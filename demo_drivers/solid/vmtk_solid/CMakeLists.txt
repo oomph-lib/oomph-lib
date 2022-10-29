@@ -22,7 +22,7 @@ oomph_add_test(
   TARGET_DEPENDENCIES vmtk_solid
   EXTRA_REQUIRES solid_iliac.1.ele solid_iliac.1.face solid_iliac.1.node
                  solid_iliac.poly
-  LABELS "solid;vmtk_solid")
+  LABELS solid vmtk_solid)
 
 message(VERBOSE "Leaving vmtk_solid subdirectory")
 # ------------------------------------------------------------------------------

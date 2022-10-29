@@ -79,7 +79,7 @@ oomph_add_test(
     macro_element_free_boundary_poisson_non_ref
     old_macro_element_free_boundary_poisson_for_doc
   EXTRA_REQUIRES
-  LABELS "interaction;free_boundary_poisson")
+  LABELS interaction free_boundary_poisson)
 
 message(VERBOSE "Leaving free_boundary_poisson subdirectory")
 # ------------------------------------------------------------------------------

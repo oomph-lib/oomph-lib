@@ -40,7 +40,7 @@ oomph_add_test(
   TARGET_DEPENDENCIES refineable_spin_up refineable_spin_up_cyl spin_up
                       spin_up_cyl
   EXTRA_REQUIRES
-  LABELS "spherical_navier_stokes;spin_up")
+  LABELS spherical_navier_stokes spin_up)
 
 message(VERBOSE "Leaving spin_up subdirectory")
 # ------------------------------------------------------------------------------

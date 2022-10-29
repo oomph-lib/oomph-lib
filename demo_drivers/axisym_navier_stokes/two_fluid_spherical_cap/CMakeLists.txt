@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME axisym_navier_stokes.two_fluid_spherical_cap
   TARGET_DEPENDENCIES two_fluid_spherical_cap
   EXTRA_REQUIRES
-  LABELS "axisym_navier_stokes;two_fluid_spherical_cap")
+  LABELS axisym_navier_stokes two_fluid_spherical_cap)
 
 message(VERBOSE "Leaving two_fluid_spherical_cap subdirectory")
 # ------------------------------------------------------------------------------

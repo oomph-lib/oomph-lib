@@ -23,7 +23,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.space_time_oscillating_cylinder
   TARGET_DEPENDENCIES space_time_oscillating_cylinder
   EXTRA_REQUIRES
-  LABELS "navier_stokes;space_time_oscillating_cylinder")
+  LABELS navier_stokes space_time_oscillating_cylinder)
 
 message(VERBOSE
         "Leaving space_time_flow_past_oscillating_cylinder subdirectory")

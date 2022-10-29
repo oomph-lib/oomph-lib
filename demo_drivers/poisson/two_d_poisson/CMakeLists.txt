@@ -40,7 +40,7 @@ oomph_add_test(
   TEST_NAME poisson.two_d_poisson
   TARGET_DEPENDENCIES two_d_poisson two_d_poisson2 two_d_poisson_compare_solvers
   EXTRA_REQUIRES
-  LABELS "poisson;two_d_poisson")
+  LABELS poisson two_d_poisson)
 
 message(VERBOSE "Leaving two_d_poisson subdirectory")
 # ------------------------------------------------------------------------------

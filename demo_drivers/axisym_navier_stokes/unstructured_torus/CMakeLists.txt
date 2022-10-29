@@ -27,7 +27,7 @@ oomph_add_test(
   TEST_NAME axisym_navier_stokes.unstructured_torus
   TARGET_DEPENDENCIES pressure_driven_torus unstructured_torus
   EXTRA_REQUIRES
-  LABELS "axisym_navier_stokes;unstructured_torus")
+  LABELS axisym_navier_stokes unstructured_torus)
 
 message(VERBOSE "Leaving unstructured_torus subdirectory")
 # ------------------------------------------------------------------------------

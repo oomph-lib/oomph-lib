@@ -22,8 +22,7 @@ oomph_add_test(
     axisym_displ_based_foeppl_von_karman.axisym_displ_based_foeppl_von_karman
   TARGET_DEPENDENCIES axisym_displ_based_fvk
   EXTRA_REQUIRES
-  LABELS
-    "axisym_displ_based_foeppl_von_karman;axisym_displ_based_foeppl_von_karman")
+  LABELS axisym_displ_based_foeppl_von_karman)
 
 message(VERBOSE "Leaving axisym_displ_based_foeppl_von_karman subdirectory")
 # ------------------------------------------------------------------------------

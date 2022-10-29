@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.bretherton
   TARGET_DEPENDENCIES bretherton
   EXTRA_REQUIRES
-  LABELS "navier_stokes;bretherton")
+  LABELS navier_stokes bretherton)
 
 message(VERBOSE "Leaving bretherton subdirectory")
 # ------------------------------------------------------------------------------

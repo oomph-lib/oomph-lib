@@ -22,7 +22,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.three_d_free_surface
   TARGET_DEPENDENCIES 3d_free_surface
   EXTRA_REQUIRES
-  LABELS "navier_stokes;three_d_free_surface")
+  LABELS navier_stokes three_d_free_surface)
 
 message(VERBOSE "Leaving three_d_free_surface subdirectory")
 # ------------------------------------------------------------------------------

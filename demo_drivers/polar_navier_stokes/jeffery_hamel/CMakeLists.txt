@@ -27,7 +27,7 @@ oomph_add_test(
   TEST_NAME polar_navier_stokes.jeffery_hamel
   TARGET_DEPENDENCIES jeffery_hamel
   EXTRA_REQUIRES
-  LABELS "polar_navier_stokes;jeffery_hamel")
+  LABELS polar_navier_stokes jeffery_hamel)
 
 message(VERBOSE "Leaving jeffery_hamel subdirectory")
 # ------------------------------------------------------------------------------

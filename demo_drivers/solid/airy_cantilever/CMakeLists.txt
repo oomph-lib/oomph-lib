@@ -35,7 +35,7 @@ oomph_add_test(
   TARGET_DEPENDENCIES airy_cantilever airy_cantilever2_adapt
                       airy_cantilever2_noadapt
   EXTRA_REQUIRES
-  LABELS "solid;airy_cantilever")
+  LABELS solid airy_cantilever)
 
 message(VERBOSE "Leaving airy_cantilever subdirectory")
 # ------------------------------------------------------------------------------

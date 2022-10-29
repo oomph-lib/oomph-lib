@@ -35,7 +35,7 @@ oomph_add_test(
   TEST_NAME eigenproblems.harmonic
   TARGET_DEPENDENCIES ${TEST_TARGET_DEPS}
   EXTRA_REQUIRES
-  LABELS "eigenproblems;harmonic")
+  LABELS eigenproblems harmonic)
 
 message(VERBOSE "Leaving harmonic subdirectory")
 # ------------------------------------------------------------------------------

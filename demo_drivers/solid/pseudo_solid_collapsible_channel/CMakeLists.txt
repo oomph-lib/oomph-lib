@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME solid.pseudo_solid_collapsible_channel
   TARGET_DEPENDENCIES pseudo_solid_collapsible_channel
   EXTRA_REQUIRES
-  LABELS "solid;pseudo_solid_collapsible_channel")
+  LABELS solid pseudo_solid_collapsible_channel)
 
 message(VERBOSE "Leaving pseudo_solid_collapsible_channel subdirectory")
 # ------------------------------------------------------------------------------

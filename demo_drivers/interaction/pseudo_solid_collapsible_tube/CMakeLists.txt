@@ -30,7 +30,7 @@ oomph_add_test(
   TARGET_DEPENDENCIES pseudo_solid_collapsible_tube
                       pseudo_solid_collapsible_tube_work
   EXTRA_REQUIRES
-  LABELS "interaction;pseudo_solid_collapsible_tube")
+  LABELS interaction pseudo_solid_collapsible_tube)
 
 message(VERBOSE "Leaving pseudo_solid_collapsible_tube subdirectory")
 # ------------------------------------------------------------------------------

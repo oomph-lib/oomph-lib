@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME spherical_navier_stokes.spherical_couette
   TARGET_DEPENDENCIES spherical_couette
   EXTRA_REQUIRES
-  LABELS "spherical_navier_stokes;spherical_couette")
+  LABELS spherical_navier_stokes spherical_couette)
 
 message(VERBOSE "Leaving spherical_couette subdirectory")
 # ------------------------------------------------------------------------------

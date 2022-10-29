@@ -36,7 +36,7 @@ oomph_add_test(
     mesh_from_inline_triangle mesh_from_inline_triangle_no_adapt
     mesh_from_inline_triangle_polygon
   EXTRA_REQUIRES
-  LABELS "meshing;mesh_from_inline_triangle")
+  LABELS meshing mesh_from_inline_triangle)
 
 message(VERBOSE "Leaving mesh_from_inline_triangle subdirectory")
 # ------------------------------------------------------------------------------

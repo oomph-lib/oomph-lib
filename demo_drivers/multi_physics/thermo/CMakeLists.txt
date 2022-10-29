@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME multi_physics.thermo
   TARGET_DEPENDENCIES thermo
   EXTRA_REQUIRES
-  LABELS "multi_physics;thermo")
+  LABELS multi_physics thermo)
 
 message(VERBOSE "Leaving thermo subdirectory")
 # ------------------------------------------------------------------------------

@@ -27,7 +27,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.three_d_entry_flow
   TARGET_DEPENDENCIES full_tube three_d_entry_flow
   EXTRA_REQUIRES
-  LABELS "navier_stokes;three_d_entry_flow")
+  LABELS navier_stokes three_d_entry_flow)
 
 message(VERBOSE "Leaving three_d_entry_flow subdirectory")
 # ------------------------------------------------------------------------------

@@ -27,7 +27,7 @@ oomph_add_test(
   TEST_NAME optimisation.navier_stokes
   TARGET_DEPENDENCIES rayleigh_channel rayleigh_circular_driven_cavity_adapt
   EXTRA_REQUIRES
-  LABELS "optimisation;navier_stokes")
+  LABELS optimisation navier_stokes)
 
 message(VERBOSE "Leaving navier_stokes subdirectory")
 # ------------------------------------------------------------------------------

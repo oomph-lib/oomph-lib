@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME gzip.one_d_poisson
   TARGET_DEPENDENCIES one_d_poisson_with_gzip_validation
   EXTRA_REQUIRES
-  LABELS "gzip;one_d_poisson"
+  LABELS gzip one_d_poisson
   NO_VALIDATE_SH)
 
 message(VERBOSE "Leaving one_d_poisson subdirectory")

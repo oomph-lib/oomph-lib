@@ -28,7 +28,7 @@ oomph_add_test(
   TEST_NAME solid.three_d_traction
   TARGET_DEPENDENCIES three_d_traction three_d_traction_non_adapt
   EXTRA_REQUIRES
-  LABELS "solid;three_d_traction")
+  LABELS solid three_d_traction)
 
 message(VERBOSE "Leaving three_d_traction subdirectory")
 # ------------------------------------------------------------------------------

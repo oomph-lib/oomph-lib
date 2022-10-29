@@ -27,7 +27,7 @@ oomph_add_test(
   TEST_NAME mpi.prescribed_displ_lagr_mult
   TARGET_DEPENDENCIES prescribed_displ_lagr_mult resize_hanging_node_tester
   EXTRA_REQUIRES presc_displ_lagr_mult_partition.dat load_balance.mcr
-  LABELS "mpi;prescribed_displ_lagr_mult"
+  LABELS mpi prescribed_displ_lagr_mult
   REQUIRES_MPI_RUN_COMMAND)
 
 # Indicate that this test requires the resource REQUIRES_SOLE_USE_OF_CPU_MPI.

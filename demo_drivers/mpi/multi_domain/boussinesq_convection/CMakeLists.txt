@@ -45,7 +45,7 @@ oomph_add_test(
     multi_domain_boussinesq_partition.dat multi_domain_ref_b_partition.dat
     refineable_b_convection_partition.dat
     multi_domain_boussinesq_partition_2.dat prune_and_balance.mcr
-  LABELS "mpi;boussinesq_convection"
+  LABELS mpi boussinesq_convection
   REQUIRES_MPI_RUN_COMMAND)
 
 # Indicate that this test requires the resource REQUIRES_SOLE_USE_OF_CPU_MPI.

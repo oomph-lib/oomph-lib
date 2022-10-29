@@ -23,7 +23,7 @@ oomph_add_test(
   EXTRA_REQUIRES
     fish_fully_automatic_partition.dat fish_incremental_partition.dat
     fish_selective_partition.dat distributed_adapt.mcr
-  LABELS "mpi;fish_poisson"
+  LABELS mpi fish_poisson
   REQUIRES_MPI_RUN_COMMAND)
 
 # Indicate that this test requires the resource REQUIRES_SOLE_USE_OF_CPU_MPI.

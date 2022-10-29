@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME optimisation.stored_shape_fcts
   TARGET_DEPENDENCIES two_d_poisson_stored_shape_fcts
   EXTRA_REQUIRES
-  LABELS "optimisation;stored_shape_fcts")
+  LABELS optimisation stored_shape_fcts)
 
 message(VERBOSE "Leaving stored_shape_fcts subdirectory")
 # ------------------------------------------------------------------------------

@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME mpi.fsi_channel_with_leaflet
   TARGET_DEPENDENCIES fsi_channel_with_leaflet
   EXTRA_REQUIRES fsi_channel_with_leaflet_partition.dat
-  LABELS "mpi;fsi_channel_with_leaflet"
+  LABELS mpi fsi_channel_with_leaflet
   REQUIRES_MPI_RUN_COMMAND)
 
 # Indicate that this test requires the resource REQUIRES_SOLE_USE_OF_CPU_MPI.

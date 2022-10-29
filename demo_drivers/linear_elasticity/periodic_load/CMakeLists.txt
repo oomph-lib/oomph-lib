@@ -27,7 +27,7 @@ oomph_add_test(
   TEST_NAME linear_elasticity.periodic_load
   TARGET_DEPENDENCIES periodic_load refineable_periodic_load
   EXTRA_REQUIRES
-  LABELS "linear_elasticity;periodic_load")
+  LABELS linear_elasticity periodic_load)
 
 message(VERBOSE "Leaving periodic_load subdirectory")
 # ------------------------------------------------------------------------------

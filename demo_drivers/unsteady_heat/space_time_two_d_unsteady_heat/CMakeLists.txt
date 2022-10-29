@@ -37,7 +37,7 @@ oomph_add_test(
   TARGET_DEPENDENCIES test_mixed_order_galerkin_petrov
                       test_equal_order_galerkin_petrov test_equal_order_galerkin
   EXTRA_REQUIRES
-  LABELS "unsteady_heat;space_time_two_d_unsteady_heat")
+  LABELS unsteady_heat space_time_two_d_unsteady_heat)
 
 message(VERBOSE "Leaving space_time_two_d_unsteady_heat subdirectory")
 # ------------------------------------------------------------------------------

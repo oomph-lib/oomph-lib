@@ -31,7 +31,7 @@ oomph_add_test(
   TEST_NAME homogenisation.two_dim
   TARGET_DEPENDENCIES two_dim two_dim_hex
   EXTRA_REQUIRES
-  LABELS "homogenisation;two_dim")
+  LABELS homogenisation two_dim)
 
 message(VERBOSE "Leaving two_dim subdirectory")
 # ------------------------------------------------------------------------------

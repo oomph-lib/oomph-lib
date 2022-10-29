@@ -47,7 +47,7 @@ oomph_add_test(
   TARGET_DEPENDENCIES barrel refineable_t_junction refineable_young_laplace
                       spherical_cap_in_cylinder young_laplace
   EXTRA_REQUIRES
-  LABELS "young_laplace;young_laplace")
+  LABELS young_laplace)
 
 message(VERBOSE "Leaving young_laplace subdirectory")
 # ------------------------------------------------------------------------------

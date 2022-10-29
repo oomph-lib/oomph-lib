@@ -35,7 +35,7 @@ oomph_add_test(
   TARGET_DEPENDENCIES prescribed_displ_lagr_mult prescribed_displ_lagr_mult2
                       prescribed_displ_lagr_mult_precond
   EXTRA_REQUIRES
-  LABELS "solid;prescribed_displ_lagr_mult")
+  LABELS solid prescribed_displ_lagr_mult)
 
 message(VERBOSE "Leaving prescribed_displ_lagr_mult subdirectory")
 # ------------------------------------------------------------------------------

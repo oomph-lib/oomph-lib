@@ -22,7 +22,7 @@ oomph_add_test(
   TEST_NAME third_party.test_nlohmann_json
   TARGET_DEPENDENCIES test_nlohmann_json
   EXTRA_REQUIRES
-  LABELS "third_party;test_nlohmann_json"
+  LABELS third_party test_nlohmann_json
   SILENCE_MISSING_VALIDATA_WARNING)
 
 message(VERBOSE "Leaving test_nlohmann_json subdirectory")

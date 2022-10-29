@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME optimisation.sparse_assemble
   TARGET_DEPENDENCIES sparse_assemble_test
   EXTRA_REQUIRES
-  LABELS "optimisation;sparse_assemble")
+  LABELS optimisation sparse_assemble)
 
 message(VERBOSE "Leaving sparse_assemble subdirectory")
 # ------------------------------------------------------------------------------

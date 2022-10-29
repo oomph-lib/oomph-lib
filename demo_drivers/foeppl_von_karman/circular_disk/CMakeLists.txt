@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME foeppl_von_karman.circular_disk
   TARGET_DEPENDENCIES circular_disk
   EXTRA_REQUIRES
-  LABELS "foeppl_von_karman;circular_disk")
+  LABELS foeppl_von_karman circular_disk)
 
 message(VERBOSE "Leaving circular_disk subdirectory")
 # ------------------------------------------------------------------------------

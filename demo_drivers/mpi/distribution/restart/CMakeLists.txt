@@ -22,7 +22,7 @@ oomph_add_test(
   TARGET_DEPENDENCIES two_d_unsteady_heat_2adapt_load_balance
   EXTRA_REQUIRES load_balance.mcr show_dist.mcr prune_and_balance.mcr
                  two_meshes.mcr partitioning.dat
-  LABELS "mpi;restart"
+  LABELS mpi restart
   REQUIRES_MPI_RUN_COMMAND)
 
 # Indicate that this test requires the resource REQUIRES_SOLE_USE_OF_CPU_MPI.

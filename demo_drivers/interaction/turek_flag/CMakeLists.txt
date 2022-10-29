@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME interaction.turek_flag
   TARGET_DEPENDENCIES turek_flag
   EXTRA_REQUIRES
-  LABELS "interaction;turek_flag")
+  LABELS interaction turek_flag)
 
 message(VERBOSE "Leaving turek_flag subdirectory")
 # ------------------------------------------------------------------------------

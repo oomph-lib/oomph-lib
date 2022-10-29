@@ -29,8 +29,7 @@ oomph_add_test(
   TARGET_DEPENDENCIES time_harmonic_elasticity_driver
                       time_harmonic_elasticity_driver_source
   EXTRA_REQUIRES
-  LABELS
-    "pml_time_harmonic_linear_elasticity;pml_time_harmonic_linear_elasticity")
+  LABELS pml_time_harmonic_linear_elasticity)
 
 message(VERBOSE "Leaving pml_time_harmonic_linear_elasticity subdirectory")
 # ------------------------------------------------------------------------------

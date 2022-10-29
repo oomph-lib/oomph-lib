@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME reaction_diffusion.unstructured_two_d_act_inhibit
   TARGET_DEPENDENCIES unstructured_two_d_act_inhibit
   EXTRA_REQUIRES
-  LABELS "reaction_diffusion;unstructured_two_d_act_inhibit")
+  LABELS reaction_diffusion unstructured_two_d_act_inhibit)
 
 message(VERBOSE "Leaving unstructured_two_d_act_inhibit subdirectory")
 # ------------------------------------------------------------------------------

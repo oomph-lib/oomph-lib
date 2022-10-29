@@ -29,7 +29,7 @@ oomph_add_test(
   TARGET_DEPENDENCIES adaptive_unstructured_two_d_circle
                       unstructured_two_d_circle
   EXTRA_REQUIRES
-  LABELS "darcy;unstructured_two_d_circle")
+  LABELS darcy unstructured_two_d_circle)
 
 message(VERBOSE "Leaving unstructured_two_d_circle subdirectory")
 # ------------------------------------------------------------------------------

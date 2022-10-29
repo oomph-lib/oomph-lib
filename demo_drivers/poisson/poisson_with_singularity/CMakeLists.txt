@@ -29,7 +29,7 @@ oomph_add_test(
   TARGET_DEPENDENCIES two_d_poisson
                       two_d_poisson_without_singularity_subtracted_off
   EXTRA_REQUIRES
-  LABELS "poisson;poisson_with_singularity")
+  LABELS poisson poisson_with_singularity)
 
 message(VERBOSE "Leaving poisson_with_singularity subdirectory")
 # ------------------------------------------------------------------------------

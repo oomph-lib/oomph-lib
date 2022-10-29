@@ -29,7 +29,7 @@ oomph_add_test(
   TEST_NAME eigenproblems.orr_sommerfeld
   TARGET_DEPENDENCIES ${TEST_TARGET_DEPS}
   EXTRA_REQUIRES
-  LABELS "eigenproblems;orr_sommerfeld")
+  LABELS eigenproblems orr_sommerfeld)
 
 message(VERBOSE "Leaving orr_sommerfeld subdirectory")
 # ------------------------------------------------------------------------------

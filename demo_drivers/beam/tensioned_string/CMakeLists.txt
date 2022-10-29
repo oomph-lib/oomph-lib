@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME beam.tensioned_string
   TARGET_DEPENDENCIES tensioned_string
   EXTRA_REQUIRES
-  LABELS "beam;tensioned_string")
+  LABELS beam tensioned_string)
 
 message(VERBOSE "Leaving tensioned_string subdirectory")
 # ------------------------------------------------------------------------------

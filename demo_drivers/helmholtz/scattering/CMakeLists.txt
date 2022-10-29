@@ -42,7 +42,7 @@ oomph_add_test(
   TARGET_DEPENDENCIES adaptive_scattering adaptive_unstructured_scattering
                       scattering unstructured_scattering
   EXTRA_REQUIRES
-  LABELS "helmholtz;scattering")
+  LABELS helmholtz scattering)
 
 message(VERBOSE "Leaving scattering subdirectory")
 # ------------------------------------------------------------------------------

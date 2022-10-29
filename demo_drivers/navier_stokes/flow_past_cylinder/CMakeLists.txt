@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.flow_past_cylinder
   TARGET_DEPENDENCIES flow_past_cylinder
   EXTRA_REQUIRES
-  LABELS "navier_stokes;flow_past_cylinder")
+  LABELS navier_stokes flow_past_cylinder)
 
 message(VERBOSE "Leaving flow_past_cylinder subdirectory")
 # ------------------------------------------------------------------------------

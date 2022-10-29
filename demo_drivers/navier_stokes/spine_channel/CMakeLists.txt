@@ -33,7 +33,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.spine_channel
   TARGET_DEPENDENCIES simple_spine_channel spine_channel spine_channel2
   EXTRA_REQUIRES
-  LABELS "navier_stokes;spine_channel")
+  LABELS navier_stokes spine_channel)
 
 message(VERBOSE "Leaving spine_channel subdirectory")
 # ------------------------------------------------------------------------------

@@ -29,7 +29,7 @@ oomph_add_test(
   TARGET_DEPENDENCIES mesh_from_inline_triangle_internal_boundaries
                       mesh_from_inline_triangle_internal_boundaries_extra
   EXTRA_REQUIRES
-  LABELS "meshing;mesh_from_inline_triangle_internal_boundaries")
+  LABELS meshing mesh_from_inline_triangle_internal_boundaries)
 
 message(VERBOSE
         "Leaving mesh_from_inline_triangle_internal_boundaries subdirectory")

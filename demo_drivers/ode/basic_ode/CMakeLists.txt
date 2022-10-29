@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME ode.basic_ode
   TARGET_DEPENDENCIES basic_ode
   EXTRA_REQUIRES zeros
-  LABELS "ode;basic_ode"
+  LABELS ode basic_ode
   SILENCE_MISSING_VALIDATA_WARNING)
 
 message(VERBOSE "Leaving basic_ode subdirectory")

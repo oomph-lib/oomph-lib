@@ -45,7 +45,7 @@ oomph_add_test(
   TEST_NAME flux_transport.euler
   TARGET_DEPENDENCIES couette ff_step one_d_euler ramp two_d_euler
   EXTRA_REQUIRES
-  LABELS "flux_transport;euler")
+  LABELS flux_transport euler)
 
 message(VERBOSE "Leaving euler subdirectory")
 # ------------------------------------------------------------------------------

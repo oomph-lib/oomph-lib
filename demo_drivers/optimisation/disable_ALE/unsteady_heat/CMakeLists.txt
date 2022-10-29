@@ -27,7 +27,7 @@ oomph_add_test(
   TEST_NAME optimisation.unsteady_heat
   TARGET_DEPENDENCIES two_d_unsteady_heat two_d_unsteady_heat_adapt
   EXTRA_REQUIRES
-  LABELS "optimisation;unsteady_heat")
+  LABELS optimisation unsteady_heat)
 
 message(VERBOSE "Leaving unsteady_heat subdirectory")
 # ------------------------------------------------------------------------------

@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.flux_control
   TARGET_DEPENDENCIES flux_control
   EXTRA_REQUIRES
-  LABELS "navier_stokes;flux_control")
+  LABELS navier_stokes flux_control)
 
 message(VERBOSE "Leaving flux_control subdirectory")
 # ------------------------------------------------------------------------------

@@ -30,7 +30,7 @@ oomph_add_test(
     fsi_bifurcation_fluid_with_extended_tubes.1.node
     fsi_bifurcation_fluid_with_extended_tubes.poly
     three_d_unstructured_fluid.mcr
-  LABELS "navier_stokes;unstructured_three_d_fluid")
+  LABELS navier_stokes unstructured_three_d_fluid)
 
 message(VERBOSE "Leaving unstructured_three_d_fluid subdirectory")
 # ------------------------------------------------------------------------------

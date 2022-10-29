@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME interaction.fsi_channel_with_leaflet
   TARGET_DEPENDENCIES fsi_channel_with_leaflet
   EXTRA_REQUIRES
-  LABELS "interaction;fsi_channel_with_leaflet")
+  LABELS interaction fsi_channel_with_leaflet)
 
 message(VERBOSE "Leaving fsi_channel_with_leaflet subdirectory")
 # ------------------------------------------------------------------------------

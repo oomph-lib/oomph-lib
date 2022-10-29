@@ -31,7 +31,7 @@ oomph_add_test(
     solid.fig.1.node
     solid.fig.1.poly
     solid.fig.poly
-  LABELS "interaction;unstructured_fsi")
+  LABELS interaction unstructured_fsi)
 
 message(VERBOSE "Leaving unstructured_fsi subdirectory")
 # ------------------------------------------------------------------------------

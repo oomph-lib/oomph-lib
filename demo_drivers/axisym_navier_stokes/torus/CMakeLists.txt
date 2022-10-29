@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME axisym_navier_stokes.torus
   TARGET_DEPENDENCIES torus
   EXTRA_REQUIRES
-  LABELS "axisym_navier_stokes;torus")
+  LABELS axisym_navier_stokes torus)
 
 message(VERBOSE "Leaving torus subdirectory")
 # ------------------------------------------------------------------------------

@@ -27,7 +27,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.curved_pipe
   TARGET_DEPENDENCIES curved_pipe helical_pipe
   EXTRA_REQUIRES
-  LABELS "navier_stokes;curved_pipe")
+  LABELS navier_stokes curved_pipe)
 
 message(VERBOSE "Leaving curved_pipe subdirectory")
 # ------------------------------------------------------------------------------

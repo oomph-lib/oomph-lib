@@ -27,7 +27,7 @@ oomph_add_test(
   TEST_NAME multigrid.helmholtz_multigrid
   TARGET_DEPENDENCIES structured_cubic_point_source unstructured_two_d_helmholtz
   EXTRA_REQUIRES
-  LABELS "multigrid;helmholtz_multigrid")
+  LABELS multigrid helmholtz_multigrid)
 
 message(VERBOSE "Leaving helmholtz_multigrid subdirectory")
 # ------------------------------------------------------------------------------

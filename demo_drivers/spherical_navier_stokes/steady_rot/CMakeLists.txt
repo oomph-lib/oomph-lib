@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME spherical_navier_stokes.steady_rot
   TARGET_DEPENDENCIES steady_rot
   EXTRA_REQUIRES
-  LABELS "spherical_navier_stokes;steady_rot")
+  LABELS spherical_navier_stokes steady_rot)
 
 message(VERBOSE "Leaving steady_rot subdirectory")
 # ------------------------------------------------------------------------------

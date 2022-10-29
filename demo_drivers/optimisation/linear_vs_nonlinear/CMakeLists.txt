@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME optimisation.linear_vs_nonlinear
   TARGET_DEPENDENCIES two_d_poisson
   EXTRA_REQUIRES
-  LABELS "optimisation;linear_vs_nonlinear")
+  LABELS optimisation linear_vs_nonlinear)
 
 message(VERBOSE "Leaving linear_vs_nonlinear subdirectory")
 # ------------------------------------------------------------------------------

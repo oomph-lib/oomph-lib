@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.channel_with_leaflet
   TARGET_DEPENDENCIES channel_with_leaflet
   EXTRA_REQUIRES
-  LABELS "navier_stokes;channel_with_leaflet")
+  LABELS navier_stokes channel_with_leaflet)
 
 message(VERBOSE "Leaving channel_with_leaflet subdirectory")
 # ------------------------------------------------------------------------------

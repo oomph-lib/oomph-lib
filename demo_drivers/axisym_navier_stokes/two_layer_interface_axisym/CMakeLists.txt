@@ -30,7 +30,7 @@ oomph_add_test(
   TARGET_DEPENDENCIES elastic_two_layer_interface_axisym
                       spine_two_layer_interface_axisym
   EXTRA_REQUIRES
-  LABELS "axisym_navier_stokes;two_layer_interface_axisym")
+  LABELS axisym_navier_stokes two_layer_interface_axisym)
 
 message(VERBOSE "Leaving two_layer_interface_axisym subdirectory")
 # ------------------------------------------------------------------------------

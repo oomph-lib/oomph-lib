@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME optimisation.fsi_jacobian_approximation
   TARGET_DEPENDENCIES fsi_jacobian_approximation
   EXTRA_REQUIRES
-  LABELS "optimisation;fsi_jacobian_approximation")
+  LABELS optimisation fsi_jacobian_approximation)
 
 message(VERBOSE "Leaving fsi_jacobian_approximation subdirectory")
 # ------------------------------------------------------------------------------

@@ -27,7 +27,7 @@ oomph_add_test(
   TEST_NAME axisym_advection_diffusion.pipe
   TARGET_DEPENDENCIES pipe pipe_variable_diff
   EXTRA_REQUIRES
-  LABELS "axisym_advection_diffusion;pipe")
+  LABELS axisym_advection_diffusion pipe)
 
 message(VERBOSE "Leaving pipe subdirectory")
 # ------------------------------------------------------------------------------

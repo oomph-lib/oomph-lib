@@ -22,7 +22,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.falling_jet
   TARGET_DEPENDENCIES falling_jet
   EXTRA_REQUIRES
-  LABELS "navier_stokes;falling_jet")
+  LABELS navier_stokes falling_jet)
 
 message(VERBOSE "Leaving falling_jet subdirectory")
 # ------------------------------------------------------------------------------

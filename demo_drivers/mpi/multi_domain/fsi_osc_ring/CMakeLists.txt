@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME mpi.fsi_osc_ring
   TARGET_DEPENDENCIES fsi_osc_ring
   EXTRA_REQUIRES fsi_osc_ring_partition.dat
-  LABELS "mpi;fsi_osc_ring"
+  LABELS mpi fsi_osc_ring
   REQUIRES_MPI_RUN_COMMAND)
 
 # Indicate that this test requires the resource REQUIRES_SOLE_USE_OF_CPU_MPI.

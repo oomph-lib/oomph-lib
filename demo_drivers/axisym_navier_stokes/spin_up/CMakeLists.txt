@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME axisym_navier_stokes.spin_up
   TARGET_DEPENDENCIES spin_up
   EXTRA_REQUIRES
-  LABELS "axisym_navier_stokes;spin_up")
+  LABELS axisym_navier_stokes spin_up)
 
 message(VERBOSE "Leaving spin_up subdirectory")
 # ------------------------------------------------------------------------------

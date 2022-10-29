@@ -36,7 +36,7 @@ oomph_add_test(
     fsi_collapsible_channel_segregated_driver simple_segregated_driver
   EXTRA_REQUIRES steady_precond.bash steady_seg.bash steady_seg_paper.bash
                  unsteady_precond.bash unsteady_seg.bash unsteady_seg_paper.bash
-  LABELS "interaction;fsi_channel_seg_and_precond")
+  LABELS interaction fsi_channel_seg_and_precond)
 
 # This test needs more than the default allotted time to complete
 set_tests_properties(interaction.fsi_channel_seg_and_precond PROPERTIES TIMEOUT

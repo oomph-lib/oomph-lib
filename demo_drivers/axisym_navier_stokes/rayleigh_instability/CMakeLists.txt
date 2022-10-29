@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME axisym_navier_stokes.rayleigh_instability
   TARGET_DEPENDENCIES rayleigh_instability
   EXTRA_REQUIRES
-  LABELS "axisym_navier_stokes;rayleigh_instability")
+  LABELS axisym_navier_stokes rayleigh_instability)
 
 message(VERBOSE "Leaving rayleigh_instability subdirectory")
 # ------------------------------------------------------------------------------

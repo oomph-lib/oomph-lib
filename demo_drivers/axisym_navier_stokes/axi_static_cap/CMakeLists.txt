@@ -22,7 +22,7 @@ oomph_add_test(
   TEST_NAME axisym_navier_stokes.axi_static_cap
   TARGET_DEPENDENCIES axi_static_cap
   EXTRA_REQUIRES
-  LABELS "axisym_navier_stokes;axi_static_cap")
+  LABELS axisym_navier_stokes axi_static_cap)
 
 message(VERBOSE "Leaving axi_static_cap subdirectory")
 # ------------------------------------------------------------------------------

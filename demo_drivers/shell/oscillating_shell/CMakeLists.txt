@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME shell.oscillating_shell
   TARGET_DEPENDENCIES oscillating_shell
   EXTRA_REQUIRES
-  LABELS "shell;oscillating_shell")
+  LABELS shell oscillating_shell)
 
 message(VERBOSE "Leaving oscillating_shell subdirectory")
 # ------------------------------------------------------------------------------

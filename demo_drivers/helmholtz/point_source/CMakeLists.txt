@@ -28,7 +28,7 @@ oomph_add_test(
   TEST_NAME helmholtz.point_source
   TARGET_DEPENDENCIES adaptive_helmholtz_point_source helmholtz_point_source
   EXTRA_REQUIRES
-  LABELS "helmholtz;point_source")
+  LABELS helmholtz point_source)
 
 message(VERBOSE "Leaving point_source subdirectory")
 # ------------------------------------------------------------------------------

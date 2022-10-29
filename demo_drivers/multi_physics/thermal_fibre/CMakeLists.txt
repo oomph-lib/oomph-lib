@@ -22,7 +22,7 @@ oomph_add_test(
   TEST_NAME multi_physics.thermal_fibre
   TARGET_DEPENDENCIES thermal_fibre
   EXTRA_REQUIRES
-  LABELS "multi_physics;thermal_fibre")
+  LABELS multi_physics thermal_fibre)
 
 message(VERBOSE "Leaving thermal_fibre subdirectory")
 # ------------------------------------------------------------------------------

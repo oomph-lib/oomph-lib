@@ -27,7 +27,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.schur_complement_preconditioner
   TARGET_DEPENDENCIES three_d_fp two_d_fp
   EXTRA_REQUIRES
-  LABELS "navier_stokes;schur_complement_preconditioner")
+  LABELS navier_stokes schur_complement_preconditioner)
 
 message(VERBOSE "Leaving schur_complement_preconditioner subdirectory")
 # ------------------------------------------------------------------------------

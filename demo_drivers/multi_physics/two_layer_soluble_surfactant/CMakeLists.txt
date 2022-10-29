@@ -43,7 +43,7 @@ oomph_add_test(
     refineable_two_layer_soluble_surfactant two_layer_soluble_surfactant
     refineable_unstructured_two_layer_ss
   EXTRA_REQUIRES
-  LABELS "multi_physics;two_layer_soluble_surfactant")
+  LABELS multi_physics two_layer_soluble_surfactant)
 
 message(VERBOSE "Leaving two_layer_soluble_surfactant subdirectory")
 # ------------------------------------------------------------------------------

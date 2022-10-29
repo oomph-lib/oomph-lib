@@ -22,7 +22,7 @@ oomph_add_test(
   TEST_NAME interaction.pseudo_solid_fsi_channel_with_leaflet
   TARGET_DEPENDENCIES fsi_channel_with_leaflet_precond
   EXTRA_REQUIRES
-  LABELS "interaction;pseudo_solid_fsi_channel_with_leaflet")
+  LABELS interaction pseudo_solid_fsi_channel_with_leaflet)
 
 message(VERBOSE "Leaving pseudo_solid_fsi_channel_with_leaflet subdirectory")
 # ------------------------------------------------------------------------------

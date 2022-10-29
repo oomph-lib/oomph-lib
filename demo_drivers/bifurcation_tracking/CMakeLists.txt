@@ -71,7 +71,7 @@ oomph_add_test(
     pitchfork
     track_pitch
   EXTRA_REQUIRES adapt_hopf_eigen.dat
-  LABELS "bifurcation_tracking;bifurcation_tracking")
+  LABELS bifurcation_tracking)
 
 # This test needs more than the default allotted time to complete
 set_tests_properties(bifurcation_tracking.bifurcation_tracking

@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.lagrange_enforced_flow_preconditioner
   TARGET_DEPENDENCIES two_d_tilted_square
   EXTRA_REQUIRES
-  LABELS "navier_stokes;lagrange_enforced_flow_preconditioner")
+  LABELS navier_stokes lagrange_enforced_flow_preconditioner)
 
 message(VERBOSE "Leaving lagrange_enforced_flow_preconditioner subdirectory")
 # ------------------------------------------------------------------------------

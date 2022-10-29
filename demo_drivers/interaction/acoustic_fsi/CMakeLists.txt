@@ -29,7 +29,7 @@ oomph_add_test(
   TEST_NAME interaction.acoustic_fsi
   TARGET_DEPENDENCIES acoustic_fsi unstructured_acoustic_fsi
   EXTRA_REQUIRES
-  LABELS "interaction;acoustic_fsi")
+  LABELS interaction acoustic_fsi)
 
 message(VERBOSE "Leaving acoustic_fsi subdirectory")
 # ------------------------------------------------------------------------------

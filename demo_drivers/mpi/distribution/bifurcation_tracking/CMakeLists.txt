@@ -27,7 +27,7 @@ oomph_add_test(
   TEST_NAME mpi.bifurcation_tracking
   TARGET_DEPENDENCIES pitchfork track_pitch
   EXTRA_REQUIRES
-  LABELS "mpi;bifurcation_tracking"
+  LABELS mpi bifurcation_tracking
   REQUIRES_MPI_RUN_COMMAND)
 
 # Indicate that this test requires the resource REQUIRES_SOLE_USE_OF_CPU_MPI.

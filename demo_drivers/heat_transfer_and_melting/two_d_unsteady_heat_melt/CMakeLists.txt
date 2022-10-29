@@ -124,7 +124,7 @@ oomph_add_test(
     stefan_boltzmann_melt
     two_d_unsteady_heat
   EXTRA_REQUIRES
-  LABELS "heat_transfer_and_melting;two_d_unsteady_heat_melt")
+  LABELS heat_transfer_and_melting two_d_unsteady_heat_melt)
 
 # This test contains a huge number of subtests and as such needs a larger amount
 # of time than the default to complete

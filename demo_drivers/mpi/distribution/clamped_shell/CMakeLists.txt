@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME mpi.three_d_cantilever
   TARGET_DEPENDENCIES clamped_shell_with_arclength_cont
   EXTRA_REQUIRES
-  LABELS "mpi;clamped_shell"
+  LABELS mpi clamped_shell
   REQUIRES_MPI_RUN_COMMAND)
 
 # Indicate that this test requires the resource REQUIRES_SOLE_USE_OF_CPU_MPI.

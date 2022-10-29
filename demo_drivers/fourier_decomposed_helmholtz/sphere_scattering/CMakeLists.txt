@@ -35,7 +35,7 @@ oomph_add_test(
   TARGET_DEPENDENCIES sphere_scattering unstructured_adaptive_sphere_scattering
                       unstructured_sphere_scattering
   EXTRA_REQUIRES
-  LABELS "fourier_decomposed_helmholtz;sphere_scattering")
+  LABELS fourier_decomposed_helmholtz sphere_scattering)
 
 message(VERBOSE "Leaving sphere_scattering subdirectory")
 # ------------------------------------------------------------------------------

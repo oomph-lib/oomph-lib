@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME solid.shock_disk
   TARGET_DEPENDENCIES shock_disk
   EXTRA_REQUIRES
-  LABELS "solid;shock_disk")
+  LABELS solid shock_disk)
 
 message(VERBOSE "Leaving shock_disk subdirectory")
 # ------------------------------------------------------------------------------

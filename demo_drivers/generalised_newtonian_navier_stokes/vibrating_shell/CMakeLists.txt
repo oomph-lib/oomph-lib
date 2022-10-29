@@ -23,7 +23,7 @@ oomph_add_test(
   TEST_NAME generalised_newtonian_navier_stokes.vibrating_shell
   TARGET_DEPENDENCIES vibrating_shell_non_newtonian
   EXTRA_REQUIRES
-  LABELS "generalised_newtonian_navier_stokes;vibrating_shell")
+  LABELS generalised_newtonian_navier_stokes vibrating_shell)
 
 # This test needs more than the default allotted time to complete
 set_tests_properties(generalised_newtonian_navier_stokes.vibrating_shell

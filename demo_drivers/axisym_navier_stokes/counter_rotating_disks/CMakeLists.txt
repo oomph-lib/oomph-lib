@@ -31,7 +31,7 @@ oomph_add_test(
   TEST_NAME axisym_navier_stokes.counter_rotating_disks
   TARGET_DEPENDENCIES counter_rotating_disks counter_rotating_disks_ref
   EXTRA_REQUIRES
-  LABELS "axisym_navier_stokes;counter_rotating_disks")
+  LABELS axisym_navier_stokes counter_rotating_disks)
 
 message(VERBOSE "Leaving counter_rotating_disks subdirectory")
 # ------------------------------------------------------------------------------

@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME solid.static_fish
   TARGET_DEPENDENCIES static_fish
   EXTRA_REQUIRES
-  LABELS "solid;static_fish")
+  LABELS solid static_fish)
 
 message(VERBOSE "Leaving static_fish subdirectory")
 # ------------------------------------------------------------------------------

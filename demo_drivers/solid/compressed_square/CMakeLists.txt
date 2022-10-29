@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME solid.compressed_square
   TARGET_DEPENDENCIES compressed_square
   EXTRA_REQUIRES
-  LABELS "solid;compressed_square")
+  LABELS solid compressed_square)
 
 message(VERBOSE "Leaving compressed_square subdirectory")
 # ------------------------------------------------------------------------------

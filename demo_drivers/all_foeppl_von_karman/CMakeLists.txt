@@ -40,7 +40,7 @@ oomph_add_test(
   TARGET_DEPENDENCIES axisym_displ_based_fvk axisym_fvk circular_disk
                       displacement_based_circular_disk
   EXTRA_REQUIRES
-  LABELS "all_foeppl_von_karman;all_foeppl_von_karman")
+  LABELS all_foeppl_von_karman)
 
 message(VERBOSE "Leaving all_foeppl_von_karman subdirectory")
 # ------------------------------------------------------------------------------

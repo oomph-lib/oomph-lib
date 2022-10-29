@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME mpi.three_d_prescribed_displ_lagr_mult
   TARGET_DEPENDENCIES three_d_prescribed_displ_lagr_mult
   EXTRA_REQUIRES distr_block_prescr.mcr
-  LABELS "mpi;three_d_prescribed_displ_lagr_mult"
+  LABELS mpi three_d_prescribed_displ_lagr_mult
   REQUIRES_MPI_RUN_COMMAND)
 
 # Indicate that this test requires the resource REQUIRES_SOLE_USE_OF_CPU_MPI.

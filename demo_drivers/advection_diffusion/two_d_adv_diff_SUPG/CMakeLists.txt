@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME advection_diffusion.two_d_adv_diff_SUPG
   TARGET_DEPENDENCIES two_d_adv_diff_SUPG
   EXTRA_REQUIRES
-  LABELS "advection_diffusion;two_d_adv_diff_SUPG")
+  LABELS advection_diffusion two_d_adv_diff_SUPG)
 
 message(VERBOSE "Leaving two_d_adv_diff_SUPG subdirectory")
 # ------------------------------------------------------------------------------

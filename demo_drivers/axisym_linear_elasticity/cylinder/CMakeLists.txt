@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME axisym_linear_elasticity.cylinder
   TARGET_DEPENDENCIES cylinder
   EXTRA_REQUIRES
-  LABELS "axisym_linear_elasticity;cylinder")
+  LABELS axisym_linear_elasticity cylinder)
 
 message(VERBOSE "Leaving cylinder subdirectory")
 # ------------------------------------------------------------------------------

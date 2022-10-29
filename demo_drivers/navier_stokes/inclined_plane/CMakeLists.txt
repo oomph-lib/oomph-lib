@@ -30,7 +30,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.inclined_plane
   TARGET_DEPENDENCIES inclined_plane inclined_plane2
   EXTRA_REQUIRES
-  LABELS "navier_stokes;inclined_plane")
+  LABELS navier_stokes inclined_plane)
 
 message(VERBOSE "Leaving inclined_plane subdirectory")
 # ------------------------------------------------------------------------------

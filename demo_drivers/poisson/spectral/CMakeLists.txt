@@ -33,7 +33,7 @@ oomph_add_test(
   TEST_NAME poisson.spectral
   TARGET_DEPENDENCIES one_d_spectral three_d_spectral_adapt two_d_spectral_adapt
   EXTRA_REQUIRES
-  LABELS "poisson;spectral")
+  LABELS poisson spectral)
 
 message(VERBOSE "Leaving spectral subdirectory")
 # ------------------------------------------------------------------------------

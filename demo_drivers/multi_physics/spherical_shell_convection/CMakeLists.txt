@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME multi_physics.spherical_shell_convection
   TARGET_DEPENDENCIES spherical_shell_convection
   EXTRA_REQUIRES
-  LABELS "multi_physics;spherical_shell_convection")
+  LABELS multi_physics spherical_shell_convection)
 
 message(VERBOSE "Leaving spherical_shell_convection subdirectory")
 # ------------------------------------------------------------------------------

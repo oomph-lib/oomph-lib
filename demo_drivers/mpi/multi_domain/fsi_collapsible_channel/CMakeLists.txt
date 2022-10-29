@@ -29,7 +29,7 @@ oomph_add_test(
   TARGET_DEPENDENCIES fsi_collapsible_channel_adapt
                       fsi_collapsible_channel_macro_adapt
   EXTRA_REQUIRES fsi_collapsible_channel_partition.dat
-  LABELS "mpi;fsi_collapsible_channel"
+  LABELS mpi fsi_collapsible_channel
   REQUIRES_MPI_RUN_COMMAND)
 
 # Indicate that this test requires the resource REQUIRES_SOLE_USE_OF_CPU_MPI.

@@ -27,7 +27,7 @@ oomph_add_test(
   TEST_NAME spherical_advection_diffusion.eluting_sphere
   TARGET_DEPENDENCIES eluting_sphere eluting_sphere_adapt
   EXTRA_REQUIRES
-  LABELS "spherical_advection_diffusion;eluting_sphere")
+  LABELS spherical_advection_diffusion eluting_sphere)
 
 message(VERBOSE "Leaving eluting_sphere subdirectory")
 # ------------------------------------------------------------------------------

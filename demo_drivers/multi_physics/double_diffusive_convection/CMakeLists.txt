@@ -34,7 +34,7 @@ oomph_add_test(
   TARGET_DEPENDENCIES dd_convection multimesh_dd_convection
                       multimesh_ref_dd_convection
   EXTRA_REQUIRES
-  LABELS "multi_physics;double_diffusive_convection")
+  LABELS multi_physics double_diffusive_convection)
 
 message(VERBOSE "Leaving double_diffusive_convection subdirectory")
 # ------------------------------------------------------------------------------

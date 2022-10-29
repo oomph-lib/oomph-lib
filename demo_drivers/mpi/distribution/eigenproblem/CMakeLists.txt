@@ -24,7 +24,7 @@ if(OOMPH_HAS_TRILINOS)
     TEST_NAME mpi.eigenproblem
     TARGET_DEPENDENCIES harmonic
     EXTRA_REQUIRES
-    LABELS "mpi;eigenproblem"
+    LABELS mpi eigenproblem
     REQUIRES_MPI_RUN_COMMAND)
 
   # Indicate that this test requires the resource REQUIRES_SOLE_USE_OF_CPU_MPI.

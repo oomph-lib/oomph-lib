@@ -27,7 +27,7 @@ oomph_add_test(
   TEST_NAME shell.clamped_shell
   TARGET_DEPENDENCIES clamped_shell clamped_shell_with_arclength_cont
   EXTRA_REQUIRES
-  LABELS "shell;clamped_shell")
+  LABELS shell clamped_shell)
 
 message(VERBOSE "Leaving clamped_shell subdirectory")
 # ------------------------------------------------------------------------------

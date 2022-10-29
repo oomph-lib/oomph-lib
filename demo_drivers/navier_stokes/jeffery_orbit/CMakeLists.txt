@@ -22,7 +22,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.jeffery_orbit
   TARGET_DEPENDENCIES jeffery_orbit
   EXTRA_REQUIRES
-  LABELS "navier_stokes;jeffery_orbit")
+  LABELS navier_stokes jeffery_orbit)
 
 message(VERBOSE "Leaving jeffery_orbit subdirectory")
 # ------------------------------------------------------------------------------

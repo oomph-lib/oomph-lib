@@ -36,7 +36,7 @@ oomph_add_test(
     unstructured_two_d_helmholtz unstructured_two_d_helmholtz_adapt
     unstructured_two_d_helmholtz_scattering
   EXTRA_REQUIRES
-  LABELS "pml_helmholtz;scattering")
+  LABELS pml_helmholtz scattering)
 
 message(VERBOSE "Leaving scattering subdirectory")
 # ------------------------------------------------------------------------------

@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME optimisation.use_coarse_base_meshes
   TARGET_DEPENDENCIES two_d_poisson_adapt
   EXTRA_REQUIRES
-  LABELS "optimisation;use_coarse_base_meshes")
+  LABELS optimisation use_coarse_base_meshes)
 
 message(VERBOSE "Leaving use_coarse_base_meshes subdirectory")
 # ------------------------------------------------------------------------------

@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME interaction.linearised_poroelastic_fsi_pulsewave
   TARGET_DEPENDENCIES linearised_poroelastic_fsi_pulsewave
   EXTRA_REQUIRES
-  LABELS "interaction;linearised_poroelastic_fsi_pulsewave")
+  LABELS interaction linearised_poroelastic_fsi_pulsewave)
 
 message(VERBOSE "Leaving linearised_poroelastic_fsi_pulsewave subdirectory")
 # ------------------------------------------------------------------------------

@@ -42,7 +42,7 @@ oomph_add_test(
     adaptive_unstructured_fourier_decomposed_acoustic_fsi
     fourier_decomposed_acoustic_fsi unstructured_fourier_decomposed_acoustic_fsi
   EXTRA_REQUIRES
-  LABELS "interaction;fourier_decomposed_acoustic_fsi")
+  LABELS interaction fourier_decomposed_acoustic_fsi)
 
 message(VERBOSE "Leaving fourier_decomposed_acoustic_fsi subdirectory")
 # ------------------------------------------------------------------------------

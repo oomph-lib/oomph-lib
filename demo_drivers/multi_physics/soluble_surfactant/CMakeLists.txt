@@ -22,7 +22,7 @@ oomph_add_test(
   TEST_NAME multi_physics.soluble_surfactant
   TARGET_DEPENDENCIES soluble_surfactant
   EXTRA_REQUIRES
-  LABELS "multi_physics;soluble_surfactant")
+  LABELS multi_physics soluble_surfactant)
 
 message(VERBOSE "Leaving soluble_surfactant subdirectory")
 # ------------------------------------------------------------------------------

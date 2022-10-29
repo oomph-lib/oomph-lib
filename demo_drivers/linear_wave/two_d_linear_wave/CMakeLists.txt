@@ -27,7 +27,7 @@ oomph_add_test(
   TEST_NAME linear_wave.two_d_linear_wave
   TARGET_DEPENDENCIES two_d_linear_wave two_d_linear_wave_flux
   EXTRA_REQUIRES
-  LABELS "linear_wave;two_d_linear_wave")
+  LABELS linear_wave two_d_linear_wave)
 
 message(VERBOSE "Leaving two_d_linear_wave subdirectory")
 # ------------------------------------------------------------------------------

@@ -39,7 +39,7 @@ oomph_add_test(
     rect.m2
     rect.mh2
     rect.rg2
-  LABELS "meshing;mesh_from_geompack")
+  LABELS meshing mesh_from_geompack)
 
 message(VERBOSE "Leaving mesh_from_geompack subdirectory")
 # ------------------------------------------------------------------------------

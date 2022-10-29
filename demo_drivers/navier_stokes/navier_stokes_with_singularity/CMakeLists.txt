@@ -54,7 +54,7 @@ oomph_add_test(
     circular_couette_without_pseudo_singularity_subtracted_off driven_cavity
     driven_cavity_without_singularity_subtracted_off
   EXTRA_REQUIRES
-  LABELS "navier_stokes;navier_stokes_with_singularity")
+  LABELS navier_stokes navier_stokes_with_singularity)
 
 message(VERBOSE "Leaving navier_stokes_with_singularity subdirectory")
 # ------------------------------------------------------------------------------

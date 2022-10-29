@@ -51,7 +51,7 @@ oomph_add_test(
     oomph_mesh.fig.1.node
     oomph_mesh.fig.1.poly
     oomph_mesh.fig.poly
-  LABELS "meshing;mesh_from_xfig_triangle")
+  LABELS meshing mesh_from_xfig_triangle)
 
 message(VERBOSE "Leaving mesh_from_xfig_triangle subdirectory")
 # ------------------------------------------------------------------------------

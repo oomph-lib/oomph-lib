@@ -27,7 +27,7 @@ oomph_add_test(
   TEST_NAME beam.unsteady_ring
   TARGET_DEPENDENCIES lin_unsteady_ring unsteady_ring
   EXTRA_REQUIRES
-  LABELS "beam;unsteady_ring")
+  LABELS beam unsteady_ring)
 
 message(VERBOSE "Leaving unsteady_ring subdirectory")
 # ------------------------------------------------------------------------------

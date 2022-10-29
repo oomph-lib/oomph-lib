@@ -29,7 +29,7 @@ oomph_add_test(
   TARGET_DEPENDENCIES three_d_prescribed_displ_lagr_mult
                       three_d_prescribed_displ_lagr_mult_non_adapt
   EXTRA_REQUIRES
-  LABELS "solid;three_d_prescribed_displ_lagr_mult")
+  LABELS solid three_d_prescribed_displ_lagr_mult)
 
 message(VERBOSE "Leaving three_d_prescribed_displ_lagr_mult subdirectory")
 # ------------------------------------------------------------------------------

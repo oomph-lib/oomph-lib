@@ -32,7 +32,7 @@ oomph_add_test(
   TEST_NAME solid.simple_shear
   TARGET_DEPENDENCIES simple_shear refineable_simple_shear
   EXTRA_REQUIRES
-  LABELS "solid;simple_shear")
+  LABELS solid simple_shear)
 
 # This test needs more than the default allotted time to complete
 set_tests_properties(solid.simple_shear PROPERTIES TIMEOUT 10000)

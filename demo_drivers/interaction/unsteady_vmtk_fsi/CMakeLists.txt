@@ -31,7 +31,7 @@ oomph_add_test(
     solid.1.node
     solid_quadratic_nodes.dat
     boundary_enumeration.dat
-  LABELS "interaction;unsteady_vmtk_fsi")
+  LABELS interaction unsteady_vmtk_fsi)
 
 message(VERBOSE "Leaving unsteady_vmtk_fsi subdirectory")
 # ------------------------------------------------------------------------------

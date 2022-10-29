@@ -29,7 +29,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.static_cap
   TARGET_DEPENDENCIES static_single_layer static_two_layer
   EXTRA_REQUIRES
-  LABELS "navier_stokes;static_cap")
+  LABELS navier_stokes static_cap)
 
 message(VERBOSE "Leaving static_cap subdirectory")
 # ------------------------------------------------------------------------------

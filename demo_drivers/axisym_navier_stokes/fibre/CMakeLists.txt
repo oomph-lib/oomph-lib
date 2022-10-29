@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME axisym_navier_stokes.fibre
   TARGET_DEPENDENCIES fibre
   EXTRA_REQUIRES
-  LABELS "axisym_navier_stokes;fibre")
+  LABELS axisym_navier_stokes fibre)
 
 message(VERBOSE "Leaving fibre subdirectory")
 # ------------------------------------------------------------------------------

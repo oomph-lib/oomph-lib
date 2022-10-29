@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME solid.disk_compression
   TARGET_DEPENDENCIES disk_compression
   EXTRA_REQUIRES
-  LABELS "solid;disk_compression")
+  LABELS solid disk_compression)
 
 message(VERBOSE "Leaving disk_compression subdirectory")
 # ------------------------------------------------------------------------------

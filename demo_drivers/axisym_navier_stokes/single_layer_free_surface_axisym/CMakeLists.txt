@@ -22,7 +22,7 @@ oomph_add_test(
   TEST_NAME axisym_navier_stokes.single_layer_free_surface_axisym
   TARGET_DEPENDENCIES single_layer_free_surface_axisym
   EXTRA_REQUIRES
-  LABELS "axisym_navier_stokes;single_layer_free_surface_axisym")
+  LABELS axisym_navier_stokes single_layer_free_surface_axisym)
 
 message(VERBOSE "Leaving single_layer_free_surface_axisym subdirectory")
 # ------------------------------------------------------------------------------

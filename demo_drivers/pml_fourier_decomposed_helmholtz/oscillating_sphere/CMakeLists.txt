@@ -28,7 +28,7 @@ oomph_add_test(
   TEST_NAME pml_fourier_decomposed_helmholtz.oscillating_sphere
   TARGET_DEPENDENCIES adaptive_oscillating_sphere oscillating_sphere
   EXTRA_REQUIRES
-  LABELS "pml_fourier_decomposed_helmholtz;oscillating_sphere")
+  LABELS pml_fourier_decomposed_helmholtz oscillating_sphere)
 
 message(VERBOSE "Leaving oscillating_sphere subdirectory")
 # ------------------------------------------------------------------------------

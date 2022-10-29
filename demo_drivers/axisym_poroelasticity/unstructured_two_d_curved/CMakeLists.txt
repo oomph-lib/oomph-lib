@@ -29,7 +29,7 @@ oomph_add_test(
   TARGET_DEPENDENCIES adaptive_unstructured_two_d_curved
                       unstructured_two_d_curved
   EXTRA_REQUIRES
-  LABELS "axisym_poroelasticity;unstructured_two_d_curved")
+  LABELS axisym_poroelasticity unstructured_two_d_curved)
 
 message(VERBOSE "Leaving unstructured_two_d_curved subdirectory")
 # ------------------------------------------------------------------------------

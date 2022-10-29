@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.rayleigh_channel
   TARGET_DEPENDENCIES rayleigh_channel
   EXTRA_REQUIRES
-  LABELS "navier_stokes;rayleigh_channel")
+  LABELS navier_stokes rayleigh_channel)
 
 message(VERBOSE "Leaving rayleigh_channel subdirectory")
 # ------------------------------------------------------------------------------

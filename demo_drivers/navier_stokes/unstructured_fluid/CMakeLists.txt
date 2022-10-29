@@ -22,7 +22,7 @@ oomph_add_test(
   TARGET_DEPENDENCIES unstructured_two_d_fluid
   EXTRA_REQUIRES fluid.fig fluid.fig.1.ele fluid.fig.1.node fluid.fig.1.poly
                  fluid.fig.poly
-  LABELS "navier_stokes;unstructured_fluid")
+  LABELS navier_stokes unstructured_fluid)
 
 message(VERBOSE "Leaving unstructured_fluid subdirectory")
 # ------------------------------------------------------------------------------

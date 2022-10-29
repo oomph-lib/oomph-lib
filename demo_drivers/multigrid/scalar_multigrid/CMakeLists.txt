@@ -41,7 +41,7 @@ oomph_add_test(
     two_d_poisson_tanh_flux_bc two_d_poisson_tanh_flux_bc_validate
     unit_cube_poisson unit_cube_poisson_validate
   EXTRA_REQUIRES
-  LABELS "multigrid;scalar_multigrid")
+  LABELS multigrid scalar_multigrid)
 
 message(VERBOSE "Leaving scalar_multigrid subdirectory")
 # ------------------------------------------------------------------------------

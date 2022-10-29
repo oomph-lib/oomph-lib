@@ -29,7 +29,7 @@ oomph_add_test(
   TEST_NAME linearised_axisym_navier_stokes.counter_rotating_disks
   TARGET_DEPENDENCIES counter_rotating_disks counter_rotating_disks_ref
   EXTRA_REQUIRES
-  LABELS "linearised_axisym_navier_stokes;counter_rotating_disks")
+  LABELS linearised_axisym_navier_stokes counter_rotating_disks)
 
 # This test needs more than the default allotted time to complete
 set_tests_properties(linearised_axisym_navier_stokes.counter_rotating_disks

@@ -22,7 +22,7 @@ oomph_add_test(
   TARGET_DEPENDENCIES three_d_entry_flow
   EXTRA_REQUIRES three_d_entry_flow_1_partition.dat
                  three_d_entry_flow_2_partition.dat
-  LABELS "mpi;three_d_entry_flow"
+  LABELS mpi three_d_entry_flow
   REQUIRES_MPI_RUN_COMMAND)
 
 # Indicate that this test requires the resource REQUIRES_SOLE_USE_OF_CPU_MPI.

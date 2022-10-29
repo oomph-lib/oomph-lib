@@ -28,7 +28,7 @@ oomph_add_test(
   TARGET_DEPENDENCIES fsi_driven_cavity_driver
                       fsi_driven_cavity_segregated_driver
   EXTRA_REQUIRES
-  LABELS "interaction;fsi_driven_cavity"
+  LABELS interaction fsi_driven_cavity
   SILENCE_MISSING_VALIDATA_WARNING)
 
 message(VERBOSE "Leaving fsi_driven_cavity subdirectory")

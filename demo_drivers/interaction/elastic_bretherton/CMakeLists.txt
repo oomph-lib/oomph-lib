@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME interaction.elastic_bretherton
   TARGET_DEPENDENCIES elastic_bretherton
   EXTRA_REQUIRES
-  LABELS "interaction;elastic_bretherton")
+  LABELS interaction elastic_bretherton)
 
 message(VERBOSE "Leaving elastic_bretherton subdirectory")
 # ------------------------------------------------------------------------------

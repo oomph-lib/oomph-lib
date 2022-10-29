@@ -24,9 +24,8 @@ oomph_add_test(
     linearised_free_surface_axisym_navier_stokes.two_layer_interface_nonaxisym_perturbations
   TARGET_DEPENDENCIES two_layer_interface_nonaxisym_perturbations
   EXTRA_REQUIRES
-  LABELS
-    "linearised_free_surface_axisym_navier_stokes;two_layer_interface_nonaxisym_perturbations"
-)
+  LABELS linearised_free_surface_axisym_navier_stokes
+         two_layer_interface_nonaxisym_perturbations)
 
 message(VERBOSE
         "Leaving two_layer_interface_nonaxisym_perturbations subdirectory")

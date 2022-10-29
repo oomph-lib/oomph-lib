@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.vorticity_smoother
   TARGET_DEPENDENCIES vorticity_smoother_validation
   EXTRA_REQUIRES
-  LABELS "navier_stokes;vorticity_smoother")
+  LABELS navier_stokes vorticity_smoother)
 
 message(VERBOSE "Leaving vorticity_smoother subdirectory")
 # ------------------------------------------------------------------------------

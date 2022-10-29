@@ -37,7 +37,7 @@ oomph_add_test(
     3d_rayleigh_instability_surfactant rayleigh_instability_insoluble_surfactant
     rayleigh_instability_soluble_surfactant
   EXTRA_REQUIRES
-  LABELS "multi_physics;rayleigh_instability_surfactant")
+  LABELS multi_physics rayleigh_instability_surfactant)
 
 message(VERBOSE "Leaving rayleigh_instability_surfactant subdirectory")
 # ------------------------------------------------------------------------------

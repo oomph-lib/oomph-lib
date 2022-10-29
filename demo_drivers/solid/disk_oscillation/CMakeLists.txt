@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME solid.disk_oscillation
   TARGET_DEPENDENCIES disk_oscillation
   EXTRA_REQUIRES
-  LABELS "solid;disk_oscillation")
+  LABELS solid disk_oscillation)
 
 message(VERBOSE "Leaving disk_oscillation subdirectory")
 # ------------------------------------------------------------------------------

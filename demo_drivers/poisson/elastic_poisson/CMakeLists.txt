@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME poisson.elastic_poisson
   TARGET_DEPENDENCIES elastic_poisson
   EXTRA_REQUIRES
-  LABELS "poisson;elastic_poisson")
+  LABELS poisson elastic_poisson)
 
 message(VERBOSE "Leaving elastic_poisson subdirectory")
 # ------------------------------------------------------------------------------

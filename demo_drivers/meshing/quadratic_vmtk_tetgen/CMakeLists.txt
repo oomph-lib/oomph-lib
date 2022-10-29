@@ -28,7 +28,7 @@ oomph_add_test(
   TEST_NAME meshing.quadratic_vmtk_tetgen
   TARGET_DEPENDENCIES snap_mesh xda_to_poly_fsi
   EXTRA_REQUIRES short_coarse_mesh_files
-  LABELS "meshing;quadratic_vmtk_tetgen")
+  LABELS meshing quadratic_vmtk_tetgen)
 
 # This test needs more than the default allotted time to complete
 set_tests_properties(meshing.quadratic_vmtk_tetgen PROPERTIES TIMEOUT 10000)

@@ -36,7 +36,7 @@ oomph_add_test(
   TARGET_DEPENDENCIES elastic_two_layer_interface spine_two_layer_interface
                       refineable_two_layer_interface
   EXTRA_REQUIRES
-  LABELS "navier_stokes;two_layer_interface")
+  LABELS navier_stokes two_layer_interface)
 
 message(VERBOSE "Leaving two_layer_interface subdirectory")
 # ------------------------------------------------------------------------------

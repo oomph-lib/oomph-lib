@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME womersley.two_d_womersley
   TARGET_DEPENDENCIES two_d_womersley
   EXTRA_REQUIRES
-  LABELS "womersley;two_d_womersley")
+  LABELS womersley two_d_womersley)
 
 message(VERBOSE "Leaving two_d_womersley subdirectory")
 # ------------------------------------------------------------------------------

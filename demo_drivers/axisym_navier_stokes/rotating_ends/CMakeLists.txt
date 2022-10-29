@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME axisym_navier_stokes.rotating_ends
   TARGET_DEPENDENCIES rotating_ends
   EXTRA_REQUIRES
-  LABELS "axisym_navier_stokes;rotating_ends")
+  LABELS axisym_navier_stokes rotating_ends)
 
 message(VERBOSE "Leaving rotating_ends subdirectory")
 # ------------------------------------------------------------------------------

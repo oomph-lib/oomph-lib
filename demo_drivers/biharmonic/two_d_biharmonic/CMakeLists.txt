@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME biharmonic.two_d_biharmonic
   TARGET_DEPENDENCIES two_d_biharmonic
   EXTRA_REQUIRES
-  LABELS "biharmonic;two_d_biharmonic")
+  LABELS biharmonic two_d_biharmonic)
 
 message(VERBOSE "Leaving two_d_biharmonic subdirectory")
 # ------------------------------------------------------------------------------

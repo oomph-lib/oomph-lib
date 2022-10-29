@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME shell.plate
   TARGET_DEPENDENCIES plate
   EXTRA_REQUIRES
-  LABELS "shell;plate")
+  LABELS shell plate)
 
 # This test contains a huge number of subtests and as such needs a larger amount
 # of time than the default to complete

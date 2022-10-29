@@ -32,7 +32,7 @@ oomph_add_test(
     airy_cantilever_7_partition.dat
     airy_cantilever_8_partition.dat
     airy_cantilever_9_partition.dat
-  LABELS "mpi;airy_cantilever"
+  LABELS mpi airy_cantilever
   REQUIRES_MPI_RUN_COMMAND)
 
 # Indicate that this test requires the resource REQUIRES_SOLE_USE_OF_CPU_MPI.

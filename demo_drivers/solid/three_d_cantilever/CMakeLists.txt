@@ -28,7 +28,7 @@ oomph_add_test(
   TEST_NAME solid.three_d_cantilever
   TARGET_DEPENDENCIES three_d_cantilever three_d_cantilever_adapt
   EXTRA_REQUIRES
-  LABELS "solid;three_d_cantilever")
+  LABELS solid three_d_cantilever)
 
 message(VERBOSE "Leaving three_d_cantilever subdirectory")
 # ------------------------------------------------------------------------------

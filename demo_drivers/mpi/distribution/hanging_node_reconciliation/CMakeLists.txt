@@ -27,7 +27,7 @@ oomph_add_test(
   TEST_NAME mpi.hanging_node_reconciliation
   TARGET_DEPENDENCIES adaptive_driven_cavity hp_adaptive_driven_cavity
   EXTRA_REQUIRES nodes_cr.lay nodes.lay hp_adaptive_cavity_partition.dat
-  LABELS "mpi;hanging_node_reconciliation"
+  LABELS mpi hanging_node_reconciliation
   REQUIRES_MPI_RUN_COMMAND)
 
 # Indicate that this test requires the resource REQUIRES_SOLE_USE_OF_CPU_MPI.

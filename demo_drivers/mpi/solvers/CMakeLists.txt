@@ -65,7 +65,7 @@ oomph_add_test(
   TEST_NAME mpi.solvers
   TARGET_DEPENDENCIES ${TEST_TARGET_DEPS}
   EXTRA_REQUIRES multi_poisson_partition.dat
-  LABELS "mpi;solvers"
+  LABELS mpi solvers
   REQUIRES_MPI_RUN_COMMAND)
 
 message(VERBOSE "Leaving solvers subdirectory")

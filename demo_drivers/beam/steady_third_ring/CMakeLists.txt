@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME beam.steady_third_ring
   TARGET_DEPENDENCIES steady_third_ring
   EXTRA_REQUIRES
-  LABELS "beam;steady_third_ring")
+  LABELS beam steady_third_ring)
 
 message(VERBOSE "Leaving steady_third_ring subdirectory")
 # ------------------------------------------------------------------------------

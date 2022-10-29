@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME shell.clamped_or_pinned_shell
   TARGET_DEPENDENCIES clamped_or_pinned_shell
   EXTRA_REQUIRES
-  LABELS "shell;clamped_or_pinned_shell")
+  LABELS shell clamped_or_pinned_shell)
 
 message(VERBOSE "Leaving clamped_or_pinned_shell subdirectory")
 # ------------------------------------------------------------------------------

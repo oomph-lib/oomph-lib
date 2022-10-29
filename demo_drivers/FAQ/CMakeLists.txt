@@ -27,7 +27,7 @@ oomph_add_test(
   TEST_NAME FAQ.FAQ
   TARGET_DEPENDENCIES broken_this_demo customising_output
   EXTRA_REQUIRES
-  LABELS "FAQ;FAQ"
+  LABELS FAQ
   SILENCE_MISSING_VALIDATA_WARNING)
 
 message(VERBOSE "Leaving FAQ subdirectory")

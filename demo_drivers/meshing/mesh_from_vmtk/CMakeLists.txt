@@ -30,7 +30,7 @@ oomph_add_test(
   TARGET_DEPENDENCIES create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh
                       create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh
   EXTRA_REQUIRES iliac.xda replies.txt
-  LABELS "meshing;mesh_from_vmtk")
+  LABELS meshing mesh_from_vmtk)
 
 message(VERBOSE "Leaving mesh_from_vmtk subdirectory")
 # ------------------------------------------------------------------------------

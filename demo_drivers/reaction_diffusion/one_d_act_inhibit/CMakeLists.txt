@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME reaction_diffusion.one_d_act_inhibit
   TARGET_DEPENDENCIES one_d_act_inhibit
   EXTRA_REQUIRES
-  LABELS "reaction_diffusion;one_d_act_inhibit")
+  LABELS reaction_diffusion one_d_act_inhibit)
 
 message(VERBOSE "Leaving one_d_act_inhibit subdirectory")
 # ------------------------------------------------------------------------------

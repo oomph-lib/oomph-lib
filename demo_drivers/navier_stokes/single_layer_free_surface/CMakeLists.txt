@@ -28,7 +28,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.single_layer_free_surface
   TARGET_DEPENDENCIES elastic_single_layer spine_single_layer
   EXTRA_REQUIRES
-  LABELS "navier_stokes;single_layer_free_surface")
+  LABELS navier_stokes single_layer_free_surface)
 
 message(VERBOSE "Leaving single_layer_free_surface subdirectory")
 # ------------------------------------------------------------------------------

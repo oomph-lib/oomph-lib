@@ -28,7 +28,7 @@ oomph_add_test(
   TARGET_DEPENDENCIES extrude_triangle_generated_mesh
                       extrude_with_macro_element_representation
   EXTRA_REQUIRES triangle_meshes
-  LABELS "extrude_quad_mesh_to_cube_mesh")
+  LABELS extrude_quad_mesh_to_cube_mesh)
 
 message(VERBOSE "Leaving extrude_quad_mesh_to_cube_mesh subdirectory")
 # ------------------------------------------------------------------------------

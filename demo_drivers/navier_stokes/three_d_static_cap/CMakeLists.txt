@@ -28,7 +28,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.three_d_static_cap
   TARGET_DEPENDENCIES 3d_static_cap 3d_static_cap_elastic
   EXTRA_REQUIRES
-  LABELS "navier_stokes;three_d_static_cap")
+  LABELS navier_stokes three_d_static_cap)
 
 message(VERBOSE "Leaving three_d_static_cap subdirectory")
 # ------------------------------------------------------------------------------

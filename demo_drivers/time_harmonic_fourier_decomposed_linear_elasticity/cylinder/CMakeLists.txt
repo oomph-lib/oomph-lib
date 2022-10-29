@@ -49,7 +49,7 @@ oomph_add_test(
     adaptive_pressure_loaded_cylinder adaptive_unstructured_cylinder cylinder
     pressure_loaded_cylinder unstructured_cylinder
   EXTRA_REQUIRES
-  LABELS "time_harmonic_fourier_decomposed_linear_elasticity;cylinder")
+  LABELS time_harmonic_fourier_decomposed_linear_elasticity cylinder)
 
 message(VERBOSE "Leaving cylinder subdirectory")
 # ------------------------------------------------------------------------------

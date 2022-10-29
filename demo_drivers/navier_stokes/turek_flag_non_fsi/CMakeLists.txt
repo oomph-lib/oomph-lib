@@ -28,7 +28,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.turek_flag_non_fsi
   TARGET_DEPENDENCIES turek_flag_non_fsi_alg turek_flag_non_fsi_macro
   EXTRA_REQUIRES
-  LABELS "navier_stokes;turek_flag_non_fsi")
+  LABELS navier_stokes turek_flag_non_fsi)
 
 message(VERBOSE "Leaving turek_flag_non_fsi subdirectory")
 # ------------------------------------------------------------------------------

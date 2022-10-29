@@ -44,7 +44,7 @@ oomph_add_test(
     adaptive_unstructured_time_harmonic_elastic_annulus
     time_harmonic_elastic_annulus unstructured_time_harmonic_elastic_annulus
   EXTRA_REQUIRES
-  LABELS "time_harmonic_linear_elasticity;elastic_annulus")
+  LABELS time_harmonic_linear_elasticity elastic_annulus)
 
 message(VERBOSE "Leaving elastic_annulus subdirectory")
 # ------------------------------------------------------------------------------

@@ -29,7 +29,7 @@ oomph_add_test(
   TEST_NAME multi_physics.axisym_heat_sphere
   TARGET_DEPENDENCIES axisym_heat_sphere multi_domain_axisym_heat_sphere
   EXTRA_REQUIRES
-  LABELS "multi_physics;axisym_heat_sphere")
+  LABELS multi_physics axisym_heat_sphere)
 
 message(VERBOSE "Leaving axisym_heat_sphere subdirectory")
 # ------------------------------------------------------------------------------

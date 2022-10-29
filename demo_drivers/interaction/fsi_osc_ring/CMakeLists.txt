@@ -40,7 +40,7 @@ oomph_add_test(
   TARGET_DEPENDENCIES fsi_osc_ring fsi_osc_ring_compare_jacs osc_ring_alg
                       osc_ring_macro
   EXTRA_REQUIRES
-  LABELS "interaction;fsi_osc_ring")
+  LABELS interaction fsi_osc_ring)
 
 message(VERBOSE "Leaving fsi_osc_ring subdirectory")
 # ------------------------------------------------------------------------------

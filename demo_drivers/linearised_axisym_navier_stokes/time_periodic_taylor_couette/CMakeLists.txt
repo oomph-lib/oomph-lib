@@ -22,7 +22,7 @@ oomph_add_test(
   TEST_NAME linearised_axisym_navier_stokes.time_periodic_taylor_couette
   TARGET_DEPENDENCIES time_periodic_taylor_couette
   EXTRA_REQUIRES
-  LABELS "linearised_axisym_navier_stokes;time_periodic_taylor_couette")
+  LABELS linearised_axisym_navier_stokes time_periodic_taylor_couette)
 
 message(VERBOSE "Leaving time_periodic_taylor_couette subdirectory")
 # ------------------------------------------------------------------------------

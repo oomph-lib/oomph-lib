@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME poisson.two_d_poisson_flux_bc
   TARGET_DEPENDENCIES two_d_poisson_flux_bc
   EXTRA_REQUIRES
-  LABELS "poisson;two_d_poisson_flux_bc")
+  LABELS poisson two_d_poisson_flux_bc)
 
 message(VERBOSE "Leaving two_d_poisson_flux_bc subdirectory")
 # ------------------------------------------------------------------------------

@@ -27,7 +27,7 @@ oomph_add_test(
   TEST_NAME mpi.turek_flag
   TARGET_DEPENDENCIES turek_flag turek_flag_load_balance
   EXTRA_REQUIRES turek_flag_partition.dat load_balance.mcr
-  LABELS "mpi;turek_flag"
+  LABELS mpi turek_flag
   REQUIRES_MPI_RUN_COMMAND)
 
 # Indicate that this test requires the resource REQUIRES_SOLE_USE_OF_CPU_MPI.
