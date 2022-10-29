@@ -12,7 +12,9 @@
 #                    TARGET_DEPENDENCIES   <executables/targets-required-by-test>
 #                    EXTRA_REQUIRES        <extra-files-required-by-test>
 #                    LABELS                <string-list-of-labels>
-#                    [REQUIRES_MPI_RUN_COMMAND])
+#                    [SILENCE_MISSING_VALIDATA_WARNING]
+#                    [NO_VALIDATE_SH]
+#                    [REQUIRES_MPI_RUN_COMMAND]
 #                    [REQUIRES_MPI_VARIABLENP_RUN_COMMAND])
 #
 # By default we always assume that a validata/ and a validate.sh script are
@@ -42,8 +44,8 @@ include_guard()
 function(oomph_add_test)
   # Define the supported set of keywords
   set(PREFIX ARG)
-  set(FLAGS SILENCE_MISSING_VALIDATA_WARNING REQUIRES_MPI_RUN_COMMAND
-      REQUIRES_MPI_VARIABLENP_RUN_COMMAND)
+  set(FLAGS NO_VALIDATE_SH SILENCE_MISSING_VALIDATA_WARNING
+      REQUIRES_MPI_RUN_COMMAND REQUIRES_MPI_VARIABLENP_RUN_COMMAND)
   set(SINGLE_VALUE_ARGS TEST_NAME)
   set(MULTI_VALUE_ARGS EXTRA_REQUIRES LABELS TARGET_DEPENDENCIES)
 
@@ -53,6 +55,7 @@ function(oomph_add_test)
                         "${SINGLE_VALUE_ARGS}" "${MULTI_VALUE_ARGS}")
 
   # Redefine the variables in this scope without a prefix for clarity
+  set(NO_VALIDATE_SH ${${PREFIX}_NO_VALIDATE_SH})
   set(SILENCE_MISSING_VALIDATA_WARNING
       ${${PREFIX}_SILENCE_MISSING_VALIDATA_WARNING})
   set(REQUIRES_MPI_RUN_COMMAND ${${PREFIX}_REQUIRES_MPI_RUN_COMMAND})
@@ -191,13 +194,22 @@ function(oomph_add_test)
   # like fpdiff.py and validate_ok_count, and so it knows where to place the
   # validation.log output. The VERBATIM argument is absolutely necessary here to
   # ensure that the "mpirun ..." commands are correctly escaped.
-  add_custom_target(
-    check_${PATH_HASH}
-    COMMAND ${BASH_PROGRAM} ./validate.sh ${OOMPH_ROOT_DIR}
-            ${EXTRA_VALIDATE_SH_ARGS}
-    WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
-    DEPENDS copy_${PATH_HASH} build_targets_${PATH_HASH}
-    VERBATIM)
+  if(NOT NO_VALIDATE_SH)
+    add_custom_target(
+      check_${PATH_HASH}
+      COMMAND ${BASH_PROGRAM} ./validate.sh ${OOMPH_ROOT_DIR}
+              ${EXTRA_VALIDATE_SH_ARGS}
+      WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
+      DEPENDS copy_${PATH_HASH} build_targets_${PATH_HASH}
+      VERBATIM)
+  else()
+    # TODO: Delete VERBATIM if not needed
+    add_custom_target(
+      check_${PATH_HASH}
+      COMMAND ${BASH_PROGRAM} ${TARGET_DEPENDENCIES}
+      WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
+      DEPENDS copy_${PATH_HASH} build_targets_${PATH_HASH})
+  endif()
 
   # Create the test to be run by CTest. Through the dependencies requirements,
   # the copy_... and build_targets_... will be executed first to get the data we

@@ -5,123 +5,124 @@ with section("parse"):
 
     # Specify structure for custom cmake functions
     additional_commands = {
-        'oomph_add_executable': {
-            'flags': [
-                'SILENCE_NO_LIBS_SUPPLIED_WARNING'
+        "oomph_add_executable": {
+            "flags": [
+                "SILENCE_NO_LIBS_SUPPLIED_WARNING"
             ],
-            'kwargs': {
-                'CXX_DEFINITIONS': '*',
-                'CXX_OPTIONS': '*',
-                'CXX_STANDARD': '*',
-                'LIBRARIES': '*',
-                'NAME': '*',
-                'SOURCES': '*'
+            "kwargs": {
+                "CXX_DEFINITIONS": "*",
+                "CXX_OPTIONS": "*",
+                "CXX_STANDARD": "*",
+                "LIBRARIES": "*",
+                "NAME": "*",
+                "SOURCES": "*"
             }
         },
-        'oomph_add_test': {
-            'flags': [
-                'SILENCE_MISSING_VALIDATA_WARNING',
-                'REQUIRES_MPI_RUN_COMMAND',
-                'REQUIRES_MPI_VARIABLENP_RUN_COMMAND'
+        "oomph_add_test": {
+            "flags": [
+                "SILENCE_MISSING_VALIDATA_WARNING",
+                "NO_VALIDATE_SH",
+                "REQUIRES_MPI_RUN_COMMAND",
+                "REQUIRES_MPI_VARIABLENP_RUN_COMMAND"
             ],
-            'kwargs': {
-                'EXTRA_REQUIRES': '*',
-                'LABELS': '*',
-                'TARGET_DEPENDENCIES': '*',
-                'TEST_NAME': '*'
+            "kwargs": {
+                "EXTRA_REQUIRES": "*",
+                "LABELS": "*",
+                "TARGET_DEPENDENCIES": "*",
+                "TEST_NAME": "*"
             }
         },
-        'oomph_create_combined_header': {
-            'flags': [],
-            'kwargs': {
-                'HEADERS': '*',
-                'SUBDIRECTORY': '*',
-                'TARGET': '*'
+        "oomph_create_combined_header": {
+            "flags": [],
+            "kwargs": {
+                "HEADERS": "*",
+                "SUBDIRECTORY": "*",
+                "TARGET": "*"
             }
         },
-        'oomph_create_symlinks_for_headers': {
-            'flags': [],
-            'kwargs': {
-                'HEADERS': '*',
-                'REAL_DIR': '*',
-                'SYMLINK_DIR': '*'
+        "oomph_create_symlinks_for_headers": {
+            "flags": [],
+            "kwargs": {
+                "HEADERS": "*",
+                "REAL_DIR": "*",
+                "SYMLINK_DIR": "*"
             }
         },
-        'oomph_find_external_src_file': {
-            'flags': [
-                'REQUIRED',
-                'TOUCH_DUMMY_FILE'
+        "oomph_find_external_src_file": {
+            "flags": [
+                "REQUIRED",
+                "TOUCH_DUMMY_FILE"
             ],
-            'kwargs': {
-                'DUMMY_FILE': '*',
-                'FILE': '*',
-                'SEARCH_PATHS': '*',
-                'SET_FLAG': '*',
-                'TARGET': '*'
+            "kwargs": {
+                "DUMMY_FILE": "*",
+                "FILE": "*",
+                "SEARCH_PATHS": "*",
+                "SET_FLAG": "*",
+                "TARGET": "*"
             }
         },
-        'oomph_git_patch_command': {
-            'flags': [],
-            'kwargs': {
-                'PATCH_DIRECTORY': '*',
-                'PATCH_FILE': '*'
+        "oomph_git_patch_command": {
+            "flags": [],
+            "kwargs": {
+                "PATCH_DIRECTORY": "*",
+                "PATCH_FILE": "*"
             }
         },
-        'oomph_library_config': {
-            'flags': [],
-            'kwargs': {
-                'HEADERS': '*',
-                'HEADERS_NO_COMBINE': '*',
-                'HEADERS_NO_INSTALL': '*',
-                'INCLUDE_SUBDIRECTORY': '*',
-                'LIBNAME': '*',
-                'LIBTYPE': '*',
-                'LINKLIBS': '*',
-                'SOURCES': '*',
-                'SOURCES_NO_BUILD': '*'
+        "oomph_library_config": {
+            "flags": [],
+            "kwargs": {
+                "HEADERS": "*",
+                "HEADERS_NO_COMBINE": "*",
+                "HEADERS_NO_INSTALL": "*",
+                "INCLUDE_SUBDIRECTORY": "*",
+                "LIBNAME": "*",
+                "LIBTYPE": "*",
+                "LINKLIBS": "*",
+                "SOURCES": "*",
+                "SOURCES_NO_BUILD": "*"
             }
         },
-        'oomph_target_silence_warnings': {
-            'flags': [
+        "oomph_target_silence_warnings": {
+            "flags": [
                 "WARN_IF_FLAG_NOT_FOUND"
             ],
-            'kwargs': {
-                'CXX_COMPILE_FLAGS': '*',
-                'C_COMPILE_FLAGS': '*',
-                'FORTRAN_COMPILE_FLAGS': '*',
-                'TARGET': '*'
+            "kwargs": {
+                "CXX_COMPILE_FLAGS": "*",
+                "C_COMPILE_FLAGS": "*",
+                "FORTRAN_COMPILE_FLAGS": "*",
+                "TARGET": "*"
             }
         },
-        'check_fortran_compiler_flag': {
-            'flags': [],
-            'kwargs': {}
+        "check_fortran_compiler_flag": {
+            "flags": [],
+            "kwargs": {}
         },
-        'set': {
-            'flags': [],
-            'kwargs': {}
+        "set": {
+            "flags": [],
+            "kwargs": {}
         },
         "find_package": {
-            'flags': [
-                'REQUIRED',
-                'EXACT',
-                'QUIET',
-                'CONFIG',
-                'NO_MODULE',
-                'GLOBAL',
-                'NO_POLICY_SCOPE',
-                'BYPASS_PROVIDER',
-                'NO_DEFAULT_PATH',
-                'NO_PACKAGE_ROOT_PATH',
-                'NO_CMAKE_PATH',
-                'NO_CMAKE_ENVIRONMENT_PATH',
-                'NO_SYSTEM_ENVIRONMENT_PATH',
-                'NO_CMAKE_PACKAGE_REGISTRY',
-                'NO_CMAKE_SYSTEM_PATH',
-                'NO_CMAKE_INSTALL_PREFIX',
-                'NO_CMAKE_SYSTEM_PACKAGE_REGISTRY',
-                'CMAKE_FIND_ROOT_PATH_BOTH',
-                'ONLY_CMAKE_FIND_ROOT_PATH',
-                'NO_CMAKE_FIND_ROOT_PATH',
+            "flags": [
+                "REQUIRED",
+                "EXACT",
+                "QUIET",
+                "CONFIG",
+                "NO_MODULE",
+                "GLOBAL",
+                "NO_POLICY_SCOPE",
+                "BYPASS_PROVIDER",
+                "NO_DEFAULT_PATH",
+                "NO_PACKAGE_ROOT_PATH",
+                "NO_CMAKE_PATH",
+                "NO_CMAKE_ENVIRONMENT_PATH",
+                "NO_SYSTEM_ENVIRONMENT_PATH",
+                "NO_CMAKE_PACKAGE_REGISTRY",
+                "NO_CMAKE_SYSTEM_PATH",
+                "NO_CMAKE_INSTALL_PREFIX",
+                "NO_CMAKE_SYSTEM_PACKAGE_REGISTRY",
+                "CMAKE_FIND_ROOT_PATH_BOTH",
+                "ONLY_CMAKE_FIND_ROOT_PATH",
+                "NO_CMAKE_FIND_ROOT_PATH",
             ],
             "kwargs": {
                 "COMPONENTS": "*",
@@ -131,7 +132,7 @@ with section("parse"):
                 "HINTS": "*",
                 "PATHS": "*",
                 "REGISTRY_VIEW": 1,
-                "PATH_SUFFIXES": '*',
+                "PATH_SUFFIXES": "*",
             },
         }
     }
@@ -166,10 +167,10 @@ with section("format"):
 
     # If <use_tabchars> is True, then the value of this variable indicates how
     # fractional indentions are handled during whitespace replacement. If set to
-    # 'use-space', fractional indentation is left as spaces (utf-8 0x20). If set
+    # "use-space", fractional indentation is left as spaces (utf-8 0x20). If set
     # to `round-up` fractional indentation is replaced with a single tab character
     # (utf-8 0x09) effectively shifting the column to the next tabstop
-    fractional_tab_policy = 'use-space'
+    fractional_tab_policy = "use-space"
 
     # If an argument group contains more than this many sub-groups (parg or kwarg
     # groups) then force it to a vertical layout.
@@ -193,11 +194,11 @@ with section("format"):
     # parenthesis on its own line.
     dangle_parens = False
 
-    # If the trailing parenthesis must be 'dangled' on its on line, then align it
+    # If the trailing parenthesis must be "dangled" on its on line, then align it
     # to this reference: `prefix`: the start of the statement,  `prefix-indent`:
     # the start of the statement, plus one indentation  level, `child`: align to
     # the column of the arguments
-    dangle_align = 'prefix'
+    dangle_align = "prefix"
 
     # If the statement spelling length (including space and parenthesis) is
     # smaller than this amount, then force reject nested layouts.
@@ -213,13 +214,13 @@ with section("format"):
     max_lines_hwrap = 2
 
     # What style line endings to use in the output.
-    line_ending = 'unix'
+    line_ending = "unix"
 
-    # Format command names consistently as 'lower' or 'upper' case
-    command_case = 'canonical'
+    # Format command names consistently as "lower" or "upper" case
+    command_case = "canonical"
 
-    # Format keywords consistently as 'lower' or 'upper' case
-    keyword_case = 'upper'
+    # Format keywords consistently as "lower" or "upper" case
+    keyword_case = "upper"
 
     # A list of command names which should always be wrapped
     always_wrap = []
@@ -248,10 +249,10 @@ with section("format"):
 with section("markup"):
 
     # What character to use for bulleted lists
-    bullet_char = '*'
+    bullet_char = "*"
 
     # What character to use as punctuation after numerals in an enumerated list
-    enum_char = '.'
+    enum_char = "."
 
     # If comment markup is enabled, don't reflow the first comment block in each
     # listfile. Use this to preserve formatting of your copyright/license
@@ -263,16 +264,16 @@ with section("markup"):
     literal_comment_pattern = None
 
     # Regular expression to match preformat fences in comments default=
-    # ``r'^\s*([`~]{3}[`~]*)(.*)$'``
-    fence_pattern = '^\\s*([`~]{3}[`~]*)(.*)$'
+    # ``r"^\s*([`~]{3}[`~]*)(.*)$"``
+    fence_pattern = "^\\s*([`~]{3}[`~]*)(.*)$"
 
     # Regular expression to match rulers in comments default=
-    # ``r'^\s*[^\w\s]{3}.*[^\w\s]{3}$'``
-    ruler_pattern = '^\\s*[^\\w\\s]{3}.*[^\\w\\s]{3}$'
+    # ``r"^\s*[^\w\s]{3}.*[^\w\s]{3}$"``
+    ruler_pattern = "^\\s*[^\\w\\s]{3}.*[^\\w\\s]{3}$"
 
     # If a comment line matches starts with this pattern then it is explicitly a
-    # trailing comment for the preceeding argument. Default is '#<'
-    explicit_trailing_pattern = '#<'
+    # trailing comment for the preceeding argument. Default is "#<"
+    explicit_trailing_pattern = "#<"
 
     # If a comment line starts with at least this many consecutive hash
     # characters, then don't lstrip() them off. This allows for lazy hash rulers
@@ -295,38 +296,38 @@ with section("lint"):
     disabled_codes = []
 
     # regular expression pattern describing valid function names
-    function_pattern = '[0-9a-z_]+'
+    function_pattern = "[0-9a-z_]+"
 
     # regular expression pattern describing valid macro names
-    macro_pattern = '[0-9A-Z_]+'
+    macro_pattern = "[0-9A-Z_]+"
 
     # regular expression pattern describing valid names for variables with global
     # (cache) scope
-    global_var_pattern = '[A-Z][0-9A-Z_]+'
+    global_var_pattern = "[A-Z][0-9A-Z_]+"
 
     # regular expression pattern describing valid names for variables with global
     # scope (but internal semantic)
-    internal_var_pattern = '_[A-Z][0-9A-Z_]+'
+    internal_var_pattern = "_[A-Z][0-9A-Z_]+"
 
     # regular expression pattern describing valid names for variables with local
     # scope
-    local_var_pattern = '[a-z][a-z0-9_]+'
+    local_var_pattern = "[a-z][a-z0-9_]+"
 
     # regular expression pattern describing valid names for privatedirectory
     # variables
-    private_var_pattern = '_[0-9a-z_]+'
+    private_var_pattern = "_[0-9a-z_]+"
 
     # regular expression pattern describing valid names for public directory
     # variables
-    public_var_pattern = '[A-Z][0-9A-Z_]+'
+    public_var_pattern = "[A-Z][0-9A-Z_]+"
 
     # regular expression pattern describing valid names for function/macro
     # arguments and loop variables.
-    argument_var_pattern = '[a-z][a-z0-9_]+'
+    argument_var_pattern = "[a-z][a-z0-9_]+"
 
     # regular expression pattern describing valid names for keywords used in
     # functions or macros
-    keyword_pattern = '[A-Z][0-9A-Z_]+'
+    keyword_pattern = "[A-Z][0-9A-Z_]+"
 
     # In the heuristic for C0201, how many conditionals to match within a loop in
     # before considering the loop a parser.
@@ -352,11 +353,11 @@ with section("encode"):
     emit_byteorder_mark = False
 
     # Specify the encoding of the input file. Defaults to utf-8
-    input_encoding = 'utf-8'
+    input_encoding = "utf-8"
 
     # Specify the encoding of the output file. Defaults to utf-8. Note that cmake
     # only claims to support utf-8 so be careful when using anything else
-    output_encoding = 'utf-8'
+    output_encoding = "utf-8"
 
 # -------------------------------------
 # Miscellaneous configurations options.
