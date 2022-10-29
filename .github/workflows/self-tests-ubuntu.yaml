@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Install dependencies
         run: sudo apt-get install -y gfortran ninja-build libopenblas-dev
@@ -55,7 +55,7 @@ jobs:
         continue-on-error: true
 
       - name: Upload validation log file
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: validation-${{ runner.os }}-MPI_${{ matrix.build_info.status }}.log
           path: ./validation.log

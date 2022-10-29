@@ -27,7 +27,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Install dependencies
         run: brew install cmake ninja openblas fd && brew reinstall gcc
@@ -60,7 +60,7 @@ jobs:
         continue-on-error: true
 
       - name: Upload validation log file
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: validation-${{ runner.os }}-MPI_${{ matrix.build_info.mpi_status }}.log
           path: ./validation.log
