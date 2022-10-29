@@ -24,6 +24,9 @@ message(VERBOSE "Entered external_src subdirectory")
 set(EXTERNAL_SRC_CXX_DEFINITIONS "")
 set(EXTERNAL_SRC_LIBS)
 
+# ZLib for gzip decompression
+add_subdirectory(oomph_zlib)
+
 # Add HSL, C.R. Bond Bessel functions, and ARPACK
 add_subdirectory(oomph_hsl)
 add_subdirectory(oomph_crbond_bessel)
