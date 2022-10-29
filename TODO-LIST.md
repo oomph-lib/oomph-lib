@@ -2,13 +2,22 @@
 
 ## Requirements for minimum viable product
 
+* [ ] Convert `oomph_gzip` library to single-file code...
+* [ ] Print additional helpful info during configure step, e.g. install destination
+* [ ] Add C++ implementation of `fpdiff.py`
+  * [ ] Add `zlib` to `external_src` for `.gz` decompression
+* [ ] Add presets for M1 Macs and x86 Mac
+  * [ ] Make x86, the default `--preset mac` and Arm the special case `--preset mac_arm64`
+* [ ] Decide how to handle `OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY`
+  * ~~E.g. if demo drivers are built with the library, do not define the `install()` functions; force the user to work in the build directory!~~
+* [ ] Add build/test presets for MPI configuration!
 * [ ] Discuss option naming!! E.g. `WANT_` or `ENABLE_` etc.
-* [ ] Try using Accelerate.Framework BLAS library on M1 Mac
 * [ ] Update GitHub self-tests to only run after pushing .h, .c, .cc, CMakeLists.txt code (see e.g. [here](https://github.com/scivision/mumps/blob/v5.5.1.7/.github/workflows/ci.yml)).
 * [ ] Convert external library version numbers into variables (for ODR)
 * [ ] Make oomph_add_test() a wrapper around oomph_add_executable()?
   * Need to be very careful about how we set up test names and output names to avoid clashes...
   * Will be helpful to create a separate test per executable and so we know whether a specific executable is actually included in a test... (although we'll know automatically from NUM_TESTS)
+    * Can't do this at the moment because all tests are run with `validate.sh`! Can get around this by using the new C++ fpdiff...
 * [ ] Handle M1 Macs gracefully and update GitHub Actions...
 * [ ] Update instructions for how to run demo drivers (need to set CMAKE_APPLE_SILICON_PROCESSOR...?)
 * [ ] Implement `fpdiff.py` in C++ (FUN!) (requires gzip processing)
@@ -47,6 +56,7 @@
 * [ ] Add notes on how to use `CMakePresets.json` and how they can define their own `CMakeUserPresets.json` file.
 * [ ] Switch to mpic++ and mpicxx compilers for MPI-enabled code(?)
 * [ ] Fix broken MPI-enabled demo drivers
+* [ ] Get timing comparison for Accelerate.Framework BLAS and OpenBLAS on M1 Mac
 
 ## Less urgent
 
