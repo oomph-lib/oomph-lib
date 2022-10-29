@@ -45,7 +45,7 @@ else
     $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/results2.dat.gz \
 				     results2.dat 1.0 1.0e-08 >> validation.log
     $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/results3.dat.gz \
-				     results3.dat 2.0 1.0e-08 >> validation.log
+				     results3.dat 2.0 5.0e-08 >> validation.log
     $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/convergence.dat.gz \
 				     convergence.dat >> validation.log
 fi
