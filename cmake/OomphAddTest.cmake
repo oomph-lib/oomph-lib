@@ -195,6 +195,9 @@ function(oomph_add_test)
   # It will simply append the new command (with &&; check build.ninja) and not
   # overwrite the previous ones!
 
+  # TODO: Try simplifying things with
+  # https://cmake.org/cmake/help/book/mastering-cmake/chapter/Testing%20With%20CMake%20and%20CTest.html#using-ctest-to-drive-complex-tests
+
   # FIXME: If we move away from validate.sh scripts, we need to run executables
   # with our own mpirun command if needed
 
@@ -219,6 +222,11 @@ function(oomph_add_test)
     add_custom_target(
       check_${PATH_HASH}
       COMMAND ${BASH_PROGRAM} -c ./${RUN_DEPENDENCIES_STRING}
+      COMMAND
+        ${BASH_PROGRAM} -c
+        "test -e \"${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log\" || ( \
+          printf \"\\nUnable to locate file:\\n\\n\\t${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log\\n\\nStopping here...\\n\\n\" && \
+          exit 1 )"
       COMMAND cat "${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log" >>
               "${OOMPH_ROOT_DIR}/validation.log"
       WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
@@ -226,10 +234,16 @@ function(oomph_add_test)
       VERBATIM)
   endif()
 
-  # Create the test to be run by CTest. Through the dependencies requirements,
-  # the copy_... and build_targets_... will be executed first to get the data we
-  # require and to build the executables we need. Then, the check_... target
-  # will be run which will execute the validate.sh script
+  # Create the test to be run by CTest. When we run the test, it will call, e.g.
+  # 'ninja check_...' which will call the 'check_...' target defined above. As
+  # this target depends on the copy_... and build_targets_... targets, they will
+  # be called first, resulting in the required test files to be symlinked or
+  # copied to the build directory, and the targets the test depends on to get
+  # built. Once the data is in place and the executables have been built, the
+  # check_... commands will run, which will cause the validate.sh script or
+  # individual executables to be run (depending on whether 'NO_VALIDATE_SH' was
+  # specified). Finally, the output validation.log file will be appended to the
+  # global validation.log file in the oomph-lib root directory.
   add_test(
     NAME ${TEST_NAME}
     COMMAND ${CMAKE_MAKE_PROGRAM} check_${PATH_HASH}
