@@ -73,7 +73,7 @@ set(CMAKE_MODULES_TO_INSTALL OomphAddExecutable.cmake OomphAddTest.cmake
 # oomphlibConfig.cmake file
 foreach(MODULE IN LISTS CMAKE_MODULES_TO_INSTALL)
   file(COPY "${CMAKE_CURRENT_LIST_DIR}/${MODULE}"
-       DESTINATION ${OOMPH_CMAKE_CONFIG_DIR})
+       DESTINATION ${OOMPH_BUILD_DIR})
 
   # Install it
   install(FILES "${CMAKE_CURRENT_LIST_DIR}/${MODULE}"
