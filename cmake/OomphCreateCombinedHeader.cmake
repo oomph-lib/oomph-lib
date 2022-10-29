@@ -40,7 +40,13 @@ function(oomph_create_combined_header)
 
   # Add the "#include<...>" commands
   foreach(FILE IN LISTS HEADERS)
-    string(APPEND COMBINED_HEADER_FILE "#include <${SUBDIRECTORY}/${FILE}>\n")
+    # The header path might be a long path (e.g. corresponding to a path in the
+    # build tree) but once installed, the header will just be in SUBDIRECTORY,
+    # so we have to remember to strip the path before constructing the path to
+    # add to the combined header
+    cmake_path(GET FILE FILENAME FILE_NAME)
+    string(APPEND COMBINED_HEADER_FILE
+           "#include <${SUBDIRECTORY}/${FILE_NAME}>\n")
   endforeach()
 
   # Write to file
