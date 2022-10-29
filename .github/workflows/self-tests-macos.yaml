@@ -7,7 +7,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Install requirements
         run: brew install make automake libtool autoconf doxygen && brew reinstall gfortran
@@ -28,7 +28,7 @@ jobs:
         continue-on-error: true
 
       - name: Upload validation log file
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: validation-${{ runner.os }}.log
           path: ./validation.log
