@@ -35,6 +35,7 @@ set(SUBDIRS
     fourier_decomposed_helmholtz
     generalised_newtonian_axisym_navier_stokes
     generalised_newtonian_navier_stokes
+    gzip
     heat_transfer_and_melting
     helmholtz
     homogenisation
