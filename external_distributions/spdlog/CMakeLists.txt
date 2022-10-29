@@ -1,5 +1,5 @@
 # ==============================================================================
-# Build the nlohmann JSON library
+# Build the spdlog library
 # ==============================================================================
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(STATUS "Entered spdlog subdirectory")
