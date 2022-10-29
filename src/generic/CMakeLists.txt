@@ -108,7 +108,8 @@ set(HEADERS
     geom_obj_with_boundary.h
     extruded_macro_element.h
     extruded_domain.h
-    black_box_newton_solver.h)
+    black_box_newton_solver.h
+    fpdiff.h)
 
 if(OOMPH_HAS_STACKTRACE)
   list(APPEND HEADERS stacktrace.h)
@@ -197,7 +198,8 @@ set(SOURCES
     geometric_multigrid.cc
     extruded_macro_element.cc
     extruded_domain.cc
-    black_box_newton_solver.cc)
+    black_box_newton_solver.cc
+    fpdiff.cc)
 
 if(OOMPH_HAS_MPI)
   list(APPEND SOURCES superlu_dist.c)
