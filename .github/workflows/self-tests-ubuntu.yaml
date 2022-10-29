@@ -51,7 +51,7 @@ jobs:
 
       - name: Run self-tests
         id: self_tests
-        run: ctest --test-dir demo_drivers/build -j $(nproc) -R gzip --output-on-failure
+        run: ctest --test-dir demo_drivers/build -j $(nproc)
         continue-on-error: true
 
       - name: Upload validation log file
