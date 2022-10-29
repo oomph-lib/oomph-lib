@@ -55,7 +55,7 @@ jobs:
 
       - name: Run self-tests
         id: self_tests
-        run: ctest --test-dir demo_drivers/build -j $(sysctl -n hw.logicalcpu)
+        run: ctest --test-dir demo_drivers/build -j $(sysctl -n hw.logicalcpu) -R gzip --output-on-failure
         continue-on-error: true
 
       - name: Upload validation log file
