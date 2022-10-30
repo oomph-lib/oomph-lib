@@ -17,11 +17,13 @@ oomph_add_executable(
 
 # ---------------------------------- TESTING ----------------------------------
 
-oomph_add_test(
-  TEST_NAME axisym_navier_stokes.torus
-  TARGET_DEPENDENCIES torus
-  EXTRA_REQUIRES
-  LABELS axisym_navier_stokes torus)
+if(OOMPH_HAS_HYPRE AND OOMPH_HAS_MPI)
+  oomph_add_test(
+    TEST_NAME axisym_navier_stokes.torus
+    TARGET_DEPENDENCIES torus
+    EXTRA_REQUIRES
+    LABELS axisym_navier_stokes torus)
+endif()
 
 message(VERBOSE "Leaving torus subdirectory")
 # ------------------------------------------------------------------------------
