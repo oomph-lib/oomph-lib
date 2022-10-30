@@ -42,16 +42,6 @@ project(
   HOMEPAGE_URL "http://oomph-lib.maths.man.ac.uk/doc/html/index.html"
   LANGUAGES C CXX Fortran)
 
-message(WARNING "CMAKE_INSTALL_PREFIX: ${CMAKE_INSTALL_PREFIX}")
-# ~~~
-# # **********************************************************************
-# # FIXME: Temporary patch; find out how to handle this one properly...
-# if(APPLE)
-#   set(CMAKE_OSX_DEPLOYMENT_TARGET 12.3)
-# endif()
-# # **********************************************************************
-# ~~~
-
 # ---------------------------[ INITIAL PROJECT SETUP ]--------------------------
 
 # Specify the location of non-standard CMake modules and the C++ standard
@@ -184,6 +174,7 @@ if(OOMPH_ENABLE_USE_OPENBLAS)
   # NOTE: You can override the BLAS/LAPACK vendor by setting it's value as a
   # cache variable from the command-line, i.e. "cmake -DBLA_VENDOR ...". It will
   # then override the value used here.
+  #
   set(BLA_VENDOR OpenBLAS)
   find_package(BLAS REQUIRED)
   find_package(LAPACK REQUIRED)
