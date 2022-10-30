@@ -233,10 +233,6 @@ set(HEADERS_NO_COMBINE cfortran.h frontal.h arpack.h lapack_qz.h mumps.h)
 # be listed in combined header file
 set(TEMPLATES tree.tpp refineable_mesh.tpp multi_domain.tpp missing_masters.tpp)
 
-# FIXME: Delete once you're sure oomph-lib builds (this should automatically be
-# done in OomphLibraryConfig.cmake) set_source_files_properties(${TEMPLATES}
-# PROPERTIES HEADER_FILE_ONLY TRUE)
-
 # The generic library relies on the external sources
 set(LINKLIBS ${EXTERNAL_SRC_LIBS})
 if(OOMPH_HAS_MPI)
