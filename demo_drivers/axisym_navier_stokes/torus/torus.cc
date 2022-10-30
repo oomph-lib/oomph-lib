@@ -250,6 +250,9 @@ TorusProblem<ELEMENT>::TorusProblem(const unsigned &max_refinement_level,
 //Trap because HYPRE can't handle the case when OOMPH_HAS_MPI, but we
 //run in serial
 #ifndef OOMPH_HAS_MPI
+  // The Newton solver sometimes doesn't converge within 10 iterations when
+  // using the HyprePreconditioner. Let's relax that condition a little...
+  this->max_newton_iterations() = 20;
 
  //Set up the internal preconditioners
  Preconditioner* P_matrix_preconditioner_pt = new HyprePreconditioner;
