@@ -45,6 +45,7 @@
 
 ### Features to add or patch
 
+* [ ] Add control for setting number of procs to use in `mpiexec` command
 * [ ] Add `self_test/` directory to CMake build
   * [ ] Run tests with C++ fpdiff (requires C++17 support)
   * [ ] Implement with `oomph_add_pure_cpp_test()`
@@ -61,6 +62,7 @@
   * [ ] If broken, patch any issues, e.g. `ctest --config $<CONFIG>`
 * [ ] Sort out a subproject build of `private/`
 * [ ] Update GitHub self-tests to only run after pushing .h, .c, .cc, CMakeLists.txt code (see e.g. [here](https://github.com/scivision/mumps/blob/v5.5.1.7/.github/workflows/ci.yml)).
+* [ ] Update MPI demo drivers to use 'RESOURCE_GROUPS' to declare the number of CPUs they'll use (will need to store)
 
 ### Needs investigation
 
@@ -71,6 +73,7 @@
 * [ ] Installing CMake (3.24)
 * [ ] Downloading and installing oomph-lib
 * [ ] Update instructions for how to run demo drivers
+  * [ ] Add info on how to set C++ standard and add compile definitions
   * [ ] macOS info:
     * [ ] Add warning that the user might need to set `CMAKE_APPLE_SILICON_PROCESSOR`
     * [ ] Ask users to `brew uninstall coreutils` if it is not required (over)
@@ -93,9 +96,12 @@
     * [ ] BLAS and LAPACK build can be skipped with `find_package(BLAS)` and `find_package(LAPACK)`
   * [ ] `demo_drivers/`
   * [ ] `private/`
-* [ ] Write a breakdown of all new features, e.g.
+* [ ] Write info on how to debug issue:
+  * [ ] Run commands for MPI tests (e.g. `mpiexec -np 2`)
+* [ ] Write a breakdown of all new features important changes, e.g.
   * [ ] **Either update Notion or create a CMake Changelog**
   * [ ] C++ implementation of `fpdiff.py`
+  * [ ] `validate.sh` scripts now take the path to the root directory
 * [ ] Incrementing version number (**strongly recommend using `bumpversion.cfg` to keep git version and cmake version in sync!**)
 
 ### Fine-tuning for beta release
