@@ -220,6 +220,11 @@ if(OOMPH_HAS_TRILINOS)
        trilinos_solver.cc trilinos_eigen_solver.cc)
 endif()
 
+if(OOMPH_HAS_MUMPS)
+  list(APPEND HEADERS mumps_solver.h)
+  list(APPEND SOURCES mumps_fortran_solver.F mumps_solver.cc)
+endif()
+
 # Need to worry about these for dependency but they shouldn't be included into
 # the include directory
 set(HEADERS_NO_COMBINE cfortran.h frontal.h arpack.h lapack_qz.h mumps.h)
@@ -304,9 +309,6 @@ if(OOMPH_HAS_TRILINOS)
 endif()
 
 if(OOMPH_HAS_MUMPS)
-  list(APPEND HEADERS mumps_solver.h)
-  list(APPEND SOURCES mumps_fortran_solver.F mumps_solver.cc)
-  # find_package(MUMPS 5.5.1.10 REQUIRED HINTS ${MUMPS_BINARY_DIR})
   target_link_libraries(${LIBNAME} PUBLIC MUMPS::MUMPS MPI::MPI_C)
 endif()
 
