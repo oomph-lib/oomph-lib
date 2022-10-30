@@ -40,7 +40,9 @@
       "generator": "Ninja",
       "cacheVariables": {
         "OOMPH_ENABLE_USE_OPENBLAS": "ON",
-        "OOMPH_WANT_TRILINOS": "OFF",
+        "OOMPH_WANT_NLOHMANN_JSON": "ON",
+        "OOMPH_WANT_SPDLOG": "ON",
+        "OOMPH_WANT_HYPRE": "ON",
         "OOMPH_WANT_MUMPS": "OFF"
       }
     },
@@ -52,13 +54,7 @@
       "cacheVariables": {
         "OOMPH_ENABLE_USE_OPENBLAS": "ON",
         "OOMPH_ENABLE_MPI": "ON",
-        "OOMPH_WANT_TRILINOS": "OFF",
-        "OOMPH_WANT_MUMPS": "OFF"
-      },
-      "environment": {
-        "CC": "mpicc",
-        "CXX": "mpic++",
-        "FC": "mpifort"
+        "OOMPH_WANT_MUMPS": "ON"
       }
     },
     {
@@ -114,18 +110,16 @@
       "inherits": "base",
       "displayName": "Default MPI Config",
       "generator": "Ninja",
-      "binaryDir": "${sourceDir}/build-mpi",
-      "environment": {
-        "CC": "mpicc",
-        "CXX": "mpic++",
-        "FC": "mpifort"
-      }
+      "binaryDir": "${sourceDir}/build-mpi"
     },
     {
       "name": "ninja-multi",
       "inherits": "base",
       "displayName": "Ninja Multi-Config",
       "generator": "Ninja Multi-Config"
+    },
+    {
+      "name": "dummy"
     }
   ],
   "buildPresets": [
@@ -168,7 +162,7 @@
       "hidden": true,
       "output": {
         "outputOnFailure": true,
-        "labelSummary": false
+        "labelSummary": true
       },
       "execution": {
         "timeout": 10000,
@@ -176,18 +170,8 @@
       }
     },
     {
-      "name": "ninja-multi",
-      "configurePreset": "ninja-multi",
-      "inherits": "test-base"
-    },
-    {
-      "name": "CI-demo-drivers",
-      "configurePreset": "CI-demo-drivers",
-      "inherits": "test-base"
-    },
-    {
-      "name": "CI-demo-drivers-with-coverage",
-      "configurePreset": "CI-demo-drivers-with-coverage",
+      "name": "ci",
+      "configurePreset": "dummy",
       "inherits": "test-base"
     },
     {
