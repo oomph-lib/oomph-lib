@@ -68,14 +68,16 @@ set(OOMPH_SUPPRESSED_TETGEN_LIB @SUPPRESS_TETGEN_LIB@)
 set(OOMPH_ENABLE_USE_OPENBLAS @OOMPH_ENABLE_USE_OPENBLAS@)
 
 # Capture values from the configuration step to determine which dependencies
-# should be forwarded to the user
-set(OOMPH_HAS_MPI @OOMPH_ENABLE_MPI@)
-set(OOMPH_HAS_CGAL @OOMPH_WANT_CGAL@)
-set(OOMPH_HAS_HYPRE @OOMPH_WANT_HYPRE@)
-set(OOMPH_HAS_MUMPS @OOMPH_WANT_MUMPS@)
-set(OOMPH_HAS_TRILINOS @OOMPH_WANT_TRILINOS@)
+# should be forwarded to the user. Note that if the packages aren't requested,
+# the variables won't have any values (because the _HAS_ variables won't be
+# set). However, they will still be "falsey"
+set(OOMPH_HAS_MPI @OOMPH_HAS_MPI@)
+set(OOMPH_HAS_CGAL @OOMPH_HAS_CGAL@)
+set(OOMPH_HAS_HYPRE @OOMPH_HAS_HYPRE@)
+set(OOMPH_HAS_MUMPS @OOMPH_HAS_MUMPS@)
+set(OOMPH_HAS_TRILINOS @OOMPH_HAS_TRILINOS@)
 
-set(OOMPH_HAS_NLOHMANN_JSON @OOMPH_WANT_NLOHMANN_JSON@)
+set(OOMPH_HAS_NLOHMANN_JSON @OOMPH_HAS_NLOHMANN_JSON@)
 set(OOMPH_HAS_SPDLOG @OOMPH_HAS_SPDLOG@)
 
 # Search for OpenBLAS/LAPACK libraries
