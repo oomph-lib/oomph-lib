@@ -71,7 +71,8 @@ endif()
 # it here to add MPI libraries to the entire build if we want it
 include_directories(SYSTEM ${MPI_C_INCLUDE_PATH} ${MPI_CXX_INCLUDE_PATH})
 # include_directories(SYSTEM ${MPI_CXX_INCLUDE_PATH})
-link_libraries(${MPI_C_LIBRARIES} ${MPI_CXX_LIBRARIES})
+link_libraries(MPI::MPI_C MPI::MPI_CXX)
+# link_libraries(${MPI_C_LIBRARIES} ${MPI_CXX_LIBRARIES})
 # ~~~
 
 # Set the command used to run MPI-enabled self-tests if the user didn't specify
