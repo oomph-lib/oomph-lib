@@ -35,21 +35,12 @@ set(mumps_matlab OFF)
 set(use_default_install_location ON)
 # set(BUILD_TESTING OFF)
 
-# TODO: Find out how to control the installation destination of the stupid thing
-
-# Download MUMPS repo. Currently using a personal forked repo with patched
-# changes to address the overriden install path when the default one is used. If
-# it ever gets fixed in the future, we should fork a copy of the repo here:
-#
-# https://github.com/scivision/mumps.git
-#
-# to the oomph-lib organisation.
 include(FetchContent)
 FetchContent_Declare(
   mumps_project
-  GIT_REPOSITORY https://github.com/scivision/mumps.git
-  GIT_TAG v5.4.1.2
-  # GIT_REPOSITORY https://github.com/PuneetMatharu/mumps.git GIT_TAG v5.4.0.6
+  # GIT_REPOSITORY https://github.com/scivision/mumps.git
+  GIT_REPOSITORY https://github.com/puneetmatharu/mumps.git
+  GIT_TAG v5.5.1.11
   GIT_SHALLOW TRUE)
 FetchContent_MakeAvailable(mumps_project)
 
