@@ -17,10 +17,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # NOTE: The main options are: [
-        #   {status: "OFF", preset: CI-build},
-        #   {status: "ON",  preset: CI-mpi-build}]
-        build_info: [{ status: "OFF", cmake_preset: CI-build }]
+        # build_info: [{ mpi_status: "OFF", cmake_preset: CI-build }]
+        build_info:
+          [
+            { mpi_status: "OFF", preset: CI-build },
+            { mpi_status: "ON", preset: CI-mpi-build },
+          ]
 
     runs-on: ubuntu-latest
     steps:
@@ -31,7 +33,7 @@ jobs:
         run: sudo apt-get install -y gfortran ninja-build libopenblas-dev
 
       - name: Install MPI dependencies (if required)
-        if: matrix.build_info.status == 'ON'
+        if: matrix.build_info.mpi_status == 'ON'
         run: sudo apt-get install openmpi-bin libopenmpi-dev
 
       - name: Configure
@@ -43,21 +45,27 @@ jobs:
       - name: Install
         run: cmake --install build
 
-      - name: Configure self-tests
+      - name: Configure demo drivers
         run: cmake -S demo_drivers -B demo_drivers/build
+        env:
+          # Tell the demo drivers where to find the installed oomph-lib library
+          CMAKE_PREFIX_PATH: ${{ env.OOMPH_INSTALL_PATH }}
+
+      - name: Build demo drivers
+        run: cmake --build demo_drivers/build
         env:
           # Tell the demo drivers where to find the installed oomph-lib library
           CMAKE_PREFIX_PATH: ${{ env.OOMPH_INSTALL_PATH }}
 
       - name: Run self-tests
         id: self_tests
-        run: ctest --test-dir demo_drivers/build -j $(nproc)
+        run: ctest --preset ci --test-dir demo_drivers/build -j $(nproc)
         continue-on-error: true
 
       - name: Upload validation log file
         uses: actions/upload-artifact@v3
         with:
-          name: validation-${{ runner.os }}-MPI_${{ matrix.build_info.status }}.log
+          name: validation-${{ runner.os }}-MPI_${{ matrix.build_info.mpi_status }}.log
           path: ./validation.log
 
       - name: Propagate CTest status
