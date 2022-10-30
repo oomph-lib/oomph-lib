@@ -2,72 +2,128 @@
 
 ## Requirements for minimum viable product
 
-* [ ] Convert `oomph_gzip` library to single-file code...
-* [ ] Print additional helpful info during configure step, e.g. install destination
-* [ ] Add C++ implementation of `fpdiff.py`
-  * [ ] Add `zlib` to `external_src` for `.gz` decompression
-* [ ] Add presets for M1 Macs and x86 Mac
-  * [ ] Make x86, the default `--preset mac` and Arm the special case `--preset mac_arm64`
-* [ ] Decide how to handle `OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY`
-  * ~~E.g. if demo drivers are built with the library, do not define the `install()` functions; force the user to work in the build directory!~~
-* [ ] Add build/test presets for MPI configuration!
-* [ ] Discuss option naming!! E.g. `WANT_` or `ENABLE_` etc.
-* [ ] Update GitHub self-tests to only run after pushing .h, .c, .cc, CMakeLists.txt code (see e.g. [here](https://github.com/scivision/mumps/blob/v5.5.1.7/.github/workflows/ci.yml)).
-* [ ] Convert external library version numbers into variables (for ODR)
-* [ ] Make oomph_add_test() a wrapper around oomph_add_executable()?
-  * Need to be very careful about how we set up test names and output names to avoid clashes...
-  * Will be helpful to create a separate test per executable and so we know whether a specific executable is actually included in a test... (although we'll know automatically from NUM_TESTS)
-    * Can't do this at the moment because all tests are run with `validate.sh`! Can get around this by using the new C++ fpdiff...
-* [ ] Handle M1 Macs gracefully and update GitHub Actions...
-* [ ] Update instructions for how to run demo drivers (need to set CMAKE_APPLE_SILICON_PROCESSOR...?)
-* [ ] Implement `fpdiff.py` in C++ (FUN!) (requires gzip processing)
-* [ ] Settle on a versioning scheme (e.g. define a `version.h`)
-* Documentation for:
-  * [ ] Installing CMake (3.24)
-  * [ ] Downloading and installing oomph-lib
-  * [ ] Incrementing version number (STRONGLY RECOMMEND USING BUMPVERSION.CFG TO KEEP GIT VERSION AND CMAKE VERSION IN LINE!)
-  * [ ] Adding demo drivers
-    * [ ] Document changes to `validate.sh` (first arg will be `oomph-lib` root; absolute path!!)
-    * [ ] ONLY ONE oomph_add_test() per demo_driver directory
-  * [ ] Adding *MPI* demo drivers (special flags)
-    * [ ] Document additional `validate.sh` arg (mpi run command)
-* [ ] Change 'oomphlib' -> 'oomph_lib' (carefully(!) avoid changing headers/sources)
-* Add:
+### Third party library support
+
+* Add support for:
   * [x] `spdlog::spdlog`
   * [x] `nlohmann::json`
   * [x] `Hypre`
-  * [ ] `MUMPS`
+  * [x] `MUMPS`
   * [ ] `Trilinos`
     * For Trilinos, link against `Trilinos::all_libs`
   * [ ] Sequential build of `MUMPS`
-* [ ] Remove non-working `external_distributions/` crap
-* [ ] Patch OomphMPI.cmake to avoid doing a global link_libraries()
-* [ ] Write a breakdown of what has been completed and what features are missing for:
-  * [ ] `src/`
-  * [ ] `external_src/`
-  * [ ] `demo_drivers/`
-  * [ ] `private/`
-* [ ] Talk to MH about updating to latest MUMPS
-* [ ] Fix building of documentation
-* [ ] Download CMake oomph-lib in a folder that has a space in the name.
-* [ ] Find and doc. how users can build a Debug and Release version and easily switch between the two.
-* [ ] Sort out a subproject build of private/
-* [ ] Add check_...() calls to make sure the C/C++/Fortran/MPI compilers work
-* [ ] Add notes on how to use `CMakePresets.json` and how they can define their own `CMakeUserPresets.json` file.
-* [ ] Switch to mpic++ and mpicxx compilers for MPI-enabled code(?)
-* [ ] Fix broken MPI-enabled demo drivers
-* [ ] Get timing comparison for Accelerate.Framework BLAS and OpenBLAS on M1 Mac
-
-## Less urgent
-
-* [ ] Add (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME) in conditionals where appropriate. See: <https://cliutils.gitlab.io/modern-cmake/chapters/testing.html>
-
-* [ ] Consider replacing bash scripts with Python scripts for demo_driver tests to make them platform-independent.
+  * [ ] Specifying the location of already-installed libraries
+    * Could possibly specify installation directory with `-D <PACKAGE>_DIR`? E.g. `-D TRILINOS_DIR`, `-D HYPRE_DIR` etc.
+    * [ ] `spdlog::spdlog`
+    * [ ] `nlohmann::json`
+    * [ ] `Hypre`
+    * [ ] `MUMPS`
+    * [ ] `Trilinos`
+      * For Trilinos, link against `Trilinos::all_libs`
+    * [ ] Sequential build of `MUMPS`
+* [ ] Convert external library version numbers into variables? (ODR)
 * [ ] Address MUMPS 64-bit int (i.e. long long) compatibility issue
 
+### Improvements
+
+* [ ] *Optional:* Convert `oomph_gzip` library to single-file?
+
+### Pure-CMake
+
+* [ ] Add a `oomph_add_pure_cpp_test()` with an `ARGS` command for arguments to pass
+  * Should define the executable AND the test target
+  * Will allow us to create an individual test per test for finer granularity
+* [ ] *Add presets:*
+  * [ ] For MPI configuration
+  * [ ] For Intel-based Macs (`--preset macos`) and Arm-based (`--preset macos_arm64`)
+    * Should just need to define `CMAKE_APPLE_SILICON_PROCESSOR="arm64"` for the latter
+* [ ] Print additional helpful info during configure step, e.g. install destination
+* [ ] *Optional:* Update all demo drivers to stop piping output to `validation.log`; use `ctest --o validation.log --output-on-failure`
+  * Ideally we'd still output `validation.log` info to this file even if the test doesn't fail... (Just incase there's a bug where a test fails but CTest doesn't catch it)
+* [ ] Update `OomphMPI.cmake` to avoid doing a global `link_libraries()`
+* [ ] Use `PROJECT_IS_TOP_LEVEL` to enable/disable tests
+
+### Features to add or patch
+
+* [ ] Add `self_test/` directory to CMake build
+  * [ ] Run tests with C++ fpdiff (requires C++17 support)
+  * [ ] Implement with `oomph_add_pure_cpp_test()`
+* [ ] Graceful support M1 Macs gracefully and update GitHub Actions...
+* [ ] Remove non-working `external_distributions/` crap
+* [ ] Fix building of documentation
+* [ ] Download CMake oomph-lib in a folder that has a space in the name.
+* [ ] Add `check_...()` calls to make sure the C/C++/Fortran/MPI compilers work
+* [ ] Fix broken MPI-enabled demo drivers
+* [ ] Let the user specify their own BLAS/LAPACK libraries
+  * [ ] Create an `OomphPickBLASAndLAPACK.cmake`
+  * [ ] Will need to locally set `CMAKE_PREFIX_PATH` and unset `BLA_VENDOR`
+* [ ] Test out Ninja multi-config support
+  * [ ] If broken, patch any issues, e.g. `ctest --config $<CONFIG>`
+* [ ] Sort out a subproject build of `private/`
+* [ ] Update GitHub self-tests to only run after pushing .h, .c, .cc, CMakeLists.txt code (see e.g. [here](https://github.com/scivision/mumps/blob/v5.5.1.7/.github/workflows/ci.yml)).
+
+### Needs investigation
+
+* [ ] Get timing comparison for Accelerate.Framework BLAS and OpenBLAS on M1 Mac
+
+### Documentation
+
+* [ ] Installing CMake (3.24)
+* [ ] Downloading and installing oomph-lib
+* [ ] Update instructions for how to run demo drivers
+  * [ ] macOS info:
+    * [ ] Add warning that the user might need to set `CMAKE_APPLE_SILICON_PROCESSOR`
+    * [ ] Ask users to `brew uninstall coreutils` if it is not required (over)
+    * [ ] Add documentation on how users can also just set the `CMAKE_APPLE_SILICON_PROCESSOR` environment variable (see [CMake GitLab](https://gitlab.kitware.com/cmake/cmake/-/blob/master/Modules/CMakeDetermineSystem.cmake#L35))
+* [ ] Adding demo drivers
+  * [ ] Document changes to `validate.sh` (first arg will be `oomph-lib` root; absolute path!!)
+  * [ ] ONLY ONE oomph_add_test() per demo_driver directory
+* [ ] Adding *MPI* demo drivers (special flags)
+  * [ ] Document additional `validate.sh` arg (mpi run command)
+* [ ] Document how to use `CMakePresets.json` and `CMakeUserPresets.json` file
+* [ ] Find and doc. how users can build both a `Debug` and `Release` version and easily switch between the two
+* [ ] Write a breakdown of what has been completed and what features are missing for:
+  * [ ] `src/`
+    * [ ] `src/meshes/`
+      * New build format for `src/meshes`
+      * Headers and template headers ONLY; no library artefact! (So no linking to `oomph::meshes` needed)
+      * We can automatically find meshes by `#include`-ing `meshes/<mesh-header>`; the `target_include_directories()` command in `OomphLibraryConfig.cmake` has been set up cleverly for that
+  * [ ] `external_src/`
+    * [ ] New `oomph_gzip` folder
+    * [ ] BLAS and LAPACK build can be skipped with `find_package(BLAS)` and `find_package(LAPACK)`
+  * [ ] `demo_drivers/`
+  * [ ] `private/`
+* [ ] Write a breakdown of all new features, e.g.
+  * [ ] **Either update Notion or create a CMake Changelog**
+  * [ ] C++ implementation of `fpdiff.py`
+* [ ] Incrementing version number (**strongly recommend using `bumpversion.cfg` to keep git version and cmake version in sync!**)
+
+### Fine-tuning for beta release
+
+Include tasks here that likely need some collaboration with Matthias
+
+* [ ] Properly review to-do list and see if there's anything missing!
+* [ ] Talk to MH about latest MUMPS
+  * [ ] Do we need Scotch/METIS?
+* [ ] Discuss option naming!! E.g. `WANT_` or `ENABLE_` etc.
+* [ ] Possibly change `oomphlib` -> `oomph_lib`? (carefully(!) avoid changing headers/sources)
+* [ ] Settle on a versioning scheme (e.g. should we define a `version.h`?)
+* [ ] Decide how to handle `OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY` and whether to leave it in
+  * Useful for quick debugging of build with demo drivers
+  * ~~E.g. if demo drivers are built with the library, do not define the `install()` functions; force the user to work in the build directory!~~
+* [ ] Discuss required base presets in `CMakePresets.json`
+
+### Less urgent
 
 ## Finished
 
+* [x] ~~Make oomph_add_test() a wrapper around oomph_add_executable()?~~
+  * Need to be very careful about how we set up test names and output names to avoid clashes...
+  * Will be helpful to create a separate test per executable and so we know whether a specific executable is actually included in a test... (although we'll know automatically from NUM_TESTS)
+    * Can't do this at the moment because all tests are run with `validate.sh` so we can only have one test per directory.
+    * Can get around this by using the new C++ fpdiff though...
+* [x] Implement `fpdiff.py` in C++ (FUN!)
+  * [x] Add `zlib` to `external_src` for `.gz` decompression
 * [x] Update minimum CMake version
 * [x] Fix issue with not being able to rerun `ctest` in a directory twice (at least for `mpi/distribution/adaptive_driven_cavity`).
 * [x] Remove Docker build (can be brought back after beta release)
@@ -116,3 +172,5 @@
 * [x] Add a config header and export it with the library!
 * [x] Add an "include_guard()" to CMake modules files likely to be included multiple times.
 * [x] Specify required dependencies of the package. See: <https://cmake.org/cmake/help/git-master/guide/importing-exporting/index.html#id8>
+* [x] ~~Switch to mpic++ and mpicxx compilers for MPI-enabled code(?)~~
+  * No! We should be letting CMake pick the compilers itself!
