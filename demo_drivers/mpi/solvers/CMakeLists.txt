@@ -15,15 +15,10 @@ oomph_add_executable(
   LIBRARIES oomph::navier_stokes
   CXX_STANDARD 14)
 
-set(DIRECT_SOLVER_TEST_OPTIONAL_LIBS)
-if(OOMPH_HAS_MUMPS)
-  list(APPEND DIRECT_SOLVER_TEST_OPTIONAL_LIBS MUMPS::MUMPS)
-endif()
-
 oomph_add_executable(
   NAME direct_solver_test
   SOURCES direct_solver_test.cc
-  LIBRARIES oomph::poisson ${DIRECT_SOLVER_TEST_OPTIONAL_LIBS}
+  LIBRARIES oomph::poisson
   CXX_STANDARD 14)
 
 oomph_add_executable(
