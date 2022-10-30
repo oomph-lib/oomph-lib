@@ -22,8 +22,8 @@ jobs:
         # build_info: [{ mpi_status: "OFF", cmake_preset: CI-build }]
         build_info:
           [
-            { mpi_status: "OFF", preset: CI-build },
-            { mpi_status: "ON", preset: CI-mpi-build },
+            { mpi_status: "OFF", cmake_preset: CI-build },
+            { mpi_status: "ON", cmake_preset: CI-mpi-build },
           ]
 
     runs-on: macos-latest
