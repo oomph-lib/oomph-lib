@@ -12,13 +12,13 @@ include(CTest)
 oomph_add_executable(
   NAME turek_flag
   SOURCES turek_flag.cc
-  LIBRARIES oomph::solid oomph::constitutive oomph::navier_stokes MPI::MPI_CXX
+  LIBRARIES oomph::solid oomph::constitutive oomph::navier_stokes
   CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME turek_flag_load_balance
   SOURCES turek_flag_load_balance.cc
-  LIBRARIES oomph::solid oomph::constitutive oomph::navier_stokes MPI::MPI_CXX
+  LIBRARIES oomph::solid oomph::constitutive oomph::navier_stokes
   CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
@@ -30,11 +30,8 @@ oomph_add_test(
   LABELS mpi turek_flag
   REQUIRES_MPI_RUN_COMMAND)
 
-# Indicate that this test requires the resource REQUIRES_SOLE_USE_OF_CPU_MPI.
-# We'll pass this to all other MPI-enabled self-tests to ensure that parallel
-# self-test do NOT run at the same time!
-set_tests_properties(mpi.turek_flag PROPERTIES RESOURCE_LOCK
-                                               REQUIRES_SOLE_USE_OF_CPU_MPI)
+# Don't run this test alongside any other tests
+set_tests_properties(mpi.turek_flag PROPERTIES RUN_SERIAL TRUE)
 
 # TODO: Patch
 if(APPLE)

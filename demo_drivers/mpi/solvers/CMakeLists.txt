@@ -12,12 +12,12 @@ include(CTest)
 oomph_add_executable(
   NAME driven_cavity
   SOURCES driven_cavity.cc
-  LIBRARIES oomph::navier_stokes MPI::MPI_CXX
+  LIBRARIES oomph::navier_stokes
   CXX_STANDARD 14)
 
 set(DIRECT_SOLVER_TEST_OPTIONAL_LIBS)
 if(OOMPH_HAS_MUMPS)
-  list(APPEND DIRECT_SOLVER_TEST_OPTIONAL_LIBS MUMPS::MUMPS MPI::MPI_CXX)
+  list(APPEND DIRECT_SOLVER_TEST_OPTIONAL_LIBS MUMPS::MUMPS)
 endif()
 
 oomph_add_executable(
@@ -29,26 +29,26 @@ oomph_add_executable(
 oomph_add_executable(
   NAME airy_cantilever
   SOURCES airy_cantilever.cc
-  LIBRARIES oomph::solid oomph::constitutive MPI::MPI_CXX
+  LIBRARIES oomph::solid oomph::constitutive
   CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME fsi_channel_with_leaflet
   SOURCES fsi_channel_with_leaflet.cc
-  LIBRARIES oomph::beam oomph::navier_stokes oomph::generic MPI::MPI_CXX
+  LIBRARIES oomph::beam oomph::navier_stokes oomph::generic
   CXX_STANDARD 14)
 
 if(OOMPH_HAS_TRILINOS)
   oomph_add_executable(
     NAME TrilinosSolver_test
     SOURCES TrilinosSolver_test.cc
-    LIBRARIES oomph::poisson MPI::MPI_CXX
+    LIBRARIES oomph::poisson
     CXX_STANDARD 14)
 
   oomph_add_executable(
     NAME two_d_multi_poisson
     SOURCES two_d_multi_poisson.cc
-    LIBRARIES oomph::generic MPI::MPI_CXX
+    LIBRARIES oomph::generic
     CXX_STANDARD 14)
 endif()
 
@@ -67,6 +67,9 @@ oomph_add_test(
   EXTRA_REQUIRES multi_poisson_partition.dat
   LABELS mpi solvers
   REQUIRES_MPI_RUN_COMMAND)
+
+# Don't run this test alongside any other tests
+set_tests_properties(mpi.solvers PROPERTIES RUN_SERIAL TRUE)
 
 message(VERBOSE "Leaving solvers subdirectory")
 # ------------------------------------------------------------------------------

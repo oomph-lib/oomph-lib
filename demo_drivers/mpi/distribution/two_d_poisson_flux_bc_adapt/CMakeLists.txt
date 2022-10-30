@@ -12,7 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME two_d_poisson_flux_bc_adapt
   SOURCES two_d_poisson_flux_bc_adapt.cc
-  LIBRARIES oomph::poisson MPI::MPI_CXX
+  LIBRARIES oomph::poisson
   CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
@@ -21,14 +21,11 @@ oomph_add_test(
   TEST_NAME mpi.two_d_poisson_flux_bc_adapt
   TARGET_DEPENDENCIES two_d_poisson_flux_bc_adapt
   EXTRA_REQUIRES two_d_poisson_flux_partition.dat
-  LABELS "mpi;two_d_poisson_flux_bc_adapt;adapt"
+  LABELS mpi two_d_poisson_flux_bc_adapt adapt
   REQUIRES_MPI_RUN_COMMAND)
 
-# Indicate that this test requires the resource REQUIRES_SOLE_USE_OF_CPU_MPI.
-# We'll pass this to all other MPI-enabled self-tests to ensure that parallel
-# self-test do NOT run at the same time!
-set_tests_properties(mpi.two_d_poisson_flux_bc_adapt
-                     PROPERTIES RESOURCE_LOCK REQUIRES_SOLE_USE_OF_CPU_MPI)
+# Don't run this test alongside any other tests
+set_tests_properties(mpi.two_d_poisson_flux_bc_adapt PROPERTIES RUN_SERIAL TRUE)
 
 message(VERBOSE "Leaving two_d_poisson_flux_bc_adapt subdirectory")
 # ------------------------------------------------------------------------------

@@ -12,13 +12,13 @@ include(CTest)
 oomph_add_executable(
   NAME fsi_collapsible_channel_adapt
   SOURCES fsi_collapsible_channel_adapt.cc
-  LIBRARIES oomph::beam oomph::navier_stokes MPI::MPI_CXX
+  LIBRARIES oomph::beam oomph::navier_stokes
   CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME fsi_collapsible_channel_macro_adapt
   SOURCES fsi_collapsible_channel_adapt.cc
-  LIBRARIES oomph::beam oomph::navier_stokes MPI::MPI_CXX
+  LIBRARIES oomph::beam oomph::navier_stokes
   CXX_DEFINITIONS MACRO_ELEMENT_NODE_UPDATE
   CXX_STANDARD 14)
 
@@ -32,11 +32,8 @@ oomph_add_test(
   LABELS mpi fsi_collapsible_channel
   REQUIRES_MPI_RUN_COMMAND)
 
-# Indicate that this test requires the resource REQUIRES_SOLE_USE_OF_CPU_MPI.
-# We'll pass this to all other MPI-enabled self-tests to ensure that parallel
-# self-test do NOT run at the same time!
-set_tests_properties(mpi.fsi_collapsible_channel
-                     PROPERTIES RESOURCE_LOCK REQUIRES_SOLE_USE_OF_CPU_MPI)
+# Don't run this test alongside any other tests
+set_tests_properties(mpi.fsi_collapsible_channel PROPERTIES RUN_SERIAL TRUE)
 
 message(VERBOSE "Leaving fsi_collapsible_channel subdirectory")
 # ------------------------------------------------------------------------------

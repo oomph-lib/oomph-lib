@@ -12,7 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME fsi_osc_ring
   SOURCES fsi_osc_ring.cc
-  LIBRARIES oomph::beam oomph::navier_stokes MPI::MPI_CXX
+  LIBRARIES oomph::beam oomph::navier_stokes
   CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
@@ -24,11 +24,8 @@ oomph_add_test(
   LABELS mpi fsi_osc_ring
   REQUIRES_MPI_RUN_COMMAND)
 
-# Indicate that this test requires the resource REQUIRES_SOLE_USE_OF_CPU_MPI.
-# We'll pass this to all other MPI-enabled self-tests to ensure that parallel
-# self-test do NOT run at the same time!
-set_tests_properties(mpi.fsi_osc_ring PROPERTIES RESOURCE_LOCK
-                                                 REQUIRES_SOLE_USE_OF_CPU_MPI)
+# Don't run this test alongside any other tests
+set_tests_properties(mpi.fsi_osc_ring PROPERTIES RUN_SERIAL TRUE)
 
 message(VERBOSE "Leaving fsi_osc_ring subdirectory")
 # ------------------------------------------------------------------------------

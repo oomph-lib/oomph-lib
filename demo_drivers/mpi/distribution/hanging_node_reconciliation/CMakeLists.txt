@@ -12,13 +12,13 @@ include(CTest)
 oomph_add_executable(
   NAME adaptive_driven_cavity
   SOURCES adaptive_driven_cavity.cc
-  LIBRARIES oomph::navier_stokes MPI::MPI_CXX
+  LIBRARIES oomph::navier_stokes
   CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME hp_adaptive_driven_cavity
   SOURCES hp_adaptive_driven_cavity.cc
-  LIBRARIES oomph::navier_stokes MPI::MPI_CXX
+  LIBRARIES oomph::navier_stokes
   CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
@@ -30,11 +30,8 @@ oomph_add_test(
   LABELS mpi hanging_node_reconciliation
   REQUIRES_MPI_RUN_COMMAND)
 
-# Indicate that this test requires the resource REQUIRES_SOLE_USE_OF_CPU_MPI.
-# We'll pass this to all other MPI-enabled self-tests to ensure that parallel
-# self-test do NOT run at the same time!
-set_tests_properties(mpi.hanging_node_reconciliation
-                     PROPERTIES RESOURCE_LOCK REQUIRES_SOLE_USE_OF_CPU_MPI)
+# Don't run this test alongside any other tests
+set_tests_properties(mpi.hanging_node_reconciliation PROPERTIES RUN_SERIAL TRUE)
 
 message(VERBOSE "Leaving hanging_node_reconciliation subdirectory")
 # ------------------------------------------------------------------------------

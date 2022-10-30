@@ -36,14 +36,12 @@ oomph_add_test(
     unstructured_adaptive_mesh_two_outer_boundaries
     unstructured_adaptive_mesh_two_outer_boundaries_crossed
   EXTRA_REQUIRES
-  LABELS "mpi;two_d_unstructured_adaptive_poisson;adapt"
+  LABELS mpi two_d_unstructured_adaptive_poisson adapt
   REQUIRES_MPI_VARIABLENP_RUN_COMMAND)
 
-# Indicate that this test requires the resource REQUIRES_SOLE_USE_OF_CPU_MPI.
-# We'll pass this to all other MPI-enabled self-tests to ensure that parallel
-# self-test do NOT run at the same time!
+# Don't run this test alongside any other tests
 set_tests_properties(mpi.two_d_unstructured_adaptive_poisson
-                     PROPERTIES RESOURCE_LOCK REQUIRES_SOLE_USE_OF_CPU_MPI)
+                     PROPERTIES RUN_SERIAL TRUE)
 
 message(VERBOSE "Leaving two_d_unstructured_adaptive_poisson subdirectory")
 # ------------------------------------------------------------------------------

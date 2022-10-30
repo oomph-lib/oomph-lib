@@ -12,13 +12,13 @@ include(CTest)
 oomph_add_executable(
   NAME prescribed_displ_lagr_mult
   SOURCES prescribed_displ_lagr_mult.cc
-  LIBRARIES oomph::solid oomph::constitutive MPI::MPI_CXX
+  LIBRARIES oomph::solid oomph::constitutive
   CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME resize_hanging_node_tester
   SOURCES resize_hanging_node_tester.cc
-  LIBRARIES oomph::solid oomph::constitutive MPI::MPI_CXX
+  LIBRARIES oomph::solid oomph::constitutive
   CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
@@ -30,11 +30,8 @@ oomph_add_test(
   LABELS mpi prescribed_displ_lagr_mult
   REQUIRES_MPI_RUN_COMMAND)
 
-# Indicate that this test requires the resource REQUIRES_SOLE_USE_OF_CPU_MPI.
-# We'll pass this to all other MPI-enabled self-tests to ensure that parallel
-# self-test do NOT run at the same time!
-set_tests_properties(mpi.prescribed_displ_lagr_mult
-                     PROPERTIES RESOURCE_LOCK REQUIRES_SOLE_USE_OF_CPU_MPI)
+# Don't run this test alongside any other tests
+set_tests_properties(mpi.prescribed_displ_lagr_mult PROPERTIES RUN_SERIAL TRUE)
 
 message(VERBOSE "Leaving prescribed_displ_lagr_mult subdirectory")
 # ------------------------------------------------------------------------------

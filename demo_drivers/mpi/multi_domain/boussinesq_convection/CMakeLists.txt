@@ -12,26 +12,26 @@ include(CTest)
 oomph_add_executable(
   NAME multi_domain_boussinesq_convection
   SOURCES multi_domain_boussinesq_convection.cc
-  LIBRARIES oomph::advection_diffusion oomph::navier_stokes MPI::MPI_CXX
+  LIBRARIES oomph::advection_diffusion oomph::navier_stokes
   CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME multi_domain_boussinesq_convection_fd
   SOURCES multi_domain_boussinesq_convection.cc
-  LIBRARIES oomph::advection_diffusion oomph::navier_stokes MPI::MPI_CXX
+  LIBRARIES oomph::advection_diffusion oomph::navier_stokes
   CXX_DEFINITIONS USE_FD_JACOBIAN_NST_IN_MULTI_DOMAIN_BOUSSINESQ
   CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME multi_domain_ref_b_convection
   SOURCES multi_domain_ref_b_convection.cc
-  LIBRARIES oomph::advection_diffusion oomph::navier_stokes MPI::MPI_CXX
+  LIBRARIES oomph::advection_diffusion oomph::navier_stokes
   CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME refineable_b_convection
   SOURCES refineable_b_convection.cc
-  LIBRARIES oomph::advection_diffusion oomph::navier_stokes MPI::MPI_CXX
+  LIBRARIES oomph::advection_diffusion oomph::navier_stokes
   CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
@@ -48,11 +48,8 @@ oomph_add_test(
   LABELS mpi boussinesq_convection
   REQUIRES_MPI_RUN_COMMAND)
 
-# Indicate that this test requires the resource REQUIRES_SOLE_USE_OF_CPU_MPI.
-# We'll pass this to all other MPI-enabled self-tests to ensure that parallel
-# self-test do NOT run at the same time!
-set_tests_properties(mpi.boussinesq_convection
-                     PROPERTIES RESOURCE_LOCK REQUIRES_SOLE_USE_OF_CPU_MPI)
+# Don't run this test alongside any other tests
+set_tests_properties(mpi.boussinesq_convection PROPERTIES RUN_SERIAL TRUE)
 
 # TODO: Patch
 if(APPLE)

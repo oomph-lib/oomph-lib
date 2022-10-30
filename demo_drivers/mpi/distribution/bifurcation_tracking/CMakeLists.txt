@@ -12,13 +12,13 @@ include(CTest)
 oomph_add_executable(
   NAME pitchfork
   SOURCES pitchfork.cc
-  LIBRARIES oomph::generic MPI::MPI_CXX
+  LIBRARIES oomph::generic
   CXX_STANDARD 14)
 
 oomph_add_executable(
   NAME track_pitch
   SOURCES track_pitch.cc
-  LIBRARIES oomph::axisym_navier_stokes MPI::MPI_CXX
+  LIBRARIES oomph::axisym_navier_stokes
   CXX_STANDARD 14)
 
 # ---------------------------------- TESTING ----------------------------------
@@ -30,14 +30,9 @@ oomph_add_test(
   LABELS mpi bifurcation_tracking
   REQUIRES_MPI_RUN_COMMAND)
 
-# Indicate that this test requires the resource REQUIRES_SOLE_USE_OF_CPU_MPI.
-# We'll pass this to all other MPI-enabled self-tests to ensure that parallel
-# self-test do NOT run at the same time!
-set_tests_properties(mpi.bifurcation_tracking
-                     PROPERTIES RESOURCE_LOCK REQUIRES_SOLE_USE_OF_CPU_MPI)
-
-# TODO: Patch
-set_tests_properties(mpi.bifurcation_tracking PROPERTIES DISABLED YES)
+# Don't run this test alongside any other tests
+set_tests_properties(mpi.bifurcation_tracking PROPERTIES RUN_SERIAL TRUE
+                                                         DISABLED YES)
 
 message(VERBOSE "Leaving bifurcation_tracking subdirectory")
 # ------------------------------------------------------------------------------
