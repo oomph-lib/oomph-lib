@@ -37,7 +37,7 @@ oomph_add_test(
 # This test needs more than the default allotted time to complete
 set_tests_properties(solid.simple_shear PROPERTIES TIMEOUT 10000)
 
-# TODO: Patch
+# TODO: Needs to be patched
 set_tests_properties(solid.simple_shear PROPERTIES DISABLED YES)
 
 message(VERBOSE "Leaving simple_shear subdirectory")
