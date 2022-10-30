@@ -11,8 +11,8 @@ set(SPDLOG_INSTALL ON)
 # Download and populate the spdlog target
 FetchContent_Declare(
   spdlog_project
-  GIT_REPOSITORY https://github.com/gabime/spdlog.git
-  GIT_TAG 77429b2
+  GIT_REPOSITORY https://github.com/puneetmatharu/spdlog.git
+  GIT_TAG v1.10.1
   GIT_PROGRESS TRUE
   GIT_SHALLOW TRUE)
 FetchContent_MakeAvailable(spdlog_project)
