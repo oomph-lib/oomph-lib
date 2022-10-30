@@ -51,9 +51,6 @@ jobs:
           # Tell the demo drivers where to find the installed oomph-lib library
           CMAKE_PREFIX_PATH: ${{ env.OOMPH_INSTALL_PATH }}
 
-      - name: Build demo drivers
-        run: cmake --build demo_drivers/build
-
       - name: Run self-tests
         id: self_tests
         run: ctest --preset ci --test-dir demo_drivers/build -j $(nproc)
