@@ -33,10 +33,5 @@ oomph_add_test(
 # Don't run this test alongside any other tests
 set_tests_properties(mpi.turek_flag PROPERTIES RUN_SERIAL TRUE)
 
-# TODO: Patch
-if(APPLE)
-  set_tests_properties(mpi.turek_flag PROPERTIES DISABLED YES)
-endif()
-
 message(VERBOSE "Leaving turek_flag subdirectory")
 # ------------------------------------------------------------------------------

@@ -31,8 +31,7 @@ oomph_add_test(
   REQUIRES_MPI_RUN_COMMAND)
 
 # Don't run this test alongside any other tests
-set_tests_properties(mpi.bifurcation_tracking PROPERTIES RUN_SERIAL TRUE
-                                                         DISABLED YES)
+set_tests_properties(mpi.bifurcation_tracking PROPERTIES RUN_SERIAL TRUE)
 
 message(VERBOSE "Leaving bifurcation_tracking subdirectory")
 # ------------------------------------------------------------------------------

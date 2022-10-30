@@ -51,10 +51,5 @@ oomph_add_test(
 # Don't run this test alongside any other tests
 set_tests_properties(mpi.boussinesq_convection PROPERTIES RUN_SERIAL TRUE)
 
-# TODO: Patch
-if(APPLE)
-  set_tests_properties(mpi.boussinesq_convection PROPERTIES DISABLED YES)
-endif()
-
 message(VERBOSE "Leaving boussinesq_convection subdirectory")
 # ------------------------------------------------------------------------------
