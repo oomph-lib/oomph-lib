@@ -198,7 +198,7 @@ This involves the following steps:
    (Note: If you only want to add files that were changed and that are
    already under Git version control, you can use `git add -u`; this command will not add any newly created files.)
  
-   (Second Note: As soon as you have staged any files then git diff will no longer show any differences between them and the current versions in the repository.)
+   (Second Note: As soon as you have staged any files then `git diff` will no longer show any differences between them and the current versions in the repository.)
 
 
     ```bash
@@ -500,15 +500,15 @@ Described below is an alternative way to pull changes from the official reposito
 
 ## Advanced: pulling in changes from another branch without going through the central repository
 
-  Imagine that somebody has written a piece of code that you want to use, but they are not yet ready to create a pull request to the main oomph-lib development branch. Obviously, they could just send you the code, but the better way is to ask them to create a pull request to a branch on your forked copy of the repository. Ideally, you should create a new branch specifically to pull in the changes, but you could also pull into the development branch. You should follow the steps described in [Code review](#code-review) to pull those changes into your branch. You now have the problem that your upstream repository is different from the local copy on your machine, but you can solve this problem with the git merge command.
+  Imagine that somebody has written a piece of code that you want to use, but they are not yet ready to create a pull request to the main `oomph-lib` development branch. Obviously, they could just send you the code, but the better way is to ask them to create a pull request to a branch on your forked copy of the repository. Ideally, you should create a new branch specifically to pull in the changes, but you could also pull into the development branch. You should follow the steps described in [Code review](#code-review) to pull those changes into your branch. You now have the problem that your upstream repository is different from the local copy on your machine, but you can solve this problem with the git merge command.
 
  1. Make sure that you fetch the upstream copy of repository that includes the changes pulled in
    from the external source. 
    ```bash
-    >>> git pull upstream exernal-feature-branch
+    >>> git pull upstream external-feature-branch
     ```
 
- 2. Resolve any merge conflicts. If you have created a separate branch there should be no merge conflicts, but if you have pulled changes into an existing branch then there could be conflicts.
+ 2. Resolve any merge conflicts. If you have created a separate branch there should be no conflicts, but if you have pulled changes into an existing branch then there is potential for some conflicts.
 
  3. Use git checkout to switch to the branch into which you want to bring the changes
     ```bash

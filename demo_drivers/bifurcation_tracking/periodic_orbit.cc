@@ -378,8 +378,8 @@ void ABCProblem<ELEMENT,TIMESTEPPER>::solve()
 {
  //Assign memory for the eigenvalues and eigenvectors
  Vector<std::complex<double> > eigenvalues;
- Vector< DoubleVector > eigenvector_real;
- Vector< DoubleVector > eigenvector_imag;
+ Vector<DoubleVector> eigenvector_real;
+ Vector<DoubleVector> eigenvector_imag;
 
  Desired_newton_iterations_ds = 2;
  Desired_proportion_of_arc_length = 0.5;

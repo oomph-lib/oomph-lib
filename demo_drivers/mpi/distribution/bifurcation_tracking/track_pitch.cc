@@ -410,9 +410,6 @@ RotatingProblem<ELEMENT>::RotatingProblem
  static_cast<HSL_MA42*>(linear_solver_pt())->lenbuf_factor2() = 3.0;
  static_cast<HSL_MA42*>(linear_solver_pt())->front_factor() = 3.0;*/
 
- //Specify the eigensolver shift, if required
-
-
  //Complete the build of the elements 
  finish_problem_setup();
  
