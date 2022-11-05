@@ -18,9 +18,8 @@ jobs:
       fail-fast: false
       matrix:
         # build_info: [{ mpi_status: "OFF", cmake_preset: CI-build }]
-        build_info:
-          [
-            { mpi_status: "OFF", cmake_preset: CI-build },
+        build_info: [
+            # { mpi_status: "OFF", cmake_preset: CI-build },
             { mpi_status: "ON", cmake_preset: CI-mpi-build },
           ]
 
@@ -53,7 +52,7 @@ jobs:
 
       - name: Run self-tests
         id: self_tests
-        run: ctest --preset ci --test-dir demo_drivers/build -j $(nproc)
+        run: ctest --preset ci --test-dir demo_drivers/build -j $(nproc) -R mpi.solvers
         continue-on-error: true
 
       - name: Upload validation log file

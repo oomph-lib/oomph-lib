@@ -54,9 +54,16 @@ jobs:
           # Tell the demo drivers where to find the installed oomph-lib library
           CMAKE_PREFIX_PATH: ${{ env.OOMPH_INSTALL_PATH }}
 
+      - name: Run non-MPI self-tests
+        if: matrix.build_info.mpi_status == 'OFF'
+        id: no_mpi_self_tests
+        run: ctest --preset ci --test-dir demo_drivers/build -j $(sysctl -n hw.logicalcpu) -R interaction.elastic_bretherton
+        continue-on-error: true
+
       - name: Run self-tests
-        id: self_tests
-        run: ctest --preset ci --test-dir demo_drivers/build -j $(sysctl -n hw.logicalcpu)
+        if: matrix.build_info.mpi_status == 'ON'
+        id: mpi_self_tests
+        run: ctest --preset ci --test-dir demo_drivers/build -j $(sysctl -n hw.logicalcpu) -R mpi
         continue-on-error: true
 
       - name: Upload validation log file
@@ -66,6 +73,6 @@ jobs:
           path: ./validation.log
 
       - name: Propagate CTest mpi_status
-        if: steps.self_tests.outcome == 'failure'
+        if: (matrix.build_info.mpi_status == 'OFF' && steps.no_mpi_self_tests.outcome == 'failure') || (matrix.build_info.mpi_status == 'ON' && steps.mpi_self_tests.outcome == 'failure')
         run: exit 8
 # ------------------------------------------------------------------------------
