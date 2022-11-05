@@ -109,6 +109,7 @@ set(HEADERS
     extruded_macro_element.h
     extruded_domain.h
     black_box_newton_solver.h
+    gzip_reader.h
     fpdiff.h)
 
 if(OOMPH_HAS_STACKTRACE)
@@ -199,6 +200,7 @@ set(SOURCES
     extruded_macro_element.cc
     extruded_domain.cc
     black_box_newton_solver.cc
+    gzip_reader.cc
     fpdiff.cc)
 
 if(OOMPH_HAS_MPI)

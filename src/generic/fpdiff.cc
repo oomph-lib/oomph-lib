@@ -25,6 +25,7 @@
 // LIC//====================================================================
 
 #include "fpdiff.h"
+#include "gzip_reader.h"
 #include "oomph_definitions.h"
 
 #include <cstdlib>
@@ -34,7 +35,6 @@
 #include <string>
 #include <regex>
 #include <vector>
-#include "oomph_zlib/zlib.h"
 
 #define CHUNKSIZE 8192
 
@@ -166,33 +166,7 @@ namespace oomph
                           OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
     }
-
-    // Storage for file data
-    std::vector<std::string> file_data;
-
-    // Open file
-    gzFile file = gzopen(filename.c_str(), "rb");
-    if (file == NULL)
-    {
-      throw OomphLibError("Failed to open file:\n\t" + filename,
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-    }
-
-    // Decompress data and store
-    char buffer[CHUNKSIZE];
-    while (gzgets(file, buffer, CHUNKSIZE))
-    {
-      char* end = std::find(buffer, buffer + sizeof(buffer), '\0');
-      std::string line{buffer, end};
-      if (!line.empty() && line[line.length() - 1] == '\n')
-      {
-        line.erase(line.length() - 1);
-      }
-      file_data.push_back(line);
-    }
-    gzclose(file);
-    return file_data;
+    return GZipReader(filename).read_all();
   } // End of gzip_load
 
 
