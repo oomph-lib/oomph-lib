@@ -17,7 +17,6 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # build_info: [{ mpi_status: "OFF", cmake_preset: CI-build }]
         build_info:
           [
             { mpi_status: "OFF", cmake_preset: CI-build },
@@ -57,13 +56,13 @@ jobs:
       - name: Run non-MPI self-tests
         if: matrix.build_info.mpi_status == 'OFF'
         id: no_mpi_self_tests
-        run: ctest --preset ci --test-dir demo_drivers/build -j $(sysctl -n hw.logicalcpu) -R interaction.elastic_bretherton
+        run: ctest --preset ci --test-dir demo_drivers/build -j $(sysctl -n hw.logicalcpu)
         continue-on-error: true
 
       - name: Run self-tests
         if: matrix.build_info.mpi_status == 'ON'
         id: mpi_self_tests
-        run: ctest --preset ci --test-dir demo_drivers/build -j $(sysctl -n hw.logicalcpu) -R mpi
+        run: ctest --preset ci --test-dir demo_drivers/build -j $(sysctl -n hw.logicalcpu)
         continue-on-error: true
 
       - name: Upload validation log file
