@@ -30,9 +30,21 @@
 
 ### Pure-CMake
 
+* [ ] Think about *installing* `fpdiff.py` incase the user wants to install `oomph-lib` but wipe everything but the demo drivers.
+  * *If* I decide to do this:
+    * [ ] Make a copy of `fpdiff.py` in each folder (seems reasonable as 200 x 15KB = 3MB)
+    * [ ] Need to update `OomphAddTest.cmake` CAREFULLY as we need to know where the `fpdiff.py` file will live
+      * Maybe create a variable to store the default location (e.g. `PATH_TO_FPDIFF_PY`) that either gets appended to or overwritten when the library and the `fpdiff.py` script is installed
+      * **NOTE:** If we append, we may make changes to one script and affect the demo drivers in an unclear way
+    * [ ] Update each `validate.sh` script to
+      * [ ] Remove the `OOMPH_ROOT_DIR` argument from every `validate.sh`
+      * [ ] Remove the `OOMPH_ROOT_DIR` usage from `fpdiff.py` (user can assume that it will be installed in the same folder as the `validate.sh`; i.e. outside the `Validation/` directory)
+* [ ] Add two ways to specify arguments to `validate.sh` from `oomph_add_test`
+  * One should
 * [ ] Add a `oomph_add_pure_cpp_test()` with an `ARGS` command for arguments to pass
   * Should define the executable AND the test target
   * Will allow us to create an individual test per test for finer granularity
+* [ ] Add `OOMPH_BLAS_LIB`/`OOMPH_LAPACK_LIB` variables to store the path to the chosen BLAS lib **then** tidy up the Hypre `CMakeLists.txt`
 * [ ] *Add presets:*
   * [ ] For MPI configuration
   * [ ] For Intel-based Macs (`--preset macos`) and Arm-based (`--preset macos_arm64`)
@@ -45,6 +57,8 @@
 
 ### Features to add or patch
 
+* [ ] Add Intel MKL BLAS support
+* [ ] Replace current BLAS/LAPACK with OpenBLAS
 * [ ] Add control for setting number of procs to use in `mpiexec` command
 * [ ] Add `self_test/` directory to CMake build
   * [ ] Run tests with C++ fpdiff (requires C++17 support)
@@ -108,6 +122,7 @@
 
 Include tasks here that likely need some collaboration with Matthias
 
+* [ ] Talk to MH about updating to C++17
 * [ ] Properly review to-do list and see if there's anything missing!
 * [ ] Talk to MH about latest MUMPS
   * [ ] Do we need Scotch/METIS?
