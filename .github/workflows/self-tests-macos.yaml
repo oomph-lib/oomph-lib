@@ -54,14 +54,16 @@ jobs:
       - name: Run non-MPI self-tests
         if: matrix.build_info.mpi_status == 'OFF'
         id: no_mpi_self_tests
-        run: ctest --preset ci --test-dir demo_drivers/build -j $(sysctl -n hw.logicalcpu) -R interaction.elastic_bretherton -VV
+        run: |
+          ninja -v elastic_bretherton
+          ctest --preset ci --test-dir demo_drivers/build -j $(sysctl -n hw.logicalcpu) -R interaction.elastic_bretherton -VV
         continue-on-error: true
 
-      - name: Run self-tests
-        if: matrix.build_info.mpi_status == 'ON'
-        id: mpi_self_tests
-        run: ctest --preset ci --test-dir demo_drivers/build -j $(sysctl -n hw.logicalcpu) -R mpi -VV
-        continue-on-error: true
+      # - name: Run self-tests
+      #   if: matrix.build_info.mpi_status == 'ON'
+      #   id: mpi_self_tests
+      #   run: ctest --preset ci --test-dir demo_drivers/build -j $(sysctl -n hw.logicalcpu) -R mpi -VV
+      #   continue-on-error: true
 
       - name: Upload validation log file
         uses: actions/upload-artifact@v3
