@@ -40,7 +40,7 @@ jobs:
 
       - name: Run self-tests
         id: self_tests
-        run: ctest --preset ci --test-dir demo_drivers/build -j $(nproc) -R interaction.elastic_bretherton -VV
+        run: cd build && ctest -R interaction.elastic_bretherton
         continue-on-error: true
 
       - name: Upload validation log file

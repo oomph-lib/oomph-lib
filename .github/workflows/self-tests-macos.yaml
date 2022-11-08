@@ -9,6 +9,8 @@ on: push
 env:
   CTEST_OUTPUT_ON_FAILURE: 1
   OOMPH_INSTALL_PATH: "${{ github.workspace }}/.local"
+  CC: clang
+  CXX: clang++
 
 # ------------------------------------------------------------------------------
 
@@ -44,8 +46,14 @@ jobs:
 
       - name: Run self-tests
         id: self_tests
-        run: ctest --preset ci --test-dir demo_drivers/build -j $(nproc) -R interaction.elastic_bretherton -VV
+        run: cd build && ctest -R interaction.elastic_bretherton
         continue-on-error: true
+
+      - name: Print output
+        run: |
+          cd build/demo_drivers/interaction/elastic_bretherton/Validation
+          ls -l
+          cat OUTPUT
 
       - name: Upload validation log file
         uses: actions/upload-artifact@v3
@@ -54,6 +62,6 @@ jobs:
           path: ./validation.log
 
       - name: Propagate CTest mpi_status
-        if: matrix.self_tests.outcome == 'failure'
+        if: steps.self_tests.outcome == 'failure'
         run: exit 8
 # ------------------------------------------------------------------------------
