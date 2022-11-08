@@ -1221,25 +1221,39 @@ public:
 
  /// Destructor, clean up all allocated memory
  ~AirwayReopeningProblem()
-  {
+ {
+   OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("destructor!");
    //Delete objects created in constructor in reverse order
    delete Constraint_mesh_pt;
+   OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("destructor!");
    delete Bulk_mesh_pt;
+   OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("destructor!");
    //Delete objects associated with lower wall mesh
    delete Global_Physical_Variables::Lower_wall_pt;
+   OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("destructor!");
    delete Lower_wall_mesh_pt;
+   OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("destructor!");
    delete Undeformed_lower_wall_geom_pt;
+   OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("destructor!");
    //Delete objects associated with upper wall mesh
    delete Global_Physical_Variables::Upper_wall_pt;
+   OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("destructor!");
    delete Upper_wall_mesh_pt;
+   OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("destructor!");
    delete Undeformed_upper_wall_geom_pt;
-   
+   OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("destructor!");
+
    //Delete global data
    delete Mesh_fraction_at_transition_pt;
+   OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("destructor!");
    delete Bubble_pressure_data_pt;
-  //Delete the linear solver, if allocated
-   if(Frontal_solver) {delete linear_solver_pt();}
-  }
+   OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("destructor!");
+   // Delete the linear solver, if allocated
+   if(Frontal_solver) {
+    delete linear_solver_pt();
+     OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("destructor!");
+   }
+ }
 
  /// Overload the continuation actions because we're 
  /// continuing in Ca which does not affect the mesh
