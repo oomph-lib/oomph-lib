@@ -33,25 +33,14 @@ jobs:
         run: sudo apt-get install openmpi-bin libopenmpi-dev
 
       - name: Configure
-        run: cmake --preset ${{ matrix.build_info.cmake_preset }} --install-prefix ${{ env.OOMPH_INSTALL_PATH }} -B build
+        run: cmake -DOOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY=ON --preset ${{ matrix.build_info.cmake_preset }} --install-prefix ${{ env.OOMPH_INSTALL_PATH }} -B build
 
       - name: Build
-        run: cmake --build build
-
-      - name: Install
-        run: cmake --install build
-
-      - name: Configure demo drivers
-        run: cmake -S demo_drivers -B demo_drivers/build
-        env:
-          # Tell the demo drivers where to find the installed oomph-lib library
-          CMAKE_PREFIX_PATH: ${{ env.OOMPH_INSTALL_PATH }}
+        run: cd build && ninja -v elastic_bretherton
 
       - name: Run self-tests
         id: self_tests
-        run: |
-          ninja -v elastic_bretherton
-          ctest --preset ci --test-dir demo_drivers/build -j $(nproc) -R interaction.elastic_bretherton -VV
+        run: ctest --preset ci --test-dir demo_drivers/build -j $(nproc) -R interaction.elastic_bretherton -VV
         continue-on-error: true
 
       - name: Upload validation log file
