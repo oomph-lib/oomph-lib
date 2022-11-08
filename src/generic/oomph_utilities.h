@@ -113,9 +113,21 @@ namespace oomph
     /// file name and line number. The make_new_line flag indicates
     /// whether the string starts on a new line or not
     extern std::string debug_string(const std::string& filename,
-                                    const int& line,
-                                    const bool& make_new_line = false);
+                                    const int& line_number,
+                                    const std::string& message,
+                                    const bool& shorten = false,
+                                    const bool& start_on_new_line = true);
   } // namespace DebugHelpers
+
+#define OOMPH_PRINT_DEBUG_STRING() \
+  printf( \
+    "%s\n", \
+    DebugHelpers::debug_string(__FILE__, __LINE__, "", false, true).c_str())
+
+#define OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE(msg) \
+  printf( \
+    "%s\n", \
+    DebugHelpers::debug_string(__FILE__, __LINE__, msg, false, true).c_str())
 
   // Forward declaration needed for second invariant helper
   template<class TYPE>

@@ -90,12 +90,11 @@ namespace oomph
     /// file name and line number. The make_new_line flag indicates
     /// whether the string starts with a "\n", i.e. a new line
     std::string debug_string(const std::string& filename,
-                             const int& line,
-                             const bool& make_new_line)
+                             const int& line_number,
+                             const std::string& message,
+                             const bool& shorten,
+                             const bool& start_on_new_line)
     {
-      // Make a string
-      std::string debug_string;
-
       // Temporary storage for the filename which can be edited
       std::string file = filename;
 
@@ -118,37 +117,46 @@ namespace oomph
         file = file.substr(pos + delimiter.length());
       }
 
-      // While we can find delimeters
-      while ((pos = file.find(delimiter)) != std::string::npos)
+      // Make a string
+      std::string prefix{};
+
+      if (shorten)
       {
-        // Get the string before the delimiter
-        token = file.substr(0, pos);
+        // While we can find delimeters
+        while ((pos = file.find(delimiter)) != std::string::npos)
+        {
+          // Get the string before the delimiter
+          token = file.substr(0, pos);
+
+          // Output the string
+          prefix += toupper(token.at(0));
+
+          // Erase the delimeter
+          file = file.substr(pos + delimiter.length());
+        }
 
         // Output the string
-        debug_string += toupper(token.at(0));
-
-        // Erase the delimeter
-        file = file.substr(pos + delimiter.length());
+        prefix += toupper(file.at(0));
       }
-
-      // Output the string
-      debug_string += toupper(file.at(0));
-
-      // String stream
-      std::ostringstream debug_stream;
-
-      // If they want a new line
-      if (make_new_line)
+      else
       {
-        // Add a newline string
-        debug_stream << "\n";
+        // Output the string
+        prefix += file;
       }
 
-      // Create debug string
-      debug_stream << "\033[1;31m" << debug_string << line << ":\033[0m ";
-
-      // Return the string
-      return debug_stream.str();
+      // Construct the full message and make the prefix bold red
+      std::string debug_string{};
+      if (start_on_new_line)
+      {
+        debug_string = "\n";
+      }
+      debug_string += "\033[1;31m";
+      debug_string += prefix;
+      debug_string += ":";
+      debug_string += std::to_string(line_number);
+      debug_string += ":\033[0m ";
+      debug_string += message;
+      return debug_string;
     } // End of create_debug_string
   } // namespace DebugHelpers
 
