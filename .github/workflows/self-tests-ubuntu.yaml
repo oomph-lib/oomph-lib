@@ -40,7 +40,14 @@ jobs:
 
       - name: Run self-tests
         id: self_tests
-        run: cd build && ctest -R interaction.elastic_bretherton
+        run: |
+          OOMPH_MAIN_DIR=$(pwd)
+          cd build
+          ctest -R interaction.elastic_bretherton
+          cd demo_drivers/interaction/elastic_bretherton/
+          for i in $(seq 1 10); do
+            ./validate.sh "${OOMPH_MAIN_DIR}";
+          done
         continue-on-error: true
 
       - name: Upload validation log file

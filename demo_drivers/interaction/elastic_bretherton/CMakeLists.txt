@@ -15,6 +15,15 @@ oomph_add_executable(
   LIBRARIES oomph::beam oomph::navier_stokes oomph::fluid_interface
   CXX_STANDARD 14)
 
+# Add a sanitiser string(SHA1 PATH_HASH "${CMAKE_CURRENT_LIST_DIR}") # Create
+# hash string(SUBSTRING ${PATH_HASH} 0 7 PATH_HASH) # Shorten to 7 characters
+# set(HASHED_TARGET_NAME elastic_bretherton_${PATH_HASH}) # Append hash
+# target_compile_options(${HASHED_TARGET_NAME} PRIVATE -fsanitize=address -g)
+# target_link_options(${HASHED_TARGET_NAME} PRIVATE -fsanitize=address -g)
+# if(NOT APPLE) target_compile_options(${HASHED_TARGET_NAME} PRIVATE
+# -fsanitize=leak) target_link_options(${HASHED_TARGET_NAME} PRIVATE
+# -fsanitize=leak) endif()
+
 # ---------------------------------- TESTING ----------------------------------
 
 oomph_add_test(

@@ -20,7 +20,6 @@ echo "Running elastic Bretherton problem validation "
 mkdir RESLT
 echo "Running elastic Bretherton problem validation PRE-RUN"
 ../elastic_bretherton lalala #>OUTPUT
-../elastic_bretherton lalala >OUTPUT
 echo "done"
 echo " " >>validation.log
 echo "Elastic Bretherton validation" >>validation.log

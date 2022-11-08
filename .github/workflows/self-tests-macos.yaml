@@ -9,8 +9,6 @@ on: push
 env:
   CTEST_OUTPUT_ON_FAILURE: 1
   OOMPH_INSTALL_PATH: "${{ github.workspace }}/.local"
-  CC: clang
-  CXX: clang++
 
 # ------------------------------------------------------------------------------
 
@@ -51,16 +49,10 @@ jobs:
           cd build
           ctest -R interaction.elastic_bretherton
           cd demo_drivers/interaction/elastic_bretherton/
-          for i in $(seq 1 50); do
+          for i in $(seq 1 10); do
             ./validate.sh "${OOMPH_MAIN_DIR}";
           done
         continue-on-error: true
-
-      - name: Print output
-        run: |
-          cd build/demo_drivers/interaction/elastic_bretherton/Validation
-          ls -l
-          cat OUTPUT
 
       - name: Upload validation log file
         uses: actions/upload-artifact@v3
