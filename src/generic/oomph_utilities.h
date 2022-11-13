@@ -126,7 +126,7 @@ namespace oomph
 
 #define OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE(msg) \
   printf( \
-    "%s\n", \
+    "%s", \
     DebugHelpers::debug_string(__FILE__, __LINE__, msg, false, true).c_str())
 
   // Forward declaration needed for second invariant helper
