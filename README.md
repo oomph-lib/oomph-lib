@@ -77,7 +77,6 @@
 - [Table of contents](#table-of-contents)
 - [Description](#description)
 - [Compatibility](#compatibility)
-- [Documentation to-do list](#documentation-to-do-list)
 - [Prerequisites](#prerequisites)
   - [CMake](#cmake)
 - [Recommended](#recommended)
@@ -122,16 +121,6 @@ Operating system | Support provided?
 Ubuntu           | Yes
 macOS            | Yes
 Windows          | No
-
-## Documentation to-do list
-
-Finish documenting the following:
-
-- [x] Basic build instructions.
-- [x] How to build with Ninja.
-- [ ] Adding a new library.
-- [ ] Adding a new demo-driver.
-- [ ] Packaging with CPack.
 
 ## Prerequisites
 
@@ -208,8 +197,10 @@ By default, `oomph-lib` will be installed to `/usr/local/` on Unix systems. To s
 >>> cmake --build build
 >>> cmake --install build
 
-# Building, e.g., the demo drivers
-cd demo_drivers/
+# Jump to demo_driver directory
+>>> cd demo_drivers/
+
+# Build the demo drivers
 
 # Option 1: Specify the installation location
 >>> cmake -G Ninja -B build -DCMAKE_PREFIX_PATH=~/oomph_install
