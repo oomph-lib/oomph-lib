@@ -32,10 +32,10 @@ endif()
 # The project directory; passed to consumers of the exported library incase they
 # need to use anything from there, e.g. the demo_drivers nearly all need the
 # fpdiff.py script from the scripts/ subdirectory.
+# FIXME: Change this as we will be installing the fpdiff.py file...
 set(OOMPH_ROOT_DIR "${PROJECT_SOURCE_DIR}")
 
-# FIXME: CONFIG_DIR is confusing. Maybe call it build dir or just remove it...
-# Define the export information
+# Define the key files we need to install
 set(OOMPH_EXPORTS_TARGET_NAME "${PROJECT_NAME}Exports")
 set(OOMPH_BUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}")
 set(OOMPH_CMAKE_CONFIG_FILE_TEMPLATE "${CMAKE_CURRENT_LIST_DIR}/${PROJECT_NAME}Config.cmake.in")
