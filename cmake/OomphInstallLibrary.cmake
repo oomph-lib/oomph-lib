@@ -56,28 +56,38 @@ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.pc"
 
 # ------------------------------------------------------------------------------
 
-# Install anything that needs to be generated using configure_file(...), i.e.
-# any .cmake.in files
+# Install anything else that needs to be generated using configure_file(...),
+# i.e. any .cmake.in files
 
 # Install config files
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/oomphlibUninstall.cmake"
-        DESTINATION ${OOMPH_INSTALL_CONFIG_DIR})
+        DESTINATION "${OOMPH_INSTALL_CONFIG_DIR}")
 
-# Handle everything else that should be exported, e.g. useful CMake modules:
+# ------------------------------------------------------------------------------
 
-# The list of modules to export
-set(CMAKE_MODULES_TO_INSTALL OomphAddExecutable.cmake OomphAddTest.cmake
-    OomphEnableCodeCoverage.cmake)
+# Handle all useful CMake modules that should be exported
 
-# Place each module in the same build/install directory that we place the
-# oomphlibConfig.cmake file
-foreach(MODULE IN LISTS CMAKE_MODULES_TO_INSTALL)
-  file(COPY "${CMAKE_CURRENT_LIST_DIR}/${MODULE}"
-       DESTINATION ${OOMPH_BUILD_DIR})
+# The list of modules to copy to the build directory
+set(OOMPH_FILES_TO_COPY_TO_BUILD_DIR
+    "${CMAKE_CURRENT_LIST_DIR}/OomphAddExecutable.cmake"
+    "${CMAKE_CURRENT_LIST_DIR}/OomphAddTest.cmake"
+    "${CMAKE_CURRENT_LIST_DIR}/OomphEnableCodeCoverage.cmake")
 
-  # Install it
-  install(FILES "${CMAKE_CURRENT_LIST_DIR}/${MODULE}"
-          DESTINATION ${OOMPH_INSTALL_CONFIG_DIR})
+# The list of modules to distribute with the library
+set(OOMPH_FILES_TO_INSTALL_TO_CMAKE_DIR
+    "${CMAKE_CURRENT_LIST_DIR}/OomphAddExecutable.cmake"
+    "${CMAKE_CURRENT_LIST_DIR}/OomphAddTest.cmake"
+    "${CMAKE_CURRENT_LIST_DIR}/OomphEnableCodeCoverage.cmake"
+    "${OOMPH_ROOT_DIR}/scripts/fpdiff.py")
+
+# Copy files to the build directory at configure-time
+foreach(MODULE IN LISTS OOMPH_FILES_TO_COPY_TO_BUILD_DIR)
+  file(COPY "${MODULE}" DESTINATION "${OOMPH_BUILD_DIR}")
+endforeach()
+
+# Copy files to the install directory at install-time
+foreach(MODULE IN LISTS OOMPH_FILES_TO_INSTALL_TO_CMAKE_DIR)
+  install(FILES "${MODULE}" DESTINATION "${OOMPH_INSTALL_CONFIG_DIR}")
 endforeach()
 
 # ------------------------------------------------------------------------------
