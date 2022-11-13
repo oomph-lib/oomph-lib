@@ -30,15 +30,17 @@
 
 ### Pure-CMake
 
-* [ ] Think about *installing* `fpdiff.py` incase the user wants to install `oomph-lib` but wipe everything but the demo drivers.
+* [ ] Update build system to make sure building a demo driver target without `ctest` also runs the `check_...` target to build the target and copy files over
+* [ ] Think about *installing* `fpdiff.py` AND `validate_ok_count` incase the user wants to install `oomph-lib` but wipe everything but the demo drivers.
   * *If* I decide to do this:
-    * [ ] Make a copy of `fpdiff.py` in each folder (seems reasonable as 200 x 15KB = 3MB)
-    * [ ] Need to update `OomphAddTest.cmake` CAREFULLY as we need to know where the `fpdiff.py` file will live
+    * [ ] Make a copy of these files in each folder (seems reasonable as 200 x 15KB = 3MB for `fpdiff.py`)
+    * [ ] Need to update `OomphAddTest.cmake` CAREFULLY as we need to know where these files will live
       * Maybe create a variable to store the default location (e.g. `PATH_TO_FPDIFF_PY`) that either gets appended to or overwritten when the library and the `fpdiff.py` script is installed
       * **NOTE:** If we append, we may make changes to one script and affect the demo drivers in an unclear way
     * [ ] Update each `validate.sh` script to
       * [ ] Remove the `OOMPH_ROOT_DIR` argument from every `validate.sh`
-      * [ ] Remove the `OOMPH_ROOT_DIR` usage from `fpdiff.py` (user can assume that it will be installed in the same folder as the `validate.sh`; i.e. outside the `Validation/` directory)
+      * [ ] Remove the `OOMPH_ROOT_DIR` usage from `fpdiff.py` (user can assume that it will be installed in the same folder as the `validate.sh`; i.e. outside the `Validation/` directory) and `validate_ok_count`
+  * [ ] We should be able to create a global `validation.log` using `ctest --output-log`!
 * [ ] Add two ways to specify arguments to `validate.sh` from `oomph_add_test`
   * One should
 * [ ] Add a `oomph_add_pure_cpp_test()` with an `ARGS` command for arguments to pass
@@ -133,6 +135,9 @@ Include tasks here that likely need some collaboration with Matthias
   * Useful for quick debugging of build with demo drivers
   * ~~E.g. if demo drivers are built with the library, do not define the `install()` functions; force the user to work in the build directory!~~
 * [ ] Discuss required base presets in `CMakePresets.json`
+* [ ] Add option to build with `ccache` support
+* [ ] Add `google_test` support (ctest can discover gtest tests)
+* [ ] Talk to MH about distributing with `nlohmann/json`
 
 ### Less urgent
 
