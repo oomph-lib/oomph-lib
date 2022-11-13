@@ -33,12 +33,12 @@ add_subdirectory(oomph_crbond_bessel)
 add_subdirectory(oomph_arpack)
 
 # Add Triangle
-if(NOT SUPPRESS_TRIANGLE_LIB)
+if(NOT OOMPH_SUPPRESS_TRIANGLE_LIB)
   add_subdirectory(oomph_triangle)
 endif()
 
 # Add Tetgen
-if(NOT SUPPRESS_TETGEN_LIB)
+if(NOT OOMPH_SUPPRESS_TETGEN_LIB)
   add_subdirectory(oomph_tetgen)
 endif()
 
@@ -59,7 +59,6 @@ else()
   # USE: 'brew install openblas' & 'sudo apt-get install libopenblas-dev'
   #
   # add_subdirectory(oomph_openblas_0.3.17)
-
 endif()
 
 # Add SuperLU
@@ -114,6 +113,16 @@ endif()
 # Make the compiler flags and external libraries visible in the parent scope
 set(EXTERNAL_SRC_CXX_DEFINITIONS ${EXTERNAL_SRC_CXX_DEFINITIONS} PARENT_SCOPE)
 set(EXTERNAL_SRC_LIBS ${EXTERNAL_SRC_LIBS} PARENT_SCOPE)
+
+# Add suppressed Triangle C++ definition
+if(NOT OOMPH_SUPPRESS_TRIANGLE_LIB)
+  list(APPEND EXTERNAL_SRC_CXX_DEFINITIONS SUPPRESS_TRIANGLE_LIB)
+endif()
+
+# Add suppressed Tetgen C++ definition
+if(NOT OOMPH_SUPPRESS_TETGEN_LIB)
+  list(APPEND EXTERNAL_SRC_CXX_DEFINITIONS SUPPRESS_TETGEN_LIB)
+endif()
 
 message(VERBOSE "Leaving external_src subdirectory")
 # ------------------------------------------------------------------------------

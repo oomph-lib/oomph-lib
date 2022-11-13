@@ -89,8 +89,8 @@ option(OOMPH_USE_DEPRECATED_SUPERLU "Use oomph-lib's deprecated version of Super
 # Fine-grained control of build of external_srcs.
 # FIXME: Make sure the SUPPRESS variables below actually work
 # TODO: These should be set on the fly after checking whether the appropriate variable WITH_* has been set!
-option(SUPPRESS_TRIANGLE_LIB "Suppress build of oomph-lib's copy of the triangle library" OFF)
-option(SUPPRESS_TETGEN_LIB "Suppress build of oomph-lib's copy of the tetgen library" OFF)
+option(OOMPH_SUPPRESS_TRIANGLE_LIB "Suppress build of oomph-lib's copy of the triangle library" OFF)
+option(OOMPH_SUPPRESS_TETGEN_LIB "Suppress build of oomph-lib's copy of the tetgen library" OFF)
 
 # Third-party libraries. [WORK IN PROGRESS.]
 option(OOMPH_WANT_NLOHMANN_JSON "Use the nlohmann JSON library" OFF)
@@ -169,7 +169,7 @@ endif()
 # If we want to use up-to-date OpenBLAS/LAPACK libraries
 #
 # FIXME: We should try to find BLAS/LAPACK by find_package(), and if we can't,
-# build it from source (with an appropriate message)
+# build OpenBLAS from source (with an appropriate message)
 if(OOMPH_ENABLE_USE_OPENBLAS)
   # Ideally, the user will install OpenBLAS via 'sudo apt-get' or 'brew install'
   # and they will simply set 'CMAKE_PREFIX_PATH' in their CMakeUserPresets.json
@@ -259,10 +259,6 @@ if(OOMPH_IS_MAIN_PROJECT AND OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
   include(OomphAddTest)
   include(OomphAddExecutable)
   add_subdirectory(demo_drivers)
-
-  #
-  # add_subdirectory(tests)
-
   # FIXME: Need to integrate self_test files into the self-test framework
   # add_subdirectory(self_test)
 endif()
@@ -279,12 +275,15 @@ if(OOMPH_ADD_CONFIG_H)
           DESTINATION "${OOMPH_INSTALL_INCLUDE_DIR}")
 endif()
 
-# Define the 'uninstall' command to handle uninstalling the installed targets,
-# to be used, e.g. with the commands 'make uninstall' or 'ninja install'
-# (depending on the user-selected generator)
+# Configure the oomphlibUninstall.cmake file to populate the file with the list
+# of auto-generated combined headers
 configure_file(
   "${CMAKE_SOURCE_DIR}/cmake/${PROJECT_NAME}Uninstall.cmake.in"
   "${CMAKE_BINARY_DIR}/${PROJECT_NAME}Uninstall.cmake" IMMEDIATE @ONLY)
+
+# Define the 'uninstall' command to handle uninstalling the installed targets,
+# to be used, e.g. with the commands 'make uninstall' or 'ninja install'
+# (depending on the user-selected generator)
 add_custom_target(
   uninstall COMMAND ${CMAKE_COMMAND} -P
                     ${CMAKE_BINARY_DIR}/${PROJECT_NAME}Uninstall.cmake)
@@ -292,9 +291,5 @@ add_custom_target(
 # -------------------[ DEBUG SHIT: DELETE AFTER OVERHAUL ]----------------------
 
 include(OomphPrintCompilerDefinitions)
-
-# --------------------------------[ PACKAGING ]---------------------------------
-
-# Work in progress...
 
 # ------------------------------------------------------------------------------
