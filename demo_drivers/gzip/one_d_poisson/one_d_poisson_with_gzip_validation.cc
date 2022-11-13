@@ -32,15 +32,15 @@
 // Include Poisson elements/equations
 #include "poisson.h"
 
-// Include the mesh
+// The mesh
 #include "meshes/one_d_mesh.h"
 
-#include <filesystem>
+#include <experimental/filesystem>
 #include <cstdlib>
 
 using namespace std;
 using namespace oomph;
-namespace fs = std::filesystem;
+namespace fs = std::experimental::filesystem;
 
 //==start_of_namespace================================================
 /// Namespace for fish-shaped solution of 1D Poisson equation
@@ -214,7 +214,6 @@ void OneDPoissonProblem<ELEMENT>::doc_solution(const std::string& output_file)
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 
-
 //======start_of_main==================================================
 /// Driver for 1D Poisson problem
 //=====================================================================
@@ -229,10 +228,10 @@ int main()
     problem(n_element, FishSolnOneDPoisson::source_function);
 
   // Check whether the problem can be solved
-  cout << "\n\n\nProblem self-test ";
+  std::cout << "\n\n\nProblem self-test ";
   if (problem.self_test() == 0)
   {
-    cout << "passed: Problem can be solved." << std::endl;
+    std::cout << "passed: Problem can be solved." << std::endl;
   }
   else
   {
@@ -240,12 +239,11 @@ int main()
       "failed!", OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
   }
 
-  // Set output directory
+  // PM: Generalise to a "validation_pack_t"?
   const fs::path output_directory{"Validation/RESLT"};
-  const std::string log_file{"Validation/validation.log"};
-  const std::string reference_data{"validata/one_d_poisson_results.dat.gz"};
-  const std::string output_file{
-    (output_directory / "one_d_poisson_results.dat").string()};
+  const fs::path log_file{"Validation/validation.log"};
+  const fs::path reference_data{"validata/one_d_poisson_results.dat.gz"};
+  const fs::path output_file{output_directory / "one_d_poisson_results.dat"};
 
   // Wipe previously created directory
   fs::remove(log_file);
@@ -255,7 +253,7 @@ int main()
   fs::create_directories(output_directory);
 
   // Set the sign of the source function:
-  cout << "\n\n\nSolving with negative sign:\n" << std::endl;
+  std::cout << "\n\n\nSolving with negative sign:\n" << std::endl;
   FishSolnOneDPoisson::Sign = -1;
 
   // Solve the problem with this Sign
@@ -265,7 +263,7 @@ int main()
   problem.doc_solution(output_file);
 
   // Change the sign of the source function:
-  cout << "\n\n\nSolving with positive sign:\n" << std::endl;
+  std::cout << "\n\n\nSolving with positive sign:\n" << std::endl;
   FishSolnOneDPoisson::Sign = 1;
 
   // Re-solve the problem with this Sign (boundary conditions get
