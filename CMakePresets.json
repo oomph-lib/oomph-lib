@@ -34,67 +34,14 @@
       }
     },
     {
-      "name": "CI-build",
+      "name": "release",
       "inherits": "base",
-      "displayName": "Build Config for CI/CD",
+      "displayName": "Release Config",
       "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build-release",
       "cacheVariables": {
-        "OOMPH_ENABLE_USE_OPENBLAS": "ON",
-        "OOMPH_WANT_NLOHMANN_JSON": "OFF",
-        "OOMPH_WANT_SPDLOG": "OFF",
-        "OOMPH_WANT_HYPRE": "OFF",
-        "OOMPH_WANT_MUMPS": "OFF"
+        "CMAKE_BUILD_TYPE": "Release"
       }
-    },
-    {
-      "name": "CI-mpi-build",
-      "inherits": "base",
-      "displayName": "MPI Build Config for CI/CD",
-      "generator": "Ninja",
-      "cacheVariables": {
-        "OOMPH_ENABLE_USE_OPENBLAS": "ON",
-        "OOMPH_ENABLE_MPI": "ON",
-        "OOMPH_WANT_NLOHMANN_JSON": "ON",
-        "OOMPH_WANT_SPDLOG": "ON",
-        "OOMPH_WANT_HYPRE": "ON",
-        "OOMPH_WANT_MUMPS": "ON"
-      }
-    },
-    {
-      "name": "CI-demo-drivers",
-      "displayName": "Demo Drivers Build Config for CI/CD",
-      "generator": "Ninja"
-    },
-    {
-      "name": "CI-build-with-coverage",
-      "inherits": "CI-build",
-      "displayName": "Build Config for CI/CD code coverage",
-      "cacheVariables": {
-        "OOMPH_ENABLE_CODE_COVERAGE": "ON"
-      }
-    },
-    {
-      "name": "CI-mpi-build-with-coverage",
-      "inherits": "CI-mpi-build",
-      "displayName": "MPI Build Config for CI/CD code coverage",
-      "cacheVariables": {
-        "OOMPH_ENABLE_CODE_COVERAGE": "ON"
-      }
-    },
-    {
-      "name": "CI-demo-drivers-with-coverage",
-      "inherits": "CI-demo-drivers",
-      "displayName": "Demo Drivers Build Config for CI/CD code coverage",
-      "cacheVariables": {
-        "OOMPH_ENABLE_CODE_COVERAGE": "ON"
-      }
-    },
-    {
-      "name": "optimised",
-      "inherits": "base",
-      "displayName": "Optimised Config",
-      "generator": "Ninja",
-      "binaryDir": "${sourceDir}/build"
     },
     {
       "name": "debug",
@@ -116,10 +63,46 @@
       "binaryDir": "${sourceDir}/build-mpi"
     },
     {
-      "name": "ninja-multi",
+      "name": "ci",
       "inherits": "base",
-      "displayName": "Ninja Multi-Config",
-      "generator": "Ninja Multi-Config"
+      "displayName": "Build Config for CI/CD",
+      "generator": "Ninja",
+      "cacheVariables": {
+        "OOMPH_ENABLE_USE_OPENBLAS": "ON",
+        "OOMPH_WANT_NLOHMANN_JSON": "ON",
+        "OOMPH_WANT_SPDLOG": "ON",
+        "OOMPH_WANT_HYPRE": "ON"
+      }
+    },
+    {
+      "name": "ci-mpi",
+      "inherits": "base",
+      "displayName": "MPI Build Config for CI/CD",
+      "generator": "Ninja",
+      "cacheVariables": {
+        "OOMPH_ENABLE_USE_OPENBLAS": "ON",
+        "OOMPH_ENABLE_MPI": "ON",
+        "OOMPH_WANT_NLOHMANN_JSON": "ON",
+        "OOMPH_WANT_SPDLOG": "ON",
+        "OOMPH_WANT_HYPRE": "ON",
+        "OOMPH_WANT_MUMPS": "ON"
+      }
+    },
+    {
+      "name": "ci-coverage",
+      "inherits": "ci",
+      "displayName": "Build Config for CI/CD code coverage",
+      "cacheVariables": {
+        "OOMPH_ENABLE_CODE_COVERAGE": "ON"
+      }
+    },
+    {
+      "name": "ci-mpi-coverage",
+      "inherits": "ci-mpi",
+      "displayName": "MPI Build Config for CI/CD code coverage",
+      "cacheVariables": {
+        "OOMPH_ENABLE_CODE_COVERAGE": "ON"
+      }
     },
     {
       "name": "dummy"
@@ -127,24 +110,8 @@
   ],
   "buildPresets": [
     {
-      "name": "CI-build",
-      "configurePreset": "CI-build"
-    },
-    {
-      "name": "CI-demo-drivers",
-      "configurePreset": "CI-demo-drivers"
-    },
-    {
-      "name": "CI-build-with-coverage",
-      "configurePreset": "CI-build-with-coverage"
-    },
-    {
-      "name": "CI-demo-drivers-with-coverage",
-      "configurePreset": "CI-demo-drivers-with-coverage"
-    },
-    {
-      "name": "optimised",
-      "configurePreset": "optimised"
+      "name": "release",
+      "configurePreset": "release"
     },
     {
       "name": "debug",
@@ -155,8 +122,12 @@
       "configurePreset": "mpi"
     },
     {
-      "name": "ninja-multi",
-      "configurePreset": "ninja-multi"
+      "name": "ci",
+      "configurePreset": "ci"
+    },
+    {
+      "name": "ci-coverage",
+      "configurePreset": "ci-coverage"
     }
   ],
   "testPresets": [
@@ -178,8 +149,8 @@
       "inherits": "test-base"
     },
     {
-      "name": "optimised",
-      "configurePreset": "optimised",
+      "name": "release",
+      "configurePreset": "release",
       "inherits": "test-base"
     },
     {

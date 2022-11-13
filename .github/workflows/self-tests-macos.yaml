@@ -18,10 +18,12 @@ jobs:
       fail-fast: false
       matrix:
         build_info:
-          [{ mpi_status: "OFF", cmake_preset: CI-build }]
-          # { mpi_status: "ON", cmake_preset: CI-mpi-build },
+          [
+            { mpi: "OFF", cmake_preset: ci },
+            { mpi: "ON", cmake_preset: ci-mpi },
+          ]
 
-    runs-on: macos-12
+    runs-on: macos-latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v3
@@ -30,37 +32,40 @@ jobs:
         run: brew install cmake ninja openblas fd && brew reinstall gcc
 
       - name: Install MPI dependencies (if required)
-        if: matrix.build_info.mpi_status == 'ON'
+        if: matrix.build_info.mpi == 'ON'
         run: brew install open-mpi
 
       - name: Configure
-        run: cmake -DOOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY=ON --preset ${{ matrix.build_info.cmake_preset }} --install-prefix ${{ env.OOMPH_INSTALL_PATH }} -B build
+        run: cmake --preset ${{ matrix.build_info.cmake_preset }} --install-prefix ${{ env.OOMPH_INSTALL_PATH }} -B build
         env:
           # Where to look to find the Homebrew-installed OpenBLAS libraries
+          # FIXME: Decide how to specify the OpenBLAS version or replace the oomph BLAS/LAPACK libraries
           CMAKE_PREFIX_PATH: "/usr/local/Cellar/openblas/0.3.21"
 
       - name: Build
-        run: cd build && ninja -v elastic_bretherton
+        run: cmake --build build
+
+      - name: Install
+        run: cmake --install build
+
+      - name: Configure demo drivers
+        run: cmake -G Ninja -S demo_drivers -B demo_drivers/build
+        env:
+          # Tell the demo drivers where to find the installed oomph-lib library
+          CMAKE_PREFIX_PATH: ${{ env.OOMPH_INSTALL_PATH }}
 
       - name: Run self-tests
         id: self_tests
-        run: |
-          OOMPH_MAIN_DIR=$(pwd)
-          cd build
-          ctest -R interaction.elastic_bretherton
-          cd demo_drivers/interaction/elastic_bretherton/
-          for i in $(seq 1 10); do
-            ./validate.sh "${OOMPH_MAIN_DIR}";
-          done
+        run: ctest --preset ci --test-dir demo_drivers/build -j $(sysctl -n hw.logicalcpu)
         continue-on-error: true
 
       - name: Upload validation log file
         uses: actions/upload-artifact@v3
         with:
-          name: validation-${{ runner.os }}-MPI_${{ matrix.build_info.mpi_status }}.log
+          name: validation-${{ runner.os }}-MPI_${{ matrix.build_info.mpi }}.log
           path: ./validation.log
 
-      - name: Propagate CTest mpi_status
+      - name: Propagate CTest test status
         if: steps.self_tests.outcome == 'failure'
         run: exit 8
 # ------------------------------------------------------------------------------

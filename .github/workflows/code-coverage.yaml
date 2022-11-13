@@ -1,4 +1,4 @@
-# ------------------------------------------------------------------------------
+--- # ------------------------------------------------------------------------------
 name: Code coverage
 
 on:
@@ -9,8 +9,9 @@ on:
 
 # Environment variable(s) that can be read during jobs
 env:
+  CTEST_OUTPUT_ON_FAILURE: 1
   # The installation location for third-party libraries
-  OOMPH_INSTALL_PATH: '${{ github.workspace }}/.local'
+  OOMPH_INSTALL_PATH: "${{ github.workspace }}/.local"
 
 # ------------------------------------------------------------------------------
 
@@ -20,39 +21,41 @@ jobs:
       fail-fast: false
       matrix:
         # NOTE: The possible options are: [
-        #   {status: "OFF", preset: CI-build-with-coverage},
-        #   {status: "ON",  preset: CI-mpi-build-with-coverage}
+        #   {status: "OFF", preset: ci-coverage},
+        #   {status: "ON",  preset: ci-mpi-coverage}
         # ]
-        mpi_info: [
-          {status: "OFF", cmake_preset: CI-build-with-coverage}
-        ]
+        mpi_info: [{ status: "OFF", cmake_preset: ci-coverage }]
 
     runs-on: ubuntu-latest
     steps:
       # -----------------[[[ GENERATE CODE COVERAGE RESULTS ]]]-----------------
 
       - name: Check out repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Install dependencies
         run: |
           sudo apt-get install -y gfortran ninja-build libopenblas-dev \
           openmpi-bin libopenmpi-dev gcovr fd-find gnupg2 curl
 
-      - name: Configure & build (with coverage)
-        run: |
-          cmake --preset ${{ matrix.mpi_info.cmake_preset }} \
-          -D CMAKE_INSTALL_PREFIX='${{ env.OOMPH_INSTALL_PATH }}' \
-          -D OOMPH_USE_OPENBLAS=ON \
-          -B build && cd build && ninja && ninja install
+      - name: Configure
+        run: cmake --preset ${{ matrix.build_info.cmake_preset }} --install-prefix ${{ env.OOMPH_INSTALL_PATH }} -B build
 
-      - name: Run self-tests (with coverage)
+      - name: Build
+        run: cmake --build build
+
+      - name: Install
+        run: cmake --install build
+
+      - name: Configure demo drivers
+        run: cmake -S demo_drivers -B demo_drivers/build
+        env:
+          # Tell the demo drivers where to find the installed oomph-lib library
+          CMAKE_PREFIX_PATH: ${{ env.OOMPH_INSTALL_PATH }}
+
+      - name: Run self-tests to collect coverage stats
         id: self_tests
-        run: |
-          cd demo_drivers && cp ../CMakePresets.json ./
-          cmake --preset CI-demo-drivers-with-coverage -D CMAKE_PREFIX_PATH='${{ github.workspace }}/build;${{ env.OOMPH_INSTALL_PATH }}' -B build
-          cd build && cp ../CMakePresets.json ./
-          ctest --preset CI-demo-drivers-with-coverage -j $(nproc)
+        run: ctest --preset ci --test-dir demo_drivers/build -j $(nproc)
 
       # ----------------[[[ PROCESS AND UPLOAD CODE COVERAGE ]]]----------------
 
@@ -73,7 +76,7 @@ jobs:
         run: gcovr -r . --xml-pretty -o coverage-report.xml
 
       - name: Upload coverage report to codecov.io
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v3
         with:
           name: codecov-umbrella
           files: ./coverage-report.xml
@@ -85,6 +88,5 @@ jobs:
       - name: Upload coverage report to codacy.com
         run: bash <(curl -Ls https://coverage.codacy.com/get.sh) report -l CPP -r ./coverage-report.xml
         env:
-          CODACY_PROJECT_TOKEN: '${{ secrets.CODACY_PROJECT_TOKEN }}'
-
+          CODACY_PROJECT_TOKEN: "${{ secrets.CODACY_PROJECT_TOKEN }}"
 # ------------------------------------------------------------------------------
