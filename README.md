@@ -19,7 +19,6 @@
   </a>
 </div>
 
-
 <br>
 
 <div align="center">
@@ -75,25 +74,33 @@
 
 ## Table of contents
 
-  - [Description](#description)
-  - [Compatibility](#compatibility)
-  - [Documentation to-do list](#documentation-to-do-list)
-  - [Recommended](#recommended)
-  - [Usage](#usage)
-    - [Building and installing](#building-and-installing)
-    - [Useful CMake flags](#useful-cmake-flags)
-    - [`CMakePresets.json`/`CMakeUserPresets.json` [WIP]](#cmakepresetsjsoncmakeuserpresetsjson-wip)
-    - [Examples/testing](#examplestesting)
-    - [Uninstall](#uninstall)
-    - [Development](#development)
-  - [Packaging](#packaging)
-  - [Helpful CMake resources](#helpful-cmake-resources)
-  - [Community](#community)
+- [Table of contents](#table-of-contents)
+- [Description](#description)
+- [Compatibility](#compatibility)
+- [Documentation to-do list](#documentation-to-do-list)
+- [Prerequisites](#prerequisites)
+  - [CMake](#cmake)
+- [Recommended](#recommended)
+  - [Ninja](#ninja)
+  - [pre-commit](#pre-commit)
+- [Usage](#usage)
+  - [Building and installing](#building-and-installing)
+  - [Uninstalling](#uninstalling)
+    - [Specifying a custom installation location](#specifying-a-custom-installation-location)
+  - [Useful CMake flags](#useful-cmake-flags)
+  - [CMake Presets [WIP]](#cmake-presets-wip)
+    - [`CMakeUserPresets.json` example](#cmakeuserpresetsjson-example)
+  - [Examples/testing](#examplestesting)
+    - [Filtering by label](#filtering-by-label)
+    - [Filtering by regex](#filtering-by-regex)
+    - [Clean-up](#clean-up)
+  - [Disabling a test](#disabling-a-test)
+  - [Development](#development)
+- [The build system in detail](#the-build-system-in-detail)
+- [Helpful CMake resources](#helpful-cmake-resources)
+- [Community](#community)
 
 ## Description
-
-Please consult the file [`INSTALL.md`](INSTALL.md) in this directory for
-installation instructions.
 
 The [`oomph-lib` homepage](http://www.oomph-lib.org) provides much more detail on
 installation instructions, tutorials, and licencing information. Provided you
@@ -105,17 +112,16 @@ directory. In particular, `doc/html/index.html` is a local copy of the `oomph-li
 homepage.
 
 To learn more about contributing to `oomph-lib`, please see
-[`CONTRIBUTING.md`](CONTRIBUTING.md) which contains a detailed description of 
+[`CONTRIBUTING.md`](CONTRIBUTING.md) which contains a detailed description of
 the workflow.
 
 ## Compatibility
 
-
 Operating system | Support provided?
------------------|-----------------
-Ubuntu | Yes
-macOS | Yes
-Windows | No
+-----------------|------------------
+Ubuntu           | Yes
+macOS            | Yes
+Windows          | No
 
 ## Documentation to-do list
 
@@ -123,122 +129,266 @@ Finish documenting the following:
 
 - [x] Basic build instructions.
 - [x] How to build with Ninja.
-- [ ] Usage via FetchContent.
 - [ ] Adding a new library.
 - [ ] Adding a new demo-driver.
 - [ ] Packaging with CPack.
 
+## Prerequisites
+
+### CMake
+
+To build this project, you will need CMake 3.24+. You can install `cmake` via your native package manager, e.g. `sudo apt-get install cmake` or `brew install cmake`. If your package manager does not provide a recent enough version of `cmake`, you will need to build it from source. You can find instructions on how to do this [here](https://cmake.org/install/).
+
 ## Recommended
+
+### Ninja
 
 We strongly advocate the use of [Ninja](https://github.com/ninja-build/ninja)
 for its automatic parallelisation of the build process. Ninja creates clear,
 human-readable build files and allows for fast incremental builds.
 
-We use the ``cmake-format`` pre-commit hook to automatically format
-``CMakeLists.txt`` files. For this you will need to install ``pre-commit``
+### pre-commit
+
+We use the [`cmake-format`](https://github.com/cheshirekow/cmake_format) pre-commit hook to automatically format
+`CMakeLists.txt` files. To install the pre-commit hooks, see the [Contributing](./CONTRIBUTING.md#pre-commit-hooks-optional) guide.
+
+For this you will need to install `pre-commit`
 ([available here](https://pre-commit.com/)) using the following
+
 ```bash
->>> pip install pre-commit
+pip install pre-commit
+pre-commit install
 ```
-The ``.pre-commit-config.yaml`` will take care of the rest. Do not edit the
-``.cmake-format.py`` file.
+
+The `.pre-commit-config.yaml` will take care of the rest. Do not edit the
+`.cmake-format.py` file.
 
 ## Usage
 
+`oomph-lib` uses CMake to build and install the project.
+
 ### Building and installing
 
-To configure, build and install the project using Ninja (recommended), ``cd``
-into the root directory of the `oomph-lib` project and run the following:
+To configure, build and install the project using Ninja (recommended), `cd` into the root directory of the cloned `oomph-lib` project and run the following commands:
+
 ```bash
->>> cmake -G Ninja -B build              # Configure and generate build system
->>> cd build && ninja && ninja install   # Build and install
-```
-If you'd prefer to use Makefile Generators for your build system instead, run
-```bash
->>> cmake -B build
->>> cd build && make && make install
+>>> cmake -G Ninja -B build   # Configure and generate build system
+>>> cmake --build build       # Build
+>>> cmake --install build     # Install
 ```
 
-#### Customising the installation location
+After the configure step, a `build/` directory will appear with several files in it. During the build step, the individual libraries of `oomph-lib` will be built. Finally, the install step will cause the headers and generated library files to be installed to the user's system paths.
 
-By default, `oomph-lib` will be installed to `/usr/local/` on UNIX systems. If you want to install the library to a different location, specify the value of `CMAKE_INSTALL_PREFIX` when you run the initial `cmake` command. For example
+If you would prefer to use Makefile Generators (not recommended), repeat the above steps but omit the `-G Ninja` argument.
+
+**Tip:** If you wish to do a clean build of the library, you can either delete the `build/` directory or run the initial `cmake` command with the `--fresh` flag.
+
+**TODO:** *Put a note here on out-of-source builds*.
+
+### Uninstalling
+
+To uninstall the project, enter the `build` folder, remove the installed
+project files and delete the build folder using the following
+
 ```bash
-cmake -DCMAKE_INSTALL_PREFIX=~/oomph-lib-installation -B build
+>>> cd build
+>>> ninja uninstall   # replace ninja with make if using Autotools
+>>> cd ..
+>>> rm -rf build
 ```
 
-_**Note:** We recommend against setting a non-standard installation location. The reason for this is when you try to build any subproject that calls `find_package(oomphlib ...)`, CMake will check the default system paths for the `oomph-lib` installation. Because the library is likely to be installed to a non-standard location, it won't be able to find it. As a result, you will either need to pass the location of the installation to `cmake` using one of the following options:_
-1. _Specifying the `CMAKE_PREFIX_PATH` variable (every time you try to configure a subproject!), or_
-2. _You will need to add the location of the installation to your environment `PATH` variable:_
+#### Specifying a custom installation location
+
+By default, `oomph-lib` will be installed to `/usr/local/` on Unix systems. To specify a custom installation location, pass `--install-prefix=<install-location>` to `cmake` during the configure step. For example
+
 ```bash
+>>> cmake -G Ninja -B build --install-prefix~/oomph_install   # Configure and generate build system
+>>> cmake --build build                                       # Build
+>>> cmake --install build                                     # Install
+```
+
+**Important:** `<install-location>` must(!) be an absolute path.
+
+**Recommendation:** Do not specify a non-standard installation location if you have superuser rights on your machine. When you try to build a project that calls `find_package(oomphlib ...)` (e.g. `demo_drivers`), CMake will check the default system paths for the `oomph-lib` installation. If the library is installed to a non-standard location, CMake will not be able to find it. As a result, you will either need to pass the location of the installation to `cmake` using one of the following options:
+
+1. Specify the `CMAKE_PREFIX_PATH` variable (every time you try to configure a separate subproject!), or
+2. You will need to add the location of the installation to your environment `PATH` variable:
+
+```bash
+# Build and install the main library
+>>> cmake --install-prefix=~/oomph_install -G Ninja -B build
+>>> cmake --build build
+>>> cmake --install build
+
+# Building, e.g., the demo drivers
+cd demo_drivers/
+
 # Option 1: Specify the installation location
-cmake -G Ninja -DCMAKE_PREFIX_PATH=~/oomph-lib-installation -B build
+>>> cmake -G Ninja -B build -DCMAKE_PREFIX_PATH=~/oomph_install
 
 # Option 2: Update the PATH environment variable
-export PATH="$PATH:~/local"
+>>> export PATH="$PATH:~/oomph_install"
 ```
 
+**Remark:** When you invoke `cmake`, you can specify important variables with flags of the form `-D<variable-name>` or `-D <variable-name>`. These variables are called "cache" variables and take precedence over regular variables and can be use to enable/disable options during the project configuration.
 
 ### Useful CMake flags
 
-To customise your build, provide arguments of the form ``-D<YOUR-FLAG-HERE>``
+**FIXME:** Restructure to describe options in root `CMakeLists.txt` and how to specify from the commandline THEN refer to `CMakeUserPresets.json` approach.
+
+To customise your build, provide arguments of the form `-D<YOUR-FLAG-HERE>`
 at the CMake configuration/generation step.
 
-To specify a ``Release`` build (i.e. optimised; the default is ``Debug``) use
+To specify a `Release` build (i.e. optimised; the default is `Debug`) use
+
 ```bash
-  -DCMAKE_BUILD_TYPE=Release
+-DCMAKE_BUILD_TYPE=Release
 ```
+
 To enable the use of MPI (if available on your system) use
+
 ```bash
-  -DOOMPH_ENABLE_MPI
+-DOOMPH_ENABLE_MPI
 ```
 
+### CMake Presets [WIP]
 
-### `CMakePresets.json`/`CMakeUserPresets.json` [WIP]
+- We version control a generic `CMakePresets.json`.
+- You can write your own `CMakeUserPresets.json` file.
 
-TODO: Add notes on how to use a `CMakePresets.json` and how to write a `CMakeUserPresets.json` file.
+#### `CMakeUserPresets.json` example
+
+```json
+{
+  "version": 5,
+  "configurePresets": [
+    {
+      "name": "macos_arm64",
+      "inherits": "base",
+      "displayName": "macos_arm64",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "CMAKE_APPLE_SILICON_PROCESSOR": "arm64",
+        "CMAKE_BUILD_TYPE": "Release",
+        "OOMPH_ENABLE_USE_OPENBLAS": "ON"
+      },
+      "warnings": {
+        "unusedCli": true
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "macos_arm64",
+      "configurePreset": "macos_arm64",
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "macos_arm64",
+      "configurePreset": "macos_arm64",
+      "output": {
+        "outputOnFailure": true,
+        "labelSummary": false
+      },
+      "execution": {
+        "timeout": 10000,
+        "noTestsAction": "error",
+      }
+    }
+  ]
+}
+```
 
 ### Examples/testing
 
-``oomph-lib`` comes with an extensive list of well-documented examples situated
-in the ``demo_drivers`` directory. The driver codes in these folders are also
-used to validate the library. To run all of these tests, enter the
-``demo_drivers`` folder and run the following:
+`oomph-lib` comes with an extensive list of well-documented examples situated in the `demo_drivers/` directory. The driver codes in these folders are also used to validate the library. Before you can run these tests, you must install the `oomph-lib` library using the steps described in [Building and installing](#building-and-installing). To run all of these tests, enter the
+`demo_drivers/` folder and run the following:
+
 ```bash
 >>> cmake -G Ninja -B build   # Configure and generate build system for demo_drivers project
->>> cd build && ctest         # Enter the build folder and execute all tests
+>>> ctest -j4                 # Enter the build folder and execute all tests with 4 jobs
 ```
-If you intend to use Makefile Generators, remove "``-G Ninja``" from the first
-command. Note that unlike the lightweight unit-tests in the ``tests/`` folder,
-these "integration tests" are more intensive and take much longer to complete.
-After running all of the self-tests, you may wish to get rid of the output. To
-do so, simply delete the ``build`` folder, i.e.
+
+(The executable `ctest` is distributed with CMake -- you do not need to install it separately.)
+
+You can filter tests based on the values of `LABELS` or `TEST_NAME` in the `oomph_add_test()` test definition. To extract these values, open the `CMakeLists.txt` file in the directory of the test you wish to run. For example, in `demo_drivers/poisson/one_d_poisson/CMakeLists.txt` you will see the following:
+
+```cmake
+oomph_add_test(
+  TEST_NAME poisson.one_d_poisson
+  TARGET_DEPENDENCIES one_d_poisson
+  EXTRA_REQUIRES
+  LABELS poisson one_d_poisson)
+```
+
+#### Filtering by label
+
+To run the `poisson.one_d_poisson` test based on the `LABELS` key, you can pass the `-L`/`--label-regex` flag to `ctest`, as follows:
+
 ```bash
->>> cd ..           # Exit the build folder into the parent demo_drivers folder
+>>> ctest -L poisson -j4         # run all tests with "poisson" in their LABELS
+>>> ctest -L one_d_poisson -j4   # run all tests with "one_d_poisson" in their LABELS
+```
+
+It is important to note that both of these commands will cause all other tests with similar `LABELS` to be run. This can, however, be particularly helpful when you wish to run a group of tests, e.g. all Poisson-based tests (assuming they have `poisson` under their `LABELS`).
+
+#### Filtering by regex
+
+An alternative approach for filtering tests is to specify a regular expression to the `-R`/`--tests-regex` flag. Only tests for  which the `TEST_NAME` key matches the regular expression will be run. For example
+
+```bash
+>>> ctest -R poisson.one_d_poisson
+```
+
+will cause all tests containing `poisson.one_d_poisson` in the `TEST_NAME` to be run. To run, say, only `poisson.one_d_poisson` and `gzip.one_d_poisson`, you could use a regex recipe of the form:
+
+```bash
+ctest -R '(poisson|gzip)\.one_d_poisson$'
+```
+
+**TODO:** Patch support for `self_test`.
+
+#### Clean-up
+
+The examples in `demo_drivers/` produce a large amount of data. It is a good idea to remove this data after you run the tests to conserve disk space. To
+do so, simply delete the `demo_drivers/build/` folder, i.e.
+
+```bash
+# Run demo driver tests
+>>> cd demo_drivers/
+>>> cmake -G Ninja -B build
+>>> ctest -j4
+
+# Clean-up
+>>> cd ..           # Exit the build/ folder into the parent demo_drivers folder
 >>> rm -rf build    # Wipe the self-tests output
 ```
-The approach described above allows you to test the entire ``oomph-lib`` build,
+
+The approach described above allows you to test the entire `oomph-lib` build,
 all at once. However you may wish to test a smaller subset of these problems or
 just one. To do this, you may either:
 
-- (i) provide ``ctest`` with a filter to select the tests that you wish to run (described further below), or
+- (i) provide `ctest` with a filter to select the tests that you wish to run (described further below), or
 - (ii) enter any child project and rerun the same commands as above.
 
-Here, a child project refers to any subfolder containing a ``CMakeLists.txt``
-file that invokes the ``project(...)`` command (e.g.
-``demo_drivers/poisson/one_d_poisson``). If you opt for the latter option you
+Here, a child project refers to any subfolder containing a `CMakeLists.txt`
+file that invokes the `project(...)` command (e.g.
+`demo_drivers/poisson/one_d_poisson`). If you opt for the latter option you
 will notice that inside each child folder there is a shell script called
-``validate.sh``, inherited from the old Autotools-based build system, which runs
+`validate.sh`, inherited from the old Autotools-based build system, which runs
 the executables and compares them against the validation data in the
-``validata`` folder. **You should not edit the ``validate.sh`` scipt or the data
-in ``validata``.**
+`validata` folder. **You should not edit the `validate.sh` scipt or the data
+in `validata`.**
 
 For those of you comfortable with CMake, you may wish to control the target
-properties of executables in a ``CMakeLists.txt`` file. You may also notice that
+properties of executables in a `CMakeLists.txt` file. You may also notice that
 you are unable to apply target-based CMake commands because CMake is unable to
 recognise the name of the target you have provided. The reason for this is that
-inside ``oomph_add_executable(...)`` we create a unique target name for each
+inside `oomph_add_executable(...)` we create a unique target name for each
 executable/test by appending the SHA1 hash of the path to the target. This allows
-us to provide a unified self-test build (from the base ``demo_drivers`` folder)
+us to provide a unified self-test build (from the base `demo_drivers` folder)
 that avoid clashes between target names. We do rely on the user never creating
 two targets with the same name in the same folder but this should always be the
 case. To use target-based commands on a particular target, create a (SHA1) hash
@@ -260,67 +410,57 @@ To temporarily disable a test, you need to set the `DISABLED` property to `TRUE`
 using the argument to `TEST_NAME`:
 
 ```cmake
-# Define test
-oomph_add_test(
-  TEST_NAME interaction.fourier_decomposed_acoustic_fsi
-  ...)
+# Test definition
+oomph_add_test(TEST_NAME poisson.one_d_poisson ...)
 
-# Disable test
-set_tests_properties(interaction.fourier_decomposed_acoustic_fsi
-                     PROPERTIES DISABLED YES)
+# Disable
+set_tests_properties(poisson.one_d_poisson PROPERTIES DISABLED YES)
 ```
 
 **In progress**:
 
 - [ ] Add a "make self-test" command for the root `oomph-lib` directory which executes all of the self-tests.
 - [ ] Document CTest usages:
-   - [ ] Parallel execution; append a ``-j <N>`` flag.
-   - [ ] Test filtering:
-      - [ ] Filter by labels ``-L <label>`` or
-      - [ ] Regular expression matching; run all tests beginning with poisson: ``-R '^poisson'``
-      - [ ] Run all but ``<test-name>``: ``-E <test-name>``
-      - [ ] Run ony ``<test-1>`` and ``<test-2>``: ``-R '<test-1>|<test-2>'``
-   - [ ] Reading output of failed tests: ``cat build/Testing/Temporary/LastTest.log``
-   - [ ] List of failed tests: ``cat build/Testing/Temporary/LastTestsFailed.log``
-   - [ ] Repeating failed tests: ``--rerun-failed``
-   - [ ] Repeat failed test and log output: ``--rerun-failed --output-on-failure``
-   - [ ] Disable test: ``set_tests_properties(<test-name> PROPERTIES DISABLED YES)``
-   - [ ] Demand parallel codes to run in serial: ``set_tests_properties(FooWithBar PROPERTIES RUN_SERIAL)``;
-   - [ ] Providing a RESOURCE_LOCK for parallel codes.
-   - [ ] Note that in all cases here, if you specify the target name, you must rememeber to append the SHA1 path hash.
+  - [ ] Parallel execution; append a `-j <N>` flag.
+  - [ ] Test filtering:
+    - [ ] Filter by labels `-L <label>` or
+    - [ ] Regular expression matching; run all tests beginning with poisson: `-R '^poisson'`
+    - [ ] Run all but `<test-name>`: `-E <test-name>`
+    - [ ] Run ony `<test-1>` and `<test-2>`: `-R '<test-1>|<test-2>'`
+  - [ ] Reading output of failed tests: `cat build/Testing/Temporary/LastTest.log`
+  - [ ] List of failed tests: `cat build/Testing/Temporary/LastTestsFailed.log`
+  - [ ] Repeating failed tests: `--rerun-failed`
+  - [ ] Repeat failed test and log output: `--rerun-failed --output-on-failure`
+  - [ ] Disable test: `set_tests_properties(<test-name> PROPERTIES DISABLED YES)`
+  - [ ] Demand parallel codes to run in serial: `set_tests_properties(FooWithBar PROPERTIES RUN_SERIAL)`;
+  - [ ] Providing a RESOURCE_LOCK for parallel codes.
+  - [ ] Note that in all cases here, if you specify the target name, you must rememeber to append the SHA1 path hash.
 
-### Uninstall
-
-To uninstall the project, enter the ``build`` folder, remove the installed
-project files and delete the build folder using the following
-```bash
->>> cd build
->>> ninja uninstall   # replace ninja with make if using Autotools
->>> cd ..
->>> rm -rf build
-```
 ### Development
 
 To define your own executable that uses the `oomph-lib` library, you will first
-need to import the ``oomphlib`` package after it has been installed. Once this
+need to import the `oomphlib` package after it has been installed. Once this
 has been done, you can define your own executable using the helper function
-``oomph_add_executable(...)`` ([defined here](cmake/OomphAddExecutable.cmake>)).
-For example, to create an executable called ``one_d_poisson`` from the source
-``one_d_poisson.cc`` using the Poisson library (``oomph::poisson``), use
+`oomph_add_executable(...)` ([defined here](cmake/OomphAddExecutable.cmake>)).
+For example, to create an executable called `one_d_poisson` from the source
+`one_d_poisson.cc` using the Poisson library (`oomph::poisson`), use
+
 ```cmake
   find_package(oomphlib REQUIRED)
   oomph_add_executable(NAME one_d_poisson
                        SOURCES one_d_poisson.cc
                        LIBRARIES oomph::poisson)
 ```
+
 You may wish to provide additional information to the build of your executable.
 A few notable options provided by this function are
 
-- ``CXX_STANDARD``: The C++ standard. The only arguments we currently allow are 11, 14, or 17 (corresponding to C++11, C++14, and C++17, respectively). We currently assume C++11 for all files in the library. Specifying a more modern standard may result in unexpected consequences. Don't say we didn't warn you!
-- ``CXX_OPTIONS``: Compiler flags (e.g. ``-Wall``, ``-O3``). However, this is likely to only affect your executable and not the library. (``TODO: Find out about this!``)
-- ``CXX_DEFINITIONS``: Preprocessor definition(s). Arguments to this keyword do not require a ``-D`` prefix; CMake will automatically prepend it for you.
+- `CXX_STANDARD`: The C++ standard. The only arguments we currently allow are 11, 14, or 17 (corresponding to C++11, C++14, and C++17, respectively). We currently assume C++11 for all files in the library. Specifying a more modern standard may result in unexpected consequences. Don't say we didn't warn you!
+- `CXX_OPTIONS`: Compiler flags (e.g. `-Wall`, `-O3`). However, this is likely to only affect your executable and not the library. (`TODO: Find out about this!`)
+- `CXX_DEFINITIONS`: Preprocessor definition(s). Arguments to this keyword do not require a `-D` prefix; CMake will automatically prepend it for you.
 
 For example
+
 ```cmake
   oomph_add_executable(NAME one_d_poisson
                        SOURCES one_d_poisson.cc
@@ -329,17 +469,20 @@ For example
                        CXX_OPTIONS -Wall -Werror
                        CXX_DEFINITIONS REFINEABLE)
 ```
+
 If you are comfortable with CMake and you wish to specify your own executable
 using the standard CMake functions then make sure to add the following line
-after calling ``add_executable``
+after calling `add_executable`
+
 ```cmake
   target_compile_definitions(<your-target> ${OOMPH_COMPILE_DEFINITIONS})
 ```
-where ``<your-target>`` is the name of your executable. This imports the compile
-definitions defined by ``oomph-lib`` (during its build) that are needed to make
+
+where `<your-target>` is the name of your executable. This imports the compile
+definitions defined by `oomph-lib` (during its build) that are needed to make
 sure all of the code required is available to your executable.
 
-## Packaging
+## The build system in detail
 
 **Work in progress.**
 
@@ -347,10 +490,10 @@ sure all of the code required is available to your executable.
 
 For those of you new to CMake, you may wish to consult the following resources:
 
-* The excellently-written "Professional CMake: A Practical Guide" by Scott Craig.
-* The [Awesome CMake](https://github.com/onqtam/awesome-cmake) repository.
-* [An Introduction to Modern CMake](https://cliutils.gitlab.io/modern-cmake/).
-* ...and the list goes on (so add more!).
+- The excellently-written "Professional CMake: A Practical Guide" by Scott Craig.
+- The [Awesome CMake](https://github.com/onqtam/awesome-cmake) repository.
+- [An Introduction to Modern CMake](https://cliutils.gitlab.io/modern-cmake/).
+- ...and the list goes on (so add more!).
 
 ## Community
 
