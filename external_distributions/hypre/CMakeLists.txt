@@ -61,7 +61,6 @@ endif()
 # include/hypre directories...
 
 # Download HYPRE repo
-# cmake-format: off
 include(FetchContent)
 FetchContent_Declare(
   hypre
@@ -71,7 +70,6 @@ FetchContent_Declare(
   GIT_SHALLOW TRUE
   SOURCE_SUBDIR "src")
 FetchContent_MakeAvailable(hypre)
-# cmake-format: on
 
 # ------------------------------------------------------------------------------
 # BOILERPLATE: Update global variables
