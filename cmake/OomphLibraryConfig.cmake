@@ -278,19 +278,22 @@ function(oomph_library_config)
       REAL_DIR ${CMAKE_CURRENT_SOURCE_DIR}
       SYMLINK_DIR ${LIBRARY_INCLUDE_DIR}
       HEADERS ${ALL_HEADERS})
+
+    # Add these symlinks to the list of files we need to clean up
+    foreach(HEADER IN LISTS ALL_HEADERS)
+      list(APPEND EXTRA_INSTALLED_FILES_FOR_CLEAN_UP
+           "${LIBRARY_INCLUDE_DIR}/${HEADER}")
+    endforeach()
   else()
     install(FILES ${ALL_HEADERS} DESTINATION ${LIBRARY_INCLUDE_DIR})
   endif()
 
-  # Since we're installing/symlinking the combined headers, we need to remember
-  # them so that we can clean them up later. First we loop over the variables to
-  # update the variable locally, then we overwrite the cached variable to update
-  # it globally
-  foreach(HEADER IN LISTS ALL_HEADERS)
-    list(APPEND OOMPHLIB_COMBINED_HEADERS "${LIBRARY_INCLUDE_DIR}/${HEADER}")
-  endforeach()
-  set(OOMPHLIB_COMBINED_HEADERS ${OOMPHLIB_COMBINED_HEADERS} CACHE INTERNAL ""
-      FORCE)
+  # Since we're installing/symlinking the headers, we need to remember them so
+  # that we can clean them up later. First we loop over the variables to update
+  # the variable locally, then we overwrite the cached variable to update it
+  # globally
+  set(EXTRA_INSTALLED_FILES_FOR_CLEAN_UP ${EXTRA_INSTALLED_FILES_FOR_CLEAN_UP}
+      CACHE INTERNAL "" FORCE)
   # ----------------------------------------------------------------------------
 endfunction()
 # ------------------------------------------------------------------------------
