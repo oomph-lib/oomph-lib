@@ -22,12 +22,12 @@ get_directory_property(
 
 # Configure 'oomphlibConfig.cmake' using 'oomphlibConfig.cmake.in'
 configure_package_config_file(
-  ${OOMPH_CMAKE_CONFIG_FILE_TEMPLATE} ${OOMPH_CMAKE_CONFIG_FILE}
-  INSTALL_DESTINATION ${OOMPH_INSTALL_CONFIG_DIR})
+  "${OOMPH_CMAKE_CONFIG_FILE_TEMPLATE}" "${OOMPH_CMAKE_CONFIG_FILE}"
+  INSTALL_DESTINATION "${OOMPH_INSTALL_CONFIG_DIR}")
 
 # Configure 'oomphlibConfigVersion.cmake' which exports the version info
 write_basic_package_version_file(
-  ${OOMPH_CMAKE_CONFIG_VERSION_FILE}
+  "${OOMPH_CMAKE_CONFIG_VERSION_FILE}"
   VERSION ${${PROJECT_NAME}_VERSION}
   COMPATIBILITY SameMajorVersion)
 
@@ -35,24 +35,24 @@ write_basic_package_version_file(
 export(
   EXPORT ${OOMPH_EXPORTS_TARGET_NAME}
   NAMESPACE ${PROJECT_NAMESPACE}::
-  FILE ${OOMPH_CMAKE_EXPORTS_FILE})
+  FILE "${OOMPH_CMAKE_EXPORTS_FILE}")
 
 # Install config files
-install(FILES ${OOMPH_CMAKE_CONFIG_FILE} ${OOMPH_CMAKE_CONFIG_VERSION_FILE}
-        DESTINATION ${OOMPH_INSTALL_CONFIG_DIR})
+install(FILES "${OOMPH_CMAKE_CONFIG_FILE}" "${OOMPH_CMAKE_CONFIG_VERSION_FILE}"
+        DESTINATION "${OOMPH_INSTALL_CONFIG_DIR}")
 
 # Install the export targets file
 install(
   EXPORT ${OOMPH_EXPORTS_TARGET_NAME}
   NAMESPACE ${PROJECT_NAMESPACE}::
   FILE "${OOMPH_EXPORTS_TARGET_NAME}.cmake"
-  DESTINATION ${OOMPH_INSTALL_CONFIG_DIR})
+  DESTINATION "${OOMPH_INSTALL_CONFIG_DIR}")
 
 # Install pkg-config
 configure_file("${CMAKE_CURRENT_LIST_DIR}/${PROJECT_NAME}.pc.in"
                "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.pc" @ONLY)
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.pc"
-        DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig/")
+        DESTINATION "${CMAKE_INSTALL_FULL_LIBDIR}/pkgconfig/")
 
 # ------------------------------------------------------------------------------
 
