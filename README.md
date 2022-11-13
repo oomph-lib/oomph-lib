@@ -92,10 +92,11 @@
   - [Examples/testing](#examplestesting)
     - [Filtering by label](#filtering-by-label)
     - [Filtering by regex](#filtering-by-regex)
+    - [Building a specific demo driver](#building-a-specific-demo-driver)
     - [Clean-up](#clean-up)
   - [Disabling a test](#disabling-a-test)
   - [Development](#development)
-- [The build system in detail](#the-build-system-in-detail)
+- [A deeper dive into the build system](#a-deeper-dive-into-the-build-system)
 - [Helpful CMake resources](#helpful-cmake-resources)
 - [Community](#community)
 
@@ -166,20 +167,20 @@ To configure, build and install the project using Ninja (recommended), `cd` into
 >>> cmake --install build     # Install
 ```
 
-After the configure step, a `build/` directory will appear with several files in it. During the build step, the individual libraries of `oomph-lib` will be built. Finally, the install step will cause the headers and generated library files to be installed to the user's system paths.
+After the configure step, a `build/` directory will appear with several files in it. During the build step, the individual libraries of `oomph-lib` will be built. Finally, during the install step the headers and generated library files will be installed to the user's system paths (as well as several other files).
 
 If you would prefer to use the Unix Makefile generator (not recommended), repeat the above steps but omit the `-G Ninja` argument.
 
 **Tip:** If you wish to do a clean build of the library, you can either delete the `build/` directory or run the initial `cmake` command with the `--fresh` flag.
 
-**TODO:** *Put a note here on out-of-source builds*.
+**TODO:** *Add note on out-of-source builds here*.
 
 #### Specifying a custom installation location
 
 By default, `oomph-lib` will be installed to `/usr/local/` on Unix systems. To specify a custom installation location, pass `--install-prefix=<install-location>` to `cmake` during the configure step. For example
 
 ```bash
->>> cmake -G Ninja -B build --install-prefix=~/oomph_install   # Configure and generate build system
+>>> cmake -G Ninja -B build --install-prefix=~/oomph_install  # Configure and generate build system
 >>> cmake --build build                                       # Build
 >>> cmake --install build                                     # Install
 ```
@@ -224,11 +225,11 @@ To uninstall the project, enter the `build` folder, uninstall the installed proj
 
 ### Build options
 
-To customise your build, provide arguments of the form `-D<YOUR-FLAG-HERE>` at the CMake configuration/generation step. The table below contains a list of options that the user can control.
+You can customise your build by passing flags of the form `-D<FLAG>` to `cmake` during the configuration/generation step. For reference, the table below contains a list of key options that the user can control.
 
 Specifying these flags from the command-line can be cumbersome and you may forget what options you used to previously build the project. For this reason, we recommend that you create your own `CMakeUserPresets.json` file, as described in [CMake Presets](#cmake-presets).
 
-**TODO: Discuss with MH which options to make available to the user.**
+**TODO: Discuss desired/not desired options with MH.**
 
 Option                                    | Description                                                                    | Default
 ------------------------------------------|--------------------------------------------------------------------------------|--------
@@ -239,7 +240,7 @@ Option                                    | Description                         
 `OOMPH_ENABLE_MPI`                        | Enable the use of MPI for parallel processing                                  | OFF
 `OOMPH_ENABLE_PARANOID`                   | Enable the PARANOID flag in Debug                                              | OFF
 `OOMPH_ENABLE_RANGE_CHECKING`             | Enable RANGE_CHECKING flag in Debug                                            | OFF
-`OOMPH_ENABLE_SYMBOLIC_LINKS_FOR_HEADERS` | Replace headers by symbolic links                                              | ON
+`OOMPH_ENABLE_SYMBOLIC_LINKS_FOR_HEADERS` | Install symbolic links to the headers instead of copying them                  | ON
 `OOMPH_ENABLE_USE_OPENBLAS`               | Use the OpenBLAS implementation of BLAS/LAPACK                                 | OFF
 `OOMPH_ENABLE_DOC_BUILD`                  | Suppress Doxygen creation of API documentation **[DOESN'T WORK YET!]**         | OFF
 `OOMPH_TRANSITION_TO_VERSION_3`           | Try to build with up-to-date external sources                                  | OFF
@@ -353,6 +354,10 @@ ctest -R '(poisson|gzip)\.one_d_poisson$'
 
 **TODO:** Patch support for `self_test`.
 
+#### Building a specific demo driver
+
+A simpler, but slightly more restrictive approach of testing is to only build the demo driver project you want to test (using the same commands as mentioned in [Examples/testing](#examplestesting)). Here, a "project" refers to a folder with a `CMakeLists.txt` file that invokes the `project(...)` command (see e.g. `demo_drivers/poisson/one_d_poisson/CMakeLists.txt`). If you opt for the latter option you will notice that inside each child folder there is a shell script called `validate.sh`, inherited from the old Autotools-based build system, which runs the executables and compares them against the validation data in the `validata` folder.
+
 #### Clean-up
 
 The examples in `demo_drivers/` produce a large amount of data. It is a good idea to remove this data after you run the tests to conserve disk space. To
@@ -369,39 +374,19 @@ do so, simply delete the `demo_drivers/build/` folder, i.e.
 >>> rm -rf build    # Wipe the self-tests output
 ```
 
-The approach described above allows you to test the entire `oomph-lib` build,
-all at once. However you may wish to test a smaller subset of these problems or
-just one. To do this, you may either:
+The approach described above allows you to build and run all of the demo drivers at once. However you may wish to test a smaller subset of these problems or just one. To do this, you may either:
 
 - (i) provide `ctest` with a filter to select the tests that you wish to run (described further below), or
 - (ii) enter any child project and rerun the same commands as above.
 
-Here, a child project refers to any subfolder containing a `CMakeLists.txt`
-file that invokes the `project(...)` command (e.g.
-`demo_drivers/poisson/one_d_poisson`). If you opt for the latter option you
-will notice that inside each child folder there is a shell script called
-`validate.sh`, inherited from the old Autotools-based build system, which runs
-the executables and compares them against the validation data in the
-`validata` folder. **You should not edit the `validate.sh` scipt or the data
-in `validata`.**
+Here, a child project refers to any subfolder containing a `CMakeLists.txt` file that invokes the `project(...)` command (e.g. `demo_drivers/poisson/one_d_poisson`). If you opt for the latter option you will notice that inside each child folder there is a shell script called `validate.sh`, inherited from the old Autotools-based build system, which runs the executables and compares them against the validation data in the `validata` folder. **You should not edit the `validate.sh` scipt or the data in `validata`.**
 
-For those of you comfortable with CMake, you may wish to control the target
-properties of executables in a `CMakeLists.txt` file. You may also notice that
-you are unable to apply target-based CMake commands because CMake is unable to
-recognise the name of the target you have provided. The reason for this is that
-inside `oomph_add_executable(...)` we create a unique target name for each
-executable/test by appending the SHA1 hash of the path to the target. This allows
-us to provide a unified self-test build (from the base `demo_drivers` folder)
-that avoid clashes between target names. We do rely on the user never creating
-two targets with the same name in the same folder but this should always be the
-case. To use target-based commands on a particular target, create a (SHA1) hash
-of the path, shorten it to 7 characters, then append it to the original target
-name and use that name for your commands:
+For those of you comfortable with CMake, you may wish to control the target properties of executables in a `CMakeLists.txt` file. You may also notice that you are unable to apply target-based CMake commands because CMake is unable to recognise the name of the target you have provided. The reason for this is that inside `oomph_add_executable(...)` we create a unique target name for each executable/test by appending the SHA1 hash of the path to the target. This allows us to provide a unified self-test build (from the base `demo_drivers` folder) that avoid clashes between target names. We do rely on the user never creating two targets with the same name in the same folder but this should always be the case. To use target-based commands on a particular target, create a (SHA1) hash of the path, shorten it to 7 characters, then append it to the original target name and use that name for your commands:
 
 ```cmake
-  string(SHA1 PATH_HASH "${CMAKE_CURRENT_LIST_DIR}")           # Create hash
-  string(SUBSTRING ${PATH_HASH} 0 7 PATH_HASH)                 # Shorten to 7 characters
-  set(HASHED_TARGET_NAME <YOUR-EXECUTABLE-NAME>_${PATH_HASH})  # Append hash
+string(SHA1 PATH_HASH "${CMAKE_CURRENT_LIST_DIR}")           # Create hash
+string(SUBSTRING ${PATH_HASH} 0 7 PATH_HASH)                 # Shorten to 7 characters
+set(HASHED_TARGET_NAME <YOUR-EXECUTABLE-NAME>_${PATH_HASH})  # Append hash
 ```
 
 **Note:** You do not need to append the path hash to test names as, unlike
@@ -422,21 +407,12 @@ set_tests_properties(poisson.one_d_poisson PROPERTIES DISABLED YES)
 
 **In progress**:
 
-- [ ] Add a "make self-test" command for the root `oomph-lib` directory which executes all of the self-tests.
 - [ ] Document CTest usages:
-  - [ ] Parallel execution; append a `-j <N>` flag.
-  - [ ] Test filtering:
-    - [ ] Filter by labels `-L <label>` or
-    - [ ] Regular expression matching; run all tests beginning with poisson: `-R '^poisson'`
-    - [ ] Run all but `<test-name>`: `-E <test-name>`
-    - [ ] Run ony `<test-1>` and `<test-2>`: `-R '<test-1>|<test-2>'`
   - [ ] Reading output of failed tests: `cat build/Testing/Temporary/LastTest.log`
   - [ ] List of failed tests: `cat build/Testing/Temporary/LastTestsFailed.log`
-  - [ ] Repeating failed tests: `--rerun-failed`
   - [ ] Repeat failed test and log output: `--rerun-failed --output-on-failure`
   - [ ] Disable test: `set_tests_properties(<test-name> PROPERTIES DISABLED YES)`
-  - [ ] Demand parallel codes to run in serial: `set_tests_properties(FooWithBar PROPERTIES RUN_SERIAL)`;
-  - [ ] Providing a RESOURCE_LOCK for parallel codes.
+  - [ ] Demand MPI programs to run in serial: `set_tests_properties(FooWithBar PROPERTIES RUN_SERIAL)`
   - [ ] Note that in all cases here, if you specify the target name, you must rememeber to append the SHA1 path hash.
 
 ### Development
@@ -449,10 +425,10 @@ For example, to create an executable called `one_d_poisson` from the source
 `one_d_poisson.cc` using the Poisson library (`oomph::poisson`), use
 
 ```cmake
-  find_package(oomphlib REQUIRED)
-  oomph_add_executable(NAME one_d_poisson
-                       SOURCES one_d_poisson.cc
-                       LIBRARIES oomph::poisson)
+find_package(oomphlib REQUIRED)
+oomph_add_executable(NAME one_d_poisson
+                     SOURCES one_d_poisson.cc
+                     LIBRARIES oomph::poisson)
 ```
 
 You may wish to provide additional information to the build of your executable.
@@ -465,12 +441,12 @@ A few notable options provided by this function are
 For example
 
 ```cmake
-  oomph_add_executable(NAME one_d_poisson
-                       SOURCES one_d_poisson.cc
-                       LIBRARIES oomph::poisson
-                       CXX_STANDARD 11
-                       CXX_OPTIONS -Wall -Werror
-                       CXX_DEFINITIONS REFINEABLE)
+oomph_add_executable(NAME one_d_poisson
+                     SOURCES one_d_poisson.cc
+                     LIBRARIES oomph::poisson
+                     CXX_STANDARD 11
+                     CXX_OPTIONS -Wall -Werror
+                     CXX_DEFINITIONS REFINEABLE)
 ```
 
 If you are comfortable with CMake and you wish to specify your own executable
@@ -478,16 +454,22 @@ using the standard CMake functions then make sure to add the following line
 after calling `add_executable`
 
 ```cmake
-  target_compile_definitions(<your-target> ${OOMPH_COMPILE_DEFINITIONS})
+target_compile_definitions(<your-target> ${OOMPH_COMPILE_DEFINITIONS})
 ```
 
 where `<your-target>` is the name of your executable. This imports the compile
 definitions defined by `oomph-lib` (during its build) that are needed to make
 sure all of the code required is available to your executable.
 
-## The build system in detail
+## A deeper dive into the build system
 
 **Work in progress.**
+
+To describe:
+
+- [ ] `OomphLibraryConfig.cmake`
+  - [ ] `OomphLibraryConfig.cmake`
+- [ ] `OomphLibraryConfig.cmake`
 
 ## Helpful CMake resources
 
