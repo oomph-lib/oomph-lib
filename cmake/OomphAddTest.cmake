@@ -234,6 +234,17 @@ function(oomph_add_test)
       VERBATIM)
   endif()
 
+  # Create a test target that depends on the check_${PATH_HASH} target. When the
+  # user runs "ninja <TEST-NAME>", it will cause the test dependencies to get
+  # built and the validata files/validate.sh script to get placed in the build
+  # directory
+  #
+  # FIXME: Talk to MH; decide whether to just build and copy validation files or
+  # to run the validate.sh script too...
+  add_custom_target(${TEST_NAME})
+  # add_dependencies(${TEST_NAME} check_${PATH_HASH})
+  add_dependencies(${TEST_NAME} copy_${PATH_HASH} build_targets_${PATH_HASH})
+
   # Create the test to be run by CTest. When we run the test, it will call, e.g.
   # 'ninja check_...' which will call the 'check_...' target defined above. As
   # this target depends on the copy_... and build_targets_... targets, they will
@@ -246,7 +257,7 @@ function(oomph_add_test)
   # global validation.log file in the oomph-lib root directory.
   add_test(
     NAME ${TEST_NAME}
-    COMMAND ${CMAKE_MAKE_PROGRAM} check_${PATH_HASH}
+    COMMAND ${CMAKE_MAKE_PROGRAM} ${TEST_NAME}
     WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
 
   # Add the user-provided test labels to the test so that it can be used by
