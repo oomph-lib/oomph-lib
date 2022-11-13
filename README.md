@@ -85,10 +85,10 @@
   - [pre-commit](#pre-commit)
 - [Usage](#usage)
   - [Building and installing](#building-and-installing)
-  - [Uninstalling](#uninstalling)
     - [Specifying a custom installation location](#specifying-a-custom-installation-location)
-  - [Useful CMake flags](#useful-cmake-flags)
-  - [CMake Presets [WIP]](#cmake-presets-wip)
+  - [Uninstalling](#uninstalling)
+  - [Build options](#build-options)
+  - [CMake Presets](#cmake-presets)
     - [`CMakeUserPresets.json` example](#cmakeuserpresetsjson-example)
   - [Examples/testing](#examplestesting)
     - [Filtering by label](#filtering-by-label)
@@ -179,35 +179,23 @@ To configure, build and install the project using Ninja (recommended), `cd` into
 
 After the configure step, a `build/` directory will appear with several files in it. During the build step, the individual libraries of `oomph-lib` will be built. Finally, the install step will cause the headers and generated library files to be installed to the user's system paths.
 
-If you would prefer to use Makefile Generators (not recommended), repeat the above steps but omit the `-G Ninja` argument.
+If you would prefer to use the Unix Makefile generator (not recommended), repeat the above steps but omit the `-G Ninja` argument.
 
 **Tip:** If you wish to do a clean build of the library, you can either delete the `build/` directory or run the initial `cmake` command with the `--fresh` flag.
 
 **TODO:** *Put a note here on out-of-source builds*.
-
-### Uninstalling
-
-To uninstall the project, enter the `build` folder, remove the installed
-project files and delete the build folder using the following
-
-```bash
->>> cd build
->>> ninja uninstall   # replace ninja with make if using Autotools
->>> cd ..
->>> rm -rf build
-```
 
 #### Specifying a custom installation location
 
 By default, `oomph-lib` will be installed to `/usr/local/` on Unix systems. To specify a custom installation location, pass `--install-prefix=<install-location>` to `cmake` during the configure step. For example
 
 ```bash
->>> cmake -G Ninja -B build --install-prefix~/oomph_install   # Configure and generate build system
+>>> cmake -G Ninja -B build --install-prefix=~/oomph_install   # Configure and generate build system
 >>> cmake --build build                                       # Build
 >>> cmake --install build                                     # Install
 ```
 
-**Important:** `<install-location>` must(!) be an absolute path.
+**Note:** `<install-location>` **must(!)** be an absolute path.
 
 **Recommendation:** Do not specify a non-standard installation location if you have superuser rights on your machine. When you try to build a project that calls `find_package(oomphlib ...)` (e.g. `demo_drivers`), CMake will check the default system paths for the `oomph-lib` installation. If the library is installed to a non-standard location, CMake will not be able to find it. As a result, you will either need to pass the location of the installation to `cmake` using one of the following options:
 
@@ -232,29 +220,56 @@ cd demo_drivers/
 
 **Remark:** When you invoke `cmake`, you can specify important variables with flags of the form `-D<variable-name>` or `-D <variable-name>`. These variables are called "cache" variables and take precedence over regular variables and can be use to enable/disable options during the project configuration.
 
-### Useful CMake flags
+### Uninstalling
 
-**FIXME:** Restructure to describe options in root `CMakeLists.txt` and how to specify from the commandline THEN refer to `CMakeUserPresets.json` approach.
-
-To customise your build, provide arguments of the form `-D<YOUR-FLAG-HERE>`
-at the CMake configuration/generation step.
-
-To specify a `Release` build (i.e. optimised; the default is `Debug`) use
+To uninstall the project, enter the `build` folder, uninstall the installed project files and delete the build folder using the following
 
 ```bash
--DCMAKE_BUILD_TYPE=Release
+>>> cd build
+>>> ninja uninstall   # replace ninja with make if using Makefile generator
+>>> cd ..
+>>> rm -rf build
 ```
 
-To enable the use of MPI (if available on your system) use
+### Build options
 
-```bash
--DOOMPH_ENABLE_MPI
-```
+To customise your build, provide arguments of the form `-D<YOUR-FLAG-HERE>` at the CMake configuration/generation step. The table below contains a list of options that the user can control.
 
-### CMake Presets [WIP]
+Specifying these flags from the command-line can be cumbersome and you may forget what options you used to previously build the project. For this reason, we recommend that you create your own `CMakeUserPresets.json` file, as described in [CMake Presets](#cmake-presets).
 
-- We version control a generic `CMakePresets.json`.
-- You can write your own `CMakeUserPresets.json` file.
+**TODO: Discuss with MH which options to make available to the user.**
+
+Option                                    | Description                                                                    | Default
+------------------------------------------|--------------------------------------------------------------------------------|--------
+`CMAKE_BUILD_TYPE`                        | The build type (e.g. `Debug`, `Release`, `RelWithDebInfo` or `MinSizeRel`)     | `Debug`
+`BUILD_SHARED_LIBS`                       | Build using shared libraries; static otherwise                                 | OFF
+`OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY`   | Build tests with library build                                                 | OFF
+`OOMPH_DONT_SILENCE_USELESS_WARNINGS`     | Display (harmless) warnings from external_src/ and src/ that are silenced      | OFF
+`OOMPH_ENABLE_MPI`                        | Enable the use of MPI for parallel processing                                  | OFF
+`OOMPH_ENABLE_PARANOID`                   | Enable the PARANOID flag in Debug                                              | OFF
+`OOMPH_ENABLE_RANGE_CHECKING`             | Enable RANGE_CHECKING flag in Debug                                            | OFF
+`OOMPH_ENABLE_SYMBOLIC_LINKS_FOR_HEADERS` | Replace headers by symbolic links                                              | ON
+`OOMPH_ENABLE_USE_OPENBLAS`               | Use the OpenBLAS implementation of BLAS/LAPACK                                 | OFF
+`OOMPH_ENABLE_DOC_BUILD`                  | Suppress Doxygen creation of API documentation **[DOESN'T WORK YET!]**         | OFF
+`OOMPH_TRANSITION_TO_VERSION_3`           | Try to build with up-to-date external sources                                  | OFF
+`OOMPH_USE_DEPRECATED_SUPERLU`            | Use oomph-lib's deprecated version of SuperLU (4.3)                            | OFF
+`OOMPH_SUPPRESS_TRIANGLE_LIB`             | Suppress build of oomph-lib's copy of the triangle library                     | OFF
+`OOMPH_SUPPRESS_TETGEN_LIB`               | Suppress build of oomph-lib's copy of the tetgen library                       | OFF
+`OOMPH_WANT_NLOHMANN_JSON`                | Enable the [`nlohmann/json`](https://github.com/nlohmann/json) JSON library    | OFF
+`OOMPH_WANT_SPDLOG`                       | Enable the [`gabime/spdlog`](https://github.com/gabime/spdlog) logging library | OFF
+`OOMPH_WANT_CGAL`                         | Enable we want to build the CGAL library? **[DOESN'T WORK YET!]**              | OFF
+`OOMPH_WANT_HYPRE`                        | Enable Hypre library                                                           | OFF
+`OOMPH_WANT_MUMPS`                        | Enable MUMPS library [CURRENTLY ONLY WORKING WITH MPI]                         | OFF
+`OOMPH_WANT_TRILINOS`                     | Enable Trilinos library  **[DOESN'T WORK YET!]**                               | OFF
+`OOMPH_ENABLE_CODE_COVERAGE`              | Enable collection of code coverage results                                     | OFF
+
+### CMake Presets
+
+**Work in progress!**
+
+We provide a generic `CMakePresets.json` file in the root directory of the project. We recommend that you can write your own `CMakeUserPresets.json` file.
+
+For details on CMake presets refer to the [CMake documentation](https://cmake.org/cmake/help/latest/manual/cmake-presets.7.html).
 
 #### `CMakeUserPresets.json` example
 
@@ -287,14 +302,10 @@ To enable the use of MPI (if available on your system) use
   "testPresets": [
     {
       "name": "macos_arm64",
+      "inherits": "test-base",
       "configurePreset": "macos_arm64",
       "output": {
-        "outputOnFailure": true,
-        "labelSummary": false
-      },
-      "execution": {
-        "timeout": 10000,
-        "noTestsAction": "error",
+        "labelSummary": true
       }
     }
   ]
@@ -307,6 +318,7 @@ To enable the use of MPI (if available on your system) use
 `demo_drivers/` folder and run the following:
 
 ```bash
+>>> cd demo_drivers/
 >>> cmake -G Ninja -B build   # Configure and generate build system for demo_drivers project
 >>> ctest -j4                 # Enter the build folder and execute all tests with 4 jobs
 ```
