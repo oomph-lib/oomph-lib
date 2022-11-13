@@ -44,8 +44,10 @@ project(
 
 # ---------------------------[ INITIAL PROJECT SETUP ]--------------------------
 
-# Specify the location of non-standard CMake modules and the C++ standard
+# Specify the location of non-standard CMake modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/")
+
+# Specify the C++ standard
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
