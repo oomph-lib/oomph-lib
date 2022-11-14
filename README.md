@@ -94,8 +94,9 @@
     - [Filtering by regex](#filtering-by-regex)
     - [Building a specific demo driver](#building-a-specific-demo-driver)
     - [Clean-up](#clean-up)
-  - [Disabling a test](#disabling-a-test)
+    - [Disabling a test](#disabling-a-test)
   - [Development](#development)
+    - [Customising targets](#customising-targets)
 - [A deeper dive into the build system](#a-deeper-dive-into-the-build-system)
 - [Helpful CMake resources](#helpful-cmake-resources)
 - [Community](#community)
@@ -306,16 +307,25 @@ For details on CMake presets refer to the [CMake documentation](https://cmake.or
 
 ### Examples/testing
 
+**TODO:** Patch support for `self_test`.
+
 `oomph-lib` comes with an extensive list of well-documented examples situated in the `demo_drivers/` directory. The driver codes in these folders are also used to validate the library. Before you can run these tests, you must install the `oomph-lib` library using the steps described in [Building and installing](#building-and-installing). To run all of these tests, enter the
 `demo_drivers/` folder and run the following:
 
 ```bash
->>> cd demo_drivers/
 >>> cmake -G Ninja -B build   # Configure and generate build system for demo_drivers project
->>> ctest -j4                 # Enter the build folder and execute all tests with 4 jobs
+>>> cd build                  # Enter the build/ directory
+>>> ctest -j4                 # Execute all tests using 4 processes
 ```
 
-(The executable `ctest` is distributed with CMake -- you do not need to install it separately.)
+Alternatively, you can combine all of the above commands with a single command:
+
+```bash
+# ctest --build-and-test <source-dir> <build-dir> --build-generator <generator> --test-command <command>
+ctest --build-and-test . build --build-generator Ninja --test-command ctest
+```
+
+(**Note:** The executable `ctest` is distributed with CMake -- you do not need to install it separately.)
 
 You can filter tests based on the values of `LABELS` or `TEST_NAME` in the `oomph_add_test()` test definition. To extract these values, open the `CMakeLists.txt` file in the directory of the test you wish to run. For example, in `demo_drivers/poisson/one_d_poisson/CMakeLists.txt` you will see the following:
 
@@ -352,16 +362,22 @@ will cause all tests containing `poisson.one_d_poisson` in the `TEST_NAME` to be
 ctest -R '(poisson|gzip)\.one_d_poisson$'
 ```
 
-**TODO:** Patch support for `self_test`.
-
 #### Building a specific demo driver
 
-A simpler, but slightly more restrictive approach of testing is to only build the demo driver project you want to test (using the same commands as mentioned in [Examples/testing](#examplestesting)). Here, a "project" refers to a folder with a `CMakeLists.txt` file that invokes the `project(...)` command (see e.g. `demo_drivers/poisson/one_d_poisson/CMakeLists.txt`). If you opt for the latter option you will notice that inside each child folder there is a shell script called `validate.sh`, inherited from the old Autotools-based build system, which runs the executables and compares them against the validation data in the `validata` folder.
+A simpler, but slightly more restrictive approach of testing is to only build the demo driver project you want to test. Here, a "project" refers to a folder with a `CMakeLists.txt` file that invokes the `project(...)` command (see e.g. `demo_drivers/poisson/one_d_poisson/CMakeLists.txt`). If you opt for the latter option you will notice that inside each child folder there is a shell script called `validate.sh`, inherited from the old Autotools-based build system, which runs the executables and compares them against the validation data in the `validata` folder.
+
+To test a specific demo driver, you simply step into the folder of the demo driver you want to test and run the commands mentioned in [Examples/testing](#examplestesting). For example, to just run the `one_d_poisson` example, run the commands below:
+
+```bash
+>>> cd demo_drivers/poisson/one_d_poisson/  # enter chosen demo driver directory
+>>> cmake -G Ninja -B build                 # configure build system for one_d_poisson project
+>>> cd build                                # enter build directory
+>>> ctest                                   # invoke all tests defined by the one_d_poisson project
+```
 
 #### Clean-up
 
-The examples in `demo_drivers/` produce a large amount of data. It is a good idea to remove this data after you run the tests to conserve disk space. To
-do so, simply delete the `demo_drivers/build/` folder, i.e.
+The examples in `demo_drivers/` produce a large amount of data. It is a good idea to remove this data after you run the tests to conserve disk space. To do so, simply delete the `demo_drivers/build/` folder, i.e.
 
 ```bash
 # Run demo driver tests
@@ -374,25 +390,7 @@ do so, simply delete the `demo_drivers/build/` folder, i.e.
 >>> rm -rf build    # Wipe the self-tests output
 ```
 
-The approach described above allows you to build and run all of the demo drivers at once. However you may wish to test a smaller subset of these problems or just one. To do this, you may either:
-
-- (i) provide `ctest` with a filter to select the tests that you wish to run (described further below), or
-- (ii) enter any child project and rerun the same commands as above.
-
-Here, a child project refers to any subfolder containing a `CMakeLists.txt` file that invokes the `project(...)` command (e.g. `demo_drivers/poisson/one_d_poisson`). If you opt for the latter option you will notice that inside each child folder there is a shell script called `validate.sh`, inherited from the old Autotools-based build system, which runs the executables and compares them against the validation data in the `validata` folder. **You should not edit the `validate.sh` scipt or the data in `validata`.**
-
-For those of you comfortable with CMake, you may wish to control the target properties of executables in a `CMakeLists.txt` file. You may also notice that you are unable to apply target-based CMake commands because CMake is unable to recognise the name of the target you have provided. The reason for this is that inside `oomph_add_executable(...)` we create a unique target name for each executable/test by appending the SHA1 hash of the path to the target. This allows us to provide a unified self-test build (from the base `demo_drivers` folder) that avoid clashes between target names. We do rely on the user never creating two targets with the same name in the same folder but this should always be the case. To use target-based commands on a particular target, create a (SHA1) hash of the path, shorten it to 7 characters, then append it to the original target name and use that name for your commands:
-
-```cmake
-string(SHA1 PATH_HASH "${CMAKE_CURRENT_LIST_DIR}")           # Create hash
-string(SUBSTRING ${PATH_HASH} 0 7 PATH_HASH)                 # Shorten to 7 characters
-set(HASHED_TARGET_NAME <YOUR-EXECUTABLE-NAME>_${PATH_HASH})  # Append hash
-```
-
-**Note:** You do not need to append the path hash to test names as, unlike
-targets, CMake allows tests to share the same name.
-
-### Disabling a test
+#### Disabling a test
 
 To temporarily disable a test, you need to set the `DISABLED` property to `TRUE`
 using the argument to `TEST_NAME`:
@@ -431,11 +429,10 @@ oomph_add_executable(NAME one_d_poisson
                      LIBRARIES oomph::poisson)
 ```
 
-You may wish to provide additional information to the build of your executable.
-A few notable options provided by this function are
+You may wish to provide additional information to the build of your executable. A few notable options provided by this function are
 
-- `CXX_STANDARD`: The C++ standard. The only arguments we currently allow are 11, 14, or 17 (corresponding to C++11, C++14, and C++17, respectively). We currently assume C++11 for all files in the library. Specifying a more modern standard may result in unexpected consequences. Don't say we didn't warn you!
-- `CXX_OPTIONS`: Compiler flags (e.g. `-Wall`, `-O3`). However, this is likely to only affect your executable and not the library. (`TODO: Find out about this!`)
+- `CXX_STANDARD`: The C++ standard. The only arguments we currently allow are 11, 14, or 17 (corresponding to C++11, C++14, and C++17, respectively). By default, we adopt the C++14 standard for programs provided with the library. Specifying a more modern standard may result in unexpected consequences. Don't say we didn't warn you!
+- `CXX_OPTIONS`: Compiler flags (e.g. `-Wall`, `-O3`). However, this is likely to only affect your executable and not the library.
 - `CXX_DEFINITIONS`: Preprocessor definition(s). Arguments to this keyword do not require a `-D` prefix; CMake will automatically prepend it for you.
 
 For example
@@ -449,17 +446,34 @@ oomph_add_executable(NAME one_d_poisson
                      CXX_DEFINITIONS REFINEABLE)
 ```
 
-If you are comfortable with CMake and you wish to specify your own executable
-using the standard CMake functions then make sure to add the following line
-after calling `add_executable`
+If you are comfortable with CMake and feel the `oomph_add_executable()` command does not provide the flexibility that you required, you wish to specify your own executable using the standard CMake functions. If so, you will need to make that you add the compile definitions in `OOMPH_COMPILE_DEFINITIONS` to the target, e.g.
 
 ```cmake
-target_compile_definitions(<your-target> ${OOMPH_COMPILE_DEFINITIONS})
+add_executable(<target-name> <source-1> ... <source-N>)
+target_link_libraries(<target-name> PRIVATE oomph::poisson)
+target_compile_definitions(<target-name> ${OOMPH_COMPILE_DEFINITIONS})
 ```
 
-where `<your-target>` is the name of your executable. This imports the compile
+where `<target-name>` is the name of your executable. This imports the compile
 definitions defined by `oomph-lib` (during its build) that are needed to make
 sure all of the code required is available to your executable.
+
+#### Customising targets
+
+For those of you comfortable with CMake, you may wish to control the target properties of executables in a `CMakeLists.txt` file. You may also notice that you are unable to apply target-based CMake commands because CMake is unable to recognise the name of the target you have provided. The reason for this is that inside `oomph_add_executable(...)` we create a unique target name for each executable/test by appending the SHA1 hash of the path to the target. This allows us to provide a unified self-test build (from the base `demo_drivers` folder) that avoid clashes between target names. We do rely on the user never creating two targets with the same name in the same folder but this should always be the case. To use target-based commands on a particular target, create a (SHA1) hash of the path, shorten it to 7 characters, then append it to the original target name and use that name for your commands:
+
+```cmake
+# Test definition
+oomph_add_executable(NAME <executable-name> ...)
+
+# Construct target name
+string(SHA1 PATH_HASH "${CMAKE_CURRENT_LIST_DIR}")      # Create hash
+string(SUBSTRING ${PATH_HASH} 0 7 PATH_HASH)            # Shorten to 7 characters
+set(HASHED_TARGET_NAME <executable-name>_${PATH_HASH})  # Append hash
+```
+
+**Note:** You do not need to append the path hash to test names as, unlike
+targets, CMake allows tests to share the same name.
 
 ## A deeper dive into the build system
 
@@ -468,8 +482,17 @@ sure all of the code required is available to your executable.
 To describe:
 
 - [ ] `OomphLibraryConfig.cmake`
-  - [ ] `OomphLibraryConfig.cmake`
-- [ ] `OomphLibraryConfig.cmake`
+  - [ ] Types of libraries, e.g. regular library, header-only library, etc.
+  - [ ] Include paths for each library (`BUILD_INTERFACE`/`INSTALL_INTERFACE`)
+  - [ ] Installation
+    - [ ] Symlinking headers vs. copying (`OomphCreateSymlinksForHeaders.cmake`)
+    - [ ] Combined header (`OomphCreateCombinedHeader.cmake`)
+    - [ ] Additional clean-up for symlinks
+- [ ] `oomphlibConfig.cmake.in`/`oomphlibConfig.cmake`
+  - [ ] Complicated. Save until last...
+- [ ] ...
+- [ ] `OomphInstallLibrary.cmake`
+- [ ] External libraries...
 
 ## Helpful CMake resources
 
