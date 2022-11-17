@@ -18,14 +18,14 @@ oomph_add_executable(
 # ---------------------------------- TESTING ----------------------------------
 
 oomph_add_test(
-  TEST_NAME mpi.three_d_cantilever
+  TEST_NAME mpi.clamped_shell
   TARGET_DEPENDENCIES clamped_shell_with_arclength_cont
   EXTRA_REQUIRES
   LABELS mpi clamped_shell
   REQUIRES_MPI_RUN_COMMAND)
 
 # Don't run this test alongside any other tests
-set_tests_properties(mpi.three_d_cantilever PROPERTIES RUN_SERIAL TRUE)
+set_tests_properties(mpi.clamped_shell PROPERTIES RUN_SERIAL TRUE)
 
 message(VERBOSE "Leaving clamped_shell subdirectory")
 # ------------------------------------------------------------------------------
