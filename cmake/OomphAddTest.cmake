@@ -257,7 +257,7 @@ function(oomph_add_test)
   # global validation.log file in the oomph-lib root directory.
   add_test(
     NAME ${TEST_NAME}
-    COMMAND ${CMAKE_MAKE_PROGRAM} ${TEST_NAME}
+    COMMAND ${CMAKE_MAKE_PROGRAM} check_${PATH_HASH}
     WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
 
   # Add the user-provided test labels to the test so that it can be used by
