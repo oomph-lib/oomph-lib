@@ -198,7 +198,6 @@ private:
 template<class ELEMENT>
 PRefineableDrivenCavityProblem<ELEMENT>::PRefineableDrivenCavityProblem()
 { 
-
  // Setup mesh
 
  // # of elements in x-direction

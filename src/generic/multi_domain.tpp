@@ -3,7 +3,11 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
+// LIC//    Version 1.0; svn revision $LastChangedRevision$
+// LIC//
+// LIC// $LastChangedDate$
+// LIC//
+// LIC// Copyright (C) 2006-2016 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -61,7 +65,8 @@ namespace oomph
   template<class ELEMENT>
   class CompareBoundaryCoordinate;
 
-  /// / Templated helper functions for multi-domain methods using locate_zeta
+  //// Templated helper functions for multi-domain methods using locate_zeta
+
 
   //============================================================================
   /// Identify the \c FaceElements (stored in the mesh pointed to by
@@ -104,13 +109,9 @@ namespace oomph
     // interpreted as GeomObjects
     Vector<Mesh*> bulk_face_mesh_pt(n_mesh);
 
-    OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
-
     // Loop over all meshes
     for (unsigned i_mesh = 0; i_mesh < n_mesh; i_mesh++)
     {
-      OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mesh!");
-
       bulk_face_mesh_pt[i_mesh] = new Mesh;
       bulk_mesh_pt
         ->template build_face_mesh<BULK_ELEMENT, FaceElementAsGeomObject>(
@@ -171,8 +172,6 @@ namespace oomph
                 CompareBoundaryCoordinate<BULK_ELEMENT>());
     } // end of loop over meshes
 
-    OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
-
 
     // Setup the interactions for this problem using the surface mesh
     // on the fluid mesh.  The interaction parameter in this instance is
@@ -181,8 +180,6 @@ namespace oomph
       BULK_ELEMENT,
       FaceElementAsGeomObject<BULK_ELEMENT>>(
       problem_pt, face_mesh_pt, bulk_mesh_pt, bulk_face_mesh_pt, interaction);
-
-    OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
 
 
     // Loop over all meshes to clean up
@@ -206,7 +203,6 @@ namespace oomph
       delete bulk_face_mesh_pt[i_mesh];
 
     } // end of loop over meshes
-    OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
   }
 
 
@@ -226,15 +222,11 @@ namespace oomph
     Mesh* const& face_mesh_pt,
     const unsigned& interaction)
   {
-    OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
-
     // Convert to vector-based storage
     Vector<unsigned> boundary_in_bulk_mesh_vect(1);
     boundary_in_bulk_mesh_vect[0] = boundary_in_bulk_mesh;
     Vector<Mesh*> face_mesh_pt_vect(1);
     face_mesh_pt_vect[0] = face_mesh_pt;
-
-    OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
 
     // Call vector-based version
     setup_bulk_elements_adjacent_to_face_mesh<BULK_ELEMENT, DIM>(
@@ -243,7 +235,6 @@ namespace oomph
       bulk_mesh_pt,
       face_mesh_pt_vect,
       interaction);
-    OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
   }
 
 
@@ -306,13 +297,9 @@ namespace oomph
     // Bulk elements must not be external elements in this case
     Use_bulk_element_as_external = false;
 
-    OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
-
     // Call the auxiliary function with GEOM_OBJECT=EXT_ELEMENT
     // and EL_DIM_EUL=EL_DIM_LAG=dimension returned from helper function
     get_dim_helper(problem_pt, mesh_pt, external_mesh_pt);
-
-    OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
 
     if (Dim > 3)
     {
@@ -324,8 +311,6 @@ namespace oomph
       throw OomphLibError(
         error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
-
-    OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
 
     // Wrapper for each dimension (template parameter)
     aux_setup_multi_domain_interaction<EXT_ELEMENT, EXT_ELEMENT>(
@@ -515,15 +500,11 @@ namespace oomph
     const unsigned& interaction_index,
     Mesh* const& external_face_mesh_pt)
   {
-    OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
-
     // Convert to vector-based storage
     Vector<Mesh*> mesh_pt_vector(1);
     mesh_pt_vector[0] = mesh_pt;
     Vector<Mesh*> external_face_mesh_pt_vector(1);
     external_face_mesh_pt_vector[0] = external_face_mesh_pt;
-
-    OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
 
     // Call vector-based version
     aux_setup_multi_domain_interaction<EXT_ELEMENT, GEOM_OBJECT>(
@@ -532,8 +513,6 @@ namespace oomph
       external_mesh_pt,
       interaction_index,
       external_face_mesh_pt_vector);
-
-    OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
 
   } // end of aux_setup_multi_domain_interaction
 
@@ -563,8 +542,6 @@ namespace oomph
     // How many meshes do we have?
     unsigned n_mesh = mesh_pt.size();
 
-    OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
-
 #ifdef PARANOID
     if (external_face_mesh_pt.size() != n_mesh)
     {
@@ -576,8 +553,6 @@ namespace oomph
         error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 #endif
-    OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
-
 
     // Bail out?
     if (n_mesh == 0) return;
@@ -629,16 +604,12 @@ namespace oomph
 
 #endif
 
-    OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
-
 
 #ifdef OOMPH_HAS_MPI
     // Storage for number of processors and my rank
     int n_proc = problem_pt->communicator_pt()->nproc();
     int my_rank = problem_pt->communicator_pt()->my_rank();
 #endif
-
-    OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
 
     // Timing
     double t_start = 0.0;
@@ -654,8 +625,6 @@ namespace oomph
     double t_send_info = 0.0;
     double t_create_halo = 0.0;
 #endif
-
-    OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
 
     if (Doc_timings)
     {
@@ -732,8 +701,6 @@ namespace oomph
 
     } // end of loop over meshes
 
-    OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
-
     double t_setup_lookups = 0.0;
     if (Doc_timings)
     {
@@ -758,8 +725,6 @@ namespace oomph
 
     // Reset counter for elements in flat packed storage
     e_count = 0;
-
-    OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
 
     // Loop over all meshes
     for (unsigned i_mesh = 0; i_mesh < n_mesh; i_mesh++)
@@ -804,8 +769,6 @@ namespace oomph
         e_count++;
       }
     } // end of loop over meshes
-
-    OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
 
     if (Doc_timings)
     {
@@ -935,8 +898,6 @@ namespace oomph
     }
 
 
-    OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
-
     // Storage for info about coordinate location
     Vector<double> percentage_coords_located_locally;
     Vector<double> percentage_coords_located_elsewhere;
@@ -948,8 +909,6 @@ namespace oomph
     bool has_not_reached_max_level_of_search = true;
     while (has_not_reached_max_level_of_search)
     {
-      OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
-
       // Record time at start of spiral loop
       if (Doc_timings)
       {
@@ -960,8 +919,6 @@ namespace oomph
       // all not-yet-located zetas within the current spiral range.
       locate_zeta_for_local_coordinates(
         mesh_pt, external_mesh_pt, mesh_geom_obj_pt, interaction_index);
-
-      OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
 
       // Store stats about successful locates for reporting later
       if (Doc_stats)
@@ -1128,13 +1085,6 @@ namespace oomph
           n_zeta_not_found =
             Flat_packed_zetas_not_found_locally.size() - Dim * n_mesh;
 
-          OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE(
-            "Flat_packed_zetas_not_found_locally: " +
-            std::to_string(Flat_packed_zetas_not_found_locally.size()));
-          OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("Dim: " + std::to_string(Dim));
-          OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("n_mesh: " +
-                                                std::to_string(n_mesh));
-
 
 #ifdef OOMPH_HAS_MPI
           if (problem_pt->communicator_pt()->nproc() > 1)
@@ -1234,13 +1184,6 @@ namespace oomph
       n_zeta_not_found =
         Flat_packed_zetas_not_found_locally.size() - Dim * n_mesh;
 
-      OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE(
-        "Flat_packed_zetas_not_found_locally: " +
-        std::to_string(Flat_packed_zetas_not_found_locally.size()));
-      OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("Dim: " + std::to_string(Dim));
-      OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("n_mesh: " +
-                                            std::to_string(n_mesh));
-
 
 #ifdef OOMPH_HAS_MPI
       if (problem_pt->communicator_pt()->nproc() > 1)
@@ -1257,9 +1200,6 @@ namespace oomph
       // Specify max level reached for later loop
       max_level_reached = i_level + 1;
 #endif
-
-      OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("n_zeta_not_found: " +
-                                            std::to_string(n_zeta_not_found));
 
       /// If it's is now zero then break out of the spirals loop
       if (n_zeta_not_found == 0)
@@ -1386,21 +1326,14 @@ namespace oomph
 #endif // cgal
     } // end of "spirals" loop
 
-    OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
-    OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE(std::to_string(n_zeta_not_found));
-
 
     // If we haven't found all zetas we're dead now...
     //-------------------------------------------------
     if (n_zeta_not_found != 0)
     {
-      OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
-
       // Shout?
       if (!Accept_failed_locate_zeta_in_setup_multi_domain_interaction)
       {
-        OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
-
         std::ostringstream error_stream;
         error_stream
           << "Multi_domain_functions::locate_zeta_for_local_coordinates()"
@@ -1445,20 +1378,14 @@ namespace oomph
         }
 #endif
 
-        OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
-
         // Loop over all meshes
         for (unsigned i_mesh = 0; i_mesh < n_mesh; i_mesh++)
         {
-          OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
-
           // Add yet another modifier to distinguish meshes if reqd
           if (n_mesh > 1)
           {
             modifier << "_mesh" << i_mesh;
           }
-
-          OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
 
           std::ofstream outfile;
           char filename[100];
@@ -1468,15 +1395,10 @@ namespace oomph
           unsigned nel = mesh_pt[i_mesh]->nelement();
           for (unsigned e = 0; e < nel; e++)
           {
-            OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
-
             mesh_pt[i_mesh]->finite_element_pt(e)->output(outfile);
             // FiniteElement::output(outfile);
-            OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
           }
           outfile.close();
-
-          OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
 
           sprintf(
             filename, "missing_coords_ext_mesh%s.dat", modifier.str().c_str());
@@ -1484,15 +1406,10 @@ namespace oomph
           nel = external_mesh_pt->nelement();
           for (unsigned e = 0; e < nel; e++)
           {
-            OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
-
             external_mesh_pt->finite_element_pt(e)->output(outfile);
             // FiniteElement::output(outfile);
-            OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
           }
           outfile.close();
-
-          OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
 
           BinArray* bin_array_pt = dynamic_cast<BinArray*>(
             mesh_geom_obj_pt[i_mesh]->sample_point_container_pt());
@@ -1551,8 +1468,6 @@ namespace oomph
           outfile.close();
         }
 
-        OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
-
         error_stream
           << "Mesh and external mesh documented in missing_coords_mesh*.dat\n"
           << "and missing_coords_ext_mesh*.dat, respectively. Missing \n"
@@ -1574,8 +1489,6 @@ namespace oomph
       }
     }
 
-    OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
-
 
     // Doc timings if required
     if (Doc_timings)
@@ -1586,21 +1499,15 @@ namespace oomph
         << t_locate - t_start << std::endl;
     }
 
-    OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
-
     // Delete the geometric object representing the mesh
     for (unsigned i_mesh = 0; i_mesh < n_mesh; i_mesh++)
     {
       delete mesh_geom_obj_pt[i_mesh];
     }
-    OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
-
 
     // Clean up all the (extern) Vectors associated with creating the
     // external storage information
     clean_up();
-
-    OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
 
 #ifdef OOMPH_HAS_MPI
 
@@ -1759,8 +1666,6 @@ namespace oomph
     }
 
 #endif
-
-    OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("mdf!");
 
     // Doc timings if required
     if (Doc_timings)

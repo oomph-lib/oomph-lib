@@ -1221,39 +1221,25 @@ public:
 
  /// Destructor, clean up all allocated memory
  ~AirwayReopeningProblem()
- {
-   OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("destructor!");
+  {
    //Delete objects created in constructor in reverse order
    delete Constraint_mesh_pt;
-   OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("destructor!");
    delete Bulk_mesh_pt;
-   OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("destructor!");
    //Delete objects associated with lower wall mesh
    delete Global_Physical_Variables::Lower_wall_pt;
-   OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("destructor!");
    delete Lower_wall_mesh_pt;
-   OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("destructor!");
    delete Undeformed_lower_wall_geom_pt;
-   OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("destructor!");
    //Delete objects associated with upper wall mesh
    delete Global_Physical_Variables::Upper_wall_pt;
-   OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("destructor!");
    delete Upper_wall_mesh_pt;
-   OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("destructor!");
    delete Undeformed_upper_wall_geom_pt;
-   OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("destructor!");
-
+   
    //Delete global data
    delete Mesh_fraction_at_transition_pt;
-   OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("destructor!");
    delete Bubble_pressure_data_pt;
-   OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("destructor!");
-   // Delete the linear solver, if allocated
-   if(Frontal_solver) {
-    delete linear_solver_pt();
-     OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("destructor!");
-   }
- }
+  //Delete the linear solver, if allocated
+   if(Frontal_solver) {delete linear_solver_pt();}
+  }
 
  /// Overload the continuation actions because we're 
  /// continuing in Ca which does not affect the mesh
@@ -1654,48 +1640,32 @@ AirwayReopeningProblem<ELEMENT>::AirwayReopeningProblem()
  // End of liquid filled region (inflow) on wall
  double xi2 = 150.0;//300.0
 
- OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
- 
  //Set the frontal solver, if desired
  if(Frontal_solver)
   {
    linear_solver_pt() = new HSL_MA42;
   }
 
- OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
- 
  //Create a bubble presure data
  Bubble_pressure_data_pt = new Data(1);
  //This will be global data
  add_global_data(Bubble_pressure_data_pt);
 
- OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
- 
  //Create a mesh fraction data
  Mesh_fraction_at_transition_pt = new Data(1);
  add_global_data(Mesh_fraction_at_transition_pt);
-
- OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
- 
  //Pin the value
  Mesh_fraction_at_transition_pt->set_value(0,0.5);
  Mesh_fraction_at_transition_pt->pin(0);
 
- OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
- 
-
  // The underformed wall is a straight line at y = 1.0
  Undeformed_upper_wall_geom_pt = new StraightLine(1.0);
- OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
- 
 
  // Create the Lagrangian Mesh
  Upper_wall_mesh_pt = 
   new OneDLagrangianMesh<FSIHermiteBeamElement>(nwall,xi0,xi2, 
                                                 Undeformed_upper_wall_geom_pt);
 
- OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
- 
  //Loop over the wall elements
  unsigned n_upper_wall_element = Upper_wall_mesh_pt->nelement();
  for(unsigned e=0;e<n_upper_wall_element;e++)
@@ -1722,14 +1692,10 @@ AirwayReopeningProblem<ELEMENT>::AirwayReopeningProblem()
    element_pt->set_normal_pointing_out_of_fluid();
  }
 
- OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
-
  //Create a geometric object that represents the wall geometry
  MeshAsGeomObject* upper_wall_element_pt = 
   new MeshAsGeomObject(Upper_wall_mesh_pt);
-
- OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
-
+ 
  // The underformed lower wall is a straight line at y = -1.0
  Undeformed_lower_wall_geom_pt = new StraightLine(-1.0);
  
@@ -1737,9 +1703,7 @@ AirwayReopeningProblem<ELEMENT>::AirwayReopeningProblem()
  Lower_wall_mesh_pt = 
   new OneDLagrangianMesh<FSIHermiteBeamElement>(nwall,xi0,xi2, 
                                                 Undeformed_lower_wall_geom_pt);
-
- OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
-
+ 
  //Loop over the wall elements
  unsigned n_lower_wall_element = Lower_wall_mesh_pt->nelement();
  for(unsigned e=0;e<n_lower_wall_element;e++)
@@ -1767,8 +1731,6 @@ AirwayReopeningProblem<ELEMENT>::AirwayReopeningProblem()
    //element_pt->set_normal_pointing_into_fluid();
  }
 
- OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
-
  //Create a geometric object that represents the wall geometry
  MeshAsGeomObject* lower_wall_element_pt = 
   new MeshAsGeomObject(Lower_wall_mesh_pt);
@@ -1777,8 +1739,6 @@ AirwayReopeningProblem<ELEMENT>::AirwayReopeningProblem()
  //GeomObject* lower_wall_pt = new StraightLine(-1.0);
  GeomObject* lower_wall_pt = lower_wall_element_pt;
  Global_Physical_Variables::Lower_wall_pt  = lower_wall_pt;
-
- OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
 
 
  //GeomObject* upper_wall_pt=new StraightLine( 1.0);
@@ -1791,13 +1751,9 @@ AirwayReopeningProblem<ELEMENT>::AirwayReopeningProblem()
   (nx1,nx2,nx3,nh,nhalf,h,lower_wall_pt,upper_wall_pt,xi0,start_transition,
    xi1,xi2);
 
- OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
-
  //Set the vertical fraction
  Bulk_mesh_pt->set_spine_centre_fraction_pt(
   Mesh_fraction_at_transition_pt->value_pt(0));
-
- OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
 
  // Store the control element
  Control_element_pt=Bulk_mesh_pt->control_element_pt();
@@ -1807,14 +1763,10 @@ AirwayReopeningProblem<ELEMENT>::AirwayReopeningProblem()
   new FixSpineHeightElement(
    static_cast<SpineNode*>(Control_element_pt->node_pt(8)));
 
- OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
-
  //Set the fixed spine height
  Fixed_spine_height = 
   static_cast<SpineNode*>(Control_element_pt
                           ->node_pt(8))->spine_pt()->height();
-
- OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
 
  //Add the fixed height to it
  fix_spine_element_pt->height_pt() = &Fixed_spine_height;
@@ -1822,12 +1774,8 @@ AirwayReopeningProblem<ELEMENT>::AirwayReopeningProblem()
  //Set the pressure data
  fix_spine_element_pt->set_traded_pressure_data(Bubble_pressure_data_pt);
 
- OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
-
  //Add the Fixed element to the mesh
  Bulk_mesh_pt->add_element_pt(fix_spine_element_pt);
-
- OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
 
  //Loop over the elements next to the inflow boundarys
  for(unsigned b=3;b<=5;b+=2)
@@ -1848,8 +1796,6 @@ AirwayReopeningProblem<ELEMENT>::AirwayReopeningProblem()
     }
   }
 
- OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
- 
  //Set a prescribed flux element
  Flux_constraint_pt = new FluxConstraint;
  
@@ -1874,14 +1820,10 @@ AirwayReopeningProblem<ELEMENT>::AirwayReopeningProblem()
     node_pt->set_coordinates_on_boundary(2,zeta);
    }
  }
-
- OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
-
+ 
  //Sort out the interaction the upper wall
  FSI_functions::setup_fluid_load_info_for_solid_elements<ELEMENT,2>
   (this,2,Bulk_mesh_pt,Upper_wall_mesh_pt);
-
- OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
 
  {
   //Set the boundary coordinates on the lower wall
@@ -1894,9 +1836,6 @@ AirwayReopeningProblem<ELEMENT>::AirwayReopeningProblem()
     node_pt->set_coordinates_on_boundary(0,zeta);
    }
  }
-
- OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
-
 
  //Sort out the interaction the lower wall
  FSI_functions::setup_fluid_load_info_for_solid_elements<ELEMENT,2>
@@ -1912,14 +1851,10 @@ AirwayReopeningProblem<ELEMENT>::AirwayReopeningProblem()
 
  build_global_mesh();
 
- OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
-
 
  // Connect the upper mesh
  connect_walls(Lower_wall_mesh_pt,upper_wall_pt,
                Global_Physical_Variables::upper_map);
-
- OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
 
  connect_walls(Upper_wall_mesh_pt,lower_wall_pt,
                Global_Physical_Variables::lower_map);
@@ -2000,9 +1935,7 @@ AirwayReopeningProblem<ELEMENT>::AirwayReopeningProblem()
      }
    }
  }
-
- OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
-
+  
  //Loop over the lower wall
  {
   unsigned b=0;
@@ -2034,8 +1967,6 @@ AirwayReopeningProblem<ELEMENT>::AirwayReopeningProblem()
    }
  }
 
- OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
-
  //Parallel, uniform outflow on boundaries 3 and 5
  for (unsigned ibound=3;ibound<=5;ibound+=2)
   {
@@ -2047,9 +1978,6 @@ AirwayReopeningProblem<ELEMENT>::AirwayReopeningProblem()
      Bulk_mesh_pt->boundary_node_pt(ibound,inod)->set_value(1, 0.0);
     }
   }
- 
- OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
- 
 
  //Loop over the elements in the layer
  unsigned long n_bulk=Bulk_mesh_pt->nbulk();
@@ -2065,8 +1993,6 @@ AirwayReopeningProblem<ELEMENT>::AirwayReopeningProblem()
    el_pt->g_pt() = &Global_Physical_Variables::G;
   }
 
- OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
- 
  //Loop over 1D interface elements and set capillary number
  unsigned interface_element_pt_range = Bulk_mesh_pt->ninterface_element();
  for(unsigned i=0;i<interface_element_pt_range;i++)
@@ -2087,11 +2013,9 @@ AirwayReopeningProblem<ELEMENT>::AirwayReopeningProblem()
     {el_pt->hijack_nodal_value(el_pt->nnode()-1,0);}
   }
 
-  OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
-
-  // Loop over the traction elements
-  unsigned n_traction = Gravity_traction_element_pt.size();
-  for (unsigned e = 0; e < n_traction; e++)
+ //Loop over the traction elements
+ unsigned n_traction = Gravity_traction_element_pt.size();
+ for(unsigned e=0;e<n_traction;e++)
   {
    //Cast to the traction element
    SpineGravityTractionElement<ELEMENT>* el_pt = 
@@ -2103,23 +2027,18 @@ AirwayReopeningProblem<ELEMENT>::AirwayReopeningProblem()
    el_pt->g_pt() = &Global_Physical_Variables::G;
   }
 
-  OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
+ //Do equation numbering
+ cout << "Number of unknowns: " << assign_eqn_numbers() << std::endl; 
 
-  // Do equation numbering
-  cout << "Number of unknowns: " << assign_eqn_numbers() << std::endl;
-
-  OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
-
-  // Sort the elements if using the frontal solver
-  // If this is not done, it's very slow indeed
-  // If it is done, then it's very fast compared to SuperLU
-  if (Frontal_solver)
+ //Sort the elements if using the frontal solver
+ //If this is not done, it's very slow indeed
+ //If it is done, then it's very fast compared to SuperLU
+ if(Frontal_solver)
   {
    std::sort(mesh_pt()->element_pt().begin(),
              mesh_pt()->element_pt().end(),
              ElementCmp());
   }
-  OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
 }
 
 //========================================================================
@@ -2280,14 +2199,10 @@ void AirwayReopeningProblem<ELEMENT>::parameter_study(const unsigned& nsteps,
     }
    cout << "Bubble pressure is " << Bubble_pressure_data_pt->value(0) << std::endl;
 
-   OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
-
    // Doc solution
    doc_info.number()++;
    doc_solution(doc_info);
-
-   OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
-
+   
    //Dump if we're solving a real problem
    if(step > 1)
     {
@@ -2302,11 +2217,9 @@ void AirwayReopeningProblem<ELEMENT>::parameter_study(const unsigned& nsteps,
      dumpstream.close();
      cout << "Actual flux is " << get_outlet_flux() << std::endl;
     }
-
-    OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
-
-    // First time round, unpin things
-    if (step == 1)
+   
+   //First time round, unpin things
+   if(step==1)
     {
      change_boundary_conditions();
      flux = Flux_constraint_pt->read_flux();
@@ -2337,7 +2250,6 @@ void AirwayReopeningProblem<ELEMENT>::parameter_study(const unsigned& nsteps,
         }
       }
     }
-    OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
   }
 }
 
@@ -2349,13 +2261,9 @@ void AirwayReopeningProblem<ELEMENT>::parameter_study(const unsigned& nsteps,
 //======================================================================
 int main(int argc, char* argv[]) 
 {
-  OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
-
   // Store command line arguments
  CommandLineArgs::setup(argc,argv);
 
- OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
- 
  // Set physical parameters:
  using namespace Global_Physical_Variables;
  
@@ -2382,18 +2290,12 @@ int main(int argc, char* argv[])
  // The value of sigma0
  T = 100.0*Gamma/H;
 
- OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
-
  //Set up the problem
  AirwayReopeningProblem<Hijacked<SpineElement<QCrouzeixRaviartElement<2> > > > 
   problem;
 
- OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
-
  // Self test:
  problem.self_test();
-
- OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
 
  // Number of steps: 
  unsigned nstep;
@@ -2408,11 +2310,7 @@ int main(int argc, char* argv[])
    nstep=200;
   }
 
-  OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("here!");
-
-  // Run the parameter study: Perform nstep steps
-  problem.parameter_study(nstep, false);
-
-  OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE("finished!");
+ // Run the parameter study: Perform nstep steps
+ problem.parameter_study(nstep,false);
 }
 
