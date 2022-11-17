@@ -13,7 +13,7 @@ oomph_add_executable(
   NAME axisym_fvk
   SOURCES axisym_fvk.cc
   LIBRARIES oomph::axisym_foeppl_von_karman
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

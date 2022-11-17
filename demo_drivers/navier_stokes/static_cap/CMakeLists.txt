@@ -14,14 +14,14 @@ oomph_add_executable(
   SOURCES static_single_layer.cc
   LIBRARIES oomph::navier_stokes oomph::fluid_interface oomph::solid
             oomph::constitutive
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME static_two_layer
   SOURCES static_two_layer.cc
   LIBRARIES oomph::navier_stokes oomph::fluid_interface oomph::solid
             oomph::constitutive
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

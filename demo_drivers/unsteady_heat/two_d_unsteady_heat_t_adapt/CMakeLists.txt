@@ -13,7 +13,7 @@ oomph_add_executable(
   NAME two_d_unsteady_heat_t_adapt
   SOURCES two_d_unsteady_heat_t_adapt.cc
   LIBRARIES oomph::unsteady_heat
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

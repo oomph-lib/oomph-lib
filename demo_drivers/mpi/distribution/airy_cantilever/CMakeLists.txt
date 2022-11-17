@@ -14,7 +14,7 @@ oomph_add_executable(
   SOURCES airy_cantilever2.cc
   LIBRARIES oomph::solid oomph::constitutive
   CXX_DEFINITIONS REFINE
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

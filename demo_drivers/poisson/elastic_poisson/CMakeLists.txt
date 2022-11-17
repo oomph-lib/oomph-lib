@@ -13,7 +13,7 @@ oomph_add_executable(
   NAME elastic_poisson
   SOURCES elastic_poisson.cc
   LIBRARIES oomph::poisson
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

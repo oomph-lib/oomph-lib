@@ -14,13 +14,13 @@ if(HAVE_ARPACK_SOURCES)
     NAME harmonic
     SOURCES harmonic.cc
     LIBRARIES oomph::generic
-    CXX_STANDARD 14)
+    CXX_STANDARD 17)
 
   oomph_add_executable(
     NAME complex_harmonic
     SOURCES complex_harmonic.cc
     LIBRARIES oomph::generic
-    CXX_STANDARD 14)
+    CXX_STANDARD 17)
 endif()
 
 # ---------------------------------- TESTING ----------------------------------

@@ -13,13 +13,13 @@ oomph_add_executable(
   NAME two_d_unsteady_heat
   SOURCES two_d_unsteady_heat.cc
   LIBRARIES oomph::unsteady_heat
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME two_d_unsteady_heat_restarted
   SOURCES two_d_unsteady_heat_restarted.cc
   LIBRARIES oomph::unsteady_heat
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

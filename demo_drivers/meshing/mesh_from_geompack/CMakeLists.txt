@@ -12,14 +12,14 @@ include(CTest)
 oomph_add_executable(
   NAME convert_geom_file
   SOURCES convert_geom_file.cc
-  CXX_STANDARD 14
+  CXX_STANDARD 17
   SILENCE_NO_LIBS_SUPPLIED_WARNING)
 
 oomph_add_executable(
   NAME mesh_from_geompack_poisson
   SOURCES mesh_from_geompack_poisson.cc
   LIBRARIES oomph::poisson
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

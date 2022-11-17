@@ -14,20 +14,20 @@ oomph_add_executable(
   SOURCES elastic_two_layer_interface.cc
   LIBRARIES oomph::navier_stokes oomph::fluid_interface oomph::solid
             oomph::constitutive
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME spine_two_layer_interface
   SOURCES spine_two_layer_interface.cc
   LIBRARIES oomph::navier_stokes oomph::fluid_interface
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME refineable_two_layer_interface
   SOURCES refineable_two_layer_interface.cc
   LIBRARIES oomph::navier_stokes oomph::fluid_interface oomph::solid
             oomph::constitutive
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

@@ -13,7 +13,7 @@ oomph_add_executable(
   NAME two_d_biharmonic
   SOURCES two_d_biharmonic.cc
   LIBRARIES oomph::biharmonic
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

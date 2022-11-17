@@ -13,20 +13,20 @@ oomph_add_executable(
   NAME airy_cantilever
   SOURCES airy_cantilever.cc
   LIBRARIES oomph::solid oomph::constitutive
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME airy_cantilever2_adapt
   SOURCES airy_cantilever2.cc
   LIBRARIES oomph::solid oomph::constitutive
   CXX_DEFINITIONS REFINE
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME airy_cantilever2_noadapt
   SOURCES airy_cantilever2.cc
   LIBRARIES oomph::solid oomph::constitutive
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

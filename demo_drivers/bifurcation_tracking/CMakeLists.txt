@@ -13,49 +13,49 @@ oomph_add_executable(
   NAME adaptive_hopf
   SOURCES adaptive_hopf.cc
   LIBRARIES oomph::navier_stokes
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME adaptive_hopf_with_separate_meshes
   SOURCES adaptive_hopf_with_separate_meshes.cc
   LIBRARIES oomph::linearised_navier_stokes oomph::navier_stokes
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME adaptive_pitchfork
   SOURCES adaptive_pitchfork.cc
   LIBRARIES oomph::navier_stokes
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME fold
   SOURCES fold.cc
   LIBRARIES oomph::generic
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME hopf
   SOURCES hopf.cc
   LIBRARIES oomph::generic
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME periodic_orbit
   SOURCES periodic_orbit.cc
   LIBRARIES oomph::generic
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME pitchfork
   SOURCES pitchfork.cc
   LIBRARIES oomph::generic
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME track_pitch
   SOURCES track_pitch.cc
   LIBRARIES oomph::axisym_navier_stokes
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

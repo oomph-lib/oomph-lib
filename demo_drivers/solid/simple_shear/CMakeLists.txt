@@ -18,13 +18,13 @@ oomph_add_executable(
   NAME simple_shear
   SOURCES simple_shear.cc
   LIBRARIES oomph::solid oomph::constitutive oomph::generic precompiled_mesh
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME refineable_simple_shear
   SOURCES refineable_simple_shear.cc
   LIBRARIES oomph::solid oomph::constitutive oomph::generic precompiled_mesh
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

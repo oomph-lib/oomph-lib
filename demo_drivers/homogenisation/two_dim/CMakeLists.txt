@@ -15,7 +15,7 @@ oomph_add_executable(
           Thomo_lin_elasticity_elements.h Thomo_lin_elasticity_elements.cc
           two_dim.cc
   LIBRARIES oomph::linear_elasticity
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME two_dim_hex
@@ -23,7 +23,7 @@ oomph_add_executable(
           Thomo_lin_elasticity_elements.h Thomo_lin_elasticity_elements.cc
           two_dim_hex.cc
   LIBRARIES oomph::linear_elasticity
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

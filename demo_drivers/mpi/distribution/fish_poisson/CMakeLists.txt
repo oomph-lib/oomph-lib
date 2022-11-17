@@ -13,7 +13,7 @@ oomph_add_executable(
   NAME fish_poisson
   SOURCES fish_poisson.cc
   LIBRARIES oomph::poisson
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

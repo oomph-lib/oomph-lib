@@ -13,7 +13,7 @@ oomph_add_executable(
   NAME steady_axisym_advection_diffusion
   SOURCES steady_axisym_advection_diffusion.cc
   LIBRARIES oomph::steady_axisym_advection_diffusion
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

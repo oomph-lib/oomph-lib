@@ -14,7 +14,7 @@ oomph_add_executable(
   SOURCES surfactant.cc
   LIBRARIES oomph::advection_diffusion oomph::navier_stokes oomph::multi_physics
             oomph::fluid_interface
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

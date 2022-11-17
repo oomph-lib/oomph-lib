@@ -14,14 +14,14 @@ oomph_add_executable(
   SOURCES pseudo_solid_collapsible_tube.cc
   LIBRARIES oomph::multi_physics oomph::navier_stokes oomph::solid
             oomph::constitutive
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME pseudo_solid_collapsible_tube_work
   SOURCES pseudo_solid_collapsible_tube_work.cc
   LIBRARIES oomph::multi_physics oomph::navier_stokes oomph::solid
             oomph::constitutive
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

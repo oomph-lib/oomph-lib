@@ -14,26 +14,26 @@ oomph_add_executable(
   SOURCES scattering.cc
   LIBRARIES oomph::helmholtz
   CXX_DEFINITIONS ADAPTIVE
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME adaptive_unstructured_scattering
   SOURCES unstructured_scattering.cc
   LIBRARIES oomph::helmholtz
   CXX_DEFINITIONS ADAPTIVE
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME scattering
   SOURCES scattering.cc
   LIBRARIES oomph::helmholtz
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME unstructured_scattering
   SOURCES unstructured_scattering.cc
   LIBRARIES oomph::helmholtz
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

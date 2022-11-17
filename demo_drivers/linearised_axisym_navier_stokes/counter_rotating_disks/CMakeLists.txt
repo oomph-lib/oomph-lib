@@ -14,14 +14,14 @@ oomph_add_executable(
   SOURCES ../self_starting_BDF2_timestepper.h counter_rotating_disks.cc
   LIBRARIES oomph::linearised_axisym_navier_stokes oomph::axisym_navier_stokes
             oomph::navier_stokes
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME counter_rotating_disks_ref
   SOURCES ../self_starting_BDF2_timestepper.h counter_rotating_disks_ref.cc
   LIBRARIES oomph::linearised_axisym_navier_stokes oomph::axisym_navier_stokes
             oomph::navier_stokes
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

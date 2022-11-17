@@ -15,7 +15,7 @@ oomph_add_executable(
   LIBRARIES oomph::generalised_newtonian_navier_stokes oomph::navier_stokes
             oomph::solid oomph::constitutive oomph::fluid_interface
             oomph::rigid_body
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

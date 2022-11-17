@@ -13,7 +13,7 @@ oomph_add_executable(
   NAME steady_third_ring
   SOURCES steady_third_ring.cc
   LIBRARIES oomph::beam
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

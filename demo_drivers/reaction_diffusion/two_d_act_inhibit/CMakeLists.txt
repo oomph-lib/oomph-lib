@@ -13,7 +13,7 @@ oomph_add_executable(
   NAME two_d_act_inhibit
   SOURCES two_d_act_inhibit.cc
   LIBRARIES oomph::advection_diffusion_reaction
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

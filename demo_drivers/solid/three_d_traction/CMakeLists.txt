@@ -13,14 +13,14 @@ oomph_add_executable(
   NAME three_d_traction
   SOURCES three_d_traction.cc
   LIBRARIES oomph::solid oomph::constitutive
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME three_d_traction_non_adapt
   SOURCES three_d_traction.cc
   LIBRARIES oomph::solid oomph::constitutive
   CXX_DEFINITIONS NOREFINE
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

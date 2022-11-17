@@ -13,14 +13,14 @@ oomph_add_executable(
   NAME three_d_cantilever
   SOURCES three_d_cantilever.cc
   LIBRARIES oomph::solid oomph::constitutive
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME three_d_cantilever_adapt
   SOURCES three_d_cantilever.cc
   LIBRARIES oomph::solid oomph::constitutive
   CXX_DEFINITIONS REFINE
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

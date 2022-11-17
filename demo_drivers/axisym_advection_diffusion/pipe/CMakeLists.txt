@@ -13,13 +13,13 @@ oomph_add_executable(
   NAME pipe
   SOURCES pipe.cc
   LIBRARIES oomph::axisym_advection_diffusion
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME pipe_variable_diff
   SOURCES pipe_variable_diff.cc
   LIBRARIES oomph::axisym_advection_diffusion
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

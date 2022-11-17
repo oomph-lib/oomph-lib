@@ -13,27 +13,27 @@ oomph_add_executable(
   NAME mesh_from_triangle_navier_stokes
   SOURCES mesh_from_triangle_navier_stokes.cc
   LIBRARIES oomph::navier_stokes
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME mesh_from_triangle_navier_stokes_adapt
   SOURCES mesh_from_triangle_navier_stokes.cc
   LIBRARIES oomph::navier_stokes
   CXX_DEFINITIONS ADAPT
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME mesh_from_triangle_poisson
   SOURCES mesh_from_triangle_poisson.cc
   LIBRARIES oomph::poisson
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME mesh_from_triangle_poisson_adapt
   SOURCES mesh_from_triangle_poisson.cc
   LIBRARIES oomph::poisson
   CXX_DEFINITIONS ADAPT
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

@@ -13,13 +13,13 @@ oomph_add_executable(
   NAME pitchfork
   SOURCES pitchfork.cc
   LIBRARIES oomph::generic
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME track_pitch
   SOURCES track_pitch.cc
   LIBRARIES oomph::axisym_navier_stokes
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

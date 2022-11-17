@@ -14,7 +14,7 @@ if(OOMPH_HAS_HYPRE AND OOMPH_HAS_TRILINOS)
     NAME pseudo_solid_collapsible_tube
     SOURCES pseudo_solid_collapsible_tube.cc
     LIBRARIES oomph::multi_physics oomph::navier_stokes oomph::solid
-    CXX_STANDARD 14)
+    CXX_STANDARD 17)
 endif()
 
 # ---------------------------------- TESTING ----------------------------------

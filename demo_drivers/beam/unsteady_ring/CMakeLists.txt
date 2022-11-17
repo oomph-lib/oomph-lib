@@ -13,13 +13,13 @@ oomph_add_executable(
   NAME lin_unsteady_ring
   SOURCES lin_unsteady_ring.cc
   LIBRARIES oomph::beam
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME unsteady_ring
   SOURCES unsteady_ring.cc
   LIBRARIES oomph::beam
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

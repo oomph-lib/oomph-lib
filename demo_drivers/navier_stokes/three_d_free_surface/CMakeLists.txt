@@ -14,7 +14,7 @@ oomph_add_executable(
   SOURCES 3d_free_surface.cc
   LIBRARIES oomph::navier_stokes oomph::solid oomph::constitutive
             oomph::fluid_interface
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

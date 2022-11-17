@@ -15,7 +15,7 @@ oomph_add_executable(
   SOURCES two_layer_interface_nonaxisym_perturbations.cc
   LIBRARIES oomph::axisym_navier_stokes oomph::navier_stokes
             oomph::fluid_interface oomph::oomph_crbond_bessel
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

@@ -13,7 +13,7 @@ oomph_add_executable(
   NAME unstructured_adaptive_solid
   SOURCES unstructured_adaptive_solid.cc
   LIBRARIES oomph::solid oomph::constitutive
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

@@ -14,7 +14,7 @@ oomph_add_executable(
   SOURCES ../self_starting_BDF2_timestepper.h time_periodic_taylor_couette.cc
   LIBRARIES oomph::axisym_navier_stokes oomph::linearised_axisym_navier_stokes
             oomph::navier_stokes
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

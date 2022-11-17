@@ -14,7 +14,7 @@ if(OOMPH_HAS_TRILINOS)
     NAME harmonic
     SOURCES harmonic.cc
     LIBRARIES oomph::navier_stokes
-    CXX_STANDARD 14)
+    CXX_STANDARD 17)
 endif()
 
 # ---------------------------------- TESTING ----------------------------------

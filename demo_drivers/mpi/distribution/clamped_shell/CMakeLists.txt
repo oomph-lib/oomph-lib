@@ -13,7 +13,7 @@ oomph_add_executable(
   NAME clamped_shell_with_arclength_cont
   SOURCES clamped_shell_with_arclength_cont.cc
   LIBRARIES oomph::shell
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

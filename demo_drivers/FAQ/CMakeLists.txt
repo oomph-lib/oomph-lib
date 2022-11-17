@@ -12,14 +12,14 @@ include(CTest)
 oomph_add_executable(
   NAME broken_this_demo
   SOURCES broken_this_demo.cc
-  CXX_STANDARD 14
+  CXX_STANDARD 17
   SILENCE_NO_LIBS_SUPPLIED_WARNING)
 
 oomph_add_executable(
   NAME customising_output
   SOURCES customising_output.cc
   LIBRARIES oomph::poisson
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

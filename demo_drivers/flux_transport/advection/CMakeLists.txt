@@ -13,13 +13,13 @@ oomph_add_executable(
   NAME one_d_advection
   SOURCES one_d_advection.cc
   LIBRARIES oomph::flux_transport
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME two_d_advection
   SOURCES two_d_advection.cc
   LIBRARIES oomph::flux_transport
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

@@ -13,7 +13,7 @@ oomph_add_executable(
   NAME spherical_shell_convection
   SOURCES spherical_shell_convection.cc spherical_buoyant_navier_stokes.h
   LIBRARIES oomph::spherical_advection_diffusion oomph::spherical_navier_stokes
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

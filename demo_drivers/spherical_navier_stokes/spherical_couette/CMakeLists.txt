@@ -13,7 +13,7 @@ oomph_add_executable(
   NAME spherical_couette
   SOURCES spherical_couette.cc
   LIBRARIES oomph::spherical_navier_stokes
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

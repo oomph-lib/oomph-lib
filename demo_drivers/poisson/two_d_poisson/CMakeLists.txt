@@ -13,13 +13,13 @@ oomph_add_executable(
   NAME two_d_poisson
   SOURCES two_d_poisson.cc
   LIBRARIES oomph::poisson
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME two_d_poisson2
   SOURCES two_d_poisson2.cc
   LIBRARIES oomph::poisson
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # Do we have the hsl sources?
 set(CXX_DEFINITION)
@@ -32,7 +32,7 @@ oomph_add_executable(
   SOURCES two_d_poisson_compare_solvers.cc
   LIBRARIES oomph::poisson
   CXX_DEFINITIONS ${CXX_DEFINITION}
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

@@ -14,14 +14,14 @@ oomph_add_executable(
   SOURCES adaptive_bubble_in_channel.cc
   LIBRARIES oomph::solid oomph::constitutive oomph::navier_stokes
             oomph::fluid_interface
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME adaptive_drop_in_channel
   SOURCES adaptive_drop_in_channel.cc
   LIBRARIES oomph::solid oomph::constitutive oomph::navier_stokes
             oomph::fluid_interface
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

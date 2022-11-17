@@ -13,13 +13,13 @@ oomph_add_executable(
   NAME turek_flag
   SOURCES turek_flag.cc
   LIBRARIES oomph::solid oomph::constitutive oomph::navier_stokes
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME turek_flag_load_balance
   SOURCES turek_flag_load_balance.cc
   LIBRARIES oomph::solid oomph::constitutive oomph::navier_stokes
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

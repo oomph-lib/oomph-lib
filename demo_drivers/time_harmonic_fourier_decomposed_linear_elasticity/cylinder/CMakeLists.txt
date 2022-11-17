@@ -14,32 +14,32 @@ oomph_add_executable(
   SOURCES pressure_loaded_cylinder.cc
   LIBRARIES oomph::time_harmonic_fourier_decomposed_linear_elasticity
   CXX_DEFINITIONS ADAPTIVE
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME adaptive_unstructured_cylinder
   SOURCES unstructured_cylinder.cc
   LIBRARIES oomph::time_harmonic_fourier_decomposed_linear_elasticity
   CXX_DEFINITIONS ADAPTIVE
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME cylinder
   SOURCES cylinder.cc
   LIBRARIES oomph::time_harmonic_fourier_decomposed_linear_elasticity
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME pressure_loaded_cylinder
   SOURCES pressure_loaded_cylinder.cc
   LIBRARIES oomph::time_harmonic_fourier_decomposed_linear_elasticity
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME unstructured_cylinder
   SOURCES unstructured_cylinder.cc
   LIBRARIES oomph::time_harmonic_fourier_decomposed_linear_elasticity
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

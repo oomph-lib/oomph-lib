@@ -14,7 +14,7 @@ oomph_add_executable(
   SOURCES fsi_channel_with_leaflet_precond.cc
   LIBRARIES oomph::multi_physics oomph::beam oomph::navier_stokes
             oomph::constitutive oomph::solid
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

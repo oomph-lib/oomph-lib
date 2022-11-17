@@ -13,56 +13,56 @@ oomph_add_executable(
   NAME algebraic_free_boundary_poisson
   SOURCES algebraic_free_boundary_poisson.cc circle_as_generalised_element.h
   LIBRARIES oomph::poisson oomph::constitutive
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME circle
   SOURCES circle.cc circle.h
   LIBRARIES oomph::generic
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME doc_sparse_macro_node_update
   SOURCES doc_sparse_macro_node_update.cc
   LIBRARIES oomph::poisson
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME elastic_poisson
   SOURCES elastic_poisson.cc circle_as_generalised_element.h
   LIBRARIES oomph::poisson oomph::solid oomph::constitutive
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME free_boundary_poisson_with_elastic_mesh_update
   SOURCES elastic_mesh_update.cc
   LIBRARIES oomph::poisson oomph::solid oomph::constitutive
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME geom_object_element
   SOURCES geom_object_element.cc circle_as_generalised_element.h
   LIBRARIES oomph::generic
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME macro_element_free_boundary_poisson
   SOURCES macro_element_free_boundary_poisson.cc circle_as_generalised_element.h
   LIBRARIES oomph::poisson
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME macro_element_free_boundary_poisson_non_ref
   SOURCES macro_element_free_boundary_poisson_non_ref.cc
           circle_as_generalised_element.h
   LIBRARIES oomph::poisson
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME old_macro_element_free_boundary_poisson_for_doc
   SOURCES old_for_doc.cc circle_as_generalised_element.h
   LIBRARIES oomph::poisson
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

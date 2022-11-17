@@ -14,13 +14,13 @@ oomph_add_executable(
   SOURCES helmholtz_point_source.cc
   LIBRARIES oomph::helmholtz
   CXX_DEFINITIONS ADAPTIVE
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME helmholtz_point_source
   SOURCES helmholtz_point_source.cc
   LIBRARIES oomph::helmholtz
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

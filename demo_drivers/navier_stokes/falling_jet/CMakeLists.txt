@@ -14,7 +14,7 @@ oomph_add_executable(
   SOURCES falling_jet.cc
   LIBRARIES oomph::navier_stokes oomph::fluid_interface oomph::constitutive
             oomph::solid
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

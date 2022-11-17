@@ -14,14 +14,14 @@ oomph_add_executable(
   SOURCES marangoni_convection.cc
   LIBRARIES oomph::advection_diffusion oomph::navier_stokes
             oomph::fluid_interface oomph::multi_physics
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME marangoni_convection_box
   SOURCES marangoni_convection_box.cc
   LIBRARIES oomph::advection_diffusion oomph::navier_stokes oomph::multi_physics
             oomph::fluid_interface
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

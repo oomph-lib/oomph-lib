@@ -13,31 +13,31 @@ oomph_add_executable(
   NAME couette
   SOURCES couette.cc
   LIBRARIES oomph::flux_transport
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME ff_step
   SOURCES ff_step.cc
   LIBRARIES oomph::flux_transport
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME one_d_euler
   SOURCES one_d_euler.cc
   LIBRARIES oomph::flux_transport
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME ramp
   SOURCES ramp.cc
   LIBRARIES oomph::flux_transport
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME two_d_euler
   SOURCES two_d_euler.cc
   LIBRARIES oomph::flux_transport
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

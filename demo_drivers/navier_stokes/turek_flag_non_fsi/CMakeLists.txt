@@ -13,14 +13,14 @@ oomph_add_executable(
   NAME turek_flag_non_fsi_alg
   SOURCES turek_flag_non_fsi.cc
   LIBRARIES oomph::navier_stokes
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME turek_flag_non_fsi_macro
   SOURCES turek_flag_non_fsi.cc
   LIBRARIES oomph::navier_stokes
   CXX_DEFINITIONS USE_MACRO_ELEMENTS
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

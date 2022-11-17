@@ -14,7 +14,7 @@ oomph_add_executable(
   NAME test_spdlog
   SOURCES test_spdlog.cc
   LIBRARIES spdlog::spdlog
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

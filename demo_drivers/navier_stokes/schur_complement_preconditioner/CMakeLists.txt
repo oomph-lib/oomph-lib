@@ -13,13 +13,13 @@ oomph_add_executable(
   NAME three_d_fp
   SOURCES three_d_fp.cc
   LIBRARIES oomph::navier_stokes
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME two_d_fp
   SOURCES two_d_fp.cc
   LIBRARIES oomph::navier_stokes
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

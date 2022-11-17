@@ -13,7 +13,7 @@ oomph_add_executable(
   NAME oscillating_shell
   SOURCES oscillating_shell.cc
   LIBRARIES oomph::shell
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

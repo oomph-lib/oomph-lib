@@ -14,7 +14,7 @@ if(HAVE_ARPACK_SOURCES)
     NAME orr_sommerfeld
     SOURCES orr_sommerfeld.cc
     LIBRARIES oomph::generic
-    CXX_STANDARD 14)
+    CXX_STANDARD 17)
 endif()
 
 # ---------------------------------- TESTING ----------------------------------

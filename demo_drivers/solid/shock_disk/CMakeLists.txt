@@ -13,7 +13,7 @@ oomph_add_executable(
   NAME shock_disk
   SOURCES shock_disk.cc
   LIBRARIES oomph::solid oomph::constitutive
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

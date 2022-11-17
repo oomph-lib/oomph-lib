@@ -13,14 +13,14 @@ oomph_add_executable(
   NAME three_d_prescribed_displ_lagr_mult
   SOURCES three_d_prescribed_displ_lagr_mult.cc
   LIBRARIES oomph::solid oomph::constitutive
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME three_d_prescribed_displ_lagr_mult_non_adapt
   SOURCES three_d_prescribed_displ_lagr_mult.cc
   LIBRARIES oomph::solid oomph::constitutive
   CXX_DEFINITIONS NOREFINE
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

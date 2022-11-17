@@ -13,7 +13,7 @@ oomph_add_executable(
   NAME steady_rot
   SOURCES steady_rot.cc
   LIBRARIES oomph::spherical_navier_stokes
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

@@ -13,25 +13,25 @@ oomph_add_executable(
   NAME two_d_poisson_tanh_flux_bc
   SOURCES two_d_poisson_tanh_flux_bc.cc
   LIBRARIES oomph::poisson
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME two_d_poisson_tanh_flux_bc_validate
   SOURCES two_d_poisson_tanh_flux_bc_validate.cc
   LIBRARIES oomph::poisson
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME unit_cube_poisson
   SOURCES unit_cube_poisson.cc
   LIBRARIES oomph::poisson
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME unit_cube_poisson_validate
   SOURCES unit_cube_poisson_validate.cc
   LIBRARIES oomph::poisson
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

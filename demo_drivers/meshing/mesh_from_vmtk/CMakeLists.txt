@@ -13,7 +13,7 @@ oomph_add_executable(
   NAME create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh
   SOURCES create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh.cc
   LIBRARIES oomph::navier_stokes
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # Symlink built mesh to scripts directory
 set(NAME create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh)

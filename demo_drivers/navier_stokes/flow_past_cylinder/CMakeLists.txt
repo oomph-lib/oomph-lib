@@ -13,7 +13,7 @@ oomph_add_executable(
   NAME flow_past_cylinder
   SOURCES flow_past_cylinder.cc
   LIBRARIES oomph::navier_stokes
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

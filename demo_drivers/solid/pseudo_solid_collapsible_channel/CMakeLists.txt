@@ -13,7 +13,7 @@ oomph_add_executable(
   NAME pseudo_solid_collapsible_channel
   SOURCES pseudo_solid_collapsible_channel.cc
   LIBRARIES oomph::navier_stokes oomph::solid oomph::constitutive
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

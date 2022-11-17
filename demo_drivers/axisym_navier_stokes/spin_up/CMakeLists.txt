@@ -13,7 +13,7 @@ oomph_add_executable(
   NAME spin_up
   SOURCES spin_up.cc
   LIBRARIES oomph::axisym_navier_stokes oomph::navier_stokes
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

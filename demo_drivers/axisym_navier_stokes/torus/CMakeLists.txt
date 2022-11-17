@@ -13,7 +13,7 @@ oomph_add_executable(
   NAME torus
   SOURCES torus.cc
   LIBRARIES oomph::navier_stokes oomph::axisym_navier_stokes
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

@@ -14,7 +14,7 @@ oomph_add_executable(
   SOURCES c_style_output.cc
   LIBRARIES oomph::unsteady_heat oomph::navier_stokes oomph::poisson oomph::beam
             oomph::solid oomph::constitutive
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

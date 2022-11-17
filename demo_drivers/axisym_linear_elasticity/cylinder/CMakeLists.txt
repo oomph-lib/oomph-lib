@@ -13,7 +13,7 @@ oomph_add_executable(
   NAME cylinder
   SOURCES cylinder.cc
   LIBRARIES oomph::axisym_linear_elasticity
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

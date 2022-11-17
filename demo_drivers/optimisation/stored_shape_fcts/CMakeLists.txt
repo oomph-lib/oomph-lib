@@ -13,7 +13,7 @@ oomph_add_executable(
   NAME two_d_poisson_stored_shape_fcts
   SOURCES two_d_poisson_stored_shape_fcts.cc
   LIBRARIES oomph::poisson
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

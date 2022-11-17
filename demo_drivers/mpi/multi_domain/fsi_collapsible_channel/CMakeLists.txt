@@ -13,14 +13,14 @@ oomph_add_executable(
   NAME fsi_collapsible_channel_adapt
   SOURCES fsi_collapsible_channel_adapt.cc
   LIBRARIES oomph::beam oomph::navier_stokes
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME fsi_collapsible_channel_macro_adapt
   SOURCES fsi_collapsible_channel_adapt.cc
   LIBRARIES oomph::beam oomph::navier_stokes
   CXX_DEFINITIONS MACRO_ELEMENT_NODE_UPDATE
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

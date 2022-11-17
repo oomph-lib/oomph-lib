@@ -14,7 +14,7 @@ oomph_add_executable(
   SOURCES non_isothermal_axisym_nst_elements.h thermal_fibre.cc
   LIBRARIES oomph::axisym_navier_stokes oomph::fluid_interface
             oomph::steady_axisym_advection_diffusion
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

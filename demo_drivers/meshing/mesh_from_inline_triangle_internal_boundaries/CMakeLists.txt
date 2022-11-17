@@ -14,13 +14,13 @@ oomph_add_executable(
   NAME mesh_from_inline_triangle_internal_boundaries
   SOURCES mesh_from_inline_triangle_internal_boundaries.cc
   LIBRARIES oomph::poisson
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME mesh_from_inline_triangle_internal_boundaries_extra
   SOURCES mesh_from_inline_triangle_internal_boundaries_extra.cc
   LIBRARIES oomph::poisson
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

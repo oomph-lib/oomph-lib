@@ -13,7 +13,7 @@ oomph_add_executable(
   NAME two_d_adv_diff_flux_bc
   SOURCES two_d_adv_diff_flux_bc.cc
   LIBRARIES oomph::advection_diffusion
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

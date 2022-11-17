@@ -14,21 +14,21 @@ oomph_add_executable(
   SOURCES test_mixed_order_galerkin_petrov.cc
   LIBRARIES oomph::space_time_unsteady_heat_mixed_order_galerkin_petrov
             oomph::space_time_block_preconditioner
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME test_equal_order_galerkin_petrov
   SOURCES test_equal_order_galerkin_petrov.cc
   LIBRARIES oomph::space_time_unsteady_heat_equal_order_galerkin_petrov
             oomph::space_time_block_preconditioner
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME test_equal_order_galerkin
   SOURCES test_equal_order_galerkin.cc
   LIBRARIES oomph::space_time_unsteady_heat_equal_order_galerkin
             oomph::space_time_block_preconditioner
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

@@ -13,25 +13,25 @@ oomph_add_executable(
   NAME refineable_spin_up
   SOURCES refineable_spin_up.cc
   LIBRARIES oomph::spherical_navier_stokes
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME refineable_spin_up_cyl
   SOURCES refineable_spin_up_cyl.cc
   LIBRARIES oomph::axisym_navier_stokes
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME spin_up
   SOURCES spin_up.cc
   LIBRARIES oomph::spherical_navier_stokes
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME spin_up_cyl
   SOURCES spin_up_cyl.cc
   LIBRARIES oomph::axisym_navier_stokes
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

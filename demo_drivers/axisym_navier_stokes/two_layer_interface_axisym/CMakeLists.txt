@@ -14,14 +14,14 @@ oomph_add_executable(
   SOURCES elastic_two_layer_interface_axisym.cc
   LIBRARIES oomph::axisym_navier_stokes oomph::navier_stokes
             oomph::fluid_interface oomph::solid oomph::constitutive
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME spine_two_layer_interface_axisym
   SOURCES spine_two_layer_interface_axisym.cc
   LIBRARIES oomph::axisym_navier_stokes oomph::navier_stokes
             oomph::fluid_interface
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

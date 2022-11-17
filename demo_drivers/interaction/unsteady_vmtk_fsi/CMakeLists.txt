@@ -14,7 +14,7 @@ oomph_add_executable(
   SOURCES unsteady_vmtk_fsi.cc
   LIBRARIES oomph::solid oomph::constitutive oomph::navier_stokes oomph::poisson
             oomph::linear_elasticity
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

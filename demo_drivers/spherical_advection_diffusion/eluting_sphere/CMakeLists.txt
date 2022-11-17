@@ -13,13 +13,13 @@ oomph_add_executable(
   NAME eluting_sphere
   SOURCES eluting_sphere.cc
   LIBRARIES oomph::spherical_advection_diffusion
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME eluting_sphere_adapt
   SOURCES eluting_sphere_adapt.cc
   LIBRARIES oomph::spherical_advection_diffusion
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

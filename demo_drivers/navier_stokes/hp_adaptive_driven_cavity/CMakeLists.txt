@@ -13,13 +13,13 @@ oomph_add_executable(
   NAME circular_driven_cavity_hp_adapt
   SOURCES circular_driven_cavity_hp_adapt.cc
   LIBRARIES oomph::navier_stokes
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME hp_adaptive_driven_cavity
   SOURCES hp_adaptive_driven_cavity.cc
   LIBRARIES oomph::navier_stokes
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

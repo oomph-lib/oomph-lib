@@ -19,7 +19,7 @@ oomph_add_executable(
           jh_includes.h
           polar_streamfunction_traction_elements.h
   LIBRARIES oomph::polar_navier_stokes
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

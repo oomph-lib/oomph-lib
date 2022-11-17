@@ -13,7 +13,7 @@ oomph_add_executable(
   NAME vmtk_solid
   SOURCES vmtk_solid.cc
   LIBRARIES oomph::solid oomph::constitutive
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

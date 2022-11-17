@@ -13,13 +13,13 @@ oomph_add_executable(
   NAME two_d_adv_diff_adapt
   SOURCES two_d_adv_diff_adapt.cc
   LIBRARIES oomph::advection_diffusion
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME two_d_adv_diff_adapt2
   SOURCES two_d_adv_diff_adapt2.cc
   LIBRARIES oomph::advection_diffusion
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

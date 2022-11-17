@@ -13,7 +13,7 @@ oomph_add_executable(
   NAME rayleigh_instability
   SOURCES rayleigh_instability.cc
   LIBRARIES oomph::axisym_navier_stokes oomph::fluid_interface
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

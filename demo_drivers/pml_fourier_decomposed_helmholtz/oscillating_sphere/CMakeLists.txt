@@ -14,13 +14,13 @@ oomph_add_executable(
   SOURCES oscillating_sphere.cc
   LIBRARIES oomph::pml_fourier_decomposed_helmholtz
   CXX_DEFINITIONS ADAPTIVE
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME oscillating_sphere
   SOURCES oscillating_sphere.cc
   LIBRARIES oomph::pml_fourier_decomposed_helmholtz
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

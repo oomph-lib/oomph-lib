@@ -13,7 +13,7 @@ oomph_add_executable(
   NAME two_d_tilted_square
   SOURCES two_d_tilted_square.cc
   LIBRARIES oomph::navier_stokes
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

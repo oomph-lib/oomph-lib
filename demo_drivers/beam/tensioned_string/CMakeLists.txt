@@ -13,7 +13,7 @@ oomph_add_executable(
   NAME tensioned_string
   SOURCES tensioned_string.cc
   LIBRARIES oomph::beam
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

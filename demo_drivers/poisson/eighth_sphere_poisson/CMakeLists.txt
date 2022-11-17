@@ -13,7 +13,7 @@ oomph_add_executable(
   NAME eighth_sphere_poisson
   SOURCES eighth_sphere_poisson.cc
   LIBRARIES oomph::poisson
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

@@ -13,13 +13,13 @@ oomph_add_executable(
   NAME two_d_linear_wave
   SOURCES two_d_linear_wave.cc
   LIBRARIES oomph::linear_wave
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 oomph_add_executable(
   NAME two_d_linear_wave_flux
   SOURCES two_d_linear_wave_flux.cc
   LIBRARIES oomph::linear_wave
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 

@@ -14,7 +14,7 @@ oomph_add_executable(
   NAME test_nlohmann_json
   SOURCES test_nlohmann_json.cc
   LIBRARIES nlohmann_json::nlohmann_json
-  CXX_STANDARD 14)
+  CXX_STANDARD 17)
 
 # ---------------------------------- TESTING ----------------------------------
 
