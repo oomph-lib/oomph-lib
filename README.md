@@ -431,7 +431,7 @@ oomph_add_executable(NAME one_d_poisson
 
 You may wish to provide additional information to the build of your executable. A few notable options provided by this function are
 
-- `CXX_STANDARD`: The C++ standard. The only arguments we currently allow are 11, 14, or 17 (corresponding to C++11, C++14, and C++17, respectively). By default, we adopt the C++14 standard for programs provided with the library. Specifying a more modern standard may result in unexpected consequences. Don't say we didn't warn you!
+- `CXX_STANDARD`: The C++ standard. The only arguments we currently allow are 11, 14, or 17 (corresponding to C++11, C++14, and C++17, respectively). By default, we adopt the C++17 standard for programs provided with the library. Specifying a more modern standard may result in unexpected consequences. Don't say we didn't warn you!
 - `CXX_OPTIONS`: Compiler flags (e.g. `-Wall`, `-O3`). However, this is likely to only affect your executable and not the library.
 - `CXX_DEFINITIONS`: Preprocessor definition(s). Arguments to this keyword do not require a `-D` prefix; CMake will automatically prepend it for you.
 
@@ -446,7 +446,7 @@ oomph_add_executable(NAME one_d_poisson
                      CXX_DEFINITIONS REFINEABLE)
 ```
 
-If you are comfortable with CMake and feel the `oomph_add_executable()` command does not provide the flexibility that you required, you wish to specify your own executable using the standard CMake functions. If so, you will need to make that you add the compile definitions in `OOMPH_COMPILE_DEFINITIONS` to the target, e.g.
+If you are comfortable with CMake and feel the `oomph_add_executable()` command does not provide the flexibility that you require, you may wish to specify your own executable using the standard CMake functions. If so, you will need to make sure that you add the compile definitions in `OOMPH_COMPILE_DEFINITIONS` to the target, e.g.
 
 ```cmake
 add_executable(<target-name> <source-1> ... <source-N>)
