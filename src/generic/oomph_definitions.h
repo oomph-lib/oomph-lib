@@ -87,6 +87,13 @@ namespace oomph
 
 #endif
 
+// Helper macro to throw an oomph-lib error
+#define OOMPH_ERROR(msg) \
+  throw OomphLibError(msg, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+
+// Helper macro to provide an oomph-lib warning
+#define OOMPH_WARNING(msg) \
+  OomphLibWarning(msg, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
 
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////

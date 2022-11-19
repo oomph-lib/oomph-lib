@@ -117,17 +117,15 @@ namespace oomph
                                     const std::string& message,
                                     const bool& shorten = false,
                                     const bool& start_on_new_line = true);
-  } // namespace DebugHelpers
 
-#define OOMPH_PRINT_DEBUG_STRING() \
-  printf( \
-    "%s\n", \
-    DebugHelpers::debug_string(__FILE__, __LINE__, "", false, true).c_str())
-
-#define OOMPH_PRINT_DEBUG_STRING_WITH_MESSAGE(msg) \
+    // NOTE: Although we define the OOMPH_DEBUG macro inside DebugHelpers but it
+    // has global visibility because it's a macro.
+#define OOMPH_DEBUG(msg) \
   printf( \
     "%s", \
-    DebugHelpers::debug_string(__FILE__, __LINE__, msg, false, true).c_str())
+    DebugHelpers::debug_string(__FILE__, __LINE__, msg, false, true).c_str());
+
+  } // namespace DebugHelpers
 
   // Forward declaration needed for second invariant helper
   template<class TYPE>
