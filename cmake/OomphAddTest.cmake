@@ -128,6 +128,7 @@ function(oomph_add_test)
     list(APPEND TEST_BYPRODUCTS "${CMAKE_CURRENT_BINARY_DIR}/${REQUIREMENT}")
   endforeach()
 
+  # ----------------------------------------------------------------------------
   # Declare a copy_... target to copy the required files to the build directory
   add_custom_target(copy_${PATH_HASH} WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
 
@@ -161,7 +162,9 @@ function(oomph_add_test)
   # Identify the files that we'll copy as by-products so that they can be
   # cleaned up by running "make clean" if the user uses Makefile Generators
   add_custom_command(TARGET copy_${PATH_HASH} BYPRODUCTS ${TEST_BYPRODUCTS})
+  # ----------------------------------------------------------------------------
 
+  # ----------------------------------------------------------------------------
   # Create a target to build the targets we're going to test with validate.sh.
   # We need to build from the top-level build directory as this is where the
   # Makefile/build.ninja file (which contains the build recipes) lives
@@ -175,6 +178,18 @@ function(oomph_add_test)
       COMMAND ${CMAKE_MAKE_PROGRAM} ${TARGET_DEPENDENCY}_${PATH_HASH}
       WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
   endforeach()
+  # ----------------------------------------------------------------------------
+
+  # ----------------------------------------------------------------------------
+  # Create a target to wipe the Validation/ directory if it exists
+  add_custom_target(clean_validation_dir_${PATH_HASH}
+                    WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
+
+  add_custom_command(
+    TARGET clean_validation_dir_${PATH_HASH}
+    COMMAND rm -rf "${CMAKE_CURRENT_BINARY_DIR}/Validation"
+    WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
+  # ----------------------------------------------------------------------------
 
   # Command-line arguments for validate.sh. We can't run fpdiff.py if we don't
   # have Python
@@ -201,6 +216,7 @@ function(oomph_add_test)
   # FIXME: If we move away from validate.sh scripts, we need to run executables
   # with our own mpirun command if needed
 
+  # ----------------------------------------------------------------------------
   # Run the dependencies to copy the test data, build the (sub)project(s)
   # targets then run the validate.sh script and pass the location of the
   # oomph-lib root directory so they have access to the scripts they require,
@@ -214,6 +230,7 @@ function(oomph_add_test)
               ${EXTRA_VALIDATE_SH_ARGS}
       WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
       DEPENDS copy_${PATH_HASH} build_targets_${PATH_HASH}
+              clean_validation_dir_${PATH_HASH}
       VERBATIM)
   else()
     # Run all of the dependent targets and then append the validation.log output
@@ -231,8 +248,10 @@ function(oomph_add_test)
               "${OOMPH_ROOT_DIR}/validation.log"
       WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
       DEPENDS copy_${PATH_HASH} build_targets_${PATH_HASH}
+              clean_validation_dir_${PATH_HASH}
       VERBATIM)
   endif()
+  # ----------------------------------------------------------------------------
 
   # Create a test target that depends on the check_${PATH_HASH} target. When the
   # user runs "ninja <TEST-NAME>", it will cause the test dependencies to get
@@ -243,7 +262,8 @@ function(oomph_add_test)
   # to run the validate.sh script too...
   add_custom_target(${TEST_NAME})
   # add_dependencies(${TEST_NAME} check_${PATH_HASH})
-  add_dependencies(${TEST_NAME} copy_${PATH_HASH} build_targets_${PATH_HASH})
+  add_dependencies(${TEST_NAME} copy_${PATH_HASH} build_targets_${PATH_HASH}
+                   clean_validation_dir_${PATH_HASH})
 
   # Create the test to be run by CTest. When we run the test, it will call, e.g.
   # 'ninja check_...' which will call the 'check_...' target defined above. As
