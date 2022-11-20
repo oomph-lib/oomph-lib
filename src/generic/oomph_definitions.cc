@@ -210,6 +210,13 @@ namespace oomph
     }
     (*Exception_stringstream_pt) << std::endl << std::endl;
 
+    // If a Problem object hasn't been constructed yet then
+    // TerminateHelper::setup() will likely not have been called and the
+    // TerminateHelper::Exception_stringstream_pt will be a null pointer.
+    // If so, we should call TerminateHelper::setup() ourselves.
+    if (TerminateHelper::Exception_stringstream_pt == nullptr)
+      TerminateHelper::setup();
+
     // Copy message to stream in terminate helper in case the message
     // doesn't get caught and/or doesn/t make it to the destructor
     (*TerminateHelper::Exception_stringstream_pt)
