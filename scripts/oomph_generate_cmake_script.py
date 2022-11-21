@@ -42,7 +42,7 @@ def create_cmakelists_file(directory: str,
           len(makefile_data["targets_info"])):
 
         # Add the preamble
-        cmake_script += f"cmake_minimum_required(VERSION 3.24 FATAL_ERROR)\n"
+        cmake_script += f"cmake_minimum_required(VERSION 3.22 FATAL_ERROR)\n"
         cmake_script += f"project({directory} C CXX Fortran)\n"
         cmake_script += f"find_package(oomphlib REQUIRED)\n\n"
 

@@ -130,7 +130,7 @@ Windows          | No
 
 ### CMake
 
-To build this project, you will need CMake 3.24+. You can install `cmake` via your native package manager, e.g. `sudo apt-get install cmake` or `brew install cmake`. If your package manager does not provide a recent enough version of `cmake`, you will need to build it from source. You can find instructions on how to do this below and on the [CMake website](https://cmake.org/install/).
+To build this project, you will need CMake 3.22+. You can install `cmake` via your native package manager, e.g. `sudo apt-get install cmake` or `brew install cmake`. If your package manager does not provide a recent enough version of `cmake`, you will need to build it from source. You can find instructions on how to do this below and on the [CMake website](https://cmake.org/install/).
 
 #### Ubuntu
 
@@ -138,7 +138,7 @@ For Linux, CMake provides an installer script to help you download and install C
 
 ```bash
 # Pick version and installation location
-CMAKE_VERSION=3.24.0
+CMAKE_VERSION=3.22.1
 CMAKE_DEST_DIR=~/.cmake-${CMAKE_VERSION}
 
 # Download installer script and run
@@ -156,46 +156,7 @@ To accommodate both Intel-based and Arm-based Macs, CMake provides a "universal 
 
 ```bash
 # Pick version and download location
-CMAKE_VERSION=3.24.0
-CMAKE_DEST_DIR=~/.cmake-${CMAKE_VERSION}
-
-# Download package and move to desired location
-wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-macos-universal.tar.gz
-tar xvfz cmake-${CMAKE_VERSION}-macos-universal.tar.gz
-mv cmake-${CMAKE_VERSION}-macos-universal ${CMAKE_DEST_DIR}
-rm -f cmake-${CMAKE_VERSION}-macos-universal.tar.gz
-
-# Update environment
-export PATH=~/${CMAKE_DEST_DIR}/CMake.app/Contents/bin:${PATH}
-```
-
-**Remark:** To make the changes to the `$PATH` variable permanent, add the `export PATH` commands to the end of your shell start-up script, e.g. `.bashrc` or `.zshrc`.
-
-#### Ubuntu
-
-For Linux, CMake provides an installer script to help you download and install CMake:
-
-```bash
-# Pick version and installation location
-CMAKE_VERSION=3.24.0
-CMAKE_DEST_DIR=~/.cmake-${CMAKE_VERSION}
-
-# Download installer script and run
-mkdir ${CMAKE_DEST_DIR}
-wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-linux-x86_64.sh -O cmake.sh
-bash cmake.sh --prefix=${CMAKE_DEST_DIR} --exclude-subdir
-
-# Update environment
-export PATH=${CMAKE_DEST_DIR}/bin:$PATH
-```
-
-#### macOS
-
-To accommodate both Intel-based and Arm-based Macs, CMake provides a "universal binary". To download CMake via this approach, use the following commands:
-
-```bash
-# Pick version and download location
-CMAKE_VERSION=3.24.0
+CMAKE_VERSION=3.22.1
 CMAKE_DEST_DIR=~/.cmake-${CMAKE_VERSION}
 
 # Download package and move to desired location
@@ -252,7 +213,7 @@ After the configure step, a `build/` directory will appear with several files in
 
 If you would prefer to use the Unix Makefile generator (not recommended), repeat the above steps but omit the `-G Ninja` argument.
 
-**Tip:** If you wish to do a clean build of the library, you can either delete the `build/` directory or run the initial `cmake` command with the `--fresh` flag.
+**NOTE:** If you wish to do a clean build of the library, you can delete the `build/` directory. If you have already installed the library, we recommend that you first run `ninja uninstall` inside the `build/` directory.
 
 **TODO:** *Add note on out-of-source builds here*.
 
