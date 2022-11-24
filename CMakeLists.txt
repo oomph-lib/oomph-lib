@@ -60,15 +60,16 @@ endif()
 # install to the install/ subdirectory. However, if the user builds with the
 # flag -DENABLE_INSTALL_AS_SUPERUSER=ON to force us to use the default system
 # install path
-if(ENABLE_INSTALL_AS_SUPERUSER)
-  message(STATUS "Will install to: ${CMAKE_INSTALL_PREFIX}")
-elseif(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+if((NOT ENABLE_INSTALL_AS_SUPERUSER)
+   AND (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT))
   set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/install" CACHE PATH
       "Default installation path" FORCE)
   message(
     STATUS
       "Overriding default installation location. Will install to: ${CMAKE_INSTALL_PREFIX}"
   )
+else()
+  message(STATUS "Will install to: ${CMAKE_INSTALL_PREFIX}")
 endif()
 
 # Sort out config files
