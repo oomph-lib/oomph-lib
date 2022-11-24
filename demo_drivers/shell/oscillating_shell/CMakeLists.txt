@@ -5,7 +5,7 @@ message(VERBOSE "Entered oscillating_shell subdirectory")
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(oscillating_shell C CXX Fortran)
 if(NOT BUILD_DEMO_DRIVERS_WITH_LIBRARY)
-  find_package(oomphlib REQUIRED)
+  find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
 

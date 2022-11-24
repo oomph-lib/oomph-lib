@@ -5,7 +5,7 @@ message(VERBOSE "Entered pseudo_solid_collapsible_tube subdirectory")
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(pseudo_solid_collapsible_tube C CXX Fortran)
 if(NOT BUILD_DEMO_DRIVERS_WITH_LIBRARY)
-  find_package(oomphlib REQUIRED)
+  find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
 

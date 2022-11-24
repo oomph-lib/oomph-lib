@@ -5,7 +5,7 @@ message(VERBOSE "Entered time_periodic_taylor_couette subdirectory")
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(time_periodic_taylor_couette C CXX Fortran)
 if(NOT BUILD_DEMO_DRIVERS_WITH_LIBRARY)
-  find_package(oomphlib REQUIRED)
+  find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
 
