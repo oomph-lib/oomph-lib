@@ -72,9 +72,9 @@
     </table>
 </div>
 
-## Table of contents
+<!-- Use <h2> tags to omit heading from table of contents -->
+<h2>Table of contents</h2>
 
-- [Table of contents](#table-of-contents)
 - [Description](#description)
 - [Compatibility](#compatibility)
 - [Prerequisites](#prerequisites)
@@ -86,10 +86,12 @@
   - [pre-commit](#pre-commit)
 - [Usage](#usage)
   - [Building and installing](#building-and-installing)
+    - [Doing a fresh rebuild](#doing-a-fresh-rebuild)
     - [Specifying a custom installation location](#specifying-a-custom-installation-location)
-  - [Uninstalling](#uninstalling)
+    - [Building dependent projects](#building-dependent-projects)
   - [Build options](#build-options)
   - [CMake Presets](#cmake-presets)
+    - [`CMakePresets.json`](#cmakepresetsjson)
     - [`CMakeUserPresets.json` example](#cmakeuserpresetsjson-example)
   - [Examples/testing](#examplestesting)
     - [Filtering by label](#filtering-by-label)
@@ -99,7 +101,9 @@
     - [Disabling a test](#disabling-a-test)
   - [Development](#development)
     - [Customising targets](#customising-targets)
+- [To be documented](#to-be-documented)
 - [A deeper dive into the build system](#a-deeper-dive-into-the-build-system)
+- [FAQ](#faq)
 - [Helpful CMake resources](#helpful-cmake-resources)
 - [Community](#community)
 
@@ -209,17 +213,26 @@ To configure, build and install the project using Ninja (recommended), `cd` into
 >>> cmake --install build     # Install
 ```
 
-After the configure step, a `build/` directory will appear with several files in it. During the build step, the individual libraries of `oomph-lib` will be built. Finally, during the install step the headers and generated library files will be installed to the user's system paths (as well as several other files).
+After the configure step, a `build/` directory will appear with several files in it. During the build step, the individual libraries of `oomph-lib` will be built. Finally, during the install step the headers and generated library files will be installed to the `install/` subdirectory of this project. **It is important to be aware of this design choice as it affects how you use the `oomph-lib` library. For more details, see [Building `oomphlib`-dependent projects](#building-oomphlib-dependent-projects).**
 
-If you would prefer to use the Unix Makefile generator (not recommended), repeat the above steps but omit the `-G Ninja` argument.
+If you would prefer to build `oomph-lib` using the Unix Makefile generator (not recommended), repeat the above steps but omit the `-G Ninja` argument.
 
-**NOTE:** If you wish to do a clean build of the library, you can delete the `build/` directory. If you have already installed the library, we recommend that you first run `ninja uninstall` inside the `build/` directory.
+To uninstall the project, run the following:
 
-**TODO:** *Add note on out-of-source builds here*.
+```bash
+>>> cd build
+>>> ninja uninstall   # replace "ninja" with "make" if you used a Makefile generator
+```
+
+If you no longer require any of the build files, you can also delete the `build/` directory.
+
+#### Doing a fresh rebuild
+
+If you wish to do a clean build of the library, you should first uninstall any files that have been installed (refer to the steps above). Once that is done, either delete the `CMakeCache.txt` file inside the `build/` folder or delete the entire `build/` directory itself. Finally, to build `oomph-lib` again, rerun the commands shown at the start of [Building and installing](#building-and-installing).
 
 #### Specifying a custom installation location
 
-By default, `oomph-lib` will be installed to `/usr/local/` on Unix systems. To specify a custom installation location, pass `--install-prefix=<install-location>` to `cmake` during the configure step. For example
+By default, `oomph-lib` will be installed to the `install/` subdirectory of the root `oomph-lib` folder. To specify a different installation location, pass `--install-prefix=<install-location>` to `cmake` during the configure step. For example
 
 ```bash
 >>> cmake -G Ninja -B build --install-prefix=~/oomph_install  # Configure and generate build system
@@ -227,56 +240,78 @@ By default, `oomph-lib` will be installed to `/usr/local/` on Unix systems. To s
 >>> cmake --install build                                     # Install
 ```
 
-**Note:** `<install-location>` **must(!)** be an absolute path.
+**Important:** `<install-location>` **must(!)** be an absolute path.
 
-**Recommendation:** Do not specify a non-standard installation location if you have superuser rights on your machine. When you try to build a project that calls `find_package(oomphlib ...)` (e.g. `demo_drivers`), CMake will check the default system paths for the `oomph-lib` installation. If the library is installed to a non-standard location, CMake will not be able to find it. As a result, you will either need to pass the location of the installation to `cmake` using one of the following options:
+#### Building dependent projects
 
-1. Specify the `CMAKE_PREFIX_PATH` variable (every time you try to configure a separate subproject!), or
-2. You will need to add the location of the installation to your environment `PATH` variable:
+Recall from [Building and installing](#building-and-installing) that we do not try to install to the user's system paths by default. This choice affects how other projects can consume `oomph-lib`. When trying to configure a CMake project that depends on `oomph-lib`, CMake will check the default system paths for the `oomph-lib` installation. If the library is installed to a non-standard location, i.e. somewhere not in your `PATH` environment variable, CMake will not be able to find it. To get around this issue, you have three choices:
 
-```bash
-# Build and install the main library
->>> cmake --install-prefix=~/oomph_install -G Ninja -B build
->>> cmake --build build
->>> cmake --install build
+1. Install `oomph-lib` as a superuser:
 
-# Jump to demo_driver directory
->>> cd demo_drivers/
+    ```bash
+    >>> cmake -G Ninja -B build -DENABLE_INSTALL_AS_SUPERUSER=ON  # Configure
+    >>> cmake --build build                                       # Build
+    >>> sudo cmake --install build                                # Install with superuser rights
+    ```
 
-# Build the demo drivers
+    Here, the `-DENABLE_INSTALL_AS_SUPERUSER` flag indicates to CMake that you do not wish it to override the default installation location (to make it install to `install/`). It is only during the install step that you will actually need to use `sudo`.
 
-# Option 1: Specify the installation location
->>> cmake -G Ninja -B build -DCMAKE_PREFIX_PATH=~/oomph_install
+    When you later wish to uninstall the library, you may need to use `sudo` again, e.g.
 
-# Option 2: Update the PATH environment variable
->>> export PATH="$PATH:~/oomph_install"
-```
+    ```bash
+    cd build/
+    sudo ninja uninstall
+    ```
 
-**Remark:** When you invoke `cmake`, you can specify important variables with flags of the form `-D<variable-name>` or `-D <variable-name>`. These variables are called "cache" variables and take precedence over regular variables and can be use to enable/disable options during the project configuration.
+    Now when you try to build a project dependent on `oomph-lib`, CMake will be able to find it without any additional help.
 
-### Uninstalling
+2. Specify the `CMAKE_PREFIX_PATH` variable every time you try to configure a separate subproject:
 
-To uninstall the project, enter the `build` folder, uninstall the installed project files and delete the build folder using the following
+    ```bash
+    # Configure, build and install the library
+    >>> cmake -G Ninja -B build --install-prefix=~/oomph_install
+    >>> cmake --build build
+    >>> cmake --install build
 
-```bash
->>> cd build
->>> ninja uninstall   # replace ninja with make if using Makefile generator
->>> cd ..
->>> rm -rf build
-```
+    # Now try to build a project that depends on oomph-lib
+    >>> cd ~/some_project_dependent_on_oomphlib/
+    >>> cmake -G Ninja -B build -DCMAKE_PREFIX_PATH=~/oomph_install
+    ```
+
+3. Add the location of the installation to your `PATH` environment variable:
+
+    ```bash
+    # Configure, build and install the library
+    >>> cmake -G Ninja -B build --install-prefix=~/oomph_install
+    >>> cmake --build build
+    >>> cmake --install build
+
+    # Update the PATH environment variable
+    # NOTE: This change is only temporary. To make it permanent, add the line below to your .bashrc
+    >>> export PATH="$PATH:~/oomph_install"
+
+    # Now try to build a project that depends on oomph-lib
+    >>> cd ~/some_project_dependent_on_oomphlib/
+    >>> cmake -G Ninja -B build -DCMAKE_PREFIX_PATH=~/oomph_install
+    ```
+
+    If you use this approach, you should install `oomph-lib` to some location outside of your `oomph-lib` folder; if you use the default installation location and move your `oomph-lib` folder, you will have to update your `PATH` variable to reflect that change.
+
+**Remark:** When you invoke `cmake`, you can specify important variables with flags of the form `-D<variable>=<value>`. These variables are called "cache" variables and take precedence over regular variables and can be used to enable/disable options and other key features during the project configuration.
 
 ### Build options
 
-You can customise your build by passing flags of the form `-D<FLAG>` to `cmake` during the configuration/generation step. For reference, the table below contains a list of key options that the user can control.
+You can customise your build by passing flags of the form `-D<FLAG>` to `cmake` during the configuration/generation step. For reference, the table below contains a list of options that the user can control. (Note that the build and installation steps will remain the same.)
 
-Specifying these flags from the command-line can be cumbersome and you may forget what options you used to previously build the project. For this reason, we recommend that you create your own `CMakeUserPresets.json` file, as described in [CMake Presets](#cmake-presets).
+Specifying these flags from the command-line can be cumbersome and you may forget which options you used to previously build the project. For this reason, we recommend that you create your own `CMakeUserPresets.json` file, as described in [CMake Presets](#cmake-presets).
 
 **TODO: Discuss desired/not desired options with MH.**
 
 Option                                    | Description                                                                    | Default
 ------------------------------------------|--------------------------------------------------------------------------------|--------
 `CMAKE_BUILD_TYPE`                        | The build type (e.g. `Debug`, `Release`, `RelWithDebInfo` or `MinSizeRel`)     | `Debug`
-`BUILD_SHARED_LIBS`                       | Build using shared libraries; static otherwise                                 | OFF
+`BUILD_SHARED_LIBS`                       | Build using shared libraries; static otherwise  **["SHARED" DOESN'T WORK!]**   | OFF
+`BUILD_SHARED_LIBS`                       | Build using shared libraries; static otherwise  **["SHARED" DOESN'T WORK!]**   | OFF
 `OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY`   | Build tests with library build                                                 | OFF
 `OOMPH_DONT_SILENCE_USELESS_WARNINGS`     | Display (harmless) warnings from external_src/ and src/ that are silenced      | OFF
 `OOMPH_ENABLE_MPI`                        | Enable the use of MPI for parallel processing                                  | OFF
@@ -301,9 +336,19 @@ Option                                    | Description                         
 
 **Work in progress!**
 
-We provide a generic `CMakePresets.json` file in the root directory of the project. We recommend that you can write your own `CMakeUserPresets.json` file.
+#### `CMakePresets.json`
 
-For details on CMake presets refer to the [CMake documentation](https://cmake.org/cmake/help/latest/manual/cmake-presets.7.html).
+We provide a generic `CMakePresets.json` file in the root directory of the project. To list the available presets, run
+
+```bash
+cmake --preset list
+```
+
+We recommend that you can write your own `CMakeUserPresets.json` file. You can inherit your presets from the presets we provide in `CMakePresets.json`. For details on how to do this refer to the [CMake documentation](https://cmake.org/cmake/help/latest/manual/cmake-presets.7.html).
+
+**Remark:** We recommend that you do not use the Ninja Multi-Config generator yet.
+
+**FIXME:** Sort out the clean-up for the multi-config generator. The install manifest doesn't specify the debug config lib files. Hmm...
 
 #### `CMakeUserPresets.json` example
 
@@ -444,16 +489,6 @@ oomph_add_test(TEST_NAME poisson.one_d_poisson ...)
 set_tests_properties(poisson.one_d_poisson PROPERTIES DISABLED YES)
 ```
 
-**In progress**:
-
-- [ ] Document CTest usages:
-  - [ ] Reading output of failed tests: `cat build/Testing/Temporary/LastTest.log`
-  - [ ] List of failed tests: `cat build/Testing/Temporary/LastTestsFailed.log`
-  - [ ] Repeat failed test and log output: `--rerun-failed --output-on-failure`
-  - [ ] Disable test: `set_tests_properties(<test-name> PROPERTIES DISABLED YES)`
-  - [ ] Demand MPI programs to run in serial: `set_tests_properties(FooWithBar PROPERTIES RUN_SERIAL)`
-  - [ ] Note that in all cases here, if you specify the target name, you must rememeber to append the SHA1 path hash.
-
 ### Development
 
 To define your own executable that uses the `oomph-lib` library, you will first
@@ -472,7 +507,6 @@ oomph_add_executable(NAME one_d_poisson
 
 You may wish to provide additional information to the build of your executable. A few notable options provided by this function are
 
-- `CXX_STANDARD`: The C++ standard. The only arguments we currently allow are 11, 14, or 17 (corresponding to C++11, C++14, and C++17, respectively). By default, we adopt the C++17 standard for programs provided with the library. Specifying a more modern standard may result in unexpected consequences. Don't say we didn't warn you!
 - `CXX_OPTIONS`: Compiler flags (e.g. `-Wall`, `-O3`). However, this is likely to only affect your executable and not the library.
 - `CXX_DEFINITIONS`: Preprocessor definition(s). Arguments to this keyword do not require a `-D` prefix; CMake will automatically prepend it for you.
 
@@ -482,7 +516,6 @@ For example
 oomph_add_executable(NAME one_d_poisson
                      SOURCES one_d_poisson.cc
                      LIBRARIES oomph::poisson
-                     CXX_STANDARD 11
                      CXX_OPTIONS -Wall -Werror
                      CXX_DEFINITIONS REFINEABLE)
 ```
@@ -491,6 +524,7 @@ If you are comfortable with CMake and feel the `oomph_add_executable()` command 
 
 ```cmake
 add_executable(<target-name> <source-1> ... <source-N>)
+target_compile_features(<target-name> INTERFACE cxx_std_17)
 target_link_libraries(<target-name> PRIVATE oomph::poisson)
 target_compile_definitions(<target-name> ${OOMPH_COMPILE_DEFINITIONS})
 ```
@@ -516,6 +550,20 @@ set(HASHED_TARGET_NAME <executable-name>_${PATH_HASH})  # Append hash
 **Note:** You do not need to append the path hash to test names as, unlike
 targets, CMake allows tests to share the same name.
 
+## To be documented
+
+**In progress**:
+
+- [ ] Document CTest usages:
+  - [ ] Reading output of failed tests: `cat build/Testing/Temporary/LastTest.log`
+  - [ ] List of failed tests: `cat build/Testing/Temporary/LastTestsFailed.log`
+  - [ ] Repeat failed test and log output: `--rerun-failed --output-on-failure`
+  - [ ] Disable test: `set_tests_properties(<test-name> PROPERTIES DISABLED YES)`
+  - [ ] Demand MPI programs to run in serial: `set_tests_properties(FooWithBar PROPERTIES RUN_SERIAL)`
+  - [ ] Note that in all cases here, if you specify the target name, you must rememeber to append the SHA1 path hash.
+- [ ] The general workflow:
+  - [ ] Creating your own drivers (in e.g. `private/`)
+
 ## A deeper dive into the build system
 
 **Work in progress.**
@@ -534,6 +582,10 @@ To describe:
 - [ ] ...
 - [ ] `OomphInstallLibrary.cmake`
 - [ ] External libraries...
+
+## FAQ
+
+<!-- Fill this in... -->
 
 ## Helpful CMake resources
 
