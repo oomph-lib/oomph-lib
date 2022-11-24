@@ -11,13 +11,17 @@
 #                          LIBRARIES        <required-libraries>
 #                          [CXX_DEFINITIONS <preprocessor-definitions>]
 #                          [CXX_OPTIONS     <compiler-options>]
-#                          [CXX_STANDARD    <11|14|17>]
+#                          [CXX_STANDARD    <17|20>]
 #                          [SILENCE_NO_LIBS_SUPPLIED_WARNING])
 #
 # NOTE: It is slightly unusual for the user to not provide any libraries to link
 # against but not insane. Just incase the user made a mistake, we'll issue a
 # warning and if they're sure they don't want to link against any libraries,
 # they can silence the warning with the flag SILENCE_NO_LIBS_SUPPLIED_WARNING.
+#
+# PM: Strictly speaking, you (the user) should not specify the CXX_STANDARD;
+# it is likely to lead to issues down the road. I've kept it here for debugging
+# purposes for now. Will probably delete it further down the road...
 #
 # Example:
 #
@@ -26,7 +30,6 @@
 #                          LIBRARIES oomph::poisson
 #                          CXX_DEFINITIONS REFINEABLE
 #                          CXX_OPTIONS -Wall -Werror
-#                          CXX_STANDARD 11
 #                          SILENCE_NO_LIBS_SUPPLIED_WARNING)
 #
 # It is worth noting that the argument supplied to CXX_DEFINITIONS does not
@@ -83,11 +86,11 @@ function(oomph_add_executable)
           ")
     endif()
   elseif(CXX_STANDARD)
-    set(ALLOWED_CMAKE_STANDARDS 11 14 17)
-    if(NOT CXX_STANDARD IN_LIST ALLOWED_CMAKE_STANDARDS)
+    set(SUPPORTED_CMAKE_STANDARDS 17 20)
+    if(NOT CXX_STANDARD IN_LIST SUPPORTED_CMAKE_STANDARDS)
       message(
         FATAL_ERROR
-          "Supplied invalid argument ${CXX_STANDARD} to CXX_STANDARD. Valid arguments: ${ALLOWED_CMAKE_STANDARDS}."
+          "Supplied invalid argument ${CXX_STANDARD} to CXX_STANDARD. Valid arguments: ${SUPPORTED_CMAKE_STANDARDS}."
       )
     endif()
   endif()
@@ -111,14 +114,6 @@ function(oomph_add_executable)
   # Specify the name of the executable that the user will see
   set_target_properties(${NAME}_${PATH_HASH} PROPERTIES OUTPUT_NAME ${NAME})
 
-  # ~~~
-  # If we want to place everything in a single directory
-  # # Make sure everything gets placed in bin subdirectory of the build/
-  # directory associated with the project being built
-  # set_target_properties(${NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY
-  #                                            "${CMAKE_BINARY_DIR}/bin")
-  # ~~~
-
   # Link to the specified libraries
   target_link_libraries(${NAME}_${PATH_HASH} PUBLIC ${LIBRARIES})
 
@@ -131,7 +126,7 @@ function(oomph_add_executable)
   if(CXX_STANDARD)
     target_compile_features(${NAME}_${PATH_HASH} PUBLIC cxx_std_${CXX_STANDARD})
   else()
-    target_compile_features(${NAME}_${PATH_HASH} PUBLIC cxx_std_11)
+    target_compile_features(${NAME}_${PATH_HASH} PUBLIC cxx_std_17)
   endif()
 
   # General oomph-lib specific compiler definitions
