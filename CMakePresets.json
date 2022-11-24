@@ -1,8 +1,8 @@
 {
-  "version": 5,
+  "version": 3,
   "cmakeMinimumRequired": {
     "major": 3,
-    "minor": 24,
+    "minor": 22,
     "patch": 0
   },
   "configurePresets": [
@@ -84,10 +84,10 @@
         "CMAKE_BUILD_TYPE": "Release",
         "OOMPH_ENABLE_USE_OPENBLAS": "ON",
         "OOMPH_ENABLE_MPI": "ON",
-        "OOMPH_WANT_NLOHMANN_JSON": "ON",
-        "OOMPH_WANT_SPDLOG": "ON",
-        "OOMPH_WANT_HYPRE": "ON",
-        "OOMPH_WANT_MUMPS": "ON"
+        "OOMPH_WANT_NLOHMANN_JSON": "OFF",
+        "OOMPH_WANT_SPDLOG": "OFF",
+        "OOMPH_WANT_HYPRE": "OFF",
+        "OOMPH_WANT_MUMPS": "OFF"
       }
     },
     {
@@ -146,11 +146,6 @@
       }
     },
     {
-      "name": "ci",
-      "configurePreset": "dummy",
-      "inherits": "test-base"
-    },
-    {
       "name": "release",
       "configurePreset": "release",
       "inherits": "test-base"
@@ -163,6 +158,11 @@
     {
       "name": "mpi",
       "configurePreset": "mpi",
+      "inherits": "test-base"
+    },
+    {
+      "name": "ci",
+      "configurePreset": "ci",
       "inherits": "test-base"
     }
   ]
