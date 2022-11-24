@@ -13,16 +13,14 @@ oomph_add_executable(
   NAME inclined_plane
   SOURCES inclined_plane.cc
   LIBRARIES oomph::navier_stokes oomph::fluid_interface oomph::solid
-            oomph::constitutive
-  CXX_STANDARD 17)
+            oomph::constitutive)
 
 oomph_add_executable(
   NAME inclined_plane2
   SOURCES inclined_plane.cc
   LIBRARIES oomph::navier_stokes oomph::fluid_interface oomph::solid
             oomph::constitutive
-  CXX_DEFINITIONS CR_ELEMENT
-  CXX_STANDARD 17)
+  CXX_DEFINITIONS CR_ELEMENT)
 
 # ---------------------------------- TESTING ----------------------------------
 

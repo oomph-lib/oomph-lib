@@ -12,8 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME one_d_act_inhibit
   SOURCES one_d_act_inhibit.cc
-  LIBRARIES oomph::advection_diffusion_reaction
-  CXX_STANDARD 17)
+  LIBRARIES oomph::advection_diffusion_reaction)
 
 # ---------------------------------- TESTING ----------------------------------
 

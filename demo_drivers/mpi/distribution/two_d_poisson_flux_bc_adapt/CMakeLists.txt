@@ -12,8 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME two_d_poisson_flux_bc_adapt
   SOURCES two_d_poisson_flux_bc_adapt.cc
-  LIBRARIES oomph::poisson
-  CXX_STANDARD 17)
+  LIBRARIES oomph::poisson)
 
 # ---------------------------------- TESTING ----------------------------------
 

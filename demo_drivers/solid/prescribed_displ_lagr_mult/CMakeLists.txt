@@ -12,21 +12,18 @@ include(CTest)
 oomph_add_executable(
   NAME prescribed_displ_lagr_mult
   SOURCES prescribed_displ_lagr_mult.cc
-  LIBRARIES oomph::solid oomph::constitutive
-  CXX_STANDARD 17)
+  LIBRARIES oomph::solid oomph::constitutive)
 
 oomph_add_executable(
   NAME prescribed_displ_lagr_mult2
   SOURCES prescribed_displ_lagr_mult2.cc
-  LIBRARIES oomph::solid oomph::constitutive
-  CXX_STANDARD 17)
+  LIBRARIES oomph::solid oomph::constitutive)
 
 oomph_add_executable(
   NAME prescribed_displ_lagr_mult_precond
   SOURCES prescribed_displ_lagr_mult_precond.cc
   LIBRARIES oomph::multi_physics oomph::solid oomph::constitutive
-            oomph::navier_stokes
-  CXX_STANDARD 17)
+            oomph::navier_stokes)
 
 # ---------------------------------- TESTING ----------------------------------
 

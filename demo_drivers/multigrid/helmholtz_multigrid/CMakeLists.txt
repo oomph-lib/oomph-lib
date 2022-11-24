@@ -12,14 +12,12 @@ include(CTest)
 oomph_add_executable(
   NAME structured_cubic_point_source
   SOURCES structured_cubic_point_source.cc
-  LIBRARIES oomph::pml_helmholtz
-  CXX_STANDARD 17)
+  LIBRARIES oomph::pml_helmholtz)
 
 oomph_add_executable(
   NAME unstructured_two_d_helmholtz
   SOURCES unstructured_two_d_helmholtz.cc
-  LIBRARIES oomph::pml_helmholtz
-  CXX_STANDARD 17)
+  LIBRARIES oomph::pml_helmholtz)
 
 # ---------------------------------- TESTING ----------------------------------
 

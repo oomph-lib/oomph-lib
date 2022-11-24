@@ -12,8 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME linearised_poroelastic_fsi_pulsewave
   SOURCES linearised_poroelastic_fsi_pulsewave.cc
-  LIBRARIES oomph::axisym_navier_stokes oomph::axisym_poroelasticity
-  CXX_STANDARD 17)
+  LIBRARIES oomph::axisym_navier_stokes oomph::axisym_poroelasticity)
 
 # ---------------------------------- TESTING ----------------------------------
 

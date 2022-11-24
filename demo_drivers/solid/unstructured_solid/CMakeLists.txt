@@ -12,14 +12,12 @@ include(CTest)
 oomph_add_executable(
   NAME unstructured_three_d_solid
   SOURCES unstructured_three_d_solid.cc
-  LIBRARIES oomph::solid oomph::constitutive
-  CXX_STANDARD 17)
+  LIBRARIES oomph::solid oomph::constitutive)
 
 oomph_add_executable(
   NAME unstructured_two_d_solid
   SOURCES unstructured_two_d_solid.cc
-  LIBRARIES oomph::solid oomph::constitutive
-  CXX_STANDARD 17)
+  LIBRARIES oomph::solid oomph::constitutive)
 
 # ---------------------------------- TESTING ----------------------------------
 

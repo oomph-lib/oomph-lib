@@ -12,96 +12,81 @@ include(CTest)
 oomph_add_executable(
   NAME circular_boulder_melt
   SOURCES circular_boulder_melt.cc
-  LIBRARIES oomph::unsteady_heat oomph::constitutive oomph::solid
-  CXX_STANDARD 17)
+  LIBRARIES oomph::unsteady_heat oomph::constitutive oomph::solid)
 
 oomph_add_executable(
   NAME circular_boulder_solar_radiation
   SOURCES circular_boulder_solar_radiation.cc
-  LIBRARIES oomph::unsteady_heat oomph::constitutive oomph::solid
-  CXX_STANDARD 17)
+  LIBRARIES oomph::unsteady_heat oomph::constitutive oomph::solid)
 
 oomph_add_executable(
   NAME heated_linear_solid_contact_with_gravity
   SOURCES heated_linear_solid_contact_with_gravity.cc contact_elements.h
   LIBRARIES oomph::unsteady_heat oomph::linear_elasticity oomph::constitutive
-            oomph::solid
-  CXX_STANDARD 17)
+            oomph::solid)
 
 oomph_add_executable(
   NAME linear_solid_contact_with_gravity_structured
   SOURCES linear_solid_contact_with_gravity.cc
   LIBRARIES oomph::linear_elasticity oomph::constitutive oomph::solid
-  CXX_DEFINITIONS STRUCTURED_MESH
-  CXX_STANDARD 17)
+  CXX_DEFINITIONS STRUCTURED_MESH)
 
 oomph_add_executable(
   NAME linear_solid_contact_with_gravity_unstructured
   SOURCES linear_solid_contact_with_gravity.cc
-  LIBRARIES oomph::linear_elasticity oomph::constitutive oomph::solid
-  CXX_STANDARD 17)
+  LIBRARIES oomph::linear_elasticity oomph::constitutive oomph::solid)
 
 oomph_add_executable(
   NAME melt
   SOURCES melt.cc heat_transfer_and_melt_elements.h
-  LIBRARIES oomph::constitutive oomph::solid oomph::unsteady_heat
-  CXX_STANDARD 17)
+  LIBRARIES oomph::constitutive oomph::solid oomph::unsteady_heat)
 
 oomph_add_executable(
   NAME pretend_melt
   SOURCES pretend_melt.cc unsteady_heat_flux_pseudo_melt_elements.h
-  LIBRARIES oomph::unsteady_heat
-  CXX_STANDARD 17)
+  LIBRARIES oomph::unsteady_heat)
 
 oomph_add_executable(
   NAME solid_contact
   SOURCES solid_contact.cc
-  LIBRARIES oomph::solid oomph::constitutive
-  CXX_STANDARD 17)
+  LIBRARIES oomph::solid oomph::constitutive)
 
 oomph_add_executable(
   NAME solid_contact_with_gravity_structured
   SOURCES solid_contact_with_gravity.cc contact_elements.h
   LIBRARIES oomph::constitutive oomph::solid
-  CXX_DEFINITIONS STRUCTURED_MESH
-  CXX_STANDARD 17)
+  CXX_DEFINITIONS STRUCTURED_MESH)
 
 oomph_add_executable(
   NAME solid_contact_with_gravity_unstructured
   SOURCES solid_contact_with_gravity.cc contact_elements.h
-  LIBRARIES oomph::constitutive oomph::solid
-  CXX_STANDARD 17)
+  LIBRARIES oomph::constitutive oomph::solid)
 
 oomph_add_executable(
   NAME spring_contact
   SOURCES spring_contact.cc
-  LIBRARIES oomph::generic
-  CXX_STANDARD 17)
+  LIBRARIES oomph::generic)
 
 oomph_add_executable(
   NAME spring_contact2
   SOURCES spring_contact2.cc
-  LIBRARIES oomph::generic
-  CXX_STANDARD 17)
+  LIBRARIES oomph::generic)
 
 oomph_add_executable(
   NAME stefan_boltzmann
   SOURCES stefan_boltzmann.cc temporary_stefan_boltzmann_elements.h
-  LIBRARIES oomph::constitutive oomph::solid oomph::unsteady_heat
-  CXX_STANDARD 17)
+  LIBRARIES oomph::constitutive oomph::solid oomph::unsteady_heat)
 
 oomph_add_executable(
   NAME stefan_boltzmann_melt
   SOURCES stefan_boltzmann_melt.cc heat_transfer_and_melt_elements.h
           temporary_stefan_boltzmann_elements.h
-  LIBRARIES oomph::constitutive oomph::solid oomph::unsteady_heat
-  CXX_STANDARD 17)
+  LIBRARIES oomph::constitutive oomph::solid oomph::unsteady_heat)
 
 oomph_add_executable(
   NAME two_d_unsteady_heat
   SOURCES two_d_unsteady_heat.cc
-  LIBRARIES oomph::unsteady_heat
-  CXX_STANDARD 17)
+  LIBRARIES oomph::unsteady_heat)
 
 # ---------------------------------- TESTING ----------------------------------
 

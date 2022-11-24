@@ -12,8 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME bretherton
   SOURCES bretherton.cc
-  LIBRARIES oomph::navier_stokes oomph::fluid_interface
-  CXX_STANDARD 17)
+  LIBRARIES oomph::navier_stokes oomph::fluid_interface)
 
 # ---------------------------------- TESTING ----------------------------------
 

@@ -13,14 +13,12 @@ oomph_add_executable(
   NAME snap_mesh
   SOURCES snap_mesh.cc
   LIBRARIES oomph::mesh_smoothing oomph::solid oomph::constitutive
-            oomph::navier_stokes oomph::poisson oomph::linear_elasticity
-  CXX_STANDARD 17)
+            oomph::navier_stokes oomph::poisson oomph::linear_elasticity)
 
 oomph_add_executable(
   NAME xda_to_poly_fsi
   SOURCES xda_to_poly_fsi.cc
-  LIBRARIES oomph::generic
-  CXX_STANDARD 17)
+  LIBRARIES oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

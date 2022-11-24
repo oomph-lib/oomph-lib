@@ -12,20 +12,17 @@ include(CTest)
 oomph_add_executable(
   NAME two_d_parallel_unstructured_adaptive_poisson
   SOURCES two_d_parallel_unstructured_adaptive_poisson.cc
-  LIBRARIES oomph::poisson oomph::rigid_body
-  CXX_STANDARD 17)
+  LIBRARIES oomph::poisson oomph::rigid_body)
 
 oomph_add_executable(
   NAME unstructured_adaptive_mesh_two_outer_boundaries
   SOURCES unstructured_adaptive_mesh_two_outer_boundaries.cc
-  LIBRARIES oomph::poisson oomph::rigid_body
-  CXX_STANDARD 17)
+  LIBRARIES oomph::poisson oomph::rigid_body)
 
 oomph_add_executable(
   NAME unstructured_adaptive_mesh_two_outer_boundaries_crossed
   SOURCES unstructured_adaptive_mesh_two_outer_boundaries_crossed.cc
-  LIBRARIES oomph::poisson oomph::rigid_body
-  CXX_STANDARD 17)
+  LIBRARIES oomph::poisson oomph::rigid_body)
 
 # ---------------------------------- TESTING ----------------------------------
 

@@ -12,37 +12,32 @@ include(CTest)
 oomph_add_executable(
   NAME geom_obj_with_boundary
   SOURCES geom_obj_with_boundary.cc
-  LIBRARIES oomph::generic
-  CXX_STANDARD 17)
+  LIBRARIES oomph::generic)
 
 if(OOMPH_HAS_CGAL)
   oomph_add_executable(
     NAME planar_facet_bounded_mesh_from_gmsh
     SOURCES simple_shear.cc tetmesh_faceted_surfaces.h
-    LIBRARIES oomph::poisson
-    CXX_STANDARD 17)
+    LIBRARIES oomph::poisson)
 
   oomph_add_executable(
     NAME planar_facet_bounded_mesh_from_tetgen
     SOURCES refineable_simple_shear.cc planar_facet_bounded_tetmesh.cc
             tetmesh_faceted_surfaces.h
     LIBRARIES oomph::poisson
-    CXX_DEFINITIONS DO_TETGEN
-    CXX_STANDARD 17)
+    CXX_DEFINITIONS DO_TETGEN)
 
   oomph_add_executable(
     NAME curved_facet_bounded_mesh_from_gmsh
     SOURCES refineable_simple_shear.cc tetmesh_faceted_surfaces.h
-    LIBRARIES oomph::poisson
-    CXX_STANDARD 17)
+    LIBRARIES oomph::poisson)
 
   oomph_add_executable(
     NAME curved_facet_bounded_mesh_from_tetgen
     SOURCES refineable_simple_shear.cc curved_facet_bounded_tetmesh.cc
             tetmesh_faceted_surfaces.h
     LIBRARIES oomph::poisson
-    CXX_DEFINITIONS DO_TETGEN
-    CXX_STANDARD 17)
+    CXX_DEFINITIONS DO_TETGEN)
 endif()
 
 # ---------------------------------- TESTING ----------------------------------

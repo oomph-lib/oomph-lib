@@ -12,8 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME unstructured_three_d_fsi
   SOURCES unstructured_three_d_fsi.cc
-  LIBRARIES oomph::solid oomph::constitutive oomph::navier_stokes
-  CXX_STANDARD 17)
+  LIBRARIES oomph::solid oomph::constitutive oomph::navier_stokes)
 
 # ---------------------------------- TESTING ----------------------------------
 

@@ -12,14 +12,12 @@ include(CTest)
 oomph_add_executable(
   NAME 3d_multimesh_ref_b_convect
   SOURCES 3d_multimesh_ref_b_convect.cc my_boussinesq_elements.h
-  LIBRARIES oomph::advection_diffusion oomph::navier_stokes
-  CXX_STANDARD 17)
+  LIBRARIES oomph::advection_diffusion oomph::navier_stokes)
 
 oomph_add_executable(
   NAME 3d_ref_b_convect
   SOURCES 3d_ref_b_convect.cc
-  LIBRARIES oomph::advection_diffusion oomph::navier_stokes
-  CXX_STANDARD 17)
+  LIBRARIES oomph::advection_diffusion oomph::navier_stokes)
 
 # ---------------------------------- TESTING ----------------------------------
 

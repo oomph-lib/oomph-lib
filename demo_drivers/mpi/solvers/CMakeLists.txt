@@ -12,39 +12,33 @@ include(CTest)
 oomph_add_executable(
   NAME driven_cavity
   SOURCES driven_cavity.cc
-  LIBRARIES oomph::navier_stokes
-  CXX_STANDARD 17)
+  LIBRARIES oomph::navier_stokes)
 
 oomph_add_executable(
   NAME direct_solver_test
   SOURCES direct_solver_test.cc
-  LIBRARIES oomph::poisson
-  CXX_STANDARD 17)
+  LIBRARIES oomph::poisson)
 
 oomph_add_executable(
   NAME airy_cantilever
   SOURCES airy_cantilever.cc
-  LIBRARIES oomph::solid oomph::constitutive
-  CXX_STANDARD 17)
+  LIBRARIES oomph::solid oomph::constitutive)
 
 oomph_add_executable(
   NAME fsi_channel_with_leaflet
   SOURCES fsi_channel_with_leaflet.cc
-  LIBRARIES oomph::beam oomph::navier_stokes oomph::generic
-  CXX_STANDARD 17)
+  LIBRARIES oomph::beam oomph::navier_stokes oomph::generic)
 
 if(OOMPH_HAS_TRILINOS)
   oomph_add_executable(
     NAME TrilinosSolver_test
     SOURCES TrilinosSolver_test.cc
-    LIBRARIES oomph::poisson
-    CXX_STANDARD 17)
+    LIBRARIES oomph::poisson)
 
   oomph_add_executable(
     NAME two_d_multi_poisson
     SOURCES two_d_multi_poisson.cc
-    LIBRARIES oomph::generic
-    CXX_STANDARD 17)
+    LIBRARIES oomph::generic)
 endif()
 
 # ---------------------------------- TESTING ----------------------------------

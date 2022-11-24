@@ -12,14 +12,12 @@ include(CTest)
 oomph_add_executable(
   NAME pitchfork
   SOURCES pitchfork.cc
-  LIBRARIES oomph::generic
-  CXX_STANDARD 17)
+  LIBRARIES oomph::generic)
 
 oomph_add_executable(
   NAME track_pitch
   SOURCES track_pitch.cc
-  LIBRARIES oomph::axisym_navier_stokes
-  CXX_STANDARD 17)
+  LIBRARIES oomph::axisym_navier_stokes)
 
 # ---------------------------------- TESTING ----------------------------------
 

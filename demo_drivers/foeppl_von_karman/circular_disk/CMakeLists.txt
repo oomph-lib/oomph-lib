@@ -12,8 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME circular_disk
   SOURCES circular_disk.cc
-  LIBRARIES oomph::foeppl_von_karman
-  CXX_STANDARD 17)
+  LIBRARIES oomph::foeppl_von_karman)
 
 # ---------------------------------- TESTING ----------------------------------
 

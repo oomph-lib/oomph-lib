@@ -12,14 +12,12 @@ include(CTest)
 oomph_add_executable(
   NAME periodic_load
   SOURCES periodic_load.cc
-  LIBRARIES oomph::linear_elasticity
-  CXX_STANDARD 17)
+  LIBRARIES oomph::linear_elasticity)
 
 oomph_add_executable(
   NAME refineable_periodic_load
   SOURCES refineable_periodic_load.cc
-  LIBRARIES oomph::linear_elasticity
-  CXX_STANDARD 17)
+  LIBRARIES oomph::linear_elasticity)
 
 # ---------------------------------- TESTING ----------------------------------
 

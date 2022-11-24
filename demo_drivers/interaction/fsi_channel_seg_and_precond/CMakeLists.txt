@@ -12,20 +12,17 @@ include(CTest)
 oomph_add_executable(
   NAME fsi_collapsible_channel_precond_driver
   SOURCES fsi_chan_precond_driver.cc fsi_chan_problem.h
-  LIBRARIES oomph::beam oomph::navier_stokes
-  CXX_STANDARD 17)
+  LIBRARIES oomph::beam oomph::navier_stokes)
 
 oomph_add_executable(
   NAME fsi_collapsible_channel_segregated_driver
   SOURCES fsi_chan_seg_driver.cc fsi_chan_problem.h
-  LIBRARIES oomph::multi_physics oomph::beam oomph::navier_stokes
-  CXX_STANDARD 17)
+  LIBRARIES oomph::multi_physics oomph::beam oomph::navier_stokes)
 
 oomph_add_executable(
   NAME simple_segregated_driver
   SOURCES simple_segregated_driver.cc fsi_chan_problem.h
-  LIBRARIES oomph::multi_physics oomph::beam oomph::navier_stokes
-  CXX_STANDARD 17)
+  LIBRARIES oomph::multi_physics oomph::beam oomph::navier_stokes)
 
 # ---------------------------------- TESTING ----------------------------------
 

@@ -13,15 +13,13 @@ oomph_add_executable(
   NAME acoustic_fsi
   SOURCES acoustic_fsi.cc
   LIBRARIES oomph::helmholtz oomph::time_harmonic_linear_elasticity
-            oomph::navier_stokes
-  CXX_STANDARD 17)
+            oomph::navier_stokes)
 
 oomph_add_executable(
   NAME unstructured_acoustic_fsi
   SOURCES unstructured_acoustic_fsi.cc
   LIBRARIES oomph::helmholtz oomph::time_harmonic_linear_elasticity
-            oomph::navier_stokes
-  CXX_STANDARD 17)
+            oomph::navier_stokes)
 
 # ---------------------------------- TESTING ----------------------------------
 

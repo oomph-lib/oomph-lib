@@ -12,8 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME unstructured_three_d_fluid
   SOURCES unstructured_three_d_fluid.cc
-  LIBRARIES oomph::navier_stokes
-  CXX_STANDARD 17)
+  LIBRARIES oomph::navier_stokes)
 
 # ---------------------------------- TESTING ----------------------------------
 

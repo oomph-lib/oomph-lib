@@ -12,15 +12,13 @@ include(CTest)
 oomph_add_executable(
   NAME 3d_static_cap
   SOURCES 3d_static_cap.cc
-  LIBRARIES oomph::navier_stokes oomph::fluid_interface
-  CXX_STANDARD 17)
+  LIBRARIES oomph::navier_stokes oomph::fluid_interface)
 
 oomph_add_executable(
   NAME 3d_static_cap_elastic
   SOURCES 3d_static_cap_elastic.cc
   LIBRARIES oomph::navier_stokes oomph::fluid_interface oomph::solid
-            oomph::constitutive
-  CXX_STANDARD 17)
+            oomph::constitutive)
 
 # ---------------------------------- TESTING ----------------------------------
 

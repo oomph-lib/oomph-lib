@@ -12,9 +12,8 @@ include(CTest)
 oomph_add_executable(
   NAME surfactant
   SOURCES surfactant.cc
-  LIBRARIES oomph::advection_diffusion oomph::navier_stokes oomph::multi_physics
-            oomph::fluid_interface
-  CXX_STANDARD 17)
+  LIBRARIES oomph::advection_diffusion oomph::navier_stokes
+            oomph::multi_physics oomph::fluid_interface)
 
 # ---------------------------------- TESTING ----------------------------------
 

@@ -12,8 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME fibre
   SOURCES fibre.cc
-  LIBRARIES oomph::axisym_navier_stokes oomph::fluid_interface
-  CXX_STANDARD 17)
+  LIBRARIES oomph::axisym_navier_stokes oomph::fluid_interface)
 
 # ---------------------------------- TESTING ----------------------------------
 

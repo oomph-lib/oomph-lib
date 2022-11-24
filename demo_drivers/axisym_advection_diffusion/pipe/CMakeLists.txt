@@ -12,14 +12,12 @@ include(CTest)
 oomph_add_executable(
   NAME pipe
   SOURCES pipe.cc
-  LIBRARIES oomph::axisym_advection_diffusion
-  CXX_STANDARD 17)
+  LIBRARIES oomph::axisym_advection_diffusion)
 
 oomph_add_executable(
   NAME pipe_variable_diff
   SOURCES pipe_variable_diff.cc
-  LIBRARIES oomph::axisym_advection_diffusion
-  CXX_STANDARD 17)
+  LIBRARIES oomph::axisym_advection_diffusion)
 
 # ---------------------------------- TESTING ----------------------------------
 

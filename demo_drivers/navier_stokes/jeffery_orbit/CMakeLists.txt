@@ -13,8 +13,7 @@ oomph_add_executable(
   NAME jeffery_orbit
   SOURCES jeffery_orbit.cc my_taylor_hood_elements.h
   LIBRARIES oomph::solid oomph::constitutive oomph::navier_stokes
-            oomph::rigid_body
-  CXX_STANDARD 17)
+            oomph::rigid_body)
 
 # ---------------------------------- TESTING ----------------------------------
 

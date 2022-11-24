@@ -12,14 +12,12 @@ include(CTest)
 oomph_add_executable(
   NAME eluting_sphere
   SOURCES eluting_sphere.cc
-  LIBRARIES oomph::spherical_advection_diffusion
-  CXX_STANDARD 17)
+  LIBRARIES oomph::spherical_advection_diffusion)
 
 oomph_add_executable(
   NAME eluting_sphere_adapt
   SOURCES eluting_sphere_adapt.cc
-  LIBRARIES oomph::spherical_advection_diffusion
-  CXX_STANDARD 17)
+  LIBRARIES oomph::spherical_advection_diffusion)
 
 # ---------------------------------- TESTING ----------------------------------
 

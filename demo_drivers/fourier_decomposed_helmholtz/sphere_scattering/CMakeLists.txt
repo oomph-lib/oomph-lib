@@ -12,21 +12,18 @@ include(CTest)
 oomph_add_executable(
   NAME sphere_scattering
   SOURCES sphere_scattering.cc
-  LIBRARIES oomph::fourier_decomposed_helmholtz
-  CXX_STANDARD 17)
+  LIBRARIES oomph::fourier_decomposed_helmholtz)
 
 oomph_add_executable(
   NAME unstructured_adaptive_sphere_scattering
   SOURCES unstructured_sphere_scattering.cc
   LIBRARIES oomph::fourier_decomposed_helmholtz
-  CXX_DEFINITIONS ADAPTIVE
-  CXX_STANDARD 17)
+  CXX_DEFINITIONS ADAPTIVE)
 
 oomph_add_executable(
   NAME unstructured_sphere_scattering
   SOURCES unstructured_sphere_scattering.cc
-  LIBRARIES oomph::fourier_decomposed_helmholtz
-  CXX_STANDARD 17)
+  LIBRARIES oomph::fourier_decomposed_helmholtz)
 
 # ---------------------------------- TESTING ----------------------------------
 

@@ -12,20 +12,17 @@ include(CTest)
 oomph_add_executable(
   NAME fig2poly
   SOURCES fig2poly.cc
-  LIBRARIES oomph::navier_stokes
-  CXX_STANDARD 17)
+  LIBRARIES oomph::navier_stokes)
 
 oomph_add_executable(
   NAME mesh_from_xfig_poisson
   SOURCES mesh_from_xfig_poisson.cc
-  LIBRARIES oomph::poisson
-  CXX_STANDARD 17)
+  LIBRARIES oomph::poisson)
 
 oomph_add_executable(
   NAME mesh_from_xfig_navier_stokes
   SOURCES mesh_from_xfig_navier_stokes.cc
-  LIBRARIES oomph::navier_stokes
-  CXX_STANDARD 17)
+  LIBRARIES oomph::navier_stokes)
 
 # Create a symlink to the built mesh from the scripts directory
 add_custom_target(

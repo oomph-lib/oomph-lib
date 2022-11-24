@@ -12,8 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME eighth_sphere_poisson_hp_adapt
   SOURCES eighth_sphere_poisson_hp_adapt.cc
-  LIBRARIES oomph::poisson
-  CXX_STANDARD 17)
+  LIBRARIES oomph::poisson)
 
 # ---------------------------------- TESTING ----------------------------------
 

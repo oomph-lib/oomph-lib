@@ -12,14 +12,12 @@ include(CTest)
 oomph_add_executable(
   NAME circular_driven_cavity
   SOURCES circular_driven_cavity.cc
-  LIBRARIES oomph::navier_stokes
-  CXX_STANDARD 17)
+  LIBRARIES oomph::navier_stokes)
 
 oomph_add_executable(
   NAME circular_driven_cavity2
   SOURCES circular_driven_cavity2.cc
-  LIBRARIES oomph::navier_stokes
-  CXX_STANDARD 17)
+  LIBRARIES oomph::navier_stokes)
 
 # ---------------------------------- TESTING ----------------------------------
 

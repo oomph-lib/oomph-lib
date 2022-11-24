@@ -14,8 +14,7 @@ oomph_add_executable(
   NAME space_time_oscillating_cylinder
   SOURCES space_time_oscillating_cylinder.cc
   LIBRARIES oomph::space_time_navier_stokes
-            oomph::space_time_block_preconditioner oomph::navier_stokes
-  CXX_STANDARD 17)
+            oomph::space_time_block_preconditioner oomph::navier_stokes)
 
 # ---------------------------------- TESTING ----------------------------------
 

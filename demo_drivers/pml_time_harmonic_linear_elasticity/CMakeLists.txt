@@ -12,14 +12,12 @@ include(CTest)
 oomph_add_executable(
   NAME time_harmonic_elasticity_driver
   SOURCES time_harmonic_elasticity_driver.cc
-  LIBRARIES oomph::pml_time_harmonic_linear_elasticity
-  CXX_STANDARD 17)
+  LIBRARIES oomph::pml_time_harmonic_linear_elasticity)
 
 oomph_add_executable(
   NAME time_harmonic_elasticity_driver_source
   SOURCES time_harmonic_elasticity_driver_source.cc
-  LIBRARIES oomph::pml_time_harmonic_linear_elasticity
-  CXX_STANDARD 17)
+  LIBRARIES oomph::pml_time_harmonic_linear_elasticity)
 
 # ---------------------------------- TESTING ----------------------------------
 

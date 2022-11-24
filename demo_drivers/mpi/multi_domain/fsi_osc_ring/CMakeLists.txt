@@ -12,8 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME fsi_osc_ring
   SOURCES fsi_osc_ring.cc
-  LIBRARIES oomph::beam oomph::navier_stokes
-  CXX_STANDARD 17)
+  LIBRARIES oomph::beam oomph::navier_stokes)
 
 # ---------------------------------- TESTING ----------------------------------
 

@@ -12,8 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME clamped_or_pinned_shell
   SOURCES clamped_or_pinned_shell.cc
-  LIBRARIES oomph::shell
-  CXX_STANDARD 17)
+  LIBRARIES oomph::shell)
 
 # ---------------------------------- TESTING ----------------------------------
 

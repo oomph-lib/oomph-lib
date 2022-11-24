@@ -13,27 +13,23 @@ oomph_add_executable(
   NAME adaptive_time_harmonic_elastic_annulus
   SOURCES time_harmonic_elastic_annulus.cc
   LIBRARIES oomph::time_harmonic_linear_elasticity
-  CXX_DEFINITIONS ADAPTIVE
-  CXX_STANDARD 17)
+  CXX_DEFINITIONS ADAPTIVE)
 
 oomph_add_executable(
   NAME adaptive_unstructured_time_harmonic_elastic_annulus
   SOURCES unstructured_time_harmonic_elastic_annulus.cc
   LIBRARIES oomph::time_harmonic_linear_elasticity
-  CXX_DEFINITIONS ADAPTIVE
-  CXX_STANDARD 17)
+  CXX_DEFINITIONS ADAPTIVE)
 
 oomph_add_executable(
   NAME time_harmonic_elastic_annulus
   SOURCES time_harmonic_elastic_annulus.cc
-  LIBRARIES oomph::time_harmonic_linear_elasticity
-  CXX_STANDARD 17)
+  LIBRARIES oomph::time_harmonic_linear_elasticity)
 
 oomph_add_executable(
   NAME unstructured_time_harmonic_elastic_annulus
   SOURCES unstructured_time_harmonic_elastic_annulus.cc
-  LIBRARIES oomph::time_harmonic_linear_elasticity
-  CXX_STANDARD 17)
+  LIBRARIES oomph::time_harmonic_linear_elasticity)
 
 # ---------------------------------- TESTING ----------------------------------
 

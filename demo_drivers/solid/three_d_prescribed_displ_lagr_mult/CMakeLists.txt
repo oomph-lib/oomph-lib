@@ -12,15 +12,13 @@ include(CTest)
 oomph_add_executable(
   NAME three_d_prescribed_displ_lagr_mult
   SOURCES three_d_prescribed_displ_lagr_mult.cc
-  LIBRARIES oomph::solid oomph::constitutive
-  CXX_STANDARD 17)
+  LIBRARIES oomph::solid oomph::constitutive)
 
 oomph_add_executable(
   NAME three_d_prescribed_displ_lagr_mult_non_adapt
   SOURCES three_d_prescribed_displ_lagr_mult.cc
   LIBRARIES oomph::solid oomph::constitutive
-  CXX_DEFINITIONS NOREFINE
-  CXX_STANDARD 17)
+  CXX_DEFINITIONS NOREFINE)
 
 # ---------------------------------- TESTING ----------------------------------
 

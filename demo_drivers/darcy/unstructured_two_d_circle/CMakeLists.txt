@@ -13,14 +13,12 @@ oomph_add_executable(
   NAME adaptive_unstructured_two_d_circle
   SOURCES unstructured_two_d_circle.cc
   LIBRARIES oomph::darcy
-  CXX_DEFINITIONS ADAPTIVE
-  CXX_STANDARD 17)
+  CXX_DEFINITIONS ADAPTIVE)
 
 oomph_add_executable(
   NAME unstructured_two_d_circle
   SOURCES unstructured_two_d_circle.cc
-  LIBRARIES oomph::darcy
-  CXX_STANDARD 17)
+  LIBRARIES oomph::darcy)
 
 # ---------------------------------- TESTING ----------------------------------
 

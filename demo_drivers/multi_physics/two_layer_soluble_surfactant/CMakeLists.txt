@@ -14,8 +14,7 @@ oomph_add_executable(
   SOURCES double_buoyant_navier_stokes_elements.h
           refineable_two_layer_soluble_surfactant.cc
   LIBRARIES oomph::advection_diffusion_reaction oomph::navier_stokes
-            oomph::fluid_interface oomph::solid oomph::constitutive
-  CXX_STANDARD 17)
+            oomph::fluid_interface oomph::solid oomph::constitutive)
 
 oomph_add_executable(
   NAME two_layer_soluble_surfactant
@@ -24,16 +23,14 @@ oomph_add_executable(
           two_layer_soluble_surfactant.cc
           soluble_surfactant_transport_equations.h
   LIBRARIES oomph::advection_diffusion_reaction oomph::navier_stokes
-            oomph::fluid_interface
-  CXX_STANDARD 17)
+            oomph::fluid_interface)
 
 oomph_add_executable(
   NAME refineable_unstructured_two_layer_ss
   SOURCES double_buoyant_navier_stokes_elements.h
           refineable_unstructured_two_layer_ss.cc
   LIBRARIES oomph::advection_diffusion_reaction oomph::navier_stokes
-            oomph::fluid_interface oomph::solid oomph::constitutive
-  CXX_STANDARD 17)
+            oomph::fluid_interface oomph::solid oomph::constitutive)
 
 # ---------------------------------- TESTING ----------------------------------
 

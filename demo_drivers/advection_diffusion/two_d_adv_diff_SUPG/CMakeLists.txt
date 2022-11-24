@@ -12,8 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME two_d_adv_diff_SUPG
   SOURCES two_d_adv_diff_SUPG.cc
-  LIBRARIES oomph::advection_diffusion
-  CXX_STANDARD 17)
+  LIBRARIES oomph::advection_diffusion)
 
 # ---------------------------------- TESTING ----------------------------------
 

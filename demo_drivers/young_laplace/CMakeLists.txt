@@ -12,33 +12,28 @@ include(CTest)
 oomph_add_executable(
   NAME barrel
   SOURCES barrel.cc
-  LIBRARIES oomph::young_laplace
-  CXX_STANDARD 17)
+  LIBRARIES oomph::young_laplace)
 
 oomph_add_executable(
   NAME refineable_t_junction
   SOURCES refineable_t_junction.cc
   LIBRARIES oomph::young_laplace
-  CXX_OPTIONS -g
-  CXX_STANDARD 17)
+  CXX_OPTIONS -g)
 
 oomph_add_executable(
   NAME refineable_young_laplace
   SOURCES refineable_young_laplace.cc common_young_laplace_stuff.h
-  LIBRARIES oomph::young_laplace
-  CXX_STANDARD 17)
+  LIBRARIES oomph::young_laplace)
 
 oomph_add_executable(
   NAME spherical_cap_in_cylinder
   SOURCES spherical_cap_in_cylinder.cc common_young_laplace_stuff.h
-  LIBRARIES oomph::young_laplace
-  CXX_STANDARD 17)
+  LIBRARIES oomph::young_laplace)
 
 oomph_add_executable(
   NAME young_laplace
   SOURCES young_laplace.cc common_young_laplace_stuff.h
-  LIBRARIES oomph::young_laplace
-  CXX_STANDARD 17)
+  LIBRARIES oomph::young_laplace)
 
 # ---------------------------------- TESTING ----------------------------------
 

@@ -12,27 +12,23 @@ include(CTest)
 oomph_add_executable(
   NAME multi_domain_boussinesq_convection
   SOURCES multi_domain_boussinesq_convection.cc
-  LIBRARIES oomph::advection_diffusion oomph::navier_stokes
-  CXX_STANDARD 17)
+  LIBRARIES oomph::advection_diffusion oomph::navier_stokes)
 
 oomph_add_executable(
   NAME multi_domain_boussinesq_convection_fd
   SOURCES multi_domain_boussinesq_convection.cc
   LIBRARIES oomph::advection_diffusion oomph::navier_stokes
-  CXX_DEFINITIONS USE_FD_JACOBIAN_NST_IN_MULTI_DOMAIN_BOUSSINESQ
-  CXX_STANDARD 17)
+  CXX_DEFINITIONS USE_FD_JACOBIAN_NST_IN_MULTI_DOMAIN_BOUSSINESQ)
 
 oomph_add_executable(
   NAME multi_domain_ref_b_convection
   SOURCES multi_domain_ref_b_convection.cc
-  LIBRARIES oomph::advection_diffusion oomph::navier_stokes
-  CXX_STANDARD 17)
+  LIBRARIES oomph::advection_diffusion oomph::navier_stokes)
 
 oomph_add_executable(
   NAME refineable_b_convection
   SOURCES refineable_b_convection.cc
-  LIBRARIES oomph::advection_diffusion oomph::navier_stokes
-  CXX_STANDARD 17)
+  LIBRARIES oomph::advection_diffusion oomph::navier_stokes)
 
 # ---------------------------------- TESTING ----------------------------------
 

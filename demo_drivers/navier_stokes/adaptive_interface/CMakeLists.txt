@@ -13,8 +13,7 @@ oomph_add_executable(
   NAME adaptive_interface
   SOURCES adaptive_interface.cc
   LIBRARIES oomph::navier_stokes oomph::fluid_interface oomph::solid
-            oomph::constitutive
-  CXX_STANDARD 17)
+            oomph::constitutive)
 
 # ---------------------------------- TESTING ----------------------------------
 

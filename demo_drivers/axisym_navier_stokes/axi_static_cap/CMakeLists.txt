@@ -13,8 +13,7 @@ oomph_add_executable(
   NAME axi_static_cap
   SOURCES axi_static_cap.cc
   LIBRARIES oomph::axisym_navier_stokes oomph::fluid_interface oomph::solid
-            oomph::constitutive
-  CXX_STANDARD 17)
+            oomph::constitutive)
 
 # ---------------------------------- TESTING ----------------------------------
 

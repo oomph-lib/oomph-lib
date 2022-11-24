@@ -12,38 +12,33 @@ include(CTest)
 oomph_add_executable(
   NAME adaptive_driven_cavity
   SOURCES adaptive_driven_cavity.cc
-  LIBRARIES oomph::navier_stokes
-  CXX_STANDARD 17)
+  LIBRARIES oomph::navier_stokes)
 
 oomph_add_executable(
   NAME circular_couette
   SOURCES driven_cavity.cc navier_stokes_elements_with_singularity.h
   LIBRARIES oomph::navier_stokes
-  CXX_DEFINITIONS COUETTE
-  CXX_STANDARD 17)
+  CXX_DEFINITIONS COUETTE)
 
 oomph_add_executable(
   NAME circular_couette_without_pseudo_singularity_subtracted_off
   SOURCES driven_cavity.cc navier_stokes_elements_with_singularity.h
           finite_re_perturbation.h
   LIBRARIES oomph::navier_stokes
-  CXX_DEFINITIONS DONT_USE_SINGULARITY COUETTE
-  CXX_STANDARD 17)
+  CXX_DEFINITIONS DONT_USE_SINGULARITY COUETTE)
 
 oomph_add_executable(
   NAME driven_cavity
   SOURCES driven_cavity.cc navier_stokes_elements_with_singularity.h
           finite_re_perturbation.h
-  LIBRARIES oomph::navier_stokes
-  CXX_STANDARD 17)
+  LIBRARIES oomph::navier_stokes)
 
 oomph_add_executable(
   NAME driven_cavity_without_singularity_subtracted_off
   SOURCES driven_cavity.cc navier_stokes_elements_with_singularity.h
           finite_re_perturbation.h
   LIBRARIES oomph::navier_stokes
-  CXX_DEFINITIONS DONT_USE_SINGULARITY
-  CXX_STANDARD 17)
+  CXX_DEFINITIONS DONT_USE_SINGULARITY)
 
 # ---------------------------------- TESTING ----------------------------------
 

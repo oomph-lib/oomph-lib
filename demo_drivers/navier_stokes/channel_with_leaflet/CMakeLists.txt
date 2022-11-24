@@ -12,8 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME channel_with_leaflet
   SOURCES channel_with_leaflet.cc
-  LIBRARIES oomph::navier_stokes
-  CXX_STANDARD 17)
+  LIBRARIES oomph::navier_stokes)
 
 # ---------------------------------- TESTING ----------------------------------
 

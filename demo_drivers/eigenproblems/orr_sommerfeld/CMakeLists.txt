@@ -13,8 +13,7 @@ if(HAVE_ARPACK_SOURCES)
   oomph_add_executable(
     NAME orr_sommerfeld
     SOURCES orr_sommerfeld.cc
-    LIBRARIES oomph::generic
-    CXX_STANDARD 17)
+    LIBRARIES oomph::generic)
 endif()
 
 # ---------------------------------- TESTING ----------------------------------

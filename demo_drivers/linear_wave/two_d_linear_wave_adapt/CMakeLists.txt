@@ -12,8 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME two_d_linear_wave_adapt
   SOURCES two_d_linear_wave_adapt.cc
-  LIBRARIES oomph::linear_wave
-  CXX_STANDARD 17)
+  LIBRARIES oomph::linear_wave)
 
 # ---------------------------------- TESTING ----------------------------------
 

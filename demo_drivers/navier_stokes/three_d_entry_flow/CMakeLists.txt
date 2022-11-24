@@ -12,14 +12,12 @@ include(CTest)
 oomph_add_executable(
   NAME full_tube
   SOURCES full_tube.cc
-  LIBRARIES oomph::navier_stokes
-  CXX_STANDARD 17)
+  LIBRARIES oomph::navier_stokes)
 
 oomph_add_executable(
   NAME three_d_entry_flow
   SOURCES three_d_entry_flow.cc
-  LIBRARIES oomph::navier_stokes
-  CXX_STANDARD 17)
+  LIBRARIES oomph::navier_stokes)
 
 # ---------------------------------- TESTING ----------------------------------
 

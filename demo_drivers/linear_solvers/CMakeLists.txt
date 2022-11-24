@@ -12,46 +12,39 @@ include(CTest)
 oomph_add_executable(
   NAME adv_diff_iterative_linear_solver_tester
   SOURCES adv_diff_iterative_linear_solver_tester.cc
-  LIBRARIES oomph::advection_diffusion
-  CXX_STANDARD 17)
+  LIBRARIES oomph::advection_diffusion)
 
 oomph_add_executable(
   NAME driven_cavity
   SOURCES driven_cavity.cc
-  LIBRARIES oomph::navier_stokes
-  CXX_STANDARD 17)
+  LIBRARIES oomph::navier_stokes)
 
 oomph_add_executable(
   NAME direct_solver_test
   SOURCES direct_solver_test.cc
-  LIBRARIES oomph::poisson
-  CXX_STANDARD 17)
+  LIBRARIES oomph::poisson)
 
 oomph_add_executable(
   NAME two_d_poisson_dense_lu
   SOURCES two_d_poisson_dense_lu.cc
-  LIBRARIES oomph::poisson
-  CXX_STANDARD 17)
+  LIBRARIES oomph::poisson)
 
 oomph_add_executable(
   NAME two_d_linear_elasticity_with_simple_block_diagonal_preconditioner
   SOURCES two_d_linear_elasticity_with_simple_block_diagonal_preconditioner.cc
           simple_block_preconditioners.h
-  LIBRARIES oomph::linear_elasticity
-  CXX_STANDARD 17)
+  LIBRARIES oomph::linear_elasticity)
 
 oomph_add_executable(
   NAME two_d_multi_poisson
   SOURCES two_d_multi_poisson.cc multi_poisson_block_preconditioners.h
           multi_poisson_elements.h
-  LIBRARIES oomph::generic
-  CXX_STANDARD 17)
+  LIBRARIES oomph::generic)
 
 oomph_add_executable(
   NAME two_d_poisson_cg
   SOURCES two_d_poisson_cg.cc
-  LIBRARIES oomph::poisson
-  CXX_STANDARD 17)
+  LIBRARIES oomph::poisson)
 
 # Don't add these drivers if we have MPI as Hypre and Trilinos can't handle
 # serial execution of MPI-enabled code
@@ -60,16 +53,14 @@ if(NOT OOMPH_HAS_MPI)
     oomph_add_executable(
       NAME HypreSolver_test
       SOURCES HypreSolver_test.cc
-      LIBRARIES oomph::poisson
-      CXX_STANDARD 17)
+      LIBRARIES oomph::poisson)
   endif()
 
   if(OOMPH_HAS_TRILINOS)
     oomph_add_executable(
       NAME TrilinosSolver_test
       SOURCES TrilinosSolver_test.cc
-      LIBRARIES oomph::poisson
-      CXX_STANDARD 17)
+      LIBRARIES oomph::poisson)
   endif()
 endif()
 

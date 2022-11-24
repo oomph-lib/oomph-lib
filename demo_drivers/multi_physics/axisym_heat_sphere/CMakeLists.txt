@@ -13,15 +13,13 @@ oomph_add_executable(
   NAME axisym_heat_sphere
   SOURCES half_rectangle_with_hole_mesh.h axisym_heat_sphere.cc
           axisym_buoyant_navier_stokes.h
-  LIBRARIES oomph::axisym_advection_diffusion oomph::axisym_navier_stokes
-  CXX_STANDARD 17)
+  LIBRARIES oomph::axisym_advection_diffusion oomph::axisym_navier_stokes)
 
 oomph_add_executable(
   NAME multi_domain_axisym_heat_sphere
   SOURCES multi_domain_axisym_heat_sphere.cc half_rectangle_with_hole_mesh.h
           multi_domain_axisym_boussinesq_elements.h
-  LIBRARIES oomph::axisym_advection_diffusion oomph::axisym_navier_stokes
-  CXX_STANDARD 17)
+  LIBRARIES oomph::axisym_advection_diffusion oomph::axisym_navier_stokes)
 
 # ---------------------------------- TESTING ----------------------------------
 

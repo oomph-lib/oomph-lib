@@ -13,8 +13,7 @@ include(CTest)
 oomph_add_executable(
   NAME test_spdlog
   SOURCES test_spdlog.cc
-  LIBRARIES spdlog::spdlog
-  CXX_STANDARD 17)
+  LIBRARIES spdlog::spdlog)
 
 # ---------------------------------- TESTING ----------------------------------
 

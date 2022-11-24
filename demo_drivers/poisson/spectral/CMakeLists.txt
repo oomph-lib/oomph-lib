@@ -12,20 +12,17 @@ include(CTest)
 oomph_add_executable(
   NAME one_d_spectral
   SOURCES one_d_spectral.cc
-  LIBRARIES oomph::poisson
-  CXX_STANDARD 17)
+  LIBRARIES oomph::poisson)
 
 oomph_add_executable(
   NAME three_d_spectral_adapt
   SOURCES three_d_spectral_adapt.cc
-  LIBRARIES oomph::poisson
-  CXX_STANDARD 17)
+  LIBRARIES oomph::poisson)
 
 oomph_add_executable(
   NAME two_d_spectral_adapt
   SOURCES two_d_spectral_adapt.cc
-  LIBRARIES oomph::poisson
-  CXX_STANDARD 17)
+  LIBRARIES oomph::poisson)
 
 # ---------------------------------- TESTING ----------------------------------
 

@@ -12,8 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME static_fish
   SOURCES static_fish.cc
-  LIBRARIES oomph::solid oomph::constitutive
-  CXX_STANDARD 17)
+  LIBRARIES oomph::solid oomph::constitutive)
 
 # ---------------------------------- TESTING ----------------------------------
 

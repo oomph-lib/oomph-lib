@@ -14,8 +14,7 @@ oomph_add_executable(
   SOURCES vibrating_shell_non_newtonian.cc overloaded_cartesian_element_body.h
   LIBRARIES oomph::generalised_newtonian_navier_stokes oomph::navier_stokes
             oomph::solid oomph::constitutive oomph::fluid_interface
-            oomph::rigid_body
-  CXX_STANDARD 17)
+            oomph::rigid_body)
 
 # ---------------------------------- TESTING ----------------------------------
 
