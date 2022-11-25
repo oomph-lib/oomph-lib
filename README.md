@@ -27,24 +27,24 @@
         <th>Test platform</th>
         <th><a href="../../tree/main"><code>main</code></a></th>
         <th><a href="../../tree/development"><code>development</code></a></th>
-        <th><a href="../../tree/feature-convert-to-cmake-build-system"><code>convert-to-cmake-build-system</code></a></th>
+        <th><a href="../../tree/feature-shared-cmake"><code>feature-shared-cmake</code></a></th>
     </tr>
     <tr>
         <td>Ubuntu</td>
         <td>
             <a href="../../actions/workflows/self-tests-ubuntu.yaml">
-                <img alt="Ubuntu" src="../../actions/workflows/self-tests-ubuntu.yaml/badge.svg?branch=main">
+                <img alt="Ubuntu" src="../../actions/workflows/self-tests-ubuntu.yaml/badge.svg?branch=main" style="vertical-align: middle">
             </a>
         </td>
         <td>
             <a href="../../actions/workflows/self-tests-ubuntu.yaml">
-                <img alt="Ubuntu" src="../../actions/workflows/self-tests-ubuntu.yaml/badge.svg?branch=development">
+                <img alt="Ubuntu" src="../../actions/workflows/self-tests-ubuntu.yaml/badge.svg?branch=development" style="vertical-align: middle">
             </a>
         </td>
         <td>
           <div align="center">
-              <a href="../../actions/workflows/test-ubuntu.yaml">
-                  <img alt="Ubuntu" src="../../actions/workflows/test-ubuntu.yaml/badge.svg?branch=feature-convert-to-cmake-build-system">
+              <a href="../../actions/workflows/self-tests-ubuntu.yaml">
+                  <img alt="Ubuntu" src="../../actions/workflows/self-tests-ubuntu.yaml/badge.svg?branch=feature-shared-cmake" style="vertical-align: middle">
               </a>
           </div>
         </td>
@@ -53,18 +53,18 @@
         <td>macOS</td>
         <td>
             <a href="../../actions/workflows/self-tests-macos.yaml">
-                <img alt="macOS" src="../../actions/workflows/self-tests-macos.yaml/badge.svg?branch=main">
+                <img alt="macOS" src="../../actions/workflows/self-tests-macos.yaml/badge.svg?branch=main" style="vertical-align: middle">
             </a>
         </td>
         <td>
             <a href="../../actions/workflows/self-tests-macos.yaml">
-                <img alt="macOS" src="../../actions/workflows/self-tests-macos.yaml/badge.svg?branch=development">
+                <img alt="macOS" src="../../actions/workflows/self-tests-macos.yaml/badge.svg?branch=development" style="vertical-align: middle">
             </a>
         </td>
         <td>
           <div align="center">
-              <a href="../../actions/workflows/test-macos.yaml">
-                  <img alt="macOS" src="../../actions/workflows/test-macos.yaml/badge.svg?branch=feature-convert-to-cmake-build-system">
+              <a href="../../actions/workflows/self-tests-macos.yaml">
+                  <img alt="macOS" src="../../actions/workflows/self-tests-macos.yaml/badge.svg?branch=feature-shared-cmake" style="vertical-align: middle">
               </a>
           </div>
         </td>
