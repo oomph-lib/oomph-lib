@@ -393,7 +393,7 @@ We recommend that you can write your own `CMakeUserPresets.json` file. You can i
 
 ### Examples/testing
 
-**TODO:** Patch support for `self_test`.
+**TODO:** Add support for `self_test`.
 
 `oomph-lib` comes with an extensive list of well-documented examples situated in the `demo_drivers/` directory. The driver codes in these folders are also used to validate the library. Before you can run these tests, you must install the `oomph-lib` library using the steps described in [Building and installing](#building-and-installing). To run all of these tests, enter the
 `demo_drivers/` folder and run the following:
@@ -404,7 +404,9 @@ We recommend that you can write your own `CMakeUserPresets.json` file. You can i
 >>> ctest -j4                 # Execute all tests using 4 processes
 ```
 
-Alternatively, you can combine all of the above commands with a single command:
+If you installed `oomph-lib` to a custom location, you will need to tell CMake where it lives during the configuration step. For details on how to do this, refer to [Building dependent projects](#building-dependent-projects).
+
+For the sake of brevity, you can combine all of the above commands into a single command:
 
 ```bash
 # ctest --build-and-test <source-dir> <build-dir> --build-generator <generator> --test-command <command>
