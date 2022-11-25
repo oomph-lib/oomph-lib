@@ -208,9 +208,9 @@ The `.pre-commit-config.yaml` will take care of the rest. Do not edit the
 To configure, build and install the project using Ninja (recommended), `cd` into the root directory of the cloned `oomph-lib` project and run the following commands:
 
 ```bash
->>> cmake -G Ninja -B build   # Configure and generate build system
->>> cmake --build build       # Build
->>> cmake --install build     # Install
+cmake -G Ninja -B build   # Configure and generate build system
+cmake --build build       # Build
+cmake --install build     # Install
 ```
 
 After the configure step, a `build/` directory will appear with several files in it. During the build step, the individual libraries of `oomph-lib` will be built. Finally, during the install step the headers and generated library files will be installed to the `install/` subdirectory of this project. **It is important to be aware of this design choice as it affects how you use the `oomph-lib` library. For more details, see [Building `oomphlib`-dependent projects](#building-oomphlib-dependent-projects).**
@@ -220,8 +220,8 @@ If you would prefer to build `oomph-lib` using the Unix Makefile generator (not 
 To uninstall the project, run the following:
 
 ```bash
->>> cd build
->>> ninja uninstall   # replace "ninja" with "make" if you used a Makefile generator
+cd build
+ninja uninstall   # replace "ninja" with "make" if you used a Makefile generator
 ```
 
 If you no longer require any of the build files, you can also delete the `build/` directory.
@@ -235,9 +235,9 @@ If you wish to do a clean build of the library, you should first uninstall any f
 By default, `oomph-lib` will be installed to the `install/` subdirectory of the root `oomph-lib` folder. To specify a different installation location, pass `--install-prefix=<install-location>` to `cmake` during the configure step. For example
 
 ```bash
->>> cmake -G Ninja -B build --install-prefix=~/oomph_install  # Configure and generate build system
->>> cmake --build build                                       # Build
->>> cmake --install build                                     # Install
+cmake -G Ninja -B build --install-prefix=~/oomph_install  # Configure and generate build system
+cmake --build build                                       # Build
+cmake --install build                                     # Install
 ```
 
 **Important:** `<install-location>` **must(!)** be an absolute path.
@@ -249,9 +249,9 @@ Recall from [Building and installing](#building-and-installing) that we do not t
 1. Install `oomph-lib` as a superuser:
 
     ```bash
-    >>> cmake -G Ninja -B build -DENABLE_INSTALL_AS_SUPERUSER=ON  # Configure
-    >>> cmake --build build                                       # Build
-    >>> sudo cmake --install build                                # Install with superuser rights
+    cmake -G Ninja -B build -DENABLE_INSTALL_AS_SUPERUSER=ON  # Configure
+    cmake --build build                                       # Build
+    sudo cmake --install build                                # Install with superuser rights
     ```
 
     Here, the `-DENABLE_INSTALL_AS_SUPERUSER` flag indicates to CMake that you do not wish it to override the default installation location (to make it install to `install/`). It is only during the install step that you will actually need to use `sudo`.
@@ -269,30 +269,30 @@ Recall from [Building and installing](#building-and-installing) that we do not t
 
     ```bash
     # Configure, build and install the library
-    >>> cmake -G Ninja -B build --install-prefix=~/oomph_install
-    >>> cmake --build build
-    >>> cmake --install build
+    cmake -G Ninja -B build --install-prefix=~/oomph_install
+    cmake --build build
+    cmake --install build
 
     # Now try to build a project that depends on oomph-lib
-    >>> cd ~/some_project_dependent_on_oomphlib/
-    >>> cmake -G Ninja -B build -DCMAKE_PREFIX_PATH=~/oomph_install
+    cd ~/some_project_dependent_on_oomphlib/
+    cmake -G Ninja -B build -DCMAKE_PREFIX_PATH=~/oomph_install
     ```
 
 3. Add the location of the installation to your `PATH` environment variable:
 
     ```bash
     # Configure, build and install the library
-    >>> cmake -G Ninja -B build --install-prefix=~/oomph_install
-    >>> cmake --build build
-    >>> cmake --install build
+    cmake -G Ninja -B build --install-prefix=~/oomph_install
+    cmake --build build
+    cmake --install build
 
     # Update the PATH environment variable
     # NOTE: This change is only temporary. To make it permanent, add the line below to your .bashrc
-    >>> export PATH="$PATH:~/oomph_install"
+    export PATH="$PATH:~/oomph_install"
 
     # Now try to build a project that depends on oomph-lib
-    >>> cd ~/some_project_dependent_on_oomphlib/
-    >>> cmake -G Ninja -B build
+    cd ~/some_project_dependent_on_oomphlib/
+    cmake -G Ninja -B build
     ```
 
     If you use this approach, you should install `oomph-lib` to some location outside of your `oomph-lib` folder; if you use the default installation location and move your `oomph-lib` folder, you will have to update your `PATH` variable to reflect that change.
@@ -399,9 +399,9 @@ We recommend that you can write your own `CMakeUserPresets.json` file. You can i
 `demo_drivers/` folder and run the following:
 
 ```bash
->>> cmake -G Ninja -B build   # Configure and generate build system for demo_drivers project
->>> cd build                  # Enter the build/ directory
->>> ctest -j4                 # Execute all tests using 4 processes
+cmake -G Ninja -B build   # Configure and generate build system for demo_drivers project
+cd build                  # Enter the build/ directory
+ctest -j4                 # Execute all tests using 4 processes
 ```
 
 If you installed `oomph-lib` to a custom location, you will need to tell CMake where it lives during the configuration step. For details on how to do this, refer to [Building dependent projects](#building-dependent-projects).
@@ -430,8 +430,8 @@ oomph_add_test(
 To run the `poisson.one_d_poisson` test based on the `LABELS` key, you can pass the `-L`/`--label-regex` flag to `ctest`, as follows:
 
 ```bash
->>> ctest -L poisson -j4         # run all tests with "poisson" in their LABELS
->>> ctest -L one_d_poisson -j4   # run all tests with "one_d_poisson" in their LABELS
+ctest -L poisson -j4         # run all tests with "poisson" in their LABELS
+ctest -L one_d_poisson -j4   # run all tests with "one_d_poisson" in their LABELS
 ```
 
 It is important to note that both of these commands will cause all other tests with similar `LABELS` to be run. This can, however, be particularly helpful when you wish to run a group of tests, e.g. all Poisson-based tests (assuming they have `poisson` under their `LABELS`).
@@ -441,7 +441,7 @@ It is important to note that both of these commands will cause all other tests w
 An alternative approach for filtering tests is to specify a regular expression to the `-R`/`--tests-regex` flag. Only tests for  which the `TEST_NAME` key matches the regular expression will be run. For example
 
 ```bash
->>> ctest -R poisson.one_d_poisson
+ctest -R poisson.one_d_poisson
 ```
 
 will cause all tests containing `poisson.one_d_poisson` in the `TEST_NAME` to be run. To run, say, only `poisson.one_d_poisson` and `gzip.one_d_poisson`, you could use a regex recipe of the form:
@@ -457,10 +457,10 @@ A simpler, but slightly more restrictive approach of testing is to only build th
 To test a specific demo driver, you simply step into the folder of the demo driver you want to test and run the commands mentioned in [Examples/testing](#examplestesting). For example, to just run the `one_d_poisson` example, run the commands below:
 
 ```bash
->>> cd demo_drivers/poisson/one_d_poisson/  # enter chosen demo driver directory
->>> cmake -G Ninja -B build                 # configure build system for one_d_poisson project
->>> cd build                                # enter build directory
->>> ctest                                   # invoke all tests defined by the one_d_poisson project
+cd demo_drivers/poisson/one_d_poisson/  # enter chosen demo driver directory
+cmake -G Ninja -B build                 # configure build system for one_d_poisson project
+cd build                                # enter build directory
+ctest                                   # invoke all tests defined by the one_d_poisson project
 ```
 
 #### Clean-up
@@ -469,13 +469,13 @@ The examples in `demo_drivers/` produce a large amount of data. It is a good ide
 
 ```bash
 # Run demo driver tests
->>> cd demo_drivers/
->>> cmake -G Ninja -B build
->>> ctest -j4
+cd demo_drivers/
+cmake -G Ninja -B build
+ctest -j4
 
 # Clean-up
->>> cd ..           # Exit the build/ folder into the parent demo_drivers folder
->>> rm -rf build    # Wipe the self-tests output
+cd ..           # Exit the build/ folder into the parent demo_drivers folder
+rm -rf build    # Wipe the self-tests output
 ```
 
 #### Disabling a test
