@@ -292,7 +292,7 @@ Recall from [Building and installing](#building-and-installing) that we do not t
 
     # Now try to build a project that depends on oomph-lib
     >>> cd ~/some_project_dependent_on_oomphlib/
-    >>> cmake -G Ninja -B build -DCMAKE_PREFIX_PATH=~/oomph_install
+    >>> cmake -G Ninja -B build
     ```
 
     If you use this approach, you should install `oomph-lib` to some location outside of your `oomph-lib` folder; if you use the default installation location and move your `oomph-lib` folder, you will have to update your `PATH` variable to reflect that change.
