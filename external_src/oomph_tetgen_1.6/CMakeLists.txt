@@ -42,7 +42,8 @@ oomph_target_silence_warnings(TARGET ${LIBNAME}
 # BOILERPLATE: Update global variables
 
 # Update list of external sources preprocessor definitions and list of libraries
-list(APPEND EXTERNAL_SRC_CXX_DEFINITIONS OOMPH_HAS_TETGEN_LIB)
+list(APPEND EXTERNAL_SRC_CXX_DEFINITIONS OOMPH_HAS_TETGEN_LIB
+     OOMPH_HAS_TETGEN_V1_6)
 list(APPEND EXTERNAL_SRC_LIBS ${LIBNAME})
 
 # Make the updated variable values visible to the parent scope

@@ -373,7 +373,13 @@ namespace oomph
       // Make a new tetgen representation
       this->Tetgenio_exists = true;
       Tetgenio_pt = new tetgenio;
+#ifdef OOMPH_HAS_TETGEN_V1_6
+      tetgenbehavior tb;
+      tb.parse_commandline(tetswitches);
+      tetrahedralize(&tb, &in, this->Tetgenio_pt);
+#else
       tetrahedralize(tetswitches, &in, this->Tetgenio_pt);
+#endif
 
       // Build scaffold
       Tmp_mesh_pt = new TetgenScaffoldMesh(*this->Tetgenio_pt);
