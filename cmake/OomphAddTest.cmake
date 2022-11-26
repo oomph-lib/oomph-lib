@@ -10,8 +10,8 @@
 # ------
 #     oomph_add_test(TEST_NAME             <name-of-test>
 #                    TARGET_DEPENDENCIES   <executables/targets-required-by-test>
-#                    EXTRA_REQUIRES        <extra-files-required-by-test>
 #                    LABELS                <string-list-of-labels>
+#                    [EXTRA_REQUIRES        <extra-files-required-by-test>]
 #                    [SILENCE_MISSING_VALIDATA_WARNING]
 #                    [NO_VALIDATE_SH]
 #                    [REQUIRES_MPI_RUN_COMMAND]
