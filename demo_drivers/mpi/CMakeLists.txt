@@ -4,7 +4,7 @@ message(VERBOSE "Entered mpi subdirectory")
 
 set(SUBDIRS distribution multi_domain solvers)
 
-foreach(SUBDIR ${SUBDIRS})
+foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
 

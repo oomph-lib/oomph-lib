@@ -4,7 +4,7 @@ message(VERBOSE "Entered darcy subdirectory")
 
 set(SUBDIRS unstructured_two_d_circle)
 
-foreach(SUBDIR ${SUBDIRS})
+foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
 

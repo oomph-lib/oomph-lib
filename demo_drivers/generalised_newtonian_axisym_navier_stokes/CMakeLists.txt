@@ -5,7 +5,7 @@ message(VERBOSE
 
 set(SUBDIRS axisym_vibrating_shell)
 
-foreach(SUBDIR ${SUBDIRS})
+foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
 

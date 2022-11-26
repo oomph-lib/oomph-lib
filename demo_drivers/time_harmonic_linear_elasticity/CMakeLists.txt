@@ -4,7 +4,7 @@ message(VERBOSE "Entered time_harmonic_linear_elasticity subdirectory")
 
 set(SUBDIRS elastic_annulus)
 
-foreach(SUBDIR ${SUBDIRS})
+foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
 

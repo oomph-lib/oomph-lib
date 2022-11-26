@@ -4,7 +4,7 @@ message(VERBOSE "Entered foeppl_von_karman subdirectory")
 
 set(SUBDIRS circular_disk)
 
-foreach(SUBDIR ${SUBDIRS})
+foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
 

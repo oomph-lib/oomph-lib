@@ -17,7 +17,7 @@ set(SUBDIRS
     b_convection_sphere
     spherical_shell_convection)
 
-foreach(SUBDIR ${SUBDIRS})
+foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
 

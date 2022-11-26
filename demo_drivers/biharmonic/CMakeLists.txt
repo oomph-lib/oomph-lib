@@ -4,7 +4,7 @@ message(VERBOSE "Entered biharmonic subdirectory")
 
 set(SUBDIRS two_d_biharmonic)
 
-foreach(SUBDIR ${SUBDIRS})
+foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
 

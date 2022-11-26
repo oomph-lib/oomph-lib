@@ -10,7 +10,7 @@ set(SUBDIRS
     two_d_unsteady_heat_adapt
     two_d_unsteady_heat_t_adapt)
 
-foreach(SUBDIR ${SUBDIRS})
+foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
 

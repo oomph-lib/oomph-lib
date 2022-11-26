@@ -8,7 +8,7 @@ if(HAVE_ARPACK_SOURCES)
   list(APPEND SUBDIRS harmonic orr_sommerfeld)
 endif()
 
-foreach(SUBDIR ${SUBDIRS})
+foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
 

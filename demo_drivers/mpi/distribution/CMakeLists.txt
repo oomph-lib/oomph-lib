@@ -21,7 +21,7 @@ set(SUBDIRS
     bifurcation_tracking
     eigenproblem)
 
-foreach(SUBDIR ${SUBDIRS})
+foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
 

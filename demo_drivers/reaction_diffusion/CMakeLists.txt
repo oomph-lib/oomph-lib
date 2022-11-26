@@ -5,7 +5,7 @@ message(VERBOSE "Entered reaction_diffusion subdirectory")
 set(SUBDIRS one_d_act_inhibit two_d_act_inhibit two_d_act_inhibit_adapt
     unstructured_two_d_act_inhibit)
 
-foreach(SUBDIR ${SUBDIRS})
+foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
 

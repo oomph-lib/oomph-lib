@@ -4,7 +4,7 @@ message(VERBOSE "Entered homogenisation subdirectory")
 
 set(SUBDIRS two_dim)
 
-foreach(SUBDIR ${SUBDIRS})
+foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
 

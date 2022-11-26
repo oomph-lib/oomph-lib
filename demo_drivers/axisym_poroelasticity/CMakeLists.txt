@@ -4,7 +4,7 @@ message(VERBOSE "Entered axisym_poroelasticity subdirectory")
 
 set(SUBDIRS unstructured_two_d_curved)
 
-foreach(SUBDIR ${SUBDIRS})
+foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
 

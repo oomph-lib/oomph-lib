@@ -4,7 +4,7 @@ message(VERBOSE "Entered ode subdirectory")
 
 set(SUBDIRS basic_ode)
 
-foreach(SUBDIR ${SUBDIRS})
+foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
 

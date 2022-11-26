@@ -4,7 +4,7 @@ message(VERBOSE "Entered fourier_decomposed_helmholtz subdirectory")
 
 set(SUBDIRS sphere_scattering)
 
-foreach(SUBDIR ${SUBDIRS})
+foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
 

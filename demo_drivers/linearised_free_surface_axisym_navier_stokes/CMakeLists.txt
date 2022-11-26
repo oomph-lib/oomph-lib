@@ -5,7 +5,7 @@ message(VERBOSE
 
 set(SUBDIRS two_layer_interface_nonaxisym_perturbations)
 
-foreach(SUBDIR ${SUBDIRS})
+foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
 

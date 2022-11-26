@@ -23,7 +23,7 @@ set(SUBDIRS
     acoustic_fsi
     fourier_decomposed_acoustic_fsi)
 
-foreach(SUBDIR ${SUBDIRS})
+foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
 

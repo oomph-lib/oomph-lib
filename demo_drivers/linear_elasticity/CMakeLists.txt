@@ -4,7 +4,7 @@ message(VERBOSE "Entered linear_elasticity subdirectory")
 
 set(SUBDIRS periodic_load)
 
-foreach(SUBDIR ${SUBDIRS})
+foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
 

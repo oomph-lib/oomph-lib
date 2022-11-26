@@ -4,7 +4,7 @@ message(VERBOSE "Entered generalised_newtonian_navier_stokes subdirectory")
 
 set(SUBDIRS vibrating_shell)
 
-foreach(SUBDIR ${SUBDIRS})
+foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
 

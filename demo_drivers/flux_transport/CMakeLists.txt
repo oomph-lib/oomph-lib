@@ -4,7 +4,7 @@ message(VERBOSE "Entered flux_transport subdirectory")
 
 set(SUBDIRS advection euler)
 
-foreach(SUBDIR ${SUBDIRS})
+foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
 

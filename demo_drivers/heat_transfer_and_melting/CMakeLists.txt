@@ -4,7 +4,7 @@ message(VERBOSE "Entered heat_transfer_and_melting subdirectory")
 
 set(SUBDIRS two_d_unsteady_heat_melt)
 
-foreach(SUBDIR ${SUBDIRS})
+foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
 

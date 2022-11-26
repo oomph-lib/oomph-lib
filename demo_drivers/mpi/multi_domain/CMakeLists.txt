@@ -10,7 +10,7 @@ set(SUBDIRS
     turek_flag
     pseudo_solid_collapsible_tube)
 
-foreach(SUBDIR ${SUBDIRS})
+foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
 

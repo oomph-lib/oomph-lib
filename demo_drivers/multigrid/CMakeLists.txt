@@ -4,7 +4,7 @@ message(VERBOSE "Entered multigrid subdirectory")
 
 set(SUBDIRS scalar_multigrid helmholtz_multigrid)
 
-foreach(SUBDIR ${SUBDIRS})
+foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
 

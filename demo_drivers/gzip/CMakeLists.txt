@@ -4,7 +4,7 @@ message(VERBOSE "Entered gzip subdirectory")
 
 set(SUBDIRS one_d_poisson)
 
-foreach(SUBDIR ${SUBDIRS})
+foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
 

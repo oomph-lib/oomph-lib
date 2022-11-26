@@ -4,7 +4,7 @@ message(VERBOSE "Entered axisym_advection_diffusion subdirectory")
 
 set(SUBDIRS pipe)
 
-foreach(SUBDIR ${SUBDIRS})
+foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
 

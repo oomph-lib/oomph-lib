@@ -4,7 +4,7 @@ message(VERBOSE "Entered shell subdirectory")
 
 set(SUBDIRS clamped_shell clamped_or_pinned_shell oscillating_shell plate)
 
-foreach(SUBDIR ${SUBDIRS})
+foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
 

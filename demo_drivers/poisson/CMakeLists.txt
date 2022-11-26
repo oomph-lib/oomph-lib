@@ -21,7 +21,7 @@ set(SUBDIRS
     eighth_sphere_poisson_hp_adapt
     spectral)
 
-foreach(SUBDIR ${SUBDIRS})
+foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
 

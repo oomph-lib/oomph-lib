@@ -6,7 +6,7 @@ message(
 
 set(SUBDIRS cylinder)
 
-foreach(SUBDIR ${SUBDIRS})
+foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
 

@@ -20,7 +20,7 @@ set(SUBDIRS
     unstructured_three_d_solid
     unstructured_adaptive_solid)
 
-foreach(SUBDIR ${SUBDIRS})
+foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
 

@@ -11,7 +11,7 @@ set(SUBDIRS
     sparse_assemble
     fsi_jacobian_approximation)
 
-foreach(SUBDIR ${SUBDIRS})
+foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
 

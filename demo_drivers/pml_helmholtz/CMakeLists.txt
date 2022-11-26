@@ -4,7 +4,7 @@ message(VERBOSE "Entered pml_helmholtz subdirectory")
 
 set(SUBDIRS scattering)
 
-foreach(SUBDIR ${SUBDIRS})
+foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
 

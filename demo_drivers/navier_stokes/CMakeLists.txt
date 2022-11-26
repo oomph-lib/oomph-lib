@@ -49,7 +49,7 @@ if(NOT OOMPH_SUPPRESSED_TETGEN_LIB)
   list(APPEND SUBDIRS unstructured_adaptive_3d_ALE)
 endif()
 
-foreach(SUBDIR ${SUBDIRS})
+foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
 

@@ -4,7 +4,7 @@ message(VERBOSE "Entered helmholtz subdirectory")
 
 set(SUBDIRS scattering point_source)
 
-foreach(SUBDIR ${SUBDIRS})
+foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
 

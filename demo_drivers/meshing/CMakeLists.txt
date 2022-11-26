@@ -14,7 +14,7 @@ set(SUBDIRS
     quadratic_vmtk_tetgen
     adaptive_tet_meshes)
 
-foreach(SUBDIR ${SUBDIRS})
+foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
 

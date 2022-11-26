@@ -4,7 +4,7 @@ message(VERBOSE "Entered polar_navier_stokes subdirectory")
 
 set(SUBDIRS jeffery_hamel)
 
-foreach(SUBDIR ${SUBDIRS})
+foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
 

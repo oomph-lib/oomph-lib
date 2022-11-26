@@ -18,7 +18,7 @@ if(NOT OOMPH_SUPPRESSED_TRIANGLE_LIB)
   list(APPEND SUBDIRS unstructured_torus)
 endif()
 
-foreach(SUBDIR ${SUBDIRS})
+foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
 

@@ -4,7 +4,7 @@ message(VERBOSE "Entered steady_axisym_advection_diffusion subdirectory")
 
 set(SUBDIRS steady_axisym_advection_diffusion)
 
-foreach(SUBDIR ${SUBDIRS})
+foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
 

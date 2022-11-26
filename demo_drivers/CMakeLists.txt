@@ -73,7 +73,7 @@ if(OOMPH_HAS_MPI)
   list(APPEND SUBDIRS mpi)
 endif()
 
-foreach(SUBDIR ${SUBDIRS})
+foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
 
