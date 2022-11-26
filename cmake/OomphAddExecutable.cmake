@@ -12,6 +12,7 @@
 #                          [CXX_DEFINITIONS <preprocessor-definitions>]
 #                          [CXX_OPTIONS     <compiler-options>]
 #                          [CXX_STANDARD    <17|20>]
+#                          [LINK_OPTIONS    <link-options>]
 #                          [SILENCE_NO_LIBS_SUPPLIED_WARNING])
 #
 # NOTE: It is slightly unusual for the user to not provide any libraries to link
@@ -30,7 +31,7 @@
 #                          LIBRARIES oomph::poisson
 #                          CXX_DEFINITIONS REFINEABLE
 #                          CXX_OPTIONS -Wall -Werror
-#                          SILENCE_NO_LIBS_SUPPLIED_WARNING)
+#                          LINK_OPTIONS -Wl,-no_compact_unwind -Wl,-keep_dwarf_unwind)
 #
 # It is worth noting that the argument supplied to CXX_DEFINITIONS does not
 # require a -D prefix (as is usually required to indicate that it is a
@@ -44,7 +45,8 @@ function(oomph_add_executable)
   set(PREFIX ARG)
   set(FLAGS SILENCE_NO_LIBS_SUPPLIED_WARNING)
   set(SINGLE_VALUE_ARGS NAME CXX_STANDARD)
-  set(MULTI_VALUE_ARGS SOURCES LIBRARIES CXX_DEFINITIONS CXX_OPTIONS)
+  set(MULTI_VALUE_ARGS SOURCES LIBRARIES CXX_DEFINITIONS CXX_OPTIONS
+      LINK_OPTIONS)
 
   # Process the arguments passed in
   include(CMakeParseArguments)
@@ -60,6 +62,7 @@ function(oomph_add_executable)
   set(CXX_STANDARD ${${PREFIX}_CXX_STANDARD})
   set(CXX_DEFINITIONS ${${PREFIX}_CXX_DEFINITIONS})
   set(CXX_OPTIONS ${${PREFIX}_CXX_OPTIONS})
+  set(LINK_OPTIONS ${${PREFIX}_LINK_OPTIONS})
 
   # Make sure the arguments are valid
   if(NOT NAME)
@@ -104,7 +107,7 @@ function(oomph_add_executable)
   # specified by the user. NOTE: This does assume that the user won't place two
   # targets with the same name in the same folder. However, I think this is a
   # perfectly valid assumption. If you did do that and you're reading this now,
-  # what on earth are you doing?
+  # what are you thinking?
   string(SHA1 PATH_HASH "${CMAKE_CURRENT_LIST_DIR}")
   string(SUBSTRING ${PATH_HASH} 0 7 PATH_HASH)
 
@@ -141,6 +144,11 @@ function(oomph_add_executable)
   # Add any compiler flags
   if(CXX_OPTIONS)
     target_compile_options(${NAME}_${PATH_HASH} PUBLIC ${CXX_OPTIONS})
+  endif()
+
+  # Add any linker flags
+  if(LINK_OPTIONS)
+    target_compile_options(${NAME}_${PATH_HASH} PUBLIC ${LINK_OPTIONS})
   endif()
 
   # Should we try to colourise the command output?
