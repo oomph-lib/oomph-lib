@@ -39,7 +39,11 @@ endif()
 
 # Add Tetgen
 if(NOT OOMPH_SUPPRESS_TETGEN_LIB)
-  add_subdirectory(oomph_tetgen)
+  if(OOMPH_USE_DEPRECATED_TETGEN)
+    add_subdirectory(oomph_tetgen)
+  else()
+    add_subdirectory(oomph_tetgen_1.6)
+  endif()
 endif()
 
 # Add BLAS
@@ -109,6 +113,9 @@ else()
     endif()
   endif()
 endif()
+
+# ------------------------------------------------------------------------------
+# BOILERPLATE: Update global variables
 
 # Make the compiler flags and external libraries visible in the parent scope
 set(EXTERNAL_SRC_CXX_DEFINITIONS ${EXTERNAL_SRC_CXX_DEFINITIONS} PARENT_SCOPE)
