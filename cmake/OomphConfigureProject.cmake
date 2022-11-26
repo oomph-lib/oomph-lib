@@ -56,7 +56,7 @@ set(OOMPH_INSTALL_BIN_DIR "${CMAKE_INSTALL_FULL_BINDIR}/${PROJECT_NAME}")
 # Silence warnings on MacOS about targets of ranlib having no symbols. This
 # occurs when there is no code to be compiled, e.g. when #ifdef directives
 # exclude all of the code from all of the files required by a library. This
-# could possibly moved to it's own simple module. Found online somewhere...
+# could possibly moved to its own simple module. Found online somewhere...
 if(APPLE)
   set(CMAKE_C_ARCHIVE_CREATE "<CMAKE_AR> Scr <TARGET> <LINK_FLAGS> <OBJECTS>")
   set(CMAKE_CXX_ARCHIVE_CREATE "<CMAKE_AR> Scr <TARGET> <LINK_FLAGS> <OBJECTS>")

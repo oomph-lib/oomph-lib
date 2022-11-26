@@ -190,7 +190,7 @@ endif()
 if(OOMPH_ENABLE_USE_OPENBLAS)
   # Ideally, the user will install OpenBLAS via 'sudo apt-get' or 'brew install'
   # and they will simply set 'CMAKE_PREFIX_PATH' in their CMakeUserPresets.json
-  # NOTE: You can override the BLAS/LAPACK vendor by setting it's value as a
+  # NOTE: You can override the BLAS/LAPACK vendor by setting its value as a
   # cache variable from the command-line, i.e. "cmake -DBLA_VENDOR ...". It will
   # then override the value used here.
   #

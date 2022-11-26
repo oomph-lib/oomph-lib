@@ -52,7 +52,7 @@ if(HYPRE_ENABLE_HYPRE_LAPACK)
 endif()
 
 # Make it look like we've changed the installation path so that Hypre won't try
-# to set it's own custom installation path...
+# to set its own custom installation path...
 if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   set(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT FALSE)
 endif()
