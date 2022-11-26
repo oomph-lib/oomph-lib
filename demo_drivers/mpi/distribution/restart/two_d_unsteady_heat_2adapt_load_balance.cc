@@ -26,6 +26,8 @@
 // Driver for doubly adaptive 2D unsteady heat problem in moving domain
 // with restart and load balancing and pruning all in one code
 
+#include <cassert>
+
 //Generic routines
 #include "generic.h"
 

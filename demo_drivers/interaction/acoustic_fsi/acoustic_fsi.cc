@@ -25,6 +25,8 @@
 //LIC//====================================================================
 // Driver for Helmholtz/TimeHarmonicTimeHarmonicLinElast coupling
 
+#include <cassert>
+
 //Oomph-lib includes
 #include "generic.h"
 #include "helmholtz.h"

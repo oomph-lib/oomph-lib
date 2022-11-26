@@ -25,6 +25,8 @@
 //LIC//====================================================================
 //Driver for refineable Young Laplace problem
 
+#include <cassert>
+
 //Generic routines
 #include "generic.h"
 
