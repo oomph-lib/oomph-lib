@@ -148,7 +148,7 @@ function(oomph_add_executable)
 
   # Add any linker flags
   if(LINK_OPTIONS)
-    target_compile_options(${NAME}_${PATH_HASH} PUBLIC ${LINK_OPTIONS})
+    target_link_options(${NAME}_${PATH_HASH} PUBLIC ${LINK_OPTIONS})
   endif()
 
   # Should we try to colourise the command output?
