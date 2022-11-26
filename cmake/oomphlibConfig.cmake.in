@@ -177,8 +177,7 @@ check_required_components("@PROJECT_NAMESPACE@")
 
 # -------------------[ INCLUDE EXTRA INSTALLED CMAKE FILES ]-------------------
 
-# FIXME: Explain why we export these CMake modules add_executable and add_test
-# are obvious, by why enable_code_coverage?
+include("${CMAKE_CURRENT_LIST_DIR}/OomphGetHashedTargetName.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}/OomphAddExecutable.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}/OomphAddTest.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}/OomphEnableCodeCoverage.cmake")

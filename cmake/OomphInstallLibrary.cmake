@@ -69,12 +69,14 @@ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/oomphlibUninstall.cmake"
 
 # The list of modules to copy to the build directory
 set(OOMPH_FILES_TO_COPY_TO_BUILD_DIR
+    "${CMAKE_CURRENT_LIST_DIR}/OomphGetHashedTargetName.cmake"
     "${CMAKE_CURRENT_LIST_DIR}/OomphAddExecutable.cmake"
     "${CMAKE_CURRENT_LIST_DIR}/OomphAddTest.cmake"
     "${CMAKE_CURRENT_LIST_DIR}/OomphEnableCodeCoverage.cmake")
 
 # The list of modules to distribute with the library
 set(OOMPH_FILES_TO_INSTALL_TO_CMAKE_DIR
+    "${CMAKE_CURRENT_LIST_DIR}/OomphGetHashedTargetName.cmake"
     "${CMAKE_CURRENT_LIST_DIR}/OomphAddExecutable.cmake"
     "${CMAKE_CURRENT_LIST_DIR}/OomphAddTest.cmake"
     "${CMAKE_CURRENT_LIST_DIR}/OomphEnableCodeCoverage.cmake"
