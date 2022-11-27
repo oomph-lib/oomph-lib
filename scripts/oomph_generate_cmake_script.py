@@ -166,7 +166,6 @@ class MakefileToCMakeListsConverter:
         return text
 
     def load_makefile(self, fpath: Path) -> str:
-        # TODO: Add check for empty Makefile.am
         text = self._load(fpath)
         text = self._remove_comments(text)
         text = self._remove_line_breaks(text)
@@ -470,7 +469,6 @@ def main():
     args = parse_args()
     c = MakefileToCMakeListsConverter()
     files = list(c.find_makefiles(args.directory)) if args.file is None else [args.file]
-    # for file in (Path("user_drivers/puneet_flow_past_an_oscillating_cylinder/local_src/space_time_block_preconditioner/Makefile.am"),):
     print(f"{len(files)} Makefile.am files found:")
     for file in files:
         print(f"  * {file}")
