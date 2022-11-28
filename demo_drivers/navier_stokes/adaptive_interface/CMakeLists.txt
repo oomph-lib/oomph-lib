@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.adaptive_interface
   TARGET_DEPENDENCIES adaptive_interface
   EXTRA_REQUIRES
-  LABELS "navier_stokes;adaptive_interface;adapt")
+  LABELS navier_stokes adaptive_interface adapt)
 
 message(VERBOSE "Leaving adaptive_interface subdirectory")
 # ------------------------------------------------------------------------------

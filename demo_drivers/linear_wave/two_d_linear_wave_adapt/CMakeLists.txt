@@ -20,7 +20,7 @@ oomph_add_test(
   TEST_NAME linear_wave.two_d_linear_wave_adapt
   TARGET_DEPENDENCIES two_d_linear_wave_adapt
   EXTRA_REQUIRES
-  LABELS "linear_wave;two_d_linear_wave_adapt;adapt")
+  LABELS linear_wave two_d_linear_wave_adapt adapt)
 
 message(VERBOSE "Leaving two_d_linear_wave_adapt subdirectory")
 # ------------------------------------------------------------------------------

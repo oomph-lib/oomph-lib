@@ -20,7 +20,7 @@ oomph_add_test(
   TEST_NAME solid.unstructured_adaptive_solid
   TARGET_DEPENDENCIES unstructured_adaptive_solid
   EXTRA_REQUIRES
-  LABELS "solid;unstructured_adaptive_solid;adapt")
+  LABELS solid unstructured_adaptive_solid adapt)
 
 message(VERBOSE "Leaving unstructured_adaptive_solid subdirectory")
 # ------------------------------------------------------------------------------

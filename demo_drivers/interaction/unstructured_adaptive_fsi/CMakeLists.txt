@@ -20,7 +20,7 @@ oomph_add_test(
   TEST_NAME interaction.unstructured_adaptive_fsi
   TARGET_DEPENDENCIES unstructured_adaptive_2d_fsi
   EXTRA_REQUIRES
-  LABELS "interaction;unstructured_adaptive_fsi;adapt")
+  LABELS interaction unstructured_adaptive_fsi adapt)
 
 message(VERBOSE "Leaving unstructured_adaptive_fsi subdirectory")
 # ------------------------------------------------------------------------------

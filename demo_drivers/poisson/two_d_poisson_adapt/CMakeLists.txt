@@ -20,7 +20,7 @@ oomph_add_test(
   TEST_NAME poisson.two_d_poisson_adapt
   TARGET_DEPENDENCIES two_d_poisson_adapt
   EXTRA_REQUIRES
-  LABELS "poisson;two_d_poisson_adapt;adapt")
+  LABELS poisson two_d_poisson_adapt adapt)
 
 message(VERBOSE "Leaving two_d_poisson_adapt subdirectory")
 # ------------------------------------------------------------------------------

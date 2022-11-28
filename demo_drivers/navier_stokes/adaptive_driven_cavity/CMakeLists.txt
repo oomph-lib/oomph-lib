@@ -20,7 +20,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.adaptive_driven_cavity
   TARGET_DEPENDENCIES adaptive_driven_cavity
   EXTRA_REQUIRES
-  LABELS "navier_stokes;adaptive_driven_cavity;adapt")
+  LABELS navier_stokes adaptive_driven_cavity adapt)
 
 message(VERBOSE "Leaving adaptive_driven_cavity subdirectory")
 # ------------------------------------------------------------------------------

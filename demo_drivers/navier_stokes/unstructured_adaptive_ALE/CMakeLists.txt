@@ -21,7 +21,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.unstructured_adaptive_ALE
   TARGET_DEPENDENCIES unstructured_adaptive_ALE
   EXTRA_REQUIRES
-  LABELS "navier_stokes;unstructured_adaptive_ALE;adapt")
+  LABELS navier_stokes unstructured_adaptive_ALE adapt)
 
 message(VERBOSE "Leaving unstructured_adaptive_ALE subdirectory")
 # ------------------------------------------------------------------------------

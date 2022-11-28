@@ -41,7 +41,7 @@ oomph_add_test(
   TARGET_DEPENDENCIES fish_domain fish_poisson_adapt fish_poisson_no_adapt
                       fish_poisson_node_update fish_poisson_simple_adapt
   EXTRA_REQUIRES
-  LABELS "poisson;fish_poisson2")
+  LABELS poisson fish_poisson2)
 
 message(VERBOSE "Leaving fish_poisson2 subdirectory")
 # ------------------------------------------------------------------------------

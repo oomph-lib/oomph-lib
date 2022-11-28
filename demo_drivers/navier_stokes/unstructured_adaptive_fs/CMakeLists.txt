@@ -27,7 +27,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.unstructured_adaptive_fs
   TARGET_DEPENDENCIES adaptive_bubble_in_channel adaptive_drop_in_channel
   EXTRA_REQUIRES
-  LABELS "navier_stokes;unstructured_adaptive_fs;adapt")
+  LABELS navier_stokes unstructured_adaptive_fs adapt)
 
 message(VERBOSE "Leaving unstructured_adaptive_fs subdirectory")
 # ------------------------------------------------------------------------------

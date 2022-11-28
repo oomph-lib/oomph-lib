@@ -20,7 +20,7 @@ oomph_add_test(
   TEST_NAME poisson.eighth_sphere_poisson_hp_adapt
   TARGET_DEPENDENCIES eighth_sphere_poisson_hp_adapt
   EXTRA_REQUIRES
-  LABELS "poisson;eighth_sphere_poisson_hp_adapt;adapt")
+  LABELS poisson eighth_sphere_poisson_hp_adapt adapt)
 
 message(VERBOSE "Leaving eighth_sphere_poisson_hp_adapt subdirectory")
 # ------------------------------------------------------------------------------

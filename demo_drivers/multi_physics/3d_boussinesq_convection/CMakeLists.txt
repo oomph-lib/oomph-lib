@@ -25,7 +25,7 @@ oomph_add_test(
   TEST_NAME multi_physics.3d_boussinesq_convection
   TARGET_DEPENDENCIES 3d_multimesh_ref_b_convect 3d_ref_b_convect
   EXTRA_REQUIRES
-  LABELS "multi_physics;3d_boussinesq_convection")
+  LABELS multi_physics 3d_boussinesq_convection)
 
 message(VERBOSE "Leaving 3d_boussinesq_convection subdirectory")
 # ------------------------------------------------------------------------------

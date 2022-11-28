@@ -20,7 +20,7 @@ oomph_add_test(
   TEST_NAME reaction_diffusion.two_d_act_inhibit_adapt
   TARGET_DEPENDENCIES two_d_act_inhibit_adapt
   EXTRA_REQUIRES
-  LABELS "reaction_diffusion;two_d_act_inhibit_adapt;adapt")
+  LABELS reaction_diffusion two_d_act_inhibit_adapt adapt)
 
 message(VERBOSE "Leaving two_d_act_inhibit_adapt subdirectory")
 # ------------------------------------------------------------------------------

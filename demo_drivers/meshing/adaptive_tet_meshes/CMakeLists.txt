@@ -55,7 +55,7 @@ oomph_add_test(
   TEST_NAME meshing.adaptive_tet_meshes
   TARGET_DEPENDENCIES ${TEST_TARGET_DEPS}
   EXTRA_REQUIRES
-  LABELS "meshing;adaptive_tet_meshes;adapt")
+  LABELS meshing adaptive_tet_meshes adapt)
 
 message(VERBOSE "Leaving adaptive_tet_meshes subdirectory")
 # ------------------------------------------------------------------------------
