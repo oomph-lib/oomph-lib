@@ -2,6 +2,13 @@
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(VERBOSE "Entered shell subdirectory")
 
+cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
+project(shell C CXX Fortran)
+if(NOT BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+  find_package(oomphlib CONFIG REQUIRED PATHS "../../install")
+endif()
+include(CTest)
+
 set(SUBDIRS clamped_shell clamped_or_pinned_shell oscillating_shell plate)
 
 foreach(SUBDIR IN LISTS SUBDIRS)

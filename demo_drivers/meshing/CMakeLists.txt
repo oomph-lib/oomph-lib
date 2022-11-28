@@ -2,6 +2,13 @@
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(VERBOSE "Entered meshing subdirectory")
 
+cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
+project(meshing C CXX Fortran)
+if(NOT BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+  find_package(oomphlib CONFIG REQUIRED PATHS "../../install")
+endif()
+include(CTest)
+
 set(SUBDIRS
     mesh_from_inline_triangle
     mesh_from_inline_triangle_internal_boundaries

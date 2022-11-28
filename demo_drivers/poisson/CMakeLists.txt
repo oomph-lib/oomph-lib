@@ -2,6 +2,13 @@
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(VERBOSE "Entered poisson subdirectory")
 
+cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
+project(poisson C CXX Fortran)
+if(NOT BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+  find_package(oomphlib CONFIG REQUIRED PATHS "../../install")
+endif()
+include(CTest)
+
 set(SUBDIRS
     poisson_with_singularity
     one_d_poisson

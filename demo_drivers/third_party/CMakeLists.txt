@@ -2,6 +2,13 @@
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(VERBOSE "Entered third_party subdirectory")
 
+cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
+project(third_party C CXX Fortran)
+if(NOT BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+  find_package(oomphlib CONFIG REQUIRED PATHS "../../install")
+endif()
+include(CTest)
+
 set(SUBDIRS)
 
 if(OOMPH_HAS_NLOHMANN_JSON)

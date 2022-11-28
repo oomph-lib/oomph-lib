@@ -2,6 +2,13 @@
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(VERBOSE "Entered multi_physics subdirectory")
 
+cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
+project(multi_physics C CXX Fortran)
+if(NOT BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+  find_package(oomphlib CONFIG REQUIRED PATHS "../../install")
+endif()
+include(CTest)
+
 set(SUBDIRS
     boussinesq_convection
     3d_boussinesq_convection
