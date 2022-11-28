@@ -323,7 +323,7 @@ oomph_add_executable(...).
 
             cmake_text = [
                 f"\noomph_add_executable(",
-                f"  TARGET {target_name}",
+                f"  NAME {target_name}",
                 f"  SOURCES {target_sources}",
             ]
             if target_libs is not None:
