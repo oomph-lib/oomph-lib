@@ -3,7 +3,7 @@ list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(VERBOSE "Entered src subdirectory")
 
 # The subdirectories to build
-set(SRC_SUBDIRS
+set(SUBDIRS
     generic
     meshes
     poisson
@@ -54,7 +54,7 @@ set(SRC_SUBDIRS
     space_time)
 
 # Add each subdirectory target to the build
-foreach(SUBDIR ${SRC_SUBDIRS})
+foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
 
