@@ -54,10 +54,8 @@ foreach(FILE IN LISTS INSTALLED_FILES)
   endif()
 
   # Store parent folders to possibly delete (will only delete it if empty)
-  if(NOT (FILE MATCHES ".+.pc"))
-    cmake_path(GET FILE PARENT_PATH PARENT_DIR)
-    set(ALL_PARENT_DIRS ${ALL_PARENT_DIRS} ${PARENT_DIR})
-  endif()
+  cmake_path(GET FILE PARENT_PATH PARENT_DIR)
+  set(ALL_PARENT_DIRS ${ALL_PARENT_DIRS} ${PARENT_DIR})
 endforeach()
 
 # The list of auto-generated combined headers

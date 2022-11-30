@@ -48,12 +48,6 @@ install(
   FILE "${OOMPH_EXPORTS_TARGET_NAME}.cmake"
   DESTINATION "${OOMPH_INSTALL_CONFIG_DIR}")
 
-# Install pkg-config
-configure_file("${CMAKE_CURRENT_LIST_DIR}/${PROJECT_NAME}.pc.in"
-               "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.pc" @ONLY)
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.pc"
-        DESTINATION "${CMAKE_INSTALL_FULL_LIBDIR}/pkgconfig/")
-
 # ------------------------------------------------------------------------------
 
 # Install anything else that needs to be generated using configure_file(...),
