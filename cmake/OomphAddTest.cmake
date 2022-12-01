@@ -228,6 +228,15 @@ function(oomph_add_test)
       check_${PATH_HASH}
       COMMAND ${BASH_PROGRAM} ./validate.sh ${OOMPH_ROOT_DIR}
               ${EXTRA_VALIDATE_SH_ARGS}
+      # Check for the validation.log file. Stop here if we can't
+      COMMAND
+        ${BASH_PROGRAM} -c
+        "test -e \"${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log\" || ( \
+          printf \"\\nUnable to locate validation log file:\\n\\n\\t${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log\\n\\nStopping here...\\n\\n\" && \
+          exit 0 )"
+      # Append the validation.log to the top-level validation.log
+      COMMAND cat "${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log" >>
+              "${CMAKE_BINARY_DIR}/validation.log"
       WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
       DEPENDS copy_${PATH_HASH} build_targets_${PATH_HASH}
               clean_validation_dir_${PATH_HASH}
@@ -238,14 +247,17 @@ function(oomph_add_test)
     list(JOIN TARGET_DEPENDENCIES " ./" RUN_DEPENDENCIES_STRING)
     add_custom_target(
       check_${PATH_HASH}
+      # Run each executable
       COMMAND ${BASH_PROGRAM} -c ./${RUN_DEPENDENCIES_STRING}
+      # Check for the validation.log file
       COMMAND
         ${BASH_PROGRAM} -c
         "test -e \"${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log\" || ( \
           printf \"\\nUnable to locate file:\\n\\n\\t${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log\\n\\nStopping here...\\n\\n\" && \
           exit 1 )"
+      # Append validation.log to top-level validation.log
       COMMAND cat "${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log" >>
-              "${OOMPH_ROOT_DIR}/validation.log"
+              "${CMAKE_BINARY_DIR}/validation.log"
       WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
       DEPENDS copy_${PATH_HASH} build_targets_${PATH_HASH}
               clean_validation_dir_${PATH_HASH}
