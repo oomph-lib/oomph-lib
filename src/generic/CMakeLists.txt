@@ -292,6 +292,10 @@ if(OOMPH_HAS_NLOHMANN_JSON)
   target_link_libraries(${LIBNAME} PUBLIC nlohmann_json::nlohmann_json)
 endif()
 
+if(OOMPH_HAS_CGAL)
+  target_link_libraries(${LIBNAME} PUBLIC CGAL::CGAL)
+endif()
+
 if(OOMPH_HAS_HYPRE)
   target_link_libraries(${LIBNAME} PUBLIC HYPRE::HYPRE)
 endif()

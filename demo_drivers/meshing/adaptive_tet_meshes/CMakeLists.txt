@@ -17,25 +17,23 @@ oomph_add_executable(
 if(OOMPH_HAS_CGAL)
   oomph_add_executable(
     NAME planar_facet_bounded_mesh_from_gmsh
-    SOURCES simple_shear.cc tetmesh_faceted_surfaces.h
+    SOURCES planar_facet_bounded_tetmesh.cc tetmesh_faceted_surfaces.h
     LIBRARIES oomph::poisson)
 
   oomph_add_executable(
     NAME planar_facet_bounded_mesh_from_tetgen
-    SOURCES refineable_simple_shear.cc planar_facet_bounded_tetmesh.cc
-            tetmesh_faceted_surfaces.h
+    SOURCES planar_facet_bounded_tetmesh.cc tetmesh_faceted_surfaces.h
     LIBRARIES oomph::poisson
     CXX_DEFINITIONS DO_TETGEN)
 
   oomph_add_executable(
     NAME curved_facet_bounded_mesh_from_gmsh
-    SOURCES refineable_simple_shear.cc tetmesh_faceted_surfaces.h
+    SOURCES curved_facet_bounded_tetmesh.cc tetmesh_faceted_surfaces.h
     LIBRARIES oomph::poisson)
 
   oomph_add_executable(
     NAME curved_facet_bounded_mesh_from_tetgen
-    SOURCES refineable_simple_shear.cc curved_facet_bounded_tetmesh.cc
-            tetmesh_faceted_surfaces.h
+    SOURCES curved_facet_bounded_tetmesh.cc tetmesh_faceted_surfaces.h
     LIBRARIES oomph::poisson
     CXX_DEFINITIONS DO_TETGEN)
 endif()
@@ -53,9 +51,9 @@ endif()
 
 oomph_add_test(
   TEST_NAME meshing.adaptive_tet_meshes
-  TARGET_DEPENDENCIES ${TEST_TARGET_DEPS}
+  TARGET_DEPENDENCIES "${TEST_TARGET_DEPS}"
   EXTRA_REQUIRES
-  LABELS meshing adaptive_tet_meshes adapt)
+  LABELS meshing adaptive_tet_meshes adapt cgal)
 
 message(VERBOSE "Leaving adaptive_tet_meshes subdirectory")
 # ------------------------------------------------------------------------------

@@ -119,7 +119,12 @@ endif()
 
 # CGAL
 if(OOMPH_HAS_CGAL AND (NOT CGAL_FOUND))
-  find_dependency(CGAL 5.2.2 REQUIRED)
+  find_dependency(GMP REQUIRED)
+  find_dependency(MPFR REQUIRED)
+  find_dependency(Boost REQUIRED COMPONENTS Thread System Program_options)
+  set(CGAL_DO_NOT_WARN_ABOUT_CMAKE_BUILD_TYPE
+      @CGAL_DO_NOT_WARN_ABOUT_CMAKE_BUILD_TYPE@ CACHE INTERNAL "")
+  find_dependency(CGAL 5.5.1 REQUIRED PATHS "@CMAKE_INSTALL_PREFIX@")
 endif()
 
 # MUMPS

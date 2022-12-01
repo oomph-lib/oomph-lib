@@ -4,23 +4,32 @@
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(STATUS "Entered cgal subdirectory")
 
-# HANDLE WHAT HAPPENS IF WE WANT FIND BOOST...
-find_package(Boost)
+# Find dependencies
+find_package(GMP REQUIRED)
+find_package(MPFR REQUIRED)
+find_package(Boost REQUIRED COMPONENTS Thread System Program_options)
 
-# Specify build options
-set(BUILD_SHARED_LIBS ${BUILD_SHARED_LIBS})
-set(CMAKE_VERBOSE_MAKEFILE OFF)
-# set(OOMPH_WITH_GMP TRUE) set(GMP_INCLUDE_DIR "${GMP_INCLUDES}")
-# set(GMP_LIBRARIES
-# "${GMP_LINK}"))
+# Configuration flags
+set(CGAL_DO_NOT_WARN_ABOUT_CMAKE_BUILD_TYPE TRUE CACHE INTERNAL "")
 
 # Download the CGAL library
 FetchContent_Declare(
-  CGAL_project
+  cgal_project
   GIT_REPOSITORY https://github.com/CGAL/cgal.git
-  GIT_TAG v5.2.2
+  GIT_TAG v5.5.1 # releases/CGAL-4.11.3 # v5.5.1
+  GIT_PROGRESS TRUE
   GIT_SHALLOW TRUE)
-FetchContent_MakeAvailable(CGAL_project)
+FetchContent_MakeAvailable(cgal_project)
+
+find_package(CGAL REQUIRED PATHS "${CGAL_BINARY_DIR}")
+
+# FIXME: BUILD_TESTING is disable through CGAL and so whenever we import CGAL,
+# testing gets disable. This is a particular pain when we want to run our demo
+# drivers. Find a better way to do this...
+#
+# unset(BUILD_TESTING)
+
+# if(NOT TARGET CGAL::CGAL) add_library(CGAL::CGAL ALIAS CGAL) endif()
 
 # ------------------------------------------------------------------------------
 # BOILERPLATE: Update global variables

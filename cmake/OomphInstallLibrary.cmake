@@ -70,6 +70,8 @@ set(OOMPH_FILES_TO_COPY_TO_BUILD_DIR
 
 # The list of modules to distribute with the library
 set(OOMPH_FILES_TO_INSTALL_TO_CMAKE_DIR
+    "${CMAKE_CURRENT_LIST_DIR}/FindGMP.cmake"
+    "${CMAKE_CURRENT_LIST_DIR}/FindMPFR.cmake"
     "${CMAKE_CURRENT_LIST_DIR}/OomphGetHashedTargetName.cmake"
     "${CMAKE_CURRENT_LIST_DIR}/OomphAddExecutable.cmake"
     "${CMAKE_CURRENT_LIST_DIR}/OomphAddTest.cmake"
