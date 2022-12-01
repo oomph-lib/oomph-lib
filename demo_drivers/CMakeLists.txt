@@ -6,13 +6,11 @@ cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(demo_drivers C CXX Fortran)
 if(NOT BUILD_DEMO_DRIVERS_WITH_LIBRARY)
   find_package(oomphlib CONFIG REQUIRED PATHS "../install")
+  if(OOMPH_ENABLE_CODE_COVERAGE)
+    oomph_enable_code_coverage()
+  endif()
 endif()
 include(CTest)
-
-# Add code coverage compiler flags, if requested
-if(OOMPH_ENABLE_CODE_COVERAGE AND NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
-  oomph_enable_code_coverage()
-endif()
 
 set(SUBDIRS
     FAQ
