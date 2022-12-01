@@ -51,9 +51,9 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/")
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
-# Build in debugging mode by default
+# Build in Release (fully optimised) mode by default
 if(NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
-  set(CMAKE_BUILD_TYPE "Debug" CACHE STRING "" FORCE)
+  set(CMAKE_BUILD_TYPE "Release" CACHE STRING "" FORCE)
 endif()
 
 # If the user hasn't specified a custom installation path, we're going to
@@ -111,7 +111,6 @@ option(OOMPH_SUPPRESS_TETGEN_LIB "Suppress build of oomph-lib's copy of the tetg
 
 # Third-party libraries. [WORK IN PROGRESS.]
 option(OOMPH_WANT_NLOHMANN_JSON "Use the nlohmann JSON library" OFF)
-option(OOMPH_WANT_SPDLOG "Use the spdlog logging library" OFF)
 option(OOMPH_WANT_CGAL "Do we want to build the CGAL library?" OFF)
 option(OOMPH_WANT_HYPRE "Use Hypre library" OFF)
 option(OOMPH_WANT_MUMPS "Use MUMPS library" OFF)
@@ -302,8 +301,8 @@ configure_file(
 # to be used, e.g. with the commands 'make uninstall' or 'ninja install'
 # (depending on the user-selected generator)
 add_custom_target(
-  uninstall COMMAND ${CMAKE_COMMAND} -P
-                    ${CMAKE_BINARY_DIR}/${PROJECT_NAME}Uninstall.cmake)
+  oomph_uninstall COMMAND ${CMAKE_COMMAND} -P
+                          ${CMAKE_BINARY_DIR}/${PROJECT_NAME}Uninstall.cmake)
 
 # -------------------[ DEBUG SHIT: DELETE AFTER OVERHAUL ]----------------------
 
