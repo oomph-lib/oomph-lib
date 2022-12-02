@@ -1014,7 +1014,6 @@ Option                                    | Description                         
 `OOMPH_ENABLE_DOC_BUILD`                  | Suppress Doxygen creation of API documentation **[DOESN'T WORK YET!]**         | OFF
 `OOMPH_TRANSITION_TO_VERSION_3`           | Try to build with up-to-date external sources                                  | OFF
 `OOMPH_USE_DEPRECATED_SUPERLU`            | Use oomph-lib's deprecated version of SuperLU (4.3)                            | OFF
-`OOMPH_USE_DEPRECATED_TETGEN`             | Use oomph-lib's deprecated version of TetGen (1.4)                             | OFF
 `OOMPH_SUPPRESS_TRIANGLE_LIB`             | Suppress build of oomph-lib's copy of the triangle library                     | OFF
 `OOMPH_SUPPRESS_TETGEN_LIB`               | Suppress build of oomph-lib's copy of the tetgen library                       | OFF
 `OOMPH_WANT_NLOHMANN_JSON`                | Enable the [`nlohmann/json`](https://github.com/nlohmann/json) JSON library    | OFF

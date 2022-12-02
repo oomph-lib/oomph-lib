@@ -101,7 +101,6 @@ option(OOMPH_ENABLE_USE_OPENBLAS "Use the OpenBLAS implementation of BLAS/LAPACK
 option(OOMPH_ENABLE_DOC_BUILD "Suppress Doxygen creation of API documentation [DOESN'T WORK YET!]" OFF)
 option(OOMPH_TRANSITION_TO_VERSION_3 "Try to build with up-to-date external sources" OFF)
 option(OOMPH_USE_DEPRECATED_SUPERLU "Use oomph-lib's deprecated version of SuperLU (4.3)" OFF)
-option(OOMPH_USE_DEPRECATED_TETGEN "Use oomph-lib's deprecated version of TetGen (1.4)" OFF)
 
 # Fine-grained control of build of external_srcs.
 # FIXME: Make sure the SUPPRESS variables below actually work

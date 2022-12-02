@@ -39,10 +39,12 @@ endif()
 
 # Add Tetgen
 if(NOT OOMPH_SUPPRESS_TETGEN_LIB)
-  if(OOMPH_USE_DEPRECATED_TETGEN)
-    add_subdirectory(oomph_tetgen)
-  else()
+  if(OOMPH_USE_NEW_TETGEN)
+    # NOTE: Builds fine but breaks the meshing/adaptive_tet_meshes/ demo
+    # drivers... Needs further investigation
     add_subdirectory(oomph_tetgen_1.6)
+  else()
+    add_subdirectory(oomph_tetgen)
   endif()
 endif()
 
