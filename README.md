@@ -365,7 +365,7 @@ The script `validate.sh` and the directory `validata` are only used during the s
 oomph_add_executable(
   NAME one_d_poisson_generic_only
   SOURCES one_d_poisson_generic_only.cc
-  LIBRARIES oomph::generic)
+  LIBRARIES oomph::meshes oomph::generic)
 
 [...]
 ```
@@ -374,7 +374,7 @@ where we have omitted some boilerplate CMake code that is not relevant in the pr
 
 - the name of the executable, here `one_d_poisson_generic_only`
 - the local source code it depends on, here `one_d_poisson_generic_only.cc`
-- the `oomph-lib` libraries used, here only the `generic` library (prefixed with the `oomph::` namespace identifier).
+- the `oomph-lib` libraries used, here the `generic` library and `meshes` library (prefixed with the `oomph::` namespace identifier).
 
 The only thing to look out for the current task is the name of the executable.
 
@@ -443,7 +443,7 @@ The self-tests should now pass again, because they operate with the original ver
 oomph_add_executable(
   NAME my_code
   SOURCES my_code.cc
-  LIBRARIES oomph::generic)
+  LIBRARIES oomph::meshes oomph::generic)
 
 [...]
 ```
@@ -528,22 +528,22 @@ find_package(oomphlib CONFIG REQUIRED)
 # Now add the first executable: Specify the name of the
 # executable, the sources and the oomph-lib libraries
 # required. (This is a solid mechanics problem so we need
-# oomph-lib's generic library, the constitutive equations
-# library, and the solid mechanics library)
+# oomph-lib's generic library, the meshes library, the
+# constitutive equations library, and the solid mechanics library)
 oomph_add_executable(
   NAME mesh_gluing
   SOURCES mesh_gluing.cc glued_mesh_stuff.h
-  LIBRARIES oomph::solid oomph::constitutive oomph::generic)
+  LIBRARIES oomph::solid oomph::constitutive oomph::meshes oomph::generic)
 
 # Now add the second executable: Specify the name of the
 # executable, the sources and the oomph-lib libraries
 # required. (This is a solid mechanics problem so we need
-# oomph-lib's generic library, the constitutive equations
-# library, and the solid mechanics library)
+# oomph-lib's generic library, the meshes library, the
+# constitutive equations library, and the solid mechanics library)
 oomph_add_executable(
   NAME mesh_gluing2
   SOURCES mesh_gluing2.cc glued_mesh_stuff.h
-  LIBRARIES oomph::solid oomph::constitutive oomph::generic)
+  LIBRARIES oomph::solid oomph::constitutive oomph::meshes oomph::generic)
 
 # Say bye bye (if asked to)
 message(VERBOSE "Leaving mesh_gluing subdirectory")
@@ -677,13 +677,13 @@ Update the name of the executable and the underlying sources, as well as the `oo
 oomph_add_executable(
 NAME one_d_poisson
 SOURCES one_d_poisson.cc
-LIBRARIES oomph::poisson oomph::generic)
+LIBRARIES oomph::poisson oomph::meshes oomph::generic)
 
 # NEW
 oomph_add_executable(
 NAME my_fancy_new_poisson_code
 SOURCES my_fancy_new_poisson_code.cc
-LIBRARIES oomph::poisson oomph::generic)
+LIBRARIES oomph::poisson oomph::meshes oomph::generic)
 
 [...]
 ```
