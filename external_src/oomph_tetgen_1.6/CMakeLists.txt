@@ -2,7 +2,7 @@
 # Tetgen installed as library
 # ==============================================================================
 list(APPEND CMAKE_MESSAGE_INDENT " ")
-message(VERBOSE "Entered oomph_tetgen subdirectory")
+message(VERBOSE "Entered oomph_tetgen_1.6 subdirectory")
 
 # ------------------------------------------------------------------------------
 # Retained from Automake build:
@@ -62,5 +62,5 @@ set(EXTERNAL_SRC_LIBS ${EXTERNAL_SRC_LIBS} PARENT_SCOPE)
 # Define an internal project variable to indicate that we possess this library
 set(OOMPH_HAS_TETGEN TRUE CACHE INTERNAL "")
 
-message(VERBOSE "Leaving oomph_tetgen subdirectory")
+message(VERBOSE "Leaving oomph_tetgen_1.6 subdirectory")
 # ------------------------------------------------------------------------------
