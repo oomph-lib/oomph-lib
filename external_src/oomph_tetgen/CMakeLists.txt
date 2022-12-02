@@ -5,7 +5,7 @@ list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(VERBOSE "Entered oomph_tetgen subdirectory")
 
 # ------------------------------------------------------------------------------
-# TODO: Set specific flags to address the problem below (if it even occurs...).
+# Retained from Automake build:
 #
 # There is some hackery going on here because on my main test machine I kept
 # getting seg faults when tetgen.cxx was compiled with full optimisation and
@@ -16,9 +16,16 @@ message(VERBOSE "Entered oomph_tetgen subdirectory")
 # The problem may be to do with some strange initialisations within loops and
 # loop unrolling, but that could be a complete red herring.
 # ------------------------------------------------------------------------------
+# Snippet from predicates.cxx:
+#
+# "...Also be sure to turn on the optimizer when compiling this file."
+#
+# Hmmm...
+# ------------------------------------------------------------------------------
 
 # Define the sources
 set(SOURCES tetgen.cxx predicates.cxx)
+set_source_files_properties(predicates.cxx PROPERTIES COMPILE_FLAGS -O0)
 
 # Define the headers
 set(HEADERS tetgen.h)
@@ -33,10 +40,16 @@ oomph_library_config(
   HEADERS ${HEADERS}
   SOURCES ${SOURCES})
 
+# Build as a library, not an executable
+target_compile_definitions(${LIBNAME} PRIVATE -DTETLIBRARY)
+
 # Silence the annoying warnings produced by this library
 include(OomphTargetSilenceWarnings)
 oomph_target_silence_warnings(TARGET ${LIBNAME}
                               CXX_COMPILE_FLAGS -Wno-int-to-pointer-cast)
+
+# ------------------------------------------------------------------------------
+# BOILERPLATE: Update variables in parent scope
 
 # Update list of external sources preprocessor definitions and list of libraries
 list(APPEND EXTERNAL_SRC_CXX_DEFINITIONS OOMPH_HAS_TETGEN_LIB)

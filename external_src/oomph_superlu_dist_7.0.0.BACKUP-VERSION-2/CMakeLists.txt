@@ -13,20 +13,23 @@ get_target_property(TPL_PARMETIS_INCLUDE_DIRS oomph_parmetis_4.0.3
                     INCLUDE_DIRECTORIES)
 get_target_property(TPL_PARMETIS_LIBRARIES oomph_parmetis_4.0.3 LINK_LIBRARIES)
 
-# Name of the library we're creating
-set(LIBNAME oomph_superlu_dist_7.0.0)
-
 # Download and populate the nlohmann JSON library
 include(FetchContent)
 FetchContent_Declare(
-  ${LIBNAME}
+  superlu_dist
   GIT_REPOSITORY https://github.com/xiaoyeli/superlu_dist.git
   GIT_SHALLOW TRUE
   GIT_TAG v7.0.0)
-FetchContent_MakeAvailable(${LIBNAME})
+FetchContent_MakeAvailable(superlu_dist)
+
+# Name of the library we're creating
+set(LIBNAME oomph_superlu_dist_7.0.0)
 
 # Create an alias library name
 add_library(${PROJECT_NAMESPACE}::${LIBNAME} ALIAS ${LIBNAME})
+
+# ------------------------------------------------------------------------------
+# BOILERPLATE: Update variables in parent scope
 
 # Update list of external sources preprocessor definitions and list of libraries
 list(APPEND EXTERNAL_SRC_CXX_DEFINITIONS USING_OOMPH_SUPERLU_DIST)

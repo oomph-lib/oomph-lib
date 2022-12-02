@@ -34,6 +34,9 @@ include(OomphTargetSilenceWarnings)
 oomph_target_silence_warnings(
   TARGET ${LIBNAME} C_COMPILE_FLAGS -Wno-implicit-function-declaration)
 
+# ------------------------------------------------------------------------------
+# BOILERPLATE: Update variables in parent scope
+
 # Add the library to the list of external source libraries and make the updated
 # variable value visible to the parent scope
 list(APPEND EXTERNAL_SRC_LIBS ${LIBNAME})

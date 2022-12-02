@@ -95,10 +95,16 @@ if(Z_HAVE_UNISTD_H)
   target_compile_definitions(${LIBNAME} PRIVATE Z_HAVE_UNISTD_H)
 endif()
 
-# Add the library to the list of external source libraries and make the updated
-# variable value visible to the parent scope
+# ------------------------------------------------------------------------------
+# BOILERPLATE: Update variables in parent scope
+
+# Update list of external sources preprocessor definitions and list of libraries
 list(APPEND EXTERNAL_SRC_LIBS ${LIBNAME})
+list(APPEND EXTERNAL_SRC_CXX_DEFINITIONS OOMPH_HAS_ZLIB)
+
+# Make the updated variable values visible to the parent scope
 set(EXTERNAL_SRC_LIBS ${EXTERNAL_SRC_LIBS} PARENT_SCOPE)
+set(EXTERNAL_SRC_CXX_DEFINITIONS ${EXTERNAL_SRC_CXX_DEFINITIONS} PARENT_SCOPE)
 
 message(VERBOSE "Leaving oomph_zlib subdirectory")
 # ------------------------------------------------------------------------------

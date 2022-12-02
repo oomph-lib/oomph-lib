@@ -4,28 +4,6 @@
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(VERBOSE "Entered oomph_flapack subdirectory")
 
-# cmake-format: off
-# ------------------------------------------------------------------------
-# TODO: Find out how to make the code build with no optimisation as outlined
-# (from the Makefile.am below):
-#
-# #Definitely no optimisation, but still warnings
-# liboomph_flapack_non_opt_la_FFLAGS="-O0"
-#
-# # Automake doesn't have a way to build with no optimization
-# # See http://sources.redhat.com/ml/automake/2002-08/msg00082.html
-# # This is the automake-produced rule with $(FFLAGS) removed
-# slamch.lo: slamch.f
-# $(LIBTOOL) --tag=F77 --mode=compile $(F77) $(FFLAGS_NO_OPT) -c -o slamch.lo `test -f 'slamch.f' || echo '$(srcdir)/'`slamch.f
-# dlamch.lo: dlamch.f
-# $(LIBTOOL) --tag=F77 --mode=compile $(F77) $(FFLAGS_NO_OPT) -c -o dlamch.lo `test -f 'dlamch.f' || echo '$(srcdir)/'`dlamch.f
-#
-# if ADD_LGFORTRAN_TO_OOMPH_LAPACK
-# liboomph_flapack_la_LIBADD = -lgfortran
-# endif
-# ------------------------------------------------------------------------
-# cmake-format: on
-
 # Define the headers
 set(HEADERS)
 
@@ -1398,6 +1376,8 @@ set(SOURCES
     clarnd.f
     zlarnd.f)
 
+set_source_files_properties(slamch.f dlamch.f PROPERTIES COMPILE_FLAGS -O0)
+
 # Define the name of the library
 set(LIBNAME oomph_flapack)
 
@@ -1414,6 +1394,9 @@ oomph_library_config(
 
 # Don't compile with optimisation
 target_compile_options(${LIBNAME} PRIVATE -O0)
+
+# ------------------------------------------------------------------------------
+# BOILERPLATE: Update variables in parent scope
 
 # Add the library to the list of external source libraries and make the updated
 # variable value visible to the parent scope

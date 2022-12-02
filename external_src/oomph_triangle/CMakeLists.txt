@@ -20,6 +20,9 @@ oomph_library_config(
   HEADERS ${HEADERS}
   SOURCES ${SOURCES})
 
+# ------------------------------------------------------------------------------
+# BOILERPLATE: Update variables in parent scope
+
 # Update list of external sources preprocessor definitions and list of libraries
 list(APPEND EXTERNAL_SRC_CXX_DEFINITIONS OOMPH_HAS_TRIANGLE_LIB)
 list(APPEND EXTERNAL_SRC_LIBS ${LIBNAME})

@@ -6,11 +6,6 @@
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(VERBOSE "Entered oomph_superlu_4.3 subdirectory")
 
-# ------------------------------------------------------------------------------
-# TODO: Sort out issues with a huge number of files being saved via EXTRA_DIST.
-# How do we port this over to CMake?
-# ------------------------------------------------------------------------------
-
 # Define the headers
 set(HEADERS
     slu_Cnames.h
@@ -107,15 +102,19 @@ set(SOURCES
 set(LIBNAME oomph_superlu_4.3)
 
 # Define the library build type
-set(LIBTYPE STATIC)
+#
+# set(LIBTYPE STATIC)
 
 # Import the OomphLibraryConfig module to handle the library creation
 include(OomphLibraryConfig)
 oomph_library_config(
   LIBNAME ${LIBNAME}
-  LIBTYPE ${LIBTYPE}
+  # LIBTYPE ${LIBTYPE}
   HEADERS ${HEADERS}
   SOURCES ${SOURCES})
+
+# ------------------------------------------------------------------------------
+# BOILERPLATE: Update variables in parent scope
 
 # Update list of external sources preprocessor definitions and list of libraries
 list(APPEND EXTERNAL_SRC_CXX_DEFINITIONS USING_OOMPH_SUPERLU)

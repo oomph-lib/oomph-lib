@@ -51,6 +51,9 @@ oomph_library_config(
   SOURCES ${SOURCES}
   HEADERS_NO_COMBINE ${HEADERS_NO_COMBINE})
 
+# ------------------------------------------------------------------------------
+# BOILERPLATE: Update variables in parent scope
+
 # Add the library to the list of external source libraries and make the updated
 # variable value visible to the parent scope
 list(APPEND EXTERNAL_SRC_LIBS ${LIBNAME})

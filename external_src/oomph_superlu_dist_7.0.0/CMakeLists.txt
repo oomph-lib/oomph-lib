@@ -235,8 +235,13 @@ foreach(CXX_FILE IN LISTS CXX_FILES)
 endforeach()
 
 # Libraries to link SuperLU Dist to
-set(LINKLIBS ${MPI_C_LIBRARIES} ${MPI_CXX_LIBRARIES} oomph_blas oomph_lapack
-    oomph_parmetis_4.0.3) # ${COMBBLAS_LIB}
+set(LINKLIBS ${MPI_C_LIBRARIES} ${MPI_CXX_LIBRARIES} oomph_parmetis_4.0.3)
+
+if(OOMPH_ENABLE_USE_OPENBLAS AND BLAS_FOUND)
+  list(APPEND LINKLIBS BLAS::BLAS LAPACK::LAPACK)
+else()
+  list(APPEND LINKLIBS oomph_blas oomph_lapack)
+endif()
 
 # See:
 # https://github.com/xiaoyeli/superlu_dist#dependent-external-libraries-blas-and-parmetis
@@ -251,21 +256,17 @@ endif()
 # Define the name of the library
 set(LIBNAME oomph_superlu_dist_7.0.0)
 
-# Build it as a static/shared library depending on how oomph-lib is being built
-set(LIBTYPE STATIC)
-if(BUILD_SHARED_LIBS)
-  set(LIBTYPE SHARED)
-endif()
-
 # Import the OomphLibraryConfig module to handle the library creation
 include(OomphLibraryConfig)
 oomph_library_config(
   LIBNAME ${LIBNAME}
-  LIBTYPE ${LIBTYPE}
   HEADERS ${HEADERS}
   HEADERS_NO_COMBINE ${TEMPLATE_IMPL_HEADERS}
   SOURCES ${SOURCES}
   LINKLIBS ${LINKLIBS})
+
+# ------------------------------------------------------------------------------
+# BOILERPLATE: Update variables in parent scope
 
 # Update list of external sources preprocessor definitions and list of libraries
 list(APPEND EXTERNAL_SRC_CXX_DEFINITIONS USING_OOMPH_SUPERLU_DIST)

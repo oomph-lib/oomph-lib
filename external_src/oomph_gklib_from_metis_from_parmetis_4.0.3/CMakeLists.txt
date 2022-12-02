@@ -200,6 +200,9 @@ if(UNIX)
   target_link_libraries(${LIBNAME} m)
 endif()
 
+# ------------------------------------------------------------------------------
+# BOILERPLATE: Update variables in parent scope
+
 # Add the library to the list of external source libraries and make the updated
 # variable value visible to the parent scope
 list(APPEND EXTERNAL_SRC_LIBS ${LIBNAME})

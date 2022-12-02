@@ -80,12 +80,6 @@ set(SOURCES
 # Define the name of the library
 set(LIBNAME oomph_superlu_dist_3.0)
 
-# Build it as a static/shared library depending on how oomph-lib is being built
-set(LIBTYPE STATIC)
-if(BUILD_SHARED_LIBS)
-  set(LIBTYPE SHARED)
-endif()
-
 # Specify the libraries that we depend on
 set(LINKLIBS oomph_metis_from_parmetis_3.1.1 MPI::MPI_C)
 if(OOMPH_ENABLE_USE_OPENBLAS AND BLAS_FOUND)
@@ -98,7 +92,6 @@ endif()
 include(OomphLibraryConfig)
 oomph_library_config(
   LIBNAME ${LIBNAME}
-  LIBTYPE ${LIBTYPE}
   LINKLIBS ${LINKLIBS}
   HEADERS ${HEADERS}
   SOURCES ${SOURCES})
@@ -121,6 +114,9 @@ oomph_target_silence_warnings(
     -Wno-return-type
     -Wno-switch
     -Wno-unused-value)
+
+# ------------------------------------------------------------------------------
+# BOILERPLATE: Update variables in parent scope
 
 # Update list of external sources preprocessor definitions and list of libraries
 list(APPEND EXTERNAL_SRC_CXX_DEFINITIONS USING_OOMPH_SUPERLU_DIST)

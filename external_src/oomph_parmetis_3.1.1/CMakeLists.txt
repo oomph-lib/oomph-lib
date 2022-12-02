@@ -70,12 +70,6 @@ set(SOURCES
 # Define the name of the library
 set(LIBNAME oomph_parmetis_3.1.1)
 
-# Build it as a static/shared library depending on how oomph-lib is being built
-set(LIBTYPE STATIC)
-if(BUILD_SHARED_LIBS)
-  set(LIBTYPE SHARED)
-endif()
-
 # The libraries that we depend on
 set(LINKLIBS oomph_metis_from_parmetis_3.1.1)
 
@@ -83,7 +77,6 @@ set(LINKLIBS oomph_metis_from_parmetis_3.1.1)
 include(OomphLibraryConfig)
 oomph_library_config(
   LIBNAME ${LIBNAME}
-  LIBTYPE ${LIBTYPE}
   LINKLIBS ${LINKLIBS}
   HEADERS ${HEADERS}
   HEADERS_NO_COMBINE ${HEADERS_NO_COMBINE}
@@ -93,6 +86,9 @@ oomph_library_config(
 include(OomphTargetSilenceWarnings)
 oomph_target_silence_warnings(
   TARGET ${LIBNAME} C_COMPILE_FLAGS -Wno-implicit-function-declaration)
+
+# ------------------------------------------------------------------------------
+# BOILERPLATE: Update variables in parent scope
 
 # Add the library to the list of external source libraries and make the updated
 # variable value visible to the parent scope

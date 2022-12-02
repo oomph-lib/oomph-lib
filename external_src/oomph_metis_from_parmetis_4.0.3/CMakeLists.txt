@@ -10,11 +10,6 @@ message(VERBOSE "Entered oomph_metis_from_parmetis_3.1.1 subdirectory")
 # TODO: Address following from Makefile.am (but commented out):
 #
 # liboomph_metis_from_parmetis_3_1_1_la_LDFLAGS = -static
-#
-# Additional files that come with parmetis but aren't actually used by us.
-# Included for completeness.
-#
-# EXTRA_DIST = stats.c
 # ------------------------------------------------------------------------
 
 # Define the headers
@@ -76,21 +71,17 @@ set(LIBNAME oomph_metis_from_parmetis_4.0.3)
 # Libraries to link against
 set(LINKLIBS oomph_gklib_from_metis_from_parmetis_4.0.3)
 
-# Build it as a static/shared library depending on how oomph-lib is being built
-set(LIBTYPE STATIC)
-if(BUILD_SHARED_LIBS)
-  set(LIBTYPE SHARED)
-endif()
-
 # Import the OomphLibraryConfig module to handle the library creation
 include(OomphLibraryConfig)
 oomph_library_config(
   LIBNAME ${LIBNAME}
-  LIBTYPE ${LIBTYPE}
   HEADERS ${HEADERS}
   HEADERS_NO_COMBINE ${HEADERS_NO_COMBINE}
   SOURCES ${SOURCES}
   LINKLIBS ${LINKLIBS})
+
+# ------------------------------------------------------------------------------
+# BOILERPLATE: Update variables in parent scope
 
 # Add the library to the list of external source libraries and make the updated
 # variable value visible to the parent scope
