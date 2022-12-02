@@ -8,8 +8,8 @@ message(VERBOSE "Entered oomph_superlu_5.2.2 subdirectory")
 
 set(ENABLE_SINGLE ON)
 set(ENABLE_DOUBLE ON)
-set(ENABLE_COMPLEX OFF)
-set(ENABLE_COMPLEX16 OFF)
+set(ENABLE_COMPLEX ON)
+set(ENABLE_COMPLEX16 ON)
 
 set(HEADERS
     supermatrix.h
@@ -254,22 +254,25 @@ endif()
 set(LIBNAME oomph_superlu_5.2.2)
 
 # Define the library build type
-set(LIBTYPE STATIC)
+#
+# set(LIBTYPE STATIC)
 
 # Import the OomphLibraryConfig module to handle the library creation
 include(OomphLibraryConfig)
 oomph_library_config(
   LIBNAME ${LIBNAME}
-  LIBTYPE ${LIBTYPE}
+  # LIBTYPE ${LIBTYPE}
   LINKLIBS ${LINKLIBS}
   HEADERS ${HEADERS}
   SOURCES ${SOURCES})
 
 # Silence the (annoying) warnings produced by this library
 include(OomphTargetSilenceWarnings)
-oomph_target_silence_warnings(
-  TARGET ${LIBNAME} C_COMPILE_FLAGS -Wno-unused-result
-)# -Wno-deprecated-non-prototype)
+oomph_target_silence_warnings(TARGET ${LIBNAME}
+                              C_COMPILE_FLAGS -Wno-unused-result)
+
+# ------------------------------------------------------------------------------
+# BOILERPLATE: Update variables in parent scope
 
 # Update list of external sources preprocessor definitions and list of libraries
 list(APPEND EXTERNAL_SRC_CXX_DEFINITIONS USING_OOMPH_SUPERLU)
