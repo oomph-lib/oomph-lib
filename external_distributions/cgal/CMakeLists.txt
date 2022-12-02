@@ -29,8 +29,6 @@ find_package(CGAL REQUIRED PATHS "${CGAL_BINARY_DIR}")
 #
 # unset(BUILD_TESTING)
 
-# if(NOT TARGET CGAL::CGAL) add_library(CGAL::CGAL ALIAS CGAL) endif()
-
 # ------------------------------------------------------------------------------
 # BOILERPLATE: Update global variables
 

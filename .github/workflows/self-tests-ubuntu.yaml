@@ -29,7 +29,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install dependencies
-        run: sudo apt-get install -y gfortran ninja-build libopenblas-dev
+        run: sudo apt-get install -y gfortran ninja-build libopenblas-dev libgmp3-dev libmpfr-dev libboost-all-dev
 
       - name: Install MPI dependencies (if required)
         if: matrix.build_info.mpi == 'ON'
