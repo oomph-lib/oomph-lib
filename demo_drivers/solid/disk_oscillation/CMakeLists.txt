@@ -12,7 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME disk_oscillation
   SOURCES disk_oscillation.cc
-  LIBRARIES oomph::solid oomph::constitutive)
+  LIBRARIES oomph::solid oomph::constitutive oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

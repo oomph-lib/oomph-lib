@@ -12,13 +12,13 @@ include(CTest)
 oomph_add_executable(
   NAME adaptive_unstructured_two_d_curved
   SOURCES unstructured_two_d_curved.cc
-  LIBRARIES oomph::axisym_poroelasticity
+  LIBRARIES oomph::axisym_poroelasticity oomph::meshes oomph::generic
   CXX_DEFINITIONS ADAPTIVE)
 
 oomph_add_executable(
   NAME unstructured_two_d_curved
   SOURCES unstructured_two_d_curved.cc
-  LIBRARIES oomph::axisym_poroelasticity)
+  LIBRARIES oomph::axisym_poroelasticity oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

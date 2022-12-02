@@ -12,7 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME unstructured_adaptive_solid
   SOURCES unstructured_adaptive_solid.cc
-  LIBRARIES oomph::solid oomph::constitutive)
+  LIBRARIES oomph::solid oomph::constitutive oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

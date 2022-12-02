@@ -13,7 +13,7 @@ if(OOMPH_HAS_TRILINOS)
   oomph_add_executable(
     NAME harmonic
     SOURCES harmonic.cc
-    LIBRARIES oomph::navier_stokes)
+    LIBRARIES oomph::navier_stokes oomph::meshes oomph::generic)
 endif()
 
 # ---------------------------------- TESTING ----------------------------------

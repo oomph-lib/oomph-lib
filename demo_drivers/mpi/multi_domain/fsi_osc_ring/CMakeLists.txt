@@ -12,7 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME fsi_osc_ring
   SOURCES fsi_osc_ring.cc
-  LIBRARIES oomph::beam oomph::navier_stokes)
+  LIBRARIES oomph::beam oomph::navier_stokes oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

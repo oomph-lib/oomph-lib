@@ -12,7 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME tensioned_string
   SOURCES tensioned_string.cc
-  LIBRARIES oomph::beam)
+  LIBRARIES oomph::beam oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

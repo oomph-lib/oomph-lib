@@ -12,8 +12,13 @@ include(CTest)
 oomph_add_executable(
   NAME unsteady_vmtk_fsi
   SOURCES unsteady_vmtk_fsi.cc
-  LIBRARIES oomph::solid oomph::constitutive oomph::navier_stokes
-            oomph::poisson oomph::linear_elasticity)
+  LIBRARIES oomph::solid
+            oomph::constitutive
+            oomph::navier_stokes
+            oomph::poisson
+            oomph::linear_elasticity
+            oomph::meshes
+            oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

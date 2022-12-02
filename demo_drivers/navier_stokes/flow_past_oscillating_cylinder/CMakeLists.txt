@@ -12,7 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME flow_past_oscillating_cylinder
   SOURCES flow_past_oscillating_cylinder.cc
-  LIBRARIES oomph::navier_stokes)
+  LIBRARIES oomph::navier_stokes oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

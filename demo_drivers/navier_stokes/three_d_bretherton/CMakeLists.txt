@@ -19,7 +19,8 @@ oomph_add_executable(
           comb_can_spine_mesh.h
           extra_elements.h
           st_mesh.h
-  LIBRARIES oomph::navier_stokes oomph::fluid_interface)
+  LIBRARIES oomph::navier_stokes oomph::fluid_interface oomph::meshes
+            oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

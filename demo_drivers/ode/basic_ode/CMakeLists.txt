@@ -12,7 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME basic_ode
   SOURCES basic_ode.cc
-  LIBRARIES oomph::ode)
+  LIBRARIES oomph::ode oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

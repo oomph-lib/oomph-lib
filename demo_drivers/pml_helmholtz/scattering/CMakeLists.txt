@@ -12,18 +12,18 @@ include(CTest)
 oomph_add_executable(
   NAME unstructured_two_d_helmholtz
   SOURCES unstructured_two_d_helmholtz.cc
-  LIBRARIES oomph::pml_helmholtz)
+  LIBRARIES oomph::pml_helmholtz oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME unstructured_two_d_helmholtz_adapt
   SOURCES unstructured_two_d_helmholtz.cc
-  LIBRARIES oomph::pml_helmholtz
+  LIBRARIES oomph::pml_helmholtz oomph::meshes oomph::generic
   CXX_DEFINITIONS ADAPTIVE)
 
 oomph_add_executable(
   NAME unstructured_two_d_helmholtz_scattering
   SOURCES unstructured_two_d_helmholtz_scattering.cc
-  LIBRARIES oomph::pml_helmholtz)
+  LIBRARIES oomph::pml_helmholtz oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

@@ -12,7 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME steady_rot
   SOURCES steady_rot.cc
-  LIBRARIES oomph::spherical_navier_stokes)
+  LIBRARIES oomph::spherical_navier_stokes oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

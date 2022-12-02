@@ -12,13 +12,19 @@ include(CTest)
 oomph_add_executable(
   NAME snap_mesh
   SOURCES snap_mesh.cc
-  LIBRARIES oomph::mesh_smoothing oomph::solid oomph::constitutive
-            oomph::navier_stokes oomph::poisson oomph::linear_elasticity)
+  LIBRARIES oomph::mesh_smoothing
+            oomph::solid
+            oomph::constitutive
+            oomph::navier_stokes
+            oomph::poisson
+            oomph::linear_elasticity
+            oomph::meshes
+            oomph::generic)
 
 oomph_add_executable(
   NAME xda_to_poly_fsi
   SOURCES xda_to_poly_fsi.cc
-  LIBRARIES oomph::generic)
+  LIBRARIES oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

@@ -12,13 +12,14 @@ include(CTest)
 oomph_add_executable(
   NAME adaptive_oscillating_sphere
   SOURCES oscillating_sphere.cc
-  LIBRARIES oomph::pml_fourier_decomposed_helmholtz
+  LIBRARIES oomph::pml_fourier_decomposed_helmholtz oomph::meshes oomph::generic
   CXX_DEFINITIONS ADAPTIVE)
 
 oomph_add_executable(
   NAME oscillating_sphere
   SOURCES oscillating_sphere.cc
-  LIBRARIES oomph::pml_fourier_decomposed_helmholtz)
+  LIBRARIES oomph::pml_fourier_decomposed_helmholtz oomph::meshes
+            oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

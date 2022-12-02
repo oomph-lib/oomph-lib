@@ -12,12 +12,12 @@ include(CTest)
 oomph_add_executable(
   NAME circular_driven_cavity_hp_adapt
   SOURCES circular_driven_cavity_hp_adapt.cc
-  LIBRARIES oomph::navier_stokes)
+  LIBRARIES oomph::navier_stokes oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME hp_adaptive_driven_cavity
   SOURCES hp_adaptive_driven_cavity.cc
-  LIBRARIES oomph::navier_stokes)
+  LIBRARIES oomph::navier_stokes oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

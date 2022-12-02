@@ -12,7 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME vorticity_smoother_validation
   SOURCES vorticity_smoother_validation.cc
-  LIBRARIES oomph::navier_stokes)
+  LIBRARIES oomph::navier_stokes oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

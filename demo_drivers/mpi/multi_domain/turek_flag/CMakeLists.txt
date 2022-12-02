@@ -12,12 +12,14 @@ include(CTest)
 oomph_add_executable(
   NAME turek_flag
   SOURCES turek_flag.cc
-  LIBRARIES oomph::solid oomph::constitutive oomph::navier_stokes)
+  LIBRARIES oomph::solid oomph::constitutive oomph::navier_stokes oomph::meshes
+            oomph::generic)
 
 oomph_add_executable(
   NAME turek_flag_load_balance
   SOURCES turek_flag_load_balance.cc
-  LIBRARIES oomph::solid oomph::constitutive oomph::navier_stokes)
+  LIBRARIES oomph::solid oomph::constitutive oomph::navier_stokes oomph::meshes
+            oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

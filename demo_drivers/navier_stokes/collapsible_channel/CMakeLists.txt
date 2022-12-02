@@ -12,35 +12,35 @@ include(CTest)
 oomph_add_executable(
   NAME collapsible_channel
   SOURCES collapsible_channel.cc
-  LIBRARIES oomph::navier_stokes)
+  LIBRARIES oomph::navier_stokes oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME collapsible_channel_adaptive_algebraic
   SOURCES collapsible_channel_algebraic.cc my_alg_channel_mesh.h
-  LIBRARIES oomph::navier_stokes
+  LIBRARIES oomph::navier_stokes oomph::meshes oomph::generic
   CXX_DEFINITIONS ADAPTIVE)
 
 oomph_add_executable(
   NAME collapsible_channel_adaptive_algebraic_bl_squash
   SOURCES collapsible_channel_algebraic.cc my_alg_channel_mesh.h
-  LIBRARIES oomph::navier_stokes
+  LIBRARIES oomph::navier_stokes oomph::meshes oomph::generic
   CXX_DEFINITIONS USE_BL_SQUASH_FCT ADAPTIVE)
 
 oomph_add_executable(
   NAME collapsible_channel_algebraic
   SOURCES collapsible_channel_algebraic.cc my_alg_channel_mesh.h
-  LIBRARIES oomph::navier_stokes)
+  LIBRARIES oomph::navier_stokes oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME collapsible_channel_algebraic_bl_squash
   SOURCES collapsible_channel_algebraic.cc my_alg_channel_mesh.h
-  LIBRARIES oomph::navier_stokes
+  LIBRARIES oomph::navier_stokes oomph::meshes oomph::generic
   CXX_DEFINITIONS USE_BL_SQUASH_FCT)
 
 oomph_add_executable(
   NAME collapsible_channel_bl_squash
   SOURCES collapsible_channel.cc
-  LIBRARIES oomph::navier_stokes
+  LIBRARIES oomph::navier_stokes oomph::meshes oomph::generic
   CXX_DEFINITIONS USE_BL_SQUASH_FCT)
 
 # ---------------------------------- TESTING ----------------------------------

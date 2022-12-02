@@ -12,27 +12,27 @@ include(CTest)
 oomph_add_executable(
   NAME couette
   SOURCES couette.cc
-  LIBRARIES oomph::flux_transport)
+  LIBRARIES oomph::flux_transport oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME ff_step
   SOURCES ff_step.cc
-  LIBRARIES oomph::flux_transport)
+  LIBRARIES oomph::flux_transport oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME one_d_euler
   SOURCES one_d_euler.cc
-  LIBRARIES oomph::flux_transport)
+  LIBRARIES oomph::flux_transport oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME ramp
   SOURCES ramp.cc
-  LIBRARIES oomph::flux_transport)
+  LIBRARIES oomph::flux_transport oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME two_d_euler
   SOURCES two_d_euler.cc
-  LIBRARIES oomph::flux_transport)
+  LIBRARIES oomph::flux_transport oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

@@ -13,18 +13,19 @@ oomph_add_executable(
   NAME elastic_two_layer_interface
   SOURCES elastic_two_layer_interface.cc
   LIBRARIES oomph::navier_stokes oomph::fluid_interface oomph::solid
-            oomph::constitutive)
+            oomph::constitutive oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME spine_two_layer_interface
   SOURCES spine_two_layer_interface.cc
-  LIBRARIES oomph::navier_stokes oomph::fluid_interface)
+  LIBRARIES oomph::navier_stokes oomph::fluid_interface oomph::meshes
+            oomph::generic)
 
 oomph_add_executable(
   NAME refineable_two_layer_interface
   SOURCES refineable_two_layer_interface.cc
   LIBRARIES oomph::navier_stokes oomph::fluid_interface oomph::solid
-            oomph::constitutive)
+            oomph::constitutive oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

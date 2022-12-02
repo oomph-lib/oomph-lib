@@ -12,7 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME sparse_assemble_test
   SOURCES sparse_assemble_test.cc
-  LIBRARIES oomph::navier_stokes)
+  LIBRARIES oomph::navier_stokes oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

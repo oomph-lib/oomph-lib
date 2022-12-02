@@ -12,7 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME three_d_prescribed_displ_lagr_mult
   SOURCES three_d_prescribed_displ_lagr_mult.cc
-  LIBRARIES oomph::solid oomph::constitutive)
+  LIBRARIES oomph::solid oomph::constitutive oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

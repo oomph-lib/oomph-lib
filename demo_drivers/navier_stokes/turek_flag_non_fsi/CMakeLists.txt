@@ -12,12 +12,12 @@ include(CTest)
 oomph_add_executable(
   NAME turek_flag_non_fsi_alg
   SOURCES turek_flag_non_fsi.cc
-  LIBRARIES oomph::navier_stokes)
+  LIBRARIES oomph::navier_stokes oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME turek_flag_non_fsi_macro
   SOURCES turek_flag_non_fsi.cc
-  LIBRARIES oomph::navier_stokes
+  LIBRARIES oomph::navier_stokes oomph::meshes oomph::generic
   CXX_DEFINITIONS USE_MACRO_ELEMENTS)
 
 # ---------------------------------- TESTING ----------------------------------

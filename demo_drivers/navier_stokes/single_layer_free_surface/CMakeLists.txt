@@ -13,12 +13,13 @@ oomph_add_executable(
   NAME elastic_single_layer
   SOURCES elastic_single_layer.cc
   LIBRARIES oomph::navier_stokes oomph::fluid_interface oomph::solid
-            oomph::constitutive)
+            oomph::constitutive oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME spine_single_layer
   SOURCES spine_single_layer.cc
-  LIBRARIES oomph::navier_stokes oomph::fluid_interface)
+  LIBRARIES oomph::navier_stokes oomph::fluid_interface oomph::meshes
+            oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

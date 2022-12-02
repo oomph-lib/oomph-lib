@@ -12,12 +12,12 @@ include(CTest)
 oomph_add_executable(
   NAME curved_pipe
   SOURCES curved_pipe.cc
-  LIBRARIES oomph::navier_stokes)
+  LIBRARIES oomph::navier_stokes oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME helical_pipe
   SOURCES helical_pipe.cc
-  LIBRARIES oomph::navier_stokes)
+  LIBRARIES oomph::navier_stokes oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

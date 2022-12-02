@@ -13,13 +13,13 @@ oomph_add_executable(
   NAME acoustic_fsi
   SOURCES acoustic_fsi.cc
   LIBRARIES oomph::helmholtz oomph::time_harmonic_linear_elasticity
-            oomph::navier_stokes)
+            oomph::navier_stokes oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME unstructured_acoustic_fsi
   SOURCES unstructured_acoustic_fsi.cc
   LIBRARIES oomph::helmholtz oomph::time_harmonic_linear_elasticity
-            oomph::navier_stokes)
+            oomph::navier_stokes oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

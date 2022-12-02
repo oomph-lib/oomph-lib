@@ -12,13 +12,13 @@ include(CTest)
 oomph_add_executable(
   NAME adaptive_unstructured_two_d_circle
   SOURCES unstructured_two_d_circle.cc
-  LIBRARIES oomph::darcy
+  LIBRARIES oomph::darcy oomph::meshes oomph::generic
   CXX_DEFINITIONS ADAPTIVE)
 
 oomph_add_executable(
   NAME unstructured_two_d_circle
   SOURCES unstructured_two_d_circle.cc
-  LIBRARIES oomph::darcy)
+  LIBRARIES oomph::darcy oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

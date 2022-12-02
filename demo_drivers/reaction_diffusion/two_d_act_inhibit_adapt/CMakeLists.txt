@@ -12,7 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME two_d_act_inhibit_adapt
   SOURCES two_d_act_inhibit_adapt.cc
-  LIBRARIES oomph::advection_diffusion_reaction)
+  LIBRARIES oomph::advection_diffusion_reaction oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

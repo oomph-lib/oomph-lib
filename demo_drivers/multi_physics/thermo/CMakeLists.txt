@@ -12,7 +12,8 @@ include(CTest)
 oomph_add_executable(
   NAME thermo
   SOURCES thermo.cc
-  LIBRARIES oomph::unsteady_heat oomph::solid oomph::constitutive)
+  LIBRARIES oomph::unsteady_heat oomph::solid oomph::constitutive oomph::meshes
+            oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

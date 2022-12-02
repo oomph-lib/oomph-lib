@@ -12,7 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME cylinder
   SOURCES cylinder.cc
-  LIBRARIES oomph::axisym_linear_elasticity)
+  LIBRARIES oomph::axisym_linear_elasticity oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

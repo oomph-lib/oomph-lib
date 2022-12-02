@@ -12,13 +12,13 @@ include(CTest)
 oomph_add_executable(
   NAME adaptive_helmholtz_point_source
   SOURCES helmholtz_point_source.cc
-  LIBRARIES oomph::helmholtz
+  LIBRARIES oomph::helmholtz oomph::meshes oomph::generic
   CXX_DEFINITIONS ADAPTIVE)
 
 oomph_add_executable(
   NAME helmholtz_point_source
   SOURCES helmholtz_point_source.cc
-  LIBRARIES oomph::helmholtz)
+  LIBRARIES oomph::helmholtz oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

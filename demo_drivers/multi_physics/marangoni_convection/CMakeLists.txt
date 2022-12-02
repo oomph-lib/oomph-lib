@@ -13,13 +13,15 @@ oomph_add_executable(
   NAME marangoni_convection
   SOURCES marangoni_convection.cc
   LIBRARIES oomph::advection_diffusion oomph::navier_stokes
-            oomph::fluid_interface oomph::multi_physics)
+            oomph::fluid_interface oomph::multi_physics oomph::meshes
+            oomph::generic)
 
 oomph_add_executable(
   NAME marangoni_convection_box
   SOURCES marangoni_convection_box.cc
   LIBRARIES oomph::advection_diffusion oomph::navier_stokes
-            oomph::multi_physics oomph::fluid_interface)
+            oomph::multi_physics oomph::fluid_interface oomph::meshes
+            oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

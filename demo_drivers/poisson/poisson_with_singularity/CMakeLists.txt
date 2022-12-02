@@ -12,12 +12,12 @@ include(CTest)
 oomph_add_executable(
   NAME two_d_poisson
   SOURCES two_d_poisson.cc poisson_elements_with_singularity.h
-  LIBRARIES oomph::poisson)
+  LIBRARIES oomph::poisson oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME two_d_poisson_without_singularity_subtracted_off
   SOURCES two_d_poisson.cc poisson_elements_with_singularity.h
-  LIBRARIES oomph::poisson
+  LIBRARIES oomph::poisson oomph::meshes oomph::generic
   CXX_DEFINITIONS DONT_USE_SINGULARITY)
 
 # ---------------------------------- TESTING ----------------------------------

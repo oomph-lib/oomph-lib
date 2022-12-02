@@ -17,7 +17,7 @@ oomph_add_executable(
 oomph_add_executable(
   NAME customising_output
   SOURCES customising_output.cc
-  LIBRARIES oomph::poisson)
+  LIBRARIES oomph::poisson oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

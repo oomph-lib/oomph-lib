@@ -12,7 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME hp_adaptive_driven_cavity
   SOURCES hp_adaptive_driven_cavity.cc
-  LIBRARIES oomph::navier_stokes)
+  LIBRARIES oomph::navier_stokes oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

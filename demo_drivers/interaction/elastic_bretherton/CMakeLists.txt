@@ -12,7 +12,8 @@ include(CTest)
 oomph_add_executable(
   NAME elastic_bretherton
   SOURCES elastic_bretherton.cc
-  LIBRARIES oomph::beam oomph::navier_stokes oomph::fluid_interface)
+  LIBRARIES oomph::beam oomph::navier_stokes oomph::fluid_interface
+            oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

@@ -12,7 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME rotating_ends
   SOURCES rotating_ends.cc
-  LIBRARIES oomph::axisym_navier_stokes)
+  LIBRARIES oomph::axisym_navier_stokes oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

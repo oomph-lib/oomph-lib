@@ -12,22 +12,22 @@ include(CTest)
 oomph_add_executable(
   NAME two_d_poisson_tanh_flux_bc
   SOURCES two_d_poisson_tanh_flux_bc.cc
-  LIBRARIES oomph::poisson)
+  LIBRARIES oomph::poisson oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME two_d_poisson_tanh_flux_bc_validate
   SOURCES two_d_poisson_tanh_flux_bc_validate.cc
-  LIBRARIES oomph::poisson)
+  LIBRARIES oomph::poisson oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME unit_cube_poisson
   SOURCES unit_cube_poisson.cc
-  LIBRARIES oomph::poisson)
+  LIBRARIES oomph::poisson oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME unit_cube_poisson_validate
   SOURCES unit_cube_poisson_validate.cc
-  LIBRARIES oomph::poisson)
+  LIBRARIES oomph::poisson oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

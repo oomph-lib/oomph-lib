@@ -12,22 +12,22 @@ include(CTest)
 oomph_add_executable(
   NAME fsi_osc_ring
   SOURCES fsi_osc_ring.cc
-  LIBRARIES oomph::beam oomph::navier_stokes)
+  LIBRARIES oomph::beam oomph::navier_stokes oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME fsi_osc_ring_compare_jacs
   SOURCES fsi_osc_ring_compare_jacs.cc
-  LIBRARIES oomph::beam oomph::navier_stokes)
+  LIBRARIES oomph::beam oomph::navier_stokes oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME osc_ring_alg
   SOURCES osc_ring_alg.cc osc_ring_sarah_asymptotics.h
-  LIBRARIES oomph::navier_stokes)
+  LIBRARIES oomph::navier_stokes oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME osc_ring_macro
   SOURCES osc_ring_macro.cc osc_ring_sarah_asymptotics.h
-  LIBRARIES oomph::navier_stokes)
+  LIBRARIES oomph::navier_stokes oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

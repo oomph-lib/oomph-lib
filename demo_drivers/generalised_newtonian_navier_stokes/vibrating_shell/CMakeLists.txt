@@ -12,9 +12,14 @@ include(CTest)
 oomph_add_executable(
   NAME vibrating_shell_non_newtonian
   SOURCES vibrating_shell_non_newtonian.cc overloaded_cartesian_element_body.h
-  LIBRARIES oomph::generalised_newtonian_navier_stokes oomph::navier_stokes
-            oomph::solid oomph::constitutive oomph::fluid_interface
-            oomph::rigid_body)
+  LIBRARIES oomph::generalised_newtonian_navier_stokes
+            oomph::navier_stokes
+            oomph::solid
+            oomph::constitutive
+            oomph::fluid_interface
+            oomph::rigid_body
+            oomph::meshes
+            oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

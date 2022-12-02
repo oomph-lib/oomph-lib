@@ -12,7 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME axisym_fvk
   SOURCES axisym_fvk.cc
-  LIBRARIES oomph::axisym_foeppl_von_karman)
+  LIBRARIES oomph::axisym_foeppl_von_karman oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

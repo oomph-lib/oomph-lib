@@ -12,14 +12,19 @@ include(CTest)
 oomph_add_executable(
   NAME elastic_two_layer_interface_axisym
   SOURCES elastic_two_layer_interface_axisym.cc
-  LIBRARIES oomph::axisym_navier_stokes oomph::navier_stokes
-            oomph::fluid_interface oomph::solid oomph::constitutive)
+  LIBRARIES oomph::axisym_navier_stokes
+            oomph::navier_stokes
+            oomph::fluid_interface
+            oomph::solid
+            oomph::constitutive
+            oomph::meshes
+            oomph::generic)
 
 oomph_add_executable(
   NAME spine_two_layer_interface_axisym
   SOURCES spine_two_layer_interface_axisym.cc
   LIBRARIES oomph::axisym_navier_stokes oomph::navier_stokes
-            oomph::fluid_interface)
+            oomph::fluid_interface oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

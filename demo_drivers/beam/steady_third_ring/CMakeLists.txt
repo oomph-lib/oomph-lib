@@ -12,7 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME steady_third_ring
   SOURCES steady_third_ring.cc
-  LIBRARIES oomph::beam)
+  LIBRARIES oomph::beam oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

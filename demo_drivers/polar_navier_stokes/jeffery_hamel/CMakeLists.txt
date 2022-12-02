@@ -18,7 +18,7 @@ oomph_add_executable(
           streamfunction_include.h
           jh_includes.h
           polar_streamfunction_traction_elements.h
-  LIBRARIES oomph::polar_navier_stokes)
+  LIBRARIES oomph::polar_navier_stokes oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

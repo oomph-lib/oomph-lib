@@ -12,7 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME two_d_biharmonic
   SOURCES two_d_biharmonic.cc
-  LIBRARIES oomph::biharmonic)
+  LIBRARIES oomph::biharmonic oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

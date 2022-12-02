@@ -12,7 +12,8 @@ include(CTest)
 oomph_add_executable(
   NAME pseudo_solid_collapsible_channel
   SOURCES pseudo_solid_collapsible_channel.cc
-  LIBRARIES oomph::navier_stokes oomph::solid oomph::constitutive)
+  LIBRARIES oomph::navier_stokes oomph::solid oomph::constitutive oomph::meshes
+            oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

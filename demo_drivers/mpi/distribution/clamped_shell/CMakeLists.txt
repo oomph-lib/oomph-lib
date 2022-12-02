@@ -12,7 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME clamped_shell_with_arclength_cont
   SOURCES clamped_shell_with_arclength_cont.cc
-  LIBRARIES oomph::shell)
+  LIBRARIES oomph::shell oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

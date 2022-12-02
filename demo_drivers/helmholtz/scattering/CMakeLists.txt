@@ -12,24 +12,24 @@ include(CTest)
 oomph_add_executable(
   NAME adaptive_scattering
   SOURCES scattering.cc
-  LIBRARIES oomph::helmholtz
+  LIBRARIES oomph::helmholtz oomph::meshes oomph::generic
   CXX_DEFINITIONS ADAPTIVE)
 
 oomph_add_executable(
   NAME adaptive_unstructured_scattering
   SOURCES unstructured_scattering.cc
-  LIBRARIES oomph::helmholtz
+  LIBRARIES oomph::helmholtz oomph::meshes oomph::generic
   CXX_DEFINITIONS ADAPTIVE)
 
 oomph_add_executable(
   NAME scattering
   SOURCES scattering.cc
-  LIBRARIES oomph::helmholtz)
+  LIBRARIES oomph::helmholtz oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME unstructured_scattering
   SOURCES unstructured_scattering.cc
-  LIBRARIES oomph::helmholtz)
+  LIBRARIES oomph::helmholtz oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

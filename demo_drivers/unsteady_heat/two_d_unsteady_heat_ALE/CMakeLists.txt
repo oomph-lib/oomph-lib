@@ -12,7 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME two_d_unsteady_heat_ALE
   SOURCES two_d_unsteady_heat_ALE.cc
-  LIBRARIES oomph::unsteady_heat)
+  LIBRARIES oomph::unsteady_heat oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

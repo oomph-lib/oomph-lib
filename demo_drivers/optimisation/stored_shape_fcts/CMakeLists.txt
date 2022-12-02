@@ -12,7 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME two_d_poisson_stored_shape_fcts
   SOURCES two_d_poisson_stored_shape_fcts.cc
-  LIBRARIES oomph::poisson)
+  LIBRARIES oomph::poisson oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

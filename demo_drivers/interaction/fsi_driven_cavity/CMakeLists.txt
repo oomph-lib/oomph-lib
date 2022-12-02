@@ -12,12 +12,13 @@ include(CTest)
 oomph_add_executable(
   NAME fsi_driven_cavity_driver
   SOURCES fsi_driven_cavity_driver.cc fsi_driven_cavity_problem.h
-  LIBRARIES oomph::beam oomph::navier_stokes)
+  LIBRARIES oomph::beam oomph::navier_stokes oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME fsi_driven_cavity_segregated_driver
   SOURCES fsi_driven_cavity_segregated_driver.cc fsi_driven_cavity_problem.h
-  LIBRARIES oomph::multi_physics oomph::beam oomph::navier_stokes)
+  LIBRARIES oomph::multi_physics oomph::beam oomph::navier_stokes oomph::meshes
+            oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

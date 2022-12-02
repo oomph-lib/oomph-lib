@@ -13,7 +13,8 @@ if(OOMPH_HAS_CGAL)
   oomph_add_executable(
     NAME uns_adapt_3d
     SOURCES uns_adapt_3d.cc
-    LIBRARIES oomph::solid oomph::constitutive oomph::navier_stokes)
+    LIBRARIES oomph::solid oomph::constitutive oomph::navier_stokes
+              oomph::meshes oomph::generic)
 endif()
 
 # ---------------------------------- TESTING ----------------------------------

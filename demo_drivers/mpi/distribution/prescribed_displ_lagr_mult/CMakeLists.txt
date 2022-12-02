@@ -12,12 +12,12 @@ include(CTest)
 oomph_add_executable(
   NAME prescribed_displ_lagr_mult
   SOURCES prescribed_displ_lagr_mult.cc
-  LIBRARIES oomph::solid oomph::constitutive)
+  LIBRARIES oomph::solid oomph::constitutive oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME resize_hanging_node_tester
   SOURCES resize_hanging_node_tester.cc
-  LIBRARIES oomph::solid oomph::constitutive)
+  LIBRARIES oomph::solid oomph::constitutive oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

@@ -12,12 +12,12 @@ include(CTest)
 oomph_add_executable(
   NAME osc_ring_alg
   SOURCES osc_ring_alg.cc
-  LIBRARIES oomph::navier_stokes)
+  LIBRARIES oomph::navier_stokes oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME osc_ring_macro
   SOURCES osc_ring_macro.cc
-  LIBRARIES oomph::navier_stokes)
+  LIBRARIES oomph::navier_stokes oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

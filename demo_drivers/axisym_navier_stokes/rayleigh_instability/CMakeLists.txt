@@ -12,7 +12,8 @@ include(CTest)
 oomph_add_executable(
   NAME rayleigh_instability
   SOURCES rayleigh_instability.cc
-  LIBRARIES oomph::axisym_navier_stokes oomph::fluid_interface)
+  LIBRARIES oomph::axisym_navier_stokes oomph::fluid_interface oomph::meshes
+            oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

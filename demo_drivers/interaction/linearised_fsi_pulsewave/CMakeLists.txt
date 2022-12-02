@@ -12,7 +12,8 @@ include(CTest)
 oomph_add_executable(
   NAME linearised_fsi_pulsewave
   SOURCES linearised_fsi_pulsewave.cc
-  LIBRARIES oomph::axisym_navier_stokes oomph::axisym_linear_elasticity)
+  LIBRARIES oomph::axisym_navier_stokes oomph::axisym_linear_elasticity
+            oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

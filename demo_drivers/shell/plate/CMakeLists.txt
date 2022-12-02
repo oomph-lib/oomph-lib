@@ -12,7 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME plate
   SOURCES plate.cc
-  LIBRARIES oomph::shell)
+  LIBRARIES oomph::shell oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

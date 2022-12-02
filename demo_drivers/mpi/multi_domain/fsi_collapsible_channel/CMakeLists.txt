@@ -12,12 +12,12 @@ include(CTest)
 oomph_add_executable(
   NAME fsi_collapsible_channel_adapt
   SOURCES fsi_collapsible_channel_adapt.cc
-  LIBRARIES oomph::beam oomph::navier_stokes)
+  LIBRARIES oomph::beam oomph::navier_stokes oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME fsi_collapsible_channel_macro_adapt
   SOURCES fsi_collapsible_channel_adapt.cc
-  LIBRARIES oomph::beam oomph::navier_stokes
+  LIBRARIES oomph::beam oomph::navier_stokes oomph::meshes oomph::generic
   CXX_DEFINITIONS MACRO_ELEMENT_NODE_UPDATE)
 
 # ---------------------------------- TESTING ----------------------------------

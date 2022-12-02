@@ -12,69 +12,73 @@ include(CTest)
 oomph_add_executable(
   NAME fsi_collapsible_channel_algebraic_adapt_CR
   SOURCES fsi_collapsible_channel_adapt.cc
-  LIBRARIES oomph::beam oomph::navier_stokes)
+  LIBRARIES oomph::beam oomph::navier_stokes oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME fsi_collapsible_channel_algebraic_adapt_TH
   SOURCES fsi_collapsible_channel_adapt.cc
-  LIBRARIES oomph::beam oomph::navier_stokes
+  LIBRARIES oomph::beam oomph::navier_stokes oomph::meshes oomph::generic
   CXX_DEFINITIONS TAYLOR_HOOD)
 
 oomph_add_executable(
   NAME fsi_collapsible_channel_algebraic_CR
   SOURCES fsi_collapsible_channel.cc
-  LIBRARIES oomph::beam oomph::navier_stokes)
+  LIBRARIES oomph::beam oomph::navier_stokes oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME fsi_collapsible_channel_algebraic_TH
   SOURCES fsi_collapsible_channel.cc
-  LIBRARIES oomph::beam oomph::navier_stokes
+  LIBRARIES oomph::beam oomph::navier_stokes oomph::meshes oomph::generic
   CXX_DEFINITIONS TAYLOR_HOOD)
 
 oomph_add_executable(
   NAME fsi_collapsible_channel_macro_adapt_CR
   SOURCES fsi_collapsible_channel_adapt.cc
-  LIBRARIES oomph::beam oomph::navier_stokes
+  LIBRARIES oomph::beam oomph::navier_stokes oomph::meshes oomph::generic
   CXX_DEFINITIONS MACRO_ELEMENT_NODE_UPDATE)
 
 oomph_add_executable(
   NAME fsi_collapsible_channel_macro_adapt_TH
   SOURCES fsi_collapsible_channel_adapt.cc
-  LIBRARIES oomph::beam oomph::navier_stokes
+  LIBRARIES oomph::beam oomph::navier_stokes oomph::meshes oomph::generic
   CXX_DEFINITIONS MACRO_ELEMENT_NODE_UPDATE TAYLOR_HOOD)
 
 oomph_add_executable(
   NAME fsi_collapsible_channel_macro_CR
   SOURCES fsi_collapsible_channel.cc
-  LIBRARIES oomph::beam oomph::navier_stokes
+  LIBRARIES oomph::beam oomph::navier_stokes oomph::meshes oomph::generic
   CXX_DEFINITIONS MACRO_ELEMENT_NODE_UPDATE)
 
 oomph_add_executable(
   NAME fsi_collapsible_channel_macro_TH
   SOURCES fsi_collapsible_channel.cc
-  LIBRARIES oomph::beam oomph::navier_stokes
+  LIBRARIES oomph::beam oomph::navier_stokes oomph::meshes oomph::generic
   CXX_DEFINITIONS MACRO_ELEMENT_NODE_UPDATE TAYLOR_HOOD)
 
 oomph_add_executable(
   NAME fsi_pseudo_solid_collapsible_channel_adapt_CR
   SOURCES fsi_pseudo_solid_collapsible_channel_adapt.cc
-  LIBRARIES oomph::beam oomph::constitutive oomph::solid oomph::navier_stokes)
+  LIBRARIES oomph::beam oomph::constitutive oomph::solid oomph::navier_stokes
+            oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME fsi_pseudo_solid_collapsible_channel_adapt_TH
   SOURCES fsi_pseudo_solid_collapsible_channel_adapt.cc
   LIBRARIES oomph::beam oomph::constitutive oomph::solid oomph::navier_stokes
+            oomph::meshes oomph::generic
   CXX_DEFINITIONS TAYLOR_HOOD)
 
 oomph_add_executable(
   NAME fsi_pseudo_solid_collapsible_channel_CR
   SOURCES fsi_pseudo_solid_collapsible_channel.cc
-  LIBRARIES oomph::beam oomph::constitutive oomph::solid oomph::navier_stokes)
+  LIBRARIES oomph::beam oomph::constitutive oomph::solid oomph::navier_stokes
+            oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME fsi_pseudo_solid_collapsible_channel_TH
   SOURCES fsi_pseudo_solid_collapsible_channel.cc
   LIBRARIES oomph::beam oomph::constitutive oomph::solid oomph::navier_stokes
+            oomph::meshes oomph::generic
   CXX_DEFINITIONS TAYLOR_HOOD)
 
 # ---------------------------------- TESTING ----------------------------------

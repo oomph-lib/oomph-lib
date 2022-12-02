@@ -13,8 +13,13 @@ oomph_add_executable(
   NAME axisym_vibrating_shell_non_newtonian
   SOURCES axisym_vibrating_shell_non_newtonian.cc overloaded_element_body.h
   LIBRARIES oomph::generalised_newtonian_axisym_navier_stokes
-            oomph::axisym_navier_stokes oomph::solid oomph::constitutive
-            oomph::fluid_interface oomph::rigid_body)
+            oomph::axisym_navier_stokes
+            oomph::solid
+            oomph::constitutive
+            oomph::fluid_interface
+            oomph::rigid_body
+            oomph::meshes
+            oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

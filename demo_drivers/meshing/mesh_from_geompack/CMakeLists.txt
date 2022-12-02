@@ -17,7 +17,7 @@ oomph_add_executable(
 oomph_add_executable(
   NAME mesh_from_geompack_poisson
   SOURCES mesh_from_geompack_poisson.cc
-  LIBRARIES oomph::poisson)
+  LIBRARIES oomph::poisson oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

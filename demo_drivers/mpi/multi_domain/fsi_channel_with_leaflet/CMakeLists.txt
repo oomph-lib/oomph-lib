@@ -12,7 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME fsi_channel_with_leaflet
   SOURCES fsi_channel_with_leaflet.cc
-  LIBRARIES oomph::beam oomph::navier_stokes)
+  LIBRARIES oomph::beam oomph::navier_stokes oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

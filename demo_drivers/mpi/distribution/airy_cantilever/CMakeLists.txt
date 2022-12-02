@@ -12,7 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME airy_cantilever2_adapt
   SOURCES airy_cantilever2.cc
-  LIBRARIES oomph::solid oomph::constitutive
+  LIBRARIES oomph::solid oomph::constitutive oomph::meshes oomph::generic
   CXX_DEFINITIONS REFINE)
 
 # ---------------------------------- TESTING ----------------------------------

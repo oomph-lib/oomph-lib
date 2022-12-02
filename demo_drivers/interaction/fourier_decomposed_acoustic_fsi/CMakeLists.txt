@@ -14,7 +14,7 @@ oomph_add_executable(
   SOURCES unstructured_fourier_decomposed_acoustic_fsi.cc
   LIBRARIES oomph::fourier_decomposed_helmholtz
             oomph::time_harmonic_fourier_decomposed_linear_elasticity
-            oomph::navier_stokes
+            oomph::navier_stokes oomph::meshes oomph::generic
   CXX_DEFINITIONS ADAPTIVE)
 
 oomph_add_executable(
@@ -22,14 +22,14 @@ oomph_add_executable(
   SOURCES fourier_decomposed_acoustic_fsi.cc
   LIBRARIES oomph::fourier_decomposed_helmholtz
             oomph::time_harmonic_fourier_decomposed_linear_elasticity
-            oomph::navier_stokes)
+            oomph::navier_stokes oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME unstructured_fourier_decomposed_acoustic_fsi
   SOURCES unstructured_fourier_decomposed_acoustic_fsi.cc
   LIBRARIES oomph::fourier_decomposed_helmholtz
             oomph::time_harmonic_fourier_decomposed_linear_elasticity
-            oomph::navier_stokes)
+            oomph::navier_stokes oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

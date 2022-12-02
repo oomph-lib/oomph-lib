@@ -12,7 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME osc_quarter_ellipse
   SOURCES osc_quarter_ellipse.cc
-  LIBRARIES oomph::navier_stokes)
+  LIBRARIES oomph::navier_stokes oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

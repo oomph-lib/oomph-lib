@@ -12,8 +12,8 @@ include(CTest)
 oomph_add_executable(
   NAME 3d_free_surface
   SOURCES 3d_free_surface.cc
-  LIBRARIES oomph::navier_stokes oomph::solid oomph::constitutive
-            oomph::fluid_interface)
+  LIBRARIES oomph::navier_stokes oomph::solid oomph::constitutive oomph::meshes
+            oomph::generic oomph::fluid_interface)
 
 # ---------------------------------- TESTING ----------------------------------
 

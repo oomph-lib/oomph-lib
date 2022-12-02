@@ -13,7 +13,7 @@ oomph_add_executable(
   NAME soluble_surfactant
   SOURCES double_buoyant_navier_stokes_elements.h soluble_surfactant.cc
   LIBRARIES oomph::advection_diffusion_reaction oomph::navier_stokes
-            oomph::fluid_interface)
+            oomph::fluid_interface oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

@@ -12,24 +12,24 @@ include(CTest)
 oomph_add_executable(
   NAME adaptive_time_harmonic_elastic_annulus
   SOURCES time_harmonic_elastic_annulus.cc
-  LIBRARIES oomph::time_harmonic_linear_elasticity
+  LIBRARIES oomph::time_harmonic_linear_elasticity oomph::meshes oomph::generic
   CXX_DEFINITIONS ADAPTIVE)
 
 oomph_add_executable(
   NAME adaptive_unstructured_time_harmonic_elastic_annulus
   SOURCES unstructured_time_harmonic_elastic_annulus.cc
-  LIBRARIES oomph::time_harmonic_linear_elasticity
+  LIBRARIES oomph::time_harmonic_linear_elasticity oomph::meshes oomph::generic
   CXX_DEFINITIONS ADAPTIVE)
 
 oomph_add_executable(
   NAME time_harmonic_elastic_annulus
   SOURCES time_harmonic_elastic_annulus.cc
-  LIBRARIES oomph::time_harmonic_linear_elasticity)
+  LIBRARIES oomph::time_harmonic_linear_elasticity oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME unstructured_time_harmonic_elastic_annulus
   SOURCES unstructured_time_harmonic_elastic_annulus.cc
-  LIBRARIES oomph::time_harmonic_linear_elasticity)
+  LIBRARIES oomph::time_harmonic_linear_elasticity oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

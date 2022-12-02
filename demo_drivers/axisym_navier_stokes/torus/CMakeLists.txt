@@ -12,7 +12,8 @@ include(CTest)
 oomph_add_executable(
   NAME torus
   SOURCES torus.cc
-  LIBRARIES oomph::navier_stokes oomph::axisym_navier_stokes)
+  LIBRARIES oomph::navier_stokes oomph::axisym_navier_stokes oomph::meshes
+            oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

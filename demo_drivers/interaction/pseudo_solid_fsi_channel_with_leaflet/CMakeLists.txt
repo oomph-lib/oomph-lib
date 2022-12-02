@@ -12,8 +12,13 @@ include(CTest)
 oomph_add_executable(
   NAME fsi_channel_with_leaflet_precond
   SOURCES fsi_channel_with_leaflet_precond.cc
-  LIBRARIES oomph::multi_physics oomph::beam oomph::navier_stokes
-            oomph::constitutive oomph::solid)
+  LIBRARIES oomph::multi_physics
+            oomph::beam
+            oomph::navier_stokes
+            oomph::constitutive
+            oomph::solid
+            oomph::meshes
+            oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

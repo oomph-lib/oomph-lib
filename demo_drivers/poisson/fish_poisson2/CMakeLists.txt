@@ -12,27 +12,27 @@ include(CTest)
 oomph_add_executable(
   NAME fish_domain
   SOURCES fish_domain.cc
-  LIBRARIES oomph::generic)
+  LIBRARIES oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME fish_poisson_adapt
   SOURCES fish_poisson_adapt.cc
-  LIBRARIES oomph::poisson)
+  LIBRARIES oomph::poisson oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME fish_poisson_no_adapt
   SOURCES fish_poisson_no_adapt.cc
-  LIBRARIES oomph::poisson)
+  LIBRARIES oomph::poisson oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME fish_poisson_node_update
   SOURCES fish_poisson_node_update.cc
-  LIBRARIES oomph::poisson)
+  LIBRARIES oomph::poisson oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME fish_poisson_simple_adapt
   SOURCES fish_poisson_simple_adapt.cc
-  LIBRARIES oomph::poisson)
+  LIBRARIES oomph::poisson oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

@@ -12,12 +12,12 @@ include(CTest)
 oomph_add_executable(
   NAME one_d_advection
   SOURCES one_d_advection.cc
-  LIBRARIES oomph::flux_transport)
+  LIBRARIES oomph::flux_transport oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME two_d_advection
   SOURCES two_d_advection.cc
-  LIBRARIES oomph::flux_transport)
+  LIBRARIES oomph::flux_transport oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

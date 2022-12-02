@@ -12,12 +12,12 @@ include(CTest)
 oomph_add_executable(
   NAME extrude_triangle_generated_mesh
   SOURCES extrude_triangle_generated_mesh.cc
-  LIBRARIES oomph::navier_stokes)
+  LIBRARIES oomph::navier_stokes oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME extrude_with_macro_element_representation
   SOURCES extrude_with_macro_element_representation.cc
-  LIBRARIES oomph::poisson)
+  LIBRARIES oomph::poisson oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

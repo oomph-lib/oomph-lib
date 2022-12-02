@@ -12,12 +12,12 @@ include(CTest)
 oomph_add_executable(
   NAME rayleigh_channel
   SOURCES rayleigh_channel.cc
-  LIBRARIES oomph::navier_stokes)
+  LIBRARIES oomph::navier_stokes oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME rayleigh_circular_driven_cavity_adapt
   SOURCES ray_circ_cavity_adapt.cc
-  LIBRARIES oomph::navier_stokes)
+  LIBRARIES oomph::navier_stokes oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

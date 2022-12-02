@@ -12,12 +12,13 @@ include(CTest)
 oomph_add_executable(
   NAME pressure_driven_torus
   SOURCES pressure_driven_torus.cc
-  LIBRARIES oomph::solid oomph::constitutive oomph::axisym_navier_stokes)
+  LIBRARIES oomph::solid oomph::constitutive oomph::axisym_navier_stokes
+            oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME unstructured_torus
   SOURCES unstructured_torus.cc
-  LIBRARIES oomph::axisym_navier_stokes)
+  LIBRARIES oomph::axisym_navier_stokes oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

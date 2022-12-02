@@ -13,7 +13,7 @@ oomph_add_executable(
   NAME single_layer_free_surface_axisym
   SOURCES single_layer_free_surface_axisym.cc
   LIBRARIES oomph::axisym_navier_stokes oomph::navier_stokes
-            oomph::fluid_interface)
+            oomph::fluid_interface oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

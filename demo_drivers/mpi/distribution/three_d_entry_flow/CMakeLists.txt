@@ -12,7 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME three_d_entry_flow
   SOURCES three_d_entry_flow.cc
-  LIBRARIES oomph::navier_stokes)
+  LIBRARIES oomph::navier_stokes oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

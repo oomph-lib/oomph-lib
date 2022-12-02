@@ -14,14 +14,14 @@ oomph_add_executable(
   SOURCES homo_lin_elasticity_elements.h homo_lin_elasticity_elements.cc
           Thomo_lin_elasticity_elements.h Thomo_lin_elasticity_elements.cc
           two_dim.cc
-  LIBRARIES oomph::linear_elasticity)
+  LIBRARIES oomph::linear_elasticity oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME two_dim_hex
   SOURCES homo_lin_elasticity_elements.h homo_lin_elasticity_elements.cc
           Thomo_lin_elasticity_elements.h Thomo_lin_elasticity_elements.cc
           two_dim_hex.cc
-  LIBRARIES oomph::linear_elasticity)
+  LIBRARIES oomph::linear_elasticity oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

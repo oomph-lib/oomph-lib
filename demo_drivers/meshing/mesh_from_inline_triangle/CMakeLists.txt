@@ -12,17 +12,17 @@ include(CTest)
 oomph_add_executable(
   NAME mesh_from_inline_triangle
   SOURCES mesh_from_inline_triangle.cc
-  LIBRARIES oomph::poisson)
+  LIBRARIES oomph::poisson oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME mesh_from_inline_triangle_no_adapt
   SOURCES mesh_from_inline_triangle_no_adapt.cc
-  LIBRARIES oomph::poisson)
+  LIBRARIES oomph::poisson oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME mesh_from_inline_triangle_polygon
   SOURCES mesh_from_inline_triangle.cc
-  LIBRARIES oomph::poisson
+  LIBRARIES oomph::poisson oomph::meshes oomph::generic
   CXX_DEFINITIONS OUTER_POLYGON)
 
 # ---------------------------------- TESTING ----------------------------------

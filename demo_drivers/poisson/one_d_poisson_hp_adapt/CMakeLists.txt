@@ -12,7 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME one_d_poisson_hp_adapt
   SOURCES one_d_poisson_hp_adapt.cc
-  LIBRARIES oomph::poisson)
+  LIBRARIES oomph::poisson oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

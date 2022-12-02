@@ -13,7 +13,8 @@ oomph_add_executable(
   NAME counter_rotating_disks
   SOURCES counter_rotating_disks.cc linearised_axisym_navier_stokes_elements.h
           multi_domain_linearised_axisym_navier_stokes_elements.h
-  LIBRARIES oomph::axisym_navier_stokes oomph::navier_stokes)
+  LIBRARIES oomph::axisym_navier_stokes oomph::navier_stokes oomph::meshes
+            oomph::generic)
 
 oomph_add_executable(
   NAME counter_rotating_disks_ref
@@ -21,7 +22,8 @@ oomph_add_executable(
           refineable_linearised_axisym_navier_stokes_elements.h
           linearised_axisym_navier_stokes_elements.h
           multi_domain_linearised_axisym_navier_stokes_elements.h
-  LIBRARIES oomph::axisym_navier_stokes oomph::navier_stokes)
+  LIBRARIES oomph::axisym_navier_stokes oomph::navier_stokes oomph::meshes
+            oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

@@ -12,7 +12,8 @@ include(CTest)
 oomph_add_executable(
   NAME free_surface_rotation
   SOURCES free_surface_rotation.cc
-  LIBRARIES oomph::navier_stokes oomph::fluid_interface)
+  LIBRARIES oomph::navier_stokes oomph::fluid_interface oomph::meshes
+            oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

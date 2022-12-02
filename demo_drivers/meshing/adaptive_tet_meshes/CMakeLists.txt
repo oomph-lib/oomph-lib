@@ -12,29 +12,29 @@ include(CTest)
 oomph_add_executable(
   NAME geom_obj_with_boundary
   SOURCES geom_obj_with_boundary.cc
-  LIBRARIES oomph::generic)
+  LIBRARIES oomph::meshes oomph::generic)
 
 if(OOMPH_HAS_CGAL)
   oomph_add_executable(
     NAME planar_facet_bounded_mesh_from_gmsh
     SOURCES planar_facet_bounded_tetmesh.cc tetmesh_faceted_surfaces.h
-    LIBRARIES oomph::poisson)
+    LIBRARIES oomph::poisson oomph::meshes oomph::generic)
 
   oomph_add_executable(
     NAME planar_facet_bounded_mesh_from_tetgen
     SOURCES planar_facet_bounded_tetmesh.cc tetmesh_faceted_surfaces.h
-    LIBRARIES oomph::poisson
+    LIBRARIES oomph::poisson oomph::meshes oomph::generic
     CXX_DEFINITIONS DO_TETGEN)
 
   oomph_add_executable(
     NAME curved_facet_bounded_mesh_from_gmsh
     SOURCES curved_facet_bounded_tetmesh.cc tetmesh_faceted_surfaces.h
-    LIBRARIES oomph::poisson)
+    LIBRARIES oomph::poisson oomph::meshes oomph::generic)
 
   oomph_add_executable(
     NAME curved_facet_bounded_mesh_from_tetgen
     SOURCES curved_facet_bounded_tetmesh.cc tetmesh_faceted_surfaces.h
-    LIBRARIES oomph::poisson
+    LIBRARIES oomph::poisson oomph::meshes oomph::generic
     CXX_DEFINITIONS DO_TETGEN)
 endif()
 

@@ -12,7 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME flux_control
   SOURCES flux_control.cc
-  LIBRARIES oomph::womersley oomph::navier_stokes)
+  LIBRARIES oomph::womersley oomph::navier_stokes oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

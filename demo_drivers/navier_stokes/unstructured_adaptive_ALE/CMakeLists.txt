@@ -13,7 +13,7 @@ oomph_add_executable(
   NAME unstructured_adaptive_ALE
   SOURCES unstructured_adaptive_ALE.cc
   LIBRARIES oomph::solid oomph::constitutive oomph::navier_stokes
-            oomph::rigid_body)
+            oomph::rigid_body oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

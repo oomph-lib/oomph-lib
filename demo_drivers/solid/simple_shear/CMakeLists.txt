@@ -17,12 +17,14 @@ target_compile_features(precompiled_mesh PUBLIC cxx_std_17)
 oomph_add_executable(
   NAME simple_shear
   SOURCES simple_shear.cc
-  LIBRARIES oomph::solid oomph::constitutive oomph::generic precompiled_mesh)
+  LIBRARIES oomph::solid oomph::constitutive oomph::meshes oomph::generic
+            precompiled_mesh)
 
 oomph_add_executable(
   NAME refineable_simple_shear
   SOURCES refineable_simple_shear.cc
-  LIBRARIES oomph::solid oomph::constitutive oomph::generic precompiled_mesh)
+  LIBRARIES oomph::solid oomph::constitutive oomph::meshes oomph::generic
+            precompiled_mesh)
 
 # ---------------------------------- TESTING ----------------------------------
 

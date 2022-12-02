@@ -13,7 +13,8 @@ oomph_add_executable(
   NAME surfactant
   SOURCES surfactant.cc
   LIBRARIES oomph::advection_diffusion oomph::navier_stokes
-            oomph::multi_physics oomph::fluid_interface)
+            oomph::multi_physics oomph::fluid_interface oomph::meshes
+            oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

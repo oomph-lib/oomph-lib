@@ -12,7 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME three_d_cantilever_adapt
   SOURCES three_d_cantilever.cc
-  LIBRARIES oomph::solid oomph::constitutive
+  LIBRARIES oomph::solid oomph::constitutive oomph::meshes oomph::generic
   CXX_DEFINITIONS REFINE)
 
 # ---------------------------------- TESTING ----------------------------------

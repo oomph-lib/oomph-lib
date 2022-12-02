@@ -12,7 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME vmtk_solid
   SOURCES vmtk_solid.cc
-  LIBRARIES oomph::solid oomph::constitutive)
+  LIBRARIES oomph::solid oomph::constitutive oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

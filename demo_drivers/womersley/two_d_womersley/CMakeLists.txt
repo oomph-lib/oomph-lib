@@ -12,7 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME two_d_womersley
   SOURCES two_d_womersley.cc
-  LIBRARIES oomph::womersley oomph::navier_stokes)
+  LIBRARIES oomph::womersley oomph::navier_stokes oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

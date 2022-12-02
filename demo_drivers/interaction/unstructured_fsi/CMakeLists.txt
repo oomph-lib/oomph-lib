@@ -12,7 +12,8 @@ include(CTest)
 oomph_add_executable(
   NAME unstructured_two_d_fsi
   SOURCES unstructured_two_d_fsi.cc
-  LIBRARIES oomph::solid oomph::constitutive oomph::navier_stokes)
+  LIBRARIES oomph::solid oomph::constitutive oomph::navier_stokes oomph::meshes
+            oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

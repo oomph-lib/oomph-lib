@@ -12,12 +12,12 @@ include(CTest)
 oomph_add_executable(
   NAME pipe
   SOURCES pipe.cc
-  LIBRARIES oomph::axisym_advection_diffusion)
+  LIBRARIES oomph::axisym_advection_diffusion oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME pipe_variable_diff
   SOURCES pipe_variable_diff.cc
-  LIBRARIES oomph::axisym_advection_diffusion)
+  LIBRARIES oomph::axisym_advection_diffusion oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

@@ -12,12 +12,12 @@ include(CTest)
 oomph_add_executable(
   NAME lin_unsteady_ring
   SOURCES lin_unsteady_ring.cc
-  LIBRARIES oomph::beam)
+  LIBRARIES oomph::beam oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME unsteady_ring
   SOURCES unsteady_ring.cc
-  LIBRARIES oomph::beam)
+  LIBRARIES oomph::beam oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

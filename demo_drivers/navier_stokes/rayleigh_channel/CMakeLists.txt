@@ -12,7 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME rayleigh_channel
   SOURCES rayleigh_channel.cc
-  LIBRARIES oomph::navier_stokes)
+  LIBRARIES oomph::navier_stokes oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

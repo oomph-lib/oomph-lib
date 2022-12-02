@@ -13,7 +13,7 @@ include(CTest)
 oomph_add_executable(
   NAME test_nlohmann_json
   SOURCES test_nlohmann_json.cc
-  LIBRARIES nlohmann_json::nlohmann_json)
+  LIBRARIES nlohmann_json::nlohmann_json oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

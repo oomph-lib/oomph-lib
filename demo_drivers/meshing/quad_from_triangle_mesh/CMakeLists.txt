@@ -12,22 +12,22 @@ include(CTest)
 oomph_add_executable(
   NAME adaptive_moving_block_navier_stokes
   SOURCES adaptive_moving_block_navier_stokes.cc
-  LIBRARIES oomph::navier_stokes oomph::poisson)
+  LIBRARIES oomph::navier_stokes oomph::poisson oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME adaptive_unstructured_scattering_quad
   SOURCES adaptive_unstructured_scattering_quad.cc
-  LIBRARIES oomph::helmholtz)
+  LIBRARIES oomph::helmholtz oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME adaptive_unstructured_two_d_solid
   SOURCES adaptive_unstructured_two_d_solid.cc
-  LIBRARIES oomph::solid oomph::constitutive)
+  LIBRARIES oomph::solid oomph::constitutive oomph::meshes oomph::generic)
 
 oomph_add_executable(
   NAME unstructured_two_d_solid
   SOURCES unstructured_two_d_solid.cc
-  LIBRARIES oomph::solid oomph::constitutive)
+  LIBRARIES oomph::solid oomph::constitutive oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 

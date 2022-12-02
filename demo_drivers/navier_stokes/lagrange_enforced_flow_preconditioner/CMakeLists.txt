@@ -12,7 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME two_d_tilted_square
   SOURCES two_d_tilted_square.cc
-  LIBRARIES oomph::navier_stokes)
+  LIBRARIES oomph::navier_stokes oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 
