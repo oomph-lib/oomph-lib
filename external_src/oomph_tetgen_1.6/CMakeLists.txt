@@ -61,6 +61,7 @@ set(EXTERNAL_SRC_LIBS ${EXTERNAL_SRC_LIBS} PARENT_SCOPE)
 
 # Define an internal project variable to indicate that we possess this library
 set(OOMPH_HAS_TETGEN TRUE CACHE INTERNAL "")
+set(OOMPH_HAS_NEW_TETGEN TRUE CACHE INTERNAL "")
 
 message(VERBOSE "Leaving oomph_tetgen_1.6 subdirectory")
 # ------------------------------------------------------------------------------
