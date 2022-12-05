@@ -25,6 +25,9 @@ oomph_add_test(
 
 # Don't run this test alongside any other tests
 set_tests_properties(mpi.hp_adaptive_driven_cavity PROPERTIES RUN_SERIAL TRUE)
+if(APPLE)
+  set_tests_properties(mpi.hp_adaptive_driven_cavity PROPERTIES DISABLED TRUE)
+endif()
 
 message(VERBOSE "Leaving hp_adaptive_driven_cavity subdirectory")
 # ------------------------------------------------------------------------------

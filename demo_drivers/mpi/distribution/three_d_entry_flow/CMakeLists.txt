@@ -26,6 +26,9 @@ oomph_add_test(
 
 # Don't run this test alongside any other tests
 set_tests_properties(mpi.three_d_entry_flow PROPERTIES RUN_SERIAL TRUE)
+if(APPLE)
+  set_tests_properties(mpi.three_d_entry_flow PROPERTIES DISABLED TRUE)
+endif()
 
 message(VERBOSE "Leaving three_d_entry_flow subdirectory")
 # ------------------------------------------------------------------------------
