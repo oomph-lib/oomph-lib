@@ -5,7 +5,6 @@
 ### Third party library support
 
 * Add support for:
-  * [x] `spdlog::spdlog`
   * [x] `nlohmann::json`
   * [x] `Hypre`
   * [x] `MUMPS`
@@ -14,7 +13,6 @@
   * [ ] Sequential build of `MUMPS`
   * [ ] Specifying the location of already-installed libraries
     * Could possibly specify installation directory with `-D <PACKAGE>_DIR`? E.g. `-D TRILINOS_DIR`, `-D HYPRE_DIR` etc.
-    * [ ] `spdlog::spdlog`
     * [ ] `nlohmann::json`
     * [ ] `Hypre`
     * [ ] `MUMPS`
@@ -28,8 +26,16 @@
 
 * [ ] *Optional:* Convert `oomph_gzip` library to single-file?
 
+### GitHub-y
+
+* [ ] Add a `destruct_test.yaml` to test lots of different configurations (e.g. with and without MPI, w/ and w/o Hypre, etc.)
+* [ ] Add constraints to when we should run the self-tests (e.g. when CMakeLists.txt, .h, .c, .cc files have been edited)
+
 ### Pure-CMake
 
+* [ ] Update every test name to be the path to the demo driver; e.g. `mpi.distribution.adaptive_driven_cavity`
+* [ ] Patch `ninja oomph_uninstall` command for Ninja Multi-Config
+* [ ] Update `demo_drivers` to allow building from any level
 * [ ] Update build system to make sure building a demo driver target without `ctest` also runs the `check_...` target to build the target and copy files over
 * [ ] Think about *installing* `fpdiff.py` AND `validate_ok_count` incase the user wants to install `oomph-lib` but wipe everything but the demo drivers.
   * *If* I decide to do this:
@@ -56,9 +62,13 @@
   * Ideally we'd still output `validation.log` info to this file even if the test doesn't fail... (Just incase there's a bug where a test fails but CTest doesn't catch it)
 * [ ] Update `OomphMPI.cmake` to avoid doing a global `link_libraries()`
 * [ ] Use `PROJECT_IS_TOP_LEVEL` to enable/disable tests
+* [ ] Add `"workflowPresets"` when CMake 3.25 is widely available
 
 ### Features to add or patch
 
+* [ ] Implement `oomph_pure_cpp_test`
+  * [ ] Add a struct to handle
+* [ ] Implement Python script to automatically convert `Makefile.am`s in `private/`
 * [ ] Add Intel MKL BLAS support
 * [ ] Replace current BLAS/LAPACK with OpenBLAS
 * [ ] Add control for setting number of procs to use in `mpiexec` command
@@ -78,7 +88,7 @@
   * [ ] If broken, patch any issues, e.g. `ctest --config $<CONFIG>`
 * [ ] Sort out a subproject build of `private/`
 * [ ] Update GitHub self-tests to only run after pushing .h, .c, .cc, CMakeLists.txt code (see e.g. [here](https://github.com/scivision/mumps/blob/v5.5.1.7/.github/workflows/ci.yml)).
-* [ ] Update MPI demo drivers to use 'RESOURCE_GROUPS' to declare the number of CPUs they'll use (will need to store)
+* [ ] Add fmtlib/fmt(?)
 
 ### Needs investigation
 
@@ -86,6 +96,7 @@
 
 ### Documentation
 
+* [ ] Document how to use Ninja Multi-Config
 * [ ] Installing CMake (3.24)
 * [ ] Downloading and installing oomph-lib
 * [ ] Update instructions for how to run demo drivers
@@ -115,7 +126,6 @@
 * [ ] Write info on how to debug issue:
   * [ ] Run commands for MPI tests (e.g. `mpiexec -np 2`)
 * [ ] Write a breakdown of all new features important changes, e.g.
-  * [ ] **Either update Notion or create a CMake Changelog**
   * [ ] C++ implementation of `fpdiff.py`
   * [ ] `validate.sh` scripts now take the path to the root directory
 * [ ] Incrementing version number (**strongly recommend using `bumpversion.cfg` to keep git version and cmake version in sync!**)
@@ -124,6 +134,7 @@
 
 Include tasks here that likely need some collaboration with Matthias
 
+* [ ] Remove `INSTALL.md` (installation instructions in main `README.md`)
 * [ ] Talk to MH about updating to C++17
 * [ ] Properly review to-do list and see if there's anything missing!
 * [ ] Talk to MH about latest MUMPS
@@ -143,6 +154,7 @@ Include tasks here that likely need some collaboration with Matthias
 
 ## Finished
 
+* [x] Add `oomph::generic` to `LIBRARIES` for every demo driver
 * [x] ~~Make oomph_add_test() a wrapper around oomph_add_executable()?~~
   * Need to be very careful about how we set up test names and output names to avoid clashes...
   * Will be helpful to create a separate test per executable and so we know whether a specific executable is actually included in a test... (although we'll know automatically from NUM_TESTS)
