@@ -13,7 +13,7 @@ set -o nounset
 # of ~2 of each other.
 
 
-# Get the OOPMH-LIB root directory from a makefile
+# Get the OOMPH-LIB root directory from a makefile
 OOMPH_ROOT_DIR=$1
 
 # Set the number of tests to be checked, computed as we go along.
