@@ -29,7 +29,7 @@ endif()
 # ------------------------------------------------------------------------------
 # cmake-format: off
 
-# The project directory; passed to consumers of the exported library incase they
+# The project directory; passed to consumers of the exported library in case they
 # need to use anything from there, e.g. the demo_drivers nearly all need the
 # fpdiff.py script from the scripts/ subdirectory.
 # FIXME: Change this as we will be installing the fpdiff.py file...

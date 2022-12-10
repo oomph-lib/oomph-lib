@@ -88,7 +88,7 @@ GraphType *Mc_MoveGraph(CtrlType *ctrl, GraphType *graph, WorkSpaceType *wspace)
   }
 
   if (lpwgts[nparts]+gpwgts[nparts] > wspace->maxcore) {
-    /* Adjust core memory, incase the graph was originally very memory unbalanced */
+    /* Adjust core memory, in case the graph was originally very memory unbalanced */
     GKfree((void **)&wspace->core, LTERM);
     wspace->maxcore = lpwgts[nparts]+4*gpwgts[nparts]; /* In spirit of the 8*nedges */
     wspace->core    = idxmalloc(wspace->maxcore, "Mc_MoveGraph: wspace->core");

@@ -536,7 +536,7 @@ FlowAroundCylinderProblem<ELEMENT>::FlowAroundCylinderProblem() :
   // Now assign its pointer
   Problem::mesh_pt()=Bulk_mesh_pt;
 
-  // Set the error estimator: incase we want to use adaptive mesh refinement
+  // Set the error estimator: in case we want to use adaptive mesh refinement
   Bulk_mesh_pt->spatial_error_estimator_pt()=new Z2ErrorEstimator;
 
   // No limit on the number of refinements
