@@ -133,8 +133,8 @@ function(oomph_add_test)
   add_custom_target(copy_${PATH_HASH} WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
 
   # Flag used to control whether files are symlinked instead of copied; keeping
-  # the option to copy files around just in case we need it later on (but I doubt
-  # it)
+  # the option to copy files around just in case we need it later on (but I
+  # doubt it)
   set(SYMLINK_TEST_DATA_INSTEAD_OF_COPY TRUE)
 
   # Add each requirement to the copy target as a file-copy command or as a
