@@ -16,7 +16,7 @@
 #                          [SILENCE_NO_LIBS_SUPPLIED_WARNING])
 #
 # NOTE: It is slightly unusual for the user to not provide any libraries to link
-# against but not insane. Just incase the user made a mistake, we'll issue a
+# against but not insane. Just in case the user made a mistake, we'll issue a
 # warning and if they're sure they don't want to link against any libraries,
 # they can silence the warning with the flag SILENCE_NO_LIBS_SUPPLIED_WARNING.
 #

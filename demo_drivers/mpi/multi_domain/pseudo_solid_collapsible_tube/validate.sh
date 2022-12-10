@@ -1,6 +1,6 @@
 #! /bin/sh
 
-# Get the OOPMH-LIB root directory from a makefile
+# Get the OOMPH-LIB root directory from a makefile
 OOMPH_ROOT_DIR=$1
 
 # Receive the mpirun command as the first argument

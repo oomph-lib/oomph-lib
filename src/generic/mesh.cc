@@ -438,7 +438,7 @@ namespace oomph
     } // for (unsigned e=0;e<nel;e++)
 
     // Now update the external halo nodes before we adjust the positions of the
-    // hanging nodes incase any are masters of local nodes
+    // hanging nodes in case any are masters of local nodes
 #ifdef OOMPH_HAS_MPI
     // Loop over all external halo nodes with other processors
     // and update them
