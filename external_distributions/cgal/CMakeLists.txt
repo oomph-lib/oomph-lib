@@ -7,8 +7,7 @@ message(STATUS "Entered cgal subdirectory")
 # Find dependencies
 find_package(GMP REQUIRED)
 find_package(MPFR REQUIRED)
-find_package(Boost 1.80.0 EXACT REQUIRED COMPONENTS Thread System
-                                                    Program_options)
+find_package(Boost 1.66.0 REQUIRED COMPONENTS Thread System Program_options)
 
 # Configuration flags
 set(CGAL_DO_NOT_WARN_ABOUT_CMAKE_BUILD_TYPE TRUE CACHE INTERNAL "")
@@ -34,12 +33,6 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(cgal_project)
 
 find_package(CGAL REQUIRED PATHS "${CGAL_BINARY_DIR}")
-
-# FIXME: BUILD_TESTING is disable through CGAL and so whenever we import CGAL,
-# testing gets disable. This is a particular pain when we want to run our demo
-# drivers. Find a better way to do this...
-#
-# unset(BUILD_TESTING)
 
 # ------------------------------------------------------------------------------
 # BOILERPLATE: Update global variables

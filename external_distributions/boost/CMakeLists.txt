@@ -5,7 +5,7 @@ list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(STATUS "Entered boost subdirectory")
 
 # Look for an already-installed version of Boost
-find_package(Boost 1.80.0 EXACT COMPONENTS Thread System Program_options)
+find_package(Boost 1.66.0 COMPONENTS Thread System Program_options)
 
 # If we couldn't find the required version, lets build it ourselves
 if(Boost_FOUND)
