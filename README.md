@@ -550,7 +550,7 @@ message(VERBOSE "Leaving mesh_gluing subdirectory")
 # ------------------------------------------------------------------------------
 ```
 
-Note that this directory is completely unconnected to the `oomph-lib` directory. To be able to find the `oomph-lib` installation directory, if it is not in one of the system-wide standard locations such as `/usr/local` (which is only accessible if you have root privileges), it must be declared.
+Note that this directory is completely unconnected to the `oomph-lib` directory. To be able to find the `oomph-lib` installation directory, if it is not in one of the system-wide standard locations such as `/usr/local`, it must be declared.
 
 This is most easily done by using the `PATH` environment variable, as discussed [above](#option-2-specifying-a-custom-installation-location). Note that this is necessary even if `oomph-lib` is installed to its default installation directory, `install/`, in the `oomph-lib` root directory.
 
@@ -800,7 +800,7 @@ will now also run the self-tests in the newly-created demo driver. Yay!
 
 ## Creating a new library (or updating an existing one)
 
-The `oomph-lib` libraries are defined in the `src/` directory and are separated by functionality: `generic/` contains the generic machinery; most other directories contain equation-specific elements, meshes, solvers, etc. If you have developed some new functionality that would benefit from being added as new library, you simply create a new sub-directory in `src/`. It will typically contain header and source files. The latter need to be compiled and linked into a library. The headers and the library then need to be installed. As usual, the instructions that allow CMake to do this are encoded in the `CMakeLists.txt` file.
+The `oomph-lib` libraries are defined in the `src/` directory and are separated by functionality: `generic/` contains the generic machinery; most other directories contain equation-specific elements, meshes, solvers, etc. If you have developed some new functionality that would benefit from being added as a new library, you simply create a new sub-directory in `src/`. It will typically contain header and source files. The latter need to be compiled and linked into a library. The headers and the library then need to be installed. As usual, the instructions that allow CMake to do this are encoded in the `CMakeLists.txt` file.
 
 We illustrate this for `oomph-lib`'s `unsteady_heat` library. In a clean checkout from GitHub it contains the following files:
 
@@ -1214,7 +1214,7 @@ targets, CMake allows tests to share the same name.
 
 ## A deeper dive into the build system
 
-**Work in progress.**
+**Work in progress. TEST**
 
 To describe:
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Get the OOPMH-LIB root directory from a makefile
+# Get the OOMPH-LIB root directory from a makefile
 #-------------------------------------------------
 OOMPH_ROOT_DIR=$1
 

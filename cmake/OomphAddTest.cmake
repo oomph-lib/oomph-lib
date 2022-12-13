@@ -98,7 +98,7 @@ function(oomph_add_test)
     set(TEST_BYPRODUCTS "${CMAKE_CURRENT_BINARY_DIR}/validate.sh")
   endif()
 
-  # We *nearly* always need validata, so warn if we don't have it, just incase
+  # We *nearly* always need validata, so warn if we don't have it, just in case
   # the user's forgotten to provide it
   if(EXISTS "${CMAKE_CURRENT_LIST_DIR}/validata")
     list(APPEND REQUIREMENTS_WITH_PATHS "${CMAKE_CURRENT_LIST_DIR}/validata")
@@ -133,8 +133,8 @@ function(oomph_add_test)
   add_custom_target(copy_${PATH_HASH} WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
 
   # Flag used to control whether files are symlinked instead of copied; keeping
-  # the option to copy files around just incase we need it later on (but I doubt
-  # it)
+  # the option to copy files around just in case we need it later on (but I
+  # doubt it)
   set(SYMLINK_TEST_DATA_INSTEAD_OF_COPY TRUE)
 
   # Add each requirement to the copy target as a file-copy command or as a
