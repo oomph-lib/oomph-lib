@@ -257,19 +257,10 @@ include(OomphInstallLibrary)
 
 # ---------------------------------[ TESTING ]----------------------------------
 
-# A flag to indicate that we're building the demo drivers with the library. If
-# the demo drivers are built with the library then we don't need to call
-# "find_package(oomphlib REQUIRED)" in each demo_driver subdirectory to locate
-# the generated oomph-lib libraries, as they'll already be visible to that scope
-# FIXME: Remove "duplicated" BUILD_DEMO_DRIVERS_WITH_LIBRARY flag (with and
-# without OOMPH_ prefix)
-set(BUILD_DEMO_DRIVERS_WITH_LIBRARY OFF)
-
 # Enable testing for the current directory and all child directories but ONLY
 # when this is the root project, i.e. it isn't being built as part of some
 # larger project hierarchy
 if(OOMPH_IS_MAIN_PROJECT AND OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
-  set(BUILD_DEMO_DRIVERS_WITH_LIBRARY ON)
   include(CTest)
   include(OomphAddTest)
   include(OomphAddExecutable)

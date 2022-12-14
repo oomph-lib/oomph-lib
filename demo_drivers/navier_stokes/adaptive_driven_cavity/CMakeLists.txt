@@ -4,7 +4,7 @@ message(VERBOSE "Entered adaptive_driven_cavity subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(adaptive_driven_cavity C CXX Fortran)
-if(NOT BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
