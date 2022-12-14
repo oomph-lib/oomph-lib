@@ -76,7 +76,7 @@
 <h2>Table of contents</h2>
 
 - [Description](#description)
-  - [Compatibility](#compatibility)
+  - [Supported operating systems](#supported-operating-systems)
 - [Prerequisites](#prerequisites)
   - [CMake](#cmake)
   - [Ninja](#ninja)
@@ -120,9 +120,8 @@
 
 ## Description
 
-The [`oomph-lib` homepage](http://www.oomph-lib.org) provides much more detail on
-installation instructions, tutorials, and licencing information. Provided you
-have downloaded a distribution that contains the documentation and you have the
+`oomph-lib` is an object-oriented, open-source finite-element library for the simulation of multi-physics problems.
+The [`oomph-lib` homepage](http://www.oomph-lib.org) provides details on the overall design, tutorials, and licencing information. Provided you have the
 required tools (mainly `doxygen`; get it from [here](http://www.doxygen.org))
 available on your machine, the installation procedure will create a local copy
 of the `oomph-lib` webpages and the entire online documentation in the `doc`
@@ -133,7 +132,7 @@ To learn more about contributing to `oomph-lib`, please see
 [`CONTRIBUTING.md`](CONTRIBUTING.md) which contains a detailed description of
 the workflow.
 
-### Compatibility
+### Supported operating systems
 
 Operating system | Support provided?
 -----------------|------------------
@@ -145,6 +144,9 @@ Windows          | No
 
 `oomph-lib` uses CMake and Ninja to build and install the project.
 Make sure you have sufficiently recent versions of these programms installed on your computer:
+
+*** _Puneet_: We should probably make this comprehensive and list all the other stuff we use (e.g. doxygen, mpi; all accompanied by the relevant apt-get commands). There's something on the webpage which should then be removed. Let's do this when we're done with the (automatic) istallation of "everything". BTW: Still not sure if the bulk of what's now described in this document shouldn't be moved to INSTALL.md. ***
+
 
 ### CMake
 
@@ -376,7 +378,7 @@ where we have omitted some boilerplate CMake code that is not relevant in the pr
 - the local source code it depends on, here `one_d_poisson_generic_only.cc`
 - the `oomph-lib` libraries used, here the `generic` library and `meshes` library (prefixed with the `oomph::` namespace identifier).
 
-The only thing to look out for the current task is the name of the executable.
+The only thing to look for is the name of the executable.
 
 To build and run the executable, we start with the usual configure step which specifies a (local) build directory:
 
@@ -484,7 +486,7 @@ to your `.emacs` file will produce equivalent behaviour. You can now edit the so
 
 ## Linking a stand-alone project to `oomph-lib`
 
-Developing your own code in an existing demo driver directory is a quick-and-dirty way to get started, especially since you are most likely to start your work by modifying an existing driver code. However, long-term this is not a sensible solution. One slightly more attractive alternative is to create a new directory, just for your code, in the `demo_drivers` directory; described further below. This approach has the advantage of not interfering with existing `oomph-lib` driver codes and the associated test machinery. However, your code isn't really a demo driver so it should really live somewhere else.
+Developing your own code in an existing demo driver directory is a quick-and-dirty way to get started, especially since you are most likely to start your work by modifying an existing driver code. However, long-term this is not a sensible solution. One slightly more attractive alternative is to create a new directory, just for your code, in the `demo_drivers` directory; described further below. This approach has the advantage of not interfering with existing `oomph-lib` driver codes and the associated test machinery. However, your code isn't a demo driver (yet!) so it should really live somewhere else.
 
 To illustrate how this is done, assume you have a stand-alone directory that contains the driver codes and any associated header or include files needed to build the executable. Here's an example of such a project (checked out directly from its own GitHub repository)
 
@@ -508,7 +510,10 @@ message(VERBOSE "Entered mesh_gluing subdirectory")
 # Specify minimum cmake version; die if you can't find it
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 
-# Name of the project, followed by languages used
+# Name of the project, followed by languages used.
+# Note that oomph-lib itself is written entirely 
+# in C++ but it also includes some third-party C 
+# and Fortran sources.
 project(mesh_gluing C CXX Fortran)
 
 # The find_package statement declares that:
@@ -594,7 +599,7 @@ Next we consider how to create a new demo driver directory. This is mainly of in
 As always, it is easiest to copy an existing directory and then modify it. Here we demonstrate how to create a new directory and how to develop the associated self-tests in the `demo_driver/poisson` directory:
 
 ```bash
-# Go the relevant directory
+#  Go to the relevant directory
 cd demo_drivers/poisson
 
 # Make a new demo driver directory
@@ -740,7 +745,7 @@ cd demo_drivers/poisson
 cmake -G Ninja -B build -DCMAKE_MESSAGE_LOG_LEVEL=VERBOSE
 ```
 
-you will see that the `my_one_d_poisson` directory was not entered, i.e. you will not see the lines:
+you will notice that the `my_one_d_poisson` directory is not entered, i.e. you will not see the lines:
 
 ```bash
 --   Entered my_one_d_poisson subdirectory
@@ -998,6 +1003,47 @@ You can customise your build by passing flags of the form `-D<FLAG>` to `cmake` 
 Specifying these flags from the command-line can be cumbersome and you may forget which options you used to previously build the project. For this reason, we recommend that you create your own `CMakeUserPresets.json` file, as described in [CMake Presets](#cmake-presets).
 
 **TODO: Discuss desired/not desired options with MH.**
+
+*** Puneet: Surely we want Release as the default setting for BUILD_TYPE? ***
+
+*** Puneet: How do I specify mpi (or any other non-standard) compilers? *** 
+
+*** Puneet: Can we list a preset file that does the equivalent of the following: 
+```bash
+--enable-suppress-pdf-doc
+--enable-MPI
+--enable-multiple_teuchos_libraries
+--enable-symbolic-links-for-headers
+--with-blacs=/home/mheil/local/mumps_and_scalapack_default_installation/lib
+--with-scalapack=/home/mheil/local/mumps_and_scalapack_default_installation/lib/libscalapack.a
+--with-pord=/home/mheil/local/mumps_and_scalapack_default_installation/lib/libpord.a 
+--with-mumps=/home/mheil/local/mumps_and_scalapack_default_installation
+--with-blas=/home/mheil/local/lib/blas/blas.a
+--with-lapack=/home/mheil/local/lib/lapack/lapack.a
+--with-hypre=/home/mheil/local/hypre_default_installation_mpi
+--with-trilinos=/home/mheil/local/trilinos_default_installation_mpi
+--with-mpi-self-tests="mpirun -np 2"
+--with-mpi-self-tests-variablenp="mpirun -np OOMPHNP"
+--with-gmsh-self-tests="/home/mheil/gmesh/gmsh-3.0.6-source/build/gmsh"
+--with-mpi-include-directory=/usr/lib/openmpi/include
+--with-boost=/home/mheil/local/boost_default_installation
+--with-gmp=/home/mheil/local/gmp_default_installation
+--with-mpfr=/home/mheil/local/mpfr_default_installation
+--with-cgal=/home/mheil/local/cgal_default_installation
+CXXFLAGS="-O3 -Wall -std=c++11"
+CFLAGS="-O3"
+FFLAGS="-O3"
+FFLAGS_NO_OPT="-O0"
+CXX=mpic++
+CC=mpicc
+F77=mpif77
+FC=mpif90
+LD=mpif77
+```
+
+
+
+
 
 Option                                    | Description                                                                    | Default
 ------------------------------------------|--------------------------------------------------------------------------------|--------
@@ -1298,4 +1344,4 @@ project/MSc/PhD students and collaborators. For an exhaustive list, see
 [`CONTRIBUTORS.md`](CONTRIBUTORS.md).
 
 If you're interested in joining the team, get in touch. We're always looking for
-more help!
+more help! 
