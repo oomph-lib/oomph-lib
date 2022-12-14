@@ -1,7 +1,7 @@
 #! /bin/sh
 
 # Get the OOMPH-LIB root directory from a makefile
-OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
+OOMPH_ROOT_DIR=$1
 
 #Set the number of tests to be checked
 NUM_TESTS=2
@@ -34,7 +34,7 @@ cat RESLT_lapack/* > eigen_solver_test_lapack.dat
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/eigen_solver_test_lapack.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/eigen_solver_test_lapack.dat.gz  \
          eigen_solver_test_lapack.dat >> validation.log
 fi
 rm -rf RESLT_lapack
@@ -59,7 +59,7 @@ cat RESLT/* > lapack_qz_find_eigenvalues_test.dat
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/lapack_qz_find_eigenvalues_test.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/lapack_qz_find_eigenvalues_test.dat.gz  \
          lapack_qz_find_eigenvalues_test.dat >> validation.log
 fi
 rm -rf RESLT
@@ -67,7 +67,7 @@ rm -rf RESLT
 
 #-----------------------------------------
 # Append log to main validation log
-cat validation.log >> ../../../../validation.log
+cat validation.log >> $OOMPH_ROOT_DIR/validation.log
 
 cd ..
 
@@ -78,7 +78,7 @@ cd ..
 # 0 if all tests has passed.
 # 1 if some tests failed.
 # 2 if there are more 'OK' than expected.
-. $OOMPH_ROOT_DIR/bin/validate_ok_count
+. $OOMPH_ROOT_DIR/scripts/validate_ok_count
 
 # Never get here
 exit 10

@@ -1,7 +1,7 @@
 #! /bin/sh
 
 # Get the OOMPH-LIB root directory from a makefile
-OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
+OOMPH_ROOT_DIR=$1
 
 
 #Set the number of tests to be checked
@@ -33,7 +33,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 cat RESLT/success_cgal.dat RESLT/success_ref_bin.dat RESLT/success_non_ref_bin.dat > results_2d.dat
-../../../bin/fpdiff.py ../validata/results_2d.dat.gz results_2d.dat >> validation.log
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/results_2d.dat.gz results_2d.dat >> validation.log
 fi
 
 mv RESLT RESLT_2D
@@ -56,7 +56,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 cat RESLT/success_cgal.dat RESLT/success_ref_bin.dat RESLT/success_non_ref_bin.dat > results_triangle.dat
-../../../bin/fpdiff.py ../validata/results_triangle.dat.gz results_triangle.dat >> validation.log
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/results_triangle.dat.gz results_triangle.dat >> validation.log
 fi
 
 mv RESLT RESLT_triangle
@@ -79,7 +79,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 cat RESLT/success_cgal.dat RESLT/success_ref_bin.dat RESLT/success_non_ref_bin.dat > results_3d.dat
-../../../bin/fpdiff.py ../validata/results_3d.dat.gz results_3d.dat >> validation.log
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/results_3d.dat.gz results_3d.dat >> validation.log
 fi
 
 mv RESLT RESLT_3D
@@ -104,13 +104,13 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 cat RESLT/success_cgal.dat RESLT/success_ref_bin.dat RESLT/success_non_ref_bin.dat > results_tetgen.dat
-../../../bin/fpdiff.py ../validata/results_tetgen.dat.gz results_tetgen.dat >> validation.log
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/results_tetgen.dat.gz results_tetgen.dat >> validation.log
 fi
 
 mv RESLT RESLT_tetgen
 
 # Append log to main validation log
-cat validation.log >> ../../../validation.log
+cat validation.log >> $OOMPH_ROOT_DIR/validation.log
 
 cd ..
 
@@ -123,7 +123,7 @@ cd ..
 # 0 if all tests has passed.
 # 1 if some tests failed.
 # 2 if there are more 'OK' than expected.
-. $OOMPH_ROOT_DIR/bin/validate_ok_count
+. $OOMPH_ROOT_DIR/scripts/validate_ok_count
 
 # Never get here
 exit 10

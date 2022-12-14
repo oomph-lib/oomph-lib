@@ -1,7 +1,7 @@
 #! /bin/sh
 
 # Get the OOMPH-LIB root directory from a makefile
-OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
+OOMPH_ROOT_DIR=$1
 
 
 #Set the number of tests to be checked
@@ -41,7 +41,7 @@ cd ..
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../bin/fpdiff.py ../validata/circular_driven_cavity_validation.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/circular_driven_cavity_validation.dat.gz  \
          RESLT/circular_driven_cavity_results.dat >> validation.log
 fi
 
@@ -50,7 +50,7 @@ mv RESLT RESLT_circular_driven_cavity
 
 
 # Append log to main validation log
-cat validation.log >> ../../../validation.log
+cat validation.log >> $OOMPH_ROOT_DIR/validation.log
 
 cd ..
 
@@ -65,7 +65,7 @@ cd ..
 # 0 if all tests has passed.
 # 1 if some tests failed.
 # 2 if there are more 'OK' than expected.
-. $OOMPH_ROOT_DIR/bin/validate_ok_count
+. $OOMPH_ROOT_DIR/scripts/validate_ok_count
 
 # Never get here
 exit 10

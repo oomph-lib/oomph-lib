@@ -1,26 +1,30 @@
 # ------------------------------------------------------------------------------
 list(APPEND CMAKE_MESSAGE_INDENT " ")
-message(VERBOSE "Entered block_selector_test subdirectory")
+message(VERBOSE "Entered generic_mpi subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
-project(block_selector_test C CXX Fortran)
+project(generic_mpi C CXX Fortran)
 if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
 
 oomph_add_executable(
-  NAME block_selector_test
-  SOURCES block_selector_test.cc
-  LIBRARIES oomph::generic)
+  NAME generic_mpi_test
+  SOURCES generic_mpi_test.cc
+  LIBRARIES oomph::poisson oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 
 oomph_add_test(
-  TEST_NAME generic.block_selector_test
-  TARGET_DEPENDENCIES block_selector_test
-  EXTRA_REQUIRES compare_block_selector_nonnull_replacement_block_pt.sh
-  LABELS block_selector_test)
+  TEST_NAME mpi.generic_mpi
+  TARGET_DEPENDENCIES generic_mpi_test
+  EXTRA_REQUIRES
+  LABELS mpi matrix
+  REQUIRES_MPI_RUN_COMMAND)
 
-message(VERBOSE "Leaving block_selector_test subdirectory")
+# Don't run this test alongside any other tests
+set_tests_properties(mpi.generic_mpi PROPERTIES RUN_SERIAL TRUE)
+
+message(VERBOSE "Leaving generic_mpi subdirectory")
 # ------------------------------------------------------------------------------

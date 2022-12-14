@@ -1,7 +1,7 @@
 #! /bin/sh
 
 # Get the OOMPH-LIB root directory from a makefile
-OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
+OOMPH_ROOT_DIR=$1
 
 
 #Set the number of tests to be checked
@@ -41,7 +41,7 @@ cat RESLT_T2d/linear_errors_0.dat  RESLT_T2d/linear_errors_1.dat RESLT_T2d/quadr
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/T2d.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/T2d.dat.gz  \
         T2d.dat >> validation.log
 fi
 
@@ -69,7 +69,7 @@ cat RESLT_Q2d/linear_errors.dat  RESLT_Q2d/quadratic_errors.dat RESLT_Q2d/cubic_
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/Q2d.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/Q2d.dat.gz  \
          Q2d.dat >> validation.log
 fi
 
@@ -96,7 +96,7 @@ cat RESLT_Q3d/linear_errors.dat  RESLT_Q3d/quadratic_errors.dat RESLT_Q3d/cubic_
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/Q3d.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/Q3d.dat.gz  \
          Q3d.dat >> validation.log
 fi
 
@@ -125,12 +125,12 @@ cat RESLT_T3d/quadratic_normals3_0.dat RESLT_T3d/quadratic_normals0_1.dat RESLT_
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/T3d.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/T3d.dat.gz  \
          T3d.dat >> validation.log
 fi
 
 # Append log to main validation log
-cat validation.log >> ../../../../validation.log
+cat validation.log >> $OOMPH_ROOT_DIR/validation.log
 
 cd ..
 
@@ -145,7 +145,7 @@ cd ..
 # 0 if all tests has passed.
 # 1 if some tests failed.
 # 2 if there are more 'OK' than expected.
-. $OOMPH_ROOT_DIR/bin/validate_ok_count
+. $OOMPH_ROOT_DIR/scripts/validate_ok_count
 
 # Never get here
 exit 10
