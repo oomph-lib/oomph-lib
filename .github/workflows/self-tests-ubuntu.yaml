@@ -35,7 +35,7 @@ jobs:
         run: sudo apt-get install openmpi-bin libopenmpi-dev
 
       - name: Configure
-        run: cmake --preset ${{ matrix.build_info.cmake_preset }} -B build
+        run: cmake --preset ${{ matrix.build_info.cmake_preset }} -B build -DOOMPH_WANT_EXTENDED_SELF_TESTS=ON
 
       - name: Build
         run: cmake --build build
@@ -44,7 +44,7 @@ jobs:
         run: cmake --install build
 
       - name: Configure basic self-tests
-        run: cmake -G Ninja -S self_test -B self_test/build
+        run: cmake -G Ninja -S self_test -B self_test/build -DOOMPH_WANT_EXTENDED_SELF_TESTS=ON
 
       - name: Run basic self-tests
         id: self_tests
