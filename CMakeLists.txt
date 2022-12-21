@@ -48,7 +48,7 @@ project(
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/")
 
 # Specify the C++ standard
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 # Build in Release (fully optimised) mode by default
@@ -101,6 +101,11 @@ option(OOMPH_ENABLE_USE_OPENBLAS "Use the OpenBLAS implementation of BLAS/LAPACK
 option(OOMPH_ENABLE_DOC_BUILD "Suppress Doxygen creation of API documentation [DOESN'T WORK YET!]" OFF)
 option(OOMPH_TRANSITION_TO_VERSION_3 "Try to build with up-to-date external sources" OFF)
 option(OOMPH_USE_DEPRECATED_SUPERLU "Use oomph-lib's deprecated version of SuperLU (4.3)" OFF)
+
+# TODO: Discuss whether to keep this flag
+#
+# Only has an effect if OOMPH_ENABLE_MPI is ON
+option(OOMPH_WANT_MPI_VARIABLENP "Enable the use of MPI with np > 2" ON)
 
 # Fine-grained control of build of external_srcs.
 # FIXME: Make sure the SUPPRESS variables below actually work
@@ -181,24 +186,10 @@ if(OOMPH_ENABLE_CODE_COVERAGE)
   oomph_enable_code_coverage()
 endif()
 
-# If we want to use up-to-date OpenBLAS/LAPACK libraries
-#
-# FIXME: We should try to find BLAS/LAPACK by find_package(), and if we can't,
-# build OpenBLAS from source (with an appropriate message)
 if(OOMPH_ENABLE_USE_OPENBLAS)
-  # Ideally, the user will install OpenBLAS via 'sudo apt-get' or 'brew install'
-  # and they will simply set 'CMAKE_PREFIX_PATH' in their CMakeUserPresets.json
-  # NOTE: You can override the BLAS/LAPACK vendor by setting its value as a
-  # cache variable from the command-line, i.e. "cmake -DBLA_VENDOR ...". It will
-  # then override the value used here.
-  #
   set(BLA_VENDOR OpenBLAS)
   find_package(BLAS REQUIRED)
   find_package(LAPACK REQUIRED)
-
-  # NOTE: For BLAS and LAPACK, there should be just a single library artifact
-  # but we'll generically loop over the *_LIBRARIES variables set by the Find*
-  # modules to be on the safe side...
 
   # Store a list of directories containing the BLAS libraries
   set(BLAS_DIRS)
@@ -214,13 +205,6 @@ if(OOMPH_ENABLE_USE_OPENBLAS)
     list(APPEND LAPACK_DIRS ${LAPACK_DIR})
   endforeach()
 endif()
-
-# ~~~
-# TODO:
-# * Add OOMPH_WITH_* variables to specify custom drop-ins for specific
-#   libraries, e.g. BLAS, MUMPS, CGAL, etc. (and maybe think of a different name
-#   for the flags)
-# ~~~
 
 # --------------------------[ FIND REQUIRED HEADERS ]---------------------------
 
