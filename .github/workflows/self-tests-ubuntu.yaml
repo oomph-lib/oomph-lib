@@ -35,7 +35,7 @@ jobs:
         run: sudo apt-get install openmpi-bin libopenmpi-dev
 
       - name: Configure
-        run: cmake --preset ${{ matrix.build_info.cmake_preset }} -B build -DOOMPH_WANT_EXTENDED_SELF_TESTS=ON
+        run: cmake --preset ${{ matrix.build_info.cmake_preset }} -B build
 
       - name: Build
         run: cmake --build build
