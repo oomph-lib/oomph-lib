@@ -3,7 +3,7 @@
 # Get the OOMPH-LIB root directory from a makefile
 OOMPH_ROOT_DIR=$1
 
-# Receive the mpirun command as the first argument
+# Receive the mpirun command as the second argument
 MPI_RUN_COMMAND="$2"
 
 if [ ! -f pseudo_solid_collapsible_tube ]; then
