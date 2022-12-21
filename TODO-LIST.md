@@ -9,7 +9,7 @@
   * [x] `Hypre`
   * [x] `MUMPS`
   * [ ] `Trilinos`
-    * For Trilinos, link against `Trilinos::all_libs`
+    * For Trilinos, link against `Trilinos::all_selected_libs`(?)
   * [ ] Sequential build of `MUMPS`
   * [ ] Specifying the location of already-installed libraries
     * Could possibly specify installation directory with `-D <PACKAGE>_DIR`? E.g. `-D TRILINOS_DIR`, `-D HYPRE_DIR` etc.
@@ -33,9 +33,13 @@
 
 ### Pure-CMake
 
+* [ ] Update MPI tests to declare the resources they require rather than forcing everything to run sequentially
+* [ ] Update oomph_add_test() to take args for validate.sh and we pass e.g. "${OOMPH_ROOT_DIR}" and "${OOMPH_MPI_RUN_COMMAND}"
+  * Should help make things transparent and easier for users to control
+* [ ] Set <CONFIG>_POSTFIX for each config type
 * [ ] Update every test name to be the path to the demo driver; e.g. `mpi.distribution.adaptive_driven_cavity`
 * [ ] Patch `ninja oomph_uninstall` command for Ninja Multi-Config
-* [ ] Update `demo_drivers` to allow building from any level
+* [x] Update `demo_drivers` to allow building from any level
 * [ ] Update build system to make sure building a demo driver target without `ctest` also runs the `check_...` target to build the target and copy files over
 * [ ] Think about *installing* `fpdiff.py` AND `validate_ok_count` incase the user wants to install `oomph-lib` but wipe everything but the demo drivers.
   * *If* I decide to do this:
@@ -62,13 +66,12 @@
   * Ideally we'd still output `validation.log` info to this file even if the test doesn't fail... (Just incase there's a bug where a test fails but CTest doesn't catch it)
 * [ ] Update `OomphMPI.cmake` to avoid doing a global `link_libraries()`
 * [ ] Use `PROJECT_IS_TOP_LEVEL` to enable/disable tests
-* [ ] Add `"workflowPresets"` when CMake 3.25 is widely available
 
 ### Features to add or patch
 
 * [ ] Implement `oomph_pure_cpp_test`
   * [ ] Add a struct to handle
-* [ ] Implement Python script to automatically convert `Makefile.am`s in `private/`
+* [x] Implement Python script to automatically convert `Makefile.am`s in `private/`
 * [ ] Add Intel MKL BLAS support
 * [ ] Replace current BLAS/LAPACK with OpenBLAS
 * [ ] Add control for setting number of procs to use in `mpiexec` command
@@ -97,8 +100,8 @@
 ### Documentation
 
 * [ ] Document how to use Ninja Multi-Config
-* [ ] Installing CMake (3.24)
-* [ ] Downloading and installing oomph-lib
+* [x] Installing CMake (3.22)
+* [x] Downloading and installing oomph-lib
 * [ ] Update instructions for how to run demo drivers
   * [ ] Add info on how to set C++ standard and add compile definitions
   * [ ] macOS info:
@@ -134,6 +137,7 @@
 
 Include tasks here that likely need some collaboration with Matthias
 
+* [ ] Go through all new commits to the main repository in the last 1-2 years and make sure any changes in Makefiles have been reflected in their corresponding CMakeLists.txt file
 * [ ] Remove `INSTALL.md` (installation instructions in main `README.md`)
 * [ ] Talk to MH about updating to C++17
 * [ ] Properly review to-do list and see if there's anything missing!
