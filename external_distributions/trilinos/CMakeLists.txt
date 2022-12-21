@@ -39,9 +39,9 @@ if(OOMPH_ENABLE_MPI AND MPI_FOUND)
   set(MPI_BASE_DIR "${MPI_CXX_INCLUDE_DIRS}")
 endif()
 
-# NOTE (1): Grabbing a specific commit that adds modern CMake-ification to the
-# Trilinos library (see https://github.com/trilinos/Trilinos/pull/10614). It's
-# not a fully-fledged release yet so we have to use a specific commit hash
+# NOTE (1): Grabbing a specific commit where Trilinos ships libraries using
+# modern CMake (see https://github.com/trilinos/Trilinos/pull/10614). It's not a
+# fully-fledged release yet so we have to use a specific commit hash
 #
 # NOTE (2): "GIT_SHALLOW TRUE" won't work while GIT_TAG corresponds to a commit.
 # Once they've made an official 14.0 release, we can use that with a shallow
@@ -50,8 +50,10 @@ include(FetchContent)
 FetchContent_Declare(
   Trilinos
   GIT_REPOSITORY https://github.com/trilinos/Trilinos.git
-  GIT_TAG 963e937799ebb77f1f59f92bcccc0236d4e3dbfb
-  GIT_PROGRESS TRUE)
+  GIT_TAG 0270d8bd4cd3c62fb37a30535f78ee16b9c77574
+  # 963e937799ebb77f1f59f92bcccc0236d4e3dbfb
+  GIT_PROGRESS TRUE
+  GIT_SHALLOW TRUE)
 FetchContent_MakeAvailable(Trilinos)
 
 # ------------------------------------------------------------------------------
