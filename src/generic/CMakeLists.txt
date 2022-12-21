@@ -289,14 +289,18 @@ oomph_target_silence_warnings(
 # reasonable assumption.)
 
 if(OOMPH_HAS_NLOHMANN_JSON)
+  find_package(nlohmann_json 3.11.2 CONFIG REQUIRED
+               PATHS "${nlohmann_json_BINARY_DIR}")
   target_link_libraries(${LIBNAME} PUBLIC nlohmann_json::nlohmann_json)
 endif()
 
 if(OOMPH_HAS_CGAL)
+  find_package(CGAL 5.5.1 CONFIG REQUIRED PATHS "${CGAL_BINARY_DIR}")
   target_link_libraries(${LIBNAME} PUBLIC CGAL::CGAL)
 endif()
 
 if(OOMPH_HAS_HYPRE)
+  find_package(HYPRE 2.26.0 CONFIG REQUIRED PATHS "${HYPRE_BINARY_DIR}")
   target_link_libraries(${LIBNAME} PUBLIC HYPRE::HYPRE)
 endif()
 
@@ -306,6 +310,7 @@ if(OOMPH_HAS_TRILINOS)
 endif()
 
 if(OOMPH_HAS_MUMPS)
+  find_package(MUMPS 5.5.1.7 CONFIG REQUIRED PATHS "${MUMPS_BINARY_DIR}")
   target_link_libraries(${LIBNAME} PUBLIC MUMPS::MUMPS MPI::MPI_C)
 endif()
 # ------------------------------------------------------------------------------
