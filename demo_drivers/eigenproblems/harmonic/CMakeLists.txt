@@ -9,17 +9,15 @@ if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
 endif()
 include(CTest)
 
-if(HAVE_ARPACK_SOURCES)
-  oomph_add_executable(
-    NAME harmonic
-    SOURCES harmonic.cc
-    LIBRARIES oomph::meshes oomph::generic)
+oomph_add_executable(
+  NAME harmonic
+  SOURCES harmonic.cc
+  LIBRARIES oomph::meshes oomph::generic)
 
-  oomph_add_executable(
-    NAME complex_harmonic
-    SOURCES complex_harmonic.cc
-    LIBRARIES oomph::meshes oomph::generic)
-endif()
+oomph_add_executable(
+  NAME complex_harmonic
+  SOURCES complex_harmonic.cc
+  LIBRARIES oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 
