@@ -106,6 +106,9 @@ find_dependency(Python3 QUIET)
 # MPI for MPI-enabled functionality
 if(OOMPH_HAS_MPI)
   find_dependency(MPI REQUIRED)
+  # PM: Might get deleted...
+  set(OOMPH_WANT_MPI_VARIABLENP @OOMPH_WANT_MPI_VARIABLENP@)
+
   set(MPI_RUN_COMMAND "@MPI_RUN_COMMAND@")
   set(MPI_VARIABLENP_RUN_COMMAND "@MPI_VARIABLENP_RUN_COMMAND@")
 endif()
@@ -118,14 +121,22 @@ endif()
 
 # nlohmann_json
 if(OOMPH_HAS_NLOHMANN_JSON AND (NOT nlohmann_json_FOUND))
-  find_dependency(nlohmann_json 3.11.2 REQUIRED)
+  find_dependency(nlohmann_json 3.11.2 REQUIRED PATHS "@CMAKE_INSTALL_PREFIX@")
 endif()
 
 # CGAL
 if(OOMPH_HAS_CGAL AND (NOT CGAL_FOUND))
   find_dependency(GMP REQUIRED)
   find_dependency(MPFR REQUIRED)
-  find_dependency(Boost REQUIRED COMPONENTS Thread System Program_options)
+  find_dependency(
+    Boost
+    REQUIRED
+    COMPONENTS
+    Thread
+    System
+    Program_options
+    PATHS
+    "@CMAKE_INSTALL_PREFIX@")
   set(CGAL_DO_NOT_WARN_ABOUT_CMAKE_BUILD_TYPE
       @CGAL_DO_NOT_WARN_ABOUT_CMAKE_BUILD_TYPE@ CACHE INTERNAL "")
   find_dependency(CGAL 5.5.1 REQUIRED PATHS "@CMAKE_INSTALL_PREFIX@")
@@ -133,47 +144,18 @@ endif()
 
 # MUMPS
 if(OOMPH_HAS_MUMPS AND (NOT MUMPS_FOUND))
-  find_dependency(MUMPS 5.5.1.7 REQUIRED)
+  find_dependency(MUMPS 5.5.1.7 REQUIRED PATHS "@CMAKE_INSTALL_PREFIX@")
 endif()
 
 # HYPRE
 if(OOMPH_HAS_HYPRE AND (NOT HYPRE_FOUND))
-  find_dependency(HYPRE 2.26.0 REQUIRED)
+  find_dependency(HYPRE 2.26.0 REQUIRED PATHS "@CMAKE_INSTALL_PREFIX@")
 endif()
 
 # Trilinos
-#
-# FIXME: This doesn't work and its an absolute mess. They really ought to make
-# it easier to import *sigh*...
-if(OOMPH_HAS_TRILINOS AND NOT Trilinos_FOUND)
-  # Extract important information from the Trilinos build
-  set(OOMPH_TRILINOS_VERSION "@TRILINOS_VERSION@")
-  set(OOMPH_TRILINOS_INSTALL_DIR "@OOMPH_TRILINOS_INSTALL_DIR@")
-  set(OOMPH_TRILINOS_INCLUDE_DIR "${OOMPH_TRILINOS_INSTALL_DIR}/include")
-
-  set(TRILINOS_LIBRARIES "@TRILINOS_LIBRARIES@")
-  set(OOMPH_TRILINOS_LIBRARIES_WITH_PATHS
-      "@OOMPH_TRILINOS_LIBRARIES_WITH_PATHS@")
-
-  # Provide the location of the Trilinos install directory so that CMake can
-  # find the TrilinosConfig.cmake file
-  list(APPEND CMAKE_PREFIX_PATH "${OOMPH_TRILINOS_INSTALL_DIR}")
-  find_dependency(Trilinos ${OOMPH_TRILINOS_VERSION} CONFIG REQUIRED)
-
-  # TrilinosConfig.cmake doesn't set Trilinos_FOUND
-  if(Trilinos_LIBRARIES)
-    set(Trilinos_FOUND TRUE)
-  endif()
-
-  # Create the Trilinos libraries target to link against; this contains the
-  # paths to each library artifact and the path to the Trilinos include
-  # directory where all the headers are stored
-  add_library(Trilinos::Trilinos INTERFACE IMPORTED GLOBAL)
-  set_target_properties(
-    Trilinos::Trilinos
-    PROPERTIES IMPORTED_LOCATION "${OOMPH_TRILINOS_LIBRARIES_WITH_PATHS}"
-               INTERFACE_INCLUDE_DIRECTORIES "${OOMPH_TRILINOS_INCLUDE_DIR}"
-               INTERFACE_LINK_LIBRARIES "${TRILINOS_LIBRARIES}")
+if(OOMPH_HAS_TRILINOS AND (NOT Trilinos_FOUND))
+  find_dependency(Trilinos 13.5.0 CONFIG REQUIRED PATHS
+                  "@CMAKE_INSTALL_PREFIX@")
 endif()
 
 # --------------------------[ REMAINING BOILERPLATE ]--------------------------

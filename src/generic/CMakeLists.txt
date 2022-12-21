@@ -301,15 +301,13 @@ if(OOMPH_HAS_HYPRE)
 endif()
 
 if(OOMPH_HAS_TRILINOS)
-  # set(CMAKE_PREFIX_PATH ${Trilinos_PATH} ${CMAKE_PREFIX_PATH})
-  find_package(Trilinos REQUIRED PATHS "${Trilinos_BINARY_DIR}")
+  find_package(Trilinos 13.5.0 CONFIG REQUIRED PATHS "${Trilinos_BINARY_DIR}")
   target_link_libraries(${LIBNAME} PUBLIC Trilinos::all_libs)
 endif()
 
 if(OOMPH_HAS_MUMPS)
   target_link_libraries(${LIBNAME} PUBLIC MUMPS::MUMPS MPI::MPI_C)
 endif()
-
 # ------------------------------------------------------------------------------
 
 message(VERBOSE "Leaving generic subdirectory")
