@@ -65,7 +65,7 @@ include(FetchContent)
 FetchContent_Declare(
   hypre
   GIT_REPOSITORY https://github.com/hypre-space/hypre.git
-  GIT_TAG v2.26.0
+  GIT_TAG v2.27.0
   GIT_PROGRESS TRUE
   GIT_SHALLOW TRUE
   SOURCE_SUBDIR "src")
