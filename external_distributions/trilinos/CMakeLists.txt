@@ -51,9 +51,8 @@ FetchContent_Declare(
   Trilinos
   GIT_REPOSITORY https://github.com/trilinos/Trilinos.git
   GIT_TAG 0270d8bd4cd3c62fb37a30535f78ee16b9c77574
-  # 963e937799ebb77f1f59f92bcccc0236d4e3dbfb
-  GIT_PROGRESS TRUE
-  GIT_SHALLOW TRUE)
+  GIT_PROGRESS TRUE)
+# GIT_SHALLOW TRUE)
 FetchContent_MakeAvailable(Trilinos)
 
 # ------------------------------------------------------------------------------
