@@ -12,7 +12,7 @@ include(CTest)
 oomph_add_executable(
   NAME one_d_poisson_with_gzip_validation
   SOURCES one_d_poisson_with_gzip_validation.cc
-  LIBRARIES oomph::poisson oomph::meshes oomph::generic)
+  LIBRARIES oomph::poisson oomph::meshes oomph::generic stdc++fs)
 
 # ---------------------------------- TESTING ----------------------------------
 
