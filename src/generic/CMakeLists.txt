@@ -301,8 +301,11 @@ if(OOMPH_HAS_HYPRE)
 endif()
 
 if(OOMPH_HAS_TRILINOS)
-  # if(NOT TARGET Trilinos::all_libs) find_package(Trilinos 13.5.0 CONFIG
-  # REQUIRED PATHS "${Trilinos_BINARY_DIR}") endif()
+  # For some reason Trilinos::all_libs isn't defined during the configure stage
+  # but it will be defined if you pull Trilinos in via find_package(...), but
+  # that isn't the right way to do things...
+  #
+  # TODO: Log a GitHub issue for this.
   target_link_libraries(
     ${LIBNAME}
     PUBLIC Anasazi::all_libs
