@@ -119,9 +119,12 @@ endif()
 # has already been found otherwise these dependency checks can be called again
 # and again unnecessarily
 
+list(APPEND CMAKE_PREFIX_PATH "@CMAKE_INSTALL_PREFIX@")
+
 # nlohmann_json
 if(OOMPH_HAS_NLOHMANN_JSON AND (NOT nlohmann_json_FOUND))
-  find_dependency(nlohmann_json 3.11.2 REQUIRED PATHS "@CMAKE_INSTALL_PREFIX@")
+  find_dependency(nlohmann_json 3.11.2 CONFIG REQUIRED PATHS
+                  "@CMAKE_INSTALL_PREFIX@")
 endif()
 
 # CGAL
@@ -139,17 +142,19 @@ if(OOMPH_HAS_CGAL AND (NOT CGAL_FOUND))
     "@CMAKE_INSTALL_PREFIX@")
   set(CGAL_DO_NOT_WARN_ABOUT_CMAKE_BUILD_TYPE
       @CGAL_DO_NOT_WARN_ABOUT_CMAKE_BUILD_TYPE@ CACHE INTERNAL "")
-  find_dependency(CGAL 5.5.1 REQUIRED PATHS "@CMAKE_INSTALL_PREFIX@")
+  find_dependency(CGAL 5.5.1 CONFIG REQUIRED PATHS "@CMAKE_INSTALL_PREFIX@")
 endif()
 
 # MUMPS
 if(OOMPH_HAS_MUMPS AND (NOT MUMPS_FOUND))
-  find_dependency(MUMPS 5.5.1.7 REQUIRED PATHS "@CMAKE_INSTALL_PREFIX@")
+  find_dependency(SCALAPACK 2.2.1.2 CONFIG REQUIRED PATHS
+                  "@CMAKE_INSTALL_PREFIX@")
+  find_dependency(MUMPS 5.5.1.7 CONFIG REQUIRED PATHS "@CMAKE_INSTALL_PREFIX@")
 endif()
 
 # HYPRE
 if(OOMPH_HAS_HYPRE AND (NOT HYPRE_FOUND))
-  find_dependency(HYPRE 2.26.0 REQUIRED PATHS "@CMAKE_INSTALL_PREFIX@")
+  find_dependency(HYPRE 2.26.0 CONFIG REQUIRED PATHS "@CMAKE_INSTALL_PREFIX@")
 endif()
 
 # Trilinos
