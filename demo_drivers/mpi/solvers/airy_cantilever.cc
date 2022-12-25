@@ -374,7 +374,7 @@ CantileverProblem<ELEMENT>::CantileverProblem()
 
  // Open trace file
  char filename[100];   
- sprintf(filename,"%s/trace.dat",Doc_info.directory().c_str());
+ snprintf(filename,sizeof(filename),"%s/trace.dat",Doc_info.directory().c_str());
  Trace_file.open(filename);
  
 
@@ -519,7 +519,7 @@ void CantileverProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Output shape of and stress in deformed body
  //--------------------------------------------
- sprintf(filename,"%s/airy_soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename,sizeof(filename),"%s/airy_soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  solid_mesh_pt()->output(some_file,n_plot);
@@ -528,7 +528,7 @@ void CantileverProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Output St. Venant solution
  //---------------------------
- sprintf(filename,"%s/exact_soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename,sizeof(filename),"%s/exact_soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
 
@@ -688,6 +688,7 @@ int main(int argc, char* argv[])
  GMRES<CRDoubleMatrix>* solver_pt = new GMRES<CRDoubleMatrix>;
 #endif
  problem.linear_solver_pt() = solver_pt;
+ solver_pt->max_iter() = 400;
  solver_pt->tolerance() = 10e-5;
  solver_pt->enable_doc_convergence_history();
 
