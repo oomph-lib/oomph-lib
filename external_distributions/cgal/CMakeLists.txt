@@ -9,6 +9,27 @@ find_package(GMP REQUIRED)
 find_package(MPFR REQUIRED)
 find_package(Boost 1.66.0 REQUIRED COMPONENTS Thread System Program_options)
 
+# Configuration flags
+set(CGAL_DO_NOT_WARN_ABOUT_CMAKE_BUILD_TYPE TRUE CACHE INTERNAL "")
+
+# See if the user already has CGAL installed. If the user told us where it is
+# installed with OOMPH_WITH_CGAL, then search there. If we can't find it, throw
+# an error. Otherwise, search the standard system paths to see if we can find it
+if(OOMPH_WITH_CGAL)
+  find_package(
+    CGAL 5.5.1
+    PATHS "${OOMPH_WITH_CGAL}"
+    NO_DEFAULT_PATH)
+  if(NOT CGAL_FOUND)
+    message(
+      FATAL_ERROR
+        "You specified 'OOMPH_WITH_CGAL' but CGAL could not be found. Did you specify the correct directory?"
+    )
+  endif()
+else()
+  find_package(CGAL 5.5.1)
+endif()
+
 # CGAL currently defines a variable called BUILD_TESTING which they shouldn't do
 # and it messes up the use of the demo drivers. For now, we have to clone CGAL
 # ourselves so that we can patch it. There is an open GitHub issue for the fix
@@ -18,16 +39,9 @@ find_package(Boost 1.66.0 REQUIRED COMPONENTS Thread System Program_options)
 # remove the use of the FORCE_ variable below.
 set(FORCE_BUILD_OWN_VERSION_OF_CGAL TRUE)
 
-# Configuration flags
-set(CGAL_DO_NOT_WARN_ABOUT_CMAKE_BUILD_TYPE TRUE CACHE INTERNAL "")
-
-# See if the user already has CGAL installed
-find_package(CGAL 5.5.1)
+# If we couldn't find a pre-installed version, lets build it ourselves
 if(CGAL_FOUND AND (NOT FORCE_BUILD_OWN_VERSION_OF_CGAL))
-  message(
-    STATUS
-      "Found an existing installation of CGAL so we're not going to build it ourselves."
-  )
+  message(STATUS "Found an existing installation of CGAL at: ${CGAL_DIR}")
 else()
   # Path to the patch file
   set(PATCH_FILE 0001-Rename-BUILD_TESTING-CGAL_BUILD_TESTING.patch)
