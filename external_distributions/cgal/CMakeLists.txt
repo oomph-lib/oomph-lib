@@ -13,17 +13,18 @@ find_package(Boost 1.66.0 REQUIRED COMPONENTS Thread System Program_options)
 set(CGAL_DO_NOT_WARN_ABOUT_CMAKE_BUILD_TYPE TRUE CACHE INTERNAL "")
 
 # See if the user already has CGAL installed. If the user told us where it is
-# installed with OOMPH_WITH_CGAL, then search there. If we can't find it, throw
-# an error. Otherwise, search the standard system paths to see if we can find it
-if(OOMPH_WITH_CGAL)
+# installed with OOMPH_USE_CGAL_FROM, then search there. If we can't find it,
+# throw an error. Otherwise, search the standard system paths to see if we can
+# find it
+if(OOMPH_USE_CGAL_FROM)
   find_package(
     CGAL 5.5.1
-    PATHS "${OOMPH_WITH_CGAL}"
+    PATHS "${OOMPH_USE_CGAL_FROM}"
     NO_DEFAULT_PATH)
   if(NOT CGAL_FOUND)
     message(
       FATAL_ERROR
-        "You specified 'OOMPH_WITH_CGAL' but CGAL could not be found. Did you specify the correct directory?"
+        "You specified 'OOMPH_USE_CGAL_FROM' but CGAL could not be found. Did you specify the correct directory?"
     )
   endif()
 else()
