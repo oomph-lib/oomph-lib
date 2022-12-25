@@ -999,29 +999,29 @@ Specifying these flags from the command-line can be cumbersome and you may forge
 
 **TODO: Discuss desired/not desired options with MH.**
 
-Option                                    | Description                                                                    | Default
-------------------------------------------|--------------------------------------------------------------------------------|--------
-`CMAKE_BUILD_TYPE`                        | The build type (e.g. `Debug`, `Release`, `RelWithDebInfo` or `MinSizeRel`)     | `Debug`
-`BUILD_SHARED_LIBS`                       | Build using shared libraries; static otherwise  **["SHARED" DOESN'T WORK!]**   | OFF
-`BUILD_SHARED_LIBS`                       | Build using shared libraries; static otherwise  **["SHARED" DOESN'T WORK!]**   | OFF
-`OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY`   | Build tests with library build                                                 | OFF
-`OOMPH_DONT_SILENCE_USELESS_WARNINGS`     | Display (harmless) warnings from external_src/ and src/ that are silenced      | OFF
-`OOMPH_ENABLE_MPI`                        | Enable the use of MPI for parallel processing                                  | OFF
-`OOMPH_ENABLE_PARANOID`                   | Enable the PARANOID flag in Debug                                              | OFF
-`OOMPH_ENABLE_RANGE_CHECKING`             | Enable RANGE_CHECKING flag in Debug                                            | OFF
-`OOMPH_ENABLE_SYMBOLIC_LINKS_FOR_HEADERS` | Install symbolic links to the headers instead of copying them                  | ON
-`OOMPH_ENABLE_USE_OPENBLAS`               | Use the OpenBLAS implementation of BLAS/LAPACK                                 | OFF
-`OOMPH_ENABLE_DOC_BUILD`                  | Suppress Doxygen creation of API documentation **[DOESN'T WORK YET!]**         | OFF
-`OOMPH_TRANSITION_TO_VERSION_3`           | Try to build with up-to-date external sources                                  | OFF
-`OOMPH_USE_DEPRECATED_SUPERLU`            | Use oomph-lib's deprecated version of SuperLU (4.3)                            | OFF
-`OOMPH_SUPPRESS_TRIANGLE_LIB`             | Suppress build of oomph-lib's copy of the triangle library                     | OFF
-`OOMPH_SUPPRESS_TETGEN_LIB`               | Suppress build of oomph-lib's copy of the tetgen library                       | OFF
-`OOMPH_WANT_NLOHMANN_JSON`                | Enable the [`nlohmann/json`](https://github.com/nlohmann/json) JSON library    | OFF
-`OOMPH_WANT_CGAL`                         | Enable we want to build the CGAL library? **[DOESN'T WORK YET!]**              | OFF
-`OOMPH_WANT_HYPRE`                        | Enable Hypre library                                                           | OFF
-`OOMPH_WANT_MUMPS`                        | Enable MUMPS library [CURRENTLY ONLY WORKING WITH MPI]                         | OFF
-`OOMPH_WANT_TRILINOS`                     | Enable Trilinos library  **[DOESN'T WORK YET!]**                               | OFF
-`OOMPH_ENABLE_CODE_COVERAGE`              | Enable collection of code coverage results                                     | OFF
+Option                                    | Description                                                                  | Default
+------------------------------------------|------------------------------------------------------------------------------|--------
+`CMAKE_BUILD_TYPE`                        | The build type (e.g. `Debug`, `Release`, `RelWithDebInfo` or `MinSizeRel`)   | `Debug`
+`BUILD_SHARED_LIBS`                       | Build using shared libraries; static otherwise  **["SHARED" DOESN'T WORK!]** | OFF
+`BUILD_SHARED_LIBS`                       | Build using shared libraries; static otherwise  **["SHARED" DOESN'T WORK!]** | OFF
+`OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY`   | Build tests with library build                                               | OFF
+`OOMPH_DONT_SILENCE_USELESS_WARNINGS`     | Display (harmless) warnings from external_src/ and src/ that are silenced    | OFF
+`OOMPH_ENABLE_MPI`                        | Enable the use of MPI for parallel processing                                | OFF
+`OOMPH_ENABLE_PARANOID`                   | Enable the PARANOID flag in Debug                                            | OFF
+`OOMPH_ENABLE_RANGE_CHECKING`             | Enable RANGE_CHECKING flag in Debug                                          | OFF
+`OOMPH_ENABLE_SYMBOLIC_LINKS_FOR_HEADERS` | Install symbolic links to the headers instead of copying them                | ON
+`OOMPH_ENABLE_USE_OPENBLAS`               | Use the OpenBLAS implementation of BLAS/LAPACK                               | OFF
+`OOMPH_ENABLE_BUILD_OF_DOCS`              | Suppress Doxygen creation of API documentation **[DOESN'T WORK YET!]**       | OFF
+`OOMPH_TRANSITION_TO_VERSION_3`           | Try to build with up-to-date external sources                                | OFF
+`OOMPH_USE_DEPRECATED_SUPERLU`            | Use oomph-lib's deprecated version of SuperLU (4.3)                          | OFF
+`OOMPH_SUPPRESS_TRIANGLE_LIB`             | Suppress build of oomph-lib's copy of the triangle library                   | OFF
+`OOMPH_SUPPRESS_TETGEN_LIB`               | Suppress build of oomph-lib's copy of the tetgen library                     | OFF
+`OOMPH_WANT_NLOHMANN_JSON`                | Enable the [`nlohmann/json`](https://github.com/nlohmann/json) JSON library  | OFF
+`OOMPH_WANT_CGAL`                         | Enable we want to build the CGAL library? **[DOESN'T WORK YET!]**            | OFF
+`OOMPH_WANT_HYPRE`                        | Enable Hypre library                                                         | OFF
+`OOMPH_WANT_MUMPS`                        | Enable MUMPS library [CURRENTLY ONLY WORKING WITH MPI]                       | OFF
+`OOMPH_WANT_TRILINOS`                     | Enable Trilinos library  **[DOESN'T WORK YET!]**                             | OFF
+`OOMPH_ENABLE_CODE_COVERAGE`              | Enable collection of code coverage results                                   | OFF
 
 ## CMake Presets
 
