@@ -9,22 +9,21 @@ if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
 endif()
 include(CTest)
 
-set(SUBDIRS two_d_mesh_dist three_d_mesh_dist line_visualiser)
+set(SUBDIRS generic_mpi line_visualiser three_d_mesh_dist two_d_mesh_dist)
 
 if(OOMPH_WANT_MPI_VARIABLENP)
   list(
     APPEND
     SUBDIRS
-    distribution_concatenation
-    vector_split_without_communication
-    vector_concatenation_without_communication
-    matrix_concatenation_without_communication
-    vector_split
-    vector_concatenation
-    matrix_concatenation
     crdoublematrix_copy_constructor
+    distribution_concatenation
     matrix_addition
-    generic_mpi)
+    matrix_concatenation_without_communication
+    matrix_concatenation
+    vector_concatenation
+    vector_concatenation_without_communication
+    vector_split
+    vector_split_without_communication)
 endif()
 
 foreach(SUBDIR IN LISTS SUBDIRS)

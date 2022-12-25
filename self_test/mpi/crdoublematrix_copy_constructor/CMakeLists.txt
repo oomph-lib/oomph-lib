@@ -16,12 +16,21 @@ oomph_add_executable(
 
 # ---------------------------------- TESTING ----------------------------------
 
-oomph_add_test(
-  TEST_NAME mpi.crdoublematrix_copy_constructor
-  TARGET_DEPENDENCIES crdoublematrix_copy_constructor
-  EXTRA_REQUIRES
-  LABELS mpi matrix
-  REQUIRES_MPI_VARIABLENP_RUN_COMMAND)
+include(ProcessorCount)
+ProcessorCount(NUM_PROCESSORS)
+if(NUM_PROCESSORS GREATER_EQUAL 4)
+  oomph_add_test(
+    TEST_NAME mpi.crdoublematrix_copy_constructor
+    TARGET_DEPENDENCIES crdoublematrix_copy_constructor
+    EXTRA_REQUIRES
+    LABELS mpi matrix
+    REQUIRES_MPI_VARIABLENP_RUN_COMMAND)
+else()
+  message(
+    STATUS
+      "Skipping test 'mpi.crdoublematrix_copy_constructor' as you don't have enough processors available."
+  )
+endif()
 
 # Don't run this test alongside any other tests
 set_tests_properties(mpi.crdoublematrix_copy_constructor PROPERTIES RUN_SERIAL

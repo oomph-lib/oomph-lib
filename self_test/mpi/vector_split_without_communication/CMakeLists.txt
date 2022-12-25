@@ -16,12 +16,21 @@ oomph_add_executable(
 
 # ---------------------------------- TESTING ----------------------------------
 
-oomph_add_test(
-  TEST_NAME mpi.vector_split_without_communication
-  TARGET_DEPENDENCIES vector_split_without_communication
-  EXTRA_REQUIRES
-  LABELS mpi vector
-  REQUIRES_MPI_VARIABLENP_RUN_COMMAND)
+include(ProcessorCount)
+ProcessorCount(NUM_PROCESSORS)
+if(NUM_PROCESSORS GREATER_EQUAL 4)
+  oomph_add_test(
+    TEST_NAME mpi.vector_split_without_communication
+    TARGET_DEPENDENCIES vector_split_without_communication
+    EXTRA_REQUIRES
+    LABELS mpi vector
+    REQUIRES_MPI_VARIABLENP_RUN_COMMAND)
+else()
+  message(
+    STATUS
+      "Skipping test 'mpi.vector_split_without_communication' as you don't have enough processors available."
+  )
+endif()
 
 # Don't run this test alongside any other tests
 set_tests_properties(mpi.vector_split_without_communication
