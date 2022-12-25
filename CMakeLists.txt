@@ -82,7 +82,6 @@ set(CMAKE_MESSAGE_LOG_LEVEL VERBOSE)
 # ----------------------[ FIND REQUIRED/DESIRED PACKAGES ]----------------------
 
 # Built-in modules to find out whether certain packages are installed
-find_package(Doxygen)
 find_package(Git)
 find_package(Python3 REQUIRED)
 
@@ -148,6 +147,10 @@ if(OOMPH_ENABLE_PARANOID)
 endif()
 if(OOMPH_ENABLE_RANGE_CHECKING)
   add_compile_definitions("$<$<CONFIG:DEBUG>:RANGE_CHECKING>")
+endif()
+
+if(OOMPH_ENABLE_BUILD_OF_DOCS)
+  find_package(Doxygen)
 endif()
 
 # If we're using up-to-date external sources/dists then make sure we have a
