@@ -10,8 +10,8 @@
 #  oomph_git_patch_command(PATCH_DIRECTORY  <directory-containing-patch-file>
 #                          PATCH_FILE       <name-of-patch-file>)
 #
-# Example:
-#
+# EXAMPLE:
+# --------
 #  set(PATCH_FILE 0001-Patch-of-third-party-library.patch)
 #  oomph_git_patch_command(PATCH_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/patches/
 #                          PATCH_FILE ${PATCH_FILE})
