@@ -9,11 +9,7 @@ if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
 endif()
 include(CTest)
 
-set(SUBDIRS)
-
-if(HAVE_ARPACK_SOURCES)
-  list(APPEND SUBDIRS harmonic orr_sommerfeld)
-endif()
+set(SUBDIRS harmonic orr_sommerfeld)
 
 foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})

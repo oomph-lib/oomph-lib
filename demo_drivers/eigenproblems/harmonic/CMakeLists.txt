@@ -21,15 +21,9 @@ oomph_add_executable(
 
 # ---------------------------------- TESTING ----------------------------------
 
-set(TEST_TARGET_DEPS)
-
-if(HAVE_ARPACK_SOURCES)
-  list(APPEND TEST_TARGET_DEPS harmonic complex_harmonic)
-endif()
-
 oomph_add_test(
   TEST_NAME eigenproblems.harmonic
-  TARGET_DEPENDENCIES ${TEST_TARGET_DEPS}
+  TARGET_DEPENDENCIES harmonic complex_harmonic
   EXTRA_REQUIRES
   LABELS eigenproblems harmonic)
 
