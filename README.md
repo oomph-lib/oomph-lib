@@ -1010,7 +1010,6 @@ Option                                    | Description                         
 `OOMPH_ENABLE_PARANOID`                   | Enable the PARANOID flag in Debug                                            | OFF
 `OOMPH_ENABLE_RANGE_CHECKING`             | Enable RANGE_CHECKING flag in Debug                                          | OFF
 `OOMPH_ENABLE_SYMBOLIC_LINKS_FOR_HEADERS` | Install symbolic links to the headers instead of copying them                | ON
-`OOMPH_ENABLE_USE_OPENBLAS`               | Use the OpenBLAS implementation of BLAS/LAPACK                               | OFF
 `OOMPH_ENABLE_BUILD_OF_DOCS`              | Suppress Doxygen creation of API documentation **[DOESN'T WORK YET!]**       | OFF
 `OOMPH_TRANSITION_TO_VERSION_3`           | Try to build with up-to-date external sources                                | OFF
 `OOMPH_USE_DEPRECATED_SUPERLU`            | Use oomph-lib's deprecated version of SuperLU (4.3)                          | OFF
@@ -1055,8 +1054,7 @@ We recommend that you can write your own `CMakeUserPresets.json` file. You can i
       "binaryDir": "${sourceDir}/build",
       "cacheVariables": {
         "CMAKE_APPLE_SILICON_PROCESSOR": "arm64",
-        "CMAKE_BUILD_TYPE": "Release",
-        "OOMPH_ENABLE_USE_OPENBLAS": "ON"
+        "CMAKE_BUILD_TYPE": "Release"
       },
       "warnings": {
         "unusedCli": true
