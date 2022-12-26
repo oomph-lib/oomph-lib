@@ -1,16 +1,11 @@
 # ==============================================================================
-# Lapack sources required by SuperLU. We turn it into the library oomph_lapack
-# to avoid clashes with any existing installations of SuperLU (likely to be
-# accessible via -llapack)
+# Serial metis as distributed with parmetis 4.0.3
+#
+# Turn into oomph_metis_from_parmetis_4.0.3 to avoid clashes with any existing
+# installations of metis which are likely to be accessible via -lmetis
 # ==============================================================================
 list(APPEND CMAKE_MESSAGE_INDENT " ")
-message(VERBOSE "Entered oomph_metis_from_parmetis_3.1.1 subdirectory")
-
-# ------------------------------------------------------------------------
-# TODO: Address following from Makefile.am (but commented out):
-#
-# liboomph_metis_from_parmetis_3_1_1_la_LDFLAGS = -static
-# ------------------------------------------------------------------------
+message(VERBOSE "Entered oomph_metis_from_parmetis_4.0.3 subdirectory")
 
 # Define the headers
 set(HEADERS metislib.h)
@@ -88,5 +83,5 @@ oomph_library_config(
 list(APPEND EXTERNAL_SRC_LIBS ${LIBNAME})
 set(EXTERNAL_SRC_LIBS ${EXTERNAL_SRC_LIBS} PARENT_SCOPE)
 
-message(VERBOSE "Leaving oomph_metis_from_parmetis_3.1.1 subdirectory")
+message(VERBOSE "Leaving oomph_metis_from_parmetis_4.0.3 subdirectory")
 # ------------------------------------------------------------------------------
