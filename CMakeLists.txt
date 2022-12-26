@@ -56,22 +56,6 @@ if(NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
   set(CMAKE_BUILD_TYPE "Release" CACHE STRING "" FORCE)
 endif()
 
-# If the user hasn't specified a custom installation path, we're going to
-# install to the install/ subdirectory. However, if the user builds with the
-# flag -DENABLE_INSTALL_AS_SUPERUSER=ON to force us to use the default system
-# install path
-if((NOT ENABLE_INSTALL_AS_SUPERUSER)
-   AND (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT))
-  set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/install" CACHE PATH
-      "Default installation path" FORCE)
-  message(
-    STATUS
-      "Overriding default installation location. Will install to: ${CMAKE_INSTALL_PREFIX}"
-  )
-else()
-  message(STATUS "Will install to: ${CMAKE_INSTALL_PREFIX}")
-endif()
-
 # Sort out config files
 include(OomphConfigureProject)
 
@@ -108,16 +92,16 @@ option(OOMPH_WANT_MPI_VARIABLENP "Enable the use of MPI with np > 2" ON)
 
 # Fine-grained control of build of external_srcs.
 # FIXME: Make sure the SUPPRESS variables below actually work
-# TODO: These should be set on the fly after checking whether the appropriate variable WITH_* has been set!
+# TODO: These should be set on the fly after checking whether the appropriate variable WITH_* has been set...
 option(OOMPH_SUPPRESS_TRIANGLE_LIB "Suppress build of oomph-lib's copy of the triangle library" OFF)
 option(OOMPH_SUPPRESS_TETGEN_LIB "Suppress build of oomph-lib's copy of the tetgen library" OFF)
 
 # Third-party libraries. [WORK IN PROGRESS.]
-option(OOMPH_WANT_NLOHMANN_JSON "Use the nlohmann JSON library" OFF)
 option(OOMPH_WANT_CGAL "Do we want to build the CGAL library?" OFF)
 option(OOMPH_WANT_HYPRE "Use Hypre library" OFF)
 option(OOMPH_WANT_MUMPS "Use MUMPS library" OFF)
 option(OOMPH_WANT_TRILINOS "Use Trilinos library" OFF)
+option(OOMPH_WANT_NLOHMANN_JSON "Use the nlohmann JSON library" OFF)
 
 # Enable the use of code coverage flags so that coverage data can be collected
 option(OOMPH_ENABLE_CODE_COVERAGE "Enable collection of code coverage results" OFF)
@@ -150,7 +134,7 @@ if(OOMPH_ENABLE_RANGE_CHECKING)
 endif()
 
 if(OOMPH_ENABLE_BUILD_OF_DOCS)
-  find_package(Doxygen)
+  find_package(Doxygen REQUIRED)
 endif()
 
 # If we're using up-to-date external sources/dists then make sure we have a

@@ -14,6 +14,22 @@ if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
   )
 endif()
 
+# If the user hasn't specified a custom installation path, we're going to
+# install to the install/ subdirectory. However, if the user builds with the
+# flag -DENABLE_INSTALL_AS_SUPERUSER=ON to force us to use the default system
+# install path
+if((NOT ENABLE_INSTALL_AS_SUPERUSER)
+   AND (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT))
+  set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/install" CACHE PATH
+      "Default installation path" FORCE)
+  message(
+    STATUS
+      "Overriding default installation location. Will install to: ${CMAKE_INSTALL_PREFIX}"
+  )
+else()
+  message(STATUS "Will install to: ${CMAKE_INSTALL_PREFIX}")
+endif()
+
 # Is oomph-lib being used directly or as an external project?
 set(OOMPH_IS_MAIN_PROJECT FALSE)
 if(PROJECT_IS_TOP_LEVEL)
