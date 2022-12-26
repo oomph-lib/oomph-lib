@@ -49,7 +49,9 @@ if(NOT OOMPH_SUPPRESS_TETGEN_LIB)
 endif()
 
 # Add BLAS
-if(NOT OOMPH_ENABLE_USE_OPENBLAS)
+if(NOT (OOMPH_USE_BLAS_FROM OR OOMPH_USE_LAPACK_FROM))
+  # FIXME: When are the 'ALREADY_HAVE_' variables defined? Not sure they're even
+  # being used right now...
   if(NOT ALREADY_HAVE_BLAS)
     add_subdirectory(oomph_blas)
   endif()
