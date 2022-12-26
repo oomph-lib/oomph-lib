@@ -12,6 +12,8 @@ include(FetchContent)
 set(EXTERNAL_DIST_CXX_DEFINITIONS "")
 
 if(OOMPH_WANT_CGAL AND (NOT DONT_BUILD_CGAL))
+  add_subdirectory(gmp)
+  add_subdirectory(mpfr)
   add_subdirectory(boost)
   add_subdirectory(cgal)
 endif()

@@ -3,25 +3,15 @@
 # Build the MUMPS (and possibly Scalapack) library.
 #
 # Details on the available CMake build options can be found here:
-#                   https://github.com/scivision/mumps
+#               https://github.com/puneetmatharu/mumps.git
 # Note, however, that we do not download and build from the repository linked
 # above. It just happens to be where helpful build instructions can be found.
-#
-# Notable build options:
-#
-#    -Dautobuild=true (default: true): Will download and build a local copy of
-#                                 Lapack and/or Scalapack if missing or broken.
-#
-#    -Dopenmp=true (default: false): Use OpenMP. Note that OpenMP can make MUMPS
-#                                    over 10x slower in certain situations. Try
-#                                    with and without OpenMP to see which is
-#                                    faster for your situation.
 # ==============================================================================
 # cmake-format: on
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(STATUS "Entered mumps_and_scalapack subdirectory")
 
-# Set MUMPS build options
+# Set MUMPS configuration options
 set(autobuild ON)
 set(lapack_external OFF)
 set(scalapack_external OFF)
@@ -33,16 +23,30 @@ set(scotch OFF)
 set(openmp OFF)
 set(mumps_matlab OFF)
 set(use_default_install_location ON)
-# set(BUILD_TESTING OFF)
 
-include(FetchContent)
-FetchContent_Declare(
-  mumps_project
-  # GIT_REPOSITORY https://github.com/scivision/mumps.git
-  GIT_REPOSITORY https://github.com/puneetmatharu/mumps.git
-  GIT_TAG v5.5.1.11
-  GIT_SHALLOW TRUE)
-FetchContent_MakeAvailable(mumps_project)
+# Look for an already-installed version of MUMPS. If OOMPH_USE_MUMPS_FROM is
+# defined then we'll look under there
+if(OOMPH_USE_MUMPS_FROM)
+  find_package(
+    MUMPS 5.5.1.11 REQUIRED
+    PATHS "${OOMPH_USE_MUMPS_FROM}"
+    NO_DEFAULT_PATH)
+endif()
+find_package(MUMPS 5.5.1 QUIET)
+
+# If we couldn't find a pre-installed version, lets build it ourselves
+if(MUMPS_FOUND)
+  message(STATUS "Found an existing installation of MUMPS at: ${MUMPS_DIR}")
+else()
+  include(FetchContent)
+  FetchContent_Declare(
+    mumps_project
+    GIT_REPOSITORY https://github.com/puneetmatharu/mumps.git
+    # GIT_REPOSITORY https://github.com/scivision/mumps.git
+    GIT_TAG v5.5.1.11
+    GIT_SHALLOW TRUE)
+  FetchContent_MakeAvailable(mumps_project)
+endif()
 
 # ------------------------------------------------------------------------------
 # BOILERPLATE: Update global variables

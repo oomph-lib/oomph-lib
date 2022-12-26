@@ -4,31 +4,15 @@
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(STATUS "Entered cgal subdirectory")
 
-# Find dependencies
-find_package(GMP REQUIRED)
-find_package(MPFR REQUIRED)
-find_package(Boost 1.66.0 REQUIRED COMPONENTS Thread System Program_options)
-
-# Configuration flags
-set(CGAL_DO_NOT_WARN_ABOUT_CMAKE_BUILD_TYPE TRUE CACHE INTERNAL "")
-
-# See if the user already has CGAL installed. If the user told us where it is
-# installed with OOMPH_USE_CGAL_FROM, then search there. If we can't find it,
-# throw an error. Otherwise, search the standard system paths to see if we can
-# find it
-if(OOMPH_USE_CGAL_FROM)
-  find_package(
-    CGAL 5.5.1
-    PATHS "${OOMPH_USE_CGAL_FROM}"
-    NO_DEFAULT_PATH)
-  if(NOT CGAL_FOUND)
-    message(
-      FATAL_ERROR
-        "You specified 'OOMPH_USE_CGAL_FROM' but CGAL could not be found. Did you specify the correct directory?"
-    )
-  endif()
-else()
-  find_package(CGAL 5.5.1)
+# Make sure the CGAL dependencies have been found
+if(NOT GMP_FOUND)
+  message(FATAL_ERROR "Cannot use CGAL -- the 'gmp' library is missing!")
+endif()
+if(NOT MPFR_FOUND)
+  message(FATAL_ERROR "Cannot use CGAL -- the 'mpfr' library is missing!")
+endif()
+if(NOT Boost_FOUND)
+  message(FATAL_ERROR "Cannot use CGAL -- the 'Boost' library is missing!")
 endif()
 
 # CGAL currently defines a variable called BUILD_TESTING which they shouldn't do
@@ -39,6 +23,19 @@ endif()
 # CGAL which will save a lot of time at configure time. To do this, we can just
 # remove the use of the FORCE_ variable below.
 set(FORCE_BUILD_OWN_VERSION_OF_CGAL TRUE)
+
+# Configuration flags
+set(CGAL_DO_NOT_WARN_ABOUT_CMAKE_BUILD_TYPE TRUE CACHE INTERNAL "")
+
+# Look for an already-installed version of CGAL. If OOMPH_USE_CGAL_FROM is
+# defined then we'll look under there
+if(OOMPH_USE_CGAL_FROM)
+  find_package(
+    CGAL 5.5.1 REQUIRED
+    PATHS "${OOMPH_USE_CGAL_FROM}"
+    NO_DEFAULT_PATH)
+endif()
+find_package(CGAL 5.5.1 QUIET)
 
 # If we couldn't find a pre-installed version, lets build it ourselves
 if(CGAL_FOUND AND (NOT FORCE_BUILD_OWN_VERSION_OF_CGAL))
@@ -64,9 +61,14 @@ else()
       <SOURCE_DIR> && git checkout <SOURCE_DIR> && git apply
       <SOURCE_DIR>/${PATCH_FILE})
   FetchContent_MakeAvailable(cgal_project)
-endif()
 
-find_package(CGAL REQUIRED PATHS "${CGAL_BINARY_DIR}")
+  find_package(CGAL 5.5.1 REQUIRED PATHS "${CGAL_BINARY_DIR}")
+  if(NOT TARGET CGAL::CGAL)
+    message(
+      FATAL_ERROR
+        "Something went wrong during the configuration of the CGAL library!")
+  endif()
+endif()
 
 # ------------------------------------------------------------------------------
 # BOILERPLATE: Update global variables

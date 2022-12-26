@@ -4,8 +4,20 @@
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(STATUS "Entered boost subdirectory")
 
-# Look for an already-installed version of Boost
-find_package(Boost 1.66.0 COMPONENTS Thread System Program_options)
+# The list of Boost libraries we require
+set(REQUIRED_COMPONENTS Thread System Program_options)
+
+# Look for an already-installed version of Boost. If OOMPH_USE_BOOST_FROM is
+# defined then we'll look under there
+if(OOMPH_USE_BOOST_FROM)
+  find_package(
+    Boost 1.66.0
+    COMPONENTS ${REQUIRED_COMPONENTS}
+    REQUIRED
+    PATHS "${OOMPH_USE_BOOST_FROM}"
+    NO_DEFAULT_PATH)
+endif()
+find_package(Boost 1.66.0 QUIET COMPONENTS ${REQUIRED_COMPONENTS})
 
 # If we couldn't find the required version, lets build it ourselves
 if(Boost_FOUND)
