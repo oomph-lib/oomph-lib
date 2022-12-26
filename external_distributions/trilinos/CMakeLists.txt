@@ -39,10 +39,14 @@ else()
   # BLAS/LAPACK
   set(TPL_ENABLE_BLAS ON)
   set(TPL_ENABLE_LAPACK ON)
-  if(OOMPH_ENABLE_USE_OPENBLAS AND BLAS_FOUND)
+  if(OOMPH_USE_BLAS_FROM OR OOMPH_USE_LAPACK_FROM)
     set(TPL_BLAS_LIBRARIES "${BLAS_LIBRARIES}")
     set(TPL_LAPACK_LIBRARIES "${LAPACK_LIBRARIES}")
   else()
+    # Leads to a circular dependency. Think it might work if we make sure to
+    # build oomph_blas/oomph_lapack before Trilinos and specify the explicit
+    # path to the build path and install path (using $<BUILD_INTERFACE:...> and
+    # $<INSTALL_INTERFACE:...>)
     message(
       FATAL_ERROR "Currently unable to link to oomph-lib BLAS/LAPACK libraries."
     )
