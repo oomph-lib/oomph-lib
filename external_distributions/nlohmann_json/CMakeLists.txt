@@ -4,8 +4,13 @@
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(STATUS "Entered nlohmann_json subdirectory")
 
-find_package(nlohmann_json 3.11.2)
-if(NOT nlohmann_json_FOUND)
+find_package(nlohmann_json 3.11.2 QUIET)
+if(nlohmann_json_FOUND)
+  message(
+    STATUS
+      "Found an existing installation of nlohmann_json at: ${nlohmann_json_DIR}"
+  )
+else()
   # Disable the build of tests, amalgamate the library into a single header,
   # disable the CI build targets and install the library, so that we can find it
   # via find_package(...)
