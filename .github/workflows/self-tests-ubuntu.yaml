@@ -44,7 +44,7 @@ jobs:
         run: cmake --install build
 
       - name: Configure basic self-tests
-        run: cmake -G Ninja -S self_test -B self_test/build -DOOMPH_WANT_EXTENDED_SELF_TESTS=ON
+        run: cmake -G Ninja -S self_test -B self_test/build --log-level=VERBOSE -DOOMPH_WANT_EXTENDED_SELF_TESTS=ON
 
       - name: Run basic self-tests
         id: self_tests
@@ -52,7 +52,7 @@ jobs:
         continue-on-error: true
 
       - name: Configure demo drivers
-        run: cmake -G Ninja -S demo_drivers -B demo_drivers/build
+        run: cmake -G Ninja -S demo_drivers -B demo_drivers/build --log-level=VERBOSE
 
       - name: Run demo driver self-tests
         id: demo_drivers
