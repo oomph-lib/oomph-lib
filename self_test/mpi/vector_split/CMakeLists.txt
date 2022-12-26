@@ -25,15 +25,15 @@ if(NUM_PROCESSORS GREATER_EQUAL 4)
     EXTRA_REQUIRES
     LABELS mpi vector
     REQUIRES_MPI_VARIABLENP_RUN_COMMAND)
+
+  # Don't run this test alongside any other tests
+  set_tests_properties(mpi.vector_split PROPERTIES RUN_SERIAL TRUE)
 else()
   message(
     STATUS
       "Skipping test 'mpi.vector_split' as you don't have enough processors available."
   )
 endif()
-
-# Don't run this test alongside any other tests
-set_tests_properties(mpi.vector_split PROPERTIES RUN_SERIAL TRUE)
 
 message(VERBOSE "Leaving vector_split subdirectory")
 # ------------------------------------------------------------------------------

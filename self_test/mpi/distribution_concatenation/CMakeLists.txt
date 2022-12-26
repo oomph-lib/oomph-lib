@@ -25,15 +25,16 @@ if(NUM_PROCESSORS GREATER_EQUAL 4)
     EXTRA_REQUIRES
     LABELS mpi matrix
     REQUIRES_MPI_VARIABLENP_RUN_COMMAND)
+
+  # Don't run this test alongside any other tests
+  set_tests_properties(mpi.distribution_concatenation PROPERTIES RUN_SERIAL
+                                                                 TRUE)
 else()
   message(
     STATUS
       "Skipping test 'mpi.distribution_concatenation' as you don't have enough processors available."
   )
 endif()
-
-# Don't run this test alongside any other tests
-set_tests_properties(mpi.distribution_concatenation PROPERTIES RUN_SERIAL TRUE)
 
 message(VERBOSE "Leaving distribution_concatenation subdirectory")
 # ------------------------------------------------------------------------------
