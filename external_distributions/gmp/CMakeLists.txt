@@ -5,14 +5,9 @@ list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(STATUS "Entered gmp subdirectory")
 
 # Look for an already-installed version of GMP. If OOMPH_USE_GMP_FROM is defined
-# then we'll look under there
-if(OOMPH_USE_GMP_FROM)
-  find_package(
-    GMP 6.1.2 REQUIRED
-    PATHS "${OOMPH_USE_GMP_FROM}"
-    NO_DEFAULT_PATH)
-endif()
-find_package(GMP 6.1.2 REQUIRED)
+# then we'll look under there. (We have our own FindGMP.cmake that will inspect
+# the OOMPH_USE_GMP_FROM variable)
+find_package(GMP 4.2 REQUIRED)
 
 # ------------------------------------------------------------------------------
 # BOILERPLATE: Update global variables

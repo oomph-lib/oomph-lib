@@ -5,14 +5,9 @@ list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(STATUS "Entered mpfr subdirectory")
 
 # Look for an already-installed version of MPFR. If OOMPH_USE_MPFR_FROM is
-# defined then we'll look under there
-if(OOMPH_USE_MPFR_FROM)
-  find_package(
-    MPFR 3.1.6 REQUIRED
-    PATHS "${OOMPH_USE_MPFR_FROM}"
-    NO_DEFAULT_PATH)
-endif()
-find_package(MPFR 3.1.6 REQUIRED)
+# defined then we'll look under there. (We have our own FindMPFR.cmake that will
+# inspect the OOMPH_USE_MPRF_FROM variable)
+find_package(MPFR 2.2.1 REQUIRED)
 
 # ------------------------------------------------------------------------------
 # BOILERPLATE: Update global variables
