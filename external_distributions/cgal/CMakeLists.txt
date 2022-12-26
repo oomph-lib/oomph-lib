@@ -5,13 +5,13 @@ list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(STATUS "Entered cgal subdirectory")
 
 # Make sure the CGAL dependencies have been found
-if(NOT GMP_FOUND)
+if(NOT OOMPH_HAS_GMP)
   message(FATAL_ERROR "Cannot use CGAL -- the 'gmp' library is missing!")
 endif()
-if(NOT MPFR_FOUND)
+if(NOT OOMPH_HAS_MPFR)
   message(FATAL_ERROR "Cannot use CGAL -- the 'mpfr' library is missing!")
 endif()
-if(NOT Boost_FOUND)
+if(NOT OOMPH_HAS_BOOST)
   message(FATAL_ERROR "Cannot use CGAL -- the 'Boost' library is missing!")
 endif()
 
@@ -29,17 +29,19 @@ set(CGAL_DO_NOT_WARN_ABOUT_CMAKE_BUILD_TYPE TRUE CACHE INTERNAL "")
 
 # Look for an already-installed version of CGAL. If OOMPH_USE_CGAL_FROM is
 # defined then we'll look under there
-if(OOMPH_USE_CGAL_FROM)
-  find_package(
-    CGAL 5.5.1 REQUIRED
-    PATHS "${OOMPH_USE_CGAL_FROM}"
-    NO_DEFAULT_PATH)
-endif()
-find_package(CGAL 5.5.1 QUIET)
+if(NOT FORCE_BUILD_OWN_VERSION_OF_CGAL)
+  if(OOMPH_USE_CGAL_FROM)
+    find_package(
+      CGAL 5.5.1 REQUIRED
+      PATHS "${OOMPH_USE_CGAL_FROM}"
+      NO_DEFAULT_PATH)
+  endif()
+  find_package(CGAL 5.5.1 QUIET)
 
-# If we couldn't find a pre-installed version, lets build it ourselves
-if(CGAL_FOUND AND (NOT FORCE_BUILD_OWN_VERSION_OF_CGAL))
-  message(STATUS "Found an existing installation of CGAL at: ${CGAL_DIR}")
+  # If we couldn't find a pre-installed version, lets build it ourselves
+  if(CGAL_FOUND)
+    message(STATUS "Found an existing installation of CGAL at: ${CGAL_DIR}")
+  endif()
 else()
   # Path to the patch file
   set(PATCH_FILE 0001-Rename-BUILD_TESTING-CGAL_BUILD_TESTING.patch)
