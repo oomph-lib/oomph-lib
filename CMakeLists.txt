@@ -80,7 +80,6 @@ option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" OFF)
 option(OOMPH_ENABLE_PARANOID "Enable the PARANOID flag in Debug" OFF)
 option(OOMPH_ENABLE_RANGE_CHECKING "Enable RANGE_CHECKING flag in Debug" OFF)
 option(OOMPH_ENABLE_SYMBOLIC_LINKS_FOR_HEADERS "Install symbolic links to the headers instead of copying them" ON)
-option(OOMPH_ENABLE_USE_OPENBLAS "Use the OpenBLAS implementation of BLAS/LAPACK" OFF)
 option(OOMPH_ENABLE_BUILD_OF_DOCS "Suppress Doxygen creation of API documentation [DOESN'T WORK YET!]" OFF)
 option(OOMPH_TRANSITION_TO_VERSION_3 "Try to build with up-to-date external sources" OFF)
 option(OOMPH_USE_DEPRECATED_SUPERLU "Use oomph-lib's deprecated version of SuperLU (4.3)" OFF)
@@ -108,6 +107,15 @@ option(OOMPH_ENABLE_CODE_COVERAGE "Enable collection of code coverage results" O
 
 # cmake-format: on
 # -------------------------[ PROCESS SELECTED OPTIONS ]-------------------------
+
+# The demo_driver self-tests use shell scripts and symbolic links, both of which
+# require a Unix-based system
+if(NOT UNIX)
+  set(OOMPH_ENABLE_CODE_COVERAGE OFF CACHE BOOL
+      "Enable collection of code coverage results" FORCE)
+  set(OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY OFF)
+  set(SYMBOLIC_LINKS_FOR_HEADERS OFF)
+endif()
 
 # Let CMake take care of the famous -fPIC flag
 if(BUILD_SHARED_LIBS)
@@ -147,13 +155,30 @@ if(OOMPH_USE_DEPRECATED_SUPERLU)
   add_compile_definitions(OOMPH_USE_DEPRECATED_SUPERLU)
 endif()
 
-# The demo_driver self-tests use shell scripts and symbolic links, both of which
-# require a Unix-based system
-if(NOT UNIX)
-  set(OOMPH_ENABLE_CODE_COVERAGE OFF CACHE BOOL
-      "Build tests with library build" FORCE)
-  set(OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY OFF)
-  set(SYMBOLIC_LINKS_FOR_HEADERS OFF)
+if(OOMPH_USE_BLAS_FROM OR OOMPH_USE_LAPACK_FROM)
+  # Temporarily set CMAKE_PREFIX_PATH to the values of OOMPH_USE_BLAS_FROM and
+  # OOMPH_USE_LAPACK_FROM if either is provided and search for BLAS and LAPACK.
+  # Once found, reset the value of CMAKE_PREFIX_PATH
+  set(BACKUP_CMAKE_PREFIX_PATH "${CMAKE_PREFIX_PATH}" CACHE INTERNAL "")
+  set(CMAKE_PREFIX_PATH "${OOMPH_USE_BLAS_FROM};${OOMPH_USE_LAPACK_FROM}" CACHE
+      INTERNAL "" FORCE)
+  find_package(BLAS REQUIRED)
+  find_package(LAPACK REQUIRED)
+  set(CMAKE_PREFIX_PATH "${BACKUP_CMAKE_PREFIX_PATH}" CACHE INTERNAL "" FORCE)
+
+  # Store a list of directories containing the BLAS libraries
+  set(BLAS_DIRS)
+  foreach(BLAS_LIBRARY IN LISTS BLAS_LIBRARIES)
+    get_filename_component(BLAS_DIR ${BLAS_LIBRARY} DIRECTORY)
+    list(APPEND BLAS_DIRS ${BLAS_DIR})
+  endforeach()
+
+  # Store a list of directories containing the LAPACK libraries
+  set(LAPACK_DIRS)
+  foreach(LAPACK_LIBRARY IN LISTS LAPACK_LIBRARIES)
+    get_filename_component(LAPACK_DIR ${LAPACK_LIBRARY} DIRECTORY)
+    list(APPEND LAPACK_DIRS ${LAPACK_DIR})
+  endforeach()
 endif()
 
 if(OOMPH_ENABLE_CODE_COVERAGE)
@@ -171,26 +196,6 @@ if(OOMPH_ENABLE_CODE_COVERAGE)
 
   include(OomphEnableCodeCoverage)
   oomph_enable_code_coverage()
-endif()
-
-if(OOMPH_ENABLE_USE_OPENBLAS)
-  set(BLA_VENDOR OpenBLAS)
-
-  # Temporarily set CMAKE_PREFIX_PATH to the value of OOMPH_USE_BLAS_FROM
-  if(OOMPH_USE_BLAS_FROM OR OOMPH_USE_LAPACK_FROM)
-    set(BACKUP_CMAKE_PREFIX_PATH "${CMAKE_PREFIX_PATH}" CACHE INTERNAL "")
-    set(CMAKE_PREFIX_PATH "${OOMPH_USE_BLAS_FROM};${OOMPH_USE_LAPACK_FROM}"
-        CACHE INTERNAL "" FORCE)
-  endif()
-
-  # Search for BLAS and LAPACK
-  find_package(BLAS REQUIRED)
-  find_package(LAPACK REQUIRED)
-
-  # Reset the value of CMAKE_PREFIX_PATH
-  if(OOMPH_USE_BLAS_FROM OR OOMPH_USE_LAPACK_FROM)
-    set(CMAKE_PREFIX_PATH "${BACKUP_CMAKE_PREFIX_PATH}" CACHE INTERNAL "" FORCE)
-  endif()
 endif()
 
 # --------------------------[ FIND REQUIRED HEADERS ]---------------------------
