@@ -32,7 +32,7 @@ if(OOMPH_USE_MUMPS_FROM)
     PATHS "${OOMPH_USE_MUMPS_FROM}"
     NO_DEFAULT_PATH)
 endif()
-find_package(MUMPS 5.5.1 QUIET)
+find_package(MUMPS 5.5.1.11 QUIET)
 
 # If we couldn't find a pre-installed version, lets build it ourselves
 if(MUMPS_FOUND)
