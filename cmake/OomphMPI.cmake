@@ -76,8 +76,12 @@ link_libraries(MPI::MPI_C MPI::MPI_CXX)
 
 # Set the command used to run MPI-enabled self-tests if the user didn't specify
 # the commands to use
+if(NOT DEFINED OOMPH_MPI_NUM_PROC)
+  set(OOMPH_MPI_NUM_PROC 2)
+endif()
 if(NOT DEFINED MPI_RUN_COMMAND)
-  set(MPI_RUN_COMMAND "${MPIEXEC_EXECUTABLE} ${MPIEXEC_NUMPROC_FLAG} 2")
+  set(MPI_RUN_COMMAND
+      "${MPIEXEC_EXECUTABLE} ${MPIEXEC_NUMPROC_FLAG} ${OOMPH_MPI_NUM_PROC}")
 endif()
 if(NOT DEFINED MPI_VARIABLENP_RUN_COMMAND)
   set(MPI_VARIABLENP_RUN_COMMAND
