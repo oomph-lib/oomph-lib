@@ -237,7 +237,7 @@ endforeach()
 # Libraries to link SuperLU Dist to
 set(LINKLIBS ${MPI_C_LIBRARIES} ${MPI_CXX_LIBRARIES} oomph_parmetis_4.0.3)
 
-if(OOMPH_USE_BLAS_FROM OR OOMPH_USE_LAPACK_FROM)
+if(BLAS_FOUND AND LAPACK_FOUND)
   list(APPEND LINKLIBS BLAS::BLAS LAPACK::LAPACK)
 else()
   list(APPEND LINKLIBS oomph_blas oomph_lapack)

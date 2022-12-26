@@ -241,7 +241,7 @@ if(ENABLE_COMPLEX16)
 endif()
 
 # Specify the libraries that we depend on
-if(OOMPH_USE_BLAS_FROM)
+if(BLAS_FOUND)
   set(LINKLIBS BLAS::BLAS)
 else()
   set(LINKLIBS oomph::oomph_blas)
