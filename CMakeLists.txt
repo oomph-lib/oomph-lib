@@ -175,22 +175,22 @@ endif()
 
 if(OOMPH_ENABLE_USE_OPENBLAS)
   set(BLA_VENDOR OpenBLAS)
+
+  # Temporarily set CMAKE_PREFIX_PATH to the value of OOMPH_USE_BLAS_FROM
+  if(OOMPH_USE_BLAS_FROM OR OOMPH_USE_LAPACK_FROM)
+    set(BACKUP_CMAKE_PREFIX_PATH "${CMAKE_PREFIX_PATH}" CACHE INTERNAL "")
+    set(CMAKE_PREFIX_PATH "${OOMPH_USE_BLAS_FROM};${OOMPH_USE_LAPACK_FROM}"
+        CACHE INTERNAL "" FORCE)
+  endif()
+
+  # Search for BLAS and LAPACK
   find_package(BLAS REQUIRED)
   find_package(LAPACK REQUIRED)
 
-  # Store a list of directories containing the BLAS libraries
-  set(BLAS_DIRS)
-  foreach(BLAS_LIBRARY IN LISTS BLAS_LIBRARIES)
-    get_filename_component(BLAS_DIR ${BLAS_LIBRARY} DIRECTORY)
-    list(APPEND BLAS_DIRS ${BLAS_DIR})
-  endforeach()
-
-  # Store a list of directories containing the LAPACK libraries
-  set(LAPACK_DIRS)
-  foreach(LAPACK_LIBRARY IN LISTS LAPACK_LIBRARIES)
-    get_filename_component(LAPACK_DIR ${LAPACK_LIBRARY} DIRECTORY)
-    list(APPEND LAPACK_DIRS ${LAPACK_DIR})
-  endforeach()
+  # Reset the value of CMAKE_PREFIX_PATH
+  if(OOMPH_USE_BLAS_FROM OR OOMPH_USE_LAPACK_FROM)
+    set(CMAKE_PREFIX_PATH "${BACKUP_CMAKE_PREFIX_PATH}" CACHE INTERNAL "" FORCE)
+  endif()
 endif()
 
 # --------------------------[ FIND REQUIRED HEADERS ]---------------------------
