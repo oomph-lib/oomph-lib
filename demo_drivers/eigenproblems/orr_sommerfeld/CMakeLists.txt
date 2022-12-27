@@ -9,22 +9,18 @@ if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
 endif()
 include(CTest)
 
-if(OOMPH_HAS_TRILINOS)
-  oomph_add_executable(
-    NAME orr_sommerfeld
-    SOURCES orr_sommerfeld.cc
-    LIBRARIES oomph::meshes oomph::generic)
-endif()
+oomph_add_executable(
+  NAME orr_sommerfeld
+  SOURCES orr_sommerfeld.cc
+  LIBRARIES oomph::meshes oomph::generic)
 
 # ---------------------------------- TESTING ----------------------------------
 
-if(OOMPH_HAS_TRILINOS)
-  oomph_add_test(
-    TEST_NAME eigenproblems.orr_sommerfeld
-    TARGET_DEPENDENCIES orr_sommerfeld
-    EXTRA_REQUIRES
-    LABELS eigenproblems orr_sommerfeld)
-endif()
+oomph_add_test(
+  TEST_NAME eigenproblems.orr_sommerfeld
+  TARGET_DEPENDENCIES orr_sommerfeld
+  EXTRA_REQUIRES
+  LABELS eigenproblems orr_sommerfeld)
 
 message(VERBOSE "Leaving orr_sommerfeld subdirectory")
 # ------------------------------------------------------------------------------
