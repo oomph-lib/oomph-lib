@@ -27,8 +27,65 @@ add_custom_target(
   COMMAND "${OOMPH_ROOT_DIR}/scripts/make_index_html_in_demo_driver_dirs.bash"
   BYPRODUCTS ${INDEX_HTML_BYPRODUCTS_AS_LIST})
 
+# TODO: Discuss the removal of "the_distribution"; it's based on the
+# soon-to-be-deprecated Makefile.am stuff
+
 # Recurse!
-set(SUBDIRS people)
+set(SUBDIRS
+    people
+    index
+    picture_show
+    optimisation
+    contact
+    publications
+    coding_conventions
+    copyright
+    intro
+    FAQ
+    meshes
+    tar_files
+    example_code_list
+    the_data_structure
+    quick_guide
+    poisson
+    unsteady_heat
+    linear_wave
+    helmholtz
+    navier_stokes
+    axisym_navier_stokes
+    advection_diffusion
+    beam
+    shell
+    solid
+    interaction
+    multi_physics
+    eigenproblems
+    leftovers
+    order_of_action_functions
+    hijacking
+    change_log
+    bugs
+    linear_solvers
+    paraview
+    preconditioners
+    to_be_written
+    young_laplace
+    mpi
+    creating_doc
+    linear_elasticity
+    time_harmonic_fourier_decomposed_linear_elasticity
+    fourier_decomposed_helmholtz
+    time_harmonic_linear_elasticity
+    pml_fourier_decomposed_helmholtz
+    pml_helmholtz
+    axisym_linear_elasticity
+    acoustic_fsi
+    fourier_decomposed_acoustic_fsi
+    pml_time_harmonic_linear_elasticity
+    deliberately_broken_doc_for_checking
+    acknowledgements
+    search_results)
+
 foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
