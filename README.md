@@ -1185,8 +1185,7 @@ Alternatively, you can use the `oomph_get_hashed_target_name(...)` function prov
 # Test definition
 oomph_add_executable(NAME <executable-name> ...)
 
-# Get the hashed target name
-set(HASHED_TARGET_NAME)
+# Get the hashed target name and store it in HASHED_TARGET_NAME
 oomph_get_hashed_target_name(one_d_poisson HASHED_TARGET_NAME)
 
 # Do something to the target...
