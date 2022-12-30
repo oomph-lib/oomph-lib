@@ -12,6 +12,9 @@
 # =============================================================================
 # cmake-format: on
 
+# FIXME: Switch to using add_custom_command(...) instead of target to avoid
+# constantly rebuilding...
+
 # ------------------------------------------------------------------------------
 function(oomph_generate_doc_from)
   # Define the supported set of keywords
@@ -149,7 +152,7 @@ function(oomph_generate_doc_from)
       POST_BUILD
       COMMAND cd latex
       COMMAND rm -f refman.pdf
-      COMMAND echo "\\end{document}" >> index.tex
+      COMMAND echo "\\\\end{document}" >> index.tex
       COMMAND mv refman.tex refman.tex.back
       COMMAND "${OOMPH_ROOT_DIR}/scripts/customise_latex.bash" refman.tex.back >
               refman.tex
