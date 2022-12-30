@@ -25,8 +25,8 @@ add_custom_target(
 # TODO: Discuss the removal of "the_distribution"; it's based on the
 # soon-to-be-deprecated Makefile.am stuff
 
-# FIXME: Switch to using add_custom_command(...) instead of target to avoid
-# constantly rebuilding...
+# TODO: Switch to using add_custom_command(...) in OomphGenerateDocFrom.cmake
+# instead of add_custom_target(...) to avoid constantly rebuilding...
 
 # Recurse!
 set(SUBDIRS
