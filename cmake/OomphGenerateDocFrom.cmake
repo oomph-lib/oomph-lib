@@ -47,6 +47,14 @@ function(oomph_generate_doc_from)
     find_program(PATH_TO_PDFLATEX NAMES pdflatex)
   endif()
 
+  # Make sure we've got the correct docfile
+  if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${DOCFILE}")
+    message(
+      FATAL_ERROR
+        "File '${DOCFILE}' can not be found in directory '${CMAKE_CURRENT_SOURCE_DIR}/'!"
+    )
+  endif()
+
   # Extract the filename stem and extension; make sure the docfile is a text
   # file
   cmake_path(GET DOCFILE EXTENSION DOCFILE_EXT)
@@ -65,6 +73,9 @@ function(oomph_generate_doc_from)
   string(SUBSTRING ${PATH_HASH} 0 7 PATH_HASH)
 
   # Generate doxygen-ified header from ${DOCFILE_STEM}.txt
+  #
+  # FIXME: txt2h_new.sh has a hard reliance on the system having 'awk'; need to
+  # check for gawk, nawk or mawk if its missing
   add_custom_target(
     generate_doxygenified_header_${PATH_HASH}
     COMMAND "${OOMPH_ROOT_DIR}/scripts/txt2h_new.sh" ${DOCFILE_STEM}.txt
