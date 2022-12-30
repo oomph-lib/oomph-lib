@@ -12,13 +12,22 @@ oomph_generate_doc_from(
   DOCFILE oomph_index.txt
   BUILD_DOXY_HEADER_TARGET)
 
+# Get relative path to oomph-lib root
+cmake_path(
+  RELATIVE_PATH OOMPH_ROOT_DIR BASE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+  OUTPUT_VARIABLE RELATIVE_PATH_TO_OOMPH_ROOT_DIR)
+
+# Strip trailing slash (not necessary, just for prettiness...)
+string(REGEX REPLACE "/$" "" RELATIVE_PATH_TO_OOMPH_ROOT_DIR
+                     "${RELATIVE_PATH_TO_OOMPH_ROOT_DIR}")
+
 # Make sure to construct oomph_index.txt from intro.txt before we try to create
 # the doxygen-ified header from the docfile
 add_custom_target(
   generate_oomph_index
   COMMAND cp intro.txt oomph_index.txt
   COMMAND "${OOMPH_ROOT_DIR}/scripts/make_index.py" oomph.idx
-          "${OOMPH_ROOT_DIR}" >> oomph_index.txt
+          "${RELATIVE_PATH_TO_OOMPH_ROOT_DIR}" >> oomph_index.txt
   BYPRODUCTS "${CMAKE_CURRENT_SOURCE_DIR}/oomph_index.txt"
   WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
 add_dependencies(${BUILD_DOXY_HEADER_TARGET} generate_oomph_index)

@@ -51,6 +51,15 @@ function(oomph_generate_doc_from)
   # get generated at build-time; see e.g. doc/index/oomph_index.txt, but we can
   # check for it at build-time when it is needed.
 
+  # Get relative path to oomph-lib root
+  cmake_path(
+    RELATIVE_PATH OOMPH_ROOT_DIR BASE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+    OUTPUT_VARIABLE RELATIVE_PATH_TO_OOMPH_ROOT_DIR)
+
+  # Strip trailing slash (not necessary, just for prettiness...)
+  string(REGEX REPLACE "/$" "" RELATIVE_PATH_TO_OOMPH_ROOT_DIR
+                       "${RELATIVE_PATH_TO_OOMPH_ROOT_DIR}")
+
   # Extract the filename stem and extension; make sure the docfile is a text
   # file
   cmake_path(GET DOCFILE EXTENSION DOCFILE_EXT)
@@ -84,7 +93,7 @@ function(oomph_generate_doc_from)
   add_custom_target(
     generate_header_${PATH_HASH}
     COMMAND "${OOMPH_ROOT_DIR}/scripts/build_oomph_html_header.sh"
-            "${OOMPH_ROOT_DIR}"
+            "${RELATIVE_PATH_TO_OOMPH_ROOT_DIR}"
     WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
     BYPRODUCTS "${CMAKE_CURRENT_SOURCE_DIR}/oomph-lib_header.html"
                "${CMAKE_CURRENT_SOURCE_DIR}/oomph-lib_footer.html"
