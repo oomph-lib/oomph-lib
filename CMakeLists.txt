@@ -80,7 +80,6 @@ option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" OFF)
 option(OOMPH_ENABLE_PARANOID "Enable the PARANOID flag in Debug" OFF)
 option(OOMPH_ENABLE_RANGE_CHECKING "Enable RANGE_CHECKING flag in Debug" OFF)
 option(OOMPH_ENABLE_SYMBOLIC_LINKS_FOR_HEADERS "Install symbolic links to the headers instead of copying them" ON)
-option(OOMPH_ENABLE_BUILD_OF_DOCS "Suppress Doxygen creation of API documentation [DOESN'T WORK YET!]" OFF)
 option(OOMPH_TRANSITION_TO_VERSION_3 "Try to build with up-to-date external sources" OFF)
 option(OOMPH_USE_DEPRECATED_SUPERLU "Use oomph-lib's deprecated version of SuperLU (4.3)" OFF)
 
@@ -94,6 +93,8 @@ option(OOMPH_WANT_MPI_VARIABLENP "Enable the use of MPI with np > 2" ON)
 # TODO: These should be set on the fly after checking whether the appropriate variable WITH_* has been set...
 option(OOMPH_SUPPRESS_TRIANGLE_LIB "Suppress build of oomph-lib's copy of the triangle library" OFF)
 option(OOMPH_SUPPRESS_TETGEN_LIB "Suppress build of oomph-lib's copy of the tetgen library" OFF)
+
+# FIXME: Override OOMPH_WANT_<LIB> variables if OOMPH_USE_<LIB>_FROM is specified
 
 # Third-party libraries. [WORK IN PROGRESS.]
 option(OOMPH_WANT_CGAL "Do we want to build the CGAL library?" OFF)
@@ -139,10 +140,6 @@ if(OOMPH_ENABLE_PARANOID)
 endif()
 if(OOMPH_ENABLE_RANGE_CHECKING)
   add_compile_definitions("$<$<CONFIG:DEBUG>:RANGE_CHECKING>")
-endif()
-
-if(OOMPH_ENABLE_BUILD_OF_DOCS)
-  find_package(Doxygen REQUIRED)
 endif()
 
 # If we're using up-to-date external sources/dists then make sure we have a
