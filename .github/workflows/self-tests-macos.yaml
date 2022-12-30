@@ -34,9 +34,11 @@ jobs:
         if: matrix.build_info.mpi == 'ON'
         run: brew install open-mpi
 
-      # Have to specify CMAKE_PREFIX_PATH to tell CMake where to find the Homebrew-installed OpenBLAS library
       - name: Configure
-        run: cmake --preset ${{ matrix.build_info.cmake_preset }} -DCMAKE_PREFIX_PATH=$(brew --prefix openblas) -B build
+        run: cmake --preset ${{ matrix.build_info.cmake_preset }} -B build
+        env:
+          # Provide a hint to CMake for it to find the Homebrew-installed OpenBLAS library
+          CMAKE_PREFIX_PATH: $(brew --prefix openblas)
 
       - name: Build
         run: cmake --build build
