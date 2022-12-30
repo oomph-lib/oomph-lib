@@ -16,11 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        build_info:
-          [
-            { mpi: "OFF", cmake_preset: ci },
-            { mpi: "ON", cmake_preset: ci-mpi },
-          ]
+        build_info: [{ mpi: "OFF", preset: ci }, { mpi: "ON", preset: ci-mpi }]
 
     runs-on: ubuntu-latest
     steps:
@@ -35,7 +31,7 @@ jobs:
         run: sudo apt-get install openmpi-bin libopenmpi-dev
 
       - name: Configure
-        run: cmake --preset ${{ matrix.build_info.cmake_preset }} -B build
+        run: cmake --preset ${{ matrix.build_info.preset }} -B build
 
       - name: Build
         run: cmake --build build
