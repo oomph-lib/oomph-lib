@@ -16,7 +16,8 @@
 function(oomph_generate_doc_from)
   # Define the supported set of keywords
   set(PREFIX ARG)
-  set(FLAGS BUILD_DOCS_TARGET BUILD_DOXY_HEADER_TARGET)
+  set(FLAGS BUILD_DOCS_TARGET BUILD_DOXY_HEADER_TARGET
+      SUPPRESS_LATEX_IN_THIS_DIRECTORY)
   set(SINGLE_VALUE_ARGS OOMPH_ROOT_DIR DOCFILE)
   set(MULTI_VALUE_ARGS)
 
@@ -30,6 +31,8 @@ function(oomph_generate_doc_from)
   set(DOCFILE ${${PREFIX}_DOCFILE})
   set(BUILD_DOCS_TARGET ${${PREFIX}_BUILD_DOCS_TARGET})
   set(BUILD_DOXY_HEADER_TARGET ${${PREFIX}_BUILD_DOXY_HEADER_TARGET})
+  set(SUPPRESS_LATEX_IN_THIS_DIRECTORY
+      ${${PREFIX}_SUPPRESS_LATEX_IN_THIS_DIRECTORY})
 
   # TODO: Add sanity checks to make sure the oomph-lib root is correct
 
