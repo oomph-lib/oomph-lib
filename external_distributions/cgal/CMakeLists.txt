@@ -22,7 +22,7 @@ endif()
 # in, we'll be able to allow users to use their own pre-installed version of
 # CGAL which will save a lot of time at configure time. To do this, we can just
 # remove the use of the FORCE_ variable below.
-set(FORCE_BUILD_OWN_VERSION_OF_CGAL TRUE)
+set(FORCE_BUILD_OWN_VERSION_OF_CGAL TRUE CACHE INTERNAL "")
 
 # Configuration flags
 set(CGAL_DO_NOT_WARN_ABOUT_CMAKE_BUILD_TYPE TRUE CACHE INTERNAL "")
