@@ -97,6 +97,17 @@ with section("parse"):
             "flags": [],
             "kwargs": {}
         },
+        "oomph_generate_doc_from": {
+            "flags": [
+                "BUILD_DOCS_TARGET",
+                "BUILD_DOXY_HEADER_TARGET",
+                "SUPPRESS_LATEX_IN_THIS_DIRECTORY",
+            ],
+            "kwargs": {
+                "OOMPH_ROOT_DIR": 1,
+                "DOCFILE": 1,
+            }
+        },
         "set": {
             "flags": [],
             "kwargs": {}
