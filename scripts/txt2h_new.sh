@@ -36,9 +36,9 @@ rm -f .tmp/.$1.aux2
 rm -f .tmp/.labels.sed
 touch .tmp/.labels.sed
 
-AWK_COMMAND=$(which AWK)
-if [ $? -ne 0 ]; then
-  echo "Unable to locate AWK! Stopping here!"
+AWK_COMMAND="$(which awk)"
+if [ -z "$AWK_COMMAND" ]; then
+  echo "ERROR: Unable to locate AWK! Stopping here!"
   exit 1
 fi
 
