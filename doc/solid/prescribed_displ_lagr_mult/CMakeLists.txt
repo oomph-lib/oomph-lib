@@ -7,8 +7,8 @@ project(prescribed_displ_lagr_mult C CXX Fortran)
 
 set(OOMPH_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}/../../..")
 include("${OOMPH_ROOT_DIR}/cmake/OomphGenerateDocFrom.cmake")
-oomph_generate_doc_from(OOMPH_ROOT_DIR "${OOMPH_ROOT_DIR}" DOCFILE
-                        prescribed_displ_lagr_mult.txt)
+oomph_generate_doc_from(OOMPH_ROOT_DIR "${OOMPH_ROOT_DIR}"
+                        DOCFILE prescribed_displ_lagr_mult.txt)
 
 message(VERBOSE "Leaving prescribed_displ_lagr_mult subdirectory")
 # ------------------------------------------------------------------------------

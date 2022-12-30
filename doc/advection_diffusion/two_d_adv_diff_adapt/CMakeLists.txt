@@ -7,8 +7,8 @@ project(two_d_adv_diff_adapt C CXX Fortran)
 
 set(OOMPH_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}/../../..")
 include("${OOMPH_ROOT_DIR}/cmake/OomphGenerateDocFrom.cmake")
-oomph_generate_doc_from(OOMPH_ROOT_DIR "${OOMPH_ROOT_DIR}" DOCFILE
-                        two_d_adv_diff_adapt.txt)
+oomph_generate_doc_from(OOMPH_ROOT_DIR "${OOMPH_ROOT_DIR}"
+                        DOCFILE two_d_adv_diff_adapt.txt)
 
 message(VERBOSE "Leaving two_d_adv_diff_adapt subdirectory")
 # ------------------------------------------------------------------------------

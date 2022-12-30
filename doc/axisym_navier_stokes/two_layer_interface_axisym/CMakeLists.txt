@@ -7,8 +7,8 @@ project(two_layer_interface_axisym C CXX Fortran)
 
 set(OOMPH_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}/../../..")
 include("${OOMPH_ROOT_DIR}/cmake/OomphGenerateDocFrom.cmake")
-oomph_generate_doc_from(OOMPH_ROOT_DIR "${OOMPH_ROOT_DIR}" DOCFILE
-                        two_layer_interface_axisym.txt)
+oomph_generate_doc_from(OOMPH_ROOT_DIR "${OOMPH_ROOT_DIR}"
+                        DOCFILE two_layer_interface_axisym.txt)
 
 message(VERBOSE "Leaving two_layer_interface_axisym subdirectory")
 # ------------------------------------------------------------------------------

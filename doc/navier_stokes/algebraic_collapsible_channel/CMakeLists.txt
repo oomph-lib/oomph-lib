@@ -7,8 +7,8 @@ project(algebraic_collapsible_channel C CXX Fortran)
 
 set(OOMPH_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}/../../..")
 include("${OOMPH_ROOT_DIR}/cmake/OomphGenerateDocFrom.cmake")
-oomph_generate_doc_from(OOMPH_ROOT_DIR "${OOMPH_ROOT_DIR}" DOCFILE
-                        algebraic_collapsible_channel.txt)
+oomph_generate_doc_from(OOMPH_ROOT_DIR "${OOMPH_ROOT_DIR}"
+                        DOCFILE algebraic_collapsible_channel.txt)
 
 message(VERBOSE "Leaving algebraic_collapsible_channel subdirectory")
 # ------------------------------------------------------------------------------

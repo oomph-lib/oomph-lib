@@ -7,8 +7,8 @@ project(axi_static_cap C CXX Fortran)
 
 set(OOMPH_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}/../../..")
 include("${OOMPH_ROOT_DIR}/cmake/OomphGenerateDocFrom.cmake")
-oomph_generate_doc_from(OOMPH_ROOT_DIR "${OOMPH_ROOT_DIR}" DOCFILE
-                        axi_static_cap.txt)
+oomph_generate_doc_from(OOMPH_ROOT_DIR "${OOMPH_ROOT_DIR}"
+                        DOCFILE axi_static_cap.txt)
 
 message(VERBOSE "Leaving axi_static_cap subdirectory")
 # ------------------------------------------------------------------------------
