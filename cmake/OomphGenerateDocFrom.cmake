@@ -74,8 +74,7 @@ function(oomph_generate_doc_from)
   # check for gawk, nawk or mawk if its missing
   add_custom_target(
     generate_doxygenified_header_${PATH_HASH}
-    COMMAND if [ ! -f "${CMAKE_CURRENT_SOURCE_DIR}/${DOCFILE}" ]; then exit 1;
-            fi
+    COMMAND test -e "${CMAKE_CURRENT_SOURCE_DIR}/${DOCFILE}" || exit 1
     COMMAND "${OOMPH_ROOT_DIR}/scripts/txt2h_new.sh" ${DOCFILE}
     WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
     BYPRODUCTS "${CMAKE_CURRENT_SOURCE_DIR}/${DOCFILE}_doxygenified.h"
