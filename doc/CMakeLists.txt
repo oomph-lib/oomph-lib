@@ -27,8 +27,8 @@ add_custom_target(
   COMMAND "${OOMPH_ROOT_DIR}/scripts/make_index_html_in_demo_driver_dirs.bash"
   BYPRODUCTS ${INDEX_HTML_BYPRODUCTS_AS_LIST})
 
+# Recurse!
 set(SUBDIRS people)
-
 foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
 endforeach()
