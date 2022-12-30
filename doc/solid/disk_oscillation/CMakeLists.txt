@@ -7,8 +7,8 @@ project(disk_oscillation C CXX Fortran)
 
 set(OOMPH_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}/../../..")
 include("${OOMPH_ROOT_DIR}/cmake/OomphGenerateDocFrom.cmake")
-oomph_generate_doc_from(OOMPH_ROOT_DIR "${OOMPH_ROOT_DIR}" DOCFILE
-                        disk_oscillation.txt)
+oomph_generate_doc_from(OOMPH_ROOT_DIR "${OOMPH_ROOT_DIR}"
+                        DOCFILE disk_oscillation.txt)
 
 message(VERBOSE "Leaving disk_oscillation subdirectory")
 # ------------------------------------------------------------------------------

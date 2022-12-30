@@ -7,8 +7,8 @@ project(algebraic_free_boundary_poisson C CXX Fortran)
 
 set(OOMPH_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}/../../..")
 include("${OOMPH_ROOT_DIR}/cmake/OomphGenerateDocFrom.cmake")
-oomph_generate_doc_from(OOMPH_ROOT_DIR "${OOMPH_ROOT_DIR}" DOCFILE
-                        algebraic_free_boundary_poisson.txt)
+oomph_generate_doc_from(OOMPH_ROOT_DIR "${OOMPH_ROOT_DIR}"
+                        DOCFILE algebraic_free_boundary_poisson.txt)
 
 message(VERBOSE "Leaving algebraic_free_boundary_poisson subdirectory")
 # ------------------------------------------------------------------------------

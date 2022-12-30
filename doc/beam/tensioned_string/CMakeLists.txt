@@ -7,8 +7,8 @@ project(tensioned_string C CXX Fortran)
 
 set(OOMPH_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}/../../..")
 include("${OOMPH_ROOT_DIR}/cmake/OomphGenerateDocFrom.cmake")
-oomph_generate_doc_from(OOMPH_ROOT_DIR "${OOMPH_ROOT_DIR}" DOCFILE
-                        tensioned_string.txt)
+oomph_generate_doc_from(OOMPH_ROOT_DIR "${OOMPH_ROOT_DIR}"
+                        DOCFILE tensioned_string.txt)
 
 message(VERBOSE "Leaving tensioned_string subdirectory")
 # ------------------------------------------------------------------------------

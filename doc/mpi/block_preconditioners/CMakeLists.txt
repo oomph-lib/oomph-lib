@@ -7,8 +7,8 @@ project(block_preconditioners C CXX Fortran)
 
 set(OOMPH_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}/../../..")
 include("${OOMPH_ROOT_DIR}/cmake/OomphGenerateDocFrom.cmake")
-oomph_generate_doc_from(OOMPH_ROOT_DIR "${OOMPH_ROOT_DIR}" DOCFILE
-                        block_preconditioners.txt)
+oomph_generate_doc_from(OOMPH_ROOT_DIR "${OOMPH_ROOT_DIR}"
+                        DOCFILE block_preconditioners.txt)
 
 message(VERBOSE "Leaving block_preconditioners subdirectory")
 # ------------------------------------------------------------------------------

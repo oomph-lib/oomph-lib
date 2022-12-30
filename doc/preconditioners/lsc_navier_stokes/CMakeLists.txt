@@ -7,7 +7,7 @@ project(lsc_navier_stokes C CXX Fortran)
 
 set(OOMPH_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}/../../..")
 include("${OOMPH_ROOT_DIR}/cmake/OomphGenerateDocFrom.cmake")
-oomph_generate_doc_from(OOMPH_ROOT_DIR "${OOMPH_ROOT_DIR}" DOCFILE
-                        lsc_navier_stokes.txt)
+oomph_generate_doc_from(OOMPH_ROOT_DIR "${OOMPH_ROOT_DIR}"
+                        DOCFILE lsc_navier_stokes.txt)
 message(VERBOSE "Leaving lsc_navier_stokes subdirectory")
 # ------------------------------------------------------------------------------
