@@ -143,16 +143,19 @@ function(oomph_add_test)
   foreach(REQUIREMENT IN LISTS REQUIREMENTS_WITH_PATHS)
     if(SYMLINK_TEST_DATA_INSTEAD_OF_COPY)
       add_custom_command(
-        TARGET copy_${PATH_HASH} COMMAND ln -sf "${REQUIREMENT}"
-                                         "${CMAKE_CURRENT_BINARY_DIR}")
+        TARGET copy_${PATH_HASH}
+        POST_BUILD
+        COMMAND ln -sf "${REQUIREMENT}" "${CMAKE_CURRENT_BINARY_DIR}")
     else()
       if(IS_DIRECTORY "${REQUIREMENT}")
         add_custom_command(
-          TARGET copy_${PATH_HASH} COMMAND cp -ur "${REQUIREMENT}"
-                                           "${CMAKE_CURRENT_BINARY_DIR}")
+          TARGET copy_${PATH_HASH}
+          POST_BUILD
+          COMMAND cp -ur "${REQUIREMENT}" "${CMAKE_CURRENT_BINARY_DIR}")
       else()
         add_custom_command(
           TARGET copy_${PATH_HASH}
+          POST_BUILD
           COMMAND ${CMAKE_COMMAND} -E copy_if_different "${REQUIREMENT}"
                   "${CMAKE_CURRENT_BINARY_DIR}")
       endif()
@@ -161,7 +164,10 @@ function(oomph_add_test)
 
   # Identify the files that we'll copy as by-products so that they can be
   # cleaned up by running "make clean" if the user uses Makefile Generators
-  add_custom_command(TARGET copy_${PATH_HASH} BYPRODUCTS ${TEST_BYPRODUCTS})
+  add_custom_command(
+    TARGET copy_${PATH_HASH}
+    POST_BUILD
+    BYPRODUCTS ${TEST_BYPRODUCTS})
   # ----------------------------------------------------------------------------
 
   # ----------------------------------------------------------------------------
@@ -175,6 +181,7 @@ function(oomph_add_test)
   foreach(TARGET_DEPENDENCY IN LISTS TARGET_DEPENDENCIES)
     add_custom_command(
       TARGET build_targets_${PATH_HASH}
+      POST_BUILD
       COMMAND ${CMAKE_MAKE_PROGRAM} ${TARGET_DEPENDENCY}_${PATH_HASH}
       WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
   endforeach()
@@ -187,6 +194,7 @@ function(oomph_add_test)
 
   add_custom_command(
     TARGET clean_validation_dir_${PATH_HASH}
+    POST_BUILD
     COMMAND rm -rf "${CMAKE_CURRENT_BINARY_DIR}/Validation"
     WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
   # ----------------------------------------------------------------------------
