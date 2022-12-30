@@ -47,13 +47,9 @@ function(oomph_generate_doc_from)
     find_program(PATH_TO_PDFLATEX NAMES pdflatex)
   endif()
 
-  # Make sure we've got the correct docfile
-  if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${DOCFILE}")
-    message(
-      FATAL_ERROR
-        "File '${DOCFILE}' can not be found in directory '${CMAKE_CURRENT_SOURCE_DIR}/'!"
-    )
-  endif()
+  # NOTE: We can't verify that the docfile exists straight away as it might only
+  # get generated at build-time; see e.g. doc/index/oomph_index.txt, but we can
+  # check for it at build-time when it is needed.
 
   # Extract the filename stem and extension; make sure the docfile is a text
   # file
@@ -72,15 +68,17 @@ function(oomph_generate_doc_from)
   string(SHA1 PATH_HASH "${CMAKE_CURRENT_SOURCE_DIR}")
   string(SUBSTRING ${PATH_HASH} 0 7 PATH_HASH)
 
-  # Generate doxygen-ified header from ${DOCFILE_STEM}.txt
+  # Generate doxygen-ified header from ${DOCFILE}
   #
   # FIXME: txt2h_new.sh has a hard reliance on the system having 'awk'; need to
   # check for gawk, nawk or mawk if its missing
   add_custom_target(
     generate_doxygenified_header_${PATH_HASH}
-    COMMAND "${OOMPH_ROOT_DIR}/scripts/txt2h_new.sh" ${DOCFILE_STEM}.txt
+    COMMAND if [ ! -f "${CMAKE_CURRENT_SOURCE_DIR}/${DOCFILE}" ]; then exit 1;
+            fi
+    COMMAND "${OOMPH_ROOT_DIR}/scripts/txt2h_new.sh" ${DOCFILE}
     WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
-    BYPRODUCTS "${CMAKE_CURRENT_SOURCE_DIR}/${DOCFILE_STEM}.txt_doxygenified.h"
+    BYPRODUCTS "${CMAKE_CURRENT_SOURCE_DIR}/${DOCFILE}_doxygenified.h"
     VERBATIM)
 
   # Generate header and footer
@@ -127,14 +125,12 @@ function(oomph_generate_doc_from)
     add_custom_command(
       TARGET build_docs_${PATH_HASH}
       POST_BUILD
-      COMMAND cp ${DOCFILE_STEM}.txt_doxygenified.h
-              ${DOCFILE_STEM}.txt_doxygenified.h.junk
+      COMMAND cp ${DOCFILE}_doxygenified.h ${DOCFILE}_doxygenified.h.junk
       COMMAND
         sed
         [=[s/\*\*\//\n<hr>\n<hr>\n\\\section pdf PDF file\nA <a href=\"..\/latex\/refman.pdf\">pdf version<\/a> of this document is available.\n\*\*\//g]=]
-        ${DOCFILE_STEM}.txt_doxygenified.h.junk >
-        ${DOCFILE_STEM}.txt_doxygenified.h
-      COMMAND rm ${DOCFILE_STEM}.txt_doxygenified.h.junk
+        ${DOCFILE}_doxygenified.h.junk > ${DOCFILE}_doxygenified.h
+      COMMAND rm ${DOCFILE}_doxygenified.h.junk
       WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
       VERBATIM)
   endif()
