@@ -5,10 +5,11 @@ message(VERBOSE "Entered the_data_structure subdirectory")
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(the_data_structure C CXX Fortran)
 
-set(OOMPH_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}/../")
+set(OOMPH_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}/../../")
 include("${OOMPH_ROOT_DIR}/cmake/OomphGenerateDocFrom.cmake")
-oomph_generate_the_data_structure_from(
-  OOMPH_ROOT_DIR "${OOMPH_ROOT_DIR}" DOCFILE the_data_structure.txt
+oomph_generate_doc_from(
+  OOMPH_ROOT_DIR "${OOMPH_ROOT_DIR}"
+  DOCFILE the_data_structure.txt
   BUILD_DOCS_TARGET)
 
 add_custom_command(
