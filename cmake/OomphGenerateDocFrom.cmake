@@ -154,16 +154,12 @@ function(oomph_generate_doc_from)
       COMMAND "${OOMPH_ROOT_DIR}/scripts/customise_latex.bash" refman.tex.back >
               refman.tex
       COMMAND "${OOMPH_ROOT_DIR}/scripts/tweak_doxygen_latex_style_file.bash"
-      COMMAND make -i > /dev/null || make -i
+      COMMAND make -i > /dev/null || make -i || echo "PDF build failed!"
       COMMAND mv refman.pdf ../${DOCFILE_STEM}.pdf
       COMMAND ln -s ../${DOCFILE_STEM}.pdf refman.pdf
       WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
       BYPRODUCTS "${CMAKE_CURRENT_SOURCE_DIR}/${DOCFILE_STEM}.pdf"
       VERBATIM)
-  endif()
-
-  if(TARGET build_docs)
-    add_dependencies(build_docs build_docs_${PATH_HASH})
   endif()
 endfunction()
 # ------------------------------------------------------------------------------

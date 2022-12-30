@@ -9,11 +9,6 @@ set(OOMPH_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}/../")
 include("${OOMPH_ROOT_DIR}/cmake/OomphGenerateDocFrom.cmake")
 oomph_generate_doc_from(OOMPH_ROOT_DIR "${OOMPH_ROOT_DIR}" DOCFILE doc.txt)
 
-# Target to build documentation for all subdirectories of doc; dependencies will
-# be added to this target through calls to oomph_generate_doc_from(...) in the
-# subdirectories
-add_custom_target(build_docs ALL)
-
 # Get the list of index.html files that will be produced by
 # make_index_html_in_demo_driver_dirs.bash
 execute_process(
@@ -29,6 +24,9 @@ add_custom_target(
 
 # TODO: Discuss the removal of "the_distribution"; it's based on the
 # soon-to-be-deprecated Makefile.am stuff
+
+# FIXME: Switch to using add_custom_command(...) instead of target to avoid
+# constantly rebuilding...
 
 # Recurse!
 set(SUBDIRS
