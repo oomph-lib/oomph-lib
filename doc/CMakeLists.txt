@@ -22,8 +22,8 @@ add_custom_target(
   COMMAND "${OOMPH_ROOT_DIR}/scripts/make_index_html_in_demo_driver_dirs.bash"
   BYPRODUCTS ${INDEX_HTML_BYPRODUCTS_AS_LIST})
 
-# TODO: Discuss the removal of "the_distribution"; it's based on the
-# soon-to-be-deprecated Makefile.am stuff
+# TODO: Update "the_distribution"; it's based on the soon-to-be-deprecated
+# Makefile.am stuff
 
 # TODO: Switch to using add_custom_command(...) in OomphGenerateDocFrom.cmake
 # instead of add_custom_target(...) to avoid constantly rebuilding...
@@ -42,6 +42,7 @@ set(SUBDIRS
     FAQ
     meshes
     tar_files
+    the_distribution
     example_code_list
     the_data_structure
     quick_guide
