@@ -4,8 +4,8 @@ message(VERBOSE "Entered static_single_layer subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(static_single_layer C CXX Fortran)
-
 set(OOMPH_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}/../../..")
+
 include("${OOMPH_ROOT_DIR}/cmake/OomphGenerateDocFrom.cmake")
 oomph_generate_doc_from(OOMPH_ROOT_DIR "${OOMPH_ROOT_DIR}"
                         DOCFILE static_single_layer.txt)

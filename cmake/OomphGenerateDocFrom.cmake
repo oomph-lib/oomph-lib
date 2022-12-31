@@ -11,6 +11,7 @@
 #
 # =============================================================================
 # cmake-format: on
+include_guard()
 
 # FIXME: Switch to using add_custom_command(...) instead of target to avoid
 # constantly rebuilding...
@@ -19,8 +20,7 @@
 function(oomph_generate_doc_from)
   # Define the supported set of keywords
   set(PREFIX ARG)
-  set(FLAGS BUILD_DOCS_TARGET BUILD_DOXY_HEADER_TARGET
-      SUPPRESS_LATEX_IN_THIS_DIRECTORY)
+  set(FLAGS BUILD_DOCS_TARGET SUPPRESS_LATEX_IN_THIS_DIRECTORY)
   set(SINGLE_VALUE_ARGS OOMPH_ROOT_DIR DOCFILE)
   set(MULTI_VALUE_ARGS)
 
@@ -33,7 +33,6 @@ function(oomph_generate_doc_from)
   set(OOMPH_ROOT_DIR ${${PREFIX}_OOMPH_ROOT_DIR})
   set(DOCFILE ${${PREFIX}_DOCFILE})
   set(BUILD_DOCS_TARGET ${${PREFIX}_BUILD_DOCS_TARGET})
-  set(BUILD_DOXY_HEADER_TARGET ${${PREFIX}_BUILD_DOXY_HEADER_TARGET})
   set(SUPPRESS_LATEX_IN_THIS_DIRECTORY
       ${${PREFIX}_SUPPRESS_LATEX_IN_THIS_DIRECTORY})
 
@@ -41,7 +40,7 @@ function(oomph_generate_doc_from)
 
   # Look for Doxygen (mandatory) and pdflatex (not mandatory)
   if(NOT Doxygen_FOUND)
-    find_package(Doxygen 1.9.2 REQUIRED)
+    find_package(Doxygen 1.9.6 REQUIRED)
   endif()
   if(NOT DEFINED PATH_TO_PDFLATEX)
     find_program(PATH_TO_PDFLATEX NAMES pdflatex)
@@ -71,76 +70,73 @@ function(oomph_generate_doc_from)
     )
   endif()
 
+  # Generate doxygen-ified header from ${DOCFILE}
+  #
+  # FIXME: txt2h_new.sh has a hard reliance on the system having 'awk'; need to
+  # check for gawk, nawk or mawk if its missing
+
+  # Add a link in the doxygen-ified header to the to-be-generated PDF doc
+  if(NOT SUPPRESS_LATEX_IN_THIS_DIRECTORY)
+    add_custom_command(
+      OUTPUT "${CMAKE_CURRENT_SOURCE_DIR}/${DOCFILE}_doxygenified.h"
+      COMMAND "${OOMPH_ROOT_DIR}/scripts/txt2h_new.sh" ${DOCFILE}
+      COMMAND cp ${DOCFILE}_doxygenified.h ${DOCFILE}_doxygenified.h.junk
+      COMMAND
+        sed
+        [=[s/\*\*\//\n<hr>\n<hr>\n\\\section pdf PDF file\nA <a href=\"..\/latex\/refman.pdf\">pdf version<\/a> of this document is available.\n\*\*\//g]=]
+        ${DOCFILE}_doxygenified.h.junk > ${DOCFILE}_doxygenified.h
+      COMMAND rm -f ${DOCFILE}_doxygenified.h.junk
+      DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/${DOCFILE}"
+      WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+      VERBATIM)
+  else()
+    add_custom_command(
+      OUTPUT "${CMAKE_CURRENT_SOURCE_DIR}/${DOCFILE}_doxygenified.h"
+      COMMAND "${OOMPH_ROOT_DIR}/scripts/txt2h_new.sh" ${DOCFILE}
+      DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/${DOCFILE}"
+      WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+      VERBATIM)
+  endif()
+
+  # Generate header and footer
+  add_custom_command(
+    OUTPUT "${CMAKE_CURRENT_SOURCE_DIR}/oomph-lib_header.html"
+           "${CMAKE_CURRENT_SOURCE_DIR}/oomph-lib_footer.html"
+    COMMAND "${OOMPH_ROOT_DIR}/scripts/build_oomph_html_header.sh"
+            "${RELATIVE_PATH_TO_OOMPH_ROOT_DIR}"
+    WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+    VERBATIM)
+
+  # Pull "doc/extra_latex_style_files/" folder into the current folder. If we're
+  # in the doc/ folder, don't do anything
+  set(LATEX_STYLE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/extra_latex_style_files")
+  if((NOT EXISTS "${LATEX_STYLE_FILES}") OR (IS_SYMLINK "${LATEX_STYLE_FILES}"))
+    add_custom_command(
+      OUTPUT "${CMAKE_CURRENT_SOURCE_DIR}/extra_latex_style_files"
+      COMMAND ln -sf "${OOMPH_ROOT_DIR}/doc/extra_latex_style_files"
+      WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+      VERBATIM)
+  endif()
+
   # Hash the path to create a unique ID for our targets but shorten it to the
   # first 7 characters for brevity. A unique ID is required to avoid clashes
   # with targets in other directories
   string(SHA1 PATH_HASH "${CMAKE_CURRENT_SOURCE_DIR}")
   string(SUBSTRING ${PATH_HASH} 0 7 PATH_HASH)
 
-  # Generate doxygen-ified header from ${DOCFILE}
-  #
-  # FIXME: txt2h_new.sh has a hard reliance on the system having 'awk'; need to
-  # check for gawk, nawk or mawk if its missing
-  add_custom_target(
-    generate_doxygenified_header_${PATH_HASH}
-    COMMAND test -e "${CMAKE_CURRENT_SOURCE_DIR}/${DOCFILE}" || exit 1
-    COMMAND "${OOMPH_ROOT_DIR}/scripts/txt2h_new.sh" ${DOCFILE}
-    WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
-    BYPRODUCTS "${CMAKE_CURRENT_SOURCE_DIR}/${DOCFILE}_doxygenified.h"
-    VERBATIM)
-
-  # Generate header and footer
-  add_custom_target(
-    generate_header_${PATH_HASH}
-    COMMAND "${OOMPH_ROOT_DIR}/scripts/build_oomph_html_header.sh"
-            "${RELATIVE_PATH_TO_OOMPH_ROOT_DIR}"
-    WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
-    BYPRODUCTS "${CMAKE_CURRENT_SOURCE_DIR}/oomph-lib_header.html"
-               "${CMAKE_CURRENT_SOURCE_DIR}/oomph-lib_footer.html"
-    VERBATIM)
-
   # After the doxygen-ified header and header/footer have been generated, start
   # the build of html/index.html
   add_custom_target(
     build_docs_${PATH_HASH} ALL
-    DEPENDS generate_doxygenified_header_${PATH_HASH}
-            generate_header_${PATH_HASH})
+    DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/${DOCFILE}_doxygenified.h"
+            "${CMAKE_CURRENT_SOURCE_DIR}/oomph-lib_header.html"
+            "${CMAKE_CURRENT_SOURCE_DIR}/oomph-lib_footer.html"
+            "${CMAKE_CURRENT_SOURCE_DIR}/extra_latex_style_files")
 
   # Set the flag BUILD_DOCS_TARGET to the name of the build_docs_* target incase
   # the user needs to add their own dependencies
   if(BUILD_DOCS_TARGET)
     set(BUILD_DOCS_TARGET build_docs_${PATH_HASH} PARENT_SCOPE)
-  endif()
-  if(BUILD_DOXY_HEADER_TARGET)
-    set(BUILD_DOXY_HEADER_TARGET generate_doxygenified_header_${PATH_HASH}
-        PARENT_SCOPE)
-  endif()
-
-  # Pull the "extra_latex_style_files" folder into the current folder
-  set(LATEX_STYLE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/extra_latex_style_files")
-  if((NOT EXISTS "${LATEX_STYLE_FILES}") OR (IS_SYMLINK "${LATEX_STYLE_FILES}"))
-    add_custom_command(
-      TARGET build_docs_${PATH_HASH}
-      POST_BUILD
-      COMMAND ln -sf "${OOMPH_ROOT_DIR}/doc/extra_latex_style_files"
-      BYPRODUCTS "${CMAKE_CURRENT_SOURCE_DIR}/extra_latex_style_files"
-      WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
-      VERBATIM)
-  endif()
-
-  # Add a link in the doxygen-ified header to the to-be-generated PDF doc
-  if(NOT SUPPRESS_LATEX_IN_THIS_DIRECTORY)
-    add_custom_command(
-      TARGET build_docs_${PATH_HASH}
-      POST_BUILD
-      COMMAND cp ${DOCFILE}_doxygenified.h ${DOCFILE}_doxygenified.h.junk
-      COMMAND
-        sed
-        [=[s/\*\*\//\n<hr>\n<hr>\n\\\section pdf PDF file\nA <a href=\"..\/latex\/refman.pdf\">pdf version<\/a> of this document is available.\n\*\*\//g]=]
-        ${DOCFILE}_doxygenified.h.junk > ${DOCFILE}_doxygenified.h
-      COMMAND rm ${DOCFILE}_doxygenified.h.junk
-      WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
-      VERBATIM)
   endif()
 
   # Build! Build! Build!
@@ -154,6 +150,8 @@ function(oomph_generate_doc_from)
                "${CMAKE_CURRENT_SOURCE_DIR}/latex/"
     VERBATIM)
 
+  # To ensure we can clean up the html/ and latex/ directories (i.e. not plain
+  # files), we have to set the ADDITIONAL_CLEAN_FILES property. Bit odd...
   set_property(
     TARGET build_docs_${PATH_HASH}
     APPEND

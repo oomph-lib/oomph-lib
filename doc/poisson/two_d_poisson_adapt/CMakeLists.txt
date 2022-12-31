@@ -4,8 +4,8 @@ message(VERBOSE "Entered two_d_poisson_adapt subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(two_d_poisson_adapt C CXX Fortran)
-
 set(OOMPH_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}/../../..")
+
 include("${OOMPH_ROOT_DIR}/cmake/OomphGenerateDocFrom.cmake")
 oomph_generate_doc_from(OOMPH_ROOT_DIR "${OOMPH_ROOT_DIR}"
                         DOCFILE two_d_poisson_adapt.txt)
