@@ -6,6 +6,11 @@ cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(index C CXX Fortran)
 set(OOMPH_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}/../../")
 
+# Get relative path to oomph-lib root
+cmake_path(
+  RELATIVE_PATH OOMPH_ROOT_DIR BASE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+  OUTPUT_VARIABLE RELATIVE_PATH_TO_OOMPH_ROOT_DIR)
+
 # Define a rule to generate oomph_index.txt; oomph_generate_doc_from(...) will
 # generate a target that will make sure the docfile is produced before building
 # the docs
@@ -22,11 +27,6 @@ oomph_generate_doc_from(
   OOMPH_ROOT_DIR "${OOMPH_ROOT_DIR}"
   DOCFILE oomph_index.txt
   BUILD_DOXY_HEADER_TARGET)
-
-# Get relative path to oomph-lib root
-cmake_path(
-  RELATIVE_PATH OOMPH_ROOT_DIR BASE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
-  OUTPUT_VARIABLE RELATIVE_PATH_TO_OOMPH_ROOT_DIR)
 
 # Strip trailing slash (not necessary, just for prettiness...)
 string(REGEX REPLACE "/$" "" RELATIVE_PATH_TO_OOMPH_ROOT_DIR
