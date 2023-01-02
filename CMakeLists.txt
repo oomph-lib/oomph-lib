@@ -175,14 +175,14 @@ if(BLA_VENDOR
   # Store a list of directories containing the BLAS libraries
   set(BLAS_DIRS)
   foreach(BLAS_LIBRARY IN LISTS BLAS_LIBRARIES)
-    get_filename_component(BLAS_DIR ${BLAS_LIBRARY} DIRECTORY)
+    cmake_path(GET BLAS_LIBRARY PARENT_PATH BLAS_DIR)
     list(APPEND BLAS_DIRS ${BLAS_DIR})
   endforeach()
 
   # Store a list of directories containing the LAPACK libraries
   set(LAPACK_DIRS)
   foreach(LAPACK_LIBRARY IN LISTS LAPACK_LIBRARIES)
-    get_filename_component(LAPACK_DIR ${LAPACK_LIBRARY} DIRECTORY)
+    cmake_path(GET LAPACK_LIBRARY PARENT_PATH LAPACK_DIR)
     list(APPEND LAPACK_DIRS ${LAPACK_DIR})
   endforeach()
 endif()
