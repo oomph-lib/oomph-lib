@@ -18,7 +18,8 @@ endif()
 # install to the install/ subdirectory. However, if the user builds with the
 # flag -DENABLE_INSTALL_AS_SUPERUSER=ON to force us to use the default system
 # install path
-if((NOT ENABLE_INSTALL_AS_SUPERUSER)
+if(PROJECT_IS_TOP_LEVEL
+   AND (NOT ENABLE_INSTALL_AS_SUPERUSER)
    AND (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT))
   set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/install" CACHE PATH
       "Default installation path" FORCE)
@@ -63,11 +64,20 @@ set(OOMPH_CMAKE_EXPORTS_FILE "${OOMPH_BUILD_DIR}/${PROJECT_NAME}Exports.cmake")
 # CMAKE_INSTALL[_FULL]_INCLUDEDIR
 include(GNUInstallDirs)
 
-# Set the install paths
-set(OOMPH_INSTALL_LIB_DIR "${CMAKE_INSTALL_FULL_LIBDIR}/${PROJECT_NAME}")
-set(OOMPH_INSTALL_CONFIG_DIR "${CMAKE_INSTALL_FULL_LIBDIR}/cmake/${PROJECT_NAME}")
-set(OOMPH_INSTALL_INCLUDE_DIR "${CMAKE_INSTALL_FULL_INCLUDEDIR}/${PROJECT_NAME}")
-set(OOMPH_INSTALL_BIN_DIR "${CMAKE_INSTALL_FULL_BINDIR}/${PROJECT_NAME}")
+# Set the install paths. Note that we don't use the CMAKE_INSTALL_<XXX>DIR
+# (relative paths; e.g. bin/, lib/, include/) variables instead of the
+# CMAKE_INSTALL_FULL_<XXX>DIR (absolute paths; e.g. /usr/bin/, /usr/lib/,
+# /usr/include) so that the user can still override the installation
+# destination after the configuration step. For example, the user may configure
+# and build oomph-lib but later pick a custom install path with
+#
+# cmake --install . --prefix <new-install-path>
+#
+# We have to make sure that we can handle this case
+set(OOMPH_INSTALL_LIB_DIR "${CMAKE_INSTALL_LIBDIR}/${PROJECT_NAME}")
+set(OOMPH_INSTALL_CONFIG_DIR "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}")
+set(OOMPH_INSTALL_INCLUDE_DIR "${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}")
+set(OOMPH_INSTALL_BIN_DIR "${CMAKE_INSTALL_BINDIR}/${PROJECT_NAME}")
 
 # Silence warnings on MacOS about targets of ranlib having no symbols. This
 # occurs when there is no code to be compiled, e.g. when #ifdef directives

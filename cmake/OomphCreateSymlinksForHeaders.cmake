@@ -13,7 +13,6 @@
 #
 # USAGE:
 # ------
-#
 #  include(OomphCreateSymlinksForHeaders)
 #  oomph_create_symlinks_for_headers(REAL_DIR    <dir-to-symlink-to>
 #                                    SYMLINK_DIR <dir-to-symlink-from>
@@ -46,10 +45,11 @@ function(oomph_create_symlinks_for_headers)
     if(HAS_PARENT_PATH_COMPONENT)
       cmake_path(GET HEADER FILENAME HEADER_FILENAME)
       set(TARGET "${HEADER}")
-      set(LINK "${${PREFIX}_SYMLINK_DIR}/${HEADER_FILENAME}")
+      set(LINK
+          "${CMAKE_INSTALL_PREFIX}/${${PREFIX}_SYMLINK_DIR}/${HEADER_FILENAME}")
     else()
       set(TARGET "${${PREFIX}_REAL_DIR}/${HEADER}")
-      set(LINK "${${PREFIX}_SYMLINK_DIR}/${HEADER}")
+      set(LINK "${CMAKE_INSTALL_PREFIX}/${${PREFIX}_SYMLINK_DIR}/${HEADER}")
     endif()
 
     # Symlink and print info
