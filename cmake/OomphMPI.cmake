@@ -53,18 +53,13 @@ endfunction()
 # Look for MPI functionality if we haven't found it yet
 if(NOT MPI_FOUND)
   if(OOMPH_USE_MPI_FROM)
-    set(BACKUP_CMAKE_PREFIX_PATH "${CMAKE_PREFIX_PATH}" CACHE INTERNAL "")
+    set(BACKUP_CMAKE_PREFIX_PATH "${CMAKE_PREFIX_PATH}")
     set(CMAKE_PREFIX_PATH "${OOMPH_USE_MPI_FROM}" CACHE INTERNAL "" FORCE)
     find_package(MPI REQUIRED)
     set(CMAKE_PREFIX_PATH "${BACKUP_CMAKE_PREFIX_PATH}" CACHE INTERNAL "" FORCE)
   endif()
   find_package(MPI REQUIRED)
   oomph_check_mpi()
-endif()
-
-# The number of processes to use with MPI tests
-if(NOT DEFINED OOMPH_MPI_NUM_PROC)
-  set(OOMPH_MPI_NUM_PROC 2)
 endif()
 
 # Set the command used to run MPI-enabled self-tests

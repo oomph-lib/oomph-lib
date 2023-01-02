@@ -1007,6 +1007,7 @@ Option                                    | Description                         
 `OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY`   | Build tests with library build                                               | OFF
 `OOMPH_DONT_SILENCE_USELESS_WARNINGS`     | Display (harmless) warnings from external_src/ and src/ that are silenced    | OFF
 `OOMPH_ENABLE_MPI`                        | Enable the use of MPI for parallel processing                                | OFF
+`OOMPH_MPI_NUM_PROC`                      | Number of processes to use with MPI-enabled tests                            | 2
 `OOMPH_ENABLE_PARANOID`                   | Enable the PARANOID flag in Debug                                            | OFF
 `OOMPH_ENABLE_RANGE_CHECKING`             | Enable RANGE_CHECKING flag in Debug                                          | OFF
 `OOMPH_ENABLE_SYMBOLIC_LINKS_FOR_HEADERS` | Install symbolic links to the headers instead of copying them                | ON

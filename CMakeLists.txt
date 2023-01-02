@@ -86,7 +86,8 @@ option(OOMPH_USE_DEPRECATED_SUPERLU "Use oomph-lib's deprecated version of Super
 # TODO: Discuss whether to keep this flag
 #
 # Only has an effect if OOMPH_ENABLE_MPI is ON
-option(OOMPH_WANT_MPI_VARIABLENP "Enable the use of MPI with np > 2" ON)
+option(OOMPH_MPI_NUM_PROC "Number of processes to use with MPI-enabled tests" 2)
+option(OOMPH_WANT_MPI_VARIABLENP "Enable the use of MPI tests with np > 2" ON)
 
 # Fine-grained control of build of external_srcs.
 # FIXME: Make sure the SUPPRESS variables below actually work
@@ -130,6 +131,14 @@ endif()
 # Set up MPI functionality (see cmake/OomphMPI.cmake)
 if(OOMPH_ENABLE_MPI)
   include(OomphMPI)
+
+  # Sanity check
+  if(NOT OOMPH_MPI_NUM_PROC MATCHES "^[0-9]+$")
+    message(
+      FATAL_ERROR
+        "The flag 'OOMPH_MPI_NUM_PROC' must be set an integer, not ${OOMPH_MPI_NUM_PROC}!"
+    )
+  endif()
 endif()
 
 # Add PARANOID and RANGE_CHECKING for Debug configurations (ONLY!) if desired.
