@@ -39,7 +39,7 @@ project(
   oomphlib
   DESCRIPTION "A finite-element library for simulating multi-physics problems."
   VERSION 2.9.0
-  HOMEPAGE_URL "http://oomph-lib.maths.man.ac.uk/doc/html/index.html"
+  HOMEPAGE_URL "https://oomph-lib.github.io/oomph-lib/doc/html/"
   LANGUAGES C CXX Fortran)
 
 # ---------------------------[ INITIAL PROJECT SETUP ]--------------------------
