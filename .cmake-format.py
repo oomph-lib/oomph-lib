@@ -32,6 +32,18 @@ with section("parse"):
                 "TEST_NAME": "*"
             }
         },
+        "oomph_add_pure_cpp_test": {
+            "flags": [
+                "SILENCE_MISSING_VALIDATA_WARNING",
+            ],
+            "kwargs": {
+                "EXTRA_REQUIRES": "*",
+                "LABELS": "*",
+                "TARGET_DEPENDENCIES": "*",
+                "TEST_NAME": "*",
+                "RUN_COMMAND": "*"
+            }
+        },
         "oomph_create_combined_header": {
             "flags": [],
             "kwargs": {

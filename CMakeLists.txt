@@ -253,8 +253,10 @@ include(OomphInstallLibrary)
 # larger project hierarchy
 if(OOMPH_IS_MAIN_PROJECT AND OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
   include(CTest)
-  include(OomphAddTest)
   include(OomphAddExecutable)
+  include(OomphAddTest)
+  include(OomphAddPureCppTest)
+  include(OomphGetHashedTargetName)
   add_subdirectory(demo_drivers)
   # FIXME: Need to integrate self_test files into the self-test framework
   # add_subdirectory(self_test)
