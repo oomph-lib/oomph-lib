@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -1404,7 +1404,7 @@ namespace oomph
     void set_n_node(const unsigned& n)
     {
       // This should only be done once, in a Node constructor
-      //#ifdef PARANOID
+      // #ifdef PARANOID
       // if(Node_pt)
       // {
       //  OomphLibWarning(
@@ -1412,7 +1412,7 @@ namespace oomph
       //   "FiniteElement::set_n_node()",
       //   OOMPH_EXCEPTION_LOCATION);
       // }
-      //#endif
+      // #endif
       // Delete any previous storage to avoid memory leaks
       // This will only happen in very special cases
       delete[] Node_pt;

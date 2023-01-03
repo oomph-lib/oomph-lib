@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -29,7 +29,7 @@
 // Temporary flag to enable full annotation of multi domain
 // comms (but keep alive because it would be such a bloody pain to
 // rewrite it if things ever go wrong again...)
-//#define ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+// #define ANNOTATE_MULTI_DOMAIN_COMMUNICATION
 
 // Include guards to prevent multiple inclusion of the header
 #ifndef OOMPH_MISSING_MASTERS_HEADER

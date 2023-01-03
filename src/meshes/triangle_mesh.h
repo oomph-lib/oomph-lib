@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -2210,7 +2210,7 @@ namespace oomph
   //=========================================================================
   // Temporary flag to enable full annotation of RefineableTriangleMesh
   // comms
-  //#define ANNOTATE_REFINEABLE_TRIANGLE_MESH_COMMUNICATION
+  // #define ANNOTATE_REFINEABLE_TRIANGLE_MESH_COMMUNICATION
   template<class ELEMENT>
   class RefineableTriangleMesh : public virtual TriangleMesh<ELEMENT>,
                                  public virtual RefineableMeshBase
@@ -3134,7 +3134,7 @@ namespace oomph
     // Methods for load balancing
     // ====================================================================
 
-    //#define ANNOTATE_REFINEABLE_TRIANGLE_MESH_COMMUNICATION_LOAD_BALANCE
+    // #define ANNOTATE_REFINEABLE_TRIANGLE_MESH_COMMUNICATION_LOAD_BALANCE
 
     // *********************************************************************
     // BEGIN: Methods to perform load balance
