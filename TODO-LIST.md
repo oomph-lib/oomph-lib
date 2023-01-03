@@ -10,7 +10,7 @@
 * Add support for:
   * [ ] MUMPS
     * [ ] Do we need Scotch/METIS?
-    * [ ] Sequential build
+    * [x] Sequential build
 * Patch support for libraries using oomph-lib-built BLAS/LAPACK:
   * Hypre and Trilinos rely on absolute paths to blas and lapack which doesn't work if they are built by oomph-lib...
   * [ ] Hypre
@@ -34,11 +34,11 @@
 
 ### Pure-CMake
 
+* [ ] Add functionality to specify `--gmsh_command_line`
 * [ ] Update to C++17 again to patch issue in `demo_drivers/gzip/one_d_poisson`
   * Will need to test with Trilinos as it used a function removed in C++17
 * [ ] Update MPI tests to specify [PROCESSORS](https://cmake.org/cmake/help/latest/prop_test/PROCESSORS.html#prop_test:PROCESSORS) rather than forcing everything to run sequentially
 * [ ] Update `oomph_add_test()` to take args for `validate.sh` and explicitly pass e.g. "${OOMPH_ROOT_DIR}" and "${OOMPH_MPI_RUN_COMMAND}"
-* [ ] Add functionality to specify `--gmsh_command_line`
   * Should help make things transparent and easier for users to control
 * [ ] Update every test name to be the path to the demo driver; e.g. `mpi.distribution.adaptive_driven_cavity`
 * [ ] Patch `ninja oomph_uninstall` command for Ninja Multi-Config
@@ -66,12 +66,12 @@
 
 ### Features to add or patch
 
+* [ ] Add Intel MKL BLAS support
 * [ ] Implement `oomph_pure_cpp_test`
   * [ ] C++ side: Add a struct to generically handle the args for a pure C++ test
-* [ ] Add Intel MKL BLAS support
 * [ ] Replace current BLAS/LAPACK with OpenBLAS
   * Looks quite complex... Appears to contain optimised kernels for different operating systems...
-* [ ] Download CMake oomph-lib to a folder that has a space in the name
+* [ ] Download CMake `oomph-lib` to a folder that has a space in the name
 * [ ] Fix MPI-enabled demo drivers that are broken on macOS
 * [ ] Update GitHub self-tests to only run after pushing .h, .c, .cc, CMakeLists.txt code (see e.g. [here](https://github.com/scivision/mumps/blob/v5.5.1.7/.github/workflows/ci.yml)).
 * [ ] Add option to build with `ccache` support
@@ -140,7 +140,8 @@ Include tasks here that likely need some collaboration with Matthias
   * Set `OOMPH_MPI_NUM_PROC`
 * [x] Update installation paths to allow setting the installation prefix AFTER the build, e.g. `cmake --install . --prefix <PATH>`
   * [x] Change the `OOMPH_INSTALL_<XXX>_DIR` variables to not be absolute paths
-  * [x] Add warning to README.md that it won't work with `OOMPH_ENABLE_SYMBOLIC_LINKS_FOR_HEADERS=ON`
+  * [x] ~~Add warning to README.md that it won't work with `OOMPH_ENABLE_SYMBOLIC_LINKS_FOR_HEADERS=ON`~~
+  * [x] Remove symbolic linking for headers
 * [x] Set `<CONFIG>_POSTFIX` for each config type
   * Useful when looking at files in `install/` and trying to remember what build type they correspond to
 * [x] Print additional helpful info during configure step, e.g. install destination
