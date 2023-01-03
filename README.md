@@ -1219,10 +1219,9 @@ targets, CMake allows tests to share the same name.
   - [ ] List of failed tests: `cat build/Testing/Temporary/LastTestsFailed.log`
   - [ ] Repeat failed test and log output: `--rerun-failed --output-on-failure`
   - [ ] Disable test: `set_tests_properties(<test-name> PROPERTIES DISABLED YES)`
-  - [ ] Demand MPI programs to run in serial: `set_tests_properties(FooWithBar PROPERTIES RUN_SERIAL)`
-  - [ ] Note that in all cases here, if you specify the target name, you must rememeber to append the SHA1 path hash.
-- [ ] The general workflow:
-  - [ ] Creating your own drivers (in e.g. `private/`)
+  - [ ] Demand number of processors required by MPI programs:
+    - Standard MPI run command: `set_tests_properties(FooWithBar PROPERTIES PROCESSORS ${OOMPH_MPI_NUM_PROC})`
+    - Variable NP: `set_tests_properties(FooWithBar PROPERTIES PROCESSORS <N>)`, where `N` is the maximum number of processors required
 
 ## A deeper dive into the build system
 
