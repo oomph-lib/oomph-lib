@@ -277,28 +277,7 @@ function(oomph_library_config)
   set(ALL_HEADERS ${HEADERS} ${HEADERS_NO_COMBINE} ${SOURCES_NO_BUILD})
 
   # Install (or symlink) the headers
-  if(OOMPH_ENABLE_SYMBOLIC_LINKS_FOR_HEADERS)
-    include(OomphCreateSymlinksForHeaders)
-    oomph_create_symlinks_for_headers(
-      REAL_DIR "${CMAKE_CURRENT_SOURCE_DIR}"
-      SYMLINK_DIR "${INCLUDE_DIR_FOR_THIS_LIBRARY}"
-      HEADERS ${ALL_HEADERS})
-
-    # Add the symlinks to the list of files we need to clean up manually. Note
-    # that we have to hardcode the installation prefix into this variable
-    # otherwise the 'oomph_uninstall' command won't work correctly
-    foreach(HEADER IN LISTS ALL_HEADERS)
-      list(APPEND EXTRA_INSTALLED_FILES_FOR_CLEAN_UP
-           "${CMAKE_INSTALL_PREFIX}/${INCLUDE_DIR_FOR_THIS_LIBRARY}/${HEADER}")
-    endforeach()
-  else()
-    install(FILES ${ALL_HEADERS} DESTINATION "${INCLUDE_DIR_FOR_THIS_LIBRARY}")
-  endif()
-
-  # Since we're installing/symlinking the headers, we need to remember them so
-  # that we can clean them up later
-  set(EXTRA_INSTALLED_FILES_FOR_CLEAN_UP ${EXTRA_INSTALLED_FILES_FOR_CLEAN_UP}
-      CACHE INTERNAL "" FORCE)
+  install(FILES ${ALL_HEADERS} DESTINATION "${INCLUDE_DIR_FOR_THIS_LIBRARY}")
   # ----------------------------------------------------------------------------
 endfunction()
 # ------------------------------------------------------------------------------

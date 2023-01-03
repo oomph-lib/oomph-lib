@@ -1010,7 +1010,6 @@ Option                                    | Description                         
 `OOMPH_MPI_NUM_PROC`                      | Number of processes to use with MPI-enabled tests                            | 2
 `OOMPH_ENABLE_PARANOID`                   | Enable the PARANOID flag in Debug                                            | OFF
 `OOMPH_ENABLE_RANGE_CHECKING`             | Enable RANGE_CHECKING flag in Debug                                          | OFF
-`OOMPH_ENABLE_SYMBOLIC_LINKS_FOR_HEADERS` | Install symbolic links to the headers instead of copying them **(*)**        | OFF
 `OOMPH_TRANSITION_TO_VERSION_3`           | Try to build with up-to-date external sources                                | OFF
 `OOMPH_USE_DEPRECATED_SUPERLU`            | Use oomph-lib's deprecated version of SuperLU (4.3)                          | OFF
 `OOMPH_SUPPRESS_TRIANGLE_LIB`             | Suppress build of oomph-lib's copy of the triangle library                   | OFF
@@ -1021,21 +1020,6 @@ Option                                    | Description                         
 `OOMPH_WANT_MUMPS`                        | Enable MUMPS library [CURRENTLY ONLY WORKING WITH MPI]                       | OFF
 `OOMPH_WANT_TRILINOS`                     | Enable Trilinos library  **[DOESN'T WORK YET!]**                             | OFF
 `OOMPH_ENABLE_CODE_COVERAGE`              | Enable collection of code coverage results                                   | OFF
-
-**(*)**: By default, we copy headers at install-time instead of creating symbolic links. By doing so, we ensure that the user can change the installation directory even at the install-step, e.g.
-
-```bash
-# Configure and build
-cmake -G Ninja -B build
-cmake --build build
-
-# Install to "/home/joe_cool/oomph_lib_install_dir"
-cmake --install build/ --prefix /home/joe_cool/oomph_lib_install_dir
-```
-
-However, we recommend that you do **not** use this approach; instead follow the steps described in [Option 2: Specifying a custom installation location](#option-2-specifying-a-custom-installation-location).
-
-_**WARNING:** If you enable `OOMPH_ENABLE_SYMBOLIC_LINKS_FOR_HEADERS` during the configuration step, do not change the installation location after the configuration step(!)._
 
 ## CMake Presets
 

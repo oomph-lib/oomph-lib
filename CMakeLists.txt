@@ -79,7 +79,6 @@ option(OOMPH_DONT_SILENCE_USELESS_WARNINGS "Display (harmless) warnings from ext
 option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" OFF)
 option(OOMPH_ENABLE_PARANOID "Enable the PARANOID flag in Debug" OFF)
 option(OOMPH_ENABLE_RANGE_CHECKING "Enable RANGE_CHECKING flag in Debug" OFF)
-option(OOMPH_ENABLE_SYMBOLIC_LINKS_FOR_HEADERS "Install symbolic links to the headers instead of copying them" ON)
 option(OOMPH_TRANSITION_TO_VERSION_3 "Try to build with up-to-date external sources" OFF)
 option(OOMPH_USE_DEPRECATED_SUPERLU "Use oomph-lib's deprecated version of SuperLU (4.3)" OFF)
 
@@ -110,7 +109,6 @@ if(NOT UNIX)
   set(OOMPH_ENABLE_CODE_COVERAGE OFF CACHE BOOL
       "Enable collection of code coverage results" FORCE)
   set(OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY OFF)
-  set(SYMBOLIC_LINKS_FOR_HEADERS OFF)
 endif()
 
 # Let CMake take care of the famous -fPIC flag
