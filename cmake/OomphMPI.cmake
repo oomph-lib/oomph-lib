@@ -62,6 +62,11 @@ if(NOT MPI_FOUND)
   oomph_check_mpi()
 endif()
 
+# Define a cache variable that can be overriden by the user from the
+# command-line
+set(OOMPH_MPI_NUM_PROC 2 CACHE INTERNAL
+    "Number of processes to use with MPI-enabled tests")
+
 # Set the command used to run MPI-enabled self-tests
 if(NOT DEFINED MPI_RUN_COMMAND)
   set(MPI_RUN_COMMAND

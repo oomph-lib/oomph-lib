@@ -131,11 +131,6 @@ endif()
 if(OOMPH_ENABLE_MPI)
   include(OomphMPI)
 
-  # Define a cache variable that can be overriden by the user from the
-  # command-line
-  set(OOMPH_MPI_NUM_PROC 2 CACHE INTERNAL
-      "Number of processes to use with MPI-enabled tests")
-
   # Sanity check
   if(NOT OOMPH_MPI_NUM_PROC MATCHES "^[0-9]+$")
     message(
