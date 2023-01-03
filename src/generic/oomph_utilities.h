@@ -121,9 +121,8 @@ namespace oomph
     // NOTE: Although we define the OOMPH_DEBUG macro inside DebugHelpers but it
     // has global visibility because it's a macro.
 #define OOMPH_DEBUG(msg) \
-  printf( \
-    "%s", \
-    DebugHelpers::debug_string(__FILE__, __LINE__, msg, false, true).c_str());
+  oomph_info << DebugHelpers::debug_string( \
+    __FILE__, __LINE__, msg, false, true);
 
   } // namespace DebugHelpers
 
