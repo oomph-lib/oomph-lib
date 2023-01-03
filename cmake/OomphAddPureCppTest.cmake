@@ -2,48 +2,66 @@
 # =============================================================================
 # DESCRIPTION:
 # ------------
-# Supports the creation of an oomph-lib demo driver (i.e. integration) test.
+# Supports the creation of an oomph-lib demo driver (i.e. integration) test
+# that does not rely on a validate.sh script.
+#
 # These tests are distinct from regular unit tests (which are far more
 # lightweight and do not depend on data to be tested against).
 #
 # USAGE:
 # ------
-#  oomph_add_pure_cpp_test(TEST_NAME             <name-of-test>
-#                          TARGET_DEPENDENCIES   <executables/targets-required-by-test>
-#                          LABELS                <labels>
-#                          [EXTRA_REQUIRES       <extra-files-required-by-test>]
-#                          [RUN_COMMAND          <command-to-run-executable>]
+#  oomph_add_pure_cpp_test(TEST_NAME           <executable-name>
+#                          TARGET_DEPENDENCY   <executable/target-required-by-test>
+#                          LOG_FILE            <output-log-file>
+#                          LABELS              <labels>
+#                          [RUN_WITH           <command-to-run-executable>]
+#                          [TEST_ARGS          <arguments-for-executable>]
 #                          [SILENCE_MISSING_VALIDATA_WARNING])
 #
-# By default we always assume that validata/ is required for the test. The
-# user can specify the EXTRA_REQUIRES flag if any other files are required
-# at run-time, e.g. triangle input mesh files. The REQUIRES_MPI_* flags are
-# used to indicate that the validate.sh script requires the MPI_RUN_COMMAND
-# and MPI_VARIABLENP_RUN_COMMAND, respectively. If both flags are enabled,
-# then the MPI_RUN_COMMAND and MPI_VARIABLENP_RUN_COMMAND will be passed as
-# the second and third argument, respectively. I
+# The argument to TARGET_DEPENDENCY must be an already-defined executable or target
+# (i.e. defined via add_executable() or oomph_add_executable()). The LOG_FILE is the
+# relative path to the validation log file under the Validation/ directory. We
+# require a unique LOG_FILE argument for each test in the directory as multiple
+# targets could write to the same validation.log file at the same time causing
+# the resulting output to get mangled.
 #
 # EXAMPLE:
 # --------
-#  oomph_add_pure_cpp_test(TEST_NAME poisson.one_d_poisson
-#                          TARGET_DEPENDENCIES one_d_poisson
-#                          EXTRA_REQUIRES my_extra_data_file.dat
-#                          LABELS poisson one_d_poisson)
+# (1) Run with --disable_melting --validate flags
 #
-#  oomph_add_pure_cpp_test(TEST_NAME poisson.one_d_poisson
-#                          TARGET_DEPENDENCIES one_d_poisson
-#                          EXTRA_REQUIRES my_extra_data_file.dat
-#                          LABELS poisson one_d_poisson
-#                          RUN_COMMAND mpirun -np 2)
+#   # Define executable
+#   oomph_add_executable(NAME melt
+#                        SOURCES melt.cc heat_transfer_and_melt_elements.h
+#                        LIBRARIES oomph::constitutive oomph::solid oomph::unsteady_heat
+#                                  oomph::meshes oomph::generic)
 #
-#  oomph_add_pure_cpp_test(TEST_NAME poisson.one_d_poisson
-#                          TARGET_DEPENDENCIES one_d_poisson
-#                          EXTRA_REQUIRES my_extra_data_file.dat
-#                          LABELS poisson one_d_poisson
-#                          RUN_COMMAND ${MPI_RUN_COMMAND})
+#   # Define test
+#   oomph_add_pure_cpp_test(TEST_NAME heat_transfer_and_melting.melt
+#                           TARGET_DEPENDENCY melt
+#                           TEST_ARGS --disable_melting --validate
+#                           LABELS heat_transfer_and_melting solid unsteady_heat)
 #
-# NOTE: Arguments to TARGET_DEPENDENCIES must be already-defined executables
-# or targets (i.e. defined via add_executable() or oomph_add_executable()).
+# (2) Run with MPI
+#
+#   # Define executable
+#   oomph_add_executable(NAME melt
+#                        SOURCES melt.cc heat_transfer_and_melt_elements.h
+#                        LIBRARIES oomph::constitutive oomph::solid oomph::unsteady_heat
+#                                  oomph::meshes oomph::generic)
+#
+#   # Define test
+#   oomph_add_pure_cpp_test(TEST_NAME heat_transfer_and_melting.melt
+#                           TARGET_DEPENDENCY melt
+#                           RUN_WITH mpirun -np 2
+#                           LABELS heat_transfer_and_melting solid unsteady_heat)
+#
+# NOTE: You can also specify the MPI run command by setting
+#
+#   # Define test
+#   oomph_add_pure_cpp_test(TEST_NAME heat_transfer_and_melting.melt
+#                           TARGET_DEPENDENCY melt
+#                           RUN_WITH ${MPI_RUN_COMMAND}
+#                           LABELS heat_transfer_and_melting solid unsteady_heat)
 # =============================================================================
 # cmake-format: on
 include_guard()
@@ -53,8 +71,8 @@ function(oomph_add_pure_cpp_test)
   # Define the supported set of keywords
   set(PREFIX ARG)
   set(FLAGS SILENCE_MISSING_VALIDATA_WARNING)
-  set(SINGLE_VALUE_ARGS TEST_NAME)
-  set(MULTI_VALUE_ARGS EXTRA_REQUIRES LABELS TARGET_DEPENDENCIES RUN_COMMAND)
+  set(SINGLE_VALUE_ARGS TEST_NAME TARGET_DEPENDENCY LOG_FILE)
+  set(MULTI_VALUE_ARGS LABELS RUN_WITH TEST_ARGS)
 
   # Process the arguments passed in
   include(CMakeParseArguments)
@@ -62,33 +80,28 @@ function(oomph_add_pure_cpp_test)
                         "${SINGLE_VALUE_ARGS}" "${MULTI_VALUE_ARGS}")
 
   # Redefine the variables in this scope without a prefix for clarity
+  set(TEST_NAME ${${PREFIX}_TEST_NAME})
+  set(TARGET_DEPENDENCY ${${PREFIX}_TARGET_DEPENDENCY})
+  set(LOG_FILE ${${PREFIX}_LOG_FILE})
+  set(RUN_WITH ${${PREFIX}_RUN_WITH})
+  set(TEST_ARGS ${${PREFIX}_TEST_ARGS})
+  set(LABELS ${${PREFIX}_LABELS})
   set(SILENCE_MISSING_VALIDATA_WARNING
       ${${PREFIX}_SILENCE_MISSING_VALIDATA_WARNING})
-  set(TEST_NAME ${${PREFIX}_TEST_NAME})
-  set(TARGET_DEPENDENCIES ${${PREFIX}_TARGET_DEPENDENCIES})
-  set(EXTRA_REQUIRES ${${PREFIX}_EXTRA_REQUIRES})
-  set(LABELS ${${PREFIX}_LABELS})
-  set(RUN_COMMAND ${${PREFIX}_RUN_COMMAND})
 
   # Make sure the arguments are valid
   if(NOT TEST_NAME)
-    message(FATAL_ERROR "No TARGET argument supplied.")
-  elseif(NOT TARGET_DEPENDENCIES)
-    message(VERBOSE
-            "No TARGET_DEPENDENCIES argument supplied. Can't create a test.")
-    return()
+    message(FATAL_ERROR "No TEST_NAME argument supplied.")
+  elseif(NOT TARGET_DEPENDENCY)
+    message(FATAL_ERROR "No TARGET_DEPENDENCY argument supplied.")
+  elseif(NOT LOG_FILE)
+    message(FATAL_ERROR "No LOG_FILE argument supplied.")
   elseif(NOT LABELS)
     message(WARNING "No LABELS supplied. These are helpful for running CTest\
     with subsets of the tests. We recommend that you set this!")
   endif()
 
-  # Construct a single string from the run command
-  if(RUN_COMMAND)
-    list(JOIN RUN_COMMAND " " RUN_COMMAND_AS_STRING)
-  else()
-    set(RUN_COMMAND "")
-  endif()
-
+  # Check that we can run the test
   find_program(BASH_PROGRAM bash)
   if(NOT BASH_PROGRAM)
     message(
@@ -101,152 +114,51 @@ function(oomph_add_pure_cpp_test)
   string(SHA1 PATH_HASH "${CMAKE_CURRENT_LIST_DIR}")
   string(SUBSTRING ${PATH_HASH} 0 7 PATH_HASH)
 
-  # Grab the validate.sh script if we have one
-  set(REQUIREMENTS_WITH_PATHS)
-  set(TEST_BYPRODUCTS)
-
-  # We *nearly* always need validata, so warn if we don't have it, just in case
-  # the user's forgotten to provide it
-  if(EXISTS "${CMAKE_CURRENT_LIST_DIR}/validata")
-    list(APPEND REQUIREMENTS_WITH_PATHS "${CMAKE_CURRENT_LIST_DIR}/validata")
-    list(APPEND TEST_BYPRODUCTS "${CMAKE_CURRENT_BINARY_DIR}/validata")
-  else()
-    if(NOT SILENCE_MISSING_VALIDATA_WARNING)
-      message(
-        WARNING
-          "\n\
-        Missing validata folder in project folder:\n\
-        \n\
-              ${CMAKE_CURRENT_LIST_DIR}\n\
-        \n\
-        Did you possibly forget to provide the validation data? If not then\n\
-        you can silence this warning by supplying the following flag to the\n\
-        call of oomph_add_pure_cpp_test(...):\n\
-        \n\
-              SILENCE_MISSING_VALIDATA_WARNING\n\
-        ")
-    endif()
+  # Make sure we've been given a proper target
+  if(NOT TARGET ${TARGET_DEPENDENCY}_${PATH_HASH})
+    message(FATAL_ERROR "Argument ${TARGET_DEPENDENCY} is not a target.")
   endif()
-
-  # Add on the extra requirements
-  foreach(REQUIREMENT IN LISTS EXTRA_REQUIRES)
-    list(APPEND REQUIREMENTS_WITH_PATHS
-         "${CMAKE_CURRENT_LIST_DIR}/${REQUIREMENT}")
-    list(APPEND TEST_BYPRODUCTS "${CMAKE_CURRENT_BINARY_DIR}/${REQUIREMENT}")
-  endforeach()
-
-  # ----------------------------------------------------------------------------
-  # Declare a copy_... target to copy the required files to the build directory
-  add_custom_target(copy_${PATH_HASH} WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
-
-  # Flag used to control whether files are symlinked instead of copied; keeping
-  # the option to copy files around just in case we need it later on (but I
-  # doubt it)
-  set(SYMLINK_TEST_DATA_INSTEAD_OF_COPY TRUE)
-
-  # Add each requirement to the copy target as a file-copy command or as a
-  # directory-copy command. All of these commands will be executed when the
-  # copy_<path-hash> target is called
-  foreach(REQUIREMENT IN LISTS REQUIREMENTS_WITH_PATHS)
-    if(SYMLINK_TEST_DATA_INSTEAD_OF_COPY)
-      add_custom_command(
-        TARGET copy_${PATH_HASH}
-        POST_BUILD
-        COMMAND ln -sf "${REQUIREMENT}" "${CMAKE_CURRENT_BINARY_DIR}")
-    else()
-      if(IS_DIRECTORY "${REQUIREMENT}")
-        add_custom_command(
-          TARGET copy_${PATH_HASH}
-          POST_BUILD
-          COMMAND cp -ur "${REQUIREMENT}" "${CMAKE_CURRENT_BINARY_DIR}")
-      else()
-        add_custom_command(
-          TARGET copy_${PATH_HASH}
-          POST_BUILD
-          COMMAND ${CMAKE_COMMAND} -E copy_if_different "${REQUIREMENT}"
-                  "${CMAKE_CURRENT_BINARY_DIR}")
-      endif()
-    endif()
-  endforeach()
-
-  # Identify the files that we'll copy as by-products so that they can be
-  # cleaned up by running "make clean" if the user uses Makefile Generators
-  add_custom_command(
-    TARGET copy_${PATH_HASH}
-    POST_BUILD
-    BYPRODUCTS ${TEST_BYPRODUCTS})
-  # ----------------------------------------------------------------------------
-
-  # ----------------------------------------------------------------------------
-  # Create a target to build the targets we're going to test with validate.sh.
-  # We need to build from the top-level build directory as this is where the
-  # Makefile/build.ninja file (which contains the build recipes) lives
-  add_custom_target(build_targets_${PATH_HASH}
-                    WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
-
-  # Add on commands to build the targets we need
-  foreach(TARGET_DEPENDENCY IN LISTS TARGET_DEPENDENCIES)
-    add_custom_command(
-      TARGET build_targets_${PATH_HASH}
-      POST_BUILD
-      COMMAND ${CMAKE_MAKE_PROGRAM} ${TARGET_DEPENDENCY}_${PATH_HASH}
-      WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
-  endforeach()
-  # ----------------------------------------------------------------------------
 
   # ----------------------------------------------------------------------------
   # Create a target to wipe the Validation/ directory if it exists
-  add_custom_target(clean_validation_dir_${PATH_HASH}
-                    WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
-
-  add_custom_command(
-    TARGET clean_validation_dir_${PATH_HASH}
-    POST_BUILD
-    COMMAND rm -rf "${CMAKE_CURRENT_BINARY_DIR}/Validation"
-    WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
+  if(NOT TARGET clean_validation_dir_${PATH_HASH})
+    add_custom_target(clean_validation_dir_${PATH_HASH}
+                      COMMAND rm -rf "${CMAKE_CURRENT_BINARY_DIR}/Validation")
+  endif()
   # ----------------------------------------------------------------------------
 
-  # TODO: Try simplifying things with
-  # https://cmake.org/cmake/help/book/mastering-cmake/chapter/Testing%20With%20CMake%20and%20CTest.html#using-ctest-to-drive-complex-tests
-
-  # FIXME: If we move away from validate.sh scripts, we need to run executables
-  # with our own mpirun command if needed
+  # ----------------------------------------------------------------------------
+  # Indicate that if we build ${TARGET_DEPENDENCY}, we should copy over the
+  # required files
+  #
+  # add_dependencies(${TARGET_DEPENDENCY}_${PATH_HASH} copy_${PATH_HASH})
+  # ----------------------------------------------------------------------------
 
   # ----------------------------------------------------------------------------
   # Run the dependencies to copy the test data, build the (sub)project(s)
   # targets, run all of the dependent targets then append the validation.log
   # output to the global one.. The VERBATIM argument is necessary here to ensure
   # that the "mpirun ..." commands are correctly escaped
-  list(JOIN TARGET_DEPENDENCIES " ./" RUN_DEPENDENCIES_STRING)
+  set(RUN_COMMAND ${RUN_WITH} ./${TARGET_DEPENDENCY} ${TEST_ARGS})
+  list(JOIN RUN_COMMAND " " RUN_COMMAND)
   add_custom_target(
-    check_${PATH_HASH}
-    # Run each executable
-    COMMAND ${BASH_PROGRAM} -c ${RUN_COMMAND} ./${RUN_DEPENDENCIES_STRING}
+    check_${TEST_NAME}_${PATH_HASH}
+    # Run the executable
+    COMMAND ${BASH_PROGRAM} -c ${RUN_COMMAND}
     # Check for the validation.log file
     COMMAND
       ${BASH_PROGRAM} -c
-      "test -e \"${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log\" || ( \
-          printf \"\\nUnable to locate file:\\n\\n\\t${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log\\n\\nStopping here...\\n\\n\" && \
+      "test -e \"${CMAKE_CURRENT_BINARY_DIR}/Validation/${LOG_FILE}\" || ( \
+          printf \"\\nUnable to locate file:\\n\\n\\t${CMAKE_CURRENT_BINARY_DIR}/Validation/${LOG_FILE}\\n\\nStopping here...\\n\\n\" && \
           exit 1 )"
     # Append validation.log to top-level validation.log
-    COMMAND cat "${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log" >>
+    COMMAND cat "${CMAKE_CURRENT_BINARY_DIR}/Validation/${LOG_FILE}" >>
             "${CMAKE_BINARY_DIR}/validation.log"
     WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
-    DEPENDS copy_${PATH_HASH} build_targets_${PATH_HASH}
+    DEPENDS ${TARGET_DEPENDENCY}_${PATH_HASH} copy_${PATH_HASH}
             clean_validation_dir_${PATH_HASH}
     VERBATIM)
   # ----------------------------------------------------------------------------
-
-  # Create a test target that depends on the check_${PATH_HASH} target. When the
-  # user runs "ninja <TEST-NAME>", it will cause the test dependencies to get
-  # built and the validata files/validate.sh script to get placed in the build
-  # directory
-  #
-  # FIXME: Talk to MH; decide whether to just build and copy validation files or
-  # to run the validate.sh script too...
-  add_custom_target(${TEST_NAME})
-  add_dependencies(${TEST_NAME} copy_${PATH_HASH} build_targets_${PATH_HASH}
-                   clean_validation_dir_${PATH_HASH})
 
   # Create the test to be run by CTest. When we run the test, it will call, e.g.
   # 'ninja check_...' which will call the 'check_...' target defined above. As
@@ -259,7 +171,7 @@ function(oomph_add_pure_cpp_test)
   # global validation.log file in the oomph-lib root directory.
   add_test(
     NAME ${TEST_NAME}
-    COMMAND ${CMAKE_MAKE_PROGRAM} check_${PATH_HASH}
+    COMMAND ${CMAKE_MAKE_PROGRAM} check_${TEST_NAME}_${PATH_HASH}
     WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
 
   # Add the user-provided test labels to the test so that it can be used by

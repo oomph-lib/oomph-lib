@@ -10,12 +10,13 @@ with section("parse"):
                 "SILENCE_NO_LIBS_SUPPLIED_WARNING"
             ],
             "kwargs": {
-                "CXX_DEFINITIONS": "*",
-                "CXX_OPTIONS": "*",
-                "CXX_STANDARD": "*",
+                "NAME": 1,
+                "SOURCES": "*",
                 "LIBRARIES": "*",
-                "NAME": "*",
-                "SOURCES": "*"
+                "CXX_STANDARD": "*",
+                "CXX_OPTIONS": "*",
+                "CXX_DEFINITIONS": "*",
+                "LINK_OPTIONS": "*",
             }
         },
         "oomph_add_test": {
@@ -26,10 +27,10 @@ with section("parse"):
                 "REQUIRES_MPI_VARIABLENP_RUN_COMMAND"
             ],
             "kwargs": {
+                "TEST_NAME": 1,
                 "EXTRA_REQUIRES": "*",
                 "LABELS": "*",
                 "TARGET_DEPENDENCIES": "*",
-                "TEST_NAME": "*"
             }
         },
         "oomph_add_pure_cpp_test": {
@@ -37,11 +38,12 @@ with section("parse"):
                 "SILENCE_MISSING_VALIDATA_WARNING",
             ],
             "kwargs": {
-                "EXTRA_REQUIRES": "*",
+                "TEST_NAME": 1,
+                "TARGET_DEPENDENCY": 1,
+                "LOG_FILE": 1,
                 "LABELS": "*",
-                "TARGET_DEPENDENCIES": "*",
-                "TEST_NAME": "*",
-                "RUN_COMMAND": "*"
+                "RUN_WITH": "*",
+                "TEST_ARGS": "*",
             }
         },
         "oomph_create_combined_header": {
