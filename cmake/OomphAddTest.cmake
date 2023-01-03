@@ -68,7 +68,7 @@ function(oomph_add_test)
 
   # Make sure the arguments are valid
   if(NOT TEST_NAME)
-    message(FATAL_ERROR "No TARGET argument supplied.")
+    message(FATAL_ERROR "No TEST_NAME argument supplied.")
   elseif(NOT TARGET_DEPENDENCIES)
     message(VERBOSE
             "No TARGET_DEPENDENCIES argument supplied. Can't create a test.")
@@ -130,7 +130,9 @@ function(oomph_add_test)
 
   # ----------------------------------------------------------------------------
   # Declare a copy_... target to copy the required files to the build directory
-  add_custom_target(copy_${PATH_HASH} WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
+  if(NOT TARGET copy_${PATH_HASH})
+    add_custom_target(copy_${PATH_HASH} WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
+  endif()
 
   # Flag used to control whether files are symlinked instead of copied; keeping
   # the option to copy files around just in case we need it later on (but I
@@ -189,14 +191,10 @@ function(oomph_add_test)
 
   # ----------------------------------------------------------------------------
   # Create a target to wipe the Validation/ directory if it exists
-  add_custom_target(clean_validation_dir_${PATH_HASH}
-                    WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
-
-  add_custom_command(
-    TARGET clean_validation_dir_${PATH_HASH}
-    POST_BUILD
-    COMMAND rm -rf "${CMAKE_CURRENT_BINARY_DIR}/Validation"
-    WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
+  if(NOT TARGET clean_validation_dir_${PATH_HASH})
+    add_custom_target(clean_validation_dir_${PATH_HASH}
+                      COMMAND rm -rf "${CMAKE_CURRENT_BINARY_DIR}/Validation")
+  endif()
   # ----------------------------------------------------------------------------
 
   # Command-line arguments for validate.sh. We can't run fpdiff.py if we don't
