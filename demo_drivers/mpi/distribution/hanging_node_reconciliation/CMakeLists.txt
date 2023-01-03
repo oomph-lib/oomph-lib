@@ -29,7 +29,8 @@ oomph_add_test(
   REQUIRES_MPI_RUN_COMMAND)
 
 # Don't run this test alongside any other tests
-set_tests_properties(mpi.hanging_node_reconciliation PROPERTIES RUN_SERIAL TRUE)
+set_tests_properties(mpi.hanging_node_reconciliation
+                     PROPERTIES PROCESSORS ${OOMPH_MPI_NUM_PROC})
 
 message(VERBOSE "Leaving hanging_node_reconciliation subdirectory")
 # ------------------------------------------------------------------------------

@@ -27,7 +27,7 @@ if(NUM_PROCESSORS GREATER_EQUAL 4)
     REQUIRES_MPI_VARIABLENP_RUN_COMMAND)
 
   # Don't run this test alongside any other tests
-  set_tests_properties(mpi.matrix_concatenation PROPERTIES RUN_SERIAL TRUE)
+  set_tests_properties(mpi.matrix_concatenation PROPERTIES PROCESSORS 4)
 else()
   message(
     STATUS

@@ -24,7 +24,8 @@ oomph_add_test(
   REQUIRES_MPI_RUN_COMMAND)
 
 # Don't run this test alongside any other tests
-set_tests_properties(mpi.two_d_poisson_flux_bc_adapt PROPERTIES RUN_SERIAL TRUE)
+set_tests_properties(mpi.two_d_poisson_flux_bc_adapt
+                     PROPERTIES PROCESSORS ${OOMPH_MPI_NUM_PROC})
 
 message(VERBOSE "Leaving two_d_poisson_flux_bc_adapt subdirectory")
 # ------------------------------------------------------------------------------

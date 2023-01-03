@@ -38,7 +38,7 @@ oomph_add_test(
 
 # Don't run this test alongside any other tests
 set_tests_properties(mpi.two_d_unstructured_adaptive_poisson
-                     PROPERTIES RUN_SERIAL TRUE)
+                     PROPERTIES PROCESSORS 4)
 
 message(VERBOSE "Leaving two_d_unstructured_adaptive_poisson subdirectory")
 # ------------------------------------------------------------------------------

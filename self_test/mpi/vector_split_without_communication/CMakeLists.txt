@@ -28,7 +28,7 @@ if(NUM_PROCESSORS GREATER_EQUAL 4)
 
   # Don't run this test alongside any other tests
   set_tests_properties(mpi.vector_split_without_communication
-                       PROPERTIES RUN_SERIAL TRUE)
+                       PROPERTIES PROCESSORS 4)
 else()
   message(
     STATUS

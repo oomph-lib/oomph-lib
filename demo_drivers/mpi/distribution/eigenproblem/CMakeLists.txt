@@ -27,7 +27,8 @@ if(OOMPH_HAS_TRILINOS)
     REQUIRES_MPI_RUN_COMMAND)
 
   # Don't run this test alongside any other tests
-  set_tests_properties(mpi.eigenproblem PROPERTIES RUN_SERIAL TRUE)
+  set_tests_properties(mpi.eigenproblem PROPERTIES PROCESSORS
+                                                   ${OOMPH_MPI_NUM_PROC})
 endif()
 
 message(VERBOSE "Leaving eigenproblem subdirectory")

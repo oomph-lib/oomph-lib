@@ -34,7 +34,8 @@ oomph_add_test(
   REQUIRES_MPI_RUN_COMMAND)
 
 # Don't run this test alongside any other tests
-set_tests_properties(mpi.three_d_cantilever PROPERTIES RUN_SERIAL TRUE)
+set_tests_properties(mpi.three_d_cantilever PROPERTIES PROCESSORS
+                                                       ${OOMPH_MPI_NUM_PROC})
 
 message(VERBOSE "Leaving three_d_cantilever subdirectory")
 # ------------------------------------------------------------------------------

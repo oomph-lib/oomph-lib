@@ -25,7 +25,7 @@ oomph_add_test(
 
 # Don't run this test alongside any other tests
 set_tests_properties(mpi.three_d_prescribed_displ_lagr_mult
-                     PROPERTIES RUN_SERIAL TRUE)
+                     PROPERTIES PROCESSORS ${OOMPH_MPI_NUM_PROC})
 
 message(VERBOSE "Leaving three_d_prescribed_displ_lagr_mult subdirectory")
 # ------------------------------------------------------------------------------

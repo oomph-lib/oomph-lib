@@ -28,8 +28,8 @@ if(OOMPH_HAS_HYPRE AND OOMPH_HAS_TRILINOS)
     REQUIRES_MPI_RUN_COMMAND)
 
   # Don't run this test alongside any other tests
-  set_tests_properties(mpi.pseudo_solid_collapsible_tube PROPERTIES RUN_SERIAL
-                                                                    TRUE)
+  set_tests_properties(mpi.pseudo_solid_collapsible_tube
+                       PROPERTIES PROCESSORS ${OOMPH_MPI_NUM_PROC})
 endif()
 
 message(VERBOSE "Leaving pseudo_solid_collapsible_tube subdirectory")

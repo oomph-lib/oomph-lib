@@ -24,7 +24,8 @@ oomph_add_test(
   REQUIRES_MPI_RUN_COMMAND)
 
 # Don't run this test alongside any other tests
-set_tests_properties(mpi.circular_driven_cavity PROPERTIES RUN_SERIAL TRUE)
+set_tests_properties(mpi.circular_driven_cavity
+                     PROPERTIES PROCESSORS ${OOMPH_MPI_NUM_PROC})
 
 message(VERBOSE "Leaving circular_driven_cavity subdirectory")
 # ------------------------------------------------------------------------------

@@ -25,7 +25,8 @@ oomph_add_test(
   REQUIRES_MPI_RUN_COMMAND)
 
 # Don't run this test alongside any other tests
-set_tests_properties(mpi.three_d_entry_flow PROPERTIES RUN_SERIAL TRUE)
+set_tests_properties(mpi.three_d_entry_flow PROPERTIES PROCESSORS
+                                                       ${OOMPH_MPI_NUM_PROC})
 if(APPLE)
   set_tests_properties(mpi.three_d_entry_flow PROPERTIES DISABLED TRUE)
 endif()
