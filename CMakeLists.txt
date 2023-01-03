@@ -83,11 +83,6 @@ option(OOMPH_ENABLE_SYMBOLIC_LINKS_FOR_HEADERS "Install symbolic links to the he
 option(OOMPH_TRANSITION_TO_VERSION_3 "Try to build with up-to-date external sources" OFF)
 option(OOMPH_USE_DEPRECATED_SUPERLU "Use oomph-lib's deprecated version of SuperLU (4.3)" OFF)
 
-# TODO: Discuss whether to keep this flag
-#
-# Only has an effect if OOMPH_ENABLE_MPI is ON
-option(OOMPH_WANT_MPI_VARIABLENP "Enable the use of MPI tests with np > 2" ON)
-
 # Fine-grained control of build of external_srcs.
 # FIXME: Make sure the SUPPRESS variables below actually work
 # TODO: These should be set on the fly after checking whether the appropriate variable WITH_* has been set...

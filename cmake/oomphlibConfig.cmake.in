@@ -113,10 +113,7 @@ if(OOMPH_HAS_MPI)
   find_dependency(MPI REQUIRED)
 
   set(OOMPH_MPI_NUM_PROC @OOMPH_MPI_NUM_PROC@)
-
-  # PM: Might get deleted... Only used in self_test/
-  set(OOMPH_WANT_MPI_VARIABLENP @OOMPH_WANT_MPI_VARIABLENP@)
-
+  
   set(MPI_RUN_COMMAND "@MPI_RUN_COMMAND@")
   set(MPI_VARIABLENP_RUN_COMMAND "@MPI_VARIABLENP_RUN_COMMAND@")
 endif()

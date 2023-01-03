@@ -9,12 +9,8 @@ if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
 endif()
 include(CTest)
 
-set(SUBDIRS generic)
-
-if(OOMPH_WANT_EXTENDED_SELF_TESTS)
-  list(
-    APPEND
-    SUBDIRS
+set(SUBDIRS
+    generic
     navier_stokes
     poisson
     matrix_matrix_multiply
@@ -22,9 +18,8 @@ if(OOMPH_WANT_EXTENDED_SELF_TESTS)
     deliberately_broken_code_for_self_test_test
     locate_zeta)
 
-  if(OOMPH_HAS_MPI)
-    list(APPEND SUBDIRS mpi)
-  endif()
+if(OOMPH_HAS_MPI)
+  list(APPEND SUBDIRS mpi)
 endif()
 
 foreach(SUBDIR IN LISTS SUBDIRS)
