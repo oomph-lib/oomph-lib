@@ -68,6 +68,7 @@ set(OOMPH_FILES_TO_COPY_TO_BUILD_DIR
     "${CMAKE_CURRENT_LIST_DIR}/OomphAddExecutable.cmake"
     "${CMAKE_CURRENT_LIST_DIR}/OomphAddTest.cmake"
     "${CMAKE_CURRENT_LIST_DIR}/OomphAddPureCppTest.cmake"
+    "${CMAKE_CURRENT_LIST_DIR}/OomphDefineTestData.cmake"
     "${CMAKE_CURRENT_LIST_DIR}/OomphEnableCodeCoverage.cmake")
 
 # The list of modules to distribute with the library
@@ -78,6 +79,7 @@ set(OOMPH_FILES_TO_INSTALL_TO_CMAKE_DIR
     "${CMAKE_CURRENT_LIST_DIR}/OomphAddExecutable.cmake"
     "${CMAKE_CURRENT_LIST_DIR}/OomphAddTest.cmake"
     "${CMAKE_CURRENT_LIST_DIR}/OomphAddPureCppTest.cmake"
+    "${CMAKE_CURRENT_LIST_DIR}/OomphDefineTestData.cmake"
     "${CMAKE_CURRENT_LIST_DIR}/OomphEnableCodeCoverage.cmake"
     "${OOMPH_ROOT_DIR}/scripts/fpdiff.py")
 
