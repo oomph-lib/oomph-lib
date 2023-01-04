@@ -1008,29 +1008,27 @@ Specifying these flags from the command-line can be cumbersome and you may forge
 
 
 
-Option                                    | Description                                                                    | Default
-------------------------------------------|--------------------------------------------------------------------------------|--------
-`CMAKE_BUILD_TYPE`                        | The build type (e.g. `Debug`, `Release`, `RelWithDebInfo` or `MinSizeRel`)     | `Debug`
-`BUILD_SHARED_LIBS`                       | Build using shared libraries; static otherwise  **["SHARED" DOESN'T WORK!]**   | OFF
-`BUILD_SHARED_LIBS`                       | Build using shared libraries; static otherwise  **["SHARED" DOESN'T WORK!]**   | OFF
-`OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY`   | Build tests with library build                                                 | OFF
-`OOMPH_DONT_SILENCE_USELESS_WARNINGS`     | Display (harmless) warnings from external_src/ and src/ that are silenced      | OFF
-`OOMPH_ENABLE_MPI`                        | Enable the use of MPI for parallel processing                                  | OFF
-`OOMPH_ENABLE_PARANOID`                   | Enable the PARANOID flag in Debug                                              | OFF
-`OOMPH_ENABLE_RANGE_CHECKING`             | Enable RANGE_CHECKING flag in Debug                                            | OFF
-`OOMPH_ENABLE_SYMBOLIC_LINKS_FOR_HEADERS` | Install symbolic links to the headers instead of copying them                  | ON
-`OOMPH_ENABLE_USE_OPENBLAS`               | Use the OpenBLAS implementation of BLAS/LAPACK                                 | OFF
-`OOMPH_ENABLE_DOC_BUILD`                  | Suppress Doxygen creation of API documentation **[DOESN'T WORK YET!]**         | OFF
-`OOMPH_TRANSITION_TO_VERSION_3`           | Try to build with up-to-date external sources                                  | OFF
-`OOMPH_USE_DEPRECATED_SUPERLU`            | Use oomph-lib's deprecated version of SuperLU (4.3)                            | OFF
-`OOMPH_SUPPRESS_TRIANGLE_LIB`             | Suppress build of oomph-lib's copy of the triangle library                     | OFF
-`OOMPH_SUPPRESS_TETGEN_LIB`               | Suppress build of oomph-lib's copy of the tetgen library                       | OFF
-`OOMPH_WANT_NLOHMANN_JSON`                | Enable the [`nlohmann/json`](https://github.com/nlohmann/json) JSON library    | OFF
-`OOMPH_WANT_CGAL`                         | Enable we want to build the CGAL library? **[DOESN'T WORK YET!]**              | OFF
-`OOMPH_WANT_HYPRE`                        | Enable Hypre library                                                           | OFF
-`OOMPH_WANT_MUMPS`                        | Enable MUMPS library [CURRENTLY ONLY WORKING WITH MPI]                         | OFF
-`OOMPH_WANT_TRILINOS`                     | Enable Trilinos library  **[DOESN'T WORK YET!]**                               | OFF
-`OOMPH_ENABLE_CODE_COVERAGE`              | Enable collection of code coverage results                                     | OFF
+Option                                    | Description                                                                  | Default
+------------------------------------------|------------------------------------------------------------------------------|--------
+`CMAKE_BUILD_TYPE`                        | The build type (e.g. `Debug`, `Release`, `RelWithDebInfo` or `MinSizeRel`)   | `Release`
+`BUILD_SHARED_LIBS`                       | Build using shared libraries; static otherwise  **["SHARED" DOESN'T WORK!]** | OFF
+`BUILD_SHARED_LIBS`                       | Build using shared libraries; static otherwise  **["SHARED" DOESN'T WORK!]** | OFF
+`OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY`   | Build tests with library build                                               | OFF
+`OOMPH_DONT_SILENCE_USELESS_WARNINGS`     | Display (harmless) warnings from external_src/ and src/ that are silenced    | OFF
+`OOMPH_ENABLE_MPI`                        | Enable the use of MPI for parallel processing                                | OFF
+`OOMPH_MPI_NUM_PROC`                      | Number of processes to use with MPI-enabled tests                            | 2
+`OOMPH_ENABLE_PARANOID`                   | Enable the PARANOID flag in Debug                                            | OFF
+`OOMPH_ENABLE_RANGE_CHECKING`             | Enable RANGE_CHECKING flag in Debug                                          | OFF
+`OOMPH_TRANSITION_TO_VERSION_3`           | Try to build with up-to-date external sources                                | OFF
+`OOMPH_USE_DEPRECATED_SUPERLU`            | Use oomph-lib's deprecated version of SuperLU (4.3)                          | OFF
+`OOMPH_SUPPRESS_TRIANGLE_LIB`             | Suppress build of oomph-lib's copy of the triangle library                   | OFF
+`OOMPH_SUPPRESS_TETGEN_LIB`               | Suppress build of oomph-lib's copy of the tetgen library                     | OFF
+`OOMPH_WANT_NLOHMANN_JSON`                | Enable the [`nlohmann/json`](https://github.com/nlohmann/json) JSON library  | OFF
+`OOMPH_WANT_CGAL`                         | Enable we want to build the CGAL library? **[DOESN'T WORK YET!]**            | OFF
+`OOMPH_WANT_HYPRE`                        | Enable Hypre library                                                         | OFF
+`OOMPH_WANT_MUMPS`                        | Enable MUMPS library [CURRENTLY ONLY WORKING WITH MPI]                       | OFF
+`OOMPH_WANT_TRILINOS`                     | Enable Trilinos library  **[DOESN'T WORK YET!]**                             | OFF
+`OOMPH_ENABLE_CODE_COVERAGE`              | Enable collection of code coverage results                                   | OFF
 
 ## CMake Presets
 
@@ -1064,8 +1062,7 @@ We recommend that you can write your own `CMakeUserPresets.json` file. You can i
       "binaryDir": "${sourceDir}/build",
       "cacheVariables": {
         "CMAKE_APPLE_SILICON_PROCESSOR": "arm64",
-        "CMAKE_BUILD_TYPE": "Release",
-        "OOMPH_ENABLE_USE_OPENBLAS": "ON"
+        "CMAKE_BUILD_TYPE": "Release"
       },
       "warnings": {
         "unusedCli": true
@@ -1196,8 +1193,7 @@ Alternatively, you can use the `oomph_get_hashed_target_name(...)` function prov
 # Test definition
 oomph_add_executable(NAME <executable-name> ...)
 
-# Get the hashed target name
-set(HASHED_TARGET_NAME)
+# Get the hashed target name and store it in HASHED_TARGET_NAME
 oomph_get_hashed_target_name(one_d_poisson HASHED_TARGET_NAME)
 
 # Do something to the target...
@@ -1216,10 +1212,9 @@ targets, CMake allows tests to share the same name.
   - [ ] List of failed tests: `cat build/Testing/Temporary/LastTestsFailed.log`
   - [ ] Repeat failed test and log output: `--rerun-failed --output-on-failure`
   - [ ] Disable test: `set_tests_properties(<test-name> PROPERTIES DISABLED YES)`
-  - [ ] Demand MPI programs to run in serial: `set_tests_properties(FooWithBar PROPERTIES RUN_SERIAL)`
-  - [ ] Note that in all cases here, if you specify the target name, you must rememeber to append the SHA1 path hash.
-- [ ] The general workflow:
-  - [ ] Creating your own drivers (in e.g. `private/`)
+  - [ ] Demand number of processors required by MPI programs:
+    - Standard MPI run command: `set_tests_properties(FooWithBar PROPERTIES PROCESSORS ${OOMPH_MPI_NUM_PROC})`
+    - Variable NP: `set_tests_properties(FooWithBar PROPERTIES PROCESSORS <N>)`, where `N` is the maximum number of processors required
 
 ## A deeper dive into the build system
 

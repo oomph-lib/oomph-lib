@@ -49,36 +49,33 @@ function(oomph_check_mpi)
   endif()
 endfunction()
 # ------------------------------------------------------------------------------
-# Only look for MPI functionality if we haven't already found it
+
+# Look for MPI functionality if we haven't found it yet
 if(NOT MPI_FOUND)
+  if(OOMPH_USE_MPI_FROM)
+    set(BACKUP_CMAKE_PREFIX_PATH "${CMAKE_PREFIX_PATH}")
+    set(CMAKE_PREFIX_PATH "${OOMPH_USE_MPI_FROM}" CACHE INTERNAL "" FORCE)
+    find_package(MPI REQUIRED)
+    set(CMAKE_PREFIX_PATH "${BACKUP_CMAKE_PREFIX_PATH}" CACHE INTERNAL "" FORCE)
+  endif()
   find_package(MPI REQUIRED)
   oomph_check_mpi()
-
-  if(NOT MPI_FOUND)
-    message(STATUS "MPI could not be found!")
-  endif()
 endif()
 
-# if(${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.19.0") else() message( STATUS "I
-# can only check if MPI works using the\n\ check_<LANG>_source_compile()\n\
-# function which was made available in CMake 3.19. As you don't have a\n\ recent
-# enough version of CMake, I'm not going to perform these tests so\n\ you should
-# be aware that MPI *may* not work.\n") endif()
+# Define a cache variable that can be overriden by the user from the
+# command-line
+set(OOMPH_MPI_NUM_PROC 2 CACHE INTERNAL
+    "Number of processes to use with MPI-enabled tests")
 
-# ~~~
-# Make MPI libraries available project-wide. Directory-wide assignments are
-# typically a bad design decision with modern CMake, but it makes sense to use
-# it here to add MPI libraries to the entire build if we want it
-include_directories(SYSTEM ${MPI_C_INCLUDE_PATH} ${MPI_CXX_INCLUDE_PATH})
-# include_directories(SYSTEM ${MPI_CXX_INCLUDE_PATH})
-link_libraries(MPI::MPI_C MPI::MPI_CXX)
-# ~~~
-
-# Set the command used to run MPI-enabled self-tests if the user didn't specify
-# the commands to use
+# Set the command used to run MPI-enabled self-tests
 if(NOT DEFINED MPI_RUN_COMMAND)
-  set(MPI_RUN_COMMAND "${MPIEXEC_EXECUTABLE} ${MPIEXEC_NUMPROC_FLAG} 2")
+  set(MPI_RUN_COMMAND
+      "${MPIEXEC_EXECUTABLE} ${MPIEXEC_NUMPROC_FLAG} ${OOMPH_MPI_NUM_PROC}")
 endif()
+
+# Set the more complex command used to run MPI-enabled self-tests with a
+# variable number of processes. The user can sed replace 'OOMPHNP' with the
+# number of processes they wish to use
 if(NOT DEFINED MPI_VARIABLENP_RUN_COMMAND)
   set(MPI_VARIABLENP_RUN_COMMAND
       "${MPIEXEC_EXECUTABLE} ${MPIEXEC_NUMPROC_FLAG} OOMPHNP ")

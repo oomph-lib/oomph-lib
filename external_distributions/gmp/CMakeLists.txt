@@ -4,14 +4,10 @@
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(STATUS "Entered gmp subdirectory")
 
-# Define the name of the library
-set(LIBNAME gmp)
-set(ALREADY_HAVE_BUILT_GMP TRUE)
-
-# Download the nlohmann JSON library Git repository.
-FetchContent_Declare(gmp_project
-                     URL "${CMAKE_CURRENT_LIST_DIR}/gmp-6.1.2.tar.xz")
-FetchContent_MakeAvailable(gmp_project)
+# Look for an already-installed version of GMP. If OOMPH_USE_GMP_FROM is defined
+# then we'll look under there. (We have our own FindGMP.cmake that will inspect
+# the OOMPH_USE_GMP_FROM variable)
+find_package(GMP 4.2 REQUIRED)
 
 # ------------------------------------------------------------------------------
 # BOILERPLATE: Update global variables

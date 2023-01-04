@@ -112,6 +112,9 @@ function(oomph_library_config)
   # we assume it is a header-only library, in which case it should be created as
   # an INTERFACE library. Note, in this case, it makes no sense to specify the
   # library type, as the library itself will not be built/compiled.
+  #
+  # NOTE: If the user does not specify LIBTYPE, it will be inferred from the
+  # CMake cache variable BUILD_SHARED_LIBS.
   if(SOURCES)
     add_library(${LIBNAME} ${LIBTYPE} ${LIBRARY_DEPS})
     set(INCLUDE_TYPE PUBLIC)
@@ -147,17 +150,18 @@ function(oomph_library_config)
   #
   # At install-time, we just place the files under:
   #
-  # ${CMAKE_INSTALL_PREFIX}/include/oomphlib.
+  # ${CMAKE_INSTALL_PREFIX}/${OOMPH_INSTALL_INCLUDE_DIR}
   #
-  # Note that the CMAKE_INSTALL_PREFIX is added automatically here, so we don't
-  # need to specify it ourselves.
+  # which will most likely just be
+  #
+  # <oomph-lib-root>/install/include/oomphlib
   target_include_directories(
     ${LIBNAME}
     ${INCLUDE_TYPE}
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/../>
-    $<INSTALL_INTERFACE:include/${PROJECT_NAME}>)
+    $<INSTALL_INTERFACE:${OOMPH_INSTALL_INCLUDE_DIR}>)
 
   # Add the location of oomph-lib-config.h header if required
   if(OOMPH_ADD_CONFIG_H)
@@ -260,40 +264,20 @@ function(oomph_library_config)
   install(FILES "${CMAKE_CURRENT_BINARY_DIR}/../${LIBNAME}.h"
           DESTINATION "${OOMPH_INSTALL_INCLUDE_DIR}")
 
-  # The directory to install the library headers to
-  set(LIBRARY_INCLUDE_DIR
+  # The directory to install the library headers to relative(!) to the
+  # installation directory
+  set(INCLUDE_DIR_FOR_THIS_LIBRARY
       "${OOMPH_INSTALL_INCLUDE_DIR}/${LIBRARY_INCLUDE_SUBDIR}")
 
   # Create the headers install directory. Do it now so that there's a valid
   # directory to create symlinks from (if used)
-  install(DIRECTORY DESTINATION "${LIBRARY_INCLUDE_DIR}")
+  install(DIRECTORY DESTINATION "${INCLUDE_DIR_FOR_THIS_LIBRARY}")
 
   # Combine everything that shouldn't be built into a single variable
   set(ALL_HEADERS ${HEADERS} ${HEADERS_NO_COMBINE} ${SOURCES_NO_BUILD})
 
   # Install (or symlink) the headers
-  if(OOMPH_ENABLE_SYMBOLIC_LINKS_FOR_HEADERS)
-    include(OomphCreateSymlinksForHeaders)
-    oomph_create_symlinks_for_headers(
-      REAL_DIR ${CMAKE_CURRENT_SOURCE_DIR}
-      SYMLINK_DIR ${LIBRARY_INCLUDE_DIR}
-      HEADERS ${ALL_HEADERS})
-
-    # Add these symlinks to the list of files we need to clean up
-    foreach(HEADER IN LISTS ALL_HEADERS)
-      list(APPEND EXTRA_INSTALLED_FILES_FOR_CLEAN_UP
-           "${LIBRARY_INCLUDE_DIR}/${HEADER}")
-    endforeach()
-  else()
-    install(FILES ${ALL_HEADERS} DESTINATION ${LIBRARY_INCLUDE_DIR})
-  endif()
-
-  # Since we're installing/symlinking the headers, we need to remember them so
-  # that we can clean them up later. First we loop over the variables to update
-  # the variable locally, then we overwrite the cached variable to update it
-  # globally
-  set(EXTRA_INSTALLED_FILES_FOR_CLEAN_UP ${EXTRA_INSTALLED_FILES_FOR_CLEAN_UP}
-      CACHE INTERNAL "" FORCE)
+  install(FILES ${ALL_HEADERS} DESTINATION "${INCLUDE_DIR_FOR_THIS_LIBRARY}")
   # ----------------------------------------------------------------------------
 endfunction()
 # ------------------------------------------------------------------------------

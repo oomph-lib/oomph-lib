@@ -82,7 +82,7 @@ set(LIBNAME oomph_superlu_dist_3.0)
 
 # Specify the libraries that we depend on
 set(LINKLIBS oomph_metis_from_parmetis_3.1.1 MPI::MPI_C)
-if(OOMPH_ENABLE_USE_OPENBLAS AND BLAS_FOUND)
+if(BLAS_FOUND)
   list(APPEND LINKLIBS BLAS::BLAS)
 else()
   list(APPEND LINKLIBS oomph_blas)

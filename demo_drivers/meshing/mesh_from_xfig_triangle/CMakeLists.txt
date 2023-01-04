@@ -4,7 +4,7 @@ message(VERBOSE "Entered mesh_from_xfig_triangle subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(mesh_from_xfig_triangle C CXX Fortran)
-if(NOT BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
@@ -25,11 +25,14 @@ oomph_add_executable(
   LIBRARIES oomph::navier_stokes oomph::meshes oomph::generic)
 
 # Create a symlink to the built mesh from the scripts directory
+#
+# TODO: Ask whether it's better to make this a copy rather a symlink since the
+# build/ directory is likely to be deleted
 add_custom_target(
-  install_fig2poly
-  COMMAND ${CMAKE_COMMAND} -E create_symlink fig2poly
-          ../../../../scripts/fig2poly
-  DEPENDS fig2poly)
+  install_fig2poly COMMAND ln -sf "${CMAKE_BINARY_DIR}/fig2poly"
+                           "${OOMPH_ROOT_DIR}/scripts/fig2poly")
+oomph_get_hashed_target_name(fig2poly FIG2POLY_HASHED_TARGET_NAME)
+add_dependencies(install_fig2poly ${FIG2POLY_HASHED_TARGET_NAME})
 
 # ---------------------------------- TESTING ----------------------------------
 

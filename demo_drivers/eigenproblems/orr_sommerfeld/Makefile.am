@@ -1,13 +1,6 @@
 #Include commands common to every Makefile.am
 include $(top_srcdir)/config/makefile_templates/demo_drivers
 
-
-#==================================
-#  Currently need anasazi
-#==================================
-if OOMPH_HAS_TRILINOS
-
-
 # Name of executable
 check_PROGRAMS=orr_sommerfeld
 
@@ -18,4 +11,3 @@ orr_sommerfeld_SOURCES = orr_sommerfeld.cc validate.sh
 # $(FLIBS) is included in case the solver involves fortran sources.
 orr_sommerfeld_LDADD = -L@libdir@ -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 
-endif

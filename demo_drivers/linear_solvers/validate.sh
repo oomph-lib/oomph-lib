@@ -4,7 +4,7 @@
 OOMPH_ROOT_DIR=$1
 
 #Set the number of tests to be checked
-NUM_TESTS=89
+NUM_TESTS=90
 
 # Threshold for number of iterations in comparison of convergence histories
 #===========================================================================
@@ -1035,7 +1035,49 @@ mv RESLT RESLT_DirectSolverTest
 # Append log to main validation log
 cat validation.log >>$OOMPH_ROOT_DIR/validation.log
 
+# Serial MUMPS test
+#==================
+
+# Validation for serial MUMPS test
+#---------------------------------
+if [ -f ../serial_mumps_test ]; then
+
+  echo "Running serial MUMPS test"
+  mkdir RESLT
+  ../serial_mumps_test >OUTPUT_SerialMumps
+  echo "done"
+  echo " " >>validation.log
+  echo "Serial MUMPS tests" >>validation.log
+  echo "-------------------" >>validation.log
+  echo " " >>validation.log
+  echo "Validation directory: " >>validation.log
+  echo " " >>validation.log
+  echo "  " $(pwd) >>validation.log
+  echo " " >>validation.log
+
+  if test "$2" = "no_fpdiff"; then
+    echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >>validation.log
+  else
+    echo "MUMPS-based global problem based solve" >>validation.log
+    $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/serial_mumps_test_solve_result.dat.gz \
+        RESLT/soln_serial_mumps.dat >>validation.log
+  fi
+
+  mv RESLT RESLT_SerialMumpsTest
+
+else
+  echo ""
+  echo "Not running serial MUMPS test as executable doesn't exist"
+  echo ""
+
+  echo "[OK] (Dummy for non-existent MUMPS)" >>validation.log
+fi
+
+# Append log to main validation log
+cat validation.log >>$OOMPH_ROOT_DIR/validation.log
+
 cd ..
+
 
 #######################################################################
 

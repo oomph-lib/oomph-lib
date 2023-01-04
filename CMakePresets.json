@@ -17,14 +17,11 @@
         "OOMPH_DONT_SILENCE_USELESS_WARNINGS": "OFF",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "OOMPH_ENABLE_CODE_COVERAGE": "OFF",
-        "OOMPH_ENABLE_DOC_BUILD": "OFF",
         "OOMPH_ENABLE_MPI": "OFF",
         "OOMPH_ENABLE_PARANOID": "OFF",
         "OOMPH_ENABLE_RANGE_CHECKING": "OFF",
-        "OOMPH_ENABLE_SYMBOLIC_LINKS_FOR_HEADERS": "ON",
         "OOMPH_TRANSITION_TO_VERSION_3": "OFF",
         "OOMPH_USE_DEPRECATED_SUPERLU": "OFF",
-        "OOMPH_ENABLE_USE_OPENBLAS": "OFF",
         "OOMPH_WANT_CGAL": "OFF",
         "OOMPH_WANT_HYPRE": "OFF",
         "OOMPH_WANT_MUMPS": "OFF",
@@ -62,31 +59,38 @@
       "binaryDir": "${sourceDir}/build-mpi"
     },
     {
-      "name": "ci",
+      "name": "ci-base",
+      "hidden": true,
       "inherits": "base",
-      "displayName": "Build Config for CI/CD",
       "generator": "Ninja",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release",
-        "OOMPH_ENABLE_USE_OPENBLAS": "ON",
+        "BLA_VENDOR": "OpenBLAS"
+      }
+    },
+    {
+      "name": "ci",
+      "inherits": "ci-base",
+      "displayName": "Build Config for CI/CD",
+      "cacheVariables": {
         "OOMPH_WANT_CGAL": "ON",
-        "OOMPH_WANT_NLOHMANN_JSON": "OFF",
-        "OOMPH_WANT_HYPRE": "OFF"
+        "OOMPH_WANT_NLOHMANN_JSON": "ON",
+        "OOMPH_WANT_HYPRE": "ON",
+        "OOMPH_WANT_MUMPS": "ON",
+        "OOMPH_WANT_TRILINOS": "OFF"
       }
     },
     {
       "name": "ci-mpi",
-      "inherits": "base",
+      "inherits": "ci-base",
       "displayName": "MPI Build Config for CI/CD",
-      "generator": "Ninja",
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Release",
-        "OOMPH_ENABLE_USE_OPENBLAS": "ON",
-        "OOMPH_WANT_CGAL": "ON",
         "OOMPH_ENABLE_MPI": "ON",
-        "OOMPH_WANT_NLOHMANN_JSON": "OFF",
-        "OOMPH_WANT_HYPRE": "OFF",
-        "OOMPH_WANT_MUMPS": "OFF"
+        "OOMPH_WANT_CGAL": "ON",
+        "OOMPH_WANT_NLOHMANN_JSON": "ON",
+        "OOMPH_WANT_HYPRE": "ON",
+        "OOMPH_WANT_MUMPS": "ON",
+        "OOMPH_WANT_TRILINOS": "OFF"
       }
     },
     {

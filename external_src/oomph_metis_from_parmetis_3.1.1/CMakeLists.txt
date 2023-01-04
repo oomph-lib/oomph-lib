@@ -81,13 +81,20 @@ set(SOURCES
 # Define the name of the library
 set(LIBNAME oomph_metis_from_parmetis_3.1.1)
 
+# Libraries to link SuperLU Dist to
+set(LINKLIBS)
+if(OOMPH_HAS_MPI)
+  set(LINKLIBS MPI::MPI_C)
+endif()
+
 # Import the OomphLibraryConfig module to handle the library creation
 include(OomphLibraryConfig)
 oomph_library_config(
   LIBNAME ${LIBNAME}
   HEADERS ${HEADERS}
   HEADERS_NO_COMBINE ${HEADERS_NO_COMBINE}
-  SOURCES ${SOURCES})
+  SOURCES ${SOURCES}
+  LINKLIBS ${LINKLIBS})
 
 # Silence the annoying warnings produced by this library. N.B. The
 # '-Wno-incompatible-pointer-types' flag is necessary to address the warnings

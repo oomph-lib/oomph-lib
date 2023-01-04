@@ -22,7 +22,6 @@
 #                          LIBRARIES oomph::poisson)
 #
 #     # Modify the target C++ standard
-#     set(HASHED_TARGET_NAME)
 #     oomph_get_hashed_target_name(one_d_poisson HASHED_TARGET_NAME)
 #     set_target_properties(${HASHED_TARGET_NAME} PROPERTIES CXX_STANDARD 20)
 #

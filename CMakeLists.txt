@@ -39,7 +39,7 @@ project(
   oomphlib
   DESCRIPTION "A finite-element library for simulating multi-physics problems."
   VERSION 2.9.0
-  HOMEPAGE_URL "http://oomph-lib.maths.man.ac.uk/doc/html/index.html"
+  HOMEPAGE_URL "https://oomph-lib.github.io/oomph-lib/doc/html/"
   LANGUAGES C CXX Fortran)
 
 # ---------------------------[ INITIAL PROJECT SETUP ]--------------------------
@@ -48,28 +48,12 @@ project(
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/")
 
 # Specify the C++ standard
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 # Build in Release (fully optimised) mode by default
 if(NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
   set(CMAKE_BUILD_TYPE "Release" CACHE STRING "" FORCE)
-endif()
-
-# If the user hasn't specified a custom installation path, we're going to
-# install to the install/ subdirectory. However, if the user builds with the
-# flag -DENABLE_INSTALL_AS_SUPERUSER=ON to force us to use the default system
-# install path
-if((NOT ENABLE_INSTALL_AS_SUPERUSER)
-   AND (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT))
-  set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/install" CACHE PATH
-      "Default installation path" FORCE)
-  message(
-    STATUS
-      "Overriding default installation location. Will install to: ${CMAKE_INSTALL_PREFIX}"
-  )
-else()
-  message(STATUS "Will install to: ${CMAKE_INSTALL_PREFIX}")
 endif()
 
 # Sort out config files
@@ -82,7 +66,6 @@ set(CMAKE_MESSAGE_LOG_LEVEL VERBOSE)
 # ----------------------[ FIND REQUIRED/DESIRED PACKAGES ]----------------------
 
 # Built-in modules to find out whether certain packages are installed
-find_package(Doxygen)
 find_package(Git)
 find_package(Python3 REQUIRED)
 
@@ -96,30 +79,37 @@ option(OOMPH_DONT_SILENCE_USELESS_WARNINGS "Display (harmless) warnings from ext
 option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" OFF)
 option(OOMPH_ENABLE_PARANOID "Enable the PARANOID flag in Debug" OFF)
 option(OOMPH_ENABLE_RANGE_CHECKING "Enable RANGE_CHECKING flag in Debug" OFF)
-option(OOMPH_ENABLE_SYMBOLIC_LINKS_FOR_HEADERS "Install symbolic links to the headers instead of copying them" ON)
-option(OOMPH_ENABLE_USE_OPENBLAS "Use the OpenBLAS implementation of BLAS/LAPACK" OFF)
-option(OOMPH_ENABLE_DOC_BUILD "Suppress Doxygen creation of API documentation [DOESN'T WORK YET!]" OFF)
 option(OOMPH_TRANSITION_TO_VERSION_3 "Try to build with up-to-date external sources" OFF)
 option(OOMPH_USE_DEPRECATED_SUPERLU "Use oomph-lib's deprecated version of SuperLU (4.3)" OFF)
 
 # Fine-grained control of build of external_srcs.
 # FIXME: Make sure the SUPPRESS variables below actually work
-# TODO: These should be set on the fly after checking whether the appropriate variable WITH_* has been set!
+# TODO: These should be set on the fly after checking whether the appropriate variable WITH_* has been set...
 option(OOMPH_SUPPRESS_TRIANGLE_LIB "Suppress build of oomph-lib's copy of the triangle library" OFF)
 option(OOMPH_SUPPRESS_TETGEN_LIB "Suppress build of oomph-lib's copy of the tetgen library" OFF)
 
+# FIXME: Override OOMPH_WANT_<LIB> variables if OOMPH_USE_<LIB>_FROM is specified
+
 # Third-party libraries. [WORK IN PROGRESS.]
-option(OOMPH_WANT_NLOHMANN_JSON "Use the nlohmann JSON library" OFF)
 option(OOMPH_WANT_CGAL "Do we want to build the CGAL library?" OFF)
 option(OOMPH_WANT_HYPRE "Use Hypre library" OFF)
 option(OOMPH_WANT_MUMPS "Use MUMPS library" OFF)
 option(OOMPH_WANT_TRILINOS "Use Trilinos library" OFF)
+option(OOMPH_WANT_NLOHMANN_JSON "Use the nlohmann JSON library" OFF)
 
 # Enable the use of code coverage flags so that coverage data can be collected
 option(OOMPH_ENABLE_CODE_COVERAGE "Enable collection of code coverage results" OFF)
 
 # cmake-format: on
 # -------------------------[ PROCESS SELECTED OPTIONS ]-------------------------
+
+# The demo_driver self-tests use shell scripts and symbolic links, both of which
+# require a Unix-based system
+if(NOT UNIX)
+  set(OOMPH_ENABLE_CODE_COVERAGE OFF CACHE BOOL
+      "Enable collection of code coverage results" FORCE)
+  set(OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY OFF)
+endif()
 
 # Let CMake take care of the famous -fPIC flag
 if(BUILD_SHARED_LIBS)
@@ -133,6 +123,14 @@ endif()
 # Set up MPI functionality (see cmake/OomphMPI.cmake)
 if(OOMPH_ENABLE_MPI)
   include(OomphMPI)
+
+  # Sanity check
+  if(NOT OOMPH_MPI_NUM_PROC MATCHES "^[0-9]+$")
+    message(
+      FATAL_ERROR
+        "The flag 'OOMPH_MPI_NUM_PROC' must be set an integer, not ${OOMPH_MPI_NUM_PROC}!"
+    )
+  endif()
 endif()
 
 # Add PARANOID and RANGE_CHECKING for Debug configurations (ONLY!) if desired.
@@ -155,13 +153,39 @@ if(OOMPH_USE_DEPRECATED_SUPERLU)
   add_compile_definitions(OOMPH_USE_DEPRECATED_SUPERLU)
 endif()
 
-# The demo_driver self-tests use shell scripts and symbolic links, both of which
-# require a Unix-based system
-if(NOT UNIX)
-  set(OOMPH_ENABLE_CODE_COVERAGE OFF CACHE BOOL
-      "Build tests with library build" FORCE)
-  set(OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY OFF)
-  set(SYMBOLIC_LINKS_FOR_HEADERS OFF)
+if(BLA_VENDOR
+   OR OOMPH_USE_BLAS_FROM
+   OR OOMPH_USE_LAPACK_FROM)
+  # Temporarily set CMAKE_PREFIX_PATH to the values of OOMPH_USE_BLAS_FROM and
+  # OOMPH_USE_LAPACK_FROM if either is provided
+  if(OOMPH_USE_BLAS_FROM OR OOMPH_USE_LAPACK_FROM)
+    set(BACKUP_CMAKE_PREFIX_PATH "${CMAKE_PREFIX_PATH}" CACHE INTERNAL "")
+    set(CMAKE_PREFIX_PATH "${OOMPH_USE_BLAS_FROM};${OOMPH_USE_LAPACK_FROM}"
+        CACHE INTERNAL "" FORCE)
+  endif()
+
+  # Search for the BLAS/LAPACK libraries
+  find_package(BLAS REQUIRED)
+  find_package(LAPACK REQUIRED)
+
+  # Reset the value of CMAKE_PREFIX_PATH
+  if(OOMPH_USE_BLAS_FROM OR OOMPH_USE_LAPACK_FROM)
+    set(CMAKE_PREFIX_PATH "${BACKUP_CMAKE_PREFIX_PATH}" CACHE INTERNAL "" FORCE)
+  endif()
+
+  # Store a list of directories containing the BLAS libraries
+  set(BLAS_DIRS)
+  foreach(BLAS_LIBRARY IN LISTS BLAS_LIBRARIES)
+    cmake_path(GET BLAS_LIBRARY PARENT_PATH BLAS_DIR)
+    list(APPEND BLAS_DIRS ${BLAS_DIR})
+  endforeach()
+
+  # Store a list of directories containing the LAPACK libraries
+  set(LAPACK_DIRS)
+  foreach(LAPACK_LIBRARY IN LISTS LAPACK_LIBRARIES)
+    cmake_path(GET LAPACK_LIBRARY PARENT_PATH LAPACK_DIR)
+    list(APPEND LAPACK_DIRS ${LAPACK_DIR})
+  endforeach()
 endif()
 
 if(OOMPH_ENABLE_CODE_COVERAGE)
@@ -180,47 +204,6 @@ if(OOMPH_ENABLE_CODE_COVERAGE)
   include(OomphEnableCodeCoverage)
   oomph_enable_code_coverage()
 endif()
-
-# If we want to use up-to-date OpenBLAS/LAPACK libraries
-#
-# FIXME: We should try to find BLAS/LAPACK by find_package(), and if we can't,
-# build OpenBLAS from source (with an appropriate message)
-if(OOMPH_ENABLE_USE_OPENBLAS)
-  # Ideally, the user will install OpenBLAS via 'sudo apt-get' or 'brew install'
-  # and they will simply set 'CMAKE_PREFIX_PATH' in their CMakeUserPresets.json
-  # NOTE: You can override the BLAS/LAPACK vendor by setting its value as a
-  # cache variable from the command-line, i.e. "cmake -DBLA_VENDOR ...". It will
-  # then override the value used here.
-  #
-  set(BLA_VENDOR OpenBLAS)
-  find_package(BLAS REQUIRED)
-  find_package(LAPACK REQUIRED)
-
-  # NOTE: For BLAS and LAPACK, there should be just a single library artifact
-  # but we'll generically loop over the *_LIBRARIES variables set by the Find*
-  # modules to be on the safe side...
-
-  # Store a list of directories containing the BLAS libraries
-  set(BLAS_DIRS)
-  foreach(BLAS_LIBRARY IN LISTS BLAS_LIBRARIES)
-    get_filename_component(BLAS_DIR ${BLAS_LIBRARY} DIRECTORY)
-    list(APPEND BLAS_DIRS ${BLAS_DIR})
-  endforeach()
-
-  # Store a list of directories containing the LAPACK libraries
-  set(LAPACK_DIRS)
-  foreach(LAPACK_LIBRARY IN LISTS LAPACK_LIBRARIES)
-    get_filename_component(LAPACK_DIR ${LAPACK_LIBRARY} DIRECTORY)
-    list(APPEND LAPACK_DIRS ${LAPACK_DIR})
-  endforeach()
-endif()
-
-# ~~~
-# TODO:
-# * Add OOMPH_WITH_* variables to specify custom drop-ins for specific
-#   libraries, e.g. BLAS, MUMPS, CGAL, etc. (and maybe think of a different name
-#   for the flags)
-# ~~~
 
 # --------------------------[ FIND REQUIRED HEADERS ]---------------------------
 
@@ -257,22 +240,16 @@ include(OomphInstallLibrary)
 
 # ---------------------------------[ TESTING ]----------------------------------
 
-# A flag to indicate that we're building the demo drivers with the library. If
-# the demo drivers are built with the library then we don't need to call
-# "find_package(oomphlib REQUIRED)" in each demo_driver subdirectory to locate
-# the generated oomph-lib libraries, as they'll already be visible to that scope
-# FIXME: Remove "duplicated" BUILD_DEMO_DRIVERS_WITH_LIBRARY flag (with and
-# without OOMPH_ prefix)
-set(BUILD_DEMO_DRIVERS_WITH_LIBRARY OFF)
-
 # Enable testing for the current directory and all child directories but ONLY
 # when this is the root project, i.e. it isn't being built as part of some
 # larger project hierarchy
 if(OOMPH_IS_MAIN_PROJECT AND OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
-  set(BUILD_DEMO_DRIVERS_WITH_LIBRARY ON)
   include(CTest)
-  include(OomphAddTest)
   include(OomphAddExecutable)
+  include(OomphAddTest)
+  include(OomphAddPureCppTest)
+  include(OomphDefineTestData)
+  include(OomphGetHashedTargetName)
   add_subdirectory(demo_drivers)
   # FIXME: Need to integrate self_test files into the self-test framework
   # add_subdirectory(self_test)

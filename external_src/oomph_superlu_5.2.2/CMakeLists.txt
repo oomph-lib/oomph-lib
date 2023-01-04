@@ -241,10 +241,10 @@ if(ENABLE_COMPLEX16)
 endif()
 
 # Specify the libraries that we depend on
-if(OOMPH_ENABLE_USE_OPENBLAS AND BLAS_FOUND)
+if(BLAS_FOUND)
   set(LINKLIBS BLAS::BLAS)
 else()
-  set(LINKLIBS oomph_blas)
+  set(LINKLIBS oomph::oomph_blas)
 endif()
 if(NOT WIN32)
   list(APPEND LINKLIBS m)
@@ -253,15 +253,10 @@ endif()
 # Define the name of the library
 set(LIBNAME oomph_superlu_5.2.2)
 
-# Define the library build type
-#
-# set(LIBTYPE STATIC)
-
 # Import the OomphLibraryConfig module to handle the library creation
 include(OomphLibraryConfig)
 oomph_library_config(
   LIBNAME ${LIBNAME}
-  # LIBTYPE ${LIBTYPE}
   LINKLIBS ${LINKLIBS}
   HEADERS ${HEADERS}
   SOURCES ${SOURCES})

@@ -260,7 +260,6 @@ class MakefileToCMakeListsConverter:
                 filter(lambda x: True if x not in names_to_remove else False, target_libs)
             )
             target_libs = [remove_prefix(x, "-l") for x in target_libs]
-            (num_src_lib, have_generic) = (0, False)
             target_libs_with_namespace = []
             for lib in target_libs:
                 if lib in OOMPHLIB_LIBRARIES:
@@ -270,6 +269,16 @@ class MakefileToCMakeListsConverter:
                     logger.warning(
                         f"Target in Makefile.am is linking against a library '{lib}' that oomph-lib does not define. You will likely need to define it yourself."
                     )
+            if "oomph::generic" not in target_libs_with_namespace:
+                target_libs_with_namespace += ["oomph::generic"]
+            # insert oomph::meshes before oomph::generic
+            if "oomph::meshes" not in target_libs_with_namespace:
+                generic_pos = target_libs_with_namespace.index("oomph::generic")
+                target_libs_with_namespace = [
+                    *target_libs_with_namespace[:generic_pos],
+                    "oomph::meshes",
+                    *target_libs_with_namespace[generic_pos:],
+                ]
             if len(target_libs_with_namespace) == 0:
                 return None
             target_libs_with_namespace = " ".join(target_libs_with_namespace)

@@ -19,9 +19,11 @@ set(LIBNAME space_time_unsteady_heat_equal_order_galerkin)
 # We depend on the generic library
 set(LINKLIBS generic space_time_block_preconditioner)
 
+# FIXME: Sort this out
+#
 # Unlike most libraries, the name of this library is not the same as the name of
 # this subdirectory. Therefore we need to provide the directory name to the
-# user. It's a bit clunky for now... WIP.
+# user. It's a bit clunky for now...
 set(INCLUDE_SUBDIRECTORY galerkin_equal_order)
 
 # Import the OomphLibraryConfig module to handle the library creation

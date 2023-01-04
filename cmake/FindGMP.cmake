@@ -7,33 +7,19 @@
 
 include(FindPackageHandleStandardArgs)
 
-# Try to find libraries
-find_library(
-  GMP_C_LIBRARIES
-  NAMES gmp
-  PATHS /usr/local /usr /opt/homebrew/opt /usr/local/Cellar
-  DOC "GMP C libraries")
+# cmake-format: off
+# See if the user specified a custom GMP installation location using OOMPH_USE_GMP_FROM or GMPDIR
+find_library(GMP_C_LIBRARIES NAMES gmp PATHS "${OOMPH_USE_GMP_FROM}/lib" "$ENV{GMPDIR}/lib" NO_DEFAULT_PATH DOC "GMP C libraries")
+find_library(GMP_CXX_LIBRARIES NAMES gmpxx PATHS "${OOMPH_USE_GMP_FROM}/lib" "$ENV{GMPDIR}/lib" NO_DEFAULT_PATH DOC "GMP C++ libraries")
+find_path(GMP_C_INCLUDES NAMES gmp.h PATHS "${OOMPH_USE_GMP_FROM}/include" "$ENV{GMPDIR}/include" NO_DEFAULT_PATH DOC "GMP C header")
+find_path(GMP_CXX_INCLUDES NAMES gmpxx.h PATHS "${OOMPH_USE_GMP_FROM}/include" "$ENV{GMPDIR}/include" NO_DEFAULT_PATH DOC "GMP C++ header")
 
-find_library(
-  GMP_CXX_LIBRARIES
-  NAMES gmpxx
-  PATHS /usr/local /usr /opt/homebrew/opt /usr/local/Cellar
-  DOC "GMP C++ libraries")
-
-# Try to find headers
-find_path(
-  GMP_C_INCLUDES
-  NAMES gmp.h
-  PATHS $ENV{GMPDIR} /usr/local /usr /opt/homebrew/opt /usr/local/Cellar
-  DOC "GMP C header")
-
-find_path(
-  GMP_CXX_INCLUDES
-  NAMES gmpxx.h
-  PATHS $ENV{GMPDIR} /usr/local /usr /opt/homebrew/opt /usr/local/Cellar
-  DOC "GMP C++ header")
-
-# TODO: We should check we can link some simple code against libgmp and libgmpxx
+# Try to find libraries and headers in the standard system paths
+find_library(GMP_C_LIBRARIES NAMES gmp PATHS /usr/local /usr /opt/homebrew/opt /usr/local/Cellar DOC "GMP C libraries")
+find_library(GMP_CXX_LIBRARIES NAMES gmpxx PATHS /usr/local /usr /opt/homebrew/opt /usr/local/Cellar DOC "GMP C++ libraries")
+find_path(GMP_C_INCLUDES NAMES gmp.h PATHS /usr/local /usr /opt/homebrew/opt /usr/local/Cellar DOC "GMP C header")
+find_path(GMP_CXX_INCLUDES NAMES gmpxx.h PATHS /usr/local /usr /opt/homebrew/opt /usr/local/Cellar DOC "GMP C++ header")
+# cmake-format: on
 
 # Handle QUIET and REQUIRED and check the necessary variables were set and if so
 # set ``GMP_FOUND``

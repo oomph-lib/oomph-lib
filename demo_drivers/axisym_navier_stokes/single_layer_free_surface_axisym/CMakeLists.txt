@@ -4,7 +4,7 @@ message(VERBOSE "Entered single_layer_free_surface_axisym subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(single_layer_free_surface_axisym C CXX Fortran)
-if(NOT BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)

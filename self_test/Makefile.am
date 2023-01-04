@@ -11,7 +11,7 @@ if WANT_MPI
   full_self_test += mpi
 endif
 else
-  full_self_test = 
+  full_self_test =
 endif
 
 

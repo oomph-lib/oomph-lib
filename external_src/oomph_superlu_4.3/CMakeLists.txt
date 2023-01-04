@@ -101,15 +101,10 @@ set(SOURCES
 # Define the name of the library
 set(LIBNAME oomph_superlu_4.3)
 
-# Define the library build type
-#
-# set(LIBTYPE STATIC)
-
 # Import the OomphLibraryConfig module to handle the library creation
 include(OomphLibraryConfig)
 oomph_library_config(
   LIBNAME ${LIBNAME}
-  # LIBTYPE ${LIBTYPE}
   HEADERS ${HEADERS}
   SOURCES ${SOURCES})
 

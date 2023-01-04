@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -510,9 +510,9 @@ namespace oomph
     /// \f[ \begin{bmatrix} \cos\theta & \sin\theta \newline -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \newline dy \end{bmatrix} = \begin{bmatrix} r \newline 0 \end{bmatrix}, \f]
     /// where \f$ r=\sqrt{pow(dx,2)+pow(dy,2)} \f$. The values of a and b are
     /// given by:
-    /// \f[ \cos\theta&=\dfrac{dx}{\sqrt{pow(dx,2)+pow(dy,2)}}, \f]
+    /// \f[ \cos\theta=\dfrac{dx}{\sqrt{pow(dx,2)+pow(dy,2)}}, \f]
     /// and
-    /// \f[ \sin\theta&=\dfrac{dy}{\sqrt{pow(dx,2)+pow(dy,2)}}. \f]
+    /// \f[ \sin\theta=\dfrac{dy}{\sqrt{pow(dx,2)+pow(dy,2)}}. \f]
     /// Taken from: Saad Y."Iterative methods for sparse linear systems", p.192
     void generate_plane_rotation(double& dx, double& dy, double& cs, double& sn)
     {

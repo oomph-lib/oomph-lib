@@ -11,7 +11,7 @@
 #                          LIBRARIES        <required-libraries>
 #                          [CXX_DEFINITIONS <preprocessor-definitions>]
 #                          [CXX_OPTIONS     <compiler-options>]
-#                          [CXX_STANDARD    <17|20>]
+#                          [CXX_STANDARD    <14|17|20>]
 #                          [LINK_OPTIONS    <link-options>]
 #                          [SILENCE_NO_LIBS_SUPPLIED_WARNING])
 #
@@ -89,7 +89,7 @@ function(oomph_add_executable)
           ")
     endif()
   elseif(CXX_STANDARD)
-    set(SUPPORTED_CMAKE_STANDARDS 17 20)
+    set(SUPPORTED_CMAKE_STANDARDS 14 17 20)
     if(NOT CXX_STANDARD IN_LIST SUPPORTED_CMAKE_STANDARDS)
       message(
         FATAL_ERROR
@@ -129,7 +129,7 @@ function(oomph_add_executable)
   if(CXX_STANDARD)
     target_compile_features(${NAME}_${PATH_HASH} PUBLIC cxx_std_${CXX_STANDARD})
   else()
-    target_compile_features(${NAME}_${PATH_HASH} PUBLIC cxx_std_17)
+    target_compile_features(${NAME}_${PATH_HASH} PUBLIC cxx_std_14)
   endif()
 
   # General oomph-lib specific compiler definitions

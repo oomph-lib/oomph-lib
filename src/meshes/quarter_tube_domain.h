@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -702,7 +702,7 @@ namespace oomph
     // f[2]=r_top[2];
   }
 
-  //#####################################################################
+  // #####################################################################
 
   //=======================================================================
   /// Boundary of bottom right box macro element in layer i_layer
@@ -875,7 +875,7 @@ namespace oomph
            (r_wall[2] - r_central[2]) * s_squashed(0.5 * (1.0 + zeta[0]));
   }
 
-  //#####################################################################
+  // #####################################################################
 
   //=======================================================================
   /// Boundary of top left box macro element in layer i_layer

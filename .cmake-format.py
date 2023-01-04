@@ -10,12 +10,13 @@ with section("parse"):
                 "SILENCE_NO_LIBS_SUPPLIED_WARNING"
             ],
             "kwargs": {
-                "CXX_DEFINITIONS": "*",
-                "CXX_OPTIONS": "*",
-                "CXX_STANDARD": "*",
+                "NAME": 1,
+                "SOURCES": "*",
                 "LIBRARIES": "*",
-                "NAME": "*",
-                "SOURCES": "*"
+                "CXX_STANDARD": "*",
+                "CXX_OPTIONS": "*",
+                "CXX_DEFINITIONS": "*",
+                "LINK_OPTIONS": "*",
             }
         },
         "oomph_add_test": {
@@ -26,10 +27,23 @@ with section("parse"):
                 "REQUIRES_MPI_VARIABLENP_RUN_COMMAND"
             ],
             "kwargs": {
+                "TEST_NAME": 1,
                 "EXTRA_REQUIRES": "*",
                 "LABELS": "*",
                 "TARGET_DEPENDENCIES": "*",
-                "TEST_NAME": "*"
+            }
+        },
+        "oomph_add_pure_cpp_test": {
+            "flags": [
+                "SILENCE_MISSING_VALIDATA_WARNING",
+            ],
+            "kwargs": {
+                "TEST_NAME": 1,
+                "TARGET_DEPENDENCY": 1,
+                "LOG_FILE": 1,
+                "LABELS": "*",
+                "RUN_WITH": "*",
+                "TEST_ARGS": "*",
             }
         },
         "oomph_create_combined_header": {
@@ -96,6 +110,17 @@ with section("parse"):
         "check_fortran_compiler_flag": {
             "flags": [],
             "kwargs": {}
+        },
+        "oomph_generate_doc_from": {
+            "flags": [
+                "BUILD_DOCS_TARGET",
+                "BUILD_DOXY_HEADER_TARGET",
+                "SUPPRESS_LATEX_IN_THIS_DIRECTORY",
+            ],
+            "kwargs": {
+                "OOMPH_ROOT_DIR": 1,
+                "DOCFILE": 1,
+            }
         },
         "set": {
             "flags": [],

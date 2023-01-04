@@ -4,7 +4,7 @@ message(VERBOSE "Entered linear_solvers subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(linear_solvers C CXX Fortran)
-if(NOT BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../install")
 endif()
 include(CTest)
@@ -64,6 +64,13 @@ if(NOT OOMPH_HAS_MPI)
   endif()
 endif()
 
+if(OOMPH_HAS_MUMPS)
+  oomph_add_executable(
+    NAME serial_mumps_test
+    SOURCES serial_mumps_test.cc
+    LIBRARIES oomph::poisson oomph::meshes oomph::generic)
+endif()
+
 # ---------------------------------- TESTING ----------------------------------
 
 set(TEST_TARGET_DEPS
@@ -83,6 +90,10 @@ if(NOT OOMPH_HAS_MPI)
   if(OOMPH_HAS_TRILINOS)
     list(APPEND TEST_TARGET_DEPS TrilinosSolver_test)
   endif()
+endif()
+
+if(OOMPH_HAS_MUMPS)
+  list(APPEND TEST_TARGET_DEPS serial_mumps_test)
 endif()
 
 oomph_add_test(

@@ -1,7 +1,7 @@
-#! /bin/sh
+#!/bin/sh
 
 # Get the OOMPH-LIB root directory from a makefile
-OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
+OOMPH_ROOT_DIR=$1
 
 
 #Set the number of tests to be checked
@@ -40,7 +40,7 @@ if test "$1" = "no_fpdiff"; then
     echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
     # Compare results
-    ../$OOMPH_ROOT_DIR/bin/fpdiff.py ../validata/OUTFILE_default_constructor_test  \
+    $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/OUTFILE_default_constructor_test  \
         OUTFILE_default_constructor_test >> validation.log
 fi
 
@@ -62,13 +62,13 @@ if test "$1" = "no_fpdiff"; then
     echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
     # Compare results
-    ../$OOMPH_ROOT_DIR/bin/fpdiff.py ../validata/OUTFILE_constructor_with_param_wanted  \
+    $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/OUTFILE_constructor_with_param_wanted  \
         OUTFILE_constructor_with_param_wanted >> validation.log
 
-    ../$OOMPH_ROOT_DIR/bin/fpdiff.py ../validata/OUTFILE_constructor_with_param_not_wanted  \
+    $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/OUTFILE_constructor_with_param_not_wanted  \
         OUTFILE_constructor_with_param_not_wanted >> validation.log
 
-    ./.././compare_block_selector_nonnull_replacement_block_pt.sh ./../validata/OUTFILE_constructor_with_param_replace \
+    ./../compare_block_selector_nonnull_replacement_block_pt.sh ./../validata/OUTFILE_constructor_with_param_replace \
         OUTFILE_constructor_with_param_replace >> validation.log 
 fi
 
@@ -91,13 +91,13 @@ if test "$1" = "no_fpdiff"; then
     echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
     # Compare results
-    ../$OOMPH_ROOT_DIR/bin/fpdiff.py ../validata/OUTFILE_select_block_wanted  \
+    $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/OUTFILE_select_block_wanted  \
         OUTFILE_select_block_wanted >> validation.log
 
-    ../$OOMPH_ROOT_DIR/bin/fpdiff.py ../validata/OUTFILE_select_block_not_wanted  \
+    $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/OUTFILE_select_block_not_wanted  \
         OUTFILE_select_block_not_wanted >> validation.log
 
-    ./.././compare_block_selector_nonnull_replacement_block_pt.sh ./../validata/OUTFILE_select_block_replace \
+    ./../compare_block_selector_nonnull_replacement_block_pt.sh ./../validata/OUTFILE_select_block_replace \
         OUTFILE_select_block_replace >> validation.log 
 fi
 
@@ -117,7 +117,7 @@ if test "$1" = "no_fpdiff"; then
     echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
     # Compare results
-    ../$OOMPH_ROOT_DIR/bin/fpdiff.py ../validata/OUTFILE_want_block  \
+    $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/OUTFILE_want_block  \
         OUTFILE_want_block >> validation.log
 fi
 ###########################################################################
@@ -136,7 +136,7 @@ if test "$1" = "no_fpdiff"; then
     echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
     # Compare results
-    ../$OOMPH_ROOT_DIR/bin/fpdiff.py ../validata/OUTFILE_do_not_want_block  \
+    $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/OUTFILE_do_not_want_block  \
         OUTFILE_do_not_want_block >> validation.log
 fi
 
@@ -156,7 +156,7 @@ if test "$1" = "no_fpdiff"; then
     echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
     # Compare results
-    ../$OOMPH_ROOT_DIR/bin/fpdiff.py ../validata/OUTFILE_do_not_want_block_replace  \
+    $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/OUTFILE_do_not_want_block_replace  \
         OUTFILE_do_not_want_block_replace >> validation.log
 fi
 
@@ -179,7 +179,7 @@ get_makefile_variable()
 cxx_compile_command="$(get_makefile_variable CXX) $(get_makefile_variable CXXFLAGS)"
 
 # Whilst we're here, we source the constains function.
-. $OOMPH_ROOT_DIR/bin/string_contains.sh
+. $OOMPH_ROOT_DIR/scripts/string_contains.sh
 
 # Return to our testing directory.
 cd $CURRDIR
@@ -222,7 +222,7 @@ if test "$1" = "no_fpdiff"; then
     echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
     # Compare results
-    ../$OOMPH_ROOT_DIR/bin/fpdiff.py ../validata/OUTFILE_set_row_index  \
+    $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/OUTFILE_set_row_index  \
         OUTFILE_set_row_index >> validation.log
 fi
 
@@ -242,7 +242,7 @@ if test "$1" = "no_fpdiff"; then
     echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
     # Compare results
-    ../$OOMPH_ROOT_DIR/bin/fpdiff.py ../validata/OUTFILE_set_column_index  \
+    $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/OUTFILE_set_column_index  \
         OUTFILE_set_column_index >> validation.log
 fi
 
@@ -256,7 +256,7 @@ cd ../Validation
 ###########################################################################
 
 # Append log to main validation log
-cat validation.log >> ../../../../validation.log
+cat validation.log >> $OOMPH_ROOT_DIR/validation.log
 
 cd ..
 
@@ -269,7 +269,7 @@ cd ..
 # 0 if all tests has passed.
 # 1 if some tests failed.
 # 2 if there are more 'OK' than expected.
-. $OOMPH_ROOT_DIR/bin/validate_ok_count
+. $OOMPH_ROOT_DIR/scripts/validate_ok_count
 
 # Never get here
 exit 10

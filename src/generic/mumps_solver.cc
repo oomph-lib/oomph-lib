@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -668,12 +668,14 @@ namespace oomph
       tmp_rhs[j] = Mumps_struc_pt->rhs[j];
     }
 
+#ifdef OOMPH_HAS_MPI
     // Broadcast the result which is only held on root
     MPI_Bcast(&tmp_rhs[0],
               ndof,
               MPI_DOUBLE,
               0,
               this->distribution_pt()->communicator_pt()->mpi_comm());
+#endif
 
     // If the result vector is distributed, re-distribute the
     // non-distributed tmp_rhs vector to match

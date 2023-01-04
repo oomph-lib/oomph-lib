@@ -76,7 +76,7 @@ function(oomph_find_external_src_file)
     endif()
 
     # If the file isn't in the calling directory, symlink it
-    get_filename_component(FILE_LOCATION ${PATH_TO_FILE} DIRECTORY)
+    cmake_path(GET PATH_TO_FILE PARENT_PATH FILE_LOCATION)
     if(NOT FILE_LOCATION STREQUAL ${CMAKE_CURRENT_LIST_DIR})
       message(VERBOSE "Creating symlink.")
       file(CREATE_LINK ${FILE_LOCATION} "${CMAKE_CURRENT_LIST_DIR}/${FILE}"
@@ -111,7 +111,7 @@ function(oomph_find_external_src_file)
   # If the user wanted the filename appended to a specified target
   if(TARGET)
     # Append the filename of the chosen file
-    get_filename_component(FILENAME ${PATH_TO_FILE} NAME)
+    cmake_path(GET PATH_TO_FILE FILENAME FILENAME)
     set(UPDATED_TARGET ${${TARGET}} ${FILENAME})
 
     # Update the specified target and make it visible in the parent scope

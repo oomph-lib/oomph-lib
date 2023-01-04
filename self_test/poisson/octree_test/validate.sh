@@ -1,7 +1,7 @@
 #! /bin/sh
 
 # Get the OOMPH-LIB root directory from a makefile
-OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
+OOMPH_ROOT_DIR=$1
 
 
 #Set the number of tests to be checked
@@ -34,11 +34,11 @@ if test "$1" = "no_fpdiff"; then
 else
 cat trace.dat  RESLT/edge_neighbours0.dat RESLT/neighbours0.dat \
     RESLT/no_true_edge0.dat RESLT/orientation0.dat > results.dat
-../../../../bin/fpdiff.py ../validata/results.dat.gz results.dat >> validation.log
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/results.dat.gz results.dat >> validation.log
 fi
 
 # Append log to main validation log
-cat validation.log >> ../../../../validation.log
+cat validation.log >> $OOMPH_ROOT_DIR/validation.log
 
 cd ..
 
@@ -51,7 +51,7 @@ cd ..
 # 0 if all tests has passed.
 # 1 if some tests failed.
 # 2 if there are more 'OK' than expected.
-. $OOMPH_ROOT_DIR/bin/validate_ok_count
+. $OOMPH_ROOT_DIR/scripts/validate_ok_count
 
 # Never get here
 exit 10

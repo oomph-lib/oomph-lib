@@ -4,30 +4,73 @@
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(STATUS "Entered cgal subdirectory")
 
-# Find dependencies
-find_package(GMP REQUIRED)
-find_package(MPFR REQUIRED)
-find_package(Boost REQUIRED COMPONENTS Thread System Program_options)
+# Make sure the CGAL dependencies have been found
+if(NOT OOMPH_HAS_GMP)
+  message(FATAL_ERROR "Cannot use CGAL -- the 'gmp' library is missing!")
+endif()
+if(NOT OOMPH_HAS_MPFR)
+  message(FATAL_ERROR "Cannot use CGAL -- the 'mpfr' library is missing!")
+endif()
+if(NOT OOMPH_HAS_BOOST)
+  message(FATAL_ERROR "Cannot use CGAL -- the 'Boost' library is missing!")
+endif()
+
+# CGAL currently defines a variable called BUILD_TESTING which they shouldn't do
+# and it messes up the use of the demo drivers. For now, we have to clone CGAL
+# ourselves so that we can patch it. There is an open GitHub issue for the fix
+# here: https://github.com/CGAL/cgal/issues/7121. Once the patch has been merged
+# in, we'll be able to allow users to use their own pre-installed version of
+# CGAL which will save a lot of time at configure time. To do this, we can just
+# remove the use of the FORCE_ variable below.
+set(FORCE_BUILD_OWN_VERSION_OF_CGAL TRUE CACHE INTERNAL "")
 
 # Configuration flags
 set(CGAL_DO_NOT_WARN_ABOUT_CMAKE_BUILD_TYPE TRUE CACHE INTERNAL "")
 
-# Download the CGAL library
-FetchContent_Declare(
-  cgal_project
-  GIT_REPOSITORY https://github.com/CGAL/cgal.git
-  GIT_TAG v5.5.1 # releases/CGAL-4.11.3 # v5.5.1
-  GIT_PROGRESS TRUE
-  GIT_SHALLOW TRUE)
-FetchContent_MakeAvailable(cgal_project)
+# Look for an already-installed version of CGAL. If OOMPH_USE_CGAL_FROM is
+# defined then we'll look under there
+if(NOT FORCE_BUILD_OWN_VERSION_OF_CGAL)
+  if(OOMPH_USE_CGAL_FROM)
+    find_package(
+      CGAL 5.5.1 REQUIRED
+      PATHS "${OOMPH_USE_CGAL_FROM}"
+      NO_DEFAULT_PATH)
+  endif()
+  find_package(CGAL 5.5.1 QUIET)
 
-find_package(CGAL REQUIRED PATHS "${CGAL_BINARY_DIR}")
+  # If we couldn't find a pre-installed version, lets build it ourselves
+  if(CGAL_FOUND)
+    message(STATUS "Found an existing installation of CGAL at: ${CGAL_DIR}")
+  endif()
+else()
+  # Path to the patch file
+  set(PATCH_FILE 0001-Rename-BUILD_TESTING-CGAL_BUILD_TESTING.patch)
+  set(FULL_PATCH_FILE_PATH "${CMAKE_CURRENT_LIST_DIR}/patches/${PATCH_FILE}")
 
-# FIXME: BUILD_TESTING is disable through CGAL and so whenever we import CGAL,
-# testing gets disable. This is a particular pain when we want to run our demo
-# drivers. Find a better way to do this...
-#
-# unset(BUILD_TESTING)
+  # Download the CGAL library
+  FetchContent_Declare(
+    cgal_project
+    GIT_REPOSITORY https://github.com/CGAL/cgal.git
+    GIT_TAG v5.5.1
+    GIT_PROGRESS TRUE
+    GIT_SHALLOW TRUE
+    # If the user configures the project multiple times, the "git apply" will
+    # fail on subsequent runs because the patch file will have already been
+    # applied. To get around this, we reset the changes each time with "git
+    # checkout". Hacky solution but it works for now...
+    PATCH_COMMAND
+      ${CMAKE_COMMAND} -E copy_if_different ${FULL_PATCH_FILE_PATH}
+      <SOURCE_DIR> && git checkout <SOURCE_DIR> && git apply
+      <SOURCE_DIR>/${PATCH_FILE})
+  FetchContent_MakeAvailable(cgal_project)
+
+  find_package(CGAL 5.5.1 REQUIRED PATHS "${CGAL_BINARY_DIR}")
+  if(NOT TARGET CGAL::CGAL)
+    message(
+      FATAL_ERROR
+        "Something went wrong during the configuration of the CGAL library!")
+  endif()
+endif()
 
 # ------------------------------------------------------------------------------
 # BOILERPLATE: Update global variables

@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -41,9 +41,9 @@ namespace oomph
   {
     double t_start = 0.0;
 
-    //###################################
+    // ###################################
     t_start = TimingHelpers::timer();
-    //###################################
+    // ###################################
 
     // Get refinement targets
     Vector<double> target_size(elem_error.size());
@@ -72,11 +72,11 @@ namespace oomph
     oomph_info << "Max/min element size in original mesh: " << orig_max_size
                << " " << orig_min_size << std::endl;
 
-    //##################################################################
+    // ##################################################################
     oomph_info
       << "adapt: Time for getting volume targets                      : "
       << TimingHelpers::timer() - t_start << " sec " << std::endl;
-    //##################################################################
+    // ##################################################################
 
     // Should we bother to adapt?
     if ((Nrefined > 0) || (Nunrefined > this->max_keep_unrefined()) ||
@@ -296,9 +296,9 @@ namespace oomph
       /* new_mesh_pt->output_paraview(vtu_file,nplot); */
       /* vtu_file.close(); */
 
-      //###################################
+      // ###################################
       t_start = TimingHelpers::timer();
-      //###################################
+      // ###################################
 
       ProjectionProblem<ELEMENT>* project_problem_pt = 0;
 
@@ -315,9 +315,9 @@ namespace oomph
           << "adapt: Time for project soln onto new mesh                : "
           << TimingHelpers::timer() - t_start << " sec " << std::endl;
       }
-      //###################################
+      // ###################################
       t_start = TimingHelpers::timer();
-      //###################################
+      // ###################################
 
       // Flush the old mesh
       unsigned nnod = nnode();
@@ -440,11 +440,11 @@ namespace oomph
       delete new_mesh_pt;
       delete project_problem_pt;
 
-      //##################################################################
+      // ##################################################################
       oomph_info
         << "adapt: Time for moving nodes etc. to actual mesh          : "
         << TimingHelpers::timer() - t_start << " sec " << std::endl;
-      //##################################################################
+      // ##################################################################
 
       // Solid mesh?
       if (solid_mesh_pt != 0)

@@ -235,7 +235,7 @@ set(HEADERS_NO_COMBINE cfortran.h frontal.h arpack.h lapack_qz.h mumps.h)
 # be listed in combined header file
 set(TEMPLATES tree.tpp refineable_mesh.tpp multi_domain.tpp missing_masters.tpp)
 
-# The generic library relies on the external sources
+# The generic library relies on the external sources and possibly MPI
 set(LINKLIBS ${EXTERNAL_SRC_LIBS})
 if(OOMPH_HAS_MPI)
   list(APPEND LINKLIBS MPI::MPI_C MPI::MPI_CXX)
@@ -281,12 +281,10 @@ oomph_target_silence_warnings(
 # ------------------------------------------------------------------------------
 # Handle third-party library stuff:
 
-# NOTE: We publicly link third-party that generic may not even rely on to ensure
-# that these libraries will be propagated to the user. For example, if a user
-# links against, say, the poisson library, they will automatically gain access
-# to the generic library and thus the third-party libraries. (Here, we assume
-# that the user will always link to the generic library in some way, which is a
-# reasonable assumption.)
+# NOTE: We publicly link to third-party libraries so that these libraries get
+# propagated to the user. If a user pulls in the oomph-lib library they should
+# automatically get access to the third-party libraries; they shouldn't have to
+# manually link against all of those libraries themselves to use them.
 
 if(OOMPH_HAS_NLOHMANN_JSON)
   target_link_libraries(${LIBNAME} PUBLIC nlohmann_json::nlohmann_json)
@@ -301,15 +299,38 @@ if(OOMPH_HAS_HYPRE)
 endif()
 
 if(OOMPH_HAS_TRILINOS)
-  # set(CMAKE_PREFIX_PATH ${Trilinos_PATH} ${CMAKE_PREFIX_PATH})
-  find_package(Trilinos REQUIRED PATHS "${Trilinos_BINARY_DIR}")
-  target_link_libraries(${LIBNAME} PUBLIC Trilinos::all_libs)
+  # For some reason Trilinos::all_libs isn't defined during the configure stage
+  # but it will be defined if you pull Trilinos in via find_package(...), but
+  # that isn't the right way to do things...
+  #
+  # TODO: Log a GitHub issue for this.
+  target_link_libraries(
+    ${LIBNAME}
+    PUBLIC Anasazi::all_libs
+           ML::all_libs
+           Ifpack::all_libs
+           Amesos::all_libs
+           AztecOO::all_libs
+           TrilinosSS::all_libs
+           EpetraExt::all_libs
+           Triutils::all_libs
+           Epetra::all_libs
+           Teuchos::all_libs
+           TeuchosKokkosComm::all_libs
+           TeuchosKokkosCompat::all_libs
+           TeuchosRemainder::all_libs
+           TeuchosNumerics::all_libs
+           TeuchosComm::all_libs
+           TeuchosParameterList::all_libs
+           TeuchosParser::all_libs
+           TeuchosCore::all_libs
+           Kokkos::all_libs
+           KokkosCore::all_libs)
 endif()
 
 if(OOMPH_HAS_MUMPS)
-  target_link_libraries(${LIBNAME} PUBLIC MUMPS::MUMPS MPI::MPI_C)
+  target_link_libraries(${LIBNAME} PUBLIC MUMPS::MUMPS)
 endif()
-
 # ------------------------------------------------------------------------------
 
 message(VERBOSE "Leaving generic subdirectory")

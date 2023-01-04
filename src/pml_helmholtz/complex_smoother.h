@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -681,9 +681,9 @@ namespace oomph
       // Calculate the 2-norm (noting that the 2-norm of a complex vector a of
       // length n is simply the square root of the sum of the squares of each
       // real and imaginary component). That is:
-      /// \f[ \|a\|_2^2=\sum_{i=0}^{i=n-1}\real(a[i])^2+\imag(a[i])^2. \f]
+      /// \f[ \|a\|_2^2=\sum_{i=0}^{i=n-1}\Re(a[i])^2+\Im(a[i])^2. \f]
       // can be written as:
-      /// \f[ \|a\|_2^2=\|\real(a)\|_2^2+\|\imag(a)\|_2^2. \f]
+      /// \f[ \|a\|_2^2=\|\Re(a)\|_2^2+\|\Im(a)\|_2^2. \f]
       double res_real_norm = residual_real.norm();
       double res_imag_norm = residual_imag.norm();
       double norm_res =
@@ -1097,9 +1097,9 @@ namespace oomph
     /// where \f$ r=\sqrt{pow(|dx|,2)+pow(|dy|,2)} \f$. The values of a and b
     /// are given by:
     /// The values of dx and dy are given by:
-    /// \f[ \cos\theta&=\dfrac{dx}{\sqrt{|dx|^2+|dy|^2}}, \f]
+    /// \f[ \cos\theta=\dfrac{dx}{\sqrt{|dx|^2+|dy|^2}}, \f]
     /// and
-    /// \f[ \sin\theta&=\dfrac{dy}{\sqrt{|dx|^2+|dy|^2}}. \f]
+    /// \f[ \sin\theta=\dfrac{dy}{\sqrt{|dx|^2+|dy|^2}}. \f]
     /// Taken from: Saad Y."Iterative methods for sparse linear systems", p.193.
     /// We also check to see that sn is always a real (nonnegative) number. See
     /// pp.193-194 for an explanation.
@@ -2318,9 +2318,9 @@ namespace oomph
     /// where \f$ r=\sqrt{pow(|dx|,2)+pow(|dy|,2)} \f$. The values of a and b
     /// are given by:
     /// The values of dx and dy are given by:
-    /// \f[ \cos\theta&=\dfrac{dx}{\sqrt{|dx|^2+|dy|^2}}, \f]
+    /// \f[ \cos\theta=\dfrac{dx}{\sqrt{|dx|^2+|dy|^2}}, \f]
     /// and
-    /// \f[ \sin\theta&=\dfrac{dy}{\sqrt{|dx|^2+|dy|^2}}. \f]
+    /// \f[ \sin\theta=\dfrac{dy}{\sqrt{|dx|^2+|dy|^2}}. \f]
     /// Taken from: Saad Y."Iterative methods for sparse linear systems", p.193.
     /// We also check to see that sn is always a real (nonnegative) number. See
     /// pp.193-194 for an explanation.
