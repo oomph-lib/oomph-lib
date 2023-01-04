@@ -145,7 +145,7 @@ Windows          | No
 `oomph-lib` uses CMake and Ninja to build and install the project.
 Make sure you have sufficiently recent versions of these programms installed on your computer:
 
-*** _Puneet_: We should probably make this comprehensive and list all the other stuff we use (e.g. doxygen, mpi; all accompanied by the relevant apt-get commands). There's something on the webpage which should then be removed. Let's do this when we're done with the (automatic) istallation of "everything". BTW: Still not sure if the bulk of what's now described in this document shouldn't be moved to INSTALL.md. ***
+*** _Puneet_: We should probably make this comprehensive and list all the other stuff we use (e.g. doxygen, mpi; all accompanied by the relevant apt-get commands). There's something on the webpage which should then be removed. Let's do this when we're done with the (automatic) istallation of "everything". BTW: Still not sure if the bulk of what's now described in this document shouldn't be moved to INSTALL.md. KEEPING THIS IN HERE AS REMINDER TO TIDY UP. ***
 
 
 ### CMake
@@ -486,7 +486,7 @@ to your `.emacs` file will produce equivalent behaviour. You can now edit the so
 
 ## Linking a stand-alone project to `oomph-lib`
 
-Developing your own code in an existing demo driver directory is a quick-and-dirty way to get started, especially since you are most likely to start your work by modifying an existing driver code. However, long-term this is not a sensible solution. One slightly more attractive alternative is to create a new directory, just for your code, in the `demo_drivers` directory; described further below. This approach has the advantage of not interfering with existing `oomph-lib` driver codes and the associated test machinery. However, your code isn't a demo driver (yet!) so it should really live somewhere else.
+Developing your own code in an existing demo driver directory is a quick-and-dirty way to get started, especially since you are most likely to start your work by modifying an existing driver code. However, long-term this is not a sensible solution. One slightly more attractive alternative is to create a new directory, just for your code, in the `demo_drivers` directory; described further below. This approach has the advantage of not interfering with existing `oomph-lib` driver codes and the associated test machinery. However, since your code isn't a demo driver it should live somewhere else.
 
 To illustrate how this is done, assume you have a stand-alone directory that contains the driver codes and any associated header or include files needed to build the executable. Here's an example of such a project (checked out directly from its own GitHub repository)
 
@@ -1002,43 +1002,6 @@ You can customise your build by passing flags of the form `-D<FLAG>` to `cmake` 
 
 Specifying these flags from the command-line can be cumbersome and you may forget which options you used to previously build the project. For this reason, we recommend that you create your own `CMakeUserPresets.json` file, as described in [CMake Presets](#cmake-presets).
 
-**TODO: Discuss desired/not desired options with MH.**
-
-*** Puneet: Surely we want Release as the default setting for BUILD_TYPE? ***
-
-*** Puneet: How do I specify mpi (or any other non-standard) compilers? *** 
-
-*** Puneet: Can we list a preset file that does the equivalent of the following: 
-```bash
---enable-suppress-pdf-doc
---enable-MPI
---enable-multiple_teuchos_libraries
---enable-symbolic-links-for-headers
---with-blacs=/home/mheil/local/mumps_and_scalapack_default_installation/lib
---with-scalapack=/home/mheil/local/mumps_and_scalapack_default_installation/lib/libscalapack.a
---with-pord=/home/mheil/local/mumps_and_scalapack_default_installation/lib/libpord.a 
---with-mumps=/home/mheil/local/mumps_and_scalapack_default_installation
---with-blas=/home/mheil/local/lib/blas/blas.a
---with-lapack=/home/mheil/local/lib/lapack/lapack.a
---with-hypre=/home/mheil/local/hypre_default_installation_mpi
---with-trilinos=/home/mheil/local/trilinos_default_installation_mpi
---with-mpi-self-tests="mpirun -np 2"
---with-mpi-self-tests-variablenp="mpirun -np OOMPHNP"
---with-gmsh-self-tests="/home/mheil/gmesh/gmsh-3.0.6-source/build/gmsh"
---with-mpi-include-directory=/usr/lib/openmpi/include
---with-boost=/home/mheil/local/boost_default_installation
---with-gmp=/home/mheil/local/gmp_default_installation
---with-mpfr=/home/mheil/local/mpfr_default_installation
---with-cgal=/home/mheil/local/cgal_default_installation
-CXXFLAGS="-O3 -Wall -std=c++11"
-CFLAGS="-O3"
-FFLAGS="-O3"
-FFLAGS_NO_OPT="-O0"
-CXX=mpic++
-CC=mpicc
-F77=mpif77
-FC=mpif90
-LD=mpif77
 ```
 
 
