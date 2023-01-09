@@ -13,9 +13,9 @@
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release",
         "BUILD_SHARED_LIBS": "OFF",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY": "OFF",
         "OOMPH_DONT_SILENCE_USELESS_WARNINGS": "OFF",
-        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "OOMPH_ENABLE_CODE_COVERAGE": "OFF",
         "OOMPH_ENABLE_MPI": "OFF",
         "OOMPH_ENABLE_PARANOID": "OFF",
@@ -33,7 +33,6 @@
       "name": "release",
       "inherits": "base",
       "displayName": "Release Config",
-      "generator": "Ninja",
       "binaryDir": "${sourceDir}/build-release",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release"
@@ -43,7 +42,6 @@
       "name": "debug",
       "inherits": "base",
       "displayName": "Debug Config",
-      "generator": "Ninja",
       "binaryDir": "${sourceDir}/build-debug",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
