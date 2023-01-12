@@ -998,15 +998,50 @@ should also work if `oomph-lib` has already been configured, using a build direc
 
 ## Build options
 
-You can customise your build by passing flags of the form `-D<FLAG>` to `cmake` during the configuration/generation step. For reference, the table below contains a list of options that the user can control. (Note that the build and installation steps will remain the same.)
+### Configuring the build via the specification of CMake cache variables
 
-Specifying these flags from the command-line can be cumbersome and you may forget which options you used to previously build the project. For this reason, we recommend that you create your own `CMakeUserPresets.json` file, as described in [CMake Presets](#cmake-presets).
+You can customise your build by passing flags of the form `-D<FLAG>=<value>` to `cmake` during the configuration/generation ** __Puneet:__ why "generation"? *** step. For instance, `oomph-lib` allows range checking (useful for debugging but costly in terms of runtime) via a C++ macro  `RANGE_CHECKING`; if this macro is defined, `oomph-lib` will check that indices passed to vectors (and similar containers) are within the legal range. This requires the `oomph-lib` source code to be compiled with appropriate compiler flags, as shown here
+```bash
+g++ -DRANGE_CHECKING my_code.cc
+```
+To ensure that the relevant compiler flags are specified at compile time, we employ so-called CMake cache variables which have to be specified at the configure stage. For instance, to enable range checking for all source code in the library, set the cache variable `OOMPH_ENABLE_RANGE_CHECKING` to `ON` when configuring the project:
+***__Puneet__: Please check: No need to specify the flag during the build and install stages, right? ***
+```bash
+# Configure with range checking 
+cmake -G Ninja -B build -DOOMPH_ENABLE_RANGE_CHECKING=ON
+
+# Build the oomph-lib libraries 
+cmake --build build
+
+# Install
+cmake --install build
+``` 
+The table below provides a complete list of all variables and their default setting, typically chosen such that the fastest possible version of the library is built.
+
+The variables fall into several categories. There are those that get translated into C++ macros, such as 
+* `OOMPH_ENABLE_MPI` which enables `oomph-lib`'s MPI-based parallel capabilities via the C++ macro `OOMPH_HAS_MPI`. It also ensures that the sources code is compiled with a suitable MPI compiler *** __Puneet:__ I think you claimed that his was done automatically. If so, how? If not, does this require the simultaneous specification of mpi compilers for all three languages? **
+* `OOMPH_ENABLE_PARANOID` which enables the compilation of built-in self-tests and diagnostics via the C++ macro `PARANOID`. These tests are very useful during code development but add to the run-time
+* `OOMPH_ENABLE_RANGE_CHECKING`, already discussed above
+
+
+Other variables request that certain third-party libaries are built at the same time as `oomph-lib`. E.g. 
+* `OOMPH_WANT_MUMPS` requests that the parallel frontal solver MUMPS is built
+* `OOMPH_WANT_HYPRE` requests that the Hypre library is built
+* `OOMPH_WANT_TRILINOS` requests that the Trilinos library is built
+* *** __Puneet:__ what else? ***
+
+If any of these are set to `ON`, `CMake` will download the relevant sources and build the libraries as part of the `oomph-lib` installation. It will also (via associated C++ macros, `OOMPH_HAS_MUMPS`, `OOMPH_HAS_HYPRE`, `OOMPH_HAS_TRILINOS`) enable the compilation of certain `oomph-lib` wrappers to these libraries. For instance, if `OOMPH_WANT_MUMPS` is set to `ON` during the project configuration, `oomph-lib`'s C++ sources will be compiled with the C++ macro `OOMPH_HAS_MUMPS` which then enables the creation of a `LinearSolver` object that uses `MUMPS` as the underlying linear solver.
+
+Since third party libraries are not modified/maintained by us, it is, of course, not necessary to rebuild them over and over again. They only have to be installed once in a permanent location, or they may already be installed somewhere on your computer. In this case, their location can be specified via variables such as 
+* `OOMPH_USE_BLAS_FROM` which specifies the absolute path to the directory in which the BLAS library has been installed; this directory should contain an `include` and `lib` subdirectory *** __Puneet:__ Making this up as I go along; we ought to specify what exactly the path is to ***.
+* ** __Puneet:__ I assume there are others; list/describe here. **
+
+
+
+*** MH TO CONTINUE WHEN THERE'S A FULL LIST OF SET-ABLE CACHE VARIABLES ***
+
 
 ```
-
-
-
-
 
 Option                                    | Description                                                                  | Default
 ------------------------------------------|------------------------------------------------------------------------------|--------
@@ -1029,9 +1064,11 @@ Option                                    | Description                         
 `OOMPH_WANT_MUMPS`                        | Enable MUMPS library [CURRENTLY ONLY WORKING WITH MPI]                       | OFF
 `OOMPH_WANT_TRILINOS`                     | Enable Trilinos library  **[DOESN'T WORK YET!]**                             | OFF
 `OOMPH_ENABLE_CODE_COVERAGE`              | Enable collection of code coverage results                                   | OFF
+```
 
-## CMake Presets
+### Configuring the build via the specification of CMake presets
 
+Specifying these flags from the command-line can be cumbersome and you may forget which options you used to previously build the project. For this reason, we recommend that you create your own `CMakeUserPresets.json` file, as described in [CMake Presets](#cmake-presets).
 **Work in progress!**
 
 ### `CMakePresets.json`
