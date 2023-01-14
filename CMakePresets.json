@@ -56,7 +56,10 @@
       "inherits": "base",
       "displayName": "Default MPI Config",
       "generator": "Ninja",
-      "binaryDir": "${sourceDir}/build-mpi"
+      "binaryDir": "${sourceDir}/build-mpi",
+      "cacheVariables": {
+        "OOMPH_ENABLE_MPI": "ON"
+      }
     },
     {
       "name": "ci-base",
