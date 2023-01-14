@@ -68,16 +68,16 @@ set(OOMPH_MPI_NUM_PROC 2 CACHE INTERNAL
     "Number of processes to use with MPI-enabled tests")
 
 # Set the command used to run MPI-enabled self-tests
-if(NOT DEFINED MPI_RUN_COMMAND)
-  set(MPI_RUN_COMMAND
+if(NOT DEFINED OOMPH_MPI_RUN_COMMAND)
+  set(OOMPH_MPI_RUN_COMMAND
       "${MPIEXEC_EXECUTABLE} ${MPIEXEC_NUMPROC_FLAG} ${OOMPH_MPI_NUM_PROC}")
 endif()
 
 # Set the more complex command used to run MPI-enabled self-tests with a
 # variable number of processes. The user can sed replace 'OOMPHNP' with the
 # number of processes they wish to use
-if(NOT DEFINED MPI_VARIABLENP_RUN_COMMAND)
-  set(MPI_VARIABLENP_RUN_COMMAND
+if(NOT DEFINED OOMPH_MPI_VARIABLENP_RUN_COMMAND)
+  set(OOMPH_MPI_VARIABLENP_RUN_COMMAND
       "${MPIEXEC_EXECUTABLE} ${MPIEXEC_NUMPROC_FLAG} OOMPHNP ")
 endif()
 

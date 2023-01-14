@@ -60,7 +60,7 @@
 #   # Define test
 #   oomph_add_pure_cpp_test(TEST_NAME heat_transfer_and_melting.melt
 #                           TARGET_DEPENDENCY melt
-#                           RUN_WITH ${MPI_RUN_COMMAND}
+#                           RUN_WITH ${OOMPH_MPI_RUN_COMMAND}
 #                           LABELS heat_transfer_and_melting solid unsteady_heat)
 # =============================================================================
 # cmake-format: on

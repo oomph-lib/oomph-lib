@@ -11,28 +11,34 @@
 #     oomph_add_test(TEST_NAME             <name-of-test>
 #                    TARGET_DEPENDENCIES   <executables/targets-required-by-test>
 #                    LABELS                <string-list-of-labels>
-#                    [EXTRA_REQUIRES        <extra-files-required-by-test>]
+#                    VALIDATE_SH_ARGS      <arguments-to-validate-sh-script>
+#                    [EXTRA_REQUIRES       <extra-files-required-by-test>]
 #                    [SILENCE_MISSING_VALIDATA_WARNING]
-#                    [NO_VALIDATE_SH]
-#                    [REQUIRES_MPI_RUN_COMMAND]
-#                    [REQUIRES_MPI_VARIABLENP_RUN_COMMAND])
+#                    [NO_VALIDATE_SH])
 #
-# By default we always assume that a validata/ and a validate.sh script are
-# required for the test. Here, EXTRA_REQUIRES is provided so that the user can
+# By default we assume that a validata/ and a validate.sh script are always
+# required for a test. Here, EXTRA_REQUIRES is provided so that the user can
 # specify any other files that are required at run-time, like triangle input
-# mesh files. The labels in the string list must be semi-colon delimited. The
-# REQUIRES_MPI_* flags are used to indicate that the validate.sh script requires
-# the MPI_RUN_COMMAND and MPI_VARIABLENP_RUN_COMMAND, respectively. If both
-# flags are enabled, then the MPI_RUN_COMMAND and MPI_VARIABLENP_RUN_COMMAND
-# will be passed as the second and third argument, respectively.
+# mesh files. The VALIDATE_SH_ARGS argument is used to explicitly pass arguments
+# to the validate.sh file.
 #
-# Example:
+# Important: Every validate.sh script expects ${OOMPH_ROOT_DIR} as the first
+# argument to VALIDATE_SH_ARGS.
+#
+# EXAMPLE:
+# --------
 #
 #     oomph_add_test(TEST_NAME poisson.one_d_poisson
 #                    TARGET_DEPENDENCIES one_d_poisson
+#                    VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
 #                    EXTRA_REQUIRES my_extra_data_file.dat
-#                    LABELS "poisson;one_d_poisson"
-#                    REQUIRES_MPI_RUN_COMMAND)
+#                    LABELS "poisson;one_d_poisson")
+#
+#     oomph_add_test(TEST_NAME poisson.one_d_poisson
+#                    TARGET_DEPENDENCIES one_d_poisson
+#                    VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_VARIABLENP_RUN_COMMAND}
+#                    EXTRA_REQUIRES my_extra_data_file.dat
+#                    LABELS "poisson;one_d_poisson")
 #
 # NOTE 1: Arguments to TARGET_DEPENDENCIES must be already-defined executables
 # or targets (i.e. defined via add_executable() or oomph_add_executable()).
@@ -44,10 +50,10 @@ include_guard()
 function(oomph_add_test)
   # Define the supported set of keywords
   set(PREFIX ARG)
-  set(FLAGS NO_VALIDATE_SH SILENCE_MISSING_VALIDATA_WARNING
-      REQUIRES_MPI_RUN_COMMAND REQUIRES_MPI_VARIABLENP_RUN_COMMAND)
+  set(FLAGS NO_VALIDATE_SH SILENCE_MISSING_VALIDATA_WARNING)
   set(SINGLE_VALUE_ARGS TEST_NAME)
-  set(MULTI_VALUE_ARGS EXTRA_REQUIRES LABELS TARGET_DEPENDENCIES)
+  set(MULTI_VALUE_ARGS EXTRA_REQUIRES LABELS TARGET_DEPENDENCIES
+      VALIDATE_SH_ARGS)
 
   # Process the arguments passed in
   include(CMakeParseArguments)
@@ -58,10 +64,8 @@ function(oomph_add_test)
   set(NO_VALIDATE_SH ${${PREFIX}_NO_VALIDATE_SH})
   set(SILENCE_MISSING_VALIDATA_WARNING
       ${${PREFIX}_SILENCE_MISSING_VALIDATA_WARNING})
-  set(REQUIRES_MPI_RUN_COMMAND ${${PREFIX}_REQUIRES_MPI_RUN_COMMAND})
-  set(REQUIRES_MPI_VARIABLENP_RUN_COMMAND
-      ${${PREFIX}_REQUIRES_MPI_VARIABLENP_RUN_COMMAND})
   set(TEST_NAME ${${PREFIX}_TEST_NAME})
+  set(VALIDATE_SH_ARGS ${${PREFIX}_VALIDATE_SH_ARGS})
   set(TARGET_DEPENDENCIES ${${PREFIX}_TARGET_DEPENDENCIES})
   set(EXTRA_REQUIRES ${${PREFIX}_EXTRA_REQUIRES})
   set(LABELS ${${PREFIX}_LABELS})
@@ -80,16 +84,10 @@ function(oomph_add_test)
 
   find_program(BASH_PROGRAM bash)
   if(NOT BASH_PROGRAM)
-    message(
-      STATUS "You don't have 'bash', so I can't construct any tests. Sorry!")
+    message(STATUS "You don't have 'bash', so I can't construct any tests!")
   endif()
 
-  # Hash the path to create a unique ID for our targets but shorten it to the
-  # first 7 characters for brevity. A unique ID is required to avoid clashes
-  # with targets in other directories
-  string(SHA1 PATH_HASH "${CMAKE_CURRENT_LIST_DIR}")
-  string(SUBSTRING ${PATH_HASH} 0 7 PATH_HASH)
-
+  # ----------------------------------------------------------------------------
   # Grab the validate.sh script if we have one
   set(REQUIREMENTS_WITH_PATHS)
   set(TEST_BYPRODUCTS)
@@ -127,6 +125,15 @@ function(oomph_add_test)
          "${CMAKE_CURRENT_LIST_DIR}/${REQUIREMENT}")
     list(APPEND TEST_BYPRODUCTS "${CMAKE_CURRENT_BINARY_DIR}/${REQUIREMENT}")
   endforeach()
+  # ----------------------------------------------------------------------------
+
+  # ----------------------------------------------------------------------------
+  # Hash the path to create a unique ID for our targets but shorten it to the
+  # first 7 characters for brevity. A unique ID is required to avoid clashes
+  # with targets in other directories
+  string(SHA1 PATH_HASH "${CMAKE_CURRENT_LIST_DIR}")
+  string(SUBSTRING ${PATH_HASH} 0 7 PATH_HASH)
+  # ----------------------------------------------------------------------------
 
   # ----------------------------------------------------------------------------
   # Declare a copy_... target to copy the required files to the build directory
@@ -199,22 +206,15 @@ function(oomph_add_test)
 
   # Command-line arguments for validate.sh. We can't run fpdiff.py if we don't
   # have Python
-  set(EXTRA_VALIDATE_SH_ARGS)
-  if(REQUIRES_MPI_RUN_COMMAND)
-    list(APPEND EXTRA_VALIDATE_SH_ARGS "${MPI_RUN_COMMAND}")
-  endif()
-  if(REQUIRES_MPI_VARIABLENP_RUN_COMMAND)
-    list(APPEND EXTRA_VALIDATE_SH_ARGS "${MPI_VARIABLENP_RUN_COMMAND}")
-  endif()
   if(NOT Python3_FOUND)
-    list(APPEND EXTRA_VALIDATE_SH_ARGS "no_fpdiff")
+    list(APPEND VALIDATE_SH_ARGS "no_fpdiff")
   endif()
-  list(JOIN EXTRA_VALIDATE_SH_ARGS " " EXTRA_VALIDATE_SH_ARGS)
+  # list(JOIN VALIDATE_SH_ARGS " " VALIDATE_SH_ARGS)
 
   # TODO: Try rewriting with POST_BUILD actions:
   # https://cmake.org/cmake/help/latest/command/add_custom_command.html?highlight=add_custom_command#build-events
   # It will simply append the new command (with &&; check build.ninja) and not
-  # overwrite the previous ones!
+  # overwrite the previous ones
 
   # TODO: Try simplifying things with
   # https://cmake.org/cmake/help/book/mastering-cmake/chapter/Testing%20With%20CMake%20and%20CTest.html#using-ctest-to-drive-complex-tests
@@ -232,8 +232,7 @@ function(oomph_add_test)
   if(NOT NO_VALIDATE_SH)
     add_custom_target(
       check_${PATH_HASH}
-      COMMAND ${BASH_PROGRAM} ./validate.sh ${OOMPH_ROOT_DIR}
-              ${EXTRA_VALIDATE_SH_ARGS}
+      COMMAND ${BASH_PROGRAM} ./validate.sh ${VALIDATE_SH_ARGS}
       # Check for the validation.log file. Stop here if we can't
       COMMAND
         ${BASH_PROGRAM} -c
@@ -279,7 +278,6 @@ function(oomph_add_test)
   # FIXME: Talk to MH; decide whether to just build and copy validation files or
   # to run the validate.sh script too...
   add_custom_target(${TEST_NAME})
-  # add_dependencies(${TEST_NAME} check_${PATH_HASH})
   add_dependencies(${TEST_NAME} copy_${PATH_HASH} build_targets_${PATH_HASH}
                    clean_validation_dir_${PATH_HASH})
 
