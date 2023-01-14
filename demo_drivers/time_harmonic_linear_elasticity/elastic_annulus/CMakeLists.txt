@@ -39,6 +39,7 @@ oomph_add_test(
     adaptive_time_harmonic_elastic_annulus
     adaptive_unstructured_time_harmonic_elastic_annulus
     time_harmonic_elastic_annulus unstructured_time_harmonic_elastic_annulus
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS time_harmonic_linear_elasticity elastic_annulus)
 

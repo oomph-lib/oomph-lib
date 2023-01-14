@@ -25,6 +25,7 @@ oomph_add_test(
   TEST_NAME extrude_quad_mesh_to_cube_mesh.extrude_quad_mesh_to_cube_mesh
   TARGET_DEPENDENCIES extrude_triangle_generated_mesh
                       extrude_with_macro_element_representation
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES triangle_meshes
   LABELS extrude_quad_mesh_to_cube_mesh)
 

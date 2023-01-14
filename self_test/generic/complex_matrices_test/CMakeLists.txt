@@ -29,13 +29,14 @@ oomph_add_executable(
 # TODO: Check this actually works and it doesn't just become an extra label
 set(EXTRA_FLAGS)
 if(OOMPH_HAS_MPI)
-  set(EXTRA_FLAGS REQUIRES_MPI_RUN_COMMAND)
+  set(EXTRA_FLAGS)
 endif()
 
 oomph_add_test(
   TEST_NAME generic.complex_matrices_test
   TARGET_DEPENDENCIES dense_complex_matrix_test cr_complex_matrix_test
                       cc_complex_matrix_test
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
   EXTRA_REQUIRES
   LABELS complex matrix ${EXTRA_FLAGS})
 

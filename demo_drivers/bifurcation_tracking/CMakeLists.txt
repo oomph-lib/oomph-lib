@@ -63,6 +63,7 @@ oomph_add_test(
     periodic_orbit
     pitchfork
     track_pitch
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES adapt_hopf_eigen.dat
   LABELS bifurcation_tracking)
 

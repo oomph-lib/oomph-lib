@@ -28,6 +28,7 @@ oomph_add_test(
     pml_time_harmonic_linear_elasticity.pml_time_harmonic_linear_elasticity
   TARGET_DEPENDENCIES time_harmonic_elasticity_driver
                       time_harmonic_elasticity_driver_source
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS pml_time_harmonic_linear_elasticity)
 

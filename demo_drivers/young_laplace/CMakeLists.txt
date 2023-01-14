@@ -41,6 +41,7 @@ oomph_add_test(
   TEST_NAME young_laplace.young_laplace
   TARGET_DEPENDENCIES barrel refineable_t_junction refineable_young_laplace
                       spherical_cap_in_cylinder young_laplace
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS young_laplace)
 

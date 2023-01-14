@@ -32,9 +32,9 @@ oomph_add_test(
     two_d_parallel_unstructured_adaptive_poisson
     unstructured_adaptive_mesh_two_outer_boundaries
     unstructured_adaptive_mesh_two_outer_boundaries_crossed
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_VARIABLENP_RUN_COMMAND}
   EXTRA_REQUIRES
-  LABELS mpi two_d_unstructured_adaptive_poisson adapt
-  REQUIRES_MPI_VARIABLENP_RUN_COMMAND)
+  LABELS mpi two_d_unstructured_adaptive_poisson adapt)
 
 # Don't run this test alongside any other tests
 set_tests_properties(mpi.two_d_unstructured_adaptive_poisson

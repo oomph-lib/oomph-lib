@@ -25,6 +25,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME helmholtz.point_source
   TARGET_DEPENDENCIES adaptive_helmholtz_point_source helmholtz_point_source
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS helmholtz point_source)
 

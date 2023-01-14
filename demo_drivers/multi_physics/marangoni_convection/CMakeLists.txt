@@ -28,6 +28,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME multi_physics.marangoni_convection
   TARGET_DEPENDENCIES marangoni_convection marangoni_convection_box
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS multi_physics marangoni_convection)
 

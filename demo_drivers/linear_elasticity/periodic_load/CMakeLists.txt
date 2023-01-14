@@ -24,6 +24,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME linear_elasticity.periodic_load
   TARGET_DEPENDENCIES periodic_load refineable_periodic_load
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS linear_elasticity periodic_load)
 

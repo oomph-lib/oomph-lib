@@ -40,6 +40,7 @@ oomph_add_test(
   TARGET_DEPENDENCIES
     3d_rayleigh_instability_surfactant rayleigh_instability_insoluble_surfactant
     rayleigh_instability_soluble_surfactant
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS multi_physics rayleigh_instability_surfactant)
 

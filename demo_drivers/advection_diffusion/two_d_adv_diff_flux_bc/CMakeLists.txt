@@ -19,6 +19,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME advection_diffusion.two_d_adv_diff_flux_bc
   TARGET_DEPENDENCIES two_d_adv_diff_flux_bc
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS advection_diffusion two_d_adv_diff_flux_bc)
 

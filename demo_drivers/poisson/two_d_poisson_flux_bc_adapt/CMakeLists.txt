@@ -19,6 +19,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME poisson.two_d_poisson_flux_bc_adapt
   TARGET_DEPENDENCIES two_d_poisson_flux_bc_adapt
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS poisson two_d_poisson_flux_bc_adapt adapt)
 

@@ -40,6 +40,7 @@ oomph_add_test(
   TEST_NAME poisson.fish_poisson2
   TARGET_DEPENDENCIES fish_domain fish_poisson_adapt fish_poisson_no_adapt
                       fish_poisson_node_update fish_poisson_simple_adapt
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS poisson fish_poisson2)
 

@@ -19,6 +19,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME navier_stokes.vorticity_smoother
   TARGET_DEPENDENCIES vorticity_smoother_validation
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS navier_stokes vorticity_smoother)
 

@@ -27,6 +27,7 @@ oomph_add_test(
   TEST_NAME interaction.pseudo_solid_collapsible_tube
   TARGET_DEPENDENCIES pseudo_solid_collapsible_tube
                       pseudo_solid_collapsible_tube_work
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS interaction pseudo_solid_collapsible_tube)
 

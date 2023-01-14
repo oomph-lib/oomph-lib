@@ -26,6 +26,7 @@ oomph_add_test(
   TEST_NAME meshing.mesh_from_inline_triangle_internal_boundaries
   TARGET_DEPENDENCIES mesh_from_inline_triangle_internal_boundaries
                       mesh_from_inline_triangle_internal_boundaries_extra
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS meshing mesh_from_inline_triangle_internal_boundaries)
 

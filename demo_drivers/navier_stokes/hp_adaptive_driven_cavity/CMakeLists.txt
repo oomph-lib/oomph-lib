@@ -24,6 +24,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME navier_stokes.hp_adaptive_driven_cavity
   TARGET_DEPENDENCIES circular_driven_cavity_hp_adapt hp_adaptive_driven_cavity
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS navier_stokes hp_adaptive_driven_cavity adapt)
 

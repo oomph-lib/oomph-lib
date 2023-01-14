@@ -27,6 +27,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME navier_stokes.inclined_plane
   TARGET_DEPENDENCIES inclined_plane inclined_plane2
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS navier_stokes inclined_plane)
 

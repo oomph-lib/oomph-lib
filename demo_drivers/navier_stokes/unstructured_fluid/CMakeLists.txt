@@ -20,6 +20,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME navier_stokes.unstructured_fluid
   TARGET_DEPENDENCIES unstructured_two_d_fluid
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES fluid.fig fluid.fig.1.ele fluid.fig.1.node fluid.fig.1.poly
                  fluid.fig.poly
   LABELS navier_stokes unstructured_fluid)

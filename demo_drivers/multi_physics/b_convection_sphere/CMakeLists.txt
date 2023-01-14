@@ -28,6 +28,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME multi_physics.b_convection_sphere
   TARGET_DEPENDENCIES b_convection_sphere multi_domain_b_convect_sph
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS multi_physics b_convection_sphere)
 

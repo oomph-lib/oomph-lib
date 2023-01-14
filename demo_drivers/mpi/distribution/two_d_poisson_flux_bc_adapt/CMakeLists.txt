@@ -19,9 +19,9 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME mpi.two_d_poisson_flux_bc_adapt
   TARGET_DEPENDENCIES two_d_poisson_flux_bc_adapt
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
   EXTRA_REQUIRES two_d_poisson_flux_partition.dat
-  LABELS mpi two_d_poisson_flux_bc_adapt adapt
-  REQUIRES_MPI_RUN_COMMAND)
+  LABELS mpi two_d_poisson_flux_bc_adapt adapt)
 
 # Don't run this test alongside any other tests
 set_tests_properties(mpi.two_d_poisson_flux_bc_adapt

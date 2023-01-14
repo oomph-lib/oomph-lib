@@ -19,9 +19,9 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME mpi.generic_mpi
   TARGET_DEPENDENCIES generic_mpi_test
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
   EXTRA_REQUIRES
-  LABELS mpi matrix
-  REQUIRES_MPI_RUN_COMMAND)
+  LABELS mpi matrix)
 
 # Don't run this test alongside any other tests
 set_tests_properties(mpi.generic_mpi PROPERTIES PROCESSORS

@@ -98,6 +98,7 @@ oomph_add_test(
     fsi_pseudo_solid_collapsible_channel_adapt_TH
     fsi_pseudo_solid_collapsible_channel_CR
     fsi_pseudo_solid_collapsible_channel_TH
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS interaction fsi_collapsible_channel)
 

@@ -36,6 +36,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME poisson.two_d_poisson
   TARGET_DEPENDENCIES two_d_poisson two_d_poisson2 two_d_poisson_compare_solvers
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS poisson two_d_poisson)
 

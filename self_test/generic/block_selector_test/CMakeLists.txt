@@ -19,6 +19,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME generic.block_selector_test
   TARGET_DEPENDENCIES block_selector_test
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES compare_block_selector_nonnull_replacement_block_pt.sh
   LABELS block_selector_test)
 

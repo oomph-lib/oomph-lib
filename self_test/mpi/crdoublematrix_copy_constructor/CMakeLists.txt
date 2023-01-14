@@ -22,9 +22,9 @@ if(NUM_PROCESSORS GREATER_EQUAL 4)
   oomph_add_test(
     TEST_NAME mpi.crdoublematrix_copy_constructor
     TARGET_DEPENDENCIES crdoublematrix_copy_constructor
+    VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_VARIABLENP_RUN_COMMAND}
     EXTRA_REQUIRES
-    LABELS mpi matrix
-    REQUIRES_MPI_VARIABLENP_RUN_COMMAND)
+    LABELS mpi matrix)
 
   # Don't run this test alongside any other tests
   set_tests_properties(mpi.crdoublematrix_copy_constructor PROPERTIES PROCESSORS

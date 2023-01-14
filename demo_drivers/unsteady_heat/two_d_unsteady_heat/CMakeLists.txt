@@ -24,6 +24,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME unsteady_heat.two_d_unsteady_heat
   TARGET_DEPENDENCIES two_d_unsteady_heat two_d_unsteady_heat_restarted
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS unsteady_heat two_d_unsteady_heat)
 

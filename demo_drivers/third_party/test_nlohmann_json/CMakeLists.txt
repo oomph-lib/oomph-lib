@@ -20,6 +20,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME third_party.test_nlohmann_json
   TARGET_DEPENDENCIES test_nlohmann_json
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS third_party test_nlohmann_json
   SILENCE_MISSING_VALIDATA_WARNING)

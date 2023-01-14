@@ -24,6 +24,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME flux_transport.advection
   TARGET_DEPENDENCIES one_d_advection two_d_advection
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS flux_transport advection)
 

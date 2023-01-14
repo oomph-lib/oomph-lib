@@ -24,6 +24,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME meshing.mesh_from_geompack
   TARGET_DEPENDENCIES convert_geom_file mesh_from_geompack_poisson
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
     box_hole.cs2
     box_hole.m2

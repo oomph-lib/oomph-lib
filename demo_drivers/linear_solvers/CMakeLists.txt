@@ -99,6 +99,7 @@ endif()
 oomph_add_test(
   TEST_NAME linear_solvers.linear_solvers
   TARGET_DEPENDENCIES ${TEST_TARGET_DEPS}
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS linear_solvers)
 

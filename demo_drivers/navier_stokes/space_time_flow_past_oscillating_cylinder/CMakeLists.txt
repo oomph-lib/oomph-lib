@@ -22,6 +22,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME navier_stokes.space_time_oscillating_cylinder
   TARGET_DEPENDENCIES space_time_oscillating_cylinder
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS navier_stokes space_time_oscillating_cylinder)
 

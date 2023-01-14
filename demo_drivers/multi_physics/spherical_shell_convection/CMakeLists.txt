@@ -20,6 +20,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME multi_physics.spherical_shell_convection
   TARGET_DEPENDENCIES spherical_shell_convection
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS multi_physics spherical_shell_convection)
 

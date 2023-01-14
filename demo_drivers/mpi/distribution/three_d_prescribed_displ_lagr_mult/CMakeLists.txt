@@ -19,9 +19,9 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME mpi.three_d_prescribed_displ_lagr_mult
   TARGET_DEPENDENCIES three_d_prescribed_displ_lagr_mult
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
   EXTRA_REQUIRES distr_block_prescr.mcr
-  LABELS mpi three_d_prescribed_displ_lagr_mult
-  REQUIRES_MPI_RUN_COMMAND)
+  LABELS mpi three_d_prescribed_displ_lagr_mult)
 
 # Don't run this test alongside any other tests
 set_tests_properties(mpi.three_d_prescribed_displ_lagr_mult

@@ -25,6 +25,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME interaction.pseudo_solid_fsi_channel_with_leaflet
   TARGET_DEPENDENCIES fsi_channel_with_leaflet_precond
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS interaction pseudo_solid_fsi_channel_with_leaflet)
 

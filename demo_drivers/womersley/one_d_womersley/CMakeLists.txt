@@ -19,6 +19,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME womersley.one_d_womersley
   TARGET_DEPENDENCIES one_d_womersley
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS womersley one_d_womersley)
 

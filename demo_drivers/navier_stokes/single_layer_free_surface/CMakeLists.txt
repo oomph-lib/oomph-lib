@@ -26,6 +26,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME navier_stokes.single_layer_free_surface
   TARGET_DEPENDENCIES elastic_single_layer spine_single_layer
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS navier_stokes single_layer_free_surface)
 

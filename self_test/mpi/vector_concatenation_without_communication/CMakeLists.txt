@@ -23,9 +23,9 @@ if(NUM_PROCESSORS GREATER_EQUAL 4)
   oomph_add_test(
     TEST_NAME mpi.vector_concatenation_without_communication
     TARGET_DEPENDENCIES vector_concatenation_without_communication
+    VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_VARIABLENP_RUN_COMMAND}
     EXTRA_REQUIRES
-    LABELS mpi vector
-    REQUIRES_MPI_VARIABLENP_RUN_COMMAND)
+    LABELS mpi vector)
 
   # Don't run this test alongside any other tests
   set_tests_properties(mpi.vector_concatenation_without_communication

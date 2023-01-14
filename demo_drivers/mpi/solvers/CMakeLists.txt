@@ -53,9 +53,9 @@ endif()
 oomph_add_test(
   TEST_NAME mpi.solvers
   TARGET_DEPENDENCIES ${TEST_TARGET_DEPS}
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
   EXTRA_REQUIRES multi_poisson_partition.dat
-  LABELS mpi solvers
-  REQUIRES_MPI_RUN_COMMAND)
+  LABELS mpi solvers)
 
 # Don't run this test alongside any other tests
 set_tests_properties(mpi.solvers PROPERTIES PROCESSORS ${OOMPH_MPI_NUM_PROC})

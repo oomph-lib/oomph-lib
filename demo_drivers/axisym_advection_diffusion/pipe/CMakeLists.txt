@@ -24,6 +24,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME axisym_advection_diffusion.pipe
   TARGET_DEPENDENCIES pipe pipe_variable_diff
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS axisym_advection_diffusion pipe)
 

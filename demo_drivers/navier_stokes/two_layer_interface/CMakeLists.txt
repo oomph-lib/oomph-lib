@@ -33,6 +33,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.two_layer_interface
   TARGET_DEPENDENCIES elastic_two_layer_interface spine_two_layer_interface
                       refineable_two_layer_interface
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS navier_stokes two_layer_interface)
 

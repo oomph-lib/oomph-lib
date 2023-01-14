@@ -26,9 +26,9 @@ oomph_add_test(
   TEST_NAME mpi.fsi_collapsible_channel
   TARGET_DEPENDENCIES fsi_collapsible_channel_adapt
                       fsi_collapsible_channel_macro_adapt
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
   EXTRA_REQUIRES fsi_collapsible_channel_partition.dat
-  LABELS mpi fsi_collapsible_channel
-  REQUIRES_MPI_RUN_COMMAND)
+  LABELS mpi fsi_collapsible_channel)
 
 # Don't run this test alongside any other tests
 set_tests_properties(mpi.fsi_collapsible_channel

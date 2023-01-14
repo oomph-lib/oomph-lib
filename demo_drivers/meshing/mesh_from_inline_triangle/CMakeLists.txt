@@ -32,6 +32,7 @@ oomph_add_test(
   TARGET_DEPENDENCIES
     mesh_from_inline_triangle mesh_from_inline_triangle_no_adapt
     mesh_from_inline_triangle_polygon
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS meshing mesh_from_inline_triangle)
 

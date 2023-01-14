@@ -19,6 +19,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME reaction_diffusion.one_d_act_inhibit
   TARGET_DEPENDENCIES one_d_act_inhibit
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS reaction_diffusion one_d_act_inhibit)
 

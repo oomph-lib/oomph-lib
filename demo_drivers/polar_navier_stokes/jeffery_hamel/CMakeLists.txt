@@ -25,6 +25,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME polar_navier_stokes.jeffery_hamel
   TARGET_DEPENDENCIES jeffery_hamel
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS polar_navier_stokes jeffery_hamel)
 

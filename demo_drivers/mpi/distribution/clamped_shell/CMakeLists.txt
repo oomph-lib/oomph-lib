@@ -19,9 +19,9 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME mpi.clamped_shell
   TARGET_DEPENDENCIES clamped_shell_with_arclength_cont
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
   EXTRA_REQUIRES
-  LABELS mpi clamped_shell
-  REQUIRES_MPI_RUN_COMMAND)
+  LABELS mpi clamped_shell)
 
 # Don't run this test alongside any other tests
 set_tests_properties(mpi.clamped_shell PROPERTIES PROCESSORS

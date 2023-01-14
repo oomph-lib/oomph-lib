@@ -28,6 +28,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME multi_physics.axisym_heat_sphere
   TARGET_DEPENDENCIES axisym_heat_sphere multi_domain_axisym_heat_sphere
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS multi_physics axisym_heat_sphere)
 

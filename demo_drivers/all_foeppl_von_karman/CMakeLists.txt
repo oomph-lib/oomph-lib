@@ -36,6 +36,7 @@ oomph_add_test(
   TEST_NAME all_foeppl_von_karman.all_foeppl_von_karman
   TARGET_DEPENDENCIES axisym_displ_based_fvk axisym_fvk circular_disk
                       displacement_based_circular_disk
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS all_foeppl_von_karman)
 

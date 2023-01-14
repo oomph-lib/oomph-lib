@@ -19,9 +19,9 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME mpi.line_visualiser
   TARGET_DEPENDENCIES adaptive_driven_cavity
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
   EXTRA_REQUIRES adaptive_cavity_1_partition.dat adaptive_cavity_2_partition.dat
-  LABELS mpi adapt driven_cavity
-  REQUIRES_MPI_RUN_COMMAND)
+  LABELS mpi adapt driven_cavity)
 
 # Don't run this test alongside any other tests
 set_tests_properties(mpi.line_visualiser PROPERTIES PROCESSORS

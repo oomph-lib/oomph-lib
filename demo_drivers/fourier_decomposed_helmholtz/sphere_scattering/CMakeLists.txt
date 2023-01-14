@@ -31,6 +31,7 @@ oomph_add_test(
   TEST_NAME fourier_decomposed_helmholtz.sphere_scattering
   TARGET_DEPENDENCIES sphere_scattering unstructured_adaptive_sphere_scattering
                       unstructured_sphere_scattering
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS fourier_decomposed_helmholtz sphere_scattering)
 

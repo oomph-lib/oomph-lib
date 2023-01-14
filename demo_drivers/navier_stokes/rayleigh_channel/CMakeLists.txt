@@ -19,6 +19,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME navier_stokes.rayleigh_channel
   TARGET_DEPENDENCIES rayleigh_channel
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS navier_stokes rayleigh_channel)
 

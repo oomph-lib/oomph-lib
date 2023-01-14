@@ -20,6 +20,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME interaction.unstructured_three_d_fsi
   TARGET_DEPENDENCIES unstructured_three_d_fsi
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
     fsi_bifurcation_fluid.1.ele
     fsi_bifurcation_fluid.1.face

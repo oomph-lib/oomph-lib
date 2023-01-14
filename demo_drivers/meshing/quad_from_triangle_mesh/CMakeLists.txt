@@ -36,6 +36,7 @@ oomph_add_test(
   TARGET_DEPENDENCIES
     adaptive_moving_block_navier_stokes adaptive_unstructured_scattering_quad
     adaptive_unstructured_two_d_solid unstructured_two_d_solid
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
     box_hole.1.ele
     box_hole.1.node

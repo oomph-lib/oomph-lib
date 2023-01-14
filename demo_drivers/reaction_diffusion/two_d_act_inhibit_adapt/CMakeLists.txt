@@ -19,6 +19,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME reaction_diffusion.two_d_act_inhibit_adapt
   TARGET_DEPENDENCIES two_d_act_inhibit_adapt
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS reaction_diffusion two_d_act_inhibit_adapt adapt)
 

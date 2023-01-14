@@ -19,6 +19,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME navier_stokes.osc_ellipse
   TARGET_DEPENDENCIES osc_quarter_ellipse
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS navier_stokes osc_ellipse)
 

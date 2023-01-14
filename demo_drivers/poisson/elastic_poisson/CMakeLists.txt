@@ -19,6 +19,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME poisson.elastic_poisson
   TARGET_DEPENDENCIES elastic_poisson
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS poisson elastic_poisson)
 

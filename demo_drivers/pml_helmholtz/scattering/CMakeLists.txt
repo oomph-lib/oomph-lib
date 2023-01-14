@@ -32,6 +32,7 @@ oomph_add_test(
   TARGET_DEPENDENCIES
     unstructured_two_d_helmholtz unstructured_two_d_helmholtz_adapt
     unstructured_two_d_helmholtz_scattering
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS pml_helmholtz scattering)
 

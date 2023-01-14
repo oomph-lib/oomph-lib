@@ -24,6 +24,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME linear_wave.two_d_linear_wave
   TARGET_DEPENDENCIES two_d_linear_wave two_d_linear_wave_flux
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS linear_wave two_d_linear_wave)
 

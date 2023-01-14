@@ -19,6 +19,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME navier_stokes.vmtk_fluid
   TARGET_DEPENDENCIES vmtk_fluid
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES fluid_iliac.1.ele fluid_iliac.1.face fluid_iliac.1.node
                  fluid_iliac.poly iliac.xda
   LABELS navier_stokes vmtk_fluid)

@@ -33,6 +33,7 @@ oomph_add_test(
   TEST_NAME unsteady_heat.space_time_two_d_unsteady_heat
   TARGET_DEPENDENCIES test_mixed_order_galerkin_petrov
                       test_equal_order_galerkin_petrov test_equal_order_galerkin
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS unsteady_heat space_time_two_d_unsteady_heat)
 

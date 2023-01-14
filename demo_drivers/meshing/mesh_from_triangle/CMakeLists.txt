@@ -38,6 +38,7 @@ oomph_add_test(
   TARGET_DEPENDENCIES
     mesh_from_triangle_navier_stokes mesh_from_triangle_navier_stokes_adapt
     mesh_from_triangle_poisson mesh_from_triangle_poisson_adapt
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
     box_hole.1.edge
     box_hole.1.ele

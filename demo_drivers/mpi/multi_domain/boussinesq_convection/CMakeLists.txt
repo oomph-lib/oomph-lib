@@ -41,12 +41,12 @@ oomph_add_test(
   TARGET_DEPENDENCIES
     multi_domain_boussinesq_convection multi_domain_boussinesq_convection_fd
     multi_domain_ref_b_convection refineable_b_convection
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
   EXTRA_REQUIRES
     multi_domain_boussinesq_partition.dat multi_domain_ref_b_partition.dat
     refineable_b_convection_partition.dat
     multi_domain_boussinesq_partition_2.dat prune_and_balance.mcr
-  LABELS mpi boussinesq_convection
-  REQUIRES_MPI_RUN_COMMAND)
+  LABELS mpi boussinesq_convection)
 
 # Don't run this test alongside any other tests
 set_tests_properties(mpi.boussinesq_convection PROPERTIES PROCESSORS

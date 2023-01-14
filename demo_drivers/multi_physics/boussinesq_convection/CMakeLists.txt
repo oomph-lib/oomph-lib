@@ -67,6 +67,7 @@ oomph_add_test(
     multi_domain_ref_b_convection
     multi_domain_ref_b_convection_fd_for_external_data
     refineable_b_convection
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS multi_physics boussinesq_convection)
 

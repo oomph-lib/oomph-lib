@@ -48,6 +48,7 @@ oomph_add_test(
     adaptive_driven_cavity circular_couette
     circular_couette_without_pseudo_singularity_subtracted_off driven_cavity
     driven_cavity_without_singularity_subtracted_off
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS navier_stokes navier_stokes_with_singularity)
 

@@ -19,6 +19,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME line_visualiser
   TARGET_DEPENDENCIES adaptive_driven_cavity
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS line_visualiser)
 

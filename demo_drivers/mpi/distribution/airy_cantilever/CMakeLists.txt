@@ -20,6 +20,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME mpi.airy_cantilever
   TARGET_DEPENDENCIES airy_cantilever2_adapt
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
   EXTRA_REQUIRES
     airy_cantilever_0_partition.dat
     airy_cantilever_1_partition.dat
@@ -31,8 +32,7 @@ oomph_add_test(
     airy_cantilever_7_partition.dat
     airy_cantilever_8_partition.dat
     airy_cantilever_9_partition.dat
-  LABELS mpi airy_cantilever
-  REQUIRES_MPI_RUN_COMMAND)
+  LABELS mpi airy_cantilever)
 
 # Don't run this test alongside any other tests
 set_tests_properties(mpi.airy_cantilever PROPERTIES PROCESSORS
