@@ -4,9 +4,9 @@
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(STATUS "Entered mpfr subdirectory")
 
-# Look for an already-installed version of MPFR. If OOMPH_USE_MPFR_FROM is
-# defined then we'll look under there. (We have our own FindMPFR.cmake that will
-# inspect the OOMPH_USE_MPRF_FROM variable)
+# Look for an already-installed version of MPFR using FindMPFR.cmake. If
+# OOMPH_USE_MPFR_FROM is defined then FindMPFR.cmake will look under there for
+# the required files.
 find_package(MPFR 2.2.1 REQUIRED)
 
 # ------------------------------------------------------------------------------
