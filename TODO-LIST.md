@@ -34,7 +34,10 @@
 
 ### Pure-CMake
 
+* [ ] Add `oomph_option(...)` and `oomph_set(...)` commands to specify the commandline options to the user
 * [ ] Add functionality to specify `--gmsh_command_line`
+* [ ] Patch the use of shared libs
+* [ ] Sort out moving third-party libs after they've been built (will probably have issues with `oomphlibConfig.cmake`)
 * [ ] Update to C++17 again to patch issue in `demo_drivers/gzip/one_d_poisson`
   * Will need to test with Trilinos as it used a function removed in C++17
 * [ ] Update MPI tests to specify [PROCESSORS](https://cmake.org/cmake/help/latest/prop_test/PROCESSORS.html#prop_test:PROCESSORS) rather than forcing everything to run sequentially
@@ -117,9 +120,9 @@ Include tasks here that likely need some collaboration with Matthias
 
 * [ ] Go through all new commits to the main repository in the last 1-2 years and make sure any changes in Makefiles have been reflected in their corresponding CMakeLists.txt file
 * [ ] Remove `INSTALL.md` (installation instructions in main `README.md`)
+* [ ] Possibly change `oomphlib` -> `oomph_lib`? (carefully(!) avoid changing headers/sources)
 * [ ] Discuss updating to C++17 (fresh start?)
 * [ ] Discuss option naming!! E.g. `WANT_` or `ENABLE_` etc.
-* [ ] Possibly change `oomphlib` -> `oomph_lib`? (carefully(!) avoid changing headers/sources)
 * [ ] Decide whether to keep `OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY` around
   * Useful for quick debugging of build with demo drivers
 * [ ] Discuss required base presets in `CMakePresets.json`
