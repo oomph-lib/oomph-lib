@@ -71,37 +71,84 @@ find_package(Python3 REQUIRED)
 
 # ------------------------------[ BUILD OPTIONS ]-------------------------------
 # cmake-format: off
+include(OomphOptionsAndSummary)
 
 # General options
-option(BUILD_SHARED_LIBS "Build using shared libraries; static otherwise" OFF)
-option(OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY "Build tests with library build" OFF)
-option(OOMPH_DONT_SILENCE_USELESS_WARNINGS "Display (harmless) warnings from external_src/ and src/ that are silenced" OFF)
-option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" OFF)
-option(OOMPH_ENABLE_PARANOID "Enable the PARANOID flag in Debug" OFF)
-option(OOMPH_ENABLE_RANGE_CHECKING "Enable RANGE_CHECKING flag in Debug" OFF)
-option(OOMPH_TRANSITION_TO_VERSION_3 "Try to build with up-to-date external sources" OFF)
-option(OOMPH_USE_DEPRECATED_SUPERLU "Use oomph-lib's deprecated version of SuperLU (4.3)" OFF)
+oomph_option(OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY "Build tests with library build" OFF)
+oomph_option(OOMPH_DONT_SILENCE_USELESS_WARNINGS "Display (harmless) warnings from external_src/ and src/ that are silenced" OFF)
+oomph_option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" OFF)
+oomph_option(OOMPH_ENABLE_PARANOID "Enable the PARANOID flag in Debug" OFF)
+oomph_option(OOMPH_ENABLE_RANGE_CHECKING "Enable RANGE_CHECKING flag in Debug" OFF)
+oomph_option(OOMPH_TRANSITION_TO_VERSION_3 "Try to build with up-to-date external sources" OFF)
+oomph_option(OOMPH_USE_DEPRECATED_SUPERLU "Use oomph-lib's deprecated version of SuperLU (4.3)" OFF)
 
 # Fine-grained control of build of external_srcs.
 # FIXME: Make sure the SUPPRESS variables below actually work
 # TODO: These should be set on the fly after checking whether the appropriate variable WITH_* has been set...
-option(OOMPH_SUPPRESS_TRIANGLE_LIB "Suppress build of oomph-lib's copy of the triangle library" OFF)
-option(OOMPH_SUPPRESS_TETGEN_LIB "Suppress build of oomph-lib's copy of the tetgen library" OFF)
+oomph_option(OOMPH_SUPPRESS_TRIANGLE_LIB "Suppress build of oomph-lib's copy of the triangle library" OFF)
+oomph_option(OOMPH_SUPPRESS_TETGEN_LIB "Suppress build of oomph-lib's copy of the tetgen library" OFF)
 
 # FIXME: Override OOMPH_WANT_<LIB> variables if OOMPH_USE_<LIB>_FROM is specified
 
 # Third-party libraries. [WORK IN PROGRESS.]
-option(OOMPH_WANT_CGAL "Do we want to build the CGAL library?" OFF)
-option(OOMPH_WANT_HYPRE "Use Hypre library" OFF)
-option(OOMPH_WANT_MUMPS "Use MUMPS library" OFF)
-option(OOMPH_WANT_TRILINOS "Use Trilinos library" OFF)
-option(OOMPH_WANT_NLOHMANN_JSON "Use the nlohmann JSON library" OFF)
+oomph_option(OOMPH_WANT_CGAL "Do we want to build the CGAL library?" OFF)
+oomph_option(OOMPH_WANT_HYPRE "Use Hypre library" OFF)
+oomph_option(OOMPH_WANT_MUMPS "Use MUMPS library" OFF)
+oomph_option(OOMPH_WANT_TRILINOS "Use Trilinos library" OFF)
+oomph_option(OOMPH_WANT_NLOHMANN_JSON "Use the nlohmann JSON library" OFF)
 
 # Enable the use of code coverage flags so that coverage data can be collected
-option(OOMPH_ENABLE_CODE_COVERAGE "Enable collection of code coverage results" OFF)
+oomph_option(OOMPH_ENABLE_CODE_COVERAGE "Enable collection of code coverage results" OFF)
+
+# Paths to packages that the user has installed themselves
+oomph_path_option(OOMPH_USE_MPI_FROM "Path to MPI installation" "${OOMPH_USE_MPI_FROM}")
+oomph_path_option(OOMPH_USE_GMSH_FROM "Path to 'gmsh' executable" "${OOMPH_USE_GMSH_FROM}")
+oomph_path_option(OOMPH_USE_BLAS_FROM "Path to BLAS installation" "${OOMPH_USE_BLAS_FROM}")
+oomph_path_option(OOMPH_USE_LAPACK_FROM "Path to LAPACK installation" "${OOMPH_USE_LAPACK_FROM}")
+oomph_path_option(OOMPH_USE_GMP_FROM "Path to GMP installation" "${OOMPH_USE_GMP_FROM}")
+oomph_path_option(OOMPH_USE_MPFR_FROM "Path to MPFR installation" "${OOMPH_USE_MPFR_FROM}")
+oomph_path_option(OOMPH_USE_BOOST_FROM "Path to Boost installation" "${OOMPH_USE_BOOST_FROM}")
+oomph_path_option(OOMPH_USE_CGAL_FROM "Path to CGAL installation" "${OOMPH_USE_CGAL_FROM}")
+oomph_path_option(OOMPH_USE_MUMPS_FROM "Path to MUMPS installation" "${OOMPH_USE_MUMPS_FROM}")
+oomph_path_option(OOMPH_USE_HYPRE_FROM "Path to Hypre installation" "${OOMPH_USE_HYPRE_FROM}")
+oomph_path_option(OOMPH_USE_TRILINOS_FROM "Path to Trilinos installation" "${OOMPH_USE_TRILINOS_FROM}")
+
+# Print summary
+oomph_print_config_summary()
 
 # cmake-format: on
 # -------------------------[ PROCESS SELECTED OPTIONS ]-------------------------
+
+# If OOMPH_USE_GMSH_FROM is the path to an executable, make sure it is a
+# program. If it's a directory, check that we can find 'gmsh' in the directory
+if(OOMPH_USE_GMSH_FROM)
+  if(NOT EXISTS "${OOMPH_USE_GMSH_FROM}")
+    message(
+      FATAL_ERROR
+        "You said that 'gmsh' can be found here:\n\t${OOMPH_USE_GMSH_FROM}\nbut this file/directory does not exist!"
+    )
+  endif()
+
+  # Extract path components
+  set(OOMPH_GMSH_DIR ${OOMPH_USE_GMSH_FROM})
+  set(OOMPH_GMSH_PROGRAM)
+  if(NOT IS_DIRECTORY ${OOMPH_USE_GMSH_FROM})
+    cmake_path(GET OOMPH_USE_GMSH_FROM PARENT_PATH OOMPH_GMSH_DIR)
+    cmake_path(GET OOMPH_USE_GMSH_FROM STEM OOMPH_GMSH_PROGRAM)
+  endif()
+
+  # Search for a program;
+  #
+  # TODO: Add a 'VALIDATOR' argument to check that gmsh works
+  find_program(
+    OOMPH_GMSH_COMMAND
+    NAMES gmsh ${OOMPH_GMSH_PROGRAM}
+    PATHS ${OOMPH_GMSH_DIR} REQUIRED
+    NO_DEFAULT_PATH)
+
+  # Notify user
+  message(STATUS "Found 'gmsh' at: ${OOMPH_USE_GMSH_FROM}")
+endif()
 
 # The demo_driver self-tests use shell scripts and symbolic links, both of which
 # require a Unix-based system

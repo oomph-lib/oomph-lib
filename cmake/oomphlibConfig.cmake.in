@@ -95,6 +95,9 @@ set(OOMPH_USE_CGAL_FROM "@OOMPH_USE_CGAL_FROM@")
 set(OOMPH_USE_HYPRE_FROM "@OOMPH_USE_HYPRE_FROM@")
 set(OOMPH_USE_TRILINOS_FROM "@OOMPH_USE_TRILINOS_FROM@")
 
+# The gmsh executable
+set(OOMPH_GMSH_COMMAND "@OOMPH_GMSH_COMMAND@")
+
 # ---------------------[ FORWARD DEPENDENCY REQUIREMENTS ]---------------------
 
 # Python3 for self-tests
@@ -159,7 +162,6 @@ endif()
 # the find_dependency(...) will be REQUIRED. In this case, the find_package(...)
 # call for oomphlib will fail instantly when we only want it to fail if we also
 # couldn't find the package system-wide.
-
 
 list(APPEND CMAKE_PREFIX_PATH "@CMAKE_INSTALL_PREFIX@")
 
