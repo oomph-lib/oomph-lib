@@ -177,14 +177,21 @@ if(OOMPH_ENABLE_MPI)
   endif()
 endif()
 
-# Add PARANOID and RANGE_CHECKING for Debug configurations (ONLY!) if desired.
-# We have to use generator expressions so that it works correctly for multi-
-# configuration generators like Xcode, Visual Studio or Ninja Multi-Config
+# Add PARANOID and RANGE_CHECKING for Debug configurations (ONLY!) if desired
+if((OOMPH_ENABLE_PARANOID OR OOMPH_ENABLE_RANGE_CHECKING)
+   AND (NOT CMAKE_BUILD_TYPE STREQUAL "Debug"))
+  message(
+    WARNING
+      "You can only enable\n\tOOMPH_ENABLE_PARANOID\nand\n\tOOMPH_ENABLE_RANGE_CHECKING\nwhen building with\n\tCMAKE_BUILD_TYPE=\"Debug\"\nbut you're building with\n\tCMAKE_BUILD_TYPE=\"${CMAKE_BUILD_TYPE}\"\nI'm therefore going to ignore this flag..."
+  )
+endif()
+
+# Enable flags
 if(OOMPH_ENABLE_PARANOID)
-  add_compile_definitions("$<$<CONFIG:DEBUG>:PARANOID>")
+  add_compile_definitions("$<$<CONFIG:DEBUG,>:PARANOID>")
 endif()
 if(OOMPH_ENABLE_RANGE_CHECKING)
-  add_compile_definitions("$<$<CONFIG:DEBUG>:RANGE_CHECKING>")
+  add_compile_definitions("$<$<CONFIG:DEBUG,>:RANGE_CHECKING>")
 endif()
 
 # If we're using up-to-date external sources/dists then make sure we have a
