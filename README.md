@@ -150,7 +150,7 @@ Make sure you have sufficiently recent versions of these programms installed on 
 
 ### CMake
 
-You will need CMake 3.22+. You can install `cmake` via your native package manager, e.g.
+You will need CMake 3.22+. You can install CMake via your native package manager, e.g.
 
 ```bash
 # On Ubuntu:
@@ -164,7 +164,7 @@ or
 brew install cmake
 ```
 
- If your package manager does not provide a recent enough version of `cmake`, you will need to build it from source. You can find instructions on how to do this [below](#Building-CMake) and on the [CMake website](https://cmake.org/install/).
+ If your package manager does not provide a recent enough version of CMake, you will need to build it from source. You can find instructions on how to do this [below](#Building-CMake) and on the [CMake website](https://cmake.org/install/).
 
 ### Ninja
 
@@ -207,7 +207,7 @@ To uninstall the library simply delete the `build/` and `install/` directories i
 
 ### Option 2: Specifying a custom installation location
 
-By default, `oomph-lib` will be installed to the `install/` subdirectory of the root `oomph-lib` folder. To specify a different installation location, pass `--install-prefix=<install-location>` to `cmake` during the configure step. Note that `<install-location>` must be an **absolute** path. Here's an example where we specify different build and install directories:
+By default, `oomph-lib` will be installed to the `install/` subdirectory of the root `oomph-lib` folder. To specify a different installation location, pass `--install-prefix=<install-location>` to CMake during the configure step. Note that `<install-location>` must be an **absolute** path. Here's an example where we specify different build and install directories:
 
 ```bash
 # Configure and build (write build information into the
@@ -1005,14 +1005,13 @@ Start MH edits
 
 ### Configuring the build via the specification of CMake cache variables
 
-You can customise your build by passing flags of the form `-D<FLAG>=<value>` to `CMake` during the configuration step. For instance, `oomph-lib` allows range checking (useful for debugging but costly in terms of run time) via the specification of a C++ macro  `RANGE_CHECKING`; if this macro is defined, `oomph-lib` will check that indices passed to vectors (and similar containers) are within the legal range. This requires the `oomph-lib` source code to be compiled with appropriate compiler flags, e.g.
+You can customise your build by passing flags of the form `-D<FLAG>=<value>` to CMake during the configuration step. For instance, `oomph-lib` allows range checking (useful for debugging but costly in terms of run time) via the specification of a C++ macro  `RANGE_CHECKING`; if this macro is defined, `oomph-lib` will check that indices passed to vectors (and similar containers) are within the legal range. This requires the `oomph-lib` source code to be compiled with appropriate compiler flags, e.g.
 ```bash
 g++ -DRANGE_CHECKING my_code.cc
 ```
-if gcc is used as the compiler.
+if GCC is used as the compiler.
 
-To ensure that such flags (in the form required by the underlying compiler) are provided when the source code is compiled, we employ `CMake`'s cache variables. For instance, to enable range checking, set the cache variable `OOMPH_ENABLE_RANGE_CHECKING` to `"ON"` when configuring the project:
-***__Puneet__: Please check: No need to specify the flag during the build and install stages, right? Also not sure about `"ON"` vs `ON`. ***
+To ensure that such flags (in the form required by the underlying compiler) are provided when the source code is compiled, we provide CMake configuration options that have to be provided at the configure stage. For instance, to enable range checking, set the cache variable `OOMPH_ENABLE_RANGE_CHECKING` to `ON` when configuring the project:
 ```bash
 # Configure with range checking 
 cmake -G Ninja -B build -DOOMPH_ENABLE_RANGE_CHECKING=ON
@@ -1024,126 +1023,71 @@ cmake --build build
 cmake --install build
 ``` 
 
-`CMake` itself already provides a large number of such cache variables. The most important of these is the `CMAKE_BUILD_TYPE` which can take the values
-* `"Debug"`: the source code is compiled with debug information (using, e.g., `g++ -g` if gcc is used) and without any optimisation.
-* `"Release"`: the source is code compiled without debugging information but with full optimisation (using, e.g., `g++ -O3` if gcc is used). Additional settings are available but are not of much use in the context of this project. If this flag is not specified explicitly, `oomph-lib` is built in release mode.
+CMake itself already provides a large number of such cache variables. 
 
-*** __Puneet:__ `BUILD_SHARED_LIBS` is `CMake`-based too, isn't it? Is this something we want to list explicitly here. I suppose shared is better so let's just fix it (he said) and acknowledge it somewhere (or just keep quiet) ***
+- The most important of these is the `CMAKE_BUILD_TYPE` which can take the values
+  * `"Debug"`: the source code is compiled with debug information (using, e.g., `g++ -g` if GCC is used) and without any optimisation.
+  * `"Release"`: the source is code compiled without debugging information but with full optimisation (using, e.g., `g++ -O3` if GCC is used). 
 
-`oomph-lib` provides additional project-specific cache variables whose default values are chosen such that the fastest possible version of the library is built.
+  Additional settings are available but are not of much use in the context of this project. If the flag is not specified explicitly, `oomph-lib` is built in Release mode.
 
-The variables fall into several categories. There are those that get translated into C++ macros for `oomph-lib` source code. These include: 
-* `OOMPH_ENABLE_RANGE_CHECKING` (default `"OFF"`), already discussed above.
-* `OOMPH_ENABLE_PARANOID` (default `"OFF"`) enables the compilation of built-in self-tests and diagnostics within `oomph-lib`'s source code via the C++ macro `PARANOID`. These tests are very useful during code development but, like range checking, add to the run time.
-* `OOMPH_ENABLE_MPI` (default `"OFF"`) enables `oomph-lib`'s MPI-based parallel capabilities via the C++ macro `OOMPH_HAS_MPI`. It also ensures that the source code is compiled with a suitable MPI compiler. *** __Puneet:__ I think you claimed that this was done automatically. If so, how? If not, does the specification of this flag require the simultaneous specification of mpi compilers for all three languages? ***
+- Another key variable is `BUILD_SHARED_LIBS` which ensures that the libraries are built as shared (dynamic), rather than static libraries. Its default is `ON` *** BUT THIS IS CURRENTLY BROKEN, SO IT'S ACTUALLY BUILDING STATIC LIBRARIES *** 
 
+`oomph-lib` provides additional project-specific cache variables. 
 
-Other variables request that certain optional third-party libaries are built at the same time as `oomph-lib`. E.g. 
-* `OOMPH_WANT_MUMPS` (default `"OFF"`) requests that the parallel frontal solver MUMPS is built.
-* `OOMPH_WANT_HYPRE` (default `"OFF"`)  requests that the Hypre library is built.
-* `OOMPH_WANT_TRILINOS` (default `"OFF"`)  requests that the Trilinos library is built.
-* *** __Puneet:__ any others? I guess cgal (and friends), blas etc. are (or will be) built automatically since we can't really do without them; if so they only need to be discussed below when we exlain how to use existing versions of these libraries ***
-
-If any of these are set to `"ON"`, `CMake` will download the relevant sources and build the libraries as part of the `oomph-lib` installation. It will also (via the associated C++ macros, `OOMPH_HAS_MUMPS`, `OOMPH_HAS_HYPRE`, `OOMPH_HAS_TRILINOS`) enable the compilation of certain `oomph-lib` wrappers to these libraries. For instance, if `OOMPH_WANT_MUMPS` is set to `"ON"` during the project configuration, `oomph-lib`'s C++ sources will be compiled with the C++ macro `OOMPH_HAS_MUMPS` which then enables the creation of a `LinearSolver` object that uses `MUMPS` as the underlying linear solver.
-
-Since third party libraries are not modified/maintained by us, it is, of course, not necessary to rebuild them over and over again. They only have to be built/installed once (ideally using full optimisation) in a permanent location, or they may already be installed somewhere on your computer. In this case, their location can be specified via the following variables:
-* `OOMPH_USE_BLAS_FROM` which specifies the absolute path to the directory in which the BLAS library has been installed; this directory should contain an `include` and `lib` subdirectory *** __Puneet:__ Making this up as I go along; we ought to specify what exactly the path is to ***.
-* ** __Puneet:__ I assume there are others; list/describe here. **
+- Some of them are simply translated into C++ macros for the compilation of `oomph-lib` source code. These include: 
+  * `OOMPH_ENABLE_RANGE_CHECKING` (default `OFF`), already discussed above.
+  * `OOMPH_ENABLE_PARANOID` (default `OFF`) enables the compilation of built-in self-tests and diagnostics within `oomph-lib`'s source code via the C++ macro `PARANOID`. These tests are very useful during code development but, like range checking, add to the run time.
 
 
+- `oomph-lib`'s MPI-based parallel capabilities are enabled with:
+    * `OOMPH_ENABLE_MPI` (default `OFF`) not only provides the C++ macro `OOMPH_HAS_MPI` (to allow the copmpilation of MPI-related code in `oomph-lib`) but also ensures that the source code is compiled with a suitable MPI compiler.
 
-Finally, there are a number of cache variables that are only of interest to `oomph-lib` developers and can/should be ignored. A full list of cache variables can be produced by `CMake` but sadly only once the project has been configured. Luckily the configuration is quick, so to get the full list simply configure the project without providing any variables and obtain a list of variables afterwards. The re-run the configuration if you want to use any newly discovered variables:
-```bash
-# Default configuration
-cmake -G ninja -B build
+- `oomph-lib` uses a number of third-party libraries. Some of these are built by default, others are optional and their provision has to be requested at the configure stage. The three key optional libraries are Mumps (a linear solver) and the Hypre and Trilonos libraries. Their build is controlled by the following cache variables:
+  * `OOMPH_WANT_MUMPS` (default `OFF`) requests that the parallel frontal solver MUMPS is built.
+  * `OOMPH_WANT_HYPRE` (default `OFF`)  requests that the Hypre library is built.
+  * `OOMPH_WANT_TRILINOS` (default `OFF`)  requests that the Trilinos library is built.
 
-# Have a look at the available configure options
-cd build
-cmake -LH
-```
+  If any of these are set to `ON`, CMake will download the relevant sources and build the libraries as part of the `oomph-lib` installation. It will also (via the associated C++ macros `OOMPH_HAS_MUMPS`, `OOMPH_HAS_HYPRE` and `OOMPH_HAS_TRILINOS`) enable the compilation of certain `oomph-lib` wrappers to these libraries. For instance, if `OOMPH_WANT_MUMPS` is set to `ON` during the project configuration, `oomph-lib`'s C++ sources will be compiled with the C++ macro `OOMPH_HAS_MUMPS` which then enables the creation of a `MumpsSolver` object that uses `MUMPS` as the underlying linear solver. To use it in your own C++ driver code simply place the creation of that linear solver into an #ifdef/#endif block:
+  ```bash
+  [...]
 
-*** __Puneet:__ I think this is what you (and google!) said. However, I get a warning and an error when I do this:
-```bash
-matthias@matthias-Precision-7730:~/oomph-lib/build$ cmake -LH 
-CMake Warning:
-  No source or binary directory provided.  Both will be assumed to be the
-  same as the current working directory, but note that this warning will
-  become a fatal error in future CMake releases.
+  #ifdef OOMPH_HAS_MUMPS
 
+    // Create mumps solver
+    Problem::linear_solver_pt = new MumpsSolver;
 
-CMake Error: The source directory "/home/matthias/oomph-lib/build" does not appear to contain CMakeLists.txt.
-Specify --help for usage, or press the help button on the CMake GUI.
--- Cache values
-// Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel ...
-CMAKE_BUILD_TYPE:STRING=Release
+  #endif
 
-[...]
-```
-but it works (in the sense that the variables are described after the error message).
+  [...]
 
-Having said that, the list seems incomplete:
-```bash
-matthias@matthias-Precision-7730:~/oomph-lib/build$ cmake -LH  | grep OOMPH
-CMake Warning:
-  No source or binary directory provided.  Both will be assumed to be the
-  same as the current working directory, but note that this warning will
-  become a fatal error in future CMake releases.
-
-
-CMake Error: The source directory "/home/matthias/oomph-lib/build" does not appear to contain CMakeLists.txt.
-Specify --help for usage, or press the help button on the CMake GUI.
-OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY:BOOL=OFF
-OOMPH_DONT_SILENCE_USELESS_WARNINGS:BOOL=OFF
-OOMPH_ENABLE_CODE_COVERAGE:BOOL=OFF
-OOMPH_ENABLE_MPI:BOOL=OFF
-OOMPH_ENABLE_PARANOID:BOOL=OFF
-OOMPH_ENABLE_RANGE_CHECKING:BOOL=OFF
-OOMPH_SUPPRESS_TETGEN_LIB:BOOL=OFF
-OOMPH_SUPPRESS_TRIANGLE_LIB:BOOL=OFF
-OOMPH_TRANSITION_TO_VERSION_3:BOOL=OFF
-OOMPH_USE_DEPRECATED_SUPERLU:BOOL=OFF
-OOMPH_WANT_CGAL:BOOL=OFF
-OOMPH_WANT_HYPRE:BOOL=ON
-OOMPH_WANT_MUMPS:BOOL=OFF
-OOMPH_WANT_NLOHMANN_JSON:BOOL=OFF
-OOMPH_WANT_TRILINOS:BOOL=OFF
-```
-Let's have a chat...
-***
----
-End MH edits
-
----
+- Since third-party libraries (default or optional) are not modified/maintained by us, it is, of course, not necessary to rebuild them over and over again. They only have to be built/installed once (ideally using full optimisation) in a permanent location, or they may already be installed somewhere on your computer. In this case, their location can be specified via the following variables:
+  * `OOMPH_USE_BLAS_FROM=<path/to/library>` which specifies the absolute path to the directory in which the BLAS library has been installed; this directory should contain an `include` and `lib` subdirectory. So for instance if we have installed OpenBlas in 
+`/home/joe_cool/OpenBlas/install`, so that that directory contains the relevant `include` and `lib` directories,
+    ```bash
+    > ls -l /home/joe_cool/OpenBlas/install
+    drwxrwxr-x  bin
+    drwxrwxr-x  include
+    drwxrwxr-x  lib
+    ```
+    `oomph-lib` can use this library (instead of rebuilding it) by configuring the build as follows:
+    ```bash
+    # Run this in the oomph-lib root directory
+    cmake -G Ninja -B build -DOOMPH_USE_BLAS_FROM=/home/joe_cool/OpenBlas/install
+    cmake --build build
+    cmake --install build
+    ```
+  * *** DO THIS FOR ALL THE OTHER SPECIFIABLE LIBRARIES ***
 
 
-```
 
-Option                                    | Description                                                                  | Default
-------------------------------------------|------------------------------------------------------------------------------|--------
-`CMAKE_BUILD_TYPE`                        | The build type (e.g. `Debug`, `Release`, `RelWithDebInfo` or `MinSizeRel`)   | `Release`
-`BUILD_SHARED_LIBS`                       | Build using shared libraries; static otherwise  **["SHARED" DOESN'T WORK!]** | OFF
-`BUILD_SHARED_LIBS`                       | Build using shared libraries; static otherwise  **["SHARED" DOESN'T WORK!]** | OFF
-`OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY`   | Build tests with library build                                               | OFF
-`OOMPH_DONT_SILENCE_USELESS_WARNINGS`     | Display (harmless) warnings from external_src/ and src/ that are silenced    | OFF
-`OOMPH_ENABLE_MPI`                        | Enable the use of MPI for parallel processing                                | OFF
-`OOMPH_MPI_NUM_PROC`                      | Number of processes to use with MPI-enabled tests                            | 2
-`OOMPH_ENABLE_PARANOID`                   | Enable the PARANOID flag in Debug                                            | OFF
-`OOMPH_ENABLE_RANGE_CHECKING`             | Enable RANGE_CHECKING flag in Debug                                          | OFF
-`OOMPH_TRANSITION_TO_VERSION_3`           | Try to build with up-to-date external sources                                | OFF
-`OOMPH_USE_DEPRECATED_SUPERLU`            | Use oomph-lib's deprecated version of SuperLU (4.3)                          | OFF
-`OOMPH_SUPPRESS_TRIANGLE_LIB`             | Suppress build of oomph-lib's copy of the triangle library                   | OFF
-`OOMPH_SUPPRESS_TETGEN_LIB`               | Suppress build of oomph-lib's copy of the tetgen library                     | OFF
-`OOMPH_WANT_NLOHMANN_JSON`                | Enable the [`nlohmann/json`](https://github.com/nlohmann/json) JSON library  | OFF
-`OOMPH_WANT_CGAL`                         | Enable we want to build the CGAL library? **[DOESN'T WORK YET!]**            | OFF
-`OOMPH_WANT_HYPRE`                        | Enable Hypre library                                                         | OFF
-`OOMPH_WANT_MUMPS`                        | Enable MUMPS library [CURRENTLY ONLY WORKING WITH MPI]                       | OFF
-`OOMPH_WANT_TRILINOS`                     | Enable Trilinos library  **[DOESN'T WORK YET!]**                             | OFF
-`OOMPH_ENABLE_CODE_COVERAGE`              | Enable collection of code coverage results                                   | OFF
-```
+* Finally, there are a number of cache variables that are only of interest to `oomph-lib` developers and should be ignored. A full list of cache variables can be produced by ... *** PLACEHOLDER FOR UPDATED PROCEDURE FOR DETECTING ALL OOMPH-LIB VARIABLES ***
+
+
 
 ### Configuring the build via the specification of CMake presets
 
-Specifying these flags from the command-line can be cumbersome and you may forget which options you used to previously build the project. For this reason, we recommend that you create your own `CMakeUserPresets.json` file, as described in [CMake Presets](#cmake-presets).
+Specifying configuration flags from the command-line can be cumbersome and you may forget which options you used to previously build the project. For this reason, we recommend that you create your own `CMakeUserPresets.json` file, as described in [CMake Presets](#cmake-presets).
 **Work in progress!**
 
 ### `CMakePresets.json`
@@ -1161,6 +1105,12 @@ We recommend that you can write your own `CMakeUserPresets.json` file. You can i
 **FIXME:** Sort out the clean-up for the multi-config generator. The install manifest doesn't specify the debug config lib files. Hmm...
 
 ### `CMakeUserPresets.json` example
+
+---
+End MH edits
+
+---
+
 
 ```json
 {
