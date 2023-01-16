@@ -19,6 +19,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME solid.disk_compression
   TARGET_DEPENDENCIES disk_compression
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS solid disk_compression)
 

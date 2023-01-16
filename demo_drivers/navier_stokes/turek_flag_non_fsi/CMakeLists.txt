@@ -25,6 +25,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME navier_stokes.turek_flag_non_fsi
   TARGET_DEPENDENCIES turek_flag_non_fsi_alg turek_flag_non_fsi_macro
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS navier_stokes turek_flag_non_fsi)
 

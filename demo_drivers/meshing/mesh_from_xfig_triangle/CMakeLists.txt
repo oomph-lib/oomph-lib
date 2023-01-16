@@ -40,6 +40,7 @@ oomph_add_test(
   TEST_NAME meshing.mesh_from_xfig_triangle
   TARGET_DEPENDENCIES fig2poly mesh_from_xfig_poisson
                       mesh_from_xfig_navier_stokes
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
     hole.fig
     hole.fig.1.ele

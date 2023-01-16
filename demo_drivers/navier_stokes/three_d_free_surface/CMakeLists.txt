@@ -20,6 +20,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME navier_stokes.three_d_free_surface
   TARGET_DEPENDENCIES 3d_free_surface
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS navier_stokes three_d_free_surface)
 

@@ -35,6 +35,7 @@ oomph_add_test(
   TEST_NAME locate_zeta
   TARGET_DEPENDENCIES locate_zeta_tester locate_zeta_tester_3d
                       locate_zeta_tester_triangle locate_zeta_tester_tetgen
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES cube_hole.1.node cube_hole.1.ele cube_hole.1.face
   LABELS locate_zeta)
 

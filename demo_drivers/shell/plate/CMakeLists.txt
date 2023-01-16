@@ -19,6 +19,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME shell.plate
   TARGET_DEPENDENCIES plate
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS shell plate)
 

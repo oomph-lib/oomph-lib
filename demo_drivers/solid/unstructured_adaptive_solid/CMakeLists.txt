@@ -19,6 +19,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME solid.unstructured_adaptive_solid
   TARGET_DEPENDENCIES unstructured_adaptive_solid
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS solid unstructured_adaptive_solid adapt)
 

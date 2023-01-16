@@ -28,6 +28,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME homogenisation.two_dim
   TARGET_DEPENDENCIES two_dim two_dim_hex
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS homogenisation two_dim)
 

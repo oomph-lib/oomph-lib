@@ -19,6 +19,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME navier_stokes.lagrange_enforced_flow_preconditioner
   TARGET_DEPENDENCIES two_d_tilted_square
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS navier_stokes lagrange_enforced_flow_preconditioner)
 

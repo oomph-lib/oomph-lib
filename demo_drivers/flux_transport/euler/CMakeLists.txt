@@ -39,6 +39,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME flux_transport.euler
   TARGET_DEPENDENCIES couette ff_step one_d_euler ramp two_d_euler
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS flux_transport euler)
 

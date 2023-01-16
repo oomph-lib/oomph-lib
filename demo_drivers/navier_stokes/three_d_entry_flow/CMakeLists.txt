@@ -24,6 +24,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME navier_stokes.three_d_entry_flow
   TARGET_DEPENDENCIES full_tube three_d_entry_flow
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS navier_stokes three_d_entry_flow)
 

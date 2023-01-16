@@ -3,6 +3,9 @@
 # Get the OOMPH-LIB root directory from a makefile
 OOMPH_ROOT_DIR=$1
 
+# The path to gmsh (optional)
+gmsh_command=$2
+
 # Bypass self-tests if executable hasn't been built (almost
 # certainly because there's no cgal
 if [ ! -f planar_facet_bounded_mesh_from_gmsh ]; then
@@ -27,8 +30,6 @@ run_gmsh=1
 
 # Run this twice just in case Makefile.am re-generates itself and
 # creates some output in the process
-make -s --no-print-directory spit_out_gmsh_command
-gmsh_command=$(make -s --no-print-directory spit_out_gmsh_command)
 if [ "$gmsh_command" = "" ]; then
     NUM_TESTS=2
     echo " "

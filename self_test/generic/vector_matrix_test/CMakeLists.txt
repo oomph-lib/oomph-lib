@@ -19,6 +19,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME generic.vector_matrix_test
   TARGET_DEPENDENCIES vector_matrix_test
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS vector matrix)
 

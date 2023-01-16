@@ -31,6 +31,7 @@ oomph_add_test(
   TEST_NAME solid.prescribed_displ_lagr_mult
   TARGET_DEPENDENCIES prescribed_displ_lagr_mult prescribed_displ_lagr_mult2
                       prescribed_displ_lagr_mult_precond
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS solid prescribed_displ_lagr_mult)
 

@@ -19,6 +19,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME eigenproblems.orr_sommerfeld
   TARGET_DEPENDENCIES orr_sommerfeld
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS eigenproblems orr_sommerfeld)
 

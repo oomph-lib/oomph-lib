@@ -19,6 +19,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME spherical_navier_stokes.steady_rot
   TARGET_DEPENDENCIES steady_rot
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS spherical_navier_stokes steady_rot)
 

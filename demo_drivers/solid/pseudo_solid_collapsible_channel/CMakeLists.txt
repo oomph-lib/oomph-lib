@@ -20,6 +20,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME solid.pseudo_solid_collapsible_channel
   TARGET_DEPENDENCIES pseudo_solid_collapsible_channel
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS solid pseudo_solid_collapsible_channel)
 

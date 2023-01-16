@@ -26,6 +26,7 @@ oomph_add_test(
   TEST_NAME interaction.fsi_driven_cavity
   TARGET_DEPENDENCIES fsi_driven_cavity_driver
                       fsi_driven_cavity_segregated_driver
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS interaction fsi_driven_cavity
   SILENCE_MISSING_VALIDATA_WARNING)

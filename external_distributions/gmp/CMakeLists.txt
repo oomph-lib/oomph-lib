@@ -4,9 +4,9 @@
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(STATUS "Entered gmp subdirectory")
 
-# Look for an already-installed version of GMP. If OOMPH_USE_GMP_FROM is defined
-# then we'll look under there. (We have our own FindGMP.cmake that will inspect
-# the OOMPH_USE_GMP_FROM variable)
+# Look for an already-installed version of GMP using FindGMP.cmake. If
+# OOMPH_USE_GMP_FROM is defined then FindGMP.cmake will look under there for the
+# required files.
 find_package(GMP 4.2 REQUIRED)
 
 # ------------------------------------------------------------------------------

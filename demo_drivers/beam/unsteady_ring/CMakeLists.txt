@@ -24,6 +24,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME beam.unsteady_ring
   TARGET_DEPENDENCIES lin_unsteady_ring unsteady_ring
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS beam unsteady_ring)
 

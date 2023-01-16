@@ -26,6 +26,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME navier_stokes.unstructured_adaptive_fs
   TARGET_DEPENDENCIES adaptive_bubble_in_channel adaptive_drop_in_channel
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS navier_stokes unstructured_adaptive_fs adapt)
 

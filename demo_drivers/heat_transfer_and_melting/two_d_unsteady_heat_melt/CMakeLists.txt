@@ -115,6 +115,7 @@ oomph_add_test(
     stefan_boltzmann
     stefan_boltzmann_melt
     two_d_unsteady_heat
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS heat_transfer_and_melting two_d_unsteady_heat_melt)
 

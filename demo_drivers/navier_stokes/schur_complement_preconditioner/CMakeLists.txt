@@ -24,6 +24,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME navier_stokes.schur_complement_preconditioner
   TARGET_DEPENDENCIES three_d_fp two_d_fp
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS navier_stokes schur_complement_preconditioner)
 

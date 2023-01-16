@@ -31,6 +31,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME solid.simple_shear
   TARGET_DEPENDENCIES simple_shear refineable_simple_shear
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS solid simple_shear)
 

@@ -19,6 +19,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME poisson.one_d_poisson_hp_adapt
   TARGET_DEPENDENCIES one_d_poisson_hp_adapt
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS poisson one_d_poisson_hp_adapt adapt)
 

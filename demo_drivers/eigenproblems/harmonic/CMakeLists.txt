@@ -24,6 +24,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME eigenproblems.harmonic
   TARGET_DEPENDENCIES harmonic complex_harmonic
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS eigenproblems harmonic)
 

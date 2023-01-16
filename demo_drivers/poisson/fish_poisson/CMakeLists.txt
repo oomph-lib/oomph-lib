@@ -24,6 +24,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME poisson.fish_poisson
   TARGET_DEPENDENCIES fish_poisson fish_poisson_no_adapt
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS poisson fish_poisson)
 

@@ -36,6 +36,7 @@ oomph_add_test(
   TARGET_DEPENDENCIES
     two_d_poisson_tanh_flux_bc two_d_poisson_tanh_flux_bc_validate
     unit_cube_poisson unit_cube_poisson_validate
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS multigrid scalar_multigrid)
 

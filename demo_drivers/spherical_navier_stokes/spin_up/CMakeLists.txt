@@ -35,6 +35,7 @@ oomph_add_test(
   TEST_NAME spherical_navier_stokes.spin_up
   TARGET_DEPENDENCIES refineable_spin_up refineable_spin_up_cyl spin_up
                       spin_up_cyl
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS spherical_navier_stokes spin_up)
 

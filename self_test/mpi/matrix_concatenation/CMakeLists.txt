@@ -22,9 +22,9 @@ if(NUM_PROCESSORS GREATER_EQUAL 4)
   oomph_add_test(
     TEST_NAME mpi.matrix_concatenation
     TARGET_DEPENDENCIES matrix_concatenation
+    VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_VARIABLENP_RUN_COMMAND}
     EXTRA_REQUIRES
-    LABELS mpi matrix
-    REQUIRES_MPI_VARIABLENP_RUN_COMMAND)
+    LABELS mpi matrix)
 
   # Don't run this test alongside any other tests
   set_tests_properties(mpi.matrix_concatenation PROPERTIES PROCESSORS 4)

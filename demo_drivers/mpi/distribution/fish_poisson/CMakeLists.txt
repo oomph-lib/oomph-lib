@@ -16,14 +16,15 @@ oomph_add_executable(
 
 # ---------------------------------- TESTING ----------------------------------
 
+message("OOMPH_MPI_RUN_COMMAND: ${OOMPH_MPI_RUN_COMMAND}")
 oomph_add_test(
   TEST_NAME mpi.fish_poisson
   TARGET_DEPENDENCIES fish_poisson
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
   EXTRA_REQUIRES
     fish_fully_automatic_partition.dat fish_incremental_partition.dat
     fish_selective_partition.dat distributed_adapt.mcr
-  LABELS mpi fish_poisson
-  REQUIRES_MPI_RUN_COMMAND)
+  LABELS mpi fish_poisson)
 
 # Don't run this test alongside any other tests
 set_tests_properties(mpi.fish_poisson PROPERTIES PROCESSORS

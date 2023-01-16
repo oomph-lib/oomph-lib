@@ -19,6 +19,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME shell.clamped_or_pinned_shell
   TARGET_DEPENDENCIES clamped_or_pinned_shell
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS shell clamped_or_pinned_shell)
 

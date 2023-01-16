@@ -21,6 +21,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME multi_physics.insoluble_surfactant
   TARGET_DEPENDENCIES surfactant
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS multi_physics insoluble_surfactant)
 

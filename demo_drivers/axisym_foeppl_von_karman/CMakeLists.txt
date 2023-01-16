@@ -19,6 +19,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME axisym_foeppl_von_karman.axisym_foeppl_von_karman
   TARGET_DEPENDENCIES axisym_fvk
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS axisym_foeppl_von_karman)
 

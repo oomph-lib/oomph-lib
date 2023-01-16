@@ -25,6 +25,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME interaction.unsteady_vmtk_fsi
   TARGET_DEPENDENCIES unsteady_vmtk_fsi
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
     fluid.1.ele
     fluid.1.face

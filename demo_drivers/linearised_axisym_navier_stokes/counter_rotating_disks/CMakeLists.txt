@@ -26,6 +26,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME linearised_axisym_navier_stokes.counter_rotating_disks
   TARGET_DEPENDENCIES counter_rotating_disks counter_rotating_disks_ref
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS linearised_axisym_navier_stokes counter_rotating_disks)
 

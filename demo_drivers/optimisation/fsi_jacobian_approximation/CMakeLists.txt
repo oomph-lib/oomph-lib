@@ -19,6 +19,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME optimisation.fsi_jacobian_approximation
   TARGET_DEPENDENCIES fsi_jacobian_approximation
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS optimisation fsi_jacobian_approximation)
 

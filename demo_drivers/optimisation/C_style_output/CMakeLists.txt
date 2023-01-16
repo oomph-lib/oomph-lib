@@ -26,6 +26,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME optimisation.C_style_output
   TARGET_DEPENDENCIES c_style_output
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS optimisation C_style_output
   SILENCE_MISSING_VALIDATA_WARNING)

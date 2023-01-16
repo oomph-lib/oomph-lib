@@ -49,6 +49,7 @@ oomph_add_test(
   TARGET_DEPENDENCIES
     refineable_two_layer_soluble_surfactant two_layer_soluble_surfactant
     refineable_unstructured_two_layer_ss
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS multi_physics two_layer_soluble_surfactant)
 

@@ -20,6 +20,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME interaction.fsi_channel_with_leaflet
   TARGET_DEPENDENCIES fsi_channel_with_leaflet
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS interaction fsi_channel_with_leaflet)
 

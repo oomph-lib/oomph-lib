@@ -29,6 +29,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME poisson.spectral
   TARGET_DEPENDENCIES one_d_spectral three_d_spectral_adapt two_d_spectral_adapt
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS poisson spectral)
 

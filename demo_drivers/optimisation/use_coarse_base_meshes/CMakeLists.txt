@@ -19,6 +19,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME optimisation.use_coarse_base_meshes
   TARGET_DEPENDENCIES two_d_poisson_adapt
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS optimisation use_coarse_base_meshes)
 

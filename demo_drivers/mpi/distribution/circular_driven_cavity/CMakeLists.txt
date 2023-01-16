@@ -19,9 +19,9 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME mpi.circular_driven_cavity
   TARGET_DEPENDENCIES circular_driven_cavity
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
   EXTRA_REQUIRES circular_cavity_1_partition.dat circular_cavity_2_partition.dat
-  LABELS mpi circular_driven_cavity
-  REQUIRES_MPI_RUN_COMMAND)
+  LABELS mpi circular_driven_cavity)
 
 # Don't run this test alongside any other tests
 set_tests_properties(mpi.circular_driven_cavity

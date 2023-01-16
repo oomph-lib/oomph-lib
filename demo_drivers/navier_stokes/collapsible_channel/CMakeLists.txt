@@ -54,6 +54,7 @@ oomph_add_test(
     collapsible_channel_algebraic
     collapsible_channel_algebraic_bl_squash
     collapsible_channel_bl_squash
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS navier_stokes collapsible_channel)
 

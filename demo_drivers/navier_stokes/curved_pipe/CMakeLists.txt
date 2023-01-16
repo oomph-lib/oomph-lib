@@ -24,6 +24,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME navier_stokes.curved_pipe
   TARGET_DEPENDENCIES curved_pipe helical_pipe
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS navier_stokes curved_pipe)
 

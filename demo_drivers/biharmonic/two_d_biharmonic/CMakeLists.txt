@@ -19,6 +19,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME biharmonic.two_d_biharmonic
   TARGET_DEPENDENCIES two_d_biharmonic
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS biharmonic two_d_biharmonic)
 

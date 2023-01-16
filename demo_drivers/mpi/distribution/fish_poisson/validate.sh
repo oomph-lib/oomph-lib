@@ -1,5 +1,7 @@
 #! /bin/sh
 
+echo "Arguments $#: $@"
+
 # Get the OOMPH-LIB root directory from a makefile
 OOMPH_ROOT_DIR=$1
 

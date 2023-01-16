@@ -19,6 +19,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME beam.tensioned_string
   TARGET_DEPENDENCIES tensioned_string
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS beam tensioned_string)
 

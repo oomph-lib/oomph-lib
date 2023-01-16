@@ -20,6 +20,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME axisym_navier_stokes.two_fluid_spherical_cap
   TARGET_DEPENDENCIES two_fluid_spherical_cap
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS axisym_navier_stokes two_fluid_spherical_cap)
 

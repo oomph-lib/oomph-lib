@@ -22,9 +22,9 @@ if(OOMPH_HAS_TRILINOS)
   oomph_add_test(
     TEST_NAME mpi.eigenproblem
     TARGET_DEPENDENCIES harmonic
+    VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
     EXTRA_REQUIRES
-    LABELS mpi eigenproblem
-    REQUIRES_MPI_RUN_COMMAND)
+    LABELS mpi eigenproblem)
 
   # Don't run this test alongside any other tests
   set_tests_properties(mpi.eigenproblem PROPERTIES PROCESSORS

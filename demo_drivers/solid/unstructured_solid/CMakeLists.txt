@@ -24,6 +24,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME solid.unstructured_solid
   TARGET_DEPENDENCIES unstructured_three_d_solid unstructured_two_d_solid
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
     cube_hole.1.ele
     cube_hole.1.face

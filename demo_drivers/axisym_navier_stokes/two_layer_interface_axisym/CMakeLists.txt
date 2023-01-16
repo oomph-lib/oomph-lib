@@ -32,6 +32,7 @@ oomph_add_test(
   TEST_NAME axisym_navier_stokes.two_layer_interface_axisym
   TARGET_DEPENDENCIES elastic_two_layer_interface_axisym
                       spine_two_layer_interface_axisym
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS axisym_navier_stokes two_layer_interface_axisym)
 

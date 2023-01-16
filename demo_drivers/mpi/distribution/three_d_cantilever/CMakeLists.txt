@@ -20,6 +20,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME mpi.three_d_cantilever
   TARGET_DEPENDENCIES three_d_cantilever_adapt
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
   EXTRA_REQUIRES
     three_d_cantilever_0_partition.dat
     three_d_cantilever_1_partition.dat
@@ -30,8 +31,7 @@ oomph_add_test(
     three_d_cantilever_8_partition.dat
     three_d_cantilever_9_partition.dat
     comp.mcr
-  LABELS mpi three_d_cantilever
-  REQUIRES_MPI_RUN_COMMAND)
+  LABELS mpi three_d_cantilever)
 
 # Don't run this test alongside any other tests
 set_tests_properties(mpi.three_d_cantilever PROPERTIES PROCESSORS

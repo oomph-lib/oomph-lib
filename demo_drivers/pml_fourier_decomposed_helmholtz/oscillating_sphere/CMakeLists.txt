@@ -26,6 +26,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME pml_fourier_decomposed_helmholtz.oscillating_sphere
   TARGET_DEPENDENCIES adaptive_oscillating_sphere oscillating_sphere
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS pml_fourier_decomposed_helmholtz oscillating_sphere)
 

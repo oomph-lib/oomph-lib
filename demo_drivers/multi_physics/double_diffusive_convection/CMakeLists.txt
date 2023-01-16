@@ -33,6 +33,7 @@ oomph_add_test(
   TEST_NAME multi_physics.double_diffusive_convection
   TARGET_DEPENDENCIES dd_convection multimesh_dd_convection
                       multimesh_ref_dd_convection
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS multi_physics double_diffusive_convection)
 

@@ -20,6 +20,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME interaction.linearised_fsi_pulsewave
   TARGET_DEPENDENCIES linearised_fsi_pulsewave
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS interaction linearised_fsi_pulsewave)
 

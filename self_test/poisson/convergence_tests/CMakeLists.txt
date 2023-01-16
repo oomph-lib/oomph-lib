@@ -35,6 +35,7 @@ oomph_add_test(
   TEST_NAME poisson.convergence_tests
   TARGET_DEPENDENCIES q_convergence_3d q_convergence_2d t_convergence_2d
                       t_convergence_3d
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS convergence poisson)
 

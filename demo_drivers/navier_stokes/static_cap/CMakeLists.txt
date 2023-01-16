@@ -26,6 +26,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME navier_stokes.static_cap
   TARGET_DEPENDENCIES static_single_layer static_two_layer
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS navier_stokes static_cap)
 

@@ -20,6 +20,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME interaction.elastic_bretherton
   TARGET_DEPENDENCIES elastic_bretherton
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS interaction elastic_bretherton)
 

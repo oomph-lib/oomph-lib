@@ -19,6 +19,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME optimisation.stored_shape_fcts
   TARGET_DEPENDENCIES two_d_poisson_stored_shape_fcts
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS optimisation stored_shape_fcts)
 

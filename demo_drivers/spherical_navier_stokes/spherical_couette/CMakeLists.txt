@@ -19,6 +19,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME spherical_navier_stokes.spherical_couette
   TARGET_DEPENDENCIES spherical_couette
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS spherical_navier_stokes spherical_couette)
 

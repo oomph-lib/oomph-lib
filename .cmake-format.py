@@ -23,14 +23,13 @@ with section("parse"):
             "flags": [
                 "SILENCE_MISSING_VALIDATA_WARNING",
                 "NO_VALIDATE_SH",
-                "REQUIRES_MPI_RUN_COMMAND",
-                "REQUIRES_MPI_VARIABLENP_RUN_COMMAND"
             ],
             "kwargs": {
                 "TEST_NAME": 1,
                 "EXTRA_REQUIRES": "*",
                 "LABELS": "*",
                 "TARGET_DEPENDENCIES": "*",
+                "VALIDATE_SH_ARGS": "*",
             }
         },
         "oomph_add_pure_cpp_test": {

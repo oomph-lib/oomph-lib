@@ -33,6 +33,7 @@ oomph_add_test(
   TARGET_DEPENDENCIES
     fsi_collapsible_channel_precond_driver
     fsi_collapsible_channel_segregated_driver simple_segregated_driver
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES steady_precond.bash steady_seg.bash steady_seg_paper.bash
                  unsteady_precond.bash unsteady_seg.bash unsteady_seg_paper.bash
   LABELS interaction fsi_channel_seg_and_precond)

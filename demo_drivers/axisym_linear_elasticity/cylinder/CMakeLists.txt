@@ -19,6 +19,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME axisym_linear_elasticity.cylinder
   TARGET_DEPENDENCIES cylinder
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS axisym_linear_elasticity cylinder)
 

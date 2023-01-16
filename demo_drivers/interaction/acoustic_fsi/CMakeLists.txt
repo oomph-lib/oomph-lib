@@ -26,6 +26,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME interaction.acoustic_fsi
   TARGET_DEPENDENCIES acoustic_fsi unstructured_acoustic_fsi
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS interaction acoustic_fsi)
 

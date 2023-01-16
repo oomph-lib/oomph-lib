@@ -20,6 +20,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME steady_axisym_advection_diffusion.steady_axisym_advection_diffusion
   TARGET_DEPENDENCIES steady_axisym_advection_diffusion
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS steady_axisym_advection_diffusion)
 

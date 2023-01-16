@@ -24,6 +24,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME shell.clamped_shell
   TARGET_DEPENDENCIES clamped_shell clamped_shell_with_arclength_cont
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS shell clamped_shell)
 

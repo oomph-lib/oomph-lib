@@ -20,6 +20,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME interaction.unstructured_adaptive_fsi
   TARGET_DEPENDENCIES unstructured_adaptive_2d_fsi
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS interaction unstructured_adaptive_fsi adapt)
 

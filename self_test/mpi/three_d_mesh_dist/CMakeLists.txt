@@ -19,9 +19,9 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME mpi.three_d_mesh_dist
   TARGET_DEPENDENCIES three_d_mesh_dist
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
   EXTRA_REQUIRES three_d_mesh_dist_partition.dat
-  LABELS mpi three_d_mesh
-  REQUIRES_MPI_RUN_COMMAND)
+  LABELS mpi three_d_mesh)
 
 # Don't run this test alongside any other tests
 set_tests_properties(mpi.three_d_mesh_dist PROPERTIES PROCESSORS

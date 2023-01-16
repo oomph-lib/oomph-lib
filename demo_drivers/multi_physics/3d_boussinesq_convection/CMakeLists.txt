@@ -26,6 +26,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME multi_physics.3d_boussinesq_convection
   TARGET_DEPENDENCIES 3d_multimesh_ref_b_convect 3d_ref_b_convect
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS multi_physics 3d_boussinesq_convection)
 

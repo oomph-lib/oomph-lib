@@ -26,6 +26,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME generalised_newtonian_axisym_navier_stokes.axisym_vibrating_shell
   TARGET_DEPENDENCIES axisym_vibrating_shell_non_newtonian
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS generalised_newtonian_axisym_navier_stokes axisym_vibrating_shell)
 

@@ -23,6 +23,7 @@ oomph_add_test(
   TEST_NAME
     linearised_free_surface_axisym_navier_stokes.two_layer_interface_nonaxisym_perturbations
   TARGET_DEPENDENCIES two_layer_interface_nonaxisym_perturbations
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS linearised_free_surface_axisym_navier_stokes
          two_layer_interface_nonaxisym_perturbations)

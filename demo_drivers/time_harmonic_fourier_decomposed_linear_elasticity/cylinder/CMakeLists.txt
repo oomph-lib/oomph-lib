@@ -48,6 +48,7 @@ oomph_add_test(
   TARGET_DEPENDENCIES
     adaptive_pressure_loaded_cylinder adaptive_unstructured_cylinder cylinder
     pressure_loaded_cylinder unstructured_cylinder
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS time_harmonic_fourier_decomposed_linear_elasticity cylinder)
 

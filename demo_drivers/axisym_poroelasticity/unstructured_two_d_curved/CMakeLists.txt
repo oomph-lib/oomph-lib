@@ -26,6 +26,7 @@ oomph_add_test(
   TEST_NAME axisym_poroelasticity.unstructured_two_d_curved
   TARGET_DEPENDENCIES adaptive_unstructured_two_d_curved
                       unstructured_two_d_curved
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS axisym_poroelasticity unstructured_two_d_curved)
 

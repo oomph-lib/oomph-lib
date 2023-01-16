@@ -38,6 +38,7 @@ oomph_add_test(
   TARGET_DEPENDENCIES
     adaptive_unstructured_fourier_decomposed_acoustic_fsi
     fourier_decomposed_acoustic_fsi unstructured_fourier_decomposed_acoustic_fsi
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS interaction fourier_decomposed_acoustic_fsi)
 

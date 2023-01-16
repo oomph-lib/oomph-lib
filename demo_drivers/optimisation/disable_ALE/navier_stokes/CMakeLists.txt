@@ -24,6 +24,7 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME optimisation.navier_stokes
   TARGET_DEPENDENCIES rayleigh_channel rayleigh_circular_driven_cavity_adapt
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS optimisation navier_stokes)
 

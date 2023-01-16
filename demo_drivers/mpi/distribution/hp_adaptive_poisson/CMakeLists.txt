@@ -19,9 +19,9 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME mpi.hp_adaptive_poisson
   TARGET_DEPENDENCIES two_d_poisson_hp_adapt
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
   EXTRA_REQUIRES hp_adaptive_poisson_partition.dat
-  LABELS mpi hp_adaptive_poisson adapt
-  REQUIRES_MPI_RUN_COMMAND)
+  LABELS mpi hp_adaptive_poisson adapt)
 
 # Don't run this test alongside any other tests
 set_tests_properties(mpi.hp_adaptive_poisson PROPERTIES PROCESSORS

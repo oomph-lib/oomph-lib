@@ -19,10 +19,10 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME mpi.restart
   TARGET_DEPENDENCIES two_d_unsteady_heat_2adapt_load_balance
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
   EXTRA_REQUIRES load_balance.mcr show_dist.mcr prune_and_balance.mcr
                  two_meshes.mcr partitioning.dat
-  LABELS mpi restart
-  REQUIRES_MPI_RUN_COMMAND)
+  LABELS mpi restart)
 
 # Don't run this test alongside any other tests
 set_tests_properties(mpi.restart PROPERTIES PROCESSORS ${OOMPH_MPI_NUM_PROC})

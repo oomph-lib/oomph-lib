@@ -26,6 +26,7 @@ oomph_add_test(
   TEST_NAME poisson.poisson_with_singularity
   TARGET_DEPENDENCIES two_d_poisson
                       two_d_poisson_without_singularity_subtracted_off
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS poisson poisson_with_singularity)
 
