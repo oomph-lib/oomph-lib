@@ -24,19 +24,4 @@ function(oomph_path_option VAR DOCSTRING VALUE)
     "List of oomph-lib configuration options" FORCE)
 endfunction()
 # ------------------------------------------------------------------------------
-
-# ------------------------------------------------------------------------------
-function(oomph_print_config_summary)
-  include(FeatureSummary)
-  message("")
-  message("************************************************************")
-  message("OOMPH-LIB SETTINGS:")
-  message("============================================================")
-  foreach(OPTION IN LISTS OOMPH_CONFIG_VARS)
-    message("  * ${OPTION}: '${${OPTION}}'")
-  endforeach()
-  message("************************************************************")
-  message("")
-endfunction()
-# ------------------------------------------------------------------------------
 # cmake-format: on

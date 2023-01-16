@@ -71,7 +71,7 @@ find_package(Python3 REQUIRED)
 
 # ------------------------------[ BUILD OPTIONS ]-------------------------------
 # cmake-format: off
-include(OomphOptionsAndSummary)
+include(OomphCustomOptions)
 
 # General options
 oomph_option(OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY "Build tests with library build" OFF)
@@ -112,9 +112,6 @@ oomph_path_option(OOMPH_USE_CGAL_FROM "Path to CGAL installation" "${OOMPH_USE_C
 oomph_path_option(OOMPH_USE_MUMPS_FROM "Path to MUMPS installation" "${OOMPH_USE_MUMPS_FROM}")
 oomph_path_option(OOMPH_USE_HYPRE_FROM "Path to Hypre installation" "${OOMPH_USE_HYPRE_FROM}")
 oomph_path_option(OOMPH_USE_TRILINOS_FROM "Path to Trilinos installation" "${OOMPH_USE_TRILINOS_FROM}")
-
-# Print summary
-oomph_print_config_summary()
 
 # cmake-format: on
 # -------------------------[ PROCESS SELECTED OPTIONS ]-------------------------
@@ -327,8 +324,9 @@ add_custom_target(
   oomph_uninstall COMMAND ${CMAKE_COMMAND} -P
                           ${CMAKE_BINARY_DIR}/${PROJECT_NAME}Uninstall.cmake)
 
-# -------------------[ DEBUG SHIT: DELETE AFTER OVERHAUL ]----------------------
+# --------------------[ PRINT PROJECT-SPECIFIC SETTINGS ]-----------------------
 
-include(OomphPrintCompilerDefinitions)
+include(OomphPrintProjectSettings)
+oomph_print_project_settings()
 
 # ------------------------------------------------------------------------------
