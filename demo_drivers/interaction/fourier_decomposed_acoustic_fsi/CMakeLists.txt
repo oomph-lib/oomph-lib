@@ -4,7 +4,7 @@ message(VERBOSE "Entered fourier_decomposed_acoustic_fsi subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(fourier_decomposed_acoustic_fsi C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)

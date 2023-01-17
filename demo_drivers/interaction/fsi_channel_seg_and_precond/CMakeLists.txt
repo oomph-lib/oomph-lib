@@ -4,7 +4,7 @@ message(VERBOSE "Entered fsi_channel_seg_and_precond subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(fsi_channel_seg_and_precond C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)

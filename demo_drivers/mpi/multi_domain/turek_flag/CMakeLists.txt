@@ -4,7 +4,7 @@ message(VERBOSE "Entered turek_flag subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(turek_flag C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../../install")
 endif()
 include(CTest)
