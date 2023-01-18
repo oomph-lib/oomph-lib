@@ -7,9 +7,8 @@ message(STATUS "Entered gmp subdirectory")
 # Look for an already-installed version of GMP using FindGMP.cmake. If
 # OOMPH_USE_GMP_FROM is defined then FindGMP.cmake will look under there for the
 # required files.
-set(GMP_FOUND FALSE)
+find_package(GMP 4.2 QUIET)
 if(GMP_FOUND)
-  find_package(GMP 4.2 QUIET)
   message(STATUS "Found an existing installation of GMP: ${GMP_C_LIBRARIES}")
 else()
   message(STATUS "Third-party: creating target 'GMP::GMP'")

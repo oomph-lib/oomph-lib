@@ -7,18 +7,17 @@ message(STATUS "Entered mpfr subdirectory")
 # Look for an already-installed version of MPFR using FindMPFR.cmake. If
 # OOMPH_USE_MPFR_FROM is defined then FindMPFR.cmake will look under there for
 # the required files.
-set(MPFR_FOUND FALSE)
+find_package(MPFR 2.2.1 QUIET)
 if(MPFR_FOUND)
-  find_package(MPFR 2.2.1 QUIET)
-  message(STATUS "Found an existing installation of MPFR at: ${MPFR_DIR}")
+  message(STATUS "Found an existing installation of MPFR: ${MPFR_LIBRARIES}")
 else()
   message(STATUS "Third-party: creating target 'MPFR::MPFR'")
 
   # cmake-format: off
   set(PREFIX ${FETCHCONTENT_BASE_DIR}/mpfr)
   set(MPFR_LIBNAME ${CMAKE_STATIC_LIBRARY_PREFIX}mpfr${CMAKE_STATIC_LIBRARY_SUFFIX})
-  set(MPFR_LIBRARY ${CMAKE_INSTALL_PREFIX}/lib/${MPFR_LIBNAME} CACHE PATH "Path to GMP libraries")
-  set(MPFR_INCLUDE ${CMAKE_INSTALL_PREFIX}/include CACHE PATH "Path to GMP include directory")
+  set(MPFR_LIBRARIES ${CMAKE_INSTALL_PREFIX}/lib/${MPFR_LIBNAME} CACHE PATH "Path to GMP libraries")
+  set(MPFR_INCLUDES ${CMAKE_INSTALL_PREFIX}/include CACHE PATH "Path to GMP include directory")
   # cmake-format: on
 
   # Extract library directory from full path to library
@@ -41,16 +40,16 @@ else()
     BUILD_COMMAND make -s -j${NUM_CPU} || make -j${NUM_CPU}
     INSTALL_COMMAND make -s -j${NUM_CPU} install || make -j${NUM_CPU} install
     TEST_COMMAND ""
-    BUILD_BYPRODUCTS ${MPFR_LIBRARY})
+    BUILD_BYPRODUCTS ${MPFR_LIBRARIES})
   ExternalProject_Get_Property(mpfr SOURCE_DIR)
 
   # Define CMake target to link to
-  set(MPFR_LIBRARY ${MPFR_LIBRARY})
+  set(MPFR_LIBRARIES ${MPFR_LIBRARIES})
   add_library(MPFR::MPFR INTERFACE IMPORTED GLOBAL)
-  file(MAKE_DIRECTORY ${MPFR_INCLUDE}) # avoid race condition
-  target_include_directories(MPFR::MPFR INTERFACE ${MPFR_INCLUDE})
+  file(MAKE_DIRECTORY ${MPFR_INCLUDES}) # avoid race condition
+  target_include_directories(MPFR::MPFR INTERFACE ${MPFR_INCLUDES})
   target_link_libraries(
-    MPFR::MPFR INTERFACE "${MPFR_LIBRARY}" "${GMP_C_LIBRARIES}"
+    MPFR::MPFR INTERFACE "${MPFR_LIBRARIES}" "${GMP_C_LIBRARIES}"
                          "${GMP_CXX_LIBRARIES}")
   add_dependencies(MPFR::MPFR mpfr)
 
