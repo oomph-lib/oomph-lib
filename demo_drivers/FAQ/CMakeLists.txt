@@ -23,9 +23,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME FAQ.FAQ
-  TARGET_DEPENDENCIES broken_this_demo customising_output
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON broken_this_demo customising_output
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh
   LABELS FAQ
   SILENCE_MISSING_VALIDATA_WARNING)
 

@@ -30,9 +30,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME solid.simple_shear
-  TARGET_DEPENDENCIES simple_shear refineable_simple_shear
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON simple_shear refineable_simple_shear
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS solid simple_shear)
 
 # This test needs more than the default allotted time to complete

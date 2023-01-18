@@ -18,9 +18,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME mpi.eigen_solver
-  TARGET_DEPENDENCIES eigen_solver
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES random_test_matrix.dat
+  DEPENDS_ON eigen_solver
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata random_test_matrix.dat
   LABELS mpi matrix)
 
 message(VERBOSE "Leaving eigen_solver subdirectory")

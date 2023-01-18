@@ -18,9 +18,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME navier_stokes.flux_control
-  TARGET_DEPENDENCIES flux_control
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON flux_control
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS navier_stokes flux_control)
 
 message(VERBOSE "Leaving flux_control subdirectory")

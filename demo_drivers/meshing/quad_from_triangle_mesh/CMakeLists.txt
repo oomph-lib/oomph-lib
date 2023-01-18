@@ -33,19 +33,20 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME meshing.quad_from_triangle_mesh
-  TARGET_DEPENDENCIES
-    adaptive_moving_block_navier_stokes adaptive_unstructured_scattering_quad
-    adaptive_unstructured_two_d_solid unstructured_two_d_solid
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
-    box_hole.1.ele
-    box_hole.1.node
-    box_hole.1.poly
-    box_hole.poly
-    solid.1.ele
-    solid.1.node
-    solid.1.poly
-    solid.poly
+  DEPENDS_ON adaptive_moving_block_navier_stokes
+             adaptive_unstructured_scattering_quad
+             adaptive_unstructured_two_d_solid unstructured_two_d_solid
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh
+             validata
+             box_hole.1.ele
+             box_hole.1.node
+             box_hole.1.poly
+             box_hole.poly
+             solid.1.ele
+             solid.1.node
+             solid.1.poly
+             solid.poly
   LABELS meshing quad_from_triangle_mesh)
 
 message(VERBOSE "Leaving quad_from_triangle_mesh subdirectory")

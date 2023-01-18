@@ -33,11 +33,10 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME multigrid.scalar_multigrid
-  TARGET_DEPENDENCIES
-    two_d_poisson_tanh_flux_bc two_d_poisson_tanh_flux_bc_validate
-    unit_cube_poisson unit_cube_poisson_validate
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON two_d_poisson_tanh_flux_bc two_d_poisson_tanh_flux_bc_validate
+             unit_cube_poisson unit_cube_poisson_validate
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS multigrid scalar_multigrid)
 
 message(VERBOSE "Leaving scalar_multigrid subdirectory")

@@ -25,9 +25,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME interaction.acoustic_fsi
-  TARGET_DEPENDENCIES acoustic_fsi unstructured_acoustic_fsi
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON acoustic_fsi unstructured_acoustic_fsi
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS interaction acoustic_fsi)
 
 message(VERBOSE "Leaving acoustic_fsi subdirectory")

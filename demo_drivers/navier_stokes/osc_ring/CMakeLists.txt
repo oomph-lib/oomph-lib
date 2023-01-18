@@ -23,9 +23,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME navier_stokes.osc_ring
-  TARGET_DEPENDENCIES osc_ring_alg osc_ring_macro
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON osc_ring_alg osc_ring_macro
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS navier_stokes osc_ring)
 
 message(VERBOSE "Leaving osc_ring subdirectory")

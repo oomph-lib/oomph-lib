@@ -18,9 +18,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME mpi.fsi_osc_ring
-  TARGET_DEPENDENCIES fsi_osc_ring
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
-  EXTRA_REQUIRES fsi_osc_ring_partition.dat
+  DEPENDS_ON fsi_osc_ring
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
+  TEST_FILES validate.sh validata fsi_osc_ring_partition.dat
   LABELS mpi fsi_osc_ring)
 
 # Don't run this test alongside any other tests

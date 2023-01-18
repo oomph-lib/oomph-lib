@@ -19,9 +19,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME interaction.turek_flag
-  TARGET_DEPENDENCIES turek_flag
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON turek_flag
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS interaction turek_flag)
 
 message(VERBOSE "Leaving turek_flag subdirectory")

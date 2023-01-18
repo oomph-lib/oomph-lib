@@ -35,10 +35,10 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME helmholtz.scattering
-  TARGET_DEPENDENCIES adaptive_scattering adaptive_unstructured_scattering
-                      scattering unstructured_scattering
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON adaptive_scattering adaptive_unstructured_scattering scattering
+             unstructured_scattering
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS helmholtz scattering)
 
 message(VERBOSE "Leaving scattering subdirectory")

@@ -59,16 +59,15 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME multi_physics.boussinesq_convection
-  TARGET_DEPENDENCIES
-    boussinesq_convection
-    boussinesq_convection_analytic
-    boussinesq_convection_fd
-    multi_domain_boussinesq_convection
-    multi_domain_ref_b_convection
-    multi_domain_ref_b_convection_fd_for_external_data
-    refineable_b_convection
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON boussinesq_convection
+             boussinesq_convection_analytic
+             boussinesq_convection_fd
+             multi_domain_boussinesq_convection
+             multi_domain_ref_b_convection
+             multi_domain_ref_b_convection_fd_for_external_data
+             refineable_b_convection
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS multi_physics boussinesq_convection)
 
 message(VERBOSE "Leaving boussinesq_convection subdirectory")

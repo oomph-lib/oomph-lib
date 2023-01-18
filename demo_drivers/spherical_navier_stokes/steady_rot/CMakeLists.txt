@@ -18,9 +18,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME spherical_navier_stokes.steady_rot
-  TARGET_DEPENDENCIES steady_rot
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON steady_rot
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS spherical_navier_stokes steady_rot)
 
 message(VERBOSE "Leaving steady_rot subdirectory")

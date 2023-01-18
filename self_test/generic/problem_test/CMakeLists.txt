@@ -18,9 +18,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME generic.problem_test
-  TARGET_DEPENDENCIES solve_eigenproblem_test
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON solve_eigenproblem_test
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS problem)
 
 # FIXME: Currently fails because the eigenvectors are different in sign in some

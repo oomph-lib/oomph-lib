@@ -23,9 +23,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME advection_diffusion.two_d_adv_diff_adapt
-  TARGET_DEPENDENCIES two_d_adv_diff_adapt two_d_adv_diff_adapt2
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON two_d_adv_diff_adapt two_d_adv_diff_adapt2
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS advection_diffusion two_d_adv_diff_adapt adapt)
 
 message(VERBOSE "Leaving two_d_adv_diff_adapt subdirectory")

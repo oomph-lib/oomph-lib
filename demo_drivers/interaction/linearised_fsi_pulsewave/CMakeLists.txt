@@ -19,9 +19,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME interaction.linearised_fsi_pulsewave
-  TARGET_DEPENDENCIES linearised_fsi_pulsewave
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON linearised_fsi_pulsewave
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS interaction linearised_fsi_pulsewave)
 
 message(VERBOSE "Leaving linearised_fsi_pulsewave subdirectory")

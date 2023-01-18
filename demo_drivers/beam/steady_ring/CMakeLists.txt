@@ -18,9 +18,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME beam.steady_ring
-  TARGET_DEPENDENCIES steady_ring
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON steady_ring
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS beam steady_ring)
 
 message(VERBOSE "Leaving steady_ring subdirectory")

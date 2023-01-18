@@ -23,9 +23,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME linear_elasticity.periodic_load
-  TARGET_DEPENDENCIES periodic_load refineable_periodic_load
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON periodic_load refineable_periodic_load
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS linear_elasticity periodic_load)
 
 message(VERBOSE "Leaving periodic_load subdirectory")

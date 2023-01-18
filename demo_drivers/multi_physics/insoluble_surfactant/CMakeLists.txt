@@ -20,9 +20,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME multi_physics.insoluble_surfactant
-  TARGET_DEPENDENCIES surfactant
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON surfactant
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS multi_physics insoluble_surfactant)
 
 message(VERBOSE "Leaving insoluble_surfactant subdirectory")

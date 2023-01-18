@@ -61,18 +61,17 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME interaction.free_boundary_poisson
-  TARGET_DEPENDENCIES
-    algebraic_free_boundary_poisson
-    circle
-    doc_sparse_macro_node_update
-    elastic_poisson
-    free_boundary_poisson_with_elastic_mesh_update
-    geom_object_element
-    macro_element_free_boundary_poisson
-    macro_element_free_boundary_poisson_non_ref
-    old_macro_element_free_boundary_poisson_for_doc
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON algebraic_free_boundary_poisson
+             circle
+             doc_sparse_macro_node_update
+             elastic_poisson
+             free_boundary_poisson_with_elastic_mesh_update
+             geom_object_element
+             macro_element_free_boundary_poisson
+             macro_element_free_boundary_poisson_non_ref
+             old_macro_element_free_boundary_poisson_for_doc
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS interaction free_boundary_poisson)
 
 message(VERBOSE "Leaving free_boundary_poisson subdirectory")

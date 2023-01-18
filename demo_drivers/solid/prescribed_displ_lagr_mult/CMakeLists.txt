@@ -29,10 +29,10 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME solid.prescribed_displ_lagr_mult
-  TARGET_DEPENDENCIES prescribed_displ_lagr_mult prescribed_displ_lagr_mult2
-                      prescribed_displ_lagr_mult_precond
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON prescribed_displ_lagr_mult prescribed_displ_lagr_mult2
+             prescribed_displ_lagr_mult_precond
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS solid prescribed_displ_lagr_mult)
 
 message(VERBOSE "Leaving prescribed_displ_lagr_mult subdirectory")

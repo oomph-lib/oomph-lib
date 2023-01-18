@@ -23,9 +23,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME flux_transport.advection
-  TARGET_DEPENDENCIES one_d_advection two_d_advection
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON one_d_advection two_d_advection
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS flux_transport advection)
 
 message(VERBOSE "Leaving advection subdirectory")

@@ -29,10 +29,10 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME fourier_decomposed_helmholtz.sphere_scattering
-  TARGET_DEPENDENCIES sphere_scattering unstructured_adaptive_sphere_scattering
-                      unstructured_sphere_scattering
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON sphere_scattering unstructured_adaptive_sphere_scattering
+             unstructured_sphere_scattering
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS fourier_decomposed_helmholtz sphere_scattering)
 
 message(VERBOSE "Leaving sphere_scattering subdirectory")

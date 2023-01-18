@@ -24,10 +24,10 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME meshing.mesh_from_inline_triangle_internal_boundaries
-  TARGET_DEPENDENCIES mesh_from_inline_triangle_internal_boundaries
-                      mesh_from_inline_triangle_internal_boundaries_extra
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON mesh_from_inline_triangle_internal_boundaries
+             mesh_from_inline_triangle_internal_boundaries_extra
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS meshing mesh_from_inline_triangle_internal_boundaries)
 
 message(VERBOSE

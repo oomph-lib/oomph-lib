@@ -28,12 +28,11 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME mpi.two_d_unstructured_adaptive_poisson
-  TARGET_DEPENDENCIES
-    two_d_parallel_unstructured_adaptive_poisson
-    unstructured_adaptive_mesh_two_outer_boundaries
-    unstructured_adaptive_mesh_two_outer_boundaries_crossed
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_VARIABLENP_RUN_COMMAND}
-  EXTRA_REQUIRES
+  DEPENDS_ON two_d_parallel_unstructured_adaptive_poisson
+             unstructured_adaptive_mesh_two_outer_boundaries
+             unstructured_adaptive_mesh_two_outer_boundaries_crossed
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_VARIABLENP_RUN_COMMAND}
+  TEST_FILES validate.sh validata
   LABELS mpi two_d_unstructured_adaptive_poisson adapt)
 
 # Don't run this test alongside any other tests

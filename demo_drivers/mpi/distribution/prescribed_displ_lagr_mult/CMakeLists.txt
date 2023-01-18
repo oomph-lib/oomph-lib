@@ -23,9 +23,10 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME mpi.prescribed_displ_lagr_mult
-  TARGET_DEPENDENCIES prescribed_displ_lagr_mult resize_hanging_node_tester
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
-  EXTRA_REQUIRES presc_displ_lagr_mult_partition.dat load_balance.mcr
+  DEPENDS_ON prescribed_displ_lagr_mult resize_hanging_node_tester
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
+  TEST_FILES validate.sh validata presc_displ_lagr_mult_partition.dat
+             load_balance.mcr
   LABELS mpi prescribed_displ_lagr_mult)
 
 # Don't run this test alongside any other tests

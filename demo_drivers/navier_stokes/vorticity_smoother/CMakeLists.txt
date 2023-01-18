@@ -18,9 +18,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME navier_stokes.vorticity_smoother
-  TARGET_DEPENDENCIES vorticity_smoother_validation
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON vorticity_smoother_validation
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS navier_stokes vorticity_smoother)
 
 message(VERBOSE "Leaving vorticity_smoother subdirectory")

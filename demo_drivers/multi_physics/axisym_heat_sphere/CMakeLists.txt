@@ -27,9 +27,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME multi_physics.axisym_heat_sphere
-  TARGET_DEPENDENCIES axisym_heat_sphere multi_domain_axisym_heat_sphere
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON axisym_heat_sphere multi_domain_axisym_heat_sphere
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS multi_physics axisym_heat_sphere)
 
 message(VERBOSE "Leaving axisym_heat_sphere subdirectory")

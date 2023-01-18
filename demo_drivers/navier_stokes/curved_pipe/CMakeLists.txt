@@ -23,9 +23,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME navier_stokes.curved_pipe
-  TARGET_DEPENDENCIES curved_pipe helical_pipe
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON curved_pipe helical_pipe
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS navier_stokes curved_pipe)
 
 message(VERBOSE "Leaving curved_pipe subdirectory")

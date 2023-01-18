@@ -19,9 +19,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME navier_stokes.three_d_free_surface
-  TARGET_DEPENDENCIES 3d_free_surface
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON 3d_free_surface
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS navier_stokes three_d_free_surface)
 
 message(VERBOSE "Leaving three_d_free_surface subdirectory")

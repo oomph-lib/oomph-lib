@@ -35,29 +35,30 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME meshing.mesh_from_triangle
-  TARGET_DEPENDENCIES
-    mesh_from_triangle_navier_stokes mesh_from_triangle_navier_stokes_adapt
-    mesh_from_triangle_poisson mesh_from_triangle_poisson_adapt
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
-    box_hole.1.edge
-    box_hole.1.ele
-    box_hole.1.node
-    box_hole.1.poly
-    box_hole.poly
-    box_hole_adapt.1.ele
-    box_hole_adapt.1.node
-    box_hole_adapt.1.poly
-    box_hole_adapt.poly
-    flow_past_box.1.edge
-    flow_past_box.1.ele
-    flow_past_box.1.node
-    flow_past_box.1.poly
-    flow_past_box.poly
-    flow_past_box_adapt.1.ele
-    flow_past_box_adapt.1.node
-    flow_past_box_adapt.1.poly
-    flow_past_box_adapt.poly
+  DEPENDS_ON mesh_from_triangle_navier_stokes
+             mesh_from_triangle_navier_stokes_adapt mesh_from_triangle_poisson
+             mesh_from_triangle_poisson_adapt
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh
+             validata
+             box_hole.1.edge
+             box_hole.1.ele
+             box_hole.1.node
+             box_hole.1.poly
+             box_hole.poly
+             box_hole_adapt.1.ele
+             box_hole_adapt.1.node
+             box_hole_adapt.1.poly
+             box_hole_adapt.poly
+             flow_past_box.1.edge
+             flow_past_box.1.ele
+             flow_past_box.1.node
+             flow_past_box.1.poly
+             flow_past_box.poly
+             flow_past_box_adapt.1.ele
+             flow_past_box_adapt.1.node
+             flow_past_box_adapt.1.poly
+             flow_past_box_adapt.poly
   LABELS meshing mesh_from_triangle)
 
 message(VERBOSE "Leaving mesh_from_triangle subdirectory")

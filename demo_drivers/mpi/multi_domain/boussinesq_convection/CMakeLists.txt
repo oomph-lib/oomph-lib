@@ -38,14 +38,17 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME mpi.boussinesq_convection
-  TARGET_DEPENDENCIES
-    multi_domain_boussinesq_convection multi_domain_boussinesq_convection_fd
-    multi_domain_ref_b_convection refineable_b_convection
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
-  EXTRA_REQUIRES
-    multi_domain_boussinesq_partition.dat multi_domain_ref_b_partition.dat
-    refineable_b_convection_partition.dat
-    multi_domain_boussinesq_partition_2.dat prune_and_balance.mcr
+  DEPENDS_ON multi_domain_boussinesq_convection
+             multi_domain_boussinesq_convection_fd multi_domain_ref_b_convection
+             refineable_b_convection
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
+  TEST_FILES validate.sh
+             validata
+             multi_domain_boussinesq_partition.dat
+             multi_domain_ref_b_partition.dat
+             refineable_b_convection_partition.dat
+             multi_domain_boussinesq_partition_2.dat
+             prune_and_balance.mcr
   LABELS mpi boussinesq_convection)
 
 # Don't run this test alongside any other tests

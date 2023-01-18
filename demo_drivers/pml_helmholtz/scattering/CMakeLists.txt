@@ -29,11 +29,10 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME pml_helmholtz.scattering
-  TARGET_DEPENDENCIES
-    unstructured_two_d_helmholtz unstructured_two_d_helmholtz_adapt
-    unstructured_two_d_helmholtz_scattering
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON unstructured_two_d_helmholtz unstructured_two_d_helmholtz_adapt
+             unstructured_two_d_helmholtz_scattering
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS pml_helmholtz scattering)
 
 message(VERBOSE "Leaving scattering subdirectory")

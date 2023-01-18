@@ -11,14 +11,14 @@
 # USAGE:
 # ------
 #  oomph_add_pure_cpp_test(TEST_NAME           <executable-name>
-#                          TARGET_DEPENDENCY   <executable/target-required-by-test>
+#                          DEPENDS_ON          <executable/target-required-by-test>
 #                          LOG_FILE            <output-log-file>
 #                          LABELS              <labels>
 #                          [RUN_WITH           <command-to-run-executable>]
 #                          [TEST_ARGS          <arguments-for-executable>]
 #                          [SILENCE_MISSING_VALIDATA_WARNING])
 #
-# The argument to TARGET_DEPENDENCY must be an already-defined executable or target
+# The argument to DEPENDS_ON must be an already-defined executable or target
 # (i.e. defined via add_executable() or oomph_add_executable()). The LOG_FILE is the
 # relative path to the validation log file under the Validation/ directory. We
 # require a unique LOG_FILE argument for each test in the directory as multiple
@@ -37,7 +37,7 @@
 #
 #   # Define test
 #   oomph_add_pure_cpp_test(TEST_NAME heat_transfer_and_melting.melt
-#                           TARGET_DEPENDENCY melt
+#                           DEPENDS_ON melt
 #                           TEST_ARGS --disable_melting --validate
 #                           LABELS heat_transfer_and_melting solid unsteady_heat)
 #
@@ -51,7 +51,7 @@
 #
 #   # Define test
 #   oomph_add_pure_cpp_test(TEST_NAME heat_transfer_and_melting.melt
-#                           TARGET_DEPENDENCY melt
+#                           DEPENDS_ON melt
 #                           RUN_WITH mpirun -np 2
 #                           LABELS heat_transfer_and_melting solid unsteady_heat)
 #
@@ -59,7 +59,7 @@
 #
 #   # Define test
 #   oomph_add_pure_cpp_test(TEST_NAME heat_transfer_and_melting.melt
-#                           TARGET_DEPENDENCY melt
+#                           DEPENDS_ON melt
 #                           RUN_WITH ${OOMPH_MPI_RUN_COMMAND}
 #                           LABELS heat_transfer_and_melting solid unsteady_heat)
 # =============================================================================
@@ -71,7 +71,7 @@ function(oomph_add_pure_cpp_test)
   # Define the supported set of keywords
   set(PREFIX ARG)
   set(FLAGS SILENCE_MISSING_VALIDATA_WARNING)
-  set(SINGLE_VALUE_ARGS TEST_NAME TARGET_DEPENDENCY LOG_FILE)
+  set(SINGLE_VALUE_ARGS TEST_NAME DEPENDS_ON LOG_FILE)
   set(MULTI_VALUE_ARGS LABELS RUN_WITH TEST_ARGS)
 
   # Process the arguments passed in
@@ -81,7 +81,7 @@ function(oomph_add_pure_cpp_test)
 
   # Redefine the variables in this scope without a prefix for clarity
   set(TEST_NAME ${${PREFIX}_TEST_NAME})
-  set(TARGET_DEPENDENCY ${${PREFIX}_TARGET_DEPENDENCY})
+  set(DEPENDS_ON ${${PREFIX}_DEPENDS_ON})
   set(LOG_FILE ${${PREFIX}_LOG_FILE})
   set(RUN_WITH ${${PREFIX}_RUN_WITH})
   set(TEST_ARGS ${${PREFIX}_TEST_ARGS})
@@ -92,8 +92,8 @@ function(oomph_add_pure_cpp_test)
   # Make sure the arguments are valid
   if(NOT TEST_NAME)
     message(FATAL_ERROR "No TEST_NAME argument supplied.")
-  elseif(NOT TARGET_DEPENDENCY)
-    message(FATAL_ERROR "No TARGET_DEPENDENCY argument supplied.")
+  elseif(NOT DEPENDS_ON)
+    message(FATAL_ERROR "No DEPENDS_ON argument supplied.")
   elseif(NOT LOG_FILE)
     message(FATAL_ERROR "No LOG_FILE argument supplied.")
   elseif(NOT LABELS)
@@ -115,8 +115,8 @@ function(oomph_add_pure_cpp_test)
   string(SUBSTRING ${PATH_HASH} 0 7 PATH_HASH)
 
   # Make sure we've been given a proper target
-  if(NOT TARGET ${TARGET_DEPENDENCY}_${PATH_HASH})
-    message(FATAL_ERROR "Argument ${TARGET_DEPENDENCY} is not a target.")
+  if(NOT TARGET ${DEPENDS_ON}_${PATH_HASH})
+    message(FATAL_ERROR "Argument ${DEPENDS_ON} is not a target.")
   endif()
 
   # ----------------------------------------------------------------------------
@@ -128,10 +128,10 @@ function(oomph_add_pure_cpp_test)
   # ----------------------------------------------------------------------------
 
   # ----------------------------------------------------------------------------
-  # Indicate that if we build ${TARGET_DEPENDENCY}, we should copy over the
-  # required files
+  # Indicate that if we build ${DEPENDS_ON}, we should copy over the required
+  # files
   #
-  # add_dependencies(${TARGET_DEPENDENCY}_${PATH_HASH} copy_${PATH_HASH})
+  # add_dependencies(${DEPENDS_ON}_${PATH_HASH} copy_${PATH_HASH})
   # ----------------------------------------------------------------------------
 
   # ----------------------------------------------------------------------------
@@ -139,7 +139,7 @@ function(oomph_add_pure_cpp_test)
   # targets, run all of the dependent targets then append the validation.log
   # output to the global one.. The VERBATIM argument is necessary here to ensure
   # that the "mpirun ..." commands are correctly escaped
-  set(RUN_COMMAND ${RUN_WITH} ./${TARGET_DEPENDENCY} ${TEST_ARGS})
+  set(RUN_COMMAND ${RUN_WITH} ./${DEPENDS_ON} ${TEST_ARGS})
   list(JOIN RUN_COMMAND " " RUN_COMMAND)
   add_custom_target(
     check_${TEST_NAME}_${PATH_HASH}
@@ -155,7 +155,7 @@ function(oomph_add_pure_cpp_test)
     COMMAND cat "${CMAKE_CURRENT_BINARY_DIR}/Validation/${LOG_FILE}" >>
             "${CMAKE_BINARY_DIR}/validation.log"
     WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
-    DEPENDS ${TARGET_DEPENDENCY}_${PATH_HASH} copy_${PATH_HASH}
+    DEPENDS ${DEPENDS_ON}_${PATH_HASH} copy_${PATH_HASH}
             clean_validation_dir_${PATH_HASH}
     VERBATIM)
   # ----------------------------------------------------------------------------

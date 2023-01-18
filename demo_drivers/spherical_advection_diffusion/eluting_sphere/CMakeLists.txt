@@ -23,9 +23,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME spherical_advection_diffusion.eluting_sphere
-  TARGET_DEPENDENCIES eluting_sphere eluting_sphere_adapt
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON eluting_sphere eluting_sphere_adapt
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS spherical_advection_diffusion eluting_sphere)
 
 message(VERBOSE "Leaving eluting_sphere subdirectory")

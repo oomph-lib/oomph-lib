@@ -21,9 +21,9 @@ ProcessorCount(NUM_PROCESSORS)
 if(NUM_PROCESSORS GREATER_EQUAL 4)
   oomph_add_test(
     TEST_NAME mpi.vector_concatenation
-    TARGET_DEPENDENCIES vector_concatenation
-    VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_VARIABLENP_RUN_COMMAND}
-    EXTRA_REQUIRES
+    DEPENDS_ON vector_concatenation
+    COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_VARIABLENP_RUN_COMMAND}
+    TEST_FILES validate.sh validata
     LABELS mpi vector)
 
   # Don't run this test alongside any other tests

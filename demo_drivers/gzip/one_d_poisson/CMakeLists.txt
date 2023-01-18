@@ -25,7 +25,7 @@ oomph_define_test_data(validata validate.sh)
 
 oomph_add_pure_cpp_test(
   TEST_NAME gzip.one_d_poisson
-  TARGET_DEPENDENCY one_d_poisson_with_gzip_validation
+  DEPENDS_ON one_d_poisson_with_gzip_validation
   LOG_FILE validation.log
   LABELS gzip one_d_poisson)
 

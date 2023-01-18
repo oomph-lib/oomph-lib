@@ -38,9 +38,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME flux_transport.euler
-  TARGET_DEPENDENCIES couette ff_step one_d_euler ramp two_d_euler
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON couette ff_step one_d_euler ramp two_d_euler
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS flux_transport euler)
 
 message(VERBOSE "Leaving euler subdirectory")

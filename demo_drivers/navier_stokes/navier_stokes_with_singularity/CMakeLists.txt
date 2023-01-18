@@ -44,12 +44,11 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME navier_stokes.navier_stokes_with_singularity
-  TARGET_DEPENDENCIES
-    adaptive_driven_cavity circular_couette
-    circular_couette_without_pseudo_singularity_subtracted_off driven_cavity
-    driven_cavity_without_singularity_subtracted_off
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON adaptive_driven_cavity circular_couette
+             circular_couette_without_pseudo_singularity_subtracted_off
+             driven_cavity driven_cavity_without_singularity_subtracted_off
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS navier_stokes navier_stokes_with_singularity)
 
 message(VERBOSE "Leaving navier_stokes_with_singularity subdirectory")

@@ -38,10 +38,10 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME poisson.fish_poisson2
-  TARGET_DEPENDENCIES fish_domain fish_poisson_adapt fish_poisson_no_adapt
-                      fish_poisson_node_update fish_poisson_simple_adapt
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON fish_domain fish_poisson_adapt fish_poisson_no_adapt
+             fish_poisson_node_update fish_poisson_simple_adapt
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS poisson fish_poisson2)
 
 message(VERBOSE "Leaving fish_poisson2 subdirectory")

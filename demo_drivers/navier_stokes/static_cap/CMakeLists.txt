@@ -25,9 +25,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME navier_stokes.static_cap
-  TARGET_DEPENDENCIES static_single_layer static_two_layer
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON static_single_layer static_two_layer
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS navier_stokes static_cap)
 
 message(VERBOSE "Leaving static_cap subdirectory")

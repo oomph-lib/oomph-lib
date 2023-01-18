@@ -30,9 +30,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME meshing.quadratic_vmtk_tetgen
-  TARGET_DEPENDENCIES snap_mesh xda_to_poly_fsi
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES short_coarse_mesh_files
+  DEPENDS_ON snap_mesh xda_to_poly_fsi
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata short_coarse_mesh_files
   LABELS meshing quadratic_vmtk_tetgen)
 
 # This test needs more than the default allotted time to complete

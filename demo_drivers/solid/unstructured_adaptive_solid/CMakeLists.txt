@@ -18,9 +18,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME solid.unstructured_adaptive_solid
-  TARGET_DEPENDENCIES unstructured_adaptive_solid
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON unstructured_adaptive_solid
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS solid unstructured_adaptive_solid adapt)
 
 message(VERBOSE "Leaving unstructured_adaptive_solid subdirectory")

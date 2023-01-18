@@ -25,9 +25,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME generalised_newtonian_navier_stokes.vibrating_shell
-  TARGET_DEPENDENCIES vibrating_shell_non_newtonian
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON vibrating_shell_non_newtonian
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS generalised_newtonian_navier_stokes vibrating_shell)
 
 # This test needs more than the default allotted time to complete

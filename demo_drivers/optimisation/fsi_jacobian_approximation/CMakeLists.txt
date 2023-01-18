@@ -18,9 +18,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME optimisation.fsi_jacobian_approximation
-  TARGET_DEPENDENCIES fsi_jacobian_approximation
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON fsi_jacobian_approximation
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS optimisation fsi_jacobian_approximation)
 
 message(VERBOSE "Leaving fsi_jacobian_approximation subdirectory")

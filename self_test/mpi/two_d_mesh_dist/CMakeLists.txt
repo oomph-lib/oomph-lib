@@ -18,9 +18,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME mpi.two_d_mesh_dist
-  TARGET_DEPENDENCIES two_d_mesh_dist
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
-  EXTRA_REQUIRES two_d_mesh_dist_partition.dat
+  DEPENDS_ON two_d_mesh_dist
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
+  TEST_FILES validate.sh validata two_d_mesh_dist_partition.dat
   LABELS mpi two_d_mesh)
 
 # Don't run this test alongside any other tests

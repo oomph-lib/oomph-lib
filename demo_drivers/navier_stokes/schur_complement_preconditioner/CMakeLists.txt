@@ -23,9 +23,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME navier_stokes.schur_complement_preconditioner
-  TARGET_DEPENDENCIES three_d_fp two_d_fp
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON three_d_fp two_d_fp
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS navier_stokes schur_complement_preconditioner)
 
 message(VERBOSE "Leaving schur_complement_preconditioner subdirectory")

@@ -23,9 +23,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME axisym_advection_diffusion.pipe
-  TARGET_DEPENDENCIES pipe pipe_variable_diff
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON pipe pipe_variable_diff
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS axisym_advection_diffusion pipe)
 
 message(VERBOSE "Leaving pipe subdirectory")

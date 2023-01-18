@@ -18,9 +18,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME reaction_diffusion.one_d_act_inhibit
-  TARGET_DEPENDENCIES one_d_act_inhibit
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON one_d_act_inhibit
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS reaction_diffusion one_d_act_inhibit)
 
 message(VERBOSE "Leaving one_d_act_inhibit subdirectory")

@@ -23,9 +23,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME navier_stokes.three_d_entry_flow
-  TARGET_DEPENDENCIES full_tube three_d_entry_flow
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON full_tube three_d_entry_flow
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS navier_stokes three_d_entry_flow)
 
 message(VERBOSE "Leaving three_d_entry_flow subdirectory")

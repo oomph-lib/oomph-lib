@@ -24,10 +24,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME axisym_poroelasticity.unstructured_two_d_curved
-  TARGET_DEPENDENCIES adaptive_unstructured_two_d_curved
-                      unstructured_two_d_curved
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON adaptive_unstructured_two_d_curved unstructured_two_d_curved
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS axisym_poroelasticity unstructured_two_d_curved)
 
 message(VERBOSE "Leaving unstructured_two_d_curved subdirectory")

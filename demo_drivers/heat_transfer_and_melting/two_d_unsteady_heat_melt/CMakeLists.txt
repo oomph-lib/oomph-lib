@@ -99,24 +99,23 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME heat_transfer_and_melting.two_d_unsteady_heat_melt
-  TARGET_DEPENDENCIES
-    circular_boulder_melt
-    circular_boulder_solar_radiation
-    heated_linear_solid_contact_with_gravity
-    linear_solid_contact_with_gravity_structured
-    linear_solid_contact_with_gravity_unstructured
-    melt
-    pretend_melt
-    solid_contact
-    solid_contact_with_gravity_structured
-    solid_contact_with_gravity_unstructured
-    spring_contact
-    spring_contact2
-    stefan_boltzmann
-    stefan_boltzmann_melt
-    two_d_unsteady_heat
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON circular_boulder_melt
+             circular_boulder_solar_radiation
+             heated_linear_solid_contact_with_gravity
+             linear_solid_contact_with_gravity_structured
+             linear_solid_contact_with_gravity_unstructured
+             melt
+             pretend_melt
+             solid_contact
+             solid_contact_with_gravity_structured
+             solid_contact_with_gravity_unstructured
+             spring_contact
+             spring_contact2
+             stefan_boltzmann
+             stefan_boltzmann_melt
+             two_d_unsteady_heat
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS heat_transfer_and_melting two_d_unsteady_heat_melt)
 
 # This test contains a huge number of subtests and as such needs a larger amount

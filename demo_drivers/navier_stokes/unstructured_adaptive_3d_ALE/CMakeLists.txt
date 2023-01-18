@@ -22,9 +22,9 @@ endif()
 if(OOMPH_HAS_CGAL)
   oomph_add_test(
     TEST_NAME navier_stokes.unstructured_adaptive_3d_ALE
-    TARGET_DEPENDENCIES uns_adapt_3d
-    VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-    EXTRA_REQUIRES
+    DEPENDS_ON uns_adapt_3d
+    COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+    TEST_FILES validate.sh validata
     LABELS navier_stokes unstructured_adaptive_3d_ALE adapt)
 endif()
 

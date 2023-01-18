@@ -20,9 +20,9 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME
     axisym_displ_based_foeppl_von_karman.axisym_displ_based_foeppl_von_karman
-  TARGET_DEPENDENCIES axisym_displ_based_fvk
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON axisym_displ_based_fvk
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS axisym_displ_based_foeppl_von_karman)
 
 message(VERBOSE "Leaving axisym_displ_based_foeppl_von_karman subdirectory")

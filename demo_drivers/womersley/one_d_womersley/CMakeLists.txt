@@ -18,9 +18,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME womersley.one_d_womersley
-  TARGET_DEPENDENCIES one_d_womersley
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON one_d_womersley
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS womersley one_d_womersley)
 
 message(VERBOSE "Leaving one_d_womersley subdirectory")

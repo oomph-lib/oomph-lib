@@ -18,18 +18,19 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME navier_stokes.unstructured_three_d_fluid
-  TARGET_DEPENDENCIES unstructured_three_d_fluid
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
-    fsi_bifurcation_fluid.1.ele
-    fsi_bifurcation_fluid.1.face
-    fsi_bifurcation_fluid.1.node
-    fsi_bifurcation_fluid.poly
-    fsi_bifurcation_fluid_with_extended_tubes.1.ele
-    fsi_bifurcation_fluid_with_extended_tubes.1.face
-    fsi_bifurcation_fluid_with_extended_tubes.1.node
-    fsi_bifurcation_fluid_with_extended_tubes.poly
-    three_d_unstructured_fluid.mcr
+  DEPENDS_ON unstructured_three_d_fluid
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh
+             validata
+             fsi_bifurcation_fluid.1.ele
+             fsi_bifurcation_fluid.1.face
+             fsi_bifurcation_fluid.1.node
+             fsi_bifurcation_fluid.poly
+             fsi_bifurcation_fluid_with_extended_tubes.1.ele
+             fsi_bifurcation_fluid_with_extended_tubes.1.face
+             fsi_bifurcation_fluid_with_extended_tubes.1.node
+             fsi_bifurcation_fluid_with_extended_tubes.poly
+             three_d_unstructured_fluid.mcr
   LABELS navier_stokes unstructured_three_d_fluid)
 
 message(VERBOSE "Leaving unstructured_three_d_fluid subdirectory")

@@ -37,11 +37,11 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME multi_physics.rayleigh_instability_surfactant
-  TARGET_DEPENDENCIES
-    3d_rayleigh_instability_surfactant rayleigh_instability_insoluble_surfactant
-    rayleigh_instability_soluble_surfactant
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON 3d_rayleigh_instability_surfactant
+             rayleigh_instability_insoluble_surfactant
+             rayleigh_instability_soluble_surfactant
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS multi_physics rayleigh_instability_surfactant)
 
 message(VERBOSE "Leaving rayleigh_instability_surfactant subdirectory")

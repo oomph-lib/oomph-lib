@@ -24,10 +24,10 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME solid.three_d_prescribed_displ_lagr_mult
-  TARGET_DEPENDENCIES three_d_prescribed_displ_lagr_mult
-                      three_d_prescribed_displ_lagr_mult_non_adapt
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON three_d_prescribed_displ_lagr_mult
+             three_d_prescribed_displ_lagr_mult_non_adapt
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS solid three_d_prescribed_displ_lagr_mult)
 
 message(VERBOSE "Leaving three_d_prescribed_displ_lagr_mult subdirectory")

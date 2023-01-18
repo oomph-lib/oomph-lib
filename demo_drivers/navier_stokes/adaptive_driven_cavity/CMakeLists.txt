@@ -18,9 +18,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME navier_stokes.adaptive_driven_cavity
-  TARGET_DEPENDENCIES adaptive_driven_cavity
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON adaptive_driven_cavity
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS navier_stokes adaptive_driven_cavity adapt)
 
 message(VERBOSE "Leaving adaptive_driven_cavity subdirectory")

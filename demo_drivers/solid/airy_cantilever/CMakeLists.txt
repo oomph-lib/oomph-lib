@@ -29,10 +29,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME solid.airy_cantilever
-  TARGET_DEPENDENCIES airy_cantilever airy_cantilever2_adapt
-                      airy_cantilever2_noadapt
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON airy_cantilever airy_cantilever2_adapt airy_cantilever2_noadapt
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS solid airy_cantilever)
 
 message(VERBOSE "Leaving airy_cantilever subdirectory")

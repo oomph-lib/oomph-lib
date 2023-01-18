@@ -18,12 +18,15 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME solid.unstructured_three_d_solid
-  TARGET_DEPENDENCIES unstructured_three_d_solid
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
-    fsi_bifurcation_solid.1.ele fsi_bifurcation_solid.1.face
-    fsi_bifurcation_solid.1.node fsi_bifurcation_solid.poly
-    three_d_unstructured_solid.mcr
+  DEPENDS_ON unstructured_three_d_solid
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh
+             validata
+             fsi_bifurcation_solid.1.ele
+             fsi_bifurcation_solid.1.face
+             fsi_bifurcation_solid.1.node
+             fsi_bifurcation_solid.poly
+             three_d_unstructured_solid.mcr
   LABELS solid unstructured_three_d_solid)
 
 message(VERBOSE "Leaving unstructured_three_d_solid subdirectory")

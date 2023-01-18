@@ -19,9 +19,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME solid.pseudo_solid_collapsible_channel
-  TARGET_DEPENDENCIES pseudo_solid_collapsible_channel
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON pseudo_solid_collapsible_channel
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS solid pseudo_solid_collapsible_channel)
 
 message(VERBOSE "Leaving pseudo_solid_collapsible_channel subdirectory")

@@ -26,9 +26,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME navier_stokes.inclined_plane
-  TARGET_DEPENDENCIES inclined_plane inclined_plane2
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON inclined_plane inclined_plane2
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS navier_stokes inclined_plane)
 
 message(VERBOSE "Leaving inclined_plane subdirectory")

@@ -18,9 +18,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME matrix_matrix_multiply
-  TARGET_DEPENDENCIES matrix_multiply_test
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON matrix_multiply_test
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS matrix)
 
 message(VERBOSE "Leaving matrix_matrix_multiply subdirectory")

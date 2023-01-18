@@ -35,11 +35,11 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME interaction.fourier_decomposed_acoustic_fsi
-  TARGET_DEPENDENCIES
-    adaptive_unstructured_fourier_decomposed_acoustic_fsi
-    fourier_decomposed_acoustic_fsi unstructured_fourier_decomposed_acoustic_fsi
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON adaptive_unstructured_fourier_decomposed_acoustic_fsi
+             fourier_decomposed_acoustic_fsi
+             unstructured_fourier_decomposed_acoustic_fsi
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS interaction fourier_decomposed_acoustic_fsi)
 
 message(VERBOSE "Leaving fourier_decomposed_acoustic_fsi subdirectory")

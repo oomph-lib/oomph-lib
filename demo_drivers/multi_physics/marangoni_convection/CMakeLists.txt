@@ -27,9 +27,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME multi_physics.marangoni_convection
-  TARGET_DEPENDENCIES marangoni_convection marangoni_convection_box
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON marangoni_convection marangoni_convection_box
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS multi_physics marangoni_convection)
 
 message(VERBOSE "Leaving marangoni_convection subdirectory")

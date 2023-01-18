@@ -18,9 +18,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME line_visualiser
-  TARGET_DEPENDENCIES adaptive_driven_cavity
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON adaptive_driven_cavity
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS line_visualiser)
 
 message(VERBOSE "Leaving line_visualiser subdirectory")

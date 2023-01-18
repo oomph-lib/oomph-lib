@@ -45,11 +45,10 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME time_harmonic_fourier_decomposed_linear_elasticity.cylinder
-  TARGET_DEPENDENCIES
-    adaptive_pressure_loaded_cylinder adaptive_unstructured_cylinder cylinder
-    pressure_loaded_cylinder unstructured_cylinder
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON adaptive_pressure_loaded_cylinder adaptive_unstructured_cylinder
+             cylinder pressure_loaded_cylinder unstructured_cylinder
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS time_harmonic_fourier_decomposed_linear_elasticity cylinder)
 
 message(VERBOSE "Leaving cylinder subdirectory")

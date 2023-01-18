@@ -85,21 +85,20 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME interaction.fsi_collapsible_channel
-  TARGET_DEPENDENCIES
-    fsi_collapsible_channel_algebraic_adapt_CR
-    fsi_collapsible_channel_algebraic_adapt_TH
-    fsi_collapsible_channel_algebraic_CR
-    fsi_collapsible_channel_algebraic_TH
-    fsi_collapsible_channel_macro_adapt_CR
-    fsi_collapsible_channel_macro_adapt_TH
-    fsi_collapsible_channel_macro_CR
-    fsi_collapsible_channel_macro_TH
-    fsi_pseudo_solid_collapsible_channel_adapt_CR
-    fsi_pseudo_solid_collapsible_channel_adapt_TH
-    fsi_pseudo_solid_collapsible_channel_CR
-    fsi_pseudo_solid_collapsible_channel_TH
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON fsi_collapsible_channel_algebraic_adapt_CR
+             fsi_collapsible_channel_algebraic_adapt_TH
+             fsi_collapsible_channel_algebraic_CR
+             fsi_collapsible_channel_algebraic_TH
+             fsi_collapsible_channel_macro_adapt_CR
+             fsi_collapsible_channel_macro_adapt_TH
+             fsi_collapsible_channel_macro_CR
+             fsi_collapsible_channel_macro_TH
+             fsi_pseudo_solid_collapsible_channel_adapt_CR
+             fsi_pseudo_solid_collapsible_channel_adapt_TH
+             fsi_pseudo_solid_collapsible_channel_CR
+             fsi_pseudo_solid_collapsible_channel_TH
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS interaction fsi_collapsible_channel)
 
 # This test needs more than the default allotted time to complete

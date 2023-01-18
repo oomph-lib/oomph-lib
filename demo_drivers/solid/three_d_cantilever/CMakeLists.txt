@@ -24,9 +24,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME solid.three_d_cantilever
-  TARGET_DEPENDENCIES three_d_cantilever three_d_cantilever_adapt
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON three_d_cantilever three_d_cantilever_adapt
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS solid three_d_cantilever)
 
 message(VERBOSE "Leaving three_d_cantilever subdirectory")

@@ -18,9 +18,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME beam.tensioned_string
-  TARGET_DEPENDENCIES tensioned_string
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON tensioned_string
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS beam tensioned_string)
 
 message(VERBOSE "Leaving tensioned_string subdirectory")

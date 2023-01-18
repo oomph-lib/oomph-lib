@@ -23,9 +23,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME generic.eigen_solver_test
-  TARGET_DEPENDENCIES eigen_solver_test lapack_qz_find_eigenvalues_test
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES random_test_matrix.dat
+  DEPENDS_ON eigen_solver_test lapack_qz_find_eigenvalues_test
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata random_test_matrix.dat
   LABELS eigen_solver lapack)
 
 # FIXME: Solution is completely off...

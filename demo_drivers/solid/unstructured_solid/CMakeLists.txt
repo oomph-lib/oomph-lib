@@ -23,17 +23,18 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME solid.unstructured_solid
-  TARGET_DEPENDENCIES unstructured_three_d_solid unstructured_two_d_solid
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
-    cube_hole.1.ele
-    cube_hole.1.face
-    cube_hole.1.node
-    solid.fig
-    solid.fig.1.ele
-    solid.fig.1.node
-    solid.fig.1.poly
-    solid.fig.poly
+  DEPENDS_ON unstructured_three_d_solid unstructured_two_d_solid
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh
+             validata
+             cube_hole.1.ele
+             cube_hole.1.face
+             cube_hole.1.node
+             solid.fig
+             solid.fig.1.ele
+             solid.fig.1.node
+             solid.fig.1.poly
+             solid.fig.poly
   LABELS solid unstructured_solid)
 
 message(VERBOSE "Leaving unstructured_solid subdirectory")

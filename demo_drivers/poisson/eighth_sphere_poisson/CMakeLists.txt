@@ -18,9 +18,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME poisson.eighth_sphere_poisson
-  TARGET_DEPENDENCIES eighth_sphere_poisson
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON eighth_sphere_poisson
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS poisson eighth_sphere_poisson)
 
 message(VERBOSE "Leaving eighth_sphere_poisson subdirectory")

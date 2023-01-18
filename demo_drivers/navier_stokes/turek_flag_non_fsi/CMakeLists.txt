@@ -24,9 +24,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME navier_stokes.turek_flag_non_fsi
-  TARGET_DEPENDENCIES turek_flag_non_fsi_alg turek_flag_non_fsi_macro
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON turek_flag_non_fsi_alg turek_flag_non_fsi_macro
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS navier_stokes turek_flag_non_fsi)
 
 message(VERBOSE "Leaving turek_flag_non_fsi subdirectory")

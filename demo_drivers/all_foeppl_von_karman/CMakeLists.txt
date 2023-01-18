@@ -34,10 +34,10 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME all_foeppl_von_karman.all_foeppl_von_karman
-  TARGET_DEPENDENCIES axisym_displ_based_fvk axisym_fvk circular_disk
-                      displacement_based_circular_disk
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON axisym_displ_based_fvk axisym_fvk circular_disk
+             displacement_based_circular_disk
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS all_foeppl_von_karman)
 
 message(VERBOSE "Leaving all_foeppl_von_karman subdirectory")

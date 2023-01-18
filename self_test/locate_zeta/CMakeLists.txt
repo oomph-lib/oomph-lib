@@ -33,10 +33,11 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME locate_zeta
-  TARGET_DEPENDENCIES locate_zeta_tester locate_zeta_tester_3d
-                      locate_zeta_tester_triangle locate_zeta_tester_tetgen
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES cube_hole.1.node cube_hole.1.ele cube_hole.1.face
+  DEPENDS_ON locate_zeta_tester locate_zeta_tester_3d
+             locate_zeta_tester_triangle locate_zeta_tester_tetgen
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata cube_hole.1.node cube_hole.1.ele
+             cube_hole.1.face
   LABELS locate_zeta)
 
 message(VERBOSE "Leaving locate_zeta subdirectory")

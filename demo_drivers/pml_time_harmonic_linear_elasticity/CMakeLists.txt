@@ -26,10 +26,10 @@ oomph_add_executable(
 oomph_add_test(
   TEST_NAME
     pml_time_harmonic_linear_elasticity.pml_time_harmonic_linear_elasticity
-  TARGET_DEPENDENCIES time_harmonic_elasticity_driver
-                      time_harmonic_elasticity_driver_source
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON time_harmonic_elasticity_driver
+             time_harmonic_elasticity_driver_source
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS pml_time_harmonic_linear_elasticity)
 
 message(VERBOSE "Leaving pml_time_harmonic_linear_elasticity subdirectory")

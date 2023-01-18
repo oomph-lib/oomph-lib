@@ -22,14 +22,13 @@ with section("parse"):
         "oomph_add_test": {
             "flags": [
                 "SILENCE_MISSING_VALIDATA_WARNING",
-                "NO_VALIDATE_SH",
             ],
             "kwargs": {
                 "TEST_NAME": 1,
-                "EXTRA_REQUIRES": "*",
+                "DEPENDS_ON": "*",
+                "COMMAND": "*",
+                "TEST_FILES": "*",
                 "LABELS": "*",
-                "TARGET_DEPENDENCIES": "*",
-                "VALIDATE_SH_ARGS": "*",
             }
         },
         "oomph_add_pure_cpp_test": {
@@ -38,7 +37,7 @@ with section("parse"):
             ],
             "kwargs": {
                 "TEST_NAME": 1,
-                "TARGET_DEPENDENCY": 1,
+                "DEPENDS_ON": 1,
                 "LOG_FILE": 1,
                 "LABELS": "*",
                 "RUN_WITH": "*",

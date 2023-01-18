@@ -25,9 +25,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME linearised_axisym_navier_stokes.counter_rotating_disks
-  TARGET_DEPENDENCIES counter_rotating_disks counter_rotating_disks_ref
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON counter_rotating_disks counter_rotating_disks_ref
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS linearised_axisym_navier_stokes counter_rotating_disks)
 
 # This test needs more than the default allotted time to complete

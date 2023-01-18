@@ -23,9 +23,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME mpi.bifurcation_tracking
-  TARGET_DEPENDENCIES pitchfork track_pitch
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
-  EXTRA_REQUIRES
+  DEPENDS_ON pitchfork track_pitch
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
+  TEST_FILES validate.sh validata
   LABELS mpi bifurcation_tracking)
 
 # Don't run this test alongside any other tests

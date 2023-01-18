@@ -18,9 +18,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME navier_stokes.channel_with_leaflet
-  TARGET_DEPENDENCIES channel_with_leaflet
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON channel_with_leaflet
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS navier_stokes channel_with_leaflet)
 
 message(VERBOSE "Leaving channel_with_leaflet subdirectory")

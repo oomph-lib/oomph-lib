@@ -19,9 +19,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME axisym_navier_stokes.rayleigh_instability
-  TARGET_DEPENDENCIES rayleigh_instability
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON rayleigh_instability
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS axisym_navier_stokes rayleigh_instability)
 
 message(VERBOSE "Leaving rayleigh_instability subdirectory")

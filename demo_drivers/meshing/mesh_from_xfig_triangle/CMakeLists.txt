@@ -38,20 +38,20 @@ add_dependencies(install_fig2poly ${FIG2POLY_HASHED_TARGET_NAME})
 
 oomph_add_test(
   TEST_NAME meshing.mesh_from_xfig_triangle
-  TARGET_DEPENDENCIES fig2poly mesh_from_xfig_poisson
-                      mesh_from_xfig_navier_stokes
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
-    hole.fig
-    hole.fig.1.ele
-    hole.fig.1.node
-    hole.fig.1.poly
-    hole.fig.poly
-    oomph_mesh.fig
-    oomph_mesh.fig.1.ele
-    oomph_mesh.fig.1.node
-    oomph_mesh.fig.1.poly
-    oomph_mesh.fig.poly
+  DEPENDS_ON fig2poly mesh_from_xfig_poisson mesh_from_xfig_navier_stokes
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh
+             validata
+             hole.fig
+             hole.fig.1.ele
+             hole.fig.1.node
+             hole.fig.1.poly
+             hole.fig.poly
+             oomph_mesh.fig
+             oomph_mesh.fig.1.ele
+             oomph_mesh.fig.1.node
+             oomph_mesh.fig.1.poly
+             oomph_mesh.fig.poly
   LABELS meshing mesh_from_xfig_triangle)
 
 message(VERBOSE "Leaving mesh_from_xfig_triangle subdirectory")

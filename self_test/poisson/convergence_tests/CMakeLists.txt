@@ -33,10 +33,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME poisson.convergence_tests
-  TARGET_DEPENDENCIES q_convergence_3d q_convergence_2d t_convergence_2d
-                      t_convergence_3d
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON q_convergence_3d q_convergence_2d t_convergence_2d t_convergence_3d
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS convergence poisson)
 
 message(VERBOSE "Leaving convergence_tests subdirectory")

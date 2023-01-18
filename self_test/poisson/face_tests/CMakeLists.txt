@@ -33,9 +33,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME poisson.face_tests
-  TARGET_DEPENDENCIES q_faces_3d q_faces_2d t_faces_2d t_faces_3d
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON q_faces_3d q_faces_2d t_faces_2d t_faces_3d
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS face_tests poisson)
 
 message(VERBOSE "Leaving face_tests subdirectory")
