@@ -22,27 +22,16 @@ endif()
 # in, we'll be able to allow users to use their own pre-installed version of
 # CGAL which will save a lot of time at configure time. To do this, we can just
 # remove the use of the FORCE_ variable below.
-set(FORCE_BUILD_OWN_VERSION_OF_CGAL TRUE CACHE INTERNAL "")
+option(FORCE_BUILD_OWN_VERSION_OF_CGAL "" TRUE)
 
 # Configuration flags
 set(CGAL_DO_NOT_WARN_ABOUT_CMAKE_BUILD_TYPE TRUE CACHE INTERNAL "")
 
 # Look for an already-installed version of CGAL. If OOMPH_USE_CGAL_FROM is
 # defined then we'll look under there
-if(NOT FORCE_BUILD_OWN_VERSION_OF_CGAL)
-  if(OOMPH_USE_CGAL_FROM)
-    find_package(
-      CGAL 5.5.1 REQUIRED
-      PATHS "${OOMPH_USE_CGAL_FROM}"
-      NO_DEFAULT_PATH)
-  endif()
-  find_package(CGAL 5.5.1 QUIET)
+if(FORCE_BUILD_OWN_VERSION_OF_CGAL)
+  message(WARNING "Installing CGAL manually")
 
-  # If we couldn't find a pre-installed version, lets build it ourselves
-  if(CGAL_FOUND)
-    message(STATUS "Found an existing installation of CGAL at: ${CGAL_DIR}")
-  endif()
-else()
   # Path to the patch file
   set(PATCH_FILE 0001-Rename-BUILD_TESTING-CGAL_BUILD_TESTING.patch)
   set(FULL_PATCH_FILE_PATH "${CMAKE_CURRENT_LIST_DIR}/patches/${PATCH_FILE}")
@@ -64,12 +53,27 @@ else()
       <SOURCE_DIR>/${PATCH_FILE})
   FetchContent_MakeAvailable(cgal_project)
 
+  # TODO: Check whether we actually need this; I don't think we do...
   find_package(CGAL 5.5.1 REQUIRED PATHS "${CGAL_BINARY_DIR}")
-  if(NOT TARGET CGAL::CGAL)
-    message(
-      FATAL_ERROR
-        "Something went wrong during the configuration of the CGAL library!")
+else()
+  if(OOMPH_USE_CGAL_FROM)
+    find_package(
+      CGAL 5.5.1 REQUIRED
+      PATHS "${OOMPH_USE_CGAL_FROM}"
+      NO_DEFAULT_PATH)
   endif()
+  find_package(CGAL 5.5.1 QUIET)
+
+  # If we couldn't find a pre-installed version, lets build it ourselves
+  if(CGAL_FOUND)
+    message(STATUS "Found an existing installation of CGAL at: ${CGAL_DIR}")
+  endif()
+endif()
+
+if(NOT TARGET CGAL::CGAL)
+  message(
+    FATAL_ERROR
+      "Something went wrong during the configuration of the CGAL library!")
 endif()
 
 # ------------------------------------------------------------------------------
