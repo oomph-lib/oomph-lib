@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -855,7 +855,7 @@ namespace oomph
         eigenvector_imag[eval_count].build(this->distribution_pt(), 0.0);
         for (unsigned j = 0; j < n; ++j)
         {
-          eigenvector_real[eval_count][j] = eigenvector_aux[j][eval_count];
+          eigenvector_real[eval_count][j] = eigenvector_aux[eval_count][j];
           eigenvector_imag[eval_count][j] = 0.0;
         }
         eval_count++;

@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -835,22 +835,10 @@ OrrSommerfeldProblem<ELEMENT>::OrrSommerfeldProblem(const unsigned& n_element,
 { 
  // hierher Andrew: switched this to anasazi because QZ dies (I assume the
  // one of the two matrices doesn't have the required properties.
- eigen_solver_pt()=new ANASAZI;
+ eigen_solver_pt()=new LAPACK_QZ;
   
  //Set the shift to be zero (the default)
  eigen_solver_pt()->set_shift(0.0);
-
- // //We are going to track the magnitude of the eigenvalue. 
- // //Actually, we want the real part, but the magnitude does and allows
- // //us to use continuation, for some reason that I might eventaually
- // //understand.
- // static_cast<ARPACK*>(eigen_solver_pt())->track_eigenvalue_magnitude();
- // //The eigenvalues to the right of the shift correspond to the eigenvalues
- // //nearest the shift when tracking the magnitude.
- // static_cast<ARPACK*>(eigen_solver_pt())->get_eigenvalues_right_of_shift();
- // //Increase the dimension of the arnoldi subspace to 50 (otherwise the  
- // //test fails on the Intel architecture)
- // static_cast<ARPACK*>(eigen_solver_pt())->narnoldi()=50;
 
  //Set the minimum arc-length to be quite large, so that the system bails
  //quickly if there are problems
@@ -967,20 +955,41 @@ public:
    if(n_dof==0) return;
    
    //Solve the eigenvalue problem
-   Vector<complex<double> > eval;
-   eigenvalue_problem_pt->solve_eigenproblem_legacy(4,eval);
+   Vector<std::complex<double>> alpha;
+   Vector<double> beta;
+   eigenvalue_problem_pt->solve_eigenproblem(4,alpha,beta);
+   
    //We need to make sure that we pick the eigenvalue with the largest real 
-   //part
+   //part that is not infinite
    unsigned index=0;
-   double e_real = eval[0].real();
-
-   //Loop over the eigenvalues and find the smallest magnitude
-   for(unsigned i=1;i<eval.size();i++)
+   double e_real = 0.0;
+   const unsigned n_eval = alpha.size();
+   //Find the first non-infinite value
+   for(unsigned i=0;i<n_eval;++i)
     {
-     if(eval[i].real() > e_real) {e_real = eval[i].real(); index=i;}
+     if(beta[i]!=0.0)
+      {
+       index = i; 
+       e_real = alpha[i].real()/beta[i];
+       break;
+      }
+    }
+   
+
+   unsigned start = index;
+   //Loop over the eigenvalues and find the largest (non-infinite)  magnitude
+   for(unsigned i=start;i<n_eval;i++)
+    {
+     //Check we are not infinite
+     if(beta[i] != 0.0)
+      {
+       //Real part
+       double new_e_real = alpha[i].real()/beta[i];
+       if(new_e_real > e_real) {e_real = new_e_real; index=i;}
+      }
     }
    //Now set the residuals to be the eigenvalue with largest real part
-   residuals[0] = eval[index].real();
+   residuals[0] = alpha[index].real()/beta[index];
   }
 
  //Get the residuals

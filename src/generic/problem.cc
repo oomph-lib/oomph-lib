@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -8908,10 +8908,16 @@ namespace oomph
         error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
+    // Ensure that the eigenvector distribution matches the dof distribution
+    // Copy vector
+    DoubleVector eigenvector_dof = eigenvector;
+    // Redistribute the copy to the dof distribution
+    eigenvector_dof.redistribute(this->Dof_distribution_pt);
+
     // Loop over the dofs and assign the eigenvector
-    for (unsigned long n = 0; n < eigenvector.nrow_local(); n++)
+    for (unsigned long n = 0; n < eigenvector_dof.nrow_local(); n++)
     {
-      dof(n) = eigenvector[n];
+      dof(n) = eigenvector_dof[n];
     }
 // Of course we now need to synchronise
 #ifdef OOMPH_HAS_MPI
@@ -8939,6 +8945,13 @@ namespace oomph
       throw OomphLibError(
         error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
+
+    // Ensure that the eigenvector distribution matches the dof distribution
+    // Copy vector
+    DoubleVector eigenvector_dof = eigenvector;
+    // Redistribute the copy to the dof distribution
+    eigenvector_dof.redistribute(this->Dof_distribution_pt);
+
 
     // Loop over the dofs and add the eigenvector
     // Only use local values

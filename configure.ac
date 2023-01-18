@@ -572,7 +572,7 @@ AM_CONDITIONAL(HAVE_PDF_LATEX, test x$have_pdf_latex = xtrue)
 
 # Do we have python installed?
 #-----------------------------
-AC_CHECK_PROG(have_python,python,true,false)
+AC_CHECK_PROG(have_python,python3,true,false)
 if test x$have_python = xfalse; then \
   echo " "; \
   echo "================================================================="; \
