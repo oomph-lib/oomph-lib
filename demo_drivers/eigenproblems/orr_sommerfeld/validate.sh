@@ -14,9 +14,12 @@ touch Validation
 rm -r -f Validation
 mkdir Validation
 
-# Validation for demo poisson
-#----------------------------
+# Validation for orr sommerfeld
+#------------------------------
 cd Validation
+
+if [ -f ../../orr_sommerfeld ]; then
+
 
 echo "Running orr_sommerfeld validation "
 mkdir RESLT
@@ -42,6 +45,15 @@ else
     orr_sommerfeld_results.dat  0.3  1.0e-14 >> validation.log
 fi
 
+
+else
+
+echo ""
+echo "Not running orr_sommerfeld test; needs trilinos"
+echo ""
+echo "[OK] (Dummy for non-existent Trilinos)"  >> validation.log
+
+fi
 
 # Append output to global validation log file
 #--------------------------------------------
