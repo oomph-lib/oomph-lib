@@ -162,7 +162,7 @@ or
 brew install cmake
 ```
 
- If your package manager does not provide a recent enough version of `cmake`, you will need to build it from source. You can find instructions on how to do this [below](#Building-CMake) and on the [CMake website](https://cmake.org/install/).
+ If your package manager does not provide a recent enough version of `cmake`, you will need to build it from source. You can find instructions on how to do this [below](#building-cmake) and on the [CMake website](https://cmake.org/install/).
 
 ### Ninja
 
@@ -675,15 +675,15 @@ Update the name of the executable and the underlying sources, as well as the `oo
 ```bash
 # OLD
 oomph_add_executable(
-NAME one_d_poisson
-SOURCES one_d_poisson.cc
-LIBRARIES oomph::poisson oomph::meshes oomph::generic)
+  NAME one_d_poisson
+  SOURCES one_d_poisson.cc
+  LIBRARIES oomph::poisson oomph::meshes oomph::generic)
 
 # NEW
 oomph_add_executable(
-NAME my_fancy_new_poisson_code
-SOURCES my_fancy_new_poisson_code.cc
-LIBRARIES oomph::poisson oomph::meshes oomph::generic)
+  NAME my_fancy_new_poisson_code
+  SOURCES my_fancy_new_poisson_code.cc
+  LIBRARIES oomph::poisson oomph::meshes oomph::generic)
 
 [...]
 ```
@@ -999,27 +999,25 @@ Specifying these flags from the command-line can be cumbersome and you may forge
 
 **TODO: Discuss desired/not desired options with MH.**
 
-Option                                    | Description                                                                  | Default
-------------------------------------------|------------------------------------------------------------------------------|--------
-`CMAKE_BUILD_TYPE`                        | The build type (e.g. `Debug`, `Release`, `RelWithDebInfo` or `MinSizeRel`)   | `Release`
-`BUILD_SHARED_LIBS`                       | Build using shared libraries; static otherwise  **["SHARED" DOESN'T WORK!]** | OFF
-`BUILD_SHARED_LIBS`                       | Build using shared libraries; static otherwise  **["SHARED" DOESN'T WORK!]** | OFF
-`OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY`   | Build tests with library build                                               | OFF
-`OOMPH_DONT_SILENCE_USELESS_WARNINGS`     | Display (harmless) warnings from external_src/ and src/ that are silenced    | OFF
-`OOMPH_ENABLE_MPI`                        | Enable the use of MPI for parallel processing                                | OFF
-`OOMPH_MPI_NUM_PROC`                      | Number of processes to use with MPI-enabled tests                            | 2
-`OOMPH_ENABLE_PARANOID`                   | Enable the PARANOID flag in Debug                                            | OFF
-`OOMPH_ENABLE_RANGE_CHECKING`             | Enable RANGE_CHECKING flag in Debug                                          | OFF
-`OOMPH_TRANSITION_TO_VERSION_3`           | Try to build with up-to-date external sources                                | OFF
-`OOMPH_USE_DEPRECATED_SUPERLU`            | Use oomph-lib's deprecated version of SuperLU (4.3)                          | OFF
-`OOMPH_SUPPRESS_TRIANGLE_LIB`             | Suppress build of oomph-lib's copy of the triangle library                   | OFF
-`OOMPH_SUPPRESS_TETGEN_LIB`               | Suppress build of oomph-lib's copy of the tetgen library                     | OFF
-`OOMPH_WANT_NLOHMANN_JSON`                | Enable the [`nlohmann/json`](https://github.com/nlohmann/json) JSON library  | OFF
-`OOMPH_WANT_CGAL`                         | Enable we want to build the CGAL library? **[DOESN'T WORK YET!]**            | OFF
-`OOMPH_WANT_HYPRE`                        | Enable Hypre library                                                         | OFF
-`OOMPH_WANT_MUMPS`                        | Enable MUMPS library [CURRENTLY ONLY WORKING WITH MPI]                       | OFF
-`OOMPH_WANT_TRILINOS`                     | Enable Trilinos library  **[DOESN'T WORK YET!]**                             | OFF
-`OOMPH_ENABLE_CODE_COVERAGE`              | Enable collection of code coverage results                                   | OFF
+Option                                  | Description                                                                  | Default
+----------------------------------------|------------------------------------------------------------------------------|----------
+`CMAKE_BUILD_TYPE`                      | The build type (e.g. `Debug`, `Release`, `RelWithDebInfo` or `MinSizeRel`)   | `Release`
+`BUILD_SHARED_LIBS`                     | Build using shared libraries; static otherwise  **["SHARED" DOESN'T WORK!]** | OFF
+`BUILD_SHARED_LIBS`                     | Build using shared libraries; static otherwise  **["SHARED" DOESN'T WORK!]** | OFF
+`OOMPH_DONT_SILENCE_USELESS_WARNINGS`   | Display (harmless) warnings from external_src/ and src/ that are silenced    | OFF
+`OOMPH_ENABLE_MPI`                      | Enable the use of MPI for parallel processing                                | OFF
+`OOMPH_MPI_NUM_PROC`                    | Number of processes to use with MPI-enabled tests                            | 2
+`OOMPH_ENABLE_PARANOID`                 | Enable the PARANOID flag in Debug                                            | OFF
+`OOMPH_ENABLE_RANGE_CHECKING`           | Enable RANGE_CHECKING flag in Debug                                          | OFF
+`OOMPH_TRANSITION_TO_VERSION_3`         | Try to build with up-to-date external sources                                | OFF
+`OOMPH_USE_DEPRECATED_SUPERLU`          | Use oomph-lib's deprecated version of SuperLU (4.3)                          | OFF
+`OOMPH_SUPPRESS_TRIANGLE_LIB`           | Suppress build of oomph-lib's copy of the triangle library                   | OFF
+`OOMPH_SUPPRESS_TETGEN_LIB`             | Suppress build of oomph-lib's copy of the tetgen library                     | OFF
+`OOMPH_WANT_NLOHMANN_JSON`              | Enable the [`nlohmann/json`](https://github.com/nlohmann/json) JSON library  | OFF
+`OOMPH_WANT_CGAL`                       | Enable we want to build the CGAL library? **[DOESN'T WORK YET!]**            | OFF
+`OOMPH_WANT_HYPRE`                      | Enable Hypre library                                                         | OFF
+`OOMPH_WANT_MUMPS`                      | Enable MUMPS library [CURRENTLY ONLY WORKING WITH MPI]                       | OFF
+`OOMPH_WANT_TRILINOS`                   | Enable Trilinos library                                                      | OFF
 
 ## CMake Presets
 
@@ -1141,11 +1139,12 @@ You may wish to provide additional information to the build of your executable. 
 For example
 
 ```cmake
-oomph_add_executable(NAME one_d_poisson
-                     SOURCES one_d_poisson.cc
-                     LIBRARIES oomph::poisson
-                     CXX_OPTIONS -Wall -Werror
-                     CXX_DEFINITIONS REFINEABLE)
+oomph_add_executable(
+  NAME one_d_poisson
+  SOURCES one_d_poisson.cc
+  LIBRARIES oomph::poisson
+  CXX_OPTIONS -Wall -Werror
+  CXX_DEFINITIONS REFINEABLE)
 ```
 
 If you are comfortable with CMake and feel the `oomph_add_executable()` command does not provide the flexibility that you require, you may wish to specify your own executable using the standard CMake functions. If so, you will need to make sure that you add the compile definitions in `OOMPH_COMPILE_DEFINITIONS` to the target, e.g.

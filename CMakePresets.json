@@ -13,10 +13,8 @@
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release",
         "BUILD_SHARED_LIBS": "OFF",
-        "OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY": "OFF",
         "OOMPH_DONT_SILENCE_USELESS_WARNINGS": "OFF",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-        "OOMPH_ENABLE_CODE_COVERAGE": "OFF",
         "OOMPH_ENABLE_MPI": "OFF",
         "OOMPH_ENABLE_PARANOID": "OFF",
         "OOMPH_ENABLE_RANGE_CHECKING": "OFF",
@@ -97,22 +95,6 @@
       }
     },
     {
-      "name": "ci-coverage",
-      "inherits": "ci",
-      "displayName": "Build Config for CI/CD code coverage",
-      "cacheVariables": {
-        "OOMPH_ENABLE_CODE_COVERAGE": "ON"
-      }
-    },
-    {
-      "name": "ci-mpi-coverage",
-      "inherits": "ci-mpi",
-      "displayName": "MPI Build Config for CI/CD code coverage",
-      "cacheVariables": {
-        "OOMPH_ENABLE_CODE_COVERAGE": "ON"
-      }
-    },
-    {
       "name": "dummy"
     }
   ],
@@ -132,10 +114,6 @@
     {
       "name": "ci",
       "configurePreset": "ci"
-    },
-    {
-      "name": "ci-coverage",
-      "configurePreset": "ci-coverage"
     }
   ],
   "testPresets": [

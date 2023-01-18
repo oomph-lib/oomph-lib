@@ -74,7 +74,6 @@ find_package(Python3 REQUIRED)
 include(OomphCustomOptions)
 
 # General options
-oomph_option(OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY "Build tests with library build" OFF)
 oomph_option(OOMPH_DONT_SILENCE_USELESS_WARNINGS "Display (harmless) warnings from external_src/ and src/ that are silenced" OFF)
 oomph_option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" OFF)
 oomph_option(OOMPH_ENABLE_PARANOID "Enable the PARANOID flag in Debug" OFF)
@@ -96,9 +95,6 @@ oomph_option(OOMPH_WANT_HYPRE "Use Hypre library" OFF)
 oomph_option(OOMPH_WANT_MUMPS "Use MUMPS library" OFF)
 oomph_option(OOMPH_WANT_TRILINOS "Use Trilinos library" OFF)
 oomph_option(OOMPH_WANT_NLOHMANN_JSON "Use the nlohmann JSON library" OFF)
-
-# Enable the use of code coverage flags so that coverage data can be collected
-oomph_option(OOMPH_ENABLE_CODE_COVERAGE "Enable collection of code coverage results" OFF)
 
 # Paths to packages that the user has installed themselves
 oomph_path_option(OOMPH_USE_MPI_FROM "Path to MPI installation" "${OOMPH_USE_MPI_FROM}")
@@ -145,14 +141,6 @@ if(OOMPH_USE_GMSH_FROM)
 
   # Notify user
   message(STATUS "Found 'gmsh' at: ${OOMPH_USE_GMSH_FROM}")
-endif()
-
-# The demo_driver self-tests use shell scripts and symbolic links, both of which
-# require a Unix-based system
-if(NOT UNIX)
-  set(OOMPH_ENABLE_CODE_COVERAGE OFF CACHE BOOL
-      "Enable collection of code coverage results" FORCE)
-  set(OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY OFF)
 endif()
 
 # Let CMake take care of the famous -fPIC flag
@@ -239,23 +227,6 @@ if(BLA_VENDOR
   endforeach()
 endif()
 
-if(OOMPH_ENABLE_CODE_COVERAGE)
-  # We can only get coverage for the library sources if the demo drivers are
-  # built with the library itself, which requires
-  # OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY to be enabled
-  if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
-    message(
-      WARNING
-        "Code coverage was requested which requires building the demo drivers with the library\n"
-        "but you have not enabled it. I'm going to enable it now.")
-    set(OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY ON CACHE BOOL
-        "Build tests with library build" FORCE)
-  endif()
-
-  include(OomphEnableCodeCoverage)
-  oomph_enable_code_coverage()
-endif()
-
 # --------------------------[ FIND REQUIRED HEADERS ]---------------------------
 
 include(OomphCheckForRequiredHeaders)
@@ -288,23 +259,6 @@ message(VERBOSE "<====== Finished oomph-lib library configuration ======>")
 
 # Now export the package so it can be found using find_package(...)
 include(OomphInstallLibrary)
-
-# ---------------------------------[ TESTING ]----------------------------------
-
-# Enable testing for the current directory and all child directories but ONLY
-# when this is the root project, i.e. it isn't being built as part of some
-# larger project hierarchy
-if(OOMPH_IS_MAIN_PROJECT AND OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
-  include(CTest)
-  include(OomphAddExecutable)
-  include(OomphAddTest)
-  include(OomphAddPureCppTest)
-  include(OomphDefineTestData)
-  include(OomphGetHashedTargetName)
-  add_subdirectory(demo_drivers)
-  # FIXME: Need to integrate self_test files into the self-test framework
-  # add_subdirectory(self_test)
-endif()
 
 # ---------[ CONFIGURE oomph-lib-config.h AND oomphlibUninstall.cmake ]---------
 
