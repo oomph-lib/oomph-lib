@@ -717,6 +717,7 @@ To make sure the self-test is run properly when issuing `ctest` you'll also have
 oomph_add_test(
   TEST_NAME poisson.one_d_poisson
   TARGET_DEPENDENCIES one_d_poisson
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS poisson one_d_poisson)
 
@@ -724,6 +725,7 @@ oomph_add_test(
 oomph_add_test(
   TEST_NAME poisson.my_one_d_poisson # <-- this mimics the directory structure
   TARGET_DEPENDENCIES my_one_d_poisson # <-- name of the executable required for the test
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} # <-- the arguments to pass to validate.sh ('OOMPH_ROOT_DIR' is set when 'find_package(oomphlib)' is called; it is required by the validate.sh scripts to find fpdiff.py and validate_ok_count)
   EXTRA_REQUIRES  # <-- any files other than validate.sh and validata/ that should be available to the build directory for the test
   LABELS poisson my_one_d_poisson  # <-- optional labels to identify families of tests
 )
@@ -1087,6 +1089,7 @@ You can filter tests based on the values of `LABELS` or `TEST_NAME` in the `oomp
 oomph_add_test(
   TEST_NAME poisson.one_d_poisson
   TARGET_DEPENDENCIES one_d_poisson
+  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
   EXTRA_REQUIRES
   LABELS poisson one_d_poisson)
 ```
