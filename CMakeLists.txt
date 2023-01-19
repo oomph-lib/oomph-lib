@@ -111,6 +111,9 @@ oomph_path_option(OOMPH_USE_TRILINOS_FROM "Path to Trilinos installation" "${OOM
 
 # cmake-format: on
 # -------------------------[ PROCESS SELECTED OPTIONS ]-------------------------
+# Introduce oomph_add_cxx_compile_definitions(...) to add compile definitions to
+# C++ files only
+include(OomphAddCXXCompileDefinitions)
 
 # If OOMPH_USE_GMSH_FROM is the path to an executable, make sure it is a
 # program. If it's a directory, check that we can find 'gmsh' in the directory
@@ -176,20 +179,20 @@ endif()
 
 # Enable flags
 if(OOMPH_ENABLE_PARANOID)
-  add_compile_definitions("$<$<CONFIG:DEBUG,>:PARANOID>")
+  oomph_add_cxx_compile_definitions($<$<CONFIG:DEBUG,>:PARANOID>)
 endif()
 if(OOMPH_ENABLE_RANGE_CHECKING)
-  add_compile_definitions("$<$<CONFIG:DEBUG,>:RANGE_CHECKING>")
+  oomph_add_cxx_compile_definitions($<$<CONFIG:DEBUG,>:RANGE_CHECKING>)
 endif()
 
 # If we're using up-to-date external sources/dists then make sure we have a
 # preprocessor definition to handle changes that need to be made from within
 # source files (e.g. API changes)
 if(OOMPH_TRANSITION_TO_VERSION_3)
-  add_compile_definitions(OOMPH_TRANSITION_TO_VERSION_3)
+  oomph_add_cxx_compile_definitions(OOMPH_TRANSITION_TO_VERSION_3)
 endif()
 if(OOMPH_USE_DEPRECATED_SUPERLU)
-  add_compile_definitions(OOMPH_USE_DEPRECATED_SUPERLU)
+  oomph_add_cxx_compile_definitions(OOMPH_USE_DEPRECATED_SUPERLU)
 endif()
 
 if(BLA_VENDOR
@@ -239,7 +242,7 @@ set(CMAKE_MACOSX_RPATH TRUE)
 
 set(OOMPH_ADD_CONFIG_H TRUE)
 if(OOMPH_ADD_CONFIG_H)
-  add_compile_definitions(HAVE_CONFIG_H)
+  oomph_add_cxx_compile_definitions(HAVE_CONFIG_H)
 endif()
 
 # ------------------------------[ BUILD LIBRARY ]-------------------------------
@@ -248,9 +251,9 @@ message(VERBOSE "<====== Starting oomph-lib library configuration ======>")
 
 # Process the oomph-lib directories containing the library files
 add_subdirectory(external_src)
-add_compile_definitions(${EXTERNAL_SRC_CXX_DEFINITIONS})
+oomph_add_cxx_compile_definitions(${EXTERNAL_SRC_CXX_DEFINITIONS})
 add_subdirectory(external_distributions)
-add_compile_definitions(${EXTERNAL_DIST_CXX_DEFINITIONS})
+oomph_add_cxx_compile_definitions(${EXTERNAL_DIST_CXX_DEFINITIONS})
 add_subdirectory(src)
 
 message(VERBOSE "<====== Finished oomph-lib library configuration ======>")
