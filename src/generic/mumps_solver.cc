@@ -212,6 +212,7 @@ namespace oomph
                           OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
     }
+#ifdef OOMPH_HAS_MPI
     if (!Suppress_warning_about_MPI_COMM_WORLD)
     {
       if (this->distribution_pt()->communicator_pt()->mpi_comm() !=
@@ -237,6 +238,7 @@ namespace oomph
                         OOMPH_EXCEPTION_LOCATION);
       }
     }
+#endif
 
 #endif
 
@@ -528,6 +530,7 @@ namespace oomph
     double t_start = TimingHelpers::timer();
 
 #ifdef PARANOID
+#ifdef OOMPH_HAS_MPI
     if (!Suppress_warning_about_MPI_COMM_WORLD)
     {
       if (this->distribution_pt()->communicator_pt()->mpi_comm() !=
@@ -553,6 +556,7 @@ namespace oomph
                         OOMPH_EXCEPTION_LOCATION);
       }
     }
+#endif
 
     // Initialised?
     if (!Mumps_is_initialised)
@@ -728,6 +732,7 @@ namespace oomph
                           DoubleVector& result)
   {
 #ifdef PARANOID
+#ifdef OOMPH_HAS_MPI
     if (!Suppress_warning_about_MPI_COMM_WORLD)
     {
       if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt)
@@ -755,6 +760,7 @@ namespace oomph
                         OOMPH_EXCEPTION_LOCATION);
       }
     }
+#endif
 #endif
 
     // Initialise timer
@@ -896,6 +902,7 @@ namespace oomph
   void MumpsSolver::solve(Problem* const& problem_pt, DoubleVector& result)
   {
 #ifdef PARANOID
+#ifdef OOMPH_HAS_MPI
     if (!Suppress_warning_about_MPI_COMM_WORLD)
     {
       if (problem_pt->communicator_pt()->mpi_comm() != MPI_COMM_WORLD)
@@ -920,6 +927,7 @@ namespace oomph
                         OOMPH_EXCEPTION_LOCATION);
       }
     }
+#endif
 #endif
 
     // Initialise timer
@@ -1007,6 +1015,7 @@ namespace oomph
   void MumpsSolver::resolve(const DoubleVector& rhs, DoubleVector& result)
   {
 #ifdef PARANOID
+#ifdef OOMPH_HAS_MPI
     if (!Suppress_warning_about_MPI_COMM_WORLD)
     {
       if (this->distribution_pt()->communicator_pt()->mpi_comm() !=
@@ -1031,6 +1040,7 @@ namespace oomph
                         OOMPH_EXCEPTION_LOCATION);
       }
     }
+#endif
 #endif
 
     // Store starting time for solve
