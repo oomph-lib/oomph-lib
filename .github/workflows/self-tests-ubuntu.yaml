@@ -38,7 +38,7 @@ jobs:
             printf "SEARCHING FOR MPI.H: "
             if [ ! -z $(find "$pth" -iname mpi.h) ]; then
               printf "...found mpi.h!\n"
-              echo "::set-output name=mpi_h_loc::$pth"
+              echo "mpi_h_loc=$pth" >> $GITHUB_OUTPUT
               printf "EXPORTING INCLUDE PATH!\n"
               found_mpi_header=1
               break
