@@ -33,7 +33,9 @@ echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/eigenvalues1.dat RESLT/soln1.dat > res_qz.dat
-cat RESLT/eigenvalues2.dat RESLT/soln2.dat > res_anasazi.dat
+if [ -e RESLT/eigenvalues2.dat ]; then
+  cat RESLT/eigenvalues2.dat RESLT/soln2.dat > res_anasazi.dat
+fi
 mv RESLT RESLT_harmonic
 
 
@@ -43,7 +45,7 @@ else
 echo "QZ Test: " >> validation.log
 $OOMPH_ROOT_DIR/scripts/fpdiff.py  ../validata/harmonic_results.dat.gz   \
     res_qz.dat  0.1 1.0e-13 >> validation.log
-#Only if we have trilions
+# Only if we have Trilinos
 echo "Anasazi Test: " >> validation.log
 if [ -s res_anasazi.dat ]; then
 ../../../../bin/fpdiff.py  ../validata/harmonic_results.dat.gz   \
@@ -68,7 +70,9 @@ echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/eigenvalues1.dat RESLT/soln1.dat > res_qz_complex.dat
-cat RESLT/eigenvalues2.dat RESLT/soln2.dat > res_anasazi_complex.dat
+if [ -s eigenvalues2.dat ]; then
+  cat RESLT/eigenvalues2.dat RESLT/soln2.dat > res_anasazi_complex.dat
+fi
 
 
 if test "$2" = "no_fpdiff"; then
