@@ -33,7 +33,9 @@ echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/eigenvalues1.dat RESLT/soln1.dat > res_qz.dat
-cat RESLT/eigenvalues2.dat RESLT/soln2.dat > res_anasazi.dat
+if [ -e RESLT/eigenvalues2.dat ]; then
+    cat RESLT/eigenvalues2.dat RESLT/soln2.dat > res_anasazi.dat
+fi
 mv RESLT RESLT_harmonic
 
 
@@ -68,8 +70,9 @@ echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/eigenvalues1.dat RESLT/soln1.dat > res_qz_complex.dat
-cat RESLT/eigenvalues2.dat RESLT/soln2.dat > res_anasazi_complex.dat
-
+if [ -s eigenvalues2.dat ]; then
+    cat RESLT/eigenvalues2.dat RESLT/soln2.dat > res_anasazi_complex.dat
+fi
 
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
