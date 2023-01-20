@@ -96,7 +96,7 @@
 --with-mpi-include-directory=/usr/lib/x86_64-linux-gnu/openmpi/include
 CXXFLAGS="-O3 -Wall"
 CFLAGS=" -O3 -Wno-implicit-function-declaration"
-FFLAGS="-O3"
+FFLAGS="-fallow-argument-mismatch -O3"
 FFLAGS_NO_OPT="-O0"
 CXX=mpic++
 CC=mpicc
@@ -106,11 +106,11 @@ LD=mpif77
 
 #CXXFLAGS="-g -DPARANOID -DRANGE_CHECKING -Wall"
 #CFLAGS="-g"
-#FFLAGS="-g"
+#FFLAGS="-fallow-argument-mismatch -g"
 
 #CXXFLAGS="-O3 -Wall -fPIC"
 #CFLAGS="-O3 -fPIC"
-#FFLAGS="-O3 -fPIC"
+#FFLAGS="-fallow-argument-mismatch -O3 -fPIC"
 #--with-blacs=/home/mheil/local/mumps_and_scalapack_default_installation/lib
 #--with-scalapack=/home/mheil/local/mumps_and_scalapack_default_installation/lib/libscalapack.a
 #--with-pord=/home/mheil/local/mumps_and_scalapack_default_installation/lib/libpord.a 

@@ -318,7 +318,7 @@ namespace oomph
   {
   public:
     /// Empty constructor
-    LAPACK_QZ() : EigenSolver(), Tolerance_for_ccness_check(1.0e-13) {}
+    LAPACK_QZ() : EigenSolver(), Tolerance_for_ccness_check(1.0e-12) {}
 
     /// Broken copy constructor
     LAPACK_QZ(const LAPACK_QZ&) = delete;

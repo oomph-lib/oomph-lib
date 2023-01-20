@@ -15,7 +15,10 @@ mkdir Validation
 cd Validation
 
 # Validation for eigensolver test
-#-----------------------------------------
+#--------------------------------
+
+if [ -f ../eigen_solver_test ]; then
+    
 echo "Running eigensolver validation "
 mkdir RESLT_anasazi
 cp ../random_test_matrix.dat .
@@ -38,6 +41,18 @@ else
          eigen_solver_test_anasazi.dat >> validation.log
 fi
 rm -rf RESLT_anasazi
+
+
+else
+    
+echo "Not running eigensolver validation; needs trilinos "
+echo "Dummy [OK] for missing trilinos " >> validation.log
+
+fi
+
+
+
+
 #-----------------------------------------
 
 #-----------------------------------------
