@@ -689,7 +689,7 @@ int main(int argc, char* argv[])
 #endif
  problem.linear_solver_pt() = solver_pt;
  solver_pt->max_iter() = 400;
- solver_pt->tolerance() = 10e-5;
+ solver_pt->tolerance() = 10e-8;
  solver_pt->enable_doc_convergence_history();
 
  // Pointer to general purpose block preconditioner base class
