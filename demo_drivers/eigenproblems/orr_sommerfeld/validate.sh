@@ -16,6 +16,10 @@ mkdir Validation
 #------------------------------
 cd Validation
 
+# Validation for orr sommerfeld
+#------------------------------
+cd Validation
+
 if [ -f ../../orr_sommerfeld ]; then
   echo "Running orr_sommerfeld validation "
   mkdir RESLT
@@ -36,22 +40,22 @@ if [ -f ../../orr_sommerfeld ]; then
   if [ -f ../../orr_sommerfeld ]; then
     cat RESLT/neutral.dat >orr_sommerfeld_results.dat
   fi
+
+  if test "$1" = "no_fpdiff"; then
+    echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >>validation.log
+  else
+    if [ -s orr_sommerfeld_results.dat ]; then
+      ../../../../bin/fpdiff.py ../validata/orr_sommerfeld_results.dat.gz \
+        orr_sommerfeld_results.dat 0.3 1.0e-14 >>validation.log
+    else
+      echo "dummy [OK] -- Orr-Sommerfeld driver has not run, probably because Trilinos is not installed" >>validation.log
+    fi
+  fi
 else
   echo ""
   echo "Not running orr_sommerfeld test; needs trilinos"
   echo ""
   echo "[OK] (Dummy for non-existent Trilinos)" >>validation.log
-fi
-
-if test "$2" = "no_fpdiff"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >>validation.log
-else
-  if [ -s orr_sommerfeld_results.dat ]; then
-    $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/orr_sommerfeld_results.dat.gz \
-      orr_sommerfeld_results.dat 0.3 1.0e-14 >>validation.log
-  else
-    echo "dummy [OK] -- Orr-Sommerfeld driver has not run, probably because Trilinos is not installed" >>validation.log
-  fi
 fi
 
 # Append output to global validation log file
