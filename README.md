@@ -1030,7 +1030,7 @@ Option                                  | Description                           
 We provide a generic `CMakePresets.json` file in the root directory of the project. To list the available presets, run
 
 ```bash
-cmake --preset list
+cmake --list-presets
 ```
 
 We recommend that you can write your own `CMakeUserPresets.json` file. You can inherit your presets from the presets we provide in `CMakePresets.json`. For details on how to do this refer to the [CMake documentation](https://cmake.org/cmake/help/latest/manual/cmake-presets.7.html).
