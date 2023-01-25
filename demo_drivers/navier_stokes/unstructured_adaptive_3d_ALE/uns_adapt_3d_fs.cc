@@ -36,8 +36,11 @@
 // Get the mesh
 #include "meshes/tetgen_mesh.h"
 
-//#include "../../../external_src/oomph_tetgen/tetgen.h"
+#ifdef OOMPH_HAS_NEW_TETGEN
+#include "oomph_tetgen_1.6.h"
+#else
 #include "oomph_tetgen.h"
+#endif
 
 using namespace std;
 

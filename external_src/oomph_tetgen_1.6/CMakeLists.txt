@@ -30,7 +30,7 @@ set(SOURCES tetgen.cxx predicates.cxx)
 set(HEADERS tetgen.h)
 
 # Define the name of the library
-set(LIBNAME oomph_tetgen)
+set(LIBNAME oomph_tetgen_1.6)
 
 # Import the OomphLibraryConfig module to handle the library creation
 include(OomphLibraryConfig)
