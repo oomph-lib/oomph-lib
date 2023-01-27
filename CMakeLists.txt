@@ -47,6 +47,8 @@ project(
 # Specify the location of non-standard CMake modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/")
 
+# TODO: Will likely need to move to C++17 when Trilinos v14.0 is released...
+
 # Specify the C++ standard
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
@@ -72,6 +74,9 @@ find_package(Python3 REQUIRED)
 # ------------------------------[ BUILD OPTIONS ]-------------------------------
 # cmake-format: off
 include(OomphCustomOptions)
+
+# CMake-only options; doesn't influence the build of oomph-lib
+option(OOMPH_PRINT_SETTINGS_AFTER_INSTALL "Display the oomph-lib settings at the end of the install step" OFF)
 
 # General options
 oomph_option(OOMPH_DONT_SILENCE_USELESS_WARNINGS "Display (harmless) warnings from external_src/ and src/ that are silenced" OFF)
@@ -291,6 +296,10 @@ add_custom_target(
 # --------------------[ PRINT PROJECT-SPECIFIC SETTINGS ]-----------------------
 
 include(OomphPrintProjectSettings)
-oomph_print_project_settings()
+if(OOMPH_PRINT_SETTINGS_AFTER_INSTALL)
+  oomph_print_project_settings(ENABLE_PRINT_AFTER_INSTALL)
+else()
+  oomph_print_project_settings()
+endif()
 
 # ------------------------------------------------------------------------------
