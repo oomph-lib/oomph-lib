@@ -10,23 +10,37 @@
       "name": "base",
       "hidden": true,
       "binaryDir": "${sourceDir}/build",
-      "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Release",
-        "BUILD_SHARED_LIBS": "OFF",
-        "OOMPH_ENABLE_PARANOID": "OFF",
-        "OOMPH_ENABLE_RANGE_CHECKING": "OFF",
-        "OOMPH_ENABLE_MPI": "OFF",
-        "OOMPH_WANT_CGAL": "OFF",
-        "OOMPH_WANT_MUMPS": "OFF",
-        "OOMPH_WANT_HYPRE": "OFF",
-        "OOMPH_WANT_TRILINOS": "OFF",
-        "OOMPH_WANT_NLOHMANN_JSON": "OFF",
-        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-        "OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY": "OFF",
-        "OOMPH_DONT_SILENCE_USELESS_WARNINGS": "OFF",
-        "OOMPH_ENABLE_CODE_COVERAGE": "OFF",
-        "OOMPH_TRANSITION_TO_VERSION_3": "OFF",
-        "OOMPH_USE_DEPRECATED_SUPERLU": "OFF"
+      "generator": "Ninja",
+        "cacheVariables": {
+            "CMAKE_INSTALL_PREFIX": "${sourceDir}/install",
+            "CMAKE_BUILD_TYPE": "Release",
+            "comment1": "change to ON",
+            "BUILD_SHARED_LIBS": "OFF",
+            "OOMPH_ENABLE_PARANOID": "OFF",
+            "OOMPH_ENABLE_RANGE_CHECKING": "OFF",
+            "OOMPH_ENABLE_MPI": "OFF",
+            "OOMPH_WANT_CGAL": "OFF",
+            "OOMPH_WANT_MUMPS": "OFF",
+            "OOMPH_WANT_HYPRE": "OFF",
+            "OOMPH_WANT_TRILINOS": "OFF",
+            "OOMPH_WANT_NLOHMANN_JSON": "OFF",
+            "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+            "comment2": "I think we wanted to kill this altogether",
+            "OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY": "OFF",
+            "OOMPH_DONT_SILENCE_USELESS_WARNINGS": "OFF",
+            "comment3": "delete altogether; not sure its useful and it probably makes us look bad",
+            "OOMPH_ENABLE_CODE_COVERAGE": "OFF",
+            "OOMPH_TRANSITION_TO_VERSION_3": "OFF",
+            "OOMPH_USE_DEPRECATED_SUPERLU": "OFF"
+        }
+    },
+      {
+      "name": "default",
+      "displayName": "Default Config",
+      "inherits": "base",
+      "binaryDir": "${sourceDir}/build",
+        "cacheVariables": {
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/install"
       }
     },
     {
