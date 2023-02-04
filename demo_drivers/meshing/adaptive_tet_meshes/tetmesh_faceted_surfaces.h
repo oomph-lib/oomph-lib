@@ -511,7 +511,7 @@ public:
        if (count==2)
         {
          is_on_boundary[el_pt]=true;
-         if (!el_pt->node_pt(2)->is_on_boundary(b))
+         if (!(el_pt->node_pt(2)->is_on_boundary(b)))
           {
            // fine
           }
@@ -521,13 +521,13 @@ public:
            Node* nod0_pt=el_pt->node_pt(0);
            Node* nod1_pt=el_pt->node_pt(1);
            Node* nod2_pt=el_pt->node_pt(2);
-           if (!el_pt->node_pt(0)->is_on_boundary(b))
+           if (!(el_pt->node_pt(0)->is_on_boundary(b)))
             {
              el_pt->node_pt(0)=nod1_pt;
              el_pt->node_pt(1)=nod2_pt;
              el_pt->node_pt(2)=nod0_pt;
             }
-           else if (!el_pt->node_pt(1)->is_on_boundary(b))
+           else if (!(el_pt->node_pt(1)->is_on_boundary(b)))
             {
              el_pt->node_pt(0)=nod2_pt;
              el_pt->node_pt(1)=nod0_pt;
