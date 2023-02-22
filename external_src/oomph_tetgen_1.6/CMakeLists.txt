@@ -39,9 +39,6 @@ oomph_library_config(
   HEADERS ${HEADERS}
   SOURCES ${SOURCES})
 
-# Build as a library, not an executable
-target_compile_definitions(${LIBNAME} PRIVATE -DTETLIBRARY)
-
 # Silence the annoying warnings produced by this library
 include(OomphTargetSilenceWarnings)
 oomph_target_silence_warnings(TARGET ${LIBNAME}
