@@ -43,5 +43,66 @@ using namespace oomph;
 
 int main()
 {
-  std::cout << "Hello world" << std::endl;
+  // Introduce a dummy ID since we're not concerned with boundary IDs.
+  unsigned dummy_id = 1;
+
+
+  // CubicTetMeshFacetedSurface
+  //----------------------------
+  // Create a cubic faceted surface
+  double box_half_width = 1.0;
+  double box_half_length = 2.0;
+  CubicTetMeshFacetedSurface cubic_faceted_surface(
+    box_half_width, box_half_length, dummy_id);
+  // Output into the Paraview .vtu format
+  cubic_faceted_surface.output_paraview("cubic_faceted.vtu");
+
+
+  // DiskTetMeshFacetedSurface
+  //---------------------------
+  // Create a faceted disk with an oscillating displacement
+  double epsilon = 0.1; // Set the amplitude
+  unsigned n = 4; // Set the mode
+  double z_offset = 0.0; // Set the offset in the z coordinate
+  // Set the number of lines discretising half of the disk's arc
+  unsigned half_nsegment = 10;
+
+  // Create the Geometric object
+  WarpedCircularDisk disk(epsilon, n, z_offset);
+
+  // Create the faceted surface
+  DiskTetMeshFacetedSurface disk_faceted_surface(
+    &disk, half_nsegment, dummy_id, dummy_id);
+  // Output into the Paraview .vtu format
+  disk_faceted_surface.output_paraview("disk_faceted.vtu");
+
+
+  // SphericalTetMeshFacetedSurface
+  //--------------------------------
+  // Create a spherical faceted surface with a fixed number of discrete faces
+  SphericalTetMeshFacetedSurface spherical_faceted_surface;
+  // Output into the Paraview .vtu format
+  spherical_faceted_surface.output_paraview("spherical_faceted.vtu");
+
+
+  // RectangularTetMeshFacetedSurface
+  //----------------------------------
+  // Create a simple rectangular faceted surface consisting of a single facet.
+  double half_x_width = 1.0;
+  double half_y_length = 2.0;
+  Vector<double> offset(3, 0.0); // Set the rectangle at the origin
+  RectangularTetMeshFacetedSurface rectangular_faceted_surface(
+    half_x_width, half_y_length, offset, dummy_id);
+  // Output into the Paraview .vtu format
+  rectangular_faceted_surface.output_paraview("rectangular_faceted.vtu");
+
+
+  // DiskWithTwoLayersTetMeshFacetedSurface
+  //----------------------------------------
+  // Create a disk with two layers, looks like a coin
+  DiskWithTwoLayersTetMeshFacetedSurface disk_with_two_layers_faceted_surface(
+    &disk, half_nsegment, dummy_id, dummy_id, dummy_id, dummy_id, dummy_id);
+  // Output into the Paraview .vtu format
+  disk_with_two_layers_faceted_surface.output_paraview(
+    "disk_with_two_layers_faceted.vtu");
 }
