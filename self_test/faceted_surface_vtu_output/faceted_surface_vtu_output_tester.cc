@@ -36,6 +36,9 @@
 // Include definitions of faceted surfaces
 #include "tetmesh_faceted_surfaces.h"
 
+// Include the definition of SphericalTetMeshFacetedSurface
+#include "spherical_tetmesh_faceted_surface.h"
+
 using namespace oomph;
 
 int main()
