@@ -132,7 +132,7 @@ endif
 #OLD (PYTHON2)	echo "sed 's/.\/tmpf/date/g' script/framework.py.orig | sed 's/.\/tmpc/date/g' > script/framework.py ">> build_script.bash
 #OLD (PYTHON2)	echo "patch script/blacs.py < ../../build_scripts/blacs.py.patch  ">> build_script.bash
 	echo "echo "Building... [this can take a while!]"" >> build_script.bash
-	echo "./setup.py --downblacs --lapacklib=$(lapack_lib) --blaslib=$(blas_lib) --mpiincdir=$(mpi_include) --mpicc=$(CC) --mpif77=$(F77) --ccflags=\"$(CFLAGS)\" --fcflags=\"$(FFLAGS)\"  --ldflags_c=\"$(CFLAGS)\" --ldflags_f77=\"$(FFLAGS)\" --noopt=\"$(FFLAGS_NO_OPT)\" > scalapack.log" >> build_script.bash
+	echo "./setup.py --notesting --downblacs --lapacklib=$(lapack_lib) --blaslib=$(blas_lib) --mpiincdir=$(mpi_include) --mpicc=$(CC) --mpif77=$(F77) --ccflags=\"$(CFLAGS)\" --fcflags=\"$(FFLAGS) -fallow-argument-mismatch\"  --ldflags_c=\"$(CFLAGS)\" --ldflags_f77=\"$(FFLAGS)\" --noopt=\"$(FFLAGS_NO_OPT)\" > scalapack.log" >> build_script.bash
 	echo "" >> build_script.bash
 	echo "echo \"...done!\"" >> build_script.bash
 	echo "echo \"here's the scalapack.log:\"" >> build_script.bash

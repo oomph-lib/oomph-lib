@@ -119,7 +119,7 @@ namespace oomph
     /// Access function for number of elements in y directions
     const unsigned& nz() const
     {
-      return Nx;
+      return Nz;
     }
 
   protected:
