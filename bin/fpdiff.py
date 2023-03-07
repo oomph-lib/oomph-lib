@@ -80,6 +80,9 @@ def fpdiff_helper(filename1,filename2,relative_error,small,
  # handle the error and so we shouldn't do anything weird here).
  tmpfile1 = read_file(filename1)
  tmpfile2 = read_file(filename2)
+ # filename is passed for the selftest, etc.)
+ if len(tmpfile1) == 0:
+  return 1
 
  #Find the number of lines in each file
  n1 = len(tmpfile1)
