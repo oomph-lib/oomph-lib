@@ -80,7 +80,8 @@ def fpdiff_helper(filename1,filename2,relative_error,small,
  # handle the error and so we shouldn't do anything weird here).
  tmpfile1 = read_file(filename1)
  tmpfile2 = read_file(filename2)
- # filename is passed for the selftest, etc.)
+ # this line catches the error when an empty selftest gold data file is 
+ # provided and will return a FAIL (e.g. wrong filename is passed for the selftest, etc.)
  if len(tmpfile1) == 0:
   return 1
 
