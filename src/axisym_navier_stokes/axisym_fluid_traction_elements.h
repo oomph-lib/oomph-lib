@@ -39,7 +39,7 @@
 #include "../generic/shape.h"
 #include "../generic/elements.h"
 #include "../generic/element_with_external_element.h"
-
+#include "axisym_navier_stokes_face_elements.h"
 
 namespace oomph
 {
@@ -70,12 +70,9 @@ namespace oomph
   template<class ELEMENT>
   class AxisymmetricNavierStokesTractionElement
     : public virtual FaceGeometry<ELEMENT>,
-      public virtual FaceElement
+      public virtual AxisymmetricNavierStokesFaceElement
   {
   protected:
-    /// Index at which the i-th velocity component is stored
-    Vector<unsigned> U_index_axisymmetric_nst_traction;
-
     /// Pointer to an imposed traction function. Arguments:
     /// Eulerian coordinate; outer unit normal;
     /// applied traction. (Not all of the input arguments will be
@@ -115,7 +112,7 @@ namespace oomph
     /// value of the index and its limit
     AxisymmetricNavierStokesTractionElement(FiniteElement* const& element_pt,
                                             const int& face_index)
-      : FaceGeometry<ELEMENT>(), FaceElement()
+      : FaceGeometry<ELEMENT>(), AxisymmetricNavierStokesFaceElement()
     {
       // Attach the geometrical information to the element. N.B. This function
       // also assigns nbulk_value from the required_nvalue of the bulk element
@@ -123,15 +120,6 @@ namespace oomph
 
       // Find the dimension of the problem
       unsigned n_dim = element_pt->nodal_dimension();
-
-      // Find the index at which the velocity unknowns are stored
-      ELEMENT* cast_element_pt = dynamic_cast<ELEMENT*>(element_pt);
-      this->U_index_axisymmetric_nst_traction.resize(n_dim + 1);
-      for (unsigned i = 0; i < n_dim + 1; i++)
-      {
-        this->U_index_axisymmetric_nst_traction[i] =
-          cast_element_pt->u_index_axi_nst(i);
-      }
 
       // Zero traction
       Traction_fct_pt =
@@ -468,13 +456,6 @@ namespace oomph
     // Find out the dimension of the node
     unsigned n_dim = this->nodal_dimension();
 
-    // Cache the nodal indices at which the velocity components are stored
-    unsigned u_nodal_index[n_dim + 1];
-    for (unsigned i = 0; i < n_dim + 1; i++)
-    {
-      u_nodal_index[i] = this->U_index_axisymmetric_nst_traction[i];
-    }
-
     // Integer to hold the local equation number
     int local_eqn = 0;
 
@@ -574,7 +555,8 @@ namespace oomph
         for (unsigned i = 0; i < n_dim + 1; i++)
         {
           // Equation number
-          local_eqn = this->nodal_local_eqn(l, u_nodal_index[i]);
+          local_eqn =
+            this->nodal_local_eqn(l, this->momentum_index_axi_nst(l, i));
           /*IF it's not a boundary condition*/
           if (local_eqn >= 0)
           {
@@ -604,443 +586,6 @@ namespace oomph
 
   } // namespace LinearisedFSIAxisymmetricNStNoSlipBCHelper
 
-
-  //======================================================================
-  /// A class for elements that allow the imposition of the linearised
-  /// FSI no slip condition from an adjacent linearly elastic axisymmetric
-  /// solid. The element geometry is obtained from the FaceGeometry<ELEMENT>
-  /// policy class.
-  //======================================================================
-  template<class FLUID_BULK_ELEMENT, class SOLID_BULK_ELEMENT>
-  class LinearisedFSIAxisymmetricNStNoSlipBCElementElement
-    : public virtual FaceGeometry<FLUID_BULK_ELEMENT>,
-      public virtual FaceElement,
-      public virtual ElementWithExternalElement
-  {
-  public:
-    /// Constructor, takes the pointer to the "bulk" element and the
-    /// face index identifying the face to which the element is attached.
-    /// The optional identifier can be used
-    /// to distinguish the additional nodal values created by
-    /// this element from thos created by other FaceElements.
-    LinearisedFSIAxisymmetricNStNoSlipBCElementElement(
-      FiniteElement* const& bulk_el_pt,
-      const int& face_index,
-      const unsigned& id = 0);
-
-    /// Broken copy constructor
-    LinearisedFSIAxisymmetricNStNoSlipBCElementElement(
-      const LinearisedFSIAxisymmetricNStNoSlipBCElementElement& dummy) = delete;
-
-    /// Broken assignment operator
-    // Commented out broken assignment operator because this can lead to a
-    // conflict warning when used in the virtual inheritence hierarchy.
-    // Essentially the compiler doesn't realise that two separate
-    // implementations of the broken function are the same and so, quite
-    // rightly, it shouts.
-    /*void operator=(const LinearisedFSIAxisymmetricNStNoSlipBCElementElement&)
-      = delete;*/
-
-
-    /// Access function for the pointer to the fluid Strouhal number
-    /// (if not set, St defaults to 1)
-    double*& st_pt()
-    {
-      return St_pt;
-    }
-
-    /// Access function for the fluid Strouhal number
-    double st() const
-    {
-      return *St_pt;
-    }
-
-    /// Add the element's contribution to its residual vector
-    inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
-    {
-      // Call the generic residuals function with flag set to 0
-      // using a dummy matrix argument
-      fill_in_generic_residual_contribution_fsi_no_slip_axisym(
-        residuals, GeneralisedElement::Dummy_matrix, 0);
-    }
-
-
-    /// Add the element's contribution to its residual vector and its
-    /// Jacobian matrix
-    inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
-                                                 DenseMatrix<double>& jacobian)
-    {
-      // Call the generic routine with the flag set to 1
-      fill_in_generic_residual_contribution_fsi_no_slip_axisym(
-        residuals, jacobian, 1);
-
-      // Derivatives w.r.t. external data
-      fill_in_jacobian_from_external_interaction_by_fd(residuals, jacobian);
-    }
-
-    /// Output function
-    void output(std::ostream& outfile)
-    {
-      // Dummy
-      unsigned nplot = 0;
-      output(outfile, nplot);
-    }
-
-    /// Output function: Output at Gauss points; n_plot is ignored.
-    void output(std::ostream& outfile, const unsigned& n_plot)
-    {
-      outfile << "ZONE\n";
-
-      // Get the value of Nintpt
-      const unsigned n_intpt = integral_pt()->nweight();
-
-      // Set the Vector to hold local coordinates
-      Vector<double> s_int(Dim - 1);
-
-      // Loop over the integration points
-      for (unsigned ipt = 0; ipt < n_intpt; ipt++)
-      {
-        // Assign values of s
-        for (unsigned i = 0; i < (Dim - 1); i++)
-        {
-          s_int[i] = integral_pt()->knot(ipt, i);
-        }
-
-        // Get boundary coordinate
-        Vector<double> zeta(1);
-        interpolated_zeta(s_int, zeta);
-
-        // Get velocity from adjacent solid
-        SOLID_BULK_ELEMENT* ext_el_pt =
-          dynamic_cast<SOLID_BULK_ELEMENT*>(external_element_pt(0, ipt));
-        Vector<double> s_ext(external_element_local_coord(0, ipt));
-        Vector<double> dudt(3);
-        ext_el_pt->interpolated_du_dt_axisymmetric_linear_elasticity(s_ext,
-                                                                     dudt);
-
-        // Output
-        outfile << ext_el_pt->interpolated_x(s_ext, 0) << " "
-                << ext_el_pt->interpolated_x(s_ext, 1) << " " << dudt[0] << " "
-                << dudt[1] << " " << dudt[2] << " " << zeta[0] << std::endl;
-      }
-    }
-
-
-    /// C-style output function
-    void output(FILE* file_pt)
-    {
-      FaceGeometry<FLUID_BULK_ELEMENT>::output(file_pt);
-    }
-
-    /// C-style output function
-    void output(FILE* file_pt, const unsigned& n_plot)
-    {
-      FaceGeometry<FLUID_BULK_ELEMENT>::output(file_pt, n_plot);
-    }
-
-
-  protected:
-    /// Function to compute the shape and test functions and to return
-    /// the Jacobian of mapping between local and global (Eulerian)
-    /// coordinates
-    inline double shape_and_test(const Vector<double>& s,
-                                 Shape& psi,
-                                 Shape& test) const
-    {
-      // Find number of nodes
-      unsigned n_node = nnode();
-
-      // Get the shape functions
-      shape(s, psi);
-
-      // Set the test functions to be the same as the shape functions
-      for (unsigned i = 0; i < n_node; i++)
-      {
-        test[i] = psi[i];
-      }
-
-      // Return the value of the jacobian
-      return J_eulerian(s);
-    }
-
-
-    /// Function to compute the shape and test functions and to return
-    /// the Jacobian of mapping between local and global (Eulerian)
-    /// coordinates
-    inline double shape_and_test_at_knot(const unsigned& ipt,
-                                         Shape& psi,
-                                         Shape& test) const
-    {
-      // Find number of nodes
-      unsigned n_node = nnode();
-
-      // Get the shape functions
-      shape_at_knot(ipt, psi);
-
-      // Set the test functions to be the same as the shape functions
-      for (unsigned i = 0; i < n_node; i++)
-      {
-        test[i] = psi[i];
-      }
-
-      // Return the value of the jacobian
-      return J_eulerian_at_knot(ipt);
-    }
-
-
-  private:
-    /// Add the element's contribution to its residual vector.
-    /// flag=1(or 0): do (or don't) compute the contribution to the
-    /// Jacobian as well.
-    void fill_in_generic_residual_contribution_fsi_no_slip_axisym(
-      Vector<double>& residuals,
-      DenseMatrix<double>& jacobian,
-      const unsigned& flag);
-
-    /// The spatial dimension of the problem
-    unsigned Dim;
-
-    /// The index at which the unknowns are stored at the nodes
-    Vector<unsigned> U_index_fsi_no_slip_axisym;
-
-    /// Lagrange Id
-    unsigned Id;
-
-    /// Pointer to fluid Strouhal number
-    double* St_pt;
-  };
-
-  /// ///////////////////////////////////////////////////////////////////
-  /// ///////////////////////////////////////////////////////////////////
-  /// ///////////////////////////////////////////////////////////////////
-
-
-  //===========================================================================
-  /// Constructor, takes the pointer to the "bulk" element, and the
-  /// face index that identifies the face of the bulk element to which
-  /// this face element is to be attached.
-  /// The optional identifier can be used
-  /// to distinguish the additional nodal values created by
-  /// this element from thos created by other FaceElements.
-  //===========================================================================
-  template<class FLUID_BULK_ELEMENT, class SOLID_BULK_ELEMENT>
-  LinearisedFSIAxisymmetricNStNoSlipBCElementElement<FLUID_BULK_ELEMENT,
-                                                     SOLID_BULK_ELEMENT>::
-    LinearisedFSIAxisymmetricNStNoSlipBCElementElement(
-      FiniteElement* const& bulk_el_pt,
-      const int& face_index,
-      const unsigned& id)
-    : FaceGeometry<FLUID_BULK_ELEMENT>(), FaceElement()
-  {
-    // Set source element storage: one interaction with an external element
-    // that provides the velocity of the adjacent linear elasticity
-    // element
-    this->set_ninteraction(1);
-
-    //  Store the ID of the FaceElement -- this is used to distinguish
-    // it from any others
-    Id = id;
-
-    // Initialise pointer to fluid Strouhal number. Defaults to 1
-    St_pt =
-      &LinearisedFSIAxisymmetricNStNoSlipBCHelper::Default_strouhal_number;
-
-    // Let the bulk element build the FaceElement, i.e. setup the pointers
-    // to its nodes (by referring to the appropriate nodes in the bulk
-    // element), etc.
-    bulk_el_pt->build_face_element(face_index, this);
-
-    // Extract the dimension of the problem from the dimension of
-    // the first node
-    Dim = this->node_pt(0)->ndim();
-
-    // Read the index from the (cast) bulk element.
-    U_index_fsi_no_slip_axisym.resize(3);
-    for (unsigned i = 0; i < 3; i++)
-    {
-      U_index_fsi_no_slip_axisym[i] =
-        dynamic_cast<FLUID_BULK_ELEMENT*>(bulk_el_pt)->u_index_axi_nst(i);
-    }
-
-    // We need Dim+1 additional values for each FaceElement node
-    // to store the Lagrange multipliers.
-    Vector<unsigned> n_additional_values(nnode(), Dim + 1);
-
-    // Now add storage for Lagrange multipliers and set the map containing
-    // the position of the first entry of this face element's
-    // additional values.
-    add_additional_values(n_additional_values, id);
-  }
-
-
-  //===========================================================================
-  /// Helper function to compute the element's residual vector and
-  /// the Jacobian matrix.
-  //===========================================================================
-  template<class FLUID_BULK_ELEMENT, class SOLID_BULK_ELEMENT>
-  void LinearisedFSIAxisymmetricNStNoSlipBCElementElement<FLUID_BULK_ELEMENT,
-                                                          SOLID_BULK_ELEMENT>::
-    fill_in_generic_residual_contribution_fsi_no_slip_axisym(
-      Vector<double>& residuals,
-      DenseMatrix<double>& jacobian,
-      const unsigned& flag)
-  {
-    // Find out how many nodes there are
-    const unsigned n_node = nnode();
-
-    // Set up memory for the shape and test functions
-    Shape psif(n_node), testf(n_node);
-
-    // Set the value of Nintpt
-    const unsigned n_intpt = integral_pt()->nweight();
-
-    // Set the Vector to hold local coordinates
-    Vector<double> s(Dim - 1);
-
-    // Cache the Strouhal number
-    const double local_st = st();
-
-    // Integers to hold the local equation and unknown numbers
-    int local_eqn = 0;
-
-    // Loop over the integration points
-    //--------------------------------
-    for (unsigned ipt = 0; ipt < n_intpt; ipt++)
-    {
-      // Assign values of s
-      for (unsigned i = 0; i < (Dim - 1); i++)
-      {
-        s[i] = integral_pt()->knot(ipt, i);
-      }
-
-      // Get the integral weight
-      double w = integral_pt()->weight(ipt);
-
-      // Find the shape and test functions and return the Jacobian
-      // of the mapping
-      double J = shape_and_test(s, psif, testf);
-
-      // Premultiply the weights and the Jacobian
-      double W = w * J;
-
-      // Calculate the Lagrange multiplier and the fluid veloc
-      Vector<double> lambda(Dim + 1, 0.0);
-      Vector<double> fluid_veloc(Dim + 1, 0.0);
-
-      // Loop over nodes
-      for (unsigned j = 0; j < n_node; j++)
-      {
-        Node* nod_pt = node_pt(j);
-
-        // Cast to a boundary node
-        BoundaryNodeBase* bnod_pt = dynamic_cast<BoundaryNodeBase*>(node_pt(j));
-
-        // Get the index of the first nodal value associated with
-        // this FaceElement
-        unsigned first_index =
-          bnod_pt->index_of_first_value_assigned_by_face_element(Id);
-
-        // Assemble
-        for (unsigned i = 0; i < Dim + 1; i++)
-        {
-          lambda[i] += nod_pt->value(first_index + i) * psif(j);
-          fluid_veloc[i] +=
-            nod_pt->value(U_index_fsi_no_slip_axisym[i]) * psif(j);
-        }
-      }
-
-      // Get velocity from adjacent solid
-      SOLID_BULK_ELEMENT* ext_el_pt =
-        dynamic_cast<SOLID_BULK_ELEMENT*>(external_element_pt(0, ipt));
-      Vector<double> s_ext(external_element_local_coord(0, ipt));
-      Vector<double> dudt(3);
-      ext_el_pt->interpolated_du_dt_axisymmetric_linear_elasticity(s_ext, dudt);
-
-
-      // Now add to the appropriate equations
-
-      // Loop over the test functions
-      for (unsigned l = 0; l < n_node; l++)
-      {
-        // Loop over directions
-        for (unsigned i = 0; i < Dim + 1; i++)
-        {
-          // Add contribution to bulk Navier Stokes equations where
-          //-------------------------------------------------------
-          // the Lagrange multiplier acts as a traction
-          //-------------------------------------------
-          local_eqn = nodal_local_eqn(l, U_index_fsi_no_slip_axisym[i]);
-
-          /*IF it's not a boundary condition*/
-          if (local_eqn >= 0)
-          {
-            // Add the Lagrange multiplier "traction" to the bulk
-            residuals[local_eqn] -= lambda[i] * testf[l] * W;
-
-
-            // Jacobian entries
-            if (flag)
-            {
-              // Loop over the lagrange multiplier unknowns
-              for (unsigned l2 = 0; l2 < n_node; l2++)
-              {
-                // Cast to a boundary node
-                BoundaryNodeBase* bnod_pt =
-                  dynamic_cast<BoundaryNodeBase*>(node_pt(l2));
-
-                // Local unknown
-                int local_unknown = nodal_local_eqn(
-                  l2,
-                  bnod_pt->index_of_first_value_assigned_by_face_element(Id) +
-                    i);
-
-                // If it's not pinned
-                if (local_unknown >= 0)
-                {
-                  jacobian(local_eqn, local_unknown) -= psif[l2] * testf[l] * W;
-                }
-              }
-            }
-          }
-
-          // Now do the Lagrange multiplier equations
-          //-----------------------------------------
-          // Cast to a boundary node
-          BoundaryNodeBase* bnod_pt =
-            dynamic_cast<BoundaryNodeBase*>(node_pt(l));
-
-          // Local eqn number:
-          int local_eqn = nodal_local_eqn(
-            l, bnod_pt->index_of_first_value_assigned_by_face_element(Id) + i);
-
-          // If it's not pinned
-          if (local_eqn >= 0)
-          {
-            residuals[local_eqn] +=
-              (local_st * dudt[i] - fluid_veloc[i]) * testf(l) * W;
-
-            // Jacobian entries
-            if (flag)
-            {
-              // Loop over the velocity unknowns [derivs w.r.t. to
-              // wall velocity taken care of by fd-ing
-              for (unsigned l2 = 0; l2 < n_node; l2++)
-              {
-                int local_unknown =
-                  nodal_local_eqn(l2, U_index_fsi_no_slip_axisym[i]);
-
-                /*IF it's not a boundary condition*/
-                if (local_unknown >= 0)
-                {
-                  jacobian(local_eqn, local_unknown) -= psif[l2] * testf[l] * W;
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
 
 } // namespace oomph
 

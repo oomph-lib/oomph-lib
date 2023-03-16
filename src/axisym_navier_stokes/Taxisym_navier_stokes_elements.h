@@ -178,6 +178,12 @@ namespace oomph
         ->set_value(p_dof, p_value);
     }
 
+    /// Free p_dof-th pressure dof
+    void free_pressure(const unsigned& p_dof)
+    {
+      this->internal_data_pt(P_axi_nst_internal_index)->unpin(p_dof);
+    }
+
     /// Build FaceElements that apply the Robin boundary condition
     /// to the pressure advection diffusion problem required by
     /// Fp preconditioner
@@ -704,11 +710,27 @@ namespace oomph
       return 3;
     }
 
+    /// Deduce whether or not the provided node is a pressure node
+    bool is_pressure_node(const unsigned& n) const
+    {
+      // The number of pressure nodes
+      unsigned n_p = npres_axi_nst();
+
+      // See if the value n is in the array Pconv
+      return std::find(this->Pconv, this->Pconv + n_p, n) != this->Pconv + n_p;
+    } // End of is_pressure_node
+
     /// Pin p_dof-th pressure dof and set it to value specified by p_value.
     void fix_pressure(const unsigned& p_dof, const double& p_value)
     {
       this->node_pt(Pconv[p_dof])->pin(3);
       this->node_pt(Pconv[p_dof])->set_value(3, p_value);
+    }
+
+    /// Pin p_dof-th pressure dof and set it to value specified by p_value.
+    void free_pressure(const unsigned& p_dof)
+    {
+      this->node_pt(Pconv[p_dof])->unpin(3);
     }
 
 

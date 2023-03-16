@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -31,32 +31,19 @@
 
 
 // OOMPH-LIB headers
-#include "axisym_fluid_traction_elements.h"
+#include "linearised_fsi_axisym_no_slip_bc_elements.h"
 
 namespace oomph
 {
   //=======================================================================
-  /// Namespace containing the zero traction function for axisymmetric
-  /// Navier Stokes traction elements
+  /// Namespace containing the default Strouhal number of axisymmetric
+  /// linearised FSI.
   //=======================================================================
-  namespace AxisymmetricNavierStokesTractionElementHelper
+  namespace LinearisedFSIAxisymmetricNStNoSlipBCHelper
   {
-    //=======================================================================
-    /// Default load function (zero traction)
-    //=======================================================================
-    void Zero_traction_fct(const double& time,
-                           const Vector<double>& x,
-                           const Vector<double>& N,
-                           Vector<double>& load)
-    {
-      unsigned n_dim = load.size();
-      for (unsigned i = 0; i < n_dim; i++)
-      {
-        load[i] = 0.0;
-      }
-    }
+    /// Default for fluid Strouhal number
+    double Default_strouhal_number = 1.0;
 
-  } // namespace AxisymmetricNavierStokesTractionElementHelper
-
+  } // namespace LinearisedFSIAxisymmetricNStNoSlipBCHelper
 
 } // namespace oomph
