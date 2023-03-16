@@ -715,7 +715,8 @@ namespace oomph
               else
               {
                 // Local equation number
-                local_eqn = this->nodal_local_eqn(l, this->momentum_index_nst(l, i));
+                local_eqn =
+                  this->nodal_local_eqn(l, this->momentum_index_nst(l, i));
 
                 // Node contributes with full weight
                 hang_weight = 1.0;

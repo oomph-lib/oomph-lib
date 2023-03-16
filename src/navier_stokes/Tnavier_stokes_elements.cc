@@ -72,7 +72,8 @@ namespace oomph
       // and indices to the vectors
       for (unsigned i = 0; i < DIM; i++)
       {
-        paired_load_data.insert(std::make_pair(node_pt(n), this->u_index_nst(n, i)));
+        paired_load_data.insert(
+          std::make_pair(node_pt(n), this->u_index_nst(n, i)));
       }
     }
 
