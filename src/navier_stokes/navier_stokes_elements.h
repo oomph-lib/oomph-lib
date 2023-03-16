@@ -369,7 +369,10 @@ namespace oomph
     /// the continuity equation.
     /// < 0 if pinned
     /// By default, returns the p_local_eqn(n)
-    virtual int continuity_local_eqn(const unsigned& n) const = 0;
+    virtual int continuity_local_eqn(const unsigned& n) const
+    {
+      return p_local_eqn(n);
+    }
   };
 
 

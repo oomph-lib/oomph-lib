@@ -171,7 +171,7 @@ namespace oomph
           // Assemble the velocity component
           for (unsigned i = 0; i < dim_el + 1; i++)
           {
-            interpolated_u[i] += nodal_value(j, u_index_nst(j, i)) * psi(j);
+            interpolated_u[i] += nodal_value(j, this->u_index_nst(j, i)) * psi(j);
           }
 
           // Cast to a boundary node
@@ -227,7 +227,7 @@ namespace oomph
                 {
                   // Local eqn number for the i-th component
                   // of the velocity in the jj-th element
-                  local_unknown = nodal_local_eqn(jj, u_index_nst(jj, i));
+                  local_unknown = nodal_local_eqn(jj, this->u_index_nst(jj, i));
                   if (local_unknown >= 0)
                   {
                     jacobian(local_eqn, local_unknown) +=
@@ -243,7 +243,7 @@ namespace oomph
           {
             // Local eqn number for the i-th component of the
             // velocity in the j-th element
-            local_eqn = nodal_local_eqn(j, momentum_index_nst(j, i));
+            local_eqn = nodal_local_eqn(j, this->momentum_index_nst(j, i));
 
             if (local_eqn >= 0)
             {
