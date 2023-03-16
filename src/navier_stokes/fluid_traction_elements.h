@@ -39,6 +39,7 @@
 // OOMPH-LIB headers
 #include "../generic/Qelements.h"
 #include "../generic/Telements.h"
+#include "navier_stokes_elements.h"
 
 namespace oomph
 {
@@ -51,7 +52,7 @@ namespace oomph
   //======================================================================
   template<class ELEMENT>
   class NavierStokesTractionElement : public virtual FaceGeometry<ELEMENT>,
-                                      public virtual FaceElement
+                                      public virtual NavierStokesFaceElement
   {
   private:
     /// Pointer to an imposed traction function
@@ -76,9 +77,10 @@ namespace oomph
     /// u_local_eqn(n,i) = local equation number or < 0 if pinned.
     /// The default is to asssume that n is the local node number
     /// and the i-th velocity component is the i-th unknown stored at the node.
+    /// NOTE: Change in naming convention in order to retain original API
     virtual inline int u_local_eqn(const unsigned& n, const unsigned& i)
     {
-      return nodal_local_eqn(n, i);
+      return nodal_local_eqn(n, momentum_index_nst(n, i));
     }
 
     /// Function to compute the shape and test functions and to return
@@ -102,10 +104,10 @@ namespace oomph
 
 
     /// Function to calculate the traction applied to the fluid
-    void get_traction(const double& time,
-                      const Vector<double>& x,
-                      const Vector<double>& n,
-                      Vector<double>& result)
+    virtual void get_traction(const double& time,
+                              const Vector<double>& x,
+                              const Vector<double>& n,
+                              Vector<double>& result)
     {
       // If the function pointer is zero return zero
       if (Traction_fct_pt == 0)
@@ -140,7 +142,7 @@ namespace oomph
       FiniteElement* const& element_pt,
       const int& face_index,
       const bool& called_from_refineable_constructor = false)
-      : FaceGeometry<ELEMENT>(), FaceElement()
+      : FaceGeometry<ELEMENT>(), NavierStokesFaceElement()
     {
       // Attach the geometrical information to the element. N.B. This function
       // also assigns nbulk_value from the required_nvalue of the bulk element
@@ -300,7 +302,7 @@ namespace oomph
         // Loop over the velocity components
         for (unsigned i = 0; i < Dim; i++)
         {
-          local_eqn = u_local_eqn(l, i);
+          local_eqn = nodal_local_eqn(l, momentum_index_nst(l, i));
           /*IF it's not a boundary condition*/
           if (local_eqn >= 0)
           {
@@ -398,14 +400,6 @@ namespace oomph
     refineable_fill_in_generic_residual_contribution_fluid_traction(
       Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag)
   {
-    // Get the indices at which the velocity components are stored
-    unsigned u_nodal_index[this->Dim];
-    for (unsigned i = 0; i < this->Dim; i++)
-    {
-      u_nodal_index[i] =
-        dynamic_cast<ELEMENT*>(this->bulk_element_pt())->u_index_nst(i);
-    }
-
     // Find out how many nodes there are
     unsigned n_node = nnode();
 
@@ -489,6 +483,14 @@ namespace oomph
         else
         {
           n_master = 1;
+        }
+
+        // Get the indices at which the velocity components are stored
+        unsigned u_nodal_index[this->local_dim];
+        for (unsigned i = 0; i < this->local_dim; i++)
+        {
+          u_nodal_index[i] =
+            dynamic_cast<ELEMENT*>(this->bulk_element_pt())->u_index_nst(l, i);
         }
 
         // Loop over the master nodes

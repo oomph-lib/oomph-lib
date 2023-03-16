@@ -352,8 +352,8 @@ namespace oomph
             x[1] = nod_pt->x(1);
             Vector<double> u(2);
             PressureAdvectionDiffusionValidation::wind_function(x, u);
-            nod_pt->set_value(el_pt->u_index_nst(0), u[0]);
-            nod_pt->set_value(el_pt->u_index_nst(1), u[1]);
+            nod_pt->set_value(el_pt->u_index_nst(j, 0), u[0]);
+            nod_pt->set_value(el_pt->u_index_nst(j, 1), u[1]);
           }
         }
       }

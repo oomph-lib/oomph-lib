@@ -120,7 +120,7 @@ namespace oomph
     void unpin_all_internal_pressure_dofs();
 
     /// Return the local equation numbers for the pressure values.
-    inline int p_local_eqn(const unsigned& n) const
+    virtual inline int p_local_eqn(const unsigned& n) const
     {
       return this->internal_local_eqn(P_nst_internal_index, n);
     }
@@ -181,6 +181,12 @@ namespace oomph
     {
       this->internal_data_pt(P_nst_internal_index)->pin(p_dof);
       this->internal_data_pt(P_nst_internal_index)->set_value(p_dof, p_value);
+    }
+
+    /// Free p_dof-th pressure dof.
+    void free_pressure(const unsigned& p_dof)
+    {
+      this->internal_data_pt(P_nst_internal_index)->unpin(p_dof);
     }
 
     /// Build FaceElements that apply the Robin boundary condition
@@ -836,8 +842,8 @@ namespace oomph
                            Shape& psi,
                            Shape& test) const;
 
-    /// Which nodal value represents the pressure?
-    unsigned p_index_nst()
+    /// Set the value at which the pressure is stored in the nodes
+    virtual unsigned p_index_nst() const
     {
       return DIM;
     }
@@ -849,25 +855,25 @@ namespace oomph
     /// Return the local equation numbers for the pressure values.
     inline int p_local_eqn(const unsigned& n) const
     {
-      return this->nodal_local_eqn(Pconv[n], DIM);
+      return this->nodal_local_eqn(Pconv[n], this->p_index_nst());
     }
 
     /// Access function for the pressure values at local pressure
     /// node n_p (const version)
     double p_nst(const unsigned& n_p) const
     {
-      return this->nodal_value(Pconv[n_p], DIM);
+      return this->nodal_value(Pconv[n_p], this->p_index_nst());
     }
 
     /// Access function for the pressure values at local pressure
     /// node n_p (const version)
     double p_nst(const unsigned& t, const unsigned& n_p) const
     {
-      return this->nodal_value(t, Pconv[n_p], DIM);
+      return this->nodal_value(t, Pconv[n_p], this->p_index_nst());
     }
 
     /// Set the value at which the pressure is stored in the nodes
-    int p_nodal_index_nst() const
+    virtual int p_nodal_index_nst() const
     {
       return static_cast<int>(DIM);
     }
@@ -875,13 +881,28 @@ namespace oomph
     /// Return number of pressure values
     unsigned npres_nst() const;
 
+    /// Deduce whether or not the provided node is a pressure node
+    bool is_pressure_node(const unsigned& n) const
+    {
+      // The number of pressure nodes
+      unsigned n_p = npres_nst();
+
+      // See if the value n is in the array Pconv
+      return std::find(this->Pconv, this->Pconv + n_p, n) != this->Pconv + n_p;
+    } // End of is_pressure_node
+
     /// Pin p_dof-th pressure dof and set it to value specified by p_value.
     void fix_pressure(const unsigned& p_dof, const double& p_value)
     {
-      this->node_pt(Pconv[p_dof])->pin(DIM);
-      this->node_pt(Pconv[p_dof])->set_value(DIM, p_value);
+      this->node_pt(Pconv[p_dof])->pin(this->p_index_nst());
+      this->node_pt(Pconv[p_dof])->set_value(this->p_index_nst(), p_value);
     }
 
+    /// Free p_dof-th pressure dof.
+    void free_pressure(const unsigned& p_dof)
+    {
+      this->node_pt(Pconv[p_dof])->unpin(this->p_index_nst());
+    }
 
     /// Build FaceElements that apply the Robin boundary condition
     /// to the pressure advection diffusion problem required by

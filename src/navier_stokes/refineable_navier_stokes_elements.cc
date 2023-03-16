@@ -71,13 +71,6 @@ namespace oomph
     // Local coordinates
     Vector<double> s(DIM);
 
-    // find the indices at which the local velocities are stored
-    Vector<unsigned> u_nodal_index(DIM);
-    for (unsigned i = 0; i < DIM; i++)
-    {
-      u_nodal_index[i] = this->u_index_nst(i);
-    }
-
     // Which nodal value represents the pressure? (Negative if pressure
     // is not based on nodal interpolation).
     int p_index = this->p_nodal_index_nst();
@@ -146,6 +139,13 @@ namespace oomph
         //----------------------------------------------------
         for (unsigned l = 0; l < n_node; l++)
         {
+          // find the indices at which the local velocities are stored
+          Vector<unsigned> u_nodal_index(DIM);
+          for (unsigned i = 0; i < DIM; i++)
+          {
+            u_nodal_index[i] = this->u_index_nst(l, i);
+          }
+
           // Local boolean to indicate whether the node is hanging
           bool is_node_hanging = node_pt(l)->is_hanging();
 
@@ -300,14 +300,6 @@ namespace oomph
     // Find out how many pressure dofs there are
     unsigned n_pres = this->npres_nst();
 
-    // Find the indices at which the local velocities are stored
-    unsigned u_nodal_index[DIM];
-    for (unsigned i = 0; i < DIM; i++)
-    {
-      u_nodal_index[i] = this->u_index_nst(i);
-    }
-
-
     // Which nodal value represents the pressure? (Negative if pressure
     // is not based on nodal interpolation).
     int p_index = this->p_nodal_index_nst();
@@ -403,6 +395,13 @@ namespace oomph
       // Loop over nodes
       for (unsigned l = 0; l < n_node; l++)
       {
+        // Find the indices at which the local velocities are stored
+        unsigned u_nodal_index[DIM];
+        for (unsigned i = 0; i < DIM; i++)
+        {
+          u_nodal_index[i] = this->u_index_nst(l, i);
+        }
+
         // Loop over directions
         for (unsigned i = 0; i < DIM; i++)
         {
@@ -590,12 +589,6 @@ namespace oomph
     // Find out how many pressure dofs there are
     unsigned n_pres = this->npres_nst();
 
-    // Get the indices at which the velocity components are stored
-    unsigned u_nodal_index[DIM];
-    for (unsigned i = 0; i < DIM; i++)
-    {
-      u_nodal_index[i] = this->u_index_nst(i);
-    }
 
     // Which nodal value represents the pressure? (Negative if pressure
     // is not based on nodal interpolation).
@@ -696,6 +689,13 @@ namespace oomph
       // Loop over nodes
       for (unsigned l = 0; l < n_node; l++)
       {
+        // Get the indices at which the velocity components are stored
+        unsigned u_nodal_index[DIM];
+        for (unsigned i = 0; i < DIM; i++)
+        {
+          u_nodal_index[i] = this->u_index_nst(l, i);
+        }
+
         // Loop over directions
         for (unsigned i = 0; i < DIM; i++)
         {
@@ -744,6 +744,13 @@ namespace oomph
       //----------------------------------------------------
       for (unsigned l = 0; l < n_node; l++)
       {
+        // Get the indices at which the velocity components are stored
+        unsigned u_nodal_index[DIM];
+        for (unsigned i = 0; i < DIM; i++)
+        {
+          u_nodal_index[i] = this->u_index_nst(l, i);
+        }
+
         // Local boolean to indicate whether the node is hanging
         bool is_node_hanging = node_pt(l)->is_hanging();
 
@@ -841,6 +848,12 @@ namespace oomph
                 // Loop over the velocity nodes for columns
                 for (unsigned l2 = 0; l2 < n_node; l2++)
                 {
+                  // Get the indices at which the velocity components are stored
+                  unsigned u_nodal_index[DIM];
+                  for (unsigned i = 0; i < DIM; i++)
+                  {
+                    u_nodal_index[i] = this->u_index_nst(l2, i);
+                  }
                   // Local boolean to indicate whether the node is hanging
                   bool is_node2_hanging = node_pt(l2)->is_hanging();
 
@@ -1060,6 +1073,12 @@ namespace oomph
               // Loop over the velocity nodes for columns
               for (unsigned l2 = 0; l2 < n_node; l2++)
               {
+                // Get the indices at which the velocity components are stored
+                unsigned u_nodal_index[DIM];
+                for (unsigned i = 0; i < DIM; i++)
+                {
+                  u_nodal_index[i] = this->u_index_nst(l2, i);
+                }
                 // Local boolean to indicate whether the node is hanging
                 bool is_node2_hanging = node_pt(l2)->is_hanging();
 
@@ -1144,13 +1163,6 @@ namespace oomph
 
     // Determine number of pressure dofs in element
     const unsigned n_pres = this->npres_nst();
-
-    // Find the indices at which the local velocities are stored
-    unsigned u_nodal_index[DIM];
-    for (unsigned i = 0; i < DIM; i++)
-    {
-      u_nodal_index[i] = this->u_index_nst(i);
-    }
 
     // Which nodal value represents the pressure? (Negative if pressure
     // is not based on nodal interpolation).
@@ -1247,6 +1259,14 @@ namespace oomph
       {
         element_has_node_with_aux_node_update_fct = true;
 
+
+        // Find the indices at which the local velocities are stored
+        unsigned u_nodal_index[DIM];
+        for (unsigned i = 0; i < DIM; i++)
+        {
+          u_nodal_index[i] = this->u_index_nst(q, i);
+        }
+
         // Current nodal velocity
         Vector<double> u_ref(DIM);
         for (unsigned i = 0; i < DIM; i++)
@@ -1332,6 +1352,13 @@ namespace oomph
       // Loop over nodes
       for (unsigned l = 0; l < n_node; l++)
       {
+        // Find the indices at which the local velocities are stored
+        unsigned u_nodal_index[DIM];
+        for (unsigned i = 0; i < DIM; i++)
+        {
+          u_nodal_index[i] = this->u_index_nst(l, i);
+        }
+
         // Loop over directions
         for (unsigned i = 0; i < DIM; i++)
         {
@@ -1377,6 +1404,13 @@ namespace oomph
               double aux = 0.0;
               for (unsigned j = 0; j < n_node; j++)
               {
+                // Find the indices at which the local velocities are stored
+                unsigned u_nodal_index[DIM];
+                for (unsigned i = 0; i < DIM; i++)
+                {
+                  u_nodal_index[i] = this->u_index_nst(j, i);
+                }
+
                 aux +=
                   nodal_value(j, u_nodal_index[i]) * d_dpsifdx_dX(p, q, j, k);
               }
@@ -1423,6 +1457,12 @@ namespace oomph
       // Loop over the test functions
       for (unsigned l = 0; l < n_node; l++)
       {
+        // Find the indices at which the local velocities are stored
+        unsigned u_nodal_index[DIM];
+        for (unsigned i = 0; i < DIM; i++)
+        {
+          u_nodal_index[i] = this->u_index_nst(l, i);
+        }
         // Local boolean to indicate whether the node is hanging
         bool is_node_hanging = node_pt(l)->is_hanging();
 

@@ -491,9 +491,6 @@ namespace oomph
       // Find values of shape function at the given local coordinate
       this->shape(s, psi);
 
-      // Find the index at which the velocity component is stored
-      const unsigned u_nodal_index = this->u_index_nst(i);
-
       // Storage for hang info pointer
       HangInfo* hang_info_pt = 0;
       // Storage for global equation
@@ -519,6 +516,10 @@ namespace oomph
         {
           n_master = 1;
         }
+
+
+        // Find the index at which the velocity component is stored
+        const unsigned u_nodal_index = this->u_index_nst(l, i);
 
         // Loop over the master nodes
         for (unsigned m = 0; m < n_master; m++)
@@ -553,6 +554,9 @@ namespace oomph
       // Loop over the local nodes and sum
       for (unsigned l = 0; l < n_node; l++)
       {
+        // Find the index at which the velocity component is stored
+        const unsigned u_nodal_index = this->u_index_nst(l, i);
+
         unsigned n_master = 1;
         double hang_weight = 1.0;
 
@@ -783,10 +787,10 @@ namespace oomph
       // Calculate velocities: values[0],...
       for (unsigned i = 0; i < DIM; i++)
       {
-        // Get the index at which the i-th velocity is stored
-        unsigned u_nodal_index = this->u_index_nst(i);
         for (unsigned l = 0; l < n_node; l++)
         {
+          // Get the index at which the i-th velocity is stored
+          unsigned u_nodal_index = this->u_index_nst(l, i);
           values[i] += this->nodal_value(t, l, u_nodal_index) * psif[l];
         }
       }
@@ -979,17 +983,16 @@ namespace oomph
     void identify_load_data(
       std::set<std::pair<Data*, unsigned>>& paired_load_data)
     {
-      // Get the nodal indices at which the velocities are stored
-      unsigned u_index[DIM];
-      for (unsigned i = 0; i < DIM; i++)
-      {
-        u_index[i] = this->u_index_nst(i);
-      }
-
       // Loop over the nodes
       unsigned n_node = this->nnode();
       for (unsigned n = 0; n < n_node; n++)
       {
+        // Get the nodal indices at which the velocities are stored
+        unsigned u_index[DIM];
+        for (unsigned i = 0; i < DIM; i++)
+        {
+          u_index[i] = this->u_index_nst(n, i);
+        }
         // Pointer to current node
         Node* nod_pt = this->node_pt(n);
 
@@ -1220,10 +1223,10 @@ namespace oomph
       // Calculate velocities: values[0],...
       for (unsigned i = 0; i < DIM; i++)
       {
-        // Get the nodal index at which the i-th velocity component is stored
-        unsigned u_nodal_index = this->u_index_nst(i);
         for (unsigned l = 0; l < n_node; l++)
         {
+          // Get the nodal index at which the i-th velocity component is stored
+          unsigned u_nodal_index = this->u_index_nst(l, i);
           values[i] += this->nodal_value(t, l, u_nodal_index) * psif[l];
         }
       }
@@ -1263,17 +1266,17 @@ namespace oomph
     void identify_load_data(
       std::set<std::pair<Data*, unsigned>>& paired_load_data)
     {
-      // Get the nodal indices at which the velocities are stored
-      unsigned u_index[DIM];
-      for (unsigned i = 0; i < DIM; i++)
-      {
-        u_index[i] = this->u_index_nst(i);
-      }
-
       // Loop over the nodes
       unsigned n_node = this->nnode();
       for (unsigned n = 0; n < n_node; n++)
       {
+        // Get the nodal indices at which the velocities are stored
+        unsigned u_index[DIM];
+        for (unsigned i = 0; i < DIM; i++)
+        {
+          u_index[i] = this->u_index_nst(n, i);
+        }
+
         // Pointer to current node
         Node* nod_pt = this->node_pt(n);
 
@@ -1548,10 +1551,10 @@ namespace oomph
       // Calculate velocities: values[0],...
       for (unsigned i = 0; i < DIM; i++)
       {
-        // Get the nodal index at which the i-th velocity component is stored
-        unsigned u_nodal_index = this->u_index_nst(i);
         for (unsigned l = 0; l < n_node; l++)
         {
+          // Get the nodal index at which the i-th velocity component is stored
+          unsigned u_nodal_index = this->u_index_nst(l, i);
           values[i] += this->nodal_value(t, l, u_nodal_index) * psif[l];
         }
       }

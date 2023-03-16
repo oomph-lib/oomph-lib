@@ -31,6 +31,11 @@
 #include <oomph-lib-config.h>
 #endif
 
+#include "../generic/nodes.h"
+#include "../generic/Vector.h"
+#include "../generic/elements.h"
+#include "navier_stokes_elements.h"
+
 namespace oomph
 {
   //========================================================================
@@ -42,7 +47,7 @@ namespace oomph
   //========================================================================
   template<class ELEMENT>
   class ImposeParallelOutflowElement : public virtual FaceGeometry<ELEMENT>,
-                                       public virtual FaceElement
+                                       public virtual NavierStokesFaceElement
   {
   private:
     /// pointer to imposed pressure -- if null then no pressure imposed.
@@ -60,7 +65,7 @@ namespace oomph
     ImposeParallelOutflowElement(FiniteElement* const& element_pt,
                                  const int& face_index,
                                  const unsigned& id = 0)
-      : FaceGeometry<ELEMENT>(), FaceElement()
+      : FaceGeometry<ELEMENT>(), NavierStokesFaceElement()
     {
       //  set the Id
       Id = id;
@@ -112,6 +117,19 @@ namespace oomph
       FiniteElement::output(outfile, nplot);
     }
 
+    // Fix lagrange multiplier to value
+    void fix_lagrange_multiplier(const unsigned& n,
+                                 const unsigned& direction,
+                                 const double& value)
+    {
+      BoundaryNodeBase* bnod_pt =
+        dynamic_cast<BoundaryNodeBase*>(this->node_pt(n));
+      unsigned first_index =
+        bnod_pt->index_of_first_value_assigned_by_face_element(Id);
+      this->node_pt(n)->pin(first_index + direction);
+      this->node_pt(n)->set_value(first_index + direction, value);
+    }
+
     /// The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default
@@ -161,14 +179,6 @@ namespace oomph
       // to store tangantial vectors
       Vector<Vector<double>> tang_vec(dim_el, Vector<double>(dim_el + 1));
 
-      // get the value at which the velocities are stored
-      Vector<unsigned> u_index(dim_el + 1);
-      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->bulk_element_pt());
-      for (unsigned i = 0; i < dim_el + 1; i++)
-      {
-        u_index[i] = el_pt->u_index_nst(i);
-      }
-
       // Loop over the integration points
       for (unsigned ipt = 0; ipt < n_intpt; ipt++)
       {
@@ -193,7 +203,7 @@ namespace oomph
           // Assemble the velocity component
           for (unsigned i = 0; i < dim_el + 1; i++)
           {
-            interpolated_u[i] += nodal_value(j, u_index[i]) * psi(j);
+            interpolated_u[i] += nodal_value(j, u_index_nst(j,i) * psi(j);
           }
 
           // Cast to a boundary node
@@ -254,7 +264,7 @@ namespace oomph
                   {
                     // Local eqn number for the i-th component
                     // of the velocity in the jj-th element
-                    local_unknown = nodal_local_eqn(jj, u_index[i]);
+                    local_unknown = nodal_local_eqn(jj, u_index_nst(jj, i));
                     if (local_unknown >= 0)
                     {
                       jacobian(local_eqn, local_unknown) +=
@@ -271,7 +281,7 @@ namespace oomph
           {
             // Local eqn number for the i-th component of the
             // velocity in the j-th element
-            local_eqn = nodal_local_eqn(j, u_index[i]);
+            local_eqn = nodal_local_eqn(j, momentum_index_nst(j, i));
 
             if (local_eqn >= 0)
             {
@@ -391,7 +401,10 @@ namespace oomph
           // the value is pinned, if it is not pinned, the local equation number
           // is required to get the global equation number.
           int local_eqn = Bulk_element_pt->nodal_local_eqn(
-            Bulk_node_number[node_i], velocity_i);
+            Bulk_node_number[node_i],
+            dynamic_cast<NavierStokesEquationNumberingElement*>(
+              this->Bulk_element_pt)
+              ->u_index_nst(Bulk_node_number[node_i], velocity_i));
 
           // Ignore pinned values.
           if (local_eqn >= 0)

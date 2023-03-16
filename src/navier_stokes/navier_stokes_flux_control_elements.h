@@ -34,7 +34,8 @@
 
 // OOMPH-LIB headers
 #include "../generic/nodes.h"
-#include "../navier_stokes/navier_stokes_surface_power_elements.h"
+#include "navier_stokes_surface_power_elements.h"
+#include "navier_stokes_face_elements.h"
 
 namespace oomph
 {
@@ -347,7 +348,8 @@ namespace oomph
   template<class ELEMENT>
   class NavierStokesFluxControlElement
     : public virtual TemplateFreeNavierStokesFluxControlElementBase,
-      public virtual NavierStokesSurfacePowerElement<ELEMENT>
+      public virtual NavierStokesSurfacePowerElement<ELEMENT>,
+      public virtual NavierStokesFaceElement
   {
   public:
     /// Constructor, which takes a "bulk" element and face index
@@ -355,7 +357,8 @@ namespace oomph
       FiniteElement* const& element_pt,
       const int& face_index,
       const bool& called_from_refineable_constructor = false)
-      : NavierStokesSurfacePowerElement<ELEMENT>(element_pt, face_index)
+      : NavierStokesSurfacePowerElement<ELEMENT>(element_pt, face_index),
+        NavierStokesFaceElement()
     {
 #ifdef PARANOID
       {
@@ -424,9 +427,10 @@ namespace oomph
     /// u_local_eqn(n,i) = local equation number or < 0 if pinned.
     /// The default is to asssume that n is the local node number
     /// and the i-th velocity component is the i-th unknown stored at the node.
+    /// NOTE: The change in naming convention to keep the API
     virtual inline int u_local_eqn(const unsigned& n, const unsigned& i)
     {
-      return this->nodal_local_eqn(n, i);
+      return this->nodal_local_eqn(n, momentum_index_nst(n, i));
     }
 
     /// Function to compute the shape and test functions and to return
@@ -614,14 +618,6 @@ namespace oomph
     void refineable_fill_in_generic_residual_contribution_fluid_traction(
       Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag)
     {
-      // Get the indices at which the velocity components are stored
-      unsigned u_nodal_index[this->Dim];
-      for (unsigned i = 0; i < this->Dim; i++)
-      {
-        u_nodal_index[i] =
-          dynamic_cast<ELEMENT*>(this->bulk_element_pt())->u_index_nst(i);
-      }
-
       // Pointer to hang info object
       HangInfo* hang_info_pt = 0;
 
@@ -675,6 +671,13 @@ namespace oomph
         //----------------------------------------------------
         for (unsigned l = 0; l < n_node; l++)
         {
+          // Get the indices at which the velocity components are stored
+          unsigned u_nodal_index[this->Dim];
+          for (unsigned i = 0; i < this->Dim; i++)
+          {
+            u_nodal_index[i] = this->u_index_nst(l, i);
+          }
+
           // Local boolean to indicate whether the node is hanging
           bool is_node_hanging = this->node_pt(l)->is_hanging();
 
@@ -712,7 +715,7 @@ namespace oomph
               else
               {
                 // Local equation number
-                local_eqn = this->nodal_local_eqn(l, u_nodal_index[i]);
+                local_eqn = this->nodal_local_eqn(l, this->momentum_index_nst(l, i));
 
                 // Node contributes with full weight
                 hang_weight = 1.0;

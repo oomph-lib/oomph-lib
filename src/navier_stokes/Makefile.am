@@ -18,6 +18,7 @@ incl_cc_files =
 # Define the headers
 headers =  \
 navier_stokes_elements.h  \
+navier_stokes_face_elements.h \
 fluid_traction_elements.h \
 refineable_navier_stokes_elements.h  \
 Tnavier_stokes_elements.h \
