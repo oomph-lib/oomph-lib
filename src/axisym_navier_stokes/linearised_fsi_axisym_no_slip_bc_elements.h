@@ -14,6 +14,17 @@
 
 namespace oomph
 {
+  //=======================================================================
+  /// Namespace containing the default Strouhal number of axisymmetric
+  /// linearised FSI.
+  //=======================================================================
+  namespace LinearisedFSIAxisymmetricNStNoSlipBCHelper
+  {
+    /// Default for fluid Strouhal number
+    double Default_strouhal_number = 1.0;
+
+  } // namespace LinearisedFSIAxisymmetricNStNoSlipBCHelper
+
   //======================================================================
   /// A class for elements that allow the imposition of the linearised
   /// FSI no slip condition from an adjacent linearly elastic axisymmetric
