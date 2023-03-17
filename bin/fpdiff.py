@@ -83,6 +83,7 @@ def fpdiff_helper(filename1,filename2,relative_error,small,
  # this line catches the error when an empty selftest gold data file is 
  # provided and will return a FAIL (e.g. wrong filename is passed for the selftest, etc.)
  if len(tmpfile1) == 0:
+  details_stream.write("\nWarning: gold data file %s is empty and will therefore be treated as a FAIL\n" % filename1)
   return 1
 
  #Find the number of lines in each file
