@@ -34,7 +34,7 @@
 #include "meshes/triangle_mesh.h"
 
 // Include definitions of faceted surfaces
-#include "tetmesh_faceted_surfaces.h"
+#include "demo_drivers/meshing/adaptive_tet_meshes/tetmesh_faceted_surfaces.h"
 
 // Include the definition of SphericalTetMeshFacetedSurface
 #include "spherical_tetmesh_faceted_surface.h"
