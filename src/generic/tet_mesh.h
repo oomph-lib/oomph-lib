@@ -448,7 +448,7 @@ namespace oomph
       std::set<TetMeshVertex*>::iterator iterator;
 
       // Get the offset, types and connectivity
-      for (auto individual_facet_pt : Facet_pt)
+      for (const auto& individual_facet_pt : Facet_pt)
       {
         // Get the type of the current facet
         n_vertices = individual_facet_pt->nvertex();
@@ -518,7 +518,7 @@ namespace oomph
               << std::endl;
 
       // Output the coordinates of every distinct vertex
-      for (auto vertex : vertices)
+      for (const auto& vertex : vertices)
       {
         outfile << vertex->x(0) << " " << vertex->x(1) << " " << vertex->x(2)
                 << std::endl;
@@ -534,7 +534,7 @@ namespace oomph
               << std::endl;
 
       // Output the connectivity
-      for (auto vertex_index : connectivity)
+      for (const auto& vertex_index : connectivity)
       {
         outfile << vertex_index << " ";
       }
@@ -550,7 +550,7 @@ namespace oomph
               << std::endl;
 
       // Output the offsets
-      for (auto offset : offsets)
+      for (const auto& offset : offsets)
       {
         outfile << offset << " ";
       }
@@ -566,7 +566,7 @@ namespace oomph
               << std::endl;
 
       // Output the types
-      for (auto type : types)
+      for (const auto& type : types)
       {
         outfile << type << " ";
       }
