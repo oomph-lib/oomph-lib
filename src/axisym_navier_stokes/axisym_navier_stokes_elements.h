@@ -37,11 +37,12 @@
 #include "../generic/Qelements.h"
 #include "../generic/fsi.h"
 #include "../generic/projection.h"
+#include "../navier_stokes/navier_stokes_elements.h"
 
 namespace oomph
 {
   class AxisymmetricNavierStokesEquationNumberingElement
-    : public virtual FiniteElement
+    : public virtual NavierStokesEquationNumberingElement
   {
   public:
     /// Velocity i at local node n. Uses suitably interpolated value
@@ -126,6 +127,21 @@ namespace oomph
     virtual inline int continuity_nodal_index_axi_nst(const unsigned& n) const
     {
       return p_nodal_index_axi_nst(n);
+    }
+
+    virtual int p_nodal_index_nst() const
+    {
+      return p_nodal_index_axi_nst();
+    }
+
+    virtual int p_nodal_index_nst(const unsigned& n) const
+    {
+      return p_nodal_index_axi_nst(n);
+    }
+
+    virtual inline int continuity_nodal_index_nst(const unsigned& n) const
+    {
+      return continuity_nodal_index_nst(n);
     }
 
     /// Access function for the local equation number information for
