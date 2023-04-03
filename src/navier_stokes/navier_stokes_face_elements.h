@@ -26,8 +26,6 @@ namespace oomph
   class NavierStokesFaceElement : public virtual FaceElement
   {
   public:
-    NavierStokesFaceElement() {}
-
     virtual inline unsigned u_index_nst(const unsigned& n,
                                         const unsigned& i) const
     {
