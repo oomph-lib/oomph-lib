@@ -46,7 +46,7 @@ namespace oomph
   //========================================================================
   template<class ELEMENT>
   class ImposeImpenetrabilityElement : public virtual FaceGeometry<ELEMENT>,
-                                       public virtual FaceElement
+                                       public virtual NavierStokesFaceElement
   {
   private:
     /// Lagrange Id
@@ -60,7 +60,7 @@ namespace oomph
     ImposeImpenetrabilityElement(FiniteElement* const& element_pt,
                                  const int& face_index,
                                  const unsigned& id = 0)
-      : FaceGeometry<ELEMENT>(), FaceElement()
+      : FaceGeometry<ELEMENT>(), NavierStokesFaceElement()
     {
       //  set the Id
       Id = id;
