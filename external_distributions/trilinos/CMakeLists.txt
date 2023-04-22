@@ -8,11 +8,11 @@ message(STATUS "Entered Trilinos subdirectory")
 # is defined then we'll look under there
 if(OOMPH_USE_TRILINOS_FROM)
   find_package(
-    Trilinos 13.5 REQUIRED
+    Trilinos 14.0.0 REQUIRED
     PATHS ${OOMPH_USE_TRILINOS_FROM}
     NO_DEFAULT_PATH)
 endif()
-find_package(Trilinos 13.5 QUIET)
+find_package(Trilinos 14.0.0 QUIET)
 
 # If we couldn't find a pre-installed version, lets build it ourselves
 if(Trilinos_FOUND)
@@ -71,7 +71,7 @@ else()
   FetchContent_Declare(
     Trilinos
     GIT_REPOSITORY https://github.com/trilinos/Trilinos.git
-    GIT_TAG 0270d8bd4cd3c62fb37a30535f78ee16b9c77574
+    GIT_TAG trilinos-release-14-0-0
     GIT_PROGRESS TRUE)
   # GIT_SHALLOW TRUE)
   FetchContent_MakeAvailable(Trilinos)
