@@ -41,47 +41,46 @@ using namespace oomph;
 //======================================================================
 namespace Global_Parameters
 {
- /// Amplitude of traction applied
- double Amplitude = 1.0;
+  /// Amplitude of traction applied
+  double Amplitude = 1.0;
 
- /// Specify problem to be solved (boundary conditons for finite or
- /// infinite domain).
- bool Finite=false;
+  /// Specify problem to be solved (boundary conditons for finite or
+  /// infinite domain).
+  bool Finite = false;
 
- /// Define Poisson coefficient Nu
- double Nu = 0.3;
+  /// Define Poisson coefficient Nu
+  double Nu = 0.3;
 
- /// Length of domain in x direction
- double Lx = 1.0;
+  /// Length of domain in x direction
+  double Lx = 1.0;
 
- /// Length of domain in y direction
- double Ly = 2.0;
+  /// Length of domain in y direction
+  double Ly = 2.0;
 
- /// The elasticity tensor
- IsotropicElasticityTensor E(Nu);
+  /// The elasticity tensor
+  IsotropicElasticityTensor E(Nu);
 
- /// The exact solution for infinite depth case
- void exact_solution(const Vector<double> &x,
-                     Vector<double> &u)
- {
-  u[0] = -Amplitude*cos(2.0*MathematicalConstants::Pi*x[0]/Lx)*
-	exp(2.0*MathematicalConstants::Pi*(x[1]-Ly))/
-        (2.0/(1.0+Nu)*MathematicalConstants::Pi);
-  u[1] = -Amplitude*sin(2.0*MathematicalConstants::Pi*x[0]/Lx)*
-	exp(2.0*MathematicalConstants::Pi*(x[1]-Ly))/
-        (2.0/(1.0+Nu)*MathematicalConstants::Pi);
- }
+  /// The exact solution for infinite depth case
+  void exact_solution(const Vector<double>& x, Vector<double>& u)
+  {
+    u[0] = -Amplitude * cos(2.0 * MathematicalConstants::Pi * x[0] / Lx) *
+           exp(2.0 * MathematicalConstants::Pi * (x[1] - Ly)) /
+           (2.0 / (1.0 + Nu) * MathematicalConstants::Pi);
+    u[1] = -Amplitude * sin(2.0 * MathematicalConstants::Pi * x[0] / Lx) *
+           exp(2.0 * MathematicalConstants::Pi * (x[1] - Ly)) /
+           (2.0 / (1.0 + Nu) * MathematicalConstants::Pi);
+  }
 
- /// The traction function
-void periodic_traction(const double &time,
-                       const Vector<double> &x,
-                       const Vector<double> &n,
-                       Vector<double> &result)
- {
-  result[0] = -Amplitude*cos(2.0*MathematicalConstants::Pi*x[0]/Lx);
-  result[1] = -Amplitude*sin(2.0*MathematicalConstants::Pi*x[0]/Lx);
- }
-} // end_of_namespace
+  /// The traction function
+  void periodic_traction(const double& time,
+                         const Vector<double>& x,
+                         const Vector<double>& n,
+                         Vector<double>& result)
+  {
+    result[0] = -Amplitude * cos(2.0 * MathematicalConstants::Pi * x[0] / Lx);
+    result[1] = -Amplitude * sin(2.0 * MathematicalConstants::Pi * x[0] / Lx);
+  }
+} // namespace Global_Parameters
 
 
 //===start_of_problem_class=============================================
@@ -91,31 +90,31 @@ template<class ELEMENT>
 class PeriodicLoadProblem : public Problem
 {
 public:
+  /// Constructor: Pass number of elements in x and y directions
+  /// and lengths
+  PeriodicLoadProblem(const unsigned& nx,
+                      const unsigned& ny,
+                      const double& lx,
+                      const double& ly);
 
- /// Constructor: Pass number of elements in x and y directions 
- /// and lengths
- PeriodicLoadProblem(const unsigned &nx, const unsigned &ny, 
-                     const double &lx, const double &ly);
+  /// Update before solve is empty
+  void actions_before_newton_solve() {}
 
- /// Update before solve is empty
- void actions_before_newton_solve() {}
+  /// Update after solve is empty
+  void actions_after_newton_solve() {}
 
- /// Update after solve is empty
- void actions_after_newton_solve() {}
-
- /// Doc the solution
- void doc_solution(DocInfo& doc_info);
+  /// Doc the solution
+  void doc_solution(DocInfo& doc_info);
 
 private:
+  /// Allocate traction elements on the top surface
+  void assign_traction_elements();
 
- /// Allocate traction elements on the top surface
- void assign_traction_elements();
- 
- /// Pointer to the bulk mesh
- Mesh* Bulk_mesh_pt;
+  /// Pointer to the bulk mesh
+  Mesh* Bulk_mesh_pt;
 
- /// Pointer to the mesh of traction elements
- Mesh* Surface_mesh_pt;
+  /// Pointer to the mesh of traction elements
+  Mesh* Surface_mesh_pt;
 
 }; // end_of_problem_class
 
@@ -125,92 +124,93 @@ private:
 /// directions and size of domain.
 //====================================================================
 template<class ELEMENT>
-PeriodicLoadProblem<ELEMENT>::PeriodicLoadProblem
-(const unsigned &nx, const unsigned &ny,
- const double &lx, const double& ly)
+PeriodicLoadProblem<ELEMENT>::PeriodicLoadProblem(const unsigned& nx,
+                                                  const unsigned& ny,
+                                                  const double& lx,
+                                                  const double& ly)
 {
- //Now create the mesh with periodic boundary conditions in x direction
- bool periodic_in_x=true;
- Bulk_mesh_pt = 
-  new RectangularQuadMesh<ELEMENT>(nx,ny,lx,ly,periodic_in_x);
+  // Now create the mesh with periodic boundary conditions in x direction
+  bool periodic_in_x = true;
+  Bulk_mesh_pt =
+    new RectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, periodic_in_x);
 
- //Create the surface mesh of traction elements
- Surface_mesh_pt=new Mesh;
- assign_traction_elements();
+  // Create the surface mesh of traction elements
+  Surface_mesh_pt = new Mesh;
+  assign_traction_elements();
 
- // Set the boundary conditions for this problem: All nodes are
- // free by default -- just pin & set the ones that have Dirichlet 
- // conditions here
- unsigned ibound=0;
- unsigned num_nod=Bulk_mesh_pt->nboundary_node(ibound);
- for (unsigned inod=0;inod<num_nod;inod++)
+  // Set the boundary conditions for this problem: All nodes are
+  // free by default -- just pin & set the ones that have Dirichlet
+  // conditions here
+  unsigned ibound = 0;
+  unsigned num_nod = Bulk_mesh_pt->nboundary_node(ibound);
+  for (unsigned inod = 0; inod < num_nod; inod++)
   {
-   // Get pointer to node
-   Node* nod_pt=Bulk_mesh_pt->boundary_node_pt(ibound,inod);
+    // Get pointer to node
+    Node* nod_pt = Bulk_mesh_pt->boundary_node_pt(ibound, inod);
 
-   // Pinned in x & y at the bottom and set value
-   nod_pt->pin(0);
-   nod_pt->pin(1);
+    // Pinned in x & y at the bottom and set value
+    nod_pt->pin(0);
+    nod_pt->pin(1);
 
-   // Check which boundary conditions to set and set them
-   if (Global_Parameters::Finite)
-     {
+    // Check which boundary conditions to set and set them
+    if (Global_Parameters::Finite)
+    {
       // Set the displacements to zero
-      nod_pt->set_value(0,0);
-      nod_pt->set_value(1,0);
-     }
-   else
-     {
+      nod_pt->set_value(0, 0);
+      nod_pt->set_value(1, 0);
+    }
+    else
+    {
       // Extract nodal coordinates from node:
       Vector<double> x(2);
-      x[0]=nod_pt->x(0);
-      x[1]=nod_pt->x(1);
+      x[0] = nod_pt->x(0);
+      x[1] = nod_pt->x(1);
 
       // Compute the value of the exact solution at the nodal point
       Vector<double> u(2);
-      Global_Parameters::exact_solution(x,u);
+      Global_Parameters::exact_solution(x, u);
 
       // Assign these values to the nodal values at this node
-      nod_pt->set_value(0,u[0]);
-      nod_pt->set_value(1,u[1]);
-     };
+      nod_pt->set_value(0, u[0]);
+      nod_pt->set_value(1, u[1]);
+    };
   } // end_loop_over_boundary_nodes
 
- // Complete the problem setup to make the elements fully functional
+  // Complete the problem setup to make the elements fully functional
 
- // Loop over the elements
- unsigned n_el = Bulk_mesh_pt->nelement();
- for(unsigned e=0;e<n_el;e++)
+  // Loop over the elements
+  unsigned n_el = Bulk_mesh_pt->nelement();
+  for (unsigned e = 0; e < n_el; e++)
   {
-   // Cast to a bulk element
-   ELEMENT *el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
+    // Cast to a bulk element
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
-   // Set the elasticity tensor
-   el_pt->elasticity_tensor_pt() = &Global_Parameters::E;
-  }// end loop over elements
+    // Set the elasticity tensor
+    el_pt->elasticity_tensor_pt() = &Global_Parameters::E;
+  } // end loop over elements
 
- // Loop over the traction elements
- unsigned n_traction =  Surface_mesh_pt->nelement();
- for(unsigned e=0;e<n_traction;e++)
+  // Loop over the traction elements
+  unsigned n_traction = Surface_mesh_pt->nelement();
+  for (unsigned e = 0; e < n_traction; e++)
   {
-   // Cast to a surface element
-   LinearElasticityTractionElement<ELEMENT> *el_pt = 
-    dynamic_cast<LinearElasticityTractionElement<ELEMENT>* >
-    (Surface_mesh_pt->element_pt(e));
-   
-   // Set the applied traction
-   el_pt->traction_fct_pt() = &Global_Parameters::periodic_traction;
-  }// end loop over traction elements
+    // Cast to a surface element
+    LinearElasticityTractionElement<ELEMENT>* el_pt =
+      dynamic_cast<LinearElasticityTractionElement<ELEMENT>*>(
+        Surface_mesh_pt->element_pt(e));
 
- // Add the submeshes to the problem
- add_sub_mesh(Bulk_mesh_pt);
- add_sub_mesh(Surface_mesh_pt);
+    // Set the applied traction
+    el_pt->traction_fct_pt() = &Global_Parameters::periodic_traction;
+  } // end loop over traction elements
 
- // Now build the global mesh
- build_global_mesh();
+  // Add the submeshes to the problem
+  add_sub_mesh(Bulk_mesh_pt);
+  add_sub_mesh(Surface_mesh_pt);
 
- // Assign equation numbers
- cout << assign_eqn_numbers() << " equations assigned" << std::endl; 
+  // Now build the global mesh
+  build_global_mesh();
+
+  // Assign equation numbers
+  cout << assign_eqn_numbers() << " equations assigned" << std::endl;
 } // end of constructor
 
 
@@ -220,24 +220,23 @@ PeriodicLoadProblem<ELEMENT>::PeriodicLoadProblem
 template<class ELEMENT>
 void PeriodicLoadProblem<ELEMENT>::assign_traction_elements()
 {
+  // How many bulk elements are next to boundary 2 (the top boundary)?
+  unsigned bound = 2;
+  unsigned n_neigh = Bulk_mesh_pt->nboundary_element(bound);
 
- // How many bulk elements are next to boundary 2 (the top boundary)?
- unsigned bound=2;
- unsigned n_neigh = Bulk_mesh_pt->nboundary_element(bound); 
- 
- // Now loop over bulk elements and create the face elements
- for(unsigned n=0;n<n_neigh;n++)
+  // Now loop over bulk elements and create the face elements
+  for (unsigned n = 0; n < n_neigh; n++)
   {
-   // Create the face element
-   FiniteElement *traction_element_pt 
-    = new LinearElasticityTractionElement<ELEMENT>
-    (Bulk_mesh_pt->boundary_element_pt(bound,n),
-     Bulk_mesh_pt->face_index_at_boundary(bound,n));
- 
-   // Add to mesh
-   Surface_mesh_pt->add_element_pt(traction_element_pt);
+    // Create the face element
+    FiniteElement* traction_element_pt =
+      new LinearElasticityTractionElement<ELEMENT>(
+        Bulk_mesh_pt->boundary_element_pt(bound, n),
+        Bulk_mesh_pt->face_index_at_boundary(bound, n));
+
+    // Add to mesh
+    Surface_mesh_pt->add_element_pt(traction_element_pt);
   }
- 
+
 } // end of assign_traction_elements
 
 //==start_of_doc_solution=================================================
@@ -245,70 +244,69 @@ void PeriodicLoadProblem<ELEMENT>::assign_traction_elements()
 //========================================================================
 template<class ELEMENT>
 void PeriodicLoadProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
-{ 
- ofstream some_file;
- char filename[100];
+{
+  ofstream some_file;
+  char filename[100];
 
- // Number of plot points
- unsigned npts=5; 
+  // Number of plot points
+  unsigned npts = 5;
 
- // Output solution 
- sprintf(filename,"%s/soln.dat",doc_info.directory().c_str());
- some_file.open(filename);
- Bulk_mesh_pt->output(some_file,npts);
- some_file.close();
+  // Output solution
+  sprintf(filename, "%s/soln.dat", doc_info.directory().c_str());
+  some_file.open(filename);
+  Bulk_mesh_pt->output(some_file, npts);
+  some_file.close();
 
- // Output exact solution 
- sprintf(filename,"%s/exact_soln.dat",doc_info.directory().c_str());
- some_file.open(filename);
- Bulk_mesh_pt->output_fct(some_file,npts,
-                          Global_Parameters::exact_solution); 
- some_file.close();
+  // Output exact solution
+  sprintf(filename, "%s/exact_soln.dat", doc_info.directory().c_str());
+  some_file.open(filename);
+  Bulk_mesh_pt->output_fct(some_file, npts, Global_Parameters::exact_solution);
+  some_file.close();
 
- // Doc error
- double error=0.0;
- double norm=0.0;
- sprintf(filename,"%s/error.dat",doc_info.directory().c_str());
- some_file.open(filename);
- Bulk_mesh_pt->compute_error(some_file,
-                             Global_Parameters::exact_solution, 
-                             error,norm);
- some_file.close();
+  // Doc error
+  double error = 0.0;
+  double norm = 0.0;
+  sprintf(filename, "%s/error.dat", doc_info.directory().c_str());
+  some_file.open(filename);
+  Bulk_mesh_pt->compute_error(
+    some_file, Global_Parameters::exact_solution, error, norm);
+  some_file.close();
 
-// Doc error norm:
- cout << "\nNorm of error    " << sqrt(error) << std::endl; 
- cout << "Norm of solution : " << sqrt(norm) << std::endl << std::endl;
- cout << std::endl;
+  // Doc error norm:
+  cout << "\nNorm of error    " << sqrt(error) << std::endl;
+  cout << "Norm of solution : " << sqrt(norm) << std::endl << std::endl;
+  cout << std::endl;
 
 
-} // end_of_doc_solution   
+} // end_of_doc_solution
 
 
 //===start_of_main======================================================
 /// Driver code for PeriodicLoad linearly elastic problem
 //======================================================================
-int main(int argc, char* argv[]) 
+int main(int argc, char* argv[])
 {
- // Number of elements in x-direction
- unsigned nx=5;
- 
- // Number of elements in y-direction (for (approximately) square elements)
- unsigned ny=unsigned(double(nx)*Global_Parameters::Ly/Global_Parameters::Lx);
- 
- // Set up doc info
- DocInfo doc_info;
- 
- // Set output directory
- doc_info.set_directory("RESLT");
- 
- // Set up problem
- PeriodicLoadProblem<QLinearElasticityElement<2,3> > 
-  problem(nx,ny,Global_Parameters::Lx, Global_Parameters::Ly);
- 
- // Solve
- problem.newton_solve();
- 
- // Output the solution
- problem.doc_solution(doc_info);
-  
+  // Number of elements in x-direction
+  unsigned nx = 5;
+
+  // Number of elements in y-direction (for (approximately) square elements)
+  unsigned ny =
+    unsigned(double(nx) * Global_Parameters::Ly / Global_Parameters::Lx);
+
+  // Set up doc info
+  DocInfo doc_info;
+
+  // Set output directory
+  doc_info.set_directory("RESLT");
+
+  // Set up problem
+  PeriodicLoadProblem<QLinearElasticityElement<2, 3>> problem(
+    nx, ny, Global_Parameters::Lx, Global_Parameters::Ly);
+
+  // Solve
+  problem.newton_solve();
+
+  // Output the solution
+  problem.doc_solution(doc_info);
+
 } // end_of_main

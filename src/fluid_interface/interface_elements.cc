@@ -469,7 +469,10 @@ namespace oomph
   /// added from the specific elements
   //========================================================================
   void FluidInterfaceElement::fill_in_generic_residual_contribution_interface(
-    Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag)
+    Vector<double>& residuals,
+    DenseMatrix<double>& jacobian,
+    DenseMatrix<double>& mass_matrix,
+    unsigned flag)
   {
     // Find out how many nodes there are
     unsigned n_node = this->nnode();
@@ -532,7 +535,7 @@ namespace oomph
       Vector<double> interpolated_x(n_dim, 0.0);
       Vector<double> interpolated_u(n_dim, 0.0);
       Vector<double> interpolated_dx_dt(n_dim, 0.0);
-      ;
+
       DenseMatrix<double> interpolated_t(el_dim, n_dim, 0.0);
 
       // Loop over the shape functions
@@ -652,6 +655,7 @@ namespace oomph
       // of the node update (e.g. Lagrange multpliers etc)
       add_additional_residual_contributions_interface(residuals,
                                                       jacobian,
+                                                      mass_matrix,
                                                       flag,
                                                       psif,
                                                       dpsifds,

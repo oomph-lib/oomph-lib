@@ -312,7 +312,7 @@ namespace oomph
       WC += nodal_value(l, u_nodal_index[2]) * psi[l];
       WS += nodal_value(l, u_nodal_index[3]) * psi[l];
       VC += nodal_value(l, u_nodal_index[4]) * psi[l];
-      VS += nodal_value(l, u_nodal_index[4]) * psi[l];
+      VS += nodal_value(l, u_nodal_index[5]) * psi[l];
 
       dUCdr += nodal_value(l, u_nodal_index[0]) * dpsidx(l, 0);
       dUSdr += nodal_value(l, u_nodal_index[1]) * dpsidx(l, 0);
@@ -1319,6 +1319,10 @@ namespace oomph
         // If it's not a boundary condition
         if (local_eqn >= 0)
         {
+          if (r < 1e-3)
+          {
+            std::cout << "WARNING" << std::endl;
+          }
           // Pressure gradient term
           residuals[local_eqn] -= k * interpolated_PS * testf_ * W;
 

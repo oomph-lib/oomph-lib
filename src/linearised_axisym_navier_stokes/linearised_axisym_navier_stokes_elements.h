@@ -134,6 +134,7 @@ namespace oomph
                                            Shape& psi,
                                            Shape& test) const = 0;
 
+  public:
     /// Calculate the velocity components of the base flow solution
     /// at a given time and Eulerian position
     virtual void get_base_flow_u(const double& time,
@@ -185,6 +186,7 @@ namespace oomph
       }
     }
 
+  protected:
     /// Compute the residuals for the Navier-Stokes equations;
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     virtual void fill_in_generic_residual_contribution_linearised_axi_nst(
@@ -302,6 +304,10 @@ namespace oomph
     /// Return the number of pressure degrees of freedom
     /// associated with a single pressure component in the element
     virtual unsigned npres_linearised_axi_nst() const = 0;
+
+    /// Return the number of velocity degrees of freedom
+    /// at each node in the element
+    virtual unsigned n_u_linearised_axi_nst() const = 0;
 
     /// Return the index at which the i-th unknown velocity
     /// component is stored. The default value, i, is appropriate for
@@ -598,6 +604,12 @@ namespace oomph
       return 3;
     }
 
+    /// Return number of velocity values at each node in the element
+    unsigned n_u_linearised_axi_nst() const
+    {
+      return 6;
+    }
+
     /// Fix both components of the internal pressure degrees
     /// of freedom p_dof to pvalue
     void fix_pressure(const unsigned& p_dof, const double& pvalue)
@@ -852,6 +864,12 @@ namespace oomph
     unsigned npres_linearised_axi_nst() const
     {
       return 4;
+    }
+
+    /// Return number of velocity values at each node in the element
+    unsigned n_u_linearised_axi_nst() const
+    {
+      return 6;
     }
 
     /// Fix both components of the pressure at local pressure

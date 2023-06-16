@@ -377,7 +377,10 @@ namespace oomph
     /// divergence information that is overloaded in each element
     /// i.e. axisymmetric, two- or three-dimensional.
     virtual void fill_in_generic_residual_contribution_interface(
-      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
+      unsigned flag);
 
     /// Compute the surface gradient and surface divergence
     /// operators given the shape functions, derivatives,
@@ -426,6 +429,7 @@ namespace oomph
     virtual void add_additional_residual_contributions_interface(
       Vector<double>& residuals,
       DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
       const unsigned& flag,
       const Shape& psif,
       const DShape& dpsifds,
@@ -465,7 +469,10 @@ namespace oomph
     {
       // Add the residual contributions
       fill_in_generic_residual_contribution_interface(
-        residuals, GeneralisedElement::Dummy_matrix, 0);
+        residuals,
+        GeneralisedElement::Dummy_matrix,
+        GeneralisedElement::Dummy_matrix,
+        0);
     }
 
 

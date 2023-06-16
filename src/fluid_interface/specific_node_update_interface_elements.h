@@ -281,7 +281,7 @@ namespace oomph
     {
       // Call the generic routine with the flag set to 1
       EQUATION_CLASS::fill_in_generic_residual_contribution_interface(
-        residuals, jacobian, 1);
+        residuals, jacobian, GeneralisedElement::Dummy_matrix, 1);
 
       // Call the generic routine to handle the shape derivatives
       this->fill_in_jacobian_from_geometric_data(jacobian);
@@ -293,6 +293,7 @@ namespace oomph
     void add_additional_residual_contributions_interface(
       Vector<double>& residuals,
       DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
       const unsigned& flag,
       const Shape& psif,
       const DShape& dpsifds,
@@ -307,6 +308,7 @@ namespace oomph
       EQUATION_CLASS::add_additional_residual_contributions_interface(
         residuals,
         jacobian,
+        mass_matrix,
         flag,
         psif,
         dpsifds,
@@ -827,11 +829,38 @@ namespace oomph
     }
 
     /// Return the lagrange multiplier at local node n
-    double& lagrange(const unsigned& n)
+    double lagrange(const unsigned& n)
     {
       return *this->node_pt(n)->value_pt(this->lagrange_index(n));
     }
 
+    double interpolated_lagrange_multiplier(const Vector<double>& s)
+    {
+      const unsigned n_node = this->nnode();
+      Shape psif(n_node);
+
+      this->shape(s, psif);
+
+      double interpolated_lagrange = 0.0;
+      for (unsigned l = 0; l < n_node; l++)
+      {
+        // Note same shape functions used for lagrange multiplier field
+        interpolated_lagrange += lagrange(l) * psif(l);
+      }
+
+      return interpolated_lagrange;
+    }
+
+    void fix_lagrange_multiplier(const unsigned& n, const double& value)
+    {
+      this->node_pt(n)->pin(this->lagrange_index(n));
+      this->node_pt(n)->set_value(this->lagrange_index(n), value);
+    }
+
+    void free_lagrange_multiplier(const unsigned& n)
+    {
+      this->node_pt(n)->unpin(this->lagrange_index(n));
+    }
 
     /// Fill in contribution to residuals and Jacobian
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
@@ -839,7 +868,21 @@ namespace oomph
     {
       // Call the generic routine with the flag set to 1
       EQUATION_CLASS::fill_in_generic_residual_contribution_interface(
-        residuals, jacobian, 1);
+        residuals, jacobian, GeneralisedElement::Dummy_matrix, 1);
+
+      // Call the generic finite difference routine for the solid variables
+      this->fill_in_jacobian_from_solid_position_by_fd(jacobian);
+    }
+
+    /// Fill in contribution to residuals and Jacobian
+    void fill_in_contribution_to_jacobian_and_mass_matrix(
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix)
+    {
+      // Call the generic routine with the flag set to 1
+      EQUATION_CLASS::fill_in_generic_residual_contribution_interface(
+        residuals, jacobian, mass_matrix, 2);
 
       // Call the generic finite difference routine for the solid variables
       this->fill_in_jacobian_from_solid_position_by_fd(jacobian);
@@ -854,7 +897,41 @@ namespace oomph
     /// Output the element
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
-      EQUATION_CLASS::output(outfile, n_plot);
+      const unsigned el_dim = this->dim();
+      const unsigned n_dim = this->nodal_dimension();
+      const unsigned n_velocity = this->U_index_interface.size();
+      const unsigned n_node = this->nnode();
+      // Set output Vector
+      Vector<double> s(el_dim);
+      Shape psif(n_node);
+
+      // Loop over plot points
+      unsigned num_plot_points = this->nplot_points(n_plot);
+      for (unsigned iplot = 0; iplot < num_plot_points; iplot++)
+      {
+        // Get local coordinates of pliot point
+        this->get_s_plot(iplot, n_plot, s);
+
+        this->shape_at_knot(iplot, psif);
+
+        double interpolated_lagrange = 0.0;
+        for (unsigned l = 0; l < n_node; l++)
+        {
+          // Note same shape functions used for lagrange multiplier field
+          interpolated_lagrange += lagrange(l) * psif(l);
+        }
+
+        // Output the x,y,u,v
+        for (unsigned i = 0; i < n_dim; i++)
+          outfile << this->interpolated_x(s, i) << ",";
+        for (unsigned i = 0; i < n_velocity; i++)
+          outfile << this->interpolated_u(s, i) << ",";
+
+        // Output a dummy pressure
+        outfile << 0.0 << ",";
+
+        outfile << interpolated_lagrange << std::endl;
+      }
     }
 
     /// Overload the C-style output function
@@ -877,6 +954,7 @@ namespace oomph
     void add_additional_residual_contributions_interface(
       Vector<double>& residuals,
       DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
       const unsigned& flag,
       const Shape& psif,
       const DShape& dpsifds,
@@ -891,6 +969,7 @@ namespace oomph
       EQUATION_CLASS::add_additional_residual_contributions_interface(
         residuals,
         jacobian,
+        mass_matrix,
         flag,
         psif,
         dpsifds,
@@ -907,6 +986,7 @@ namespace oomph
       // Read out the dimension of the node
       const unsigned nodal_dimension = this->nodal_dimension();
 
+      const double St = EQUATION_CLASS::st();
       double interpolated_lagrange = 0.0;
       for (unsigned l = 0; l < n_node; l++)
       {
@@ -949,13 +1029,41 @@ namespace oomph
             } // End of Jacobian calculation
           }
         }
-      } // End of loop over shape functions
+
+        // Kinematic BC
+        local_eqn = kinematic_local_eqn(l);
+        if (local_eqn >= 0)
+        {
+          // Add in the jacobian
+          if (flag == 2)
+          {
+            // Loop over shape functions
+            for (unsigned l2 = 0; l2 < n_node; l2++)
+            {
+              // Loop over the components
+              for (unsigned i2 = 0; i2 < nodal_dimension; i2++)
+              {
+                // Now using the same shape functions for the elastic
+                // equations, so we can stay in the loop
+                local_unknown = this->position_local_eqn(l2, 0, i2);
+                if (local_unknown >= 0)
+                {
+                  // Positive, due to the mass matrix being on the left-hand
+                  // side.
+                  mass_matrix(local_eqn, local_unknown) +=
+                    0.0 * St * psif(l2) * interpolated_n[i2] * psif(l) * J * W;
+                }
+              }
+            }
+          } // End of loop over shape functions
+        }
+      }
     }
 
 
     /// Create an "bounding" element (here actually a 2D line element
-    /// of type ElasticLineFluidInterfaceBoundingElement<ELEMENT> that allows
-    /// the application of a contact angle boundary condition on the
+    /// of type ElasticLineFluidInterfaceBoundingElement<ELEMENT> that
+    /// allows the application of a contact angle boundary condition on the
     /// the specified face.
     virtual FluidInterfaceBoundingElement* make_bounding_element(
       const int& face_index)
@@ -985,8 +1093,8 @@ namespace oomph
       for (unsigned n = 0; n < n_node_bounding; n++)
       {
         face_el_pt->nbulk_value(n) = face_el_pt->node_pt(n)->nvalue();
-        // At the moment the assumption is that it is stored at all nodes, but
-        // that is consistent with the assumption in this element
+        // At the moment the assumption is that it is stored at all nodes,
+        // but that is consistent with the assumption in this element
         local_lagrange_index[n] =
           this->Lagrange_index[face_el_pt->bulk_node_number(n)];
       }
@@ -1266,8 +1374,8 @@ namespace oomph
     }
   };
 
-  // Define the bounding element associated with the axsymmetric elastic fluid
-  // interface element
+  // Define the bounding element associated with the axsymmetric elastic
+  // fluid interface element
   template<class ELEMENT>
   class BoundingElementType<
     ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,

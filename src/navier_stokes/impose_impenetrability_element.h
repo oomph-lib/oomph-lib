@@ -119,6 +119,26 @@ namespace oomph
       return FaceElement::zeta_nodal(n, k, i);
     }
 
+    void fix_lagrange_multiplier(const unsigned& n, const double& value)
+    {
+      this->node_pt(n)->pin(this->lagrange_index(n));
+      this->node_pt(n)->set_value(this->lagrange_index(n), value);
+    }
+
+    void free_lagrange_multiplier(const unsigned& n)
+    {
+      this->node_pt(n)->unpin(this->lagrange_index(n));
+    }
+
+    /// Return the index at which the lagrange multiplier is
+    /// stored at the n-th node
+    unsigned lagrange_index(const unsigned& n)
+    {
+      // Cast to a boundary node
+      BoundaryNodeBase* bnod_pt = dynamic_cast<BoundaryNodeBase*>(node_pt(n));
+      return bnod_pt->index_of_first_value_assigned_by_face_element(Id);
+    }
+
   protected:
     /// Helper function to compute the residuals and, if flag==1, the
     /// Jacobian

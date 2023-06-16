@@ -44,7 +44,7 @@
 namespace Anasazi
 {
   // hierher Andrew get rid of this!
-  bool Use_temporary_code_for_andrew_legacy_version = false;
+  extern bool Use_temporary_code_for_andrew_legacy_version;
 
   //========================================================================
   /// Specialize the Anasazi traits class for the oomph-lib DoubleMultiVector.

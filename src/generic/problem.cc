@@ -9797,6 +9797,15 @@ namespace oomph
       double dparam = (arc_length_constraint_residual - uderiv_dot_y) /
                       (Parameter_derivative - uderiv_dot_z);
 
+      std::cout << "dparam: " << dparam << std::endl;
+      std::cout << "arc_length_constraint_residual: "
+                << arc_length_constraint_residual << std::endl;
+      std::cout << "uderiv_dot_y: " << uderiv_dot_y << std::endl;
+      std::cout << "Parameter_derivative: " << Parameter_derivative
+                << std::endl;
+      std::cout << "uderiv_dot_z: " << uderiv_dot_z << std::endl;
+      std::cout << std::endl;
+
       // Set the new value of the parameter
       *parameter_pt -= dparam;
 

@@ -25,3 +25,10 @@
 // LIC//====================================================================
 
 #include "trilinos_eigen_solver.h"
+
+
+namespace Anasazi
+{
+  // hierher Andrew get rid of this!
+  bool Use_temporary_code_for_andrew_legacy_version = false;
+} // namespace Anasazi
