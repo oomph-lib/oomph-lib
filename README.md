@@ -145,7 +145,7 @@ Windows          | No
 `oomph-lib` uses CMake and Ninja to build and install the project.
 Make sure you have sufficiently recent versions of these programms installed on your computer:
 
-*** _Puneet_: We should probably make this comprehensive and list all the other stuff we use (e.g. doxygen, mpi; all accompanied by the relevant apt-get commands). There's something on the webpage which should then be removed. Let's do this when we're done with the (automatic) istallation of "everything". BTW: Still not sure if the bulk of what's now described in this document shouldn't be moved to INSTALL.md. KEEPING THIS IN HERE AS REMINDER TO TIDY UP. ***
+*** _Puneet_: We should probably make this comprehensive and list all the other stuff we use (e.g. doxygen, mpi; all accompanied by the relevant apt-get commands). There's something on the webpage which should then be removed. Let's do this when we're done with the (automatic) installation of "everything". BTW: Still not sure if the bulk of what's now described in this document shouldn't be moved to INSTALL.md. KEEPING THIS IN HERE AS REMINDER TO TIDY UP. ***
 
 
 ### CMake
@@ -164,7 +164,7 @@ or
 brew install cmake
 ```
 
- If your package manager does not provide a recent enough version of CMake, you will need to build it from source. You can find instructions on how to do this [below](#Building-CMake) and on the [CMake website](https://cmake.org/install/).
+ If your package manager does not provide a sufficiently recent version of CMake, you will need to build it from source. You can find instructions on how to do this [below](#Building-CMake) and on the [CMake website](https://cmake.org/install/).
 
 ### Ninja
 
@@ -239,7 +239,7 @@ addition of the installation directory to the `PATH` from your `.bashrc` or `.zs
 
 ### Option 3: Installation with root privileges
 
-If you have root privileges on your computer, you can install `oomph-lib` in the standard location `/usr/local/`:
+If you have root privileges on your computer, you can install `oomph-lib` in the standard location `/usr/local/`: *** PUNEET: change flag to OOMPH_ENABLE_INSTALL_AS_SUPERUSER? ***
 
 ```bash
 # Configure; using a local build directory but prepare
@@ -333,7 +333,7 @@ It is also possible to test a single driver code (or rather all the demo drivers
 
 ```bash
 # Go to a specific sub-directory in demo_drivers
-cd demo_drivers/poisson/one_d_poisson/
+cd demo_drivers/poisson/one_d_poisson
 
 # Configure (specify directory in which tests will be run)
 cmake -G Ninja -B build
@@ -486,7 +486,7 @@ to your `.emacs` file will produce equivalent behaviour. You can now edit the so
 
 ## Linking a stand-alone project to `oomph-lib`
 
-Developing your own code in an existing demo driver directory is a quick-and-dirty way to get started, especially since you are most likely to start your work by modifying an existing driver code. However, long-term this is not a sensible solution. One slightly more attractive alternative is to create a new directory, just for your code, in the `demo_drivers` directory; described further below. This approach has the advantage of not interfering with existing `oomph-lib` driver codes and the associated test machinery. However, since your code isn't a demo driver it should live somewhere else.
+Developing your own code in an existing demo driver directory is a quick-and-dirty way to get started, especially since you are most likely to start your work by modifying an existing driver code. However, long-term this is not a sensible solution. One slightly more attractive alternative is to create a new directory, just for your code, in the `demo_drivers` directory. This approach (described further below) has the advantage of not interfering with existing `oomph-lib` driver codes and the associated test machinery. However, since your code isn't a demo driver it should live somewhere else.
 
 To illustrate how this is done, assume you have a stand-alone directory that contains the driver codes and any associated header or include files needed to build the executable. Here's an example of such a project (checked out directly from its own GitHub repository)
 
@@ -559,7 +559,7 @@ Note that this directory is completely unconnected to the `oomph-lib` directory.
 
 This is most easily done by using the `PATH` environment variable, as discussed [above](#option-2-specifying-a-custom-installation-location). Note that this is necessary even if `oomph-lib` is installed to its default installation directory, `install/`, in the `oomph-lib` root directory.
 
-It is also possible to specify the location of the install directory in the `CMakeLists.txt` file, or to provide hints where to search for it. Please read the [CMake documentation of the `find_package()` function](https://cmake.org/cmake/help/latest/command/find_package.html?highlight=find_package).
+It is also possible to specify the location of the install directory in the `CMakeLists.txt` file, or to provide hints where to search for it. See below for an example, or read the [CMake documentation of the `find_package()` function](https://cmake.org/cmake/help/latest/command/find_package.html?highlight=find_package) for full details.
 
 Anyway, assuming `oomph-lib` was installed to `/home/joe_user/oomph_lib_install` the driver code can now be built using
 
@@ -760,7 +760,7 @@ To ensure we enter the `my_one_d_poisson` directory, open `demo_drivers/poisson/
 set(SUBDIRS
   poisson_with_singularity
   one_d_poisson
-  my_one_d_poisson # <--- new line
+  my_one_d_poisson                   # <--- new line
   one_d_poisson_generic_only
   one_d_poisson_adapt
   one_d_poisson_hp_adapt
@@ -821,7 +821,7 @@ unsteady_heat_elements.h
 unsteady_heat_flux_elements.h
 ```
 
-Here's the `CMakeLists.txt` file:
+Here's the `CMakeLists.txt` file: *** PUNEET: What's that CMAKE_MESSAGE_INDENT thing all about? If it's visible it ought to be explained I've googled a bit and found this ranty thing: https://jeremimucha.com/2021/03/cmake-lists/ so understand what it does but not where the CMAKE_MESSAGE_INDENT is used or where we remove the space (assuming that we want some sort of increasing/decreasing indendentation). It seems as if we're only ever appending based on a find/grep through the sources ***
 
 ```bash
 # ------------------------------------------------------------------------------
@@ -1013,7 +1013,7 @@ g++ -DRANGE_CHECKING my_code.cc
 ```
 if GCC is used as the compiler.
 
-To ensure that such flags (in the form required by the underlying compiler) are provided when the source code is compiled, we provide CMake configuration options that have to be provided at the configure stage. This is done by using what are known as "cache variables" which act as global variables throughout the CMake-based build process. For instance, to enable range checking, set the cache variable `OOMPH_ENABLE_RANGE_CHECKING` to `ON` when configuring the project:
+To ensure that such flags (in the form required by the underlying compiler) are provided when the source code is compiled, we provide CMake configuration options which have to be provided at the configure stage. This is done by using what are known as "cache variables" which act as global variables throughout the CMake-based build process. For instance, to enable range checking, set the cache variable `OOMPH_ENABLE_RANGE_CHECKING` to `ON` when configuring the project:
 ```bash
 # Configure with range checking 
 cmake -G Ninja -B build -DOOMPH_ENABLE_RANGE_CHECKING=ON
@@ -1031,7 +1031,7 @@ CMake itself already provides a large number of such cache variables. By default
   * `OOMPH_ENABLE_RANGE_CHECKING` (default `OFF`), already discussed above.
   * `OOMPH_ENABLE_PARANOID` (default `OFF`) enables the compilation of built-in self-tests and diagnostics within `oomph-lib`'s source code via the C++ macro `PARANOID`. These tests are very useful during code development but, like range checking, add to the run time.
 - `oomph-lib`'s MPI-based parallel capabilities are enabled with:
-  * `OOMPH_ENABLE_MPI` (default `OFF`) not only provides the C++ macro `OOMPH_HAS_MPI` (to allow the copmpilation of MPI-related code in `oomph-lib`) but also ensures that the source code is compiled with a suitable MPI compiler. *** __Puneet__: THIS SEEMS (TOO) BLACK MAGIC TO ME; IN ANY CASE WE SHOULD PROBABLY EXPLAIN HERE HOW TO SPECIFY THE MPI COMPILERS MANUALLY; JUST IN CASE ***
+  * `OOMPH_ENABLE_MPI` (default `OFF`) not only provides the C++ macro `OOMPH_HAS_MPI` (to allow the compilation of MPI-related code in `oomph-lib`) but also ensures that the source code is compiled with a suitable MPI compiler. *** __Puneet__: THIS SEEMS (TOO) BLACK MAGIC TO ME; IN ANY CASE WE SHOULD PROBABLY EXPLAIN HERE HOW TO SPECIFY THE MPI COMPILERS MANUALLY; JUST IN CASE ***
 
 - `oomph-lib` uses a number of third-party libraries. Some of these are built by default, others are optional and their provision has to be requested at the configure stage. :
   * `OOMPH_WANT_MUMPS` (default `OFF`) requests that the parallel frontal solver MUMPS is built.
@@ -1071,13 +1071,17 @@ CMake itself already provides a large number of such cache variables. By default
 
 
 
-* Finally, there are a number of cache variables that are only of interest to `oomph-lib` developers and should be ignored. A full list of cache variables can be produced by ... *** PLACEHOLDER FOR UPDATED PROCEDURE FOR DETECTING ALL OOMPH-LIB VARIABLES ***
+* There are a number of cache variables that are only of interest to `oomph-lib` developers and should be ignored. A full list of cache variables can be produced by ... *** PLACEHOLDER FOR UPDATED PROCEDURE FOR DETECTING ALL OOMPH-LIB VARIABLES ***
+
+* Finally, compiler and associated options can be set with the following flags:
+***
+
 
 
 
 ### (ii) Configuring the build via the specification of CMake presets
 
-Specifying configuration flags from the command-line can be cumbersome, especially if you frequently switch between working with different debug versions (during code development) and release versions (for production runs). CMake provides a mechanism for combining common build options via so-called preset files, in which the relevant flags are encoded in json format. Basic configurations are provided in the file  `CMakePresets.json`; these can be used as the basis for derived, user-specific configurations that can be specified in a user-provided `CMakeUserPresets.json` file.
+Specifying configuration flags from the command-line can be cumbersome, especially if you frequently switch between working with different debug versions (during code development) and release versions (for production runs). CMake provides a mechanism for combining common build options via so-called preset files, in which the relevant flags are encoded in json format. Basic configurations are provided in the file  `CMakePresets.json`which is distributed with oomph-lib. These can be used as the basis for derived, user-specific configurations that can be specified in a user-provided `CMakeUserPresets.json` file.
 
 
   The generic `CMakePresets.json` file in the `oomph-lib` root directory defines the default configuration, `default`, which mimics that used when `oomph-lib` is built without any flags or specified presets, so configuring the library with
@@ -1107,12 +1111,13 @@ Specifying configuration flags from the command-line can be cumbersome, especial
 
    ```
 
+bla bla bla
    
 ```bash
 cmake --preset list
 ```
 
-We recommend that you can write your own `CMakeUserPresets.json` file. You can inherit your presets from the presets we provide in `CMakePresets.json`. For details on how to do this refer to the [CMake documentation](https://cmake.org/cmake/help/latest/manual/cmake-presets.7.html).
+ For details on how to do this refer to the [CMake documentation](https://cmake.org/cmake/help/latest/manual/cmake-presets.7.html).
 
 **Remark:** We recommend that you do not use the Ninja Multi-Config generator yet.
 
