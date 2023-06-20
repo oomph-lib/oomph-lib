@@ -1821,10 +1821,10 @@ namespace oomph
     // String identifying processor rank. If comm_pt is null (usually because
     // the mesh is not distributed) default to "0".
     std::string rank_string = "0";
-    if(comm_pt!=0)
-     {
+    if (comm_pt != 0)
+    {
       rank_string = comm_pt->my_rank();
-     }
+    }
     // Setup output files
     std::ofstream some_file, feflux_file;
     std::ostringstream filename;
@@ -1915,13 +1915,13 @@ namespace oomph
             feflux_file << fe_flux[i] << " ";
           }
           feflux_file << elemental_error[e] << " " << std::endl;
-	}
-	
-	// Write tecplot footer (e.g. FE connectivity)
-	// Do this for each element so the output is compatible with
-	// oomph-convert
-	el_pt->write_tecplot_zone_footer(some_file, nplot);
-	el_pt->write_tecplot_zone_footer(feflux_file, nplot);
+        }
+
+        // Write tecplot footer (e.g. FE connectivity)
+        // Do this for each element so the output is compatible with
+        // oomph-convert
+        el_pt->write_tecplot_zone_footer(some_file, nplot);
+        el_pt->write_tecplot_zone_footer(feflux_file, nplot);
       }
     }
 
