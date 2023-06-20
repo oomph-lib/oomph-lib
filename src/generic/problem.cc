@@ -11408,8 +11408,10 @@ namespace oomph
         double error = std::max(std::abs(global_temporal_error_norm()), 1e-12);
 
         // Calculate the scaling factor
-        dt_rescaling_factor = Adaptive_dt_safety_factor * std::pow(
-          (epsilon / error), (1.0 / (1.0 + time_stepper_pt()->order())));
+        dt_rescaling_factor =
+          Adaptive_dt_safety_factor *
+          std::pow((epsilon / error),
+                   (1.0 / (1.0 + time_stepper_pt()->order())));
 
         oomph_info << "Timestep scaling factor is  " << dt_rescaling_factor
                    << std::endl;
