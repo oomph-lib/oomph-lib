@@ -717,6 +717,12 @@ namespace oomph
     /// with a smaller dt).
     double DTSF_min_decrease;
 
+    /// Safety factor to ensure we are aiming for an error slightly below our
+    /// tolerance. Without this, dt may repeatedly undercorrect causing the
+    /// error to converge to the tolerance from above. (Note, this only makes
+    /// sense if it is less than 1.0)
+    double Adaptive_dt_safety_factor;
+    
     /// If  Minimum_dt_but_still_proceed positive, then dt will not be
     /// reduced below this value during adaptive timestepping and the
     /// computation will continue with this value, accepting the larger
@@ -1588,6 +1594,12 @@ namespace oomph
     double& maximum_dt()
     {
       return Maximum_dt;
+    }
+   
+    /// Access function to tje safety factor in adaptive timestepping
+    double& adaptive_dt_safety_factor()
+    {
+      return Adaptive_dt_safety_factor;
     }
 
     /// Access function to max Newton iterations before giving up.

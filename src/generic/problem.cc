@@ -106,6 +106,7 @@ namespace oomph
       Maximum_dt(1.0e12),
       DTSF_max_increase(4.0),
       DTSF_min_decrease(0.8),
+      Adaptive_dt_safety_factor(0.9),
       Minimum_dt_but_still_proceed(-1.0),
       Scale_arc_length(true),
       Desired_proportion_of_arc_length(0.5),
@@ -11406,8 +11407,8 @@ namespace oomph
         // but use absolute value just in case.
         double error = std::max(std::abs(global_temporal_error_norm()), 1e-12);
 
-        // Calculate the scaling  factor
-        dt_rescaling_factor = std::pow(
+        // Calculate the scaling factor
+        dt_rescaling_factor = Adaptive_dt_safety_factor * std::pow(
           (epsilon / error), (1.0 / (1.0 + time_stepper_pt()->order())));
 
         oomph_info << "Timestep scaling factor is  " << dt_rescaling_factor
