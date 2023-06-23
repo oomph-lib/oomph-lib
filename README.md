@@ -465,6 +465,13 @@ ninja my_code
 
 Now edit `my_code.cc` as you work your way through the exercises and rebuild the executable every time you change something using `ninja my_code`.
 
+
+Note that if the build is successful, ninja will run quietly and simply confirm that the executable has been built successfully. If an error occurs during the compilation, the error messages from the compiler will be displayed. If you want to see the full calling sequence to the compiler/linker (e.g. to check what compilation flags are specified, etc.) you can run ninja in verbose mode, like this:
+```bash
+# Build executable, show what's being done
+ninja --verbose my_code
+```
+
 _Note for emacs users:_
 
 If you're used to compiling from within emacs you've probably added something like this to your `.emacs` file:
