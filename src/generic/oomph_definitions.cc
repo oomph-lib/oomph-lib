@@ -212,6 +212,7 @@ namespace oomph
 
     // Copy message to stream in terminate helper in case the message
     // doesn't get caught and/or doesn/t make it to the destructor
+    std::cout << (*Exception_stringstream_pt).str() << std::endl;
     (*TerminateHelper::Exception_stringstream_pt)
       << (*Exception_stringstream_pt).str();
   }
