@@ -1051,7 +1051,7 @@ namespace oomph
                   // Positive, due to the mass matrix being on the left-hand
                   // side.
                   mass_matrix(local_eqn, local_unknown) +=
-                    0.0 * St * psif(l2) * interpolated_n[i2] * psif(l) * J * W;
+                    St * psif(l2) * interpolated_n[i2] * psif(l) * J * W;
                 }
               }
             }
@@ -1180,16 +1180,101 @@ namespace oomph
     {
     }
 
-    /// Overload the output function
-    void output(std::ostream& outfile)
-    {
-      FiniteElement::output(outfile);
-    }
-
     /// Output the element
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
       FluidInterfaceBoundingElement::output(outfile, n_plot);
+    }
+
+    /// Overload the output function
+    void output(std::ostream& outfile)
+    {
+      // Find the dimension of the problem
+      unsigned spatial_dim = this->nodal_dimension();
+
+      // Storage for the coordinate
+      Vector<double> x(spatial_dim);
+
+      // Dummy local coordinate, of size zero
+      Vector<double> s_local(0);
+
+      // Get the x coordinate
+      this->interpolated_x(s_local, x);
+
+      // Compute the contact angles
+      double imposed_contact_angle = 0.0;
+      double computed_contact_angle = 0.0;
+      calculate_contact_angle(imposed_contact_angle, computed_contact_angle);
+
+      // Output fields, x, y, alpha_input, alpha_output, lagrange_multiplier
+      for (unsigned i = 0; i < spatial_dim; i++)
+      {
+        outfile << x[i] << ",";
+      }
+      std::streamsize ss = outfile.precision();
+      outfile << std::fixed << std::setprecision(3);
+      outfile << imposed_contact_angle * 180 / MathematicalConstants::Pi << ",";
+      outfile << computed_contact_angle * 180 / MathematicalConstants::Pi;
+      outfile << std::endl;
+    }
+
+    void calculate_contact_angle(double& imposed_contact_angle,
+                                 double& computed_contact_angle)
+    {
+      // Let's get the info from the parent
+      FiniteElement* parent_pt = bulk_element_pt();
+
+      // Find the dimension of the problem
+      unsigned spatial_dim = this->nodal_dimension();
+
+      // Outer unit normal to the wall
+      Vector<double> wall_normal(spatial_dim);
+
+      // Outer unit normal to the free surface
+      Vector<double> unit_normal(spatial_dim);
+
+      // Storage for the coordinate
+      Vector<double> x(spatial_dim);
+
+      // Storage for the coordinate time derivative
+      Vector<double> dx_dt(spatial_dim);
+
+      // Get the unit normal to the wall
+      wall_unit_normal(x, wall_normal);
+
+      // Find the dimension of the parent
+      unsigned n_dim = parent_pt->dim();
+
+      // Dummy local coordinate, of size zero
+      Vector<double> s_local(0);
+
+      // Get the x coordinate
+      this->interpolated_x(s_local, x);
+
+      // Get the dx/dt of the coordinate
+      const unsigned t_deriv = 1;
+      this->interpolated_dxdt(s_local, t_deriv, dx_dt);
+
+      // Find the local coordinates in the parent
+      Vector<double> s_parent(n_dim);
+      this->get_local_coordinate_in_bulk(s_local, s_parent);
+
+      // Just get the outer unit normal
+      dynamic_cast<FaceElement*>(parent_pt)->outer_unit_normal(s_parent,
+                                                               unit_normal);
+
+      // Get imposed contact angle
+      imposed_contact_angle = *this->contact_angle_pt();
+
+      // Find the dot product of the two vectors
+      double dot = 0.0;
+      for (unsigned i = 0; i < spatial_dim; i++)
+      {
+        dot += unit_normal[i] * wall_normal[i];
+      }
+
+      // Compute contact angle
+      computed_contact_angle = acos(dot);
     }
 
     /// Overload the C-style output function
