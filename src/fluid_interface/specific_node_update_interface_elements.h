@@ -697,6 +697,17 @@ namespace oomph
       return this->nodal_local_eqn(n, this->lagrange_index(n));
     }
 
+    // void fix_lagrange_multiplier(const unsigned& n, const double& value)
+    //{
+    //  this->node_pt(n)->pin(this->lagrange_index(n));
+    //  this->node_pt(n)->set_value(this->lagrange_index(n), value);
+    //}
+
+    // void free_lagrange_multiplier(const unsigned& n)
+    //{
+    //  this->node_pt(n)->unpin(this->lagrange_index(n));
+    //}
+
     /// Hijacking the kinematic condition corresponds to hijacking the
     /// variables associated with the Lagrange multipliers that are assigned
     /// on construction of this element.
@@ -867,11 +878,18 @@ namespace oomph
                                           DenseMatrix<double>& jacobian)
     {
       // Call the generic routine with the flag set to 1
-      EQUATION_CLASS::fill_in_generic_residual_contribution_interface(
-        residuals, jacobian, GeneralisedElement::Dummy_matrix, 1);
+      // EQUATION_CLASS::fill_in_generic_residual_contribution_interface(
+      //  residuals, jacobian, GeneralisedElement::Dummy_matrix, 1);
+      SolidFiniteElement::fill_in_contribution_to_jacobian(residuals, jacobian);
 
       // Call the generic finite difference routine for the solid variables
-      this->fill_in_jacobian_from_solid_position_by_fd(jacobian);
+      // this->fill_in_jacobian_from_solid_position_by_fd(jacobian);
+
+      // Call generic FD routine for the external data
+      // this->fill_in_jacobian_from_external_by_fd(jacobian);
+
+      // Call the generic routine to handle the spine variables
+      // this->fill_in_jacobian_from_geometric_data(jacobian);
     }
 
     /// Fill in contribution to residuals and Jacobian
