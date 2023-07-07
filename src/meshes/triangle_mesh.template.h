@@ -832,7 +832,7 @@ namespace oomph
 
       // Cleanup but leave hole alone
       bool clear_hole_data = false;
-      //TriangleHelper::clear_triangulateio(triangle_in, clear_hole_data);
+      // TriangleHelper::clear_triangulateio(triangle_in, clear_hole_data);
 
       // Setup boundary coordinates for boundaries
       unsigned nb = nboundary();
@@ -2445,7 +2445,7 @@ namespace oomph
 
       // Cleanup but leave hole alone as it's still used
       bool clear_hole_data = false;
-      //TriangleHelper::clear_triangulateio(triangle_refine, clear_hole_data);
+      // TriangleHelper::clear_triangulateio(triangle_refine, clear_hole_data);
 
 #ifdef OOMPH_HAS_MPI
       // Before calling setup boundary coordinates check if the mesh
