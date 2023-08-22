@@ -194,7 +194,7 @@ namespace oomph
       // MINUS the dot product computed above
       if (local_eqn >= 0)
       {
-        residuals[local_eqn] = cos(contact_angle()) + dot;
+        residuals[local_eqn] = cos(contact_angle()) - dot;
       }
       // NOTE: The jacobian entries will be computed automatically
       // by finite differences.
@@ -411,7 +411,7 @@ namespace oomph
           // MINUS the dot product
           if (local_eqn >= 0)
           {
-            residuals[local_eqn] += (cos(contact_angle()) + dot) * psi(l) * W;
+            residuals[local_eqn] += (cos(contact_angle()) - dot) * psi(l) * W;
           }
           // NOTE: The jacobian entries will be computed automatically
           // by finite differences.
