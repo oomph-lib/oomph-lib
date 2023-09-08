@@ -24,5 +24,6 @@ linearised_axisym_navier_stokes \
 linearised_navier_stokes \
 generalised_newtonian_navier_stokes \
 generalised_newtonian_axisym_navier_stokes \
-space_time
+space_time \
+integral
 
