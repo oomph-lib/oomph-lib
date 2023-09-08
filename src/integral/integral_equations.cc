@@ -27,13 +27,11 @@
 
 namespace oomph
 {
-  template<unsigned DIM>
-  void IntegralEquations<DIM>::set_output_data_pt(Data* const& data_pt)
-  {
-    bool use_fd_for_jacobian = true;
-    this->add_external_data(data_pt, use_fd_for_jacobian);
-  }
-
+  //======================================================================
+  // Set the pointer for the output Data and integrand function.
+  // The integrand_fct_pt defaults to not set, which results in a volume
+  // integral.
+  //======================================================================
   template<unsigned DIM>
   void IntegralEquations<DIM>::setup_integrand(
     Data* const& output_data_pt,
@@ -45,19 +43,16 @@ namespace oomph
     Vector_integrand_fct_pt.push_back(integrand_fct_pt);
   }
 
+  //======================================================================
+  // Compute element residual Vector
+  // Generic to be able to reuse and extend easily.
+  //======================================================================
   template<unsigned DIM>
   void IntegralEquations<DIM>::fill_in_generic_residual_contribution(
     Vector<double>& residuals,
     DenseMatrix<double>& jacobian,
     const unsigned& flag)
   {
-    //  if (this->nexternal_data() != 1)
-    //  {
-    //    throw OomphLibError("Should only be one external data",
-    //                        OOMPH_CURRENT_FUNCTION,
-    //                        OOMPH_EXCEPTION_LOCATION);
-    //  }
-
     // Find out how many nodes there are
     const unsigned n_node = nnode();
 
@@ -99,18 +94,18 @@ namespace oomph
         }
       }
 
+      // Loop over the integrand functions
       const unsigned n_integrand = Vector_integrand_fct_pt.size();
       for (unsigned n = 0; n < n_integrand; n++)
       {
-        // Get source function
+        // Get integral function
         //-------------------
         double f;
         get_integrand(n, t, interpolated_x, f);
 
         // Assemble residuals and Jacobian
         //--------------------------------
-
-        unsigned i_value = 0;
+        const unsigned i_value = 0;
 
         // Get the local equation
         local_eqn = external_local_eqn(n, i_value);
@@ -118,13 +113,16 @@ namespace oomph
         // Loop over the test functions
         for (unsigned l = 0; l < n_node; l++)
         {
-          // Add body force/source term here
+          // Add weighted integrand.
           residuals[local_eqn] += f * psi(l) * W;
         }
       }
     }
   }
 
+  //======================================================================
+  // Output x and the value of the integrand for the element.
+  //======================================================================
   template<unsigned DIM>
   void IntegralEquations<DIM>::output(std::ostream& outfile,
                                       const unsigned& nplot)
@@ -151,6 +149,7 @@ namespace oomph
       for (unsigned i = 0; i < DIM; i++)
       {
         x[i] = interpolated_x(s, i);
+        // Output x
         outfile << x[i] << " ";
       }
 
@@ -159,7 +158,7 @@ namespace oomph
       {
         get_integrand(n, t, x, f);
 
-        // Integrand
+        // Output the integrand
         outfile << f << " ";
       }
 
@@ -171,6 +170,9 @@ namespace oomph
     write_tecplot_zone_footer(outfile, nplot);
   }
 
+  //======================================================================
+  // Override the FiniteElement output - Call the npoint version.
+  //======================================================================
   template<unsigned DIM>
   void IntegralEquations<DIM>::output(std::ostream& outfile)
   {
@@ -178,7 +180,10 @@ namespace oomph
     output(outfile, default_n_plot);
   }
 
-  /// Get flux: flux[i] = du/dx_i
+  //======================================================================
+  // Get the flux of the integrand: flux[i] = du/dx_i at local location s.
+  // Useful for the Z2 error estimator refinement
+  //======================================================================
   template<unsigned DIM>
   void IntegralEquations<DIM>::get_integral_flux(const Vector<double>& s,
                                                  Vector<double>& flux) const
@@ -218,18 +223,24 @@ namespace oomph
     }
   }
 
+  //======================================================================
+  // Get the value of the n-th integrand at time, t, and location x.
+  //======================================================================
   template<unsigned DIM>
   inline void IntegralEquations<DIM>::get_integrand(const unsigned& n,
                                                     const double& t,
                                                     const Vector<double>& x,
                                                     double& f) const
   {
+    // If the integrand pointer hasn't been set,...
     if (Vector_integrand_fct_pt[n] == 0)
     {
+      // ... assume we want to compute the volume,
       f = 1.0;
     }
     else
     {
+      // ... otherwise call the function.
       (*Vector_integrand_fct_pt[n])(t, x, f);
     }
   }
