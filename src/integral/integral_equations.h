@@ -94,7 +94,7 @@ namespace oomph
                                       double& f) const;
 
     // Get the flux of the integrand: flux[i] = du/dx_i at local location s.
-    // Useful for the Z2 error estimator refinement 
+    // Useful for the Z2 error estimator refinement
     void get_integral_flux(const Vector<double>& s, Vector<double>& flux) const;
 
     // Override the FiniteElement output
