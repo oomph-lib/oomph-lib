@@ -586,7 +586,7 @@ cmake -G Ninja -B build -DCMAKE_PREFIX_PATH=/home/joe_user/oomph_lib_install
 # oomph-lib installation to the find_package(...) call by replacing
 #   find_package(oomphlib CONFIG REQUIRED)
 # with
-#   find_package(oomphlib CONFIG REQUIRED PATHS "/home/joe_cool/oomph_lib_install_dir")
+#   find_package(oomphlib CONFIG REQUIRED PATH="/home/joe_cool/oomph_lib_install_dir")
 # then configure the project
 cmake -G Ninja -B build
 
