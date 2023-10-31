@@ -13,7 +13,7 @@
 # --------
 #   oomph_define_test_data(validata validate.sh my_extra_data_file.dat)
 #
-# NOTE: Arguments to TARGET_DEPENDENCIES must be already-defined executables
+# NOTE: Arguments to DEPENDS_ON must be already-defined executables
 # or targets (i.e. defined via add_executable() or oomph_add_executable()).
 # =============================================================================
 # cmake-format: on
@@ -47,13 +47,13 @@ function(oomph_define_test_data)
   # Flag used to control whether files are symlinked instead of copied; keeping
   # the option to copy files around just in case we need it later on (but I
   # doubt it)
-  set(SYMLINK_TEST_DATA_INSTEAD_OF_COPY TRUE)
+  set(SYMLINK_TEST_FILES_INSTEAD_OF_COPY TRUE)
 
   # Add each requirement to the copy target as a file-copy command or as a
   # directory-copy command. All of these commands will be executed when the
   # copy_<path-hash> target is called
   foreach(REQUIREMENT IN LISTS REQUIREMENTS_WITH_PATHS)
-    if(SYMLINK_TEST_DATA_INSTEAD_OF_COPY)
+    if(SYMLINK_TEST_FILES_INSTEAD_OF_COPY)
       add_custom_command(
         TARGET copy_${PATH_HASH}
         POST_BUILD

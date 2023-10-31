@@ -4,7 +4,7 @@ message(VERBOSE "Entered vmtk_fluid subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(vmtk_fluid C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
@@ -18,10 +18,15 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME navier_stokes.vmtk_fluid
-  TARGET_DEPENDENCIES vmtk_fluid
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES fluid_iliac.1.ele fluid_iliac.1.face fluid_iliac.1.node
-                 fluid_iliac.poly iliac.xda
+  DEPENDS_ON vmtk_fluid
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh
+             validata
+             fluid_iliac.1.ele
+             fluid_iliac.1.face
+             fluid_iliac.1.node
+             fluid_iliac.poly
+             iliac.xda
   LABELS navier_stokes vmtk_fluid)
 
 message(VERBOSE "Leaving vmtk_fluid subdirectory")

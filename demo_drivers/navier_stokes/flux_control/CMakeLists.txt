@@ -4,7 +4,7 @@ message(VERBOSE "Entered flux_control subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(flux_control C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
@@ -18,9 +18,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME navier_stokes.flux_control
-  TARGET_DEPENDENCIES flux_control
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON flux_control
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS navier_stokes flux_control)
 
 message(VERBOSE "Leaving flux_control subdirectory")

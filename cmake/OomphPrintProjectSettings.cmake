@@ -13,15 +13,27 @@
 
 # ------------------------------------------------------------------------------
 function(oomph_print_project_settings)
-  set(MARKER "⦿")
-  include(FeatureSummary)
-  message(NOTICE "")
-  message(NOTICE "************************************************************")
-  message(NOTICE "================================")
-  message(NOTICE "OOMPH-LIB CONFIGURATION OPTIONS:")
-  message(NOTICE "================================")
+  # Define the supported set of keywords
+  set(PREFIX ARG)
+  set(FLAGS ENABLE_PRINT_AFTER_INSTALL ENABLE_SAVE_TO_FILE)
+  set(SINGLE_VALUE_ARGS)
+  set(MULTI_VALUE_ARGS)
+  cmake_parse_arguments(PARSE_ARGV 0 ${PREFIX} "${FLAGS}"
+                        "${SINGLE_VALUE_ARGS}" "${MULTI_VALUE_ARGS}")
+
+  # Initialise
+  set(MARKER "⦿ ")
+  set(OOMPH_SETTINGS_MESSAGE "\n")
+
+  # Append configuration options
+  string(APPEND OOMPH_SETTINGS_MESSAGE
+         "************************************************************\n")
+  string(APPEND OOMPH_SETTINGS_MESSAGE "================================\n")
+  string(APPEND OOMPH_SETTINGS_MESSAGE "OOMPH-LIB CONFIGURATION OPTIONS:\n")
+  string(APPEND OOMPH_SETTINGS_MESSAGE "================================\n")
   foreach(OPTION IN LISTS OOMPH_CONFIG_VARS)
-    message(NOTICE "  ${MARKER} ${OPTION}: '${${OPTION}}'")
+    string(APPEND OOMPH_SETTINGS_MESSAGE
+           "  ${MARKER} ${OPTION}: '${${OPTION}}'\n")
   endforeach()
 
   # Get the list compile definitions
@@ -33,14 +45,30 @@ function(oomph_print_project_settings)
   list(SORT OOMPH_COMPILE_DEFINITIONS)
 
   # Now print the compile definitions
-  message(NOTICE "")
-  message(NOTICE "===============================")
-  message(NOTICE "OOMPH-LIB COMPILER DEFINITIONS:")
-  message(NOTICE "===============================")
+  string(APPEND OOMPH_SETTINGS_MESSAGE "\n")
+  string(APPEND OOMPH_SETTINGS_MESSAGE "===============================\n")
+  string(APPEND OOMPH_SETTINGS_MESSAGE "OOMPH-LIB COMPILER DEFINITIONS:\n")
+  string(APPEND OOMPH_SETTINGS_MESSAGE "===============================\n")
   foreach(DEFN ${OOMPH_COMPILE_DEFINITIONS})
-    message(NOTICE "  ${MARKER} ${DEFN}")
+    string(APPEND OOMPH_SETTINGS_MESSAGE "  ${MARKER} ${DEFN}\n")
   endforeach()
-  message(NOTICE "************************************************************")
-  message(NOTICE "")
+  string(APPEND OOMPH_SETTINGS_MESSAGE
+         "************************************************************\n")
+
+  # Print it
+  message(NOTICE "${OOMPH_SETTINGS_MESSAGE}")
+
+  # Log to file if needed
+  set(OUTPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/oomphlib-configuration.log")
+  if(${PREFIX}_ENABLE_SAVE_TO_FILE OR ${PREFIX}_ENABLE_PRINT_AFTER_INSTALL)
+    file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/oomphlib-configuration.log"
+         "${OOMPH_SETTINGS_MESSAGE}")
+  endif()
+
+  # Print during install step; oomph_print_project_settings(...) must be called
+  # at the end of the configuration step for this to get printed at the end
+  if(${PREFIX}_ENABLE_PRINT_AFTER_INSTALL)
+    install(CODE "execute_process(COMMAND cat \"${OUTPUT_FILE}\")")
+  endif()
 endfunction()
 # ------------------------------------------------------------------------------

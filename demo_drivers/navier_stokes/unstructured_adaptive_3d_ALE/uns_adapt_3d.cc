@@ -31,7 +31,11 @@
 #include "navier_stokes.h"
 
 // Get the mesh
+#ifdef OOMPH_HAS_NEW_TETGEN
+#include "oomph_tetgen_1.6.h"
+#else
 #include "oomph_tetgen.h"
+#endif
 #include "meshes/tetgen_mesh.h"
 #include "meshes/refineable_tetgen_mesh.h"
 

@@ -4,7 +4,7 @@ message(VERBOSE "Entered static_fish subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(static_fish C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
@@ -18,9 +18,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME solid.static_fish
-  TARGET_DEPENDENCIES static_fish
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON static_fish
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS solid static_fish)
 
 message(VERBOSE "Leaving static_fish subdirectory")

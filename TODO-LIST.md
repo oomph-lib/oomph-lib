@@ -2,15 +2,13 @@
 
 ## Requirements for minimum viable product
 
+### To patch
+
+* [ ] Patch Trilinos + MPI support
+* [ ] Can't reconfigure when third-party libraries are installed. Why?!
+
 ### Third party library support
 
-* Add build of:
-  * [ ] GMP
-  * [ ] MPFR
-* Add support for:
-  * [ ] MUMPS
-    * [ ] Do we need Scotch/METIS?
-    * [x] Sequential build
 * Patch support for libraries using oomph-lib-built BLAS/LAPACK:
   * Hypre and Trilinos rely on absolute paths to blas and lapack which doesn't work if they are built by oomph-lib...
   * [ ] Hypre
@@ -74,12 +72,14 @@
   * [ ] C++ side: Add a struct to generically handle the args for a pure C++ test
 * [ ] Replace current BLAS/LAPACK with OpenBLAS
   * Looks quite complex... Appears to contain optimised kernels for different operating systems...
-* [ ] Download CMake `oomph-lib` to a folder that has a space in the name
+  * Could possibly be done by adding it as a submodule?
+    * **Q:** Can we restrict it to a specific tag?
 * [ ] Fix MPI-enabled demo drivers that are broken on macOS
 * [ ] Update GitHub self-tests to only run after pushing .h, .c, .cc, CMakeLists.txt code (see e.g. [here](https://github.com/scivision/mumps/blob/v5.5.1.7/.github/workflows/ci.yml)).
 * [ ] Add option to build with `ccache` support
 * [ ] Add fmtlib/fmt(?)
 * [ ] Add `check_...()` calls to make sure the C/C++/Fortran/MPI compilers work
+* [ ] Download CMake `oomph-lib` to a folder that has a space in the name
 
 ### Documentation
 
@@ -119,13 +119,8 @@
 Include tasks here that likely need some collaboration with Matthias
 
 * [ ] Go through all new commits to the main repository in the last 1-2 years and make sure any changes in Makefiles have been reflected in their corresponding CMakeLists.txt file
-* [ ] Remove `INSTALL.md` (installation instructions in main `README.md`)
 * [ ] Possibly change `oomphlib` -> `oomph_lib`? (carefully(!) avoid changing headers/sources)
 * [ ] Discuss updating to C++17 (fresh start?)
-* [ ] Discuss option naming!! E.g. `WANT_` or `ENABLE_` etc.
-* [ ] Decide whether to keep `OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY` around
-  * Useful for quick debugging of build with demo drivers
-* [ ] Discuss required base presets in `CMakePresets.json`
 * [ ] Discuss distributing with `nlohmann/json`
 * [ ] Settle on how to handle versioning (e.g. should we define a `version.h`?)
 * [ ] Properly review to-do list and see if there's anything missing!
@@ -134,6 +129,19 @@ Include tasks here that likely need some collaboration with Matthias
 
 ## Finished
 
+* Add support for building and installing the following packages ourselves:
+  * [x] GMP
+  * [x] MPFR
+* Add support for:
+  * [x] MUMPS:
+    * [x] Parallel version
+    * [x] ~~Do we need Scotch/METIS?~~ **No**
+    * [x] Sequential build
+* [x] Decide whether to keep `OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY` around. **Removed**
+* [x] Discuss option naming. E.g. `WANT_` or `ENABLE_` etc.
+  * Useful for quick debugging of build with demo drivers
+* [x] Discuss required base presets in `CMakePresets.json`
+  * Being handled by MH
 * [x] ~~Ninja multi-config support:~~
   * [x] ~~Test it out (e.g. building, installing and uninstalling)~~
     * [x] ~~If broken, patch any issues~~
@@ -152,6 +160,7 @@ Include tasks here that likely need some collaboration with Matthias
   * Rupinder ran the meshing/adaptive_tet_meshes test
   * ~2m but OpenBLAS was 4s slower, so very little difference
 * [x] Implement Python script to automatically convert `Makefile.am`s in `private/`
+* [x] Remove `INSTALL.md` (installation instructions in main `README.md`)
 * [x] Add `self_test/` directory to CMake build
 * [x] Add support for M1 Macs
   * Specify `CMAKE_APPLE_SILICON_PROCESSOR=arm64`

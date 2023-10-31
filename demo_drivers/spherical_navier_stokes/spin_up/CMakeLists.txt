@@ -4,7 +4,7 @@ message(VERBOSE "Entered spin_up subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(spin_up C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
@@ -33,10 +33,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME spherical_navier_stokes.spin_up
-  TARGET_DEPENDENCIES refineable_spin_up refineable_spin_up_cyl spin_up
-                      spin_up_cyl
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON refineable_spin_up refineable_spin_up_cyl spin_up spin_up_cyl
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS spherical_navier_stokes spin_up)
 
 message(VERBOSE "Leaving spin_up subdirectory")

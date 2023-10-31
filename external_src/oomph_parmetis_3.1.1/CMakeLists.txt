@@ -85,7 +85,8 @@ oomph_library_config(
 # Silence the annoying warnings produced by this library
 include(OomphTargetSilenceWarnings)
 oomph_target_silence_warnings(
-  TARGET ${LIBNAME} C_COMPILE_FLAGS -Wno-implicit-function-declaration)
+  TARGET ${LIBNAME} C_COMPILE_FLAGS -Wno-implicit-function-declaration
+                                    -Wno-format-security)
 
 # ------------------------------------------------------------------------------
 # BOILERPLATE: Update variables in parent scope

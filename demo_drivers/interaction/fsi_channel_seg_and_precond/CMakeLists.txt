@@ -4,7 +4,7 @@ message(VERBOSE "Entered fsi_channel_seg_and_precond subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(fsi_channel_seg_and_precond C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
@@ -30,12 +30,17 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME interaction.fsi_channel_seg_and_precond
-  TARGET_DEPENDENCIES
-    fsi_collapsible_channel_precond_driver
-    fsi_collapsible_channel_segregated_driver simple_segregated_driver
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES steady_precond.bash steady_seg.bash steady_seg_paper.bash
-                 unsteady_precond.bash unsteady_seg.bash unsteady_seg_paper.bash
+  DEPENDS_ON fsi_collapsible_channel_precond_driver
+             fsi_collapsible_channel_segregated_driver simple_segregated_driver
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh
+             validata
+             steady_precond.bash
+             steady_seg.bash
+             steady_seg_paper.bash
+             unsteady_precond.bash
+             unsteady_seg.bash
+             unsteady_seg_paper.bash
   LABELS interaction fsi_channel_seg_and_precond)
 
 # This test needs more than the default allotted time to complete

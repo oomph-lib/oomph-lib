@@ -4,7 +4,7 @@ message(VERBOSE "Entered unstructured_adaptive_fsi subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(unstructured_adaptive_fsi C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
@@ -19,9 +19,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME interaction.unstructured_adaptive_fsi
-  TARGET_DEPENDENCIES unstructured_adaptive_2d_fsi
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON unstructured_adaptive_2d_fsi
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS interaction unstructured_adaptive_fsi adapt)
 
 message(VERBOSE "Leaving unstructured_adaptive_fsi subdirectory")

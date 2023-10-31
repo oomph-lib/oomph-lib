@@ -4,7 +4,7 @@ message(VERBOSE "Entered navier_stokes subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(navier_stokes C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../../install")
 endif()
 include(CTest)
@@ -23,9 +23,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME optimisation.navier_stokes
-  TARGET_DEPENDENCIES rayleigh_channel rayleigh_circular_driven_cavity_adapt
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON rayleigh_channel rayleigh_circular_driven_cavity_adapt
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS optimisation navier_stokes)
 
 message(VERBOSE "Leaving navier_stokes subdirectory")

@@ -83,6 +83,6 @@ endif()
 
 # Add a preprocessor definition and a CMake cache variable to indicate that MPI
 # is available and works (if oomph_check_mpi() ran)
-add_compile_definitions(OOMPH_HAS_MPI)
+oomph_add_cxx_compile_definitions(OOMPH_HAS_MPI)
 set(OOMPH_HAS_MPI TRUE CACHE INTERNAL "")
 # ------------------------------------------------------------------------------

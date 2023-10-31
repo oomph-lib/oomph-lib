@@ -47,6 +47,8 @@ project(
 # Specify the location of non-standard CMake modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/")
 
+# TODO: Will likely need to move to C++17 when Trilinos v14.0 is released...
+
 # Specify the C++ standard
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
@@ -73,8 +75,10 @@ find_package(Python3 REQUIRED)
 # cmake-format: off
 include(OomphCustomOptions)
 
+# CMake-only options; doesn't influence the build of oomph-lib
+option(OOMPH_PRINT_SETTINGS_AFTER_INSTALL "Display the oomph-lib settings at the end of the install step" OFF)
+
 # General options
-oomph_option(OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY "Build tests with library build" OFF)
 oomph_option(OOMPH_DONT_SILENCE_USELESS_WARNINGS "Display (harmless) warnings from external_src/ and src/ that are silenced" OFF)
 oomph_option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" OFF)
 oomph_option(OOMPH_ENABLE_PARANOID "Enable the PARANOID flag in Debug" OFF)
@@ -97,9 +101,6 @@ oomph_option(OOMPH_WANT_MUMPS "Use MUMPS library" OFF)
 oomph_option(OOMPH_WANT_TRILINOS "Use Trilinos library" OFF)
 oomph_option(OOMPH_WANT_NLOHMANN_JSON "Use the nlohmann JSON library" OFF)
 
-# Enable the use of code coverage flags so that coverage data can be collected
-oomph_option(OOMPH_ENABLE_CODE_COVERAGE "Enable collection of code coverage results" OFF)
-
 # Paths to packages that the user has installed themselves
 oomph_path_option(OOMPH_USE_MPI_FROM "Path to MPI installation" "${OOMPH_USE_MPI_FROM}")
 oomph_path_option(OOMPH_USE_GMSH_FROM "Path to 'gmsh' executable" "${OOMPH_USE_GMSH_FROM}")
@@ -115,6 +116,9 @@ oomph_path_option(OOMPH_USE_TRILINOS_FROM "Path to Trilinos installation" "${OOM
 
 # cmake-format: on
 # -------------------------[ PROCESS SELECTED OPTIONS ]-------------------------
+# Introduce oomph_add_cxx_compile_definitions(...) to add compile definitions to
+# C++ files only
+include(OomphAddCXXCompileDefinitions)
 
 # If OOMPH_USE_GMSH_FROM is the path to an executable, make sure it is a
 # program. If it's a directory, check that we can find 'gmsh' in the directory
@@ -145,14 +149,6 @@ if(OOMPH_USE_GMSH_FROM)
 
   # Notify user
   message(STATUS "Found 'gmsh' at: ${OOMPH_USE_GMSH_FROM}")
-endif()
-
-# The demo_driver self-tests use shell scripts and symbolic links, both of which
-# require a Unix-based system
-if(NOT UNIX)
-  set(OOMPH_ENABLE_CODE_COVERAGE OFF CACHE BOOL
-      "Enable collection of code coverage results" FORCE)
-  set(OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY OFF)
 endif()
 
 # Let CMake take care of the famous -fPIC flag
@@ -188,20 +184,20 @@ endif()
 
 # Enable flags
 if(OOMPH_ENABLE_PARANOID)
-  add_compile_definitions("$<$<CONFIG:DEBUG,>:PARANOID>")
+  oomph_add_cxx_compile_definitions($<$<CONFIG:DEBUG,>:PARANOID>)
 endif()
 if(OOMPH_ENABLE_RANGE_CHECKING)
-  add_compile_definitions("$<$<CONFIG:DEBUG,>:RANGE_CHECKING>")
+  oomph_add_cxx_compile_definitions($<$<CONFIG:DEBUG,>:RANGE_CHECKING>)
 endif()
 
 # If we're using up-to-date external sources/dists then make sure we have a
 # preprocessor definition to handle changes that need to be made from within
 # source files (e.g. API changes)
 if(OOMPH_TRANSITION_TO_VERSION_3)
-  add_compile_definitions(OOMPH_TRANSITION_TO_VERSION_3)
+  oomph_add_cxx_compile_definitions(OOMPH_TRANSITION_TO_VERSION_3)
 endif()
 if(OOMPH_USE_DEPRECATED_SUPERLU)
-  add_compile_definitions(OOMPH_USE_DEPRECATED_SUPERLU)
+  oomph_add_cxx_compile_definitions(OOMPH_USE_DEPRECATED_SUPERLU)
 endif()
 
 if(BLA_VENDOR
@@ -239,23 +235,6 @@ if(BLA_VENDOR
   endforeach()
 endif()
 
-if(OOMPH_ENABLE_CODE_COVERAGE)
-  # We can only get coverage for the library sources if the demo drivers are
-  # built with the library itself, which requires
-  # OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY to be enabled
-  if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
-    message(
-      WARNING
-        "Code coverage was requested which requires building the demo drivers with the library\n"
-        "but you have not enabled it. I'm going to enable it now.")
-    set(OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY ON CACHE BOOL
-        "Build tests with library build" FORCE)
-  endif()
-
-  include(OomphEnableCodeCoverage)
-  oomph_enable_code_coverage()
-endif()
-
 # --------------------------[ FIND REQUIRED HEADERS ]---------------------------
 
 include(OomphCheckForRequiredHeaders)
@@ -268,7 +247,7 @@ set(CMAKE_MACOSX_RPATH TRUE)
 
 set(OOMPH_ADD_CONFIG_H TRUE)
 if(OOMPH_ADD_CONFIG_H)
-  add_compile_definitions(HAVE_CONFIG_H)
+  oomph_add_cxx_compile_definitions(HAVE_CONFIG_H)
 endif()
 
 # ------------------------------[ BUILD LIBRARY ]-------------------------------
@@ -277,9 +256,9 @@ message(VERBOSE "<====== Starting oomph-lib library configuration ======>")
 
 # Process the oomph-lib directories containing the library files
 add_subdirectory(external_src)
-add_compile_definitions(${EXTERNAL_SRC_CXX_DEFINITIONS})
+oomph_add_cxx_compile_definitions(${EXTERNAL_SRC_CXX_DEFINITIONS})
 add_subdirectory(external_distributions)
-add_compile_definitions(${EXTERNAL_DIST_CXX_DEFINITIONS})
+oomph_add_cxx_compile_definitions(${EXTERNAL_DIST_CXX_DEFINITIONS})
 add_subdirectory(src)
 
 message(VERBOSE "<====== Finished oomph-lib library configuration ======>")
@@ -288,23 +267,6 @@ message(VERBOSE "<====== Finished oomph-lib library configuration ======>")
 
 # Now export the package so it can be found using find_package(...)
 include(OomphInstallLibrary)
-
-# ---------------------------------[ TESTING ]----------------------------------
-
-# Enable testing for the current directory and all child directories but ONLY
-# when this is the root project, i.e. it isn't being built as part of some
-# larger project hierarchy
-if(OOMPH_IS_MAIN_PROJECT AND OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
-  include(CTest)
-  include(OomphAddExecutable)
-  include(OomphAddTest)
-  include(OomphAddPureCppTest)
-  include(OomphDefineTestData)
-  include(OomphGetHashedTargetName)
-  add_subdirectory(demo_drivers)
-  # FIXME: Need to integrate self_test files into the self-test framework
-  # add_subdirectory(self_test)
-endif()
 
 # ---------[ CONFIGURE oomph-lib-config.h AND oomphlibUninstall.cmake ]---------
 
@@ -334,6 +296,10 @@ add_custom_target(
 # --------------------[ PRINT PROJECT-SPECIFIC SETTINGS ]-----------------------
 
 include(OomphPrintProjectSettings)
-oomph_print_project_settings()
+if(OOMPH_PRINT_SETTINGS_AFTER_INSTALL)
+  oomph_print_project_settings(ENABLE_PRINT_AFTER_INSTALL)
+else()
+  oomph_print_project_settings()
+endif()
 
 # ------------------------------------------------------------------------------

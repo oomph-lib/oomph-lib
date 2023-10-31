@@ -4,7 +4,7 @@ message(VERBOSE "Entered thermal_fibre subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(thermal_fibre C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
@@ -20,9 +20,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME multi_physics.thermal_fibre
-  TARGET_DEPENDENCIES thermal_fibre
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON thermal_fibre
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS multi_physics thermal_fibre)
 
 message(VERBOSE "Leaving thermal_fibre subdirectory")

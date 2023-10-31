@@ -4,7 +4,7 @@ message(VERBOSE "Entered two_d_mesh_dist subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(two_d_mesh_dist C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
@@ -18,9 +18,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME mpi.two_d_mesh_dist
-  TARGET_DEPENDENCIES two_d_mesh_dist
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
-  EXTRA_REQUIRES two_d_mesh_dist_partition.dat
+  DEPENDS_ON two_d_mesh_dist
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
+  TEST_FILES validate.sh validata two_d_mesh_dist_partition.dat
   LABELS mpi two_d_mesh)
 
 # Don't run this test alongside any other tests

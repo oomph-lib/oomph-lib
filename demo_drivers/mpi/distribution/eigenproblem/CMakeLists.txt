@@ -4,7 +4,7 @@ message(VERBOSE "Entered eigenproblem subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(eigenproblem C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../../install")
 endif()
 include(CTest)
@@ -21,9 +21,9 @@ endif()
 if(OOMPH_HAS_TRILINOS)
   oomph_add_test(
     TEST_NAME mpi.eigenproblem
-    TARGET_DEPENDENCIES harmonic
-    VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
-    EXTRA_REQUIRES
+    DEPENDS_ON harmonic
+    COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
+    TEST_FILES validate.sh validata
     LABELS mpi eigenproblem)
 
   # Don't run this test alongside any other tests

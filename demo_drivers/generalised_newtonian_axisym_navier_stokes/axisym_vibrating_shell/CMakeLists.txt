@@ -4,7 +4,7 @@ message(VERBOSE "Entered axisym_vibrating_shell subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(axisym_vibrating_shell C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
@@ -25,9 +25,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME generalised_newtonian_axisym_navier_stokes.axisym_vibrating_shell
-  TARGET_DEPENDENCIES axisym_vibrating_shell_non_newtonian
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON axisym_vibrating_shell_non_newtonian
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS generalised_newtonian_axisym_navier_stokes axisym_vibrating_shell)
 
 # This test needs more than the default allotted time to complete

@@ -4,7 +4,7 @@ message(VERBOSE "Entered basic_ode subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(basic_ode C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
@@ -18,9 +18,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME ode.basic_ode
-  TARGET_DEPENDENCIES basic_ode
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES zeros
+  DEPENDS_ON basic_ode
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh zeros
   LABELS ode basic_ode
   SILENCE_MISSING_VALIDATA_WARNING)
 

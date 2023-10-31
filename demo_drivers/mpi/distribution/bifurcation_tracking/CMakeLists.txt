@@ -4,7 +4,7 @@ message(VERBOSE "Entered bifurcation_tracking subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(bifurcation_tracking C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../../install")
 endif()
 include(CTest)
@@ -23,9 +23,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME mpi.bifurcation_tracking
-  TARGET_DEPENDENCIES pitchfork track_pitch
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
-  EXTRA_REQUIRES
+  DEPENDS_ON pitchfork track_pitch
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
+  TEST_FILES validate.sh validata
   LABELS mpi bifurcation_tracking)
 
 # Don't run this test alongside any other tests

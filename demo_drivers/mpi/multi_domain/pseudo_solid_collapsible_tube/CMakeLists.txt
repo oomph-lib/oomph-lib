@@ -4,7 +4,7 @@ message(VERBOSE "Entered pseudo_solid_collapsible_tube subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(pseudo_solid_collapsible_tube C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../../install")
 endif()
 include(CTest)
@@ -22,9 +22,10 @@ endif()
 if(OOMPH_HAS_HYPRE AND OOMPH_HAS_TRILINOS)
   oomph_add_test(
     TEST_NAME mpi.pseudo_solid_collapsible_tube
-    TARGET_DEPENDENCIES pseudo_solid_collapsible_tube
-    VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
-    EXTRA_REQUIRES pseudo_solid_collapsible_tube.mcr make_dummy_solid_solns.bash
+    DEPENDS_ON pseudo_solid_collapsible_tube
+    COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
+    TEST_FILES validate.sh validata pseudo_solid_collapsible_tube.mcr
+               make_dummy_solid_solns.bash
     LABELS mpi pseudo_solid_collapsible_tube)
 
   # Don't run this test alongside any other tests

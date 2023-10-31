@@ -4,7 +4,7 @@ message(VERBOSE "Entered fourier_decomposed_acoustic_fsi subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(fourier_decomposed_acoustic_fsi C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
@@ -35,11 +35,11 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME interaction.fourier_decomposed_acoustic_fsi
-  TARGET_DEPENDENCIES
-    adaptive_unstructured_fourier_decomposed_acoustic_fsi
-    fourier_decomposed_acoustic_fsi unstructured_fourier_decomposed_acoustic_fsi
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON adaptive_unstructured_fourier_decomposed_acoustic_fsi
+             fourier_decomposed_acoustic_fsi
+             unstructured_fourier_decomposed_acoustic_fsi
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS interaction fourier_decomposed_acoustic_fsi)
 
 message(VERBOSE "Leaving fourier_decomposed_acoustic_fsi subdirectory")

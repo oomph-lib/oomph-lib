@@ -4,7 +4,7 @@ message(VERBOSE "Entered fsi_channel_with_leaflet subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(fsi_channel_with_leaflet C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
@@ -19,9 +19,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME interaction.fsi_channel_with_leaflet
-  TARGET_DEPENDENCIES fsi_channel_with_leaflet
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON fsi_channel_with_leaflet
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS interaction fsi_channel_with_leaflet)
 
 message(VERBOSE "Leaving fsi_channel_with_leaflet subdirectory")

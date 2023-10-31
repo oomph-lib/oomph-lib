@@ -4,7 +4,7 @@ message(VERBOSE "Entered marangoni_convection subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(marangoni_convection C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
@@ -27,9 +27,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME multi_physics.marangoni_convection
-  TARGET_DEPENDENCIES marangoni_convection marangoni_convection_box
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON marangoni_convection marangoni_convection_box
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS multi_physics marangoni_convection)
 
 message(VERBOSE "Leaving marangoni_convection subdirectory")

@@ -4,7 +4,7 @@ message(VERBOSE "Entered thermo subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(thermo C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
@@ -19,9 +19,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME multi_physics.thermo
-  TARGET_DEPENDENCIES thermo
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON thermo
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS multi_physics thermo)
 
 message(VERBOSE "Leaving thermo subdirectory")

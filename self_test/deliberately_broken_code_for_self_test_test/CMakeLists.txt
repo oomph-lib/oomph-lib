@@ -5,7 +5,7 @@ message(VERBOSE
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(deliberately_broken_code_for_self_test_test C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../install")
 endif()
 include(CTest)
@@ -29,8 +29,9 @@ set_target_properties(
 # and validata/ stuff over to the build directory when we run the tests
 oomph_add_test(
   TEST_NAME deliberately_broken_code_for_self_test_test.code_with_warning
-  TARGET_DEPENDENCIES code_with_warning
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
+  DEPENDS_ON code_with_warning
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS deliberately_broken_code_for_self_test_test code_with_warning)
 
 # Just try to build the driver code

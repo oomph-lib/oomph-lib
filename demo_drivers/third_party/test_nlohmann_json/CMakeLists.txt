@@ -4,8 +4,7 @@ message(VERBOSE "Entered test_nlohmann_json subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(test_nlohmann_json C CXX Fortran)
-
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
@@ -19,9 +18,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME third_party.test_nlohmann_json
-  TARGET_DEPENDENCIES test_nlohmann_json
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON test_nlohmann_json
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh
   LABELS third_party test_nlohmann_json
   SILENCE_MISSING_VALIDATA_WARNING)
 

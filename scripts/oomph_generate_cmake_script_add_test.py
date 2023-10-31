@@ -69,20 +69,20 @@ def create_test_string(project_name: str,
     """
     test_string = f"oomph_add_test(\n"
     test_string += f"  TEST_NAME {equations_type}.{project_name}\n"
-    test_string += f"  TARGET_DEPENDENCIES {' '.join(executables)}\n"
-    test_string += f"  EXTRA_REQUIRES\n"
-    test_string += f"  LABELS \"{equations_type};{project_name}"
+    test_string += f"  DEPENDS_ON {' '.join(executables)}\n"
+    test_string += f"  TEST_FILES validate.sh validata\n"
+    test_string += f"  LABELS {equations_type} {project_name}"
 
     # Add any additional labels we might want
     if "one_d_" in project_name:
-        test_string += f";one_d_{project_name}"
+        test_string += f" one_d_{project_name}"
     if "two_d_" in project_name:
-        test_string += f";two_d_{project_name}"
+        test_string += f" two_d_{project_name}"
     if "three_d_" in project_name:
-        test_string += f";three_d_{project_name}"
+        test_string += f" three_d_{project_name}"
     if "adapt" in project_name:
-        test_string += f";adapt"
-    test_string += "\")\n\n"
+        test_string += f" adapt"
+    test_string += ")\n\n"
 
     return test_string
 
@@ -137,9 +137,9 @@ def create_cmake_script_with_test(cmake_script_path: str) -> str:
 
     oomph_add_test(
         TEST_NAME one_d_poisson
-        TARGET_DEPENDENCIES one_d_poisson
-        EXTRA_REQUIRES
-        LABELS "poisson;one_d_poisson")
+        DEPENDS_ON one_d_poisson
+        TEST_FILES validate.sh validata
+        LABELS poisson one_d_poisson)
     """
 
     project_name = os.path.basename(cmake_script_path)

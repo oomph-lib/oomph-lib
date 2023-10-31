@@ -4,7 +4,7 @@ message(VERBOSE "Entered block_selector_test subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(block_selector_test C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
@@ -18,9 +18,10 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME generic.block_selector_test
-  TARGET_DEPENDENCIES block_selector_test
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES compare_block_selector_nonnull_replacement_block_pt.sh
+  DEPENDS_ON block_selector_test
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
+             compare_block_selector_nonnull_replacement_block_pt.sh
   LABELS block_selector_test)
 
 message(VERBOSE "Leaving block_selector_test subdirectory")

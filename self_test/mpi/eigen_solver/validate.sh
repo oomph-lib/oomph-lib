@@ -15,34 +15,39 @@ mkdir Validation
 cd Validation
 
 # Validation for eigensolver test
-#-----------------------------------------
-echo "Running eigensolver validation "
-mkdir RESLT_anasazi
-cp ../random_test_matrix.dat .
-mpirun -n 1 ../eigen_solver_test > OUTPUT
-echo "done"
-echo " " >> validation.log
-echo "Eigensolver validation" >> validation.log
-echo "--------------------------" >> validation.log
-echo " " >> validation.log
-echo "Validation directory: " >> validation.log
-echo " " >> validation.log
-echo "  " `pwd` >> validation.log
-echo " " >> validation.log
-cat RESLT_anasazi/* > eigen_solver_test_anasazi.dat
+#--------------------------------
+if [ -f ../eigen_solver_test ]; then
+  echo "Running eigensolver validation "
+  mkdir RESLT_anasazi
+  cp ../random_test_matrix.dat .
+  mpirun -n 1 ../eigen_solver_test >OUTPUT
+  echo "done"
+  echo " " >>validation.log
+  echo "Eigensolver validation" >>validation.log
+  echo "--------------------------" >>validation.log
+  echo " " >>validation.log
+  echo "Validation directory: " >>validation.log
+  echo " " >>validation.log
+  echo "  " $(pwd) >>validation.log
+  echo " " >>validation.log
+  cat RESLT_anasazi/* >eigen_solver_test_anasazi.dat
 
-if test "$1" = "no_fpdiff"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+  if test "$1" = "no_fpdiff"; then
+    echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >>validation.log
+  else
+    $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/eigen_solver_test_anasazi.dat.gz \
+      eigen_solver_test_anasazi.dat >>validation.log
+  fi
+  rm -rf RESLT_anasazi
 else
-$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/eigen_solver_test_anasazi.dat.gz  \
-         eigen_solver_test_anasazi.dat >> validation.log
+  echo "Not running eigensolver validation; needs trilinos "
+  echo "Dummy [OK] for missing trilinos " >>validation.log
 fi
-rm -rf RESLT_anasazi
 #-----------------------------------------
 
 #-----------------------------------------
 # Append log to main validation log
-cat validation.log >> $OOMPH_ROOT_DIR/validation.log
+cat validation.log >>$OOMPH_ROOT_DIR/validation.log
 
 cd ..
 

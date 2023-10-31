@@ -4,7 +4,7 @@ message(VERBOSE "Entered double_diffusive_convection subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(double_diffusive_convection C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
@@ -31,10 +31,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME multi_physics.double_diffusive_convection
-  TARGET_DEPENDENCIES dd_convection multimesh_dd_convection
-                      multimesh_ref_dd_convection
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON dd_convection multimesh_dd_convection multimesh_ref_dd_convection
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS multi_physics double_diffusive_convection)
 
 message(VERBOSE "Leaving double_diffusive_convection subdirectory")

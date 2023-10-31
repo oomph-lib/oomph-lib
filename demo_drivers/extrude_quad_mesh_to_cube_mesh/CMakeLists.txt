@@ -4,7 +4,7 @@ message(VERBOSE "Entered extrude_quad_mesh_to_cube_mesh subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(extrude_quad_mesh_to_cube_mesh C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../install")
 endif()
 include(CTest)
@@ -23,10 +23,10 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME extrude_quad_mesh_to_cube_mesh.extrude_quad_mesh_to_cube_mesh
-  TARGET_DEPENDENCIES extrude_triangle_generated_mesh
-                      extrude_with_macro_element_representation
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES triangle_meshes
+  DEPENDS_ON extrude_triangle_generated_mesh
+             extrude_with_macro_element_representation
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata triangle_meshes
   LABELS extrude_quad_mesh_to_cube_mesh)
 
 message(VERBOSE "Leaving extrude_quad_mesh_to_cube_mesh subdirectory")

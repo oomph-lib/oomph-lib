@@ -4,7 +4,7 @@ message(VERBOSE "Entered unstructured_three_d_fsi subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(unstructured_three_d_fsi C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
@@ -19,17 +19,18 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME interaction.unstructured_three_d_fsi
-  TARGET_DEPENDENCIES unstructured_three_d_fsi
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
-    fsi_bifurcation_fluid.1.ele
-    fsi_bifurcation_fluid.1.face
-    fsi_bifurcation_fluid.1.node
-    fsi_bifurcation_fluid.poly
-    fsi_bifurcation_solid.1.ele
-    fsi_bifurcation_solid.1.face
-    fsi_bifurcation_solid.1.node
-    fsi_bifurcation_solid.poly
+  DEPENDS_ON unstructured_three_d_fsi
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh
+             validata
+             fsi_bifurcation_fluid.1.ele
+             fsi_bifurcation_fluid.1.face
+             fsi_bifurcation_fluid.1.node
+             fsi_bifurcation_fluid.poly
+             fsi_bifurcation_solid.1.ele
+             fsi_bifurcation_solid.1.face
+             fsi_bifurcation_solid.1.node
+             fsi_bifurcation_solid.poly
   LABELS interaction unstructured_three_d_fsi)
 
 message(VERBOSE "Leaving unstructured_three_d_fsi subdirectory")

@@ -4,7 +4,7 @@ message(VERBOSE "Entered mesh_from_vmtk subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(mesh_from_vmtk C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
@@ -26,10 +26,10 @@ add_custom_target(
 
 oomph_add_test(
   TEST_NAME meshing.mesh_from_vmtk
-  TARGET_DEPENDENCIES create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh
-                      create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES iliac.xda replies.txt
+  DEPENDS_ON create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh
+             create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata iliac.xda replies.txt
   LABELS meshing mesh_from_vmtk)
 
 message(VERBOSE "Leaving mesh_from_vmtk subdirectory")

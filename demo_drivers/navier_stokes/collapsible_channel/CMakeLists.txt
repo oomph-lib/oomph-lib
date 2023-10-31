@@ -4,7 +4,7 @@ message(VERBOSE "Entered collapsible_channel subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(collapsible_channel C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
@@ -47,15 +47,14 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME navier_stokes.collapsible_channel
-  TARGET_DEPENDENCIES
-    collapsible_channel
-    collapsible_channel_adaptive_algebraic
-    collapsible_channel_adaptive_algebraic_bl_squash
-    collapsible_channel_algebraic
-    collapsible_channel_algebraic_bl_squash
-    collapsible_channel_bl_squash
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON collapsible_channel
+             collapsible_channel_adaptive_algebraic
+             collapsible_channel_adaptive_algebraic_bl_squash
+             collapsible_channel_algebraic
+             collapsible_channel_algebraic_bl_squash
+             collapsible_channel_bl_squash
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS navier_stokes collapsible_channel)
 
 message(VERBOSE "Leaving collapsible_channel subdirectory")

@@ -30,8 +30,12 @@
 #include "Telements.h"
 
 // Include the data structure from tetgen
-//#include "../../external_src/oomph_tetgen/tetgen.h"
+
+#ifdef OOMPH_HAS_NEW_TETGEN
+#include "oomph_tetgen_1.6/tetgen.h"
+#else
 #include "oomph_tetgen/tetgen.h"
+#endif
 
 namespace oomph
 {

@@ -4,7 +4,7 @@ message(VERBOSE "Entered three_d_cantilever subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(three_d_cantilever C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../../install")
 endif()
 include(CTest)
@@ -19,18 +19,19 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME mpi.three_d_cantilever
-  TARGET_DEPENDENCIES three_d_cantilever_adapt
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
-  EXTRA_REQUIRES
-    three_d_cantilever_0_partition.dat
-    three_d_cantilever_1_partition.dat
-    three_d_cantilever_3_partition.dat
-    three_d_cantilever_4_partition.dat
-    three_d_cantilever_5_partition.dat
-    three_d_cantilever_6_partition.dat
-    three_d_cantilever_8_partition.dat
-    three_d_cantilever_9_partition.dat
-    comp.mcr
+  DEPENDS_ON three_d_cantilever_adapt
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
+  TEST_FILES validate.sh
+             validata
+             three_d_cantilever_0_partition.dat
+             three_d_cantilever_1_partition.dat
+             three_d_cantilever_3_partition.dat
+             three_d_cantilever_4_partition.dat
+             three_d_cantilever_5_partition.dat
+             three_d_cantilever_6_partition.dat
+             three_d_cantilever_8_partition.dat
+             three_d_cantilever_9_partition.dat
+             comp.mcr
   LABELS mpi three_d_cantilever)
 
 # Don't run this test alongside any other tests

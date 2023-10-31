@@ -4,7 +4,7 @@ message(VERBOSE "Entered prescribed_displ_lagr_mult subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(prescribed_displ_lagr_mult C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
@@ -29,10 +29,10 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME solid.prescribed_displ_lagr_mult
-  TARGET_DEPENDENCIES prescribed_displ_lagr_mult prescribed_displ_lagr_mult2
-                      prescribed_displ_lagr_mult_precond
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON prescribed_displ_lagr_mult prescribed_displ_lagr_mult2
+             prescribed_displ_lagr_mult_precond
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS solid prescribed_displ_lagr_mult)
 
 message(VERBOSE "Leaving prescribed_displ_lagr_mult subdirectory")

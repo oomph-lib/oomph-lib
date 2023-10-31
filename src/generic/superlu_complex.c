@@ -10,7 +10,11 @@
  *
  */
 
+#ifdef OOMPH_USE_DEPRECATED_SUPERLU
 #include "../../external_src/oomph_superlu_4.3/slu_zdefs.h"
+#else
+#include "../../external_src/oomph_superlu_5.2.2/slu_zdefs.h"
+#endif
 #include "math.h"
 
 
@@ -77,7 +81,10 @@ int superlu_complex(int *op_flag, int *n, int *nnz, int *nrhs,
     mem_usage_t   mem_usage;
     superlu_options_t options;
     SuperLUStat_t stat;
-    factors_t *LUfactors;
+    factors_t* LUfactors;
+#ifndef OOMPH_USE_DEPRECATED_SUPERLU
+    GlobalLU_t Glu;
+#endif
 
     doublecomplex *Lval;
     doublecomplex *diagU, *dblock;
@@ -128,7 +135,11 @@ int superlu_complex(int *op_flag, int *n, int *nnz, int *nrhs,
 	relax = sp_ienv(2);
 
 	zgstrf(&options, &AC, /*drop_tol,*/ relax, panel_size, 
-	       etree, NULL, 0, perm_c, perm_r, L, U, &stat, info);
+	       etree, NULL, 0, perm_c, perm_r, L, U, 
+#ifndef OOMPH_USE_DEPRECATED_SUPERLU
+           &Glu, /* new with SuperLU 5.0 */
+#endif
+           &stat, info);
 
 	if ( *info == 0 ) {
 	    Lstore = (SCformat *) L->Store;

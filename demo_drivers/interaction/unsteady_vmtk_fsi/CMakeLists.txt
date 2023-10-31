@@ -4,7 +4,7 @@ message(VERBOSE "Entered unsteady_vmtk_fsi subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(unsteady_vmtk_fsi C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
@@ -24,18 +24,19 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME interaction.unsteady_vmtk_fsi
-  TARGET_DEPENDENCIES unsteady_vmtk_fsi
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
-    fluid.1.ele
-    fluid.1.face
-    fluid.1.node
-    fluid_quadratic_nodes.dat
-    solid.1.ele
-    solid.1.face
-    solid.1.node
-    solid_quadratic_nodes.dat
-    boundary_enumeration.dat
+  DEPENDS_ON unsteady_vmtk_fsi
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh
+             validata
+             fluid.1.ele
+             fluid.1.face
+             fluid.1.node
+             fluid_quadratic_nodes.dat
+             solid.1.ele
+             solid.1.face
+             solid.1.node
+             solid_quadratic_nodes.dat
+             boundary_enumeration.dat
   LABELS interaction unsteady_vmtk_fsi)
 
 message(VERBOSE "Leaving unsteady_vmtk_fsi subdirectory")

@@ -4,7 +4,7 @@ message(VERBOSE "Entered stored_shape_fcts subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(stored_shape_fcts C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
@@ -18,9 +18,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME optimisation.stored_shape_fcts
-  TARGET_DEPENDENCIES two_d_poisson_stored_shape_fcts
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON two_d_poisson_stored_shape_fcts
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS optimisation stored_shape_fcts)
 
 message(VERBOSE "Leaving stored_shape_fcts subdirectory")

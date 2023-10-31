@@ -4,7 +4,7 @@ message(VERBOSE "Entered steady_third_ring subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(steady_third_ring C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
@@ -18,9 +18,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME beam.steady_third_ring
-  TARGET_DEPENDENCIES steady_third_ring
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON steady_third_ring
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS beam steady_third_ring)
 
 message(VERBOSE "Leaving steady_third_ring subdirectory")

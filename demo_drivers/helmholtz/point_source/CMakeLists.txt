@@ -4,7 +4,7 @@ message(VERBOSE "Entered point_source subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(point_source C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
@@ -24,9 +24,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME helmholtz.point_source
-  TARGET_DEPENDENCIES adaptive_helmholtz_point_source helmholtz_point_source
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON adaptive_helmholtz_point_source helmholtz_point_source
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS helmholtz point_source)
 
 message(VERBOSE "Leaving point_source subdirectory")

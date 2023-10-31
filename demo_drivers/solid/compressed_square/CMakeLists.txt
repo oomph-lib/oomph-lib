@@ -4,7 +4,7 @@ message(VERBOSE "Entered compressed_square subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(compressed_square C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
@@ -18,9 +18,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME solid.compressed_square
-  TARGET_DEPENDENCIES compressed_square
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON compressed_square
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS solid compressed_square)
 
 message(VERBOSE "Leaving compressed_square subdirectory")

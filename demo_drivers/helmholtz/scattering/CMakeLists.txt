@@ -4,7 +4,7 @@ message(VERBOSE "Entered scattering subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(scattering C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
@@ -35,10 +35,10 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME helmholtz.scattering
-  TARGET_DEPENDENCIES adaptive_scattering adaptive_unstructured_scattering
-                      scattering unstructured_scattering
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON adaptive_scattering adaptive_unstructured_scattering scattering
+             unstructured_scattering
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS helmholtz scattering)
 
 message(VERBOSE "Leaving scattering subdirectory")

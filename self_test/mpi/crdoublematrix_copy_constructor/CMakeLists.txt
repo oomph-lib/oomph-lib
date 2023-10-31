@@ -4,7 +4,7 @@ message(VERBOSE "Entered crdoublematrix_copy_constructor subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(crdoublematrix_copy_constructor C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
@@ -21,9 +21,9 @@ ProcessorCount(NUM_PROCESSORS)
 if(NUM_PROCESSORS GREATER_EQUAL 4)
   oomph_add_test(
     TEST_NAME mpi.crdoublematrix_copy_constructor
-    TARGET_DEPENDENCIES crdoublematrix_copy_constructor
-    VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_VARIABLENP_RUN_COMMAND}
-    EXTRA_REQUIRES
+    DEPENDS_ON crdoublematrix_copy_constructor
+    COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_VARIABLENP_RUN_COMMAND}
+    TEST_FILES validate.sh validata
     LABELS mpi matrix)
 
   # Don't run this test alongside any other tests

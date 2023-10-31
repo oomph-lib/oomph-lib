@@ -4,7 +4,7 @@ message(VERBOSE "Entered turek_flag subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(turek_flag C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../../install")
 endif()
 include(CTest)
@@ -25,9 +25,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME mpi.turek_flag
-  TARGET_DEPENDENCIES turek_flag turek_flag_load_balance
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
-  EXTRA_REQUIRES turek_flag_partition.dat load_balance.mcr
+  DEPENDS_ON turek_flag turek_flag_load_balance
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
+  TEST_FILES validate.sh validata turek_flag_partition.dat load_balance.mcr
   LABELS mpi turek_flag)
 
 # Don't run this test alongside any other tests

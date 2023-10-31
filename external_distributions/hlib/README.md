@@ -14,27 +14,31 @@ required changes, along with some additional patches which contain code for
 use in micromagnetics simulations (written by Andreas Knittel and Matteo
 Franchin at the University of Southampton).
 
-To build oomph-lib with hlib follow these instructions:
+To build oomph-lib with `hlib` follow these instructions:
 
-1. Apply the patches. Extract hlib into a folder then cd into that folder
+1. Apply the patches. Extract `hlib` into a folder then `cd` into that folder
    and run the command
 
-     patch -p1 < "$OOMPH_DIR/external_distributions/hlib/cpp_hlib.patch"
-    
-  where $OOMPH_DIR is your oomph-lib directory.
-  
-2. Build hlib using the command 
+   ```bash
+   patch -p1 < "$OOMPH_DIR/external_distributions/hlib/cpp_hlib.patch"
+   ```
 
-     ./configure && make && sudo make install
-     
-   it should install the library to "/usr/local/lib" and the headers to
-   "/usr/local/include/HLib".
-   
-3. Build oomph-lib as ususal (using autogen) with the additional configure
-   option:
+   where `$OOMPH_DIR` is your oomph-lib directory.
 
-    --with-hlib
-    
+1. Build `hlib` using the command
+
+   ```bash
+   ./configure && make && sudo make install
+   ```
+
+   it should install the library to `/usr/local/lib` and the headers to
+   `/usr/local/include/HLib`.
+
+1. Build `oomph-lib` as usual (using `autogen`) with the additional configure option:
+
+   ```bash
+   --with-hlib
+   ```
+
    (Configure options in oomph-lib are usually specified by modifying an
-   options file in "$OOMPH_DIR/config/configure_options/".)
-
+   options file in `$OOMPH_DIR/config/configure_options/`.)

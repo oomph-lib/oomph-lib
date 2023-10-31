@@ -4,7 +4,7 @@ message(VERBOSE "Entered bifurcation_tracking subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(bifurcation_tracking C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../install")
 endif()
 include(CTest)
@@ -54,17 +54,16 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME bifurcation_tracking.bifurcation_tracking
-  TARGET_DEPENDENCIES
-    adaptive_hopf
-    adaptive_hopf_with_separate_meshes
-    adaptive_pitchfork
-    fold
-    hopf
-    periodic_orbit
-    pitchfork
-    track_pitch
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES adapt_hopf_eigen.dat
+  DEPENDS_ON adaptive_hopf
+             adaptive_hopf_with_separate_meshes
+             adaptive_pitchfork
+             fold
+             hopf
+             periodic_orbit
+             pitchfork
+             track_pitch
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata adapt_hopf_eigen.dat
   LABELS bifurcation_tracking)
 
 # This test needs more than the default allotted time to complete

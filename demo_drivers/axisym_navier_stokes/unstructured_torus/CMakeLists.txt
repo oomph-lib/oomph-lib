@@ -4,7 +4,7 @@ message(VERBOSE "Entered unstructured_torus subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(unstructured_torus C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
@@ -24,9 +24,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME axisym_navier_stokes.unstructured_torus
-  TARGET_DEPENDENCIES pressure_driven_torus unstructured_torus
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON pressure_driven_torus unstructured_torus
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS axisym_navier_stokes unstructured_torus)
 
 message(VERBOSE "Leaving unstructured_torus subdirectory")

@@ -11,19 +11,19 @@ set(REQUIRED_COMPONENTS Thread System Program_options)
 # defined then we'll look under there
 if(OOMPH_USE_BOOST_FROM)
   find_package(
-    Boost 1.66.0
+    Boost 1.80.0
     COMPONENTS ${REQUIRED_COMPONENTS}
     REQUIRED
     PATHS "${OOMPH_USE_BOOST_FROM}"
     NO_DEFAULT_PATH)
 endif()
-find_package(Boost 1.66.0 QUIET COMPONENTS ${REQUIRED_COMPONENTS})
+find_package(Boost 1.80.0 QUIET COMPONENTS ${REQUIRED_COMPONENTS})
 
 # If we couldn't find the required version, lets build it ourselves
 if(Boost_FOUND)
   message(
     STATUS
-      "Found an existing installation of Boost so we're not going to build it ourselves."
+    "Found an existing installation of Boost: ${Boost_LIBRARIES}"
   )
 else()
   set(BOOST_INCLUDE_LIBRARIES thread system program_options)

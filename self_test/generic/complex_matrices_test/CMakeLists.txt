@@ -4,7 +4,7 @@ message(VERBOSE "Entered complex_matrices_test subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(complex_matrices_test C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
@@ -34,10 +34,10 @@ endif()
 
 oomph_add_test(
   TEST_NAME generic.complex_matrices_test
-  TARGET_DEPENDENCIES dense_complex_matrix_test cr_complex_matrix_test
-                      cc_complex_matrix_test
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
-  EXTRA_REQUIRES
+  DEPENDS_ON dense_complex_matrix_test cr_complex_matrix_test
+             cc_complex_matrix_test
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
+  TEST_FILES validate.sh validata
   LABELS complex matrix ${EXTRA_FLAGS})
 
 set_tests_properties(generic.complex_matrices_test PROPERTIES DISABLED TRUE)

@@ -4,7 +4,7 @@ message(VERBOSE "Entered helmholtz_multigrid subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(helmholtz_multigrid C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
@@ -23,9 +23,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME multigrid.helmholtz_multigrid
-  TARGET_DEPENDENCIES structured_cubic_point_source unstructured_two_d_helmholtz
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON structured_cubic_point_source unstructured_two_d_helmholtz
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS multigrid helmholtz_multigrid)
 
 message(VERBOSE "Leaving helmholtz_multigrid subdirectory")

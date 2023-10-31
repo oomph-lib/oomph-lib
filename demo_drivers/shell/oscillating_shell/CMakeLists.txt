@@ -4,7 +4,7 @@ message(VERBOSE "Entered oscillating_shell subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(oscillating_shell C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
@@ -18,9 +18,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME shell.oscillating_shell
-  TARGET_DEPENDENCIES oscillating_shell
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON oscillating_shell
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS shell oscillating_shell)
 
 message(VERBOSE "Leaving oscillating_shell subdirectory")

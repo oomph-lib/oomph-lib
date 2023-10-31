@@ -4,7 +4,7 @@ message(VERBOSE "Entered inclined_plane subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(inclined_plane C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
@@ -26,9 +26,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME navier_stokes.inclined_plane
-  TARGET_DEPENDENCIES inclined_plane inclined_plane2
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON inclined_plane inclined_plane2
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS navier_stokes inclined_plane)
 
 message(VERBOSE "Leaving inclined_plane subdirectory")

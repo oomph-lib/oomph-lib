@@ -133,13 +133,8 @@ namespace oomph
       sprintf(tetswitches, "%s", input_string_stream.str().c_str());
 
       // Build triangulateio refined object
-#ifdef OOMPH_HAS_NEW_TETGEN
-      tetgenbehavior tb;
-      tb.parse_commandline(tetswitches);
-      tetrahedralize(&tb, tetgen_input_pt, this->Tetgenio_pt);
-#else
       tetrahedralize(tetswitches, tetgen_input_pt, this->Tetgenio_pt);
-#endif
+
       // Build scaffold
       this->Tmp_mesh_pt = new TetgenScaffoldMesh(*this->Tetgenio_pt);
 

@@ -4,7 +4,7 @@ message(VERBOSE "Entered mesh_from_inline_triangle subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(mesh_from_inline_triangle C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
@@ -29,11 +29,10 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME meshing.mesh_from_inline_triangle
-  TARGET_DEPENDENCIES
-    mesh_from_inline_triangle mesh_from_inline_triangle_no_adapt
-    mesh_from_inline_triangle_polygon
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES
+  DEPENDS_ON mesh_from_inline_triangle mesh_from_inline_triangle_no_adapt
+             mesh_from_inline_triangle_polygon
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata
   LABELS meshing mesh_from_inline_triangle)
 
 message(VERBOSE "Leaving mesh_from_inline_triangle subdirectory")

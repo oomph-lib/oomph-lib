@@ -9,38 +9,37 @@
 # USAGE:
 # ------
 #     oomph_add_test(TEST_NAME             <name-of-test>
-#                    TARGET_DEPENDENCIES   <executables/targets-required-by-test>
+#                    DEPENDS_ON            <executables/targets-required-by-test>
 #                    LABELS                <string-list-of-labels>
-#                    VALIDATE_SH_ARGS      <arguments-to-validate-sh-script>
-#                    [EXTRA_REQUIRES       <extra-files-required-by-test>]
+#                    COMMAND               <command-to-run-test>
+#                    [TEST_FILES            <files-required-by-test>]
 #                    [SILENCE_MISSING_VALIDATA_WARNING]
 #                    [NO_VALIDATE_SH])
 #
 # By default we assume that a validata/ and a validate.sh script are always
-# required for a test. Here, EXTRA_REQUIRES is provided so that the user can
+# required for a test. Here, TEST_FILES is provided so that the user can
 # specify any other files that are required at run-time, like triangle input
-# mesh files. The VALIDATE_SH_ARGS argument is used to explicitly pass arguments
-# to the validate.sh file.
+# mesh files. The COMMAND argument is used to run the test.
 #
 # Important: Every validate.sh script expects ${OOMPH_ROOT_DIR} as the first
-# argument to VALIDATE_SH_ARGS.
+# argument to COMMAND so that it can find fpdiff.py and validate_ok_count.
 #
 # EXAMPLE:
 # --------
 #
 #     oomph_add_test(TEST_NAME poisson.one_d_poisson
-#                    TARGET_DEPENDENCIES one_d_poisson
-#                    VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
-#                    EXTRA_REQUIRES my_extra_data_file.dat
+#                    DEPENDS_ON one_d_poisson
+#                    COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
+#                    TEST_FILES validate.sh validata my_extra_data_file.dat
 #                    LABELS "poisson;one_d_poisson")
 #
 #     oomph_add_test(TEST_NAME poisson.one_d_poisson
-#                    TARGET_DEPENDENCIES one_d_poisson
-#                    VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_VARIABLENP_RUN_COMMAND}
-#                    EXTRA_REQUIRES my_extra_data_file.dat
+#                    DEPENDS_ON one_d_poisson
+#                    COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_VARIABLENP_RUN_COMMAND}
+#                    TEST_FILES validate.sh validata my_extra_data_file.dat
 #                    LABELS "poisson;one_d_poisson")
 #
-# NOTE 1: Arguments to TARGET_DEPENDENCIES must be already-defined executables
+# NOTE 1: Arguments to DEPENDS_ON must be already-defined executables
 # or targets (i.e. defined via add_executable() or oomph_add_executable()).
 # =============================================================================
 # cmake-format: on
@@ -52,8 +51,7 @@ function(oomph_add_test)
   set(PREFIX ARG)
   set(FLAGS NO_VALIDATE_SH SILENCE_MISSING_VALIDATA_WARNING)
   set(SINGLE_VALUE_ARGS TEST_NAME)
-  set(MULTI_VALUE_ARGS EXTRA_REQUIRES LABELS TARGET_DEPENDENCIES
-      VALIDATE_SH_ARGS)
+  set(MULTI_VALUE_ARGS TEST_FILES LABELS DEPENDS_ON COMMAND)
 
   # Process the arguments passed in
   include(CMakeParseArguments)
@@ -65,17 +63,16 @@ function(oomph_add_test)
   set(SILENCE_MISSING_VALIDATA_WARNING
       ${${PREFIX}_SILENCE_MISSING_VALIDATA_WARNING})
   set(TEST_NAME ${${PREFIX}_TEST_NAME})
-  set(VALIDATE_SH_ARGS ${${PREFIX}_VALIDATE_SH_ARGS})
-  set(TARGET_DEPENDENCIES ${${PREFIX}_TARGET_DEPENDENCIES})
-  set(EXTRA_REQUIRES ${${PREFIX}_EXTRA_REQUIRES})
+  set(COMMAND ${${PREFIX}_COMMAND})
+  set(DEPENDS_ON ${${PREFIX}_DEPENDS_ON})
+  set(TEST_FILES ${${PREFIX}_TEST_FILES})
   set(LABELS ${${PREFIX}_LABELS})
 
   # Make sure the arguments are valid
   if(NOT TEST_NAME)
     message(FATAL_ERROR "No TEST_NAME argument supplied.")
-  elseif(NOT TARGET_DEPENDENCIES)
-    message(VERBOSE
-            "No TARGET_DEPENDENCIES argument supplied. Can't create a test.")
+  elseif(NOT DEPENDS_ON)
+    message(VERBOSE "No DEPENDS_ON argument supplied. Can't create a test.")
     return()
   elseif(NOT LABELS)
     message(WARNING "No LABELS supplied. These are helpful for running CTest\
@@ -91,17 +88,23 @@ function(oomph_add_test)
   # Grab the validate.sh script if we have one
   set(REQUIREMENTS_WITH_PATHS)
   set(TEST_BYPRODUCTS)
-  if(NOT NO_VALIDATE_SH)
-    set(REQUIREMENTS_WITH_PATHS "${CMAKE_CURRENT_LIST_DIR}/validate.sh")
-    set(TEST_BYPRODUCTS "${CMAKE_CURRENT_BINARY_DIR}/validate.sh")
-  endif()
+
+  # Add on the extra requirements
+  foreach(REQUIREMENT IN LISTS TEST_FILES)
+    set(FILENAME ${REQUIREMENT})
+    if(IS_ABSOLUTE ${REQUIREMENT})
+      list(APPEND REQUIREMENTS_WITH_PATHS ${REQUIREMENT})
+      cmake_path(GET REQUIREMENT FILENAME FILENAME)
+    else()
+      list(APPEND REQUIREMENTS_WITH_PATHS
+           "${CMAKE_CURRENT_LIST_DIR}/${REQUIREMENT}")
+    endif()
+    list(APPEND TEST_BYPRODUCTS "${CMAKE_CURRENT_BINARY_DIR}/${FILENAME}")
+  endforeach()
 
   # We *nearly* always need validata, so warn if we don't have it, just in case
   # the user's forgotten to provide it
-  if(EXISTS "${CMAKE_CURRENT_LIST_DIR}/validata")
-    list(APPEND REQUIREMENTS_WITH_PATHS "${CMAKE_CURRENT_LIST_DIR}/validata")
-    list(APPEND TEST_BYPRODUCTS "${CMAKE_CURRENT_BINARY_DIR}/validata")
-  else()
+  if(NOT "validata" IN_LIST TEST_FILES)
     if(NOT SILENCE_MISSING_VALIDATA_WARNING)
       message(
         WARNING
@@ -118,13 +121,6 @@ function(oomph_add_test)
         ")
     endif()
   endif()
-
-  # Add on the extra requirements
-  foreach(REQUIREMENT IN LISTS EXTRA_REQUIRES)
-    list(APPEND REQUIREMENTS_WITH_PATHS
-         "${CMAKE_CURRENT_LIST_DIR}/${REQUIREMENT}")
-    list(APPEND TEST_BYPRODUCTS "${CMAKE_CURRENT_BINARY_DIR}/${REQUIREMENT}")
-  endforeach()
   # ----------------------------------------------------------------------------
 
   # ----------------------------------------------------------------------------
@@ -144,13 +140,13 @@ function(oomph_add_test)
   # Flag used to control whether files are symlinked instead of copied; keeping
   # the option to copy files around just in case we need it later on (but I
   # doubt it)
-  set(SYMLINK_TEST_DATA_INSTEAD_OF_COPY TRUE)
+  set(SYMLINK_TEST_FILES_INSTEAD_OF_COPY TRUE)
 
   # Add each requirement to the copy target as a file-copy command or as a
   # directory-copy command. All of these commands will be executed when the
   # copy_<path-hash> target is called
   foreach(REQUIREMENT IN LISTS REQUIREMENTS_WITH_PATHS)
-    if(SYMLINK_TEST_DATA_INSTEAD_OF_COPY)
+    if(SYMLINK_TEST_FILES_INSTEAD_OF_COPY)
       add_custom_command(
         TARGET copy_${PATH_HASH}
         POST_BUILD
@@ -187,7 +183,7 @@ function(oomph_add_test)
                     WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
 
   # Add on commands to build the targets we need
-  foreach(TARGET_DEPENDENCY IN LISTS TARGET_DEPENDENCIES)
+  foreach(TARGET_DEPENDENCY IN LISTS DEPENDS_ON)
     add_custom_command(
       TARGET build_targets_${PATH_HASH}
       POST_BUILD
@@ -207,9 +203,8 @@ function(oomph_add_test)
   # Command-line arguments for validate.sh. We can't run fpdiff.py if we don't
   # have Python
   if(NOT Python3_FOUND)
-    list(APPEND VALIDATE_SH_ARGS "no_fpdiff")
+    list(APPEND COMMAND "no_fpdiff")
   endif()
-  # list(JOIN VALIDATE_SH_ARGS " " VALIDATE_SH_ARGS)
 
   # TODO: Try rewriting with POST_BUILD actions:
   # https://cmake.org/cmake/help/latest/command/add_custom_command.html?highlight=add_custom_command#build-events
@@ -232,7 +227,7 @@ function(oomph_add_test)
   if(NOT NO_VALIDATE_SH)
     add_custom_target(
       check_${PATH_HASH}
-      COMMAND ${BASH_PROGRAM} ./validate.sh ${VALIDATE_SH_ARGS}
+      COMMAND ${BASH_PROGRAM} ${COMMAND}
       # Check for the validation.log file. Stop here if we can't
       COMMAND
         ${BASH_PROGRAM} -c
@@ -249,7 +244,7 @@ function(oomph_add_test)
   else()
     # Run all of the dependent targets and then append the validation.log output
     # to the global one.
-    list(JOIN TARGET_DEPENDENCIES " ./" RUN_DEPENDENCIES_STRING)
+    list(JOIN DEPENDS_ON " ./" RUN_DEPENDENCIES_STRING)
     add_custom_target(
       check_${PATH_HASH}
       # Run each executable

@@ -4,7 +4,7 @@ message(VERBOSE "Entered vmtk_solid subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(vmtk_solid C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
@@ -18,10 +18,10 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME solid.vmtk_solid
-  TARGET_DEPENDENCIES vmtk_solid
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR}
-  EXTRA_REQUIRES solid_iliac.1.ele solid_iliac.1.face solid_iliac.1.node
-                 solid_iliac.poly
+  DEPENDS_ON vmtk_solid
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
+  TEST_FILES validate.sh validata solid_iliac.1.ele solid_iliac.1.face
+             solid_iliac.1.node solid_iliac.poly
   LABELS solid vmtk_solid)
 
 message(VERBOSE "Leaving vmtk_solid subdirectory")

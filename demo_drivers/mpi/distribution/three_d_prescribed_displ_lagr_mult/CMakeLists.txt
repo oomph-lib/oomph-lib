@@ -4,7 +4,7 @@ message(VERBOSE "Entered three_d_prescribed_displ_lagr_mult subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(three_d_prescribed_displ_lagr_mult C CXX Fortran)
-if(NOT OOMPH_BUILD_DEMO_DRIVERS_WITH_LIBRARY)
+if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../../install")
 endif()
 include(CTest)
@@ -18,9 +18,9 @@ oomph_add_executable(
 
 oomph_add_test(
   TEST_NAME mpi.three_d_prescribed_displ_lagr_mult
-  TARGET_DEPENDENCIES three_d_prescribed_displ_lagr_mult
-  VALIDATE_SH_ARGS ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
-  EXTRA_REQUIRES distr_block_prescr.mcr
+  DEPENDS_ON three_d_prescribed_displ_lagr_mult
+  COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
+  TEST_FILES validate.sh validata distr_block_prescr.mcr
   LABELS mpi three_d_prescribed_displ_lagr_mult)
 
 # Don't run this test alongside any other tests
