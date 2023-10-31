@@ -21,11 +21,12 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Install requirements hierher re-add doxygen (minus doxygen)
+      - name: Install requirements
         run: |
              sudo apt-get install make automake libtool libtool-bin autoconf gfortran g++ texlive texlive-latex-extra texlive-font-utils doxygen
              doxygen --version
-             
+
+      # No longer needed; keep this in case we need to istall a specific version of doxygen
       #- name: Bleeding edge doxygen
       #  run: |
       #    wget https://www.doxygen.nl/files/doxygen-1.9.6.linux.bin.tar.gz
@@ -57,10 +58,10 @@ jobs:
       - name: Grab redirect file
         run: cp ./bin/redirect.html ./build/website/index.html
 
-      #- name: Deploy
-      #  uses: JamesIves/github-pages-deploy-action@releases/v3
-      #  with:
-      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #    BRANCH: "gh-pages" # The branch the action should deploy to.
-      #    FOLDER: build/website # The folder the action should deploy.
-      #    CLEAN: true
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@releases/v4
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: "gh-pages" # The branch the action should deploy to.
+          FOLDER: build/website # The folder the action should deploy.
+          CLEAN: true
