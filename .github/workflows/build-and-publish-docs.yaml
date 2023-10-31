@@ -3,7 +3,7 @@ name: Documentation
 on:
   push:
     branches:
-      - main
+      - fix_doc_oct2023
   workflow_dispatch:
     inputs:
       publishBranch:
@@ -21,21 +21,23 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Install requirements (minus doxygen)
-        run: sudo apt-get install make automake libtool libtool-bin autoconf gfortran g++ texlive texlive-latex-extra texlive-font-utils
-
-      - name: Bleeding edge doxygen
+      - name: Install requirements hierher re-add doxygen (minus doxygen)
         run: |
-          wget https://www.doxygen.nl/files/doxygen-1.9.6.linux.bin.tar.gz
-          tar xvfz doxygen-1.9.6.linux.bin.tar.gz
-          sudo apt install libclang1-12
-          sudo apt install libclang-cpp12
-          echo "new doxygen (as installed):"
-          doxygen-1.9.6/bin/doxygen --version
-          sudo mv doxygen-1.9.6/bin/doxygen /usr/bin/doxygen
-          echo "new doxygen (installed in /usr/bin):"
-          which doxygen
-          doxygen --version
+             sudo apt-get install make automake libtool libtool-bin autoconf gfortran g++ texlive texlive-latex-extra texlive-font-utils doxygen
+             doxygen --version
+             
+      #- name: Bleeding edge doxygen
+      #  run: |
+      #    wget https://www.doxygen.nl/files/doxygen-1.9.6.linux.bin.tar.gz
+      #    tar xvfz doxygen-1.9.6.linux.bin.tar.gz
+      #    sudo apt install libclang1-12
+      #    sudo apt install libclang-cpp12
+      #    echo "new doxygen (as installed):"
+      #    doxygen-1.9.6/bin/doxygen --version
+      #    sudo mv doxygen-1.9.6/bin/doxygen /usr/bin/doxygen
+      #    echo "new doxygen (installed in /usr/bin):"
+      #    which doxygen
+      #    doxygen --version
 
       - name: Pick configuration
         run: cp config/configure_options/build_web_version config/configure_options/current
@@ -55,10 +57,10 @@ jobs:
       - name: Grab redirect file
         run: cp ./bin/redirect.html ./build/website/index.html
 
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@releases/v3
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: "gh-pages" # The branch the action should deploy to.
-          FOLDER: build/website # The folder the action should deploy.
-          CLEAN: true
+      #- name: Deploy
+      #  uses: JamesIves/github-pages-deploy-action@releases/v3
+      #  with:
+      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #    BRANCH: "gh-pages" # The branch the action should deploy to.
+      #    FOLDER: build/website # The folder the action should deploy.
+      #    CLEAN: true
