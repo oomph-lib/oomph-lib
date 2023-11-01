@@ -21,8 +21,7 @@ endif()
 # here: https://github.com/CGAL/cgal/issues/7121. Once the patch has been merged
 # in, we'll be able to allow users to use their own pre-installed version of
 # CGAL which will save a lot of time at configure time. To do this, we can just
-# remove the use of the FORCE_ variable below.
-# hierher comment out of date!
+# remove the use of the FORCE_ variable below. hierher comment out of date!
 option(FORCE_BUILD_OWN_VERSION_OF_CGAL "" FALSE)
 
 # Configuration flags
@@ -64,8 +63,8 @@ else()
       NO_DEFAULT_PATH)
   endif()
 
-  #message(FATAL_ERROR "${CGAL_LIBRARIES}")
-  
+  # message(FATAL_ERROR "${CGAL_LIBRARIES}")
+
   find_package(CGAL 5.6 QUIET)
 
   # If we couldn't find a pre-installed version, lets build it ourselves

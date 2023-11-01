@@ -26,14 +26,13 @@ find_path(GMP_C_INCLUDES NAMES gmp.h PATHS /usr/local /usr /opt/homebrew/opt /us
 
 # Handle QUIET and REQUIRED and check the necessary variables were set and if so
 # set ``GMP_FOUND``
-find_package_handle_standard_args(
-  GMP REQUIRED_VARS GMP_C_LIBRARIES GMP_C_INCLUDES)
+find_package_handle_standard_args(GMP REQUIRED_VARS GMP_C_LIBRARIES
+                                                    GMP_C_INCLUDES)
 
-#GMP_CXX_LIBRARIES
-#                    GMP_CXX_INCLUDES)
+# GMP_CXX_LIBRARIES GMP_CXX_INCLUDES)
 
 if(GMP_FOUND)
-  set(GMP_INCLUDE_DIRS "${GMP_C_INCLUDES}") #  "${GMP_CXX_INCLUDES}")
+  set(GMP_INCLUDE_DIRS "${GMP_C_INCLUDES}") # "${GMP_CXX_INCLUDES}")
   list(REMOVE_DUPLICATES GMP_INCLUDE_DIRS)
 
   if(NOT TARGET GMP::GMP)

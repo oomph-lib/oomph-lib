@@ -21,10 +21,7 @@ find_package(Boost 1.80.0 QUIET COMPONENTS ${REQUIRED_COMPONENTS})
 
 # If we couldn't find the required version, lets build it ourselves
 if(Boost_FOUND)
-  message(
-    STATUS
-    "Found an existing installation of Boost: ${Boost_LIBRARIES}"
-  )
+  message(STATUS "Found an existing installation of Boost: ${Boost_LIBRARIES}")
 else()
   set(BOOST_INCLUDE_LIBRARIES thread system program_options)
   set(BOOST_ENABLE_CMAKE ON)
