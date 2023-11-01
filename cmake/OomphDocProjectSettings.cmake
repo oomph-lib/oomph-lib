@@ -2,27 +2,27 @@
 # =============================================================================
 # DESCRIPTION:
 # ------------
-# Prints the project configuration variables and compiler definitions.
+# Docs the project configuration variables and compiler definitions.
 #
 # USAGE:
 # ------
-#          include(OomphPrintProjectSettings)
-#          oomph_print_project_settings()
+#          include(OomphDocProjectSettings)
+#          oomph_doc_project_settings()
 # =============================================================================
 # cmake-format: on
 
 # ------------------------------------------------------------------------------
-function(oomph_print_project_settings)
+function(oomph_doc_project_settings)
   # Define the supported set of keywords
   set(PREFIX ARG)
-  set(FLAGS ENABLE_PRINT_AFTER_INSTALL ENABLE_SAVE_TO_FILE)
+  set(FLAGS ENABLE_ALSO_PRINT_SETTINGS_AFTER_INSTALL ENABLE_SAVE_TO_FILE)
   set(SINGLE_VALUE_ARGS)
   set(MULTI_VALUE_ARGS)
   cmake_parse_arguments(PARSE_ARGV 0 ${PREFIX} "${FLAGS}"
                         "${SINGLE_VALUE_ARGS}" "${MULTI_VALUE_ARGS}")
 
   # Initialise
-  set(MARKER "⦿")
+  set(MARKER "⦿ ")
   set(OOMPH_SETTINGS_MESSAGE "\n")
 
   # Append configuration options
@@ -44,7 +44,7 @@ function(oomph_print_project_settings)
   # Sort the list alphabetically
   list(SORT OOMPH_COMPILE_DEFINITIONS)
 
-  # Now print the compile definitions
+  # Now doc the compile definitions
   string(APPEND OOMPH_SETTINGS_MESSAGE "\n")
   string(APPEND OOMPH_SETTINGS_MESSAGE "===============================\n")
   string(APPEND OOMPH_SETTINGS_MESSAGE "OOMPH-LIB COMPILER DEFINITIONS:\n")
@@ -55,19 +55,20 @@ function(oomph_print_project_settings)
   string(APPEND OOMPH_SETTINGS_MESSAGE
          "************************************************************\n")
 
-  # Print it
+  # Doc it
   message(NOTICE "${OOMPH_SETTINGS_MESSAGE}")
 
   # Log to file if needed
   set(OUTPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/oomphlib-configuration.log")
-  if(${PREFIX}_ENABLE_SAVE_TO_FILE OR ${PREFIX}_ENABLE_PRINT_AFTER_INSTALL)
+  if(${PREFIX}_ENABLE_SAVE_TO_FILE
+     OR ${PREFIX}_ENABLE_ALSO_PRINT_SETTINGS_AFTER_INSTALL)
     file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/oomphlib-configuration.log"
          "${OOMPH_SETTINGS_MESSAGE}")
   endif()
 
-  # Print during install step; oomph_print_project_settings(...) must be called
-  # at the end of the configuration step for this to get printed at the end
-  if(${PREFIX}_ENABLE_PRINT_AFTER_INSTALL)
+  # Doc during install step; oomph_doc_project_settings(...) must be called at
+  # the end of the configuration step for this to get doced at the end
+  if(${PREFIX}_ENABLE_ALSO_PRINT_SETTINGS_AFTER_INSTALL)
     install(CODE "execute_process(COMMAND cat \"${OUTPUT_FILE}\")")
   endif()
 endfunction()

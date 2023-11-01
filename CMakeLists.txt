@@ -92,15 +92,6 @@ oomph_option(OOMPH_USE_DEPRECATED_SUPERLU "Use oomph-lib's deprecated version of
 oomph_option(OOMPH_SUPPRESS_TRIANGLE_LIB "Suppress build of oomph-lib's copy of the triangle library" OFF)
 oomph_option(OOMPH_SUPPRESS_TETGEN_LIB "Suppress build of oomph-lib's copy of the tetgen library" OFF)
 
-# FIXME: Override OOMPH_WANT_<LIB> variables if OOMPH_USE_<LIB>_FROM is specified
-
-# Third-party libraries. [WORK IN PROGRESS.]
-oomph_option(OOMPH_WANT_CGAL "Do we want to build the CGAL library?" OFF)
-oomph_option(OOMPH_WANT_HYPRE "Use Hypre library" OFF)
-oomph_option(OOMPH_WANT_MUMPS "Use MUMPS library" OFF)
-oomph_option(OOMPH_WANT_TRILINOS "Use Trilinos library" OFF)
-oomph_option(OOMPH_WANT_NLOHMANN_JSON "Use the nlohmann JSON library" OFF)
-
 # Paths to packages that the user has installed themselves
 oomph_path_option(OOMPH_USE_MPI_FROM "Path to MPI installation" "${OOMPH_USE_MPI_FROM}")
 oomph_path_option(OOMPH_USE_GMSH_FROM "Path to 'gmsh' executable" "${OOMPH_USE_GMSH_FROM}")
@@ -295,11 +286,11 @@ add_custom_target(
 
 # --------------------[ PRINT PROJECT-SPECIFIC SETTINGS ]-----------------------
 
-include(OomphPrintProjectSettings)
+include(OomphDocProjectSettings)
 if(OOMPH_PRINT_SETTINGS_AFTER_INSTALL)
-  oomph_print_project_settings(ENABLE_PRINT_AFTER_INSTALL)
+  oomph_doc_project_settings(ENABLE_ALSO_PRINT_SETTINGS_AFTER_INSTALL)
 else()
-  oomph_print_project_settings()
+  oomph_doc_project_settings()
 endif()
 
 # ------------------------------------------------------------------------------

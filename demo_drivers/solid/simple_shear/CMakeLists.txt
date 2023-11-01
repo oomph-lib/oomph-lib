@@ -12,7 +12,11 @@ include(CTest)
 # Precompile the mesh as an OBJECT library
 add_library(precompiled_mesh OBJECT precompiled_mesh.cc)
 target_link_libraries(precompiled_mesh oomph::solid)
-target_compile_features(precompiled_mesh PUBLIC cxx_std_14)
+if(CMAKE_CXX_STANDARD)
+  target_compile_features(precompiled_mesh PUBLIC cxx_std_${CMAKE_CXX_STANDARD})
+else()
+  target_compile_features(precompiled_mesh PUBLIC cxx_std_17)
+endif()
 
 oomph_add_executable(
   NAME simple_shear

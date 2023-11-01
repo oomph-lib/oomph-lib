@@ -4,7 +4,6 @@ message(VERBOSE "Entered one_d_poisson subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(one_d_poisson C CXX Fortran)
-message("CMAKE_CXX_STANDARD: ${CMAKE_CXX_STANDARD}")
 if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()

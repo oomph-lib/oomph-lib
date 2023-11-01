@@ -66,17 +66,6 @@ set(OOMPH_HAS_TRIANGLE @OOMPH_HAS_TRIANGLE@)
 set(OOMPH_HAS_ZLIB @OOMPH_HAS_ZLIB@)
 set(USING_OOMPH_SUPERLU @USING_OOMPH_SUPERLU@)
 
-# ~~~
-# No longer needed by demo drivers:
-# set(HAVE_ARPACK_SOURCES @HAVE_ARPACK_SOURCES@)
-# set(WANT_EIGENPROBLEM_TESTS ${HAVE_ARPACK_SOURCES})
-# set(HAVE_MALLOCH @OOMPH_HAS_MALLOCH@)
-# set(HAVE_UNISTDH @OOMPH_HAS_UNISTDH@)
-# ~~~
-
-# FIXME: Shouldn't the _HAS_ variables be the ones that are captured? (Not the
-# _WANT_ or ENABLE_USE_ ones!)
-
 # Capture values from the configuration step to determine which dependencies
 # should be forwarded to the user. Note that if the packages aren't requested,
 # the variables won't have any values (because the _HAS_ variables won't be
@@ -89,14 +78,42 @@ set(OOMPH_HAS_TRILINOS @OOMPH_HAS_TRILINOS@)
 set(OOMPH_HAS_NLOHMANN_JSON @OOMPH_HAS_NLOHMANN_JSON@)
 
 # Capture user's decision to their own libraries
+set(OOMPH_USE_BLAS_FROM "@OOMPH_USE_BLAS_FROM@")
+set(OOMPH_USE_LAPACK_FROM "@OOMPH_USE_LAPACK_FROM@")
 set(OOMPH_USE_MPI_FROM "@OOMPH_USE_MPI_FROM@")
+set(OOMPH_USE_GMP_FROM "@OOMPH_USE_GMP_FROM@")
+set(OOMPH_USE_MPFR_FROM "@OOMPH_USE_MPFR_FROM@")
 set(OOMPH_USE_BOOST_FROM "@OOMPH_USE_BOOST_FROM@")
 set(OOMPH_USE_CGAL_FROM "@OOMPH_USE_CGAL_FROM@")
+set(OOMPH_USE_MUMPS_FROM "@OOMPH_USE_MUMPS_FROM@")
 set(OOMPH_USE_HYPRE_FROM "@OOMPH_USE_HYPRE_FROM@")
 set(OOMPH_USE_TRILINOS_FROM "@OOMPH_USE_TRILINOS_FROM@")
 
 # The gmsh executable
 set(OOMPH_GMSH_COMMAND "@OOMPH_GMSH_COMMAND@")
+
+# ---------------------------------[ HELPERS ]---------------------------------
+
+# FIXME: Doesn't work! Argh!
+function(oomph_push_cmake_prefix_path NEW_CMAKE_PREFIX_PATH)
+  if(DEFINED OOMPH_PUSHED_CMAKE_PREFIX_PATH)
+    message(
+      FATAL_ERROR
+        "OOMPH_PUSHED_CMAKE_PREFIX_PATH already defined and set to '${OOMPH_PUSHED_CMAKE_PREFIX_PATH}'! Did you forget to pop the value?"
+    )
+  endif()
+  set(OOMPH_PUSHED_CMAKE_PREFIX_PATH "${CMAKE_PREFIX_PATH}" PARENT_SCOPE)
+  set(CMAKE_PREFIX_PATH "${NEW_CMAKE_PREFIX_PATH}" CACHE INTERNAL "" FORCE)
+endfunction()
+
+function(oomph_pop_cmake_prefix_path)
+  if(NOT DEFINED OOMPH_PUSHED_CMAKE_PREFIX_PATH)
+    message(FATAL_ERROR "OOMPH_PUSHED_CMAKE_PREFIX_PATH has not been set!")
+  endif()
+  set(CMAKE_PREFIX_PATH "${OOMPH_PUSHED_CMAKE_PREFIX_PATH}" CACHE INTERNAL ""
+      FORCE)
+  unset(OOMPH_PUSHED_CMAKE_PREFIX_PATH PARENT_SCOPE)
+endfunction()
 
 # ---------------------[ FORWARD DEPENDENCY REQUIREMENTS ]---------------------
 
@@ -110,13 +127,14 @@ if(OOMPH_HAS_MPI)
   if(OOMPH_USE_MPI_FROM)
     set(BACKUP_CMAKE_PREFIX_PATH "${CMAKE_PREFIX_PATH}")
     set(CMAKE_PREFIX_PATH "${OOMPH_USE_MPI_FROM}" CACHE INTERNAL "" FORCE)
+
     find_dependency(MPI REQUIRED)
+
     set(CMAKE_PREFIX_PATH "${BACKUP_CMAKE_PREFIX_PATH}" CACHE INTERNAL "" FORCE)
   endif()
   find_dependency(MPI REQUIRED)
 
   set(OOMPH_MPI_NUM_PROC @OOMPH_MPI_NUM_PROC@)
-
   set(OOMPH_MPI_RUN_COMMAND "@OOMPH_MPI_RUN_COMMAND@")
   set(OOMPH_MPI_VARIABLENP_RUN_COMMAND "@OOMPH_MPI_VARIABLENP_RUN_COMMAND@")
 endif()
@@ -124,8 +142,6 @@ endif()
 # -------------------------[ EXTERNAL SOURCES STUFF ]--------------------------
 
 set(BLA_VENDOR @BLA_VENDOR@)
-set(OOMPH_USE_BLAS_FROM "@OOMPH_USE_BLAS_FROM@")
-set(OOMPH_USE_LAPACK_FROM "@OOMPH_USE_LAPACK_FROM@")
 
 # Search for OpenBLAS/LAPACK libraries
 if(BLA_VENDOR
@@ -146,59 +162,19 @@ endif()
 # --------------------------[ THIRD-PARTY LIBRARIES ]--------------------------
 # cmake-format: off
 
-# Third-party libraries we built. Make sure to also check whether the dependency
-# has already been found otherwise these dependency checks can be called again
-# and again unnecessarily
-
-# NOTE: We pair find_dependency(...) calls below to have the form
-#
-# find_package(<PACKAGE> <VERSION> QUIET CONFIG PATHS "@OOMPH_USE_<PACKAGE>_FROM@;@CMAKE_INSTALL_PREFIX@" NO_DEFAULT_PATH)
-# find_dependency(<PACKAGE> <VERSION> CONFIG REQUIRED)
-#
-# so that we first search the OOMPH_USE_<PACKAGE>_FROM directory and then install
-# directory for the library incase we installed it ourselves. Only if this fails
-# will we search system-wide for the library. We have to use find_package(...) for
-# the first call otherwise if the user called find_package(oomphlib REQUIRED) then
-# the find_dependency(...) will be REQUIRED. In this case, the find_package(...)
-# call for oomphlib will fail instantly when we only want it to fail if we also
-# couldn't find the package system-wide.
-
-list(APPEND CMAKE_PREFIX_PATH "@CMAKE_INSTALL_PREFIX@")
-
-# nlohmann_json
-if(OOMPH_HAS_NLOHMANN_JSON AND (NOT nlohmann_json_FOUND))
-  find_package(nlohmann_json 3.11.2 QUIET CONFIG PATHS "@OOMPH_USE_NLOHMANN_JSON_FROM@;@CMAKE_INSTALL_PREFIX@" NO_DEFAULT_PATH)
-  find_dependency(nlohmann_json 3.11.2 CONFIG REQUIRED)
-endif()
+# FIXME: BOOST COMPONENTS SHOULD BE SET IN A CACHE VARIABLE
 
 # CGAL
 if(OOMPH_HAS_CGAL AND (NOT CGAL_FOUND))
-  set(OOMPH_USE_GMP_FROM "@OOMPH_USE_GMP_FROM@")
-  set(OOMPH_USE_MPFR_FROM "@OOMPH_USE_MPFR_FROM@")
-  set(FORCE_BUILD_OWN_VERSION_OF_CGAL @FORCE_BUILD_OWN_VERSION_OF_CGAL@)
-
-  # TODO: Check that this works with a custom gmp/mpfr installation
   set(BACKUP_CMAKE_PREFIX_PATH "${CMAKE_PREFIX_PATH}")
-  set(CMAKE_PREFIX_PATH "${OOMPH_USE_GMP_FROM};${OOMPH_USE_MPFR_FROM}" CACHE INTERNAL "" FORCE)
-  find_dependency(GMP REQUIRED)
-  find_dependency(MPFR REQUIRED)
+  set(CMAKE_PREFIX_PATH "${OOMPH_USE_GMP_FROM};${OOMPH_USE_MPFR_FROM};${OOMPH_USE_BOOST_FROM};${OOMPH_USE_CGAL_FROM}" CACHE INTERNAL "" FORCE)
+
+  # find_dependency(GMP REQUIRED)
+  # find_dependency(MPFR REQUIRED)
+  # find_dependency(Boost 1.83.0 REQUIRED COMPONENTS Thread System Program_options)
+  find_dependency(CGAL 5.6 CONFIG REQUIRED)
+
   set(CMAKE_PREFIX_PATH "${BACKUP_CMAKE_PREFIX_PATH}" CACHE INTERNAL "" FORCE)
-
-  find_package(Boost 1.66.0 QUIET COMPONENTS Thread System Program_options PATHS "@OOMPH_USE_BOOST_FROM@;@CMAKE_INSTALL_PREFIX@" NO_DEFAULT_PATH)
-  find_dependency(Boost 1.66.0 REQUIRED COMPONENTS Thread System Program_options)
-
-  # FIXME: Delete the FORCE_BUILD_OWN_VERSION_OF_CGAL=TRUE block once the BUILD_TESTING bug in CGAL is resolved
-  set(CGAL_DO_NOT_WARN_ABOUT_CMAKE_BUILD_TYPE @CGAL_DO_NOT_WARN_ABOUT_CMAKE_BUILD_TYPE@ CACHE INTERNAL "")
-  if (FORCE_BUILD_OWN_VERSION_OF_CGAL)
-    find_dependency(CGAL 5.5.1 CONFIG REQUIRED PATHS "@CMAKE_INSTALL_PREFIX@" NO_DEFAULT_PATH)
-  else()
-    find_dependency(CGAL 5.5.1 CONFIG REQUIRED PATHS "@OOMPH_USE_CGAL_FROM@;@CMAKE_INSTALL_PREFIX@" NO_DEFAULT_PATH)
-  endif()
-
-  # TODO: Once the bug in CGAL has been resolved (presumably shipped as CGAL v5.5.2),
-  # uncomment the following lines and remove the above if-else block
-  # find_package(CGAL 5.5.2 QUIET CONFIG REQUIRED PATHS "@OOMPH_USE_CGAL_FROM@;@CMAKE_INSTALL_PREFIX@" NO_DEFAULT_PATH)
-  # find_dependency(CGAL 5.5.2 CONFIG REQUIRED)
 endif()
 
 # MUMPS

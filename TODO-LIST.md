@@ -10,20 +10,20 @@
 ### Third party library support
 
 * Patch support for libraries using oomph-lib-built BLAS/LAPACK:
-  * Hypre and Trilinos rely on absolute paths to blas and lapack which doesn't work if they are built by oomph-lib...
   * [ ] Hypre
   * [ ] Trilinos
-  * Steps:
+  * N.B. Hypre and Trilinos rely on absolute paths to blas and lapack which doesn't work if they are built by oomph-lib...
+  * **Possible solution:**
     * Construct BLAS/LAPACK paths
-      * Q: Is this going to work after they've been installed?...
+      * **Q:** Is this going to work after they've been installed?...
     * Make sure BLAS/LAPACK are built before Hypre/Trilinos
-* [ ] Convert external library version numbers into variables? (ODR)
+* [ ] Convert external library version numbers to variables?
 * [ ] Address MUMPS 64-bit int (i.e. long long) compatibility issue
 
 ### Improvements
 
 * [ ] Discuss the Doxygen search engine; `SEARCHENGINE=NO` at the moment...
-* [ ] *Optional:* Convert `oomph_gzip` library to single-file?
+* [ ] *Optional:* Convert `oomph_gzip` library to single source file?
 
 ### GitHub-y
 
@@ -32,6 +32,9 @@
 
 ### Pure-CMake
 
+* [ ] Propagate compiler flags to users executables
+* [ ] Discuss updating to C++17
+  * [ ] Required for latest Trilinos (as of 21/01/23) so will definitely be required for Trilinos v14.0
 * [ ] Add `oomph_option(...)` and `oomph_set(...)` commands to specify the commandline options to the user
 * [ ] Add functionality to specify `--gmsh_command_line`
 * [ ] Patch the use of shared libs
@@ -120,7 +123,6 @@ Include tasks here that likely need some collaboration with Matthias
 
 * [ ] Go through all new commits to the main repository in the last 1-2 years and make sure any changes in Makefiles have been reflected in their corresponding CMakeLists.txt file
 * [ ] Possibly change `oomphlib` -> `oomph_lib`? (carefully(!) avoid changing headers/sources)
-* [ ] Discuss updating to C++17 (fresh start?)
 * [ ] Discuss distributing with `nlohmann/json`
 * [ ] Settle on how to handle versioning (e.g. should we define a `version.h`?)
 * [ ] Properly review to-do list and see if there's anything missing!
