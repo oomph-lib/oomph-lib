@@ -1015,11 +1015,6 @@ Option                                  | Description                           
 `OOMPH_USE_DEPRECATED_SUPERLU`          | Use oomph-lib's deprecated version of SuperLU (4.3)                          | OFF
 `OOMPH_SUPPRESS_TRIANGLE_LIB`           | Suppress build of oomph-lib's copy of the triangle library                   | OFF
 `OOMPH_SUPPRESS_TETGEN_LIB`             | Suppress build of oomph-lib's copy of the tetgen library                     | OFF
-`OOMPH_WANT_NLOHMANN_JSON`              | Enable the [`nlohmann/json`](https://github.com/nlohmann/json) JSON library  | OFF
-`OOMPH_WANT_CGAL`                       | Enable we want to build the CGAL library? **[DOESN'T WORK YET!]**            | OFF
-`OOMPH_WANT_HYPRE`                      | Enable Hypre library                                                         | OFF
-`OOMPH_WANT_MUMPS`                      | Enable MUMPS library [CURRENTLY ONLY WORKING WITH MPI]                       | OFF
-`OOMPH_WANT_TRILINOS`                   | Enable Trilinos library                                                      | OFF
 
 ## CMake Presets
 
