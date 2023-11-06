@@ -675,6 +675,56 @@ namespace oomph
                                Shape& psi,
                                Shape& test) const;
 
+    /// Return FE interpolated pressure at local coordinate s
+    Vector<double> interpolated_dpdx_axi_nst(const Vector<double>& s) const
+    {
+      // Find number of nodes
+      const unsigned n_pres = npres_axi_nst();
+      // Find number of dimensions
+      const unsigned n_dim = nodal_dimension();
+      // Local shape function
+      Shape psi(n_pres);
+      DShape dpsidx(n_pres, n_dim);
+      // Find values of shape function
+      dpshape_eulerian_axi_nst(s, psi, dpsidx);
+
+      // Initialise value of p
+      Vector<double> interpolated_dpdx(n_dim, 0.0);
+      // Loop over the local nodes and sum
+      for (unsigned l = 0; l < n_pres; l++)
+      {
+        for (unsigned n = 0; n < n_dim; n++)
+        {
+          interpolated_dpdx[n] += p_axi_nst(l) * dpsidx(l, n);
+        }
+      }
+
+      return (interpolated_dpdx);
+    }
+
+    /// Pressure shape functions at local coordinate s
+    inline double dpshape_eulerian_axi_nst(const Vector<double>& s,
+                                           Shape& psi,
+                                           DShape& dpsidx) const
+    {
+      pshape_axi_nst(s, psi);
+      dpsidx(0, 0) = 1.0;
+      dpsidx(1, 1) = 1.0;
+      dpsidx(2, 0) = -1.0;
+      dpsidx(2, 1) = -1.0;
+
+      // Allocate memory for the inverse jacobian
+      DenseMatrix<double> inverse_jacobian(dpsidx.nindex2());
+      // Now calculate the inverse jacobian
+      const double det = local_to_eulerian_mapping(dpsidx, inverse_jacobian);
+
+      // Now set the values of the derivatives to be dpsidx
+      transform_derivatives(inverse_jacobian, dpsidx);
+      // Return the determinant of the jacobian
+      return det;
+    }
+
+
     /// Which nodal value represents the pressure?
     unsigned p_index_axi_nst()
     {
