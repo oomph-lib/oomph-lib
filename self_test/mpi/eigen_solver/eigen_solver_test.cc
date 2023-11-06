@@ -36,7 +36,7 @@ using namespace oomph;
 //=================================================================
 namespace global_parameters
 {
-  DenseMatrix<double> FixedRandomAsymmetricMatrix(64,64);
+ DenseMatrix<double> FixedRandomAsymmetricMatrix(64,64);
 };
 
 
@@ -71,7 +71,7 @@ public:
 protected:
 
  /// Number of values 
-  unsigned N_value;
+ unsigned N_value;
 
  /// Data index
  unsigned Data_index;
@@ -197,8 +197,8 @@ class FixedRandomAsymmetricEigenElement : public BaseEigenElement
 {
 public:
  
-  /// Override set_size to ensure the problem is 64x64
-  void set_size(const unsigned& n)
+ /// Override set_size to ensure the problem is 64x64
+ void set_size(const unsigned& n)
   {
    /// Override the input argument as the Rosser matrix is fixed at 8x8
    N_value = 64;
@@ -236,13 +236,13 @@ class RosserSymmetricEigenElement : public BaseEigenElement
 {
 public:
  
-  /// Override set_size to ensure the problem is 8x8
-  void set_size(const unsigned& n)
+ /// Override set_size to ensure the problem is 8x8
+ void set_size(const unsigned& n)
   {
-    // Override the input argument as the Rosser matrix is fixed at 8x8
-    N_value = 8;
+   // Override the input argument as the Rosser matrix is fixed at 8x8
+   N_value = 8;
 
-    Data_index = add_internal_data(new Data(N_value));
+   Data_index = add_internal_data(new Data(N_value));
   }
 
  /// Implement creation of Jacobian and mass matrices by setting the Jacobian
@@ -389,10 +389,10 @@ public:
 private:
  
  /// Eigen solver pointer
-  EigenSolver* Eigen_solver_pt;
+ EigenSolver* Eigen_solver_pt;
  
  /// Eigenproblem 
-  Problem* Problem_pt;
+ Problem* Problem_pt;
 
  /// Matrix size
  unsigned Matrix_size;
@@ -404,10 +404,10 @@ private:
  bool Do_adjoint_problem;
  
  /// Number of times the function should be call for improved timing
-  unsigned N_timing_loops;
+ unsigned N_timing_loops;
 
-  // Store a pointer to doc_info
-  DocInfo* Doc_info_pt;
+ // Store a pointer to doc_info
+ DocInfo* Doc_info_pt;
 };
 
 
@@ -504,7 +504,7 @@ private:
  unsigned N_timing_loops;
  
  /// Pointer to doc_info
-  DocInfo* Doc_info_pt;
+ DocInfo* Doc_info_pt;
 };
 
 
@@ -515,22 +515,22 @@ void test_anasazi(const unsigned N,
                   const unsigned n_timing_loops,
                   DocInfo* doc_info_pt)
 {
-  // Create a new eigensolver
-  EigenSolver* eigen_solver_pt = new ANASAZI;
+ // Create a new eigensolver
+ EigenSolver* eigen_solver_pt = new ANASAZI;
 
-  // Test both the adjoint and regular problem
-  const bool do_adjoint_problem = false;
+ // Test both the adjoint and regular problem
+ const bool do_adjoint_problem = false;
 
-  // Test the regular solve_eigenproblem
-  SolveEigenProblemTest<AsymmetricEigenElement>(
-    eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem);
+ // Test the regular solve_eigenproblem
+ SolveEigenProblemTest<AsymmetricEigenElement>(
+  eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem);
 
-  // Test the legacy solve_eigenproblem
-  SolveEigenProblemLegacyTest<AsymmetricEigenElement>(
-    eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem);
+ // Test the legacy solve_eigenproblem
+ SolveEigenProblemLegacyTest<AsymmetricEigenElement>(
+  eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem);
 
-  // Free the eigen_solver_pt
-  delete eigen_solver_pt;
+ // Free the eigen_solver_pt
+ delete eigen_solver_pt;
 }
 
 
@@ -541,43 +541,43 @@ void test_anasazi(const unsigned N,
 //====================================================================
 int main(int argc, char** argv)
 {
-  MPI_Helpers::init(argc, argv);
+ MPI_Helpers::init(argc, argv);
 
-  int my_rank, size;
-  // Get number of MPI processes
-  MPI_Comm_size(MPI_COMM_WORLD, &size);
-  // Get current process rank id
-  MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
+ int my_rank, size;
+ // Get number of MPI processes
+ MPI_Comm_size(MPI_COMM_WORLD, &size);
+ // Get current process rank id
+ MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
 
-  // Number of times to repeat the operation for better timings
-  const unsigned n_timing_loops = 2;
+ // Number of times to repeat the operation for better timings
+ const unsigned n_timing_loops = 2;
 
-  // Matrix dimensions
-  const unsigned N = 64;
+ // Matrix dimensions
+ const unsigned N = 64;
 
-  // Create a DocInfo
-  DocInfo* doc_info_pt = new DocInfo;
+ // Create a DocInfo
+ DocInfo* doc_info_pt = new DocInfo;
 
-  // Set directory to anasazi and reset the numbering
-  doc_info_pt->set_directory("RESLT_anasazi/");
-  doc_info_pt->number() = 0;
+ // Set directory to anasazi and reset the numbering
+ doc_info_pt->set_directory("RESLT_anasazi/");
+ doc_info_pt->number() = 0;
 
-  // Add a header to the timing data stream
-  ofstream timing_stream;
-  timing_stream.open("timing.dat", ios_base::app);
-  timing_stream << "ANASAZI" << endl;
-  timing_stream.close();
+ // Add a header to the timing data stream
+ ofstream timing_stream;
+ timing_stream.open("timing.dat", ios_base::app);
+ timing_stream << "ANASAZI" << endl;
+ timing_stream.close();
 
-  // Ensure legacy flag is enabled
-  Anasazi::Use_temporary_code_for_andrew_legacy_version = true;
+ // Ensure legacy flag is enabled
+ Anasazi::Use_temporary_code_for_andrew_legacy_version = true;
 
-  // Call test anasazi
-  test_anasazi(N, n_timing_loops, doc_info_pt);
+ // Call test anasazi
+ test_anasazi(N, n_timing_loops, doc_info_pt);
 
-  // Delete doc_info_pt
-  delete doc_info_pt;
+ // Delete doc_info_pt
+ delete doc_info_pt;
 
-  MPI_Helpers::finalize();
+ MPI_Helpers::finalize();
 
-  return 0;
+ return 0;
 }

@@ -39,28 +39,28 @@ class BaseEigenElement : public GeneralisedElement
 {
 public:
  
-  BaseEigenElement() {}
+ BaseEigenElement() {}
 
-  /// Set problem size
-  void set_size(const unsigned& n)
+ /// Set problem size
+ void set_size(const unsigned& n)
   {
-    N_value = n;
+   N_value = n;
 
-    Data_index = add_internal_data(new Data(N_value));
+   Data_index = add_internal_data(new Data(N_value));
   }
 
-  /// Create the matrices in the eigenproblem, equivalent to the Jacobian and
-  /// mass matrix (virtual)
-  void fill_in_contribution_to_jacobian_and_mass_matrix(
-    Vector<double>& residuals,
-    DenseMatrix<double>& jacobian,
-    DenseMatrix<double>& mass_matrix) = 0;
+ /// Create the matrices in the eigenproblem, equivalent to the Jacobian and
+ /// mass matrix (virtual)
+ void fill_in_contribution_to_jacobian_and_mass_matrix(
+  Vector<double>& residuals,
+  DenseMatrix<double>& jacobian,
+  DenseMatrix<double>& mass_matrix) = 0;
 
 protected:
  
-  /// Store the problem size and the data index
-  unsigned N_value;
-  unsigned Data_index;
+ /// Store the problem size and the data index
+ unsigned N_value;
+ unsigned Data_index;
 };
 
 //==========================================================================
@@ -72,22 +72,22 @@ class IdentityEigenElement : public BaseEigenElement
  
 public:
  
-  /// Implement the Jacobian and mass matrix construction
-  void fill_in_contribution_to_jacobian_and_mass_matrix(
-    Vector<double>& residuals,
-    DenseMatrix<double>& jacobian,
-    DenseMatrix<double>& mass_matrix)
+ /// Implement the Jacobian and mass matrix construction
+ void fill_in_contribution_to_jacobian_and_mass_matrix(
+  Vector<double>& residuals,
+  DenseMatrix<double>& jacobian,
+  DenseMatrix<double>& mass_matrix)
   {
-    for (unsigned i = 0; i < N_value; i++)
+   for (unsigned i = 0; i < N_value; i++)
     {
-      unsigned local_eqn = internal_local_eqn(Data_index, i);
-      for (unsigned j = 0; j < N_value; j++)
+     unsigned local_eqn = internal_local_eqn(Data_index, i);
+     for (unsigned j = 0; j < N_value; j++)
       {
-        unsigned local_unknown = internal_local_eqn(Data_index, j);
-        if (i == j)
+       unsigned local_unknown = internal_local_eqn(Data_index, j);
+       if (i == j)
         {
-          jacobian(local_eqn, local_unknown) += 1;
-          mass_matrix(local_eqn, local_unknown) += 1;
+         jacobian(local_eqn, local_unknown) += 1;
+         mass_matrix(local_eqn, local_unknown) += 1;
         }
       }
     }
@@ -104,30 +104,30 @@ class AsymmetricEigenElement : public BaseEigenElement
 {
 public:
  
-  /// Implement creation of the matrices
-  void fill_in_contribution_to_jacobian_and_mass_matrix(
-    Vector<double>& residuals,
-    DenseMatrix<double>& jacobian,
-    DenseMatrix<double>& mass_matrix)
+ /// Implement creation of the matrices
+ void fill_in_contribution_to_jacobian_and_mass_matrix(
+  Vector<double>& residuals,
+  DenseMatrix<double>& jacobian,
+  DenseMatrix<double>& mass_matrix)
   {
-    for (unsigned i = 0; i < N_value; i++)
+   for (unsigned i = 0; i < N_value; i++)
     {
-      unsigned local_eqn = internal_local_eqn(Data_index, i);
-      for (unsigned j = 0; j < N_value; j++)
+     unsigned local_eqn = internal_local_eqn(Data_index, i);
+     for (unsigned j = 0; j < N_value; j++)
       {
-        unsigned local_unknown = internal_local_eqn(Data_index, j);
-        // Set the elements of the Jacobian's diagonal to 1, 2, 3, ..., 64
-        // and the mass matrix's diagonal to 1, 1, ..., 1
-        if (i == j)
+       unsigned local_unknown = internal_local_eqn(Data_index, j);
+       // Set the elements of the Jacobian's diagonal to 1, 2, 3, ..., 64
+       // and the mass matrix's diagonal to 1, 1, ..., 1
+       if (i == j)
         {
-          jacobian(local_eqn, local_unknown) += i + 1.0;
-          mass_matrix(local_eqn, local_unknown) += 1.0;
+         jacobian(local_eqn, local_unknown) += i + 1.0;
+         mass_matrix(local_eqn, local_unknown) += 1.0;
         }
-        // Set the upper diagonal elements to one for both matrices
-        else if (i > j)
+       // Set the upper diagonal elements to one for both matrices
+       else if (i > j)
         {
-          jacobian(local_eqn, local_unknown) += 1.0;
-          mass_matrix(local_eqn, local_unknown) += 1.0;
+         jacobian(local_eqn, local_unknown) += 1.0;
+         mass_matrix(local_eqn, local_unknown) += 1.0;
         }
       }
     }
@@ -144,24 +144,24 @@ class RandomAsymmetricEigenElement : public BaseEigenElement
 {
 public:
  
-  /// Implement creation of eigenproblem matrices
-  void fill_in_contribution_to_jacobian_and_mass_matrix(
-    Vector<double>& residuals,
-    DenseMatrix<double>& jacobian,
-    DenseMatrix<double>& mass_matrix)
+ /// Implement creation of eigenproblem matrices
+ void fill_in_contribution_to_jacobian_and_mass_matrix(
+  Vector<double>& residuals,
+  DenseMatrix<double>& jacobian,
+  DenseMatrix<double>& mass_matrix)
   {
-    // Initialise the random number generator to a fixed seed
-    unsigned seed = 0;
-    mt19937 generator(seed);
-    for (unsigned i = 0; i < N_value; i++)
+   // Initialise the random number generator to a fixed seed
+   unsigned seed = 0;
+   mt19937 generator(seed);
+   for (unsigned i = 0; i < N_value; i++)
     {
-      unsigned local_eqn = internal_local_eqn(Data_index, i);
-      for (unsigned j = 0; j < N_value; j++)
+     unsigned local_eqn = internal_local_eqn(Data_index, i);
+     for (unsigned j = 0; j < N_value; j++)
       {
-        unsigned local_unknown = internal_local_eqn(Data_index, j);
-        // Create two dense, random, asymmetric matrices
-        jacobian(local_eqn, local_unknown) += generator() % 256 - 128;
-        mass_matrix(local_eqn, local_unknown) += generator() % 256 - 128;
+       unsigned local_unknown = internal_local_eqn(Data_index, j);
+       // Create two dense, random, asymmetric matrices
+       jacobian(local_eqn, local_unknown) += generator() % 256 - 128;
+       mass_matrix(local_eqn, local_unknown) += generator() % 256 - 128;
       }
     }
   }
@@ -178,39 +178,39 @@ class FixedRandomAsymmetricEigenElement : public BaseEigenElement
 {
 public:
  
-  /// Override set_size to ensure the problem is 64x64
-  void set_size(const unsigned& n)
+ /// Override set_size to ensure the problem is 64x64
+ void set_size(const unsigned& n)
   {
-    /// Override the input argument as the Rosser matrix is fixed at 8x8
-    N_value = 64;
+   /// Override the input argument as the Rosser matrix is fixed at 8x8
+   N_value = 64;
 
-    Data_index = add_internal_data(new Data(N_value));
+   Data_index = add_internal_data(new Data(N_value));
   }
 
-  /// Implement creation of eigenproblem matrices
-  void fill_in_contribution_to_jacobian_and_mass_matrix(
-    Vector<double>& residuals,
-    DenseMatrix<double>& jacobian,
-    DenseMatrix<double>& mass_matrix)
+ /// Implement creation of eigenproblem matrices
+ void fill_in_contribution_to_jacobian_and_mass_matrix(
+  Vector<double>& residuals,
+  DenseMatrix<double>& jacobian,
+  DenseMatrix<double>& mass_matrix)
   {
-    // Initialise the random number generator to a fixed seed
-    ifstream input_stream;
-    input_stream.open("random_test_matrix.dat");
-    for (unsigned i = 0; i < N_value; i++)
+   // Initialise the random number generator to a fixed seed
+   ifstream input_stream;
+   input_stream.open("random_test_matrix.dat");
+   for (unsigned i = 0; i < N_value; i++)
     {
-      unsigned local_eqn = internal_local_eqn(Data_index, i);
-      for (unsigned j = 0; j < N_value; j++)
+     unsigned local_eqn = internal_local_eqn(Data_index, i);
+     for (unsigned j = 0; j < N_value; j++)
       {
-        unsigned local_unknown = internal_local_eqn(Data_index, j);
+       unsigned local_unknown = internal_local_eqn(Data_index, j);
 
-        string buffer;
-        getline(input_stream, buffer, ',');
-        double jac = stod(buffer);
+       string buffer;
+       getline(input_stream, buffer, ',');
+       double jac = stod(buffer);
 
-        jacobian(local_eqn, local_unknown) += jac;
-        if (local_eqn == local_unknown)
+       jacobian(local_eqn, local_unknown) += jac;
+       if (local_eqn == local_unknown)
         {
-          mass_matrix(local_eqn, local_unknown) += 1;
+         mass_matrix(local_eqn, local_unknown) += 1;
         }
       }
     }
@@ -226,43 +226,43 @@ class RosserSymmetricEigenElement : public BaseEigenElement
 {
 public:
  
-  /// Override set_size to ensure the problem is 8x8
-  void set_size(const unsigned& n)
+ /// Override set_size to ensure the problem is 8x8
+ void set_size(const unsigned& n)
   {
-    /// Override the input argument as the Rosser matrix is fixed at 8x8
-    N_value = 8;
+   /// Override the input argument as the Rosser matrix is fixed at 8x8
+   N_value = 8;
 
-    Data_index = add_internal_data(new Data(N_value));
+   Data_index = add_internal_data(new Data(N_value));
   }
 
-  /// Implement creation of Jacobian and mass matrices by setting the Jacobian
-  /// equal to the Rosser matrix and the mass matrix to the identity matrix
-  void fill_in_contribution_to_jacobian_and_mass_matrix(
-    Vector<double>& residuals,
-    DenseMatrix<double>& jacobian,
-    DenseMatrix<double>& mass_matrix)
+ /// Implement creation of Jacobian and mass matrices by setting the Jacobian
+ /// equal to the Rosser matrix and the mass matrix to the identity matrix
+ void fill_in_contribution_to_jacobian_and_mass_matrix(
+  Vector<double>& residuals,
+  DenseMatrix<double>& jacobian,
+  DenseMatrix<double>& mass_matrix)
   {
-    // The Rosser matrix, eigenvalues = 10*sqrt(10405), 1020, 510 +
-    // 100*sqrt(26), 1000, 1000, 510 - 100*sqrt(26), 0, -10*sqrt(10405)
-    int A[8][8] = {{611, 196, -192, 407, -8, -52, -49, 29},
-                   {196, 899, 113, -192, -71, -43, -8, -44},
-                   {-192, 113, 899, 196, 61, 49, 8, 52},
-                   {407, -192, 196, 611, 8, 44, 59, -23},
-                   {-8, -71, 61, 8, 411, -599, 208, 208},
-                   {-52, -43, 49, 44, -599, 411, 208, 208},
-                   {-49, -8, 8, 59, 208, 208, 99, -911},
-                   {29, -44, 52, -23, 208, 208, -911, 99}};
+   // The Rosser matrix, eigenvalues = 10*sqrt(10405), 1020, 510 +
+   // 100*sqrt(26), 1000, 1000, 510 - 100*sqrt(26), 0, -10*sqrt(10405)
+   int A[8][8] = {{611, 196, -192, 407, -8, -52, -49, 29},
+                  {196, 899, 113, -192, -71, -43, -8, -44},
+                  {-192, 113, 899, 196, 61, 49, 8, 52},
+                  {407, -192, 196, 611, 8, 44, 59, -23},
+                  {-8, -71, 61, 8, 411, -599, 208, 208},
+                  {-52, -43, 49, 44, -599, 411, 208, 208},
+                  {-49, -8, 8, 59, 208, 208, 99, -911},
+                  {29, -44, 52, -23, 208, 208, -911, 99}};
 
-    for (unsigned i = 0; i < N_value; i++)
+   for (unsigned i = 0; i < N_value; i++)
     {
-      unsigned local_eqn = internal_local_eqn(Data_index, i);
-      for (unsigned j = 0; j < N_value; j++)
+     unsigned local_eqn = internal_local_eqn(Data_index, i);
+     for (unsigned j = 0; j < N_value; j++)
       {
-        unsigned local_unknown = internal_local_eqn(Data_index, j);
-        jacobian(local_eqn, local_unknown) += double(A[i][j]);
-        if (i == j)
+       unsigned local_unknown = internal_local_eqn(Data_index, j);
+       jacobian(local_eqn, local_unknown) += double(A[i][j]);
+       if (i == j)
         {
-          mass_matrix(local_eqn, local_unknown) += 1;
+         mass_matrix(local_eqn, local_unknown) += 1;
         }
       }
     }
@@ -481,7 +481,7 @@ public:
 private:
 
  
-  /// Eigen solver pointer
+ /// Eigen solver pointer
  EigenSolver* Eigen_solver_pt;
  
  /// Eigenproblem
@@ -491,7 +491,7 @@ private:
  unsigned Matrix_size;
  
  /// Number of eigenvalues required
-  unsigned N_eval;
+ unsigned N_eval;
 
  /// Do adjoint or normal problem?
  bool Do_adjoint_problem;
@@ -558,22 +558,22 @@ int main(int argc, char** argv)
  const unsigned N = 64;
  
  // Create a DocInfo
-  DocInfo* doc_info_pt = new DocInfo;
+ DocInfo* doc_info_pt = new DocInfo;
 
-  // Set directory to lapack
-  doc_info_pt->set_directory("RESLT_lapack/");
+ // Set directory to lapack
+ doc_info_pt->set_directory("RESLT_lapack/");
 
-  // Add a header to the timing data stream
-  ofstream timing_stream;
-  timing_stream.open("timing.dat", ios_base::app);
-  timing_stream << "LAPACK_QZ" << endl;
-  timing_stream.close();
+ // Add a header to the timing data stream
+ ofstream timing_stream;
+ timing_stream.open("timing.dat", ios_base::app);
+ timing_stream << "LAPACK_QZ" << endl;
+ timing_stream.close();
 
-  // Call test lapack qz
-  test_lapack_qz(N, n_timing_loops, doc_info_pt);
+ // Call test lapack qz
+ test_lapack_qz(N, n_timing_loops, doc_info_pt);
 
-  // Delete doc_info_pt
-  delete doc_info_pt;
+ // Delete doc_info_pt
+ delete doc_info_pt;
 
-  return 0;
+ return 0;
 }

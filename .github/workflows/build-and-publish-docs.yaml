@@ -26,20 +26,6 @@ jobs:
              sudo apt-get install make automake libtool libtool-bin autoconf gfortran g++ texlive texlive-latex-extra texlive-font-utils doxygen
              doxygen --version
 
-      # No longer needed; keep this in case we need to istall a specific version of doxygen
-      #- name: Bleeding edge doxygen
-      #  run: |
-      #    wget https://www.doxygen.nl/files/doxygen-1.9.6.linux.bin.tar.gz
-      #    tar xvfz doxygen-1.9.6.linux.bin.tar.gz
-      #    sudo apt install libclang1-12
-      #    sudo apt install libclang-cpp12
-      #    echo "new doxygen (as installed):"
-      #    doxygen-1.9.6/bin/doxygen --version
-      #    sudo mv doxygen-1.9.6/bin/doxygen /usr/bin/doxygen
-      #    echo "new doxygen (installed in /usr/bin):"
-      #    which doxygen
-      #    doxygen --version
-
       - name: Pick configuration
         run: cp config/configure_options/build_web_version config/configure_options/current
 
