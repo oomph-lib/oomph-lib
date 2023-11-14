@@ -83,7 +83,8 @@ def fpdiff_helper(filename1,filename2,relative_error,small,
  # this line catches the error when an empty selftest reference data file is provided and will return a FAIL
  for file_length, filename in [(len(tmpfile1), filename1), (len(tmpfile2), filename2)]:
   if file_length == 0:
-   details_stream.write(f"\nWarning: file {filename} is empty and the test will therefore be treated as a FAIL\n")
+   details_stream.write(f"\nWarning: file {filename} is empty and the test will therefore be treated as a fail.")
+   outstream.write("\n\n   [FAILED]\n")
    return 1
 
  #Find the number of lines in each file

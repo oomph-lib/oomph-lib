@@ -1,8 +1,8 @@
 
 
 
-all: 
-	./build_script.bash ${GMP_LIB} ${GMP_INCLUDE} ${GMP_DIR} `echo " export CXX=${CXX};" "export CXXFLAGS=\" ${CXXFLAGS} \";" "export CC=${CC};" "export CFLAGS=\" ${CFLAGS} \";"`
+all:
+	./build_script.bash ${GMP_DIR} ${CXX} ${CC}
 
 
 install:

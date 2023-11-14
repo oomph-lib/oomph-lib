@@ -29,6 +29,7 @@ echo " "
 cat validate_sh_timing_generated_by_make_check.dat
 echo " "
 
+
 #echo "EXIT_CODE: " $EXIT_CODE
 if [ $EXIT_CODE -eq 0 ]; then
     exit 0
