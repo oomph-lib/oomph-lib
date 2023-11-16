@@ -12,7 +12,7 @@
 #                    DEPENDS_ON            <executables/targets-required-by-test>
 #                    LABELS                <string-list-of-labels>
 #                    COMMAND               <command-to-run-test>
-#                    [TEST_FILES            <files-required-by-test>]
+#                    [TEST_FILES           <files-required-by-test>]
 #                    [SILENCE_MISSING_VALIDATA_WARNING]
 #                    [NO_VALIDATE_SH])
 #
