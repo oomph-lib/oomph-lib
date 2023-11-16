@@ -16,7 +16,6 @@ oomph_add_executable(
 
 # ---------------------------------- TESTING ----------------------------------
 
-message("OOMPH_MPI_RUN_COMMAND: ${OOMPH_MPI_RUN_COMMAND}")
 oomph_add_test(
   TEST_NAME mpi.fish_poisson
   DEPENDS_ON fish_poisson
