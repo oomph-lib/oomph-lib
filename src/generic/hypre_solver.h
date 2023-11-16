@@ -40,7 +40,7 @@
 #include "preconditioner.h"
 
 // hypre's global error flag
-extern int hypre__global_error;
+extern hypre_Error hypre__global_error;
 
 
 namespace oomph

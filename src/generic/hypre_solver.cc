@@ -161,7 +161,7 @@ namespace oomph
       }
 
       // reset Hypre's global error flag
-      hypre__global_error = 0;
+      hypre__global_error.error_flag = 0;
 
       return err;
     }
@@ -513,7 +513,7 @@ namespace oomph
   void HypreInterface::hypre_matrix_setup(CRDoubleMatrix* matrix_pt)
   {
     // reset Hypre's global error flag
-    hypre__global_error = 0;
+    hypre__global_error.error_flag = 0;
 
     // issue warning if the matrix is small compared to the number of processors
     if (unsigned(2 * matrix_pt->distribution_pt()->communicator_pt()->nproc()) >
@@ -563,7 +563,7 @@ namespace oomph
 
 
     // reset Hypre's global error flag
-    hypre__global_error = 0;
+    hypre__global_error.error_flag = 0;
 
     // create dummy Hypre vectors which are required for setup
     HYPRE_IJVector dummy_sol_ij;
