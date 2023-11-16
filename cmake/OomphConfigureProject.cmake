@@ -40,9 +40,7 @@ endif()
 # ------------------------------------------------------------------------------
 # Configuration variables; create custom variables to avoid issues with regular
 # variables being overriden by third-party libraries or by parties that import
-# this library. The variable names used here follow a similar template to that
-# used by the nlohmann JSON library:
-# https://github.com/nlohmann/json/blob/develop/CMakeLists.txt
+# this library.
 # ------------------------------------------------------------------------------
 # cmake-format: off
 

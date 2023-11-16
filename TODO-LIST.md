@@ -123,7 +123,6 @@ Include tasks here that likely need some collaboration with Matthias
 
 * [ ] Go through all new commits to the main repository in the last 1-2 years and make sure any changes in Makefiles have been reflected in their corresponding CMakeLists.txt file
 * [ ] Possibly change `oomphlib` -> `oomph_lib`? (carefully(!) avoid changing headers/sources)
-* [ ] Discuss distributing with `nlohmann/json`
 * [ ] Settle on how to handle versioning (e.g. should we define a `version.h`?)
 * [ ] Properly review to-do list and see if there's anything missing!
 
@@ -178,7 +177,6 @@ Include tasks here that likely need some collaboration with Matthias
 * [x] Update `Doxyfile`s to set `QUIET = NO` again
 * [x] Update `demo_drivers` to allow building from any level
 * Add initial support for:
-  * [x] `nlohmann::json`
   * [x] `Hypre`
   * [x] `MUMPS`
   * [x] `Trilinos`
