@@ -47,10 +47,8 @@ project(
 # Specify the location of non-standard CMake modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/")
 
-# TODO: Will likely need to move to C++17 when Trilinos v14.0 is released...
-
 # Specify the C++ standard
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 # Build in Release (fully optimised) mode by default
@@ -119,15 +117,18 @@ if(OOMPH_USE_GMSH_FROM)
       FATAL_ERROR
         "You said that 'gmsh' can be found here:\n\t${OOMPH_USE_GMSH_FROM}\nbut this file/directory does not exist!"
     )
+  elseif(IS_DIRECTORY "${OOMPH_USE_GMSH_FROM}")
+    message(
+      FATAL_ERROR
+        "Argument to 'OOMPH_USE_GMSH_FROM' must be an executable, not a directory!"
+    )
   endif()
 
   # Extract path components
   set(OOMPH_GMSH_DIR ${OOMPH_USE_GMSH_FROM})
   set(OOMPH_GMSH_PROGRAM)
-  if(NOT IS_DIRECTORY ${OOMPH_USE_GMSH_FROM})
-    cmake_path(GET OOMPH_USE_GMSH_FROM PARENT_PATH OOMPH_GMSH_DIR)
-    cmake_path(GET OOMPH_USE_GMSH_FROM STEM OOMPH_GMSH_PROGRAM)
-  endif()
+  cmake_path(GET OOMPH_USE_GMSH_FROM STEM OOMPH_GMSH_PROGRAM)
+  cmake_path(GET OOMPH_USE_GMSH_FROM PARENT_PATH OOMPH_GMSH_DIR)
 
   # Search for a program;
   #
@@ -139,7 +140,7 @@ if(OOMPH_USE_GMSH_FROM)
     NO_DEFAULT_PATH)
 
   # Notify user
-  message(STATUS "Found 'gmsh' at: ${OOMPH_USE_GMSH_FROM}")
+  message(STATUS "Command 'gmsh' exists at: ${OOMPH_GMSH_COMMAND}")
 endif()
 
 # Let CMake take care of the famous -fPIC flag
