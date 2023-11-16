@@ -6,9 +6,16 @@ OOMPH_ROOT_DIR=$1
 # The path to gmsh (optional)
 gmsh_command=$2
 
+# Setup validation directory
+#---------------------------
+touch Validation
+rm -r -f Validation
+mkdir Validation
+
 # Bypass self-tests if executable hasn't been built (almost
 # certainly because there's no cgal
 if [ ! -f planar_facet_bounded_mesh_from_gmsh ]; then
+    cd Validation
     echo " "
     echo "Skipping four adaptive tet-mesh tests, presumably because"
     echo "driver codes weren't compiled because we don't have CGAL."
@@ -63,12 +70,6 @@ fi
 # Suppress (very costly!) bulk output -- re-enable if there are any problems...
 suppress_bulk_output_flag=""
 suppress_bulk_output_flag="--suppress_bulk_output"
-
-# Setup validation directory
-#---------------------------
-touch Validation
-rm -r -f Validation
-mkdir Validation
 
 cd Validation
 
