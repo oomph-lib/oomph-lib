@@ -45,7 +45,7 @@ if [ -f ../../orr_sommerfeld ]; then
     echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >>validation.log
   else
     if [ -s orr_sommerfeld_results.dat ]; then
-      ../../../../bin/fpdiff.py ../validata/orr_sommerfeld_results.dat.gz \
+      $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/orr_sommerfeld_results.dat.gz \
         orr_sommerfeld_results.dat 0.3 1.0e-14 >>validation.log
     else
       echo "dummy [OK] -- Orr-Sommerfeld driver has not run, probably because Trilinos is not installed" >>validation.log
