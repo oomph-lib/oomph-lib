@@ -19,50 +19,119 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        build_info: [{ mpi: "OFF", preset: ci }, { mpi: "ON", preset: ci-mpi }]
+        build_info:
+          [
+            { enable_mpi: "OFF", preset: ci },
+            { enable_mpi: "ON", preset: ci-mpi },
+          ]
+        build_third_party_libs: ["OFF", "ON"]
 
     runs-on: macos-latest
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v3
+      - name: Check out third-party libraries repository (optional)
+        if: matrix.build_third_party_libs == 'ON'
+        uses: actions/checkout@v4
+        with:
+          repository: puneetmatharu/oomph_lib_third_party_libraries
+          path: ./oomph_lib_third_party_libraries
+
+      - name: Check out oomph-lib repository
+        uses: actions/checkout@v4
+        with:
+          path: ./oomph_lib
 
       - name: Install dependencies
-        run: brew install cmake ninja openblas fd gmp mpfr boost && brew reinstall gcc
+        run: brew install ninja fd openblas gmp mpfr && brew reinstall gcc
 
       - name: Install MPI dependencies (if required)
-        if: matrix.build_info.mpi == 'ON'
+        if: matrix.build_info.enable_mpi == 'ON'
         run: brew install open-mpi
 
+      - name: Get CMake v3.24
+        uses: lukka/get-cmake@latest
+        with:
+          cmakeVersion: "~3.24.0"
+
+      - name: Check CMake version
+        run: cmake --version
+
+      - name: Configure third-party libraries (optional)
+        if: matrix.build_third_party_libs == 'ON'
+        run: |
+          cmake -G Ninja \
+            -DOOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTS=ON \
+            -DOOMPH_ENABLE_MPI=${{ matrix.build_info.enable_mpi }} \
+            -DOOMPH_USE_OPENBLAS_FROM=$(brew --prefix openblas) \
+            -DOOMPH_USE_GMP_FROM=$(brew --prefix gmp) \
+            -DOOMPH_USE_MPFR_FROM=$(brew --prefix mpfr) \
+            -B build
+        working-directory: ./oomph_lib_third_party_libraries
+
+      - name: Build third-party libraries (optional)
+        if: matrix.build_third_party_libs == 'ON'
+        run: cmake --build build
+        working-directory: ./oomph_lib_third_party_libraries
+
+      - name: Upload third-party libraries build logs (optional)
+        if: matrix.build_third_party_libs == 'ON'
+        uses: actions/upload-artifact@v3
+        with:
+          name: third_party_build_logs-${{ runner.os }}-MPI_${{ matrix.build_info.enable_mpi }}
+          path: ./oomph_lib_third_party_libraries/build/logs
+
       - name: Configure
-        run: cmake --preset ${{ matrix.build_info.preset }} -DCMAKE_PREFIX_PATH=$(brew --prefix openblas) -B build
+        if: matrix.build_third_party_libs == 'OFF'
+        run: cmake --preset ${{ matrix.build_info.preset }} -DOOMPH_USE_BLAS_FROM=$(brew --prefix openblas) -B build
+        working-directory: ./oomph_lib
+
+      - name: Configure with third-party libs
+        if: matrix.build_third_party_libs == 'ON'
+        run: |
+          cmake --preset ${{ matrix.build_info.preset }} \
+            -DOOMPH_USE_BLAS_FROM=$(brew --prefix openblas) \
+            -DOOMPH_USE_GMP_FROM=$(brew --prefix gmp) \
+            -DOOMPH_USE_MPFR_FROM=$(brew --prefix mpfr) \
+            -DOOMPH_USE_BOOST_FROM=${GITHUB_WORKSPACE}/oomph_lib_third_party_libraries/install/boost \
+            -DOOMPH_USE_CGAL_FROM=${GITHUB_WORKSPACE}/oomph_lib_third_party_libraries/install/cgal \
+            -DOOMPH_USE_MUMPS_FROM=${GITHUB_WORKSPACE}/oomph_lib_third_party_libraries/install/mumps \
+            -DOOMPH_USE_HYPRE_FROM=${GITHUB_WORKSPACE}/oomph_lib_third_party_libraries/install/hypre \
+            -DOOMPH_USE_TRILINOS_FROM=${GITHUB_WORKSPACE}/oomph_lib_third_party_libraries/install/trilinos \
+            -B build
+        working-directory: ./oomph_lib
 
       - name: Build
         run: cmake --build build
+        working-directory: ./oomph_lib
 
       - name: Install
         run: cmake --install build
+        working-directory: ./oomph_lib
 
       - name: Configure basic self-tests
         run: cmake -G Ninja -S self_test -B self_test/build --log-level=VERBOSE
+        working-directory: ./oomph_lib
 
       - name: Run basic self-tests
         id: self_tests
         run: ctest --preset ci --test-dir self_test/build -j $(sysctl -n hw.logicalcpu)
+        working-directory: ./oomph_lib
         continue-on-error: true
 
       - name: Configure demo drivers
         run: cmake -G Ninja -S demo_drivers -B demo_drivers/build --log-level=VERBOSE
+        working-directory: ./oomph_lib
 
       - name: Run demo driver self-tests
         id: demo_drivers
         run: ctest --preset ci --test-dir demo_drivers/build -j $(sysctl -n hw.logicalcpu)
+        working-directory: ./oomph_lib
         continue-on-error: true
 
       - name: Upload validation log file
         uses: actions/upload-artifact@v3
         with:
-          name: validation-${{ runner.os }}-MPI_${{ matrix.build_info.mpi }}.log
-          path: ./validation.log
+          name: validation-${{ runner.os }}-MPI_${{ matrix.build_info.enable_mpi }}.log
+          path: ./oomph_lib/validation.log
 
       - name: Propagate CTest test status
         if: steps.self_tests.outcome == 'failure' || steps.demo_drivers.outcome == 'failure'

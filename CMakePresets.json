@@ -11,15 +11,10 @@
       "hidden": true,
       "binaryDir": "${sourceDir}/build",
       "cacheVariables": {
+        "BLA_VENDOR": "OpenBLAS",
         "CMAKE_BUILD_TYPE": "Release",
         "BUILD_SHARED_LIBS": "OFF",
-        "OOMPH_DONT_SILENCE_USELESS_WARNINGS": "OFF",
-        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-        "OOMPH_ENABLE_MPI": "OFF",
-        "OOMPH_ENABLE_PARANOID": "OFF",
-        "OOMPH_ENABLE_RANGE_CHECKING": "OFF",
-        "OOMPH_TRANSITION_TO_VERSION_3": "OFF",
-        "OOMPH_USE_DEPRECATED_SUPERLU": "OFF"
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
       }
     },
     {
@@ -59,10 +54,7 @@
       "hidden": true,
       "inherits": "base",
       "generator": "Ninja",
-      "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Release",
-        "BLA_VENDOR": "OpenBLAS"
-      }
+      "cacheVariables": {}
     },
     {
       "name": "ci",
