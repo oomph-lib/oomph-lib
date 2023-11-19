@@ -130,7 +130,7 @@ jobs:
       - name: Upload validation log file
         uses: actions/upload-artifact@v3
         with:
-          name: validation-${{ runner.os }}-MPI_${{ matrix.build_info.enable_mpi }}.log
+          name: validation-${{ runner.os }}-THIRD_PARTY_LIBS_${{ matrix.build_third_party_libs }}-MPI_${{ matrix.build_info.enable_mpi }}.log
           path: ./oomph_lib/validation.log
 
       - name: Propagate CTest test status
