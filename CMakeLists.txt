@@ -73,8 +73,8 @@ find_package(Python3 REQUIRED)
 # cmake-format: off
 include(OomphCustomOptions)
 
-# CMake-only options; doesn't influence the build of oomph-lib
-option(OOMPH_PRINT_SETTINGS_AFTER_INSTALL "Display the oomph-lib settings at the end of the install step" OFF)
+# Regular CMake option; doesn't influence the build so we won't print its value at the end
+option(OOMPH_PRINT_SETTINGS_AFTER_INSTALL "Display the oomph-lib settings at the end of the install step" ON)
 
 # General options
 oomph_option(OOMPH_DONT_SILENCE_USELESS_WARNINGS "Display (harmless) warnings from external_src/ and src/ that are silenced" OFF)
