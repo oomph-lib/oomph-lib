@@ -10,6 +10,7 @@
 #
 # =============================================================================
 # cmake-format: on
+include_guard()
 
 # ------------------------------------------------------------------------------
 function(oomph_check_mpi)
@@ -53,6 +54,16 @@ endfunction()
 # Look for MPI functionality if we haven't found it yet
 if(NOT MPI_FOUND)
   if(OOMPH_USE_MPI_FROM)
+    # NOTE: CMake provides FindMPI.cmake to find MPI via find_package(MPI).
+    # However, this requires find_package(...) to operate in module mode rather
+    # than config mode (where it would search for MPIConfig.cmake). As a result,
+    # we can't use a simpler call of the form:
+    # ~~~
+    #       find_package(MPI REQUIRED
+    #                    COMPONENTS C CXX Fortran
+    #                    PATHS ${OOMPH_USE_CGAL_FROM} NO_DEFAULT_PATH)
+    # ~~~
+    # to locate the MPI package. :(
     set(BACKUP_CMAKE_PREFIX_PATH "${CMAKE_PREFIX_PATH}")
     set(CMAKE_PREFIX_PATH "${OOMPH_USE_MPI_FROM}" CACHE INTERNAL "" FORCE)
     find_package(MPI REQUIRED COMPONENTS C CXX Fortran)
@@ -66,6 +77,14 @@ endif()
 # command-line
 set(OOMPH_MPI_NUM_PROC 2 CACHE INTERNAL
     "Number of processes to use with MPI-enabled tests")
+
+# Sanity check
+if(NOT OOMPH_MPI_NUM_PROC MATCHES "^[0-9]+$")
+  message(
+    FATAL_ERROR
+      "The flag 'OOMPH_MPI_NUM_PROC' must be set an integer, not ${OOMPH_MPI_NUM_PROC}!"
+  )
+endif()
 
 # Set the command used to run MPI-enabled self-tests
 if(NOT DEFINED OOMPH_MPI_RUN_COMMAND)

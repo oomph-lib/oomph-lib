@@ -57,7 +57,7 @@ if(NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
 endif()
 
 # Sort out config files
-include(OomphConfigureProject)
+include(OomphConfigureCMakeInfoForProject)
 
 # Select level of verbosity (e.g. STATUS, VERBOSE, etc.). Only valid from CMake
 # 3.17 onwards. For earlier CMake versions, setting this variable has no effect
@@ -109,38 +109,9 @@ oomph_path_option(OOMPH_USE_TRILINOS_FROM "Path to Trilinos installation" "${OOM
 # C++ files only
 include(OomphAddCXXCompileDefinitions)
 
-# If OOMPH_USE_GMSH_FROM is the path to an executable, make sure it is a
-# program. If it's a directory, check that we can find 'gmsh' in the directory
+# Do we want to use Gmsh?
 if(OOMPH_USE_GMSH_FROM)
-  if(NOT EXISTS "${OOMPH_USE_GMSH_FROM}")
-    message(
-      FATAL_ERROR
-        "You said that 'gmsh' can be found here:\n\t${OOMPH_USE_GMSH_FROM}\nbut this file/directory does not exist!"
-    )
-  elseif(IS_DIRECTORY "${OOMPH_USE_GMSH_FROM}")
-    message(
-      FATAL_ERROR
-        "Argument to 'OOMPH_USE_GMSH_FROM' must be an executable, not a directory!"
-    )
-  endif()
-
-  # Extract path components
-  set(OOMPH_GMSH_DIR ${OOMPH_USE_GMSH_FROM})
-  set(OOMPH_GMSH_PROGRAM)
-  cmake_path(GET OOMPH_USE_GMSH_FROM STEM OOMPH_GMSH_PROGRAM)
-  cmake_path(GET OOMPH_USE_GMSH_FROM PARENT_PATH OOMPH_GMSH_DIR)
-
-  # Search for a program;
-  #
-  # TODO: Add a 'VALIDATOR' argument to check that gmsh works
-  find_program(
-    OOMPH_GMSH_COMMAND
-    NAMES gmsh ${OOMPH_GMSH_PROGRAM}
-    PATHS ${OOMPH_GMSH_DIR} REQUIRED
-    NO_DEFAULT_PATH)
-
-  # Notify user
-  message(STATUS "Command 'gmsh' exists at: ${OOMPH_GMSH_COMMAND}")
+  include(OomphFindGmsh)
 endif()
 
 # Let CMake take care of the famous -fPIC flag
@@ -155,14 +126,6 @@ endif()
 # Set up MPI functionality (see cmake/OomphMPI.cmake)
 if(OOMPH_ENABLE_MPI)
   include(OomphMPI)
-
-  # Sanity check
-  if(NOT OOMPH_MPI_NUM_PROC MATCHES "^[0-9]+$")
-    message(
-      FATAL_ERROR
-        "The flag 'OOMPH_MPI_NUM_PROC' must be set an integer, not ${OOMPH_MPI_NUM_PROC}!"
-    )
-  endif()
 endif()
 
 # Add PARANOID and RANGE_CHECKING for Debug configurations (ONLY!) if desired
