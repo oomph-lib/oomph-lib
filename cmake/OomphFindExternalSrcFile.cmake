@@ -29,6 +29,7 @@
 # shell command).
 # =============================================================================
 # cmake-format: on
+include_guard()
 
 function(oomph_find_external_src_file)
   # Define the supported set of keywords. The value of PREFIX will be prepended

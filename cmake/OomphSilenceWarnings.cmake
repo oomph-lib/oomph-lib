@@ -1,3 +1,17 @@
+# cmake-format: off
+# =============================================================================
+# DESCRIPTION:
+# ------------
+#
+#
+# USAGE:
+# ------
+#  include(OomphSilenceWarnings)
+# =============================================================================
+# cmake-format: on
+include_guard()
+
+# ----------------------------------------------------------------------------
 set(OOMPH_C_AND_CXX_FLAGS)
 set(OOMPH_C_FLAGS ${OOMPH_C_FLAGS} ${OOMPH_C_AND_CXX_FLAGS})
 set(OOMPH_CXX_FLAGS ${OOMPH_CXX_FLAGS} ${OOMPH_C_AND_CXX_FLAGS})
@@ -25,7 +39,6 @@ foreach(CXX_COMPILE_FLAG IN LISTS OOMPH_CXX_FLAGS)
     add_compile_options($<$<COMPILE_LANGUAGE:CXX>:${CXX_COMPILE_FLAG}>)
   endif()
 endforeach()
-
 # ----------------------------------------------------------------------------
 # Keep around!
 
