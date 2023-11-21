@@ -1,102 +1,234 @@
 # cmake-format: off
 # ==============================================================================
-# Build the third-party libraries
+#                                          888             888 d8b 888
+#                                          888             888 Y8P 888
+#                                          888             888     888
+#  .d88b.   .d88b.  88888b.d88b.  88888b.  88888b.         888 888 88888b.
+# d88""88b d88""88b 888 "888 "88b 888 "88b 888 "88b        888 888 888 "88b
+# 888  888 888  888 888  888  888 888  888 888  888 888888 888 888 888  888
+# Y88..88P Y88..88P 888  888  888 888 d88P 888  888        888 888 888 d88P
+#  "Y88P"   "Y88P"  888  888  888 88888P"  888  888        888 888 88888P"
+#                                 888
+#                                 888
+#                                 888
+# ------------------------------------------------------------------------------
+# oomph-lib is an object-oriented, open-source finite-element library for the
+# simulation of multi-physics problems. It is developed and maintained by
+# Matthias Heil and Andrew Hazel of the School of Mathematics at The University
+# of Manchester, along with many other contributors.
+#
+# This library is distributed with a GNU LGPL License; see LICENSE.txt.
 # ==============================================================================
-list(APPEND CMAKE_MESSAGE_INDENT " ")
-message(VERBOSE "Entered external_distributions subdirectory")
+# cmake-format: on
+cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
+project(
+  oomph_lib_third_party_libraries
+  DESCRIPTION "Builds the third-party libraries used by oomph-lib."
+  VERSION 1.0.0
+  HOMEPAGE_URL "https://oomph-lib.github.io/oomph-lib/doc/html/"
+  LANGUAGES C CXX Fortran)
 
-# Targets to store the accumulated compiler flags and external libs to link
-set(EXTERNAL_DIST_CXX_DEFINITIONS "")
+# ---------------------------[ INITIAL PROJECT SETUP ]--------------------------
 
-# CGAL
-if(OOMPH_USE_GMP_FROM OR OOMPH_USE_MPFR_FROM OR OOMPH_USE_BOOST_FROM OR OOMPH_USE_CGAL_FROM)
-  if(NOT (OOMPH_USE_GMP_FROM AND OOMPH_USE_MPFR_FROM AND OOMPH_USE_BOOST_FROM AND OOMPH_USE_CGAL_FROM))
+# Handle warning about timestamps when downloading archives via ExternalProject
+if(POLICY CMP0135)
+  cmake_policy(SET CMP0135 OLD)
+endif()
+
+# Specify the location of non-standard CMake modules
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/")
+
+# Specify the C++ standard. NOTE: This version MUST align with the version used
+# in the build of the main oomph-lib library
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
+
+# Build in Release (fully optimised) mode by default
+if((NOT CMAKE_BUILD_TYPE) OR (NOT DEFINED ENV{CMAKE_BUILD_TYPE}))
+  set(CMAKE_BUILD_TYPE "Release" CACHE STRING
+      "Build in Release mode for improved runtime performance.")
+endif()
+
+# Select level of verbosity (e.g. STATUS, VERBOSE, etc.)
+set(CMAKE_MESSAGE_LOG_LEVEL VERBOSE)
+
+# ------------------------------[ BUILD OPTIONS ]-------------------------------
+# cmake-format: off
+include(OomphOptions)
+
+# Boolean options
+oomph_option(OOMPH_ENABLE_MPI "Build third-party libraries with MPI support?" OFF)
+oomph_option(OOMPH_BUILD_OPENBLAS "Build OpenBLAS?" ON)
+oomph_option(OOMPH_BUILD_CGAL "Build CGAL?" ON)
+oomph_option(OOMPH_BUILD_MUMPS "Build MUMPS?" ON)
+oomph_option(OOMPH_BUILD_HYPRE "Build Hypre?" ON)
+oomph_option(OOMPH_BUILD_TRILINOS "Build Trilinos?" ON)
+oomph_option(OOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTS "Disable testing when building the third-party libraries?" OFF)
+
+# Path-like flags
+oomph_path_option(
+  FLAG OOMPH_THIRD_PARTY_INSTALL_DIR
+  DEFAULT "${CMAKE_CURRENT_LIST_DIR}/install"
+  DOCSTRING "Base installation directory for third-party libraries."
+)
+oomph_path_option(
+  FLAG OOMPH_USE_OPENBLAS_FROM
+  DOCSTRING "The path to a preinstalled version of OpenBLAS."
+)
+oomph_path_option(
+  FLAG OOMPH_USE_GMP_FROM
+  DOCSTRING "The path to a preinstalled version of GMP."
+)
+oomph_path_option(
+  FLAG OOMPH_USE_MPFR_FROM
+  DOCSTRING "The path to a preinstalled version of MPFR."
+)
+oomph_path_option(
+  FLAG OOMPH_USE_BOOST_FROM
+  DOCSTRING "The path to a preinstalled version of Boost."
+)
+
+# cmake-format: on
+# ----------------------[ FIND REQUIRED/DESIRED PACKAGES ]----------------------
+
+# Use CMake built-in modules to search for certain packages
+find_package(Git)
+find_package(Python3 REQUIRED)
+
+# Helpful CMake modules
+include(ExternalProject)
+include(ProcessorCount)
+
+# The 'make' executable
+find_program(MAKE_EXECUTABLE NAMES make REQUIRED)
+
+# Get our helper function for getting external libraries
+include(OomphGetExternalProjectHelper)
+
+# --------------------------------[ GENERAL ]----------------------------------
+
+# Decide on number of jobs to use for building projects
+ProcessorCount(NUM_PROCESSOR)
+set(NUM_JOBS 1)
+if(NUM_PROCESSOR EQUAL 0)
+  message(
+    WARNING
+      "Encountered error trying to determine the number of available CPU cores. Will build Makefile-based projects with just 1 job."
+  )
+else()
+  set(NUM_JOBS ${NUM_PROCESSOR})
+  message(STATUS "Number of jobs for parallel make: ${NUM_JOBS}")
+endif()
+
+# Where to download files from and where to install to
+set(OOMPH_THIRD_PARTY_TAR_FILE_URL
+    "https://www.matthias-heil.co.uk/oomph-lib_third_party_tar_files")
+
+# ----------------------------------[ MPI ]------------------------------------
+
+# Set up MPI functionality (see cmake/OomphMPI.cmake)
+if(OOMPH_ENABLE_MPI)
+  include(OomphMPI)
+endif()
+
+# --------------------------------[ OPENBLAS ]---------------------------------
+
+if(OOMPH_USE_OPENBLAS_FROM)
+  find_package(OpenBLAS 0.3.24 REQUIRED PATHS ${OOMPH_USE_OPENBLAS_FROM})
+  set(OOMPH_BUILD_OPENBLAS OFF CACHE PATH "Build OpenBLAS?" FORCE)
+elseif(OOMPH_BUILD_OPENBLAS)
+  include(OomphGetExternalOpenBLAS)
+endif()
+
+# Get the OpenBLAS root directory (required by MUMPS)
+if(OpenBLAS_LIBRARIES)
+  cmake_path(GET OpenBLAS_LIBRARIES PARENT_PATH OpenBLAS_LIBDIR)
+  cmake_path(GET OpenBLAS_LIBDIR PARENT_PATH OpenBLAS_ROOT)
+  set(OpenBLAS_ROOT "${OpenBLAS_ROOT}" CACHE PATH "" FORCE)
+endif()
+
+# ----------------------------------[ CGAL ]-----------------------------------
+
+# If we're given CGAL or need to build it
+if(OOMPH_BUILD_CGAL)
+  # If we're given GMP
+  if(OOMPH_USE_GMP_FROM)
+    find_package(GMP REQUIRED)
+  endif()
+
+  # If we're given MPFR
+  if(OOMPH_USE_MPFR_FROM)
+    find_package(MPFR REQUIRED)
+  endif()
+
+  # If we're given Boost
+  if(OOMPH_USE_BOOST_FROM)
+    find_package(
+      Boost 1.83.0 REQUIRED
+      PATHS ${OOMPH_USE_BOOST_FROM}
+      NO_DEFAULT_PATH)
+  endif()
+
+  # If we're given CGAL
+  include(OomphGetExternalCGAL)
+  set(GMP_FOUND TRUE)
+  set(MPFR_FOUND TRUE)
+  set(BOOST_FOUND TRUE)
+  set(CGAL_FOUND TRUE)
+else()
+  # If we haven't been asked to build CGAL but the user (bizarrely) told us
+  # where to find GMP, MPFR and/or Boost...
+  set(OOMPH_PASSED_CGAL_DEPS)
+  if(OOMPH_USE_GMP_FROM)
+    list(APPEND OOMPH_PASSED_CGAL_DEPS "'OOMPH_USE_GMP_FROM'")
+  endif()
+  if(OOMPH_USE_MPFR_FROM)
+    list(APPEND OOMPH_PASSED_CGAL_DEPS "'OOMPH_USE_MPFR_FROM'")
+  endif()
+  if(OOMPH_USE_BOOST_FROM)
+    list(APPEND OOMPH_PASSED_CGAL_DEPS "'OOMPH_USE_BOOST_FROM'")
+  endif()
+  if(OOMPH_PASSED_CGAL_DEPS)
+    string(JOIN " and " OOMPH_PASSED_CGAL_DEPS_AS_STR ${OOMPH_PASSED_CGAL_DEPS})
     message(
-      FATAL_ERROR
-        "If you want CGAL, you need to specify 'OOMPH_USE_GMP_FROM', 'OOMPH_USE_MPFR_FROM', 'OOMPH_USE_BOOST_FROM' *AND* 'OOMPH_USE_CGAL_FROM'!"
+      WARNING
+        "\nYou specified ${OOMPH_PASSED_CGAL_DEPS_AS_STR} but did not enable the build of CGAL. Did you forget to pass '-DOOMPH_BUILD_CGAL=ON'?"
     )
   endif()
-
-  set(REQUIRED_BOOST_COMPONENTS thread system program_options)
-
-  # NOTE: We wrote a custom FindGMP.cmake and FindMPFR.cmake script to search
-  # for GMP and MPFR. They will internally read the variables OOMPH_USE_GMP_FROM
-  # and OOMPH_USE_MPFR_FROM, respectively
-  find_package(GMP REQUIRED GLOBAL)
-  find_package(MPFR REQUIRED GLOBAL )
-  find_package(Boost 1.83.0 REQUIRED COMPONENTS ${REQUIRED_BOOST_COMPONENTS} GLOBAL PATHS ${OOMPH_USE_BOOST_FROM} NO_DEFAULT_PATH)
-  find_package(CGAL 5.6 REQUIRED GLOBAL PATHS ${OOMPH_USE_CGAL_FROM} NO_DEFAULT_PATH)
-
-  if (TARGET GMP::GMP)
-    message(STATUS "Hurray! The target GMP::GMP is defined!")
-  else()
-    message(FATAL_ERROR "Target GMP::GMP is not defined!")
-  endif()
-  if (TARGET MPFR::MPFR)
-    message(STATUS "Hurray! The target MPFR::MPFR is defined!")
-  else()
-    message(FATAL_ERROR "Target MPFR::MPFR is not defined!")
-  endif()
-  foreach(BOOST_COMPONENT IN LISTS REQUIRED_BOOST_COMPONENTS)
-    if (TARGET Boost::${BOOST_COMPONENT})
-      message(STATUS "Hurray! The target Boost::${BOOST_COMPONENT} is defined!")
-    else()
-      message(FATAL_ERROR "Target Boost::${BOOST_COMPONENT} is not defined!")
-    endif()
-  endforeach()
-  if (TARGET CGAL::CGAL)
-    message(STATUS "Hurray! The target CGAL::CGAL is defined!")
-  else()
-    message(FATAL_ERROR "Target CGAL::CGAL is not defined!")
-  endif()
-
-  list(APPEND EXTERNAL_DIST_CXX_DEFINITIONS OOMPH_HAS_GMP OOMPH_HAS_MPFR OOMPH_HAS_BOOST OOMPH_HAS_CGAL)
-  set(OOMPH_HAS_GMP TRUE CACHE INTERNAL "")
-  set(OOMPH_HAS_MPFR TRUE CACHE INTERNAL "")
-  set(OOMPH_HAS_BOOST TRUE CACHE INTERNAL "")
-  set(OOMPH_HAS_CGAL TRUE CACHE INTERNAL "")
 endif()
 
-# MUMPS
-if(OOMPH_USE_MUMPS_FROM)
-  set(SCALAPACK_ROOT "${OOMPH_USE_MUMPS_FROM}")
-  find_package(MUMPS 5.6.2.4 REQUIRED GLOBAL PATHS ${OOMPH_USE_MUMPS_FROM} NO_DEFAULT_PATH)
-  if (TARGET MUMPS::MUMPS)
-    message(STATUS "Hurray! The target MUMPS::MUMPS is defined!")
-  else()
-    message(FATAL_ERROR "Target MUMPS::MUMPS is not defined!")
-  endif()
-  list(APPEND EXTERNAL_DIST_CXX_DEFINITIONS OOMPH_HAS_MUMPS)
-  set(OOMPH_HAS_MUMPS TRUE CACHE INTERNAL "")
+# ----------------------------------[ MUMPS ]----------------------------------
+
+if(OOMPH_BUILD_MUMPS)
+  include(OomphGetExternalMUMPS)
 endif()
 
-# HYPRE
-if(OOMPH_USE_HYPRE_FROM)
-  find_package(HYPRE 2.29.0 REQUIRED GLOBAL PATHS ${OOMPH_USE_HYPRE_FROM} NO_DEFAULT_PATH)
-  if (TARGET HYPRE::HYPRE)
-    message(STATUS "Hurray! The target HYPRE::HYPRE is defined!")
-  else()
-    message(FATAL_ERROR "Target HYPRE::HYPRE is not defined!")
+# ----------------------------------[ HYPRE ]----------------------------------
+
+if(OOMPH_BUILD_HYPRE)
+  if(NOT OpenBLAS_LIBRARIES)
+    message(FATAL_ERROR "Refusing to build HYPRE without OpenBLAS!")
   endif()
-  list(APPEND EXTERNAL_DIST_CXX_DEFINITIONS OOMPH_HAS_HYPRE)
-  set(OOMPH_HAS_HYPRE TRUE CACHE INTERNAL "")
+  include(OomphGetExternalHYPRE)
 endif()
 
-# Trilinos
-if(OOMPH_USE_TRILINOS_FROM)
-  find_package(Trilinos 14.4.0 REQUIRED GLOBAL PATHS ${OOMPH_USE_TRILINOS_FROM} NO_DEFAULT_PATH)
-  if (TARGET Trilinos::all_libs)
-    message(STATUS "Hurray! The target Trilinos::all_libs is defined!")
-  else()
-    message(FATAL_ERROR "Target Trilinos::all_libs is not defined!")
+# ---------------------------------[ TRILINOS ]--------------------------------
+
+if(OOMPH_BUILD_TRILINOS)
+  if(NOT OpenBLAS_LIBRARIES)
+    message(FATAL_ERROR "Refusing to build Trilinos without OpenBLAS!")
   endif()
-  list(APPEND EXTERNAL_DIST_CXX_DEFINITIONS OOMPH_HAS_TRILINOS)
-  set(OOMPH_HAS_TRILINOS TRUE CACHE INTERNAL "")
+  include(OomphGetExternalTrilinos)
 endif()
 
-# Make the accumulated C++ definitions visible in the parent scope
-set(EXTERNAL_DIST_CXX_DEFINITIONS ${EXTERNAL_DIST_CXX_DEFINITIONS} PARENT_SCOPE)
+# ----------------------------[ DOC CONFIGURATION ]----------------------------
 
-message(VERBOSE "Leaving external_distributions subdirectory")
-# ------------------------------------------------------------------------------
-# cmake-format: on
+include(OomphDocProjectSettings)
+oomph_doc_project_settings()
+
+# -------------------------[ HOW TO USE THE LIBRARIES ]------------------------
+
+include(OomphPrintThirdPartyLibrariesUsage)
+oomph_doc_third_party_libraries_usage()
+
+# -----------------------------------------------------------------------------

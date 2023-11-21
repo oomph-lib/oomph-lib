@@ -1,0 +1,62 @@
+# ------------------------------------------------------------------------------
+
+name: macOS
+on: push
+
+# Print the output of a test if it fails
+env:
+  CTEST_OUTPUT_ON_FAILURE: 1
+
+# ------------------------------------------------------------------------------
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        mpi: ["OFF", "ON"]
+
+    runs-on: macos-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: brew install ninja automake openblas gmp mpfr && brew reinstall gcc
+
+      - name: Install MPI dependencies (if required)
+        if: matrix.mpi == 'ON'
+        run: brew install open-mpi
+
+      - name: Get CMake v3.24
+        uses: lukka/get-cmake@latest
+        with:
+          cmakeVersion: "~3.24.0"
+
+      - name: Check CMake version
+        run: cmake --version
+
+      - name: Configure
+        run: |
+          cmake -G Ninja \
+            -DOOMPH_USE_OPENBLAS_FROM=$(brew --prefix openblas) \
+            -DOOMPH_USE_GMP_FROM=$(brew --prefix gmp) \
+            -DOOMPH_USE_MPFR_FROM=$(brew --prefix mpfr) \
+            -DOOMPH_ENABLE_MPI=${{ matrix.mpi }} \
+            -B build
+
+      - name: Build/install
+        id: build
+        run: cmake --build build
+        continue-on-error: true
+
+      - name: Upload build logs
+        uses: actions/upload-artifact@v3
+        with:
+          name: build_logs-os_${{ runner.os }}-mpi_${{ matrix.mpi }}
+          path: ./build/logs/
+
+      - name: Propagate build status
+        if: steps.build.outcome == 'failure'
+        run: exit 1
+# ------------------------------------------------------------------------------
