@@ -518,7 +518,7 @@ namespace oomph
     }
 
     // Clean up the allocated memory
-    delete[] * z;
+    delete[] *z;
     *z = 0;
     delete z;
     z = 0;
@@ -536,7 +536,7 @@ namespace oomph
     workd = 0;
     delete[] resid;
     resid = 0;
-    delete[] * v;
+    delete[] *v;
     *v = 0;
     delete v;
     v = 0;
