@@ -1,24 +1,14 @@
 # Task list
 
-## Requirements for minimum viable product
+## Fine-tuning for beta release
 
-### To patch
+Include tasks here that likely need some collaboration with Matthias
 
-* [ ] Patch Trilinos + MPI support
-* [ ] Can't reconfigure when third-party libraries are installed. Why?!
+* [ ] Go through all new commits to the main repository in the last 1-2 years and make sure any changes in Makefiles have been reflected in their corresponding CMakeLists.txt file
+* [ ] Possibly change `oomphlib` -> `oomph_lib`? (carefully(!) avoid changing headers/sources)
 
-### Third party library support
-
-* Patch support for libraries using oomph-lib-built BLAS/LAPACK:
-  * [ ] Hypre
-  * [ ] Trilinos
-  * N.B. Hypre and Trilinos rely on absolute paths to blas and lapack which doesn't work if they are built by oomph-lib...
-  * **Possible solution:**
-    * Construct BLAS/LAPACK paths
-      * **Q:** Is this going to work after they've been installed?...
-    * Make sure BLAS/LAPACK are built before Hypre/Trilinos
-* [ ] Convert external library version numbers to variables?
-* [ ] Address MUMPS 64-bit int (i.e. long long) compatibility issue
+* [ ] Test with `OOMPH_TRANSITION_TO_VERSION_3`
+* [ ] Add demo driver test target to "all" so `ninja` in the build directory will also cause required test files to be copied over
 
 ### Improvements
 
@@ -33,14 +23,7 @@
 ### Pure-CMake
 
 * [ ] Propagate compiler flags to users executables
-* [ ] Discuss updating to C++17
-  * [ ] Required for latest Trilinos (as of 21/01/23) so will definitely be required for Trilinos v14.0
-* [ ] Add `oomph_option(...)` and `oomph_set(...)` commands to specify the commandline options to the user
-* [ ] Add functionality to specify `--gmsh_command_line`
 * [ ] Patch the use of shared libs
-* [ ] Sort out moving third-party libs after they've been built (will probably have issues with `oomphlibConfig.cmake`)
-* [ ] Update to C++17 again to patch issue in `demo_drivers/gzip/one_d_poisson`
-  * Will need to test with Trilinos as it used a function removed in C++17
 * [ ] Update MPI tests to specify [PROCESSORS](https://cmake.org/cmake/help/latest/prop_test/PROCESSORS.html#prop_test:PROCESSORS) rather than forcing everything to run sequentially
 * [ ] Update `oomph_add_test()` to take args for `validate.sh` and explicitly pass e.g. "${OOMPH_ROOT_DIR}" and "${OOMPH_MPI_RUN_COMMAND}"
   * Should help make things transparent and easier for users to control
@@ -68,19 +51,13 @@
 * [ ] *Optional:* Update all demo drivers to stop piping output to `validation.log`; use `ctest --o validation.log --output-on-failure`
   * Ideally we'd still output `validation.log` info to this file even if the test doesn't fail... (Just incase there's a bug where a test fails but CTest doesn't catch it)
 
-### Features to add or patch
+### Features to check, add or patch
 
-* [ ] Add Intel MKL BLAS support
+* [ ] ~~Add Intel MKL BLAS support~~
 * [ ] Implement `oomph_pure_cpp_test`
   * [ ] C++ side: Add a struct to generically handle the args for a pure C++ test
-* [ ] Replace current BLAS/LAPACK with OpenBLAS
-  * Looks quite complex... Appears to contain optimised kernels for different operating systems...
-  * Could possibly be done by adding it as a submodule?
-    * **Q:** Can we restrict it to a specific tag?
 * [ ] Fix MPI-enabled demo drivers that are broken on macOS
 * [ ] Update GitHub self-tests to only run after pushing .h, .c, .cc, CMakeLists.txt code (see e.g. [here](https://github.com/scivision/mumps/blob/v5.5.1.7/.github/workflows/ci.yml)).
-* [ ] Add option to build with `ccache` support
-* [ ] Add fmtlib/fmt(?)
 * [ ] Add `check_...()` calls to make sure the C/C++/Fortran/MPI compilers work
 * [ ] Download CMake `oomph-lib` to a folder that has a space in the name
 
@@ -115,20 +92,36 @@
 * [ ] Write a breakdown of all new features and important changes, e.g.
   * [ ] C++ implementation of `fpdiff.py`
   * [ ] `validate.sh` scripts now take the path to the root directory
-* [ ] Incrementing version number (**strongly recommend using `bumpversion.cfg` to keep git version and cmake version in sync!**)
-
-### Fine-tuning for beta release
-
-Include tasks here that likely need some collaboration with Matthias
-
-* [ ] Go through all new commits to the main repository in the last 1-2 years and make sure any changes in Makefiles have been reflected in their corresponding CMakeLists.txt file
-* [ ] Possibly change `oomphlib` -> `oomph_lib`? (carefully(!) avoid changing headers/sources)
-* [ ] Settle on how to handle versioning (e.g. should we define a `version.h`?)
-* [ ] Properly review to-do list and see if there's anything missing!
-
-### Less urgent
+* [ ] Incrementing version number (**recommend using `bumpversion.cfg` to keep git version and cmake version in sync; can make a makefile command for this 'make bump major' or 'make bump minor' or 'make bump patch'**)
 
 ## Finished
+
+* [x] Discuss updating to C++17
+  * [x] Required for Trilinos v14.4.0+ so will definitely be required for Trilinos v14.0
+* [x] Add `oomph_option(...)` commands to specify the commandline options to the user
+* [x] Add functionality to specify `--gmsh_command_line`
+* [x] Sort out moving third-party libs after they've been built (will probably have issues with `oomphlibConfig.cmake`)
+* [x] Update to C++17 again to patch issue in `demo_drivers/gzip/one_d_poisson`
+  * Will need to test with Trilinos as it used a function removed in C++17
+* [ ] ~~Add option to build with `ccache` support~~
+* [x] Replace current BLAS/LAPACK with OpenBLAS
+  * Looks quite complex... Appears to contain optimised kernels for different operating systems...
+  * Could possibly be done by adding it as a submodule?
+    * **Q:** Can we restrict it to a specific tag?
+* [x] ~~Settle on how to handle versioning (e.g. should we define a `version.h`?)~~
+* [x] Properly review to-do list and see if there's anything missing!
+* [ ]
+* Patch support for libraries using oomph-lib-built BLAS/LAPACK:
+  * [x] Hypre
+  * [x] Trilinos
+  * N.B. Hypre and Trilinos rely on absolute paths to blas and lapack which doesn't work if they are built by oomph-lib...
+  * **Possible solution:**
+    * Construct BLAS/LAPACK paths
+      * **Q:** Is this going to work after they've been installed?...
+    * Make sure BLAS/LAPACK are built before Hypre/Trilinos
+* [x] Convert external library version numbers to variables?
+* [ ] ~~Address MUMPS 64-bit int (i.e. long long) compatibility issue~~
+  * Not important for now
 
 * Add support for building and installing the following packages ourselves:
   * [x] GMP
