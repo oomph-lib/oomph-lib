@@ -34,7 +34,7 @@
 # format CMake files. Do not delete them.
 # ==============================================================================
 # cmake-format: on
-cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
 project(
   oomphlib
   DESCRIPTION "A finite-element library for simulating multi-physics problems."
