@@ -28,17 +28,11 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
-      - name: Check out third-party libraries repository (optional)
-        if: matrix.build_third_party_libs == 'ON'
-        uses: actions/checkout@v4
-        with:
-          repository: puneetmatharu/oomph_lib_third_party_libraries
-          path: ./oomph_lib_third_party_libraries
-
+      # -------------------
+      # INITIAL SETUP:
+      # -------------------
       - name: Check out oomph-lib repository
         uses: actions/checkout@v4
-        with:
-          path: ./oomph_lib
 
       - name: Install dependencies
         run: sudo apt-get install -y gfortran ninja-build python2
@@ -59,6 +53,9 @@ jobs:
       - name: Check CMake version
         run: cmake --version
 
+      # -------------------
+      # THIRD-PARTY LIBS:
+      # -------------------
       - name: Configure third-party libraries (optional)
         if: matrix.build_third_party_libs == 'ON'
         run: |
@@ -66,73 +63,67 @@ jobs:
             -DOOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTS=ON \
             -DOOMPH_ENABLE_MPI=${{ matrix.build_info.enable_mpi }} \
             -B build
-        working-directory: ./oomph_lib_third_party_libraries
+        working-directory: ./external_distributions/
 
       - name: Build third-party libraries (optional)
         if: matrix.build_third_party_libs == 'ON'
         run: cmake --build build
-        working-directory: ./oomph_lib_third_party_libraries
+        working-directory: ./external_distributions/
 
       - name: Upload third-party libraries build logs (optional)
         if: matrix.build_third_party_libs == 'ON'
         uses: actions/upload-artifact@v3
         with:
           name: third_party_build_logs-${{ runner.os }}-MPI_${{ matrix.build_info.enable_mpi }}
-          path: ./oomph_lib_third_party_libraries/build/logs
+          path: ./external_distributions/build/logs
 
+      # -------------------
+      # BUILD MAIN PROJECT:
+      # -------------------
       - name: Configure
         if: matrix.build_third_party_libs == 'OFF'
         run: cmake --preset ${{ matrix.build_info.preset }} -B build
-        working-directory: ./oomph_lib
 
       - name: Configure with third-party libs
         if: matrix.build_third_party_libs == 'ON'
-        run: |
-          cmake --preset ${{ matrix.build_info.preset }} \
-            -DOOMPH_USE_BLAS_FROM=${GITHUB_WORKSPACE}/oomph_lib_third_party_libraries/install/openblas \
-            -DOOMPH_USE_GMP_FROM=${GITHUB_WORKSPACE}/oomph_lib_third_party_libraries/install/gmp \
-            -DOOMPH_USE_MPFR_FROM=${GITHUB_WORKSPACE}/oomph_lib_third_party_libraries/install/mpfr \
-            -DOOMPH_USE_BOOST_FROM=${GITHUB_WORKSPACE}/oomph_lib_third_party_libraries/install/boost \
-            -DOOMPH_USE_CGAL_FROM=${GITHUB_WORKSPACE}/oomph_lib_third_party_libraries/install/cgal \
-            -DOOMPH_USE_MUMPS_FROM=${GITHUB_WORKSPACE}/oomph_lib_third_party_libraries/install/mumps \
-            -DOOMPH_USE_HYPRE_FROM=${GITHUB_WORKSPACE}/oomph_lib_third_party_libraries/install/hypre \
-            -DOOMPH_USE_TRILINOS_FROM=${GITHUB_WORKSPACE}/oomph_lib_third_party_libraries/install/trilinos \
-            -B build
-        working-directory: ./oomph_lib
+        run: cmake --preset ${{ matrix.build_info.preset }} $(cat external_distributions/build/cmake_flags_for_oomph_lib.txt) -B build
 
       - name: Build
         run: cmake --build build
-        working-directory: ./oomph_lib
 
       - name: Install
         run: cmake --install build
-        working-directory: ./oomph_lib
 
+      # -------------------
+      # BASIC SELF-TESTS:
+      # -------------------
       - name: Configure basic self-tests
         run: cmake -G Ninja -S self_test -B self_test/build --log-level=VERBOSE
-        working-directory: ./oomph_lib
 
       - name: Run basic self-tests
         id: self_tests
         run: ctest --preset ci --test-dir self_test/build -j $(nproc)
-        working-directory: ./oomph_lib
         continue-on-error: true
 
+      # -------------------
+      # DEMO DRIVERS:
+      # -------------------
       - name: Configure demo drivers
         run: cmake -G Ninja -S demo_drivers -B demo_drivers/build --log-level=VERBOSE
-        working-directory: ./oomph_lib
 
       - name: Run demo driver self-tests
         id: demo_drivers
         run: ctest --preset ci --test-dir demo_drivers/build -j $(nproc)
-        working-directory: ./oomph_lib
         continue-on-error: true
 
+      # -------------------
+      # UPLOAD STUFF:
+      # -------------------
       - name: Upload validation log file
         uses: actions/upload-artifact@v3
         with:
           name: validation-${{ runner.os }}-THIRD_PARTY_LIBS_${{ matrix.build_third_party_libs }}-MPI_${{ matrix.build_info.enable_mpi }}.log
-          path: ./oomph_lib/validation.log
+          path: ./validation.log
 
       - name: Propagate CTest test status
         if: steps.self_tests.outcome == 'failure' || steps.demo_drivers.outcome == 'failure'
