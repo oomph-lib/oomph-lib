@@ -157,6 +157,21 @@ with section("parse"):
                 "REGISTRY_VIEW": 1,
                 "PATH_SUFFIXES": "*",
             },
+        },
+        "oomph_get_external_project_helper": {
+            "flags": ["CONFIGURE_HANDLED_BY_BUILD"],
+            "kwargs": {
+                "PROJECT_NAME": 1,
+                "URL": 1,
+                "INSTALL_DIR": 1,
+                "PATCH_COMMAND": "*",
+                "CONFIGURE_COMMAND": "*",
+                "BUILD_COMMAND": "*",
+                "INSTALL_COMMAND": "*",
+                "TEST_COMMAND": "*",
+                "INSTALL_BYPRODUCTS": "*",
+                "CMAKE_CACHE_ARGS": "*",
+            },
         }
     }
     # Override configurations per-command where available
