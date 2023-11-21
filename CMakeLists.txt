@@ -209,11 +209,23 @@ endif()
 
 message(VERBOSE "<====== Starting oomph-lib library configuration ======>")
 
-# Process the oomph-lib directories containing the library files
+# Configure the external sources (i.e. third-party libraries that oomph-lib
+# always ships with)
 add_subdirectory(external_src)
+
+# Add C++ definitions for all of the defined third-party sources that we build
+# with oomph-lib, e.g. -DOOMPH_HAS_SUPERLU, -DOOMPH_HAS_TRIANGLE, etc.
 oomph_add_cxx_compile_definitions(${EXTERNAL_SRC_CXX_DEFINITIONS})
-add_subdirectory(external_distributions)
+
+# Locate the third-party libraries that the user has provided via the
+# OOMPH_USE_<LIBRARY>_FROM flags
+include(OomphLocateOptionalThirdPartyLibs)
+
+# Add C++ definitions for all of the defined (optional) third-party libraries,
+# e.g. -DOOMPH_HAS_CGAL, -DOOMPH_HAS_MUMPS, etc.
 oomph_add_cxx_compile_definitions(${EXTERNAL_DIST_CXX_DEFINITIONS})
+
+# Configure all of the main oomph-lib library sources
 add_subdirectory(src)
 
 message(VERBOSE "<====== Finished oomph-lib library configuration ======>")
