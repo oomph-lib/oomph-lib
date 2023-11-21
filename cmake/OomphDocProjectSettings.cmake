@@ -82,6 +82,14 @@ function(oomph_doc_project_settings)
   # Doc it
   message(NOTICE "${OOMPH_SETTINGS_MESSAGE}")
 
+  # Print info about the build and install steps
+  message(
+    NOTICE
+    "${BOLD_MAGENTA}Project configured! Don't forget to run the build step with:\n\n"
+    "\tcmake --build <build-directory>\n\n"
+    "then the install step with:\n\n"
+    "\tcmake --install <build-directory>${RESET}\n")
+
   # Log to file if needed
   set(OUTPUT_FILE
       "${CMAKE_CURRENT_BINARY_DIR}/oomphlib-third-party-libraries-info.log")
