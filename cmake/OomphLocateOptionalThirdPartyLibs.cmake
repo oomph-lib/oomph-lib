@@ -94,9 +94,6 @@ if(OOMPH_USE_TRILINOS_FROM)
   set(OOMPH_HAS_TRILINOS TRUE CACHE INTERNAL "")
 endif()
 
-# Make the accumulated C++ definitions visible in the parent scope
-set(EXTERNAL_DIST_CXX_DEFINITIONS ${EXTERNAL_DIST_CXX_DEFINITIONS} PARENT_SCOPE)
-
 message(VERBOSE "Leaving external_distributions subdirectory")
 # ------------------------------------------------------------------------------
 # cmake-format: on
