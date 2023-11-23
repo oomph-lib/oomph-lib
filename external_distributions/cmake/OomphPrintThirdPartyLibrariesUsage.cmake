@@ -7,19 +7,12 @@
 # USAGE:
 # ------
 #   include(OomphPrintThirdPartyLibrariesUsage)
-#   oomph_doc_third_party_libraries_usage()
+#   oomph_print_third_party_libraries_usage()
 # =============================================================================
 include_guard()
 
-# TODO: This could probably be streamlined but I'm just going to hack it in for
-# now
-
-# TODO: Dump single line command to file so it can be used like so
-#
-# cmake -G Ninja $(cat external_distributions/build/cmake_flags_for_oomph_lib.txt) -B build
-
 # ------------------------------------------------------------------------------
-function(oomph_doc_third_party_libraries_usage)
+function(oomph_print_third_party_libraries_usage)
   # Colourising
   if(NOT WIN32)
     string(ASCII 27 Esc)
@@ -51,7 +44,7 @@ function(oomph_doc_third_party_libraries_usage)
     list(APPEND OOMPH_JSON_PRESET_FLAGS_LIST "\"OOMPH_ENABLE_MPI\": \"ON\"")
   endif()
 
-  # FIXME: Talk to matthias
+  # FIXME: Talk to Matthias about switching to OpenBLAS completely
 
   # OpenBLAS
   if (OOMPH_USE_OPENBLAS_FROM OR OOMPH_BUILD_OPENBLAS)
@@ -141,8 +134,8 @@ function(oomph_doc_third_party_libraries_usage)
   # Dump the usage instructions to file so we can just print the contents at the end of the build step
   file(RELATIVE_PATH RELPATH_TO_CMAKE_FLAGS_TXT_FILE ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_FLAGS_FOR_OOMPH_LIB_FILE})
   set(
-    OOMPH_THIRD_PARTY_LIBARIES_USAGE_MESSAGE "\n${BOLD_MAGENTA}Now the libraries have been built, you can use the following command to configure the main oomph-lib project:\n\n \tcmake -G ${OOMPH_CONFIGURE_FLAGS} -B build\n\n Alternatively, if you're using a preset file, place the following under the \"cacheVariables\" key:\n
-       ${OOMPH_JSON_PRESET_TEXT}\n\n I've also printed these values to the file:\n\n \t${RELPATH_TO_CMAKE_FLAGS_TXT_FILE}\n\n so you could jump up to the root oomph-lib directory and run:\n\n \tcmake -G Ninja $(cat external_distributions/build/cmake_flags_for_oomph_lib.txt) -B build\n\nClever, I know!${RESET}")
+    OOMPH_THIRD_PARTY_LIBARIES_USAGE_MESSAGE "\n${BOLD_MAGENTA}Now the libraries have been built, you can use the following command to configure the main oomph-lib project:\n\n \tcmake -G Ninja ${OOMPH_CONFIGURE_FLAGS} -B build\n\nAlternatively, if you're using a preset file, place the following under the \"cacheVariables\" key:\n
+       ${OOMPH_JSON_PRESET_TEXT}\n\nI've also printed these values to the file:\n\n\t${RELPATH_TO_CMAKE_FLAGS_TXT_FILE}\n\nso you could simply jump up to the root oomph-lib directory and run:\n\n\tcmake -G Ninja $(cat external_distributions/build/cmake_flags_for_oomph_lib.txt) -B build\n\nClever, I know!${RESET}")
   list(JOIN "" OOMPH_THIRD_PARTY_LIBARIES_USAGE_MESSAGE "${OOMPH_THIRD_PARTY_LIBARIES_USAGE_MESSAGE}")
 
   # Create a target to print the usage instructions AFTER we've built everything

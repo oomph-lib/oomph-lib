@@ -223,12 +223,12 @@ endif()
 
 # ----------------------------[ DOC CONFIGURATION ]----------------------------
 
-include(OomphDocProjectSettings)
-oomph_doc_project_settings()
+include(OomphPrintProjectConfiguration)
+oomph_print_project_configuration()
 
 # -------------------------[ HOW TO USE THE LIBRARIES ]------------------------
 
 include(OomphPrintThirdPartyLibrariesUsage)
-oomph_doc_third_party_libraries_usage()
+oomph_print_third_party_libraries_usage()
 
 # -----------------------------------------------------------------------------

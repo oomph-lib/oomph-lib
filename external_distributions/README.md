@@ -16,21 +16,21 @@
     <table>
     <tr>
         <th>Test platform</th>
-        <th><a href="../../tree/main"><code>main</code></a></th>
+        <th><a href="../../../tree/feature-shared-cmake"><code>feature-shared-cmake</code></a></th>
     </tr>
     <tr>
         <td>Ubuntu</td>
         <td>
-            <a href="../../actions/workflows/build-on-ubuntu.yaml">
-                <img alt="Ubuntu" src="../../actions/workflows/build-on-ubuntu.yaml/badge.svg?branch=main" style="vertical-align: middle">
+            <a href="../../../actions/workflows/test-third-party-libs-on-ubuntu.yaml">
+                <img alt="Ubuntu" src="../../../actions/workflows/test-third-party-libs-on-ubuntu.yaml/badge.svg?branch=feature-shared-cmake" style="vertical-align: middle">
             </a>
         </td>
     </tr>
     <tr>
         <td>macOS</td>
         <td>
-            <a href="../../actions/workflows/build-on-macos.yaml">
-                <img alt="macOS" src="../../actions/workflows/build-on-macos.yaml/badge.svg?branch=main" style="vertical-align: middle">
+            <a href="../../../actions/workflows/test-third-party-libs-on-macos.yaml">
+                <img alt="macOS" src="../../../actions/workflows/test-third-party-libs-on-macos.yaml/badge.svg?branch=feature-shared-cmake" style="vertical-align: middle">
             </a>
         </td>
     </tr>

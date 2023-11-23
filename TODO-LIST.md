@@ -4,6 +4,11 @@
 
 Include tasks here that likely need some collaboration with Matthias
 
+* [ ] DISCUSS UPDATED SELF-TEST TRIGGER SYNTAX
+* [ ] Can I wipe the `config/` directory? or do we need to keep it around?
+* [ ] Discuss making `oomph_lib_third_party_libraries` a submodule so we can preserve the README badges (or add tests to main project; should only trigger those workflows if we edit external_distributions/)
+* [ ] Discuss switching to OpenBLAS only (need to change OOMPH_USE_BLAS/LAPACK_FROM)
+
 * [ ] Go through all new commits to the main repository in the last 1-2 years and make sure any changes in Makefiles have been reflected in their corresponding CMakeLists.txt file
 * [ ] Possibly change `oomphlib` -> `oomph_lib`? (carefully(!) avoid changing headers/sources)
 

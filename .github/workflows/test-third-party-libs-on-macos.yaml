@@ -1,7 +1,13 @@
 # ------------------------------------------------------------------------------
 
-name: macOS
-on: push
+name: Test third-party libraries (macOS)
+
+# Test third-party libs building ONLY if we edited code in external_distributions/
+on:
+  push:
+    paths:
+      - "external_distributions/CMakeLists.txt"
+      - "external_distributions/cmake/**"
 
 # Print the output of a test if it fails
 env:
@@ -44,17 +50,19 @@ jobs:
             -DOOMPH_USE_MPFR_FROM=$(brew --prefix mpfr) \
             -DOOMPH_ENABLE_MPI=${{ matrix.mpi }} \
             -B build
+        working-directory: ./external_distributions/
 
       - name: Build/install
         id: build
         run: cmake --build build
+        working-directory: ./external_distributions/
         continue-on-error: true
 
       - name: Upload build logs
         uses: actions/upload-artifact@v3
         with:
           name: build_logs-os_${{ runner.os }}-mpi_${{ matrix.mpi }}
-          path: ./build/logs/
+          path: ./external_distributions/build/logs/
 
       - name: Propagate build status
         if: steps.build.outcome == 'failure'

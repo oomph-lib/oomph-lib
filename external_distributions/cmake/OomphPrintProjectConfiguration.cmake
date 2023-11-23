@@ -2,24 +2,22 @@
 # =============================================================================
 # DESCRIPTION:
 # ------------
-# Docs the project configuration variables and compiler definitions.
+# Prints the project configuration variables and compiler definitions.
 #
 # USAGE:
 # ------
-#   include(OomphDocProjectSettings)
-#   oomph_doc_project_settings()
+#   include(OomphPrintProjectConfiguration)
+#   oomph_print_project_configuration()
 # =============================================================================
-# cmake-format: on
 
 # ------------------------------------------------------------------------------
-function(oomph_doc_project_settings)
+function(oomph_print_project_configuration)
   # Define the supported set of keywords
   set(PREFIX ARG)
   set(FLAGS ENABLE_ALSO_PRINT_SETTINGS_AFTER_INSTALL ENABLE_SAVE_TO_FILE)
   set(SINGLE_VALUE_ARGS)
   set(MULTI_VALUE_ARGS)
-  cmake_parse_arguments(PARSE_ARGV 0 ${PREFIX} "${FLAGS}"
-                        "${SINGLE_VALUE_ARGS}" "${MULTI_VALUE_ARGS}")
+  cmake_parse_arguments(PARSE_ARGV 0 ${PREFIX} "${FLAGS}" "${SINGLE_VALUE_ARGS}" "${MULTI_VALUE_ARGS}")
 
   # Colourising
   if(NOT WIN32)
@@ -78,19 +76,19 @@ function(oomph_doc_project_settings)
     "********************************************************************************\n"
   )
 
-  # Doc it
+  # Print it
+  file(RELATIVE_PATH OOMPH_RELPATH_TO_TPL_BUILD_DIR ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
   message(NOTICE "${OOMPH_SETTINGS_MESSAGE}")
   message(
     STATUS
       "${BOLD_MAGENTA}Project configured! Don't forget to run the build step with:\n\n"
-      "\tcmake --build <build-directory>${RESET}\n")
+      "\tcmake --build ${OOMPH_RELPATH_TO_TPL_BUILD_DIR}${RESET}\n")
 
   # Log to file if needed
-  set(OUTPUT_FILE
-      "${CMAKE_CURRENT_BINARY_DIR}/oomphlib-third-party-libraries-info.log")
-  if(${PREFIX}_ENABLE_SAVE_TO_FILE
-     OR ${PREFIX}_ENABLE_ALSO_PRINT_SETTINGS_AFTER_INSTALL)
-    file(WRITE "${OUTPUT_FILE}" "${OOMPH_SETTINGS_MESSAGE}")
+  set(OOMPH_TPL_CONFIG_FILE "${CMAKE_CURRENT_BINARY_DIR}/oomph-lib-third-party-libraries-config.log")
+  if(${PREFIX}_ENABLE_SAVE_TO_FILE OR ${PREFIX}_ENABLE_ALSO_PRINT_SETTINGS_AFTER_INSTALL)
+    file(WRITE "${OOMPH_TPL_CONFIG_FILE}" "${OOMPH_SETTINGS_MESSAGE}")
   endif()
 endfunction()
 # ------------------------------------------------------------------------------
+# cmake-format: on
