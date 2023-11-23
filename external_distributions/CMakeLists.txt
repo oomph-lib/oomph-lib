@@ -122,7 +122,8 @@ endif()
 
 # Where to download files from and where to install to
 set(OOMPH_THIRD_PARTY_TAR_FILE_URL
-    "https://www.matthias-heil.co.uk/oomph-lib_third_party_tar_files")
+    "https://github.com/puneetmatharu/oomph-lib/releases/download/v3.0.0.pre-alpha"
+)
 
 # ----------------------------------[ MPI ]------------------------------------
 
