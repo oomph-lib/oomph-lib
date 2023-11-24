@@ -82,8 +82,6 @@ oomph_option(OOMPH_DONT_SILENCE_USELESS_WARNINGS "Display (harmless) warnings fr
 oomph_option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" OFF)
 oomph_option(OOMPH_ENABLE_PARANOID "Enable the PARANOID flag in Debug" OFF)
 oomph_option(OOMPH_ENABLE_RANGE_CHECKING "Enable RANGE_CHECKING flag in Debug" OFF)
-oomph_option(OOMPH_TRANSITION_TO_VERSION_3 "Try to build with up-to-date external sources" OFF)
-oomph_option(OOMPH_USE_DEPRECATED_SUPERLU "Use oomph-lib's deprecated version of SuperLU (4.3)" OFF)
 
 # Fine-grained control of build of external_srcs.
 # FIXME: Make sure the SUPPRESS variables below actually work
@@ -91,18 +89,55 @@ oomph_option(OOMPH_USE_DEPRECATED_SUPERLU "Use oomph-lib's deprecated version of
 oomph_option(OOMPH_SUPPRESS_TRIANGLE_LIB "Suppress build of oomph-lib's copy of the triangle library" OFF)
 oomph_option(OOMPH_SUPPRESS_TETGEN_LIB "Suppress build of oomph-lib's copy of the tetgen library" OFF)
 
+
+#   oomph_path_option(
+#     FLAG OOMPH_THIRD_PARTY_INSTALL_DIR
+#     DEFAULT "${CMAKE_CURRENT_LIST_DIR}/install"
+#     DOCSTRING "Base installation directory for third-party libraries."
+#   )
+
 # Paths to packages that the user has installed themselves
-oomph_path_option(OOMPH_USE_MPI_FROM "Path to MPI installation" "${OOMPH_USE_MPI_FROM}")
-oomph_path_option(OOMPH_USE_GMSH_FROM "Path to 'gmsh' executable" "${OOMPH_USE_GMSH_FROM}")
-oomph_path_option(OOMPH_USE_BLAS_FROM "Path to BLAS installation" "${OOMPH_USE_BLAS_FROM}")
-oomph_path_option(OOMPH_USE_LAPACK_FROM "Path to LAPACK installation" "${OOMPH_USE_LAPACK_FROM}")
-oomph_path_option(OOMPH_USE_GMP_FROM "Path to GMP installation" "${OOMPH_USE_GMP_FROM}")
-oomph_path_option(OOMPH_USE_MPFR_FROM "Path to MPFR installation" "${OOMPH_USE_MPFR_FROM}")
-oomph_path_option(OOMPH_USE_BOOST_FROM "Path to Boost installation" "${OOMPH_USE_BOOST_FROM}")
-oomph_path_option(OOMPH_USE_CGAL_FROM "Path to CGAL installation" "${OOMPH_USE_CGAL_FROM}")
-oomph_path_option(OOMPH_USE_MUMPS_FROM "Path to MUMPS installation" "${OOMPH_USE_MUMPS_FROM}")
-oomph_path_option(OOMPH_USE_HYPRE_FROM "Path to Hypre installation" "${OOMPH_USE_HYPRE_FROM}")
-oomph_path_option(OOMPH_USE_TRILINOS_FROM "Path to Trilinos installation" "${OOMPH_USE_TRILINOS_FROM}")
+oomph_path_option(
+  FLAG OOMPH_USE_OPENBLAS_FROM
+  DOCSTIRNG "Path to OpenBLAS installation."
+  REQUIRED
+)
+oomph_path_option(
+  FLAG OOMPH_USE_GMSH_FROM
+  DOCSTRING "Path to 'gmsh' executable"
+)
+oomph_path_option(
+  FLAG OOMPH_USE_MPI_FROM
+  DOCSTRING "Path to MPI installation"
+)
+oomph_path_option(
+  FLAG OOMPH_USE_GMP_FROM
+  DOCSTRING "Path to GMP installation"
+)
+oomph_path_option(
+  FLAG OOMPH_USE_MPFR_FROM
+  DOCSTRING "Path to MPFR installation"
+)
+oomph_path_option(
+  FLAG OOMPH_USE_BOOST_FROM
+  DOCSTRING "Path to Boost installation"
+)
+oomph_path_option(
+  FLAG OOMPH_USE_CGAL_FROM
+  DOCSTRING "Path to CGAL installation"
+)
+oomph_path_option(
+  FLAG OOMPH_USE_MUMPS_FROM
+  DOCSTRING "Path to MUMPS installation"
+)
+oomph_path_option(
+  FLAG OOMPH_USE_HYPRE_FROM
+  DOCSTRING "Path to Hypre installation"
+)
+oomph_path_option(
+  FLAG OOMPH_USE_TRILINOS_FROM
+  DOCSTRING "Path to Trilinos installation"
+)
 
 # cmake-format: on
 # -------------------------[ PROCESS SELECTED OPTIONS ]-------------------------
@@ -110,16 +145,21 @@ oomph_path_option(OOMPH_USE_TRILINOS_FROM "Path to Trilinos installation" "${OOM
 # C++ files only
 include(OomphAddCXXCompileDefinitions)
 
-# Do we want to use Gmsh?
-if(OOMPH_USE_GMSH_FROM)
-  include(OomphFindGmsh)
-endif()
-
 # Let CMake take care of the famous -fPIC flag
 if(BUILD_SHARED_LIBS)
   set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 endif()
 
+# The user needs to provide at least v0.3.24 of OpenBLAS
+find_package(OpenBLAS 0.3.24 REQUIRED PATHS ${OOMPH_USE_OPENBLAS_FROM})
+
+# Do we want to use Gmsh?
+if(OOMPH_USE_GMSH_FROM)
+  include(OomphFindGmsh)
+endif()
+
+# We silence several useless warnings but if you want to see them, enable the
+# OOMPH_DONT_SILENCE_USELESS_WARNINGS flag
 if(NOT OOMPH_DONT_SILENCE_USELESS_WARNINGS)
   include(OomphSilenceWarnings)
 endif()
@@ -138,57 +178,14 @@ if((OOMPH_ENABLE_PARANOID OR OOMPH_ENABLE_RANGE_CHECKING)
   )
 endif()
 
-# Enable flags
+# Only set the PARANOID or RANGE_CHECKING compiler definitions if building the
+# Debug configuration. It doesn't make sense to build with full optimisation and
+# to enable these flags
 if(OOMPH_ENABLE_PARANOID)
   oomph_add_cxx_compile_definitions($<$<CONFIG:DEBUG,>:PARANOID>)
 endif()
 if(OOMPH_ENABLE_RANGE_CHECKING)
   oomph_add_cxx_compile_definitions($<$<CONFIG:DEBUG,>:RANGE_CHECKING>)
-endif()
-
-# If we're using up-to-date external sources/dists then make sure we have a
-# preprocessor definition to handle changes that need to be made from within
-# source files (e.g. API changes)
-if(OOMPH_TRANSITION_TO_VERSION_3)
-  oomph_add_cxx_compile_definitions(OOMPH_TRANSITION_TO_VERSION_3)
-endif()
-if(OOMPH_USE_DEPRECATED_SUPERLU)
-  oomph_add_cxx_compile_definitions(OOMPH_USE_DEPRECATED_SUPERLU)
-endif()
-
-if(BLA_VENDOR
-   OR OOMPH_USE_BLAS_FROM
-   OR OOMPH_USE_LAPACK_FROM)
-  # Temporarily set CMAKE_PREFIX_PATH to the values of OOMPH_USE_BLAS_FROM and
-  # OOMPH_USE_LAPACK_FROM if either is provided
-  if(OOMPH_USE_BLAS_FROM OR OOMPH_USE_LAPACK_FROM)
-    set(BACKUP_CMAKE_PREFIX_PATH "${CMAKE_PREFIX_PATH}" CACHE INTERNAL "")
-    set(CMAKE_PREFIX_PATH "${OOMPH_USE_BLAS_FROM};${OOMPH_USE_LAPACK_FROM}"
-        CACHE INTERNAL "" FORCE)
-  endif()
-
-  # Search for the BLAS/LAPACK libraries
-  find_package(BLAS REQUIRED)
-  find_package(LAPACK REQUIRED)
-
-  # Reset the value of CMAKE_PREFIX_PATH
-  if(OOMPH_USE_BLAS_FROM OR OOMPH_USE_LAPACK_FROM)
-    set(CMAKE_PREFIX_PATH "${BACKUP_CMAKE_PREFIX_PATH}" CACHE INTERNAL "" FORCE)
-  endif()
-
-  # Store a list of directories containing the BLAS libraries
-  set(BLAS_DIRS)
-  foreach(BLAS_LIBRARY IN LISTS BLAS_LIBRARIES)
-    cmake_path(GET BLAS_LIBRARY PARENT_PATH BLAS_DIR)
-    list(APPEND BLAS_DIRS ${BLAS_DIR})
-  endforeach()
-
-  # Store a list of directories containing the LAPACK libraries
-  set(LAPACK_DIRS)
-  foreach(LAPACK_LIBRARY IN LISTS LAPACK_LIBRARIES)
-    cmake_path(GET LAPACK_LIBRARY PARENT_PATH LAPACK_DIR)
-    list(APPEND LAPACK_DIRS ${LAPACK_DIR})
-  endforeach()
 endif()
 
 # --------------------------[ FIND REQUIRED HEADERS ]---------------------------
