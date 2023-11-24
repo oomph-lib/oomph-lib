@@ -252,29 +252,13 @@ if(ENABLE_COMPLEX16)
     zdiagonal.c)
 endif()
 
-if(NOT DEFINED OOMPH_TRANSITION_TO_VERSION_3)
-  message(
-    FATAL_ERROR
-      "Expected 'OOMPH_TRANSITION_TO_VERSION_3' to be defined. If it hasn't then the logic for selecting the appropriate METIS library has probably changed!"
-  )
-endif()
-
 # Specify the libraries that we depend on
-set(LINKLIBS)
 
 # METIS
-if(OOMPH_TRANSITION_TO_VERSION_3)
-  list(APPEND LINKLIBS oomph::oomph_metis_from_parmetis_4.0.3)
-else()
-  list(APPEND LINKLIBS oomph::oomph_metis_from_parmetis_3.1.1)
-endif()
+set(LINKLIBS oomph::oomph_metis_from_parmetis_4.0.3)
 
-# Blas
-if(BLAS_FOUND)
-  list(APPEND LINKLIBS BLAS::BLAS)
-else()
-  list(APPEND LINKLIBS oomph::oomph_blas)
-endif()
+# OpenBLAS
+list(APPEND LINKLIBS ${OpenBLAS_LIBRARIES})
 
 # Math library
 if(NOT WIN32)
@@ -291,10 +275,6 @@ oomph_library_config(
   LINKLIBS ${LINKLIBS}
   HEADERS ${HEADERS}
   SOURCES ${SOURCES})
-
-# # Silence the (annoying) warnings produced by this library
-# include(OomphTargetSilenceWarnings) oomph_target_silence_warnings(TARGET
-# ${LIBNAME} C_COMPILE_FLAGS -Wno-unused-result)
 
 # ------------------------------------------------------------------------------
 # BOILERPLATE: Update variables in parent scope

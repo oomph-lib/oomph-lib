@@ -25,11 +25,7 @@
 */
 #include <math.h>
 #ifdef USING_OOMPH_SUPERLU_DIST
-#ifdef OOMPH_TRANSITION_TO_VERSION_3
 #include "oomph_superlu_dist_7.0.0.h"
-#else
-#include "oomph_superlu_dist_3.0.h"
-#endif
 #else
 #include <superlu_defs.h>
 #include <superlu_ddefs.h>

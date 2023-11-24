@@ -12,11 +12,7 @@
 
 #ifdef USING_OOMPH_SUPERLU
 
-#ifdef OOMPH_USE_DEPRECATED_SUPERLU
-#include "oomph_superlu_4.3/slu_ddefs.h"
-#else
 #include "oomph_superlu_5.2.2/slu_ddefs.h"
-#endif
 
 #else
 #include "slu_ddefs.h"
@@ -141,9 +137,7 @@ int superlu(int *op_flag, int *n, int *nnz, int *nrhs,
   superlu_options_t options;
   SuperLUStat_t stat;
   factors_t *LUfactors;
-#ifndef OOMPH_USE_DEPRECATED_SUPERLU
   GlobalLU_t Glu;
-#endif
 
   double *Lval;
   double *diagU, *dblock;
@@ -196,9 +190,7 @@ int superlu(int *op_flag, int *n, int *nnz, int *nrhs,
 
     dgstrf(&options, &AC, /*drop_tol,*/ relax, panel_size,
            etree, NULL, 0, perm_c, perm_r, L, U,
-#ifndef OOMPH_USE_DEPRECATED_SUPERLU
            &Glu, /* new with SuperLU 5.0 */
-#endif
            &stat, info);
 
     if (*info == 0)

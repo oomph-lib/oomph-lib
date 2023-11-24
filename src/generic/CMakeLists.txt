@@ -236,7 +236,7 @@ set(HEADERS_NO_COMBINE cfortran.h frontal.h arpack.h lapack_qz.h mumps.h)
 set(TEMPLATES tree.tpp refineable_mesh.tpp multi_domain.tpp missing_masters.tpp)
 
 # The generic library relies on the external sources and possibly MPI
-set(LINKLIBS ${EXTERNAL_SRC_LIBS})
+set(LINKLIBS ${OpenBLAS_LIBRARIES} ${EXTERNAL_SRC_LIBS})
 if(OOMPH_HAS_MPI)
   list(APPEND LINKLIBS MPI::MPI_C MPI::MPI_CXX)
 endif()

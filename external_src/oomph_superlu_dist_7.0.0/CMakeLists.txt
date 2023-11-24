@@ -235,19 +235,8 @@ foreach(CXX_FILE IN LISTS CXX_FILES)
 endforeach()
 
 # Libraries to link SuperLU Dist to
-set(LINKLIBS ${MPI_C_LIBRARIES} ${MPI_CXX_LIBRARIES} oomph_parmetis_4.0.3)
-
-if(BLAS_FOUND AND LAPACK_FOUND)
-  list(APPEND LINKLIBS BLAS::BLAS LAPACK::LAPACK)
-else()
-  list(APPEND LINKLIBS oomph_blas oomph_lapack)
-endif()
-
-# See:
-# https://github.com/xiaoyeli/superlu_dist#dependent-external-libraries-blas-and-parmetis
-# Might be able to link against OpenBLAS...
-#
-# -DTPL_BLAS_LIBRARIES="<BLAS library name>"
+set(LINKLIBS ${MPI_C_LIBRARIES} ${MPI_CXX_LIBRARIES} oomph_parmetis_4.0.3
+    ${OpenBLAS_LIBRARIES})
 
 if(UNIX)
   list(APPEND LINKLIBS m)
