@@ -1011,8 +1011,6 @@ Option                                  | Description                           
 `OOMPH_MPI_NUM_PROC`                    | Number of processes to use with MPI-enabled tests                            | 2
 `OOMPH_ENABLE_PARANOID`                 | Enable the PARANOID flag in Debug                                            | OFF
 `OOMPH_ENABLE_RANGE_CHECKING`           | Enable RANGE_CHECKING flag in Debug                                          | OFF
-`OOMPH_TRANSITION_TO_VERSION_3`         | Try to build with up-to-date external sources                                | OFF
-`OOMPH_USE_DEPRECATED_SUPERLU`          | Use oomph-lib's deprecated version of SuperLU (4.3)                          | OFF
 `OOMPH_SUPPRESS_TRIANGLE_LIB`           | Suppress build of oomph-lib's copy of the triangle library                   | OFF
 `OOMPH_SUPPRESS_TETGEN_LIB`             | Suppress build of oomph-lib's copy of the tetgen library                     | OFF
 
