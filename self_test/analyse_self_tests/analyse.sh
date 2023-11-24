@@ -8,7 +8,7 @@
 
 #Check that we get the correct number of OKs
 OK_COUNT=`grep -c 'OK' ../../validation.log`
-FAIL_COUNT=`grep -c 'FAILED' ../../validation.log`
+FAIL_COUNT=`grep -c 'FAIL' ../../validation.log`
 
 cp ../../validation.log .
 

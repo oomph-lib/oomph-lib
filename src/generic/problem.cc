@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -151,7 +151,7 @@ namespace oomph
     Linear_solver_pt = Default_linear_solver_pt = new SuperLUSolver;
     Mass_matrix_solver_for_explicit_timestepper_pt = Linear_solver_pt;
 
-    Eigen_solver_pt = Default_eigen_solver_pt = new ARPACK;
+    Eigen_solver_pt = Default_eigen_solver_pt = new LAPACK_QZ;
 
     Assembly_handler_pt = Default_assembly_handler_pt = new AssemblyHandler;
 
@@ -289,6 +289,92 @@ namespace oomph
     }
 
     return Nelement;
+  }
+
+
+  //==================================================================
+  /// Build new LinearAlgebraDistribution. Note: you're in charge of
+  /// deleting it!
+  //==================================================================
+  void Problem::create_new_linear_algebra_distribution(
+    LinearAlgebraDistribution*& dist_pt)
+  {
+    // Find the number of rows
+    const unsigned nrow = this->ndof();
+
+#ifdef OOMPH_HAS_MPI
+
+    unsigned nproc = Communicator_pt->nproc();
+
+    // if problem is only one one processor assemble non-distributed
+    // distribution
+    if (nproc == 1)
+    {
+      dist_pt = new LinearAlgebraDistribution(Communicator_pt, nrow, false);
+    }
+    // if the problem is not distributed then assemble the jacobian with
+    // a uniform distributed distribution
+    else if (!Problem_has_been_distributed)
+    {
+      dist_pt = new LinearAlgebraDistribution(Communicator_pt, nrow, true);
+    }
+    // otherwise the problem is a distributed problem
+    else
+    {
+      switch (Dist_problem_matrix_distribution)
+      {
+        case Uniform_matrix_distribution:
+
+          dist_pt = new LinearAlgebraDistribution(Communicator_pt, nrow, true);
+          break;
+
+        case Problem_matrix_distribution:
+
+          dist_pt = new LinearAlgebraDistribution(Dof_distribution_pt);
+          break;
+
+        case Default_matrix_distribution:
+
+          // Put in its own scope to avoid warnings about "local" variables
+          {
+            LinearAlgebraDistribution* uniform_dist_pt =
+              new LinearAlgebraDistribution(Communicator_pt, nrow, true);
+            bool use_problem_dist = true;
+            for (unsigned p = 0; p < nproc; p++)
+            {
+              // hierher Andrew: what's the logic behind this?
+              if ((double)Dof_distribution_pt->nrow_local(p) >
+                  ((double)uniform_dist_pt->nrow_local(p)) * 1.1)
+              {
+                use_problem_dist = false;
+              }
+            }
+            if (use_problem_dist)
+            {
+              dist_pt = new LinearAlgebraDistribution(Dof_distribution_pt);
+            }
+            else
+            {
+              dist_pt = new LinearAlgebraDistribution(uniform_dist_pt);
+            }
+            delete uniform_dist_pt;
+          }
+          break;
+
+        default:
+
+          std::ostringstream error_stream;
+          error_stream << "Never get here. Dist_problem_matrix_distribution = "
+                       << Dist_problem_matrix_distribution << std::endl;
+          throw OomphLibError(error_stream.str(),
+                              OOMPH_CURRENT_FUNCTION,
+                              OOMPH_EXCEPTION_LOCATION);
+          break;
+      }
+    }
+#else
+    dist_pt = new LinearAlgebraDistribution(Communicator_pt, nrow, false);
+#endif
   }
 
 
@@ -3743,9 +3829,6 @@ namespace oomph
     }
 #endif
 
-    // Find the number of rows
-    const unsigned nrow = this->ndof();
-
     // Determine the distribution for the residuals vector
     // IF the vector has distribution setup then use that
     // ELSE determine the distribution based on the
@@ -3757,59 +3840,7 @@ namespace oomph
     }
     else
     {
-#ifdef OOMPH_HAS_MPI
-      // if problem is only one one processor assemble non-distributed
-      // distribution
-      if (Communicator_pt->nproc() == 1)
-      {
-        dist_pt = new LinearAlgebraDistribution(Communicator_pt, nrow, false);
-      }
-      // if the problem is not distributed then assemble the jacobian with
-      // a uniform distributed distribution
-      else if (!Problem_has_been_distributed)
-      {
-        dist_pt = new LinearAlgebraDistribution(Communicator_pt, nrow, true);
-      }
-      // otherwise the problem is a distributed problem
-      else
-      {
-        switch (Dist_problem_matrix_distribution)
-        {
-          case Uniform_matrix_distribution:
-            dist_pt =
-              new LinearAlgebraDistribution(Communicator_pt, nrow, true);
-            break;
-          case Problem_matrix_distribution:
-            dist_pt = new LinearAlgebraDistribution(Dof_distribution_pt);
-            break;
-          case Default_matrix_distribution:
-            LinearAlgebraDistribution* uniform_dist_pt =
-              new LinearAlgebraDistribution(Communicator_pt, nrow, true);
-            bool use_problem_dist = true;
-            unsigned nproc = Communicator_pt->nproc();
-            for (unsigned p = 0; p < nproc; p++)
-            {
-              if ((double)Dof_distribution_pt->nrow_local(p) >
-                  ((double)uniform_dist_pt->nrow_local(p)) * 1.1)
-              {
-                use_problem_dist = false;
-              }
-            }
-            if (use_problem_dist)
-            {
-              dist_pt = new LinearAlgebraDistribution(Dof_distribution_pt);
-            }
-            else
-            {
-              dist_pt = new LinearAlgebraDistribution(uniform_dist_pt);
-            }
-            delete uniform_dist_pt;
-            break;
-        }
-      }
-#else
-      dist_pt = new LinearAlgebraDistribution(Communicator_pt, nrow, false);
-#endif
+      create_new_linear_algebra_distribution(dist_pt);
     }
 
     // Locally cache pointer to assembly handler
@@ -4057,9 +4088,6 @@ namespace oomph
     // Allocate generalised storage format for passing to sparse_assemble()
     Vector<double*> res(1);
 
-    // number of rows
-    unsigned nrow = this->ndof();
-
     // determine the distribution for the jacobian.
     // IF the jacobian has distribution setup then use that
     // ELSE determine the distribution based on the
@@ -4071,58 +4099,7 @@ namespace oomph
     }
     else
     {
-#ifdef OOMPH_HAS_MPI
-      // if problem is only one one processor
-      if (Communicator_pt->nproc() == 1)
-      {
-        dist_pt = new LinearAlgebraDistribution(Communicator_pt, nrow, false);
-      }
-      // if the problem is not distributed then assemble the jacobian with
-      // a uniform distributed distribution
-      else if (!Problem_has_been_distributed)
-      {
-        dist_pt = new LinearAlgebraDistribution(Communicator_pt, nrow, true);
-      }
-      // otherwise the problem is a distributed problem
-      else
-      {
-        switch (Dist_problem_matrix_distribution)
-        {
-          case Uniform_matrix_distribution:
-            dist_pt =
-              new LinearAlgebraDistribution(Communicator_pt, nrow, true);
-            break;
-          case Problem_matrix_distribution:
-            dist_pt = new LinearAlgebraDistribution(Dof_distribution_pt);
-            break;
-          case Default_matrix_distribution:
-            LinearAlgebraDistribution* uniform_dist_pt =
-              new LinearAlgebraDistribution(Communicator_pt, nrow, true);
-            bool use_problem_dist = true;
-            unsigned nproc = Communicator_pt->nproc();
-            for (unsigned p = 0; p < nproc; p++)
-            {
-              if ((double)Dof_distribution_pt->nrow_local(p) >
-                  ((double)uniform_dist_pt->nrow_local(p)) * 1.1)
-              {
-                use_problem_dist = false;
-              }
-            }
-            if (use_problem_dist)
-            {
-              dist_pt = new LinearAlgebraDistribution(Dof_distribution_pt);
-            }
-            else
-            {
-              dist_pt = new LinearAlgebraDistribution(uniform_dist_pt);
-            }
-            delete uniform_dist_pt;
-            break;
-        }
-      }
-#else
-      dist_pt = new LinearAlgebraDistribution(Communicator_pt, nrow, false);
-#endif
+      create_new_linear_algebra_distribution(dist_pt);
     }
 
 
@@ -8308,17 +8285,21 @@ namespace oomph
   }*/
 
   //==================================================================
-  /// Solve the eigenproblem
+  /// Solve the eigenproblem. Legacy version that returns real vectors which are
+  /// related in some solver-specific way to the real and imaginary parts
+  /// of the actual, usually complex eigenvalues.
+  /// At least n_eval eigenvalues are computed.
   //==================================================================
-  void Problem::solve_eigenproblem(const unsigned& n_eval,
-                                   Vector<std::complex<double>>& eigenvalue,
-                                   Vector<DoubleVector>& eigenvector,
-                                   const bool& steady)
+  void Problem::solve_eigenproblem_legacy(
+    const unsigned& n_eval,
+    Vector<std::complex<double>>& eigenvalue,
+    Vector<DoubleVector>& eigenvector,
+    const bool& make_timesteppers_steady)
   {
     // If the boolean flag is steady, then make all the timesteppers steady
     // before solving the eigenproblem. This will "switch off" the
     // time-derivative terms in the jacobian matrix
-    if (steady)
+    if (make_timesteppers_steady)
     {
       // Find out how many timesteppers there are
       const unsigned n_time_steppers = ntime_stepper();
@@ -8334,9 +8315,10 @@ namespace oomph
         time_stepper_pt(i)->make_steady();
       }
 
+      const bool do_adjoint_problem = false;
       // Call the Eigenproblem for the eigensolver
-      Eigen_solver_pt->solve_eigenproblem(
-        this, n_eval, eigenvalue, eigenvector);
+      Eigen_solver_pt->solve_eigenproblem_legacy(
+        this, n_eval, eigenvalue, eigenvector, do_adjoint_problem);
 
       // Reset the is_steady status of all timesteppers that
       // weren't already steady when we came in here and reset their
@@ -8353,12 +8335,264 @@ namespace oomph
     // assemble and solve the eigensystem
     else
     {
+      const bool do_adjoint_problem = false;
       // Call the Eigenproblem for the eigensolver
-      Eigen_solver_pt->solve_eigenproblem(
-        this, n_eval, eigenvalue, eigenvector);
+      Eigen_solver_pt->solve_eigenproblem_legacy(
+        this, n_eval, eigenvalue, eigenvector, do_adjoint_problem);
     }
   }
 
+  //==================================================================
+  /// Solve the eigenproblem
+  //==================================================================
+  void Problem::solve_eigenproblem(const unsigned& n_eval,
+                                   Vector<std::complex<double>>& alpha,
+                                   Vector<double>& beta,
+                                   Vector<DoubleVector>& eigenvector_real,
+                                   Vector<DoubleVector>& eigenvector_imag,
+                                   const bool& make_timesteppers_steady)
+  {
+    // If the boolean flag is steady, then make all the timesteppers steady
+    // before solving the eigenproblem. This will "switch off" the
+    // time-derivative terms in the jacobian matrix
+    if (make_timesteppers_steady)
+    {
+      // Find out how many timesteppers there are
+      const unsigned n_time_steppers = ntime_stepper();
+
+      // Vector of bools to store the is_steady status of the various
+      // timesteppers when we came in here
+      std::vector<bool> was_steady(n_time_steppers);
+
+      // Loop over them all and make them (temporarily) static
+      for (unsigned i = 0; i < n_time_steppers; i++)
+      {
+        was_steady[i] = time_stepper_pt(i)->is_steady();
+        time_stepper_pt(i)->make_steady();
+      }
+
+      const bool do_adjoint_problem = false;
+      // Call the Eigenproblem for the eigensolver
+      Eigen_solver_pt->solve_eigenproblem(this,
+                                          n_eval,
+                                          alpha,
+                                          beta,
+                                          eigenvector_real,
+                                          eigenvector_imag,
+                                          do_adjoint_problem);
+
+      // Reset the is_steady status of all timesteppers that
+      // weren't already steady when we came in here and reset their
+      // weights
+      for (unsigned i = 0; i < n_time_steppers; i++)
+      {
+        if (!was_steady[i])
+        {
+          time_stepper_pt(i)->undo_make_steady();
+        }
+      }
+    }
+    // Otherwise if we don't want to make the problem steady, just
+    // assemble and solve the eigensystem
+    else
+    {
+      const bool do_adjoint_problem = false;
+      // Call the Eigenproblem for the eigensolver
+      Eigen_solver_pt->solve_eigenproblem(this,
+                                          n_eval,
+                                          alpha,
+                                          beta,
+                                          eigenvector_real,
+                                          eigenvector_imag,
+                                          do_adjoint_problem);
+    }
+  }
+
+
+  //==================================================================
+  /// Solve the eigenproblem
+  //==================================================================
+  void Problem::solve_eigenproblem(const unsigned& n_eval,
+                                   Vector<std::complex<double>>& eigenvalue,
+                                   Vector<DoubleVector>& eigenvector_real,
+                                   Vector<DoubleVector>& eigenvector_imag,
+                                   const bool& make_timesteppers_steady)
+  {
+    // If the boolean flag is steady, then make all the timesteppers steady
+    // before solving the eigenproblem. This will "switch off" the
+    // time-derivative terms in the jacobian matrix
+    if (make_timesteppers_steady)
+    {
+      // Find out how many timesteppers there are
+      const unsigned n_time_steppers = ntime_stepper();
+
+      // Vector of bools to store the is_steady status of the various
+      // timesteppers when we came in here
+      std::vector<bool> was_steady(n_time_steppers);
+
+      // Loop over them all and make them (temporarily) static
+      for (unsigned i = 0; i < n_time_steppers; i++)
+      {
+        was_steady[i] = time_stepper_pt(i)->is_steady();
+        time_stepper_pt(i)->make_steady();
+      }
+
+      const bool do_adjoint_problem = false;
+      // Call the Eigenproblem for the eigensolver
+      Eigen_solver_pt->solve_eigenproblem(this,
+                                          n_eval,
+                                          eigenvalue,
+                                          eigenvector_real,
+                                          eigenvector_imag,
+                                          do_adjoint_problem);
+
+      // Reset the is_steady status of all timesteppers that
+      // weren't already steady when we came in here and reset their
+      // weights
+      for (unsigned i = 0; i < n_time_steppers; i++)
+      {
+        if (!was_steady[i])
+        {
+          time_stepper_pt(i)->undo_make_steady();
+        }
+      }
+    }
+    // Otherwise if we don't want to make the problem steady, just
+    // assemble and solve the eigensystem
+    else
+    {
+      const bool do_adjoint_problem = false;
+      // Call the Eigenproblem for the eigensolver
+      Eigen_solver_pt->solve_eigenproblem(this,
+                                          n_eval,
+                                          eigenvalue,
+                                          eigenvector_real,
+                                          eigenvector_imag,
+                                          do_adjoint_problem);
+    }
+  }
+
+
+  //==================================================================
+  /// Solve the adjoint eigenproblem
+  //==================================================================
+  void Problem::solve_adjoint_eigenproblem_legacy(
+    const unsigned& n_eval,
+    Vector<std::complex<double>>& eigenvalue,
+    Vector<DoubleVector>& eigenvector,
+    const bool& make_timesteppers_steady)
+  {
+    // If the boolean flag is steady, then make all the timesteppers steady
+    // before solving the eigenproblem. This will "switch off" the
+    // time-derivative terms in the jacobian matrix
+    if (make_timesteppers_steady)
+    {
+      // Find out how many timesteppers there are
+      const unsigned n_time_steppers = ntime_stepper();
+
+      // Vector of bools to store the is_steady status of the various
+      // timesteppers when we came in here
+      std::vector<bool> was_steady(n_time_steppers);
+
+      // Loop over them all and make them (temporarily) static
+      for (unsigned i = 0; i < n_time_steppers; i++)
+      {
+        was_steady[i] = time_stepper_pt(i)->is_steady();
+        time_stepper_pt(i)->make_steady();
+      }
+
+      const bool do_adjoint_problem = true;
+      // Call the Eigenproblem for the ajoint-problem eigensolver
+      // NB Only different to solve_eigenproblem
+      Eigen_solver_pt->solve_eigenproblem_legacy(
+        this, n_eval, eigenvalue, eigenvector, do_adjoint_problem);
+
+      // Reset the is_steady status of all timesteppers that
+      // weren't already steady when we came in here and reset their
+      // weights
+      for (unsigned i = 0; i < n_time_steppers; i++)
+      {
+        if (!was_steady[i])
+        {
+          time_stepper_pt(i)->undo_make_steady();
+        }
+      }
+    }
+    // Otherwise if we don't want to make the problem steady, just
+    // assemble and solve the eigensystem
+    else
+    {
+      const bool do_adjoint_problem = true;
+      // Call the Eigenproblem for the eigensolver
+      Eigen_solver_pt->solve_eigenproblem_legacy(
+        this, n_eval, eigenvalue, eigenvector, do_adjoint_problem);
+    }
+  }
+
+
+  //==================================================================
+  /// Solve the adjoint eigenproblem
+  //==================================================================
+  void Problem::solve_adjoint_eigenproblem(
+    const unsigned& n_eval,
+    Vector<std::complex<double>>& eigenvalue,
+    Vector<DoubleVector>& eigenvector_real,
+    Vector<DoubleVector>& eigenvector_imag,
+    const bool& make_timesteppers_steady)
+  {
+    // If the boolean flag is steady, then make all the timesteppers steady
+    // before solving the eigenproblem. This will "switch off" the
+    // time-derivative terms in the jacobian matrix
+    if (make_timesteppers_steady)
+    {
+      // Find out how many timesteppers there are
+      const unsigned n_time_steppers = ntime_stepper();
+
+      // Vector of bools to store the is_steady status of the various
+      // timesteppers when we came in here
+      std::vector<bool> was_steady(n_time_steppers);
+
+      // Loop over them all and make them (temporarily) static
+      for (unsigned i = 0; i < n_time_steppers; i++)
+      {
+        was_steady[i] = time_stepper_pt(i)->is_steady();
+        time_stepper_pt(i)->make_steady();
+      }
+
+      const bool do_adjoint_problem = true;
+      // Call the Eigenproblem for the eigensolver
+      Eigen_solver_pt->solve_eigenproblem(this,
+                                          n_eval,
+                                          eigenvalue,
+                                          eigenvector_real,
+                                          eigenvector_imag,
+                                          do_adjoint_problem);
+
+      // Reset the is_steady status of all timesteppers that
+      // weren't already steady when we came in here and reset their
+      // weights
+      for (unsigned i = 0; i < n_time_steppers; i++)
+      {
+        if (!was_steady[i])
+        {
+          time_stepper_pt(i)->undo_make_steady();
+        }
+      }
+    }
+    // Otherwise if we don't want to make the problem steady, just
+    // assemble and solve the eigensystem
+    else
+    {
+      const bool do_adjoint_problem = true;
+      // Call the Eigenproblem for the eigensolver
+      Eigen_solver_pt->solve_eigenproblem(this,
+                                          n_eval,
+                                          eigenvalue,
+                                          eigenvector_real,
+                                          eigenvector_imag,
+                                          do_adjoint_problem);
+    }
+  }
 
   //===================================================================
   /// Get the matrices required to solve an eigenproblem
@@ -8434,9 +8668,6 @@ namespace oomph
     // Allocate pointer to residuals, although not used in these problems
     Vector<double*> residuals_vectors(0);
 
-    // total number of rows in each matrix
-    unsigned nrow = this->ndof();
-
     // determine the distribution for the jacobian (main matrix)
     // IF the jacobian has distribution setup then use that
     // ELSE determine the distribution based on the
@@ -8448,58 +8679,7 @@ namespace oomph
     }
     else
     {
-#ifdef OOMPH_HAS_MPI
-      // if problem is only one one processor
-      if (Communicator_pt->nproc() == 1)
-      {
-        dist_pt = new LinearAlgebraDistribution(Communicator_pt, nrow, false);
-      }
-      // if the problem is not distributed then assemble the matrices with
-      // a uniform distributed distribution
-      else if (!Problem_has_been_distributed)
-      {
-        dist_pt = new LinearAlgebraDistribution(Communicator_pt, nrow, true);
-      }
-      // otherwise the problem is a distributed problem
-      else
-      {
-        switch (Dist_problem_matrix_distribution)
-        {
-          case Uniform_matrix_distribution:
-            dist_pt =
-              new LinearAlgebraDistribution(Communicator_pt, nrow, true);
-            break;
-          case Problem_matrix_distribution:
-            dist_pt = new LinearAlgebraDistribution(Dof_distribution_pt);
-            break;
-          case Default_matrix_distribution:
-            LinearAlgebraDistribution* uniform_dist_pt =
-              new LinearAlgebraDistribution(Communicator_pt, nrow, true);
-            bool use_problem_dist = true;
-            unsigned nproc = Communicator_pt->nproc();
-            for (unsigned p = 0; p < nproc; p++)
-            {
-              if ((double)Dof_distribution_pt->nrow_local(p) >
-                  ((double)uniform_dist_pt->nrow_local(p)) * 1.1)
-              {
-                use_problem_dist = false;
-              }
-            }
-            if (use_problem_dist)
-            {
-              dist_pt = new LinearAlgebraDistribution(Dof_distribution_pt);
-            }
-            else
-            {
-              dist_pt = new LinearAlgebraDistribution(uniform_dist_pt);
-            }
-            delete uniform_dist_pt;
-            break;
-        }
-      }
-#else
-      dist_pt = new LinearAlgebraDistribution(Communicator_pt, nrow, false);
-#endif
+      create_new_linear_algebra_distribution(dist_pt);
     }
 
 
@@ -8728,10 +8908,16 @@ namespace oomph
         error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
+    // Ensure that the eigenvector distribution matches the dof distribution
+    // Copy vector
+    DoubleVector eigenvector_dof = eigenvector;
+    // Redistribute the copy to the dof distribution
+    eigenvector_dof.redistribute(this->Dof_distribution_pt);
+
     // Loop over the dofs and assign the eigenvector
-    for (unsigned long n = 0; n < eigenvector.nrow_local(); n++)
+    for (unsigned long n = 0; n < eigenvector_dof.nrow_local(); n++)
     {
-      dof(n) = eigenvector[n];
+      dof(n) = eigenvector_dof[n];
     }
 // Of course we now need to synchronise
 #ifdef OOMPH_HAS_MPI
@@ -8759,6 +8945,13 @@ namespace oomph
       throw OomphLibError(
         error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
+
+    // Ensure that the eigenvector distribution matches the dof distribution
+    // Copy vector
+    DoubleVector eigenvector_dof = eigenvector;
+    // Redistribute the copy to the dof distribution
+    eigenvector_dof.redistribute(this->Dof_distribution_pt);
+
 
     // Loop over the dofs and add the eigenvector
     // Only use local values

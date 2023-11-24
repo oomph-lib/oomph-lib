@@ -18,10 +18,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Install requirements
-        run: sudo apt-get install make automake libtool libtool-bin autoconf doxygen gfortran g++
+        run: sudo apt-get install make automake libtool libtool-bin autoconf doxygen gfortran g++ python2
 
       - name: Install MPI requirements (if required)
         if: ${{ matrix.mpi_options.enable == true }}
@@ -38,7 +38,7 @@ jobs:
             printf "SEARCHING FOR MPI.H: "
             if [ ! -z $(find "$pth" -iname mpi.h) ]; then
               printf "...found mpi.h!\n"
-              echo "::set-output name=mpi_h_loc::$pth"
+              echo "mpi_h_loc=$pth" >> $GITHUB_OUTPUT
               printf "EXPORTING INCLUDE PATH!\n"
               found_mpi_header=1
               break
@@ -81,7 +81,7 @@ jobs:
         continue-on-error: true
 
       - name: Upload validation log file
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: validation-${{ runner.os }}-MPI_${{ matrix.mpi_options.enable }}.log
           path: ./validation.log
