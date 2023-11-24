@@ -1,11 +1,11 @@
-\hypertarget{classElasticTwoLayerMesh}{}\doxysection{Elastic\+Two\+Layer\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classElasticTwoLayerMesh}{}\doxysection{Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$ Class Template Reference}
 \label{classElasticTwoLayerMesh}\index{ElasticTwoLayerMesh$<$ ELEMENT $>$@{ElasticTwoLayerMesh$<$ ELEMENT $>$}}
 
 
 Two layer mesh which employs a pseudo-\/solid node-\/update strategy. This class is essentially a wrapper to an Elastic\+Rectangular\+Quad\+Mesh, with an additional boundary to represent the interface between the two fluid layers. In addition, the mesh paritions the elements into those above and below the interface and relabels boundaries so that we can impose a volume constraint on the lower or upper fluid.  
 
 
-Inheritance diagram for Elastic\+Two\+Layer\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{classElasticTwoLayerMesh}
@@ -16,17 +16,17 @@ Inheritance diagram for Elastic\+Two\+Layer\+Mesh\texorpdfstring{$<$}{<} ELEMENT
 \item 
 \mbox{\hyperlink{classElasticTwoLayerMesh_a720be7cd7b0f44df04dcb0d09a2795a7}{Elastic\+Two\+Layer\+Mesh}} (const unsigned \&nx, const unsigned \&ny1, const unsigned \&ny2, const double \&lx, const double \&h1, const double \&h2, const bool \&periodic\+\_\+in\+\_\+x=false, Time\+Stepper $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
 \begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in x-\/direction, number of elements in y-\/direction in bottom and top layer, respectively, axial length and height of top and bottom layers, a boolean flag to make the mesh periodic in the x-\/direction, and pointer to timestepper (defaults to Steady timestepper) \end{DoxyCompactList}\item 
-Finite\+Element $\ast$\& \mbox{\hyperlink{classElasticTwoLayerMesh_a1eda03440a219d06a5c002048715687c}{upper\+\_\+layer\+\_\+element\+\_\+pt}} (const unsigned long \&i)
+Finite\+Element $\ast$\& \mbox{\hyperlink{classElasticTwoLayerMesh_ab5b2682b701b796c14431f8e126457fd}{upper\+\_\+layer\+\_\+element\+\_\+pt}} (const unsigned long \&i)
 \begin{DoxyCompactList}\small\item\em Access functions for pointers to elements in upper layer. \end{DoxyCompactList}\item 
-Finite\+Element $\ast$\& \mbox{\hyperlink{classElasticTwoLayerMesh_a55cb8f219643531b55d0072e32c2a1e8}{lower\+\_\+layer\+\_\+element\+\_\+pt}} (const unsigned long \&i)
+Finite\+Element $\ast$\& \mbox{\hyperlink{classElasticTwoLayerMesh_a4e6d9b26eecc0487d7b2684ad27b7669}{lower\+\_\+layer\+\_\+element\+\_\+pt}} (const unsigned long \&i)
 \begin{DoxyCompactList}\small\item\em Access functions for pointers to elements in bottom layer. \end{DoxyCompactList}\item 
 unsigned long \mbox{\hyperlink{classElasticTwoLayerMesh_ae5c586ecab2ac275174427a94ccfc0c7}{nupper}} () const
 \begin{DoxyCompactList}\small\item\em Number of elements in upper layer. \end{DoxyCompactList}\item 
 unsigned long \mbox{\hyperlink{classElasticTwoLayerMesh_a144f4d44005a25bb301955625a79c9ef}{nlower}} () const
 \begin{DoxyCompactList}\small\item\em Number of elements in top layer. \end{DoxyCompactList}\item 
-Finite\+Element $\ast$\& \mbox{\hyperlink{classElasticTwoLayerMesh_ada3d4bfb572ad71bace28702777ca077}{interface\+\_\+upper\+\_\+boundary\+\_\+element\+\_\+pt}} (const unsigned long \&i)
+Finite\+Element $\ast$\& \mbox{\hyperlink{classElasticTwoLayerMesh_a5170e0a70ad0d4eb3ec01c32d3db2c72}{interface\+\_\+upper\+\_\+boundary\+\_\+element\+\_\+pt}} (const unsigned long \&i)
 \begin{DoxyCompactList}\small\item\em Access functions for pointers to elements in upper layer. \end{DoxyCompactList}\item 
-Finite\+Element $\ast$\& \mbox{\hyperlink{classElasticTwoLayerMesh_abdfd1f3141ca5e0e65561195119b735b}{interface\+\_\+lower\+\_\+boundary\+\_\+element\+\_\+pt}} (const unsigned long \&i)
+Finite\+Element $\ast$\& \mbox{\hyperlink{classElasticTwoLayerMesh_a748ff5229092301a18a193a846d2ebdd}{interface\+\_\+lower\+\_\+boundary\+\_\+element\+\_\+pt}} (const unsigned long \&i)
 \begin{DoxyCompactList}\small\item\em Access functions for pointers to elements in bottom layer. \end{DoxyCompactList}\item 
 unsigned long \mbox{\hyperlink{classElasticTwoLayerMesh_a6e813329601844d3d900d78a60892134}{ninterface\+\_\+upper}} () const
 \begin{DoxyCompactList}\small\item\em Number of elements in upper layer. \end{DoxyCompactList}\item 
@@ -52,6 +52,7 @@ Vector$<$ Finite\+Element $\ast$ $>$ \mbox{\hyperlink{classElasticTwoLayerMesh_a
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class ELEMENT$>$\newline
 class Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$}
+
 Two layer mesh which employs a pseudo-\/solid node-\/update strategy. This class is essentially a wrapper to an Elastic\+Rectangular\+Quad\+Mesh, with an additional boundary to represent the interface between the two fluid layers. In addition, the mesh paritions the elements into those above and below the interface and relabels boundaries so that we can impose a volume constraint on the lower or upper fluid. 
 
 \begin{DoxyVerb}                            3
@@ -68,7 +69,7 @@ Two layer mesh which employs a pseudo-\/solid node-\/update strategy. This class
 \end{DoxyVerb}
  
 
-Definition at line \mbox{\hyperlink{static__two__layer_8cc_source_l00452}{452}} of file \mbox{\hyperlink{static__two__layer_8cc_source}{static\+\_\+two\+\_\+layer.\+cc}}.
+Definition at line 452 of file static\+\_\+two\+\_\+layer.\+cc.
 
 
 
@@ -86,21 +87,21 @@ Constructor\+: Pass number of elements in x-\/direction, number of elements in y
 
 
 
-Definition at line \mbox{\hyperlink{static__two__layer_8cc_source_l00463}{463}} of file \mbox{\hyperlink{static__two__layer_8cc_source}{static\+\_\+two\+\_\+layer.\+cc}}.
+Definition at line 463 of file static\+\_\+two\+\_\+layer.\+cc.
 
 
 
-References \mbox{\hyperlink{static__two__layer_8cc_source_l00732}{Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::\+Interface\+\_\+lower\+\_\+boundary\+\_\+element\+\_\+pt}}, \mbox{\hyperlink{static__two__layer_8cc_source_l00736}{Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::\+Interface\+\_\+upper\+\_\+boundary\+\_\+element\+\_\+pt}}, \mbox{\hyperlink{static__two__layer_8cc_source_l00725}{Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::\+Lower\+\_\+layer\+\_\+element\+\_\+pt}}, and \mbox{\hyperlink{static__two__layer_8cc_source_l00728}{Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::\+Upper\+\_\+layer\+\_\+element\+\_\+pt}}.
+References Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::\+Interface\+\_\+lower\+\_\+boundary\+\_\+element\+\_\+pt, Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::\+Interface\+\_\+upper\+\_\+boundary\+\_\+element\+\_\+pt, Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::\+Lower\+\_\+layer\+\_\+element\+\_\+pt, and Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::\+Upper\+\_\+layer\+\_\+element\+\_\+pt.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classElasticTwoLayerMesh_abdfd1f3141ca5e0e65561195119b735b}\label{classElasticTwoLayerMesh_abdfd1f3141ca5e0e65561195119b735b}} 
+\mbox{\Hypertarget{classElasticTwoLayerMesh_a748ff5229092301a18a193a846d2ebdd}\label{classElasticTwoLayerMesh_a748ff5229092301a18a193a846d2ebdd}} 
 \index{ElasticTwoLayerMesh$<$ ELEMENT $>$@{ElasticTwoLayerMesh$<$ ELEMENT $>$}!interface\_lower\_boundary\_element\_pt@{interface\_lower\_boundary\_element\_pt}}
 \index{interface\_lower\_boundary\_element\_pt@{interface\_lower\_boundary\_element\_pt}!ElasticTwoLayerMesh$<$ ELEMENT $>$@{ElasticTwoLayerMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{interface\_lower\_boundary\_element\_pt()}{interface\_lower\_boundary\_element\_pt()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-Finite\+Element $\ast$\& \mbox{\hyperlink{classElasticTwoLayerMesh}{Elastic\+Two\+Layer\+Mesh}}$<$ ELEMENT $>$\+::interface\+\_\+lower\+\_\+boundary\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+Finite\+Element$\ast$ \& \mbox{\hyperlink{classElasticTwoLayerMesh}{Elastic\+Two\+Layer\+Mesh}}$<$ ELEMENT $>$\+::interface\+\_\+lower\+\_\+boundary\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -108,11 +109,11 @@ Access functions for pointers to elements in bottom layer.
 
 
 
-Definition at line \mbox{\hyperlink{static__two__layer_8cc_source_l00701}{701}} of file \mbox{\hyperlink{static__two__layer_8cc_source}{static\+\_\+two\+\_\+layer.\+cc}}.
+Definition at line 701 of file static\+\_\+two\+\_\+layer.\+cc.
 
 
 
-References \mbox{\hyperlink{static__two__layer_8cc_source_l00732}{Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::\+Interface\+\_\+lower\+\_\+boundary\+\_\+element\+\_\+pt}}.
+References Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::\+Interface\+\_\+lower\+\_\+boundary\+\_\+element\+\_\+pt.
 
 \mbox{\Hypertarget{classElasticTwoLayerMesh_a100b3b26d4a2b97f67b0bef4e4b42e64}\label{classElasticTwoLayerMesh_a100b3b26d4a2b97f67b0bef4e4b42e64}} 
 \index{ElasticTwoLayerMesh$<$ ELEMENT $>$@{ElasticTwoLayerMesh$<$ ELEMENT $>$}!interface\_lower\_face\_index\_at\_boundary@{interface\_lower\_face\_index\_at\_boundary}}
@@ -127,14 +128,14 @@ Index of the face of the elements next to the interface in the lower region (alw
 
 
 
-Definition at line \mbox{\hyperlink{static__two__layer_8cc_source_l00719}{719}} of file \mbox{\hyperlink{static__two__layer_8cc_source}{static\+\_\+two\+\_\+layer.\+cc}}.
+Definition at line 719 of file static\+\_\+two\+\_\+layer.\+cc.
 
-\mbox{\Hypertarget{classElasticTwoLayerMesh_ada3d4bfb572ad71bace28702777ca077}\label{classElasticTwoLayerMesh_ada3d4bfb572ad71bace28702777ca077}} 
+\mbox{\Hypertarget{classElasticTwoLayerMesh_a5170e0a70ad0d4eb3ec01c32d3db2c72}\label{classElasticTwoLayerMesh_a5170e0a70ad0d4eb3ec01c32d3db2c72}} 
 \index{ElasticTwoLayerMesh$<$ ELEMENT $>$@{ElasticTwoLayerMesh$<$ ELEMENT $>$}!interface\_upper\_boundary\_element\_pt@{interface\_upper\_boundary\_element\_pt}}
 \index{interface\_upper\_boundary\_element\_pt@{interface\_upper\_boundary\_element\_pt}!ElasticTwoLayerMesh$<$ ELEMENT $>$@{ElasticTwoLayerMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{interface\_upper\_boundary\_element\_pt()}{interface\_upper\_boundary\_element\_pt()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-Finite\+Element $\ast$\& \mbox{\hyperlink{classElasticTwoLayerMesh}{Elastic\+Two\+Layer\+Mesh}}$<$ ELEMENT $>$\+::interface\+\_\+upper\+\_\+boundary\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+Finite\+Element$\ast$ \& \mbox{\hyperlink{classElasticTwoLayerMesh}{Elastic\+Two\+Layer\+Mesh}}$<$ ELEMENT $>$\+::interface\+\_\+upper\+\_\+boundary\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -142,11 +143,11 @@ Access functions for pointers to elements in upper layer.
 
 
 
-Definition at line \mbox{\hyperlink{static__two__layer_8cc_source_l00697}{697}} of file \mbox{\hyperlink{static__two__layer_8cc_source}{static\+\_\+two\+\_\+layer.\+cc}}.
+Definition at line 697 of file static\+\_\+two\+\_\+layer.\+cc.
 
 
 
-References \mbox{\hyperlink{static__two__layer_8cc_source_l00736}{Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::\+Interface\+\_\+upper\+\_\+boundary\+\_\+element\+\_\+pt}}.
+References Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::\+Interface\+\_\+upper\+\_\+boundary\+\_\+element\+\_\+pt.
 
 \mbox{\Hypertarget{classElasticTwoLayerMesh_a074aafe34f7dd56566c1a9ff934505d5}\label{classElasticTwoLayerMesh_a074aafe34f7dd56566c1a9ff934505d5}} 
 \index{ElasticTwoLayerMesh$<$ ELEMENT $>$@{ElasticTwoLayerMesh$<$ ELEMENT $>$}!interface\_upper\_face\_index\_at\_boundary@{interface\_upper\_face\_index\_at\_boundary}}
@@ -161,14 +162,14 @@ Index of the face of the elements next to the interface in the upper region (alw
 
 
 
-Definition at line \mbox{\hyperlink{static__two__layer_8cc_source_l00714}{714}} of file \mbox{\hyperlink{static__two__layer_8cc_source}{static\+\_\+two\+\_\+layer.\+cc}}.
+Definition at line 714 of file static\+\_\+two\+\_\+layer.\+cc.
 
-\mbox{\Hypertarget{classElasticTwoLayerMesh_a55cb8f219643531b55d0072e32c2a1e8}\label{classElasticTwoLayerMesh_a55cb8f219643531b55d0072e32c2a1e8}} 
+\mbox{\Hypertarget{classElasticTwoLayerMesh_a4e6d9b26eecc0487d7b2684ad27b7669}\label{classElasticTwoLayerMesh_a4e6d9b26eecc0487d7b2684ad27b7669}} 
 \index{ElasticTwoLayerMesh$<$ ELEMENT $>$@{ElasticTwoLayerMesh$<$ ELEMENT $>$}!lower\_layer\_element\_pt@{lower\_layer\_element\_pt}}
 \index{lower\_layer\_element\_pt@{lower\_layer\_element\_pt}!ElasticTwoLayerMesh$<$ ELEMENT $>$@{ElasticTwoLayerMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{lower\_layer\_element\_pt()}{lower\_layer\_element\_pt()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-Finite\+Element $\ast$\& \mbox{\hyperlink{classElasticTwoLayerMesh}{Elastic\+Two\+Layer\+Mesh}}$<$ ELEMENT $>$\+::lower\+\_\+layer\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+Finite\+Element$\ast$ \& \mbox{\hyperlink{classElasticTwoLayerMesh}{Elastic\+Two\+Layer\+Mesh}}$<$ ELEMENT $>$\+::lower\+\_\+layer\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -176,11 +177,11 @@ Access functions for pointers to elements in bottom layer.
 
 
 
-Definition at line \mbox{\hyperlink{static__two__layer_8cc_source_l00687}{687}} of file \mbox{\hyperlink{static__two__layer_8cc_source}{static\+\_\+two\+\_\+layer.\+cc}}.
+Definition at line 687 of file static\+\_\+two\+\_\+layer.\+cc.
 
 
 
-References \mbox{\hyperlink{static__two__layer_8cc_source_l00725}{Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::\+Lower\+\_\+layer\+\_\+element\+\_\+pt}}.
+References Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::\+Lower\+\_\+layer\+\_\+element\+\_\+pt.
 
 \mbox{\Hypertarget{classElasticTwoLayerMesh_ae5db5553497593905fd227bfc5b34b50}\label{classElasticTwoLayerMesh_ae5db5553497593905fd227bfc5b34b50}} 
 \index{ElasticTwoLayerMesh$<$ ELEMENT $>$@{ElasticTwoLayerMesh$<$ ELEMENT $>$}!ninterface\_lower@{ninterface\_lower}}
@@ -195,11 +196,11 @@ Number of elements in top layer.
 
 
 
-Definition at line \mbox{\hyperlink{static__two__layer_8cc_source_l00709}{709}} of file \mbox{\hyperlink{static__two__layer_8cc_source}{static\+\_\+two\+\_\+layer.\+cc}}.
+Definition at line 709 of file static\+\_\+two\+\_\+layer.\+cc.
 
 
 
-References \mbox{\hyperlink{static__two__layer_8cc_source_l00732}{Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::\+Interface\+\_\+lower\+\_\+boundary\+\_\+element\+\_\+pt}}.
+References Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::\+Interface\+\_\+lower\+\_\+boundary\+\_\+element\+\_\+pt.
 
 \mbox{\Hypertarget{classElasticTwoLayerMesh_a6e813329601844d3d900d78a60892134}\label{classElasticTwoLayerMesh_a6e813329601844d3d900d78a60892134}} 
 \index{ElasticTwoLayerMesh$<$ ELEMENT $>$@{ElasticTwoLayerMesh$<$ ELEMENT $>$}!ninterface\_upper@{ninterface\_upper}}
@@ -214,11 +215,11 @@ Number of elements in upper layer.
 
 
 
-Definition at line \mbox{\hyperlink{static__two__layer_8cc_source_l00705}{705}} of file \mbox{\hyperlink{static__two__layer_8cc_source}{static\+\_\+two\+\_\+layer.\+cc}}.
+Definition at line 705 of file static\+\_\+two\+\_\+layer.\+cc.
 
 
 
-References \mbox{\hyperlink{static__two__layer_8cc_source_l00736}{Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::\+Interface\+\_\+upper\+\_\+boundary\+\_\+element\+\_\+pt}}.
+References Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::\+Interface\+\_\+upper\+\_\+boundary\+\_\+element\+\_\+pt.
 
 \mbox{\Hypertarget{classElasticTwoLayerMesh_a144f4d44005a25bb301955625a79c9ef}\label{classElasticTwoLayerMesh_a144f4d44005a25bb301955625a79c9ef}} 
 \index{ElasticTwoLayerMesh$<$ ELEMENT $>$@{ElasticTwoLayerMesh$<$ ELEMENT $>$}!nlower@{nlower}}
@@ -233,11 +234,11 @@ Number of elements in top layer.
 
 
 
-Definition at line \mbox{\hyperlink{static__two__layer_8cc_source_l00694}{694}} of file \mbox{\hyperlink{static__two__layer_8cc_source}{static\+\_\+two\+\_\+layer.\+cc}}.
+Definition at line 694 of file static\+\_\+two\+\_\+layer.\+cc.
 
 
 
-References \mbox{\hyperlink{static__two__layer_8cc_source_l00725}{Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::\+Lower\+\_\+layer\+\_\+element\+\_\+pt}}.
+References Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::\+Lower\+\_\+layer\+\_\+element\+\_\+pt.
 
 \mbox{\Hypertarget{classElasticTwoLayerMesh_ae5c586ecab2ac275174427a94ccfc0c7}\label{classElasticTwoLayerMesh_ae5c586ecab2ac275174427a94ccfc0c7}} 
 \index{ElasticTwoLayerMesh$<$ ELEMENT $>$@{ElasticTwoLayerMesh$<$ ELEMENT $>$}!nupper@{nupper}}
@@ -252,18 +253,18 @@ Number of elements in upper layer.
 
 
 
-Definition at line \mbox{\hyperlink{static__two__layer_8cc_source_l00691}{691}} of file \mbox{\hyperlink{static__two__layer_8cc_source}{static\+\_\+two\+\_\+layer.\+cc}}.
+Definition at line 691 of file static\+\_\+two\+\_\+layer.\+cc.
 
 
 
-References \mbox{\hyperlink{static__two__layer_8cc_source_l00728}{Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::\+Upper\+\_\+layer\+\_\+element\+\_\+pt}}.
+References Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::\+Upper\+\_\+layer\+\_\+element\+\_\+pt.
 
-\mbox{\Hypertarget{classElasticTwoLayerMesh_a1eda03440a219d06a5c002048715687c}\label{classElasticTwoLayerMesh_a1eda03440a219d06a5c002048715687c}} 
+\mbox{\Hypertarget{classElasticTwoLayerMesh_ab5b2682b701b796c14431f8e126457fd}\label{classElasticTwoLayerMesh_ab5b2682b701b796c14431f8e126457fd}} 
 \index{ElasticTwoLayerMesh$<$ ELEMENT $>$@{ElasticTwoLayerMesh$<$ ELEMENT $>$}!upper\_layer\_element\_pt@{upper\_layer\_element\_pt}}
 \index{upper\_layer\_element\_pt@{upper\_layer\_element\_pt}!ElasticTwoLayerMesh$<$ ELEMENT $>$@{ElasticTwoLayerMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{upper\_layer\_element\_pt()}{upper\_layer\_element\_pt()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-Finite\+Element $\ast$\& \mbox{\hyperlink{classElasticTwoLayerMesh}{Elastic\+Two\+Layer\+Mesh}}$<$ ELEMENT $>$\+::upper\+\_\+layer\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+Finite\+Element$\ast$ \& \mbox{\hyperlink{classElasticTwoLayerMesh}{Elastic\+Two\+Layer\+Mesh}}$<$ ELEMENT $>$\+::upper\+\_\+layer\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -271,11 +272,11 @@ Access functions for pointers to elements in upper layer.
 
 
 
-Definition at line \mbox{\hyperlink{static__two__layer_8cc_source_l00683}{683}} of file \mbox{\hyperlink{static__two__layer_8cc_source}{static\+\_\+two\+\_\+layer.\+cc}}.
+Definition at line 683 of file static\+\_\+two\+\_\+layer.\+cc.
 
 
 
-References \mbox{\hyperlink{static__two__layer_8cc_source_l00728}{Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::\+Upper\+\_\+layer\+\_\+element\+\_\+pt}}.
+References Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::\+Upper\+\_\+layer\+\_\+element\+\_\+pt.
 
 
 
@@ -293,11 +294,11 @@ Vector of pointers to the elements adjacent to the interface on the lower layer.
 
 
 
-Definition at line \mbox{\hyperlink{static__two__layer_8cc_source_l00732}{732}} of file \mbox{\hyperlink{static__two__layer_8cc_source}{static\+\_\+two\+\_\+layer.\+cc}}.
+Definition at line 732 of file static\+\_\+two\+\_\+layer.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{static__two__layer_8cc_source_l00463}{Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Two\+Layer\+Mesh()}}, \mbox{\hyperlink{static__two__layer_8cc_source_l00701}{Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::interface\+\_\+lower\+\_\+boundary\+\_\+element\+\_\+pt()}}, and \mbox{\hyperlink{static__two__layer_8cc_source_l00709}{Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::ninterface\+\_\+lower()}}.
+Referenced by Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Two\+Layer\+Mesh(), Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::interface\+\_\+lower\+\_\+boundary\+\_\+element\+\_\+pt(), and Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::ninterface\+\_\+lower().
 
 \mbox{\Hypertarget{classElasticTwoLayerMesh_af8218bd023535d3dbf4af3cf7bc1c12d}\label{classElasticTwoLayerMesh_af8218bd023535d3dbf4af3cf7bc1c12d}} 
 \index{ElasticTwoLayerMesh$<$ ELEMENT $>$@{ElasticTwoLayerMesh$<$ ELEMENT $>$}!Interface\_upper\_boundary\_element\_pt@{Interface\_upper\_boundary\_element\_pt}}
@@ -312,11 +313,11 @@ Vector of pointers to the element adjacent to the interface on the upper layer.
 
 
 
-Definition at line \mbox{\hyperlink{static__two__layer_8cc_source_l00736}{736}} of file \mbox{\hyperlink{static__two__layer_8cc_source}{static\+\_\+two\+\_\+layer.\+cc}}.
+Definition at line 736 of file static\+\_\+two\+\_\+layer.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{static__two__layer_8cc_source_l00463}{Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Two\+Layer\+Mesh()}}, \mbox{\hyperlink{static__two__layer_8cc_source_l00697}{Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::interface\+\_\+upper\+\_\+boundary\+\_\+element\+\_\+pt()}}, and \mbox{\hyperlink{static__two__layer_8cc_source_l00705}{Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::ninterface\+\_\+upper()}}.
+Referenced by Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Two\+Layer\+Mesh(), Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::interface\+\_\+upper\+\_\+boundary\+\_\+element\+\_\+pt(), and Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::ninterface\+\_\+upper().
 
 \mbox{\Hypertarget{classElasticTwoLayerMesh_a4f8c33eaaa185e8c8710883ee9b5811f}\label{classElasticTwoLayerMesh_a4f8c33eaaa185e8c8710883ee9b5811f}} 
 \index{ElasticTwoLayerMesh$<$ ELEMENT $>$@{ElasticTwoLayerMesh$<$ ELEMENT $>$}!Lower\_layer\_element\_pt@{Lower\_layer\_element\_pt}}
@@ -331,11 +332,11 @@ Vector of pointers to element in the upper layer.
 
 
 
-Definition at line \mbox{\hyperlink{static__two__layer_8cc_source_l00725}{725}} of file \mbox{\hyperlink{static__two__layer_8cc_source}{static\+\_\+two\+\_\+layer.\+cc}}.
+Definition at line 725 of file static\+\_\+two\+\_\+layer.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{static__two__layer_8cc_source_l00463}{Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Two\+Layer\+Mesh()}}, \mbox{\hyperlink{static__two__layer_8cc_source_l00687}{Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::lower\+\_\+layer\+\_\+element\+\_\+pt()}}, and \mbox{\hyperlink{static__two__layer_8cc_source_l00694}{Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::nlower()}}.
+Referenced by Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Two\+Layer\+Mesh(), Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::lower\+\_\+layer\+\_\+element\+\_\+pt(), and Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::nlower().
 
 \mbox{\Hypertarget{classElasticTwoLayerMesh_ae46d4ef2bb95a6c023bd0dc1e367ccfb}\label{classElasticTwoLayerMesh_ae46d4ef2bb95a6c023bd0dc1e367ccfb}} 
 \index{ElasticTwoLayerMesh$<$ ELEMENT $>$@{ElasticTwoLayerMesh$<$ ELEMENT $>$}!Upper\_layer\_element\_pt@{Upper\_layer\_element\_pt}}
@@ -350,11 +351,11 @@ Vector of pointers to element in the lower layer.
 
 
 
-Definition at line \mbox{\hyperlink{static__two__layer_8cc_source_l00728}{728}} of file \mbox{\hyperlink{static__two__layer_8cc_source}{static\+\_\+two\+\_\+layer.\+cc}}.
+Definition at line 728 of file static\+\_\+two\+\_\+layer.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{static__two__layer_8cc_source_l00463}{Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Two\+Layer\+Mesh()}}, \mbox{\hyperlink{static__two__layer_8cc_source_l00691}{Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::nupper()}}, and \mbox{\hyperlink{static__two__layer_8cc_source_l00683}{Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::upper\+\_\+layer\+\_\+element\+\_\+pt()}}.
+Referenced by Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Two\+Layer\+Mesh(), Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::nupper(), and Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::upper\+\_\+layer\+\_\+element\+\_\+pt().
 
 
 

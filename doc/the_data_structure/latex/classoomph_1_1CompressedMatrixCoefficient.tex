@@ -14,7 +14,7 @@ Class for a compressed-\/matrix coefficent (for either CC or CR matrices). Conta
 \item 
 \mbox{\hyperlink{classoomph_1_1CompressedMatrixCoefficient_a7cbfc9de624baabd04b3501d9970bfb2}{Compressed\+Matrix\+Coefficient}} ()
 \begin{DoxyCompactList}\small\item\em Constructor (no arguments) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1CompressedMatrixCoefficient_a80eba1cc000e17b7de0a24dbae74cb13}{Compressed\+Matrix\+Coefficient}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1CompressedMatrixCoefficient_a2f994cd41042cc2b7c4ea64c7e1e395e}{index}}, const double \&\mbox{\hyperlink{classoomph_1_1CompressedMatrixCoefficient_aaeda8610cd964c7e0d521ce48d527761}{value}})
+\mbox{\hyperlink{classoomph_1_1CompressedMatrixCoefficient_a80eba1cc000e17b7de0a24dbae74cb13}{Compressed\+Matrix\+Coefficient}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1CompressedMatrixCoefficient_a680fdf9009100911ec5c43b53a0dccee}{index}}, const double \&\mbox{\hyperlink{classoomph_1_1CompressedMatrixCoefficient_ad37c133b527ae8ad5aa841ba3d3a29b3}{value}})
 \begin{DoxyCompactList}\small\item\em Constructor (takes the index and value as arguments) \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1CompressedMatrixCoefficient_a1d77f4d596e5263c1fe235dae6a9081c}{$\sim$\+Compressed\+Matrix\+Coefficient}} ()
 \begin{DoxyCompactList}\small\item\em Destructor (does nothing) \end{DoxyCompactList}\item 
@@ -24,9 +24,9 @@ void \mbox{\hyperlink{classoomph_1_1CompressedMatrixCoefficient_ab58ad8da0c00b3c
 \begin{DoxyCompactList}\small\item\em Assignment Operator. Not Broken. Required for STL sort function. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1CompressedMatrixCoefficient_a69f893759bb296dd6fb862b7d3e2fce3}{operator$<$}} (const \mbox{\hyperlink{classoomph_1_1CompressedMatrixCoefficient}{Compressed\+Matrix\+Coefficient}} \&a) const
 \begin{DoxyCompactList}\small\item\em Less Than Operator (for the STL sort function) \end{DoxyCompactList}\item 
-unsigned \& \mbox{\hyperlink{classoomph_1_1CompressedMatrixCoefficient_a2f994cd41042cc2b7c4ea64c7e1e395e}{index}} ()
+unsigned \& \mbox{\hyperlink{classoomph_1_1CompressedMatrixCoefficient_a680fdf9009100911ec5c43b53a0dccee}{index}} ()
 \begin{DoxyCompactList}\small\item\em access function for the coefficient\textquotesingle{}s (row or column) index \end{DoxyCompactList}\item 
-double \& \mbox{\hyperlink{classoomph_1_1CompressedMatrixCoefficient_aaeda8610cd964c7e0d521ce48d527761}{value}} ()
+double \& \mbox{\hyperlink{classoomph_1_1CompressedMatrixCoefficient_ad37c133b527ae8ad5aa841ba3d3a29b3}{value}} ()
 \begin{DoxyCompactList}\small\item\em access function for the coefficient value \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1CompressedMatrixCoefficient_acd77daf8774a403432fe019da052c6da}{index}} () const
 \begin{DoxyCompactList}\small\item\em Access function for the coefficient\textquotesingle{}s (row or column\+\_\+ index (const version) \end{DoxyCompactList}\item 
@@ -44,7 +44,7 @@ double \mbox{\hyperlink{classoomph_1_1CompressedMatrixCoefficient_a8873cbcd41c13
 \doxysubsection{Detailed Description}
 Class for a compressed-\/matrix coefficent (for either CC or CR matrices). Contains the (row or column) index and value of a coefficient in a compressed row or column. Currently only used in ILU(0) for CCDouble\+Matrices to allow the coefficients in each compressed column \mbox{[}row\mbox{]} to be sorted by their row \mbox{[}column\mbox{]} index. 
 
-Definition at line \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00184}{184}} of file \mbox{\hyperlink{general__purpose__preconditioners_8h_source}{general\+\_\+purpose\+\_\+preconditioners.\+h}}.
+Definition at line 184 of file general\+\_\+purpose\+\_\+preconditioners.\+h.
 
 
 
@@ -61,7 +61,7 @@ Constructor (no arguments)
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00188}{188}} of file \mbox{\hyperlink{general__purpose__preconditioners_8h_source}{general\+\_\+purpose\+\_\+preconditioners.\+h}}.
+Definition at line 188 of file general\+\_\+purpose\+\_\+preconditioners.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1CompressedMatrixCoefficient_a80eba1cc000e17b7de0a24dbae74cb13}\label{classoomph_1_1CompressedMatrixCoefficient_a80eba1cc000e17b7de0a24dbae74cb13}} 
 \index{oomph::CompressedMatrixCoefficient@{oomph::CompressedMatrixCoefficient}!CompressedMatrixCoefficient@{CompressedMatrixCoefficient}}
@@ -75,11 +75,11 @@ Constructor (takes the index and value as arguments)
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00191}{191}} of file \mbox{\hyperlink{general__purpose__preconditioners_8h_source}{general\+\_\+purpose\+\_\+preconditioners.\+h}}.
+Definition at line 191 of file general\+\_\+purpose\+\_\+preconditioners.\+h.
 
 
 
-References \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00222}{index()}}, \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00248}{Index}}, \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00228}{value()}}, and \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00251}{Value}}.
+References index(), Index, value(), and Value.
 
 \mbox{\Hypertarget{classoomph_1_1CompressedMatrixCoefficient_a1d77f4d596e5263c1fe235dae6a9081c}\label{classoomph_1_1CompressedMatrixCoefficient_a1d77f4d596e5263c1fe235dae6a9081c}} 
 \index{oomph::CompressedMatrixCoefficient@{oomph::CompressedMatrixCoefficient}!````~CompressedMatrixCoefficient@{$\sim$CompressedMatrixCoefficient}}
@@ -93,7 +93,7 @@ Destructor (does nothing)
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00199}{199}} of file \mbox{\hyperlink{general__purpose__preconditioners_8h_source}{general\+\_\+purpose\+\_\+preconditioners.\+h}}.
+Definition at line 199 of file general\+\_\+purpose\+\_\+preconditioners.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1CompressedMatrixCoefficient_aa45c925ae1a3a0620475b60f64b6cf68}\label{classoomph_1_1CompressedMatrixCoefficient_aa45c925ae1a3a0620475b60f64b6cf68}} 
 \index{oomph::CompressedMatrixCoefficient@{oomph::CompressedMatrixCoefficient}!CompressedMatrixCoefficient@{CompressedMatrixCoefficient}}
@@ -107,20 +107,20 @@ Copy Constructor. Not Broken. Required for STL sort function.
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00202}{202}} of file \mbox{\hyperlink{general__purpose__preconditioners_8h_source}{general\+\_\+purpose\+\_\+preconditioners.\+h}}.
+Definition at line 202 of file general\+\_\+purpose\+\_\+preconditioners.\+h.
 
 
 
-References \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00222}{index()}}, \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00248}{Index}}, \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00228}{value()}}, and \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00251}{Value}}.
+References index(), Index, value(), and Value.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1CompressedMatrixCoefficient_a2f994cd41042cc2b7c4ea64c7e1e395e}\label{classoomph_1_1CompressedMatrixCoefficient_a2f994cd41042cc2b7c4ea64c7e1e395e}} 
+\mbox{\Hypertarget{classoomph_1_1CompressedMatrixCoefficient_a680fdf9009100911ec5c43b53a0dccee}\label{classoomph_1_1CompressedMatrixCoefficient_a680fdf9009100911ec5c43b53a0dccee}} 
 \index{oomph::CompressedMatrixCoefficient@{oomph::CompressedMatrixCoefficient}!index@{index}}
 \index{index@{index}!oomph::CompressedMatrixCoefficient@{oomph::CompressedMatrixCoefficient}}
 \doxysubsubsection{\texorpdfstring{index()}{index()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily unsigned \& oomph\+::\+Compressed\+Matrix\+Coefficient\+::index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily unsigned\& oomph\+::\+Compressed\+Matrix\+Coefficient\+::index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -128,15 +128,15 @@ access function for the coefficient\textquotesingle{}s (row or column) index
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00222}{222}} of file \mbox{\hyperlink{general__purpose__preconditioners_8h_source}{general\+\_\+purpose\+\_\+preconditioners.\+h}}.
+Definition at line 222 of file general\+\_\+purpose\+\_\+preconditioners.\+h.
 
 
 
-References \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00248}{Index}}.
+References Index.
 
 
 
-Referenced by \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00191}{Compressed\+Matrix\+Coefficient()}}, \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00216}{operator$<$()}}, and \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00209}{operator=()}}.
+Referenced by Compressed\+Matrix\+Coefficient(), operator$<$(), and operator=().
 
 \mbox{\Hypertarget{classoomph_1_1CompressedMatrixCoefficient_acd77daf8774a403432fe019da052c6da}\label{classoomph_1_1CompressedMatrixCoefficient_acd77daf8774a403432fe019da052c6da}} 
 \index{oomph::CompressedMatrixCoefficient@{oomph::CompressedMatrixCoefficient}!index@{index}}
@@ -150,11 +150,11 @@ Access function for the coefficient\textquotesingle{}s (row or column\+\_\+ inde
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00235}{235}} of file \mbox{\hyperlink{general__purpose__preconditioners_8h_source}{general\+\_\+purpose\+\_\+preconditioners.\+h}}.
+Definition at line 235 of file general\+\_\+purpose\+\_\+preconditioners.\+h.
 
 
 
-References \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00248}{Index}}.
+References Index.
 
 \mbox{\Hypertarget{classoomph_1_1CompressedMatrixCoefficient_a69f893759bb296dd6fb862b7d3e2fce3}\label{classoomph_1_1CompressedMatrixCoefficient_a69f893759bb296dd6fb862b7d3e2fce3}} 
 \index{oomph::CompressedMatrixCoefficient@{oomph::CompressedMatrixCoefficient}!operator$<$@{operator$<$}}
@@ -168,11 +168,11 @@ Less Than Operator (for the STL sort function)
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00216}{216}} of file \mbox{\hyperlink{general__purpose__preconditioners_8h_source}{general\+\_\+purpose\+\_\+preconditioners.\+h}}.
+Definition at line 216 of file general\+\_\+purpose\+\_\+preconditioners.\+h.
 
 
 
-References \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00222}{index()}}, and \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00248}{Index}}.
+References index(), and Index.
 
 \mbox{\Hypertarget{classoomph_1_1CompressedMatrixCoefficient_ab58ad8da0c00b3c61acc13f68e865af3}\label{classoomph_1_1CompressedMatrixCoefficient_ab58ad8da0c00b3c61acc13f68e865af3}} 
 \index{oomph::CompressedMatrixCoefficient@{oomph::CompressedMatrixCoefficient}!operator=@{operator=}}
@@ -186,17 +186,17 @@ Assignment Operator. Not Broken. Required for STL sort function.
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00209}{209}} of file \mbox{\hyperlink{general__purpose__preconditioners_8h_source}{general\+\_\+purpose\+\_\+preconditioners.\+h}}.
+Definition at line 209 of file general\+\_\+purpose\+\_\+preconditioners.\+h.
 
 
 
-References \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00222}{index()}}, \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00248}{Index}}, \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00228}{value()}}, and \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00251}{Value}}.
+References index(), Index, value(), and Value.
 
-\mbox{\Hypertarget{classoomph_1_1CompressedMatrixCoefficient_aaeda8610cd964c7e0d521ce48d527761}\label{classoomph_1_1CompressedMatrixCoefficient_aaeda8610cd964c7e0d521ce48d527761}} 
+\mbox{\Hypertarget{classoomph_1_1CompressedMatrixCoefficient_ad37c133b527ae8ad5aa841ba3d3a29b3}\label{classoomph_1_1CompressedMatrixCoefficient_ad37c133b527ae8ad5aa841ba3d3a29b3}} 
 \index{oomph::CompressedMatrixCoefficient@{oomph::CompressedMatrixCoefficient}!value@{value}}
 \index{value@{value}!oomph::CompressedMatrixCoefficient@{oomph::CompressedMatrixCoefficient}}
 \doxysubsubsection{\texorpdfstring{value()}{value()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily double \& oomph\+::\+Compressed\+Matrix\+Coefficient\+::value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double\& oomph\+::\+Compressed\+Matrix\+Coefficient\+::value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -204,15 +204,15 @@ access function for the coefficient value
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00228}{228}} of file \mbox{\hyperlink{general__purpose__preconditioners_8h_source}{general\+\_\+purpose\+\_\+preconditioners.\+h}}.
+Definition at line 228 of file general\+\_\+purpose\+\_\+preconditioners.\+h.
 
 
 
-References \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00251}{Value}}.
+References Value.
 
 
 
-Referenced by \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00191}{Compressed\+Matrix\+Coefficient()}}, and \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00209}{operator=()}}.
+Referenced by Compressed\+Matrix\+Coefficient(), and operator=().
 
 \mbox{\Hypertarget{classoomph_1_1CompressedMatrixCoefficient_a8659b8a8c7cb778d337cf58c38a1d24a}\label{classoomph_1_1CompressedMatrixCoefficient_a8659b8a8c7cb778d337cf58c38a1d24a}} 
 \index{oomph::CompressedMatrixCoefficient@{oomph::CompressedMatrixCoefficient}!value@{value}}
@@ -226,11 +226,11 @@ access function for the coefficient\textquotesingle{}s value (const version)
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00241}{241}} of file \mbox{\hyperlink{general__purpose__preconditioners_8h_source}{general\+\_\+purpose\+\_\+preconditioners.\+h}}.
+Definition at line 241 of file general\+\_\+purpose\+\_\+preconditioners.\+h.
 
 
 
-References \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00251}{Value}}.
+References Value.
 
 
 
@@ -247,11 +247,11 @@ the row or column index of the compressed-\/matrix coefficient
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00248}{248}} of file \mbox{\hyperlink{general__purpose__preconditioners_8h_source}{general\+\_\+purpose\+\_\+preconditioners.\+h}}.
+Definition at line 248 of file general\+\_\+purpose\+\_\+preconditioners.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00191}{Compressed\+Matrix\+Coefficient()}}, \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00222}{index()}}, \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00216}{operator$<$()}}, and \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00209}{operator=()}}.
+Referenced by Compressed\+Matrix\+Coefficient(), index(), operator$<$(), and operator=().
 
 \mbox{\Hypertarget{classoomph_1_1CompressedMatrixCoefficient_a8873cbcd41c135197f049bbcec71fa6b}\label{classoomph_1_1CompressedMatrixCoefficient_a8873cbcd41c135197f049bbcec71fa6b}} 
 \index{oomph::CompressedMatrixCoefficient@{oomph::CompressedMatrixCoefficient}!Value@{Value}}
@@ -265,11 +265,11 @@ the value of the compressed-\/matrix coefficient
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00251}{251}} of file \mbox{\hyperlink{general__purpose__preconditioners_8h_source}{general\+\_\+purpose\+\_\+preconditioners.\+h}}.
+Definition at line 251 of file general\+\_\+purpose\+\_\+preconditioners.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00191}{Compressed\+Matrix\+Coefficient()}}, \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00209}{operator=()}}, and \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00228}{value()}}.
+Referenced by Compressed\+Matrix\+Coefficient(), operator=(), and value().
 
 
 

@@ -1,11 +1,11 @@
-\hypertarget{classBrethertonElement}{}\doxysection{Bretherton\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classBrethertonElement}{}\doxysection{Bretherton\+Element$<$ ELEMENT $>$ Class Template Reference}
 \label{classBrethertonElement}\index{BrethertonElement$<$ ELEMENT $>$@{BrethertonElement$<$ ELEMENT $>$}}
 
 
 \char`\"{}\+Bretherton element\char`\"{} is a fluid element (of type ELEMENT) for which the (inflow) velocity at those nodes that are located on a specified Mesh boundary is prescribed by Dirichlet boundary conditions. The key is that prescribed velocity profile can be a function of some external Data -- this dependency must be taken into account when computing the element\textquotesingle{}s Jacobian matrix.  
 
 
-Inheritance diagram for Bretherton\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for Bretherton\+Element$<$ ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{classBrethertonElement}
@@ -48,11 +48,12 @@ unsigned \mbox{\hyperlink{classBrethertonElement_a2d3a3d4837d41865d5f62271c98715
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class ELEMENT$>$\newline
 class Bretherton\+Element$<$ ELEMENT $>$}
+
 \char`\"{}\+Bretherton element\char`\"{} is a fluid element (of type ELEMENT) for which the (inflow) velocity at those nodes that are located on a specified Mesh boundary is prescribed by Dirichlet boundary conditions. The key is that prescribed velocity profile can be a function of some external Data -- this dependency must be taken into account when computing the element\textquotesingle{}s Jacobian matrix. 
 
 This element type is useful, for instance, in the Bretherton problem, where the parabolic \char`\"{}inflow\char`\"{} profile is a function of the film thickness (represented by Spine heights) at the \char`\"{}outflow\char`\"{}. 
 
-Definition at line \mbox{\hyperlink{bretherton_8cc_source_l00153}{153}} of file \mbox{\hyperlink{bretherton_8cc_source}{bretherton.\+cc}}.
+Definition at line 153 of file bretherton.\+cc.
 
 
 
@@ -70,7 +71,7 @@ Typedef for pointer (global) function that specifies the the inflow.
 
 
 
-Definition at line \mbox{\hyperlink{bretherton_8cc_source_l00160}{160}} of file \mbox{\hyperlink{bretherton_8cc_source}{bretherton.\+cc}}.
+Definition at line 160 of file bretherton.\+cc.
 
 
 
@@ -88,7 +89,7 @@ Constructor\+: Call the constructor of the underlying element.
 
 
 
-Definition at line \mbox{\hyperlink{bretherton_8cc_source_l00163}{163}} of file \mbox{\hyperlink{bretherton_8cc_source}{bretherton.\+cc}}.
+Definition at line 163 of file bretherton.\+cc.
 
 
 
@@ -106,11 +107,7 @@ Activate the dependency of the \char`\"{}inflow\char`\"{} on the external data. 
 
 
 
-Definition at line \mbox{\hyperlink{bretherton_8cc_source_l00171}{171}} of file \mbox{\hyperlink{bretherton_8cc_source}{bretherton.\+cc}}.
-
-
-
-References \mbox{\hyperlink{bretherton_8cc_source_l00390}{Bretherton\+Element$<$ ELEMENT $>$\+::\+Inflow\+\_\+boundary}}, \mbox{\hyperlink{bretherton_8cc_source_l00383}{Bretherton\+Element$<$ ELEMENT $>$\+::\+Inflow\+\_\+ext\+\_\+data}}, and \mbox{\hyperlink{bretherton_8cc_source_l00394}{Bretherton\+Element$<$ ELEMENT $>$\+::\+Inflow\+\_\+fct\+\_\+pt}}.
+Definition at line 171 of file bretherton.\+cc.
 
 \mbox{\Hypertarget{classBrethertonElement_a40f35d9e03eae08954b6b32badadcf61}\label{classBrethertonElement_a40f35d9e03eae08954b6b32badadcf61}} 
 \index{BrethertonElement$<$ ELEMENT $>$@{BrethertonElement$<$ ELEMENT $>$}!assign\_local\_eqn\_numbers@{assign\_local\_eqn\_numbers}}
@@ -125,11 +122,7 @@ Overload assign local equation numbers\+: Add the dependency on the external Dat
 
 
 
-Definition at line \mbox{\hyperlink{bretherton_8cc_source_l00192}{192}} of file \mbox{\hyperlink{bretherton_8cc_source}{bretherton.\+cc}}.
-
-
-
-References \mbox{\hyperlink{bretherton_8cc_source_l00383}{Bretherton\+Element$<$ ELEMENT $>$\+::\+Inflow\+\_\+ext\+\_\+data}}, and \mbox{\hyperlink{bretherton_8cc_source_l00387}{Bretherton\+Element$<$ ELEMENT $>$\+::\+Inflow\+\_\+ext\+\_\+data\+\_\+eqn}}.
+Definition at line 192 of file bretherton.\+cc.
 
 \mbox{\Hypertarget{classBrethertonElement_ab0bc00d862b2c888703ed38c74f18b77}\label{classBrethertonElement_ab0bc00d862b2c888703ed38c74f18b77}} 
 \index{BrethertonElement$<$ ELEMENT $>$@{BrethertonElement$<$ ELEMENT $>$}!get\_jacobian@{get\_jacobian}}
@@ -144,11 +137,7 @@ Overloaded Jacobian computation\+: Computes the Jacobian of the underlying eleme
 
 
 
-Definition at line \mbox{\hyperlink{bretherton_8cc_source_l00261}{261}} of file \mbox{\hyperlink{bretherton_8cc_source}{bretherton.\+cc}}.
-
-
-
-References \mbox{\hyperlink{bretherton_8cc_source_l00383}{Bretherton\+Element$<$ ELEMENT $>$\+::\+Inflow\+\_\+ext\+\_\+data}}, \mbox{\hyperlink{bretherton_8cc_source_l00387}{Bretherton\+Element$<$ ELEMENT $>$\+::\+Inflow\+\_\+ext\+\_\+data\+\_\+eqn}}, and \mbox{\hyperlink{bretherton_8cc_source_l00339}{Bretherton\+Element$<$ ELEMENT $>$\+::reassign\+\_\+inflow()}}.
+Definition at line 261 of file bretherton.\+cc.
 
 \mbox{\Hypertarget{classBrethertonElement_a7e655df2ed6104862cc70c2408daf93c}\label{classBrethertonElement_a7e655df2ed6104862cc70c2408daf93c}} 
 \index{BrethertonElement$<$ ELEMENT $>$@{BrethertonElement$<$ ELEMENT $>$}!reassign\_inflow@{reassign\_inflow}}
@@ -163,15 +152,7 @@ For all nodes that are located on specified boundary re-\/assign the inflow velo
 
 
 
-Definition at line \mbox{\hyperlink{bretherton_8cc_source_l00339}{339}} of file \mbox{\hyperlink{bretherton_8cc_source}{bretherton.\+cc}}.
-
-
-
-References \mbox{\hyperlink{bretherton_8cc_source_l00390}{Bretherton\+Element$<$ ELEMENT $>$\+::\+Inflow\+\_\+boundary}}, and \mbox{\hyperlink{bretherton_8cc_source_l00394}{Bretherton\+Element$<$ ELEMENT $>$\+::\+Inflow\+\_\+fct\+\_\+pt}}.
-
-
-
-Referenced by \mbox{\hyperlink{bretherton_8cc_source_l00261}{Bretherton\+Element$<$ ELEMENT $>$\+::get\+\_\+jacobian()}}.
+Definition at line 339 of file bretherton.\+cc.
 
 
 
@@ -189,11 +170,7 @@ Number of the inflow boundary in the global mesh.
 
 
 
-Definition at line \mbox{\hyperlink{bretherton_8cc_source_l00390}{390}} of file \mbox{\hyperlink{bretherton_8cc_source}{bretherton.\+cc}}.
-
-
-
-Referenced by \mbox{\hyperlink{bretherton_8cc_source_l00171}{Bretherton\+Element$<$ ELEMENT $>$\+::activate\+\_\+inflow\+\_\+dependency\+\_\+on\+\_\+external\+\_\+data()}}, and \mbox{\hyperlink{bretherton_8cc_source_l00339}{Bretherton\+Element$<$ ELEMENT $>$\+::reassign\+\_\+inflow()}}.
+Definition at line 390 of file bretherton.\+cc.
 
 \mbox{\Hypertarget{classBrethertonElement_a84c7822cf2a97fe45e936429faa16788}\label{classBrethertonElement_a84c7822cf2a97fe45e936429faa16788}} 
 \index{BrethertonElement$<$ ELEMENT $>$@{BrethertonElement$<$ ELEMENT $>$}!Inflow\_ext\_data@{Inflow\_ext\_data}}
@@ -208,11 +185,7 @@ Storage for the external Data that affects the inflow.
 
 
 
-Definition at line \mbox{\hyperlink{bretherton_8cc_source_l00383}{383}} of file \mbox{\hyperlink{bretherton_8cc_source}{bretherton.\+cc}}.
-
-
-
-Referenced by \mbox{\hyperlink{bretherton_8cc_source_l00171}{Bretherton\+Element$<$ ELEMENT $>$\+::activate\+\_\+inflow\+\_\+dependency\+\_\+on\+\_\+external\+\_\+data()}}, \mbox{\hyperlink{bretherton_8cc_source_l00192}{Bretherton\+Element$<$ ELEMENT $>$\+::assign\+\_\+local\+\_\+eqn\+\_\+numbers()}}, and \mbox{\hyperlink{bretherton_8cc_source_l00261}{Bretherton\+Element$<$ ELEMENT $>$\+::get\+\_\+jacobian()}}.
+Definition at line 383 of file bretherton.\+cc.
 
 \mbox{\Hypertarget{classBrethertonElement_ad1ddf8c7a6fd590bf7156d13640303d1}\label{classBrethertonElement_ad1ddf8c7a6fd590bf7156d13640303d1}} 
 \index{BrethertonElement$<$ ELEMENT $>$@{BrethertonElement$<$ ELEMENT $>$}!Inflow\_ext\_data\_eqn@{Inflow\_ext\_data\_eqn}}
@@ -227,11 +200,7 @@ Storage for the local equation numbers associated the Data values that affect th
 
 
 
-Definition at line \mbox{\hyperlink{bretherton_8cc_source_l00387}{387}} of file \mbox{\hyperlink{bretherton_8cc_source}{bretherton.\+cc}}.
-
-
-
-Referenced by \mbox{\hyperlink{bretherton_8cc_source_l00192}{Bretherton\+Element$<$ ELEMENT $>$\+::assign\+\_\+local\+\_\+eqn\+\_\+numbers()}}, and \mbox{\hyperlink{bretherton_8cc_source_l00261}{Bretherton\+Element$<$ ELEMENT $>$\+::get\+\_\+jacobian()}}.
+Definition at line 387 of file bretherton.\+cc.
 
 \mbox{\Hypertarget{classBrethertonElement_a6ded0faba9d7fcfe96834c56af461977}\label{classBrethertonElement_a6ded0faba9d7fcfe96834c56af461977}} 
 \index{BrethertonElement$<$ ELEMENT $>$@{BrethertonElement$<$ ELEMENT $>$}!Inflow\_fct\_pt@{Inflow\_fct\_pt}}
@@ -246,11 +215,7 @@ Function pointer to the global function that specifies the inflow velocity profi
 
 
 
-Definition at line \mbox{\hyperlink{bretherton_8cc_source_l00394}{394}} of file \mbox{\hyperlink{bretherton_8cc_source}{bretherton.\+cc}}.
-
-
-
-Referenced by \mbox{\hyperlink{bretherton_8cc_source_l00171}{Bretherton\+Element$<$ ELEMENT $>$\+::activate\+\_\+inflow\+\_\+dependency\+\_\+on\+\_\+external\+\_\+data()}}, and \mbox{\hyperlink{bretherton_8cc_source_l00339}{Bretherton\+Element$<$ ELEMENT $>$\+::reassign\+\_\+inflow()}}.
+Definition at line 394 of file bretherton.\+cc.
 
 
 

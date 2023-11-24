@@ -21,6 +21,8 @@ In this example we shall re-\/solve the driven cavity problem with the refineabl
 \end{DoxyCode}
 
 \end{DoxyEnumerate}
+\end{DoxyItemize}
+\begin{DoxyItemize}
 \item The possible presence of hanging nodes in an adapted mesh requires special treatment for elements (e.\+g. Taylor-\/\+Hood elements) in which the pressure is represented by a low-\/order interpolation between a subset of the element\textquotesingle{}s nodal values. The required tasks are performed by the function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{NavierStokesEquations<DIM>::pin\_redundant\_nodal\_pressures(...)}
@@ -30,8 +32,8 @@ In this example we shall re-\/solve the driven cavity problem with the refineabl
 \begin{DoxyEnumerate}
 \item before assigning the equation numbers for the first time, and
 \item after every mesh adaptation.
-\end{DoxyEnumerate}\mbox{[}If the user \char`\"{}forgets\char`\"{} to call this function, a warning is issued if the library is compiled with the PARANOID flag.\mbox{]}
-\end{DoxyItemize}The driver code discussed below illustrates the use of these functions. The section \mbox{\hyperlink{index_comments}{Comments and Exercises}} provides a more detailed discussion of the technical details involved in their implementation.
+\end{DoxyEnumerate}
+\end{DoxyItemize}\mbox{[}If the user \char`\"{}forgets\char`\"{} to call this function, a warning is issued if the library is compiled with the PARANOID flag.\mbox{]}The driver code discussed below illustrates the use of these functions. The section \mbox{\hyperlink{index_comments}{Comments and Exercises}} provides a more detailed discussion of the technical details involved in their implementation.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -77,7 +79,7 @@ The global namespace used to define the problem parameters is identical to the o
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_namespace===================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for physical parameters}}
-\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Reynolds number}}
@@ -94,7 +96,7 @@ The main driver code is virtually identical to that in the \href{../../driven_ca
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_main======================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver for RefineableDrivenCavity test problem }}
-\DoxyCodeLine{\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{adaptive__driven__cavity_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
@@ -151,8 +153,8 @@ Most of the problem class is identical to that in the \href{../../driven_cavity/
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_problem\_class============================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Driven cavity problem in rectangular domain, templated}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// by element type. }}
+\DoxyCodeLine{\textcolor{comment}{/// Driven cavity problem in rectangular domain, templated}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// by element type. }}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classRefineableDrivenCavityProblem}{RefineableDrivenCavityProblem}} : \textcolor{keyword}{public} Problem}
@@ -208,7 +210,7 @@ As discussed in the introduction, we use the function {\ttfamily Problem\+::acti
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// After adaptation: Unpin pressure and pin redudant pressure dofs.}}
+\DoxyCodeLine{ \textcolor{comment}{/// After adaptation: Unpin pressure and pin redudant pressure dofs.}}
 \DoxyCodeLine{ \textcolor{keywordtype}{void} actions\_after\_adapt()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Unpin all pressure dofs}}
@@ -271,8 +273,8 @@ The constructor remains largely as \href{../../driven_cavity/html/index.html\#co
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_constructor==================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Constructor for RefineableDrivenCavity problem }\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{///}}
+\DoxyCodeLine{\textcolor{comment}{/// Constructor for RefineableDrivenCavity problem }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classRefineableDrivenCavityProblem_aef71ddbff081a1f9c7f5484a6c80598a}{RefineableDrivenCavityProblem<ELEMENT>::RefineableDrivenCavityProblem}}()}
@@ -354,7 +356,7 @@ The post-\/processing function is identical to that in the \href{../../driven_ca
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_doc\_solution=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableDrivenCavityProblem_a0baa1e8f1d1f6f73ef921b06a9b20836}{RefineableDrivenCavityProblem<ELEMENT>::doc\_solution}}(DocInfo\& doc\_info)}
 \DoxyCodeLine{\{ }

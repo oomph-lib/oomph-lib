@@ -55,7 +55,7 @@ The discretisation of the problem is reasonably straightforward, the most (human
 \DoxyCodeLine{\textcolor{comment}{//LIC// multi-\/physics finite-\/element library, available }}
 \DoxyCodeLine{\textcolor{comment}{//LIC// at http://www.oomph-\/lib.org.}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// }}
-\DoxyCodeLine{\textcolor{comment}{//LIC// Copyright (C) 2006-\/2022 Matthias Heil and Andrew Hazel}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// Copyright (C) 2006-\/2023 Matthias Heil and Andrew Hazel}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// }}
 \DoxyCodeLine{\textcolor{comment}{//LIC// This library is free software; you can redistribute it and/or}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// modify it under the terms of the GNU Lesser General Public}}
@@ -109,7 +109,7 @@ The discretisation of the problem is reasonably straightforward, the most (human
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b32b93d2e546f9375ec418474107838}{Ca}};  }
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Direction of gravity}}
-\DoxyCodeLine{\textcolor{comment}{} Vector<double> \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a37a6f46efcb35b4bd12c73f19d741020}{G}}(2);}
+\DoxyCodeLine{\textcolor{comment}{} Vector<double> \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a18fe245262ec8beec764c805bb93e73c}{G}}(2);}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to film thickness at outflow on the lower wall}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double}* \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a137bdac2ad4b72a03ec9916e8ee7395b}{H\_lo\_pt}};}
@@ -209,10 +209,10 @@ The discretisation of the problem is reasonably straightforward, the most (human
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Typedef for pointer (global) function that specifies the}}
 \DoxyCodeLine{\textcolor{comment}{ /// the inflow}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{typedef} void (*\mbox{\hyperlink{classBrethertonElement_a313d868ce6fbd8df07b0360db25133ce}{InflowFctPt}})(\textcolor{keyword}{const} Vector<double>\& x, Vector<double>\& veloc);}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{typedef} void (*InflowFctPt)(\textcolor{keyword}{const} Vector<double>\& x, Vector<double>\& veloc);}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Constructor: Call the constructor of the underlying element}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classBrethertonElement_acbc668eed3ea683a67b6b822d6e59974}{BrethertonElement}}() : ELEMENT() \{\}}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classBrethertonElement}{BrethertonElement}}() : ELEMENT() \{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Activate the dependency of the "{}inflow"{} on the external}}
@@ -220,28 +220,28 @@ The discretisation of the problem is reasonably straightforward, the most (human
 \DoxyCodeLine{\textcolor{comment}{ /// the inflow, the id of the boundary on which the inflow}}
 \DoxyCodeLine{\textcolor{comment}{ /// condition is to be applied and the function pointer to }}
 \DoxyCodeLine{\textcolor{comment}{ /// to the global function that defines the inflow}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classBrethertonElement_a5a8333b92b4b732e62798c172d7e9d52}{activate\_inflow\_dependency\_on\_external\_data}}(}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} activate\_inflow\_dependency\_on\_external\_data(}
 \DoxyCodeLine{  \textcolor{keyword}{const} Vector<Data*>\& inflow\_ext\_data,}
 \DoxyCodeLine{  \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& inflow\_boundary,}
-\DoxyCodeLine{  \mbox{\hyperlink{classBrethertonElement_a313d868ce6fbd8df07b0360db25133ce}{InflowFctPt}} inflow\_fct\_pt)}
+\DoxyCodeLine{  InflowFctPt inflow\_fct\_pt)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Copy data that affects the inflow}}
 \DoxyCodeLine{   \textcolor{keywordtype}{unsigned} n\_ext=inflow\_ext\_data.size();}
-\DoxyCodeLine{   \mbox{\hyperlink{classBrethertonElement_a84c7822cf2a97fe45e936429faa16788}{Inflow\_ext\_data}}.resize(n\_ext);}
+\DoxyCodeLine{   Inflow\_ext\_data.resize(n\_ext);}
 \DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i=0;i<n\_ext;i++)}
 \DoxyCodeLine{    \{}
-\DoxyCodeLine{     \mbox{\hyperlink{classBrethertonElement_a84c7822cf2a97fe45e936429faa16788}{Inflow\_ext\_data}}[i]=inflow\_ext\_data[i];}
+\DoxyCodeLine{     Inflow\_ext\_data[i]=inflow\_ext\_data[i];}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{   \textcolor{comment}{// Set inflow boundary}}
-\DoxyCodeLine{   \mbox{\hyperlink{classBrethertonElement_a2d3a3d4837d41865d5f62271c98715c5}{Inflow\_boundary}}=inflow\_boundary;}
+\DoxyCodeLine{   Inflow\_boundary=inflow\_boundary;}
 \DoxyCodeLine{   \textcolor{comment}{// Set fct pointer to inflow condition}}
-\DoxyCodeLine{   \mbox{\hyperlink{classBrethertonElement_a6ded0faba9d7fcfe96834c56af461977}{Inflow\_fct\_pt}}=inflow\_fct\_pt;}
+\DoxyCodeLine{   Inflow\_fct\_pt=inflow\_fct\_pt;}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ }
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Overload assign local equation numbers: Add the dependency }}
 \DoxyCodeLine{\textcolor{comment}{ /// on the external Data that affects the inflow profile}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classBrethertonElement_a40f35d9e03eae08954b6b32badadcf61}{assign\_local\_eqn\_numbers}}(\textcolor{keyword}{const} \textcolor{keywordtype}{bool}  \&store\_local\_dof\_pt)}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} assign\_local\_eqn\_numbers(\textcolor{keyword}{const} \textcolor{keywordtype}{bool}  \&store\_local\_dof\_pt)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Call the element's local equation numbering procedure first}}
 \DoxyCodeLine{   ELEMENT::assign\_local\_eqn\_numbers(store\_local\_dof\_pt);}
@@ -255,18 +255,18 @@ The discretisation of the problem is reasonably straightforward, the most (human
 \DoxyCodeLine{   \textcolor{comment}{// Find out max. number of values stored at all Data values }}
 \DoxyCodeLine{   \textcolor{comment}{// that affect the inflow}}
 \DoxyCodeLine{   \textcolor{keywordtype}{unsigned} max\_nvalue=0;}
-\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} n\_ext=\mbox{\hyperlink{classBrethertonElement_a84c7822cf2a97fe45e936429faa16788}{Inflow\_ext\_data}}.size();}
+\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} n\_ext=Inflow\_ext\_data.size();}
 \DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i=0;i<n\_ext;i++)}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     \textcolor{comment}{// The external Data:}}
-\DoxyCodeLine{     Data* data\_pt=\mbox{\hyperlink{classBrethertonElement_a84c7822cf2a97fe45e936429faa16788}{Inflow\_ext\_data}}[i];}
+\DoxyCodeLine{     Data* data\_pt=Inflow\_ext\_data[i];}
 \DoxyCodeLine{     \textcolor{comment}{// Number of values}}
 \DoxyCodeLine{     \textcolor{keywordtype}{unsigned} n\_val=data\_pt-\/>nvalue();}
 \DoxyCodeLine{     \textcolor{keywordflow}{if} (n\_val>max\_nvalue) max\_nvalue=n\_val;}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Allocate sufficient storage}}
-\DoxyCodeLine{   \mbox{\hyperlink{classBrethertonElement_ad1ddf8c7a6fd590bf7156d13640303d1}{Inflow\_ext\_data\_eqn}}.resize(n\_ext,max\_nvalue);}
+\DoxyCodeLine{   Inflow\_ext\_data\_eqn.resize(n\_ext,max\_nvalue);}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{//A local queue to store the global equation numbers}}
 \DoxyCodeLine{   std::deque<unsigned long> global\_eqn\_number\_queue;}
@@ -275,7 +275,7 @@ The discretisation of the problem is reasonably straightforward, the most (human
 \DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i=0;i<n\_ext;i++)}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     \textcolor{comment}{// The external Data:}}
-\DoxyCodeLine{     Data* data\_pt=\mbox{\hyperlink{classBrethertonElement_a84c7822cf2a97fe45e936429faa16788}{Inflow\_ext\_data}}[i];}
+\DoxyCodeLine{     Data* data\_pt=Inflow\_ext\_data[i];}
 \DoxyCodeLine{     }
 \DoxyCodeLine{     \textcolor{comment}{// Loop over number of values:}}
 \DoxyCodeLine{     \textcolor{keywordtype}{unsigned} n\_val=data\_pt-\/>nvalue();}
@@ -289,13 +289,13 @@ The discretisation of the problem is reasonably straightforward, the most (human
 \DoxyCodeLine{         \textcolor{comment}{// Add global equation number to local storage}}
 \DoxyCodeLine{         global\_eqn\_number\_queue.push\_back(eqn\_number);}
 \DoxyCodeLine{         \textcolor{comment}{// Store local equation number associated with this external dof}}
-\DoxyCodeLine{         \mbox{\hyperlink{classBrethertonElement_ad1ddf8c7a6fd590bf7156d13640303d1}{Inflow\_ext\_data\_eqn}}(i,ival)=local\_eqn\_count;}
+\DoxyCodeLine{         Inflow\_ext\_data\_eqn(i,ival)=local\_eqn\_count;}
 \DoxyCodeLine{         \textcolor{comment}{// Increment counter for local dofs}}
 \DoxyCodeLine{         local\_eqn\_count++;}
 \DoxyCodeLine{        \}}
 \DoxyCodeLine{       \textcolor{keywordflow}{else}}
 \DoxyCodeLine{        \{}
-\DoxyCodeLine{         \mbox{\hyperlink{classBrethertonElement_ad1ddf8c7a6fd590bf7156d13640303d1}{Inflow\_ext\_data\_eqn}}(i,ival)=-\/1;}
+\DoxyCodeLine{         Inflow\_ext\_data\_eqn(i,ival)=-\/1;}
 \DoxyCodeLine{        \}}
 \DoxyCodeLine{      \}}
 \DoxyCodeLine{    \}}
@@ -310,11 +310,11 @@ The discretisation of the problem is reasonably straightforward, the most (human
 \DoxyCodeLine{\textcolor{comment}{ /// of the underlying element and then adds the FD }}
 \DoxyCodeLine{\textcolor{comment}{ /// operations to evaluate the derivatives w.r.t. the Data values}}
 \DoxyCodeLine{\textcolor{comment}{ /// that affect the inflow.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classBrethertonElement_ab0bc00d862b2c888703ed38c74f18b77}{get\_jacobian}}(Vector<double>\& residuals,}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} get\_jacobian(Vector<double>\& residuals,}
 \DoxyCodeLine{                   DenseMatrix<double>\& jacobian)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Loop over Data values that affect the inflow}}
-\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} n\_ext=\mbox{\hyperlink{classBrethertonElement_a84c7822cf2a97fe45e936429faa16788}{Inflow\_ext\_data}}.size();}
+\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} n\_ext=Inflow\_ext\_data.size();}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Call "{}normal"{} jacobian first.}}
 \DoxyCodeLine{   ELEMENT::get\_jacobian(residuals,jacobian);}
@@ -329,14 +329,14 @@ The discretisation of the problem is reasonably straightforward, the most (human
 \DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i=0;i<n\_ext;i++)}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     \textcolor{comment}{// Get Data item}}
-\DoxyCodeLine{     Data* data\_pt=\mbox{\hyperlink{classBrethertonElement_a84c7822cf2a97fe45e936429faa16788}{Inflow\_ext\_data}}[i];}
+\DoxyCodeLine{     Data* data\_pt=Inflow\_ext\_data[i];}
 \DoxyCodeLine{     }
 \DoxyCodeLine{     \textcolor{comment}{// Loop over values}}
 \DoxyCodeLine{     \textcolor{keywordtype}{unsigned} n\_val=data\_pt-\/>nvalue();}
 \DoxyCodeLine{     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ival=0;ival<n\_val;ival++)}
 \DoxyCodeLine{      \{}
 \DoxyCodeLine{       \textcolor{comment}{// Local equation number}}
-\DoxyCodeLine{       \textcolor{keywordtype}{int} local\_eqn=\mbox{\hyperlink{classBrethertonElement_ad1ddf8c7a6fd590bf7156d13640303d1}{Inflow\_ext\_data\_eqn}}(i,ival);}
+\DoxyCodeLine{       \textcolor{keywordtype}{int} local\_eqn=Inflow\_ext\_data\_eqn(i,ival);}
 \DoxyCodeLine{       }
 \DoxyCodeLine{       \textcolor{comment}{// Dof or pinned?}}
 \DoxyCodeLine{       \textcolor{keywordflow}{if} (local\_eqn>=0)}
@@ -351,7 +351,7 @@ The discretisation of the problem is reasonably straightforward, the most (human
 \DoxyCodeLine{         *value\_pt += fd\_step;}
 \DoxyCodeLine{         }
 \DoxyCodeLine{         \textcolor{comment}{// Re-\/assign the inflow velocities for nodes in this element}}
-\DoxyCodeLine{         \mbox{\hyperlink{classBrethertonElement_a7e655df2ed6104862cc70c2408daf93c}{reassign\_inflow}}();}
+\DoxyCodeLine{         reassign\_inflow();}
 \DoxyCodeLine{         }
 \DoxyCodeLine{                  }
 \DoxyCodeLine{         \textcolor{comment}{// Fill in the relevant column in the Jacobian matrix}}
@@ -376,7 +376,7 @@ The discretisation of the problem is reasonably straightforward, the most (human
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Final re-\/assign for the inflow velocities for nodes in this element}}
-\DoxyCodeLine{   \mbox{\hyperlink{classBrethertonElement_a7e655df2ed6104862cc70c2408daf93c}{reassign\_inflow}}();}
+\DoxyCodeLine{   reassign\_inflow();}
 \DoxyCodeLine{   }
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ }
@@ -388,7 +388,7 @@ The discretisation of the problem is reasonably straightforward, the most (human
 \DoxyCodeLine{\textcolor{comment}{ /// For all nodes that are located on specified boundary}}
 \DoxyCodeLine{\textcolor{comment}{ /// re-\/assign the inflow velocity, using the function pointed to}}
 \DoxyCodeLine{\textcolor{comment}{ /// by the function pointer}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classBrethertonElement_a7e655df2ed6104862cc70c2408daf93c}{reassign\_inflow}}()}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} reassign\_inflow()}
 \DoxyCodeLine{  \{ }
 \DoxyCodeLine{   \textcolor{comment}{// Loop over all nodes in element -\/-\/ if they are}}
 \DoxyCodeLine{   \textcolor{comment}{// on inflow boundary, re-\/assign their velocities}}
@@ -399,7 +399,7 @@ The discretisation of the problem is reasonably straightforward, the most (human
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     Node* nod\_pt = this-\/>node\_pt(j);}
 \DoxyCodeLine{}
-\DoxyCodeLine{     \textcolor{keywordflow}{if}(nod\_pt-\/>is\_on\_boundary(\mbox{\hyperlink{classBrethertonElement_a2d3a3d4837d41865d5f62271c98715c5}{Inflow\_boundary}}))}
+\DoxyCodeLine{     \textcolor{keywordflow}{if}(nod\_pt-\/>is\_on\_boundary(Inflow\_boundary))}
 \DoxyCodeLine{      \{}
 \DoxyCodeLine{\textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i=0;i<2;i++)}
@@ -423,7 +423,7 @@ The discretisation of the problem is reasonably straightforward, the most (human
 \DoxyCodeLine{           \textcolor{comment}{// Get inflow profile }}
 \DoxyCodeLine{           x[0]=nod\_pt-\/>x(0);}
 \DoxyCodeLine{           x[1]=nod\_pt-\/>x(1);}
-\DoxyCodeLine{           \mbox{\hyperlink{classBrethertonElement_a6ded0faba9d7fcfe96834c56af461977}{Inflow\_fct\_pt}}(x,veloc);}
+\DoxyCodeLine{           Inflow\_fct\_pt(x,veloc);}
 \DoxyCodeLine{           nod\_pt-\/>set\_value(0,veloc[0]);}
 \DoxyCodeLine{           nod\_pt-\/>set\_value(1,veloc[1]);}
 \DoxyCodeLine{      \}}
@@ -432,18 +432,18 @@ The discretisation of the problem is reasonably straightforward, the most (human
 \DoxyCodeLine{ }
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Storage for the external Data that affects the inflow}}
-\DoxyCodeLine{\textcolor{comment}{} Vector<Data*> \mbox{\hyperlink{classBrethertonElement_a84c7822cf2a97fe45e936429faa16788}{Inflow\_ext\_data}};}
+\DoxyCodeLine{\textcolor{comment}{} Vector<Data*> Inflow\_ext\_data;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Storage for the local equation numbers associated the Data}}
 \DoxyCodeLine{\textcolor{comment}{ /// values that affect the inflow}}
-\DoxyCodeLine{\textcolor{comment}{} DenseMatrix<int> \mbox{\hyperlink{classBrethertonElement_ad1ddf8c7a6fd590bf7156d13640303d1}{Inflow\_ext\_data\_eqn}};}
+\DoxyCodeLine{\textcolor{comment}{} DenseMatrix<int> Inflow\_ext\_data\_eqn;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Number of the inflow boundary in the global mesh}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classBrethertonElement_a2d3a3d4837d41865d5f62271c98715c5}{Inflow\_boundary}};}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} Inflow\_boundary;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Function pointer to the global function that specifies the}}
 \DoxyCodeLine{\textcolor{comment}{ /// inflow velocity profile on the global mesh boundary Inflow\_boundary}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classBrethertonElement_a313d868ce6fbd8df07b0360db25133ce}{InflowFctPt}} \mbox{\hyperlink{classBrethertonElement_a6ded0faba9d7fcfe96834c56af461977}{Inflow\_fct\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} InflowFctPt Inflow\_fct\_pt;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\};}
 \DoxyCodeLine{}
@@ -520,16 +520,16 @@ The discretisation of the problem is reasonably straightforward, the most (human
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Constructor: }}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classBrethertonProblem_a207cdfe4cf60e83257e759b1ac15e5eb}{BrethertonProblem}}();}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classBrethertonProblem}{BrethertonProblem}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Spine heights/lengths are unknowns in the problem so their}}
 \DoxyCodeLine{\textcolor{comment}{ /// values get corrected during each Newton step. However,}}
 \DoxyCodeLine{\textcolor{comment}{ /// changing their value does not automatically change the}}
 \DoxyCodeLine{\textcolor{comment}{ /// nodal positions, so we need to update all of them}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classBrethertonProblem_a6a3e76e4900715d8c2fd15d0e350d724}{actions\_before\_newton\_convergence\_check}}()}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_newton\_convergence\_check()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Update}}
-\DoxyCodeLine{   \mbox{\hyperlink{classBrethertonProblem_af293d72416de7a93ed51f20a5e4fb86e}{Bulk\_mesh\_pt}}-\/>node\_update();}
+\DoxyCodeLine{   Bulk\_mesh\_pt-\/>node\_update();}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Apply inflow on boundary 1}}
 \DoxyCodeLine{   \textcolor{keywordtype}{unsigned} ibound=1;}
@@ -554,44 +554,44 @@ The discretisation of the problem is reasonably straightforward, the most (human
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update before solve: empty}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classBrethertonProblem_a7112e0efe4c0cd0269cf47f02df4fe22}{actions\_before\_newton\_solve}}() \{\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_newton\_solve() \{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update after solve can remain empty, because the update }}
 \DoxyCodeLine{\textcolor{comment}{ /// is performed automatically after every Newton step.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classBrethertonProblem_a2e84e3ce784b0f0de5eeefe1175d48ff}{actions\_after\_newton\_solve}}() \{\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_newton\_solve() \{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Fix pressure value l in element e to value p\_value}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classBrethertonProblem_aa4c346d4dc8d7d24147076d281d181e9}{fix\_pressure}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&e, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&l, }
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} fix\_pressure(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&e, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&l, }
 \DoxyCodeLine{                   \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&pvalue)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{//Fix the pressure at that element}}
-\DoxyCodeLine{   \textcolor{keyword}{dynamic\_cast<}ELEMENT *\textcolor{keyword}{>}(\mbox{\hyperlink{classBrethertonProblem_af293d72416de7a93ed51f20a5e4fb86e}{Bulk\_mesh\_pt}}-\/>element\_pt(e))-\/>}
-\DoxyCodeLine{    \mbox{\hyperlink{classBrethertonProblem_aa4c346d4dc8d7d24147076d281d181e9}{fix\_pressure}}(l,pvalue);}
+\DoxyCodeLine{   \textcolor{keyword}{dynamic\_cast<}ELEMENT *\textcolor{keyword}{>}(Bulk\_mesh\_pt-\/>element\_pt(e))-\/>}
+\DoxyCodeLine{    fix\_pressure(l,pvalue);}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Activate the dependency of the inflow velocity on the }}
 \DoxyCodeLine{\textcolor{comment}{ /// spine heights at the outflow}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classBrethertonProblem_a04257edfb80f2ff3bf865442d9eb01fb}{activate\_inflow\_dependency}}();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} activate\_inflow\_dependency();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Run a parameter study; perform specified number of steps}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classBrethertonProblem_ac24db9373e1a3005e6b14fc92c16b41c}{parameter\_study}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nsteps); }
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} parameter\_study(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nsteps); }
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classBrethertonProblem_ab6e29ecf0dbffabd4ce897203d35626e}{doc\_solution}}(DocInfo\& doc\_info);}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} doc\_solution(DocInfo\& doc\_info);}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to control element}}
-\DoxyCodeLine{\textcolor{comment}{} ELEMENT* \mbox{\hyperlink{classBrethertonProblem_ab1dfeabf599487ac4a121398c6a98368}{Control\_element\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} ELEMENT* Control\_element\_pt;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Trace file}}
-\DoxyCodeLine{\textcolor{comment}{} ofstream \mbox{\hyperlink{classBrethertonProblem_ae37c09c1e0faf5ba8b347fab6a9f687f}{Trace\_file}};}
+\DoxyCodeLine{\textcolor{comment}{} ofstream Trace\_file;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to bulk mesh}}
 \DoxyCodeLine{\textcolor{comment}{} BrethertonSpineMesh<ELEMENT,SpineLineFluidInterfaceElement<ELEMENT> >* }
-\DoxyCodeLine{ \mbox{\hyperlink{classBrethertonProblem_af293d72416de7a93ed51f20a5e4fb86e}{Bulk\_mesh\_pt}};}
+\DoxyCodeLine{ Bulk\_mesh\_pt;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\};}
 \DoxyCodeLine{}
@@ -743,7 +743,7 @@ The discretisation of the problem is reasonably straightforward, the most (human
 \DoxyCodeLine{   el\_pt-\/>re\_pt() = \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Global\_Physical\_Variables::Re}};}
 \DoxyCodeLine{   el\_pt-\/>re\_st\_pt() = \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907}{Global\_Physical\_Variables::ReSt}};}
 \DoxyCodeLine{   el\_pt-\/>re\_invfr\_pt() = \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa6286f02b476912dd7550eced538331a}{Global\_Physical\_Variables::ReInvFr}};}
-\DoxyCodeLine{   el\_pt-\/>g\_pt() = \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a37a6f46efcb35b4bd12c73f19d741020}{Global\_Physical\_Variables::G}};}
+\DoxyCodeLine{   el\_pt-\/>g\_pt() = \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a18fe245262ec8beec764c805bb93e73c}{Global\_Physical\_Variables::G}};}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Loop over 1D interface elements and set capillary number}}
@@ -975,8 +975,8 @@ The discretisation of the problem is reasonably straightforward, the most (human
 \DoxyCodeLine{ \textcolor{comment}{// Set physical parameters:}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Set direction of gravity: Vertically downwards}}
-\DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a37a6f46efcb35b4bd12c73f19d741020}{Global\_Physical\_Variables::G}}[0] = 0.0;}
-\DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a37a6f46efcb35b4bd12c73f19d741020}{Global\_Physical\_Variables::G}}[1] = -\/1.0;}
+\DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a18fe245262ec8beec764c805bb93e73c}{Global\_Physical\_Variables::G}}[0] = 0.0;}
+\DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a18fe245262ec8beec764c805bb93e73c}{Global\_Physical\_Variables::G}}[1] = -\/1.0;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Womersley number = Reynolds number (St = 1)}}
 \DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907}{Global\_Physical\_Variables::ReSt}} = 0.0;}

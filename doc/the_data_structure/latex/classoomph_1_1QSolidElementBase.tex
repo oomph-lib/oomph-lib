@@ -22,9 +22,9 @@ Inheritance diagram for oomph\+::QSolid\+Element\+Base\+:\begin{figure}[H]
 \begin{DoxyCompactList}\small\item\em Constructor\+: Empty. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1QSolidElementBase_adca40dbdc7543c76f938609e36ec549b}{QSolid\+Element\+Base}} (const \mbox{\hyperlink{classoomph_1_1QSolidElementBase}{QSolid\+Element\+Base}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1QSolidElementBase_a0ceca47c039bbb38b0feb3baa330a27f}{set\+\_\+macro\+\_\+elem\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a801bbe89619c28e181afa8fa3e9ac836}{macro\+\_\+elem\+\_\+pt}})
+virtual void \mbox{\hyperlink{classoomph_1_1QSolidElementBase_a0ceca47c039bbb38b0feb3baa330a27f}{set\+\_\+macro\+\_\+elem\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_aa8bce95f69e3199a508672eea7ecc226}{macro\+\_\+elem\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1QSolidElementBase_aa7f14a039224fb4c513da587448d2c3b}{set\+\_\+macro\+\_\+elem\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a801bbe89619c28e181afa8fa3e9ac836}{macro\+\_\+elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a2c4a2681d29251acc0af8e7d95227cad}{undeformed\+\_\+macro\+\_\+elem\+\_\+pt}})
+virtual void \mbox{\hyperlink{classoomph_1_1QSolidElementBase_aa7f14a039224fb4c513da587448d2c3b}{set\+\_\+macro\+\_\+elem\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_aa8bce95f69e3199a508672eea7ecc226}{macro\+\_\+elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a20517d8d6ba84c8e90d880f38310915f}{undeformed\+\_\+macro\+\_\+elem\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Set pointers to \char`\"{}current\char`\"{} and \char`\"{}undeformed\char`\"{} Macro\+Elements. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QSolidElementBase_a2afc3bfd3aa6ed253f42d55ac4e20839}{get\+\_\+x\+\_\+and\+\_\+xi}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x\+\_\+fe, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi\+\_\+fe, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi) const
 \begin{DoxyCompactList}\small\item\em Eulerian and Lagrangian coordinates as function of the local coordinates\+: The Eulerian position is returned in FE-\/interpolated form ({\ttfamily x\+\_\+fe}) and then in the form obtained from the \char`\"{}current\char`\"{} \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} representation (if it exists -- if not, {\ttfamily x} is the same as {\ttfamily x\+\_\+fe}). This allows the Domain/\+Macro\+Element-\/ based representation to be used to apply displacement boundary conditions exactly. Ditto for the Lagrangian coordinates returned in xi\+\_\+fe and xi. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -36,7 +36,7 @@ void \mbox{\hyperlink{classoomph_1_1QSolidElementBase_a2afc3bfd3aa6ed253f42d55ac
 
 Base class for Solid Qelements 
 
-Definition at line \mbox{\hyperlink{Qelements_8h_source_l00329}{329}} of file \mbox{\hyperlink{Qelements_8h_source}{Qelements.\+h}}.
+Definition at line 329 of file Qelements.\+h.
 
 
 
@@ -53,7 +53,7 @@ Constructor\+: Empty.
 
 
 
-Definition at line \mbox{\hyperlink{Qelements_8h_source_l00334}{334}} of file \mbox{\hyperlink{Qelements_8h_source}{Qelements.\+h}}.
+Definition at line 334 of file Qelements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QSolidElementBase_adca40dbdc7543c76f938609e36ec549b}\label{classoomph_1_1QSolidElementBase_adca40dbdc7543c76f938609e36ec549b}} 
 \index{oomph::QSolidElementBase@{oomph::QSolidElementBase}!QSolidElementBase@{QSolidElementBase}}
@@ -84,15 +84,15 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a2e557cb364
 
 
 
-Definition at line \mbox{\hyperlink{Qelements_8h_source_l00379}{379}} of file \mbox{\hyperlink{Qelements_8h_source}{Qelements.\+h}}.
+Definition at line 379 of file Qelements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8cc_source_l07104}{oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi()}}, \mbox{\hyperlink{elements_8h_source_l01683}{oomph\+::\+Finite\+Element\+::\+Macro\+\_\+elem\+\_\+pt}}, \mbox{\hyperlink{macro__element_8h_source_l00126}{oomph\+::\+Macro\+Element\+::macro\+\_\+map()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{Qelements_8h_source_l00186}{oomph\+::\+QElement\+Base\+::s\+\_\+macro\+\_\+ll()}}, \mbox{\hyperlink{Qelements_8h_source_l00202}{oomph\+::\+QElement\+Base\+::s\+\_\+macro\+\_\+ur()}}, and \mbox{\hyperlink{elements_8h_source_l04076}{oomph\+::\+Solid\+Finite\+Element\+::\+Undeformed\+\_\+macro\+\_\+elem\+\_\+pt}}.
+References oomph\+::\+Finite\+Element\+::dim(), i, oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi(), oomph\+::\+Finite\+Element\+::\+Macro\+\_\+elem\+\_\+pt, oomph\+::\+Macro\+Element\+::macro\+\_\+map(), s, oomph\+::\+QElement\+Base\+::s\+\_\+macro\+\_\+ll(), oomph\+::\+QElement\+Base\+::s\+\_\+macro\+\_\+ur(), and oomph\+::\+Solid\+Finite\+Element\+::\+Undeformed\+\_\+macro\+\_\+elem\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{refineable__brick__element_8h_source_l00294}{oomph\+::\+Refineable\+Solid\+QElement$<$ 3 $>$\+::build()}}, and \mbox{\hyperlink{refineable__quad__element_8h_source_l00278}{oomph\+::\+Refineable\+Solid\+QElement$<$ 2 $>$\+::build()}}.
+Referenced by oomph\+::\+Refineable\+Solid\+QElement$<$ 3 $>$\+::build(), and oomph\+::\+Refineable\+Solid\+QElement$<$ 2 $>$\+::build().
 
 \mbox{\Hypertarget{classoomph_1_1QSolidElementBase_a0ceca47c039bbb38b0feb3baa330a27f}\label{classoomph_1_1QSolidElementBase_a0ceca47c039bbb38b0feb3baa330a27f}} 
 \index{oomph::QSolidElementBase@{oomph::QSolidElementBase}!set\_macro\_elem\_pt@{set\_macro\_elem\_pt}}
@@ -110,19 +110,19 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a07ac4c2745
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_013_01_4_a2b1aa7874048e0f38370ae7bf761d315}{oomph\+::\+Refineable\+Solid\+QElement$<$ 3 $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_011_01_4_ae0cd264bee16dd1d05d35f79e33dd408}{oomph\+::\+Refineable\+Solid\+QElement$<$ 1 $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_012_01_4_aac8a230631c509dd854d71a5f68b6483}{oomph\+::\+Refineable\+Solid\+QElement$<$ 2 $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_012_01_4_aac8a230631c509dd854d71a5f68b6483}{oomph\+::\+Refineable\+Solid\+QElement$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_011_01_4_ae0cd264bee16dd1d05d35f79e33dd408}{oomph\+::\+Refineable\+Solid\+QElement$<$ 1 $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_013_01_4_a2b1aa7874048e0f38370ae7bf761d315}{oomph\+::\+Refineable\+Solid\+QElement$<$ 3 $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{Qelements_8h_source_l00349}{349}} of file \mbox{\hyperlink{Qelements_8h_source}{Qelements.\+h}}.
+Definition at line 349 of file Qelements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01878}{oomph\+::\+Finite\+Element\+::macro\+\_\+elem\+\_\+pt()}}, \mbox{\hyperlink{Qelements_8h_source_l00143}{oomph\+::\+QElement\+Base\+::set\+\_\+macro\+\_\+elem\+\_\+pt()}}, and \mbox{\hyperlink{elements_8h_source_l03699}{oomph\+::\+Solid\+Finite\+Element\+::set\+\_\+undeformed\+\_\+macro\+\_\+elem\+\_\+pt()}}.
+References oomph\+::\+Finite\+Element\+::macro\+\_\+elem\+\_\+pt(), oomph\+::\+QElement\+Base\+::set\+\_\+macro\+\_\+elem\+\_\+pt(), and oomph\+::\+Solid\+Finite\+Element\+::set\+\_\+undeformed\+\_\+macro\+\_\+elem\+\_\+pt().
 
 
 
-Referenced by \mbox{\hyperlink{refineable__brick__element_8h_source_l00259}{oomph\+::\+Refineable\+Solid\+QElement$<$ 3 $>$\+::set\+\_\+macro\+\_\+elem\+\_\+pt()}}, \mbox{\hyperlink{refineable__line__element_8h_source_l00217}{oomph\+::\+Refineable\+Solid\+QElement$<$ 1 $>$\+::set\+\_\+macro\+\_\+elem\+\_\+pt()}}, and \mbox{\hyperlink{refineable__quad__element_8h_source_l00242}{oomph\+::\+Refineable\+Solid\+QElement$<$ 2 $>$\+::set\+\_\+macro\+\_\+elem\+\_\+pt()}}.
+Referenced by oomph\+::\+Refineable\+Solid\+QElement$<$ 3 $>$\+::set\+\_\+macro\+\_\+elem\+\_\+pt(), oomph\+::\+Refineable\+Solid\+QElement$<$ 1 $>$\+::set\+\_\+macro\+\_\+elem\+\_\+pt(), and oomph\+::\+Refineable\+Solid\+QElement$<$ 2 $>$\+::set\+\_\+macro\+\_\+elem\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1QSolidElementBase_aa7f14a039224fb4c513da587448d2c3b}\label{classoomph_1_1QSolidElementBase_aa7f14a039224fb4c513da587448d2c3b}} 
 \index{oomph::QSolidElementBase@{oomph::QSolidElementBase}!set\_macro\_elem\_pt@{set\_macro\_elem\_pt}}
@@ -140,15 +140,15 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a05bdd718a5
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_013_01_4_ab2c2950454d7c4ea16a597192c7fae15}{oomph\+::\+Refineable\+Solid\+QElement$<$ 3 $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_011_01_4_a9dd7e2622260d14c2bf92125707a3401}{oomph\+::\+Refineable\+Solid\+QElement$<$ 1 $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_012_01_4_a8c0cb9d011cc070322945b1fecd03331}{oomph\+::\+Refineable\+Solid\+QElement$<$ 2 $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_012_01_4_a8c0cb9d011cc070322945b1fecd03331}{oomph\+::\+Refineable\+Solid\+QElement$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_011_01_4_a9dd7e2622260d14c2bf92125707a3401}{oomph\+::\+Refineable\+Solid\+QElement$<$ 1 $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_013_01_4_ab2c2950454d7c4ea16a597192c7fae15}{oomph\+::\+Refineable\+Solid\+QElement$<$ 3 $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{Qelements_8h_source_l00360}{360}} of file \mbox{\hyperlink{Qelements_8h_source}{Qelements.\+h}}.
+Definition at line 360 of file Qelements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01878}{oomph\+::\+Finite\+Element\+::macro\+\_\+elem\+\_\+pt()}}, \mbox{\hyperlink{Qelements_8h_source_l00143}{oomph\+::\+QElement\+Base\+::set\+\_\+macro\+\_\+elem\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l03699}{oomph\+::\+Solid\+Finite\+Element\+::set\+\_\+undeformed\+\_\+macro\+\_\+elem\+\_\+pt()}}, and \mbox{\hyperlink{elements_8h_source_l03706}{oomph\+::\+Solid\+Finite\+Element\+::undeformed\+\_\+macro\+\_\+elem\+\_\+pt()}}.
+References oomph\+::\+Finite\+Element\+::macro\+\_\+elem\+\_\+pt(), oomph\+::\+QElement\+Base\+::set\+\_\+macro\+\_\+elem\+\_\+pt(), oomph\+::\+Solid\+Finite\+Element\+::set\+\_\+undeformed\+\_\+macro\+\_\+elem\+\_\+pt(), and oomph\+::\+Solid\+Finite\+Element\+::undeformed\+\_\+macro\+\_\+elem\+\_\+pt().
 
 
 

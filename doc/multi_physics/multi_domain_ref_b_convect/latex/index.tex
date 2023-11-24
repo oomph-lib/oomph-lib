@@ -187,10 +187,10 @@ We use multiple inheritance to upgrade an existing refineable Navier-\/\+Stokes 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{  \textcolor{comment}{//======================nst\_bous\_class=================================}}
-\DoxyCodeLine{\textcolor{comment}{  /// Build a refineable Navier Stokes element that inherits from}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{  /// ElementWithExternalElement so that it can "{}communicate"{} with}}
-\DoxyCodeLine{\textcolor{comment}{  /// an advection diffusion element that provides the temperature}}
-\DoxyCodeLine{\textcolor{comment}{  /// in the body force term.}}
+\DoxyCodeLine{\textcolor{comment}{  /// Build a refineable Navier Stokes element that inherits from}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// ElementWithExternalElement so that it can "{}communicate"{} with}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// an advection diffusion element that provides the temperature}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// in the body force term.}}
 \DoxyCodeLine{\textcolor{comment}{}  \textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{  \textcolor{keyword}{template}<\textcolor{keyword}{class} NST\_ELEMENT, \textcolor{keyword}{class} AD\_ELEMENT>}
 \DoxyCodeLine{  \textcolor{keyword}{class }RefineableNavierStokesBoussinesqElement}
@@ -250,10 +250,10 @@ and, given that we are dealing with a refineable element, make sure that the poi
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{    /// Overload get\_body\_force\_nst() to return the temperature-\/dependent}}
-\DoxyCodeLine{\textcolor{comment}{    /// buoyancy force, using the temperature computed by the}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{    /// "{}external"{} advection diffusion element associated with}}
-\DoxyCodeLine{\textcolor{comment}{    /// integration point \(\backslash\)c ipt.}}
+\DoxyCodeLine{    \textcolor{comment}{/// Overload get\_body\_force\_nst() to return the temperature-\/dependent}}
+\DoxyCodeLine{\textcolor{comment}{    /// buoyancy force, using the temperature computed by the}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// "{}external"{} advection diffusion element associated with}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// integration point \(\backslash\)c ipt.}}
 \DoxyCodeLine{\textcolor{comment}{}    \textcolor{keywordtype}{void} get\_body\_force\_nst(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
 \DoxyCodeLine{                            \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ipt,}
 \DoxyCodeLine{                            \textcolor{keyword}{const} Vector<double>\& s,}
@@ -293,7 +293,7 @@ Finally, we have to compute the element\textquotesingle{}s Jacobian matrix. The 
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{    /// Compute the element's residual vector and the Jacobian matrix.}}
+\DoxyCodeLine{    \textcolor{comment}{/// Compute the element's residual vector and the Jacobian matrix.}}
 \DoxyCodeLine{    \textcolor{keywordtype}{void} fill\_in\_contribution\_to\_jacobian(Vector<double>\& residuals,}
 \DoxyCodeLine{                                          DenseMatrix<double>\& jacobian)}
 \DoxyCodeLine{    \{}
@@ -343,9 +343,9 @@ Upgrading the advection-\/diffusion element to an {\ttfamily Element\+With\+Exte
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{  \textcolor{comment}{//======================ad\_bous\_class==================================}}
-\DoxyCodeLine{\textcolor{comment}{  /// Build an AdvectionDiffusionElement that inherits from}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{  /// ElementWithExternalElement so that it can "{}communicate"{} with the}}
-\DoxyCodeLine{\textcolor{comment}{  /// a NavierStokesElement that provides its wind.}}
+\DoxyCodeLine{\textcolor{comment}{  /// Build an AdvectionDiffusionElement that inherits from}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// ElementWithExternalElement so that it can "{}communicate"{} with the}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// a NavierStokesElement that provides its wind.}}
 \DoxyCodeLine{\textcolor{comment}{}  \textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{  \textcolor{keyword}{template}<\textcolor{keyword}{class} AD\_ELEMENT, \textcolor{keyword}{class} NST\_ELEMENT>}
 \DoxyCodeLine{  \textcolor{keyword}{class }RefineableAdvectionDiffusionBoussinesqElement}
@@ -368,10 +368,10 @@ We overload the function that computes the \char`\"{}wind\char`\"{} for the adve
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{    /// Overload the wind function in the advection-\/diffusion equations.}}
-\DoxyCodeLine{\textcolor{comment}{    /// This provides the coupling from the Navier-\/-\/Stokes equations to the}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{    /// advection-\/diffusion equations because the wind is the fluid velocity,}}
-\DoxyCodeLine{\textcolor{comment}{    /// obtained from the "{}external"{} element}}
+\DoxyCodeLine{    \textcolor{comment}{/// Overload the wind function in the advection-\/diffusion equations.}}
+\DoxyCodeLine{\textcolor{comment}{    /// This provides the coupling from the Navier-\/-\/Stokes equations to the}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// advection-\/diffusion equations because the wind is the fluid velocity,}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// obtained from the "{}external"{} element}}
 \DoxyCodeLine{\textcolor{comment}{}    \textcolor{keywordtype}{void} get\_wind\_adv\_diff(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ipt,}
 \DoxyCodeLine{                           \textcolor{keyword}{const} Vector<double>\& s,}
 \DoxyCodeLine{                           \textcolor{keyword}{const} Vector<double>\& x,}
@@ -397,7 +397,7 @@ The element\textquotesingle{}s Jacobian matrix can be computed by the same metho
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{    /// Compute the element's residual vector and the Jacobian matrix.}}
+\DoxyCodeLine{    \textcolor{comment}{/// Compute the element's residual vector and the Jacobian matrix.}}
 \DoxyCodeLine{    \textcolor{keywordtype}{void} fill\_in\_contribution\_to\_jacobian(Vector<double>\& residuals,}
 \DoxyCodeLine{                                          DenseMatrix<double>\& jacobian)}
 \DoxyCodeLine{    \{}
@@ -432,17 +432,17 @@ The problem class is similar to that of the \href{../../refine_b_convect/html/in
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Access function to the NST mesh. }}
-\DoxyCodeLine{\textcolor{comment}{ /// Casts the pointer to the base Mesh object to }\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// the actual mesh type.}}
+\DoxyCodeLine{ \textcolor{comment}{/// Access function to the NST mesh. }}
+\DoxyCodeLine{\textcolor{comment}{ /// Casts the pointer to the base Mesh object to }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// the actual mesh type.}}
 \DoxyCodeLine{\textcolor{comment}{} RefineableRectangularQuadMesh<NST\_ELEMENT>* nst\_mesh\_pt() }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{keywordflow}{return} \textcolor{keyword}{dynamic\_cast<}RefineableRectangularQuadMesh<NST\_ELEMENT>*\textcolor{keyword}{>}}
 \DoxyCodeLine{    (Nst\_mesh\_pt);}
 \DoxyCodeLine{  \} \textcolor{comment}{// end\_of\_nst\_mesh}}
-\DoxyCodeLine{\textcolor{comment}{ /// Access function to the AD mesh. }}
-\DoxyCodeLine{\textcolor{comment}{ /// Casts the pointer to the base Mesh object to }\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// the actual mesh type.}}
+\DoxyCodeLine{ \textcolor{comment}{/// Access function to the AD mesh. }}
+\DoxyCodeLine{\textcolor{comment}{ /// Casts the pointer to the base Mesh object to }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// the actual mesh type.}}
 \DoxyCodeLine{\textcolor{comment}{} RefineableRectangularQuadMesh<AD\_ELEMENT>* adv\_diff\_mesh\_pt() }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{keywordflow}{return} \textcolor{keyword}{dynamic\_cast<}RefineableRectangularQuadMesh<AD\_ELEMENT>*\textcolor{keyword}{>}}
@@ -454,9 +454,9 @@ The problem class is similar to that of the \href{../../refine_b_convect/html/in
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Actions after adaptation, reset all sources, then}}
+\DoxyCodeLine{ \textcolor{comment}{/// Actions after adaptation, reset all sources, then}}
 \DoxyCodeLine{\textcolor{comment}{ /// re-\/pin a single pressure degree of freedom}}
-\DoxyCodeLine{ \textcolor{keywordtype}{void} actions\_after\_adapt()}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_adapt()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{//Unpin all the pressures in NST mesh to avoid pinning two pressures}}
 \DoxyCodeLine{   RefineableNavierStokesEquations<2>::}
@@ -482,7 +482,7 @@ The problem constructor is slightly different from the equivalent single-\/domai
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_constructor=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for adaptive thermal convection problem}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} NST\_ELEMENT,\textcolor{keyword}{class} AD\_ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classRefineableConvectionProblem_a97e661986093402bf55fb6c32b782ddc}{RefineableConvectionProblem<NST\_ELEMENT,AD\_ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classRefineableConvectionProblem_a97e661986093402bf55fb6c32b782ddc}{RefineableConvectionProblem}}()}
@@ -683,8 +683,8 @@ In this function we update the problem specifications before a solution by re-\/
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===================start\_actions\_before\_newton\_solve====================}}
-\DoxyCodeLine{\textcolor{comment}{/// Update the problem specs before solve: (Re-\/)set boundary conditions}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// to include an imperfection (or not) depending on the control flag.}}
+\DoxyCodeLine{\textcolor{comment}{/// Update the problem specs before solve: (Re-\/)set boundary conditions}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// to include an imperfection (or not) depending on the control flag.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} NST\_ELEMENT,\textcolor{keyword}{class} AD\_ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableConvectionProblem_a694f0be87fe09a30d94e92acfce85eee}{RefineableConvectionProblem<NST\_ELEMENT,AD\_ELEMENT>::actions\_before\_newton\_solve}}()}
@@ -758,7 +758,7 @@ This function outputs all fields to the specified solution file in the directory
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//====================start\_of\_doc\_solution===============================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} NST\_ELEMENT,\textcolor{keyword}{class} AD\_ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableConvectionProblem_a47efcb3467931e13e12687303135e38b}{RefineableConvectionProblem<NST\_ELEMENT,AD\_ELEMENT>::doc\_solution}}()}
 \DoxyCodeLine{\{ }
@@ -802,10 +802,10 @@ The function {\ttfamily Element\+With\+External\+Element\+::identify\+\_\+all\+\
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{  \textcolor{comment}{//================optimised\_identification\_of\_field\_data==================}}
-\DoxyCodeLine{\textcolor{comment}{  /// Overload the function that must return all field data involved}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{  /// in the interaction with the external (Navier Stokes) element.}}
-\DoxyCodeLine{\textcolor{comment}{  /// Only the velocity dofs in the Navier Stokes element affect the}}
-\DoxyCodeLine{\textcolor{comment}{  /// interaction with the current element.}}
+\DoxyCodeLine{\textcolor{comment}{  /// Overload the function that must return all field data involved}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// in the interaction with the external (Navier Stokes) element.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// Only the velocity dofs in the Navier Stokes element affect the}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// interaction with the current element.}}
 \DoxyCodeLine{\textcolor{comment}{}  \textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{  \textcolor{keyword}{template}<\textcolor{keyword}{class} AD\_ELEMENT, \textcolor{keyword}{class} NST\_ELEMENT>}
 \DoxyCodeLine{  \textcolor{keywordtype}{void} RefineableAdvectionDiffusionBoussinesqElement<AD\_ELEMENT, NST\_ELEMENT>::}

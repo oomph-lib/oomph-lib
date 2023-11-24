@@ -79,7 +79,7 @@ As usual we define the various problem parameters in a global namespace. We defi
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_namespace==============================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for physical parameters}}
-\DoxyCodeLine{\textcolor{comment}{//==================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Parameters}{Global\_Parameters}}}
 \DoxyCodeLine{\{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Reynolds number}}
@@ -168,7 +168,7 @@ Following the procedure discussed in the corresponding \href{../../../solid/unst
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//========start\_solid\_mesh=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Triangle-\/based mesh upgraded to become a solid mesh}}
-\DoxyCodeLine{\textcolor{comment}{//=========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classMySolidTriangleMesh}{MySolidTriangleMesh}} : \textcolor{keyword}{public} \textcolor{keyword}{virtual} TriangleMesh<ELEMENT>, }
 \DoxyCodeLine{                          \textcolor{keyword}{public} \textcolor{keyword}{virtual} SolidMesh }
@@ -234,7 +234,7 @@ Finally, we identify the elements that are located next to the newly created dom
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Empty Destructor}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \mbox{\hyperlink{classMySolidTriangleMesh}{\string~MySolidTriangleMesh}}() \{ \}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \string~\mbox{\hyperlink{classMySolidTriangleMesh}{MySolidTriangleMesh}}() \{ \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\};}
 
@@ -248,7 +248,7 @@ The creation of the fluid mesh follows the same process but uses the mesh create
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//======================start\_fluid\_mesh===================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Triangle-\/based mesh upgraded to become a pseudo-\/solid mesh}}
-\DoxyCodeLine{\textcolor{comment}{//=========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classFluidTriangleMesh}{FluidTriangleMesh}} : \textcolor{keyword}{public} \textcolor{keyword}{virtual} TriangleMesh<ELEMENT>,}
 \DoxyCodeLine{                          \textcolor{keyword}{public} \textcolor{keyword}{virtual} SolidMesh }
@@ -343,7 +343,7 @@ The creation of the fluid mesh follows the same process but uses the mesh create
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Empty Destructor}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \mbox{\hyperlink{classFluidTriangleMesh}{\string~FluidTriangleMesh}}() \{ \}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \string~\mbox{\hyperlink{classFluidTriangleMesh}{FluidTriangleMesh}}() \{ \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\};}
 
@@ -359,7 +359,7 @@ We specify an output directory and instantiate the constitutive equation for the
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_main======================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver for unstructured fsi problem}}
-\DoxyCodeLine{\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{unstructured__two__d__fsi_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ \textcolor{comment}{// Label for output}}
@@ -384,7 +384,7 @@ We specify an output directory and instantiate the constitutive equation for the
 \DoxyCodeLine{  TPVDElement<2,3> > problem;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output boundaries }}
-\DoxyCodeLine{ problem.\mbox{\hyperlink{classUnstructuredFSIProblem_a920c8629e5516bf916edd340d445100f}{fluid\_mesh\_pt}}()-\/>output\_boundaries(\textcolor{stringliteral}{"{}RESLT/fluid\_boundaries.dat"{}});}
+\DoxyCodeLine{ problem.\mbox{\hyperlink{classUnstructuredFSIProblem_afe86a739cadf57036a0bf351ed9bc1a9}{fluid\_mesh\_pt}}()-\/>output\_boundaries(\textcolor{stringliteral}{"{}RESLT/fluid\_boundaries.dat"{}});}
 \DoxyCodeLine{ problem.solid\_mesh\_pt()-\/>output\_boundaries(\textcolor{stringliteral}{"{}RESLT/solid\_boundaries.dat"{}});}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Output the initial guess for the solution}}
@@ -447,7 +447,7 @@ The {\ttfamily Problem} class has the usual members, with access functions to th
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_problem\_class============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Unstructured FSI Problem}}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} FLUID\_ELEMENT, \textcolor{keyword}{class} SOLID\_ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classUnstructuredFSIProblem}{UnstructuredFSIProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -461,13 +461,13 @@ The {\ttfamily Problem} class has the usual members, with access functions to th
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classUnstructuredFSIProblem_a976a81e0dee902f6713bd8ca4d79d000}{\string~UnstructuredFSIProblem}}()\{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Access function for the fluid mesh}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classFluidTriangleMesh}{FluidTriangleMesh<FLUID\_ELEMENT>}}*\& \mbox{\hyperlink{classUnstructuredFSIProblem_a920c8629e5516bf916edd340d445100f}{fluid\_mesh\_pt}}() }
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classFluidTriangleMesh}{FluidTriangleMesh<FLUID\_ELEMENT>}}*\& \mbox{\hyperlink{classUnstructuredFSIProblem_afe86a739cadf57036a0bf351ed9bc1a9}{fluid\_mesh\_pt}}() }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{keywordflow}{return} \mbox{\hyperlink{classUnstructuredFSIProblem_a33c3b4cd9923f8b25368ff20e4810b2c}{Fluid\_mesh\_pt}};}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Access function for the solid mesh}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classMySolidTriangleMesh}{MySolidTriangleMesh<SOLID\_ELEMENT>}}*\& \mbox{\hyperlink{classUnstructuredFSIProblem_a3aeaaac80eca8d12a97bd7d268bccdb0}{solid\_mesh\_pt}}() }
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classMySolidTriangleMesh}{MySolidTriangleMesh<SOLID\_ELEMENT>}}*\& \mbox{\hyperlink{classUnstructuredFSIProblem_ad1430c627842b8ea0a373adcf571647f}{solid\_mesh\_pt}}() }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{keywordflow}{return} \mbox{\hyperlink{classUnstructuredFSIProblem_aeb164665366e237ca311e448466d7c9d}{Solid\_mesh\_pt}};}
 \DoxyCodeLine{  \}}
@@ -535,7 +535,7 @@ We start by building the fluid mesh, using the files created by \href{http://www
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_constructor==================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for unstructured FSI problem.}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} FLUID\_ELEMENT, \textcolor{keyword}{class} SOLID\_ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classUnstructuredFSIProblem_a6a31fd839e0215ef1312942cf7284bd2}{UnstructuredFSIProblem<FLUID\_ELEMENT,SOLID\_ELEMENT>::UnstructuredFSIProblem}}()}
 \DoxyCodeLine{\{ }
@@ -845,7 +845,7 @@ The creation of the FSI traction elements adjacent to the solid boundary 2 follo
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_traction\_elements==========================}}
 \DoxyCodeLine{\textcolor{comment}{/// Create FSI traction elements }}
-\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} FLUID\_ELEMENT,\textcolor{keyword}{class} SOLID\_ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classUnstructuredFSIProblem_a934a587c99668fca969a72814b3142a7}{UnstructuredFSIProblem<FLUID\_ELEMENT,SOLID\_ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classUnstructuredFSIProblem_a934a587c99668fca969a72814b3142a7}{create\_fsi\_traction\_elements}}()}
@@ -997,7 +997,7 @@ The post-\/processing routine simply executes the output functions for the fluid
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_doc\_solution=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} FLUID\_ELEMENT, \textcolor{keyword}{class} SOLID\_ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classUnstructuredFSIProblem_a15f581318b505de07f50bd570da8c8d0}{UnstructuredFSIProblem<FLUID\_ELEMENT,SOLID\_ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classUnstructuredFSIProblem_a15f581318b505de07f50bd570da8c8d0}{doc\_solution}}(DocInfo\& doc\_info)}

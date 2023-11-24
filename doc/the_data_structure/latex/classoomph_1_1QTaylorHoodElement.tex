@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1QTaylorHoodElement}{}\doxysection{oomph\+::QTaylor\+Hood\+Element\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1QTaylorHoodElement}{}\doxysection{oomph\+::QTaylor\+Hood\+Element$<$ DIM $>$ Class Template Reference}
 \label{classoomph_1_1QTaylorHoodElement}\index{oomph::QTaylorHoodElement$<$ DIM $>$@{oomph::QTaylorHoodElement$<$ DIM $>$}}
 
 
@@ -9,7 +9,7 @@
 
 {\ttfamily \#include $<$navier\+\_\+stokes\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::QTaylor\+Hood\+Element\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::QTaylor\+Hood\+Element$<$ DIM $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.507463cm]{classoomph_1_1QTaylorHoodElement}
@@ -44,9 +44,9 @@ void \mbox{\hyperlink{classoomph_1_1QTaylorHoodElement_ab47f75f2720d9f42d1f073d9
 \begin{DoxyCompactList}\small\item\em Pin p\+\_\+dof-\/th pressure dof and set it to value specified by p\+\_\+value. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QTaylorHoodElement_aa3c4eabbedadb47c3bcbbbe22febf3cf}{build\+\_\+fp\+\_\+press\+\_\+adv\+\_\+diff\+\_\+robin\+\_\+bc\+\_\+element}} (const unsigned \&face\+\_\+index)
 \begin{DoxyCompactList}\small\item\em Build Face\+Elements that apply the Robin boundary condition to the pressure advection diffusion problem required by Fp preconditioner. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QTaylorHoodElement_af14ad75ea276ed120e620646f48dcc0c}{identify\+\_\+load\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&paired\+\_\+load\+\_\+data)
+void \mbox{\hyperlink{classoomph_1_1QTaylorHoodElement_a6796a527a8ac53e872eecf38b932f852}{identify\+\_\+load\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&paired\+\_\+load\+\_\+data)
 \begin{DoxyCompactList}\small\item\em Add to the set {\ttfamily paired\+\_\+load\+\_\+data} pairs containing. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QTaylorHoodElement_ad1488e770c1364c5d6f25ce30532d9d4}{identify\+\_\+pressure\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&paired\+\_\+pressure\+\_\+data)
+void \mbox{\hyperlink{classoomph_1_1QTaylorHoodElement_a64aed725ad7e718858b4daa49218da7d}{identify\+\_\+pressure\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&paired\+\_\+pressure\+\_\+data)
 \begin{DoxyCompactList}\small\item\em Add to the set {\ttfamily paired\+\_\+pressure\+\_\+data} pairs containing. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QTaylorHoodElement_a66200b671d6b16402d0d89c382af2f95}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
@@ -58,7 +58,7 @@ void \mbox{\hyperlink{classoomph_1_1QTaylorHoodElement_a0544106fc73db26d59619f63
 \begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1QTaylorHoodElement_a14a90f0ce2b19d79ed9bc9b755e0b2d2}{ndof\+\_\+types}} () const
 \begin{DoxyCompactList}\small\item\em Returns the number of \char`\"{}\+DOF types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: Velocity and pressure. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QTaylorHoodElement_abe161055c22b04059a4a4e71cd2681f0}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
+void \mbox{\hyperlink{classoomph_1_1QTaylorHoodElement_aa2c95841ca84eca4dbea761d4af5378d}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&dof\+\_\+lookup\+\_\+list) const
 \begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+DOF type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) Velocity=0; Pressure=1. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1QTaylorHoodElement_a018ee0d5aab5c5061770ee46d3c4132f}{dpshape\+\_\+and\+\_\+dptest\+\_\+eulerian\+\_\+nst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&ppsi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dppsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&ptest, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dptestdx) const
 \begin{DoxyCompactList}\small\item\em 2D \+: Pressure shape and test functions and derivs w.\+r.\+t. to Eulerian coords. Return Jacobian of mapping between local and global coordinates. \end{DoxyCompactList}\item 
@@ -108,11 +108,12 @@ static const unsigned \mbox{\hyperlink{classoomph_1_1QTaylorHoodElement_aba97d85
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$unsigned DIM$>$\newline
 class oomph\+::\+QTaylor\+Hood\+Element$<$ DIM $>$}
+
 ///////////////////////////////////////////////////////////////////////// 
 
 Taylor--Hood elements are Navier--Stokes elements with quadratic interpolation for velocities and positions and continuous linear pressure interpolation. They can be used within oomph-\/lib\textquotesingle{}s block-\/preconditioning framework. 
 
-Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l02306}{2306}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2306 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -130,7 +131,7 @@ Constructor, no internal data points.
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l02351}{2351}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2351 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -156,11 +157,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodElement_ab7
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l02434}{2434}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2434 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{navier__stokes__elements_8h_source_l00475}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Pressure\+\_\+advection\+\_\+diffusion\+\_\+robin\+\_\+element\+\_\+pt}}.
+References oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Pressure\+\_\+advection\+\_\+diffusion\+\_\+robin\+\_\+element\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodElement_a361d8f56918429731de4929a75310f26}\label{classoomph_1_1QTaylorHoodElement_a361d8f56918429731de4929a75310f26}} 
 \index{oomph::QTaylorHoodElement$<$ DIM $>$@{oomph::QTaylorHoodElement$<$ DIM $>$}!dpshape\_and\_dptest\_eulerian\_nst@{dpshape\_and\_dptest\_eulerian\_nst}}
@@ -193,11 +194,11 @@ Implements \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a2f3024a4d370ec4
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l02565}{2565}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2565 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{shape_8h_source_l00616}{oomph\+::\+One\+Dim\+Lagrange\+::dshape$<$ 2 $>$()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{shape_8h_source_l00608}{oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 2 $>$()}}.
+References oomph\+::\+One\+Dim\+Lagrange\+::dshape$<$ 2 $>$(), i, s, and oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 2 $>$().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodElement_a54736e3bee31c4a6349a8e95cb12eb43}\label{classoomph_1_1QTaylorHoodElement_a54736e3bee31c4a6349a8e95cb12eb43}} 
 \index{oomph::QTaylorHoodElement$<$ DIM $>$@{oomph::QTaylorHoodElement$<$ DIM $>$}!dpshape\_and\_dptest\_eulerian\_nst@{dpshape\_and\_dptest\_eulerian\_nst}}
@@ -215,11 +216,11 @@ Implements \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a2f3024a4d370ec4
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l02751}{2751}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2751 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{shape_8h_source_l00616}{oomph\+::\+One\+Dim\+Lagrange\+::dshape$<$ 2 $>$()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{shape_8h_source_l00608}{oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 2 $>$()}}.
+References oomph\+::\+One\+Dim\+Lagrange\+::dshape$<$ 2 $>$(), i, s, and oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 2 $>$().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodElement_ae37df57d30a5fdd716667e07ecd1796b}\label{classoomph_1_1QTaylorHoodElement_ae37df57d30a5fdd716667e07ecd1796b}} 
 \index{oomph::QTaylorHoodElement$<$ DIM $>$@{oomph::QTaylorHoodElement$<$ DIM $>$}!dshape\_and\_dtest\_eulerian\_at\_knot\_nst@{dshape\_and\_dtest\_eulerian\_at\_knot\_nst}}
@@ -252,11 +253,11 @@ Implements \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_afbc63afd804f514
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l02630}{2630}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2630 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References i.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodElement_aab486a7268766da64b95e08d978b71d2}\label{classoomph_1_1QTaylorHoodElement_aab486a7268766da64b95e08d978b71d2}} 
 \index{oomph::QTaylorHoodElement$<$ DIM $>$@{oomph::QTaylorHoodElement$<$ DIM $>$}!dshape\_and\_dtest\_eulerian\_at\_knot\_nst@{dshape\_and\_dtest\_eulerian\_at\_knot\_nst}}
@@ -274,11 +275,11 @@ Implements \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_afbc63afd804f514
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l02679}{2679}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2679 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References i.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodElement_a25f796f83e490de92186d63ee015d708}\label{classoomph_1_1QTaylorHoodElement_a25f796f83e490de92186d63ee015d708}} 
 \index{oomph::QTaylorHoodElement$<$ DIM $>$@{oomph::QTaylorHoodElement$<$ DIM $>$}!dshape\_and\_dtest\_eulerian\_at\_knot\_nst@{dshape\_and\_dtest\_eulerian\_at\_knot\_nst}}
@@ -297,7 +298,7 @@ Implements \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a46f9c15f162160f
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l02540}{2540}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2540 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodElement_a50722aac3b81372e6eab8eda39680783}\label{classoomph_1_1QTaylorHoodElement_a50722aac3b81372e6eab8eda39680783}} 
 \index{oomph::QTaylorHoodElement$<$ DIM $>$@{oomph::QTaylorHoodElement$<$ DIM $>$}!dshape\_and\_dtest\_eulerian\_nst@{dshape\_and\_dtest\_eulerian\_nst}}
@@ -316,11 +317,11 @@ Implements \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_aeea4a1a3035ef93
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l02515}{2515}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2515 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References s.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodElement_ab47f75f2720d9f42d1f073d9bf5f5077}\label{classoomph_1_1QTaylorHoodElement_ab47f75f2720d9f42d1f073d9bf5f5077}} 
 \index{oomph::QTaylorHoodElement$<$ DIM $>$@{oomph::QTaylorHoodElement$<$ DIM $>$}!fix\_pressure@{fix\_pressure}}
@@ -339,18 +340,18 @@ Implements \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_aa33a3dd5c1cdba0
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l02423}{2423}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2423 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l02370}{oomph\+::\+QTaylor\+Hood\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst()}}, \mbox{\hyperlink{nodes_8h_source_l00385}{oomph\+::\+Data\+::pin()}}, and \mbox{\hyperlink{nodes_8h_source_l00271}{oomph\+::\+Data\+::set\+\_\+value()}}.
+References oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+QTaylor\+Hood\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst(), oomph\+::\+Data\+::pin(), and oomph\+::\+Data\+::set\+\_\+value().
 
-\mbox{\Hypertarget{classoomph_1_1QTaylorHoodElement_abe161055c22b04059a4a4e71cd2681f0}\label{classoomph_1_1QTaylorHoodElement_abe161055c22b04059a4a4e71cd2681f0}} 
+\mbox{\Hypertarget{classoomph_1_1QTaylorHoodElement_aa2c95841ca84eca4dbea761d4af5378d}\label{classoomph_1_1QTaylorHoodElement_aa2c95841ca84eca4dbea761d4af5378d}} 
 \index{oomph::QTaylorHoodElement$<$ DIM $>$@{oomph::QTaylorHoodElement$<$ DIM $>$}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
 \index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::QTaylorHoodElement$<$ DIM $>$@{oomph::QTaylorHoodElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QTaylorHoodElement}{oomph\+::\+QTaylor\+Hood\+Element}}$<$ DIM $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1QTaylorHoodElement}{oomph\+::\+QTaylor\+Hood\+Element}}$<$ DIM $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -358,18 +359,18 @@ Create a list of pairs for all unknowns in this element, so that the first entry
 
 Create a list of pairs for all unknowns in this element, so the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+DOF type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a069f59bfc3e607a5bebba52c6314d777}{oomph\+::\+Generalised\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a29c6fb71cd7cabb29b4c289598aec601}{oomph\+::\+Generalised\+Element}}.
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__elements_8cc_source_l02825}{2825}} of file \mbox{\hyperlink{navier__stokes__elements_8cc_source}{navier\+\_\+stokes\+\_\+elements.\+cc}}.
+Definition at line 2825 of file navier\+\_\+stokes\+\_\+elements.\+cc.
 
-\mbox{\Hypertarget{classoomph_1_1QTaylorHoodElement_af14ad75ea276ed120e620646f48dcc0c}\label{classoomph_1_1QTaylorHoodElement_af14ad75ea276ed120e620646f48dcc0c}} 
+\mbox{\Hypertarget{classoomph_1_1QTaylorHoodElement_a6796a527a8ac53e872eecf38b932f852}\label{classoomph_1_1QTaylorHoodElement_a6796a527a8ac53e872eecf38b932f852}} 
 \index{oomph::QTaylorHoodElement$<$ DIM $>$@{oomph::QTaylorHoodElement$<$ DIM $>$}!identify\_load\_data@{identify\_load\_data}}
 \index{identify\_load\_data@{identify\_load\_data}!oomph::QTaylorHoodElement$<$ DIM $>$@{oomph::QTaylorHoodElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{identify\_load\_data()}{identify\_load\_data()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QTaylorHoodElement}{oomph\+::\+QTaylor\+Hood\+Element}}$<$ DIM $>$\+::identify\+\_\+load\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&}]{paired\+\_\+load\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1QTaylorHoodElement}{oomph\+::\+QTaylor\+Hood\+Element}}$<$ DIM $>$\+::identify\+\_\+load\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&}]{paired\+\_\+load\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -381,26 +382,26 @@ Add to the set {\ttfamily paired\+\_\+load\+\_\+data} pairs containing.
 \item the index of the value in that \mbox{\hyperlink{classoomph_1_1Data}{Data}} object
 \end{DoxyItemize}for all values (pressures, velocities) that affect the load computed in the {\ttfamily get\+\_\+load(...)} function. 
 
-Implements \mbox{\hyperlink{classoomph_1_1FSIFluidElement_a13c5f835cddd1b78e6d2582733619300}{oomph\+::\+FSIFluid\+Element}}.
+Implements \mbox{\hyperlink{classoomph_1_1FSIFluidElement_ac67392272be44300a42c2285abbbea00}{oomph\+::\+FSIFluid\+Element}}.
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodElement_af9358dd7b65ca4a1005980d50986db0d}{oomph\+::\+Refineable\+QTaylor\+Hood\+Element$<$ DIM $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodElement_ae33c3a85421336c32c43014fe1a693bf}{oomph\+::\+Refineable\+QTaylor\+Hood\+Element$<$ DIM $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__elements_8cc_source_l02762}{2762}} of file \mbox{\hyperlink{navier__stokes__elements_8cc_source}{navier\+\_\+stokes\+\_\+elements.\+cc}}.
+Definition at line 2762 of file navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References i.
 
-\mbox{\Hypertarget{classoomph_1_1QTaylorHoodElement_ad1488e770c1364c5d6f25ce30532d9d4}\label{classoomph_1_1QTaylorHoodElement_ad1488e770c1364c5d6f25ce30532d9d4}} 
+\mbox{\Hypertarget{classoomph_1_1QTaylorHoodElement_a64aed725ad7e718858b4daa49218da7d}\label{classoomph_1_1QTaylorHoodElement_a64aed725ad7e718858b4daa49218da7d}} 
 \index{oomph::QTaylorHoodElement$<$ DIM $>$@{oomph::QTaylorHoodElement$<$ DIM $>$}!identify\_pressure\_data@{identify\_pressure\_data}}
 \index{identify\_pressure\_data@{identify\_pressure\_data}!oomph::QTaylorHoodElement$<$ DIM $>$@{oomph::QTaylorHoodElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{identify\_pressure\_data()}{identify\_pressure\_data()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QTaylorHoodElement}{oomph\+::\+QTaylor\+Hood\+Element}}$<$ DIM $>$\+::identify\+\_\+pressure\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&}]{paired\+\_\+pressure\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1QTaylorHoodElement}{oomph\+::\+QTaylor\+Hood\+Element}}$<$ DIM $>$\+::identify\+\_\+pressure\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&}]{paired\+\_\+pressure\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -418,11 +419,11 @@ Add to the set {\ttfamily paired\+\_\+pressure\+\_\+data} pairs containing.
 \item the index of the value in that \mbox{\hyperlink{classoomph_1_1Data}{Data}} object
 \end{DoxyItemize}for pressure values that affect the load computed in the {\ttfamily get\+\_\+load(...)} function., 
 
-Implements \mbox{\hyperlink{classoomph_1_1FSIFluidElement_af8e0805b769b7d111eb71f223fc83df8}{oomph\+::\+FSIFluid\+Element}}.
+Implements \mbox{\hyperlink{classoomph_1_1FSIFluidElement_a1a28009885c5459bd92ac8cf8395910c}{oomph\+::\+FSIFluid\+Element}}.
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__elements_8cc_source_l02798}{2798}} of file \mbox{\hyperlink{navier__stokes__elements_8cc_source}{navier\+\_\+stokes\+\_\+elements.\+cc}}.
+Definition at line 2798 of file navier\+\_\+stokes\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodElement_ad8f81289d883aa712b30503954c58e30}\label{classoomph_1_1QTaylorHoodElement_ad8f81289d883aa712b30503954c58e30}} 
 \index{oomph::QTaylorHoodElement$<$ DIM $>$@{oomph::QTaylorHoodElement$<$ DIM $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
@@ -432,7 +433,7 @@ Definition at line \mbox{\hyperlink{navier__stokes__elements_8cc_source_l02798}{
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__elements_8cc_source_l02744}{2744}} of file \mbox{\hyperlink{navier__stokes__elements_8cc_source}{navier\+\_\+stokes\+\_\+elements.\+cc}}.
+Definition at line 2744 of file navier\+\_\+stokes\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodElement_ab3d269bd8d437f5cb93a309a9c64b038}\label{classoomph_1_1QTaylorHoodElement_ab3d269bd8d437f5cb93a309a9c64b038}} 
 \index{oomph::QTaylorHoodElement$<$ DIM $>$@{oomph::QTaylorHoodElement$<$ DIM $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
@@ -446,7 +447,7 @@ Definition at line \mbox{\hyperlink{navier__stokes__elements_8cc_source_l02744}{
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__elements_8cc_source_l02734}{2734}} of file \mbox{\hyperlink{navier__stokes__elements_8cc_source}{navier\+\_\+stokes\+\_\+elements.\+cc}}.
+Definition at line 2734 of file navier\+\_\+stokes\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodElement_adc5dcf0304f97e55755bcf1602a91b0e}\label{classoomph_1_1QTaylorHoodElement_adc5dcf0304f97e55755bcf1602a91b0e}} 
 \index{oomph::QTaylorHoodElement$<$ DIM $>$@{oomph::QTaylorHoodElement$<$ DIM $>$}!is\_pressure\_node@{is\_pressure\_node}}
@@ -461,11 +462,11 @@ Deduce whether or not the provided node is a pressure node.
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l02412}{2412}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2412 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{navier__stokes__elements_8h_source_l02405}{oomph\+::\+QTaylor\+Hood\+Element$<$ DIM $>$\+::npres\+\_\+nst()}}.
+References oomph\+::\+QTaylor\+Hood\+Element$<$ DIM $>$\+::npres\+\_\+nst().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodElement_a14a90f0ce2b19d79ed9bc9b755e0b2d2}\label{classoomph_1_1QTaylorHoodElement_a14a90f0ce2b19d79ed9bc9b755e0b2d2}} 
 \index{oomph::QTaylorHoodElement$<$ DIM $>$@{oomph::QTaylorHoodElement$<$ DIM $>$}!ndof\_types@{ndof\_types}}
@@ -484,7 +485,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a0c6037a870
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l02492}{2492}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2492 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodElement_aaf60ebf583d9671f7adddca94e6029ac}\label{classoomph_1_1QTaylorHoodElement_aaf60ebf583d9671f7adddca94e6029ac}} 
 \index{oomph::QTaylorHoodElement$<$ DIM $>$@{oomph::QTaylorHoodElement$<$ DIM $>$}!npres\_nst@{npres\_nst}}
@@ -503,11 +504,11 @@ Implements \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a4a17a76873bf313
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l02405}{2405}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2405 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l00979}{oomph\+::\+Refineable\+QTaylor\+Hood\+Element$<$ DIM $>$\+::identify\+\_\+load\+\_\+data()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l02412}{oomph\+::\+QTaylor\+Hood\+Element$<$ DIM $>$\+::is\+\_\+pressure\+\_\+node()}}, and \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l00668}{oomph\+::\+Refineable\+QTaylor\+Hood\+Element$<$ DIM $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs()}}.
+Referenced by oomph\+::\+Refineable\+QTaylor\+Hood\+Element$<$ DIM $>$\+::identify\+\_\+load\+\_\+data(), oomph\+::\+QTaylor\+Hood\+Element$<$ DIM $>$\+::is\+\_\+pressure\+\_\+node(), and oomph\+::\+Refineable\+QTaylor\+Hood\+Element$<$ DIM $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodElement_a75af9559b2b53886f8f256a08c315a45}\label{classoomph_1_1QTaylorHoodElement_a75af9559b2b53886f8f256a08c315a45}} 
 \index{oomph::QTaylorHoodElement$<$ DIM $>$@{oomph::QTaylorHoodElement$<$ DIM $>$}!output@{output}}
@@ -526,11 +527,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_acb921a4
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l02478}{2478}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2478 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{navier__stokes__elements_8h_source_l01155}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::output()}}.
+References oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodElement_a0544106fc73db26d59619f6303b5803c}\label{classoomph_1_1QTaylorHoodElement_a0544106fc73db26d59619f6303b5803c}} 
 \index{oomph::QTaylorHoodElement$<$ DIM $>$@{oomph::QTaylorHoodElement$<$ DIM $>$}!output@{output}}
@@ -549,11 +550,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_af09ce1e
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l02484}{2484}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2484 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{navier__stokes__elements_8h_source_l01155}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::output()}}.
+References oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodElement_a66200b671d6b16402d0d89c382af2f95}\label{classoomph_1_1QTaylorHoodElement_a66200b671d6b16402d0d89c382af2f95}} 
 \index{oomph::QTaylorHoodElement$<$ DIM $>$@{oomph::QTaylorHoodElement$<$ DIM $>$}!output@{output}}
@@ -572,11 +573,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_ae2c8742
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l02466}{2466}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2466 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{navier__stokes__elements_8h_source_l01155}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::output()}}.
+References oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodElement_a9a19616b9abaf15ad273f9eaa951de73}\label{classoomph_1_1QTaylorHoodElement_a9a19616b9abaf15ad273f9eaa951de73}} 
 \index{oomph::QTaylorHoodElement$<$ DIM $>$@{oomph::QTaylorHoodElement$<$ DIM $>$}!output@{output}}
@@ -595,11 +596,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a2bc96a2
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l02472}{2472}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2472 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{navier__stokes__elements_8h_source_l01155}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::output()}}.
+References oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodElement_a13d4dd087330f26ee6283fe63153867d}\label{classoomph_1_1QTaylorHoodElement_a13d4dd087330f26ee6283fe63153867d}} 
 \index{oomph::QTaylorHoodElement$<$ DIM $>$@{oomph::QTaylorHoodElement$<$ DIM $>$}!p\_local\_eqn@{p\_local\_eqn}}
@@ -618,11 +619,11 @@ Implements \mbox{\hyperlink{classoomph_1_1TemplateFreeNavierStokesEquationsBase_
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l02376}{2376}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2376 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}, and \mbox{\hyperlink{navier__stokes__elements_8h_source_l02370}{oomph\+::\+QTaylor\+Hood\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst()}}.
+References oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), and oomph\+::\+QTaylor\+Hood\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodElement_a86f85131d3383d74ab40dfdb2213d8d5}\label{classoomph_1_1QTaylorHoodElement_a86f85131d3383d74ab40dfdb2213d8d5}} 
 \index{oomph::QTaylorHoodElement$<$ DIM $>$@{oomph::QTaylorHoodElement$<$ DIM $>$}!p\_nodal\_index\_nst@{p\_nodal\_index\_nst}}
@@ -641,11 +642,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a3694d3e
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l02370}{2370}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2370 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{navier__stokes__elements_8h_source_l02423}{oomph\+::\+QTaylor\+Hood\+Element$<$ DIM $>$\+::fix\+\_\+pressure()}}, \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l00803}{oomph\+::\+Refineable\+QTaylor\+Hood\+Element$<$ DIM $>$\+::further\+\_\+setup\+\_\+hanging\+\_\+nodes()}}, \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l00979}{oomph\+::\+Refineable\+QTaylor\+Hood\+Element$<$ DIM $>$\+::identify\+\_\+load\+\_\+data()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l02376}{oomph\+::\+QTaylor\+Hood\+Element$<$ DIM $>$\+::p\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l02383}{oomph\+::\+QTaylor\+Hood\+Element$<$ DIM $>$\+::p\+\_\+nst()}}, \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l00668}{oomph\+::\+Refineable\+QTaylor\+Hood\+Element$<$ DIM $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs()}}, and \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l00655}{oomph\+::\+Refineable\+QTaylor\+Hood\+Element$<$ DIM $>$\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs()}}.
+Referenced by oomph\+::\+QTaylor\+Hood\+Element$<$ DIM $>$\+::fix\+\_\+pressure(), oomph\+::\+Refineable\+QTaylor\+Hood\+Element$<$ DIM $>$\+::further\+\_\+setup\+\_\+hanging\+\_\+nodes(), oomph\+::\+Refineable\+QTaylor\+Hood\+Element$<$ DIM $>$\+::identify\+\_\+load\+\_\+data(), oomph\+::\+QTaylor\+Hood\+Element$<$ DIM $>$\+::p\+\_\+local\+\_\+eqn(), oomph\+::\+QTaylor\+Hood\+Element$<$ DIM $>$\+::p\+\_\+nst(), oomph\+::\+Refineable\+QTaylor\+Hood\+Element$<$ DIM $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), and oomph\+::\+Refineable\+QTaylor\+Hood\+Element$<$ DIM $>$\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodElement_a533ae120f2cde3e5d589b76c08803f09}\label{classoomph_1_1QTaylorHoodElement_a533ae120f2cde3e5d589b76c08803f09}} 
 \index{oomph::QTaylorHoodElement$<$ DIM $>$@{oomph::QTaylorHoodElement$<$ DIM $>$}!p\_nst@{p\_nst}}
@@ -664,11 +665,11 @@ Implements \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_ae00a22f99df3630
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l02383}{2383}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2383 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, and \mbox{\hyperlink{navier__stokes__elements_8h_source_l02370}{oomph\+::\+QTaylor\+Hood\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst()}}.
+References oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), and oomph\+::\+QTaylor\+Hood\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodElement_a8aa6aca4730dda3d3e9993e951fa6196}\label{classoomph_1_1QTaylorHoodElement_a8aa6aca4730dda3d3e9993e951fa6196}} 
 \index{oomph::QTaylorHoodElement$<$ DIM $>$@{oomph::QTaylorHoodElement$<$ DIM $>$}!p\_nst@{p\_nst}}
@@ -687,11 +688,11 @@ Implements \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a0a39f638a61fd9a
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l02390}{2390}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2390 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l02370}{oomph\+::\+QTaylor\+Hood\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst()}}, and \mbox{\hyperlink{navier__stokes__elements_8h_source_l02316}{oomph\+::\+QTaylor\+Hood\+Element$<$ DIM $>$\+::\+Pconv}}.
+References oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), oomph\+::\+QTaylor\+Hood\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst(), and oomph\+::\+QTaylor\+Hood\+Element$<$ DIM $>$\+::\+Pconv.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodElement_a6e78788379caf880015846bbd1418bff}\label{classoomph_1_1QTaylorHoodElement_a6e78788379caf880015846bbd1418bff}} 
 \index{oomph::QTaylorHoodElement$<$ DIM $>$@{oomph::QTaylorHoodElement$<$ DIM $>$}!Pconv@{Pconv}}
@@ -701,7 +702,7 @@ References \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Elemen
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__elements_8cc_source_l02739}{2739}} of file \mbox{\hyperlink{navier__stokes__elements_8cc_source}{navier\+\_\+stokes\+\_\+elements.\+cc}}.
+Definition at line 2739 of file navier\+\_\+stokes\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodElement_ab910e70d2d0c6f281dc7f87bb6ea4993}\label{classoomph_1_1QTaylorHoodElement_ab910e70d2d0c6f281dc7f87bb6ea4993}} 
 \index{oomph::QTaylorHoodElement$<$ DIM $>$@{oomph::QTaylorHoodElement$<$ DIM $>$}!Pconv@{Pconv}}
@@ -711,7 +712,7 @@ Definition at line \mbox{\hyperlink{navier__stokes__elements_8cc_source_l02739}{
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__elements_8cc_source_l02750}{2750}} of file \mbox{\hyperlink{navier__stokes__elements_8cc_source}{navier\+\_\+stokes\+\_\+elements.\+cc}}.
+Definition at line 2750 of file navier\+\_\+stokes\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodElement_a791d591c9dbcc18f5843dd0df3a5210c}\label{classoomph_1_1QTaylorHoodElement_a791d591c9dbcc18f5843dd0df3a5210c}} 
 \index{oomph::QTaylorHoodElement$<$ DIM $>$@{oomph::QTaylorHoodElement$<$ DIM $>$}!pshape\_nst@{pshape\_nst}}
@@ -730,7 +731,7 @@ Implements \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a487030303b71da2
 
 
 
-Referenced by \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l00944}{oomph\+::\+Refineable\+QTaylor\+Hood\+Element$<$ DIM $>$\+::interpolating\+\_\+basis()}}.
+Referenced by oomph\+::\+Refineable\+QTaylor\+Hood\+Element$<$ DIM $>$\+::interpolating\+\_\+basis().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodElement_a568b8a5698a54547a384197a61604e00}\label{classoomph_1_1QTaylorHoodElement_a568b8a5698a54547a384197a61604e00}} 
 \index{oomph::QTaylorHoodElement$<$ DIM $>$@{oomph::QTaylorHoodElement$<$ DIM $>$}!pshape\_nst@{pshape\_nst}}
@@ -748,11 +749,11 @@ Implements \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a487030303b71da2
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l02723}{2723}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2723 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{shape_8h_source_l00608}{oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 2 $>$()}}.
+References i, s, and oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 2 $>$().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodElement_a0de2a02754316fe236c5f3d89410cf13}\label{classoomph_1_1QTaylorHoodElement_a0de2a02754316fe236c5f3d89410cf13}} 
 \index{oomph::QTaylorHoodElement$<$ DIM $>$@{oomph::QTaylorHoodElement$<$ DIM $>$}!pshape\_nst@{pshape\_nst}}
@@ -770,11 +771,11 @@ Implements \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a487030303b71da2
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l02816}{2816}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2816 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{shape_8h_source_l00608}{oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 2 $>$()}}.
+References i, s, and oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 2 $>$().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodElement_a63b1c65111efb6bea78245b897516c71}\label{classoomph_1_1QTaylorHoodElement_a63b1c65111efb6bea78245b897516c71}} 
 \index{oomph::QTaylorHoodElement$<$ DIM $>$@{oomph::QTaylorHoodElement$<$ DIM $>$}!pshape\_nst@{pshape\_nst}}
@@ -793,11 +794,11 @@ Implements \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a55f96a5c9f98547
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l02847}{2847}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2847 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References s.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodElement_a7993924abd5095ebaa776ee0e080e600}\label{classoomph_1_1QTaylorHoodElement_a7993924abd5095ebaa776ee0e080e600}} 
 \index{oomph::QTaylorHoodElement$<$ DIM $>$@{oomph::QTaylorHoodElement$<$ DIM $>$}!required\_nvalue@{required\_nvalue}}
@@ -820,11 +821,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodElement_a4b
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l02355}{2355}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2355 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{navier__stokes__elements_8h_source_l02311}{oomph\+::\+QTaylor\+Hood\+Element$<$ DIM $>$\+::\+Initial\+\_\+\+Nvalue}}.
+References oomph\+::\+QTaylor\+Hood\+Element$<$ DIM $>$\+::\+Initial\+\_\+\+Nvalue.
 
 
 
@@ -842,11 +843,11 @@ Static array of ints to hold number of variables at node.
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l02311}{2311}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2311 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{navier__stokes__elements_8h_source_l02355}{oomph\+::\+QTaylor\+Hood\+Element$<$ DIM $>$\+::required\+\_\+nvalue()}}.
+Referenced by oomph\+::\+QTaylor\+Hood\+Element$<$ DIM $>$\+::required\+\_\+nvalue().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodElement_a8756ec8b57d66a6c2e1feb8f7b264b03}\label{classoomph_1_1QTaylorHoodElement_a8756ec8b57d66a6c2e1feb8f7b264b03}} 
 \index{oomph::QTaylorHoodElement$<$ DIM $>$@{oomph::QTaylorHoodElement$<$ DIM $>$}!Pconv@{Pconv}}
@@ -861,11 +862,11 @@ Static array of ints to hold conversion from pressure node numbers to actual nod
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l02316}{2316}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2316 of file navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{navier__stokes__elements_8h_source_l02390}{oomph\+::\+QTaylor\+Hood\+Element$<$ DIM $>$\+::p\+\_\+nst()}}, and \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l00809}{oomph\+::\+Refineable\+QTaylor\+Hood\+Element$<$ DIM $>$\+::pressure\+\_\+node\+\_\+pt()}}.
+Referenced by oomph\+::\+QTaylor\+Hood\+Element$<$ DIM $>$\+::p\+\_\+nst(), and oomph\+::\+Refineable\+QTaylor\+Hood\+Element$<$ DIM $>$\+::pressure\+\_\+node\+\_\+pt().
 
 
 

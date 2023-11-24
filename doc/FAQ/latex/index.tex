@@ -42,7 +42,7 @@ Here are some frequently asked questions (with assorted frequently given answers
 \item \mbox{\hyperlink{index_link}{The oomph-\/lib distribution includes some third-\/party libraries. How do I get the code to link against optimised local versions of these libraries that are already installed on my machine?}} ~\newline
 ~\newline
 
-\item \mbox{\hyperlink{index_missing_this}{Missing \textquotesingle{}this-\/\texorpdfstring{$>$}{>}\textquotesingle{}}} ~\newline
+\item \mbox{\hyperlink{index_missing_this}{Missing \textquotesingle{}this-\/$>$\textquotesingle{}}} ~\newline
 ~\newline
 
 \end{DoxyItemize}
@@ -452,7 +452,7 @@ The most frequent problem arises in classes that are derived from a templated ba
 \DoxyCodeLine{\textcolor{comment}{//LIC// multi-\/physics finite-\/element library, available }}
 \DoxyCodeLine{\textcolor{comment}{//LIC// at http://www.oomph-\/lib.org.}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// }}
-\DoxyCodeLine{\textcolor{comment}{//LIC// Copyright (C) 2006-\/2022 Matthias Heil and Andrew Hazel}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// Copyright (C) 2006-\/2023 Matthias Heil and Andrew Hazel}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// }}
 \DoxyCodeLine{\textcolor{comment}{//LIC// This library is free software; you can redistribute it and/or}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// modify it under the terms of the GNU Lesser General Public}}
@@ -594,7 +594,7 @@ Suggestions\+:
 \item Run {\ttfamily Problem\+::self\+\_\+test()} before solving the problem. This function performs a large number of sanity checks and reports any inconsistencies in the data structure. ~\newline
 ~\newline
 
-\item Recompile the relevant libraries with the PARANOID and RANGE\+\_\+\+CHECKING flags set. Segmentation faults are often caused by out-\/of-\/bounds access to STL containers. Since \texorpdfstring{$>$}{>} 95\% (?) of the containers used in {\ttfamily oomph-\/lib} are {\ttfamily Vectors} ({\ttfamily oomph-\/lib\textquotesingle{}s} wrapper to the STL vector class, with optional range checking) they can easily be detected. Make sure to re-\/compile again with RANGE\+\_\+\+CHECKING switched off before you start any production runs -- the run-\/time overheads incurred by range-\/checking are significant! ~\newline
+\item Recompile the relevant libraries with the PARANOID and RANGE\+\_\+\+CHECKING flags set. Segmentation faults are often caused by out-\/of-\/bounds access to STL containers. Since $>$ 95\% (?) of the containers used in {\ttfamily oomph-\/lib} are {\ttfamily Vectors} ({\ttfamily oomph-\/lib\textquotesingle{}s} wrapper to the STL vector class, with optional range checking) they can easily be detected. Make sure to re-\/compile again with RANGE\+\_\+\+CHECKING switched off before you start any production runs -- the run-\/time overheads incurred by range-\/checking are significant! ~\newline
 ~\newline
 
 \item Recompile the relevant libraries and your driver code with the debugging flag (\char`\"{}-\/g\char`\"{} for the gnu compiler suite) switched on and all optimisation disabled. Re-\/run the code in a debugger ({\ttfamily gdb} or its GUI-\/based equivalent \href{http://www.gnu.org/software/ddd/}{\texttt{ ddd}}) to (try to!) find out where the segmentation fault occurred. \mbox{[}{\bfseries{Careful\+:}} If the segmentation fault is caused by a pointer problem, this naive inspection can be quite misleading -- tell-\/tale signs are that the traceback displays a non-\/sensical call stack, e.\+g. a function being called \char`\"{}out of nowhere\char`\"{}; variables that have just been given values not existing; etc.\mbox{]} ~\newline
@@ -623,17 +623,21 @@ Suggestions\+:
 
 \begin{DoxyItemize}
 \item a \char`\"{}good\char`\"{} initial guess for the solution has been assigned,
+\end{DoxyItemize}
 \end{DoxyItemize}~\newline
  or ~\newline
 
 \begin{DoxyItemize}
 \item the problem is linear.
-\end{DoxyItemize}~\newline
+\end{DoxyItemize}
+
+~\newline
  If the Newton solver fails to converge for a nonlinear problem, try to identify a related linear problem and use continuation to generate a sequence of good initial guesses. For instance, to solve the Navier-\/\+Stokes equations at a Reynolds number of 500, say, start by solving the problem for zero Reynolds number (in which case the problem becomes linear so that the Newton method converges in one iteration); increase the Reynolds number by 50, say, and re-\/solve. Repeat this procedure until the desired value of the Reynolds number is reached. ~\newline
 ~\newline
  {\bfseries{Note\+:}} {\ttfamily oomph-\/lib} also provides automatic continuation methods, based on Keller\textquotesingle{}s arclength continuation, but at the moment, no tutorials exist for these. ~\newline
 ~\newline
 
+\begin{DoxyItemize}
 \item If you have tried the above and the Newton method fails to converge ~\newline
  even for a linear version of your problem, the most likely reasons are that ~\newline
 ~\newline
@@ -679,7 +683,7 @@ We include {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily generic} and {\
 \DoxyCodeLine{\textcolor{comment}{//LIC// multi-\/physics finite-\/element library, available }}
 \DoxyCodeLine{\textcolor{comment}{//LIC// at http://www.oomph-\/lib.org.}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// }}
-\DoxyCodeLine{\textcolor{comment}{//LIC// Copyright (C) 2006-\/2022 Matthias Heil and Andrew Hazel}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// Copyright (C) 2006-\/2023 Matthias Heil and Andrew Hazel}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// }}
 \DoxyCodeLine{\textcolor{comment}{//LIC// This library is free software; you can redistribute it and/or}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// modify it under the terms of the GNU Lesser General Public}}
@@ -850,13 +854,15 @@ Here are some possible \char`\"{}routemaps\char`\"{} around the library\+:
 \item Classes (private, protected and public members; inheritance and multiple inheritance; virtual and pure virtual functions; base classes and derived classes; static and dynamic casts).
 \item Templates and template instantiations.
 \item The standard template library (STL).
+\end{DoxyItemize}
+\end{DoxyItemize}
 \end{DoxyItemize}~\newline
 ~\newline
 
+\begin{DoxyItemize}
 \item Continue with the steps suggested above. ~\newline
 ~\newline
 
-\end{DoxyItemize}
 \end{DoxyItemize}
 
 ~\newline

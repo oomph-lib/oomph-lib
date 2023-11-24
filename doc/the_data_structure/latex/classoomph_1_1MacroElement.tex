@@ -18,7 +18,7 @@ Inheritance diagram for oomph\+::Macro\+Element\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1MacroElement_ad94cc0ffda0d77e1778110da4aa651eb}{Macro\+Element}} (\mbox{\hyperlink{classoomph_1_1Domain}{Domain}} $\ast$\mbox{\hyperlink{classoomph_1_1MacroElement_ab882e21d5add76995d1e896517030e45}{domain\+\_\+pt}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1MacroElement_abeb744cd6c9bd213a1375fc8d924d445}{macro\+\_\+element\+\_\+number}})
+\mbox{\hyperlink{classoomph_1_1MacroElement_ad94cc0ffda0d77e1778110da4aa651eb}{Macro\+Element}} (\mbox{\hyperlink{classoomph_1_1Domain}{Domain}} $\ast$\mbox{\hyperlink{classoomph_1_1MacroElement_ab086ff8cbdb656eff8ab5eafd67bca07}{domain\+\_\+pt}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1MacroElement_acc146caf3839d234c62cf9a4de2fbe91}{macro\+\_\+element\+\_\+number}})
 \begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to \mbox{\hyperlink{classoomph_1_1Domain}{Domain}} and the number of the \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} within that \mbox{\hyperlink{classoomph_1_1Domain}{Domain}}. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1MacroElement_affaa1d2975bac834846195c710d86760}{Macro\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Default constructor (empty and broken) \end{DoxyCompactList}\item 
@@ -31,11 +31,11 @@ virtual \mbox{\hyperlink{classoomph_1_1MacroElement_abdc6cb9a63b44d4da0141dde40a
 void \mbox{\hyperlink{classoomph_1_1MacroElement_a92030ed18caf4539c9e44e1062457edc}{output}} (std\+::ostream \&outfile, const int \&nplot)
 \begin{DoxyCompactList}\small\item\em Plot\+: x,y (or x,y,z) at current time in tecplot format. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1MacroElement_a5d3646716d60aedf456889768a3c2dbe}{output}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, std\+::ostream \&outfile, const unsigned \&nplot)=0
-\begin{DoxyCompactList}\small\item\em Plot\+: x,y (or x,y,z) in tecplot format at time level t (t=0\+: current; t\texorpdfstring{$>$}{>}0\+: previous) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Plot\+: x,y (or x,y,z) in tecplot format at time level t (t=0\+: current; t$>$0\+: previous) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1MacroElement_a85e7842ad949bb4062a9ff302fa452e5}{macro\+\_\+map}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&r)
 \begin{DoxyCompactList}\small\item\em The mapping from local to global coordinates at the current time \+: r(s) \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1MacroElement_a819b095e97c92e634d6216ddce00c8a2}{macro\+\_\+map}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&r)=0
-\begin{DoxyCompactList}\small\item\em The time-\/dependent mapping from local to global coordinates\+: r(t,s). t is the discrete timelevel\+: t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous timestep. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em The time-\/dependent mapping from local to global coordinates\+: r(t,s). t is the discrete timelevel\+: t=0\+: current time; t$>$0\+: previous timestep. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1MacroElement_a6dd7b36601982a9ebde9d614ce62c93d}{macro\+\_\+map}} (const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&r)
 \begin{DoxyCompactList}\small\item\em Get global position r(s) at continuous time value, t. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1MacroElement_a748b561313e952c9767d278d0e99be4e}{output\+\_\+macro\+\_\+element\+\_\+boundaries}} (std\+::ostream \&outfile, const unsigned \&nplot)=0
@@ -48,9 +48,9 @@ void \mbox{\hyperlink{classoomph_1_1MacroElement_a5640171931fffc8add41437596d3df
 \begin{DoxyCompactList}\small\item\em Assembles the jacobian of the mapping from the macro coordinates to the global coordinates. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1MacroElement_ae3c34b538e970d152a7f107d7ae418c8}{assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian2}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian2)
 \begin{DoxyCompactList}\small\item\em Assembles the second derivative jacobian of the mapping from the macro coordinates to the global coordinates. \end{DoxyCompactList}\item 
-unsigned \& \mbox{\hyperlink{classoomph_1_1MacroElement_abeb744cd6c9bd213a1375fc8d924d445}{macro\+\_\+element\+\_\+number}} ()
+unsigned \& \mbox{\hyperlink{classoomph_1_1MacroElement_acc146caf3839d234c62cf9a4de2fbe91}{macro\+\_\+element\+\_\+number}} ()
 \begin{DoxyCompactList}\small\item\em Access function to the Macro\+\_\+element\+\_\+number. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Domain}{Domain}} $\ast$\& \mbox{\hyperlink{classoomph_1_1MacroElement_ab882e21d5add76995d1e896517030e45}{domain\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1Domain}{Domain}} $\ast$\& \mbox{\hyperlink{classoomph_1_1MacroElement_ab086ff8cbdb656eff8ab5eafd67bca07}{domain\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function to the Domain\+\_\+pt. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -73,7 +73,7 @@ A macro element provides a parametrisation of a sub-\/domain by providing a mapp
 \end{DoxyCode}
 
 
-The time-\/dependent version of the macro map returns the mapping from local to global coordinates\+: $ {\bf r} (t,{\bf S}) $ where t is the discrete timelevel\+: t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous timestep.
+The time-\/dependent version of the macro map returns the mapping from local to global coordinates\+: $ {\bf r} (t,{\bf S}) $ where t is the discrete timelevel\+: t=0\+: current time; t$>$0\+: previous timestep.
 
 The \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} s establish the current (and previous) domain shape via member function pointers to the \mbox{\hyperlink{classoomph_1_1Domain}{Domain}} \textquotesingle{}s 
 \begin{DoxyCode}{0}
@@ -82,7 +82,7 @@ The \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} s establish th
 \end{DoxyCode}
  member function. 
 
-Definition at line \mbox{\hyperlink{macro__element_8h_source_l00072}{72}} of file \mbox{\hyperlink{macro__element_8h_source}{macro\+\_\+element.\+h}}.
+Definition at line 72 of file macro\+\_\+element.\+h.
 
 
 
@@ -99,11 +99,11 @@ Constructor\+: Pass pointer to \mbox{\hyperlink{classoomph_1_1Domain}{Domain}} a
 
 
 
-Definition at line \mbox{\hyperlink{macro__element_8h_source_l00077}{77}} of file \mbox{\hyperlink{macro__element_8h_source}{macro\+\_\+element.\+h}}.
+Definition at line 77 of file macro\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{oomph__utilities_8cc_source_l01191}{oomph\+::\+Leak\+Check\+Names\+::\+Macro\+Element\+\_\+build}}.
+References oomph\+::\+Leak\+Check\+Names\+::\+Macro\+Element\+\_\+build.
 
 \mbox{\Hypertarget{classoomph_1_1MacroElement_affaa1d2975bac834846195c710d86760}\label{classoomph_1_1MacroElement_affaa1d2975bac834846195c710d86760}} 
 \index{oomph::MacroElement@{oomph::MacroElement}!MacroElement@{MacroElement}}
@@ -117,7 +117,7 @@ Default constructor (empty and broken)
 
 
 
-Definition at line \mbox{\hyperlink{macro__element_8h_source_l00086}{86}} of file \mbox{\hyperlink{macro__element_8h_source}{macro\+\_\+element.\+h}}.
+Definition at line 86 of file macro\+\_\+element.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1MacroElement_ae00100790b8c6c669c4ee1c40578b7cc}\label{classoomph_1_1MacroElement_ae00100790b8c6c669c4ee1c40578b7cc}} 
 \index{oomph::MacroElement@{oomph::MacroElement}!MacroElement@{MacroElement}}
@@ -141,11 +141,11 @@ Empty destructor.
 
 
 
-Definition at line \mbox{\hyperlink{macro__element_8h_source_l00101}{101}} of file \mbox{\hyperlink{macro__element_8h_source}{macro\+\_\+element.\+h}}.
+Definition at line 101 of file macro\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{oomph__utilities_8cc_source_l01191}{oomph\+::\+Leak\+Check\+Names\+::\+Macro\+Element\+\_\+build}}.
+References oomph\+::\+Leak\+Check\+Names\+::\+Macro\+Element\+\_\+build.
 
 
 
@@ -166,11 +166,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QMacroElement_3_012_01_4_a74aaa1
 
 
 
-Definition at line \mbox{\hyperlink{macro__element_8h_source_l00170}{170}} of file \mbox{\hyperlink{macro__element_8h_source}{macro\+\_\+element.\+h}}.
+Definition at line 170 of file macro\+\_\+element.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{macro__element_8h_source_l00205}{assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian()}}.
+Referenced by assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian().
 
 \mbox{\Hypertarget{classoomph_1_1MacroElement_a5640171931fffc8add41437596d3df20}\label{classoomph_1_1MacroElement_a5640171931fffc8add41437596d3df20}} 
 \index{oomph::MacroElement@{oomph::MacroElement}!assemble\_macro\_to\_eulerian\_jacobian@{assemble\_macro\_to\_eulerian\_jacobian}}
@@ -184,11 +184,11 @@ Assembles the jacobian of the mapping from the macro coordinates to the global c
 
 
 
-Definition at line \mbox{\hyperlink{macro__element_8h_source_l00205}{205}} of file \mbox{\hyperlink{macro__element_8h_source}{macro\+\_\+element.\+h}}.
+Definition at line 205 of file macro\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{macro__element_8h_source_l00170}{assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+References assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian(), s, and t.
 
 \mbox{\Hypertarget{classoomph_1_1MacroElement_a3c898b6deef9f8bfcc957313030a3e68}\label{classoomph_1_1MacroElement_a3c898b6deef9f8bfcc957313030a3e68}} 
 \index{oomph::MacroElement@{oomph::MacroElement}!assemble\_macro\_to\_eulerian\_jacobian2@{assemble\_macro\_to\_eulerian\_jacobian2}}
@@ -206,11 +206,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QMacroElement_3_012_01_4_aef2666
 
 
 
-Definition at line \mbox{\hyperlink{macro__element_8h_source_l00186}{186}} of file \mbox{\hyperlink{macro__element_8h_source}{macro\+\_\+element.\+h}}.
+Definition at line 186 of file macro\+\_\+element.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{macro__element_8h_source_l00215}{assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian2()}}.
+Referenced by assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian2().
 
 \mbox{\Hypertarget{classoomph_1_1MacroElement_ae3c34b538e970d152a7f107d7ae418c8}\label{classoomph_1_1MacroElement_ae3c34b538e970d152a7f107d7ae418c8}} 
 \index{oomph::MacroElement@{oomph::MacroElement}!assemble\_macro\_to\_eulerian\_jacobian2@{assemble\_macro\_to\_eulerian\_jacobian2}}
@@ -224,17 +224,17 @@ Assembles the second derivative jacobian of the mapping from the macro coordinat
 
 
 
-Definition at line \mbox{\hyperlink{macro__element_8h_source_l00215}{215}} of file \mbox{\hyperlink{macro__element_8h_source}{macro\+\_\+element.\+h}}.
+Definition at line 215 of file macro\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{macro__element_8h_source_l00186}{assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian2()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+References assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian2(), s, and t.
 
-\mbox{\Hypertarget{classoomph_1_1MacroElement_ab882e21d5add76995d1e896517030e45}\label{classoomph_1_1MacroElement_ab882e21d5add76995d1e896517030e45}} 
+\mbox{\Hypertarget{classoomph_1_1MacroElement_ab086ff8cbdb656eff8ab5eafd67bca07}\label{classoomph_1_1MacroElement_ab086ff8cbdb656eff8ab5eafd67bca07}} 
 \index{oomph::MacroElement@{oomph::MacroElement}!domain\_pt@{domain\_pt}}
 \index{domain\_pt@{domain\_pt}!oomph::MacroElement@{oomph::MacroElement}}
 \doxysubsubsection{\texorpdfstring{domain\_pt()}{domain\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Domain}{Domain}} $\ast$\& oomph\+::\+Macro\+Element\+::domain\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Domain}{Domain}}$\ast$\& oomph\+::\+Macro\+Element\+::domain\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -242,21 +242,21 @@ Access function to the Domain\+\_\+pt.
 
 
 
-Definition at line \mbox{\hyperlink{macro__element_8h_source_l00229}{229}} of file \mbox{\hyperlink{macro__element_8h_source}{macro\+\_\+element.\+h}}.
+Definition at line 229 of file macro\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{macro__element_8h_source_l00236}{Domain\+\_\+pt}}.
+References Domain\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00099}{oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}.
+Referenced by oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh().
 
-\mbox{\Hypertarget{classoomph_1_1MacroElement_abeb744cd6c9bd213a1375fc8d924d445}\label{classoomph_1_1MacroElement_abeb744cd6c9bd213a1375fc8d924d445}} 
+\mbox{\Hypertarget{classoomph_1_1MacroElement_acc146caf3839d234c62cf9a4de2fbe91}\label{classoomph_1_1MacroElement_acc146caf3839d234c62cf9a4de2fbe91}} 
 \index{oomph::MacroElement@{oomph::MacroElement}!macro\_element\_number@{macro\_element\_number}}
 \index{macro\_element\_number@{macro\_element\_number}!oomph::MacroElement@{oomph::MacroElement}}
 \doxysubsubsection{\texorpdfstring{macro\_element\_number()}{macro\_element\_number()}}
-{\footnotesize\ttfamily unsigned \& oomph\+::\+Macro\+Element\+::macro\+\_\+element\+\_\+number (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily unsigned\& oomph\+::\+Macro\+Element\+::macro\+\_\+element\+\_\+number (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -264,15 +264,15 @@ Access function to the Macro\+\_\+element\+\_\+number.
 
 
 
-Definition at line \mbox{\hyperlink{macro__element_8h_source_l00223}{223}} of file \mbox{\hyperlink{macro__element_8h_source}{macro\+\_\+element.\+h}}.
+Definition at line 223 of file macro\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{macro__element_8h_source_l00239}{Macro\+\_\+element\+\_\+number}}.
+References Macro\+\_\+element\+\_\+number.
 
 
 
-Referenced by \mbox{\hyperlink{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00099}{oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}, \mbox{\hyperlink{missing__masters_8cc_source_l00658}{oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01010}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper()}}, and \mbox{\hyperlink{multi__domain_8cc_source_l01797}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates()}}.
+Referenced by oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), and oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates().
 
 \mbox{\Hypertarget{classoomph_1_1MacroElement_a6dd7b36601982a9ebde9d614ce62c93d}\label{classoomph_1_1MacroElement_a6dd7b36601982a9ebde9d614ce62c93d}} 
 \index{oomph::MacroElement@{oomph::MacroElement}!macro\_map@{macro\_map}}
@@ -290,7 +290,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QMacroElement_3_012_01_4_a204600
 
 
 
-Definition at line \mbox{\hyperlink{macro__element_8h_source_l00143}{143}} of file \mbox{\hyperlink{macro__element_8h_source}{macro\+\_\+element.\+h}}.
+Definition at line 143 of file macro\+\_\+element.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1MacroElement_a819b095e97c92e634d6216ddce00c8a2}\label{classoomph_1_1MacroElement_a819b095e97c92e634d6216ddce00c8a2}} 
 \index{oomph::MacroElement@{oomph::MacroElement}!macro\_map@{macro\_map}}
@@ -300,11 +300,11 @@ Definition at line \mbox{\hyperlink{macro__element_8h_source_l00143}{143}} of fi
 
 
 
-The time-\/dependent mapping from local to global coordinates\+: r(t,s). t is the discrete timelevel\+: t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous timestep. 
+The time-\/dependent mapping from local to global coordinates\+: r(t,s). t is the discrete timelevel\+: t=0\+: current time; t$>$0\+: previous timestep. 
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1QExtrudedMacroElement_3_013_01_4_a31df4af80a110bfb00b468f5a9b3cd27}{oomph\+::\+QExtruded\+Macro\+Element$<$ 3 $>$}}, \mbox{\hyperlink{classoomph_1_1QMacroElement_3_012_01_4_af78c96d14b561af4ee3b1bf6c5331766}{oomph\+::\+QMacro\+Element$<$ 2 $>$}}, and \mbox{\hyperlink{classoomph_1_1QMacroElement_3_013_01_4_ae99513e135616e45927307ccfa0f8306}{oomph\+::\+QMacro\+Element$<$ 3 $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1QMacroElement_3_013_01_4_ae99513e135616e45927307ccfa0f8306}{oomph\+::\+QMacro\+Element$<$ 3 $>$}}, \mbox{\hyperlink{classoomph_1_1QMacroElement_3_012_01_4_af78c96d14b561af4ee3b1bf6c5331766}{oomph\+::\+QMacro\+Element$<$ 2 $>$}}, and \mbox{\hyperlink{classoomph_1_1QExtrudedMacroElement_3_013_01_4_a31df4af80a110bfb00b468f5a9b3cd27}{oomph\+::\+QExtruded\+Macro\+Element$<$ 3 $>$}}.
 
 \mbox{\Hypertarget{classoomph_1_1MacroElement_a85e7842ad949bb4062a9ff302fa452e5}\label{classoomph_1_1MacroElement_a85e7842ad949bb4062a9ff302fa452e5}} 
 \index{oomph::MacroElement@{oomph::MacroElement}!macro\_map@{macro\_map}}
@@ -318,15 +318,15 @@ The mapping from local to global coordinates at the current time \+: r(s)
 
 
 
-Definition at line \mbox{\hyperlink{macro__element_8h_source_l00126}{126}} of file \mbox{\hyperlink{macro__element_8h_source}{macro\+\_\+element.\+h}}.
+Definition at line 126 of file macro\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{macro__element_8h_source_l00126}{macro\+\_\+map()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+References s, and t.
 
 
 
-Referenced by \mbox{\hyperlink{eighth__sphere__mesh_8template_8cc_source_l00039}{oomph\+::\+Eighth\+Sphere\+Mesh$<$ ELEMENT $>$\+::\+Eighth\+Sphere\+Mesh()}}, \mbox{\hyperlink{full__circle__mesh_8template_8cc_source_l00040}{oomph\+::\+Full\+Circle\+Mesh$<$ ELEMENT $>$\+::\+Full\+Circle\+Mesh()}}, \mbox{\hyperlink{Qelements_8h_source_l00379}{oomph\+::\+QSolid\+Element\+Base\+::get\+\_\+x\+\_\+and\+\_\+xi()}}, \mbox{\hyperlink{Qelements_8h_source_l00249}{oomph\+::\+QElement\+Base\+::get\+\_\+x\+\_\+from\+\_\+macro\+\_\+element()}}, \mbox{\hyperlink{extruded__domain_8cc_source_l00148}{oomph\+::\+Extruded\+Domain\+::macro\+\_\+element\+\_\+boundary()}}, \mbox{\hyperlink{macro__element_8h_source_l00126}{macro\+\_\+map()}}, \mbox{\hyperlink{extruded__macro__element_8h_source_l00179}{oomph\+::\+QExtruded\+Macro\+Element$<$ 3 $>$\+::output()}}, \mbox{\hyperlink{macro__element_8h_source_l00306}{oomph\+::\+QMacro\+Element$<$ 2 $>$\+::output()}}, \mbox{\hyperlink{macro__element_8h_source_l00400}{oomph\+::\+QMacro\+Element$<$ 3 $>$\+::output()}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l00044}{oomph\+::\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Quarter\+Circle\+Sector\+Mesh()}}, \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l00044}{oomph\+::\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Quarter\+Tube\+Mesh()}}, \mbox{\hyperlink{rectangle__with__hole__mesh_8template_8h_source_l00056}{oomph\+::\+Rectangle\+With\+Hole\+Mesh$<$ ELEMENT $>$\+::\+Rectangle\+With\+Hole\+Mesh()}}, and \mbox{\hyperlink{tube__mesh_8template_8cc_source_l00040}{oomph\+::\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Tube\+Mesh()}}.
+Referenced by oomph\+::\+Eighth\+Sphere\+Mesh$<$ ELEMENT $>$\+::\+Eighth\+Sphere\+Mesh(), oomph\+::\+Full\+Circle\+Mesh$<$ ELEMENT $>$\+::\+Full\+Circle\+Mesh(), oomph\+::\+QSolid\+Element\+Base\+::get\+\_\+x\+\_\+and\+\_\+xi(), oomph\+::\+QElement\+Base\+::get\+\_\+x\+\_\+from\+\_\+macro\+\_\+element(), oomph\+::\+Extruded\+Domain\+::macro\+\_\+element\+\_\+boundary(), oomph\+::\+QExtruded\+Macro\+Element$<$ 3 $>$\+::output(), oomph\+::\+QMacro\+Element$<$ 2 $>$\+::output(), oomph\+::\+QMacro\+Element$<$ 3 $>$\+::output(), oomph\+::\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Quarter\+Circle\+Sector\+Mesh(), oomph\+::\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Quarter\+Tube\+Mesh(), oomph\+::\+Rectangle\+With\+Hole\+Mesh$<$ ELEMENT $>$\+::\+Rectangle\+With\+Hole\+Mesh(), and oomph\+::\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Tube\+Mesh().
 
 \mbox{\Hypertarget{classoomph_1_1MacroElement_a77638b2a2f06a96f467b4e42c894d738}\label{classoomph_1_1MacroElement_a77638b2a2f06a96f467b4e42c894d738}} 
 \index{oomph::MacroElement@{oomph::MacroElement}!operator=@{operator=}}
@@ -346,11 +346,11 @@ Broken assignment operator.
 
 
 
-Plot\+: x,y (or x,y,z) in tecplot format at time level t (t=0\+: current; t\texorpdfstring{$>$}{>}0\+: previous) 
+Plot\+: x,y (or x,y,z) in tecplot format at time level t (t=0\+: current; t$>$0\+: previous) 
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1QExtrudedMacroElement_3_013_01_4_aa583fff773011f570849856b2060918d}{oomph\+::\+QExtruded\+Macro\+Element$<$ 3 $>$}}, \mbox{\hyperlink{classoomph_1_1QMacroElement_3_012_01_4_a1fe56200453a2200e5103d3fb4793e38}{oomph\+::\+QMacro\+Element$<$ 2 $>$}}, and \mbox{\hyperlink{classoomph_1_1QMacroElement_3_013_01_4_a5c1916d58b2d3142b5fa85f209e16b4c}{oomph\+::\+QMacro\+Element$<$ 3 $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1QMacroElement_3_013_01_4_a5c1916d58b2d3142b5fa85f209e16b4c}{oomph\+::\+QMacro\+Element$<$ 3 $>$}}, \mbox{\hyperlink{classoomph_1_1QMacroElement_3_012_01_4_a1fe56200453a2200e5103d3fb4793e38}{oomph\+::\+QMacro\+Element$<$ 2 $>$}}, and \mbox{\hyperlink{classoomph_1_1QExtrudedMacroElement_3_013_01_4_aa583fff773011f570849856b2060918d}{oomph\+::\+QExtruded\+Macro\+Element$<$ 3 $>$}}.
 
 \mbox{\Hypertarget{classoomph_1_1MacroElement_a92030ed18caf4539c9e44e1062457edc}\label{classoomph_1_1MacroElement_a92030ed18caf4539c9e44e1062457edc}} 
 \index{oomph::MacroElement@{oomph::MacroElement}!output@{output}}
@@ -364,15 +364,11 @@ Plot\+: x,y (or x,y,z) at current time in tecplot format.
 
 
 
-Definition at line \mbox{\hyperlink{macro__element_8h_source_l00111}{111}} of file \mbox{\hyperlink{macro__element_8h_source}{macro\+\_\+element.\+h}}.
+Definition at line 111 of file macro\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{macro__element_8h_source_l00111}{output()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
-
-
-
-Referenced by \mbox{\hyperlink{macro__element_8h_source_l00111}{output()}}.
+References t.
 
 \mbox{\Hypertarget{classoomph_1_1MacroElement_a748b561313e952c9767d278d0e99be4e}\label{classoomph_1_1MacroElement_a748b561313e952c9767d278d0e99be4e}} 
 \index{oomph::MacroElement@{oomph::MacroElement}!output\_macro\_element\_boundaries@{output\_macro\_element\_boundaries}}
@@ -386,11 +382,11 @@ Output all macro element boundaries as tecplot zones.
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1QExtrudedMacroElement_3_013_01_4_abca751a9fce97794df8787340b698009}{oomph\+::\+QExtruded\+Macro\+Element$<$ 3 $>$}}, \mbox{\hyperlink{classoomph_1_1QMacroElement_3_012_01_4_ae717a0b0098f830a1b1a5019ce5431a8}{oomph\+::\+QMacro\+Element$<$ 2 $>$}}, and \mbox{\hyperlink{classoomph_1_1QMacroElement_3_013_01_4_aeb5d117bf346d710bd4f8fc4f04dbfd5}{oomph\+::\+QMacro\+Element$<$ 3 $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1QMacroElement_3_013_01_4_aeb5d117bf346d710bd4f8fc4f04dbfd5}{oomph\+::\+QMacro\+Element$<$ 3 $>$}}, \mbox{\hyperlink{classoomph_1_1QMacroElement_3_012_01_4_ae717a0b0098f830a1b1a5019ce5431a8}{oomph\+::\+QMacro\+Element$<$ 2 $>$}}, and \mbox{\hyperlink{classoomph_1_1QExtrudedMacroElement_3_013_01_4_abca751a9fce97794df8787340b698009}{oomph\+::\+QExtruded\+Macro\+Element$<$ 3 $>$}}.
 
 
 
-Referenced by \mbox{\hyperlink{domain_8h_source_l00197}{oomph\+::\+Domain\+::output\+\_\+macro\+\_\+element\+\_\+boundaries()}}.
+Referenced by oomph\+::\+Domain\+::output\+\_\+macro\+\_\+element\+\_\+boundaries().
 
 
 
@@ -407,11 +403,11 @@ Pointer to domain.
 
 
 
-Definition at line \mbox{\hyperlink{macro__element_8h_source_l00236}{236}} of file \mbox{\hyperlink{macro__element_8h_source}{macro\+\_\+element.\+h}}.
+Definition at line 236 of file macro\+\_\+element.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{macro__element_8cc_source_l00238}{oomph\+::\+QMacro\+Element$<$ 2 $>$\+::assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian()}}, \mbox{\hyperlink{macro__element_8cc_source_l00334}{oomph\+::\+QMacro\+Element$<$ 2 $>$\+::assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian2()}}, \mbox{\hyperlink{macro__element_8h_source_l00229}{domain\+\_\+pt()}}, \mbox{\hyperlink{macro__element_8cc_source_l00035}{oomph\+::\+QMacro\+Element$<$ 2 $>$\+::macro\+\_\+map()}}, \mbox{\hyperlink{macro__element_8cc_source_l00440}{oomph\+::\+QMacro\+Element$<$ 3 $>$\+::macro\+\_\+map()}}, \mbox{\hyperlink{macro__element_8cc_source_l00211}{oomph\+::\+QMacro\+Element$<$ 2 $>$\+::output\+\_\+macro\+\_\+element\+\_\+boundaries()}}, and \mbox{\hyperlink{macro__element_8cc_source_l00659}{oomph\+::\+QMacro\+Element$<$ 3 $>$\+::output\+\_\+macro\+\_\+element\+\_\+boundaries()}}.
+Referenced by oomph\+::\+QMacro\+Element$<$ 2 $>$\+::assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian(), oomph\+::\+QMacro\+Element$<$ 2 $>$\+::assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian2(), domain\+\_\+pt(), oomph\+::\+QMacro\+Element$<$ 2 $>$\+::macro\+\_\+map(), oomph\+::\+QMacro\+Element$<$ 3 $>$\+::macro\+\_\+map(), oomph\+::\+QMacro\+Element$<$ 2 $>$\+::output\+\_\+macro\+\_\+element\+\_\+boundaries(), and oomph\+::\+QMacro\+Element$<$ 3 $>$\+::output\+\_\+macro\+\_\+element\+\_\+boundaries().
 
 \mbox{\Hypertarget{classoomph_1_1MacroElement_a96e31a1ba7eac203a3bacb3403796ec1}\label{classoomph_1_1MacroElement_a96e31a1ba7eac203a3bacb3403796ec1}} 
 \index{oomph::MacroElement@{oomph::MacroElement}!Macro\_element\_number@{Macro\_element\_number}}
@@ -425,11 +421,11 @@ What is the number of the current macro element within its domain.
 
 
 
-Definition at line \mbox{\hyperlink{macro__element_8h_source_l00239}{239}} of file \mbox{\hyperlink{macro__element_8h_source}{macro\+\_\+element.\+h}}.
+Definition at line 239 of file macro\+\_\+element.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{macro__element_8cc_source_l00238}{oomph\+::\+QMacro\+Element$<$ 2 $>$\+::assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian()}}, \mbox{\hyperlink{macro__element_8cc_source_l00334}{oomph\+::\+QMacro\+Element$<$ 2 $>$\+::assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian2()}}, \mbox{\hyperlink{macro__element_8h_source_l00223}{macro\+\_\+element\+\_\+number()}}, \mbox{\hyperlink{macro__element_8cc_source_l00035}{oomph\+::\+QMacro\+Element$<$ 2 $>$\+::macro\+\_\+map()}}, \mbox{\hyperlink{extruded__macro__element_8cc_source_l00035}{oomph\+::\+QExtruded\+Macro\+Element$<$ 3 $>$\+::macro\+\_\+map()}}, \mbox{\hyperlink{macro__element_8cc_source_l00440}{oomph\+::\+QMacro\+Element$<$ 3 $>$\+::macro\+\_\+map()}}, \mbox{\hyperlink{extruded__macro__element_8cc_source_l00316}{oomph\+::\+QExtruded\+Macro\+Element$<$ 3 $>$\+::output\+\_\+macro\+\_\+element\+\_\+boundaries()}}, \mbox{\hyperlink{macro__element_8cc_source_l00211}{oomph\+::\+QMacro\+Element$<$ 2 $>$\+::output\+\_\+macro\+\_\+element\+\_\+boundaries()}}, and \mbox{\hyperlink{macro__element_8cc_source_l00659}{oomph\+::\+QMacro\+Element$<$ 3 $>$\+::output\+\_\+macro\+\_\+element\+\_\+boundaries()}}.
+Referenced by oomph\+::\+QMacro\+Element$<$ 2 $>$\+::assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian(), oomph\+::\+QMacro\+Element$<$ 2 $>$\+::assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian2(), macro\+\_\+element\+\_\+number(), oomph\+::\+QMacro\+Element$<$ 2 $>$\+::macro\+\_\+map(), oomph\+::\+QExtruded\+Macro\+Element$<$ 3 $>$\+::macro\+\_\+map(), oomph\+::\+QMacro\+Element$<$ 3 $>$\+::macro\+\_\+map(), oomph\+::\+QExtruded\+Macro\+Element$<$ 3 $>$\+::output\+\_\+macro\+\_\+element\+\_\+boundaries(), oomph\+::\+QMacro\+Element$<$ 2 $>$\+::output\+\_\+macro\+\_\+element\+\_\+boundaries(), and oomph\+::\+QMacro\+Element$<$ 3 $>$\+::output\+\_\+macro\+\_\+element\+\_\+boundaries().
 
 
 

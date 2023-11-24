@@ -24,9 +24,9 @@ virtual \mbox{\hyperlink{classoomph_1_1HijackedElementBase_af3393a98fc80a2f77610
 \begin{DoxyCompactList}\small\item\em Destructor, destroy the storage for the equation numbers. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HijackedElementBase_a0a373a87d121205b9cc0fd54ea41f4ad}{unhijack\+\_\+all\+\_\+data}} ()
 \begin{DoxyCompactList}\small\item\em Reset the hijacked data pt, so that none of the equations in the element are hijacked. \end{DoxyCompactList}\item 
-const double \& \mbox{\hyperlink{classoomph_1_1HijackedElementBase_aca8fb139dcd8632391ba601c87692748}{residual\+\_\+multiplier}} () const
+const double \& \mbox{\hyperlink{classoomph_1_1HijackedElementBase_a79740641b6ac5b5a966d072bd10ab66a}{residual\+\_\+multiplier}} () const
 \begin{DoxyCompactList}\small\item\em Return the value of the residual multiplier. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1HijackedElementBase_a8fb2d61b46a5b1d79890ec50e80d593d}{residual\+\_\+multiplier\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1HijackedElementBase_a812cf3a3eacd9b587dffa8afb752d8d6}{residual\+\_\+multiplier\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return the pointer to the residual multiplier. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -54,7 +54,7 @@ static double \mbox{\hyperlink{classoomph_1_1HijackedElementBase_afd87cc7c33c2b8
 \doxysubsection{Detailed Description}
 Hijacked\+Element base class that provides storage and access funcitons for pointers to the global equation numbers that are hijacked by the Hijacked\+Element. A default residuals multiplier is also provided. 
 
-Definition at line \mbox{\hyperlink{hijacked__elements_8h_source_l00044}{44}} of file \mbox{\hyperlink{hijacked__elements_8h_source}{hijacked\+\_\+elements.\+h}}.
+Definition at line 44 of file hijacked\+\_\+elements.\+h.
 
 
 
@@ -71,11 +71,11 @@ Constructor, initialise the pointer to the equation numbers for the storage to z
 
 
 
-Definition at line \mbox{\hyperlink{hijacked__elements_8h_source_l00049}{49}} of file \mbox{\hyperlink{hijacked__elements_8h_source}{hijacked\+\_\+elements.\+h}}.
+Definition at line 49 of file hijacked\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{hijacked__elements_8h_source_l00102}{Default\+\_\+residual\+\_\+multiplier}}, and \mbox{\hyperlink{hijacked__elements_8h_source_l00098}{Residual\+\_\+multiplier\+\_\+pt}}.
+References Default\+\_\+residual\+\_\+multiplier, and Residual\+\_\+multiplier\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1HijackedElementBase_af3393a98fc80a2f7761046920b4a3040}\label{classoomph_1_1HijackedElementBase_af3393a98fc80a2f7761046920b4a3040}} 
 \index{oomph::HijackedElementBase@{oomph::HijackedElementBase}!````~HijackedElementBase@{$\sim$HijackedElementBase}}
@@ -89,11 +89,11 @@ Destructor, destroy the storage for the equation numbers.
 
 Destructor that cleans up any memory allocated by the class. 
 
-Definition at line \mbox{\hyperlink{hijacked__elements_8cc_source_l00041}{41}} of file \mbox{\hyperlink{hijacked__elements_8cc_source}{hijacked\+\_\+elements.\+cc}}.
+Definition at line 41 of file hijacked\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{hijacked__elements_8h_source_l00086}{Hijacked\+\_\+global\+\_\+eqn\+\_\+number\+\_\+pt}}, and \mbox{\hyperlink{hijacked__elements_8h_source_l00091}{Hijacked\+\_\+local\+\_\+eqn\+\_\+number\+\_\+pt}}.
+References Hijacked\+\_\+global\+\_\+eqn\+\_\+number\+\_\+pt, and Hijacked\+\_\+local\+\_\+eqn\+\_\+number\+\_\+pt.
 
 
 
@@ -110,21 +110,21 @@ Mark the global equation, addressed by global\+\_\+eqn\+\_\+pt, as hijacked by t
 
 
 
-Definition at line \mbox{\hyperlink{hijacked__elements_8cc_source_l00062}{62}} of file \mbox{\hyperlink{hijacked__elements_8cc_source}{hijacked\+\_\+elements.\+cc}}.
+Definition at line 62 of file hijacked\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{hijacked__elements_8h_source_l00086}{Hijacked\+\_\+global\+\_\+eqn\+\_\+number\+\_\+pt}}.
+References Hijacked\+\_\+global\+\_\+eqn\+\_\+number\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{hijacked__elements_8h_source_l00188}{oomph\+::\+Hijacked$<$ ELEMENT $>$\+::hijack\+\_\+external\+\_\+value()}}, \mbox{\hyperlink{hijacked__elements_8h_source_l00160}{oomph\+::\+Hijacked$<$ ELEMENT $>$\+::hijack\+\_\+internal\+\_\+value()}}, \mbox{\hyperlink{hijacked__elements_8h_source_l00240}{oomph\+::\+Hijacked$<$ ELEMENT $>$\+::hijack\+\_\+nodal\+\_\+position\+\_\+value()}}, \mbox{\hyperlink{hijacked__elements_8h_source_l00279}{oomph\+::\+Hijacked$<$ ELEMENT $>$\+::hijack\+\_\+nodal\+\_\+spine\+\_\+value()}}, and \mbox{\hyperlink{hijacked__elements_8h_source_l00214}{oomph\+::\+Hijacked$<$ ELEMENT $>$\+::hijack\+\_\+nodal\+\_\+value()}}.
+Referenced by oomph\+::\+Hijacked$<$ ELEMENT $>$\+::hijack\+\_\+external\+\_\+value(), oomph\+::\+Hijacked$<$ ELEMENT $>$\+::hijack\+\_\+internal\+\_\+value(), oomph\+::\+Hijacked$<$ ELEMENT $>$\+::hijack\+\_\+nodal\+\_\+position\+\_\+value(), oomph\+::\+Hijacked$<$ ELEMENT $>$\+::hijack\+\_\+nodal\+\_\+spine\+\_\+value(), and oomph\+::\+Hijacked$<$ ELEMENT $>$\+::hijack\+\_\+nodal\+\_\+value().
 
-\mbox{\Hypertarget{classoomph_1_1HijackedElementBase_aca8fb139dcd8632391ba601c87692748}\label{classoomph_1_1HijackedElementBase_aca8fb139dcd8632391ba601c87692748}} 
+\mbox{\Hypertarget{classoomph_1_1HijackedElementBase_a79740641b6ac5b5a966d072bd10ab66a}\label{classoomph_1_1HijackedElementBase_a79740641b6ac5b5a966d072bd10ab66a}} 
 \index{oomph::HijackedElementBase@{oomph::HijackedElementBase}!residual\_multiplier@{residual\_multiplier}}
 \index{residual\_multiplier@{residual\_multiplier}!oomph::HijackedElementBase@{oomph::HijackedElementBase}}
 \doxysubsubsection{\texorpdfstring{residual\_multiplier()}{residual\_multiplier()}}
-{\footnotesize\ttfamily const double \& oomph\+::\+Hijacked\+Element\+Base\+::residual\+\_\+multiplier (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const double\& oomph\+::\+Hijacked\+Element\+Base\+::residual\+\_\+multiplier (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -132,21 +132,21 @@ Return the value of the residual multiplier.
 
 
 
-Definition at line \mbox{\hyperlink{hijacked__elements_8h_source_l00070}{70}} of file \mbox{\hyperlink{hijacked__elements_8h_source}{hijacked\+\_\+elements.\+h}}.
+Definition at line 70 of file hijacked\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{hijacked__elements_8h_source_l00098}{Residual\+\_\+multiplier\+\_\+pt}}.
+References Residual\+\_\+multiplier\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{hijacked__elements_8h_source_l00395}{oomph\+::\+Hijacked$<$ ELEMENT $>$\+::get\+\_\+jacobian()}}, and \mbox{\hyperlink{hijacked__elements_8h_source_l00377}{oomph\+::\+Hijacked$<$ ELEMENT $>$\+::get\+\_\+residuals()}}.
+Referenced by oomph\+::\+Hijacked$<$ ELEMENT $>$\+::get\+\_\+jacobian(), and oomph\+::\+Hijacked$<$ ELEMENT $>$\+::get\+\_\+residuals().
 
-\mbox{\Hypertarget{classoomph_1_1HijackedElementBase_a8fb2d61b46a5b1d79890ec50e80d593d}\label{classoomph_1_1HijackedElementBase_a8fb2d61b46a5b1d79890ec50e80d593d}} 
+\mbox{\Hypertarget{classoomph_1_1HijackedElementBase_a812cf3a3eacd9b587dffa8afb752d8d6}\label{classoomph_1_1HijackedElementBase_a812cf3a3eacd9b587dffa8afb752d8d6}} 
 \index{oomph::HijackedElementBase@{oomph::HijackedElementBase}!residual\_multiplier\_pt@{residual\_multiplier\_pt}}
 \index{residual\_multiplier\_pt@{residual\_multiplier\_pt}!oomph::HijackedElementBase@{oomph::HijackedElementBase}}
 \doxysubsubsection{\texorpdfstring{residual\_multiplier\_pt()}{residual\_multiplier\_pt()}}
-{\footnotesize\ttfamily double $\ast$\& oomph\+::\+Hijacked\+Element\+Base\+::residual\+\_\+multiplier\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double$\ast$\& oomph\+::\+Hijacked\+Element\+Base\+::residual\+\_\+multiplier\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -154,11 +154,11 @@ Return the pointer to the residual multiplier.
 
 
 
-Definition at line \mbox{\hyperlink{hijacked__elements_8h_source_l00076}{76}} of file \mbox{\hyperlink{hijacked__elements_8h_source}{hijacked\+\_\+elements.\+h}}.
+Definition at line 76 of file hijacked\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{hijacked__elements_8h_source_l00098}{Residual\+\_\+multiplier\+\_\+pt}}.
+References Residual\+\_\+multiplier\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1HijackedElementBase_a0a373a87d121205b9cc0fd54ea41f4ad}\label{classoomph_1_1HijackedElementBase_a0a373a87d121205b9cc0fd54ea41f4ad}} 
 \index{oomph::HijackedElementBase@{oomph::HijackedElementBase}!unhijack\_all\_data@{unhijack\_all\_data}}
@@ -172,11 +172,11 @@ Reset the hijacked data pt, so that none of the equations in the element are hij
 
 
 
-Definition at line \mbox{\hyperlink{hijacked__elements_8h_source_l00064}{64}} of file \mbox{\hyperlink{hijacked__elements_8h_source}{hijacked\+\_\+elements.\+h}}.
+Definition at line 64 of file hijacked\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{hijacked__elements_8h_source_l00086}{Hijacked\+\_\+global\+\_\+eqn\+\_\+number\+\_\+pt}}.
+References Hijacked\+\_\+global\+\_\+eqn\+\_\+number\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1HijackedElementBase_aa94e2c93374151302879645f4c354c3f}\label{classoomph_1_1HijackedElementBase_aa94e2c93374151302879645f4c354c3f}} 
 \index{oomph::HijackedElementBase@{oomph::HijackedElementBase}!unhijack\_global\_eqn@{unhijack\_global\_eqn}}
@@ -190,11 +190,11 @@ The global equation, addressed by global\+\_\+eqn\+\_\+pt, is no longer hijacked
 
 
 
-Definition at line \mbox{\hyperlink{hijacked__elements_8cc_source_l00079}{79}} of file \mbox{\hyperlink{hijacked__elements_8cc_source}{hijacked\+\_\+elements.\+cc}}.
+Definition at line 79 of file hijacked\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{hijacked__elements_8h_source_l00086}{Hijacked\+\_\+global\+\_\+eqn\+\_\+number\+\_\+pt}}.
+References Hijacked\+\_\+global\+\_\+eqn\+\_\+number\+\_\+pt.
 
 
 
@@ -211,11 +211,11 @@ Static default value for the double that multiplies the original residuals.
 
 Static default value of the multiplier for the original residuals The contribution to the total residuals is the product of the multiplier and the original value of the residuals. 
 
-Definition at line \mbox{\hyperlink{hijacked__elements_8h_source_l00102}{102}} of file \mbox{\hyperlink{hijacked__elements_8h_source}{hijacked\+\_\+elements.\+h}}.
+Definition at line 102 of file hijacked\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{hijacked__elements_8h_source_l00049}{Hijacked\+Element\+Base()}}.
+Referenced by Hijacked\+Element\+Base().
 
 \mbox{\Hypertarget{classoomph_1_1HijackedElementBase_a9c3a9a4e39ee5e3af0f5594c31f532c5}\label{classoomph_1_1HijackedElementBase_a9c3a9a4e39ee5e3af0f5594c31f532c5}} 
 \index{oomph::HijackedElementBase@{oomph::HijackedElementBase}!Hijacked\_global\_eqn\_number\_pt@{Hijacked\_global\_eqn\_number\_pt}}
@@ -229,11 +229,11 @@ Pointer to a Set of pointers to the equation numbers that will be hijacked by th
 
 
 
-Definition at line \mbox{\hyperlink{hijacked__elements_8h_source_l00086}{86}} of file \mbox{\hyperlink{hijacked__elements_8h_source}{hijacked\+\_\+elements.\+h}}.
+Definition at line 86 of file hijacked\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{hijacked__elements_8h_source_l00318}{oomph\+::\+Hijacked$<$ ELEMENT $>$\+::assign\+\_\+local\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{hijacked__elements_8cc_source_l00062}{hijack\+\_\+global\+\_\+eqn()}}, \mbox{\hyperlink{hijacked__elements_8h_source_l00064}{unhijack\+\_\+all\+\_\+data()}}, \mbox{\hyperlink{hijacked__elements_8cc_source_l00079}{unhijack\+\_\+global\+\_\+eqn()}}, and \mbox{\hyperlink{hijacked__elements_8cc_source_l00041}{$\sim$\+Hijacked\+Element\+Base()}}.
+Referenced by oomph\+::\+Hijacked$<$ ELEMENT $>$\+::assign\+\_\+local\+\_\+eqn\+\_\+numbers(), hijack\+\_\+global\+\_\+eqn(), unhijack\+\_\+all\+\_\+data(), unhijack\+\_\+global\+\_\+eqn(), and $\sim$\+Hijacked\+Element\+Base().
 
 \mbox{\Hypertarget{classoomph_1_1HijackedElementBase_ae604da2f744f328f3866a2cefa3aa80c}\label{classoomph_1_1HijackedElementBase_ae604da2f744f328f3866a2cefa3aa80c}} 
 \index{oomph::HijackedElementBase@{oomph::HijackedElementBase}!Hijacked\_local\_eqn\_number\_pt@{Hijacked\_local\_eqn\_number\_pt}}
@@ -247,11 +247,11 @@ Pointer to a vector of integers containing the local equation numbers of any hij
 
 
 
-Definition at line \mbox{\hyperlink{hijacked__elements_8h_source_l00091}{91}} of file \mbox{\hyperlink{hijacked__elements_8h_source}{hijacked\+\_\+elements.\+h}}.
+Definition at line 91 of file hijacked\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{hijacked__elements_8h_source_l00318}{oomph\+::\+Hijacked$<$ ELEMENT $>$\+::assign\+\_\+local\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{hijacked__elements_8h_source_l00395}{oomph\+::\+Hijacked$<$ ELEMENT $>$\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{hijacked__elements_8h_source_l00377}{oomph\+::\+Hijacked$<$ ELEMENT $>$\+::get\+\_\+residuals()}}, and \mbox{\hyperlink{hijacked__elements_8cc_source_l00041}{$\sim$\+Hijacked\+Element\+Base()}}.
+Referenced by oomph\+::\+Hijacked$<$ ELEMENT $>$\+::assign\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Hijacked$<$ ELEMENT $>$\+::get\+\_\+jacobian(), oomph\+::\+Hijacked$<$ ELEMENT $>$\+::get\+\_\+residuals(), and $\sim$\+Hijacked\+Element\+Base().
 
 \mbox{\Hypertarget{classoomph_1_1HijackedElementBase_a283509b7af09479e7a1cb8c0e05a8c16}\label{classoomph_1_1HijackedElementBase_a283509b7af09479e7a1cb8c0e05a8c16}} 
 \index{oomph::HijackedElementBase@{oomph::HijackedElementBase}!Residual\_multiplier\_pt@{Residual\_multiplier\_pt}}
@@ -265,11 +265,11 @@ Pointer to a double that multiplies the contribution to the residuals from the o
 
 
 
-Definition at line \mbox{\hyperlink{hijacked__elements_8h_source_l00098}{98}} of file \mbox{\hyperlink{hijacked__elements_8h_source}{hijacked\+\_\+elements.\+h}}.
+Definition at line 98 of file hijacked\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{hijacked__elements_8h_source_l00049}{Hijacked\+Element\+Base()}}, \mbox{\hyperlink{hijacked__elements_8h_source_l00070}{residual\+\_\+multiplier()}}, and \mbox{\hyperlink{hijacked__elements_8h_source_l00076}{residual\+\_\+multiplier\+\_\+pt()}}.
+Referenced by Hijacked\+Element\+Base(), residual\+\_\+multiplier(), and residual\+\_\+multiplier\+\_\+pt().
 
 
 

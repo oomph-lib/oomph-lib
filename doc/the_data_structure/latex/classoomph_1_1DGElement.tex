@@ -36,19 +36,19 @@ virtual void \mbox{\hyperlink{classoomph_1_1DGElement_a4387d0837a07a2d5423896331
 \item 
 virtual void \mbox{\hyperlink{classoomph_1_1DGElement_ad2247a9d65eb229dbf30d709c7b28d6d}{get\+\_\+inverse\+\_\+mass\+\_\+matrix\+\_\+times\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&minv\+\_\+res)
 \begin{DoxyCompactList}\small\item\em Function that returns the current value of the residuals multiplied by the inverse mass matrix (virtual so that it can be overloaded specific elements in which time saving tricks can be applied) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DGElement_aa04768b9b6e6b929c070c6c1c9fc4372}{construct\+\_\+boundary\+\_\+nodes\+\_\+and\+\_\+faces}} (\mbox{\hyperlink{classoomph_1_1DGMesh}{DGMesh}} $\ast$const \&mesh\+\_\+pt, std\+::vector$<$ bool $>$ \&boundary\+\_\+flag, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\+\_\+stepper\+\_\+pt}})
+void \mbox{\hyperlink{classoomph_1_1DGElement_aa04768b9b6e6b929c070c6c1c9fc4372}{construct\+\_\+boundary\+\_\+nodes\+\_\+and\+\_\+faces}} (\mbox{\hyperlink{classoomph_1_1DGMesh}{DGMesh}} $\ast$const \&mesh\+\_\+pt, std\+::vector$<$ bool $>$ \&boundary\+\_\+flag, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1GeomObject_a3c92023891dd4a0e818022f467eeb7f1}{time\+\_\+stepper\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Construct all nodes and faces of the element. The vector of booleans boundary should be the same size as the number of nodes and if any entries are true that node will be constructed as a boundary node. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DGElement_a6f7fc1def2a798ee364ae33c8925245f}{construct\+\_\+nodes\+\_\+and\+\_\+faces}} (\mbox{\hyperlink{classoomph_1_1DGMesh}{DGMesh}} $\ast$const \&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\+\_\+stepper\+\_\+pt}})
+void \mbox{\hyperlink{classoomph_1_1DGElement_a6f7fc1def2a798ee364ae33c8925245f}{construct\+\_\+nodes\+\_\+and\+\_\+faces}} (\mbox{\hyperlink{classoomph_1_1DGMesh}{DGMesh}} $\ast$const \&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1GeomObject_a3c92023891dd4a0e818022f467eeb7f1}{time\+\_\+stepper\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Construct the nodes and faces of the element. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1DGElement_a8908504165b2d6bd3e2429a08160fd2b}{set\+\_\+mesh\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1DGMesh}{DGMesh}} $\ast$\&mesh\+\_\+pt)
 \item 
 unsigned \mbox{\hyperlink{classoomph_1_1DGElement_a76598661987374a484d75d626f9bc13b}{nface}} () const
 \begin{DoxyCompactList}\small\item\em Return the number of faces. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1DGFaceElement}{DGFace\+Element}} $\ast$ \mbox{\hyperlink{classoomph_1_1DGElement_a93fae49d0109a60b0fbbbdf04c1e4367}{face\+\_\+element\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\mbox{\hyperlink{classoomph_1_1DGFaceElement}{DGFace\+Element}} $\ast$ \mbox{\hyperlink{classoomph_1_1DGElement_ac4df080229516b2ceb1c045f57cb9b6d}{face\+\_\+element\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Access function for the faces. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1DGElement_ab4d6f236fcfaca280473ad9177b296e9}{output\+\_\+faces}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output the faces of the element. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DGElement_aca2f5466e8f969d671ba71b976153629}{get\+\_\+neighbouring\+\_\+face\+\_\+and\+\_\+local\+\_\+coordinate}} (const int \&face\+\_\+index, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} $\ast$\&\mbox{\hyperlink{classoomph_1_1DGElement_a93fae49d0109a60b0fbbbdf04c1e4367}{face\+\_\+element\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&s\+\_\+face)
+void \mbox{\hyperlink{classoomph_1_1DGElement_aca2f5466e8f969d671ba71b976153629}{get\+\_\+neighbouring\+\_\+face\+\_\+and\+\_\+local\+\_\+coordinate}} (const int \&face\+\_\+index, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} $\ast$\&\mbox{\hyperlink{classoomph_1_1DGElement_ac4df080229516b2ceb1c045f57cb9b6d}{face\+\_\+element\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&s\+\_\+face)
 \begin{DoxyCompactList}\small\item\em Return the neighbour info. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1DGElement_a318f2799a91b674c9420e4fc1da5c055}{setup\+\_\+face\+\_\+neighbour\+\_\+info}} (const bool \&add\+\_\+face\+\_\+data\+\_\+as\+\_\+external)
 \begin{DoxyCompactList}\small\item\em The boolean flag determines whether the data from the neighbouring elements is added as external data to the element (required for correct computation of the jacobian) \end{DoxyCompactList}\item 
@@ -60,9 +60,9 @@ virtual void \mbox{\hyperlink{classoomph_1_1DGElement_a336c61ef405a4710060f177e7
 \begin{DoxyCompactList}\small\item\em Calculate the averages in the element. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1DGElement_a23227ce4e1bd1c24b0d1ae203c36703a}{calculate\+\_\+averages}} ()
 \begin{DoxyCompactList}\small\item\em Calculate the elemental averages. \end{DoxyCompactList}\item 
-double \& \mbox{\hyperlink{classoomph_1_1DGElement_ac6e34ef10309c4714881404a788d0722}{average\+\_\+value}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+double \& \mbox{\hyperlink{classoomph_1_1DGElement_a9349e3c349f9cf3b25bcb6121e86a7f2}{average\+\_\+value}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Return the average values. \end{DoxyCompactList}\item 
-const double \& \mbox{\hyperlink{classoomph_1_1DGElement_a60a1a333981b18cd97923ab740f42290}{average\+\_\+value}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+const double \& \mbox{\hyperlink{classoomph_1_1DGElement_ad4cbd42c864738c6ee6b3ba388b8168c}{average\+\_\+value}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Return the average values. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -97,7 +97,7 @@ class \mbox{\hyperlink{classoomph_1_1DGElement_a0f4002a66e7e3bc5b0b40d9b201e596f
 \doxysubsection{Detailed Description}
 A Base class for DGElements. 
 
-Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00160}{160}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+Definition at line 160 of file dg\+\_\+elements.\+h.
 
 
 
@@ -114,7 +114,7 @@ Constructor, initialise the pointers to zero.
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00200}{200}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+Definition at line 200 of file dg\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1DGElement_acfb3e165aa49a619e11d5ce77f580f33}\label{classoomph_1_1DGElement_acfb3e165aa49a619e11d5ce77f580f33}} 
 \index{oomph::DGElement@{oomph::DGElement}!````~DGElement@{$\sim$DGElement}}
@@ -128,11 +128,11 @@ Virtual destructor, destroy the mass matrix, if we created it Clean-\/up storage
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00212}{212}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+Definition at line 212 of file dg\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{dg__elements_8h_source_l00179}{Average\+\_\+value}}, \mbox{\hyperlink{dg__elements_8h_source_l00190}{Can\+\_\+delete\+\_\+mass\+\_\+matrix}}, and \mbox{\hyperlink{dg__elements_8h_source_l00175}{M\+\_\+pt}}.
+References Average\+\_\+value, Can\+\_\+delete\+\_\+mass\+\_\+matrix, and M\+\_\+pt.
 
 
 
@@ -149,17 +149,17 @@ Loop over all faces and add their integrated numerical fluxes to the residuals.
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00406}{406}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+Definition at line 406 of file dg\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{dg__elements_8cc_source_l00416}{oomph\+::\+DGFace\+Element\+::add\+\_\+flux\+\_\+contributions()}}, \mbox{\hyperlink{dg__elements_8h_source_l00366}{face\+\_\+element\+\_\+pt()}}, and \mbox{\hyperlink{dg__elements_8h_source_l00360}{nface()}}.
+References oomph\+::\+DGFace\+Element\+::add\+\_\+flux\+\_\+contributions(), face\+\_\+element\+\_\+pt(), and nface().
 
-\mbox{\Hypertarget{classoomph_1_1DGElement_ac6e34ef10309c4714881404a788d0722}\label{classoomph_1_1DGElement_ac6e34ef10309c4714881404a788d0722}} 
+\mbox{\Hypertarget{classoomph_1_1DGElement_a9349e3c349f9cf3b25bcb6121e86a7f2}\label{classoomph_1_1DGElement_a9349e3c349f9cf3b25bcb6121e86a7f2}} 
 \index{oomph::DGElement@{oomph::DGElement}!average\_value@{average\_value}}
 \index{average\_value@{average\_value}!oomph::DGElement@{oomph::DGElement}}
 \doxysubsubsection{\texorpdfstring{average\_value()}{average\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily double \& oomph\+::\+DGElement\+::average\+\_\+value (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double\& oomph\+::\+DGElement\+::average\+\_\+value (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -167,17 +167,17 @@ Return the average values.
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00436}{436}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+Definition at line 436 of file dg\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{dg__elements_8h_source_l00179}{Average\+\_\+value}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References Average\+\_\+value, and i.
 
-\mbox{\Hypertarget{classoomph_1_1DGElement_a60a1a333981b18cd97923ab740f42290}\label{classoomph_1_1DGElement_a60a1a333981b18cd97923ab740f42290}} 
+\mbox{\Hypertarget{classoomph_1_1DGElement_ad4cbd42c864738c6ee6b3ba388b8168c}\label{classoomph_1_1DGElement_ad4cbd42c864738c6ee6b3ba388b8168c}} 
 \index{oomph::DGElement@{oomph::DGElement}!average\_value@{average\_value}}
 \index{average\_value@{average\_value}!oomph::DGElement@{oomph::DGElement}}
 \doxysubsubsection{\texorpdfstring{average\_value()}{average\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily const double \& oomph\+::\+DGElement\+::average\+\_\+value (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const double\& oomph\+::\+DGElement\+::average\+\_\+value (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -185,11 +185,11 @@ Return the average values.
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00449}{449}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+Definition at line 449 of file dg\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{dg__elements_8h_source_l00179}{Average\+\_\+value}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References Average\+\_\+value, and i.
 
 \mbox{\Hypertarget{classoomph_1_1DGElement_a4387d0837a07a2d5423896331c6c012a}\label{classoomph_1_1DGElement_a4387d0837a07a2d5423896331c6c012a}} 
 \index{oomph::DGElement@{oomph::DGElement}!build\_all\_faces@{build\_all\_faces}}
@@ -199,11 +199,11 @@ References \mbox{\hyperlink{dg__elements_8h_source_l00179}{Average\+\_\+value}},
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1DGSpectralEulerElement_3_011_00_01NNODE__1D_01_4_a79e06bb38c84bae756597dc885a687ac}{oomph\+::\+DGSpectral\+Euler\+Element$<$ 1, NNODE\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1DGSpectralEulerElement_3_012_00_01NNODE__1D_01_4_ae9cdecdb217f91b99b24f960a1ab85ab}{oomph\+::\+DGSpectral\+Euler\+Element$<$ 2, NNODE\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1DGSpectralScalarAdvectionElement_3_011_00_01NNODE__1D_01_4_ac52a57b0eb393440d0a182260cfc1ce3}{oomph\+::\+DGSpectral\+Scalar\+Advection\+Element$<$ 1, NNODE\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1DGSpectralScalarAdvectionElement_3_012_00_01NNODE__1D_01_4_a90e5d17dfbd134b9f9be110a7ab9085b}{oomph\+::\+DGSpectral\+Scalar\+Advection\+Element$<$ 2, NNODE\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement_3_011_00_01NNODE__1D_01_4_a18b03341945a2664a74f7b276e755439}{oomph\+::\+DGScalar\+Advection\+Element$<$ 1, NNODE\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement_3_012_00_01NNODE__1D_01_4_a467b719ab6fd88aaddade7e32a0cf354}{oomph\+::\+DGScalar\+Advection\+Element$<$ 2, NNODE\+\_\+1\+D $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement_3_012_00_01NNODE__1D_01_4_a467b719ab6fd88aaddade7e32a0cf354}{oomph\+::\+DGScalar\+Advection\+Element$<$ 2, NNODE\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement_3_011_00_01NNODE__1D_01_4_a18b03341945a2664a74f7b276e755439}{oomph\+::\+DGScalar\+Advection\+Element$<$ 1, NNODE\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1DGSpectralScalarAdvectionElement_3_012_00_01NNODE__1D_01_4_a90e5d17dfbd134b9f9be110a7ab9085b}{oomph\+::\+DGSpectral\+Scalar\+Advection\+Element$<$ 2, NNODE\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1DGSpectralScalarAdvectionElement_3_011_00_01NNODE__1D_01_4_ac52a57b0eb393440d0a182260cfc1ce3}{oomph\+::\+DGSpectral\+Scalar\+Advection\+Element$<$ 1, NNODE\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1DGSpectralEulerElement_3_012_00_01NNODE__1D_01_4_ae9cdecdb217f91b99b24f960a1ab85ab}{oomph\+::\+DGSpectral\+Euler\+Element$<$ 2, NNODE\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1DGSpectralEulerElement_3_011_00_01NNODE__1D_01_4_a79e06bb38c84bae756597dc885a687ac}{oomph\+::\+DGSpectral\+Euler\+Element$<$ 1, NNODE\+\_\+1\+D $>$}}.
 
 
 
-Referenced by \mbox{\hyperlink{dg__elements_8h_source_l00291}{construct\+\_\+boundary\+\_\+nodes\+\_\+and\+\_\+faces()}}, and \mbox{\hyperlink{dg__elements_8h_source_l00335}{construct\+\_\+nodes\+\_\+and\+\_\+faces()}}.
+Referenced by construct\+\_\+boundary\+\_\+nodes\+\_\+and\+\_\+faces(), and construct\+\_\+nodes\+\_\+and\+\_\+faces().
 
 \mbox{\Hypertarget{classoomph_1_1DGElement_a23227ce4e1bd1c24b0d1ae203c36703a}\label{classoomph_1_1DGElement_a23227ce4e1bd1c24b0d1ae203c36703a}} 
 \index{oomph::DGElement@{oomph::DGElement}!calculate\_averages@{calculate\_averages}}
@@ -217,11 +217,11 @@ Calculate the elemental averages.
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00430}{430}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+Definition at line 430 of file dg\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{dg__elements_8h_source_l00422}{calculate\+\_\+element\+\_\+averages()}}.
+References calculate\+\_\+element\+\_\+averages().
 
 \mbox{\Hypertarget{classoomph_1_1DGElement_a336c61ef405a4710060f177e707c3ec9}\label{classoomph_1_1DGElement_a336c61ef405a4710060f177e707c3ec9}} 
 \index{oomph::DGElement@{oomph::DGElement}!calculate\_element\_averages@{calculate\_element\_averages}}
@@ -235,15 +235,15 @@ Calculate the averages in the element.
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1DGSpectralEulerElement_3_011_00_01NNODE__1D_01_4_a7b5fa56b6e4bf604d6c3f21c126c0781}{oomph\+::\+DGSpectral\+Euler\+Element$<$ 1, NNODE\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1DGSpectralEulerElement_3_012_00_01NNODE__1D_01_4_a4eba89afa9c9a037b77f9ed4ccbc766b}{oomph\+::\+DGSpectral\+Euler\+Element$<$ 2, NNODE\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1DGSpectralScalarAdvectionElement_3_011_00_01NNODE__1D_01_4_a39a30e2966dde6acf1eb44d58ce0013a}{oomph\+::\+DGSpectral\+Scalar\+Advection\+Element$<$ 1, NNODE\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1DGSpectralScalarAdvectionElement_3_012_00_01NNODE__1D_01_4_a7f8e67d242b7a4967cf9bab98486e974}{oomph\+::\+DGSpectral\+Scalar\+Advection\+Element$<$ 2, NNODE\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement_3_011_00_01NNODE__1D_01_4_ae516160e4873adc0e599394db991a507}{oomph\+::\+DGScalar\+Advection\+Element$<$ 1, NNODE\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement_3_012_00_01NNODE__1D_01_4_a929abefd370881945240338a03265d99}{oomph\+::\+DGScalar\+Advection\+Element$<$ 2, NNODE\+\_\+1\+D $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement_3_012_00_01NNODE__1D_01_4_a929abefd370881945240338a03265d99}{oomph\+::\+DGScalar\+Advection\+Element$<$ 2, NNODE\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement_3_011_00_01NNODE__1D_01_4_ae516160e4873adc0e599394db991a507}{oomph\+::\+DGScalar\+Advection\+Element$<$ 1, NNODE\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1DGSpectralScalarAdvectionElement_3_012_00_01NNODE__1D_01_4_a7f8e67d242b7a4967cf9bab98486e974}{oomph\+::\+DGSpectral\+Scalar\+Advection\+Element$<$ 2, NNODE\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1DGSpectralScalarAdvectionElement_3_011_00_01NNODE__1D_01_4_a39a30e2966dde6acf1eb44d58ce0013a}{oomph\+::\+DGSpectral\+Scalar\+Advection\+Element$<$ 1, NNODE\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1DGSpectralEulerElement_3_012_00_01NNODE__1D_01_4_a4eba89afa9c9a037b77f9ed4ccbc766b}{oomph\+::\+DGSpectral\+Euler\+Element$<$ 2, NNODE\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1DGSpectralEulerElement_3_011_00_01NNODE__1D_01_4_a7b5fa56b6e4bf604d6c3f21c126c0781}{oomph\+::\+DGSpectral\+Euler\+Element$<$ 1, NNODE\+\_\+1\+D $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00422}{422}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+Definition at line 422 of file dg\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{dg__elements_8h_source_l00430}{calculate\+\_\+averages()}}.
+Referenced by calculate\+\_\+averages().
 
 \mbox{\Hypertarget{classoomph_1_1DGElement_aa04768b9b6e6b929c070c6c1c9fc4372}\label{classoomph_1_1DGElement_aa04768b9b6e6b929c070c6c1c9fc4372}} 
 \index{oomph::DGElement@{oomph::DGElement}!construct\_boundary\_nodes\_and\_faces@{construct\_boundary\_nodes\_and\_faces}}
@@ -257,11 +257,11 @@ Construct all nodes and faces of the element. The vector of booleans boundary sh
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00291}{291}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+Definition at line 291 of file dg\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{classoomph_1_1DGElement_a4387d0837a07a2d5423896331c6c012a}{build\+\_\+all\+\_\+faces()}}, \mbox{\hyperlink{elements_8h_source_l02538}{oomph\+::\+Finite\+Element\+::construct\+\_\+boundary\+\_\+node()}}, \mbox{\hyperlink{elements_8h_source_l02509}{oomph\+::\+Finite\+Element\+::construct\+\_\+node()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}.
+References build\+\_\+all\+\_\+faces(), oomph\+::\+Finite\+Element\+::construct\+\_\+boundary\+\_\+node(), oomph\+::\+Finite\+Element\+::construct\+\_\+node(), oomph\+::\+Finite\+Element\+::nnode(), and oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1DGElement_a6f7fc1def2a798ee364ae33c8925245f}\label{classoomph_1_1DGElement_a6f7fc1def2a798ee364ae33c8925245f}} 
 \index{oomph::DGElement@{oomph::DGElement}!construct\_nodes\_and\_faces@{construct\_nodes\_and\_faces}}
@@ -275,11 +275,11 @@ Construct the nodes and faces of the element.
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00335}{335}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+Definition at line 335 of file dg\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{classoomph_1_1DGElement_a4387d0837a07a2d5423896331c6c012a}{build\+\_\+all\+\_\+faces()}}, \mbox{\hyperlink{elements_8h_source_l02509}{oomph\+::\+Finite\+Element\+::construct\+\_\+node()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}.
+References build\+\_\+all\+\_\+faces(), oomph\+::\+Finite\+Element\+::construct\+\_\+node(), oomph\+::\+Finite\+Element\+::nnode(), and oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1DGElement_a1fb4172f65716e0b5277efc65b182d44}\label{classoomph_1_1DGElement_a1fb4172f65716e0b5277efc65b182d44}} 
 \index{oomph::DGElement@{oomph::DGElement}!disable\_mass\_matrix\_reuse@{disable\_mass\_matrix\_reuse}}
@@ -293,15 +293,15 @@ Function that disables the reuse of the mass matrix.
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00240}{240}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+Definition at line 240 of file dg\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{dg__elements_8h_source_l00190}{Can\+\_\+delete\+\_\+mass\+\_\+matrix}}, \mbox{\hyperlink{dg__elements_8h_source_l00175}{M\+\_\+pt}}, \mbox{\hyperlink{dg__elements_8h_source_l00186}{Mass\+\_\+matrix\+\_\+has\+\_\+been\+\_\+computed}}, and \mbox{\hyperlink{dg__elements_8h_source_l00182}{Mass\+\_\+matrix\+\_\+reuse\+\_\+is\+\_\+enabled}}.
+References Can\+\_\+delete\+\_\+mass\+\_\+matrix, M\+\_\+pt, Mass\+\_\+matrix\+\_\+has\+\_\+been\+\_\+computed, and Mass\+\_\+matrix\+\_\+reuse\+\_\+is\+\_\+enabled.
 
 
 
-Referenced by \mbox{\hyperlink{problem_8cc_source_l11832}{oomph\+::\+Problem\+::disable\+\_\+mass\+\_\+matrix\+\_\+reuse()}}.
+Referenced by oomph\+::\+Problem\+::disable\+\_\+mass\+\_\+matrix\+\_\+reuse().
 
 \mbox{\Hypertarget{classoomph_1_1DGElement_a62c5daa21324a839419ec4feec8e0685}\label{classoomph_1_1DGElement_a62c5daa21324a839419ec4feec8e0685}} 
 \index{oomph::DGElement@{oomph::DGElement}!enable\_mass\_matrix\_reuse@{enable\_mass\_matrix\_reuse}}
@@ -315,21 +315,21 @@ Function that allows the reuse of the mass matrix.
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00233}{233}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+Definition at line 233 of file dg\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{dg__elements_8h_source_l00186}{Mass\+\_\+matrix\+\_\+has\+\_\+been\+\_\+computed}}, and \mbox{\hyperlink{dg__elements_8h_source_l00182}{Mass\+\_\+matrix\+\_\+reuse\+\_\+is\+\_\+enabled}}.
+References Mass\+\_\+matrix\+\_\+has\+\_\+been\+\_\+computed, and Mass\+\_\+matrix\+\_\+reuse\+\_\+is\+\_\+enabled.
 
 
 
-Referenced by \mbox{\hyperlink{problem_8cc_source_l11807}{oomph\+::\+Problem\+::enable\+\_\+mass\+\_\+matrix\+\_\+reuse()}}.
+Referenced by oomph\+::\+Problem\+::enable\+\_\+mass\+\_\+matrix\+\_\+reuse().
 
-\mbox{\Hypertarget{classoomph_1_1DGElement_a93fae49d0109a60b0fbbbdf04c1e4367}\label{classoomph_1_1DGElement_a93fae49d0109a60b0fbbbdf04c1e4367}} 
+\mbox{\Hypertarget{classoomph_1_1DGElement_ac4df080229516b2ceb1c045f57cb9b6d}\label{classoomph_1_1DGElement_ac4df080229516b2ceb1c045f57cb9b6d}} 
 \index{oomph::DGElement@{oomph::DGElement}!face\_element\_pt@{face\_element\_pt}}
 \index{face\_element\_pt@{face\_element\_pt}!oomph::DGElement@{oomph::DGElement}}
 \doxysubsubsection{\texorpdfstring{face\_element\_pt()}{face\_element\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1DGFaceElement}{DGFace\+Element}} $\ast$ oomph\+::\+DGElement\+::face\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1DGFaceElement}{DGFace\+Element}}$\ast$ oomph\+::\+DGElement\+::face\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -337,15 +337,15 @@ Access function for the faces.
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00366}{366}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+Definition at line 366 of file dg\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{dg__elements_8h_source_l00168}{Face\+\_\+element\+\_\+pt}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References Face\+\_\+element\+\_\+pt, and i.
 
 
 
-Referenced by \mbox{\hyperlink{dg__elements_8h_source_l00406}{add\+\_\+flux\+\_\+contributions\+\_\+to\+\_\+residuals()}}, \mbox{\hyperlink{dg__elements_8cc_source_l00675}{get\+\_\+neighbouring\+\_\+face\+\_\+and\+\_\+local\+\_\+coordinate()}}, \mbox{\hyperlink{dg__elements_8h_source_l00372}{output\+\_\+faces()}}, \mbox{\hyperlink{dg__elements_8h_source_l00393}{setup\+\_\+face\+\_\+neighbour\+\_\+info()}}, and \mbox{\hyperlink{dg__elements_8cc_source_l00686}{slope\+\_\+limit()}}.
+Referenced by add\+\_\+flux\+\_\+contributions\+\_\+to\+\_\+residuals(), get\+\_\+neighbouring\+\_\+face\+\_\+and\+\_\+local\+\_\+coordinate(), output\+\_\+faces(), setup\+\_\+face\+\_\+neighbour\+\_\+info(), and slope\+\_\+limit().
 
 \mbox{\Hypertarget{classoomph_1_1DGElement_ad2247a9d65eb229dbf30d709c7b28d6d}\label{classoomph_1_1DGElement_ad2247a9d65eb229dbf30d709c7b28d6d}} 
 \index{oomph::DGElement@{oomph::DGElement}!get\_inverse\_mass\_matrix\_times\_residuals@{get\_inverse\_mass\_matrix\_times\_residuals}}
@@ -363,15 +363,15 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1DGSpectralScalarAdvectionElement
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8cc_source_l00614}{614}} of file \mbox{\hyperlink{dg__elements_8cc_source}{dg\+\_\+elements.\+cc}}.
+Definition at line 614 of file dg\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l01292}{oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+mass\+\_\+matrix()}}, \mbox{\hyperlink{elements_8h_source_l00357}{oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}, \mbox{\hyperlink{matrices_8h_source_l00514}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::initialise()}}, \mbox{\hyperlink{matrices_8cc_source_l00202}{oomph\+::\+Dense\+Double\+Matrix\+::lubksub()}}, \mbox{\hyperlink{matrices_8cc_source_l00192}{oomph\+::\+Dense\+Double\+Matrix\+::ludecompose()}}, \mbox{\hyperlink{dg__elements_8h_source_l00175}{M\+\_\+pt}}, \mbox{\hyperlink{dg__elements_8h_source_l00186}{Mass\+\_\+matrix\+\_\+has\+\_\+been\+\_\+computed}}, \mbox{\hyperlink{dg__elements_8h_source_l00182}{Mass\+\_\+matrix\+\_\+reuse\+\_\+is\+\_\+enabled}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{elements_8h_source_l00829}{oomph\+::\+Generalised\+Element\+::nexternal\+\_\+data()}}, and \mbox{\hyperlink{matrices_8h_source_l00498}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::resize()}}.
+References oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+mass\+\_\+matrix(), oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), oomph\+::\+Dense\+Matrix$<$ T $>$\+::initialise(), oomph\+::\+Dense\+Double\+Matrix\+::lubksub(), oomph\+::\+Dense\+Double\+Matrix\+::ludecompose(), M\+\_\+pt, Mass\+\_\+matrix\+\_\+has\+\_\+been\+\_\+computed, Mass\+\_\+matrix\+\_\+reuse\+\_\+is\+\_\+enabled, oomph\+::\+Generalised\+Element\+::ndof(), oomph\+::\+Generalised\+Element\+::nexternal\+\_\+data(), and oomph\+::\+Dense\+Matrix$<$ T $>$\+::resize().
 
 
 
-Referenced by \mbox{\hyperlink{problem_8cc_source_l03579}{oomph\+::\+Problem\+::get\+\_\+inverse\+\_\+mass\+\_\+matrix\+\_\+times\+\_\+residuals()}}.
+Referenced by oomph\+::\+Problem\+::get\+\_\+inverse\+\_\+mass\+\_\+matrix\+\_\+times\+\_\+residuals().
 
 \mbox{\Hypertarget{classoomph_1_1DGElement_aca2f5466e8f969d671ba71b976153629}\label{classoomph_1_1DGElement_aca2f5466e8f969d671ba71b976153629}} 
 \index{oomph::DGElement@{oomph::DGElement}!get\_neighbouring\_face\_and\_local\_coordinate@{get\_neighbouring\_face\_and\_local\_coordinate}}
@@ -385,11 +385,11 @@ Return the neighbour info.
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8cc_source_l00675}{675}} of file \mbox{\hyperlink{dg__elements_8cc_source}{dg\+\_\+elements.\+cc}}.
+Definition at line 675 of file dg\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{dg__elements_8h_source_l00171}{DG\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{dg__elements_8h_source_l00366}{face\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{dg__elements_8h_source_l00470}{oomph\+::\+DGMesh\+::neighbour\+\_\+finder()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References DG\+\_\+mesh\+\_\+pt, face\+\_\+element\+\_\+pt(), oomph\+::\+DGMesh\+::neighbour\+\_\+finder(), and s.
 
 \mbox{\Hypertarget{classoomph_1_1DGElement_a5d30dc3eb67c43f9f01db5f1386fc5f8}\label{classoomph_1_1DGElement_a5d30dc3eb67c43f9f01db5f1386fc5f8}} 
 \index{oomph::DGElement@{oomph::DGElement}!mass\_matrix\_has\_been\_computed@{mass\_matrix\_has\_been\_computed}}
@@ -403,15 +403,15 @@ Access function for the boolean to indicate whether the mass matrix has been com
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00227}{227}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+Definition at line 227 of file dg\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{dg__elements_8h_source_l00186}{Mass\+\_\+matrix\+\_\+has\+\_\+been\+\_\+computed}}.
+References Mass\+\_\+matrix\+\_\+has\+\_\+been\+\_\+computed.
 
 
 
-Referenced by \mbox{\hyperlink{dg__elements_8h_source_l00256}{set\+\_\+mass\+\_\+matrix\+\_\+from\+\_\+element()}}.
+Referenced by set\+\_\+mass\+\_\+matrix\+\_\+from\+\_\+element().
 
 \mbox{\Hypertarget{classoomph_1_1DGElement_a76598661987374a484d75d626f9bc13b}\label{classoomph_1_1DGElement_a76598661987374a484d75d626f9bc13b}} 
 \index{oomph::DGElement@{oomph::DGElement}!nface@{nface}}
@@ -425,15 +425,15 @@ Return the number of faces.
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00360}{360}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+Definition at line 360 of file dg\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{dg__elements_8h_source_l00168}{Face\+\_\+element\+\_\+pt}}.
+References Face\+\_\+element\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{dg__elements_8h_source_l00406}{add\+\_\+flux\+\_\+contributions\+\_\+to\+\_\+residuals()}}, \mbox{\hyperlink{dg__elements_8h_source_l00372}{output\+\_\+faces()}}, and \mbox{\hyperlink{dg__elements_8h_source_l00393}{setup\+\_\+face\+\_\+neighbour\+\_\+info()}}.
+Referenced by add\+\_\+flux\+\_\+contributions\+\_\+to\+\_\+residuals(), output\+\_\+faces(), and setup\+\_\+face\+\_\+neighbour\+\_\+info().
 
 \mbox{\Hypertarget{classoomph_1_1DGElement_ab4d6f236fcfaca280473ad9177b296e9}\label{classoomph_1_1DGElement_ab4d6f236fcfaca280473ad9177b296e9}} 
 \index{oomph::DGElement@{oomph::DGElement}!output\_faces@{output\_faces}}
@@ -447,11 +447,11 @@ Output the faces of the element.
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00372}{372}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+Definition at line 372 of file dg\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{dg__elements_8h_source_l00366}{face\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{dg__elements_8h_source_l00360}{nface()}}, and \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
+References face\+\_\+element\+\_\+pt(), nface(), and oomph\+::\+Finite\+Element\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1DGElement_a56efa47ff13adce4b7d740290a208ddc}\label{classoomph_1_1DGElement_a56efa47ff13adce4b7d740290a208ddc}} 
 \index{oomph::DGElement@{oomph::DGElement}!pre\_compute\_mass\_matrix@{pre\_compute\_mass\_matrix}}
@@ -465,15 +465,15 @@ Function that computes and stores the (inverse) mass matrix.
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8cc_source_l00578}{578}} of file \mbox{\hyperlink{dg__elements_8cc_source}{dg\+\_\+elements.\+cc}}.
+Definition at line 578 of file dg\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l01292}{oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+mass\+\_\+matrix()}}, \mbox{\hyperlink{matrices_8h_source_l00514}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::initialise()}}, \mbox{\hyperlink{matrices_8cc_source_l00192}{oomph\+::\+Dense\+Double\+Matrix\+::ludecompose()}}, \mbox{\hyperlink{dg__elements_8h_source_l00175}{M\+\_\+pt}}, \mbox{\hyperlink{dg__elements_8h_source_l00186}{Mass\+\_\+matrix\+\_\+has\+\_\+been\+\_\+computed}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, and \mbox{\hyperlink{matrices_8h_source_l00498}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::resize()}}.
+References oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+mass\+\_\+matrix(), oomph\+::\+Dense\+Matrix$<$ T $>$\+::initialise(), oomph\+::\+Dense\+Double\+Matrix\+::ludecompose(), M\+\_\+pt, Mass\+\_\+matrix\+\_\+has\+\_\+been\+\_\+computed, oomph\+::\+Generalised\+Element\+::ndof(), and oomph\+::\+Dense\+Matrix$<$ T $>$\+::resize().
 
 
 
-Referenced by \mbox{\hyperlink{dg__elements_8h_source_l00256}{set\+\_\+mass\+\_\+matrix\+\_\+from\+\_\+element()}}.
+Referenced by set\+\_\+mass\+\_\+matrix\+\_\+from\+\_\+element().
 
 \mbox{\Hypertarget{classoomph_1_1DGElement_a87dc9f5b40437c3ab22db35229012c07}\label{classoomph_1_1DGElement_a87dc9f5b40437c3ab22db35229012c07}} 
 \index{oomph::DGElement@{oomph::DGElement}!required\_nflux@{required\_nflux}}
@@ -487,15 +487,15 @@ Set the number of flux components.
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1DGSpectralEulerElement_3_011_00_01NNODE__1D_01_4_a8a7b3f093854cccf1cc12f1f9d381a54}{oomph\+::\+DGSpectral\+Euler\+Element$<$ 1, NNODE\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1DGSpectralEulerElement_3_012_00_01NNODE__1D_01_4_a070767446172be36e3abd6faa624d71d}{oomph\+::\+DGSpectral\+Euler\+Element$<$ 2, NNODE\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1DGSpectralScalarAdvectionElement_3_011_00_01NNODE__1D_01_4_a0966bfa51ec4e244580be3212c1db919}{oomph\+::\+DGSpectral\+Scalar\+Advection\+Element$<$ 1, NNODE\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1DGSpectralScalarAdvectionElement_3_012_00_01NNODE__1D_01_4_a7a4facebbe8b314a1364472e66646e55}{oomph\+::\+DGSpectral\+Scalar\+Advection\+Element$<$ 2, NNODE\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement_3_011_00_01NNODE__1D_01_4_ae2edc6f1cca20b5308f50e1ae24bd6cd}{oomph\+::\+DGScalar\+Advection\+Element$<$ 1, NNODE\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement_3_012_00_01NNODE__1D_01_4_a316a94ee11fe6fe52e25a2eec1b4a1c8}{oomph\+::\+DGScalar\+Advection\+Element$<$ 2, NNODE\+\_\+1\+D $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement_3_012_00_01NNODE__1D_01_4_a316a94ee11fe6fe52e25a2eec1b4a1c8}{oomph\+::\+DGScalar\+Advection\+Element$<$ 2, NNODE\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement_3_011_00_01NNODE__1D_01_4_ae2edc6f1cca20b5308f50e1ae24bd6cd}{oomph\+::\+DGScalar\+Advection\+Element$<$ 1, NNODE\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1DGSpectralScalarAdvectionElement_3_012_00_01NNODE__1D_01_4_a7a4facebbe8b314a1364472e66646e55}{oomph\+::\+DGSpectral\+Scalar\+Advection\+Element$<$ 2, NNODE\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1DGSpectralScalarAdvectionElement_3_011_00_01NNODE__1D_01_4_a0966bfa51ec4e244580be3212c1db919}{oomph\+::\+DGSpectral\+Scalar\+Advection\+Element$<$ 1, NNODE\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1DGSpectralEulerElement_3_012_00_01NNODE__1D_01_4_a070767446172be36e3abd6faa624d71d}{oomph\+::\+DGSpectral\+Euler\+Element$<$ 2, NNODE\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1DGSpectralEulerElement_3_011_00_01NNODE__1D_01_4_a8a7b3f093854cccf1cc12f1f9d381a54}{oomph\+::\+DGSpectral\+Euler\+Element$<$ 1, NNODE\+\_\+1\+D $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00193}{193}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+Definition at line 193 of file dg\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{dg__elements_8cc_source_l00686}{slope\+\_\+limit()}}.
+Referenced by slope\+\_\+limit().
 
 \mbox{\Hypertarget{classoomph_1_1DGElement_a794df81f734bdab309fe76a713588524}\label{classoomph_1_1DGElement_a794df81f734bdab309fe76a713588524}} 
 \index{oomph::DGElement@{oomph::DGElement}!set\_mass\_matrix\_from\_element@{set\_mass\_matrix\_from\_element}}
@@ -509,11 +509,11 @@ Set the mass matrix to point to one in another element.
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00256}{256}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+Definition at line 256 of file dg\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{dg__elements_8h_source_l00190}{Can\+\_\+delete\+\_\+mass\+\_\+matrix}}, \mbox{\hyperlink{dg__elements_8h_source_l00175}{M\+\_\+pt}}, \mbox{\hyperlink{dg__elements_8h_source_l00186}{Mass\+\_\+matrix\+\_\+has\+\_\+been\+\_\+computed}}, \mbox{\hyperlink{dg__elements_8h_source_l00227}{mass\+\_\+matrix\+\_\+has\+\_\+been\+\_\+computed()}}, \mbox{\hyperlink{dg__elements_8h_source_l00182}{Mass\+\_\+matrix\+\_\+reuse\+\_\+is\+\_\+enabled}}, and \mbox{\hyperlink{dg__elements_8cc_source_l00578}{pre\+\_\+compute\+\_\+mass\+\_\+matrix()}}.
+References Can\+\_\+delete\+\_\+mass\+\_\+matrix, M\+\_\+pt, Mass\+\_\+matrix\+\_\+has\+\_\+been\+\_\+computed, mass\+\_\+matrix\+\_\+has\+\_\+been\+\_\+computed(), Mass\+\_\+matrix\+\_\+reuse\+\_\+is\+\_\+enabled, and pre\+\_\+compute\+\_\+mass\+\_\+matrix().
 
 \mbox{\Hypertarget{classoomph_1_1DGElement_a8908504165b2d6bd3e2429a08160fd2b}\label{classoomph_1_1DGElement_a8908504165b2d6bd3e2429a08160fd2b}} 
 \index{oomph::DGElement@{oomph::DGElement}!set\_mesh\_pt@{set\_mesh\_pt}}
@@ -523,11 +523,11 @@ References \mbox{\hyperlink{dg__elements_8h_source_l00190}{Can\+\_\+delete\+\_\+
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00354}{354}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+Definition at line 354 of file dg\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{dg__elements_8h_source_l00171}{DG\+\_\+mesh\+\_\+pt}}.
+References DG\+\_\+mesh\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1DGElement_a318f2799a91b674c9420e4fc1da5c055}\label{classoomph_1_1DGElement_a318f2799a91b674c9420e4fc1da5c055}} 
 \index{oomph::DGElement@{oomph::DGElement}!setup\_face\_neighbour\_info@{setup\_face\_neighbour\_info}}
@@ -541,11 +541,11 @@ The boolean flag determines whether the data from the neighbouring elements is a
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00393}{393}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+Definition at line 393 of file dg\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{dg__elements_8h_source_l00366}{face\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{dg__elements_8h_source_l00360}{nface()}}, \mbox{\hyperlink{dg__elements_8cc_source_l00123}{oomph\+::\+DGFace\+Element\+::report\+\_\+info()}}, and \mbox{\hyperlink{dg__elements_8cc_source_l00042}{oomph\+::\+DGFace\+Element\+::setup\+\_\+neighbour\+\_\+info()}}.
+References face\+\_\+element\+\_\+pt(), nface(), oomph\+::\+DGFace\+Element\+::report\+\_\+info(), and oomph\+::\+DGFace\+Element\+::setup\+\_\+neighbour\+\_\+info().
 
 \mbox{\Hypertarget{classoomph_1_1DGElement_a69834c27193675dfa9e9d03413ac9d7e}\label{classoomph_1_1DGElement_a69834c27193675dfa9e9d03413ac9d7e}} 
 \index{oomph::DGElement@{oomph::DGElement}!slope\_limit@{slope\_limit}}
@@ -559,11 +559,11 @@ Limit the slope within the element.
 
 Limit the slope within an element. 
 
-Definition at line \mbox{\hyperlink{dg__elements_8cc_source_l00686}{686}} of file \mbox{\hyperlink{dg__elements_8cc_source}{dg\+\_\+elements.\+cc}}.
+Definition at line 686 of file dg\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l04735}{oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{dg__elements_8h_source_l00366}{face\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{dg__elements_8h_source_l00534}{oomph\+::\+Slope\+Limiter\+::limit()}}, and \mbox{\hyperlink{dg__elements_8h_source_l00193}{required\+\_\+nflux()}}.
+References oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt(), oomph\+::\+Finite\+Element\+::dim(), face\+\_\+element\+\_\+pt(), i, oomph\+::\+Slope\+Limiter\+::limit(), and required\+\_\+nflux().
 
 
 
@@ -580,7 +580,7 @@ The \mbox{\hyperlink{classoomph_1_1DGFaceElement}{DGFace\+Element}} requires acc
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00165}{165}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+Definition at line 165 of file dg\+\_\+elements.\+h.
 
 
 
@@ -597,11 +597,11 @@ Pointer to storage for the average values of the of the variables over the eleme
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00179}{179}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+Definition at line 179 of file dg\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{dg__elements_8h_source_l00436}{average\+\_\+value()}}, and \mbox{\hyperlink{dg__elements_8h_source_l00212}{$\sim$\+DGElement()}}.
+Referenced by average\+\_\+value(), and $\sim$\+DGElement().
 
 \mbox{\Hypertarget{classoomph_1_1DGElement_a13357b2bf3bc7703050c6909d0ece927}\label{classoomph_1_1DGElement_a13357b2bf3bc7703050c6909d0ece927}} 
 \index{oomph::DGElement@{oomph::DGElement}!Can\_delete\_mass\_matrix@{Can\_delete\_mass\_matrix}}
@@ -615,11 +615,11 @@ Boolean flag to indicate whether the mass matrix can be deleted (i.\+e. was it c
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00190}{190}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+Definition at line 190 of file dg\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{dg__elements_8h_source_l00240}{disable\+\_\+mass\+\_\+matrix\+\_\+reuse()}}, \mbox{\hyperlink{dg__elements_8h_source_l00256}{set\+\_\+mass\+\_\+matrix\+\_\+from\+\_\+element()}}, and \mbox{\hyperlink{dg__elements_8h_source_l00212}{$\sim$\+DGElement()}}.
+Referenced by disable\+\_\+mass\+\_\+matrix\+\_\+reuse(), set\+\_\+mass\+\_\+matrix\+\_\+from\+\_\+element(), and $\sim$\+DGElement().
 
 \mbox{\Hypertarget{classoomph_1_1DGElement_a247d118e3d474c7b56b8e93db1d5256d}\label{classoomph_1_1DGElement_a247d118e3d474c7b56b8e93db1d5256d}} 
 \index{oomph::DGElement@{oomph::DGElement}!DG\_mesh\_pt@{DG\_mesh\_pt}}
@@ -633,11 +633,11 @@ Pointer to \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}, which will be responsibl
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00171}{171}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+Definition at line 171 of file dg\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{dg__elements_8cc_source_l00675}{get\+\_\+neighbouring\+\_\+face\+\_\+and\+\_\+local\+\_\+coordinate()}}, and \mbox{\hyperlink{dg__elements_8h_source_l00354}{set\+\_\+mesh\+\_\+pt()}}.
+Referenced by get\+\_\+neighbouring\+\_\+face\+\_\+and\+\_\+local\+\_\+coordinate(), and set\+\_\+mesh\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1DGElement_a752becbf28b323514a6e2426c5e07799}\label{classoomph_1_1DGElement_a752becbf28b323514a6e2426c5e07799}} 
 \index{oomph::DGElement@{oomph::DGElement}!Face\_element\_pt@{Face\_element\_pt}}
@@ -651,11 +651,11 @@ Referenced by \mbox{\hyperlink{dg__elements_8cc_source_l00675}{get\+\_\+neighbou
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00168}{168}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+Definition at line 168 of file dg\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{dg__elements_8h_source_l00366}{face\+\_\+element\+\_\+pt()}}, and \mbox{\hyperlink{dg__elements_8h_source_l00360}{nface()}}.
+Referenced by face\+\_\+element\+\_\+pt(), and nface().
 
 \mbox{\Hypertarget{classoomph_1_1DGElement_aeeab3c1e5bf7461ef4eaa06638cf48a4}\label{classoomph_1_1DGElement_aeeab3c1e5bf7461ef4eaa06638cf48a4}} 
 \index{oomph::DGElement@{oomph::DGElement}!M\_pt@{M\_pt}}
@@ -669,11 +669,11 @@ Pointer to storage for a mass matrix that can be recycled if desired.
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00175}{175}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+Definition at line 175 of file dg\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{dg__elements_8h_source_l00240}{disable\+\_\+mass\+\_\+matrix\+\_\+reuse()}}, \mbox{\hyperlink{dg__elements_8cc_source_l00614}{get\+\_\+inverse\+\_\+mass\+\_\+matrix\+\_\+times\+\_\+residuals()}}, \mbox{\hyperlink{dg__elements_8cc_source_l00578}{pre\+\_\+compute\+\_\+mass\+\_\+matrix()}}, \mbox{\hyperlink{dg__elements_8h_source_l00256}{set\+\_\+mass\+\_\+matrix\+\_\+from\+\_\+element()}}, and \mbox{\hyperlink{dg__elements_8h_source_l00212}{$\sim$\+DGElement()}}.
+Referenced by disable\+\_\+mass\+\_\+matrix\+\_\+reuse(), get\+\_\+inverse\+\_\+mass\+\_\+matrix\+\_\+times\+\_\+residuals(), pre\+\_\+compute\+\_\+mass\+\_\+matrix(), set\+\_\+mass\+\_\+matrix\+\_\+from\+\_\+element(), and $\sim$\+DGElement().
 
 \mbox{\Hypertarget{classoomph_1_1DGElement_a915c6ac76c58c45393de8e9678e5dfc4}\label{classoomph_1_1DGElement_a915c6ac76c58c45393de8e9678e5dfc4}} 
 \index{oomph::DGElement@{oomph::DGElement}!Mass\_matrix\_has\_been\_computed@{Mass\_matrix\_has\_been\_computed}}
@@ -687,11 +687,11 @@ Boolean flag to indicate whether the mass matrix has been computed.
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00186}{186}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+Definition at line 186 of file dg\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{dg__elements_8h_source_l00240}{disable\+\_\+mass\+\_\+matrix\+\_\+reuse()}}, \mbox{\hyperlink{dg__elements_8h_source_l00233}{enable\+\_\+mass\+\_\+matrix\+\_\+reuse()}}, \mbox{\hyperlink{dg__elements_8cc_source_l00614}{get\+\_\+inverse\+\_\+mass\+\_\+matrix\+\_\+times\+\_\+residuals()}}, \mbox{\hyperlink{dg__elements_8h_source_l00227}{mass\+\_\+matrix\+\_\+has\+\_\+been\+\_\+computed()}}, \mbox{\hyperlink{dg__elements_8cc_source_l00578}{pre\+\_\+compute\+\_\+mass\+\_\+matrix()}}, and \mbox{\hyperlink{dg__elements_8h_source_l00256}{set\+\_\+mass\+\_\+matrix\+\_\+from\+\_\+element()}}.
+Referenced by disable\+\_\+mass\+\_\+matrix\+\_\+reuse(), enable\+\_\+mass\+\_\+matrix\+\_\+reuse(), get\+\_\+inverse\+\_\+mass\+\_\+matrix\+\_\+times\+\_\+residuals(), mass\+\_\+matrix\+\_\+has\+\_\+been\+\_\+computed(), pre\+\_\+compute\+\_\+mass\+\_\+matrix(), and set\+\_\+mass\+\_\+matrix\+\_\+from\+\_\+element().
 
 \mbox{\Hypertarget{classoomph_1_1DGElement_ab2078ea04b7bc4d615498f3b6bff13dd}\label{classoomph_1_1DGElement_ab2078ea04b7bc4d615498f3b6bff13dd}} 
 \index{oomph::DGElement@{oomph::DGElement}!Mass\_matrix\_reuse\_is\_enabled@{Mass\_matrix\_reuse\_is\_enabled}}
@@ -705,11 +705,11 @@ Boolean flag to indicate whether to reuse the mass matrix.
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00182}{182}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+Definition at line 182 of file dg\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{dg__elements_8h_source_l00240}{disable\+\_\+mass\+\_\+matrix\+\_\+reuse()}}, \mbox{\hyperlink{dg__elements_8h_source_l00233}{enable\+\_\+mass\+\_\+matrix\+\_\+reuse()}}, \mbox{\hyperlink{dg__elements_8cc_source_l00614}{get\+\_\+inverse\+\_\+mass\+\_\+matrix\+\_\+times\+\_\+residuals()}}, and \mbox{\hyperlink{dg__elements_8h_source_l00256}{set\+\_\+mass\+\_\+matrix\+\_\+from\+\_\+element()}}.
+Referenced by disable\+\_\+mass\+\_\+matrix\+\_\+reuse(), enable\+\_\+mass\+\_\+matrix\+\_\+reuse(), get\+\_\+inverse\+\_\+mass\+\_\+matrix\+\_\+times\+\_\+residuals(), and set\+\_\+mass\+\_\+matrix\+\_\+from\+\_\+element().
 
 
 

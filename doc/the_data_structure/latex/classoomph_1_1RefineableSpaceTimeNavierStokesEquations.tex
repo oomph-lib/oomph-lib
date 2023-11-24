@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesEquations}{}\doxysection{oomph\+::Refineable\+Space\+Time\+Navier\+Stokes\+Equations\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesEquations}{}\doxysection{oomph\+::Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$ Class Template Reference}
 \label{classoomph_1_1RefineableSpaceTimeNavierStokesEquations}\index{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$}}
 
 
@@ -9,7 +9,7 @@
 
 {\ttfamily \#include $<$refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Refineable\+Space\+Time\+Navier\+Stokes\+Equations\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=5.687904cm]{classoomph_1_1RefineableSpaceTimeNavierStokesEquations}
@@ -20,7 +20,7 @@ Inheritance diagram for oomph\+::Refineable\+Space\+Time\+Navier\+Stokes\+Equati
 \item 
 \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a63fbf1ce07606d29a027d2cab68e0857}{Refineable\+Space\+Time\+Navier\+Stokes\+Equations}} ()
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-virtual \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_ae6c4471129a487219f97ec3f28bddad5}{pressure\+\_\+node\+\_\+pt}} (const unsigned \&n\+\_\+p)
+virtual \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a02161ea0c3df595fc2295db7d8a5c4e1}{pressure\+\_\+node\+\_\+pt}} (const unsigned \&n\+\_\+p)
 \begin{DoxyCompactList}\small\item\em Pointer to n\+\_\+p-\/th pressure node (Default\+: NULL, indicating that pressure is not based on nodal interpolation). \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a5cfde03983cee6ac154b320e1c77f1bb}{get\+\_\+pressure\+\_\+and\+\_\+velocity\+\_\+mass\+\_\+matrix\+\_\+diagonal}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&press\+\_\+mass\+\_\+diag, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&veloc\+\_\+mass\+\_\+diag, const unsigned \&which\+\_\+one=0)
 \begin{DoxyCompactList}\small\item\em Compute the diagonal of the velocity/pressure mass matrices. If which one=0, both are computed, otherwise only the pressure (which\+\_\+one=1) or the velocity mass matrix (which\+\_\+one=2 -- the LSC version of the preconditioner only needs that one) \end{DoxyCompactList}\item 
@@ -34,7 +34,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_ae8
 \begin{DoxyCompactList}\small\item\em Compute the derivatives of the i-\/th component of velocity at point s with respect to all data that can affect its value. In addition, return the global equation numbers corresponding to the data. Overload the non-\/refineable version to take account of hanging node information. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a63fbf1ce07606d29a027d2cab68e0857}{Refineable\+Space\+Time\+Navier\+Stokes\+Equations}} ()
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-virtual \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_ae6c4471129a487219f97ec3f28bddad5}{pressure\+\_\+node\+\_\+pt}} (const unsigned \&n\+\_\+p)
+virtual \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a02161ea0c3df595fc2295db7d8a5c4e1}{pressure\+\_\+node\+\_\+pt}} (const unsigned \&n\+\_\+p)
 \begin{DoxyCompactList}\small\item\em Pointer to n\+\_\+p-\/th pressure node (Default\+: NULL, indicating that pressure is not based on nodal interpolation). \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a5cfde03983cee6ac154b320e1c77f1bb}{get\+\_\+pressure\+\_\+and\+\_\+velocity\+\_\+mass\+\_\+matrix\+\_\+diagonal}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&press\+\_\+mass\+\_\+diag, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&veloc\+\_\+mass\+\_\+diag, const unsigned \&which\+\_\+one=0)
 \begin{DoxyCompactList}\small\item\em Compute the diagonal of the velocity/pressure mass matrices. If which one=0, both are computed, otherwise only the pressure (which\+\_\+one=1) or the velocity mass matrix (which\+\_\+one=2 -- the LSC version of the preconditioner only needs that one) \end{DoxyCompactList}\item 
@@ -48,7 +48,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_ae8
 \begin{DoxyCompactList}\small\item\em Compute the derivatives of the i-\/th component of velocity at point s with respect to all data that can affect its value. In addition, return the global equation numbers corresponding to the data. Overload the non-\/refineable version to take account of hanging node information. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a63fbf1ce07606d29a027d2cab68e0857}{Refineable\+Space\+Time\+Navier\+Stokes\+Equations}} ()
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-virtual \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_ae6c4471129a487219f97ec3f28bddad5}{pressure\+\_\+node\+\_\+pt}} (const unsigned \&n\+\_\+p)
+virtual \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a02161ea0c3df595fc2295db7d8a5c4e1}{pressure\+\_\+node\+\_\+pt}} (const unsigned \&n\+\_\+p)
 \begin{DoxyCompactList}\small\item\em Pointer to n\+\_\+p-\/th pressure node (Default\+: NULL, indicating that pressure is not based on nodal interpolation). \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a5cfde03983cee6ac154b320e1c77f1bb}{get\+\_\+pressure\+\_\+and\+\_\+velocity\+\_\+mass\+\_\+matrix\+\_\+diagonal}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&press\+\_\+mass\+\_\+diag, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&veloc\+\_\+mass\+\_\+diag, const unsigned \&which\+\_\+one=0)
 \begin{DoxyCompactList}\small\item\em Compute the diagonal of the velocity/pressure mass matrices. If which one=0, both are computed, otherwise only the pressure (which\+\_\+one=1) or the velocity mass matrix (which\+\_\+one=2 -- the LSC version of the preconditioner only needs that one) \end{DoxyCompactList}\item 
@@ -114,11 +114,12 @@ virtual void \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquat
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$unsigned DIM$>$\newline
 class oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}
+
 //////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// 
 
 Refineable version of the Navier-\/\+Stokes equations 
 
-Definition at line \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00339}{339}} of file \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 339 of file refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -136,7 +137,7 @@ Constructor.
 
 
 
-Definition at line \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00354}{354}} of file \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 354 of file refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a63fbf1ce07606d29a027d2cab68e0857}\label{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a63fbf1ce07606d29a027d2cab68e0857}} 
 \index{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$}!RefineableSpaceTimeNavierStokesEquations@{RefineableSpaceTimeNavierStokesEquations}}
@@ -151,7 +152,7 @@ Constructor.
 
 
 
-Definition at line \mbox{\hyperlink{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l00354}{354}} of file \mbox{\hyperlink{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 354 of file refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a63fbf1ce07606d29a027d2cab68e0857}\label{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a63fbf1ce07606d29a027d2cab68e0857}} 
 \index{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$}!RefineableSpaceTimeNavierStokesEquations@{RefineableSpaceTimeNavierStokesEquations}}
@@ -166,7 +167,7 @@ Constructor.
 
 
 
-Definition at line \mbox{\hyperlink{refineable__spacetime__navier__stokes__elements_8h_source_l00354}{354}} of file \mbox{\hyperlink{refineable__spacetime__navier__stokes__elements_8h_source}{refineable\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 354 of file refineable\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -188,11 +189,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations
 
 
 
-Definition at line \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00579}{579}} of file \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 579 of file refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{nodes_8h_source_l00367}{oomph\+::\+Data\+::eqn\+\_\+number()}}, \mbox{\hyperlink{nodes_8h_source_l01228}{oomph\+::\+Node\+::hanging\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l01285}{oomph\+::\+Node\+::is\+\_\+hanging()}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00808}{oomph\+::\+Hang\+Info\+::master\+\_\+weight()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l01102}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+nst()}}.
+References oomph\+::\+Data\+::eqn\+\_\+number(), oomph\+::\+Node\+::hanging\+\_\+pt(), oomph\+::\+Node\+::is\+\_\+hanging(), oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt(), oomph\+::\+Hang\+Info\+::master\+\_\+weight(), oomph\+::\+Hang\+Info\+::nmaster(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Finite\+Element\+::shape(), and oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+nst().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_ae83af1a200c2aaf3df80d39c8d95e98e}\label{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_ae83af1a200c2aaf3df80d39c8d95e98e}} 
 \index{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$}!dinterpolated\_u\_nst\_ddata@{dinterpolated\_u\_nst\_ddata}}
@@ -211,11 +212,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations
 
 
 
-Definition at line \mbox{\hyperlink{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l00579}{579}} of file \mbox{\hyperlink{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 579 of file refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{nodes_8h_source_l00367}{oomph\+::\+Data\+::eqn\+\_\+number()}}, \mbox{\hyperlink{nodes_8h_source_l01228}{oomph\+::\+Node\+::hanging\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l01285}{oomph\+::\+Node\+::is\+\_\+hanging()}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00808}{oomph\+::\+Hang\+Info\+::master\+\_\+weight()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l01102}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+nst()}}.
+References oomph\+::\+Data\+::eqn\+\_\+number(), oomph\+::\+Node\+::hanging\+\_\+pt(), oomph\+::\+Node\+::is\+\_\+hanging(), oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt(), oomph\+::\+Hang\+Info\+::master\+\_\+weight(), oomph\+::\+Hang\+Info\+::nmaster(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Finite\+Element\+::shape(), and oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+nst().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_ae83af1a200c2aaf3df80d39c8d95e98e}\label{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_ae83af1a200c2aaf3df80d39c8d95e98e}} 
 \index{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$}!dinterpolated\_u\_nst\_ddata@{dinterpolated\_u\_nst\_ddata}}
@@ -234,11 +235,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations
 
 
 
-Definition at line \mbox{\hyperlink{refineable__spacetime__navier__stokes__elements_8h_source_l00579}{579}} of file \mbox{\hyperlink{refineable__spacetime__navier__stokes__elements_8h_source}{refineable\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 579 of file refineable\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{nodes_8h_source_l00367}{oomph\+::\+Data\+::eqn\+\_\+number()}}, \mbox{\hyperlink{nodes_8h_source_l01228}{oomph\+::\+Node\+::hanging\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l01285}{oomph\+::\+Node\+::is\+\_\+hanging()}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00808}{oomph\+::\+Hang\+Info\+::master\+\_\+weight()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l01102}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+nst()}}.
+References oomph\+::\+Data\+::eqn\+\_\+number(), oomph\+::\+Node\+::hanging\+\_\+pt(), oomph\+::\+Node\+::is\+\_\+hanging(), oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt(), oomph\+::\+Hang\+Info\+::master\+\_\+weight(), oomph\+::\+Hang\+Info\+::nmaster(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Finite\+Element\+::shape(), and oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+nst().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a6e32e07036ba99e2d712ab8756b3f74d}\label{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a6e32e07036ba99e2d712ab8756b3f74d}} 
 \index{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$}!fill\_in\_generic\_pressure\_advection\_diffusion\_contribution\_nst@{fill\_in\_generic\_pressure\_advection\_diffusion\_contribution\_nst}}
@@ -257,11 +258,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations
 
 
 
-Definition at line \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8cc_source_l00285}{285}} of file \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8cc_source}{refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc}}.
+Definition at line 285 of file refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00808}{oomph\+::\+Hang\+Info\+::master\+\_\+weight()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
+References e, i, oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt(), oomph\+::\+Hang\+Info\+::master\+\_\+weight(), oomph\+::\+Hang\+Info\+::nmaster(), s, and oomph\+::\+Quad\+Tree\+Names\+::W.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a6e32e07036ba99e2d712ab8756b3f74d}\label{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a6e32e07036ba99e2d712ab8756b3f74d}} 
 \index{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$}!fill\_in\_generic\_pressure\_advection\_diffusion\_contribution\_nst@{fill\_in\_generic\_pressure\_advection\_diffusion\_contribution\_nst}}
@@ -310,11 +311,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations
 
 
 
-Definition at line \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8cc_source_l00579}{579}} of file \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8cc_source}{refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc}}.
+Definition at line 579 of file refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00808}{oomph\+::\+Hang\+Info\+::master\+\_\+weight()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
+References i, oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt(), oomph\+::\+Hang\+Info\+::master\+\_\+weight(), oomph\+::\+Hang\+Info\+::nmaster(), s, and oomph\+::\+Quad\+Tree\+Names\+::W.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a830ec939fcac36ceabbb8367b89332c6}\label{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a830ec939fcac36ceabbb8367b89332c6}} 
 \index{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$}!fill\_in\_generic\_residual\_contribution\_nst@{fill\_in\_generic\_residual\_contribution\_nst}}
@@ -363,11 +364,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a26628ce36df
 
 
 
-Definition at line \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00521}{521}} of file \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 521 of file refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00543}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+ALE\+\_\+is\+\_\+disabled}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00531}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Body\+\_\+force\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l01009}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::body\+\_\+force\+\_\+fct\+\_\+pt()}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00509}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Density\+\_\+\+Ratio\+\_\+pt}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00979}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::density\+\_\+ratio\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l00659}{oomph\+::\+Generalised\+Element\+::external\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{refineable__elements_8h_source_l00539}{oomph\+::\+Refineable\+Element\+::father\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00528}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+G\+\_\+pt}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l01003}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::g\+\_\+pt()}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00886}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::is\+\_\+strouhal\+\_\+stored\+\_\+as\+\_\+external\+\_\+data()}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00991}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::re\+\_\+invfr\+\_\+pt()}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00514}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Re\+\_\+pt}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00878}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::re\+\_\+pt()}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00525}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Re\+Inv\+Fr\+\_\+pt}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00534}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Source\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l01021}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::source\+\_\+fct\+\_\+pt()}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00517}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+St\+\_\+pt}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00918}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::st\+\_\+pt()}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00837}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::store\+\_\+strouhal\+\_\+as\+\_\+external\+\_\+data()}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00521}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Strouhal\+\_\+is\+\_\+stored\+\_\+as\+\_\+external\+\_\+data}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00505}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Viscosity\+\_\+\+Ratio\+\_\+pt}}, and \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00966}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::viscosity\+\_\+ratio\+\_\+pt()}}.
+References oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+ALE\+\_\+is\+\_\+disabled, oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Body\+\_\+force\+\_\+fct\+\_\+pt, oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::body\+\_\+force\+\_\+fct\+\_\+pt(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Density\+\_\+\+Ratio\+\_\+pt, oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::density\+\_\+ratio\+\_\+pt(), oomph\+::\+Generalised\+Element\+::external\+\_\+data\+\_\+pt(), oomph\+::\+Refineable\+Element\+::father\+\_\+element\+\_\+pt(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+G\+\_\+pt, oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::g\+\_\+pt(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::is\+\_\+strouhal\+\_\+stored\+\_\+as\+\_\+external\+\_\+data(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::re\+\_\+invfr\+\_\+pt(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Re\+\_\+pt, oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::re\+\_\+pt(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Re\+Inv\+Fr\+\_\+pt, oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Source\+\_\+fct\+\_\+pt, oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::source\+\_\+fct\+\_\+pt(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+St\+\_\+pt, oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::st\+\_\+pt(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::store\+\_\+strouhal\+\_\+as\+\_\+external\+\_\+data(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Strouhal\+\_\+is\+\_\+stored\+\_\+as\+\_\+external\+\_\+data, oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Viscosity\+\_\+\+Ratio\+\_\+pt, and oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::viscosity\+\_\+ratio\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_ae0ea19b6f9745af4a9d458245bd178af}\label{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_ae0ea19b6f9745af4a9d458245bd178af}} 
 \index{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$}!further\_build@{further\_build}}
@@ -386,11 +387,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a26628ce36df
 
 
 
-Definition at line \mbox{\hyperlink{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l00521}{521}} of file \mbox{\hyperlink{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 521 of file refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00543}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+ALE\+\_\+is\+\_\+disabled}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00531}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Body\+\_\+force\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00509}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Density\+\_\+\+Ratio\+\_\+pt}}, \mbox{\hyperlink{refineable__elements_8h_source_l00539}{oomph\+::\+Refineable\+Element\+::father\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00528}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+G\+\_\+pt}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00514}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Re\+\_\+pt}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00525}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Re\+Inv\+Fr\+\_\+pt}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00534}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Source\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00517}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+St\+\_\+pt}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00837}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::store\+\_\+strouhal\+\_\+as\+\_\+external\+\_\+data()}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00521}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Strouhal\+\_\+is\+\_\+stored\+\_\+as\+\_\+external\+\_\+data}}, and \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00505}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Viscosity\+\_\+\+Ratio\+\_\+pt}}.
+References oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+ALE\+\_\+is\+\_\+disabled, oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Body\+\_\+force\+\_\+fct\+\_\+pt, oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Density\+\_\+\+Ratio\+\_\+pt, oomph\+::\+Refineable\+Element\+::father\+\_\+element\+\_\+pt(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+G\+\_\+pt, oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Re\+\_\+pt, oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Re\+Inv\+Fr\+\_\+pt, oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Source\+\_\+fct\+\_\+pt, oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+St\+\_\+pt, oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::store\+\_\+strouhal\+\_\+as\+\_\+external\+\_\+data(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Strouhal\+\_\+is\+\_\+stored\+\_\+as\+\_\+external\+\_\+data, and oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Viscosity\+\_\+\+Ratio\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_ae0ea19b6f9745af4a9d458245bd178af}\label{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_ae0ea19b6f9745af4a9d458245bd178af}} 
 \index{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$}!further\_build@{further\_build}}
@@ -409,11 +410,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a26628ce36df
 
 
 
-Definition at line \mbox{\hyperlink{refineable__spacetime__navier__stokes__elements_8h_source_l00521}{521}} of file \mbox{\hyperlink{refineable__spacetime__navier__stokes__elements_8h_source}{refineable\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 521 of file refineable\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00543}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+ALE\+\_\+is\+\_\+disabled}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00531}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Body\+\_\+force\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00509}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Density\+\_\+\+Ratio\+\_\+pt}}, \mbox{\hyperlink{refineable__elements_8h_source_l00539}{oomph\+::\+Refineable\+Element\+::father\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00528}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+G\+\_\+pt}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00514}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Re\+\_\+pt}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00525}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Re\+Inv\+Fr\+\_\+pt}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00534}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Source\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00517}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+St\+\_\+pt}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00837}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::store\+\_\+strouhal\+\_\+as\+\_\+external\+\_\+data()}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00521}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Strouhal\+\_\+is\+\_\+stored\+\_\+as\+\_\+external\+\_\+data}}, and \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00505}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Viscosity\+\_\+\+Ratio\+\_\+pt}}.
+References oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+ALE\+\_\+is\+\_\+disabled, oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Body\+\_\+force\+\_\+fct\+\_\+pt, oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Density\+\_\+\+Ratio\+\_\+pt, oomph\+::\+Refineable\+Element\+::father\+\_\+element\+\_\+pt(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+G\+\_\+pt, oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Re\+\_\+pt, oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Re\+Inv\+Fr\+\_\+pt, oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Source\+\_\+fct\+\_\+pt, oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+St\+\_\+pt, oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::store\+\_\+strouhal\+\_\+as\+\_\+external\+\_\+data(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Strouhal\+\_\+is\+\_\+stored\+\_\+as\+\_\+external\+\_\+data, and oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Viscosity\+\_\+\+Ratio\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_adfdb7ccf9b34c4cdf3da890081a289d4}\label{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_adfdb7ccf9b34c4cdf3da890081a289d4}} 
 \index{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$}!get\_dresidual\_dnodal\_coordinates@{get\_dresidual\_dnodal\_coordinates}}
@@ -432,11 +433,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a83d4f26d6f4
 
 
 
-Definition at line \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8cc_source_l01292}{1292}} of file \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8cc_source}{refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc}}.
+Definition at line 1292 of file refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01198}{oomph\+::\+Generalised\+Element\+::\+Default\+\_\+fd\+\_\+jacobian\+\_\+step}}, \mbox{\hyperlink{nodes_8h_source_l01606}{oomph\+::\+Node\+::has\+\_\+auxiliary\+\_\+node\+\_\+update\+\_\+fct\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00808}{oomph\+::\+Hang\+Info\+::master\+\_\+weight()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{nodes_8h_source_l01615}{oomph\+::\+Node\+::perform\+\_\+auxiliary\+\_\+node\+\_\+update\+\_\+fct()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{nodes_8h_source_l00324}{oomph\+::\+Data\+::value\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
+References oomph\+::\+Generalised\+Element\+::\+Default\+\_\+fd\+\_\+jacobian\+\_\+step, oomph\+::\+Node\+::has\+\_\+auxiliary\+\_\+node\+\_\+update\+\_\+fct\+\_\+pt(), i, oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt(), oomph\+::\+Hang\+Info\+::master\+\_\+weight(), oomph\+::\+Hang\+Info\+::nmaster(), oomph\+::\+Node\+::perform\+\_\+auxiliary\+\_\+node\+\_\+update\+\_\+fct(), s, oomph\+::\+Data\+::value\+\_\+pt(), and oomph\+::\+Node\+::x().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a6abb6002cd98cacfd4768564fbaf735c}\label{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a6abb6002cd98cacfd4768564fbaf735c}} 
 \index{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$}!get\_dresidual\_dnodal\_coordinates@{get\_dresidual\_dnodal\_coordinates}}
@@ -485,11 +486,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations
 
 
 
-Definition at line \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8cc_source_l00042}{42}} of file \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8cc_source}{refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc}}.
+Definition at line 42 of file refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00808}{oomph\+::\+Hang\+Info\+::master\+\_\+weight()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
+References i, oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt(), oomph\+::\+Hang\+Info\+::master\+\_\+weight(), oomph\+::\+Hang\+Info\+::nmaster(), s, and oomph\+::\+Quad\+Tree\+Names\+::W.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a5cfde03983cee6ac154b320e1c77f1bb}\label{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a5cfde03983cee6ac154b320e1c77f1bb}} 
 \index{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$}!get\_pressure\_and\_velocity\_mass\_matrix\_diagonal@{get\_pressure\_and\_velocity\_mass\_matrix\_diagonal}}
@@ -538,11 +539,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a5688ff5f5
 
 
 
-Definition at line \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00437}{437}} of file \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 437 of file refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l03298}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8cc_source_l01468}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::strain\+\_\+rate()}}, and \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l01102}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+nst()}}.
+References oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian(), i, oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), s, oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::strain\+\_\+rate(), and oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+nst().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a1dcf46d955b391d7aff4a6629d2adff1}\label{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a1dcf46d955b391d7aff4a6629d2adff1}} 
 \index{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$}!get\_Z2\_flux@{get\_Z2\_flux}}
@@ -561,11 +562,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a5688ff5f5
 
 
 
-Definition at line \mbox{\hyperlink{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l00437}{437}} of file \mbox{\hyperlink{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 437 of file refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l03298}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8cc_source_l01468}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::strain\+\_\+rate()}}, and \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l01102}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+nst()}}.
+References oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian(), i, oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), s, oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::strain\+\_\+rate(), and oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+nst().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a1dcf46d955b391d7aff4a6629d2adff1}\label{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a1dcf46d955b391d7aff4a6629d2adff1}} 
 \index{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$}!get\_Z2\_flux@{get\_Z2\_flux}}
@@ -584,11 +585,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a5688ff5f5
 
 
 
-Definition at line \mbox{\hyperlink{refineable__spacetime__navier__stokes__elements_8h_source_l00437}{437}} of file \mbox{\hyperlink{refineable__spacetime__navier__stokes__elements_8h_source}{refineable\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 437 of file refineable\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l03298}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8cc_source_l01468}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::strain\+\_\+rate()}}, and \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l01102}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+nst()}}.
+References oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian(), i, oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), s, oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::strain\+\_\+rate(), and oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+nst().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a342412ec52da23fb297d14841d941481}\label{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a342412ec52da23fb297d14841d941481}} 
 \index{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$}!num\_Z2\_flux\_terms@{num\_Z2\_flux\_terms}}
@@ -607,7 +608,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_ae82c57289
 
 
 
-Definition at line \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00427}{427}} of file \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 427 of file refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a342412ec52da23fb297d14841d941481}\label{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a342412ec52da23fb297d14841d941481}} 
 \index{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$}!num\_Z2\_flux\_terms@{num\_Z2\_flux\_terms}}
@@ -626,7 +627,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_ae82c57289
 
 
 
-Definition at line \mbox{\hyperlink{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l00427}{427}} of file \mbox{\hyperlink{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 427 of file refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a342412ec52da23fb297d14841d941481}\label{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a342412ec52da23fb297d14841d941481}} 
 \index{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$}!num\_Z2\_flux\_terms@{num\_Z2\_flux\_terms}}
@@ -645,7 +646,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_ae82c57289
 
 
 
-Definition at line \mbox{\hyperlink{refineable__spacetime__navier__stokes__elements_8h_source_l00427}{427}} of file \mbox{\hyperlink{refineable__spacetime__navier__stokes__elements_8h_source}{refineable\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 427 of file refineable\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_ad7fded76a97b3b9f6ddc6cd2fce7ccc2}\label{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_ad7fded76a97b3b9f6ddc6cd2fce7ccc2}} 
 \index{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$}!pin\_elemental\_redundant\_nodal\_pressure\_dofs@{pin\_elemental\_redundant\_nodal\_pressure\_dofs}}
@@ -664,11 +665,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeEl
 
 
 
-Definition at line \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00350}{350}} of file \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 350 of file refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00372}{oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::pin\+\_\+redundant\+\_\+nodal\+\_\+pressures()}}.
+Referenced by oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::pin\+\_\+redundant\+\_\+nodal\+\_\+pressures().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_ad7fded76a97b3b9f6ddc6cd2fce7ccc2}\label{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_ad7fded76a97b3b9f6ddc6cd2fce7ccc2}} 
 \index{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$}!pin\_elemental\_redundant\_nodal\_pressure\_dofs@{pin\_elemental\_redundant\_nodal\_pressure\_dofs}}
@@ -687,7 +688,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeEl
 
 
 
-Definition at line \mbox{\hyperlink{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l00350}{350}} of file \mbox{\hyperlink{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 350 of file refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_ad7fded76a97b3b9f6ddc6cd2fce7ccc2}\label{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_ad7fded76a97b3b9f6ddc6cd2fce7ccc2}} 
 \index{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$}!pin\_elemental\_redundant\_nodal\_pressure\_dofs@{pin\_elemental\_redundant\_nodal\_pressure\_dofs}}
@@ -706,7 +707,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeEl
 
 
 
-Definition at line \mbox{\hyperlink{refineable__spacetime__navier__stokes__elements_8h_source_l00350}{350}} of file \mbox{\hyperlink{refineable__spacetime__navier__stokes__elements_8h_source}{refineable\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 350 of file refineable\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a08521ef1ca40f41439b771735613e75e}\label{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a08521ef1ca40f41439b771735613e75e}} 
 \index{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$}!pin\_redundant\_nodal\_pressures@{pin\_redundant\_nodal\_pressures}}
@@ -724,11 +725,11 @@ Loop over all elements in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} (which
 \item {\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations}{Refineable\+Space\+Time\+Navier\+Stokes\+Equations}}\+:}\+: \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_ad7fded76a97b3b9f6ddc6cd2fce7ccc2}{pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs()}}
 \end{DoxyItemize}which is empty by default and should be implemented for elements with nodal pressure degrees of freedom (e.\+g. for refineable Taylor-\/\+Hood.) 
 
-Definition at line \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00372}{372}} of file \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 372 of file refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, and \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00350}{oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs()}}.
+References e, and oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a08521ef1ca40f41439b771735613e75e}\label{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a08521ef1ca40f41439b771735613e75e}} 
 \index{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$}!pin\_redundant\_nodal\_pressures@{pin\_redundant\_nodal\_pressures}}
@@ -746,11 +747,11 @@ Loop over all elements in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} (which
 \item {\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations}{Refineable\+Space\+Time\+Navier\+Stokes\+Equations}}\+:}\+: \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_ad7fded76a97b3b9f6ddc6cd2fce7ccc2}{pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs()}}
 \end{DoxyItemize}which is empty by default and should be implemented for elements with nodal pressure degrees of freedom (e.\+g. for refineable Taylor-\/\+Hood.) 
 
-Definition at line \mbox{\hyperlink{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l00372}{372}} of file \mbox{\hyperlink{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 372 of file refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, and \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00350}{oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs()}}.
+References e, and oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a08521ef1ca40f41439b771735613e75e}\label{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a08521ef1ca40f41439b771735613e75e}} 
 \index{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$}!pin\_redundant\_nodal\_pressures@{pin\_redundant\_nodal\_pressures}}
@@ -768,18 +769,18 @@ Loop over all elements in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} (which
 \item {\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations}{Refineable\+Space\+Time\+Navier\+Stokes\+Equations}}\+:}\+: \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_ad7fded76a97b3b9f6ddc6cd2fce7ccc2}{pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs()}}
 \end{DoxyItemize}which is empty by default and should be implemented for elements with nodal pressure degrees of freedom (e.\+g. for refineable Taylor-\/\+Hood.) 
 
-Definition at line \mbox{\hyperlink{refineable__spacetime__navier__stokes__elements_8h_source_l00372}{372}} of file \mbox{\hyperlink{refineable__spacetime__navier__stokes__elements_8h_source}{refineable\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 372 of file refineable\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, and \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00350}{oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs()}}.
+References e, and oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs().
 
-\mbox{\Hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_ae6c4471129a487219f97ec3f28bddad5}\label{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_ae6c4471129a487219f97ec3f28bddad5}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a02161ea0c3df595fc2295db7d8a5c4e1}\label{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a02161ea0c3df595fc2295db7d8a5c4e1}} 
 \index{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$}!pressure\_node\_pt@{pressure\_node\_pt}}
 \index{pressure\_node\_pt@{pressure\_node\_pt}!oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{pressure\_node\_pt()}{pressure\_node\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations}{oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations}}$<$ DIM $>$\+::pressure\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+virtual \mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$ \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations}{oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations}}$<$ DIM $>$\+::pressure\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -787,18 +788,18 @@ Pointer to n\+\_\+p-\/th pressure node (Default\+: NULL, indicating that pressur
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a9e45e0f4c084b175748225123f215440}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a9e45e0f4c084b175748225123f215440}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a9e45e0f4c084b175748225123f215440}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a21e5e3d9fd1093f3a847f760beac392f}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a21e5e3d9fd1093f3a847f760beac392f}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a21e5e3d9fd1093f3a847f760beac392f}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00409}{409}} of file \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 409 of file refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
-\mbox{\Hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_ae6c4471129a487219f97ec3f28bddad5}\label{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_ae6c4471129a487219f97ec3f28bddad5}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a02161ea0c3df595fc2295db7d8a5c4e1}\label{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a02161ea0c3df595fc2295db7d8a5c4e1}} 
 \index{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$}!pressure\_node\_pt@{pressure\_node\_pt}}
 \index{pressure\_node\_pt@{pressure\_node\_pt}!oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{pressure\_node\_pt()}{pressure\_node\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations}{oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations}}$<$ DIM $>$\+::pressure\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+virtual \mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$ \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations}{oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations}}$<$ DIM $>$\+::pressure\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -806,18 +807,18 @@ Pointer to n\+\_\+p-\/th pressure node (Default\+: NULL, indicating that pressur
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a9e45e0f4c084b175748225123f215440}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a9e45e0f4c084b175748225123f215440}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a9e45e0f4c084b175748225123f215440}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a21e5e3d9fd1093f3a847f760beac392f}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a21e5e3d9fd1093f3a847f760beac392f}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a21e5e3d9fd1093f3a847f760beac392f}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l00409}{409}} of file \mbox{\hyperlink{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 409 of file refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
-\mbox{\Hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_ae6c4471129a487219f97ec3f28bddad5}\label{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_ae6c4471129a487219f97ec3f28bddad5}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a02161ea0c3df595fc2295db7d8a5c4e1}\label{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a02161ea0c3df595fc2295db7d8a5c4e1}} 
 \index{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$}!pressure\_node\_pt@{pressure\_node\_pt}}
 \index{pressure\_node\_pt@{pressure\_node\_pt}!oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{pressure\_node\_pt()}{pressure\_node\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations}{oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations}}$<$ DIM $>$\+::pressure\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+virtual \mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$ \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations}{oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations}}$<$ DIM $>$\+::pressure\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -825,11 +826,11 @@ Pointer to n\+\_\+p-\/th pressure node (Default\+: NULL, indicating that pressur
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a9e45e0f4c084b175748225123f215440}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a9e45e0f4c084b175748225123f215440}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a9e45e0f4c084b175748225123f215440}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a21e5e3d9fd1093f3a847f760beac392f}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a21e5e3d9fd1093f3a847f760beac392f}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a21e5e3d9fd1093f3a847f760beac392f}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{refineable__spacetime__navier__stokes__elements_8h_source_l00409}{409}} of file \mbox{\hyperlink{refineable__spacetime__navier__stokes__elements_8h_source}{refineable\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 409 of file refineable\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a8c79b19ba1afa42e8baf05c370d54b6a}\label{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a8c79b19ba1afa42e8baf05c370d54b6a}} 
 \index{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$}!unpin\_all\_pressure\_dofs@{unpin\_all\_pressure\_dofs}}
@@ -844,11 +845,11 @@ Unpin all pressure dofs in elements listed in vector.
 
 
 
-Definition at line \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00390}{390}} of file \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 390 of file refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, and \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a7a425b0cc6fcbd1e687e04e0251ab2d4}{oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs()}}.
+References e, and oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a8c79b19ba1afa42e8baf05c370d54b6a}\label{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a8c79b19ba1afa42e8baf05c370d54b6a}} 
 \index{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$}!unpin\_all\_pressure\_dofs@{unpin\_all\_pressure\_dofs}}
@@ -863,11 +864,11 @@ Unpin all pressure dofs in elements listed in vector.
 
 
 
-Definition at line \mbox{\hyperlink{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l00390}{390}} of file \mbox{\hyperlink{refineable__discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 390 of file refineable\+\_\+discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, and \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a7a425b0cc6fcbd1e687e04e0251ab2d4}{oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs()}}.
+References e, and oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a8c79b19ba1afa42e8baf05c370d54b6a}\label{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a8c79b19ba1afa42e8baf05c370d54b6a}} 
 \index{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$}!unpin\_all\_pressure\_dofs@{unpin\_all\_pressure\_dofs}}
@@ -882,11 +883,11 @@ Unpin all pressure dofs in elements listed in vector.
 
 
 
-Definition at line \mbox{\hyperlink{refineable__spacetime__navier__stokes__elements_8h_source_l00390}{390}} of file \mbox{\hyperlink{refineable__spacetime__navier__stokes__elements_8h_source}{refineable\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 390 of file refineable\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, and \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a7a425b0cc6fcbd1e687e04e0251ab2d4}{oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs()}}.
+References e, and oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a7a425b0cc6fcbd1e687e04e0251ab2d4}\label{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a7a425b0cc6fcbd1e687e04e0251ab2d4}} 
 \index{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$}!unpin\_elemental\_pressure\_dofs@{unpin\_elemental\_pressure\_dofs}}
@@ -905,7 +906,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElem
 
 
 
-Referenced by \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00390}{oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::unpin\+\_\+all\+\_\+pressure\+\_\+dofs()}}.
+Referenced by oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::unpin\+\_\+all\+\_\+pressure\+\_\+dofs().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a7a425b0cc6fcbd1e687e04e0251ab2d4}\label{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a7a425b0cc6fcbd1e687e04e0251ab2d4}} 
 \index{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$@{oomph::RefineableSpaceTimeNavierStokesEquations$<$ DIM $>$}!unpin\_elemental\_pressure\_dofs@{unpin\_elemental\_pressure\_dofs}}

@@ -38,7 +38,7 @@ void \mbox{\hyperlink{classoomph_1_1PitchForkHandler_a85e7dba2d21c9fe95a575a115c
 \begin{DoxyCompactList}\small\item\em Overload the hessian vector product function so that it breaks. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classoomph_1_1PitchForkHandler_aadc4f0b5dfb82cf171b91432536d1679}{bifurcation\+\_\+type}} () const
 \begin{DoxyCompactList}\small\item\em Indicate that we are tracking a pitchfork bifurcation by returning 2. \end{DoxyCompactList}\item 
-double $\ast$ \mbox{\hyperlink{classoomph_1_1PitchForkHandler_a3bd2172c28b5414bcb03566169d91451}{bifurcation\+\_\+parameter\+\_\+pt}} () const
+double $\ast$ \mbox{\hyperlink{classoomph_1_1PitchForkHandler_a7363cb34d716d64d891af5018e09d807}{bifurcation\+\_\+parameter\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Return a pointer to the bifurcation parameter in bifurcation tracking problems. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PitchForkHandler_a9d5e1388fe0ede6834a249b98168b71a}{get\+\_\+eigenfunction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&eigenfunction)
 \begin{DoxyCompactList}\small\item\em Return the eigenfunction(s) associated with the bifurcation that has been detected in bifurcation tracking problems. \end{DoxyCompactList}\item 
@@ -110,7 +110,7 @@ A class that is used to assemble the augmented system that defines a pitchfork (
 
 \[ R(u,\lambda) + \sigma \psi = 0,\] \[ Jy = 0,\] \[ \langle u, \phi \rangle = 0, \] \[ \phi \cdot y = 1.\] In the abovem $J$ is the usual Jacobian matrix, $dR/du$ and $\phi$ is a constant vector that is chosen to ensure that the null vector, $y$, is not trivial. Here $\sigma $ is a slack variable that is used to enforce the constraint $ \langle u, \phi \rangle = 0 $ --- the inner product of the solution with the chosen symmetry vector is zero. At the bifurcation $ \sigma $ should be very close to zero. Note that this formulation means that any odd symmetry in the problem must be about zero. Moreover, we use the dot product of two vectors to calculate the inner product, rather than an integral over the domain and so the mesh must be symmetric in the appropriate directions. 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00772}{772}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 772 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -139,7 +139,7 @@ Block\+\_\+augmented\+\_\+J&\\
 \end{DoxyEnumFields}
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00779}{779}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 779 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -156,11 +156,11 @@ Constructor, initialise the systems.
 
 Constructor\+: Initialise the \mbox{\hyperlink{classoomph_1_1PitchForkHandler}{Pitch\+Fork\+Handler}} by setting intial guesses for Sigma, Y, specifying C and Psi and calculating count. 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l02677}{2677}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 2677 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{assembly__handler_8h_source_l00797}{Assembly\+\_\+handler\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00807}{Augmented\+\_\+dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00379}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::build\+\_\+halo\+\_\+scheme()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00821}{C}}, \mbox{\hyperlink{problem_8h_source_l01246}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00828}{Count}}, \mbox{\hyperlink{assembly__handler_8h_source_l00842}{Distributed}}, \mbox{\hyperlink{problem_8h_source_l00808}{oomph\+::\+Problem\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00804}{Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00460}{oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00554}{oomph\+::\+Problem\+::\+Dof\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00448}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l00082}{oomph\+::\+Assembly\+Handler\+::eqn\+\_\+number()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00261}{oomph\+::\+Linear\+Algebra\+Distribution\+::first\+\_\+row()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00832}{Global\+\_\+eqn\+\_\+number}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00221}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::global\+\_\+value()}}, \mbox{\hyperlink{problem_8h_source_l00577}{oomph\+::\+Problem\+::\+Halo\+\_\+scheme\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l01163}{oomph\+::\+Generalised\+Element\+::is\+\_\+halo()}}, \mbox{\hyperlink{problem_8h_source_l01280}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l00042}{oomph\+::\+Assembly\+Handler\+::ndof()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00801}{Ndof}}, \mbox{\hyperlink{problem_8h_source_l01674}{oomph\+::\+Problem\+::ndof()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00838}{Nelement}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{double__vector_8cc_source_l00867}{oomph\+::\+Double\+Vector\+::norm()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00193}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00794}{Problem\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00817}{Psi}}, \mbox{\hyperlink{problem_8cc_source_l00300}{oomph\+::\+Problem\+::setup\+\_\+dof\+\_\+halo\+\_\+scheme()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00811}{Sigma}}, \mbox{\hyperlink{problem_8h_source_l00667}{oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation}}, \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00323}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::sum\+\_\+all\+\_\+halo\+\_\+and\+\_\+haloed\+\_\+values()}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00814}{Y}}.
+References Assembly\+\_\+handler\+\_\+pt, Augmented\+\_\+dof\+\_\+distribution\+\_\+pt, oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::build\+\_\+halo\+\_\+scheme(), C, oomph\+::\+Problem\+::communicator\+\_\+pt(), Count, Distributed, oomph\+::\+Problem\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), Dof\+\_\+distribution\+\_\+pt, oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt, oomph\+::\+Problem\+::\+Dof\+\_\+pt, e, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Assembly\+Handler\+::eqn\+\_\+number(), oomph\+::\+Linear\+Algebra\+Distribution\+::first\+\_\+row(), Global\+\_\+eqn\+\_\+number, oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::global\+\_\+value(), oomph\+::\+Problem\+::\+Halo\+\_\+scheme\+\_\+pt, oomph\+::\+Generalised\+Element\+::is\+\_\+halo(), oomph\+::\+Problem\+::mesh\+\_\+pt(), oomph\+::\+Assembly\+Handler\+::ndof(), Ndof, oomph\+::\+Problem\+::ndof(), Nelement, oomph\+::\+Mesh\+::nelement(), oomph\+::\+Double\+Vector\+::norm(), oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local(), Problem\+\_\+pt, Psi, oomph\+::\+Problem\+::setup\+\_\+dof\+\_\+halo\+\_\+scheme(), Sigma, oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation, oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::sum\+\_\+all\+\_\+halo\+\_\+and\+\_\+haloed\+\_\+values(), and Y.
 
 \mbox{\Hypertarget{classoomph_1_1PitchForkHandler_a69c6b0b6aedd03d828d295531fd61820}\label{classoomph_1_1PitchForkHandler_a69c6b0b6aedd03d828d295531fd61820}} 
 \index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!````~PitchForkHandler@{$\sim$PitchForkHandler}}
@@ -174,20 +174,20 @@ Destructor, return the problem to its original state, before the augmented syste
 
 Destructor return the problem to its original (non-\/augmented) state. 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l02897}{2897}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 2897 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{assembly__handler_8h_source_l00804}{Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00460}{oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00554}{oomph\+::\+Problem\+::\+Dof\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l01466}{oomph\+::\+Problem\+::linear\+\_\+solver\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00676}{oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::linear\+\_\+solver\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00743}{oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::linear\+\_\+solver\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00193}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00794}{Problem\+\_\+pt}}, and \mbox{\hyperlink{problem_8h_source_l00667}{oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation}}.
+References Dof\+\_\+distribution\+\_\+pt, oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt, oomph\+::\+Problem\+::\+Dof\+\_\+pt, oomph\+::\+Problem\+::linear\+\_\+solver\+\_\+pt(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::linear\+\_\+solver\+\_\+pt(), oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::linear\+\_\+solver\+\_\+pt(), oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local(), Problem\+\_\+pt, and oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1PitchForkHandler_a3bd2172c28b5414bcb03566169d91451}\label{classoomph_1_1PitchForkHandler_a3bd2172c28b5414bcb03566169d91451}} 
+\mbox{\Hypertarget{classoomph_1_1PitchForkHandler_a7363cb34d716d64d891af5018e09d807}\label{classoomph_1_1PitchForkHandler_a7363cb34d716d64d891af5018e09d807}} 
 \index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!bifurcation\_parameter\_pt@{bifurcation\_parameter\_pt}}
 \index{bifurcation\_parameter\_pt@{bifurcation\_parameter\_pt}!oomph::PitchForkHandler@{oomph::PitchForkHandler}}
 \doxysubsubsection{\texorpdfstring{bifurcation\_parameter\_pt()}{bifurcation\_parameter\_pt()}}
-{\footnotesize\ttfamily double $\ast$ oomph\+::\+Pitch\+Fork\+Handler\+::bifurcation\+\_\+parameter\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily double$\ast$ oomph\+::\+Pitch\+Fork\+Handler\+::bifurcation\+\_\+parameter\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -199,11 +199,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a3e369ec692c3d
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00924}{924}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 924 of file assembly\+\_\+handler.\+h.
 
 
 
-References \mbox{\hyperlink{assembly__handler_8h_source_l00835}{Parameter\+\_\+pt}}.
+References Parameter\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1PitchForkHandler_aadc4f0b5dfb82cf171b91432536d1679}\label{classoomph_1_1PitchForkHandler_aadc4f0b5dfb82cf171b91432536d1679}} 
 \index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!bifurcation\_type@{bifurcation\_type}}
@@ -221,7 +221,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a22c5f240674e4
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00917}{917}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 917 of file assembly\+\_\+handler.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PitchForkHandler_ab29e58e25bd5bebd836e30015f01ac8d}\label{classoomph_1_1PitchForkHandler_ab29e58e25bd5bebd836e30015f01ac8d}} 
 \index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!eqn\_number@{eqn\_number}}
@@ -239,15 +239,15 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a94d28e2de2559
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l02974}{2974}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 2974 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{assembly__handler_8h_source_l00783}{Block\+\_\+augmented\+\_\+J}}, \mbox{\hyperlink{assembly__handler_8h_source_l00782}{Block\+\_\+J}}, \mbox{\hyperlink{assembly__handler_8h_source_l00842}{Distributed}}, \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00781}{Full\+\_\+augmented}}, \mbox{\hyperlink{assembly__handler_8h_source_l00848}{global\+\_\+eqn\+\_\+number()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00801}{Ndof}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00791}{Solve\+\_\+which\+\_\+system}}.
+References Block\+\_\+augmented\+\_\+J, Block\+\_\+J, Distributed, oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), Full\+\_\+augmented, global\+\_\+eqn\+\_\+number(), Ndof, oomph\+::\+Generalised\+Element\+::ndof(), and Solve\+\_\+which\+\_\+system.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l02510}{oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l02275}{oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve()}}.
+Referenced by oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), and oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve().
 
 \mbox{\Hypertarget{classoomph_1_1PitchForkHandler_aa16d6770f6d46b7db4101f417373b191}\label{classoomph_1_1PitchForkHandler_aa16d6770f6d46b7db4101f417373b191}} 
 \index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!get\_djacobian\_dparameter@{get\_djacobian\_dparameter}}
@@ -265,7 +265,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_aefc0c13a65342
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l03394}{3394}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 3394 of file assembly\+\_\+handler.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1PitchForkHandler_a6510803afcbcfce1ae5b1c1c5d82a541}\label{classoomph_1_1PitchForkHandler_a6510803afcbcfce1ae5b1c1c5d82a541}} 
 \index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!get\_dresiduals\_dparameter@{get\_dresiduals\_dparameter}}
@@ -283,11 +283,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a2ee980ccabe0a
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l03316}{3316}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 3316 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{problem_8h_source_l01048}{oomph\+::\+Problem\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00783}{Block\+\_\+augmented\+\_\+J}}, \mbox{\hyperlink{assembly__handler_8h_source_l00782}{Block\+\_\+J}}, \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00781}{Full\+\_\+augmented}}, \mbox{\hyperlink{elements_8h_source_l01046}{oomph\+::\+Generalised\+Element\+::get\+\_\+djacobian\+\_\+dparameter()}}, \mbox{\hyperlink{elements_8h_source_l01034}{oomph\+::\+Generalised\+Element\+::get\+\_\+dresiduals\+\_\+dparameter()}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00221}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::global\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00794}{Problem\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00791}{Solve\+\_\+which\+\_\+system}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00814}{Y}}.
+References oomph\+::\+Problem\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check(), Block\+\_\+augmented\+\_\+J, Block\+\_\+J, oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), Full\+\_\+augmented, oomph\+::\+Generalised\+Element\+::get\+\_\+djacobian\+\_\+dparameter(), oomph\+::\+Generalised\+Element\+::get\+\_\+dresiduals\+\_\+dparameter(), oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::global\+\_\+value(), i, oomph\+::\+Generalised\+Element\+::ndof(), Problem\+\_\+pt, Solve\+\_\+which\+\_\+system, and Y.
 
 \mbox{\Hypertarget{classoomph_1_1PitchForkHandler_a9d5e1388fe0ede6834a249b98168b71a}\label{classoomph_1_1PitchForkHandler_a9d5e1388fe0ede6834a249b98168b71a}} 
 \index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!get\_eigenfunction@{get\_eigenfunction}}
@@ -305,11 +305,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a6d614b1b3809d
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l03430}{3430}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 3430 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{assembly__handler_8h_source_l00804}{Dof\+\_\+distribution\+\_\+pt}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00814}{Y}}.
+References Dof\+\_\+distribution\+\_\+pt, and Y.
 
 \mbox{\Hypertarget{classoomph_1_1PitchForkHandler_a85e7dba2d21c9fe95a575a115cf3ee9f}\label{classoomph_1_1PitchForkHandler_a85e7dba2d21c9fe95a575a115cf3ee9f}} 
 \index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!get\_hessian\_vector\_products@{get\_hessian\_vector\_products}}
@@ -327,11 +327,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a296bef49838d2
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l03416}{3416}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 3416 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{assembly__handler_8h_source_l00821}{C}}, \mbox{\hyperlink{elements_8h_source_l01083}{oomph\+::\+Generalised\+Element\+::get\+\_\+hessian\+\_\+vector\+\_\+products()}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00814}{Y}}.
+References C, oomph\+::\+Generalised\+Element\+::get\+\_\+hessian\+\_\+vector\+\_\+products(), and Y.
 
 \mbox{\Hypertarget{classoomph_1_1PitchForkHandler_aa6728813a099111bee2b6c79dec20fc4}\label{classoomph_1_1PitchForkHandler_aa6728813a099111bee2b6c79dec20fc4}} 
 \index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!get\_jacobian@{get\_jacobian}}
@@ -351,15 +351,15 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_ad43c3d8760be0
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l03137}{3137}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 3137 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{problem_8h_source_l01151}{oomph\+::\+Problem\+::actions\+\_\+after\+\_\+change\+\_\+in\+\_\+bifurcation\+\_\+parameter()}}, \mbox{\hyperlink{problem_8h_source_l01048}{oomph\+::\+Problem\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00797}{Assembly\+\_\+handler\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00783}{Block\+\_\+augmented\+\_\+J}}, \mbox{\hyperlink{assembly__handler_8h_source_l00782}{Block\+\_\+J}}, \mbox{\hyperlink{assembly__handler_8h_source_l00821}{C}}, \mbox{\hyperlink{assembly__handler_8h_source_l00828}{Count}}, \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l00082}{oomph\+::\+Assembly\+Handler\+::eqn\+\_\+number()}}, \mbox{\hyperlink{black__box__newton__solver_8cc_source_l00054}{oomph\+::\+Black\+Box\+FDNewton\+Solver\+::\+FD\+\_\+step}}, \mbox{\hyperlink{assembly__handler_8h_source_l00781}{Full\+\_\+augmented}}, \mbox{\hyperlink{elements_8h_source_l00990}{oomph\+::\+Generalised\+Element\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03034}{get\+\_\+residuals()}}, \mbox{\hyperlink{problem_8h_source_l01764}{oomph\+::\+Problem\+::global\+\_\+dof\+\_\+pt()}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00221}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::global\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02944}{ndof()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00835}{Parameter\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00794}{Problem\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00817}{Psi}}, \mbox{\hyperlink{assembly__handler_8h_source_l00811}{Sigma}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00791}{Solve\+\_\+which\+\_\+system}}.
+References oomph\+::\+Problem\+::actions\+\_\+after\+\_\+change\+\_\+in\+\_\+bifurcation\+\_\+parameter(), oomph\+::\+Problem\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check(), Assembly\+\_\+handler\+\_\+pt, Block\+\_\+augmented\+\_\+J, Block\+\_\+J, C, Count, oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), oomph\+::\+Assembly\+Handler\+::eqn\+\_\+number(), oomph\+::\+Black\+Box\+FDNewton\+Solver\+::\+FD\+\_\+step, Full\+\_\+augmented, oomph\+::\+Generalised\+Element\+::get\+\_\+jacobian(), get\+\_\+residuals(), oomph\+::\+Problem\+::global\+\_\+dof\+\_\+pt(), oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::global\+\_\+value(), i, oomph\+::\+Generalised\+Element\+::ndof(), ndof(), Parameter\+\_\+pt, Problem\+\_\+pt, Psi, Sigma, and Solve\+\_\+which\+\_\+system.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l02510}{oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l02275}{oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve()}}.
+Referenced by oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), and oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve().
 
 \mbox{\Hypertarget{classoomph_1_1PitchForkHandler_a461b24284da88b9489d720e484a6925c}\label{classoomph_1_1PitchForkHandler_a461b24284da88b9489d720e484a6925c}} 
 \index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!get\_residuals@{get\_residuals}}
@@ -377,15 +377,15 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a7a6203b0ab90d
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l03034}{3034}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 3034 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{assembly__handler_8h_source_l00783}{Block\+\_\+augmented\+\_\+J}}, \mbox{\hyperlink{assembly__handler_8h_source_l00782}{Block\+\_\+J}}, \mbox{\hyperlink{assembly__handler_8h_source_l00821}{C}}, \mbox{\hyperlink{assembly__handler_8h_source_l00828}{Count}}, \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00781}{Full\+\_\+augmented}}, \mbox{\hyperlink{elements_8h_source_l00990}{oomph\+::\+Generalised\+Element\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{elements_8h_source_l00980}{oomph\+::\+Generalised\+Element\+::get\+\_\+residuals()}}, \mbox{\hyperlink{problem_8h_source_l01764}{oomph\+::\+Problem\+::global\+\_\+dof\+\_\+pt()}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00221}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::global\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00838}{Nelement}}, \mbox{\hyperlink{assembly__handler_8h_source_l00794}{Problem\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00817}{Psi}}, \mbox{\hyperlink{assembly__handler_8h_source_l00811}{Sigma}}, \mbox{\hyperlink{assembly__handler_8h_source_l00791}{Solve\+\_\+which\+\_\+system}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00814}{Y}}.
+References Block\+\_\+augmented\+\_\+J, Block\+\_\+J, C, Count, oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), Full\+\_\+augmented, oomph\+::\+Generalised\+Element\+::get\+\_\+jacobian(), oomph\+::\+Generalised\+Element\+::get\+\_\+residuals(), oomph\+::\+Problem\+::global\+\_\+dof\+\_\+pt(), oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::global\+\_\+value(), i, oomph\+::\+Generalised\+Element\+::ndof(), Nelement, Problem\+\_\+pt, Psi, Sigma, Solve\+\_\+which\+\_\+system, and Y.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l03137}{get\+\_\+jacobian()}}.
+Referenced by get\+\_\+jacobian().
 
 \mbox{\Hypertarget{classoomph_1_1PitchForkHandler_ac1a4bbb1415a009e9f176f16263fcb3e}\label{classoomph_1_1PitchForkHandler_ac1a4bbb1415a009e9f176f16263fcb3e}} 
 \index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!global\_eqn\_number@{global\_eqn\_number}}
@@ -399,15 +399,15 @@ Function that is used to return map the global equations using the simplistic nu
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00848}{848}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 848 of file assembly\+\_\+handler.\+h.
 
 
 
-References \mbox{\hyperlink{assembly__handler_8h_source_l00842}{Distributed}}, \mbox{\hyperlink{assembly__handler_8h_source_l00832}{Global\+\_\+eqn\+\_\+number}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References Distributed, Global\+\_\+eqn\+\_\+number, and i.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l02974}{eqn\+\_\+number()}}.
+Referenced by eqn\+\_\+number().
 
 \mbox{\Hypertarget{classoomph_1_1PitchForkHandler_ae066fa45e9f1bf10601286ca2d083a42}\label{classoomph_1_1PitchForkHandler_ae066fa45e9f1bf10601286ca2d083a42}} 
 \index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!ndof@{ndof}}
@@ -425,15 +425,15 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a09213be8f4aa0
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l02944}{2944}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 2944 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{assembly__handler_8h_source_l00783}{Block\+\_\+augmented\+\_\+J}}, \mbox{\hyperlink{assembly__handler_8h_source_l00782}{Block\+\_\+J}}, \mbox{\hyperlink{assembly__handler_8h_source_l00781}{Full\+\_\+augmented}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00791}{Solve\+\_\+which\+\_\+system}}.
+References Block\+\_\+augmented\+\_\+J, Block\+\_\+J, Full\+\_\+augmented, oomph\+::\+Generalised\+Element\+::ndof(), and Solve\+\_\+which\+\_\+system.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l03137}{get\+\_\+jacobian()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02510}{oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l02275}{oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve()}}.
+Referenced by get\+\_\+jacobian(), oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), and oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve().
 
 \mbox{\Hypertarget{classoomph_1_1PitchForkHandler_ad0b0920383bcbdab5df1f43db5affa47}\label{classoomph_1_1PitchForkHandler_ad0b0920383bcbdab5df1f43db5affa47}} 
 \index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!solve\_augmented\_block\_system@{solve\_augmented\_block\_system}}
@@ -447,15 +447,15 @@ Set to solve the augmented block system.
 
 Set to solve the augmented-\/by-\/one block system. 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l03476}{3476}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 3476 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{assembly__handler_8h_source_l00783}{Block\+\_\+augmented\+\_\+J}}, \mbox{\hyperlink{assembly__handler_8h_source_l00782}{Block\+\_\+J}}, \mbox{\hyperlink{problem_8h_source_l01246}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l00460}{oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00554}{oomph\+::\+Problem\+::\+Dof\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00801}{Ndof}}, \mbox{\hyperlink{assembly__handler_8h_source_l00835}{Parameter\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00794}{Problem\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00791}{Solve\+\_\+which\+\_\+system}}, and \mbox{\hyperlink{problem_8h_source_l00667}{oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation}}.
+References Block\+\_\+augmented\+\_\+J, Block\+\_\+J, oomph\+::\+Problem\+::communicator\+\_\+pt(), oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt, oomph\+::\+Problem\+::\+Dof\+\_\+pt, Ndof, Parameter\+\_\+pt, Problem\+\_\+pt, Solve\+\_\+which\+\_\+system, and oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l02510}{oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l02275}{oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve()}}.
+Referenced by oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), and oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve().
 
 \mbox{\Hypertarget{classoomph_1_1PitchForkHandler_ad193c3d67741edd60b023c94e42c8802}\label{classoomph_1_1PitchForkHandler_ad193c3d67741edd60b023c94e42c8802}} 
 \index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!solve\_block\_system@{solve\_block\_system}}
@@ -469,15 +469,15 @@ Set to solve the block system.
 
 Set to solve the block system. The boolean flag is used to specify whether the block decomposition should use exactly the same jacobian as the original system. 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l03512}{3512}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 3512 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{assembly__handler_8h_source_l00782}{Block\+\_\+J}}, \mbox{\hyperlink{assembly__handler_8h_source_l00804}{Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00460}{oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00554}{oomph\+::\+Problem\+::\+Dof\+\_\+pt}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00193}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00794}{Problem\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00791}{Solve\+\_\+which\+\_\+system}}, and \mbox{\hyperlink{problem_8h_source_l00667}{oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation}}.
+References Block\+\_\+J, Dof\+\_\+distribution\+\_\+pt, oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt, oomph\+::\+Problem\+::\+Dof\+\_\+pt, oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local(), Problem\+\_\+pt, Solve\+\_\+which\+\_\+system, and oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l02007}{oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l01705}{oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve()}}.
+Referenced by oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), and oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve().
 
 \mbox{\Hypertarget{classoomph_1_1PitchForkHandler_a27325616f4342d159f6f5e7c82ccdf98}\label{classoomph_1_1PitchForkHandler_a27325616f4342d159f6f5e7c82ccdf98}} 
 \index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!solve\_full\_system@{solve\_full\_system}}
@@ -491,15 +491,15 @@ Solve non-\/block system.
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l03535}{3535}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 3535 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{assembly__handler_8h_source_l00807}{Augmented\+\_\+dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00782}{Block\+\_\+J}}, \mbox{\hyperlink{problem_8h_source_l01246}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00842}{Distributed}}, \mbox{\hyperlink{assembly__handler_8h_source_l00804}{Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00460}{oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00554}{oomph\+::\+Problem\+::\+Dof\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00781}{Full\+\_\+augmented}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00193}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00835}{Parameter\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00794}{Problem\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00811}{Sigma}}, \mbox{\hyperlink{assembly__handler_8h_source_l00791}{Solve\+\_\+which\+\_\+system}}, \mbox{\hyperlink{problem_8h_source_l00667}{oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00814}{Y}}.
+References Augmented\+\_\+dof\+\_\+distribution\+\_\+pt, Block\+\_\+J, oomph\+::\+Problem\+::communicator\+\_\+pt(), Distributed, Dof\+\_\+distribution\+\_\+pt, oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt, oomph\+::\+Problem\+::\+Dof\+\_\+pt, Full\+\_\+augmented, oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local(), Parameter\+\_\+pt, Problem\+\_\+pt, Sigma, Solve\+\_\+which\+\_\+system, oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation, and Y.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l02007}{oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02510}{oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01705}{oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l02275}{oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve()}}.
+Referenced by oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), and oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve().
 
 \mbox{\Hypertarget{classoomph_1_1PitchForkHandler_a23a67d7212e25108e40cf9b4606f4478}\label{classoomph_1_1PitchForkHandler_a23a67d7212e25108e40cf9b4606f4478}} 
 \index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!synchronise@{synchronise}}
@@ -517,11 +517,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a0ccef21253d99
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l03448}{3448}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 3448 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{problem_8h_source_l01246}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00842}{Distributed}}, \mbox{\hyperlink{assembly__handler_8h_source_l00835}{Parameter\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00794}{Problem\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00811}{Sigma}}, \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00269}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::synchronise()}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00814}{Y}}.
+References oomph\+::\+Problem\+::communicator\+\_\+pt(), Distributed, Parameter\+\_\+pt, Problem\+\_\+pt, Sigma, oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::synchronise(), and Y.
 
 
 
@@ -534,7 +534,7 @@ References \mbox{\hyperlink{problem_8h_source_l01246}{oomph\+::\+Problem\+::comm
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00775}{775}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 775 of file assembly\+\_\+handler.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PitchForkHandler_aba62ac8cc057be07657972adc4a78b45}\label{classoomph_1_1PitchForkHandler_aba62ac8cc057be07657972adc4a78b45}} 
 \index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!BlockPitchForkLinearSolver@{BlockPitchForkLinearSolver}}
@@ -544,7 +544,7 @@ Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00775}{775}} of
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00774}{774}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 774 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -561,11 +561,11 @@ Pointer to the underlying (original) assembly handler.
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00797}{797}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 797 of file assembly\+\_\+handler.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l03137}{get\+\_\+jacobian()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l02677}{Pitch\+Fork\+Handler()}}.
+Referenced by get\+\_\+jacobian(), and Pitch\+Fork\+Handler().
 
 \mbox{\Hypertarget{classoomph_1_1PitchForkHandler_af6346c1dc77f3d4fb3dc8950afd91e0f}\label{classoomph_1_1PitchForkHandler_af6346c1dc77f3d4fb3dc8950afd91e0f}} 
 \index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!Augmented\_dof\_distribution\_pt@{Augmented\_dof\_distribution\_pt}}
@@ -579,11 +579,11 @@ The augmented distribution.
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00807}{807}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 807 of file assembly\+\_\+handler.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l02677}{Pitch\+Fork\+Handler()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02007}{oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01705}{oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l03535}{solve\+\_\+full\+\_\+system()}}.
+Referenced by Pitch\+Fork\+Handler(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), and solve\+\_\+full\+\_\+system().
 
 \mbox{\Hypertarget{classoomph_1_1PitchForkHandler_a88f5df169c44b02f4ba563cf42241599}\label{classoomph_1_1PitchForkHandler_a88f5df169c44b02f4ba563cf42241599}} 
 \index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!C@{C}}
@@ -597,11 +597,11 @@ A constant vector used to ensure that the null vector is not trivial.
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00821}{821}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 821 of file assembly\+\_\+handler.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l03416}{get\+\_\+hessian\+\_\+vector\+\_\+products()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03137}{get\+\_\+jacobian()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03034}{get\+\_\+residuals()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l02677}{Pitch\+Fork\+Handler()}}.
+Referenced by get\+\_\+hessian\+\_\+vector\+\_\+products(), get\+\_\+jacobian(), get\+\_\+residuals(), and Pitch\+Fork\+Handler().
 
 \mbox{\Hypertarget{classoomph_1_1PitchForkHandler_ad3f5fc1d7ee4918c9734e59e0611a62c}\label{classoomph_1_1PitchForkHandler_ad3f5fc1d7ee4918c9734e59e0611a62c}} 
 \index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!Count@{Count}}
@@ -615,11 +615,11 @@ A vector that is used to determine how many elements contribute to a particular 
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00828}{828}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 828 of file assembly\+\_\+handler.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l03137}{get\+\_\+jacobian()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03034}{get\+\_\+residuals()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l02677}{Pitch\+Fork\+Handler()}}.
+Referenced by get\+\_\+jacobian(), get\+\_\+residuals(), and Pitch\+Fork\+Handler().
 
 \mbox{\Hypertarget{classoomph_1_1PitchForkHandler_ab948b0ac9640e85e8a17f993a764e000}\label{classoomph_1_1PitchForkHandler_ab948b0ac9640e85e8a17f993a764e000}} 
 \index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!Distributed@{Distributed}}
@@ -633,11 +633,11 @@ Boolean to indicate whether the problem is distributed.
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00842}{842}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 842 of file assembly\+\_\+handler.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l02974}{eqn\+\_\+number()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00848}{global\+\_\+eqn\+\_\+number()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02677}{Pitch\+Fork\+Handler()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03535}{solve\+\_\+full\+\_\+system()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l03448}{synchronise()}}.
+Referenced by eqn\+\_\+number(), global\+\_\+eqn\+\_\+number(), Pitch\+Fork\+Handler(), solve\+\_\+full\+\_\+system(), and synchronise().
 
 \mbox{\Hypertarget{classoomph_1_1PitchForkHandler_a075f47b5f8941d25796f96d258a1752e}\label{classoomph_1_1PitchForkHandler_a075f47b5f8941d25796f96d258a1752e}} 
 \index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!Dof\_distribution\_pt@{Dof\_distribution\_pt}}
@@ -651,11 +651,11 @@ Store the original dof distribution.
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00804}{804}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 804 of file assembly\+\_\+handler.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l03430}{get\+\_\+eigenfunction()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02677}{Pitch\+Fork\+Handler()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02007}{oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01705}{oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03512}{solve\+\_\+block\+\_\+system()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03535}{solve\+\_\+full\+\_\+system()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l02897}{$\sim$\+Pitch\+Fork\+Handler()}}.
+Referenced by get\+\_\+eigenfunction(), Pitch\+Fork\+Handler(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), solve\+\_\+block\+\_\+system(), solve\+\_\+full\+\_\+system(), and $\sim$\+Pitch\+Fork\+Handler().
 
 \mbox{\Hypertarget{classoomph_1_1PitchForkHandler_ac7010a8c64237d76cb0f23bfad126e07}\label{classoomph_1_1PitchForkHandler_ac7010a8c64237d76cb0f23bfad126e07}} 
 \index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!Global\_eqn\_number@{Global\_eqn\_number}}
@@ -669,11 +669,11 @@ A vector that is used to map the global equations to their actual location in a 
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00832}{832}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 832 of file assembly\+\_\+handler.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8h_source_l00848}{global\+\_\+eqn\+\_\+number()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l02677}{Pitch\+Fork\+Handler()}}.
+Referenced by global\+\_\+eqn\+\_\+number(), and Pitch\+Fork\+Handler().
 
 \mbox{\Hypertarget{classoomph_1_1PitchForkHandler_a9314a176be55e7e9c5a359accfbec751}\label{classoomph_1_1PitchForkHandler_a9314a176be55e7e9c5a359accfbec751}} 
 \index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!Ndof@{Ndof}}
@@ -687,11 +687,11 @@ Store the number of degrees of freedom in the non-\/augmented problem.
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00801}{801}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 801 of file assembly\+\_\+handler.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l02974}{eqn\+\_\+number()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02677}{Pitch\+Fork\+Handler()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l03476}{solve\+\_\+augmented\+\_\+block\+\_\+system()}}.
+Referenced by eqn\+\_\+number(), Pitch\+Fork\+Handler(), and solve\+\_\+augmented\+\_\+block\+\_\+system().
 
 \mbox{\Hypertarget{classoomph_1_1PitchForkHandler_ac85263fcd40fa913e4bc12c07f6b7343}\label{classoomph_1_1PitchForkHandler_ac85263fcd40fa913e4bc12c07f6b7343}} 
 \index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!Nelement@{Nelement}}
@@ -701,11 +701,11 @@ Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l02974}{eqn\+\_\+num
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00838}{838}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 838 of file assembly\+\_\+handler.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l03034}{get\+\_\+residuals()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l02677}{Pitch\+Fork\+Handler()}}.
+Referenced by get\+\_\+residuals(), and Pitch\+Fork\+Handler().
 
 \mbox{\Hypertarget{classoomph_1_1PitchForkHandler_aa0e8800d56e68fcb63ec2315f503cab2}\label{classoomph_1_1PitchForkHandler_aa0e8800d56e68fcb63ec2315f503cab2}} 
 \index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!Parameter\_pt@{Parameter\_pt}}
@@ -719,11 +719,11 @@ Storage for the pointer to the parameter.
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00835}{835}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 835 of file assembly\+\_\+handler.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8h_source_l00924}{bifurcation\+\_\+parameter\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03137}{get\+\_\+jacobian()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01705}{oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03476}{solve\+\_\+augmented\+\_\+block\+\_\+system()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03535}{solve\+\_\+full\+\_\+system()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l03448}{synchronise()}}.
+Referenced by bifurcation\+\_\+parameter\+\_\+pt(), get\+\_\+jacobian(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), solve\+\_\+augmented\+\_\+block\+\_\+system(), solve\+\_\+full\+\_\+system(), and synchronise().
 
 \mbox{\Hypertarget{classoomph_1_1PitchForkHandler_a196adc8e79a66292d2df9bd9093f8f73}\label{classoomph_1_1PitchForkHandler_a196adc8e79a66292d2df9bd9093f8f73}} 
 \index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!Problem\_pt@{Problem\_pt}}
@@ -737,11 +737,11 @@ Pointer to the problem.
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00794}{794}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 794 of file assembly\+\_\+handler.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l03316}{get\+\_\+dresiduals\+\_\+dparameter()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03137}{get\+\_\+jacobian()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03034}{get\+\_\+residuals()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02677}{Pitch\+Fork\+Handler()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03476}{solve\+\_\+augmented\+\_\+block\+\_\+system()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03512}{solve\+\_\+block\+\_\+system()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03535}{solve\+\_\+full\+\_\+system()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03448}{synchronise()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l02897}{$\sim$\+Pitch\+Fork\+Handler()}}.
+Referenced by get\+\_\+dresiduals\+\_\+dparameter(), get\+\_\+jacobian(), get\+\_\+residuals(), Pitch\+Fork\+Handler(), solve\+\_\+augmented\+\_\+block\+\_\+system(), solve\+\_\+block\+\_\+system(), solve\+\_\+full\+\_\+system(), synchronise(), and $\sim$\+Pitch\+Fork\+Handler().
 
 \mbox{\Hypertarget{classoomph_1_1PitchForkHandler_aa04d0f340d919d4da3f9199eb76649b1}\label{classoomph_1_1PitchForkHandler_aa04d0f340d919d4da3f9199eb76649b1}} 
 \index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!Psi@{Psi}}
@@ -755,11 +755,11 @@ A constant vector that is specifies the symmetry being broken.
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00817}{817}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 817 of file assembly\+\_\+handler.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l03137}{get\+\_\+jacobian()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03034}{get\+\_\+residuals()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02677}{Pitch\+Fork\+Handler()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02007}{oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01705}{oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l02275}{oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve()}}.
+Referenced by get\+\_\+jacobian(), get\+\_\+residuals(), Pitch\+Fork\+Handler(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), and oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve().
 
 \mbox{\Hypertarget{classoomph_1_1PitchForkHandler_a56a173cbdf59e73728c9c1b8c5221817}\label{classoomph_1_1PitchForkHandler_a56a173cbdf59e73728c9c1b8c5221817}} 
 \index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!Sigma@{Sigma}}
@@ -773,11 +773,11 @@ A slack variable used to specify the amount of antisymmetry in the solution.
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00811}{811}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 811 of file assembly\+\_\+handler.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l03137}{get\+\_\+jacobian()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03034}{get\+\_\+residuals()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02677}{Pitch\+Fork\+Handler()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03535}{solve\+\_\+full\+\_\+system()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l03448}{synchronise()}}.
+Referenced by get\+\_\+jacobian(), get\+\_\+residuals(), Pitch\+Fork\+Handler(), solve\+\_\+full\+\_\+system(), and synchronise().
 
 \mbox{\Hypertarget{classoomph_1_1PitchForkHandler_a614de1eea213de58687ed161fc7c53ae}\label{classoomph_1_1PitchForkHandler_a614de1eea213de58687ed161fc7c53ae}} 
 \index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!Solve\_which\_system@{Solve\_which\_system}}
@@ -791,11 +791,11 @@ Integer flag to indicate which system should be assembled. There are three possi
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00791}{791}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 791 of file assembly\+\_\+handler.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l02974}{eqn\+\_\+number()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03316}{get\+\_\+dresiduals\+\_\+dparameter()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03137}{get\+\_\+jacobian()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03034}{get\+\_\+residuals()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02944}{ndof()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03476}{solve\+\_\+augmented\+\_\+block\+\_\+system()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03512}{solve\+\_\+block\+\_\+system()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l03535}{solve\+\_\+full\+\_\+system()}}.
+Referenced by eqn\+\_\+number(), get\+\_\+dresiduals\+\_\+dparameter(), get\+\_\+jacobian(), get\+\_\+residuals(), ndof(), solve\+\_\+augmented\+\_\+block\+\_\+system(), solve\+\_\+block\+\_\+system(), and solve\+\_\+full\+\_\+system().
 
 \mbox{\Hypertarget{classoomph_1_1PitchForkHandler_a289ce15584734b8ea50cd9a7f7f430ed}\label{classoomph_1_1PitchForkHandler_a289ce15584734b8ea50cd9a7f7f430ed}} 
 \index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!Y@{Y}}
@@ -809,11 +809,11 @@ Storage for the null vector.
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00814}{814}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 814 of file assembly\+\_\+handler.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l03316}{get\+\_\+dresiduals\+\_\+dparameter()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03430}{get\+\_\+eigenfunction()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03416}{get\+\_\+hessian\+\_\+vector\+\_\+products()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03034}{get\+\_\+residuals()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02677}{Pitch\+Fork\+Handler()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02007}{oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02510}{oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01705}{oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02275}{oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03535}{solve\+\_\+full\+\_\+system()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l03448}{synchronise()}}.
+Referenced by get\+\_\+dresiduals\+\_\+dparameter(), get\+\_\+eigenfunction(), get\+\_\+hessian\+\_\+vector\+\_\+products(), get\+\_\+residuals(), Pitch\+Fork\+Handler(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), solve\+\_\+full\+\_\+system(), and synchronise().
 
 
 

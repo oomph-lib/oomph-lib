@@ -23,7 +23,7 @@ typedef double($\ast$ \mbox{\hyperlink{classoomph_1_1Z2ErrorEstimator_a75ef55e67
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1Z2ErrorEstimator_a1cb0328af843a8bebf5333045cea4553}{Z2\+Error\+Estimator}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1Z2ErrorEstimator_a08ef5a50b590d9c1e41126cbdb4a4f99}{recovery\+\_\+order}})
+\mbox{\hyperlink{classoomph_1_1Z2ErrorEstimator_a1cb0328af843a8bebf5333045cea4553}{Z2\+Error\+Estimator}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1Z2ErrorEstimator_af7a3a28cfc05b291b438b80e87c7f5cc}{recovery\+\_\+order}})
 \begin{DoxyCompactList}\small\item\em Constructor\+: Set order of recovery shape functions. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Z2ErrorEstimator_a35186eeb792bf2b948239d19b2697ca0}{Z2\+Error\+Estimator}} ()
 \begin{DoxyCompactList}\small\item\em Constructor\+: Leave order of recovery shape functions open for now -- they will be read out from first element of the mesh when the error estimator is applied. \end{DoxyCompactList}\item 
@@ -37,17 +37,17 @@ void \mbox{\hyperlink{classoomph_1_1Z2ErrorEstimator_aa38b3ecfbb223a91bfe049d472
 \begin{DoxyCompactList}\small\item\em Compute the elemental error measures for a given mesh and store them in a vector. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1Z2ErrorEstimator_ae0fd03123c518ed340bb534c2f6b8cc4}{get\+\_\+element\+\_\+errors}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&elemental\+\_\+error, \mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} \&doc\+\_\+info)
 \begin{DoxyCompactList}\small\item\em Compute the elemental error measures for a given mesh and store them in a vector. If doc\+\_\+info.\+enable\+\_\+doc(), doc FE and recovered fluxes in. \end{DoxyCompactList}\item 
-unsigned \& \mbox{\hyperlink{classoomph_1_1Z2ErrorEstimator_a08ef5a50b590d9c1e41126cbdb4a4f99}{recovery\+\_\+order}} ()
+unsigned \& \mbox{\hyperlink{classoomph_1_1Z2ErrorEstimator_af7a3a28cfc05b291b438b80e87c7f5cc}{recovery\+\_\+order}} ()
 \begin{DoxyCompactList}\small\item\em Access function for order of recovery polynomials. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1Z2ErrorEstimator_ad463b5c01e6bb5b9e4ec9b3a02f9fb4a}{recovery\+\_\+order}} () const
 \begin{DoxyCompactList}\small\item\em Access function for order of recovery polynomials (const version) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Z2ErrorEstimator_a75ef55e67b21ec49ed1a37d095cfa9f9}{Combined\+Error\+Estimate\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1Z2ErrorEstimator_a11645d89f46948c1a2360e183be13ada}{combined\+\_\+error\+\_\+fct\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1Z2ErrorEstimator_a75ef55e67b21ec49ed1a37d095cfa9f9}{Combined\+Error\+Estimate\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1Z2ErrorEstimator_a1719ff79e67f2f0b2b8194a91f52d3d2}{combined\+\_\+error\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to combined error estimate function. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Z2ErrorEstimator_a75ef55e67b21ec49ed1a37d095cfa9f9}{Combined\+Error\+Estimate\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1Z2ErrorEstimator_aa961268bfdb517d9a59a68eb159042c9}{combined\+\_\+error\+\_\+fct\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to combined error estimate function. Const version. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1Z2ErrorEstimator_a5c8a3d6e46d9b9ba31c768cb5b026bba}{setup\+\_\+patches}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&mesh\+\_\+pt, std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator}{Element\+With\+Z2\+Error\+Estimator}} $\ast$ $>$ $\ast$ $>$ \&adjacent\+\_\+elements\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ \&vertex\+\_\+node\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Setup patches\+: For each vertex node pointed to by nod\+\_\+pt, adjacent\+\_\+elements\+\_\+pt\mbox{[}nod\+\_\+pt\mbox{]} contains the pointer to the vector that contains the pointers to the elements that the node is part of. \end{DoxyCompactList}\item 
-double \& \mbox{\hyperlink{classoomph_1_1Z2ErrorEstimator_af2590bffd7c884adf9f647f9a242d1e3}{reference\+\_\+flux\+\_\+norm}} ()
+double \& \mbox{\hyperlink{classoomph_1_1Z2ErrorEstimator_a997dc6ba0b546a0f7363949a8d33d133}{reference\+\_\+flux\+\_\+norm}} ()
 \begin{DoxyCompactList}\small\item\em Access function for prescribed reference flux norm. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1Z2ErrorEstimator_a4a7902d3e80dc64406e1f367c02ec4e3}{reference\+\_\+flux\+\_\+norm}} () const
 \begin{DoxyCompactList}\small\item\em Access function for prescribed reference flux norm (const. version) \end{DoxyCompactList}\item 
@@ -110,13 +110,13 @@ We repeat this procedure for every patch. For nodes that are part of multiple pa
 
 \[ E_{e} = \sqrt{ \frac{ \int_{\mbox{$e$}} \left( f_i^{[rec]} - f_i^{[FE]} \right)^2 dv} {\sum_{e\textnormal{\textquotesingle}=1}^{N_e} \int_{\mbox{$e\textnormal{\textquotesingle}$}} \left( f_i^{[rec]} \right)^2 dv} } \mbox{\ \ \ for $e=1,...,N_e$.} \] In this (default) form, mesh refinement, based on this error estimate will lead to an equidistribution of the error across all elements. Usually, this is the desired behaviour. However, there are cases in which the solution evolves towards a state in which the flux tends to zero while the solution itself becomes so simple that it can be represented exactly on any finite element mesh (e.\+g. in spin-\/up problems in which the fluid motion approaches a rigid body rotation). In that case the mesh adaptation tries to equidistribute any small roundoff errors in the solution, causing strong, spatially uniform mesh refinement throughout the domain, even though the solution is already fully converged. For such cases, it is possible to replace the denominator in the above expression by a prescribed reference flux, which may be specified via the access function 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\mbox{\hyperlink{classoomph_1_1Z2ErrorEstimator_af2590bffd7c884adf9f647f9a242d1e3}{reference\_flux\_norm}}()}
+\DoxyCodeLine{\mbox{\hyperlink{classoomph_1_1Z2ErrorEstimator_a997dc6ba0b546a0f7363949a8d33d133}{reference\_flux\_norm}}()}
 
 \end{DoxyCode}
  
 \end{DoxyEnumerate}
 
-Definition at line \mbox{\hyperlink{error__estimator_8h_source_l00265}{265}} of file \mbox{\hyperlink{error__estimator_8h_source}{error\+\_\+estimator.\+h}}.
+Definition at line 265 of file error\+\_\+estimator.\+h.
 
 
 
@@ -133,7 +133,7 @@ Function pointer to combined error estimator function.
 
 
 
-Definition at line \mbox{\hyperlink{error__estimator_8h_source_l00269}{269}} of file \mbox{\hyperlink{error__estimator_8h_source}{error\+\_\+estimator.\+h}}.
+Definition at line 269 of file error\+\_\+estimator.\+h.
 
 
 
@@ -150,7 +150,7 @@ Constructor\+: Set order of recovery shape functions.
 
 
 
-Definition at line \mbox{\hyperlink{error__estimator_8h_source_l00272}{272}} of file \mbox{\hyperlink{error__estimator_8h_source}{error\+\_\+estimator.\+h}}.
+Definition at line 272 of file error\+\_\+estimator.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Z2ErrorEstimator_a35186eeb792bf2b948239d19b2697ca0}\label{classoomph_1_1Z2ErrorEstimator_a35186eeb792bf2b948239d19b2697ca0}} 
 \index{oomph::Z2ErrorEstimator@{oomph::Z2ErrorEstimator}!Z2ErrorEstimator@{Z2ErrorEstimator}}
@@ -164,7 +164,7 @@ Constructor\+: Leave order of recovery shape functions open for now -- they will
 
 
 
-Definition at line \mbox{\hyperlink{error__estimator_8h_source_l00284}{284}} of file \mbox{\hyperlink{error__estimator_8h_source}{error\+\_\+estimator.\+h}}.
+Definition at line 284 of file error\+\_\+estimator.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Z2ErrorEstimator_ab52cb1c86f2a39af3c4f10dfff02a51a}\label{classoomph_1_1Z2ErrorEstimator_ab52cb1c86f2a39af3c4f10dfff02a51a}} 
 \index{oomph::Z2ErrorEstimator@{oomph::Z2ErrorEstimator}!Z2ErrorEstimator@{Z2ErrorEstimator}}
@@ -188,16 +188,16 @@ Empty virtual destructor.
 
 
 
-Definition at line \mbox{\hyperlink{error__estimator_8h_source_l00299}{299}} of file \mbox{\hyperlink{error__estimator_8h_source}{error\+\_\+estimator.\+h}}.
+Definition at line 299 of file error\+\_\+estimator.\+h.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1Z2ErrorEstimator_a11645d89f46948c1a2360e183be13ada}\label{classoomph_1_1Z2ErrorEstimator_a11645d89f46948c1a2360e183be13ada}} 
+\mbox{\Hypertarget{classoomph_1_1Z2ErrorEstimator_a1719ff79e67f2f0b2b8194a91f52d3d2}\label{classoomph_1_1Z2ErrorEstimator_a1719ff79e67f2f0b2b8194a91f52d3d2}} 
 \index{oomph::Z2ErrorEstimator@{oomph::Z2ErrorEstimator}!combined\_error\_fct\_pt@{combined\_error\_fct\_pt}}
 \index{combined\_error\_fct\_pt@{combined\_error\_fct\_pt}!oomph::Z2ErrorEstimator@{oomph::Z2ErrorEstimator}}
 \doxysubsubsection{\texorpdfstring{combined\_error\_fct\_pt()}{combined\_error\_fct\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Z2ErrorEstimator_a75ef55e67b21ec49ed1a37d095cfa9f9}{Combined\+Error\+Estimate\+Fct\+Pt}} \& oomph\+::\+Z2\+Error\+Estimator\+::combined\+\_\+error\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Z2ErrorEstimator_a75ef55e67b21ec49ed1a37d095cfa9f9}{Combined\+Error\+Estimate\+Fct\+Pt}}\& oomph\+::\+Z2\+Error\+Estimator\+::combined\+\_\+error\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -205,11 +205,11 @@ Access function\+: Pointer to combined error estimate function.
 
 
 
-Definition at line \mbox{\hyperlink{error__estimator_8h_source_l00334}{334}} of file \mbox{\hyperlink{error__estimator_8h_source}{error\+\_\+estimator.\+h}}.
+Definition at line 334 of file error\+\_\+estimator.\+h.
 
 
 
-References \mbox{\hyperlink{error__estimator_8h_source_l00420}{Combined\+\_\+error\+\_\+fct\+\_\+pt}}.
+References Combined\+\_\+error\+\_\+fct\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1Z2ErrorEstimator_aa961268bfdb517d9a59a68eb159042c9}\label{classoomph_1_1Z2ErrorEstimator_aa961268bfdb517d9a59a68eb159042c9}} 
 \index{oomph::Z2ErrorEstimator@{oomph::Z2ErrorEstimator}!combined\_error\_fct\_pt@{combined\_error\_fct\_pt}}
@@ -223,11 +223,11 @@ Access function\+: Pointer to combined error estimate function. Const version.
 
 
 
-Definition at line \mbox{\hyperlink{error__estimator_8h_source_l00341}{341}} of file \mbox{\hyperlink{error__estimator_8h_source}{error\+\_\+estimator.\+h}}.
+Definition at line 341 of file error\+\_\+estimator.\+h.
 
 
 
-References \mbox{\hyperlink{error__estimator_8h_source_l00420}{Combined\+\_\+error\+\_\+fct\+\_\+pt}}.
+References Combined\+\_\+error\+\_\+fct\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1Z2ErrorEstimator_ad84f3b903d0508093d6e2a905198b438}\label{classoomph_1_1Z2ErrorEstimator_ad84f3b903d0508093d6e2a905198b438}} 
 \index{oomph::Z2ErrorEstimator@{oomph::Z2ErrorEstimator}!doc\_flux@{doc\_flux}}
@@ -241,15 +241,15 @@ Doc flux and recovered flux.
 
 Doc FE and recovered flux. 
 
-Definition at line \mbox{\hyperlink{error__estimator_8cc_source_l01802}{1802}} of file \mbox{\hyperlink{error__estimator_8cc_source}{error\+\_\+estimator.\+cc}}.
+Definition at line 1802 of file error\+\_\+estimator.\+cc.
 
 
 
-References \mbox{\hyperlink{oomph__utilities_8cc_source_l01046}{oomph\+::\+MPI\+\_\+\+Helpers\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l01600}{oomph\+::\+Mesh\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00524}{oomph\+::\+Doc\+Info\+::directory()}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00448}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00473}{oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l03148}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a5688ff5f546d81771cabad82ca5a7556}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::get\+\_\+\+Z2\+\_\+flux()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l03186}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00554}{oomph\+::\+Doc\+Info\+::number()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, \mbox{\hyperlink{elements_8h_source_l03161}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}, and \mbox{\hyperlink{elements_8h_source_l03174}{oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer()}}.
+References oomph\+::\+MPI\+\_\+\+Helpers\+::communicator\+\_\+pt(), oomph\+::\+Mesh\+::communicator\+\_\+pt(), oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Doc\+Info\+::directory(), e, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot(), oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::get\+\_\+\+Z2\+\_\+flux(), i, oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Finite\+Element\+::nplot\+\_\+points(), oomph\+::\+Doc\+Info\+::number(), s, oomph\+::\+Finite\+Element\+::shape(), oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string(), and oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer().
 
 
 
-Referenced by \mbox{\hyperlink{error__estimator_8cc_source_l00946}{get\+\_\+element\+\_\+errors()}}.
+Referenced by get\+\_\+element\+\_\+errors().
 
 \mbox{\Hypertarget{classoomph_1_1Z2ErrorEstimator_a53d7a1ac66dd41b39d6794e1d00080fc}\label{classoomph_1_1Z2ErrorEstimator_a53d7a1ac66dd41b39d6794e1d00080fc}} 
 \index{oomph::Z2ErrorEstimator@{oomph::Z2ErrorEstimator}!get\_combined\_error\_estimate@{get\_combined\_error\_estimate}}
@@ -263,15 +263,15 @@ Return a combined error estimate from all compound errors.
 
 Return a combined error estimate from all compound flux errors The default is to return the maximum of the compound flux errors which will always force refinment if any field is above the single mesh error threshold and unrefinement if both are below the lower limit. Any other fancy combinations can be selected by specifying a user-\/defined combined estimate by setting a function pointer. 
 
-Definition at line \mbox{\hyperlink{error__estimator_8cc_source_l00460}{460}} of file \mbox{\hyperlink{error__estimator_8cc_source}{error\+\_\+estimator.\+cc}}.
+Definition at line 460 of file error\+\_\+estimator.\+cc.
 
 
 
-References \mbox{\hyperlink{error__estimator_8h_source_l00420}{Combined\+\_\+error\+\_\+fct\+\_\+pt}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References Combined\+\_\+error\+\_\+fct\+\_\+pt, and i.
 
 
 
-Referenced by \mbox{\hyperlink{error__estimator_8cc_source_l00946}{get\+\_\+element\+\_\+errors()}}.
+Referenced by get\+\_\+element\+\_\+errors().
 
 \mbox{\Hypertarget{classoomph_1_1Z2ErrorEstimator_aa38b3ecfbb223a91bfe049d4722af6d3}\label{classoomph_1_1Z2ErrorEstimator_aa38b3ecfbb223a91bfe049d4722af6d3}} 
 \index{oomph::Z2ErrorEstimator@{oomph::Z2ErrorEstimator}!get\_element\_errors@{get\_element\_errors}}
@@ -285,15 +285,11 @@ Compute the elemental error measures for a given mesh and store them in a vector
 
 
 
-Definition at line \mbox{\hyperlink{error__estimator_8h_source_l00303}{303}} of file \mbox{\hyperlink{error__estimator_8h_source}{error\+\_\+estimator.\+h}}.
+Definition at line 303 of file error\+\_\+estimator.\+h.
 
 
 
-References \mbox{\hyperlink{oomph__utilities_8h_source_l00542}{oomph\+::\+Doc\+Info\+::disable\+\_\+doc()}}, and \mbox{\hyperlink{error__estimator_8h_source_l00303}{get\+\_\+element\+\_\+errors()}}.
-
-
-
-Referenced by \mbox{\hyperlink{error__estimator_8h_source_l00303}{get\+\_\+element\+\_\+errors()}}.
+References oomph\+::\+Doc\+Info\+::disable\+\_\+doc().
 
 \mbox{\Hypertarget{classoomph_1_1Z2ErrorEstimator_ae0fd03123c518ed340bb534c2f6b8cc4}\label{classoomph_1_1Z2ErrorEstimator_ae0fd03123c518ed340bb534c2f6b8cc4}} 
 \index{oomph::Z2ErrorEstimator@{oomph::Z2ErrorEstimator}!get\_element\_errors@{get\_element\_errors}}
@@ -317,11 +313,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ErrorEstimator_a77e85262d309d6e7da0ca7
 
 
 
-Definition at line \mbox{\hyperlink{error__estimator_8cc_source_l00946}{946}} of file \mbox{\hyperlink{error__estimator_8cc_source}{error\+\_\+estimator.\+cc}}.
+Definition at line 946 of file error\+\_\+estimator.\+cc.
 
 
 
-References \mbox{\hyperlink{oomph__utilities_8cc_source_l01046}{oomph\+::\+MPI\+\_\+\+Helpers\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l01600}{oomph\+::\+Mesh\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{error__estimator_8cc_source_l01802}{doc\+\_\+flux()}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00448}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{error__estimator_8h_source_l00142}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::geometric\+\_\+jacobian()}}, \mbox{\hyperlink{error__estimator_8cc_source_l00460}{get\+\_\+combined\+\_\+error\+\_\+estimate()}}, \mbox{\hyperlink{error__estimator_8cc_source_l00666}{get\+\_\+recovered\+\_\+flux\+\_\+in\+\_\+patch()}}, \mbox{\hyperlink{error__estimator_8h_source_l00127}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::get\+\_\+\+Z2\+\_\+compound\+\_\+flux\+\_\+indices()}}, \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a5688ff5f546d81771cabad82ca5a7556}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::get\+\_\+\+Z2\+\_\+flux()}}, \mbox{\hyperlink{mesh_8h_source_l01740}{oomph\+::\+Mesh\+::halo\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l01779}{oomph\+::\+Mesh\+::haloed\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00548}{oomph\+::\+Doc\+Info\+::is\+\_\+doc\+\_\+enabled()}}, \mbox{\hyperlink{elements_8h_source_l01163}{oomph\+::\+Generalised\+Element\+::is\+\_\+halo()}}, \mbox{\hyperlink{mesh_8h_source_l01588}{oomph\+::\+Mesh\+::is\+\_\+mesh\+\_\+distributed()}}, \mbox{\hyperlink{elements_8cc_source_l04103}{oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00851}{oomph\+::\+MPI\+\_\+\+Helpers\+::mpi\+\_\+has\+\_\+been\+\_\+initialised()}}, \mbox{\hyperlink{error__estimator_8h_source_l00100}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::ncompound\+\_\+fluxes()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{mesh_8h_source_l00596}{oomph\+::\+Mesh\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00436}{oomph\+::\+Mesh\+::node\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_af39480835bd3e0f6b2f4f7a9a4044798}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::nrecovery\+\_\+order()}}, \mbox{\hyperlink{error__estimator_8cc_source_l00812}{nrecovery\+\_\+terms()}}, \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_ae82c5728902e13da31be19c390fc28e3}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::num\+\_\+\+Z2\+\_\+flux\+\_\+terms()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{error__estimator_8h_source_l00322}{recovery\+\_\+order()}}, \mbox{\hyperlink{error__estimator_8h_source_l00403}{Recovery\+\_\+order}}, \mbox{\hyperlink{error__estimator_8h_source_l00407}{Recovery\+\_\+order\+\_\+from\+\_\+first\+\_\+element}}, \mbox{\hyperlink{error__estimator_8h_source_l00417}{Reference\+\_\+flux\+\_\+norm}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{error__estimator_8cc_source_l00505}{setup\+\_\+patches()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, \mbox{\hyperlink{error__estimator_8cc_source_l00044}{shape\+\_\+rec()}}, \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}, \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral\+::weight()}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
+References oomph\+::\+MPI\+\_\+\+Helpers\+::communicator\+\_\+pt(), oomph\+::\+Mesh\+::communicator\+\_\+pt(), oomph\+::\+Finite\+Element\+::dim(), doc\+\_\+flux(), e, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::geometric\+\_\+jacobian(), get\+\_\+combined\+\_\+error\+\_\+estimate(), get\+\_\+recovered\+\_\+flux\+\_\+in\+\_\+patch(), oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::get\+\_\+\+Z2\+\_\+compound\+\_\+flux\+\_\+indices(), oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::get\+\_\+\+Z2\+\_\+flux(), oomph\+::\+Mesh\+::halo\+\_\+element\+\_\+pt(), oomph\+::\+Mesh\+::haloed\+\_\+element\+\_\+pt(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Doc\+Info\+::is\+\_\+doc\+\_\+enabled(), oomph\+::\+Generalised\+Element\+::is\+\_\+halo(), oomph\+::\+Mesh\+::is\+\_\+mesh\+\_\+distributed(), oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Integral\+::knot(), oomph\+::\+MPI\+\_\+\+Helpers\+::mpi\+\_\+has\+\_\+been\+\_\+initialised(), oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::ncompound\+\_\+fluxes(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Mesh\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Mesh\+::node\+\_\+pt(), oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::nrecovery\+\_\+order(), nrecovery\+\_\+terms(), oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::num\+\_\+\+Z2\+\_\+flux\+\_\+terms(), oomph\+::\+Integral\+::nweight(), recovery\+\_\+order(), Recovery\+\_\+order, Recovery\+\_\+order\+\_\+from\+\_\+first\+\_\+element, Reference\+\_\+flux\+\_\+norm, s, setup\+\_\+patches(), oomph\+::\+Finite\+Element\+::shape(), shape\+\_\+rec(), oomph\+::\+Quad\+Tree\+Names\+::W, oomph\+::\+Integral\+::weight(), and oomph\+::\+Node\+::x().
 
 \mbox{\Hypertarget{classoomph_1_1Z2ErrorEstimator_a0384127746b7eea7fcf0d08f2d34c647}\label{classoomph_1_1Z2ErrorEstimator_a0384127746b7eea7fcf0d08f2d34c647}} 
 \index{oomph::Z2ErrorEstimator@{oomph::Z2ErrorEstimator}!get\_recovered\_flux\_in\_patch@{get\_recovered\_flux\_in\_patch}}
@@ -335,15 +331,15 @@ Given the vector of elements that make up a patch, the number of recovery and fl
 
 
 
-Definition at line \mbox{\hyperlink{error__estimator_8cc_source_l00666}{666}} of file \mbox{\hyperlink{error__estimator_8cc_source}{error\+\_\+estimator.\+cc}}.
+Definition at line 666 of file error\+\_\+estimator.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{error__estimator_8h_source_l00142}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::geometric\+\_\+jacobian()}}, \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a5688ff5f546d81771cabad82ca5a7556}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::get\+\_\+\+Z2\+\_\+flux()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{error__estimator_8cc_source_l00245}{integral\+\_\+rec()}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8cc_source_l04103}{oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{matrices_8cc_source_l00202}{oomph\+::\+Dense\+Double\+Matrix\+::lubksub()}}, \mbox{\hyperlink{matrices_8cc_source_l00192}{oomph\+::\+Dense\+Double\+Matrix\+::ludecompose()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{error__estimator_8cc_source_l00044}{shape\+\_\+rec()}}, \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}, and \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral\+::weight()}}.
+References e, oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::geometric\+\_\+jacobian(), oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::get\+\_\+\+Z2\+\_\+flux(), i, integral\+\_\+rec(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Integral\+::knot(), oomph\+::\+Dense\+Double\+Matrix\+::lubksub(), oomph\+::\+Dense\+Double\+Matrix\+::ludecompose(), oomph\+::\+Integral\+::nweight(), s, shape\+\_\+rec(), oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Integral\+::weight().
 
 
 
-Referenced by \mbox{\hyperlink{error__estimator_8cc_source_l00946}{get\+\_\+element\+\_\+errors()}}.
+Referenced by get\+\_\+element\+\_\+errors().
 
 \mbox{\Hypertarget{classoomph_1_1Z2ErrorEstimator_ac53b6d73d9e73140c92302c2aa70203a}\label{classoomph_1_1Z2ErrorEstimator_ac53b6d73d9e73140c92302c2aa70203a}} 
 \index{oomph::Z2ErrorEstimator@{oomph::Z2ErrorEstimator}!integral\_rec@{integral\_rec}}
@@ -363,15 +359,15 @@ Find order of recovery shape functions
 
 Find order of recovery shape functions
 
-Definition at line \mbox{\hyperlink{error__estimator_8cc_source_l00245}{245}} of file \mbox{\hyperlink{error__estimator_8cc_source}{error\+\_\+estimator.\+cc}}.
+Definition at line 245 of file error\+\_\+estimator.\+cc.
 
 
 
-References \mbox{\hyperlink{error__estimator_8h_source_l00322}{recovery\+\_\+order()}}.
+References recovery\+\_\+order().
 
 
 
-Referenced by \mbox{\hyperlink{error__estimator_8cc_source_l00666}{get\+\_\+recovered\+\_\+flux\+\_\+in\+\_\+patch()}}.
+Referenced by get\+\_\+recovered\+\_\+flux\+\_\+in\+\_\+patch().
 
 \mbox{\Hypertarget{classoomph_1_1Z2ErrorEstimator_a1782984fa64738f9a8e7ca40d585597a}\label{classoomph_1_1Z2ErrorEstimator_a1782984fa64738f9a8e7ca40d585597a}} 
 \index{oomph::Z2ErrorEstimator@{oomph::Z2ErrorEstimator}!nrecovery\_terms@{nrecovery\_terms}}
@@ -385,15 +381,15 @@ Return number of coefficients for expansion of recovered fluxes for given spatia
 
 Number of coefficients for expansion of recovered fluxes for given spatial dimension of elements. Use complete polynomial of given order for recovery. 
 
-Definition at line \mbox{\hyperlink{error__estimator_8cc_source_l00812}{812}} of file \mbox{\hyperlink{error__estimator_8cc_source}{error\+\_\+estimator.\+cc}}.
+Definition at line 812 of file error\+\_\+estimator.\+cc.
 
 
 
-References \mbox{\hyperlink{error__estimator_8h_source_l00403}{Recovery\+\_\+order}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
+References Recovery\+\_\+order, and oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
 
 
 
-Referenced by \mbox{\hyperlink{error__estimator_8cc_source_l00946}{get\+\_\+element\+\_\+errors()}}.
+Referenced by get\+\_\+element\+\_\+errors().
 
 \mbox{\Hypertarget{classoomph_1_1Z2ErrorEstimator_a70cc1b459e36f42e6654c25c89103319}\label{classoomph_1_1Z2ErrorEstimator_a70cc1b459e36f42e6654c25c89103319}} 
 \index{oomph::Z2ErrorEstimator@{oomph::Z2ErrorEstimator}!operator=@{operator=}}
@@ -405,11 +401,11 @@ Referenced by \mbox{\hyperlink{error__estimator_8cc_source_l00946}{get\+\_\+elem
 
 Broken assignment operator. 
 
-\mbox{\Hypertarget{classoomph_1_1Z2ErrorEstimator_a08ef5a50b590d9c1e41126cbdb4a4f99}\label{classoomph_1_1Z2ErrorEstimator_a08ef5a50b590d9c1e41126cbdb4a4f99}} 
+\mbox{\Hypertarget{classoomph_1_1Z2ErrorEstimator_af7a3a28cfc05b291b438b80e87c7f5cc}\label{classoomph_1_1Z2ErrorEstimator_af7a3a28cfc05b291b438b80e87c7f5cc}} 
 \index{oomph::Z2ErrorEstimator@{oomph::Z2ErrorEstimator}!recovery\_order@{recovery\_order}}
 \index{recovery\_order@{recovery\_order}!oomph::Z2ErrorEstimator@{oomph::Z2ErrorEstimator}}
 \doxysubsubsection{\texorpdfstring{recovery\_order()}{recovery\_order()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily unsigned \& oomph\+::\+Z2\+Error\+Estimator\+::recovery\+\_\+order (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily unsigned\& oomph\+::\+Z2\+Error\+Estimator\+::recovery\+\_\+order (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -417,15 +413,15 @@ Access function for order of recovery polynomials.
 
 
 
-Definition at line \mbox{\hyperlink{error__estimator_8h_source_l00322}{322}} of file \mbox{\hyperlink{error__estimator_8h_source}{error\+\_\+estimator.\+h}}.
+Definition at line 322 of file error\+\_\+estimator.\+h.
 
 
 
-References \mbox{\hyperlink{error__estimator_8h_source_l00403}{Recovery\+\_\+order}}.
+References Recovery\+\_\+order.
 
 
 
-Referenced by \mbox{\hyperlink{error__estimator_8cc_source_l00946}{get\+\_\+element\+\_\+errors()}}, \mbox{\hyperlink{error__estimator_8cc_source_l00245}{integral\+\_\+rec()}}, and \mbox{\hyperlink{error__estimator_8cc_source_l00044}{shape\+\_\+rec()}}.
+Referenced by get\+\_\+element\+\_\+errors(), integral\+\_\+rec(), and shape\+\_\+rec().
 
 \mbox{\Hypertarget{classoomph_1_1Z2ErrorEstimator_ad463b5c01e6bb5b9e4ec9b3a02f9fb4a}\label{classoomph_1_1Z2ErrorEstimator_ad463b5c01e6bb5b9e4ec9b3a02f9fb4a}} 
 \index{oomph::Z2ErrorEstimator@{oomph::Z2ErrorEstimator}!recovery\_order@{recovery\_order}}
@@ -439,17 +435,17 @@ Access function for order of recovery polynomials (const version)
 
 
 
-Definition at line \mbox{\hyperlink{error__estimator_8h_source_l00328}{328}} of file \mbox{\hyperlink{error__estimator_8h_source}{error\+\_\+estimator.\+h}}.
+Definition at line 328 of file error\+\_\+estimator.\+h.
 
 
 
-References \mbox{\hyperlink{error__estimator_8h_source_l00403}{Recovery\+\_\+order}}.
+References Recovery\+\_\+order.
 
-\mbox{\Hypertarget{classoomph_1_1Z2ErrorEstimator_af2590bffd7c884adf9f647f9a242d1e3}\label{classoomph_1_1Z2ErrorEstimator_af2590bffd7c884adf9f647f9a242d1e3}} 
+\mbox{\Hypertarget{classoomph_1_1Z2ErrorEstimator_a997dc6ba0b546a0f7363949a8d33d133}\label{classoomph_1_1Z2ErrorEstimator_a997dc6ba0b546a0f7363949a8d33d133}} 
 \index{oomph::Z2ErrorEstimator@{oomph::Z2ErrorEstimator}!reference\_flux\_norm@{reference\_flux\_norm}}
 \index{reference\_flux\_norm@{reference\_flux\_norm}!oomph::Z2ErrorEstimator@{oomph::Z2ErrorEstimator}}
 \doxysubsubsection{\texorpdfstring{reference\_flux\_norm()}{reference\_flux\_norm()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily double \& oomph\+::\+Z2\+Error\+Estimator\+::reference\+\_\+flux\+\_\+norm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double\& oomph\+::\+Z2\+Error\+Estimator\+::reference\+\_\+flux\+\_\+norm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -457,11 +453,11 @@ Access function for prescribed reference flux norm.
 
 
 
-Definition at line \mbox{\hyperlink{error__estimator_8h_source_l00355}{355}} of file \mbox{\hyperlink{error__estimator_8h_source}{error\+\_\+estimator.\+h}}.
+Definition at line 355 of file error\+\_\+estimator.\+h.
 
 
 
-References \mbox{\hyperlink{error__estimator_8h_source_l00417}{Reference\+\_\+flux\+\_\+norm}}.
+References Reference\+\_\+flux\+\_\+norm.
 
 \mbox{\Hypertarget{classoomph_1_1Z2ErrorEstimator_a4a7902d3e80dc64406e1f367c02ec4e3}\label{classoomph_1_1Z2ErrorEstimator_a4a7902d3e80dc64406e1f367c02ec4e3}} 
 \index{oomph::Z2ErrorEstimator@{oomph::Z2ErrorEstimator}!reference\_flux\_norm@{reference\_flux\_norm}}
@@ -475,11 +471,11 @@ Access function for prescribed reference flux norm (const. version)
 
 
 
-Definition at line \mbox{\hyperlink{error__estimator_8h_source_l00361}{361}} of file \mbox{\hyperlink{error__estimator_8h_source}{error\+\_\+estimator.\+h}}.
+Definition at line 361 of file error\+\_\+estimator.\+h.
 
 
 
-References \mbox{\hyperlink{error__estimator_8h_source_l00417}{Reference\+\_\+flux\+\_\+norm}}.
+References Reference\+\_\+flux\+\_\+norm.
 
 \mbox{\Hypertarget{classoomph_1_1Z2ErrorEstimator_a5c8a3d6e46d9b9ba31c768cb5b026bba}\label{classoomph_1_1Z2ErrorEstimator_a5c8a3d6e46d9b9ba31c768cb5b026bba}} 
 \index{oomph::Z2ErrorEstimator@{oomph::Z2ErrorEstimator}!setup\_patches@{setup\_patches}}
@@ -493,15 +489,15 @@ Setup patches\+: For each vertex node pointed to by nod\+\_\+pt, adjacent\+\_\+e
 
 Setup patches\+: For each vertex node pointed to by nod\+\_\+pt, adjacent\+\_\+elements\+\_\+pt\mbox{[}nod\+\_\+pt\mbox{]} contains the pointer to the vector that contains the pointers to the elements that the node is part of. Also returns a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of vertex nodes for use in get\+\_\+element\+\_\+errors. 
 
-Definition at line \mbox{\hyperlink{error__estimator_8cc_source_l00505}{505}} of file \mbox{\hyperlink{error__estimator_8cc_source}{error\+\_\+estimator.\+cc}}.
+Definition at line 505 of file error\+\_\+estimator.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00448}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_af39480835bd3e0f6b2f4f7a9a4044798}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::nrecovery\+\_\+order()}}, \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a19495a0e77ef4ff35f15fdf7913b4077}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::nvertex\+\_\+node()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{error__estimator_8h_source_l00403}{Recovery\+\_\+order}}, and \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a6d852edae3d9f6bddeb5aaf136ebbb8b}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::vertex\+\_\+node\+\_\+pt()}}.
+References e, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::nrecovery\+\_\+order(), oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::nvertex\+\_\+node(), oomph\+::oomph\+\_\+info, Recovery\+\_\+order, and oomph\+::\+Element\+With\+Z2\+Error\+Estimator\+::vertex\+\_\+node\+\_\+pt().
 
 
 
-Referenced by \mbox{\hyperlink{error__estimator_8cc_source_l00946}{get\+\_\+element\+\_\+errors()}}.
+Referenced by get\+\_\+element\+\_\+errors().
 
 \mbox{\Hypertarget{classoomph_1_1Z2ErrorEstimator_ab57514ecde88f7ae970439fd4900996a}\label{classoomph_1_1Z2ErrorEstimator_ab57514ecde88f7ae970439fd4900996a}} 
 \index{oomph::Z2ErrorEstimator@{oomph::Z2ErrorEstimator}!shape\_rec@{shape\_rec}}
@@ -521,15 +517,15 @@ Find order of recovery shape functions
 
 Find order of recovery shape functions
 
-Definition at line \mbox{\hyperlink{error__estimator_8cc_source_l00044}{44}} of file \mbox{\hyperlink{error__estimator_8cc_source}{error\+\_\+estimator.\+cc}}.
+Definition at line 44 of file error\+\_\+estimator.\+cc.
 
 
 
-References \mbox{\hyperlink{error__estimator_8h_source_l00322}{recovery\+\_\+order()}}.
+References recovery\+\_\+order().
 
 
 
-Referenced by \mbox{\hyperlink{error__estimator_8cc_source_l00946}{get\+\_\+element\+\_\+errors()}}, and \mbox{\hyperlink{error__estimator_8cc_source_l00666}{get\+\_\+recovered\+\_\+flux\+\_\+in\+\_\+patch()}}.
+Referenced by get\+\_\+element\+\_\+errors(), and get\+\_\+recovered\+\_\+flux\+\_\+in\+\_\+patch().
 
 
 
@@ -546,11 +542,11 @@ Function pointer to combined error estimator function.
 
 
 
-Definition at line \mbox{\hyperlink{error__estimator_8h_source_l00420}{420}} of file \mbox{\hyperlink{error__estimator_8h_source}{error\+\_\+estimator.\+h}}.
+Definition at line 420 of file error\+\_\+estimator.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{error__estimator_8h_source_l00334}{combined\+\_\+error\+\_\+fct\+\_\+pt()}}, and \mbox{\hyperlink{error__estimator_8cc_source_l00460}{get\+\_\+combined\+\_\+error\+\_\+estimate()}}.
+Referenced by combined\+\_\+error\+\_\+fct\+\_\+pt(), and get\+\_\+combined\+\_\+error\+\_\+estimate().
 
 \mbox{\Hypertarget{classoomph_1_1Z2ErrorEstimator_a9aafff3d80518811ba7d9bb12a240a7c}\label{classoomph_1_1Z2ErrorEstimator_a9aafff3d80518811ba7d9bb12a240a7c}} 
 \index{oomph::Z2ErrorEstimator@{oomph::Z2ErrorEstimator}!Recovery\_order@{Recovery\_order}}
@@ -564,11 +560,11 @@ Order of recovery polynomials.
 
 
 
-Definition at line \mbox{\hyperlink{error__estimator_8h_source_l00403}{403}} of file \mbox{\hyperlink{error__estimator_8h_source}{error\+\_\+estimator.\+h}}.
+Definition at line 403 of file error\+\_\+estimator.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{error__estimator_8cc_source_l00946}{get\+\_\+element\+\_\+errors()}}, \mbox{\hyperlink{error__estimator_8cc_source_l00812}{nrecovery\+\_\+terms()}}, \mbox{\hyperlink{error__estimator_8h_source_l00322}{recovery\+\_\+order()}}, and \mbox{\hyperlink{error__estimator_8cc_source_l00505}{setup\+\_\+patches()}}.
+Referenced by get\+\_\+element\+\_\+errors(), nrecovery\+\_\+terms(), recovery\+\_\+order(), and setup\+\_\+patches().
 
 \mbox{\Hypertarget{classoomph_1_1Z2ErrorEstimator_afa024a307366bb987b1c9ba379b837e8}\label{classoomph_1_1Z2ErrorEstimator_afa024a307366bb987b1c9ba379b837e8}} 
 \index{oomph::Z2ErrorEstimator@{oomph::Z2ErrorEstimator}!Recovery\_order\_from\_first\_element@{Recovery\_order\_from\_first\_element}}
@@ -582,11 +578,11 @@ Bool to indicate if recovery order is to be read out from first element in mesh 
 
 
 
-Definition at line \mbox{\hyperlink{error__estimator_8h_source_l00407}{407}} of file \mbox{\hyperlink{error__estimator_8h_source}{error\+\_\+estimator.\+h}}.
+Definition at line 407 of file error\+\_\+estimator.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{error__estimator_8cc_source_l00946}{get\+\_\+element\+\_\+errors()}}.
+Referenced by get\+\_\+element\+\_\+errors().
 
 \mbox{\Hypertarget{classoomph_1_1Z2ErrorEstimator_aa170691c5d84fbf0eb6dc5f480bbb187}\label{classoomph_1_1Z2ErrorEstimator_aa170691c5d84fbf0eb6dc5f480bbb187}} 
 \index{oomph::Z2ErrorEstimator@{oomph::Z2ErrorEstimator}!Reference\_flux\_norm@{Reference\_flux\_norm}}
@@ -600,11 +596,11 @@ Prescribed reference flux norm.
 
 
 
-Definition at line \mbox{\hyperlink{error__estimator_8h_source_l00417}{417}} of file \mbox{\hyperlink{error__estimator_8h_source}{error\+\_\+estimator.\+h}}.
+Definition at line 417 of file error\+\_\+estimator.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{error__estimator_8cc_source_l00946}{get\+\_\+element\+\_\+errors()}}, and \mbox{\hyperlink{error__estimator_8h_source_l00355}{reference\+\_\+flux\+\_\+norm()}}.
+Referenced by get\+\_\+element\+\_\+errors(), and reference\+\_\+flux\+\_\+norm().
 
 
 

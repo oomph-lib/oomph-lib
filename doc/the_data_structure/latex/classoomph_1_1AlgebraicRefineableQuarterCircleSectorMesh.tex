@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh}{}\doxysection{oomph\+::Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh}{}\doxysection{oomph\+::Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$ Class Template Reference}
 \label{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh}\index{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}}
 
 
@@ -9,7 +9,7 @@ Algebraic version of \mbox{\hyperlink{classoomph_1_1RefineableQuarterCircleSecto
 
 {\ttfamily \#include $<$quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h$>$}
 
-Inheritance diagram for oomph\+::Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.413793cm]{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh}
@@ -18,15 +18,15 @@ Inheritance diagram for oomph\+::Algebraic\+Refineable\+Quarter\+Circle\+Sector\
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a4245d6f0499af21053a0381bc69de271}{Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh}} (\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$\mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_a1ebdc75ae69205b3863c0433f8d25025}{wall\+\_\+pt}}, const double \&xi\+\_\+lo, const double \&fract\+\_\+mid, const double \&xi\+\_\+hi, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
+\mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a4245d6f0499af21053a0381bc69de271}{Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh}} (\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$\mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_a0b03071bbe7e95cc6723c221ddc0998a}{wall\+\_\+pt}}, const double \&xi\+\_\+lo, const double \&fract\+\_\+mid, const double \&xi\+\_\+hi, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
 \begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to geometric object, start and end coordinates on the geometric object and the fraction along which the dividing line is to be placed when updating the nodal positions, and timestepper (defaults to (\mbox{\hyperlink{classoomph_1_1Steady}{Steady}}) default timestepper defined in \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}). Setup the refineable mesh (by calling the constructor for the underlying \mbox{\hyperlink{classoomph_1_1RefineableQuarterCircleSectorMesh}{Refineable\+Quarter\+Circle\+Sector\+Mesh}}) and the algebraic update functions for nodes. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a68d9738e3d3eedc4d2dd8e1b7fb09d8c}{self\+\_\+test}} ()
 \begin{DoxyCompactList}\small\item\em Run self-\/test for algebraic mesh -- return 0/1 for OK/failure. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a32a096b894031167a90bafdab167ffc7}{node\+\_\+update}} (const bool \&update\+\_\+all\+\_\+solid\+\_\+nodes=false)
 \begin{DoxyCompactList}\small\item\em Resolve mesh update\+: Update current nodal positions via algebraic node update. \mbox{[}Doesn\textquotesingle{}t make sense to use this mesh with Solid\+Elements anyway, so we buffer the case if update\+\_\+all\+\_\+solid\+\_\+nodes is set to true.\mbox{]}. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_ac591df8f18ad687e1dc9b70b731c2de1}{algebraic\+\_\+node\+\_\+update}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1AlgebraicNode}{Algebraic\+Node}} $\ast$\&\mbox{\hyperlink{classoomph_1_1AlgebraicMesh_ae87af0c5ddc685dbc9e694d70b474d64}{node\+\_\+pt}})
-\begin{DoxyCompactList}\small\item\em Implement the algebraic node update function for a node at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous)\+: Update with the node\textquotesingle{}s first (default) update function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a08abc1bf64e0637fc87c36638c41b846}{update\+\_\+node\+\_\+update}} (\mbox{\hyperlink{classoomph_1_1AlgebraicNode}{Algebraic\+Node}} $\ast$\&\mbox{\hyperlink{classoomph_1_1AlgebraicMesh_ae87af0c5ddc685dbc9e694d70b474d64}{node\+\_\+pt}})
+void \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_ac591df8f18ad687e1dc9b70b731c2de1}{algebraic\+\_\+node\+\_\+update}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1AlgebraicNode}{Algebraic\+Node}} $\ast$\&\mbox{\hyperlink{classoomph_1_1AlgebraicMesh_aedeebbe95d2f8e67e9939cecd1be3933}{node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Implement the algebraic node update function for a node at time level t (t=0\+: present; t$>$0\+: previous)\+: Update with the node\textquotesingle{}s first (default) update function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a08abc1bf64e0637fc87c36638c41b846}{update\+\_\+node\+\_\+update}} (\mbox{\hyperlink{classoomph_1_1AlgebraicNode}{Algebraic\+Node}} $\ast$\&\mbox{\hyperlink{classoomph_1_1AlgebraicMesh_aedeebbe95d2f8e67e9939cecd1be3933}{node\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Update the node update info for specified algebraic node following any spatial mesh adaptation. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Types}
 \begin{DoxyCompactItemize}
@@ -39,17 +39,17 @@ enum \{ \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMes
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a89dc4a592e3f188f9bfbffd5c7fdbbcc}{node\+\_\+update\+\_\+in\+\_\+central\+\_\+box}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1AlgebraicNode}{Algebraic\+Node}} $\ast$\&\mbox{\hyperlink{classoomph_1_1AlgebraicMesh_ae87af0c5ddc685dbc9e694d70b474d64}{node\+\_\+pt}})
+void \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a89dc4a592e3f188f9bfbffd5c7fdbbcc}{node\+\_\+update\+\_\+in\+\_\+central\+\_\+box}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1AlgebraicNode}{Algebraic\+Node}} $\ast$\&\mbox{\hyperlink{classoomph_1_1AlgebraicMesh_aedeebbe95d2f8e67e9939cecd1be3933}{node\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Algebraic update function for a node that is located in the central box. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a9a7d3e4a2126346cdae3bde51eff7b36}{node\+\_\+update\+\_\+in\+\_\+lower\+\_\+right\+\_\+box}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1AlgebraicNode}{Algebraic\+Node}} $\ast$\&\mbox{\hyperlink{classoomph_1_1AlgebraicMesh_ae87af0c5ddc685dbc9e694d70b474d64}{node\+\_\+pt}})
+void \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a9a7d3e4a2126346cdae3bde51eff7b36}{node\+\_\+update\+\_\+in\+\_\+lower\+\_\+right\+\_\+box}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1AlgebraicNode}{Algebraic\+Node}} $\ast$\&\mbox{\hyperlink{classoomph_1_1AlgebraicMesh_aedeebbe95d2f8e67e9939cecd1be3933}{node\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Algebraic update function for a node that is located in the lower right box. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_aeb36f6747d14cd68d4857169fa0f22d1}{node\+\_\+update\+\_\+in\+\_\+upper\+\_\+left\+\_\+box}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1AlgebraicNode}{Algebraic\+Node}} $\ast$\&\mbox{\hyperlink{classoomph_1_1AlgebraicMesh_ae87af0c5ddc685dbc9e694d70b474d64}{node\+\_\+pt}})
+void \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_aeb36f6747d14cd68d4857169fa0f22d1}{node\+\_\+update\+\_\+in\+\_\+upper\+\_\+left\+\_\+box}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1AlgebraicNode}{Algebraic\+Node}} $\ast$\&\mbox{\hyperlink{classoomph_1_1AlgebraicMesh_aedeebbe95d2f8e67e9939cecd1be3933}{node\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Algebraic update function for a node that is located in the upper left box. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a3eb269dc5c26355a808d1c5035190017}{setup\+\_\+algebraic\+\_\+node\+\_\+update}} ()
 \begin{DoxyCompactList}\small\item\em Setup algebraic update operation for all nodes. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a77154a45d65fa66d220bad2a3e860c8e}{update\+\_\+node\+\_\+update\+\_\+in\+\_\+lower\+\_\+right\+\_\+box}} (\mbox{\hyperlink{classoomph_1_1AlgebraicNode}{Algebraic\+Node}} $\ast$\&\mbox{\hyperlink{classoomph_1_1AlgebraicMesh_ae87af0c5ddc685dbc9e694d70b474d64}{node\+\_\+pt}})
+void \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a77154a45d65fa66d220bad2a3e860c8e}{update\+\_\+node\+\_\+update\+\_\+in\+\_\+lower\+\_\+right\+\_\+box}} (\mbox{\hyperlink{classoomph_1_1AlgebraicNode}{Algebraic\+Node}} $\ast$\&\mbox{\hyperlink{classoomph_1_1AlgebraicMesh_aedeebbe95d2f8e67e9939cecd1be3933}{node\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Update algebraic node update function for nodes in lower right box. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_ab1e4847ffef953e66aafff14f35b7141}{update\+\_\+node\+\_\+update\+\_\+in\+\_\+upper\+\_\+left\+\_\+box}} (\mbox{\hyperlink{classoomph_1_1AlgebraicNode}{Algebraic\+Node}} $\ast$\&\mbox{\hyperlink{classoomph_1_1AlgebraicMesh_ae87af0c5ddc685dbc9e694d70b474d64}{node\+\_\+pt}})
+void \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_ab1e4847ffef953e66aafff14f35b7141}{update\+\_\+node\+\_\+update\+\_\+in\+\_\+upper\+\_\+left\+\_\+box}} (\mbox{\hyperlink{classoomph_1_1AlgebraicNode}{Algebraic\+Node}} $\ast$\&\mbox{\hyperlink{classoomph_1_1AlgebraicMesh_aedeebbe95d2f8e67e9939cecd1be3933}{node\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Update algebraic node update function for nodes in upper left box. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -64,6 +64,7 @@ double \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class ELEMENT$>$\newline
 class oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$}
+
 Algebraic version of \mbox{\hyperlink{classoomph_1_1RefineableQuarterCircleSectorMesh}{Refineable\+Quarter\+Circle\+Sector\+Mesh}}. 
 
 
@@ -96,7 +97,7 @@ Algebraic version of \mbox{\hyperlink{classoomph_1_1RefineableQuarterCircleSecto
 
 \mbox{\hyperlink{classoomph_1_1Domain}{Domain}} is parametrised by three macro elements as sketched. Elements need to be derived from \mbox{\hyperlink{classoomph_1_1AlgebraicElementBase}{Algebraic\+Element\+Base}}. In addition to all the refinement procedures available for \mbox{\hyperlink{classoomph_1_1RefineableQuarterCircleSectorMesh}{Refineable\+Quarter\+Circle\+Sector\+Mesh}} which forms the basis for this mesh, we implement algebraic node update functions for the nodes. 
 
-Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8h_source_l00439}{439}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h}}.
+Definition at line 439 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h.
 
 
 
@@ -126,7 +127,7 @@ Upper\+\_\+left\+\_\+box&\\
 \end{DoxyEnumFields}
 
 
-Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8h_source_l00625}{625}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h}}.
+Definition at line 625 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h.
 
 
 
@@ -144,11 +145,11 @@ Constructor\+: Pass pointer to geometric object, start and end coordinates on th
 
 
 
-Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8h_source_l00451}{451}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h}}.
+Definition at line 451 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h.
 
 
 
-References \mbox{\hyperlink{algebraic__elements_8h_source_l00823}{oomph\+::\+Algebraic\+Mesh\+::add\+\_\+geom\+\_\+object\+\_\+list\+\_\+pt()}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l00557}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, and \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8h_source_l00105}{oomph\+::\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::wall\+\_\+pt()}}.
+References oomph\+::\+Algebraic\+Mesh\+::add\+\_\+geom\+\_\+object\+\_\+list\+\_\+pt(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), and oomph\+::\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::wall\+\_\+pt().
 
 
 
@@ -162,7 +163,7 @@ void \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh}{
 
 
 
-Implement the algebraic node update function for a node at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous)\+: Update with the node\textquotesingle{}s first (default) update function. 
+Implement the algebraic node update function for a node at time level t (t=0\+: present; t$>$0\+: previous)\+: Update with the node\textquotesingle{}s first (default) update function. 
 
 
 
@@ -170,11 +171,11 @@ Implements \mbox{\hyperlink{classoomph_1_1AlgebraicMesh_ab01d6f93354f3c4e5c9d1f0
 
 
 
-Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8h_source_l00527}{527}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h}}.
+Definition at line 527 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h.
 
 
 
-References \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8h_source_l00627}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Central\+\_\+box}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8h_source_l00628}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Lower\+\_\+right\+\_\+box}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00620}{oomph\+::\+Algebraic\+Mesh\+::node\+\_\+pt()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00146}{oomph\+::\+Algebraic\+Node\+::node\+\_\+update\+\_\+fct\+\_\+id()}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l00851}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+in\+\_\+central\+\_\+box()}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l00940}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+in\+\_\+lower\+\_\+right\+\_\+box()}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l01048}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+in\+\_\+upper\+\_\+left\+\_\+box()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8h_source_l00629}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Upper\+\_\+left\+\_\+box}}.
+References oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Central\+\_\+box, oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Lower\+\_\+right\+\_\+box, oomph\+::\+Algebraic\+Mesh\+::node\+\_\+pt(), oomph\+::\+Algebraic\+Node\+::node\+\_\+update\+\_\+fct\+\_\+id(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+in\+\_\+central\+\_\+box(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+in\+\_\+lower\+\_\+right\+\_\+box(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+in\+\_\+upper\+\_\+left\+\_\+box(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), t, and oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Upper\+\_\+left\+\_\+box.
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a32a096b894031167a90bafdab167ffc7}\label{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a32a096b894031167a90bafdab167ffc7}} 
 \index{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!node\_update@{node\_update}}
@@ -193,11 +194,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AlgebraicMesh_ad3a5638cacb6df1
 
 
 
-Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8h_source_l00501}{501}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h}}.
+Definition at line 501 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h.
 
 
 
-References \mbox{\hyperlink{algebraic__elements_8h_source_l00653}{oomph\+::\+Algebraic\+Mesh\+::node\+\_\+update()}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
+References oomph\+::\+Algebraic\+Mesh\+::node\+\_\+update(), and oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a89dc4a592e3f188f9bfbffd5c7fdbbcc}\label{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a89dc4a592e3f188f9bfbffd5c7fdbbcc}} 
 \index{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!node\_update\_in\_central\_box@{node\_update\_in\_central\_box}}
@@ -210,17 +211,17 @@ void \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh}{
 
 Algebraic update function for a node that is located in the central box. 
 
-Algebraic update function\+: Update in central box according to wall shape at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous) 
+Algebraic update function\+: Update in central box according to wall shape at time level t (t=0\+: present; t$>$0\+: previous) 
 
-Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l00851}{851}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+cc}}.
-
-
-
-References \mbox{\hyperlink{geom__objects_8h_source_l00177}{oomph\+::\+Geom\+Object\+::ndim()}}, \mbox{\hyperlink{classoomph_1_1TimeStepper_a0f38713ed304c18d9f7b5cf8131664c1}{oomph\+::\+Time\+Stepper\+::nprev\+\_\+values()}}, \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, \mbox{\hyperlink{nodes_8h_source_l01022}{oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00200}{oomph\+::\+Algebraic\+Node\+::vector\+\_\+geom\+\_\+object\+\_\+pt()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00251}{oomph\+::\+Algebraic\+Node\+::vector\+\_\+ref\+\_\+value()}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
+Definition at line 851 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8h_source_l00527}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::algebraic\+\_\+node\+\_\+update()}}.
+References oomph\+::\+Geom\+Object\+::ndim(), oomph\+::\+Time\+Stepper\+::nprev\+\_\+values(), oomph\+::\+Geom\+Object\+::position(), oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), t, oomph\+::\+Algebraic\+Node\+::vector\+\_\+geom\+\_\+object\+\_\+pt(), oomph\+::\+Algebraic\+Node\+::vector\+\_\+ref\+\_\+value(), and oomph\+::\+Node\+::x().
+
+
+
+Referenced by oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::algebraic\+\_\+node\+\_\+update().
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a9a7d3e4a2126346cdae3bde51eff7b36}\label{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a9a7d3e4a2126346cdae3bde51eff7b36}} 
 \index{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!node\_update\_in\_lower\_right\_box@{node\_update\_in\_lower\_right\_box}}
@@ -233,17 +234,17 @@ void \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh}{
 
 Algebraic update function for a node that is located in the lower right box. 
 
-Algebraic update function\+: Update in lower right box according to wall shape at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous) 
+Algebraic update function\+: Update in lower right box according to wall shape at time level t (t=0\+: present; t$>$0\+: previous) 
 
-Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l00940}{940}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+cc}}.
-
-
-
-References \mbox{\hyperlink{geom__objects_8h_source_l00177}{oomph\+::\+Geom\+Object\+::ndim()}}, \mbox{\hyperlink{classoomph_1_1TimeStepper_a0f38713ed304c18d9f7b5cf8131664c1}{oomph\+::\+Time\+Stepper\+::nprev\+\_\+values()}}, \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, \mbox{\hyperlink{nodes_8h_source_l01022}{oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00200}{oomph\+::\+Algebraic\+Node\+::vector\+\_\+geom\+\_\+object\+\_\+pt()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00251}{oomph\+::\+Algebraic\+Node\+::vector\+\_\+ref\+\_\+value()}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
+Definition at line 940 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8h_source_l00527}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::algebraic\+\_\+node\+\_\+update()}}.
+References oomph\+::\+Geom\+Object\+::ndim(), oomph\+::\+Time\+Stepper\+::nprev\+\_\+values(), oomph\+::\+Geom\+Object\+::position(), oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), t, oomph\+::\+Algebraic\+Node\+::vector\+\_\+geom\+\_\+object\+\_\+pt(), oomph\+::\+Algebraic\+Node\+::vector\+\_\+ref\+\_\+value(), and oomph\+::\+Node\+::x().
+
+
+
+Referenced by oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::algebraic\+\_\+node\+\_\+update().
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_aeb36f6747d14cd68d4857169fa0f22d1}\label{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_aeb36f6747d14cd68d4857169fa0f22d1}} 
 \index{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!node\_update\_in\_upper\_left\_box@{node\_update\_in\_upper\_left\_box}}
@@ -256,17 +257,17 @@ void \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh}{
 
 Algebraic update function for a node that is located in the upper left box. 
 
-Algebraic update function\+: Update in upper left box according to wall shape at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous) 
+Algebraic update function\+: Update in upper left box according to wall shape at time level t (t=0\+: present; t$>$0\+: previous) 
 
-Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l01048}{1048}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+cc}}.
-
-
-
-References \mbox{\hyperlink{algebraic__elements_8h_source_l00229}{oomph\+::\+Algebraic\+Node\+::geom\+\_\+object\+\_\+pt()}}, \mbox{\hyperlink{geom__objects_8h_source_l00177}{oomph\+::\+Geom\+Object\+::ndim()}}, \mbox{\hyperlink{classoomph_1_1TimeStepper_a0f38713ed304c18d9f7b5cf8131664c1}{oomph\+::\+Time\+Stepper\+::nprev\+\_\+values()}}, \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, \mbox{\hyperlink{nodes_8h_source_l01022}{oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00267}{oomph\+::\+Algebraic\+Node\+::ref\+\_\+value()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00200}{oomph\+::\+Algebraic\+Node\+::vector\+\_\+geom\+\_\+object\+\_\+pt()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00251}{oomph\+::\+Algebraic\+Node\+::vector\+\_\+ref\+\_\+value()}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
+Definition at line 1048 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8h_source_l00527}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::algebraic\+\_\+node\+\_\+update()}}.
+References oomph\+::\+Algebraic\+Node\+::geom\+\_\+object\+\_\+pt(), oomph\+::\+Geom\+Object\+::ndim(), oomph\+::\+Time\+Stepper\+::nprev\+\_\+values(), oomph\+::\+Geom\+Object\+::position(), oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt(), oomph\+::\+Algebraic\+Node\+::ref\+\_\+value(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), t, oomph\+::\+Algebraic\+Node\+::vector\+\_\+geom\+\_\+object\+\_\+pt(), oomph\+::\+Algebraic\+Node\+::vector\+\_\+ref\+\_\+value(), and oomph\+::\+Node\+::x().
+
+
+
+Referenced by oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::algebraic\+\_\+node\+\_\+update().
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a68d9738e3d3eedc4d2dd8e1b7fb09d8c}\label{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a68d9738e3d3eedc4d2dd8e1b7fb09d8c}} 
 \index{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!self\_test@{self\_test}}
@@ -281,11 +282,11 @@ Run self-\/test for algebraic mesh -- return 0/1 for OK/failure.
 
 
 
-Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8h_source_l00491}{491}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h}}.
+Definition at line 491 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h.
 
 
 
-References \mbox{\hyperlink{algebraic__elements_8h_source_l00786}{oomph\+::\+Algebraic\+Mesh\+::self\+\_\+test()}}.
+References oomph\+::\+Algebraic\+Mesh\+::self\+\_\+test().
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a3eb269dc5c26355a808d1c5035190017}\label{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a3eb269dc5c26355a808d1c5035190017}} 
 \index{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!setup\_algebraic\_node\_update@{setup\_algebraic\_node\_update}}
@@ -306,15 +307,15 @@ Setup algebraic update operation for all nodes.
 \item Nodes in the two outer \char`\"{}ring\char`\"{} elements (bottom right and top left) are located on straight lines running from the edges of the central box to the outer wall. 
 \end{DoxyItemize}Pointer to algebraic element in central box
 
-Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l00557}{557}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+cc}}.
+Definition at line 557 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+cc.
 
 
 
-References \mbox{\hyperlink{mesh_8h_source_l00460}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00473}{oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
+References oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Geom\+Object\+::position(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), and oomph\+::\+Node\+::x().
 
 
 
-Referenced by \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8h_source_l00451}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh()}}.
+Referenced by oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh().
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a08abc1bf64e0637fc87c36638c41b846}\label{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a08abc1bf64e0637fc87c36638c41b846}} 
 \index{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!update\_node\_update@{update\_node\_update}}
@@ -333,11 +334,11 @@ Implements \mbox{\hyperlink{classoomph_1_1AlgebraicMesh_a6c6a35ae2be6e2766f5b80d
 
 
 
-Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8h_source_l00573}{573}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h}}.
+Definition at line 573 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h.
 
 
 
-References \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8h_source_l00627}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Central\+\_\+box}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8h_source_l00628}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Lower\+\_\+right\+\_\+box}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00620}{oomph\+::\+Algebraic\+Mesh\+::node\+\_\+pt()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00146}{oomph\+::\+Algebraic\+Node\+::node\+\_\+update\+\_\+fct\+\_\+id()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l01159}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::update\+\_\+node\+\_\+update\+\_\+in\+\_\+lower\+\_\+right\+\_\+box()}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l01259}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::update\+\_\+node\+\_\+update\+\_\+in\+\_\+upper\+\_\+left\+\_\+box()}}, and \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8h_source_l00629}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Upper\+\_\+left\+\_\+box}}.
+References oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Central\+\_\+box, i, oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Lower\+\_\+right\+\_\+box, oomph\+::\+Algebraic\+Mesh\+::node\+\_\+pt(), oomph\+::\+Algebraic\+Node\+::node\+\_\+update\+\_\+fct\+\_\+id(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::update\+\_\+node\+\_\+update\+\_\+in\+\_\+lower\+\_\+right\+\_\+box(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::update\+\_\+node\+\_\+update\+\_\+in\+\_\+upper\+\_\+left\+\_\+box(), and oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Upper\+\_\+left\+\_\+box.
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a77154a45d65fa66d220bad2a3e860c8e}\label{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a77154a45d65fa66d220bad2a3e860c8e}} 
 \index{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!update\_node\_update\_in\_lower\_right\_box@{update\_node\_update\_in\_lower\_right\_box}}
@@ -352,15 +353,15 @@ Update algebraic node update function for nodes in lower right box.
 
 Update algebraic update function for nodes in lower right box. 
 
-Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l01159}{1159}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+cc}}.
+Definition at line 1159 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+cc.
 
 
 
-References \mbox{\hyperlink{algebraic__elements_8h_source_l00280}{oomph\+::\+Algebraic\+Node\+::add\+\_\+node\+\_\+update\+\_\+info()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00365}{oomph\+::\+Algebraic\+Node\+::kill\+\_\+node\+\_\+update\+\_\+info()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00200}{oomph\+::\+Algebraic\+Node\+::vector\+\_\+geom\+\_\+object\+\_\+pt()}}, and \mbox{\hyperlink{algebraic__elements_8h_source_l00251}{oomph\+::\+Algebraic\+Node\+::vector\+\_\+ref\+\_\+value()}}.
+References oomph\+::\+Algebraic\+Node\+::add\+\_\+node\+\_\+update\+\_\+info(), oomph\+::\+Algebraic\+Node\+::kill\+\_\+node\+\_\+update\+\_\+info(), oomph\+::\+Algebraic\+Node\+::vector\+\_\+geom\+\_\+object\+\_\+pt(), and oomph\+::\+Algebraic\+Node\+::vector\+\_\+ref\+\_\+value().
 
 
 
-Referenced by \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8h_source_l00573}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::update\+\_\+node\+\_\+update()}}.
+Referenced by oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::update\+\_\+node\+\_\+update().
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_ab1e4847ffef953e66aafff14f35b7141}\label{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_ab1e4847ffef953e66aafff14f35b7141}} 
 \index{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!update\_node\_update\_in\_upper\_left\_box@{update\_node\_update\_in\_upper\_left\_box}}
@@ -375,15 +376,15 @@ Update algebraic node update function for nodes in upper left box.
 
 Update algebraic update function for nodes in upper left box. 
 
-Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l01259}{1259}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+cc}}.
+Definition at line 1259 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+cc.
 
 
 
-References \mbox{\hyperlink{algebraic__elements_8h_source_l00280}{oomph\+::\+Algebraic\+Node\+::add\+\_\+node\+\_\+update\+\_\+info()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00365}{oomph\+::\+Algebraic\+Node\+::kill\+\_\+node\+\_\+update\+\_\+info()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00200}{oomph\+::\+Algebraic\+Node\+::vector\+\_\+geom\+\_\+object\+\_\+pt()}}, and \mbox{\hyperlink{algebraic__elements_8h_source_l00251}{oomph\+::\+Algebraic\+Node\+::vector\+\_\+ref\+\_\+value()}}.
+References oomph\+::\+Algebraic\+Node\+::add\+\_\+node\+\_\+update\+\_\+info(), oomph\+::\+Algebraic\+Node\+::kill\+\_\+node\+\_\+update\+\_\+info(), oomph\+::\+Algebraic\+Node\+::vector\+\_\+geom\+\_\+object\+\_\+pt(), and oomph\+::\+Algebraic\+Node\+::vector\+\_\+ref\+\_\+value().
 
 
 
-Referenced by \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8h_source_l00573}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::update\+\_\+node\+\_\+update()}}.
+Referenced by oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::update\+\_\+node\+\_\+update().
 
 
 
@@ -401,7 +402,7 @@ Fractional width of central box.
 
 
 
-Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8h_source_l00634}{634}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h}}.
+Definition at line 634 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a2690e44e43dd4ed1e45b02f4b71ae43f}\label{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a2690e44e43dd4ed1e45b02f4b71ae43f}} 
 \index{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!Lambda\_y@{Lambda\_y}}
@@ -416,7 +417,7 @@ Fractional height of central box.
 
 
 
-Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8h_source_l00637}{637}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h}}.
+Definition at line 637 of file quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+h.
 
 
 

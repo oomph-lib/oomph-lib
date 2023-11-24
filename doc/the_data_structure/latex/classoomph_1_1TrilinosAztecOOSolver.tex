@@ -2,7 +2,7 @@
 \label{classoomph_1_1TrilinosAztecOOSolver}\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
 
 
-An interface to the Trilinos Aztec\+OO classes allowing it to be used as an Oomph-\/lib \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}}. The Aztec\+OO solver is a Krylov Subspace solver; the solver type (either \mbox{\hyperlink{classoomph_1_1CG}{CG}}, \mbox{\hyperlink{classoomph_1_1GMRES}{GMRES}} or \mbox{\hyperlink{classoomph_1_1BiCGStab}{Bi\+CGStab}}) can be set using \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a7c81cd1f21720d2c05db9d499dc8f2bc}{solver\+\_\+type()}}. This solver can be preconditioned with Trilinos Preconditioners (derived from \mbox{\hyperlink{classoomph_1_1TrilinosPreconditionerBase}{Trilinos\+Preconditioner\+Base}}) or Oomph-\/lib preconditioners (derived from \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}}). Preconditioners are set using \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_ad4ae617ce8304f17bd42f4dc39813e22}{preconditioner\+\_\+pt()}}.  
+An interface to the Trilinos Aztec\+OO classes allowing it to be used as an Oomph-\/lib \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}}. The Aztec\+OO solver is a Krylov Subspace solver; the solver type (either \mbox{\hyperlink{classoomph_1_1CG}{CG}}, \mbox{\hyperlink{classoomph_1_1GMRES}{GMRES}} or \mbox{\hyperlink{classoomph_1_1BiCGStab}{Bi\+CGStab}}) can be set using \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a9169831da7460eec52071e8b3938bf97}{solver\+\_\+type()}}. This solver can be preconditioned with Trilinos Preconditioners (derived from \mbox{\hyperlink{classoomph_1_1TrilinosPreconditionerBase}{Trilinos\+Preconditioner\+Base}}) or Oomph-\/lib preconditioners (derived from \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}}). Preconditioners are set using \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a800f699ec8dda290105807cb91297850}{preconditioner\+\_\+pt()}}.  
 
 
 
@@ -54,13 +54,13 @@ void \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_ad48df1a369de8dabe6c2c
 \begin{DoxyCompactList}\small\item\em Call if the matrix can be deleted. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a6df71e8dd3967f17d39142696f71aef6}{disable\+\_\+delete\+\_\+matrix}} ()
 \begin{DoxyCompactList}\small\item\em Call if the matrix can not be deleted (default) \end{DoxyCompactList}\item 
-unsigned \& \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a8e3fbb5d980b5764a7934cc7e901bd56}{max\+\_\+iter}} ()
+unsigned \& \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a5e98e3624970a772e8ddbbcb6c92c24f}{max\+\_\+iter}} ()
 \begin{DoxyCompactList}\small\item\em Access function to Max\+\_\+iter. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_aaa90619b05f448d7bd610f474a9f750d}{iterations}} () const
 \begin{DoxyCompactList}\small\item\em Acess function to Iterations. \end{DoxyCompactList}\item 
-double \& \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a0b7b6b0431efdc7fd6276552349610bb}{tolerance}} ()
+double \& \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_afc08e5d6996fe05b93d68ff3cec6a478}{tolerance}} ()
 \begin{DoxyCompactList}\small\item\em Access function to Tolerance. \end{DoxyCompactList}\item 
-unsigned \& \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a7c81cd1f21720d2c05db9d499dc8f2bc}{solver\+\_\+type}} ()
+unsigned \& \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a9169831da7460eec52071e8b3938bf97}{solver\+\_\+type}} ()
 \begin{DoxyCompactList}\small\item\em Access function to Solver\+\_\+type. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a3b7cf9349909686e3638aced9b29303f}{jacobian\+\_\+setup\+\_\+time}} ()
 \begin{DoxyCompactList}\small\item\em Function to return Jacobian\+\_\+setup\+\_\+time;. \end{DoxyCompactList}\item 
@@ -112,9 +112,9 @@ bool \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a028992b1b3fe1a501590a
 
 
 \doxysubsection{Detailed Description}
-An interface to the Trilinos Aztec\+OO classes allowing it to be used as an Oomph-\/lib \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}}. The Aztec\+OO solver is a Krylov Subspace solver; the solver type (either \mbox{\hyperlink{classoomph_1_1CG}{CG}}, \mbox{\hyperlink{classoomph_1_1GMRES}{GMRES}} or \mbox{\hyperlink{classoomph_1_1BiCGStab}{Bi\+CGStab}}) can be set using \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a7c81cd1f21720d2c05db9d499dc8f2bc}{solver\+\_\+type()}}. This solver can be preconditioned with Trilinos Preconditioners (derived from \mbox{\hyperlink{classoomph_1_1TrilinosPreconditionerBase}{Trilinos\+Preconditioner\+Base}}) or Oomph-\/lib preconditioners (derived from \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}}). Preconditioners are set using \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_ad4ae617ce8304f17bd42f4dc39813e22}{preconditioner\+\_\+pt()}}. 
+An interface to the Trilinos Aztec\+OO classes allowing it to be used as an Oomph-\/lib \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}}. The Aztec\+OO solver is a Krylov Subspace solver; the solver type (either \mbox{\hyperlink{classoomph_1_1CG}{CG}}, \mbox{\hyperlink{classoomph_1_1GMRES}{GMRES}} or \mbox{\hyperlink{classoomph_1_1BiCGStab}{Bi\+CGStab}}) can be set using \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a9169831da7460eec52071e8b3938bf97}{solver\+\_\+type()}}. This solver can be preconditioned with Trilinos Preconditioners (derived from \mbox{\hyperlink{classoomph_1_1TrilinosPreconditionerBase}{Trilinos\+Preconditioner\+Base}}) or Oomph-\/lib preconditioners (derived from \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}}). Preconditioners are set using \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a800f699ec8dda290105807cb91297850}{preconditioner\+\_\+pt()}}. 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00266}{266}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 266 of file trilinos\+\_\+solver.\+h.
 
 
 
@@ -145,7 +145,7 @@ Bi\+CGStab&\\
 \end{DoxyEnumFields}
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00483}{483}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 483 of file trilinos\+\_\+solver.\+h.
 
 
 
@@ -162,11 +162,11 @@ Constructor.
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00270}{270}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 270 of file trilinos\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{trilinos__solver_8h_source_l00527}{Assemble\+\_\+serial\+\_\+jacobian}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00509}{Aztec\+OO\+\_\+solver\+\_\+pt}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00523}{Delete\+\_\+matrix}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00538}{Epetra\+\_\+matrix\+\_\+pt}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00542}{Epetra\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00486}{GMRES}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00556}{If\+\_\+oomphlib\+\_\+preconditioner\+\_\+use\+\_\+epetra\+\_\+values}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00550}{Problem\+\_\+pt}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00531}{Solver\+\_\+type}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00239}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Tolerance}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00503}{Use\+\_\+aztecoo\+\_\+workaround\+\_\+for\+\_\+epetra\+\_\+matrix\+\_\+setup}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00535}{Using\+\_\+problem\+\_\+based\+\_\+solve}}.
+References Assemble\+\_\+serial\+\_\+jacobian, Aztec\+OO\+\_\+solver\+\_\+pt, Delete\+\_\+matrix, e, Epetra\+\_\+matrix\+\_\+pt, Epetra\+\_\+preconditioner\+\_\+pt, GMRES, If\+\_\+oomphlib\+\_\+preconditioner\+\_\+use\+\_\+epetra\+\_\+values, Problem\+\_\+pt, Solver\+\_\+type, oomph\+::\+Iterative\+Linear\+Solver\+::\+Tolerance, Use\+\_\+aztecoo\+\_\+workaround\+\_\+for\+\_\+epetra\+\_\+matrix\+\_\+setup, and Using\+\_\+problem\+\_\+based\+\_\+solve.
 
 \mbox{\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a7b06c1e69e25f407083453f98cfdb144}\label{classoomph_1_1TrilinosAztecOOSolver_a7b06c1e69e25f407083453f98cfdb144}} 
 \index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!````~TrilinosAztecOOSolver@{$\sim$TrilinosAztecOOSolver}}
@@ -180,11 +180,11 @@ Destructor -\/ delete the solver and the matrices.
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00304}{304}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 304 of file trilinos\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{trilinos__solver_8h_source_l00347}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00545}{Oomph\+\_\+matrix\+\_\+pt}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00535}{Using\+\_\+problem\+\_\+based\+\_\+solve}}.
+References clean\+\_\+up\+\_\+memory(), Oomph\+\_\+matrix\+\_\+pt, and Using\+\_\+problem\+\_\+based\+\_\+solve.
 
 \mbox{\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_aa29c842b4a8abe16e50c9e371557b2f8}\label{classoomph_1_1TrilinosAztecOOSolver_aa29c842b4a8abe16e50c9e371557b2f8}} 
 \index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!TrilinosAztecOOSolver@{TrilinosAztecOOSolver}}
@@ -215,15 +215,15 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a9d66f3262e80ca06
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00347}{347}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 347 of file trilinos\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{trilinos__solver_8h_source_l00509}{Aztec\+OO\+\_\+solver\+\_\+pt}}, \mbox{\hyperlink{preconditioner_8h_source_l00147}{oomph\+::\+Preconditioner\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00538}{Epetra\+\_\+matrix\+\_\+pt}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00542}{Epetra\+\_\+preconditioner\+\_\+pt}}, and \mbox{\hyperlink{iterative__linear__solver_8h_source_l00095}{oomph\+::\+Iterative\+Linear\+Solver\+::preconditioner\+\_\+pt()}}.
+References Aztec\+OO\+\_\+solver\+\_\+pt, oomph\+::\+Preconditioner\+::clean\+\_\+up\+\_\+memory(), Epetra\+\_\+matrix\+\_\+pt, Epetra\+\_\+preconditioner\+\_\+pt, and oomph\+::\+Iterative\+Linear\+Solver\+::preconditioner\+\_\+pt().
 
 
 
-Referenced by \mbox{\hyperlink{trilinos__solver_8h_source_l00405}{disable\+\_\+resolve()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00043}{solve()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00283}{solver\+\_\+setup()}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00304}{$\sim$\+Trilinos\+Aztec\+OOSolver()}}.
+Referenced by disable\+\_\+resolve(), solve(), solver\+\_\+setup(), and $\sim$\+Trilinos\+Aztec\+OOSolver().
 
 \mbox{\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a9f79dc6d711d4052ee61cb305da226db}\label{classoomph_1_1TrilinosAztecOOSolver_a9f79dc6d711d4052ee61cb305da226db}} 
 \index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!disable\_assemble\_serial\_jacobian@{disable\_assemble\_serial\_jacobian}}
@@ -237,11 +237,11 @@ Unset the assembly of the serial jacobian.
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00467}{467}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 467 of file trilinos\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{trilinos__solver_8h_source_l00527}{Assemble\+\_\+serial\+\_\+jacobian}}.
+References Assemble\+\_\+serial\+\_\+jacobian.
 
 \mbox{\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a25ba106bb6f1cd4b99dd1af343aeeb7c}\label{classoomph_1_1TrilinosAztecOOSolver_a25ba106bb6f1cd4b99dd1af343aeeb7c}} 
 \index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!disable\_aztecoo\_workaround\_for\_epetra\_matrix\_setup@{disable\_aztecoo\_workaround\_for\_epetra\_matrix\_setup}}
@@ -255,11 +255,11 @@ Disable workaround for creating of epetra matrix that respects aztecoo\textquote
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00333}{333}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 333 of file trilinos\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{trilinos__solver_8h_source_l00503}{Use\+\_\+aztecoo\+\_\+workaround\+\_\+for\+\_\+epetra\+\_\+matrix\+\_\+setup}}.
+References Use\+\_\+aztecoo\+\_\+workaround\+\_\+for\+\_\+epetra\+\_\+matrix\+\_\+setup.
 
 \mbox{\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a6df71e8dd3967f17d39142696f71aef6}\label{classoomph_1_1TrilinosAztecOOSolver_a6df71e8dd3967f17d39142696f71aef6}} 
 \index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!disable\_delete\_matrix@{disable\_delete\_matrix}}
@@ -273,11 +273,11 @@ Call if the matrix can not be deleted (default)
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00418}{418}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 418 of file trilinos\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{trilinos__solver_8h_source_l00523}{Delete\+\_\+matrix}}.
+References Delete\+\_\+matrix.
 
 \mbox{\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a7d9c9d9beddb2d18abea55529db534e4}\label{classoomph_1_1TrilinosAztecOOSolver_a7d9c9d9beddb2d18abea55529db534e4}} 
 \index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!disable\_resolve@{disable\_resolve}}
@@ -295,11 +295,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_ad61c63af94c59618
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00405}{405}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 405 of file trilinos\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{trilinos__solver_8h_source_l00347}{clean\+\_\+up\+\_\+memory()}}, and \mbox{\hyperlink{linear__solver_8h_source_l00073}{oomph\+::\+Linear\+Solver\+::\+Enable\+\_\+resolve}}.
+References clean\+\_\+up\+\_\+memory(), and oomph\+::\+Linear\+Solver\+::\+Enable\+\_\+resolve.
 
 \mbox{\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a80de34d99eff7b2ad41af3e04229a55b}\label{classoomph_1_1TrilinosAztecOOSolver_a80de34d99eff7b2ad41af3e04229a55b}} 
 \index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!enable\_assemble\_serial\_jacobian@{enable\_assemble\_serial\_jacobian}}
@@ -313,11 +313,11 @@ Set the assembly of the serial jacobian when performing a problem-\/based solve.
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00461}{461}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 461 of file trilinos\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{trilinos__solver_8h_source_l00527}{Assemble\+\_\+serial\+\_\+jacobian}}.
+References Assemble\+\_\+serial\+\_\+jacobian.
 
 \mbox{\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_aa3cd029cc48f36cc41d75e8c83faa037}\label{classoomph_1_1TrilinosAztecOOSolver_aa3cd029cc48f36cc41d75e8c83faa037}} 
 \index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!enable\_aztecoo\_workaround\_for\_epetra\_matrix\_setup@{enable\_aztecoo\_workaround\_for\_epetra\_matrix\_setup}}
@@ -331,11 +331,11 @@ Enable workaround for creating of epetra matrix that respects aztecoo\textquotes
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00326}{326}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 326 of file trilinos\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{trilinos__solver_8h_source_l00503}{Use\+\_\+aztecoo\+\_\+workaround\+\_\+for\+\_\+epetra\+\_\+matrix\+\_\+setup}}.
+References Use\+\_\+aztecoo\+\_\+workaround\+\_\+for\+\_\+epetra\+\_\+matrix\+\_\+setup.
 
 \mbox{\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_ad48df1a369de8dabe6c2cdb00e05ff87}\label{classoomph_1_1TrilinosAztecOOSolver_ad48df1a369de8dabe6c2cdb00e05ff87}} 
 \index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!enable\_delete\_matrix@{enable\_delete\_matrix}}
@@ -349,11 +349,11 @@ Call if the matrix can be deleted.
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00412}{412}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 412 of file trilinos\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{trilinos__solver_8h_source_l00523}{Delete\+\_\+matrix}}.
+References Delete\+\_\+matrix.
 
 \mbox{\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_ac17e7d21595ce4b9b854f0207f3b04be}\label{classoomph_1_1TrilinosAztecOOSolver_ac17e7d21595ce4b9b854f0207f3b04be}} 
 \index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!is\_aztecoo\_workaround\_for\_epetra\_matrix\_setup\_enabled@{is\_aztecoo\_workaround\_for\_epetra\_matrix\_setup\_enabled}}
@@ -367,11 +367,11 @@ Is workaround for creating of epetra matrix that respects aztecoo\textquotesingl
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00340}{340}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 340 of file trilinos\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{trilinos__solver_8h_source_l00503}{Use\+\_\+aztecoo\+\_\+workaround\+\_\+for\+\_\+epetra\+\_\+matrix\+\_\+setup}}.
+References Use\+\_\+aztecoo\+\_\+workaround\+\_\+for\+\_\+epetra\+\_\+matrix\+\_\+setup.
 
 \mbox{\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_aaa90619b05f448d7bd610f474a9f750d}\label{classoomph_1_1TrilinosAztecOOSolver_aaa90619b05f448d7bd610f474a9f750d}} 
 \index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!iterations@{iterations}}
@@ -389,11 +389,11 @@ Implements \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a5fe7f7b5e4847fd
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00430}{430}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 430 of file trilinos\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{trilinos__solver_8h_source_l00506}{Iterations}}.
+References Iterations.
 
 \mbox{\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a3b7cf9349909686e3638aced9b29303f}\label{classoomph_1_1TrilinosAztecOOSolver_a3b7cf9349909686e3638aced9b29303f}} 
 \index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!jacobian\_setup\_time@{jacobian\_setup\_time}}
@@ -407,11 +407,11 @@ Function to return Jacobian\+\_\+setup\+\_\+time;.
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00448}{448}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 448 of file trilinos\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{trilinos__solver_8h_source_l00512}{Jacobian\+\_\+setup\+\_\+time}}.
+References Jacobian\+\_\+setup\+\_\+time.
 
 \mbox{\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a88cf6614457b404e38c6aed2e5d41257}\label{classoomph_1_1TrilinosAztecOOSolver_a88cf6614457b404e38c6aed2e5d41257}} 
 \index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!linear\_solver\_solution\_time@{linear\_solver\_solution\_time}}
@@ -425,17 +425,17 @@ Function to return Linear\+\_\+solver\+\_\+solution\+\_\+time.
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00454}{454}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 454 of file trilinos\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{trilinos__solver_8h_source_l00515}{Linear\+\_\+solver\+\_\+solution\+\_\+time}}.
+References Linear\+\_\+solver\+\_\+solution\+\_\+time.
 
-\mbox{\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a8e3fbb5d980b5764a7934cc7e901bd56}\label{classoomph_1_1TrilinosAztecOOSolver_a8e3fbb5d980b5764a7934cc7e901bd56}} 
+\mbox{\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a5e98e3624970a772e8ddbbcb6c92c24f}\label{classoomph_1_1TrilinosAztecOOSolver_a5e98e3624970a772e8ddbbcb6c92c24f}} 
 \index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!max\_iter@{max\_iter}}
 \index{max\_iter@{max\_iter}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
 \doxysubsubsection{\texorpdfstring{max\_iter()}{max\_iter()}}
-{\footnotesize\ttfamily unsigned \& oomph\+::\+Trilinos\+Aztec\+OOSolver\+::max\+\_\+iter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily unsigned\& oomph\+::\+Trilinos\+Aztec\+OOSolver\+::max\+\_\+iter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -443,11 +443,11 @@ Access function to Max\+\_\+iter.
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00424}{424}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 424 of file trilinos\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{iterative__linear__solver_8h_source_l00242}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Max\+\_\+iter}}.
+References oomph\+::\+Iterative\+Linear\+Solver\+::\+Max\+\_\+iter.
 
 \mbox{\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_ae78dde00323507932c4103723dec10fa}\label{classoomph_1_1TrilinosAztecOOSolver_ae78dde00323507932c4103723dec10fa}} 
 \index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!operator=@{operator=}}
@@ -475,11 +475,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033ed
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8cc_source_l00489}{489}} of file \mbox{\hyperlink{trilinos__solver_8cc_source}{trilinos\+\_\+solver.\+cc}}.
+Definition at line 489 of file trilinos\+\_\+solver.\+cc.
 
 
 
-References \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00180}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::copy\+\_\+to\+\_\+oomphlib\+\_\+vector()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00041}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+vector()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00500}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__solver_8h_source_l00077}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00538}{Epetra\+\_\+matrix\+\_\+pt}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00515}{Linear\+\_\+solver\+\_\+solution\+\_\+time}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00570}{solve\+\_\+using\+\_\+\+Aztec\+OO()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}.
+References oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Double\+Vector\+::built(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::copy\+\_\+to\+\_\+oomphlib\+\_\+vector(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+vector(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+built(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time, Epetra\+\_\+matrix\+\_\+pt, Linear\+\_\+solver\+\_\+solution\+\_\+time, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), oomph\+::oomph\+\_\+info, solve\+\_\+using\+\_\+\+Aztec\+OO(), and oomph\+::\+Timing\+Helpers\+::timer().
 
 \mbox{\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a7d2853c49429224fc2deb3260340b190}\label{classoomph_1_1TrilinosAztecOOSolver_a7d2853c49429224fc2deb3260340b190}} 
 \index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!solve@{solve}}
@@ -497,11 +497,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a546c09822d18191d
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8cc_source_l00135}{135}} of file \mbox{\hyperlink{trilinos__solver_8cc_source}{trilinos\+\_\+solver.\+cc}}.
+Definition at line 135 of file trilinos\+\_\+solver.\+cc.
 
 
 
-References \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00347}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00335}{oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00180}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::copy\+\_\+to\+\_\+oomphlib\+\_\+vector()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00041}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+vector()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__solver_8h_source_l00077}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, \mbox{\hyperlink{linear__solver_8h_source_l00073}{oomph\+::\+Linear\+Solver\+::\+Enable\+\_\+resolve}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00270}{oomph\+::\+Iterative\+Linear\+Solver\+::\+First\+\_\+time\+\_\+solve\+\_\+when\+\_\+used\+\_\+as\+\_\+preconditioner}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00515}{Linear\+\_\+solver\+\_\+solution\+\_\+time}}, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a253feffbf1db1976cdd86c6134c50abe}{oomph\+::\+Double\+Matrix\+Base\+::ncol()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow()}}, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_acdcd6e1ea2bf2380f1a2fa32c7829cb5}{oomph\+::\+Double\+Matrix\+Base\+::nrow()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00570}{solve\+\_\+using\+\_\+\+Aztec\+OO()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00283}{solver\+\_\+setup()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}, and \mbox{\hyperlink{iterative__linear__solver_8h_source_l00265}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Use\+\_\+iterative\+\_\+solver\+\_\+as\+\_\+preconditioner}}.
+References oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Double\+Vector\+::built(), clean\+\_\+up\+\_\+memory(), oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::copy\+\_\+to\+\_\+oomphlib\+\_\+vector(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+vector(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time, oomph\+::\+Linear\+Solver\+::\+Enable\+\_\+resolve, oomph\+::\+Iterative\+Linear\+Solver\+::\+First\+\_\+time\+\_\+solve\+\_\+when\+\_\+used\+\_\+as\+\_\+preconditioner, Linear\+\_\+solver\+\_\+solution\+\_\+time, oomph\+::\+Double\+Matrix\+Base\+::ncol(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), oomph\+::\+Double\+Matrix\+Base\+::nrow(), oomph\+::oomph\+\_\+info, solve\+\_\+using\+\_\+\+Aztec\+OO(), solver\+\_\+setup(), oomph\+::\+Timing\+Helpers\+::timer(), and oomph\+::\+Iterative\+Linear\+Solver\+::\+Use\+\_\+iterative\+\_\+solver\+\_\+as\+\_\+preconditioner.
 
 \mbox{\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a7dc1ae7f05e8a50416b8df700f832eb9}\label{classoomph_1_1TrilinosAztecOOSolver_a7dc1ae7f05e8a50416b8df700f832eb9}} 
 \index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!solve@{solve}}
@@ -521,15 +521,11 @@ Implements \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485e
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8cc_source_l00043}{43}} of file \mbox{\hyperlink{trilinos__solver_8cc_source}{trilinos\+\_\+solver.\+cc}}.
+Definition at line 43 of file trilinos\+\_\+solver.\+cc.
 
 
 
-References \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00347}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__solver_8h_source_l00077}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, \mbox{\hyperlink{problem_8cc_source_l03890}{oomph\+::\+Problem\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00512}{Jacobian\+\_\+setup\+\_\+time}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00545}{Oomph\+\_\+matrix\+\_\+pt}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00550}{Problem\+\_\+pt}}, \mbox{\hyperlink{double__vector_8cc_source_l00164}{oomph\+::\+Double\+Vector\+::redistribute()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00043}{solve()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00535}{Using\+\_\+problem\+\_\+based\+\_\+solve}}.
-
-
-
-Referenced by \mbox{\hyperlink{trilinos__solver_8cc_source_l00043}{solve()}}.
+References oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution(), oomph\+::\+Double\+Vector\+::built(), clean\+\_\+up\+\_\+memory(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time, oomph\+::\+Problem\+::get\+\_\+jacobian(), Jacobian\+\_\+setup\+\_\+time, oomph\+::oomph\+\_\+info, Oomph\+\_\+matrix\+\_\+pt, Problem\+\_\+pt, oomph\+::\+Double\+Vector\+::redistribute(), oomph\+::\+Timing\+Helpers\+::timer(), and Using\+\_\+problem\+\_\+based\+\_\+solve.
 
 \mbox{\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a419638218c26238bab55674304c5fc98}\label{classoomph_1_1TrilinosAztecOOSolver_a419638218c26238bab55674304c5fc98}} 
 \index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!solve\_using\_AztecOO@{solve\_using\_AztecOO}}
@@ -543,15 +539,15 @@ Helper function performs the actual solve once the Aztec\+OO solver is set up.
 
 Helper function performs the actual solve once the Aztec\+OO solver is set up (i.\+e. \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a1d5e7dfc9fe3c890569465a167c2f2fc}{solver\+\_\+setup()}} is called) 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8cc_source_l00570}{570}} of file \mbox{\hyperlink{trilinos__solver_8cc_source}{trilinos\+\_\+solver.\+cc}}.
+Definition at line 570 of file trilinos\+\_\+solver.\+cc.
 
 
 
-References \mbox{\hyperlink{trilinos__solver_8h_source_l00509}{Aztec\+OO\+\_\+solver\+\_\+pt}}, \mbox{\hyperlink{linear__solver_8h_source_l00077}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00506}{Iterations}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00242}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Max\+\_\+iter}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, and \mbox{\hyperlink{iterative__linear__solver_8h_source_l00239}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Tolerance}}.
+References Aztec\+OO\+\_\+solver\+\_\+pt, oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time, Iterations, oomph\+::\+Iterative\+Linear\+Solver\+::\+Max\+\_\+iter, oomph\+::oomph\+\_\+info, and oomph\+::\+Iterative\+Linear\+Solver\+::\+Tolerance.
 
 
 
-Referenced by \mbox{\hyperlink{trilinos__solver_8cc_source_l00489}{resolve()}}, and \mbox{\hyperlink{trilinos__solver_8cc_source_l00135}{solve()}}.
+Referenced by resolve(), and solve().
 
 \mbox{\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a1d5e7dfc9fe3c890569465a167c2f2fc}\label{classoomph_1_1TrilinosAztecOOSolver_a1d5e7dfc9fe3c890569465a167c2f2fc}} 
 \index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!solver\_setup@{solver\_setup}}
@@ -565,21 +561,21 @@ Helper function for setting up the solver. Converts the oomph-\/lib matrices to 
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8cc_source_l00283}{283}} of file \mbox{\hyperlink{trilinos__solver_8cc_source}{trilinos\+\_\+solver.\+cc}}.
+Definition at line 283 of file trilinos\+\_\+solver.\+cc.
 
 
 
-References \mbox{\hyperlink{trilinos__solver_8h_source_l00509}{Aztec\+OO\+\_\+solver\+\_\+pt}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00487}{Bi\+CGStab}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00485}{CG}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00347}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00289}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00474}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix\+\_\+for\+\_\+aztecoo()}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00523}{Delete\+\_\+matrix}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__solver_8h_source_l00077}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00538}{Epetra\+\_\+matrix\+\_\+pt}}, \mbox{\hyperlink{trilinos__preconditioners_8h_source_l00118}{oomph\+::\+Trilinos\+Preconditioner\+Base\+::epetra\+\_\+operator\+\_\+pt()}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00542}{Epetra\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00486}{GMRES}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00242}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Max\+\_\+iter}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00545}{Oomph\+\_\+matrix\+\_\+pt}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00245}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Preconditioner\+\_\+pt}}, \mbox{\hyperlink{preconditioner_8h_source_l00165}{oomph\+::\+Preconditioner\+::set\+\_\+matrix\+\_\+pt()}}, \mbox{\hyperlink{trilinos__preconditioners_8cc_source_l00053}{oomph\+::\+Trilinos\+Preconditioner\+Base\+::setup()}}, \mbox{\hyperlink{preconditioner_8h_source_l00094}{oomph\+::\+Preconditioner\+::setup()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00258}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Setup\+\_\+preconditioner\+\_\+before\+\_\+solve}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00531}{Solver\+\_\+type}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00503}{Use\+\_\+aztecoo\+\_\+workaround\+\_\+for\+\_\+epetra\+\_\+matrix\+\_\+setup}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00535}{Using\+\_\+problem\+\_\+based\+\_\+solve}}.
+References Aztec\+OO\+\_\+solver\+\_\+pt, Bi\+CGStab, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution(), CG, clean\+\_\+up\+\_\+memory(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix\+\_\+for\+\_\+aztecoo(), Delete\+\_\+matrix, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time, Epetra\+\_\+matrix\+\_\+pt, oomph\+::\+Trilinos\+Preconditioner\+Base\+::epetra\+\_\+operator\+\_\+pt(), Epetra\+\_\+preconditioner\+\_\+pt, GMRES, oomph\+::\+Iterative\+Linear\+Solver\+::\+Max\+\_\+iter, oomph\+::oomph\+\_\+info, Oomph\+\_\+matrix\+\_\+pt, oomph\+::\+Iterative\+Linear\+Solver\+::\+Preconditioner\+\_\+pt, oomph\+::\+Preconditioner\+::set\+\_\+matrix\+\_\+pt(), oomph\+::\+Trilinos\+Preconditioner\+Base\+::setup(), oomph\+::\+Preconditioner\+::setup(), oomph\+::\+Iterative\+Linear\+Solver\+::\+Setup\+\_\+preconditioner\+\_\+before\+\_\+solve, Solver\+\_\+type, oomph\+::\+Timing\+Helpers\+::timer(), Use\+\_\+aztecoo\+\_\+workaround\+\_\+for\+\_\+epetra\+\_\+matrix\+\_\+setup, and Using\+\_\+problem\+\_\+based\+\_\+solve.
 
 
 
-Referenced by \mbox{\hyperlink{trilinos__solver_8cc_source_l00135}{solve()}}.
+Referenced by solve().
 
-\mbox{\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a7c81cd1f21720d2c05db9d499dc8f2bc}\label{classoomph_1_1TrilinosAztecOOSolver_a7c81cd1f21720d2c05db9d499dc8f2bc}} 
+\mbox{\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a9169831da7460eec52071e8b3938bf97}\label{classoomph_1_1TrilinosAztecOOSolver_a9169831da7460eec52071e8b3938bf97}} 
 \index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!solver\_type@{solver\_type}}
 \index{solver\_type@{solver\_type}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
 \doxysubsubsection{\texorpdfstring{solver\_type()}{solver\_type()}}
-{\footnotesize\ttfamily unsigned \& oomph\+::\+Trilinos\+Aztec\+OOSolver\+::solver\+\_\+type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily unsigned\& oomph\+::\+Trilinos\+Aztec\+OOSolver\+::solver\+\_\+type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -587,17 +583,17 @@ Access function to Solver\+\_\+type.
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00442}{442}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 442 of file trilinos\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{trilinos__solver_8h_source_l00531}{Solver\+\_\+type}}.
+References Solver\+\_\+type.
 
-\mbox{\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a0b7b6b0431efdc7fd6276552349610bb}\label{classoomph_1_1TrilinosAztecOOSolver_a0b7b6b0431efdc7fd6276552349610bb}} 
+\mbox{\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_afc08e5d6996fe05b93d68ff3cec6a478}\label{classoomph_1_1TrilinosAztecOOSolver_afc08e5d6996fe05b93d68ff3cec6a478}} 
 \index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!tolerance@{tolerance}}
 \index{tolerance@{tolerance}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
 \doxysubsubsection{\texorpdfstring{tolerance()}{tolerance()}}
-{\footnotesize\ttfamily double \& oomph\+::\+Trilinos\+Aztec\+OOSolver\+::tolerance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double\& oomph\+::\+Trilinos\+Aztec\+OOSolver\+::tolerance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -605,11 +601,11 @@ Access function to Tolerance.
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00436}{436}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 436 of file trilinos\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{iterative__linear__solver_8h_source_l00239}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Tolerance}}.
+References oomph\+::\+Iterative\+Linear\+Solver\+::\+Tolerance.
 
 
 
@@ -626,11 +622,11 @@ If true, when performing a problem based solve a serial matrix will be requested
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00527}{527}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 527 of file trilinos\+\_\+solver.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{trilinos__solver_8h_source_l00467}{disable\+\_\+assemble\+\_\+serial\+\_\+jacobian()}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00461}{enable\+\_\+assemble\+\_\+serial\+\_\+jacobian()}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00270}{Trilinos\+Aztec\+OOSolver()}}.
+Referenced by disable\+\_\+assemble\+\_\+serial\+\_\+jacobian(), enable\+\_\+assemble\+\_\+serial\+\_\+jacobian(), and Trilinos\+Aztec\+OOSolver().
 
 \mbox{\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_ad71b280c5af25e35e0f9da8cd68228cf}\label{classoomph_1_1TrilinosAztecOOSolver_ad71b280c5af25e35e0f9da8cd68228cf}} 
 \index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!AztecOO\_solver\_pt@{AztecOO\_solver\_pt}}
@@ -644,11 +640,11 @@ Pointer to the Aztec\+OO solver.
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00509}{509}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 509 of file trilinos\+\_\+solver.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{trilinos__solver_8h_source_l00347}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00570}{solve\+\_\+using\+\_\+\+Aztec\+OO()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00283}{solver\+\_\+setup()}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00270}{Trilinos\+Aztec\+OOSolver()}}.
+Referenced by clean\+\_\+up\+\_\+memory(), solve\+\_\+using\+\_\+\+Aztec\+OO(), solver\+\_\+setup(), and Trilinos\+Aztec\+OOSolver().
 
 \mbox{\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a6cd6d4719412c7ebf01bfb6cb4fddfcc}\label{classoomph_1_1TrilinosAztecOOSolver_a6cd6d4719412c7ebf01bfb6cb4fddfcc}} 
 \index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!Delete\_matrix@{Delete\_matrix}}
@@ -662,11 +658,11 @@ Trilinos copies matrix data from oomph-\/lib\textquotesingle{}s own \mbox{\hyper
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00523}{523}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 523 of file trilinos\+\_\+solver.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{trilinos__solver_8h_source_l00418}{disable\+\_\+delete\+\_\+matrix()}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00412}{enable\+\_\+delete\+\_\+matrix()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00283}{solver\+\_\+setup()}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00270}{Trilinos\+Aztec\+OOSolver()}}.
+Referenced by disable\+\_\+delete\+\_\+matrix(), enable\+\_\+delete\+\_\+matrix(), solver\+\_\+setup(), and Trilinos\+Aztec\+OOSolver().
 
 \mbox{\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a2d0905cb4a63b119e784a5caee458691}\label{classoomph_1_1TrilinosAztecOOSolver_a2d0905cb4a63b119e784a5caee458691}} 
 \index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!Epetra\_matrix\_pt@{Epetra\_matrix\_pt}}
@@ -680,11 +676,11 @@ A pointer for the linear system matrix in Epetra\+\_\+\+Crs\+Matrix format.
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00538}{538}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 538 of file trilinos\+\_\+solver.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{trilinos__solver_8h_source_l00347}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00489}{resolve()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00283}{solver\+\_\+setup()}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00270}{Trilinos\+Aztec\+OOSolver()}}.
+Referenced by clean\+\_\+up\+\_\+memory(), resolve(), solver\+\_\+setup(), and Trilinos\+Aztec\+OOSolver().
 
 \mbox{\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a7a419b3a461f998608dcc9b868fb0a89}\label{classoomph_1_1TrilinosAztecOOSolver_a7a419b3a461f998608dcc9b868fb0a89}} 
 \index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!Epetra\_preconditioner\_pt@{Epetra\_preconditioner\_pt}}
@@ -698,11 +694,11 @@ A pointer to the Epetra\+\_\+\+Operator for the preconditioner. This is only use
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00542}{542}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 542 of file trilinos\+\_\+solver.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{trilinos__solver_8h_source_l00347}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00283}{solver\+\_\+setup()}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00270}{Trilinos\+Aztec\+OOSolver()}}.
+Referenced by clean\+\_\+up\+\_\+memory(), solver\+\_\+setup(), and Trilinos\+Aztec\+OOSolver().
 
 \mbox{\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a028992b1b3fe1a501590aa71d4a879e8}\label{classoomph_1_1TrilinosAztecOOSolver_a028992b1b3fe1a501590aa71d4a879e8}} 
 \index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!If\_oomphlib\_preconditioner\_use\_epetra\_values@{If\_oomphlib\_preconditioner\_use\_epetra\_values}}
@@ -716,11 +712,11 @@ if this solver is using an oomph-\/lib preconditioner then the vectors passed to
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00556}{556}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 556 of file trilinos\+\_\+solver.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{trilinos__solver_8h_source_l00270}{Trilinos\+Aztec\+OOSolver()}}.
+Referenced by Trilinos\+Aztec\+OOSolver().
 
 \mbox{\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a26a9366d3ec0f11e7e907587c0439ea7}\label{classoomph_1_1TrilinosAztecOOSolver_a26a9366d3ec0f11e7e907587c0439ea7}} 
 \index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!Iterations@{Iterations}}
@@ -734,11 +730,11 @@ Stores number of iterations used.
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00506}{506}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 506 of file trilinos\+\_\+solver.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{trilinos__solver_8h_source_l00430}{iterations()}}, and \mbox{\hyperlink{trilinos__solver_8cc_source_l00570}{solve\+\_\+using\+\_\+\+Aztec\+OO()}}.
+Referenced by iterations(), and solve\+\_\+using\+\_\+\+Aztec\+OO().
 
 \mbox{\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_afec53c52f4fcab981eb0ed7244d750de}\label{classoomph_1_1TrilinosAztecOOSolver_afec53c52f4fcab981eb0ed7244d750de}} 
 \index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!Jacobian\_setup\_time@{Jacobian\_setup\_time}}
@@ -752,11 +748,11 @@ Stores set up time for Jacobian.
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00512}{512}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 512 of file trilinos\+\_\+solver.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{trilinos__solver_8h_source_l00448}{jacobian\+\_\+setup\+\_\+time()}}, and \mbox{\hyperlink{trilinos__solver_8cc_source_l00043}{solve()}}.
+Referenced by jacobian\+\_\+setup\+\_\+time(), and solve().
 
 \mbox{\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_ab2373a8cdd5c27d2ac099ad8444dfbb7}\label{classoomph_1_1TrilinosAztecOOSolver_ab2373a8cdd5c27d2ac099ad8444dfbb7}} 
 \index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!Linear\_solver\_solution\_time@{Linear\_solver\_solution\_time}}
@@ -770,11 +766,11 @@ Stores time for the solution (excludes time to set up preconditioner)
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00515}{515}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 515 of file trilinos\+\_\+solver.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{trilinos__solver_8h_source_l00454}{linear\+\_\+solver\+\_\+solution\+\_\+time()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00489}{resolve()}}, and \mbox{\hyperlink{trilinos__solver_8cc_source_l00135}{solve()}}.
+Referenced by linear\+\_\+solver\+\_\+solution\+\_\+time(), resolve(), and solve().
 
 \mbox{\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a71d7437b0502f3be59f64258e0af458e}\label{classoomph_1_1TrilinosAztecOOSolver_a71d7437b0502f3be59f64258e0af458e}} 
 \index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!Oomph\_matrix\_pt@{Oomph\_matrix\_pt}}
@@ -788,11 +784,11 @@ Oomph lib matrix pointer.
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00545}{545}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 545 of file trilinos\+\_\+solver.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{trilinos__solver_8cc_source_l00043}{solve()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00283}{solver\+\_\+setup()}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00304}{$\sim$\+Trilinos\+Aztec\+OOSolver()}}.
+Referenced by solve(), solver\+\_\+setup(), and $\sim$\+Trilinos\+Aztec\+OOSolver().
 
 \mbox{\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_abc6a63eb67694f7ac5dfc8505a8b9a5f}\label{classoomph_1_1TrilinosAztecOOSolver_abc6a63eb67694f7ac5dfc8505a8b9a5f}} 
 \index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!Problem\_pt@{Problem\_pt}}
@@ -806,11 +802,11 @@ A pointer to the underlying problem (NULL if MATRIX based solve) The problem\+\_
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00550}{550}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 550 of file trilinos\+\_\+solver.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{trilinos__solver_8cc_source_l00043}{solve()}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00270}{Trilinos\+Aztec\+OOSolver()}}.
+Referenced by solve(), and Trilinos\+Aztec\+OOSolver().
 
 \mbox{\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_aaa1ffdf657c54fbd5cfa097cc962050c}\label{classoomph_1_1TrilinosAztecOOSolver_aaa1ffdf657c54fbd5cfa097cc962050c}} 
 \index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!Solver\_type@{Solver\_type}}
@@ -824,11 +820,11 @@ Defines which solver is set up -\/ available types are defined in Aztec\+OO\+\_\
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00531}{531}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 531 of file trilinos\+\_\+solver.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{trilinos__solver_8cc_source_l00283}{solver\+\_\+setup()}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00442}{solver\+\_\+type()}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00270}{Trilinos\+Aztec\+OOSolver()}}.
+Referenced by solver\+\_\+setup(), solver\+\_\+type(), and Trilinos\+Aztec\+OOSolver().
 
 \mbox{\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_aead1067bb965649abddcf0af0e2d47f7}\label{classoomph_1_1TrilinosAztecOOSolver_aead1067bb965649abddcf0af0e2d47f7}} 
 \index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!Use\_aztecoo\_workaround\_for\_epetra\_matrix\_setup@{Use\_aztecoo\_workaround\_for\_epetra\_matrix\_setup}}
@@ -842,11 +838,11 @@ Use workaround for creating of epetra matrix that respects aztecoo\textquotesing
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00503}{503}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 503 of file trilinos\+\_\+solver.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{trilinos__solver_8h_source_l00333}{disable\+\_\+aztecoo\+\_\+workaround\+\_\+for\+\_\+epetra\+\_\+matrix\+\_\+setup()}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00326}{enable\+\_\+aztecoo\+\_\+workaround\+\_\+for\+\_\+epetra\+\_\+matrix\+\_\+setup()}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00340}{is\+\_\+aztecoo\+\_\+workaround\+\_\+for\+\_\+epetra\+\_\+matrix\+\_\+setup\+\_\+enabled()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00283}{solver\+\_\+setup()}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00270}{Trilinos\+Aztec\+OOSolver()}}.
+Referenced by disable\+\_\+aztecoo\+\_\+workaround\+\_\+for\+\_\+epetra\+\_\+matrix\+\_\+setup(), enable\+\_\+aztecoo\+\_\+workaround\+\_\+for\+\_\+epetra\+\_\+matrix\+\_\+setup(), is\+\_\+aztecoo\+\_\+workaround\+\_\+for\+\_\+epetra\+\_\+matrix\+\_\+setup\+\_\+enabled(), solver\+\_\+setup(), and Trilinos\+Aztec\+OOSolver().
 
 \mbox{\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a015ad0b4207515558d270ef08a213125}\label{classoomph_1_1TrilinosAztecOOSolver_a015ad0b4207515558d270ef08a213125}} 
 \index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!Using\_problem\_based\_solve@{Using\_problem\_based\_solve}}
@@ -860,11 +856,11 @@ Helper flag keeping track of whether we called the linear algebra or problem-\/b
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00535}{535}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 535 of file trilinos\+\_\+solver.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{trilinos__solver_8cc_source_l00043}{solve()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00283}{solver\+\_\+setup()}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00270}{Trilinos\+Aztec\+OOSolver()}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00304}{$\sim$\+Trilinos\+Aztec\+OOSolver()}}.
+Referenced by solve(), solver\+\_\+setup(), Trilinos\+Aztec\+OOSolver(), and $\sim$\+Trilinos\+Aztec\+OOSolver().
 
 
 

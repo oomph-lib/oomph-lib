@@ -73,7 +73,7 @@ As usual, we define the problem parameters in a global namespace. The main param
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===== start\_of\_namespace=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for the Fourier decomposed Helmholtz problem parameters}}
-\DoxyCodeLine{\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceProblemParameters}{ProblemParameters}}}
 \DoxyCodeLine{\{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Square of the wavenumber}}
@@ -105,7 +105,7 @@ As usual, we define the problem parameters in a global namespace. The main param
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Exact solution as a Vector of size 2, containing real and imag parts}}
+\DoxyCodeLine{ \textcolor{comment}{/// Exact solution as a Vector of size 2, containing real and imag parts}}
 \DoxyCodeLine{ \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceProblemParameters_af750b29069b29bd38b5220ecf534e7f7}{get\_exact\_u}}(\textcolor{keyword}{const} Vector<double>\& x, Vector<double>\& u)}
 
 \end{DoxyCodeInclude}
@@ -113,9 +113,9 @@ As usual, we define the problem parameters in a global namespace. The main param
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Get -\/du/dr (spherical r) for exact solution. Equal to prescribed}}
+\DoxyCodeLine{ \textcolor{comment}{/// Get -\/du/dr (spherical r) for exact solution. Equal to prescribed}}
 \DoxyCodeLine{\textcolor{comment}{ /// flux on inner boundary.}}
-\DoxyCodeLine{ \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceProblemParameters_aa544d1f3e384d3283f7113512931ea8f}{exact\_minus\_dudr}}(\textcolor{keyword}{const} Vector<double>\& x, std::complex<double>\& flux)}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceProblemParameters_aa544d1f3e384d3283f7113512931ea8f}{exact\_minus\_dudr}}(\textcolor{keyword}{const} Vector<double>\& x, std::complex<double>\& flux)}
 
 \end{DoxyCodeInclude}
  whose listings we omit here.
@@ -130,7 +130,7 @@ The driver code is very straightforward. We create the problem object, discretis
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===== start\_of\_main=====================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver code for Fourier decomposed Helmholtz problem}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{sphere__scattering_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} **argv)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ \textcolor{comment}{// Create the problem with 2D nine-\/node elements from the}}
@@ -180,7 +180,7 @@ We provide two separate meshes of {\ttfamily Face\+Elements\+:} one for the inne
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//========= start\_of\_problem\_class=====================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Problem class }}
-\DoxyCodeLine{\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT> }
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classFourierDecomposedHelmholtzProblem}{FourierDecomposedHelmholtzProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -245,7 +245,7 @@ We start by building the bulk mesh, using the {\ttfamily Two\+DAnnular\+Mesh}.
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_constructor=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for Fourier-\/decomposed Helmholtz problem}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_ab368ed8fe04d4e3db67d13bab9e7b52e}{FourierDecomposedHelmholtzProblem<ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_ab368ed8fe04d4e3db67d13bab9e7b52e}{FourierDecomposedHelmholtzProblem}}()}
@@ -352,7 +352,7 @@ The functions {\ttfamily create\+\_\+flux\+\_\+elements(...)} and {\ttfamily cre
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_outer\_bc\_elements==============================}}
 \DoxyCodeLine{\textcolor{comment}{/// Create BC elements on outer boundary}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_a359d402bb4aed7d83973248d82085efb}{FourierDecomposedHelmholtzProblem<ELEMENT>::create\_outer\_bc\_elements}}()}
 \DoxyCodeLine{\{}
@@ -398,7 +398,7 @@ The post-\/processing function {\ttfamily doc\+\_\+solution(...)} plots the comp
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===============start\_of\_doc=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution: doc\_info contains labels/output directory etc.}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_a893efb01f8f1d254315201121766d882}{FourierDecomposedHelmholtzProblem<ELEMENT>::doc\_solution}}(DocInfo\& doc\_info)}
 \DoxyCodeLine{\{ }
@@ -514,7 +514,7 @@ As discussed above, the Dirichlet-\/to-\/\+Neumann mapping allows an \char`\"{}e
 Confirm that the (costly) re-\/computation of the $ \gamma $ integral in {\ttfamily actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()} after the first (and only) linear solve in the Newton iteration can be avoided by declaring the problem to be linear.\hypertarget{index_acc_ex}{}\doxysubsubsection{The accuracy of the boundary condition elements}\label{index_acc_ex}
 
 \begin{DoxyItemize}
-\item Explore the accuracy (and computational cost) of the application of the DtN boundary condition by varying the number of terms included in the sum (8). Specifically, confirm that an obviously wrong result is obtained if we choose {\ttfamily \mbox{\hyperlink{namespaceProblemParameters_aa529b33b7feb959e0c044447bf0f6c6f}{Problem\+Parameters\+::\+Nterms\+\_\+for\+\_\+\+DtN}}} \texorpdfstring{$<$}{<} {\ttfamily Problem\+Parameters\+::\+Nterms}. ~\newline
+\item Explore the accuracy (and computational cost) of the application of the DtN boundary condition by varying the number of terms included in the sum (8). Specifically, confirm that an obviously wrong result is obtained if we choose {\ttfamily \mbox{\hyperlink{namespaceProblemParameters_aa529b33b7feb959e0c044447bf0f6c6f}{Problem\+Parameters\+::\+Nterms\+\_\+for\+\_\+\+DtN}}} $<$ {\ttfamily Problem\+Parameters\+::\+Nterms}. ~\newline
 
 \item Explore the function {\ttfamily check\+\_\+gamma()} and confirm that the computed value for the $ \gamma $ integral provides a good approximation to the derivative of the exact solution. Here is a representative comparison obtained with the parameters used in the driver code listed above\+:
 \end{DoxyItemize} 

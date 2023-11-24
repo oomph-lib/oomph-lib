@@ -25,9 +25,9 @@ struct \mbox{\hyperlink{structoomph_1_1CRDoubleMatrix_1_1CRDoubleMatrixCompariso
 \item 
 \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_ad8914fa1a5a98f7602a1724b76eef26c}{CRDouble\+Matrix}} ()
 \begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a1f1ffece5cbd2d25d46fe3db3b9c3ff5}{CRDouble\+Matrix}} (const \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} $\ast$\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\+\_\+pt}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a4ed5597d8a34dd14f90b0e6cfb88ca2e}{ncol}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_aafc5f1896dc3a317cdeddb067290c796}{value}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a925b465e7e86cf1ec45c1fb70a37c105}{column\+\_\+index}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a31a5d05c00d653a02e7b07714472d372}{row\+\_\+start}})
+\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a1f1ffece5cbd2d25d46fe3db3b9c3ff5}{CRDouble\+Matrix}} (const \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} $\ast$\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a603105384d60c9a3710378af39f538b9}{distribution\+\_\+pt}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a4ed5597d8a34dd14f90b0e6cfb88ca2e}{ncol}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_ab8220b7c2bb763dab32a4d0fea7da6f4}{value}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a21b3dbb8ee74e1247f80ce4506c395f8}{column\+\_\+index}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a25f1efd00318183abd8c65efede3f3f4}{row\+\_\+start}})
 \begin{DoxyCompactList}\small\item\em Constructor\+: vector of values, vector of column indices, vector of row starts and number of rows and columns. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a80b1f351988b2a7c0bd39387c77b85f3}{CRDouble\+Matrix}} (const \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} $\ast$\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\+\_\+pt}})
+\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a80b1f351988b2a7c0bd39387c77b85f3}{CRDouble\+Matrix}} (const \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} $\ast$\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a603105384d60c9a3710378af39f538b9}{distribution\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Constructor\+: just stores the distribution but does not build the matrix. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_af88437afe2b838fd6b508c590d26bd26}{CRDouble\+Matrix}} (const \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \&matrix)
 \begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
@@ -35,19 +35,19 @@ void \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a3def3614952fcdd16a8edbc82f47
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a27c30b4faf3d2328f3b9ce9c590f43a4}{$\sim$\+CRDouble\+Matrix}} ()
 \begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
-const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a52aed99d498f7279bcc9d975873dec50}{get\+\_\+index\+\_\+of\+\_\+diagonal\+\_\+entries}} () const
+const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a80c3342b36dbcdf60bb21676fda66c97}{get\+\_\+index\+\_\+of\+\_\+diagonal\+\_\+entries}} () const
 \begin{DoxyCompactList}\small\item\em Access function\+: returns the vector Index\+\_\+of\+\_\+diagonal\+\_\+entries. The i-\/th entry of the vector contains the index of the last entry below or on the diagonal. If there are no entries below or on the diagonal then the corresponding entry is -\/1. If, however, there are no entries in the row then the entry is irrelevant and is kept as the initialised value; 0. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_ae35fbae1702bbf75601c2a1026df103e}{entries\+\_\+are\+\_\+sorted}} (const bool \&doc\+\_\+unordered\+\_\+entries=false) const
 \begin{DoxyCompactList}\small\item\em Runs through the column index vector and checks if the entries follow the regular lexicographical ordering of matrix entries, i.\+e. it will check (at the i-\/th row of the matrix) if the entries in the column index vector associated with this row are in increasing order. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a2107875787d4dfa1cf007c05a041b078}{sort\+\_\+entries}} ()
 \begin{DoxyCompactList}\small\item\em Sorts the entries associated with each row of the matrix in the column index vector and the value vector into ascending order and sets up the Index\+\_\+of\+\_\+diagonal\+\_\+entries vector. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_af44bac2acd071317f96dae49cbb0d977}{build}} (const \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} $\ast$\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\+\_\+pt}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a4ed5597d8a34dd14f90b0e6cfb88ca2e}{ncol}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_aafc5f1896dc3a317cdeddb067290c796}{value}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a925b465e7e86cf1ec45c1fb70a37c105}{column\+\_\+index}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a31a5d05c00d653a02e7b07714472d372}{row\+\_\+start}})
+void \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_af44bac2acd071317f96dae49cbb0d977}{build}} (const \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} $\ast$\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a603105384d60c9a3710378af39f538b9}{distribution\+\_\+pt}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a4ed5597d8a34dd14f90b0e6cfb88ca2e}{ncol}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_ab8220b7c2bb763dab32a4d0fea7da6f4}{value}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a21b3dbb8ee74e1247f80ce4506c395f8}{column\+\_\+index}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a25f1efd00318183abd8c65efede3f3f4}{row\+\_\+start}})
 \begin{DoxyCompactList}\small\item\em build method\+: vector of values, vector of column indices, vector of row starts and number of rows and columns. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a7fc397b91a7289df8ee64287ae20e132}{build}} (const \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} $\ast$\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\+\_\+pt}})
+void \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a7fc397b91a7289df8ee64287ae20e132}{build}} (const \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} $\ast$\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a603105384d60c9a3710378af39f538b9}{distribution\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em rebuild the matrix -\/ assembles an empty matrix will a defined distribution \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_ac04c0787a123256b3dbaf6acf40df4e2}{build}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a4ed5597d8a34dd14f90b0e6cfb88ca2e}{ncol}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_aafc5f1896dc3a317cdeddb067290c796}{value}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a925b465e7e86cf1ec45c1fb70a37c105}{column\+\_\+index}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a31a5d05c00d653a02e7b07714472d372}{row\+\_\+start}})
+void \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_ac04c0787a123256b3dbaf6acf40df4e2}{build}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a4ed5597d8a34dd14f90b0e6cfb88ca2e}{ncol}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_ab8220b7c2bb763dab32a4d0fea7da6f4}{value}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a21b3dbb8ee74e1247f80ce4506c395f8}{column\+\_\+index}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a25f1efd00318183abd8c65efede3f3f4}{row\+\_\+start}})
 \begin{DoxyCompactList}\small\item\em keeps the existing distribution and just matrix that is stored \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_aafb4d7de0a87b4bda560928e6a128060}{build\+\_\+without\+\_\+copy}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a4ed5597d8a34dd14f90b0e6cfb88ca2e}{ncol}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a9482dafc0a17ebc5b7431369d8d07565}{nnz}}, double $\ast$\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_aafc5f1896dc3a317cdeddb067290c796}{value}}, int $\ast$\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a925b465e7e86cf1ec45c1fb70a37c105}{column\+\_\+index}}, int $\ast$\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a31a5d05c00d653a02e7b07714472d372}{row\+\_\+start}})
+void \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_aafb4d7de0a87b4bda560928e6a128060}{build\+\_\+without\+\_\+copy}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a4ed5597d8a34dd14f90b0e6cfb88ca2e}{ncol}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a9482dafc0a17ebc5b7431369d8d07565}{nnz}}, double $\ast$\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_ab8220b7c2bb763dab32a4d0fea7da6f4}{value}}, int $\ast$\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a21b3dbb8ee74e1247f80ce4506c395f8}{column\+\_\+index}}, int $\ast$\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a25f1efd00318183abd8c65efede3f3f4}{row\+\_\+start}})
 \begin{DoxyCompactList}\small\item\em keeps the existing distribution and just matrix that is stored without copying the matrix data \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a9ba295a04e08e3153ae06bc0556f507d}{redistribute}} (const \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} $\ast$const \&dist\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em The contents of the matrix are redistributed to match the new distribution. In a non-\/\+MPI build this method does nothing. {\bfseries{NOTE}} 1\+: The current distribution and the new distribution must have the same number of global rows. {\bfseries{NOTE}} 2\+: The current distribution and the new distribution must have the same Communicator. \end{DoxyCompactList}\item 
@@ -65,17 +65,17 @@ void \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a2b5dcdc5e1b9ccea51647f02b323
 \begin{DoxyCompactList}\small\item\em Indexed output function to print a matrix to a file as i,j,a(i,j) for a(i,j)!=0 only. Specify filename. This uses acual global row numbers. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_af5b1d934bae618c92aa1089671b6130e}{operator()}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned long \&j) const
 \begin{DoxyCompactList}\small\item\em Overload the round-\/bracket access operator for read-\/only access. In a distributed matrix i refers to the local row index. \end{DoxyCompactList}\item 
-int $\ast$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a31a5d05c00d653a02e7b07714472d372}{row\+\_\+start}} ()
+int $\ast$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a25f1efd00318183abd8c65efede3f3f4}{row\+\_\+start}} ()
 \begin{DoxyCompactList}\small\item\em Access to C-\/style row\+\_\+start array. \end{DoxyCompactList}\item 
-const int $\ast$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_ab288a44a89581070675d536d931eb73f}{row\+\_\+start}} () const
+const int $\ast$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a9c7f058048764537f4d4ecadded5dd7c}{row\+\_\+start}} () const
 \begin{DoxyCompactList}\small\item\em Access to C-\/style row\+\_\+start array (const version) \end{DoxyCompactList}\item 
-int $\ast$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a925b465e7e86cf1ec45c1fb70a37c105}{column\+\_\+index}} ()
+int $\ast$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a21b3dbb8ee74e1247f80ce4506c395f8}{column\+\_\+index}} ()
 \begin{DoxyCompactList}\small\item\em Access to C-\/style column index array. \end{DoxyCompactList}\item 
-const int $\ast$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_aed3ef1fa860752c33ac3fe6ecabde136}{column\+\_\+index}} () const
+const int $\ast$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a886a481d11974f5707405f573fcb9850}{column\+\_\+index}} () const
 \begin{DoxyCompactList}\small\item\em Access to C-\/style column index array (const version) \end{DoxyCompactList}\item 
-double $\ast$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_aafc5f1896dc3a317cdeddb067290c796}{value}} ()
+double $\ast$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_ab8220b7c2bb763dab32a4d0fea7da6f4}{value}} ()
 \begin{DoxyCompactList}\small\item\em Access to C-\/style value array. \end{DoxyCompactList}\item 
-const double $\ast$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a4a2812ca4c4a026d5e50972dab83d793}{value}} () const
+const double $\ast$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a2b0895f75ec750c386f0dbc11bfbf57b}{value}} () const
 \begin{DoxyCompactList}\small\item\em Access to C-\/style value array (const version) \end{DoxyCompactList}\item 
 unsigned long \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a9482dafc0a17ebc5b7431369d8d07565}{nnz}} () const
 \begin{DoxyCompactList}\small\item\em Return the number of nonzero entries (the local nnz) \end{DoxyCompactList}\item 
@@ -91,13 +91,13 @@ void \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_af08fd73a7edbdbde9facf47b913e
 \begin{DoxyCompactList}\small\item\em Function to multiply this matrix by the \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} matrix\+\_\+in. In a serial matrix, there are 4 methods available\+: Method 1\+: First runs through this matrix and matrix\+\_\+in to find the storage requirements for result -\/ arrays of the correct size are then allocated before performing the calculation. Minimises memory requirements but more costly. Method 2\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using an array of maps. Faster but more memory intensive. Method 3\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using a vector of vectors. Not particularly impressive on the platforms we tried... Method 4\+: Trilinos Epetra \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} multiply. Method 5\+: Trilinox Epetra \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} Mulitply (ml based) If Trilinos is installed then Method 4 is employed by default, otherwise Method 2 is employed by default. In a distributed matrix, only Trilinos Epetra \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} multiply is available. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a3853068b7fce9e83bc817930262e9ca1}{matrix\+\_\+reduction}} (const double \&alpha, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \&reduced\+\_\+matrix)
 \begin{DoxyCompactList}\small\item\em For every row, find the maximum absolute value of the entries in this row. Set all values that are less than alpha times this maximum to zero and return the resulting matrix in reduced\+\_\+matrix. Note\+: Diagonal entries are retained regardless of their size. \end{DoxyCompactList}\item 
-unsigned \& \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a0b77e4dd1d6633d68264c0f41fc0e5e7}{serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method}} ()
+unsigned \& \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_aa09d92094d0ccf281dded547edfc981e}{serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method}} ()
 \begin{DoxyCompactList}\small\item\em Access function to Serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method, the flag which determines the matrix matrix multiplication method used for serial matrices. Method 1\+: First runs through this matrix and matrix\+\_\+in to find the storage requirements for result -\/ arrays of the correct size are then allocated before performing the calculation. Minimises memory requirements but more costly. Method 2\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using an array of maps. Faster but more memory intensive. Method 3\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using a vector of vectors. Not particularly impressive on the platforms we tried... Method 4\+: Trilinos Epetra \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} multiply. Method 5\+: Trilinos Epetra \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} multiply (ML based). \end{DoxyCompactList}\item 
-const unsigned \& \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a8ca76ee3ec67406f16ef1d958fedc710}{serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method}} () const
+const unsigned \& \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_ae8eff79ad9ac6e399ef4b677b6e0e1e5}{serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method}} () const
 \begin{DoxyCompactList}\small\item\em Read only access function (const version) to Serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method, the flag which determines the matrix matrix multiplication method used for serial matrices. Method 1\+: First runs through this matrix and matrix\+\_\+in to find the storage requirements for result -\/ arrays of the correct size are then allocated before performing the calculation. Minimises memory requirements but more costly. Method 2\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using an array of maps. Faster but more memory intensive. Method 3\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using a vector of vectors. Not particularly impressive on the platforms we tried... Method 4\+: Trilinos Epetra \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} multiply. Method 5\+: Trilinos Epetra \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} multiply (ML based). \end{DoxyCompactList}\item 
-unsigned \& \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a5c1850605f916040619230a5760dc6be}{distributed\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method}} ()
+unsigned \& \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a311cf35d030c6cc22b389c2542a4089c}{distributed\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method}} ()
 \begin{DoxyCompactList}\small\item\em Access function to Distributed\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method, the flag which determines the matrix matrix multiplication method used for distributed matrices. Method 1\+: Trilinos Epetra \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} multiply. Method 2\+: Trilinos Epetra \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} multiply (ML based). \end{DoxyCompactList}\item 
-const unsigned \& \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_aae258c4df846901a39c86af1fadc262d}{distributed\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method}} () const
+const unsigned \& \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a61b0b02e40f94ddceecafe38626e7ad2}{distributed\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method}} () const
 \begin{DoxyCompactList}\small\item\em Read only access function (const version) to Distributed\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method, the flag which determines the matrix matrix multiplication method used for distributed matrices. Method 1\+: Trilinos Epetra \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} multiply. Method 2\+: Trilinos Epetra \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} multiply (ML based). \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_aa0503bc64ef0ccb60cb7d7e645425a62}{built}} () const
 \begin{DoxyCompactList}\small\item\em access function to the Built flag -\/ indicates whether the matrix has been build -\/ i.\+e. the distribution has been defined and the matrix assembled. \end{DoxyCompactList}\item 
@@ -135,7 +135,7 @@ bool \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a63afd9976f0970a4e6ffee3755d2
 \doxysubsection{Detailed Description}
 A class for compressed row matrices. This is a distributable object. 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l00885}{885}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 885 of file matrices.\+h.
 
 
 
@@ -154,15 +154,15 @@ Default constructor.
 
 Default constructor 
 
-Definition at line \mbox{\hyperlink{matrices_8cc_source_l01214}{1214}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+Definition at line 1214 of file matrices.\+cc.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l01253}{Built}}, \mbox{\hyperlink{matrices_8h_source_l00267}{oomph\+::\+Double\+Matrix\+Base\+::\+Default\+\_\+linear\+\_\+solver\+\_\+pt}}, \mbox{\hyperlink{matrices_8h_source_l00264}{oomph\+::\+Double\+Matrix\+Base\+::\+Linear\+\_\+solver\+\_\+pt}}, and \mbox{\hyperlink{matrices_8h_source_l01242}{Serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method}}.
+References Built, oomph\+::\+Double\+Matrix\+Base\+::\+Default\+\_\+linear\+\_\+solver\+\_\+pt, oomph\+::\+Double\+Matrix\+Base\+::\+Linear\+\_\+solver\+\_\+pt, and Serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method.
 
 
 
-Referenced by \mbox{\hyperlink{matrices_8cc_source_l02431}{global\+\_\+matrix()}}.
+Referenced by global\+\_\+matrix().
 
 \mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_a1f1ffece5cbd2d25d46fe3db3b9c3ff5}\label{classoomph_1_1CRDoubleMatrix_a1f1ffece5cbd2d25d46fe3db3b9c3ff5}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!CRDoubleMatrix@{CRDoubleMatrix}}
@@ -176,11 +176,11 @@ Constructor\+: vector of values, vector of column indices, vector of row starts 
 
 Constructor\+: Takes the distribution and the number of columns, as well as the vector of values, vector of column indices,vector of row starts. 
 
-Definition at line \mbox{\hyperlink{matrices_8cc_source_l01311}{1311}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+Definition at line 1311 of file matrices.\+cc.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{matrices_8h_source_l01253}{Built}}, \mbox{\hyperlink{matrices_8h_source_l01072}{column\+\_\+index()}}, \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}, \mbox{\hyperlink{matrices_8h_source_l00267}{oomph\+::\+Double\+Matrix\+Base\+::\+Default\+\_\+linear\+\_\+solver\+\_\+pt}}, \mbox{\hyperlink{matrices_8h_source_l00264}{oomph\+::\+Double\+Matrix\+Base\+::\+Linear\+\_\+solver\+\_\+pt}}, \mbox{\hyperlink{matrices_8h_source_l01008}{ncol()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00193}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local()}}, \mbox{\hyperlink{matrices_8h_source_l01060}{row\+\_\+start()}}, \mbox{\hyperlink{matrices_8h_source_l01242}{Serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method}}, and \mbox{\hyperlink{matrices_8h_source_l01084}{value()}}.
+References oomph\+::\+CRMatrix$<$ T $>$\+::build(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution(), Built, column\+\_\+index(), CR\+\_\+matrix, oomph\+::\+Double\+Matrix\+Base\+::\+Default\+\_\+linear\+\_\+solver\+\_\+pt, oomph\+::\+Double\+Matrix\+Base\+::\+Linear\+\_\+solver\+\_\+pt, ncol(), oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local(), row\+\_\+start(), Serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method, and value().
 
 \mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_a80b1f351988b2a7c0bd39387c77b85f3}\label{classoomph_1_1CRDoubleMatrix_a80b1f351988b2a7c0bd39387c77b85f3}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!CRDoubleMatrix@{CRDoubleMatrix}}
@@ -194,11 +194,11 @@ Constructor\+: just stores the distribution but does not build the matrix.
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8cc_source_l01286}{1286}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+Definition at line 1286 of file matrices.\+cc.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{matrices_8h_source_l01253}{Built}}, \mbox{\hyperlink{matrices_8h_source_l00267}{oomph\+::\+Double\+Matrix\+Base\+::\+Default\+\_\+linear\+\_\+solver\+\_\+pt}}, \mbox{\hyperlink{matrices_8h_source_l00264}{oomph\+::\+Double\+Matrix\+Base\+::\+Linear\+\_\+solver\+\_\+pt}}, and \mbox{\hyperlink{matrices_8h_source_l01242}{Serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method}}.
+References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution(), Built, oomph\+::\+Double\+Matrix\+Base\+::\+Default\+\_\+linear\+\_\+solver\+\_\+pt, oomph\+::\+Double\+Matrix\+Base\+::\+Linear\+\_\+solver\+\_\+pt, and Serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method.
 
 \mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_af88437afe2b838fd6b508c590d26bd26}\label{classoomph_1_1CRDoubleMatrix_af88437afe2b838fd6b508c590d26bd26}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!CRDoubleMatrix@{CRDoubleMatrix}}
@@ -212,11 +212,11 @@ Copy constructor.
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8cc_source_l01234}{1234}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+Definition at line 1234 of file matrices.\+cc.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{matrices_8cc_source_l01710}{build\+\_\+without\+\_\+copy()}}, \mbox{\hyperlink{matrices_8h_source_l01253}{Built}}, \mbox{\hyperlink{matrices_8h_source_l01072}{column\+\_\+index()}}, \mbox{\hyperlink{matrices_8h_source_l00267}{oomph\+::\+Double\+Matrix\+Base\+::\+Default\+\_\+linear\+\_\+solver\+\_\+pt}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{matrices_8h_source_l00264}{oomph\+::\+Double\+Matrix\+Base\+::\+Linear\+\_\+solver\+\_\+pt}}, \mbox{\hyperlink{matrices_8h_source_l01008}{ncol()}}, \mbox{\hyperlink{matrices_8h_source_l01096}{nnz()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{matrices_8h_source_l01060}{row\+\_\+start()}}, \mbox{\hyperlink{matrices_8h_source_l01242}{Serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method}}, and \mbox{\hyperlink{matrices_8h_source_l01084}{value()}}.
+References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution(), build\+\_\+without\+\_\+copy(), Built, column\+\_\+index(), oomph\+::\+Double\+Matrix\+Base\+::\+Default\+\_\+linear\+\_\+solver\+\_\+pt, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Double\+Matrix\+Base\+::\+Linear\+\_\+solver\+\_\+pt, ncol(), nnz(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), row\+\_\+start(), Serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method, and value().
 
 \mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_a27c30b4faf3d2328f3b9ce9c590f43a4}\label{classoomph_1_1CRDoubleMatrix_a27c30b4faf3d2328f3b9ce9c590f43a4}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!````~CRDoubleMatrix@{$\sim$CRDoubleMatrix}}
@@ -230,11 +230,11 @@ Destructor.
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8cc_source_l01343}{1343}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+Definition at line 1343 of file matrices.\+cc.
 
 
 
-References \mbox{\hyperlink{matrices_8cc_source_l01657}{clear()}}, and \mbox{\hyperlink{matrices_8h_source_l00267}{oomph\+::\+Double\+Matrix\+Base\+::\+Default\+\_\+linear\+\_\+solver\+\_\+pt}}.
+References clear(), and oomph\+::\+Double\+Matrix\+Base\+::\+Default\+\_\+linear\+\_\+solver\+\_\+pt.
 
 
 
@@ -251,11 +251,11 @@ element-\/wise addition of this matrix with matrix\+\_\+in.
 
 Element-\/wise addition of this matrix with matrix\+\_\+in. 
 
-Definition at line \mbox{\hyperlink{matrices_8cc_source_l03515}{3515}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+Definition at line 3515 of file matrices.\+cc.
 
 
 
-References \mbox{\hyperlink{matrices_8cc_source_l01672}{build()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00342}{oomph\+::\+Linear\+Algebra\+Distribution\+::built()}}, \mbox{\hyperlink{matrices_8h_source_l01210}{built()}}, \mbox{\hyperlink{matrices_8h_source_l01072}{column\+\_\+index()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l01008}{ncol()}}, \mbox{\hyperlink{matrices_8h_source_l01002}{nrow()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{matrices_8h_source_l01060}{row\+\_\+start()}}, and \mbox{\hyperlink{matrices_8h_source_l01084}{value()}}.
+References build(), oomph\+::\+Linear\+Algebra\+Distribution\+::built(), built(), column\+\_\+index(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), i, ncol(), nrow(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), row\+\_\+start(), and value().
 
 \mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_a7fc397b91a7289df8ee64287ae20e132}\label{classoomph_1_1CRDoubleMatrix_a7fc397b91a7289df8ee64287ae20e132}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!build@{build}}
@@ -269,11 +269,11 @@ rebuild the matrix -\/ assembles an empty matrix will a defined distribution
 
 Rebuild the matrix -\/ assembles an empty matrix with a defined distribution. 
 
-Definition at line \mbox{\hyperlink{matrices_8cc_source_l01353}{1353}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+Definition at line 1353 of file matrices.\+cc.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, and \mbox{\hyperlink{matrices_8cc_source_l01657}{clear()}}.
+References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution(), and clear().
 
 \mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_af44bac2acd071317f96dae49cbb0d977}\label{classoomph_1_1CRDoubleMatrix_af44bac2acd071317f96dae49cbb0d977}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!build@{build}}
@@ -287,15 +287,15 @@ build method\+: vector of values, vector of column indices, vector of row starts
 
 build method\+: Takes the distribution and the number of columns, as well as the vector of values, vector of column indices,vector of row starts. 
 
-Definition at line \mbox{\hyperlink{matrices_8cc_source_l01672}{1672}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+Definition at line 1672 of file matrices.\+cc.
 
 
 
-References \mbox{\hyperlink{matrices_8cc_source_l01672}{build()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{matrices_8cc_source_l01657}{clear()}}, \mbox{\hyperlink{matrices_8h_source_l01072}{column\+\_\+index()}}, \mbox{\hyperlink{matrices_8h_source_l00267}{oomph\+::\+Double\+Matrix\+Base\+::\+Default\+\_\+linear\+\_\+solver\+\_\+pt}}, \mbox{\hyperlink{matrices_8h_source_l01060}{row\+\_\+start()}}, and \mbox{\hyperlink{matrices_8h_source_l01084}{value()}}.
+References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution(), clear(), column\+\_\+index(), oomph\+::\+Double\+Matrix\+Base\+::\+Default\+\_\+linear\+\_\+solver\+\_\+pt, row\+\_\+start(), and value().
 
 
 
-Referenced by \mbox{\hyperlink{matrices_8cc_source_l03515}{add()}}, \mbox{\hyperlink{matrices_8cc_source_l01672}{build()}}, \mbox{\hyperlink{matrices_8cc_source_l04349}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::concatenate()}}, \mbox{\hyperlink{matrices_8cc_source_l05223}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::concatenate\+\_\+without\+\_\+communication()}}, \mbox{\hyperlink{matrices_8cc_source_l03676}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::create\+\_\+uniformly\+\_\+distributed\+\_\+matrix()}}, \mbox{\hyperlink{matrices_8h_source_l03490}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::deep\+\_\+copy()}}, \mbox{\hyperlink{problem_8cc_source_l08368}{oomph\+::\+Problem\+::get\+\_\+eigenproblem\+\_\+matrices()}}, \mbox{\hyperlink{problem_8cc_source_l03997}{oomph\+::\+Problem\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{matrices_8cc_source_l03271}{get\+\_\+matrix\+\_\+transpose()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l05101}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+get\+\_\+block()}}, \mbox{\hyperlink{matrices_8cc_source_l02365}{matrix\+\_\+reduction()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00753}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l01992}{multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l02575}{redistribute()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00507}{oomph\+::\+Lagrange\+Enforced\+Flow\+Preconditioner\+::setup()}}, and \mbox{\hyperlink{helmholtz__geometric__multigrid_8h_source_l01476}{oomph\+::\+Helmholtz\+MGPreconditioner$<$ DIM $>$\+::setup\+\_\+mg\+\_\+structures()}}.
+Referenced by add(), oomph\+::\+CRDouble\+Matrix\+Helpers\+::concatenate(), oomph\+::\+CRDouble\+Matrix\+Helpers\+::concatenate\+\_\+without\+\_\+communication(), oomph\+::\+CRDouble\+Matrix\+Helpers\+::create\+\_\+uniformly\+\_\+distributed\+\_\+matrix(), oomph\+::\+CRDouble\+Matrix\+Helpers\+::deep\+\_\+copy(), oomph\+::\+Problem\+::get\+\_\+eigenproblem\+\_\+matrices(), oomph\+::\+Problem\+::get\+\_\+jacobian(), get\+\_\+matrix\+\_\+transpose(), oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+get\+\_\+block(), matrix\+\_\+reduction(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply(), multiply(), redistribute(), oomph\+::\+Lagrange\+Enforced\+Flow\+Preconditioner\+::setup(), and oomph\+::\+Helmholtz\+MGPreconditioner$<$ DIM $>$\+::setup\+\_\+mg\+\_\+structures().
 
 \mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_ac04c0787a123256b3dbaf6acf40df4e2}\label{classoomph_1_1CRDoubleMatrix_ac04c0787a123256b3dbaf6acf40df4e2}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!build@{build}}
@@ -309,11 +309,11 @@ keeps the existing distribution and just matrix that is stored
 
 method to rebuild the matrix, but not the distribution 
 
-Definition at line \mbox{\hyperlink{matrices_8cc_source_l01694}{1694}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+Definition at line 1694 of file matrices.\+cc.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l01253}{Built}}, \mbox{\hyperlink{matrices_8h_source_l01072}{column\+\_\+index()}}, \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{matrices_8h_source_l01060}{row\+\_\+start()}}, and \mbox{\hyperlink{matrices_8h_source_l01084}{value()}}.
+References oomph\+::\+CRMatrix$<$ T $>$\+::build(), Built, oomph\+::\+CRMatrix$<$ T $>$\+::clean\+\_\+up\+\_\+memory(), column\+\_\+index(), CR\+\_\+matrix, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), row\+\_\+start(), and value().
 
 \mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_aafb4d7de0a87b4bda560928e6a128060}\label{classoomph_1_1CRDoubleMatrix_aafb4d7de0a87b4bda560928e6a128060}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!build\_without\_copy@{build\_without\_copy}}
@@ -327,15 +327,15 @@ keeps the existing distribution and just matrix that is stored without copying t
 
 method to rebuild the matrix, but not the distribution 
 
-Definition at line \mbox{\hyperlink{matrices_8cc_source_l01710}{1710}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+Definition at line 1710 of file matrices.\+cc.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l01253}{Built}}, \mbox{\hyperlink{matrices_8h_source_l01072}{column\+\_\+index()}}, \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}, \mbox{\hyperlink{matrices_8h_source_l01096}{nnz()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{matrices_8h_source_l01060}{row\+\_\+start()}}, and \mbox{\hyperlink{matrices_8h_source_l01084}{value()}}.
+References oomph\+::\+CRMatrix$<$ T $>$\+::build\+\_\+without\+\_\+copy(), Built, oomph\+::\+CRMatrix$<$ T $>$\+::clean\+\_\+up\+\_\+memory(), column\+\_\+index(), CR\+\_\+matrix, nnz(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), row\+\_\+start(), and value().
 
 
 
-Referenced by \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00846}{oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::assemble\+\_\+inv\+\_\+press\+\_\+and\+\_\+veloc\+\_\+mass\+\_\+matrix\+\_\+diagonal()}}, \mbox{\hyperlink{solid__preconditioners_8cc_source_l00705}{oomph\+::\+Pressure\+Based\+Solid\+LSCPreconditioner\+::assemble\+\_\+mass\+\_\+matrix\+\_\+diagonal()}}, \mbox{\hyperlink{matrices_8cc_source_l05223}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::concatenate\+\_\+without\+\_\+communication()}}, \mbox{\hyperlink{matrices_8cc_source_l01234}{CRDouble\+Matrix()}}, \mbox{\hyperlink{matrices_8h_source_l03490}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::deep\+\_\+copy()}}, \mbox{\hyperlink{problem_8cc_source_l08368}{oomph\+::\+Problem\+::get\+\_\+eigenproblem\+\_\+matrices()}}, \mbox{\hyperlink{problem_8cc_source_l03997}{oomph\+::\+Problem\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{matrices_8cc_source_l02431}{global\+\_\+matrix()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l05101}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+get\+\_\+block()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00753}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l01992}{multiply()}}, and \mbox{\hyperlink{matrices_8cc_source_l02575}{redistribute()}}.
+Referenced by oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::assemble\+\_\+inv\+\_\+press\+\_\+and\+\_\+veloc\+\_\+mass\+\_\+matrix\+\_\+diagonal(), oomph\+::\+Pressure\+Based\+Solid\+LSCPreconditioner\+::assemble\+\_\+mass\+\_\+matrix\+\_\+diagonal(), oomph\+::\+CRDouble\+Matrix\+Helpers\+::concatenate\+\_\+without\+\_\+communication(), CRDouble\+Matrix(), oomph\+::\+CRDouble\+Matrix\+Helpers\+::deep\+\_\+copy(), oomph\+::\+Problem\+::get\+\_\+eigenproblem\+\_\+matrices(), oomph\+::\+Problem\+::get\+\_\+jacobian(), global\+\_\+matrix(), oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+get\+\_\+block(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply(), multiply(), and redistribute().
 
 \mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_aa0503bc64ef0ccb60cb7d7e645425a62}\label{classoomph_1_1CRDoubleMatrix_aa0503bc64ef0ccb60cb7d7e645425a62}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!built@{built}}
@@ -349,15 +349,15 @@ access function to the Built flag -\/ indicates whether the matrix has been buil
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l01210}{1210}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 1210 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l01253}{Built}}.
+References Built.
 
 
 
-Referenced by \mbox{\hyperlink{matrices_8cc_source_l03515}{add()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00289}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00474}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix\+\_\+for\+\_\+aztecoo()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00270}{oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+HYPRE\+\_\+\+Matrix()}}, \mbox{\hyperlink{matrices_8cc_source_l03676}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::create\+\_\+uniformly\+\_\+distributed\+\_\+matrix()}}, \mbox{\hyperlink{matrices_8h_source_l03490}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::deep\+\_\+copy()}}, \mbox{\hyperlink{matrices_8cc_source_l03465}{diagonal\+\_\+entries()}}, \mbox{\hyperlink{mumps__solver_8cc_source_l00180}{oomph\+::\+Mumps\+Solver\+::factorise()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01865}{oomph\+::\+Super\+LUSolver\+::factorise\+\_\+distributed()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01134}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+concatenated\+\_\+block()}}, \mbox{\hyperlink{matrices_8cc_source_l01992}{multiply()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00657}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply()}}, \mbox{\hyperlink{double__vector_8cc_source_l00914}{oomph\+::\+Double\+Vector\+::norm()}}, and \mbox{\hyperlink{matrices_8cc_source_l02575}{redistribute()}}.
+Referenced by oomph\+::\+CRComplex\+Matrix\+::add(), add(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix\+\_\+for\+\_\+aztecoo(), oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+HYPRE\+\_\+\+Matrix(), oomph\+::\+CRDouble\+Matrix\+Helpers\+::create\+\_\+uniformly\+\_\+distributed\+\_\+matrix(), oomph\+::\+CRDouble\+Matrix\+Helpers\+::deep\+\_\+copy(), diagonal\+\_\+entries(), oomph\+::\+Mumps\+Solver\+::factorise(), oomph\+::\+Super\+LUSolver\+::factorise\+\_\+distributed(), oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+concatenated\+\_\+block(), multiply(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply(), oomph\+::\+Double\+Vector\+::norm(), and redistribute().
 
 \mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_a70c8a67158c081e70b4d07a6b248bc7a}\label{classoomph_1_1CRDoubleMatrix_a70c8a67158c081e70b4d07a6b248bc7a}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!clear@{clear}}
@@ -371,21 +371,21 @@ clear
 
 Clean method. 
 
-Definition at line \mbox{\hyperlink{matrices_8cc_source_l01657}{1657}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+Definition at line 1657 of file matrices.\+cc.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l01253}{Built}}, \mbox{\hyperlink{linear__solver_8h_source_l00256}{oomph\+::\+Linear\+Solver\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00522}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::clear\+\_\+distribution()}}, \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}, and \mbox{\hyperlink{matrices_8h_source_l00264}{oomph\+::\+Double\+Matrix\+Base\+::\+Linear\+\_\+solver\+\_\+pt}}.
+References Built, oomph\+::\+Linear\+Solver\+::clean\+\_\+up\+\_\+memory(), oomph\+::\+CRMatrix$<$ T $>$\+::clean\+\_\+up\+\_\+memory(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::clear\+\_\+distribution(), CR\+\_\+matrix, and oomph\+::\+Double\+Matrix\+Base\+::\+Linear\+\_\+solver\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{matrices_8cc_source_l01353}{build()}}, \mbox{\hyperlink{mumps__solver_8cc_source_l00180}{oomph\+::\+Mumps\+Solver\+::factorise()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01865}{oomph\+::\+Super\+LUSolver\+::factorise\+\_\+distributed()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00513}{oomph\+::\+Hypre\+Interface\+::hypre\+\_\+matrix\+\_\+setup()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00269}{oomph\+::\+FSIPreconditioner\+::setup()}}, and \mbox{\hyperlink{matrices_8cc_source_l01343}{$\sim$\+CRDouble\+Matrix()}}.
+Referenced by build(), oomph\+::\+Mumps\+Solver\+::factorise(), oomph\+::\+Super\+LUSolver\+::factorise\+\_\+distributed(), oomph\+::\+Hypre\+Interface\+::hypre\+\_\+matrix\+\_\+setup(), oomph\+::\+FSIPreconditioner\+::setup(), and $\sim$\+CRDouble\+Matrix().
 
-\mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_a925b465e7e86cf1ec45c1fb70a37c105}\label{classoomph_1_1CRDoubleMatrix_a925b465e7e86cf1ec45c1fb70a37c105}} 
+\mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_a21b3dbb8ee74e1247f80ce4506c395f8}\label{classoomph_1_1CRDoubleMatrix_a21b3dbb8ee74e1247f80ce4506c395f8}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!column\_index@{column\_index}}
 \index{column\_index@{column\_index}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
 \doxysubsubsection{\texorpdfstring{column\_index()}{column\_index()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily int $\ast$ oomph\+::\+CRDouble\+Matrix\+::column\+\_\+index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily int$\ast$ oomph\+::\+CRDouble\+Matrix\+::column\+\_\+index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -393,21 +393,21 @@ Access to C-\/style column index array.
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l01072}{1072}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 1072 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}.
+References oomph\+::\+CRMatrix$<$ T $>$\+::column\+\_\+index(), and CR\+\_\+matrix.
 
 
 
-Referenced by \mbox{\hyperlink{matrices_8cc_source_l03515}{add()}}, \mbox{\hyperlink{matrices_8cc_source_l01672}{build()}}, \mbox{\hyperlink{matrices_8cc_source_l01710}{build\+\_\+without\+\_\+copy()}}, \mbox{\hyperlink{matrices_8cc_source_l04349}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::concatenate()}}, \mbox{\hyperlink{matrices_8cc_source_l01234}{CRDouble\+Matrix()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00289}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00474}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix\+\_\+for\+\_\+aztecoo()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00270}{oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+HYPRE\+\_\+\+Matrix()}}, \mbox{\hyperlink{matrices_8h_source_l03490}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::deep\+\_\+copy()}}, \mbox{\hyperlink{matrices_8cc_source_l01366}{entries\+\_\+are\+\_\+sorted()}}, \mbox{\hyperlink{mumps__solver_8cc_source_l00180}{oomph\+::\+Mumps\+Solver\+::factorise()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01865}{oomph\+::\+Super\+LUSolver\+::factorise\+\_\+distributed()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02161}{oomph\+::\+Super\+LUSolver\+::factorise\+\_\+serial()}}, \mbox{\hyperlink{matrices_8cc_source_l03271}{get\+\_\+matrix\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8cc_source_l02431}{global\+\_\+matrix()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l05101}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+get\+\_\+block()}}, \mbox{\hyperlink{matrices_8cc_source_l02365}{matrix\+\_\+reduction()}}, \mbox{\hyperlink{matrices_8cc_source_l01782}{multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l01882}{multiply\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8cc_source_l02575}{redistribute()}}, \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00474}{oomph\+::\+ILUZero\+Preconditioner$<$ CRDouble\+Matrix $>$\+::setup()}}, \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source_l00813}{oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Subsidiary\+Preconditioner\+Old\+::setup()}}, \mbox{\hyperlink{helmholtz__geometric__multigrid_8h_source_l01980}{oomph\+::\+Helmholtz\+MGPreconditioner$<$ DIM $>$\+::setup\+\_\+coarsest\+\_\+level\+\_\+structures()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l01480}{oomph\+::\+GS$<$ CRDouble\+Matrix $>$\+::solve\+\_\+helper()}}, \mbox{\hyperlink{matrices_8cc_source_l01449}{sort\+\_\+entries()}}, and \mbox{\hyperlink{matrices_8h_source_l01031}{sparse\+\_\+indexed\+\_\+output\+\_\+with\+\_\+offset()}}.
+Referenced by oomph\+::\+CRComplex\+Matrix\+::add(), add(), build(), build\+\_\+without\+\_\+copy(), oomph\+::\+CRDouble\+Matrix\+Helpers\+::concatenate(), CRDouble\+Matrix(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix\+\_\+for\+\_\+aztecoo(), oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+HYPRE\+\_\+\+Matrix(), oomph\+::\+CRDouble\+Matrix\+Helpers\+::deep\+\_\+copy(), entries\+\_\+are\+\_\+sorted(), oomph\+::\+Mumps\+Solver\+::factorise(), oomph\+::\+Super\+LUSolver\+::factorise\+\_\+distributed(), oomph\+::\+Super\+LUSolver\+::factorise\+\_\+serial(), get\+\_\+matrix\+\_\+transpose(), global\+\_\+matrix(), oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+get\+\_\+block(), matrix\+\_\+reduction(), multiply(), multiply\+\_\+transpose(), redistribute(), oomph\+::\+ILUZero\+Preconditioner$<$ CRDouble\+Matrix $>$\+::setup(), oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Subsidiary\+Preconditioner\+Old\+::setup(), oomph\+::\+Helmholtz\+MGPreconditioner$<$ DIM $>$\+::setup\+\_\+coarsest\+\_\+level\+\_\+structures(), oomph\+::\+GS$<$ CRDouble\+Matrix $>$\+::solve\+\_\+helper(), sort\+\_\+entries(), and sparse\+\_\+indexed\+\_\+output\+\_\+with\+\_\+offset().
 
-\mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_aed3ef1fa860752c33ac3fe6ecabde136}\label{classoomph_1_1CRDoubleMatrix_aed3ef1fa860752c33ac3fe6ecabde136}} 
+\mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_a886a481d11974f5707405f573fcb9850}\label{classoomph_1_1CRDoubleMatrix_a886a481d11974f5707405f573fcb9850}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!column\_index@{column\_index}}
 \index{column\_index@{column\_index}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
 \doxysubsubsection{\texorpdfstring{column\_index()}{column\_index()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily const int $\ast$ oomph\+::\+CRDouble\+Matrix\+::column\+\_\+index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const int$\ast$ oomph\+::\+CRDouble\+Matrix\+::column\+\_\+index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -415,11 +415,11 @@ Access to C-\/style column index array (const version)
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l01078}{1078}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 1078 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}.
+References oomph\+::\+CRMatrix$<$ T $>$\+::column\+\_\+index(), and CR\+\_\+matrix.
 
 \mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_ad438e693468cd0ae179460eafcaab038}\label{classoomph_1_1CRDoubleMatrix_ad438e693468cd0ae179460eafcaab038}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!diagonal\_entries@{diagonal\_entries}}
@@ -433,21 +433,21 @@ returns a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of diagonal entries of
 
 Return the diagonal entries of the matrix. This only works with square matrices. This condition may be relaxed in the future if need be. 
 
-Definition at line \mbox{\hyperlink{matrices_8cc_source_l03465}{3465}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+Definition at line 3465 of file matrices.\+cc.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l01210}{built()}}, \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00481}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l01008}{ncol()}}, \mbox{\hyperlink{matrices_8h_source_l01002}{nrow()}}, and \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}.
+References built(), CR\+\_\+matrix, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row(), oomph\+::\+CRMatrix$<$ T $>$\+::get\+\_\+entry(), i, ncol(), nrow(), and oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local().
 
 
 
-Referenced by \mbox{\hyperlink{complex__smoother_8h_source_l00398}{oomph\+::\+Complex\+Damped\+Jacobi$<$ MATRIX $>$\+::complex\+\_\+smoother\+\_\+setup()}}, and \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00507}{oomph\+::\+Lagrange\+Enforced\+Flow\+Preconditioner\+::setup()}}.
+Referenced by oomph\+::\+Complex\+Damped\+Jacobi$<$ MATRIX $>$\+::complex\+\_\+smoother\+\_\+setup(), and oomph\+::\+Lagrange\+Enforced\+Flow\+Preconditioner\+::setup().
 
-\mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_a5c1850605f916040619230a5760dc6be}\label{classoomph_1_1CRDoubleMatrix_a5c1850605f916040619230a5760dc6be}} 
+\mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_a311cf35d030c6cc22b389c2542a4089c}\label{classoomph_1_1CRDoubleMatrix_a311cf35d030c6cc22b389c2542a4089c}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!distributed\_matrix\_matrix\_multiply\_method@{distributed\_matrix\_matrix\_multiply\_method}}
 \index{distributed\_matrix\_matrix\_multiply\_method@{distributed\_matrix\_matrix\_multiply\_method}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
 \doxysubsubsection{\texorpdfstring{distributed\_matrix\_matrix\_multiply\_method()}{distributed\_matrix\_matrix\_multiply\_method()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily unsigned \& oomph\+::\+CRDouble\+Matrix\+::distributed\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily unsigned\& oomph\+::\+CRDouble\+Matrix\+::distributed\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -455,21 +455,21 @@ Access function to Distributed\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l01191}{1191}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 1191 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l01246}{Distributed\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method}}.
+References Distributed\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method.
 
 
 
-Referenced by \mbox{\hyperlink{matrices_8h_source_l03490}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::deep\+\_\+copy()}}.
+Referenced by oomph\+::\+CRDouble\+Matrix\+Helpers\+::deep\+\_\+copy().
 
-\mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_aae258c4df846901a39c86af1fadc262d}\label{classoomph_1_1CRDoubleMatrix_aae258c4df846901a39c86af1fadc262d}} 
+\mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_a61b0b02e40f94ddceecafe38626e7ad2}\label{classoomph_1_1CRDoubleMatrix_a61b0b02e40f94ddceecafe38626e7ad2}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!distributed\_matrix\_matrix\_multiply\_method@{distributed\_matrix\_matrix\_multiply\_method}}
 \index{distributed\_matrix\_matrix\_multiply\_method@{distributed\_matrix\_matrix\_multiply\_method}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
 \doxysubsubsection{\texorpdfstring{distributed\_matrix\_matrix\_multiply\_method()}{distributed\_matrix\_matrix\_multiply\_method()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily const unsigned \& oomph\+::\+CRDouble\+Matrix\+::distributed\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const unsigned\& oomph\+::\+CRDouble\+Matrix\+::distributed\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -477,11 +477,11 @@ Read only access function (const version) to Distributed\+\_\+matrix\+\_\+matrix
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l01202}{1202}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 1202 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l01246}{Distributed\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method}}.
+References Distributed\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method.
 
 \mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_ae35fbae1702bbf75601c2a1026df103e}\label{classoomph_1_1CRDoubleMatrix_ae35fbae1702bbf75601c2a1026df103e}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!entries\_are\_sorted@{entries\_are\_sorted}}
@@ -495,17 +495,17 @@ Runs through the column index vector and checks if the entries follow the regula
 
 Runs through the column index vector and checks if the entries are arranged arbitrarily or if they follow the regular lexicographical of matrices. If a boolean argument is provided with the assignment TRUE then information on the first entry which is not in the correct position will also be given. 
 
-Definition at line \mbox{\hyperlink{matrices_8cc_source_l01366}{1366}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+Definition at line 1366 of file matrices.\+cc.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l01072}{column\+\_\+index()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l01002}{nrow()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, and \mbox{\hyperlink{matrices_8h_source_l01060}{row\+\_\+start()}}.
+References column\+\_\+index(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), i, nrow(), oomph\+::oomph\+\_\+info, and row\+\_\+start().
 
-\mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_a52aed99d498f7279bcc9d975873dec50}\label{classoomph_1_1CRDoubleMatrix_a52aed99d498f7279bcc9d975873dec50}} 
+\mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_a80c3342b36dbcdf60bb21676fda66c97}\label{classoomph_1_1CRDoubleMatrix_a80c3342b36dbcdf60bb21676fda66c97}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!get\_index\_of\_diagonal\_entries@{get\_index\_of\_diagonal\_entries}}
 \index{get\_index\_of\_diagonal\_entries@{get\_index\_of\_diagonal\_entries}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
 \doxysubsubsection{\texorpdfstring{get\_index\_of\_diagonal\_entries()}{get\_index\_of\_diagonal\_entries()}}
-{\footnotesize\ttfamily const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ oomph\+::\+CRDouble\+Matrix\+::get\+\_\+index\+\_\+of\+\_\+diagonal\+\_\+entries (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$int$>$ oomph\+::\+CRDouble\+Matrix\+::get\+\_\+index\+\_\+of\+\_\+diagonal\+\_\+entries (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -513,11 +513,11 @@ Access function\+: returns the vector Index\+\_\+of\+\_\+diagonal\+\_\+entries. 
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l00920}{920}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 920 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l01238}{Index\+\_\+of\+\_\+diagonal\+\_\+entries}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
+References Index\+\_\+of\+\_\+diagonal\+\_\+entries, and oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
 
 \mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_a82cb428139f7c35a7c62a09fad38eecb}\label{classoomph_1_1CRDoubleMatrix_a82cb428139f7c35a7c62a09fad38eecb}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!get\_matrix\_transpose@{get\_matrix\_transpose}}
@@ -531,11 +531,15 @@ Returns the transpose of this matrix.
 
 Compute transpose of matrix. 
 
-Definition at line \mbox{\hyperlink{matrices_8cc_source_l03271}{3271}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+Definition at line 3271 of file matrices.\+cc.
 
 
 
-References \mbox{\hyperlink{matrices_8cc_source_l01672}{build()}}, \mbox{\hyperlink{linear__algebra__distribution_8cc_source_l00035}{oomph\+::\+Linear\+Algebra\+Distribution\+::build()}}, \mbox{\hyperlink{matrices_8h_source_l01072}{column\+\_\+index()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l01008}{ncol()}}, \mbox{\hyperlink{matrices_8h_source_l01096}{nnz()}}, \mbox{\hyperlink{matrices_8h_source_l01002}{nrow()}}, \mbox{\hyperlink{matrices_8h_source_l01060}{row\+\_\+start()}}, and \mbox{\hyperlink{matrices_8h_source_l01084}{value()}}.
+References build(), oomph\+::\+Linear\+Algebra\+Distribution\+::build(), column\+\_\+index(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), i, ncol(), nnz(), nrow(), row\+\_\+start(), and value().
+
+
+
+Referenced by oomph\+::\+Adjoint\+Problem\+Based\+Shift\+Invert\+Operator\+::\+Adjoint\+Problem\+Based\+Shift\+Invert\+Operator().
 
 \mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_a984602c9df0c573451f315a025820ced}\label{classoomph_1_1CRDoubleMatrix_a984602c9df0c573451f315a025820ced}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!global\_matrix@{global\_matrix}}
@@ -549,15 +553,15 @@ if this matrix is distributed then a the equivalent global matrix is built using
 
 if this matrix is distributed then the equivalent global matrix is built using new and returned. The calling method is responsible for the destruction of the new matrix. 
 
-Definition at line \mbox{\hyperlink{matrices_8cc_source_l02431}{2431}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+Definition at line 2431 of file matrices.\+cc.
 
 
 
-References \mbox{\hyperlink{matrices_8cc_source_l01710}{build\+\_\+without\+\_\+copy()}}, \mbox{\hyperlink{matrices_8h_source_l01072}{column\+\_\+index()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00335}{oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{matrices_8cc_source_l01214}{CRDouble\+Matrix()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00481}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l01008}{ncol()}}, \mbox{\hyperlink{matrices_8h_source_l01096}{nnz()}}, \mbox{\hyperlink{matrices_8h_source_l01002}{nrow()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{matrices_8h_source_l01060}{row\+\_\+start()}}, and \mbox{\hyperlink{matrices_8h_source_l01084}{value()}}.
+References build\+\_\+without\+\_\+copy(), column\+\_\+index(), oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt(), CRDouble\+Matrix(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row(), i, ncol(), nnz(), nrow(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), row\+\_\+start(), and value().
 
 
 
-Referenced by \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00474}{oomph\+::\+ILUZero\+Preconditioner$<$ CRDouble\+Matrix $>$\+::setup()}}.
+Referenced by oomph\+::\+ILUZero\+Preconditioner$<$ CRDouble\+Matrix $>$\+::setup().
 
 \mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_a6cd938ba5f026f1508239cef05b16cb4}\label{classoomph_1_1CRDoubleMatrix_a6cd938ba5f026f1508239cef05b16cb4}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!inf\_norm@{inf\_norm}}
@@ -571,15 +575,15 @@ returns the inf-\/norm of this matrix
 
 Compute infinity (maximum) norm of matrix. 
 
-Definition at line \mbox{\hyperlink{matrices_8cc_source_l03412}{3412}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+Definition at line 3412 of file matrices.\+cc.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00500}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{matrices_8h_source_l01060}{row\+\_\+start()}}, and \mbox{\hyperlink{matrices_8h_source_l01084}{value()}}.
+References CR\+\_\+matrix, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+built(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), i, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), oomph\+::\+CRMatrix$<$ T $>$\+::row\+\_\+start(), row\+\_\+start(), oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::value(), and value().
 
 
 
-Referenced by \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00755}{oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Scaling\+Helper\+Old\+::s\+\_\+inf\+\_\+norm()}}.
+Referenced by oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Scaling\+Helper\+Old\+::s\+\_\+inf\+\_\+norm().
 
 \mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_af2c0f286f77ca44453f0da684b8f9dc7}\label{classoomph_1_1CRDoubleMatrix_af2c0f286f77ca44453f0da684b8f9dc7}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!lubksub@{lubksub}}
@@ -593,11 +597,11 @@ LU back solve for given RHS.
 
 Do back-\/substitution. 
 
-Definition at line \mbox{\hyperlink{matrices_8cc_source_l01749}{1749}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+Definition at line 1749 of file matrices.\+cc.
 
 
 
-References \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{matrices_8h_source_l00267}{oomph\+::\+Double\+Matrix\+Base\+::\+Default\+\_\+linear\+\_\+solver\+\_\+pt}}, and \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}.
+References oomph\+::\+Double\+Vector\+::built(), oomph\+::\+Double\+Matrix\+Base\+::\+Default\+\_\+linear\+\_\+solver\+\_\+pt, and oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_a4b90203edbcbfec4e5e1c79f7d8d2722}\label{classoomph_1_1CRDoubleMatrix_a4b90203edbcbfec4e5e1c79f7d8d2722}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!ludecompose@{ludecompose}}
@@ -611,11 +615,11 @@ LU decomposition using Super\+LU if matrix is not distributed or distributed ont
 
 Do LU decomposition. 
 
-Definition at line \mbox{\hyperlink{matrices_8cc_source_l01728}{1728}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+Definition at line 1728 of file matrices.\+cc.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l01253}{Built}}, and \mbox{\hyperlink{matrices_8h_source_l00267}{oomph\+::\+Double\+Matrix\+Base\+::\+Default\+\_\+linear\+\_\+solver\+\_\+pt}}.
+References Built, and oomph\+::\+Double\+Matrix\+Base\+::\+Default\+\_\+linear\+\_\+solver\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_a3853068b7fce9e83bc817930262e9ca1}\label{classoomph_1_1CRDoubleMatrix_a3853068b7fce9e83bc817930262e9ca1}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!matrix\_reduction@{matrix\_reduction}}
@@ -629,11 +633,11 @@ For every row, find the maximum absolute value of the entries in this row. Set a
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8cc_source_l02365}{2365}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+Definition at line 2365 of file matrices.\+cc.
 
 
 
-References \mbox{\hyperlink{matrices_8cc_source_l01672}{build()}}, \mbox{\hyperlink{matrices_8h_source_l01072}{column\+\_\+index()}}, \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l01008}{ncol()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{matrices_8h_source_l01060}{row\+\_\+start()}}, and \mbox{\hyperlink{matrices_8h_source_l01084}{value()}}.
+References build(), oomph\+::\+CRMatrix$<$ T $>$\+::column\+\_\+index(), column\+\_\+index(), CR\+\_\+matrix, i, ncol(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), oomph\+::\+CRMatrix$<$ T $>$\+::row\+\_\+start(), row\+\_\+start(), oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::value(), and value().
 
 \mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_af08fd73a7edbdbde9facf47b913e3e43}\label{classoomph_1_1CRDoubleMatrix_af08fd73a7edbdbde9facf47b913e3e43}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!multiply@{multiply}}
@@ -647,11 +651,11 @@ Function to multiply this matrix by the \mbox{\hyperlink{classoomph_1_1CRDoubleM
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8cc_source_l01992}{1992}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+Definition at line 1992 of file matrices.\+cc.
 
 
 
-References \mbox{\hyperlink{matrices_8cc_source_l01672}{build()}}, \mbox{\hyperlink{matrices_8cc_source_l01710}{build\+\_\+without\+\_\+copy()}}, \mbox{\hyperlink{matrices_8h_source_l01210}{built()}}, \mbox{\hyperlink{matrices_8h_source_l01253}{Built}}, \mbox{\hyperlink{matrices_8h_source_l01072}{column\+\_\+index()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00500}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00657}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply()}}, \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, \mbox{\hyperlink{matrices_8h_source_l01008}{ncol()}}, \mbox{\hyperlink{matrices_8h_source_l01002}{nrow()}}, \mbox{\hyperlink{matrices_8h_source_l01060}{row\+\_\+start()}}, \mbox{\hyperlink{matrices_8h_source_l01242}{Serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method}}, and \mbox{\hyperlink{matrices_8h_source_l01084}{value()}}.
+References build(), build\+\_\+without\+\_\+copy(), built(), Built, column\+\_\+index(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+built(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), i, oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply(), oomph\+::\+Quad\+Tree\+Names\+::N, ncol(), nrow(), row\+\_\+start(), Serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method, and value().
 
 \mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_a54b75960df52e3aebd21aaab20e9869d}\label{classoomph_1_1CRDoubleMatrix_a54b75960df52e3aebd21aaab20e9869d}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!multiply@{multiply}}
@@ -669,15 +673,15 @@ Implements \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a78204eab557e0dc99618
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8cc_source_l01782}{1782}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+Definition at line 1782 of file matrices.\+cc.
 
 
 
-References \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{matrices_8h_source_l01253}{Built}}, \mbox{\hyperlink{matrices_8h_source_l01072}{column\+\_\+index()}}, \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{double__vector_8cc_source_l00123}{oomph\+::\+Double\+Vector\+::initialise()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00657}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply()}}, \mbox{\hyperlink{matrices_8h_source_l01008}{ncol()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00186}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow()}}, \mbox{\hyperlink{matrices_8h_source_l01002}{nrow()}}, \mbox{\hyperlink{matrices_8h_source_l01060}{row\+\_\+start()}}, \mbox{\hyperlink{matrices_8h_source_l01084}{value()}}, and \mbox{\hyperlink{double__vector_8h_source_l00254}{oomph\+::\+Double\+Vector\+::values\+\_\+pt()}}.
+References oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Double\+Vector\+::built(), Built, oomph\+::\+CRMatrix$<$ T $>$\+::column\+\_\+index(), column\+\_\+index(), CR\+\_\+matrix, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), i, oomph\+::\+Double\+Vector\+::initialise(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply(), ncol(), oomph\+::\+Linear\+Algebra\+Distribution\+::nrow(), nrow(), oomph\+::\+CRMatrix$<$ T $>$\+::row\+\_\+start(), row\+\_\+start(), oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::value(), value(), and oomph\+::\+Double\+Vector\+::values\+\_\+pt().
 
 
 
-Referenced by \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00524}{oomph\+::\+Problem\+Based\+Shift\+Invert\+Operator\+::apply()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01697}{oomph\+::\+Augmented\+Problem\+GMRES\+::augmented\+\_\+matrix\+\_\+multiply()}}, \mbox{\hyperlink{matrix__vector__product_8cc_source_l00108}{oomph\+::\+Matrix\+Vector\+Product\+::multiply()}}, \mbox{\hyperlink{double__vector_8cc_source_l00914}{oomph\+::\+Double\+Vector\+::norm()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00729}{oomph\+::\+GMRESBlock\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00507}{oomph\+::\+Lagrange\+Enforced\+Flow\+Preconditioner\+::setup()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00147}{oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::setup()}}, \mbox{\hyperlink{solid__preconditioners_8cc_source_l00038}{oomph\+::\+Pressure\+Based\+Solid\+LSCPreconditioner\+::setup()}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00061}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::setup()}}.
+Referenced by oomph\+::\+Problem\+Based\+Shift\+Invert\+Operator\+::apply(), oomph\+::\+Adjoint\+Problem\+Based\+Shift\+Invert\+Operator\+::apply(), oomph\+::\+Augmented\+Problem\+GMRES\+::augmented\+\_\+matrix\+\_\+multiply(), oomph\+::\+Matrix\+Vector\+Product\+::multiply(), oomph\+::\+Double\+Vector\+::norm(), oomph\+::\+GMRESBlock\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Lagrange\+Enforced\+Flow\+Preconditioner\+::setup(), oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::setup(), oomph\+::\+Pressure\+Based\+Solid\+LSCPreconditioner\+::setup(), and oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::setup().
 
 \mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_a42fb274c98ccf4c2a542ca15343fcc0e}\label{classoomph_1_1CRDoubleMatrix_a42fb274c98ccf4c2a542ca15343fcc0e}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!multiply\_transpose@{multiply\_transpose}}
@@ -695,15 +699,15 @@ Implements \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a843d44405b70da1d96b4
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8cc_source_l01882}{1882}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+Definition at line 1882 of file matrices.\+cc.
 
 
 
-References \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{matrices_8h_source_l01253}{Built}}, \mbox{\hyperlink{matrices_8h_source_l01072}{column\+\_\+index()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00335}{oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{double__vector_8cc_source_l00123}{oomph\+::\+Double\+Vector\+::initialise()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00657}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00186}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow()}}, \mbox{\hyperlink{matrices_8h_source_l01002}{nrow()}}, \mbox{\hyperlink{matrices_8h_source_l01060}{row\+\_\+start()}}, \mbox{\hyperlink{matrices_8h_source_l01084}{value()}}, and \mbox{\hyperlink{double__vector_8h_source_l00254}{oomph\+::\+Double\+Vector\+::values\+\_\+pt()}}.
+References oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Double\+Vector\+::built(), Built, oomph\+::\+CRMatrix$<$ T $>$\+::column\+\_\+index(), column\+\_\+index(), oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt(), CR\+\_\+matrix, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), i, oomph\+::\+Double\+Vector\+::initialise(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply(), oomph\+::\+Linear\+Algebra\+Distribution\+::nrow(), nrow(), oomph\+::\+CRMatrix$<$ T $>$\+::row\+\_\+start(), row\+\_\+start(), oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::value(), value(), and oomph\+::\+Double\+Vector\+::values\+\_\+pt().
 
 
 
-Referenced by \mbox{\hyperlink{matrix__vector__product_8cc_source_l00177}{oomph\+::\+Matrix\+Vector\+Product\+::multiply\+\_\+transpose()}}, \mbox{\hyperlink{linear__solver_8cc_source_l00814}{oomph\+::\+Super\+LUSolver\+::solve()}}, and \mbox{\hyperlink{linear__solver_8cc_source_l01293}{oomph\+::\+Super\+LUSolver\+::solve\+\_\+transpose()}}.
+Referenced by oomph\+::\+Matrix\+Vector\+Product\+::multiply\+\_\+transpose(), oomph\+::\+Super\+LUSolver\+::solve(), and oomph\+::\+Super\+LUSolver\+::solve\+\_\+transpose().
 
 \mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_a4ed5597d8a34dd14f90b0e6cfb88ca2e}\label{classoomph_1_1CRDoubleMatrix_a4ed5597d8a34dd14f90b0e6cfb88ca2e}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!ncol@{ncol}}
@@ -721,15 +725,15 @@ Implements \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a253feffbf1db1976cdd8
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l01008}{1008}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 1008 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}.
+References CR\+\_\+matrix, and oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::ncol().
 
 
 
-Referenced by \mbox{\hyperlink{matrices_8cc_source_l03515}{add()}}, \mbox{\hyperlink{matrices_8cc_source_l01234}{CRDouble\+Matrix()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00474}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix\+\_\+for\+\_\+aztecoo()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00270}{oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+HYPRE\+\_\+\+Matrix()}}, \mbox{\hyperlink{matrices_8h_source_l03490}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::deep\+\_\+copy()}}, \mbox{\hyperlink{matrices_8cc_source_l03465}{diagonal\+\_\+entries()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01134}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+concatenated\+\_\+block()}}, \mbox{\hyperlink{matrices_8cc_source_l03271}{get\+\_\+matrix\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8cc_source_l02431}{global\+\_\+matrix()}}, \mbox{\hyperlink{matrices_8cc_source_l02365}{matrix\+\_\+reduction()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00753}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l01782}{multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l02575}{redistribute()}}, \mbox{\hyperlink{matrix__vector__product_8cc_source_l00041}{oomph\+::\+Matrix\+Vector\+Product\+::setup()}}, and \mbox{\hyperlink{helmholtz__geometric__multigrid_8h_source_l01980}{oomph\+::\+Helmholtz\+MGPreconditioner$<$ DIM $>$\+::setup\+\_\+coarsest\+\_\+level\+\_\+structures()}}.
+Referenced by oomph\+::\+CRComplex\+Matrix\+::add(), add(), CRDouble\+Matrix(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix\+\_\+for\+\_\+aztecoo(), oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+HYPRE\+\_\+\+Matrix(), oomph\+::\+CRDouble\+Matrix\+Helpers\+::deep\+\_\+copy(), diagonal\+\_\+entries(), oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+concatenated\+\_\+block(), get\+\_\+matrix\+\_\+transpose(), global\+\_\+matrix(), matrix\+\_\+reduction(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply(), multiply(), redistribute(), oomph\+::\+Matrix\+Vector\+Product\+::setup(), and oomph\+::\+Helmholtz\+MGPreconditioner$<$ DIM $>$\+::setup\+\_\+coarsest\+\_\+level\+\_\+structures().
 
 \mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_a9482dafc0a17ebc5b7431369d8d07565}\label{classoomph_1_1CRDoubleMatrix_a9482dafc0a17ebc5b7431369d8d07565}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!nnz@{nnz}}
@@ -743,15 +747,15 @@ Return the number of nonzero entries (the local nnz)
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l01096}{1096}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 1096 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}.
+References CR\+\_\+matrix, and oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::nnz().
 
 
 
-Referenced by \mbox{\hyperlink{matrices_8cc_source_l01710}{build\+\_\+without\+\_\+copy()}}, \mbox{\hyperlink{matrices_8cc_source_l01234}{CRDouble\+Matrix()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00474}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix\+\_\+for\+\_\+aztecoo()}}, \mbox{\hyperlink{matrices_8h_source_l03490}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::deep\+\_\+copy()}}, \mbox{\hyperlink{mumps__solver_8cc_source_l00180}{oomph\+::\+Mumps\+Solver\+::factorise()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01865}{oomph\+::\+Super\+LUSolver\+::factorise\+\_\+distributed()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02161}{oomph\+::\+Super\+LUSolver\+::factorise\+\_\+serial()}}, \mbox{\hyperlink{matrices_8cc_source_l03271}{get\+\_\+matrix\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8cc_source_l02431}{global\+\_\+matrix()}}, \mbox{\hyperlink{matrices_8cc_source_l02575}{redistribute()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01714}{oomph\+::\+Hypre\+Preconditioner\+::setup()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00507}{oomph\+::\+Lagrange\+Enforced\+Flow\+Preconditioner\+::setup()}}, \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8cc_source_l00218}{oomph\+::\+Banded\+Block\+Triangular\+Preconditioner$<$ MATRIX $>$\+::setup()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00061}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::setup()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00575}{oomph\+::\+GMRESBlock\+Preconditioner\+::setup()}}, \mbox{\hyperlink{helmholtz__geometric__multigrid_8h_source_l01980}{oomph\+::\+Helmholtz\+MGPreconditioner$<$ DIM $>$\+::setup\+\_\+coarsest\+\_\+level\+\_\+structures()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01074}{oomph\+::\+Super\+LUSolver\+::solve()}}, and \mbox{\hyperlink{linear__solver_8cc_source_l01554}{oomph\+::\+Super\+LUSolver\+::solve\+\_\+transpose()}}.
+Referenced by build\+\_\+without\+\_\+copy(), CRDouble\+Matrix(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix\+\_\+for\+\_\+aztecoo(), oomph\+::\+CRDouble\+Matrix\+Helpers\+::deep\+\_\+copy(), oomph\+::\+Mumps\+Solver\+::factorise(), oomph\+::\+Super\+LUSolver\+::factorise\+\_\+distributed(), oomph\+::\+Super\+LUSolver\+::factorise\+\_\+serial(), get\+\_\+matrix\+\_\+transpose(), global\+\_\+matrix(), redistribute(), oomph\+::\+Hypre\+Preconditioner\+::setup(), oomph\+::\+Lagrange\+Enforced\+Flow\+Preconditioner\+::setup(), oomph\+::\+Banded\+Block\+Triangular\+Preconditioner$<$ MATRIX $>$\+::setup(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::setup(), oomph\+::\+GMRESBlock\+Preconditioner\+::setup(), oomph\+::\+Helmholtz\+MGPreconditioner$<$ DIM $>$\+::setup\+\_\+coarsest\+\_\+level\+\_\+structures(), oomph\+::\+Super\+LUSolver\+::solve(), and oomph\+::\+Super\+LUSolver\+::solve\+\_\+transpose().
 
 \mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_abd8d231b0549540144b4739a667b1e75}\label{classoomph_1_1CRDoubleMatrix_abd8d231b0549540144b4739a667b1e75}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!nrow@{nrow}}
@@ -769,15 +773,15 @@ Implements \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_acdcd6e1ea2bf2380f1a2
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l01002}{1002}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 1002 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow()}}.
+References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow().
 
 
 
-Referenced by \mbox{\hyperlink{matrices_8cc_source_l03515}{add()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01697}{oomph\+::\+Augmented\+Problem\+GMRES\+::augmented\+\_\+matrix\+\_\+multiply()}}, \mbox{\hyperlink{complex__smoother_8h_source_l00398}{oomph\+::\+Complex\+Damped\+Jacobi$<$ MATRIX $>$\+::complex\+\_\+smoother\+\_\+setup()}}, \mbox{\hyperlink{matrices_8cc_source_l04349}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::concatenate()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00289}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00474}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix\+\_\+for\+\_\+aztecoo()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00270}{oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+HYPRE\+\_\+\+Matrix()}}, \mbox{\hyperlink{matrices_8cc_source_l03465}{diagonal\+\_\+entries()}}, \mbox{\hyperlink{matrices_8cc_source_l01366}{entries\+\_\+are\+\_\+sorted()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01865}{oomph\+::\+Super\+LUSolver\+::factorise\+\_\+distributed()}}, \mbox{\hyperlink{problem_8cc_source_l08368}{oomph\+::\+Problem\+::get\+\_\+eigenproblem\+\_\+matrices()}}, \mbox{\hyperlink{matrices_8cc_source_l03271}{get\+\_\+matrix\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8cc_source_l02431}{global\+\_\+matrix()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00513}{oomph\+::\+Hypre\+Interface\+::hypre\+\_\+matrix\+\_\+setup()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l02070}{oomph\+::\+MGSolver$<$ DIM $>$\+::modify\+\_\+restriction\+\_\+matrices()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00753}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l01782}{multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l01882}{multiply\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8cc_source_l02575}{redistribute()}}, \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00474}{oomph\+::\+ILUZero\+Preconditioner$<$ CRDouble\+Matrix $>$\+::setup()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01714}{oomph\+::\+Hypre\+Preconditioner\+::setup()}}, \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8cc_source_l00218}{oomph\+::\+Banded\+Block\+Triangular\+Preconditioner$<$ MATRIX $>$\+::setup()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00061}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::setup()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00575}{oomph\+::\+GMRESBlock\+Preconditioner\+::setup()}}, \mbox{\hyperlink{helmholtz__geometric__multigrid_8h_source_l01980}{oomph\+::\+Helmholtz\+MGPreconditioner$<$ DIM $>$\+::setup\+\_\+coarsest\+\_\+level\+\_\+structures()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01074}{oomph\+::\+Super\+LUSolver\+::solve()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01554}{oomph\+::\+Super\+LUSolver\+::solve\+\_\+transpose()}}, and \mbox{\hyperlink{matrices_8cc_source_l01449}{sort\+\_\+entries()}}.
+Referenced by oomph\+::\+CRComplex\+Matrix\+::add(), add(), oomph\+::\+Augmented\+Problem\+GMRES\+::augmented\+\_\+matrix\+\_\+multiply(), oomph\+::\+Complex\+Damped\+Jacobi$<$ MATRIX $>$\+::complex\+\_\+smoother\+\_\+setup(), oomph\+::\+CRDouble\+Matrix\+Helpers\+::concatenate(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix\+\_\+for\+\_\+aztecoo(), oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+HYPRE\+\_\+\+Matrix(), diagonal\+\_\+entries(), entries\+\_\+are\+\_\+sorted(), oomph\+::\+Super\+LUSolver\+::factorise\+\_\+distributed(), oomph\+::\+Problem\+::get\+\_\+eigenproblem\+\_\+matrices(), get\+\_\+matrix\+\_\+transpose(), global\+\_\+matrix(), oomph\+::\+Hypre\+Interface\+::hypre\+\_\+matrix\+\_\+setup(), oomph\+::\+MGSolver$<$ DIM $>$\+::modify\+\_\+restriction\+\_\+matrices(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply(), multiply(), multiply\+\_\+transpose(), redistribute(), oomph\+::\+ILUZero\+Preconditioner$<$ CRDouble\+Matrix $>$\+::setup(), oomph\+::\+Hypre\+Preconditioner\+::setup(), oomph\+::\+Banded\+Block\+Triangular\+Preconditioner$<$ MATRIX $>$\+::setup(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::setup(), oomph\+::\+GMRESBlock\+Preconditioner\+::setup(), oomph\+::\+Helmholtz\+MGPreconditioner$<$ DIM $>$\+::setup\+\_\+coarsest\+\_\+level\+\_\+structures(), oomph\+::\+Super\+LUSolver\+::solve(), oomph\+::\+Super\+LUSolver\+::solve\+\_\+transpose(), and sort\+\_\+entries().
 
 \mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_af5b1d934bae618c92aa1089671b6130e}\label{classoomph_1_1CRDoubleMatrix_af5b1d934bae618c92aa1089671b6130e}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!operator()@{operator()}}
@@ -795,11 +799,11 @@ Implements \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a20b85f0286f80464f42f
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l01053}{1053}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 1053 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References CR\+\_\+matrix, oomph\+::\+CRMatrix$<$ T $>$\+::get\+\_\+entry(), and i.
 
 \mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_a3def3614952fcdd16a8edbc82f472490}\label{classoomph_1_1CRDoubleMatrix_a3def3614952fcdd16a8edbc82f472490}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!operator=@{operator=}}
@@ -827,11 +831,11 @@ Implements \mbox{\hyperlink{classoomph_1_1Matrix_a10ee338f4d3893010291a692aea042
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l01016}{1016}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 1016 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}.
+References CR\+\_\+matrix, and oomph\+::\+CRMatrix$<$ T $>$\+::output\+\_\+bottom\+\_\+right\+\_\+zero\+\_\+helper().
 
 \mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_a9ba295a04e08e3153ae06bc0556f507d}\label{classoomph_1_1CRDoubleMatrix_a9ba295a04e08e3153ae06bc0556f507d}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!redistribute@{redistribute}}
@@ -845,21 +849,21 @@ The contents of the matrix are redistributed to match the new distribution. In a
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8cc_source_l02575}{2575}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+Definition at line 2575 of file matrices.\+cc.
 
 
 
-References \mbox{\hyperlink{matrices_8cc_source_l01672}{build()}}, \mbox{\hyperlink{matrices_8cc_source_l01710}{build\+\_\+without\+\_\+copy()}}, \mbox{\hyperlink{matrices_8h_source_l01210}{built()}}, \mbox{\hyperlink{matrices_8h_source_l01072}{column\+\_\+index()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00335}{oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00329}{oomph\+::\+Linear\+Algebra\+Distribution\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00261}{oomph\+::\+Linear\+Algebra\+Distribution\+::first\+\_\+row()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00481}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l01008}{ncol()}}, \mbox{\hyperlink{matrices_8h_source_l01096}{nnz()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00186}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow()}}, \mbox{\hyperlink{matrices_8h_source_l01002}{nrow()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00193}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{matrices_8h_source_l01060}{row\+\_\+start()}}, and \mbox{\hyperlink{matrices_8h_source_l01084}{value()}}.
+References build(), build\+\_\+without\+\_\+copy(), built(), column\+\_\+index(), oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt(), oomph\+::\+Linear\+Algebra\+Distribution\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Linear\+Algebra\+Distribution\+::first\+\_\+row(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row(), i, ncol(), nnz(), oomph\+::\+Linear\+Algebra\+Distribution\+::nrow(), nrow(), oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), row\+\_\+start(), and value().
 
 
 
-Referenced by \mbox{\hyperlink{matrices_8cc_source_l03676}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::create\+\_\+uniformly\+\_\+distributed\+\_\+matrix()}}, \mbox{\hyperlink{problem_8cc_source_l08368}{oomph\+::\+Problem\+::get\+\_\+eigenproblem\+\_\+matrices()}}, and \mbox{\hyperlink{problem_8cc_source_l03997}{oomph\+::\+Problem\+::get\+\_\+jacobian()}}.
+Referenced by oomph\+::\+CRDouble\+Matrix\+Helpers\+::create\+\_\+uniformly\+\_\+distributed\+\_\+matrix(), oomph\+::\+Problem\+::get\+\_\+eigenproblem\+\_\+matrices(), and oomph\+::\+Problem\+::get\+\_\+jacobian().
 
-\mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_a31a5d05c00d653a02e7b07714472d372}\label{classoomph_1_1CRDoubleMatrix_a31a5d05c00d653a02e7b07714472d372}} 
+\mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_a25f1efd00318183abd8c65efede3f3f4}\label{classoomph_1_1CRDoubleMatrix_a25f1efd00318183abd8c65efede3f3f4}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!row\_start@{row\_start}}
 \index{row\_start@{row\_start}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
 \doxysubsubsection{\texorpdfstring{row\_start()}{row\_start()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily int $\ast$ oomph\+::\+CRDouble\+Matrix\+::row\+\_\+start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily int$\ast$ oomph\+::\+CRDouble\+Matrix\+::row\+\_\+start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -867,21 +871,21 @@ Access to C-\/style row\+\_\+start array.
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l01060}{1060}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 1060 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}.
+References CR\+\_\+matrix, and oomph\+::\+CRMatrix$<$ T $>$\+::row\+\_\+start().
 
 
 
-Referenced by \mbox{\hyperlink{matrices_8cc_source_l03515}{add()}}, \mbox{\hyperlink{matrices_8cc_source_l01672}{build()}}, \mbox{\hyperlink{matrices_8cc_source_l01710}{build\+\_\+without\+\_\+copy()}}, \mbox{\hyperlink{matrices_8cc_source_l04349}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::concatenate()}}, \mbox{\hyperlink{matrices_8cc_source_l01234}{CRDouble\+Matrix()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00289}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00474}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix\+\_\+for\+\_\+aztecoo()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00270}{oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+HYPRE\+\_\+\+Matrix()}}, \mbox{\hyperlink{matrices_8h_source_l03490}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::deep\+\_\+copy()}}, \mbox{\hyperlink{matrices_8cc_source_l01366}{entries\+\_\+are\+\_\+sorted()}}, \mbox{\hyperlink{mumps__solver_8cc_source_l00180}{oomph\+::\+Mumps\+Solver\+::factorise()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01865}{oomph\+::\+Super\+LUSolver\+::factorise\+\_\+distributed()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02161}{oomph\+::\+Super\+LUSolver\+::factorise\+\_\+serial()}}, \mbox{\hyperlink{matrices_8cc_source_l04003}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::gershgorin\+\_\+eigenvalue\+\_\+estimate()}}, \mbox{\hyperlink{matrices_8cc_source_l03271}{get\+\_\+matrix\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8cc_source_l02431}{global\+\_\+matrix()}}, \mbox{\hyperlink{matrices_8cc_source_l03412}{inf\+\_\+norm()}}, \mbox{\hyperlink{matrices_8cc_source_l03731}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::inf\+\_\+norm()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l05101}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+get\+\_\+block()}}, \mbox{\hyperlink{matrices_8cc_source_l02365}{matrix\+\_\+reduction()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l02070}{oomph\+::\+MGSolver$<$ DIM $>$\+::modify\+\_\+restriction\+\_\+matrices()}}, \mbox{\hyperlink{matrices_8cc_source_l01782}{multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l01882}{multiply\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8cc_source_l02575}{redistribute()}}, \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00224}{oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::setup()}}, \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00474}{oomph\+::\+ILUZero\+Preconditioner$<$ CRDouble\+Matrix $>$\+::setup()}}, \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source_l00813}{oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Subsidiary\+Preconditioner\+Old\+::setup()}}, \mbox{\hyperlink{helmholtz__geometric__multigrid_8h_source_l01980}{oomph\+::\+Helmholtz\+MGPreconditioner$<$ DIM $>$\+::setup\+\_\+coarsest\+\_\+level\+\_\+structures()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l01480}{oomph\+::\+GS$<$ CRDouble\+Matrix $>$\+::solve\+\_\+helper()}}, \mbox{\hyperlink{matrices_8cc_source_l01449}{sort\+\_\+entries()}}, and \mbox{\hyperlink{matrices_8h_source_l01031}{sparse\+\_\+indexed\+\_\+output\+\_\+with\+\_\+offset()}}.
+Referenced by oomph\+::\+CRComplex\+Matrix\+::add(), add(), build(), build\+\_\+without\+\_\+copy(), oomph\+::\+CRDouble\+Matrix\+Helpers\+::concatenate(), CRDouble\+Matrix(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix\+\_\+for\+\_\+aztecoo(), oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+HYPRE\+\_\+\+Matrix(), oomph\+::\+CRDouble\+Matrix\+Helpers\+::deep\+\_\+copy(), entries\+\_\+are\+\_\+sorted(), oomph\+::\+Mumps\+Solver\+::factorise(), oomph\+::\+Super\+LUSolver\+::factorise\+\_\+distributed(), oomph\+::\+Super\+LUSolver\+::factorise\+\_\+serial(), oomph\+::\+CRDouble\+Matrix\+Helpers\+::gershgorin\+\_\+eigenvalue\+\_\+estimate(), get\+\_\+matrix\+\_\+transpose(), global\+\_\+matrix(), inf\+\_\+norm(), oomph\+::\+CRDouble\+Matrix\+Helpers\+::inf\+\_\+norm(), oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+get\+\_\+block(), matrix\+\_\+reduction(), oomph\+::\+MGSolver$<$ DIM $>$\+::modify\+\_\+restriction\+\_\+matrices(), multiply(), multiply\+\_\+transpose(), redistribute(), oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::setup(), oomph\+::\+ILUZero\+Preconditioner$<$ CRDouble\+Matrix $>$\+::setup(), oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Subsidiary\+Preconditioner\+Old\+::setup(), oomph\+::\+Helmholtz\+MGPreconditioner$<$ DIM $>$\+::setup\+\_\+coarsest\+\_\+level\+\_\+structures(), oomph\+::\+GS$<$ CRDouble\+Matrix $>$\+::solve\+\_\+helper(), sort\+\_\+entries(), and sparse\+\_\+indexed\+\_\+output\+\_\+with\+\_\+offset().
 
-\mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_ab288a44a89581070675d536d931eb73f}\label{classoomph_1_1CRDoubleMatrix_ab288a44a89581070675d536d931eb73f}} 
+\mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_a9c7f058048764537f4d4ecadded5dd7c}\label{classoomph_1_1CRDoubleMatrix_a9c7f058048764537f4d4ecadded5dd7c}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!row\_start@{row\_start}}
 \index{row\_start@{row\_start}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
 \doxysubsubsection{\texorpdfstring{row\_start()}{row\_start()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily const int $\ast$ oomph\+::\+CRDouble\+Matrix\+::row\+\_\+start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const int$\ast$ oomph\+::\+CRDouble\+Matrix\+::row\+\_\+start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -889,17 +893,17 @@ Access to C-\/style row\+\_\+start array (const version)
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l01066}{1066}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 1066 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}.
+References CR\+\_\+matrix, and oomph\+::\+CRMatrix$<$ T $>$\+::row\+\_\+start().
 
-\mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_a0b77e4dd1d6633d68264c0f41fc0e5e7}\label{classoomph_1_1CRDoubleMatrix_a0b77e4dd1d6633d68264c0f41fc0e5e7}} 
+\mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_aa09d92094d0ccf281dded547edfc981e}\label{classoomph_1_1CRDoubleMatrix_aa09d92094d0ccf281dded547edfc981e}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!serial\_matrix\_matrix\_multiply\_method@{serial\_matrix\_matrix\_multiply\_method}}
 \index{serial\_matrix\_matrix\_multiply\_method@{serial\_matrix\_matrix\_multiply\_method}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
 \doxysubsubsection{\texorpdfstring{serial\_matrix\_matrix\_multiply\_method()}{serial\_matrix\_matrix\_multiply\_method()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily unsigned \& oomph\+::\+CRDouble\+Matrix\+::serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily unsigned\& oomph\+::\+CRDouble\+Matrix\+::serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -907,21 +911,21 @@ Access function to Serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method, the
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l01159}{1159}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 1159 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l01242}{Serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method}}.
+References Serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method.
 
 
 
-Referenced by \mbox{\hyperlink{matrices_8h_source_l03490}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::deep\+\_\+copy()}}.
+Referenced by oomph\+::\+CRDouble\+Matrix\+Helpers\+::deep\+\_\+copy().
 
-\mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_a8ca76ee3ec67406f16ef1d958fedc710}\label{classoomph_1_1CRDoubleMatrix_a8ca76ee3ec67406f16ef1d958fedc710}} 
+\mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_ae8eff79ad9ac6e399ef4b677b6e0e1e5}\label{classoomph_1_1CRDoubleMatrix_ae8eff79ad9ac6e399ef4b677b6e0e1e5}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!serial\_matrix\_matrix\_multiply\_method@{serial\_matrix\_matrix\_multiply\_method}}
 \index{serial\_matrix\_matrix\_multiply\_method@{serial\_matrix\_matrix\_multiply\_method}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
 \doxysubsubsection{\texorpdfstring{serial\_matrix\_matrix\_multiply\_method()}{serial\_matrix\_matrix\_multiply\_method()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily const unsigned \& oomph\+::\+CRDouble\+Matrix\+::serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const unsigned\& oomph\+::\+CRDouble\+Matrix\+::serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -929,11 +933,11 @@ Read only access function (const version) to Serial\+\_\+matrix\+\_\+matrix\+\_\
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l01181}{1181}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 1181 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l01242}{Serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method}}.
+References Serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method.
 
 \mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_a2107875787d4dfa1cf007c05a041b078}\label{classoomph_1_1CRDoubleMatrix_a2107875787d4dfa1cf007c05a041b078}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!sort\_entries@{sort\_entries}}
@@ -947,11 +951,11 @@ Sorts the entries associated with each row of the matrix in the column index vec
 
 This helper function sorts the entries in the column index vector and the value vector. During the construction of the matrix the entries were most likely assigned in an arbitrary order. As a result, it cannot be assumed that the entries in the column index vector corresponding to each row of the matrix have been arranged in increasing order. During the setup an additional vector will be set up; Index\+\_\+of\+\_\+diagonal\+\_\+entries. The i-\/th entry of this vector contains the index of the last entry below or on the diagonal. If there are no entries below or on the diagonal then the corresponding entry is -\/1. If, however, there are no entries in the row then the entry is irrelevant and is kept as the initialised value; 0. 
 
-Definition at line \mbox{\hyperlink{matrices_8cc_source_l01449}{1449}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+Definition at line 1449 of file matrices.\+cc.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l01072}{column\+\_\+index()}}, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a37d76ad3814e127802b80e1e274a3f15}{Comparison\+\_\+struct}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l01238}{Index\+\_\+of\+\_\+diagonal\+\_\+entries}}, \mbox{\hyperlink{matrices_8h_source_l01002}{nrow()}}, \mbox{\hyperlink{matrices_8h_source_l01060}{row\+\_\+start()}}, and \mbox{\hyperlink{matrices_8h_source_l01084}{value()}}.
+References column\+\_\+index(), Comparison\+\_\+struct, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), i, Index\+\_\+of\+\_\+diagonal\+\_\+entries, nrow(), row\+\_\+start(), and value().
 
 \mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_a468055aa2e36ff270a769a74c9ac2856}\label{classoomph_1_1CRDoubleMatrix_a468055aa2e36ff270a769a74c9ac2856}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!sparse\_indexed\_output\_helper@{sparse\_indexed\_output\_helper}}
@@ -969,11 +973,11 @@ Implements \mbox{\hyperlink{classoomph_1_1Matrix_a7a5b44e7688ce2c2f7552da104e615
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l01023}{1023}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 1023 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}.
+References CR\+\_\+matrix, and oomph\+::\+CRMatrix$<$ T $>$\+::sparse\+\_\+indexed\+\_\+output\+\_\+helper().
 
 \mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_a2b5dcdc5e1b9ccea51647f02b3239e66}\label{classoomph_1_1CRDoubleMatrix_a2b5dcdc5e1b9ccea51647f02b3239e66}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!sparse\_indexed\_output\_with\_offset@{sparse\_indexed\_output\_with\_offset}}
@@ -987,21 +991,21 @@ Indexed output function to print a matrix to a file as i,j,a(i,j) for a(i,j)!=0 
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l01031}{1031}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 1031 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l01072}{column\+\_\+index()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00261}{oomph\+::\+Linear\+Algebra\+Distribution\+::first\+\_\+row()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00481}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{matrices_8h_source_l01060}{row\+\_\+start()}}, and \mbox{\hyperlink{matrices_8h_source_l01084}{value()}}.
+References column\+\_\+index(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Linear\+Algebra\+Distribution\+::first\+\_\+row(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row(), i, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), row\+\_\+start(), and value().
 
 
 
-Referenced by \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00147}{oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::setup()}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00061}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::setup()}}.
+Referenced by oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::setup(), and oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::setup().
 
-\mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_aafc5f1896dc3a317cdeddb067290c796}\label{classoomph_1_1CRDoubleMatrix_aafc5f1896dc3a317cdeddb067290c796}} 
+\mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_ab8220b7c2bb763dab32a4d0fea7da6f4}\label{classoomph_1_1CRDoubleMatrix_ab8220b7c2bb763dab32a4d0fea7da6f4}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!value@{value}}
 \index{value@{value}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
 \doxysubsubsection{\texorpdfstring{value()}{value()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily double $\ast$ oomph\+::\+CRDouble\+Matrix\+::value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double$\ast$ oomph\+::\+CRDouble\+Matrix\+::value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1009,21 +1013,21 @@ Access to C-\/style value array.
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l01084}{1084}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 1084 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}.
+References CR\+\_\+matrix, and oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::value().
 
 
 
-Referenced by \mbox{\hyperlink{matrices_8cc_source_l03515}{add()}}, \mbox{\hyperlink{matrices_8cc_source_l01672}{build()}}, \mbox{\hyperlink{matrices_8cc_source_l01710}{build\+\_\+without\+\_\+copy()}}, \mbox{\hyperlink{matrices_8cc_source_l04349}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::concatenate()}}, \mbox{\hyperlink{matrices_8cc_source_l01234}{CRDouble\+Matrix()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00289}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00474}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix\+\_\+for\+\_\+aztecoo()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00270}{oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+HYPRE\+\_\+\+Matrix()}}, \mbox{\hyperlink{matrices_8h_source_l03490}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::deep\+\_\+copy()}}, \mbox{\hyperlink{mumps__solver_8cc_source_l00180}{oomph\+::\+Mumps\+Solver\+::factorise()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01865}{oomph\+::\+Super\+LUSolver\+::factorise\+\_\+distributed()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02161}{oomph\+::\+Super\+LUSolver\+::factorise\+\_\+serial()}}, \mbox{\hyperlink{matrices_8cc_source_l04003}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::gershgorin\+\_\+eigenvalue\+\_\+estimate()}}, \mbox{\hyperlink{matrices_8cc_source_l03271}{get\+\_\+matrix\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8cc_source_l02431}{global\+\_\+matrix()}}, \mbox{\hyperlink{matrices_8cc_source_l03412}{inf\+\_\+norm()}}, \mbox{\hyperlink{matrices_8cc_source_l03731}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::inf\+\_\+norm()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l05101}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+get\+\_\+block()}}, \mbox{\hyperlink{matrices_8cc_source_l02365}{matrix\+\_\+reduction()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l02070}{oomph\+::\+MGSolver$<$ DIM $>$\+::modify\+\_\+restriction\+\_\+matrices()}}, \mbox{\hyperlink{matrices_8cc_source_l01782}{multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l01882}{multiply\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8cc_source_l02575}{redistribute()}}, \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00224}{oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::setup()}}, \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00474}{oomph\+::\+ILUZero\+Preconditioner$<$ CRDouble\+Matrix $>$\+::setup()}}, \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source_l00813}{oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Subsidiary\+Preconditioner\+Old\+::setup()}}, \mbox{\hyperlink{helmholtz__geometric__multigrid_8h_source_l01980}{oomph\+::\+Helmholtz\+MGPreconditioner$<$ DIM $>$\+::setup\+\_\+coarsest\+\_\+level\+\_\+structures()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l01480}{oomph\+::\+GS$<$ CRDouble\+Matrix $>$\+::solve\+\_\+helper()}}, \mbox{\hyperlink{matrices_8cc_source_l01449}{sort\+\_\+entries()}}, and \mbox{\hyperlink{matrices_8h_source_l01031}{sparse\+\_\+indexed\+\_\+output\+\_\+with\+\_\+offset()}}.
+Referenced by oomph\+::\+CRComplex\+Matrix\+::add(), add(), build(), build\+\_\+without\+\_\+copy(), oomph\+::\+CRDouble\+Matrix\+Helpers\+::concatenate(), CRDouble\+Matrix(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix\+\_\+for\+\_\+aztecoo(), oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+HYPRE\+\_\+\+Matrix(), oomph\+::\+CRDouble\+Matrix\+Helpers\+::deep\+\_\+copy(), oomph\+::\+Mumps\+Solver\+::factorise(), oomph\+::\+Super\+LUSolver\+::factorise\+\_\+distributed(), oomph\+::\+Super\+LUSolver\+::factorise\+\_\+serial(), oomph\+::\+CRDouble\+Matrix\+Helpers\+::gershgorin\+\_\+eigenvalue\+\_\+estimate(), get\+\_\+matrix\+\_\+transpose(), global\+\_\+matrix(), inf\+\_\+norm(), oomph\+::\+CRDouble\+Matrix\+Helpers\+::inf\+\_\+norm(), oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+get\+\_\+block(), matrix\+\_\+reduction(), oomph\+::\+MGSolver$<$ DIM $>$\+::modify\+\_\+restriction\+\_\+matrices(), multiply(), multiply\+\_\+transpose(), redistribute(), oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::setup(), oomph\+::\+ILUZero\+Preconditioner$<$ CRDouble\+Matrix $>$\+::setup(), oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Subsidiary\+Preconditioner\+Old\+::setup(), oomph\+::\+Helmholtz\+MGPreconditioner$<$ DIM $>$\+::setup\+\_\+coarsest\+\_\+level\+\_\+structures(), oomph\+::\+GS$<$ CRDouble\+Matrix $>$\+::solve\+\_\+helper(), sort\+\_\+entries(), and sparse\+\_\+indexed\+\_\+output\+\_\+with\+\_\+offset().
 
-\mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_a4a2812ca4c4a026d5e50972dab83d793}\label{classoomph_1_1CRDoubleMatrix_a4a2812ca4c4a026d5e50972dab83d793}} 
+\mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_a2b0895f75ec750c386f0dbc11bfbf57b}\label{classoomph_1_1CRDoubleMatrix_a2b0895f75ec750c386f0dbc11bfbf57b}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!value@{value}}
 \index{value@{value}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
 \doxysubsubsection{\texorpdfstring{value()}{value()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily const double $\ast$ oomph\+::\+CRDouble\+Matrix\+::value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const double$\ast$ oomph\+::\+CRDouble\+Matrix\+::value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1031,11 +1035,11 @@ Access to C-\/style value array (const version)
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l01090}{1090}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 1090 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}.
+References CR\+\_\+matrix, and oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::value().
 
 
 
@@ -1052,11 +1056,11 @@ Flag to indicate whether the matrix has been built -\/ i.\+e. the distribution h
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l01253}{1253}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 1253 of file matrices.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{matrices_8cc_source_l01694}{build()}}, \mbox{\hyperlink{matrices_8cc_source_l01710}{build\+\_\+without\+\_\+copy()}}, \mbox{\hyperlink{matrices_8h_source_l01210}{built()}}, \mbox{\hyperlink{matrices_8cc_source_l01657}{clear()}}, \mbox{\hyperlink{matrices_8cc_source_l01214}{CRDouble\+Matrix()}}, \mbox{\hyperlink{matrices_8cc_source_l01728}{ludecompose()}}, \mbox{\hyperlink{matrices_8cc_source_l01782}{multiply()}}, and \mbox{\hyperlink{matrices_8cc_source_l01882}{multiply\+\_\+transpose()}}.
+Referenced by build(), build\+\_\+without\+\_\+copy(), built(), clear(), CRDouble\+Matrix(), ludecompose(), multiply(), and multiply\+\_\+transpose().
 
 \mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_a37d76ad3814e127802b80e1e274a3f15}\label{classoomph_1_1CRDoubleMatrix_a37d76ad3814e127802b80e1e274a3f15}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!Comparison\_struct@{Comparison\_struct}}
@@ -1066,7 +1070,7 @@ Referenced by \mbox{\hyperlink{matrices_8cc_source_l01694}{build()}}, \mbox{\hyp
 
 
 
-Referenced by \mbox{\hyperlink{matrices_8cc_source_l01449}{sort\+\_\+entries()}}.
+Referenced by sort\+\_\+entries().
 
 \mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_aefc9a269911694cdd5bde98dc536148f}\label{classoomph_1_1CRDoubleMatrix_aefc9a269911694cdd5bde98dc536148f}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!CR\_matrix@{CR\_matrix}}
@@ -1080,11 +1084,11 @@ Storage for the \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} in CR Format.
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l01249}{1249}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 1249 of file matrices.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{matrices_8cc_source_l01694}{build()}}, \mbox{\hyperlink{matrices_8cc_source_l01710}{build\+\_\+without\+\_\+copy()}}, \mbox{\hyperlink{matrices_8cc_source_l01657}{clear()}}, \mbox{\hyperlink{matrices_8h_source_l01072}{column\+\_\+index()}}, \mbox{\hyperlink{matrices_8cc_source_l01311}{CRDouble\+Matrix()}}, \mbox{\hyperlink{matrices_8cc_source_l03465}{diagonal\+\_\+entries()}}, \mbox{\hyperlink{matrices_8cc_source_l03412}{inf\+\_\+norm()}}, \mbox{\hyperlink{matrices_8cc_source_l02365}{matrix\+\_\+reduction()}}, \mbox{\hyperlink{matrices_8cc_source_l01782}{multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l01882}{multiply\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8h_source_l01008}{ncol()}}, \mbox{\hyperlink{matrices_8h_source_l01096}{nnz()}}, \mbox{\hyperlink{matrices_8h_source_l01053}{operator()()}}, \mbox{\hyperlink{matrices_8h_source_l01016}{output\+\_\+bottom\+\_\+right\+\_\+zero\+\_\+helper()}}, \mbox{\hyperlink{matrices_8h_source_l01060}{row\+\_\+start()}}, \mbox{\hyperlink{matrices_8h_source_l01023}{sparse\+\_\+indexed\+\_\+output\+\_\+helper()}}, and \mbox{\hyperlink{matrices_8h_source_l01084}{value()}}.
+Referenced by build(), build\+\_\+without\+\_\+copy(), clear(), column\+\_\+index(), CRDouble\+Matrix(), diagonal\+\_\+entries(), inf\+\_\+norm(), matrix\+\_\+reduction(), multiply(), multiply\+\_\+transpose(), ncol(), nnz(), operator()(), output\+\_\+bottom\+\_\+right\+\_\+zero\+\_\+helper(), row\+\_\+start(), sparse\+\_\+indexed\+\_\+output\+\_\+helper(), and value().
 
 \mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_a4ab4056eff376d383c613a11082651cb}\label{classoomph_1_1CRDoubleMatrix_a4ab4056eff376d383c613a11082651cb}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!Distributed\_matrix\_matrix\_multiply\_method@{Distributed\_matrix\_matrix\_multiply\_method}}
@@ -1098,11 +1102,11 @@ Flag to determine which matrix-\/matrix multiplication method is used (for distr
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l01246}{1246}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 1246 of file matrices.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{matrices_8h_source_l01191}{distributed\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method()}}.
+Referenced by distributed\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method().
 
 \mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_a6cb9860ebacf742fc7fc47d77703cc82}\label{classoomph_1_1CRDoubleMatrix_a6cb9860ebacf742fc7fc47d77703cc82}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!Index\_of\_diagonal\_entries@{Index\_of\_diagonal\_entries}}
@@ -1116,11 +1120,11 @@ Referenced by \mbox{\hyperlink{matrices_8h_source_l01191}{distributed\+\_\+matri
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l01238}{1238}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 1238 of file matrices.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{matrices_8h_source_l00920}{get\+\_\+index\+\_\+of\+\_\+diagonal\+\_\+entries()}}, and \mbox{\hyperlink{matrices_8cc_source_l01449}{sort\+\_\+entries()}}.
+Referenced by get\+\_\+index\+\_\+of\+\_\+diagonal\+\_\+entries(), and sort\+\_\+entries().
 
 \mbox{\Hypertarget{classoomph_1_1CRDoubleMatrix_ac8fab9824a0766b6bb6361a6b25df9ce}\label{classoomph_1_1CRDoubleMatrix_ac8fab9824a0766b6bb6361a6b25df9ce}} 
 \index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!Serial\_matrix\_matrix\_multiply\_method@{Serial\_matrix\_matrix\_multiply\_method}}
@@ -1134,11 +1138,11 @@ Flag to determine which matrix-\/matrix multiplication method is used (for seria
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l01242}{1242}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 1242 of file matrices.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{matrices_8cc_source_l01214}{CRDouble\+Matrix()}}, \mbox{\hyperlink{matrices_8cc_source_l01992}{multiply()}}, and \mbox{\hyperlink{matrices_8h_source_l01159}{serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method()}}.
+Referenced by CRDouble\+Matrix(), multiply(), and serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method().
 
 
 

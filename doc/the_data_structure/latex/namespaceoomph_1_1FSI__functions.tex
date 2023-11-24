@@ -45,11 +45,11 @@ Apply no-\/slip condition for N.\+St. on a moving wall node u = St d\+R/dt, wher
 
 Apply no-\/slip condition for N.\+St. on a moving wall node, u = St d\+R/dt, where the Strouhal number St = a/(UT) is defined by \mbox{\hyperlink{namespaceoomph_1_1FSI__functions_aa213854665524b0720b63a115ef57fd8}{FSI\+\_\+functions\+::\+Strouhal\+\_\+for\+\_\+no\+\_\+slip}} and is initialised to 1.\+0. Note\+: This requires the x,y,\mbox{[}z\mbox{]} velocity components to be stored in nodal values 0,1,\mbox{[}2\mbox{]}. This is the default for all currently existing Navier-\/\+Stokes elements. If you use any others, use this function at your own risk. 
 
-Definition at line \mbox{\hyperlink{fsi_8cc_source_l00048}{48}} of file \mbox{\hyperlink{fsi_8cc_source}{fsi.\+cc}}.
+Definition at line 48 of file fsi.\+cc.
 
 
 
-References \mbox{\hyperlink{nodes_8cc_source_l02659}{oomph\+::\+Node\+::dposition\+\_\+dt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{nodes_8h_source_l00271}{oomph\+::\+Data\+::set\+\_\+value()}}, and \mbox{\hyperlink{fsi_8cc_source_l00039}{Strouhal\+\_\+for\+\_\+no\+\_\+slip}}.
+References oomph\+::\+Node\+::dposition\+\_\+dt(), i, oomph\+::\+Node\+::ndim(), oomph\+::\+Data\+::set\+\_\+value(), and Strouhal\+\_\+for\+\_\+no\+\_\+slip.
 
 \mbox{\Hypertarget{namespaceoomph_1_1FSI__functions_afc4e716b0325ab47465bd6c312c829fe}\label{namespaceoomph_1_1FSI__functions_afc4e716b0325ab47465bd6c312c829fe}} 
 \index{oomph::FSI\_functions@{oomph::FSI\_functions}!doc\_fsi@{doc\_fsi}}
@@ -70,11 +70,11 @@ Doc FSI\+:
 
 Pass pointer to fluid and solid meshes and pointer to the \mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} object that specifies the directory and the overall step number. Template parameter specifies the type of node that is used to implement the node update strategy. 
 
-Definition at line \mbox{\hyperlink{fsi_8h_source_l00724}{724}} of file \mbox{\hyperlink{fsi_8h_source}{fsi.\+h}}.
+Definition at line 724 of file fsi.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00524}{oomph\+::\+Doc\+Info\+::directory()}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00448}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00136}{oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+local\+\_\+coord()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00107}{oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l02251}{oomph\+::\+Mesh\+::external\+\_\+halo\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l02475}{oomph\+::\+Mesh\+::external\+\_\+halo\+\_\+proc()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00212}{oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+interaction\+\_\+field\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00251}{oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+interaction\+\_\+geometric\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00473}{oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l00622}{oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l01163}{oomph\+::\+Generalised\+Element\+::is\+\_\+halo()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{mesh_8h_source_l02222}{oomph\+::\+Mesh\+::nexternal\+\_\+halo\+\_\+element()}}, \mbox{\hyperlink{elements_8h_source_l00823}{oomph\+::\+Generalised\+Element\+::ninternal\+\_\+data()}}, \mbox{\hyperlink{mesh_8h_source_l00596}{oomph\+::\+Mesh\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02484}{oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension()}}, \mbox{\hyperlink{mesh_8h_source_l00436}{oomph\+::\+Mesh\+::node\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l02594}{oomph\+::\+Solid\+Mesh\+::node\+\_\+pt()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00554}{oomph\+::\+Doc\+Info\+::number()}}, \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{fsi_8h_source_l00269}{oomph\+::\+FSIWall\+Element\+::only\+\_\+front\+\_\+is\+\_\+loaded\+\_\+by\+\_\+fluid()}}, \mbox{\hyperlink{mesh_8cc_source_l02027}{oomph\+::\+Mesh\+::output()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{elements_8h_source_l02803}{oomph\+::\+Finite\+Element\+::s\+\_\+max()}}, \mbox{\hyperlink{elements_8h_source_l02793}{oomph\+::\+Finite\+Element\+::s\+\_\+min()}}, \mbox{\hyperlink{nodes_8h_source_l01765}{oomph\+::\+Solid\+Node\+::variable\+\_\+position\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
+References oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Doc\+Info\+::directory(), e, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+local\+\_\+coord(), oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+pt(), oomph\+::\+Mesh\+::external\+\_\+halo\+\_\+element\+\_\+pt(), oomph\+::\+Mesh\+::external\+\_\+halo\+\_\+proc(), oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+interaction\+\_\+field\+\_\+data\+\_\+pt(), oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+interaction\+\_\+geometric\+\_\+data\+\_\+pt(), oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Generalised\+Element\+::is\+\_\+halo(), oomph\+::\+Integral\+::knot(), oomph\+::\+Node\+::ndim(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Mesh\+::nexternal\+\_\+halo\+\_\+element(), oomph\+::\+Generalised\+Element\+::ninternal\+\_\+data(), oomph\+::\+Mesh\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension(), oomph\+::\+Mesh\+::node\+\_\+pt(), oomph\+::\+Solid\+Mesh\+::node\+\_\+pt(), oomph\+::\+Doc\+Info\+::number(), oomph\+::\+Data\+::nvalue(), oomph\+::\+Integral\+::nweight(), oomph\+::\+FSIWall\+Element\+::only\+\_\+front\+\_\+is\+\_\+loaded\+\_\+by\+\_\+fluid(), oomph\+::\+Mesh\+::output(), s, oomph\+::\+Finite\+Element\+::s\+\_\+max(), oomph\+::\+Finite\+Element\+::s\+\_\+min(), oomph\+::\+Solid\+Node\+::variable\+\_\+position\+\_\+pt(), and oomph\+::\+Node\+::x().
 
 \mbox{\Hypertarget{namespaceoomph_1_1FSI__functions_adccd22c19d99eabffd72f7671df49598}\label{namespaceoomph_1_1FSI__functions_adccd22c19d99eabffd72f7671df49598}} 
 \index{oomph::FSI\_functions@{oomph::FSI\_functions}!setup\_fluid\_load\_info\_for\_solid\_elements@{setup\_fluid\_load\_info\_for\_solid\_elements}}
@@ -89,11 +89,11 @@ Set up the information that the FSIWall\+Elements in the specified solid mesh re
 
 
 
-Definition at line \mbox{\hyperlink{fsi_8h_source_l00632}{632}} of file \mbox{\hyperlink{fsi_8h_source}{fsi.\+h}}.
+Definition at line 632 of file fsi.\+h.
 
 
 
-References \mbox{\hyperlink{multi__domain_8template_8cc_source_l00072}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::setup\+\_\+bulk\+\_\+elements\+\_\+adjacent\+\_\+to\+\_\+face\+\_\+mesh()}}.
+References oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::setup\+\_\+bulk\+\_\+elements\+\_\+adjacent\+\_\+to\+\_\+face\+\_\+mesh().
 
 \mbox{\Hypertarget{namespaceoomph_1_1FSI__functions_ac71732700aad0d671fa1285d173d5b27}\label{namespaceoomph_1_1FSI__functions_ac71732700aad0d671fa1285d173d5b27}} 
 \index{oomph::FSI\_functions@{oomph::FSI\_functions}!setup\_fluid\_load\_info\_for\_solid\_elements@{setup\_fluid\_load\_info\_for\_solid\_elements}}
@@ -108,11 +108,11 @@ Set up the information that the FSIWall\+Elements in the specified solid mesh re
 
 This is the vector based version it works simultaneously on fluid fsi boundaries identified in the vector boundary\+\_\+in\+\_\+fluid\+\_\+mesh and the corresponding solid meshes in solid\+\_\+mesh\+\_\+pt. 
 
-Definition at line \mbox{\hyperlink{fsi_8h_source_l00601}{601}} of file \mbox{\hyperlink{fsi_8h_source}{fsi.\+h}}.
+Definition at line 601 of file fsi.\+h.
 
 
 
-References \mbox{\hyperlink{multi__domain_8template_8cc_source_l00072}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::setup\+\_\+bulk\+\_\+elements\+\_\+adjacent\+\_\+to\+\_\+face\+\_\+mesh()}}.
+References oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::setup\+\_\+bulk\+\_\+elements\+\_\+adjacent\+\_\+to\+\_\+face\+\_\+mesh().
 
 \mbox{\Hypertarget{namespaceoomph_1_1FSI__functions_ad638257ef97a089f5367edf5d2911e60}\label{namespaceoomph_1_1FSI__functions_ad638257ef97a089f5367edf5d2911e60}} 
 \index{oomph::FSI\_functions@{oomph::FSI\_functions}!setup\_solid\_elements\_for\_displacement\_bc@{setup\_solid\_elements\_for\_displacement\_bc}}
@@ -127,11 +127,11 @@ Setup multi-\/domain interaction required for imposition of solid displacements 
 
 
 
-Definition at line \mbox{\hyperlink{fsi_8h_source_l00692}{692}} of file \mbox{\hyperlink{fsi_8h_source}{fsi.\+h}}.
+Definition at line 692 of file fsi.\+h.
 
 
 
-References \mbox{\hyperlink{multi__domain_8template_8cc_source_l00072}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::setup\+\_\+bulk\+\_\+elements\+\_\+adjacent\+\_\+to\+\_\+face\+\_\+mesh()}}.
+References oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::setup\+\_\+bulk\+\_\+elements\+\_\+adjacent\+\_\+to\+\_\+face\+\_\+mesh().
 
 \mbox{\Hypertarget{namespaceoomph_1_1FSI__functions_aacfff5c6e8f9ee75e7d2ae490d28fb7b}\label{namespaceoomph_1_1FSI__functions_aacfff5c6e8f9ee75e7d2ae490d28fb7b}} 
 \index{oomph::FSI\_functions@{oomph::FSI\_functions}!setup\_solid\_elements\_for\_displacement\_bc@{setup\_solid\_elements\_for\_displacement\_bc}}
@@ -146,11 +146,11 @@ Setup multi-\/domain interaction required for imposition of solid displacements 
 
 This is the vector based version it works simultaneously on solid fsi boundaries identified in the vector b\+\_\+solid\+\_\+fsi and the corresponding Lagrange multiplier meshes in lagrange\+\_\+multiplier\+\_\+mesh\+\_\+pt. 
 
-Definition at line \mbox{\hyperlink{fsi_8h_source_l00665}{665}} of file \mbox{\hyperlink{fsi_8h_source}{fsi.\+h}}.
+Definition at line 665 of file fsi.\+h.
 
 
 
-References \mbox{\hyperlink{multi__domain_8template_8cc_source_l00072}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::setup\+\_\+bulk\+\_\+elements\+\_\+adjacent\+\_\+to\+\_\+face\+\_\+mesh()}}.
+References oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::setup\+\_\+bulk\+\_\+elements\+\_\+adjacent\+\_\+to\+\_\+face\+\_\+mesh().
 
 
 
@@ -167,9 +167,9 @@ Strouhal number St = a/(UT) for application of no slip condition. Initialised to
 
 
 
-Definition at line \mbox{\hyperlink{fsi_8cc_source_l00039}{39}} of file \mbox{\hyperlink{fsi_8cc_source}{fsi.\+cc}}.
+Definition at line 39 of file fsi.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{fsi_8cc_source_l00048}{apply\+\_\+no\+\_\+slip\+\_\+on\+\_\+moving\+\_\+wall()}}.
+Referenced by apply\+\_\+no\+\_\+slip\+\_\+on\+\_\+moving\+\_\+wall().
 

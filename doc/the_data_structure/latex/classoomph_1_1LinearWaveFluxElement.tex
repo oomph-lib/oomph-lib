@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1LinearWaveFluxElement}{}\doxysection{oomph\+::Linear\+Wave\+Flux\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1LinearWaveFluxElement}{}\doxysection{oomph\+::Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$ Class Template Reference}
 \label{classoomph_1_1LinearWaveFluxElement}\index{oomph::LinearWaveFluxElement$<$ ELEMENT $>$@{oomph::LinearWaveFluxElement$<$ ELEMENT $>$}}
 
 
@@ -9,7 +9,7 @@
 
 {\ttfamily \#include $<$linear\+\_\+wave\+\_\+flux\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Linear\+Wave\+Flux\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.657177cm]{classoomph_1_1LinearWaveFluxElement}
@@ -23,7 +23,7 @@ typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a4010ab
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a40752d5ceccceb1fa0ee94feb4760468}{Linear\+Wave\+Flux\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$bulk\+\_\+el\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}})
+\mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a40752d5ceccceb1fa0ee94feb4760468}{Linear\+Wave\+Flux\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$bulk\+\_\+el\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a478d577ac6db67ecc80f1f02ae3ab170}{face\+\_\+index}})
 \begin{DoxyCompactList}\small\item\em Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the index of the face to be created. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_aa87a90e74c1f27929ab60d7fef3044fd}{Linear\+Wave\+Flux\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Broken empty constructor. \end{DoxyCompactList}\item 
@@ -31,7 +31,7 @@ typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a4010ab
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a8e7589367d5c33303cc1906dc6479b9c}{operator=}} (const \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement}{Linear\+Wave\+Flux\+Element}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a4010abac8856733ae2b152bc41e7b558}{Linear\+Wave\+Prescribed\+Flux\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a5a478df5f79b7873a285fd7c61003cde}{flux\+\_\+fct\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a4010abac8856733ae2b152bc41e7b558}{Linear\+Wave\+Prescribed\+Flux\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a00946fd9acf1e2d85a6a3f31e3d7500e}{flux\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for the prescribed-\/flux function pointer. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a1bc14657ec786579cc01096f42e8c30c}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em Compute the element residual vector. \end{DoxyCompactList}\item 
@@ -74,11 +74,12 @@ unsigned \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a6a5e0e000ee602797
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class ELEMENT$>$\newline
 class oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$}
+
 ///////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////// 
 
 A class for elements that allow the imposition of an applied flux on the boundaries of Linear\+Wave elements. The element geometry is obtained from the Face\+Geometry$<$\+ELEMENT$>$ policy class. 
 
-Definition at line \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00051}{51}} of file \mbox{\hyperlink{linear__wave__flux__elements_8h_source}{linear\+\_\+wave\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 51 of file linear\+\_\+wave\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -96,7 +97,7 @@ Function pointer to the prescribed-\/flux function fct(x,f(x)) -- x is a Vector!
 
 
 
-Definition at line \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00057}{57}} of file \mbox{\hyperlink{linear__wave__flux__elements_8h_source}{linear\+\_\+wave\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 57 of file linear\+\_\+wave\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -116,11 +117,11 @@ Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the i
 
 Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the index of the face to be created. 
 
-Definition at line \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00220}{220}} of file \mbox{\hyperlink{linear__wave__flux__elements_8h_source}{linear\+\_\+wave\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 220 of file linear\+\_\+wave\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l05132}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00203}{oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::\+Dim}}, \mbox{\hyperlink{elements_8h_source_l04626}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}, \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00200}{oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l02470}{oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes()}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, \mbox{\hyperlink{linear__wave__elements_8h_source_l00077}{oomph\+::\+Linear\+Wave\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+lin\+\_\+wave()}}, and \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00206}{oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+lin\+\_\+wave}}.
+References oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::\+Dim, oomph\+::\+Face\+Element\+::face\+\_\+index(), oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt, oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes(), oomph\+::\+Node\+::ndim(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), oomph\+::\+Linear\+Wave\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+lin\+\_\+wave(), and oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+lin\+\_\+wave.
 
 \mbox{\Hypertarget{classoomph_1_1LinearWaveFluxElement_aa87a90e74c1f27929ab60d7fef3044fd}\label{classoomph_1_1LinearWaveFluxElement_aa87a90e74c1f27929ab60d7fef3044fd}} 
 \index{oomph::LinearWaveFluxElement$<$ ELEMENT $>$@{oomph::LinearWaveFluxElement$<$ ELEMENT $>$}!LinearWaveFluxElement@{LinearWaveFluxElement}}
@@ -135,7 +136,7 @@ Broken empty constructor.
 
 
 
-Definition at line \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00068}{68}} of file \mbox{\hyperlink{linear__wave__flux__elements_8h_source}{linear\+\_\+wave\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 68 of file linear\+\_\+wave\+\_\+flux\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1LinearWaveFluxElement_a6c9bc8cee30eb29351cbb83521877362}\label{classoomph_1_1LinearWaveFluxElement_a6c9bc8cee30eb29351cbb83521877362}} 
 \index{oomph::LinearWaveFluxElement$<$ ELEMENT $>$@{oomph::LinearWaveFluxElement$<$ ELEMENT $>$}!LinearWaveFluxElement@{LinearWaveFluxElement}}
@@ -168,11 +169,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0
 
 
 
-Definition at line \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00101}{101}} of file \mbox{\hyperlink{linear__wave__flux__elements_8h_source}{linear\+\_\+wave\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 101 of file linear\+\_\+wave\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00372}{oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+lin\+\_\+wave\+\_\+flux()}}.
+References oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+lin\+\_\+wave\+\_\+flux().
 
 \mbox{\Hypertarget{classoomph_1_1LinearWaveFluxElement_a1bc14657ec786579cc01096f42e8c30c}\label{classoomph_1_1LinearWaveFluxElement_a1bc14657ec786579cc01096f42e8c30c}} 
 \index{oomph::LinearWaveFluxElement$<$ ELEMENT $>$@{oomph::LinearWaveFluxElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
@@ -191,11 +192,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00091}{91}} of file \mbox{\hyperlink{linear__wave__flux__elements_8h_source}{linear\+\_\+wave\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 91 of file linear\+\_\+wave\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00227}{oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix}}, and \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00372}{oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+lin\+\_\+wave\+\_\+flux()}}.
+References oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix, and oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+lin\+\_\+wave\+\_\+flux().
 
 \mbox{\Hypertarget{classoomph_1_1LinearWaveFluxElement_abde1eec8fa1a4c1ff97c1cd33fe1c727}\label{classoomph_1_1LinearWaveFluxElement_abde1eec8fa1a4c1ff97c1cd33fe1c727}} 
 \index{oomph::LinearWaveFluxElement$<$ ELEMENT $>$@{oomph::LinearWaveFluxElement$<$ ELEMENT $>$}!fill\_in\_generic\_residual\_contribution\_lin\_wave\_flux@{fill\_in\_generic\_residual\_contribution\_lin\_wave\_flux}}
@@ -210,22 +211,22 @@ Compute the element residual vector. flag=1(or 0)\+: do (or don\textquotesingle{
 
 Compute the element\textquotesingle{}s residual vector and the (zero) Jacobian matrix. 
 
-Definition at line \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00371}{371}} of file \mbox{\hyperlink{linear__wave__flux__elements_8h_source}{linear\+\_\+wave\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 371 of file linear\+\_\+wave\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{multi__domain_8cc_source_l00060}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Dim}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
+References oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Dim, i, s, and oomph\+::\+Quad\+Tree\+Names\+::W.
 
 
 
-Referenced by \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00101}{oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, and \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00091}{oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
+Referenced by oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
 
-\mbox{\Hypertarget{classoomph_1_1LinearWaveFluxElement_a5a478df5f79b7873a285fd7c61003cde}\label{classoomph_1_1LinearWaveFluxElement_a5a478df5f79b7873a285fd7c61003cde}} 
+\mbox{\Hypertarget{classoomph_1_1LinearWaveFluxElement_a00946fd9acf1e2d85a6a3f31e3d7500e}\label{classoomph_1_1LinearWaveFluxElement_a00946fd9acf1e2d85a6a3f31e3d7500e}} 
 \index{oomph::LinearWaveFluxElement$<$ ELEMENT $>$@{oomph::LinearWaveFluxElement$<$ ELEMENT $>$}!flux\_fct\_pt@{flux\_fct\_pt}}
 \index{flux\_fct\_pt@{flux\_fct\_pt}!oomph::LinearWaveFluxElement$<$ ELEMENT $>$@{oomph::LinearWaveFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{flux\_fct\_pt()}{flux\_fct\_pt()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a4010abac8856733ae2b152bc41e7b558}{Linear\+Wave\+Prescribed\+Flux\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement}{oomph\+::\+Linear\+Wave\+Flux\+Element}}$<$ ELEMENT $>$\+::flux\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement_a4010abac8856733ae2b152bc41e7b558}{Linear\+Wave\+Prescribed\+Flux\+Fct\+Pt}}\& \mbox{\hyperlink{classoomph_1_1LinearWaveFluxElement}{oomph\+::\+Linear\+Wave\+Flux\+Element}}$<$ ELEMENT $>$\+::flux\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -233,11 +234,11 @@ Access function for the prescribed-\/flux function pointer.
 
 
 
-Definition at line \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00084}{84}} of file \mbox{\hyperlink{linear__wave__flux__elements_8h_source}{linear\+\_\+wave\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 84 of file linear\+\_\+wave\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00200}{oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt}}.
+References oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1LinearWaveFluxElement_a969d93f5e289c16d581da0851fcd89e7}\label{classoomph_1_1LinearWaveFluxElement_a969d93f5e289c16d581da0851fcd89e7}} 
 \index{oomph::LinearWaveFluxElement$<$ ELEMENT $>$@{oomph::LinearWaveFluxElement$<$ ELEMENT $>$}!get\_flux@{get\_flux}}
@@ -252,11 +253,11 @@ Function to calculate the prescribed flux at a given spatial position and at a g
 
 
 
-Definition at line \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00178}{178}} of file \mbox{\hyperlink{linear__wave__flux__elements_8h_source}{linear\+\_\+wave\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 178 of file linear\+\_\+wave\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00200}{oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt}}.
+References oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1LinearWaveFluxElement_a8e7589367d5c33303cc1906dc6479b9c}\label{classoomph_1_1LinearWaveFluxElement_a8e7589367d5c33303cc1906dc6479b9c}} 
 \index{oomph::LinearWaveFluxElement$<$ ELEMENT $>$@{oomph::LinearWaveFluxElement$<$ ELEMENT $>$}!operator=@{operator=}}
@@ -286,11 +287,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee
 
 
 
-Definition at line \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00138}{138}} of file \mbox{\hyperlink{linear__wave__flux__elements_8h_source}{linear\+\_\+wave\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 138 of file linear\+\_\+wave\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
+References oomph\+::\+Finite\+Element\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1LinearWaveFluxElement_a09230e7c17c744a62ed8d3e317ba1eeb}\label{classoomph_1_1LinearWaveFluxElement_a09230e7c17c744a62ed8d3e317ba1eeb}} 
 \index{oomph::LinearWaveFluxElement$<$ ELEMENT $>$@{oomph::LinearWaveFluxElement$<$ ELEMENT $>$}!output@{output}}
@@ -309,11 +310,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f
 
 
 
-Definition at line \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00145}{145}} of file \mbox{\hyperlink{linear__wave__flux__elements_8h_source}{linear\+\_\+wave\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 145 of file linear\+\_\+wave\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
+References oomph\+::\+Finite\+Element\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1LinearWaveFluxElement_ad969d2df96dd76f0cab08ad7a80dda9f}\label{classoomph_1_1LinearWaveFluxElement_ad969d2df96dd76f0cab08ad7a80dda9f}} 
 \index{oomph::LinearWaveFluxElement$<$ ELEMENT $>$@{oomph::LinearWaveFluxElement$<$ ELEMENT $>$}!output@{output}}
@@ -332,11 +333,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00123}{123}} of file \mbox{\hyperlink{linear__wave__flux__elements_8h_source}{linear\+\_\+wave\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 123 of file linear\+\_\+wave\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
+References oomph\+::\+Finite\+Element\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1LinearWaveFluxElement_ae767010f3b965889d917a4c41f8db956}\label{classoomph_1_1LinearWaveFluxElement_ae767010f3b965889d917a4c41f8db956}} 
 \index{oomph::LinearWaveFluxElement$<$ ELEMENT $>$@{oomph::LinearWaveFluxElement$<$ ELEMENT $>$}!output@{output}}
@@ -355,11 +356,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00130}{130}} of file \mbox{\hyperlink{linear__wave__flux__elements_8h_source}{linear\+\_\+wave\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 130 of file linear\+\_\+wave\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
+References oomph\+::\+Finite\+Element\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1LinearWaveFluxElement_ae9568e5e47bea6bbcb17ef1b88a2845b}\label{classoomph_1_1LinearWaveFluxElement_ae9568e5e47bea6bbcb17ef1b88a2845b}} 
 \index{oomph::LinearWaveFluxElement$<$ ELEMENT $>$@{oomph::LinearWaveFluxElement$<$ ELEMENT $>$}!shape\_and\_test@{shape\_and\_test}}
@@ -374,11 +375,11 @@ Function to compute the shape and test functions and to return the Jacobian of m
 
 
 
-Definition at line \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00155}{155}} of file \mbox{\hyperlink{linear__wave__flux__elements_8h_source}{linear\+\_\+wave\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 155 of file linear\+\_\+wave\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l05242}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
+References i, oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Finite\+Element\+::nnode(), s, and oomph\+::\+Finite\+Element\+::shape().
 
 \mbox{\Hypertarget{classoomph_1_1LinearWaveFluxElement_a6fb1a0846c91406e86f598c8eb0fafb2}\label{classoomph_1_1LinearWaveFluxElement_a6fb1a0846c91406e86f598c8eb0fafb2}} 
 \index{oomph::LinearWaveFluxElement$<$ ELEMENT $>$@{oomph::LinearWaveFluxElement$<$ ELEMENT $>$}!zeta\_nodal@{zeta\_nodal}}
@@ -397,11 +398,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FaceElement_a58c9f93705c7741f7
 
 
 
-Definition at line \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00114}{114}} of file \mbox{\hyperlink{linear__wave__flux__elements_8h_source}{linear\+\_\+wave\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 114 of file linear\+\_\+wave\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l04497}{oomph\+::\+Face\+Element\+::zeta\+\_\+nodal()}}.
+References i, and oomph\+::\+Face\+Element\+::zeta\+\_\+nodal().
 
 
 
@@ -419,11 +420,11 @@ The spatial dimension of the problem.
 
 
 
-Definition at line \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00203}{203}} of file \mbox{\hyperlink{linear__wave__flux__elements_8h_source}{linear\+\_\+wave\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 203 of file linear\+\_\+wave\+\_\+flux\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00220}{oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::\+Linear\+Wave\+Flux\+Element()}}.
+Referenced by oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::\+Linear\+Wave\+Flux\+Element().
 
 \mbox{\Hypertarget{classoomph_1_1LinearWaveFluxElement_a91d78912959e683d299a6778590957d2}\label{classoomph_1_1LinearWaveFluxElement_a91d78912959e683d299a6778590957d2}} 
 \index{oomph::LinearWaveFluxElement$<$ ELEMENT $>$@{oomph::LinearWaveFluxElement$<$ ELEMENT $>$}!Flux\_fct\_pt@{Flux\_fct\_pt}}
@@ -438,11 +439,11 @@ Function pointer to the (global) prescribed-\/flux function.
 
 
 
-Definition at line \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00200}{200}} of file \mbox{\hyperlink{linear__wave__flux__elements_8h_source}{linear\+\_\+wave\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 200 of file linear\+\_\+wave\+\_\+flux\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00084}{oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::flux\+\_\+fct\+\_\+pt()}}, \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00178}{oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::get\+\_\+flux()}}, and \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00220}{oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::\+Linear\+Wave\+Flux\+Element()}}.
+Referenced by oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::flux\+\_\+fct\+\_\+pt(), oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::get\+\_\+flux(), and oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::\+Linear\+Wave\+Flux\+Element().
 
 \mbox{\Hypertarget{classoomph_1_1LinearWaveFluxElement_a6a5e0e000ee602797262490bc49c49e2}\label{classoomph_1_1LinearWaveFluxElement_a6a5e0e000ee602797262490bc49c49e2}} 
 \index{oomph::LinearWaveFluxElement$<$ ELEMENT $>$@{oomph::LinearWaveFluxElement$<$ ELEMENT $>$}!U\_index\_lin\_wave@{U\_index\_lin\_wave}}
@@ -457,11 +458,11 @@ The index at which the unknown is stored at the nodes.
 
 
 
-Definition at line \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00206}{206}} of file \mbox{\hyperlink{linear__wave__flux__elements_8h_source}{linear\+\_\+wave\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 206 of file linear\+\_\+wave\+\_\+flux\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00220}{oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::\+Linear\+Wave\+Flux\+Element()}}.
+Referenced by oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::\+Linear\+Wave\+Flux\+Element().
 
 
 

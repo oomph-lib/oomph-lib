@@ -93,7 +93,7 @@ As usual, we define all non-\/dimensional parameters in a namespace where we als
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_namespace==========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Global variables}}
-\DoxyCodeLine{\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Parameters}{Global\_Parameters}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -145,7 +145,7 @@ As usual, we define all non-\/dimensional parameters in a namespace where we als
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Output directory}}
+\DoxyCodeLine{ \textcolor{comment}{/// Output directory}}
 \DoxyCodeLine{ \textcolor{keywordtype}{string} \mbox{\hyperlink{namespaceGlobal__Parameters_a301ab922df72030c660b21328d6caf76}{Directory}}=\textcolor{stringliteral}{"{}RESLT"{}};}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Number of elements in azimuthal direction }}
@@ -166,7 +166,7 @@ We start by defining command line arguments which specify the number of elements
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_main==================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver for annular disk loaded by pressure}}
-\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{time__harmonic__elastic__annulus_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} **argv)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
@@ -246,7 +246,7 @@ The {\ttfamily Problem} class is very simple. As in other problems with Neumann 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=============begin\_problem============================================ }}
 \DoxyCodeLine{\textcolor{comment}{/// Annular disk}}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================== }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================== }}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELASTICITY\_ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classAnnularDiskProblem}{AnnularDiskProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -261,7 +261,7 @@ The {\ttfamily Problem} class is very simple. As in other problems with Neumann 
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update function (empty)}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classAnnularDiskProblem_a147e5fbe37f7132bbace2b713acb03a5}{actions\_before\_newton\_solve}}() \{\}}
-\DoxyCodeLine{\textcolor{comment}{ /// Doc the solution}}
+\DoxyCodeLine{ \textcolor{comment}{/// Doc the solution}}
 \DoxyCodeLine{ \textcolor{keywordtype}{void} doc\_solution();}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{private}:}
@@ -271,9 +271,9 @@ The {\ttfamily Problem} class is very simple. As in other problems with Neumann 
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Delete traction elements}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} delete\_traction\_elements();}
-\DoxyCodeLine{\textcolor{comment}{ /// Pointer to solid mesh}}
+\DoxyCodeLine{ \textcolor{comment}{/// Pointer to solid mesh}}
 \DoxyCodeLine{ Mesh* Solid\_mesh\_pt;}
-\DoxyCodeLine{\textcolor{comment}{ /// Pointer to mesh of traction elements}}
+\DoxyCodeLine{ \textcolor{comment}{/// Pointer to mesh of traction elements}}
 \DoxyCodeLine{ Mesh* Traction\_mesh\_pt;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// DocInfo object for output}}
@@ -293,7 +293,7 @@ We begin by building the \char`\"{}bulk\char`\"{} solid mesh, specifying the pre
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===========start\_of\_constructor======================================= }}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor: }}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================== }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================== }}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELASTICITY\_ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classAnnularDiskProblem_aad1ce56fa5c26045fb14d46acf29c89e}{AnnularDiskProblem<ELASTICITY\_ELEMENT>::AnnularDiskProblem}}() }
 \DoxyCodeLine{\{}
@@ -439,7 +439,7 @@ We create the face elements that apply the traction on the outer boundary (bound
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_traction\_elements==============================}}
 \DoxyCodeLine{\textcolor{comment}{/// Create traction elements }}
-\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELASTICITY\_ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classAnnularDiskProblem_aeab547741d3b500af5f465e52e1ba57c}{AnnularDiskProblem<ELASTICITY\_ELEMENT>::create\_traction\_elements}}()}
 \DoxyCodeLine{\{}
@@ -501,7 +501,7 @@ As expected, this member function documents the computed solution.
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==============start\_doc===========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{//==================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELASTICITY\_ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classAnnularDiskProblem_a8034c630f21ccf5882a21eef2c1464fc}{AnnularDiskProblem<ELASTICITY\_ELEMENT>::doc\_solution}}()}
 \DoxyCodeLine{\{}
@@ -564,12 +564,16 @@ As expected, this member function documents the computed solution.
 
 \begin{DoxyItemize}
 \item for the same parameter study suggested in the previous exercise (increase in $ \Omega^2 $ )
+\end{DoxyItemize}
 \end{DoxyItemize}and
 \begin{DoxyItemize}
 \item for the problem with the \char`\"{}gap\char`\"{} in the annular region.
-\end{DoxyItemize}~\newline
+\end{DoxyItemize}
+
+~\newline
 ~\newline
 
+\begin{DoxyItemize}
 \item Modify the code to exploit at least some of the problem\textquotesingle{}s symmetry, e.\+g. by solving the problem for the continuous annulus in a quarter of the original domain, $ x_1, x_2 \ge 0 $, say, using appropriate symmetry boundary conditions along the coordinate axes.
 \end{DoxyItemize}\DoxyHorRuler{0}
  \DoxyHorRuler{0}

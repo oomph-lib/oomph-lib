@@ -72,7 +72,7 @@ The global parameters are the Reynolds number, the dimensionless grouping $Re/Fr
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa2e802ee7cc8e1ac900ba94c3ce86eb7}{Alpha}} = 1.0*atan(1.0);}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// The Vector direction of gravity, set in main()}}
-\DoxyCodeLine{\textcolor{comment}{} Vector<double> \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ad40b4c9ef4cf48648fee0914736e7341}{G}}(2,0.0);}
+\DoxyCodeLine{\textcolor{comment}{} Vector<double> \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa868968dead376240a69f9152bd599b9}{G}}(2,0.0);}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// The Capillary number}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b32b93d2e546f9375ec418474107838}{Ca}}= 1.0;}
@@ -80,12 +80,12 @@ The global parameters are the Reynolds number, the dimensionless grouping $Re/Fr
 \end{DoxyCodeInclude}
  The hydrostatic pressure field is specified as an applied traction. At the outlet (inlet), the outer unit normal is in the positive (negative) $x$ direction and so the required traction is given by $-p$ ( $p$), \[ \mbox{\boldmath$t$}|_{\mbox{outlet}} = (- (Re/Fr)\cos\alpha (1 - y), 0), \qquad \mbox{\boldmath$t$}|_{\mbox{inlet}} = ((Re/Fr)\cos\alpha (1 - y), 0).\] These tractions are specified by the two different functions 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Function that prescribes the hydrostatic pressure field at the outlet}}
+\DoxyCodeLine{ \textcolor{comment}{/// Function that prescribes the hydrostatic pressure field at the outlet}}
 \DoxyCodeLine{ \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab577639e7c51979d3db7565c08c69c70}{hydrostatic\_pressure\_outlet}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time, \textcolor{keyword}{const} Vector<double> \&x, }
 \DoxyCodeLine{                                  \textcolor{keyword}{const} Vector<double> \&n, }
 \DoxyCodeLine{                                  Vector<double> \&traction)}
 \DoxyCodeLine{ \{}
-\DoxyCodeLine{  traction[0] = \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa6286f02b476912dd7550eced538331a}{ReInvFr}}*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ad40b4c9ef4cf48648fee0914736e7341}{G}}[1]*(1.0 -\/ x[1]);}
+\DoxyCodeLine{  traction[0] = \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa6286f02b476912dd7550eced538331a}{ReInvFr}}*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa868968dead376240a69f9152bd599b9}{G}}[1]*(1.0 -\/ x[1]);}
 \DoxyCodeLine{  traction[1] = 0.0;}
 \DoxyCodeLine{ \}}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -94,7 +94,7 @@ The global parameters are the Reynolds number, the dimensionless grouping $Re/Fr
 \DoxyCodeLine{                                 \textcolor{keyword}{const} Vector<double> \&n,}
 \DoxyCodeLine{                                 Vector<double> \&traction)}
 \DoxyCodeLine{ \{}
-\DoxyCodeLine{  traction[0] = -\/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa6286f02b476912dd7550eced538331a}{ReInvFr}}*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ad40b4c9ef4cf48648fee0914736e7341}{G}}[1]*(1.0 -\/ x[1]);}
+\DoxyCodeLine{  traction[0] = -\/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa6286f02b476912dd7550eced538331a}{ReInvFr}}*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa868968dead376240a69f9152bd599b9}{G}}[1]*(1.0 -\/ x[1]);}
 \DoxyCodeLine{  traction[1] = 0.0;}
 \DoxyCodeLine{ \}}
 \DoxyCodeLine{ \textcolor{comment}{//end of traction functions}}
@@ -107,7 +107,7 @@ We must also specify the direction of the normals (directed out of the fluid) to
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Direction of the wall normal vector (at the inlet)}}
+\DoxyCodeLine{ \textcolor{comment}{/// Direction of the wall normal vector (at the inlet)}}
 \DoxyCodeLine{ Vector<double> \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a5feb3df21fc4a0adefadecb8a8ed98d7}{Wall\_normal}};}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Function that specifies the wall unit normal at the inlet}}
@@ -162,8 +162,8 @@ We start by specifying the constitutive law used to define the mesh motion when 
 \DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Re}} = 4.0/sin(\mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa2e802ee7cc8e1ac900ba94c3ce86eb7}{Alpha}}); }
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Set the direction of gravity}}
-\DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ad40b4c9ef4cf48648fee0914736e7341}{G}}[0] = sin(\mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa2e802ee7cc8e1ac900ba94c3ce86eb7}{Alpha}});}
-\DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ad40b4c9ef4cf48648fee0914736e7341}{G}}[1] = -\/cos(\mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa2e802ee7cc8e1ac900ba94c3ce86eb7}{Alpha}});}
+\DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa868968dead376240a69f9152bd599b9}{G}}[0] = sin(\mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa2e802ee7cc8e1ac900ba94c3ce86eb7}{Alpha}});}
+\DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa868968dead376240a69f9152bd599b9}{G}}[1] = -\/cos(\mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa2e802ee7cc8e1ac900ba94c3ce86eb7}{Alpha}});}
 
 \end{DoxyCodeInclude}
  We also set the direction of the notional wall normal vector. 
@@ -297,9 +297,9 @@ The {\ttfamily \mbox{\hyperlink{classSpineInclinedPlaneMesh}{Spine\+Inclined\+Pl
 \end{DoxyCodeInclude}
 In addition, a {\ttfamily spine\+\_\+node\+\_\+update()} function must be provided that determines how the {\ttfamily Nodes} move as functions of the {\ttfamily Spines}. 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// General node update function implements pure virtual function }}
-\DoxyCodeLine{\textcolor{comment}{ /// defined in SpineMesh base class and performs specific node update}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// actions:  along vertical spines}}
+\DoxyCodeLine{ \textcolor{comment}{/// General node update function implements pure virtual function }}
+\DoxyCodeLine{\textcolor{comment}{ /// defined in SpineMesh base class and performs specific node update}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// actions:  along vertical spines}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} spine\_node\_update(SpineNode* spine\_node\_pt)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{//Get fraction along the spine}}
@@ -343,8 +343,8 @@ Note that the specification of the Elastic\+Mesh is much simpler than that of a 
 For ease of exposition, all generic functionality is included in the {\ttfamily \mbox{\hyperlink{classInclinedPlaneProblem}{Inclined\+Plane\+Problem}}} class, which is templated by the bulk {\ttfamily ELEMENT} and the {\ttfamily INTERFACE\+\_\+\+ELEMENT}. The class includes storage for the different sub-\/meshes\+: Bulk, the Traction elements associated with the inlet and outlet, the (free) Surface elements and the point elements associated with the ends of the interface. In addition, a string {\ttfamily Output\+\_\+prefix} is used to distinguish between the output files from different formulations.  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{/// Generic problem class that will form the base class for both }}
-\DoxyCodeLine{\textcolor{comment}{/// spine and elastic mesh-\/updates of the problem.}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// Templated by the bulk element and interface element types}}
+\DoxyCodeLine{\textcolor{comment}{/// spine and elastic mesh-\/updates of the problem.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// Templated by the bulk element and interface element types}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} INTERFACE\_ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classInclinedPlaneProblem}{InclinedPlaneProblem}} : \textcolor{keyword}{public} Problem}
@@ -391,9 +391,9 @@ For ease of exposition, all generic functionality is included in the {\ttfamily 
 \end{DoxyCodeInclude}
  The function {\ttfamily make\+\_\+traction\+\_\+elements()} creates {\ttfamily Navier\+Stokes\+Traction\+Element} s adjacent to the mesh boundaries 3 (the inlet) and 1 (the inlet). These elements are added to the {\ttfamily Mesh} {\ttfamily Traction\+\_\+mesh\+\_\+pt}, which is itself constructed in the function and pointers to the appropriate traction functions are assigned. 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Function to add the traction boundary elements to boundaries}}
+\DoxyCodeLine{ \textcolor{comment}{/// Function to add the traction boundary elements to boundaries}}
 \DoxyCodeLine{\textcolor{comment}{ /// 3(inlet) and 1(outlet) of the mesh}}
-\DoxyCodeLine{ \textcolor{keywordtype}{void} make\_traction\_elements()}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} make\_traction\_elements()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{//Create a new (empty mesh)}}
 \DoxyCodeLine{   Traction\_mesh\_pt = \textcolor{keyword}{new} Mesh;}
@@ -526,7 +526,7 @@ The function {\ttfamily complete\+\_\+build()} assigns physical parameters to th
 \DoxyCodeLine{     \textcolor{comment}{//Set the Reynolds number / Froude number}}
 \DoxyCodeLine{     temp\_pt-\/>re\_invfr\_pt() = \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa6286f02b476912dd7550eced538331a}{ReInvFr}};}
 \DoxyCodeLine{     \textcolor{comment}{//Set the direction of gravity}}
-\DoxyCodeLine{     temp\_pt-\/>g\_pt() = \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ad40b4c9ef4cf48648fee0914736e7341}{G}};}
+\DoxyCodeLine{     temp\_pt-\/>g\_pt() = \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa868968dead376240a69f9152bd599b9}{G}};}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Set the boundary conditions for this problem-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
@@ -732,10 +732,10 @@ The class {\ttfamily \mbox{\hyperlink{classSpineInclinedPlaneProblem}{Spine\+Inc
 \end{DoxyCodeInclude}
  In a spine-\/based formulation, the nodal positions must be updated after every Newton step, which is achieved by overloading the function {\ttfamily Problem\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()} 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Spine heights/lengths are unknowns in the problem so their}}
-\DoxyCodeLine{\textcolor{comment}{ /// values get corrected during each Newton step. However,}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// changing their value does not automatically change the}}
-\DoxyCodeLine{\textcolor{comment}{ /// nodal positions, so we need to update all of them}}
+\DoxyCodeLine{ \textcolor{comment}{/// Spine heights/lengths are unknowns in the problem so their}}
+\DoxyCodeLine{\textcolor{comment}{ /// values get corrected during each Newton step. However,}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// changing their value does not automatically change the}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// nodal positions, so we need to update all of them}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_newton\_convergence\_check()}
 \DoxyCodeLine{  \{this-\/>Bulk\_mesh\_pt-\/>node\_update();\}}
 

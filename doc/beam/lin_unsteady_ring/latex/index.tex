@@ -7,7 +7,7 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{\textcolor{comment}{//LIC// multi-\/physics finite-\/element library, available }}
 \DoxyCodeLine{\textcolor{comment}{//LIC// at http://www.oomph-\/lib.org.}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// }}
-\DoxyCodeLine{\textcolor{comment}{//LIC// Copyright (C) 2006-\/2022 Matthias Heil and Andrew Hazel}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// Copyright (C) 2006-\/2023 Matthias Heil and Andrew Hazel}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// }}
 \DoxyCodeLine{\textcolor{comment}{//LIC// This library is free software; you can redistribute it and/or}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// modify it under the terms of the GNU Lesser General Public}}
@@ -79,46 +79,46 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Constructor: Number of elements, length of domain, flag for}}
 \DoxyCodeLine{\textcolor{comment}{ /// setting Newmark IC directly or consistently}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classElasticRingProblem_a57be33a379c1ec4418a7fb3e8db8ef2b}{ElasticRingProblem}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&N, \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&L);}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classElasticRingProblem}{ElasticRingProblem}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&N, \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&L);}
 \DoxyCodeLine{                    \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Access function for the mesh}}
-\DoxyCodeLine{\textcolor{comment}{} OneDLagrangianMesh<ELEMENT>* \mbox{\hyperlink{classElasticRingProblem_ab7e6b68cb51f8d6bc636e0f0789793ce}{mesh\_pt}}() }
+\DoxyCodeLine{\textcolor{comment}{} OneDLagrangianMesh<ELEMENT>* mesh\_pt() }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{keywordflow}{return} \textcolor{keyword}{dynamic\_cast<}OneDLagrangianMesh<ELEMENT>*\textcolor{keyword}{>}(Problem::mesh\_pt());}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update function is empty }}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticRingProblem_ab0eb0dcecfa7e9c9e52ecf319f6e873e}{actions\_after\_newton\_solve}}() \{\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_newton\_solve() \{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update function is empty }}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticRingProblem_aac5f3adac1e1a42492bd428eeb732a3d}{actions\_before\_newton\_solve}}() \{\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_newton\_solve() \{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Doc solution}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticRingProblem_a9aa904e4cf82d45711f890cd8440ced9}{doc\_solution}}(DocInfo\& doc\_info);}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} doc\_solution(DocInfo\& doc\_info);}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Do unsteady run}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticRingProblem_acd30c4363ffedbaadc1523aa8b85523b}{unsteady\_run}}();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} unsteady\_run();}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Length of domain (in terms of the Lagrangian coordinates)}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{classElasticRingProblem_a74aac22a4e8673b1e58c024610f8220f}{Length}};}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} Length;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// In which element are we applying displacement control?}}
 \DoxyCodeLine{\textcolor{comment}{ /// (here only used for doc of radius)}}
-\DoxyCodeLine{\textcolor{comment}{} ELEMENT* \mbox{\hyperlink{classElasticRingProblem_aba78b855677ef08ea3d9678dcde8a71b}{Displ\_control\_elem\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} ELEMENT* Displ\_control\_elem\_pt;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// At what local coordinate are we applying displacement control?}}
-\DoxyCodeLine{\textcolor{comment}{} Vector<double> \mbox{\hyperlink{classElasticRingProblem_a0acfcb485441bbe0c9e4202d8a5e72d3}{S\_displ\_control}};}
+\DoxyCodeLine{\textcolor{comment}{} Vector<double> S\_displ\_control;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to geometric object that represents the undeformed shape}}
-\DoxyCodeLine{\textcolor{comment}{} GeomObject* \mbox{\hyperlink{classElasticRingProblem_ab0f0f02cc67dcabfc38f051e3d3cebfc}{Undef\_geom\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} GeomObject* Undef\_geom\_pt;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to object that specifies the initial condition}}
-\DoxyCodeLine{\textcolor{comment}{} SolidInitialCondition* \mbox{\hyperlink{classElasticRingProblem_a0d314051b66afb53fa7f28c298f38206}{IC\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} SolidInitialCondition* IC\_pt;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Trace file for recording control data}}
-\DoxyCodeLine{\textcolor{comment}{} ofstream \mbox{\hyperlink{classElasticRingProblem_a7f0f8c10b57021446e19c5833863cc7f}{Trace\_file}};}
+\DoxyCodeLine{\textcolor{comment}{} ofstream Trace\_file;}
 \DoxyCodeLine{\}; \textcolor{comment}{// end of problem class}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}

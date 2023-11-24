@@ -18,7 +18,7 @@ Inheritance diagram for oomph\+::Block\+Pitch\+Fork\+Linear\+Solver\+:\begin{fig
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1BlockPitchForkLinearSolver_a9820033e85fed1a01a48ac09f27e574f}{Block\+Pitch\+Fork\+Linear\+Solver}} (\mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} $\ast$const \mbox{\hyperlink{classoomph_1_1BlockPitchForkLinearSolver_a35c2658ddd0fb46125cd458e316e9c8d}{linear\+\_\+solver\+\_\+pt}})
+\mbox{\hyperlink{classoomph_1_1BlockPitchForkLinearSolver_a9820033e85fed1a01a48ac09f27e574f}{Block\+Pitch\+Fork\+Linear\+Solver}} (\mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} $\ast$const \mbox{\hyperlink{classoomph_1_1BlockPitchForkLinearSolver_a38efead8e84202a3232b4a3624a2986c}{linear\+\_\+solver\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Constructor, inherits the original linear solver. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1BlockPitchForkLinearSolver_a3fa97815fefc83c678341222847797ea}{$\sim$\+Block\+Pitch\+Fork\+Linear\+Solver}} ()
 \begin{DoxyCompactList}\small\item\em Destructor\+: clean up the allocated memory. \end{DoxyCompactList}\item 
@@ -30,7 +30,7 @@ void \mbox{\hyperlink{classoomph_1_1BlockPitchForkLinearSolver_a45c8a56bd1942374
 \begin{DoxyCompactList}\small\item\em The linear-\/algebra-\/type solver does not make sense. The interface is deliberately broken. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BlockPitchForkLinearSolver_a9a424fd2ae0b67ef8c3ff59f16030786}{resolve}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
 \begin{DoxyCompactList}\small\item\em The resolve function also uses the block factorisation. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} $\ast$ \mbox{\hyperlink{classoomph_1_1BlockPitchForkLinearSolver_a35c2658ddd0fb46125cd458e316e9c8d}{linear\+\_\+solver\+\_\+pt}} () const
+\mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} $\ast$ \mbox{\hyperlink{classoomph_1_1BlockPitchForkLinearSolver_a38efead8e84202a3232b4a3624a2986c}{linear\+\_\+solver\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Access function to the original linear solver. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -53,7 +53,7 @@ void \mbox{\hyperlink{classoomph_1_1BlockPitchForkLinearSolver_a9a424fd2ae0b67ef
 \doxysubsection{Detailed Description}
 A custom linear solver class that is used to solve a block-\/factorised version of the Pitch\+Fork bifurcation detection problem. 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00608}{608}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 608 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -70,7 +70,7 @@ Constructor, inherits the original linear solver.
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00631}{631}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 631 of file assembly\+\_\+handler.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPitchForkLinearSolver_a3fa97815fefc83c678341222847797ea}\label{classoomph_1_1BlockPitchForkLinearSolver_a3fa97815fefc83c678341222847797ea}} 
 \index{oomph::BlockPitchForkLinearSolver@{oomph::BlockPitchForkLinearSolver}!````~BlockPitchForkLinearSolver@{$\sim$BlockPitchForkLinearSolver}}
@@ -84,20 +84,20 @@ Destructor\+: clean up the allocated memory.
 
 Clean up the memory that may have been allocated by the solver. 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l01681}{1681}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 1681 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{assembly__handler_8h_source_l00617}{B\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00620}{C\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00623}{D\+\_\+pt}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00627}{d\+Jy\+\_\+dparam\+\_\+pt}}.
+References B\+\_\+pt, C\+\_\+pt, D\+\_\+pt, and d\+Jy\+\_\+dparam\+\_\+pt.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1BlockPitchForkLinearSolver_a35c2658ddd0fb46125cd458e316e9c8d}\label{classoomph_1_1BlockPitchForkLinearSolver_a35c2658ddd0fb46125cd458e316e9c8d}} 
+\mbox{\Hypertarget{classoomph_1_1BlockPitchForkLinearSolver_a38efead8e84202a3232b4a3624a2986c}\label{classoomph_1_1BlockPitchForkLinearSolver_a38efead8e84202a3232b4a3624a2986c}} 
 \index{oomph::BlockPitchForkLinearSolver@{oomph::BlockPitchForkLinearSolver}!linear\_solver\_pt@{linear\_solver\_pt}}
 \index{linear\_solver\_pt@{linear\_solver\_pt}!oomph::BlockPitchForkLinearSolver@{oomph::BlockPitchForkLinearSolver}}
 \doxysubsubsection{\texorpdfstring{linear\_solver\_pt()}{linear\_solver\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} $\ast$ oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::linear\+\_\+solver\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}}$\ast$ oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::linear\+\_\+solver\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -105,15 +105,15 @@ Access function to the original linear solver.
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00676}{676}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 676 of file assembly\+\_\+handler.\+h.
 
 
 
-References \mbox{\hyperlink{assembly__handler_8h_source_l00611}{Linear\+\_\+solver\+\_\+pt}}.
+References Linear\+\_\+solver\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l02897}{oomph\+::\+Pitch\+Fork\+Handler\+::$\sim$\+Pitch\+Fork\+Handler()}}.
+Referenced by oomph\+::\+Pitch\+Fork\+Handler\+::$\sim$\+Pitch\+Fork\+Handler().
 
 \mbox{\Hypertarget{classoomph_1_1BlockPitchForkLinearSolver_a9a424fd2ae0b67ef8c3ff59f16030786}\label{classoomph_1_1BlockPitchForkLinearSolver_a9a424fd2ae0b67ef8c3ff59f16030786}} 
 \index{oomph::BlockPitchForkLinearSolver@{oomph::BlockPitchForkLinearSolver}!resolve@{resolve}}
@@ -131,11 +131,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033ed
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l02007}{2007}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 2007 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{problem_8h_source_l01570}{oomph\+::\+Problem\+::assembly\+\_\+handler\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00807}{oomph\+::\+Pitch\+Fork\+Handler\+::\+Augmented\+\_\+dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00617}{B\+\_\+pt}}, \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{linear__algebra__distribution_8cc_source_l00035}{oomph\+::\+Linear\+Algebra\+Distribution\+::build()}}, \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00342}{oomph\+::\+Linear\+Algebra\+Distribution\+::built()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00620}{C\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l01246}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00623}{D\+\_\+pt}}, \mbox{\hyperlink{linear__solver_8h_source_l00144}{oomph\+::\+Linear\+Solver\+::disable\+\_\+resolve()}}, \mbox{\hyperlink{problem_8h_source_l00808}{oomph\+::\+Problem\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00804}{oomph\+::\+Pitch\+Fork\+Handler\+::\+Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{double__vector_8cc_source_l00805}{oomph\+::\+Double\+Vector\+::dot()}}, \mbox{\hyperlink{linear__solver_8h_source_l00135}{oomph\+::\+Linear\+Solver\+::enable\+\_\+resolve()}}, \mbox{\hyperlink{problem_8cc_source_l07985}{oomph\+::\+Problem\+::get\+\_\+hessian\+\_\+vector\+\_\+products()}}, \mbox{\hyperlink{problem_8h_source_l00577}{oomph\+::\+Problem\+::\+Halo\+\_\+scheme\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00611}{Linear\+\_\+solver\+\_\+pt}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00193}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00614}{Problem\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00817}{oomph\+::\+Pitch\+Fork\+Handler\+::\+Psi}}, \mbox{\hyperlink{double__vector_8cc_source_l00164}{oomph\+::\+Double\+Vector\+::redistribute()}}, \mbox{\hyperlink{linear__solver_8h_source_l00225}{oomph\+::\+Linear\+Solver\+::resolve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03512}{oomph\+::\+Pitch\+Fork\+Handler\+::solve\+\_\+block\+\_\+system()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03535}{oomph\+::\+Pitch\+Fork\+Handler\+::solve\+\_\+full\+\_\+system()}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00814}{oomph\+::\+Pitch\+Fork\+Handler\+::Y}}.
+References oomph\+::\+Problem\+::assembly\+\_\+handler\+\_\+pt(), oomph\+::\+Pitch\+Fork\+Handler\+::\+Augmented\+\_\+dof\+\_\+distribution\+\_\+pt, B\+\_\+pt, oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Linear\+Algebra\+Distribution\+::build(), oomph\+::\+Double\+Vector\+::built(), oomph\+::\+Linear\+Algebra\+Distribution\+::built(), C\+\_\+pt, oomph\+::\+Problem\+::communicator\+\_\+pt(), D\+\_\+pt, oomph\+::\+Linear\+Solver\+::disable\+\_\+resolve(), oomph\+::\+Problem\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Pitch\+Fork\+Handler\+::\+Dof\+\_\+distribution\+\_\+pt, oomph\+::\+Double\+Vector\+::dot(), oomph\+::\+Linear\+Solver\+::enable\+\_\+resolve(), oomph\+::\+Problem\+::get\+\_\+hessian\+\_\+vector\+\_\+products(), oomph\+::\+Problem\+::\+Halo\+\_\+scheme\+\_\+pt, Linear\+\_\+solver\+\_\+pt, oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), Problem\+\_\+pt, oomph\+::\+Pitch\+Fork\+Handler\+::\+Psi, oomph\+::\+Double\+Vector\+::redistribute(), oomph\+::\+Linear\+Solver\+::resolve(), oomph\+::\+Pitch\+Fork\+Handler\+::solve\+\_\+block\+\_\+system(), oomph\+::\+Pitch\+Fork\+Handler\+::solve\+\_\+full\+\_\+system(), and oomph\+::\+Pitch\+Fork\+Handler\+::Y.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPitchForkLinearSolver_aaa6dbd59c0f6db8e5a19689888b17eac}\label{classoomph_1_1BlockPitchForkLinearSolver_aaa6dbd59c0f6db8e5a19689888b17eac}} 
 \index{oomph::BlockPitchForkLinearSolver@{oomph::BlockPitchForkLinearSolver}!solve@{solve}}
@@ -153,7 +153,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a546c09822d18191d
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00649}{649}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 649 of file assembly\+\_\+handler.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPitchForkLinearSolver_a45c8a56bd1942374756feb9edcfb6151}\label{classoomph_1_1BlockPitchForkLinearSolver_a45c8a56bd1942374756feb9edcfb6151}} 
 \index{oomph::BlockPitchForkLinearSolver@{oomph::BlockPitchForkLinearSolver}!solve@{solve}}
@@ -171,7 +171,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a1f7a2ee2cd18d3da
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00661}{661}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 661 of file assembly\+\_\+handler.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPitchForkLinearSolver_ad196867613954a8fabd318b50e2aadc6}\label{classoomph_1_1BlockPitchForkLinearSolver_ad196867613954a8fabd318b50e2aadc6}} 
 \index{oomph::BlockPitchForkLinearSolver@{oomph::BlockPitchForkLinearSolver}!solve@{solve}}
@@ -189,11 +189,11 @@ Implements \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485e
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l01705}{1705}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 1705 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{problem_8h_source_l01570}{oomph\+::\+Problem\+::assembly\+\_\+handler\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00807}{oomph\+::\+Pitch\+Fork\+Handler\+::\+Augmented\+\_\+dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00617}{B\+\_\+pt}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00620}{C\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l01246}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00623}{D\+\_\+pt}}, \mbox{\hyperlink{linear__solver_8h_source_l00144}{oomph\+::\+Linear\+Solver\+::disable\+\_\+resolve()}}, \mbox{\hyperlink{problem_8h_source_l00808}{oomph\+::\+Problem\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00627}{d\+Jy\+\_\+dparam\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00804}{oomph\+::\+Pitch\+Fork\+Handler\+::\+Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{double__vector_8cc_source_l00805}{oomph\+::\+Double\+Vector\+::dot()}}, \mbox{\hyperlink{linear__solver_8h_source_l00073}{oomph\+::\+Linear\+Solver\+::\+Enable\+\_\+resolve}}, \mbox{\hyperlink{linear__solver_8h_source_l00135}{oomph\+::\+Linear\+Solver\+::enable\+\_\+resolve()}}, \mbox{\hyperlink{octree_8h_source_l00074}{oomph\+::\+Oc\+Tree\+Names\+::F}}, \mbox{\hyperlink{problem_8cc_source_l07887}{oomph\+::\+Problem\+::get\+\_\+derivative\+\_\+wrt\+\_\+global\+\_\+parameter()}}, \mbox{\hyperlink{problem_8cc_source_l07985}{oomph\+::\+Problem\+::get\+\_\+hessian\+\_\+vector\+\_\+products()}}, \mbox{\hyperlink{problem_8h_source_l00577}{oomph\+::\+Problem\+::\+Halo\+\_\+scheme\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00611}{Linear\+\_\+solver\+\_\+pt}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00193}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00835}{oomph\+::\+Pitch\+Fork\+Handler\+::\+Parameter\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00614}{Problem\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00817}{oomph\+::\+Pitch\+Fork\+Handler\+::\+Psi}}, \mbox{\hyperlink{double__vector_8cc_source_l00164}{oomph\+::\+Double\+Vector\+::redistribute()}}, \mbox{\hyperlink{linear__solver_8h_source_l00225}{oomph\+::\+Linear\+Solver\+::resolve()}}, \mbox{\hyperlink{problem_8h_source_l02424}{oomph\+::\+Problem\+::sign\+\_\+of\+\_\+jacobian()}}, \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}{oomph\+::\+Linear\+Solver\+::solve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03512}{oomph\+::\+Pitch\+Fork\+Handler\+::solve\+\_\+block\+\_\+system()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03535}{oomph\+::\+Pitch\+Fork\+Handler\+::solve\+\_\+full\+\_\+system()}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00814}{oomph\+::\+Pitch\+Fork\+Handler\+::Y}}.
+References oomph\+::\+Problem\+::assembly\+\_\+handler\+\_\+pt(), oomph\+::\+Pitch\+Fork\+Handler\+::\+Augmented\+\_\+dof\+\_\+distribution\+\_\+pt, B\+\_\+pt, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution(), oomph\+::\+Double\+Vector\+::built(), C\+\_\+pt, oomph\+::\+Problem\+::communicator\+\_\+pt(), D\+\_\+pt, oomph\+::\+Linear\+Solver\+::disable\+\_\+resolve(), oomph\+::\+Problem\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), d\+Jy\+\_\+dparam\+\_\+pt, oomph\+::\+Pitch\+Fork\+Handler\+::\+Dof\+\_\+distribution\+\_\+pt, oomph\+::\+Double\+Vector\+::dot(), oomph\+::\+Linear\+Solver\+::\+Enable\+\_\+resolve, oomph\+::\+Linear\+Solver\+::enable\+\_\+resolve(), oomph\+::\+Oc\+Tree\+Names\+::F, oomph\+::\+Problem\+::get\+\_\+derivative\+\_\+wrt\+\_\+global\+\_\+parameter(), oomph\+::\+Problem\+::get\+\_\+hessian\+\_\+vector\+\_\+products(), oomph\+::\+Problem\+::\+Halo\+\_\+scheme\+\_\+pt, Linear\+\_\+solver\+\_\+pt, oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local(), oomph\+::\+Pitch\+Fork\+Handler\+::\+Parameter\+\_\+pt, Problem\+\_\+pt, oomph\+::\+Pitch\+Fork\+Handler\+::\+Psi, oomph\+::\+Double\+Vector\+::redistribute(), oomph\+::\+Linear\+Solver\+::resolve(), oomph\+::\+Problem\+::sign\+\_\+of\+\_\+jacobian(), oomph\+::\+Linear\+Solver\+::solve(), oomph\+::\+Pitch\+Fork\+Handler\+::solve\+\_\+block\+\_\+system(), oomph\+::\+Pitch\+Fork\+Handler\+::solve\+\_\+full\+\_\+system(), and oomph\+::\+Pitch\+Fork\+Handler\+::Y.
 
 
 
@@ -210,11 +210,11 @@ Pointer to the storage for the vector b.
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00617}{617}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 617 of file assembly\+\_\+handler.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l02007}{resolve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01705}{solve()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l01681}{$\sim$\+Block\+Pitch\+Fork\+Linear\+Solver()}}.
+Referenced by resolve(), solve(), and $\sim$\+Block\+Pitch\+Fork\+Linear\+Solver().
 
 \mbox{\Hypertarget{classoomph_1_1BlockPitchForkLinearSolver_ac9f8e9f84f79437b43e35ae2850ec335}\label{classoomph_1_1BlockPitchForkLinearSolver_ac9f8e9f84f79437b43e35ae2850ec335}} 
 \index{oomph::BlockPitchForkLinearSolver@{oomph::BlockPitchForkLinearSolver}!C\_pt@{C\_pt}}
@@ -228,11 +228,11 @@ Pointer to the storage for the vector c.
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00620}{620}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 620 of file assembly\+\_\+handler.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l02007}{resolve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01705}{solve()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l01681}{$\sim$\+Block\+Pitch\+Fork\+Linear\+Solver()}}.
+Referenced by resolve(), solve(), and $\sim$\+Block\+Pitch\+Fork\+Linear\+Solver().
 
 \mbox{\Hypertarget{classoomph_1_1BlockPitchForkLinearSolver_a3178ff5ce055b76423b30357022f9e58}\label{classoomph_1_1BlockPitchForkLinearSolver_a3178ff5ce055b76423b30357022f9e58}} 
 \index{oomph::BlockPitchForkLinearSolver@{oomph::BlockPitchForkLinearSolver}!D\_pt@{D\_pt}}
@@ -246,11 +246,11 @@ Pointer to the storage for the vector d.
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00623}{623}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 623 of file assembly\+\_\+handler.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l02007}{resolve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01705}{solve()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l01681}{$\sim$\+Block\+Pitch\+Fork\+Linear\+Solver()}}.
+Referenced by resolve(), solve(), and $\sim$\+Block\+Pitch\+Fork\+Linear\+Solver().
 
 \mbox{\Hypertarget{classoomph_1_1BlockPitchForkLinearSolver_a3ceff96adc374fb588f106cc3cc9b435}\label{classoomph_1_1BlockPitchForkLinearSolver_a3ceff96adc374fb588f106cc3cc9b435}} 
 \index{oomph::BlockPitchForkLinearSolver@{oomph::BlockPitchForkLinearSolver}!dJy\_dparam\_pt@{dJy\_dparam\_pt}}
@@ -264,11 +264,11 @@ Pointer to the storage for the vector of derivatives with respect to the bifurca
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00627}{627}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 627 of file assembly\+\_\+handler.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l01705}{solve()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l01681}{$\sim$\+Block\+Pitch\+Fork\+Linear\+Solver()}}.
+Referenced by solve(), and $\sim$\+Block\+Pitch\+Fork\+Linear\+Solver().
 
 \mbox{\Hypertarget{classoomph_1_1BlockPitchForkLinearSolver_afcf84124d724d6bd961870fbcdc7b9e4}\label{classoomph_1_1BlockPitchForkLinearSolver_afcf84124d724d6bd961870fbcdc7b9e4}} 
 \index{oomph::BlockPitchForkLinearSolver@{oomph::BlockPitchForkLinearSolver}!Linear\_solver\_pt@{Linear\_solver\_pt}}
@@ -282,11 +282,11 @@ Pointer to the original linear solver.
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00611}{611}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 611 of file assembly\+\_\+handler.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8h_source_l00676}{linear\+\_\+solver\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02007}{resolve()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l01705}{solve()}}.
+Referenced by linear\+\_\+solver\+\_\+pt(), resolve(), and solve().
 
 \mbox{\Hypertarget{classoomph_1_1BlockPitchForkLinearSolver_a5819a48984aa1a9a68c28e106bc22f90}\label{classoomph_1_1BlockPitchForkLinearSolver_a5819a48984aa1a9a68c28e106bc22f90}} 
 \index{oomph::BlockPitchForkLinearSolver@{oomph::BlockPitchForkLinearSolver}!Problem\_pt@{Problem\_pt}}
@@ -300,11 +300,11 @@ Pointer to the problem, used in the resolve.
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00614}{614}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 614 of file assembly\+\_\+handler.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l02007}{resolve()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l01705}{solve()}}.
+Referenced by resolve(), and solve().
 
 
 

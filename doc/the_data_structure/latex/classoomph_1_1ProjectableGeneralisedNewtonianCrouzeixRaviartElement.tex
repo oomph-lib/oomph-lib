@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement}{}\doxysection{oomph\+::Projectable\+Generalised\+Newtonian\+Crouzeix\+Raviart\+Element\texorpdfstring{$<$}{<} CROUZEIX\+\_\+\+RAVIART\+\_\+\+ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement}{}\doxysection{oomph\+::Projectable\+Generalised\+Newtonian\+Crouzeix\+Raviart\+Element$<$ CROUZEIX\+\_\+\+RAVIART\+\_\+\+ELEMENT $>$ Class Template Reference}
 \label{classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement}\index{oomph::ProjectableGeneralisedNewtonianCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$@{oomph::ProjectableGeneralisedNewtonianCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$}}
 
 
@@ -9,7 +9,7 @@ Crouzeix Raviart upgraded to become projectable.
 
 {\ttfamily \#include $<$generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Projectable\+Generalised\+Newtonian\+Crouzeix\+Raviart\+Element\texorpdfstring{$<$}{<} CROUZEIX\+\_\+\+RAVIART\+\_\+\+ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Projectable\+Generalised\+Newtonian\+Crouzeix\+Raviart\+Element$<$ CROUZEIX\+\_\+\+RAVIART\+\_\+\+ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=1.164726cm]{classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement}
@@ -20,7 +20,7 @@ Inheritance diagram for oomph\+::Projectable\+Generalised\+Newtonian\+Crouzeix\+
 \item 
 \mbox{\hyperlink{classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement_a54a4d4a9b1de6861d05c194c05540d11}{Projectable\+Generalised\+Newtonian\+Crouzeix\+Raviart\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards...\mbox{]}. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement_ac9561c0e5ac24a286fb75998934259a9}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement_a75958f0c6bc43cf63bfbc94fb575afaa}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. In the underlying Crouzeix Raviart elements the fld-\/th velocities are stored at the fld-\/th value of the nodes; the pressures are stored internally. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement_a6c8b647ec31436a5f35e4eee2cd678b6}{nfields\+\_\+for\+\_\+projection}} ()
 \begin{DoxyCompactList}\small\item\em Number of fields to be projected\+: dim+1, corresponding to velocity components and pressure. \end{DoxyCompactList}\item 
@@ -31,7 +31,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixR
 double \mbox{\hyperlink{classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement_ae766399afa32fb3e77fb0ce9f7cb8a1c}{jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field}} (const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi)
 \begin{DoxyCompactList}\small\item\em Return Jacobian of mapping and shape functions of field fld at local coordinate s. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement_a28e2853c747d88204673b6aa93f2bf62}{get\+\_\+field}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
-\begin{DoxyCompactList}\small\item\em Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: history values) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t$>$0\+: history values) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement_af5fd14a52a74dead7b8e095cb8b20cdc}{nvalue\+\_\+of\+\_\+field}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Return number of values in field fld. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement_a3bc031a4608afe535d89c3ab1b611b10}{local\+\_\+equation}} (const unsigned \&fld, const unsigned \&j)
@@ -42,9 +42,10 @@ int \mbox{\hyperlink{classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviar
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class CROUZEIX\+\_\+\+RAVIART\+\_\+\+ELEMENT$>$\newline
 class oomph\+::\+Projectable\+Generalised\+Newtonian\+Crouzeix\+Raviart\+Element$<$ CROUZEIX\+\_\+\+RAVIART\+\_\+\+ELEMENT $>$}
+
 Crouzeix Raviart upgraded to become projectable. 
 
-Definition at line \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source_l02663}{2663}} of file \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2663 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -62,17 +63,17 @@ Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards
 
 
 
-Definition at line \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source_l02669}{2669}} of file \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2669 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement_ac9561c0e5ac24a286fb75998934259a9}\label{classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement_ac9561c0e5ac24a286fb75998934259a9}} 
+\mbox{\Hypertarget{classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement_a75958f0c6bc43cf63bfbc94fb575afaa}\label{classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement_a75958f0c6bc43cf63bfbc94fb575afaa}} 
 \index{oomph::ProjectableGeneralisedNewtonianCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$@{oomph::ProjectableGeneralisedNewtonianCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$}!data\_values\_of\_field@{data\_values\_of\_field}}
 \index{data\_values\_of\_field@{data\_values\_of\_field}!oomph::ProjectableGeneralisedNewtonianCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$@{oomph::ProjectableGeneralisedNewtonianCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{data\_values\_of\_field()}{data\_values\_of\_field()}}
 {\footnotesize\ttfamily template$<$class CROUZEIX\+\_\+\+RAVIART\+\_\+\+ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement}{oomph\+::\+Projectable\+Generalised\+Newtonian\+Crouzeix\+Raviart\+Element}}$<$ CROUZEIX\+\_\+\+RAVIART\+\_\+\+ELEMENT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$std\+::pair$<$\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$, unsigned$>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement}{oomph\+::\+Projectable\+Generalised\+Newtonian\+Crouzeix\+Raviart\+Element}}$<$ CROUZEIX\+\_\+\+RAVIART\+\_\+\+ELEMENT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -80,15 +81,15 @@ Specify the values associated with field fld. The information is returned in a v
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a2292bd9c58694f89839bd7d198cfe86a}{oomph\+::\+Projectable\+Element\+Base}}.
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a63b0053dde1172be726f9a6c75fb66ea}{oomph\+::\+Projectable\+Element\+Base}}.
 
 
 
-Definition at line \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source_l02677}{2677}} of file \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2677 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l00622}{oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt(), oomph\+::\+Finite\+Element\+::nnode(), and oomph\+::\+Finite\+Element\+::node\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement_a28e2853c747d88204673b6aa93f2bf62}\label{classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement_a28e2853c747d88204673b6aa93f2bf62}} 
 \index{oomph::ProjectableGeneralisedNewtonianCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$@{oomph::ProjectableGeneralisedNewtonianCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$}!get\_field@{get\_field}}
@@ -99,7 +100,7 @@ double \mbox{\hyperlink{classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRav
 
 
 
-Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: history values) 
+Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t$>$0\+: history values) 
 
 
 
@@ -107,11 +108,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ae4da5b565b6d33
 
 
 
-Definition at line \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source_l02778}{2778}} of file \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2778 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+References oomph\+::\+Finite\+Element\+::dim(), s, and t.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement_ae766399afa32fb3e77fb0ce9f7cb8a1c}\label{classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement_ae766399afa32fb3e77fb0ce9f7cb8a1c}} 
 \index{oomph::ProjectableGeneralisedNewtonianCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$@{oomph::ProjectableGeneralisedNewtonianCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$}!jacobian\_and\_shape\_of\_field@{jacobian\_and\_shape\_of\_field}}
@@ -130,11 +131,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ad45c21b58c0985
 
 
 
-Definition at line \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source_l02743}{2743}} of file \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2743 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Finite\+Element\+::nnode(), and s.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement_a3bc031a4608afe535d89c3ab1b611b10}\label{classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement_a3bc031a4608afe535d89c3ab1b611b10}} 
 \index{oomph::ProjectableGeneralisedNewtonianCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$@{oomph::ProjectableGeneralisedNewtonianCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$}!local\_equation@{local\_equation}}
@@ -153,11 +154,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac5c27ae929ff63
 
 
 
-Definition at line \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source_l02812}{2812}} of file \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2812 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, and \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}.
+References oomph\+::\+Finite\+Element\+::dim(), and oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement_a6c8b647ec31436a5f35e4eee2cd678b6}\label{classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement_a6c8b647ec31436a5f35e4eee2cd678b6}} 
 \index{oomph::ProjectableGeneralisedNewtonianCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$@{oomph::ProjectableGeneralisedNewtonianCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$}!nfields\_for\_projection@{nfields\_for\_projection}}
@@ -176,11 +177,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a44634aa4049332
 
 
 
-Definition at line \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source_l02712}{2712}} of file \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2712 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}.
+References oomph\+::\+Finite\+Element\+::dim().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement_a20d7536f02164a9614ab0c4a15a1ad31}\label{classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement_a20d7536f02164a9614ab0c4a15a1ad31}} 
 \index{oomph::ProjectableGeneralisedNewtonianCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$@{oomph::ProjectableGeneralisedNewtonianCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$}!nhistory\_values\_for\_coordinate\_projection@{nhistory\_values\_for\_coordinate\_projection}}
@@ -199,11 +200,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ab4ecd0cd24000a
 
 
 
-Definition at line \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source_l02736}{2736}} of file \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2736 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, and \mbox{\hyperlink{nodes_8h_source_l01022}{oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt()}}.
+References oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Time\+Stepper\+::ntstorage(), and oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement_aa1351493ce07955f66bcc56b4a2beabf}\label{classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement_aa1351493ce07955f66bcc56b4a2beabf}} 
 \index{oomph::ProjectableGeneralisedNewtonianCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$@{oomph::ProjectableGeneralisedNewtonianCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$}!nhistory\_values\_for\_projection@{nhistory\_values\_for\_projection}}
@@ -222,11 +223,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac6790f394630b9
 
 
 
-Definition at line \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source_l02721}{2721}} of file \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2721 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8cc_source_l00879}{oomph\+::\+Data\+::ntstorage()}}.
+References oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Data\+::ntstorage().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement_af5fd14a52a74dead7b8e095cb8b20cdc}\label{classoomph_1_1ProjectableGeneralisedNewtonianCrouzeixRaviartElement_af5fd14a52a74dead7b8e095cb8b20cdc}} 
 \index{oomph::ProjectableGeneralisedNewtonianCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$@{oomph::ProjectableGeneralisedNewtonianCrouzeixRaviartElement$<$ CROUZEIX\_RAVIART\_ELEMENT $>$}!nvalue\_of\_field@{nvalue\_of\_field}}
@@ -245,11 +246,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a1a9a6de16f3511
 
 
 
-Definition at line \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source_l02798}{2798}} of file \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2798 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, and \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}.
+References oomph\+::\+Finite\+Element\+::dim(), and oomph\+::\+Finite\+Element\+::nnode().
 
 
 

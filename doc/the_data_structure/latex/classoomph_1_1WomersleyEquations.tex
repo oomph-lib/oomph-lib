@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1WomersleyEquations}{}\doxysection{oomph\+::Womersley\+Equations\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1WomersleyEquations}{}\doxysection{oomph\+::Womersley\+Equations$<$ DIM $>$ Class Template Reference}
 \label{classoomph_1_1WomersleyEquations}\index{oomph::WomersleyEquations$<$ DIM $>$@{oomph::WomersleyEquations$<$ DIM $>$}}
 
 
@@ -9,7 +9,7 @@
 
 {\ttfamily \#include $<$womersley\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Womersley\+Equations\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Womersley\+Equations$<$ DIM $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=3.696370cm]{classoomph_1_1WomersleyEquations}
@@ -26,11 +26,11 @@ void \mbox{\hyperlink{classoomph_1_1WomersleyEquations_a0a7de5ca3eb772d38c1f9efa
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1WomersleyEquations_ada82ee649d9a6d7469166fd497222594}{set\+\_\+pressure\+\_\+gradient\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$\&pressure\+\_\+gradient\+\_\+data\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Set pointer to pressure gradient (single-\/valued \mbox{\hyperlink{classoomph_1_1Data}{Data}}) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1WomersleyEquations_afacfc8be5c5bb9316d8542446436d4a3}{set\+\_\+pressure\+\_\+gradient\+\_\+pt}} () const
+\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1WomersleyEquations_a72c6fc82b100bd997a6d707d8bccd9d2}{set\+\_\+pressure\+\_\+gradient\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Read-\/only access to pointer to pressure gradient. \end{DoxyCompactList}\item 
-const double \& \mbox{\hyperlink{classoomph_1_1WomersleyEquations_af4d89aa14f8989f29fd5f029ab93409d}{re\+\_\+st}} () const
+const double \& \mbox{\hyperlink{classoomph_1_1WomersleyEquations_a4db194b9f71a69779b3450d40288b55d}{re\+\_\+st}} () const
 \begin{DoxyCompactList}\small\item\em Product of Reynolds and Strouhal number (=Womersley number) \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1WomersleyEquations_aa64f22f3ab2a81d3626901f1a546f01a}{re\+\_\+st\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1WomersleyEquations_aec3a88cf82056c894e7503f791328ad9}{re\+\_\+st\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to product of Reynolds and Strouhal number (=Womersley number) \end{DoxyCompactList}\item 
 virtual unsigned \mbox{\hyperlink{classoomph_1_1WomersleyEquations_afd739de1c8e01b1d9409c05db9ced366}{u\+\_\+index\+\_\+womersley}} () const
 \begin{DoxyCompactList}\small\item\em Return the index at which the unknown value is stored. The default value, 0, is appropriate for single-\/physics problems, when there is only one variable, the value that satisfies the Womersley equation. In derived multi-\/physics elements, this function should be overloaded to reflect the chosen storage scheme. Note that these equations require that the unknown is always stored at the same index at each node. \end{DoxyCompactList}\item 
@@ -103,6 +103,7 @@ void \mbox{\hyperlink{classoomph_1_1WomersleyEquations_ae4c9206bebee065874acb318
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$unsigned DIM$>$\newline
 class oomph\+::\+Womersley\+Equations$<$ DIM $>$}
+
 ////////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////// 
 
 A class for all isoparametric elements that solve the Womersley (parallel flow) equations. \[ Re St \frac{\partial u}{\partial t} = - g + \frac{\partial^2 u}{\partial x_i^2} \] which may be derived from the full Navier-\/\+Stokes equations (with a viscous scaling of the pressure) under the assumption of parallel flow in the z direction. u then represents the axial velocity and g is the (spatially constant) axial component of the pressure gradient.
@@ -113,7 +114,7 @@ Generally, the instantaneous value of the pressure gradient, g, is prescribed (a
 
 It is also possible to prescribe the flow rate through a mesh of Womersley elements and to determine the pressure gradient required to achieve this flow rate as an unknown. In that case the external pressure is treated as an external \mbox{\hyperlink{classoomph_1_1Data}{Data}} object that an associated \mbox{\hyperlink{classoomph_1_1ImposeFluxForWomersleyElement}{Impose\+Flux\+For\+Womersley\+Element}} is in charge of. Note that only the \mbox{\hyperlink{classoomph_1_1ImposeFluxForWomersleyElement}{Impose\+Flux\+For\+Womersley\+Element}} can set the pressure gradient \mbox{\hyperlink{classoomph_1_1Data}{Data}} object as external \mbox{\hyperlink{classoomph_1_1Data}{Data}}. This is because (counter to general practice) the \mbox{\hyperlink{classoomph_1_1WomersleyEquations}{Womersley\+Equations}} make contributions to the residuals of the Impose\+Flux\+For\+Womersley\+Elements in order to keep the elemental Jacobians as small as possible. 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00185}{185}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 185 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -131,11 +132,11 @@ Constructor\+: Initialises the Pressure\+\_\+gradient\+\_\+data\+\_\+pt to null.
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00189}{189}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 189 of file womersley\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{womersley__elements_8h_source_l00459}{oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::\+Default\+\_\+\+Re\+St\+\_\+value}}, and \mbox{\hyperlink{womersley__elements_8h_source_l00456}{oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::\+Re\+St\+\_\+pt}}.
+References oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::\+Default\+\_\+\+Re\+St\+\_\+value, and oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::\+Re\+St\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1WomersleyEquations_af8c99db53ace8bd83990b65e5348e8d5}\label{classoomph_1_1WomersleyEquations_af8c99db53ace8bd83990b65e5348e8d5}} 
 \index{oomph::WomersleyEquations$<$ DIM $>$@{oomph::WomersleyEquations$<$ DIM $>$}!WomersleyEquations@{WomersleyEquations}}
@@ -170,11 +171,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a73c79a1f1e5b1d3
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8cc_source_l00524}{524}} of file \mbox{\hyperlink{womersley__elements_8cc_source}{womersley\+\_\+elements.\+cc}}.
+Definition at line 524 of file womersley\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
+References i, s, and oomph\+::\+Quad\+Tree\+Names\+::W.
 
 \mbox{\Hypertarget{classoomph_1_1WomersleyEquations_a5db020d180881321f3dbd18e2971c407}\label{classoomph_1_1WomersleyEquations_a5db020d180881321f3dbd18e2971c407}} 
 \index{oomph::WomersleyEquations$<$ DIM $>$@{oomph::WomersleyEquations$<$ DIM $>$}!compute\_error@{compute\_error}}
@@ -195,11 +196,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a7f67853506dc73f
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8cc_source_l00603}{603}} of file \mbox{\hyperlink{womersley__elements_8cc_source}{womersley\+\_\+elements.\+cc}}.
+Definition at line 603 of file womersley\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
+References i, s, and oomph\+::\+Quad\+Tree\+Names\+::W.
 
 \mbox{\Hypertarget{classoomph_1_1WomersleyEquations_a5f8bd506dbebc304f30f86ef4acfbd9d}\label{classoomph_1_1WomersleyEquations_a5f8bd506dbebc304f30f86ef4acfbd9d}} 
 \index{oomph::WomersleyEquations$<$ DIM $>$@{oomph::WomersleyEquations$<$ DIM $>$}!dshape\_and\_dtest\_eulerian\_at\_knot\_womersley@{dshape\_and\_dtest\_eulerian\_at\_knot\_womersley}}
@@ -214,7 +215,7 @@ Shape/test functions and derivs w.\+r.\+t. to global coords at integration point
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1TWomersleyElement_a497b00b2f011802e86fa8a0ad45546e7}{oomph\+::\+TWomersley\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1QWomersleyElement_a5c4db93fb861995c7910ffe44751f449}{oomph\+::\+QWomersley\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1QWomersleyElement_a5c4db93fb861995c7910ffe44751f449}{oomph\+::\+QWomersley\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1TWomersleyElement_a497b00b2f011802e86fa8a0ad45546e7}{oomph\+::\+TWomersley\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}.
 
 \mbox{\Hypertarget{classoomph_1_1WomersleyEquations_a26d31e02c3fb483c76402823e09d67c7}\label{classoomph_1_1WomersleyEquations_a26d31e02c3fb483c76402823e09d67c7}} 
 \index{oomph::WomersleyEquations$<$ DIM $>$@{oomph::WomersleyEquations$<$ DIM $>$}!dshape\_and\_dtest\_eulerian\_womersley@{dshape\_and\_dtest\_eulerian\_womersley}}
@@ -229,7 +230,7 @@ Shape/test functions and derivs w.\+r.\+t. to global coords at local coord. s; r
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1TWomersleyElement_a745f06fe3f040dfe800fb09be9f38f1e}{oomph\+::\+TWomersley\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1QWomersleyElement_afe507e9f0d7359d47c0c682fed7c952b}{oomph\+::\+QWomersley\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1QWomersleyElement_afe507e9f0d7359d47c0c682fed7c952b}{oomph\+::\+QWomersley\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1TWomersleyElement_a745f06fe3f040dfe800fb09be9f38f1e}{oomph\+::\+TWomersley\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}.
 
 \mbox{\Hypertarget{classoomph_1_1WomersleyEquations_a6012a6010fc26e347214492f6c590e74}\label{classoomph_1_1WomersleyEquations_a6012a6010fc26e347214492f6c590e74}} 
 \index{oomph::WomersleyEquations$<$ DIM $>$@{oomph::WomersleyEquations$<$ DIM $>$}!du\_dt\_womersley@{du\_dt\_womersley}}
@@ -244,11 +245,11 @@ du/dt at local node n. Uses suitably interpolated value for hanging nodes.
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00253}{253}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 253 of file womersley\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{timesteppers_8h_source_l00389}{oomph\+::\+Time\+Stepper\+::is\+\_\+steady()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00238}{oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{womersley__elements_8h_source_l00245}{oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+womersley()}}, and \mbox{\hyperlink{timesteppers_8h_source_l00594}{oomph\+::\+Time\+Stepper\+::weight()}}.
+References oomph\+::\+Time\+Stepper\+::is\+\_\+steady(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Time\+Stepper\+::ntstorage(), t, oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt(), oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt(), oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+womersley(), and oomph\+::\+Time\+Stepper\+::weight().
 
 \mbox{\Hypertarget{classoomph_1_1WomersleyEquations_a4a0779392d756b1450d17879d0c10027}\label{classoomph_1_1WomersleyEquations_a4a0779392d756b1450d17879d0c10027}} 
 \index{oomph::WomersleyEquations$<$ DIM $>$@{oomph::WomersleyEquations$<$ DIM $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
@@ -267,11 +268,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00386}{386}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 386 of file womersley\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{womersley__elements_8cc_source_l00067}{oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+womersley()}}.
+References oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+womersley().
 
 \mbox{\Hypertarget{classoomph_1_1WomersleyEquations_ad0c342503c279bc697530d87059e7d48}\label{classoomph_1_1WomersleyEquations_ad0c342503c279bc697530d87059e7d48}} 
 \index{oomph::WomersleyEquations$<$ DIM $>$@{oomph::WomersleyEquations$<$ DIM $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
@@ -290,11 +291,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00376}{376}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 376 of file womersley\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00227}{oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix}}, and \mbox{\hyperlink{womersley__elements_8cc_source_l00067}{oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+womersley()}}.
+References oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix, and oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+womersley().
 
 \mbox{\Hypertarget{classoomph_1_1WomersleyEquations_a5aebac86c117c1cc99437d26686d000e}\label{classoomph_1_1WomersleyEquations_a5aebac86c117c1cc99437d26686d000e}} 
 \index{oomph::WomersleyEquations$<$ DIM $>$@{oomph::WomersleyEquations$<$ DIM $>$}!fill\_in\_generic\_residual\_contribution\_womersley@{fill\_in\_generic\_residual\_contribution\_womersley}}
@@ -313,15 +314,15 @@ flag=1\+: compute both flag=0\+: compute only residual \mbox{\hyperlink{classoom
 
 Pure version without hanging nodes 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8cc_source_l00067}{67}} of file \mbox{\hyperlink{womersley__elements_8cc_source}{womersley\+\_\+elements.\+cc}}.
+Definition at line 67 of file womersley\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
+References i, s, and oomph\+::\+Quad\+Tree\+Names\+::W.
 
 
 
-Referenced by \mbox{\hyperlink{womersley__elements_8h_source_l00386}{oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, and \mbox{\hyperlink{womersley__elements_8h_source_l00376}{oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
+Referenced by oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
 
 \mbox{\Hypertarget{classoomph_1_1WomersleyEquations_a5dccff3c238209806fefdebbbef91756}\label{classoomph_1_1WomersleyEquations_a5dccff3c238209806fefdebbbef91756}} 
 \index{oomph::WomersleyEquations$<$ DIM $>$@{oomph::WomersleyEquations$<$ DIM $>$}!get\_flux@{get\_flux}}
@@ -336,11 +337,11 @@ Get flux\+: flux\mbox{[}i\mbox{]} = du/dx\+\_\+i.
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00342}{342}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 342 of file womersley\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l03298}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{womersley__elements_8h_source_l00245}{oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+womersley()}}.
+References oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), s, and oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+womersley().
 
 \mbox{\Hypertarget{classoomph_1_1WomersleyEquations_ab04034e44e876ea9935a4ae102c34ce9}\label{classoomph_1_1WomersleyEquations_ab04034e44e876ea9935a4ae102c34ce9}} 
 \index{oomph::WomersleyEquations$<$ DIM $>$@{oomph::WomersleyEquations$<$ DIM $>$}!get\_volume\_flux@{get\_volume\_flux}}
@@ -355,15 +356,15 @@ Compute total volume flux through element.
 
 Compute volume flux through element. 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8cc_source_l00219}{219}} of file \mbox{\hyperlink{womersley__elements_8cc_source}{womersley\+\_\+elements.\+cc}}.
+Definition at line 219 of file womersley\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
+References i, s, and oomph\+::\+Quad\+Tree\+Names\+::W.
 
 
 
-Referenced by \mbox{\hyperlink{womersley__elements_8h_source_l00553}{oomph\+::\+Impose\+Flux\+For\+Womersley\+Element$<$ DIM $>$\+::total\+\_\+volume\+\_\+flux()}}.
+Referenced by oomph\+::\+Impose\+Flux\+For\+Womersley\+Element$<$ DIM $>$\+::total\+\_\+volume\+\_\+flux().
 
 \mbox{\Hypertarget{classoomph_1_1WomersleyEquations_a6b45d8a95f8f811e766fcf3466bfeb09}\label{classoomph_1_1WomersleyEquations_a6b45d8a95f8f811e766fcf3466bfeb09}} 
 \index{oomph::WomersleyEquations$<$ DIM $>$@{oomph::WomersleyEquations$<$ DIM $>$}!interpolated\_u\_womersley@{interpolated\_u\_womersley}}
@@ -378,11 +379,11 @@ Return FE representation of function value u(s) at local coordinate s.
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00395}{395}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 395 of file womersley\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{womersley__elements_8h_source_l00245}{oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+womersley()}}.
+References oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), s, oomph\+::\+Finite\+Element\+::shape(), and oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+womersley().
 
 \mbox{\Hypertarget{classoomph_1_1WomersleyEquations_a0a7de5ca3eb772d38c1f9efa5b1786ee}\label{classoomph_1_1WomersleyEquations_a0a7de5ca3eb772d38c1f9efa5b1786ee}} 
 \index{oomph::WomersleyEquations$<$ DIM $>$@{oomph::WomersleyEquations$<$ DIM $>$}!operator=@{operator=}}
@@ -416,11 +417,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QWomersleyElement_a2d73507033cac
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00300}{300}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 300 of file womersley\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{womersley__elements_8h_source_l00282}{oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::output()}}.
+References oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1WomersleyEquations_ad5254560613d0c22280f15cc9cb42dc7}\label{classoomph_1_1WomersleyEquations_ad5254560613d0c22280f15cc9cb42dc7}} 
 \index{oomph::WomersleyEquations$<$ DIM $>$@{oomph::WomersleyEquations$<$ DIM $>$}!output@{output}}
@@ -447,11 +448,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QWomersleyElement_aedac8e0c2b41e
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8cc_source_l00382}{382}} of file \mbox{\hyperlink{womersley__elements_8cc_source}{womersley\+\_\+elements.\+cc}}.
+Definition at line 382 of file womersley\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References i, and s.
 
 \mbox{\Hypertarget{classoomph_1_1WomersleyEquations_a9c1246d883f937888bf052b7078aee9a}\label{classoomph_1_1WomersleyEquations_a9c1246d883f937888bf052b7078aee9a}} 
 \index{oomph::WomersleyEquations$<$ DIM $>$@{oomph::WomersleyEquations$<$ DIM $>$}!output@{output}}
@@ -474,15 +475,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QWomersleyElement_a5a8951b6a947e
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00282}{282}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 282 of file womersley\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{womersley__elements_8h_source_l00282}{oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::output()}}.
-
-
-
-Referenced by \mbox{\hyperlink{Twomersley__elements_8h_source_l00086}{oomph\+::\+TWomersley\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::output()}}, \mbox{\hyperlink{womersley__elements_8h_source_l00282}{oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::output()}}, and \mbox{\hyperlink{womersley__elements_8h_source_l00660}{oomph\+::\+QWomersley\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::output()}}.
+Referenced by oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::output(), oomph\+::\+TWomersley\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::output(), and oomph\+::\+QWomersley\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1WomersleyEquations_acf07411d652b5c2fc16d5dc309eb6ffc}\label{classoomph_1_1WomersleyEquations_acf07411d652b5c2fc16d5dc309eb6ffc}} 
 \index{oomph::WomersleyEquations$<$ DIM $>$@{oomph::WomersleyEquations$<$ DIM $>$}!output@{output}}
@@ -509,11 +506,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QWomersleyElement_a98968ff614577
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8cc_source_l00346}{346}} of file \mbox{\hyperlink{womersley__elements_8cc_source}{womersley\+\_\+elements.\+cc}}.
+Definition at line 346 of file womersley\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References i, and s.
 
 \mbox{\Hypertarget{classoomph_1_1WomersleyEquations_af97b58e933b49d84f2eda3c10fec9cd1}\label{classoomph_1_1WomersleyEquations_af97b58e933b49d84f2eda3c10fec9cd1}} 
 \index{oomph::WomersleyEquations$<$ DIM $>$@{oomph::WomersleyEquations$<$ DIM $>$}!output\_3d@{output\_3d}}
@@ -528,11 +525,11 @@ Output function\+: x,y,z\+\_\+out,0,0,u,0 to allow comparison against full Navie
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8cc_source_l00308}{308}} of file \mbox{\hyperlink{womersley__elements_8cc_source}{womersley\+\_\+elements.\+cc}}.
+Definition at line 308 of file womersley\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References i, and s.
 
 \mbox{\Hypertarget{classoomph_1_1WomersleyEquations_ab1468b769eeb97f0a603526531e01564}\label{classoomph_1_1WomersleyEquations_ab1468b769eeb97f0a603526531e01564}} 
 \index{oomph::WomersleyEquations$<$ DIM $>$@{oomph::WomersleyEquations$<$ DIM $>$}!output\_fct@{output\_fct}}
@@ -555,15 +552,15 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2a8426dccd57b92
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1TWomersleyElement_a2ff66a70ff364d1ddfc0ef0a99ad70cb}{oomph\+::\+TWomersley\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1QWomersleyElement_a2730f3cf9212c0b5cbc22939a376af07}{oomph\+::\+QWomersley\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1QWomersleyElement_a2730f3cf9212c0b5cbc22939a376af07}{oomph\+::\+QWomersley\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1TWomersleyElement_a2ff66a70ff364d1ddfc0ef0a99ad70cb}{oomph\+::\+TWomersley\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8cc_source_l00470}{470}} of file \mbox{\hyperlink{womersley__elements_8cc_source}{womersley\+\_\+elements.\+cc}}.
+Definition at line 470 of file womersley\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References i, and s.
 
 \mbox{\Hypertarget{classoomph_1_1WomersleyEquations_aebc178cae7a5f50da1f76eed2ea3972d}\label{classoomph_1_1WomersleyEquations_aebc178cae7a5f50da1f76eed2ea3972d}} 
 \index{oomph::WomersleyEquations$<$ DIM $>$@{oomph::WomersleyEquations$<$ DIM $>$}!output\_fct@{output\_fct}}
@@ -590,22 +587,22 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QWomersleyElement_ae15d32d03c1e6
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8cc_source_l00418}{418}} of file \mbox{\hyperlink{womersley__elements_8cc_source}{womersley\+\_\+elements.\+cc}}.
+Definition at line 418 of file womersley\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References i, and s.
 
 
 
-Referenced by \mbox{\hyperlink{Twomersley__elements_8h_source_l00118}{oomph\+::\+TWomersley\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::output\+\_\+fct()}}, and \mbox{\hyperlink{womersley__elements_8h_source_l00692}{oomph\+::\+QWomersley\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::output\+\_\+fct()}}.
+Referenced by oomph\+::\+TWomersley\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::output\+\_\+fct(), and oomph\+::\+QWomersley\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::output\+\_\+fct().
 
-\mbox{\Hypertarget{classoomph_1_1WomersleyEquations_af4d89aa14f8989f29fd5f029ab93409d}\label{classoomph_1_1WomersleyEquations_af4d89aa14f8989f29fd5f029ab93409d}} 
+\mbox{\Hypertarget{classoomph_1_1WomersleyEquations_a4db194b9f71a69779b3450d40288b55d}\label{classoomph_1_1WomersleyEquations_a4db194b9f71a69779b3450d40288b55d}} 
 \index{oomph::WomersleyEquations$<$ DIM $>$@{oomph::WomersleyEquations$<$ DIM $>$}!re\_st@{re\_st}}
 \index{re\_st@{re\_st}!oomph::WomersleyEquations$<$ DIM $>$@{oomph::WomersleyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{re\_st()}{re\_st()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-const double \& \mbox{\hyperlink{classoomph_1_1WomersleyEquations}{oomph\+::\+Womersley\+Equations}}$<$ DIM $>$\+::re\+\_\+st (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+const double\& \mbox{\hyperlink{classoomph_1_1WomersleyEquations}{oomph\+::\+Womersley\+Equations}}$<$ DIM $>$\+::re\+\_\+st (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -613,18 +610,18 @@ Product of Reynolds and Strouhal number (=Womersley number)
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00225}{225}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 225 of file womersley\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{womersley__elements_8h_source_l00456}{oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::\+Re\+St\+\_\+pt}}.
+References oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::\+Re\+St\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1WomersleyEquations_aa64f22f3ab2a81d3626901f1a546f01a}\label{classoomph_1_1WomersleyEquations_aa64f22f3ab2a81d3626901f1a546f01a}} 
+\mbox{\Hypertarget{classoomph_1_1WomersleyEquations_aec3a88cf82056c894e7503f791328ad9}\label{classoomph_1_1WomersleyEquations_aec3a88cf82056c894e7503f791328ad9}} 
 \index{oomph::WomersleyEquations$<$ DIM $>$@{oomph::WomersleyEquations$<$ DIM $>$}!re\_st\_pt@{re\_st\_pt}}
 \index{re\_st\_pt@{re\_st\_pt}!oomph::WomersleyEquations$<$ DIM $>$@{oomph::WomersleyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{re\_st\_pt()}{re\_st\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1WomersleyEquations}{oomph\+::\+Womersley\+Equations}}$<$ DIM $>$\+::re\+\_\+st\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+double$\ast$\& \mbox{\hyperlink{classoomph_1_1WomersleyEquations}{oomph\+::\+Womersley\+Equations}}$<$ DIM $>$\+::re\+\_\+st\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -632,11 +629,11 @@ Pointer to product of Reynolds and Strouhal number (=Womersley number)
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00232}{232}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 232 of file womersley\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{womersley__elements_8h_source_l00456}{oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::\+Re\+St\+\_\+pt}}.
+References oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::\+Re\+St\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1WomersleyEquations_acdcc63b1f495caa704aec0c5c170b030}\label{classoomph_1_1WomersleyEquations_acdcc63b1f495caa704aec0c5c170b030}} 
 \index{oomph::WomersleyEquations$<$ DIM $>$@{oomph::WomersleyEquations$<$ DIM $>$}!self\_test@{self\_test}}
@@ -655,11 +652,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_af94c5a5e22175d5
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8cc_source_l00281}{281}} of file \mbox{\hyperlink{womersley__elements_8cc_source}{womersley\+\_\+elements.\+cc}}.
+Definition at line 281 of file womersley\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l04440}{oomph\+::\+Finite\+Element\+::self\+\_\+test()}}.
+References oomph\+::\+Finite\+Element\+::self\+\_\+test().
 
 \mbox{\Hypertarget{classoomph_1_1WomersleyEquations_ae4c9206bebee065874acb318d2abf20d}\label{classoomph_1_1WomersleyEquations_ae4c9206bebee065874acb318d2abf20d}} 
 \index{oomph::WomersleyEquations$<$ DIM $>$@{oomph::WomersleyEquations$<$ DIM $>$}!set\_pressure\_gradient\_and\_add\_as\_external\_data@{set\_pressure\_gradient\_and\_add\_as\_external\_data}}
@@ -674,22 +671,22 @@ Set pointer to pressure gradient (single-\/valued \mbox{\hyperlink{classoomph_1_
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00478}{478}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 478 of file womersley\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l00307}{oomph\+::\+Generalised\+Element\+::add\+\_\+external\+\_\+data()}}, and \mbox{\hyperlink{womersley__elements_8h_source_l00453}{oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::\+Pressure\+\_\+gradient\+\_\+data\+\_\+pt}}.
+References oomph\+::\+Generalised\+Element\+::add\+\_\+external\+\_\+data(), and oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::\+Pressure\+\_\+gradient\+\_\+data\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{womersley__elements_8h_source_l00510}{oomph\+::\+Impose\+Flux\+For\+Womersley\+Element$<$ DIM $>$\+::\+Impose\+Flux\+For\+Womersley\+Element()}}.
+Referenced by oomph\+::\+Impose\+Flux\+For\+Womersley\+Element$<$ DIM $>$\+::\+Impose\+Flux\+For\+Womersley\+Element().
 
-\mbox{\Hypertarget{classoomph_1_1WomersleyEquations_afacfc8be5c5bb9316d8542446436d4a3}\label{classoomph_1_1WomersleyEquations_afacfc8be5c5bb9316d8542446436d4a3}} 
+\mbox{\Hypertarget{classoomph_1_1WomersleyEquations_a72c6fc82b100bd997a6d707d8bccd9d2}\label{classoomph_1_1WomersleyEquations_a72c6fc82b100bd997a6d707d8bccd9d2}} 
 \index{oomph::WomersleyEquations$<$ DIM $>$@{oomph::WomersleyEquations$<$ DIM $>$}!set\_pressure\_gradient\_pt@{set\_pressure\_gradient\_pt}}
 \index{set\_pressure\_gradient\_pt@{set\_pressure\_gradient\_pt}!oomph::WomersleyEquations$<$ DIM $>$@{oomph::WomersleyEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{set\_pressure\_gradient\_pt()}{set\_pressure\_gradient\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1WomersleyEquations}{oomph\+::\+Womersley\+Equations}}$<$ DIM $>$\+::set\+\_\+pressure\+\_\+gradient\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$ \mbox{\hyperlink{classoomph_1_1WomersleyEquations}{oomph\+::\+Womersley\+Equations}}$<$ DIM $>$\+::set\+\_\+pressure\+\_\+gradient\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -697,11 +694,11 @@ Read-\/only access to pointer to pressure gradient.
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00218}{218}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 218 of file womersley\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{womersley__elements_8h_source_l00453}{oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::\+Pressure\+\_\+gradient\+\_\+data\+\_\+pt}}.
+References oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::\+Pressure\+\_\+gradient\+\_\+data\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1WomersleyEquations_ada82ee649d9a6d7469166fd497222594}\label{classoomph_1_1WomersleyEquations_ada82ee649d9a6d7469166fd497222594}} 
 \index{oomph::WomersleyEquations$<$ DIM $>$@{oomph::WomersleyEquations$<$ DIM $>$}!set\_pressure\_gradient\_pt@{set\_pressure\_gradient\_pt}}
@@ -716,11 +713,11 @@ Set pointer to pressure gradient (single-\/valued \mbox{\hyperlink{classoomph_1_
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00202}{202}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 202 of file womersley\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}, and \mbox{\hyperlink{womersley__elements_8h_source_l00453}{oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::\+Pressure\+\_\+gradient\+\_\+data\+\_\+pt}}.
+References oomph\+::\+Data\+::nvalue(), and oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::\+Pressure\+\_\+gradient\+\_\+data\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1WomersleyEquations_afd739de1c8e01b1d9409c05db9ced366}\label{classoomph_1_1WomersleyEquations_afd739de1c8e01b1d9409c05db9ced366}} 
 \index{oomph::WomersleyEquations$<$ DIM $>$@{oomph::WomersleyEquations$<$ DIM $>$}!u\_index\_womersley@{u\_index\_womersley}}
@@ -735,11 +732,11 @@ Return the index at which the unknown value is stored. The default value, 0, is 
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00245}{245}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 245 of file womersley\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{womersley__elements_8h_source_l00253}{oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::du\+\_\+dt\+\_\+womersley()}}, \mbox{\hyperlink{womersley__elements_8h_source_l00342}{oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::get\+\_\+flux()}}, and \mbox{\hyperlink{womersley__elements_8h_source_l00395}{oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::interpolated\+\_\+u\+\_\+womersley()}}.
+Referenced by oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::du\+\_\+dt\+\_\+womersley(), oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::get\+\_\+flux(), and oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::interpolated\+\_\+u\+\_\+womersley().
 
 
 
@@ -754,7 +751,7 @@ friend class \mbox{\hyperlink{classoomph_1_1ImposeFluxForWomersleyElement}{Impos
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00463}{463}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 463 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -772,11 +769,11 @@ Static default value for the Womersley number.
 
 Default Womersley number. 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00459}{459}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 459 of file womersley\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{womersley__elements_8h_source_l00189}{oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::\+Womersley\+Equations()}}.
+Referenced by oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::\+Womersley\+Equations().
 
 \mbox{\Hypertarget{classoomph_1_1WomersleyEquations_acf9f462d481937ec282ccb48c34e77bc}\label{classoomph_1_1WomersleyEquations_acf9f462d481937ec282ccb48c34e77bc}} 
 \index{oomph::WomersleyEquations$<$ DIM $>$@{oomph::WomersleyEquations$<$ DIM $>$}!Pressure\_gradient\_data\_pt@{Pressure\_gradient\_data\_pt}}
@@ -791,11 +788,11 @@ Pointer to pressure gradient \mbox{\hyperlink{classoomph_1_1Data}{Data}} (single
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00453}{453}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 453 of file womersley\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{womersley__elements_8h_source_l00478}{oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::set\+\_\+pressure\+\_\+gradient\+\_\+and\+\_\+add\+\_\+as\+\_\+external\+\_\+data()}}, and \mbox{\hyperlink{womersley__elements_8h_source_l00202}{oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::set\+\_\+pressure\+\_\+gradient\+\_\+pt()}}.
+Referenced by oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::set\+\_\+pressure\+\_\+gradient\+\_\+and\+\_\+add\+\_\+as\+\_\+external\+\_\+data(), and oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::set\+\_\+pressure\+\_\+gradient\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1WomersleyEquations_af6aa8745284573bf740816c394fa5437}\label{classoomph_1_1WomersleyEquations_af6aa8745284573bf740816c394fa5437}} 
 \index{oomph::WomersleyEquations$<$ DIM $>$@{oomph::WomersleyEquations$<$ DIM $>$}!ReSt\_pt@{ReSt\_pt}}
@@ -810,11 +807,11 @@ Pointer to global Reynolds number x Strouhal number (=Womersley)
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00456}{456}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 456 of file womersley\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{womersley__elements_8h_source_l00225}{oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::re\+\_\+st()}}, \mbox{\hyperlink{womersley__elements_8h_source_l00232}{oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::re\+\_\+st\+\_\+pt()}}, and \mbox{\hyperlink{womersley__elements_8h_source_l00189}{oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::\+Womersley\+Equations()}}.
+Referenced by oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::re\+\_\+st(), oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::re\+\_\+st\+\_\+pt(), and oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::\+Womersley\+Equations().
 
 
 

@@ -1,11 +1,11 @@
-\hypertarget{classTurekProblem}{}\doxysection{Turek\+Problem\texorpdfstring{$<$}{<} FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classTurekProblem}{}\doxysection{Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$ Class Template Reference}
 \label{classTurekProblem}\index{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}}
 
 
 //////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////  
 
 
-Inheritance diagram for Turek\+Problem\texorpdfstring{$<$}{<} FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{classTurekProblem}
@@ -16,11 +16,11 @@ Inheritance diagram for Turek\+Problem\texorpdfstring{$<$}{<} FLUID\+\_\+\+ELEME
 \item 
 \mbox{\hyperlink{classTurekProblem_a69f6624fd854393f0c0e5303603ec749}{Turek\+Problem}} (const double \&length, const double \&height)
 \begin{DoxyCompactList}\small\item\em Constructor\+: Pass length and height of domain. \end{DoxyCompactList}\item 
-Refineable\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ FLUID\+\_\+\+ELEMENT $>$ $\ast$ \mbox{\hyperlink{classTurekProblem_a3b4ac71e11bcded191a0711ff1d475f5}{fluid\+\_\+mesh\+\_\+pt}} ()
+Refineable\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ FLUID\+\_\+\+ELEMENT $>$ $\ast$ \mbox{\hyperlink{classTurekProblem_a0fc23b86efec256cb7f4450a928f7999}{fluid\+\_\+mesh\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for the fluid mesh. \end{DoxyCompactList}\item 
-Elastic\+Refineable\+Rectangular\+Quad\+Mesh$<$ SOLID\+\_\+\+ELEMENT $>$ $\ast$\& \mbox{\hyperlink{classTurekProblem_a82b6ed236144e95a5f20ea10857fc147}{solid\+\_\+mesh\+\_\+pt}} ()
+Elastic\+Refineable\+Rectangular\+Quad\+Mesh$<$ SOLID\+\_\+\+ELEMENT $>$ $\ast$\& \mbox{\hyperlink{classTurekProblem_a89430ae6d87a85a83e23e14e0b0d72b7}{solid\+\_\+mesh\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for the solid mesh. \end{DoxyCompactList}\item 
-Solid\+Mesh $\ast$\& \mbox{\hyperlink{classTurekProblem_a84ebb085e77f079232738e95d1090857}{traction\+\_\+mesh\+\_\+pt}} (const unsigned \&i)
+Solid\+Mesh $\ast$\& \mbox{\hyperlink{classTurekProblem_a93a4b3d4e598a499631e00cfa701ee3c}{traction\+\_\+mesh\+\_\+pt}} (const unsigned \&i)
 \begin{DoxyCompactList}\small\item\em Access function for the i-\/th mesh of FSI traction elements. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classTurekProblem_a39df0332d7606a5befe89bb0e581184b}{actions\+\_\+after\+\_\+adapt}} ()
 \begin{DoxyCompactList}\small\item\em Actions after adapt\+: Re-\/setup the fsi lookup scheme. \end{DoxyCompactList}\item 
@@ -63,11 +63,12 @@ Node $\ast$ \mbox{\hyperlink{classTurekProblem_a3d297a52fffd79bb7083fd57c2574fff
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class FLUID\+\_\+\+ELEMENT, class SOLID\+\_\+\+ELEMENT$>$\newline
 class Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$}
+
 //////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// 
 
 Problem class 
 
-Definition at line \mbox{\hyperlink{turek__flag_8cc_source_l00370}{370}} of file \mbox{\hyperlink{turek__flag_8cc_source}{turek\+\_\+flag.\+cc}}.
+Definition at line 370 of file turek\+\_\+flag.\+cc.
 
 
 
@@ -85,11 +86,11 @@ Constructor\+: Pass length and height of domain.
 
 Left point on centreline of flag so that the top and bottom vertices merge with the cylinder.
 
-Definition at line \mbox{\hyperlink{turek__flag_8cc_source_l00446}{446}} of file \mbox{\hyperlink{turek__flag_8cc_source}{turek\+\_\+flag.\+cc}}.
+Definition at line 446 of file turek\+\_\+flag.\+cc.
 
 
 
-References \mbox{\hyperlink{turek__flag_8cc_source_l00078}{Global\+\_\+\+Parameters\+::\+Centre\+\_\+x}}, \mbox{\hyperlink{turek__flag_8cc_source_l00081}{Global\+\_\+\+Parameters\+::\+Centre\+\_\+y}}, \mbox{\hyperlink{turek__flag_8cc_source_l00087}{Global\+\_\+\+Parameters\+::\+Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{turek__flag_8cc_source_l00953}{Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::create\+\_\+fsi\+\_\+traction\+\_\+elements()}}, \mbox{\hyperlink{turek__flag_8cc_source_l00428}{Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::\+Domain\+\_\+height}}, \mbox{\hyperlink{turek__flag_8cc_source_l00437}{Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::\+Fluid\+\_\+control\+\_\+node\+\_\+pt}}, \mbox{\hyperlink{turek__flag_8cc_source_l00379}{Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::fluid\+\_\+mesh\+\_\+pt()}}, \mbox{\hyperlink{turek__flag_8cc_source_l00419}{Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::\+Fluid\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{turek__flag_8cc_source_l00128}{Global\+\_\+\+Parameters\+::flux()}}, \mbox{\hyperlink{turek__flag_8cc_source_l00109}{Global\+\_\+\+Parameters\+::gravity()}}, \mbox{\hyperlink{turek__flag_8cc_source_l00075}{Global\+\_\+\+Parameters\+::H}}, \mbox{\hyperlink{turek__flag_8cc_source_l00097}{Global\+\_\+\+Parameters\+::\+Ignore\+\_\+fluid\+\_\+loading}}, \mbox{\hyperlink{turek__flag_8cc_source_l00091}{Global\+\_\+\+Parameters\+::\+Lambda\+\_\+sq}}, \mbox{\hyperlink{turek__flag_8cc_source_l00068}{Global\+\_\+\+Parameters\+::Q}}, \mbox{\hyperlink{turek__flag_8cc_source_l00084}{Global\+\_\+\+Parameters\+::\+Radius}}, \mbox{\hyperlink{turek__flag_8cc_source_l00058}{Global\+\_\+\+Parameters\+::\+Re}}, \mbox{\hyperlink{turek__flag_8cc_source_l00065}{Global\+\_\+\+Parameters\+::\+Re\+St}}, \mbox{\hyperlink{turek__flag_8cc_source_l00434}{Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::\+Solid\+\_\+control\+\_\+node\+\_\+pt}}, \mbox{\hyperlink{turek__flag_8cc_source_l00383}{Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::solid\+\_\+mesh\+\_\+pt()}}, \mbox{\hyperlink{turek__flag_8cc_source_l00061}{Global\+\_\+\+Parameters\+::\+St}}, \mbox{\hyperlink{turek__flag_8cc_source_l00387}{Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::traction\+\_\+mesh\+\_\+pt()}}, and \mbox{\hyperlink{turek__flag_8cc_source_l00422}{Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::\+Traction\+\_\+mesh\+\_\+pt}}.
+References Global\+\_\+\+Parameters\+::\+Centre\+\_\+x, Global\+\_\+\+Parameters\+::\+Centre\+\_\+y, Global\+\_\+\+Parameters\+::\+Constitutive\+\_\+law\+\_\+pt, Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::create\+\_\+fsi\+\_\+traction\+\_\+elements(), Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::\+Domain\+\_\+height, Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::\+Fluid\+\_\+control\+\_\+node\+\_\+pt, Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::fluid\+\_\+mesh\+\_\+pt(), Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::\+Fluid\+\_\+mesh\+\_\+pt, Global\+\_\+\+Parameters\+::flux(), Global\+\_\+\+Parameters\+::gravity(), Global\+\_\+\+Parameters\+::H, Global\+\_\+\+Parameters\+::\+Ignore\+\_\+fluid\+\_\+loading, Global\+\_\+\+Parameters\+::\+Lambda\+\_\+sq, Global\+\_\+\+Parameters\+::Q, Global\+\_\+\+Parameters\+::\+Radius, Global\+\_\+\+Parameters\+::\+Re, Global\+\_\+\+Parameters\+::\+Re\+St, Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::\+Solid\+\_\+control\+\_\+node\+\_\+pt, Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::solid\+\_\+mesh\+\_\+pt(), Global\+\_\+\+Parameters\+::\+St, Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::traction\+\_\+mesh\+\_\+pt(), and Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::\+Traction\+\_\+mesh\+\_\+pt.
 
 
 
@@ -107,11 +108,11 @@ Actions after adapt\+: Re-\/setup the fsi lookup scheme.
 
 Actions after adapt\+: Re-\/setup FSI. 
 
-Definition at line \mbox{\hyperlink{turek__flag_8cc_source_l00895}{895}} of file \mbox{\hyperlink{turek__flag_8cc_source}{turek\+\_\+flag.\+cc}}.
+Definition at line 895 of file turek\+\_\+flag.\+cc.
 
 
 
-References \mbox{\hyperlink{turek__flag_8cc_source_l00097}{Global\+\_\+\+Parameters\+::\+Ignore\+\_\+fluid\+\_\+loading}}.
+References Global\+\_\+\+Parameters\+::\+Ignore\+\_\+fluid\+\_\+loading.
 
 \mbox{\Hypertarget{classTurekProblem_ae97d3bad44e12274168e883c966b3983}\label{classTurekProblem_ae97d3bad44e12274168e883c966b3983}} 
 \index{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
@@ -126,7 +127,7 @@ Update function (empty)
 
 
 
-Definition at line \mbox{\hyperlink{turek__flag_8cc_source_l00397}{397}} of file \mbox{\hyperlink{turek__flag_8cc_source}{turek\+\_\+flag.\+cc}}.
+Definition at line 397 of file turek\+\_\+flag.\+cc.
 
 \mbox{\Hypertarget{classTurekProblem_a4ad226ceec27cb3c3ea4d1ecfd4e573f}\label{classTurekProblem_a4ad226ceec27cb3c3ea4d1ecfd4e573f}} 
 \index{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}!actions\_before\_implicit\_timestep@{actions\_before\_implicit\_timestep}}
@@ -141,11 +142,11 @@ Update the time-\/dependent influx.
 
 Actions before implicit timestep\+: Update inflow profile. 
 
-Definition at line \mbox{\hyperlink{turek__flag_8cc_source_l00868}{868}} of file \mbox{\hyperlink{turek__flag_8cc_source}{turek\+\_\+flag.\+cc}}.
+Definition at line 868 of file turek\+\_\+flag.\+cc.
 
 
 
-References \mbox{\hyperlink{turek__flag_8cc_source_l00128}{Global\+\_\+\+Parameters\+::flux()}}.
+References Global\+\_\+\+Parameters\+::flux().
 
 \mbox{\Hypertarget{classTurekProblem_aa896171b1a817ca35cba9b723bb15ed2}\label{classTurekProblem_aa896171b1a817ca35cba9b723bb15ed2}} 
 \index{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}!actions\_before\_newton\_convergence\_check@{actions\_before\_newton\_convergence\_check}}
@@ -160,7 +161,7 @@ Update the (dependent) fluid node positions following the update of the solid va
 
 Update the (dependent) fluid node positions following the update of the solid variables. 
 
-Definition at line \mbox{\hyperlink{turek__flag_8cc_source_l00857}{857}} of file \mbox{\hyperlink{turek__flag_8cc_source}{turek\+\_\+flag.\+cc}}.
+Definition at line 857 of file turek\+\_\+flag.\+cc.
 
 \mbox{\Hypertarget{classTurekProblem_a889518fdaf0c4215e21981afbfc669bd}\label{classTurekProblem_a889518fdaf0c4215e21981afbfc669bd}} 
 \index{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
@@ -175,7 +176,7 @@ Update function (empty)
 
 
 
-Definition at line \mbox{\hyperlink{turek__flag_8cc_source_l00400}{400}} of file \mbox{\hyperlink{turek__flag_8cc_source}{turek\+\_\+flag.\+cc}}.
+Definition at line 400 of file turek\+\_\+flag.\+cc.
 
 \mbox{\Hypertarget{classTurekProblem_ad460a2e860c9425297cf70ee125de10b}\label{classTurekProblem_ad460a2e860c9425297cf70ee125de10b}} 
 \index{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}!create\_fsi\_traction\_elements@{create\_fsi\_traction\_elements}}
@@ -190,11 +191,11 @@ Create FSI traction elements.
 
 
 
-Definition at line \mbox{\hyperlink{turek__flag_8cc_source_l00953}{953}} of file \mbox{\hyperlink{turek__flag_8cc_source}{turek\+\_\+flag.\+cc}}.
+Definition at line 953 of file turek\+\_\+flag.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{turek__flag_8cc_source_l00447}{Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::\+Turek\+Problem()}}.
+Referenced by Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::\+Turek\+Problem().
 
 \mbox{\Hypertarget{classTurekProblem_a2cf0eb1610b4c3a7cdbd3c7948cdd46e}\label{classTurekProblem_a2cf0eb1610b4c3a7cdbd3c7948cdd46e}} 
 \index{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}!doc\_solution@{doc\_solution}}
@@ -209,22 +210,22 @@ Doc the solution.
 
 
 
-Definition at line \mbox{\hyperlink{turek__flag_8cc_source_l01008}{1008}} of file \mbox{\hyperlink{turek__flag_8cc_source}{turek\+\_\+flag.\+cc}}.
+Definition at line 1008 of file turek\+\_\+flag.\+cc.
 
 
 
-References \mbox{\hyperlink{turek__flag_8cc_source_l00128}{Global\+\_\+\+Parameters\+::flux()}}.
+References Global\+\_\+\+Parameters\+::flux().
 
 
 
-Referenced by \mbox{\hyperlink{turek__flag_8cc_source_l01080}{main()}}.
+Referenced by main().
 
-\mbox{\Hypertarget{classTurekProblem_a3b4ac71e11bcded191a0711ff1d475f5}\label{classTurekProblem_a3b4ac71e11bcded191a0711ff1d475f5}} 
+\mbox{\Hypertarget{classTurekProblem_a0fc23b86efec256cb7f4450a928f7999}\label{classTurekProblem_a0fc23b86efec256cb7f4450a928f7999}} 
 \index{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}!fluid\_mesh\_pt@{fluid\_mesh\_pt}}
 \index{fluid\_mesh\_pt@{fluid\_mesh\_pt}!TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{fluid\_mesh\_pt()}{fluid\_mesh\_pt()}}
 {\footnotesize\ttfamily template$<$class FLUID\+\_\+\+ELEMENT , class SOLID\+\_\+\+ELEMENT $>$ \\
-Refineable\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ FLUID\+\_\+\+ELEMENT $>$ $\ast$ \mbox{\hyperlink{classTurekProblem}{Turek\+Problem}}$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::fluid\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+Refineable\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$FLUID\+\_\+\+ELEMENT$>$$\ast$ \mbox{\hyperlink{classTurekProblem}{Turek\+Problem}}$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::fluid\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -232,22 +233,18 @@ Access function for the fluid mesh.
 
 
 
-Definition at line \mbox{\hyperlink{turek__flag_8cc_source_l00379}{379}} of file \mbox{\hyperlink{turek__flag_8cc_source}{turek\+\_\+flag.\+cc}}.
+Definition at line 379 of file turek\+\_\+flag.\+cc.
 
 
 
-References \mbox{\hyperlink{turek__flag_8cc_source_l00419}{Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::\+Fluid\+\_\+mesh\+\_\+pt}}.
+Referenced by Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::\+Turek\+Problem().
 
-
-
-Referenced by \mbox{\hyperlink{turek__flag_8cc_source_l00447}{Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::\+Turek\+Problem()}}.
-
-\mbox{\Hypertarget{classTurekProblem_a82b6ed236144e95a5f20ea10857fc147}\label{classTurekProblem_a82b6ed236144e95a5f20ea10857fc147}} 
+\mbox{\Hypertarget{classTurekProblem_a89430ae6d87a85a83e23e14e0b0d72b7}\label{classTurekProblem_a89430ae6d87a85a83e23e14e0b0d72b7}} 
 \index{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}!solid\_mesh\_pt@{solid\_mesh\_pt}}
 \index{solid\_mesh\_pt@{solid\_mesh\_pt}!TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{solid\_mesh\_pt()}{solid\_mesh\_pt()}}
 {\footnotesize\ttfamily template$<$class FLUID\+\_\+\+ELEMENT , class SOLID\+\_\+\+ELEMENT $>$ \\
-Elastic\+Refineable\+Rectangular\+Quad\+Mesh$<$ SOLID\+\_\+\+ELEMENT $>$ $\ast$\& \mbox{\hyperlink{classTurekProblem}{Turek\+Problem}}$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::solid\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+Elastic\+Refineable\+Rectangular\+Quad\+Mesh$<$SOLID\+\_\+\+ELEMENT$>$$\ast$\& \mbox{\hyperlink{classTurekProblem}{Turek\+Problem}}$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::solid\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -255,22 +252,18 @@ Access function for the solid mesh.
 
 
 
-Definition at line \mbox{\hyperlink{turek__flag_8cc_source_l00383}{383}} of file \mbox{\hyperlink{turek__flag_8cc_source}{turek\+\_\+flag.\+cc}}.
+Definition at line 383 of file turek\+\_\+flag.\+cc.
 
 
 
-References \mbox{\hyperlink{turek__flag_8cc_source_l00416}{Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::\+Solid\+\_\+mesh\+\_\+pt}}.
+Referenced by Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::\+Turek\+Problem().
 
-
-
-Referenced by \mbox{\hyperlink{turek__flag_8cc_source_l00447}{Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::\+Turek\+Problem()}}.
-
-\mbox{\Hypertarget{classTurekProblem_a84ebb085e77f079232738e95d1090857}\label{classTurekProblem_a84ebb085e77f079232738e95d1090857}} 
+\mbox{\Hypertarget{classTurekProblem_a93a4b3d4e598a499631e00cfa701ee3c}\label{classTurekProblem_a93a4b3d4e598a499631e00cfa701ee3c}} 
 \index{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}!traction\_mesh\_pt@{traction\_mesh\_pt}}
 \index{traction\_mesh\_pt@{traction\_mesh\_pt}!TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{traction\_mesh\_pt()}{traction\_mesh\_pt()}}
 {\footnotesize\ttfamily template$<$class FLUID\+\_\+\+ELEMENT , class SOLID\+\_\+\+ELEMENT $>$ \\
-Solid\+Mesh $\ast$\& \mbox{\hyperlink{classTurekProblem}{Turek\+Problem}}$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::traction\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+Solid\+Mesh$\ast$\& \mbox{\hyperlink{classTurekProblem}{Turek\+Problem}}$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::traction\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -278,15 +271,11 @@ Access function for the i-\/th mesh of FSI traction elements.
 
 
 
-Definition at line \mbox{\hyperlink{turek__flag_8cc_source_l00387}{387}} of file \mbox{\hyperlink{turek__flag_8cc_source}{turek\+\_\+flag.\+cc}}.
+Definition at line 387 of file turek\+\_\+flag.\+cc.
 
 
 
-References \mbox{\hyperlink{turek__flag_8cc_source_l00422}{Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::\+Traction\+\_\+mesh\+\_\+pt}}.
-
-
-
-Referenced by \mbox{\hyperlink{turek__flag_8cc_source_l00447}{Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::\+Turek\+Problem()}}.
+Referenced by Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::\+Turek\+Problem().
 
 
 
@@ -304,7 +293,7 @@ Combined mesh of traction elements -- only used for documentation.
 
 
 
-Definition at line \mbox{\hyperlink{turek__flag_8cc_source_l00425}{425}} of file \mbox{\hyperlink{turek__flag_8cc_source}{turek\+\_\+flag.\+cc}}.
+Definition at line 425 of file turek\+\_\+flag.\+cc.
 
 \mbox{\Hypertarget{classTurekProblem_a24d68af05e815f7164e30f53ce7357ce}\label{classTurekProblem_a24d68af05e815f7164e30f53ce7357ce}} 
 \index{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}!Domain\_height@{Domain\_height}}
@@ -319,11 +308,11 @@ Overall height of domain.
 
 
 
-Definition at line \mbox{\hyperlink{turek__flag_8cc_source_l00428}{428}} of file \mbox{\hyperlink{turek__flag_8cc_source}{turek\+\_\+flag.\+cc}}.
+Definition at line 428 of file turek\+\_\+flag.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{turek__flag_8cc_source_l00447}{Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::\+Turek\+Problem()}}.
+Referenced by Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::\+Turek\+Problem().
 
 \mbox{\Hypertarget{classTurekProblem_aff485942ff327ccfcafd3608910ef635}\label{classTurekProblem_aff485942ff327ccfcafd3608910ef635}} 
 \index{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}!Domain\_length@{Domain\_length}}
@@ -338,7 +327,7 @@ Overall length of domain.
 
 
 
-Definition at line \mbox{\hyperlink{turek__flag_8cc_source_l00431}{431}} of file \mbox{\hyperlink{turek__flag_8cc_source}{turek\+\_\+flag.\+cc}}.
+Definition at line 431 of file turek\+\_\+flag.\+cc.
 
 \mbox{\Hypertarget{classTurekProblem_a3d297a52fffd79bb7083fd57c2574fff}\label{classTurekProblem_a3d297a52fffd79bb7083fd57c2574fff}} 
 \index{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}!Fluid\_control\_node\_pt@{Fluid\_control\_node\_pt}}
@@ -353,11 +342,11 @@ Pointer to fluid control node.
 
 
 
-Definition at line \mbox{\hyperlink{turek__flag_8cc_source_l00437}{437}} of file \mbox{\hyperlink{turek__flag_8cc_source}{turek\+\_\+flag.\+cc}}.
+Definition at line 437 of file turek\+\_\+flag.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{turek__flag_8cc_source_l00447}{Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::\+Turek\+Problem()}}.
+Referenced by Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::\+Turek\+Problem().
 
 \mbox{\Hypertarget{classTurekProblem_a18a0daace5dc50db4b93879e4a600e6a}\label{classTurekProblem_a18a0daace5dc50db4b93879e4a600e6a}} 
 \index{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}!Fluid\_mesh\_pt@{Fluid\_mesh\_pt}}
@@ -372,11 +361,11 @@ Pointer to fluid mesh.
 
 
 
-Definition at line \mbox{\hyperlink{turek__flag_8cc_source_l00419}{419}} of file \mbox{\hyperlink{turek__flag_8cc_source}{turek\+\_\+flag.\+cc}}.
+Definition at line 419 of file turek\+\_\+flag.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{turek__flag_8cc_source_l00379}{Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::fluid\+\_\+mesh\+\_\+pt()}}, and \mbox{\hyperlink{turek__flag_8cc_source_l00447}{Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::\+Turek\+Problem()}}.
+Referenced by Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::\+Turek\+Problem().
 
 \mbox{\Hypertarget{classTurekProblem_ad65b9a2f833ed9bae3520980c76d1f2f}\label{classTurekProblem_ad65b9a2f833ed9bae3520980c76d1f2f}} 
 \index{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}!Solid\_control\_node\_pt@{Solid\_control\_node\_pt}}
@@ -391,11 +380,11 @@ Pointer to solid control node.
 
 
 
-Definition at line \mbox{\hyperlink{turek__flag_8cc_source_l00434}{434}} of file \mbox{\hyperlink{turek__flag_8cc_source}{turek\+\_\+flag.\+cc}}.
+Definition at line 434 of file turek\+\_\+flag.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{turek__flag_8cc_source_l00447}{Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::\+Turek\+Problem()}}.
+Referenced by Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::\+Turek\+Problem().
 
 \mbox{\Hypertarget{classTurekProblem_a1a449088ae3cc96ade1c58979294afed}\label{classTurekProblem_a1a449088ae3cc96ade1c58979294afed}} 
 \index{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}!Solid\_mesh\_pt@{Solid\_mesh\_pt}}
@@ -410,11 +399,7 @@ Pointer to solid mesh.
 
 
 
-Definition at line \mbox{\hyperlink{turek__flag_8cc_source_l00416}{416}} of file \mbox{\hyperlink{turek__flag_8cc_source}{turek\+\_\+flag.\+cc}}.
-
-
-
-Referenced by \mbox{\hyperlink{turek__flag_8cc_source_l00383}{Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::solid\+\_\+mesh\+\_\+pt()}}.
+Definition at line 416 of file turek\+\_\+flag.\+cc.
 
 \mbox{\Hypertarget{classTurekProblem_a0b8588d0f133ffb9a281c5747786f95f}\label{classTurekProblem_a0b8588d0f133ffb9a281c5747786f95f}} 
 \index{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$@{TurekProblem$<$ FLUID\_ELEMENT, SOLID\_ELEMENT $>$}!Traction\_mesh\_pt@{Traction\_mesh\_pt}}
@@ -429,11 +414,11 @@ Vector of pointers to mesh of FSI traction elements.
 
 
 
-Definition at line \mbox{\hyperlink{turek__flag_8cc_source_l00422}{422}} of file \mbox{\hyperlink{turek__flag_8cc_source}{turek\+\_\+flag.\+cc}}.
+Definition at line 422 of file turek\+\_\+flag.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{turek__flag_8cc_source_l00387}{Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::traction\+\_\+mesh\+\_\+pt()}}, and \mbox{\hyperlink{turek__flag_8cc_source_l00447}{Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::\+Turek\+Problem()}}.
+Referenced by Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::\+Turek\+Problem().
 
 
 

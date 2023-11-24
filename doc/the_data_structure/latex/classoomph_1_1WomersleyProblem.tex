@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1WomersleyProblem}{}\doxysection{oomph\+::Womersley\+Problem\texorpdfstring{$<$}{<} ELEMENT, DIM \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1WomersleyProblem}{}\doxysection{oomph\+::Womersley\+Problem$<$ ELEMENT, DIM $>$ Class Template Reference}
 \label{classoomph_1_1WomersleyProblem}\index{oomph::WomersleyProblem$<$ ELEMENT, DIM $>$@{oomph::WomersleyProblem$<$ ELEMENT, DIM $>$}}
 
 
@@ -9,7 +9,7 @@
 
 {\ttfamily \#include $<$womersley\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Womersley\+Problem\texorpdfstring{$<$}{<} ELEMENT, DIM \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Womersley\+Problem$<$ ELEMENT, DIM $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=3.000000cm]{classoomph_1_1WomersleyProblem}
@@ -23,9 +23,9 @@ typedef double($\ast$ \mbox{\hyperlink{classoomph_1_1WomersleyProblem_ac3607d12a
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1WomersleyProblem_aa3b907c22d24bd76659a2f7c3b35c91a}{Womersley\+Problem}} (double $\ast$re\+\_\+st\+\_\+pt, double $\ast$prescribed\+\_\+volume\+\_\+flux\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$\mbox{\hyperlink{classoomph_1_1Problem_aa6bb90130ac5bb220493c40cddf520ba}{time\+\_\+stepper\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$womersley\+\_\+mesh\+\_\+pt)
+\mbox{\hyperlink{classoomph_1_1WomersleyProblem_aa3b907c22d24bd76659a2f7c3b35c91a}{Womersley\+Problem}} (double $\ast$re\+\_\+st\+\_\+pt, double $\ast$prescribed\+\_\+volume\+\_\+flux\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$\mbox{\hyperlink{classoomph_1_1Problem_ad77413dc70a25d271f582ad3c3d7bf65}{time\+\_\+stepper\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$womersley\+\_\+mesh\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to Womersley number, pointer to the double that stores the currently imposed flow rate, the pointer to the mesh of Womersley\+Elements (of the type specified by the template argument) and the \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} used in these elements. (Note that the mesh must be created, and boundary conditions applied BEFORE creating the Womersley problem. This is to facilitate the re-\/use of this class for different geometries. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1WomersleyProblem_adc4074cd09df4505feb27e22abb6922a}{Womersley\+Problem}} (double $\ast$re\+\_\+st\+\_\+pt, \mbox{\hyperlink{classoomph_1_1WomersleyProblem_ac3607d12a92dede9ed2e93ae64f300b3}{Prescribed\+Pressure\+Gradient\+Fct\+Pt}} pressure\+\_\+gradient\+\_\+fct\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$\mbox{\hyperlink{classoomph_1_1Problem_aa6bb90130ac5bb220493c40cddf520ba}{time\+\_\+stepper\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$womersley\+\_\+mesh\+\_\+pt)
+\mbox{\hyperlink{classoomph_1_1WomersleyProblem_adc4074cd09df4505feb27e22abb6922a}{Womersley\+Problem}} (double $\ast$re\+\_\+st\+\_\+pt, \mbox{\hyperlink{classoomph_1_1WomersleyProblem_ac3607d12a92dede9ed2e93ae64f300b3}{Prescribed\+Pressure\+Gradient\+Fct\+Pt}} pressure\+\_\+gradient\+\_\+fct\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$\mbox{\hyperlink{classoomph_1_1Problem_ad77413dc70a25d271f582ad3c3d7bf65}{time\+\_\+stepper\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$womersley\+\_\+mesh\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to Womersley number, pointer to the function that returns the imposed pressure gradient, the pointer to the mesh of Womersley\+Elements and the \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} used in these elements. (Note that the mesh must be created, and boundary conditions applied BEFORE creating the Womersley problem. This is to allow the facilitate the re-\/use of this class for different geometries.) \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1WomersleyProblem_a9a8cc169abe4814d9f9851f4eb936701}{$\sim$\+Womersley\+Problem}} ()
 \begin{DoxyCompactList}\small\item\em Destructor to clean up memory. \end{DoxyCompactList}\item 
@@ -39,7 +39,7 @@ void \mbox{\hyperlink{classoomph_1_1WomersleyProblem_a6ed55a744929154a6b8d3b7bb9
 \begin{DoxyCompactList}\small\item\em Doc the solution incl. trace file for various quantities of interest (to some...) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1WomersleyProblem_a367c83d9a996c426cb65a7baa86af81b}{doc\+\_\+solution}} (\mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} \&doc\+\_\+info, const double \&z\+\_\+out=0.\+0)
 \begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1WomersleyProblem_af15208a85c1668cfbb29dc2a2cea9757}{pressure\+\_\+gradient\+\_\+data\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1WomersleyProblem_a648496a026e53b453e16c161f9f44434}{pressure\+\_\+gradient\+\_\+data\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function to the single-\/valued \mbox{\hyperlink{classoomph_1_1Data}{Data}} object that contains the unknown pressure gradient (used if flux is prescribed) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -58,11 +58,12 @@ double $\ast$ \mbox{\hyperlink{classoomph_1_1WomersleyProblem_a8880c101a67eb960a
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class ELEMENT, unsigned DIM$>$\newline
 class oomph\+::\+Womersley\+Problem$<$ ELEMENT, DIM $>$}
+
 ///////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////// 
 
 Womersley problem 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00742}{742}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 742 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -80,7 +81,7 @@ Function pointer to fct that prescribes pressure gradient g=fct(t)
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00747}{747}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 747 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -98,11 +99,11 @@ Constructor\+: Pass pointer to Womersley number, pointer to the double that stor
 
 Constructor\+: Pass pointer to Womersley number, pointer to the double that stores the currently imposed flow rate, the pointer to the mesh of Womersley\+Elements and the \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} used in these elements. (Note that the mesh must be created, and boundary conditions applied BEFORE creating the Womersley problem. This is to facilitate the re-\/use of this class for different geometries.) 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00915}{915}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 915 of file womersley\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{mesh_8h_source_l00617}{oomph\+::\+Mesh\+::add\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{problem_8cc_source_l01545}{oomph\+::\+Problem\+::add\+\_\+time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{problem_8cc_source_l01989}{oomph\+::\+Problem\+::assign\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{mesh_8h_source_l00448}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{womersley__elements_8h_source_l00825}{oomph\+::\+Womersley\+Problem$<$ ELEMENT, DIM $>$\+::\+Flux\+\_\+el\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{problem_8h_source_l01280}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{womersley__elements_8h_source_l00821}{oomph\+::\+Womersley\+Problem$<$ ELEMENT, DIM $>$\+::\+Prescribed\+\_\+volume\+\_\+flux\+\_\+pt}}, \mbox{\hyperlink{womersley__elements_8h_source_l00831}{oomph\+::\+Womersley\+Problem$<$ ELEMENT, DIM $>$\+::\+Pressure\+\_\+gradient\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00628}{oomph\+::\+Problem\+::\+Problem\+\_\+is\+\_\+nonlinear}}, and \mbox{\hyperlink{problem_8h_source_l01524}{oomph\+::\+Problem\+::time\+\_\+stepper\+\_\+pt()}}.
+References oomph\+::\+Mesh\+::add\+\_\+element\+\_\+pt(), oomph\+::\+Problem\+::add\+\_\+time\+\_\+stepper\+\_\+pt(), oomph\+::\+Problem\+::assign\+\_\+eqn\+\_\+numbers(), oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Womersley\+Problem$<$ ELEMENT, DIM $>$\+::\+Flux\+\_\+el\+\_\+pt, i, oomph\+::\+Problem\+::mesh\+\_\+pt(), oomph\+::\+Mesh\+::nelement(), oomph\+::oomph\+\_\+info, oomph\+::\+Womersley\+Problem$<$ ELEMENT, DIM $>$\+::\+Prescribed\+\_\+volume\+\_\+flux\+\_\+pt, oomph\+::\+Womersley\+Problem$<$ ELEMENT, DIM $>$\+::\+Pressure\+\_\+gradient\+\_\+data\+\_\+pt, oomph\+::\+Problem\+::\+Problem\+\_\+is\+\_\+nonlinear, and oomph\+::\+Problem\+::time\+\_\+stepper\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1WomersleyProblem_adc4074cd09df4505feb27e22abb6922a}\label{classoomph_1_1WomersleyProblem_adc4074cd09df4505feb27e22abb6922a}} 
 \index{oomph::WomersleyProblem$<$ ELEMENT, DIM $>$@{oomph::WomersleyProblem$<$ ELEMENT, DIM $>$}!WomersleyProblem@{WomersleyProblem}}
@@ -117,11 +118,11 @@ Constructor\+: Pass pointer to Womersley number, pointer to the function that re
 
 Constructor\+: Pass pointer to Womersley number, fct pointer to the function that returns the prescribed pressure gradient, the pointer to the mesh of Womersley\+Elements (of the type specified by the template argument), and the \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} used in these elements. (Note that the mesh must be created, and boundary conditions applied BEFORE creating the Womersley problem. This is to facilitate the re-\/use of this class for different geometries.) 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00847}{847}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 847 of file womersley\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{problem_8cc_source_l01545}{oomph\+::\+Problem\+::add\+\_\+time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{problem_8cc_source_l01989}{oomph\+::\+Problem\+::assign\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00448}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{problem_8h_source_l01280}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{nodes_8h_source_l00385}{oomph\+::\+Data\+::pin()}}, \mbox{\hyperlink{womersley__elements_8h_source_l00831}{oomph\+::\+Womersley\+Problem$<$ ELEMENT, DIM $>$\+::\+Pressure\+\_\+gradient\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00628}{oomph\+::\+Problem\+::\+Problem\+\_\+is\+\_\+nonlinear}}, and \mbox{\hyperlink{problem_8h_source_l01524}{oomph\+::\+Problem\+::time\+\_\+stepper\+\_\+pt()}}.
+References oomph\+::\+Problem\+::add\+\_\+time\+\_\+stepper\+\_\+pt(), oomph\+::\+Problem\+::assign\+\_\+eqn\+\_\+numbers(), e, oomph\+::\+Mesh\+::element\+\_\+pt(), i, oomph\+::\+Problem\+::mesh\+\_\+pt(), oomph\+::\+Mesh\+::nelement(), oomph\+::oomph\+\_\+info, oomph\+::\+Data\+::pin(), oomph\+::\+Womersley\+Problem$<$ ELEMENT, DIM $>$\+::\+Pressure\+\_\+gradient\+\_\+data\+\_\+pt, oomph\+::\+Problem\+::\+Problem\+\_\+is\+\_\+nonlinear, and oomph\+::\+Problem\+::time\+\_\+stepper\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1WomersleyProblem_a9a8cc169abe4814d9f9851f4eb936701}\label{classoomph_1_1WomersleyProblem_a9a8cc169abe4814d9f9851f4eb936701}} 
 \index{oomph::WomersleyProblem$<$ ELEMENT, DIM $>$@{oomph::WomersleyProblem$<$ ELEMENT, DIM $>$}!````~WomersleyProblem@{$\sim$WomersleyProblem}}
@@ -136,7 +137,7 @@ Destructor to clean up memory.
 
 Destructor for Womersley problem. 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00977}{977}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 977 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -158,7 +159,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Problem_a033ec7301123deeb7e56d
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00780}{780}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 780 of file womersley\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1WomersleyProblem_af87f80658aaadaee2d7c8d0c06ad159e}\label{classoomph_1_1WomersleyProblem_af87f80658aaadaee2d7c8d0c06ad159e}} 
 \index{oomph::WomersleyProblem$<$ ELEMENT, DIM $>$@{oomph::WomersleyProblem$<$ ELEMENT, DIM $>$}!actions\_before\_implicit\_timestep@{actions\_before\_implicit\_timestep}}
@@ -177,11 +178,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Problem_a4f19896906d2c0274ad67
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00788}{788}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 788 of file womersley\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{womersley__elements_8h_source_l00828}{oomph\+::\+Womersley\+Problem$<$ ELEMENT, DIM $>$\+::\+Prescribed\+\_\+pressure\+\_\+gradient\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{womersley__elements_8h_source_l00831}{oomph\+::\+Womersley\+Problem$<$ ELEMENT, DIM $>$\+::\+Pressure\+\_\+gradient\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{nodes_8h_source_l00271}{oomph\+::\+Data\+::set\+\_\+value()}}, \mbox{\hyperlink{problem_8cc_source_l11531}{oomph\+::\+Problem\+::time()}}, and \mbox{\hyperlink{problem_8h_source_l01504}{oomph\+::\+Problem\+::time\+\_\+pt()}}.
+References oomph\+::\+Womersley\+Problem$<$ ELEMENT, DIM $>$\+::\+Prescribed\+\_\+pressure\+\_\+gradient\+\_\+fct\+\_\+pt, oomph\+::\+Womersley\+Problem$<$ ELEMENT, DIM $>$\+::\+Pressure\+\_\+gradient\+\_\+data\+\_\+pt, oomph\+::\+Data\+::set\+\_\+value(), oomph\+::\+Problem\+::time(), and oomph\+::\+Problem\+::time\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1WomersleyProblem_a7aa82fe18099c9770edf9fa8e79a2028}\label{classoomph_1_1WomersleyProblem_a7aa82fe18099c9770edf9fa8e79a2028}} 
 \index{oomph::WomersleyProblem$<$ ELEMENT, DIM $>$@{oomph::WomersleyProblem$<$ ELEMENT, DIM $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
@@ -200,7 +201,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Problem_a0c8d70891f7369bb4bf84
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00783}{783}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 783 of file womersley\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1WomersleyProblem_a367c83d9a996c426cb65a7baa86af81b}\label{classoomph_1_1WomersleyProblem_a367c83d9a996c426cb65a7baa86af81b}} 
 \index{oomph::WomersleyProblem$<$ ELEMENT, DIM $>$@{oomph::WomersleyProblem$<$ ELEMENT, DIM $>$}!doc\_solution@{doc\_solution}}
@@ -215,11 +216,11 @@ Doc the solution.
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00805}{805}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 805 of file womersley\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{womersley__elements_8h_source_l00990}{oomph\+::\+Womersley\+Problem$<$ ELEMENT, DIM $>$\+::doc\+\_\+solution()}}.
+References oomph\+::\+Womersley\+Problem$<$ ELEMENT, DIM $>$\+::doc\+\_\+solution().
 
 \mbox{\Hypertarget{classoomph_1_1WomersleyProblem_a6ed55a744929154a6b8d3b7bb9f0570a}\label{classoomph_1_1WomersleyProblem_a6ed55a744929154a6b8d3b7bb9f0570a}} 
 \index{oomph::WomersleyProblem$<$ ELEMENT, DIM $>$@{oomph::WomersleyProblem$<$ ELEMENT, DIM $>$}!doc\_solution@{doc\_solution}}
@@ -234,22 +235,22 @@ Doc the solution incl. trace file for various quantities of interest (to some...
 
 Doc the solution. 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00990}{990}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 990 of file womersley\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{oomph__utilities_8h_source_l00524}{oomph\+::\+Doc\+Info\+::directory()}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, and \mbox{\hyperlink{oomph__utilities_8h_source_l00554}{oomph\+::\+Doc\+Info\+::number()}}.
+References oomph\+::\+Doc\+Info\+::directory(), e, and oomph\+::\+Doc\+Info\+::number().
 
 
 
-Referenced by \mbox{\hyperlink{womersley__elements_8h_source_l00805}{oomph\+::\+Womersley\+Problem$<$ ELEMENT, DIM $>$\+::doc\+\_\+solution()}}.
+Referenced by oomph\+::\+Womersley\+Problem$<$ ELEMENT, DIM $>$\+::doc\+\_\+solution().
 
-\mbox{\Hypertarget{classoomph_1_1WomersleyProblem_af15208a85c1668cfbb29dc2a2cea9757}\label{classoomph_1_1WomersleyProblem_af15208a85c1668cfbb29dc2a2cea9757}} 
+\mbox{\Hypertarget{classoomph_1_1WomersleyProblem_a648496a026e53b453e16c161f9f44434}\label{classoomph_1_1WomersleyProblem_a648496a026e53b453e16c161f9f44434}} 
 \index{oomph::WomersleyProblem$<$ ELEMENT, DIM $>$@{oomph::WomersleyProblem$<$ ELEMENT, DIM $>$}!pressure\_gradient\_data\_pt@{pressure\_gradient\_data\_pt}}
 \index{pressure\_gradient\_data\_pt@{pressure\_gradient\_data\_pt}!oomph::WomersleyProblem$<$ ELEMENT, DIM $>$@{oomph::WomersleyProblem$<$ ELEMENT, DIM $>$}}
 \doxysubsubsection{\texorpdfstring{pressure\_gradient\_data\_pt()}{pressure\_gradient\_data\_pt()}}
 {\footnotesize\ttfamily template$<$class ELEMENT , unsigned DIM$>$ \\
-\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1WomersleyProblem}{oomph\+::\+Womersley\+Problem}}$<$ ELEMENT, DIM $>$\+::pressure\+\_\+gradient\+\_\+data\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$ \mbox{\hyperlink{classoomph_1_1WomersleyProblem}{oomph\+::\+Womersley\+Problem}}$<$ ELEMENT, DIM $>$\+::pressure\+\_\+gradient\+\_\+data\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -257,11 +258,11 @@ Access function to the single-\/valued \mbox{\hyperlink{classoomph_1_1Data}{Data
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00813}{813}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 813 of file womersley\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{womersley__elements_8h_source_l00831}{oomph\+::\+Womersley\+Problem$<$ ELEMENT, DIM $>$\+::\+Pressure\+\_\+gradient\+\_\+data\+\_\+pt}}.
+References oomph\+::\+Womersley\+Problem$<$ ELEMENT, DIM $>$\+::\+Pressure\+\_\+gradient\+\_\+data\+\_\+pt.
 
 
 
@@ -279,11 +280,11 @@ Pointer to element that imposes the flux through the collection of Womersley ele
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00825}{825}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 825 of file womersley\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{womersley__elements_8h_source_l00915}{oomph\+::\+Womersley\+Problem$<$ ELEMENT, DIM $>$\+::\+Womersley\+Problem()}}.
+Referenced by oomph\+::\+Womersley\+Problem$<$ ELEMENT, DIM $>$\+::\+Womersley\+Problem().
 
 \mbox{\Hypertarget{classoomph_1_1WomersleyProblem_a54d5137eeb495e40382576392720611f}\label{classoomph_1_1WomersleyProblem_a54d5137eeb495e40382576392720611f}} 
 \index{oomph::WomersleyProblem$<$ ELEMENT, DIM $>$@{oomph::WomersleyProblem$<$ ELEMENT, DIM $>$}!Prescribed\_pressure\_gradient\_fct\_pt@{Prescribed\_pressure\_gradient\_fct\_pt}}
@@ -298,11 +299,11 @@ Fct pointer to fct that prescribes pressure gradient.
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00828}{828}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 828 of file womersley\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{womersley__elements_8h_source_l00788}{oomph\+::\+Womersley\+Problem$<$ ELEMENT, DIM $>$\+::actions\+\_\+before\+\_\+implicit\+\_\+timestep()}}.
+Referenced by oomph\+::\+Womersley\+Problem$<$ ELEMENT, DIM $>$\+::actions\+\_\+before\+\_\+implicit\+\_\+timestep().
 
 \mbox{\Hypertarget{classoomph_1_1WomersleyProblem_a8880c101a67eb960adac41775ebf2029}\label{classoomph_1_1WomersleyProblem_a8880c101a67eb960adac41775ebf2029}} 
 \index{oomph::WomersleyProblem$<$ ELEMENT, DIM $>$@{oomph::WomersleyProblem$<$ ELEMENT, DIM $>$}!Prescribed\_volume\_flux\_pt@{Prescribed\_volume\_flux\_pt}}
@@ -317,11 +318,11 @@ Pointer to currently prescribed volume flux.
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00821}{821}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 821 of file womersley\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{womersley__elements_8h_source_l00915}{oomph\+::\+Womersley\+Problem$<$ ELEMENT, DIM $>$\+::\+Womersley\+Problem()}}.
+Referenced by oomph\+::\+Womersley\+Problem$<$ ELEMENT, DIM $>$\+::\+Womersley\+Problem().
 
 \mbox{\Hypertarget{classoomph_1_1WomersleyProblem_ad82799a978674bc9f49ac3240d43c34d}\label{classoomph_1_1WomersleyProblem_ad82799a978674bc9f49ac3240d43c34d}} 
 \index{oomph::WomersleyProblem$<$ ELEMENT, DIM $>$@{oomph::WomersleyProblem$<$ ELEMENT, DIM $>$}!Pressure\_gradient\_data\_pt@{Pressure\_gradient\_data\_pt}}
@@ -336,11 +337,11 @@ Pointer to single-\/valued \mbox{\hyperlink{classoomph_1_1Data}{Data}} item that
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00831}{831}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 831 of file womersley\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{womersley__elements_8h_source_l00788}{oomph\+::\+Womersley\+Problem$<$ ELEMENT, DIM $>$\+::actions\+\_\+before\+\_\+implicit\+\_\+timestep()}}, \mbox{\hyperlink{womersley__elements_8h_source_l00813}{oomph\+::\+Womersley\+Problem$<$ ELEMENT, DIM $>$\+::pressure\+\_\+gradient\+\_\+data\+\_\+pt()}}, and \mbox{\hyperlink{womersley__elements_8h_source_l00847}{oomph\+::\+Womersley\+Problem$<$ ELEMENT, DIM $>$\+::\+Womersley\+Problem()}}.
+Referenced by oomph\+::\+Womersley\+Problem$<$ ELEMENT, DIM $>$\+::actions\+\_\+before\+\_\+implicit\+\_\+timestep(), oomph\+::\+Womersley\+Problem$<$ ELEMENT, DIM $>$\+::pressure\+\_\+gradient\+\_\+data\+\_\+pt(), and oomph\+::\+Womersley\+Problem$<$ ELEMENT, DIM $>$\+::\+Womersley\+Problem().
 
 
 

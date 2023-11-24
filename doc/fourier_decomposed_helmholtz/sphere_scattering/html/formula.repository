@@ -1,64 +1,64 @@
-\_form#0=69x14:$ \gamma = -du/dn $
-\_form#1=254x29:\[ \nabla^2 U(x,y,z,t) = \frac{1}{c^2} \frac{\partial^2 U(x,y,z,t)}{\partial t^2}, \ \ \ \ \ \ \ \ \ \ \ \ (1) \]
-\_form#2=5x6:$ c $
-\_form#3=60x14:$ U(x,y,z,t) $
-\_form#4=9x6:$ \omega $
-\_form#5=246x16:\[ U(x,y,z,t) = Re ({\tt U}(x,y,z) \ e^{-i \omega t}) \ \ \ \ \ \ \ \ \ \ \ \ (2) \]
-\_form#6=48x14:$ {\tt U}(x,y,z) $
-\_form#7=186x16:\[ \nabla^2 {\tt U}(x,y,z) + k^2 {\tt U} = 0 \ \ \ \ \ \ \ \ \ \ \ \ (3) \]
-\_form#8=100x24:\[ k = \frac{\omega}{c} \ \ \ \ \ \ \ \ \ \ \ \ (4) \]
-\_form#9=129x31:\[ \lim_{r\to \infty} r \left(\frac{\partial {\tt U}}{\partial r} - ik{\tt U} \right) =0. \]
-\_form#10=40x14:$ (r,\varphi,z) $
-\_form#11=40x14:$ (x,y,z) $
-\_form#12=70x14:\[ x = r \cos(\varphi), \]
-\_form#13=68x14:\[ y = r \sin(\varphi), \]
-\_form#14=33x6:\[ z = z. \]
-\_form#15=200x36:\[ {\tt U}(r,\varphi,z) = \sum_{N=-\infty}^{\infty} u_N(r,z) \exp({\rm i} N \varphi). \]
-\_form#16=44x14:$ u_N(r,z) $
-\_form#17=274x31:\[ \nabla^2 {u_{N}}(r,z) + \left(k^2-\frac{N^2}{r^2}\right) u_N(r,z) = 0 \ \ \ \ \ \ \ \ \ \ \ \ (5) \]
-\_form#18=11x10:$ N $
-\_form#19=9x9:$ \Gamma $
-\_form#20=13x10:$ R. $
-\_form#21=40x14:$ (\rho,\varphi,\theta) $
-\_form#22=420x39:\[ {\tt U}(\rho,\theta,\varphi)= \sum_{l=0}^{+\infty}\sum_{n=-l}^{l} \left( a_{ln} \ h_{l}^{(1)}(k\rho)+ b_{ln} \ h_{l}^{(2)}(k\rho) \right)P_{l}^{n} (\cos\theta)\exp({\rm i} n \varphi). \ \ \ \ \ \ \ (6) \]
-\_form#23=36x13:$a_{ln}, b_{ln} $
-\_form#24=311x18:\[ h_{l}^{(1)}(x)=j_{l}(x)+{\rm i} y_{l}(x) \mbox{ \ \ \ \ and \ \ \ \ } h_{l}^{(2)}(x)=j_{l}(x)-{\rm i} y_{l}(x) \]
-\_form#25=310x30:\[ j_{l}(x)=\sqrt{\frac{\pi}{2x}}J_{l+1/2}(x) \mbox{ \ \ \ \ and \ \ \ \ } y_{l}(x)=\sqrt{\frac{\pi}{2x}}Y_{l+1/2}(x). \]
-\_form#26=205x28:\[ P_{l}^{m}(x)=(-1)^{m}(1-x^2)^{m/2}\frac{d^m}{dx^m}P_{l}(x) \]
-\_form#27=161x28:\[ P_{n}(x)=\frac{1}{2^{n} \, n!}\frac{d^n}{dx^n}[(x^2-1)^{n}]. \]
-\_form#28=59x14:$ P_{l}^{m}(x)=0 $
-\_form#29=33x11:$ m>l $
-\_form#30=40x14:$ (r,\varphi,z)$
-\_form#31=40x14:$ (\rho,\theta,\varphi) $
-\_form#32=78x16:\[ \rho = \sqrt{r^2 + z^2}, \]
-\_form#33=89x14:\[ \theta = \arctan(r/z), \]
-\_form#34=36x9:\[ \varphi = \varphi, \]
-\_form#35=55x14:$\varphi \in [0,2\pi] $
-\_form#36=46x14:$\theta \in [0,\pi] $
-\_form#37=29x10:$ \theta = 0 $
-\_form#38=43x14:$ \theta = \pi/2 $
-\_form#39=30x10:$ \theta = \pi $
-\_form#40=19x19:$ h_l^{(1)} $
-\_form#41=293x39:\[ {\tt U}(\rho,\theta,\phi)= \sum_{l=0}^{+\infty}\sum_{n=-l}^{l} \ a_{ln}\ h_{l}^{(1)}(k\rho) \ P_{l}^{n}(\cos\theta) \ \exp({\rm i}n\varphi). \]
-\_form#42=36x10:$ n=N $
-\_form#43=248x38:\[ u_N(\rho,\theta)=\sum_{l=N}^{+\infty} a_{l} \ h_{l}^{(1)}(k\rho)\ P_{l}^{N}(\cos\theta). \ \ \ \ \ \ \ (7) \]
-\_form#44=86x15:$ P_{n}^{N}(\cos\theta) \sin(\theta)$
-\_form#45=6x10:$ \theta $
-\_form#46=306x35:\[ a_{l}=\frac{2l+1}{2 h_{l}^{(1)}(kR)} \frac{(l-N)!}{(l+N)!}\int_{0}^{\pi} u(R,\theta)\ P_{l}^{N}(\cos\theta) \ \sin(\theta) \ d\theta. \]
-\_form#47=319x36:\[ \left. \frac{\partial u}{\partial n} \right|_{\rho=R} = \left. \frac{\partial u}{\partial \rho} \right|_{\rho=R} = \gamma(u) = k\sum_{n=N}^{\infty}a_{n} \ h_{n}^{(1)'}(kR)\ P_{n}^{N}(\cos \theta) \]
-\_form#48=540x36:\[ \gamma(u(R,\theta))= k \sum_{n=N}^{\infty} h_{n}^{(1)'}(kR) \ P_{n}^{N}(\cos \theta) \ \frac{2n+1}{2h_{n}^{(1)}(kR)}\frac{(n-N)!}{(n+N)!} \int_{0}^{\pi} u(R,\overline{\theta}) \ P_{n}^{N}(\cos\overline{\theta}) \ \sin(\overline{\theta}) \; d\overline{\theta}, \ \ \ \ \ \ \ \ \ \ (8) \]
-\_form#49=9x9:$ \gamma $
-\_form#50=10x10:$ R $
-\_form#51=361x39:\[ u_N(r,z)=u_N^{[exact]}(r,z)=\sum_{l=N}^{N_{\rm terms}} h_{l}^{(1)}(k\sqrt{r^2+z^2}) \ P_{l}^{N}\left(\frac{z}{\sqrt{r^2+z^2}}\right). \]
-\_form#52=33x11:$ a_l = 1 $
-\_form#53=95x14:$ 1 < \sqrt{r^2 + z^2} < 3 $
-\_form#54=98x14:$ \sqrt{r^2 + z^2} = R = 3$
-\_form#55=58x13:$ N_{\rm terms}=6 $
-\_form#56=34x10:$ N=3 $
-\_form#57=41x11:$ k^2 = 10 $
-\_form#58=11x11:$ k^2 $
-\_form#59=398x34:\[ \overline{\cal P }_N = \pi R^2 \int_0^\pi \left. \bigg( Im \{\frac{\partial u_N}{\partial \rho} \} Re\{u_N \} - Re \{\frac{\partial u_N}{\partial \rho} \} Im\{u_N \} \bigg)\right|_{\rho=R} \sin(\theta) \ d\theta. \]
-\_form#60=6x6:$ z $
-\_form#61=110x14:\[ {\tt U}(x,y,z) = \exp({\rm i}kz) \]
-\_form#62=213x36:\[ {\tt U}(\rho,\theta) = \sum_{l=0}^{\infty} (2l+1) \ {\rm i}^l \ j_l(kr) \ P_l(\cos\theta), \]
-\_form#63=34x10:$ N=0$
+\_form#0=254x29:\[ \nabla^2 U(x,y,z,t) = \frac{1}{c^2} \frac{\partial^2 U(x,y,z,t)}{\partial t^2}, \ \ \ \ \ \ \ \ \ \ \ \ (1) \]
+\_form#1=5x6:$ c $
+\_form#2=60x14:$ U(x,y,z,t) $
+\_form#3=9x6:$ \omega $
+\_form#4=246x16:\[ U(x,y,z,t) = Re ({\tt U}(x,y,z) \ e^{-i \omega t}) \ \ \ \ \ \ \ \ \ \ \ \ (2) \]
+\_form#5=48x14:$ {\tt U}(x,y,z) $
+\_form#6=186x16:\[ \nabla^2 {\tt U}(x,y,z) + k^2 {\tt U} = 0 \ \ \ \ \ \ \ \ \ \ \ \ (3) \]
+\_form#7=100x24:\[ k = \frac{\omega}{c} \ \ \ \ \ \ \ \ \ \ \ \ (4) \]
+\_form#8=129x31:\[ \lim_{r\to \infty} r \left(\frac{\partial {\tt U}}{\partial r} - ik{\tt U} \right) =0. \]
+\_form#9=40x14:$ (r,\varphi,z) $
+\_form#10=40x14:$ (x,y,z) $
+\_form#11=70x14:\[ x = r \cos(\varphi), \]
+\_form#12=68x14:\[ y = r \sin(\varphi), \]
+\_form#13=33x6:\[ z = z. \]
+\_form#14=200x36:\[ {\tt U}(r,\varphi,z) = \sum_{N=-\infty}^{\infty} u_N(r,z) \exp({\rm i} N \varphi). \]
+\_form#15=44x14:$ u_N(r,z) $
+\_form#16=274x31:\[ \nabla^2 {u_{N}}(r,z) + \left(k^2-\frac{N^2}{r^2}\right) u_N(r,z) = 0 \ \ \ \ \ \ \ \ \ \ \ \ (5) \]
+\_form#17=11x10:$ N $
+\_form#18=9x9:$ \Gamma $
+\_form#19=13x10:$ R. $
+\_form#20=40x14:$ (\rho,\varphi,\theta) $
+\_form#21=420x39:\[ {\tt U}(\rho,\theta,\varphi)= \sum_{l=0}^{+\infty}\sum_{n=-l}^{l} \left( a_{ln} \ h_{l}^{(1)}(k\rho)+ b_{ln} \ h_{l}^{(2)}(k\rho) \right)P_{l}^{n} (\cos\theta)\exp({\rm i} n \varphi). \ \ \ \ \ \ \ (6) \]
+\_form#22=36x13:$a_{ln}, b_{ln} $
+\_form#23=311x18:\[ h_{l}^{(1)}(x)=j_{l}(x)+{\rm i} y_{l}(x) \mbox{ \ \ \ \ and \ \ \ \ } h_{l}^{(2)}(x)=j_{l}(x)-{\rm i} y_{l}(x) \]
+\_form#24=310x30:\[ j_{l}(x)=\sqrt{\frac{\pi}{2x}}J_{l+1/2}(x) \mbox{ \ \ \ \ and \ \ \ \ } y_{l}(x)=\sqrt{\frac{\pi}{2x}}Y_{l+1/2}(x). \]
+\_form#25=205x28:\[ P_{l}^{m}(x)=(-1)^{m}(1-x^2)^{m/2}\frac{d^m}{dx^m}P_{l}(x) \]
+\_form#26=161x28:\[ P_{n}(x)=\frac{1}{2^{n} \, n!}\frac{d^n}{dx^n}[(x^2-1)^{n}]. \]
+\_form#27=59x14:$ P_{l}^{m}(x)=0 $
+\_form#28=33x11:$ m>l $
+\_form#29=40x14:$ (r,\varphi,z)$
+\_form#30=40x14:$ (\rho,\theta,\varphi) $
+\_form#31=78x16:\[ \rho = \sqrt{r^2 + z^2}, \]
+\_form#32=89x14:\[ \theta = \arctan(r/z), \]
+\_form#33=36x9:\[ \varphi = \varphi, \]
+\_form#34=55x14:$\varphi \in [0,2\pi] $
+\_form#35=46x14:$\theta \in [0,\pi] $
+\_form#36=29x10:$ \theta = 0 $
+\_form#37=43x14:$ \theta = \pi/2 $
+\_form#38=30x10:$ \theta = \pi $
+\_form#39=19x19:$ h_l^{(1)} $
+\_form#40=293x39:\[ {\tt U}(\rho,\theta,\phi)= \sum_{l=0}^{+\infty}\sum_{n=-l}^{l} \ a_{ln}\ h_{l}^{(1)}(k\rho) \ P_{l}^{n}(\cos\theta) \ \exp({\rm i}n\varphi). \]
+\_form#41=36x10:$ n=N $
+\_form#42=248x38:\[ u_N(\rho,\theta)=\sum_{l=N}^{+\infty} a_{l} \ h_{l}^{(1)}(k\rho)\ P_{l}^{N}(\cos\theta). \ \ \ \ \ \ \ (7) \]
+\_form#43=86x15:$ P_{n}^{N}(\cos\theta) \sin(\theta)$
+\_form#44=6x10:$ \theta $
+\_form#45=306x35:\[ a_{l}=\frac{2l+1}{2 h_{l}^{(1)}(kR)} \frac{(l-N)!}{(l+N)!}\int_{0}^{\pi} u(R,\theta)\ P_{l}^{N}(\cos\theta) \ \sin(\theta) \ d\theta. \]
+\_form#46=319x36:\[ \left. \frac{\partial u}{\partial n} \right|_{\rho=R} = \left. \frac{\partial u}{\partial \rho} \right|_{\rho=R} = \gamma(u) = k\sum_{n=N}^{\infty}a_{n} \ h_{n}^{(1)'}(kR)\ P_{n}^{N}(\cos \theta) \]
+\_form#47=540x36:\[ \gamma(u(R,\theta))= k \sum_{n=N}^{\infty} h_{n}^{(1)'}(kR) \ P_{n}^{N}(\cos \theta) \ \frac{2n+1}{2h_{n}^{(1)}(kR)}\frac{(n-N)!}{(n+N)!} \int_{0}^{\pi} u(R,\overline{\theta}) \ P_{n}^{N}(\cos\overline{\theta}) \ \sin(\overline{\theta}) \; d\overline{\theta}, \ \ \ \ \ \ \ \ \ \ (8) \]
+\_form#48=9x9:$ \gamma $
+\_form#49=10x10:$ R $
+\_form#50=361x39:\[ u_N(r,z)=u_N^{[exact]}(r,z)=\sum_{l=N}^{N_{\rm terms}} h_{l}^{(1)}(k\sqrt{r^2+z^2}) \ P_{l}^{N}\left(\frac{z}{\sqrt{r^2+z^2}}\right). \]
+\_form#51=33x11:$ a_l = 1 $
+\_form#52=95x14:$ 1 < \sqrt{r^2 + z^2} < 3 $
+\_form#53=98x14:$ \sqrt{r^2 + z^2} = R = 3$
+\_form#54=58x13:$ N_{\rm terms}=6 $
+\_form#55=34x10:$ N=3 $
+\_form#56=41x11:$ k^2 = 10 $
+\_form#57=11x11:$ k^2 $
+\_form#58=398x34:\[ \overline{\cal P }_N = \pi R^2 \int_0^\pi \left. \bigg( Im \{\frac{\partial u_N}{\partial \rho} \} Re\{u_N \} - Re \{\frac{\partial u_N}{\partial \rho} \} Im\{u_N \} \bigg)\right|_{\rho=R} \sin(\theta) \ d\theta. \]
+\_form#59=6x6:$ z $
+\_form#60=110x14:\[ {\tt U}(x,y,z) = \exp({\rm i}kz) \]
+\_form#61=213x36:\[ {\tt U}(\rho,\theta) = \sum_{l=0}^{\infty} (2l+1) \ {\rm i}^l \ j_l(kr) \ P_l(\cos\theta), \]
+\_form#62=34x10:$ N=0$
+\_form#63=69x14:$ \gamma = -du/dn $

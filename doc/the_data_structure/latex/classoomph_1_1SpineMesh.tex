@@ -20,17 +20,17 @@ Inheritance diagram for oomph\+::Spine\+Mesh\+:\begin{figure}[H]
 \item 
 virtual \mbox{\hyperlink{classoomph_1_1SpineMesh_ad60286797fb2e8fc4d72efd2719b5623}{$\sim$\+Spine\+Mesh}} ()
 \begin{DoxyCompactList}\small\item\em Destructor to clean up the memory allocated to the spines. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Spine}{Spine}} $\ast$\& \mbox{\hyperlink{classoomph_1_1SpineMesh_a6e67783a65a7134b3174c15ccf92acfa}{spine\+\_\+pt}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\mbox{\hyperlink{classoomph_1_1Spine}{Spine}} $\ast$\& \mbox{\hyperlink{classoomph_1_1SpineMesh_aa8a4afbc37ff7f4c19e44c28c1d7552a}{spine\+\_\+pt}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Return the i-\/th spine in the mesh. \end{DoxyCompactList}\item 
-const \mbox{\hyperlink{classoomph_1_1Spine}{Spine}} $\ast$ \mbox{\hyperlink{classoomph_1_1SpineMesh_a3e0e58367a1af887baf2c2d147c7a1ef}{spine\+\_\+pt}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+const \mbox{\hyperlink{classoomph_1_1Spine}{Spine}} $\ast$ \mbox{\hyperlink{classoomph_1_1SpineMesh_a13ad12ffbc4d5880aebdfbabc01755e1}{spine\+\_\+pt}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Return the i-\/th spine in the mesh (const version) \end{DoxyCompactList}\item 
 unsigned long \mbox{\hyperlink{classoomph_1_1SpineMesh_a8aa10bf71f0d0126e2cdb98a4a4ae264}{nspine}} () const
 \begin{DoxyCompactList}\small\item\em Return the number of spines in the mesh. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1SpineMesh_a4bd8248041f7ed8337d65ce763afa8ee}{add\+\_\+spine\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1Spine}{Spine}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1SpineMesh_a6e67783a65a7134b3174c15ccf92acfa}{spine\+\_\+pt}})
+void \mbox{\hyperlink{classoomph_1_1SpineMesh_a4bd8248041f7ed8337d65ce763afa8ee}{add\+\_\+spine\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1Spine}{Spine}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1SpineMesh_aa8a4afbc37ff7f4c19e44c28c1d7552a}{spine\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Add a spine to the mesh. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1SpineMesh_aa15a8ebfd599a5d5f0cdb201e0313a18}{node\+\_\+pt}} (const unsigned long \&n)
+\mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1SpineMesh_a55bfdb79c8cf307c1b36e4948e5dc298}{node\+\_\+pt}} (const unsigned long \&n)
 \begin{DoxyCompactList}\small\item\em Return a pointer to the n-\/th global \mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}}. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1SpineMesh_adc29c3a91cc31401c7ba5922a600284c}{element\+\_\+node\+\_\+pt}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}, const unsigned \&n)
+\mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1SpineMesh_aea36e8d0454965f9f96a3adc4a5a9371}{element\+\_\+node\+\_\+pt}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}, const unsigned \&n)
 \begin{DoxyCompactList}\small\item\em Return the n-\/th local \mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}} in element e. This is required to cast the nodes in a spine mesh to be Spine\+Nodes and therefore allow access to the extra \mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}} data. \end{DoxyCompactList}\item 
 unsigned long \mbox{\hyperlink{classoomph_1_1SpineMesh_ad969000be2d963bb4427bbde89ac47c2}{assign\+\_\+global\+\_\+spine\+\_\+eqn\+\_\+numbers}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $\ast$ $>$ \&Dof\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Assign spines to Spine\+\_\+pt vector of element. \end{DoxyCompactList}\item 
@@ -67,7 +67,7 @@ General \mbox{\hyperlink{classoomph_1_1SpineMesh}{Spine\+Mesh}} class.
 
 Derived from \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} with virtual so that spine meshes can be derived from general meshes, without multiple copies of \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} objects. 
 
-Definition at line \mbox{\hyperlink{spines_8h_source_l00612}{612}} of file \mbox{\hyperlink{spines_8h_source}{spines.\+h}}.
+Definition at line 612 of file spines.\+h.
 
 
 
@@ -86,11 +86,11 @@ Destructor to clean up the memory allocated to the spines.
 
 //////////////////////////////////////////////////////////////// Destructor to clean up the memory allocated to the spines 
 
-Definition at line \mbox{\hyperlink{spines_8cc_source_l00066}{66}} of file \mbox{\hyperlink{spines_8cc_source}{spines.\+cc}}.
+Definition at line 66 of file spines.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{spines_8h_source_l00616}{Spine\+\_\+pt}}.
+References i, and Spine\+\_\+pt.
 
 
 
@@ -107,11 +107,11 @@ Add a spine to the mesh.
 
 
 
-Definition at line \mbox{\hyperlink{spines_8h_source_l00641}{641}} of file \mbox{\hyperlink{spines_8h_source}{spines.\+h}}.
+Definition at line 641 of file spines.\+h.
 
 
 
-References \mbox{\hyperlink{spines_8h_source_l00616}{Spine\+\_\+pt}}, and \mbox{\hyperlink{spines_8h_source_l00623}{spine\+\_\+pt()}}.
+References Spine\+\_\+pt, and spine\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1SpineMesh_ad969000be2d963bb4427bbde89ac47c2}\label{classoomph_1_1SpineMesh_ad969000be2d963bb4427bbde89ac47c2}} 
 \index{oomph::SpineMesh@{oomph::SpineMesh}!assign\_global\_spine\_eqn\_numbers@{assign\_global\_spine\_eqn\_numbers}}
@@ -127,11 +127,11 @@ Assign (global) equation numbers to spines, nodes and elements.
 
 Assign equation numbers for spines 
 
-Definition at line \mbox{\hyperlink{spines_8cc_source_l00124}{124}} of file \mbox{\hyperlink{spines_8cc_source}{spines.\+cc}}.
+Definition at line 124 of file spines.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{spines_8h_source_l00616}{Spine\+\_\+pt}}.
+References i, and Spine\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1SpineMesh_a94766043ec96db8388476b62556bad16}\label{classoomph_1_1SpineMesh_a94766043ec96db8388476b62556bad16}} 
 \index{oomph::SpineMesh@{oomph::SpineMesh}!describe\_spine\_dofs@{describe\_spine\_dofs}}
@@ -145,11 +145,11 @@ Function to describe the dofs of the \mbox{\hyperlink{classoomph_1_1Spine}{Spine
 
 
 
-Definition at line \mbox{\hyperlink{spines_8cc_source_l00154}{154}} of file \mbox{\hyperlink{spines_8cc_source}{spines.\+cc}}.
+Definition at line 154 of file spines.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{spines_8h_source_l00616}{Spine\+\_\+pt}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
+References i, Spine\+\_\+pt, and oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
 
 \mbox{\Hypertarget{classoomph_1_1SpineMesh_a85444e7f6883f0540c75fd5f4cd9abe4}\label{classoomph_1_1SpineMesh_a85444e7f6883f0540c75fd5f4cd9abe4}} 
 \index{oomph::SpineMesh@{oomph::SpineMesh}!does\_pointer\_correspond\_to\_spine\_data@{does\_pointer\_correspond\_to\_spine\_data}}
@@ -163,11 +163,11 @@ Check whether the pointer parameter\+\_\+pt addresses data stored in the spines.
 
 Return true if the pointer addresses data stored within the spines, false if not. 
 
-Definition at line \mbox{\hyperlink{spines_8cc_source_l00207}{207}} of file \mbox{\hyperlink{spines_8cc_source}{spines.\+cc}}.
+Definition at line 207 of file spines.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{spines_8h_source_l00635}{nspine()}}, and \mbox{\hyperlink{spines_8h_source_l00616}{Spine\+\_\+pt}}.
+References i, nspine(), and Spine\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1SpineMesh_a4181640b3ddff5d710397c8f3a51a494}\label{classoomph_1_1SpineMesh_a4181640b3ddff5d710397c8f3a51a494}} 
 \index{oomph::SpineMesh@{oomph::SpineMesh}!dump@{dump}}
@@ -181,17 +181,17 @@ Overload the dump function so that the spine data is dumped.
 
 Overload the dump function so that the spine data is also dumped. 
 
-Definition at line \mbox{\hyperlink{spines_8cc_source_l00229}{229}} of file \mbox{\hyperlink{spines_8cc_source}{spines.\+cc}}.
+Definition at line 229 of file spines.\+cc.
 
 
 
-References \mbox{\hyperlink{mesh_8cc_source_l01088}{oomph\+::\+Mesh\+::dump()}}, \mbox{\hyperlink{nodes_8cc_source_l00645}{oomph\+::\+Data\+::dump()}}, \mbox{\hyperlink{spines_8h_source_l00635}{nspine()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{spines_8h_source_l00156}{oomph\+::\+Spine\+::spine\+\_\+height\+\_\+pt()}}, and \mbox{\hyperlink{spines_8h_source_l00623}{spine\+\_\+pt()}}.
+References oomph\+::\+Mesh\+::dump(), oomph\+::\+Data\+::dump(), nspine(), s, oomph\+::\+Spine\+::spine\+\_\+height\+\_\+pt(), and spine\+\_\+pt().
 
-\mbox{\Hypertarget{classoomph_1_1SpineMesh_adc29c3a91cc31401c7ba5922a600284c}\label{classoomph_1_1SpineMesh_adc29c3a91cc31401c7ba5922a600284c}} 
+\mbox{\Hypertarget{classoomph_1_1SpineMesh_aea36e8d0454965f9f96a3adc4a5a9371}\label{classoomph_1_1SpineMesh_aea36e8d0454965f9f96a3adc4a5a9371}} 
 \index{oomph::SpineMesh@{oomph::SpineMesh}!element\_node\_pt@{element\_node\_pt}}
 \index{element\_node\_pt@{element\_node\_pt}!oomph::SpineMesh@{oomph::SpineMesh}}
 \doxysubsubsection{\texorpdfstring{element\_node\_pt()}{element\_node\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}} $\ast$ oomph\+::\+Spine\+Mesh\+::element\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{e,  }\item[{const unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}}$\ast$ oomph\+::\+Spine\+Mesh\+::element\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{e,  }\item[{const unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -199,21 +199,21 @@ Return the n-\/th local \mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}} 
 
 
 
-Definition at line \mbox{\hyperlink{spines_8h_source_l00669}{669}} of file \mbox{\hyperlink{spines_8h_source}{spines.\+h}}.
+Definition at line 669 of file spines.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00186}{oomph\+::\+Mesh\+::\+Element\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{spines_8h_source_l00648}{node\+\_\+pt()}}.
+References e, oomph\+::\+Mesh\+::\+Element\+\_\+pt, oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and node\+\_\+pt().
 
 
 
-Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l00058}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bretherton\+Spine\+Mesh()}}.
+Referenced by oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bretherton\+Spine\+Mesh().
 
-\mbox{\Hypertarget{classoomph_1_1SpineMesh_aa15a8ebfd599a5d5f0cdb201e0313a18}\label{classoomph_1_1SpineMesh_aa15a8ebfd599a5d5f0cdb201e0313a18}} 
+\mbox{\Hypertarget{classoomph_1_1SpineMesh_a55bfdb79c8cf307c1b36e4948e5dc298}\label{classoomph_1_1SpineMesh_a55bfdb79c8cf307c1b36e4948e5dc298}} 
 \index{oomph::SpineMesh@{oomph::SpineMesh}!node\_pt@{node\_pt}}
 \index{node\_pt@{node\_pt}!oomph::SpineMesh@{oomph::SpineMesh}}
 \doxysubsubsection{\texorpdfstring{node\_pt()}{node\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}} $\ast$ oomph\+::\+Spine\+Mesh\+::node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}}$\ast$ oomph\+::\+Spine\+Mesh\+::node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -221,15 +221,15 @@ Return a pointer to the n-\/th global \mbox{\hyperlink{classoomph_1_1SpineNode}{
 
 
 
-Definition at line \mbox{\hyperlink{spines_8h_source_l00648}{648}} of file \mbox{\hyperlink{spines_8h_source}{spines.\+h}}.
+Definition at line 648 of file spines.\+h.
 
 
 
-References \mbox{\hyperlink{mesh_8h_source_l00183}{oomph\+::\+Mesh\+::\+Node\+\_\+pt}}.
+References oomph\+::\+Mesh\+::\+Node\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{spines_8h_source_l00669}{element\+\_\+node\+\_\+pt()}}.
+Referenced by element\+\_\+node\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1SpineMesh_ac04a655397d61da66c155f146c698d33}\label{classoomph_1_1SpineMesh_ac04a655397d61da66c155f146c698d33}} 
 \index{oomph::SpineMesh@{oomph::SpineMesh}!node\_update@{node\_update}}
@@ -247,15 +247,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Mesh_a95bf112e5e1b3892e70a41f9
 
 
 
-Definition at line \mbox{\hyperlink{spines_8cc_source_l00084}{84}} of file \mbox{\hyperlink{spines_8cc_source}{spines.\+cc}}.
+Definition at line 84 of file spines.\+cc.
 
 
 
-References \mbox{\hyperlink{mesh_8h_source_l00183}{oomph\+::\+Mesh\+::\+Node\+\_\+pt}}, \mbox{\hyperlink{spines_8cc_source_l00084}{node\+\_\+update()}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
-
-
-
-Referenced by \mbox{\hyperlink{spines_8cc_source_l00084}{node\+\_\+update()}}.
+References oomph\+::\+Mesh\+::\+Node\+\_\+pt, and oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
 
 \mbox{\Hypertarget{classoomph_1_1SpineMesh_a8aa10bf71f0d0126e2cdb98a4a4ae264}\label{classoomph_1_1SpineMesh_a8aa10bf71f0d0126e2cdb98a4a4ae264}} 
 \index{oomph::SpineMesh@{oomph::SpineMesh}!nspine@{nspine}}
@@ -269,15 +265,15 @@ Return the number of spines in the mesh.
 
 
 
-Definition at line \mbox{\hyperlink{spines_8h_source_l00635}{635}} of file \mbox{\hyperlink{spines_8h_source}{spines.\+h}}.
+Definition at line 635 of file spines.\+h.
 
 
 
-References \mbox{\hyperlink{spines_8h_source_l00616}{Spine\+\_\+pt}}.
+References Spine\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{spines_8cc_source_l00207}{does\+\_\+pointer\+\_\+correspond\+\_\+to\+\_\+spine\+\_\+data()}}, \mbox{\hyperlink{spines_8cc_source_l00229}{dump()}}, \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00128}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::pin\+\_\+all\+\_\+spines()}}, \mbox{\hyperlink{spines_8cc_source_l00253}{read()}}, \mbox{\hyperlink{spines_8cc_source_l00189}{set\+\_\+consistent\+\_\+pinned\+\_\+spine\+\_\+values\+\_\+for\+\_\+continuation()}}, and \mbox{\hyperlink{spines_8cc_source_l00171}{set\+\_\+spine\+\_\+time\+\_\+stepper()}}.
+Referenced by does\+\_\+pointer\+\_\+correspond\+\_\+to\+\_\+spine\+\_\+data(), dump(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::pin\+\_\+all\+\_\+spines(), read(), set\+\_\+consistent\+\_\+pinned\+\_\+spine\+\_\+values\+\_\+for\+\_\+continuation(), and set\+\_\+spine\+\_\+time\+\_\+stepper().
 
 \mbox{\Hypertarget{classoomph_1_1SpineMesh_a281b1de21b0957de28fe78a93c80a215}\label{classoomph_1_1SpineMesh_a281b1de21b0957de28fe78a93c80a215}} 
 \index{oomph::SpineMesh@{oomph::SpineMesh}!read@{read}}
@@ -295,11 +291,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Mesh_ac192b41d1a24297ff3885454
 
 
 
-Definition at line \mbox{\hyperlink{spines_8cc_source_l00253}{253}} of file \mbox{\hyperlink{spines_8cc_source}{spines.\+cc}}.
+Definition at line 253 of file spines.\+cc.
 
 
 
-References \mbox{\hyperlink{spines_8h_source_l00635}{nspine()}}, \mbox{\hyperlink{mesh_8cc_source_l01130}{oomph\+::\+Mesh\+::read()}}, \mbox{\hyperlink{nodes_8cc_source_l00672}{oomph\+::\+Data\+::read()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{spines_8h_source_l00156}{oomph\+::\+Spine\+::spine\+\_\+height\+\_\+pt()}}, \mbox{\hyperlink{spines_8h_source_l00623}{spine\+\_\+pt()}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
+References nspine(), oomph\+::\+Mesh\+::read(), oomph\+::\+Data\+::read(), s, oomph\+::\+Spine\+::spine\+\_\+height\+\_\+pt(), spine\+\_\+pt(), and oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
 
 \mbox{\Hypertarget{classoomph_1_1SpineMesh_a0ec20ffa3e78435f8daa087147900d9a}\label{classoomph_1_1SpineMesh_a0ec20ffa3e78435f8daa087147900d9a}} 
 \index{oomph::SpineMesh@{oomph::SpineMesh}!set\_consistent\_pinned\_spine\_values\_for\_continuation@{set\_consistent\_pinned\_spine\_values\_for\_continuation}}
@@ -313,11 +309,11 @@ Set any pinned spine \char`\"{}history\char`\"{} values to be consistent for con
 
 Set the data associated with pinned spine values to be consistent for continuation when using the continuation storage scheme. 
 
-Definition at line \mbox{\hyperlink{spines_8cc_source_l00189}{189}} of file \mbox{\hyperlink{spines_8cc_source}{spines.\+cc}}.
+Definition at line 189 of file spines.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{spines_8h_source_l00635}{nspine()}}, \mbox{\hyperlink{generalised__timesteppers_8h_source_l00221}{oomph\+::\+Continuation\+Storage\+Scheme\+::set\+\_\+consistent\+\_\+pinned\+\_\+values()}}, and \mbox{\hyperlink{spines_8h_source_l00616}{Spine\+\_\+pt}}.
+References i, nspine(), oomph\+::\+Continuation\+Storage\+Scheme\+::set\+\_\+consistent\+\_\+pinned\+\_\+values(), and Spine\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1SpineMesh_ad858479b2509532604bc48a184ad55a9}\label{classoomph_1_1SpineMesh_ad858479b2509532604bc48a184ad55a9}} 
 \index{oomph::SpineMesh@{oomph::SpineMesh}!set\_mesh\_level\_time\_stepper@{set\_mesh\_level\_time\_stepper}}
@@ -335,11 +331,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Mesh_a52c30b4ebc67038e137a5de1
 
 
 
-Definition at line \mbox{\hyperlink{spines_8h_source_l00721}{721}} of file \mbox{\hyperlink{spines_8h_source}{spines.\+h}}.
+Definition at line 721 of file spines.\+h.
 
 
 
-References \mbox{\hyperlink{spines_8cc_source_l00171}{set\+\_\+spine\+\_\+time\+\_\+stepper()}}.
+References set\+\_\+spine\+\_\+time\+\_\+stepper().
 
 \mbox{\Hypertarget{classoomph_1_1SpineMesh_a96c6e27c4029aa2424d00e138c30de2c}\label{classoomph_1_1SpineMesh_a96c6e27c4029aa2424d00e138c30de2c}} 
 \index{oomph::SpineMesh@{oomph::SpineMesh}!set\_spine\_time\_stepper@{set\_spine\_time\_stepper}}
@@ -353,15 +349,15 @@ Set the time stepper forthe spine data that is stored in the mesh.
 
 Assign time stepper to spines data. 
 
-Definition at line \mbox{\hyperlink{spines_8cc_source_l00171}{171}} of file \mbox{\hyperlink{spines_8cc_source}{spines.\+cc}}.
+Definition at line 171 of file spines.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{spines_8h_source_l00635}{nspine()}}, and \mbox{\hyperlink{spines_8h_source_l00616}{Spine\+\_\+pt}}.
+References i, nspine(), and Spine\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{spines_8h_source_l00721}{set\+\_\+mesh\+\_\+level\+\_\+time\+\_\+stepper()}}.
+Referenced by set\+\_\+mesh\+\_\+level\+\_\+time\+\_\+stepper().
 
 \mbox{\Hypertarget{classoomph_1_1SpineMesh_aa7843aadce3c540f34442671f59eb75b}\label{classoomph_1_1SpineMesh_aa7843aadce3c540f34442671f59eb75b}} 
 \index{oomph::SpineMesh@{oomph::SpineMesh}!spine\_node\_update@{spine\_node\_update}}
@@ -375,17 +371,17 @@ Update function for given spine node -- this must be implemented by all specific
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a981301706d4940cfb24d3d769a7a523b}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_aefa38017e44e64ad0cd86d87d397bf8d}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1HorizontalSingleLayerSpineMesh_a4b9b833a281aa64a809b4e47159282e6}{oomph\+::\+Horizontal\+Single\+Layer\+Spine\+Mesh$<$ ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1SingleLayerCubicSpineMesh_a4851fbaed5be21441ad4f7b7f2a660e0}{oomph\+::\+Single\+Layer\+Cubic\+Spine\+Mesh$<$ ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1SingleLayerSpineMesh_a364648c15ab29c0c8d1cf7c2bc4cb792}{oomph\+::\+Single\+Layer\+Spine\+Mesh$<$ ELEMENT $>$}}, and \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_ad9b80ae7e34be72ca03f6d1bc6062de4}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_ad9b80ae7e34be72ca03f6d1bc6062de4}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1SingleLayerSpineMesh_a364648c15ab29c0c8d1cf7c2bc4cb792}{oomph\+::\+Single\+Layer\+Spine\+Mesh$<$ ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1SingleLayerCubicSpineMesh_a4851fbaed5be21441ad4f7b7f2a660e0}{oomph\+::\+Single\+Layer\+Cubic\+Spine\+Mesh$<$ ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1HorizontalSingleLayerSpineMesh_a4b9b833a281aa64a809b4e47159282e6}{oomph\+::\+Horizontal\+Single\+Layer\+Spine\+Mesh$<$ ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_aefa38017e44e64ad0cd86d87d397bf8d}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$}}, and \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a981301706d4940cfb24d3d769a7a523b}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$}}.
 
 
 
-Referenced by \mbox{\hyperlink{spines_8cc_source_l00044}{oomph\+::\+Spine\+Node\+::node\+\_\+update()}}.
+Referenced by oomph\+::\+Spine\+Node\+::node\+\_\+update().
 
-\mbox{\Hypertarget{classoomph_1_1SpineMesh_a6e67783a65a7134b3174c15ccf92acfa}\label{classoomph_1_1SpineMesh_a6e67783a65a7134b3174c15ccf92acfa}} 
+\mbox{\Hypertarget{classoomph_1_1SpineMesh_aa8a4afbc37ff7f4c19e44c28c1d7552a}\label{classoomph_1_1SpineMesh_aa8a4afbc37ff7f4c19e44c28c1d7552a}} 
 \index{oomph::SpineMesh@{oomph::SpineMesh}!spine\_pt@{spine\_pt}}
 \index{spine\_pt@{spine\_pt}!oomph::SpineMesh@{oomph::SpineMesh}}
 \doxysubsubsection{\texorpdfstring{spine\_pt()}{spine\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Spine}{Spine}} $\ast$\& oomph\+::\+Spine\+Mesh\+::spine\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Spine}{Spine}}$\ast$\& oomph\+::\+Spine\+Mesh\+::spine\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -393,21 +389,21 @@ Return the i-\/th spine in the mesh.
 
 
 
-Definition at line \mbox{\hyperlink{spines_8h_source_l00623}{623}} of file \mbox{\hyperlink{spines_8h_source}{spines.\+h}}.
+Definition at line 623 of file spines.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{spines_8h_source_l00616}{Spine\+\_\+pt}}.
+References i, and Spine\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{spines_8h_source_l00641}{add\+\_\+spine\+\_\+pt()}}, \mbox{\hyperlink{spines_8cc_source_l00229}{dump()}}, \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00128}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::pin\+\_\+all\+\_\+spines()}}, and \mbox{\hyperlink{spines_8cc_source_l00253}{read()}}.
+Referenced by add\+\_\+spine\+\_\+pt(), dump(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::pin\+\_\+all\+\_\+spines(), and read().
 
-\mbox{\Hypertarget{classoomph_1_1SpineMesh_a3e0e58367a1af887baf2c2d147c7a1ef}\label{classoomph_1_1SpineMesh_a3e0e58367a1af887baf2c2d147c7a1ef}} 
+\mbox{\Hypertarget{classoomph_1_1SpineMesh_a13ad12ffbc4d5880aebdfbabc01755e1}\label{classoomph_1_1SpineMesh_a13ad12ffbc4d5880aebdfbabc01755e1}} 
 \index{oomph::SpineMesh@{oomph::SpineMesh}!spine\_pt@{spine\_pt}}
 \index{spine\_pt@{spine\_pt}!oomph::SpineMesh@{oomph::SpineMesh}}
 \doxysubsubsection{\texorpdfstring{spine\_pt()}{spine\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily const \mbox{\hyperlink{classoomph_1_1Spine}{Spine}} $\ast$ oomph\+::\+Spine\+Mesh\+::spine\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classoomph_1_1Spine}{Spine}}$\ast$ oomph\+::\+Spine\+Mesh\+::spine\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -415,11 +411,11 @@ Return the i-\/th spine in the mesh (const version)
 
 
 
-Definition at line \mbox{\hyperlink{spines_8h_source_l00629}{629}} of file \mbox{\hyperlink{spines_8h_source}{spines.\+h}}.
+Definition at line 629 of file spines.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{spines_8h_source_l00616}{Spine\+\_\+pt}}.
+References i, and Spine\+\_\+pt.
 
 
 
@@ -436,11 +432,11 @@ A \mbox{\hyperlink{classoomph_1_1Spine}{Spine}} mesh contains a \mbox{\hyperlink
 
 
 
-Definition at line \mbox{\hyperlink{spines_8h_source_l00616}{616}} of file \mbox{\hyperlink{spines_8h_source}{spines.\+h}}.
+Definition at line 616 of file spines.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{spines_8h_source_l00641}{add\+\_\+spine\+\_\+pt()}}, \mbox{\hyperlink{spines_8cc_source_l00124}{assign\+\_\+global\+\_\+spine\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l00058}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bretherton\+Spine\+Mesh()}}, \mbox{\hyperlink{channel__spine__mesh_8template_8h_source_l00214}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::centre\+\_\+spine\+\_\+pt()}}, \mbox{\hyperlink{spines_8cc_source_l00154}{describe\+\_\+spine\+\_\+dofs()}}, \mbox{\hyperlink{spines_8cc_source_l00207}{does\+\_\+pointer\+\_\+correspond\+\_\+to\+\_\+spine\+\_\+data()}}, \mbox{\hyperlink{channel__spine__mesh_8template_8h_source_l00200}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::left\+\_\+spine\+\_\+pt()}}, \mbox{\hyperlink{spines_8h_source_l00635}{nspine()}}, \mbox{\hyperlink{channel__spine__mesh_8template_8h_source_l00229}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::right\+\_\+spine\+\_\+pt()}}, \mbox{\hyperlink{spines_8cc_source_l00189}{set\+\_\+consistent\+\_\+pinned\+\_\+spine\+\_\+values\+\_\+for\+\_\+continuation()}}, \mbox{\hyperlink{spines_8cc_source_l00171}{set\+\_\+spine\+\_\+time\+\_\+stepper()}}, \mbox{\hyperlink{spines_8h_source_l00623}{spine\+\_\+pt()}}, and \mbox{\hyperlink{spines_8cc_source_l00066}{$\sim$\+Spine\+Mesh()}}.
+Referenced by add\+\_\+spine\+\_\+pt(), assign\+\_\+global\+\_\+spine\+\_\+eqn\+\_\+numbers(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bretherton\+Spine\+Mesh(), oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::centre\+\_\+spine\+\_\+pt(), describe\+\_\+spine\+\_\+dofs(), does\+\_\+pointer\+\_\+correspond\+\_\+to\+\_\+spine\+\_\+data(), oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::left\+\_\+spine\+\_\+pt(), nspine(), oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::right\+\_\+spine\+\_\+pt(), set\+\_\+consistent\+\_\+pinned\+\_\+spine\+\_\+values\+\_\+for\+\_\+continuation(), set\+\_\+spine\+\_\+time\+\_\+stepper(), spine\+\_\+pt(), and $\sim$\+Spine\+Mesh().
 
 
 

@@ -34,9 +34,9 @@ The boundary conditions are such that a single pressure degree of freedom must b
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Actions after adaptation, re-\/set all interactions, then}}
+\DoxyCodeLine{ \textcolor{comment}{/// Actions after adaptation, re-\/set all interactions, then}}
 \DoxyCodeLine{\textcolor{comment}{ /// re-\/pin a single pressure degree of freedom}}
-\DoxyCodeLine{ \textcolor{keywordtype}{void} actions\_after\_adapt()}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_adapt()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{//Unpin all the pressures in NST mesh to avoid pinning two pressures}}
 \DoxyCodeLine{   RefineableNavierStokesEquations<2>::}
@@ -71,7 +71,7 @@ After the problem distribution, the multi-\/domain interactions must be set up a
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Actions after distribute: Re-\/setup multi-\/domain interaction}}
+\DoxyCodeLine{ \textcolor{comment}{/// Actions after distribute: Re-\/setup multi-\/domain interaction}}
 \DoxyCodeLine{ \textcolor{keywordtype}{void} actions\_after\_distribute()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Re-\/set all the interactions in the problem}}

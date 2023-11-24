@@ -9,7 +9,7 @@ In this document, we discuss the solution of the buckling of a cylindrical shell
 \DoxyCodeLine{\textcolor{comment}{//LIC// multi-\/physics finite-\/element library, available }}
 \DoxyCodeLine{\textcolor{comment}{//LIC// at http://www.oomph-\/lib.org.}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// }}
-\DoxyCodeLine{\textcolor{comment}{//LIC// Copyright (C) 2006-\/2022 Matthias Heil and Andrew Hazel}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// Copyright (C) 2006-\/2023 Matthias Heil and Andrew Hazel}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// }}
 \DoxyCodeLine{\textcolor{comment}{//LIC// This library is free software; you can redistribute it and/or}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// modify it under the terms of the GNU Lesser General Public}}
@@ -103,14 +103,14 @@ In this document, we discuss the solution of the buckling of a cylindrical shell
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Constructor for the mesh}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classShellMesh_a6ce8404f69fa3f4c10dac5c18cff0699}{ShellMesh}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&nx, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&ny, }
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classShellMesh}{ShellMesh}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&nx, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&ny, }
 \DoxyCodeLine{           \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&lx, \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&ly);}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// In all elastic problems, the nodes must be assigned an undeformed,}}
 \DoxyCodeLine{\textcolor{comment}{ /// or reference, position, corresponding to the stress-\/free state}}
 \DoxyCodeLine{\textcolor{comment}{ /// of the elastic body. This function assigns the undeformed position }}
 \DoxyCodeLine{\textcolor{comment}{ /// for the nodes on the elastic tube}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classShellMesh_a3576870121fad30d0f99588ea8082ca1}{assign\_undeformed\_positions}}(GeomObject* \textcolor{keyword}{const} \&undeformed\_midplane\_pt);}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} assign\_undeformed\_positions(GeomObject* \textcolor{keyword}{const} \&undeformed\_midplane\_pt);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\};}
 \DoxyCodeLine{}
@@ -227,7 +227,7 @@ In this document, we discuss the solution of the buckling of a cylindrical shell
 \DoxyCodeLine{              \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&lx, \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&ly);}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Overload Access function for the mesh}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classShellMesh}{ShellMesh<ELEMENT>}}* \mbox{\hyperlink{classShellProblem_afc9aeb3cac98033db75b8963f8304928}{mesh\_pt}}() }
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classShellMesh}{ShellMesh<ELEMENT>}}* \mbox{\hyperlink{classShellProblem_a1905a1b913469ed54f7c8f55d133ff57}{mesh\_pt}}() }
 \DoxyCodeLine{  \{\textcolor{keywordflow}{return} \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classShellMesh}{ShellMesh<ELEMENT>}}*\textcolor{keyword}{>}(Problem::mesh\_pt());\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Actions after solve empty}}

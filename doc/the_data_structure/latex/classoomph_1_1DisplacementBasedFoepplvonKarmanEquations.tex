@@ -31,13 +31,13 @@ typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKar
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a94b04b8947a5256fd5a769aa4fe53959}{operator=}} (const \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations}{Displacement\+Based\+Foepplvon\+Karman\+Equations}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
-const double \& \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_aa6241a86ee667c6e9f6030436d40f575}{nu}} () const
+const double \& \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a475db5e6023c4f6e0cf190683f13d58d}{nu}} () const
 \begin{DoxyCompactList}\small\item\em Poisson\textquotesingle{}s ratio. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a163b2986860dd6324ba0e96c88debaed}{nu\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a9e5f014ce1bd5405f9fe2288d2cdf1e4}{nu\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to Poisson\textquotesingle{}s ratio. \end{DoxyCompactList}\item 
-const double \& \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a33c26b3a1c4793324fc8878e7aabd964}{eta}} () const
+const double \& \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_ad8e7978589f1ddf2de86510969288f57}{eta}} () const
 \begin{DoxyCompactList}\small\item\em Eta. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a9f27526f0426b8fa2d00721740a65cdc}{eta\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_aec76fc8b86f8fab117fd464771b03716}{eta\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to eta. \end{DoxyCompactList}\item 
 virtual unsigned \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a85e8c68577eb3c8528269db180d8db84}{nodal\+\_\+index\+\_\+fvk}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}=0) const
 \begin{DoxyCompactList}\small\item\em Return the index at which the i-\/th unknown value is stored. The default value, i, is appropriate for single-\/physics problems. By default, these are\+: 0\+: w 1\+: laplacian w 2\+: u\+\_\+x 3\+: u\+\_\+y In derived multi-\/physics elements, this function should be overloaded to reflect the chosen storage scheme. Note that these equations require that the unknown is always stored at the same index at each node. \end{DoxyCompactList}\item 
@@ -57,11 +57,11 @@ void \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a2
 \begin{DoxyCompactList}\small\item\em Get error against and norm of exact solution. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_aab27e73211bd9c4a569730883dc869b3}{compute\+\_\+error}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt, const double \&time, double \&error, double \&norm)
 \begin{DoxyCompactList}\small\item\em Dummy, time dependent error checker. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a9d63b92b57e3b521a5a10cecdafc4e65}{Foepplvon\+Karman\+Pressure\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_abe1dfd5cded2d4390d33c1bfb485565b}{pressure\+\_\+fct\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a9d63b92b57e3b521a5a10cecdafc4e65}{Foepplvon\+Karman\+Pressure\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a4a3f67d05cac2f289195c025a4c28d67}{pressure\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to pressure function. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a9d63b92b57e3b521a5a10cecdafc4e65}{Foepplvon\+Karman\+Pressure\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a83ab5c54053dc8c57395054158ca6c45}{pressure\+\_\+fct\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to pressure function. Const version. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_ab2c41b3ecc15b89802657c068ee3e1cc}{Foepplvon\+Karman\+Traction\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a516b4f5d335e751392cec92d2a7facb4}{traction\+\_\+fct\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_ab2c41b3ecc15b89802657c068ee3e1cc}{Foepplvon\+Karman\+Traction\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_adae0b6cc04c60bf4dcabdaea5edc3c54}{traction\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to in-\/plane traction function. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_ab2c41b3ecc15b89802657c068ee3e1cc}{Foepplvon\+Karman\+Traction\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a51df88cf83e1358f852974f2f358c42c}{traction\+\_\+fct\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to in-\/plane traction function. Const version. \end{DoxyCompactList}\item 
@@ -82,7 +82,7 @@ void \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a9
 void \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_ae5b7e25d861df6134d1ea4457e6e1880}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em Fill in the residuals with this element\textquotesingle{}s contribution. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_aac329f225fd5f309b23da3299fefdec1}{interpolated\+\_\+w\+\_\+fvk}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, unsigned index=0) const
-\begin{DoxyCompactList}\small\item\em Return FE representation of function value w\+\_\+fvk(s) at local coordinate s (by default -\/ if index \texorpdfstring{$>$}{>} 0, returns FE representation of valued stored at index$^\wedge$th nodal index. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Return FE representation of function value w\+\_\+fvk(s) at local coordinate s (by default -\/ if index $>$ 0, returns FE representation of valued stored at index$^\wedge$th nodal index. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a3e1ad8befd0561258f86c8e97da30744}{self\+\_\+test}} ()
 \begin{DoxyCompactList}\small\item\em Self-\/test\+: Return 0 for OK. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a29d4c7f7789b70e49e6555971f6abc96}{use\+\_\+linear\+\_\+bending\+\_\+model}} ()
@@ -125,7 +125,7 @@ A class for all isoparametric elements that solve the Foeppl von Karman equation
 
 \[ \nabla^4 w - \eta \frac{\partial}{\partial x_{\beta}} \left( \sigma^{\alpha \beta} \frac{\partial w}{\partial x_{\alpha}} \right) = p(x,y) \] and \[ \frac{\sigma^{\alpha \beta}}{\partial x_{\beta}} = \tau_\alpha \] This contains the generic maths. \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} functions, geometric mapping etc. must get implemented in derived class. 
 
-Definition at line \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00054}{54}} of file \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source}{displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 54 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -142,7 +142,7 @@ Function pointer to pressure function fct(x,f(x)) -- x is a Vector!
 
 
 
-Definition at line \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00059}{59}} of file \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source}{displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 59 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_ab2c41b3ecc15b89802657c068ee3e1cc}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_ab2c41b3ecc15b89802657c068ee3e1cc}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!FoepplvonKarmanTractionFctPt@{FoepplvonKarmanTractionFctPt}}
@@ -156,7 +156,7 @@ Function pointer to traction function fct(x,f(x)) -- x is a Vector!
 
 
 
-Definition at line \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00064}{64}} of file \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source}{displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 64 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
@@ -173,11 +173,11 @@ Constructor (must initialise the Pressure\+\_\+fct\+\_\+pt and the Traction\+\_\
 
 
 
-Definition at line \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00070}{70}} of file \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source}{displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 70 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00756}{Default\+\_\+\+Nu\+\_\+\+Value}}, \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00759}{Default\+\_\+\+Physical\+\_\+\+Constant\+\_\+\+Value}}, \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00746}{Eta\+\_\+pt}}, \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00763}{Linear\+\_\+bending\+\_\+model}}, and \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00743}{Nu\+\_\+pt}}.
+References Default\+\_\+\+Nu\+\_\+\+Value, Default\+\_\+\+Physical\+\_\+\+Constant\+\_\+\+Value, Eta\+\_\+pt, Linear\+\_\+bending\+\_\+model, and Nu\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a2ad088d92d78af45b76a765fc39e1969}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a2ad088d92d78af45b76a765fc39e1969}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!DisplacementBasedFoepplvonKarmanEquations@{DisplacementBasedFoepplvonKarmanEquations}}
@@ -210,11 +210,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a73c79a1f1e5b1d3
 
 
 
-Definition at line \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8cc_source_l00229}{229}} of file \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8cc_source}{displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+cc}}.
+Definition at line 229 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00658}{interpolated\+\_\+w\+\_\+fvk()}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8cc_source_l04103}{oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}, and \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral\+::weight()}}.
+References i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), interpolated\+\_\+w\+\_\+fvk(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Integral\+::knot(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Integral\+::nweight(), s, oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Integral\+::weight().
 
 \mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_aab27e73211bd9c4a569730883dc869b3}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_aab27e73211bd9c4a569730883dc869b3}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!compute\_error@{compute\_error}}
@@ -232,7 +232,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a7f67853506dc73f
 
 
 
-Definition at line \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00181}{181}} of file \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source}{displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 181 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a93b089c7109311817e2fbd7dfcdca1f2}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a93b089c7109311817e2fbd7dfcdca1f2}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!dshape\_and\_dtest\_eulerian\_at\_knot\_fvk@{dshape\_and\_dtest\_eulerian\_at\_knot\_fvk}}
@@ -250,7 +250,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanE
 
 
 
-Referenced by \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00470}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
+Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
 
 \mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a91d0e65a45461295c271b6f2e9604f67}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a91d0e65a45461295c271b6f2e9604f67}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!dshape\_and\_dtest\_eulerian\_fvk@{dshape\_and\_dtest\_eulerian\_fvk}}
@@ -266,11 +266,11 @@ Shape/test functions and derivs w.\+r.\+t. to global coords at local coord. s; r
 
 Implemented in \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarmanElement_a1df4d4f099c7a710a1c43004266e4ea7}{oomph\+::\+TDisplacement\+Based\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D $>$}}.
 
-\mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a33c26b3a1c4793324fc8878e7aabd964}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a33c26b3a1c4793324fc8878e7aabd964}} 
+\mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_ad8e7978589f1ddf2de86510969288f57}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_ad8e7978589f1ddf2de86510969288f57}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!eta@{eta}}
 \index{eta@{eta}!oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}}
 \doxysubsubsection{\texorpdfstring{eta()}{eta()}}
-{\footnotesize\ttfamily const double \& oomph\+::\+Displacement\+Based\+Foepplvon\+Karman\+Equations\+::eta (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const double\& oomph\+::\+Displacement\+Based\+Foepplvon\+Karman\+Equations\+::eta (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -278,21 +278,21 @@ Eta.
 
 
 
-Definition at line \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00103}{103}} of file \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source}{displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 103 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00746}{Eta\+\_\+pt}}.
+References Eta\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00470}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
+Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
 
-\mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a9f27526f0426b8fa2d00721740a65cdc}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a9f27526f0426b8fa2d00721740a65cdc}} 
+\mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_aec76fc8b86f8fab117fd464771b03716}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_aec76fc8b86f8fab117fd464771b03716}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!eta\_pt@{eta\_pt}}
 \index{eta\_pt@{eta\_pt}!oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}}
 \doxysubsubsection{\texorpdfstring{eta\_pt()}{eta\_pt()}}
-{\footnotesize\ttfamily double $\ast$\& oomph\+::\+Displacement\+Based\+Foepplvon\+Karman\+Equations\+::eta\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double$\ast$\& oomph\+::\+Displacement\+Based\+Foepplvon\+Karman\+Equations\+::eta\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -300,11 +300,11 @@ Pointer to eta.
 
 
 
-Definition at line \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00109}{109}} of file \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source}{displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 109 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00746}{Eta\+\_\+pt}}.
+References Eta\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a9c6a54fd6c46014805f5d3d55220e35b}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a9c6a54fd6c46014805f5d3d55220e35b}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix@{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix}}
@@ -322,11 +322,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a2b6294a730
 
 
 
-Definition at line \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00451}{451}} of file \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source}{displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 451 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01735}{oomph\+::\+Finite\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, and \mbox{\hyperlink{matrices_8h_source_l00485}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::nrow()}}.
+References oomph\+::\+Finite\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), i, oomph\+::\+Generalised\+Element\+::ndof(), and oomph\+::\+Dense\+Matrix$<$ T $>$\+::nrow().
 
 \mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_ae5b7e25d861df6134d1ea4457e6e1880}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_ae5b7e25d861df6134d1ea4457e6e1880}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
@@ -344,11 +344,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00470}{470}} of file \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source}{displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 470 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a93b089c7109311817e2fbd7dfcdca1f2}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+fvk()}}, \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00103}{eta()}}, \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00222}{get\+\_\+pressure\+\_\+fvk()}}, \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00341}{get\+\_\+sigma()}}, \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00239}{get\+\_\+traction\+\_\+fvk()}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00763}{Linear\+\_\+bending\+\_\+model}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00124}{nodal\+\_\+index\+\_\+fvk()}}, \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{elements_8h_source_l02317}{oomph\+::\+Finite\+Element\+::nodal\+\_\+position()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}, and \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral\+::weight()}}.
+References dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+fvk(), eta(), get\+\_\+pressure\+\_\+fvk(), get\+\_\+sigma(), get\+\_\+traction\+\_\+fvk(), oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), Linear\+\_\+bending\+\_\+model, oomph\+::\+Finite\+Element\+::nnode(), nodal\+\_\+index\+\_\+fvk(), oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), oomph\+::\+Finite\+Element\+::nodal\+\_\+position(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), oomph\+::\+Integral\+::nweight(), oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Integral\+::weight().
 
 \mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a96188696e059a5a74172be73756f8f27}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a96188696e059a5a74172be73756f8f27}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!get\_gradient\_of\_deflection@{get\_gradient\_of\_deflection}}
@@ -362,15 +362,15 @@ Get gradient of deflection\+: gradient\mbox{[}i\mbox{]} = dw/dx\+\_\+i.
 
 
 
-Definition at line \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00256}{256}} of file \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source}{displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 256 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l03298}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00124}{nodal\+\_\+index\+\_\+fvk()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian(), oomph\+::\+Finite\+Element\+::nnode(), nodal\+\_\+index\+\_\+fvk(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), and s.
 
 
 
-Referenced by \mbox{\hyperlink{Tdisplacement__based__foeppl__von__karman__elements_8h_source_l00316}{oomph\+::\+TDisplacement\+Based\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D $>$\+::get\+\_\+\+Z2\+\_\+flux()}}.
+Referenced by oomph\+::\+TDisplacement\+Based\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D $>$\+::get\+\_\+\+Z2\+\_\+flux().
 
 \mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a7f0e08691ebe9a34bfd95d6f2c38558f}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a7f0e08691ebe9a34bfd95d6f2c38558f}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!get\_gradient\_of\_field@{get\_gradient\_of\_field}}
@@ -384,11 +384,11 @@ Get gradient of field\+: gradient\mbox{[}i\mbox{]} = d\mbox{[}.\mbox{]}/dx\+\_\+
 
 
 
-Definition at line \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00300}{300}} of file \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source}{displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 300 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l03298}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00124}{nodal\+\_\+index\+\_\+fvk()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian(), oomph\+::\+Finite\+Element\+::nnode(), nodal\+\_\+index\+\_\+fvk(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), and s.
 
 \mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_adf1849b94ae0a98459a02405cde57a1c}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_adf1849b94ae0a98459a02405cde57a1c}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!get\_pressure\_fvk@{get\_pressure\_fvk}}
@@ -402,15 +402,15 @@ Get pressure term at (Eulerian) position x. This function is virtual to allow ov
 
 
 
-Definition at line \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00222}{222}} of file \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source}{displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 222 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00749}{Pressure\+\_\+fct\+\_\+pt}}.
+References Pressure\+\_\+fct\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00470}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
+Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
 
 \mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_ad1f40f34ceb5c97eed8dbc12cc414044}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_ad1f40f34ceb5c97eed8dbc12cc414044}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!get\_sigma@{get\_sigma}}
@@ -424,15 +424,15 @@ Get the in-\/plane stress (sigma) as a fct of the pre=computed displcement deriv
 
 
 
-Definition at line \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00341}{341}} of file \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source}{displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 341 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00091}{nu()}}.
+References nu().
 
 
 
-Referenced by \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00470}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}, and \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00371}{get\+\_\+stress\+\_\+and\+\_\+strain\+\_\+for\+\_\+output()}}.
+Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), and get\+\_\+stress\+\_\+and\+\_\+strain\+\_\+for\+\_\+output().
 
 \mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a4382eef3eb303d5429d6b3edd1d1c6c5}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a4382eef3eb303d5429d6b3edd1d1c6c5}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!get\_stress\_and\_strain\_for\_output@{get\_stress\_and\_strain\_for\_output}}
@@ -442,15 +442,15 @@ Referenced by \mbox{\hyperlink{displacement__based__foeppl__von__karman__element
 
 
 
-Definition at line \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00371}{371}} of file \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source}{displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 371 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l03298}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian()}}, \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00341}{get\+\_\+sigma()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00124}{nodal\+\_\+index\+\_\+fvk()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian(), get\+\_\+sigma(), oomph\+::\+Finite\+Element\+::nnode(), nodal\+\_\+index\+\_\+fvk(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), and s.
 
 
 
-Referenced by \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8cc_source_l00076}{output()}}.
+Referenced by output().
 
 \mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_afd044e54b959f0238ec8724ea529fbd6}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_afd044e54b959f0238ec8724ea529fbd6}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!get\_traction\_fvk@{get\_traction\_fvk}}
@@ -464,15 +464,15 @@ Get in-\/plane traction term at (Eulerian) position x.
 
 
 
-Definition at line \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00239}{239}} of file \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source}{displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 239 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00752}{Traction\+\_\+fct\+\_\+pt}}.
+References Traction\+\_\+fct\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00470}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
+Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
 
 \mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_aac329f225fd5f309b23da3299fefdec1}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_aac329f225fd5f309b23da3299fefdec1}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!interpolated\_w\_fvk@{interpolated\_w\_fvk}}
@@ -482,19 +482,19 @@ Referenced by \mbox{\hyperlink{displacement__based__foeppl__von__karman__element
 
 
 
-Return FE representation of function value w\+\_\+fvk(s) at local coordinate s (by default -\/ if index \texorpdfstring{$>$}{>} 0, returns FE representation of valued stored at index$^\wedge$th nodal index. 
+Return FE representation of function value w\+\_\+fvk(s) at local coordinate s (by default -\/ if index $>$ 0, returns FE representation of valued stored at index$^\wedge$th nodal index. 
 
 
 
-Definition at line \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00658}{658}} of file \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source}{displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 658 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00124}{nodal\+\_\+index\+\_\+fvk()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
+References oomph\+::\+Finite\+Element\+::nnode(), nodal\+\_\+index\+\_\+fvk(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), s, and oomph\+::\+Finite\+Element\+::shape().
 
 
 
-Referenced by \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8cc_source_l00229}{compute\+\_\+error()}}, and \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8cc_source_l00076}{output()}}.
+Referenced by compute\+\_\+error(), and output().
 
 \mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a85e8c68577eb3c8528269db180d8db84}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a85e8c68577eb3c8528269db180d8db84}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!nodal\_index\_fvk@{nodal\_index\_fvk}}
@@ -508,21 +508,21 @@ Return the index at which the i-\/th unknown value is stored. The default value,
 
 
 
-Definition at line \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00124}{124}} of file \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source}{displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 124 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References i.
 
 
 
-Referenced by \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00470}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}, \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00256}{get\+\_\+gradient\+\_\+of\+\_\+deflection()}}, \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00300}{get\+\_\+gradient\+\_\+of\+\_\+field()}}, \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00371}{get\+\_\+stress\+\_\+and\+\_\+strain\+\_\+for\+\_\+output()}}, \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00658}{interpolated\+\_\+w\+\_\+fvk()}}, and \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00691}{use\+\_\+linear\+\_\+bending\+\_\+model()}}.
+Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), get\+\_\+gradient\+\_\+of\+\_\+deflection(), get\+\_\+gradient\+\_\+of\+\_\+field(), get\+\_\+stress\+\_\+and\+\_\+strain\+\_\+for\+\_\+output(), interpolated\+\_\+w\+\_\+fvk(), and use\+\_\+linear\+\_\+bending\+\_\+model().
 
-\mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_aa6241a86ee667c6e9f6030436d40f575}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_aa6241a86ee667c6e9f6030436d40f575}} 
+\mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a475db5e6023c4f6e0cf190683f13d58d}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a475db5e6023c4f6e0cf190683f13d58d}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!nu@{nu}}
 \index{nu@{nu}!oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}}
 \doxysubsubsection{\texorpdfstring{nu()}{nu()}}
-{\footnotesize\ttfamily const double \& oomph\+::\+Displacement\+Based\+Foepplvon\+Karman\+Equations\+::nu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const double\& oomph\+::\+Displacement\+Based\+Foepplvon\+Karman\+Equations\+::nu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -530,21 +530,21 @@ Poisson\textquotesingle{}s ratio.
 
 
 
-Definition at line \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00091}{91}} of file \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source}{displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 91 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00743}{Nu\+\_\+pt}}.
+References Nu\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00341}{get\+\_\+sigma()}}.
+Referenced by get\+\_\+sigma().
 
-\mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a163b2986860dd6324ba0e96c88debaed}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a163b2986860dd6324ba0e96c88debaed}} 
+\mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a9e5f014ce1bd5405f9fe2288d2cdf1e4}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a9e5f014ce1bd5405f9fe2288d2cdf1e4}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!nu\_pt@{nu\_pt}}
 \index{nu\_pt@{nu\_pt}!oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}}
 \doxysubsubsection{\texorpdfstring{nu\_pt()}{nu\_pt()}}
-{\footnotesize\ttfamily double $\ast$\& oomph\+::\+Displacement\+Based\+Foepplvon\+Karman\+Equations\+::nu\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double$\ast$\& oomph\+::\+Displacement\+Based\+Foepplvon\+Karman\+Equations\+::nu\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -552,11 +552,11 @@ Pointer to Poisson\textquotesingle{}s ratio.
 
 
 
-Definition at line \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00097}{97}} of file \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source}{displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 97 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00743}{Nu\+\_\+pt}}.
+References Nu\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a94b04b8947a5256fd5a769aa4fe53959}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a94b04b8947a5256fd5a769aa4fe53959}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!operator=@{operator=}}
@@ -588,11 +588,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarma
 
 
 
-Definition at line \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00141}{141}} of file \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source}{displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 141 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00130}{output()}}.
+References output().
 
 \mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_ad5c7fa0d55e2eb85d1f305b05be86a97}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_ad5c7fa0d55e2eb85d1f305b05be86a97}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!output@{output}}
@@ -618,11 +618,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarma
 
 
 
-Definition at line \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8cc_source_l00140}{140}} of file \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8cc_source}{displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+cc}}.
+Definition at line 140 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03148}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00658}{interpolated\+\_\+w\+\_\+fvk()}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l03186}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{elements_8h_source_l03161}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}, and \mbox{\hyperlink{elements_8h_source_l03174}{oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer()}}.
+References oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot(), i, interpolated\+\_\+w\+\_\+fvk(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Finite\+Element\+::nplot\+\_\+points(), s, oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string(), and oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer().
 
 \mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a7e806927a451e21dc0b2f10cf98a5941}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a7e806927a451e21dc0b2f10cf98a5941}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!output@{output}}
@@ -644,15 +644,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarma
 
 
 
-Definition at line \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00130}{130}} of file \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source}{displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 130 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00130}{output()}}.
-
-
-
-Referenced by \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00130}{output()}}, and \mbox{\hyperlink{Tdisplacement__based__foeppl__von__karman__elements_8h_source_l00233}{oomph\+::\+TDisplacement\+Based\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D $>$\+::output()}}.
+Referenced by output(), and oomph\+::\+TDisplacement\+Based\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D $>$\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a675597ddd788e92dd6fb8d3bfed01c5b}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a675597ddd788e92dd6fb8d3bfed01c5b}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!output@{output}}
@@ -678,11 +674,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarma
 
 
 
-Definition at line \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8cc_source_l00076}{76}} of file \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8cc_source}{displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+cc}}.
+Definition at line 76 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03148}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00371}{get\+\_\+stress\+\_\+and\+\_\+strain\+\_\+for\+\_\+output()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00658}{interpolated\+\_\+w\+\_\+fvk()}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l03186}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{elements_8h_source_l03161}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}, and \mbox{\hyperlink{elements_8h_source_l03174}{oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer()}}.
+References oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot(), get\+\_\+stress\+\_\+and\+\_\+strain\+\_\+for\+\_\+output(), i, interpolated\+\_\+w\+\_\+fvk(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Finite\+Element\+::nplot\+\_\+points(), s, oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string(), and oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer().
 
 \mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a55cc825e8aedbc958617b03dea2afe29}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a55cc825e8aedbc958617b03dea2afe29}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!output\_fct@{output\_fct}}
@@ -704,7 +700,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarma
 
 
 
-Definition at line \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00159}{159}} of file \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source}{displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 159 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a43085c764ddc4c1b4676b3e89754f87a}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a43085c764ddc4c1b4676b3e89754f87a}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!output\_fct@{output\_fct}}
@@ -730,21 +726,21 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TDisplacementBasedFoepplvonKarma
 
 
 
-Definition at line \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8cc_source_l00176}{176}} of file \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8cc_source}{displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+cc}}.
+Definition at line 176 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03148}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l03186}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{elements_8h_source_l03161}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}, and \mbox{\hyperlink{elements_8h_source_l03174}{oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer()}}.
+References oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot(), i, oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Finite\+Element\+::nplot\+\_\+points(), s, oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string(), and oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer().
 
 
 
-Referenced by \mbox{\hyperlink{Tdisplacement__based__foeppl__von__karman__elements_8h_source_l00264}{oomph\+::\+TDisplacement\+Based\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D $>$\+::output\+\_\+fct()}}.
+Referenced by oomph\+::\+TDisplacement\+Based\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D $>$\+::output\+\_\+fct().
 
-\mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_abe1dfd5cded2d4390d33c1bfb485565b}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_abe1dfd5cded2d4390d33c1bfb485565b}} 
+\mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a4a3f67d05cac2f289195c025a4c28d67}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a4a3f67d05cac2f289195c025a4c28d67}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!pressure\_fct\_pt@{pressure\_fct\_pt}}
 \index{pressure\_fct\_pt@{pressure\_fct\_pt}!oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}}
 \doxysubsubsection{\texorpdfstring{pressure\_fct\_pt()}{pressure\_fct\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a9d63b92b57e3b521a5a10cecdafc4e65}{Foepplvon\+Karman\+Pressure\+Fct\+Pt}} \& oomph\+::\+Displacement\+Based\+Foepplvon\+Karman\+Equations\+::pressure\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a9d63b92b57e3b521a5a10cecdafc4e65}{Foepplvon\+Karman\+Pressure\+Fct\+Pt}}\& oomph\+::\+Displacement\+Based\+Foepplvon\+Karman\+Equations\+::pressure\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -752,11 +748,11 @@ Access function\+: Pointer to pressure function.
 
 
 
-Definition at line \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00195}{195}} of file \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source}{displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 195 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00749}{Pressure\+\_\+fct\+\_\+pt}}.
+References Pressure\+\_\+fct\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a83ab5c54053dc8c57395054158ca6c45}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a83ab5c54053dc8c57395054158ca6c45}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!pressure\_fct\_pt@{pressure\_fct\_pt}}
@@ -770,11 +766,11 @@ Access function\+: Pointer to pressure function. Const version.
 
 
 
-Definition at line \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00201}{201}} of file \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source}{displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 201 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00749}{Pressure\+\_\+fct\+\_\+pt}}.
+References Pressure\+\_\+fct\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a3e1ad8befd0561258f86c8e97da30744}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a3e1ad8befd0561258f86c8e97da30744}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!self\_test@{self\_test}}
@@ -792,17 +788,17 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_af94c5a5e22175d5
 
 
 
-Definition at line \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8cc_source_l00048}{48}} of file \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8cc_source}{displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+cc}}.
+Definition at line 48 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l04440}{oomph\+::\+Finite\+Element\+::self\+\_\+test()}}.
+References oomph\+::\+Finite\+Element\+::self\+\_\+test().
 
-\mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a516b4f5d335e751392cec92d2a7facb4}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a516b4f5d335e751392cec92d2a7facb4}} 
+\mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_adae0b6cc04c60bf4dcabdaea5edc3c54}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_adae0b6cc04c60bf4dcabdaea5edc3c54}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!traction\_fct\_pt@{traction\_fct\_pt}}
 \index{traction\_fct\_pt@{traction\_fct\_pt}!oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}}
 \doxysubsubsection{\texorpdfstring{traction\_fct\_pt()}{traction\_fct\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_ab2c41b3ecc15b89802657c068ee3e1cc}{Foepplvon\+Karman\+Traction\+Fct\+Pt}} \& oomph\+::\+Displacement\+Based\+Foepplvon\+Karman\+Equations\+::traction\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_ab2c41b3ecc15b89802657c068ee3e1cc}{Foepplvon\+Karman\+Traction\+Fct\+Pt}}\& oomph\+::\+Displacement\+Based\+Foepplvon\+Karman\+Equations\+::traction\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -810,11 +806,11 @@ Access function\+: Pointer to in-\/plane traction function.
 
 
 
-Definition at line \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00207}{207}} of file \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source}{displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 207 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00752}{Traction\+\_\+fct\+\_\+pt}}.
+References Traction\+\_\+fct\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a51df88cf83e1358f852974f2f358c42c}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a51df88cf83e1358f852974f2f358c42c}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!traction\_fct\_pt@{traction\_fct\_pt}}
@@ -828,11 +824,11 @@ Access function\+: Pointer to in-\/plane traction function. Const version.
 
 
 
-Definition at line \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00213}{213}} of file \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source}{displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 213 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00752}{Traction\+\_\+fct\+\_\+pt}}.
+References Traction\+\_\+fct\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a29d4c7f7789b70e49e6555971f6abc96}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a29d4c7f7789b70e49e6555971f6abc96}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!use\_linear\_bending\_model@{use\_linear\_bending\_model}}
@@ -846,11 +842,11 @@ Sets a flag to signify that we are solving the linear, pure bending equations, a
 
 
 
-Definition at line \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00691}{691}} of file \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source}{displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 691 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00763}{Linear\+\_\+bending\+\_\+model}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00124}{nodal\+\_\+index\+\_\+fvk()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8h_source_l00385}{oomph\+::\+Data\+::pin()}}.
+References Linear\+\_\+bending\+\_\+model, oomph\+::\+Finite\+Element\+::nnode(), nodal\+\_\+index\+\_\+fvk(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Data\+::pin().
 
 
 
@@ -867,11 +863,11 @@ Default value for Poisson\textquotesingle{}s ratio.
 
 
 
-Definition at line \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00756}{756}} of file \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source}{displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 756 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00070}{Displacement\+Based\+Foepplvon\+Karman\+Equations()}}.
+Referenced by Displacement\+Based\+Foepplvon\+Karman\+Equations().
 
 \mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_afbcb94cced9726c21000fd66088469d7}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_afbcb94cced9726c21000fd66088469d7}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!Default\_Physical\_Constant\_Value@{Default\_Physical\_Constant\_Value}}
@@ -891,11 +887,11 @@ Default value for physical constants.
 
 Default value physical constants. 
 
-Definition at line \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00759}{759}} of file \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source}{displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 759 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00070}{Displacement\+Based\+Foepplvon\+Karman\+Equations()}}.
+Referenced by Displacement\+Based\+Foepplvon\+Karman\+Equations().
 
 \mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_abf9d5f5d90d02be23cec55593b6f0e16}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_abf9d5f5d90d02be23cec55593b6f0e16}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!Eta\_pt@{Eta\_pt}}
@@ -909,11 +905,11 @@ Pointer to global eta.
 
 
 
-Definition at line \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00746}{746}} of file \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source}{displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 746 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00070}{Displacement\+Based\+Foepplvon\+Karman\+Equations()}}, \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00103}{eta()}}, and \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00109}{eta\+\_\+pt()}}.
+Referenced by Displacement\+Based\+Foepplvon\+Karman\+Equations(), eta(), and eta\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a1773ca38afe50787584bc7d00993447b}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a1773ca38afe50787584bc7d00993447b}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!Linear\_bending\_model@{Linear\_bending\_model}}
@@ -927,11 +923,11 @@ Flag which stores whether we are using a linear, pure bending model instead of t
 
 
 
-Definition at line \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00763}{763}} of file \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source}{displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 763 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00070}{Displacement\+Based\+Foepplvon\+Karman\+Equations()}}, \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00470}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}, and \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00691}{use\+\_\+linear\+\_\+bending\+\_\+model()}}.
+Referenced by Displacement\+Based\+Foepplvon\+Karman\+Equations(), fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), and use\+\_\+linear\+\_\+bending\+\_\+model().
 
 \mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a4afa5c268f1fea01e6cedf4bf7e17541}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a4afa5c268f1fea01e6cedf4bf7e17541}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!Nu\_pt@{Nu\_pt}}
@@ -945,11 +941,11 @@ Pointer to global Poisson\textquotesingle{}s ratio.
 
 
 
-Definition at line \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00743}{743}} of file \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source}{displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 743 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00070}{Displacement\+Based\+Foepplvon\+Karman\+Equations()}}, \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00091}{nu()}}, and \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00097}{nu\+\_\+pt()}}.
+Referenced by Displacement\+Based\+Foepplvon\+Karman\+Equations(), nu(), and nu\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a6cb9ee1c546aad3a331b8eff4703613c}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_a6cb9ee1c546aad3a331b8eff4703613c}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!Pressure\_fct\_pt@{Pressure\_fct\_pt}}
@@ -963,11 +959,11 @@ Pointer to pressure function\+:
 
 
 
-Definition at line \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00749}{749}} of file \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source}{displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 749 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00222}{get\+\_\+pressure\+\_\+fvk()}}, and \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00195}{pressure\+\_\+fct\+\_\+pt()}}.
+Referenced by get\+\_\+pressure\+\_\+fvk(), and pressure\+\_\+fct\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_ae89a72c87d03fe0fceee1a42bcd3fcb8}\label{classoomph_1_1DisplacementBasedFoepplvonKarmanEquations_ae89a72c87d03fe0fceee1a42bcd3fcb8}} 
 \index{oomph::DisplacementBasedFoepplvonKarmanEquations@{oomph::DisplacementBasedFoepplvonKarmanEquations}!Traction\_fct\_pt@{Traction\_fct\_pt}}
@@ -981,11 +977,11 @@ Pointer to traction function\+:
 
 
 
-Definition at line \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00752}{752}} of file \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source}{displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 752 of file displacement\+\_\+based\+\_\+foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00239}{get\+\_\+traction\+\_\+fvk()}}, and \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00207}{traction\+\_\+fct\+\_\+pt()}}.
+Referenced by get\+\_\+traction\+\_\+fvk(), and traction\+\_\+fct\+\_\+pt().
 
 
 

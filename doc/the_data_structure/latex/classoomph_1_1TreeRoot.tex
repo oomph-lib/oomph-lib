@@ -18,13 +18,13 @@ Inheritance diagram for oomph\+::Tree\+Root\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1TreeRoot_a9220f966655424676f4a5710b016c23d}{Tree\+Root}} (\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_a7d630dad19ef861ab6a5f37ad6ea67f4}{object\+\_\+pt}})
+\mbox{\hyperlink{classoomph_1_1TreeRoot_a9220f966655424676f4a5710b016c23d}{Tree\+Root}} (\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_a2f2eeb0f1dd161f696cccc652974ff4c}{object\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Constructor for the (empty) root tree. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1TreeRoot_a7db9e51a9aa23d8894ad0fc573853d05}{Tree\+Root}} (const \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} \&dummy)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TreeRoot_a1c486b91b11d6524a23f4ab8298f696b}{operator=}} (const \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} $\ast$\& \mbox{\hyperlink{classoomph_1_1TreeRoot_ae25383c6dd2ab2def3dc98bb5e279d58}{neighbour\+\_\+pt}} (const int \&direction)
+\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} $\ast$\& \mbox{\hyperlink{classoomph_1_1TreeRoot_ae793a707b05815957d5910d5216dddc1}{neighbour\+\_\+pt}} (const int \&direction)
 \begin{DoxyCompactList}\small\item\em Return the pointer to the neighbouring Tree\+Roots in specified direction. Returns NULL if there\textquotesingle{}s no neighbour in this direction. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1TreeRoot_a7be347e54e34f924c008c302f5146064}{is\+\_\+neighbour\+\_\+periodic}} (const int \&direction)
 \begin{DoxyCompactList}\small\item\em Return whether the neighbour in the particular direction is periodic. \end{DoxyCompactList}\item 
@@ -47,7 +47,7 @@ std\+::map$<$ int, bool $>$ \mbox{\hyperlink{classoomph_1_1TreeRoot_a067533f9b73
 \doxysubsection{Detailed Description}
 \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} is a \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} that forms the root of a (recursive) tree. The \char`\"{}root node\char`\"{} is special as it holds additional information about its neighbours and their relative rotation (inside a \mbox{\hyperlink{classoomph_1_1TreeForest}{Tree\+Forest}}). 
 
-Definition at line \mbox{\hyperlink{tree_8h_source_l00323}{323}} of file \mbox{\hyperlink{tree_8h_source}{tree.\+h}}.
+Definition at line 323 of file tree.\+h.
 
 
 
@@ -64,11 +64,11 @@ Constructor for the (empty) root tree.
 
 
 
-Definition at line \mbox{\hyperlink{tree_8h_source_l00342}{342}} of file \mbox{\hyperlink{tree_8h_source}{tree.\+h}}.
+Definition at line 342 of file tree.\+h.
 
 
 
-References \mbox{\hyperlink{tree_8h_source_l00292}{oomph\+::\+Tree\+::\+Root\+\_\+pt}}.
+References oomph\+::\+Tree\+::\+Root\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1TreeRoot_a7db9e51a9aa23d8894ad0fc573853d05}\label{classoomph_1_1TreeRoot_a7db9e51a9aa23d8894ad0fc573853d05}} 
 \index{oomph::TreeRoot@{oomph::TreeRoot}!TreeRoot@{TreeRoot}}
@@ -95,21 +95,21 @@ Return whether the neighbour in the particular direction is periodic.
 
 
 
-Definition at line \mbox{\hyperlink{tree_8h_source_l00364}{364}} of file \mbox{\hyperlink{tree_8h_source}{tree.\+h}}.
+Definition at line 364 of file tree.\+h.
 
 
 
-References \mbox{\hyperlink{tree_8h_source_l00338}{Neighbour\+\_\+periodic}}.
+References Neighbour\+\_\+periodic.
 
 
 
-Referenced by \mbox{\hyperlink{hp__refineable__elements_8cc_source_l03748}{oomph\+::\+PRefineable\+QElement$<$ 2, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::check\+\_\+integrity()}}, \mbox{\hyperlink{refineable__brick__element_8cc_source_l02509}{oomph\+::\+Refineable\+QElement$<$ 3 $>$\+::check\+\_\+integrity()}}, \mbox{\hyperlink{refineable__line__element_8cc_source_l00686}{oomph\+::\+Refineable\+QElement$<$ 1 $>$\+::check\+\_\+integrity()}}, \mbox{\hyperlink{refineable__quad__element_8cc_source_l01837}{oomph\+::\+Refineable\+QElement$<$ 2 $>$\+::check\+\_\+integrity()}}, \mbox{\hyperlink{octree_8cc_source_l04275}{oomph\+::\+Oc\+Tree\+::doc\+\_\+face\+\_\+neighbours()}}, \mbox{\hyperlink{binary__tree_8cc_source_l00668}{oomph\+::\+Binary\+Tree\+::doc\+\_\+neighbours()}}, \mbox{\hyperlink{quadtree_8cc_source_l01402}{oomph\+::\+Quad\+Tree\+::doc\+\_\+neighbours()}}, \mbox{\hyperlink{octree_8cc_source_l04552}{oomph\+::\+Oc\+Tree\+::doc\+\_\+true\+\_\+edge\+\_\+neighbours()}}, \mbox{\hyperlink{refineable__brick__element_8cc_source_l02142}{oomph\+::\+Refineable\+QElement$<$ 3 $>$\+::oc\+\_\+hang\+\_\+helper()}}, and \mbox{\hyperlink{refineable__quad__element_8cc_source_l01522}{oomph\+::\+Refineable\+QElement$<$ 2 $>$\+::quad\+\_\+hang\+\_\+helper()}}.
+Referenced by oomph\+::\+PRefineable\+QElement$<$ 2, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::check\+\_\+integrity(), oomph\+::\+Refineable\+QElement$<$ 3 $>$\+::check\+\_\+integrity(), oomph\+::\+Refineable\+QElement$<$ 1 $>$\+::check\+\_\+integrity(), oomph\+::\+Refineable\+QElement$<$ 2 $>$\+::check\+\_\+integrity(), oomph\+::\+Oc\+Tree\+::doc\+\_\+face\+\_\+neighbours(), oomph\+::\+Binary\+Tree\+::doc\+\_\+neighbours(), oomph\+::\+Quad\+Tree\+::doc\+\_\+neighbours(), oomph\+::\+Oc\+Tree\+::doc\+\_\+true\+\_\+edge\+\_\+neighbours(), oomph\+::\+Refineable\+QElement$<$ 3 $>$\+::oc\+\_\+hang\+\_\+helper(), and oomph\+::\+Refineable\+QElement$<$ 2 $>$\+::quad\+\_\+hang\+\_\+helper().
 
-\mbox{\Hypertarget{classoomph_1_1TreeRoot_ae25383c6dd2ab2def3dc98bb5e279d58}\label{classoomph_1_1TreeRoot_ae25383c6dd2ab2def3dc98bb5e279d58}} 
+\mbox{\Hypertarget{classoomph_1_1TreeRoot_ae793a707b05815957d5910d5216dddc1}\label{classoomph_1_1TreeRoot_ae793a707b05815957d5910d5216dddc1}} 
 \index{oomph::TreeRoot@{oomph::TreeRoot}!neighbour\_pt@{neighbour\_pt}}
 \index{neighbour\_pt@{neighbour\_pt}!oomph::TreeRoot@{oomph::TreeRoot}}
 \doxysubsubsection{\texorpdfstring{neighbour\_pt()}{neighbour\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} $\ast$\& oomph\+::\+Tree\+Root\+::neighbour\+\_\+pt (\begin{DoxyParamCaption}\item[{const int \&}]{direction }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}}$\ast$\& oomph\+::\+Tree\+Root\+::neighbour\+\_\+pt (\begin{DoxyParamCaption}\item[{const int \&}]{direction }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -117,15 +117,15 @@ Return the pointer to the neighbouring Tree\+Roots in specified direction. Retur
 
 
 
-Definition at line \mbox{\hyperlink{tree_8h_source_l00357}{357}} of file \mbox{\hyperlink{tree_8h_source}{tree.\+h}}.
+Definition at line 357 of file tree.\+h.
 
 
 
-References \mbox{\hyperlink{tree_8h_source_l00330}{Neighbour\+\_\+pt}}.
+References Neighbour\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{binary__tree_8cc_source_l00257}{oomph\+::\+Binary\+Tree\+::gteq\+\_\+edge\+\_\+neighbour()}}, \mbox{\hyperlink{quadtree_8cc_source_l00601}{oomph\+::\+Quad\+Tree\+::gteq\+\_\+edge\+\_\+neighbour()}}, and \mbox{\hyperlink{octree_8cc_source_l03839}{oomph\+::\+Oc\+Tree\+::gteq\+\_\+face\+\_\+neighbour()}}.
+Referenced by oomph\+::\+Binary\+Tree\+::gteq\+\_\+edge\+\_\+neighbour(), oomph\+::\+Quad\+Tree\+::gteq\+\_\+edge\+\_\+neighbour(), and oomph\+::\+Oc\+Tree\+::gteq\+\_\+face\+\_\+neighbour().
 
 \mbox{\Hypertarget{classoomph_1_1TreeRoot_a81be1a835829a48f7f443dcc85f369b9}\label{classoomph_1_1TreeRoot_a81be1a835829a48f7f443dcc85f369b9}} 
 \index{oomph::TreeRoot@{oomph::TreeRoot}!nneighbour@{nneighbour}}
@@ -139,11 +139,11 @@ Return the number of neighbours.
 
 
 
-Definition at line \mbox{\hyperlink{tree_8h_source_l00382}{382}} of file \mbox{\hyperlink{tree_8h_source}{tree.\+h}}.
+Definition at line 382 of file tree.\+h.
 
 
 
-References \mbox{\hyperlink{tree_8h_source_l00330}{Neighbour\+\_\+pt}}.
+References Neighbour\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1TreeRoot_a1c486b91b11d6524a23f4ab8298f696b}\label{classoomph_1_1TreeRoot_a1c486b91b11d6524a23f4ab8298f696b}} 
 \index{oomph::TreeRoot@{oomph::TreeRoot}!operator=@{operator=}}
@@ -167,11 +167,11 @@ Set the neighbour in particular direction to be nonperiodic.
 
 
 
-Definition at line \mbox{\hyperlink{tree_8h_source_l00376}{376}} of file \mbox{\hyperlink{tree_8h_source}{tree.\+h}}.
+Definition at line 376 of file tree.\+h.
 
 
 
-References \mbox{\hyperlink{tree_8h_source_l00338}{Neighbour\+\_\+periodic}}.
+References Neighbour\+\_\+periodic.
 
 \mbox{\Hypertarget{classoomph_1_1TreeRoot_ad4a2c51b2b42261bd8dde67ca32c594c}\label{classoomph_1_1TreeRoot_ad4a2c51b2b42261bd8dde67ca32c594c}} 
 \index{oomph::TreeRoot@{oomph::TreeRoot}!set\_neighbour\_periodic@{set\_neighbour\_periodic}}
@@ -185,11 +185,11 @@ Set the neighbour in particular direction to be periodic.
 
 
 
-Definition at line \mbox{\hyperlink{tree_8h_source_l00370}{370}} of file \mbox{\hyperlink{tree_8h_source}{tree.\+h}}.
+Definition at line 370 of file tree.\+h.
 
 
 
-References \mbox{\hyperlink{tree_8h_source_l00338}{Neighbour\+\_\+periodic}}.
+References Neighbour\+\_\+periodic.
 
 
 
@@ -206,11 +206,11 @@ Map of booleans used for periodic boundaries\+: Neighbour\+\_\+periodic\+\_\+dir
 
 
 
-Definition at line \mbox{\hyperlink{tree_8h_source_l00338}{338}} of file \mbox{\hyperlink{tree_8h_source}{tree.\+h}}.
+Definition at line 338 of file tree.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{tree_8h_source_l00364}{is\+\_\+neighbour\+\_\+periodic()}}, \mbox{\hyperlink{tree_8h_source_l00376}{set\+\_\+neighbour\+\_\+nonperiodic()}}, and \mbox{\hyperlink{tree_8h_source_l00370}{set\+\_\+neighbour\+\_\+periodic()}}.
+Referenced by is\+\_\+neighbour\+\_\+periodic(), set\+\_\+neighbour\+\_\+nonperiodic(), and set\+\_\+neighbour\+\_\+periodic().
 
 \mbox{\Hypertarget{classoomph_1_1TreeRoot_a8923854080ee44a2d1be477000309b13}\label{classoomph_1_1TreeRoot_a8923854080ee44a2d1be477000309b13}} 
 \index{oomph::TreeRoot@{oomph::TreeRoot}!Neighbour\_pt@{Neighbour\_pt}}
@@ -224,11 +224,11 @@ Map of pointers to the neighbouring Tree\+Roots\+: Neighbour\+\_\+pt\mbox{[}dire
 
 
 
-Definition at line \mbox{\hyperlink{tree_8h_source_l00330}{330}} of file \mbox{\hyperlink{tree_8h_source}{tree.\+h}}.
+Definition at line 330 of file tree.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{binary__tree_8h_source_l00262}{oomph\+::\+Binary\+Tree\+Root\+::direction\+\_\+of\+\_\+neighbour()}}, \mbox{\hyperlink{quadtree_8h_source_l00377}{oomph\+::\+Quad\+Tree\+Root\+::direction\+\_\+of\+\_\+neighbour()}}, \mbox{\hyperlink{octree_8h_source_l00814}{oomph\+::\+Oc\+Tree\+Root\+::direction\+\_\+of\+\_\+neighbour()}}, \mbox{\hyperlink{tree_8h_source_l00357}{neighbour\+\_\+pt()}}, and \mbox{\hyperlink{tree_8h_source_l00382}{nneighbour()}}.
+Referenced by oomph\+::\+Binary\+Tree\+Root\+::direction\+\_\+of\+\_\+neighbour(), oomph\+::\+Quad\+Tree\+Root\+::direction\+\_\+of\+\_\+neighbour(), oomph\+::\+Oc\+Tree\+Root\+::direction\+\_\+of\+\_\+neighbour(), neighbour\+\_\+pt(), and nneighbour().
 
 
 

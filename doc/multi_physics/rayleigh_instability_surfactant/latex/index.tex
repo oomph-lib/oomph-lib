@@ -59,9 +59,9 @@ The global parameters are simply the dimensionless parameters described above.
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_namespace===================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Namespace for physical parameters}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// The parameter values are chosen to be those used in Figures 8, 9 }}
-\DoxyCodeLine{\textcolor{comment}{/// in Campana et al.}}
+\DoxyCodeLine{\textcolor{comment}{/// Namespace for physical parameters}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// The parameter values are chosen to be those used in Figures 8, 9 }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// in Campana et al.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{}
@@ -118,7 +118,7 @@ The driver code and problem are very similar to those in the \href{../../../navi
 
 An additional member function {\ttfamily \mbox{\hyperlink{classInterfaceProblem_a9b19bc90667fe8c7885d8ee113812e27}{Interface\+Problem\+::compute\+\_\+total\+\_\+mass()}}} is provided as a check on the implementation of the the surface transport equations. The surfactant cannot be removed from the surface, so its mass must be conserved. The function simply loops over the interface elements and sums their contribution to the total mass.  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Compute the total mass of the insoluble surfactant}}
+\DoxyCodeLine{ \textcolor{comment}{/// Compute the total mass of the insoluble surfactant}}
 \DoxyCodeLine{ \textcolor{keywordtype}{double} compute\_total\_mass()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{//Initialise to zero}}
@@ -147,11 +147,11 @@ An additional member function {\ttfamily \mbox{\hyperlink{classInterfaceProblem_
 This class is implemented in our driver code and inherits directly from \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Fluid\+Interface\+Element}}. The class provides storage for the required additional dimensionless groups and the nodal index where the surface concentration will be stored.  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{/// Spine-\/based Marangoni surface tension elements that add}}
-\DoxyCodeLine{\textcolor{comment}{/// a linear dependence on concentration}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// of a surface chemical to the surface tension, }}
-\DoxyCodeLine{\textcolor{comment}{/// which decreases with increasing concentration.}}
-\DoxyCodeLine{\textcolor{comment}{/// The non-\/dimensionalisation is the same as Campana et al (2004)}}
-\DoxyCodeLine{\textcolor{comment}{/// but we may wish to revisit this.}}
+\DoxyCodeLine{\textcolor{comment}{/// a linear dependence on concentration}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// of a surface chemical to the surface tension, }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// which decreases with increasing concentration.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// The non-\/dimensionalisation is the same as Campana et al (2004)}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// but we may wish to revisit this.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement : }
@@ -174,9 +174,9 @@ This class is implemented in our driver code and inherits directly from \mbox{\h
 \end{DoxyCodeInclude}
  Most of the functionality is already provided by the underlying {\ttfamily Fluid\+Interface\+Element} and we need simply to overload a few functions. The constructor sets default values for the physical constants and adds the additional data value to nodes on the surface. 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Constructor that passes the bulk element and face index down}}
+\DoxyCodeLine{ \textcolor{comment}{/// Constructor that passes the bulk element and face index down}}
 \DoxyCodeLine{\textcolor{comment}{ /// to the underlying}}
-\DoxyCodeLine{  SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement(FiniteElement* \textcolor{keyword}{const} \&element\_pt, \textcolor{keyword}{const} \textcolor{keywordtype}{int} \&face\_index) : SpineAxisymmetricFluidInterfaceElement<ELEMENT>}
+\DoxyCodeLine{\textcolor{comment}{}  SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement(FiniteElement* \textcolor{keyword}{const} \&element\_pt, \textcolor{keyword}{const} \textcolor{keywordtype}{int} \&face\_index) : SpineAxisymmetricFluidInterfaceElement<ELEMENT>}
 \DoxyCodeLine{                                                                                                                       (element\_pt,face\_index)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{//Initialise the values}}

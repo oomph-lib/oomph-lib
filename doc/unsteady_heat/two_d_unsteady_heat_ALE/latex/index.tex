@@ -62,9 +62,9 @@ As discussed above, we will incorporate the time-\/dependence of the moving curv
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_MyEllipse===========================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Oscillating ellipse}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)f[ x = (a + \(\backslash\)widehat\{a\} \(\backslash\)sin(2\(\backslash\)Pi t/T)) \(\backslash\)cos(\(\backslash\)xi)  \(\backslash\)f]}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)f[ y = (b + \(\backslash\)widehat\{b\} \(\backslash\)sin(2\(\backslash\)Pi t/T)) \(\backslash\)sin(\(\backslash\)xi)  \(\backslash\)f]}}
+\DoxyCodeLine{\textcolor{comment}{/// Oscillating ellipse}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)f[ x = (a + \(\backslash\)widehat\{a\} \(\backslash\)sin(2\(\backslash\)Pi t/T)) \(\backslash\)cos(\(\backslash\)xi)  \(\backslash\)f]}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)f[ y = (b + \(\backslash\)widehat\{b\} \(\backslash\)sin(2\(\backslash\)Pi t/T)) \(\backslash\)sin(\(\backslash\)xi)  \(\backslash\)f]}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classMyEllipse}{MyEllipse}} : \textcolor{keyword}{public} GeomObject}
 \DoxyCodeLine{\{}
@@ -85,9 +85,9 @@ As discussed above, we will incorporate the time-\/dependence of the moving curv
 \end{DoxyCodeInclude}
  The \char`\"{}steady\char`\"{} version of the {\ttfamily position(...)} function must return the position vector to the point on the {\ttfamily Geom\+Object}, identified by its intrinsic coordinate {\ttfamily xi}, and evaluated at the current value of the continuous time, which we extract from {\ttfamily Time\+::time()}\+: 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Current position vector to material point at }}
+\DoxyCodeLine{ \textcolor{comment}{/// Current position vector to material point at }}
 \DoxyCodeLine{\textcolor{comment}{ /// Lagrangian coordinate xi }}
-\DoxyCodeLine{ \textcolor{keywordtype}{void} position(\textcolor{keyword}{const} Vector<double>\& xi, Vector<double>\& r)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} position(\textcolor{keyword}{const} Vector<double>\& xi, Vector<double>\& r)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\textcolor{keyword}{  }\{}
 \DoxyCodeLine{   \textcolor{comment}{// Get current time:}}
 \DoxyCodeLine{   \textcolor{keywordtype}{double} time=Time\_pt-\/>time();}
@@ -103,9 +103,9 @@ As discussed above, we will incorporate the time-\/dependence of the moving curv
 
 The \char`\"{}time-\/dependent\char`\"{} version of the {\ttfamily position(...)} function must return the position vector to the {\ttfamily Geom\+Object}, evaluated at the {\ttfamily t} -\/ th previous timestep. The value of the continuous time at that timestep is available from from {\ttfamily Time\+::time(t)}\+: 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Parametrised position on object: r(xi). Evaluated at}}
-\DoxyCodeLine{\textcolor{comment}{ /// previous time level. t=0: current time; t>0: previous}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// time level.}}
+\DoxyCodeLine{ \textcolor{comment}{/// Parametrised position on object: r(xi). Evaluated at}}
+\DoxyCodeLine{\textcolor{comment}{ /// previous time level. t=0: current time; t>0: previous}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// time level.}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} position(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& t, \textcolor{keyword}{const} Vector<double>\& xi,}
 \DoxyCodeLine{               Vector<double>\& r)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\textcolor{keyword}{  }\{}
@@ -180,8 +180,8 @@ As discussed above, the addition of a single line to {\ttfamily Problem\+::actio
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=========start of actions\_before\_implicit\_timestep===============================}}
-\DoxyCodeLine{\textcolor{comment}{/// Actions before timestep: Update the domain shape, then set the }\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// boundary conditions for the current time.}}
+\DoxyCodeLine{\textcolor{comment}{/// Actions before timestep: Update the domain shape, then set the }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// boundary conditions for the current time.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_ac754f1313cd6d684c149443beb5bcf9e}{RefineableUnsteadyHeatProblem<ELEMENT>::actions\_before\_implicit\_timestep}}()}

@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1PRefineableQCrouzeixRaviartElement}{}\doxysection{oomph\+::PRefineable\+QCrouzeix\+Raviart\+Element\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1PRefineableQCrouzeixRaviartElement}{}\doxysection{oomph\+::PRefineable\+QCrouzeix\+Raviart\+Element$<$ DIM $>$ Class Template Reference}
 \label{classoomph_1_1PRefineableQCrouzeixRaviartElement}\index{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$@{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$}}
 
 
@@ -9,7 +9,7 @@ p-\/refineable version of Crouzeix Raviart elements. Generic class definitions
 
 {\ttfamily \#include $<$refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::PRefineable\+QCrouzeix\+Raviart\+Element\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::PRefineable\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=0.911805cm]{classoomph_1_1PRefineableQCrouzeixRaviartElement}
@@ -42,7 +42,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1PRefineableQCrouzeixRaviartElement_a8a4b
 \begin{DoxyCompactList}\small\item\em Order of recovery shape functions for Z2 error estimation\+: \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1PRefineableQCrouzeixRaviartElement_a4f29431659c8fb00cd2b56b21bcb722c}{nvertex\+\_\+node}} () const
 \begin{DoxyCompactList}\small\item\em Number of vertex nodes in the element. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1PRefineableQCrouzeixRaviartElement_a23616a70f7df9d45e12e45358c528ecb}{vertex\+\_\+node\+\_\+pt}} (const unsigned \&j) const
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1PRefineableQCrouzeixRaviartElement_a0a0d25592c0b9b04505fbd0b3bb4fb22}{vertex\+\_\+node\+\_\+pt}} (const unsigned \&j) const
 \begin{DoxyCompactList}\small\item\em Pointer to the j-\/th vertex node in the element. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1PRefineableQCrouzeixRaviartElement_a72a81749bb4c7f43462324935e1617a7}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+nst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) const
 \begin{DoxyCompactList}\small\item\em Velocity shape and test functions and their derivs w.\+r.\+t. to global coords at local coordinate s (taken from geometry) Return Jacobian of mapping between local and global coordinates. \end{DoxyCompactList}\item 
@@ -55,7 +55,7 @@ void \mbox{\hyperlink{classoomph_1_1PRefineableQCrouzeixRaviartElement_a5891e367
 void \mbox{\hyperlink{classoomph_1_1PRefineableQCrouzeixRaviartElement_ac9cfbe5c8df894511fd03d49b4015d19}{get\+\_\+interpolated\+\_\+values}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&values)
 \begin{DoxyCompactList}\small\item\em Get the function value u in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PRefineableQCrouzeixRaviartElement_af7337a2ad744a06a2e5c3590dcd07dfb}{get\+\_\+interpolated\+\_\+values}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&values)
-\begin{DoxyCompactList}\small\item\em Get all function values \mbox{[}u,v..,p\mbox{]} at previous timestep t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous timestep). \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Get all function values \mbox{[}u,v..,p\mbox{]} at previous timestep t (t=0\+: present; t$>$0\+: previous timestep). \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PRefineableQCrouzeixRaviartElement_a782e45a47d5e1df77bcbc6480f90c24d}{further\+\_\+setup\+\_\+hanging\+\_\+nodes}} ()
 \begin{DoxyCompactList}\small\item\em Perform additional hanging node procedures for variables that are not interpolated by all nodes. Empty. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PRefineableQCrouzeixRaviartElement_a3129fe3450caf60d2f678024d7bf7f08}{further\+\_\+build}} ()
@@ -91,9 +91,10 @@ void \mbox{\hyperlink{classoomph_1_1PRefineableQCrouzeixRaviartElement_a686b5209
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$unsigned DIM$>$\newline
 class oomph\+::\+PRefineable\+QCrouzeix\+Raviart\+Element$<$ DIM $>$}
+
 p-\/refineable version of Crouzeix Raviart elements. Generic class definitions 
 
-Definition at line \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l01332}{1332}} of file \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source}{refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 1332 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -111,11 +112,11 @@ Constructor.
 
 
 
-Definition at line \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l01352}{1352}} of file \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source}{refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 1352 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00622}{oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l01411}{oomph\+::\+PRefineable\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::npres\+\_\+nst()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l01757}{oomph\+::\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::\+P\+\_\+nst\+\_\+internal\+\_\+index}}, \mbox{\hyperlink{nodes_8cc_source_l01002}{oomph\+::\+Data\+::resize()}}, and \mbox{\hyperlink{elements_8cc_source_l03210}{oomph\+::\+Finite\+Element\+::set\+\_\+integration\+\_\+scheme()}}.
+References oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt(), oomph\+::\+PRefineable\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::npres\+\_\+nst(), oomph\+::\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::\+P\+\_\+nst\+\_\+internal\+\_\+index, oomph\+::\+Data\+::resize(), and oomph\+::\+Finite\+Element\+::set\+\_\+integration\+\_\+scheme().
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQCrouzeixRaviartElement_a1cf44559e861aa992849c7466d2123e2}\label{classoomph_1_1PRefineableQCrouzeixRaviartElement_a1cf44559e861aa992849c7466d2123e2}} 
 \index{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$@{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$}!````~PRefineableQCrouzeixRaviartElement@{$\sim$PRefineableQCrouzeixRaviartElement}}
@@ -130,11 +131,11 @@ Destructor.
 
 
 
-Definition at line \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l01383}{1383}} of file \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source}{refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 1383 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}.
+References oomph\+::\+Finite\+Element\+::integral\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQCrouzeixRaviartElement_a559afb5d1356f080af62252f436d7e40}\label{classoomph_1_1PRefineableQCrouzeixRaviartElement_a559afb5d1356f080af62252f436d7e40}} 
 \index{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$@{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$}!PRefineableQCrouzeixRaviartElement@{PRefineableQCrouzeixRaviartElement}}
@@ -181,11 +182,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement_a3c426
 
 
 
-Definition at line \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l02079}{2079}} of file \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source}{refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2079 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References i.
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQCrouzeixRaviartElement_a9ba67f2ae8ae78cd3725734928caf200}\label{classoomph_1_1PRefineableQCrouzeixRaviartElement_a9ba67f2ae8ae78cd3725734928caf200}} 
 \index{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$@{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$}!dshape\_and\_dtest\_eulerian\_at\_knot\_nst@{dshape\_and\_dtest\_eulerian\_at\_knot\_nst}}
@@ -203,11 +204,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement_a3c426
 
 
 
-Definition at line \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l02140}{2140}} of file \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source}{refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2140 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References i.
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQCrouzeixRaviartElement_a72a81749bb4c7f43462324935e1617a7}\label{classoomph_1_1PRefineableQCrouzeixRaviartElement_a72a81749bb4c7f43462324935e1617a7}} 
 \index{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$@{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$}!dshape\_and\_dtest\_eulerian\_nst@{dshape\_and\_dtest\_eulerian\_nst}}
@@ -240,11 +241,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement_af1553
 
 
 
-Definition at line \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l02049}{2049}} of file \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source}{refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2049 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References i, and s.
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQCrouzeixRaviartElement_a4d364c4539b2e906f634cfd8a2cf0e5f}\label{classoomph_1_1PRefineableQCrouzeixRaviartElement_a4d364c4539b2e906f634cfd8a2cf0e5f}} 
 \index{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$@{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$}!dshape\_and\_dtest\_eulerian\_nst@{dshape\_and\_dtest\_eulerian\_nst}}
@@ -262,11 +263,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement_af1553
 
 
 
-Definition at line \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l02109}{2109}} of file \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source}{refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2109 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References i, and s.
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQCrouzeixRaviartElement_a31a014a5e5d549d793968245d56d5d69}\label{classoomph_1_1PRefineableQCrouzeixRaviartElement_a31a014a5e5d549d793968245d56d5d69}} 
 \index{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$@{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$}!fix\_pressure@{fix\_pressure}}
@@ -285,11 +286,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement_ae885b
 
 
 
-Definition at line \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l01417}{1417}} of file \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source}{refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 1417 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00622}{oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l01757}{oomph\+::\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::\+P\+\_\+nst\+\_\+internal\+\_\+index}}, \mbox{\hyperlink{nodes_8h_source_l00385}{oomph\+::\+Data\+::pin()}}, and \mbox{\hyperlink{nodes_8h_source_l00271}{oomph\+::\+Data\+::set\+\_\+value()}}.
+References oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt(), oomph\+::\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::\+P\+\_\+nst\+\_\+internal\+\_\+index, oomph\+::\+Data\+::pin(), and oomph\+::\+Data\+::set\+\_\+value().
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQCrouzeixRaviartElement_a222c74947a6515041f515bd6c26d1a45}\label{classoomph_1_1PRefineableQCrouzeixRaviartElement_a222c74947a6515041f515bd6c26d1a45}} 
 \index{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$@{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$}!further\_build@{further\_build}}
@@ -307,11 +308,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquation
 
 
 
-Definition at line \mbox{\hyperlink{refineable__navier__stokes__elements_8cc_source_l01805}{1805}} of file \mbox{\hyperlink{refineable__navier__stokes__elements_8cc_source}{refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc}}.
+Definition at line 1805 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l00445}{oomph\+::\+Refineable\+Navier\+Stokes\+Equations$<$ DIM $>$\+::further\+\_\+build()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l01639}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::interpolated\+\_\+p\+\_\+nst()}}, \mbox{\hyperlink{quadtree_8h_source_l00059}{oomph\+::\+Quad\+Tree\+Names\+::\+NE}}, \mbox{\hyperlink{quadtree_8h_source_l00058}{oomph\+::\+Quad\+Tree\+Names\+::\+NW}}, \mbox{\hyperlink{quadtree_8h_source_l00057}{oomph\+::\+Quad\+Tree\+Names\+::\+SE}}, and \mbox{\hyperlink{quadtree_8h_source_l00056}{oomph\+::\+Quad\+Tree\+Names\+::\+SW}}.
+References oomph\+::\+Refineable\+Navier\+Stokes\+Equations$<$ DIM $>$\+::further\+\_\+build(), oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::interpolated\+\_\+p\+\_\+nst(), oomph\+::\+Quad\+Tree\+Names\+::\+NE, oomph\+::\+Quad\+Tree\+Names\+::\+NW, oomph\+::\+Quad\+Tree\+Names\+::\+SE, and oomph\+::\+Quad\+Tree\+Names\+::\+SW.
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQCrouzeixRaviartElement_a81987260da356675028c1a3283ddc2f1}\label{classoomph_1_1PRefineableQCrouzeixRaviartElement_a81987260da356675028c1a3283ddc2f1}} 
 \index{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$@{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$}!further\_build@{further\_build}}
@@ -329,11 +330,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquation
 
 
 
-Definition at line \mbox{\hyperlink{refineable__navier__stokes__elements_8cc_source_l01916}{1916}} of file \mbox{\hyperlink{refineable__navier__stokes__elements_8cc_source}{refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc}}.
+Definition at line 1916 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{octree_8h_source_l00353}{oomph\+::\+Oc\+Tree\+::\+Direction\+\_\+to\+\_\+vector}}, \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l00445}{oomph\+::\+Refineable\+Navier\+Stokes\+Equations$<$ DIM $>$\+::further\+\_\+build()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{navier__stokes__elements_8h_source_l01639}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::interpolated\+\_\+p\+\_\+nst()}}.
+References oomph\+::\+Oc\+Tree\+::\+Direction\+\_\+to\+\_\+vector, oomph\+::\+Refineable\+Navier\+Stokes\+Equations$<$ DIM $>$\+::further\+\_\+build(), i, and oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::interpolated\+\_\+p\+\_\+nst().
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQCrouzeixRaviartElement_a3129fe3450caf60d2f678024d7bf7f08}\label{classoomph_1_1PRefineableQCrouzeixRaviartElement_a3129fe3450caf60d2f678024d7bf7f08}} 
 \index{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$@{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$}!further\_build@{further\_build}}
@@ -367,7 +368,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a86ea01c485f
 
 
 
-Definition at line \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l01562}{1562}} of file \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source}{refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 1562 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQCrouzeixRaviartElement_af7337a2ad744a06a2e5c3590dcd07dfb}\label{classoomph_1_1PRefineableQCrouzeixRaviartElement_af7337a2ad744a06a2e5c3590dcd07dfb}} 
 \index{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$@{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$}!get\_interpolated\_values@{get\_interpolated\_values}}
@@ -378,7 +379,7 @@ void \mbox{\hyperlink{classoomph_1_1PRefineableQCrouzeixRaviartElement}{oomph\+:
 
 
 
-Get all function values \mbox{[}u,v..,p\mbox{]} at previous timestep t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous timestep). 
+Get all function values \mbox{[}u,v..,p\mbox{]} at previous timestep t (t=0\+: present; t$>$0\+: previous timestep). 
 
 Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here.
 
@@ -388,11 +389,11 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_ada6f0efe831ffefb1d2
 
 
 
-Definition at line \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l01528}{1528}} of file \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source}{refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 1528 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{navier__stokes__elements_8h_source_l00866}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+nst()}}.
+References i, oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), oomph\+::\+Finite\+Element\+::shape(), and oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+nst().
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQCrouzeixRaviartElement_ac9cfbe5c8df894511fd03d49b4015d19}\label{classoomph_1_1PRefineableQCrouzeixRaviartElement_ac9cfbe5c8df894511fd03d49b4015d19}} 
 \index{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$@{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$}!get\_interpolated\_values@{get\_interpolated\_values}}
@@ -411,11 +412,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_ad9a4f928806
 
 
 
-Definition at line \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l01506}{1506}} of file \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source}{refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 1506 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{navier__stokes__elements_8h_source_l01505}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::interpolated\+\_\+u\+\_\+nst()}}.
+References i, and oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::interpolated\+\_\+u\+\_\+nst().
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQCrouzeixRaviartElement_a8fc2388f81c74e6c9dc32058592ed7d2}\label{classoomph_1_1PRefineableQCrouzeixRaviartElement_a8fc2388f81c74e6c9dc32058592ed7d2}} 
 \index{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$@{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$}!ncont\_interpolated\_values@{ncont\_interpolated\_values}}
@@ -434,7 +435,7 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_a53e171a18c9f43f1db9
 
 
 
-Definition at line \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l01430}{1430}} of file \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source}{refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 1430 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQCrouzeixRaviartElement_a6431bb5f74022a94d074d04ba2f4c7a1}\label{classoomph_1_1PRefineableQCrouzeixRaviartElement_a6431bb5f74022a94d074d04ba2f4c7a1}} 
 \index{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$@{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$}!npres\_nst@{npres\_nst}}
@@ -453,11 +454,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement_a0cbd8
 
 
 
-Definition at line \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l01411}{1411}} of file \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source}{refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 1411 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l01352}{oomph\+::\+PRefineable\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::\+PRefineable\+QCrouzeix\+Raviart\+Element()}}, \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l01437}{oomph\+::\+PRefineable\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::rebuild\+\_\+from\+\_\+sons()}}, and \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l01339}{oomph\+::\+PRefineable\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs()}}.
+Referenced by oomph\+::\+PRefineable\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::\+PRefineable\+QCrouzeix\+Raviart\+Element(), oomph\+::\+PRefineable\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::rebuild\+\_\+from\+\_\+sons(), and oomph\+::\+PRefineable\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs().
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQCrouzeixRaviartElement_a8a4bf8ba2d89273431c78ea5e09e0947}\label{classoomph_1_1PRefineableQCrouzeixRaviartElement_a8a4bf8ba2d89273431c78ea5e09e0947}} 
 \index{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$@{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$}!nrecovery\_order@{nrecovery\_order}}
@@ -480,7 +481,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_af39480835
 
 
 
-Definition at line \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l01459}{1459}} of file \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source}{refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 1459 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQCrouzeixRaviartElement_a4f29431659c8fb00cd2b56b21bcb722c}\label{classoomph_1_1PRefineableQCrouzeixRaviartElement_a4f29431659c8fb00cd2b56b21bcb722c}} 
 \index{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$@{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$}!nvertex\_node@{nvertex\_node}}
@@ -499,11 +500,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a19495a0e7
 
 
 
-Definition at line \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l01465}{1465}} of file \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source}{refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 1465 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02491}{oomph\+::\+Finite\+Element\+::nvertex\+\_\+node()}}.
+References oomph\+::\+Finite\+Element\+::nvertex\+\_\+node().
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQCrouzeixRaviartElement_a2a9613cf21e1d115893491423ca5394a}\label{classoomph_1_1PRefineableQCrouzeixRaviartElement_a2a9613cf21e1d115893491423ca5394a}} 
 \index{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$@{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$}!p\_nst@{p\_nst}}
@@ -522,11 +523,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement_a3d3b2
 
 
 
-Definition at line \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l01400}{1400}} of file \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source}{refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 1400 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00622}{oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l01757}{oomph\+::\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::\+P\+\_\+nst\+\_\+internal\+\_\+index}}, and \mbox{\hyperlink{nodes_8h_source_l00293}{oomph\+::\+Data\+::value()}}.
+References oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt(), oomph\+::\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::\+P\+\_\+nst\+\_\+internal\+\_\+index, and oomph\+::\+Data\+::value().
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQCrouzeixRaviartElement_a1a70b2251c5150e4719db4e26bbde7f0}\label{classoomph_1_1PRefineableQCrouzeixRaviartElement_a1a70b2251c5150e4719db4e26bbde7f0}} 
 \index{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$@{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$}!p\_nst@{p\_nst}}
@@ -545,11 +546,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement_ab7e5c
 
 
 
-Definition at line \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l01405}{1405}} of file \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source}{refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 1405 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l00622}{oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l01757}{oomph\+::\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::\+P\+\_\+nst\+\_\+internal\+\_\+index}}, and \mbox{\hyperlink{nodes_8h_source_l00293}{oomph\+::\+Data\+::value()}}.
+References i, oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt(), oomph\+::\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::\+P\+\_\+nst\+\_\+internal\+\_\+index, and oomph\+::\+Data\+::value().
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQCrouzeixRaviartElement_a19222e5c997c7ce4a30452d9aab12ad0}\label{classoomph_1_1PRefineableQCrouzeixRaviartElement_a19222e5c997c7ce4a30452d9aab12ad0}} 
 \index{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$@{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$}!pshape\_nst@{pshape\_nst}}
@@ -582,11 +583,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement_a122c4
 
 
 
-Definition at line \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l02168}{2168}} of file \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source}{refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2168 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References i, and s.
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQCrouzeixRaviartElement_a9ed30421c0ba6c41aed4125625bfc95a}\label{classoomph_1_1PRefineableQCrouzeixRaviartElement_a9ed30421c0ba6c41aed4125625bfc95a}} 
 \index{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$@{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$}!pshape\_nst@{pshape\_nst}}
@@ -604,11 +605,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement_a122c4
 
 
 
-Definition at line \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l02223}{2223}} of file \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source}{refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2223 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References i, and s.
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQCrouzeixRaviartElement_a5891e3675a411f77fca204fa567c71da}\label{classoomph_1_1PRefineableQCrouzeixRaviartElement_a5891e3675a411f77fca204fa567c71da}} 
 \index{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$@{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$}!pshape\_nst@{pshape\_nst}}
@@ -641,11 +642,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement_a662b9
 
 
 
-Definition at line \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l02201}{2201}} of file \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source}{refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2201 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References i, and s.
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQCrouzeixRaviartElement_a4ae579a6b6b70e3f6b827619641e8ada}\label{classoomph_1_1PRefineableQCrouzeixRaviartElement_a4ae579a6b6b70e3f6b827619641e8ada}} 
 \index{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$@{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$}!pshape\_nst@{pshape\_nst}}
@@ -663,11 +664,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement_a662b9
 
 
 
-Definition at line \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l02261}{2261}} of file \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source}{refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2261 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References i, and s.
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQCrouzeixRaviartElement_a0511e9fbba31ef30acd3cf7987d1f4a5}\label{classoomph_1_1PRefineableQCrouzeixRaviartElement_a0511e9fbba31ef30acd3cf7987d1f4a5}} 
 \index{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$@{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$}!rebuild\_from\_sons@{rebuild\_from\_sons}}
@@ -686,11 +687,11 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_a33324be27833fa4b782
 
 
 
-Definition at line \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l01437}{1437}} of file \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source}{refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 1437 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00622}{oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l01411}{oomph\+::\+PRefineable\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::npres\+\_\+nst()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l01757}{oomph\+::\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::\+P\+\_\+nst\+\_\+internal\+\_\+index}}, and \mbox{\hyperlink{nodes_8h_source_l00271}{oomph\+::\+Data\+::set\+\_\+value()}}.
+References oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt(), oomph\+::\+PRefineable\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::npres\+\_\+nst(), oomph\+::\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::\+P\+\_\+nst\+\_\+internal\+\_\+index, and oomph\+::\+Data\+::set\+\_\+value().
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQCrouzeixRaviartElement_a5789a5ace7a5d633dec82c775ac890bf}\label{classoomph_1_1PRefineableQCrouzeixRaviartElement_a5789a5ace7a5d633dec82c775ac890bf}} 
 \index{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$@{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$}!required\_nvalue@{required\_nvalue}}
@@ -709,7 +710,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement_a02594
 
 
 
-Definition at line \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l01424}{1424}} of file \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source}{refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 1424 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PRefineableQCrouzeixRaviartElement_a686b52095b423b9d7173aa338e8a7d33}\label{classoomph_1_1PRefineableQCrouzeixRaviartElement_a686b52095b423b9d7173aa338e8a7d33}} 
 \index{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$@{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$}!unpin\_elemental\_pressure\_dofs@{unpin\_elemental\_pressure\_dofs}}
@@ -728,18 +729,18 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations_acd0b5
 
 
 
-Definition at line \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l01339}{1339}} of file \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source}{refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 1339 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00622}{oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l01411}{oomph\+::\+PRefineable\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::npres\+\_\+nst()}}, \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l01757}{oomph\+::\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::\+P\+\_\+nst\+\_\+internal\+\_\+index}}, and \mbox{\hyperlink{nodes_8h_source_l00391}{oomph\+::\+Data\+::unpin()}}.
+References oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt(), oomph\+::\+PRefineable\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::npres\+\_\+nst(), oomph\+::\+Data\+::nvalue(), oomph\+::\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::\+P\+\_\+nst\+\_\+internal\+\_\+index, and oomph\+::\+Data\+::unpin().
 
-\mbox{\Hypertarget{classoomph_1_1PRefineableQCrouzeixRaviartElement_a23616a70f7df9d45e12e45358c528ecb}\label{classoomph_1_1PRefineableQCrouzeixRaviartElement_a23616a70f7df9d45e12e45358c528ecb}} 
+\mbox{\Hypertarget{classoomph_1_1PRefineableQCrouzeixRaviartElement_a0a0d25592c0b9b04505fbd0b3bb4fb22}\label{classoomph_1_1PRefineableQCrouzeixRaviartElement_a0a0d25592c0b9b04505fbd0b3bb4fb22}} 
 \index{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$@{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$}!vertex\_node\_pt@{vertex\_node\_pt}}
 \index{vertex\_node\_pt@{vertex\_node\_pt}!oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$@{oomph::PRefineableQCrouzeixRaviartElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{vertex\_node\_pt()}{vertex\_node\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1PRefineableQCrouzeixRaviartElement}{oomph\+::\+PRefineable\+QCrouzeix\+Raviart\+Element}}$<$ DIM $>$\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$ \mbox{\hyperlink{classoomph_1_1PRefineableQCrouzeixRaviartElement}{oomph\+::\+PRefineable\+QCrouzeix\+Raviart\+Element}}$<$ DIM $>$\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -747,15 +748,15 @@ Pointer to the j-\/th vertex node in the element.
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a6d852edae3d9f6bddeb5aaf136ebbb8b}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a0eedccc33519f852c5dc2055ddf2774b}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
 
 
 
-Definition at line \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l01471}{1471}} of file \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source}{refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 1471 of file refineable\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02500}{oomph\+::\+Finite\+Element\+::vertex\+\_\+node\+\_\+pt()}}.
+References oomph\+::\+Finite\+Element\+::vertex\+\_\+node\+\_\+pt().
 
 
 

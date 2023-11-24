@@ -20,12 +20,12 @@ Inheritance diagram for oomph\+::PMLTime\+Harmonic\+Elasticity\+Tensor\+:\begin{
 \item 
 virtual \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicElasticityTensor_a520e58b90e02cc9c36f39102e32afa3f}{$\sim$\+PMLTime\+Harmonic\+Elasticity\+Tensor}} ()
 \begin{DoxyCompactList}\small\item\em Empty virtual Destructor. \end{DoxyCompactList}\item 
-std\+::complex$<$ double $>$ \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicElasticityTensor_ac594b4fea1015ffb582862e078036d94}{operator()}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned \&j, const unsigned \&k, const unsigned \&l) const
+std\+::complex$<$ double $>$ \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicElasticityTensor_ac253ca0d5530e06f9596a9be7bb728d2}{operator()}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned \&j, const unsigned \&k, const unsigned \&l) const
 \begin{DoxyCompactList}\small\item\em Return the appropriate independent component via the index translation scheme (const version). \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual std\+::complex$<$ double $>$ \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicElasticityTensor_a9d07ac639fb398e15295e73bb87152b1}{independent\+\_\+component}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+virtual std\+::complex$<$ double $>$ \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicElasticityTensor_a80876070e0c45dd00bbc21fe9c527a21}{independent\+\_\+component}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Member function that returns the i-\/th independent component of the elasticity tensor. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicElasticityTensor_acc5d6de5e961ad67dd72bf032a47bb7b}{range\+\_\+check}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned \&j, const unsigned \&k, const unsigned \&l) const
 \begin{DoxyCompactList}\small\item\em Helper range checking function (Note that this only captures over-\/runs in 3D but errors are likely to be caught in evaluation of the stress and strain tensors anyway...) \end{DoxyCompactList}\item 
@@ -43,7 +43,7 @@ A base class that represents the fourth-\/rank elasticity tensor $E_{ijkl}$ defi
 
 \[\tau_{ij} = E_{ijkl} e_{kl},\] where $e_{ij}$ is the infinitessimal (Cauchy) strain tensor and $\tau_{ij}$ is the stress tensor. The symmetries of the tensor are such that \[E_{ijkl} = E_{jikl} = E_{ijlk} = E_{klij}\] and thus there are relatively few independent components. These symmetries are included in the definition of the object so that non-\/physical symmetries cannot be accidentally imposed. 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00056}{56}} of file \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h}}.
+Definition at line 56 of file pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h.
 
 
 
@@ -60,7 +60,7 @@ Empty Constructor.
 
 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00116}{116}} of file \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h}}.
+Definition at line 116 of file pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicElasticityTensor_a520e58b90e02cc9c36f39102e32afa3f}\label{classoomph_1_1PMLTimeHarmonicElasticityTensor_a520e58b90e02cc9c36f39102e32afa3f}} 
 \index{oomph::PMLTimeHarmonicElasticityTensor@{oomph::PMLTimeHarmonicElasticityTensor}!````~PMLTimeHarmonicElasticityTensor@{$\sim$PMLTimeHarmonicElasticityTensor}}
@@ -74,16 +74,16 @@ Empty virtual Destructor.
 
 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00120}{120}} of file \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h}}.
+Definition at line 120 of file pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicElasticityTensor_a9d07ac639fb398e15295e73bb87152b1}\label{classoomph_1_1PMLTimeHarmonicElasticityTensor_a9d07ac639fb398e15295e73bb87152b1}} 
+\mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicElasticityTensor_a80876070e0c45dd00bbc21fe9c527a21}\label{classoomph_1_1PMLTimeHarmonicElasticityTensor_a80876070e0c45dd00bbc21fe9c527a21}} 
 \index{oomph::PMLTimeHarmonicElasticityTensor@{oomph::PMLTimeHarmonicElasticityTensor}!independent\_component@{independent\_component}}
 \index{independent\_component@{independent\_component}!oomph::PMLTimeHarmonicElasticityTensor@{oomph::PMLTimeHarmonicElasticityTensor}}
 \doxysubsubsection{\texorpdfstring{independent\_component()}{independent\_component()}}
-{\footnotesize\ttfamily virtual std\+::complex$<$ double $>$ oomph\+::\+PMLTime\+Harmonic\+Elasticity\+Tensor\+::independent\+\_\+component (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual std\+::complex$<$double$>$ oomph\+::\+PMLTime\+Harmonic\+Elasticity\+Tensor\+::independent\+\_\+component (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -91,21 +91,21 @@ Member function that returns the i-\/th independent component of the elasticity 
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_aee557f8f75af142cc59094cd3ab40a9c}{oomph\+::\+PMLTime\+Harmonic\+Isotropic\+Elasticity\+Tensor}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_a650332deea93cd5838fc614ac253ec1c}{oomph\+::\+PMLTime\+Harmonic\+Isotropic\+Elasticity\+Tensor}}.
 
 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00065}{65}} of file \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h}}.
+Definition at line 65 of file pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00125}{operator()()}}.
+Referenced by operator()().
 
-\mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicElasticityTensor_ac594b4fea1015ffb582862e078036d94}\label{classoomph_1_1PMLTimeHarmonicElasticityTensor_ac594b4fea1015ffb582862e078036d94}} 
+\mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicElasticityTensor_ac253ca0d5530e06f9596a9be7bb728d2}\label{classoomph_1_1PMLTimeHarmonicElasticityTensor_ac253ca0d5530e06f9596a9be7bb728d2}} 
 \index{oomph::PMLTimeHarmonicElasticityTensor@{oomph::PMLTimeHarmonicElasticityTensor}!operator()@{operator()}}
 \index{operator()@{operator()}!oomph::PMLTimeHarmonicElasticityTensor@{oomph::PMLTimeHarmonicElasticityTensor}}
 \doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
-{\footnotesize\ttfamily std\+::complex$<$ double $>$ oomph\+::\+PMLTime\+Harmonic\+Elasticity\+Tensor\+::operator() (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j,  }\item[{const unsigned \&}]{k,  }\item[{const unsigned \&}]{l }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily std\+::complex$<$double$>$ oomph\+::\+PMLTime\+Harmonic\+Elasticity\+Tensor\+::operator() (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j,  }\item[{const unsigned \&}]{k,  }\item[{const unsigned \&}]{l }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -113,11 +113,11 @@ Return the appropriate independent component via the index translation scheme (c
 
 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00125}{125}} of file \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h}}.
+Definition at line 125 of file pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00065}{independent\+\_\+component()}}, \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00060}{Index}}, and \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00076}{range\+\_\+check()}}.
+References i, independent\+\_\+component(), Index, and range\+\_\+check().
 
 \mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicElasticityTensor_acc5d6de5e961ad67dd72bf032a47bb7b}\label{classoomph_1_1PMLTimeHarmonicElasticityTensor_acc5d6de5e961ad67dd72bf032a47bb7b}} 
 \index{oomph::PMLTimeHarmonicElasticityTensor@{oomph::PMLTimeHarmonicElasticityTensor}!range\_check@{range\_check}}
@@ -131,15 +131,15 @@ Helper range checking function (Note that this only captures over-\/runs in 3D b
 
 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00076}{76}} of file \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h}}.
+Definition at line 76 of file pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References i.
 
 
 
-Referenced by \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00125}{operator()()}}.
+Referenced by operator()().
 
 
 
@@ -174,11 +174,11 @@ Translation scheme that takes account of the symmetries of the tensor. The indep
 
 / \[\begin{array}{cc} 0 & E_{1111} \\ 1 & E_{1112} \\ 2 & E_{1122} \\ 3 & E_{1212} \\ 4 & E_{1222} \\ 5 & E_{2222} \\ 6 & E_{1113} \\ 7 & E_{1123} \\ 8 & E_{1133} \\ 9 & E_{1213} \\ 10 & E_{1223} \\ 11 & E_{1233} \\ 12 & E_{1313} \\ 13 & E_{1322} \\ 14 & E_{1323} \\ 15 & E_{1333} \\ 16 & E_{2223} \\ 17 & E_{2233} \\ 18 & E_{2323} \\ 19 & E_{2333} \\ 20 & E_{3333} \end{array}\] / 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00060}{60}} of file \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h}}.
+Definition at line 60 of file pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00125}{operator()()}}.
+Referenced by operator()().
 
 
 

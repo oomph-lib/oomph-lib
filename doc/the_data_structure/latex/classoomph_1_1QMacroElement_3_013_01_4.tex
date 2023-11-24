@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1QMacroElement_3_013_01_4}{}\doxysection{oomph\+::QMacro\+Element\texorpdfstring{$<$}{<} 3 \texorpdfstring{$>$}{>} Class Reference}
+\hypertarget{classoomph_1_1QMacroElement_3_013_01_4}{}\doxysection{oomph\+::QMacro\+Element$<$ 3 $>$ Class Reference}
 \label{classoomph_1_1QMacroElement_3_013_01_4}\index{oomph::QMacroElement$<$ 3 $>$@{oomph::QMacroElement$<$ 3 $>$}}
 
 
@@ -9,7 +9,7 @@
 
 {\ttfamily \#include $<$macro\+\_\+element.\+h$>$}
 
-Inheritance diagram for oomph\+::QMacro\+Element\texorpdfstring{$<$}{<} 3 \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::QMacro\+Element$<$ 3 $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{classoomph_1_1QMacroElement_3_013_01_4}
@@ -18,7 +18,7 @@ Inheritance diagram for oomph\+::QMacro\+Element\texorpdfstring{$<$}{<} 3 \texor
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1QMacroElement_3_013_01_4_a51599bea29101ab0473485b0815e4797}{QMacro\+Element}} (\mbox{\hyperlink{classoomph_1_1Domain}{Domain}} $\ast$\mbox{\hyperlink{classoomph_1_1MacroElement_ab882e21d5add76995d1e896517030e45}{domain\+\_\+pt}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1MacroElement_abeb744cd6c9bd213a1375fc8d924d445}{macro\+\_\+element\+\_\+number}})
+\mbox{\hyperlink{classoomph_1_1QMacroElement_3_013_01_4_a51599bea29101ab0473485b0815e4797}{QMacro\+Element}} (\mbox{\hyperlink{classoomph_1_1Domain}{Domain}} $\ast$\mbox{\hyperlink{classoomph_1_1MacroElement_ab086ff8cbdb656eff8ab5eafd67bca07}{domain\+\_\+pt}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1MacroElement_acc146caf3839d234c62cf9a4de2fbe91}{macro\+\_\+element\+\_\+number}})
 \begin{DoxyCompactList}\small\item\em Constructor\+: Pass the pointer to the domain and the macro element\textquotesingle{}s number within this domain. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1QMacroElement_3_013_01_4_a52e55e172b74a1a9ea5888b5b06ac552}{QMacro\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Default constructor (empty and broken) \end{DoxyCompactList}\item 
@@ -29,11 +29,11 @@ void \mbox{\hyperlink{classoomph_1_1QMacroElement_3_013_01_4_abc5ade14200c8498fe
 virtual \mbox{\hyperlink{classoomph_1_1QMacroElement_3_013_01_4_a61243dc73167dac67eec6c02e6b35d5d}{$\sim$\+QMacro\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Empty destructor. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QMacroElement_3_013_01_4_a5c1916d58b2d3142b5fa85f209e16b4c}{output}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, std\+::ostream \&outfile, const unsigned \&nplot)
-\begin{DoxyCompactList}\small\item\em Plot\+: x,y in tecplot format at time level t (t=0\+: current; t\texorpdfstring{$>$}{>}0\+: previous) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Plot\+: x,y in tecplot format at time level t (t=0\+: current; t$>$0\+: previous) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QMacroElement_3_013_01_4_aeb5d117bf346d710bd4f8fc4f04dbfd5}{output\+\_\+macro\+\_\+element\+\_\+boundaries}} (std\+::ostream \&outfile, const unsigned \&nplot)
 \begin{DoxyCompactList}\small\item\em Output all macro element boundaries as tecplot zones. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QMacroElement_3_013_01_4_ae99513e135616e45927307ccfa0f8306}{macro\+\_\+map}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&S, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&r)
-\begin{DoxyCompactList}\small\item\em Get global position r(\+S) at discrete time level t. t=0\+: Present time; t\texorpdfstring{$>$}{>}0\+: previous timestep. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Get global position r(\+S) at discrete time level t. t=0\+: Present time; t$>$0\+: previous timestep. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
@@ -50,10 +50,10 @@ The macro element mapping is based on the member function pointer to the associa
 \item $ i $ labels the boundary (L/\+R/\+D/\+U/\+B/F)
 \item $ {\bf S} \in [-1,1]^2 $ is the (2D) \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of local coordinate(s) along the boundary.
 \item $ {\bf f} $ is the position \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} to the boundary.
-\item $ t $ is the time level (t=0\+: current; t\texorpdfstring{$>$}{>}0 previous timestep) 
+\item $ t $ is the time level (t=0\+: current; t$>$0 previous timestep) 
 \end{DoxyItemize}
 
-Definition at line \mbox{\hyperlink{macro__element_8h_source_l00372}{372}} of file \mbox{\hyperlink{macro__element_8h_source}{macro\+\_\+element.\+h}}.
+Definition at line 372 of file macro\+\_\+element.\+h.
 
 
 
@@ -70,7 +70,7 @@ Constructor\+: Pass the pointer to the domain and the macro element\textquotesin
 
 
 
-Definition at line \mbox{\hyperlink{macro__element_8h_source_l00377}{377}} of file \mbox{\hyperlink{macro__element_8h_source}{macro\+\_\+element.\+h}}.
+Definition at line 377 of file macro\+\_\+element.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QMacroElement_3_013_01_4_a52e55e172b74a1a9ea5888b5b06ac552}\label{classoomph_1_1QMacroElement_3_013_01_4_a52e55e172b74a1a9ea5888b5b06ac552}} 
 \index{oomph::QMacroElement$<$ 3 $>$@{oomph::QMacroElement$<$ 3 $>$}!QMacroElement@{QMacroElement}}
@@ -84,7 +84,7 @@ Default constructor (empty and broken)
 
 
 
-Definition at line \mbox{\hyperlink{macro__element_8h_source_l00381}{381}} of file \mbox{\hyperlink{macro__element_8h_source}{macro\+\_\+element.\+h}}.
+Definition at line 381 of file macro\+\_\+element.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QMacroElement_3_013_01_4_aa698147b48b0589102638f859a2b3c38}\label{classoomph_1_1QMacroElement_3_013_01_4_aa698147b48b0589102638f859a2b3c38}} 
 \index{oomph::QMacroElement$<$ 3 $>$@{oomph::QMacroElement$<$ 3 $>$}!QMacroElement@{QMacroElement}}
@@ -108,7 +108,7 @@ Empty destructor.
 
 
 
-Definition at line \mbox{\hyperlink{macro__element_8h_source_l00395}{395}} of file \mbox{\hyperlink{macro__element_8h_source}{macro\+\_\+element.\+h}}.
+Definition at line 395 of file macro\+\_\+element.\+h.
 
 
 
@@ -121,21 +121,21 @@ Definition at line \mbox{\hyperlink{macro__element_8h_source_l00395}{395}} of fi
 
 
 
-Get global position r(\+S) at discrete time level t. t=0\+: Present time; t\texorpdfstring{$>$}{>}0\+: previous timestep. 
+Get global position r(\+S) at discrete time level t. t=0\+: Present time; t$>$0\+: previous timestep. 
 
 /////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////
 
-Get global position r(\+S) at discrete time level t. t=0\+: Present time; t\texorpdfstring{$>$}{>}0\+: previous timestep. 
+Get global position r(\+S) at discrete time level t. t=0\+: Present time; t$>$0\+: previous timestep. 
 
 Implements \mbox{\hyperlink{classoomph_1_1MacroElement_a819b095e97c92e634d6216ddce00c8a2}{oomph\+::\+Macro\+Element}}.
 
 
 
-Definition at line \mbox{\hyperlink{macro__element_8cc_source_l00440}{440}} of file \mbox{\hyperlink{macro__element_8cc_source}{macro\+\_\+element.\+cc}}.
+Definition at line 440 of file macro\+\_\+element.\+cc.
 
 
 
-References \mbox{\hyperlink{octree_8h_source_l00073}{oomph\+::\+Oc\+Tree\+Names\+::B}}, \mbox{\hyperlink{octree_8h_source_l00071}{oomph\+::\+Oc\+Tree\+Names\+::D}}, \mbox{\hyperlink{macro__element_8h_source_l00236}{oomph\+::\+Macro\+Element\+::\+Domain\+\_\+pt}}, \mbox{\hyperlink{octree_8h_source_l00074}{oomph\+::\+Oc\+Tree\+Names\+::F}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{octree_8h_source_l00069}{oomph\+::\+Oc\+Tree\+Names\+::L}}, \mbox{\hyperlink{classoomph_1_1Domain_a95f3e00d28ea37e6c4d3027bfac91096}{oomph\+::\+Domain\+::macro\+\_\+element\+\_\+boundary()}}, \mbox{\hyperlink{macro__element_8h_source_l00239}{oomph\+::\+Macro\+Element\+::\+Macro\+\_\+element\+\_\+number}}, \mbox{\hyperlink{octree_8h_source_l00070}{oomph\+::\+Oc\+Tree\+Names\+::R}}, \mbox{\hyperlink{quadtree_8h_source_l00062}{oomph\+::\+Quad\+Tree\+Names\+::S}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{octree_8h_source_l00072}{oomph\+::\+Oc\+Tree\+Names\+::U}}.
+References oomph\+::\+Oc\+Tree\+Names\+::B, oomph\+::\+Oc\+Tree\+Names\+::D, oomph\+::\+Macro\+Element\+::\+Domain\+\_\+pt, oomph\+::\+Oc\+Tree\+Names\+::F, i, oomph\+::\+Oc\+Tree\+Names\+::L, oomph\+::\+Domain\+::macro\+\_\+element\+\_\+boundary(), oomph\+::\+Macro\+Element\+::\+Macro\+\_\+element\+\_\+number, oomph\+::\+Oc\+Tree\+Names\+::R, oomph\+::\+Quad\+Tree\+Names\+::S, t, and oomph\+::\+Oc\+Tree\+Names\+::U.
 
 \mbox{\Hypertarget{classoomph_1_1QMacroElement_3_013_01_4_abc5ade14200c8498fe150400d61d2f92}\label{classoomph_1_1QMacroElement_3_013_01_4_abc5ade14200c8498fe150400d61d2f92}} 
 \index{oomph::QMacroElement$<$ 3 $>$@{oomph::QMacroElement$<$ 3 $>$}!operator=@{operator=}}
@@ -155,7 +155,7 @@ Broken assignment operator.
 
 
 
-Plot\+: x,y in tecplot format at time level t (t=0\+: current; t\texorpdfstring{$>$}{>}0\+: previous) 
+Plot\+: x,y in tecplot format at time level t (t=0\+: current; t$>$0\+: previous) 
 
 
 
@@ -163,11 +163,11 @@ Implements \mbox{\hyperlink{classoomph_1_1MacroElement_a5d3646716d60aedf45688976
 
 
 
-Definition at line \mbox{\hyperlink{macro__element_8h_source_l00400}{400}} of file \mbox{\hyperlink{macro__element_8h_source}{macro\+\_\+element.\+h}}.
+Definition at line 400 of file macro\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{macro__element_8h_source_l00126}{oomph\+::\+Macro\+Element\+::macro\+\_\+map()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+References i, oomph\+::\+Macro\+Element\+::macro\+\_\+map(), and t.
 
 \mbox{\Hypertarget{classoomph_1_1QMacroElement_3_013_01_4_aeb5d117bf346d710bd4f8fc4f04dbfd5}\label{classoomph_1_1QMacroElement_3_013_01_4_aeb5d117bf346d710bd4f8fc4f04dbfd5}} 
 \index{oomph::QMacroElement$<$ 3 $>$@{oomph::QMacroElement$<$ 3 $>$}!output\_macro\_element\_boundaries@{output\_macro\_element\_boundaries}}
@@ -185,11 +185,11 @@ Implements \mbox{\hyperlink{classoomph_1_1MacroElement_a748b561313e952c9767d278d
 
 
 
-Definition at line \mbox{\hyperlink{macro__element_8cc_source_l00659}{659}} of file \mbox{\hyperlink{macro__element_8cc_source}{macro\+\_\+element.\+cc}}.
+Definition at line 659 of file macro\+\_\+element.\+cc.
 
 
 
-References \mbox{\hyperlink{macro__element_8h_source_l00236}{oomph\+::\+Macro\+Element\+::\+Domain\+\_\+pt}}, \mbox{\hyperlink{octree_8h_source_l00074}{oomph\+::\+Oc\+Tree\+Names\+::F}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{binary__tree_8h_source_l00050}{oomph\+::\+Binary\+Tree\+Names\+::L}}, \mbox{\hyperlink{classoomph_1_1Domain_a95f3e00d28ea37e6c4d3027bfac91096}{oomph\+::\+Domain\+::macro\+\_\+element\+\_\+boundary()}}, \mbox{\hyperlink{macro__element_8h_source_l00239}{oomph\+::\+Macro\+Element\+::\+Macro\+\_\+element\+\_\+number}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+References oomph\+::\+Macro\+Element\+::\+Domain\+\_\+pt, oomph\+::\+Oc\+Tree\+Names\+::F, i, oomph\+::\+Binary\+Tree\+Names\+::L, oomph\+::\+Domain\+::macro\+\_\+element\+\_\+boundary(), oomph\+::\+Macro\+Element\+::\+Macro\+\_\+element\+\_\+number, s, and t.
 
 
 

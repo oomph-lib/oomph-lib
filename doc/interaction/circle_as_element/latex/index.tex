@@ -26,9 +26,9 @@ Most specific geometric objects store some additional parameters as private data
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====start\_of\_circle=====================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Simple circle in 2D space.}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)f[ x = X\_c + R \(\backslash\)cos(\(\backslash\)zeta)  \(\backslash\)f]}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)f[ y = Y\_c + R \(\backslash\)sin(\(\backslash\)zeta)  \(\backslash\)f]}}
+\DoxyCodeLine{\textcolor{comment}{/// Simple circle in 2D space.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)f[ x = X\_c + R \(\backslash\)cos(\(\backslash\)zeta)  \(\backslash\)f]}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)f[ y = Y\_c + R \(\backslash\)sin(\(\backslash\)zeta)  \(\backslash\)f]}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{class }SimpleCircle : \textcolor{keyword}{public} GeomObject}
 \DoxyCodeLine{\{}
@@ -98,11 +98,11 @@ Here is a re-\/implementation of the above {\ttfamily Geom\+Object} in a form th
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=========================================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// GeneralCircle in 2D space.}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)f[ x = X\_c + R \(\backslash\)cos(\(\backslash\)zeta)  \(\backslash\)f]}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)f[ y = Y\_c + R \(\backslash\)sin(\(\backslash\)zeta)  \(\backslash\)f]}}
-\DoxyCodeLine{\textcolor{comment}{/// The three parameters \(\backslash\)f\$ X\_c, Y\_c \(\backslash\)f\$ and \(\backslash\)f\$ R \(\backslash\)f\$ are represented}}
-\DoxyCodeLine{\textcolor{comment}{/// by Data and can therefore be unknowns in the problem.}}
+\DoxyCodeLine{\textcolor{comment}{/// GeneralCircle in 2D space.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)f[ x = X\_c + R \(\backslash\)cos(\(\backslash\)zeta)  \(\backslash\)f]}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)f[ y = Y\_c + R \(\backslash\)sin(\(\backslash\)zeta)  \(\backslash\)f]}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// The three parameters \(\backslash\)f\$ X\_c, Y\_c \(\backslash\)f\$ and \(\backslash\)f\$ R \(\backslash\)f\$ are represented}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// by Data and can therefore be unknowns in the problem.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{class }GeneralCircle : \textcolor{keyword}{public} GeomObject}
 \DoxyCodeLine{\{}
@@ -112,7 +112,7 @@ Here is a re-\/implementation of the above {\ttfamily Geom\+Object} in a form th
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Constructor:  Pass x and y-\/coords of centre and radius (all pinned)}}
+\DoxyCodeLine{ \textcolor{comment}{/// Constructor:  Pass x and y-\/coords of centre and radius (all pinned)}}
 \DoxyCodeLine{ GeneralCircle(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& x\_c, \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& y\_c, }
 \DoxyCodeLine{               \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& r) : GeomObject(1,2)}
 \DoxyCodeLine{  \{}
@@ -153,7 +153,7 @@ Here is a re-\/implementation of the above {\ttfamily Geom\+Object} in a form th
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Access function to x-\/coordinate of centre of circle}}
+\DoxyCodeLine{ \textcolor{comment}{/// Access function to x-\/coordinate of centre of circle}}
 \DoxyCodeLine{ \textcolor{keywordtype}{double}\& x\_c()\{\textcolor{keywordflow}{return} *Geom\_data\_pt[0]-\/>value\_pt(0);\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Access function to y-\/coordinate of centre of circle}}
@@ -167,7 +167,7 @@ Here is a re-\/implementation of the above {\ttfamily Geom\+Object} in a form th
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// How many items of Data does the shape of the object depend on?}}
+\DoxyCodeLine{ \textcolor{comment}{/// How many items of Data does the shape of the object depend on?}}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} ngeom\_data()\textcolor{keyword}{ const }\{\textcolor{keywordflow}{return} Geom\_data\_pt.size();\}}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Return pointer to the j-\/th Data item that the object's }}
@@ -187,13 +187,13 @@ Here is a re-\/implementation of the above {\ttfamily Geom\+Object} in a form th
 \end{DoxyCodeInclude}
  The second constructor is appropriate for cases in which the {\ttfamily Data} object that specifies the object\textquotesingle{}s shape has already been created elsewhere. In this case, we simply pass the pointer to the Data object to the constructor and store it in the first entry of the {\ttfamily Geom\+\_\+data\+\_\+pt} vector\+:  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Alternative constructor:  Pass x and y-\/coords of centre and radius}}
-\DoxyCodeLine{\textcolor{comment}{ /// (all as part of Data)}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)code }}
-\DoxyCodeLine{\textcolor{comment}{ /// Geom\_data\_pt[0]-\/>value(0) = X\_c;}}
-\DoxyCodeLine{\textcolor{comment}{ /// Geom\_data\_pt[0]-\/>value(1) = Y\_c;}}
-\DoxyCodeLine{\textcolor{comment}{ /// Geom\_data\_pt[0]-\/>value(2) = R;}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)endcode}}
+\DoxyCodeLine{ \textcolor{comment}{/// Alternative constructor:  Pass x and y-\/coords of centre and radius}}
+\DoxyCodeLine{\textcolor{comment}{ /// (all as part of Data)}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// \(\backslash\)code }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// Geom\_data\_pt[0]-\/>value(0) = X\_c;}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// Geom\_data\_pt[0]-\/>value(1) = Y\_c;}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// Geom\_data\_pt[0]-\/>value(2) = R;}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// \(\backslash\)endcode}}
 \DoxyCodeLine{\textcolor{comment}{} GeneralCircle(Data* geom\_data\_pt) : GeomObject(1,2)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{\textcolor{preprocessor}{\#ifdef PARANOID}}
@@ -223,7 +223,7 @@ The boolean flag {\ttfamily Must\+\_\+clean\+\_\+up} is stored as private member
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Destructor:  Clean up if necessary}}
+\DoxyCodeLine{ \textcolor{comment}{/// Destructor:  Clean up if necessary}}
 \DoxyCodeLine{ \textcolor{keyword}{virtual} \string~GeneralCircle()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Do I need to clean up?}}
@@ -243,7 +243,7 @@ The boolean flag {\ttfamily Must\+\_\+clean\+\_\+up} is stored as private member
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Position Vector at Lagrangian coordinate zeta }}
+\DoxyCodeLine{ \textcolor{comment}{/// Position Vector at Lagrangian coordinate zeta }}
 \DoxyCodeLine{ \textcolor{keywordtype}{void} position(\textcolor{keyword}{const} Vector<double>\& zeta, Vector<double>\& r)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\textcolor{keyword}{  }\{}
 \DoxyCodeLine{   \textcolor{comment}{// Extract data}}
@@ -285,19 +285,19 @@ Here is the class definition for the {\ttfamily Elastically\+Supported\+Ring\+El
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===========start\_of\_general\_circle=========================================}}
-\DoxyCodeLine{\textcolor{comment}{/// GeneralCircle "{}upgraded"{} to a GeneralisedElement: Circular }\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// ring whose position is given by}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)f[ x = X\_c + R \(\backslash\)cos(\(\backslash\)zeta)  \(\backslash\)f]}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)f[ y = Y\_c + R \(\backslash\)sin(\(\backslash\)zeta)  \(\backslash\)f]}}
-\DoxyCodeLine{\textcolor{comment}{/// The ring's vertical position \(\backslash\)f\$ Y\_c \(\backslash\)f\$ is}}
-\DoxyCodeLine{\textcolor{comment}{/// determined by "{}pseudo elasticity"{}:}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)f[}}
-\DoxyCodeLine{\textcolor{comment}{/// 0 = f\_\{load\} -\/ Y\_c \(\backslash\) k\_\{stiff\} }}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)f]}}
-\DoxyCodeLine{\textcolor{comment}{/// This simulates the case where the centre of the ring is mounted on }}
-\DoxyCodeLine{\textcolor{comment}{/// an elastic spring of stiffness \(\backslash\)f\$ k\_\{stiff\} \(\backslash\)f\$ and loaded by }}
-\DoxyCodeLine{\textcolor{comment}{/// the force \(\backslash\)f\$ f\_\{load\}. \(\backslash\)f\$ The "{}load"{} is specified by the }}
-\DoxyCodeLine{\textcolor{comment}{/// Data object \(\backslash\)c load\_pt(). }}
+\DoxyCodeLine{\textcolor{comment}{/// GeneralCircle "{}upgraded"{} to a GeneralisedElement: Circular }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// ring whose position is given by}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)f[ x = X\_c + R \(\backslash\)cos(\(\backslash\)zeta)  \(\backslash\)f]}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)f[ y = Y\_c + R \(\backslash\)sin(\(\backslash\)zeta)  \(\backslash\)f]}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// The ring's vertical position \(\backslash\)f\$ Y\_c \(\backslash\)f\$ is}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// determined by "{}pseudo elasticity"{}:}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)f[}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// 0 = f\_\{load\} -\/ Y\_c \(\backslash\) k\_\{stiff\} }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)f]}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// This simulates the case where the centre of the ring is mounted on }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// an elastic spring of stiffness \(\backslash\)f\$ k\_\{stiff\} \(\backslash\)f\$ and loaded by }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// the force \(\backslash\)f\$ f\_\{load\}. \(\backslash\)f\$ The "{}load"{} is specified by the }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// Data object \(\backslash\)c load\_pt(). }}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{class }ElasticallySupportedRingElement : \textcolor{keyword}{public} GeneralisedElement, }
 \DoxyCodeLine{                                        \textcolor{keyword}{public} GeneralCircle}
@@ -307,9 +307,9 @@ Here is the class definition for the {\ttfamily Elastically\+Supported\+Ring\+El
 
 The arguments to the constructor specify the initial geometric parameters, $ X_c, Y_c $ and $ R $. We pass them to the constructor of the {\ttfamily General\+Circle} object and assign a default value for the spring stiffness $ k_{stiff}$ (stored as a private data member of the class; see below)\+:  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Constructor: Build  ring from doubles that describe }}
-\DoxyCodeLine{\textcolor{comment}{ /// the geometry: x and y positions of centre and the radius.}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// Initialise stiffness to 1.0. By default, no load is set.}}
+\DoxyCodeLine{ \textcolor{comment}{/// Constructor: Build  ring from doubles that describe }}
+\DoxyCodeLine{\textcolor{comment}{ /// the geometry: x and y positions of centre and the radius.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// Initialise stiffness to 1.0. By default, no load is set.}}
 \DoxyCodeLine{\textcolor{comment}{} ElasticallySupportedRingElement(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& x\_c, \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& y\_c, }
 \DoxyCodeLine{                                 \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& r) : }
 \DoxyCodeLine{  GeneralCircle(x\_c,y\_c,r), K\_stiff(1.0), Load\_data\_has\_been\_set(false)}
@@ -348,7 +348,7 @@ The arguments to the constructor specify the initial geometric parameters, $ X_c
 
 Since the {\ttfamily Generalised\+Element\textquotesingle{}s} destructor will delete the internal {\ttfamily Data}, the destructor can remain empty\+: 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Destructor: }}
+\DoxyCodeLine{ \textcolor{comment}{/// Destructor: }}
 \DoxyCodeLine{ \textcolor{keyword}{virtual} \string~ElasticallySupportedRingElement()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// The GeomObject's GeomData is mirrored in the element's}}
@@ -361,9 +361,9 @@ Since the {\ttfamily Generalised\+Element\textquotesingle{}s} destructor will de
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Set pointer to Data object that specifies the "{}load"{}}}
+\DoxyCodeLine{ \textcolor{comment}{/// Set pointer to Data object that specifies the "{}load"{}}}
 \DoxyCodeLine{\textcolor{comment}{ /// on the ElasticallySupportedRingElement}}
-\DoxyCodeLine{ \textcolor{keywordtype}{void} set\_load\_pt(Data* load\_pt)}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} set\_load\_pt(Data* load\_pt)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{\textcolor{preprocessor}{\#ifdef PARANOID}}
 \DoxyCodeLine{   \textcolor{keywordflow}{if} (load\_pt-\/>nvalue()!=1)}
@@ -398,7 +398,7 @@ The {\ttfamily load()} function provides access to the load specified by the loa
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// "{}Load"{} acting on the ring}}
+\DoxyCodeLine{ \textcolor{comment}{/// "{}Load"{} acting on the ring}}
 \DoxyCodeLine{ \textcolor{keywordtype}{double} load()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Return the load if it has been set}}
@@ -418,7 +418,7 @@ The {\ttfamily load()} function provides access to the load specified by the loa
 
 Next, we provide an access functions to the spring stiffness parameter, 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Access function for the spring stiffness}}
+\DoxyCodeLine{ \textcolor{comment}{/// Access function for the spring stiffness}}
 \DoxyCodeLine{ \textcolor{keywordtype}{double}\& k\_stiff() \{\textcolor{keywordflow}{return} K\_stiff;\}}
 
 \end{DoxyCodeInclude}
@@ -426,7 +426,7 @@ Next, we provide an access functions to the spring stiffness parameter,
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Pin the vertical displacement}}
+\DoxyCodeLine{ \textcolor{comment}{/// Pin the vertical displacement}}
 \DoxyCodeLine{ \textcolor{keywordtype}{void} pin\_yc()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Vertical position of centre is stored as value 1 in the}}
@@ -449,7 +449,7 @@ Next, we provide an access functions to the spring stiffness parameter,
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Compute element residual vector (wrapper)}}
+\DoxyCodeLine{ \textcolor{comment}{/// Compute element residual vector (wrapper)}}
 \DoxyCodeLine{ \textcolor{keywordtype}{void} get\_residuals(Vector<double> \&residuals)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{//Initialise residuals to zero}}
@@ -485,9 +485,9 @@ Next, we provide an access functions to the spring stiffness parameter,
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Compute element residual Vector (only if flag=0) and also}}
+\DoxyCodeLine{ \textcolor{comment}{/// Compute element residual Vector (only if flag=0) and also}}
 \DoxyCodeLine{\textcolor{comment}{ /// the element Jacobian matrix (if flag=1)}}
-\DoxyCodeLine{ \textcolor{keywordtype}{void} fill\_in\_generic\_residual\_contribution(Vector<double> \&residuals,}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} fill\_in\_generic\_residual\_contribution(Vector<double> \&residuals,}
 \DoxyCodeLine{                                            DenseMatrix<double> \&jacobian,}
 \DoxyCodeLine{                                            \textcolor{keywordtype}{unsigned} flag)}
 \DoxyCodeLine{  \{ }
@@ -567,7 +567,7 @@ The driver builds the {\ttfamily Problem} object and solves the problem for vari
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===============start\_of\_driver==========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver }}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{geom__object__element_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
@@ -575,7 +575,7 @@ The driver builds the {\ttfamily Problem} object and solves the problem for vari
 \DoxyCodeLine{ \mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem}{GeomObjectAsGeneralisedElementProblem}} problem;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Initial value for the load }}
-\DoxyCodeLine{ problem.\mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem_a47149c35c94b2ab99507a0a74fe35823}{load}}()=-\/0.3;}
+\DoxyCodeLine{ problem.\mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem_a5ae799de23742e4c8fa54ee7ae32e679}{load}}()=-\/0.3;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Loop for different loads}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
@@ -593,10 +593,10 @@ The driver builds the {\ttfamily Problem} object and solves the problem for vari
 \DoxyCodeLine{   problem.\mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem_a5092be8e6172d6c9147115bdd485db35}{doc\_solution}}();}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{//Increment counter for solutions }}
-\DoxyCodeLine{   problem.\mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem_af21708459753b56b407f4e70d1cfe795}{doc\_info}}().number()++;    }
+\DoxyCodeLine{   problem.\mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem_a4be869d81c0df187d4239a590826f139}{doc\_info}}().number()++;    }
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Change load on ring}}
-\DoxyCodeLine{   problem.\mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem_a47149c35c94b2ab99507a0a74fe35823}{load}}()+=dp;}
+\DoxyCodeLine{   problem.\mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem_a5ae799de23742e4c8fa54ee7ae32e679}{load}}()+=dp;}
 \DoxyCodeLine{  \} }
 \DoxyCodeLine{ }
 \DoxyCodeLine{\} \textcolor{comment}{// end of driver}}
@@ -611,12 +611,12 @@ Here is the problem class definition which requires little comment\+:
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//======start\_of\_problem==============================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Problem to demonstrate the use of a GeomObject as a }\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// GeneralisedElement: A geometric object (a Circle) is "{}upgraded"{}}}
-\DoxyCodeLine{\textcolor{comment}{/// to a GeneralisedElement. The position of the Circle is}}
-\DoxyCodeLine{\textcolor{comment}{/// determined by a balance of forces, assuming that the}}
-\DoxyCodeLine{\textcolor{comment}{/// Circle is mounted on an elastic spring of specified}}
-\DoxyCodeLine{\textcolor{comment}{/// stiffness and loaded by a vertical "{}load"{}. }}
+\DoxyCodeLine{\textcolor{comment}{/// Problem to demonstrate the use of a GeomObject as a }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// GeneralisedElement: A geometric object (a Circle) is "{}upgraded"{}}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// to a GeneralisedElement. The position of the Circle is}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// determined by a balance of forces, assuming that the}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// Circle is mounted on an elastic spring of specified}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// stiffness and loaded by a vertical "{}load"{}. }}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem}{GeomObjectAsGeneralisedElementProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -636,13 +636,13 @@ Here is the problem class definition which requires little comment\+:
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem_a5092be8e6172d6c9147115bdd485db35}{doc\_solution}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Return value of the "{}load"{} on the elastically supported ring}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem_a47149c35c94b2ab99507a0a74fe35823}{load}}()}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem_a5ae799de23742e4c8fa54ee7ae32e679}{load}}()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{keywordflow}{return} *\mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem_ac04469b2dbce010fff3f5b2cf5591bcd}{Load\_pt}}-\/>value\_pt(0);}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Access to DocInfo object}}
-\DoxyCodeLine{\textcolor{comment}{} DocInfo\& \mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem_af21708459753b56b407f4e70d1cfe795}{doc\_info}}() \{\textcolor{keywordflow}{return} \mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem_a89a7f5fa555839193166f802d6ff6be2}{Doc\_info}};\}}
+\DoxyCodeLine{\textcolor{comment}{} DocInfo\& \mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem_a4be869d81c0df187d4239a590826f139}{doc\_info}}() \{\textcolor{keywordflow}{return} \mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem_a89a7f5fa555839193166f802d6ff6be2}{Doc\_info}};\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -664,7 +664,7 @@ In the problem constructor, we create the (single) {\ttfamily Elastically\+Suppo
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=============================start\_of\_problem\_constructor===============}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem_ad1f15fcb6c055c58d1f71b522f1f7bd6}{GeomObjectAsGeneralisedElementProblem::GeomObjectAsGeneralisedElementProblem}}()}
 \DoxyCodeLine{\{ }
 \DoxyCodeLine{ }
@@ -738,7 +738,7 @@ The post-\/processing routine is straightforward and is listed only to highlight
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===========================start\_of\_doc\_solution========================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution in tecplot format.}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem_a5092be8e6172d6c9147115bdd485db35}{GeomObjectAsGeneralisedElementProblem::doc\_solution}}()}
 \DoxyCodeLine{\{ }
 \DoxyCodeLine{}
@@ -769,7 +769,7 @@ The post-\/processing routine is straightforward and is listed only to highlight
 \DoxyCodeLine{ \textcolor{comment}{// Write "{}load"{} and vertical position of the ring's centre}}
 \DoxyCodeLine{ \mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem_ad6261e556a52596ba8904ee902ea6d70}{Trace\_file}} }
 \DoxyCodeLine{  << \textcolor{keyword}{static\_cast<}ElasticallySupportedRingElement*\textcolor{keyword}{>}(}
-\DoxyCodeLine{   mesh\_pt()-\/>element\_pt(0))-\/>\mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem_a47149c35c94b2ab99507a0a74fe35823}{load}}()}
+\DoxyCodeLine{   mesh\_pt()-\/>element\_pt(0))-\/>\mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem_a5ae799de23742e4c8fa54ee7ae32e679}{load}}()}
 \DoxyCodeLine{  << \textcolor{stringliteral}{"{} "{}}}
 \DoxyCodeLine{  << \textcolor{keyword}{static\_cast<}ElasticallySupportedRingElement*\textcolor{keyword}{>}(}
 \DoxyCodeLine{   mesh\_pt()-\/>element\_pt(0))-\/>y\_c()}

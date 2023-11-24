@@ -21,7 +21,7 @@ virtual \mbox{\hyperlink{classMyEllipse_ac2f2d3fb269c57fb26b4db6d9a0c7c05}{$\sim
 void \mbox{\hyperlink{classMyEllipse_a7b139a2f4564005773c83325f2414e3e}{position}} (const Vector$<$ double $>$ \&xi, Vector$<$ double $>$ \&r) const
 \begin{DoxyCompactList}\small\item\em Current position vector to material point at Lagrangian coordinate xi. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classMyEllipse_a93f75bf33969037e35d779738a8493f5}{position}} (const unsigned \&t, const Vector$<$ double $>$ \&xi, Vector$<$ double $>$ \&r) const
-\begin{DoxyCompactList}\small\item\em Parametrised position on object\+: r(xi). Evaluated at previous time level. t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous time level. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Parametrised position on object\+: r(xi). Evaluated at previous time level. t=0\+: current time; t$>$0\+: previous time level. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -40,7 +40,7 @@ Oscillating ellipse.
 
 \[ x = (A + \widehat{A} \cos(2\pi t/T)) \cos(\xi) \] \[ y = \frac{\sin(\xi)}{A + \widehat{A} \cos(2\pi t/T)} \] Note that cross-\/sectional area is conserved. 
 
-Definition at line \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00047}{47}} of file \mbox{\hyperlink{osc__quarter__ellipse_8cc_source}{osc\+\_\+quarter\+\_\+ellipse.\+cc}}.
+Definition at line 47 of file osc\+\_\+quarter\+\_\+ellipse.\+cc.
 
 
 
@@ -57,7 +57,7 @@ Constructor\+: Pass initial x-\/half axis, amplitude of x-\/variation, period of
 
 
 
-Definition at line \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00054}{54}} of file \mbox{\hyperlink{osc__quarter__ellipse_8cc_source}{osc\+\_\+quarter\+\_\+ellipse.\+cc}}.
+Definition at line 54 of file osc\+\_\+quarter\+\_\+ellipse.\+cc.
 
 \mbox{\Hypertarget{classMyEllipse_ac2f2d3fb269c57fb26b4db6d9a0c7c05}\label{classMyEllipse_ac2f2d3fb269c57fb26b4db6d9a0c7c05}} 
 \index{MyEllipse@{MyEllipse}!````~MyEllipse@{$\sim$MyEllipse}}
@@ -71,7 +71,7 @@ Destructor\+: Empty.
 
 
 
-Definition at line \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00059}{59}} of file \mbox{\hyperlink{osc__quarter__ellipse_8cc_source}{osc\+\_\+quarter\+\_\+ellipse.\+cc}}.
+Definition at line 59 of file osc\+\_\+quarter\+\_\+ellipse.\+cc.
 
 
 
@@ -84,15 +84,15 @@ Definition at line \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00059}{59}
 
 
 
-Parametrised position on object\+: r(xi). Evaluated at previous time level. t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous time level. 
+Parametrised position on object\+: r(xi). Evaluated at previous time level. t=0\+: current time; t$>$0\+: previous time level. 
 
 
 
-Definition at line \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00077}{77}} of file \mbox{\hyperlink{osc__quarter__ellipse_8cc_source}{osc\+\_\+quarter\+\_\+ellipse.\+cc}}.
+Definition at line 77 of file osc\+\_\+quarter\+\_\+ellipse.\+cc.
 
 
 
-References \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00092}{A}}, \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00095}{A\+\_\+hat}}, \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00098}{T}}, and \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00101}{Time\+\_\+pt}}.
+References Global\+\_\+\+Physical\+\_\+\+Variables\+::A, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+A\+\_\+hat, and Global\+\_\+\+Physical\+\_\+\+Variables\+::T.
 
 \mbox{\Hypertarget{classMyEllipse_a7b139a2f4564005773c83325f2414e3e}\label{classMyEllipse_a7b139a2f4564005773c83325f2414e3e}} 
 \index{MyEllipse@{MyEllipse}!position@{position}}
@@ -106,11 +106,11 @@ Current position vector to material point at Lagrangian coordinate xi.
 
 
 
-Definition at line \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00063}{63}} of file \mbox{\hyperlink{osc__quarter__ellipse_8cc_source}{osc\+\_\+quarter\+\_\+ellipse.\+cc}}.
+Definition at line 63 of file osc\+\_\+quarter\+\_\+ellipse.\+cc.
 
 
 
-References \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00092}{A}}, \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00095}{A\+\_\+hat}}, \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00098}{T}}, and \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00101}{Time\+\_\+pt}}.
+References Global\+\_\+\+Physical\+\_\+\+Variables\+::A, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+A\+\_\+hat, and Global\+\_\+\+Physical\+\_\+\+Variables\+::T.
 
 
 
@@ -127,11 +127,7 @@ x-\/half axis
 
 
 
-Definition at line \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00092}{92}} of file \mbox{\hyperlink{osc__quarter__ellipse_8cc_source}{osc\+\_\+quarter\+\_\+ellipse.\+cc}}.
-
-
-
-Referenced by \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00063}{position()}}.
+Definition at line 92 of file osc\+\_\+quarter\+\_\+ellipse.\+cc.
 
 \mbox{\Hypertarget{classMyEllipse_a653e71cf296cdc86cc595d16f18004dd}\label{classMyEllipse_a653e71cf296cdc86cc595d16f18004dd}} 
 \index{MyEllipse@{MyEllipse}!A\_hat@{A\_hat}}
@@ -145,11 +141,7 @@ Amplitude of variation in x-\/half axis.
 
 
 
-Definition at line \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00095}{95}} of file \mbox{\hyperlink{osc__quarter__ellipse_8cc_source}{osc\+\_\+quarter\+\_\+ellipse.\+cc}}.
-
-
-
-Referenced by \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00063}{position()}}.
+Definition at line 95 of file osc\+\_\+quarter\+\_\+ellipse.\+cc.
 
 \mbox{\Hypertarget{classMyEllipse_ab098069ab23bbbd8f30b0da3523dc87f}\label{classMyEllipse_ab098069ab23bbbd8f30b0da3523dc87f}} 
 \index{MyEllipse@{MyEllipse}!T@{T}}
@@ -163,11 +155,7 @@ Period of oscillation.
 
 
 
-Definition at line \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00098}{98}} of file \mbox{\hyperlink{osc__quarter__ellipse_8cc_source}{osc\+\_\+quarter\+\_\+ellipse.\+cc}}.
-
-
-
-Referenced by \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00063}{position()}}.
+Definition at line 98 of file osc\+\_\+quarter\+\_\+ellipse.\+cc.
 
 \mbox{\Hypertarget{classMyEllipse_abc1c4c863a599ce87bdff1abb9971953}\label{classMyEllipse_abc1c4c863a599ce87bdff1abb9971953}} 
 \index{MyEllipse@{MyEllipse}!Time\_pt@{Time\_pt}}
@@ -181,11 +169,7 @@ Pointer to time object.
 
 
 
-Definition at line \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00101}{101}} of file \mbox{\hyperlink{osc__quarter__ellipse_8cc_source}{osc\+\_\+quarter\+\_\+ellipse.\+cc}}.
-
-
-
-Referenced by \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00063}{position()}}.
+Definition at line 101 of file osc\+\_\+quarter\+\_\+ellipse.\+cc.
 
 
 

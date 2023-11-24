@@ -25,14 +25,14 @@ virtual unsigned \mbox{\hyperlink{classoomph_1_1PolarCrouzeixRaviartElement_a36e
 double \mbox{\hyperlink{classoomph_1_1PolarCrouzeixRaviartElement_a9c214952496bbb3e777e7c49d4579377}{u\+\_\+pnst}} (const unsigned \&n, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Return the velocity component u\mbox{[}i\mbox{]} at local node n. Uses suitably interpolated value for hanging nodes. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1PolarCrouzeixRaviartElement_a0c61f886e4869b04ef14e4f160812985}{u\+\_\+pnst}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&n, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
-\begin{DoxyCompactList}\small\item\em Return the velocity component u\mbox{[}i\mbox{]} at local node n at timestep t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous timestep). Uses suitably interpolated value for hanging nodes. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Return the velocity component u\mbox{[}i\mbox{]} at local node n at timestep t (t=0\+: present; t$>$0\+: previous timestep). Uses suitably interpolated value for hanging nodes. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1PolarCrouzeixRaviartElement_ac11e6ee68acf235bb6d2b41a2bd77d89}{p\+\_\+pnst}} (const unsigned \&i\+\_\+internal) const
 \begin{DoxyCompactList}\small\item\em Return the pressure values at internal dof i\+\_\+internal (Discontinous pressure interpolation -- no need to cater for hanging nodes). \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1PolarCrouzeixRaviartElement_a22bc07f82b9e2c5b373db917ca071085}{npres\+\_\+pnst}} () const
 \begin{DoxyCompactList}\small\item\em Return number of pressure values. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PolarCrouzeixRaviartElement_a10ce59c8e1796c0fcac9c0b3b6a89568}{fix\+\_\+pressure}} (const unsigned \&p\+\_\+dof, const double \&p\+\_\+value)
 \begin{DoxyCompactList}\small\item\em Pin p\+\_\+dof-\/th pressure dof and set it to value specified by p\+\_\+value. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PolarCrouzeixRaviartElement_a575257c6dc7b44e56c687066cbda3791}{get\+\_\+load\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&paired\+\_\+load\+\_\+data)
+void \mbox{\hyperlink{classoomph_1_1PolarCrouzeixRaviartElement_a672a020c7722d5b71cae4baa653898f5}{get\+\_\+load\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&paired\+\_\+load\+\_\+data)
 \begin{DoxyCompactList}\small\item\em Add to the set paired\+\_\+load\+\_\+data pairs of pointers to data objects and unsigned integers that index the values in the data object that affect the load (traction), as specified in the \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a47ae24dc603a7d46bd4a85ccfb2b8e23}{get\+\_\+load()}} function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PolarCrouzeixRaviartElement_ad93900ce702a77bb8d7710cf0f22ea8d}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
@@ -77,7 +77,7 @@ static const unsigned \mbox{\hyperlink{classoomph_1_1PolarCrouzeixRaviartElement
 
 Crouzeix\+\_\+\+Raviart elements are Navier--Stokes elements with quadratic interpolation for velocities and positions, but a discontinuous linear pressure interpolation 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00770}{770}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 770 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -94,11 +94,11 @@ Constructor, there are DIM+1 internal values (for the pressure)
 
 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00816}{816}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 816 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l00062}{oomph\+::\+Generalised\+Element\+::add\+\_\+internal\+\_\+data()}}, and \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00780}{P\+\_\+pnst\+\_\+internal\+\_\+index}}.
+References oomph\+::\+Generalised\+Element\+::add\+\_\+internal\+\_\+data(), and P\+\_\+pnst\+\_\+internal\+\_\+index.
 
 
 
@@ -119,11 +119,11 @@ Implements \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a7fda7aac0b
 
 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00949}{949}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 949 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References i.
 
 \mbox{\Hypertarget{classoomph_1_1PolarCrouzeixRaviartElement_acd23331a698b1dc87c9d309ed805430a}\label{classoomph_1_1PolarCrouzeixRaviartElement_acd23331a698b1dc87c9d309ed805430a}} 
 \index{oomph::PolarCrouzeixRaviartElement@{oomph::PolarCrouzeixRaviartElement}!dshape\_and\_dtest\_eulerian\_pnst@{dshape\_and\_dtest\_eulerian\_pnst}}
@@ -141,11 +141,11 @@ Implements \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a5be752caef
 
 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00921}{921}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 921 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References i, and s.
 
 \mbox{\Hypertarget{classoomph_1_1PolarCrouzeixRaviartElement_a10ce59c8e1796c0fcac9c0b3b6a89568}\label{classoomph_1_1PolarCrouzeixRaviartElement_a10ce59c8e1796c0fcac9c0b3b6a89568}} 
 \index{oomph::PolarCrouzeixRaviartElement@{oomph::PolarCrouzeixRaviartElement}!fix\_pressure@{fix\_pressure}}
@@ -163,11 +163,11 @@ Implements \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a80333b6021
 
 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00858}{858}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 858 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00622}{oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00385}{oomph\+::\+Data\+::pin()}}, and \mbox{\hyperlink{nodes_8h_source_l00324}{oomph\+::\+Data\+::value\+\_\+pt()}}.
+References oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt(), oomph\+::\+Data\+::pin(), and oomph\+::\+Data\+::value\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1PolarCrouzeixRaviartElement_afbc0b41da46fa27fa5cd35d9b38de2e1}\label{classoomph_1_1PolarCrouzeixRaviartElement_afbc0b41da46fa27fa5cd35d9b38de2e1}} 
 \index{oomph::PolarCrouzeixRaviartElement@{oomph::PolarCrouzeixRaviartElement}!full\_output@{full\_output}}
@@ -181,11 +181,11 @@ Full output function\+: x,y,\mbox{[}z\mbox{]},u,v,\mbox{[}w\mbox{]},p,du/dt,dv/d
 
 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00899}{899}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 899 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00510}{oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::full\+\_\+output()}}.
+References oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::full\+\_\+output().
 
 \mbox{\Hypertarget{classoomph_1_1PolarCrouzeixRaviartElement_a92da79ca7ed2c314650ad5a54b7878e8}\label{classoomph_1_1PolarCrouzeixRaviartElement_a92da79ca7ed2c314650ad5a54b7878e8}} 
 \index{oomph::PolarCrouzeixRaviartElement@{oomph::PolarCrouzeixRaviartElement}!full\_output@{full\_output}}
@@ -199,17 +199,17 @@ Full output function\+: x,y,\mbox{[}z\mbox{]},u,v,\mbox{[}w\mbox{]},p,du/dt,dv/d
 
 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00907}{907}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 907 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00510}{oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::full\+\_\+output()}}.
+References oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::full\+\_\+output().
 
-\mbox{\Hypertarget{classoomph_1_1PolarCrouzeixRaviartElement_a575257c6dc7b44e56c687066cbda3791}\label{classoomph_1_1PolarCrouzeixRaviartElement_a575257c6dc7b44e56c687066cbda3791}} 
+\mbox{\Hypertarget{classoomph_1_1PolarCrouzeixRaviartElement_a672a020c7722d5b71cae4baa653898f5}\label{classoomph_1_1PolarCrouzeixRaviartElement_a672a020c7722d5b71cae4baa653898f5}} 
 \index{oomph::PolarCrouzeixRaviartElement@{oomph::PolarCrouzeixRaviartElement}!get\_load\_data@{get\_load\_data}}
 \index{get\_load\_data@{get\_load\_data}!oomph::PolarCrouzeixRaviartElement@{oomph::PolarCrouzeixRaviartElement}}
 \doxysubsubsection{\texorpdfstring{get\_load\_data()}{get\_load\_data()}}
-{\footnotesize\ttfamily void oomph\+::\+Polar\+Crouzeix\+Raviart\+Element\+::get\+\_\+load\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&}]{paired\+\_\+load\+\_\+data }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void oomph\+::\+Polar\+Crouzeix\+Raviart\+Element\+::get\+\_\+load\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&}]{paired\+\_\+load\+\_\+data }\end{DoxyParamCaption})}
 
 
 
@@ -217,11 +217,11 @@ Add to the set paired\+\_\+load\+\_\+data pairs of pointers to data objects and 
 
 Add pointers to \mbox{\hyperlink{classoomph_1_1Data}{Data}} and indices of the values that affect the potential load (traction) applied to the Solid\+Elements to the set paired\+\_\+load\+\_\+data. 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l01577}{1577}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc}}.
+Definition at line 1577 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l00622}{oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l00823}{oomph\+::\+Generalised\+Element\+::ninternal\+\_\+data()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}.
+References i, oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt(), oomph\+::\+Generalised\+Element\+::ninternal\+\_\+data(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Data\+::nvalue().
 
 \mbox{\Hypertarget{classoomph_1_1PolarCrouzeixRaviartElement_a22bc07f82b9e2c5b373db917ca071085}\label{classoomph_1_1PolarCrouzeixRaviartElement_a22bc07f82b9e2c5b373db917ca071085}} 
 \index{oomph::PolarCrouzeixRaviartElement@{oomph::PolarCrouzeixRaviartElement}!npres\_pnst@{npres\_pnst}}
@@ -239,11 +239,11 @@ Implements \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_af66cafead0
 
 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00852}{852}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 852 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{refineable__polar__navier__stokes__elements_8h_source_l00829}{oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::insert\+\_\+load\+\_\+data()}}, and \mbox{\hyperlink{refineable__polar__navier__stokes__elements_8h_source_l00680}{oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs()}}.
+Referenced by oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::insert\+\_\+load\+\_\+data(), and oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs().
 
 \mbox{\Hypertarget{classoomph_1_1PolarCrouzeixRaviartElement_a3ebab0f1e7981aaab9100fcaa39cd7a4}\label{classoomph_1_1PolarCrouzeixRaviartElement_a3ebab0f1e7981aaab9100fcaa39cd7a4}} 
 \index{oomph::PolarCrouzeixRaviartElement@{oomph::PolarCrouzeixRaviartElement}!output@{output}}
@@ -261,11 +261,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_aad
 
 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00884}{884}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 884 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00485}{oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::output()}}.
+References oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1PolarCrouzeixRaviartElement_a0e5c165c36dacf83709bd8c6fba1be40}\label{classoomph_1_1PolarCrouzeixRaviartElement_a0e5c165c36dacf83709bd8c6fba1be40}} 
 \index{oomph::PolarCrouzeixRaviartElement@{oomph::PolarCrouzeixRaviartElement}!output@{output}}
@@ -283,11 +283,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a1d
 
 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00890}{890}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 890 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00485}{oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::output()}}.
+References oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1PolarCrouzeixRaviartElement_ad93900ce702a77bb8d7710cf0f22ea8d}\label{classoomph_1_1PolarCrouzeixRaviartElement_ad93900ce702a77bb8d7710cf0f22ea8d}} 
 \index{oomph::PolarCrouzeixRaviartElement@{oomph::PolarCrouzeixRaviartElement}!output@{output}}
@@ -305,11 +305,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a72
 
 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00871}{871}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 871 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00485}{oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::output()}}.
+References oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1PolarCrouzeixRaviartElement_ac170ddb5c2a7047d46a20d8c41da22df}\label{classoomph_1_1PolarCrouzeixRaviartElement_ac170ddb5c2a7047d46a20d8c41da22df}} 
 \index{oomph::PolarCrouzeixRaviartElement@{oomph::PolarCrouzeixRaviartElement}!output@{output}}
@@ -327,11 +327,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a83
 
 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00877}{877}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 877 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00485}{oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::output()}}.
+References oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1PolarCrouzeixRaviartElement_a13dafb71fd6a720e02a6382b1a3274e7}\label{classoomph_1_1PolarCrouzeixRaviartElement_a13dafb71fd6a720e02a6382b1a3274e7}} 
 \index{oomph::PolarCrouzeixRaviartElement@{oomph::PolarCrouzeixRaviartElement}!p\_local\_eqn@{p\_local\_eqn}}
@@ -349,11 +349,11 @@ Implements \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a4738c2cb0d
 
 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00809}{809}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 809 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00267}{oomph\+::\+Generalised\+Element\+::internal\+\_\+local\+\_\+eqn()}}.
+References oomph\+::\+Generalised\+Element\+::internal\+\_\+local\+\_\+eqn().
 
 \mbox{\Hypertarget{classoomph_1_1PolarCrouzeixRaviartElement_ac11e6ee68acf235bb6d2b41a2bd77d89}\label{classoomph_1_1PolarCrouzeixRaviartElement_ac11e6ee68acf235bb6d2b41a2bd77d89}} 
 \index{oomph::PolarCrouzeixRaviartElement@{oomph::PolarCrouzeixRaviartElement}!p\_pnst@{p\_pnst}}
@@ -371,11 +371,11 @@ Implements \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a4db8f8149f
 
 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00845}{845}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 845 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00622}{oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8h_source_l00324}{oomph\+::\+Data\+::value\+\_\+pt()}}.
+References oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt(), and oomph\+::\+Data\+::value\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1PolarCrouzeixRaviartElement_a1898936dd70065cb4054d1e1ba6a9d49}\label{classoomph_1_1PolarCrouzeixRaviartElement_a1898936dd70065cb4054d1e1ba6a9d49}} 
 \index{oomph::PolarCrouzeixRaviartElement@{oomph::PolarCrouzeixRaviartElement}!pshape\_pnst@{pshape\_pnst}}
@@ -393,15 +393,15 @@ Implements \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a1b382bf38d
 
 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00974}{974}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 974 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References s.
 
 
 
-Referenced by \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00983}{pshape\+\_\+pnst()}}.
+Referenced by pshape\+\_\+pnst().
 
 \mbox{\Hypertarget{classoomph_1_1PolarCrouzeixRaviartElement_a919b450ac1bb494ca96b94b717a9a37b}\label{classoomph_1_1PolarCrouzeixRaviartElement_a919b450ac1bb494ca96b94b717a9a37b}} 
 \index{oomph::PolarCrouzeixRaviartElement@{oomph::PolarCrouzeixRaviartElement}!pshape\_pnst@{pshape\_pnst}}
@@ -419,11 +419,11 @@ Implements \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a2ec5597d86
 
 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00983}{983}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 983 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00974}{pshape\+\_\+pnst()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References i, pshape\+\_\+pnst(), and s.
 
 \mbox{\Hypertarget{classoomph_1_1PolarCrouzeixRaviartElement_a36edbd6c9a877d4da2c99d5e70691c34}\label{classoomph_1_1PolarCrouzeixRaviartElement_a36edbd6c9a877d4da2c99d5e70691c34}} 
 \index{oomph::PolarCrouzeixRaviartElement@{oomph::PolarCrouzeixRaviartElement}!required\_nvalue@{required\_nvalue}}
@@ -441,11 +441,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a56610c60d5bc2d7
 
 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l01566}{1566}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc}}.
+Definition at line 1566 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00775}{Initial\+\_\+\+Nvalue}}.
+References Initial\+\_\+\+Nvalue.
 
 \mbox{\Hypertarget{classoomph_1_1PolarCrouzeixRaviartElement_a9c214952496bbb3e777e7c49d4579377}\label{classoomph_1_1PolarCrouzeixRaviartElement_a9c214952496bbb3e777e7c49d4579377}} 
 \index{oomph::PolarCrouzeixRaviartElement@{oomph::PolarCrouzeixRaviartElement}!u\_pnst@{u\_pnst}}
@@ -463,11 +463,11 @@ Implements \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ae4bfb7b4c5
 
 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00829}{829}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 829 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}.
+References i, and oomph\+::\+Finite\+Element\+::nodal\+\_\+value().
 
 \mbox{\Hypertarget{classoomph_1_1PolarCrouzeixRaviartElement_a0c61f886e4869b04ef14e4f160812985}\label{classoomph_1_1PolarCrouzeixRaviartElement_a0c61f886e4869b04ef14e4f160812985}} 
 \index{oomph::PolarCrouzeixRaviartElement@{oomph::PolarCrouzeixRaviartElement}!u\_pnst@{u\_pnst}}
@@ -477,7 +477,7 @@ References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink
 
 
 
-Return the velocity component u\mbox{[}i\mbox{]} at local node n at timestep t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous timestep). Uses suitably interpolated value for hanging nodes. 
+Return the velocity component u\mbox{[}i\mbox{]} at local node n at timestep t (t=0\+: present; t$>$0\+: previous timestep). Uses suitably interpolated value for hanging nodes. 
 
 
 
@@ -485,11 +485,11 @@ Implements \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ace9bb9807c
 
 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00837}{837}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 837 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}.
+References i, and oomph\+::\+Finite\+Element\+::nodal\+\_\+value().
 
 
 
@@ -514,11 +514,11 @@ Static array of ints to hold required number of variables at nodes.
 
 2D Crouzeix-\/\+Raviart elements 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00775}{775}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 775 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l01566}{required\+\_\+nvalue()}}.
+Referenced by required\+\_\+nvalue().
 
 \mbox{\Hypertarget{classoomph_1_1PolarCrouzeixRaviartElement_a7d41e3c313c6f4dd798c2dd696ef22c8}\label{classoomph_1_1PolarCrouzeixRaviartElement_a7d41e3c313c6f4dd798c2dd696ef22c8}} 
 \index{oomph::PolarCrouzeixRaviartElement@{oomph::PolarCrouzeixRaviartElement}!P\_pnst\_internal\_index@{P\_pnst\_internal\_index}}
@@ -532,11 +532,11 @@ Internal index that indicates at which internal data the pressure is stored.
 
 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00780}{780}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 780 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{refineable__polar__navier__stokes__elements_8h_source_l01018}{oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::further\+\_\+build()}}, \mbox{\hyperlink{refineable__polar__navier__stokes__elements_8h_source_l00829}{oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::insert\+\_\+load\+\_\+data()}}, \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00816}{Polar\+Crouzeix\+Raviart\+Element()}}, \mbox{\hyperlink{refineable__polar__navier__stokes__elements_8h_source_l00908}{oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons()}}, and \mbox{\hyperlink{refineable__polar__navier__stokes__elements_8h_source_l00680}{oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs()}}.
+Referenced by oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::insert\+\_\+load\+\_\+data(), Polar\+Crouzeix\+Raviart\+Element(), oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), and oomph\+::\+Refineable\+Polar\+Crouzeix\+Raviart\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs().
 
 
 

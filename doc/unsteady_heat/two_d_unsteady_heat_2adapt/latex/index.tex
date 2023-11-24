@@ -104,8 +104,8 @@ We initialise the output label in the {\ttfamily Problem} constructor,
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//========start\_of\_constructor============================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Constructor for UnsteadyHeat problem on deformable ellipse domain.}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// Pass pointer to source function.}}
+\DoxyCodeLine{\textcolor{comment}{/// Constructor for UnsteadyHeat problem on deformable ellipse domain.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// Pass pointer to source function.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a894f3bd6c1c23c307a736de6898e4e98}{RefineableUnsteadyHeatProblem<ELEMENT>::RefineableUnsteadyHeatProblem}}(}
@@ -181,7 +181,7 @@ We modify the timestepping loop so that the adaptive timestepper\textquotesingle
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_dump\_it=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Dump the solution to disk}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a1fb939c3f9c258fd49328bb1516ced98}{RefineableUnsteadyHeatProblem<ELEMENT>::dump\_it}}(ofstream\& dump\_file)}
 \DoxyCodeLine{\{}
@@ -207,7 +207,7 @@ These values are then read during the restart\+:
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=========start\_of\_restart===============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Read solution from disk}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_af36fa71e72852367411e21b50b179625}{RefineableUnsteadyHeatProblem<ELEMENT>::restart}}(ifstream\& restart\_file)}
 \DoxyCodeLine{\{}

@@ -75,7 +75,7 @@ Here\textquotesingle{}s a listing of the complete driver code\+:
 \DoxyCodeLine{\textcolor{comment}{//LIC// multi-\/physics finite-\/element library, available }}
 \DoxyCodeLine{\textcolor{comment}{//LIC// at http://www.oomph-\/lib.org.}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// }}
-\DoxyCodeLine{\textcolor{comment}{//LIC// Copyright (C) 2006-\/2022 Matthias Heil and Andrew Hazel}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// Copyright (C) 2006-\/2023 Matthias Heil and Andrew Hazel}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// }}
 \DoxyCodeLine{\textcolor{comment}{//LIC// This library is free software; you can redistribute it and/or}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// modify it under the terms of the GNU Lesser General Public}}
@@ -125,42 +125,42 @@ Here\textquotesingle{}s a listing of the complete driver code\+:
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Constructor:  Pass start and end points}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classMyStraightLine_a2c63e574f21703250a31fc446ab8045d}{MyStraightLine}}(\textcolor{keyword}{const} Vector<double>\& r\_start, \textcolor{keyword}{const} Vector<double>\& r\_end) }
-\DoxyCodeLine{  :  GeomObject(1,2), \mbox{\hyperlink{classMyStraightLine_a0f66636dd5d1e7ff6ec93acf90879f0c}{R\_start}}(r\_start), \mbox{\hyperlink{classMyStraightLine_afa466e12301ccea99a02fe1bde615691}{R\_end}}(r\_end)}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}(\textcolor{keyword}{const} Vector<double>\& r\_start, \textcolor{keyword}{const} Vector<double>\& r\_end) }
+\DoxyCodeLine{  :  GeomObject(1,2), R\_start(r\_start), R\_end(r\_end)}
 \DoxyCodeLine{  \{ \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Broken copy constructor}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classMyStraightLine_a2c63e574f21703250a31fc446ab8045d}{MyStraightLine}}(\textcolor{keyword}{const} \mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}\& dummy) }
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}(\textcolor{keyword}{const} \mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}\& dummy) }
 \DoxyCodeLine{  \{ }
 \DoxyCodeLine{   BrokenCopy::broken\_copy(\textcolor{stringliteral}{"{}MyStraightLine"{}});}
 \DoxyCodeLine{  \} }
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Broken assignment operator}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classMyStraightLine_a926ab921fec52ded94509efce06b66a7}{operator=}}(\textcolor{keyword}{const} \mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}\&) }
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} operator=(\textcolor{keyword}{const} \mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}\&) }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   BrokenCopy::broken\_assign(\textcolor{stringliteral}{"{}MyStraightLine"{}});}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Destructor:  Empty}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classMyStraightLine_ae2f9a5860652a726b2f4dc94d1332ef1}{\string~MyStraightLine}}()\{\}}
+\DoxyCodeLine{\textcolor{comment}{} \string~\mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}()\{\}}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Position Vector at Lagrangian coordinate zeta }}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classMyStraightLine_ae3ee51a7b81acc2ef652bec4ee955d2f}{position}}(\textcolor{keyword}{const} Vector<double>\& zeta, Vector<double>\& r)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} position(\textcolor{keyword}{const} Vector<double>\& zeta, Vector<double>\& r)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\textcolor{keyword}{  }\{}
 \DoxyCodeLine{   \textcolor{comment}{// Position Vector}}
-\DoxyCodeLine{   r[0] = \mbox{\hyperlink{classMyStraightLine_a0f66636dd5d1e7ff6ec93acf90879f0c}{R\_start}}[0]+(\mbox{\hyperlink{classMyStraightLine_afa466e12301ccea99a02fe1bde615691}{R\_end}}[0]-\/\mbox{\hyperlink{classMyStraightLine_a0f66636dd5d1e7ff6ec93acf90879f0c}{R\_start}}[0])*zeta[0];}
-\DoxyCodeLine{   r[1] = \mbox{\hyperlink{classMyStraightLine_a0f66636dd5d1e7ff6ec93acf90879f0c}{R\_start}}[1]+(\mbox{\hyperlink{classMyStraightLine_afa466e12301ccea99a02fe1bde615691}{R\_end}}[1]-\/\mbox{\hyperlink{classMyStraightLine_a0f66636dd5d1e7ff6ec93acf90879f0c}{R\_start}}[1])*zeta[0];}
+\DoxyCodeLine{   r[0] = R\_start[0]+(R\_end[0]-\/R\_start[0])*zeta[0];}
+\DoxyCodeLine{   r[1] = R\_start[1]+(R\_end[1]-\/R\_start[1])*zeta[0];}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ }
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Start point of line}}
-\DoxyCodeLine{\textcolor{comment}{} Vector<double> \mbox{\hyperlink{classMyStraightLine_a0f66636dd5d1e7ff6ec93acf90879f0c}{R\_start}};}
+\DoxyCodeLine{\textcolor{comment}{} Vector<double> R\_start;}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// End point of line}}
-\DoxyCodeLine{\textcolor{comment}{} Vector<double> \mbox{\hyperlink{classMyStraightLine_afa466e12301ccea99a02fe1bde615691}{R\_end}};}
+\DoxyCodeLine{\textcolor{comment}{} Vector<double> R\_end;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\};}
 \DoxyCodeLine{}
@@ -184,7 +184,7 @@ Here\textquotesingle{}s a listing of the complete driver code\+:
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Parameters_af9e1e178dfb7f5e35b452599bd4c4324}{Omega\_sq}}=10.0; }
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Square of non-\/dim frequency for the two regions}}
-\DoxyCodeLine{\textcolor{comment}{} Vector<double> \mbox{\hyperlink{namespaceGlobal__Parameters_a4c035035889b93588b44f7778bb27ef9}{Omega\_sq\_region}}(2,\mbox{\hyperlink{namespaceGlobal__Parameters_af9e1e178dfb7f5e35b452599bd4c4324}{Omega\_sq}});}
+\DoxyCodeLine{\textcolor{comment}{} Vector<double> \mbox{\hyperlink{namespaceGlobal__Parameters_a58a76124a7c047adf58388cc12e84f23}{Omega\_sq\_region}}(2,\mbox{\hyperlink{namespaceGlobal__Parameters_af9e1e178dfb7f5e35b452599bd4c4324}{Omega\_sq}});}
 \DoxyCodeLine{  \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// The elasticity tensors for the two regions}}
 \DoxyCodeLine{\textcolor{comment}{} Vector<TimeHarmonicIsotropicElasticityTensor*> \mbox{\hyperlink{namespaceGlobal__Parameters_a73c731fa617a9d92851e4195493262e7}{E\_pt}};}
@@ -230,60 +230,60 @@ Here\textquotesingle{}s a listing of the complete driver code\+:
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Constructor:}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classRingWithTRibProblem_ad0313aac3c0cdb87e753ba474a4e334f}{RingWithTRibProblem}}();}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classRingWithTRibProblem}{RingWithTRibProblem}}();}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update function (empty)}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRingWithTRibProblem_a5d9f7b05cc71c02275f6c3c1a465fd20}{actions\_after\_newton\_solve}}() \{\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_newton\_solve() \{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update function (empty)}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRingWithTRibProblem_aa74a20d5bd6d7f16eb00080734dde0d1}{actions\_before\_newton\_solve}}() \{\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_newton\_solve() \{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Actions before adapt: Wipe the mesh of traction elements}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRingWithTRibProblem_a7a170199d58390ae43a044294bfc7ac5}{actions\_before\_adapt}}();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_adapt();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Actions after adapt: Rebuild the mesh of traction elements}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRingWithTRibProblem_a8749aaf1e46d802c210b51e07093505b}{actions\_after\_adapt}}();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_adapt();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRingWithTRibProblem_a43b70b125f467aa5bb9c74d08f193aa5}{doc\_solution}}();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} doc\_solution();}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Create traction elements}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRingWithTRibProblem_ac4445c7a9fbfdcb69063d36fe0fe08c3}{create\_traction\_elements}}();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} create\_traction\_elements();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Delete traction elements}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRingWithTRibProblem_aa85169a96623cb39f18111ee436f5b9d}{delete\_traction\_elements}}();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} delete\_traction\_elements();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Helper function to complete problem setup}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRingWithTRibProblem_a7aa8c978ec6ff0a9823ef895b263fb41}{complete\_problem\_setup}}();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} complete\_problem\_setup();}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{preprocessor}{\#ifdef ADAPTIVE}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to refineable solid mesh}}
-\DoxyCodeLine{\textcolor{comment}{} RefineableTriangleMesh<ELASTICITY\_ELEMENT>* \mbox{\hyperlink{classRingWithTRibProblem_a89da884cecc2d8984168817de7b1927e}{Solid\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} RefineableTriangleMesh<ELASTICITY\_ELEMENT>* Solid\_mesh\_pt;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{preprocessor}{\#else}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to solid mesh}}
-\DoxyCodeLine{\textcolor{comment}{} TriangleMesh<ELASTICITY\_ELEMENT>* \mbox{\hyperlink{classRingWithTRibProblem_a89da884cecc2d8984168817de7b1927e}{Solid\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} TriangleMesh<ELASTICITY\_ELEMENT>* Solid\_mesh\_pt;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to mesh of traction elements}}
-\DoxyCodeLine{\textcolor{comment}{} Mesh* \mbox{\hyperlink{classRingWithTRibProblem_abf11b5c5d0c63c91ca7b248c18acad5b}{Traction\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} Mesh* Traction\_mesh\_pt;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// DocInfo object for output}}
-\DoxyCodeLine{\textcolor{comment}{} DocInfo \mbox{\hyperlink{classRingWithTRibProblem_a086bb927e3091b5d38e193b2ccb84e3b}{Doc\_info}};}
+\DoxyCodeLine{\textcolor{comment}{} DocInfo Doc\_info;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Boundary ID of upper symmetry boundary}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classRingWithTRibProblem_ad15da3f1436b47c6cd7a79962aaa895d}{Upper\_symmetry\_boundary\_id}};}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} Upper\_symmetry\_boundary\_id;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Boundary ID of lower symmetry boundary}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classRingWithTRibProblem_a93f5abb451b85f65316b930802c727f8}{Lower\_symmetry\_boundary\_id}};}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} Lower\_symmetry\_boundary\_id;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Boundary ID of outer boundary}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classRingWithTRibProblem_a88918269cac403640e2659d48210d03c}{Outer\_boundary\_id}};}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} Outer\_boundary\_id;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{\};}
 \DoxyCodeLine{}
@@ -664,7 +664,7 @@ Here\textquotesingle{}s a listing of the complete driver code\+:
 \DoxyCodeLine{     el\_pt-\/>elasticity\_tensor\_pt() = \mbox{\hyperlink{namespaceGlobal__Parameters_a73c731fa617a9d92851e4195493262e7}{Global\_Parameters::E\_pt}}[r];}
 \DoxyCodeLine{}
 \DoxyCodeLine{     \textcolor{comment}{// Square of non-\/dim frequency}}
-\DoxyCodeLine{     el\_pt-\/>omega\_sq\_pt()= \&\mbox{\hyperlink{namespaceGlobal__Parameters_a4c035035889b93588b44f7778bb27ef9}{Global\_Parameters::Omega\_sq\_region}}[r];}
+\DoxyCodeLine{     el\_pt-\/>omega\_sq\_pt()= \&\mbox{\hyperlink{namespaceGlobal__Parameters_a58a76124a7c047adf58388cc12e84f23}{Global\_Parameters::Omega\_sq\_region}}[r];}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{  \}                         }
 \DoxyCodeLine{}
@@ -963,7 +963,7 @@ Here\textquotesingle{}s a listing of the complete driver code\+:
 \DoxyCodeLine{   \textcolor{comment}{// be approximately axisymmetric in the annular region.}}
 \DoxyCodeLine{   \mbox{\hyperlink{namespaceGlobal__Parameters_a73c731fa617a9d92851e4195493262e7}{Global\_Parameters::E\_pt}}[1]-\/>update\_constitutive\_parameters(}
 \DoxyCodeLine{    \mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Global\_Parameters::Nu}},1.0e-\/10);}
-\DoxyCodeLine{   \mbox{\hyperlink{namespaceGlobal__Parameters_a4c035035889b93588b44f7778bb27ef9}{Global\_Parameters::Omega\_sq\_region}}[1]=0.0;}
+\DoxyCodeLine{   \mbox{\hyperlink{namespaceGlobal__Parameters_a58a76124a7c047adf58388cc12e84f23}{Global\_Parameters::Omega\_sq\_region}}[1]=0.0;}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ }

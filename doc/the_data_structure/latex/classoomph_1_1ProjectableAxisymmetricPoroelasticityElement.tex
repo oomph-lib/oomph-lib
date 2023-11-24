@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement}{}\doxysection{oomph\+::Projectable\+Axisymmetric\+Poroelasticity\+Element\texorpdfstring{$<$}{<} AXISYMMETRIC\+\_\+\+POROELASTICITY\+\_\+\+ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement}{}\doxysection{oomph\+::Projectable\+Axisymmetric\+Poroelasticity\+Element$<$ AXISYMMETRIC\+\_\+\+POROELASTICITY\+\_\+\+ELEMENT $>$ Class Template Reference}
 \label{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement}\index{oomph::ProjectableAxisymmetricPoroelasticityElement$<$ AXISYMMETRIC\_POROELASTICITY\_ELEMENT $>$@{oomph::ProjectableAxisymmetricPoroelasticityElement$<$ AXISYMMETRIC\_POROELASTICITY\_ELEMENT $>$}}
 
 
@@ -9,7 +9,7 @@
 
 {\ttfamily \#include $<$axisym\+\_\+poroelasticity\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Projectable\+Axisymmetric\+Poroelasticity\+Element\texorpdfstring{$<$}{<} AXISYMMETRIC\+\_\+\+POROELASTICITY\+\_\+\+ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Projectable\+Axisymmetric\+Poroelasticity\+Element$<$ AXISYMMETRIC\+\_\+\+POROELASTICITY\+\_\+\+ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=1.132686cm]{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement}
@@ -20,7 +20,7 @@ Inheritance diagram for oomph\+::Projectable\+Axisymmetric\+Poroelasticity\+Elem
 \item 
 \mbox{\hyperlink{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement_a346b0bf035991f172569177b1079d8c6}{Projectable\+Axisymmetric\+Poroelasticity\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards...\mbox{]}. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement_a1f0e111f9c4725fbbf63a4fa47b1a721}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement_a678e7d7fdf5e9f8ea2fe5583a21a03fe}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement_a593b32549e17dedf66365bf3fd202536}{nfields\+\_\+for\+\_\+projection}} ()
 \begin{DoxyCompactList}\small\item\em Number of fields to be projected\+: 4 (two displacement components, pressure, Darcy flux) \end{DoxyCompactList}\item 
@@ -31,7 +31,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1ProjectableAxisymmetricPoroelasticityEle
 double \mbox{\hyperlink{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement_a53a88c81a5225e213ca869e670ad1605}{jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field}} (const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi)
 \begin{DoxyCompactList}\small\item\em Return Jacobian of mapping and shape functions of field fld at local coordinate s. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement_aba62f3460cbd779f3193be8e48fdb636}{get\+\_\+field}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
-\begin{DoxyCompactList}\small\item\em Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: history values) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t$>$0\+: history values) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement_a8082f4f9da812ae6965e20838ecce8d2}{nvalue\+\_\+of\+\_\+field}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Return number of values in field fld. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement_a083614b12898ca9057debe48aa81364a}{local\+\_\+equation}} (const unsigned \&fld, const unsigned \&j)
@@ -46,11 +46,12 @@ void \mbox{\hyperlink{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class AXISYMMETRIC\+\_\+\+POROELASTICITY\+\_\+\+ELEMENT$>$\newline
 class oomph\+::\+Projectable\+Axisymmetric\+Poroelasticity\+Element$<$ AXISYMMETRIC\+\_\+\+POROELASTICITY\+\_\+\+ELEMENT $>$}
+
 ///////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////// 
 
 Axisymmetric poro elasticity upgraded to become projectable 
 
-Definition at line \mbox{\hyperlink{axisym__poroelasticity__elements_8h_source_l01396}{1396}} of file \mbox{\hyperlink{axisym__poroelasticity__elements_8h_source}{axisym\+\_\+poroelasticity\+\_\+elements.\+h}}.
+Definition at line 1396 of file axisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
@@ -68,17 +69,17 @@ Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards
 
 
 
-Definition at line \mbox{\hyperlink{axisym__poroelasticity__elements_8h_source_l01403}{1403}} of file \mbox{\hyperlink{axisym__poroelasticity__elements_8h_source}{axisym\+\_\+poroelasticity\+\_\+elements.\+h}}.
+Definition at line 1403 of file axisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement_a1f0e111f9c4725fbbf63a4fa47b1a721}\label{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement_a1f0e111f9c4725fbbf63a4fa47b1a721}} 
+\mbox{\Hypertarget{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement_a678e7d7fdf5e9f8ea2fe5583a21a03fe}\label{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement_a678e7d7fdf5e9f8ea2fe5583a21a03fe}} 
 \index{oomph::ProjectableAxisymmetricPoroelasticityElement$<$ AXISYMMETRIC\_POROELASTICITY\_ELEMENT $>$@{oomph::ProjectableAxisymmetricPoroelasticityElement$<$ AXISYMMETRIC\_POROELASTICITY\_ELEMENT $>$}!data\_values\_of\_field@{data\_values\_of\_field}}
 \index{data\_values\_of\_field@{data\_values\_of\_field}!oomph::ProjectableAxisymmetricPoroelasticityElement$<$ AXISYMMETRIC\_POROELASTICITY\_ELEMENT $>$@{oomph::ProjectableAxisymmetricPoroelasticityElement$<$ AXISYMMETRIC\_POROELASTICITY\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{data\_values\_of\_field()}{data\_values\_of\_field()}}
 {\footnotesize\ttfamily template$<$class AXISYMMETRIC\+\_\+\+POROELASTICITY\+\_\+\+ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement}{oomph\+::\+Projectable\+Axisymmetric\+Poroelasticity\+Element}}$<$ AXISYMMETRIC\+\_\+\+POROELASTICITY\+\_\+\+ELEMENT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$std\+::pair$<$\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$, unsigned$>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement}{oomph\+::\+Projectable\+Axisymmetric\+Poroelasticity\+Element}}$<$ AXISYMMETRIC\+\_\+\+POROELASTICITY\+\_\+\+ELEMENT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -86,15 +87,15 @@ Specify the values associated with field fld. The information is returned in a v
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a2292bd9c58694f89839bd7d198cfe86a}{oomph\+::\+Projectable\+Element\+Base}}.
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a63b0053dde1172be726f9a6c75fb66ea}{oomph\+::\+Projectable\+Element\+Base}}.
 
 
 
-Definition at line \mbox{\hyperlink{axisym__poroelasticity__elements_8h_source_l01408}{1408}} of file \mbox{\hyperlink{axisym__poroelasticity__elements_8h_source}{axisym\+\_\+poroelasticity\+\_\+elements.\+h}}.
+Definition at line 1408 of file axisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}.
+References i, oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Data\+::nvalue().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement_aba62f3460cbd779f3193be8e48fdb636}\label{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement_aba62f3460cbd779f3193be8e48fdb636}} 
 \index{oomph::ProjectableAxisymmetricPoroelasticityElement$<$ AXISYMMETRIC\_POROELASTICITY\_ELEMENT $>$@{oomph::ProjectableAxisymmetricPoroelasticityElement$<$ AXISYMMETRIC\_POROELASTICITY\_ELEMENT $>$}!get\_field@{get\_field}}
@@ -105,7 +106,7 @@ double \mbox{\hyperlink{classoomph_1_1ProjectableAxisymmetricPoroelasticityEleme
 
 
 
-Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: history values) 
+Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t$>$0\+: history values) 
 
 
 
@@ -113,15 +114,15 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ae4da5b565b6d33
 
 
 
-Definition at line \mbox{\hyperlink{axisym__poroelasticity__elements_8h_source_l01610}{1610}} of file \mbox{\hyperlink{axisym__poroelasticity__elements_8h_source}{axisym\+\_\+poroelasticity\+\_\+elements.\+h}}.
+Definition at line 1610 of file axisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+References s, and t.
 
 
 
-Referenced by \mbox{\hyperlink{axisym__poroelasticity__elements_8h_source_l01752}{oomph\+::\+Projectable\+Axisymmetric\+Poroelasticity\+Element$<$ AXISYMMETRIC\+\_\+\+POROELASTICITY\+\_\+\+ELEMENT $>$\+::residual\+\_\+for\+\_\+projection()}}.
+Referenced by oomph\+::\+Projectable\+Axisymmetric\+Poroelasticity\+Element$<$ AXISYMMETRIC\+\_\+\+POROELASTICITY\+\_\+\+ELEMENT $>$\+::residual\+\_\+for\+\_\+projection().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement_a53a88c81a5225e213ca869e670ad1605}\label{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement_a53a88c81a5225e213ca869e670ad1605}} 
 \index{oomph::ProjectableAxisymmetricPoroelasticityElement$<$ AXISYMMETRIC\_POROELASTICITY\_ELEMENT $>$@{oomph::ProjectableAxisymmetricPoroelasticityElement$<$ AXISYMMETRIC\_POROELASTICITY\_ELEMENT $>$}!jacobian\_and\_shape\_of\_field@{jacobian\_and\_shape\_of\_field}}
@@ -140,15 +141,15 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ad45c21b58c0985
 
 
 
-Definition at line \mbox{\hyperlink{axisym__poroelasticity__elements_8h_source_l01526}{1526}} of file \mbox{\hyperlink{axisym__poroelasticity__elements_8h_source}{axisym\+\_\+poroelasticity\+\_\+elements.\+h}}.
+Definition at line 1526 of file axisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{shape_8h_source_l00259}{oomph\+::\+Shape\+::nindex1()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References oomph\+::\+Finite\+Element\+::dim(), i, oomph\+::\+Shape\+::nindex1(), oomph\+::\+Finite\+Element\+::nnode(), and s.
 
 
 
-Referenced by \mbox{\hyperlink{axisym__poroelasticity__elements_8h_source_l01752}{oomph\+::\+Projectable\+Axisymmetric\+Poroelasticity\+Element$<$ AXISYMMETRIC\+\_\+\+POROELASTICITY\+\_\+\+ELEMENT $>$\+::residual\+\_\+for\+\_\+projection()}}.
+Referenced by oomph\+::\+Projectable\+Axisymmetric\+Poroelasticity\+Element$<$ AXISYMMETRIC\+\_\+\+POROELASTICITY\+\_\+\+ELEMENT $>$\+::residual\+\_\+for\+\_\+projection().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement_a083614b12898ca9057debe48aa81364a}\label{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement_a083614b12898ca9057debe48aa81364a}} 
 \index{oomph::ProjectableAxisymmetricPoroelasticityElement$<$ AXISYMMETRIC\_POROELASTICITY\_ELEMENT $>$@{oomph::ProjectableAxisymmetricPoroelasticityElement$<$ AXISYMMETRIC\_POROELASTICITY\_ELEMENT $>$}!local\_equation@{local\_equation}}
@@ -167,15 +168,15 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac5c27ae929ff63
 
 
 
-Definition at line \mbox{\hyperlink{axisym__poroelasticity__elements_8h_source_l01697}{1697}} of file \mbox{\hyperlink{axisym__poroelasticity__elements_8h_source}{axisym\+\_\+poroelasticity\+\_\+elements.\+h}}.
+Definition at line 1697 of file axisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}.
+References oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn().
 
 
 
-Referenced by \mbox{\hyperlink{axisym__poroelasticity__elements_8h_source_l01752}{oomph\+::\+Projectable\+Axisymmetric\+Poroelasticity\+Element$<$ AXISYMMETRIC\+\_\+\+POROELASTICITY\+\_\+\+ELEMENT $>$\+::residual\+\_\+for\+\_\+projection()}}.
+Referenced by oomph\+::\+Projectable\+Axisymmetric\+Poroelasticity\+Element$<$ AXISYMMETRIC\+\_\+\+POROELASTICITY\+\_\+\+ELEMENT $>$\+::residual\+\_\+for\+\_\+projection().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement_a593b32549e17dedf66365bf3fd202536}\label{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement_a593b32549e17dedf66365bf3fd202536}} 
 \index{oomph::ProjectableAxisymmetricPoroelasticityElement$<$ AXISYMMETRIC\_POROELASTICITY\_ELEMENT $>$@{oomph::ProjectableAxisymmetricPoroelasticityElement$<$ AXISYMMETRIC\_POROELASTICITY\_ELEMENT $>$}!nfields\_for\_projection@{nfields\_for\_projection}}
@@ -194,7 +195,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a44634aa4049332
 
 
 
-Definition at line \mbox{\hyperlink{axisym__poroelasticity__elements_8h_source_l01482}{1482}} of file \mbox{\hyperlink{axisym__poroelasticity__elements_8h_source}{axisym\+\_\+poroelasticity\+\_\+elements.\+h}}.
+Definition at line 1482 of file axisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement_a077bea222dd174803e3af28e6995195e}\label{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement_a077bea222dd174803e3af28e6995195e}} 
 \index{oomph::ProjectableAxisymmetricPoroelasticityElement$<$ AXISYMMETRIC\_POROELASTICITY\_ELEMENT $>$@{oomph::ProjectableAxisymmetricPoroelasticityElement$<$ AXISYMMETRIC\_POROELASTICITY\_ELEMENT $>$}!nhistory\_values\_for\_coordinate\_projection@{nhistory\_values\_for\_coordinate\_projection}}
@@ -213,11 +214,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ab4ecd0cd24000a
 
 
 
-Definition at line \mbox{\hyperlink{axisym__poroelasticity__elements_8h_source_l01519}{1519}} of file \mbox{\hyperlink{axisym__poroelasticity__elements_8h_source}{axisym\+\_\+poroelasticity\+\_\+elements.\+h}}.
+Definition at line 1519 of file axisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, and \mbox{\hyperlink{nodes_8h_source_l01022}{oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt()}}.
+References oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Time\+Stepper\+::ntstorage(), and oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement_afa3e26efcd834f12046852303709c4f7}\label{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement_afa3e26efcd834f12046852303709c4f7}} 
 \index{oomph::ProjectableAxisymmetricPoroelasticityElement$<$ AXISYMMETRIC\_POROELASTICITY\_ELEMENT $>$@{oomph::ProjectableAxisymmetricPoroelasticityElement$<$ AXISYMMETRIC\_POROELASTICITY\_ELEMENT $>$}!nhistory\_values\_for\_projection@{nhistory\_values\_for\_projection}}
@@ -236,11 +237,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac6790f394630b9
 
 
 
-Definition at line \mbox{\hyperlink{axisym__poroelasticity__elements_8h_source_l01489}{1489}} of file \mbox{\hyperlink{axisym__poroelasticity__elements_8h_source}{axisym\+\_\+poroelasticity\+\_\+elements.\+h}}.
+Definition at line 1489 of file axisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8cc_source_l00879}{oomph\+::\+Data\+::ntstorage()}}.
+References oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Data\+::ntstorage().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement_a8082f4f9da812ae6965e20838ecce8d2}\label{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement_a8082f4f9da812ae6965e20838ecce8d2}} 
 \index{oomph::ProjectableAxisymmetricPoroelasticityElement$<$ AXISYMMETRIC\_POROELASTICITY\_ELEMENT $>$@{oomph::ProjectableAxisymmetricPoroelasticityElement$<$ AXISYMMETRIC\_POROELASTICITY\_ELEMENT $>$}!nvalue\_of\_field@{nvalue\_of\_field}}
@@ -259,15 +260,15 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a1a9a6de16f3511
 
 
 
-Definition at line \mbox{\hyperlink{axisym__poroelasticity__elements_8h_source_l01661}{1661}} of file \mbox{\hyperlink{axisym__poroelasticity__elements_8h_source}{axisym\+\_\+poroelasticity\+\_\+elements.\+h}}.
+Definition at line 1661 of file axisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}.
+References oomph\+::\+Finite\+Element\+::nnode().
 
 
 
-Referenced by \mbox{\hyperlink{axisym__poroelasticity__elements_8h_source_l01752}{oomph\+::\+Projectable\+Axisymmetric\+Poroelasticity\+Element$<$ AXISYMMETRIC\+\_\+\+POROELASTICITY\+\_\+\+ELEMENT $>$\+::residual\+\_\+for\+\_\+projection()}}.
+Referenced by oomph\+::\+Projectable\+Axisymmetric\+Poroelasticity\+Element$<$ AXISYMMETRIC\+\_\+\+POROELASTICITY\+\_\+\+ELEMENT $>$\+::residual\+\_\+for\+\_\+projection().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement_af234691b4a8de7ac8e0b786d94c0fdab}\label{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement_af234691b4a8de7ac8e0b786d94c0fdab}} 
 \index{oomph::ProjectableAxisymmetricPoroelasticityElement$<$ AXISYMMETRIC\_POROELASTICITY\_ELEMENT $>$@{oomph::ProjectableAxisymmetricPoroelasticityElement$<$ AXISYMMETRIC\_POROELASTICITY\_ELEMENT $>$}!output@{output}}
@@ -286,11 +287,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line \mbox{\hyperlink{axisym__poroelasticity__elements_8h_source_l01743}{1743}} of file \mbox{\hyperlink{axisym__poroelasticity__elements_8h_source}{axisym\+\_\+poroelasticity\+\_\+elements.\+h}}.
+Definition at line 1743 of file axisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
+References oomph\+::\+Command\+Line\+Args\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement_a0ae5521eeba28eeef8eb28741597ea44}\label{classoomph_1_1ProjectableAxisymmetricPoroelasticityElement_a0ae5521eeba28eeef8eb28741597ea44}} 
 \index{oomph::ProjectableAxisymmetricPoroelasticityElement$<$ AXISYMMETRIC\_POROELASTICITY\_ELEMENT $>$@{oomph::ProjectableAxisymmetricPoroelasticityElement$<$ AXISYMMETRIC\_POROELASTICITY\_ELEMENT $>$}!residual\_for\_projection@{residual\_for\_projection}}
@@ -309,11 +310,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ProjectableElement_a1ff7a9207e
 
 
 
-Definition at line \mbox{\hyperlink{axisym__poroelasticity__elements_8h_source_l01752}{1752}} of file \mbox{\hyperlink{axisym__poroelasticity__elements_8h_source}{axisym\+\_\+poroelasticity\+\_\+elements.\+h}}.
+Definition at line 1752 of file axisym\+\_\+poroelasticity\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{projection_8h_source_l00061}{oomph\+::\+Projectable\+Element\+Base\+::\+Coordinate}}, \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00136}{oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+local\+\_\+coord()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00107}{oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{axisym__poroelasticity__elements_8h_source_l01610}{oomph\+::\+Projectable\+Axisymmetric\+Poroelasticity\+Element$<$ AXISYMMETRIC\+\_\+\+POROELASTICITY\+\_\+\+ELEMENT $>$\+::get\+\_\+field()}}, \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ae4da5b565b6d333be2f5920f7be763cd}{oomph\+::\+Projectable\+Element\+Base\+::get\+\_\+field()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8cc_source_l04103}{oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{axisym__poroelasticity__elements_8h_source_l01526}{oomph\+::\+Projectable\+Axisymmetric\+Poroelasticity\+Element$<$ AXISYMMETRIC\+\_\+\+POROELASTICITY\+\_\+\+ELEMENT $>$\+::jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{projection_8h_source_l00062}{oomph\+::\+Projectable\+Element\+Base\+::\+Lagrangian}}, \mbox{\hyperlink{axisym__poroelasticity__elements_8h_source_l01697}{oomph\+::\+Projectable\+Axisymmetric\+Poroelasticity\+Element$<$ AXISYMMETRIC\+\_\+\+POROELASTICITY\+\_\+\+ELEMENT $>$\+::local\+\_\+equation()}}, \mbox{\hyperlink{elements_8h_source_l02463}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{axisym__poroelasticity__elements_8h_source_l01661}{oomph\+::\+Projectable\+Axisymmetric\+Poroelasticity\+Element$<$ AXISYMMETRIC\+\_\+\+POROELASTICITY\+\_\+\+ELEMENT $>$\+::nvalue\+\_\+of\+\_\+field()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{elements_8h_source_l04137}{oomph\+::\+Solid\+Finite\+Element\+::position\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{projection_8h_source_l00074}{oomph\+::\+Projectable\+Element\+Base\+::\+Projected\+\_\+coordinate}}, \mbox{\hyperlink{projection_8h_source_l00067}{oomph\+::\+Projectable\+Element\+Base\+::\+Projected\+\_\+field}}, \mbox{\hyperlink{projection_8h_source_l00078}{oomph\+::\+Projectable\+Element\+Base\+::\+Projected\+\_\+lagrangian}}, \mbox{\hyperlink{projection_8h_source_l00083}{oomph\+::\+Projectable\+Element\+Base\+::\+Projection\+\_\+type}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, \mbox{\hyperlink{projection_8h_source_l00070}{oomph\+::\+Projectable\+Element\+Base\+::\+Time\+\_\+level\+\_\+for\+\_\+projection}}, \mbox{\hyperlink{projection_8h_source_l00063}{oomph\+::\+Projectable\+Element\+Base\+::\+Value}}, \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}, and \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral\+::weight()}}.
+References oomph\+::\+Projectable\+Element\+Base\+::\+Coordinate, oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+local\+\_\+coord(), oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+pt(), oomph\+::\+Projectable\+Axisymmetric\+Poroelasticity\+Element$<$ AXISYMMETRIC\+\_\+\+POROELASTICITY\+\_\+\+ELEMENT $>$\+::get\+\_\+field(), oomph\+::\+Projectable\+Element\+Base\+::get\+\_\+field(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Projectable\+Axisymmetric\+Poroelasticity\+Element$<$ AXISYMMETRIC\+\_\+\+POROELASTICITY\+\_\+\+ELEMENT $>$\+::jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field(), oomph\+::\+Integral\+::knot(), oomph\+::\+Projectable\+Element\+Base\+::\+Lagrangian, oomph\+::\+Projectable\+Axisymmetric\+Poroelasticity\+Element$<$ AXISYMMETRIC\+\_\+\+POROELASTICITY\+\_\+\+ELEMENT $>$\+::local\+\_\+equation(), oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Projectable\+Axisymmetric\+Poroelasticity\+Element$<$ AXISYMMETRIC\+\_\+\+POROELASTICITY\+\_\+\+ELEMENT $>$\+::nvalue\+\_\+of\+\_\+field(), oomph\+::\+Integral\+::nweight(), oomph\+::\+Solid\+Finite\+Element\+::position\+\_\+local\+\_\+eqn(), oomph\+::\+Projectable\+Element\+Base\+::\+Projected\+\_\+coordinate, oomph\+::\+Projectable\+Element\+Base\+::\+Projected\+\_\+field, oomph\+::\+Projectable\+Element\+Base\+::\+Projected\+\_\+lagrangian, oomph\+::\+Projectable\+Element\+Base\+::\+Projection\+\_\+type, s, oomph\+::\+Finite\+Element\+::shape(), oomph\+::\+Projectable\+Element\+Base\+::\+Time\+\_\+level\+\_\+for\+\_\+projection, oomph\+::\+Projectable\+Element\+Base\+::\+Value, oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Integral\+::weight().
 
 
 

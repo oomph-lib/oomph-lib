@@ -14,11 +14,11 @@
 \item 
 \mbox{\hyperlink{classoomph_1_1BlockSelector_aaed92a7e9c7845821e616e744611cc7c}{Block\+Selector}} ()
 \begin{DoxyCompactList}\small\item\em Default constructor, initialise block index i, j to 0 and bool to false. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1BlockSelector_a8da9f5e41598377786de44af3ddb26b3}{Block\+Selector}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1BlockSelector_a727e49bc907061251e66c8c7e2a6c3f5}{row\+\_\+index}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1BlockSelector_a36ba2d1028d0641e8da3d0b11b51f59c}{column\+\_\+index}}, const bool \&\mbox{\hyperlink{classoomph_1_1BlockSelector_aaa2342f6fde2ae3586502da0676f453a}{wanted}}, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$\mbox{\hyperlink{classoomph_1_1BlockSelector_a1a74e622121c3d5fa0658082dad67889}{replacement\+\_\+block\+\_\+pt}}=0)
+\mbox{\hyperlink{classoomph_1_1BlockSelector_a8da9f5e41598377786de44af3ddb26b3}{Block\+Selector}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1BlockSelector_abc7c527ed8c1080d98bddf2a1f3c1801}{row\+\_\+index}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1BlockSelector_a2b18303d1dfdfe5aeee43fc9a5452f5c}{column\+\_\+index}}, const bool \&\mbox{\hyperlink{classoomph_1_1BlockSelector_aceece28b03cdc41a43205603380126b9}{wanted}}, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$\mbox{\hyperlink{classoomph_1_1BlockSelector_ad40b427ae3228721a702f5bf82b2b829}{replacement\+\_\+block\+\_\+pt}}=0)
 \begin{DoxyCompactList}\small\item\em Constructor, takes the row and column indices and a boolean indicating if the block is required or not. The optional parameter replacement\+\_\+block\+\_\+pt is set to null. If the block is not required a block of the correct dimensions full of 0s is used. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1BlockSelector_a591da9d609cad2e823380782a3de24a6}{$\sim$\+Block\+Selector}} ()
 \begin{DoxyCompactList}\small\item\em Default destructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1BlockSelector_a62037fdd93cc7b06a781ef4408957d38}{select\+\_\+block}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1BlockSelector_a727e49bc907061251e66c8c7e2a6c3f5}{row\+\_\+index}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1BlockSelector_a36ba2d1028d0641e8da3d0b11b51f59c}{column\+\_\+index}}, const bool \&\mbox{\hyperlink{classoomph_1_1BlockSelector_aaa2342f6fde2ae3586502da0676f453a}{wanted}}, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$\mbox{\hyperlink{classoomph_1_1BlockSelector_a1a74e622121c3d5fa0658082dad67889}{replacement\+\_\+block\+\_\+pt}}=0)
+void \mbox{\hyperlink{classoomph_1_1BlockSelector_a62037fdd93cc7b06a781ef4408957d38}{select\+\_\+block}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1BlockSelector_abc7c527ed8c1080d98bddf2a1f3c1801}{row\+\_\+index}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1BlockSelector_a2b18303d1dfdfe5aeee43fc9a5452f5c}{column\+\_\+index}}, const bool \&\mbox{\hyperlink{classoomph_1_1BlockSelector_aceece28b03cdc41a43205603380126b9}{wanted}}, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$\mbox{\hyperlink{classoomph_1_1BlockSelector_ad40b427ae3228721a702f5bf82b2b829}{replacement\+\_\+block\+\_\+pt}}=0)
 \begin{DoxyCompactList}\small\item\em Select a block. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BlockSelector_a2ac783d94aa3339ce43fc40e269ea628}{want\+\_\+block}} ()
 \begin{DoxyCompactList}\small\item\em Indicate that we require the block (set Wanted to true). \end{DoxyCompactList}\item 
@@ -26,24 +26,24 @@ void \mbox{\hyperlink{classoomph_1_1BlockSelector_a2548e42fd02e258d46d0a4f74919f
 \begin{DoxyCompactList}\small\item\em Indicate that we do not want the block (set Wanted to false). \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BlockSelector_a0a9a7dd11c0dba9272d83bfc8b694482}{null\+\_\+replacement\+\_\+block\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Set Replacement\+\_\+block\+\_\+pt to null. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1BlockSelector_af98391ac49a8717eb6b2fbe0995222be}{set\+\_\+replacement\+\_\+block\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$\mbox{\hyperlink{classoomph_1_1BlockSelector_a1a74e622121c3d5fa0658082dad67889}{replacement\+\_\+block\+\_\+pt}})
+void \mbox{\hyperlink{classoomph_1_1BlockSelector_af98391ac49a8717eb6b2fbe0995222be}{set\+\_\+replacement\+\_\+block\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$\mbox{\hyperlink{classoomph_1_1BlockSelector_ad40b427ae3228721a702f5bf82b2b829}{replacement\+\_\+block\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em set Replacement\+\_\+block\+\_\+pt. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$ \mbox{\hyperlink{classoomph_1_1BlockSelector_a1a74e622121c3d5fa0658082dad67889}{replacement\+\_\+block\+\_\+pt}} () const
+\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$ \mbox{\hyperlink{classoomph_1_1BlockSelector_ad40b427ae3228721a702f5bf82b2b829}{replacement\+\_\+block\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Returns Replacement\+\_\+block\+\_\+pt. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1BlockSelector_ad0fb48a7b31189c891013bb5de6ba938}{set\+\_\+row\+\_\+index}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1BlockSelector_a727e49bc907061251e66c8c7e2a6c3f5}{row\+\_\+index}})
+void \mbox{\hyperlink{classoomph_1_1BlockSelector_ad0fb48a7b31189c891013bb5de6ba938}{set\+\_\+row\+\_\+index}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1BlockSelector_abc7c527ed8c1080d98bddf2a1f3c1801}{row\+\_\+index}})
 \begin{DoxyCompactList}\small\item\em Set the row index. \end{DoxyCompactList}\item 
-const unsigned \& \mbox{\hyperlink{classoomph_1_1BlockSelector_a727e49bc907061251e66c8c7e2a6c3f5}{row\+\_\+index}} () const
+const unsigned \& \mbox{\hyperlink{classoomph_1_1BlockSelector_abc7c527ed8c1080d98bddf2a1f3c1801}{row\+\_\+index}} () const
 \begin{DoxyCompactList}\small\item\em returns the row index. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1BlockSelector_acb7166a82872ba91c5da1574a4dd8b62}{set\+\_\+column\+\_\+index}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1BlockSelector_a36ba2d1028d0641e8da3d0b11b51f59c}{column\+\_\+index}})
+void \mbox{\hyperlink{classoomph_1_1BlockSelector_acb7166a82872ba91c5da1574a4dd8b62}{set\+\_\+column\+\_\+index}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1BlockSelector_a2b18303d1dfdfe5aeee43fc9a5452f5c}{column\+\_\+index}})
 \begin{DoxyCompactList}\small\item\em Set the column index. \end{DoxyCompactList}\item 
-const unsigned \& \mbox{\hyperlink{classoomph_1_1BlockSelector_a36ba2d1028d0641e8da3d0b11b51f59c}{column\+\_\+index}} () const
+const unsigned \& \mbox{\hyperlink{classoomph_1_1BlockSelector_a2b18303d1dfdfe5aeee43fc9a5452f5c}{column\+\_\+index}} () const
 \begin{DoxyCompactList}\small\item\em returns the column index. \end{DoxyCompactList}\item 
-const bool \& \mbox{\hyperlink{classoomph_1_1BlockSelector_aaa2342f6fde2ae3586502da0676f453a}{wanted}} () const
+const bool \& \mbox{\hyperlink{classoomph_1_1BlockSelector_aceece28b03cdc41a43205603380126b9}{wanted}} () const
 \begin{DoxyCompactList}\small\item\em returns whether the block is wanted or not. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classoomph_1_1BlockSelector_a5ed23c2fc70d78b46ddad425a9a91dfe}{build}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1BlockSelector_a727e49bc907061251e66c8c7e2a6c3f5}{row\+\_\+index}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1BlockSelector_a36ba2d1028d0641e8da3d0b11b51f59c}{column\+\_\+index}}, const bool \&\mbox{\hyperlink{classoomph_1_1BlockSelector_aaa2342f6fde2ae3586502da0676f453a}{wanted}}, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$\mbox{\hyperlink{classoomph_1_1BlockSelector_a1a74e622121c3d5fa0658082dad67889}{replacement\+\_\+block\+\_\+pt}}=0)
+void \mbox{\hyperlink{classoomph_1_1BlockSelector_a5ed23c2fc70d78b46ddad425a9a91dfe}{build}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1BlockSelector_abc7c527ed8c1080d98bddf2a1f3c1801}{row\+\_\+index}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1BlockSelector_a2b18303d1dfdfe5aeee43fc9a5452f5c}{column\+\_\+index}}, const bool \&\mbox{\hyperlink{classoomph_1_1BlockSelector_aceece28b03cdc41a43205603380126b9}{wanted}}, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$\mbox{\hyperlink{classoomph_1_1BlockSelector_ad40b427ae3228721a702f5bf82b2b829}{replacement\+\_\+block\+\_\+pt}}=0)
 \begin{DoxyCompactList}\small\item\em Build function, sets the Row\+\_\+index, Column\+\_\+index and Wanted variables. the Replacement\+\_\+block\+\_\+pt is only set if it is not null. Otherwise it is left alone. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -59,7 +59,7 @@ bool \mbox{\hyperlink{classoomph_1_1BlockSelector_ad5b7ec23096f89f3d0cceed70ca07
 \doxysubsection*{Friends}
 \begin{DoxyCompactItemize}
 \item 
-std\+::ostream \& \mbox{\hyperlink{classoomph_1_1BlockSelector_a427fa8716c7b562a3d879765ba58107d}{operator$<$$<$}} (std\+::ostream \&o\+\_\+stream, const \mbox{\hyperlink{classoomph_1_1BlockSelector}{Block\+Selector}} \&block\+\_\+selector)
+std\+::ostream \& \mbox{\hyperlink{classoomph_1_1BlockSelector_aae471ca00fb73dad738500975f46071b}{operator$<$$<$}} (std\+::ostream \&o\+\_\+stream, const \mbox{\hyperlink{classoomph_1_1BlockSelector}{Block\+Selector}} \&block\+\_\+selector)
 \begin{DoxyCompactList}\small\item\em Output function, outputs the Row\+\_\+index, Column\+\_\+index, Wanted and the address of the Replacement\+\_\+block\+\_\+pt. P.\+M.\+: The address of a null pointer on a Mac is 0x0 but for self-\/tests the address needs to be simply 0. Easy (but hacky) check sorts that out... \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -106,7 +106,7 @@ then the resulting concatenated matrix would contain
 
 \mbox{[} R , J\+\_\+00 J\+\_\+21 , 0 \mbox{]} 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l00123}{123}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line 123 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -123,11 +123,11 @@ Default constructor, initialise block index i, j to 0 and bool to false.
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l00128}{128}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line 128 of file block\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l00326}{build()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l00369}{Replacement\+\_\+block\+\_\+pt}}.
+References build(), and Replacement\+\_\+block\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1BlockSelector_a8da9f5e41598377786de44af3ddb26b3}\label{classoomph_1_1BlockSelector_a8da9f5e41598377786de44af3ddb26b3}} 
 \index{oomph::BlockSelector@{oomph::BlockSelector}!BlockSelector@{BlockSelector}}
@@ -141,11 +141,11 @@ Constructor, takes the row and column indices and a boolean indicating if the bl
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l00141}{141}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line 141 of file block\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l00326}{build()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00290}{column\+\_\+index()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00266}{replacement\+\_\+block\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00369}{Replacement\+\_\+block\+\_\+pt}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l00296}{wanted()}}.
+References build(), column\+\_\+index(), replacement\+\_\+block\+\_\+pt(), Replacement\+\_\+block\+\_\+pt, and wanted().
 
 \mbox{\Hypertarget{classoomph_1_1BlockSelector_a591da9d609cad2e823380782a3de24a6}\label{classoomph_1_1BlockSelector_a591da9d609cad2e823380782a3de24a6}} 
 \index{oomph::BlockSelector@{oomph::BlockSelector}!````~BlockSelector@{$\sim$BlockSelector}}
@@ -159,11 +159,11 @@ Default destructor.
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l00168}{168}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line 168 of file block\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l00363}{Column\+\_\+index}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00369}{Replacement\+\_\+block\+\_\+pt}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l00360}{Row\+\_\+index}}.
+References Column\+\_\+index, Replacement\+\_\+block\+\_\+pt, and Row\+\_\+index.
 
 
 
@@ -180,21 +180,21 @@ Build function, sets the Row\+\_\+index, Column\+\_\+index and Wanted variables.
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l00326}{326}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line 326 of file block\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l00290}{column\+\_\+index()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00363}{Column\+\_\+index}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00266}{replacement\+\_\+block\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00369}{Replacement\+\_\+block\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00278}{row\+\_\+index()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00360}{Row\+\_\+index}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00296}{wanted()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l00366}{Wanted}}.
+References column\+\_\+index(), Column\+\_\+index, replacement\+\_\+block\+\_\+pt(), Replacement\+\_\+block\+\_\+pt, row\+\_\+index(), Row\+\_\+index, wanted(), and Wanted.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l00128}{Block\+Selector()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l00188}{select\+\_\+block()}}.
+Referenced by Block\+Selector(), and select\+\_\+block().
 
-\mbox{\Hypertarget{classoomph_1_1BlockSelector_a36ba2d1028d0641e8da3d0b11b51f59c}\label{classoomph_1_1BlockSelector_a36ba2d1028d0641e8da3d0b11b51f59c}} 
+\mbox{\Hypertarget{classoomph_1_1BlockSelector_a2b18303d1dfdfe5aeee43fc9a5452f5c}\label{classoomph_1_1BlockSelector_a2b18303d1dfdfe5aeee43fc9a5452f5c}} 
 \index{oomph::BlockSelector@{oomph::BlockSelector}!column\_index@{column\_index}}
 \index{column\_index@{column\_index}!oomph::BlockSelector@{oomph::BlockSelector}}
 \doxysubsubsection{\texorpdfstring{column\_index()}{column\_index()}}
-{\footnotesize\ttfamily const unsigned \& oomph\+::\+Block\+Selector\+::column\+\_\+index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const unsigned\& oomph\+::\+Block\+Selector\+::column\+\_\+index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -202,15 +202,15 @@ returns the column index.
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l00290}{290}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line 290 of file block\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l00363}{Column\+\_\+index}}.
+References Column\+\_\+index.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l00141}{Block\+Selector()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00326}{build()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00188}{select\+\_\+block()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l00284}{set\+\_\+column\+\_\+index()}}.
+Referenced by Block\+Selector(), build(), select\+\_\+block(), and set\+\_\+column\+\_\+index().
 
 \mbox{\Hypertarget{classoomph_1_1BlockSelector_a2548e42fd02e258d46d0a4f74919f11a}\label{classoomph_1_1BlockSelector_a2548e42fd02e258d46d0a4f74919f11a}} 
 \index{oomph::BlockSelector@{oomph::BlockSelector}!do\_not\_want\_block@{do\_not\_want\_block}}
@@ -224,11 +224,11 @@ Indicate that we do not want the block (set Wanted to false).
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l00218}{218}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line 218 of file block\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l00363}{Column\+\_\+index}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00241}{null\+\_\+replacement\+\_\+block\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00369}{Replacement\+\_\+block\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00360}{Row\+\_\+index}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l00366}{Wanted}}.
+References Column\+\_\+index, null\+\_\+replacement\+\_\+block\+\_\+pt(), Replacement\+\_\+block\+\_\+pt, Row\+\_\+index, and Wanted.
 
 \mbox{\Hypertarget{classoomph_1_1BlockSelector_a0a9a7dd11c0dba9272d83bfc8b694482}\label{classoomph_1_1BlockSelector_a0a9a7dd11c0dba9272d83bfc8b694482}} 
 \index{oomph::BlockSelector@{oomph::BlockSelector}!null\_replacement\_block\_pt@{null\_replacement\_block\_pt}}
@@ -242,21 +242,21 @@ Set Replacement\+\_\+block\+\_\+pt to null.
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l00241}{241}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line 241 of file block\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l00369}{Replacement\+\_\+block\+\_\+pt}}.
+References Replacement\+\_\+block\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l00218}{do\+\_\+not\+\_\+want\+\_\+block()}}.
+Referenced by do\+\_\+not\+\_\+want\+\_\+block().
 
-\mbox{\Hypertarget{classoomph_1_1BlockSelector_a1a74e622121c3d5fa0658082dad67889}\label{classoomph_1_1BlockSelector_a1a74e622121c3d5fa0658082dad67889}} 
+\mbox{\Hypertarget{classoomph_1_1BlockSelector_ad40b427ae3228721a702f5bf82b2b829}\label{classoomph_1_1BlockSelector_ad40b427ae3228721a702f5bf82b2b829}} 
 \index{oomph::BlockSelector@{oomph::BlockSelector}!replacement\_block\_pt@{replacement\_block\_pt}}
 \index{replacement\_block\_pt@{replacement\_block\_pt}!oomph::BlockSelector@{oomph::BlockSelector}}
 \doxysubsubsection{\texorpdfstring{replacement\_block\_pt()}{replacement\_block\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$ oomph\+::\+Block\+Selector\+::replacement\+\_\+block\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}}$\ast$ oomph\+::\+Block\+Selector\+::replacement\+\_\+block\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -264,21 +264,21 @@ Returns Replacement\+\_\+block\+\_\+pt.
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l00266}{266}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line 266 of file block\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l00369}{Replacement\+\_\+block\+\_\+pt}}.
+References Replacement\+\_\+block\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l00141}{Block\+Selector()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00326}{build()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00188}{select\+\_\+block()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l00247}{set\+\_\+replacement\+\_\+block\+\_\+pt()}}.
+Referenced by Block\+Selector(), build(), select\+\_\+block(), and set\+\_\+replacement\+\_\+block\+\_\+pt().
 
-\mbox{\Hypertarget{classoomph_1_1BlockSelector_a727e49bc907061251e66c8c7e2a6c3f5}\label{classoomph_1_1BlockSelector_a727e49bc907061251e66c8c7e2a6c3f5}} 
+\mbox{\Hypertarget{classoomph_1_1BlockSelector_abc7c527ed8c1080d98bddf2a1f3c1801}\label{classoomph_1_1BlockSelector_abc7c527ed8c1080d98bddf2a1f3c1801}} 
 \index{oomph::BlockSelector@{oomph::BlockSelector}!row\_index@{row\_index}}
 \index{row\_index@{row\_index}!oomph::BlockSelector@{oomph::BlockSelector}}
 \doxysubsubsection{\texorpdfstring{row\_index()}{row\_index()}}
-{\footnotesize\ttfamily const unsigned \& oomph\+::\+Block\+Selector\+::row\+\_\+index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const unsigned\& oomph\+::\+Block\+Selector\+::row\+\_\+index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -286,15 +286,15 @@ returns the row index.
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l00278}{278}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line 278 of file block\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l00360}{Row\+\_\+index}}.
+References Row\+\_\+index.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l00326}{build()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00188}{select\+\_\+block()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l00272}{set\+\_\+row\+\_\+index()}}.
+Referenced by build(), select\+\_\+block(), and set\+\_\+row\+\_\+index().
 
 \mbox{\Hypertarget{classoomph_1_1BlockSelector_a62037fdd93cc7b06a781ef4408957d38}\label{classoomph_1_1BlockSelector_a62037fdd93cc7b06a781ef4408957d38}} 
 \index{oomph::BlockSelector@{oomph::BlockSelector}!select\_block@{select\_block}}
@@ -308,11 +308,11 @@ Select a block.
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l00188}{188}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line 188 of file block\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l00326}{build()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00290}{column\+\_\+index()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00266}{replacement\+\_\+block\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00278}{row\+\_\+index()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l00296}{wanted()}}.
+References build(), column\+\_\+index(), replacement\+\_\+block\+\_\+pt(), row\+\_\+index(), and wanted().
 
 \mbox{\Hypertarget{classoomph_1_1BlockSelector_acb7166a82872ba91c5da1574a4dd8b62}\label{classoomph_1_1BlockSelector_acb7166a82872ba91c5da1574a4dd8b62}} 
 \index{oomph::BlockSelector@{oomph::BlockSelector}!set\_column\_index@{set\_column\_index}}
@@ -326,11 +326,11 @@ Set the column index.
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l00284}{284}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line 284 of file block\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l00290}{column\+\_\+index()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l00363}{Column\+\_\+index}}.
+References column\+\_\+index(), and Column\+\_\+index.
 
 \mbox{\Hypertarget{classoomph_1_1BlockSelector_af98391ac49a8717eb6b2fbe0995222be}\label{classoomph_1_1BlockSelector_af98391ac49a8717eb6b2fbe0995222be}} 
 \index{oomph::BlockSelector@{oomph::BlockSelector}!set\_replacement\_block\_pt@{set\_replacement\_block\_pt}}
@@ -344,11 +344,11 @@ set Replacement\+\_\+block\+\_\+pt.
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l00247}{247}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line 247 of file block\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l00363}{Column\+\_\+index}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00266}{replacement\+\_\+block\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00369}{Replacement\+\_\+block\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00360}{Row\+\_\+index}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l00366}{Wanted}}.
+References Column\+\_\+index, replacement\+\_\+block\+\_\+pt(), Replacement\+\_\+block\+\_\+pt, Row\+\_\+index, and Wanted.
 
 \mbox{\Hypertarget{classoomph_1_1BlockSelector_ad0fb48a7b31189c891013bb5de6ba938}\label{classoomph_1_1BlockSelector_ad0fb48a7b31189c891013bb5de6ba938}} 
 \index{oomph::BlockSelector@{oomph::BlockSelector}!set\_row\_index@{set\_row\_index}}
@@ -362,11 +362,11 @@ Set the row index.
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l00272}{272}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line 272 of file block\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l00278}{row\+\_\+index()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l00360}{Row\+\_\+index}}.
+References row\+\_\+index(), and Row\+\_\+index.
 
 \mbox{\Hypertarget{classoomph_1_1BlockSelector_a2ac783d94aa3339ce43fc40e269ea628}\label{classoomph_1_1BlockSelector_a2ac783d94aa3339ce43fc40e269ea628}} 
 \index{oomph::BlockSelector@{oomph::BlockSelector}!want\_block@{want\_block}}
@@ -380,17 +380,17 @@ Indicate that we require the block (set Wanted to true).
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l00212}{212}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line 212 of file block\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l00366}{Wanted}}.
+References Wanted.
 
-\mbox{\Hypertarget{classoomph_1_1BlockSelector_aaa2342f6fde2ae3586502da0676f453a}\label{classoomph_1_1BlockSelector_aaa2342f6fde2ae3586502da0676f453a}} 
+\mbox{\Hypertarget{classoomph_1_1BlockSelector_aceece28b03cdc41a43205603380126b9}\label{classoomph_1_1BlockSelector_aceece28b03cdc41a43205603380126b9}} 
 \index{oomph::BlockSelector@{oomph::BlockSelector}!wanted@{wanted}}
 \index{wanted@{wanted}!oomph::BlockSelector@{oomph::BlockSelector}}
 \doxysubsubsection{\texorpdfstring{wanted()}{wanted()}}
-{\footnotesize\ttfamily const bool \& oomph\+::\+Block\+Selector\+::wanted (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const bool\& oomph\+::\+Block\+Selector\+::wanted (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -398,24 +398,24 @@ returns whether the block is wanted or not.
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l00296}{296}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line 296 of file block\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l00366}{Wanted}}.
+References Wanted.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l00141}{Block\+Selector()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00326}{build()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l00188}{select\+\_\+block()}}.
+Referenced by Block\+Selector(), build(), and select\+\_\+block().
 
 
 
 \doxysubsection{Friends And Related Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1BlockSelector_a427fa8716c7b562a3d879765ba58107d}\label{classoomph_1_1BlockSelector_a427fa8716c7b562a3d879765ba58107d}} 
+\mbox{\Hypertarget{classoomph_1_1BlockSelector_aae471ca00fb73dad738500975f46071b}\label{classoomph_1_1BlockSelector_aae471ca00fb73dad738500975f46071b}} 
 \index{oomph::BlockSelector@{oomph::BlockSelector}!operator$<$$<$@{operator$<$$<$}}
 \index{operator$<$$<$@{operator$<$$<$}!oomph::BlockSelector@{oomph::BlockSelector}}
 \doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
-{\footnotesize\ttfamily std\+::ostream \& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{o\+\_\+stream,  }\item[{const \mbox{\hyperlink{classoomph_1_1BlockSelector}{Block\+Selector}} \&}]{block\+\_\+selector }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+{\footnotesize\ttfamily std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{o\+\_\+stream,  }\item[{const \mbox{\hyperlink{classoomph_1_1BlockSelector}{Block\+Selector}} \&}]{block\+\_\+selector }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
 
 
 
@@ -423,7 +423,7 @@ Output function, outputs the Row\+\_\+index, Column\+\_\+index, Wanted and the a
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l00307}{307}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line 307 of file block\+\_\+preconditioner.\+h.
 
 
 
@@ -440,11 +440,11 @@ Column index of the block.
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l00363}{363}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line 363 of file block\+\_\+preconditioner.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l00326}{build()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00290}{column\+\_\+index()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00218}{do\+\_\+not\+\_\+want\+\_\+block()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00284}{set\+\_\+column\+\_\+index()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00247}{set\+\_\+replacement\+\_\+block\+\_\+pt()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l00168}{$\sim$\+Block\+Selector()}}.
+Referenced by build(), column\+\_\+index(), do\+\_\+not\+\_\+want\+\_\+block(), set\+\_\+column\+\_\+index(), set\+\_\+replacement\+\_\+block\+\_\+pt(), and $\sim$\+Block\+Selector().
 
 \mbox{\Hypertarget{classoomph_1_1BlockSelector_ad18ae2223ddfb1a1b61937930357bfc8}\label{classoomph_1_1BlockSelector_ad18ae2223ddfb1a1b61937930357bfc8}} 
 \index{oomph::BlockSelector@{oomph::BlockSelector}!Replacement\_block\_pt@{Replacement\_block\_pt}}
@@ -458,11 +458,11 @@ Pointer to the block.
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l00369}{369}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line 369 of file block\+\_\+preconditioner.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l00128}{Block\+Selector()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00326}{build()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00218}{do\+\_\+not\+\_\+want\+\_\+block()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00241}{null\+\_\+replacement\+\_\+block\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00266}{replacement\+\_\+block\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00247}{set\+\_\+replacement\+\_\+block\+\_\+pt()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l00168}{$\sim$\+Block\+Selector()}}.
+Referenced by Block\+Selector(), build(), do\+\_\+not\+\_\+want\+\_\+block(), null\+\_\+replacement\+\_\+block\+\_\+pt(), replacement\+\_\+block\+\_\+pt(), set\+\_\+replacement\+\_\+block\+\_\+pt(), and $\sim$\+Block\+Selector().
 
 \mbox{\Hypertarget{classoomph_1_1BlockSelector_ae48060783b1f4744b14a4477190e205e}\label{classoomph_1_1BlockSelector_ae48060783b1f4744b14a4477190e205e}} 
 \index{oomph::BlockSelector@{oomph::BlockSelector}!Row\_index@{Row\_index}}
@@ -476,11 +476,11 @@ Row index of the block.
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l00360}{360}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line 360 of file block\+\_\+preconditioner.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l00326}{build()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00218}{do\+\_\+not\+\_\+want\+\_\+block()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00278}{row\+\_\+index()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00247}{set\+\_\+replacement\+\_\+block\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00272}{set\+\_\+row\+\_\+index()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l00168}{$\sim$\+Block\+Selector()}}.
+Referenced by build(), do\+\_\+not\+\_\+want\+\_\+block(), row\+\_\+index(), set\+\_\+replacement\+\_\+block\+\_\+pt(), set\+\_\+row\+\_\+index(), and $\sim$\+Block\+Selector().
 
 \mbox{\Hypertarget{classoomph_1_1BlockSelector_ad5b7ec23096f89f3d0cceed70ca07fdb}\label{classoomph_1_1BlockSelector_ad5b7ec23096f89f3d0cceed70ca07fdb}} 
 \index{oomph::BlockSelector@{oomph::BlockSelector}!Wanted@{Wanted}}
@@ -494,11 +494,11 @@ Bool to indicate if we require this block.
 
 
 
-Definition at line \mbox{\hyperlink{block__preconditioner_8h_source_l00366}{366}} of file \mbox{\hyperlink{block__preconditioner_8h_source}{block\+\_\+preconditioner.\+h}}.
+Definition at line 366 of file block\+\_\+preconditioner.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l00326}{build()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00218}{do\+\_\+not\+\_\+want\+\_\+block()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00247}{set\+\_\+replacement\+\_\+block\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00212}{want\+\_\+block()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l00296}{wanted()}}.
+Referenced by build(), do\+\_\+not\+\_\+want\+\_\+block(), set\+\_\+replacement\+\_\+block\+\_\+pt(), want\+\_\+block(), and wanted().
 
 
 

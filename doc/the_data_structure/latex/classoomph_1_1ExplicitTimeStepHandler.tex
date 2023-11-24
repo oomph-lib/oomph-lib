@@ -28,7 +28,7 @@ void \mbox{\hyperlink{classoomph_1_1ExplicitTimeStepHandler_aef8ab1b61aef072b2bc
 \begin{DoxyCompactList}\small\item\em Return the contribution to the residuals of the element elem\+\_\+pt This is deliberately broken in our eigenproblem. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ExplicitTimeStepHandler_ad2c849833e4b35199a79d9d9965af32f}{get\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Calculate the elemental Jacobian matrix \char`\"{}d equation / d variable\char`\"{} for elem\+\_\+pt. Again deliberately broken in the eigenproblem. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1ExplicitTimeStepHandler_a842529121fbe177ea6900d668d8b2a65}{get\+\_\+all\+\_\+vectors\+\_\+and\+\_\+matrices}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&vec, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ $>$ \&matrix)
+void \mbox{\hyperlink{classoomph_1_1ExplicitTimeStepHandler_ad00d54cb242b64dee6a6d113f2238edf}{get\+\_\+all\+\_\+vectors\+\_\+and\+\_\+matrices}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&vec, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$$>$ \&matrix)
 \begin{DoxyCompactList}\small\item\em Calculate all desired vectors and matrices provided by the element elem\+\_\+pt. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1ExplicitTimeStepHandler_a183f40bf18428256a5097f95560f7c5e}{$\sim$\+Explicit\+Time\+Step\+Handler}} ()
 \begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -37,7 +37,7 @@ void \mbox{\hyperlink{classoomph_1_1ExplicitTimeStepHandler_a842529121fbe177ea69
 \doxysubsection{Detailed Description}
 A class that is used to define the functions used to assemble and invert the mass matrix when taking an explicit timestep. The idea is simply to replace the jacobian matrix with the mass matrix and then our standard linear solvers will solve the required system. 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00180}{180}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 180 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -54,7 +54,7 @@ Empty Constructor.
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00184}{184}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 184 of file assembly\+\_\+handler.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ExplicitTimeStepHandler_a183f40bf18428256a5097f95560f7c5e}\label{classoomph_1_1ExplicitTimeStepHandler_a183f40bf18428256a5097f95560f7c5e}} 
 \index{oomph::ExplicitTimeStepHandler@{oomph::ExplicitTimeStepHandler}!````~ExplicitTimeStepHandler@{$\sim$ExplicitTimeStepHandler}}
@@ -68,7 +68,7 @@ Empty virtual destructor.
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00212}{212}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 212 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -89,17 +89,17 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a94d28e2de2559
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l00248}{248}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 248 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}.
+References oomph\+::\+Generalised\+Element\+::eqn\+\_\+number().
 
-\mbox{\Hypertarget{classoomph_1_1ExplicitTimeStepHandler_a842529121fbe177ea6900d668d8b2a65}\label{classoomph_1_1ExplicitTimeStepHandler_a842529121fbe177ea6900d668d8b2a65}} 
+\mbox{\Hypertarget{classoomph_1_1ExplicitTimeStepHandler_ad00d54cb242b64dee6a6d113f2238edf}\label{classoomph_1_1ExplicitTimeStepHandler_ad00d54cb242b64dee6a6d113f2238edf}} 
 \index{oomph::ExplicitTimeStepHandler@{oomph::ExplicitTimeStepHandler}!get\_all\_vectors\_and\_matrices@{get\_all\_vectors\_and\_matrices}}
 \index{get\_all\_vectors\_and\_matrices@{get\_all\_vectors\_and\_matrices}!oomph::ExplicitTimeStepHandler@{oomph::ExplicitTimeStepHandler}}
 \doxysubsubsection{\texorpdfstring{get\_all\_vectors\_and\_matrices()}{get\_all\_vectors\_and\_matrices()}}
-{\footnotesize\ttfamily void oomph\+::\+Explicit\+Time\+Step\+Handler\+::get\+\_\+all\+\_\+vectors\+\_\+and\+\_\+matrices (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&}]{vec,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ $>$ \&}]{matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Explicit\+Time\+Step\+Handler\+::get\+\_\+all\+\_\+vectors\+\_\+and\+\_\+matrices (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&}]{vec,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$$>$ \&}]{matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -107,15 +107,15 @@ Calculate all desired vectors and matrices provided by the element elem\+\_\+pt.
 
 Calculate all desired vectors and matrices that are required by the problem by calling those of the underlying element. 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_ab2e4ee4623116b18245ca90cfe9ba144}{oomph\+::\+Assembly\+Handler}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a67093ef481c51d384606486c41002baa}{oomph\+::\+Assembly\+Handler}}.
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l00278}{278}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 278 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01003}{oomph\+::\+Generalised\+Element\+::get\+\_\+mass\+\_\+matrix()}}.
+References oomph\+::\+Generalised\+Element\+::get\+\_\+mass\+\_\+matrix().
 
 \mbox{\Hypertarget{classoomph_1_1ExplicitTimeStepHandler_ad2c849833e4b35199a79d9d9965af32f}\label{classoomph_1_1ExplicitTimeStepHandler_ad2c849833e4b35199a79d9d9965af32f}} 
 \index{oomph::ExplicitTimeStepHandler@{oomph::ExplicitTimeStepHandler}!get\_jacobian@{get\_jacobian}}
@@ -133,11 +133,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_ad43c3d8760be0
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l00266}{266}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 266 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01003}{oomph\+::\+Generalised\+Element\+::get\+\_\+mass\+\_\+matrix()}}.
+References oomph\+::\+Generalised\+Element\+::get\+\_\+mass\+\_\+matrix().
 
 \mbox{\Hypertarget{classoomph_1_1ExplicitTimeStepHandler_aef8ab1b61aef072b2bcb061dd287a00f}\label{classoomph_1_1ExplicitTimeStepHandler_aef8ab1b61aef072b2bcb061dd287a00f}} 
 \index{oomph::ExplicitTimeStepHandler@{oomph::ExplicitTimeStepHandler}!get\_residuals@{get\_residuals}}
@@ -155,11 +155,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a7a6203b0ab90d
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l00257}{257}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 257 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00980}{oomph\+::\+Generalised\+Element\+::get\+\_\+residuals()}}.
+References oomph\+::\+Generalised\+Element\+::get\+\_\+residuals().
 
 \mbox{\Hypertarget{classoomph_1_1ExplicitTimeStepHandler_a723bec764e9e59025f052f6ca0135181}\label{classoomph_1_1ExplicitTimeStepHandler_a723bec764e9e59025f052f6ca0135181}} 
 \index{oomph::ExplicitTimeStepHandler@{oomph::ExplicitTimeStepHandler}!ndof@{ndof}}
@@ -177,11 +177,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a09213be8f4aa0
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l00239}{239}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 239 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}.
+References oomph\+::\+Generalised\+Element\+::ndof().
 
 
 

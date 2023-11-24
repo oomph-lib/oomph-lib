@@ -80,7 +80,7 @@ We create the mesh by multiple inheritance from {\ttfamily oomph-\/lib\textquote
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//================start\_mesh===============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Triangle-\/based mesh upgraded to become a solid mesh}}
-\DoxyCodeLine{\textcolor{comment}{//=========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classElasticTriangleMesh}{ElasticTriangleMesh}} : \textcolor{keyword}{public} \textcolor{keyword}{virtual} TriangleMesh<ELEMENT>, }
 \DoxyCodeLine{                            \textcolor{keyword}{public} \textcolor{keyword}{virtual} SolidMesh }
@@ -154,7 +154,7 @@ We create the mesh by multiple inheritance from {\ttfamily oomph-\/lib\textquote
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Empty Destructor}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \mbox{\hyperlink{classElasticTriangleMesh}{\string~ElasticTriangleMesh}}() \{ \}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \string~\mbox{\hyperlink{classElasticTriangleMesh}{ElasticTriangleMesh}}() \{ \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\};}
 
@@ -168,7 +168,7 @@ As usual we define the various problem parameters in a global namespace. We defi
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_namespace==========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Global variables}}
-\DoxyCodeLine{\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Poisson's ratio}}
@@ -231,7 +231,7 @@ The driver code is straightforward. We specify an output directory and instantia
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===========start\_main===================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Demonstrate how to solve an unstructured solid problem}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{unstructured__two__d__solid_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ \textcolor{comment}{// Label for output}}
@@ -298,7 +298,7 @@ The {\ttfamily Problem} class has the usual member functions and provides storag
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==============start\_problem=========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Unstructured solid problem}}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT> }
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classUnstructuredSolidProblem}{UnstructuredSolidProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -336,7 +336,7 @@ We start by building the bulk mesh, using the files created by \href{http://www.
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===============start\_constructor========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for unstructured solid problem}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classUnstructuredSolidProblem_a18ce02b6e4bbc86403c9e1b32c095772}{UnstructuredSolidProblem<ELEMENT>::UnstructuredSolidProblem}}()}
 \DoxyCodeLine{\{  }

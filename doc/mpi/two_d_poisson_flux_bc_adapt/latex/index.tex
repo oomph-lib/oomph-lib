@@ -37,15 +37,15 @@ The only additions to the problem class are the functions {\ttfamily actions\+\_
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Actions before distribute: Wipe the mesh of prescribed flux elements}}
+\DoxyCodeLine{ \textcolor{comment}{/// Actions before distribute: Wipe the mesh of prescribed flux elements}}
 \DoxyCodeLine{\textcolor{comment}{ /// (simply call actions\_before\_adapt() which does the same thing)}}
-\DoxyCodeLine{ \textcolor{keywordtype}{void} actions\_before\_distribute()}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_distribute()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   actions\_before\_adapt();}
 \DoxyCodeLine{  \}}
-\DoxyCodeLine{\textcolor{comment}{ /// Actions after distribute: Rebuild the mesh of prescribed flux }}
+\DoxyCodeLine{ \textcolor{comment}{/// Actions after distribute: Rebuild the mesh of prescribed flux }}
 \DoxyCodeLine{\textcolor{comment}{ /// elements (simply call actions\_after\_adapt() which does the same thing)}}
-\DoxyCodeLine{ \textcolor{keywordtype}{void} actions\_after\_distribute()}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_distribute()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   actions\_after\_adapt();}
 \DoxyCodeLine{  \}}
@@ -59,7 +59,7 @@ As with other driver codes, the output files are modified to allow each processo
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====================start\_of\_doc=======================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution: doc\_info contains labels/output directory etc.}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} RefineableTwoMeshFluxPoissonProblem<ELEMENT>::doc\_solution(DocInfo\& doc\_info)}
 \DoxyCodeLine{\{ }

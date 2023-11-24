@@ -90,7 +90,7 @@ As usual we define the problem parameters in a global namespace. The key paramet
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===== start\_of\_namespace========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for "{}global"{} problem parameters}}
-\DoxyCodeLine{\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobalParameters}{GlobalParameters}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
@@ -198,7 +198,7 @@ We start by preparing an output directory and open a trace file to record the co
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===================start\_of\_main========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver code}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{barrel_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ }
@@ -285,9 +285,9 @@ The problem class has the usual member functions. (Ignore the lines in {\ttfamil
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//====== start\_of\_problem\_class=======================================}}
-\DoxyCodeLine{\textcolor{comment}{/// 2D YoungLaplace problem on rectangular domain, discretised with}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// 2D QYoungLaplace elements. The specific type of element is}}
-\DoxyCodeLine{\textcolor{comment}{/// specified via the template parameter.}}
+\DoxyCodeLine{\textcolor{comment}{/// 2D YoungLaplace problem on rectangular domain, discretised with}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// 2D QYoungLaplace elements. The specific type of element is}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// specified via the template parameter.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT> }
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classYoungLaplaceProblem}{YoungLaplaceProblem}} : \textcolor{keyword}{public} Problem}
@@ -480,7 +480,7 @@ We document the exact and computed meniscus curvatures in the trace file and out
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===============start\_of\_doc=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution: doc\_info contains labels/output directory etc.}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classYoungLaplaceProblem_a16f10e66457718eca76d1335dbed8f12}{YoungLaplaceProblem<ELEMENT>::doc\_solution}}(DocInfo\& doc\_info,}
 \DoxyCodeLine{                                                ofstream\& trace\_file)}

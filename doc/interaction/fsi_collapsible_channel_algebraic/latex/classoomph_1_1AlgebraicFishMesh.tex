@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1AlgebraicFishMesh}{}\doxysection{oomph\+::Algebraic\+Fish\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1AlgebraicFishMesh}{}\doxysection{oomph\+::Algebraic\+Fish\+Mesh$<$ ELEMENT $>$ Class Template Reference}
 \label{classoomph_1_1AlgebraicFishMesh}\index{oomph::AlgebraicFishMesh$<$ ELEMENT $>$@{oomph::AlgebraicFishMesh$<$ ELEMENT $>$}}
 
 
@@ -9,7 +9,7 @@
 
 {\ttfamily \#include $<$fish\+\_\+mesh.\+template.\+h$>$}
 
-Inheritance diagram for oomph\+::Algebraic\+Fish\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Algebraic\+Fish\+Mesh$<$ ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=3.555556cm]{classoomph_1_1AlgebraicFishMesh}
@@ -25,7 +25,7 @@ Inheritance diagram for oomph\+::Algebraic\+Fish\+Mesh\texorpdfstring{$<$}{<} EL
 virtual \mbox{\hyperlink{classoomph_1_1AlgebraicFishMesh_a027d54d158e22ce8fe3c1246cb030440}{$\sim$\+Algebraic\+Fish\+Mesh}} ()
 \begin{DoxyCompactList}\small\item\em Destructor\+: empty. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AlgebraicFishMesh_ac66d6542472dac702a7414aa9d7f995f}{algebraic\+\_\+node\+\_\+update}} (const unsigned \&t, Algebraic\+Node $\ast$\&node\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em Update nodal position at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Update nodal position at time level t (t=0\+: present; t$>$0\+: previous) \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1AlgebraicFishMesh_a39cd5a86b0f762efd09f4fefba6da1c3}{node\+\_\+update}} (const bool \&update\+\_\+all\+\_\+solid\+\_\+nodes=false)
 \begin{DoxyCompactList}\small\item\em Resolve the node update function (we neither want the broken empty one in the Mesh base class nor the macro-\/element-\/based one in the Refineable\+Quad\+Mesh base class but the Algebraic\+Element one). \mbox{[}It doesn\textquotesingle{}t make sense to use this mesh with Solid\+Elements so we buffer the case if update\+\_\+all\+\_\+solid\+\_\+nodes is set to true.\mbox{]}. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AlgebraicFishMesh_a4f992939c299f87abc762c14aab50b5c}{update\+\_\+node\+\_\+update}} (Algebraic\+Node $\ast$\&node\+\_\+pt)
@@ -45,11 +45,12 @@ void \mbox{\hyperlink{classoomph_1_1AlgebraicFishMesh_a1a6d22eedc77299d843274e8c
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class ELEMENT$>$\newline
 class oomph\+::\+Algebraic\+Fish\+Mesh$<$ ELEMENT $>$}
+
 //////////////////////////////////////////////////////////////////// 
 
 //////////////////////////////////////////////////////////////////// Fish shaped mesh with algebraic node update function for nodes. 
 
-Definition at line \mbox{\hyperlink{fish__mesh_8template_8h_source_l00326}{326}} of file \mbox{\hyperlink{fish__mesh_8template_8h_source}{fish\+\_\+mesh.\+template.\+h}}.
+Definition at line 326 of file fish\+\_\+mesh.\+template.\+h.
 
 
 
@@ -67,11 +68,11 @@ Constructor\+: Pass pointer to timestepper. (defaults to (Steady) default timest
 
 
 
-Definition at line \mbox{\hyperlink{fish__mesh_8template_8h_source_l00332}{332}} of file \mbox{\hyperlink{fish__mesh_8template_8h_source}{fish\+\_\+mesh.\+template.\+h}}.
+Definition at line 332 of file fish\+\_\+mesh.\+template.\+h.
 
 
 
-References \mbox{\hyperlink{fish__mesh_8template_8cc_source_l00682}{oomph\+::\+Algebraic\+Fish\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update()}}.
+References oomph\+::\+Algebraic\+Fish\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update().
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicFishMesh_aac4b7f18a6e1d10c64edf431af921ce7}\label{classoomph_1_1AlgebraicFishMesh_aac4b7f18a6e1d10c64edf431af921ce7}} 
 \index{oomph::AlgebraicFishMesh$<$ ELEMENT $>$@{oomph::AlgebraicFishMesh$<$ ELEMENT $>$}!AlgebraicFishMesh@{AlgebraicFishMesh}}
@@ -86,11 +87,11 @@ Constructor\+: Pass pointer Geom\+Object that defines the fish\textquotesingle{}
 
 
 
-Definition at line \mbox{\hyperlink{fish__mesh_8template_8h_source_l00342}{342}} of file \mbox{\hyperlink{fish__mesh_8template_8h_source}{fish\+\_\+mesh.\+template.\+h}}.
+Definition at line 342 of file fish\+\_\+mesh.\+template.\+h.
 
 
 
-References \mbox{\hyperlink{fish__mesh_8template_8cc_source_l00682}{oomph\+::\+Algebraic\+Fish\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update()}}.
+References oomph\+::\+Algebraic\+Fish\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update().
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicFishMesh_a027d54d158e22ce8fe3c1246cb030440}\label{classoomph_1_1AlgebraicFishMesh_a027d54d158e22ce8fe3c1246cb030440}} 
 \index{oomph::AlgebraicFishMesh$<$ ELEMENT $>$@{oomph::AlgebraicFishMesh$<$ ELEMENT $>$}!````~AlgebraicFishMesh@{$\sim$AlgebraicFishMesh}}
@@ -105,7 +106,7 @@ Destructor\+: empty.
 
 
 
-Definition at line \mbox{\hyperlink{fish__mesh_8template_8h_source_l00354}{354}} of file \mbox{\hyperlink{fish__mesh_8template_8h_source}{fish\+\_\+mesh.\+template.\+h}}.
+Definition at line 354 of file fish\+\_\+mesh.\+template.\+h.
 
 
 
@@ -119,15 +120,15 @@ void \mbox{\hyperlink{classoomph_1_1AlgebraicFishMesh}{oomph\+::\+Algebraic\+Fis
 
 
 
-Update nodal position at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous) 
+Update nodal position at time level t (t=0\+: present; t$>$0\+: previous) 
 
 
 
-Definition at line \mbox{\hyperlink{fish__mesh_8template_8h_source_l00358}{358}} of file \mbox{\hyperlink{fish__mesh_8template_8h_source}{fish\+\_\+mesh.\+template.\+h}}.
+Definition at line 358 of file fish\+\_\+mesh.\+template.\+h.
 
 
 
-References \mbox{\hyperlink{fish__mesh_8template_8h_source_l00095}{oomph\+::\+Fish\+Mesh$<$ ELEMENT $>$\+::\+Lower\+\_\+body}}, \mbox{\hyperlink{fish__mesh_8template_8h_source_l00097}{oomph\+::\+Fish\+Mesh$<$ ELEMENT $>$\+::\+Lower\+\_\+fin}}, \mbox{\hyperlink{fish__mesh_8template_8cc_source_l00893}{oomph\+::\+Algebraic\+Fish\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+in\+\_\+body()}}, \mbox{\hyperlink{fish__mesh_8template_8cc_source_l00949}{oomph\+::\+Algebraic\+Fish\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+in\+\_\+fin()}}, \mbox{\hyperlink{fish__mesh_8template_8h_source_l00096}{oomph\+::\+Fish\+Mesh$<$ ELEMENT $>$\+::\+Upper\+\_\+body}}, and \mbox{\hyperlink{fish__mesh_8template_8h_source_l00098}{oomph\+::\+Fish\+Mesh$<$ ELEMENT $>$\+::\+Upper\+\_\+fin}}.
+References oomph\+::\+Fish\+Mesh$<$ ELEMENT $>$\+::\+Lower\+\_\+body, oomph\+::\+Fish\+Mesh$<$ ELEMENT $>$\+::\+Lower\+\_\+fin, oomph\+::\+Algebraic\+Fish\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+in\+\_\+body(), oomph\+::\+Algebraic\+Fish\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+in\+\_\+fin(), oomph\+::\+Fish\+Mesh$<$ ELEMENT $>$\+::\+Upper\+\_\+body, and oomph\+::\+Fish\+Mesh$<$ ELEMENT $>$\+::\+Upper\+\_\+fin.
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicFishMesh_a39cd5a86b0f762efd09f4fefba6da1c3}\label{classoomph_1_1AlgebraicFishMesh_a39cd5a86b0f762efd09f4fefba6da1c3}} 
 \index{oomph::AlgebraicFishMesh$<$ ELEMENT $>$@{oomph::AlgebraicFishMesh$<$ ELEMENT $>$}!node\_update@{node\_update}}
@@ -146,11 +147,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableFishMesh_a812
 
 
 
-Definition at line \mbox{\hyperlink{fish__mesh_8template_8h_source_l00395}{395}} of file \mbox{\hyperlink{fish__mesh_8template_8h_source}{fish\+\_\+mesh.\+template.\+h}}.
+Definition at line 395 of file fish\+\_\+mesh.\+template.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{fish__mesh_8template_8h_source_l00530}{oomph\+::\+Algebraic\+Refineable\+Fish\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update()}}.
+Referenced by oomph\+::\+Algebraic\+Refineable\+Fish\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update().
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicFishMesh_a4aee83d1b0a42418fe886b2f244c1d49}\label{classoomph_1_1AlgebraicFishMesh_a4aee83d1b0a42418fe886b2f244c1d49}} 
 \index{oomph::AlgebraicFishMesh$<$ ELEMENT $>$@{oomph::AlgebraicFishMesh$<$ ELEMENT $>$}!node\_update\_in\_body@{node\_update\_in\_body}}
@@ -163,13 +164,13 @@ void \mbox{\hyperlink{classoomph_1_1AlgebraicFishMesh}{oomph\+::\+Algebraic\+Fis
 
 Algebraic update function for nodes in upper/lower body. 
 
-Algebraic update function\+: Update in (upper or lower) body according to wall shape at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous) 
+Algebraic update function\+: Update in (upper or lower) body according to wall shape at time level t (t=0\+: present; t$>$0\+: previous) 
 
-Definition at line \mbox{\hyperlink{fish__mesh_8template_8cc_source_l00893}{893}} of file \mbox{\hyperlink{fish__mesh_8template_8cc_source}{fish\+\_\+mesh.\+template.\+cc}}.
+Definition at line 893 of file fish\+\_\+mesh.\+template.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{fish__mesh_8template_8h_source_l00358}{oomph\+::\+Algebraic\+Fish\+Mesh$<$ ELEMENT $>$\+::algebraic\+\_\+node\+\_\+update()}}.
+Referenced by oomph\+::\+Algebraic\+Fish\+Mesh$<$ ELEMENT $>$\+::algebraic\+\_\+node\+\_\+update().
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicFishMesh_ad4a6f95e21e3d81b9defde90636e7d45}\label{classoomph_1_1AlgebraicFishMesh_ad4a6f95e21e3d81b9defde90636e7d45}} 
 \index{oomph::AlgebraicFishMesh$<$ ELEMENT $>$@{oomph::AlgebraicFishMesh$<$ ELEMENT $>$}!node\_update\_in\_fin@{node\_update\_in\_fin}}
@@ -182,13 +183,13 @@ void \mbox{\hyperlink{classoomph_1_1AlgebraicFishMesh}{oomph\+::\+Algebraic\+Fis
 
 Algebraic update function for nodes in upper/lower fin. 
 
-Algebraic update function\+: Update in (upper or lower) fin according to wall shape at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous) 
+Algebraic update function\+: Update in (upper or lower) fin according to wall shape at time level t (t=0\+: present; t$>$0\+: previous) 
 
-Definition at line \mbox{\hyperlink{fish__mesh_8template_8cc_source_l00949}{949}} of file \mbox{\hyperlink{fish__mesh_8template_8cc_source}{fish\+\_\+mesh.\+template.\+cc}}.
+Definition at line 949 of file fish\+\_\+mesh.\+template.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{fish__mesh_8template_8h_source_l00358}{oomph\+::\+Algebraic\+Fish\+Mesh$<$ ELEMENT $>$\+::algebraic\+\_\+node\+\_\+update()}}.
+Referenced by oomph\+::\+Algebraic\+Fish\+Mesh$<$ ELEMENT $>$\+::algebraic\+\_\+node\+\_\+update().
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicFishMesh_a1a6d22eedc77299d843274e8ce34b560}\label{classoomph_1_1AlgebraicFishMesh_a1a6d22eedc77299d843274e8ce34b560}} 
 \index{oomph::AlgebraicFishMesh$<$ ELEMENT $>$@{oomph::AlgebraicFishMesh$<$ ELEMENT $>$}!setup\_algebraic\_node\_update@{setup\_algebraic\_node\_update}}
@@ -205,11 +206,11 @@ Setup algebraic update operation for all nodes (separate function because this t
 
 //////////////////////////////////////////////////////////////////// Setup algebraic update operation. Nodes are \char`\"{}suspended\char`\"{} from the fish\textquotesingle{}s back and the upper edge of the fin. Nodes in the lower half are placed symmetrically. Pointer to algebraic element in lower body
 
-Definition at line \mbox{\hyperlink{fish__mesh_8template_8cc_source_l00682}{682}} of file \mbox{\hyperlink{fish__mesh_8template_8cc_source}{fish\+\_\+mesh.\+template.\+cc}}.
+Definition at line 682 of file fish\+\_\+mesh.\+template.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{fish__mesh_8template_8h_source_l00332}{oomph\+::\+Algebraic\+Fish\+Mesh$<$ ELEMENT $>$\+::\+Algebraic\+Fish\+Mesh()}}.
+Referenced by oomph\+::\+Algebraic\+Fish\+Mesh$<$ ELEMENT $>$\+::\+Algebraic\+Fish\+Mesh().
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicFishMesh_a4f992939c299f87abc762c14aab50b5c}\label{classoomph_1_1AlgebraicFishMesh_a4f992939c299f87abc762c14aab50b5c}} 
 \index{oomph::AlgebraicFishMesh$<$ ELEMENT $>$@{oomph::AlgebraicFishMesh$<$ ELEMENT $>$}!update\_node\_update@{update\_node\_update}}
@@ -228,11 +229,11 @@ End coordinate on wall (near tail)
 
 Check halfway along the object
 
-Definition at line \mbox{\hyperlink{fish__mesh_8template_8h_source_l00424}{424}} of file \mbox{\hyperlink{fish__mesh_8template_8h_source}{fish\+\_\+mesh.\+template.\+h}}.
+Definition at line 424 of file fish\+\_\+mesh.\+template.\+h.
 
 
 
-References \mbox{\hyperlink{fish__mesh_8template_8h_source_l00105}{oomph\+::\+Fish\+Mesh$<$ ELEMENT $>$\+::\+Back\+\_\+pt}}, \mbox{\hyperlink{fish__mesh_8template_8h_source_l00108}{oomph\+::\+Fish\+Mesh$<$ ELEMENT $>$\+::\+Domain\+\_\+pt}}, \mbox{\hyperlink{fish__domain_8h_source_l00101}{oomph\+::\+Fish\+Domain\+::xi\+\_\+nose()}}, and \mbox{\hyperlink{fish__domain_8h_source_l00107}{oomph\+::\+Fish\+Domain\+::xi\+\_\+tail()}}.
+References oomph\+::\+Fish\+Mesh$<$ ELEMENT $>$\+::\+Back\+\_\+pt, oomph\+::\+Fish\+Mesh$<$ ELEMENT $>$\+::\+Domain\+\_\+pt, oomph\+::\+Fish\+Domain\+::xi\+\_\+nose(), and oomph\+::\+Fish\+Domain\+::xi\+\_\+tail().
 
 
 

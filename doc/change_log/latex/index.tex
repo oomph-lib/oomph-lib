@@ -29,6 +29,8 @@ The remainder of this document covers the following issues\+:
 \item \mbox{\hyperlink{index_new_functionality_zero_point_nine}{Major new functionality}}
 \item \mbox{\hyperlink{index_major_interface_changes_zero_point_nine}{Major interface changes}}
 \end{DoxyItemize}
+\end{DoxyItemize}
+\begin{DoxyItemize}
 \item \mbox{\hyperlink{index_zero_point_eight_to_zero_point_five}{Changes between version 0.\+8 and 0.\+85}}
 \begin{DoxyItemize}
 \item \mbox{\hyperlink{index_new_functionality_zero_point_five}{Major new functionality}}
@@ -257,9 +259,11 @@ Obviously, you should only compile the library with {\ttfamily WARN\+\_\+\+ABOUT
 ~\newline
 
 \item \href{../../interaction/vmtk_fsi/html/index.html}{\texttt{ Finite Reynolds number flow through an elastic iliac bifurcation.}}
+\end{DoxyItemize}
 \end{DoxyItemize}~\newline
 ~\newline
 
+\begin{DoxyItemize}
 \item Extended FSI capabilities so that such problems can be solved on unstructured meshes. We provide new tutorials that demonstrate this capability for \href{../../interaction/unstructured_fsi/html/index.html}{\texttt{ 2D}} and \href{../../interaction/unstructured_three_d_fsi/html/index.html}{\texttt{ 3D}} problems. ~\newline
 ~\newline
 
@@ -343,7 +347,7 @@ Obviously, you should only compile the library with {\ttfamily WARN\+\_\+\+ABOUT
 
 \item Added integration point arguments to all get\+\_\+source-\/type functions in elements to allow for overloading in multi-\/domain calculations. For example, ~\newline
 ~\newline
- 
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{NavierStokesEquations<DIM>::get\_body\_force\_nst(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
 \DoxyCodeLine{                                               \textcolor{keyword}{const} Vector<double> \&s,}
@@ -355,7 +359,7 @@ Obviously, you should only compile the library with {\ttfamily WARN\+\_\+\+ABOUT
 ~\newline
  has been changed to ~\newline
 ~\newline
- 
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{NavierStokesEquations<DIM>::get\_body\_force\_nst(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
 \DoxyCodeLine{                                               \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ipt,}
@@ -407,14 +411,14 @@ Obviously, you should only compile the library with {\ttfamily WARN\+\_\+\+ABOUT
 
 \item In {\ttfamily Navier\+Stokes\+LSCPreconditioner} ~\newline
 ~\newline
- 
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keywordtype}{void} set\_f\_preconditioner(Preconditioner\& new\_f\_preconditioner)}
 
 \end{DoxyCode}
  and ~\newline
 ~\newline
- 
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keywordtype}{void} set\_p\_preconditioner(Preconditioner\& new\_f\_preconditioner)}
 
@@ -423,7 +427,7 @@ Obviously, you should only compile the library with {\ttfamily WARN\+\_\+\+ABOUT
 ~\newline
  were changed to ~\newline
 ~\newline
- 
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keywordtype}{void} set\_f\_preconditioner(Preconditioner* new\_f\_preconditioner\_pt)}
 
@@ -432,7 +436,7 @@ Obviously, you should only compile the library with {\ttfamily WARN\+\_\+\+ABOUT
 ~\newline
  and ~\newline
 ~\newline
- 
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keywordtype}{void} set\_p\_preconditioner(Preconditioner* new\_f\_preconditioner\_pt)}
 
@@ -514,9 +518,11 @@ Obviously, you should only compile the library with {\ttfamily WARN\+\_\+\+ABOUT
 ~\newline
 
 \item \href{../../preconditioners/fsi/html/index.html}{\texttt{ Using {\ttfamily oomph-\/lib\textquotesingle{}s} FSI preconditioner.}}
+\end{DoxyItemize}
 \end{DoxyItemize}~\newline
 ~\newline
 
+\begin{DoxyItemize}
 \item Provided segregated solver capabilities for fluid-\/structure interaction. ~\newline
 ~\newline
 
@@ -534,9 +540,11 @@ Obviously, you should only compile the library with {\ttfamily WARN\+\_\+\+ABOUT
 ~\newline
 
 \item \href{../../preconditioners/fsi/html/index.html}{\texttt{ Using {\ttfamily oomph-\/lib\textquotesingle{}s} FSI preconditioner.}}
+\end{DoxyItemize}
 \end{DoxyItemize}~\newline
 ~\newline
 
+\begin{DoxyItemize}
 \item MPI capability is now fully integrated into the library (rather than being kept in a separate mpi directory/sub-\/library) but not yet complete (or documented). Segments of code that involve MPI calls are surrounded by {\ttfamily \#ifdef} {\ttfamily OOMPH\+\_\+\+HAS\+\_\+\+MPI} {\ttfamily }\mbox{[}...\mbox{]} {\ttfamily \#endif}. They are only compiled if the {\ttfamily --enable-\/\+MPI} flag is specified at the configure stage. ~\newline
  ~\newline
 ~\newline

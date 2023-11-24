@@ -94,7 +94,7 @@ As usual, we create a namespace where we define the dimensionless parameters $ R
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_namespace==============================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for Problem Parameter}}
-\DoxyCodeLine{\textcolor{comment}{//==================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==================================================}}
 \DoxyCodeLine{ \textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceProblem__Parameter}{Problem\_Parameter}}}
 \DoxyCodeLine{ \{    \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{  /// Doc info object}}
@@ -149,7 +149,7 @@ We start by processing the command line arguments and create the generalised Hoo
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==========start\_of\_main=====================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver code for moving bubble problem}}
-\DoxyCodeLine{\textcolor{comment}{//============================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//============================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} **argv)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{  }
@@ -289,7 +289,7 @@ As usual, we template the Problem class by the element type
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_problem\_class============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Problem class to simulate inviscid bubble propagating along 2D channel}}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classBubbleInChannelProblem}{BubbleInChannelProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -307,7 +307,7 @@ As usual, we template the Problem class by the element type
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Actions before adapt: Wipe the mesh of free surface elements}}
+\DoxyCodeLine{ \textcolor{comment}{/// Actions before adapt: Wipe the mesh of free surface elements}}
 \DoxyCodeLine{ \textcolor{keywordtype}{void} actions\_before\_adapt()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Kill the  elements and wipe surface mesh}}
@@ -358,7 +358,7 @@ As usual, we template the Problem class by the element type
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Doc the solution}}
+\DoxyCodeLine{ \textcolor{comment}{/// Doc the solution}}
 \DoxyCodeLine{ \textcolor{keywordtype}{void} doc\_solution(\textcolor{keyword}{const} std::string\& comment=\textcolor{stringliteral}{"{}"{}});}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Compute the error estimates and assign to elements for plotting}}
@@ -421,7 +421,7 @@ As usual, we template the Problem class by the element type
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Pointers to mesh of free surface elements}}
+\DoxyCodeLine{ \textcolor{comment}{/// Pointers to mesh of free surface elements}}
 \DoxyCodeLine{ Mesh* Free\_surface\_mesh\_pt;}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to mesh containing elements that impose volume constraint}}
@@ -468,7 +468,7 @@ We allocate the timestepper and build the {\ttfamily Volume\+Constraint\+Element
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_constructor=====================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classBubbleInChannelProblem_a04bf2f20c65e85228fac381d786bedad}{BubbleInChannelProblem<ELEMENT>::BubbleInChannelProblem}}()}
 \DoxyCodeLine{\{ }
@@ -753,7 +753,7 @@ During the problem setup the position of all boundary nodes in the pseudo-\/elas
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_complete\_problem\_setup=======================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Set boundary conditions and complete the build of all elements}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classBubbleInChannelProblem_a7b3c042477f4ee4e62dd1e00e1a480f8}{BubbleInChannelProblem<ELEMENT>::complete\_problem\_setup}}()}
 \DoxyCodeLine{\{      }
@@ -927,8 +927,8 @@ As usual we impose the kinematic and dynamic boundary condition at the free surf
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_free\_surface\_elements======================}}
-\DoxyCodeLine{\textcolor{comment}{/// Create elements that impose the kinematic and dynamic bcs}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// for the pseudo-\/solid fluid mesh}}
+\DoxyCodeLine{\textcolor{comment}{/// Create elements that impose the kinematic and dynamic bcs}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// for the pseudo-\/solid fluid mesh}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classBubbleInChannelProblem_a9a5a34516352db3153baa52ccb204b62}{BubbleInChannelProblem<ELEMENT>::create\_free\_surface\_elements}}()}
@@ -988,7 +988,7 @@ As usual we impose the kinematic and dynamic boundary condition at the free surf
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_volume\_constraint\_elements=================}}
 \DoxyCodeLine{\textcolor{comment}{/// Create elements that impose volume constraint on the bubble}}
-\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classBubbleInChannelProblem_ae1ab79ef810211e337127878876c0fa6}{BubbleInChannelProblem<ELEMENT>::create\_volume\_constraint\_elements}}()}
 \DoxyCodeLine{\{ }
@@ -1039,7 +1039,7 @@ This member function documents the computed solution after every Newton solve.
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_doc\_solution=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classBubbleInChannelProblem_a6a68ee06024107d7b3f92059365a06d1}{BubbleInChannelProblem<ELEMENT>::doc\_solution}}(\textcolor{keyword}{const} std::string\& comment)}
 \DoxyCodeLine{\{ }

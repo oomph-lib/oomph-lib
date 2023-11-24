@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1FourierDecomposedHelmholtzBCElementBase}{}\doxysection{oomph\+::Fourier\+Decomposed\+Helmholtz\+BCElement\+Base\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1FourierDecomposedHelmholtzBCElementBase}{}\doxysection{oomph\+::Fourier\+Decomposed\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$ Class Template Reference}
 \label{classoomph_1_1FourierDecomposedHelmholtzBCElementBase}\index{oomph::FourierDecomposedHelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::FourierDecomposedHelmholtzBCElementBase$<$ ELEMENT $>$}}
 
 
@@ -9,7 +9,7 @@
 
 {\ttfamily \#include $<$fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Fourier\+Decomposed\+Helmholtz\+BCElement\+Base\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Fourier\+Decomposed\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.150538cm]{classoomph_1_1FourierDecomposedHelmholtzBCElementBase}
@@ -18,7 +18,7 @@ Inheritance diagram for oomph\+::Fourier\+Decomposed\+Helmholtz\+BCElement\+Base
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzBCElementBase_accbd3c1c2b10fa12e9932af07913487f}{Fourier\+Decomposed\+Helmholtz\+BCElement\+Base}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&bulk\+\_\+el\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}})
+\mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzBCElementBase_accbd3c1c2b10fa12e9932af07913487f}{Fourier\+Decomposed\+Helmholtz\+BCElement\+Base}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&bulk\+\_\+el\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a478d577ac6db67ecc80f1f02ae3ab170}{face\+\_\+index}})
 \begin{DoxyCompactList}\small\item\em Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the index of the face to which the element is attached. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzBCElementBase_a0279036f276a91d48634674d4e371c0f}{Fourier\+Decomposed\+Helmholtz\+BCElement\+Base}} ()
 \begin{DoxyCompactList}\small\item\em Broken empty constructor. \end{DoxyCompactList}\item 
@@ -34,7 +34,7 @@ void \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzBCElementBase_a062
 \begin{DoxyCompactList}\small\item\em C-\/style output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzBCElementBase_a497d1952481a116fe68f20f5c937166b}{output}} (FILE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em C-\/style output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... \end{DoxyCompactList}\item 
-virtual std\+::complex$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzBCElementBase_a6cc7603bab6fa2285ca61fe6007fd02f}{u\+\_\+index\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz}} () const
+virtual std\+::complex$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzBCElementBase_ae3b5e32d07a1dc898fec269470cf2000}{u\+\_\+index\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz}} () const
 \begin{DoxyCompactList}\small\item\em Return the index at which the real/imag unknown value is stored. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzBCElementBase_ab9610b7f417f100b331e8d4885edab36}{global\+\_\+power\+\_\+contribution}} ()
 \begin{DoxyCompactList}\small\item\em Compute the element\textquotesingle{}s contribution to the time-\/averaged radiated power over the artificial boundary. \end{DoxyCompactList}\item 
@@ -58,11 +58,12 @@ std\+::complex$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1FourierDecomposedH
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class ELEMENT$>$\newline
 class oomph\+::\+Fourier\+Decomposed\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$}
+
 ////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////// 
 
 A class for elements that allow the approximation of the Sommerfeld radiation BC for Fourier decomposed Helmholtz equations. The element geometry is obtained from the Face\+Geometry$<$\+ELEMENT$>$ policy class. 
 
-Definition at line \mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h_source_l00059}{59}} of file \mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h_source}{fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h}}.
+Definition at line 59 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
@@ -80,11 +81,11 @@ Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the i
 
 Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the face index. 
 
-Definition at line \mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h_source_l01139}{1139}} of file \mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h_source}{fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h}}.
+Definition at line 1139 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l05132}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{elements_8h_source_l04626}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, \mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h_source_l00335}{oomph\+::\+Fourier\+Decomposed\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz}}, and \mbox{\hyperlink{fourier__decomposed__helmholtz__elements_8h_source_l00114}{oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Equations\+::u\+\_\+index\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz()}}.
+References oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), oomph\+::\+Face\+Element\+::face\+\_\+index(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz, and oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Equations\+::u\+\_\+index\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz().
 
 \mbox{\Hypertarget{classoomph_1_1FourierDecomposedHelmholtzBCElementBase_a0279036f276a91d48634674d4e371c0f}\label{classoomph_1_1FourierDecomposedHelmholtzBCElementBase_a0279036f276a91d48634674d4e371c0f}} 
 \index{oomph::FourierDecomposedHelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::FourierDecomposedHelmholtzBCElementBase$<$ ELEMENT $>$}!FourierDecomposedHelmholtzBCElementBase@{FourierDecomposedHelmholtzBCElementBase}}
@@ -99,7 +100,7 @@ Broken empty constructor.
 
 
 
-Definition at line \mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h_source_l00070}{70}} of file \mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h_source}{fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h}}.
+Definition at line 70 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FourierDecomposedHelmholtzBCElementBase_a62b8da6a587b29ae81a068eadf393407}\label{classoomph_1_1FourierDecomposedHelmholtzBCElementBase_a62b8da6a587b29ae81a068eadf393407}} 
 \index{oomph::FourierDecomposedHelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::FourierDecomposedHelmholtzBCElementBase$<$ ELEMENT $>$}!FourierDecomposedHelmholtzBCElementBase@{FourierDecomposedHelmholtzBCElementBase}}
@@ -128,11 +129,11 @@ Function to compute the shape, test functions and derivates and to return the Ja
 
 
 
-Definition at line \mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h_source_l00308}{308}} of file \mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h_source}{fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h}}.
+Definition at line 308 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01981}{oomph\+::\+Finite\+Element\+::dshape\+\_\+local()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l05242}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References oomph\+::\+Finite\+Element\+::dshape\+\_\+local(), i, oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Finite\+Element\+::nnode(), and s.
 
 \mbox{\Hypertarget{classoomph_1_1FourierDecomposedHelmholtzBCElementBase_ab9610b7f417f100b331e8d4885edab36}\label{classoomph_1_1FourierDecomposedHelmholtzBCElementBase_ab9610b7f417f100b331e8d4885edab36}} 
 \index{oomph::FourierDecomposedHelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::FourierDecomposedHelmholtzBCElementBase$<$ ELEMENT $>$}!global\_power\_contribution@{global\_power\_contribution}}
@@ -147,15 +148,7 @@ Compute the element\textquotesingle{}s contribution to the time-\/averaged radia
 
 
 
-Definition at line \mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h_source_l00145}{145}} of file \mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h_source}{fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h}}.
-
-
-
-References \mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h_source_l00145}{oomph\+::\+Fourier\+Decomposed\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::global\+\_\+power\+\_\+contribution()}}.
-
-
-
-Referenced by \mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h_source_l00145}{oomph\+::\+Fourier\+Decomposed\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::global\+\_\+power\+\_\+contribution()}}.
+Definition at line 145 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FourierDecomposedHelmholtzBCElementBase_a22704a98a6a28b9b2cd52bcaa78b23e1}\label{classoomph_1_1FourierDecomposedHelmholtzBCElementBase_a22704a98a6a28b9b2cd52bcaa78b23e1}} 
 \index{oomph::FourierDecomposedHelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::FourierDecomposedHelmholtzBCElementBase$<$ ELEMENT $>$}!global\_power\_contribution@{global\_power\_contribution}}
@@ -170,11 +163,11 @@ Compute the element\textquotesingle{}s contribution to the time-\/averaged radia
 
 
 
-Definition at line \mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h_source_l00156}{156}} of file \mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h_source}{fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h}}.
+Definition at line 156 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l04735}{oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l04528}{oomph\+::\+Face\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8cc_source_l05242}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{elements_8cc_source_l06353}{oomph\+::\+Face\+Element\+::local\+\_\+coordinate\+\_\+in\+\_\+bulk()}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{elements_8cc_source_l06006}{oomph\+::\+Face\+Element\+::outer\+\_\+unit\+\_\+normal()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00157}{oomph\+::\+Mathematical\+Constants\+::\+Pi}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, \mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h_source_l00135}{oomph\+::\+Fourier\+Decomposed\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::u\+\_\+index\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz()}}, \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}, and \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral\+::weight()}}.
+References oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Face\+Element\+::interpolated\+\_\+x(), oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Integral\+::knot(), oomph\+::\+Face\+Element\+::local\+\_\+coordinate\+\_\+in\+\_\+bulk(), oomph\+::\+Node\+::ndim(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Integral\+::nweight(), oomph\+::\+Face\+Element\+::outer\+\_\+unit\+\_\+normal(), oomph\+::\+Mathematical\+Constants\+::\+Pi, s, oomph\+::\+Finite\+Element\+::shape(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::u\+\_\+index\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz(), oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Integral\+::weight().
 
 \mbox{\Hypertarget{classoomph_1_1FourierDecomposedHelmholtzBCElementBase_a06238e8fd09c6daf38d5cea2c7f38404}\label{classoomph_1_1FourierDecomposedHelmholtzBCElementBase_a06238e8fd09c6daf38d5cea2c7f38404}} 
 \index{oomph::FourierDecomposedHelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::FourierDecomposedHelmholtzBCElementBase$<$ ELEMENT $>$}!output@{output}}
@@ -193,11 +186,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee
 
 
 
-Definition at line \mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h_source_l00120}{120}} of file \mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h_source}{fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h}}.
+Definition at line 120 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
+References oomph\+::\+Finite\+Element\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1FourierDecomposedHelmholtzBCElementBase_a497d1952481a116fe68f20f5c937166b}\label{classoomph_1_1FourierDecomposedHelmholtzBCElementBase_a497d1952481a116fe68f20f5c937166b}} 
 \index{oomph::FourierDecomposedHelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::FourierDecomposedHelmholtzBCElementBase$<$ ELEMENT $>$}!output@{output}}
@@ -216,11 +209,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f
 
 
 
-Definition at line \mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h_source_l00128}{128}} of file \mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h_source}{fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h}}.
+Definition at line 128 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
+References oomph\+::\+Finite\+Element\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1FourierDecomposedHelmholtzBCElementBase_a17070cafb0b4d23fb736b022f7d9d36b}\label{classoomph_1_1FourierDecomposedHelmholtzBCElementBase_a17070cafb0b4d23fb736b022f7d9d36b}} 
 \index{oomph::FourierDecomposedHelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::FourierDecomposedHelmholtzBCElementBase$<$ ELEMENT $>$}!output@{output}}
@@ -239,11 +232,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line \mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h_source_l00106}{106}} of file \mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h_source}{fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h}}.
+Definition at line 106 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
+References oomph\+::\+Finite\+Element\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1FourierDecomposedHelmholtzBCElementBase_a2caddd8509771b2976895f1f08b90e89}\label{classoomph_1_1FourierDecomposedHelmholtzBCElementBase_a2caddd8509771b2976895f1f08b90e89}} 
 \index{oomph::FourierDecomposedHelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::FourierDecomposedHelmholtzBCElementBase$<$ ELEMENT $>$}!output@{output}}
@@ -262,11 +255,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line \mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h_source_l00113}{113}} of file \mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h_source}{fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h}}.
+Definition at line 113 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
+References oomph\+::\+Finite\+Element\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1FourierDecomposedHelmholtzBCElementBase_a5046a85132dd8fed1199b8c55aeea030}\label{classoomph_1_1FourierDecomposedHelmholtzBCElementBase_a5046a85132dd8fed1199b8c55aeea030}} 
 \index{oomph::FourierDecomposedHelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::FourierDecomposedHelmholtzBCElementBase$<$ ELEMENT $>$}!shape\_and\_test@{shape\_and\_test}}
@@ -281,22 +274,22 @@ Function to compute the test functions and to return the Jacobian of mapping bet
 
 
 
-Definition at line \mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h_source_l00287}{287}} of file \mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h_source}{fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h}}.
+Definition at line 287 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l05242}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
+References i, oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Finite\+Element\+::nnode(), s, and oomph\+::\+Finite\+Element\+::shape().
 
 
 
-Referenced by \mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h_source_l00532}{oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+NBoundary\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+\+Dt\+N\+\_\+bc()}}.
+Referenced by oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+NBoundary\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+\+Dt\+N\+\_\+bc().
 
-\mbox{\Hypertarget{classoomph_1_1FourierDecomposedHelmholtzBCElementBase_a6cc7603bab6fa2285ca61fe6007fd02f}\label{classoomph_1_1FourierDecomposedHelmholtzBCElementBase_a6cc7603bab6fa2285ca61fe6007fd02f}} 
+\mbox{\Hypertarget{classoomph_1_1FourierDecomposedHelmholtzBCElementBase_ae3b5e32d07a1dc898fec269470cf2000}\label{classoomph_1_1FourierDecomposedHelmholtzBCElementBase_ae3b5e32d07a1dc898fec269470cf2000}} 
 \index{oomph::FourierDecomposedHelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::FourierDecomposedHelmholtzBCElementBase$<$ ELEMENT $>$}!u\_index\_fourier\_decomposed\_helmholtz@{u\_index\_fourier\_decomposed\_helmholtz}}
 \index{u\_index\_fourier\_decomposed\_helmholtz@{u\_index\_fourier\_decomposed\_helmholtz}!oomph::FourierDecomposedHelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::FourierDecomposedHelmholtzBCElementBase$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{u\_index\_fourier\_decomposed\_helmholtz()}{u\_index\_fourier\_decomposed\_helmholtz()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-virtual std\+::complex$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzBCElementBase}{oomph\+::\+Fourier\+Decomposed\+Helmholtz\+BCElement\+Base}}$<$ ELEMENT $>$\+::u\+\_\+index\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+virtual std\+::complex$<$unsigned$>$ \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzBCElementBase}{oomph\+::\+Fourier\+Decomposed\+Helmholtz\+BCElement\+Base}}$<$ ELEMENT $>$\+::u\+\_\+index\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -304,15 +297,15 @@ Return the index at which the real/imag unknown value is stored.
 
 
 
-Definition at line \mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h_source_l00135}{135}} of file \mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h_source}{fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h}}.
+Definition at line 135 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h_source_l00335}{oomph\+::\+Fourier\+Decomposed\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz}}.
+References oomph\+::\+Fourier\+Decomposed\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz.
 
 
 
-Referenced by \mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h_source_l00156}{oomph\+::\+Fourier\+Decomposed\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::global\+\_\+power\+\_\+contribution()}}, and \mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h_source_l00936}{oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+NMesh$<$ ELEMENT $>$\+::setup\+\_\+gamma()}}.
+Referenced by oomph\+::\+Fourier\+Decomposed\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::global\+\_\+power\+\_\+contribution(), and oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+NMesh$<$ ELEMENT $>$\+::setup\+\_\+gamma().
 
 \mbox{\Hypertarget{classoomph_1_1FourierDecomposedHelmholtzBCElementBase_a6bbf014e96f180c90265e96fd00a0358}\label{classoomph_1_1FourierDecomposedHelmholtzBCElementBase_a6bbf014e96f180c90265e96fd00a0358}} 
 \index{oomph::FourierDecomposedHelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::FourierDecomposedHelmholtzBCElementBase$<$ ELEMENT $>$}!zeta\_nodal@{zeta\_nodal}}
@@ -331,11 +324,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a849561c5fbcbc07
 
 
 
-Definition at line \mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h_source_l00096}{96}} of file \mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h_source}{fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h}}.
+Definition at line 96 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l04497}{oomph\+::\+Face\+Element\+::zeta\+\_\+nodal()}}.
+References i, and oomph\+::\+Face\+Element\+::zeta\+\_\+nodal().
 
 
 
@@ -353,11 +346,11 @@ The index at which the real and imag part of the unknown is stored at the nodes.
 
 
 
-Definition at line \mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h_source_l00335}{335}} of file \mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h_source}{fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h}}.
+Definition at line 335 of file fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h_source_l00532}{oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+NBoundary\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+\+Dt\+N\+\_\+bc()}}, \mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h_source_l01140}{oomph\+::\+Fourier\+Decomposed\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::\+Fourier\+Decomposed\+Helmholtz\+BCElement\+Base()}}, and \mbox{\hyperlink{fourier__decomposed__helmholtz__bc__elements_8h_source_l00135}{oomph\+::\+Fourier\+Decomposed\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::u\+\_\+index\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz()}}.
+Referenced by oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Dt\+NBoundary\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+\+Dt\+N\+\_\+bc(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::\+Fourier\+Decomposed\+Helmholtz\+BCElement\+Base(), and oomph\+::\+Fourier\+Decomposed\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::u\+\_\+index\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz().
 
 
 

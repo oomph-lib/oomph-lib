@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1BackupMeshForProjection}{}\doxysection{oomph\+::Backup\+Mesh\+For\+Projection\texorpdfstring{$<$}{<} GEOMETRIC\+\_\+\+ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1BackupMeshForProjection}{}\doxysection{oomph\+::Backup\+Mesh\+For\+Projection$<$ GEOMETRIC\+\_\+\+ELEMENT $>$ Class Template Reference}
 \label{classoomph_1_1BackupMeshForProjection}\index{oomph::BackupMeshForProjection$<$ GEOMETRIC\_ELEMENT $>$@{oomph::BackupMeshForProjection$<$ GEOMETRIC\_ELEMENT $>$}}
 
 
@@ -9,7 +9,7 @@
 
 {\ttfamily \#include $<$face\+\_\+mesh\+\_\+project.\+h$>$}
 
-Inheritance diagram for oomph\+::Backup\+Mesh\+For\+Projection\texorpdfstring{$<$}{<} GEOMETRIC\+\_\+\+ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Backup\+Mesh\+For\+Projection$<$ GEOMETRIC\+\_\+\+ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{classoomph_1_1BackupMeshForProjection}
@@ -39,11 +39,12 @@ unsigned \mbox{\hyperlink{classoomph_1_1BackupMeshForProjection_aac26d2ee9ed6c7e
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class GEOMETRIC\+\_\+\+ELEMENT$>$\newline
 class oomph\+::\+Backup\+Mesh\+For\+Projection$<$ GEOMETRIC\+\_\+\+ELEMENT $>$}
+
 //////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// 
 
 Class that makes backup (via a deep copy) of a mesh, keeping alive enough information to allow the solution that is currently stored on the mesh to be projected onto another mesh sometime in the future (when the original mesh may already have been deleted). This is mainly useful for the projection of additional nodal values (such as Lagrange multipliers) created by Face\+Elements. ASSUMPTION\+: All fields in the element are represented by isoparametric Lagrange interpolation between the nodal values. Any fields that do not fall into this category will not be copied across correctly and if you\textquotesingle{}re unlucky the code may die...). 
 
-Definition at line \mbox{\hyperlink{face__mesh__project_8h_source_l00222}{222}} of file \mbox{\hyperlink{face__mesh__project_8h_source}{face\+\_\+mesh\+\_\+project.\+h}}.
+Definition at line 222 of file face\+\_\+mesh\+\_\+project.\+h.
 
 
 
@@ -61,11 +62,11 @@ Constructor\+: Pass existing mesh and the boundary ID (need to find the boundary
 
 
 
-Definition at line \mbox{\hyperlink{face__mesh__project_8h_source_l00230}{230}} of file \mbox{\hyperlink{face__mesh__project_8h_source}{face\+\_\+mesh\+\_\+project.\+h}}.
+Definition at line 230 of file face\+\_\+mesh\+\_\+project.\+h.
 
 
 
-References \mbox{\hyperlink{mesh_8h_source_l00617}{oomph\+::\+Mesh\+::add\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{nodes_8cc_source_l02336}{oomph\+::\+Node\+::add\+\_\+to\+\_\+boundary()}}, \mbox{\hyperlink{face__mesh__project_8h_source_l00471}{oomph\+::\+Backup\+Mesh\+For\+Projection$<$ GEOMETRIC\+\_\+\+ELEMENT $>$\+::\+Boundary\+\_\+id}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00186}{oomph\+::\+Mesh\+::\+Element\+\_\+pt}}, \mbox{\hyperlink{mesh_8h_source_l00448}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00473}{oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{nodes_8cc_source_l02379}{oomph\+::\+Node\+::get\+\_\+coordinates\+\_\+on\+\_\+boundary()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{face__mesh__project_8h_source_l00475}{oomph\+::\+Backup\+Mesh\+For\+Projection$<$ GEOMETRIC\+\_\+\+ELEMENT $>$\+::\+ID\+\_\+of\+\_\+field\+\_\+to\+\_\+be\+\_\+projected}}, \mbox{\hyperlink{nodes_8h_source_l01373}{oomph\+::\+Node\+::is\+\_\+on\+\_\+boundary()}}, \mbox{\hyperlink{nodes_8cc_source_l02363}{oomph\+::\+Node\+::ncoordinates\+\_\+on\+\_\+boundary()}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{face__mesh__project_8h_source_l00468}{oomph\+::\+Backup\+Mesh\+For\+Projection$<$ GEOMETRIC\+\_\+\+ELEMENT $>$\+::\+New\+\_\+node\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l00823}{oomph\+::\+Generalised\+Element\+::ninternal\+\_\+data()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{mesh_8h_source_l00596}{oomph\+::\+Mesh\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00183}{oomph\+::\+Mesh\+::\+Node\+\_\+pt}}, \mbox{\hyperlink{nodes_8h_source_l01016}{oomph\+::\+Node\+::nposition\+\_\+type()}}, \mbox{\hyperlink{nodes_8cc_source_l00879}{oomph\+::\+Data\+::ntstorage()}}, \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}, \mbox{\hyperlink{face__mesh__project_8h_source_l00082}{oomph\+::\+Generic\+Lagrange\+Interpolated\+Projectable\+Element$<$ ELEMENT $>$\+::set\+\_\+boundary\+\_\+id()}}, \mbox{\hyperlink{nodes_8cc_source_l02394}{oomph\+::\+Node\+::set\+\_\+coordinates\+\_\+on\+\_\+boundary()}}, \mbox{\hyperlink{elements_8h_source_l01390}{oomph\+::\+Finite\+Element\+::set\+\_\+nodal\+\_\+dimension()}}, \mbox{\hyperlink{nodes_8h_source_l00271}{oomph\+::\+Data\+::set\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{nodes_8h_source_l00238}{oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{nodes_8cc_source_l02408}{oomph\+::\+Node\+::value()}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
+References oomph\+::\+Mesh\+::add\+\_\+element\+\_\+pt(), oomph\+::\+Node\+::add\+\_\+to\+\_\+boundary(), oomph\+::\+Backup\+Mesh\+For\+Projection$<$ GEOMETRIC\+\_\+\+ELEMENT $>$\+::\+Boundary\+\_\+id, e, oomph\+::\+Mesh\+::\+Element\+\_\+pt, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), oomph\+::\+Node\+::get\+\_\+coordinates\+\_\+on\+\_\+boundary(), i, oomph\+::\+Backup\+Mesh\+For\+Projection$<$ GEOMETRIC\+\_\+\+ELEMENT $>$\+::\+ID\+\_\+of\+\_\+field\+\_\+to\+\_\+be\+\_\+projected, oomph\+::\+Node\+::is\+\_\+on\+\_\+boundary(), oomph\+::\+Node\+::ncoordinates\+\_\+on\+\_\+boundary(), oomph\+::\+Node\+::ndim(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Backup\+Mesh\+For\+Projection$<$ GEOMETRIC\+\_\+\+ELEMENT $>$\+::\+New\+\_\+node\+\_\+pt, oomph\+::\+Generalised\+Element\+::ninternal\+\_\+data(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Mesh\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Mesh\+::\+Node\+\_\+pt, oomph\+::\+Node\+::nposition\+\_\+type(), oomph\+::\+Data\+::ntstorage(), oomph\+::\+Data\+::nvalue(), oomph\+::\+Generic\+Lagrange\+Interpolated\+Projectable\+Element$<$ ELEMENT $>$\+::set\+\_\+boundary\+\_\+id(), oomph\+::\+Node\+::set\+\_\+coordinates\+\_\+on\+\_\+boundary(), oomph\+::\+Finite\+Element\+::set\+\_\+nodal\+\_\+dimension(), oomph\+::\+Data\+::set\+\_\+value(), t, oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt(), oomph\+::\+Node\+::value(), and oomph\+::\+Node\+::x().
 
 
 
@@ -83,15 +84,15 @@ Copy nodal values back onto original mesh from which this mesh was built. This o
 
 
 
-Definition at line \mbox{\hyperlink{face__mesh__project_8h_source_l00426}{426}} of file \mbox{\hyperlink{face__mesh__project_8h_source}{face\+\_\+mesh\+\_\+project.\+h}}.
+Definition at line 426 of file face\+\_\+mesh\+\_\+project.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{face__mesh__project_8h_source_l00475}{oomph\+::\+Backup\+Mesh\+For\+Projection$<$ GEOMETRIC\+\_\+\+ELEMENT $>$\+::\+ID\+\_\+of\+\_\+field\+\_\+to\+\_\+be\+\_\+projected}}, \mbox{\hyperlink{face__mesh__project_8h_source_l00468}{oomph\+::\+Backup\+Mesh\+For\+Projection$<$ GEOMETRIC\+\_\+\+ELEMENT $>$\+::\+New\+\_\+node\+\_\+pt}}, \mbox{\hyperlink{nodes_8cc_source_l00879}{oomph\+::\+Data\+::ntstorage()}}, \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}, \mbox{\hyperlink{nodes_8h_source_l00271}{oomph\+::\+Data\+::set\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{nodes_8cc_source_l02408}{oomph\+::\+Node\+::value()}}.
+References i, oomph\+::\+Backup\+Mesh\+For\+Projection$<$ GEOMETRIC\+\_\+\+ELEMENT $>$\+::\+ID\+\_\+of\+\_\+field\+\_\+to\+\_\+be\+\_\+projected, oomph\+::\+Backup\+Mesh\+For\+Projection$<$ GEOMETRIC\+\_\+\+ELEMENT $>$\+::\+New\+\_\+node\+\_\+pt, oomph\+::\+Data\+::ntstorage(), oomph\+::\+Data\+::nvalue(), oomph\+::\+Data\+::set\+\_\+value(), t, and oomph\+::\+Node\+::value().
 
 
 
-Referenced by \mbox{\hyperlink{face__mesh__project_8h_source_l00394}{oomph\+::\+Backup\+Mesh\+For\+Projection$<$ GEOMETRIC\+\_\+\+ELEMENT $>$\+::project\+\_\+onto\+\_\+new\+\_\+mesh()}}.
+Referenced by oomph\+::\+Backup\+Mesh\+For\+Projection$<$ GEOMETRIC\+\_\+\+ELEMENT $>$\+::project\+\_\+onto\+\_\+new\+\_\+mesh().
 
 \mbox{\Hypertarget{classoomph_1_1BackupMeshForProjection_ab96a32a5934ef0edfbc50eb846cb3641}\label{classoomph_1_1BackupMeshForProjection_ab96a32a5934ef0edfbc50eb846cb3641}} 
 \index{oomph::BackupMeshForProjection$<$ GEOMETRIC\_ELEMENT $>$@{oomph::BackupMeshForProjection$<$ GEOMETRIC\_ELEMENT $>$}!project\_onto\_new\_mesh@{project\_onto\_new\_mesh}}
@@ -106,11 +107,11 @@ Project the solution that was present in the original mesh and from which this b
 
 
 
-Definition at line \mbox{\hyperlink{face__mesh__project_8h_source_l00394}{394}} of file \mbox{\hyperlink{face__mesh__project_8h_source}{face\+\_\+mesh\+\_\+project.\+h}}.
+Definition at line 394 of file face\+\_\+mesh\+\_\+project.\+h.
 
 
 
-References \mbox{\hyperlink{face__mesh__project_8h_source_l00471}{oomph\+::\+Backup\+Mesh\+For\+Projection$<$ GEOMETRIC\+\_\+\+ELEMENT $>$\+::\+Boundary\+\_\+id}}, \mbox{\hyperlink{face__mesh__project_8h_source_l00426}{oomph\+::\+Backup\+Mesh\+For\+Projection$<$ GEOMETRIC\+\_\+\+ELEMENT $>$\+::copy\+\_\+onto\+\_\+original\+\_\+mesh()}}, and \mbox{\hyperlink{face__mesh__project_8h_source_l00475}{oomph\+::\+Backup\+Mesh\+For\+Projection$<$ GEOMETRIC\+\_\+\+ELEMENT $>$\+::\+ID\+\_\+of\+\_\+field\+\_\+to\+\_\+be\+\_\+projected}}.
+References oomph\+::\+Backup\+Mesh\+For\+Projection$<$ GEOMETRIC\+\_\+\+ELEMENT $>$\+::\+Boundary\+\_\+id, oomph\+::\+Backup\+Mesh\+For\+Projection$<$ GEOMETRIC\+\_\+\+ELEMENT $>$\+::copy\+\_\+onto\+\_\+original\+\_\+mesh(), and oomph\+::\+Backup\+Mesh\+For\+Projection$<$ GEOMETRIC\+\_\+\+ELEMENT $>$\+::\+ID\+\_\+of\+\_\+field\+\_\+to\+\_\+be\+\_\+projected.
 
 
 
@@ -128,11 +129,11 @@ Boundary id.
 
 
 
-Definition at line \mbox{\hyperlink{face__mesh__project_8h_source_l00471}{471}} of file \mbox{\hyperlink{face__mesh__project_8h_source}{face\+\_\+mesh\+\_\+project.\+h}}.
+Definition at line 471 of file face\+\_\+mesh\+\_\+project.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{face__mesh__project_8h_source_l00230}{oomph\+::\+Backup\+Mesh\+For\+Projection$<$ GEOMETRIC\+\_\+\+ELEMENT $>$\+::\+Backup\+Mesh\+For\+Projection()}}, and \mbox{\hyperlink{face__mesh__project_8h_source_l00394}{oomph\+::\+Backup\+Mesh\+For\+Projection$<$ GEOMETRIC\+\_\+\+ELEMENT $>$\+::project\+\_\+onto\+\_\+new\+\_\+mesh()}}.
+Referenced by oomph\+::\+Backup\+Mesh\+For\+Projection$<$ GEOMETRIC\+\_\+\+ELEMENT $>$\+::\+Backup\+Mesh\+For\+Projection(), and oomph\+::\+Backup\+Mesh\+For\+Projection$<$ GEOMETRIC\+\_\+\+ELEMENT $>$\+::project\+\_\+onto\+\_\+new\+\_\+mesh().
 
 \mbox{\Hypertarget{classoomph_1_1BackupMeshForProjection_aac26d2ee9ed6c7ee58f3f5c416be2047}\label{classoomph_1_1BackupMeshForProjection_aac26d2ee9ed6c7ee58f3f5c416be2047}} 
 \index{oomph::BackupMeshForProjection$<$ GEOMETRIC\_ELEMENT $>$@{oomph::BackupMeshForProjection$<$ GEOMETRIC\_ELEMENT $>$}!ID\_of\_field\_to\_be\_projected@{ID\_of\_field\_to\_be\_projected}}
@@ -147,11 +148,11 @@ ID of field to be projected (UINT\+\_\+\+MAX if there isn\textquotesingle{}t one
 
 
 
-Definition at line \mbox{\hyperlink{face__mesh__project_8h_source_l00475}{475}} of file \mbox{\hyperlink{face__mesh__project_8h_source}{face\+\_\+mesh\+\_\+project.\+h}}.
+Definition at line 475 of file face\+\_\+mesh\+\_\+project.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{face__mesh__project_8h_source_l00230}{oomph\+::\+Backup\+Mesh\+For\+Projection$<$ GEOMETRIC\+\_\+\+ELEMENT $>$\+::\+Backup\+Mesh\+For\+Projection()}}, \mbox{\hyperlink{face__mesh__project_8h_source_l00426}{oomph\+::\+Backup\+Mesh\+For\+Projection$<$ GEOMETRIC\+\_\+\+ELEMENT $>$\+::copy\+\_\+onto\+\_\+original\+\_\+mesh()}}, and \mbox{\hyperlink{face__mesh__project_8h_source_l00394}{oomph\+::\+Backup\+Mesh\+For\+Projection$<$ GEOMETRIC\+\_\+\+ELEMENT $>$\+::project\+\_\+onto\+\_\+new\+\_\+mesh()}}.
+Referenced by oomph\+::\+Backup\+Mesh\+For\+Projection$<$ GEOMETRIC\+\_\+\+ELEMENT $>$\+::\+Backup\+Mesh\+For\+Projection(), oomph\+::\+Backup\+Mesh\+For\+Projection$<$ GEOMETRIC\+\_\+\+ELEMENT $>$\+::copy\+\_\+onto\+\_\+original\+\_\+mesh(), and oomph\+::\+Backup\+Mesh\+For\+Projection$<$ GEOMETRIC\+\_\+\+ELEMENT $>$\+::project\+\_\+onto\+\_\+new\+\_\+mesh().
 
 \mbox{\Hypertarget{classoomph_1_1BackupMeshForProjection_a1bbddbe0f3fe21915a13578844f1c17d}\label{classoomph_1_1BackupMeshForProjection_a1bbddbe0f3fe21915a13578844f1c17d}} 
 \index{oomph::BackupMeshForProjection$<$ GEOMETRIC\_ELEMENT $>$@{oomph::BackupMeshForProjection$<$ GEOMETRIC\_ELEMENT $>$}!New\_node\_pt@{New\_node\_pt}}
@@ -166,11 +167,11 @@ Map returning new node, labeled by node point in original mesh.
 
 
 
-Definition at line \mbox{\hyperlink{face__mesh__project_8h_source_l00468}{468}} of file \mbox{\hyperlink{face__mesh__project_8h_source}{face\+\_\+mesh\+\_\+project.\+h}}.
+Definition at line 468 of file face\+\_\+mesh\+\_\+project.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{face__mesh__project_8h_source_l00230}{oomph\+::\+Backup\+Mesh\+For\+Projection$<$ GEOMETRIC\+\_\+\+ELEMENT $>$\+::\+Backup\+Mesh\+For\+Projection()}}, and \mbox{\hyperlink{face__mesh__project_8h_source_l00426}{oomph\+::\+Backup\+Mesh\+For\+Projection$<$ GEOMETRIC\+\_\+\+ELEMENT $>$\+::copy\+\_\+onto\+\_\+original\+\_\+mesh()}}.
+Referenced by oomph\+::\+Backup\+Mesh\+For\+Projection$<$ GEOMETRIC\+\_\+\+ELEMENT $>$\+::\+Backup\+Mesh\+For\+Projection(), and oomph\+::\+Backup\+Mesh\+For\+Projection$<$ GEOMETRIC\+\_\+\+ELEMENT $>$\+::copy\+\_\+onto\+\_\+original\+\_\+mesh().
 
 
 

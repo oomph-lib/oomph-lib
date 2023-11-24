@@ -33,9 +33,9 @@ In this section we demonstrate the use of {\ttfamily oomph-\/lib\textquotesingle
 By default all general purpose block preconditioners use {\ttfamily Super\+LUPreconditioner} as the preconditioner for the subsidiary systems ( $J_{xx}$ and $J_{yy}$ in the \mbox{\hyperlink{index_introduction}{Introduction}}). {\ttfamily Super\+LUPreconditioner} is a wrapper to both the \href{http://crd.lbl.gov/~xiaoye/SuperLU/\#superlu}{\texttt{ {\ttfamily Super\+LU}}} direct solver and the \href{http://crd.lbl.gov/~xiaoye/SuperLU/\#superlu_dist}{\texttt{ {\ttfamily Super\+LU Dist}}} distributed direct solver. Often we seek to replace this direct solver preconditioning with an inexact solver to make the preconditioner more efficient. To use an alternative subsidiary preconditioner we must define a function to return new instances of the chosen type of preconditioner (inexact solver). For example  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=hypre\_helper=================================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// The function get\_hypre\_preconditioner() returns an instance of }\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// HyprePreconditioner to be used as a subsidiary preconditioner in a}}
-\DoxyCodeLine{\textcolor{comment}{/// GeneralPurposeBlockPreconditioner}}
+\DoxyCodeLine{\textcolor{comment}{/// The function get\_hypre\_preconditioner() returns an instance of }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// HyprePreconditioner to be used as a subsidiary preconditioner in a}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// GeneralPurposeBlockPreconditioner}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==============================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }Hypre\_Subsidiary\_Preconditioner\_Helper}
 \DoxyCodeLine{\{}
@@ -53,8 +53,8 @@ The rest of the section is concerned with the main function, and in particular s
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_main==================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Driver for cantilever beam loaded by surface traction and/or}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// gravity}}
+\DoxyCodeLine{\textcolor{comment}{/// Driver for cantilever beam loaded by surface traction and/or}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// gravity}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}

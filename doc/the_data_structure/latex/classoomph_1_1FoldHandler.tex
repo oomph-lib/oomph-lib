@@ -42,7 +42,7 @@ void \mbox{\hyperlink{classoomph_1_1FoldHandler_aa633b80f1ebdb322350c6832fe6c2b6
 \begin{DoxyCompactList}\small\item\em Overload the hessian vector product function so that it breaks. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classoomph_1_1FoldHandler_adb2878f53be92ea2be6cc012cbfc27ba}{bifurcation\+\_\+type}} () const
 \begin{DoxyCompactList}\small\item\em Indicate that we are tracking a fold bifurcation by returning 1. \end{DoxyCompactList}\item 
-double $\ast$ \mbox{\hyperlink{classoomph_1_1FoldHandler_a0263094e2237dff2f5f677ddcee717d9}{bifurcation\+\_\+parameter\+\_\+pt}} () const
+double $\ast$ \mbox{\hyperlink{classoomph_1_1FoldHandler_a0e35268f1b13aa94739aaaaa366f4586}{bifurcation\+\_\+parameter\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Return a pointer to the bifurcation parameter in bifurcation tracking problems. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FoldHandler_aca97058722ccc1482ae8180ea8dde74c}{get\+\_\+eigenfunction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&eigenfunction)
 \begin{DoxyCompactList}\small\item\em Return the eigenfunction(s) associated with the bifurcation that has been detected in bifurcation tracking problems. \end{DoxyCompactList}\item 
@@ -89,7 +89,7 @@ A class that is used to assemble the augmented system that defines a fold (saddl
 
 \[ R(u,\lambda) = 0, \] \[ Jy = 0, \] \[\phi\cdot y = 1. \] In the above $ J $ is the usual Jacobian matrix, $ dR/du $, and $ \phi $ is a constant vector that is chosen to ensure that the null vector, $ y $, is not trivial. 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00472}{472}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 472 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -118,7 +118,7 @@ Block\+\_\+augmented\+\_\+J&\\
 \end{DoxyEnumFields}
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00478}{478}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 478 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -135,11 +135,11 @@ Constructor\+: initialise the fold handler, by setting initial guesses for Y, Ph
 
 Constructor\+: Initialise the fold handler, by setting initial guesses for Y, Phi and calculating Count. If the system changes, a new handler must be constructed. 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l00864}{864}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 864 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8cc_source_l00035}{oomph\+::\+Linear\+Algebra\+Distribution\+::build()}}, \mbox{\hyperlink{problem_8h_source_l01246}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00509}{Count}}, \mbox{\hyperlink{linear__solver_8h_source_l00144}{oomph\+::\+Linear\+Solver\+::disable\+\_\+resolve()}}, \mbox{\hyperlink{problem_8h_source_l00460}{oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00554}{oomph\+::\+Problem\+::\+Dof\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00448}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{linear__solver_8h_source_l00135}{oomph\+::\+Linear\+Solver\+::enable\+\_\+resolve()}}, \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{problem_8cc_source_l07887}{oomph\+::\+Problem\+::get\+\_\+derivative\+\_\+wrt\+\_\+global\+\_\+parameter()}}, \mbox{\hyperlink{linear__solver_8h_source_l00128}{oomph\+::\+Linear\+Solver\+::is\+\_\+resolve\+\_\+enabled()}}, \mbox{\hyperlink{problem_8h_source_l01466}{oomph\+::\+Problem\+::linear\+\_\+solver\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l01280}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00497}{Ndof}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{problem_8h_source_l01674}{oomph\+::\+Problem\+::ndof()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00501}{Phi}}, \mbox{\hyperlink{assembly__handler_8h_source_l00493}{Problem\+\_\+pt}}, \mbox{\hyperlink{linear__solver_8h_source_l00225}{oomph\+::\+Linear\+Solver\+::resolve()}}, \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}{oomph\+::\+Linear\+Solver\+::solve()}}, \mbox{\hyperlink{problem_8h_source_l00667}{oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00504}{Y}}.
+References oomph\+::\+Linear\+Algebra\+Distribution\+::build(), oomph\+::\+Problem\+::communicator\+\_\+pt(), Count, oomph\+::\+Linear\+Solver\+::disable\+\_\+resolve(), oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt, oomph\+::\+Problem\+::\+Dof\+\_\+pt, e, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Linear\+Solver\+::enable\+\_\+resolve(), oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), oomph\+::\+Problem\+::get\+\_\+derivative\+\_\+wrt\+\_\+global\+\_\+parameter(), oomph\+::\+Linear\+Solver\+::is\+\_\+resolve\+\_\+enabled(), oomph\+::\+Problem\+::linear\+\_\+solver\+\_\+pt(), oomph\+::\+Problem\+::mesh\+\_\+pt(), Ndof, oomph\+::\+Generalised\+Element\+::ndof(), oomph\+::\+Problem\+::ndof(), oomph\+::\+Mesh\+::nelement(), Phi, Problem\+\_\+pt, oomph\+::\+Linear\+Solver\+::resolve(), oomph\+::\+Linear\+Solver\+::solve(), oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation, and Y.
 
 \mbox{\Hypertarget{classoomph_1_1FoldHandler_ac50106424b3fa4e3346231ec41b7a89f}\label{classoomph_1_1FoldHandler_ac50106424b3fa4e3346231ec41b7a89f}} 
 \index{oomph::FoldHandler@{oomph::FoldHandler}!FoldHandler@{FoldHandler}}
@@ -153,11 +153,11 @@ Constructor in which initial eigenvector can be passed.
 
 Constructor in which the eigenvector is passed as an initial guess. 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l00970}{970}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 970 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8cc_source_l00035}{oomph\+::\+Linear\+Algebra\+Distribution\+::build()}}, \mbox{\hyperlink{problem_8h_source_l01246}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00509}{Count}}, \mbox{\hyperlink{problem_8h_source_l00460}{oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00554}{oomph\+::\+Problem\+::\+Dof\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00448}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{problem_8h_source_l01280}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00497}{Ndof}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{problem_8h_source_l01674}{oomph\+::\+Problem\+::ndof()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00501}{Phi}}, \mbox{\hyperlink{assembly__handler_8h_source_l00493}{Problem\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00667}{oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00504}{Y}}.
+References oomph\+::\+Linear\+Algebra\+Distribution\+::build(), oomph\+::\+Problem\+::communicator\+\_\+pt(), Count, oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt, oomph\+::\+Problem\+::\+Dof\+\_\+pt, e, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), oomph\+::\+Problem\+::mesh\+\_\+pt(), Ndof, oomph\+::\+Generalised\+Element\+::ndof(), oomph\+::\+Problem\+::ndof(), oomph\+::\+Mesh\+::nelement(), Phi, Problem\+\_\+pt, oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation, and Y.
 
 \mbox{\Hypertarget{classoomph_1_1FoldHandler_a0e39e588b48269e4f7272b78fa4b99a7}\label{classoomph_1_1FoldHandler_a0e39e588b48269e4f7272b78fa4b99a7}} 
 \index{oomph::FoldHandler@{oomph::FoldHandler}!FoldHandler@{FoldHandler}}
@@ -171,11 +171,11 @@ Constructor in which initial eigenvector and normalisation can be passed.
 
 Constructor in which the eigenvector and normalisation vector are passed as an initial guess. 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l01036}{1036}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 1036 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8cc_source_l00035}{oomph\+::\+Linear\+Algebra\+Distribution\+::build()}}, \mbox{\hyperlink{problem_8h_source_l01246}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00509}{Count}}, \mbox{\hyperlink{problem_8h_source_l00460}{oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00554}{oomph\+::\+Problem\+::\+Dof\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00448}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{problem_8h_source_l01280}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00497}{Ndof}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{problem_8h_source_l01674}{oomph\+::\+Problem\+::ndof()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00501}{Phi}}, \mbox{\hyperlink{assembly__handler_8h_source_l00493}{Problem\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00667}{oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00504}{Y}}.
+References oomph\+::\+Linear\+Algebra\+Distribution\+::build(), oomph\+::\+Problem\+::communicator\+\_\+pt(), Count, oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt, oomph\+::\+Problem\+::\+Dof\+\_\+pt, e, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), oomph\+::\+Problem\+::mesh\+\_\+pt(), Ndof, oomph\+::\+Generalised\+Element\+::ndof(), oomph\+::\+Problem\+::ndof(), oomph\+::\+Mesh\+::nelement(), Phi, Problem\+\_\+pt, oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation, and Y.
 
 \mbox{\Hypertarget{classoomph_1_1FoldHandler_ab582d9ac969e0f7779a285d21a6d8e45}\label{classoomph_1_1FoldHandler_ab582d9ac969e0f7779a285d21a6d8e45}} 
 \index{oomph::FoldHandler@{oomph::FoldHandler}!````~FoldHandler@{$\sim$FoldHandler}}
@@ -189,20 +189,20 @@ Destructor, return the problem to its original state before the augmented system
 
 Destructor return the problem to its original (non-\/augmented) state. 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l01573}{1573}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 1573 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8cc_source_l00035}{oomph\+::\+Linear\+Algebra\+Distribution\+::build()}}, \mbox{\hyperlink{problem_8h_source_l01246}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l00460}{oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00554}{oomph\+::\+Problem\+::\+Dof\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l01466}{oomph\+::\+Problem\+::linear\+\_\+solver\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00451}{oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::linear\+\_\+solver\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00497}{Ndof}}, \mbox{\hyperlink{assembly__handler_8h_source_l00493}{Problem\+\_\+pt}}, and \mbox{\hyperlink{problem_8h_source_l00667}{oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation}}.
+References oomph\+::\+Linear\+Algebra\+Distribution\+::build(), oomph\+::\+Problem\+::communicator\+\_\+pt(), oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt, oomph\+::\+Problem\+::\+Dof\+\_\+pt, oomph\+::\+Problem\+::linear\+\_\+solver\+\_\+pt(), oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::linear\+\_\+solver\+\_\+pt(), Ndof, Problem\+\_\+pt, and oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1FoldHandler_a0263094e2237dff2f5f677ddcee717d9}\label{classoomph_1_1FoldHandler_a0263094e2237dff2f5f677ddcee717d9}} 
+\mbox{\Hypertarget{classoomph_1_1FoldHandler_a0e35268f1b13aa94739aaaaa366f4586}\label{classoomph_1_1FoldHandler_a0e35268f1b13aa94739aaaaa366f4586}} 
 \index{oomph::FoldHandler@{oomph::FoldHandler}!bifurcation\_parameter\_pt@{bifurcation\_parameter\_pt}}
 \index{bifurcation\_parameter\_pt@{bifurcation\_parameter\_pt}!oomph::FoldHandler@{oomph::FoldHandler}}
 \doxysubsubsection{\texorpdfstring{bifurcation\_parameter\_pt()}{bifurcation\_parameter\_pt()}}
-{\footnotesize\ttfamily double $\ast$ oomph\+::\+Fold\+Handler\+::bifurcation\+\_\+parameter\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily double$\ast$ oomph\+::\+Fold\+Handler\+::bifurcation\+\_\+parameter\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -214,11 +214,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a3e369ec692c3d
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00584}{584}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 584 of file assembly\+\_\+handler.\+h.
 
 
 
-References \mbox{\hyperlink{assembly__handler_8h_source_l00512}{Parameter\+\_\+pt}}.
+References Parameter\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1FoldHandler_adb2878f53be92ea2be6cc012cbfc27ba}\label{classoomph_1_1FoldHandler_adb2878f53be92ea2be6cc012cbfc27ba}} 
 \index{oomph::FoldHandler@{oomph::FoldHandler}!bifurcation\_type@{bifurcation\_type}}
@@ -236,7 +236,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a22c5f240674e4
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00577}{577}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 577 of file assembly\+\_\+handler.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FoldHandler_a30f2973860c13a183d5647a63b0c2ead}\label{classoomph_1_1FoldHandler_a30f2973860c13a183d5647a63b0c2ead}} 
 \index{oomph::FoldHandler@{oomph::FoldHandler}!eqn\_number@{eqn\_number}}
@@ -254,15 +254,15 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a94d28e2de2559
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l01138}{1138}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 1138 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00497}{Ndof}}, and \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}.
+References oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), Ndof, and oomph\+::\+Generalised\+Element\+::ndof().
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l01244}{get\+\_\+jacobian()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l00677}{oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::resolve()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l00405}{oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::solve()}}.
+Referenced by get\+\_\+jacobian(), oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::resolve(), and oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::solve().
 
 \mbox{\Hypertarget{classoomph_1_1FoldHandler_a674cf9fe7c065e54c95813c2baeea84c}\label{classoomph_1_1FoldHandler_a674cf9fe7c065e54c95813c2baeea84c}} 
 \index{oomph::FoldHandler@{oomph::FoldHandler}!get\_djacobian\_dparameter@{get\_djacobian\_dparameter}}
@@ -280,7 +280,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_aefc0c13a65342
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l01512}{1512}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 1512 of file assembly\+\_\+handler.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1FoldHandler_ad98b98488b683fa3ad9497b662e6e5b6}\label{classoomph_1_1FoldHandler_ad98b98488b683fa3ad9497b662e6e5b6}} 
 \index{oomph::FoldHandler@{oomph::FoldHandler}!get\_dresiduals\_dparameter@{get\_dresiduals\_dparameter}}
@@ -298,11 +298,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a2ee980ccabe0a
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l01442}{1442}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 1442 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{assembly__handler_8h_source_l00482}{Block\+\_\+augmented\+\_\+J}}, \mbox{\hyperlink{assembly__handler_8h_source_l00481}{Block\+\_\+J}}, \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00480}{Full\+\_\+augmented}}, \mbox{\hyperlink{elements_8h_source_l01046}{oomph\+::\+Generalised\+Element\+::get\+\_\+djacobian\+\_\+dparameter()}}, \mbox{\hyperlink{elements_8h_source_l01034}{oomph\+::\+Generalised\+Element\+::get\+\_\+dresiduals\+\_\+dparameter()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00490}{Solve\+\_\+which\+\_\+system}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00504}{Y}}.
+References Block\+\_\+augmented\+\_\+J, Block\+\_\+J, oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), Full\+\_\+augmented, oomph\+::\+Generalised\+Element\+::get\+\_\+djacobian\+\_\+dparameter(), oomph\+::\+Generalised\+Element\+::get\+\_\+dresiduals\+\_\+dparameter(), i, oomph\+::\+Generalised\+Element\+::ndof(), Solve\+\_\+which\+\_\+system, and Y.
 
 \mbox{\Hypertarget{classoomph_1_1FoldHandler_aca97058722ccc1482ae8180ea8dde74c}\label{classoomph_1_1FoldHandler_aca97058722ccc1482ae8180ea8dde74c}} 
 \index{oomph::FoldHandler@{oomph::FoldHandler}!get\_eigenfunction@{get\_eigenfunction}}
@@ -320,11 +320,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a6d614b1b3809d
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l01555}{1555}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 1555 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{problem_8h_source_l01246}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00497}{Ndof}}, \mbox{\hyperlink{assembly__handler_8h_source_l00493}{Problem\+\_\+pt}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00504}{Y}}.
+References oomph\+::\+Problem\+::communicator\+\_\+pt(), Ndof, Problem\+\_\+pt, and Y.
 
 \mbox{\Hypertarget{classoomph_1_1FoldHandler_aa633b80f1ebdb322350c6832fe6c2b6c}\label{classoomph_1_1FoldHandler_aa633b80f1ebdb322350c6832fe6c2b6c}} 
 \index{oomph::FoldHandler@{oomph::FoldHandler}!get\_hessian\_vector\_products@{get\_hessian\_vector\_products}}
@@ -342,7 +342,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a296bef49838d2
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l01533}{1533}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 1533 of file assembly\+\_\+handler.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1FoldHandler_ad1bec54a2e0c5bd483ff0bf633bd6542}\label{classoomph_1_1FoldHandler_ad1bec54a2e0c5bd483ff0bf633bd6542}} 
 \index{oomph::FoldHandler@{oomph::FoldHandler}!get\_jacobian@{get\_jacobian}}
@@ -362,15 +362,15 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_ad43c3d8760be0
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l01244}{1244}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 1244 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{problem_8h_source_l01151}{oomph\+::\+Problem\+::actions\+\_\+after\+\_\+change\+\_\+in\+\_\+bifurcation\+\_\+parameter()}}, \mbox{\hyperlink{problem_8h_source_l01048}{oomph\+::\+Problem\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00482}{Block\+\_\+augmented\+\_\+J}}, \mbox{\hyperlink{assembly__handler_8h_source_l00481}{Block\+\_\+J}}, \mbox{\hyperlink{assembly__handler_8h_source_l00509}{Count}}, \mbox{\hyperlink{problem_8h_source_l00554}{oomph\+::\+Problem\+::\+Dof\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01138}{eqn\+\_\+number()}}, \mbox{\hyperlink{black__box__newton__solver_8cc_source_l00054}{oomph\+::\+Black\+Box\+FDNewton\+Solver\+::\+FD\+\_\+step}}, \mbox{\hyperlink{assembly__handler_8h_source_l00480}{Full\+\_\+augmented}}, \mbox{\hyperlink{elements_8h_source_l00990}{oomph\+::\+Generalised\+Element\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01171}{get\+\_\+residuals()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00497}{Ndof}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01105}{ndof()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00501}{Phi}}, \mbox{\hyperlink{assembly__handler_8h_source_l00493}{Problem\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00490}{Solve\+\_\+which\+\_\+system}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00504}{Y}}.
+References oomph\+::\+Problem\+::actions\+\_\+after\+\_\+change\+\_\+in\+\_\+bifurcation\+\_\+parameter(), oomph\+::\+Problem\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check(), Block\+\_\+augmented\+\_\+J, Block\+\_\+J, Count, oomph\+::\+Problem\+::\+Dof\+\_\+pt, oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), eqn\+\_\+number(), oomph\+::\+Black\+Box\+FDNewton\+Solver\+::\+FD\+\_\+step, Full\+\_\+augmented, oomph\+::\+Generalised\+Element\+::get\+\_\+jacobian(), get\+\_\+residuals(), Ndof, oomph\+::\+Generalised\+Element\+::ndof(), ndof(), Phi, Problem\+\_\+pt, Solve\+\_\+which\+\_\+system, and Y.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l00677}{oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::resolve()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l00405}{oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::solve()}}.
+Referenced by oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::resolve(), and oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::solve().
 
 \mbox{\Hypertarget{classoomph_1_1FoldHandler_abfbec6da3dffeaf3b4df0ee4955101fd}\label{classoomph_1_1FoldHandler_abfbec6da3dffeaf3b4df0ee4955101fd}} 
 \index{oomph::FoldHandler@{oomph::FoldHandler}!get\_residuals@{get\_residuals}}
@@ -388,15 +388,15 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a7a6203b0ab90d
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l01171}{1171}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 1171 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{assembly__handler_8h_source_l00482}{Block\+\_\+augmented\+\_\+J}}, \mbox{\hyperlink{assembly__handler_8h_source_l00481}{Block\+\_\+J}}, \mbox{\hyperlink{assembly__handler_8h_source_l00509}{Count}}, \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00480}{Full\+\_\+augmented}}, \mbox{\hyperlink{elements_8h_source_l00990}{oomph\+::\+Generalised\+Element\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{elements_8h_source_l00980}{oomph\+::\+Generalised\+Element\+::get\+\_\+residuals()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{problem_8h_source_l01280}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00501}{Phi}}, \mbox{\hyperlink{assembly__handler_8h_source_l00493}{Problem\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00490}{Solve\+\_\+which\+\_\+system}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00504}{Y}}.
+References Block\+\_\+augmented\+\_\+J, Block\+\_\+J, Count, oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), Full\+\_\+augmented, oomph\+::\+Generalised\+Element\+::get\+\_\+jacobian(), oomph\+::\+Generalised\+Element\+::get\+\_\+residuals(), i, oomph\+::\+Problem\+::mesh\+\_\+pt(), oomph\+::\+Generalised\+Element\+::ndof(), oomph\+::\+Mesh\+::nelement(), Phi, Problem\+\_\+pt, Solve\+\_\+which\+\_\+system, and Y.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l01244}{get\+\_\+jacobian()}}.
+Referenced by get\+\_\+jacobian().
 
 \mbox{\Hypertarget{classoomph_1_1FoldHandler_af8e766d1faa7867a0161329566865867}\label{classoomph_1_1FoldHandler_af8e766d1faa7867a0161329566865867}} 
 \index{oomph::FoldHandler@{oomph::FoldHandler}!ndof@{ndof}}
@@ -414,15 +414,15 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a09213be8f4aa0
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l01105}{1105}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 1105 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{assembly__handler_8h_source_l00482}{Block\+\_\+augmented\+\_\+J}}, \mbox{\hyperlink{assembly__handler_8h_source_l00481}{Block\+\_\+J}}, \mbox{\hyperlink{assembly__handler_8h_source_l00480}{Full\+\_\+augmented}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00490}{Solve\+\_\+which\+\_\+system}}.
+References Block\+\_\+augmented\+\_\+J, Block\+\_\+J, Full\+\_\+augmented, oomph\+::\+Generalised\+Element\+::ndof(), and Solve\+\_\+which\+\_\+system.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l01244}{get\+\_\+jacobian()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l00677}{oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::resolve()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l00405}{oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::solve()}}.
+Referenced by get\+\_\+jacobian(), oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::resolve(), and oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::solve().
 
 \mbox{\Hypertarget{classoomph_1_1FoldHandler_a7718a18444f6e328953dd5d5e73802f8}\label{classoomph_1_1FoldHandler_a7718a18444f6e328953dd5d5e73802f8}} 
 \index{oomph::FoldHandler@{oomph::FoldHandler}!solve\_augmented\_block\_system@{solve\_augmented\_block\_system}}
@@ -436,15 +436,15 @@ Set to solve the augmented block system.
 
 Set to solve the augmented-\/by-\/one block system. 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l01600}{1600}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 1600 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{assembly__handler_8h_source_l00482}{Block\+\_\+augmented\+\_\+J}}, \mbox{\hyperlink{assembly__handler_8h_source_l00481}{Block\+\_\+J}}, \mbox{\hyperlink{linear__algebra__distribution_8cc_source_l00035}{oomph\+::\+Linear\+Algebra\+Distribution\+::build()}}, \mbox{\hyperlink{problem_8h_source_l01246}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l00460}{oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00554}{oomph\+::\+Problem\+::\+Dof\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00497}{Ndof}}, \mbox{\hyperlink{assembly__handler_8h_source_l00512}{Parameter\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00493}{Problem\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00490}{Solve\+\_\+which\+\_\+system}}, and \mbox{\hyperlink{problem_8h_source_l00667}{oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation}}.
+References Block\+\_\+augmented\+\_\+J, Block\+\_\+J, oomph\+::\+Linear\+Algebra\+Distribution\+::build(), oomph\+::\+Problem\+::communicator\+\_\+pt(), oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt, oomph\+::\+Problem\+::\+Dof\+\_\+pt, Ndof, Parameter\+\_\+pt, Problem\+\_\+pt, Solve\+\_\+which\+\_\+system, and oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l00677}{oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::resolve()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l00405}{oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::solve()}}.
+Referenced by oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::resolve(), and oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::solve().
 
 \mbox{\Hypertarget{classoomph_1_1FoldHandler_abf0c7293014112731f0482e464f4daa3}\label{classoomph_1_1FoldHandler_abf0c7293014112731f0482e464f4daa3}} 
 \index{oomph::FoldHandler@{oomph::FoldHandler}!solve\_block\_system@{solve\_block\_system}}
@@ -458,11 +458,11 @@ Set to solve the block system.
 
 Set to solve the block system. The boolean flag specifies whether the block decomposition should use exactly the same jacobian. 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l01629}{1629}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 1629 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{assembly__handler_8h_source_l00481}{Block\+\_\+J}}, \mbox{\hyperlink{linear__algebra__distribution_8cc_source_l00035}{oomph\+::\+Linear\+Algebra\+Distribution\+::build()}}, \mbox{\hyperlink{problem_8h_source_l01246}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l00460}{oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00554}{oomph\+::\+Problem\+::\+Dof\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00497}{Ndof}}, \mbox{\hyperlink{assembly__handler_8h_source_l00493}{Problem\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00490}{Solve\+\_\+which\+\_\+system}}, and \mbox{\hyperlink{problem_8h_source_l00667}{oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation}}.
+References Block\+\_\+J, oomph\+::\+Linear\+Algebra\+Distribution\+::build(), oomph\+::\+Problem\+::communicator\+\_\+pt(), oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt, oomph\+::\+Problem\+::\+Dof\+\_\+pt, Ndof, Problem\+\_\+pt, Solve\+\_\+which\+\_\+system, and oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation.
 
 \mbox{\Hypertarget{classoomph_1_1FoldHandler_a506c9a7bb372c6d8799c6dabc9448f46}\label{classoomph_1_1FoldHandler_a506c9a7bb372c6d8799c6dabc9448f46}} 
 \index{oomph::FoldHandler@{oomph::FoldHandler}!solve\_full\_system@{solve\_full\_system}}
@@ -476,15 +476,15 @@ Solve non-\/block system.
 
 Set to Solve non-\/block system. 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l01649}{1649}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 1649 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{assembly__handler_8h_source_l00481}{Block\+\_\+J}}, \mbox{\hyperlink{linear__algebra__distribution_8cc_source_l00035}{oomph\+::\+Linear\+Algebra\+Distribution\+::build()}}, \mbox{\hyperlink{problem_8h_source_l01246}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l00460}{oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00554}{oomph\+::\+Problem\+::\+Dof\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00480}{Full\+\_\+augmented}}, \mbox{\hyperlink{assembly__handler_8h_source_l00497}{Ndof}}, \mbox{\hyperlink{assembly__handler_8h_source_l00512}{Parameter\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00493}{Problem\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00490}{Solve\+\_\+which\+\_\+system}}, \mbox{\hyperlink{problem_8h_source_l00667}{oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00504}{Y}}.
+References Block\+\_\+J, oomph\+::\+Linear\+Algebra\+Distribution\+::build(), oomph\+::\+Problem\+::communicator\+\_\+pt(), oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt, oomph\+::\+Problem\+::\+Dof\+\_\+pt, Full\+\_\+augmented, Ndof, Parameter\+\_\+pt, Problem\+\_\+pt, Solve\+\_\+which\+\_\+system, oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation, and Y.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l00677}{oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::resolve()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l00405}{oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::solve()}}.
+Referenced by oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::resolve(), and oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::solve().
 
 
 
@@ -497,7 +497,7 @@ Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l00677}{oomph\+::\+A
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00474}{474}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 474 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -514,11 +514,11 @@ A vector that is used to determine how many elements contribute to a particular 
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00509}{509}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 509 of file assembly\+\_\+handler.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l00864}{Fold\+Handler()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01244}{get\+\_\+jacobian()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l01171}{get\+\_\+residuals()}}.
+Referenced by Fold\+Handler(), get\+\_\+jacobian(), and get\+\_\+residuals().
 
 \mbox{\Hypertarget{classoomph_1_1FoldHandler_aa3f143846245ecea5967ba7c79bedf56}\label{classoomph_1_1FoldHandler_aa3f143846245ecea5967ba7c79bedf56}} 
 \index{oomph::FoldHandler@{oomph::FoldHandler}!Ndof@{Ndof}}
@@ -532,11 +532,11 @@ Store the number of degrees of freedom in the non-\/augmented problem.
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00497}{497}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 497 of file assembly\+\_\+handler.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l01138}{eqn\+\_\+number()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l00864}{Fold\+Handler()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01555}{get\+\_\+eigenfunction()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01244}{get\+\_\+jacobian()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01600}{solve\+\_\+augmented\+\_\+block\+\_\+system()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01629}{solve\+\_\+block\+\_\+system()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01649}{solve\+\_\+full\+\_\+system()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l01573}{$\sim$\+Fold\+Handler()}}.
+Referenced by eqn\+\_\+number(), Fold\+Handler(), get\+\_\+eigenfunction(), get\+\_\+jacobian(), solve\+\_\+augmented\+\_\+block\+\_\+system(), solve\+\_\+block\+\_\+system(), solve\+\_\+full\+\_\+system(), and $\sim$\+Fold\+Handler().
 
 \mbox{\Hypertarget{classoomph_1_1FoldHandler_ae32fb6242e77a273f82de2c491d36314}\label{classoomph_1_1FoldHandler_ae32fb6242e77a273f82de2c491d36314}} 
 \index{oomph::FoldHandler@{oomph::FoldHandler}!Parameter\_pt@{Parameter\_pt}}
@@ -550,11 +550,11 @@ Storage for the pointer to the parameter.
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00512}{512}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 512 of file assembly\+\_\+handler.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8h_source_l00584}{bifurcation\+\_\+parameter\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01600}{solve\+\_\+augmented\+\_\+block\+\_\+system()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l01649}{solve\+\_\+full\+\_\+system()}}.
+Referenced by bifurcation\+\_\+parameter\+\_\+pt(), solve\+\_\+augmented\+\_\+block\+\_\+system(), and solve\+\_\+full\+\_\+system().
 
 \mbox{\Hypertarget{classoomph_1_1FoldHandler_a7b6ebf95bb87aab0c3df7daf841af3a8}\label{classoomph_1_1FoldHandler_a7b6ebf95bb87aab0c3df7daf841af3a8}} 
 \index{oomph::FoldHandler@{oomph::FoldHandler}!Phi@{Phi}}
@@ -568,11 +568,11 @@ A constant vector used to ensure that the null vector is not trivial.
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00501}{501}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 501 of file assembly\+\_\+handler.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l00864}{Fold\+Handler()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01244}{get\+\_\+jacobian()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l01171}{get\+\_\+residuals()}}.
+Referenced by Fold\+Handler(), get\+\_\+jacobian(), and get\+\_\+residuals().
 
 \mbox{\Hypertarget{classoomph_1_1FoldHandler_a2bd14323ca059b1aaef045cb9cc4013b}\label{classoomph_1_1FoldHandler_a2bd14323ca059b1aaef045cb9cc4013b}} 
 \index{oomph::FoldHandler@{oomph::FoldHandler}!Problem\_pt@{Problem\_pt}}
@@ -586,11 +586,11 @@ Pointer to the problem.
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00493}{493}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 493 of file assembly\+\_\+handler.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l00864}{Fold\+Handler()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01555}{get\+\_\+eigenfunction()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01244}{get\+\_\+jacobian()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01171}{get\+\_\+residuals()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01600}{solve\+\_\+augmented\+\_\+block\+\_\+system()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01629}{solve\+\_\+block\+\_\+system()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01649}{solve\+\_\+full\+\_\+system()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l01573}{$\sim$\+Fold\+Handler()}}.
+Referenced by Fold\+Handler(), get\+\_\+eigenfunction(), get\+\_\+jacobian(), get\+\_\+residuals(), solve\+\_\+augmented\+\_\+block\+\_\+system(), solve\+\_\+block\+\_\+system(), solve\+\_\+full\+\_\+system(), and $\sim$\+Fold\+Handler().
 
 \mbox{\Hypertarget{classoomph_1_1FoldHandler_a76ecb78ebc1d48e5511b70660953f02d}\label{classoomph_1_1FoldHandler_a76ecb78ebc1d48e5511b70660953f02d}} 
 \index{oomph::FoldHandler@{oomph::FoldHandler}!Solve\_which\_system@{Solve\_which\_system}}
@@ -604,11 +604,11 @@ Integer flag to indicate which system should be assembled. There are three possi
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00490}{490}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 490 of file assembly\+\_\+handler.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l01442}{get\+\_\+dresiduals\+\_\+dparameter()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01244}{get\+\_\+jacobian()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01171}{get\+\_\+residuals()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01105}{ndof()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01600}{solve\+\_\+augmented\+\_\+block\+\_\+system()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01629}{solve\+\_\+block\+\_\+system()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l01649}{solve\+\_\+full\+\_\+system()}}.
+Referenced by get\+\_\+dresiduals\+\_\+dparameter(), get\+\_\+jacobian(), get\+\_\+residuals(), ndof(), solve\+\_\+augmented\+\_\+block\+\_\+system(), solve\+\_\+block\+\_\+system(), and solve\+\_\+full\+\_\+system().
 
 \mbox{\Hypertarget{classoomph_1_1FoldHandler_ac8697e5d9484fc0488d4c16b822c792e}\label{classoomph_1_1FoldHandler_ac8697e5d9484fc0488d4c16b822c792e}} 
 \index{oomph::FoldHandler@{oomph::FoldHandler}!Y@{Y}}
@@ -622,11 +622,11 @@ Storage for the null vector.
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00504}{504}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 504 of file assembly\+\_\+handler.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l00864}{Fold\+Handler()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01442}{get\+\_\+dresiduals\+\_\+dparameter()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01555}{get\+\_\+eigenfunction()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01244}{get\+\_\+jacobian()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01171}{get\+\_\+residuals()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l00677}{oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::resolve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l00405}{oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::solve()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l01649}{solve\+\_\+full\+\_\+system()}}.
+Referenced by Fold\+Handler(), get\+\_\+dresiduals\+\_\+dparameter(), get\+\_\+eigenfunction(), get\+\_\+jacobian(), get\+\_\+residuals(), oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::resolve(), oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::solve(), and solve\+\_\+full\+\_\+system().
 
 
 

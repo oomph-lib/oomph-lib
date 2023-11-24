@@ -42,7 +42,7 @@ We store the problem parameters and define the source function and the exact sol
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//======start\_of\_ExactSolnForUnsteadyHeat=====================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for forced exact solution for UnsteadyHeat equation }}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceExactSolnForUnsteadyHeat}{ExactSolnForUnsteadyHeat}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -146,7 +146,7 @@ The problem class contains a single additional member function
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Global error norm for adaptive time-\/stepping}}
+\DoxyCodeLine{ \textcolor{comment}{/// Global error norm for adaptive time-\/stepping}}
 \DoxyCodeLine{ \textcolor{keywordtype}{double} global\_temporal\_error\_norm();}
 
 \end{DoxyCodeInclude}
@@ -220,8 +220,8 @@ In the present problem, we choose the RMS of the errors $ e_j \ (j=1,...,N_{node
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//========start\_of\_global\_temporal\_error\_norm==============================}}
-\DoxyCodeLine{\textcolor{comment}{/// Global error norm for adaptive timestepping: RMS error, based on}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// difference between predicted and actual value at all nodes.}}
+\DoxyCodeLine{\textcolor{comment}{/// Global error norm for adaptive timestepping: RMS error, based on}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// difference between predicted and actual value at all nodes.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{double} \mbox{\hyperlink{classUnsteadyHeatProblem_a888e25dd97e89d31e485cb188721dbe1}{UnsteadyHeatProblem<ELEMENT>::global\_temporal\_error\_norm}}()}

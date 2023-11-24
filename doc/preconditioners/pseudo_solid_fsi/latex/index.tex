@@ -146,7 +146,7 @@ The main code only requires minor changes, all associated with the specification
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_main=====================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver code }}
-\DoxyCodeLine{\textcolor{comment}{//=========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} **argv)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{preprocessor}{\#ifdef OOMPH\_HAS\_MPI}}
@@ -211,7 +211,7 @@ We provide a new function, {\ttfamily set\+\_\+iterative\+\_\+solver()} to switc
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===========start\_iterative\_solver=========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Set iterative solver }}
-\DoxyCodeLine{\textcolor{comment}{//==========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classFSIChannelWithLeafletProblem_a8ca939c0edc4194e4e5cb7d1404f27de}{FSIChannelWithLeafletProblem<ELEMENT>::set\_iterative\_solver}}()}
 \DoxyCodeLine{\{}
@@ -319,7 +319,7 @@ We provide a new function, {\ttfamily set\+\_\+iterative\+\_\+solver()} to switc
 \DoxyCodeLine{   ns\_prec\_pt-\/>set\_f\_preconditioner(f\_prec\_pt);  }
 
 \end{DoxyCodeInclude}
- If Hypre is available, we can then (approximately) solve the diagonal blocks using a small number of AMG V-\/cycles (with settings specified in the helper function {\ttfamily \mbox{\hyperlink{namespaceLSC__Preconditioner__Helper_a3ddbb4dc9864cc9ce3901001447560a0}{LSC\+\_\+\+Preconditioner\+\_\+\+Helper\+::set\+\_\+hypre\+\_\+preconditioner}}})\+:
+ If Hypre is available, we can then (approximately) solve the diagonal blocks using a small number of AMG V-\/cycles (with settings specified in the helper function {\ttfamily \mbox{\hyperlink{namespaceLSC__Preconditioner__Helper_a3191fa949eda009c481fdf4f81516535}{LSC\+\_\+\+Preconditioner\+\_\+\+Helper\+::set\+\_\+hypre\+\_\+preconditioner}}})\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -328,7 +328,7 @@ We provide a new function, {\ttfamily set\+\_\+iterative\+\_\+solver()} to switc
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Use Hypre for diagonal blocks}}
 \DoxyCodeLine{   f\_prec\_pt-\/>set\_subsidiary\_preconditioner\_function}
-\DoxyCodeLine{    (\mbox{\hyperlink{namespaceLSC__Preconditioner__Helper_a3ddbb4dc9864cc9ce3901001447560a0}{LSC\_Preconditioner\_Helper::set\_hypre\_preconditioner}});}
+\DoxyCodeLine{    (\mbox{\hyperlink{namespaceLSC__Preconditioner__Helper_a3191fa949eda009c481fdf4f81516535}{LSC\_Preconditioner\_Helper::set\_hypre\_preconditioner}});}
 
 \end{DoxyCodeInclude}
 

@@ -18,7 +18,7 @@ Inheritance diagram for oomph\+::Ellipse\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1Ellipse_a422744665799852d6e767416dcda2692}{Ellipse}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ $>$ \&\mbox{\hyperlink{classoomph_1_1Ellipse_ac293fd6830b55de7ad39df03ec3add2b}{geom\+\_\+data\+\_\+pt}})
+\mbox{\hyperlink{classoomph_1_1Ellipse_a422744665799852d6e767416dcda2692}{Ellipse}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ $>$ \&\mbox{\hyperlink{classoomph_1_1Ellipse_a99f443c61294d5cd12a1412a8a3b0b3e}{geom\+\_\+data\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Constructor\+: 1 Lagrangian coordinate, 2 Eulerian coords. Pass half axes as \mbox{\hyperlink{classoomph_1_1Data}{Data}}\+: \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Ellipse_a23a5b259b37d9e41af6a6755d3b944cd}{Ellipse}} (const double \&A, const double \&B)
 \begin{DoxyCompactList}\small\item\em Constructor\+: 1 Lagrangian coordinate, 2 Eulerian coords. Pass half axes A and B; both pinned. \end{DoxyCompactList}\item 
@@ -39,7 +39,7 @@ double \mbox{\hyperlink{classoomph_1_1Ellipse_aad24496ce678eea77c602c52d9eaa9a5}
 void \mbox{\hyperlink{classoomph_1_1Ellipse_abf6972409206084dd1f517a535fb1b52}{position}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&r) const
 \begin{DoxyCompactList}\small\item\em Position \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} at Lagrangian coordinate zeta. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1Ellipse_a862ce1f7d6ac7b2c5deb613b49caa30f}{position}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&r) const
-\begin{DoxyCompactList}\small\item\em Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous timestep. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t$>$0\+: previous timestep. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1Ellipse_af8caf51de734dff257fa3dbde14fa167}{dposition}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&drdzeta) const
 \begin{DoxyCompactList}\small\item\em Derivative of position \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} w.\+r.\+t. to coordinates\+: $ \frac{dR_i}{d \zeta_\alpha}$ = drdzeta(alpha,i). \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1Ellipse_a19b6cecd9fcbcad1830a8a3c1e133672}{d2position}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}}$<$ double $>$ \&ddrdzeta) const
@@ -48,7 +48,7 @@ void \mbox{\hyperlink{classoomph_1_1Ellipse_a5cf7ea86ce09f7371e03fea52395cf3b}{d
 \begin{DoxyCompactList}\small\item\em Position \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} and 1st and 2nd derivs to coordinates\+: $ \frac{dR_i}{d \zeta_\alpha}$ = drdzeta(alpha,i). $ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$ = ddrdzeta(alpha,beta,i). Evaluated at current time. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1Ellipse_a7b89731ed0bbe563d323d0eb5e1e708c}{ngeom\+\_\+data}} () const
 \begin{DoxyCompactList}\small\item\em How many items of \mbox{\hyperlink{classoomph_1_1Data}{Data}} does the shape of the object depend on? \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1Ellipse_ac293fd6830b55de7ad39df03ec3add2b}{geom\+\_\+data\+\_\+pt}} (const unsigned \&j)
+\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1Ellipse_a99f443c61294d5cd12a1412a8a3b0b3e}{geom\+\_\+data\+\_\+pt}} (const unsigned \&j)
 \begin{DoxyCompactList}\small\item\em Return pointer to the j-\/th \mbox{\hyperlink{classoomph_1_1Data}{Data}} item that the object\textquotesingle{}s shape depends on. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -65,7 +65,7 @@ bool \mbox{\hyperlink{classoomph_1_1Ellipse_ad21b2c34858b46d6bff5f25f02bbe3d9}{M
 
 //////////////////////////////////////////////////////////////////// \mbox{\hyperlink{classoomph_1_1Steady}{Steady}} ellipse with half axes A and B as geometric object\+: \[ x = A \cos(\zeta) \] \[ y = B \sin(\zeta) \] 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00643}{643}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line 643 of file geom\+\_\+objects.\+h.
 
 
 
@@ -88,11 +88,11 @@ Constructor\+: 1 Lagrangian coordinate, 2 Eulerian coords. Pass half axes as \mb
 \end{DoxyCode}
  
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00652}{652}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line 652 of file geom\+\_\+objects.\+h.
 
 
 
-References \mbox{\hyperlink{geom__objects_8h_source_l00846}{geom\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{geom__objects_8h_source_l00853}{Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{geom__objects_8h_source_l00856}{Must\+\_\+clean\+\_\+up}}, and \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}.
+References geom\+\_\+data\+\_\+pt(), Geom\+\_\+data\+\_\+pt, Must\+\_\+clean\+\_\+up, and oomph\+::\+Data\+::nvalue().
 
 \mbox{\Hypertarget{classoomph_1_1Ellipse_a23a5b259b37d9e41af6a6755d3b944cd}\label{classoomph_1_1Ellipse_a23a5b259b37d9e41af6a6755d3b944cd}} 
 \index{oomph::Ellipse@{oomph::Ellipse}!Ellipse@{Ellipse}}
@@ -106,11 +106,11 @@ Constructor\+: 1 Lagrangian coordinate, 2 Eulerian coords. Pass half axes A and 
 
 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00682}{682}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line 682 of file geom\+\_\+objects.\+h.
 
 
 
-References \mbox{\hyperlink{octree_8h_source_l00073}{oomph\+::\+Oc\+Tree\+Names\+::B}}, \mbox{\hyperlink{geom__objects_8h_source_l00853}{Geom\+\_\+data\+\_\+pt}}, and \mbox{\hyperlink{geom__objects_8h_source_l00856}{Must\+\_\+clean\+\_\+up}}.
+References oomph\+::\+Oc\+Tree\+Names\+::B, Geom\+\_\+data\+\_\+pt, and Must\+\_\+clean\+\_\+up.
 
 \mbox{\Hypertarget{classoomph_1_1Ellipse_a75f3c301372c52fa597789b1b422d5df}\label{classoomph_1_1Ellipse_a75f3c301372c52fa597789b1b422d5df}} 
 \index{oomph::Ellipse@{oomph::Ellipse}!Ellipse@{Ellipse}}
@@ -134,11 +134,11 @@ Destructor\+: Clean up if necessary.
 
 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00709}{709}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line 709 of file geom\+\_\+objects.\+h.
 
 
 
-References \mbox{\hyperlink{geom__objects_8h_source_l00853}{Geom\+\_\+data\+\_\+pt}}, and \mbox{\hyperlink{geom__objects_8h_source_l00856}{Must\+\_\+clean\+\_\+up}}.
+References Geom\+\_\+data\+\_\+pt, and Must\+\_\+clean\+\_\+up.
 
 
 
@@ -155,11 +155,11 @@ Access function for horizontal half axis.
 
 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00732}{732}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line 732 of file geom\+\_\+objects.\+h.
 
 
 
-References \mbox{\hyperlink{geom__objects_8h_source_l00853}{Geom\+\_\+data\+\_\+pt}}.
+References Geom\+\_\+data\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1Ellipse_aad24496ce678eea77c602c52d9eaa9a5}\label{classoomph_1_1Ellipse_aad24496ce678eea77c602c52d9eaa9a5}} 
 \index{oomph::Ellipse@{oomph::Ellipse}!b\_ellips@{b\_ellips}}
@@ -173,11 +173,11 @@ Access function for vertical half axis.
 
 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00738}{738}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line 738 of file geom\+\_\+objects.\+h.
 
 
 
-References \mbox{\hyperlink{geom__objects_8h_source_l00853}{Geom\+\_\+data\+\_\+pt}}.
+References Geom\+\_\+data\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1Ellipse_a19b6cecd9fcbcad1830a8a3c1e133672}\label{classoomph_1_1Ellipse_a19b6cecd9fcbcad1830a8a3c1e133672}} 
 \index{oomph::Ellipse@{oomph::Ellipse}!d2position@{d2position}}
@@ -195,11 +195,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_a08472dbe196123490e
 
 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00804}{804}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line 804 of file geom\+\_\+objects.\+h.
 
 
 
-References \mbox{\hyperlink{geom__objects_8h_source_l00853}{Geom\+\_\+data\+\_\+pt}}.
+References Geom\+\_\+data\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1Ellipse_a5cf7ea86ce09f7371e03fea52395cf3b}\label{classoomph_1_1Ellipse_a5cf7ea86ce09f7371e03fea52395cf3b}} 
 \index{oomph::Ellipse@{oomph::Ellipse}!d2position@{d2position}}
@@ -217,11 +217,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_a4fdbd372e26d448602
 
 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00817}{817}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line 817 of file geom\+\_\+objects.\+h.
 
 
 
-References \mbox{\hyperlink{geom__objects_8h_source_l00853}{Geom\+\_\+data\+\_\+pt}}.
+References Geom\+\_\+data\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1Ellipse_af8caf51de734dff257fa3dbde14fa167}\label{classoomph_1_1Ellipse_af8caf51de734dff257fa3dbde14fa167}} 
 \index{oomph::Ellipse@{oomph::Ellipse}!dposition@{dposition}}
@@ -239,17 +239,17 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_a91cd59efcb15971a29
 
 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00791}{791}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line 791 of file geom\+\_\+objects.\+h.
 
 
 
-References \mbox{\hyperlink{geom__objects_8h_source_l00853}{Geom\+\_\+data\+\_\+pt}}.
+References Geom\+\_\+data\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1Ellipse_ac293fd6830b55de7ad39df03ec3add2b}\label{classoomph_1_1Ellipse_ac293fd6830b55de7ad39df03ec3add2b}} 
+\mbox{\Hypertarget{classoomph_1_1Ellipse_a99f443c61294d5cd12a1412a8a3b0b3e}\label{classoomph_1_1Ellipse_a99f443c61294d5cd12a1412a8a3b0b3e}} 
 \index{oomph::Ellipse@{oomph::Ellipse}!geom\_data\_pt@{geom\_data\_pt}}
 \index{geom\_data\_pt@{geom\_data\_pt}!oomph::Ellipse@{oomph::Ellipse}}
 \doxysubsubsection{\texorpdfstring{geom\_data\_pt()}{geom\_data\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ oomph\+::\+Ellipse\+::geom\+\_\+data\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$ oomph\+::\+Ellipse\+::geom\+\_\+data\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -257,19 +257,19 @@ Return pointer to the j-\/th \mbox{\hyperlink{classoomph_1_1Data}{Data}} item th
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_a512b6e559414821452836a387cb34132}{oomph\+::\+Geom\+Object}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_ae1940fc6a3050e645c3882f2f6f3a202}{oomph\+::\+Geom\+Object}}.
 
 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00846}{846}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line 846 of file geom\+\_\+objects.\+h.
 
 
 
-References \mbox{\hyperlink{geom__objects_8h_source_l00853}{Geom\+\_\+data\+\_\+pt}}.
+References Geom\+\_\+data\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{geom__objects_8h_source_l00652}{Ellipse()}}.
+Referenced by Ellipse().
 
 \mbox{\Hypertarget{classoomph_1_1Ellipse_a7b89731ed0bbe563d323d0eb5e1e708c}\label{classoomph_1_1Ellipse_a7b89731ed0bbe563d323d0eb5e1e708c}} 
 \index{oomph::Ellipse@{oomph::Ellipse}!ngeom\_data@{ngeom\_data}}
@@ -287,11 +287,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_a19d325347e19964e12
 
 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00839}{839}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line 839 of file geom\+\_\+objects.\+h.
 
 
 
-References \mbox{\hyperlink{geom__objects_8h_source_l00853}{Geom\+\_\+data\+\_\+pt}}.
+References Geom\+\_\+data\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1Ellipse_a63a6243120fcccc330f2f07bc0dffe96}\label{classoomph_1_1Ellipse_a63a6243120fcccc330f2f07bc0dffe96}} 
 \index{oomph::Ellipse@{oomph::Ellipse}!operator=@{operator=}}
@@ -311,7 +311,7 @@ Broken assignment operator.
 
 
 
-Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous timestep. 
+Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t$>$0\+: previous timestep. 
 
 
 
@@ -319,11 +319,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_ad44a736d23dcd63af1
 
 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00756}{756}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line 756 of file geom\+\_\+objects.\+h.
 
 
 
-References \mbox{\hyperlink{geom__objects_8h_source_l00853}{Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{geom__objects_8h_source_l00856}{Must\+\_\+clean\+\_\+up}}, \mbox{\hyperlink{geom__objects_8h_source_l00745}{position()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}.
+References Geom\+\_\+data\+\_\+pt, Must\+\_\+clean\+\_\+up, position(), t, and oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1Ellipse_abf6972409206084dd1f517a535fb1b52}\label{classoomph_1_1Ellipse_abf6972409206084dd1f517a535fb1b52}} 
 \index{oomph::Ellipse@{oomph::Ellipse}!position@{position}}
@@ -341,15 +341,15 @@ Implements \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660f
 
 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00745}{745}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line 745 of file geom\+\_\+objects.\+h.
 
 
 
-References \mbox{\hyperlink{geom__objects_8h_source_l00853}{Geom\+\_\+data\+\_\+pt}}.
+References Geom\+\_\+data\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{geom__objects_8h_source_l00756}{position()}}, and \mbox{\hyperlink{annular__mesh_8template_8cc_source_l00037}{oomph\+::\+Two\+DAnnular\+Mesh$<$ ELEMENT $>$\+::wrap\+\_\+into\+\_\+annular\+\_\+shape()}}.
+Referenced by position(), and oomph\+::\+Two\+DAnnular\+Mesh$<$ ELEMENT $>$\+::wrap\+\_\+into\+\_\+annular\+\_\+shape().
 
 \mbox{\Hypertarget{classoomph_1_1Ellipse_a703231f987e418849146258eba183eb7}\label{classoomph_1_1Ellipse_a703231f987e418849146258eba183eb7}} 
 \index{oomph::Ellipse@{oomph::Ellipse}!set\_A\_ellips@{set\_A\_ellips}}
@@ -363,11 +363,11 @@ Set horizontal half axis.
 
 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00720}{720}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line 720 of file geom\+\_\+objects.\+h.
 
 
 
-References \mbox{\hyperlink{geom__objects_8h_source_l00853}{Geom\+\_\+data\+\_\+pt}}.
+References Geom\+\_\+data\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1Ellipse_a8c974f20a6e82951f07c66b3687550d2}\label{classoomph_1_1Ellipse_a8c974f20a6e82951f07c66b3687550d2}} 
 \index{oomph::Ellipse@{oomph::Ellipse}!set\_B\_ellips@{set\_B\_ellips}}
@@ -381,11 +381,11 @@ Set vertical half axis.
 
 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00726}{726}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line 726 of file geom\+\_\+objects.\+h.
 
 
 
-References \mbox{\hyperlink{geom__objects_8h_source_l00853}{Geom\+\_\+data\+\_\+pt}}.
+References Geom\+\_\+data\+\_\+pt.
 
 
 
@@ -402,11 +402,11 @@ References \mbox{\hyperlink{geom__objects_8h_source_l00853}{Geom\+\_\+data\+\_\+
 
 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00853}{853}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line 853 of file geom\+\_\+objects.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{geom__objects_8h_source_l00732}{a\+\_\+ellips()}}, \mbox{\hyperlink{geom__objects_8h_source_l00738}{b\+\_\+ellips()}}, \mbox{\hyperlink{geom__objects_8h_source_l00804}{d2position()}}, \mbox{\hyperlink{geom__objects_8h_source_l00791}{dposition()}}, \mbox{\hyperlink{geom__objects_8h_source_l00652}{Ellipse()}}, \mbox{\hyperlink{geom__objects_8h_source_l00846}{geom\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{geom__objects_8h_source_l00839}{ngeom\+\_\+data()}}, \mbox{\hyperlink{geom__objects_8h_source_l00745}{position()}}, \mbox{\hyperlink{geom__objects_8h_source_l00720}{set\+\_\+\+A\+\_\+ellips()}}, \mbox{\hyperlink{geom__objects_8h_source_l00726}{set\+\_\+\+B\+\_\+ellips()}}, and \mbox{\hyperlink{geom__objects_8h_source_l00709}{$\sim$\+Ellipse()}}.
+Referenced by a\+\_\+ellips(), b\+\_\+ellips(), d2position(), dposition(), Ellipse(), geom\+\_\+data\+\_\+pt(), ngeom\+\_\+data(), position(), set\+\_\+\+A\+\_\+ellips(), set\+\_\+\+B\+\_\+ellips(), and $\sim$\+Ellipse().
 
 \mbox{\Hypertarget{classoomph_1_1Ellipse_ad21b2c34858b46d6bff5f25f02bbe3d9}\label{classoomph_1_1Ellipse_ad21b2c34858b46d6bff5f25f02bbe3d9}} 
 \index{oomph::Ellipse@{oomph::Ellipse}!Must\_clean\_up@{Must\_clean\_up}}
@@ -420,11 +420,11 @@ Do I need to clean up?
 
 
 
-Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00856}{856}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+Definition at line 856 of file geom\+\_\+objects.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{geom__objects_8h_source_l00652}{Ellipse()}}, \mbox{\hyperlink{geom__objects_8h_source_l00756}{position()}}, and \mbox{\hyperlink{geom__objects_8h_source_l00709}{$\sim$\+Ellipse()}}.
+Referenced by Ellipse(), position(), and $\sim$\+Ellipse().
 
 
 

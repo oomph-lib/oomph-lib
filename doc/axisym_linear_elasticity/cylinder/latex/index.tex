@@ -81,7 +81,7 @@ As usual, we define all non-\/dimensional parameters in a namespace. In this nam
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_Global\_Parameters\_namespace===============================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for global parameters}}
-\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Parameters}{Global\_Parameters}}}
 \DoxyCodeLine{\{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Define Poisson's ratio Nu}}
@@ -156,7 +156,7 @@ As usual, we define all non-\/dimensional parameters in a namespace. In this nam
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Calculate the time dependent form of the r-\/component of displacement}}
+\DoxyCodeLine{ \textcolor{comment}{/// Calculate the time dependent form of the r-\/component of displacement}}
 \DoxyCodeLine{ \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Parameters_ae600c7d1b0928a5cb532fa3a93bab338}{u\_r}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double} \&time, \textcolor{keyword}{const} Vector<double> \&x)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   Vector<double> displ(3);}
@@ -174,7 +174,7 @@ We start by creating a {\ttfamily Doc\+Info} object that will be used to output 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_main======================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver code }}
-\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{cylinder_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ \textcolor{comment}{// Store command line arguments}}
@@ -279,8 +279,8 @@ The problem class is very simple, and similarly to other problems with Neumann c
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_problem\_class=============================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Class to validate time harmonic linear elasticity (Fourier }\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// decomposed)}}
+\DoxyCodeLine{\textcolor{comment}{/// Class to validate time harmonic linear elasticity (Fourier }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// decomposed)}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classAxisymmetricLinearElasticityProblem}{AxisymmetricLinearElasticityProblem}} : \textcolor{keyword}{public} Problem}
@@ -335,8 +335,8 @@ The problem constructor creates the mesh objects (which in turn create the eleme
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_constructor=============================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Problem constructor: Pass number of elements in coordinate}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// directions and size of domain.}}
+\DoxyCodeLine{\textcolor{comment}{/// Problem constructor: Pass number of elements in coordinate}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// directions and size of domain.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\mbox{\hyperlink{classAxisymmetricLinearElasticityProblem_aaa4da18227b8b20dfba1f67bad4907ed}{AxisymmetricLinearElasticityProblem<ELEMENT, TIMESTEPPER>::}}}
@@ -438,7 +438,7 @@ We create the face elements that apply the traction to the boundary $ r=r_\mathr
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_traction===============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Make traction elements along the boundary r=Rmin}}
-\DoxyCodeLine{\textcolor{comment}{//===================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//===================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classAxisymmetricLinearElasticityProblem_ab0cfde2632d6711b75744bcc2644ae04}{AxisymmetricLinearElasticityProblem<ELEMENT, TIMESTEPPER>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classAxisymmetricLinearElasticityProblem_ab0cfde2632d6711b75744bcc2644ae04}{assign\_traction\_elements}}()}
@@ -476,7 +476,7 @@ If we\textquotesingle{}re doing an impulsive start, set the displacement, veloci
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_set\_initial\_conditions=================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Set the initial conditions (history values)}}
-\DoxyCodeLine{\textcolor{comment}{//===================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//===================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classAxisymmetricLinearElasticityProblem_a6b0263b6f783652a1d8151948f4b9430}{AxisymmetricLinearElasticityProblem<ELEMENT, TIMESTEPPER>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classAxisymmetricLinearElasticityProblem_a6b0263b6f783652a1d8151948f4b9430}{set\_initial\_conditions}}()}
@@ -576,7 +576,7 @@ This member function documents the computed solution to file and calculates the 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_doc\_solution=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classAxisymmetricLinearElasticityProblem_a370b76b9e2902242de018339d3aedd04}{AxisymmetricLinearElasticityProblem<ELEMENT, TIMESTEPPER>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classAxisymmetricLinearElasticityProblem_a370b76b9e2902242de018339d3aedd04}{doc\_solution}}(DocInfo\& doc\_info)}

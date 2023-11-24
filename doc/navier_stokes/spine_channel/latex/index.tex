@@ -88,7 +88,7 @@ The Reynolds number is the only parameter in this problem. As usual, we define a
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_namespace===================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for physical parameters}}
-\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -107,7 +107,7 @@ We start by creating a {\ttfamily Doc\+Info} object to define the output directo
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_main======================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver for channel flow problem with spine mesh.}}
-\DoxyCodeLine{\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{spine__channel_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
@@ -117,7 +117,7 @@ We start by creating a {\ttfamily Doc\+Info} object to define the output directo
 \DoxyCodeLine{ doc\_info.number()=0;}
 
 \end{DoxyCodeInclude}
- When using spines, we must use elements augmented by the {\ttfamily Spine\+Element$<$\+ELEMENT$>$} class. This class, adds the functionality to be updated using the method of spines (i.\+e storing a vector of pointers to the spines and allocating equations numbers associated with the spines degrees of freedom). We build the problem using {\ttfamily Spine\+Element$<$\+Tayloor\+Hood\+Element$<$2$>$$>$}.
+ When using spines, we must use elements augmented by the {\ttfamily Spine\+Element$<$\+ELEMENT$>$} class. This class, adds the functionality to be updated using the method of spines (i.\+e storing a vector of pointers to the spines and allocating equations numbers associated with the spines degrees of freedom). We build the problem using {\ttfamily Spine\+Element$<$Tayloor\+Hood\+Element$<$2$>$$>$}.
 
 We now build and solve the problem with Spine-\/\+Taylor-\/\+Hood elements, then repeat for Spine-\/\+Crouzeix-\/\+Raviart elements.
 
@@ -171,8 +171,8 @@ The problem class for this example is very similar to our previous \href{../../d
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_problem\_class============================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Channel flow through a non-\/uniform channel whose geometry is defined }\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// by a spine mesh.}}
+\DoxyCodeLine{\textcolor{comment}{/// Channel flow through a non-\/uniform channel whose geometry is defined }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// by a spine mesh.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classChannelSpineFlowProblem}{ChannelSpineFlowProblem}} : \textcolor{keyword}{public} Problem}
@@ -191,7 +191,7 @@ The problem class for this example is very similar to our previous \href{../../d
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classChannelSpineFlowProblem_aaf6dd8a8a472ccd938df579aba61ec97}{actions\_before\_newton\_solve}}()}
 \DoxyCodeLine{  \{ }
 \DoxyCodeLine{   \textcolor{comment}{// Update the mesh}}
-\DoxyCodeLine{   \mbox{\hyperlink{classChannelSpineFlowProblem_a6f3a60eb5d2f2a0eccb9b40848d4387d}{mesh\_pt}}()-\/>node\_update();}
+\DoxyCodeLine{   \mbox{\hyperlink{classChannelSpineFlowProblem_ab68c7ab5406b90a0ef56c39b67f83a09}{mesh\_pt}}()-\/>node\_update();}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \} \textcolor{comment}{// end\_of\_actions\_before\_newton\_solve}}
 \DoxyCodeLine{}
@@ -222,7 +222,7 @@ We begin by setting all the mesh parameters, and building it.
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_constructor==================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for ChannelSpineFlow problem }}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classChannelSpineFlowProblem_a23f1b987e3395b1d101eaf3f3b5c94b2}{ChannelSpineFlowProblem<ELEMENT>::ChannelSpineFlowProblem}}()}
 \DoxyCodeLine{\{ }
@@ -431,7 +431,7 @@ To begin, we create a new class templated by a element and inheriting from {\ttf
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{    /// Number of elements in the left region}}
+\DoxyCodeLine{    \textcolor{comment}{/// Number of elements in the left region}}
 \DoxyCodeLine{    \textcolor{keywordtype}{unsigned} Nx0;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{    /// Number of elements in the centre region}}

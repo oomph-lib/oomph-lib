@@ -24,15 +24,15 @@ virtual \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateMesh_ab835a8aeb9dae
 \begin{DoxyCompactList}\small\item\em Virtual destructor (empty) \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateMesh_a48f9d0f8bb5d67c2f96e91c76bfc61f8}{Macro\+Element\+Node\+Update\+Mesh}} (const \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateMesh}{Macro\+Element\+Node\+Update\+Mesh}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Domain}{Domain}} $\ast$\& \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateMesh_aadb1bf7d9de16c2ab2e6c0ffb36a806e}{macro\+\_\+domain\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1Domain}{Domain}} $\ast$\& \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateMesh_af3b019d6a195493a7feb7f03832bb6fd}{macro\+\_\+domain\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateMesh_ab5271c4514bcd236271307361423ac9d}{node\+\_\+update}} (const bool \&update\+\_\+all\+\_\+solid\+\_\+nodes=false)
 \begin{DoxyCompactList}\small\item\em Update all nodal positions via sparse Macro\+Element-\/based update functions. If a \mbox{\hyperlink{classoomph_1_1Node}{Node}} is hanging its position is updated after updating the position of its masters first. \mbox{[}Doesn\textquotesingle{}t make sense to use this mesh with Solid\+Elements anyway, so we buffer the case if update\+\_\+all\+\_\+solid\+\_\+nodes is set to true.\mbox{]}. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateMesh_a7cb22fc156610a84e45981eff99cde54}{distribute}} (\mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} $\ast$comm\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&element\+\_\+domain, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$ $>$ \&deleted\+\_\+element\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} \&doc\+\_\+info, const bool \&report\+\_\+stats, const bool \&overrule\+\_\+keep\+\_\+as\+\_\+halo\+\_\+element\+\_\+status)
 \begin{DoxyCompactList}\small\item\em Overload the base class distribute function to deal with halo nodes on halo elements that may have pointers to macro elements that no longer exist. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateMesh_a28f1505ed1e507018271c5e7c7cbecde}{set\+\_\+geom\+\_\+object\+\_\+vector\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateMesh_aa550e97598d235eb609bd004d8dbfff2}{geom\+\_\+object\+\_\+vector\+\_\+pt}})
+void \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateMesh_a28f1505ed1e507018271c5e7c7cbecde}{set\+\_\+geom\+\_\+object\+\_\+vector\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateMesh_ac533cc3ab7ae1d1c03cefba50ad5acff}{geom\+\_\+object\+\_\+vector\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Set geometric objects associated with \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateMesh}{Macro\+Element\+Node\+Update\+Mesh}}; this must also be called from the constructor of each derived mesh. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateMesh_aa550e97598d235eb609bd004d8dbfff2}{geom\+\_\+object\+\_\+vector\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateMesh_ac533cc3ab7ae1d1c03cefba50ad5acff}{geom\+\_\+object\+\_\+vector\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function to the vector of \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -47,7 +47,7 @@ void \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateMesh_a28f1505ed1e50701
 \doxysubsection{Detailed Description}
 Macro\+Element\+Node\+Update\+Meshes contain Macro\+Element\+Node\+Update\+Nodes which have their own node update functions. When the node\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateMesh_ab5271c4514bcd236271307361423ac9d}{node\+\_\+update()}} function is called, they also perform any auxiliary update functions, e.\+g. to update no-\/slip boundary conditions on moving domain boundaries. 
 
-Definition at line \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00359}{359}} of file \mbox{\hyperlink{macro__element__node__update__element_8h_source}{macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h}}.
+Definition at line 359 of file macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h.
 
 
 
@@ -64,7 +64,7 @@ Constructor (empty)
 
 
 
-Definition at line \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00363}{363}} of file \mbox{\hyperlink{macro__element__node__update__element_8h_source}{macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h}}.
+Definition at line 363 of file macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1MacroElementNodeUpdateMesh_ab835a8aeb9dae5cf468f02a149fa04c5}\label{classoomph_1_1MacroElementNodeUpdateMesh_ab835a8aeb9dae5cf468f02a149fa04c5}} 
 \index{oomph::MacroElementNodeUpdateMesh@{oomph::MacroElementNodeUpdateMesh}!````~MacroElementNodeUpdateMesh@{$\sim$MacroElementNodeUpdateMesh}}
@@ -78,7 +78,7 @@ Virtual destructor (empty)
 
 
 
-Definition at line \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00366}{366}} of file \mbox{\hyperlink{macro__element__node__update__element_8h_source}{macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h}}.
+Definition at line 366 of file macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1MacroElementNodeUpdateMesh_a48f9d0f8bb5d67c2f96e91c76bfc61f8}\label{classoomph_1_1MacroElementNodeUpdateMesh_a48f9d0f8bb5d67c2f96e91c76bfc61f8}} 
 \index{oomph::MacroElementNodeUpdateMesh@{oomph::MacroElementNodeUpdateMesh}!MacroElementNodeUpdateMesh@{MacroElementNodeUpdateMesh}}
@@ -109,17 +109,17 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Mesh_adeef6d5b1de197aab956025b
 
 
 
-Definition at line \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00465}{465}} of file \mbox{\hyperlink{macro__element__node__update__element_8h_source}{macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h}}.
+Definition at line 465 of file macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{mesh_8cc_source_l04959}{oomph\+::\+Mesh\+::distribute()}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00227}{oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::geom\+\_\+object\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l01740}{oomph\+::\+Mesh\+::halo\+\_\+element\+\_\+pt()}}, and \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElementBase_aa2408d8463e8cecc2ad12a93e10390b1}{oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::set\+\_\+node\+\_\+update\+\_\+info()}}.
+References oomph\+::\+Mesh\+::distribute(), e, oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::geom\+\_\+object\+\_\+pt(), oomph\+::\+Mesh\+::halo\+\_\+element\+\_\+pt(), and oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::set\+\_\+node\+\_\+update\+\_\+info().
 
-\mbox{\Hypertarget{classoomph_1_1MacroElementNodeUpdateMesh_aa550e97598d235eb609bd004d8dbfff2}\label{classoomph_1_1MacroElementNodeUpdateMesh_aa550e97598d235eb609bd004d8dbfff2}} 
+\mbox{\Hypertarget{classoomph_1_1MacroElementNodeUpdateMesh_ac533cc3ab7ae1d1c03cefba50ad5acff}\label{classoomph_1_1MacroElementNodeUpdateMesh_ac533cc3ab7ae1d1c03cefba50ad5acff}} 
 \index{oomph::MacroElementNodeUpdateMesh@{oomph::MacroElementNodeUpdateMesh}!geom\_object\_vector\_pt@{geom\_object\_vector\_pt}}
 \index{geom\_object\_vector\_pt@{geom\_object\_vector\_pt}!oomph::MacroElementNodeUpdateMesh@{oomph::MacroElementNodeUpdateMesh}}
 \doxysubsubsection{\texorpdfstring{geom\_object\_vector\_pt()}{geom\_object\_vector\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$ $>$ oomph\+::\+Macro\+Element\+Node\+Update\+Mesh\+::geom\+\_\+object\+\_\+vector\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}$\ast$$>$ oomph\+::\+Macro\+Element\+Node\+Update\+Mesh\+::geom\+\_\+object\+\_\+vector\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -127,21 +127,21 @@ Access function to the vector of \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom
 
 
 
-Definition at line \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00516}{516}} of file \mbox{\hyperlink{macro__element__node__update__element_8h_source}{macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h}}.
+Definition at line 516 of file macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00524}{Geom\+\_\+object\+\_\+vector\+\_\+pt}}.
+References Geom\+\_\+object\+\_\+vector\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l02068}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{missing__masters_8template_8cc_source_l00251}{oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01452}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{missing__masters_8cc_source_l01298}{oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l19416}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::construct\+\_\+new\+\_\+halo\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l27905}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::construct\+\_\+new\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper()}}, and \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00510}{set\+\_\+geom\+\_\+object\+\_\+vector\+\_\+pt()}}.
+Referenced by oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::construct\+\_\+new\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::construct\+\_\+new\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper(), and set\+\_\+geom\+\_\+object\+\_\+vector\+\_\+pt().
 
-\mbox{\Hypertarget{classoomph_1_1MacroElementNodeUpdateMesh_aadb1bf7d9de16c2ab2e6c0ffb36a806e}\label{classoomph_1_1MacroElementNodeUpdateMesh_aadb1bf7d9de16c2ab2e6c0ffb36a806e}} 
+\mbox{\Hypertarget{classoomph_1_1MacroElementNodeUpdateMesh_af3b019d6a195493a7feb7f03832bb6fd}\label{classoomph_1_1MacroElementNodeUpdateMesh_af3b019d6a195493a7feb7f03832bb6fd}} 
 \index{oomph::MacroElementNodeUpdateMesh@{oomph::MacroElementNodeUpdateMesh}!macro\_domain\_pt@{macro\_domain\_pt}}
 \index{macro\_domain\_pt@{macro\_domain\_pt}!oomph::MacroElementNodeUpdateMesh@{oomph::MacroElementNodeUpdateMesh}}
 \doxysubsubsection{\texorpdfstring{macro\_domain\_pt()}{macro\_domain\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Domain}{Domain}} $\ast$\& oomph\+::\+Macro\+Element\+Node\+Update\+Mesh\+::macro\+\_\+domain\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Domain}{Domain}}$\ast$\& oomph\+::\+Macro\+Element\+Node\+Update\+Mesh\+::macro\+\_\+domain\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -149,15 +149,15 @@ Broken assignment operator.
 
 Access to Macro\+\_\+domain\+\_\+pt for \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateMesh}{Macro\+Element\+Node\+Update\+Mesh}}; this must be filled in by any mesh which inherits from here 
 
-Definition at line \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00376}{376}} of file \mbox{\hyperlink{macro__element__node__update__element_8h_source}{macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h}}.
+Definition at line 376 of file macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00527}{Macro\+\_\+domain\+\_\+pt}}.
+References Macro\+\_\+domain\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l02068}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{missing__masters_8template_8cc_source_l00251}{oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l01677}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::create\+\_\+external\+\_\+halo\+\_\+elements()}}, \mbox{\hyperlink{channel__with__leaflet__mesh_8template_8h_source_l00180}{oomph\+::\+Macro\+Element\+Node\+Update\+Channel\+With\+Leaflet\+Mesh$<$ ELEMENT $>$\+::\+Macro\+Element\+Node\+Update\+Channel\+With\+Leaflet\+Mesh()}}, \mbox{\hyperlink{collapsible__channel__mesh_8template_8h_source_l00247}{oomph\+::\+Macro\+Element\+Node\+Update\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::\+Macro\+Element\+Node\+Update\+Collapsible\+Channel\+Mesh()}}, \mbox{\hyperlink{fish__mesh_8template_8h_source_l00205}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh$<$ ELEMENT $>$\+::\+Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh()}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8h_source_l00344}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+macro\+\_\+element\+\_\+node\+\_\+update()}}, and \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00325}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+macro\+\_\+element\+\_\+node\+\_\+update()}}.
+Referenced by oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::create\+\_\+external\+\_\+halo\+\_\+elements(), oomph\+::\+Macro\+Element\+Node\+Update\+Channel\+With\+Leaflet\+Mesh$<$ ELEMENT $>$\+::\+Macro\+Element\+Node\+Update\+Channel\+With\+Leaflet\+Mesh(), oomph\+::\+Macro\+Element\+Node\+Update\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::\+Macro\+Element\+Node\+Update\+Collapsible\+Channel\+Mesh(), oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh$<$ ELEMENT $>$\+::\+Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh(), oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+macro\+\_\+element\+\_\+node\+\_\+update(), and oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+macro\+\_\+element\+\_\+node\+\_\+update().
 
 \mbox{\Hypertarget{classoomph_1_1MacroElementNodeUpdateMesh_ab5271c4514bcd236271307361423ac9d}\label{classoomph_1_1MacroElementNodeUpdateMesh_ab5271c4514bcd236271307361423ac9d}} 
 \index{oomph::MacroElementNodeUpdateMesh@{oomph::MacroElementNodeUpdateMesh}!node\_update@{node\_update}}
@@ -175,19 +175,19 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Mesh_a95bf112e5e1b3892e70a41f9
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableFishMesh_a1008dd9faa50699dcef68c8c35d6979c}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh$<$ ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh_a99403c711c3fdc2a601b478deebef9fe}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$}}, and \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableQuarterTubeMesh_a6255c22765a484ac11642ade0c084082}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableQuarterTubeMesh_a6255c22765a484ac11642ade0c084082}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh_a99403c711c3fdc2a601b478deebef9fe}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$}}, and \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableFishMesh_a1008dd9faa50699dcef68c8c35d6979c}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh$<$ ELEMENT $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00387}{387}} of file \mbox{\hyperlink{macro__element__node__update__element_8h_source}{macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h}}.
+Definition at line 387 of file macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{mesh_8h_source_l00135}{oomph\+::\+Mesh\+::\+External\+\_\+halo\+\_\+node\+\_\+pt}}, \mbox{\hyperlink{mesh_8h_source_l02377}{oomph\+::\+Mesh\+::external\+\_\+halo\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l02308}{oomph\+::\+Mesh\+::nexternal\+\_\+halo\+\_\+node()}}, \mbox{\hyperlink{mesh_8h_source_l00596}{oomph\+::\+Mesh\+::nnode()}}, \mbox{\hyperlink{mesh_8h_source_l00436}{oomph\+::\+Mesh\+::node\+\_\+pt()}}, \mbox{\hyperlink{macro__element__node__update__element_8cc_source_l00048}{oomph\+::\+Macro\+Element\+Node\+Update\+Node\+::node\+\_\+update()}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
+References oomph\+::\+Mesh\+::\+External\+\_\+halo\+\_\+node\+\_\+pt, oomph\+::\+Mesh\+::external\+\_\+halo\+\_\+node\+\_\+pt(), oomph\+::\+Mesh\+::nexternal\+\_\+halo\+\_\+node(), oomph\+::\+Mesh\+::nnode(), oomph\+::\+Mesh\+::node\+\_\+pt(), oomph\+::\+Macro\+Element\+Node\+Update\+Node\+::node\+\_\+update(), and oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
 
 
 
-Referenced by \mbox{\hyperlink{fish__mesh_8template_8h_source_l00291}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update()}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8h_source_l00318}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update()}}, and \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00299}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update()}}.
+Referenced by oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update(), oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update(), and oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update().
 
 \mbox{\Hypertarget{classoomph_1_1MacroElementNodeUpdateMesh_a28f1505ed1e507018271c5e7c7cbecde}\label{classoomph_1_1MacroElementNodeUpdateMesh_a28f1505ed1e507018271c5e7c7cbecde}} 
 \index{oomph::MacroElementNodeUpdateMesh@{oomph::MacroElementNodeUpdateMesh}!set\_geom\_object\_vector\_pt@{set\_geom\_object\_vector\_pt}}
@@ -201,15 +201,15 @@ Set geometric objects associated with \mbox{\hyperlink{classoomph_1_1MacroElemen
 
 
 
-Definition at line \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00510}{510}} of file \mbox{\hyperlink{macro__element__node__update__element_8h_source}{macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h}}.
+Definition at line 510 of file macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00516}{geom\+\_\+object\+\_\+vector\+\_\+pt()}}, and \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00524}{Geom\+\_\+object\+\_\+vector\+\_\+pt}}.
+References geom\+\_\+object\+\_\+vector\+\_\+pt(), and Geom\+\_\+object\+\_\+vector\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{channel__with__leaflet__mesh_8template_8h_source_l00180}{oomph\+::\+Macro\+Element\+Node\+Update\+Channel\+With\+Leaflet\+Mesh$<$ ELEMENT $>$\+::\+Macro\+Element\+Node\+Update\+Channel\+With\+Leaflet\+Mesh()}}, \mbox{\hyperlink{collapsible__channel__mesh_8template_8h_source_l00247}{oomph\+::\+Macro\+Element\+Node\+Update\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::\+Macro\+Element\+Node\+Update\+Collapsible\+Channel\+Mesh()}}, \mbox{\hyperlink{fish__mesh_8template_8h_source_l00205}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh$<$ ELEMENT $>$\+::\+Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh()}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8h_source_l00344}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+macro\+\_\+element\+\_\+node\+\_\+update()}}, and \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00325}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+macro\+\_\+element\+\_\+node\+\_\+update()}}.
+Referenced by oomph\+::\+Macro\+Element\+Node\+Update\+Channel\+With\+Leaflet\+Mesh$<$ ELEMENT $>$\+::\+Macro\+Element\+Node\+Update\+Channel\+With\+Leaflet\+Mesh(), oomph\+::\+Macro\+Element\+Node\+Update\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::\+Macro\+Element\+Node\+Update\+Collapsible\+Channel\+Mesh(), oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh$<$ ELEMENT $>$\+::\+Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh(), oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+macro\+\_\+element\+\_\+node\+\_\+update(), and oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+macro\+\_\+element\+\_\+node\+\_\+update().
 
 
 
@@ -226,11 +226,11 @@ Referenced by \mbox{\hyperlink{channel__with__leaflet__mesh_8template_8h_source_
 
 
 
-Definition at line \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00524}{524}} of file \mbox{\hyperlink{macro__element__node__update__element_8h_source}{macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h}}.
+Definition at line 524 of file macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00516}{geom\+\_\+object\+\_\+vector\+\_\+pt()}}, and \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00510}{set\+\_\+geom\+\_\+object\+\_\+vector\+\_\+pt()}}.
+Referenced by geom\+\_\+object\+\_\+vector\+\_\+pt(), and set\+\_\+geom\+\_\+object\+\_\+vector\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1MacroElementNodeUpdateMesh_a27a421ccba8fb0d180f3250da82b2a15}\label{classoomph_1_1MacroElementNodeUpdateMesh_a27a421ccba8fb0d180f3250da82b2a15}} 
 \index{oomph::MacroElementNodeUpdateMesh@{oomph::MacroElementNodeUpdateMesh}!Macro\_domain\_pt@{Macro\_domain\_pt}}
@@ -244,11 +244,11 @@ Referenced by \mbox{\hyperlink{macro__element__node__update__element_8h_source_l
 
 
 
-Definition at line \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00527}{527}} of file \mbox{\hyperlink{macro__element__node__update__element_8h_source}{macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h}}.
+Definition at line 527 of file macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00376}{macro\+\_\+domain\+\_\+pt()}}.
+Referenced by macro\+\_\+domain\+\_\+pt().
 
 
 

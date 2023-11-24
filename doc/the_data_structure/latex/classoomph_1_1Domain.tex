@@ -26,7 +26,7 @@ void \mbox{\hyperlink{classoomph_1_1Domain_a33de7a18dd8ff992dc7faf068197ff50}{op
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1Domain_afd6c101003640d74becabcd8f1dcbc67}{$\sim$\+Domain}} ()
 \begin{DoxyCompactList}\small\item\em Destructor\+: Strictly speaking, whoever creates an object dynamically should be responsible for the cleanup of said object but it makes sense here for the \mbox{\hyperlink{classoomph_1_1Domain}{Domain}} to generically kill any Macro\+Elements left over in the \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} container (if it hasn\textquotesingle{}t already been done in the derived class) to avoid memory leaks. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} $\ast$ \mbox{\hyperlink{classoomph_1_1Domain_abef3886384a9b9e722e490268feecc2d}{macro\+\_\+element\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} $\ast$ \mbox{\hyperlink{classoomph_1_1Domain_a9d8ca47c89812a0d6dda0b9142441efc}{macro\+\_\+element\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Access to i-\/th macro element. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1Domain_a3ed63583615d0e8471d95ba13ccc0aff}{nmacro\+\_\+element}} ()
 \begin{DoxyCompactList}\small\item\em Number of macro elements in domain. \end{DoxyCompactList}\item 
@@ -35,7 +35,7 @@ void \mbox{\hyperlink{classoomph_1_1Domain_a7b0c50db44e3bc3c8ae1a0d34ac835c8}{ou
 void \mbox{\hyperlink{classoomph_1_1Domain_ab7ccc375ba2e46ffb11e4e2c5c485578}{output}} (std\+::ostream \&outfile, const unsigned \&nplot)
 \begin{DoxyCompactList}\small\item\em Output macro elements. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1Domain_a95f3e00d28ea37e6c4d3027bfac91096}{macro\+\_\+element\+\_\+boundary}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&i\+\_\+macro, const unsigned \&i\+\_\+direct, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&f)=0
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} representation of the i\+\_\+macro-\/th macro element boundary i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D) at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous)\+: f(s) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} representation of the i\+\_\+macro-\/th macro element boundary i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D) at time level t (t=0\+: present; t$>$0\+: previous)\+: f(s) \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1Domain_a10142c029e8a57c5470d22701518e9d1}{macro\+\_\+element\+\_\+boundary}} (const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&i\+\_\+macro, const unsigned \&i\+\_\+direct, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} representation of the i\+\_\+macro-\/th macro element boundary i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D) at continuous time, t. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1Domain_a9d293b736e74bfeace64c1c8858add8a}{macro\+\_\+element\+\_\+boundary}} (const unsigned \&i\+\_\+macro, const unsigned \&i\+\_\+direct, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&f)
@@ -45,13 +45,13 @@ void \mbox{\hyperlink{classoomph_1_1Domain_ac663be35932981a1c02b3ed930ec2eda}{ou
 void \mbox{\hyperlink{classoomph_1_1Domain_a59dfe3a2cff10aa2e12f86dba9584f15}{output\+\_\+macro\+\_\+element\+\_\+boundaries}} (std\+::ostream \&outfile, const unsigned \&nplot)
 \begin{DoxyCompactList}\small\item\em Output all macro element boundaries as tecplot zones. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1Domain_ae573c54363a8e9d33951e59208a9bc39}{dmacro\+\_\+element\+\_\+boundary}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&i\+\_\+macro, const unsigned \&i\+\_\+direct, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&f)
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} representation of the i\+\_\+macro-\/th macro element boundary derivatives i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D) at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous)\+: f(s). Broken virtual. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} representation of the i\+\_\+macro-\/th macro element boundary derivatives i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D) at time level t (t=0\+: present; t$>$0\+: previous)\+: f(s). Broken virtual. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1Domain_af4de3686bcfbf5a8e98b92a071607e0f}{dmacro\+\_\+element\+\_\+boundary}} (const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&i\+\_\+macro, const unsigned \&i\+\_\+direct, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} representation of the i\+\_\+macro-\/th macro element boundary derivatives i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D) at continuous time level t. Broken virtual. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1Domain_a6973f0ef86b83c6cadcd722374c62270}{dmacro\+\_\+element\+\_\+boundary}} (const unsigned \&i\+\_\+macro, const unsigned \&i\+\_\+direct, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} representation of the i\+\_\+macro-\/th macro element boundary derivatives i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D) at current time\+: f(s). \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1Domain_afeeb40f9179abe710f14effbe4db42a1}{d2macro\+\_\+element\+\_\+boundary}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&i\+\_\+macro, const unsigned \&i\+\_\+direct, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&f)
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} representation of the i\+\_\+macro-\/th macro element boundary second derivatives i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D) at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous)\+: f(s). Broken virtual. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} representation of the i\+\_\+macro-\/th macro element boundary second derivatives i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D) at time level t (t=0\+: present; t$>$0\+: previous)\+: f(s). Broken virtual. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1Domain_a645d0e40b2e378eca3b6230741b21169}{d2macro\+\_\+element\+\_\+boundary}} (const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&i\+\_\+macro, const unsigned \&i\+\_\+direct, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} representation of the i\+\_\+macro-\/th macro element boundary seocond derivatives i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D) at continuous time level t. Broken virtual. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1Domain_a837d82e917451ca9adc755aa99ad99a2}{d2macro\+\_\+element\+\_\+boundary}} (const unsigned \&i\+\_\+macro, const unsigned \&i\+\_\+direct, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&f)
@@ -73,7 +73,7 @@ Base class for Domains with curvilinear and/or time-\/dependent boundaries. \mbo
 \end{DoxyCode}
  which returns a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} representation of each of the \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} s\textquotesingle{} boundaries, parametrised by the coordinate(s) along this boundary. For instance, in the above example, the eastern boundary of \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} 1 is given by the appropriate fraction of the curvilinear boundary; its northern boundary (which coincides with the southern boundary of \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} 2) is given by the straight line emanating from the curvilinear boundary, etc. The \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} s obtain their boundary positions via member function pointers to {\ttfamily Domain\+::macro\+\_\+element\+\_\+boundary(...)}. 
 
-Definition at line \mbox{\hyperlink{domain_8h_source_l00066}{66}} of file \mbox{\hyperlink{domain_8h_source}{domain.\+h}}.
+Definition at line 66 of file domain.\+h.
 
 
 
@@ -90,11 +90,11 @@ Constructor.
 
 
 
-Definition at line \mbox{\hyperlink{domain_8h_source_l00070}{70}} of file \mbox{\hyperlink{domain_8h_source}{domain.\+h}}.
+Definition at line 70 of file domain.\+h.
 
 
 
-References \mbox{\hyperlink{domain_8h_source_l00301}{Macro\+\_\+element\+\_\+pt}}.
+References Macro\+\_\+element\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1Domain_ad3ae60cfff2bc9595d942c6891aefb8a}\label{classoomph_1_1Domain_ad3ae60cfff2bc9595d942c6891aefb8a}} 
 \index{oomph::Domain@{oomph::Domain}!Domain@{Domain}}
@@ -118,11 +118,11 @@ Destructor\+: Strictly speaking, whoever creates an object dynamically should be
 
 
 
-Definition at line \mbox{\hyperlink{domain_8h_source_l00087}{87}} of file \mbox{\hyperlink{domain_8h_source}{domain.\+h}}.
+Definition at line 87 of file domain.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{domain_8h_source_l00301}{Macro\+\_\+element\+\_\+pt}}.
+References i, and Macro\+\_\+element\+\_\+pt.
 
 
 
@@ -139,7 +139,7 @@ References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink
 
 
 
-Definition at line \mbox{\hyperlink{domain_8h_source_l00273}{273}} of file \mbox{\hyperlink{domain_8h_source}{domain.\+h}}.
+Definition at line 273 of file domain.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Domain_a837d82e917451ca9adc755aa99ad99a2}\label{classoomph_1_1Domain_a837d82e917451ca9adc755aa99ad99a2}} 
 \index{oomph::Domain@{oomph::Domain}!d2macro\_element\_boundary@{d2macro\_element\_boundary}}
@@ -153,11 +153,11 @@ Definition at line \mbox{\hyperlink{domain_8h_source_l00273}{273}} of file \mbox
 
 
 
-Definition at line \mbox{\hyperlink{domain_8h_source_l00288}{288}} of file \mbox{\hyperlink{domain_8h_source}{domain.\+h}}.
+Definition at line 288 of file domain.\+h.
 
 
 
-References \mbox{\hyperlink{domain_8h_source_l00258}{d2macro\+\_\+element\+\_\+boundary()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+References d2macro\+\_\+element\+\_\+boundary(), s, and t.
 
 \mbox{\Hypertarget{classoomph_1_1Domain_afeeb40f9179abe710f14effbe4db42a1}\label{classoomph_1_1Domain_afeeb40f9179abe710f14effbe4db42a1}} 
 \index{oomph::Domain@{oomph::Domain}!d2macro\_element\_boundary@{d2macro\_element\_boundary}}
@@ -167,7 +167,7 @@ References \mbox{\hyperlink{domain_8h_source_l00258}{d2macro\+\_\+element\+\_\+b
 
 
 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} representation of the i\+\_\+macro-\/th macro element boundary second derivatives i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D) at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous)\+: f(s). Broken virtual. 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} representation of the i\+\_\+macro-\/th macro element boundary second derivatives i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D) at time level t (t=0\+: present; t$>$0\+: previous)\+: f(s). Broken virtual. 
 
 
 
@@ -175,11 +175,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a
 
 
 
-Definition at line \mbox{\hyperlink{domain_8h_source_l00258}{258}} of file \mbox{\hyperlink{domain_8h_source}{domain.\+h}}.
+Definition at line 258 of file domain.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{macro__element_8cc_source_l00334}{oomph\+::\+QMacro\+Element$<$ 2 $>$\+::assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian2()}}, and \mbox{\hyperlink{domain_8h_source_l00288}{d2macro\+\_\+element\+\_\+boundary()}}.
+Referenced by oomph\+::\+QMacro\+Element$<$ 2 $>$\+::assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian2(), and d2macro\+\_\+element\+\_\+boundary().
 
 \mbox{\Hypertarget{classoomph_1_1Domain_af4de3686bcfbf5a8e98b92a071607e0f}\label{classoomph_1_1Domain_af4de3686bcfbf5a8e98b92a071607e0f}} 
 \index{oomph::Domain@{oomph::Domain}!dmacro\_element\_boundary@{dmacro\_element\_boundary}}
@@ -193,7 +193,7 @@ Referenced by \mbox{\hyperlink{macro__element_8cc_source_l00334}{oomph\+::\+QMac
 
 
 
-Definition at line \mbox{\hyperlink{domain_8h_source_l00228}{228}} of file \mbox{\hyperlink{domain_8h_source}{domain.\+h}}.
+Definition at line 228 of file domain.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Domain_a6973f0ef86b83c6cadcd722374c62270}\label{classoomph_1_1Domain_a6973f0ef86b83c6cadcd722374c62270}} 
 \index{oomph::Domain@{oomph::Domain}!dmacro\_element\_boundary@{dmacro\_element\_boundary}}
@@ -207,11 +207,11 @@ Definition at line \mbox{\hyperlink{domain_8h_source_l00228}{228}} of file \mbox
 
 
 
-Definition at line \mbox{\hyperlink{domain_8h_source_l00244}{244}} of file \mbox{\hyperlink{domain_8h_source}{domain.\+h}}.
+Definition at line 244 of file domain.\+h.
 
 
 
-References \mbox{\hyperlink{domain_8h_source_l00212}{dmacro\+\_\+element\+\_\+boundary()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+References dmacro\+\_\+element\+\_\+boundary(), s, and t.
 
 \mbox{\Hypertarget{classoomph_1_1Domain_ae573c54363a8e9d33951e59208a9bc39}\label{classoomph_1_1Domain_ae573c54363a8e9d33951e59208a9bc39}} 
 \index{oomph::Domain@{oomph::Domain}!dmacro\_element\_boundary@{dmacro\_element\_boundary}}
@@ -221,7 +221,7 @@ References \mbox{\hyperlink{domain_8h_source_l00212}{dmacro\+\_\+element\+\_\+bo
 
 
 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} representation of the i\+\_\+macro-\/th macro element boundary derivatives i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D) at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous)\+: f(s). Broken virtual. 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} representation of the i\+\_\+macro-\/th macro element boundary derivatives i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D) at time level t (t=0\+: present; t$>$0\+: previous)\+: f(s). Broken virtual. 
 
 
 
@@ -229,11 +229,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a
 
 
 
-Definition at line \mbox{\hyperlink{domain_8h_source_l00212}{212}} of file \mbox{\hyperlink{domain_8h_source}{domain.\+h}}.
+Definition at line 212 of file domain.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{macro__element_8cc_source_l00238}{oomph\+::\+QMacro\+Element$<$ 2 $>$\+::assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian()}}, \mbox{\hyperlink{macro__element_8cc_source_l00334}{oomph\+::\+QMacro\+Element$<$ 2 $>$\+::assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian2()}}, and \mbox{\hyperlink{domain_8h_source_l00244}{dmacro\+\_\+element\+\_\+boundary()}}.
+Referenced by oomph\+::\+QMacro\+Element$<$ 2 $>$\+::assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian(), oomph\+::\+QMacro\+Element$<$ 2 $>$\+::assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian2(), and dmacro\+\_\+element\+\_\+boundary().
 
 \mbox{\Hypertarget{classoomph_1_1Domain_a10142c029e8a57c5470d22701518e9d1}\label{classoomph_1_1Domain_a10142c029e8a57c5470d22701518e9d1}} 
 \index{oomph::Domain@{oomph::Domain}!macro\_element\_boundary@{macro\_element\_boundary}}
@@ -251,7 +251,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RectangleWithHoleAndAnnularRegio
 
 
 
-Definition at line \mbox{\hyperlink{domain_8h_source_l00160}{160}} of file \mbox{\hyperlink{domain_8h_source}{domain.\+h}}.
+Definition at line 160 of file domain.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Domain_a9d293b736e74bfeace64c1c8858add8a}\label{classoomph_1_1Domain_a9d293b736e74bfeace64c1c8858add8a}} 
 \index{oomph::Domain@{oomph::Domain}!macro\_element\_boundary@{macro\_element\_boundary}}
@@ -265,11 +265,11 @@ Definition at line \mbox{\hyperlink{domain_8h_source_l00160}{160}} of file \mbox
 
 
 
-Definition at line \mbox{\hyperlink{domain_8h_source_l00175}{175}} of file \mbox{\hyperlink{domain_8h_source}{domain.\+h}}.
+Definition at line 175 of file domain.\+h.
 
 
 
-References \mbox{\hyperlink{classoomph_1_1Domain_a95f3e00d28ea37e6c4d3027bfac91096}{macro\+\_\+element\+\_\+boundary()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+References macro\+\_\+element\+\_\+boundary(), s, and t.
 
 \mbox{\Hypertarget{classoomph_1_1Domain_a95f3e00d28ea37e6c4d3027bfac91096}\label{classoomph_1_1Domain_a95f3e00d28ea37e6c4d3027bfac91096}} 
 \index{oomph::Domain@{oomph::Domain}!macro\_element\_boundary@{macro\_element\_boundary}}
@@ -279,21 +279,21 @@ References \mbox{\hyperlink{classoomph_1_1Domain_a95f3e00d28ea37e6c4d3027bfac910
 
 
 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} representation of the i\+\_\+macro-\/th macro element boundary i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D) at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous)\+: f(s) 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} representation of the i\+\_\+macro-\/th macro element boundary i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D) at time level t (t=0\+: present; t$>$0\+: previous)\+: f(s) 
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1WarpedCubeDomain_a4e021719488897307d141fe4df327e49}{oomph\+::\+Warped\+Cube\+Domain}}, \mbox{\hyperlink{classoomph_1_1AnnularDomain_ade8cfa0e6f2d41e7d3877250321bfff3}{oomph\+::\+Annular\+Domain}}, \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a93253d6c878c3ab40a582e0d2070a69d}{oomph\+::\+Full\+Circle\+Domain}}, \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a9faddf9d13e0a7633f732bac1ddda80b}{oomph\+::\+Quarter\+Circle\+Sector\+Domain}}, \mbox{\hyperlink{classoomph_1_1QuarterPipeDomain_ae8cc6433c58dcfb265335744ed8a330a}{oomph\+::\+Quarter\+Pipe\+Domain}}, \mbox{\hyperlink{classoomph_1_1QuarterTubeDomain_afacee4fe8a6fbc33618643398f5b8ab1}{oomph\+::\+Quarter\+Tube\+Domain}}, \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a4de4d505233303cee0690ee87e45b4cf}{oomph\+::\+Topologically\+Rectangular\+Domain}}, \mbox{\hyperlink{classoomph_1_1TubeDomain_a1f16dde7ad082e2557dff9c737dae6c0}{oomph\+::\+Tube\+Domain}}, \mbox{\hyperlink{classoomph_1_1FishDomain_a383b0fb396d605932ba6fb0779dacbf9}{oomph\+::\+Fish\+Domain}}, \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a281727105819669ea9dab9fec120ea63}{oomph\+::\+Eighth\+Sphere\+Domain}}, \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_ae4b123847f4ab6e242a0409d72fe5cbd}{oomph\+::\+Channel\+With\+Leaflet\+Domain}}, \mbox{\hyperlink{classoomph_1_1CollapsibleChannelDomain_a2c0a5bd21e12fbcc1cdd753c0f205da2}{oomph\+::\+Collapsible\+Channel\+Domain}}, \mbox{\hyperlink{classoomph_1_1ExtrudedDomain_a10a824075e2d2ee6efcf3485966dbadc}{oomph\+::\+Extruded\+Domain}}, \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a40bca9a30f1f874c043e68621b28de74}{oomph\+::\+Cylinder\+With\+Flag\+Domain}}, \mbox{\hyperlink{classoomph_1_1RectangleWithHoleDomain_a514085f80059aa9f0cc3334a3cb408c1}{oomph\+::\+Rectangle\+With\+Hole\+Domain}}, and \mbox{\hyperlink{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain_ad36aee594ee03f7947c2bcd4e2198284}{oomph\+::\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Domain}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain_ad36aee594ee03f7947c2bcd4e2198284}{oomph\+::\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Domain}}, \mbox{\hyperlink{classoomph_1_1RectangleWithHoleDomain_a514085f80059aa9f0cc3334a3cb408c1}{oomph\+::\+Rectangle\+With\+Hole\+Domain}}, \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a40bca9a30f1f874c043e68621b28de74}{oomph\+::\+Cylinder\+With\+Flag\+Domain}}, \mbox{\hyperlink{classoomph_1_1ExtrudedDomain_a10a824075e2d2ee6efcf3485966dbadc}{oomph\+::\+Extruded\+Domain}}, \mbox{\hyperlink{classoomph_1_1CollapsibleChannelDomain_a2c0a5bd21e12fbcc1cdd753c0f205da2}{oomph\+::\+Collapsible\+Channel\+Domain}}, \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_ae4b123847f4ab6e242a0409d72fe5cbd}{oomph\+::\+Channel\+With\+Leaflet\+Domain}}, \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a281727105819669ea9dab9fec120ea63}{oomph\+::\+Eighth\+Sphere\+Domain}}, \mbox{\hyperlink{classoomph_1_1FishDomain_a383b0fb396d605932ba6fb0779dacbf9}{oomph\+::\+Fish\+Domain}}, \mbox{\hyperlink{classoomph_1_1TubeDomain_a1f16dde7ad082e2557dff9c737dae6c0}{oomph\+::\+Tube\+Domain}}, \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a4de4d505233303cee0690ee87e45b4cf}{oomph\+::\+Topologically\+Rectangular\+Domain}}, \mbox{\hyperlink{classoomph_1_1QuarterTubeDomain_afacee4fe8a6fbc33618643398f5b8ab1}{oomph\+::\+Quarter\+Tube\+Domain}}, \mbox{\hyperlink{classoomph_1_1QuarterPipeDomain_ae8cc6433c58dcfb265335744ed8a330a}{oomph\+::\+Quarter\+Pipe\+Domain}}, \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a9faddf9d13e0a7633f732bac1ddda80b}{oomph\+::\+Quarter\+Circle\+Sector\+Domain}}, \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a93253d6c878c3ab40a582e0d2070a69d}{oomph\+::\+Full\+Circle\+Domain}}, \mbox{\hyperlink{classoomph_1_1AnnularDomain_ade8cfa0e6f2d41e7d3877250321bfff3}{oomph\+::\+Annular\+Domain}}, and \mbox{\hyperlink{classoomph_1_1WarpedCubeDomain_a4e021719488897307d141fe4df327e49}{oomph\+::\+Warped\+Cube\+Domain}}.
 
 
 
-Referenced by \mbox{\hyperlink{macro__element_8cc_source_l00238}{oomph\+::\+QMacro\+Element$<$ 2 $>$\+::assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian()}}, \mbox{\hyperlink{macro__element_8cc_source_l00334}{oomph\+::\+QMacro\+Element$<$ 2 $>$\+::assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian2()}}, \mbox{\hyperlink{domain_8h_source_l00175}{macro\+\_\+element\+\_\+boundary()}}, \mbox{\hyperlink{extruded__domain_8cc_source_l00148}{oomph\+::\+Extruded\+Domain\+::macro\+\_\+element\+\_\+boundary()}}, \mbox{\hyperlink{macro__element_8cc_source_l00035}{oomph\+::\+QMacro\+Element$<$ 2 $>$\+::macro\+\_\+map()}}, \mbox{\hyperlink{macro__element_8cc_source_l00440}{oomph\+::\+QMacro\+Element$<$ 3 $>$\+::macro\+\_\+map()}}, \mbox{\hyperlink{macro__element_8cc_source_l00211}{oomph\+::\+QMacro\+Element$<$ 2 $>$\+::output\+\_\+macro\+\_\+element\+\_\+boundaries()}}, and \mbox{\hyperlink{macro__element_8cc_source_l00659}{oomph\+::\+QMacro\+Element$<$ 3 $>$\+::output\+\_\+macro\+\_\+element\+\_\+boundaries()}}.
+Referenced by oomph\+::\+QMacro\+Element$<$ 2 $>$\+::assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian(), oomph\+::\+QMacro\+Element$<$ 2 $>$\+::assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian2(), macro\+\_\+element\+\_\+boundary(), oomph\+::\+Extruded\+Domain\+::macro\+\_\+element\+\_\+boundary(), oomph\+::\+QMacro\+Element$<$ 2 $>$\+::macro\+\_\+map(), oomph\+::\+QMacro\+Element$<$ 3 $>$\+::macro\+\_\+map(), oomph\+::\+QMacro\+Element$<$ 2 $>$\+::output\+\_\+macro\+\_\+element\+\_\+boundaries(), and oomph\+::\+QMacro\+Element$<$ 3 $>$\+::output\+\_\+macro\+\_\+element\+\_\+boundaries().
 
-\mbox{\Hypertarget{classoomph_1_1Domain_abef3886384a9b9e722e490268feecc2d}\label{classoomph_1_1Domain_abef3886384a9b9e722e490268feecc2d}} 
+\mbox{\Hypertarget{classoomph_1_1Domain_a9d8ca47c89812a0d6dda0b9142441efc}\label{classoomph_1_1Domain_a9d8ca47c89812a0d6dda0b9142441efc}} 
 \index{oomph::Domain@{oomph::Domain}!macro\_element\_pt@{macro\_element\_pt}}
 \index{macro\_element\_pt@{macro\_element\_pt}!oomph::Domain@{oomph::Domain}}
 \doxysubsubsection{\texorpdfstring{macro\_element\_pt()}{macro\_element\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} $\ast$ oomph\+::\+Domain\+::macro\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}}$\ast$ oomph\+::\+Domain\+::macro\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -301,15 +301,15 @@ Access to i-\/th macro element.
 
 
 
-Definition at line \mbox{\hyperlink{domain_8h_source_l00116}{116}} of file \mbox{\hyperlink{domain_8h_source}{domain.\+h}}.
+Definition at line 116 of file domain.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{domain_8h_source_l00301}{Macro\+\_\+element\+\_\+pt}}.
+References i, and Macro\+\_\+element\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{channel__with__leaflet__mesh_8template_8cc_source_l00048}{oomph\+::\+Channel\+With\+Leaflet\+Mesh$<$ ELEMENT $>$\+::\+Channel\+With\+Leaflet\+Mesh()}}, \mbox{\hyperlink{collapsible__channel__mesh_8template_8cc_source_l00043}{oomph\+::\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::\+Collapsible\+Channel\+Mesh()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l02068}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{missing__masters_8template_8cc_source_l00251}{oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l01677}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::create\+\_\+external\+\_\+halo\+\_\+elements()}}, \mbox{\hyperlink{eighth__sphere__mesh_8template_8cc_source_l00039}{oomph\+::\+Eighth\+Sphere\+Mesh$<$ ELEMENT $>$\+::\+Eighth\+Sphere\+Mesh()}}, \mbox{\hyperlink{quarter__pipe__mesh_8template_8h_source_l00218}{oomph\+::\+Elastic\+Refineable\+Quarter\+Pipe\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Refineable\+Quarter\+Pipe\+Mesh()}}, \mbox{\hyperlink{full__circle__mesh_8template_8cc_source_l00040}{oomph\+::\+Full\+Circle\+Mesh$<$ ELEMENT $>$\+::\+Full\+Circle\+Mesh()}}, \mbox{\hyperlink{extruded__domain_8cc_source_l00148}{oomph\+::\+Extruded\+Domain\+::macro\+\_\+element\+\_\+boundary()}}, \mbox{\hyperlink{domain_8h_source_l00197}{output\+\_\+macro\+\_\+element\+\_\+boundaries()}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l00044}{oomph\+::\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Quarter\+Circle\+Sector\+Mesh()}}, \mbox{\hyperlink{quarter__pipe__mesh_8template_8cc_source_l00039}{oomph\+::\+Quarter\+Pipe\+Mesh$<$ ELEMENT $>$\+::\+Quarter\+Pipe\+Mesh()}}, \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l00044}{oomph\+::\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Quarter\+Tube\+Mesh()}}, \mbox{\hyperlink{rectangle__with__hole__mesh_8template_8h_source_l00056}{oomph\+::\+Rectangle\+With\+Hole\+Mesh$<$ ELEMENT $>$\+::\+Rectangle\+With\+Hole\+Mesh()}}, \mbox{\hyperlink{eighth__sphere__mesh_8template_8h_source_l00095}{oomph\+::\+Refineable\+Eighth\+Sphere\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Eighth\+Sphere\+Mesh()}}, \mbox{\hyperlink{full__circle__mesh_8template_8h_source_l00124}{oomph\+::\+Refineable\+Full\+Circle\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Full\+Circle\+Mesh()}}, \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00171}{oomph\+::\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Quarter\+Tube\+Mesh()}}, \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00280}{oomph\+::\+Refineable\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh()}}, \mbox{\hyperlink{rectangle__with__hole__mesh_8template_8h_source_l00265}{oomph\+::\+Refineable\+Rectangle\+With\+Hole\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Rectangle\+With\+Hole\+Mesh()}}, \mbox{\hyperlink{tube__mesh_8template_8h_source_l00137}{oomph\+::\+Refineable\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Tube\+Mesh()}}, \mbox{\hyperlink{annular__mesh_8template_8h_source_l00111}{oomph\+::\+Refineable\+Two\+DAnnular\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Two\+DAnnular\+Mesh()}}, and \mbox{\hyperlink{tube__mesh_8template_8cc_source_l00040}{oomph\+::\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Tube\+Mesh()}}.
+Referenced by oomph\+::\+Channel\+With\+Leaflet\+Mesh$<$ ELEMENT $>$\+::\+Channel\+With\+Leaflet\+Mesh(), oomph\+::\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::\+Collapsible\+Channel\+Mesh(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::create\+\_\+external\+\_\+halo\+\_\+elements(), oomph\+::\+Eighth\+Sphere\+Mesh$<$ ELEMENT $>$\+::\+Eighth\+Sphere\+Mesh(), oomph\+::\+Elastic\+Refineable\+Quarter\+Pipe\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Refineable\+Quarter\+Pipe\+Mesh(), oomph\+::\+Full\+Circle\+Mesh$<$ ELEMENT $>$\+::\+Full\+Circle\+Mesh(), oomph\+::\+Extruded\+Domain\+::macro\+\_\+element\+\_\+boundary(), output\+\_\+macro\+\_\+element\+\_\+boundaries(), oomph\+::\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Quarter\+Circle\+Sector\+Mesh(), oomph\+::\+Quarter\+Pipe\+Mesh$<$ ELEMENT $>$\+::\+Quarter\+Pipe\+Mesh(), oomph\+::\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Quarter\+Tube\+Mesh(), oomph\+::\+Rectangle\+With\+Hole\+Mesh$<$ ELEMENT $>$\+::\+Rectangle\+With\+Hole\+Mesh(), oomph\+::\+Refineable\+Eighth\+Sphere\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Eighth\+Sphere\+Mesh(), oomph\+::\+Refineable\+Full\+Circle\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Full\+Circle\+Mesh(), oomph\+::\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Quarter\+Tube\+Mesh(), oomph\+::\+Refineable\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh(), oomph\+::\+Refineable\+Rectangle\+With\+Hole\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Rectangle\+With\+Hole\+Mesh(), oomph\+::\+Refineable\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Tube\+Mesh(), oomph\+::\+Refineable\+Two\+DAnnular\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Two\+DAnnular\+Mesh(), and oomph\+::\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Tube\+Mesh().
 
 \mbox{\Hypertarget{classoomph_1_1Domain_a3ed63583615d0e8471d95ba13ccc0aff}\label{classoomph_1_1Domain_a3ed63583615d0e8471d95ba13ccc0aff}} 
 \index{oomph::Domain@{oomph::Domain}!nmacro\_element@{nmacro\_element}}
@@ -323,15 +323,15 @@ Number of macro elements in domain.
 
 
 
-Definition at line \mbox{\hyperlink{domain_8h_source_l00123}{123}} of file \mbox{\hyperlink{domain_8h_source}{domain.\+h}}.
+Definition at line 123 of file domain.\+h.
 
 
 
-References \mbox{\hyperlink{domain_8h_source_l00301}{Macro\+\_\+element\+\_\+pt}}.
+References Macro\+\_\+element\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00099}{oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}, \mbox{\hyperlink{extruded__domain_8cc_source_l00035}{oomph\+::\+Extruded\+Domain\+::\+Extruded\+Domain()}}, \mbox{\hyperlink{extruded__domain_8cc_source_l00148}{oomph\+::\+Extruded\+Domain\+::macro\+\_\+element\+\_\+boundary()}}, \mbox{\hyperlink{domain_8h_source_l00197}{output\+\_\+macro\+\_\+element\+\_\+boundaries()}}, \mbox{\hyperlink{rectangle__with__hole__mesh_8template_8h_source_l00056}{oomph\+::\+Rectangle\+With\+Hole\+Mesh$<$ ELEMENT $>$\+::\+Rectangle\+With\+Hole\+Mesh()}}, and \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00280}{oomph\+::\+Refineable\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh()}}.
+Referenced by oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh(), oomph\+::\+Extruded\+Domain\+::\+Extruded\+Domain(), oomph\+::\+Extruded\+Domain\+::macro\+\_\+element\+\_\+boundary(), output\+\_\+macro\+\_\+element\+\_\+boundaries(), oomph\+::\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh$<$ ELEMENT $>$\+::\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh(), oomph\+::\+Rectangle\+With\+Hole\+Mesh$<$ ELEMENT $>$\+::\+Rectangle\+With\+Hole\+Mesh(), and oomph\+::\+Refineable\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh().
 
 \mbox{\Hypertarget{classoomph_1_1Domain_a33de7a18dd8ff992dc7faf068197ff50}\label{classoomph_1_1Domain_a33de7a18dd8ff992dc7faf068197ff50}} 
 \index{oomph::Domain@{oomph::Domain}!operator=@{operator=}}
@@ -355,15 +355,7 @@ Output macro elements.
 
 
 
-Definition at line \mbox{\hyperlink{domain_8h_source_l00129}{129}} of file \mbox{\hyperlink{domain_8h_source}{domain.\+h}}.
-
-
-
-References \mbox{\hyperlink{domain_8h_source_l00129}{output()}}.
-
-
-
-Referenced by \mbox{\hyperlink{domain_8h_source_l00129}{output()}}.
+Definition at line 129 of file domain.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Domain_ab7ccc375ba2e46ffb11e4e2c5c485578}\label{classoomph_1_1Domain_ab7ccc375ba2e46ffb11e4e2c5c485578}} 
 \index{oomph::Domain@{oomph::Domain}!output@{output}}
@@ -377,11 +369,11 @@ Output macro elements.
 
 
 
-Definition at line \mbox{\hyperlink{domain_8h_source_l00138}{138}} of file \mbox{\hyperlink{domain_8h_source}{domain.\+h}}.
+Definition at line 138 of file domain.\+h.
 
 
 
-References \mbox{\hyperlink{domain_8h_source_l00301}{Macro\+\_\+element\+\_\+pt}}.
+References Macro\+\_\+element\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1Domain_ac663be35932981a1c02b3ed930ec2eda}\label{classoomph_1_1Domain_ac663be35932981a1c02b3ed930ec2eda}} 
 \index{oomph::Domain@{oomph::Domain}!output\_macro\_element\_boundaries@{output\_macro\_element\_boundaries}}
@@ -395,15 +387,7 @@ Output all macro element boundaries as tecplot zones.
 
 
 
-Definition at line \mbox{\hyperlink{domain_8h_source_l00187}{187}} of file \mbox{\hyperlink{domain_8h_source}{domain.\+h}}.
-
-
-
-References \mbox{\hyperlink{domain_8h_source_l00187}{output\+\_\+macro\+\_\+element\+\_\+boundaries()}}.
-
-
-
-Referenced by \mbox{\hyperlink{domain_8h_source_l00187}{output\+\_\+macro\+\_\+element\+\_\+boundaries()}}.
+Definition at line 187 of file domain.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Domain_a59dfe3a2cff10aa2e12f86dba9584f15}\label{classoomph_1_1Domain_a59dfe3a2cff10aa2e12f86dba9584f15}} 
 \index{oomph::Domain@{oomph::Domain}!output\_macro\_element\_boundaries@{output\_macro\_element\_boundaries}}
@@ -417,11 +401,11 @@ Output all macro element boundaries as tecplot zones.
 
 
 
-Definition at line \mbox{\hyperlink{domain_8h_source_l00197}{197}} of file \mbox{\hyperlink{domain_8h_source}{domain.\+h}}.
+Definition at line 197 of file domain.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{domain_8h_source_l00116}{macro\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{domain_8h_source_l00123}{nmacro\+\_\+element()}}, and \mbox{\hyperlink{classoomph_1_1MacroElement_a748b561313e952c9767d278d0e99be4e}{oomph\+::\+Macro\+Element\+::output\+\_\+macro\+\_\+element\+\_\+boundaries()}}.
+References i, macro\+\_\+element\+\_\+pt(), nmacro\+\_\+element(), and oomph\+::\+Macro\+Element\+::output\+\_\+macro\+\_\+element\+\_\+boundaries().
 
 
 
@@ -438,11 +422,11 @@ References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{dom
 
 
 
-Definition at line \mbox{\hyperlink{domain_8h_source_l00301}{301}} of file \mbox{\hyperlink{domain_8h_source}{domain.\+h}}.
+Definition at line 301 of file domain.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{annular__domain_8h_source_l00045}{oomph\+::\+Annular\+Domain\+::\+Annular\+Domain()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00052}{oomph\+::\+Channel\+With\+Leaflet\+Domain\+::\+Channel\+With\+Leaflet\+Domain()}}, \mbox{\hyperlink{collapsible__channel__domain_8h_source_l00047}{oomph\+::\+Collapsible\+Channel\+Domain\+::\+Collapsible\+Channel\+Domain()}}, \mbox{\hyperlink{cylinder__with__flag__domain_8cc_source_l00037}{oomph\+::\+Cylinder\+With\+Flag\+Domain\+::\+Cylinder\+With\+Flag\+Domain()}}, \mbox{\hyperlink{domain_8h_source_l00070}{Domain()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00045}{oomph\+::\+Eighth\+Sphere\+Domain\+::\+Eighth\+Sphere\+Domain()}}, \mbox{\hyperlink{extruded__domain_8cc_source_l00035}{oomph\+::\+Extruded\+Domain\+::\+Extruded\+Domain()}}, \mbox{\hyperlink{fish__domain_8h_source_l00048}{oomph\+::\+Fish\+Domain\+::\+Fish\+Domain()}}, \mbox{\hyperlink{full__circle__domain_8h_source_l00077}{oomph\+::\+Full\+Circle\+Domain\+::\+Full\+Circle\+Domain()}}, \mbox{\hyperlink{domain_8h_source_l00116}{macro\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{extruded__domain_8cc_source_l00132}{oomph\+::\+Extruded\+Domain\+::macro\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{domain_8h_source_l00123}{nmacro\+\_\+element()}}, \mbox{\hyperlink{extruded__domain_8cc_source_l00122}{oomph\+::\+Extruded\+Domain\+::nmacro\+\_\+element()}}, \mbox{\hyperlink{domain_8h_source_l00138}{output()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00047}{oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::\+Quarter\+Circle\+Sector\+Domain()}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00045}{oomph\+::\+Quarter\+Pipe\+Domain\+::\+Quarter\+Pipe\+Domain()}}, \mbox{\hyperlink{quarter__tube__domain_8h_source_l00048}{oomph\+::\+Quarter\+Tube\+Domain\+::\+Quarter\+Tube\+Domain()}}, \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00061}{oomph\+::\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Domain\+::\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Domain()}}, \mbox{\hyperlink{rectangle__with__hole__domain_8h_source_l00050}{oomph\+::\+Rectangle\+With\+Hole\+Domain\+::\+Rectangle\+With\+Hole\+Domain()}}, \mbox{\hyperlink{topologically__rectangular__domain_8cc_source_l00036}{oomph\+::\+Topologically\+Rectangular\+Domain\+::\+Topologically\+Rectangular\+Domain()}}, \mbox{\hyperlink{tube__domain_8h_source_l00079}{oomph\+::\+Tube\+Domain\+::\+Tube\+Domain()}}, \mbox{\hyperlink{domain_8h_source_l00320}{oomph\+::\+Warped\+Cube\+Domain\+::\+Warped\+Cube\+Domain()}}, and \mbox{\hyperlink{domain_8h_source_l00087}{$\sim$\+Domain()}}.
+Referenced by oomph\+::\+Annular\+Domain\+::\+Annular\+Domain(), oomph\+::\+Channel\+With\+Leaflet\+Domain\+::\+Channel\+With\+Leaflet\+Domain(), oomph\+::\+Collapsible\+Channel\+Domain\+::\+Collapsible\+Channel\+Domain(), oomph\+::\+Cylinder\+With\+Flag\+Domain\+::\+Cylinder\+With\+Flag\+Domain(), Domain(), oomph\+::\+Eighth\+Sphere\+Domain\+::\+Eighth\+Sphere\+Domain(), oomph\+::\+Extruded\+Domain\+::\+Extruded\+Domain(), oomph\+::\+Fish\+Domain\+::\+Fish\+Domain(), oomph\+::\+Full\+Circle\+Domain\+::\+Full\+Circle\+Domain(), macro\+\_\+element\+\_\+pt(), oomph\+::\+Extruded\+Domain\+::macro\+\_\+element\+\_\+pt(), nmacro\+\_\+element(), oomph\+::\+Extruded\+Domain\+::nmacro\+\_\+element(), output(), oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::\+Quarter\+Circle\+Sector\+Domain(), oomph\+::\+Quarter\+Pipe\+Domain\+::\+Quarter\+Pipe\+Domain(), oomph\+::\+Quarter\+Tube\+Domain\+::\+Quarter\+Tube\+Domain(), oomph\+::\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Domain\+::\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Domain(), oomph\+::\+Rectangle\+With\+Hole\+Domain\+::\+Rectangle\+With\+Hole\+Domain(), oomph\+::\+Topologically\+Rectangular\+Domain\+::\+Topologically\+Rectangular\+Domain(), oomph\+::\+Tube\+Domain\+::\+Tube\+Domain(), oomph\+::\+Warped\+Cube\+Domain\+::\+Warped\+Cube\+Domain(), and $\sim$\+Domain().
 
 
 

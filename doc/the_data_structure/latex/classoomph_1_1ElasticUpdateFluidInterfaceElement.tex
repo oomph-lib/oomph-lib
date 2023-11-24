@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement}{}\doxysection{oomph\+::Elastic\+Update\+Fluid\+Interface\+Element\texorpdfstring{$<$}{<} EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement}{}\doxysection{oomph\+::Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$ Class Template Reference}
 \label{classoomph_1_1ElasticUpdateFluidInterfaceElement}\index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
 
 
@@ -9,7 +9,7 @@
 
 {\ttfamily \#include $<$specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Elastic\+Update\+Fluid\+Interface\+Element\texorpdfstring{$<$}{<} EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=0.707071cm]{classoomph_1_1ElasticUpdateFluidInterfaceElement}
@@ -22,7 +22,7 @@ Inheritance diagram for oomph\+::Elastic\+Update\+Fluid\+Interface\+Element\texo
 \begin{DoxyCompactList}\small\item\em Constructor, pass a pointer to the bulk element and the face index of the bulk element to which the element is to be attached to. The optional identifier can be used to distinguish the additional nodal value (Lagr mult) created by this element from those created by other Face\+Elements. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a41706192ce4de3c4c51a70086199d8fa}{zeta\+\_\+nodal}} (const unsigned \&n, const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} representation, by default. \end{DoxyCompactList}\item 
-double \& \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a9340c15f4463fad5bca019829f5998cf}{lagrange}} (const unsigned \&n)
+double \& \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a8b5c5b703e6daafbe1dcafd3fe93e537}{lagrange}} (const unsigned \&n)
 \begin{DoxyCompactList}\small\item\em Return the lagrange multiplier at local node n. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_acc1d5bb57e5664b86a9a76a4cfb8259f}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Fill in contribution to residuals and Jacobian. \end{DoxyCompactList}\item 
@@ -36,7 +36,7 @@ void \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a10b64a46
 \begin{DoxyCompactList}\small\item\em C-\/style Output function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a15c3d2912325ace17676366c1469121f}{add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, const unsigned \&flag, const \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psif, const \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsifds, const \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsifdS, const \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsifd\+S\+\_\+div, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&interpolated\+\_\+x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&interpolated\+\_\+n, const double \&W, const double \&J)
 \begin{DoxyCompactList}\small\item\em Helper function to calculate the additional contributions to be added at each integration point. This deals with Lagrange multiplier contribution, as well as any additional contributions by the other equations. \end{DoxyCompactList}\item 
-virtual \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement}{Fluid\+Interface\+Bounding\+Element}} $\ast$ \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a88d35a42eb1b3abb4adba9ca79787d2e}{make\+\_\+bounding\+\_\+element}} (const int \&face\+\_\+index)
+virtual \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement}{Fluid\+Interface\+Bounding\+Element}} $\ast$ \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a91c59905720a4417447fcce09032ce7f}{make\+\_\+bounding\+\_\+element}} (const int \&face\+\_\+index)
 \begin{DoxyCompactList}\small\item\em Create an \char`\"{}bounding\char`\"{} element (here actually a 2D line element of type Elastic\+Line\+Fluid\+Interface\+Bounding\+Element$<$\+ELEMENT$>$ that allows the application of a contact angle boundary condition on the the specified face. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -63,11 +63,12 @@ void \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_ae82f4864
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class EQUATION\+\_\+\+CLASS, class DERIVATIVE\+\_\+\+CLASS, class ELEMENT$>$\newline
 class oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$}
+
 //////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// 
 
 Generic Elastic node update interface template class that can be combined with a given surface equations class and surface derivative class to provide a concrete implementation of any surface element that uses elastic node updates. 
 
-Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00672}{672}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+Definition at line 672 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
 
 
 
@@ -85,11 +86,11 @@ Constructor, pass a pointer to the bulk element and the face index of the bulk e
 
 
 
-Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00739}{739}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+Definition at line 739 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l05132}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00681}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::\+Lagrange\+\_\+index}}, \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00097}{oomph\+::\+Fluid\+Interface\+Additional\+Values$<$ ELEMENT $>$\+::nadditional\+\_\+values()}}, and \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00106}{oomph\+::\+Fluid\+Interface\+Additional\+Values$<$ ELEMENT $>$\+::setup\+\_\+equation\+\_\+indices()}}.
+References oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), i, oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::\+Lagrange\+\_\+index, oomph\+::\+Fluid\+Interface\+Additional\+Values$<$ ELEMENT $>$\+::nadditional\+\_\+values(), and oomph\+::\+Fluid\+Interface\+Additional\+Values$<$ ELEMENT $>$\+::setup\+\_\+equation\+\_\+indices().
 
 
 
@@ -107,11 +108,11 @@ Helper function to calculate the additional contributions to be added at each in
 
 
 
-Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00877}{877}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+Definition at line 877 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00692}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::kinematic\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00830}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::lagrange()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
+References i, oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::kinematic\+\_\+local\+\_\+eqn(), oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::lagrange(), s, and oomph\+::\+Quad\+Tree\+Names\+::W.
 
 \mbox{\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_ae9df6c11ccb63dc04c0d5ca655fe1482}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_ae9df6c11ccb63dc04c0d5ca655fe1482}} 
 \index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!compute\_surface\_derivatives@{compute\_surface\_derivatives}}
@@ -126,7 +127,7 @@ Fill in the specific surface derivative calculations by calling the appropriate 
 
 
 
-Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00716}{716}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+Definition at line 716 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_acc1d5bb57e5664b86a9a76a4cfb8259f}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_acc1d5bb57e5664b86a9a76a4cfb8259f}} 
 \index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
@@ -141,7 +142,7 @@ Fill in contribution to residuals and Jacobian.
 
 
 
-Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00837}{837}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+Definition at line 837 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_ae82f486496a0647d905ab6ee857de0d0}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_ae82f486496a0647d905ab6ee857de0d0}} 
 \index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!hijack\_kinematic\_conditions@{hijack\_kinematic\_conditions}}
@@ -156,11 +157,11 @@ Hijacking the kinematic condition corresponds to hijacking the variables associa
 
 
 
-Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00701}{701}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+Definition at line 701 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{hijacked__elements_8h_source_l00214}{oomph\+::\+Hijacked$<$ Face\+Geometry$<$ ELEMENT $>$ $>$\+::hijack\+\_\+nodal\+\_\+value()}}, and \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00685}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::lagrange\+\_\+index()}}.
+References oomph\+::\+Hijacked$<$ Face\+Geometry$<$ ELEMENT $>$ $>$\+::hijack\+\_\+nodal\+\_\+value(), and oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::lagrange\+\_\+index().
 
 \mbox{\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_a940840693906b7b8d619ff97f521c811}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_a940840693906b7b8d619ff97f521c811}} 
 \index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!kinematic\_local\_eqn@{kinematic\_local\_eqn}}
@@ -175,22 +176,22 @@ Equation number of the kinematic BC associated with node j. (This is the equatio
 
 
 
-Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00692}{692}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+Definition at line 692 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00685}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::lagrange\+\_\+index()}}.
+References oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::lagrange\+\_\+index().
 
 
 
-Referenced by \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00877}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface()}}.
+Referenced by oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface().
 
-\mbox{\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_a9340c15f4463fad5bca019829f5998cf}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_a9340c15f4463fad5bca019829f5998cf}} 
+\mbox{\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_a8b5c5b703e6daafbe1dcafd3fe93e537}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_a8b5c5b703e6daafbe1dcafd3fe93e537}} 
 \index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!lagrange@{lagrange}}
 \index{lagrange@{lagrange}!oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{lagrange()}{lagrange()}}
 {\footnotesize\ttfamily template$<$class EQUATION\+\_\+\+CLASS , class DERIVATIVE\+\_\+\+CLASS , class ELEMENT $>$ \\
-double \& \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::lagrange (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+double\& \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::lagrange (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -198,15 +199,15 @@ Return the lagrange multiplier at local node n.
 
 
 
-Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00830}{830}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+Definition at line 830 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00685}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::lagrange\+\_\+index()}}.
+References oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::lagrange\+\_\+index().
 
 
 
-Referenced by \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00877}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface()}}.
+Referenced by oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface().
 
 \mbox{\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_a2eb4fbe50ac4ff1e9b26e0e1d8ff3186}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_a2eb4fbe50ac4ff1e9b26e0e1d8ff3186}} 
 \index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!lagrange\_index@{lagrange\_index}}
@@ -221,18 +222,18 @@ Return the index at which the lagrange multiplier is stored at the n-\/th node.
 
 
 
-Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00685}{685}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+Definition at line 685 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00701}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::hijack\+\_\+kinematic\+\_\+conditions()}}, \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00692}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::kinematic\+\_\+local\+\_\+eqn()}}, and \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00830}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::lagrange()}}.
+Referenced by oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::hijack\+\_\+kinematic\+\_\+conditions(), oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::kinematic\+\_\+local\+\_\+eqn(), and oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::lagrange().
 
-\mbox{\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_a88d35a42eb1b3abb4adba9ca79787d2e}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_a88d35a42eb1b3abb4adba9ca79787d2e}} 
+\mbox{\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_a91c59905720a4417447fcce09032ce7f}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_a91c59905720a4417447fcce09032ce7f}} 
 \index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!make\_bounding\_element@{make\_bounding\_element}}
 \index{make\_bounding\_element@{make\_bounding\_element}!oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{make\_bounding\_element()}{make\_bounding\_element()}}
 {\footnotesize\ttfamily template$<$class EQUATION\+\_\+\+CLASS , class DERIVATIVE\+\_\+\+CLASS , class ELEMENT $>$ \\
-virtual \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement}{Fluid\+Interface\+Bounding\+Element}} $\ast$ \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::make\+\_\+bounding\+\_\+element (\begin{DoxyParamCaption}\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+virtual \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement}{Fluid\+Interface\+Bounding\+Element}}$\ast$ \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::make\+\_\+bounding\+\_\+element (\begin{DoxyParamCaption}\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -240,7 +241,7 @@ Create an \char`\"{}bounding\char`\"{} element (here actually a 2D line element 
 
 
 
-Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00960}{960}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+Definition at line 960 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_a8baae14bdede6a659e948942d7a08cb5}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_a8baae14bdede6a659e948942d7a08cb5}} 
 \index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!output@{output}}
@@ -255,11 +256,11 @@ Overload the C-\/style output function.
 
 
 
-Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00861}{861}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+Definition at line 861 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
+References oomph\+::\+Command\+Line\+Args\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_a10b64a463b5ff98475e727b06d95b0ac}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_a10b64a463b5ff98475e727b06d95b0ac}} 
 \index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!output@{output}}
@@ -274,11 +275,11 @@ C-\/style Output function.
 
 
 
-Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00867}{867}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+Definition at line 867 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
+References oomph\+::\+Command\+Line\+Args\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_a46b22d178b248355083a3564e4e92eb0}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_a46b22d178b248355083a3564e4e92eb0}} 
 \index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!output@{output}}
@@ -293,11 +294,11 @@ Overload the output function.
 
 
 
-Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00849}{849}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+Definition at line 849 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
+References oomph\+::\+Command\+Line\+Args\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_ac193aa64a8223a96e4148a5af456fb64}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_ac193aa64a8223a96e4148a5af456fb64}} 
 \index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!output@{output}}
@@ -312,11 +313,11 @@ Output the element.
 
 
 
-Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00855}{855}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+Definition at line 855 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
+References oomph\+::\+Command\+Line\+Args\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_a41706192ce4de3c4c51a70086199d8fa}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_a41706192ce4de3c4c51a70086199d8fa}} 
 \index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!zeta\_nodal@{zeta\_nodal}}
@@ -331,11 +332,11 @@ The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed a
 
 
 
-Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00822}{822}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+Definition at line 822 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l04497}{oomph\+::\+Face\+Element\+::zeta\+\_\+nodal()}}.
+References i, and oomph\+::\+Face\+Element\+::zeta\+\_\+nodal().
 
 
 
@@ -353,11 +354,11 @@ Storage for the location of the Lagrange multiplier (If other additional values 
 
 
 
-Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00681}{681}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+Definition at line 681 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00739}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::\+Elastic\+Update\+Fluid\+Interface\+Element()}}.
+Referenced by oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::\+Elastic\+Update\+Fluid\+Interface\+Element().
 
 
 

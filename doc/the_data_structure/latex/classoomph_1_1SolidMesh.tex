@@ -26,11 +26,11 @@ void \mbox{\hyperlink{classoomph_1_1SolidMesh_a19b238cfaaaec5cd3c1d6149250c2159}
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1SolidMesh_a74ea7301e0b7ca1b5abc938fb0710d5e}{Solid\+Mesh}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SolidMesh}{Solid\+Mesh}} $\ast$ $>$ \&sub\+\_\+mesh\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Constructor builds combined mesh from the meshes specified. Note\+: This simply merges the meshes\textquotesingle{} elements and nodes (ignoring duplicates; no boundary information etc. is created). \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1SolidNode}{Solid\+Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1SolidMesh_a053f864c3df9b7436b2eda1554d30ee5}{node\+\_\+pt}} (const unsigned long \&n)
+\mbox{\hyperlink{classoomph_1_1SolidNode}{Solid\+Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1SolidMesh_a8b096888d09593a6cdec9ede72eb5850}{node\+\_\+pt}} (const unsigned long \&n)
 \begin{DoxyCompactList}\small\item\em Return a pointer to the n-\/th global \mbox{\hyperlink{classoomph_1_1SolidNode}{Solid\+Node}}. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1SolidNode}{Solid\+Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1SolidMesh_a562aad8bd129f8482b7d8fb14a94bebd}{boundary\+\_\+node\+\_\+pt}} (const unsigned \&b, const unsigned \&n)
+\mbox{\hyperlink{classoomph_1_1SolidNode}{Solid\+Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1SolidMesh_af2d057e3b0af894bb548bcc73765c414}{boundary\+\_\+node\+\_\+pt}} (const unsigned \&b, const unsigned \&n)
 \begin{DoxyCompactList}\small\item\em Return n-\/th Solid\+Nodes on b-\/th boundary. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1SolidNode}{Solid\+Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1SolidMesh_a67bdc29bcb0477492362d116b55b4928}{element\+\_\+node\+\_\+pt}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}, const unsigned \&n)
+\mbox{\hyperlink{classoomph_1_1SolidNode}{Solid\+Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1SolidMesh_a8ef82c5fa6460e47eaaf02a681147649}{element\+\_\+node\+\_\+pt}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}, const unsigned \&n)
 \begin{DoxyCompactList}\small\item\em Return the n-\/th local \mbox{\hyperlink{classoomph_1_1SolidNode}{Solid\+Node}} in elemnet e. This is required to cast the nodes in a solid mesh to be Solid\+Nodes and therefore allow access to the extra \mbox{\hyperlink{classoomph_1_1SolidNode}{Solid\+Node}} data. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SolidMesh_a3eb52bbb81875244774cfc305c3ab21d}{set\+\_\+lagrangian\+\_\+nodal\+\_\+coordinates}} ()
 \begin{DoxyCompactList}\small\item\em Make the current configuration the undeformed one by setting the nodal Lagrangian coordinates to their current Eulerian ones. \end{DoxyCompactList}\item 
@@ -49,7 +49,7 @@ General \mbox{\hyperlink{classoomph_1_1SolidMesh}{Solid\+Mesh}} class.
 
 Solid meshes contain Solid\+Finite\+Elements which contain Solid\+Nodes. This class simply overloads the appropriate access functions from the underlying \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} class. 
 
-Definition at line \mbox{\hyperlink{mesh_8h_source_l02561}{2561}} of file \mbox{\hyperlink{mesh_8h_source}{mesh.\+h}}.
+Definition at line 2561 of file mesh.\+h.
 
 
 
@@ -66,7 +66,7 @@ Default constructor.
 
 
 
-Definition at line \mbox{\hyperlink{mesh_8h_source_l02565}{2565}} of file \mbox{\hyperlink{mesh_8h_source}{mesh.\+h}}.
+Definition at line 2565 of file mesh.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SolidMesh_af608c3a27638e17ed1e82a8371c1847b}\label{classoomph_1_1SolidMesh_af608c3a27638e17ed1e82a8371c1847b}} 
 \index{oomph::SolidMesh@{oomph::SolidMesh}!SolidMesh@{SolidMesh}}
@@ -90,20 +90,20 @@ Constructor builds combined mesh from the meshes specified. Note\+: This simply 
 
 
 
-Definition at line \mbox{\hyperlink{mesh_8h_source_l02576}{2576}} of file \mbox{\hyperlink{mesh_8h_source}{mesh.\+h}}.
+Definition at line 2576 of file mesh.\+h.
 
 
 
-References \mbox{\hyperlink{mesh_8h_source_l00119}{oomph\+::\+Mesh\+::\+Comm\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{mesh_8cc_source_l00065}{oomph\+::\+Mesh\+::merge\+\_\+meshes()}}.
+References oomph\+::\+Mesh\+::\+Comm\+\_\+pt, i, and oomph\+::\+Mesh\+::merge\+\_\+meshes().
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1SolidMesh_a562aad8bd129f8482b7d8fb14a94bebd}\label{classoomph_1_1SolidMesh_a562aad8bd129f8482b7d8fb14a94bebd}} 
+\mbox{\Hypertarget{classoomph_1_1SolidMesh_af2d057e3b0af894bb548bcc73765c414}\label{classoomph_1_1SolidMesh_af2d057e3b0af894bb548bcc73765c414}} 
 \index{oomph::SolidMesh@{oomph::SolidMesh}!boundary\_node\_pt@{boundary\_node\_pt}}
 \index{boundary\_node\_pt@{boundary\_node\_pt}!oomph::SolidMesh@{oomph::SolidMesh}}
 \doxysubsubsection{\texorpdfstring{boundary\_node\_pt()}{boundary\_node\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SolidNode}{Solid\+Node}} $\ast$ oomph\+::\+Solid\+Mesh\+::boundary\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b,  }\item[{const unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SolidNode}{Solid\+Node}}$\ast$ oomph\+::\+Solid\+Mesh\+::boundary\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b,  }\item[{const unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -111,21 +111,21 @@ Return n-\/th Solid\+Nodes on b-\/th boundary.
 
 
 
-Definition at line \mbox{\hyperlink{mesh_8h_source_l02612}{2612}} of file \mbox{\hyperlink{mesh_8h_source}{mesh.\+h}}.
+Definition at line 2612 of file mesh.\+h.
 
 
 
-References \mbox{\hyperlink{mesh_8h_source_l00493}{oomph\+::\+Mesh\+::boundary\+\_\+node\+\_\+pt()}}.
+References oomph\+::\+Mesh\+::boundary\+\_\+node\+\_\+pt().
 
 
 
-Referenced by \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00579}{oomph\+::\+Elastic\+Refineable\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Refineable\+Rectangular\+Quad\+Mesh()}}.
+Referenced by oomph\+::\+Elastic\+Refineable\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Refineable\+Rectangular\+Quad\+Mesh().
 
-\mbox{\Hypertarget{classoomph_1_1SolidMesh_a67bdc29bcb0477492362d116b55b4928}\label{classoomph_1_1SolidMesh_a67bdc29bcb0477492362d116b55b4928}} 
+\mbox{\Hypertarget{classoomph_1_1SolidMesh_a8ef82c5fa6460e47eaaf02a681147649}\label{classoomph_1_1SolidMesh_a8ef82c5fa6460e47eaaf02a681147649}} 
 \index{oomph::SolidMesh@{oomph::SolidMesh}!element\_node\_pt@{element\_node\_pt}}
 \index{element\_node\_pt@{element\_node\_pt}!oomph::SolidMesh@{oomph::SolidMesh}}
 \doxysubsubsection{\texorpdfstring{element\_node\_pt()}{element\_node\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SolidNode}{Solid\+Node}} $\ast$ oomph\+::\+Solid\+Mesh\+::element\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{e,  }\item[{const unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SolidNode}{Solid\+Node}}$\ast$ oomph\+::\+Solid\+Mesh\+::element\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{e,  }\item[{const unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -133,17 +133,17 @@ Return the n-\/th local \mbox{\hyperlink{classoomph_1_1SolidNode}{Solid\+Node}} 
 
 
 
-Definition at line \mbox{\hyperlink{mesh_8h_source_l02631}{2631}} of file \mbox{\hyperlink{mesh_8h_source}{mesh.\+h}}.
+Definition at line 2631 of file mesh.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00186}{oomph\+::\+Mesh\+::\+Element\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{mesh_8h_source_l02594}{node\+\_\+pt()}}.
+References e, oomph\+::\+Mesh\+::\+Element\+\_\+pt, oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and node\+\_\+pt().
 
-\mbox{\Hypertarget{classoomph_1_1SolidMesh_a053f864c3df9b7436b2eda1554d30ee5}\label{classoomph_1_1SolidMesh_a053f864c3df9b7436b2eda1554d30ee5}} 
+\mbox{\Hypertarget{classoomph_1_1SolidMesh_a8b096888d09593a6cdec9ede72eb5850}\label{classoomph_1_1SolidMesh_a8b096888d09593a6cdec9ede72eb5850}} 
 \index{oomph::SolidMesh@{oomph::SolidMesh}!node\_pt@{node\_pt}}
 \index{node\_pt@{node\_pt}!oomph::SolidMesh@{oomph::SolidMesh}}
 \doxysubsubsection{\texorpdfstring{node\_pt()}{node\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SolidNode}{Solid\+Node}} $\ast$ oomph\+::\+Solid\+Mesh\+::node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SolidNode}{Solid\+Node}}$\ast$ oomph\+::\+Solid\+Mesh\+::node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -151,15 +151,15 @@ Return a pointer to the n-\/th global \mbox{\hyperlink{classoomph_1_1SolidNode}{
 
 
 
-Definition at line \mbox{\hyperlink{mesh_8h_source_l02594}{2594}} of file \mbox{\hyperlink{mesh_8h_source}{mesh.\+h}}.
+Definition at line 2594 of file mesh.\+h.
 
 
 
-References \mbox{\hyperlink{mesh_8h_source_l00183}{oomph\+::\+Mesh\+::\+Node\+\_\+pt}}.
+References oomph\+::\+Mesh\+::\+Node\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{mesh__smooth_8h_source_l00395}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve()}}, \mbox{\hyperlink{mesh__smooth_8h_source_l00416}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::backup()}}, \mbox{\hyperlink{fsi_8h_source_l00724}{oomph\+::\+FSI\+\_\+functions\+::doc\+\_\+fsi()}}, \mbox{\hyperlink{mesh_8h_source_l02631}{element\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{mesh__smooth_8h_source_l00141}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::operator()()}}, \mbox{\hyperlink{mesh__smooth_8h_source_l00529}{oomph\+::\+Linear\+Elasticity\+Smooth\+Mesh$<$ LINEAR\+\_\+\+ELASTICITY\+\_\+\+ELEMENT $>$\+::operator()()}}, \mbox{\hyperlink{mesh__smooth_8h_source_l00664}{oomph\+::\+Poisson\+Smooth\+Mesh$<$ POISSON\+\_\+\+ELEMENT $>$\+::operator()()}}, \mbox{\hyperlink{mesh__smooth_8h_source_l00435}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::reset()}}, and \mbox{\hyperlink{mesh_8cc_source_l09564}{set\+\_\+lagrangian\+\_\+nodal\+\_\+coordinates()}}.
+Referenced by oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve(), oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::backup(), oomph\+::\+FSI\+\_\+functions\+::doc\+\_\+fsi(), element\+\_\+node\+\_\+pt(), oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::operator()(), oomph\+::\+Linear\+Elasticity\+Smooth\+Mesh$<$ LINEAR\+\_\+\+ELASTICITY\+\_\+\+ELEMENT $>$\+::operator()(), oomph\+::\+Poisson\+Smooth\+Mesh$<$ POISSON\+\_\+\+ELEMENT $>$\+::operator()(), oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::reset(), and set\+\_\+lagrangian\+\_\+nodal\+\_\+coordinates().
 
 \mbox{\Hypertarget{classoomph_1_1SolidMesh_a19b238cfaaaec5cd3c1d6149250c2159}\label{classoomph_1_1SolidMesh_a19b238cfaaaec5cd3c1d6149250c2159}} 
 \index{oomph::SolidMesh@{oomph::SolidMesh}!operator=@{operator=}}
@@ -187,11 +187,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Mesh_a7e0d761fca70b856185b7b9b
 
 
 
-Definition at line \mbox{\hyperlink{mesh_8h_source_l02669}{2669}} of file \mbox{\hyperlink{mesh_8h_source}{mesh.\+h}}.
+Definition at line 2669 of file mesh.\+h.
 
 
 
-References \mbox{\hyperlink{mesh_8h_source_l00373}{oomph\+::\+Mesh\+::scale\+\_\+mesh()}}, and \mbox{\hyperlink{mesh_8cc_source_l09564}{set\+\_\+lagrangian\+\_\+nodal\+\_\+coordinates()}}.
+References oomph\+::\+Mesh\+::scale\+\_\+mesh(), and set\+\_\+lagrangian\+\_\+nodal\+\_\+coordinates().
 
 \mbox{\Hypertarget{classoomph_1_1SolidMesh_a3eb52bbb81875244774cfc305c3ab21d}\label{classoomph_1_1SolidMesh_a3eb52bbb81875244774cfc305c3ab21d}} 
 \index{oomph::SolidMesh@{oomph::SolidMesh}!set\_lagrangian\_nodal\_coordinates@{set\_lagrangian\_nodal\_coordinates}}
@@ -207,15 +207,15 @@ Make the current configuration the undeformed one by setting the nodal Lagrangia
 
 /////////////////////////////////////////////////////////////////// Make the current configuration the undeformed one by setting the nodal Lagrangian coordinates to their current Eulerian ones 
 
-Definition at line \mbox{\hyperlink{mesh_8cc_source_l09564}{9564}} of file \mbox{\hyperlink{mesh_8cc_source}{mesh.\+cc}}.
+Definition at line 9564 of file mesh.\+cc.
 
 
 
-References \mbox{\hyperlink{nodes_8h_source_l01870}{oomph\+::\+Solid\+Node\+::nlagrangian()}}, \mbox{\hyperlink{nodes_8h_source_l01877}{oomph\+::\+Solid\+Node\+::nlagrangian\+\_\+type()}}, \mbox{\hyperlink{mesh_8h_source_l00596}{oomph\+::\+Mesh\+::nnode()}}, \mbox{\hyperlink{mesh_8h_source_l00183}{oomph\+::\+Mesh\+::\+Node\+\_\+pt}}, \mbox{\hyperlink{mesh_8h_source_l02594}{node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l01126}{oomph\+::\+Node\+::x\+\_\+gen()}}, and \mbox{\hyperlink{nodes_8h_source_l01902}{oomph\+::\+Solid\+Node\+::xi\+\_\+gen()}}.
+References oomph\+::\+Solid\+Node\+::nlagrangian(), oomph\+::\+Solid\+Node\+::nlagrangian\+\_\+type(), oomph\+::\+Mesh\+::nnode(), oomph\+::\+Mesh\+::\+Node\+\_\+pt, node\+\_\+pt(), oomph\+::\+Node\+::x\+\_\+gen(), and oomph\+::\+Solid\+Node\+::xi\+\_\+gen().
 
 
 
-Referenced by \mbox{\hyperlink{quarter__pipe__mesh_8template_8h_source_l00179}{oomph\+::\+Elastic\+Quarter\+Pipe\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Quarter\+Pipe\+Mesh()}}, \mbox{\hyperlink{one__d__lagrangian__mesh_8template_8cc_source_l00047}{oomph\+::\+One\+DLagrangian\+Mesh$<$ ELEMENT $>$\+::\+One\+DLagrangian\+Mesh()}}, \mbox{\hyperlink{mesh__smooth_8h_source_l00141}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::operator()()}}, \mbox{\hyperlink{mesh__smooth_8h_source_l00529}{oomph\+::\+Linear\+Elasticity\+Smooth\+Mesh$<$ LINEAR\+\_\+\+ELASTICITY\+\_\+\+ELEMENT $>$\+::operator()()}}, \mbox{\hyperlink{mesh__smooth_8h_source_l00664}{oomph\+::\+Poisson\+Smooth\+Mesh$<$ POISSON\+\_\+\+ELEMENT $>$\+::operator()()}}, \mbox{\hyperlink{channel__with__leaflet__mesh_8template_8h_source_l00547}{oomph\+::\+Pseudo\+Elastic\+Channel\+With\+Leaflet\+Mesh$<$ ELEMENT $>$\+::\+Pseudo\+Elastic\+Channel\+With\+Leaflet\+Mesh()}}, \mbox{\hyperlink{brick__from__tet__mesh_8template_8h_source_l00264}{oomph\+::\+Refineable\+Solid\+Brick\+From\+Tet\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Solid\+Brick\+From\+Tet\+Mesh()}}, \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8h_source_l00262}{oomph\+::\+Refineable\+Solid\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Solid\+Thin\+Layer\+Brick\+On\+Tet\+Mesh()}}, \mbox{\hyperlink{triangle__mesh_8template_8h_source_l03952}{oomph\+::\+Refineable\+Solid\+Triangle\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Solid\+Triangle\+Mesh()}}, \mbox{\hyperlink{mesh_8h_source_l02669}{scale\+\_\+mesh()}}, \mbox{\hyperlink{brick__from__tet__mesh_8template_8h_source_l00171}{oomph\+::\+Solid\+Brick\+From\+Tet\+Mesh$<$ ELEMENT $>$\+::\+Solid\+Brick\+From\+Tet\+Mesh()}}, \mbox{\hyperlink{tetgen__mesh_8template_8h_source_l00745}{oomph\+::\+Solid\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Solid\+Tetgen\+Mesh()}}, \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8h_source_l00205}{oomph\+::\+Solid\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$\+::\+Solid\+Thin\+Layer\+Brick\+On\+Tet\+Mesh()}}, \mbox{\hyperlink{triangle__mesh_8template_8h_source_l03903}{oomph\+::\+Solid\+Triangle\+Mesh$<$ ELEMENT $>$\+::\+Solid\+Triangle\+Mesh()}}, and \mbox{\hyperlink{xda__tet__mesh_8template_8h_source_l00132}{oomph\+::\+Solid\+Xda\+Tet\+Mesh$<$ ELEMENT $>$\+::\+Solid\+Xda\+Tet\+Mesh()}}.
+Referenced by oomph\+::\+Elastic\+Quarter\+Pipe\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Quarter\+Pipe\+Mesh(), oomph\+::\+One\+DLagrangian\+Mesh$<$ ELEMENT $>$\+::\+One\+DLagrangian\+Mesh(), oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::operator()(), oomph\+::\+Linear\+Elasticity\+Smooth\+Mesh$<$ LINEAR\+\_\+\+ELASTICITY\+\_\+\+ELEMENT $>$\+::operator()(), oomph\+::\+Poisson\+Smooth\+Mesh$<$ POISSON\+\_\+\+ELEMENT $>$\+::operator()(), oomph\+::\+Pseudo\+Elastic\+Channel\+With\+Leaflet\+Mesh$<$ ELEMENT $>$\+::\+Pseudo\+Elastic\+Channel\+With\+Leaflet\+Mesh(), oomph\+::\+Refineable\+Solid\+Brick\+From\+Tet\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Solid\+Brick\+From\+Tet\+Mesh(), oomph\+::\+Refineable\+Solid\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Solid\+Thin\+Layer\+Brick\+On\+Tet\+Mesh(), oomph\+::\+Refineable\+Solid\+Triangle\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Solid\+Triangle\+Mesh(), scale\+\_\+mesh(), oomph\+::\+Solid\+Brick\+From\+Tet\+Mesh$<$ ELEMENT $>$\+::\+Solid\+Brick\+From\+Tet\+Mesh(), oomph\+::\+Solid\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Solid\+Tetgen\+Mesh(), oomph\+::\+Solid\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$\+::\+Solid\+Thin\+Layer\+Brick\+On\+Tet\+Mesh(), oomph\+::\+Solid\+Triangle\+Mesh$<$ ELEMENT $>$\+::\+Solid\+Triangle\+Mesh(), and oomph\+::\+Solid\+Xda\+Tet\+Mesh$<$ ELEMENT $>$\+::\+Solid\+Xda\+Tet\+Mesh().
 
 
 
@@ -232,7 +232,7 @@ Static problem that can be used to assign initial conditions on a given solid me
 
 Static problem that can be used to assign initial conditions on a given mesh. 
 
-Definition at line \mbox{\hyperlink{mesh_8h_source_l02679}{2679}} of file \mbox{\hyperlink{mesh_8h_source}{mesh.\+h}}.
+Definition at line 2679 of file mesh.\+h.
 
 
 

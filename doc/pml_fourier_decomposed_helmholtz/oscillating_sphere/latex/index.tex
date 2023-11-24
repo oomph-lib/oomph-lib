@@ -105,7 +105,7 @@ As usual, we define the problem parameters in a global namespace. The main param
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===== start\_of\_namespace=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for the Fourier decomposed Helmholtz problem parameters}}
-\DoxyCodeLine{\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceProblemParameters}{ProblemParameters}}}
 \DoxyCodeLine{\{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Output directory}}
@@ -131,18 +131,18 @@ As usual, we define the problem parameters in a global namespace. The main param
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Number of terms in the exact solution}}
+\DoxyCodeLine{ \textcolor{comment}{/// Number of terms in the exact solution}}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}{N\_terms}}=6;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Coefficients in the exact solution}}
-\DoxyCodeLine{\textcolor{comment}{} Vector<double> \mbox{\hyperlink{namespaceProblemParameters_acb1788444ef78fe2adec824504f24246}{Coeff}}(\mbox{\hyperlink{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}{N\_terms}},1.0);}
+\DoxyCodeLine{\textcolor{comment}{} Vector<double> \mbox{\hyperlink{namespaceProblemParameters_a20cc9776e745842f6126f4cd17659d19}{Coeff}}(\mbox{\hyperlink{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}{N\_terms}},1.0);}
 
 \end{DoxyCodeInclude}
  required for the specification of the exact solution
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Exact solution as a Vector of size 2, containing real and imag parts}}
+\DoxyCodeLine{ \textcolor{comment}{/// Exact solution as a Vector of size 2, containing real and imag parts}}
 \DoxyCodeLine{ \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceProblemParameters_af750b29069b29bd38b5220ecf534e7f7}{get\_exact\_u}}(\textcolor{keyword}{const} Vector<double>\& x, Vector<double>\& u)}
 
 \end{DoxyCodeInclude}
@@ -150,9 +150,9 @@ As usual, we define the problem parameters in a global namespace. The main param
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Get -\/du/dr (spherical r) for exact solution. Equal to prescribed}}
+\DoxyCodeLine{ \textcolor{comment}{/// Get -\/du/dr (spherical r) for exact solution. Equal to prescribed}}
 \DoxyCodeLine{\textcolor{comment}{ /// flux on inner boundary.}}
-\DoxyCodeLine{ \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceProblemParameters_aa544d1f3e384d3283f7113512931ea8f}{exact\_minus\_dudr}}(\textcolor{keyword}{const} Vector<double>\& x, std::complex<double>\& flux)}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceProblemParameters_aa544d1f3e384d3283f7113512931ea8f}{exact\_minus\_dudr}}(\textcolor{keyword}{const} Vector<double>\& x, std::complex<double>\& flux)}
 
 \end{DoxyCodeInclude}
  whose listings we omit here.
@@ -165,7 +165,7 @@ The driver code is very straightforward. We create the problem object,
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===== start\_of\_main=====================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver code for Pml Fourier decomposed Helmholtz problem}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{oscillating__sphere_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} **argv)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ \textcolor{comment}{// Create the problem with 2D six-\/node elements from the}}
@@ -209,7 +209,7 @@ The problem class is very similar to that employed for the \href{../../../helmho
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//========= start\_of\_problem\_class=====================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Problem class}}
-\DoxyCodeLine{\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem}{PMLFourierDecomposedHelmholtzProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -243,7 +243,7 @@ The problem class is very similar to that employed for the \href{../../../helmho
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Pointer to the "{}bulk"{} mesh}}
+\DoxyCodeLine{ \textcolor{comment}{/// Pointer to the "{}bulk"{} mesh}}
 \DoxyCodeLine{ TriangleMesh<ELEMENT>* Bulk\_mesh\_pt;}
 
 \end{DoxyCodeInclude}
@@ -251,7 +251,7 @@ The problem class is very similar to that employed for the \href{../../../helmho
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Mesh of FaceElements that apply the flux bc on the inner boundary}}
+\DoxyCodeLine{ \textcolor{comment}{/// Mesh of FaceElements that apply the flux bc on the inner boundary}}
 \DoxyCodeLine{ Mesh* Helmholtz\_inner\_boundary\_mesh\_pt;}
 
 \end{DoxyCodeInclude}
@@ -259,7 +259,7 @@ The problem class is very similar to that employed for the \href{../../../helmho
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Pointer to the right PML mesh}}
+\DoxyCodeLine{ \textcolor{comment}{/// Pointer to the right PML mesh}}
 \DoxyCodeLine{ Mesh* PML\_right\_mesh\_pt;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to the top PML mesh}}
@@ -288,7 +288,7 @@ We open a trace file in which we record the radiated power and create the {\ttfa
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_constructor=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for Pml Fourier-\/decomposed Helmholtz problem}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem_a5764db8312a28a3e1eaac2cc61813f83}{PMLFourierDecomposedHelmholtzProblem<ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem_a5764db8312a28a3e1eaac2cc61813f83}{PMLFourierDecomposedHelmholtzProblem}}()}
@@ -457,7 +457,7 @@ The function {\ttfamily create\+\_\+flux\+\_\+elements()} creates the Face\+Elem
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_flux\_elements=================}}
 \DoxyCodeLine{\textcolor{comment}{/// Create flux elements on inner boundary}}
-\DoxyCodeLine{\textcolor{comment}{//==========================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==========================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void}  \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem_afd6e3401bdbd1d3deb3271553fbe1d3a}{PMLFourierDecomposedHelmholtzProblem<ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem_afd6e3401bdbd1d3deb3271553fbe1d3a}{create\_flux\_elements\_on\_inner\_boundary}}()}
@@ -501,7 +501,7 @@ The function {\ttfamily create\+\_\+power\+\_\+monitor\+\_\+mesh} creates the Fa
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===================start\_of\_create\_power\_monitor\_mesh===================}}
 \DoxyCodeLine{\textcolor{comment}{/// Create BC elements on outer boundary}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem_a83e0aa333ec3b25f1afccc3bc0a529ad}{PMLFourierDecomposedHelmholtzProblem<ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem_a83e0aa333ec3b25f1afccc3bc0a529ad}{create\_power\_monitor\_mesh}}()}
@@ -651,7 +651,7 @@ The post-\/processing function {\ttfamily doc\+\_\+solution(...)} outputs the so
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===============start\_of\_doc=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution: doc\_info contains labels/output directory etc.}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem_afcdfaf86efc75fbea14f6ade9eeb7f9c}{PMLFourierDecomposedHelmholtzProblem<ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem_afcdfaf86efc75fbea14f6ade9eeb7f9c}{doc\_solution}}(DocInfo\& doc\_info)}

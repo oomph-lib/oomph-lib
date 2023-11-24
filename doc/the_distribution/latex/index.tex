@@ -7,6 +7,8 @@
 \item \mbox{\hyperlink{index_standard_install}{Installation with {\ttfamily autogen.\+sh} }}
 \item \mbox{\hyperlink{index_custom_install}{Configuration options}}
 \end{DoxyEnumerate}
+\end{DoxyEnumerate}
+\begin{DoxyEnumerate}
 \item \mbox{\hyperlink{index_nav}{Finding your way through the distribution}}
 \item \mbox{\hyperlink{index_external}{External (third-\/party) libraries}}
 \begin{DoxyEnumerate}
@@ -23,6 +25,8 @@
 \item \mbox{\hyperlink{index_mumps}{MUMPS and Sca\+LAPACK}}
 \end{DoxyEnumerate}
 \end{DoxyEnumerate}
+\end{DoxyEnumerate}
+\begin{DoxyEnumerate}
 \item \mbox{\hyperlink{index_own}{How to write your own code and link it against oomph-\/lib\textquotesingle{}s library/libraries}}
 \begin{DoxyEnumerate}
 \item \mbox{\hyperlink{index_have_auto_tools}{Writing/linking your own driver codes under autotools control}}
@@ -30,9 +34,13 @@
 \item \mbox{\hyperlink{index_add_driver}{Adding your own driver codes}}
 \item \mbox{\hyperlink{index_add_src}{Adding new libraries and linking against them from driver codes}}
 \end{DoxyEnumerate}
+\end{DoxyEnumerate}
+\end{DoxyEnumerate}
+\begin{DoxyEnumerate}
 \item \mbox{\hyperlink{index_dont_have_auto_tools}{Writing/linking user code without autotools\+: How do I treat {\ttfamily oomph-\/lib} simply as a library?}}
 \end{DoxyEnumerate}
-\end{DoxyEnumerate}\DoxyHorRuler{0}
+
+\DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_download}{}\doxysection{Get the distribution}\label{index_download}
 {\ttfamily oomph-\/lib} is hosted on and distributed via Git\+Hub at \begin{center}\href{https://github.com/oomph-lib/oomph-lib}{\texttt{ https\+://github.\+com/oomph-\/lib/oomph-\/lib}}.\end{center} ~\newline
@@ -432,8 +440,8 @@ Let\textquotesingle{}s start with the straightforward case\+: You want to use {\
 ~\newline
 
 \item The {\ttfamily INCLUDES} variable should only be specified once.
-\end{DoxyItemize}It makes sense to create a separate Git\+Hub repository for your user driver directory. This won\textquotesingle{}t interfere with the forked/cloned oomph-\/lib repository that you\textquotesingle{}re working within. As far as the {\ttfamily oomph-\/lib} repository is concerned your user driver directory is simply one of possibly many directories that it\textquotesingle{}s not tracking. Similarly, from within your user driver directory, the files outside it are not tracked by your repository, so the two can happily co-\/exist.
-\end{DoxyEnumerate}\hypertarget{index_add_src}{}\doxysubsubsection{Adding new libraries and linking against them from driver codes}\label{index_add_src}
+\end{DoxyItemize}
+\end{DoxyEnumerate}It makes sense to create a separate Git\+Hub repository for your user driver directory. This won\textquotesingle{}t interfere with the forked/cloned oomph-\/lib repository that you\textquotesingle{}re working within. As far as the {\ttfamily oomph-\/lib} repository is concerned your user driver directory is simply one of possibly many directories that it\textquotesingle{}s not tracking. Similarly, from within your user driver directory, the files outside it are not tracked by your repository, so the two can happily co-\/exist.\hypertarget{index_add_src}{}\doxysubsubsection{Adding new libraries and linking against them from driver codes}\label{index_add_src}
 The above instructions should be sufficient to get you started. You can create multiple sub-\/directories for different projects and each sub-\/directory may, of course, contain multiple files, separated into header and source files. {\ttfamily automake} will ensure that only those files that have been changed will be recompiled when you issue the {\ttfamily make} command. However, at some point you may wish to package some of your sources into your own library and maybe even offer it for permanent inclusion into {\ttfamily oomph-\/lib}. For this purpose the {\ttfamily oomph-\/lib} distribution provides the sub-\/directory {\ttfamily user\+\_\+src} which closely mirrors that of the {\ttfamily src} and {\ttfamily external\+\_\+src} directories discussed earlier. During the build process, each sub-\/directory in {\ttfamily user\+\_\+src} is compiled into its own library and installed in the standard location.
 
 The steps required to include your own library into the {\ttfamily oomph-\/lib} build process are very similar to those required to add additional user drivers. As before, the {\ttfamily user\+\_\+src} directory already contains a sample directory {\ttfamily jack\+\_\+cool}, to facilitate the procedure. We therefore suggest the following sequence of steps\+:

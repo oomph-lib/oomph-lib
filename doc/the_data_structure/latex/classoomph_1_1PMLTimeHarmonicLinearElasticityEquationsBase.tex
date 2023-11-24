@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}{}\doxysection{oomph\+::PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}{}\doxysection{oomph\+::PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$ Class Template Reference}
 \label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}\index{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}}
 
 
@@ -9,7 +9,7 @@ A base class for elements that solve the equations of time-\/harmonic linear ela
 
 {\ttfamily \#include $<$pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=0.971098cm]{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}
@@ -18,50 +18,50 @@ Inheritance diagram for oomph\+::PMLTime\+Harmonic\+Linear\+Elasticity\+Equation
 \doxysubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a45774807ce550b68de4f85ad0ffa904a}{Body\+Force\+Fct\+Pt}}) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&b)
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_ae7e51fd604fffc42cb9a8a843fa09496}{Body\+Force\+Fct\+Pt}}) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&b)
 \begin{DoxyCompactList}\small\item\em Function pointer to function that specifies the body force as a function of the Cartesian coordinates FCT(x,b) -- x and b are Vectors! \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_aafd00c124daa9b197a4364707b788d43}{PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base}} ()
 \begin{DoxyCompactList}\small\item\em Constructor\+: Set null pointers for constitutive law and for isotropic growth function. Set physical parameter values to default values, and set body force to zero. \end{DoxyCompactList}\item 
-virtual std\+::complex$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_aa053acc6c4cbb5432bf2a667fac7ffe7}{u\+\_\+index\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity}} (const unsigned \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+virtual std\+::complex$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a81fa794623734812d0aa3116456d99ba}{u\+\_\+index\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity}} (const unsigned \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Return the index at which the i-\/th real or imag unknown displacement component is stored. The default value is appropriate for single-\/physics problems\+: \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a0eda17e9f0e6973ca0f859f67746ab60}{interpolated\+\_\+u\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&disp) const
+void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_ae7ac55e5a3d92669e56ab492cbc2dddf}{interpolated\+\_\+u\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&disp) const
 \begin{DoxyCompactList}\small\item\em Compute vector of FE interpolated displacement u at local coordinate s. \end{DoxyCompactList}\item 
-std\+::complex$<$ double $>$ \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_ae2155516c77c13f6eb80790d752eb659}{interpolated\+\_\+u\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+std\+::complex$<$ double $>$ \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a99f3853339d3570ac7afb7cbf486dd17}{interpolated\+\_\+u\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Return FE interpolated displacement u\mbox{[}i\mbox{]} at local coordinate s. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor}{PMLTime\+Harmonic\+Isotropic\+Elasticity\+Tensor}} $\ast$\& \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a1897aeb42545465056ed9e196b25e11d}{elasticity\+\_\+tensor\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor}{PMLTime\+Harmonic\+Isotropic\+Elasticity\+Tensor}} $\ast$\& \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a30cfbee8ab485cee53ecd8a666531557}{elasticity\+\_\+tensor\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return the pointer to the elasticity\+\_\+tensor. \end{DoxyCompactList}\item 
-std\+::complex$<$ double $>$ \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a4e1d46d7b8f3482906e902669e272ce9}{E}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned \&j, const unsigned \&k, const unsigned \&l) const
+std\+::complex$<$ double $>$ \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a1c9ade99fa96e7cfe987e9e978d130da}{E}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned \&j, const unsigned \&k, const unsigned \&l) const
 \begin{DoxyCompactList}\small\item\em Access function to the entries in the elasticity tensor. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a5c28764330d0d42339c5c5f3044a66bf}{nu}} () const
 \begin{DoxyCompactList}\small\item\em Access function to nu in the elasticity tensor. \end{DoxyCompactList}\item 
-const double \& \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a6c8e3b3bf49c07828155b1c20694133e}{omega\+\_\+sq}} () const
+const double \& \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a82459926f0225f8acd062f0450abc6ed}{omega\+\_\+sq}} () const
 \begin{DoxyCompactList}\small\item\em Access function for square of non-\/dim frequency. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_ae59339d693eb60de1583c74c4eb0dd47}{omega\+\_\+sq\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a060c7a034add2ded7e2dbf2fe9eaac0c}{omega\+\_\+sq\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for square of non-\/dim frequency. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a45774807ce550b68de4f85ad0ffa904a}{Body\+Force\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a90990ee34201eadc80145531fe12ed11}{body\+\_\+force\+\_\+fct\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_ae7e51fd604fffc42cb9a8a843fa09496}{Body\+Force\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a1af36445ad459fbb36c9c3646a323347}{body\+\_\+force\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to body force function. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a45774807ce550b68de4f85ad0ffa904a}{Body\+Force\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a119cef0394bdfa2df62e439d935513a2}{body\+\_\+force\+\_\+fct\+\_\+pt}} () const
+\mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_ae7e51fd604fffc42cb9a8a843fa09496}{Body\+Force\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a119cef0394bdfa2df62e439d935513a2}{body\+\_\+force\+\_\+fct\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to body force function (const version) \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_ae3f79308f146b472d4058bed523fc9c9}{get\+\_\+stress}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ std\+::complex$<$ double $>$ $>$ \&sigma) const =0
+virtual void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a3383c407d4d83b864ec7a0aa46af4fb9}{get\+\_\+stress}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ std\+::complex$<$ double $>$$>$ \&sigma) const =0
 \begin{DoxyCompactList}\small\item\em Return the Cauchy stress tensor, as calculated from the elasticity tensor at specified local coordinate Virtual so separaete versions can (and must!) be provided for displacement and pressure-\/displacement formulations. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_af9c0b4aeb96bee736791de3a1a0aa7b1}{get\+\_\+strain}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ std\+::complex$<$ double $>$ $>$ \&strain) const
+void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_ab7e8ff48d11335eb5596e4016e5b617b}{get\+\_\+strain}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ std\+::complex$<$ double $>$$>$ \&strain) const
 \begin{DoxyCompactList}\small\item\em Return the strain tensor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a2993da51320515e959e7e395a3adb637}{body\+\_\+force}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&b) const
+void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a186ca62a78f072daf9637256718b6978}{body\+\_\+force}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&b) const
 \begin{DoxyCompactList}\small\item\em Evaluate body force at Eulerian coordinate x (returns zero vector if no body force function pointer has been set) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a6cf2e81c08597a2bd242941846cafa77}{values\+\_\+to\+\_\+be\+\_\+pinned\+\_\+on\+\_\+outer\+\_\+pml\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&values\+\_\+to\+\_\+pin)
 \begin{DoxyCompactList}\small\item\em Pure virtual function in which we specify the values to be pinned (and set to zero) on the outer edge of the pml layer. All of them! \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} is resized internally. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a16ddde4801bcb2ae3dda95490cb0d680}{ndof\+\_\+types}} () const
 \begin{DoxyCompactList}\small\item\em The number of \char`\"{}\+DOF types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: for now lump them all into one DOF type. Can be adjusted later. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_ae73d932e03d1105cad7f7f4a3cf7fefe}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
+void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_ac6d68b4d4aa01cc4da3c26c50af7515c}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&dof\+\_\+lookup\+\_\+list) const
 \begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+DOF types\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_aaa0ca76090994db0c20606ad2a536aec}{compute\+\_\+pml\+\_\+coefficients}} (const unsigned \&ipt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&pml\+\_\+inverse\+\_\+jacobian\+\_\+diagonal, std\+::complex$<$ double $>$ \&pml\+\_\+jacobian\+\_\+det)
+void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_af4394df38bd1a15e3169f250a9972ac2}{compute\+\_\+pml\+\_\+coefficients}} (const unsigned \&ipt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&pml\+\_\+inverse\+\_\+jacobian\+\_\+diagonal, std\+::complex$<$ double $>$ \&pml\+\_\+jacobian\+\_\+det)
 \begin{DoxyCompactList}\small\item\em Compute pml coefficients at position x and integration point ipt. pml\+\_\+inverse\+\_\+jacobian\+\_\+diagonal contains the diagonal terms from the inverse of the Jacobian of the PML transformation. These are used to transform derivatives in real x to derivatives in transformed space $\tilde x $. This can be interpreted as an anisotropic stiffness. pml\+\_\+jacobian\+\_\+det is the determinant of the Jacobian of the PML transformation, this allows us to transform volume integrals in transformed space to real space. This can be interpreted as a mass factor If the PML is not enabled via enable\+\_\+pml, both default to 1.\+0. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1PMLMapping}{PMLMapping}} $\ast$\& \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_ae9b07f11cc6f784b97c30b966068df10}{pml\+\_\+mapping\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1PMLMapping}{PMLMapping}} $\ast$\& \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_ac58d409c9b0c6f89446a14955cb8dc1a}{pml\+\_\+mapping\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return a pointer to the PML Mapping object. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1PMLMapping}{PMLMapping}} $\ast$const \& \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a2f45e9b45c613cf0f5be9ac24b8e1ec4}{pml\+\_\+mapping\+\_\+pt}} () const
+\mbox{\hyperlink{classoomph_1_1PMLMapping}{PMLMapping}} $\ast$const  \& \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_ab0be5c95a17f261e17e7e70ec15d25eb}{pml\+\_\+mapping\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Return a pointer to the PML Mapping object (const version) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
@@ -75,7 +75,7 @@ static \mbox{\hyperlink{classoomph_1_1ContinuousBermudezPMLMapping}{Continuous\+
 \begin{DoxyCompactList}\small\item\em Pointer to the elasticity tensor. \end{DoxyCompactList}\item 
 double $\ast$ \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_afb14d5dd207ba369c68056b8537b8e41}{Omega\+\_\+sq\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Square of nondim frequency. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a45774807ce550b68de4f85ad0ffa904a}{Body\+Force\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a7cb45d4e41b4d1775e4206696eb3aaf7}{Body\+\_\+force\+\_\+fct\+\_\+pt}}
+\mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_ae7e51fd604fffc42cb9a8a843fa09496}{Body\+Force\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a7cb45d4e41b4d1775e4206696eb3aaf7}{Body\+\_\+force\+\_\+fct\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to body force function. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1PMLMapping}{PMLMapping}} $\ast$ \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a78e8558aa4616b6a2859cb7e33ca59cf}{Pml\+\_\+mapping\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to class which holds the pml mapping function, also known as gamma. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -90,19 +90,20 @@ static double \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEqua
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$unsigned DIM$>$\newline
 class oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$}
+
 A base class for elements that solve the equations of time-\/harmonic linear elasticity in Cartesian coordinates. Combines a few generic functions that are shared by \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquations}{PMLTime\+Harmonic\+Linear\+Elasticity\+Equations}} and PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+With\+Pressure (Note\+: The latter don\textquotesingle{}t exist yet but will be written as soon as somebody needs them...) 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00078}{78}} of file \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
+Definition at line 78 of file pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
 \doxysubsection{Member Typedef Documentation}
-\mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a45774807ce550b68de4f85ad0ffa904a}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a45774807ce550b68de4f85ad0ffa904a}} 
+\mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_ae7e51fd604fffc42cb9a8a843fa09496}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_ae7e51fd604fffc42cb9a8a843fa09496}} 
 \index{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}!BodyForceFctPt@{BodyForceFctPt}}
 \index{BodyForceFctPt@{BodyForceFctPt}!oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{BodyForceFctPt}{BodyForceFctPt}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base}}$<$ DIM $>$\+::Body\+Force\+Fct\+Pt) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&b)}
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base}}$<$ DIM $>$\+::Body\+Force\+Fct\+Pt) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&b)}
 
 
 
@@ -110,7 +111,7 @@ Function pointer to function that specifies the body force as a function of the 
 
 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00175}{175}} of file \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
+Definition at line 175 of file pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -128,21 +129,21 @@ Constructor\+: Set null pointers for constitutive law and for isotropic growth f
 
 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00086}{86}} of file \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
+Definition at line 86 of file pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00415}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::\+Default\+\_\+pml\+\_\+mapping}}, and \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00432}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::\+Pml\+\_\+mapping\+\_\+pt}}.
+References oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::\+Default\+\_\+pml\+\_\+mapping, and oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::\+Pml\+\_\+mapping\+\_\+pt.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a2993da51320515e959e7e395a3adb637}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a2993da51320515e959e7e395a3adb637}} 
+\mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a186ca62a78f072daf9637256718b6978}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a186ca62a78f072daf9637256718b6978}} 
 \index{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}!body\_force@{body\_force}}
 \index{body\_force@{body\_force}!oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{body\_force()}{body\_force()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base}}$<$ DIM $>$\+::body\+\_\+force (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{b }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base}}$<$ DIM $>$\+::body\+\_\+force (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{b }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -150,18 +151,18 @@ Evaluate body force at Eulerian coordinate x (returns zero vector if no body for
 
 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00236}{236}} of file \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
+Definition at line 236 of file pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00425}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::\+Body\+\_\+force\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::\+Body\+\_\+force\+\_\+fct\+\_\+pt, oomph\+::\+Finite\+Element\+::dim(), and i.
 
-\mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a90990ee34201eadc80145531fe12ed11}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a90990ee34201eadc80145531fe12ed11}} 
+\mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a1af36445ad459fbb36c9c3646a323347}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a1af36445ad459fbb36c9c3646a323347}} 
 \index{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}!body\_force\_fct\_pt@{body\_force\_fct\_pt}}
 \index{body\_force\_fct\_pt@{body\_force\_fct\_pt}!oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{body\_force\_fct\_pt()}{body\_force\_fct\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-\mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a45774807ce550b68de4f85ad0ffa904a}{Body\+Force\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base}}$<$ DIM $>$\+::body\+\_\+force\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_ae7e51fd604fffc42cb9a8a843fa09496}{Body\+Force\+Fct\+Pt}}\& \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base}}$<$ DIM $>$\+::body\+\_\+force\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -169,18 +170,18 @@ Access function\+: Pointer to body force function.
 
 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00212}{212}} of file \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
+Definition at line 212 of file pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00425}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::\+Body\+\_\+force\+\_\+fct\+\_\+pt}}.
+References oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::\+Body\+\_\+force\+\_\+fct\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a119cef0394bdfa2df62e439d935513a2}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a119cef0394bdfa2df62e439d935513a2}} 
 \index{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}!body\_force\_fct\_pt@{body\_force\_fct\_pt}}
 \index{body\_force\_fct\_pt@{body\_force\_fct\_pt}!oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{body\_force\_fct\_pt()}{body\_force\_fct\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-\mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a45774807ce550b68de4f85ad0ffa904a}{Body\+Force\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base}}$<$ DIM $>$\+::body\+\_\+force\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_ae7e51fd604fffc42cb9a8a843fa09496}{Body\+Force\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base}}$<$ DIM $>$\+::body\+\_\+force\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -188,18 +189,18 @@ Access function\+: Pointer to body force function (const version)
 
 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00218}{218}} of file \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
+Definition at line 218 of file pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00425}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::\+Body\+\_\+force\+\_\+fct\+\_\+pt}}.
+References oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::\+Body\+\_\+force\+\_\+fct\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_aaa0ca76090994db0c20606ad2a536aec}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_aaa0ca76090994db0c20606ad2a536aec}} 
+\mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_af4394df38bd1a15e3169f250a9972ac2}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_af4394df38bd1a15e3169f250a9972ac2}} 
 \index{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}!compute\_pml\_coefficients@{compute\_pml\_coefficients}}
 \index{compute\_pml\_coefficients@{compute\_pml\_coefficients}!oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{compute\_pml\_coefficients()}{compute\_pml\_coefficients()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base}}$<$ DIM $>$\+::compute\+\_\+pml\+\_\+coefficients (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{pml\+\_\+inverse\+\_\+jacobian\+\_\+diagonal,  }\item[{std\+::complex$<$ double $>$ \&}]{pml\+\_\+jacobian\+\_\+det }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base}}$<$ DIM $>$\+::compute\+\_\+pml\+\_\+coefficients (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{pml\+\_\+inverse\+\_\+jacobian\+\_\+diagonal,  }\item[{std\+::complex$<$ double $>$ \&}]{pml\+\_\+jacobian\+\_\+det }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -213,18 +214,18 @@ The factors all default to 1.\+0 if the propagation medium is the physical domai
 
 Calculate the square of the non-\/dimensional wavenumber
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00331}{331}} of file \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
+Definition at line 331 of file pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{classoomph_1_1PMLMapping_a748bcc76abc77d6df3ea83a174ebfb65}{oomph\+::\+PMLMapping\+::gamma()}}, \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00194}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::nu()}}, \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00200}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::omega\+\_\+sq()}}, \mbox{\hyperlink{pml__meshes_8h_source_l00124}{oomph\+::\+PMLElement\+Base$<$ DIM $>$\+::\+Pml\+\_\+direction\+\_\+active}}, \mbox{\hyperlink{pml__meshes_8h_source_l00129}{oomph\+::\+PMLElement\+Base$<$ DIM $>$\+::\+Pml\+\_\+inner\+\_\+boundary}}, \mbox{\hyperlink{pml__meshes_8h_source_l00119}{oomph\+::\+PMLElement\+Base$<$ DIM $>$\+::\+Pml\+\_\+is\+\_\+enabled}}, \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00432}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::\+Pml\+\_\+mapping\+\_\+pt}}, and \mbox{\hyperlink{pml__meshes_8h_source_l00134}{oomph\+::\+PMLElement\+Base$<$ DIM $>$\+::\+Pml\+\_\+outer\+\_\+boundary}}.
+References oomph\+::\+PMLMapping\+::gamma(), oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::nu(), oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::omega\+\_\+sq(), oomph\+::\+PMLElement\+Base$<$ DIM $>$\+::\+Pml\+\_\+direction\+\_\+active, oomph\+::\+PMLElement\+Base$<$ DIM $>$\+::\+Pml\+\_\+inner\+\_\+boundary, oomph\+::\+PMLElement\+Base$<$ DIM $>$\+::\+Pml\+\_\+is\+\_\+enabled, oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::\+Pml\+\_\+mapping\+\_\+pt, and oomph\+::\+PMLElement\+Base$<$ DIM $>$\+::\+Pml\+\_\+outer\+\_\+boundary.
 
-\mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a4e1d46d7b8f3482906e902669e272ce9}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a4e1d46d7b8f3482906e902669e272ce9}} 
+\mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a1c9ade99fa96e7cfe987e9e978d130da}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a1c9ade99fa96e7cfe987e9e978d130da}} 
 \index{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}!E@{E}}
 \index{E@{E}!oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{E()}{E()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-std\+::complex$<$ double $>$ \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base}}$<$ DIM $>$\+::E (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j,  }\item[{const unsigned \&}]{k,  }\item[{const unsigned \&}]{l }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+std\+::complex$<$double$>$ \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base}}$<$ DIM $>$\+::E (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j,  }\item[{const unsigned \&}]{k,  }\item[{const unsigned \&}]{l }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -232,18 +233,18 @@ Access function to the entries in the elasticity tensor.
 
 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00185}{185}} of file \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
+Definition at line 185 of file pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00419}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::\+Elasticity\+\_\+tensor\+\_\+pt}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::\+Elasticity\+\_\+tensor\+\_\+pt, and i.
 
-\mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a1897aeb42545465056ed9e196b25e11d}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a1897aeb42545465056ed9e196b25e11d}} 
+\mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a30cfbee8ab485cee53ecd8a666531557}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a30cfbee8ab485cee53ecd8a666531557}} 
 \index{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}!elasticity\_tensor\_pt@{elasticity\_tensor\_pt}}
 \index{elasticity\_tensor\_pt@{elasticity\_tensor\_pt}!oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{elasticity\_tensor\_pt()}{elasticity\_tensor\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-\mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor}{PMLTime\+Harmonic\+Isotropic\+Elasticity\+Tensor}} $\ast$\& \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base}}$<$ DIM $>$\+::elasticity\+\_\+tensor\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor}{PMLTime\+Harmonic\+Isotropic\+Elasticity\+Tensor}}$\ast$\& \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base}}$<$ DIM $>$\+::elasticity\+\_\+tensor\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -251,18 +252,18 @@ Return the pointer to the elasticity\+\_\+tensor.
 
 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00179}{179}} of file \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
+Definition at line 179 of file pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00419}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::\+Elasticity\+\_\+tensor\+\_\+pt}}.
+References oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::\+Elasticity\+\_\+tensor\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_ae73d932e03d1105cad7f7f4a3cf7fefe}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_ae73d932e03d1105cad7f7f4a3cf7fefe}} 
+\mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_ac6d68b4d4aa01cc4da3c26c50af7515c}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_ac6d68b4d4aa01cc4da3c26c50af7515c}} 
 \index{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
 \index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base}}$<$ DIM $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base}}$<$ DIM $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -270,22 +271,22 @@ Create a list of pairs for all unknowns in this element, so that the first entry
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a069f59bfc3e607a5bebba52c6314d777}{oomph\+::\+Generalised\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a29c6fb71cd7cabb29b4c289598aec601}{oomph\+::\+Generalised\+Element}}.
 
 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00284}{284}} of file \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
+Definition at line 284 of file pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}.
+References oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), i, oomph\+::\+Finite\+Element\+::nnode(), and oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn().
 
-\mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_af9c0b4aeb96bee736791de3a1a0aa7b1}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_af9c0b4aeb96bee736791de3a1a0aa7b1}} 
+\mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_ab7e8ff48d11335eb5596e4016e5b617b}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_ab7e8ff48d11335eb5596e4016e5b617b}} 
 \index{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}!get\_strain@{get\_strain}}
 \index{get\_strain@{get\_strain}!oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_strain()}{get\_strain()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base}}$<$ DIM $>$\+::get\+\_\+strain (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{strain }\end{DoxyParamCaption}) const}
+void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base}}$<$ DIM $>$\+::get\+\_\+strain (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ std\+::complex$<$ double $>$$>$ \&}]{strain }\end{DoxyParamCaption}) const}
 
 
 
@@ -295,22 +296,22 @@ Return the strain tensor.
 
 Compute the strain tensor at local coordinate s Now fill in the entries of the strain tensor
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8cc_source_l00049}{49}} of file \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8cc_source}{pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc}}.
+Definition at line 49 of file pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References i, and s.
 
 
 
-Referenced by \mbox{\hyperlink{Tpml__time__harmonic__linear__elasticity__elements_8h_source_l00141}{oomph\+::\+TPMLTime\+Harmonic\+Linear\+Elasticity\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::get\+\_\+\+Z2\+\_\+flux()}}.
+Referenced by oomph\+::\+TPMLTime\+Harmonic\+Linear\+Elasticity\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::get\+\_\+\+Z2\+\_\+flux().
 
-\mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_ae3f79308f146b472d4058bed523fc9c9}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_ae3f79308f146b472d4058bed523fc9c9}} 
+\mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a3383c407d4d83b864ec7a0aa46af4fb9}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a3383c407d4d83b864ec7a0aa46af4fb9}} 
 \index{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}!get\_stress@{get\_stress}}
 \index{get\_stress@{get\_stress}!oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_stress()}{get\_stress()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base}}$<$ DIM $>$\+::get\+\_\+stress (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{sigma }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+virtual void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base}}$<$ DIM $>$\+::get\+\_\+stress (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ std\+::complex$<$ double $>$$>$ \&}]{sigma }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -318,14 +319,14 @@ Return the Cauchy stress tensor, as calculated from the elasticity tensor at spe
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquations_a4edaa3f2f191cfd6add376017c95a729}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations$<$ DIM $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquations_a39706bfffbaf0b2dfd4e3c01e25010a3}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations$<$ DIM $>$}}.
 
-\mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_ae2155516c77c13f6eb80790d752eb659}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_ae2155516c77c13f6eb80790d752eb659}} 
+\mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a99f3853339d3570ac7afb7cbf486dd17}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a99f3853339d3570ac7afb7cbf486dd17}} 
 \index{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}!interpolated\_u\_time\_harmonic\_linear\_elasticity@{interpolated\_u\_time\_harmonic\_linear\_elasticity}}
 \index{interpolated\_u\_time\_harmonic\_linear\_elasticity@{interpolated\_u\_time\_harmonic\_linear\_elasticity}!oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{interpolated\_u\_time\_harmonic\_linear\_elasticity()}{interpolated\_u\_time\_harmonic\_linear\_elasticity()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-std\+::complex$<$ double $>$ \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base}}$<$ DIM $>$\+::interpolated\+\_\+u\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+std\+::complex$<$double$>$ \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base}}$<$ DIM $>$\+::interpolated\+\_\+u\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -333,18 +334,18 @@ Return FE interpolated displacement u\mbox{[}i\mbox{]} at local coordinate s.
 
 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00139}{139}} of file \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
+Definition at line 139 of file pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00098}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::u\+\_\+index\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity()}}.
+References i, oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), s, oomph\+::\+Finite\+Element\+::shape(), and oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::u\+\_\+index\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity().
 
-\mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a0eda17e9f0e6973ca0f859f67746ab60}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a0eda17e9f0e6973ca0f859f67746ab60}} 
+\mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_ae7ac55e5a3d92669e56ab492cbc2dddf}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_ae7ac55e5a3d92669e56ab492cbc2dddf}} 
 \index{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}!interpolated\_u\_time\_harmonic\_linear\_elasticity@{interpolated\_u\_time\_harmonic\_linear\_elasticity}}
 \index{interpolated\_u\_time\_harmonic\_linear\_elasticity@{interpolated\_u\_time\_harmonic\_linear\_elasticity}!oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{interpolated\_u\_time\_harmonic\_linear\_elasticity()}{interpolated\_u\_time\_harmonic\_linear\_elasticity()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base}}$<$ DIM $>$\+::interpolated\+\_\+u\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{disp }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base}}$<$ DIM $>$\+::interpolated\+\_\+u\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{disp }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -352,11 +353,11 @@ Compute vector of FE interpolated displacement u at local coordinate s.
 
 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00105}{105}} of file \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
+Definition at line 105 of file pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00098}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::u\+\_\+index\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity()}}.
+References i, oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), s, oomph\+::\+Finite\+Element\+::shape(), and oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::u\+\_\+index\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity().
 
 \mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a16ddde4801bcb2ae3dda95490cb0d680}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a16ddde4801bcb2ae3dda95490cb0d680}} 
 \index{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}!ndof\_types@{ndof\_types}}
@@ -375,7 +376,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a0c6037a870
 
 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00273}{273}} of file \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
+Definition at line 273 of file pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a5c28764330d0d42339c5c5f3044a66bf}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a5c28764330d0d42339c5c5f3044a66bf}} 
 \index{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}!nu@{nu}}
@@ -390,22 +391,22 @@ Access function to nu in the elasticity tensor.
 
 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00194}{194}} of file \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
+Definition at line 194 of file pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00419}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::\+Elasticity\+\_\+tensor\+\_\+pt}}, and \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00194}{oomph\+::\+PMLTime\+Harmonic\+Isotropic\+Elasticity\+Tensor\+::nu()}}.
+References oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::\+Elasticity\+\_\+tensor\+\_\+pt, and oomph\+::\+PMLTime\+Harmonic\+Isotropic\+Elasticity\+Tensor\+::nu().
 
 
 
-Referenced by \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00331}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::compute\+\_\+pml\+\_\+coefficients()}}.
+Referenced by oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::compute\+\_\+pml\+\_\+coefficients().
 
-\mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a6c8e3b3bf49c07828155b1c20694133e}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a6c8e3b3bf49c07828155b1c20694133e}} 
+\mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a82459926f0225f8acd062f0450abc6ed}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a82459926f0225f8acd062f0450abc6ed}} 
 \index{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}!omega\_sq@{omega\_sq}}
 \index{omega\_sq@{omega\_sq}!oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{omega\_sq()}{omega\_sq()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-const double \& \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base}}$<$ DIM $>$\+::omega\+\_\+sq (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+const double\& \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base}}$<$ DIM $>$\+::omega\+\_\+sq (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -413,22 +414,22 @@ Access function for square of non-\/dim frequency.
 
 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00200}{200}} of file \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
+Definition at line 200 of file pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00422}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::\+Omega\+\_\+sq\+\_\+pt}}.
+References oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::\+Omega\+\_\+sq\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00331}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::compute\+\_\+pml\+\_\+coefficients()}}.
+Referenced by oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::compute\+\_\+pml\+\_\+coefficients().
 
-\mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_ae59339d693eb60de1583c74c4eb0dd47}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_ae59339d693eb60de1583c74c4eb0dd47}} 
+\mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a060c7a034add2ded7e2dbf2fe9eaac0c}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a060c7a034add2ded7e2dbf2fe9eaac0c}} 
 \index{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}!omega\_sq\_pt@{omega\_sq\_pt}}
 \index{omega\_sq\_pt@{omega\_sq\_pt}!oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{omega\_sq\_pt()}{omega\_sq\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base}}$<$ DIM $>$\+::omega\+\_\+sq\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+double$\ast$\& \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base}}$<$ DIM $>$\+::omega\+\_\+sq\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -436,18 +437,18 @@ Access function for square of non-\/dim frequency.
 
 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00206}{206}} of file \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
+Definition at line 206 of file pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00422}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::\+Omega\+\_\+sq\+\_\+pt}}.
+References oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::\+Omega\+\_\+sq\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_ae9b07f11cc6f784b97c30b966068df10}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_ae9b07f11cc6f784b97c30b966068df10}} 
+\mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_ac58d409c9b0c6f89446a14955cb8dc1a}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_ac58d409c9b0c6f89446a14955cb8dc1a}} 
 \index{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}!pml\_mapping\_pt@{pml\_mapping\_pt}}
 \index{pml\_mapping\_pt@{pml\_mapping\_pt}!oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{pml\_mapping\_pt()}{pml\_mapping\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-\mbox{\hyperlink{classoomph_1_1PMLMapping}{PMLMapping}} $\ast$\& \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base}}$<$ DIM $>$\+::pml\+\_\+mapping\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1PMLMapping}{PMLMapping}}$\ast$\& \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base}}$<$ DIM $>$\+::pml\+\_\+mapping\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -455,18 +456,18 @@ Return a pointer to the PML Mapping object.
 
 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00402}{402}} of file \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
+Definition at line 402 of file pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00432}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::\+Pml\+\_\+mapping\+\_\+pt}}.
+References oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::\+Pml\+\_\+mapping\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a2f45e9b45c613cf0f5be9ac24b8e1ec4}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a2f45e9b45c613cf0f5be9ac24b8e1ec4}} 
+\mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_ab0be5c95a17f261e17e7e70ec15d25eb}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_ab0be5c95a17f261e17e7e70ec15d25eb}} 
 \index{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}!pml\_mapping\_pt@{pml\_mapping\_pt}}
 \index{pml\_mapping\_pt@{pml\_mapping\_pt}!oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{pml\_mapping\_pt()}{pml\_mapping\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-\mbox{\hyperlink{classoomph_1_1PMLMapping}{PMLMapping}} $\ast$const  \& \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base}}$<$ DIM $>$\+::pml\+\_\+mapping\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1PMLMapping}{PMLMapping}}$\ast$ const\& \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base}}$<$ DIM $>$\+::pml\+\_\+mapping\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -474,18 +475,18 @@ Return a pointer to the PML Mapping object (const version)
 
 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00408}{408}} of file \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
+Definition at line 408 of file pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00432}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::\+Pml\+\_\+mapping\+\_\+pt}}.
+References oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::\+Pml\+\_\+mapping\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_aa053acc6c4cbb5432bf2a667fac7ffe7}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_aa053acc6c4cbb5432bf2a667fac7ffe7}} 
+\mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a81fa794623734812d0aa3116456d99ba}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a81fa794623734812d0aa3116456d99ba}} 
 \index{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}!u\_index\_time\_harmonic\_linear\_elasticity@{u\_index\_time\_harmonic\_linear\_elasticity}}
 \index{u\_index\_time\_harmonic\_linear\_elasticity@{u\_index\_time\_harmonic\_linear\_elasticity}!oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{u\_index\_time\_harmonic\_linear\_elasticity()}{u\_index\_time\_harmonic\_linear\_elasticity()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-virtual std\+::complex$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base}}$<$ DIM $>$\+::u\+\_\+index\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity (\begin{DoxyParamCaption}\item[{const unsigned}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+virtual std\+::complex$<$unsigned$>$ \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base}}$<$ DIM $>$\+::u\+\_\+index\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity (\begin{DoxyParamCaption}\item[{const unsigned}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -493,15 +494,15 @@ Return the index at which the i-\/th real or imag unknown displacement component
 
 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00098}{98}} of file \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
+Definition at line 98 of file pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References i.
 
 
 
-Referenced by \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00105}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::interpolated\+\_\+u\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity()}}.
+Referenced by oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::interpolated\+\_\+u\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity().
 
 \mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a6cf2e81c08597a2bd242941846cafa77}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a6cf2e81c08597a2bd242941846cafa77}} 
 \index{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}!values\_to\_be\_pinned\_on\_outer\_pml\_boundary@{values\_to\_be\_pinned\_on\_outer\_pml\_boundary}}
@@ -520,7 +521,7 @@ Implements \mbox{\hyperlink{classoomph_1_1PMLElementBase_ad63639f1966cd3191fad69
 
 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00260}{260}} of file \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
+Definition at line 260 of file pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -530,7 +531,7 @@ Definition at line \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__ele
 \index{Body\_force\_fct\_pt@{Body\_force\_fct\_pt}!oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{Body\_force\_fct\_pt}{Body\_force\_fct\_pt}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-\mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a45774807ce550b68de4f85ad0ffa904a}{Body\+Force\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base}}$<$ DIM $>$\+::Body\+\_\+force\+\_\+fct\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+\mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_ae7e51fd604fffc42cb9a8a843fa09496}{Body\+Force\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base}}$<$ DIM $>$\+::Body\+\_\+force\+\_\+fct\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -538,11 +539,11 @@ Pointer to body force function.
 
 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00425}{425}} of file \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
+Definition at line 425 of file pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00236}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::body\+\_\+force()}}, and \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00212}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::body\+\_\+force\+\_\+fct\+\_\+pt()}}.
+Referenced by oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::body\+\_\+force(), and oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::body\+\_\+force\+\_\+fct\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a78909091b9d20b569910c6865d99e8a3}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a78909091b9d20b569910c6865d99e8a3}} 
 \index{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}!Default\_omega\_sq\_value@{Default\_omega\_sq\_value}}
@@ -563,7 +564,7 @@ Static default value for square of frequency.
 
 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00428}{428}} of file \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
+Definition at line 428 of file pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a6263e96014839467d26bf0680529bc9b}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a6263e96014839467d26bf0680529bc9b}} 
 \index{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}!Default\_pml\_mapping@{Default\_pml\_mapping}}
@@ -578,11 +579,11 @@ Static so that the class doesn\textquotesingle{}t need to instantiate a new defa
 
 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00415}{415}} of file \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
+Definition at line 415 of file pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00086}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base()}}.
+Referenced by oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base().
 
 \mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a8b5bc9bc89d1e98c4970e561c19564f2}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a8b5bc9bc89d1e98c4970e561c19564f2}} 
 \index{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}!Elasticity\_tensor\_pt@{Elasticity\_tensor\_pt}}
@@ -597,11 +598,11 @@ Pointer to the elasticity tensor.
 
 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00419}{419}} of file \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
+Definition at line 419 of file pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00185}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::\+E()}}, \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00179}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::elasticity\+\_\+tensor\+\_\+pt()}}, and \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00194}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::nu()}}.
+Referenced by oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::\+E(), oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::elasticity\+\_\+tensor\+\_\+pt(), and oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::nu().
 
 \mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_afb14d5dd207ba369c68056b8537b8e41}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_afb14d5dd207ba369c68056b8537b8e41}} 
 \index{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}!Omega\_sq\_pt@{Omega\_sq\_pt}}
@@ -616,11 +617,11 @@ Square of nondim frequency.
 
 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00422}{422}} of file \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
+Definition at line 422 of file pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00200}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::omega\+\_\+sq()}}, and \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00206}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::omega\+\_\+sq\+\_\+pt()}}.
+Referenced by oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::omega\+\_\+sq(), and oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::omega\+\_\+sq\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a78e8558aa4616b6a2859cb7e33ca59cf}\label{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a78e8558aa4616b6a2859cb7e33ca59cf}} 
 \index{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$@{oomph::PMLTimeHarmonicLinearElasticityEquationsBase$<$ DIM $>$}!Pml\_mapping\_pt@{Pml\_mapping\_pt}}
@@ -635,11 +636,11 @@ Pointer to class which holds the pml mapping function, also known as gamma.
 
 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00432}{432}} of file \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
+Definition at line 432 of file pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00331}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::compute\+\_\+pml\+\_\+coefficients()}}, \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00402}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::pml\+\_\+mapping\+\_\+pt()}}, and \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00086}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base()}}.
+Referenced by oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::compute\+\_\+pml\+\_\+coefficients(), oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::pml\+\_\+mapping\+\_\+pt(), and oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base().
 
 
 

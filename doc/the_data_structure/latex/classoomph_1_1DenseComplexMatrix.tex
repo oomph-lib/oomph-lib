@@ -2,7 +2,7 @@
 \label{classoomph_1_1DenseComplexMatrix}\index{oomph::DenseComplexMatrix@{oomph::DenseComplexMatrix}}
 
 
-Class of matrices containing double complex, and stored as a \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}\texorpdfstring{$<$}{<}complex$<$double$>$ \texorpdfstring{$>$}{>}, but with solving functionality inherited from the abstract Complex\+Matrix class.  
+Class of matrices containing double complex, and stored as a \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$complex$<$double$>$ $>$, but with solving functionality inherited from the abstract Complex\+Matrix class.  
 
 
 
@@ -34,21 +34,21 @@ unsigned long \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_aea9edba37ef5fd6
 \begin{DoxyCompactList}\small\item\em Return the number of rows of the matrix. \end{DoxyCompactList}\item 
 unsigned long \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_a4101f581e470c940bf7daf12ec1b234f}{ncol}} () const
 \begin{DoxyCompactList}\small\item\em Return the number of columns of the matrix. \end{DoxyCompactList}\item 
-std\+::complex$<$ double $>$ \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_acc2ba6bbaa9f0e17b7711b5168fbae72}{operator()}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned long \&j) const
+std\+::complex$<$ double $>$ \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_ad59f7b0bbbbce05868a80fcfd3f08560}{operator()}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned long \&j) const
 \begin{DoxyCompactList}\small\item\em Overload the const version of the round-\/bracket access operator for read-\/only access. \end{DoxyCompactList}\item 
-std\+::complex$<$ double $>$ \& \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_a7d6b3f5cf4471460313bb160f18da801}{operator()}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned long \&j)
+std\+::complex$<$ double $>$ \& \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_a01aecdcd48d058067ac9b550e8147fa6}{operator()}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned long \&j)
 \begin{DoxyCompactList}\small\item\em Overload the non-\/const version of the round-\/bracket access operator for read-\/write access. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_a157f9dac417c294a9082efeffc123f2d}{$\sim$\+Dense\+Complex\+Matrix}} ()
 \begin{DoxyCompactList}\small\item\em Destructor, delete the storage for Index vector and LU storage (if any) \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_a8503c0e46409613c58261ce6136f88b9}{ludecompose}} ()
 \begin{DoxyCompactList}\small\item\em Overload the LU decomposition. For this storage scheme the matrix storage will be over-\/writeen by its LU decomposition. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_abcd909e71bdcae1059eb8779de72a99d}{lubksub}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&rhs)
+void \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_a0be350659466e46db23ce926c2acb959}{lubksub}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&rhs)
 \begin{DoxyCompactList}\small\item\em Overload the LU back substitution. Note that the rhs will be overwritten with the solution vector. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_a76146afe81a055af475a107231468afb}{residual}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&rhs, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&residual)
+void \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_a4b285b43e6afd8c825322d0de30351ab}{residual}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&rhs, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&residual)
 \begin{DoxyCompactList}\small\item\em Find the residual of Ax=b, ie r=b-\/\+Ax for the \char`\"{}solution\char`\"{} x. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_afcc47dd450a1ab37d2790b5d0279cadf}{multiply}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&soln)
+void \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_a77f901f23531551596ddd03725b27fcf}{multiply}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&soln)
 \begin{DoxyCompactList}\small\item\em Multiply the matrix by the vector x\+: soln=Ax. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_aaaf8f0589e011bf720791058711fa952}{multiply\+\_\+transpose}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&soln)
+void \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_af1109c8719d047682157145bb95af487}{multiply\+\_\+transpose}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&soln)
 \begin{DoxyCompactList}\small\item\em Multiply the transposed matrix by the vector x\+: soln=A$^\wedge$T x. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
@@ -68,9 +68,9 @@ bool \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_a0ae372ffdc13620ac561baf9
 
 
 \doxysubsection{Detailed Description}
-Class of matrices containing double complex, and stored as a \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}\texorpdfstring{$<$}{<}complex$<$double$>$ \texorpdfstring{$>$}{>}, but with solving functionality inherited from the abstract Complex\+Matrix class. 
+Class of matrices containing double complex, and stored as a \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$complex$<$double$>$ $>$, but with solving functionality inherited from the abstract Complex\+Matrix class. 
 
-Definition at line \mbox{\hyperlink{complex__matrices_8h_source_l00153}{153}} of file \mbox{\hyperlink{complex__matrices_8h_source}{complex\+\_\+matrices.\+h}}.
+Definition at line 153 of file complex\+\_\+matrices.\+h.
 
 
 
@@ -87,7 +87,7 @@ Empty constructor, simply assign the lengths N and M to 0.
 
 
 
-Definition at line \mbox{\hyperlink{complex__matrices_8h_source_l00173}{173}} of file \mbox{\hyperlink{complex__matrices_8h_source}{complex\+\_\+matrices.\+h}}.
+Definition at line 173 of file complex\+\_\+matrices.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1DenseComplexMatrix_ac716f53db14021238edef4e385f6b319}\label{classoomph_1_1DenseComplexMatrix_ac716f53db14021238edef4e385f6b319}} 
 \index{oomph::DenseComplexMatrix@{oomph::DenseComplexMatrix}!DenseComplexMatrix@{DenseComplexMatrix}}
@@ -101,7 +101,7 @@ Constructor to build a square n by n matrix.
 
 
 
-Definition at line \mbox{\hyperlink{complex__matrices_8h_source_l00182}{182}} of file \mbox{\hyperlink{complex__matrices_8h_source}{complex\+\_\+matrices.\+h}}.
+Definition at line 182 of file complex\+\_\+matrices.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1DenseComplexMatrix_ab17bdf75fb6cec1bbae74a0abac8e69a}\label{classoomph_1_1DenseComplexMatrix_ab17bdf75fb6cec1bbae74a0abac8e69a}} 
 \index{oomph::DenseComplexMatrix@{oomph::DenseComplexMatrix}!DenseComplexMatrix@{DenseComplexMatrix}}
@@ -115,7 +115,7 @@ Constructor to build a matrix with n rows and m columns.
 
 
 
-Definition at line \mbox{\hyperlink{complex__matrices_8h_source_l00191}{191}} of file \mbox{\hyperlink{complex__matrices_8h_source}{complex\+\_\+matrices.\+h}}.
+Definition at line 191 of file complex\+\_\+matrices.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1DenseComplexMatrix_a88144ac8dc64438f77b2aec56b283e87}\label{classoomph_1_1DenseComplexMatrix_a88144ac8dc64438f77b2aec56b283e87}} 
 \index{oomph::DenseComplexMatrix@{oomph::DenseComplexMatrix}!DenseComplexMatrix@{DenseComplexMatrix}}
@@ -129,7 +129,7 @@ Constructor to build a matrix with n rows and m columns, with initial value init
 
 
 
-Definition at line \mbox{\hyperlink{complex__matrices_8h_source_l00201}{201}} of file \mbox{\hyperlink{complex__matrices_8h_source}{complex\+\_\+matrices.\+h}}.
+Definition at line 201 of file complex\+\_\+matrices.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1DenseComplexMatrix_aae57e49bd8bd12fa20ec0fe14ef4ffe5}\label{classoomph_1_1DenseComplexMatrix_aae57e49bd8bd12fa20ec0fe14ef4ffe5}} 
 \index{oomph::DenseComplexMatrix@{oomph::DenseComplexMatrix}!DenseComplexMatrix@{DenseComplexMatrix}}
@@ -153,11 +153,11 @@ Destructor, delete the storage for Index vector and LU storage (if any)
 
 Destructor clean up the LU factors that have been allocated. 
 
-Definition at line \mbox{\hyperlink{complex__matrices_8cc_source_l00104}{104}} of file \mbox{\hyperlink{complex__matrices_8cc_source}{complex\+\_\+matrices.\+cc}}.
+Definition at line 105 of file complex\+\_\+matrices.\+cc.
 
 
 
-References \mbox{\hyperlink{complex__matrices_8h_source_l00158}{Index}}, and \mbox{\hyperlink{complex__matrices_8h_source_l00161}{LU\+\_\+factors}}.
+References Index, and LU\+\_\+factors.
 
 
 
@@ -174,21 +174,21 @@ Function that deletes the storage for the LU\+\_\+factors, if it is not the same
 
 Delete the storage that has been allocated for the LU factors, if the matrix data is not itself being overwritten. 
 
-Definition at line \mbox{\hyperlink{complex__matrices_8cc_source_l00087}{87}} of file \mbox{\hyperlink{complex__matrices_8cc_source}{complex\+\_\+matrices.\+cc}}.
+Definition at line 88 of file complex\+\_\+matrices.\+cc.
 
 
 
-References \mbox{\hyperlink{complex__matrices_8h_source_l00161}{LU\+\_\+factors}}, and \mbox{\hyperlink{complex__matrices_8h_source_l00165}{Overwrite\+\_\+matrix\+\_\+storage}}.
+References LU\+\_\+factors, and Overwrite\+\_\+matrix\+\_\+storage.
 
 
 
-Referenced by \mbox{\hyperlink{complex__matrices_8cc_source_l00121}{ludecompose()}}.
+Referenced by ludecompose().
 
-\mbox{\Hypertarget{classoomph_1_1DenseComplexMatrix_abcd909e71bdcae1059eb8779de72a99d}\label{classoomph_1_1DenseComplexMatrix_abcd909e71bdcae1059eb8779de72a99d}} 
+\mbox{\Hypertarget{classoomph_1_1DenseComplexMatrix_a0be350659466e46db23ce926c2acb959}\label{classoomph_1_1DenseComplexMatrix_a0be350659466e46db23ce926c2acb959}} 
 \index{oomph::DenseComplexMatrix@{oomph::DenseComplexMatrix}!lubksub@{lubksub}}
 \index{lubksub@{lubksub}!oomph::DenseComplexMatrix@{oomph::DenseComplexMatrix}}
 \doxysubsubsection{\texorpdfstring{lubksub()}{lubksub()}}
-{\footnotesize\ttfamily void oomph\+::\+Dense\+Complex\+Matrix\+::lubksub (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Dense\+Complex\+Matrix\+::lubksub (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -196,15 +196,15 @@ Overload the LU back substitution. Note that the rhs will be overwritten with th
 
 Back substitute an LU decomposed matrix. 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_aa0e444d60d4ec9e35a6903ab88baaf62}{oomph\+::\+Complex\+Matrix\+Base}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_a97f5b56fd405e9a288879c256529568c}{oomph\+::\+Complex\+Matrix\+Base}}.
 
 
 
-Definition at line \mbox{\hyperlink{complex__matrices_8cc_source_l00374}{374}} of file \mbox{\hyperlink{complex__matrices_8cc_source}{complex\+\_\+matrices.\+cc}}.
+Definition at line 377 of file complex\+\_\+matrices.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{complex__matrices_8h_source_l00158}{Index}}, \mbox{\hyperlink{complex__matrices_8h_source_l00161}{LU\+\_\+factors}}, \mbox{\hyperlink{matrices_8h_source_l00395}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::M}}, and \mbox{\hyperlink{matrices_8h_source_l00392}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::N}}.
+References i, Index, LU\+\_\+factors, oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::M, and oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::N.
 
 \mbox{\Hypertarget{classoomph_1_1DenseComplexMatrix_a8503c0e46409613c58261ce6136f88b9}\label{classoomph_1_1DenseComplexMatrix_a8503c0e46409613c58261ce6136f88b9}} 
 \index{oomph::DenseComplexMatrix@{oomph::DenseComplexMatrix}!ludecompose@{ludecompose}}
@@ -222,17 +222,17 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_a11e1beeb776
 
 
 
-Definition at line \mbox{\hyperlink{complex__matrices_8cc_source_l00121}{121}} of file \mbox{\hyperlink{complex__matrices_8cc_source}{complex\+\_\+matrices.\+cc}}.
+Definition at line 122 of file complex\+\_\+matrices.\+cc.
 
 
 
-References \mbox{\hyperlink{complex__matrices_8cc_source_l00087}{delete\+\_\+lu\+\_\+factors()}}, \mbox{\hyperlink{matrices_8h_source_l00447}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::entry()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{complex__matrices_8h_source_l00158}{Index}}, \mbox{\hyperlink{complex__matrices_8h_source_l00161}{LU\+\_\+factors}}, \mbox{\hyperlink{matrices_8h_source_l00395}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l00389}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Matrixdata}}, \mbox{\hyperlink{matrices_8h_source_l00392}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::N}}, and \mbox{\hyperlink{complex__matrices_8h_source_l00165}{Overwrite\+\_\+matrix\+\_\+storage}}.
+References delete\+\_\+lu\+\_\+factors(), oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::entry(), i, Index, LU\+\_\+factors, oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::M, oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Matrixdata, oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::N, and Overwrite\+\_\+matrix\+\_\+storage.
 
-\mbox{\Hypertarget{classoomph_1_1DenseComplexMatrix_afcc47dd450a1ab37d2790b5d0279cadf}\label{classoomph_1_1DenseComplexMatrix_afcc47dd450a1ab37d2790b5d0279cadf}} 
+\mbox{\Hypertarget{classoomph_1_1DenseComplexMatrix_a77f901f23531551596ddd03725b27fcf}\label{classoomph_1_1DenseComplexMatrix_a77f901f23531551596ddd03725b27fcf}} 
 \index{oomph::DenseComplexMatrix@{oomph::DenseComplexMatrix}!multiply@{multiply}}
 \index{multiply@{multiply}!oomph::DenseComplexMatrix@{oomph::DenseComplexMatrix}}
 \doxysubsubsection{\texorpdfstring{multiply()}{multiply()}}
-{\footnotesize\ttfamily void oomph\+::\+Dense\+Complex\+Matrix\+::multiply (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{soln }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Dense\+Complex\+Matrix\+::multiply (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{soln }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -240,21 +240,21 @@ Multiply the matrix by the vector x\+: soln=Ax.
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_a730c106643464a29ebf0660a6921ebaa}{oomph\+::\+Complex\+Matrix\+Base}}.
+Implements \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_a95d43a8daf989523467c1a70c005bf37}{oomph\+::\+Complex\+Matrix\+Base}}.
 
 
 
-Definition at line \mbox{\hyperlink{complex__matrices_8cc_source_l00507}{507}} of file \mbox{\hyperlink{complex__matrices_8cc_source}{complex\+\_\+matrices.\+cc}}.
+Definition at line 510 of file complex\+\_\+matrices.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l00395}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l00389}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Matrixdata}}, and \mbox{\hyperlink{matrices_8h_source_l00392}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::N}}.
+References i, oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::M, oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Matrixdata, and oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::N.
 
-\mbox{\Hypertarget{classoomph_1_1DenseComplexMatrix_aaaf8f0589e011bf720791058711fa952}\label{classoomph_1_1DenseComplexMatrix_aaaf8f0589e011bf720791058711fa952}} 
+\mbox{\Hypertarget{classoomph_1_1DenseComplexMatrix_af1109c8719d047682157145bb95af487}\label{classoomph_1_1DenseComplexMatrix_af1109c8719d047682157145bb95af487}} 
 \index{oomph::DenseComplexMatrix@{oomph::DenseComplexMatrix}!multiply\_transpose@{multiply\_transpose}}
 \index{multiply\_transpose@{multiply\_transpose}!oomph::DenseComplexMatrix@{oomph::DenseComplexMatrix}}
 \doxysubsubsection{\texorpdfstring{multiply\_transpose()}{multiply\_transpose()}}
-{\footnotesize\ttfamily void oomph\+::\+Dense\+Complex\+Matrix\+::multiply\+\_\+transpose (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{soln }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Dense\+Complex\+Matrix\+::multiply\+\_\+transpose (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{soln }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -262,15 +262,15 @@ Multiply the transposed matrix by the vector x\+: soln=A$^\wedge$T x.
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_a90c7832bad84aad3d0f437925efb089a}{oomph\+::\+Complex\+Matrix\+Base}}.
+Implements \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_aa6541eade56b7c4ea786f6d1a80c22e3}{oomph\+::\+Complex\+Matrix\+Base}}.
 
 
 
-Definition at line \mbox{\hyperlink{complex__matrices_8cc_source_l00545}{545}} of file \mbox{\hyperlink{complex__matrices_8cc_source}{complex\+\_\+matrices.\+cc}}.
+Definition at line 1078 of file complex\+\_\+matrices.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l00395}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l00389}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Matrixdata}}, and \mbox{\hyperlink{matrices_8h_source_l00392}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::N}}.
+References i, oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::M, oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Matrixdata, and oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::N.
 
 \mbox{\Hypertarget{classoomph_1_1DenseComplexMatrix_a4101f581e470c940bf7daf12ec1b234f}\label{classoomph_1_1DenseComplexMatrix_a4101f581e470c940bf7daf12ec1b234f}} 
 \index{oomph::DenseComplexMatrix@{oomph::DenseComplexMatrix}!ncol@{ncol}}
@@ -288,15 +288,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_a849b63e50dad36ca8b2
 
 
 
-Definition at line \mbox{\hyperlink{complex__matrices_8h_source_l00225}{225}} of file \mbox{\hyperlink{complex__matrices_8h_source}{complex\+\_\+matrices.\+h}}.
-
-
-
-References \mbox{\hyperlink{complex__matrices_8h_source_l00225}{ncol()}}.
-
-
-
-Referenced by \mbox{\hyperlink{complex__matrices_8h_source_l00225}{ncol()}}.
+Definition at line 225 of file complex\+\_\+matrices.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1DenseComplexMatrix_aea9edba37ef5fd679d17f22eaeb85369}\label{classoomph_1_1DenseComplexMatrix_aea9edba37ef5fd679d17f22eaeb85369}} 
 \index{oomph::DenseComplexMatrix@{oomph::DenseComplexMatrix}!nrow@{nrow}}
@@ -314,21 +306,13 @@ Implements \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_adcbdf19bc82c61c0a4f
 
 
 
-Definition at line \mbox{\hyperlink{complex__matrices_8h_source_l00219}{219}} of file \mbox{\hyperlink{complex__matrices_8h_source}{complex\+\_\+matrices.\+h}}.
+Definition at line 219 of file complex\+\_\+matrices.\+h.
 
-
-
-References \mbox{\hyperlink{complex__matrices_8h_source_l00219}{nrow()}}.
-
-
-
-Referenced by \mbox{\hyperlink{complex__matrices_8h_source_l00219}{nrow()}}.
-
-\mbox{\Hypertarget{classoomph_1_1DenseComplexMatrix_a7d6b3f5cf4471460313bb160f18da801}\label{classoomph_1_1DenseComplexMatrix_a7d6b3f5cf4471460313bb160f18da801}} 
+\mbox{\Hypertarget{classoomph_1_1DenseComplexMatrix_a01aecdcd48d058067ac9b550e8147fa6}\label{classoomph_1_1DenseComplexMatrix_a01aecdcd48d058067ac9b550e8147fa6}} 
 \index{oomph::DenseComplexMatrix@{oomph::DenseComplexMatrix}!operator()@{operator()}}
 \index{operator()@{operator()}!oomph::DenseComplexMatrix@{oomph::DenseComplexMatrix}}
 \doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily std\+::complex$<$ double $>$ \& oomph\+::\+Dense\+Complex\+Matrix\+::operator() (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i,  }\item[{const unsigned long \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily std\+::complex$<$double$>$\& oomph\+::\+Dense\+Complex\+Matrix\+::operator() (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i,  }\item[{const unsigned long \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -336,17 +320,17 @@ Overload the non-\/const version of the round-\/bracket access operator for read
 
 
 
-Definition at line \mbox{\hyperlink{complex__matrices_8h_source_l00240}{240}} of file \mbox{\hyperlink{complex__matrices_8h_source}{complex\+\_\+matrices.\+h}}.
+Definition at line 240 of file complex\+\_\+matrices.\+h.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l00447}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::entry()}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::entry(), and i.
 
-\mbox{\Hypertarget{classoomph_1_1DenseComplexMatrix_acc2ba6bbaa9f0e17b7711b5168fbae72}\label{classoomph_1_1DenseComplexMatrix_acc2ba6bbaa9f0e17b7711b5168fbae72}} 
+\mbox{\Hypertarget{classoomph_1_1DenseComplexMatrix_ad59f7b0bbbbce05868a80fcfd3f08560}\label{classoomph_1_1DenseComplexMatrix_ad59f7b0bbbbce05868a80fcfd3f08560}} 
 \index{oomph::DenseComplexMatrix@{oomph::DenseComplexMatrix}!operator()@{operator()}}
 \index{operator()@{operator()}!oomph::DenseComplexMatrix@{oomph::DenseComplexMatrix}}
 \doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily std\+::complex$<$ double $>$ oomph\+::\+Dense\+Complex\+Matrix\+::operator() (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i,  }\item[{const unsigned long \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily std\+::complex$<$double$>$ oomph\+::\+Dense\+Complex\+Matrix\+::operator() (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i,  }\item[{const unsigned long \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -354,15 +338,15 @@ Overload the const version of the round-\/bracket access operator for read-\/onl
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_a2140730b879cfc6ea58bba5a34e6c197}{oomph\+::\+Complex\+Matrix\+Base}}.
+Implements \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_a78d1185ec8249fec5855d01129a1c870}{oomph\+::\+Complex\+Matrix\+Base}}.
 
 
 
-Definition at line \mbox{\hyperlink{complex__matrices_8h_source_l00232}{232}} of file \mbox{\hyperlink{complex__matrices_8h_source}{complex\+\_\+matrices.\+h}}.
+Definition at line 232 of file complex\+\_\+matrices.\+h.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l00457}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::get\+\_\+entry()}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::get\+\_\+entry(), and i.
 
 \mbox{\Hypertarget{classoomph_1_1DenseComplexMatrix_ac210414e7780ba8da7fbb0676002168f}\label{classoomph_1_1DenseComplexMatrix_ac210414e7780ba8da7fbb0676002168f}} 
 \index{oomph::DenseComplexMatrix@{oomph::DenseComplexMatrix}!operator=@{operator=}}
@@ -374,11 +358,11 @@ References \mbox{\hyperlink{matrices_8h_source_l00457}{oomph\+::\+Dense\+Matrix$
 
 Broken assignment operator. 
 
-\mbox{\Hypertarget{classoomph_1_1DenseComplexMatrix_a76146afe81a055af475a107231468afb}\label{classoomph_1_1DenseComplexMatrix_a76146afe81a055af475a107231468afb}} 
+\mbox{\Hypertarget{classoomph_1_1DenseComplexMatrix_a4b285b43e6afd8c825322d0de30351ab}\label{classoomph_1_1DenseComplexMatrix_a4b285b43e6afd8c825322d0de30351ab}} 
 \index{oomph::DenseComplexMatrix@{oomph::DenseComplexMatrix}!residual@{residual}}
 \index{residual@{residual}!oomph::DenseComplexMatrix@{oomph::DenseComplexMatrix}}
 \doxysubsubsection{\texorpdfstring{residual()}{residual()}}
-{\footnotesize\ttfamily void oomph\+::\+Dense\+Complex\+Matrix\+::residual (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{x,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{residual }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Dense\+Complex\+Matrix\+::residual (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{x,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{residual }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -386,19 +370,15 @@ Find the residual of Ax=b, ie r=b-\/\+Ax for the \char`\"{}solution\char`\"{} x.
 
 Find the residual of Ax=b, i.\+e. r=b-\/\+Ax. 
 
-Implements \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_aec72875402b9ba387e0724d6c2597430}{oomph\+::\+Complex\+Matrix\+Base}}.
+Implements \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_aa33932d1eb105818a9ccfd3857b26d25}{oomph\+::\+Complex\+Matrix\+Base}}.
 
 
 
-Definition at line \mbox{\hyperlink{complex__matrices_8cc_source_l00450}{450}} of file \mbox{\hyperlink{complex__matrices_8cc_source}{complex\+\_\+matrices.\+cc}}.
+Definition at line 453 of file complex\+\_\+matrices.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l00395}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l00389}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Matrixdata}}, \mbox{\hyperlink{matrices_8h_source_l00392}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::N}}, and \mbox{\hyperlink{complex__matrices_8cc_source_l00450}{residual()}}.
-
-
-
-Referenced by \mbox{\hyperlink{complex__matrices_8cc_source_l00450}{residual()}}.
+References i, oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::M, oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Matrixdata, and oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::N.
 
 
 
@@ -415,11 +395,11 @@ Pointer to storage for the index of permutations in the LU solve.
 
 
 
-Definition at line \mbox{\hyperlink{complex__matrices_8h_source_l00158}{158}} of file \mbox{\hyperlink{complex__matrices_8h_source}{complex\+\_\+matrices.\+h}}.
+Definition at line 158 of file complex\+\_\+matrices.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{complex__matrices_8cc_source_l00374}{lubksub()}}, \mbox{\hyperlink{complex__matrices_8cc_source_l00121}{ludecompose()}}, and \mbox{\hyperlink{complex__matrices_8cc_source_l00104}{$\sim$\+Dense\+Complex\+Matrix()}}.
+Referenced by lubksub(), ludecompose(), and $\sim$\+Dense\+Complex\+Matrix().
 
 \mbox{\Hypertarget{classoomph_1_1DenseComplexMatrix_ae14fa899e9257ee36e4d251502886f25}\label{classoomph_1_1DenseComplexMatrix_ae14fa899e9257ee36e4d251502886f25}} 
 \index{oomph::DenseComplexMatrix@{oomph::DenseComplexMatrix}!LU\_factors@{LU\_factors}}
@@ -433,11 +413,11 @@ Pointer to storage for the LU decomposition.
 
 
 
-Definition at line \mbox{\hyperlink{complex__matrices_8h_source_l00161}{161}} of file \mbox{\hyperlink{complex__matrices_8h_source}{complex\+\_\+matrices.\+h}}.
+Definition at line 161 of file complex\+\_\+matrices.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{complex__matrices_8cc_source_l00087}{delete\+\_\+lu\+\_\+factors()}}, \mbox{\hyperlink{complex__matrices_8cc_source_l00374}{lubksub()}}, \mbox{\hyperlink{complex__matrices_8cc_source_l00121}{ludecompose()}}, and \mbox{\hyperlink{complex__matrices_8cc_source_l00104}{$\sim$\+Dense\+Complex\+Matrix()}}.
+Referenced by delete\+\_\+lu\+\_\+factors(), lubksub(), ludecompose(), and $\sim$\+Dense\+Complex\+Matrix().
 
 \mbox{\Hypertarget{classoomph_1_1DenseComplexMatrix_a0ae372ffdc13620ac561baf9a8d0cbf0}\label{classoomph_1_1DenseComplexMatrix_a0ae372ffdc13620ac561baf9a8d0cbf0}} 
 \index{oomph::DenseComplexMatrix@{oomph::DenseComplexMatrix}!Overwrite\_matrix\_storage@{Overwrite\_matrix\_storage}}
@@ -451,11 +431,11 @@ Boolean flag used to decided whether the LU decomposition is stored separately, 
 
 
 
-Definition at line \mbox{\hyperlink{complex__matrices_8h_source_l00165}{165}} of file \mbox{\hyperlink{complex__matrices_8h_source}{complex\+\_\+matrices.\+h}}.
+Definition at line 165 of file complex\+\_\+matrices.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{complex__matrices_8cc_source_l00087}{delete\+\_\+lu\+\_\+factors()}}, and \mbox{\hyperlink{complex__matrices_8cc_source_l00121}{ludecompose()}}.
+Referenced by delete\+\_\+lu\+\_\+factors(), and ludecompose().
 
 
 

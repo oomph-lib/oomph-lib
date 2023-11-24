@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement}{}\doxysection{oomph\+::Projectable\+Generalised\+Newtonian\+Taylor\+Hood\+Element\texorpdfstring{$<$}{<} TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement}{}\doxysection{oomph\+::Projectable\+Generalised\+Newtonian\+Taylor\+Hood\+Element$<$ TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$ Class Template Reference}
 \label{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement}\index{oomph::ProjectableGeneralisedNewtonianTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableGeneralisedNewtonianTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}}
 
 
@@ -9,7 +9,7 @@
 
 {\ttfamily \#include $<$generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Projectable\+Generalised\+Newtonian\+Taylor\+Hood\+Element\texorpdfstring{$<$}{<} TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Projectable\+Generalised\+Newtonian\+Taylor\+Hood\+Element$<$ TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=1.277372cm]{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement}
@@ -20,7 +20,7 @@ Inheritance diagram for oomph\+::Projectable\+Generalised\+Newtonian\+Taylor\+Ho
 \item 
 \mbox{\hyperlink{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement_a84e5e27501f7bd74aeb2ed595b674884}{Projectable\+Generalised\+Newtonian\+Taylor\+Hood\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards...\mbox{]}. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement_a6af07b6f762cd243cdc24146c2481383}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement_a3e9ee360991e68cb2c745ca336ddaf5d}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. In the underlying Taylor Hood elements the fld-\/th velocities are stored at the fld-\/th value of the nodes; the pressures (the dim-\/th field) are the dim-\/th values at the vertex nodes etc. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement_a34bc56caf12c251a15509f1be90debf1}{nfields\+\_\+for\+\_\+projection}} ()
 \begin{DoxyCompactList}\small\item\em Number of fields to be projected\+: dim+1, corresponding to velocity components and pressure. \end{DoxyCompactList}\item 
@@ -31,7 +31,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoo
 double \mbox{\hyperlink{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement_a14569ba6c03489a0ad3cee644794ee2e}{jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field}} (const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi)
 \begin{DoxyCompactList}\small\item\em Return Jacobian of mapping and shape functions of field fld at local coordinate s. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement_aa43386b75da4ae4c4b1dd89d335de0db}{get\+\_\+field}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
-\begin{DoxyCompactList}\small\item\em Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: history values) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t$>$0\+: history values) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement_a44ae0637efb48b6dc0c2f886bf39e376}{nvalue\+\_\+of\+\_\+field}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Return number of values in field fld. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement_aade79476ead53af48e508562033bfb50}{local\+\_\+equation}} (const unsigned \&fld, const unsigned \&j)
@@ -42,11 +42,12 @@ int \mbox{\hyperlink{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElem
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT$>$\newline
 class oomph\+::\+Projectable\+Generalised\+Newtonian\+Taylor\+Hood\+Element$<$ TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$}
+
 ///////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////// 
 
 Taylor Hood upgraded to become projectable 
 
-Definition at line \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source_l02448}{2448}} of file \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2448 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -64,17 +65,17 @@ Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards
 
 
 
-Definition at line \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source_l02454}{2454}} of file \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2454 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement_a6af07b6f762cd243cdc24146c2481383}\label{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement_a6af07b6f762cd243cdc24146c2481383}} 
+\mbox{\Hypertarget{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement_a3e9ee360991e68cb2c745ca336ddaf5d}\label{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement_a3e9ee360991e68cb2c745ca336ddaf5d}} 
 \index{oomph::ProjectableGeneralisedNewtonianTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableGeneralisedNewtonianTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!data\_values\_of\_field@{data\_values\_of\_field}}
 \index{data\_values\_of\_field@{data\_values\_of\_field}!oomph::ProjectableGeneralisedNewtonianTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableGeneralisedNewtonianTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{data\_values\_of\_field()}{data\_values\_of\_field()}}
 {\footnotesize\ttfamily template$<$class TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement}{oomph\+::\+Projectable\+Generalised\+Newtonian\+Taylor\+Hood\+Element}}$<$ TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$std\+::pair$<$\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$, unsigned$>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement}{oomph\+::\+Projectable\+Generalised\+Newtonian\+Taylor\+Hood\+Element}}$<$ TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -82,15 +83,15 @@ Specify the values associated with field fld. The information is returned in a v
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a2292bd9c58694f89839bd7d198cfe86a}{oomph\+::\+Projectable\+Element\+Base}}.
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a63b0053dde1172be726f9a6c75fb66ea}{oomph\+::\+Projectable\+Element\+Base}}.
 
 
 
-Definition at line \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source_l02463}{2463}} of file \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2463 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Finite\+Element\+::nnode(), and oomph\+::\+Finite\+Element\+::node\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement_aa43386b75da4ae4c4b1dd89d335de0db}\label{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement_aa43386b75da4ae4c4b1dd89d335de0db}} 
 \index{oomph::ProjectableGeneralisedNewtonianTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableGeneralisedNewtonianTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!get\_field@{get\_field}}
@@ -101,7 +102,7 @@ double \mbox{\hyperlink{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodE
 
 
 
-Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: history values) 
+Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t$>$0\+: history values) 
 
 
 
@@ -109,11 +110,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ae4da5b565b6d33
 
 
 
-Definition at line \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source_l02565}{2565}} of file \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2565 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+References oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), s, oomph\+::\+Finite\+Element\+::shape(), and t.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement_a14569ba6c03489a0ad3cee644794ee2e}\label{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement_a14569ba6c03489a0ad3cee644794ee2e}} 
 \index{oomph::ProjectableGeneralisedNewtonianTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableGeneralisedNewtonianTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!jacobian\_and\_shape\_of\_field@{jacobian\_and\_shape\_of\_field}}
@@ -132,11 +133,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ad45c21b58c0985
 
 
 
-Definition at line \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source_l02530}{2530}} of file \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2530 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Finite\+Element\+::nnode(), and s.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement_aade79476ead53af48e508562033bfb50}\label{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement_aade79476ead53af48e508562033bfb50}} 
 \index{oomph::ProjectableGeneralisedNewtonianTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableGeneralisedNewtonianTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!local\_equation@{local\_equation}}
@@ -155,11 +156,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac5c27ae929ff63
 
 
 
-Definition at line \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source_l02617}{2617}} of file \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2617 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, and \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}.
+References oomph\+::\+Finite\+Element\+::dim(), and oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement_a34bc56caf12c251a15509f1be90debf1}\label{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement_a34bc56caf12c251a15509f1be90debf1}} 
 \index{oomph::ProjectableGeneralisedNewtonianTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableGeneralisedNewtonianTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!nfields\_for\_projection@{nfields\_for\_projection}}
@@ -178,11 +179,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a44634aa4049332
 
 
 
-Definition at line \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source_l02499}{2499}} of file \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2499 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}.
+References oomph\+::\+Finite\+Element\+::dim().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement_a126d79b6d873a2e4e73ea300089cef85}\label{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement_a126d79b6d873a2e4e73ea300089cef85}} 
 \index{oomph::ProjectableGeneralisedNewtonianTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableGeneralisedNewtonianTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!nhistory\_values\_for\_coordinate\_projection@{nhistory\_values\_for\_coordinate\_projection}}
@@ -201,11 +202,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ab4ecd0cd24000a
 
 
 
-Definition at line \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source_l02523}{2523}} of file \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2523 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, and \mbox{\hyperlink{nodes_8h_source_l01022}{oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt()}}.
+References oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Time\+Stepper\+::ntstorage(), and oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement_a5a7f30af042df73e5a62a29830333b33}\label{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement_a5a7f30af042df73e5a62a29830333b33}} 
 \index{oomph::ProjectableGeneralisedNewtonianTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableGeneralisedNewtonianTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!nhistory\_values\_for\_projection@{nhistory\_values\_for\_projection}}
@@ -224,11 +225,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac6790f394630b9
 
 
 
-Definition at line \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source_l02508}{2508}} of file \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2508 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8cc_source_l00879}{oomph\+::\+Data\+::ntstorage()}}.
+References oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Data\+::ntstorage().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement_a44ae0637efb48b6dc0c2f886bf39e376}\label{classoomph_1_1ProjectableGeneralisedNewtonianTaylorHoodElement_a44ae0637efb48b6dc0c2f886bf39e376}} 
 \index{oomph::ProjectableGeneralisedNewtonianTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableGeneralisedNewtonianTaylorHoodElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!nvalue\_of\_field@{nvalue\_of\_field}}
@@ -247,11 +248,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a1a9a6de16f3511
 
 
 
-Definition at line \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source_l02603}{2603}} of file \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2603 of file generalised\+\_\+newtonian\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, and \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}.
+References oomph\+::\+Finite\+Element\+::dim(), and oomph\+::\+Finite\+Element\+::nnode().
 
 
 

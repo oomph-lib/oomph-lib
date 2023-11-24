@@ -31,8 +31,8 @@ As usual, we store the problem parameters in a namespace. Note that we define no
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_tanh\_solution============================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Namespace for exact solution for LinearWave equation }\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// with sharp step }}
+\DoxyCodeLine{\textcolor{comment}{/// Namespace for exact solution for LinearWave equation }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// with sharp step }}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceTanhSolnForLinearWave}{TanhSolnForLinearWave}}}
 \DoxyCodeLine{\{}
@@ -94,7 +94,7 @@ As in most previous time-\/dependent example codes, we use the command line argu
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_main========================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Demonstrate how to solve LinearWave problem.}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{two__d__linear__wave_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
@@ -156,7 +156,7 @@ The problem class is practically identical to that used for \href{../../../unste
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_problem\_class===========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// LinearWave problem in rectanglular domain}}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classLinearWaveProblem}{LinearWaveProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -266,7 +266,7 @@ The problem constructor is also fairly standard\+: We start by creating the time
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_constructor=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for LinearWave problem }}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\mbox{\hyperlink{classLinearWaveProblem_a459a58b7afd588cfa78a5e1e98c3c41e}{LinearWaveProblem<ELEMENT,TIMESTEPPER>::LinearWaveProblem}}(}
 \DoxyCodeLine{ \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nx, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ny, \textcolor{keyword}{const} \textcolor{keywordtype}{bool}\& impulsive\_start, }
@@ -366,12 +366,12 @@ Timesteppers from the {\ttfamily Newmark} family compute second-\/order accurate
 
 For a {\ttfamily Data} object that is associated with a {\ttfamily Newmark$<$\+NSTEPS$>$} timestepper, the history value obtained from {\ttfamily Data\+::value(t,i)} may be interpreted as follows\+:
 \begin{DoxyItemize}
-\item t=0\+: The i-\/th value at at present time, {\ttfamily Time\+\_\+pt-\/\texorpdfstring{$>$}{>}time()} 
-\item t=1\+: The i-\/th value at the previous timestep, {\ttfamily Time\+\_\+pt-\/\texorpdfstring{$>$}{>}time()-\/dt} 
+\item t=0\+: The i-\/th value at at present time, {\ttfamily Time\+\_\+pt-\/$>$time()} 
+\item t=1\+: The i-\/th value at the previous timestep, {\ttfamily Time\+\_\+pt-\/$>$time()-\/dt} 
 \item ...
-\item t=NSTEPS\+: The i-\/th value at the NSTEPS-\/th previous timestep, i.\+e. at {\ttfamily Time\+\_\+pt-\/\texorpdfstring{$>$}{>}time()-\/NSTEPS$\ast$dt} if the timestep dt was kept constant.
-\item t=NSTEPS+1\+: The 1st time derivative (= \char`\"{}the velocity\char`\"{}) of the i-\/th value at the previous timestep, {\ttfamily Time\+\_\+pt-\/\texorpdfstring{$>$}{>}time()-\/dt} 
-\item t=NSTEPS+2\+: The 2nd time derivative (= \char`\"{}the acceleration\char`\"{}) of the i-\/th value at the previous timestep, {\ttfamily Time\+\_\+pt-\/\texorpdfstring{$>$}{>}time()-\/dt}.
+\item t=NSTEPS\+: The i-\/th value at the NSTEPS-\/th previous timestep, i.\+e. at {\ttfamily Time\+\_\+pt-\/$>$time()-\/NSTEPS$\ast$dt} if the timestep dt was kept constant.
+\item t=NSTEPS+1\+: The 1st time derivative (= \char`\"{}the velocity\char`\"{}) of the i-\/th value at the previous timestep, {\ttfamily Time\+\_\+pt-\/$>$time()-\/dt} 
+\item t=NSTEPS+2\+: The 2nd time derivative (= \char`\"{}the acceleration\char`\"{}) of the i-\/th value at the previous timestep, {\ttfamily Time\+\_\+pt-\/$>$time()-\/dt}.
 \end{DoxyItemize}The {\ttfamily Newmark$<$1$>$} timestepper is equivalent to the classical Newmark scheme.
 
 \DoxyHorRuler{0}
@@ -393,7 +393,7 @@ The function {\ttfamily set\+\_\+initial\+\_\+condition()} demonstrates the use 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_set\_initial\_condition=======================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Set initial condition.}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classLinearWaveProblem_afb5d327791d8289a8a0a565afc8aee37}{LinearWaveProblem<ELEMENT,TIMESTEPPER>::set\_initial\_condition}}()}
 \DoxyCodeLine{\{ }
@@ -615,7 +615,7 @@ Timestepping the linear wave equation involves exactly the same steps as in the 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_unsteady\_run================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Unsteady run.}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classLinearWaveProblem_a9993365201bfffcc04dd2034f0d3d391}{LinearWaveProblem<ELEMENT,TIMESTEPPER>::unsteady\_run}}()}
 \DoxyCodeLine{\{}

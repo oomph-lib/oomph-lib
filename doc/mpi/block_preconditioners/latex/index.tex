@@ -73,8 +73,8 @@ These are already implemented for many elements. If not, the functions are easy 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_mylinearelasticityelement===============================}}
-\DoxyCodeLine{\textcolor{comment}{/// Wrapper to make quadratic linear elasticity element block}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// preconditionable }}
+\DoxyCodeLine{\textcolor{comment}{/// Wrapper to make quadratic linear elasticity element block}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// preconditionable }}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//===================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
 \DoxyCodeLine{\textcolor{keyword}{class }MyLinearElasticityElement : \textcolor{keyword}{public} \textcolor{keyword}{virtual} QLinearElasticityElement<DIM,3>}
@@ -204,8 +204,8 @@ Here is a sample implementation of the diagonal block preconditioner as a class 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=========================start\_of\_diagonal\_class=============================}}
-\DoxyCodeLine{\textcolor{comment}{/// Simple proof-\/of-\/concept block diagonal preconditioner for}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// demo purposes. There's a much better version in src/generic!}}
+\DoxyCodeLine{\textcolor{comment}{/// Simple proof-\/of-\/concept block diagonal preconditioner for}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// demo purposes. There's a much better version in src/generic!}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=============================================================================}}
 \DoxyCodeLine{ \textcolor{keyword}{template}<\textcolor{keyword}{typename} MATRIX> }
 \DoxyCodeLine{ \textcolor{keyword}{class }Diagonal : \textcolor{keyword}{public} BlockPreconditioner<MATRIX>}
@@ -454,8 +454,8 @@ Here is a sample implementation of the upper triangular block preconditioner as 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=========================start\_of\_upper\_triangular\_class=====================}}
-\DoxyCodeLine{\textcolor{comment}{/// Upper triangular preconditioner for a system }\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// with any number of dof types.}}
+\DoxyCodeLine{\textcolor{comment}{/// Upper triangular preconditioner for a system }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// with any number of dof types.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=============================================================================}}
 \DoxyCodeLine{ \textcolor{keyword}{template}<\textcolor{keyword}{typename} MATRIX> }
 \DoxyCodeLine{ \textcolor{keyword}{class }UpperTriangular : \textcolor{keyword}{public} BlockPreconditioner<MATRIX>}
@@ -2372,10 +2372,10 @@ The overall structure of the class is similar to that of the preconditioners con
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=start\_of\_simple\_fsi\_preconditioner========================================== }}
-\DoxyCodeLine{\textcolor{comment}{/// Simple FSI preconditioner. A block uppper triangular preconditioner}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// for the 2x2 FSI block system -\/-\/ DOFs are decomposed into fluid DOFs and }}
-\DoxyCodeLine{\textcolor{comment}{/// solid DOFs. The fluid subisidiary system is solved with the }}
-\DoxyCodeLine{\textcolor{comment}{/// Navier Stokes Preconditioner and the solid subsidiary system with the}}
+\DoxyCodeLine{\textcolor{comment}{/// Simple FSI preconditioner. A block uppper triangular preconditioner}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// for the 2x2 FSI block system -\/-\/ DOFs are decomposed into fluid DOFs and }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// solid DOFs. The fluid subisidiary system is solved with the }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// Navier Stokes Preconditioner and the solid subsidiary system with the}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=============================================================================}}
 \DoxyCodeLine{ \textcolor{keyword}{template}<\textcolor{keyword}{typename} MATRIX> }
 \DoxyCodeLine{\textcolor{keyword}{class }SimpleFSIPreconditioner }
@@ -2479,7 +2479,7 @@ We start by setting up the meshes, choosing the fluid mesh to be mesh {\ttfamily
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=start\_of\_setup===============================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Setup the preconditioner.}}
-\DoxyCodeLine{\textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==============================================================================}}
 \DoxyCodeLine{ \textcolor{keyword}{template}<\textcolor{keyword}{typename} MATRIX> }
 \DoxyCodeLine{ \textcolor{keywordtype}{void} SimpleFSIPreconditioner<MATRIX>::setup()}
 \DoxyCodeLine{\{}
@@ -2603,7 +2603,7 @@ We start by applying the Navier-\/\+Stokes preconditioner $\tilde F$ to the flui
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=start\_of\_preconditioner\_solve================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Apply preconditioner.}}
-\DoxyCodeLine{\textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==============================================================================}}
 \DoxyCodeLine{ \textcolor{keyword}{template}<\textcolor{keyword}{typename} MATRIX> }
 \DoxyCodeLine{ \textcolor{keywordtype}{void} SimpleFSIPreconditioner<MATRIX>::preconditioner\_solve(}
 \DoxyCodeLine{  \textcolor{keyword}{const} DoubleVector \&y, DoubleVector \&z)}

@@ -107,7 +107,7 @@ To facilitate the deletion and re-\/creation of the {\ttfamily FSISolid\+Tractio
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_delete\_traction\_elements==========================}}
 \DoxyCodeLine{\textcolor{comment}{/// Delete FSI traction elements }}
-\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} FLUID\_ELEMENT,\textcolor{keyword}{class} SOLID\_ELEMENT >}
 \DoxyCodeLine{\textcolor{keywordtype}{void} TurekProblem<FLUID\_ELEMENT,SOLID\_ELEMENT>::delete\_fsi\_traction\_elements()}
 \DoxyCodeLine{\{}
@@ -136,11 +136,11 @@ As discussed above, we must ensure that the \char`\"{}bulk\char`\"{} solid eleme
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==================start\_of\_actions\_before\_distribute====================}}
-\DoxyCodeLine{\textcolor{comment}{/// Actions before distribute: Make sure that the bulk solid elements }\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// attached to the FSISolidTractionElements are kept as halo elements.}}
-\DoxyCodeLine{\textcolor{comment}{/// Unlike in most other parallel codes we DON'T delete the }}
-\DoxyCodeLine{\textcolor{comment}{/// FSISolidTractionElements here, though, because they need to }}
-\DoxyCodeLine{\textcolor{comment}{/// be around while the fluid mesh is adapted.}}
+\DoxyCodeLine{\textcolor{comment}{/// Actions before distribute: Make sure that the bulk solid elements }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// attached to the FSISolidTractionElements are kept as halo elements.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// Unlike in most other parallel codes we DON'T delete the }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// FSISolidTractionElements here, though, because they need to }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// be around while the fluid mesh is adapted.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} FLUID\_ELEMENT,\textcolor{keyword}{class} SOLID\_ELEMENT >}
 \DoxyCodeLine{\textcolor{keywordtype}{void} TurekProblem<FLUID\_ELEMENT,SOLID\_ELEMENT>::actions\_before\_distribute()}
@@ -203,7 +203,7 @@ Following the problem distribution, we delete the old {\ttfamily FSISolid\+Tract
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==================start\_of\_actions\_after\_distribute=====================}}
 \DoxyCodeLine{\textcolor{comment}{///  Actions after distribute: Re-\/setup FSI}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} FLUID\_ELEMENT,\textcolor{keyword}{class} SOLID\_ELEMENT >}
 \DoxyCodeLine{\textcolor{keywordtype}{void} TurekProblem<FLUID\_ELEMENT,SOLID\_ELEMENT>::actions\_after\_distribute()}
 \DoxyCodeLine{\{}
@@ -410,7 +410,7 @@ The function {\ttfamily Problem\+::build\+\_\+mesh()} must be supplied by the us
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====start\_of\_constructor============================================= }}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor: Pass length and height of domain}}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================== }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================== }}
 \DoxyCodeLine{\textcolor{keyword}{template}< \textcolor{keyword}{class} FLUID\_ELEMENT,\textcolor{keyword}{class} SOLID\_ELEMENT >}
 \DoxyCodeLine{TurekProblem<FLUID\_ELEMENT,SOLID\_ELEMENT>::}
 \DoxyCodeLine{TurekProblem(\textcolor{keyword}{const} \textcolor{keywordtype}{double} \&length,}

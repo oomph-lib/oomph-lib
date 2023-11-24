@@ -34,7 +34,7 @@ void \mbox{\hyperlink{classRefineableLinearisedQTaylorHoodMultiDomainElement_ae9
 
 Build a Refineable\+Linearised\+QTaylor\+Hood element that inherits from Element\+With\+External\+Element so that it can \char`\"{}communicate\char`\"{} with an axisymmetric Navier-\/\+Stokes element that provides the base flow velocities and their derivatives w.\+r.\+t. global coordinates (r and z) 
 
-Definition at line \mbox{\hyperlink{multi__domain__linearised__navier__stokes__elements_8h_source_l00288}{288}} of file \mbox{\hyperlink{multi__domain__linearised__navier__stokes__elements_8h_source}{multi\+\_\+domain\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 288 of file multi\+\_\+domain\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -51,11 +51,11 @@ Constructor\+: call the underlying constructors.
 
 Do not include any external geometric data when computing the element\textquotesingle{}s Jacobian.
 
-Definition at line \mbox{\hyperlink{multi__domain__linearised__navier__stokes__elements_8h_source_l00294}{294}} of file \mbox{\hyperlink{multi__domain__linearised__navier__stokes__elements_8h_source}{multi\+\_\+domain\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 294 of file multi\+\_\+domain\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__external__element_8h_source_l00178}{oomph\+::\+Element\+With\+External\+Element\+::set\+\_\+ninteraction()}}.
+References oomph\+::\+Element\+With\+External\+Element\+::ignore\+\_\+external\+\_\+geometric\+\_\+data().
 
 
 
@@ -76,11 +76,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_ae5
 
 
 
-Definition at line \mbox{\hyperlink{multi__domain__linearised__navier__stokes__elements_8h_source_l00382}{382}} of file \mbox{\hyperlink{multi__domain__linearised__navier__stokes__elements_8h_source}{multi\+\_\+domain\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 382 of file multi\+\_\+domain\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__external__element_8h_source_l00345}{oomph\+::\+Element\+With\+External\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+by\+\_\+fd()}}.
+References oomph\+::\+Finite\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian().
 
 \mbox{\Hypertarget{classRefineableLinearisedQTaylorHoodMultiDomainElement_ad22978ef877f7a79f05a613a9aa101fd}\label{classRefineableLinearisedQTaylorHoodMultiDomainElement_ad22978ef877f7a79f05a613a9aa101fd}} 
 \index{RefineableLinearisedQTaylorHoodMultiDomainElement@{RefineableLinearisedQTaylorHoodMultiDomainElement}!get\_base\_flow\_dudx@{get\_base\_flow\_dudx}}
@@ -98,11 +98,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearisedNavierStokesEquation
 
 
 
-Definition at line \mbox{\hyperlink{multi__domain__linearised__navier__stokes__elements_8h_source_l00345}{345}} of file \mbox{\hyperlink{multi__domain__linearised__navier__stokes__elements_8h_source}{multi\+\_\+domain\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 345 of file multi\+\_\+domain\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__external__element_8h_source_l00136}{oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+local\+\_\+coord()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00107}{oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{navier__stokes__elements_8h_source_l01684}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::interpolated\+\_\+dudx\+\_\+nst()}}.
+References i, and oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::interpolated\+\_\+dudx\+\_\+nst().
 
 \mbox{\Hypertarget{classRefineableLinearisedQTaylorHoodMultiDomainElement_add3d103c76066426856143d9b683053d}\label{classRefineableLinearisedQTaylorHoodMultiDomainElement_add3d103c76066426856143d9b683053d}} 
 \index{RefineableLinearisedQTaylorHoodMultiDomainElement@{RefineableLinearisedQTaylorHoodMultiDomainElement}!get\_base\_flow\_u@{get\_base\_flow\_u}}
@@ -120,11 +120,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearisedNavierStokesEquation
 
 
 
-Definition at line \mbox{\hyperlink{multi__domain__linearised__navier__stokes__elements_8h_source_l00312}{312}} of file \mbox{\hyperlink{multi__domain__linearised__navier__stokes__elements_8h_source}{multi\+\_\+domain\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 312 of file multi\+\_\+domain\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__external__element_8h_source_l00136}{oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+local\+\_\+coord()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00107}{oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{navier__stokes__elements_8h_source_l01505}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::interpolated\+\_\+u\+\_\+nst()}}.
+References i, and oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::interpolated\+\_\+u\+\_\+nst().
 
 
 

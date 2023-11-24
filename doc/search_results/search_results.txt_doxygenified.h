@@ -19,7 +19,7 @@ document.getElementById("search_warning").style.display = "block";
 
 <script>
   (function() {
-    var cx = '012602191547997727495:tdptmnnakuy';
+    var cx = 'c61eaf2c80b684c8a';
     var gcse = document.createElement('script');
     gcse.type = 'text/javascript';
     gcse.async = true;

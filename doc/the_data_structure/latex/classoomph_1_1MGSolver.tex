@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1MGSolver}{}\doxysection{oomph\+::MGSolver\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1MGSolver}{}\doxysection{oomph\+::MGSolver$<$ DIM $>$ Class Template Reference}
 \label{classoomph_1_1MGSolver}\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
 
 
@@ -9,7 +9,7 @@
 
 {\ttfamily \#include $<$geometric\+\_\+multigrid.\+h$>$}
 
-Inheritance diagram for oomph\+::MGSolver\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::MGSolver$<$ DIM $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=5.000000cm]{classoomph_1_1MGSolver}
@@ -18,16 +18,16 @@ Inheritance diagram for oomph\+::MGSolver\texorpdfstring{$<$}{<} DIM \texorpdfst
 \doxysubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
-typedef \mbox{\hyperlink{classoomph_1_1Smoother}{Smoother}} $\ast$($\ast$ \mbox{\hyperlink{classoomph_1_1MGSolver_a60aa316ebfc000491554e28dbfbebc10}{Pre\+Smoother\+Factory\+Fct\+Pt}}) ()
+typedef \mbox{\hyperlink{classoomph_1_1Smoother}{Smoother}} $\ast$($\ast$ \mbox{\hyperlink{classoomph_1_1MGSolver_a43de5ad4985ae1bbe68388619a9db32a}{Pre\+Smoother\+Factory\+Fct\+Pt}}) ()
 \begin{DoxyCompactList}\small\item\em typedef for a function that returns a pointer to an object of the class \mbox{\hyperlink{classoomph_1_1Smoother}{Smoother}} to be used as the pre-\/smoother \end{DoxyCompactList}\item 
-typedef \mbox{\hyperlink{classoomph_1_1Smoother}{Smoother}} $\ast$($\ast$ \mbox{\hyperlink{classoomph_1_1MGSolver_a0a46fa180d8a32f54272fc98e28001cf}{Post\+Smoother\+Factory\+Fct\+Pt}}) ()
+typedef \mbox{\hyperlink{classoomph_1_1Smoother}{Smoother}} $\ast$($\ast$ \mbox{\hyperlink{classoomph_1_1MGSolver_a72fa4eb80c0b5a0ec6811dcd92b30231}{Post\+Smoother\+Factory\+Fct\+Pt}}) ()
 \begin{DoxyCompactList}\small\item\em typedef for a function that returns a pointer to an object of the class \mbox{\hyperlink{classoomph_1_1Smoother}{Smoother}} to be used as the post-\/smoother \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classoomph_1_1MGSolver_a0c783dddf9108f26b835509fddec6938}{set\+\_\+pre\+\_\+smoother\+\_\+factory\+\_\+function}} (\mbox{\hyperlink{classoomph_1_1MGSolver_a60aa316ebfc000491554e28dbfbebc10}{Pre\+Smoother\+Factory\+Fct\+Pt}} pre\+\_\+smoother\+\_\+fn)
+void \mbox{\hyperlink{classoomph_1_1MGSolver_a0c783dddf9108f26b835509fddec6938}{set\+\_\+pre\+\_\+smoother\+\_\+factory\+\_\+function}} (\mbox{\hyperlink{classoomph_1_1MGSolver_a43de5ad4985ae1bbe68388619a9db32a}{Pre\+Smoother\+Factory\+Fct\+Pt}} pre\+\_\+smoother\+\_\+fn)
 \begin{DoxyCompactList}\small\item\em Access function to set the pre-\/smoother creation function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1MGSolver_a451bf822bb1b42c8cdd8ed3fbb3a7be4}{set\+\_\+post\+\_\+smoother\+\_\+factory\+\_\+function}} (\mbox{\hyperlink{classoomph_1_1MGSolver_a0a46fa180d8a32f54272fc98e28001cf}{Post\+Smoother\+Factory\+Fct\+Pt}} post\+\_\+smoother\+\_\+fn)
+void \mbox{\hyperlink{classoomph_1_1MGSolver_a451bf822bb1b42c8cdd8ed3fbb3a7be4}{set\+\_\+post\+\_\+smoother\+\_\+factory\+\_\+function}} (\mbox{\hyperlink{classoomph_1_1MGSolver_a72fa4eb80c0b5a0ec6811dcd92b30231}{Post\+Smoother\+Factory\+Fct\+Pt}} post\+\_\+smoother\+\_\+fn)
 \begin{DoxyCompactList}\small\item\em Access function to set the post-\/smoother creation function. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1MGSolver_a61354743e9989dc8eb69efe2b1414cfa}{MGSolver}} (\mbox{\hyperlink{classoomph_1_1MGProblem}{MGProblem}} $\ast$mg\+\_\+problem\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Constructor\+: Set up default values for number of V-\/cycles and pre-\/ and post-\/smoothing steps. \end{DoxyCompactList}\item 
@@ -57,9 +57,9 @@ void \mbox{\hyperlink{classoomph_1_1MGSolver_abf5d8dc2a2a116a41bb625e1d6985f2e}{
 \begin{DoxyCompactList}\small\item\em Enable the output from anything that could have been suppressed. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1MGSolver_a84a562088ef3ec0514027cac6a69d5a9}{disable\+\_\+smoother\+\_\+and\+\_\+superlu\+\_\+doc\+\_\+time}} ()
 \begin{DoxyCompactList}\small\item\em Suppress the output of both smoothers and Super\+LU. \end{DoxyCompactList}\item 
-unsigned \& \mbox{\hyperlink{classoomph_1_1MGSolver_a4cf132b23574081bd2334253ac864d02}{npost\+\_\+smooth}} ()
+unsigned \& \mbox{\hyperlink{classoomph_1_1MGSolver_a7ccbf719e57fb651fa4577c13b90942b}{npost\+\_\+smooth}} ()
 \begin{DoxyCompactList}\small\item\em Return the number of post-\/smoothing iterations (lvalue) \end{DoxyCompactList}\item 
-unsigned \& \mbox{\hyperlink{classoomph_1_1MGSolver_ace13f81b421aa1084d5963f2ebc69f8b}{npre\+\_\+smooth}} ()
+unsigned \& \mbox{\hyperlink{classoomph_1_1MGSolver_acfe72d9cc2743740a3e148e91919bf74}{npre\+\_\+smooth}} ()
 \begin{DoxyCompactList}\small\item\em Return the number of pre-\/smoothing iterations (lvalue) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1MGSolver_ac44511f43e0029f325f09d297d46134e}{pre\+\_\+smooth}} (const unsigned \&level)
 \begin{DoxyCompactList}\small\item\em Pre-\/smoother\+: Perform \textquotesingle{}max\+\_\+iter\textquotesingle{} smoothing steps on the linear system Ax=b with current RHS vector, b, starting with current solution vector, x. Return the residual vector r=b-\/\+Ax. Uses the default smoother (set in the \mbox{\hyperlink{classoomph_1_1MGProblem}{MGProblem}} constructor) which can be overloaded for a specific problem. \end{DoxyCompactList}\item 
@@ -93,7 +93,7 @@ void \mbox{\hyperlink{classoomph_1_1MGSolver_a68f8c874b922c5b67e73c836048e34f5}{
 \begin{DoxyCompactList}\small\item\em Virtual function in the base class that needs to be implemented later but for now just leave it empty. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1MGSolver_ace1b91d44c67c990259807ee746a6363}{iterations}} () const
 \begin{DoxyCompactList}\small\item\em Number of iterations. \end{DoxyCompactList}\item 
-unsigned \& \mbox{\hyperlink{classoomph_1_1MGSolver_af8a50fac4acaadaa5a12eaf29231bc4c}{max\+\_\+iter}} ()
+unsigned \& \mbox{\hyperlink{classoomph_1_1MGSolver_a615f4840e78b719860fc767a1dfe46ff}{max\+\_\+iter}} ()
 \begin{DoxyCompactList}\small\item\em Number of iterations. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1MGSolver_a403ac19c2fceb11768d1d1426f70ef6a}{level\+\_\+up\+\_\+local\+\_\+coord\+\_\+of\+\_\+node}} (const int \&son\+\_\+type, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
 \begin{DoxyCompactList}\small\item\em Given the son type of the element and the local coordinate s of a given node in the son element, return the local coordinate s in its father element. 2D case. \end{DoxyCompactList}\item 
@@ -133,9 +133,9 @@ void \mbox{\hyperlink{classoomph_1_1MGSolver_a9b3674f92da65b8cacada47325107804}{
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1MGSolver_a60aa316ebfc000491554e28dbfbebc10}{Pre\+Smoother\+Factory\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1MGSolver_af7d8204d7b71b18f5362b01a971aad02}{Pre\+\_\+smoother\+\_\+factory\+\_\+function\+\_\+pt}}
+\mbox{\hyperlink{classoomph_1_1MGSolver_a43de5ad4985ae1bbe68388619a9db32a}{Pre\+Smoother\+Factory\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1MGSolver_af7d8204d7b71b18f5362b01a971aad02}{Pre\+\_\+smoother\+\_\+factory\+\_\+function\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Function to create pre-\/smoothers. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1MGSolver_a0a46fa180d8a32f54272fc98e28001cf}{Post\+Smoother\+Factory\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1MGSolver_a2c105a6889f43968c9e57366f44ebd79}{Post\+\_\+smoother\+\_\+factory\+\_\+function\+\_\+pt}}
+\mbox{\hyperlink{classoomph_1_1MGSolver_a72fa4eb80c0b5a0ec6811dcd92b30231}{Post\+Smoother\+Factory\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1MGSolver_a2c105a6889f43968c9e57366f44ebd79}{Post\+\_\+smoother\+\_\+factory\+\_\+function\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Function to create post-\/smoothers. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1MGSolver_a4ab5b80c46b66867e720b1c28f170bb9}{Nlevel}}
 \begin{DoxyCompactList}\small\item\em The number of levels in the multigrid heirachy. \end{DoxyCompactList}\item 
@@ -177,19 +177,20 @@ unsigned \mbox{\hyperlink{classoomph_1_1MGSolver_a29bdc90613e9759bd3fdff47a0c7c4
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$unsigned DIM$>$\newline
 class oomph\+::\+MGSolver$<$ DIM $>$}
+
 /////////////////////////////////////////////////////// /////////////////////////////////////////////////////// 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00089}{89}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 89 of file geometric\+\_\+multigrid.\+h.
 
 
 
 \doxysubsection{Member Typedef Documentation}
-\mbox{\Hypertarget{classoomph_1_1MGSolver_a0a46fa180d8a32f54272fc98e28001cf}\label{classoomph_1_1MGSolver_a0a46fa180d8a32f54272fc98e28001cf}} 
+\mbox{\Hypertarget{classoomph_1_1MGSolver_a72fa4eb80c0b5a0ec6811dcd92b30231}\label{classoomph_1_1MGSolver_a72fa4eb80c0b5a0ec6811dcd92b30231}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!PostSmootherFactoryFctPt@{PostSmootherFactoryFctPt}}
 \index{PostSmootherFactoryFctPt@{PostSmootherFactoryFctPt}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{PostSmootherFactoryFctPt}{PostSmootherFactoryFctPt}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-typedef \mbox{\hyperlink{classoomph_1_1Smoother}{Smoother}} $\ast$($\ast$ \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ DIM $>$\+::Post\+Smoother\+Factory\+Fct\+Pt) ()}
+typedef \mbox{\hyperlink{classoomph_1_1Smoother}{Smoother}}$\ast$($\ast$ \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ DIM $>$\+::Post\+Smoother\+Factory\+Fct\+Pt) ()}
 
 
 
@@ -197,14 +198,14 @@ typedef for a function that returns a pointer to an object of the class \mbox{\h
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00098}{98}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 98 of file geometric\+\_\+multigrid.\+h.
 
-\mbox{\Hypertarget{classoomph_1_1MGSolver_a60aa316ebfc000491554e28dbfbebc10}\label{classoomph_1_1MGSolver_a60aa316ebfc000491554e28dbfbebc10}} 
+\mbox{\Hypertarget{classoomph_1_1MGSolver_a43de5ad4985ae1bbe68388619a9db32a}\label{classoomph_1_1MGSolver_a43de5ad4985ae1bbe68388619a9db32a}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!PreSmootherFactoryFctPt@{PreSmootherFactoryFctPt}}
 \index{PreSmootherFactoryFctPt@{PreSmootherFactoryFctPt}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{PreSmootherFactoryFctPt}{PreSmootherFactoryFctPt}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-typedef \mbox{\hyperlink{classoomph_1_1Smoother}{Smoother}} $\ast$($\ast$ \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ DIM $>$\+::Pre\+Smoother\+Factory\+Fct\+Pt) ()}
+typedef \mbox{\hyperlink{classoomph_1_1Smoother}{Smoother}}$\ast$($\ast$ \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ DIM $>$\+::Pre\+Smoother\+Factory\+Fct\+Pt) ()}
 
 
 
@@ -212,7 +213,7 @@ typedef for a function that returns a pointer to an object of the class \mbox{\h
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00094}{94}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 94 of file geometric\+\_\+multigrid.\+h.
 
 
 
@@ -230,11 +231,11 @@ Constructor\+: Set up default values for number of V-\/cycles and pre-\/ and pos
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00118}{118}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 118 of file geometric\+\_\+multigrid.\+h.
 
 
 
-References \mbox{\hyperlink{geometric__multigrid_8h_source_l00673}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Mg\+\_\+hierarchy}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00626}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Mg\+\_\+problem\+\_\+pt}}, and \mbox{\hyperlink{iterative__linear__solver_8h_source_l00239}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Tolerance}}.
+References oomph\+::\+MGSolver$<$ DIM $>$\+::\+Mg\+\_\+hierarchy, oomph\+::\+MGSolver$<$ DIM $>$\+::\+Mg\+\_\+problem\+\_\+pt, and oomph\+::\+Iterative\+Linear\+Solver\+::\+Tolerance.
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_aae6259c5553a6570841e689b63bd691d}\label{classoomph_1_1MGSolver_aae6259c5553a6570841e689b63bd691d}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!````~MGSolver@{$\sim$MGSolver}}
@@ -249,11 +250,11 @@ Delete any dynamically allocated data.
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00141}{141}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 141 of file geometric\+\_\+multigrid.\+h.
 
 
 
-References \mbox{\hyperlink{geometric__multigrid_8h_source_l00148}{oomph\+::\+MGSolver$<$ DIM $>$\+::clean\+\_\+up\+\_\+memory()}}.
+References oomph\+::\+MGSolver$<$ DIM $>$\+::clean\+\_\+up\+\_\+memory().
 
 
 
@@ -279,15 +280,15 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1MGPreconditioner_acc92bd3f8c9b72
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00148}{148}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 148 of file geometric\+\_\+multigrid.\+h.
 
 
 
-References \mbox{\hyperlink{geometric__multigrid_8h_source_l00717}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Doc\+\_\+everything}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00720}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Has\+\_\+been\+\_\+setup}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00679}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Interpolation\+\_\+matrices\+\_\+storage\+\_\+pt}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00673}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Mg\+\_\+hierarchy}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00676}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Mg\+\_\+matrices\+\_\+storage\+\_\+pt}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00670}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Nlevel}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00704}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Post\+\_\+smoothers\+\_\+storage\+\_\+pt}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00701}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Pre\+\_\+smoothers\+\_\+storage\+\_\+pt}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00682}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Restriction\+\_\+matrices\+\_\+storage\+\_\+pt}}.
+References oomph\+::\+MGSolver$<$ DIM $>$\+::\+Doc\+\_\+everything, oomph\+::\+MGSolver$<$ DIM $>$\+::\+Has\+\_\+been\+\_\+setup, i, oomph\+::\+MGSolver$<$ DIM $>$\+::\+Interpolation\+\_\+matrices\+\_\+storage\+\_\+pt, oomph\+::\+MGSolver$<$ DIM $>$\+::\+Mg\+\_\+hierarchy, oomph\+::\+MGSolver$<$ DIM $>$\+::\+Mg\+\_\+matrices\+\_\+storage\+\_\+pt, oomph\+::\+MGSolver$<$ DIM $>$\+::\+Nlevel, oomph\+::\+MGSolver$<$ DIM $>$\+::\+Post\+\_\+smoothers\+\_\+storage\+\_\+pt, oomph\+::\+MGSolver$<$ DIM $>$\+::\+Pre\+\_\+smoothers\+\_\+storage\+\_\+pt, and oomph\+::\+MGSolver$<$ DIM $>$\+::\+Restriction\+\_\+matrices\+\_\+storage\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00141}{oomph\+::\+MGSolver$<$ DIM $>$\+::$\sim$\+MGSolver()}}.
+Referenced by oomph\+::\+MGSolver$<$ DIM $>$\+::$\sim$\+MGSolver().
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_a966b9775086c2a238c212605a9bb16de}\label{classoomph_1_1MGSolver_a966b9775086c2a238c212605a9bb16de}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!direct\_solve@{direct\_solve}}
@@ -302,11 +303,11 @@ Call the direct solver (Super\+LU) to solve the problem exactly.
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00392}{392}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 392 of file geometric\+\_\+multigrid.\+h.
 
 
 
-References \mbox{\hyperlink{geometric__multigrid_8h_source_l00676}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Mg\+\_\+matrices\+\_\+storage\+\_\+pt}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00670}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Nlevel}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00631}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Rhs\+\_\+mg\+\_\+vectors\+\_\+storage}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00685}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+X\+\_\+mg\+\_\+vectors\+\_\+storage}}.
+References oomph\+::\+MGSolver$<$ DIM $>$\+::\+Mg\+\_\+matrices\+\_\+storage\+\_\+pt, oomph\+::\+MGSolver$<$ DIM $>$\+::\+Nlevel, oomph\+::\+MGSolver$<$ DIM $>$\+::\+Rhs\+\_\+mg\+\_\+vectors\+\_\+storage, and oomph\+::\+MGSolver$<$ DIM $>$\+::\+X\+\_\+mg\+\_\+vectors\+\_\+storage.
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_a72dcbb3e6fd8420e7236ada2b5e33b91}\label{classoomph_1_1MGSolver_a72dcbb3e6fd8420e7236ada2b5e33b91}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!disable\_output@{disable\_output}}
@@ -321,11 +322,11 @@ Suppress anything that can be suppressed, i.\+e. any timings. Things like mesh a
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00256}{256}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 256 of file geometric\+\_\+multigrid.\+h.
 
 
 
-References \mbox{\hyperlink{linear__solver_8h_source_l00077}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00313}{oomph\+::oomph\+\_\+nullstream}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00648}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Stream\+\_\+pt}}, \mbox{\hyperlink{oomph__definitions_8h_source_l00464}{oomph\+::\+Oomph\+Info\+::stream\+\_\+pt()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00642}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Suppress\+\_\+all\+\_\+output}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00637}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Suppress\+\_\+v\+\_\+cycle\+\_\+output}}.
+References oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time, oomph\+::oomph\+\_\+info, oomph\+::oomph\+\_\+nullstream, oomph\+::\+MGSolver$<$ DIM $>$\+::\+Stream\+\_\+pt, oomph\+::\+Oomph\+Info\+::stream\+\_\+pt(), oomph\+::\+MGSolver$<$ DIM $>$\+::\+Suppress\+\_\+all\+\_\+output, and oomph\+::\+MGSolver$<$ DIM $>$\+::\+Suppress\+\_\+v\+\_\+cycle\+\_\+output.
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_a84a562088ef3ec0514027cac6a69d5a9}\label{classoomph_1_1MGSolver_a84a562088ef3ec0514027cac6a69d5a9}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!disable\_smoother\_and\_superlu\_doc\_time@{disable\_smoother\_and\_superlu\_doc\_time}}
@@ -340,11 +341,11 @@ Suppress the output of both smoothers and Super\+LU.
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00308}{308}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 308 of file geometric\+\_\+multigrid.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00676}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Mg\+\_\+matrices\+\_\+storage\+\_\+pt}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00670}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Nlevel}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00704}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Post\+\_\+smoothers\+\_\+storage\+\_\+pt}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00701}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Pre\+\_\+smoothers\+\_\+storage\+\_\+pt}}.
+References i, oomph\+::\+MGSolver$<$ DIM $>$\+::\+Mg\+\_\+matrices\+\_\+storage\+\_\+pt, oomph\+::\+MGSolver$<$ DIM $>$\+::\+Nlevel, oomph\+::\+MGSolver$<$ DIM $>$\+::\+Post\+\_\+smoothers\+\_\+storage\+\_\+pt, and oomph\+::\+MGSolver$<$ DIM $>$\+::\+Pre\+\_\+smoothers\+\_\+storage\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_aa96a2b512287d603f3be8fb1c693e05a}\label{classoomph_1_1MGSolver_aa96a2b512287d603f3be8fb1c693e05a}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!disable\_v\_cycle\_output@{disable\_v\_cycle\_output}}
@@ -359,11 +360,11 @@ Disable all output from mg\+\_\+solve apart from the number of V-\/cycles used t
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00245}{245}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 245 of file geometric\+\_\+multigrid.\+h.
 
 
 
-References \mbox{\hyperlink{linear__solver_8h_source_l00077}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00637}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Suppress\+\_\+v\+\_\+cycle\+\_\+output}}.
+References oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time, and oomph\+::\+MGSolver$<$ DIM $>$\+::\+Suppress\+\_\+v\+\_\+cycle\+\_\+output.
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_ac1e06a4689b41bbb9a05ba9a0eecdb23}\label{classoomph_1_1MGSolver_ac1e06a4689b41bbb9a05ba9a0eecdb23}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!enable\_doc\_everything@{enable\_doc\_everything}}
@@ -378,11 +379,11 @@ Enable the output from anything that could have been suppressed.
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00286}{286}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 286 of file geometric\+\_\+multigrid.\+h.
 
 
 
-References \mbox{\hyperlink{geometric__multigrid_8h_source_l00717}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Doc\+\_\+everything}}.
+References oomph\+::\+MGSolver$<$ DIM $>$\+::\+Doc\+\_\+everything.
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_abf5d8dc2a2a116a41bb625e1d6985f2e}\label{classoomph_1_1MGSolver_abf5d8dc2a2a116a41bb625e1d6985f2e}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!enable\_output@{enable\_output}}
@@ -397,11 +398,11 @@ Enable the output from anything that could have been suppressed.
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00295}{295}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 295 of file geometric\+\_\+multigrid.\+h.
 
 
 
-References \mbox{\hyperlink{linear__solver_8h_source_l00077}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00642}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Suppress\+\_\+all\+\_\+output}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00637}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Suppress\+\_\+v\+\_\+cycle\+\_\+output}}.
+References oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time, oomph\+::\+MGSolver$<$ DIM $>$\+::\+Suppress\+\_\+all\+\_\+output, and oomph\+::\+MGSolver$<$ DIM $>$\+::\+Suppress\+\_\+v\+\_\+cycle\+\_\+output.
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_a34098c30d954bc884b7df62ec61bd836}\label{classoomph_1_1MGSolver_a34098c30d954bc884b7df62ec61bd836}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!enable\_v\_cycle\_output@{enable\_v\_cycle\_output}}
@@ -416,11 +417,11 @@ Enable the output of the V-\/cycle timings and other output.
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00276}{276}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 276 of file geometric\+\_\+multigrid.\+h.
 
 
 
-References \mbox{\hyperlink{linear__solver_8h_source_l00077}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00637}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Suppress\+\_\+v\+\_\+cycle\+\_\+output}}.
+References oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time, and oomph\+::\+MGSolver$<$ DIM $>$\+::\+Suppress\+\_\+v\+\_\+cycle\+\_\+output.
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_a104b2f66ce3e177c31cdd666bbc1f17d}\label{classoomph_1_1MGSolver_a104b2f66ce3e177c31cdd666bbc1f17d}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!full\_setup@{full\_setup}}
@@ -435,15 +436,15 @@ Do a full setup (assumes everything will be setup around the \mbox{\hyperlink{cl
 
 Runs a full setup of the MG solver. 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00826}{826}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 826 of file geometric\+\_\+multigrid.\+h.
 
 
 
-References \mbox{\hyperlink{oomph__definitions_8cc_source_l00086}{oomph\+::\+Terminate\+Helper\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}.
+References oomph\+::\+Terminate\+Helper\+::clean\+\_\+up\+\_\+memory(), oomph\+::\+Finite\+Element\+::dim(), i, oomph\+::oomph\+\_\+info, oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), and oomph\+::\+Timing\+Helpers\+::timer().
 
 
 
-Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00754}{oomph\+::\+MGPreconditioner$<$ DIM $>$\+::setup()}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00509}{oomph\+::\+MGSolver$<$ DIM $>$\+::solve()}}.
+Referenced by oomph\+::\+MGPreconditioner$<$ DIM $>$\+::setup(), and oomph\+::\+MGSolver$<$ DIM $>$\+::solve().
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_addc29a0b865681c3eaf7d67e702ee995}\label{classoomph_1_1MGSolver_addc29a0b865681c3eaf7d67e702ee995}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!interpolate\_and\_correct@{interpolate\_and\_correct}}
@@ -458,7 +459,7 @@ Interpolate solution at current level onto next finer mesh and correct the solut
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l02043}{2043}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 2043 of file geometric\+\_\+multigrid.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_ad749205517822b5855faab5701f90afe}\label{classoomph_1_1MGSolver_ad749205517822b5855faab5701f90afe}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!interpolation\_matrix\_set@{interpolation\_matrix\_set}}
@@ -473,11 +474,11 @@ Builds a \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} that 
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00402}{402}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 402 of file geometric\+\_\+multigrid.\+h.
 
 
 
-References \mbox{\hyperlink{geometric__multigrid_8h_source_l00679}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Interpolation\+\_\+matrices\+\_\+storage\+\_\+pt}}.
+References oomph\+::\+MGSolver$<$ DIM $>$\+::\+Interpolation\+\_\+matrices\+\_\+storage\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_a7f96b229fb357fdf817f790f92197745}\label{classoomph_1_1MGSolver_a7f96b229fb357fdf817f790f92197745}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!interpolation\_matrix\_set@{interpolation\_matrix\_set}}
@@ -492,11 +493,11 @@ Builds a \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} that 
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00420}{420}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 420 of file geometric\+\_\+multigrid.\+h.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00335}{oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00679}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Interpolation\+\_\+matrices\+\_\+storage\+\_\+pt}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00673}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Mg\+\_\+hierarchy}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow()}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
+References oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt(), oomph\+::\+MGSolver$<$ DIM $>$\+::\+Interpolation\+\_\+matrices\+\_\+storage\+\_\+pt, oomph\+::\+MGSolver$<$ DIM $>$\+::\+Mg\+\_\+hierarchy, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), and oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_a25fbe00e277a8fba8c7f54902b92c417}\label{classoomph_1_1MGSolver_a25fbe00e277a8fba8c7f54902b92c417}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!interpolation\_self\_test@{interpolation\_self\_test}}
@@ -511,11 +512,11 @@ Make a self-\/test to make sure that the interpolation matrices are doing the sa
 
 Function which implements a self-\/test to interpolate a vector up all of levels of the MG hierarchy and outputs the restricted vectors to file. 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l02344}{2344}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 2344 of file geometric\+\_\+multigrid.\+h.
 
 
 
-References \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
+References oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_ace1b91d44c67c990259807ee746a6363}\label{classoomph_1_1MGSolver_ace1b91d44c67c990259807ee746a6363}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!iterations@{iterations}}
@@ -534,11 +535,11 @@ Implements \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a5fe7f7b5e4847fd
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00595}{595}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 595 of file geometric\+\_\+multigrid.\+h.
 
 
 
-References \mbox{\hyperlink{geometric__multigrid_8h_source_l00727}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+V\+\_\+cycle\+\_\+counter}}.
+References oomph\+::\+MGSolver$<$ DIM $>$\+::\+V\+\_\+cycle\+\_\+counter.
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_a403ac19c2fceb11768d1d1426f70ef6a}\label{classoomph_1_1MGSolver_a403ac19c2fceb11768d1d1426f70ef6a}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!level\_up\_local\_coord\_of\_node@{level\_up\_local\_coord\_of\_node}}
@@ -552,11 +553,11 @@ Given the son type of the element and the local coordinate s of a given node in 
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8cc_source_l00037}{37}} of file \mbox{\hyperlink{geometric__multigrid_8cc_source}{geometric\+\_\+multigrid.\+cc}}.
+Definition at line 37 of file geometric\+\_\+multigrid.\+cc.
 
 
 
-References \mbox{\hyperlink{quadtree_8h_source_l00059}{oomph\+::\+Quad\+Tree\+Names\+::\+NE}}, \mbox{\hyperlink{quadtree_8h_source_l00058}{oomph\+::\+Quad\+Tree\+Names\+::\+NW}}, \mbox{\hyperlink{tree_8h_source_l00262}{oomph\+::\+Tree\+::\+OMEGA}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{quadtree_8h_source_l00057}{oomph\+::\+Quad\+Tree\+Names\+::\+SE}}, and \mbox{\hyperlink{quadtree_8h_source_l00056}{oomph\+::\+Quad\+Tree\+Names\+::\+SW}}.
+References oomph\+::\+Quad\+Tree\+Names\+::\+NE, oomph\+::\+Quad\+Tree\+Names\+::\+NW, oomph\+::\+Tree\+::\+OMEGA, s, oomph\+::\+Quad\+Tree\+Names\+::\+SE, and oomph\+::\+Quad\+Tree\+Names\+::\+SW.
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_a1de2d3013acb7401751a0daf7872889e}\label{classoomph_1_1MGSolver_a1de2d3013acb7401751a0daf7872889e}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!level\_up\_local\_coord\_of\_node@{level\_up\_local\_coord\_of\_node}}
@@ -570,11 +571,11 @@ Given the son type of the element and the local coordinate s of a given node in 
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8cc_source_l00091}{91}} of file \mbox{\hyperlink{geometric__multigrid_8cc_source}{geometric\+\_\+multigrid.\+cc}}.
+Definition at line 91 of file geometric\+\_\+multigrid.\+cc.
 
 
 
-References \mbox{\hyperlink{octree_8h_source_l00049}{oomph\+::\+Oc\+Tree\+Names\+::\+LDB}}, \mbox{\hyperlink{octree_8h_source_l00053}{oomph\+::\+Oc\+Tree\+Names\+::\+LDF}}, \mbox{\hyperlink{octree_8h_source_l00051}{oomph\+::\+Oc\+Tree\+Names\+::\+LUB}}, \mbox{\hyperlink{octree_8h_source_l00055}{oomph\+::\+Oc\+Tree\+Names\+::\+LUF}}, \mbox{\hyperlink{tree_8h_source_l00262}{oomph\+::\+Tree\+::\+OMEGA}}, \mbox{\hyperlink{octree_8h_source_l00050}{oomph\+::\+Oc\+Tree\+Names\+::\+RDB}}, \mbox{\hyperlink{octree_8h_source_l00054}{oomph\+::\+Oc\+Tree\+Names\+::\+RDF}}, \mbox{\hyperlink{octree_8h_source_l00052}{oomph\+::\+Oc\+Tree\+Names\+::\+RUB}}, \mbox{\hyperlink{octree_8h_source_l00056}{oomph\+::\+Oc\+Tree\+Names\+::\+RUF}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References oomph\+::\+Oc\+Tree\+Names\+::\+LDB, oomph\+::\+Oc\+Tree\+Names\+::\+LDF, oomph\+::\+Oc\+Tree\+Names\+::\+LUB, oomph\+::\+Oc\+Tree\+Names\+::\+LUF, oomph\+::\+Tree\+::\+OMEGA, oomph\+::\+Oc\+Tree\+Names\+::\+RDB, oomph\+::\+Oc\+Tree\+Names\+::\+RDF, oomph\+::\+Oc\+Tree\+Names\+::\+RUB, oomph\+::\+Oc\+Tree\+Names\+::\+RUF, and s.
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_a28c5bc08c12849ac16bc0d78bdb9b58a}\label{classoomph_1_1MGSolver_a28c5bc08c12849ac16bc0d78bdb9b58a}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!level\_up\_local\_coord\_of\_node@{level\_up\_local\_coord\_of\_node}}
@@ -587,12 +588,12 @@ void \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ DIM $>$\+
 
 Given the son\+\_\+type of an element and a local node number j in that element with nnode\+\_\+1d nodes per coordinate direction, return the local coordinate s in its father element. Needed in the setup of the interpolation matrices. 
 
-\mbox{\Hypertarget{classoomph_1_1MGSolver_af8a50fac4acaadaa5a12eaf29231bc4c}\label{classoomph_1_1MGSolver_af8a50fac4acaadaa5a12eaf29231bc4c}} 
+\mbox{\Hypertarget{classoomph_1_1MGSolver_a615f4840e78b719860fc767a1dfe46ff}\label{classoomph_1_1MGSolver_a615f4840e78b719860fc767a1dfe46ff}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!max\_iter@{max\_iter}}
 \index{max\_iter@{max\_iter}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{max\_iter()}{max\_iter()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-unsigned \& \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ DIM $>$\+::max\+\_\+iter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+unsigned\& \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ DIM $>$\+::max\+\_\+iter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -600,11 +601,11 @@ Number of iterations.
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00602}{602}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 602 of file geometric\+\_\+multigrid.\+h.
 
 
 
-References \mbox{\hyperlink{geometric__multigrid_8h_source_l00622}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Nvcycle}}.
+References oomph\+::\+MGSolver$<$ DIM $>$\+::\+Nvcycle.
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_a70f1090e0673b8f9c4b87080adff0e2f}\label{classoomph_1_1MGSolver_a70f1090e0673b8f9c4b87080adff0e2f}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!mg\_solve@{mg\_solve}}
@@ -619,15 +620,15 @@ Do the actual solve -- this is called through the pure virtual solve function in
 
 Linear solver. 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l02525}{2525}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 2525 of file geometric\+\_\+multigrid.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}.
+References i, oomph\+::oomph\+\_\+info, and oomph\+::\+Timing\+Helpers\+::timer().
 
 
 
-Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00781}{oomph\+::\+MGPreconditioner$<$ DIM $>$\+::preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00509}{oomph\+::\+MGSolver$<$ DIM $>$\+::solve()}}.
+Referenced by oomph\+::\+MGPreconditioner$<$ DIM $>$\+::preconditioner\+\_\+solve(), and oomph\+::\+MGSolver$<$ DIM $>$\+::solve().
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_ad31f3a5daa8edec01ab20c92e5fcca54}\label{classoomph_1_1MGSolver_ad31f3a5daa8edec01ab20c92e5fcca54}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!modify\_restriction\_matrices@{modify\_restriction\_matrices}}
@@ -642,18 +643,18 @@ Normalise the rows of the restriction matrices to avoid amplifications when proj
 
 Modify the restriction matrices. 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l02070}{2070}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 2070 of file geometric\+\_\+multigrid.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l01002}{oomph\+::\+CRDouble\+Matrix\+::nrow()}}, \mbox{\hyperlink{matrices_8h_source_l01060}{oomph\+::\+CRDouble\+Matrix\+::row\+\_\+start()}}, and \mbox{\hyperlink{matrices_8h_source_l01084}{oomph\+::\+CRDouble\+Matrix\+::value()}}.
+References i, oomph\+::\+CRDouble\+Matrix\+::nrow(), oomph\+::\+CRDouble\+Matrix\+::row\+\_\+start(), and oomph\+::\+CRDouble\+Matrix\+::value().
 
-\mbox{\Hypertarget{classoomph_1_1MGSolver_a4cf132b23574081bd2334253ac864d02}\label{classoomph_1_1MGSolver_a4cf132b23574081bd2334253ac864d02}} 
+\mbox{\Hypertarget{classoomph_1_1MGSolver_a7ccbf719e57fb651fa4577c13b90942b}\label{classoomph_1_1MGSolver_a7ccbf719e57fb651fa4577c13b90942b}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!npost\_smooth@{npost\_smooth}}
 \index{npost\_smooth@{npost\_smooth}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{npost\_smooth()}{npost\_smooth()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-unsigned \& \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ DIM $>$\+::npost\+\_\+smooth (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+unsigned\& \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ DIM $>$\+::npost\+\_\+smooth (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -661,18 +662,18 @@ Return the number of post-\/smoothing iterations (lvalue)
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00328}{328}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 328 of file geometric\+\_\+multigrid.\+h.
 
 
 
-References \mbox{\hyperlink{geometric__multigrid_8h_source_l00710}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Npost\+\_\+smooth}}.
+References oomph\+::\+MGSolver$<$ DIM $>$\+::\+Npost\+\_\+smooth.
 
-\mbox{\Hypertarget{classoomph_1_1MGSolver_ace13f81b421aa1084d5963f2ebc69f8b}\label{classoomph_1_1MGSolver_ace13f81b421aa1084d5963f2ebc69f8b}} 
+\mbox{\Hypertarget{classoomph_1_1MGSolver_acfe72d9cc2743740a3e148e91919bf74}\label{classoomph_1_1MGSolver_acfe72d9cc2743740a3e148e91919bf74}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!npre\_smooth@{npre\_smooth}}
 \index{npre\_smooth@{npre\_smooth}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{npre\_smooth()}{npre\_smooth()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-unsigned \& \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ DIM $>$\+::npre\+\_\+smooth (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+unsigned\& \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ DIM $>$\+::npre\+\_\+smooth (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -680,11 +681,11 @@ Return the number of pre-\/smoothing iterations (lvalue)
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00336}{336}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 336 of file geometric\+\_\+multigrid.\+h.
 
 
 
-References \mbox{\hyperlink{geometric__multigrid_8h_source_l00707}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Npre\+\_\+smooth}}.
+References oomph\+::\+MGSolver$<$ DIM $>$\+::\+Npre\+\_\+smooth.
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_a4af1269b75f9dcd598474d242de1f4ef}\label{classoomph_1_1MGSolver_a4af1269b75f9dcd598474d242de1f4ef}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!plot@{plot}}
@@ -699,11 +700,11 @@ Given a level in the hierarchy, an input vector and a filename this function wil
 
 Plots the input vector (assuming we\textquotesingle{}re dealing with scalar nodal data, otherwise I don\textquotesingle{}t know how to implement this...) 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l02379}{2379}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 2379 of file geometric\+\_\+multigrid.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{nodes_8h_source_l00367}{oomph\+::\+Data\+::eqn\+\_\+number()}}, \mbox{\hyperlink{mesh_8h_source_l00473}{oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l01228}{oomph\+::\+Node\+::hanging\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l01285}{oomph\+::\+Node\+::is\+\_\+hanging()}}, \mbox{\hyperlink{nodes_8h_source_l01373}{oomph\+::\+Node\+::is\+\_\+on\+\_\+boundary()}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00808}{oomph\+::\+Hang\+Info\+::master\+\_\+weight()}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02218}{oomph\+::\+Finite\+Element\+::nnode\+\_\+1d()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00436}{oomph\+::\+Mesh\+::node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}, \mbox{\hyperlink{elements_8h_source_l03161}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
+References e, oomph\+::\+Data\+::eqn\+\_\+number(), oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), oomph\+::\+Node\+::hanging\+\_\+pt(), i, oomph\+::\+Node\+::is\+\_\+hanging(), oomph\+::\+Node\+::is\+\_\+on\+\_\+boundary(), oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt(), oomph\+::\+Hang\+Info\+::master\+\_\+weight(), oomph\+::\+Node\+::ndim(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Hang\+Info\+::nmaster(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nnode\+\_\+1d(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Mesh\+::node\+\_\+pt(), oomph\+::\+Data\+::nvalue(), oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string(), and oomph\+::\+Node\+::x().
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_a449bc7f6ebf7ba7bc517c7712373c68d}\label{classoomph_1_1MGSolver_a449bc7f6ebf7ba7bc517c7712373c68d}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!post\_smooth@{post\_smooth}}
@@ -718,11 +719,11 @@ Post-\/smoother\+: Perform max\+\_\+iter smoothing steps on the linear system Ax
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00366}{366}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 366 of file geometric\+\_\+multigrid.\+h.
 
 
 
-References \mbox{\hyperlink{geometric__multigrid_8h_source_l00704}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Post\+\_\+smoothers\+\_\+storage\+\_\+pt}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00631}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Rhs\+\_\+mg\+\_\+vectors\+\_\+storage}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00685}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+X\+\_\+mg\+\_\+vectors\+\_\+storage}}.
+References oomph\+::\+MGSolver$<$ DIM $>$\+::\+Post\+\_\+smoothers\+\_\+storage\+\_\+pt, oomph\+::\+MGSolver$<$ DIM $>$\+::\+Rhs\+\_\+mg\+\_\+vectors\+\_\+storage, and oomph\+::\+MGSolver$<$ DIM $>$\+::\+X\+\_\+mg\+\_\+vectors\+\_\+storage.
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_ac44511f43e0029f325f09d297d46134e}\label{classoomph_1_1MGSolver_ac44511f43e0029f325f09d297d46134e}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!pre\_smooth@{pre\_smooth}}
@@ -737,11 +738,11 @@ Pre-\/smoother\+: Perform \textquotesingle{}max\+\_\+iter\textquotesingle{} smoo
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00348}{348}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 348 of file geometric\+\_\+multigrid.\+h.
 
 
 
-References \mbox{\hyperlink{geometric__multigrid_8h_source_l00676}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Mg\+\_\+matrices\+\_\+storage\+\_\+pt}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00701}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Pre\+\_\+smoothers\+\_\+storage\+\_\+pt}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00688}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Residual\+\_\+mg\+\_\+vectors\+\_\+storage}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00631}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Rhs\+\_\+mg\+\_\+vectors\+\_\+storage}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00685}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+X\+\_\+mg\+\_\+vectors\+\_\+storage}}.
+References oomph\+::\+MGSolver$<$ DIM $>$\+::\+Mg\+\_\+matrices\+\_\+storage\+\_\+pt, oomph\+::\+MGSolver$<$ DIM $>$\+::\+Pre\+\_\+smoothers\+\_\+storage\+\_\+pt, oomph\+::\+MGSolver$<$ DIM $>$\+::\+Residual\+\_\+mg\+\_\+vectors\+\_\+storage, oomph\+::\+MGSolver$<$ DIM $>$\+::\+Rhs\+\_\+mg\+\_\+vectors\+\_\+storage, and oomph\+::\+MGSolver$<$ DIM $>$\+::\+X\+\_\+mg\+\_\+vectors\+\_\+storage.
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_ae1780530c59f06913884eec764a4b6cc}\label{classoomph_1_1MGSolver_ae1780530c59f06913884eec764a4b6cc}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!residual\_norm@{residual\_norm}}
@@ -756,11 +757,11 @@ Return norm of residual r=b-\/\+Ax and the residual vector itself on the level-\
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00375}{375}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 375 of file geometric\+\_\+multigrid.\+h.
 
 
 
-References \mbox{\hyperlink{geometric__multigrid_8h_source_l00676}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Mg\+\_\+matrices\+\_\+storage\+\_\+pt}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00688}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Residual\+\_\+mg\+\_\+vectors\+\_\+storage}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00631}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Rhs\+\_\+mg\+\_\+vectors\+\_\+storage}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00685}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+X\+\_\+mg\+\_\+vectors\+\_\+storage}}.
+References oomph\+::\+MGSolver$<$ DIM $>$\+::\+Mg\+\_\+matrices\+\_\+storage\+\_\+pt, oomph\+::\+MGSolver$<$ DIM $>$\+::\+Residual\+\_\+mg\+\_\+vectors\+\_\+storage, oomph\+::\+MGSolver$<$ DIM $>$\+::\+Rhs\+\_\+mg\+\_\+vectors\+\_\+storage, and oomph\+::\+MGSolver$<$ DIM $>$\+::\+X\+\_\+mg\+\_\+vectors\+\_\+storage.
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_a755ee1fd473faa22f342829dadbe4e51}\label{classoomph_1_1MGSolver_a755ee1fd473faa22f342829dadbe4e51}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!restrict\_residual@{restrict\_residual}}
@@ -775,7 +776,7 @@ Restrict residual (computed on level-\/th MG level) to the next coarser mesh and
 
 Restrict residual (computed on current MG level) to next coarser mesh and stick it into the coarse mesh RHS vector using the restriction matrix (if restrict\+\_\+flag=1) or the transpose of the interpolation matrix (if restrict\+\_\+flag=2) 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l02020}{2020}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 2020 of file geometric\+\_\+multigrid.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_acfc50241a9dc27e7e60b06564e5dd726}\label{classoomph_1_1MGSolver_acfc50241a9dc27e7e60b06564e5dd726}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!restriction\_self\_test@{restriction\_self\_test}}
@@ -790,11 +791,11 @@ Make a self-\/test to make sure that the interpolation matrices are doing the sa
 
 Function which implements a self-\/test to restrict the residual vector down all of the coarser grids and output the restricted vectors to file. 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l02307}{2307}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 2307 of file geometric\+\_\+multigrid.\+h.
 
 
 
-References \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
+References oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_a88efa5f110e824947f50306e3b56e07b}\label{classoomph_1_1MGSolver_a88efa5f110e824947f50306e3b56e07b}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!self\_test@{self\_test}}
@@ -809,18 +810,18 @@ Makes a vector, restricts it down the levels of the hierarchy and documents it a
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l02135}{2135}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 2135 of file geometric\+\_\+multigrid.\+h.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00335}{oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}.
+References oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt(), oomph\+::oomph\+\_\+info, oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), and oomph\+::\+Timing\+Helpers\+::timer().
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_a451bf822bb1b42c8cdd8ed3fbb3a7be4}\label{classoomph_1_1MGSolver_a451bf822bb1b42c8cdd8ed3fbb3a7be4}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!set\_post\_smoother\_factory\_function@{set\_post\_smoother\_factory\_function}}
 \index{set\_post\_smoother\_factory\_function@{set\_post\_smoother\_factory\_function}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{set\_post\_smoother\_factory\_function()}{set\_post\_smoother\_factory\_function()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ DIM $>$\+::set\+\_\+post\+\_\+smoother\+\_\+factory\+\_\+function (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MGSolver_a0a46fa180d8a32f54272fc98e28001cf}{Post\+Smoother\+Factory\+Fct\+Pt}}}]{post\+\_\+smoother\+\_\+fn }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ DIM $>$\+::set\+\_\+post\+\_\+smoother\+\_\+factory\+\_\+function (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MGSolver_a72fa4eb80c0b5a0ec6811dcd92b30231}{Post\+Smoother\+Factory\+Fct\+Pt}}}]{post\+\_\+smoother\+\_\+fn }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -828,18 +829,18 @@ Access function to set the post-\/smoother creation function.
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00109}{109}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 109 of file geometric\+\_\+multigrid.\+h.
 
 
 
-References \mbox{\hyperlink{geometric__multigrid_8h_source_l00655}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Post\+\_\+smoother\+\_\+factory\+\_\+function\+\_\+pt}}.
+References oomph\+::\+MGSolver$<$ DIM $>$\+::\+Post\+\_\+smoother\+\_\+factory\+\_\+function\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_a0c783dddf9108f26b835509fddec6938}\label{classoomph_1_1MGSolver_a0c783dddf9108f26b835509fddec6938}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!set\_pre\_smoother\_factory\_function@{set\_pre\_smoother\_factory\_function}}
 \index{set\_pre\_smoother\_factory\_function@{set\_pre\_smoother\_factory\_function}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{set\_pre\_smoother\_factory\_function()}{set\_pre\_smoother\_factory\_function()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ DIM $>$\+::set\+\_\+pre\+\_\+smoother\+\_\+factory\+\_\+function (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MGSolver_a60aa316ebfc000491554e28dbfbebc10}{Pre\+Smoother\+Factory\+Fct\+Pt}}}]{pre\+\_\+smoother\+\_\+fn }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ DIM $>$\+::set\+\_\+pre\+\_\+smoother\+\_\+factory\+\_\+function (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MGSolver_a43de5ad4985ae1bbe68388619a9db32a}{Pre\+Smoother\+Factory\+Fct\+Pt}}}]{pre\+\_\+smoother\+\_\+fn }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -847,11 +848,11 @@ Access function to set the pre-\/smoother creation function.
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00101}{101}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 101 of file geometric\+\_\+multigrid.\+h.
 
 
 
-References \mbox{\hyperlink{geometric__multigrid_8h_source_l00652}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Pre\+\_\+smoother\+\_\+factory\+\_\+function\+\_\+pt}}.
+References oomph\+::\+MGSolver$<$ DIM $>$\+::\+Pre\+\_\+smoother\+\_\+factory\+\_\+function\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_a52dcf1e19aa7f5d77697575b341a838b}\label{classoomph_1_1MGSolver_a52dcf1e19aa7f5d77697575b341a838b}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!set\_restriction\_matrices\_as\_interpolation\_transposes@{set\_restriction\_matrices\_as\_interpolation\_transposes}}
@@ -866,11 +867,11 @@ Builds a \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} on ea
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00465}{465}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 465 of file geometric\+\_\+multigrid.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00679}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Interpolation\+\_\+matrices\+\_\+storage\+\_\+pt}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00670}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Nlevel}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00682}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Restriction\+\_\+matrices\+\_\+storage\+\_\+pt}}.
+References i, oomph\+::\+MGSolver$<$ DIM $>$\+::\+Interpolation\+\_\+matrices\+\_\+storage\+\_\+pt, oomph\+::\+MGSolver$<$ DIM $>$\+::\+Nlevel, and oomph\+::\+MGSolver$<$ DIM $>$\+::\+Restriction\+\_\+matrices\+\_\+storage\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_a081eb7bcdd49dfce9a03f0ae3ab4cfab}\label{classoomph_1_1MGSolver_a081eb7bcdd49dfce9a03f0ae3ab4cfab}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!set\_self\_test\_vector@{set\_self\_test\_vector}}
@@ -885,11 +886,11 @@ Makes a vector which will be used in the self-\/test. Is currently set to make t
 
 Sets the initial vector to be used in the restriction and interpolation self-\/tests. 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l02219}{2219}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 2219 of file geometric\+\_\+multigrid.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{nodes_8h_source_l00367}{oomph\+::\+Data\+::eqn\+\_\+number()}}, \mbox{\hyperlink{mesh_8h_source_l00473}{oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00436}{oomph\+::\+Mesh\+::node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00157}{oomph\+::\+Mathematical\+Constants\+::\+Pi}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
+References e, oomph\+::\+Data\+::eqn\+\_\+number(), oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), i, oomph\+::\+Node\+::ndim(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Mesh\+::node\+\_\+pt(), oomph\+::\+Data\+::nvalue(), oomph\+::\+Mathematical\+Constants\+::\+Pi, and oomph\+::\+Node\+::x().
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_a368106b0ca8332ab5a6571b9421822e2}\label{classoomph_1_1MGSolver_a368106b0ca8332ab5a6571b9421822e2}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!setup\_interpolation\_matrices@{setup\_interpolation\_matrices}}
@@ -904,11 +905,11 @@ Setup the interpolation matrix on each level.
 
 Setup the interpolation matrices. 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l01510}{1510}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 1510 of file geometric\+\_\+multigrid.\+h.
 
 
 
-References \mbox{\hyperlink{nodes_8h_source_l00367}{oomph\+::\+Data\+::eqn\+\_\+number()}}, \mbox{\hyperlink{mesh_8h_source_l00473}{oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00808}{oomph\+::\+Hang\+Info\+::master\+\_\+weight()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{tree_8h_source_l00262}{oomph\+::\+Tree\+::\+OMEGA}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References oomph\+::\+Data\+::eqn\+\_\+number(), oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), i, oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt(), oomph\+::\+Hang\+Info\+::master\+\_\+weight(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Hang\+Info\+::nmaster(), oomph\+::\+Tree\+::\+OMEGA, and s.
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_a923c121b000fc5372664045c764b163f}\label{classoomph_1_1MGSolver_a923c121b000fc5372664045c764b163f}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!setup\_interpolation\_matrices\_unstructured@{setup\_interpolation\_matrices\_unstructured}}
@@ -923,11 +924,11 @@ Setup the interpolation matrix on each level (used for unstructured meshes)
 
 Setup the interpolation matrices. 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l01832}{1832}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 1832 of file geometric\+\_\+multigrid.\+h.
 
 
 
-References \mbox{\hyperlink{nodes_8h_source_l00367}{oomph\+::\+Data\+::eqn\+\_\+number()}}, \mbox{\hyperlink{nodes_8h_source_l01228}{oomph\+::\+Node\+::hanging\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l01285}{oomph\+::\+Node\+::is\+\_\+hanging()}}, \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00373}{oomph\+::\+Mesh\+As\+Geom\+Object\+::locate\+\_\+zeta()}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00808}{oomph\+::\+Hang\+Info\+::master\+\_\+weight()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{mesh_8h_source_l00596}{oomph\+::\+Mesh\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00436}{oomph\+::\+Mesh\+::node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8cc_source_l02499}{oomph\+::\+Node\+::position()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
+References oomph\+::\+Data\+::eqn\+\_\+number(), oomph\+::\+Node\+::hanging\+\_\+pt(), oomph\+::\+Node\+::is\+\_\+hanging(), oomph\+::\+Mesh\+As\+Geom\+Object\+::locate\+\_\+zeta(), oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt(), oomph\+::\+Hang\+Info\+::master\+\_\+weight(), oomph\+::\+Hang\+Info\+::nmaster(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Mesh\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Mesh\+::node\+\_\+pt(), oomph\+::\+Node\+::position(), s, and oomph\+::\+Finite\+Element\+::shape().
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_a8b25ea9a7781f95ddf46b4b8d427d3d0}\label{classoomph_1_1MGSolver_a8b25ea9a7781f95ddf46b4b8d427d3d0}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!setup\_mg\_hierarchy@{setup\_mg\_hierarchy}}
@@ -942,11 +943,11 @@ Function to set up the hierachy of levels. Creates a vector of pointers to each 
 
 Set up the MG hierarchy. 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00968}{968}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 968 of file geometric\+\_\+multigrid.\+h.
 
 
 
-References \mbox{\hyperlink{problem_8h_source_l01025}{oomph\+::\+Problem\+::actions\+\_\+after\+\_\+adapt()}}, \mbox{\hyperlink{problem_8h_source_l01022}{oomph\+::\+Problem\+::actions\+\_\+before\+\_\+adapt()}}, \mbox{\hyperlink{problem_8cc_source_l01989}{oomph\+::\+Problem\+::assign\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{classoomph_1_1MGProblem_ad4915d5a571798060f2f7724a2c8b9c8}{oomph\+::\+MGProblem\+::make\+\_\+new\+\_\+problem()}}, \mbox{\hyperlink{classoomph_1_1MGProblem_a46ef71045e3624fefc312d10f1da9a92}{oomph\+::\+MGProblem\+::mg\+\_\+bulk\+\_\+mesh\+\_\+pt()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{refineable__mesh_8cc_source_l01907}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::refine\+\_\+base\+\_\+mesh\+\_\+as\+\_\+in\+\_\+reference\+\_\+mesh\+\_\+minus\+\_\+one()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}.
+References oomph\+::\+Problem\+::actions\+\_\+after\+\_\+adapt(), oomph\+::\+Problem\+::actions\+\_\+before\+\_\+adapt(), oomph\+::\+Problem\+::assign\+\_\+eqn\+\_\+numbers(), oomph\+::\+MGProblem\+::make\+\_\+new\+\_\+problem(), oomph\+::\+MGProblem\+::mg\+\_\+bulk\+\_\+mesh\+\_\+pt(), oomph\+::oomph\+\_\+info, oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::refine\+\_\+base\+\_\+mesh\+\_\+as\+\_\+in\+\_\+reference\+\_\+mesh\+\_\+minus\+\_\+one(), and oomph\+::\+Timing\+Helpers\+::timer().
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_a24b2cc3ce0eefde4eef0b80b38339b38}\label{classoomph_1_1MGSolver_a24b2cc3ce0eefde4eef0b80b38339b38}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!setup\_mg\_structures@{setup\_mg\_structures}}
@@ -961,11 +962,11 @@ Function to set up the hierachy of levels. Creates a vector of pointers to each 
 
 Set up the MG hierarchy structures. 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l01180}{1180}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 1180 of file geometric\+\_\+multigrid.\+h.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00171}{oomph\+::\+Linear\+Algebra\+Distribution\+::clear()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00335}{oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}.
+References oomph\+::\+Linear\+Algebra\+Distribution\+::clear(), oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt(), i, oomph\+::oomph\+\_\+info, oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), and oomph\+::\+Timing\+Helpers\+::timer().
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_a9b3674f92da65b8cacada47325107804}\label{classoomph_1_1MGSolver_a9b3674f92da65b8cacada47325107804}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!setup\_smoothers@{setup\_smoothers}}
@@ -980,11 +981,11 @@ Function to set up all of the smoothers once the system matrices have been set u
 
 Set up the smoothers on all levels. 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l01360}{1360}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 1360 of file geometric\+\_\+multigrid.\+h.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00335}{oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}, and \mbox{\hyperlink{iterative__linear__solver_8h_source_l00107}{oomph\+::\+Iterative\+Linear\+Solver\+::tolerance()}}.
+References oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt(), i, oomph\+::oomph\+\_\+info, oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), oomph\+::\+Timing\+Helpers\+::timer(), and oomph\+::\+Iterative\+Linear\+Solver\+::tolerance().
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_a332a6b1028732481a4954fa0a9337a80}\label{classoomph_1_1MGSolver_a332a6b1028732481a4954fa0a9337a80}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!setup\_transfer\_matrices@{setup\_transfer\_matrices}}
@@ -999,11 +1000,11 @@ Setup the transfer matrices on each level.
 
 Set up the transfer matrices. Both the pure injection and full weighting method have been implemented here but it is highly recommended that full weighting is used in general. In both methods the transpose of the transfer matrix is used to transfer a vector back. 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l01117}{1117}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 1117 of file geometric\+\_\+multigrid.\+h.
 
 
 
-References \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}.
+References oomph\+::oomph\+\_\+info, and oomph\+::\+Timing\+Helpers\+::timer().
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_a68f8c874b922c5b67e73c836048e34f5}\label{classoomph_1_1MGSolver_a68f8c874b922c5b67e73c836048e34f5}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!solve@{solve}}
@@ -1022,11 +1023,11 @@ Implements \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485e
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00509}{509}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 509 of file geometric\+\_\+multigrid.\+h.
 
 
 
-References \mbox{\hyperlink{geometric__multigrid_8h_source_l00826}{oomph\+::\+MGSolver$<$ DIM $>$\+::full\+\_\+setup()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00724}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Has\+\_\+been\+\_\+solved}}, \mbox{\hyperlink{problem_8h_source_l01280}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00626}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Mg\+\_\+problem\+\_\+pt}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l02525}{oomph\+::\+MGSolver$<$ DIM $>$\+::mg\+\_\+solve()}}, \mbox{\hyperlink{mesh_8h_source_l00436}{oomph\+::\+Mesh\+::node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00648}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Stream\+\_\+pt}}, \mbox{\hyperlink{oomph__definitions_8h_source_l00464}{oomph\+::\+Oomph\+Info\+::stream\+\_\+pt()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00642}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Suppress\+\_\+all\+\_\+output}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00637}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Suppress\+\_\+v\+\_\+cycle\+\_\+output}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00727}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+V\+\_\+cycle\+\_\+counter}}.
+References oomph\+::\+MGSolver$<$ DIM $>$\+::full\+\_\+setup(), oomph\+::\+MGSolver$<$ DIM $>$\+::\+Has\+\_\+been\+\_\+solved, oomph\+::\+Problem\+::mesh\+\_\+pt(), oomph\+::\+MGSolver$<$ DIM $>$\+::\+Mg\+\_\+problem\+\_\+pt, oomph\+::\+MGSolver$<$ DIM $>$\+::mg\+\_\+solve(), oomph\+::\+Mesh\+::node\+\_\+pt(), oomph\+::\+Data\+::nvalue(), oomph\+::oomph\+\_\+info, oomph\+::\+MGSolver$<$ DIM $>$\+::\+Stream\+\_\+pt, oomph\+::\+Oomph\+Info\+::stream\+\_\+pt(), oomph\+::\+MGSolver$<$ DIM $>$\+::\+Suppress\+\_\+all\+\_\+output, oomph\+::\+MGSolver$<$ DIM $>$\+::\+Suppress\+\_\+v\+\_\+cycle\+\_\+output, and oomph\+::\+MGSolver$<$ DIM $>$\+::\+V\+\_\+cycle\+\_\+counter.
 
 
 
@@ -1044,11 +1045,11 @@ If this is set to true we document everything. In addition to outputting the inf
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00717}{717}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 717 of file geometric\+\_\+multigrid.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00148}{oomph\+::\+MGSolver$<$ DIM $>$\+::clean\+\_\+up\+\_\+memory()}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00286}{oomph\+::\+MGSolver$<$ DIM $>$\+::enable\+\_\+doc\+\_\+everything()}}.
+Referenced by oomph\+::\+MGSolver$<$ DIM $>$\+::clean\+\_\+up\+\_\+memory(), and oomph\+::\+MGSolver$<$ DIM $>$\+::enable\+\_\+doc\+\_\+everything().
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_ae78a2b15951afde6d3e60bd9127fb978}\label{classoomph_1_1MGSolver_ae78a2b15951afde6d3e60bd9127fb978}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Has\_been\_setup@{Has\_been\_setup}}
@@ -1063,11 +1064,11 @@ Boolean variable to indicate whether or not the solver has been setup.
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00720}{720}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 720 of file geometric\+\_\+multigrid.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00148}{oomph\+::\+MGSolver$<$ DIM $>$\+::clean\+\_\+up\+\_\+memory()}}.
+Referenced by oomph\+::\+MGSolver$<$ DIM $>$\+::clean\+\_\+up\+\_\+memory().
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_af7b6c7e1c4e047f8c5a7c83e5b8169c7}\label{classoomph_1_1MGSolver_af7b6c7e1c4e047f8c5a7c83e5b8169c7}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Has\_been\_solved@{Has\_been\_solved}}
@@ -1082,11 +1083,11 @@ Boolean variable to indicate whether or not the problem was successfully solved.
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00724}{724}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 724 of file geometric\+\_\+multigrid.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00509}{oomph\+::\+MGSolver$<$ DIM $>$\+::solve()}}.
+Referenced by oomph\+::\+MGSolver$<$ DIM $>$\+::solve().
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_abb0744bdd778ed6076ee60803b0bc24a}\label{classoomph_1_1MGSolver_abb0744bdd778ed6076ee60803b0bc24a}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Interpolation\_matrices\_storage\_pt@{Interpolation\_matrices\_storage\_pt}}
@@ -1101,11 +1102,11 @@ Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00509}{oomph\+::\
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00679}{679}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 679 of file geometric\+\_\+multigrid.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00148}{oomph\+::\+MGSolver$<$ DIM $>$\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00402}{oomph\+::\+MGSolver$<$ DIM $>$\+::interpolation\+\_\+matrix\+\_\+set()}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00465}{oomph\+::\+MGSolver$<$ DIM $>$\+::set\+\_\+restriction\+\_\+matrices\+\_\+as\+\_\+interpolation\+\_\+transposes()}}.
+Referenced by oomph\+::\+MGSolver$<$ DIM $>$\+::clean\+\_\+up\+\_\+memory(), oomph\+::\+MGSolver$<$ DIM $>$\+::interpolation\+\_\+matrix\+\_\+set(), and oomph\+::\+MGSolver$<$ DIM $>$\+::set\+\_\+restriction\+\_\+matrices\+\_\+as\+\_\+interpolation\+\_\+transposes().
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_ab751da487614e6f661b8d944f37c20ec}\label{classoomph_1_1MGSolver_ab751da487614e6f661b8d944f37c20ec}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Interpolation\_self\_test\_vectors\_storage@{Interpolation\_self\_test\_vectors\_storage}}
@@ -1120,7 +1121,7 @@ Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00148}{oomph\+::\
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00693}{693}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 693 of file geometric\+\_\+multigrid.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_ab6a410abeb049aec45409a5cf74597f6}\label{classoomph_1_1MGSolver_ab6a410abeb049aec45409a5cf74597f6}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Mg\_hierarchy@{Mg\_hierarchy}}
@@ -1135,11 +1136,11 @@ Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00693}{693}}
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00673}{673}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 673 of file geometric\+\_\+multigrid.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00148}{oomph\+::\+MGSolver$<$ DIM $>$\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00420}{oomph\+::\+MGSolver$<$ DIM $>$\+::interpolation\+\_\+matrix\+\_\+set()}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00118}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+MGSolver()}}.
+Referenced by oomph\+::\+MGSolver$<$ DIM $>$\+::clean\+\_\+up\+\_\+memory(), oomph\+::\+MGSolver$<$ DIM $>$\+::interpolation\+\_\+matrix\+\_\+set(), and oomph\+::\+MGSolver$<$ DIM $>$\+::\+MGSolver().
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_a90b372c8339dda0589493bd1a1b58b6a}\label{classoomph_1_1MGSolver_a90b372c8339dda0589493bd1a1b58b6a}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Mg\_matrices\_storage\_pt@{Mg\_matrices\_storage\_pt}}
@@ -1154,11 +1155,11 @@ Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00148}{oomph\+::\
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00676}{676}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 676 of file geometric\+\_\+multigrid.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00148}{oomph\+::\+MGSolver$<$ DIM $>$\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00392}{oomph\+::\+MGSolver$<$ DIM $>$\+::direct\+\_\+solve()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00308}{oomph\+::\+MGSolver$<$ DIM $>$\+::disable\+\_\+smoother\+\_\+and\+\_\+superlu\+\_\+doc\+\_\+time()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00348}{oomph\+::\+MGSolver$<$ DIM $>$\+::pre\+\_\+smooth()}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00375}{oomph\+::\+MGSolver$<$ DIM $>$\+::residual\+\_\+norm()}}.
+Referenced by oomph\+::\+MGSolver$<$ DIM $>$\+::clean\+\_\+up\+\_\+memory(), oomph\+::\+MGSolver$<$ DIM $>$\+::direct\+\_\+solve(), oomph\+::\+MGSolver$<$ DIM $>$\+::disable\+\_\+smoother\+\_\+and\+\_\+superlu\+\_\+doc\+\_\+time(), oomph\+::\+MGSolver$<$ DIM $>$\+::pre\+\_\+smooth(), and oomph\+::\+MGSolver$<$ DIM $>$\+::residual\+\_\+norm().
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_af48a7c051423b2a5d27b19aa8adb996a}\label{classoomph_1_1MGSolver_af48a7c051423b2a5d27b19aa8adb996a}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Mg\_problem\_pt@{Mg\_problem\_pt}}
@@ -1173,11 +1174,11 @@ Pointer to the MG problem (deep copy). This is protected to provide access to th
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00626}{626}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 626 of file geometric\+\_\+multigrid.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00118}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+MGSolver()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00781}{oomph\+::\+MGPreconditioner$<$ DIM $>$\+::preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00509}{oomph\+::\+MGSolver$<$ DIM $>$\+::solve()}}.
+Referenced by oomph\+::\+MGSolver$<$ DIM $>$\+::\+MGSolver(), oomph\+::\+MGPreconditioner$<$ DIM $>$\+::preconditioner\+\_\+solve(), and oomph\+::\+MGSolver$<$ DIM $>$\+::solve().
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_a4ab5b80c46b66867e720b1c28f170bb9}\label{classoomph_1_1MGSolver_a4ab5b80c46b66867e720b1c28f170bb9}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Nlevel@{Nlevel}}
@@ -1192,11 +1193,11 @@ The number of levels in the multigrid heirachy.
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00670}{670}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 670 of file geometric\+\_\+multigrid.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00148}{oomph\+::\+MGSolver$<$ DIM $>$\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00392}{oomph\+::\+MGSolver$<$ DIM $>$\+::direct\+\_\+solve()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00308}{oomph\+::\+MGSolver$<$ DIM $>$\+::disable\+\_\+smoother\+\_\+and\+\_\+superlu\+\_\+doc\+\_\+time()}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00465}{oomph\+::\+MGSolver$<$ DIM $>$\+::set\+\_\+restriction\+\_\+matrices\+\_\+as\+\_\+interpolation\+\_\+transposes()}}.
+Referenced by oomph\+::\+MGSolver$<$ DIM $>$\+::clean\+\_\+up\+\_\+memory(), oomph\+::\+MGSolver$<$ DIM $>$\+::direct\+\_\+solve(), oomph\+::\+MGSolver$<$ DIM $>$\+::disable\+\_\+smoother\+\_\+and\+\_\+superlu\+\_\+doc\+\_\+time(), and oomph\+::\+MGSolver$<$ DIM $>$\+::set\+\_\+restriction\+\_\+matrices\+\_\+as\+\_\+interpolation\+\_\+transposes().
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_aa1bd9b32d6d5976582b57739bcc10b6d}\label{classoomph_1_1MGSolver_aa1bd9b32d6d5976582b57739bcc10b6d}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Npost\_smooth@{Npost\_smooth}}
@@ -1211,11 +1212,11 @@ Number of post-\/smoothing steps.
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00710}{710}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 710 of file geometric\+\_\+multigrid.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00328}{oomph\+::\+MGSolver$<$ DIM $>$\+::npost\+\_\+smooth()}}.
+Referenced by oomph\+::\+MGSolver$<$ DIM $>$\+::npost\+\_\+smooth().
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_acc27929d8448646bd1551a32db05c966}\label{classoomph_1_1MGSolver_acc27929d8448646bd1551a32db05c966}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Npre\_smooth@{Npre\_smooth}}
@@ -1230,11 +1231,11 @@ Number of pre-\/smoothing steps.
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00707}{707}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 707 of file geometric\+\_\+multigrid.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00336}{oomph\+::\+MGSolver$<$ DIM $>$\+::npre\+\_\+smooth()}}.
+Referenced by oomph\+::\+MGSolver$<$ DIM $>$\+::npre\+\_\+smooth().
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_ab3d4af8ea6d7bc8d0a6f528cb669e920}\label{classoomph_1_1MGSolver_ab3d4af8ea6d7bc8d0a6f528cb669e920}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Nvcycle@{Nvcycle}}
@@ -1249,18 +1250,18 @@ Maximum number of V-\/cycles (this is set as a protected variable so.
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00622}{622}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 622 of file geometric\+\_\+multigrid.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00602}{oomph\+::\+MGSolver$<$ DIM $>$\+::max\+\_\+iter()}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00738}{oomph\+::\+MGPreconditioner$<$ DIM $>$\+::\+MGPreconditioner()}}.
+Referenced by oomph\+::\+MGSolver$<$ DIM $>$\+::max\+\_\+iter(), and oomph\+::\+MGPreconditioner$<$ DIM $>$\+::\+MGPreconditioner().
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_a2c105a6889f43968c9e57366f44ebd79}\label{classoomph_1_1MGSolver_a2c105a6889f43968c9e57366f44ebd79}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Post\_smoother\_factory\_function\_pt@{Post\_smoother\_factory\_function\_pt}}
 \index{Post\_smoother\_factory\_function\_pt@{Post\_smoother\_factory\_function\_pt}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{Post\_smoother\_factory\_function\_pt}{Post\_smoother\_factory\_function\_pt}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-\mbox{\hyperlink{classoomph_1_1MGSolver_a0a46fa180d8a32f54272fc98e28001cf}{Post\+Smoother\+Factory\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ DIM $>$\+::Post\+\_\+smoother\+\_\+factory\+\_\+function\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+\mbox{\hyperlink{classoomph_1_1MGSolver_a72fa4eb80c0b5a0ec6811dcd92b30231}{Post\+Smoother\+Factory\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ DIM $>$\+::Post\+\_\+smoother\+\_\+factory\+\_\+function\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -1268,11 +1269,11 @@ Function to create post-\/smoothers.
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00655}{655}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 655 of file geometric\+\_\+multigrid.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00109}{oomph\+::\+MGSolver$<$ DIM $>$\+::set\+\_\+post\+\_\+smoother\+\_\+factory\+\_\+function()}}.
+Referenced by oomph\+::\+MGSolver$<$ DIM $>$\+::set\+\_\+post\+\_\+smoother\+\_\+factory\+\_\+function().
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_a2b5b5a2719782ab2f43b1aa9179c814c}\label{classoomph_1_1MGSolver_a2b5b5a2719782ab2f43b1aa9179c814c}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Post\_smoothers\_storage\_pt@{Post\_smoothers\_storage\_pt}}
@@ -1287,18 +1288,18 @@ Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00109}{oomph\+::\
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00704}{704}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 704 of file geometric\+\_\+multigrid.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00148}{oomph\+::\+MGSolver$<$ DIM $>$\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00308}{oomph\+::\+MGSolver$<$ DIM $>$\+::disable\+\_\+smoother\+\_\+and\+\_\+superlu\+\_\+doc\+\_\+time()}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00366}{oomph\+::\+MGSolver$<$ DIM $>$\+::post\+\_\+smooth()}}.
+Referenced by oomph\+::\+MGSolver$<$ DIM $>$\+::clean\+\_\+up\+\_\+memory(), oomph\+::\+MGSolver$<$ DIM $>$\+::disable\+\_\+smoother\+\_\+and\+\_\+superlu\+\_\+doc\+\_\+time(), and oomph\+::\+MGSolver$<$ DIM $>$\+::post\+\_\+smooth().
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_af7d8204d7b71b18f5362b01a971aad02}\label{classoomph_1_1MGSolver_af7d8204d7b71b18f5362b01a971aad02}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Pre\_smoother\_factory\_function\_pt@{Pre\_smoother\_factory\_function\_pt}}
 \index{Pre\_smoother\_factory\_function\_pt@{Pre\_smoother\_factory\_function\_pt}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{Pre\_smoother\_factory\_function\_pt}{Pre\_smoother\_factory\_function\_pt}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-\mbox{\hyperlink{classoomph_1_1MGSolver_a60aa316ebfc000491554e28dbfbebc10}{Pre\+Smoother\+Factory\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ DIM $>$\+::Pre\+\_\+smoother\+\_\+factory\+\_\+function\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+\mbox{\hyperlink{classoomph_1_1MGSolver_a43de5ad4985ae1bbe68388619a9db32a}{Pre\+Smoother\+Factory\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ DIM $>$\+::Pre\+\_\+smoother\+\_\+factory\+\_\+function\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -1306,11 +1307,11 @@ Function to create pre-\/smoothers.
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00652}{652}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 652 of file geometric\+\_\+multigrid.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00101}{oomph\+::\+MGSolver$<$ DIM $>$\+::set\+\_\+pre\+\_\+smoother\+\_\+factory\+\_\+function()}}.
+Referenced by oomph\+::\+MGSolver$<$ DIM $>$\+::set\+\_\+pre\+\_\+smoother\+\_\+factory\+\_\+function().
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_a50cea09c4fd325e52c6d50884095bac8}\label{classoomph_1_1MGSolver_a50cea09c4fd325e52c6d50884095bac8}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Pre\_smoothers\_storage\_pt@{Pre\_smoothers\_storage\_pt}}
@@ -1325,11 +1326,11 @@ Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00101}{oomph\+::\
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00701}{701}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 701 of file geometric\+\_\+multigrid.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00148}{oomph\+::\+MGSolver$<$ DIM $>$\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00308}{oomph\+::\+MGSolver$<$ DIM $>$\+::disable\+\_\+smoother\+\_\+and\+\_\+superlu\+\_\+doc\+\_\+time()}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00348}{oomph\+::\+MGSolver$<$ DIM $>$\+::pre\+\_\+smooth()}}.
+Referenced by oomph\+::\+MGSolver$<$ DIM $>$\+::clean\+\_\+up\+\_\+memory(), oomph\+::\+MGSolver$<$ DIM $>$\+::disable\+\_\+smoother\+\_\+and\+\_\+superlu\+\_\+doc\+\_\+time(), and oomph\+::\+MGSolver$<$ DIM $>$\+::pre\+\_\+smooth().
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_a2c3f9d64997faf275de633fe3c799fee}\label{classoomph_1_1MGSolver_a2c3f9d64997faf275de633fe3c799fee}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Residual\_mg\_vectors\_storage@{Residual\_mg\_vectors\_storage}}
@@ -1344,11 +1345,11 @@ Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00148}{oomph\+::\
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00688}{688}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 688 of file geometric\+\_\+multigrid.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00348}{oomph\+::\+MGSolver$<$ DIM $>$\+::pre\+\_\+smooth()}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00375}{oomph\+::\+MGSolver$<$ DIM $>$\+::residual\+\_\+norm()}}.
+Referenced by oomph\+::\+MGSolver$<$ DIM $>$\+::pre\+\_\+smooth(), and oomph\+::\+MGSolver$<$ DIM $>$\+::residual\+\_\+norm().
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_a8a4974aac58e9835089da9b4b8039952}\label{classoomph_1_1MGSolver_a8a4974aac58e9835089da9b4b8039952}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Restriction\_matrices\_storage\_pt@{Restriction\_matrices\_storage\_pt}}
@@ -1363,11 +1364,11 @@ Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00348}{oomph\+::\
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00682}{682}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 682 of file geometric\+\_\+multigrid.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00148}{oomph\+::\+MGSolver$<$ DIM $>$\+::clean\+\_\+up\+\_\+memory()}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00465}{oomph\+::\+MGSolver$<$ DIM $>$\+::set\+\_\+restriction\+\_\+matrices\+\_\+as\+\_\+interpolation\+\_\+transposes()}}.
+Referenced by oomph\+::\+MGSolver$<$ DIM $>$\+::clean\+\_\+up\+\_\+memory(), and oomph\+::\+MGSolver$<$ DIM $>$\+::set\+\_\+restriction\+\_\+matrices\+\_\+as\+\_\+interpolation\+\_\+transposes().
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_a79fd640c7e43f08dca60f41d3ff91d59}\label{classoomph_1_1MGSolver_a79fd640c7e43f08dca60f41d3ff91d59}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Restriction\_self\_test\_vectors\_storage@{Restriction\_self\_test\_vectors\_storage}}
@@ -1382,7 +1383,7 @@ Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00148}{oomph\+::\
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00698}{698}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 698 of file geometric\+\_\+multigrid.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_a18889939fb1256a86e5862c1e5ecbd31}\label{classoomph_1_1MGSolver_a18889939fb1256a86e5862c1e5ecbd31}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Rhs\_mg\_vectors\_storage@{Rhs\_mg\_vectors\_storage}}
@@ -1397,11 +1398,11 @@ Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00698}{698}}
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00631}{631}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 631 of file geometric\+\_\+multigrid.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00392}{oomph\+::\+MGSolver$<$ DIM $>$\+::direct\+\_\+solve()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00366}{oomph\+::\+MGSolver$<$ DIM $>$\+::post\+\_\+smooth()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00348}{oomph\+::\+MGSolver$<$ DIM $>$\+::pre\+\_\+smooth()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00781}{oomph\+::\+MGPreconditioner$<$ DIM $>$\+::preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00375}{oomph\+::\+MGSolver$<$ DIM $>$\+::residual\+\_\+norm()}}.
+Referenced by oomph\+::\+MGSolver$<$ DIM $>$\+::direct\+\_\+solve(), oomph\+::\+MGSolver$<$ DIM $>$\+::post\+\_\+smooth(), oomph\+::\+MGSolver$<$ DIM $>$\+::pre\+\_\+smooth(), oomph\+::\+MGPreconditioner$<$ DIM $>$\+::preconditioner\+\_\+solve(), and oomph\+::\+MGSolver$<$ DIM $>$\+::residual\+\_\+norm().
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_a5184053b6d2a717a6d6865c76acef14b}\label{classoomph_1_1MGSolver_a5184053b6d2a717a6d6865c76acef14b}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Stream\_pt@{Stream\_pt}}
@@ -1416,11 +1417,11 @@ Pointer to the output stream -- defaults to std\+::cout. This is protected membe
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00648}{648}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 648 of file geometric\+\_\+multigrid.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00256}{oomph\+::\+MGSolver$<$ DIM $>$\+::disable\+\_\+output()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00781}{oomph\+::\+MGPreconditioner$<$ DIM $>$\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00754}{oomph\+::\+MGPreconditioner$<$ DIM $>$\+::setup()}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00509}{oomph\+::\+MGSolver$<$ DIM $>$\+::solve()}}.
+Referenced by oomph\+::\+MGSolver$<$ DIM $>$\+::disable\+\_\+output(), oomph\+::\+MGPreconditioner$<$ DIM $>$\+::preconditioner\+\_\+solve(), oomph\+::\+MGPreconditioner$<$ DIM $>$\+::setup(), and oomph\+::\+MGSolver$<$ DIM $>$\+::solve().
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_a0cd765279d8e8f3929cc253fd00ba9eb}\label{classoomph_1_1MGSolver_a0cd765279d8e8f3929cc253fd00ba9eb}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Suppress\_all\_output@{Suppress\_all\_output}}
@@ -1435,11 +1436,11 @@ If this is set to true then all output from the solver is suppressed. This is pr
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00642}{642}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 642 of file geometric\+\_\+multigrid.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00256}{oomph\+::\+MGSolver$<$ DIM $>$\+::disable\+\_\+output()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00295}{oomph\+::\+MGSolver$<$ DIM $>$\+::enable\+\_\+output()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00781}{oomph\+::\+MGPreconditioner$<$ DIM $>$\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00754}{oomph\+::\+MGPreconditioner$<$ DIM $>$\+::setup()}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00509}{oomph\+::\+MGSolver$<$ DIM $>$\+::solve()}}.
+Referenced by oomph\+::\+MGSolver$<$ DIM $>$\+::disable\+\_\+output(), oomph\+::\+MGSolver$<$ DIM $>$\+::enable\+\_\+output(), oomph\+::\+MGPreconditioner$<$ DIM $>$\+::preconditioner\+\_\+solve(), oomph\+::\+MGPreconditioner$<$ DIM $>$\+::setup(), and oomph\+::\+MGSolver$<$ DIM $>$\+::solve().
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_ac533f8f9a9f6efaf5b3c63fbdd09e0d1}\label{classoomph_1_1MGSolver_ac533f8f9a9f6efaf5b3c63fbdd09e0d1}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Suppress\_v\_cycle\_output@{Suppress\_v\_cycle\_output}}
@@ -1454,11 +1455,11 @@ Indicates whether or not the V-\/cycle output should be suppressed. Needs to be 
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00637}{637}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 637 of file geometric\+\_\+multigrid.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00256}{oomph\+::\+MGSolver$<$ DIM $>$\+::disable\+\_\+output()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00245}{oomph\+::\+MGSolver$<$ DIM $>$\+::disable\+\_\+v\+\_\+cycle\+\_\+output()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00295}{oomph\+::\+MGSolver$<$ DIM $>$\+::enable\+\_\+output()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00276}{oomph\+::\+MGSolver$<$ DIM $>$\+::enable\+\_\+v\+\_\+cycle\+\_\+output()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00781}{oomph\+::\+MGPreconditioner$<$ DIM $>$\+::preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00509}{oomph\+::\+MGSolver$<$ DIM $>$\+::solve()}}.
+Referenced by oomph\+::\+MGSolver$<$ DIM $>$\+::disable\+\_\+output(), oomph\+::\+MGSolver$<$ DIM $>$\+::disable\+\_\+v\+\_\+cycle\+\_\+output(), oomph\+::\+MGSolver$<$ DIM $>$\+::enable\+\_\+output(), oomph\+::\+MGSolver$<$ DIM $>$\+::enable\+\_\+v\+\_\+cycle\+\_\+output(), oomph\+::\+MGPreconditioner$<$ DIM $>$\+::preconditioner\+\_\+solve(), and oomph\+::\+MGSolver$<$ DIM $>$\+::solve().
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_a29bdc90613e9759bd3fdff47a0c7c45a}\label{classoomph_1_1MGSolver_a29bdc90613e9759bd3fdff47a0c7c45a}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!V\_cycle\_counter@{V\_cycle\_counter}}
@@ -1473,11 +1474,11 @@ Pointer to counter for V-\/cycles.
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00727}{727}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 727 of file geometric\+\_\+multigrid.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00595}{oomph\+::\+MGSolver$<$ DIM $>$\+::iterations()}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00509}{oomph\+::\+MGSolver$<$ DIM $>$\+::solve()}}.
+Referenced by oomph\+::\+MGSolver$<$ DIM $>$\+::iterations(), and oomph\+::\+MGSolver$<$ DIM $>$\+::solve().
 
 \mbox{\Hypertarget{classoomph_1_1MGSolver_ad0117f918473d50a9ca8526103401534}\label{classoomph_1_1MGSolver_ad0117f918473d50a9ca8526103401534}} 
 \index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!X\_mg\_vectors\_storage@{X\_mg\_vectors\_storage}}
@@ -1492,11 +1493,11 @@ Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00595}{oomph\+::\
 
 
 
-Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00685}{685}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+Definition at line 685 of file geometric\+\_\+multigrid.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00392}{oomph\+::\+MGSolver$<$ DIM $>$\+::direct\+\_\+solve()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00366}{oomph\+::\+MGSolver$<$ DIM $>$\+::post\+\_\+smooth()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00348}{oomph\+::\+MGSolver$<$ DIM $>$\+::pre\+\_\+smooth()}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00375}{oomph\+::\+MGSolver$<$ DIM $>$\+::residual\+\_\+norm()}}.
+Referenced by oomph\+::\+MGSolver$<$ DIM $>$\+::direct\+\_\+solve(), oomph\+::\+MGSolver$<$ DIM $>$\+::post\+\_\+smooth(), oomph\+::\+MGSolver$<$ DIM $>$\+::pre\+\_\+smooth(), and oomph\+::\+MGSolver$<$ DIM $>$\+::residual\+\_\+norm().
 
 
 

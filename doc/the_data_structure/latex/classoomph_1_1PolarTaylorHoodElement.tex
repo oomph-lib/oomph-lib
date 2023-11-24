@@ -24,19 +24,19 @@ virtual unsigned \mbox{\hyperlink{classoomph_1_1PolarTaylorHoodElement_a471a225b
 \begin{DoxyCompactList}\small\item\em Number of values (pinned or dofs) required at node n. Can be overwritten for hanging node version. \end{DoxyCompactList}\item 
 virtual int \mbox{\hyperlink{classoomph_1_1PolarTaylorHoodElement_af7ced5d7811bc4f5f5d86c211cb40500}{p\+\_\+nodal\+\_\+index\+\_\+pnst}} ()
 \begin{DoxyCompactList}\small\item\em Which nodal value represents the pressure? \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1PolarTaylorHoodElement_a8ffcfc12bbb93b42b1b1b37911f29715}{pressure\+\_\+node\+\_\+pt}} (const unsigned \&n\+\_\+p)
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1PolarTaylorHoodElement_a8843c94923e754967be8765c77d8c0a0}{pressure\+\_\+node\+\_\+pt}} (const unsigned \&n\+\_\+p)
 \begin{DoxyCompactList}\small\item\em Pointer to n\+\_\+p-\/th pressure node. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1PolarTaylorHoodElement_a7a584a50123314fdfc35798e8c604383}{u\+\_\+pnst}} (const unsigned \&n, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Return the velocity component u\mbox{[}i\mbox{]} at local node n. Uses suitably interpolated value for hanging nodes. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1PolarTaylorHoodElement_ad1faa74e287808e3a2ebc493d6e78686}{u\+\_\+pnst}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&n, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
-\begin{DoxyCompactList}\small\item\em Return the velocity component u\mbox{[}i\mbox{]} at local node n at timestep t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous timestep). Uses suitably interpolated value for hanging nodes. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Return the velocity component u\mbox{[}i\mbox{]} at local node n at timestep t (t=0\+: present; t$>$0\+: previous timestep). Uses suitably interpolated value for hanging nodes. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1PolarTaylorHoodElement_a0ddfef8a7a5ab18b920a498be2d92cba}{p\+\_\+pnst}} (const unsigned \&n\+\_\+p) const
 \begin{DoxyCompactList}\small\item\em Access function for the pressure values at local pressure node n\+\_\+p (const version) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1PolarTaylorHoodElement_a4ffb1ba7522ccb0d2fb181faa5bdf79b}{npres\+\_\+pnst}} () const
 \begin{DoxyCompactList}\small\item\em Return number of pressure values. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PolarTaylorHoodElement_aea2da4c0a1114dacbf15d463da2f3d4f}{fix\+\_\+pressure}} (const unsigned \&p\+\_\+dof, const double \&p\+\_\+value)
 \begin{DoxyCompactList}\small\item\em Pin p\+\_\+dof-\/th pressure dof and set it to value specified by p\+\_\+value. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PolarTaylorHoodElement_a0a432b5a93ca2e789992ec77d050f49a}{get\+\_\+load\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&paired\+\_\+load\+\_\+data)
+void \mbox{\hyperlink{classoomph_1_1PolarTaylorHoodElement_a2c2fc339826fd73d3f72404ea327c04e}{get\+\_\+load\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&paired\+\_\+load\+\_\+data)
 \begin{DoxyCompactList}\small\item\em Add to the set paired\+\_\+load\+\_\+data pairs of pointers to data objects and unsigned integers that index the values in the data object that affect the load (traction), as specified in the \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a47ae24dc603a7d46bd4a85ccfb2b8e23}{get\+\_\+load()}} function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PolarTaylorHoodElement_ad6c70423cee82f9f2c7ff698f4f910ef}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
@@ -77,7 +77,7 @@ static const unsigned \mbox{\hyperlink{classoomph_1_1PolarTaylorHoodElement_a4db
 
 Taylor--Hood elements are Navier--Stokes elements with quadratic interpolation for velocities and positions and continous linear pressure interpolation 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l01012}{1012}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 1012 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -94,7 +94,7 @@ Constructor, no internal data points.
 
 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l01058}{1058}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 1058 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -115,11 +115,11 @@ Implements \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a7fda7aac0b
 
 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l01184}{1184}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 1184 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References i.
 
 \mbox{\Hypertarget{classoomph_1_1PolarTaylorHoodElement_a5f7b5059497c7d24e5804e1ff9cd34b2}\label{classoomph_1_1PolarTaylorHoodElement_a5f7b5059497c7d24e5804e1ff9cd34b2}} 
 \index{oomph::PolarTaylorHoodElement@{oomph::PolarTaylorHoodElement}!dshape\_and\_dtest\_eulerian\_pnst@{dshape\_and\_dtest\_eulerian\_pnst}}
@@ -137,11 +137,11 @@ Implements \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a5be752caef
 
 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l01156}{1156}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 1156 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References i, and s.
 
 \mbox{\Hypertarget{classoomph_1_1PolarTaylorHoodElement_aea2da4c0a1114dacbf15d463da2f3d4f}\label{classoomph_1_1PolarTaylorHoodElement_aea2da4c0a1114dacbf15d463da2f3d4f}} 
 \index{oomph::PolarTaylorHoodElement@{oomph::PolarTaylorHoodElement}!fix\_pressure@{fix\_pressure}}
@@ -159,17 +159,17 @@ Implements \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a80333b6021
 
 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l01109}{1109}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 1109 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l01068}{p\+\_\+nodal\+\_\+index\+\_\+pnst()}}, \mbox{\hyperlink{nodes_8h_source_l00385}{oomph\+::\+Data\+::pin()}}, and \mbox{\hyperlink{nodes_8h_source_l00324}{oomph\+::\+Data\+::value\+\_\+pt()}}.
+References oomph\+::\+Finite\+Element\+::node\+\_\+pt(), p\+\_\+nodal\+\_\+index\+\_\+pnst(), oomph\+::\+Data\+::pin(), and oomph\+::\+Data\+::value\+\_\+pt().
 
-\mbox{\Hypertarget{classoomph_1_1PolarTaylorHoodElement_a0a432b5a93ca2e789992ec77d050f49a}\label{classoomph_1_1PolarTaylorHoodElement_a0a432b5a93ca2e789992ec77d050f49a}} 
+\mbox{\Hypertarget{classoomph_1_1PolarTaylorHoodElement_a2c2fc339826fd73d3f72404ea327c04e}\label{classoomph_1_1PolarTaylorHoodElement_a2c2fc339826fd73d3f72404ea327c04e}} 
 \index{oomph::PolarTaylorHoodElement@{oomph::PolarTaylorHoodElement}!get\_load\_data@{get\_load\_data}}
 \index{get\_load\_data@{get\_load\_data}!oomph::PolarTaylorHoodElement@{oomph::PolarTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{get\_load\_data()}{get\_load\_data()}}
-{\footnotesize\ttfamily void oomph\+::\+Polar\+Taylor\+Hood\+Element\+::get\+\_\+load\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&}]{paired\+\_\+load\+\_\+data }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void oomph\+::\+Polar\+Taylor\+Hood\+Element\+::get\+\_\+load\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&}]{paired\+\_\+load\+\_\+data }\end{DoxyParamCaption})}
 
 
 
@@ -177,11 +177,11 @@ Add to the set paired\+\_\+load\+\_\+data pairs of pointers to data objects and 
 
 Add pointers to \mbox{\hyperlink{classoomph_1_1Data}{Data}} and the indices of the values that affect the potential load (traction) applied to the Solid\+Elements to the set paired\+\_\+load\+\_\+data. 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l01622}{1622}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc}}.
+Definition at line 1622 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l01103}{npres\+\_\+pnst()}}, and \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l01022}{Pconv}}.
+References i, oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), npres\+\_\+pnst(), and Pconv.
 
 \mbox{\Hypertarget{classoomph_1_1PolarTaylorHoodElement_a4ffb1ba7522ccb0d2fb181faa5bdf79b}\label{classoomph_1_1PolarTaylorHoodElement_a4ffb1ba7522ccb0d2fb181faa5bdf79b}} 
 \index{oomph::PolarTaylorHoodElement@{oomph::PolarTaylorHoodElement}!npres\_pnst@{npres\_pnst}}
@@ -199,11 +199,11 @@ Implements \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_af66cafead0
 
 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l01103}{1103}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 1103 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l01622}{get\+\_\+load\+\_\+data()}}, \mbox{\hyperlink{refineable__polar__navier__stokes__elements_8h_source_l00562}{oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element\+::insert\+\_\+load\+\_\+data()}}, and \mbox{\hyperlink{refineable__polar__navier__stokes__elements_8h_source_l00246}{oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs()}}.
+Referenced by get\+\_\+load\+\_\+data(), oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element\+::insert\+\_\+load\+\_\+data(), and oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs().
 
 \mbox{\Hypertarget{classoomph_1_1PolarTaylorHoodElement_ab1d58fc5d344421bdf29ea11514accb6}\label{classoomph_1_1PolarTaylorHoodElement_ab1d58fc5d344421bdf29ea11514accb6}} 
 \index{oomph::PolarTaylorHoodElement@{oomph::PolarTaylorHoodElement}!output@{output}}
@@ -221,11 +221,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_aad
 
 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l01136}{1136}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 1136 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00485}{oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::output()}}.
+References oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1PolarTaylorHoodElement_a491915435066f5545da449fd2ac5e3a7}\label{classoomph_1_1PolarTaylorHoodElement_a491915435066f5545da449fd2ac5e3a7}} 
 \index{oomph::PolarTaylorHoodElement@{oomph::PolarTaylorHoodElement}!output@{output}}
@@ -243,11 +243,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a1d
 
 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l01142}{1142}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 1142 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00485}{oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::output()}}.
+References oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1PolarTaylorHoodElement_ad6c70423cee82f9f2c7ff698f4f910ef}\label{classoomph_1_1PolarTaylorHoodElement_ad6c70423cee82f9f2c7ff698f4f910ef}} 
 \index{oomph::PolarTaylorHoodElement@{oomph::PolarTaylorHoodElement}!output@{output}}
@@ -265,11 +265,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a72
 
 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l01124}{1124}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 1124 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00485}{oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::output()}}.
+References oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1PolarTaylorHoodElement_acca69fdd471868d493ec2087f81a7188}\label{classoomph_1_1PolarTaylorHoodElement_acca69fdd471868d493ec2087f81a7188}} 
 \index{oomph::PolarTaylorHoodElement@{oomph::PolarTaylorHoodElement}!output@{output}}
@@ -287,11 +287,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a83
 
 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l01130}{1130}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 1130 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00485}{oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::output()}}.
+References oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1PolarTaylorHoodElement_ab50b43e4dadba14413f8b84b35eea9aa}\label{classoomph_1_1PolarTaylorHoodElement_ab50b43e4dadba14413f8b84b35eea9aa}} 
 \index{oomph::PolarTaylorHoodElement@{oomph::PolarTaylorHoodElement}!p\_local\_eqn@{p\_local\_eqn}}
@@ -309,11 +309,11 @@ Implements \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a4738c2cb0d
 
 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l01051}{1051}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 1051 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}, and \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l01068}{p\+\_\+nodal\+\_\+index\+\_\+pnst()}}.
+References oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), and p\+\_\+nodal\+\_\+index\+\_\+pnst().
 
 \mbox{\Hypertarget{classoomph_1_1PolarTaylorHoodElement_af7ced5d7811bc4f5f5d86c211cb40500}\label{classoomph_1_1PolarTaylorHoodElement_af7ced5d7811bc4f5f5d86c211cb40500}} 
 \index{oomph::PolarTaylorHoodElement@{oomph::PolarTaylorHoodElement}!p\_nodal\_index\_pnst@{p\_nodal\_index\_pnst}}
@@ -331,11 +331,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a79
 
 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l01068}{1068}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 1068 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l01109}{fix\+\_\+pressure()}}, \mbox{\hyperlink{refineable__polar__navier__stokes__elements_8h_source_l00403}{oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element\+::further\+\_\+setup\+\_\+hanging\+\_\+nodes()}}, \mbox{\hyperlink{refineable__polar__navier__stokes__elements_8h_source_l00562}{oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element\+::insert\+\_\+load\+\_\+data()}}, \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l01051}{p\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{refineable__polar__navier__stokes__elements_8h_source_l00246}{oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs()}}, and \mbox{\hyperlink{refineable__polar__navier__stokes__elements_8h_source_l00233}{oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs()}}.
+Referenced by fix\+\_\+pressure(), oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element\+::further\+\_\+setup\+\_\+hanging\+\_\+nodes(), oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element\+::insert\+\_\+load\+\_\+data(), p\+\_\+local\+\_\+eqn(), oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), and oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs().
 
 \mbox{\Hypertarget{classoomph_1_1PolarTaylorHoodElement_a0ddfef8a7a5ab18b920a498be2d92cba}\label{classoomph_1_1PolarTaylorHoodElement_a0ddfef8a7a5ab18b920a498be2d92cba}} 
 \index{oomph::PolarTaylorHoodElement@{oomph::PolarTaylorHoodElement}!p\_pnst@{p\_pnst}}
@@ -353,17 +353,17 @@ Implements \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a4db8f8149f
 
 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l01096}{1096}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 1096 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}.
+References oomph\+::\+Finite\+Element\+::nodal\+\_\+value().
 
-\mbox{\Hypertarget{classoomph_1_1PolarTaylorHoodElement_a8ffcfc12bbb93b42b1b1b37911f29715}\label{classoomph_1_1PolarTaylorHoodElement_a8ffcfc12bbb93b42b1b1b37911f29715}} 
+\mbox{\Hypertarget{classoomph_1_1PolarTaylorHoodElement_a8843c94923e754967be8765c77d8c0a0}\label{classoomph_1_1PolarTaylorHoodElement_a8843c94923e754967be8765c77d8c0a0}} 
 \index{oomph::PolarTaylorHoodElement@{oomph::PolarTaylorHoodElement}!pressure\_node\_pt@{pressure\_node\_pt}}
 \index{pressure\_node\_pt@{pressure\_node\_pt}!oomph::PolarTaylorHoodElement@{oomph::PolarTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{pressure\_node\_pt()}{pressure\_node\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ oomph\+::\+Polar\+Taylor\+Hood\+Element\+::pressure\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$ oomph\+::\+Polar\+Taylor\+Hood\+Element\+::pressure\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -371,19 +371,19 @@ Pointer to n\+\_\+p-\/th pressure node.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_adb91c780f55bda62b209573facf9a999}{oomph\+::\+Polar\+Navier\+Stokes\+Equations}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ae87e3863f67fb6cceb6b0e74a360febe}{oomph\+::\+Polar\+Navier\+Stokes\+Equations}}.
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineablePolarTaylorHoodElement_a2e275087d25416bc03ce1f4fceab91dc}{oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineablePolarTaylorHoodElement_a327a296af13c5c7346fdfd06b4da7bd8}{oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element}}.
 
 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l01074}{1074}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 1074 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References oomph\+::\+Finite\+Element\+::node\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1PolarTaylorHoodElement_a017ced81001a0b0cbeaf4701ef2d4792}\label{classoomph_1_1PolarTaylorHoodElement_a017ced81001a0b0cbeaf4701ef2d4792}} 
 \index{oomph::PolarTaylorHoodElement@{oomph::PolarTaylorHoodElement}!pshape\_pnst@{pshape\_pnst}}
@@ -401,15 +401,15 @@ Implements \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a1b382bf38d
 
 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l01210}{1210}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 1210 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{shape_8h_source_l00608}{oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 2 $>$()}}.
+References i, s, and oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 2 $>$().
 
 
 
-Referenced by \mbox{\hyperlink{refineable__polar__navier__stokes__elements_8h_source_l00538}{oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element\+::interpolating\+\_\+basis()}}, and \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l01237}{pshape\+\_\+pnst()}}.
+Referenced by oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element\+::interpolating\+\_\+basis(), and pshape\+\_\+pnst().
 
 \mbox{\Hypertarget{classoomph_1_1PolarTaylorHoodElement_ad382221466572628efe24ae3c0be7291}\label{classoomph_1_1PolarTaylorHoodElement_ad382221466572628efe24ae3c0be7291}} 
 \index{oomph::PolarTaylorHoodElement@{oomph::PolarTaylorHoodElement}!pshape\_pnst@{pshape\_pnst}}
@@ -427,11 +427,11 @@ Implements \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_a2ec5597d86
 
 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l01237}{1237}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 1237 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l01210}{pshape\+\_\+pnst()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References i, pshape\+\_\+pnst(), and s.
 
 \mbox{\Hypertarget{classoomph_1_1PolarTaylorHoodElement_a471a225bdcb0f6f1babd03f6e152da79}\label{classoomph_1_1PolarTaylorHoodElement_a471a225bdcb0f6f1babd03f6e152da79}} 
 \index{oomph::PolarTaylorHoodElement@{oomph::PolarTaylorHoodElement}!required\_nvalue@{required\_nvalue}}
@@ -453,11 +453,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineablePolarTaylorHoodElement
 
 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l01062}{1062}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 1062 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l01017}{Initial\+\_\+\+Nvalue}}.
+References Initial\+\_\+\+Nvalue.
 
 \mbox{\Hypertarget{classoomph_1_1PolarTaylorHoodElement_a7a584a50123314fdfc35798e8c604383}\label{classoomph_1_1PolarTaylorHoodElement_a7a584a50123314fdfc35798e8c604383}} 
 \index{oomph::PolarTaylorHoodElement@{oomph::PolarTaylorHoodElement}!u\_pnst@{u\_pnst}}
@@ -475,11 +475,11 @@ Implements \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ae4bfb7b4c5
 
 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l01081}{1081}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 1081 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}.
+References i, and oomph\+::\+Finite\+Element\+::nodal\+\_\+value().
 
 \mbox{\Hypertarget{classoomph_1_1PolarTaylorHoodElement_ad1faa74e287808e3a2ebc493d6e78686}\label{classoomph_1_1PolarTaylorHoodElement_ad1faa74e287808e3a2ebc493d6e78686}} 
 \index{oomph::PolarTaylorHoodElement@{oomph::PolarTaylorHoodElement}!u\_pnst@{u\_pnst}}
@@ -489,7 +489,7 @@ References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink
 
 
 
-Return the velocity component u\mbox{[}i\mbox{]} at local node n at timestep t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous timestep). Uses suitably interpolated value for hanging nodes. 
+Return the velocity component u\mbox{[}i\mbox{]} at local node n at timestep t (t=0\+: present; t$>$0\+: previous timestep). Uses suitably interpolated value for hanging nodes. 
 
 
 
@@ -497,11 +497,11 @@ Implements \mbox{\hyperlink{classoomph_1_1PolarNavierStokesEquations_ace9bb9807c
 
 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l01089}{1089}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 1089 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}.
+References i, and oomph\+::\+Finite\+Element\+::nodal\+\_\+value().
 
 
 
@@ -524,11 +524,11 @@ Static array of ints to hold number of variables at node.
 
 //////////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////////// 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l01017}{1017}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 1017 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l01062}{required\+\_\+nvalue()}}.
+Referenced by required\+\_\+nvalue().
 
 \mbox{\Hypertarget{classoomph_1_1PolarTaylorHoodElement_a4804e4bdf732b17cdb7e55aebaebcab0}\label{classoomph_1_1PolarTaylorHoodElement_a4804e4bdf732b17cdb7e55aebaebcab0}} 
 \index{oomph::PolarTaylorHoodElement@{oomph::PolarTaylorHoodElement}!Pconv@{Pconv}}
@@ -542,11 +542,11 @@ Static array of ints to hold conversion from pressure node numbers to actual nod
 
 
 
-Definition at line \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l01022}{1022}} of file \mbox{\hyperlink{polar__navier__stokes__elements_8h_source}{polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 1022 of file polar\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l01622}{get\+\_\+load\+\_\+data()}}, and \mbox{\hyperlink{refineable__polar__navier__stokes__elements_8h_source_l00227}{oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element\+::pressure\+\_\+node\+\_\+pt()}}.
+Referenced by get\+\_\+load\+\_\+data(), and oomph\+::\+Refineable\+Polar\+Taylor\+Hood\+Element\+::pressure\+\_\+node\+\_\+pt().
 
 
 

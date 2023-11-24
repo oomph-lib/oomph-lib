@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1WomersleyOutflowImpedanceTube}{}\doxysection{oomph\+::Womersley\+Outflow\+Impedance\+Tube\texorpdfstring{$<$}{<} ELEMENT, DIM \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1WomersleyOutflowImpedanceTube}{}\doxysection{oomph\+::Womersley\+Outflow\+Impedance\+Tube$<$ ELEMENT, DIM $>$ Class Template Reference}
 \label{classoomph_1_1WomersleyOutflowImpedanceTube}\index{oomph::WomersleyOutflowImpedanceTube$<$ ELEMENT, DIM $>$@{oomph::WomersleyOutflowImpedanceTube$<$ ELEMENT, DIM $>$}}
 
 
@@ -9,7 +9,7 @@
 
 {\ttfamily \#include $<$womersley\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Womersley\+Outflow\+Impedance\+Tube\texorpdfstring{$<$}{<} ELEMENT, DIM \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Womersley\+Outflow\+Impedance\+Tube$<$ ELEMENT, DIM $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=3.000000cm]{classoomph_1_1WomersleyOutflowImpedanceTube}
@@ -20,7 +20,7 @@ Inheritance diagram for oomph\+::Womersley\+Outflow\+Impedance\+Tube\texorpdfstr
 \item 
 \mbox{\hyperlink{classoomph_1_1WomersleyOutflowImpedanceTube_a43c6028b6a11ae3c73b26271f0176c58}{Womersley\+Outflow\+Impedance\+Tube}} (const double \&length, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$navier\+\_\+stokes\+\_\+outflow\+\_\+mesh\+\_\+pt, const unsigned \&fixed\+\_\+coordinate, const unsigned \&w\+\_\+index)
 \begin{DoxyCompactList}\small\item\em Constructor\+: Pass length and mesh of face elements that are attached to the outflow cross-\/section of the Navier Stokes mesh to constructor of underlying base class. Also specify the coordinate (in the higher-\/dimensional Navier-\/\+Stokes mesh) that is constant in the outflow cross-\/section and the velocity component (in terms of the nodal index) that represents the outflow component -- the latter is used to automatically apply the boundary conditions for the Womersley problem. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$ \mbox{\hyperlink{classoomph_1_1WomersleyOutflowImpedanceTube_a1f6e2872ee8b1cb161ffe3f8a04cf175}{build\+\_\+mesh\+\_\+and\+\_\+apply\+\_\+boundary\+\_\+conditions}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt)
+\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$ \mbox{\hyperlink{classoomph_1_1WomersleyOutflowImpedanceTube_a31655c396b473246a6a9840d789dc046}{build\+\_\+mesh\+\_\+and\+\_\+apply\+\_\+boundary\+\_\+conditions}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Implement pure virtual fct (defined in the base class \mbox{\hyperlink{classoomph_1_1WomersleyImpedanceTubeBase}{Womersley\+Impedance\+Tube\+Base}}) that builds the mesh of Womersley elements (of the type specified by the template argument), using the specified timestepper. Also applies the boundary condition. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -35,11 +35,12 @@ unsigned \mbox{\hyperlink{classoomph_1_1WomersleyOutflowImpedanceTube_ab695df834
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class ELEMENT, unsigned DIM$>$\newline
 class oomph\+::\+Womersley\+Outflow\+Impedance\+Tube$<$ ELEMENT, DIM $>$}
+
 ///////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////// 
 
 Womersley\+Impedance\+Tube that attaches itself to the outflow of a Navier-\/\+Stokes mesh. 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l01826}{1826}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 1826 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -57,17 +58,17 @@ Constructor\+: Pass length and mesh of face elements that are attached to the ou
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l01839}{1839}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 1839 of file womersley\+\_\+elements.\+h.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1WomersleyOutflowImpedanceTube_a1f6e2872ee8b1cb161ffe3f8a04cf175}\label{classoomph_1_1WomersleyOutflowImpedanceTube_a1f6e2872ee8b1cb161ffe3f8a04cf175}} 
+\mbox{\Hypertarget{classoomph_1_1WomersleyOutflowImpedanceTube_a31655c396b473246a6a9840d789dc046}\label{classoomph_1_1WomersleyOutflowImpedanceTube_a31655c396b473246a6a9840d789dc046}} 
 \index{oomph::WomersleyOutflowImpedanceTube$<$ ELEMENT, DIM $>$@{oomph::WomersleyOutflowImpedanceTube$<$ ELEMENT, DIM $>$}!build\_mesh\_and\_apply\_boundary\_conditions@{build\_mesh\_and\_apply\_boundary\_conditions}}
 \index{build\_mesh\_and\_apply\_boundary\_conditions@{build\_mesh\_and\_apply\_boundary\_conditions}!oomph::WomersleyOutflowImpedanceTube$<$ ELEMENT, DIM $>$@{oomph::WomersleyOutflowImpedanceTube$<$ ELEMENT, DIM $>$}}
 \doxysubsubsection{\texorpdfstring{build\_mesh\_and\_apply\_boundary\_conditions()}{build\_mesh\_and\_apply\_boundary\_conditions()}}
 {\footnotesize\ttfamily template$<$class ELEMENT , unsigned DIM$>$ \\
-\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$ \mbox{\hyperlink{classoomph_1_1WomersleyOutflowImpedanceTube}{oomph\+::\+Womersley\+Outflow\+Impedance\+Tube}}$<$ ELEMENT, DIM $>$\+::build\+\_\+mesh\+\_\+and\+\_\+apply\+\_\+boundary\+\_\+conditions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}$\ast$ \mbox{\hyperlink{classoomph_1_1WomersleyOutflowImpedanceTube}{oomph\+::\+Womersley\+Outflow\+Impedance\+Tube}}$<$ ELEMENT, DIM $>$\+::build\+\_\+mesh\+\_\+and\+\_\+apply\+\_\+boundary\+\_\+conditions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -75,15 +76,15 @@ Implement pure virtual fct (defined in the base class \mbox{\hyperlink{classoomp
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1WomersleyImpedanceTubeBase_a746f8fe8de207bff29af109dc486e828}{oomph\+::\+Womersley\+Impedance\+Tube\+Base$<$ ELEMENT, DIM $>$}}.
+Implements \mbox{\hyperlink{classoomph_1_1WomersleyImpedanceTubeBase_afbe4fd4a9e8275b010ea210a9f8b1fee}{oomph\+::\+Womersley\+Impedance\+Tube\+Base$<$ ELEMENT, DIM $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l01854}{1854}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 1854 of file womersley\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{womersley__elements_8h_source_l01871}{oomph\+::\+Womersley\+Outflow\+Impedance\+Tube$<$ ELEMENT, DIM $>$\+::\+Fixed\+\_\+coordinate}}, \mbox{\hyperlink{womersley__elements_8h_source_l01456}{oomph\+::\+Womersley\+Impedance\+Tube\+Base$<$ ELEMENT, DIM $>$\+::\+Navier\+\_\+stokes\+\_\+outflow\+\_\+mesh\+\_\+pt}}, and \mbox{\hyperlink{womersley__elements_8h_source_l01877}{oomph\+::\+Womersley\+Outflow\+Impedance\+Tube$<$ ELEMENT, DIM $>$\+::\+W\+\_\+index}}.
+References oomph\+::\+Womersley\+Outflow\+Impedance\+Tube$<$ ELEMENT, DIM $>$\+::\+Fixed\+\_\+coordinate, oomph\+::\+Womersley\+Impedance\+Tube\+Base$<$ ELEMENT, DIM $>$\+::\+Navier\+\_\+stokes\+\_\+outflow\+\_\+mesh\+\_\+pt, and oomph\+::\+Womersley\+Outflow\+Impedance\+Tube$<$ ELEMENT, DIM $>$\+::\+W\+\_\+index.
 
 
 
@@ -101,11 +102,11 @@ The coordinate (in the higher-\/dimensional Navier-\/\+Stokes mesh) that is cons
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l01871}{1871}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 1871 of file womersley\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{womersley__elements_8h_source_l01854}{oomph\+::\+Womersley\+Outflow\+Impedance\+Tube$<$ ELEMENT, DIM $>$\+::build\+\_\+mesh\+\_\+and\+\_\+apply\+\_\+boundary\+\_\+conditions()}}.
+Referenced by oomph\+::\+Womersley\+Outflow\+Impedance\+Tube$<$ ELEMENT, DIM $>$\+::build\+\_\+mesh\+\_\+and\+\_\+apply\+\_\+boundary\+\_\+conditions().
 
 \mbox{\Hypertarget{classoomph_1_1WomersleyOutflowImpedanceTube_ab695df8342d00c65a16d79af35c49ad1}\label{classoomph_1_1WomersleyOutflowImpedanceTube_ab695df8342d00c65a16d79af35c49ad1}} 
 \index{oomph::WomersleyOutflowImpedanceTube$<$ ELEMENT, DIM $>$@{oomph::WomersleyOutflowImpedanceTube$<$ ELEMENT, DIM $>$}!W\_index@{W\_index}}
@@ -120,11 +121,11 @@ The velocity component (in terms of the nodal index) that represents the outflow
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l01877}{1877}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 1877 of file womersley\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{womersley__elements_8h_source_l01854}{oomph\+::\+Womersley\+Outflow\+Impedance\+Tube$<$ ELEMENT, DIM $>$\+::build\+\_\+mesh\+\_\+and\+\_\+apply\+\_\+boundary\+\_\+conditions()}}.
+Referenced by oomph\+::\+Womersley\+Outflow\+Impedance\+Tube$<$ ELEMENT, DIM $>$\+::build\+\_\+mesh\+\_\+and\+\_\+apply\+\_\+boundary\+\_\+conditions().
 
 
 

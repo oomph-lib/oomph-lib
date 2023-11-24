@@ -8,15 +8,15 @@
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-Vector$<$ double $>$ \mbox{\hyperlink{namespaceProblemParameters_acb1788444ef78fe2adec824504f24246}{Coeff}} (\mbox{\hyperlink{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}{N\+\_\+terms}}, 1.\+0)
+Vector$<$ double $>$ \mbox{\hyperlink{namespaceProblemParameters_a20cc9776e745842f6126f4cd17659d19}{Coeff}} (\mbox{\hyperlink{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}{N\+\_\+terms}}, 1.\+0)
 \begin{DoxyCompactList}\small\item\em Coefficients in the exact solution. \end{DoxyCompactList}\item 
-std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceProblemParameters_acfe6a3fe73272672d596ebe2afd0092e}{I}} (0.\+0, 1.\+0)
+std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceProblemParameters_a869b19d379dd66b387c675ca07c6a049}{I}} (0.\+0, 1.\+0)
 \begin{DoxyCompactList}\small\item\em Imaginary unit. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceProblemParameters_af750b29069b29bd38b5220ecf534e7f7}{get\+\_\+exact\+\_\+u}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&u)
 \begin{DoxyCompactList}\small\item\em Exact solution as a Vector of size 2, containing real and imag parts. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceProblemParameters_aa544d1f3e384d3283f7113512931ea8f}{exact\+\_\+minus\+\_\+dudr}} (const Vector$<$ double $>$ \&x, std\+::complex$<$ double $>$ \&flux)
 \begin{DoxyCompactList}\small\item\em Get -\/du/dr (spherical r) for exact solution. Equal to prescribed flux on inner boundary. \end{DoxyCompactList}\item 
-std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceProblemParameters_a95ca6575d3ac2ec3d2efd3132ff2b5c4}{Magnitude}} (100.\+0, 100.\+0)
+std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceProblemParameters_acdaa2237a50d2ccf2b58be59c944953d}{Magnitude}} (100.\+0, 100.\+0)
 \begin{DoxyCompactList}\small\item\em Point source magnitude (Complex) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
@@ -47,11 +47,11 @@ double \mbox{\hyperlink{namespaceProblemParameters_a346993de7a274e1828af3f8fc8ca
 Namespace for the Fourier decomposed Helmholtz problem parameters 
 
 \doxysubsection{Function Documentation}
-\mbox{\Hypertarget{namespaceProblemParameters_acb1788444ef78fe2adec824504f24246}\label{namespaceProblemParameters_acb1788444ef78fe2adec824504f24246}} 
+\mbox{\Hypertarget{namespaceProblemParameters_a20cc9776e745842f6126f4cd17659d19}\label{namespaceProblemParameters_a20cc9776e745842f6126f4cd17659d19}} 
 \index{ProblemParameters@{ProblemParameters}!Coeff@{Coeff}}
 \index{Coeff@{Coeff}!ProblemParameters@{ProblemParameters}}
 \doxysubsubsection{\texorpdfstring{Coeff()}{Coeff()}}
-{\footnotesize\ttfamily Vector$<$ double $>$ Problem\+Parameters\+::\+Coeff (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}{N\+\_\+terms}}}]{,  }\item[{1.}]{0 }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily Vector$<$double$>$ Problem\+Parameters\+::\+Coeff (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}{N\+\_\+terms}}}]{,  }\item[{1.}]{0 }\end{DoxyParamCaption})}
 
 
 
@@ -59,7 +59,7 @@ Coefficients in the exact solution.
 
 
 
-Referenced by \mbox{\hyperlink{oscillating__sphere_8cc_source_l00147}{exact\+\_\+minus\+\_\+dudr()}}, and \mbox{\hyperlink{oscillating__sphere_8cc_source_l00086}{get\+\_\+exact\+\_\+u()}}.
+Referenced by exact\+\_\+minus\+\_\+dudr(), and get\+\_\+exact\+\_\+u().
 
 \mbox{\Hypertarget{namespaceProblemParameters_aa544d1f3e384d3283f7113512931ea8f}\label{namespaceProblemParameters_aa544d1f3e384d3283f7113512931ea8f}} 
 \index{ProblemParameters@{ProblemParameters}!exact\_minus\_dudr@{exact\_minus\_dudr}}
@@ -73,15 +73,15 @@ Get -\/du/dr (spherical r) for exact solution. Equal to prescribed flux on inner
 
 
 
-Definition at line \mbox{\hyperlink{oscillating__sphere_8cc_source_l00147}{147}} of file \mbox{\hyperlink{oscillating__sphere_8cc_source}{oscillating\+\_\+sphere.\+cc}}.
+Definition at line 147 of file oscillating\+\_\+sphere.\+cc.
 
 
 
-References \mbox{\hyperlink{namespaceProblemParameters_acb1788444ef78fe2adec824504f24246}{Coeff()}}, \mbox{\hyperlink{namespaceProblemParameters_acfe6a3fe73272672d596ebe2afd0092e}{I()}}, \mbox{\hyperlink{oscillating__sphere_8cc_source_l00062}{K\+\_\+squared}}, \mbox{\hyperlink{oscillating__sphere_8cc_source_l00074}{N\+\_\+fourier}}, and \mbox{\hyperlink{oscillating__sphere_8cc_source_l00077}{N\+\_\+terms}}.
+References Coeff(), I(), K\+\_\+squared, N\+\_\+fourier, and N\+\_\+terms.
 
 
 
-Referenced by \mbox{\hyperlink{oscillating__sphere_8cc_source_l01072}{PMLFourier\+Decomposed\+Helmholtz\+Problem$<$ ELEMENT $>$\+::create\+\_\+flux\+\_\+elements\+\_\+on\+\_\+inner\+\_\+boundary()}}.
+Referenced by PMLFourier\+Decomposed\+Helmholtz\+Problem$<$ ELEMENT $>$\+::create\+\_\+flux\+\_\+elements\+\_\+on\+\_\+inner\+\_\+boundary().
 
 \mbox{\Hypertarget{namespaceProblemParameters_af750b29069b29bd38b5220ecf534e7f7}\label{namespaceProblemParameters_af750b29069b29bd38b5220ecf534e7f7}} 
 \index{ProblemParameters@{ProblemParameters}!get\_exact\_u@{get\_exact\_u}}
@@ -95,21 +95,21 @@ Exact solution as a Vector of size 2, containing real and imag parts.
 
 
 
-Definition at line \mbox{\hyperlink{oscillating__sphere_8cc_source_l00086}{86}} of file \mbox{\hyperlink{oscillating__sphere_8cc_source}{oscillating\+\_\+sphere.\+cc}}.
+Definition at line 86 of file oscillating\+\_\+sphere.\+cc.
 
 
 
-References \mbox{\hyperlink{namespaceProblemParameters_acb1788444ef78fe2adec824504f24246}{Coeff()}}, \mbox{\hyperlink{namespaceProblemParameters_acfe6a3fe73272672d596ebe2afd0092e}{I()}}, \mbox{\hyperlink{oscillating__sphere_8cc_source_l00062}{K\+\_\+squared}}, \mbox{\hyperlink{oscillating__sphere_8cc_source_l00074}{N\+\_\+fourier}}, and \mbox{\hyperlink{oscillating__sphere_8cc_source_l00077}{N\+\_\+terms}}.
+References Coeff(), I(), K\+\_\+squared, N\+\_\+fourier, and N\+\_\+terms.
 
 
 
-Referenced by \mbox{\hyperlink{oscillating__sphere_8cc_source_l00975}{PMLFourier\+Decomposed\+Helmholtz\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}.
+Referenced by PMLFourier\+Decomposed\+Helmholtz\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution().
 
-\mbox{\Hypertarget{namespaceProblemParameters_acfe6a3fe73272672d596ebe2afd0092e}\label{namespaceProblemParameters_acfe6a3fe73272672d596ebe2afd0092e}} 
+\mbox{\Hypertarget{namespaceProblemParameters_a869b19d379dd66b387c675ca07c6a049}\label{namespaceProblemParameters_a869b19d379dd66b387c675ca07c6a049}} 
 \index{ProblemParameters@{ProblemParameters}!I@{I}}
 \index{I@{I}!ProblemParameters@{ProblemParameters}}
 \doxysubsubsection{\texorpdfstring{I()}{I()}}
-{\footnotesize\ttfamily std\+::complex$<$ double $>$ Problem\+Parameters\+::I (\begin{DoxyParamCaption}\item[{0.}]{0,  }\item[{1.}]{0 }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily std\+::complex$<$double$>$ Problem\+Parameters\+::I (\begin{DoxyParamCaption}\item[{0.}]{0,  }\item[{1.}]{0 }\end{DoxyParamCaption})}
 
 
 
@@ -117,13 +117,13 @@ Imaginary unit.
 
 
 
-Referenced by \mbox{\hyperlink{oscillating__sphere_8cc_source_l00147}{exact\+\_\+minus\+\_\+dudr()}}, and \mbox{\hyperlink{oscillating__sphere_8cc_source_l00086}{get\+\_\+exact\+\_\+u()}}.
+Referenced by exact\+\_\+minus\+\_\+dudr(), and get\+\_\+exact\+\_\+u().
 
-\mbox{\Hypertarget{namespaceProblemParameters_a95ca6575d3ac2ec3d2efd3132ff2b5c4}\label{namespaceProblemParameters_a95ca6575d3ac2ec3d2efd3132ff2b5c4}} 
+\mbox{\Hypertarget{namespaceProblemParameters_acdaa2237a50d2ccf2b58be59c944953d}\label{namespaceProblemParameters_acdaa2237a50d2ccf2b58be59c944953d}} 
 \index{ProblemParameters@{ProblemParameters}!Magnitude@{Magnitude}}
 \index{Magnitude@{Magnitude}!ProblemParameters@{ProblemParameters}}
 \doxysubsubsection{\texorpdfstring{Magnitude()}{Magnitude()}}
-{\footnotesize\ttfamily std\+::complex$<$ double $>$ Problem\+Parameters\+::\+Magnitude (\begin{DoxyParamCaption}\item[{100.}]{0,  }\item[{100.}]{0 }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily std\+::complex$<$double$>$ Problem\+Parameters\+::\+Magnitude (\begin{DoxyParamCaption}\item[{100.}]{0,  }\item[{100.}]{0 }\end{DoxyParamCaption})}
 
 
 
@@ -131,7 +131,7 @@ Point source magnitude (Complex)
 
 
 
-Referenced by \mbox{\hyperlink{oscillating__sphere_8cc_source_l00690}{PMLFourier\+Decomposed\+Helmholtz\+Problem$<$ ELEMENT $>$\+::setup\+\_\+point\+\_\+source()}}.
+Referenced by PMLFourier\+Decomposed\+Helmholtz\+Problem$<$ ELEMENT $>$\+::setup\+\_\+point\+\_\+source().
 
 
 
@@ -148,11 +148,11 @@ Output directory.
 
 
 
-Definition at line \mbox{\hyperlink{oscillating__sphere_8cc_source_l00059}{59}} of file \mbox{\hyperlink{oscillating__sphere_8cc_source}{oscillating\+\_\+sphere.\+cc}}.
+Definition at line 59 of file oscillating\+\_\+sphere.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{oscillating__sphere_8cc_source_l01184}{main()}}, and \mbox{\hyperlink{oscillating__sphere_8cc_source_l00790}{PMLFourier\+Decomposed\+Helmholtz\+Problem$<$ ELEMENT $>$\+::\+PMLFourier\+Decomposed\+Helmholtz\+Problem()}}.
+Referenced by main(), and PMLFourier\+Decomposed\+Helmholtz\+Problem$<$ ELEMENT $>$\+::\+PMLFourier\+Decomposed\+Helmholtz\+Problem().
 
 \mbox{\Hypertarget{namespaceProblemParameters_aafe26abadfce87800a6a4676f0476956}\label{namespaceProblemParameters_aafe26abadfce87800a6a4676f0476956}} 
 \index{ProblemParameters@{ProblemParameters}!Element\_area@{Element\_area}}
@@ -166,11 +166,11 @@ Target area for initial mesh.
 
 
 
-Definition at line \mbox{\hyperlink{oscillating__sphere_8cc_source_l00071}{71}} of file \mbox{\hyperlink{oscillating__sphere_8cc_source}{oscillating\+\_\+sphere.\+cc}}.
+Definition at line 71 of file oscillating\+\_\+sphere.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{oscillating__sphere_8cc_source_l01184}{main()}}, and \mbox{\hyperlink{oscillating__sphere_8cc_source_l00790}{PMLFourier\+Decomposed\+Helmholtz\+Problem$<$ ELEMENT $>$\+::\+PMLFourier\+Decomposed\+Helmholtz\+Problem()}}.
+Referenced by main(), and PMLFourier\+Decomposed\+Helmholtz\+Problem$<$ ELEMENT $>$\+::\+PMLFourier\+Decomposed\+Helmholtz\+Problem().
 
 \mbox{\Hypertarget{namespaceProblemParameters_aa5362de1af9e257fde4317c367158a93}\label{namespaceProblemParameters_aa5362de1af9e257fde4317c367158a93}} 
 \index{ProblemParameters@{ProblemParameters}!K\_squared@{K\_squared}}
@@ -184,11 +184,11 @@ Frequency.
 
 
 
-Definition at line \mbox{\hyperlink{oscillating__sphere_8cc_source_l00062}{62}} of file \mbox{\hyperlink{oscillating__sphere_8cc_source}{oscillating\+\_\+sphere.\+cc}}.
+Definition at line 62 of file oscillating\+\_\+sphere.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{oscillating__sphere_8cc_source_l00649}{PMLFourier\+Decomposed\+Helmholtz\+Problem$<$ ELEMENT $>$\+::complete\+\_\+problem\+\_\+setup()}}, \mbox{\hyperlink{oscillating__sphere_8cc_source_l00147}{exact\+\_\+minus\+\_\+dudr()}}, \mbox{\hyperlink{oscillating__sphere_8cc_source_l00086}{get\+\_\+exact\+\_\+u()}}, \mbox{\hyperlink{oscillating__sphere_8cc_source_l01184}{main()}}, and \mbox{\hyperlink{oscillating__sphere_8cc_source_l00790}{PMLFourier\+Decomposed\+Helmholtz\+Problem$<$ ELEMENT $>$\+::\+PMLFourier\+Decomposed\+Helmholtz\+Problem()}}.
+Referenced by PMLFourier\+Decomposed\+Helmholtz\+Problem$<$ ELEMENT $>$\+::complete\+\_\+problem\+\_\+setup(), exact\+\_\+minus\+\_\+dudr(), get\+\_\+exact\+\_\+u(), main(), and PMLFourier\+Decomposed\+Helmholtz\+Problem$<$ ELEMENT $>$\+::\+PMLFourier\+Decomposed\+Helmholtz\+Problem().
 
 \mbox{\Hypertarget{namespaceProblemParameters_aaa674958a1ca6ee0b99de3377288c93f}\label{namespaceProblemParameters_aaa674958a1ca6ee0b99de3377288c93f}} 
 \index{ProblemParameters@{ProblemParameters}!N\_fourier@{N\_fourier}}
@@ -202,11 +202,11 @@ The default Fourier wave number.
 
 
 
-Definition at line \mbox{\hyperlink{oscillating__sphere_8cc_source_l00074}{74}} of file \mbox{\hyperlink{oscillating__sphere_8cc_source}{oscillating\+\_\+sphere.\+cc}}.
+Definition at line 74 of file oscillating\+\_\+sphere.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{oscillating__sphere_8cc_source_l00649}{PMLFourier\+Decomposed\+Helmholtz\+Problem$<$ ELEMENT $>$\+::complete\+\_\+problem\+\_\+setup()}}, \mbox{\hyperlink{oscillating__sphere_8cc_source_l00147}{exact\+\_\+minus\+\_\+dudr()}}, \mbox{\hyperlink{oscillating__sphere_8cc_source_l00086}{get\+\_\+exact\+\_\+u()}}, \mbox{\hyperlink{oscillating__sphere_8cc_source_l01184}{main()}}, and \mbox{\hyperlink{oscillating__sphere_8cc_source_l00690}{PMLFourier\+Decomposed\+Helmholtz\+Problem$<$ ELEMENT $>$\+::setup\+\_\+point\+\_\+source()}}.
+Referenced by PMLFourier\+Decomposed\+Helmholtz\+Problem$<$ ELEMENT $>$\+::complete\+\_\+problem\+\_\+setup(), exact\+\_\+minus\+\_\+dudr(), get\+\_\+exact\+\_\+u(), main(), and PMLFourier\+Decomposed\+Helmholtz\+Problem$<$ ELEMENT $>$\+::setup\+\_\+point\+\_\+source().
 
 \mbox{\Hypertarget{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}\label{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}} 
 \index{ProblemParameters@{ProblemParameters}!N\_terms@{N\_terms}}
@@ -220,11 +220,11 @@ Number of terms in the exact solution.
 
 
 
-Definition at line \mbox{\hyperlink{oscillating__sphere_8cc_source_l00077}{77}} of file \mbox{\hyperlink{oscillating__sphere_8cc_source}{oscillating\+\_\+sphere.\+cc}}.
+Definition at line 77 of file oscillating\+\_\+sphere.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{oscillating__sphere_8cc_source_l00147}{exact\+\_\+minus\+\_\+dudr()}}, and \mbox{\hyperlink{oscillating__sphere_8cc_source_l00086}{get\+\_\+exact\+\_\+u()}}.
+Referenced by exact\+\_\+minus\+\_\+dudr(), and get\+\_\+exact\+\_\+u().
 
 \mbox{\Hypertarget{namespaceProblemParameters_aef2e7cb819b8c5012a0f2db03892ee87}\label{namespaceProblemParameters_aef2e7cb819b8c5012a0f2db03892ee87}} 
 \index{ProblemParameters@{ProblemParameters}!Nel\_pml@{Nel\_pml}}
@@ -238,11 +238,11 @@ Default number of elements within PMLs.
 
 
 
-Definition at line \mbox{\hyperlink{oscillating__sphere_8cc_source_l00068}{68}} of file \mbox{\hyperlink{oscillating__sphere_8cc_source}{oscillating\+\_\+sphere.\+cc}}.
+Definition at line 68 of file oscillating\+\_\+sphere.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{oscillating__sphere_8cc_source_l01110}{PMLFourier\+Decomposed\+Helmholtz\+Problem$<$ ELEMENT $>$\+::create\+\_\+pml\+\_\+meshes()}}, and \mbox{\hyperlink{oscillating__sphere_8cc_source_l01184}{main()}}.
+Referenced by PMLFourier\+Decomposed\+Helmholtz\+Problem$<$ ELEMENT $>$\+::create\+\_\+pml\+\_\+meshes(), and main().
 
 \mbox{\Hypertarget{namespaceProblemParameters_ad56d4d5946cbe68de28413e4f8aa4d42}\label{namespaceProblemParameters_ad56d4d5946cbe68de28413e4f8aa4d42}} 
 \index{ProblemParameters@{ProblemParameters}!PML\_thickness@{PML\_thickness}}
@@ -256,11 +256,11 @@ Default physical PML thickness.
 
 
 
-Definition at line \mbox{\hyperlink{oscillating__sphere_8cc_source_l00065}{65}} of file \mbox{\hyperlink{oscillating__sphere_8cc_source}{oscillating\+\_\+sphere.\+cc}}.
+Definition at line 65 of file oscillating\+\_\+sphere.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{oscillating__sphere_8cc_source_l01110}{PMLFourier\+Decomposed\+Helmholtz\+Problem$<$ ELEMENT $>$\+::create\+\_\+pml\+\_\+meshes()}}, and \mbox{\hyperlink{oscillating__sphere_8cc_source_l01184}{main()}}.
+Referenced by PMLFourier\+Decomposed\+Helmholtz\+Problem$<$ ELEMENT $>$\+::create\+\_\+pml\+\_\+meshes(), and main().
 
 \mbox{\Hypertarget{namespaceProblemParameters_a42c148c7f3bed95827acf8d86c2c6089}\label{namespaceProblemParameters_a42c148c7f3bed95827acf8d86c2c6089}} 
 \index{ProblemParameters@{ProblemParameters}!R\_source@{R\_source}}
@@ -274,11 +274,11 @@ Radial position of point source.
 
 
 
-Definition at line \mbox{\hyperlink{oscillating__sphere_8cc_source_l00206}{206}} of file \mbox{\hyperlink{oscillating__sphere_8cc_source}{oscillating\+\_\+sphere.\+cc}}.
+Definition at line 206 of file oscillating\+\_\+sphere.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{oscillating__sphere_8cc_source_l00690}{PMLFourier\+Decomposed\+Helmholtz\+Problem$<$ ELEMENT $>$\+::setup\+\_\+point\+\_\+source()}}.
+Referenced by PMLFourier\+Decomposed\+Helmholtz\+Problem$<$ ELEMENT $>$\+::setup\+\_\+point\+\_\+source().
 
 \mbox{\Hypertarget{namespaceProblemParameters_a346993de7a274e1828af3f8fc8ca8b13}\label{namespaceProblemParameters_a346993de7a274e1828af3f8fc8ca8b13}} 
 \index{ProblemParameters@{ProblemParameters}!Z\_source@{Z\_source}}
@@ -292,9 +292,9 @@ Axial position of point source.
 
 
 
-Definition at line \mbox{\hyperlink{oscillating__sphere_8cc_source_l00209}{209}} of file \mbox{\hyperlink{oscillating__sphere_8cc_source}{oscillating\+\_\+sphere.\+cc}}.
+Definition at line 209 of file oscillating\+\_\+sphere.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{oscillating__sphere_8cc_source_l00690}{PMLFourier\+Decomposed\+Helmholtz\+Problem$<$ ELEMENT $>$\+::setup\+\_\+point\+\_\+source()}}.
+Referenced by PMLFourier\+Decomposed\+Helmholtz\+Problem$<$ ELEMENT $>$\+::setup\+\_\+point\+\_\+source().
 

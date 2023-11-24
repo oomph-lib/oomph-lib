@@ -50,9 +50,9 @@ We shall discuss the driver code ~\newline
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==============================start\_of\_mesh======================}}
-\DoxyCodeLine{\textcolor{comment}{/// Refineable equivalent of the SimpleRectangularQuadMesh.}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// Refinement is performed by the QuadTree-\/based procedures}}
-\DoxyCodeLine{\textcolor{comment}{/// implemented in the RefineableQuadMesh base class.}}
+\DoxyCodeLine{\textcolor{comment}{/// Refineable equivalent of the SimpleRectangularQuadMesh.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// Refinement is performed by the QuadTree-\/based procedures}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// implemented in the RefineableQuadMesh base class.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{SimpleRefineableRectangularQuadMesh}} : }
@@ -89,7 +89,7 @@ We shall discuss the driver code ~\newline
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Destructor: Empty}}
+\DoxyCodeLine{ \textcolor{comment}{/// Destructor: Empty}}
 \DoxyCodeLine{ \textcolor{keyword}{virtual} \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh_a8f258e0b5178ccb33f0596ae5a33c3c5}{\string~SimpleRefineableRectangularQuadMesh}}() \{\}}
 
 \end{DoxyCodeInclude}
@@ -107,7 +107,7 @@ The driver code is very similar to that in the \href{../../../poisson/two_d_pois
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===== start\_of\_main=====================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver code for 2D Poisson problem}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{two__d__poisson__adapt_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
@@ -169,9 +169,9 @@ The problem class definition is virtually identical to that in the \href{../../.
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//====== start\_of\_problem\_class=======================================}}
-\DoxyCodeLine{\textcolor{comment}{/// 2D Poisson problem on rectangular domain, discretised with}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// refineable 2D QPoisson elements. The specific type of element is}}
-\DoxyCodeLine{\textcolor{comment}{/// specified via the template parameter.}}
+\DoxyCodeLine{\textcolor{comment}{/// 2D Poisson problem on rectangular domain, discretised with}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// refineable 2D QPoisson elements. The specific type of element is}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// specified via the template parameter.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT> }
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classRefineablePoissonProblem}{RefineablePoissonProblem}} : \textcolor{keyword}{public} Problem}
@@ -200,7 +200,7 @@ The problem class definition is virtually identical to that in the \href{../../.
 \DoxyCodeLine{\textcolor{comment}{ /// Overloaded version of the Problem's access function to }}
 \DoxyCodeLine{\textcolor{comment}{ /// the mesh. Recasts the pointer to the base Mesh object to }}
 \DoxyCodeLine{\textcolor{comment}{ /// the actual mesh type.}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{SimpleRefineableRectangularQuadMesh<ELEMENT>}}* \mbox{\hyperlink{classRefineablePoissonProblem_a3cde3ea5577b065e081eb74ff870b5c3}{mesh\_pt}}() }
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{SimpleRefineableRectangularQuadMesh<ELEMENT>}}* \mbox{\hyperlink{classRefineablePoissonProblem_ad8148aada59e279cbd9eb34272b65fa5}{mesh\_pt}}() }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{keywordflow}{return} \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{SimpleRefineableRectangularQuadMesh<ELEMENT>}}*\textcolor{keyword}{>}(}
 \DoxyCodeLine{    Problem::mesh\_pt());}
@@ -225,7 +225,7 @@ The problem constructor is virtually identical to that in the \href{../../../poi
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====start\_of\_constructor===============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for Poisson problem: Pass pointer to source function.}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classRefineablePoissonProblem_a019ec586c38163e04e177de92503c02f}{RefineablePoissonProblem<ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classRefineablePoissonProblem_a019ec586c38163e04e177de92503c02f}{      RefineablePoissonProblem}}(PoissonEquations<2>::PoissonSourceFctPt }

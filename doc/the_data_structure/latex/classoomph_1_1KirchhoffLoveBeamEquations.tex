@@ -24,19 +24,19 @@ virtual void \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_aef8e5b3a
 \begin{DoxyCompactList}\small\item\em Get the load vector\+: Pass number of integration point (dummy), Lagr. and Eulerian coordinate and normal vector and return the load vector (not all of the input arguments will be required for all specific load functions but the list should cover all cases). This function is virtual so it can be overloaded for FSI. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_a967cb9c4cf03007464eed6edcb7bccf6}{wall\+\_\+profile}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&h\+\_\+ratio)
 \begin{DoxyCompactList}\small\item\em Get the wall profile\+: Pass Lagrangian \& Eulerian coordinate and return the wall profile (not all of the input arguments will be required for all specific thickness functions but the list should cover all cases). \end{DoxyCompactList}\item 
-const double \& \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_a3f9338b1c7962aac67c5ef87ab2fc349}{h}} () const
+const double \& \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_ad6fab6e7853b702cfe319b957b59c37f}{h}} () const
 \begin{DoxyCompactList}\small\item\em Return the non-\/dimensional wall thickness. \end{DoxyCompactList}\item 
-const double \& \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_a7fcddab89f5bf324fe7ed81826cb5d1e}{lambda\+\_\+sq}} () const
+const double \& \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_a8dc173db47158b04c2613b946756a74f}{lambda\+\_\+sq}} () const
 \begin{DoxyCompactList}\small\item\em Return the timescale ratio (non-\/dimensional density) \end{DoxyCompactList}\item 
-const double \& \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_ac05b7ecdcb7586852a81aa3470691a25}{sigma0}} () const
+const double \& \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_aa6d1fce06b7f030673fa5dce0f539a72}{sigma0}} () const
 \begin{DoxyCompactList}\small\item\em Return the axial prestress. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_ac59f65410b97ce15e6c9fef418bea875}{sigma0\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_a69d957808b74157eb54ff6e2175df61b}{sigma0\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return a pointer to axial prestress. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_a3fee290b2f80c0dc9c37acfbf964efb2}{h\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_aa0464db51a575e1e1c00872f34e53a7c}{h\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return a pointer to non-\/dim. wall thickness. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_afa654b16c0ba85dbc238ac0e3d033875}{lambda\+\_\+sq\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_ad366bb2f4c7a4cac901c71337a2fa91f}{lambda\+\_\+sq\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return a pointer to timescale ratio (nondim density) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$\& \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_af23da70c9fbc58a9fb3ef82fe2f2d5d3}{undeformed\+\_\+beam\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$\& \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_ade277069089bd27531bf47caea1cb827}{undeformed\+\_\+beam\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return a Pointer to geometric object that specifies the beam\textquotesingle{}s undeformed geometry. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_a963a2ffb3c4008e3b9c175fc1d2d94cc}{get\+\_\+normal}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&N)
 \begin{DoxyCompactList}\small\item\em Get normal vector on wall. \end{DoxyCompactList}\item 
@@ -57,9 +57,9 @@ void \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_ae003c588ad4e3145
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-void($\ast$\&)(const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&load) \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_aeadc92070cc54a3a9212964f460dc738}{load\+\_\+vector\+\_\+fct\+\_\+pt}} ()
+void($\ast$\&)(const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&load) \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_a249f1139559ba8e64856f389a9161bb7}{load\+\_\+vector\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Reference to the load vector function pointer. \end{DoxyCompactList}\item 
-void($\ast$\&)(const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&h\+\_\+ratio) \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_a5a86c67f2df4594fa79bbcd1951221dc}{wall\+\_\+profile\+\_\+fct\+\_\+pt}} ()
+void($\ast$\&)(const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&h\+\_\+ratio) \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations_a7e65a0419b827758d9bc53494691c186}{wall\+\_\+profile\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Reference to the wall thickness ratio profile function pointer. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -124,9 +124,9 @@ Need to specify\+:
 \item the undeformed wall shape (as a \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}).
 \end{DoxyItemize}
 
-The governing equations can be switched from the principle of virtual displacements to a system of equations that forces the beam to deform into a shape specified by a \mbox{\hyperlink{classoomph_1_1SolidInitialCondition}{Solid\+Initial\+Condition}} object. If {\ttfamily \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a79833711d561c711297e69e0bc1e0abd}{Solid\+Finite\+Element\+::solid\+\_\+ic\+\_\+pt()}}!=0} we solve the the equations \[ \int_0^{L} \left( \frac{\partial^i {\bf R}_{IC}}{\partial t^i} - {\bf R}_w \right) \psi_{jk} \ d\xi = 0, \] where $ \partial^i {\bf R}_{IC}/\partial t^i$ is implemented by the \mbox{\hyperlink{classoomph_1_1SolidInitialCondition}{Solid\+Initial\+Condition}} object, pointed to by {\ttfamily Solid\+Finite\+Element\+::shell\+\_\+ic\+\_\+pt()}. 
+The governing equations can be switched from the principle of virtual displacements to a system of equations that forces the beam to deform into a shape specified by a \mbox{\hyperlink{classoomph_1_1SolidInitialCondition}{Solid\+Initial\+Condition}} object. If {\ttfamily \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_abb6ff13ecd9068e25dba4b8a63ffe5b0}{Solid\+Finite\+Element\+::solid\+\_\+ic\+\_\+pt()}}!=0} we solve the the equations \[ \int_0^{L} \left( \frac{\partial^i {\bf R}_{IC}}{\partial t^i} - {\bf R}_w \right) \psi_{jk} \ d\xi = 0, \] where $ \partial^i {\bf R}_{IC}/\partial t^i$ is implemented by the \mbox{\hyperlink{classoomph_1_1SolidInitialCondition}{Solid\+Initial\+Condition}} object, pointed to by {\ttfamily Solid\+Finite\+Element\+::shell\+\_\+ic\+\_\+pt()}. 
 
-Definition at line \mbox{\hyperlink{beam__elements_8h_source_l00093}{93}} of file \mbox{\hyperlink{beam__elements_8h_source}{beam\+\_\+elements.\+h}}.
+Definition at line 93 of file beam\+\_\+elements.\+h.
 
 
 
@@ -143,11 +143,11 @@ Constructor. Set default values for all physical parameters and zero traction.
 
 
 
-Definition at line \mbox{\hyperlink{beam__elements_8h_source_l00154}{154}} of file \mbox{\hyperlink{beam__elements_8h_source}{beam\+\_\+elements.\+h}}.
+Definition at line 154 of file beam\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{beam__elements_8h_source_l00104}{Default\+\_\+h\+\_\+value}}, \mbox{\hyperlink{beam__elements_8h_source_l00100}{Default\+\_\+lambda\+\_\+sq\+\_\+value}}, \mbox{\hyperlink{beam__elements_8h_source_l00097}{Default\+\_\+sigma0\+\_\+value}}, \mbox{\hyperlink{beam__elements_8h_source_l00111}{H\+\_\+pt}}, \mbox{\hyperlink{beam__elements_8h_source_l00114}{Lambda\+\_\+sq\+\_\+pt}}, \mbox{\hyperlink{beam__elements_8h_source_l00128}{Load\+\_\+vector\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{beam__elements_8h_source_l00107}{Sigma0\+\_\+pt}}, \mbox{\hyperlink{beam__elements_8cc_source_l00066}{Unit\+\_\+profile\+\_\+fct()}}, \mbox{\hyperlink{beam__elements_8h_source_l00143}{Wall\+\_\+profile\+\_\+fct\+\_\+pt}}, and \mbox{\hyperlink{beam__elements_8cc_source_l00051}{Zero\+\_\+traction\+\_\+fct()}}.
+References Default\+\_\+h\+\_\+value, Default\+\_\+lambda\+\_\+sq\+\_\+value, Default\+\_\+sigma0\+\_\+value, H\+\_\+pt, Lambda\+\_\+sq\+\_\+pt, Load\+\_\+vector\+\_\+fct\+\_\+pt, Sigma0\+\_\+pt, Unit\+\_\+profile\+\_\+fct(), Wall\+\_\+profile\+\_\+fct\+\_\+pt, and Zero\+\_\+traction\+\_\+fct().
 
 
 
@@ -172,15 +172,15 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1FSIHermiteBeamElement_ab81052ae3
 
 
 
-Definition at line \mbox{\hyperlink{beam__elements_8cc_source_l00534}{534}} of file \mbox{\hyperlink{beam__elements_8cc_source}{beam\+\_\+elements.\+cc}}.
+Definition at line 534 of file beam\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{beam__elements_8cc_source_l00275}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+beam()}}, \mbox{\hyperlink{elements_8cc_source_l07227}{oomph\+::\+Solid\+Finite\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+for\+\_\+newmark\+\_\+accel()}}, \mbox{\hyperlink{elements_8cc_source_l01199}{oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+by\+\_\+fd()}}, \mbox{\hyperlink{elements_8cc_source_l06985}{oomph\+::\+Solid\+Finite\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+solid\+\_\+position\+\_\+by\+\_\+fd()}}, \mbox{\hyperlink{elements_8h_source_l00980}{oomph\+::\+Generalised\+Element\+::get\+\_\+residuals()}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, and \mbox{\hyperlink{elements_8h_source_l04302}{oomph\+::\+Solid\+Finite\+Element\+::\+Solve\+\_\+for\+\_\+consistent\+\_\+newmark\+\_\+accel\+\_\+flag}}.
+References fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+beam(), oomph\+::\+Solid\+Finite\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+for\+\_\+newmark\+\_\+accel(), oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+by\+\_\+fd(), oomph\+::\+Solid\+Finite\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+solid\+\_\+position\+\_\+by\+\_\+fd(), oomph\+::\+Generalised\+Element\+::get\+\_\+residuals(), oomph\+::\+Generalised\+Element\+::ndof(), and oomph\+::\+Solid\+Finite\+Element\+::\+Solve\+\_\+for\+\_\+consistent\+\_\+newmark\+\_\+accel\+\_\+flag.
 
 
 
-Referenced by \mbox{\hyperlink{beam__elements_8h_source_l00437}{oomph\+::\+FSIHermite\+Beam\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}.
+Referenced by oomph\+::\+FSIHermite\+Beam\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian().
 
 \mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_a1b1d654d07a38349b99380cabac33808}\label{classoomph_1_1KirchhoffLoveBeamEquations_a1b1d654d07a38349b99380cabac33808}} 
 \index{oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
@@ -198,11 +198,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line \mbox{\hyperlink{beam__elements_8h_source_l00281}{281}} of file \mbox{\hyperlink{beam__elements_8h_source}{beam\+\_\+elements.\+h}}.
+Definition at line 281 of file beam\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{beam__elements_8cc_source_l00275}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+beam()}}.
+References fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+beam().
 
 \mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_a50800b61dd7036d13a9213388b7957c9}\label{classoomph_1_1KirchhoffLoveBeamEquations_a50800b61dd7036d13a9213388b7957c9}} 
 \index{oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}!fill\_in\_contribution\_to\_residuals\_beam@{fill\_in\_contribution\_to\_residuals\_beam}}
@@ -216,15 +216,15 @@ Return the residuals for the equations of Kirchhoff-\/\+Love beam theory with li
 
 
 
-Definition at line \mbox{\hyperlink{beam__elements_8cc_source_l00275}{275}} of file \mbox{\hyperlink{beam__elements_8cc_source}{beam\+\_\+elements.\+cc}}.
+Definition at line 275 of file beam\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{octree_8h_source_l00073}{oomph\+::\+Oc\+Tree\+Names\+::B}}, \mbox{\hyperlink{geom__objects_8h_source_l00341}{oomph\+::\+Geom\+Object\+::d2position()}}, \mbox{\hyperlink{elements_8cc_source_l06832}{oomph\+::\+Solid\+Finite\+Element\+::d2shape\+\_\+lagrangian\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{elements_8h_source_l04018}{oomph\+::\+Solid\+Finite\+Element\+::fill\+\_\+in\+\_\+residuals\+\_\+for\+\_\+solid\+\_\+ic()}}, \mbox{\hyperlink{beam__elements_8h_source_l00215}{h()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8cc_source_l07104}{oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi()}}, \mbox{\hyperlink{beam__elements_8h_source_l00221}{lambda\+\_\+sq()}}, \mbox{\hyperlink{beam__elements_8h_source_l00183}{load\+\_\+vector()}}, \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, \mbox{\hyperlink{geom__objects_8h_source_l00177}{oomph\+::\+Geom\+Object\+::ndim()}}, \mbox{\hyperlink{geom__objects_8h_source_l00171}{oomph\+::\+Geom\+Object\+::nlagrangian()}}, \mbox{\hyperlink{elements_8h_source_l02463}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{elements_8h_source_l04137}{oomph\+::\+Solid\+Finite\+Element\+::position\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{binary__tree_8h_source_l00051}{oomph\+::\+Binary\+Tree\+Names\+::R}}, \mbox{\hyperlink{elements_8h_source_l02294}{oomph\+::\+Finite\+Element\+::raw\+\_\+dnodal\+\_\+position\+\_\+gen\+\_\+dt()}}, \mbox{\hyperlink{elements_8h_source_l03897}{oomph\+::\+Solid\+Finite\+Element\+::raw\+\_\+lagrangian\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{elements_8h_source_l02272}{oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{beam__elements_8h_source_l00227}{sigma0()}}, \mbox{\hyperlink{elements_8h_source_l04131}{oomph\+::\+Solid\+Finite\+Element\+::\+Solid\+\_\+ic\+\_\+pt}}, \mbox{\hyperlink{beam__elements_8h_source_l00149}{Undeformed\+\_\+beam\+\_\+pt}}, \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}, \mbox{\hyperlink{beam__elements_8h_source_l00205}{wall\+\_\+profile()}}, and \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral\+::weight()}}.
+References oomph\+::\+Oc\+Tree\+Names\+::B, oomph\+::\+Geom\+Object\+::d2position(), oomph\+::\+Solid\+Finite\+Element\+::d2shape\+\_\+lagrangian\+\_\+at\+\_\+knot(), oomph\+::\+Solid\+Finite\+Element\+::fill\+\_\+in\+\_\+residuals\+\_\+for\+\_\+solid\+\_\+ic(), h(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi(), lambda\+\_\+sq(), load\+\_\+vector(), oomph\+::\+Quad\+Tree\+Names\+::N, oomph\+::\+Geom\+Object\+::ndim(), oomph\+::\+Geom\+Object\+::nlagrangian(), oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Integral\+::nweight(), oomph\+::\+Solid\+Finite\+Element\+::position\+\_\+local\+\_\+eqn(), oomph\+::\+Binary\+Tree\+Names\+::R, oomph\+::\+Finite\+Element\+::raw\+\_\+dnodal\+\_\+position\+\_\+gen\+\_\+dt(), oomph\+::\+Solid\+Finite\+Element\+::raw\+\_\+lagrangian\+\_\+position\+\_\+gen(), oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+position\+\_\+gen(), sigma0(), oomph\+::\+Solid\+Finite\+Element\+::\+Solid\+\_\+ic\+\_\+pt, Undeformed\+\_\+beam\+\_\+pt, oomph\+::\+Quad\+Tree\+Names\+::W, wall\+\_\+profile(), and oomph\+::\+Integral\+::weight().
 
 
 
-Referenced by \mbox{\hyperlink{beam__elements_8cc_source_l00534}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, and \mbox{\hyperlink{beam__elements_8h_source_l00281}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
+Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
 
 \mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_ac593b9b056f6e89ba4f82ad2d303bdf6}\label{classoomph_1_1KirchhoffLoveBeamEquations_ac593b9b056f6e89ba4f82ad2d303bdf6}} 
 \index{oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}!get\_energy@{get\_energy}}
@@ -238,15 +238,7 @@ Get potential (strain) and kinetic energy of the element.
 
 Compute the potential (strain) and kinetic energy of the element (wrapper function). 
 
-Definition at line \mbox{\hyperlink{beam__elements_8cc_source_l00568}{568}} of file \mbox{\hyperlink{beam__elements_8cc_source}{beam\+\_\+elements.\+cc}}.
-
-
-
-References \mbox{\hyperlink{beam__elements_8cc_source_l00568}{get\+\_\+energy()}}.
-
-
-
-Referenced by \mbox{\hyperlink{beam__elements_8cc_source_l00568}{get\+\_\+energy()}}.
+Definition at line 568 of file beam\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_ae003c588ad4e314538fcd04c9289a702}\label{classoomph_1_1KirchhoffLoveBeamEquations_ae003c588ad4e314538fcd04c9289a702}} 
 \index{oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}!get\_energy@{get\_energy}}
@@ -260,11 +252,11 @@ Get the potential energy due to stretching and bending and the kinetic energy of
 
 Compute the potential (strain) and kinetic energy of the element, breaking down the potential energy into stretching and bending components. 
 
-Definition at line \mbox{\hyperlink{beam__elements_8cc_source_l00588}{588}} of file \mbox{\hyperlink{beam__elements_8cc_source}{beam\+\_\+elements.\+cc}}.
+Definition at line 588 of file beam\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{octree_8h_source_l00073}{oomph\+::\+Oc\+Tree\+Names\+::B}}, \mbox{\hyperlink{geom__objects_8h_source_l00341}{oomph\+::\+Geom\+Object\+::d2position()}}, \mbox{\hyperlink{elements_8cc_source_l06832}{oomph\+::\+Solid\+Finite\+Element\+::d2shape\+\_\+lagrangian\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{beam__elements_8h_source_l00215}{h()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8cc_source_l07104}{oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi()}}, \mbox{\hyperlink{beam__elements_8h_source_l00221}{lambda\+\_\+sq()}}, \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, \mbox{\hyperlink{geom__objects_8h_source_l00177}{oomph\+::\+Geom\+Object\+::ndim()}}, \mbox{\hyperlink{geom__objects_8h_source_l00171}{oomph\+::\+Geom\+Object\+::nlagrangian()}}, \mbox{\hyperlink{elements_8h_source_l02463}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{binary__tree_8h_source_l00051}{oomph\+::\+Binary\+Tree\+Names\+::R}}, \mbox{\hyperlink{elements_8h_source_l02294}{oomph\+::\+Finite\+Element\+::raw\+\_\+dnodal\+\_\+position\+\_\+gen\+\_\+dt()}}, \mbox{\hyperlink{elements_8h_source_l03897}{oomph\+::\+Solid\+Finite\+Element\+::raw\+\_\+lagrangian\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{elements_8h_source_l02272}{oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{beam__elements_8h_source_l00227}{sigma0()}}, \mbox{\hyperlink{beam__elements_8h_source_l00149}{Undeformed\+\_\+beam\+\_\+pt}}, \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}, \mbox{\hyperlink{beam__elements_8h_source_l00205}{wall\+\_\+profile()}}, and \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral\+::weight()}}.
+References oomph\+::\+Oc\+Tree\+Names\+::B, oomph\+::\+Geom\+Object\+::d2position(), oomph\+::\+Solid\+Finite\+Element\+::d2shape\+\_\+lagrangian\+\_\+at\+\_\+knot(), h(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi(), lambda\+\_\+sq(), oomph\+::\+Quad\+Tree\+Names\+::N, oomph\+::\+Geom\+Object\+::ndim(), oomph\+::\+Geom\+Object\+::nlagrangian(), oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Integral\+::nweight(), oomph\+::\+Binary\+Tree\+Names\+::R, oomph\+::\+Finite\+Element\+::raw\+\_\+dnodal\+\_\+position\+\_\+gen\+\_\+dt(), oomph\+::\+Solid\+Finite\+Element\+::raw\+\_\+lagrangian\+\_\+position\+\_\+gen(), oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+position\+\_\+gen(), sigma0(), Undeformed\+\_\+beam\+\_\+pt, oomph\+::\+Quad\+Tree\+Names\+::W, wall\+\_\+profile(), and oomph\+::\+Integral\+::weight().
 
 \mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_a73584a8199a342faf924def94245bdfd}\label{classoomph_1_1KirchhoffLoveBeamEquations_a73584a8199a342faf924def94245bdfd}} 
 \index{oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}!get\_non\_unit\_tangent@{get\_non\_unit\_tangent}}
@@ -278,15 +270,15 @@ Get position vector to and non-\/unit tangent vector on wall\+: dr/ds.
 
 
 
-Definition at line \mbox{\hyperlink{beam__elements_8cc_source_l00184}{184}} of file \mbox{\hyperlink{beam__elements_8cc_source}{beam\+\_\+elements.\+cc}}.
+Definition at line 184 of file beam\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01981}{oomph\+::\+Finite\+Element\+::dshape\+\_\+local()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{geom__objects_8h_source_l00177}{oomph\+::\+Geom\+Object\+::ndim()}}, \mbox{\hyperlink{geom__objects_8h_source_l00171}{oomph\+::\+Geom\+Object\+::nlagrangian()}}, \mbox{\hyperlink{elements_8h_source_l02463}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02272}{oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{beam__elements_8h_source_l00149}{Undeformed\+\_\+beam\+\_\+pt}}.
+References oomph\+::\+Finite\+Element\+::dshape\+\_\+local(), i, oomph\+::\+Geom\+Object\+::ndim(), oomph\+::\+Geom\+Object\+::nlagrangian(), oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+position\+\_\+gen(), s, and Undeformed\+\_\+beam\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{beam__elements_8cc_source_l01357}{oomph\+::\+Clamped\+Sliding\+Hermite\+Beam\+Boundary\+Condition\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
+Referenced by oomph\+::\+Clamped\+Sliding\+Hermite\+Beam\+Boundary\+Condition\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
 
 \mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_a963a2ffb3c4008e3b9c175fc1d2d94cc}\label{classoomph_1_1KirchhoffLoveBeamEquations_a963a2ffb3c4008e3b9c175fc1d2d94cc}} 
 \index{oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}!get\_normal@{get\_normal}}
@@ -300,15 +292,15 @@ Get normal vector on wall.
 
 
 
-Definition at line \mbox{\hyperlink{beam__elements_8h_source_l00259}{259}} of file \mbox{\hyperlink{beam__elements_8h_source}{beam\+\_\+elements.\+h}}.
+Definition at line 259 of file beam\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{beam__elements_8h_source_l00259}{get\+\_\+normal()}}, \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References oomph\+::\+Quad\+Tree\+Names\+::N, and s.
 
 
 
-Referenced by \mbox{\hyperlink{beam__elements_8cc_source_l01357}{oomph\+::\+Clamped\+Sliding\+Hermite\+Beam\+Boundary\+Condition\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}, and \mbox{\hyperlink{beam__elements_8h_source_l00259}{get\+\_\+normal()}}.
+Referenced by oomph\+::\+Clamped\+Sliding\+Hermite\+Beam\+Boundary\+Condition\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
 
 \mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_a22ac8fb781bc845fa0dc3a77e1127d08}\label{classoomph_1_1KirchhoffLoveBeamEquations_a22ac8fb781bc845fa0dc3a77e1127d08}} 
 \index{oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}!get\_normal@{get\_normal}}
@@ -322,17 +314,17 @@ Get position vector to and normal vector on wall.
 
 
 
-Definition at line \mbox{\hyperlink{beam__elements_8cc_source_l00077}{77}} of file \mbox{\hyperlink{beam__elements_8cc_source}{beam\+\_\+elements.\+cc}}.
+Definition at line 77 of file beam\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l06710}{oomph\+::\+Solid\+Finite\+Element\+::dshape\+\_\+lagrangian()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, \mbox{\hyperlink{geom__objects_8h_source_l00177}{oomph\+::\+Geom\+Object\+::ndim()}}, \mbox{\hyperlink{geom__objects_8h_source_l00171}{oomph\+::\+Geom\+Object\+::nlagrangian()}}, \mbox{\hyperlink{elements_8h_source_l02463}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02272}{oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{beam__elements_8h_source_l00149}{Undeformed\+\_\+beam\+\_\+pt}}.
+References oomph\+::\+Solid\+Finite\+Element\+::dshape\+\_\+lagrangian(), i, oomph\+::\+Quad\+Tree\+Names\+::N, oomph\+::\+Geom\+Object\+::ndim(), oomph\+::\+Geom\+Object\+::nlagrangian(), oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+position\+\_\+gen(), s, and Undeformed\+\_\+beam\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_a3f9338b1c7962aac67c5ef87ab2fc349}\label{classoomph_1_1KirchhoffLoveBeamEquations_a3f9338b1c7962aac67c5ef87ab2fc349}} 
+\mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_ad6fab6e7853b702cfe319b957b59c37f}\label{classoomph_1_1KirchhoffLoveBeamEquations_ad6fab6e7853b702cfe319b957b59c37f}} 
 \index{oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}!h@{h}}
 \index{h@{h}!oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}}
 \doxysubsubsection{\texorpdfstring{h()}{h()}}
-{\footnotesize\ttfamily const double \& oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::h (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const double\& oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::h (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -340,21 +332,21 @@ Return the non-\/dimensional wall thickness.
 
 
 
-Definition at line \mbox{\hyperlink{beam__elements_8h_source_l00215}{215}} of file \mbox{\hyperlink{beam__elements_8h_source}{beam\+\_\+elements.\+h}}.
+Definition at line 215 of file beam\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{beam__elements_8h_source_l00111}{H\+\_\+pt}}.
+References H\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{beam__elements_8cc_source_l00275}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+beam()}}, and \mbox{\hyperlink{beam__elements_8cc_source_l00588}{get\+\_\+energy()}}.
+Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+beam(), and get\+\_\+energy().
 
-\mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_a3fee290b2f80c0dc9c37acfbf964efb2}\label{classoomph_1_1KirchhoffLoveBeamEquations_a3fee290b2f80c0dc9c37acfbf964efb2}} 
+\mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_aa0464db51a575e1e1c00872f34e53a7c}\label{classoomph_1_1KirchhoffLoveBeamEquations_aa0464db51a575e1e1c00872f34e53a7c}} 
 \index{oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}!h\_pt@{h\_pt}}
 \index{h\_pt@{h\_pt}!oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}}
 \doxysubsubsection{\texorpdfstring{h\_pt()}{h\_pt()}}
-{\footnotesize\ttfamily double $\ast$\& oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::h\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double$\ast$\& oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::h\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -362,17 +354,17 @@ Return a pointer to non-\/dim. wall thickness.
 
 
 
-Definition at line \mbox{\hyperlink{beam__elements_8h_source_l00240}{240}} of file \mbox{\hyperlink{beam__elements_8h_source}{beam\+\_\+elements.\+h}}.
+Definition at line 240 of file beam\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{beam__elements_8h_source_l00111}{H\+\_\+pt}}.
+References H\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_a7fcddab89f5bf324fe7ed81826cb5d1e}\label{classoomph_1_1KirchhoffLoveBeamEquations_a7fcddab89f5bf324fe7ed81826cb5d1e}} 
+\mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_a8dc173db47158b04c2613b946756a74f}\label{classoomph_1_1KirchhoffLoveBeamEquations_a8dc173db47158b04c2613b946756a74f}} 
 \index{oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}!lambda\_sq@{lambda\_sq}}
 \index{lambda\_sq@{lambda\_sq}!oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}}
 \doxysubsubsection{\texorpdfstring{lambda\_sq()}{lambda\_sq()}}
-{\footnotesize\ttfamily const double \& oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::lambda\+\_\+sq (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const double\& oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::lambda\+\_\+sq (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -380,21 +372,21 @@ Return the timescale ratio (non-\/dimensional density)
 
 
 
-Definition at line \mbox{\hyperlink{beam__elements_8h_source_l00221}{221}} of file \mbox{\hyperlink{beam__elements_8h_source}{beam\+\_\+elements.\+h}}.
+Definition at line 221 of file beam\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{beam__elements_8h_source_l00114}{Lambda\+\_\+sq\+\_\+pt}}.
+References Lambda\+\_\+sq\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{beam__elements_8cc_source_l00275}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+beam()}}, and \mbox{\hyperlink{beam__elements_8cc_source_l00588}{get\+\_\+energy()}}.
+Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+beam(), and get\+\_\+energy().
 
-\mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_afa654b16c0ba85dbc238ac0e3d033875}\label{classoomph_1_1KirchhoffLoveBeamEquations_afa654b16c0ba85dbc238ac0e3d033875}} 
+\mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_ad366bb2f4c7a4cac901c71337a2fa91f}\label{classoomph_1_1KirchhoffLoveBeamEquations_ad366bb2f4c7a4cac901c71337a2fa91f}} 
 \index{oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}!lambda\_sq\_pt@{lambda\_sq\_pt}}
 \index{lambda\_sq\_pt@{lambda\_sq\_pt}!oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}}
 \doxysubsubsection{\texorpdfstring{lambda\_sq\_pt()}{lambda\_sq\_pt()}}
-{\footnotesize\ttfamily double $\ast$\& oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::lambda\+\_\+sq\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double$\ast$\& oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::lambda\+\_\+sq\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -402,11 +394,11 @@ Return a pointer to timescale ratio (nondim density)
 
 
 
-Definition at line \mbox{\hyperlink{beam__elements_8h_source_l00246}{246}} of file \mbox{\hyperlink{beam__elements_8h_source}{beam\+\_\+elements.\+h}}.
+Definition at line 246 of file beam\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{beam__elements_8h_source_l00114}{Lambda\+\_\+sq\+\_\+pt}}.
+References Lambda\+\_\+sq\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_aef8e5b3abb7669c7292103d7061f10c6}\label{classoomph_1_1KirchhoffLoveBeamEquations_aef8e5b3abb7669c7292103d7061f10c6}} 
 \index{oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}!load\_vector@{load\_vector}}
@@ -424,21 +416,21 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1FSIHermiteBeamElement_aee4b8fcde
 
 
 
-Definition at line \mbox{\hyperlink{beam__elements_8h_source_l00183}{183}} of file \mbox{\hyperlink{beam__elements_8h_source}{beam\+\_\+elements.\+h}}.
+Definition at line 183 of file beam\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{beam__elements_8h_source_l00128}{Load\+\_\+vector\+\_\+fct\+\_\+pt}}, and \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}.
+References Load\+\_\+vector\+\_\+fct\+\_\+pt, and oomph\+::\+Quad\+Tree\+Names\+::N.
 
 
 
-Referenced by \mbox{\hyperlink{beam__elements_8cc_source_l00275}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+beam()}}.
+Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+beam().
 
-\mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_ac05b7ecdcb7586852a81aa3470691a25}\label{classoomph_1_1KirchhoffLoveBeamEquations_ac05b7ecdcb7586852a81aa3470691a25}} 
+\mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_aa6d1fce06b7f030673fa5dce0f539a72}\label{classoomph_1_1KirchhoffLoveBeamEquations_aa6d1fce06b7f030673fa5dce0f539a72}} 
 \index{oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}!sigma0@{sigma0}}
 \index{sigma0@{sigma0}!oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}}
 \doxysubsubsection{\texorpdfstring{sigma0()}{sigma0()}}
-{\footnotesize\ttfamily const double \& oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::sigma0 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const double\& oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::sigma0 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -446,21 +438,21 @@ Return the axial prestress.
 
 
 
-Definition at line \mbox{\hyperlink{beam__elements_8h_source_l00227}{227}} of file \mbox{\hyperlink{beam__elements_8h_source}{beam\+\_\+elements.\+h}}.
+Definition at line 227 of file beam\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{beam__elements_8h_source_l00107}{Sigma0\+\_\+pt}}.
+References Sigma0\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{beam__elements_8cc_source_l00275}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+beam()}}, and \mbox{\hyperlink{beam__elements_8cc_source_l00588}{get\+\_\+energy()}}.
+Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+beam(), and get\+\_\+energy().
 
-\mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_ac59f65410b97ce15e6c9fef418bea875}\label{classoomph_1_1KirchhoffLoveBeamEquations_ac59f65410b97ce15e6c9fef418bea875}} 
+\mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_a69d957808b74157eb54ff6e2175df61b}\label{classoomph_1_1KirchhoffLoveBeamEquations_a69d957808b74157eb54ff6e2175df61b}} 
 \index{oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}!sigma0\_pt@{sigma0\_pt}}
 \index{sigma0\_pt@{sigma0\_pt}!oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}}
 \doxysubsubsection{\texorpdfstring{sigma0\_pt()}{sigma0\_pt()}}
-{\footnotesize\ttfamily double $\ast$\& oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::sigma0\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double$\ast$\& oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::sigma0\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -468,17 +460,17 @@ Return a pointer to axial prestress.
 
 
 
-Definition at line \mbox{\hyperlink{beam__elements_8h_source_l00233}{233}} of file \mbox{\hyperlink{beam__elements_8h_source}{beam\+\_\+elements.\+h}}.
+Definition at line 233 of file beam\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{beam__elements_8h_source_l00107}{Sigma0\+\_\+pt}}.
+References Sigma0\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_af23da70c9fbc58a9fb3ef82fe2f2d5d3}\label{classoomph_1_1KirchhoffLoveBeamEquations_af23da70c9fbc58a9fb3ef82fe2f2d5d3}} 
+\mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_ade277069089bd27531bf47caea1cb827}\label{classoomph_1_1KirchhoffLoveBeamEquations_ade277069089bd27531bf47caea1cb827}} 
 \index{oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}!undeformed\_beam\_pt@{undeformed\_beam\_pt}}
 \index{undeformed\_beam\_pt@{undeformed\_beam\_pt}!oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}}
 \doxysubsubsection{\texorpdfstring{undeformed\_beam\_pt()}{undeformed\_beam\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$\& oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::undeformed\+\_\+beam\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}$\ast$\& oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::undeformed\+\_\+beam\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -486,11 +478,11 @@ Return a Pointer to geometric object that specifies the beam\textquotesingle{}s 
 
 
 
-Definition at line \mbox{\hyperlink{beam__elements_8h_source_l00253}{253}} of file \mbox{\hyperlink{beam__elements_8h_source}{beam\+\_\+elements.\+h}}.
+Definition at line 253 of file beam\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{beam__elements_8h_source_l00149}{Undeformed\+\_\+beam\+\_\+pt}}.
+References Undeformed\+\_\+beam\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_a4bb49aa9866268baf6e6da7385442399}\label{classoomph_1_1KirchhoffLoveBeamEquations_a4bb49aa9866268baf6e6da7385442399}} 
 \index{oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}!Unit\_profile\_fct@{Unit\_profile\_fct}}
@@ -504,11 +496,11 @@ Default profile function (constant thickness \textquotesingle{}h\+\_\+0\textquot
 
 Default wall profile function (constant thickness h\+\_\+0) 
 
-Definition at line \mbox{\hyperlink{beam__elements_8cc_source_l00066}{66}} of file \mbox{\hyperlink{beam__elements_8cc_source}{beam\+\_\+elements.\+cc}}.
+Definition at line 66 of file beam\+\_\+elements.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{beam__elements_8h_source_l00154}{Kirchhoff\+Love\+Beam\+Equations()}}.
+Referenced by Kirchhoff\+Love\+Beam\+Equations().
 
 \mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_a967cb9c4cf03007464eed6edcb7bccf6}\label{classoomph_1_1KirchhoffLoveBeamEquations_a967cb9c4cf03007464eed6edcb7bccf6}} 
 \index{oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}!wall\_profile@{wall\_profile}}
@@ -522,15 +514,15 @@ Get the wall profile\+: Pass Lagrangian \& Eulerian coordinate and return the wa
 
 
 
-Definition at line \mbox{\hyperlink{beam__elements_8h_source_l00205}{205}} of file \mbox{\hyperlink{beam__elements_8h_source}{beam\+\_\+elements.\+h}}.
+Definition at line 205 of file beam\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{beam__elements_8h_source_l00143}{Wall\+\_\+profile\+\_\+fct\+\_\+pt}}.
+References Wall\+\_\+profile\+\_\+fct\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{beam__elements_8cc_source_l00275}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+beam()}}, and \mbox{\hyperlink{beam__elements_8cc_source_l00588}{get\+\_\+energy()}}.
+Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+beam(), and get\+\_\+energy().
 
 \mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_a283a6440586152fe987189d1fcef5a62}\label{classoomph_1_1KirchhoffLoveBeamEquations_a283a6440586152fe987189d1fcef5a62}} 
 \index{oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}!Zero\_traction\_fct@{Zero\_traction\_fct}}
@@ -544,15 +536,15 @@ Default load function (zero traction)
 
 
 
-Definition at line \mbox{\hyperlink{beam__elements_8cc_source_l00051}{51}} of file \mbox{\hyperlink{beam__elements_8cc_source}{beam\+\_\+elements.\+cc}}.
+Definition at line 51 of file beam\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References i.
 
 
 
-Referenced by \mbox{\hyperlink{beam__elements_8h_source_l00154}{Kirchhoff\+Love\+Beam\+Equations()}}.
+Referenced by Kirchhoff\+Love\+Beam\+Equations().
 
 
 
@@ -569,11 +561,11 @@ Static default value for non-\/dim wall thickness.
 
 Static default value for non-\/dim wall thickness (1/20) 
 
-Definition at line \mbox{\hyperlink{beam__elements_8h_source_l00104}{104}} of file \mbox{\hyperlink{beam__elements_8h_source}{beam\+\_\+elements.\+h}}.
+Definition at line 104 of file beam\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{beam__elements_8h_source_l00154}{Kirchhoff\+Love\+Beam\+Equations()}}.
+Referenced by Kirchhoff\+Love\+Beam\+Equations().
 
 \mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_a965ef43850af9f156cc46d35d536edc1}\label{classoomph_1_1KirchhoffLoveBeamEquations_a965ef43850af9f156cc46d35d536edc1}} 
 \index{oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}!Default\_lambda\_sq\_value@{Default\_lambda\_sq\_value}}
@@ -587,11 +579,11 @@ Static default value for timescale ratio (1.\+0 -- for natural scaling)
 
 Static default value for timescale ratio (1.\+0 for natural scaling) 
 
-Definition at line \mbox{\hyperlink{beam__elements_8h_source_l00100}{100}} of file \mbox{\hyperlink{beam__elements_8h_source}{beam\+\_\+elements.\+h}}.
+Definition at line 100 of file beam\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{beam__elements_8h_source_l00154}{Kirchhoff\+Love\+Beam\+Equations()}}.
+Referenced by Kirchhoff\+Love\+Beam\+Equations().
 
 \mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_a22ce2707713186c808aedc32bd12be3c}\label{classoomph_1_1KirchhoffLoveBeamEquations_a22ce2707713186c808aedc32bd12be3c}} 
 \index{oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}!Default\_sigma0\_value@{Default\_sigma0\_value}}
@@ -605,11 +597,11 @@ Static default value for 2nd Piola Kirchhoff prestress.
 
 Static default value for 2nd Piola Kirchhoff prestress (zero) 
 
-Definition at line \mbox{\hyperlink{beam__elements_8h_source_l00097}{97}} of file \mbox{\hyperlink{beam__elements_8h_source}{beam\+\_\+elements.\+h}}.
+Definition at line 97 of file beam\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{beam__elements_8h_source_l00154}{Kirchhoff\+Love\+Beam\+Equations()}}.
+Referenced by Kirchhoff\+Love\+Beam\+Equations().
 
 \mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_adec17e53f30e371f899241ba2b2dfe2e}\label{classoomph_1_1KirchhoffLoveBeamEquations_adec17e53f30e371f899241ba2b2dfe2e}} 
 \index{oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}!H\_pt@{H\_pt}}
@@ -623,11 +615,11 @@ Pointer to wall thickness.
 
 
 
-Definition at line \mbox{\hyperlink{beam__elements_8h_source_l00111}{111}} of file \mbox{\hyperlink{beam__elements_8h_source}{beam\+\_\+elements.\+h}}.
+Definition at line 111 of file beam\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{beam__elements_8h_source_l00215}{h()}}, \mbox{\hyperlink{beam__elements_8h_source_l00240}{h\+\_\+pt()}}, and \mbox{\hyperlink{beam__elements_8h_source_l00154}{Kirchhoff\+Love\+Beam\+Equations()}}.
+Referenced by h(), h\+\_\+pt(), and Kirchhoff\+Love\+Beam\+Equations().
 
 \mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_a700cd4aa2ac90f41b019839610981633}\label{classoomph_1_1KirchhoffLoveBeamEquations_a700cd4aa2ac90f41b019839610981633}} 
 \index{oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}!Lambda\_sq\_pt@{Lambda\_sq\_pt}}
@@ -641,17 +633,17 @@ Pointer to Timescale ratio (non-\/dim. density)
 
 
 
-Definition at line \mbox{\hyperlink{beam__elements_8h_source_l00114}{114}} of file \mbox{\hyperlink{beam__elements_8h_source}{beam\+\_\+elements.\+h}}.
+Definition at line 114 of file beam\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{beam__elements_8h_source_l00154}{Kirchhoff\+Love\+Beam\+Equations()}}, \mbox{\hyperlink{beam__elements_8h_source_l00221}{lambda\+\_\+sq()}}, and \mbox{\hyperlink{beam__elements_8h_source_l00246}{lambda\+\_\+sq\+\_\+pt()}}.
+Referenced by Kirchhoff\+Love\+Beam\+Equations(), lambda\+\_\+sq(), and lambda\+\_\+sq\+\_\+pt().
 
-\mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_aeadc92070cc54a3a9212964f460dc738}\label{classoomph_1_1KirchhoffLoveBeamEquations_aeadc92070cc54a3a9212964f460dc738}} 
+\mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_a249f1139559ba8e64856f389a9161bb7}\label{classoomph_1_1KirchhoffLoveBeamEquations_a249f1139559ba8e64856f389a9161bb7}} 
 \index{oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}!load\_vector\_fct\_pt@{load\_vector\_fct\_pt}}
 \index{load\_vector\_fct\_pt@{load\_vector\_fct\_pt}!oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}}
 \doxysubsubsection{\texorpdfstring{load\_vector\_fct\_pt}{load\_vector\_fct\_pt}}
-{\footnotesize\ttfamily void($\ast$\&)(const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&load) oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::load\+\_\+vector\+\_\+fct\+\_\+pt()\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void($\ast$\&)(const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& xi, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& load) oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::load\+\_\+vector\+\_\+fct\+\_\+pt()\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -659,7 +651,7 @@ Reference to the load vector function pointer.
 
 
 
-Definition at line \mbox{\hyperlink{beam__elements_8h_source_l00169}{169}} of file \mbox{\hyperlink{beam__elements_8h_source}{beam\+\_\+elements.\+h}}.
+Definition at line 169 of file beam\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_a66707c32b8a08bcf6e8ed855066f9618}\label{classoomph_1_1KirchhoffLoveBeamEquations_a66707c32b8a08bcf6e8ed855066f9618}} 
 \index{oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}!Load\_vector\_fct\_pt@{Load\_vector\_fct\_pt}}
@@ -673,11 +665,11 @@ Pointer to load vector function\+: Its arguments are\+: Lagrangian coordinate, E
 
 
 
-Definition at line \mbox{\hyperlink{beam__elements_8h_source_l00128}{128}} of file \mbox{\hyperlink{beam__elements_8h_source}{beam\+\_\+elements.\+h}}.
+Definition at line 128 of file beam\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{beam__elements_8h_source_l00154}{Kirchhoff\+Love\+Beam\+Equations()}}, \mbox{\hyperlink{beam__elements_8h_source_l00183}{load\+\_\+vector()}}, and \mbox{\hyperlink{beam__elements_8h_source_l00405}{oomph\+::\+FSIHermite\+Beam\+Element\+::load\+\_\+vector()}}.
+Referenced by Kirchhoff\+Love\+Beam\+Equations(), load\+\_\+vector(), and oomph\+::\+FSIHermite\+Beam\+Element\+::load\+\_\+vector().
 
 \mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_a87d8ff0b264ae3327ee44975774f8c2f}\label{classoomph_1_1KirchhoffLoveBeamEquations_a87d8ff0b264ae3327ee44975774f8c2f}} 
 \index{oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}!Sigma0\_pt@{Sigma0\_pt}}
@@ -691,11 +683,11 @@ Pointer to axial prestress.
 
 
 
-Definition at line \mbox{\hyperlink{beam__elements_8h_source_l00107}{107}} of file \mbox{\hyperlink{beam__elements_8h_source}{beam\+\_\+elements.\+h}}.
+Definition at line 107 of file beam\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{beam__elements_8h_source_l00154}{Kirchhoff\+Love\+Beam\+Equations()}}, \mbox{\hyperlink{beam__elements_8h_source_l00227}{sigma0()}}, and \mbox{\hyperlink{beam__elements_8h_source_l00233}{sigma0\+\_\+pt()}}.
+Referenced by Kirchhoff\+Love\+Beam\+Equations(), sigma0(), and sigma0\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_a3e89080f7df640c70c8ec3bf85fb74c9}\label{classoomph_1_1KirchhoffLoveBeamEquations_a3e89080f7df640c70c8ec3bf85fb74c9}} 
 \index{oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}!Undeformed\_beam\_pt@{Undeformed\_beam\_pt}}
@@ -709,17 +701,17 @@ Pointer to the \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} that sp
 
 
 
-Definition at line \mbox{\hyperlink{beam__elements_8h_source_l00149}{149}} of file \mbox{\hyperlink{beam__elements_8h_source}{beam\+\_\+elements.\+h}}.
+Definition at line 149 of file beam\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{beam__elements_8cc_source_l01199}{oomph\+::\+FSIHermite\+Beam\+Element\+::dposition\+\_\+dlagrangian\+\_\+at\+\_\+local\+\_\+coordinate()}}, \mbox{\hyperlink{beam__elements_8cc_source_l00275}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+beam()}}, \mbox{\hyperlink{beam__elements_8cc_source_l00588}{get\+\_\+energy()}}, \mbox{\hyperlink{beam__elements_8cc_source_l00184}{get\+\_\+non\+\_\+unit\+\_\+tangent()}}, \mbox{\hyperlink{beam__elements_8cc_source_l00077}{get\+\_\+normal()}}, \mbox{\hyperlink{beam__elements_8cc_source_l00825}{oomph\+::\+Hermite\+Beam\+Element\+::output()}}, and \mbox{\hyperlink{beam__elements_8h_source_l00253}{undeformed\+\_\+beam\+\_\+pt()}}.
+Referenced by oomph\+::\+FSIHermite\+Beam\+Element\+::dposition\+\_\+dlagrangian\+\_\+at\+\_\+local\+\_\+coordinate(), fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+beam(), get\+\_\+energy(), get\+\_\+non\+\_\+unit\+\_\+tangent(), get\+\_\+normal(), oomph\+::\+Hermite\+Beam\+Element\+::output(), and undeformed\+\_\+beam\+\_\+pt().
 
-\mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_a5a86c67f2df4594fa79bbcd1951221dc}\label{classoomph_1_1KirchhoffLoveBeamEquations_a5a86c67f2df4594fa79bbcd1951221dc}} 
+\mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_a7e65a0419b827758d9bc53494691c186}\label{classoomph_1_1KirchhoffLoveBeamEquations_a7e65a0419b827758d9bc53494691c186}} 
 \index{oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}!wall\_profile\_fct\_pt@{wall\_profile\_fct\_pt}}
 \index{wall\_profile\_fct\_pt@{wall\_profile\_fct\_pt}!oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}}
 \doxysubsubsection{\texorpdfstring{wall\_profile\_fct\_pt}{wall\_profile\_fct\_pt}}
-{\footnotesize\ttfamily void($\ast$\&)(const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&h\+\_\+ratio) oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::wall\+\_\+profile\+\_\+fct\+\_\+pt()\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void($\ast$\&)(const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& xi, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& x, double\& h\+\_\+ratio) oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::wall\+\_\+profile\+\_\+fct\+\_\+pt()\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -727,7 +719,7 @@ Reference to the wall thickness ratio profile function pointer.
 
 
 
-Definition at line \mbox{\hyperlink{beam__elements_8h_source_l00193}{193}} of file \mbox{\hyperlink{beam__elements_8h_source}{beam\+\_\+elements.\+h}}.
+Definition at line 193 of file beam\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1KirchhoffLoveBeamEquations_a6ca999fcdf45f0cf51b0a74a1025ed53}\label{classoomph_1_1KirchhoffLoveBeamEquations_a6ca999fcdf45f0cf51b0a74a1025ed53}} 
 \index{oomph::KirchhoffLoveBeamEquations@{oomph::KirchhoffLoveBeamEquations}!Wall\_profile\_fct\_pt@{Wall\_profile\_fct\_pt}}
@@ -741,11 +733,11 @@ Pointer to wall profile function\+: Its arguments are\+: Lagrangian coordinate, 
 
 
 
-Definition at line \mbox{\hyperlink{beam__elements_8h_source_l00143}{143}} of file \mbox{\hyperlink{beam__elements_8h_source}{beam\+\_\+elements.\+h}}.
+Definition at line 143 of file beam\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{beam__elements_8h_source_l00154}{Kirchhoff\+Love\+Beam\+Equations()}}, and \mbox{\hyperlink{beam__elements_8h_source_l00205}{wall\+\_\+profile()}}.
+Referenced by Kirchhoff\+Love\+Beam\+Equations(), and wall\+\_\+profile().
 
 
 

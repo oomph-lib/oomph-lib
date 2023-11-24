@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1HelmholtzFluxElement}{}\doxysection{oomph\+::Helmholtz\+Flux\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1HelmholtzFluxElement}{}\doxysection{oomph\+::Helmholtz\+Flux\+Element$<$ ELEMENT $>$ Class Template Reference}
 \label{classoomph_1_1HelmholtzFluxElement}\index{oomph::HelmholtzFluxElement$<$ ELEMENT $>$@{oomph::HelmholtzFluxElement$<$ ELEMENT $>$}}
 
 
@@ -9,7 +9,7 @@ A class for elements that allow the imposition of an applied flux on the boundar
 
 {\ttfamily \#include $<$helmholtz\+\_\+flux\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Helmholtz\+Flux\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.796504cm]{classoomph_1_1HelmholtzFluxElement}
@@ -23,13 +23,13 @@ typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_ad53ce40
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a8c9a62afbb6ed06a0441d4fbf607624c}{Helmholtz\+Flux\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&bulk\+\_\+el\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}})
+\mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a8c9a62afbb6ed06a0441d4fbf607624c}{Helmholtz\+Flux\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&bulk\+\_\+el\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a478d577ac6db67ecc80f1f02ae3ab170}{face\+\_\+index}})
 \begin{DoxyCompactList}\small\item\em Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the index of the face to which the element is attached. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a73182cbef5c3c2ccb7abdb6337b3651b}{Helmholtz\+Flux\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Broken empty constructor. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a747c3a80f505e318f915b763f5fbf878}{Helmholtz\+Flux\+Element}} (const \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement}{Helmholtz\+Flux\+Element}} \&dummy)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_ad53ce405c551a39ac9baeaaab7f254df}{Helmholtz\+Prescribed\+Flux\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_ad7a1caf6679742499c14c1690d670372}{flux\+\_\+fct\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_ad53ce405c551a39ac9baeaaab7f254df}{Helmholtz\+Prescribed\+Flux\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_ac2f6581b3619489d41822761038f4bf5}{flux\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a861a3825432d2ddc1b0e2deff79ed0bc}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector. \end{DoxyCompactList}\item 
@@ -45,7 +45,7 @@ void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a8afbad47be6598b8a4a677
 \begin{DoxyCompactList}\small\item\em C-\/style output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a125673c600acb76787db63810c51066d}{output}} (FILE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em C-\/style output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... \end{DoxyCompactList}\item 
-virtual std\+::complex$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_aeb7d32f5e95b2ce8682b89c4f8e7d0c5}{u\+\_\+index\+\_\+helmholtz}} () const
+virtual std\+::complex$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_ae3fb5779a0337f07a71bf8211ea403e3}{u\+\_\+index\+\_\+helmholtz}} () const
 \begin{DoxyCompactList}\small\item\em Return the index at which the unknown value is stored. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -73,9 +73,10 @@ unsigned \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_a5d1b709d1f2120ca7a
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class ELEMENT$>$\newline
 class oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$}
+
 A class for elements that allow the imposition of an applied flux on the boundaries of Helmholtz elements. The element geometry is obtained from the Face\+Geometry$<$\+ELEMENT$>$ policy class. 
 
-Definition at line \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00051}{51}} of file \mbox{\hyperlink{helmholtz__flux__elements_8h_source}{helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 51 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -93,7 +94,7 @@ Function pointer to the prescribed-\/flux function fct(x,f(x)) -- x is a \mbox{\
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00058}{58}} of file \mbox{\hyperlink{helmholtz__flux__elements_8h_source}{helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 58 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -113,11 +114,11 @@ Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the i
 
 Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element, the index of the fixed local coordinate and its value represented by an integer (+/-\/ 1), indicating that the face is located at the max. or min. value of the \char`\"{}fixed\char`\"{} local coordinate in the bulk element. 
 
-Definition at line \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00268}{268}} of file \mbox{\hyperlink{helmholtz__flux__elements_8h_source}{helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 268 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l05132}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00252}{oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::\+Dim}}, \mbox{\hyperlink{elements_8h_source_l04626}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}, \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00249}{oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l02470}{oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes()}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, \mbox{\hyperlink{helmholtz__elements_8h_source_l00080}{oomph\+::\+Helmholtz\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+helmholtz()}}, and \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00236}{oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+helmholtz}}.
+References oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::\+Dim, oomph\+::\+Face\+Element\+::face\+\_\+index(), oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt, oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes(), oomph\+::\+Node\+::ndim(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), oomph\+::\+Helmholtz\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+helmholtz(), and oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+helmholtz.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzFluxElement_a73182cbef5c3c2ccb7abdb6337b3651b}\label{classoomph_1_1HelmholtzFluxElement_a73182cbef5c3c2ccb7abdb6337b3651b}} 
 \index{oomph::HelmholtzFluxElement$<$ ELEMENT $>$@{oomph::HelmholtzFluxElement$<$ ELEMENT $>$}!HelmholtzFluxElement@{HelmholtzFluxElement}}
@@ -132,7 +133,7 @@ Broken empty constructor.
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00067}{67}} of file \mbox{\hyperlink{helmholtz__flux__elements_8h_source}{helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 67 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzFluxElement_a747c3a80f505e318f915b763f5fbf878}\label{classoomph_1_1HelmholtzFluxElement_a747c3a80f505e318f915b763f5fbf878}} 
 \index{oomph::HelmholtzFluxElement$<$ ELEMENT $>$@{oomph::HelmholtzFluxElement$<$ ELEMENT $>$}!HelmholtzFluxElement@{HelmholtzFluxElement}}
@@ -165,11 +166,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00106}{106}} of file \mbox{\hyperlink{helmholtz__flux__elements_8h_source}{helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 106 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00420}{oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+flux()}}.
+References oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+flux().
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzFluxElement_a861a3825432d2ddc1b0e2deff79ed0bc}\label{classoomph_1_1HelmholtzFluxElement_a861a3825432d2ddc1b0e2deff79ed0bc}} 
 \index{oomph::HelmholtzFluxElement$<$ ELEMENT $>$@{oomph::HelmholtzFluxElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
@@ -188,11 +189,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00095}{95}} of file \mbox{\hyperlink{helmholtz__flux__elements_8h_source}{helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 95 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00227}{oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix}}, and \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00420}{oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+flux()}}.
+References oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix, and oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+flux().
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzFluxElement_a4f6caf80f078c526144990ee77bfaf92}\label{classoomph_1_1HelmholtzFluxElement_a4f6caf80f078c526144990ee77bfaf92}} 
 \index{oomph::HelmholtzFluxElement$<$ ELEMENT $>$@{oomph::HelmholtzFluxElement$<$ ELEMENT $>$}!fill\_in\_generic\_residual\_contribution\_helmholtz\_flux@{fill\_in\_generic\_residual\_contribution\_helmholtz\_flux}}
@@ -207,22 +208,22 @@ Add the element\textquotesingle{}s contribution to its residual vector. flag=1(o
 
 Compute the element\textquotesingle{}s residual vector and the (zero) Jacobian matrix. 
 
-Definition at line \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00419}{419}} of file \mbox{\hyperlink{helmholtz__flux__elements_8h_source}{helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 419 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{multi__domain_8cc_source_l00060}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Dim}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
+References oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Dim, i, s, and oomph\+::\+Quad\+Tree\+Names\+::W.
 
 
 
-Referenced by \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00106}{oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, and \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00095}{oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
+Referenced by oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
 
-\mbox{\Hypertarget{classoomph_1_1HelmholtzFluxElement_ad7a1caf6679742499c14c1690d670372}\label{classoomph_1_1HelmholtzFluxElement_ad7a1caf6679742499c14c1690d670372}} 
+\mbox{\Hypertarget{classoomph_1_1HelmholtzFluxElement_ac2f6581b3619489d41822761038f4bf5}\label{classoomph_1_1HelmholtzFluxElement_ac2f6581b3619489d41822761038f4bf5}} 
 \index{oomph::HelmholtzFluxElement$<$ ELEMENT $>$@{oomph::HelmholtzFluxElement$<$ ELEMENT $>$}!flux\_fct\_pt@{flux\_fct\_pt}}
 \index{flux\_fct\_pt@{flux\_fct\_pt}!oomph::HelmholtzFluxElement$<$ ELEMENT $>$@{oomph::HelmholtzFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{flux\_fct\_pt()}{flux\_fct\_pt()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_ad53ce405c551a39ac9baeaaab7f254df}{Helmholtz\+Prescribed\+Flux\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement}{oomph\+::\+Helmholtz\+Flux\+Element}}$<$ ELEMENT $>$\+::flux\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement_ad53ce405c551a39ac9baeaaab7f254df}{Helmholtz\+Prescribed\+Flux\+Fct\+Pt}}\& \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement}{oomph\+::\+Helmholtz\+Flux\+Element}}$<$ ELEMENT $>$\+::flux\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -230,11 +231,11 @@ Broken assignment operator.
 
 Access function for the prescribed-\/flux function pointer 
 
-Definition at line \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00088}{88}} of file \mbox{\hyperlink{helmholtz__flux__elements_8h_source}{helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 88 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00249}{oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt}}.
+References oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzFluxElement_a0e43870b7dc404d05c58c835a79e7121}\label{classoomph_1_1HelmholtzFluxElement_a0e43870b7dc404d05c58c835a79e7121}} 
 \index{oomph::HelmholtzFluxElement$<$ ELEMENT $>$@{oomph::HelmholtzFluxElement$<$ ELEMENT $>$}!get\_flux@{get\_flux}}
@@ -249,11 +250,11 @@ Function to calculate the prescribed flux at a given spatial position.
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00219}{219}} of file \mbox{\hyperlink{helmholtz__flux__elements_8h_source}{helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 219 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00249}{oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt}}.
+References oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzFluxElement_a8afbad47be6598b8a4a6776aa21bb38a}\label{classoomph_1_1HelmholtzFluxElement_a8afbad47be6598b8a4a6776aa21bb38a}} 
 \index{oomph::HelmholtzFluxElement$<$ ELEMENT $>$@{oomph::HelmholtzFluxElement$<$ ELEMENT $>$}!output@{output}}
@@ -272,11 +273,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00145}{145}} of file \mbox{\hyperlink{helmholtz__flux__elements_8h_source}{helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 145 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
+References oomph\+::\+Finite\+Element\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzFluxElement_a125673c600acb76787db63810c51066d}\label{classoomph_1_1HelmholtzFluxElement_a125673c600acb76787db63810c51066d}} 
 \index{oomph::HelmholtzFluxElement$<$ ELEMENT $>$@{oomph::HelmholtzFluxElement$<$ ELEMENT $>$}!output@{output}}
@@ -295,11 +296,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00153}{153}} of file \mbox{\hyperlink{helmholtz__flux__elements_8h_source}{helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 153 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
+References oomph\+::\+Finite\+Element\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzFluxElement_a08f6410ef176312d00f5a5c13caa1b06}\label{classoomph_1_1HelmholtzFluxElement_a08f6410ef176312d00f5a5c13caa1b06}} 
 \index{oomph::HelmholtzFluxElement$<$ ELEMENT $>$@{oomph::HelmholtzFluxElement$<$ ELEMENT $>$}!output@{output}}
@@ -318,11 +319,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00130}{130}} of file \mbox{\hyperlink{helmholtz__flux__elements_8h_source}{helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 130 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
+References oomph\+::\+Finite\+Element\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzFluxElement_a8df42455a8d4584c1d67e8e0d7ab44a0}\label{classoomph_1_1HelmholtzFluxElement_a8df42455a8d4584c1d67e8e0d7ab44a0}} 
 \index{oomph::HelmholtzFluxElement$<$ ELEMENT $>$@{oomph::HelmholtzFluxElement$<$ ELEMENT $>$}!output@{output}}
@@ -341,11 +342,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00137}{137}} of file \mbox{\hyperlink{helmholtz__flux__elements_8h_source}{helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 137 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
+References oomph\+::\+Finite\+Element\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzFluxElement_a7d4c36738cba6e0620fa394d66ea28c5}\label{classoomph_1_1HelmholtzFluxElement_a7d4c36738cba6e0620fa394d66ea28c5}} 
 \index{oomph::HelmholtzFluxElement$<$ ELEMENT $>$@{oomph::HelmholtzFluxElement$<$ ELEMENT $>$}!shape\_and\_test@{shape\_and\_test}}
@@ -360,11 +361,11 @@ Function to compute the shape and test functions and to return the Jacobian of m
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00172}{172}} of file \mbox{\hyperlink{helmholtz__flux__elements_8h_source}{helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 172 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l05242}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
+References i, oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Finite\+Element\+::nnode(), s, and oomph\+::\+Finite\+Element\+::shape().
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzFluxElement_a463b7abfac1cc3aa698437b484b51683}\label{classoomph_1_1HelmholtzFluxElement_a463b7abfac1cc3aa698437b484b51683}} 
 \index{oomph::HelmholtzFluxElement$<$ ELEMENT $>$@{oomph::HelmholtzFluxElement$<$ ELEMENT $>$}!shape\_and\_test\_at\_knot@{shape\_and\_test\_at\_knot}}
@@ -379,18 +380,18 @@ Function to compute the shape and test functions and to return the Jacobian of m
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00196}{196}} of file \mbox{\hyperlink{helmholtz__flux__elements_8h_source}{helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 196 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l05328}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8cc_source_l03220}{oomph\+::\+Finite\+Element\+::shape\+\_\+at\+\_\+knot()}}.
+References i, oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian\+\_\+at\+\_\+knot(), oomph\+::\+Finite\+Element\+::nnode(), and oomph\+::\+Finite\+Element\+::shape\+\_\+at\+\_\+knot().
 
-\mbox{\Hypertarget{classoomph_1_1HelmholtzFluxElement_aeb7d32f5e95b2ce8682b89c4f8e7d0c5}\label{classoomph_1_1HelmholtzFluxElement_aeb7d32f5e95b2ce8682b89c4f8e7d0c5}} 
+\mbox{\Hypertarget{classoomph_1_1HelmholtzFluxElement_ae3fb5779a0337f07a71bf8211ea403e3}\label{classoomph_1_1HelmholtzFluxElement_ae3fb5779a0337f07a71bf8211ea403e3}} 
 \index{oomph::HelmholtzFluxElement$<$ ELEMENT $>$@{oomph::HelmholtzFluxElement$<$ ELEMENT $>$}!u\_index\_helmholtz@{u\_index\_helmholtz}}
 \index{u\_index\_helmholtz@{u\_index\_helmholtz}!oomph::HelmholtzFluxElement$<$ ELEMENT $>$@{oomph::HelmholtzFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{u\_index\_helmholtz()}{u\_index\_helmholtz()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-virtual std\+::complex$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement}{oomph\+::\+Helmholtz\+Flux\+Element}}$<$ ELEMENT $>$\+::u\+\_\+index\+\_\+helmholtz (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+virtual std\+::complex$<$unsigned$>$ \mbox{\hyperlink{classoomph_1_1HelmholtzFluxElement}{oomph\+::\+Helmholtz\+Flux\+Element}}$<$ ELEMENT $>$\+::u\+\_\+index\+\_\+helmholtz (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -398,11 +399,11 @@ Return the index at which the unknown value is stored.
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00161}{161}} of file \mbox{\hyperlink{helmholtz__flux__elements_8h_source}{helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 161 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00236}{oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+helmholtz}}.
+References oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+helmholtz.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzFluxElement_a02ce0bfabe6ce7ef3901bb4155806d86}\label{classoomph_1_1HelmholtzFluxElement_a02ce0bfabe6ce7ef3901bb4155806d86}} 
 \index{oomph::HelmholtzFluxElement$<$ ELEMENT $>$@{oomph::HelmholtzFluxElement$<$ ELEMENT $>$}!zeta\_nodal@{zeta\_nodal}}
@@ -421,11 +422,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FaceElement_a58c9f93705c7741f7
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00120}{120}} of file \mbox{\hyperlink{helmholtz__flux__elements_8h_source}{helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 120 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l04497}{oomph\+::\+Face\+Element\+::zeta\+\_\+nodal()}}.
+References i, and oomph\+::\+Face\+Element\+::zeta\+\_\+nodal().
 
 
 
@@ -443,11 +444,11 @@ The spatial dimension of the problem.
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00252}{252}} of file \mbox{\hyperlink{helmholtz__flux__elements_8h_source}{helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 252 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00268}{oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::\+Helmholtz\+Flux\+Element()}}.
+Referenced by oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::\+Helmholtz\+Flux\+Element().
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzFluxElement_a28e520786dcd619f8e362356f9492728}\label{classoomph_1_1HelmholtzFluxElement_a28e520786dcd619f8e362356f9492728}} 
 \index{oomph::HelmholtzFluxElement$<$ ELEMENT $>$@{oomph::HelmholtzFluxElement$<$ ELEMENT $>$}!Flux\_fct\_pt@{Flux\_fct\_pt}}
@@ -462,11 +463,11 @@ Function pointer to the (global) prescribed-\/flux function.
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00249}{249}} of file \mbox{\hyperlink{helmholtz__flux__elements_8h_source}{helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 249 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00088}{oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::flux\+\_\+fct\+\_\+pt()}}, \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00219}{oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::get\+\_\+flux()}}, and \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00268}{oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::\+Helmholtz\+Flux\+Element()}}.
+Referenced by oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::flux\+\_\+fct\+\_\+pt(), oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::get\+\_\+flux(), and oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::\+Helmholtz\+Flux\+Element().
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzFluxElement_ac5fd419a34614c3ae7a784faa28b773e}\label{classoomph_1_1HelmholtzFluxElement_ac5fd419a34614c3ae7a784faa28b773e}} 
 \index{oomph::HelmholtzFluxElement$<$ ELEMENT $>$@{oomph::HelmholtzFluxElement$<$ ELEMENT $>$}!U\_index\_helmholtz@{U\_index\_helmholtz}}
@@ -481,11 +482,11 @@ The index at which the real and imag part of the unknown is stored at the nodes.
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00236}{236}} of file \mbox{\hyperlink{helmholtz__flux__elements_8h_source}{helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 236 of file helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00268}{oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::\+Helmholtz\+Flux\+Element()}}, and \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00161}{oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::u\+\_\+index\+\_\+helmholtz()}}.
+Referenced by oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::\+Helmholtz\+Flux\+Element(), and oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::u\+\_\+index\+\_\+helmholtz().
 
 
 

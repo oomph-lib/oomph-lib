@@ -70,7 +70,7 @@ As in the \href{../../../navier_stokes/two_layer_interface/html/index.html\#name
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Direction of gravity}}
+\DoxyCodeLine{ \textcolor{comment}{/// Direction of gravity}}
 \DoxyCodeLine{ Vector<double> \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af5ae275cf339105b9a54821c034df470}{G}}(3);}
 
 \end{DoxyCodeInclude}
@@ -111,7 +111,7 @@ The problem class is almost identical to the \href{../../../navier_stokes/two_la
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Deform the mesh/free surface to a prescribed function}}
+\DoxyCodeLine{ \textcolor{comment}{/// Deform the mesh/free surface to a prescribed function}}
 \DoxyCodeLine{ \textcolor{keywordtype}{void} deform\_free\_surface(\textcolor{keyword}{const} \textcolor{keywordtype}{double} \&epsilon, \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&k);}
 
 \end{DoxyCodeInclude}
@@ -191,9 +191,9 @@ The {\ttfamily set\+\_\+initial\+\_\+conditions()} function is very similar to t
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_set\_initial\_condition========================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Set initial conditions: Set all nodal velocities to zero and}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// initialise the previous velocities and nodal positions to correspond}}
-\DoxyCodeLine{\textcolor{comment}{/// to an impulsive start}}
+\DoxyCodeLine{\textcolor{comment}{/// Set initial conditions: Set all nodal velocities to zero and}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// initialise the previous velocities and nodal positions to correspond}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// to an impulsive start}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classInterfaceProblem_a0d3af8378c4f0a6e38636be958c300d5}{InterfaceProblem<ELEMENT,TIMESTEPPER>::set\_initial\_condition}}()}
@@ -227,9 +227,9 @@ The {\ttfamily set\+\_\+boundary\+\_\+conditions()} function is very similar to 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_set\_boundary\_conditions======================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Set boundary conditions: Set all velocity components to zero}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// on the top and bottom (solid) walls and the radial and azimuthal}}
-\DoxyCodeLine{\textcolor{comment}{/// components only to zero on the side boundaries}}
+\DoxyCodeLine{\textcolor{comment}{/// Set boundary conditions: Set all velocity components to zero}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// on the top and bottom (solid) walls and the radial and azimuthal}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// components only to zero on the side boundaries}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classInterfaceProblem_a844445832ad7a32aa9f5d03ffdb40ebb}{InterfaceProblem<ELEMENT,TIMESTEPPER>::set\_boundary\_conditions}}()}
@@ -304,7 +304,7 @@ At the beginning of the simulation the interface is deformed by a prescribed fun
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_deform\_free\_surface==========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Deform the mesh/free surface to a prescribed function}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classInterfaceProblem_aa93d492461ac53f0d9f88516bce322dc}{InterfaceProblem<ELEMENT,TIMESTEPPER>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classInterfaceProblem_aa93d492461ac53f0d9f88516bce322dc}{deform\_free\_surface}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double} \&epsilon,\textcolor{keyword}{const} \textcolor{keywordtype}{double} \&k)}

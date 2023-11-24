@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1NavierStokesSurfacePowerElement}{}\doxysection{oomph\+::Navier\+Stokes\+Surface\+Power\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1NavierStokesSurfacePowerElement}{}\doxysection{oomph\+::Navier\+Stokes\+Surface\+Power\+Element$<$ ELEMENT $>$ Class Template Reference}
 \label{classoomph_1_1NavierStokesSurfacePowerElement}\index{oomph::NavierStokesSurfacePowerElement$<$ ELEMENT $>$@{oomph::NavierStokesSurfacePowerElement$<$ ELEMENT $>$}}
 
 
@@ -9,7 +9,7 @@ A class of elements that allow the determination of the power input and various 
 
 {\ttfamily \#include $<$navier\+\_\+stokes\+\_\+surface\+\_\+power\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Navier\+Stokes\+Surface\+Power\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Navier\+Stokes\+Surface\+Power\+Element$<$ ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.879177cm]{classoomph_1_1NavierStokesSurfacePowerElement}
@@ -18,13 +18,13 @@ Inheritance diagram for oomph\+::Navier\+Stokes\+Surface\+Power\+Element\texorpd
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1NavierStokesSurfacePowerElement_a4755269a509f63be1917ad5dd4061939}{Navier\+Stokes\+Surface\+Power\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&element\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}})
+\mbox{\hyperlink{classoomph_1_1NavierStokesSurfacePowerElement_a4755269a509f63be1917ad5dd4061939}{Navier\+Stokes\+Surface\+Power\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&element\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a478d577ac6db67ecc80f1f02ae3ab170}{face\+\_\+index}})
 \begin{DoxyCompactList}\small\item\em Constructor, which takes a \char`\"{}bulk\char`\"{} element and the value of the index and its limit. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1NavierStokesSurfacePowerElement_add4a49170201b878ed97449dd3d55a42}{zeta\+\_\+nodal}} (const unsigned \&n, const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} representation, by default This final over-\/ride is required for cases where the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} is a \mbox{\hyperlink{classoomph_1_1SolidFiniteElement}{Solid\+Finite\+Element}} because both Solid\+Finite\+Elements and Face\+Elements overload zeta\+\_\+nodal. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1NavierStokesSurfacePowerElement_ae6eb9ef972c81bf0251d1f8aaa35c1c7}{drag\+\_\+force}} ()
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1NavierStokesSurfacePowerElement_a85b2a9f383e7a52d6789d8ec15be9222}{drag\+\_\+force}} ()
 \begin{DoxyCompactList}\small\item\em Get drag force (traction acting on fluid) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1NavierStokesSurfacePowerElement_a5365157f34c19ecdbe2201b0bc73e929}{drag\+\_\+force}} (std\+::ofstream \&outfile)
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1NavierStokesSurfacePowerElement_a0f98b1da199fd971c7b8b6a9fb74ce60}{drag\+\_\+force}} (std\+::ofstream \&outfile)
 \begin{DoxyCompactList}\small\item\em Get drag force (traction acting on fluid) Doc in outfile. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1NavierStokesSurfacePowerElement_a65c3fbc22163da89b94374c5b590c5e3}{get\+\_\+rate\+\_\+of\+\_\+traction\+\_\+work}} ()
 \begin{DoxyCompactList}\small\item\em Get integral of instantaneous rate of work done by the traction that\textquotesingle{}s exerted onto the fluid. \end{DoxyCompactList}\item 
@@ -53,9 +53,10 @@ unsigned \mbox{\hyperlink{classoomph_1_1NavierStokesSurfacePowerElement_a233c38a
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class ELEMENT$>$\newline
 class oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ ELEMENT $>$}
+
 A class of elements that allow the determination of the power input and various other fluxes over the domain boundaries. The element operates as a \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} and attaches itself to a bulk element of the type specified by the template argument. 
 
-Definition at line \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source_l00050}{50}} of file \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source}{navier\+\_\+stokes\+\_\+surface\+\_\+power\+\_\+elements.\+h}}.
+Definition at line 50 of file navier\+\_\+stokes\+\_\+surface\+\_\+power\+\_\+elements.\+h.
 
 
 
@@ -73,21 +74,21 @@ Constructor, which takes a \char`\"{}bulk\char`\"{} element and the value of the
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source_l00056}{56}} of file \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source}{navier\+\_\+stokes\+\_\+surface\+\_\+power\+\_\+elements.\+h}}.
+Definition at line 56 of file navier\+\_\+stokes\+\_\+surface\+\_\+power\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l05132}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source_l00840}{oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ ELEMENT $>$\+::\+Dim}}, \mbox{\hyperlink{elements_8h_source_l04626}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, and \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ ELEMENT $>$\+::\+Dim, oomph\+::\+Face\+Element\+::face\+\_\+index(), oomph\+::\+Node\+::ndim(), and oomph\+::\+Finite\+Element\+::node\+\_\+pt().
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1NavierStokesSurfacePowerElement_ae6eb9ef972c81bf0251d1f8aaa35c1c7}\label{classoomph_1_1NavierStokesSurfacePowerElement_ae6eb9ef972c81bf0251d1f8aaa35c1c7}} 
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSurfacePowerElement_a85b2a9f383e7a52d6789d8ec15be9222}\label{classoomph_1_1NavierStokesSurfacePowerElement_a85b2a9f383e7a52d6789d8ec15be9222}} 
 \index{oomph::NavierStokesSurfacePowerElement$<$ ELEMENT $>$@{oomph::NavierStokesSurfacePowerElement$<$ ELEMENT $>$}!drag\_force@{drag\_force}}
 \index{drag\_force@{drag\_force}!oomph::NavierStokesSurfacePowerElement$<$ ELEMENT $>$@{oomph::NavierStokesSurfacePowerElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{drag\_force()}{drag\_force()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1NavierStokesSurfacePowerElement}{oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element}}$<$ ELEMENT $>$\+::drag\+\_\+force (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ \mbox{\hyperlink{classoomph_1_1NavierStokesSurfacePowerElement}{oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element}}$<$ ELEMENT $>$\+::drag\+\_\+force (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -95,22 +96,14 @@ Get drag force (traction acting on fluid)
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source_l00084}{84}} of file \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source}{navier\+\_\+stokes\+\_\+surface\+\_\+power\+\_\+elements.\+h}}.
+Definition at line 84 of file navier\+\_\+stokes\+\_\+surface\+\_\+power\+\_\+elements.\+h.
 
-
-
-References \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source_l00084}{oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ ELEMENT $>$\+::drag\+\_\+force()}}.
-
-
-
-Referenced by \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source_l00084}{oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ ELEMENT $>$\+::drag\+\_\+force()}}.
-
-\mbox{\Hypertarget{classoomph_1_1NavierStokesSurfacePowerElement_a5365157f34c19ecdbe2201b0bc73e929}\label{classoomph_1_1NavierStokesSurfacePowerElement_a5365157f34c19ecdbe2201b0bc73e929}} 
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSurfacePowerElement_a0f98b1da199fd971c7b8b6a9fb74ce60}\label{classoomph_1_1NavierStokesSurfacePowerElement_a0f98b1da199fd971c7b8b6a9fb74ce60}} 
 \index{oomph::NavierStokesSurfacePowerElement$<$ ELEMENT $>$@{oomph::NavierStokesSurfacePowerElement$<$ ELEMENT $>$}!drag\_force@{drag\_force}}
 \index{drag\_force@{drag\_force}!oomph::NavierStokesSurfacePowerElement$<$ ELEMENT $>$@{oomph::NavierStokesSurfacePowerElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{drag\_force()}{drag\_force()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1NavierStokesSurfacePowerElement}{oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element}}$<$ ELEMENT $>$\+::drag\+\_\+force (\begin{DoxyParamCaption}\item[{std\+::ofstream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ \mbox{\hyperlink{classoomph_1_1NavierStokesSurfacePowerElement}{oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element}}$<$ ELEMENT $>$\+::drag\+\_\+force (\begin{DoxyParamCaption}\item[{std\+::ofstream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -118,11 +111,11 @@ Get drag force (traction acting on fluid) Doc in outfile.
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source_l00093}{93}} of file \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source}{navier\+\_\+stokes\+\_\+surface\+\_\+power\+\_\+elements.\+h}}.
+Definition at line 93 of file navier\+\_\+stokes\+\_\+surface\+\_\+power\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l04735}{oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8cc_source_l06384}{oomph\+::\+Face\+Element\+::get\+\_\+local\+\_\+coordinate\+\_\+in\+\_\+bulk()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l04528}{oomph\+::\+Face\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8cc_source_l05242}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{geom__objects_8h_source_l00177}{oomph\+::\+Geom\+Object\+::ndim()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{elements_8cc_source_l06006}{oomph\+::\+Face\+Element\+::outer\+\_\+unit\+\_\+normal()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}, and \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral\+::weight()}}.
+References oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt(), oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Face\+Element\+::get\+\_\+local\+\_\+coordinate\+\_\+in\+\_\+bulk(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Face\+Element\+::interpolated\+\_\+x(), oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Integral\+::knot(), oomph\+::\+Geom\+Object\+::ndim(), oomph\+::\+Integral\+::nweight(), oomph\+::\+Face\+Element\+::outer\+\_\+unit\+\_\+normal(), s, oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Integral\+::weight().
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSurfacePowerElement_a69225bd43c0e0552beeab3013a59968e}\label{classoomph_1_1NavierStokesSurfacePowerElement_a69225bd43c0e0552beeab3013a59968e}} 
 \index{oomph::NavierStokesSurfacePowerElement$<$ ELEMENT $>$@{oomph::NavierStokesSurfacePowerElement$<$ ELEMENT $>$}!get\_kinetic\_energy\_flux@{get\_kinetic\_energy\_flux}}
@@ -137,15 +130,7 @@ Get integral of kinetic energy flux.
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source_l00563}{563}} of file \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source}{navier\+\_\+stokes\+\_\+surface\+\_\+power\+\_\+elements.\+h}}.
-
-
-
-References \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source_l00563}{oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ ELEMENT $>$\+::get\+\_\+kinetic\+\_\+energy\+\_\+flux()}}.
-
-
-
-Referenced by \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source_l00563}{oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ ELEMENT $>$\+::get\+\_\+kinetic\+\_\+energy\+\_\+flux()}}.
+Definition at line 563 of file navier\+\_\+stokes\+\_\+surface\+\_\+power\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSurfacePowerElement_a1d2f901cf1ce20919aad222a013210b4}\label{classoomph_1_1NavierStokesSurfacePowerElement_a1d2f901cf1ce20919aad222a013210b4}} 
 \index{oomph::NavierStokesSurfacePowerElement$<$ ELEMENT $>$@{oomph::NavierStokesSurfacePowerElement$<$ ELEMENT $>$}!get\_kinetic\_energy\_flux@{get\_kinetic\_energy\_flux}}
@@ -160,11 +145,11 @@ Get integral of kinetic energy flux and doc.
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source_l00571}{571}} of file \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source}{navier\+\_\+stokes\+\_\+surface\+\_\+power\+\_\+elements.\+h}}.
+Definition at line 571 of file navier\+\_\+stokes\+\_\+surface\+\_\+power\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l04735}{oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8cc_source_l06384}{oomph\+::\+Face\+Element\+::get\+\_\+local\+\_\+coordinate\+\_\+in\+\_\+bulk()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l04528}{oomph\+::\+Face\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8cc_source_l05242}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{geom__objects_8h_source_l00177}{oomph\+::\+Geom\+Object\+::ndim()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{elements_8cc_source_l06006}{oomph\+::\+Face\+Element\+::outer\+\_\+unit\+\_\+normal()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}, and \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral\+::weight()}}.
+References oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt(), oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Face\+Element\+::get\+\_\+local\+\_\+coordinate\+\_\+in\+\_\+bulk(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Face\+Element\+::interpolated\+\_\+x(), oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Integral\+::knot(), oomph\+::\+Geom\+Object\+::ndim(), oomph\+::\+Integral\+::nweight(), oomph\+::\+Face\+Element\+::outer\+\_\+unit\+\_\+normal(), s, oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Integral\+::weight().
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSurfacePowerElement_a65c3fbc22163da89b94374c5b590c5e3}\label{classoomph_1_1NavierStokesSurfacePowerElement_a65c3fbc22163da89b94374c5b590c5e3}} 
 \index{oomph::NavierStokesSurfacePowerElement$<$ ELEMENT $>$@{oomph::NavierStokesSurfacePowerElement$<$ ELEMENT $>$}!get\_rate\_of\_traction\_work@{get\_rate\_of\_traction\_work}}
@@ -179,15 +164,7 @@ Get integral of instantaneous rate of work done by the traction that\textquotesi
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source_l00217}{217}} of file \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source}{navier\+\_\+stokes\+\_\+surface\+\_\+power\+\_\+elements.\+h}}.
-
-
-
-References \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source_l00217}{oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ ELEMENT $>$\+::get\+\_\+rate\+\_\+of\+\_\+traction\+\_\+work()}}.
-
-
-
-Referenced by \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source_l00217}{oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ ELEMENT $>$\+::get\+\_\+rate\+\_\+of\+\_\+traction\+\_\+work()}}.
+Definition at line 217 of file navier\+\_\+stokes\+\_\+surface\+\_\+power\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSurfacePowerElement_aa46d2bfef7537d540c1103e6d832d8c1}\label{classoomph_1_1NavierStokesSurfacePowerElement_aa46d2bfef7537d540c1103e6d832d8c1}} 
 \index{oomph::NavierStokesSurfacePowerElement$<$ ELEMENT $>$@{oomph::NavierStokesSurfacePowerElement$<$ ELEMENT $>$}!get\_rate\_of\_traction\_work@{get\_rate\_of\_traction\_work}}
@@ -202,11 +179,11 @@ Get integral of instantaneous rate of work done by the traction that\textquotesi
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source_l00226}{226}} of file \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source}{navier\+\_\+stokes\+\_\+surface\+\_\+power\+\_\+elements.\+h}}.
+Definition at line 226 of file navier\+\_\+stokes\+\_\+surface\+\_\+power\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l04735}{oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8cc_source_l06384}{oomph\+::\+Face\+Element\+::get\+\_\+local\+\_\+coordinate\+\_\+in\+\_\+bulk()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l04528}{oomph\+::\+Face\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8cc_source_l05242}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{geom__objects_8h_source_l00177}{oomph\+::\+Geom\+Object\+::ndim()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{elements_8cc_source_l06006}{oomph\+::\+Face\+Element\+::outer\+\_\+unit\+\_\+normal()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}, and \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral\+::weight()}}.
+References oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt(), oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Face\+Element\+::get\+\_\+local\+\_\+coordinate\+\_\+in\+\_\+bulk(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Face\+Element\+::interpolated\+\_\+x(), oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Integral\+::knot(), oomph\+::\+Geom\+Object\+::ndim(), oomph\+::\+Integral\+::nweight(), oomph\+::\+Face\+Element\+::outer\+\_\+unit\+\_\+normal(), s, oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Integral\+::weight().
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSurfacePowerElement_a37fb9f362e6be61c0e0c8c75d07cf9ee}\label{classoomph_1_1NavierStokesSurfacePowerElement_a37fb9f362e6be61c0e0c8c75d07cf9ee}} 
 \index{oomph::NavierStokesSurfacePowerElement$<$ ELEMENT $>$@{oomph::NavierStokesSurfacePowerElement$<$ ELEMENT $>$}!get\_rate\_of\_traction\_work\_components@{get\_rate\_of\_traction\_work\_components}}
@@ -221,15 +198,7 @@ Get integral of instantaneous rate of work done by the traction that\textquotesi
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source_l00370}{370}} of file \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source}{navier\+\_\+stokes\+\_\+surface\+\_\+power\+\_\+elements.\+h}}.
-
-
-
-References \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source_l00370}{oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ ELEMENT $>$\+::get\+\_\+rate\+\_\+of\+\_\+traction\+\_\+work\+\_\+components()}}.
-
-
-
-Referenced by \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source_l00370}{oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ ELEMENT $>$\+::get\+\_\+rate\+\_\+of\+\_\+traction\+\_\+work\+\_\+components()}}.
+Definition at line 370 of file navier\+\_\+stokes\+\_\+surface\+\_\+power\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSurfacePowerElement_abb4f14e2d8a0f79f9ab678c6ae9ae049}\label{classoomph_1_1NavierStokesSurfacePowerElement_abb4f14e2d8a0f79f9ab678c6ae9ae049}} 
 \index{oomph::NavierStokesSurfacePowerElement$<$ ELEMENT $>$@{oomph::NavierStokesSurfacePowerElement$<$ ELEMENT $>$}!get\_rate\_of\_traction\_work\_components@{get\_rate\_of\_traction\_work\_components}}
@@ -244,11 +213,11 @@ Get integral of instantaneous rate of work done by the traction that\textquotesi
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source_l00385}{385}} of file \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source}{navier\+\_\+stokes\+\_\+surface\+\_\+power\+\_\+elements.\+h}}.
+Definition at line 385 of file navier\+\_\+stokes\+\_\+surface\+\_\+power\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l04735}{oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8cc_source_l06384}{oomph\+::\+Face\+Element\+::get\+\_\+local\+\_\+coordinate\+\_\+in\+\_\+bulk()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l04528}{oomph\+::\+Face\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8cc_source_l05242}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{geom__objects_8h_source_l00177}{oomph\+::\+Geom\+Object\+::ndim()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{elements_8cc_source_l06006}{oomph\+::\+Face\+Element\+::outer\+\_\+unit\+\_\+normal()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}, and \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral\+::weight()}}.
+References oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt(), oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Face\+Element\+::get\+\_\+local\+\_\+coordinate\+\_\+in\+\_\+bulk(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Face\+Element\+::interpolated\+\_\+x(), oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Integral\+::knot(), oomph\+::\+Geom\+Object\+::ndim(), oomph\+::\+Integral\+::nweight(), oomph\+::\+Face\+Element\+::outer\+\_\+unit\+\_\+normal(), s, oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Integral\+::weight().
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSurfacePowerElement_ad30a10d36ecfaebe0add91c0750e52f7}\label{classoomph_1_1NavierStokesSurfacePowerElement_ad30a10d36ecfaebe0add91c0750e52f7}} 
 \index{oomph::NavierStokesSurfacePowerElement$<$ ELEMENT $>$@{oomph::NavierStokesSurfacePowerElement$<$ ELEMENT $>$}!get\_volume\_flux@{get\_volume\_flux}}
@@ -263,15 +232,11 @@ Get integral of volume flux.
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source_l00704}{704}} of file \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source}{navier\+\_\+stokes\+\_\+surface\+\_\+power\+\_\+elements.\+h}}.
+Definition at line 704 of file navier\+\_\+stokes\+\_\+surface\+\_\+power\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source_l00704}{oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ ELEMENT $>$\+::get\+\_\+volume\+\_\+flux()}}.
-
-
-
-Referenced by \mbox{\hyperlink{navier__stokes__flux__control__elements_8h_source_l00416}{oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element$<$ ELEMENT $>$\+::get\+\_\+volume\+\_\+flux()}}, and \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source_l00704}{oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ ELEMENT $>$\+::get\+\_\+volume\+\_\+flux()}}.
+Referenced by oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element$<$ ELEMENT $>$\+::get\+\_\+volume\+\_\+flux().
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSurfacePowerElement_a9ec3d84951b67c1b84827b2a721c06b8}\label{classoomph_1_1NavierStokesSurfacePowerElement_a9ec3d84951b67c1b84827b2a721c06b8}} 
 \index{oomph::NavierStokesSurfacePowerElement$<$ ELEMENT $>$@{oomph::NavierStokesSurfacePowerElement$<$ ELEMENT $>$}!get\_volume\_flux@{get\_volume\_flux}}
@@ -286,11 +251,11 @@ Get integral of volume flux and doc.
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source_l00712}{712}} of file \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source}{navier\+\_\+stokes\+\_\+surface\+\_\+power\+\_\+elements.\+h}}.
+Definition at line 712 of file navier\+\_\+stokes\+\_\+surface\+\_\+power\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l04735}{oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8cc_source_l06384}{oomph\+::\+Face\+Element\+::get\+\_\+local\+\_\+coordinate\+\_\+in\+\_\+bulk()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l04528}{oomph\+::\+Face\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8cc_source_l05242}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{geom__objects_8h_source_l00177}{oomph\+::\+Geom\+Object\+::ndim()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{elements_8cc_source_l06006}{oomph\+::\+Face\+Element\+::outer\+\_\+unit\+\_\+normal()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}, and \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral\+::weight()}}.
+References oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt(), oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Face\+Element\+::get\+\_\+local\+\_\+coordinate\+\_\+in\+\_\+bulk(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Face\+Element\+::interpolated\+\_\+x(), oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Integral\+::knot(), oomph\+::\+Geom\+Object\+::ndim(), oomph\+::\+Integral\+::nweight(), oomph\+::\+Face\+Element\+::outer\+\_\+unit\+\_\+normal(), s, oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Integral\+::weight().
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSurfacePowerElement_add4a49170201b878ed97449dd3d55a42}\label{classoomph_1_1NavierStokesSurfacePowerElement_add4a49170201b878ed97449dd3d55a42}} 
 \index{oomph::NavierStokesSurfacePowerElement$<$ ELEMENT $>$@{oomph::NavierStokesSurfacePowerElement$<$ ELEMENT $>$}!zeta\_nodal@{zeta\_nodal}}
@@ -309,11 +274,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FaceElement_a58c9f93705c7741f7
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source_l00075}{75}} of file \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source}{navier\+\_\+stokes\+\_\+surface\+\_\+power\+\_\+elements.\+h}}.
+Definition at line 75 of file navier\+\_\+stokes\+\_\+surface\+\_\+power\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l04497}{oomph\+::\+Face\+Element\+::zeta\+\_\+nodal()}}.
+References i, and oomph\+::\+Face\+Element\+::zeta\+\_\+nodal().
 
 
 
@@ -331,11 +296,11 @@ The highest dimension of the problem.
 
 
 
-Definition at line \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source_l00840}{840}} of file \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source}{navier\+\_\+stokes\+\_\+surface\+\_\+power\+\_\+elements.\+h}}.
+Definition at line 840 of file navier\+\_\+stokes\+\_\+surface\+\_\+power\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source_l00056}{oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ ELEMENT $>$\+::\+Navier\+Stokes\+Surface\+Power\+Element()}}.
+Referenced by oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ ELEMENT $>$\+::\+Navier\+Stokes\+Surface\+Power\+Element().
 
 
 

@@ -162,7 +162,7 @@ The namespace {\ttfamily \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//========start\_of\_namespace========================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for physical parameters}}
-\DoxyCodeLine{\textcolor{comment}{//==================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Non-\/dimensional thickness}}
@@ -193,7 +193,7 @@ The main code is very short. The physical parameters $ h $, $ \sigma_{0} $ and $
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//========start\_of\_main================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver for beam (string under tension) test problem }}
-\DoxyCodeLine{\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{tensioned__string_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
@@ -241,7 +241,7 @@ The problem class has five member functions, only two of which are non-\/trivial
 \item the function {\ttfamily parameter\+\_\+study()}, which computes the beam\textquotesingle{}s deformation for a range of external pressures.
 \end{DoxyItemize}
 
-In the present problem, the functions {\ttfamily Problem\+::actions\+\_\+before\+\_\+newton\+\_\+solve()} and {\ttfamily Problem\+::actions\+\_\+after\+\_\+newton\+\_\+solve()} are not required, so remain empty. The function {\ttfamily \mbox{\hyperlink{classElasticBeamProblem_a884541822d7272d343971d2b2e79a7c4}{Elastic\+Beam\+Problem\+::mesh\+\_\+pt()}}} overloads the (virtual) function {\ttfamily Problem\+::mesh\+\_\+pt()} to return a pointer to the specific mesh used in this problem. This avoids explicit re-\/casts when member functions of the specific mesh need to be accessed.
+In the present problem, the functions {\ttfamily Problem\+::actions\+\_\+before\+\_\+newton\+\_\+solve()} and {\ttfamily Problem\+::actions\+\_\+after\+\_\+newton\+\_\+solve()} are not required, so remain empty. The function {\ttfamily \mbox{\hyperlink{classElasticBeamProblem_ae7d14ba8bec2325a82cbeed0c1b29910}{Elastic\+Beam\+Problem\+::mesh\+\_\+pt()}}} overloads the (virtual) function {\ttfamily Problem\+::mesh\+\_\+pt()} to return a pointer to the specific mesh used in this problem. This avoids explicit re-\/casts when member functions of the specific mesh need to be accessed.
 
 The class also includes three private data members which store a pointer to a node at which the displacement is documented, the length of the domain, and a pointer to the geometric object that specifies the beam\textquotesingle{}s undeformed shape.
 
@@ -249,7 +249,7 @@ The class also includes three private data members which store a pointer to a no
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//======start\_of\_problem\_class==========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Beam problem object}}
-\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classElasticBeamProblem}{ElasticBeamProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{keyword}{public}:}
@@ -262,7 +262,7 @@ The class also includes three private data members which store a pointer to a no
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticBeamProblem_a2da3cb02ce953da67fb27742e20774a5}{parameter\_study}}();}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Return pointer to the mesh}}
-\DoxyCodeLine{\textcolor{comment}{} OneDLagrangianMesh<HermiteBeamElement>* \mbox{\hyperlink{classElasticBeamProblem_a884541822d7272d343971d2b2e79a7c4}{mesh\_pt}}() }
+\DoxyCodeLine{\textcolor{comment}{} OneDLagrangianMesh<HermiteBeamElement>* \mbox{\hyperlink{classElasticBeamProblem_ae7d14ba8bec2325a82cbeed0c1b29910}{mesh\_pt}}() }
 \DoxyCodeLine{  \{\textcolor{keywordflow}{return} \textcolor{keyword}{dynamic\_cast<}OneDLagrangianMesh<HermiteBeamElement>*\textcolor{keyword}{>}}
 \DoxyCodeLine{    (Problem::mesh\_pt());\}}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -295,7 +295,7 @@ We start by creating the undeformed centreline of the beam as a {\ttfamily Strai
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=============start\_of\_constructor=====================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for elastic beam problem}}
-\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\mbox{\hyperlink{classElasticBeamProblem_a1c62c2a14c9a5528a649700d16dac2ea}{ElasticBeamProblem::ElasticBeamProblem}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&n\_elem,}
 \DoxyCodeLine{                                       \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&length) : Length(length)}
 \DoxyCodeLine{\{}
@@ -396,7 +396,7 @@ In the loop, we increment the external pressure $ P_{ext} $, solve the problem, 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_parameter\_study==========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Solver loop to perform parameter study}}
-\DoxyCodeLine{\textcolor{comment}{//=========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticBeamProblem_a2da3cb02ce953da67fb27742e20774a5}{ElasticBeamProblem::parameter\_study}}()}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ \textcolor{comment}{// Over-\/ride the default maximum value for the residuals}}
@@ -466,7 +466,7 @@ In the loop, we increment the external pressure $ P_{ext} $, solve the problem, 
 \DoxyCodeLine{   \textcolor{comment}{// Document the solution}}
 \DoxyCodeLine{   sprintf(filename,\textcolor{stringliteral}{"{}RESLT/beam\%i.dat"{}},i);}
 \DoxyCodeLine{   file.open(filename);}
-\DoxyCodeLine{   \mbox{\hyperlink{classElasticBeamProblem_a884541822d7272d343971d2b2e79a7c4}{mesh\_pt}}()-\/>output(file,5);}
+\DoxyCodeLine{   \mbox{\hyperlink{classElasticBeamProblem_ae7d14ba8bec2325a82cbeed0c1b29910}{mesh\_pt}}()-\/>output(file,5);}
 \DoxyCodeLine{   file.close();}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Write trace file: Pressure, displacement and exact solution}}
@@ -500,7 +500,8 @@ nonlinear solver, {\ttfamily Problem\+::newton\+\_\+solve(...)}, provides an imp
 \begin{DoxyItemize}
 \item the number of iterations exceeds {\ttfamily Problem\+::\+Max\+\_\+newton\+\_\+iterations} (which has a default value of 10)
 \item the residual exceeds {\ttfamily Problem\+::\+Max\+\_\+residuals} (which has a default value of 10.\+0)
-\end{DoxyItemize}The Newton method continues until the maximum residual has been reduced to {\ttfamily Problem\+::\+Newton\+\_\+solver\+\_\+tolerance}, which has a default value of $ 10^{-8} $. ~\newline
+\end{DoxyItemize}
+\end{DoxyEnumerate}The Newton method continues until the maximum residual has been reduced to {\ttfamily Problem\+::\+Newton\+\_\+solver\+\_\+tolerance}, which has a default value of $ 10^{-8} $. ~\newline
 ~\newline
  All three values are protected data members of the {\ttfamily Problem} base class and can therefore be changed in any specific {\ttfamily Problem}. For instance, in the problem considered above, the undeformed beam provides a poor approximation of its equilibrium shape at the first pressure value. The Newton method still converges (very slowly initially, then quadratically as it approaches the exact solution), even though the initial maximum residual has a relatively large value of 19.\+6. Here are some exercises that explore the convergence characteristics of the Newton method\+:
 \begin{DoxyEnumerate}
@@ -509,7 +510,6 @@ nonlinear solver, {\ttfamily Problem\+::newton\+\_\+solve(...)}, provides an imp
 \item Compare the solutions for different values of {\ttfamily Problem\+::\+Newton\+\_\+solver\+\_\+tolerance}. Is the default value ~\newline
  $ 10^{-8} $ adequate? Reduce it to $ 10^{-12} $ and $ 10^{-18} $. What do you observe? ~\newline
 
-\end{DoxyEnumerate}
 \end{DoxyEnumerate}
 
 \DoxyHorRuler{0}

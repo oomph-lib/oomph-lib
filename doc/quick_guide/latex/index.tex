@@ -47,7 +47,7 @@ All specific {\ttfamily Problems} should be implemented as objects that inherit 
 
 Only a few member functions {\itshape must} be implemented for each specific {\ttfamily Problem} class\+:
 \begin{DoxyItemize}
-\item The problem constructor 
+\item The problem constructor
 \begin{DoxyCode}{0}
 \DoxyCodeLine{SomeSpecificProblem(...) }
 
@@ -241,6 +241,8 @@ Here is the full specification for the {\ttfamily Demo\+Poisson\+Problem} class 
 \item What happens when you don\textquotesingle{}t apply a boundary condition at $ x=1 $? (Hint\+: What are the natural boundary conditions for the Poisson equation?)
 \item What happens when no boundary conditions are applied?
 \end{DoxyItemize}
+\end{DoxyItemize}
+\begin{DoxyItemize}
 \item Suppress the assignment of the equation numbers in the problem constructor and observe what happens. Check the error messages produced by {\ttfamily Problem\+::self\+\_\+test()}.
 \end{DoxyItemize}\DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -544,9 +546,9 @@ Most specific finite element classes will contain further member functions and m
 \end{DoxyCodeInclude}
  Finally, it is good practice to implement a self-\/test function that provides a sanity check of all data before the problem is solved. {\ttfamily oomph-\/lib} already provides self-\/test functions for all fundamental objects. Additional tests can be added by overloading these. For instance, in our Poisson element, the {\ttfamily Sign} variable should only take the values $ \pm 1 $. This can be tested with the following function, which also executes the {\ttfamily self\+\_\+test()} function of the underlying {\ttfamily Finite\+Element\+:}  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{  /// Self test function: The sign in the source function should}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{  /// only have the values +/-\/ 1. Following the general oomph-\/lib convention,}}
-\DoxyCodeLine{\textcolor{comment}{  /// the self\_test() returns 0 for success, and 1 for failure:}}
+\DoxyCodeLine{\textcolor{comment}{  /// Self test function: The sign in the source function should}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// only have the values +/-\/ 1. Following the general oomph-\/lib convention,}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// the self\_test() returns 0 for success, and 1 for failure:}}
 \DoxyCodeLine{\textcolor{comment}{}  \textcolor{keywordtype}{unsigned} self\_test()}
 \DoxyCodeLine{   \{}
 \DoxyCodeLine{    \textcolor{comment}{// Initialise success flag}}
@@ -575,7 +577,7 @@ The function returns the number of values that are stored at the element\textquo
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{  /// For the Poisson equation, only one value is stored at each node}}
-\DoxyCodeLine{  \textcolor{keywordtype}{unsigned} required\_nvalue(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&n)\textcolor{keyword}{ const }\{\textcolor{keywordflow}{return} 1;\}}
+\DoxyCodeLine{\textcolor{comment}{}  \textcolor{keywordtype}{unsigned} required\_nvalue(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&n)\textcolor{keyword}{ const }\{\textcolor{keywordflow}{return} 1;\}}
 
 \end{DoxyCodeInclude}
  The function is used by {\ttfamily Finite\+Element\+::construct\+\_\+node(...)} to determine the amount of storage to be allocated at each of the element\textquotesingle{}s {\ttfamily Nodes}.\hypertarget{index_residuals}{}\doxysubsubsection{The function Finite\+Element\+::get\+\_\+residuals(residuals)}\label{index_residuals}
@@ -782,8 +784,8 @@ The output function is used to print the nodal values over the element
 \begin{DoxyItemize}
 \item Implement the function {\ttfamily get\+\_\+generic\+\_\+residual\+\_\+contribution(...)} as a private member function of the {\ttfamily Two\+Node\+Poisson\+Element}. Use the function to avoid the large amount of code duplication between {\ttfamily get\+\_\+residuals(...)} and {\ttfamily get\+\_\+jacobian(...)} by re-\/writing these functions as follows\+: 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Calculate the elemental contributions to the residuals for }\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// the weak form of the Poisson equation}}
+\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Calculate the elemental contributions to the residuals for }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// the weak form of the Poisson equation}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{keywordtype}{void} get\_residuals(Vector<double> \&residuals)}
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{comment}{// Set flag for not computing the Jacobian}}
@@ -799,8 +801,8 @@ The output function is used to print the nodal values over the element
 \end{DoxyCode}
  and 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Calculate the elemental contribution to the Jacobian }\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// matrix dR\_\{i\}/du\_\{j\} used in the Newton method}}
+\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Calculate the elemental contribution to the Jacobian }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// matrix dR\_\{i\}/du\_\{j\} used in the Newton method}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{keywordtype}{void} get\_jacobian(Vector<double> \&residuals, DenseMatrix<double> \&jacobian)}
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{comment}{// Set flag for computing the Jacobian matrix}}
@@ -819,17 +821,17 @@ The output function is used to print the nodal values over the element
 \begin{DoxyItemize}
 \item Introduce a public typedef into the element class to define the required format of the function pointer\+: 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Function pointer to source function: }\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// The source function returns the value of the }}
-\DoxyCodeLine{\textcolor{comment}{/// source function at the global coordinate x.}}
+\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Function pointer to source function: }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// The source function returns the value of the }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// source function at the global coordinate x.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{keyword}{typedef} double (*PoissonSourceFctPt)(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& x);}
 
 \end{DoxyCode}
 
 \item Add a function pointer to the private data of the {\ttfamily Two\+Node\+Poisson\+Element} class and initialise it to NULL in the constructor\+: 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Function pointer to source function (initialised to}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// NULL in the constructor)}}
+\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Function pointer to source function (initialised to}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// NULL in the constructor)}}
 \DoxyCodeLine{\textcolor{comment}{}PoissonSourceFctPt Source\_fct\_pt;}
 
 \end{DoxyCode}
@@ -837,14 +839,14 @@ The output function is used to print the nodal values over the element
 \item Provide an access function for the source function pointer\+: 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Access function to pointer to source function}}
-\DoxyCodeLine{PoissonSourceFctPt\& source\_fct\_pt() \{\textcolor{keywordflow}{return} Source\_fct\_pt;\}}
+\DoxyCodeLine{\textcolor{comment}{}PoissonSourceFctPt\& source\_fct\_pt() \{\textcolor{keywordflow}{return} Source\_fct\_pt;\}}
 
 \end{DoxyCode}
 
 \item Re-\/write the {\ttfamily Two\+Node\+Poisson\+Element\+::f(...)} function, so that it evaluates the (global) function pointed to by the source function pointer. If possible, provide a default value for the case when the function pointer has not been set\+: 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{comment}{/// Evaluate source function at Eulerian position x}}
-\DoxyCodeLine{\textcolor{keywordtype}{double} f(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& x)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{keywordtype}{double} f(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& x)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\textcolor{keyword}{ }\{ }
 \DoxyCodeLine{  \textcolor{comment}{//If no source function has been set, return zero}}
 \DoxyCodeLine{  \textcolor{comment}{//so that the Poisson equation defaults to a Laplace equation.}}
@@ -859,7 +861,9 @@ The output function is used to print the nodal values over the element
 
 \end{DoxyCode}
 
+\end{DoxyItemize}
 \end{DoxyItemize}The pointer to the source function (typically defined in a suitable namespace in the \char`\"{}user\textquotesingle{}s\char`\"{} driver code) can now be set in the Problem constructor.
+\begin{DoxyItemize}
 \item Generalise the {\ttfamily Two\+Node\+Poisson\+Element} to a {\ttfamily Two\+Node\+Self\+Adjoint\+Element} that implements the isoparametric discretisation of the self-\/adjoint ODE \[ \frac{\mbox{d}}{\mbox{d}x} \left( a(x) \frac{\mbox{d}u}{\mbox{d}x} \right) + b(x) u(x) = f(x). \ \ \ \ \ \ \ \ \ (3) \] Use function pointers to allow the \char`\"{}user\char`\"{} to specify the coefficient functions $ a(x), \ b(x) $ and $ f(x) $.
 \end{DoxyItemize}
 
@@ -880,19 +884,19 @@ Geometric elements define the geometry of a {\ttfamily Finite\+Element}. They ar
 
 \end{DoxyCode}
 
-\item Set the dimension of the element by calling the protected member function 
+\item Set the dimension of the element by calling the protected member function
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::set\_dimension(dim)}
 
 \end{DoxyCode}
  Here the dimension of the element is defined as the number of local coordinates required to parametrise its shape. (Note that this is not necessarily the same as the spatial dimension of the problem -- we can have one-\/dimensional {\ttfamily Finite\+Elements} in 3D space, say.)
-\item {\bfseries{Optional\+:}} Set the spatial integration scheme by calling the protected member function 
+\item {\bfseries{Optional\+:}} Set the spatial integration scheme by calling the protected member function
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::set\_integration\_scheme(\&integration\_scheme) }
 
 \end{DoxyCode}
 
-\item {\bfseries{Optional\+:}} If the spatial dimension (= the number of Eulerian coordinates) required at all Nodes in the element is different from the spatial dimension of the element then set the \char`\"{}nodal dimension\char`\"{} by calling the protected member function 
+\item {\bfseries{Optional\+:}} If the spatial dimension (= the number of Eulerian coordinates) required at all Nodes in the element is different from the spatial dimension of the element then set the \char`\"{}nodal dimension\char`\"{} by calling the protected member function
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::set\_nodal\_dimension(dim)}
 
@@ -938,9 +942,9 @@ As a concrete example, we consider the implementation of the one-\/dimensional, 
 \end{DoxyCodeInclude}
  and it uses a one-\/dimensional, two-\/point Gauss rule as the default spatial integration scheme 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Integration scheme that will be used to integrate over the element.}}
+\DoxyCodeLine{ \textcolor{comment}{/// Integration scheme that will be used to integrate over the element.}}
 \DoxyCodeLine{\textcolor{comment}{ /// Simple Gaussian quadrature in one dimension, with two Gauss points.}}
-\DoxyCodeLine{ \textcolor{keyword}{static} Gauss<1,2> Default\_spatial\_integration\_scheme;}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{static} Gauss<1,2> Default\_spatial\_integration\_scheme;}
 
 \end{DoxyCodeInclude}
  Here is the implementation of the generic {\ttfamily Finite\+Element} member functions for our specific geometric {\ttfamily Finite\+Element\+:} \hypertarget{index_Geomconst}{}\doxysubsubsection{The constructor\+: Two\+Node\+Geometric\+Element()}\label{index_Geomconst}
@@ -1307,7 +1311,7 @@ These functions DO NOT initialise the entries of the residuals vector or the Jac
 The {\ttfamily get\+\_\+residuals} function, for example, can thus be overloaded in a multi-\/physics element, as follows\+: 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{comment}{/// Multi-\/physics element, created by multiple inheritance}}
-\DoxyCodeLine{\textcolor{keyword}{class }SomeMultiPhysicsElement : \textcolor{keyword}{public} \textcolor{keyword}{virtual} TwoNodePoissonElement,}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{keyword}{class }SomeMultiPhysicsElement : \textcolor{keyword}{public} \textcolor{keyword}{virtual} TwoNodePoissonElement,}
 \DoxyCodeLine{                                \textcolor{keyword}{public} \textcolor{keyword}{virtual} TwoNodeSomeOtherEquationElement}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}

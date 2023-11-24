@@ -28,7 +28,7 @@ void \mbox{\hyperlink{classoomph_1_1BlockPreconditionableSpaceTimeElementBase_a2
 \begin{DoxyCompactList}\small\item\em Access function to assign the number of dof types in the mesh NOTE\+: We have an access function for this as N\+\_\+dof\+\_\+types relies on the number of time slices in the mesh which isn\textquotesingle{}t something one individual element should know... \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1BlockPreconditionableSpaceTimeElementBase_a602b8a4bf43a2a4b1a0ca9ac149c4945}{ndof\+\_\+types}} () const
 \begin{DoxyCompactList}\small\item\em Return the number of \char`\"{}\+DOF types\char`\"{} that the degrees of freedom in this element are sub-\/divided into. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1BlockPreconditionableSpaceTimeElementBase_a008bf2c59d8b3f4058e970d6ddf26f1e}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const =0
+virtual void \mbox{\hyperlink{classoomph_1_1BlockPreconditionableSpaceTimeElementBase_acfe09b6fb968daa43074acde23f04763}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&dof\+\_\+lookup\+\_\+list) const =0
 \begin{DoxyCompactList}\small\item\em Pure virtual function to be implemented in a derived class. Create a list of pairs for all unknowns in this element, so the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+DOF type\char`\"{} that this unknown is associated with. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -43,7 +43,7 @@ int \mbox{\hyperlink{classoomph_1_1BlockPreconditionableSpaceTimeElementBase_a24
 \doxysubsection{Detailed Description}
 Block preconditionable space-\/time element base class. NOTE\+: It has to derive from \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} so that it can overload the implementation of \mbox{\hyperlink{classoomph_1_1BlockPreconditionableSpaceTimeElementBase_a602b8a4bf43a2a4b1a0ca9ac149c4945}{ndof\+\_\+types()}} in \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}}. 
 
-Definition at line \mbox{\hyperlink{general__purpose__space__time__block__preconditionable__elements_8h_source_l00049}{49}} of file \mbox{\hyperlink{general__purpose__space__time__block__preconditionable__elements_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditionable\+\_\+elements.\+h}}.
+Definition at line 49 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditionable\+\_\+elements.\+h.
 
 
 
@@ -60,7 +60,7 @@ Constructor (empty)
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__space__time__block__preconditionable__elements_8h_source_l00054}{54}} of file \mbox{\hyperlink{general__purpose__space__time__block__preconditionable__elements_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditionable\+\_\+elements.\+h}}.
+Definition at line 54 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditionable\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditionableSpaceTimeElementBase_a3fa22571534e509cc65b4dd4d0a9f9e7}\label{classoomph_1_1BlockPreconditionableSpaceTimeElementBase_a3fa22571534e509cc65b4dd4d0a9f9e7}} 
 \index{oomph::BlockPreconditionableSpaceTimeElementBase@{oomph::BlockPreconditionableSpaceTimeElementBase}!````~BlockPreconditionableSpaceTimeElementBase@{$\sim$BlockPreconditionableSpaceTimeElementBase}}
@@ -74,16 +74,16 @@ Destructor (empty)
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__space__time__block__preconditionable__elements_8h_source_l00057}{57}} of file \mbox{\hyperlink{general__purpose__space__time__block__preconditionable__elements_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditionable\+\_\+elements.\+h}}.
+Definition at line 57 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditionable\+\_\+elements.\+h.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1BlockPreconditionableSpaceTimeElementBase_a008bf2c59d8b3f4058e970d6ddf26f1e}\label{classoomph_1_1BlockPreconditionableSpaceTimeElementBase_a008bf2c59d8b3f4058e970d6ddf26f1e}} 
+\mbox{\Hypertarget{classoomph_1_1BlockPreconditionableSpaceTimeElementBase_acfe09b6fb968daa43074acde23f04763}\label{classoomph_1_1BlockPreconditionableSpaceTimeElementBase_acfe09b6fb968daa43074acde23f04763}} 
 \index{oomph::BlockPreconditionableSpaceTimeElementBase@{oomph::BlockPreconditionableSpaceTimeElementBase}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
 \index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::BlockPreconditionableSpaceTimeElementBase@{oomph::BlockPreconditionableSpaceTimeElementBase}}
 \doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Block\+Preconditionable\+Space\+Time\+Element\+Base\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Block\+Preconditionable\+Space\+Time\+Element\+Base\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -91,11 +91,11 @@ Pure virtual function to be implemented in a derived class. Create a list of pai
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a069f59bfc3e607a5bebba52c6314d777}{oomph\+::\+Generalised\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a29c6fb71cd7cabb29b4c289598aec601}{oomph\+::\+Generalised\+Element}}.
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1BlockPrecQTaylorHoodSpaceTimeElement_ab54a87621d8b858d87a70eeac8674d96}{oomph\+::\+Block\+Prec\+QTaylor\+Hood\+Space\+Time\+Element}}, \mbox{\hyperlink{classoomph_1_1BlockPrecQTaylorHoodMixedOrderSpaceTimeElement_ac134a00f90d3712c962fe459f3ccc9b6}{oomph\+::\+Block\+Prec\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element}}, \mbox{\hyperlink{classoomph_1_1BlockPrecQUnsteadyHeatSpaceTimeElement_a9be06861bf79d7f00a954af259aad4c1}{oomph\+::\+Block\+Prec\+QUnsteady\+Heat\+Space\+Time\+Element$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1BlockPrecRefineableQUnsteadyHeatSpaceTimeElement_a707abbf06ff0ea15a0bbc4078d66bf09}{oomph\+::\+Block\+Prec\+Refineable\+QUnsteady\+Heat\+Space\+Time\+Element$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1BlockPrecQUnsteadyHeatSpaceTimeElement_a9be06861bf79d7f00a954af259aad4c1}{oomph\+::\+Block\+Prec\+QUnsteady\+Heat\+Space\+Time\+Element$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1BlockPrecRefineableQUnsteadyHeatSpaceTimeElement_a707abbf06ff0ea15a0bbc4078d66bf09}{oomph\+::\+Block\+Prec\+Refineable\+QUnsteady\+Heat\+Space\+Time\+Element$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1BlockPrecQUnsteadyHeatMixedOrderSpaceTimeElement_a7dc54161fd2e7732b113b0a4fee77998}{oomph\+::\+Block\+Prec\+QUnsteady\+Heat\+Mixed\+Order\+Space\+Time\+Element$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1BlockPrecRefineableQUnsteadyHeatMixedOrderSpaceTimeElement_ab6042a2f0be484ce2a4170db55e6eb05}{oomph\+::\+Block\+Prec\+Refineable\+QUnsteady\+Heat\+Mixed\+Order\+Space\+Time\+Element$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1\+D $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1BlockPrecRefineableQUnsteadyHeatMixedOrderSpaceTimeElement_a6920048924016a6a0e5166d057850dc0}{oomph\+::\+Block\+Prec\+Refineable\+QUnsteady\+Heat\+Mixed\+Order\+Space\+Time\+Element$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1BlockPrecQUnsteadyHeatMixedOrderSpaceTimeElement_ab5b6733bfcef09d48d44dd6f7fdcf1c6}{oomph\+::\+Block\+Prec\+QUnsteady\+Heat\+Mixed\+Order\+Space\+Time\+Element$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1BlockPrecRefineableQUnsteadyHeatSpaceTimeElement_a42ac6e9476c2ecd9fcc9272c6b2c357f}{oomph\+::\+Block\+Prec\+Refineable\+QUnsteady\+Heat\+Space\+Time\+Element$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1BlockPrecQUnsteadyHeatSpaceTimeElement_ae83b88acaabab6e12655fbde7c6a8950}{oomph\+::\+Block\+Prec\+QUnsteady\+Heat\+Space\+Time\+Element$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1BlockPrecRefineableQUnsteadyHeatSpaceTimeElement_a42ac6e9476c2ecd9fcc9272c6b2c357f}{oomph\+::\+Block\+Prec\+Refineable\+QUnsteady\+Heat\+Space\+Time\+Element$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1BlockPrecQUnsteadyHeatSpaceTimeElement_ae83b88acaabab6e12655fbde7c6a8950}{oomph\+::\+Block\+Prec\+QUnsteady\+Heat\+Space\+Time\+Element$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1BlockPrecQTaylorHoodMixedOrderSpaceTimeElement_a087e71ea9d33fa1d64f5c727642fa940}{oomph\+::\+Block\+Prec\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element}}, and \mbox{\hyperlink{classoomph_1_1BlockPrecQTaylorHoodSpaceTimeElement_acfe754f406045395a457cc03590d48ab}{oomph\+::\+Block\+Prec\+QTaylor\+Hood\+Space\+Time\+Element}}.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditionableSpaceTimeElementBase_a602b8a4bf43a2a4b1a0ca9ac149c4945}\label{classoomph_1_1BlockPreconditionableSpaceTimeElementBase_a602b8a4bf43a2a4b1a0ca9ac149c4945}} 
 \index{oomph::BlockPreconditionableSpaceTimeElementBase@{oomph::BlockPreconditionableSpaceTimeElementBase}!ndof\_types@{ndof\_types}}
@@ -113,11 +113,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a0c6037a870
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__space__time__block__preconditionable__elements_8h_source_l00093}{93}} of file \mbox{\hyperlink{general__purpose__space__time__block__preconditionable__elements_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditionable\+\_\+elements.\+h}}.
+Definition at line 93 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditionable\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{general__purpose__space__time__block__preconditionable__elements_8h_source_l00110}{N\+\_\+dof\+\_\+types}}.
+References N\+\_\+dof\+\_\+types.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditionableSpaceTimeElementBase_a218354f69fa24db5bd5f3ba8e8ad88cd}\label{classoomph_1_1BlockPreconditionableSpaceTimeElementBase_a218354f69fa24db5bd5f3ba8e8ad88cd}} 
 \index{oomph::BlockPreconditionableSpaceTimeElementBase@{oomph::BlockPreconditionableSpaceTimeElementBase}!set\_ndof\_types@{set\_ndof\_types}}
@@ -131,11 +131,11 @@ Access function to assign the number of dof types in the mesh NOTE\+: We have an
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__space__time__block__preconditionable__elements_8h_source_l00084}{84}} of file \mbox{\hyperlink{general__purpose__space__time__block__preconditionable__elements_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditionable\+\_\+elements.\+h}}.
+Definition at line 84 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditionable\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{general__purpose__space__time__block__preconditionable__elements_8h_source_l00110}{N\+\_\+dof\+\_\+types}}.
+References N\+\_\+dof\+\_\+types.
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditionableSpaceTimeElementBase_afe9eb6b09f11fe928ebdd404b1061c05}\label{classoomph_1_1BlockPreconditionableSpaceTimeElementBase_afe9eb6b09f11fe928ebdd404b1061c05}} 
 \index{oomph::BlockPreconditionableSpaceTimeElementBase@{oomph::BlockPreconditionableSpaceTimeElementBase}!set\_time\_slab\_id@{set\_time\_slab\_id}}
@@ -149,11 +149,11 @@ Access function to assign the time slice this element lies in.
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__space__time__block__preconditionable__elements_8h_source_l00060}{60}} of file \mbox{\hyperlink{general__purpose__space__time__block__preconditionable__elements_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditionable\+\_\+elements.\+h}}.
+Definition at line 60 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditionable\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{general__purpose__space__time__block__preconditionable__elements_8h_source_l00113}{Time\+\_\+slab\+\_\+id}}.
+References Time\+\_\+slab\+\_\+id.
 
 
 
@@ -170,11 +170,11 @@ The number of time slices in the mesh.
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__space__time__block__preconditionable__elements_8h_source_l00110}{110}} of file \mbox{\hyperlink{general__purpose__space__time__block__preconditionable__elements_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditionable\+\_\+elements.\+h}}.
+Definition at line 110 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditionable\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{general__purpose__space__time__block__preconditionable__elements_8h_source_l00093}{ndof\+\_\+types()}}, and \mbox{\hyperlink{general__purpose__space__time__block__preconditionable__elements_8h_source_l00084}{set\+\_\+ndof\+\_\+types()}}.
+Referenced by ndof\+\_\+types(), and set\+\_\+ndof\+\_\+types().
 
 \mbox{\Hypertarget{classoomph_1_1BlockPreconditionableSpaceTimeElementBase_a24db5c92c237470635975fb53a892f00}\label{classoomph_1_1BlockPreconditionableSpaceTimeElementBase_a24db5c92c237470635975fb53a892f00}} 
 \index{oomph::BlockPreconditionableSpaceTimeElementBase@{oomph::BlockPreconditionableSpaceTimeElementBase}!Time\_slab\_id@{Time\_slab\_id}}
@@ -188,11 +188,11 @@ The time slice this element lies within.
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__space__time__block__preconditionable__elements_8h_source_l00113}{113}} of file \mbox{\hyperlink{general__purpose__space__time__block__preconditionable__elements_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditionable\+\_\+elements.\+h}}.
+Definition at line 113 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditionable\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{spacetime__navier__stokes__block__preconditionable__elements_8cc_source_l00038}{oomph\+::\+Block\+Prec\+QTaylor\+Hood\+Space\+Time\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns()}}, \mbox{\hyperlink{mixed__order__petrov__galerkin__space__time__block__preconditionable__elements_8cc_source_l00039}{oomph\+::\+Block\+Prec\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns()}}, and \mbox{\hyperlink{general__purpose__space__time__block__preconditionable__elements_8h_source_l00060}{set\+\_\+time\+\_\+slab\+\_\+id()}}.
+Referenced by oomph\+::\+Block\+Prec\+QTaylor\+Hood\+Space\+Time\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns(), oomph\+::\+Block\+Prec\+QTaylor\+Hood\+Mixed\+Order\+Space\+Time\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns(), and set\+\_\+time\+\_\+slab\+\_\+id().
 
 
 

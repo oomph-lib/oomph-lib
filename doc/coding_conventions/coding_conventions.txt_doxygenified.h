@@ -214,6 +214,21 @@ of objects in the container.
    automatically extracted by doxygen and inserted into the
    code documentation.
 
+- All member data is defined (and annotated) on a separate line,
+  otherwise doxygen gets confused. So use
+  \code
+  /// Number of elements
+  unsigned Nelement;
+
+  /// Number of nodes
+  unsigned Nnode;
+  \endcode
+  rather than
+  \code
+  /// Number of elements and nodes
+  unsigned Nelement, Nnode;
+  \endcode
+
 
 \subsection oomph The oomph-lib namespace
 - \c oomph-lib is contained in its own namespace, \c oomph,

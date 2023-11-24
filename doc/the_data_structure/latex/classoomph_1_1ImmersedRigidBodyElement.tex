@@ -25,17 +25,17 @@ typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a455
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_ada7e9e80771ed9df5f236b371ca66f84}{Immersed\+Rigid\+Body\+Element}} (\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$const \&geom\+\_\+object\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\+\_\+stepper\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a9f9537354eb0e1c9f653e8cd4e8216b1}{centre\+\_\+displacement\+\_\+data\+\_\+pt}}=0)
+\mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_ada7e9e80771ed9df5f236b371ca66f84}{Immersed\+Rigid\+Body\+Element}} (\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$const \&geom\+\_\+object\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1GeomObject_a3c92023891dd4a0e818022f467eeb7f1}{time\+\_\+stepper\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_ac1e912d596869720566ab2264aa60d6c}{centre\+\_\+displacement\+\_\+data\+\_\+pt}}=0)
 \begin{DoxyCompactList}\small\item\em Constructor that takes an underlying geometric object\+: and timestepper. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_afbc443daa2200a53b96dc3295e821461}{set\+\_\+geometric\+\_\+rotation}} ()
 \begin{DoxyCompactList}\small\item\em Set the rotation of the object to be included. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_ac1aaf7a8872fa3e02201ed13eb122c59}{unset\+\_\+geometric\+\_\+rotation}} ()
 \begin{DoxyCompactList}\small\item\em Set the rotation of the object to be ignored (only really useful if you have a circular shape) \end{DoxyCompactList}\item 
-double \& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a23d7c604e8a81caeb7a5d7493c16c558}{initial\+\_\+phi}} ()
+double \& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_aaaff87f9808037afd0ef9adebfb0ebde}{initial\+\_\+phi}} ()
 \begin{DoxyCompactList}\small\item\em Access function for the initial angle. \end{DoxyCompactList}\item 
-double \& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a5b86d5f8d79206d68c0cd09bc59b5b3d}{initial\+\_\+centre\+\_\+of\+\_\+mass}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+double \& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a3c436ba641c221d647dd21a67a583c49}{initial\+\_\+centre\+\_\+of\+\_\+mass}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Access function for the initial centre of mass. \end{DoxyCompactList}\item 
-const double \& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_ac5ae23bf1c3e7e988956a248a1bfe1bd}{initial\+\_\+centre\+\_\+of\+\_\+mass}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+const double \& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_af19a740e7de78418af938ea8f23e5a86}{initial\+\_\+centre\+\_\+of\+\_\+mass}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Access function for the initial centre of mass (const version) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a14f5acb186ecd1168dfa08dcf242c538}{position}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&r) const
 \begin{DoxyCompactList}\small\item\em Overload the position to apply the rotation and translation. \end{DoxyCompactList}\item 
@@ -45,19 +45,19 @@ void \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a3b25cfe303aa51f26b
 \begin{DoxyCompactList}\small\item\em Work out the position derivative, including rigid body motion. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a60dd9497b3e0713719dfb4b08989eb4c}{$\sim$\+Immersed\+Rigid\+Body\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Destuctor\+: Cleanup if required. \end{DoxyCompactList}\item 
-double \& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a5a18c79fbeae3dc091c10f55add50c5e}{mass\+\_\+shape}} ()
+double \& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a0ff9948b9df503ec15a32d3f6f19784e}{mass\+\_\+shape}} ()
 \begin{DoxyCompactList}\small\item\em Access to dimensionless \char`\"{}mass\char`\"{} shape parameter that must be set by hand for non polygonal shapes. \end{DoxyCompactList}\item 
-double \& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a31c670c086ce25b8d92fb5dc2a49e0f7}{moment\+\_\+of\+\_\+inertia\+\_\+shape}} ()
+double \& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_ac55d720f7151e838785bcca455127155}{moment\+\_\+of\+\_\+inertia\+\_\+shape}} ()
 \begin{DoxyCompactList}\small\item\em Access to dimensionless polar \char`\"{}moment of inertia\char`\"{} shape parameter. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$\& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a9f9537354eb0e1c9f653e8cd4e8216b1}{centre\+\_\+displacement\+\_\+data\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$\& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_ac1e912d596869720566ab2264aa60d6c}{centre\+\_\+displacement\+\_\+data\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to \mbox{\hyperlink{classoomph_1_1Data}{Data}} for centre of gravity displacement. Values\+: 0\+: x-\/displ; 1\+: y-\/displ; 2\+: rotation angle. \end{DoxyCompactList}\item 
-double \& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_ae559fc3d403b27edc660f554f97ed2bf}{centre\+\_\+x\+\_\+displacement}} ()
+double \& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_ad8dd9dad803362a51742fc9e79aa6aa7}{centre\+\_\+x\+\_\+displacement}} ()
 \begin{DoxyCompactList}\small\item\em x-\/displacement of centre of mass \end{DoxyCompactList}\item 
-double \& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a0f6495e7b4d775712bfbb06d43b64077}{centre\+\_\+y\+\_\+displacement}} ()
+double \& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a61ffdb07b3db3936f83c3abef3d322d7}{centre\+\_\+y\+\_\+displacement}} ()
 \begin{DoxyCompactList}\small\item\em y-\/displacement of centre of mass \end{DoxyCompactList}\item 
-double \& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_ac8e6c6e796157c4540cb2e868f375f9d}{centre\+\_\+rotation\+\_\+angle}} ()
+double \& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_aca1ade4ee20982d2f91c10d3730c0f00}{centre\+\_\+rotation\+\_\+angle}} ()
 \begin{DoxyCompactList}\small\item\em rotation of centre of mass \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_ab0a6dbd7674071db2ad61543b1ad7674}{centre\+\_\+of\+\_\+gravity}} ()
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a087cd76b208e47bb4b29a63f01d2b6f7}{centre\+\_\+of\+\_\+gravity}} ()
 \begin{DoxyCompactList}\small\item\em Get current centre of gravity. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a27f6871d3ff88b116f6fe5a653858457}{pin\+\_\+centre\+\_\+of\+\_\+mass\+\_\+coordinate}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Pin the i-\/th coordinate of the centre of mass. \end{DoxyCompactList}\item 
@@ -89,44 +89,44 @@ void \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a3fe2dc3e3adbe330de
 \begin{DoxyCompactList}\small\item\em After all internal data finite-\/differencing, update nodal positions. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_ae901e5528aad0dbc2eb7cb43849ae606}{get\+\_\+force\+\_\+and\+\_\+torque}} (const double \&time, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&force, double \&torque)
 \begin{DoxyCompactList}\small\item\em Get force and torque from specified fct pointers and drag mesh. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a7a43bfd54213becfb135b594720b0539}{External\+Force\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a98378aa05d768f73e4a42bb2de4a3b73}{external\+\_\+force\+\_\+fct\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a7a43bfd54213becfb135b594720b0539}{External\+Force\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_abe0594b64f31848ebb05866fe0cde688}{external\+\_\+force\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access to function pointer to function that specifies external force. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a455638a1d0e9547290d835513d00c40e}{External\+Torque\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_ac07085ac900077b5e4e65fc7d964ea7a}{external\+\_\+torque\+\_\+fct\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a455638a1d0e9547290d835513d00c40e}{External\+Torque\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a06c876a8a96c2d4e168aa6cdc48b1f15}{external\+\_\+torque\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access to function pointer to function that specifies external torque. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a21728c27a2d33cc9ae38ccd7938d5b15}{drag\+\_\+mesh\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const  \& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_ab5570597c7962806448af56aac4ac3cd}{drag\+\_\+mesh\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access fct to mesh containing face elements that allow the computation of the drag on the body. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_adae3a4896f45d1fd08f3cd40fad0fdf4}{set\+\_\+drag\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a21728c27a2d33cc9ae38ccd7938d5b15}{drag\+\_\+mesh\+\_\+pt}})
+void \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_adae3a4896f45d1fd08f3cd40fad0fdf4}{set\+\_\+drag\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_ab5570597c7962806448af56aac4ac3cd}{drag\+\_\+mesh\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Function to set the drag mesh and add the appropriate load and geometric data as external data to the Rigid Body. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a2ee0f157b7a4f1b7ad89b3d45a4cf620}{flush\+\_\+drag\+\_\+mesh}} ()
 \begin{DoxyCompactList}\small\item\em Function to clear the drag mesh and all associated external data. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a4c5bf4b09a19ea70edf9ec68b41bfd2a}{ngeom\+\_\+data}} () const
 \begin{DoxyCompactList}\small\item\em The position of the object depends on one data item. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a70a80642abccb05334b4863024dbc3e5}{geom\+\_\+data\+\_\+pt}} (const unsigned \&j)
+\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_adf0e61dfcf35f8be55dab30dd8e0ccb5}{geom\+\_\+data\+\_\+pt}} (const unsigned \&j)
 \begin{DoxyCompactList}\small\item\em Return pointer to the j-\/th (only) \mbox{\hyperlink{classoomph_1_1Data}{Data}} item that the object\textquotesingle{}s shape depends on. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $\ast$\& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a8c024412de2cf3a9776706519699a958}{g\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $\ast$\& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a279438c72a19d8317de5965c91b9954e}{g\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function to the direction of gravity. \end{DoxyCompactList}\item 
-const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a4934d1a22bfb0b9576b1d9067125af5d}{g}} () const
+const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a01354ab471561d2703f8d391ae63f224}{g}} () const
 \begin{DoxyCompactList}\small\item\em Access function for gravity. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_ad76b3b63973e5e9ce5462c9d999ea8c2}{re\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a6252a20838bd8f511758e2ec1950602f}{re\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for the pointer to the fluid Reynolds number. \end{DoxyCompactList}\item 
-const double \& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_aeee81daee82885dfc7f894088d548559}{re}} () const
+const double \& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_ab1dd410be282f26775715bc14544723f}{re}} () const
 \begin{DoxyCompactList}\small\item\em Access function for the fluid Reynolds number. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a68ba2c82801cdee8f5f1395bccbf3f72}{st\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_af31ee7e3a9ce707f80632cdaf50937da}{st\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for the pointer to the fluid Strouhal number. \end{DoxyCompactList}\item 
-const double \& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a2657392b73e5522b9fce25250a12019d}{st}} () const
+const double \& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a872d911b5a42dae2b2d1463a9a381bb2}{st}} () const
 \begin{DoxyCompactList}\small\item\em Access function for the fluid Strouhal number. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a6ffb150e5f2d59356bb8a30d5d787f7a}{re\+\_\+invfr\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a4b52a3c9dff855e88467abb57619639b}{re\+\_\+invfr\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for pointer to the fluid inverse Froude number (dimensionless gravitational loading) \end{DoxyCompactList}\item 
-const double \& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a9f3f40041e287824fb7bfd2153d8a0c5}{re\+\_\+invfr}} ()
+const double \& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_ad5082011e8c4db0def4044b05314d149}{re\+\_\+invfr}} ()
 \begin{DoxyCompactList}\small\item\em Access to the fluid inverse Froude number. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_af6c78a49f12fa840c7574fac91071f35}{density\+\_\+ratio\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a87323907ddf8bc70a23219e86c5a3181}{density\+\_\+ratio\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for the pointer to the density ratio. \end{DoxyCompactList}\item 
-const double \& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a206544ce5e57f34f5badb436d6a32ee2}{density\+\_\+ratio}} () const
+const double \& \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_af080ce9be7657e243e94ab303d5b52b1}{density\+\_\+ratio}} () const
 \begin{DoxyCompactList}\small\item\em Access function for the the density ratio. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a085973f0fc1fe69839a632811ea8702b}{Immersed\+Rigid\+Body\+Element}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\+\_\+stepper\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a9f9537354eb0e1c9f653e8cd4e8216b1}{centre\+\_\+displacement\+\_\+data\+\_\+pt}}=0)
+\mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a085973f0fc1fe69839a632811ea8702b}{Immersed\+Rigid\+Body\+Element}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1GeomObject_a3c92023891dd4a0e818022f467eeb7f1}{time\+\_\+stepper\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_ac1e912d596869720566ab2264aa60d6c}{centre\+\_\+displacement\+\_\+data\+\_\+pt}}=0)
 \begin{DoxyCompactList}\small\item\em Default constructor that intialises everything to zero. This is expected to be called only from derived clases such as the \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyTriangleMeshPolygon}{Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon}} that can provided their own \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a14f5acb186ecd1168dfa08dcf242c538}{position()}} functions. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_af115b2b370039678ebe619be333efc9f}{apply\+\_\+rigid\+\_\+body\+\_\+motion}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&initial\+\_\+x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&r) const
 \begin{DoxyCompactList}\small\item\em Helper function to adjust the position in response to changes in position and angle of the solid about the centre of mass. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -148,7 +148,7 @@ double \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_ab410ae35b8e4c034
 \item 
 int \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_aae4212a06293e06c0d8ccf2ce57a466f}{centre\+\_\+displacement\+\_\+local\+\_\+eqn}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Return the equation number associated with the i-\/th centre of gravity displacment 0\+: x-\/displ; 1\+: y-\/displ; 2\+: rotation angle. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a34eec4f661aafa32f5d4cf14ceb1f850}{initialise}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\+\_\+stepper\+\_\+pt}})
+void \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a34eec4f661aafa32f5d4cf14ceb1f850}{initialise}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1GeomObject_a3c92023891dd4a0e818022f467eeb7f1}{time\+\_\+stepper\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Initialisation function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a7890b76d95e13de6436423a2989bf3ec}{get\+\_\+residuals\+\_\+rigid\+\_\+body\+\_\+generic}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, const bool \&flag)
 \begin{DoxyCompactList}\small\item\em Get residuals and/or Jacobian. \end{DoxyCompactList}\item 
@@ -206,7 +206,7 @@ For general usage, an underlying geometric object must passed to the constructor
 
 If added to a mesh in the \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} (in its incarnation as a \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}}) the displacement/rotation of the body is computed in response to (i) user-\/specifiable applied forces and a torque and (ii) the net drag (and associated torque) from a mesh of elements that can exert a drag onto the body (typically Navier-\/\+Stokes Face\+Elements that apply a viscous drag to an immersed body, represented by the body.) 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00092}{92}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 92 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
@@ -223,7 +223,7 @@ Function pointer to function that specifies external force.
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00097}{97}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 97 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a455638a1d0e9547290d835513d00c40e}\label{classoomph_1_1ImmersedRigidBodyElement_a455638a1d0e9547290d835513d00c40e}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!ExternalTorqueFctPt@{ExternalTorqueFctPt}}
@@ -237,7 +237,7 @@ Function pointer to function that specifies external torque.
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00102}{102}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 102 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
@@ -254,11 +254,11 @@ Default constructor that intialises everything to zero. This is expected to be c
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00110}{110}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 110 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00266}{initialise()}}.
+References initialise().
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_ada7e9e80771ed9df5f236b371ca66f84}\label{classoomph_1_1ImmersedRigidBodyElement_ada7e9e80771ed9df5f236b371ca66f84}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!ImmersedRigidBodyElement@{ImmersedRigidBodyElement}}
@@ -272,11 +272,11 @@ Constructor that takes an underlying geometric object\+: and timestepper.
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00133}{133}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 133 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00266}{initialise()}}.
+References initialise().
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a60dd9497b3e0713719dfb4b08989eb4c}\label{classoomph_1_1ImmersedRigidBodyElement_a60dd9497b3e0713719dfb4b08989eb4c}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!````~ImmersedRigidBodyElement@{$\sim$ImmersedRigidBodyElement}}
@@ -290,11 +290,11 @@ Destuctor\+: Cleanup if required.
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00210}{210}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 210 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00592}{Centre\+\_\+displacement\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00639}{Displacement\+\_\+data\+\_\+is\+\_\+internal}}, and \mbox{\hyperlink{elements_8h_source_l00622}{oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt()}}.
+References Centre\+\_\+displacement\+\_\+data\+\_\+pt, Displacement\+\_\+data\+\_\+is\+\_\+internal, and oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt().
 
 
 
@@ -311,21 +311,21 @@ Helper function to adjust the position in response to changes in position and an
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00498}{498}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 498 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00592}{Centre\+\_\+displacement\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00643}{Include\+\_\+geometric\+\_\+rotation}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00579}{Initial\+\_\+centre\+\_\+of\+\_\+mass}}, and \mbox{\hyperlink{nodes_8h_source_l00293}{oomph\+::\+Data\+::value()}}.
+References Centre\+\_\+displacement\+\_\+data\+\_\+pt, Include\+\_\+geometric\+\_\+rotation, Initial\+\_\+centre\+\_\+of\+\_\+mass, and oomph\+::\+Data\+::value().
 
 
 
-Referenced by \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00186}{position()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00684}{oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::position()}}, and \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00549}{oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::reset\+\_\+reference\+\_\+configuration()}}.
+Referenced by position(), oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::position(), and oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::reset\+\_\+reference\+\_\+configuration().
 
-\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a9f9537354eb0e1c9f653e8cd4e8216b1}\label{classoomph_1_1ImmersedRigidBodyElement_a9f9537354eb0e1c9f653e8cd4e8216b1}} 
+\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_ac1e912d596869720566ab2264aa60d6c}\label{classoomph_1_1ImmersedRigidBodyElement_ac1e912d596869720566ab2264aa60d6c}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!centre\_displacement\_data\_pt@{centre\_displacement\_data\_pt}}
 \index{centre\_displacement\_data\_pt@{centre\_displacement\_data\_pt}!oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}}
 \doxysubsubsection{\texorpdfstring{centre\_displacement\_data\_pt()}{centre\_displacement\_data\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$\& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::centre\+\_\+displacement\+\_\+data\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$\& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::centre\+\_\+displacement\+\_\+data\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -333,11 +333,11 @@ Pointer to \mbox{\hyperlink{classoomph_1_1Data}{Data}} for centre of gravity dis
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00235}{235}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 235 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00592}{Centre\+\_\+displacement\+\_\+data\+\_\+pt}}.
+References Centre\+\_\+displacement\+\_\+data\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_aae4212a06293e06c0d8ccf2ce57a466f}\label{classoomph_1_1ImmersedRigidBodyElement_aae4212a06293e06c0d8ccf2ce57a466f}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!centre\_displacement\_local\_eqn@{centre\_displacement\_local\_eqn}}
@@ -351,21 +351,21 @@ Return the equation number associated with the i-\/th centre of gravity displacm
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00537}{537}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 537 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00639}{Displacement\+\_\+data\+\_\+is\+\_\+internal}}, \mbox{\hyperlink{elements_8h_source_l00311}{oomph\+::\+Generalised\+Element\+::external\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00636}{Index\+\_\+for\+\_\+centre\+\_\+displacement}}, and \mbox{\hyperlink{elements_8h_source_l00267}{oomph\+::\+Generalised\+Element\+::internal\+\_\+local\+\_\+eqn()}}.
+References Displacement\+\_\+data\+\_\+is\+\_\+internal, oomph\+::\+Generalised\+Element\+::external\+\_\+local\+\_\+eqn(), Index\+\_\+for\+\_\+centre\+\_\+displacement, and oomph\+::\+Generalised\+Element\+::internal\+\_\+local\+\_\+eqn().
 
 
 
-Referenced by \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00304}{get\+\_\+residuals\+\_\+rigid\+\_\+body\+\_\+generic()}}.
+Referenced by get\+\_\+residuals\+\_\+rigid\+\_\+body\+\_\+generic().
 
-\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_ab0a6dbd7674071db2ad61543b1ad7674}\label{classoomph_1_1ImmersedRigidBodyElement_ab0a6dbd7674071db2ad61543b1ad7674}} 
+\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a087cd76b208e47bb4b29a63f01d2b6f7}\label{classoomph_1_1ImmersedRigidBodyElement_a087cd76b208e47bb4b29a63f01d2b6f7}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!centre\_of\_gravity@{centre\_of\_gravity}}
 \index{centre\_of\_gravity@{centre\_of\_gravity}!oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}}
 \doxysubsubsection{\texorpdfstring{centre\_of\_gravity()}{centre\_of\_gravity()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ oomph\+::\+Immersed\+Rigid\+Body\+Element\+::centre\+\_\+of\+\_\+gravity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ oomph\+::\+Immersed\+Rigid\+Body\+Element\+::centre\+\_\+of\+\_\+gravity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -373,17 +373,17 @@ Get current centre of gravity.
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00259}{259}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 259 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00592}{Centre\+\_\+displacement\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00579}{Initial\+\_\+centre\+\_\+of\+\_\+mass}}, and \mbox{\hyperlink{nodes_8h_source_l00293}{oomph\+::\+Data\+::value()}}.
+References Centre\+\_\+displacement\+\_\+data\+\_\+pt, i, Initial\+\_\+centre\+\_\+of\+\_\+mass, and oomph\+::\+Data\+::value().
 
-\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_ac8e6c6e796157c4540cb2e868f375f9d}\label{classoomph_1_1ImmersedRigidBodyElement_ac8e6c6e796157c4540cb2e868f375f9d}} 
+\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_aca1ade4ee20982d2f91c10d3730c0f00}\label{classoomph_1_1ImmersedRigidBodyElement_aca1ade4ee20982d2f91c10d3730c0f00}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!centre\_rotation\_angle@{centre\_rotation\_angle}}
 \index{centre\_rotation\_angle@{centre\_rotation\_angle}!oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}}
 \doxysubsubsection{\texorpdfstring{centre\_rotation\_angle()}{centre\_rotation\_angle()}}
-{\footnotesize\ttfamily double \& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::centre\+\_\+rotation\+\_\+angle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double\& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::centre\+\_\+rotation\+\_\+angle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -391,17 +391,17 @@ rotation of centre of mass
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00253}{253}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 253 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00592}{Centre\+\_\+displacement\+\_\+data\+\_\+pt}}, and \mbox{\hyperlink{nodes_8h_source_l00324}{oomph\+::\+Data\+::value\+\_\+pt()}}.
+References Centre\+\_\+displacement\+\_\+data\+\_\+pt, and oomph\+::\+Data\+::value\+\_\+pt().
 
-\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_ae559fc3d403b27edc660f554f97ed2bf}\label{classoomph_1_1ImmersedRigidBodyElement_ae559fc3d403b27edc660f554f97ed2bf}} 
+\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_ad8dd9dad803362a51742fc9e79aa6aa7}\label{classoomph_1_1ImmersedRigidBodyElement_ad8dd9dad803362a51742fc9e79aa6aa7}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!centre\_x\_displacement@{centre\_x\_displacement}}
 \index{centre\_x\_displacement@{centre\_x\_displacement}!oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}}
 \doxysubsubsection{\texorpdfstring{centre\_x\_displacement()}{centre\_x\_displacement()}}
-{\footnotesize\ttfamily double \& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::centre\+\_\+x\+\_\+displacement (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double\& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::centre\+\_\+x\+\_\+displacement (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -409,17 +409,17 @@ x-\/displacement of centre of mass
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00241}{241}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 241 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00592}{Centre\+\_\+displacement\+\_\+data\+\_\+pt}}, and \mbox{\hyperlink{nodes_8h_source_l00324}{oomph\+::\+Data\+::value\+\_\+pt()}}.
+References Centre\+\_\+displacement\+\_\+data\+\_\+pt, and oomph\+::\+Data\+::value\+\_\+pt().
 
-\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a0f6495e7b4d775712bfbb06d43b64077}\label{classoomph_1_1ImmersedRigidBodyElement_a0f6495e7b4d775712bfbb06d43b64077}} 
+\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a61ffdb07b3db3936f83c3abef3d322d7}\label{classoomph_1_1ImmersedRigidBodyElement_a61ffdb07b3db3936f83c3abef3d322d7}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!centre\_y\_displacement@{centre\_y\_displacement}}
 \index{centre\_y\_displacement@{centre\_y\_displacement}!oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}}
 \doxysubsubsection{\texorpdfstring{centre\_y\_displacement()}{centre\_y\_displacement()}}
-{\footnotesize\ttfamily double \& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::centre\+\_\+y\+\_\+displacement (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double\& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::centre\+\_\+y\+\_\+displacement (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -427,11 +427,11 @@ y-\/displacement of centre of mass
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00247}{247}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 247 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00592}{Centre\+\_\+displacement\+\_\+data\+\_\+pt}}, and \mbox{\hyperlink{nodes_8h_source_l00324}{oomph\+::\+Data\+::value\+\_\+pt()}}.
+References Centre\+\_\+displacement\+\_\+data\+\_\+pt, and oomph\+::\+Data\+::value\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a5d9b6718a4d1b92c8849861224c11cc4}\label{classoomph_1_1ImmersedRigidBodyElement_a5d9b6718a4d1b92c8849861224c11cc4}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!delete\_external\_hijacked\_data@{delete\_external\_hijacked\_data}}
@@ -445,21 +445,21 @@ Delete the storage for the external data formed from hijacked data.
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00562}{562}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 562 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00659}{oomph\+::\+Generalised\+Element\+::external\+\_\+data\+\_\+pt()}}, and \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00559}{List\+\_\+of\+\_\+external\+\_\+hijacked\+\_\+data}}.
+References oomph\+::\+Generalised\+Element\+::external\+\_\+data\+\_\+pt(), and List\+\_\+of\+\_\+external\+\_\+hijacked\+\_\+data.
 
 
 
-Referenced by \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00410}{flush\+\_\+drag\+\_\+mesh()}}, and \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00206}{set\+\_\+drag\+\_\+mesh()}}.
+Referenced by flush\+\_\+drag\+\_\+mesh(), and set\+\_\+drag\+\_\+mesh().
 
-\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a206544ce5e57f34f5badb436d6a32ee2}\label{classoomph_1_1ImmersedRigidBodyElement_a206544ce5e57f34f5badb436d6a32ee2}} 
+\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_af080ce9be7657e243e94ab303d5b52b1}\label{classoomph_1_1ImmersedRigidBodyElement_af080ce9be7657e243e94ab303d5b52b1}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!density\_ratio@{density\_ratio}}
 \index{density\_ratio@{density\_ratio}!oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}}
 \doxysubsubsection{\texorpdfstring{density\_ratio()}{density\_ratio()}}
-{\footnotesize\ttfamily const double \& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::density\+\_\+ratio (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const double\& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::density\+\_\+ratio (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -467,21 +467,21 @@ Access function for the the density ratio.
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00489}{489}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 489 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00623}{Density\+\_\+ratio\+\_\+pt}}.
+References Density\+\_\+ratio\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00304}{get\+\_\+residuals\+\_\+rigid\+\_\+body\+\_\+generic()}}.
+Referenced by get\+\_\+residuals\+\_\+rigid\+\_\+body\+\_\+generic().
 
-\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_af6c78a49f12fa840c7574fac91071f35}\label{classoomph_1_1ImmersedRigidBodyElement_af6c78a49f12fa840c7574fac91071f35}} 
+\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a87323907ddf8bc70a23219e86c5a3181}\label{classoomph_1_1ImmersedRigidBodyElement_a87323907ddf8bc70a23219e86c5a3181}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!density\_ratio\_pt@{density\_ratio\_pt}}
 \index{density\_ratio\_pt@{density\_ratio\_pt}!oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}}
 \doxysubsubsection{\texorpdfstring{density\_ratio\_pt()}{density\_ratio\_pt()}}
-{\footnotesize\ttfamily double $\ast$\& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::density\+\_\+ratio\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double$\ast$\& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::density\+\_\+ratio\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -489,11 +489,11 @@ Access function for the pointer to the density ratio.
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00483}{483}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 483 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00623}{Density\+\_\+ratio\+\_\+pt}}.
+References Density\+\_\+ratio\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a3b25cfe303aa51f26bd27312abccbba4}\label{classoomph_1_1ImmersedRigidBodyElement_a3b25cfe303aa51f26bd27312abccbba4}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!dposition\_dt@{dposition\_dt}}
@@ -511,17 +511,17 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_aa46469e491d25eda8d
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00045}{45}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+cc}}.
+Definition at line 45 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00592}{Centre\+\_\+displacement\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00596}{Geom\+\_\+object\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00643}{Include\+\_\+geometric\+\_\+rotation}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00579}{Initial\+\_\+centre\+\_\+of\+\_\+mass}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00186}{position()}}, \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, \mbox{\hyperlink{timesteppers_8h_source_l00502}{oomph\+::\+Time\+Stepper\+::time\+\_\+derivative()}}, \mbox{\hyperlink{nodes_8h_source_l00238}{oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8h_source_l00293}{oomph\+::\+Data\+::value()}}.
+References Centre\+\_\+displacement\+\_\+data\+\_\+pt, Geom\+\_\+object\+\_\+pt, i, Include\+\_\+geometric\+\_\+rotation, Initial\+\_\+centre\+\_\+of\+\_\+mass, position(), oomph\+::\+Geom\+Object\+::position(), oomph\+::\+Time\+Stepper\+::time\+\_\+derivative(), oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt(), and oomph\+::\+Data\+::value().
 
-\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a21728c27a2d33cc9ae38ccd7938d5b15}\label{classoomph_1_1ImmersedRigidBodyElement_a21728c27a2d33cc9ae38ccd7938d5b15}} 
+\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_ab5570597c7962806448af56aac4ac3cd}\label{classoomph_1_1ImmersedRigidBodyElement_ab5570597c7962806448af56aac4ac3cd}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!drag\_mesh\_pt@{drag\_mesh\_pt}}
 \index{drag\_mesh\_pt@{drag\_mesh\_pt}!oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}}
 \doxysubsubsection{\texorpdfstring{drag\_mesh\_pt()}{drag\_mesh\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const  \& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::drag\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}$\ast$ const\& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::drag\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -529,21 +529,21 @@ Access fct to mesh containing face elements that allow the computation of the dr
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00400}{400}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 400 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00608}{Drag\+\_\+mesh\+\_\+pt}}.
+References Drag\+\_\+mesh\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00206}{set\+\_\+drag\+\_\+mesh()}}.
+Referenced by set\+\_\+drag\+\_\+mesh().
 
-\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a98378aa05d768f73e4a42bb2de4a3b73}\label{classoomph_1_1ImmersedRigidBodyElement_a98378aa05d768f73e4a42bb2de4a3b73}} 
+\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_abe0594b64f31848ebb05866fe0cde688}\label{classoomph_1_1ImmersedRigidBodyElement_abe0594b64f31848ebb05866fe0cde688}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!external\_force\_fct\_pt@{external\_force\_fct\_pt}}
 \index{external\_force\_fct\_pt@{external\_force\_fct\_pt}!oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}}
 \doxysubsubsection{\texorpdfstring{external\_force\_fct\_pt()}{external\_force\_fct\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a7a43bfd54213becfb135b594720b0539}{External\+Force\+Fct\+Pt}} \& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::external\+\_\+force\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a7a43bfd54213becfb135b594720b0539}{External\+Force\+Fct\+Pt}}\& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::external\+\_\+force\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -551,17 +551,17 @@ Access to function pointer to function that specifies external force.
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00386}{386}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 386 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00600}{External\+\_\+force\+\_\+fct\+\_\+pt}}.
+References External\+\_\+force\+\_\+fct\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_ac07085ac900077b5e4e65fc7d964ea7a}\label{classoomph_1_1ImmersedRigidBodyElement_ac07085ac900077b5e4e65fc7d964ea7a}} 
+\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a06c876a8a96c2d4e168aa6cdc48b1f15}\label{classoomph_1_1ImmersedRigidBodyElement_a06c876a8a96c2d4e168aa6cdc48b1f15}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!external\_torque\_fct\_pt@{external\_torque\_fct\_pt}}
 \index{external\_torque\_fct\_pt@{external\_torque\_fct\_pt}!oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}}
 \doxysubsubsection{\texorpdfstring{external\_torque\_fct\_pt()}{external\_torque\_fct\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a455638a1d0e9547290d835513d00c40e}{External\+Torque\+Fct\+Pt}} \& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::external\+\_\+torque\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a455638a1d0e9547290d835513d00c40e}{External\+Torque\+Fct\+Pt}}\& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::external\+\_\+torque\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -569,11 +569,11 @@ Access to function pointer to function that specifies external torque.
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00393}{393}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 393 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00604}{External\+\_\+torque\+\_\+fct\+\_\+pt}}.
+References External\+\_\+torque\+\_\+fct\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_ac3a062f70718c9bf85a470c2eca2c60f}\label{classoomph_1_1ImmersedRigidBodyElement_ac3a062f70718c9bf85a470c2eca2c60f}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
@@ -591,11 +591,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a6ae09fc0d6
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00307}{307}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 307 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l01199}{oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+by\+\_\+fd()}}, \mbox{\hyperlink{elements_8cc_source_l01102}{oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+internal\+\_\+by\+\_\+fd()}}, and \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00304}{get\+\_\+residuals\+\_\+rigid\+\_\+body\+\_\+generic()}}.
+References oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+by\+\_\+fd(), oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+internal\+\_\+by\+\_\+fd(), and get\+\_\+residuals\+\_\+rigid\+\_\+body\+\_\+generic().
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_abeff18198ffb78f6eb4bfe90c5f0b846}\label{classoomph_1_1ImmersedRigidBodyElement_abeff18198ffb78f6eb4bfe90c5f0b846}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
@@ -613,11 +613,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00298}{298}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 298 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00227}{oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix}}, and \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00304}{get\+\_\+residuals\+\_\+rigid\+\_\+body\+\_\+generic()}}.
+References oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix, and get\+\_\+residuals\+\_\+rigid\+\_\+body\+\_\+generic().
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a2ee0f157b7a4f1b7ad89b3d45a4cf620}\label{classoomph_1_1ImmersedRigidBodyElement_a2ee0f157b7a4f1b7ad89b3d45a4cf620}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!flush\_drag\_mesh@{flush\_drag\_mesh}}
@@ -631,17 +631,17 @@ Function to clear the drag mesh and all associated external data.
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00410}{410}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 410 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00562}{delete\+\_\+external\+\_\+hijacked\+\_\+data()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00608}{Drag\+\_\+mesh\+\_\+pt}}, and \mbox{\hyperlink{elements_8cc_source_l00387}{oomph\+::\+Generalised\+Element\+::flush\+\_\+external\+\_\+data()}}.
+References delete\+\_\+external\+\_\+hijacked\+\_\+data(), Drag\+\_\+mesh\+\_\+pt, and oomph\+::\+Generalised\+Element\+::flush\+\_\+external\+\_\+data().
 
-\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a4934d1a22bfb0b9576b1d9067125af5d}\label{classoomph_1_1ImmersedRigidBodyElement_a4934d1a22bfb0b9576b1d9067125af5d}} 
+\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a01354ab471561d2703f8d391ae63f224}\label{classoomph_1_1ImmersedRigidBodyElement_a01354ab471561d2703f8d391ae63f224}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!g@{g}}
 \index{g@{g}!oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}}
 \doxysubsubsection{\texorpdfstring{g()}{g()}}
-{\footnotesize\ttfamily const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::g (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::g (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -649,21 +649,21 @@ Access function for gravity.
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00440}{440}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 440 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00611}{G\+\_\+pt}}.
+References G\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00304}{get\+\_\+residuals\+\_\+rigid\+\_\+body\+\_\+generic()}}.
+Referenced by get\+\_\+residuals\+\_\+rigid\+\_\+body\+\_\+generic().
 
-\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a8c024412de2cf3a9776706519699a958}\label{classoomph_1_1ImmersedRigidBodyElement_a8c024412de2cf3a9776706519699a958}} 
+\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a279438c72a19d8317de5965c91b9954e}\label{classoomph_1_1ImmersedRigidBodyElement_a279438c72a19d8317de5965c91b9954e}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!g\_pt@{g\_pt}}
 \index{g\_pt@{g\_pt}!oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}}
 \doxysubsubsection{\texorpdfstring{g\_pt()}{g\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $\ast$\& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::g\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$$\ast$\& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::g\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -671,17 +671,17 @@ Access function to the direction of gravity.
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00434}{434}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 434 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00611}{G\+\_\+pt}}.
+References G\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a70a80642abccb05334b4863024dbc3e5}\label{classoomph_1_1ImmersedRigidBodyElement_a70a80642abccb05334b4863024dbc3e5}} 
+\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_adf0e61dfcf35f8be55dab30dd8e0ccb5}\label{classoomph_1_1ImmersedRigidBodyElement_adf0e61dfcf35f8be55dab30dd8e0ccb5}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!geom\_data\_pt@{geom\_data\_pt}}
 \index{geom\_data\_pt@{geom\_data\_pt}!oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}}
 \doxysubsubsection{\texorpdfstring{geom\_data\_pt()}{geom\_data\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ oomph\+::\+Immersed\+Rigid\+Body\+Element\+::geom\+\_\+data\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$ oomph\+::\+Immersed\+Rigid\+Body\+Element\+::geom\+\_\+data\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -689,15 +689,15 @@ Return pointer to the j-\/th (only) \mbox{\hyperlink{classoomph_1_1Data}{Data}} 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_a512b6e559414821452836a387cb34132}{oomph\+::\+Geom\+Object}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_ae1940fc6a3050e645c3882f2f6f3a202}{oomph\+::\+Geom\+Object}}.
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00428}{428}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 428 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00592}{Centre\+\_\+displacement\+\_\+data\+\_\+pt}}.
+References Centre\+\_\+displacement\+\_\+data\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_ae901e5528aad0dbc2eb7cb43849ae606}\label{classoomph_1_1ImmersedRigidBodyElement_ae901e5528aad0dbc2eb7cb43849ae606}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!get\_force\_and\_torque@{get\_force\_and\_torque}}
@@ -711,15 +711,15 @@ Get force and torque from specified fct pointers and drag mesh.
 
 Obtain the external force and torque on the body from specified function pointers and also from a drag mesh, if there is one. 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00153}{153}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+cc}}.
+Definition at line 153 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00608}{Drag\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00448}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00600}{External\+\_\+force\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00604}{External\+\_\+torque\+\_\+fct\+\_\+pt}}, and \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}.
+References Drag\+\_\+mesh\+\_\+pt, e, oomph\+::\+Mesh\+::element\+\_\+pt(), External\+\_\+force\+\_\+fct\+\_\+pt, External\+\_\+torque\+\_\+fct\+\_\+pt, and oomph\+::\+Mesh\+::nelement().
 
 
 
-Referenced by \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00304}{get\+\_\+residuals\+\_\+rigid\+\_\+body\+\_\+generic()}}.
+Referenced by get\+\_\+residuals\+\_\+rigid\+\_\+body\+\_\+generic().
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a7890b76d95e13de6436423a2989bf3ec}\label{classoomph_1_1ImmersedRigidBodyElement_a7890b76d95e13de6436423a2989bf3ec}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!get\_residuals\_rigid\_body\_generic@{get\_residuals\_rigid\_body\_generic}}
@@ -733,21 +733,21 @@ Get residuals and/or Jacobian.
 
 Calculate the contributions to the residuals and the jacobian. 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00304}{304}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+cc}}.
+Definition at line 304 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00592}{Centre\+\_\+displacement\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00537}{centre\+\_\+displacement\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00489}{density\+\_\+ratio()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00440}{g()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00153}{get\+\_\+force\+\_\+and\+\_\+torque()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00585}{Mass}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00588}{Moment\+\_\+of\+\_\+inertia}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00452}{re()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00477}{re\+\_\+invfr()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00464}{st()}}, \mbox{\hyperlink{timesteppers_8h_source_l00332}{oomph\+::\+Time\+Stepper\+::time()}}, \mbox{\hyperlink{timesteppers_8h_source_l00502}{oomph\+::\+Time\+Stepper\+::time\+\_\+derivative()}}, \mbox{\hyperlink{nodes_8h_source_l00238}{oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt()}}, and \mbox{\hyperlink{timesteppers_8h_source_l00594}{oomph\+::\+Time\+Stepper\+::weight()}}.
+References Centre\+\_\+displacement\+\_\+data\+\_\+pt, centre\+\_\+displacement\+\_\+local\+\_\+eqn(), density\+\_\+ratio(), g(), get\+\_\+force\+\_\+and\+\_\+torque(), Mass, Moment\+\_\+of\+\_\+inertia, re(), re\+\_\+invfr(), st(), oomph\+::\+Time\+Stepper\+::time(), oomph\+::\+Time\+Stepper\+::time\+\_\+derivative(), oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt(), and oomph\+::\+Time\+Stepper\+::weight().
 
 
 
-Referenced by \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00307}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, and \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00298}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
+Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
 
-\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a5b86d5f8d79206d68c0cd09bc59b5b3d}\label{classoomph_1_1ImmersedRigidBodyElement_a5b86d5f8d79206d68c0cd09bc59b5b3d}} 
+\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a3c436ba641c221d647dd21a67a583c49}\label{classoomph_1_1ImmersedRigidBodyElement_a3c436ba641c221d647dd21a67a583c49}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!initial\_centre\_of\_mass@{initial\_centre\_of\_mass}}
 \index{initial\_centre\_of\_mass@{initial\_centre\_of\_mass}!oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}}
 \doxysubsubsection{\texorpdfstring{initial\_centre\_of\_mass()}{initial\_centre\_of\_mass()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily double \& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::initial\+\_\+centre\+\_\+of\+\_\+mass (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double\& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::initial\+\_\+centre\+\_\+of\+\_\+mass (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -755,17 +755,17 @@ Access function for the initial centre of mass.
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00174}{174}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 174 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00579}{Initial\+\_\+centre\+\_\+of\+\_\+mass}}.
+References i, and Initial\+\_\+centre\+\_\+of\+\_\+mass.
 
-\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_ac5ae23bf1c3e7e988956a248a1bfe1bd}\label{classoomph_1_1ImmersedRigidBodyElement_ac5ae23bf1c3e7e988956a248a1bfe1bd}} 
+\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_af19a740e7de78418af938ea8f23e5a86}\label{classoomph_1_1ImmersedRigidBodyElement_af19a740e7de78418af938ea8f23e5a86}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!initial\_centre\_of\_mass@{initial\_centre\_of\_mass}}
 \index{initial\_centre\_of\_mass@{initial\_centre\_of\_mass}!oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}}
 \doxysubsubsection{\texorpdfstring{initial\_centre\_of\_mass()}{initial\_centre\_of\_mass()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily const double \& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::initial\+\_\+centre\+\_\+of\+\_\+mass (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const double\& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::initial\+\_\+centre\+\_\+of\+\_\+mass (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -773,17 +773,17 @@ Access function for the initial centre of mass (const version)
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00180}{180}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 180 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00579}{Initial\+\_\+centre\+\_\+of\+\_\+mass}}.
+References i, and Initial\+\_\+centre\+\_\+of\+\_\+mass.
 
-\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a23d7c604e8a81caeb7a5d7493c16c558}\label{classoomph_1_1ImmersedRigidBodyElement_a23d7c604e8a81caeb7a5d7493c16c558}} 
+\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_aaaff87f9808037afd0ef9adebfb0ebde}\label{classoomph_1_1ImmersedRigidBodyElement_aaaff87f9808037afd0ef9adebfb0ebde}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!initial\_phi@{initial\_phi}}
 \index{initial\_phi@{initial\_phi}!oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}}
 \doxysubsubsection{\texorpdfstring{initial\_phi()}{initial\_phi()}}
-{\footnotesize\ttfamily double \& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::initial\+\_\+phi (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double\& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::initial\+\_\+phi (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -791,11 +791,11 @@ Access function for the initial angle.
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00168}{168}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 168 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00582}{Initial\+\_\+\+Phi}}.
+References Initial\+\_\+\+Phi.
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a34eec4f661aafa32f5d4cf14ceb1f850}\label{classoomph_1_1ImmersedRigidBodyElement_a34eec4f661aafa32f5d4cf14ceb1f850}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!initialise@{initialise}}
@@ -809,21 +809,21 @@ Initialisation function.
 
 Initialise the internal data. 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00266}{266}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+cc}}.
+Definition at line 266 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l00307}{oomph\+::\+Generalised\+Element\+::add\+\_\+external\+\_\+data()}}, \mbox{\hyperlink{elements_8cc_source_l00062}{oomph\+::\+Generalised\+Element\+::add\+\_\+internal\+\_\+data()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00592}{Centre\+\_\+displacement\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00639}{Displacement\+\_\+data\+\_\+is\+\_\+internal}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00636}{Index\+\_\+for\+\_\+centre\+\_\+displacement}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00579}{Initial\+\_\+centre\+\_\+of\+\_\+mass}}, and \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}.
+References oomph\+::\+Generalised\+Element\+::add\+\_\+external\+\_\+data(), oomph\+::\+Generalised\+Element\+::add\+\_\+internal\+\_\+data(), Centre\+\_\+displacement\+\_\+data\+\_\+pt, Displacement\+\_\+data\+\_\+is\+\_\+internal, Index\+\_\+for\+\_\+centre\+\_\+displacement, Initial\+\_\+centre\+\_\+of\+\_\+mass, and oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt().
 
 
 
-Referenced by \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00110}{Immersed\+Rigid\+Body\+Element()}}.
+Referenced by Immersed\+Rigid\+Body\+Element().
 
-\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a5a18c79fbeae3dc091c10f55add50c5e}\label{classoomph_1_1ImmersedRigidBodyElement_a5a18c79fbeae3dc091c10f55add50c5e}} 
+\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a0ff9948b9df503ec15a32d3f6f19784e}\label{classoomph_1_1ImmersedRigidBodyElement_a0ff9948b9df503ec15a32d3f6f19784e}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!mass\_shape@{mass\_shape}}
 \index{mass\_shape@{mass\_shape}!oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}}
 \doxysubsubsection{\texorpdfstring{mass\_shape()}{mass\_shape()}}
-{\footnotesize\ttfamily double \& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::mass\+\_\+shape (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double\& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::mass\+\_\+shape (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -831,17 +831,17 @@ Access to dimensionless \char`\"{}mass\char`\"{} shape parameter that must be se
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00222}{222}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 222 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00585}{Mass}}.
+References Mass.
 
-\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a31c670c086ce25b8d92fb5dc2a49e0f7}\label{classoomph_1_1ImmersedRigidBodyElement_a31c670c086ce25b8d92fb5dc2a49e0f7}} 
+\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_ac55d720f7151e838785bcca455127155}\label{classoomph_1_1ImmersedRigidBodyElement_ac55d720f7151e838785bcca455127155}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!moment\_of\_inertia\_shape@{moment\_of\_inertia\_shape}}
 \index{moment\_of\_inertia\_shape@{moment\_of\_inertia\_shape}!oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}}
 \doxysubsubsection{\texorpdfstring{moment\_of\_inertia\_shape()}{moment\_of\_inertia\_shape()}}
-{\footnotesize\ttfamily double \& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::moment\+\_\+of\+\_\+inertia\+\_\+shape (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double\& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::moment\+\_\+of\+\_\+inertia\+\_\+shape (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -849,11 +849,11 @@ Access to dimensionless polar \char`\"{}moment of inertia\char`\"{} shape parame
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00228}{228}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 228 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00588}{Moment\+\_\+of\+\_\+inertia}}.
+References Moment\+\_\+of\+\_\+inertia.
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a4c5bf4b09a19ea70edf9ec68b41bfd2a}\label{classoomph_1_1ImmersedRigidBodyElement_a4c5bf4b09a19ea70edf9ec68b41bfd2a}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!ngeom\_data@{ngeom\_data}}
@@ -871,7 +871,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_a19d325347e19964e12
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00421}{421}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 421 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_af97075da52b4f7b4f01b849a30618ba7}\label{classoomph_1_1ImmersedRigidBodyElement_af97075da52b4f7b4f01b849a30618ba7}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!node\_update\_adjacent\_fluid\_elements@{node\_update\_adjacent\_fluid\_elements}}
@@ -885,15 +885,15 @@ Update the positions of the nodes in fluid elements adjacent to the rigid body, 
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00324}{324}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 324 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00608}{Drag\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00448}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, and \mbox{\hyperlink{elements_8cc_source_l05072}{oomph\+::\+Finite\+Element\+::node\+\_\+update()}}.
+References Drag\+\_\+mesh\+\_\+pt, e, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Mesh\+::nelement(), and oomph\+::\+Finite\+Element\+::node\+\_\+update().
 
 
 
-Referenced by \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00357}{reset\+\_\+after\+\_\+external\+\_\+fd()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00373}{reset\+\_\+after\+\_\+internal\+\_\+fd()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00347}{update\+\_\+in\+\_\+external\+\_\+fd()}}, and \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00363}{update\+\_\+in\+\_\+internal\+\_\+fd()}}.
+Referenced by reset\+\_\+after\+\_\+external\+\_\+fd(), reset\+\_\+after\+\_\+internal\+\_\+fd(), update\+\_\+in\+\_\+external\+\_\+fd(), and update\+\_\+in\+\_\+internal\+\_\+fd().
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a7c86fab683bf1d5da2051a09ac210e55}\label{classoomph_1_1ImmersedRigidBodyElement_a7c86fab683bf1d5da2051a09ac210e55}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!output\_centre\_of\_gravity@{output\_centre\_of\_gravity}}
@@ -907,11 +907,11 @@ Output position velocity and acceleration of centre of gravity.
 
 Output the position of the centre of gravity including velocities and accelerations. 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00121}{121}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+cc}}.
+Definition at line 121 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00592}{Centre\+\_\+displacement\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00579}{Initial\+\_\+centre\+\_\+of\+\_\+mass}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00582}{Initial\+\_\+\+Phi}}, \mbox{\hyperlink{timesteppers_8h_source_l00332}{oomph\+::\+Time\+Stepper\+::time()}}, \mbox{\hyperlink{timesteppers_8h_source_l00502}{oomph\+::\+Time\+Stepper\+::time\+\_\+derivative()}}, \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00238}{oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8h_source_l00293}{oomph\+::\+Data\+::value()}}.
+References Centre\+\_\+displacement\+\_\+data\+\_\+pt, Initial\+\_\+centre\+\_\+of\+\_\+mass, Initial\+\_\+\+Phi, oomph\+::\+Time\+Stepper\+::time(), oomph\+::\+Time\+Stepper\+::time\+\_\+derivative(), oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt(), oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt(), and oomph\+::\+Data\+::value().
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a27f6871d3ff88b116f6fe5a653858457}\label{classoomph_1_1ImmersedRigidBodyElement_a27f6871d3ff88b116f6fe5a653858457}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!pin\_centre\_of\_mass\_coordinate@{pin\_centre\_of\_mass\_coordinate}}
@@ -925,11 +925,11 @@ Pin the i-\/th coordinate of the centre of mass.
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00271}{271}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 271 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00592}{Centre\+\_\+displacement\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{nodes_8h_source_l00385}{oomph\+::\+Data\+::pin()}}.
+References Centre\+\_\+displacement\+\_\+data\+\_\+pt, i, and oomph\+::\+Data\+::pin().
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_aa90d24d3f3c3ad2e1f8fc974fe59ace7}\label{classoomph_1_1ImmersedRigidBodyElement_aa90d24d3f3c3ad2e1f8fc974fe59ace7}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!pin\_rotation\_angle@{pin\_rotation\_angle}}
@@ -943,11 +943,11 @@ Pin the rotation angle.
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00283}{283}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 283 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00592}{Centre\+\_\+displacement\+\_\+data\+\_\+pt}}, and \mbox{\hyperlink{nodes_8h_source_l00385}{oomph\+::\+Data\+::pin()}}.
+References Centre\+\_\+displacement\+\_\+data\+\_\+pt, and oomph\+::\+Data\+::pin().
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_aca95759d96758c7a4fc81dece7768e9d}\label{classoomph_1_1ImmersedRigidBodyElement_aca95759d96758c7a4fc81dece7768e9d}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!position@{position}}
@@ -969,11 +969,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyTriangleMeshPol
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00194}{194}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 194 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00498}{apply\+\_\+rigid\+\_\+body\+\_\+motion()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00596}{Geom\+\_\+object\+\_\+pt}}, and \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}.
+References apply\+\_\+rigid\+\_\+body\+\_\+motion(), Geom\+\_\+object\+\_\+pt, and oomph\+::\+Geom\+Object\+::position().
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a14f5acb186ecd1168dfa08dcf242c538}\label{classoomph_1_1ImmersedRigidBodyElement_a14f5acb186ecd1168dfa08dcf242c538}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!position@{position}}
@@ -995,21 +995,21 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyTriangleMeshPol
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00186}{186}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 186 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00498}{apply\+\_\+rigid\+\_\+body\+\_\+motion()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00596}{Geom\+\_\+object\+\_\+pt}}, and \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}.
+References apply\+\_\+rigid\+\_\+body\+\_\+motion(), Geom\+\_\+object\+\_\+pt, and oomph\+::\+Geom\+Object\+::position().
 
 
 
-Referenced by \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00045}{dposition\+\_\+dt()}}.
+Referenced by dposition\+\_\+dt().
 
-\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_aeee81daee82885dfc7f894088d548559}\label{classoomph_1_1ImmersedRigidBodyElement_aeee81daee82885dfc7f894088d548559}} 
+\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_ab1dd410be282f26775715bc14544723f}\label{classoomph_1_1ImmersedRigidBodyElement_ab1dd410be282f26775715bc14544723f}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!re@{re}}
 \index{re@{re}!oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}}
 \doxysubsubsection{\texorpdfstring{re()}{re()}}
-{\footnotesize\ttfamily const double \& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::re (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const double\& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::re (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1017,21 +1017,21 @@ Access function for the fluid Reynolds number.
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00452}{452}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 452 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00614}{Re\+\_\+pt}}.
+References Re\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00304}{get\+\_\+residuals\+\_\+rigid\+\_\+body\+\_\+generic()}}.
+Referenced by get\+\_\+residuals\+\_\+rigid\+\_\+body\+\_\+generic().
 
-\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a9f3f40041e287824fb7bfd2153d8a0c5}\label{classoomph_1_1ImmersedRigidBodyElement_a9f3f40041e287824fb7bfd2153d8a0c5}} 
+\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_ad5082011e8c4db0def4044b05314d149}\label{classoomph_1_1ImmersedRigidBodyElement_ad5082011e8c4db0def4044b05314d149}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!re\_invfr@{re\_invfr}}
 \index{re\_invfr@{re\_invfr}!oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}}
 \doxysubsubsection{\texorpdfstring{re\_invfr()}{re\_invfr()}}
-{\footnotesize\ttfamily const double \& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::re\+\_\+invfr (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const double\& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::re\+\_\+invfr (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1039,21 +1039,21 @@ Access to the fluid inverse Froude number.
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00477}{477}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 477 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00620}{Re\+Inv\+Fr\+\_\+pt}}.
+References Re\+Inv\+Fr\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00304}{get\+\_\+residuals\+\_\+rigid\+\_\+body\+\_\+generic()}}.
+Referenced by get\+\_\+residuals\+\_\+rigid\+\_\+body\+\_\+generic().
 
-\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a6ffb150e5f2d59356bb8a30d5d787f7a}\label{classoomph_1_1ImmersedRigidBodyElement_a6ffb150e5f2d59356bb8a30d5d787f7a}} 
+\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a4b52a3c9dff855e88467abb57619639b}\label{classoomph_1_1ImmersedRigidBodyElement_a4b52a3c9dff855e88467abb57619639b}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!re\_invfr\_pt@{re\_invfr\_pt}}
 \index{re\_invfr\_pt@{re\_invfr\_pt}!oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}}
 \doxysubsubsection{\texorpdfstring{re\_invfr\_pt()}{re\_invfr\_pt()}}
-{\footnotesize\ttfamily double $\ast$\& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::re\+\_\+invfr\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double$\ast$\& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::re\+\_\+invfr\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1061,17 +1061,17 @@ Access function for pointer to the fluid inverse Froude number (dimensionless gr
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00471}{471}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 471 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00620}{Re\+Inv\+Fr\+\_\+pt}}.
+References Re\+Inv\+Fr\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_ad76b3b63973e5e9ce5462c9d999ea8c2}\label{classoomph_1_1ImmersedRigidBodyElement_ad76b3b63973e5e9ce5462c9d999ea8c2}} 
+\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a6252a20838bd8f511758e2ec1950602f}\label{classoomph_1_1ImmersedRigidBodyElement_a6252a20838bd8f511758e2ec1950602f}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!re\_pt@{re\_pt}}
 \index{re\_pt@{re\_pt}!oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}}
 \doxysubsubsection{\texorpdfstring{re\_pt()}{re\_pt()}}
-{\footnotesize\ttfamily double $\ast$\& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::re\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double$\ast$\& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::re\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1079,11 +1079,11 @@ Access function for the pointer to the fluid Reynolds number.
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00446}{446}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 446 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00614}{Re\+\_\+pt}}.
+References Re\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a7812d2be5a267c95e954bc7c5f359fc6}\label{classoomph_1_1ImmersedRigidBodyElement_a7812d2be5a267c95e954bc7c5f359fc6}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!reset\_after\_external\_fd@{reset\_after\_external\_fd}}
@@ -1101,11 +1101,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a10210277ae
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00357}{357}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 357 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00324}{node\+\_\+update\+\_\+adjacent\+\_\+fluid\+\_\+elements()}}.
+References node\+\_\+update\+\_\+adjacent\+\_\+fluid\+\_\+elements().
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a3fe2dc3e3adbe330de3c7a7a216f49b8}\label{classoomph_1_1ImmersedRigidBodyElement_a3fe2dc3e3adbe330de3c7a7a216f49b8}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!reset\_after\_internal\_fd@{reset\_after\_internal\_fd}}
@@ -1123,11 +1123,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_ab3e2e13d21
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00373}{373}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 373 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00324}{node\+\_\+update\+\_\+adjacent\+\_\+fluid\+\_\+elements()}}.
+References node\+\_\+update\+\_\+adjacent\+\_\+fluid\+\_\+elements().
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a54ca1acbe1ad39e6ff692a79062318a0}\label{classoomph_1_1ImmersedRigidBodyElement_a54ca1acbe1ad39e6ff692a79062318a0}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!reset\_in\_external\_fd@{reset\_in\_external\_fd}}
@@ -1145,7 +1145,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a027a9213e9
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00353}{353}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 353 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a6e1d1fa9a6808691d6c067d45d108d2e}\label{classoomph_1_1ImmersedRigidBodyElement_a6e1d1fa9a6808691d6c067d45d108d2e}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!reset\_in\_internal\_fd@{reset\_in\_internal\_fd}}
@@ -1163,7 +1163,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a89c6c5cf8b
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00369}{369}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 369 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_adae3a4896f45d1fd08f3cd40fad0fdf4}\label{classoomph_1_1ImmersedRigidBodyElement_adae3a4896f45d1fd08f3cd40fad0fdf4}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!set\_drag\_mesh@{set\_drag\_mesh}}
@@ -1177,11 +1177,11 @@ Function to set the drag mesh and add the appropriate load and geometric data as
 
 Set the external drag mesh, which should consist of Navier\+Stokes\+Surface\+Drag\+Torque\+Elements and then read out the appropriate load and geometric data from those elements and set as external data for this element. 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00206}{206}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+cc}}.
+Definition at line 206 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l00307}{oomph\+::\+Generalised\+Element\+::add\+\_\+external\+\_\+data()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00562}{delete\+\_\+external\+\_\+hijacked\+\_\+data()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00400}{drag\+\_\+mesh\+\_\+pt()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00608}{Drag\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00448}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{elements_8cc_source_l00387}{oomph\+::\+Generalised\+Element\+::flush\+\_\+external\+\_\+data()}}, \mbox{\hyperlink{elements_8h_source_l02789}{oomph\+::\+Finite\+Element\+::identify\+\_\+geometric\+\_\+data()}}, \mbox{\hyperlink{classoomph_1_1FSIFluidElement_a13c5f835cddd1b78e6d2582733619300}{oomph\+::\+FSIFluid\+Element\+::identify\+\_\+load\+\_\+data()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00559}{List\+\_\+of\+\_\+external\+\_\+hijacked\+\_\+data}}, and \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}.
+References oomph\+::\+Generalised\+Element\+::add\+\_\+external\+\_\+data(), delete\+\_\+external\+\_\+hijacked\+\_\+data(), drag\+\_\+mesh\+\_\+pt(), Drag\+\_\+mesh\+\_\+pt, e, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Generalised\+Element\+::flush\+\_\+external\+\_\+data(), oomph\+::\+Finite\+Element\+::identify\+\_\+geometric\+\_\+data(), oomph\+::\+FSIFluid\+Element\+::identify\+\_\+load\+\_\+data(), List\+\_\+of\+\_\+external\+\_\+hijacked\+\_\+data, and oomph\+::\+Mesh\+::nelement().
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_afbc443daa2200a53b96dc3295e821461}\label{classoomph_1_1ImmersedRigidBodyElement_afbc443daa2200a53b96dc3295e821461}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!set\_geometric\_rotation@{set\_geometric\_rotation}}
@@ -1195,17 +1195,17 @@ Set the rotation of the object to be included.
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00155}{155}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 155 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00643}{Include\+\_\+geometric\+\_\+rotation}}.
+References Include\+\_\+geometric\+\_\+rotation.
 
-\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a2657392b73e5522b9fce25250a12019d}\label{classoomph_1_1ImmersedRigidBodyElement_a2657392b73e5522b9fce25250a12019d}} 
+\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a872d911b5a42dae2b2d1463a9a381bb2}\label{classoomph_1_1ImmersedRigidBodyElement_a872d911b5a42dae2b2d1463a9a381bb2}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!st@{st}}
 \index{st@{st}!oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}}
 \doxysubsubsection{\texorpdfstring{st()}{st()}}
-{\footnotesize\ttfamily const double \& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::st (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const double\& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::st (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1213,21 +1213,21 @@ Access function for the fluid Strouhal number.
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00464}{464}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 464 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00617}{St\+\_\+pt}}.
+References St\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00304}{get\+\_\+residuals\+\_\+rigid\+\_\+body\+\_\+generic()}}.
+Referenced by get\+\_\+residuals\+\_\+rigid\+\_\+body\+\_\+generic().
 
-\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a68ba2c82801cdee8f5f1395bccbf3f72}\label{classoomph_1_1ImmersedRigidBodyElement_a68ba2c82801cdee8f5f1395bccbf3f72}} 
+\mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_af31ee7e3a9ce707f80632cdaf50937da}\label{classoomph_1_1ImmersedRigidBodyElement_af31ee7e3a9ce707f80632cdaf50937da}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!st\_pt@{st\_pt}}
 \index{st\_pt@{st\_pt}!oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}}
 \doxysubsubsection{\texorpdfstring{st\_pt()}{st\_pt()}}
-{\footnotesize\ttfamily double $\ast$\& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::st\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double$\ast$\& oomph\+::\+Immersed\+Rigid\+Body\+Element\+::st\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1235,11 +1235,11 @@ Access function for the pointer to the fluid Strouhal number.
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00458}{458}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 458 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00617}{St\+\_\+pt}}.
+References St\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_afe7a383ce0bb9799103809fcbb1fa78f}\label{classoomph_1_1ImmersedRigidBodyElement_afe7a383ce0bb9799103809fcbb1fa78f}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!unpin\_centre\_of\_mass\_coordinate@{unpin\_centre\_of\_mass\_coordinate}}
@@ -1253,11 +1253,11 @@ Unpin the i-\/th coordinate of the centre of mass.
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00277}{277}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 277 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00592}{Centre\+\_\+displacement\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{nodes_8h_source_l00391}{oomph\+::\+Data\+::unpin()}}.
+References Centre\+\_\+displacement\+\_\+data\+\_\+pt, i, and oomph\+::\+Data\+::unpin().
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a89cf34a31797e43703321c22cc47f284}\label{classoomph_1_1ImmersedRigidBodyElement_a89cf34a31797e43703321c22cc47f284}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!unpin\_rotation\_angle@{unpin\_rotation\_angle}}
@@ -1271,11 +1271,11 @@ Unpin the rotation angle.
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00289}{289}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 289 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00592}{Centre\+\_\+displacement\+\_\+data\+\_\+pt}}, and \mbox{\hyperlink{nodes_8h_source_l00391}{oomph\+::\+Data\+::unpin()}}.
+References Centre\+\_\+displacement\+\_\+data\+\_\+pt, and oomph\+::\+Data\+::unpin().
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_ac1aaf7a8872fa3e02201ed13eb122c59}\label{classoomph_1_1ImmersedRigidBodyElement_ac1aaf7a8872fa3e02201ed13eb122c59}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!unset\_geometric\_rotation@{unset\_geometric\_rotation}}
@@ -1289,11 +1289,11 @@ Set the rotation of the object to be ignored (only really useful if you have a c
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00162}{162}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 162 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00643}{Include\+\_\+geometric\+\_\+rotation}}.
+References Include\+\_\+geometric\+\_\+rotation.
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a54a7da8fcacfc00c29c36561170ad3c6}\label{classoomph_1_1ImmersedRigidBodyElement_a54a7da8fcacfc00c29c36561170ad3c6}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!update\_in\_external\_fd@{update\_in\_external\_fd}}
@@ -1311,11 +1311,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_af740b8c507
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00347}{347}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 347 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00324}{node\+\_\+update\+\_\+adjacent\+\_\+fluid\+\_\+elements()}}.
+References node\+\_\+update\+\_\+adjacent\+\_\+fluid\+\_\+elements().
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a96a991a1b99ff591bebe076772fc99c3}\label{classoomph_1_1ImmersedRigidBodyElement_a96a991a1b99ff591bebe076772fc99c3}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!update\_in\_internal\_fd@{update\_in\_internal\_fd}}
@@ -1333,11 +1333,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a0c94ccb2ca
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00363}{363}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 363 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00324}{node\+\_\+update\+\_\+adjacent\+\_\+fluid\+\_\+elements()}}.
+References node\+\_\+update\+\_\+adjacent\+\_\+fluid\+\_\+elements().
 
 
 
@@ -1354,11 +1354,11 @@ References \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00324}{no
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00592}{592}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 592 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00498}{apply\+\_\+rigid\+\_\+body\+\_\+motion()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00235}{centre\+\_\+displacement\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00259}{centre\+\_\+of\+\_\+gravity()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00253}{centre\+\_\+rotation\+\_\+angle()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00241}{centre\+\_\+x\+\_\+displacement()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00247}{centre\+\_\+y\+\_\+displacement()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00045}{dposition\+\_\+dt()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00428}{geom\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00304}{get\+\_\+residuals\+\_\+rigid\+\_\+body\+\_\+generic()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00266}{initialise()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00121}{output\+\_\+centre\+\_\+of\+\_\+gravity()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00271}{pin\+\_\+centre\+\_\+of\+\_\+mass\+\_\+coordinate()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00283}{pin\+\_\+rotation\+\_\+angle()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00549}{oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::reset\+\_\+reference\+\_\+configuration()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00277}{unpin\+\_\+centre\+\_\+of\+\_\+mass\+\_\+coordinate()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00289}{unpin\+\_\+rotation\+\_\+angle()}}, and \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00210}{$\sim$\+Immersed\+Rigid\+Body\+Element()}}.
+Referenced by apply\+\_\+rigid\+\_\+body\+\_\+motion(), centre\+\_\+displacement\+\_\+data\+\_\+pt(), centre\+\_\+of\+\_\+gravity(), centre\+\_\+rotation\+\_\+angle(), centre\+\_\+x\+\_\+displacement(), centre\+\_\+y\+\_\+displacement(), dposition\+\_\+dt(), geom\+\_\+data\+\_\+pt(), get\+\_\+residuals\+\_\+rigid\+\_\+body\+\_\+generic(), initialise(), output\+\_\+centre\+\_\+of\+\_\+gravity(), pin\+\_\+centre\+\_\+of\+\_\+mass\+\_\+coordinate(), pin\+\_\+rotation\+\_\+angle(), oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::reset\+\_\+reference\+\_\+configuration(), unpin\+\_\+centre\+\_\+of\+\_\+mass\+\_\+coordinate(), unpin\+\_\+rotation\+\_\+angle(), and $\sim$\+Immersed\+Rigid\+Body\+Element().
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a95ee4a622282d5c1c79318bc17468cf0}\label{classoomph_1_1ImmersedRigidBodyElement_a95ee4a622282d5c1c79318bc17468cf0}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!Default\_Gravity\_vector@{Default\_Gravity\_vector}}
@@ -1372,7 +1372,7 @@ Static default value for gravity.
 
 Static default gravity direction vector. 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00632}{632}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 632 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a2acb4ef1ef706dfda4d2600875419efc}\label{classoomph_1_1ImmersedRigidBodyElement_a2acb4ef1ef706dfda4d2600875419efc}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!Default\_Physical\_Constant\_Value@{Default\_Physical\_Constant\_Value}}
@@ -1386,7 +1386,7 @@ Static default value for physical constants.
 
 Static default value for physical constants Zero gives instantaneous force and torque balances --- no solid intertia. 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00626}{626}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 626 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_af4a4c84c02fdcaebfc529a575ee57971}\label{classoomph_1_1ImmersedRigidBodyElement_af4a4c84c02fdcaebfc529a575ee57971}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!Default\_Physical\_Ratio\_Value@{Default\_Physical\_Ratio\_Value}}
@@ -1400,7 +1400,7 @@ Static default value for physical ratios.
 
 Static default value for physical ratio. 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00629}{629}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 629 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_afbb9b7caffa3645d4d104611c4cf16df}\label{classoomph_1_1ImmersedRigidBodyElement_afbb9b7caffa3645d4d104611c4cf16df}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!Density\_ratio\_pt@{Density\_ratio\_pt}}
@@ -1414,11 +1414,11 @@ Density ratio of the solid to the external fluid.
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00623}{623}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 623 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00489}{density\+\_\+ratio()}}, and \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00483}{density\+\_\+ratio\+\_\+pt()}}.
+Referenced by density\+\_\+ratio(), and density\+\_\+ratio\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a6e68c8b6d7e33f0abbf93633f7e2ef69}\label{classoomph_1_1ImmersedRigidBodyElement_a6e68c8b6d7e33f0abbf93633f7e2ef69}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!Displacement\_data\_is\_internal@{Displacement\_data\_is\_internal}}
@@ -1432,11 +1432,11 @@ Boolean flag to indicate whether data is internal.
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00639}{639}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 639 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00537}{centre\+\_\+displacement\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00266}{initialise()}}, and \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00210}{$\sim$\+Immersed\+Rigid\+Body\+Element()}}.
+Referenced by centre\+\_\+displacement\+\_\+local\+\_\+eqn(), initialise(), and $\sim$\+Immersed\+Rigid\+Body\+Element().
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_ae34b3efd4b3bd9619d9abc371bf7de14}\label{classoomph_1_1ImmersedRigidBodyElement_ae34b3efd4b3bd9619d9abc371bf7de14}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!Drag\_mesh\_pt@{Drag\_mesh\_pt}}
@@ -1450,11 +1450,11 @@ Referenced by \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00537}
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00608}{608}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 608 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00400}{drag\+\_\+mesh\+\_\+pt()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00410}{flush\+\_\+drag\+\_\+mesh()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00153}{get\+\_\+force\+\_\+and\+\_\+torque()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00324}{node\+\_\+update\+\_\+adjacent\+\_\+fluid\+\_\+elements()}}, and \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00206}{set\+\_\+drag\+\_\+mesh()}}.
+Referenced by drag\+\_\+mesh\+\_\+pt(), flush\+\_\+drag\+\_\+mesh(), get\+\_\+force\+\_\+and\+\_\+torque(), node\+\_\+update\+\_\+adjacent\+\_\+fluid\+\_\+elements(), and set\+\_\+drag\+\_\+mesh().
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_aac35cbe02cabee08a706aadd03af801a}\label{classoomph_1_1ImmersedRigidBodyElement_aac35cbe02cabee08a706aadd03af801a}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!External\_force\_fct\_pt@{External\_force\_fct\_pt}}
@@ -1468,11 +1468,11 @@ Function pointer to function that specifies external force.
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00600}{600}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 600 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00386}{external\+\_\+force\+\_\+fct\+\_\+pt()}}, and \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00153}{get\+\_\+force\+\_\+and\+\_\+torque()}}.
+Referenced by external\+\_\+force\+\_\+fct\+\_\+pt(), and get\+\_\+force\+\_\+and\+\_\+torque().
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a4061f0ed0ea1ca3a8d0b618664ce889a}\label{classoomph_1_1ImmersedRigidBodyElement_a4061f0ed0ea1ca3a8d0b618664ce889a}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!External\_torque\_fct\_pt@{External\_torque\_fct\_pt}}
@@ -1486,11 +1486,11 @@ Function pointer to function that specifies external torque.
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00604}{604}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 604 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00393}{external\+\_\+torque\+\_\+fct\+\_\+pt()}}, and \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00153}{get\+\_\+force\+\_\+and\+\_\+torque()}}.
+Referenced by external\+\_\+torque\+\_\+fct\+\_\+pt(), and get\+\_\+force\+\_\+and\+\_\+torque().
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_ad8c6a50f2055f33942e011661a8b4499}\label{classoomph_1_1ImmersedRigidBodyElement_ad8c6a50f2055f33942e011661a8b4499}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!G\_pt@{G\_pt}}
@@ -1504,11 +1504,11 @@ The direction of gravity.
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00611}{611}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 611 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00440}{g()}}, and \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00434}{g\+\_\+pt()}}.
+Referenced by g(), and g\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_aa522d91f432b5da330042ee34735fab2}\label{classoomph_1_1ImmersedRigidBodyElement_aa522d91f432b5da330042ee34735fab2}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!Geom\_object\_pt@{Geom\_object\_pt}}
@@ -1522,11 +1522,11 @@ Underlying geometric object.
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00596}{596}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 596 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00045}{dposition\+\_\+dt()}}, and \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00186}{position()}}.
+Referenced by dposition\+\_\+dt(), and position().
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a10ec0a0cfd976dac012d6cf0d73a1063}\label{classoomph_1_1ImmersedRigidBodyElement_a10ec0a0cfd976dac012d6cf0d73a1063}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!Include\_geometric\_rotation@{Include\_geometric\_rotation}}
@@ -1540,11 +1540,11 @@ Boolean to indicate that the rotation variable does not affect the boundary shap
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00643}{643}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 643 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00498}{apply\+\_\+rigid\+\_\+body\+\_\+motion()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00045}{dposition\+\_\+dt()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00155}{set\+\_\+geometric\+\_\+rotation()}}, and \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00162}{unset\+\_\+geometric\+\_\+rotation()}}.
+Referenced by apply\+\_\+rigid\+\_\+body\+\_\+motion(), dposition\+\_\+dt(), set\+\_\+geometric\+\_\+rotation(), and unset\+\_\+geometric\+\_\+rotation().
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a8fddc20d16203836484417775ef19b33}\label{classoomph_1_1ImmersedRigidBodyElement_a8fddc20d16203836484417775ef19b33}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!Index\_for\_centre\_displacement@{Index\_for\_centre\_displacement}}
@@ -1558,11 +1558,11 @@ Index for the data (internal or external) that contains the centre-\/of-\/gravit
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00636}{636}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 636 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00537}{centre\+\_\+displacement\+\_\+local\+\_\+eqn()}}, and \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00266}{initialise()}}.
+Referenced by centre\+\_\+displacement\+\_\+local\+\_\+eqn(), and initialise().
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_af848df31315115071bdde1eded9aa6d1}\label{classoomph_1_1ImmersedRigidBodyElement_af848df31315115071bdde1eded9aa6d1}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!Initial\_centre\_of\_mass@{Initial\_centre\_of\_mass}}
@@ -1576,11 +1576,11 @@ X-\/coordinate of initial centre of gravity.
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00579}{579}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 579 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00498}{apply\+\_\+rigid\+\_\+body\+\_\+motion()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00259}{centre\+\_\+of\+\_\+gravity()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00045}{dposition\+\_\+dt()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00387}{oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00174}{initial\+\_\+centre\+\_\+of\+\_\+mass()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00266}{initialise()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00121}{output\+\_\+centre\+\_\+of\+\_\+gravity()}}, and \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00549}{oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::reset\+\_\+reference\+\_\+configuration()}}.
+Referenced by apply\+\_\+rigid\+\_\+body\+\_\+motion(), centre\+\_\+of\+\_\+gravity(), dposition\+\_\+dt(), oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon(), initial\+\_\+centre\+\_\+of\+\_\+mass(), initialise(), output\+\_\+centre\+\_\+of\+\_\+gravity(), and oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::reset\+\_\+reference\+\_\+configuration().
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a689973058034ff2b8476202ed2fb0f96}\label{classoomph_1_1ImmersedRigidBodyElement_a689973058034ff2b8476202ed2fb0f96}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!Initial\_Phi@{Initial\_Phi}}
@@ -1594,11 +1594,11 @@ Original rotation angle.
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00582}{582}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 582 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00387}{oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00168}{initial\+\_\+phi()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00121}{output\+\_\+centre\+\_\+of\+\_\+gravity()}}, and \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00549}{oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::reset\+\_\+reference\+\_\+configuration()}}.
+Referenced by oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon(), initial\+\_\+phi(), output\+\_\+centre\+\_\+of\+\_\+gravity(), and oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::reset\+\_\+reference\+\_\+configuration().
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_afb7caf6fb7b409f32b948de6ef6fc8c4}\label{classoomph_1_1ImmersedRigidBodyElement_afb7caf6fb7b409f32b948de6ef6fc8c4}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!List\_of\_external\_hijacked\_data@{List\_of\_external\_hijacked\_data}}
@@ -1612,11 +1612,11 @@ Storage for the external data that is formed from hijacked data that must be del
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00559}{559}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 559 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00562}{delete\+\_\+external\+\_\+hijacked\+\_\+data()}}, and \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00206}{set\+\_\+drag\+\_\+mesh()}}.
+Referenced by delete\+\_\+external\+\_\+hijacked\+\_\+data(), and set\+\_\+drag\+\_\+mesh().
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_ac2dcda38cf2bd20d0a6bb830a6fde91f}\label{classoomph_1_1ImmersedRigidBodyElement_ac2dcda38cf2bd20d0a6bb830a6fde91f}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!Mass@{Mass}}
@@ -1626,11 +1626,11 @@ Referenced by \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00562}
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00585}{585}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 585 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00304}{get\+\_\+residuals\+\_\+rigid\+\_\+body\+\_\+generic()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00387}{oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon()}}, and \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00222}{mass\+\_\+shape()}}.
+Referenced by get\+\_\+residuals\+\_\+rigid\+\_\+body\+\_\+generic(), oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon(), and mass\+\_\+shape().
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_ab410ae35b8e4c034ed721731c8a165a6}\label{classoomph_1_1ImmersedRigidBodyElement_ab410ae35b8e4c034ed721731c8a165a6}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!Moment\_of\_inertia@{Moment\_of\_inertia}}
@@ -1644,11 +1644,11 @@ Polar moment of inertia of body.
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00588}{588}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 588 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00304}{get\+\_\+residuals\+\_\+rigid\+\_\+body\+\_\+generic()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00387}{oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon()}}, and \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00228}{moment\+\_\+of\+\_\+inertia\+\_\+shape()}}.
+Referenced by get\+\_\+residuals\+\_\+rigid\+\_\+body\+\_\+generic(), oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon(), and moment\+\_\+of\+\_\+inertia\+\_\+shape().
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a90b0f294088777736260ffc4922af431}\label{classoomph_1_1ImmersedRigidBodyElement_a90b0f294088777736260ffc4922af431}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!Re\_pt@{Re\_pt}}
@@ -1662,11 +1662,11 @@ Reynolds number of external fluid.
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00614}{614}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 614 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00452}{re()}}, and \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00446}{re\+\_\+pt()}}.
+Referenced by re(), and re\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a592e3846e9894c23cb6bb232d342eb20}\label{classoomph_1_1ImmersedRigidBodyElement_a592e3846e9894c23cb6bb232d342eb20}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!ReInvFr\_pt@{ReInvFr\_pt}}
@@ -1680,11 +1680,11 @@ Reynolds number divided by Froude number of external fluid.
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00620}{620}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 620 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00477}{re\+\_\+invfr()}}, and \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00471}{re\+\_\+invfr\+\_\+pt()}}.
+Referenced by re\+\_\+invfr(), and re\+\_\+invfr\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1ImmersedRigidBodyElement_a200f179da0403fd3af0076200832a2ac}\label{classoomph_1_1ImmersedRigidBodyElement_a200f179da0403fd3af0076200832a2ac}} 
 \index{oomph::ImmersedRigidBodyElement@{oomph::ImmersedRigidBodyElement}!St\_pt@{St\_pt}}
@@ -1698,11 +1698,11 @@ Strouhal number of external fluid.
 
 
 
-Definition at line \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00617}{617}} of file \mbox{\hyperlink{immersed__rigid__body__elements_8h_source}{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h}}.
+Definition at line 617 of file immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00464}{st()}}, and \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00458}{st\+\_\+pt()}}.
+Referenced by st(), and st\+\_\+pt().
 
 
 

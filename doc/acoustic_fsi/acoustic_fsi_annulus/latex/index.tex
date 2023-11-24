@@ -94,7 +94,7 @@ As usual we define the problem parameters in a namespace.
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_namespace==========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Global variables}}
-\DoxyCodeLine{\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Parameters}{Global\_Parameters}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -170,7 +170,7 @@ The driver code is very straightforward. We parse the command line to determine 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_main==================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver for acoustic fsi problem}}
-\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{acoustic__fsi_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} **argv)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
@@ -255,7 +255,7 @@ The {\ttfamily Problem} class is templated by the types of the \char`\"{}bulk\ch
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=============begin\_problem============================================ }}
 \DoxyCodeLine{\textcolor{comment}{/// Coated disk FSI}}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================== }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================== }}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELASTICITY\_ELEMENT, \textcolor{keyword}{class} HELMHOLTZ\_ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classCoatedDiskProblem}{CoatedDiskProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -344,7 +344,7 @@ We start by building the meshes for the elasticity and Helmholtz equations. Both
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===========start\_of\_constructor======================================= }}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor}}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================== }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================== }}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELASTICITY\_ELEMENT, \textcolor{keyword}{class} HELMHOLTZ\_ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classCoatedDiskProblem_a9585ca5b422c72dc2b91cbb3e311b736}{CoatedDiskProblem<ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT>::CoatedDiskProblem}}() }
 \DoxyCodeLine{\{}
@@ -614,7 +614,7 @@ The mesh adaptation is driven by the error estimates for the bulk elements. The 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====================start\_of\_actions\_before\_adapt======================}}
 \DoxyCodeLine{\textcolor{comment}{/// Actions before adapt: Wipe the meshes face elements}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELASTICITY\_ELEMENT, \textcolor{keyword}{class} HELMHOLTZ\_ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classCoatedDiskProblem_a89e972df172b024b1358f0fac7646d6d}{CoatedDiskProblem<ELASTICITY\_ELEMENT,HELMHOLTZ\_ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classCoatedDiskProblem_a89e972df172b024b1358f0fac7646d6d}{actions\_before\_adapt}}()}
@@ -645,7 +645,7 @@ After the (bulk-\/)mesh has been adapted, the various {\ttfamily Face\+Elements}
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====================start\_of\_actions\_after\_adapt=======================}}
 \DoxyCodeLine{\textcolor{comment}{///  Actions after adapt: Rebuild the meshes of face elements}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELASTICITY\_ELEMENT, \textcolor{keyword}{class} HELMHOLTZ\_ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classCoatedDiskProblem_a93f9d34cd24f08ca1ec726ae0057b939}{CoatedDiskProblem<ELASTICITY\_ELEMENT,HELMHOLTZ\_ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classCoatedDiskProblem_a93f9d34cd24f08ca1ec726ae0057b939}{actions\_after\_adapt}}()}
@@ -681,7 +681,7 @@ The helper function {\ttfamily delete\+\_\+face\+\_\+elements()} is used to dele
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_delete\_face\_elements================}}
 \DoxyCodeLine{\textcolor{comment}{/// Delete face elements and wipe the mesh}}
-\DoxyCodeLine{\textcolor{comment}{//==========================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==========================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELASTICITY\_ELEMENT, \textcolor{keyword}{class} HELMHOLTZ\_ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classCoatedDiskProblem_a55b4cead41e01ab5fd728b607f62bb74}{CoatedDiskProblem<ELASTICITY\_ELEMENT,HELMHOLTZ\_ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classCoatedDiskProblem_a55b4cead41e01ab5fd728b607f62bb74}{delete\_face\_elements}}(Mesh* \textcolor{keyword}{const} \& boundary\_mesh\_pt)}
@@ -711,7 +711,7 @@ The function {\ttfamily create\+\_\+fsi\+\_\+traction\+\_\+elements()} creates t
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_fsi\_traction\_elements======================}}
 \DoxyCodeLine{\textcolor{comment}{/// Create fsi traction elements }}
-\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELASTICITY\_ELEMENT, \textcolor{keyword}{class} HELMHOLTZ\_ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classCoatedDiskProblem_a143908e8db74ad6bd8b7efaaa26c78c3}{CoatedDiskProblem<ELASTICITY\_ELEMENT,HELMHOLTZ\_ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classCoatedDiskProblem_a143908e8db74ad6bd8b7efaaa26c78c3}{create\_fsi\_traction\_elements}}()}
@@ -778,7 +778,7 @@ The setup of the fluid-\/structure interaction requires the identification of th
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====================start\_of\_setup\_interaction======================}}
 \DoxyCodeLine{\textcolor{comment}{/// Setup interaction between two fields}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELASTICITY\_ELEMENT, \textcolor{keyword}{class} HELMHOLTZ\_ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classCoatedDiskProblem_ad24d43389155a6a9f2f66faf4b239c26}{CoatedDiskProblem<ELASTICITY\_ELEMENT,HELMHOLTZ\_ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classCoatedDiskProblem_ad24d43389155a6a9f2f66faf4b239c26}{setup\_interaction}}()}
@@ -812,7 +812,7 @@ The post-\/processing function {\ttfamily doc\+\_\+solution(...)} computes and o
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==============start\_doc===========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{//==================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELASTICITY\_ELEMENT, \textcolor{keyword}{class} HELMHOLTZ\_ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classCoatedDiskProblem_af8e103d494f526c0e24c0c4ccef4ea6b}{CoatedDiskProblem<ELASTICITY\_ELEMENT,HELMHOLTZ\_ELEMENT>::doc\_solution}}()}
 \DoxyCodeLine{\{}
@@ -959,10 +959,10 @@ The post-\/processing function {\ttfamily doc\+\_\+solution(...)} computes and o
 ~\newline
 
 \item varying the element type, from the bi-\/linear {\ttfamily Refineable\+QHelmholtz\+Element$<$2,2$>$} to the bi-\/cubic {\ttfamily Refineable\+QHelmholtz\+Element$<$2,4$>$}, say.
+\end{DoxyItemize}
 \end{DoxyItemize}~\newline
 ~\newline
- Which of these approaches gives you the \char`\"{}most accuracy\char`\"{} for a given number of degrees of freedom?
-\end{DoxyItemize}\DoxyHorRuler{0}
+ Which of these approaches gives you the \char`\"{}most accuracy\char`\"{} for a given number of degrees of freedom? \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_sources}{}\doxysection{Source files for this tutorial}\label{index_sources}
 

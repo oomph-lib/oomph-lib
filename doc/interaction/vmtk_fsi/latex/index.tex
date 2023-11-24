@@ -103,11 +103,11 @@ To illustrate this, the code extract shown below provides a (partial) listing of
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{    /// Constructor takes a "{}bulk"{} element and the}}
-\DoxyCodeLine{\textcolor{comment}{    /// index that identifies which face the FaceElement is supposed}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{    /// to be attached to. The optional identifier can be used}}
-\DoxyCodeLine{\textcolor{comment}{    /// to distinguish the additional nodal values created by}}
-\DoxyCodeLine{\textcolor{comment}{    /// this element from thos created by other FaceElements.}}
+\DoxyCodeLine{    \textcolor{comment}{/// Constructor takes a "{}bulk"{} element and the}}
+\DoxyCodeLine{\textcolor{comment}{    /// index that identifies which face the FaceElement is supposed}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// to be attached to. The optional identifier can be used}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// to distinguish the additional nodal values created by}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// this element from thos created by other FaceElements.}}
 \DoxyCodeLine{\textcolor{comment}{}    ImposeDisplacementByLagrangeMultiplierElement(}
 \DoxyCodeLine{      FiniteElement* \textcolor{keyword}{const}\& element\_pt,}
 \DoxyCodeLine{      \textcolor{keyword}{const} \textcolor{keywordtype}{int}\& face\_index,}
@@ -157,8 +157,8 @@ The driver code for the flow through the elastic iliac is almost identical to th
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{sdiff demo\_drivers/interaction/vmtk\_fsi/vmtk\_fsi.cc \(\backslash\)}
-\DoxyCodeLine{      demo\_drivers/interaction/unstructured\_three\_d\_fsi/unstructured\_three\_d\_fsi.cc}
+\DoxyCodeLine{sdiff demo\_drivers/interaction/vmtk\_fsi/vmtk\_fsi.cc \(\backslash\)
+      demo\_drivers/interaction/unstructured\_three\_d\_fsi/unstructured\_three\_d\_fsi.cc}
 
 \end{DoxyCode}
 
@@ -171,8 +171,8 @@ shows that the only differences relate to the facts that\+:
 \begin{DoxyItemize}
 \item {\ttfamily Impose\+Parallel\+Outflow\+Elements} are used to impose parallel flow at the in-\/ and outflow cross-\/sections.
 \item {\ttfamily Impose\+Displacement\+By\+Lagrange\+Multipler\+Elements} are used to deform the boundary of the pseudo-\/solid fluid mesh to reflect the changes in the geometry of the vessel wall.
-\end{DoxyItemize}Since both {\ttfamily Face\+Elements} introduce additional unknowns into the problem, we use the methodology described \href{\#face}{\texttt{ above}} to distinguish between the two types of Lagrange multipliers.
 \end{DoxyItemize}
+\end{DoxyItemize}Since both {\ttfamily Face\+Elements} introduce additional unknowns into the problem, we use the methodology described \href{\#face}{\texttt{ above}} to distinguish between the two types of Lagrange multipliers.
 
 Once again, we shall discuss only those aspects of the code that are changed from the driver code discussed in the \href{../../unstructured_three_d_fsi/html/index.html}{\texttt{ previous tutorial.}}
 
@@ -184,7 +184,7 @@ As usual, global parameters are specified in a namespace, which now includes an 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_namespace==========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Global variables}}
-\DoxyCodeLine{\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }Global\_Parameters}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -354,8 +354,8 @@ The creation of the {\ttfamily Impose\+Displacement\+By\+Lagrange\+Multiplier\+E
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_lagrange\_multiplier\_elements===============}}
-\DoxyCodeLine{\textcolor{comment}{/// Create elements that impose the prescribed boundary displacement}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// for the pseudo-\/solid fluid mesh}}
+\DoxyCodeLine{\textcolor{comment}{/// Create elements that impose the prescribed boundary displacement}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// for the pseudo-\/solid fluid mesh}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} FLUID\_ELEMENT, \textcolor{keyword}{class} SOLID\_ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} UnstructuredFSIProblem<FLUID\_ELEMENT,SOLID\_ELEMENT>::}

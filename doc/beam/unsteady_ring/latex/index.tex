@@ -62,7 +62,7 @@ As usual, we employ a namespace to define the problem\textquotesingle{}s physica
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//====start\_of\_namespace============================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for global parameters}}
-\DoxyCodeLine{\textcolor{comment}{//==================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -113,7 +113,7 @@ The main function is very simple. We store the (up to) two optional command line
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_main=====================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver for oscillating ring problem }}
-\DoxyCodeLine{\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{unsteady__ring_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
@@ -147,7 +147,7 @@ The problem class is very similar to that used in the \href{../../steady_ring/ht
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_problem\_class=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Ring problem}}
-\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classElasticRingProblem}{ElasticRingProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -158,7 +158,7 @@ The problem class is very similar to that used in the \href{../../steady_ring/ht
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classElasticRingProblem_a57be33a379c1ec4418a7fb3e8db8ef2b}{ElasticRingProblem}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_element);}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Access function for the specific mesh}}
-\DoxyCodeLine{\textcolor{comment}{} OneDLagrangianMesh<ELEMENT>* \mbox{\hyperlink{classElasticRingProblem_ab7e6b68cb51f8d6bc636e0f0789793ce}{mesh\_pt}}() }
+\DoxyCodeLine{\textcolor{comment}{} OneDLagrangianMesh<ELEMENT>* \mbox{\hyperlink{classElasticRingProblem_a763200d4985bca4a120f2be2a217f4a8}{mesh\_pt}}() }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{keywordflow}{return} \textcolor{keyword}{dynamic\_cast<}OneDLagrangianMesh<ELEMENT>*\textcolor{keyword}{>}(Problem::mesh\_pt());}
 \DoxyCodeLine{  \}}
@@ -216,7 +216,7 @@ The constructor assigns default values for the two control flags corresponding t
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_constructor===============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for elastic ring problem}}
-\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT,\textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\mbox{\hyperlink{classElasticRingProblem_a57be33a379c1ec4418a7fb3e8db8ef2b}{ElasticRingProblem<ELEMENT,TIMESTEPPER>::ElasticRingProblem}}}
 \DoxyCodeLine{(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_element) :}
@@ -309,7 +309,7 @@ We compute the total kinetic and potential (=strain) energies stored in the (qua
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//====start\_of\_doc\_solution===============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Document solution}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticRingProblem_a9aa904e4cf82d45711f890cd8440ced9}{ElasticRingProblem<ELEMENT, TIMESTEPPER>::doc\_solution}}(}
 \DoxyCodeLine{ DocInfo\& doc\_info)}
@@ -379,7 +379,7 @@ We compute the total kinetic and potential (=strain) energies stored in the (qua
 
 \end{DoxyCodeInclude}
  \hypertarget{index_prev}{}\doxysubsection{How to retrieve the solution at previous timesteps}\label{index_prev}
-The next few lines illustrate how to retrieve (and document) the ring shape at previous timesteps. \href{../../../linear_wave/two_d_linear_wave/html/index.html\#IC}{\texttt{ Recall }} that {\ttfamily Newmark} timesteppers are implicit, single-\/step timestepping schemes that compute approximations for the time-\/derivatives, based on the solution at the current time level, and on \char`\"{}history values\char`\"{} that represent quantities at a single previous timestep. In some applications (particularly in fluid-\/structure interaction problems) it is necessary to keep track of the solution at additional previous timesteps. Storage for such additional history values is allocated (and managed) by the generalised {\ttfamily Newmark$<$\+NSTEPS$>$} timesteppers if {\ttfamily NSTEPS} \texorpdfstring{$>$}{>} 1. We stress that these additional history values are not involved in the approximation of the time-\/derivatives; they are simply stored and updated by the timestepper when the solution is advanced to the next timestep.
+The next few lines illustrate how to retrieve (and document) the ring shape at previous timesteps. \href{../../../linear_wave/two_d_linear_wave/html/index.html\#IC}{\texttt{ Recall }} that {\ttfamily Newmark} timesteppers are implicit, single-\/step timestepping schemes that compute approximations for the time-\/derivatives, based on the solution at the current time level, and on \char`\"{}history values\char`\"{} that represent quantities at a single previous timestep. In some applications (particularly in fluid-\/structure interaction problems) it is necessary to keep track of the solution at additional previous timesteps. Storage for such additional history values is allocated (and managed) by the generalised {\ttfamily Newmark$<$\+NSTEPS$>$} timesteppers if {\ttfamily NSTEPS} $>$ 1. We stress that these additional history values are not involved in the approximation of the time-\/derivatives; they are simply stored and updated by the timestepper when the solution is advanced to the next timestep.
 
 \href{../../../unsteady_heat/two_d_unsteady_heat/html/index.html\#IC}{\texttt{ Recall }} also that the member function {\ttfamily Time\+Stepper\+::nprev\+\_\+values()} may be used to determine how many of the history values that are stored in an associated {\ttfamily Data} object represent the solution at previous timesteps. Finally, \href{../../../unsteady_heat/two_d_unsteady_heat/html/index.html\#IC}{\texttt{ recall }} that history values that represent the solution at previous timesteps are always stored before those that represent \char`\"{}generalised\char`\"{} history values (such as approximations of the first time-\/derivative at the previous timestep, etc). It is therefore always possible to determine how many previous solutions are stored in a {\ttfamily Data} object, and where they are stored.
 
@@ -434,8 +434,8 @@ Writing the restart file for the present problem is as easy as in the previous e
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_dump\_it====================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Dump problem-\/specific parameter values, then dump}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// generic problem data.}}
+\DoxyCodeLine{\textcolor{comment}{/// Dump problem-\/specific parameter values, then dump}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// generic problem data.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT,\textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticRingProblem_a5d932c03b49cb7fe4da256a5c3c9be26}{ElasticRingProblem<ELEMENT,TIMESTEPPER>::dump\_it}}(ofstream\& dump\_file)}
@@ -463,8 +463,8 @@ The restart operation reverses the steps performed in the dump function\+: We re
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_restart=====================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Read problem-\/specific parameter values, then recover}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// generic problem data.}}
+\DoxyCodeLine{\textcolor{comment}{/// Read problem-\/specific parameter values, then recover}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// generic problem data.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT,\textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticRingProblem_a0b7d864f52a18bb2a9f3a2378d8b02aa}{ElasticRingProblem<ELEMENT,TIMESTEPPER>::restart}}(ifstream\& restart\_file)}
@@ -501,8 +501,8 @@ The assignment of initial conditions depends on whether or not a restart from a 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====start\_of\_set\_ic=====================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Setup initial conditions -\/-\/ either restart from solution }\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// specified via command line or impulsive start. }}
+\DoxyCodeLine{\textcolor{comment}{/// Setup initial conditions -\/-\/ either restart from solution }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// specified via command line or impulsive start. }}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT,\textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticRingProblem_ab435f36b59e5f76301123c3440363704}{ElasticRingProblem<ELEMENT,TIMESTEPPER>::set\_initial\_conditions}}()}
@@ -576,7 +576,7 @@ We start by converting the (optional) command line arguments into the flags that
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_unsteady\_run=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Solver loop to perform unsteady run.}}
-\DoxyCodeLine{\textcolor{comment}{//=========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT,\textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticRingProblem_acd30c4363ffedbaadc1523aa8b85523b}{ElasticRingProblem<ELEMENT,TIMESTEPPER>::unsteady\_run}}()}
 \DoxyCodeLine{\{}
@@ -801,7 +801,9 @@ The definition of the non-\/dimensional kinetic energy used in {\ttfamily Kirchh
 \begin{DoxyEnumerate}
 \item $ {\cal O}(1) $ pressures are required to induce $ {\cal O}(1) $ axisymmetric displacements, and
 \item the period of the axisymmetric oscillations is $ {\cal O}(1) $.
+\end{DoxyEnumerate}
 \end{DoxyEnumerate}\mbox{[}{\bfseries{Hint\+:}} You will have to reduce the timestep to capture the much faster axisymmetric oscillations.\mbox{]}
+\begin{DoxyEnumerate}
 \item Use the principle of virtual displacements (without prestress) \[ \int_0^{L} \left[ \gamma \ \delta \gamma + \frac{1}{12} h^2 \kappa \ \delta \kappa - \left(\frac{1}{h} \sqrt{\frac{A}{a}} \ {\bf f} - \Lambda^2 \frac{\partial^2 {\bf R}_w}{\partial t^2} \right) \cdot \delta {\bf R}_w \right] \ \sqrt{a} \ d\xi = 0, \ \ \ \ \ \ \ \ \ (2) \] to show (analytically) that for bending-\/dominated deformations (i.\+e. deformations for which $ |\gamma| \ll |\kappa| $)
 \begin{DoxyEnumerate}
 \item an increase in the wall thickness $ h $ by a factor 2, say, will
@@ -809,8 +811,14 @@ The definition of the non-\/dimensional kinetic energy used in {\ttfamily Kirchh
 \item reduce the amplitude of the ring\textquotesingle{}s static deformation by a factor of 8 (thicker rings are stiffer)
 \item reduces the period of the unforced oscillations (i.\+e. the oscillations it performs when $ {\bf f} = {\bf 0} $ ) by factor of 4 (thicker rings oscillate more rapidly).
 \end{DoxyEnumerate}
+\end{DoxyEnumerate}
+\end{DoxyEnumerate}
+\begin{DoxyEnumerate}
 \item an increase in the ring\textquotesingle{}s density $ \rho \sim \Lambda^2$ by a factor of 2, say, increases the period of its bending-\/dominated oscillations by a factor of 4 (heavier rings oscillate more slowly).
-\end{DoxyEnumerate}Combine these results to show that a ring of wall thickness $ h $ and a density $ \rho $, subject to a forcing of magnitude $ f $ will deform (approximately) as a ring of wall thickness $ \alpha h $ with a density $ \alpha^2 \rho $, subject to a forcing of magnitude $ \alpha^3 f$. Confirm these theoretical predictions computationally\+: Change the initial assignment for the scaling factor {\ttfamily \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa2e802ee7cc8e1ac900ba94c3ce86eb7}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Alpha}}} and repeat the computation.
+\end{DoxyEnumerate}
+
+Combine these results to show that a ring of wall thickness $ h $ and a density $ \rho $, subject to a forcing of magnitude $ f $ will deform (approximately) as a ring of wall thickness $ \alpha h $ with a density $ \alpha^2 \rho $, subject to a forcing of magnitude $ \alpha^3 f$. Confirm these theoretical predictions computationally\+: Change the initial assignment for the scaling factor {\ttfamily \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa2e802ee7cc8e1ac900ba94c3ce86eb7}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Alpha}}} and repeat the computation.
+\begin{DoxyEnumerate}
 \item Confirm that the restart procedure works correctly by plotting the time-\/trace obtained from a restarted simulation on top of the original time-\/trace.
 \item Compare the results obtained from a simulation with a variable timestep against the results obtained from a computation with a fixed timestep (comment out the line that reduces the timestep after every solve).
 \item Compare the various output files generated in {\ttfamily doc\+\_\+solution()} to confirm that the {\ttfamily Newmark$<$3$>$} timestepper correctly maintains the history of the solution at three previous timesteps. E.\+g. confirm that the output file {\ttfamily RESLT/ring3-\/0.\+dat} which contains the ring shape at timestep 3 is identical to {\ttfamily RESLT/ring5-\/2.\+dat} which contains the ring shape computed two timesteps before timestep 5. Explore {\ttfamily oomph-\/lib\textquotesingle{}s} internal use of the history values by analysing the functions 

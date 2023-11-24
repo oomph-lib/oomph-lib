@@ -1,15 +1,15 @@
-\hypertarget{classoomph_1_1Hijacked}{}\doxysection{oomph\+::Hijacked\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1Hijacked}{}\doxysection{oomph\+::Hijacked$<$ ELEMENT $>$ Class Template Reference}
 \label{classoomph_1_1Hijacked}\index{oomph::Hijacked$<$ ELEMENT $>$@{oomph::Hijacked$<$ ELEMENT $>$}}
 
 
-\mbox{\hyperlink{classoomph_1_1Hijacked}{Hijacked}} elements are elements in which one or more \mbox{\hyperlink{classoomph_1_1Data}{Data}} values that affect the element\textquotesingle{}s residuals, are determined by another element -- the data values are then said to have been hijacked by another element. The main functionality added by the \mbox{\hyperlink{classoomph_1_1Hijacked}{Hijacked}} element class is that it wipes out those entries in the element\textquotesingle{}s residual vector and those rows in the element\textquotesingle{}s Jacobian matrix that are determined by the \char`\"{}other\char`\"{} elements that have hijacked the values. Note that for continuation in homotopy parameters, it may be desriable to multiply the residuals and corresponding jacobian entries by a \char`\"{}homotopy parameter\char`\"{}. The value of this parameter can be set by assigning \mbox{\hyperlink{classoomph_1_1HijackedElementBase_a8fb2d61b46a5b1d79890ec50e80d593d}{residual\+\_\+multiplier\+\_\+pt()}} which has a default value of zero. Note\+: it would be possible to extend the functionality so that different residuals are multiplied by different values, but will this ever be required?  
+\mbox{\hyperlink{classoomph_1_1Hijacked}{Hijacked}} elements are elements in which one or more \mbox{\hyperlink{classoomph_1_1Data}{Data}} values that affect the element\textquotesingle{}s residuals, are determined by another element -- the data values are then said to have been hijacked by another element. The main functionality added by the \mbox{\hyperlink{classoomph_1_1Hijacked}{Hijacked}} element class is that it wipes out those entries in the element\textquotesingle{}s residual vector and those rows in the element\textquotesingle{}s Jacobian matrix that are determined by the \char`\"{}other\char`\"{} elements that have hijacked the values. Note that for continuation in homotopy parameters, it may be desriable to multiply the residuals and corresponding jacobian entries by a \char`\"{}homotopy parameter\char`\"{}. The value of this parameter can be set by assigning \mbox{\hyperlink{classoomph_1_1HijackedElementBase_a812cf3a3eacd9b587dffa8afb752d8d6}{residual\+\_\+multiplier\+\_\+pt()}} which has a default value of zero. Note\+: it would be possible to extend the functionality so that different residuals are multiplied by different values, but will this ever be required?  
 
 
 
 
 {\ttfamily \#include $<$hijacked\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Hijacked\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Hijacked$<$ ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{classoomph_1_1Hijacked}
@@ -24,15 +24,15 @@ Inheritance diagram for oomph\+::Hijacked\texorpdfstring{$<$}{<} ELEMENT \texorp
 \begin{DoxyCompactList}\small\item\em Constructor used for hijacking face elements. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Hijacked_ac03d9be9ce8252556d41ef643b3658be}{Hijacked}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&element\+\_\+pt, const int \&face\+\_\+index, const unsigned \&id=0)
 \begin{DoxyCompactList}\small\item\em Constructor used for hijacking face elements with specification of ID of additional variables. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1Hijacked_ac010278a5af2f3072d7a79fd507aa71b}{hijack\+\_\+internal\+\_\+value}} (const unsigned \&n, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const bool \&return\+\_\+data=true)
+\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1Hijacked_a835ce930b91c2c138f3b4de12aeba216}{hijack\+\_\+internal\+\_\+value}} (const unsigned \&n, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const bool \&return\+\_\+data=true)
 \begin{DoxyCompactList}\small\item\em Hijack the i-\/th value stored at internal data n. Optionally return a custom-\/made (copied) data object that contains only the hijacked value. This can be used as the input to other elements. Note that the calling program assumes responsibility for this data object and must clean it up. The default is that the data object is returned. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1Hijacked_a38b793b1597b567938ca5014fef86a78}{hijack\+\_\+external\+\_\+value}} (const unsigned \&n, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const bool \&return\+\_\+data=true)
+\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1Hijacked_a9e11fa249f667b130e93af9379322182}{hijack\+\_\+external\+\_\+value}} (const unsigned \&n, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const bool \&return\+\_\+data=true)
 \begin{DoxyCompactList}\small\item\em Hijack the i-\/th value stored at external data n. Optionally return a custom-\/made (copied) data object that contains only the hijacked value. Note that the calling program assumes responsibility for this data object and must clean it up. The default is that the data object is returned. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1Hijacked_a944ab621f0da8b6434d843c33b8a63f4}{hijack\+\_\+nodal\+\_\+value}} (const unsigned \&n, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const bool \&return\+\_\+data=true)
+\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1Hijacked_acd1255b8d3783d0bce222095f9f78aa2}{hijack\+\_\+nodal\+\_\+value}} (const unsigned \&n, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const bool \&return\+\_\+data=true)
 \begin{DoxyCompactList}\small\item\em Hijack the i-\/th value stored at node n. Optionally return a custom-\/made (copied) data object that contains only the hijacked value. Once again, the calling program must clean up the allocated \mbox{\hyperlink{classoomph_1_1Data}{Data}} object. The default is that the data object is returned. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1Hijacked_a79cc7c9e72db17bf07538925b6d0537a}{hijack\+\_\+nodal\+\_\+position\+\_\+value}} (const unsigned \&n, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const bool \&return\+\_\+data=true)
+\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1Hijacked_a3c4a0ed281996d74c30f5d4af9a5a324}{hijack\+\_\+nodal\+\_\+position\+\_\+value}} (const unsigned \&n, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const bool \&return\+\_\+data=true)
 \begin{DoxyCompactList}\small\item\em Hijack the i-\/th positional value stored at node n. Optionaly return a custom-\/made (copied) data object that contains only the hijacked value. Again, responsibility for the memory allocated lies with the calling function. The default is that the data object is returned. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1Hijacked_aaf4d8eb01937473cc10cc1c89dfe7dc6}{hijack\+\_\+nodal\+\_\+spine\+\_\+value}} (const unsigned \&n, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const bool \&return\+\_\+data=true)
+\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1Hijacked_a3d4f055a9ade75b19d69d8aa7eb26417}{hijack\+\_\+nodal\+\_\+spine\+\_\+value}} (const unsigned \&n, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const bool \&return\+\_\+data=true)
 \begin{DoxyCompactList}\small\item\em Hijack the i-\/th value stored at the spine that affects local node n. Optionally return a custom-\/made (copied) data object that contains only the hijacked value. Deletion must be handled at the higher level The default is that the data object is returned. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1Hijacked_afd4a5578291487aa37b0931dab845701}{assign\+\_\+local\+\_\+eqn\+\_\+numbers}} (const bool \&store\+\_\+local\+\_\+dof\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Set up the local equation numbers for the underlying element, then set up the local arrays to hold the hijacked variables. If the boolean argument is true then pointers to the associated degrees of freedom are stored in the array Dof\+\_\+pt. \end{DoxyCompactList}\item 
@@ -46,9 +46,10 @@ void \mbox{\hyperlink{classoomph_1_1Hijacked_a35778dccc9cf036c37ee569efe5b5f7c}{
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class ELEMENT$>$\newline
 class oomph\+::\+Hijacked$<$ ELEMENT $>$}
-\mbox{\hyperlink{classoomph_1_1Hijacked}{Hijacked}} elements are elements in which one or more \mbox{\hyperlink{classoomph_1_1Data}{Data}} values that affect the element\textquotesingle{}s residuals, are determined by another element -- the data values are then said to have been hijacked by another element. The main functionality added by the \mbox{\hyperlink{classoomph_1_1Hijacked}{Hijacked}} element class is that it wipes out those entries in the element\textquotesingle{}s residual vector and those rows in the element\textquotesingle{}s Jacobian matrix that are determined by the \char`\"{}other\char`\"{} elements that have hijacked the values. Note that for continuation in homotopy parameters, it may be desriable to multiply the residuals and corresponding jacobian entries by a \char`\"{}homotopy parameter\char`\"{}. The value of this parameter can be set by assigning \mbox{\hyperlink{classoomph_1_1HijackedElementBase_a8fb2d61b46a5b1d79890ec50e80d593d}{residual\+\_\+multiplier\+\_\+pt()}} which has a default value of zero. Note\+: it would be possible to extend the functionality so that different residuals are multiplied by different values, but will this ever be required? 
 
-Definition at line \mbox{\hyperlink{hijacked__elements_8h_source_l00131}{131}} of file \mbox{\hyperlink{hijacked__elements_8h_source}{hijacked\+\_\+elements.\+h}}.
+\mbox{\hyperlink{classoomph_1_1Hijacked}{Hijacked}} elements are elements in which one or more \mbox{\hyperlink{classoomph_1_1Data}{Data}} values that affect the element\textquotesingle{}s residuals, are determined by another element -- the data values are then said to have been hijacked by another element. The main functionality added by the \mbox{\hyperlink{classoomph_1_1Hijacked}{Hijacked}} element class is that it wipes out those entries in the element\textquotesingle{}s residual vector and those rows in the element\textquotesingle{}s Jacobian matrix that are determined by the \char`\"{}other\char`\"{} elements that have hijacked the values. Note that for continuation in homotopy parameters, it may be desriable to multiply the residuals and corresponding jacobian entries by a \char`\"{}homotopy parameter\char`\"{}. The value of this parameter can be set by assigning \mbox{\hyperlink{classoomph_1_1HijackedElementBase_a812cf3a3eacd9b587dffa8afb752d8d6}{residual\+\_\+multiplier\+\_\+pt()}} which has a default value of zero. Note\+: it would be possible to extend the functionality so that different residuals are multiplied by different values, but will this ever be required? 
+
+Definition at line 131 of file hijacked\+\_\+elements.\+h.
 
 
 
@@ -66,7 +67,7 @@ Constructor, call the constructors of the base elements.
 
 
 
-Definition at line \mbox{\hyperlink{hijacked__elements_8h_source_l00135}{135}} of file \mbox{\hyperlink{hijacked__elements_8h_source}{hijacked\+\_\+elements.\+h}}.
+Definition at line 135 of file hijacked\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Hijacked_a5e4aa47011d8141757f9ecbd8f787811}\label{classoomph_1_1Hijacked_a5e4aa47011d8141757f9ecbd8f787811}} 
 \index{oomph::Hijacked$<$ ELEMENT $>$@{oomph::Hijacked$<$ ELEMENT $>$}!Hijacked@{Hijacked}}
@@ -81,7 +82,7 @@ Constructor used for hijacking face elements.
 
 
 
-Definition at line \mbox{\hyperlink{hijacked__elements_8h_source_l00138}{138}} of file \mbox{\hyperlink{hijacked__elements_8h_source}{hijacked\+\_\+elements.\+h}}.
+Definition at line 138 of file hijacked\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Hijacked_ac03d9be9ce8252556d41ef643b3658be}\label{classoomph_1_1Hijacked_ac03d9be9ce8252556d41ef643b3658be}} 
 \index{oomph::Hijacked$<$ ELEMENT $>$@{oomph::Hijacked$<$ ELEMENT $>$}!Hijacked@{Hijacked}}
@@ -96,7 +97,7 @@ Constructor used for hijacking face elements with specification of ID of additio
 
 
 
-Definition at line \mbox{\hyperlink{hijacked__elements_8h_source_l00146}{146}} of file \mbox{\hyperlink{hijacked__elements_8h_source}{hijacked\+\_\+elements.\+h}}.
+Definition at line 146 of file hijacked\+\_\+elements.\+h.
 
 
 
@@ -114,11 +115,11 @@ Set up the local equation numbers for the underlying element, then set up the lo
 
 
 
-Definition at line \mbox{\hyperlink{hijacked__elements_8h_source_l00318}{318}} of file \mbox{\hyperlink{hijacked__elements_8h_source}{hijacked\+\_\+elements.\+h}}.
+Definition at line 318 of file hijacked\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{hijacked__elements_8h_source_l00086}{oomph\+::\+Hijacked\+Element\+Base\+::\+Hijacked\+\_\+global\+\_\+eqn\+\_\+number\+\_\+pt}}, \mbox{\hyperlink{hijacked__elements_8h_source_l00091}{oomph\+::\+Hijacked\+Element\+Base\+::\+Hijacked\+\_\+local\+\_\+eqn\+\_\+number\+\_\+pt}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References oomph\+::\+Hijacked\+Element\+Base\+::\+Hijacked\+\_\+global\+\_\+eqn\+\_\+number\+\_\+pt, oomph\+::\+Hijacked\+Element\+Base\+::\+Hijacked\+\_\+local\+\_\+eqn\+\_\+number\+\_\+pt, and i.
 
 \mbox{\Hypertarget{classoomph_1_1Hijacked_a35778dccc9cf036c37ee569efe5b5f7c}\label{classoomph_1_1Hijacked_a35778dccc9cf036c37ee569efe5b5f7c}} 
 \index{oomph::Hijacked$<$ ELEMENT $>$@{oomph::Hijacked$<$ ELEMENT $>$}!get\_jacobian@{get\_jacobian}}
@@ -133,11 +134,11 @@ Get the residuals and Jacobian matrix from the underlying element, but then wipe
 
 
 
-Definition at line \mbox{\hyperlink{hijacked__elements_8h_source_l00395}{395}} of file \mbox{\hyperlink{hijacked__elements_8h_source}{hijacked\+\_\+elements.\+h}}.
+Definition at line 395 of file hijacked\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{hijacked__elements_8h_source_l00091}{oomph\+::\+Hijacked\+Element\+Base\+::\+Hijacked\+\_\+local\+\_\+eqn\+\_\+number\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{hijacked__elements_8h_source_l00070}{oomph\+::\+Hijacked\+Element\+Base\+::residual\+\_\+multiplier()}}.
+References oomph\+::\+Hijacked\+Element\+Base\+::\+Hijacked\+\_\+local\+\_\+eqn\+\_\+number\+\_\+pt, i, and oomph\+::\+Hijacked\+Element\+Base\+::residual\+\_\+multiplier().
 
 \mbox{\Hypertarget{classoomph_1_1Hijacked_adb1760705326df86f6289cc3774d37b9}\label{classoomph_1_1Hijacked_adb1760705326df86f6289cc3774d37b9}} 
 \index{oomph::Hijacked$<$ ELEMENT $>$@{oomph::Hijacked$<$ ELEMENT $>$}!get\_residuals@{get\_residuals}}
@@ -152,18 +153,18 @@ Get the residuals from the underlying element, but then wipe the entries in the 
 
 
 
-Definition at line \mbox{\hyperlink{hijacked__elements_8h_source_l00377}{377}} of file \mbox{\hyperlink{hijacked__elements_8h_source}{hijacked\+\_\+elements.\+h}}.
+Definition at line 377 of file hijacked\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{hijacked__elements_8h_source_l00091}{oomph\+::\+Hijacked\+Element\+Base\+::\+Hijacked\+\_\+local\+\_\+eqn\+\_\+number\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{hijacked__elements_8h_source_l00070}{oomph\+::\+Hijacked\+Element\+Base\+::residual\+\_\+multiplier()}}.
+References oomph\+::\+Hijacked\+Element\+Base\+::\+Hijacked\+\_\+local\+\_\+eqn\+\_\+number\+\_\+pt, i, and oomph\+::\+Hijacked\+Element\+Base\+::residual\+\_\+multiplier().
 
-\mbox{\Hypertarget{classoomph_1_1Hijacked_a38b793b1597b567938ca5014fef86a78}\label{classoomph_1_1Hijacked_a38b793b1597b567938ca5014fef86a78}} 
+\mbox{\Hypertarget{classoomph_1_1Hijacked_a9e11fa249f667b130e93af9379322182}\label{classoomph_1_1Hijacked_a9e11fa249f667b130e93af9379322182}} 
 \index{oomph::Hijacked$<$ ELEMENT $>$@{oomph::Hijacked$<$ ELEMENT $>$}!hijack\_external\_value@{hijack\_external\_value}}
 \index{hijack\_external\_value@{hijack\_external\_value}!oomph::Hijacked$<$ ELEMENT $>$@{oomph::Hijacked$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{hijack\_external\_value()}{hijack\_external\_value()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1Hijacked}{oomph\+::\+Hijacked}}$<$ ELEMENT $>$\+::hijack\+\_\+external\+\_\+value (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{i,  }\item[{const bool \&}]{return\+\_\+data = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$ \mbox{\hyperlink{classoomph_1_1Hijacked}{oomph\+::\+Hijacked}}$<$ ELEMENT $>$\+::hijack\+\_\+external\+\_\+value (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{i,  }\item[{const bool \&}]{return\+\_\+data = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -171,18 +172,18 @@ Hijack the i-\/th value stored at external data n. Optionally return a custom-\/
 
 
 
-Definition at line \mbox{\hyperlink{hijacked__elements_8h_source_l00188}{188}} of file \mbox{\hyperlink{hijacked__elements_8h_source}{hijacked\+\_\+elements.\+h}}.
+Definition at line 188 of file hijacked\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{hijacked__elements_8cc_source_l00062}{oomph\+::\+Hijacked\+Element\+Base\+::hijack\+\_\+global\+\_\+eqn()}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References oomph\+::\+Hijacked\+Element\+Base\+::hijack\+\_\+global\+\_\+eqn(), and i.
 
-\mbox{\Hypertarget{classoomph_1_1Hijacked_ac010278a5af2f3072d7a79fd507aa71b}\label{classoomph_1_1Hijacked_ac010278a5af2f3072d7a79fd507aa71b}} 
+\mbox{\Hypertarget{classoomph_1_1Hijacked_a835ce930b91c2c138f3b4de12aeba216}\label{classoomph_1_1Hijacked_a835ce930b91c2c138f3b4de12aeba216}} 
 \index{oomph::Hijacked$<$ ELEMENT $>$@{oomph::Hijacked$<$ ELEMENT $>$}!hijack\_internal\_value@{hijack\_internal\_value}}
 \index{hijack\_internal\_value@{hijack\_internal\_value}!oomph::Hijacked$<$ ELEMENT $>$@{oomph::Hijacked$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{hijack\_internal\_value()}{hijack\_internal\_value()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1Hijacked}{oomph\+::\+Hijacked}}$<$ ELEMENT $>$\+::hijack\+\_\+internal\+\_\+value (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{i,  }\item[{const bool \&}]{return\+\_\+data = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$ \mbox{\hyperlink{classoomph_1_1Hijacked}{oomph\+::\+Hijacked}}$<$ ELEMENT $>$\+::hijack\+\_\+internal\+\_\+value (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{i,  }\item[{const bool \&}]{return\+\_\+data = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -190,18 +191,18 @@ Hijack the i-\/th value stored at internal data n. Optionally return a custom-\/
 
 
 
-Definition at line \mbox{\hyperlink{hijacked__elements_8h_source_l00160}{160}} of file \mbox{\hyperlink{hijacked__elements_8h_source}{hijacked\+\_\+elements.\+h}}.
+Definition at line 160 of file hijacked\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{hijacked__elements_8cc_source_l00062}{oomph\+::\+Hijacked\+Element\+Base\+::hijack\+\_\+global\+\_\+eqn()}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References oomph\+::\+Hijacked\+Element\+Base\+::hijack\+\_\+global\+\_\+eqn(), and i.
 
-\mbox{\Hypertarget{classoomph_1_1Hijacked_a79cc7c9e72db17bf07538925b6d0537a}\label{classoomph_1_1Hijacked_a79cc7c9e72db17bf07538925b6d0537a}} 
+\mbox{\Hypertarget{classoomph_1_1Hijacked_a3c4a0ed281996d74c30f5d4af9a5a324}\label{classoomph_1_1Hijacked_a3c4a0ed281996d74c30f5d4af9a5a324}} 
 \index{oomph::Hijacked$<$ ELEMENT $>$@{oomph::Hijacked$<$ ELEMENT $>$}!hijack\_nodal\_position\_value@{hijack\_nodal\_position\_value}}
 \index{hijack\_nodal\_position\_value@{hijack\_nodal\_position\_value}!oomph::Hijacked$<$ ELEMENT $>$@{oomph::Hijacked$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{hijack\_nodal\_position\_value()}{hijack\_nodal\_position\_value()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1Hijacked}{oomph\+::\+Hijacked}}$<$ ELEMENT $>$\+::hijack\+\_\+nodal\+\_\+position\+\_\+value (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{i,  }\item[{const bool \&}]{return\+\_\+data = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$ \mbox{\hyperlink{classoomph_1_1Hijacked}{oomph\+::\+Hijacked}}$<$ ELEMENT $>$\+::hijack\+\_\+nodal\+\_\+position\+\_\+value (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{i,  }\item[{const bool \&}]{return\+\_\+data = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -209,18 +210,18 @@ Hijack the i-\/th positional value stored at node n. Optionaly return a custom-\
 
 
 
-Definition at line \mbox{\hyperlink{hijacked__elements_8h_source_l00240}{240}} of file \mbox{\hyperlink{hijacked__elements_8h_source}{hijacked\+\_\+elements.\+h}}.
+Definition at line 240 of file hijacked\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{nodes_8h_source_l00358}{oomph\+::\+Data\+::eqn\+\_\+number\+\_\+pt()}}, \mbox{\hyperlink{hijacked__elements_8cc_source_l00062}{oomph\+::\+Hijacked\+Element\+Base\+::hijack\+\_\+global\+\_\+eqn()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, and \mbox{\hyperlink{nodes_8h_source_l01765}{oomph\+::\+Solid\+Node\+::variable\+\_\+position\+\_\+pt()}}.
+References oomph\+::\+Data\+::eqn\+\_\+number\+\_\+pt(), oomph\+::\+Hijacked\+Element\+Base\+::hijack\+\_\+global\+\_\+eqn(), i, oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), and oomph\+::\+Solid\+Node\+::variable\+\_\+position\+\_\+pt().
 
-\mbox{\Hypertarget{classoomph_1_1Hijacked_aaf4d8eb01937473cc10cc1c89dfe7dc6}\label{classoomph_1_1Hijacked_aaf4d8eb01937473cc10cc1c89dfe7dc6}} 
+\mbox{\Hypertarget{classoomph_1_1Hijacked_a3d4f055a9ade75b19d69d8aa7eb26417}\label{classoomph_1_1Hijacked_a3d4f055a9ade75b19d69d8aa7eb26417}} 
 \index{oomph::Hijacked$<$ ELEMENT $>$@{oomph::Hijacked$<$ ELEMENT $>$}!hijack\_nodal\_spine\_value@{hijack\_nodal\_spine\_value}}
 \index{hijack\_nodal\_spine\_value@{hijack\_nodal\_spine\_value}!oomph::Hijacked$<$ ELEMENT $>$@{oomph::Hijacked$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{hijack\_nodal\_spine\_value()}{hijack\_nodal\_spine\_value()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1Hijacked}{oomph\+::\+Hijacked}}$<$ ELEMENT $>$\+::hijack\+\_\+nodal\+\_\+spine\+\_\+value (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{i,  }\item[{const bool \&}]{return\+\_\+data = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$ \mbox{\hyperlink{classoomph_1_1Hijacked}{oomph\+::\+Hijacked}}$<$ ELEMENT $>$\+::hijack\+\_\+nodal\+\_\+spine\+\_\+value (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{i,  }\item[{const bool \&}]{return\+\_\+data = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -228,18 +229,18 @@ Hijack the i-\/th value stored at the spine that affects local node n. Optionall
 
 
 
-Definition at line \mbox{\hyperlink{hijacked__elements_8h_source_l00279}{279}} of file \mbox{\hyperlink{hijacked__elements_8h_source}{hijacked\+\_\+elements.\+h}}.
+Definition at line 279 of file hijacked\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{nodes_8h_source_l00358}{oomph\+::\+Data\+::eqn\+\_\+number\+\_\+pt()}}, \mbox{\hyperlink{hijacked__elements_8cc_source_l00062}{oomph\+::\+Hijacked\+Element\+Base\+::hijack\+\_\+global\+\_\+eqn()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{spines_8h_source_l00156}{oomph\+::\+Spine\+::spine\+\_\+height\+\_\+pt()}}, \mbox{\hyperlink{spines_8h_source_l00372}{oomph\+::\+Spine\+Node\+::spine\+\_\+pt()}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
+References oomph\+::\+Data\+::eqn\+\_\+number\+\_\+pt(), oomph\+::\+Hijacked\+Element\+Base\+::hijack\+\_\+global\+\_\+eqn(), i, oomph\+::\+Spine\+::spine\+\_\+height\+\_\+pt(), oomph\+::\+Spine\+Node\+::spine\+\_\+pt(), and oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
 
-\mbox{\Hypertarget{classoomph_1_1Hijacked_a944ab621f0da8b6434d843c33b8a63f4}\label{classoomph_1_1Hijacked_a944ab621f0da8b6434d843c33b8a63f4}} 
+\mbox{\Hypertarget{classoomph_1_1Hijacked_acd1255b8d3783d0bce222095f9f78aa2}\label{classoomph_1_1Hijacked_acd1255b8d3783d0bce222095f9f78aa2}} 
 \index{oomph::Hijacked$<$ ELEMENT $>$@{oomph::Hijacked$<$ ELEMENT $>$}!hijack\_nodal\_value@{hijack\_nodal\_value}}
 \index{hijack\_nodal\_value@{hijack\_nodal\_value}!oomph::Hijacked$<$ ELEMENT $>$@{oomph::Hijacked$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{hijack\_nodal\_value()}{hijack\_nodal\_value()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1Hijacked}{oomph\+::\+Hijacked}}$<$ ELEMENT $>$\+::hijack\+\_\+nodal\+\_\+value (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{i,  }\item[{const bool \&}]{return\+\_\+data = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$ \mbox{\hyperlink{classoomph_1_1Hijacked}{oomph\+::\+Hijacked}}$<$ ELEMENT $>$\+::hijack\+\_\+nodal\+\_\+value (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{i,  }\item[{const bool \&}]{return\+\_\+data = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -247,15 +248,15 @@ Hijack the i-\/th value stored at node n. Optionally return a custom-\/made (cop
 
 
 
-Definition at line \mbox{\hyperlink{hijacked__elements_8h_source_l00214}{214}} of file \mbox{\hyperlink{hijacked__elements_8h_source}{hijacked\+\_\+elements.\+h}}.
+Definition at line 214 of file hijacked\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{hijacked__elements_8cc_source_l00062}{oomph\+::\+Hijacked\+Element\+Base\+::hijack\+\_\+global\+\_\+eqn()}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References oomph\+::\+Hijacked\+Element\+Base\+::hijack\+\_\+global\+\_\+eqn(), and i.
 
 
 
-Referenced by \mbox{\hyperlink{biharmonic__problem_8cc_source_l00489}{oomph\+::\+Biharmonic\+Fluid\+Problem$<$ DIM $>$\+::impose\+\_\+traction\+\_\+free\+\_\+edge()}}.
+Referenced by oomph\+::\+Biharmonic\+Fluid\+Problem$<$ DIM $>$\+::impose\+\_\+traction\+\_\+free\+\_\+edge().
 
 
 

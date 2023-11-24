@@ -24,7 +24,7 @@ virtual \mbox{\hyperlink{classoomph_1_1OcTree_a5c7bf77c8700898c428dacbdff6b334c}
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1OcTree_a14dba08782264f0d6008a8c1578b41e1}{operator=}} (const \mbox{\hyperlink{classoomph_1_1OcTree}{Oc\+Tree}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$ \mbox{\hyperlink{classoomph_1_1OcTree_af820674d7413566c25e895cd49a5e8a2}{construct\+\_\+son}} (\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_a7d630dad19ef861ab6a5f37ad6ea67f4}{object\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_aa2918f6d84795c9f366adb178e287843}{father\+\_\+pt}}, const int \&\mbox{\hyperlink{classoomph_1_1Tree_a7537f8fe7c896d2220eb2da03567b34d}{son\+\_\+type}})
+\mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$ \mbox{\hyperlink{classoomph_1_1OcTree_a2f894bab3cbde60d810de0ee43a9f023}{construct\+\_\+son}} (\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_a2f2eeb0f1dd161f696cccc652974ff4c}{object\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_a5f8444ddeda272b70669b8bbe929708a}{father\+\_\+pt}}, const int \&\mbox{\hyperlink{classoomph_1_1Tree_a7537f8fe7c896d2220eb2da03567b34d}{son\+\_\+type}})
 \begin{DoxyCompactList}\small\item\em Overload the function construct\+\_\+son to ensure that the son is a specific \mbox{\hyperlink{classoomph_1_1OcTree}{Oc\+Tree}} and not a general \mbox{\hyperlink{classoomph_1_1Tree}{Tree}}. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1OcTree}{Oc\+Tree}} $\ast$ \mbox{\hyperlink{classoomph_1_1OcTree_a690c4fbbca73bd48c0bc3b2913a9b39c}{gteq\+\_\+face\+\_\+neighbour}} (const int \&direction, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&translate\+\_\+s, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&s\+\_\+sw, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&s\+\_\+ne, int \&face, int \&diff\+\_\+level, bool \&in\+\_\+neighbouring\+\_\+tree) const
 \begin{DoxyCompactList}\small\item\em Find (pointer to) `greater-\/or-\/equal-\/sized face neighbour' in given direction (L/\+R/\+U/\+D/\+F/B). Another way of interpreting this is that we\textquotesingle{}re looking for the neighbour across the present element\textquotesingle{}s face \textquotesingle{}direction\textquotesingle{}. The various arguments return additional information about the size and relative orientation of the neighbouring octree. To interpret these we use the following {\bfseries{General convention\+:}} \end{DoxyCompactList}\item 
@@ -77,9 +77,9 @@ static std\+::map$<$ std\+::pair$<$ std\+::pair$<$ int, int $>$, std\+::pair$<$ 
 \item 
 \mbox{\hyperlink{classoomph_1_1OcTree_abb830075e2f08aa68bf65a07089039ca}{Oc\+Tree}} ()
 \begin{DoxyCompactList}\small\item\em Default constructor (empty and broken) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1OcTree_a2c0f7987566846a0451bdc1ed522a2d4}{Oc\+Tree}} (\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_a7d630dad19ef861ab6a5f37ad6ea67f4}{object\+\_\+pt}})
+\mbox{\hyperlink{classoomph_1_1OcTree_a2c0f7987566846a0451bdc1ed522a2d4}{Oc\+Tree}} (\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_a2f2eeb0f1dd161f696cccc652974ff4c}{object\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Constructor for empty (root) tree\+: no father, no sons; just pass a pointer to its object (a \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_013_01_4}{Refineable\+QElement$<$3$>$}}). This is protected because Oc\+Trees can only be created internally, during the split operation. Only Oc\+Tree\+Roots can be created externally. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1OcTree_af79e3cbf9d0c65f9e4a01207d65d4967}{Oc\+Tree}} (\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_a7d630dad19ef861ab6a5f37ad6ea67f4}{object\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_aa2918f6d84795c9f366adb178e287843}{father\+\_\+pt}}, const int \&\mbox{\hyperlink{classoomph_1_1Tree_a7537f8fe7c896d2220eb2da03567b34d}{son\+\_\+type}})
+\mbox{\hyperlink{classoomph_1_1OcTree_af79e3cbf9d0c65f9e4a01207d65d4967}{Oc\+Tree}} (\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_a2f2eeb0f1dd161f696cccc652974ff4c}{object\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_a5f8444ddeda272b70669b8bbe929708a}{father\+\_\+pt}}, const int \&\mbox{\hyperlink{classoomph_1_1Tree_a7537f8fe7c896d2220eb2da03567b34d}{son\+\_\+type}})
 \begin{DoxyCompactList}\small\item\em Constructor for tree that has a father\+: Pass it the pointer to its object, the pointer to its father and tell it what type of son (LDB,RDB,...) it is. Protected because Oc\+Trees can only be created internally, during the split operation. Only Oc\+Tree\+Roots can be created externally. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -160,7 +160,7 @@ Finally, the leaf \char`\"{}nodes\char`\"{} can be split depending on criteria d
 
 Note that Oc\+Trees are only generated by splitting existing Oc\+Trees. Therefore, the constructors are protected. The only \mbox{\hyperlink{classoomph_1_1OcTree}{Oc\+Tree}} that \char`\"{}\+Joe User\char`\"{} can create is the (derived) class \mbox{\hyperlink{classoomph_1_1OcTreeRoot}{Oc\+Tree\+Root}}. 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00113}{113}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 113 of file octree.\+h.
 
 
 
@@ -177,7 +177,7 @@ Destructor. Note\+: Deleting a octree also deletes the objects associated with a
 
 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00118}{118}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 118 of file octree.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_a2d729ac4b94328c7168bbcf423421edd}\label{classoomph_1_1OcTree_a2d729ac4b94328c7168bbcf423421edd}} 
 \index{oomph::OcTree@{oomph::OcTree}!OcTree@{OcTree}}
@@ -201,11 +201,11 @@ Default constructor (empty and broken)
 
 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00382}{382}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 382 of file octree.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8h_source_l00129}{construct\+\_\+son()}}.
+Referenced by construct\+\_\+son().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_a2c0f7987566846a0451bdc1ed522a2d4}\label{classoomph_1_1OcTree_a2c0f7987566846a0451bdc1ed522a2d4}} 
 \index{oomph::OcTree@{oomph::OcTree}!OcTree@{OcTree}}
@@ -219,7 +219,7 @@ Constructor for empty (root) tree\+: no father, no sons; just pass a pointer to 
 
 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00395}{395}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 395 of file octree.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_af79e3cbf9d0c65f9e4a01207d65d4967}\label{classoomph_1_1OcTree_af79e3cbf9d0c65f9e4a01207d65d4967}} 
 \index{oomph::OcTree@{oomph::OcTree}!OcTree@{OcTree}}
@@ -233,7 +233,7 @@ Constructor for tree that has a father\+: Pass it the pointer to its object, the
 
 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00404}{404}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 404 of file octree.\+h.
 
 
 
@@ -250,21 +250,21 @@ This constructs the rotation matrix of the rotation around the axis {\ttfamily a
 
 Build the rotation matrix for a rotation around the axis {\ttfamily axis} of an angle {\ttfamily angle$\ast$90}. 
 
-Definition at line \mbox{\hyperlink{octree_8cc_source_l00609}{609}} of file \mbox{\hyperlink{octree_8cc_source}{octree.\+cc}}.
+Definition at line 609 of file octree.\+cc.
 
 
 
-References \mbox{\hyperlink{Vector_8h_source_l00309}{oomph\+::\+Vector\+Helpers\+::angle()}}, \mbox{\hyperlink{octree_8h_source_l00520}{Cosi}}, \mbox{\hyperlink{octree_8h_source_l00074}{oomph\+::\+Oc\+Tree\+Names\+::F}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{binary__tree_8h_source_l00051}{oomph\+::\+Binary\+Tree\+Names\+::R}}, \mbox{\hyperlink{octree_8h_source_l00070}{oomph\+::\+Oc\+Tree\+Names\+::R}}, \mbox{\hyperlink{octree_8h_source_l00523}{Sini}}, and \mbox{\hyperlink{octree_8h_source_l00072}{oomph\+::\+Oc\+Tree\+Names\+::U}}.
+References oomph\+::\+Vector\+Helpers\+::angle(), Cosi, oomph\+::\+Oc\+Tree\+Names\+::F, i, oomph\+::\+Binary\+Tree\+Names\+::R, oomph\+::\+Oc\+Tree\+Names\+::R, Sini, and oomph\+::\+Oc\+Tree\+Names\+::U.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8cc_source_l00750}{rotate()}}.
+Referenced by rotate().
 
-\mbox{\Hypertarget{classoomph_1_1OcTree_af820674d7413566c25e895cd49a5e8a2}\label{classoomph_1_1OcTree_af820674d7413566c25e895cd49a5e8a2}} 
+\mbox{\Hypertarget{classoomph_1_1OcTree_a2f894bab3cbde60d810de0ee43a9f023}\label{classoomph_1_1OcTree_a2f894bab3cbde60d810de0ee43a9f023}} 
 \index{oomph::OcTree@{oomph::OcTree}!construct\_son@{construct\_son}}
 \index{construct\_son@{construct\_son}!oomph::OcTree@{oomph::OcTree}}
 \doxysubsubsection{\texorpdfstring{construct\_son()}{construct\_son()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$ oomph\+::\+Oc\+Tree\+::construct\+\_\+son (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&}]{object\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$const \&}]{father\+\_\+pt,  }\item[{const int \&}]{son\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Tree}{Tree}}$\ast$ oomph\+::\+Oc\+Tree\+::construct\+\_\+son (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&}]{object\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Tree}{Tree}} $\ast$const \&}]{father\+\_\+pt,  }\item[{const int \&}]{son\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -272,15 +272,15 @@ Overload the function construct\+\_\+son to ensure that the son is a specific \m
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1Tree_aca2fa14194f424583fd6425a8c4bbff2}{oomph\+::\+Tree}}.
+Implements \mbox{\hyperlink{classoomph_1_1Tree_a5eb29718044b1bc56403ee9bd15a60b6}{oomph\+::\+Tree}}.
 
 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00129}{129}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 129 of file octree.\+h.
 
 
 
-References \mbox{\hyperlink{tree_8h_source_l00235}{oomph\+::\+Tree\+::father\+\_\+pt()}}, \mbox{\hyperlink{tree_8h_source_l00088}{oomph\+::\+Tree\+::object\+\_\+pt()}}, \mbox{\hyperlink{octree_8h_source_l00382}{Oc\+Tree()}}, and \mbox{\hyperlink{tree_8h_source_l00214}{oomph\+::\+Tree\+::son\+\_\+type()}}.
+References oomph\+::\+Tree\+::father\+\_\+pt(), oomph\+::\+Tree\+::object\+\_\+pt(), Oc\+Tree(), and oomph\+::\+Tree\+::son\+\_\+type().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_afd54b3cd1f4196d618e73d19bb4ba157}\label{classoomph_1_1OcTree_afd54b3cd1f4196d618e73d19bb4ba157}} 
 \index{oomph::OcTree@{oomph::OcTree}!doc\_face\_neighbours@{doc\_face\_neighbours}}
@@ -294,15 +294,15 @@ Doc/check all face neighbours of octree (nodes) contained in the \mbox{\hyperlin
 
 Doc/check all face neighbours of octree (nodes) contained in the \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} forest\+\_\+node\+\_\+pt. Output into neighbours\+\_\+file which can be viewed from tecplot with Oc\+Tree\+Neighbours.\+mcr Neighbour info and errors are displayed on neighbours\+\_\+txt\+\_\+file. Finally, compute the max. error between vertices when viewed from neighbouring element. If the two filestreams are closed, output is suppressed. (Static function.) 
 
-Definition at line \mbox{\hyperlink{octree_8cc_source_l04275}{4275}} of file \mbox{\hyperlink{octree_8cc_source}{octree.\+cc}}.
+Definition at line 4275 of file octree.\+cc.
 
 
 
-References \mbox{\hyperlink{octree_8h_source_l00540}{Colour}}, \mbox{\hyperlink{octree_8h_source_l00329}{Direct\+\_\+string}}, \mbox{\hyperlink{octree_8h_source_l00074}{oomph\+::\+Oc\+Tree\+Names\+::F}}, \mbox{\hyperlink{elements_8h_source_l01885}{oomph\+::\+Finite\+Element\+::get\+\_\+x()}}, \mbox{\hyperlink{octree_8cc_source_l03373}{gteq\+\_\+face\+\_\+neighbour()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{tree_8h_source_l00364}{oomph\+::\+Tree\+Root\+::is\+\_\+neighbour\+\_\+periodic()}}, \mbox{\hyperlink{binary__tree_8h_source_l00050}{oomph\+::\+Binary\+Tree\+Names\+::L}}, \mbox{\hyperlink{tree_8h_source_l00313}{oomph\+::\+Tree\+::\+Max\+\_\+neighbour\+\_\+finding\+\_\+tolerance}}, \mbox{\hyperlink{refineable__elements_8h_source_l00389}{oomph\+::\+Refineable\+Element\+::nodes\+\_\+built()}}, \mbox{\hyperlink{refineable__elements_8h_source_l00395}{oomph\+::\+Refineable\+Element\+::number()}}, \mbox{\hyperlink{tree_8h_source_l00088}{oomph\+::\+Tree\+::object\+\_\+pt()}}, \mbox{\hyperlink{tree_8h_source_l00262}{oomph\+::\+Tree\+::\+OMEGA}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01265}{oomph\+::pause()}}, \mbox{\hyperlink{tree_8h_source_l00141}{oomph\+::\+Tree\+::root\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{octree_8h_source_l00544}{S\+\_\+base}}, \mbox{\hyperlink{octree_8h_source_l00565}{S\+\_\+stephi}}, and \mbox{\hyperlink{octree_8h_source_l00558}{S\+\_\+steplo}}.
+References Colour, Direct\+\_\+string, oomph\+::\+Oc\+Tree\+Names\+::F, oomph\+::\+Finite\+Element\+::get\+\_\+x(), gteq\+\_\+face\+\_\+neighbour(), i, oomph\+::\+Tree\+Root\+::is\+\_\+neighbour\+\_\+periodic(), oomph\+::\+Binary\+Tree\+Names\+::L, oomph\+::\+Tree\+::\+Max\+\_\+neighbour\+\_\+finding\+\_\+tolerance, oomph\+::\+Refineable\+Element\+::nodes\+\_\+built(), oomph\+::\+Refineable\+Element\+::number(), oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::\+Tree\+::\+OMEGA, oomph\+::pause(), oomph\+::\+Tree\+::root\+\_\+pt(), s, S\+\_\+base, S\+\_\+stephi, and S\+\_\+steplo.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8cc_source_l05749}{oomph\+::\+Oc\+Tree\+Forest\+::check\+\_\+all\+\_\+neighbours()}}, \mbox{\hyperlink{octree_8cc_source_l04200}{self\+\_\+test()}}, and \mbox{\hyperlink{octree_8cc_source_l05678}{oomph\+::\+Oc\+Tree\+Forest\+::self\+\_\+test()}}.
+Referenced by oomph\+::\+Oc\+Tree\+Forest\+::check\+\_\+all\+\_\+neighbours(), self\+\_\+test(), and oomph\+::\+Oc\+Tree\+Forest\+::self\+\_\+test().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_a728b0580f568f9d5fb814458b6c75fe4}\label{classoomph_1_1OcTree_a728b0580f568f9d5fb814458b6c75fe4}} 
 \index{oomph::OcTree@{oomph::OcTree}!doc\_true\_edge\_neighbours@{doc\_true\_edge\_neighbours}}
@@ -318,15 +318,15 @@ Doc/check all true edge neighbours of octree (nodes) contained in the \mbox{\hyp
 
 Doc/check all true edge neighbours of octree (nodes) contained in the \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} forest\+\_\+node\+\_\+pt. Output into neighbours\+\_\+file which can be viewed from tecplot with Oc\+Tree\+Neighbours.\+mcr Neighbour info and errors are displayed on neighbours\+\_\+txt\+\_\+file. Finally, compute the max. error between vertices when viewed from neighbouring element. If the two filestreams are closed, output is suppressed. (Static function). 
 
-Definition at line \mbox{\hyperlink{octree_8cc_source_l04552}{4552}} of file \mbox{\hyperlink{octree_8cc_source}{octree.\+cc}}.
+Definition at line 4552 of file octree.\+cc.
 
 
 
-References \mbox{\hyperlink{octree_8h_source_l00540}{Colour}}, \mbox{\hyperlink{octree_8h_source_l00329}{Direct\+\_\+string}}, \mbox{\hyperlink{octree_8cc_source_l00268}{faces\+\_\+of\+\_\+common\+\_\+edge()}}, \mbox{\hyperlink{elements_8h_source_l01885}{oomph\+::\+Finite\+Element\+::get\+\_\+x()}}, \mbox{\hyperlink{octree_8cc_source_l03618}{gteq\+\_\+true\+\_\+edge\+\_\+neighbour()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{tree_8h_source_l00220}{oomph\+::\+Tree\+::is\+\_\+leaf()}}, \mbox{\hyperlink{tree_8h_source_l00364}{oomph\+::\+Tree\+Root\+::is\+\_\+neighbour\+\_\+periodic()}}, \mbox{\hyperlink{octree_8h_source_l00057}{oomph\+::\+Oc\+Tree\+Names\+::\+LB}}, \mbox{\hyperlink{tree_8h_source_l00313}{oomph\+::\+Tree\+::\+Max\+\_\+neighbour\+\_\+finding\+\_\+tolerance}}, \mbox{\hyperlink{refineable__elements_8h_source_l00389}{oomph\+::\+Refineable\+Element\+::nodes\+\_\+built()}}, \mbox{\hyperlink{refineable__elements_8h_source_l00395}{oomph\+::\+Refineable\+Element\+::number()}}, \mbox{\hyperlink{tree_8h_source_l00088}{oomph\+::\+Tree\+::object\+\_\+pt()}}, \mbox{\hyperlink{tree_8h_source_l00262}{oomph\+::\+Tree\+::\+OMEGA}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01265}{oomph\+::pause()}}, \mbox{\hyperlink{tree_8h_source_l00141}{oomph\+::\+Tree\+::root\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{octree_8h_source_l00585}{S\+\_\+base\+\_\+edge}}, \mbox{\hyperlink{octree_8h_source_l00593}{S\+\_\+step\+\_\+edge}}, and \mbox{\hyperlink{octree_8h_source_l00068}{oomph\+::\+Oc\+Tree\+Names\+::\+UF}}.
+References Colour, Direct\+\_\+string, faces\+\_\+of\+\_\+common\+\_\+edge(), oomph\+::\+Finite\+Element\+::get\+\_\+x(), gteq\+\_\+true\+\_\+edge\+\_\+neighbour(), i, oomph\+::\+Tree\+::is\+\_\+leaf(), oomph\+::\+Tree\+Root\+::is\+\_\+neighbour\+\_\+periodic(), oomph\+::\+Oc\+Tree\+Names\+::\+LB, oomph\+::\+Tree\+::\+Max\+\_\+neighbour\+\_\+finding\+\_\+tolerance, oomph\+::\+Refineable\+Element\+::nodes\+\_\+built(), oomph\+::\+Refineable\+Element\+::number(), oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::\+Tree\+::\+OMEGA, oomph\+::pause(), oomph\+::\+Tree\+::root\+\_\+pt(), s, S\+\_\+base\+\_\+edge, S\+\_\+step\+\_\+edge, and oomph\+::\+Oc\+Tree\+Names\+::\+UF.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8cc_source_l05749}{oomph\+::\+Oc\+Tree\+Forest\+::check\+\_\+all\+\_\+neighbours()}}, \mbox{\hyperlink{octree_8cc_source_l04200}{self\+\_\+test()}}, and \mbox{\hyperlink{octree_8cc_source_l05678}{oomph\+::\+Oc\+Tree\+Forest\+::self\+\_\+test()}}.
+Referenced by oomph\+::\+Oc\+Tree\+Forest\+::check\+\_\+all\+\_\+neighbours(), self\+\_\+test(), and oomph\+::\+Oc\+Tree\+Forest\+::self\+\_\+test().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_ab780bf82a61230f23bc3d96774a63010}\label{classoomph_1_1OcTree_ab780bf82a61230f23bc3d96774a63010}} 
 \index{oomph::OcTree@{oomph::OcTree}!edge\_neighbour\_is\_face\_neighbour@{edge\_neighbour\_is\_face\_neighbour}}
@@ -340,15 +340,15 @@ Is the edge neighbour (for edge \char`\"{}edge\char`\"{}) specified via the poin
 
 
 
-Definition at line \mbox{\hyperlink{octree_8cc_source_l02769}{2769}} of file \mbox{\hyperlink{octree_8cc_source}{octree.\+cc}}.
+Definition at line 2769 of file octree.\+cc.
 
 
 
-References \mbox{\hyperlink{octree_8h_source_l00073}{oomph\+::\+Oc\+Tree\+Names\+::B}}, \mbox{\hyperlink{octree_8h_source_l00071}{oomph\+::\+Oc\+Tree\+Names\+::D}}, \mbox{\hyperlink{octree_8h_source_l00059}{oomph\+::\+Oc\+Tree\+Names\+::\+DB}}, \mbox{\hyperlink{octree_8h_source_l00067}{oomph\+::\+Oc\+Tree\+Names\+::\+DF}}, \mbox{\hyperlink{octree_8h_source_l00329}{Direct\+\_\+string}}, \mbox{\hyperlink{octree_8h_source_l00074}{oomph\+::\+Oc\+Tree\+Names\+::F}}, \mbox{\hyperlink{octree_8cc_source_l03373}{gteq\+\_\+face\+\_\+neighbour()}}, \mbox{\hyperlink{binary__tree_8h_source_l00050}{oomph\+::\+Binary\+Tree\+Names\+::L}}, \mbox{\hyperlink{octree_8h_source_l00057}{oomph\+::\+Oc\+Tree\+Names\+::\+LB}}, \mbox{\hyperlink{octree_8h_source_l00061}{oomph\+::\+Oc\+Tree\+Names\+::\+LD}}, \mbox{\hyperlink{octree_8h_source_l00065}{oomph\+::\+Oc\+Tree\+Names\+::\+LF}}, \mbox{\hyperlink{octree_8h_source_l00063}{oomph\+::\+Oc\+Tree\+Names\+::\+LU}}, \mbox{\hyperlink{binary__tree_8h_source_l00051}{oomph\+::\+Binary\+Tree\+Names\+::R}}, \mbox{\hyperlink{octree_8h_source_l00058}{oomph\+::\+Oc\+Tree\+Names\+::\+RB}}, \mbox{\hyperlink{octree_8h_source_l00062}{oomph\+::\+Oc\+Tree\+Names\+::\+RD}}, \mbox{\hyperlink{octree_8h_source_l00066}{oomph\+::\+Oc\+Tree\+Names\+::\+RF}}, \mbox{\hyperlink{octree_8h_source_l00064}{oomph\+::\+Oc\+Tree\+Names\+::\+RU}}, \mbox{\hyperlink{octree_8h_source_l00072}{oomph\+::\+Oc\+Tree\+Names\+::U}}, \mbox{\hyperlink{octree_8h_source_l00060}{oomph\+::\+Oc\+Tree\+Names\+::\+UB}}, and \mbox{\hyperlink{octree_8h_source_l00068}{oomph\+::\+Oc\+Tree\+Names\+::\+UF}}.
+References oomph\+::\+Oc\+Tree\+Names\+::B, oomph\+::\+Oc\+Tree\+Names\+::D, oomph\+::\+Oc\+Tree\+Names\+::\+DB, oomph\+::\+Oc\+Tree\+Names\+::\+DF, Direct\+\_\+string, oomph\+::\+Oc\+Tree\+Names\+::F, gteq\+\_\+face\+\_\+neighbour(), oomph\+::\+Binary\+Tree\+Names\+::L, oomph\+::\+Oc\+Tree\+Names\+::\+LB, oomph\+::\+Oc\+Tree\+Names\+::\+LD, oomph\+::\+Oc\+Tree\+Names\+::\+LF, oomph\+::\+Oc\+Tree\+Names\+::\+LU, oomph\+::\+Binary\+Tree\+Names\+::R, oomph\+::\+Oc\+Tree\+Names\+::\+RB, oomph\+::\+Oc\+Tree\+Names\+::\+RD, oomph\+::\+Oc\+Tree\+Names\+::\+RF, oomph\+::\+Oc\+Tree\+Names\+::\+RU, oomph\+::\+Oc\+Tree\+Names\+::U, oomph\+::\+Oc\+Tree\+Names\+::\+UB, and oomph\+::\+Oc\+Tree\+Names\+::\+UF.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8cc_source_l03618}{gteq\+\_\+true\+\_\+edge\+\_\+neighbour()}}.
+Referenced by gteq\+\_\+true\+\_\+edge\+\_\+neighbour().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_a29d019becbc07f9ea2811a0ff0881d9a}\label{classoomph_1_1OcTree_a29d019becbc07f9ea2811a0ff0881d9a}} 
 \index{oomph::OcTree@{oomph::OcTree}!faces\_of\_common\_edge@{faces\_of\_common\_edge}}
@@ -362,15 +362,15 @@ Function that, given an edge, returns the two faces on which it.
 
 Given an edge, this function returns the faces on which it lies. 
 
-Definition at line \mbox{\hyperlink{octree_8cc_source_l00268}{268}} of file \mbox{\hyperlink{octree_8cc_source}{octree.\+cc}}.
+Definition at line 268 of file octree.\+cc.
 
 
 
-References \mbox{\hyperlink{octree_8h_source_l00073}{oomph\+::\+Oc\+Tree\+Names\+::B}}, \mbox{\hyperlink{octree_8h_source_l00071}{oomph\+::\+Oc\+Tree\+Names\+::D}}, \mbox{\hyperlink{octree_8h_source_l00059}{oomph\+::\+Oc\+Tree\+Names\+::\+DB}}, \mbox{\hyperlink{octree_8h_source_l00067}{oomph\+::\+Oc\+Tree\+Names\+::\+DF}}, \mbox{\hyperlink{octree_8h_source_l00329}{Direct\+\_\+string}}, \mbox{\hyperlink{octree_8h_source_l00074}{oomph\+::\+Oc\+Tree\+Names\+::F}}, \mbox{\hyperlink{binary__tree_8h_source_l00050}{oomph\+::\+Binary\+Tree\+Names\+::L}}, \mbox{\hyperlink{octree_8h_source_l00057}{oomph\+::\+Oc\+Tree\+Names\+::\+LB}}, \mbox{\hyperlink{octree_8h_source_l00061}{oomph\+::\+Oc\+Tree\+Names\+::\+LD}}, \mbox{\hyperlink{octree_8h_source_l00065}{oomph\+::\+Oc\+Tree\+Names\+::\+LF}}, \mbox{\hyperlink{octree_8h_source_l00063}{oomph\+::\+Oc\+Tree\+Names\+::\+LU}}, \mbox{\hyperlink{binary__tree_8h_source_l00051}{oomph\+::\+Binary\+Tree\+Names\+::R}}, \mbox{\hyperlink{octree_8h_source_l00058}{oomph\+::\+Oc\+Tree\+Names\+::\+RB}}, \mbox{\hyperlink{octree_8h_source_l00062}{oomph\+::\+Oc\+Tree\+Names\+::\+RD}}, \mbox{\hyperlink{octree_8h_source_l00066}{oomph\+::\+Oc\+Tree\+Names\+::\+RF}}, \mbox{\hyperlink{octree_8h_source_l00064}{oomph\+::\+Oc\+Tree\+Names\+::\+RU}}, \mbox{\hyperlink{octree_8h_source_l00072}{oomph\+::\+Oc\+Tree\+Names\+::U}}, \mbox{\hyperlink{octree_8h_source_l00060}{oomph\+::\+Oc\+Tree\+Names\+::\+UB}}, and \mbox{\hyperlink{octree_8h_source_l00068}{oomph\+::\+Oc\+Tree\+Names\+::\+UF}}.
+References oomph\+::\+Oc\+Tree\+Names\+::B, oomph\+::\+Oc\+Tree\+Names\+::D, oomph\+::\+Oc\+Tree\+Names\+::\+DB, oomph\+::\+Oc\+Tree\+Names\+::\+DF, Direct\+\_\+string, oomph\+::\+Oc\+Tree\+Names\+::F, oomph\+::\+Binary\+Tree\+Names\+::L, oomph\+::\+Oc\+Tree\+Names\+::\+LB, oomph\+::\+Oc\+Tree\+Names\+::\+LD, oomph\+::\+Oc\+Tree\+Names\+::\+LF, oomph\+::\+Oc\+Tree\+Names\+::\+LU, oomph\+::\+Binary\+Tree\+Names\+::R, oomph\+::\+Oc\+Tree\+Names\+::\+RB, oomph\+::\+Oc\+Tree\+Names\+::\+RD, oomph\+::\+Oc\+Tree\+Names\+::\+RF, oomph\+::\+Oc\+Tree\+Names\+::\+RU, oomph\+::\+Oc\+Tree\+Names\+::U, oomph\+::\+Oc\+Tree\+Names\+::\+UB, and oomph\+::\+Oc\+Tree\+Names\+::\+UF.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8cc_source_l04552}{doc\+\_\+true\+\_\+edge\+\_\+neighbours()}}, \mbox{\hyperlink{hp__refineable__elements_8cc_source_l04956}{oomph\+::\+PRefineable\+QElement$<$ 3, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::node\+\_\+created\+\_\+by\+\_\+neighbour()}}, \mbox{\hyperlink{refineable__brick__element_8cc_source_l00992}{oomph\+::\+Refineable\+QElement$<$ 3 $>$\+::node\+\_\+created\+\_\+by\+\_\+neighbour()}}, and \mbox{\hyperlink{hp__refineable__elements_8cc_source_l05271}{oomph\+::\+PRefineable\+QElement$<$ 3, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::node\+\_\+created\+\_\+by\+\_\+son\+\_\+of\+\_\+neighbour()}}.
+Referenced by doc\+\_\+true\+\_\+edge\+\_\+neighbours(), oomph\+::\+PRefineable\+QElement$<$ 3, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::node\+\_\+created\+\_\+by\+\_\+neighbour(), oomph\+::\+Refineable\+QElement$<$ 3 $>$\+::node\+\_\+created\+\_\+by\+\_\+neighbour(), and oomph\+::\+PRefineable\+QElement$<$ 3, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::node\+\_\+created\+\_\+by\+\_\+son\+\_\+of\+\_\+neighbour().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_ab03edae455d5bd788acf426ca3f87b9d}\label{classoomph_1_1OcTree_ab03edae455d5bd788acf426ca3f87b9d}} 
 \index{oomph::OcTree@{oomph::OcTree}!get\_the\_other\_face@{get\_the\_other\_face}}
@@ -384,15 +384,15 @@ If an edge is bordered by the nodes whose local numbers are n1 and n2 in an elem
 
 This function takes as argument two node numbers of two nodes delimiting an edge, and one face of this edge and returns the other face that is sharing this edge. The node numbers given to this function MUST be vertices nodes to work. it also need the value of nnode1d to work. ({\ttfamily face} is a direction in the set U,D,F,B,L,R). 
 
-Definition at line \mbox{\hyperlink{octree_8cc_source_l00565}{565}} of file \mbox{\hyperlink{octree_8cc_source}{octree.\+cc}}.
+Definition at line 565 of file octree.\+cc.
 
 
 
-References \mbox{\hyperlink{octree_8h_source_l00353}{Direction\+\_\+to\+\_\+vector}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{octree_8h_source_l00348}{Vector\+\_\+to\+\_\+direction}}, and \mbox{\hyperlink{octree_8cc_source_l00232}{vertex\+\_\+node\+\_\+to\+\_\+vector()}}.
+References Direction\+\_\+to\+\_\+vector, i, Vector\+\_\+to\+\_\+direction, and vertex\+\_\+node\+\_\+to\+\_\+vector().
 
 
 
-Referenced by \mbox{\hyperlink{octree_8cc_source_l05255}{oomph\+::\+Oc\+Tree\+Forest\+::construct\+\_\+up\+\_\+right\+\_\+equivalents()}}.
+Referenced by oomph\+::\+Oc\+Tree\+Forest\+::construct\+\_\+up\+\_\+right\+\_\+equivalents().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_abaa4c8bbf2fdbad7465af2c4964a915f}\label{classoomph_1_1OcTree_abaa4c8bbf2fdbad7465af2c4964a915f}} 
 \index{oomph::OcTree@{oomph::OcTree}!gteq\_edge\_neighbour@{gteq\_edge\_neighbour}}
@@ -409,9 +409,9 @@ This is an auxiliary routine which allows neighbour finding in adjacent octrees.
 Parameters\+:
 \begin{DoxyItemize}
 \item direction\+: (LB/\+RB/...) Direction in which neighbour has to be found.
-\item In a forest, an \mbox{\hyperlink{classoomph_1_1OcTree}{Oc\+Tree}} can have multiple edge neighbours (across an edge where multiple trees meet). {\ttfamily i\+\_\+root\+\_\+edge\+\_\+neighbour} specifies which of these is used. Use this as \char`\"{}reverse communication\char`\"{}\+: First call with {\ttfamily i\+\_\+root\+\_\+edge\+\_\+neighbour=0} and {\ttfamily n\+\_\+root\+\_\+edge\+\_\+neighour} initialised to anything you want (zero, ideally). On return from the fct, {\ttfamily n\+\_\+root\+\_\+edge\+\_\+neighour} contains the total number of true edge neighbours, so additional calls to the fct with {\ttfamily i\+\_\+root\+\_\+edge\+\_\+neighbour\texorpdfstring{$>$}{>}0} can be made until they\textquotesingle{}ve all been visited.
+\item In a forest, an \mbox{\hyperlink{classoomph_1_1OcTree}{Oc\+Tree}} can have multiple edge neighbours (across an edge where multiple trees meet). {\ttfamily i\+\_\+root\+\_\+edge\+\_\+neighbour} specifies which of these is used. Use this as \char`\"{}reverse communication\char`\"{}\+: First call with {\ttfamily i\+\_\+root\+\_\+edge\+\_\+neighbour=0} and {\ttfamily n\+\_\+root\+\_\+edge\+\_\+neighour} initialised to anything you want (zero, ideally). On return from the fct, {\ttfamily n\+\_\+root\+\_\+edge\+\_\+neighour} contains the total number of true edge neighbours, so additional calls to the fct with {\ttfamily i\+\_\+root\+\_\+edge\+\_\+neighbour$>$0} can be made until they\textquotesingle{}ve all been visited.
 \item s\+\_\+diff\+: Offset of the edge\textquotesingle{}s \char`\"{}low\char`\"{} vertex from corresponding vertex in neighbour. Note that this is input/output as it needs to be incremented/ decremented during the recursive calls to this function.
-\item diff\+\_\+level \texorpdfstring{$<$}{<}= 0 indicates the difference in octree levels between the current element and its neighbour.
+\item diff\+\_\+level $<$= 0 indicates the difference in octree levels between the current element and its neighbour.
 \item max\+\_\+level is the maximum level to which the neighbour search is allowed to proceed. This is necessary because in a forest, the neighbour search isn\textquotesingle{}t based on pure recursion.
 \item orig\+\_\+root\+\_\+pt identifies the root node of the element whose neighbour we\textquotesingle{}re really trying to find by all these recursive calls.
 \end{DoxyItemize}{\bfseries{Note\+:}} some of the auxiliary information may be incorrect if the neighbour is not a true edge neighbour. We don\textquotesingle{}t care because we\textquotesingle{}re not dealing with those!
@@ -423,22 +423,22 @@ Parameters\+:
 
 \begin{DoxyItemize}
 \item direction\+: (LB,RB/...) Direction in which neighbour has to be found.
-\item In a forest, an \mbox{\hyperlink{classoomph_1_1OcTree}{Oc\+Tree}} can have multiple edge neighbours (across an edge where multiple trees meet). {\ttfamily i\+\_\+root\+\_\+edge\+\_\+neighbour} specifies which of these is used. Use this as \char`\"{}reverse communication\char`\"{}\+: First call with {\ttfamily i\+\_\+root\+\_\+edge\+\_\+neighbour=0} and {\ttfamily n\+\_\+root\+\_\+edge\+\_\+neighour} initialised to anything you want (zero, ideally). On return from the fct, {\ttfamily n\+\_\+root\+\_\+edge\+\_\+neighour} contains the total number of true edge neighbours, so additional calls to the fct with {\ttfamily i\+\_\+root\+\_\+edge\+\_\+neighbour\texorpdfstring{$>$}{>}0} can be made until they\textquotesingle{}ve all been visited.
+\item In a forest, an \mbox{\hyperlink{classoomph_1_1OcTree}{Oc\+Tree}} can have multiple edge neighbours (across an edge where multiple trees meet). {\ttfamily i\+\_\+root\+\_\+edge\+\_\+neighbour} specifies which of these is used. Use this as \char`\"{}reverse communication\char`\"{}\+: First call with {\ttfamily i\+\_\+root\+\_\+edge\+\_\+neighbour=0} and {\ttfamily n\+\_\+root\+\_\+edge\+\_\+neighour} initialised to anything you want (zero, ideally). On return from the fct, {\ttfamily n\+\_\+root\+\_\+edge\+\_\+neighour} contains the total number of true edge neighbours, so additional calls to the fct with {\ttfamily i\+\_\+root\+\_\+edge\+\_\+neighbour$>$0} can be made until they\textquotesingle{}ve all been visited.
 \item s\+\_\+diff\+: Offset of left/down/back vertex from corresponding vertex in neighbour. Note that this is input/output as it needs to be incremented/ decremented during the recursive calls to this function.
-\item diff\+\_\+level \texorpdfstring{$<$}{<}= 0 indicates the difference in octree levels between the current element and its neighbour.
+\item diff\+\_\+level $<$= 0 indicates the difference in octree levels between the current element and its neighbour.
 \item max\+\_\+level is the maximum level to which the neighbour search is allowed to proceed. This is necessary because in a forest, the neighbour search isn\textquotesingle{}t based on pure recursion.
 \item orig\+\_\+root\+\_\+pt identifies the root node of the element whose neighbour we\textquotesingle{}re really trying to find by all these recursive calls. 
 \end{DoxyItemize}
 
-Definition at line \mbox{\hyperlink{octree_8cc_source_l04015}{4015}} of file \mbox{\hyperlink{octree_8cc_source}{octree.\+cc}}.
+Definition at line 4015 of file octree.\+cc.
 
 
 
-References \mbox{\hyperlink{octree_8h_source_l00537}{Common\+\_\+face}}, \mbox{\hyperlink{octree_8h_source_l00059}{oomph\+::\+Oc\+Tree\+Names\+::\+DB}}, \mbox{\hyperlink{octree_8h_source_l00067}{oomph\+::\+Oc\+Tree\+Names\+::\+DF}}, \mbox{\hyperlink{octree_8h_source_l00329}{Direct\+\_\+string}}, \mbox{\hyperlink{tree_8h_source_l00296}{oomph\+::\+Tree\+::\+Father\+\_\+pt}}, \mbox{\hyperlink{octree_8cc_source_l04015}{gteq\+\_\+edge\+\_\+neighbour()}}, \mbox{\hyperlink{octree_8cc_source_l03373}{gteq\+\_\+face\+\_\+neighbour()}}, \mbox{\hyperlink{octree_8h_source_l00529}{Is\+\_\+adjacent}}, \mbox{\hyperlink{octree_8h_source_l00057}{oomph\+::\+Oc\+Tree\+Names\+::\+LB}}, \mbox{\hyperlink{octree_8h_source_l00061}{oomph\+::\+Oc\+Tree\+Names\+::\+LD}}, \mbox{\hyperlink{tree_8h_source_l00302}{oomph\+::\+Tree\+::\+Level}}, \mbox{\hyperlink{octree_8h_source_l00065}{oomph\+::\+Oc\+Tree\+Names\+::\+LF}}, \mbox{\hyperlink{octree_8h_source_l00063}{oomph\+::\+Oc\+Tree\+Names\+::\+LU}}, \mbox{\hyperlink{tree_8h_source_l00262}{oomph\+::\+Tree\+::\+OMEGA}}, \mbox{\hyperlink{octree_8h_source_l00058}{oomph\+::\+Oc\+Tree\+Names\+::\+RB}}, \mbox{\hyperlink{octree_8h_source_l00062}{oomph\+::\+Oc\+Tree\+Names\+::\+RD}}, \mbox{\hyperlink{octree_8h_source_l00533}{Reflect}}, \mbox{\hyperlink{octree_8h_source_l00066}{oomph\+::\+Oc\+Tree\+Names\+::\+RF}}, \mbox{\hyperlink{tree_8h_source_l00292}{oomph\+::\+Tree\+::\+Root\+\_\+pt}}, \mbox{\hyperlink{octree_8cc_source_l00750}{rotate()}}, \mbox{\hyperlink{octree_8h_source_l00064}{oomph\+::\+Oc\+Tree\+Names\+::\+RU}}, \mbox{\hyperlink{octree_8h_source_l00600}{S\+\_\+direct\+\_\+edge}}, \mbox{\hyperlink{tree_8h_source_l00299}{oomph\+::\+Tree\+::\+Son\+\_\+pt}}, \mbox{\hyperlink{tree_8h_source_l00305}{oomph\+::\+Tree\+::\+Son\+\_\+type}}, \mbox{\hyperlink{octree_8h_source_l00060}{oomph\+::\+Oc\+Tree\+Names\+::\+UB}}, and \mbox{\hyperlink{octree_8h_source_l00068}{oomph\+::\+Oc\+Tree\+Names\+::\+UF}}.
+References Common\+\_\+face, oomph\+::\+Oc\+Tree\+Names\+::\+DB, oomph\+::\+Oc\+Tree\+Names\+::\+DF, Direct\+\_\+string, oomph\+::\+Tree\+::\+Father\+\_\+pt, gteq\+\_\+face\+\_\+neighbour(), Is\+\_\+adjacent, oomph\+::\+Oc\+Tree\+Names\+::\+LB, oomph\+::\+Oc\+Tree\+Names\+::\+LD, oomph\+::\+Tree\+::\+Level, oomph\+::\+Oc\+Tree\+Names\+::\+LF, oomph\+::\+Oc\+Tree\+Names\+::\+LU, oomph\+::\+Tree\+::\+OMEGA, oomph\+::\+Oc\+Tree\+Names\+::\+RB, oomph\+::\+Oc\+Tree\+Names\+::\+RD, Reflect, oomph\+::\+Oc\+Tree\+Names\+::\+RF, oomph\+::\+Tree\+::\+Root\+\_\+pt, rotate(), oomph\+::\+Oc\+Tree\+Names\+::\+RU, S\+\_\+direct\+\_\+edge, oomph\+::\+Tree\+::\+Son\+\_\+pt, oomph\+::\+Tree\+::\+Son\+\_\+type, oomph\+::\+Oc\+Tree\+Names\+::\+UB, and oomph\+::\+Oc\+Tree\+Names\+::\+UF.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8cc_source_l04015}{gteq\+\_\+edge\+\_\+neighbour()}}, and \mbox{\hyperlink{octree_8cc_source_l03618}{gteq\+\_\+true\+\_\+edge\+\_\+neighbour()}}.
+Referenced by gteq\+\_\+true\+\_\+edge\+\_\+neighbour().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_afd5ef9914c4b65f604bbf587343aca72}\label{classoomph_1_1OcTree_afd5ef9914c4b65f604bbf587343aca72}} 
 \index{oomph::OcTree@{oomph::OcTree}!gteq\_face\_neighbour@{gteq\_face\_neighbour}}
@@ -456,7 +456,7 @@ Parameters\+:
 \begin{DoxyItemize}
 \item direction\+: (L/\+R/\+U/\+D/\+B/F) Direction in which neighbour has to be found.
 \item s\+\_\+difflo/s\+\_\+diffhi\+: Offset of left/down/back vertex from corresponding vertex in neighbour. Note that this is input/output as it needs to be incremented/ decremented during the recursive calls to this function.
-\item diff\+\_\+level \texorpdfstring{$<$}{<}= 0 indicates the difference in octree levels between the current element and its neighbour.
+\item diff\+\_\+level $<$= 0 indicates the difference in octree levels between the current element and its neighbour.
 \item max\+\_\+level is the maximum level to which the neighbour search is allowed to proceed. This is necessary because in a forest, the neighbour search isn\textquotesingle{}t based on pure recursion.
 \item orig\+\_\+root\+\_\+pt identifies the root node of the element whose neighbour we\textquotesingle{}re really trying to find by all these recursive calls.
 \end{DoxyItemize}
@@ -469,17 +469,17 @@ Parameters\+:
 \begin{DoxyItemize}
 \item direction\+: (L/\+R/\+U/\+D/\+B/F) Direction in which neighbour has to be found.
 \item s\+\_\+difflo/s\+\_\+diffhi\+: Offset of left/down/back vertex from corresponding vertex in neighbour. Note that this is input/output as it needs to be incremented/decremented during the recursive calls to this function.
-\item face\+: We\textquotesingle{}re looking for the neighbour across our face \textquotesingle{}direction\textquotesingle{} (L/\+R/\+U/\+D/\+B/F). When viewed from the neighbour, this face is `face' (L/\+R/\+U/\+D/\+B/F). \mbox{[}If there\textquotesingle{}s no relative rotation between neighbours then this is a mere reflection, e.\+g. direction=F -\/-\/\texorpdfstring{$>$}{>} face=B etc.\mbox{]}
-\item diff\+\_\+level \texorpdfstring{$<$}{<}= 0 indicates the difference in octree levels between the current element and its neighbour.
+\item face\+: We\textquotesingle{}re looking for the neighbour across our face \textquotesingle{}direction\textquotesingle{} (L/\+R/\+U/\+D/\+B/F). When viewed from the neighbour, this face is `face' (L/\+R/\+U/\+D/\+B/F). \mbox{[}If there\textquotesingle{}s no relative rotation between neighbours then this is a mere reflection, e.\+g. direction=F -\/-\/$>$ face=B etc.\mbox{]}
+\item diff\+\_\+level $<$= 0 indicates the difference in octree levels between the current element and its neighbour.
 \item max\+\_\+level is the maximum level to which the neighbour search is allowed to proceed. This is necessary because in a forest, the neighbour search isn\textquotesingle{}t based on pure recursion.
 \item orig\+\_\+root\+\_\+pt identifies the root node of the element whose neighbour we\textquotesingle{}re really trying to find by all these recursive calls. 
 \end{DoxyItemize}
 
-Definition at line \mbox{\hyperlink{octree_8cc_source_l03839}{3839}} of file \mbox{\hyperlink{octree_8cc_source}{octree.\+cc}}.
+Definition at line 3839 of file octree.\+cc.
 
 
 
-References \mbox{\hyperlink{octree_8h_source_l00073}{oomph\+::\+Oc\+Tree\+Names\+::B}}, \mbox{\hyperlink{octree_8h_source_l00071}{oomph\+::\+Oc\+Tree\+Names\+::D}}, \mbox{\hyperlink{octree_8h_source_l00329}{Direct\+\_\+string}}, \mbox{\hyperlink{octree_8h_source_l00074}{oomph\+::\+Oc\+Tree\+Names\+::F}}, \mbox{\hyperlink{tree_8h_source_l00296}{oomph\+::\+Tree\+::\+Father\+\_\+pt}}, \mbox{\hyperlink{octree_8cc_source_l03373}{gteq\+\_\+face\+\_\+neighbour()}}, \mbox{\hyperlink{octree_8h_source_l00529}{Is\+\_\+adjacent}}, \mbox{\hyperlink{binary__tree_8h_source_l00050}{oomph\+::\+Binary\+Tree\+Names\+::L}}, \mbox{\hyperlink{tree_8h_source_l00302}{oomph\+::\+Tree\+::\+Level}}, \mbox{\hyperlink{tree_8h_source_l00357}{oomph\+::\+Tree\+Root\+::neighbour\+\_\+pt()}}, \mbox{\hyperlink{binary__tree_8h_source_l00051}{oomph\+::\+Binary\+Tree\+Names\+::R}}, \mbox{\hyperlink{octree_8h_source_l00533}{Reflect}}, \mbox{\hyperlink{tree_8h_source_l00292}{oomph\+::\+Tree\+::\+Root\+\_\+pt}}, \mbox{\hyperlink{octree_8cc_source_l00750}{rotate()}}, \mbox{\hyperlink{octree_8h_source_l00581}{S\+\_\+directhi}}, \mbox{\hyperlink{octree_8h_source_l00573}{S\+\_\+directlo}}, \mbox{\hyperlink{tree_8h_source_l00299}{oomph\+::\+Tree\+::\+Son\+\_\+pt}}, \mbox{\hyperlink{tree_8h_source_l00305}{oomph\+::\+Tree\+::\+Son\+\_\+type}}, and \mbox{\hyperlink{octree_8h_source_l00072}{oomph\+::\+Oc\+Tree\+Names\+::U}}.
+References oomph\+::\+Oc\+Tree\+Names\+::B, oomph\+::\+Oc\+Tree\+Names\+::D, Direct\+\_\+string, oomph\+::\+Oc\+Tree\+Names\+::F, oomph\+::\+Tree\+::\+Father\+\_\+pt, gteq\+\_\+face\+\_\+neighbour(), Is\+\_\+adjacent, oomph\+::\+Binary\+Tree\+Names\+::L, oomph\+::\+Tree\+::\+Level, oomph\+::\+Tree\+Root\+::neighbour\+\_\+pt(), oomph\+::\+Binary\+Tree\+Names\+::R, Reflect, oomph\+::\+Tree\+::\+Root\+\_\+pt, rotate(), S\+\_\+directhi, S\+\_\+directlo, oomph\+::\+Tree\+::\+Son\+\_\+pt, oomph\+::\+Tree\+::\+Son\+\_\+type, and oomph\+::\+Oc\+Tree\+Names\+::U.
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_a690c4fbbca73bd48c0bc3b2913a9b39c}\label{classoomph_1_1OcTree_a690c4fbbca73bd48c0bc3b2913a9b39c}} 
 \index{oomph::OcTree@{oomph::OcTree}!gteq\_face\_neighbour@{gteq\_face\_neighbour}}
@@ -500,18 +500,18 @@ Find (pointer to) `greater-\/or-\/equal-\/sized face neighbour' in given directi
 \item In the present octree, the \char`\"{}south west\char`\"{} vertex of the face between the present octree and its neighbour is located at S\+\_\+lo=-\/1, S\+\_\+hi=-\/1. This point is located at the (3D) local coordinates ({\ttfamily s\+\_\+sw}\mbox{[}0\mbox{]}, {\ttfamily s\+\_\+sw}\mbox{[}1\mbox{]}, {\ttfamily s\+\_\+sw}\mbox{[}2\mbox{]}) in the neighbouring octree.
 \item ditto with s\+\_\+ne\+: In the present octree, the \char`\"{}north east\char`\"{} vertex of the face between the present octree and its neighbour is located at S\+\_\+lo=+1, S\+\_\+hi=+1. This point is located at the (3D) local coordinates ({\ttfamily s\+\_\+ne}\mbox{[}0\mbox{]}, {\ttfamily s\+\_\+ne}\mbox{[}1\mbox{]}, {\ttfamily s\+\_\+ne}\mbox{[}2\mbox{]}) in the neighbouring octree.
 \item We\textquotesingle{}re looking for a neighbour in the specified {\ttfamily direction}. When viewed from the neighbouring octree, the face that separates the present octree from its neighbour is the neighbour\textquotesingle{}s face {\ttfamily face}. If there\textquotesingle{}s no rotation between the two octrees, this is a simple reflection\+: For instance, if we\textquotesingle{}re looking for a neighhbour in the {\ttfamily R} \mbox{[}ight\mbox{]} {\ttfamily direction}, {\ttfamily face} will be {\ttfamily L} \mbox{[}eft\mbox{]}
-\item {\ttfamily diff\+\_\+level} \texorpdfstring{$<$}{<}= 0 indicates the difference in refinement levels between the two neighbours. If {\ttfamily diff\+\_\+level==0}, the neighbour has the same size as the current octree. 
+\item {\ttfamily diff\+\_\+level} $<$= 0 indicates the difference in refinement levels between the two neighbours. If {\ttfamily diff\+\_\+level==0}, the neighbour has the same size as the current octree. 
 \end{DoxyItemize}
 
-Definition at line \mbox{\hyperlink{octree_8cc_source_l03373}{3373}} of file \mbox{\hyperlink{octree_8cc_source}{octree.\+cc}}.
+Definition at line 3373 of file octree.\+cc.
 
 
 
-References \mbox{\hyperlink{octree_8h_source_l00073}{oomph\+::\+Oc\+Tree\+Names\+::B}}, \mbox{\hyperlink{octree_8h_source_l00071}{oomph\+::\+Oc\+Tree\+Names\+::D}}, \mbox{\hyperlink{octree_8h_source_l00329}{Direct\+\_\+string}}, \mbox{\hyperlink{octree_8h_source_l00353}{Direction\+\_\+to\+\_\+vector}}, \mbox{\hyperlink{octree_8h_source_l00074}{oomph\+::\+Oc\+Tree\+Names\+::F}}, \mbox{\hyperlink{octree_8cc_source_l03373}{gteq\+\_\+face\+\_\+neighbour()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{binary__tree_8h_source_l00050}{oomph\+::\+Binary\+Tree\+Names\+::L}}, \mbox{\hyperlink{tree_8h_source_l00302}{oomph\+::\+Tree\+::\+Level}}, \mbox{\hyperlink{binary__tree_8h_source_l00051}{oomph\+::\+Binary\+Tree\+Names\+::R}}, \mbox{\hyperlink{octree_8h_source_l00332}{Reflect\+\_\+face}}, \mbox{\hyperlink{octree_8h_source_l00790}{oomph\+::\+Oc\+Tree\+Root\+::right\+\_\+equivalent()}}, \mbox{\hyperlink{tree_8h_source_l00292}{oomph\+::\+Tree\+::\+Root\+\_\+pt}}, \mbox{\hyperlink{octree_8cc_source_l00750}{rotate()}}, \mbox{\hyperlink{octree_8h_source_l00544}{S\+\_\+base}}, \mbox{\hyperlink{octree_8h_source_l00565}{S\+\_\+stephi}}, \mbox{\hyperlink{octree_8h_source_l00558}{S\+\_\+steplo}}, \mbox{\hyperlink{octree_8h_source_l00072}{oomph\+::\+Oc\+Tree\+Names\+::U}}, and \mbox{\hyperlink{octree_8h_source_l00757}{oomph\+::\+Oc\+Tree\+Root\+::up\+\_\+equivalent()}}.
+References oomph\+::\+Oc\+Tree\+Names\+::B, oomph\+::\+Oc\+Tree\+Names\+::D, Direct\+\_\+string, Direction\+\_\+to\+\_\+vector, oomph\+::\+Oc\+Tree\+Names\+::F, i, oomph\+::\+Binary\+Tree\+Names\+::L, oomph\+::\+Tree\+::\+Level, oomph\+::\+Binary\+Tree\+Names\+::R, Reflect\+\_\+face, oomph\+::\+Oc\+Tree\+Root\+::right\+\_\+equivalent(), oomph\+::\+Tree\+::\+Root\+\_\+pt, rotate(), S\+\_\+base, S\+\_\+stephi, S\+\_\+steplo, oomph\+::\+Oc\+Tree\+Names\+::U, and oomph\+::\+Oc\+Tree\+Root\+::up\+\_\+equivalent().
 
 
 
-Referenced by \mbox{\hyperlink{refineable__brick__element_8cc_source_l02509}{oomph\+::\+Refineable\+QElement$<$ 3 $>$\+::check\+\_\+integrity()}}, \mbox{\hyperlink{octree_8cc_source_l04275}{doc\+\_\+face\+\_\+neighbours()}}, \mbox{\hyperlink{octree_8cc_source_l02769}{edge\+\_\+neighbour\+\_\+is\+\_\+face\+\_\+neighbour()}}, \mbox{\hyperlink{octree_8cc_source_l04015}{gteq\+\_\+edge\+\_\+neighbour()}}, \mbox{\hyperlink{octree_8cc_source_l03373}{gteq\+\_\+face\+\_\+neighbour()}}, \mbox{\hyperlink{hp__refineable__elements_8cc_source_l04956}{oomph\+::\+PRefineable\+QElement$<$ 3, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::node\+\_\+created\+\_\+by\+\_\+neighbour()}}, \mbox{\hyperlink{refineable__brick__element_8cc_source_l00992}{oomph\+::\+Refineable\+QElement$<$ 3 $>$\+::node\+\_\+created\+\_\+by\+\_\+neighbour()}}, \mbox{\hyperlink{hp__refineable__elements_8cc_source_l05271}{oomph\+::\+PRefineable\+QElement$<$ 3, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::node\+\_\+created\+\_\+by\+\_\+son\+\_\+of\+\_\+neighbour()}}, \mbox{\hyperlink{refineable__brick__element_8cc_source_l02142}{oomph\+::\+Refineable\+QElement$<$ 3 $>$\+::oc\+\_\+hang\+\_\+helper()}}, and \mbox{\hyperlink{hp__refineable__elements_8cc_source_l08351}{oomph\+::\+PRefineable\+QElement$<$ 3, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::oc\+\_\+hang\+\_\+helper()}}.
+Referenced by oomph\+::\+Refineable\+QElement$<$ 3 $>$\+::check\+\_\+integrity(), doc\+\_\+face\+\_\+neighbours(), edge\+\_\+neighbour\+\_\+is\+\_\+face\+\_\+neighbour(), gteq\+\_\+edge\+\_\+neighbour(), gteq\+\_\+face\+\_\+neighbour(), oomph\+::\+PRefineable\+QElement$<$ 3, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::node\+\_\+created\+\_\+by\+\_\+neighbour(), oomph\+::\+Refineable\+QElement$<$ 3 $>$\+::node\+\_\+created\+\_\+by\+\_\+neighbour(), oomph\+::\+PRefineable\+QElement$<$ 3, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::node\+\_\+created\+\_\+by\+\_\+son\+\_\+of\+\_\+neighbour(), oomph\+::\+Refineable\+QElement$<$ 3 $>$\+::oc\+\_\+hang\+\_\+helper(), and oomph\+::\+PRefineable\+QElement$<$ 3, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::oc\+\_\+hang\+\_\+helper().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_ab5a26409cd49a430095915c76060f476}\label{classoomph_1_1OcTree_ab5a26409cd49a430095915c76060f476}} 
 \index{oomph::OcTree@{oomph::OcTree}!gteq\_true\_edge\_neighbour@{gteq\_true\_edge\_neighbour}}
@@ -529,33 +529,33 @@ Another way of interpreting this is that we\textquotesingle{}re looking for the 
 
 The interpretation of the arguments is as follows\+:
 \begin{DoxyItemize}
-\item In a forest, an \mbox{\hyperlink{classoomph_1_1OcTree}{Oc\+Tree}} can have multiple edge neighbours (across an edge where multiple trees meet). {\ttfamily i\+\_\+root\+\_\+edge\+\_\+neighbour} specifies which of these is used. Use this as \char`\"{}reverse communication\char`\"{}\+: First call with {\ttfamily i\+\_\+root\+\_\+edge\+\_\+neighbour=0} and {\ttfamily n\+\_\+root\+\_\+edge\+\_\+neighour} initialised to anything you want (zero, ideally). On return from the fct, {\ttfamily n\+\_\+root\+\_\+edge\+\_\+neighour} contains the total number of true edge neighbours, so additional calls to the fct with {\ttfamily i\+\_\+root\+\_\+edge\+\_\+neighbour\texorpdfstring{$>$}{>}0} can be made until they\textquotesingle{}ve all been visited.
+\item In a forest, an \mbox{\hyperlink{classoomph_1_1OcTree}{Oc\+Tree}} can have multiple edge neighbours (across an edge where multiple trees meet). {\ttfamily i\+\_\+root\+\_\+edge\+\_\+neighbour} specifies which of these is used. Use this as \char`\"{}reverse communication\char`\"{}\+: First call with {\ttfamily i\+\_\+root\+\_\+edge\+\_\+neighbour=0} and {\ttfamily n\+\_\+root\+\_\+edge\+\_\+neighour} initialised to anything you want (zero, ideally). On return from the fct, {\ttfamily n\+\_\+root\+\_\+edge\+\_\+neighour} contains the total number of true edge neighbours, so additional calls to the fct with {\ttfamily i\+\_\+root\+\_\+edge\+\_\+neighbour$>$0} can be made until they\textquotesingle{}ve all been visited.
 \item The vector {\ttfamily translate\+\_\+s} turns the index of the local coordinate in the present octree into that of the neighbour. If there are no rotations then {\ttfamily translate\+\_\+s}\mbox{[}i\mbox{]} = i.
 \item The \char`\"{}low\char`\"{} vertex of the edge in the present octree coincides with a certain vertex in the edge neighbour. In terms of the neighbour\textquotesingle{}s local coordinates, this point is located at the (3D) local coordinates ({\ttfamily s\+\_\+lo}\mbox{[}0\mbox{]}, {\ttfamily s\+\_\+lo}\mbox{[}1\mbox{]}, {\ttfamily s\+\_\+lo}\mbox{[}2\mbox{]})
 \item ditto with s\+\_\+hi\+: The \char`\"{}high\char`\"{} vertex of the edge in the present octree coincides with a certain vertex in the edge neighbour. In terms of the neighbour\textquotesingle{}s local coordinates, this point is located at the (3D) local coordinates ({\ttfamily s\+\_\+hi}\mbox{[}0\mbox{]}, {\ttfamily s\+\_\+hi}\mbox{[}1\mbox{]}, {\ttfamily s\+\_\+hi}\mbox{[}2\mbox{]})
 \item We\textquotesingle{}re looking for a neighbour in the specified {\ttfamily direction}. When viewed from the neighbouring octree, the edge that separates the present octree from its neighbour is the neighbour\textquotesingle{}s edge {\ttfamily edge}. If there\textquotesingle{}s no rotation between the two octrees, this is a simple reflection\+: For instance, if we\textquotesingle{}re looking for a neighhbour in the {\ttfamily DB} {\ttfamily direction}, {\ttfamily edge} will be {\ttfamily UF}.
-\item {\ttfamily diff\+\_\+level} \texorpdfstring{$<$}{<}= 0 indicates the difference in refinement levels between the two neighbours. If {\ttfamily diff\+\_\+level==0}, the neighbour has the same size as the current octree.
+\item {\ttfamily diff\+\_\+level} $<$= 0 indicates the difference in refinement levels between the two neighbours. If {\ttfamily diff\+\_\+level==0}, the neighbour has the same size as the current octree.
 \end{DoxyItemize}{\bfseries{Important\+:}} We\textquotesingle{}re only looking for {\bfseries{true}} edge neighbours i.\+e. edge neigbours that are not also face neighbours. This is an important difference to Samet\textquotesingle{}s terminology. If the neighbour in a certain direction is not a true edge neighbour, or if there is no neighbour, then this function returns NULL.
 
 
 \begin{DoxyItemize}
-\item In a forest, an \mbox{\hyperlink{classoomph_1_1OcTree}{Oc\+Tree}} can have multiple edge neighbours (across an edge where multiple trees meet). {\ttfamily i\+\_\+root\+\_\+edge\+\_\+neighbour} specifies which of these is used. Use this as \char`\"{}reverse communication\char`\"{}\+: First call with {\ttfamily i\+\_\+root\+\_\+edge\+\_\+neighbour=0} and {\ttfamily n\+\_\+root\+\_\+edge\+\_\+neighour} initialised to anything you want (zero, ideally). On return from the fct, {\ttfamily n\+\_\+root\+\_\+edge\+\_\+neighour} contains the total number of true edge neighbours, so additional calls to the fct with {\ttfamily i\+\_\+root\+\_\+edge\+\_\+neighbour\texorpdfstring{$>$}{>}0} can be made until they\textquotesingle{}ve all been visited.
+\item In a forest, an \mbox{\hyperlink{classoomph_1_1OcTree}{Oc\+Tree}} can have multiple edge neighbours (across an edge where multiple trees meet). {\ttfamily i\+\_\+root\+\_\+edge\+\_\+neighbour} specifies which of these is used. Use this as \char`\"{}reverse communication\char`\"{}\+: First call with {\ttfamily i\+\_\+root\+\_\+edge\+\_\+neighbour=0} and {\ttfamily n\+\_\+root\+\_\+edge\+\_\+neighour} initialised to anything you want (zero, ideally). On return from the fct, {\ttfamily n\+\_\+root\+\_\+edge\+\_\+neighour} contains the total number of true edge neighbours, so additional calls to the fct with {\ttfamily i\+\_\+root\+\_\+edge\+\_\+neighbour$>$0} can be made until they\textquotesingle{}ve all been visited.
 \item The vector {\ttfamily translate\+\_\+s} turns the index of the local coordinate in the present octree into that of the neighbour. If there are no rotations then {\ttfamily translate\+\_\+s}\mbox{[}i\mbox{]} = i.
 \item The \char`\"{}low\char`\"{} vertex of the edge in the present octree coincides with a certain vertex in the edge neighbour. In terms of the neighbour\textquotesingle{}s local coordinates, this point is located at the (3D) local coordinates ({\ttfamily s\+\_\+lo}\mbox{[}0\mbox{]}, {\ttfamily s\+\_\+lo}\mbox{[}1\mbox{]}, {\ttfamily s\+\_\+lo}\mbox{[}2\mbox{]})
 \item ditto with s\+\_\+hi\+: The \char`\"{}high\char`\"{} vertex of the edge in the present octree coincides with a certain vertex in the edge neighbour. In terms of the neighbour\textquotesingle{}s local coordinates, this point is located at the (3D) local coordinates ({\ttfamily s\+\_\+hi}\mbox{[}0\mbox{]}, {\ttfamily s\+\_\+hi}\mbox{[}1\mbox{]}, {\ttfamily s\+\_\+hi}\mbox{[}2\mbox{]})
 \item We\textquotesingle{}re looking for a neighbour in the specified {\ttfamily direction}. When viewed from the neighbouring octree, the edge that separates the present octree from its neighbour is the neighbour\textquotesingle{}s edge {\ttfamily edge}. If there\textquotesingle{}s no rotation between the two octrees, this is a simple reflection\+: For instance, if we\textquotesingle{}re looking for a neighhbour in the {\ttfamily DB} {\ttfamily direction}, {\ttfamily edge} will be {\ttfamily UF}.
-\item {\ttfamily diff\+\_\+level} \texorpdfstring{$<$}{<}= 0 indicates the difference in refinement levels between the two neighbours. If {\ttfamily diff\+\_\+level==0}, the neighbour has the same size as the current octree.
+\item {\ttfamily diff\+\_\+level} $<$= 0 indicates the difference in refinement levels between the two neighbours. If {\ttfamily diff\+\_\+level==0}, the neighbour has the same size as the current octree.
 \end{DoxyItemize}{\bfseries{Important\+:}} We\textquotesingle{}re only looking for {\bfseries{true}} edge neighbours i.\+e. edge neigbours that are not also face neighbours. This is an important difference to Samet\textquotesingle{}s terminology. If the neighbour in a certain direction is not a true edge neighbour, or if there is no neighbour, then this function returns NULL. 
 
-Definition at line \mbox{\hyperlink{octree_8cc_source_l03618}{3618}} of file \mbox{\hyperlink{octree_8cc_source}{octree.\+cc}}.
+Definition at line 3618 of file octree.\+cc.
 
 
 
-References \mbox{\hyperlink{octree_8h_source_l00059}{oomph\+::\+Oc\+Tree\+Names\+::\+DB}}, \mbox{\hyperlink{octree_8h_source_l00067}{oomph\+::\+Oc\+Tree\+Names\+::\+DF}}, \mbox{\hyperlink{octree_8h_source_l00329}{Direct\+\_\+string}}, \mbox{\hyperlink{octree_8h_source_l00353}{Direction\+\_\+to\+\_\+vector}}, \mbox{\hyperlink{octree_8cc_source_l02769}{edge\+\_\+neighbour\+\_\+is\+\_\+face\+\_\+neighbour()}}, \mbox{\hyperlink{octree_8h_source_l00074}{oomph\+::\+Oc\+Tree\+Names\+::F}}, \mbox{\hyperlink{octree_8cc_source_l04015}{gteq\+\_\+edge\+\_\+neighbour()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{octree_8h_source_l00057}{oomph\+::\+Oc\+Tree\+Names\+::\+LB}}, \mbox{\hyperlink{octree_8h_source_l00061}{oomph\+::\+Oc\+Tree\+Names\+::\+LD}}, \mbox{\hyperlink{tree_8h_source_l00302}{oomph\+::\+Tree\+::\+Level}}, \mbox{\hyperlink{octree_8h_source_l00065}{oomph\+::\+Oc\+Tree\+Names\+::\+LF}}, \mbox{\hyperlink{octree_8h_source_l00063}{oomph\+::\+Oc\+Tree\+Names\+::\+LU}}, \mbox{\hyperlink{binary__tree_8h_source_l00051}{oomph\+::\+Binary\+Tree\+Names\+::R}}, \mbox{\hyperlink{octree_8h_source_l00058}{oomph\+::\+Oc\+Tree\+Names\+::\+RB}}, \mbox{\hyperlink{octree_8h_source_l00062}{oomph\+::\+Oc\+Tree\+Names\+::\+RD}}, \mbox{\hyperlink{octree_8h_source_l00335}{Reflect\+\_\+edge}}, \mbox{\hyperlink{octree_8h_source_l00066}{oomph\+::\+Oc\+Tree\+Names\+::\+RF}}, \mbox{\hyperlink{octree_8h_source_l00790}{oomph\+::\+Oc\+Tree\+Root\+::right\+\_\+equivalent()}}, \mbox{\hyperlink{tree_8h_source_l00292}{oomph\+::\+Tree\+::\+Root\+\_\+pt}}, \mbox{\hyperlink{octree_8cc_source_l00750}{rotate()}}, \mbox{\hyperlink{octree_8h_source_l00064}{oomph\+::\+Oc\+Tree\+Names\+::\+RU}}, \mbox{\hyperlink{octree_8h_source_l00585}{S\+\_\+base\+\_\+edge}}, \mbox{\hyperlink{octree_8h_source_l00593}{S\+\_\+step\+\_\+edge}}, \mbox{\hyperlink{octree_8h_source_l00072}{oomph\+::\+Oc\+Tree\+Names\+::U}}, \mbox{\hyperlink{octree_8h_source_l00060}{oomph\+::\+Oc\+Tree\+Names\+::\+UB}}, \mbox{\hyperlink{octree_8h_source_l00068}{oomph\+::\+Oc\+Tree\+Names\+::\+UF}}, and \mbox{\hyperlink{octree_8h_source_l00757}{oomph\+::\+Oc\+Tree\+Root\+::up\+\_\+equivalent()}}.
+References oomph\+::\+Oc\+Tree\+Names\+::\+DB, oomph\+::\+Oc\+Tree\+Names\+::\+DF, Direct\+\_\+string, Direction\+\_\+to\+\_\+vector, edge\+\_\+neighbour\+\_\+is\+\_\+face\+\_\+neighbour(), oomph\+::\+Oc\+Tree\+Names\+::F, gteq\+\_\+edge\+\_\+neighbour(), i, oomph\+::\+Oc\+Tree\+Names\+::\+LB, oomph\+::\+Oc\+Tree\+Names\+::\+LD, oomph\+::\+Tree\+::\+Level, oomph\+::\+Oc\+Tree\+Names\+::\+LF, oomph\+::\+Oc\+Tree\+Names\+::\+LU, oomph\+::\+Binary\+Tree\+Names\+::R, oomph\+::\+Oc\+Tree\+Names\+::\+RB, oomph\+::\+Oc\+Tree\+Names\+::\+RD, Reflect\+\_\+edge, oomph\+::\+Oc\+Tree\+Names\+::\+RF, oomph\+::\+Oc\+Tree\+Root\+::right\+\_\+equivalent(), oomph\+::\+Tree\+::\+Root\+\_\+pt, rotate(), oomph\+::\+Oc\+Tree\+Names\+::\+RU, S\+\_\+base\+\_\+edge, S\+\_\+step\+\_\+edge, oomph\+::\+Oc\+Tree\+Names\+::U, oomph\+::\+Oc\+Tree\+Names\+::\+UB, oomph\+::\+Oc\+Tree\+Names\+::\+UF, and oomph\+::\+Oc\+Tree\+Root\+::up\+\_\+equivalent().
 
 
 
-Referenced by \mbox{\hyperlink{octree_8cc_source_l04552}{doc\+\_\+true\+\_\+edge\+\_\+neighbours()}}, \mbox{\hyperlink{hp__refineable__elements_8cc_source_l04956}{oomph\+::\+PRefineable\+QElement$<$ 3, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::node\+\_\+created\+\_\+by\+\_\+neighbour()}}, \mbox{\hyperlink{refineable__brick__element_8cc_source_l00992}{oomph\+::\+Refineable\+QElement$<$ 3 $>$\+::node\+\_\+created\+\_\+by\+\_\+neighbour()}}, \mbox{\hyperlink{hp__refineable__elements_8cc_source_l05271}{oomph\+::\+PRefineable\+QElement$<$ 3, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::node\+\_\+created\+\_\+by\+\_\+son\+\_\+of\+\_\+neighbour()}}, and \mbox{\hyperlink{hp__refineable__elements_8cc_source_l08351}{oomph\+::\+PRefineable\+QElement$<$ 3, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::oc\+\_\+hang\+\_\+helper()}}.
+Referenced by doc\+\_\+true\+\_\+edge\+\_\+neighbours(), oomph\+::\+PRefineable\+QElement$<$ 3, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::node\+\_\+created\+\_\+by\+\_\+neighbour(), oomph\+::\+Refineable\+QElement$<$ 3 $>$\+::node\+\_\+created\+\_\+by\+\_\+neighbour(), oomph\+::\+PRefineable\+QElement$<$ 3, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::node\+\_\+created\+\_\+by\+\_\+son\+\_\+of\+\_\+neighbour(), and oomph\+::\+PRefineable\+QElement$<$ 3, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::oc\+\_\+hang\+\_\+helper().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_ad67128675db4b8d5d3e5815134d78fd2}\label{classoomph_1_1OcTree_ad67128675db4b8d5d3e5815134d78fd2}} 
 \index{oomph::OcTree@{oomph::OcTree}!mult\_mat\_mat@{mult\_mat\_mat}}
@@ -569,15 +569,15 @@ Helper function\+: Performs the operation \+: mat3=mat1$\ast$mat2.
 
 Helper\+: Performs the operation Mat3=Mat1$\ast$\+Mat2. 
 
-Definition at line \mbox{\hyperlink{octree_8cc_source_l00664}{664}} of file \mbox{\hyperlink{octree_8cc_source}{octree.\+cc}}.
+Definition at line 664 of file octree.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References i.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8cc_source_l00750}{rotate()}}.
+Referenced by rotate().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_a4cb0cccaedfcb4301edcc8dc7cead639}\label{classoomph_1_1OcTree_a4cb0cccaedfcb4301edcc8dc7cead639}} 
 \index{oomph::OcTree@{oomph::OcTree}!mult\_mat\_vect@{mult\_mat\_vect}}
@@ -591,15 +591,15 @@ Helper function\+: Performs the operation \+: vect2 = mat$\ast$vect1.
 
 Helper\+: Performs the operation Vect2=Mat$\ast$\+Vect1. 
 
-Definition at line \mbox{\hyperlink{octree_8cc_source_l00687}{687}} of file \mbox{\hyperlink{octree_8cc_source}{octree.\+cc}}.
+Definition at line 687 of file octree.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References i.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8cc_source_l00750}{rotate()}}.
+Referenced by rotate().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_a43cbe5258a41168fe2d891e52ae64e6b}\label{classoomph_1_1OcTree_a43cbe5258a41168fe2d891e52ae64e6b}} 
 \index{oomph::OcTree@{oomph::OcTree}!node\_number\_to\_vertex@{node\_number\_to\_vertex}}
@@ -613,15 +613,15 @@ Return the vertex \mbox{[}LDB,RDB,...\mbox{]} of local (vertex) node n in an ele
 
 Return the vertex of local (vertex) node n in an element with nnode1d nodes in each coordinate direction. 
 
-Definition at line \mbox{\hyperlink{octree_8cc_source_l00491}{491}} of file \mbox{\hyperlink{octree_8cc_source}{octree.\+cc}}.
+Definition at line 491 of file octree.\+cc.
 
 
 
-References \mbox{\hyperlink{octree_8h_source_l00049}{oomph\+::\+Oc\+Tree\+Names\+::\+LDB}}, \mbox{\hyperlink{octree_8h_source_l00053}{oomph\+::\+Oc\+Tree\+Names\+::\+LDF}}, \mbox{\hyperlink{octree_8h_source_l00051}{oomph\+::\+Oc\+Tree\+Names\+::\+LUB}}, \mbox{\hyperlink{octree_8h_source_l00055}{oomph\+::\+Oc\+Tree\+Names\+::\+LUF}}, \mbox{\hyperlink{octree_8h_source_l00050}{oomph\+::\+Oc\+Tree\+Names\+::\+RDB}}, \mbox{\hyperlink{octree_8h_source_l00054}{oomph\+::\+Oc\+Tree\+Names\+::\+RDF}}, \mbox{\hyperlink{octree_8h_source_l00052}{oomph\+::\+Oc\+Tree\+Names\+::\+RUB}}, and \mbox{\hyperlink{octree_8h_source_l00056}{oomph\+::\+Oc\+Tree\+Names\+::\+RUF}}.
+References oomph\+::\+Oc\+Tree\+Names\+::\+LDB, oomph\+::\+Oc\+Tree\+Names\+::\+LDF, oomph\+::\+Oc\+Tree\+Names\+::\+LUB, oomph\+::\+Oc\+Tree\+Names\+::\+LUF, oomph\+::\+Oc\+Tree\+Names\+::\+RDB, oomph\+::\+Oc\+Tree\+Names\+::\+RDF, oomph\+::\+Oc\+Tree\+Names\+::\+RUB, and oomph\+::\+Oc\+Tree\+Names\+::\+RUF.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8cc_source_l05255}{oomph\+::\+Oc\+Tree\+Forest\+::construct\+\_\+up\+\_\+right\+\_\+equivalents()}}.
+Referenced by oomph\+::\+Oc\+Tree\+Forest\+::construct\+\_\+up\+\_\+right\+\_\+equivalents().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_a14dba08782264f0d6008a8c1578b41e1}\label{classoomph_1_1OcTree_a14dba08782264f0d6008a8c1578b41e1}} 
 \index{oomph::OcTree@{oomph::OcTree}!operator=@{operator=}}
@@ -645,11 +645,11 @@ If U\mbox{[}p\mbox{]} becomes new\+\_\+up and R\mbox{[}ight\mbox{]} becomes new\
 
 A rotation is defined by the new\+Up and new\+Right directions; so if Up becomes new\+Up and Right becomes new\+Right then dir becomes rotate(new\+Up,new\+Right,dir);. 
 
-Definition at line \mbox{\hyperlink{octree_8cc_source_l00709}{709}} of file \mbox{\hyperlink{octree_8cc_source}{octree.\+cc}}.
+Definition at line 709 of file octree.\+cc.
 
 
 
-References \mbox{\hyperlink{octree_8h_source_l00073}{oomph\+::\+Oc\+Tree\+Names\+::B}}, \mbox{\hyperlink{octree_8h_source_l00071}{oomph\+::\+Oc\+Tree\+Names\+::D}}, \mbox{\hyperlink{octree_8h_source_l00329}{Direct\+\_\+string}}, \mbox{\hyperlink{octree_8h_source_l00353}{Direction\+\_\+to\+\_\+vector}}, \mbox{\hyperlink{octree_8h_source_l00074}{oomph\+::\+Oc\+Tree\+Names\+::F}}, \mbox{\hyperlink{binary__tree_8h_source_l00050}{oomph\+::\+Binary\+Tree\+Names\+::L}}, \mbox{\hyperlink{binary__tree_8h_source_l00051}{oomph\+::\+Binary\+Tree\+Names\+::R}}, \mbox{\hyperlink{octree_8cc_source_l00750}{rotate()}}, \mbox{\hyperlink{octree_8h_source_l00072}{oomph\+::\+Oc\+Tree\+Names\+::U}}, and \mbox{\hyperlink{octree_8h_source_l00348}{Vector\+\_\+to\+\_\+direction}}.
+References oomph\+::\+Oc\+Tree\+Names\+::B, oomph\+::\+Oc\+Tree\+Names\+::D, Direct\+\_\+string, Direction\+\_\+to\+\_\+vector, oomph\+::\+Oc\+Tree\+Names\+::F, oomph\+::\+Binary\+Tree\+Names\+::L, oomph\+::\+Binary\+Tree\+Names\+::R, rotate(), oomph\+::\+Oc\+Tree\+Names\+::U, and Vector\+\_\+to\+\_\+direction.
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_a25e5185f0395a19883e216fd80103cf7}\label{classoomph_1_1OcTree_a25e5185f0395a19883e216fd80103cf7}} 
 \index{oomph::OcTree@{oomph::OcTree}!rotate@{rotate}}
@@ -663,15 +663,15 @@ If U\mbox{[}p\mbox{]} becomes new\+\_\+up and R\mbox{[}ight\mbox{]} becomes new\
 
 This function rotates a vector according to a rotation of the axes that changes up to new\+\_\+up and right to new\+\_\+right. 
 
-Definition at line \mbox{\hyperlink{octree_8cc_source_l00750}{750}} of file \mbox{\hyperlink{octree_8cc_source}{octree.\+cc}}.
+Definition at line 750 of file octree.\+cc.
 
 
 
-References \mbox{\hyperlink{octree_8h_source_l00073}{oomph\+::\+Oc\+Tree\+Names\+::B}}, \mbox{\hyperlink{octree_8cc_source_l00609}{construct\+\_\+rotation\+\_\+matrix()}}, \mbox{\hyperlink{octree_8h_source_l00071}{oomph\+::\+Oc\+Tree\+Names\+::D}}, \mbox{\hyperlink{octree_8h_source_l00329}{Direct\+\_\+string}}, \mbox{\hyperlink{octree_8h_source_l00074}{oomph\+::\+Oc\+Tree\+Names\+::F}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{binary__tree_8h_source_l00050}{oomph\+::\+Binary\+Tree\+Names\+::L}}, \mbox{\hyperlink{octree_8cc_source_l00664}{mult\+\_\+mat\+\_\+mat()}}, \mbox{\hyperlink{octree_8cc_source_l00687}{mult\+\_\+mat\+\_\+vect()}}, \mbox{\hyperlink{binary__tree_8h_source_l00051}{oomph\+::\+Binary\+Tree\+Names\+::R}}, and \mbox{\hyperlink{octree_8h_source_l00072}{oomph\+::\+Oc\+Tree\+Names\+::U}}.
+References oomph\+::\+Oc\+Tree\+Names\+::B, construct\+\_\+rotation\+\_\+matrix(), oomph\+::\+Oc\+Tree\+Names\+::D, Direct\+\_\+string, oomph\+::\+Oc\+Tree\+Names\+::F, i, oomph\+::\+Binary\+Tree\+Names\+::L, mult\+\_\+mat\+\_\+mat(), mult\+\_\+mat\+\_\+vect(), oomph\+::\+Binary\+Tree\+Names\+::R, and oomph\+::\+Oc\+Tree\+Names\+::U.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8cc_source_l04015}{gteq\+\_\+edge\+\_\+neighbour()}}, \mbox{\hyperlink{octree_8cc_source_l03373}{gteq\+\_\+face\+\_\+neighbour()}}, \mbox{\hyperlink{octree_8cc_source_l03618}{gteq\+\_\+true\+\_\+edge\+\_\+neighbour()}}, \mbox{\hyperlink{octree_8cc_source_l00709}{rotate()}}, and \mbox{\hyperlink{octree_8cc_source_l01040}{setup\+\_\+static\+\_\+data()}}.
+Referenced by gteq\+\_\+edge\+\_\+neighbour(), gteq\+\_\+face\+\_\+neighbour(), gteq\+\_\+true\+\_\+edge\+\_\+neighbour(), rotate(), and setup\+\_\+static\+\_\+data().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_a68218b6e02594bef23cb141af8a19ffb}\label{classoomph_1_1OcTree_a68218b6e02594bef23cb141af8a19ffb}} 
 \index{oomph::OcTree@{oomph::OcTree}!self\_test@{self\_test}}
@@ -685,11 +685,11 @@ Self-\/test\+: Check all neighbours. Return success (0) if the max. distance bet
 
 Self-\/test\+: Check neighbour finding routine. For each element in the tree and for each vertex, determine the distance between the vertex and its position in the neigbour. . If the difference is less than \mbox{\hyperlink{classoomph_1_1Tree_aef9abebc166fa3bf81ecb59ec0d5d6b2}{Tree\+::\+Max\+\_\+neighbour\+\_\+finding\+\_\+tolerance}}. return success (0), otherwise failure (1) 
 
-Definition at line \mbox{\hyperlink{octree_8cc_source_l04200}{4200}} of file \mbox{\hyperlink{octree_8cc_source}{octree.\+cc}}.
+Definition at line 4200 of file octree.\+cc.
 
 
 
-References \mbox{\hyperlink{octree_8cc_source_l04275}{doc\+\_\+face\+\_\+neighbours()}}, \mbox{\hyperlink{octree_8cc_source_l04552}{doc\+\_\+true\+\_\+edge\+\_\+neighbours()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{tree_8h_source_l00313}{oomph\+::\+Tree\+::\+Max\+\_\+neighbour\+\_\+finding\+\_\+tolerance}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, and \mbox{\hyperlink{tree_8cc_source_l00277}{oomph\+::\+Tree\+::stick\+\_\+all\+\_\+tree\+\_\+nodes\+\_\+into\+\_\+vector()}}.
+References doc\+\_\+face\+\_\+neighbours(), doc\+\_\+true\+\_\+edge\+\_\+neighbours(), i, oomph\+::\+Tree\+::\+Max\+\_\+neighbour\+\_\+finding\+\_\+tolerance, oomph\+::oomph\+\_\+info, and oomph\+::\+Tree\+::stick\+\_\+all\+\_\+tree\+\_\+nodes\+\_\+into\+\_\+vector().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_a5d7b0830cd9c913786e23259c69c71a0}\label{classoomph_1_1OcTree_a5d7b0830cd9c913786e23259c69c71a0}} 
 \index{oomph::OcTree@{oomph::OcTree}!setup\_static\_data@{setup\_static\_data}}
@@ -703,15 +703,15 @@ Setup the static data, rotation and reflection schemes, etc.
 
 Setup static data for \mbox{\hyperlink{classoomph_1_1OcTree}{Oc\+Tree}}. 
 
-Definition at line \mbox{\hyperlink{octree_8cc_source_l01040}{1040}} of file \mbox{\hyperlink{octree_8cc_source}{octree.\+cc}}.
+Definition at line 1040 of file octree.\+cc.
 
 
 
-References \mbox{\hyperlink{octree_8h_source_l00073}{oomph\+::\+Oc\+Tree\+Names\+::B}}, \mbox{\hyperlink{octree_8h_source_l00540}{Colour}}, \mbox{\hyperlink{octree_8h_source_l00537}{Common\+\_\+face}}, \mbox{\hyperlink{octree_8h_source_l00520}{Cosi}}, \mbox{\hyperlink{octree_8h_source_l00071}{oomph\+::\+Oc\+Tree\+Names\+::D}}, \mbox{\hyperlink{octree_8h_source_l00059}{oomph\+::\+Oc\+Tree\+Names\+::\+DB}}, \mbox{\hyperlink{octree_8h_source_l00067}{oomph\+::\+Oc\+Tree\+Names\+::\+DF}}, \mbox{\hyperlink{octree_8h_source_l00329}{Direct\+\_\+string}}, \mbox{\hyperlink{octree_8h_source_l00353}{Direction\+\_\+to\+\_\+vector}}, \mbox{\hyperlink{octree_8h_source_l00074}{oomph\+::\+Oc\+Tree\+Names\+::F}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{octree_8h_source_l00529}{Is\+\_\+adjacent}}, \mbox{\hyperlink{binary__tree_8h_source_l00050}{oomph\+::\+Binary\+Tree\+Names\+::L}}, \mbox{\hyperlink{octree_8h_source_l00057}{oomph\+::\+Oc\+Tree\+Names\+::\+LB}}, \mbox{\hyperlink{octree_8h_source_l00061}{oomph\+::\+Oc\+Tree\+Names\+::\+LD}}, \mbox{\hyperlink{octree_8h_source_l00049}{oomph\+::\+Oc\+Tree\+Names\+::\+LDB}}, \mbox{\hyperlink{octree_8h_source_l00053}{oomph\+::\+Oc\+Tree\+Names\+::\+LDF}}, \mbox{\hyperlink{octree_8h_source_l00065}{oomph\+::\+Oc\+Tree\+Names\+::\+LF}}, \mbox{\hyperlink{octree_8h_source_l00063}{oomph\+::\+Oc\+Tree\+Names\+::\+LU}}, \mbox{\hyperlink{octree_8h_source_l00051}{oomph\+::\+Oc\+Tree\+Names\+::\+LUB}}, \mbox{\hyperlink{octree_8h_source_l00055}{oomph\+::\+Oc\+Tree\+Names\+::\+LUF}}, \mbox{\hyperlink{cfortran_8h_ac5977f3790a2b5e5a4e7e5ea21259aa1}{num\+\_\+elem()}}, \mbox{\hyperlink{tree_8h_source_l00262}{oomph\+::\+Tree\+::\+OMEGA}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{binary__tree_8h_source_l00051}{oomph\+::\+Binary\+Tree\+Names\+::R}}, \mbox{\hyperlink{octree_8h_source_l00058}{oomph\+::\+Oc\+Tree\+Names\+::\+RB}}, \mbox{\hyperlink{octree_8h_source_l00062}{oomph\+::\+Oc\+Tree\+Names\+::\+RD}}, \mbox{\hyperlink{octree_8h_source_l00050}{oomph\+::\+Oc\+Tree\+Names\+::\+RDB}}, \mbox{\hyperlink{octree_8h_source_l00054}{oomph\+::\+Oc\+Tree\+Names\+::\+RDF}}, \mbox{\hyperlink{octree_8h_source_l00533}{Reflect}}, \mbox{\hyperlink{octree_8h_source_l00335}{Reflect\+\_\+edge}}, \mbox{\hyperlink{octree_8h_source_l00332}{Reflect\+\_\+face}}, \mbox{\hyperlink{octree_8h_source_l00338}{Reflect\+\_\+vertex}}, \mbox{\hyperlink{matrices_8h_source_l00498}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::resize()}}, \mbox{\hyperlink{octree_8h_source_l00066}{oomph\+::\+Oc\+Tree\+Names\+::\+RF}}, \mbox{\hyperlink{octree_8cc_source_l00750}{rotate()}}, \mbox{\hyperlink{octree_8h_source_l00064}{oomph\+::\+Oc\+Tree\+Names\+::\+RU}}, \mbox{\hyperlink{octree_8h_source_l00052}{oomph\+::\+Oc\+Tree\+Names\+::\+RUB}}, \mbox{\hyperlink{octree_8h_source_l00056}{oomph\+::\+Oc\+Tree\+Names\+::\+RUF}}, \mbox{\hyperlink{octree_8h_source_l00544}{S\+\_\+base}}, \mbox{\hyperlink{octree_8h_source_l00585}{S\+\_\+base\+\_\+edge}}, \mbox{\hyperlink{octree_8h_source_l00600}{S\+\_\+direct\+\_\+edge}}, \mbox{\hyperlink{octree_8h_source_l00581}{S\+\_\+directhi}}, \mbox{\hyperlink{octree_8h_source_l00573}{S\+\_\+directlo}}, \mbox{\hyperlink{octree_8h_source_l00593}{S\+\_\+step\+\_\+edge}}, \mbox{\hyperlink{octree_8h_source_l00565}{S\+\_\+stephi}}, \mbox{\hyperlink{octree_8h_source_l00558}{S\+\_\+steplo}}, \mbox{\hyperlink{octree_8h_source_l00523}{Sini}}, \mbox{\hyperlink{octree_8h_source_l00412}{Static\+\_\+data\+\_\+has\+\_\+been\+\_\+setup}}, \mbox{\hyperlink{octree_8h_source_l00072}{oomph\+::\+Oc\+Tree\+Names\+::U}}, \mbox{\hyperlink{octree_8h_source_l00060}{oomph\+::\+Oc\+Tree\+Names\+::\+UB}}, \mbox{\hyperlink{octree_8h_source_l00068}{oomph\+::\+Oc\+Tree\+Names\+::\+UF}}, \mbox{\hyperlink{octree_8h_source_l00377}{Up\+\_\+and\+\_\+right\+\_\+equivalent\+\_\+for\+\_\+pairs\+\_\+of\+\_\+vertices}}, \mbox{\hyperlink{octree_8h_source_l00348}{Vector\+\_\+to\+\_\+direction}}, and \mbox{\hyperlink{octree_8h_source_l00343}{Vertex\+\_\+at\+\_\+end\+\_\+of\+\_\+edge}}.
+References oomph\+::\+Oc\+Tree\+Names\+::B, Colour, Common\+\_\+face, Cosi, oomph\+::\+Oc\+Tree\+Names\+::D, oomph\+::\+Oc\+Tree\+Names\+::\+DB, oomph\+::\+Oc\+Tree\+Names\+::\+DF, Direct\+\_\+string, Direction\+\_\+to\+\_\+vector, oomph\+::\+Oc\+Tree\+Names\+::F, i, Is\+\_\+adjacent, oomph\+::\+Binary\+Tree\+Names\+::L, oomph\+::\+Oc\+Tree\+Names\+::\+LB, oomph\+::\+Oc\+Tree\+Names\+::\+LD, oomph\+::\+Oc\+Tree\+Names\+::\+LDB, oomph\+::\+Oc\+Tree\+Names\+::\+LDF, oomph\+::\+Oc\+Tree\+Names\+::\+LF, oomph\+::\+Oc\+Tree\+Names\+::\+LU, oomph\+::\+Oc\+Tree\+Names\+::\+LUB, oomph\+::\+Oc\+Tree\+Names\+::\+LUF, num\+\_\+elem(), oomph\+::\+Tree\+::\+OMEGA, oomph\+::oomph\+\_\+info, oomph\+::\+Binary\+Tree\+Names\+::R, oomph\+::\+Oc\+Tree\+Names\+::\+RB, oomph\+::\+Oc\+Tree\+Names\+::\+RD, oomph\+::\+Oc\+Tree\+Names\+::\+RDB, oomph\+::\+Oc\+Tree\+Names\+::\+RDF, Reflect, Reflect\+\_\+edge, Reflect\+\_\+face, Reflect\+\_\+vertex, oomph\+::\+Dense\+Matrix$<$ T $>$\+::resize(), oomph\+::\+Oc\+Tree\+Names\+::\+RF, rotate(), oomph\+::\+Oc\+Tree\+Names\+::\+RU, oomph\+::\+Oc\+Tree\+Names\+::\+RUB, oomph\+::\+Oc\+Tree\+Names\+::\+RUF, S\+\_\+base, S\+\_\+base\+\_\+edge, S\+\_\+direct\+\_\+edge, S\+\_\+directhi, S\+\_\+directlo, S\+\_\+step\+\_\+edge, S\+\_\+stephi, S\+\_\+steplo, Sini, Static\+\_\+data\+\_\+has\+\_\+been\+\_\+setup, oomph\+::\+Oc\+Tree\+Names\+::U, oomph\+::\+Oc\+Tree\+Names\+::\+UB, oomph\+::\+Oc\+Tree\+Names\+::\+UF, Up\+\_\+and\+\_\+right\+\_\+equivalent\+\_\+for\+\_\+pairs\+\_\+of\+\_\+vertices, Vector\+\_\+to\+\_\+direction, and Vertex\+\_\+at\+\_\+end\+\_\+of\+\_\+edge.
 
 
 
-Referenced by \mbox{\hyperlink{refineable__brick__mesh_8h_source_l00064}{oomph\+::\+Refineable\+Brick\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Brick\+Mesh()}}, and \mbox{\hyperlink{eighth__sphere__mesh_8template_8h_source_l00095}{oomph\+::\+Refineable\+Eighth\+Sphere\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Eighth\+Sphere\+Mesh()}}.
+Referenced by oomph\+::\+Refineable\+Brick\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Brick\+Mesh(), and oomph\+::\+Refineable\+Eighth\+Sphere\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Eighth\+Sphere\+Mesh().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_a6f2dfb7f1527f77cf2900eecef279ee0}\label{classoomph_1_1OcTree_a6f2dfb7f1527f77cf2900eecef279ee0}} 
 \index{oomph::OcTree@{oomph::OcTree}!vertex\_node\_to\_vector@{vertex\_node\_to\_vector}}
@@ -725,11 +725,11 @@ Returns the vector of the coordinate directions of vertex node number n in an el
 
 This function is used to translate the position of a vertex node (given by his local number n into a vector giving the position of this node in the local coordinates system. It also needs the value of nnode1d to work. 
 
-Definition at line \mbox{\hyperlink{octree_8cc_source_l00232}{232}} of file \mbox{\hyperlink{octree_8cc_source}{octree.\+cc}}.
+Definition at line 232 of file octree.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8cc_source_l00565}{get\+\_\+the\+\_\+other\+\_\+face()}}.
+Referenced by get\+\_\+the\+\_\+other\+\_\+face().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_af2a129b95ad303ed340bb8bd86e05384}\label{classoomph_1_1OcTree_af2a129b95ad303ed340bb8bd86e05384}} 
 \index{oomph::OcTree@{oomph::OcTree}!vertex\_to\_node\_number@{vertex\_to\_node\_number}}
@@ -743,15 +743,15 @@ Return the local node number of given vertex \mbox{[}LDB,RDB,...\mbox{]} in an e
 
 Return the local node number of given vertex in an element with nnode1d nodes in each coordinate direction. 
 
-Definition at line \mbox{\hyperlink{octree_8cc_source_l00414}{414}} of file \mbox{\hyperlink{octree_8cc_source}{octree.\+cc}}.
+Definition at line 414 of file octree.\+cc.
 
 
 
-References \mbox{\hyperlink{octree_8h_source_l00329}{Direct\+\_\+string}}, \mbox{\hyperlink{octree_8h_source_l00049}{oomph\+::\+Oc\+Tree\+Names\+::\+LDB}}, \mbox{\hyperlink{octree_8h_source_l00053}{oomph\+::\+Oc\+Tree\+Names\+::\+LDF}}, \mbox{\hyperlink{octree_8h_source_l00051}{oomph\+::\+Oc\+Tree\+Names\+::\+LUB}}, \mbox{\hyperlink{octree_8h_source_l00055}{oomph\+::\+Oc\+Tree\+Names\+::\+LUF}}, \mbox{\hyperlink{octree_8h_source_l00050}{oomph\+::\+Oc\+Tree\+Names\+::\+RDB}}, \mbox{\hyperlink{octree_8h_source_l00054}{oomph\+::\+Oc\+Tree\+Names\+::\+RDF}}, \mbox{\hyperlink{octree_8h_source_l00052}{oomph\+::\+Oc\+Tree\+Names\+::\+RUB}}, and \mbox{\hyperlink{octree_8h_source_l00056}{oomph\+::\+Oc\+Tree\+Names\+::\+RUF}}.
+References Direct\+\_\+string, oomph\+::\+Oc\+Tree\+Names\+::\+LDB, oomph\+::\+Oc\+Tree\+Names\+::\+LDF, oomph\+::\+Oc\+Tree\+Names\+::\+LUB, oomph\+::\+Oc\+Tree\+Names\+::\+LUF, oomph\+::\+Oc\+Tree\+Names\+::\+RDB, oomph\+::\+Oc\+Tree\+Names\+::\+RDF, oomph\+::\+Oc\+Tree\+Names\+::\+RUB, and oomph\+::\+Oc\+Tree\+Names\+::\+RUF.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8cc_source_l05255}{oomph\+::\+Oc\+Tree\+Forest\+::construct\+\_\+up\+\_\+right\+\_\+equivalents()}}, and \mbox{\hyperlink{helmholtz__geometric__multigrid_8h_source_l02354}{oomph\+::\+Helmholtz\+MGPreconditioner$<$ DIM $>$\+::maximum\+\_\+edge\+\_\+width()}}.
+Referenced by oomph\+::\+Oc\+Tree\+Forest\+::construct\+\_\+up\+\_\+right\+\_\+equivalents(), and oomph\+::\+Helmholtz\+MGPreconditioner$<$ DIM $>$\+::maximum\+\_\+edge\+\_\+width().
 
 
 
@@ -768,11 +768,11 @@ Colours for neighbours in various directions.
 
 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00540}{540}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 540 of file octree.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8cc_source_l04275}{doc\+\_\+face\+\_\+neighbours()}}, \mbox{\hyperlink{octree_8cc_source_l04552}{doc\+\_\+true\+\_\+edge\+\_\+neighbours()}}, and \mbox{\hyperlink{octree_8cc_source_l01040}{setup\+\_\+static\+\_\+data()}}.
+Referenced by doc\+\_\+face\+\_\+neighbours(), doc\+\_\+true\+\_\+edge\+\_\+neighbours(), and setup\+\_\+static\+\_\+data().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_a50a97dff32038087df0195dcf346405e}\label{classoomph_1_1OcTree_a50a97dff32038087df0195dcf346405e}} 
 \index{oomph::OcTree@{oomph::OcTree}!Common\_face@{Common\_face}}
@@ -786,11 +786,11 @@ Determine common face of edges or octants. Slightly bizarre lookup scheme from S
 
 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00537}{537}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 537 of file octree.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8cc_source_l04015}{gteq\+\_\+edge\+\_\+neighbour()}}, and \mbox{\hyperlink{octree_8cc_source_l01040}{setup\+\_\+static\+\_\+data()}}.
+Referenced by gteq\+\_\+edge\+\_\+neighbour(), and setup\+\_\+static\+\_\+data().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_aa9c70aef8a78008e8fa668c5e0e516d9}\label{classoomph_1_1OcTree_aa9c70aef8a78008e8fa668c5e0e516d9}} 
 \index{oomph::OcTree@{oomph::OcTree}!Cosi@{Cosi}}
@@ -804,11 +804,11 @@ Entry in rotation matrix\+: cos(i$\ast$90)
 
 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00520}{520}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 520 of file octree.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8cc_source_l00609}{construct\+\_\+rotation\+\_\+matrix()}}, and \mbox{\hyperlink{octree_8cc_source_l01040}{setup\+\_\+static\+\_\+data()}}.
+Referenced by construct\+\_\+rotation\+\_\+matrix(), and setup\+\_\+static\+\_\+data().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_a2e9487b716f4d583aada06a850b8eae9}\label{classoomph_1_1OcTree_a2e9487b716f4d583aada06a850b8eae9}} 
 \index{oomph::OcTree@{oomph::OcTree}!Direct\_string@{Direct\_string}}
@@ -822,11 +822,11 @@ Translate (enumerated) directions into strings.
 
 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00329}{329}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 329 of file octree.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8h_source_l00716}{oomph\+::\+Oc\+Tree\+Root\+::add\+\_\+edge\+\_\+neighbour\+\_\+pt()}}, \mbox{\hyperlink{octree_8cc_source_l04275}{doc\+\_\+face\+\_\+neighbours()}}, \mbox{\hyperlink{octree_8cc_source_l04552}{doc\+\_\+true\+\_\+edge\+\_\+neighbours()}}, \mbox{\hyperlink{octree_8cc_source_l02769}{edge\+\_\+neighbour\+\_\+is\+\_\+face\+\_\+neighbour()}}, \mbox{\hyperlink{octree_8h_source_l00668}{oomph\+::\+Oc\+Tree\+Root\+::edge\+\_\+neighbour\+\_\+pt()}}, \mbox{\hyperlink{octree_8cc_source_l00268}{faces\+\_\+of\+\_\+common\+\_\+edge()}}, \mbox{\hyperlink{octree_8cc_source_l04015}{gteq\+\_\+edge\+\_\+neighbour()}}, \mbox{\hyperlink{octree_8cc_source_l03373}{gteq\+\_\+face\+\_\+neighbour()}}, \mbox{\hyperlink{octree_8cc_source_l03618}{gteq\+\_\+true\+\_\+edge\+\_\+neighbour()}}, \mbox{\hyperlink{refineable__brick__element_8cc_source_l00582}{oomph\+::\+Refineable\+QElement$<$ 3 $>$\+::interpolated\+\_\+zeta\+\_\+on\+\_\+face()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{oomph\+::\+Eighth\+Sphere\+Domain\+::macro\+\_\+element\+\_\+boundary()}}, \mbox{\hyperlink{extruded__domain_8cc_source_l00148}{oomph\+::\+Extruded\+Domain\+::macro\+\_\+element\+\_\+boundary()}}, \mbox{\hyperlink{octree_8h_source_l00693}{oomph\+::\+Oc\+Tree\+Root\+::nedge\+\_\+neighbour()}}, \mbox{\hyperlink{octree_8h_source_l00982}{oomph\+::\+Oc\+Tree\+Forest\+::oc\+\_\+face\+\_\+neigh\+\_\+pt()}}, \mbox{\hyperlink{octree_8cc_source_l00709}{rotate()}}, \mbox{\hyperlink{octree_8cc_source_l01040}{setup\+\_\+static\+\_\+data()}}, and \mbox{\hyperlink{octree_8cc_source_l00414}{vertex\+\_\+to\+\_\+node\+\_\+number()}}.
+Referenced by oomph\+::\+Oc\+Tree\+Root\+::add\+\_\+edge\+\_\+neighbour\+\_\+pt(), doc\+\_\+face\+\_\+neighbours(), doc\+\_\+true\+\_\+edge\+\_\+neighbours(), edge\+\_\+neighbour\+\_\+is\+\_\+face\+\_\+neighbour(), oomph\+::\+Oc\+Tree\+Root\+::edge\+\_\+neighbour\+\_\+pt(), faces\+\_\+of\+\_\+common\+\_\+edge(), gteq\+\_\+edge\+\_\+neighbour(), gteq\+\_\+face\+\_\+neighbour(), gteq\+\_\+true\+\_\+edge\+\_\+neighbour(), oomph\+::\+Refineable\+QElement$<$ 3 $>$\+::interpolated\+\_\+zeta\+\_\+on\+\_\+face(), oomph\+::\+Eighth\+Sphere\+Domain\+::macro\+\_\+element\+\_\+boundary(), oomph\+::\+Extruded\+Domain\+::macro\+\_\+element\+\_\+boundary(), oomph\+::\+Oc\+Tree\+Root\+::nedge\+\_\+neighbour(), oomph\+::\+Oc\+Tree\+Forest\+::oc\+\_\+face\+\_\+neigh\+\_\+pt(), rotate(), setup\+\_\+static\+\_\+data(), and vertex\+\_\+to\+\_\+node\+\_\+number().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_adf813fbb9cffe89fb51f3c8ccd3083ca}\label{classoomph_1_1OcTree_adf813fbb9cffe89fb51f3c8ccd3083ca}} 
 \index{oomph::OcTree@{oomph::OcTree}!Direction\_to\_vector@{Direction\_to\_vector}}
@@ -840,11 +840,11 @@ For each direction, i.\+e. a son\+\_\+type (vertex), a face or an edge, this def
 
 \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} storing the information to translate a direction into a vector of directions (in the three coordinate directions) 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00353}{353}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 353 of file octree.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01814}{oomph\+::\+PRefineable\+Generalised\+Newtonian\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::further\+\_\+build()}}, \mbox{\hyperlink{generalised__newtonian__refineable__navier__stokes__elements_8h_source_l01737}{oomph\+::\+Refineable\+Generalised\+Newtonian\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::further\+\_\+build()}}, \mbox{\hyperlink{refineable__navier__stokes__elements_8cc_source_l01916}{oomph\+::\+PRefineable\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::further\+\_\+build()}}, \mbox{\hyperlink{refineable__navier__stokes__elements_8h_source_l01998}{oomph\+::\+Refineable\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::further\+\_\+build()}}, \mbox{\hyperlink{refineable__solid__elements_8h_source_l00748}{oomph\+::\+Refineable\+QPVDElement\+With\+Pressure$<$ DIM $>$\+::further\+\_\+build()}}, \mbox{\hyperlink{refineable__brick__element_8cc_source_l00238}{oomph\+::\+Refineable\+QElement$<$ 3 $>$\+::get\+\_\+bcs()}}, \mbox{\hyperlink{refineable__brick__element_8cc_source_l00424}{oomph\+::\+Refineable\+QElement$<$ 3 $>$\+::get\+\_\+boundaries()}}, \mbox{\hyperlink{refineable__brick__element_8cc_source_l02764}{oomph\+::\+Refineable\+Solid\+QElement$<$ 3 $>$\+::get\+\_\+solid\+\_\+bcs()}}, \mbox{\hyperlink{octree_8cc_source_l00565}{get\+\_\+the\+\_\+other\+\_\+face()}}, \mbox{\hyperlink{octree_8cc_source_l03373}{gteq\+\_\+face\+\_\+neighbour()}}, \mbox{\hyperlink{octree_8cc_source_l03618}{gteq\+\_\+true\+\_\+edge\+\_\+neighbour()}}, \mbox{\hyperlink{octree_8cc_source_l00709}{rotate()}}, \mbox{\hyperlink{refineable__brick__element_8cc_source_l00126}{oomph\+::\+Refineable\+QElement$<$ 3 $>$\+::setup\+\_\+father\+\_\+bounds()}}, and \mbox{\hyperlink{octree_8cc_source_l01040}{setup\+\_\+static\+\_\+data()}}.
+Referenced by oomph\+::\+PRefineable\+Generalised\+Newtonian\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::further\+\_\+build(), oomph\+::\+Refineable\+Generalised\+Newtonian\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::further\+\_\+build(), oomph\+::\+PRefineable\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::further\+\_\+build(), oomph\+::\+Refineable\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::further\+\_\+build(), oomph\+::\+Refineable\+QPVDElement\+With\+Pressure$<$ DIM $>$\+::further\+\_\+build(), oomph\+::\+Refineable\+QElement$<$ 3 $>$\+::get\+\_\+bcs(), oomph\+::\+Refineable\+QElement$<$ 3 $>$\+::get\+\_\+boundaries(), oomph\+::\+Refineable\+Solid\+QElement$<$ 3 $>$\+::get\+\_\+solid\+\_\+bcs(), get\+\_\+the\+\_\+other\+\_\+face(), gteq\+\_\+face\+\_\+neighbour(), gteq\+\_\+true\+\_\+edge\+\_\+neighbour(), rotate(), oomph\+::\+Refineable\+QElement$<$ 3 $>$\+::setup\+\_\+father\+\_\+bounds(), and setup\+\_\+static\+\_\+data().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_a24e29b9da2bf17cc81d803af6925890b}\label{classoomph_1_1OcTree_a24e29b9da2bf17cc81d803af6925890b}} 
 \index{oomph::OcTree@{oomph::OcTree}!Is\_adjacent@{Is\_adjacent}}
@@ -858,11 +858,11 @@ Array of direction/octant adjacency scheme\+: Is\+\_\+adjacent(direction,octant)
 
 Array of direction/octant adjacency scheme\+: Is\+\_\+adjacent(direction,octant)\+: Is face/edge {\ttfamily direction} adjacent to octant {\ttfamily octant} ? Table in Samet\textquotesingle{}s book. 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00529}{529}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 529 of file octree.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8cc_source_l04015}{gteq\+\_\+edge\+\_\+neighbour()}}, \mbox{\hyperlink{octree_8cc_source_l03839}{gteq\+\_\+face\+\_\+neighbour()}}, and \mbox{\hyperlink{octree_8cc_source_l01040}{setup\+\_\+static\+\_\+data()}}.
+Referenced by gteq\+\_\+edge\+\_\+neighbour(), gteq\+\_\+face\+\_\+neighbour(), and setup\+\_\+static\+\_\+data().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_aae2497ec31766ebf0541ff6f2bffa790}\label{classoomph_1_1OcTree_aae2497ec31766ebf0541ff6f2bffa790}} 
 \index{oomph::OcTree@{oomph::OcTree}!Reflect@{Reflect}}
@@ -876,11 +876,11 @@ Reflection scheme\+: Reflect(direction,octant)\+: Get mirror of octant/edge in s
 
 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00533}{533}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 533 of file octree.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8cc_source_l04015}{gteq\+\_\+edge\+\_\+neighbour()}}, \mbox{\hyperlink{octree_8cc_source_l03839}{gteq\+\_\+face\+\_\+neighbour()}}, and \mbox{\hyperlink{octree_8cc_source_l01040}{setup\+\_\+static\+\_\+data()}}.
+Referenced by gteq\+\_\+edge\+\_\+neighbour(), gteq\+\_\+face\+\_\+neighbour(), and setup\+\_\+static\+\_\+data().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_aeb757b41fc1c4b7ea697de40c19b6c36}\label{classoomph_1_1OcTree_aeb757b41fc1c4b7ea697de40c19b6c36}} 
 \index{oomph::OcTree@{oomph::OcTree}!Reflect\_edge@{Reflect\_edge}}
@@ -894,11 +894,11 @@ Get opposite edge, e.\+g. Reflect\+\_\+edge\mbox{[}DB\mbox{]}=UF.
 
 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00335}{335}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 335 of file octree.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8cc_source_l03618}{gteq\+\_\+true\+\_\+edge\+\_\+neighbour()}}, and \mbox{\hyperlink{octree_8cc_source_l01040}{setup\+\_\+static\+\_\+data()}}.
+Referenced by gteq\+\_\+true\+\_\+edge\+\_\+neighbour(), and setup\+\_\+static\+\_\+data().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_a50b5b6208e34976cb3fd50e84b5c2d05}\label{classoomph_1_1OcTree_a50b5b6208e34976cb3fd50e84b5c2d05}} 
 \index{oomph::OcTree@{oomph::OcTree}!Reflect\_face@{Reflect\_face}}
@@ -912,11 +912,11 @@ Get opposite face, e.\+g. Reflect\+\_\+face\mbox{[}L\mbox{]}=R.
 
 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00332}{332}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 332 of file octree.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8cc_source_l05255}{oomph\+::\+Oc\+Tree\+Forest\+::construct\+\_\+up\+\_\+right\+\_\+equivalents()}}, \mbox{\hyperlink{octree_8cc_source_l03373}{gteq\+\_\+face\+\_\+neighbour()}}, and \mbox{\hyperlink{octree_8cc_source_l01040}{setup\+\_\+static\+\_\+data()}}.
+Referenced by oomph\+::\+Oc\+Tree\+Forest\+::construct\+\_\+up\+\_\+right\+\_\+equivalents(), gteq\+\_\+face\+\_\+neighbour(), and setup\+\_\+static\+\_\+data().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_acee0e40be5a1aa25e7356e23ec327636}\label{classoomph_1_1OcTree_acee0e40be5a1aa25e7356e23ec327636}} 
 \index{oomph::OcTree@{oomph::OcTree}!Reflect\_vertex@{Reflect\_vertex}}
@@ -930,11 +930,11 @@ Get opposite vertex, e.\+g. Reflect\+\_\+vertex\mbox{[}LDB\mbox{]}=RUF.
 
 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00338}{338}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 338 of file octree.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8cc_source_l01040}{setup\+\_\+static\+\_\+data()}}.
+Referenced by setup\+\_\+static\+\_\+data().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_a114adf939f2937d16a69a541b8e2ceb3}\label{classoomph_1_1OcTree_a114adf939f2937d16a69a541b8e2ceb3}} 
 \index{oomph::OcTree@{oomph::OcTree}!S\_base@{S\_base}}
@@ -948,11 +948,11 @@ s\+\_\+base(i,direction)\+: Initial value for coordinate s\mbox{[}i\mbox{]} on t
 
 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00544}{544}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 544 of file octree.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8cc_source_l04275}{doc\+\_\+face\+\_\+neighbours()}}, \mbox{\hyperlink{octree_8cc_source_l03373}{gteq\+\_\+face\+\_\+neighbour()}}, and \mbox{\hyperlink{octree_8cc_source_l01040}{setup\+\_\+static\+\_\+data()}}.
+Referenced by doc\+\_\+face\+\_\+neighbours(), gteq\+\_\+face\+\_\+neighbour(), and setup\+\_\+static\+\_\+data().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_a9f8afa940d0ce2ceca2a064f3f1ec6b1}\label{classoomph_1_1OcTree_a9f8afa940d0ce2ceca2a064f3f1ec6b1}} 
 \index{oomph::OcTree@{oomph::OcTree}!S\_base\_edge@{S\_base\_edge}}
@@ -966,11 +966,11 @@ S\+\_\+base\+\_\+edge(i,edge)\+: Initial value for coordinate s\mbox{[}i\mbox{]}
 
 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00585}{585}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 585 of file octree.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8cc_source_l04552}{doc\+\_\+true\+\_\+edge\+\_\+neighbours()}}, \mbox{\hyperlink{octree_8cc_source_l03618}{gteq\+\_\+true\+\_\+edge\+\_\+neighbour()}}, and \mbox{\hyperlink{octree_8cc_source_l01040}{setup\+\_\+static\+\_\+data()}}.
+Referenced by doc\+\_\+true\+\_\+edge\+\_\+neighbours(), gteq\+\_\+true\+\_\+edge\+\_\+neighbour(), and setup\+\_\+static\+\_\+data().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_abf12711759332ae1d0b55da939b62aa0}\label{classoomph_1_1OcTree_abf12711759332ae1d0b55da939b62aa0}} 
 \index{oomph::OcTree@{oomph::OcTree}!S\_direct\_edge@{S\_direct\_edge}}
@@ -984,11 +984,11 @@ Relative to the left/down/back vertex in any (father) octree, the corresponding 
 
 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00600}{600}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 600 of file octree.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8cc_source_l04015}{gteq\+\_\+edge\+\_\+neighbour()}}, and \mbox{\hyperlink{octree_8cc_source_l01040}{setup\+\_\+static\+\_\+data()}}.
+Referenced by gteq\+\_\+edge\+\_\+neighbour(), and setup\+\_\+static\+\_\+data().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_a11aca558846c26e31f802396508bea51}\label{classoomph_1_1OcTree_a11aca558846c26e31f802396508bea51}} 
 \index{oomph::OcTree@{oomph::OcTree}!S\_directhi@{S\_directhi}}
@@ -1002,11 +1002,11 @@ Relative to the left/down/back vertex in any (father) octree, the corresponding 
 
 Relative to the left/down/back vertex in any (father) octree, the corresponding vertex in the son specified by {\ttfamily son\+\_\+octant} has an offset. If we project the son\+\_\+octant\textquotesingle{}s left/down/back vertex onto the father\textquotesingle{}s face {\ttfamily face}, it is located at the in-\/face coordinate {\ttfamily s\+\_\+hi} = h/2 {\ttfamily S\+\_\+directlhi(face,son\+\_\+octant)}. \mbox{[}See discussion of {\ttfamily S\+\_\+steplo} for an explanation of the subscripts {\ttfamily \+\_\+hi} and {\ttfamily \+\_\+lo}.\mbox{]}. 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00581}{581}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 581 of file octree.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8cc_source_l03839}{gteq\+\_\+face\+\_\+neighbour()}}, and \mbox{\hyperlink{octree_8cc_source_l01040}{setup\+\_\+static\+\_\+data()}}.
+Referenced by gteq\+\_\+face\+\_\+neighbour(), and setup\+\_\+static\+\_\+data().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_a2ece71f32cf50ba50851d2102af15426}\label{classoomph_1_1OcTree_a2ece71f32cf50ba50851d2102af15426}} 
 \index{oomph::OcTree@{oomph::OcTree}!S\_directlo@{S\_directlo}}
@@ -1020,11 +1020,11 @@ Relative to the left/down/back vertex in any (father) octree, the corresponding 
 
 Relative to the left/down/back vertex in any (father) octree, the corresponding vertex in the son specified by {\ttfamily son\+\_\+octant} has an offset. If we project the son\+\_\+octant\textquotesingle{}s left/down/back vertex onto the father\textquotesingle{}s face {\ttfamily face}, it is located at the in-\/face coordinate {\ttfamily s\+\_\+lo} = h/2 {\ttfamily S\+\_\+directlo(face,son\+\_\+octant)}. \mbox{[}See discussion of {\ttfamily S\+\_\+steplo} for an explanation of the subscripts {\ttfamily \+\_\+hi} and {\ttfamily \+\_\+lo}.\mbox{]}. 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00573}{573}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 573 of file octree.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8cc_source_l03839}{gteq\+\_\+face\+\_\+neighbour()}}, and \mbox{\hyperlink{octree_8cc_source_l01040}{setup\+\_\+static\+\_\+data()}}.
+Referenced by gteq\+\_\+face\+\_\+neighbour(), and setup\+\_\+static\+\_\+data().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_a036d7e355507212bee6a53d42adbea26}\label{classoomph_1_1OcTree_a036d7e355507212bee6a53d42adbea26}} 
 \index{oomph::OcTree@{oomph::OcTree}!S\_step\_edge@{S\_step\_edge}}
@@ -1038,11 +1038,11 @@ Each edge of the \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_013_01_4}{R
 
 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00593}{593}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 593 of file octree.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8cc_source_l04552}{doc\+\_\+true\+\_\+edge\+\_\+neighbours()}}, \mbox{\hyperlink{octree_8cc_source_l03618}{gteq\+\_\+true\+\_\+edge\+\_\+neighbour()}}, and \mbox{\hyperlink{octree_8cc_source_l01040}{setup\+\_\+static\+\_\+data()}}.
+Referenced by doc\+\_\+true\+\_\+edge\+\_\+neighbours(), gteq\+\_\+true\+\_\+edge\+\_\+neighbour(), and setup\+\_\+static\+\_\+data().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_addcc327c9831b6c57f30c8596125c236}\label{classoomph_1_1OcTree_addcc327c9831b6c57f30c8596125c236}} 
 \index{oomph::OcTree@{oomph::OcTree}!S\_stephi@{S\_stephi}}
@@ -1056,11 +1056,11 @@ If we\textquotesingle{}re located on face {\ttfamily face} \mbox{[}L/\+R/\+F/\+B
 
 If we\textquotesingle{}re located on face {\ttfamily face} \mbox{[}L/\+R/\+F/\+B/\+U/D\mbox{]}, then an increase in s\+\_\+hi from -\/1 to +1 corresponds to a change of {\ttfamily S\+\_\+stephi(i,face)} in the 3D coordinate \textbackslash{} s\mbox{[}i\mbox{]}. \mbox{[}Read the discussion of {\ttfamily S\+\_\+steplo} for an explanation of the subscripts {\ttfamily \+\_\+hi} and {\ttfamily \+\_\+lo}.\mbox{]}. 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00565}{565}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 565 of file octree.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8cc_source_l04275}{doc\+\_\+face\+\_\+neighbours()}}, \mbox{\hyperlink{octree_8cc_source_l03373}{gteq\+\_\+face\+\_\+neighbour()}}, and \mbox{\hyperlink{octree_8cc_source_l01040}{setup\+\_\+static\+\_\+data()}}.
+Referenced by doc\+\_\+face\+\_\+neighbours(), gteq\+\_\+face\+\_\+neighbour(), and setup\+\_\+static\+\_\+data().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_af1c005f0207cae66390314859edd9bd1}\label{classoomph_1_1OcTree_af1c005f0207cae66390314859edd9bd1}} 
 \index{oomph::OcTree@{oomph::OcTree}!S\_steplo@{S\_steplo}}
@@ -1074,11 +1074,11 @@ Each face of the \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_013_01_4}{R
 
 Each face of the \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_013_01_4}{Refineable\+QElement$<$3$>$}} that is represented by the octree is parametrised by two (of the three) local coordinates that parametrise the entire 3D element. E.\+g. the B\mbox{[}ack\mbox{]} face is parametrised by (s\mbox{[}0\mbox{]}, s\mbox{[}1\mbox{]}); the D\mbox{[}own\mbox{]} face is parametrised by (s\mbox{[}0\mbox{]},s\mbox{[}2\mbox{]}); etc. We always identify the in-\/face coordinate with the lower (3D) index with the subscript {\ttfamily \+\_\+lo} and the one with the larger (3D) index with the subscript {\ttfamily \+\_\+hi}. Here we set up the translation scheme between the 2D in-\/face coordinates (s\+\_\+lo,s\+\_\+hi) and the corresponding 3D coordinates\+: If we\textquotesingle{}re located on face {\ttfamily face} \mbox{[}L/\+R/\+F/\+B/\+U/D\mbox{]}, then an increase in s\+\_\+lo from -\/1 to +1 corresponds to a change of {\ttfamily S\+\_\+steplo(i,face)} in the 3D coordinate {\ttfamily s}\mbox{[}i\mbox{]}. S\+\_\+steplo(i,direction) 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00558}{558}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 558 of file octree.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8cc_source_l04275}{doc\+\_\+face\+\_\+neighbours()}}, \mbox{\hyperlink{octree_8cc_source_l03373}{gteq\+\_\+face\+\_\+neighbour()}}, and \mbox{\hyperlink{octree_8cc_source_l01040}{setup\+\_\+static\+\_\+data()}}.
+Referenced by doc\+\_\+face\+\_\+neighbours(), gteq\+\_\+face\+\_\+neighbour(), and setup\+\_\+static\+\_\+data().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_a5537d73ec80462fe6f03bdfd5ac836ff}\label{classoomph_1_1OcTree_a5537d73ec80462fe6f03bdfd5ac836ff}} 
 \index{oomph::OcTree@{oomph::OcTree}!Sini@{Sini}}
@@ -1092,11 +1092,11 @@ Entry in rotation matrix sin(i$\ast$90)
 
 Entry in rotation matrix\+: sin(i$\ast$90) 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00523}{523}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 523 of file octree.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8cc_source_l00609}{construct\+\_\+rotation\+\_\+matrix()}}, and \mbox{\hyperlink{octree_8cc_source_l01040}{setup\+\_\+static\+\_\+data()}}.
+Referenced by construct\+\_\+rotation\+\_\+matrix(), and setup\+\_\+static\+\_\+data().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_addaa397d11580ec949531c8ae9b082a5}\label{classoomph_1_1OcTree_addaa397d11580ec949531c8ae9b082a5}} 
 \index{oomph::OcTree@{oomph::OcTree}!Static\_data\_has\_been\_setup@{Static\_data\_has\_been\_setup}}
@@ -1110,11 +1110,11 @@ Bool indicating that static member data has been setup.
 
 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00412}{412}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 412 of file octree.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8h_source_l00641}{oomph\+::\+Oc\+Tree\+Root\+::\+Oc\+Tree\+Root()}}, and \mbox{\hyperlink{octree_8cc_source_l01040}{setup\+\_\+static\+\_\+data()}}.
+Referenced by oomph\+::\+Oc\+Tree\+Root\+::\+Oc\+Tree\+Root(), and setup\+\_\+static\+\_\+data().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_a88cff579697781e1ec50c86517feec77}\label{classoomph_1_1OcTree_a88cff579697781e1ec50c86517feec77}} 
 \index{oomph::OcTree@{oomph::OcTree}!Up\_and\_right\_equivalent\_for\_pairs\_of\_vertices@{Up\_and\_right\_equivalent\_for\_pairs\_of\_vertices}}
@@ -1133,6 +1133,8 @@ Storage for the up/right-\/equivalents corresponding to two pairs of vertices al
 \item the vertex in the reference element
 \item the corresponding vertex in the edge neighbour (i.\+e. the vertex in the edge neighbour that is located at the same position as that first vertex).
 \end{DoxyEnumerate}
+\end{DoxyItemize}
+\begin{DoxyItemize}
 \item The second pair contains
 \begin{DoxyEnumerate}
 \item the vertex at the other end of the edge in the reference element
@@ -1140,11 +1142,11 @@ Storage for the up/right-\/equivalents corresponding to two pairs of vertices al
 \end{DoxyEnumerate}
 \end{DoxyItemize}These two pairs completely define the relative rotation between the reference element and its edge neighbour. The map returns a pair which contains the up\+\_\+equivalent and the right\+\_\+equivalent of the edge neighbour, i.\+e. it tells us which direction in the edge neighbour coincides with the up (or right) direction in the reference element. 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00377}{377}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 377 of file octree.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8cc_source_l05255}{oomph\+::\+Oc\+Tree\+Forest\+::construct\+\_\+up\+\_\+right\+\_\+equivalents()}}, and \mbox{\hyperlink{octree_8cc_source_l01040}{setup\+\_\+static\+\_\+data()}}.
+Referenced by oomph\+::\+Oc\+Tree\+Forest\+::construct\+\_\+up\+\_\+right\+\_\+equivalents(), and setup\+\_\+static\+\_\+data().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_aec83bade91057d89aa3896274cb96b7e}\label{classoomph_1_1OcTree_aec83bade91057d89aa3896274cb96b7e}} 
 \index{oomph::OcTree@{oomph::OcTree}!Vector\_to\_direction@{Vector\_to\_direction}}
@@ -1158,11 +1160,11 @@ Each vector representing a direction can be translated into a direction, either 
 
 Map storing the information to translate a vector of directions (in the three coordinate directions) into a direction. 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00348}{348}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 348 of file octree.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{refineable__brick__element_8cc_source_l00238}{oomph\+::\+Refineable\+QElement$<$ 3 $>$\+::get\+\_\+bcs()}}, \mbox{\hyperlink{refineable__brick__element_8cc_source_l02764}{oomph\+::\+Refineable\+Solid\+QElement$<$ 3 $>$\+::get\+\_\+solid\+\_\+bcs()}}, \mbox{\hyperlink{octree_8cc_source_l00565}{get\+\_\+the\+\_\+other\+\_\+face()}}, \mbox{\hyperlink{octree_8cc_source_l00709}{rotate()}}, \mbox{\hyperlink{refineable__brick__element_8cc_source_l00126}{oomph\+::\+Refineable\+QElement$<$ 3 $>$\+::setup\+\_\+father\+\_\+bounds()}}, and \mbox{\hyperlink{octree_8cc_source_l01040}{setup\+\_\+static\+\_\+data()}}.
+Referenced by oomph\+::\+Refineable\+QElement$<$ 3 $>$\+::get\+\_\+bcs(), oomph\+::\+Refineable\+Solid\+QElement$<$ 3 $>$\+::get\+\_\+solid\+\_\+bcs(), get\+\_\+the\+\_\+other\+\_\+face(), rotate(), oomph\+::\+Refineable\+QElement$<$ 3 $>$\+::setup\+\_\+father\+\_\+bounds(), and setup\+\_\+static\+\_\+data().
 
 \mbox{\Hypertarget{classoomph_1_1OcTree_acf182a71db90c350c3f1d334d73d103f}\label{classoomph_1_1OcTree_acf182a71db90c350c3f1d334d73d103f}} 
 \index{oomph::OcTree@{oomph::OcTree}!Vertex\_at\_end\_of\_edge@{Vertex\_at\_end\_of\_edge}}
@@ -1176,11 +1178,11 @@ Referenced by \mbox{\hyperlink{refineable__brick__element_8cc_source_l00238}{oom
 
 Map of vectors containing the two vertices for each edge. 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00343}{343}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 343 of file octree.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8cc_source_l05255}{oomph\+::\+Oc\+Tree\+Forest\+::construct\+\_\+up\+\_\+right\+\_\+equivalents()}}, and \mbox{\hyperlink{octree_8cc_source_l01040}{setup\+\_\+static\+\_\+data()}}.
+Referenced by oomph\+::\+Oc\+Tree\+Forest\+::construct\+\_\+up\+\_\+right\+\_\+equivalents(), and setup\+\_\+static\+\_\+data().
 
 
 

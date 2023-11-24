@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1QHermiteElement}{}\doxysection{oomph\+::QHermite\+Element\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1QHermiteElement}{}\doxysection{oomph\+::QHermite\+Element$<$ DIM $>$ Class Template Reference}
 \label{classoomph_1_1QHermiteElement}\index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}}
 
 
@@ -9,7 +9,7 @@
 
 {\ttfamily \#include $<$hermite\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::QHermite\+Element\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::QHermite\+Element$<$ DIM $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.456140cm]{classoomph_1_1QHermiteElement}
@@ -65,7 +65,7 @@ std\+::string \mbox{\hyperlink{classoomph_1_1QHermiteElement_a29a26af721af282e5c
 unsigned \mbox{\hyperlink{classoomph_1_1QHermiteElement_a4afca94e16e9a63c4e2a0fa4ee2853db}{nplot\+\_\+points}} (const unsigned \&nplot) const
 \begin{DoxyCompactList}\small\item\em Return total number of plot points (when plotting nplot points in each "{}coordinate direction) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QHermiteElement_a796c8d180b039c5e753b373ba7aa720a}{build\+\_\+face\+\_\+element}} (const int \&face\+\_\+index, \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} $\ast$face\+\_\+element\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em Build the lower-\/dimensional \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} of the type \mbox{\hyperlink{classoomph_1_1QHermiteElement}{QHermite\+Element}}\texorpdfstring{$<$}{<}DIM-\/1\texorpdfstring{$>$}{>}. The face index takes a value that correponds to the possible faces\+: \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Build the lower-\/dimensional \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} of the type \mbox{\hyperlink{classoomph_1_1QHermiteElement}{QHermite\+Element}}$<$DIM-\/1$>$. The face index takes a value that correponds to the possible faces\+: \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QHermiteElement_ab389bd7cae8a81e022084955b5e5f12b}{shape}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) const
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} function for specific QHermite\+Element$<$1$>$ \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QHermiteElement_abeced659516958f2197856c3b2ccc910}{dshape\+\_\+local}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsids) const
@@ -121,11 +121,12 @@ static \mbox{\hyperlink{classoomph_1_1Gauss}{Gauss}}$<$ DIM, 3 $>$ \mbox{\hyperl
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$unsigned DIM$>$\newline
 class oomph\+::\+QHermite\+Element$<$ DIM $>$}
+
 /////////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////////// 
 
 General \mbox{\hyperlink{classoomph_1_1QHermiteElement}{QHermite\+Element}} class. Local coordinates are not assumed to be aligned with the global coordinates so the Jacobian of the mapping between local and global coordinates is a full matrix. For cases where the coordinates are aligned, you should use the derived class, \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement}{Diag\+QHermite\+Element}}, which uses a simplified mapping that makes the evaluation of derivatives of the shape functions much cheaper. 
 
-Definition at line \mbox{\hyperlink{hermite__elements_8h_source_l00085}{85}} of file \mbox{\hyperlink{hermite__elements_8h_source}{hermite\+\_\+elements.\+h}}.
+Definition at line 85 of file hermite\+\_\+elements.\+h.
 
 
 
@@ -143,11 +144,11 @@ Constructor.
 
 
 
-Definition at line \mbox{\hyperlink{hermite__elements_8h_source_l00098}{98}} of file \mbox{\hyperlink{hermite__elements_8h_source}{hermite\+\_\+elements.\+h}}.
+Definition at line 98 of file hermite\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01380}{oomph\+::\+Finite\+Element\+::set\+\_\+dimension()}}, \mbox{\hyperlink{elements_8cc_source_l03210}{oomph\+::\+Finite\+Element\+::set\+\_\+integration\+\_\+scheme()}}, \mbox{\hyperlink{elements_8h_source_l01404}{oomph\+::\+Finite\+Element\+::set\+\_\+n\+\_\+node()}}, and \mbox{\hyperlink{elements_8h_source_l01396}{oomph\+::\+Finite\+Element\+::set\+\_\+nnodal\+\_\+position\+\_\+type()}}.
+References oomph\+::\+Finite\+Element\+::set\+\_\+dimension(), oomph\+::\+Finite\+Element\+::set\+\_\+integration\+\_\+scheme(), oomph\+::\+Finite\+Element\+::set\+\_\+n\+\_\+node(), and oomph\+::\+Finite\+Element\+::set\+\_\+nnodal\+\_\+position\+\_\+type().
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_af4af9bfc84f52ebf5d0fe6a59e808eea}\label{classoomph_1_1QHermiteElement_af4af9bfc84f52ebf5d0fe6a59e808eea}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!QHermiteElement@{QHermiteElement}}
@@ -183,11 +184,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a4e81780865
 
 
 
-Definition at line \mbox{\hyperlink{hermite__elements_8cc_source_l00278}{278}} of file \mbox{\hyperlink{hermite__elements_8cc_source}{hermite\+\_\+elements.\+cc}}.
+Definition at line 278 of file hermite\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l04770}{oomph\+::\+Face\+Element\+::bulk\+\_\+coordinate\+\_\+derivatives\+\_\+fct\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l04735}{oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l04825}{oomph\+::\+Face\+Element\+::bulk\+\_\+node\+\_\+number()}}, \mbox{\hyperlink{elements_8h_source_l04818}{oomph\+::\+Face\+Element\+::bulk\+\_\+node\+\_\+number\+\_\+resize()}}, \mbox{\hyperlink{Qelement__face__coordinate__translation__schemes_8cc_source_l00038}{oomph\+::\+QElement1\+Face\+To\+Bulk\+Coordinates\+::face0()}}, \mbox{\hyperlink{Qelement__face__coordinate__translation__schemes_8cc_source_l00044}{oomph\+::\+QElement1\+Face\+To\+Bulk\+Coordinates\+::face1()}}, \mbox{\hyperlink{elements_8h_source_l04626}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}, \mbox{\hyperlink{elements_8h_source_l04755}{oomph\+::\+Face\+Element\+::face\+\_\+to\+\_\+bulk\+\_\+coordinate\+\_\+fct\+\_\+pt()}}, \mbox{\hyperlink{Qelement__face__coordinate__translation__schemes_8cc_source_l00059}{oomph\+::\+QElement1\+Bulk\+Coordinate\+Derivatives\+::faces0()}}, \mbox{\hyperlink{elements_8h_source_l04845}{oomph\+::\+Face\+Element\+::nbulk\+\_\+value()}}, \mbox{\hyperlink{elements_8h_source_l04860}{oomph\+::\+Face\+Element\+::nbulk\+\_\+value\+\_\+resize()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l04612}{oomph\+::\+Face\+Element\+::normal\+\_\+sign()}}, \mbox{\hyperlink{elements_8h_source_l01151}{oomph\+::\+Generalised\+Element\+::set\+\_\+halo()}}, and \mbox{\hyperlink{elements_8h_source_l01390}{oomph\+::\+Finite\+Element\+::set\+\_\+nodal\+\_\+dimension()}}.
+References oomph\+::\+Face\+Element\+::bulk\+\_\+coordinate\+\_\+derivatives\+\_\+fct\+\_\+pt(), oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt(), oomph\+::\+Face\+Element\+::bulk\+\_\+node\+\_\+number(), oomph\+::\+Face\+Element\+::bulk\+\_\+node\+\_\+number\+\_\+resize(), oomph\+::\+QElement1\+Face\+To\+Bulk\+Coordinates\+::face0(), oomph\+::\+QElement1\+Face\+To\+Bulk\+Coordinates\+::face1(), oomph\+::\+Face\+Element\+::face\+\_\+index(), oomph\+::\+Face\+Element\+::face\+\_\+to\+\_\+bulk\+\_\+coordinate\+\_\+fct\+\_\+pt(), oomph\+::\+QElement1\+Bulk\+Coordinate\+Derivatives\+::faces0(), oomph\+::\+Face\+Element\+::nbulk\+\_\+value(), oomph\+::\+Face\+Element\+::nbulk\+\_\+value\+\_\+resize(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Face\+Element\+::normal\+\_\+sign(), oomph\+::\+Generalised\+Element\+::set\+\_\+halo(), and oomph\+::\+Finite\+Element\+::set\+\_\+nodal\+\_\+dimension().
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a4678bc2efa637be91736e43e7155d03e}\label{classoomph_1_1QHermiteElement_a4678bc2efa637be91736e43e7155d03e}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!build\_face\_element@{build\_face\_element}}
@@ -209,11 +210,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a4e81780865
 
 
 
-Definition at line \mbox{\hyperlink{hermite__elements_8cc_source_l00913}{913}} of file \mbox{\hyperlink{hermite__elements_8cc_source}{hermite\+\_\+elements.\+cc}}.
+Definition at line 913 of file hermite\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l04770}{oomph\+::\+Face\+Element\+::bulk\+\_\+coordinate\+\_\+derivatives\+\_\+fct\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l04735}{oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l04825}{oomph\+::\+Face\+Element\+::bulk\+\_\+node\+\_\+number()}}, \mbox{\hyperlink{elements_8h_source_l04818}{oomph\+::\+Face\+Element\+::bulk\+\_\+node\+\_\+number\+\_\+resize()}}, \mbox{\hyperlink{elements_8h_source_l04805}{oomph\+::\+Face\+Element\+::bulk\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l04838}{oomph\+::\+Face\+Element\+::bulk\+\_\+position\+\_\+type\+\_\+resize()}}, \mbox{\hyperlink{Qelement__face__coordinate__translation__schemes_8cc_source_l00079}{oomph\+::\+QElement2\+Face\+To\+Bulk\+Coordinates\+::face0()}}, \mbox{\hyperlink{Qelement__face__coordinate__translation__schemes_8cc_source_l00086}{oomph\+::\+QElement2\+Face\+To\+Bulk\+Coordinates\+::face1()}}, \mbox{\hyperlink{Qelement__face__coordinate__translation__schemes_8cc_source_l00093}{oomph\+::\+QElement2\+Face\+To\+Bulk\+Coordinates\+::face2()}}, \mbox{\hyperlink{Qelement__face__coordinate__translation__schemes_8cc_source_l00100}{oomph\+::\+QElement2\+Face\+To\+Bulk\+Coordinates\+::face3()}}, \mbox{\hyperlink{elements_8h_source_l04626}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}, \mbox{\hyperlink{elements_8h_source_l04755}{oomph\+::\+Face\+Element\+::face\+\_\+to\+\_\+bulk\+\_\+coordinate\+\_\+fct\+\_\+pt()}}, \mbox{\hyperlink{Qelement__face__coordinate__translation__schemes_8cc_source_l00116}{oomph\+::\+QElement2\+Bulk\+Coordinate\+Derivatives\+::faces0()}}, \mbox{\hyperlink{Qelement__face__coordinate__translation__schemes_8cc_source_l00131}{oomph\+::\+QElement2\+Bulk\+Coordinate\+Derivatives\+::faces1()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l04845}{oomph\+::\+Face\+Element\+::nbulk\+\_\+value()}}, \mbox{\hyperlink{elements_8h_source_l04860}{oomph\+::\+Face\+Element\+::nbulk\+\_\+value\+\_\+resize()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l04612}{oomph\+::\+Face\+Element\+::normal\+\_\+sign()}}, \mbox{\hyperlink{elements_8h_source_l01151}{oomph\+::\+Generalised\+Element\+::set\+\_\+halo()}}, and \mbox{\hyperlink{elements_8h_source_l01390}{oomph\+::\+Finite\+Element\+::set\+\_\+nodal\+\_\+dimension()}}.
+References oomph\+::\+Face\+Element\+::bulk\+\_\+coordinate\+\_\+derivatives\+\_\+fct\+\_\+pt(), oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt(), oomph\+::\+Face\+Element\+::bulk\+\_\+node\+\_\+number(), oomph\+::\+Face\+Element\+::bulk\+\_\+node\+\_\+number\+\_\+resize(), oomph\+::\+Face\+Element\+::bulk\+\_\+position\+\_\+type(), oomph\+::\+Face\+Element\+::bulk\+\_\+position\+\_\+type\+\_\+resize(), oomph\+::\+QElement2\+Face\+To\+Bulk\+Coordinates\+::face0(), oomph\+::\+QElement2\+Face\+To\+Bulk\+Coordinates\+::face1(), oomph\+::\+QElement2\+Face\+To\+Bulk\+Coordinates\+::face2(), oomph\+::\+QElement2\+Face\+To\+Bulk\+Coordinates\+::face3(), oomph\+::\+Face\+Element\+::face\+\_\+index(), oomph\+::\+Face\+Element\+::face\+\_\+to\+\_\+bulk\+\_\+coordinate\+\_\+fct\+\_\+pt(), oomph\+::\+QElement2\+Bulk\+Coordinate\+Derivatives\+::faces0(), oomph\+::\+QElement2\+Bulk\+Coordinate\+Derivatives\+::faces1(), i, oomph\+::\+Face\+Element\+::nbulk\+\_\+value(), oomph\+::\+Face\+Element\+::nbulk\+\_\+value\+\_\+resize(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Face\+Element\+::normal\+\_\+sign(), oomph\+::\+Generalised\+Element\+::set\+\_\+halo(), and oomph\+::\+Finite\+Element\+::set\+\_\+nodal\+\_\+dimension().
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a796c8d180b039c5e753b373ba7aa720a}\label{classoomph_1_1QHermiteElement_a796c8d180b039c5e753b373ba7aa720a}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!build\_face\_element@{build\_face\_element}}
@@ -224,7 +225,7 @@ void \mbox{\hyperlink{classoomph_1_1QHermiteElement}{oomph\+::\+QHermite\+Elemen
 
 
 
-Build the lower-\/dimensional \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} of the type \mbox{\hyperlink{classoomph_1_1QHermiteElement}{QHermite\+Element}}\texorpdfstring{$<$}{<}DIM-\/1\texorpdfstring{$>$}{>}. The face index takes a value that correponds to the possible faces\+: 
+Build the lower-\/dimensional \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} of the type \mbox{\hyperlink{classoomph_1_1QHermiteElement}{QHermite\+Element}}$<$DIM-\/1$>$. The face index takes a value that correponds to the possible faces\+: 
 
 In 1D\+: -\/1 (Left) s\mbox{[}0\mbox{]} = -\/1.\+0 +1 (Right) s\mbox{[}0\mbox{]} = 1.\+0
 
@@ -254,11 +255,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a53e5051582d9da0
 
 
 
-Definition at line \mbox{\hyperlink{hermite__elements_8cc_source_l00098}{98}} of file \mbox{\hyperlink{hermite__elements_8cc_source}{hermite\+\_\+elements.\+cc}}.
+Definition at line 98 of file hermite\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{shape_8h_source_l01217}{oomph\+::\+One\+Dim\+Hermite\+::d2shape()}}, \mbox{\hyperlink{shape_8h_source_l01206}{oomph\+::\+One\+Dim\+Hermite\+::dshape()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{shape_8h_source_l01194}{oomph\+::\+One\+Dim\+Hermite\+::shape()}}.
+References oomph\+::\+One\+Dim\+Hermite\+::d2shape(), oomph\+::\+One\+Dim\+Hermite\+::dshape(), s, and oomph\+::\+One\+Dim\+Hermite\+::shape().
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_aff7aa8691e3a9ead914c1423f5b10295}\label{classoomph_1_1QHermiteElement_aff7aa8691e3a9ead914c1423f5b10295}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!d2shape\_local@{d2shape\_local}}
@@ -276,11 +277,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a53e5051582d9da0
 
 
 
-Definition at line \mbox{\hyperlink{hermite__elements_8cc_source_l00543}{543}} of file \mbox{\hyperlink{hermite__elements_8cc_source}{hermite\+\_\+elements.\+cc}}.
+Definition at line 543 of file hermite\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{shape_8h_source_l01194}{oomph\+::\+One\+Dim\+Hermite\+::shape()}}.
+References s, and oomph\+::\+One\+Dim\+Hermite\+::shape().
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_aef2bb1abc43f207edd57f6e38cbbe297}\label{classoomph_1_1QHermiteElement_aef2bb1abc43f207edd57f6e38cbbe297}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!d2shape\_local@{d2shape\_local}}
@@ -313,11 +314,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a9db1456b827131c
 
 
 
-Definition at line \mbox{\hyperlink{hermite__elements_8cc_source_l00070}{70}} of file \mbox{\hyperlink{hermite__elements_8cc_source}{hermite\+\_\+elements.\+cc}}.
+Definition at line 70 of file hermite\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{shape_8h_source_l01206}{oomph\+::\+One\+Dim\+Hermite\+::dshape()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{shape_8h_source_l01194}{oomph\+::\+One\+Dim\+Hermite\+::shape()}}.
+References oomph\+::\+One\+Dim\+Hermite\+::dshape(), s, and oomph\+::\+One\+Dim\+Hermite\+::shape().
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a4ace15a8a4c52b35aefacc4e7fdd5926}\label{classoomph_1_1QHermiteElement_a4ace15a8a4c52b35aefacc4e7fdd5926}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!dshape\_local@{dshape\_local}}
@@ -335,11 +336,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a9db1456b827131c
 
 
 
-Definition at line \mbox{\hyperlink{hermite__elements_8cc_source_l00426}{426}} of file \mbox{\hyperlink{hermite__elements_8cc_source}{hermite\+\_\+elements.\+cc}}.
+Definition at line 426 of file hermite\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{shape_8h_source_l01206}{oomph\+::\+One\+Dim\+Hermite\+::dshape()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{shape_8h_source_l01194}{oomph\+::\+One\+Dim\+Hermite\+::shape()}}.
+References oomph\+::\+One\+Dim\+Hermite\+::dshape(), s, and oomph\+::\+One\+Dim\+Hermite\+::shape().
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a8b44fee3bf2a9d1b7587b56e434b594e}\label{classoomph_1_1QHermiteElement_a8b44fee3bf2a9d1b7587b56e434b594e}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!dshape\_local@{dshape\_local}}
@@ -376,11 +377,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a82da844fd3ebb20
 
 
 
-Definition at line \mbox{\hyperlink{hermite__elements_8h_source_l00322}{322}} of file \mbox{\hyperlink{hermite__elements_8h_source}{hermite\+\_\+elements.\+h}}.
+Definition at line 322 of file hermite\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References i, and s.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a352698e9c7294cacd358cb850a8d6096}\label{classoomph_1_1QHermiteElement_a352698e9c7294cacd358cb850a8d6096}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!get\_s\_plot@{get\_s\_plot}}
@@ -398,11 +399,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a82da844fd3ebb20
 
 
 
-Definition at line \mbox{\hyperlink{hermite__elements_8h_source_l00374}{374}} of file \mbox{\hyperlink{hermite__elements_8h_source}{hermite\+\_\+elements.\+h}}.
+Definition at line 374 of file hermite\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References i, and s.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a2b275f67da74572fb761d067bfaa71d1}\label{classoomph_1_1QHermiteElement_a2b275f67da74572fb761d067bfaa71d1}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!get\_s\_plot@{get\_s\_plot}}
@@ -440,7 +441,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement_a07bdc47a91a
 
 
 
-Definition at line \mbox{\hyperlink{hermite__elements_8h_source_l00183}{183}} of file \mbox{\hyperlink{hermite__elements_8h_source}{hermite\+\_\+elements.\+h}}.
+Definition at line 183 of file hermite\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a29a36f3b1e8f07d4d7b5e14aeb79c422}\label{classoomph_1_1QHermiteElement_a29a36f3b1e8f07d4d7b5e14aeb79c422}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!local\_coord\_is\_valid@{local\_coord\_is\_valid}}
@@ -459,11 +460,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a9ae98c5b577d833
 
 
 
-Definition at line \mbox{\hyperlink{hermite__elements_8h_source_l00120}{120}} of file \mbox{\hyperlink{hermite__elements_8h_source}{hermite\+\_\+elements.\+h}}.
+Definition at line 120 of file hermite\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{hermite__elements_8h_source_l00210}{oomph\+::\+QHermite\+Element$<$ DIM $>$\+::s\+\_\+max()}}, and \mbox{\hyperlink{hermite__elements_8h_source_l00204}{oomph\+::\+QHermite\+Element$<$ DIM $>$\+::s\+\_\+min()}}.
+References oomph\+::\+Finite\+Element\+::dim(), i, s, oomph\+::\+QHermite\+Element$<$ DIM $>$\+::s\+\_\+max(), and oomph\+::\+QHermite\+Element$<$ DIM $>$\+::s\+\_\+min().
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a40d6a579987b39c4427f88745de83c89}\label{classoomph_1_1QHermiteElement_a40d6a579987b39c4427f88745de83c89}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!local\_coordinate\_of\_node@{local\_coordinate\_of\_node}}
@@ -482,11 +483,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a22bc4ee35e4f948
 
 
 
-Definition at line \mbox{\hyperlink{hermite__elements_8h_source_l00217}{217}} of file \mbox{\hyperlink{hermite__elements_8h_source}{hermite\+\_\+elements.\+h}}.
+Definition at line 217 of file hermite\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{hermite__elements_8h_source_l00210}{oomph\+::\+QHermite\+Element$<$ DIM $>$\+::s\+\_\+max()}}, and \mbox{\hyperlink{hermite__elements_8h_source_l00204}{oomph\+::\+QHermite\+Element$<$ DIM $>$\+::s\+\_\+min()}}.
+References i, s, oomph\+::\+QHermite\+Element$<$ DIM $>$\+::s\+\_\+max(), and oomph\+::\+QHermite\+Element$<$ DIM $>$\+::s\+\_\+min().
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a7265d98ba824ff594c7eae3b14ebcf46}\label{classoomph_1_1QHermiteElement_a7265d98ba824ff594c7eae3b14ebcf46}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!local\_fraction\_of\_node@{local\_fraction\_of\_node}}
@@ -505,11 +506,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a41640b9a9e5f646
 
 
 
-Definition at line \mbox{\hyperlink{hermite__elements_8h_source_l00234}{234}} of file \mbox{\hyperlink{hermite__elements_8h_source}{hermite\+\_\+elements.\+h}}.
+Definition at line 234 of file hermite\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References i.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a08477703be4ee27e1883f320c098298c}\label{classoomph_1_1QHermiteElement_a08477703be4ee27e1883f320c098298c}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!local\_one\_d\_fraction\_of\_node@{local\_one\_d\_fraction\_of\_node}}
@@ -528,7 +529,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adb8ec7d2ceda375
 
 
 
-Definition at line \mbox{\hyperlink{hermite__elements_8h_source_l00250}{250}} of file \mbox{\hyperlink{hermite__elements_8h_source}{hermite\+\_\+elements.\+h}}.
+Definition at line 250 of file hermite\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a2c0eb92b2d66f0c67abebf96bb7922fc}\label{classoomph_1_1QHermiteElement_a2c0eb92b2d66f0c67abebf96bb7922fc}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!move\_local\_coord\_back\_into\_element@{move\_local\_coord\_back\_into\_element}}
@@ -547,11 +548,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_aa042b56813a8dd8
 
 
 
-Definition at line \mbox{\hyperlink{hermite__elements_8h_source_l00136}{136}} of file \mbox{\hyperlink{hermite__elements_8h_source}{hermite\+\_\+elements.\+h}}.
+Definition at line 136 of file hermite\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{hermite__elements_8h_source_l00210}{oomph\+::\+QHermite\+Element$<$ DIM $>$\+::s\+\_\+max()}}, and \mbox{\hyperlink{hermite__elements_8h_source_l00204}{oomph\+::\+QHermite\+Element$<$ DIM $>$\+::s\+\_\+min()}}.
+References oomph\+::\+Finite\+Element\+::dim(), i, s, oomph\+::\+QHermite\+Element$<$ DIM $>$\+::s\+\_\+max(), and oomph\+::\+QHermite\+Element$<$ DIM $>$\+::s\+\_\+min().
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a30b57c285bdbe9687cb5cc4771393363}\label{classoomph_1_1QHermiteElement_a30b57c285bdbe9687cb5cc4771393363}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!nnode\_1d@{nnode\_1d}}
@@ -570,7 +571,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_ab65c7a94dda80c1
 
 
 
-Definition at line \mbox{\hyperlink{hermite__elements_8h_source_l00258}{258}} of file \mbox{\hyperlink{hermite__elements_8h_source}{hermite\+\_\+elements.\+h}}.
+Definition at line 258 of file hermite\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a4afca94e16e9a63c4e2a0fa4ee2853db}\label{classoomph_1_1QHermiteElement_a4afca94e16e9a63c4e2a0fa4ee2853db}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!nplot\_points@{nplot\_points}}
@@ -603,7 +604,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a8ed563c7ff0cfd8
 
 
 
-Definition at line \mbox{\hyperlink{hermite__elements_8h_source_l00363}{363}} of file \mbox{\hyperlink{hermite__elements_8h_source}{hermite\+\_\+elements.\+h}}.
+Definition at line 363 of file hermite\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a96f20eb759a1225d81242348f9623c19}\label{classoomph_1_1QHermiteElement_a96f20eb759a1225d81242348f9623c19}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!nplot\_points@{nplot\_points}}
@@ -621,7 +622,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a8ed563c7ff0cfd8
 
 
 
-Definition at line \mbox{\hyperlink{hermite__elements_8h_source_l00422}{422}} of file \mbox{\hyperlink{hermite__elements_8h_source}{hermite\+\_\+elements.\+h}}.
+Definition at line 422 of file hermite\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a50ac771f502ee3afdfb3975960342c8a}\label{classoomph_1_1QHermiteElement_a50ac771f502ee3afdfb3975960342c8a}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!operator=@{operator=}}
@@ -654,11 +655,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_ae4f251ca93
 
 
 
-Definition at line \mbox{\hyperlink{hermite__elements_8cc_source_l00203}{203}} of file \mbox{\hyperlink{hermite__elements_8cc_source}{hermite\+\_\+elements.\+cc}}.
+Definition at line 203 of file hermite\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References i.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a1b1bbbb836a8440f6b200162e8007bcf}\label{classoomph_1_1QHermiteElement_a1b1bbbb836a8440f6b200162e8007bcf}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!output@{output}}
@@ -680,11 +681,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_ae4f251ca93
 
 
 
-Definition at line \mbox{\hyperlink{hermite__elements_8cc_source_l00829}{829}} of file \mbox{\hyperlink{hermite__elements_8cc_source}{hermite\+\_\+elements.\+cc}}.
+Definition at line 829 of file hermite\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References i.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_ae69bd9e9d2e2e90ff3116995483b87dd}\label{classoomph_1_1QHermiteElement_ae69bd9e9d2e2e90ff3116995483b87dd}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!output@{output}}
@@ -703,7 +704,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_ae4f251ca932301e92e1b897cec6f0459}{oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_ae4f251ca932301e92e1b897cec6f0459}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_ae4f251ca932301e92e1b897cec6f0459}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1HermiteShellElement_a126ebcc503395e036c6bfaf8fabbc800}{oomph\+::\+Hermite\+Shell\+Element}}, \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_af1b8f1785d656386e36a01336611a22d}{oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element}}, and \mbox{\hyperlink{classoomph_1_1HermitePVDElement_a5567656681b134890e6940972a2461d5}{oomph\+::\+Hermite\+PVDElement$<$ DIM $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1HermitePVDElement_a5567656681b134890e6940972a2461d5}{oomph\+::\+Hermite\+PVDElement$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_af1b8f1785d656386e36a01336611a22d}{oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element}}, \mbox{\hyperlink{classoomph_1_1HermiteShellElement_a126ebcc503395e036c6bfaf8fabbc800}{oomph\+::\+Hermite\+Shell\+Element}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_ae4f251ca932301e92e1b897cec6f0459}{oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_ae4f251ca932301e92e1b897cec6f0459}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, and \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_ae4f251ca932301e92e1b897cec6f0459}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a21e46c3179cda3c9c7e2832208144d65}\label{classoomph_1_1QHermiteElement_a21e46c3179cda3c9c7e2832208144d65}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!output@{output}}
@@ -721,15 +722,15 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a7a36f23eed994280a8c1e5879f2e985b}{oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a7a36f23eed994280a8c1e5879f2e985b}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a7a36f23eed994280a8c1e5879f2e985b}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a1ec4a3c5f7372782a10d59845603aa71}{oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a1ec4a3c5f7372782a10d59845603aa71}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a1ec4a3c5f7372782a10d59845603aa71}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a29b211e63df67028435a71ac732d47ad}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, and \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a29b211e63df67028435a71ac732d47ad}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a29b211e63df67028435a71ac732d47ad}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a29b211e63df67028435a71ac732d47ad}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a1ec4a3c5f7372782a10d59845603aa71}{oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a1ec4a3c5f7372782a10d59845603aa71}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a1ec4a3c5f7372782a10d59845603aa71}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a7a36f23eed994280a8c1e5879f2e985b}{oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a7a36f23eed994280a8c1e5879f2e985b}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, and \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a7a36f23eed994280a8c1e5879f2e985b}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{hermite__elements_8cc_source_l00248}{248}} of file \mbox{\hyperlink{hermite__elements_8cc_source}{hermite\+\_\+elements.\+cc}}.
+Definition at line 248 of file hermite\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References i, and s.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a62b222352dee9ba19fd12e818d94a6c6}\label{classoomph_1_1QHermiteElement_a62b222352dee9ba19fd12e818d94a6c6}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!output@{output}}
@@ -747,15 +748,15 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a7a36f23eed994280a8c1e5879f2e985b}{oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a7a36f23eed994280a8c1e5879f2e985b}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a7a36f23eed994280a8c1e5879f2e985b}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a1ec4a3c5f7372782a10d59845603aa71}{oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a1ec4a3c5f7372782a10d59845603aa71}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a1ec4a3c5f7372782a10d59845603aa71}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a29b211e63df67028435a71ac732d47ad}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, and \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a29b211e63df67028435a71ac732d47ad}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a29b211e63df67028435a71ac732d47ad}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a29b211e63df67028435a71ac732d47ad}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a1ec4a3c5f7372782a10d59845603aa71}{oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a1ec4a3c5f7372782a10d59845603aa71}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a1ec4a3c5f7372782a10d59845603aa71}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a7a36f23eed994280a8c1e5879f2e985b}{oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a7a36f23eed994280a8c1e5879f2e985b}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, and \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a7a36f23eed994280a8c1e5879f2e985b}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{hermite__elements_8cc_source_l00878}{878}} of file \mbox{\hyperlink{hermite__elements_8cc_source}{hermite\+\_\+elements.\+cc}}.
+Definition at line 878 of file hermite\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References i, and s.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a12a4346480e45d82cbfca1f324cd4878}\label{classoomph_1_1QHermiteElement_a12a4346480e45d82cbfca1f324cd4878}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!output@{output}}
@@ -774,7 +775,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a7a36f23eed994280a8c1e5879f2e985b}{oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a7a36f23eed994280a8c1e5879f2e985b}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a7a36f23eed994280a8c1e5879f2e985b}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a1ec4a3c5f7372782a10d59845603aa71}{oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a1ec4a3c5f7372782a10d59845603aa71}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a1ec4a3c5f7372782a10d59845603aa71}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a29b211e63df67028435a71ac732d47ad}{oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a29b211e63df67028435a71ac732d47ad}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a29b211e63df67028435a71ac732d47ad}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1HermiteShellElement_a805a6e65b4dbb7bcffab6180ff9686ba}{oomph\+::\+Hermite\+Shell\+Element}}, \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_ade7c773aa9f4587d25945b4f4860a690}{oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element}}, and \mbox{\hyperlink{classoomph_1_1HermitePVDElement_a4a8edf00d8c8b4fe61676fead8413ab9}{oomph\+::\+Hermite\+PVDElement$<$ DIM $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1HermitePVDElement_a4a8edf00d8c8b4fe61676fead8413ab9}{oomph\+::\+Hermite\+PVDElement$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_ade7c773aa9f4587d25945b4f4860a690}{oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element}}, \mbox{\hyperlink{classoomph_1_1HermiteShellElement_a805a6e65b4dbb7bcffab6180ff9686ba}{oomph\+::\+Hermite\+Shell\+Element}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a29b211e63df67028435a71ac732d47ad}{oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a29b211e63df67028435a71ac732d47ad}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a29b211e63df67028435a71ac732d47ad}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a1ec4a3c5f7372782a10d59845603aa71}{oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a1ec4a3c5f7372782a10d59845603aa71}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a1ec4a3c5f7372782a10d59845603aa71}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a7a36f23eed994280a8c1e5879f2e985b}{oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a7a36f23eed994280a8c1e5879f2e985b}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, and \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a7a36f23eed994280a8c1e5879f2e985b}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_aa3db89457e9b7cd73ad2c3672f15f6af}\label{classoomph_1_1QHermiteElement_aa3db89457e9b7cd73ad2c3672f15f6af}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!output@{output}}
@@ -796,11 +797,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a6459f239b5
 
 
 
-Definition at line \mbox{\hyperlink{hermite__elements_8cc_source_l00128}{128}} of file \mbox{\hyperlink{hermite__elements_8cc_source}{hermite\+\_\+elements.\+cc}}.
+Definition at line 128 of file hermite\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References i.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a2c0af72d551eab10a016e0dfe1be4c68}\label{classoomph_1_1QHermiteElement_a2c0af72d551eab10a016e0dfe1be4c68}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!output@{output}}
@@ -822,11 +823,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a6459f239b5
 
 
 
-Definition at line \mbox{\hyperlink{hermite__elements_8cc_source_l00745}{745}} of file \mbox{\hyperlink{hermite__elements_8cc_source}{hermite\+\_\+elements.\+cc}}.
+Definition at line 745 of file hermite\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References i.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_aed2b691a0b8effb35840561b5112a3af}\label{classoomph_1_1QHermiteElement_aed2b691a0b8effb35840561b5112a3af}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!output@{output}}
@@ -845,11 +846,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a6459f239b585ae575d779f58f70bae46}{oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a6459f239b585ae575d779f58f70bae46}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a6459f239b585ae575d779f58f70bae46}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1HermiteShellElement_af2313040b66727088dc044738b652677}{oomph\+::\+Hermite\+Shell\+Element}}, \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a1595e604991ff18f4d907da5a8fdf40b}{oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element}}, and \mbox{\hyperlink{classoomph_1_1HermitePVDElement_aa0e10a14a3b005e07d74c9fa99e47d48}{oomph\+::\+Hermite\+PVDElement$<$ DIM $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1HermitePVDElement_aa0e10a14a3b005e07d74c9fa99e47d48}{oomph\+::\+Hermite\+PVDElement$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a1595e604991ff18f4d907da5a8fdf40b}{oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element}}, \mbox{\hyperlink{classoomph_1_1HermiteShellElement_af2313040b66727088dc044738b652677}{oomph\+::\+Hermite\+Shell\+Element}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a6459f239b585ae575d779f58f70bae46}{oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a6459f239b585ae575d779f58f70bae46}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, and \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a6459f239b585ae575d779f58f70bae46}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}.
 
 
 
-Referenced by \mbox{\hyperlink{hermite__elements_8cc_source_l01072}{oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$\+::output()}}.
+Referenced by oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a3a8586cf4b69353730e1b99e77d81c6d}\label{classoomph_1_1QHermiteElement_a3a8586cf4b69353730e1b99e77d81c6d}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!output@{output}}
@@ -867,15 +868,15 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a8505f1e0b517221735e357edaa2a586e}{oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a8505f1e0b517221735e357edaa2a586e}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a8505f1e0b517221735e357edaa2a586e}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a5e1fcf5f26f5e0c089f1dd94cd5beae0}{oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a5e1fcf5f26f5e0c089f1dd94cd5beae0}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a5e1fcf5f26f5e0c089f1dd94cd5beae0}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_ab86bacc26f319f3266e6de9cfc5b82af}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, and \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_ab86bacc26f319f3266e6de9cfc5b82af}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_ab86bacc26f319f3266e6de9cfc5b82af}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_ab86bacc26f319f3266e6de9cfc5b82af}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a5e1fcf5f26f5e0c089f1dd94cd5beae0}{oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a5e1fcf5f26f5e0c089f1dd94cd5beae0}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a5e1fcf5f26f5e0c089f1dd94cd5beae0}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a8505f1e0b517221735e357edaa2a586e}{oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a8505f1e0b517221735e357edaa2a586e}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, and \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a8505f1e0b517221735e357edaa2a586e}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{hermite__elements_8cc_source_l00172}{172}} of file \mbox{\hyperlink{hermite__elements_8cc_source}{hermite\+\_\+elements.\+cc}}.
+Definition at line 172 of file hermite\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References i, and s.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_ac192aeb57a54175e415d1aadb9739fdb}\label{classoomph_1_1QHermiteElement_ac192aeb57a54175e415d1aadb9739fdb}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!output@{output}}
@@ -893,15 +894,15 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a8505f1e0b517221735e357edaa2a586e}{oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a8505f1e0b517221735e357edaa2a586e}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a8505f1e0b517221735e357edaa2a586e}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a5e1fcf5f26f5e0c089f1dd94cd5beae0}{oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a5e1fcf5f26f5e0c089f1dd94cd5beae0}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a5e1fcf5f26f5e0c089f1dd94cd5beae0}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_ab86bacc26f319f3266e6de9cfc5b82af}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, and \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_ab86bacc26f319f3266e6de9cfc5b82af}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_ab86bacc26f319f3266e6de9cfc5b82af}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_ab86bacc26f319f3266e6de9cfc5b82af}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a5e1fcf5f26f5e0c089f1dd94cd5beae0}{oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a5e1fcf5f26f5e0c089f1dd94cd5beae0}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a5e1fcf5f26f5e0c089f1dd94cd5beae0}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a8505f1e0b517221735e357edaa2a586e}{oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a8505f1e0b517221735e357edaa2a586e}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, and \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a8505f1e0b517221735e357edaa2a586e}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{hermite__elements_8cc_source_l00794}{794}} of file \mbox{\hyperlink{hermite__elements_8cc_source}{hermite\+\_\+elements.\+cc}}.
+Definition at line 794 of file hermite\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References i, and s.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a8053b3b58ea769a5e7be72982d594c0d}\label{classoomph_1_1QHermiteElement_a8053b3b58ea769a5e7be72982d594c0d}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!output@{output}}
@@ -920,7 +921,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a8505f1e0b517221735e357edaa2a586e}{oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a8505f1e0b517221735e357edaa2a586e}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a8505f1e0b517221735e357edaa2a586e}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a5e1fcf5f26f5e0c089f1dd94cd5beae0}{oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a5e1fcf5f26f5e0c089f1dd94cd5beae0}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a5e1fcf5f26f5e0c089f1dd94cd5beae0}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_ab86bacc26f319f3266e6de9cfc5b82af}{oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_ab86bacc26f319f3266e6de9cfc5b82af}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_ab86bacc26f319f3266e6de9cfc5b82af}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1HermiteShellElement_a2f76280c3af060304800b5bc0aeb02d8}{oomph\+::\+Hermite\+Shell\+Element}}, \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a099a046661da996bac32617c0479b220}{oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element}}, and \mbox{\hyperlink{classoomph_1_1HermitePVDElement_a9de8d6a3b4e844189a97eb19e7b034c1}{oomph\+::\+Hermite\+PVDElement$<$ DIM $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1HermitePVDElement_a9de8d6a3b4e844189a97eb19e7b034c1}{oomph\+::\+Hermite\+PVDElement$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a099a046661da996bac32617c0479b220}{oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element}}, \mbox{\hyperlink{classoomph_1_1HermiteShellElement_a2f76280c3af060304800b5bc0aeb02d8}{oomph\+::\+Hermite\+Shell\+Element}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_ab86bacc26f319f3266e6de9cfc5b82af}{oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_ab86bacc26f319f3266e6de9cfc5b82af}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_ab86bacc26f319f3266e6de9cfc5b82af}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a5e1fcf5f26f5e0c089f1dd94cd5beae0}{oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a5e1fcf5f26f5e0c089f1dd94cd5beae0}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a5e1fcf5f26f5e0c089f1dd94cd5beae0}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a8505f1e0b517221735e357edaa2a586e}{oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a8505f1e0b517221735e357edaa2a586e}{oomph\+::\+Solid\+QHermite\+Element$<$ 1 $>$}}, and \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement_a8505f1e0b517221735e357edaa2a586e}{oomph\+::\+Solid\+QHermite\+Element$<$ 2 $>$}}.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a9f603f92a0aae12188dcb6bcf105b8b9}\label{classoomph_1_1QHermiteElement_a9f603f92a0aae12188dcb6bcf105b8b9}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!s\_max@{s\_max}}
@@ -939,11 +940,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a64adbe935692713
 
 
 
-Definition at line \mbox{\hyperlink{hermite__elements_8h_source_l00210}{210}} of file \mbox{\hyperlink{hermite__elements_8h_source}{hermite\+\_\+elements.\+h}}.
+Definition at line 210 of file hermite\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{hermite__elements_8h_source_l00120}{oomph\+::\+QHermite\+Element$<$ DIM $>$\+::local\+\_\+coord\+\_\+is\+\_\+valid()}}, \mbox{\hyperlink{hermite__elements_8h_source_l00217}{oomph\+::\+QHermite\+Element$<$ DIM $>$\+::local\+\_\+coordinate\+\_\+of\+\_\+node()}}, and \mbox{\hyperlink{hermite__elements_8h_source_l00136}{oomph\+::\+QHermite\+Element$<$ DIM $>$\+::move\+\_\+local\+\_\+coord\+\_\+back\+\_\+into\+\_\+element()}}.
+Referenced by oomph\+::\+QHermite\+Element$<$ DIM $>$\+::local\+\_\+coord\+\_\+is\+\_\+valid(), oomph\+::\+QHermite\+Element$<$ DIM $>$\+::local\+\_\+coordinate\+\_\+of\+\_\+node(), and oomph\+::\+QHermite\+Element$<$ DIM $>$\+::move\+\_\+local\+\_\+coord\+\_\+back\+\_\+into\+\_\+element().
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a913af787533d6c0fae4269c601ac62af}\label{classoomph_1_1QHermiteElement_a913af787533d6c0fae4269c601ac62af}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!s\_min@{s\_min}}
@@ -962,11 +963,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a35f0803115b68bd
 
 
 
-Definition at line \mbox{\hyperlink{hermite__elements_8h_source_l00204}{204}} of file \mbox{\hyperlink{hermite__elements_8h_source}{hermite\+\_\+elements.\+h}}.
+Definition at line 204 of file hermite\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{hermite__elements_8h_source_l00120}{oomph\+::\+QHermite\+Element$<$ DIM $>$\+::local\+\_\+coord\+\_\+is\+\_\+valid()}}, \mbox{\hyperlink{hermite__elements_8h_source_l00217}{oomph\+::\+QHermite\+Element$<$ DIM $>$\+::local\+\_\+coordinate\+\_\+of\+\_\+node()}}, and \mbox{\hyperlink{hermite__elements_8h_source_l00136}{oomph\+::\+QHermite\+Element$<$ DIM $>$\+::move\+\_\+local\+\_\+coord\+\_\+back\+\_\+into\+\_\+element()}}.
+Referenced by oomph\+::\+QHermite\+Element$<$ DIM $>$\+::local\+\_\+coord\+\_\+is\+\_\+valid(), oomph\+::\+QHermite\+Element$<$ DIM $>$\+::local\+\_\+coordinate\+\_\+of\+\_\+node(), and oomph\+::\+QHermite\+Element$<$ DIM $>$\+::move\+\_\+local\+\_\+coord\+\_\+back\+\_\+into\+\_\+element().
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_ab389bd7cae8a81e022084955b5e5f12b}\label{classoomph_1_1QHermiteElement_ab389bd7cae8a81e022084955b5e5f12b}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!shape@{shape}}
@@ -984,11 +985,11 @@ Implements \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a
 
 
 
-Definition at line \mbox{\hyperlink{hermite__elements_8cc_source_l00048}{48}} of file \mbox{\hyperlink{hermite__elements_8cc_source}{hermite\+\_\+elements.\+cc}}.
+Definition at line 48 of file hermite\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{shape_8h_source_l01194}{oomph\+::\+One\+Dim\+Hermite\+::shape()}}.
+References s, and oomph\+::\+One\+Dim\+Hermite\+::shape().
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a6b49ae0dc1f527a691325fd771795460}\label{classoomph_1_1QHermiteElement_a6b49ae0dc1f527a691325fd771795460}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!shape@{shape}}
@@ -1006,11 +1007,11 @@ Implements \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a
 
 
 
-Definition at line \mbox{\hyperlink{hermite__elements_8cc_source_l00371}{371}} of file \mbox{\hyperlink{hermite__elements_8cc_source}{hermite\+\_\+elements.\+cc}}.
+Definition at line 371 of file hermite\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{shape_8h_source_l01194}{oomph\+::\+One\+Dim\+Hermite\+::shape()}}.
+References s, and oomph\+::\+One\+Dim\+Hermite\+::shape().
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a0e5d50fb86a7eb4c8a30ca8392d5a216}\label{classoomph_1_1QHermiteElement_a0e5d50fb86a7eb4c8a30ca8392d5a216}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!shape@{shape}}
@@ -1033,7 +1034,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryCondi
 
 
 
-Referenced by \mbox{\hyperlink{beam__elements_8cc_source_l00825}{oomph\+::\+Hermite\+Beam\+Element\+::output()}}.
+Referenced by oomph\+::\+Hermite\+Beam\+Element\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a29a26af721af282e5c03f93a0005ce5f}\label{classoomph_1_1QHermiteElement_a29a26af721af282e5c03f93a0005ce5f}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!tecplot\_zone\_string@{tecplot\_zone\_string}}
@@ -1066,7 +1067,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a3193df31f9ce38e
 
 
 
-Definition at line \mbox{\hyperlink{hermite__elements_8h_source_l00350}{350}} of file \mbox{\hyperlink{hermite__elements_8h_source}{hermite\+\_\+elements.\+h}}.
+Definition at line 350 of file hermite\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_ab31005ae86142a1ea5c9d119994ef697}\label{classoomph_1_1QHermiteElement_ab31005ae86142a1ea5c9d119994ef697}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!tecplot\_zone\_string@{tecplot\_zone\_string}}
@@ -1084,7 +1085,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a3193df31f9ce38e
 
 
 
-Definition at line \mbox{\hyperlink{hermite__elements_8h_source_l00409}{409}} of file \mbox{\hyperlink{hermite__elements_8h_source}{hermite\+\_\+elements.\+h}}.
+Definition at line 409 of file hermite\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QHermiteElement_a0f000889085286deef3b273043522834}\label{classoomph_1_1QHermiteElement_a0f000889085286deef3b273043522834}} 
 \index{oomph::QHermiteElement$<$ DIM $>$@{oomph::QHermiteElement$<$ DIM $>$}!transform\_second\_derivatives@{transform\_second\_derivatives}}
@@ -1107,7 +1108,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement_a6d6dbf192bc
 
 
 
-Definition at line \mbox{\hyperlink{hermite__elements_8h_source_l00192}{192}} of file \mbox{\hyperlink{hermite__elements_8h_source}{hermite\+\_\+elements.\+h}}.
+Definition at line 192 of file hermite\+\_\+elements.\+h.
 
 
 
@@ -1125,7 +1126,7 @@ Default integration rule\+: Gaussian integration of same \textquotesingle{}order
 
 Assign the static Default\+\_\+integration\+\_\+scheme. 
 
-Definition at line \mbox{\hyperlink{hermite__elements_8h_source_l00094}{94}} of file \mbox{\hyperlink{hermite__elements_8h_source}{hermite\+\_\+elements.\+h}}.
+Definition at line 94 of file hermite\+\_\+elements.\+h.
 
 
 

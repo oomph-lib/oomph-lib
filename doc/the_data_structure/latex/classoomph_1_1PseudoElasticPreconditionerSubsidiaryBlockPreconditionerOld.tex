@@ -18,7 +18,7 @@ Inheritance diagram for oomph\+::Pseudo\+Elastic\+Preconditioner\+Subsidiary\+Bl
 \doxysubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
-typedef \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} $\ast$($\ast$ \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_ac76bcd0129f40fa71607fa5dbc1b4e66}{Subsidiary\+Preconditioner\+Fct\+Pt}}) ()
+typedef \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} $\ast$($\ast$ \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_a85f57923e70244d5fde0538946eb8c3d}{Subsidiary\+Preconditioner\+Fct\+Pt}}) ()
 \begin{DoxyCompactList}\small\item\em This preconditioner includes the option to use subsidiary operators other than \mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner}{Super\+LUPreconditioner}} for this problem. This is the typedef of a function that should return an instance of a subsidiary preconditioning operator. This preconditioner is responsible for the destruction of the subsidiary preconditioners. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -35,7 +35,7 @@ void \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPr
 \begin{DoxyCompactList}\small\item\em Setup the preconditioner. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_a31f3b927696c11c90f704178cae13e7e}{preconditioner\+\_\+solve}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&res, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&z)
 \begin{DoxyCompactList}\small\item\em Apply preconditioner to r. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_a6c238d4e402413fe20061d5735acb40c}{set\+\_\+subsidiary\+\_\+preconditioner\+\_\+function}} (\mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_ac76bcd0129f40fa71607fa5dbc1b4e66}{Subsidiary\+Preconditioner\+Fct\+Pt}} sub\+\_\+prec\+\_\+fn)
+void \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_a6c238d4e402413fe20061d5735acb40c}{set\+\_\+subsidiary\+\_\+preconditioner\+\_\+function}} (\mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_a85f57923e70244d5fde0538946eb8c3d}{Subsidiary\+Preconditioner\+Fct\+Pt}} sub\+\_\+prec\+\_\+fn)
 \begin{DoxyCompactList}\small\item\em access function to set the subsidiary preconditioner function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_a1d2c4fa73f0e4839e20ddca2e799da3c}{use\+\_\+block\+\_\+diagonal\+\_\+approximation}} ()
 \begin{DoxyCompactList}\small\item\em use as a block diagonal preconditioner \end{DoxyCompactList}\item 
@@ -43,7 +43,7 @@ void \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPr
 \begin{DoxyCompactList}\small\item\em Use as an upper triangular preconditioner. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_a4ac42f45ed94d02f2fd25b3807653979}{use\+\_\+lower\+\_\+triangular\+\_\+approximation}} ()
 \begin{DoxyCompactList}\small\item\em Use as a lower triangular preconditioner. \end{DoxyCompactList}\item 
-double \& \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_accf0eb22e98fd7ec1b671b6eb9f7ffde}{scaling}} ()
+double \& \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_ad6cb2301227704660e2f621f9de504cf}{scaling}} ()
 \begin{DoxyCompactList}\small\item\em Specify the scaling. Default is 1.\+0 Must be set before setup(...). \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -54,7 +54,7 @@ double \& \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBl
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} of matrix vector product operators for the off diagonals. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_a6b45cbf207717b9ffe326041f78ea85b}{Method}}
 \begin{DoxyCompactList}\small\item\em the preconditioning method. 0 -\/ block diagonal 1 -\/ upper triangular 2 -\/ lower triangular \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_ac76bcd0129f40fa71607fa5dbc1b4e66}{Subsidiary\+Preconditioner\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_a376d5fd2ddf9f367854b41478a269ae2}{Subsidiary\+\_\+preconditioner\+\_\+function\+\_\+pt}}
+\mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_a85f57923e70244d5fde0538946eb8c3d}{Subsidiary\+Preconditioner\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_a376d5fd2ddf9f367854b41478a269ae2}{Subsidiary\+\_\+preconditioner\+\_\+function\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em The Subisidary\+Preconditioner\+Fct\+Pt. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_a588f4623c606d01c3e3feb3c09023f03}{Scaling}}
 \begin{DoxyCompactList}\small\item\em The scaling. default 1.\+0. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -71,16 +71,16 @@ Subsidiary helper preconditioner for the \mbox{\hyperlink{classoomph_1_1PseudoEl
 \item By default this preconditioner uses a superlu preconditioner. 
 \end{DoxyEnumerate}
 
-Definition at line \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00584}{584}} of file \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+preconditioner.\+h}}.
+Definition at line 584 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
 
 
 
 \doxysubsection{Member Typedef Documentation}
-\mbox{\Hypertarget{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_ac76bcd0129f40fa71607fa5dbc1b4e66}\label{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_ac76bcd0129f40fa71607fa5dbc1b4e66}} 
+\mbox{\Hypertarget{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_a85f57923e70244d5fde0538946eb8c3d}\label{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_a85f57923e70244d5fde0538946eb8c3d}} 
 \index{oomph::PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld@{oomph::PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld}!SubsidiaryPreconditionerFctPt@{SubsidiaryPreconditionerFctPt}}
 \index{SubsidiaryPreconditionerFctPt@{SubsidiaryPreconditionerFctPt}!oomph::PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld@{oomph::PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld}}
 \doxysubsubsection{\texorpdfstring{SubsidiaryPreconditionerFctPt}{SubsidiaryPreconditionerFctPt}}
-{\footnotesize\ttfamily typedef \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} $\ast$($\ast$ oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Subsidiary\+Block\+Preconditioner\+Old\+::\+Subsidiary\+Preconditioner\+Fct\+Pt) ()}
+{\footnotesize\ttfamily typedef \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}}$\ast$($\ast$ oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Subsidiary\+Block\+Preconditioner\+Old\+::\+Subsidiary\+Preconditioner\+Fct\+Pt) ()}
 
 
 
@@ -88,7 +88,7 @@ This preconditioner includes the option to use subsidiary operators other than \
 
 
 
-Definition at line \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00593}{593}} of file \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+preconditioner.\+h}}.
+Definition at line 593 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
 
 
 
@@ -105,11 +105,11 @@ Constructor. (By default this preconditioner is upper triangular).
 
 
 
-Definition at line \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00596}{596}} of file \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+preconditioner.\+h}}.
+Definition at line 596 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00679}{Method}}, \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00685}{Scaling}}, and \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00682}{Subsidiary\+\_\+preconditioner\+\_\+function\+\_\+pt}}.
+References Method, Scaling, and Subsidiary\+\_\+preconditioner\+\_\+function\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_a3d44a67738fba34197376f1a1865bfe1}\label{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_a3d44a67738fba34197376f1a1865bfe1}} 
 \index{oomph::PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld@{oomph::PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld}!````~PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld@{$\sim$PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld}}
@@ -123,11 +123,11 @@ Destructor.
 
 
 
-Definition at line \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00610}{610}} of file \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+preconditioner.\+h}}.
+Definition at line 610 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source_l00916}{clean\+\_\+up\+\_\+memory()}}.
+References clean\+\_\+up\+\_\+memory().
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_a3f316d1ab87b525fe67afdf4576dd844}\label{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_a3f316d1ab87b525fe67afdf4576dd844}} 
 \index{oomph::PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld@{oomph::PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld}!PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld@{PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld}}
@@ -160,15 +160,15 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Preconditioner_a46c31c416829be
 
 
 
-Definition at line \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source_l00915}{915}} of file \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source}{pseudo\+\_\+elastic\+\_\+preconditioner.\+cc}}.
+Definition at line 915 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+cc.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l02159}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}, \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00670}{Diagonal\+\_\+block\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00679}{Method}}, and \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00673}{Off\+\_\+diagonal\+\_\+matrix\+\_\+vector\+\_\+products}}.
+References oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base(), Diagonal\+\_\+block\+\_\+preconditioner\+\_\+pt, i, Method, and Off\+\_\+diagonal\+\_\+matrix\+\_\+vector\+\_\+products.
 
 
 
-Referenced by \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source_l00951}{setup()}}, and \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00610}{$\sim$\+Pseudo\+Elastic\+Preconditioner\+Subsidiary\+Block\+Preconditioner\+Old()}}.
+Referenced by setup(), and $\sim$\+Pseudo\+Elastic\+Preconditioner\+Subsidiary\+Block\+Preconditioner\+Old().
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_a31f3b927696c11c90f704178cae13e7e}\label{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_a31f3b927696c11c90f704178cae13e7e}} 
 \index{oomph::PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld@{oomph::PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld}!preconditioner\_solve@{preconditioner\_solve}}
@@ -186,17 +186,17 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34
 
 
 
-Definition at line \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source_l01044}{1044}} of file \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source}{pseudo\+\_\+elastic\+\_\+preconditioner.\+cc}}.
+Definition at line 1044 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+cc.
 
 
 
-References \mbox{\hyperlink{double__vector_8h_source_l00142}{oomph\+::\+Double\+Vector\+::clear()}}, \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00670}{Diagonal\+\_\+block\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04186}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00679}{Method}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01670}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::nblock\+\_\+types()}}, \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00673}{Off\+\_\+diagonal\+\_\+matrix\+\_\+vector\+\_\+products}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04489}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::return\+\_\+block\+\_\+vector()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l00243}{oomph\+::\+Cumulative\+Timings\+::start()}}.
+References oomph\+::\+Double\+Vector\+::clear(), Diagonal\+\_\+block\+\_\+preconditioner\+\_\+pt, oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+block\+\_\+vector(), i, Method, oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::nblock\+\_\+types(), Off\+\_\+diagonal\+\_\+matrix\+\_\+vector\+\_\+products, oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::return\+\_\+block\+\_\+vector(), and oomph\+::\+Cumulative\+Timings\+::start().
 
-\mbox{\Hypertarget{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_accf0eb22e98fd7ec1b671b6eb9f7ffde}\label{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_accf0eb22e98fd7ec1b671b6eb9f7ffde}} 
+\mbox{\Hypertarget{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_ad6cb2301227704660e2f621f9de504cf}\label{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_ad6cb2301227704660e2f621f9de504cf}} 
 \index{oomph::PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld@{oomph::PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld}!scaling@{scaling}}
 \index{scaling@{scaling}!oomph::PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld@{oomph::PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld}}
 \doxysubsubsection{\texorpdfstring{scaling()}{scaling()}}
-{\footnotesize\ttfamily double \& oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Subsidiary\+Block\+Preconditioner\+Old\+::scaling (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double\& oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Subsidiary\+Block\+Preconditioner\+Old\+::scaling (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -204,21 +204,21 @@ Specify the scaling. Default is 1.\+0 Must be set before setup(...).
 
 
 
-Definition at line \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00661}{661}} of file \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+preconditioner.\+h}}.
+Definition at line 661 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00685}{Scaling}}.
+References Scaling.
 
 
 
-Referenced by \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source_l00552}{oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Old\+::setup()}}.
+Referenced by oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Old\+::setup().
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_a6c238d4e402413fe20061d5735acb40c}\label{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_a6c238d4e402413fe20061d5735acb40c}} 
 \index{oomph::PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld@{oomph::PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld}!set\_subsidiary\_preconditioner\_function@{set\_subsidiary\_preconditioner\_function}}
 \index{set\_subsidiary\_preconditioner\_function@{set\_subsidiary\_preconditioner\_function}!oomph::PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld@{oomph::PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld}}
 \doxysubsubsection{\texorpdfstring{set\_subsidiary\_preconditioner\_function()}{set\_subsidiary\_preconditioner\_function()}}
-{\footnotesize\ttfamily void oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Subsidiary\+Block\+Preconditioner\+Old\+::set\+\_\+subsidiary\+\_\+preconditioner\+\_\+function (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_ac76bcd0129f40fa71607fa5dbc1b4e66}{Subsidiary\+Preconditioner\+Fct\+Pt}}}]{sub\+\_\+prec\+\_\+fn }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Subsidiary\+Block\+Preconditioner\+Old\+::set\+\_\+subsidiary\+\_\+preconditioner\+\_\+function (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_a85f57923e70244d5fde0538946eb8c3d}{Subsidiary\+Preconditioner\+Fct\+Pt}}}]{sub\+\_\+prec\+\_\+fn }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -226,15 +226,15 @@ access function to set the subsidiary preconditioner function.
 
 
 
-Definition at line \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00635}{635}} of file \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+preconditioner.\+h}}.
+Definition at line 635 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00682}{Subsidiary\+\_\+preconditioner\+\_\+function\+\_\+pt}}.
+References Subsidiary\+\_\+preconditioner\+\_\+function\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source_l00552}{oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Old\+::setup()}}.
+Referenced by oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Old\+::setup().
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_a4477e968641690ab5c66c8155aef8a99}\label{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_a4477e968641690ab5c66c8155aef8a99}} 
 \index{oomph::PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld@{oomph::PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld}!setup@{setup}}
@@ -252,11 +252,11 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb1
 
 
 
-Definition at line \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source_l00951}{951}} of file \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source}{pseudo\+\_\+elastic\+\_\+preconditioner.\+cc}}.
+Definition at line 951 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+cc.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8cc_source_l02483}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::block\+\_\+setup()}}, \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source_l00916}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00670}{Diagonal\+\_\+block\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00673}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+block()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00520}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::matrix\+\_\+pt()}}, \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00679}{Method}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01694}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::ndof\+\_\+types()}}, \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00673}{Off\+\_\+diagonal\+\_\+matrix\+\_\+vector\+\_\+products}}, \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00685}{Scaling}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02397}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::setup\+\_\+matrix\+\_\+vector\+\_\+product()}}, and \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00682}{Subsidiary\+\_\+preconditioner\+\_\+function\+\_\+pt}}.
+References oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::block\+\_\+setup(), clean\+\_\+up\+\_\+memory(), Diagonal\+\_\+block\+\_\+preconditioner\+\_\+pt, oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+block(), oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::matrix\+\_\+pt(), Method, oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::ndof\+\_\+types(), Off\+\_\+diagonal\+\_\+matrix\+\_\+vector\+\_\+products, Scaling, oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::setup\+\_\+matrix\+\_\+vector\+\_\+product(), and Subsidiary\+\_\+preconditioner\+\_\+function\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_a1d2c4fa73f0e4839e20ddca2e799da3c}\label{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_a1d2c4fa73f0e4839e20ddca2e799da3c}} 
 \index{oomph::PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld@{oomph::PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld}!use\_block\_diagonal\_approximation@{use\_block\_diagonal\_approximation}}
@@ -270,15 +270,15 @@ use as a block diagonal preconditioner
 
 
 
-Definition at line \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00642}{642}} of file \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+preconditioner.\+h}}.
+Definition at line 642 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00679}{Method}}.
+References Method.
 
 
 
-Referenced by \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source_l00552}{oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Old\+::setup()}}.
+Referenced by oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Old\+::setup().
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_a4ac42f45ed94d02f2fd25b3807653979}\label{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_a4ac42f45ed94d02f2fd25b3807653979}} 
 \index{oomph::PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld@{oomph::PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld}!use\_lower\_triangular\_approximation@{use\_lower\_triangular\_approximation}}
@@ -292,15 +292,15 @@ Use as a lower triangular preconditioner.
 
 
 
-Definition at line \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00654}{654}} of file \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+preconditioner.\+h}}.
+Definition at line 654 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00679}{Method}}.
+References Method.
 
 
 
-Referenced by \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source_l00552}{oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Old\+::setup()}}.
+Referenced by oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Old\+::setup().
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_a3a6487cc895a4e3a3fe8f978024e116e}\label{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_a3a6487cc895a4e3a3fe8f978024e116e}} 
 \index{oomph::PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld@{oomph::PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld}!use\_upper\_triangular\_approximation@{use\_upper\_triangular\_approximation}}
@@ -314,15 +314,15 @@ Use as an upper triangular preconditioner.
 
 
 
-Definition at line \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00648}{648}} of file \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+preconditioner.\+h}}.
+Definition at line 648 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00679}{Method}}.
+References Method.
 
 
 
-Referenced by \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source_l00552}{oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Old\+::setup()}}.
+Referenced by oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Old\+::setup().
 
 
 
@@ -339,11 +339,11 @@ Referenced by \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source_l00552
 
 
 
-Definition at line \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00670}{670}} of file \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+preconditioner.\+h}}.
+Definition at line 670 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source_l00916}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source_l01045}{preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source_l00951}{setup()}}.
+Referenced by clean\+\_\+up\+\_\+memory(), preconditioner\+\_\+solve(), and setup().
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_a6b45cbf207717b9ffe326041f78ea85b}\label{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_a6b45cbf207717b9ffe326041f78ea85b}} 
 \index{oomph::PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld@{oomph::PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld}!Method@{Method}}
@@ -357,11 +357,11 @@ the preconditioning method. 0 -\/ block diagonal 1 -\/ upper triangular 2 -\/ lo
 
 
 
-Definition at line \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00679}{679}} of file \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+preconditioner.\+h}}.
+Definition at line 679 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source_l00916}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source_l01045}{preconditioner\+\_\+solve()}}, \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00596}{Pseudo\+Elastic\+Preconditioner\+Subsidiary\+Block\+Preconditioner\+Old()}}, \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source_l00951}{setup()}}, \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00642}{use\+\_\+block\+\_\+diagonal\+\_\+approximation()}}, \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00654}{use\+\_\+lower\+\_\+triangular\+\_\+approximation()}}, and \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00648}{use\+\_\+upper\+\_\+triangular\+\_\+approximation()}}.
+Referenced by clean\+\_\+up\+\_\+memory(), preconditioner\+\_\+solve(), Pseudo\+Elastic\+Preconditioner\+Subsidiary\+Block\+Preconditioner\+Old(), setup(), use\+\_\+block\+\_\+diagonal\+\_\+approximation(), use\+\_\+lower\+\_\+triangular\+\_\+approximation(), and use\+\_\+upper\+\_\+triangular\+\_\+approximation().
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_ac736d6b0390de55bb96cc9475a4cabac}\label{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_ac736d6b0390de55bb96cc9475a4cabac}} 
 \index{oomph::PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld@{oomph::PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld}!Off\_diagonal\_matrix\_vector\_products@{Off\_diagonal\_matrix\_vector\_products}}
@@ -375,11 +375,11 @@ Referenced by \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source_l00916
 
 
 
-Definition at line \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00673}{673}} of file \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+preconditioner.\+h}}.
+Definition at line 673 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source_l00916}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source_l01045}{preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source_l00951}{setup()}}.
+Referenced by clean\+\_\+up\+\_\+memory(), preconditioner\+\_\+solve(), and setup().
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_a588f4623c606d01c3e3feb3c09023f03}\label{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_a588f4623c606d01c3e3feb3c09023f03}} 
 \index{oomph::PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld@{oomph::PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld}!Scaling@{Scaling}}
@@ -393,17 +393,17 @@ The scaling. default 1.\+0.
 
 
 
-Definition at line \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00685}{685}} of file \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+preconditioner.\+h}}.
+Definition at line 685 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00596}{Pseudo\+Elastic\+Preconditioner\+Subsidiary\+Block\+Preconditioner\+Old()}}, \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00661}{scaling()}}, and \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source_l00951}{setup()}}.
+Referenced by Pseudo\+Elastic\+Preconditioner\+Subsidiary\+Block\+Preconditioner\+Old(), scaling(), and setup().
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_a376d5fd2ddf9f367854b41478a269ae2}\label{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_a376d5fd2ddf9f367854b41478a269ae2}} 
 \index{oomph::PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld@{oomph::PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld}!Subsidiary\_preconditioner\_function\_pt@{Subsidiary\_preconditioner\_function\_pt}}
 \index{Subsidiary\_preconditioner\_function\_pt@{Subsidiary\_preconditioner\_function\_pt}!oomph::PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld@{oomph::PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld}}
 \doxysubsubsection{\texorpdfstring{Subsidiary\_preconditioner\_function\_pt}{Subsidiary\_preconditioner\_function\_pt}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_ac76bcd0129f40fa71607fa5dbc1b4e66}{Subsidiary\+Preconditioner\+Fct\+Pt}} oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Subsidiary\+Block\+Preconditioner\+Old\+::\+Subsidiary\+\_\+preconditioner\+\_\+function\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld_a85f57923e70244d5fde0538946eb8c3d}{Subsidiary\+Preconditioner\+Fct\+Pt}} oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Subsidiary\+Block\+Preconditioner\+Old\+::\+Subsidiary\+\_\+preconditioner\+\_\+function\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -411,11 +411,11 @@ The Subisidary\+Preconditioner\+Fct\+Pt.
 
 
 
-Definition at line \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00682}{682}} of file \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+preconditioner.\+h}}.
+Definition at line 682 of file pseudo\+\_\+elastic\+\_\+preconditioner.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00596}{Pseudo\+Elastic\+Preconditioner\+Subsidiary\+Block\+Preconditioner\+Old()}}, \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00635}{set\+\_\+subsidiary\+\_\+preconditioner\+\_\+function()}}, and \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source_l00951}{setup()}}.
+Referenced by Pseudo\+Elastic\+Preconditioner\+Subsidiary\+Block\+Preconditioner\+Old(), set\+\_\+subsidiary\+\_\+preconditioner\+\_\+function(), and setup().
 
 
 

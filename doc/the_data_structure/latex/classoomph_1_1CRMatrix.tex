@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1CRMatrix}{}\doxysection{oomph\+::CRMatrix\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1CRMatrix}{}\doxysection{oomph\+::CRMatrix$<$ T $>$ Class Template Reference}
 \label{classoomph_1_1CRMatrix}\index{oomph::CRMatrix$<$ T $>$@{oomph::CRMatrix$<$ T $>$}}
 
 
@@ -9,7 +9,7 @@ A class for compressed row matrices, a sparse storage format Once again the recu
 
 {\ttfamily \#include $<$matrices.\+h$>$}
 
-Inheritance diagram for oomph\+::CRMatrix\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::CRMatrix$<$ T $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=3.000000cm]{classoomph_1_1CRMatrix}
@@ -20,7 +20,7 @@ Inheritance diagram for oomph\+::CRMatrix\texorpdfstring{$<$}{<} T \texorpdfstri
 \item 
 \mbox{\hyperlink{classoomph_1_1CRMatrix_a0b362175c2474a0531ed7b196681209b}{CRMatrix}} ()
 \begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1CRMatrix_afefb2869fd01835cd23a8db25b90148f}{CRMatrix}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ T $>$ \&\mbox{\hyperlink{classoomph_1_1SparseMatrix_a7a5b585410f9b23da6f269faa4a1db72}{value}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&column\+\_\+index\+\_\+, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&row\+\_\+start\+\_\+, const unsigned long \&n, const unsigned long \&m)
+\mbox{\hyperlink{classoomph_1_1CRMatrix_afefb2869fd01835cd23a8db25b90148f}{CRMatrix}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ T $>$ \&\mbox{\hyperlink{classoomph_1_1SparseMatrix_a3e382ff145082821a6b0b3e63b6aed5d}{value}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&column\+\_\+index\+\_\+, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&row\+\_\+start\+\_\+, const unsigned long \&n, const unsigned long \&m)
 \begin{DoxyCompactList}\small\item\em Constructor\+: Pass vector of values, vector of column indices, vector of row starts and number of rows and columns Number of nonzero entries is read off from value, so make sure the vector has been shrunk to its correct length. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1CRMatrix_a27b5182b560fd414bde62baf6fe7f519}{CRMatrix}} (const \mbox{\hyperlink{classoomph_1_1CRMatrix}{CRMatrix}} \&source\+\_\+matrix)
 \begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
@@ -30,15 +30,15 @@ virtual \mbox{\hyperlink{classoomph_1_1CRMatrix_ae0f73d8120305af7a20f6f7b64af054
 \begin{DoxyCompactList}\small\item\em Destructor, delete any allocated memory. \end{DoxyCompactList}\item 
 T \mbox{\hyperlink{classoomph_1_1CRMatrix_afc7fe758067c8ab3fe2dba96a4258492}{get\+\_\+entry}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned long \&j) const
 \begin{DoxyCompactList}\small\item\em Access function that will be called by the read-\/only round-\/bracket operator (const) \end{DoxyCompactList}\item 
-T \& \mbox{\hyperlink{classoomph_1_1CRMatrix_a41a047afd71ed5d6e3ed91489d213f51}{entry}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned long \&j)
+T \& \mbox{\hyperlink{classoomph_1_1CRMatrix_a5ad8bd622cd8929c4fea17cf057f0a73}{entry}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned long \&j)
 \begin{DoxyCompactList}\small\item\em The read-\/write access function is deliberately broken. \end{DoxyCompactList}\item 
-int $\ast$ \mbox{\hyperlink{classoomph_1_1CRMatrix_a8764aaff252eac12f2d822e62852d729}{row\+\_\+start}} ()
+int $\ast$ \mbox{\hyperlink{classoomph_1_1CRMatrix_a6210ebb3d384de9c3a289f5d841a0d7a}{row\+\_\+start}} ()
 \begin{DoxyCompactList}\small\item\em Access to C-\/style row\+\_\+start array. \end{DoxyCompactList}\item 
-const int $\ast$ \mbox{\hyperlink{classoomph_1_1CRMatrix_abfc044709ad160d0c9157f4301808438}{row\+\_\+start}} () const
+const int $\ast$ \mbox{\hyperlink{classoomph_1_1CRMatrix_a28d1d96e2259b0a3a8a4f8e4fb312947}{row\+\_\+start}} () const
 \begin{DoxyCompactList}\small\item\em Access to C-\/style row\+\_\+start array (const version) \end{DoxyCompactList}\item 
-int $\ast$ \mbox{\hyperlink{classoomph_1_1CRMatrix_a6102f6708bca13832e05d5914397a5f1}{column\+\_\+index}} ()
+int $\ast$ \mbox{\hyperlink{classoomph_1_1CRMatrix_aa6057d1c2a9a491f643e0633c778f8fb}{column\+\_\+index}} ()
 \begin{DoxyCompactList}\small\item\em Access to C-\/style column index array. \end{DoxyCompactList}\item 
-const int $\ast$ \mbox{\hyperlink{classoomph_1_1CRMatrix_af8720382a1f90276eaacb34649c4f4b7}{column\+\_\+index}} () const
+const int $\ast$ \mbox{\hyperlink{classoomph_1_1CRMatrix_a278c99924c90c8eaccc7c325685a3dc7}{column\+\_\+index}} () const
 \begin{DoxyCompactList}\small\item\em Access to C-\/style column index array (const version) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1CRMatrix_abf764862746afbbe2655a41bdf726327}{output\+\_\+bottom\+\_\+right\+\_\+zero\+\_\+helper}} (std\+::ostream \&outfile) const
 \begin{DoxyCompactList}\small\item\em Output the \char`\"{}bottom right\char`\"{} entry regardless of it being zero or not (this allows automatic detection of matrix size in e.\+g. matlab, python). \end{DoxyCompactList}\item 
@@ -46,9 +46,9 @@ void \mbox{\hyperlink{classoomph_1_1CRMatrix_af34167172020d60e5fa382e4bd5d6466}{
 \begin{DoxyCompactList}\small\item\em Indexed output function to print a matrix to the stream outfile as i,j,a(i,j) for a(i,j)!=0 only. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1CRMatrix_a14f6cf02e78e14afc9a50eb73c6d517a}{clean\+\_\+up\+\_\+memory}} ()
 \begin{DoxyCompactList}\small\item\em Wipe matrix data and set all values to 0. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1CRMatrix_a73e05d0fc4fe5fb402416b18f17316b8}{build}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ T $>$ \&\mbox{\hyperlink{classoomph_1_1SparseMatrix_a7a5b585410f9b23da6f269faa4a1db72}{value}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&\mbox{\hyperlink{classoomph_1_1CRMatrix_a6102f6708bca13832e05d5914397a5f1}{column\+\_\+index}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&\mbox{\hyperlink{classoomph_1_1CRMatrix_a8764aaff252eac12f2d822e62852d729}{row\+\_\+start}}, const unsigned long \&n, const unsigned long \&m)
+void \mbox{\hyperlink{classoomph_1_1CRMatrix_a73e05d0fc4fe5fb402416b18f17316b8}{build}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ T $>$ \&\mbox{\hyperlink{classoomph_1_1SparseMatrix_a3e382ff145082821a6b0b3e63b6aed5d}{value}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&\mbox{\hyperlink{classoomph_1_1CRMatrix_aa6057d1c2a9a491f643e0633c778f8fb}{column\+\_\+index}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&\mbox{\hyperlink{classoomph_1_1CRMatrix_a6210ebb3d384de9c3a289f5d841a0d7a}{row\+\_\+start}}, const unsigned long \&n, const unsigned long \&m)
 \begin{DoxyCompactList}\small\item\em Build matrix from compressed representation. Number of nonzero entries is read off from value, so make sure the vector has been shrunk to its correct length. This matrix forms the storage for CRDouble\+Matrices which are distributable. The argument n should be the number of local rows. The argument m is the number of columns. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1CRMatrix_aee41b01876f3b8ce9011e6fe7a332da6}{build\+\_\+without\+\_\+copy}} (T $\ast$\mbox{\hyperlink{classoomph_1_1SparseMatrix_a7a5b585410f9b23da6f269faa4a1db72}{value}}, int $\ast$\mbox{\hyperlink{classoomph_1_1CRMatrix_a6102f6708bca13832e05d5914397a5f1}{column\+\_\+index}}, int $\ast$\mbox{\hyperlink{classoomph_1_1CRMatrix_a8764aaff252eac12f2d822e62852d729}{row\+\_\+start}}, const unsigned long \&\mbox{\hyperlink{classoomph_1_1SparseMatrix_a8b8010edcc0869283621e72a9bbc51e3}{nnz}}, const unsigned long \&n, const unsigned long \&m)
+void \mbox{\hyperlink{classoomph_1_1CRMatrix_aee41b01876f3b8ce9011e6fe7a332da6}{build\+\_\+without\+\_\+copy}} (T $\ast$\mbox{\hyperlink{classoomph_1_1SparseMatrix_a3e382ff145082821a6b0b3e63b6aed5d}{value}}, int $\ast$\mbox{\hyperlink{classoomph_1_1CRMatrix_aa6057d1c2a9a491f643e0633c778f8fb}{column\+\_\+index}}, int $\ast$\mbox{\hyperlink{classoomph_1_1CRMatrix_a6210ebb3d384de9c3a289f5d841a0d7a}{row\+\_\+start}}, const unsigned long \&\mbox{\hyperlink{classoomph_1_1SparseMatrix_a8b8010edcc0869283621e72a9bbc51e3}{nnz}}, const unsigned long \&n, const unsigned long \&m)
 \begin{DoxyCompactList}\small\item\em Function to build matrix from pointers to arrays which hold the row starts, column indices and non-\/zero values. The final two arguments are the number of rows and columns. Note that, as the name suggests, this function does not make a copy of the data pointed to by the first three arguments! \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -63,9 +63,10 @@ int $\ast$ \mbox{\hyperlink{classoomph_1_1CRMatrix_a6d2a0db8650e65c9278febe27fee
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class T$>$\newline
 class oomph\+::\+CRMatrix$<$ T $>$}
+
 A class for compressed row matrices, a sparse storage format Once again the recursive template trick is used to inform that base class that is should use the access functions provided in the \mbox{\hyperlink{classoomph_1_1CRMatrix}{CRMatrix}} class. 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l00681}{681}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 681 of file matrices.\+h.
 
 
 
@@ -83,11 +84,11 @@ Default constructor.
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l00685}{685}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 685 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l00870}{oomph\+::\+CRMatrix$<$ T $>$\+::\+Column\+\_\+index}}, and \mbox{\hyperlink{matrices_8h_source_l00873}{oomph\+::\+CRMatrix$<$ T $>$\+::\+Row\+\_\+start}}.
+References oomph\+::\+CRMatrix$<$ T $>$\+::\+Column\+\_\+index, and oomph\+::\+CRMatrix$<$ T $>$\+::\+Row\+\_\+start.
 
 \mbox{\Hypertarget{classoomph_1_1CRMatrix_afefb2869fd01835cd23a8db25b90148f}\label{classoomph_1_1CRMatrix_afefb2869fd01835cd23a8db25b90148f}} 
 \index{oomph::CRMatrix$<$ T $>$@{oomph::CRMatrix$<$ T $>$}!CRMatrix@{CRMatrix}}
@@ -102,11 +103,11 @@ Constructor\+: Pass vector of values, vector of column indices, vector of row st
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l00697}{697}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 697 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l03404}{oomph\+::\+CRMatrix$<$ T $>$\+::build()}}, \mbox{\hyperlink{matrices_8h_source_l00870}{oomph\+::\+CRMatrix$<$ T $>$\+::\+Column\+\_\+index}}, \mbox{\hyperlink{matrices_8h_source_l00873}{oomph\+::\+CRMatrix$<$ T $>$\+::\+Row\+\_\+start}}, and \mbox{\hyperlink{matrices_8h_source_l00616}{oomph\+::\+Sparse\+Matrix$<$ T, CRMatrix$<$ T $>$ $>$\+::value()}}.
+References oomph\+::\+CRMatrix$<$ T $>$\+::build(), oomph\+::\+CRMatrix$<$ T $>$\+::\+Column\+\_\+index, oomph\+::\+CRMatrix$<$ T $>$\+::\+Row\+\_\+start, and oomph\+::\+Sparse\+Matrix$<$ T, CRMatrix$<$ T $>$ $>$\+::value().
 
 \mbox{\Hypertarget{classoomph_1_1CRMatrix_a27b5182b560fd414bde62baf6fe7f519}\label{classoomph_1_1CRMatrix_a27b5182b560fd414bde62baf6fe7f519}} 
 \index{oomph::CRMatrix$<$ T $>$@{oomph::CRMatrix$<$ T $>$}!CRMatrix@{CRMatrix}}
@@ -121,11 +122,11 @@ Copy constructor.
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l00710}{710}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 710 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l00797}{oomph\+::\+CRMatrix$<$ T $>$\+::column\+\_\+index()}}, \mbox{\hyperlink{matrices_8h_source_l00870}{oomph\+::\+CRMatrix$<$ T $>$\+::\+Column\+\_\+index}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l00568}{oomph\+::\+Sparse\+Matrix$<$ T, CRMatrix$<$ T $>$ $>$\+::N}}, \mbox{\hyperlink{matrices_8h_source_l00574}{oomph\+::\+Sparse\+Matrix$<$ T, CRMatrix$<$ T $>$ $>$\+::\+Nnz}}, \mbox{\hyperlink{matrices_8h_source_l00785}{oomph\+::\+CRMatrix$<$ T $>$\+::row\+\_\+start()}}, and \mbox{\hyperlink{matrices_8h_source_l00873}{oomph\+::\+CRMatrix$<$ T $>$\+::\+Row\+\_\+start}}.
+References oomph\+::\+CRMatrix$<$ T $>$\+::column\+\_\+index(), oomph\+::\+CRMatrix$<$ T $>$\+::\+Column\+\_\+index, i, oomph\+::\+Sparse\+Matrix$<$ T, CRMatrix$<$ T $>$ $>$\+::N, oomph\+::\+Sparse\+Matrix$<$ T, CRMatrix$<$ T $>$ $>$\+::\+Nnz, oomph\+::\+CRMatrix$<$ T $>$\+::row\+\_\+start(), and oomph\+::\+CRMatrix$<$ T $>$\+::\+Row\+\_\+start.
 
 \mbox{\Hypertarget{classoomph_1_1CRMatrix_ae0f73d8120305af7a20f6f7b64af0547}\label{classoomph_1_1CRMatrix_ae0f73d8120305af7a20f6f7b64af0547}} 
 \index{oomph::CRMatrix$<$ T $>$@{oomph::CRMatrix$<$ T $>$}!````~CRMatrix@{$\sim$CRMatrix}}
@@ -140,11 +141,11 @@ Destructor, delete any allocated memory.
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l00738}{738}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 738 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l00870}{oomph\+::\+CRMatrix$<$ T $>$\+::\+Column\+\_\+index}}, and \mbox{\hyperlink{matrices_8h_source_l00873}{oomph\+::\+CRMatrix$<$ T $>$\+::\+Row\+\_\+start}}.
+References oomph\+::\+CRMatrix$<$ T $>$\+::\+Column\+\_\+index, and oomph\+::\+CRMatrix$<$ T $>$\+::\+Row\+\_\+start.
 
 
 
@@ -162,15 +163,15 @@ Build matrix from compressed representation. Number of nonzero entries is read o
 
 Build matrix from compressed representation. Number of nonzero entries is read off from value, so make sure the vector has been shrunk to its correct length. The optional final parameter specifies the number of columns. If it is not specified the matrix is assumed to be quadratic. 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l03404}{3404}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 3404 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, and \mbox{\hyperlink{elements_8h_source_l01242}{oomph\+::\+Element\+Geometry\+::T}}.
+References i, oomph\+::\+Quad\+Tree\+Names\+::N, and oomph\+::\+Element\+Geometry\+::T.
 
 
 
-Referenced by \mbox{\hyperlink{matrices_8h_source_l00697}{oomph\+::\+CRMatrix$<$ T $>$\+::\+CRMatrix()}}.
+Referenced by oomph\+::\+CRComplex\+Matrix\+::add(), oomph\+::\+CRDouble\+Matrix\+::build(), oomph\+::\+CRDouble\+Matrix\+::\+CRDouble\+Matrix(), and oomph\+::\+CRMatrix$<$ T $>$\+::\+CRMatrix().
 
 \mbox{\Hypertarget{classoomph_1_1CRMatrix_aee41b01876f3b8ce9011e6fe7a332da6}\label{classoomph_1_1CRMatrix_aee41b01876f3b8ce9011e6fe7a332da6}} 
 \index{oomph::CRMatrix$<$ T $>$@{oomph::CRMatrix$<$ T $>$}!build\_without\_copy@{build\_without\_copy}}
@@ -185,11 +186,15 @@ Function to build matrix from pointers to arrays which hold the row starts, colu
 
 Function to build a \mbox{\hyperlink{classoomph_1_1CRMatrix}{CRMatrix}} from pointers to arrays which hold the row starts, column indices and non-\/zero values Note that, as the name suggests, this function does not make a copy of the data pointed to by the first three arguments! 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l03354}{3354}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 3354 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}.
+References oomph\+::\+Quad\+Tree\+Names\+::N.
+
+
+
+Referenced by oomph\+::\+CRDouble\+Matrix\+::build\+\_\+without\+\_\+copy(), and oomph\+::\+CRComplex\+Matrix\+::multiply().
 
 \mbox{\Hypertarget{classoomph_1_1CRMatrix_a14f6cf02e78e14afc9a50eb73c6d517a}\label{classoomph_1_1CRMatrix_a14f6cf02e78e14afc9a50eb73c6d517a}} 
 \index{oomph::CRMatrix$<$ T $>$@{oomph::CRMatrix$<$ T $>$}!clean\_up\_memory@{clean\_up\_memory}}
@@ -206,18 +211,22 @@ Wipe matrix data and set all values to 0.
 
 Wipe matrix data and set all values to 0. 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l03323}{3323}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 3323 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}.
+References oomph\+::\+Quad\+Tree\+Names\+::N.
 
-\mbox{\Hypertarget{classoomph_1_1CRMatrix_a6102f6708bca13832e05d5914397a5f1}\label{classoomph_1_1CRMatrix_a6102f6708bca13832e05d5914397a5f1}} 
+
+
+Referenced by oomph\+::\+CRDouble\+Matrix\+::build(), oomph\+::\+CRDouble\+Matrix\+::build\+\_\+without\+\_\+copy(), and oomph\+::\+CRDouble\+Matrix\+::clear().
+
+\mbox{\Hypertarget{classoomph_1_1CRMatrix_aa6057d1c2a9a491f643e0633c778f8fb}\label{classoomph_1_1CRMatrix_aa6057d1c2a9a491f643e0633c778f8fb}} 
 \index{oomph::CRMatrix$<$ T $>$@{oomph::CRMatrix$<$ T $>$}!column\_index@{column\_index}}
 \index{column\_index@{column\_index}!oomph::CRMatrix$<$ T $>$@{oomph::CRMatrix$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{column\_index()}{column\_index()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$class T $>$ \\
-int $\ast$ \mbox{\hyperlink{classoomph_1_1CRMatrix}{oomph\+::\+CRMatrix}}$<$ T $>$\+::column\+\_\+index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+int$\ast$ \mbox{\hyperlink{classoomph_1_1CRMatrix}{oomph\+::\+CRMatrix}}$<$ T $>$\+::column\+\_\+index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -225,22 +234,22 @@ Access to C-\/style column index array.
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l00797}{797}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 797 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l00870}{oomph\+::\+CRMatrix$<$ T $>$\+::\+Column\+\_\+index}}.
+References oomph\+::\+CRMatrix$<$ T $>$\+::\+Column\+\_\+index.
 
 
 
-Referenced by \mbox{\hyperlink{matrices_8h_source_l00710}{oomph\+::\+CRMatrix$<$ T $>$\+::\+CRMatrix()}}.
+Referenced by oomph\+::\+CRComplex\+Matrix\+::add(), oomph\+::\+CRDouble\+Matrix\+::column\+\_\+index(), oomph\+::\+CRMatrix$<$ T $>$\+::\+CRMatrix(), oomph\+::\+CRDouble\+Matrix\+::matrix\+\_\+reduction(), oomph\+::\+CRComplex\+Matrix\+::multiply(), oomph\+::\+CRDouble\+Matrix\+::multiply(), and oomph\+::\+CRDouble\+Matrix\+::multiply\+\_\+transpose().
 
-\mbox{\Hypertarget{classoomph_1_1CRMatrix_af8720382a1f90276eaacb34649c4f4b7}\label{classoomph_1_1CRMatrix_af8720382a1f90276eaacb34649c4f4b7}} 
+\mbox{\Hypertarget{classoomph_1_1CRMatrix_a278c99924c90c8eaccc7c325685a3dc7}\label{classoomph_1_1CRMatrix_a278c99924c90c8eaccc7c325685a3dc7}} 
 \index{oomph::CRMatrix$<$ T $>$@{oomph::CRMatrix$<$ T $>$}!column\_index@{column\_index}}
 \index{column\_index@{column\_index}!oomph::CRMatrix$<$ T $>$@{oomph::CRMatrix$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{column\_index()}{column\_index()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$class T $>$ \\
-const int $\ast$ \mbox{\hyperlink{classoomph_1_1CRMatrix}{oomph\+::\+CRMatrix}}$<$ T $>$\+::column\+\_\+index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+const int$\ast$ \mbox{\hyperlink{classoomph_1_1CRMatrix}{oomph\+::\+CRMatrix}}$<$ T $>$\+::column\+\_\+index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -248,18 +257,18 @@ Access to C-\/style column index array (const version)
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l00803}{803}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 803 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l00870}{oomph\+::\+CRMatrix$<$ T $>$\+::\+Column\+\_\+index}}.
+References oomph\+::\+CRMatrix$<$ T $>$\+::\+Column\+\_\+index.
 
-\mbox{\Hypertarget{classoomph_1_1CRMatrix_a41a047afd71ed5d6e3ed91489d213f51}\label{classoomph_1_1CRMatrix_a41a047afd71ed5d6e3ed91489d213f51}} 
+\mbox{\Hypertarget{classoomph_1_1CRMatrix_a5ad8bd622cd8929c4fea17cf057f0a73}\label{classoomph_1_1CRMatrix_a5ad8bd622cd8929c4fea17cf057f0a73}} 
 \index{oomph::CRMatrix$<$ T $>$@{oomph::CRMatrix$<$ T $>$}!entry@{entry}}
 \index{entry@{entry}!oomph::CRMatrix$<$ T $>$@{oomph::CRMatrix$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{entry()}{entry()}}
 {\footnotesize\ttfamily template$<$class T $>$ \\
-T \& \mbox{\hyperlink{classoomph_1_1CRMatrix}{oomph\+::\+CRMatrix}}$<$ T $>$\+::entry (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i,  }\item[{const unsigned long \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+T\& \mbox{\hyperlink{classoomph_1_1CRMatrix}{oomph\+::\+CRMatrix}}$<$ T $>$\+::entry (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i,  }\item[{const unsigned long \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -267,11 +276,11 @@ The read-\/write access function is deliberately broken.
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l00764}{764}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 764 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, and \mbox{\hyperlink{elements_8h_source_l01242}{oomph\+::\+Element\+Geometry\+::T}}.
+References oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), and oomph\+::\+Element\+Geometry\+::T.
 
 \mbox{\Hypertarget{classoomph_1_1CRMatrix_afc7fe758067c8ab3fe2dba96a4258492}\label{classoomph_1_1CRMatrix_afc7fe758067c8ab3fe2dba96a4258492}} 
 \index{oomph::CRMatrix$<$ T $>$@{oomph::CRMatrix$<$ T $>$}!get\_entry@{get\_entry}}
@@ -286,11 +295,15 @@ Access function that will be called by the read-\/only round-\/bracket operator 
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l00748}{748}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 748 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l00870}{oomph\+::\+CRMatrix$<$ T $>$\+::\+Column\+\_\+index}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l00078}{oomph\+::\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::range\+\_\+check()}}, \mbox{\hyperlink{matrices_8h_source_l00873}{oomph\+::\+CRMatrix$<$ T $>$\+::\+Row\+\_\+start}}, \mbox{\hyperlink{matrices_8h_source_l00565}{oomph\+::\+Sparse\+Matrix$<$ T, CRMatrix$<$ T $>$ $>$\+::\+Value}}, and \mbox{\hyperlink{matrices_8h_source_l00577}{oomph\+::\+Sparse\+Matrix$<$ T, CRMatrix$<$ T $>$ $>$\+::\+Zero}}.
+References oomph\+::\+CRMatrix$<$ T $>$\+::\+Column\+\_\+index, i, oomph\+::\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::range\+\_\+check(), oomph\+::\+CRMatrix$<$ T $>$\+::\+Row\+\_\+start, oomph\+::\+Sparse\+Matrix$<$ T, CRMatrix$<$ T $>$ $>$\+::\+Value, and oomph\+::\+Sparse\+Matrix$<$ T, CRMatrix$<$ T $>$ $>$\+::\+Zero.
+
+
+
+Referenced by oomph\+::\+CRDouble\+Matrix\+::diagonal\+\_\+entries(), and oomph\+::\+CRDouble\+Matrix\+::operator()().
 
 \mbox{\Hypertarget{classoomph_1_1CRMatrix_a917b997c472d83f060397da610e5c061}\label{classoomph_1_1CRMatrix_a917b997c472d83f060397da610e5c061}} 
 \index{oomph::CRMatrix$<$ T $>$@{oomph::CRMatrix$<$ T $>$}!operator=@{operator=}}
@@ -320,18 +333,22 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SparseMatrix_a4c638f36db786e15
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l00811}{811}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 811 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l00571}{oomph\+::\+Sparse\+Matrix$<$ T, CRMatrix$<$ T $>$ $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l00568}{oomph\+::\+Sparse\+Matrix$<$ T, CRMatrix$<$ T $>$ $>$\+::N}}, \mbox{\hyperlink{matrices_8h_source_l00128}{oomph\+::\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::operator()()}}, and \mbox{\hyperlink{elements_8h_source_l01242}{oomph\+::\+Element\+Geometry\+::T}}.
+References oomph\+::\+Sparse\+Matrix$<$ T, CRMatrix$<$ T $>$ $>$\+::M, oomph\+::\+Sparse\+Matrix$<$ T, CRMatrix$<$ T $>$ $>$\+::N, oomph\+::\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::operator()(), and oomph\+::\+Element\+Geometry\+::T.
 
-\mbox{\Hypertarget{classoomph_1_1CRMatrix_a8764aaff252eac12f2d822e62852d729}\label{classoomph_1_1CRMatrix_a8764aaff252eac12f2d822e62852d729}} 
+
+
+Referenced by oomph\+::\+CRDouble\+Matrix\+::output\+\_\+bottom\+\_\+right\+\_\+zero\+\_\+helper().
+
+\mbox{\Hypertarget{classoomph_1_1CRMatrix_a6210ebb3d384de9c3a289f5d841a0d7a}\label{classoomph_1_1CRMatrix_a6210ebb3d384de9c3a289f5d841a0d7a}} 
 \index{oomph::CRMatrix$<$ T $>$@{oomph::CRMatrix$<$ T $>$}!row\_start@{row\_start}}
 \index{row\_start@{row\_start}!oomph::CRMatrix$<$ T $>$@{oomph::CRMatrix$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{row\_start()}{row\_start()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$class T $>$ \\
-int $\ast$ \mbox{\hyperlink{classoomph_1_1CRMatrix}{oomph\+::\+CRMatrix}}$<$ T $>$\+::row\+\_\+start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+int$\ast$ \mbox{\hyperlink{classoomph_1_1CRMatrix}{oomph\+::\+CRMatrix}}$<$ T $>$\+::row\+\_\+start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -339,22 +356,22 @@ Access to C-\/style row\+\_\+start array.
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l00785}{785}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 785 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l00873}{oomph\+::\+CRMatrix$<$ T $>$\+::\+Row\+\_\+start}}.
+References oomph\+::\+CRMatrix$<$ T $>$\+::\+Row\+\_\+start.
 
 
 
-Referenced by \mbox{\hyperlink{matrices_8h_source_l00710}{oomph\+::\+CRMatrix$<$ T $>$\+::\+CRMatrix()}}.
+Referenced by oomph\+::\+CRComplex\+Matrix\+::add(), oomph\+::\+CRMatrix$<$ T $>$\+::\+CRMatrix(), oomph\+::\+CRDouble\+Matrix\+::inf\+\_\+norm(), oomph\+::\+CRDouble\+Matrix\+::matrix\+\_\+reduction(), oomph\+::\+CRComplex\+Matrix\+::multiply(), oomph\+::\+CRDouble\+Matrix\+::multiply(), oomph\+::\+CRDouble\+Matrix\+::multiply\+\_\+transpose(), and oomph\+::\+CRDouble\+Matrix\+::row\+\_\+start().
 
-\mbox{\Hypertarget{classoomph_1_1CRMatrix_abfc044709ad160d0c9157f4301808438}\label{classoomph_1_1CRMatrix_abfc044709ad160d0c9157f4301808438}} 
+\mbox{\Hypertarget{classoomph_1_1CRMatrix_a28d1d96e2259b0a3a8a4f8e4fb312947}\label{classoomph_1_1CRMatrix_a28d1d96e2259b0a3a8a4f8e4fb312947}} 
 \index{oomph::CRMatrix$<$ T $>$@{oomph::CRMatrix$<$ T $>$}!row\_start@{row\_start}}
 \index{row\_start@{row\_start}!oomph::CRMatrix$<$ T $>$@{oomph::CRMatrix$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{row\_start()}{row\_start()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$class T $>$ \\
-const int $\ast$ \mbox{\hyperlink{classoomph_1_1CRMatrix}{oomph\+::\+CRMatrix}}$<$ T $>$\+::row\+\_\+start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+const int$\ast$ \mbox{\hyperlink{classoomph_1_1CRMatrix}{oomph\+::\+CRMatrix}}$<$ T $>$\+::row\+\_\+start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -362,11 +379,11 @@ Access to C-\/style row\+\_\+start array (const version)
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l00791}{791}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 791 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l00873}{oomph\+::\+CRMatrix$<$ T $>$\+::\+Row\+\_\+start}}.
+References oomph\+::\+CRMatrix$<$ T $>$\+::\+Row\+\_\+start.
 
 \mbox{\Hypertarget{classoomph_1_1CRMatrix_af34167172020d60e5fa382e4bd5d6466}\label{classoomph_1_1CRMatrix_af34167172020d60e5fa382e4bd5d6466}} 
 \index{oomph::CRMatrix$<$ T $>$@{oomph::CRMatrix$<$ T $>$}!sparse\_indexed\_output\_helper@{sparse\_indexed\_output\_helper}}
@@ -385,11 +402,15 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SparseMatrix_a84a08f7e77be50af
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l00828}{828}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 828 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l00870}{oomph\+::\+CRMatrix$<$ T $>$\+::\+Column\+\_\+index}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l00568}{oomph\+::\+Sparse\+Matrix$<$ T, CRMatrix$<$ T $>$ $>$\+::N}}, \mbox{\hyperlink{matrices_8h_source_l00873}{oomph\+::\+CRMatrix$<$ T $>$\+::\+Row\+\_\+start}}, and \mbox{\hyperlink{matrices_8h_source_l00565}{oomph\+::\+Sparse\+Matrix$<$ T, CRMatrix$<$ T $>$ $>$\+::\+Value}}.
+References oomph\+::\+CRMatrix$<$ T $>$\+::\+Column\+\_\+index, i, oomph\+::\+Sparse\+Matrix$<$ T, CRMatrix$<$ T $>$ $>$\+::N, oomph\+::\+CRMatrix$<$ T $>$\+::\+Row\+\_\+start, and oomph\+::\+Sparse\+Matrix$<$ T, CRMatrix$<$ T $>$ $>$\+::\+Value.
+
+
+
+Referenced by oomph\+::\+CRDouble\+Matrix\+::sparse\+\_\+indexed\+\_\+output\+\_\+helper().
 
 
 
@@ -407,11 +428,11 @@ Column index.
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l00870}{870}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 870 of file matrices.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{matrices_8h_source_l00797}{oomph\+::\+CRMatrix$<$ T $>$\+::column\+\_\+index()}}, \mbox{\hyperlink{matrices_8h_source_l00685}{oomph\+::\+CRMatrix$<$ T $>$\+::\+CRMatrix()}}, \mbox{\hyperlink{matrices_8h_source_l00748}{oomph\+::\+CRMatrix$<$ T $>$\+::get\+\_\+entry()}}, \mbox{\hyperlink{matrices_8h_source_l00828}{oomph\+::\+CRMatrix$<$ T $>$\+::sparse\+\_\+indexed\+\_\+output\+\_\+helper()}}, and \mbox{\hyperlink{matrices_8h_source_l00738}{oomph\+::\+CRMatrix$<$ T $>$\+::$\sim$\+CRMatrix()}}.
+Referenced by oomph\+::\+CRMatrix$<$ T $>$\+::column\+\_\+index(), oomph\+::\+CRMatrix$<$ T $>$\+::\+CRMatrix(), oomph\+::\+CRMatrix$<$ T $>$\+::get\+\_\+entry(), oomph\+::\+CRMatrix$<$ T $>$\+::sparse\+\_\+indexed\+\_\+output\+\_\+helper(), and oomph\+::\+CRMatrix$<$ T $>$\+::$\sim$\+CRMatrix().
 
 \mbox{\Hypertarget{classoomph_1_1CRMatrix_a6d2a0db8650e65c9278febe27feeb22e}\label{classoomph_1_1CRMatrix_a6d2a0db8650e65c9278febe27feeb22e}} 
 \index{oomph::CRMatrix$<$ T $>$@{oomph::CRMatrix$<$ T $>$}!Row\_start@{Row\_start}}
@@ -426,11 +447,11 @@ Start index for row.
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l00873}{873}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 873 of file matrices.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{matrices_8h_source_l00685}{oomph\+::\+CRMatrix$<$ T $>$\+::\+CRMatrix()}}, \mbox{\hyperlink{matrices_8h_source_l00748}{oomph\+::\+CRMatrix$<$ T $>$\+::get\+\_\+entry()}}, \mbox{\hyperlink{matrices_8h_source_l00785}{oomph\+::\+CRMatrix$<$ T $>$\+::row\+\_\+start()}}, \mbox{\hyperlink{matrices_8h_source_l00828}{oomph\+::\+CRMatrix$<$ T $>$\+::sparse\+\_\+indexed\+\_\+output\+\_\+helper()}}, and \mbox{\hyperlink{matrices_8h_source_l00738}{oomph\+::\+CRMatrix$<$ T $>$\+::$\sim$\+CRMatrix()}}.
+Referenced by oomph\+::\+CRMatrix$<$ T $>$\+::\+CRMatrix(), oomph\+::\+CRMatrix$<$ T $>$\+::get\+\_\+entry(), oomph\+::\+CRMatrix$<$ T $>$\+::row\+\_\+start(), oomph\+::\+CRMatrix$<$ T $>$\+::sparse\+\_\+indexed\+\_\+output\+\_\+helper(), and oomph\+::\+CRMatrix$<$ T $>$\+::$\sim$\+CRMatrix().
 
 
 

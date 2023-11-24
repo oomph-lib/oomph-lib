@@ -43,7 +43,7 @@ As usual, we define a namespace, {\ttfamily \mbox{\hyperlink{namespaceGlobal__Ph
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_namespace==========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Global variables}}
-\DoxyCodeLine{\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -71,7 +71,7 @@ Next, we define a function that defines the constant pressure load on the upper 
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Uniform pressure}}
+\DoxyCodeLine{ \textcolor{comment}{/// Uniform pressure}}
 \DoxyCodeLine{ \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a23c2ade6398f54040b869f7f3a2bcc4b}{P}} = 0.0;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Constant pressure load. The arguments to this function are imposed}}
@@ -94,7 +94,7 @@ Next, we define a function that defines the constant pressure load on the upper 
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Non-\/dim gravity}}
+\DoxyCodeLine{ \textcolor{comment}{/// Non-\/dim gravity}}
 \DoxyCodeLine{ \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b80d3e8d63b8d0a0ed435a2dd7fe2ad}{Gravity}}=0.0;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Non-\/dimensional gravity as body force}}
@@ -119,8 +119,8 @@ The driver code is very short. We start by building a {\ttfamily Generalised\+Ho
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_main==================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Driver for cantilever beam loaded by surface traction and/or}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// gravity}}
+\DoxyCodeLine{\textcolor{comment}{/// Driver for cantilever beam loaded by surface traction and/or}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// gravity}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{airy__cantilever_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
 \DoxyCodeLine{\{}
@@ -192,7 +192,7 @@ The problem class contains the usual member functions, including separate access
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=============begin\_problem============================================ }}
 \DoxyCodeLine{\textcolor{comment}{/// Problem class for the cantilever "{}beam"{} structure.}}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================== }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================== }}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classCantileverProblem}{CantileverProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -209,11 +209,11 @@ The problem class contains the usual member functions, including separate access
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classCantileverProblem_a293902b825898ce043ffce3f0691f5a5}{actions\_before\_newton\_solve}}() \{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Access function for the solid mesh}}
-\DoxyCodeLine{\textcolor{comment}{} ElasticRefineableRectangularQuadMesh<ELEMENT>*\& \mbox{\hyperlink{classCantileverProblem_a98c2d3b5e195f53b4fdd8d1698593ee0}{solid\_mesh\_pt}}() }
+\DoxyCodeLine{\textcolor{comment}{} ElasticRefineableRectangularQuadMesh<ELEMENT>*\& \mbox{\hyperlink{classCantileverProblem_a26843782873897ee5e45647d17204b86}{solid\_mesh\_pt}}() }
 \DoxyCodeLine{  \{\textcolor{keywordflow}{return} \mbox{\hyperlink{classCantileverProblem_a263ff19e4aa0fa4391582242763f08f1}{Solid\_mesh\_pt}};\} }
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Access function to the mesh of surface traction elements}}
-\DoxyCodeLine{\textcolor{comment}{} SolidMesh*\& \mbox{\hyperlink{classCantileverProblem_a0f879b58f7b2ed17ef1c7105b2d9c9b4}{traction\_mesh\_pt}}()\{\textcolor{keywordflow}{return} \mbox{\hyperlink{classCantileverProblem_a52485434aab5d653010c48a0b0f89088}{Traction\_mesh\_pt}};\} }
+\DoxyCodeLine{\textcolor{comment}{} SolidMesh*\& \mbox{\hyperlink{classCantileverProblem_af9e9b4a4686ac29bc7e4ef5d6baeae5a}{traction\_mesh\_pt}}()\{\textcolor{keywordflow}{return} \mbox{\hyperlink{classCantileverProblem_a52485434aab5d653010c48a0b0f89088}{Traction\_mesh\_pt}};\} }
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Actions before adapt: Wipe the mesh of traction elements}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classCantileverProblem_a50f8964219c507562945655e0ed5fc23}{actions\_before\_adapt}}();}
@@ -269,7 +269,7 @@ The constructor builds the bulk mesh (the standard {\ttfamily Refineable\+Rectan
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===========start\_of\_constructor======================================= }}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor: }}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================== }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================== }}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classCantileverProblem_abba97fc4b8402bc0363fdf16322f6572}{CantileverProblem<ELEMENT>::CantileverProblem}}() }
 \DoxyCodeLine{\{}
@@ -410,7 +410,7 @@ Following our usual procedure, we delete the {\ttfamily Solid\+Traction\+Element
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====================start\_of\_actions\_before\_adapt======================}}
 \DoxyCodeLine{\textcolor{comment}{/// Actions before adapt: Wipe the mesh of traction elements}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classCantileverProblem_a50f8964219c507562945655e0ed5fc23}{CantileverProblem<ELEMENT>::actions\_before\_adapt}}()}
 \DoxyCodeLine{\{}
@@ -434,7 +434,7 @@ The {\ttfamily Solid\+Traction\+Elements} are re-\/attached after the mesh adapt
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====================start\_of\_actions\_after\_adapt=======================}}
 \DoxyCodeLine{\textcolor{comment}{///  Actions after adapt: Rebuild the mesh of traction elements}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classCantileverProblem_af4d135ace3eac657b38de362e1644c75}{CantileverProblem<ELEMENT>::actions\_after\_adapt}}()}
 \DoxyCodeLine{\{}
@@ -465,8 +465,8 @@ The helper function {\ttfamily set\+\_\+traction\+\_\+pt()} is used to pass the 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==================start\_of\_set\_traction\_pt==============================}}
-\DoxyCodeLine{\textcolor{comment}{/// Set pointer to traction function for the relevant}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// elements in the traction mesh}}
+\DoxyCodeLine{\textcolor{comment}{/// Set pointer to traction function for the relevant}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// elements in the traction mesh}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classCantileverProblem_a96a9716947a15930f3881fcec6d448e2}{CantileverProblem<ELEMENT>::set\_traction\_pt}}()}
@@ -497,7 +497,7 @@ The helper function {\ttfamily create\+\_\+traction\+\_\+elements()} is used to 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_traction\_elements==============================}}
 \DoxyCodeLine{\textcolor{comment}{/// Create traction elements }}
-\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classCantileverProblem_abb6f19d964d96a531bf1a60732c72ce9}{CantileverProblem<ELEMENT>::create\_traction\_elements}}()}
 \DoxyCodeLine{\{}
@@ -537,7 +537,7 @@ The helper function {\ttfamily delete\+\_\+traction\+\_\+elements()} is used to 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_delete\_traction\_elements==============================}}
 \DoxyCodeLine{\textcolor{comment}{/// Delete traction elements and wipe the  traction meshes}}
-\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classCantileverProblem_aeb64122ce3783bf36df3696c41e5d2a5}{CantileverProblem<ELEMENT>::delete\_traction\_elements}}()}
 \DoxyCodeLine{\{}
@@ -566,7 +566,7 @@ The post-\/processing function {\ttfamily doc\+\_\+solution()} outputs the finit
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==============start\_doc===========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{//==================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classCantileverProblem_a7571348f8724e71be4e67dc64cea3877}{CantileverProblem<ELEMENT>::doc\_solution}}()}
 \DoxyCodeLine{\{}
@@ -703,8 +703,8 @@ Here is the implementation\+: The \char`\"{}wrapping\char`\"{} element inherits 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=================start\_wrapper==================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Wrapper class for solid elements to modify their output }\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// functions.}}
+\DoxyCodeLine{\textcolor{comment}{/// Wrapper class for solid elements to modify their output }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// functions.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }MySolidElement : \textcolor{keyword}{public} \textcolor{keyword}{virtual} ELEMENT}
@@ -788,7 +788,7 @@ Finally we declare that the {\ttfamily Face\+Geometry} of the \char`\"{}wrapped\
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===========start\_face\_geometry==============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// FaceGeometry of wrapped element is the same as the underlying element}}
-\DoxyCodeLine{\textcolor{comment}{//============================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//============================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }FaceGeometry<MySolidElement<ELEMENT> > :}
 \DoxyCodeLine{ \textcolor{keyword}{public} \textcolor{keyword}{virtual} FaceGeometry<ELEMENT>}

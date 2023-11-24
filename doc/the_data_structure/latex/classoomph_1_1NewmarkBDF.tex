@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1NewmarkBDF}{}\doxysection{oomph\+::Newmark\+BDF\texorpdfstring{$<$}{<} NSTEPS \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1NewmarkBDF}{}\doxysection{oomph\+::Newmark\+BDF$<$ NSTEPS $>$ Class Template Reference}
 \label{classoomph_1_1NewmarkBDF}\index{oomph::NewmarkBDF$<$ NSTEPS $>$@{oomph::NewmarkBDF$<$ NSTEPS $>$}}
 
 
@@ -9,7 +9,7 @@
 
 {\ttfamily \#include $<$timesteppers.\+h$>$}
 
-Inheritance diagram for oomph\+::Newmark\+BDF\texorpdfstring{$<$}{<} NSTEPS \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Newmark\+BDF$<$ NSTEPS $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=3.000000cm]{classoomph_1_1NewmarkBDF}
@@ -58,21 +58,22 @@ bool \mbox{\hyperlink{classoomph_1_1NewmarkBDF_a772c06965e20fdbe72520024c845131a
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$unsigned NSTEPS$>$\newline
 class oomph\+::\+Newmark\+BDF$<$ NSTEPS $>$}
+
 ////////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////// 
 
 \mbox{\hyperlink{classoomph_1_1Newmark}{Newmark}} scheme for second time deriv with first derivatives calculated using \mbox{\hyperlink{classoomph_1_1BDF}{BDF}}. . Stored data represents
 \begin{DoxyItemize}
-\item t=0\+: value at at present time, Time\+\_\+pt-\/\texorpdfstring{$>$}{>}\mbox{\hyperlink{classoomph_1_1TimeStepper_a5a69b6874b36b2f594cbee45719d4c7b}{time()}}
-\item t=1\+: value at previous time, Time\+\_\+pt-\/\texorpdfstring{$>$}{>}\mbox{\hyperlink{classoomph_1_1TimeStepper_a5a69b6874b36b2f594cbee45719d4c7b}{time()}}-\/dt
+\item t=0\+: value at at present time, Time\+\_\+pt-\/$>$\mbox{\hyperlink{classoomph_1_1TimeStepper_ab902086340e6b33c5114db30c1f644c1}{time()}}
+\item t=1\+: value at previous time, Time\+\_\+pt-\/$>$\mbox{\hyperlink{classoomph_1_1TimeStepper_ab902086340e6b33c5114db30c1f644c1}{time()}}-\/dt
 \item ...
-\item t=NSTEPS\+: value at previous time, Time\+\_\+pt-\/\texorpdfstring{$>$}{>}\mbox{\hyperlink{classoomph_1_1TimeStepper_a5a69b6874b36b2f594cbee45719d4c7b}{time()}}-\/NSTEPS$\ast$dt
-\item t=NSTEPS+1\+: 1st time deriv (= \char`\"{}velocity\char`\"{}) at previous time, Time\+\_\+pt-\/\texorpdfstring{$>$}{>}\mbox{\hyperlink{classoomph_1_1TimeStepper_a5a69b6874b36b2f594cbee45719d4c7b}{time()}}-\/dt
-\item t=NSTEPS+2\+: 2nd time deriv (= \char`\"{}acceleration\char`\"{}) at previous time, Time\+\_\+pt-\/\texorpdfstring{$>$}{>}\mbox{\hyperlink{classoomph_1_1TimeStepper_a5a69b6874b36b2f594cbee45719d4c7b}{time()}}-\/dt
+\item t=NSTEPS\+: value at previous time, Time\+\_\+pt-\/$>$\mbox{\hyperlink{classoomph_1_1TimeStepper_ab902086340e6b33c5114db30c1f644c1}{time()}}-\/NSTEPS$\ast$dt
+\item t=NSTEPS+1\+: 1st time deriv (= \char`\"{}velocity\char`\"{}) at previous time, Time\+\_\+pt-\/$>$\mbox{\hyperlink{classoomph_1_1TimeStepper_ab902086340e6b33c5114db30c1f644c1}{time()}}-\/dt
+\item t=NSTEPS+2\+: 2nd time deriv (= \char`\"{}acceleration\char`\"{}) at previous time, Time\+\_\+pt-\/$>$\mbox{\hyperlink{classoomph_1_1TimeStepper_ab902086340e6b33c5114db30c1f644c1}{time()}}-\/dt
 \end{DoxyItemize}
 
 NSTEPS=1 gives normal \mbox{\hyperlink{classoomph_1_1Newmark}{Newmark}}. 
 
-Definition at line \mbox{\hyperlink{timesteppers_8h_source_l01073}{1073}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
+Definition at line 1073 of file timesteppers.\+h.
 
 
 
@@ -90,11 +91,7 @@ Constructor\+: Pass pointer to global time. We set up a timestepping scheme with
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8h_source_l01079}{1079}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
-
-
-
-References \mbox{\hyperlink{timesteppers_8h_source_l01139}{oomph\+::\+Newmark\+BDF$<$ NSTEPS $>$\+::\+Degrade\+\_\+to\+\_\+bdf1\+\_\+for\+\_\+first\+\_\+derivs}}, \mbox{\hyperlink{timesteppers_8h_source_l01145}{oomph\+::\+Newmark\+BDF$<$ NSTEPS $>$\+::\+Newmark\+\_\+veloc\+\_\+weight}}, and \mbox{\hyperlink{timesteppers_8h_source_l00241}{oomph\+::\+Time\+Stepper\+::\+Type}}.
+Definition at line 1079 of file timesteppers.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1NewmarkBDF_a7368dd7fc915b8af92f82c9c54424270}\label{classoomph_1_1NewmarkBDF_a7368dd7fc915b8af92f82c9c54424270}} 
 \index{oomph::NewmarkBDF$<$ NSTEPS $>$@{oomph::NewmarkBDF$<$ NSTEPS $>$}!NewmarkBDF@{NewmarkBDF}}
@@ -123,11 +120,7 @@ Disable degradation to first order \mbox{\hyperlink{classoomph_1_1BDF}{BDF}}.
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8h_source_l01112}{1112}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
-
-
-
-References \mbox{\hyperlink{timesteppers_8h_source_l01139}{oomph\+::\+Newmark\+BDF$<$ NSTEPS $>$\+::\+Degrade\+\_\+to\+\_\+bdf1\+\_\+for\+\_\+first\+\_\+derivs}}.
+Definition at line 1112 of file timesteppers.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1NewmarkBDF_ae86538697fa6188d8fd14fe87312e078}\label{classoomph_1_1NewmarkBDF_ae86538697fa6188d8fd14fe87312e078}} 
 \index{oomph::NewmarkBDF$<$ NSTEPS $>$@{oomph::NewmarkBDF$<$ NSTEPS $>$}!enable\_degrade\_first\_derivatives\_to\_bdf1@{enable\_degrade\_first\_derivatives\_to\_bdf1}}
@@ -142,11 +135,7 @@ Degrade scheme to first order \mbox{\hyperlink{classoomph_1_1BDF}{BDF}} (for fir
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8h_source_l01105}{1105}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
-
-
-
-References \mbox{\hyperlink{timesteppers_8h_source_l01139}{oomph\+::\+Newmark\+BDF$<$ NSTEPS $>$\+::\+Degrade\+\_\+to\+\_\+bdf1\+\_\+for\+\_\+first\+\_\+derivs}}.
+Definition at line 1105 of file timesteppers.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1NewmarkBDF_ab6b2bef5a76367987689d0df874c5d95}\label{classoomph_1_1NewmarkBDF_ab6b2bef5a76367987689d0df874c5d95}} 
 \index{oomph::NewmarkBDF$<$ NSTEPS $>$@{oomph::NewmarkBDF$<$ NSTEPS $>$}!operator=@{operator=}}
@@ -172,11 +161,11 @@ Set original \mbox{\hyperlink{classoomph_1_1Newmark}{Newmark}} weights for veloc
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8h_source_l01122}{1122}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
+Definition at line 1122 of file timesteppers.\+h.
 
 
 
-References \mbox{\hyperlink{timesteppers_8h_source_l01046}{oomph\+::\+Newmark$<$ NSTEPS $>$\+::\+Beta1}}, \mbox{\hyperlink{timesteppers_8h_source_l01145}{oomph\+::\+Newmark\+BDF$<$ NSTEPS $>$\+::\+Newmark\+\_\+veloc\+\_\+weight}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{timesteppers_8h_source_l00237}{oomph\+::\+Time\+Stepper\+::\+Weight}}.
+References oomph\+::\+Time\+::dt(), and t.
 
 \mbox{\Hypertarget{classoomph_1_1NewmarkBDF_a1ab5b94c81436aa79066ba23a9e2b957}\label{classoomph_1_1NewmarkBDF_a1ab5b94c81436aa79066ba23a9e2b957}} 
 \index{oomph::NewmarkBDF$<$ NSTEPS $>$@{oomph::NewmarkBDF$<$ NSTEPS $>$}!set\_weights@{set\_weights}}
@@ -194,7 +183,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Newmark_ad175de47f064359fa319a
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l01185}{1185}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+Definition at line 1185 of file timesteppers.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1NewmarkBDF_a4026ae40b728d9558d565874437fdb6f}\label{classoomph_1_1NewmarkBDF_a4026ae40b728d9558d565874437fdb6f}} 
 \index{oomph::NewmarkBDF$<$ NSTEPS $>$@{oomph::NewmarkBDF$<$ NSTEPS $>$}!set\_weights@{set\_weights}}
@@ -212,11 +201,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Newmark_ad175de47f064359fa319a
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l01208}{1208}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+Definition at line 1208 of file timesteppers.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References i.
 
 \mbox{\Hypertarget{classoomph_1_1NewmarkBDF_af559fe2ed59f9b2787f4c2741ba5c534}\label{classoomph_1_1NewmarkBDF_af559fe2ed59f9b2787f4c2741ba5c534}} 
 \index{oomph::NewmarkBDF$<$ NSTEPS $>$@{oomph::NewmarkBDF$<$ NSTEPS $>$}!set\_weights@{set\_weights}}
@@ -234,11 +223,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Newmark_ad175de47f064359fa319a
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l01247}{1247}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+Definition at line 1247 of file timesteppers.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References i.
 
 \mbox{\Hypertarget{classoomph_1_1NewmarkBDF_a338055c11a633d2d22e5fd3b378910b2}\label{classoomph_1_1NewmarkBDF_a338055c11a633d2d22e5fd3b378910b2}} 
 \index{oomph::NewmarkBDF$<$ NSTEPS $>$@{oomph::NewmarkBDF$<$ NSTEPS $>$}!set\_weights@{set\_weights}}
@@ -272,11 +261,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Newmark_af56a2965f66e9a181b336
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l01128}{1128}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+Definition at line 1128 of file timesteppers.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{nodes_8h_source_l01016}{oomph\+::\+Node\+::nposition\+\_\+type()}}, \mbox{\hyperlink{nodes_8h_source_l01113}{oomph\+::\+Node\+::position\+\_\+is\+\_\+a\+\_\+copy()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{nodes_8h_source_l01126}{oomph\+::\+Node\+::x\+\_\+gen()}}.
+References i, oomph\+::\+Node\+::ndim(), oomph\+::\+Node\+::nposition\+\_\+type(), oomph\+::\+Node\+::position\+\_\+is\+\_\+a\+\_\+copy(), t, and oomph\+::\+Node\+::x\+\_\+gen().
 
 \mbox{\Hypertarget{classoomph_1_1NewmarkBDF_a4726c0ea901167bc2124c63bf6e5f692}\label{classoomph_1_1NewmarkBDF_a4726c0ea901167bc2124c63bf6e5f692}} 
 \index{oomph::NewmarkBDF$<$ NSTEPS $>$@{oomph::NewmarkBDF$<$ NSTEPS $>$}!shift\_time\_values@{shift\_time\_values}}
@@ -295,11 +284,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Newmark_a3f8606d569f947669006b
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l01082}{1082}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+Definition at line 1082 of file timesteppers.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l00253}{oomph\+::\+Data\+::is\+\_\+a\+\_\+copy()}}, \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}, \mbox{\hyperlink{nodes_8h_source_l00271}{oomph\+::\+Data\+::set\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{nodes_8h_source_l00293}{oomph\+::\+Data\+::value()}}.
+References i, oomph\+::\+Data\+::is\+\_\+a\+\_\+copy(), oomph\+::\+Data\+::nvalue(), oomph\+::\+Data\+::set\+\_\+value(), t, and oomph\+::\+Data\+::value().
 
 
 
@@ -317,11 +306,7 @@ Boolean flag to indicate degradation of scheme to first order \mbox{\hyperlink{c
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8h_source_l01139}{1139}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
-
-
-
-Referenced by \mbox{\hyperlink{timesteppers_8h_source_l01112}{oomph\+::\+Newmark\+BDF$<$ NSTEPS $>$\+::disable\+\_\+degrade\+\_\+first\+\_\+derivatives\+\_\+to\+\_\+bdf1()}}, \mbox{\hyperlink{timesteppers_8h_source_l01105}{oomph\+::\+Newmark\+BDF$<$ NSTEPS $>$\+::enable\+\_\+degrade\+\_\+first\+\_\+derivatives\+\_\+to\+\_\+bdf1()}}, and \mbox{\hyperlink{timesteppers_8h_source_l01079}{oomph\+::\+Newmark\+BDF$<$ NSTEPS $>$\+::\+Newmark\+BDF()}}.
+Definition at line 1139 of file timesteppers.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1NewmarkBDF_ac6032c3a2bd0f7c64f51ad3c84c3ca16}\label{classoomph_1_1NewmarkBDF_ac6032c3a2bd0f7c64f51ad3c84c3ca16}} 
 \index{oomph::NewmarkBDF$<$ NSTEPS $>$@{oomph::NewmarkBDF$<$ NSTEPS $>$}!Newmark\_veloc\_weight@{Newmark\_veloc\_weight}}
@@ -336,11 +321,7 @@ Original \mbox{\hyperlink{classoomph_1_1Newmark}{Newmark}} weights for velocitie
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8h_source_l01145}{1145}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
-
-
-
-Referenced by \mbox{\hyperlink{timesteppers_8h_source_l01079}{oomph\+::\+Newmark\+BDF$<$ NSTEPS $>$\+::\+Newmark\+BDF()}}, and \mbox{\hyperlink{timesteppers_8h_source_l01122}{oomph\+::\+Newmark\+BDF$<$ NSTEPS $>$\+::set\+\_\+newmark\+\_\+veloc\+\_\+weights()}}.
+Definition at line 1145 of file timesteppers.\+h.
 
 
 

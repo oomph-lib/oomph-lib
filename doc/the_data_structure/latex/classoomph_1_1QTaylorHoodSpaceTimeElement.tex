@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement}{}\doxysection{oomph\+::QTaylor\+Hood\+Space\+Time\+Element\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement}{}\doxysection{oomph\+::QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$ Class Template Reference}
 \label{classoomph_1_1QTaylorHoodSpaceTimeElement}\index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}}
 
 
@@ -9,7 +9,7 @@
 
 {\ttfamily \#include $<$discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::QTaylor\+Hood\+Space\+Time\+Element\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.005571cm]{classoomph_1_1QTaylorHoodSpaceTimeElement}
@@ -42,9 +42,9 @@ void \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a5dcdb54f45adb01
 \begin{DoxyCompactList}\small\item\em Pin p\+\_\+dof-\/th pressure dof and set it to value specified by p\+\_\+value. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}{build\+\_\+fp\+\_\+press\+\_\+adv\+\_\+diff\+\_\+robin\+\_\+bc\+\_\+element}} (const unsigned \&face\+\_\+index)
 \begin{DoxyCompactList}\small\item\em Build Face\+Elements that apply the Robin boundary condition to the pressure advection diffusion problem required by Fp preconditioner. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_ae5afedd655140a7e62b6e56d26c3ea5f}{identify\+\_\+load\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&paired\+\_\+load\+\_\+data)
+void \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_aa2bdb098066efbfa2347d437c79e5864}{identify\+\_\+load\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&paired\+\_\+load\+\_\+data)
 \begin{DoxyCompactList}\small\item\em Add to the set {\ttfamily paired\+\_\+load\+\_\+data} pairs containing. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_ac7f9014bacfabd56ef76cd4fce660dfa}{identify\+\_\+pressure\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&paired\+\_\+pressure\+\_\+data)
+void \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_ab3431e43e59e435a5bd9d4c892657574}{identify\+\_\+pressure\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&paired\+\_\+pressure\+\_\+data)
 \begin{DoxyCompactList}\small\item\em Add to the set {\ttfamily paired\+\_\+pressure\+\_\+data} pairs containing. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a0fa5f52017a6577ef0b50f280ec044d4}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
@@ -56,7 +56,7 @@ void \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a17d0d5d02bfbaa5
 \begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_aa0f254fd47e4b5818835ba5e5bde1c78}{ndof\+\_\+types}} () const
 \begin{DoxyCompactList}\small\item\em Returns the number of \char`\"{}\+DOF types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: Velocity and pressure. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a92aab53168f0512aaf127feaddb72978}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
+void \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_af8907856c2327bb4590bd0933daae2c5}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&dof\+\_\+lookup\+\_\+list) const
 \begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+DOF type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) Velocity=0; Pressure=1. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a1a897a60bec577fa25c27d6e152eccfe}{QTaylor\+Hood\+Space\+Time\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor, no internal data points. \end{DoxyCompactList}\item 
@@ -84,9 +84,9 @@ void \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a5dcdb54f45adb01
 \begin{DoxyCompactList}\small\item\em Pin p\+\_\+dof-\/th pressure dof and set it to value specified by p\+\_\+value. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}{build\+\_\+fp\+\_\+press\+\_\+adv\+\_\+diff\+\_\+robin\+\_\+bc\+\_\+element}} (const unsigned \&face\+\_\+index)
 \begin{DoxyCompactList}\small\item\em Build Face\+Elements that apply the Robin boundary condition to the pressure advection diffusion problem required by Fp preconditioner. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_ae5afedd655140a7e62b6e56d26c3ea5f}{identify\+\_\+load\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&paired\+\_\+load\+\_\+data)
+void \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_aa2bdb098066efbfa2347d437c79e5864}{identify\+\_\+load\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&paired\+\_\+load\+\_\+data)
 \begin{DoxyCompactList}\small\item\em Add to the set {\ttfamily paired\+\_\+load\+\_\+data} pairs containing. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_ac7f9014bacfabd56ef76cd4fce660dfa}{identify\+\_\+pressure\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&paired\+\_\+pressure\+\_\+data)
+void \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_ab3431e43e59e435a5bd9d4c892657574}{identify\+\_\+pressure\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&paired\+\_\+pressure\+\_\+data)
 \begin{DoxyCompactList}\small\item\em Add to the set {\ttfamily paired\+\_\+pressure\+\_\+data} pairs containing. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a0fa5f52017a6577ef0b50f280ec044d4}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
@@ -118,9 +118,9 @@ void \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a5dcdb54f45adb01
 \begin{DoxyCompactList}\small\item\em Pin p\+\_\+dof-\/th pressure dof and set it to value specified by p\+\_\+value. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}{build\+\_\+fp\+\_\+press\+\_\+adv\+\_\+diff\+\_\+robin\+\_\+bc\+\_\+element}} (const unsigned \&face\+\_\+index)
 \begin{DoxyCompactList}\small\item\em Build Face\+Elements that apply the Robin boundary condition to the pressure advection diffusion problem required by Fp preconditioner. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_ae5afedd655140a7e62b6e56d26c3ea5f}{identify\+\_\+load\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&paired\+\_\+load\+\_\+data)
+void \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_aa2bdb098066efbfa2347d437c79e5864}{identify\+\_\+load\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&paired\+\_\+load\+\_\+data)
 \begin{DoxyCompactList}\small\item\em Add to the set {\ttfamily paired\+\_\+load\+\_\+data} pairs containing. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_ac7f9014bacfabd56ef76cd4fce660dfa}{identify\+\_\+pressure\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&paired\+\_\+pressure\+\_\+data)
+void \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_ab3431e43e59e435a5bd9d4c892657574}{identify\+\_\+pressure\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&paired\+\_\+pressure\+\_\+data)
 \begin{DoxyCompactList}\small\item\em Add to the set {\ttfamily paired\+\_\+pressure\+\_\+data} pairs containing. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a0fa5f52017a6577ef0b50f280ec044d4}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
@@ -226,11 +226,12 @@ static const unsigned \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$unsigned DIM$>$\newline
 class oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}
+
 /////////////////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////////////////// 
 
 Taylor-\/\+Hood elements are Navier-\/\+Stokes elements with quadratic interpolation for velocities and positions and continuous linear pressure interpolation. They can be used within oomph-\/lib\textquotesingle{}s block-\/preconditioning framework. 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02117}{2117}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2117 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -248,7 +249,7 @@ Constructor, no internal data points.
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02192}{2192}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2192 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a1a897a60bec577fa25c27d6e152eccfe}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a1a897a60bec577fa25c27d6e152eccfe}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!QTaylorHoodSpaceTimeElement@{QTaylorHoodSpaceTimeElement}}
@@ -263,7 +264,7 @@ Constructor, no internal data points.
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l02192}{2192}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2192 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_ae3979ee6912a35866275bbb1a05055df}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_ae3979ee6912a35866275bbb1a05055df}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!````~QTaylorHoodSpaceTimeElement@{$\sim$QTaylorHoodSpaceTimeElement}}
@@ -274,11 +275,11 @@ Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l02198}{2198}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2198 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}.
+References oomph\+::\+Finite\+Element\+::integral\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a1a897a60bec577fa25c27d6e152eccfe}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a1a897a60bec577fa25c27d6e152eccfe}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!QTaylorHoodSpaceTimeElement@{QTaylorHoodSpaceTimeElement}}
@@ -293,7 +294,7 @@ Constructor, no internal data points.
 
 
 
-Definition at line \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source_l02148}{2148}} of file \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2148 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -319,11 +320,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeEl
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02278}{2278}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2278 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00548}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Pressure\+\_\+advection\+\_\+diffusion\+\_\+robin\+\_\+element\+\_\+pt}}.
+References oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Pressure\+\_\+advection\+\_\+diffusion\+\_\+robin\+\_\+element\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!build\_fp\_press\_adv\_diff\_robin\_bc\_element@{build\_fp\_press\_adv\_diff\_robin\_bc\_element}}
@@ -346,11 +347,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeEl
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l02285}{2285}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2285 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00548}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Pressure\+\_\+advection\+\_\+diffusion\+\_\+robin\+\_\+element\+\_\+pt}}.
+References oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Pressure\+\_\+advection\+\_\+diffusion\+\_\+robin\+\_\+element\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!build\_fp\_press\_adv\_diff\_robin\_bc\_element@{build\_fp\_press\_adv\_diff\_robin\_bc\_element}}
@@ -369,11 +370,11 @@ Implements \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aecc863
 
 
 
-Definition at line \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source_l02230}{2230}} of file \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2230 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00548}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Pressure\+\_\+advection\+\_\+diffusion\+\_\+robin\+\_\+element\+\_\+pt}}.
+References oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::\+Pressure\+\_\+advection\+\_\+diffusion\+\_\+robin\+\_\+element\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_ac0fe4b7db0e92afb713bf2398d3ea884}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_ac0fe4b7db0e92afb713bf2398d3ea884}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!dpshape\_and\_dptest\_eulerian\_nst@{dpshape\_and\_dptest\_eulerian\_nst}}
@@ -406,11 +407,11 @@ Implements \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a02ef09
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02711}{2711}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2711 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References s.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_ac0fe4b7db0e92afb713bf2398d3ea884}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_ac0fe4b7db0e92afb713bf2398d3ea884}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!dpshape\_and\_dptest\_eulerian\_nst@{dpshape\_and\_dptest\_eulerian\_nst}}
@@ -443,11 +444,11 @@ Implements \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a02ef09
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l02728}{2728}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2728 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References s.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_ac0fe4b7db0e92afb713bf2398d3ea884}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_ac0fe4b7db0e92afb713bf2398d3ea884}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!dpshape\_and\_dptest\_eulerian\_nst@{dpshape\_and\_dptest\_eulerian\_nst}}
@@ -480,11 +481,11 @@ Implements \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a02ef09
 
 
 
-Definition at line \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source_l02374}{2374}} of file \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2374 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{shape_8h_source_l00616}{oomph\+::\+One\+Dim\+Lagrange\+::dshape$<$ 2 $>$()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{shape_8h_source_l00608}{oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 2 $>$()}}.
+References oomph\+::\+One\+Dim\+Lagrange\+::dshape$<$ 2 $>$(), i, s, and oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 2 $>$().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a39962db4f8b7057e72d16840ce51a2e8}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a39962db4f8b7057e72d16840ce51a2e8}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!dpshape\_eulerian@{dpshape\_eulerian}}
@@ -517,11 +518,11 @@ Implements \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_adeb146
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02509}{2509}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2509 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{shape_8h_source_l00616}{oomph\+::\+One\+Dim\+Lagrange\+::dshape$<$ 2 $>$()}}, \mbox{\hyperlink{shape_8h_source_l00645}{oomph\+::\+One\+Dim\+Lagrange\+::dshape$<$ 3 $>$()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{shape_8h_source_l00608}{oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 2 $>$()}}, and \mbox{\hyperlink{shape_8h_source_l00635}{oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 3 $>$()}}.
+References oomph\+::\+One\+Dim\+Lagrange\+::dshape$<$ 2 $>$(), oomph\+::\+One\+Dim\+Lagrange\+::dshape$<$ 3 $>$(), i, s, oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 2 $>$(), and oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 3 $>$().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a39962db4f8b7057e72d16840ce51a2e8}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a39962db4f8b7057e72d16840ce51a2e8}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!dpshape\_eulerian@{dpshape\_eulerian}}
@@ -554,11 +555,11 @@ Implements \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_adeb146
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l02524}{2524}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2524 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{shape_8h_source_l00616}{oomph\+::\+One\+Dim\+Lagrange\+::dshape$<$ 2 $>$()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{shape_8h_source_l00608}{oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 2 $>$()}}.
+References oomph\+::\+One\+Dim\+Lagrange\+::dshape$<$ 2 $>$(), i, s, and oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 2 $>$().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a1993d524a0728587303e4c6a2149252d}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a1993d524a0728587303e4c6a2149252d}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!dptest\_eulerian@{dptest\_eulerian}}
@@ -591,11 +592,11 @@ Implements \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_ab98bda
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02610}{2610}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2610 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{shape_8h_source_l00616}{oomph\+::\+One\+Dim\+Lagrange\+::dshape$<$ 2 $>$()}}, \mbox{\hyperlink{shape_8h_source_l00645}{oomph\+::\+One\+Dim\+Lagrange\+::dshape$<$ 3 $>$()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{shape_8h_source_l00608}{oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 2 $>$()}}, and \mbox{\hyperlink{shape_8h_source_l00635}{oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 3 $>$()}}.
+References oomph\+::\+One\+Dim\+Lagrange\+::dshape$<$ 2 $>$(), oomph\+::\+One\+Dim\+Lagrange\+::dshape$<$ 3 $>$(), i, s, oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 2 $>$(), and oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 3 $>$().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a1993d524a0728587303e4c6a2149252d}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a1993d524a0728587303e4c6a2149252d}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!dptest\_eulerian@{dptest\_eulerian}}
@@ -628,11 +629,11 @@ Implements \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_ab98bda
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l02625}{2625}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2625 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{shape_8h_source_l00616}{oomph\+::\+One\+Dim\+Lagrange\+::dshape$<$ 2 $>$()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{shape_8h_source_l00608}{oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 2 $>$()}}.
+References oomph\+::\+One\+Dim\+Lagrange\+::dshape$<$ 2 $>$(), i, s, and oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 2 $>$().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_ac9ecece67761dd25d3f2dc940bed2608}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_ac9ecece67761dd25d3f2dc940bed2608}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!dshape\_and\_dtest\_eulerian\_at\_knot\_nst@{dshape\_and\_dtest\_eulerian\_at\_knot\_nst}}
@@ -665,11 +666,11 @@ Implements \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a3af290
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02736}{2736}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2736 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References i.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_ac9ecece67761dd25d3f2dc940bed2608}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_ac9ecece67761dd25d3f2dc940bed2608}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!dshape\_and\_dtest\_eulerian\_at\_knot\_nst@{dshape\_and\_dtest\_eulerian\_at\_knot\_nst}}
@@ -702,11 +703,11 @@ Implements \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a3af290
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l02753}{2753}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2753 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References i.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_ac9ecece67761dd25d3f2dc940bed2608}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_ac9ecece67761dd25d3f2dc940bed2608}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!dshape\_and\_dtest\_eulerian\_at\_knot\_nst@{dshape\_and\_dtest\_eulerian\_at\_knot\_nst}}
@@ -739,11 +740,11 @@ Implements \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a3af290
 
 
 
-Definition at line \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source_l02488}{2488}} of file \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2488 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References i.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_ace7b8ad451c792bf1fe51a19698f10de}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_ace7b8ad451c792bf1fe51a19698f10de}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!dshape\_and\_dtest\_eulerian\_at\_knot\_nst@{dshape\_and\_dtest\_eulerian\_at\_knot\_nst}}
@@ -762,11 +763,11 @@ Implements \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a57dfce
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02479}{2479}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2479 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References i, and s.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_ace7b8ad451c792bf1fe51a19698f10de}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_ace7b8ad451c792bf1fe51a19698f10de}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!dshape\_and\_dtest\_eulerian\_at\_knot\_nst@{dshape\_and\_dtest\_eulerian\_at\_knot\_nst}}
@@ -815,11 +816,11 @@ Implements \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a2cc20e
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02369}{2369}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2369 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{shape_8h_source_l00645}{oomph\+::\+One\+Dim\+Lagrange\+::dshape$<$ 3 $>$()}}, \mbox{\hyperlink{shape_8h_source_l00820}{oomph\+::\+One\+Dim\+Discontinuous\+Galerkin\+::dshape$<$ 3 $>$()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{shape_8h_source_l00635}{oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 3 $>$()}}, and \mbox{\hyperlink{shape_8h_source_l00810}{oomph\+::\+One\+Dim\+Discontinuous\+Galerkin\+::shape$<$ 3 $>$()}}.
+References oomph\+::\+One\+Dim\+Lagrange\+::dshape$<$ 3 $>$(), oomph\+::\+One\+Dim\+Discontinuous\+Galerkin\+::dshape$<$ 3 $>$(), i, s, oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 3 $>$(), and oomph\+::\+One\+Dim\+Discontinuous\+Galerkin\+::shape$<$ 3 $>$().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_afb98e9674244dcabd34fcedfca0240d5}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_afb98e9674244dcabd34fcedfca0240d5}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!dshape\_and\_dtest\_eulerian\_nst@{dshape\_and\_dtest\_eulerian\_nst}}
@@ -868,11 +869,11 @@ Implements \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_ade0310
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02264}{2264}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2264 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02221}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst()}}, \mbox{\hyperlink{nodes_8h_source_l00385}{oomph\+::\+Data\+::pin()}}, and \mbox{\hyperlink{nodes_8h_source_l00271}{oomph\+::\+Data\+::set\+\_\+value()}}.
+References oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst(), oomph\+::\+Data\+::pin(), and oomph\+::\+Data\+::set\+\_\+value().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a5dcdb54f45adb01918aec993d8e22e38}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a5dcdb54f45adb01918aec993d8e22e38}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!fix\_pressure@{fix\_pressure}}
@@ -891,11 +892,11 @@ Implements \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_ade0310
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l02271}{2271}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2271 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02221}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst()}}, \mbox{\hyperlink{nodes_8h_source_l00385}{oomph\+::\+Data\+::pin()}}, and \mbox{\hyperlink{nodes_8h_source_l00271}{oomph\+::\+Data\+::set\+\_\+value()}}.
+References oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst(), oomph\+::\+Data\+::pin(), and oomph\+::\+Data\+::set\+\_\+value().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a5dcdb54f45adb01918aec993d8e22e38}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a5dcdb54f45adb01918aec993d8e22e38}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!fix\_pressure@{fix\_pressure}}
@@ -914,18 +915,18 @@ Implements \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_ade0310
 
 
 
-Definition at line \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source_l02216}{2216}} of file \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2216 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02221}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst()}}, \mbox{\hyperlink{nodes_8h_source_l00385}{oomph\+::\+Data\+::pin()}}, and \mbox{\hyperlink{nodes_8h_source_l00271}{oomph\+::\+Data\+::set\+\_\+value()}}.
+References oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst(), oomph\+::\+Data\+::pin(), and oomph\+::\+Data\+::set\+\_\+value().
 
-\mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a92aab53168f0512aaf127feaddb72978}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a92aab53168f0512aaf127feaddb72978}} 
+\mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_af8907856c2327bb4590bd0933daae2c5}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_af8907856c2327bb4590bd0933daae2c5}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
 \index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element}}$<$ DIM $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element}}$<$ DIM $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -933,18 +934,18 @@ Create a list of pairs for all unknowns in this element, so that the first entry
 
 Create a list of pairs for all unknowns in this element, so the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+DOF type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a069f59bfc3e607a5bebba52c6314d777}{oomph\+::\+Generalised\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a29c6fb71cd7cabb29b4c289598aec601}{oomph\+::\+Generalised\+Element}}.
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8cc_source_l03068}{3068}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8cc_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc}}.
+Definition at line 3068 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
-\mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_ae5afedd655140a7e62b6e56d26c3ea5f}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_ae5afedd655140a7e62b6e56d26c3ea5f}} 
+\mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_aa2bdb098066efbfa2347d437c79e5864}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_aa2bdb098066efbfa2347d437c79e5864}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!identify\_load\_data@{identify\_load\_data}}
 \index{identify\_load\_data@{identify\_load\_data}!oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{identify\_load\_data()}{identify\_load\_data()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element}}$<$ DIM $>$\+::identify\+\_\+load\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&}]{paired\+\_\+load\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element}}$<$ DIM $>$\+::identify\+\_\+load\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&}]{paired\+\_\+load\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -956,26 +957,26 @@ Add to the set {\ttfamily paired\+\_\+load\+\_\+data} pairs containing.
 \item the index of the value in that \mbox{\hyperlink{classoomph_1_1Data}{Data}} object
 \end{DoxyItemize}for all values (pressures, velocities) that affect the load computed in the {\ttfamily get\+\_\+load(...)} function. 
 
-Implements \mbox{\hyperlink{classoomph_1_1FSIFluidElement_a13c5f835cddd1b78e6d2582733619300}{oomph\+::\+FSIFluid\+Element}}.
+Implements \mbox{\hyperlink{classoomph_1_1FSIFluidElement_ac67392272be44300a42c2285abbbea00}{oomph\+::\+FSIFluid\+Element}}.
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_ac78e53f61e116853f4c52b7fe649dddd}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_ac78e53f61e116853f4c52b7fe649dddd}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_ac78e53f61e116853f4c52b7fe649dddd}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_aea9652c5729c334b9ddcfb9f22c43556}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_aea9652c5729c334b9ddcfb9f22c43556}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_aea9652c5729c334b9ddcfb9f22c43556}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8cc_source_l02998}{2998}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8cc_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc}}.
+Definition at line 2998 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References i.
 
-\mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_ae5afedd655140a7e62b6e56d26c3ea5f}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_ae5afedd655140a7e62b6e56d26c3ea5f}} 
+\mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_aa2bdb098066efbfa2347d437c79e5864}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_aa2bdb098066efbfa2347d437c79e5864}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!identify\_load\_data@{identify\_load\_data}}
 \index{identify\_load\_data@{identify\_load\_data}!oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{identify\_load\_data()}{identify\_load\_data()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element}}$<$ DIM $>$\+::identify\+\_\+load\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&}]{paired\+\_\+load\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element}}$<$ DIM $>$\+::identify\+\_\+load\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&}]{paired\+\_\+load\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -987,18 +988,18 @@ Add to the set {\ttfamily paired\+\_\+load\+\_\+data} pairs containing.
 \item the index of the value in that \mbox{\hyperlink{classoomph_1_1Data}{Data}} object
 \end{DoxyItemize}for all values (pressures, velocities) that affect the load computed in the {\ttfamily get\+\_\+load(...)} function. 
 
-Implements \mbox{\hyperlink{classoomph_1_1FSIFluidElement_a13c5f835cddd1b78e6d2582733619300}{oomph\+::\+FSIFluid\+Element}}.
+Implements \mbox{\hyperlink{classoomph_1_1FSIFluidElement_ac67392272be44300a42c2285abbbea00}{oomph\+::\+FSIFluid\+Element}}.
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_ac78e53f61e116853f4c52b7fe649dddd}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_ac78e53f61e116853f4c52b7fe649dddd}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_ac78e53f61e116853f4c52b7fe649dddd}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_aea9652c5729c334b9ddcfb9f22c43556}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_aea9652c5729c334b9ddcfb9f22c43556}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_aea9652c5729c334b9ddcfb9f22c43556}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}.
 
-\mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_ae5afedd655140a7e62b6e56d26c3ea5f}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_ae5afedd655140a7e62b6e56d26c3ea5f}} 
+\mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_aa2bdb098066efbfa2347d437c79e5864}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_aa2bdb098066efbfa2347d437c79e5864}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!identify\_load\_data@{identify\_load\_data}}
 \index{identify\_load\_data@{identify\_load\_data}!oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{identify\_load\_data()}{identify\_load\_data()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element}}$<$ DIM $>$\+::identify\+\_\+load\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&}]{paired\+\_\+load\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element}}$<$ DIM $>$\+::identify\+\_\+load\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&}]{paired\+\_\+load\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -1010,14 +1011,14 @@ Add to the set {\ttfamily paired\+\_\+load\+\_\+data} pairs containing.
 \item the index of the value in that \mbox{\hyperlink{classoomph_1_1Data}{Data}} object
 \end{DoxyItemize}for all values (pressures, velocities) that affect the load computed in the {\ttfamily get\+\_\+load(...)} function. 
 
-Implements \mbox{\hyperlink{classoomph_1_1FSIFluidElement_a13c5f835cddd1b78e6d2582733619300}{oomph\+::\+FSIFluid\+Element}}.
+Implements \mbox{\hyperlink{classoomph_1_1FSIFluidElement_ac67392272be44300a42c2285abbbea00}{oomph\+::\+FSIFluid\+Element}}.
 
-\mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_ac7f9014bacfabd56ef76cd4fce660dfa}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_ac7f9014bacfabd56ef76cd4fce660dfa}} 
+\mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_ab3431e43e59e435a5bd9d4c892657574}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_ab3431e43e59e435a5bd9d4c892657574}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!identify\_pressure\_data@{identify\_pressure\_data}}
 \index{identify\_pressure\_data@{identify\_pressure\_data}!oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{identify\_pressure\_data()}{identify\_pressure\_data()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element}}$<$ DIM $>$\+::identify\+\_\+pressure\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&}]{paired\+\_\+pressure\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element}}$<$ DIM $>$\+::identify\+\_\+pressure\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&}]{paired\+\_\+pressure\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -1035,18 +1036,18 @@ Add to the set {\ttfamily paired\+\_\+pressure\+\_\+data} pairs containing.
 \item the index of the value in that \mbox{\hyperlink{classoomph_1_1Data}{Data}} object
 \end{DoxyItemize}for pressure values that affect the load computed in the {\ttfamily get\+\_\+load(...)} function., 
 
-Implements \mbox{\hyperlink{classoomph_1_1FSIFluidElement_af8e0805b769b7d111eb71f223fc83df8}{oomph\+::\+FSIFluid\+Element}}.
+Implements \mbox{\hyperlink{classoomph_1_1FSIFluidElement_a1a28009885c5459bd92ac8cf8395910c}{oomph\+::\+FSIFluid\+Element}}.
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8cc_source_l03040}{3040}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8cc_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc}}.
+Definition at line 3040 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
-\mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_ac7f9014bacfabd56ef76cd4fce660dfa}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_ac7f9014bacfabd56ef76cd4fce660dfa}} 
+\mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_ab3431e43e59e435a5bd9d4c892657574}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_ab3431e43e59e435a5bd9d4c892657574}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!identify\_pressure\_data@{identify\_pressure\_data}}
 \index{identify\_pressure\_data@{identify\_pressure\_data}!oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{identify\_pressure\_data()}{identify\_pressure\_data()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element}}$<$ DIM $>$\+::identify\+\_\+pressure\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&}]{paired\+\_\+pressure\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element}}$<$ DIM $>$\+::identify\+\_\+pressure\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&}]{paired\+\_\+pressure\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -1058,14 +1059,14 @@ Add to the set {\ttfamily paired\+\_\+pressure\+\_\+data} pairs containing.
 \item the index of the value in that \mbox{\hyperlink{classoomph_1_1Data}{Data}} object
 \end{DoxyItemize}for all pressure values that affect the load computed in the {\ttfamily get\+\_\+load(...)} function. 
 
-Implements \mbox{\hyperlink{classoomph_1_1FSIFluidElement_af8e0805b769b7d111eb71f223fc83df8}{oomph\+::\+FSIFluid\+Element}}.
+Implements \mbox{\hyperlink{classoomph_1_1FSIFluidElement_a1a28009885c5459bd92ac8cf8395910c}{oomph\+::\+FSIFluid\+Element}}.
 
-\mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_ac7f9014bacfabd56ef76cd4fce660dfa}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_ac7f9014bacfabd56ef76cd4fce660dfa}} 
+\mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_ab3431e43e59e435a5bd9d4c892657574}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_ab3431e43e59e435a5bd9d4c892657574}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!identify\_pressure\_data@{identify\_pressure\_data}}
 \index{identify\_pressure\_data@{identify\_pressure\_data}!oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{identify\_pressure\_data()}{identify\_pressure\_data()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element}}$<$ DIM $>$\+::identify\+\_\+pressure\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&}]{paired\+\_\+pressure\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element}}$<$ DIM $>$\+::identify\+\_\+pressure\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&}]{paired\+\_\+pressure\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -1077,7 +1078,7 @@ Add to the set {\ttfamily paired\+\_\+pressure\+\_\+data} pairs containing.
 \item the index of the value in that \mbox{\hyperlink{classoomph_1_1Data}{Data}} object
 \end{DoxyItemize}for all pressure values that affect the load computed in the {\ttfamily get\+\_\+load(...)} function. 
 
-Implements \mbox{\hyperlink{classoomph_1_1FSIFluidElement_af8e0805b769b7d111eb71f223fc83df8}{oomph\+::\+FSIFluid\+Element}}.
+Implements \mbox{\hyperlink{classoomph_1_1FSIFluidElement_a1a28009885c5459bd92ac8cf8395910c}{oomph\+::\+FSIFluid\+Element}}.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a79290feb9f6b61cdb6f0b362555cb7b6}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a79290feb9f6b61cdb6f0b362555cb7b6}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
@@ -1091,7 +1092,7 @@ Implements \mbox{\hyperlink{classoomph_1_1FSIFluidElement_af8e0805b769b7d111eb71
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8cc_source_l02979}{2979}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8cc_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc}}.
+Definition at line 2979 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a79290feb9f6b61cdb6f0b362555cb7b6}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a79290feb9f6b61cdb6f0b362555cb7b6}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
@@ -1105,7 +1106,7 @@ Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__press
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l02972}{2972}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc}}.
+Definition at line 2972 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a79290feb9f6b61cdb6f0b362555cb7b6}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a79290feb9f6b61cdb6f0b362555cb7b6}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
@@ -1119,7 +1120,7 @@ Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__
 
 
 
-Definition at line \mbox{\hyperlink{spacetime__navier__stokes__elements_8cc_source_l02976}{2976}} of file \mbox{\hyperlink{spacetime__navier__stokes__elements_8cc_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc}}.
+Definition at line 2976 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_aa0f254fd47e4b5818835ba5e5bde1c78}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_aa0f254fd47e4b5818835ba5e5bde1c78}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!ndof\_types@{ndof\_types}}
@@ -1138,7 +1139,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a0c6037a870
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02344}{2344}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2344 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_af96b330b72d73e7143509ac05b4b358c}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_af96b330b72d73e7143509ac05b4b358c}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!npres\_nst@{npres\_nst}}
@@ -1157,11 +1158,11 @@ Implements \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a9484c6
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02255}{2255}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2255 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l01090}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::identify\+\_\+load\+\_\+data()}}, and \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l01209}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs()}}.
+Referenced by oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::identify\+\_\+load\+\_\+data(), and oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_af96b330b72d73e7143509ac05b4b358c}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_af96b330b72d73e7143509ac05b4b358c}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!npres\_nst@{npres\_nst}}
@@ -1180,7 +1181,7 @@ Implements \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a9484c6
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l02262}{2262}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2262 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_af96b330b72d73e7143509ac05b4b358c}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_af96b330b72d73e7143509ac05b4b358c}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!npres\_nst@{npres\_nst}}
@@ -1199,7 +1200,7 @@ Implements \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a9484c6
 
 
 
-Definition at line \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source_l02207}{2207}} of file \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2207 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_aeff0bcaa4ac992aa8a8ade46461027e9}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_aeff0bcaa4ac992aa8a8ade46461027e9}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!output@{output}}
@@ -1218,11 +1219,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02327}{2327}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2327 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l01472}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::output()}}.
+References oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_aeff0bcaa4ac992aa8a8ade46461027e9}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_aeff0bcaa4ac992aa8a8ade46461027e9}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!output@{output}}
@@ -1241,11 +1242,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l02334}{2334}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2334 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l01472}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::output()}}.
+References oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_aeff0bcaa4ac992aa8a8ade46461027e9}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_aeff0bcaa4ac992aa8a8ade46461027e9}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!output@{output}}
@@ -1264,11 +1265,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations
 
 
 
-Definition at line \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source_l02279}{2279}} of file \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2279 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l01472}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::output()}}.
+References oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a17d0d5d02bfbaa5f7fbd37023909be0d}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a17d0d5d02bfbaa5f7fbd37023909be0d}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!output@{output}}
@@ -1287,11 +1288,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02335}{2335}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2335 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l01472}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::output()}}.
+References oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a17d0d5d02bfbaa5f7fbd37023909be0d}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a17d0d5d02bfbaa5f7fbd37023909be0d}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!output@{output}}
@@ -1310,11 +1311,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l02342}{2342}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2342 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l01472}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::output()}}.
+References oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a17d0d5d02bfbaa5f7fbd37023909be0d}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a17d0d5d02bfbaa5f7fbd37023909be0d}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!output@{output}}
@@ -1333,11 +1334,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations
 
 
 
-Definition at line \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source_l02287}{2287}} of file \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2287 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l01472}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::output()}}.
+References oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a0fa5f52017a6577ef0b50f280ec044d4}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a0fa5f52017a6577ef0b50f280ec044d4}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!output@{output}}
@@ -1356,11 +1357,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02311}{2311}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2311 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l01472}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::output()}}.
+References oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a0fa5f52017a6577ef0b50f280ec044d4}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a0fa5f52017a6577ef0b50f280ec044d4}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!output@{output}}
@@ -1379,11 +1380,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l02318}{2318}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2318 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l01472}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::output()}}.
+References oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a0fa5f52017a6577ef0b50f280ec044d4}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a0fa5f52017a6577ef0b50f280ec044d4}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!output@{output}}
@@ -1402,11 +1403,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations
 
 
 
-Definition at line \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source_l02263}{2263}} of file \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2263 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l01472}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::output()}}.
+References oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a734f37204be71a51958da81ecfab0b44}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a734f37204be71a51958da81ecfab0b44}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!output@{output}}
@@ -1425,11 +1426,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02319}{2319}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2319 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l01472}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::output()}}.
+References oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a734f37204be71a51958da81ecfab0b44}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a734f37204be71a51958da81ecfab0b44}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!output@{output}}
@@ -1448,11 +1449,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l02326}{2326}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2326 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l01472}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::output()}}.
+References oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a734f37204be71a51958da81ecfab0b44}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a734f37204be71a51958da81ecfab0b44}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!output@{output}}
@@ -1471,11 +1472,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations
 
 
 
-Definition at line \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source_l02271}{2271}} of file \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2271 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l01472}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::output()}}.
+References oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a83f431d9c59396253ff1c58175cc1f68}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a83f431d9c59396253ff1c58175cc1f68}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!p\_local\_eqn@{p\_local\_eqn}}
@@ -1494,11 +1495,11 @@ Implements \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquat
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02229}{2229}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2229 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}, and \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02221}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst()}}.
+References oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), and oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a83f431d9c59396253ff1c58175cc1f68}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a83f431d9c59396253ff1c58175cc1f68}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!p\_local\_eqn@{p\_local\_eqn}}
@@ -1517,11 +1518,11 @@ Implements \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquat
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l02236}{2236}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2236 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}, and \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02221}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst()}}.
+References oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), and oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a83f431d9c59396253ff1c58175cc1f68}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a83f431d9c59396253ff1c58175cc1f68}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!p\_local\_eqn@{p\_local\_eqn}}
@@ -1540,11 +1541,11 @@ Implements \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquat
 
 
 
-Definition at line \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source_l02181}{2181}} of file \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2181 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}, and \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02221}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst()}}.
+References oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), and oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!p\_nodal\_index\_nst@{p\_nodal\_index\_nst}}
@@ -1563,11 +1564,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02221}{2221}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2221 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02264}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::fix\+\_\+pressure()}}, \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00877}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::further\+\_\+setup\+\_\+hanging\+\_\+nodes()}}, \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l01090}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::identify\+\_\+load\+\_\+data()}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02229}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::p\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02238}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::p\+\_\+nst()}}, \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l01209}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs()}}, and \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l01191}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs()}}.
+Referenced by oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::fix\+\_\+pressure(), oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::further\+\_\+setup\+\_\+hanging\+\_\+nodes(), oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::identify\+\_\+load\+\_\+data(), oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::p\+\_\+local\+\_\+eqn(), oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::p\+\_\+nst(), oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), and oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!p\_nodal\_index\_nst@{p\_nodal\_index\_nst}}
@@ -1586,7 +1587,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l02228}{2228}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2228 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!p\_nodal\_index\_nst@{p\_nodal\_index\_nst}}
@@ -1605,7 +1606,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations
 
 
 
-Definition at line \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source_l02173}{2173}} of file \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2173 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a96d9c9568f643e4023f8d8828db834da}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a96d9c9568f643e4023f8d8828db834da}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!p\_nst@{p\_nst}}
@@ -1624,11 +1625,11 @@ Implements \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a6ef4da
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02238}{2238}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2238 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, and \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02221}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst()}}.
+References oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), and oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a96d9c9568f643e4023f8d8828db834da}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a96d9c9568f643e4023f8d8828db834da}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!p\_nst@{p\_nst}}
@@ -1647,11 +1648,11 @@ Implements \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a6ef4da
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l02245}{2245}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2245 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, and \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02221}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst()}}.
+References oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), and oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a96d9c9568f643e4023f8d8828db834da}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a96d9c9568f643e4023f8d8828db834da}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!p\_nst@{p\_nst}}
@@ -1670,11 +1671,11 @@ Implements \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a6ef4da
 
 
 
-Definition at line \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source_l02190}{2190}} of file \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2190 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, and \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02221}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst()}}.
+References oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), and oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a35b0de550910ef4f3730ecb3e7c919e5}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a35b0de550910ef4f3730ecb3e7c919e5}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!p\_nst@{p\_nst}}
@@ -1693,11 +1694,11 @@ Implements \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a7508ea
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02247}{2247}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2247 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02221}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst()}}, and \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02128}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::\+Pconv}}.
+References oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst(), and oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::\+Pconv.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a35b0de550910ef4f3730ecb3e7c919e5}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a35b0de550910ef4f3730ecb3e7c919e5}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!p\_nst@{p\_nst}}
@@ -1716,11 +1717,11 @@ Implements \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a7508ea
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l02254}{2254}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2254 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02221}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst()}}, and \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02128}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::\+Pconv}}.
+References oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst(), and oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::\+Pconv.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a35b0de550910ef4f3730ecb3e7c919e5}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a35b0de550910ef4f3730ecb3e7c919e5}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!p\_nst@{p\_nst}}
@@ -1739,11 +1740,11 @@ Implements \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a7508ea
 
 
 
-Definition at line \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source_l02199}{2199}} of file \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2199 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02221}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst()}}, and \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02128}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::\+Pconv}}.
+References oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::p\+\_\+nodal\+\_\+index\+\_\+nst(), and oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::\+Pconv.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a753a70924a30395b452b1286a6fccdaa}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a753a70924a30395b452b1286a6fccdaa}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!Pconv@{Pconv}}
@@ -1753,7 +1754,7 @@ References \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Elemen
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8cc_source_l02985}{2985}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8cc_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc}}.
+Definition at line 2985 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_aced1318457c56d3dd70c1af44c95b3d0}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_aced1318457c56d3dd70c1af44c95b3d0}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!Pconv@{Pconv}}
@@ -1763,7 +1764,7 @@ Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__press
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source_l02978}{2978}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8cc_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc}}.
+Definition at line 2978 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_aced1318457c56d3dd70c1af44c95b3d0}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_aced1318457c56d3dd70c1af44c95b3d0}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!Pconv@{Pconv}}
@@ -1773,7 +1774,7 @@ Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__
 
 
 
-Definition at line \mbox{\hyperlink{spacetime__navier__stokes__elements_8cc_source_l02982}{2982}} of file \mbox{\hyperlink{spacetime__navier__stokes__elements_8cc_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc}}.
+Definition at line 2982 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a48213eb3a18f3f0db23a45635e6d67d0}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a48213eb3a18f3f0db23a45635e6d67d0}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!pshape\_nst@{pshape\_nst}}
@@ -1792,7 +1793,7 @@ Implements \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_abc9547
 
 
 
-Referenced by \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l01051}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::interpolating\+\_\+basis()}}.
+Referenced by oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::interpolating\+\_\+basis().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a0207839792d31eee1c72b5d387d3c405}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a0207839792d31eee1c72b5d387d3c405}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!pshape\_nst@{pshape\_nst}}
@@ -1810,11 +1811,11 @@ Implements \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_abc9547
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02791}{2791}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2791 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{shape_8h_source_l00608}{oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 2 $>$()}}, and \mbox{\hyperlink{shape_8h_source_l00635}{oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 3 $>$()}}.
+References i, s, oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 2 $>$(), and oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 3 $>$().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a48213eb3a18f3f0db23a45635e6d67d0}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a48213eb3a18f3f0db23a45635e6d67d0}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!pshape\_nst@{pshape\_nst}}
@@ -1847,11 +1848,11 @@ Implements \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_abc9547
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l02808}{2808}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2808 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{shape_8h_source_l00608}{oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 2 $>$()}}.
+References i, s, and oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 2 $>$().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a48213eb3a18f3f0db23a45635e6d67d0}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a48213eb3a18f3f0db23a45635e6d67d0}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!pshape\_nst@{pshape\_nst}}
@@ -1884,11 +1885,11 @@ Implements \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_abc9547
 
 
 
-Definition at line \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source_l02538}{2538}} of file \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2538 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{shape_8h_source_l00608}{oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 2 $>$()}}.
+References i, s, and oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 2 $>$().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a99a8df03684c102b460acd8219bf4938}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a99a8df03684c102b460acd8219bf4938}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!pshape\_nst@{pshape\_nst}}
@@ -1907,11 +1908,11 @@ Implements \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a91a3e0
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02885}{2885}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2885 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References s.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a99a8df03684c102b460acd8219bf4938}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a99a8df03684c102b460acd8219bf4938}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!pshape\_nst@{pshape\_nst}}
@@ -1977,11 +1978,11 @@ Pressure test functions at local coordinate s.
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02838}{2838}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2838 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{shape_8h_source_l00608}{oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 2 $>$()}}, and \mbox{\hyperlink{shape_8h_source_l00635}{oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 3 $>$()}}.
+References i, s, oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 2 $>$(), and oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 3 $>$().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_aedd9a5851d2b4fb5a2a82a62760e0d32}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_aedd9a5851d2b4fb5a2a82a62760e0d32}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!ptest\_nst@{ptest\_nst}}
@@ -1995,11 +1996,11 @@ References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfo
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l02855}{2855}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2855 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{shape_8h_source_l00608}{oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 2 $>$()}}.
+References i, s, and oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 2 $>$().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a7ca4887e4e194347f9283bf3a6bc1c30}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a7ca4887e4e194347f9283bf3a6bc1c30}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!required\_nvalue@{required\_nvalue}}
@@ -2022,11 +2023,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeEl
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02199}{2199}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2199 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02123}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::\+Initial\+\_\+\+Nvalue}}.
+References oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::\+Initial\+\_\+\+Nvalue.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a7ca4887e4e194347f9283bf3a6bc1c30}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a7ca4887e4e194347f9283bf3a6bc1c30}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!required\_nvalue@{required\_nvalue}}
@@ -2049,11 +2050,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeEl
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l02206}{2206}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2206 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02123}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::\+Initial\+\_\+\+Nvalue}}.
+References oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::\+Initial\+\_\+\+Nvalue.
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a7ca4887e4e194347f9283bf3a6bc1c30}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a7ca4887e4e194347f9283bf3a6bc1c30}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!required\_nvalue@{required\_nvalue}}
@@ -2076,11 +2077,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeEl
 
 
 
-Definition at line \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source_l02155}{2155}} of file \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2155 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02123}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::\+Initial\+\_\+\+Nvalue}}.
+References oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::\+Initial\+\_\+\+Nvalue.
 
 
 
@@ -2098,11 +2099,11 @@ Static array of ints to hold number of variables at node.
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02123}{2123}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2123 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02199}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::required\+\_\+nvalue()}}.
+Referenced by oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::required\+\_\+nvalue().
 
 \mbox{\Hypertarget{classoomph_1_1QTaylorHoodSpaceTimeElement_a5eaf421b85f9ca1797bfc2532270cac9}\label{classoomph_1_1QTaylorHoodSpaceTimeElement_a5eaf421b85f9ca1797bfc2532270cac9}} 
 \index{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$@{oomph::QTaylorHoodSpaceTimeElement$<$ DIM $>$}!Pconv@{Pconv}}
@@ -2117,11 +2118,11 @@ Static array of ints to hold conversion from pressure node numbers to actual nod
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02128}{2128}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2128 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02247}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::p\+\_\+nst()}}, and \mbox{\hyperlink{refineable__discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00885}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::pressure\+\_\+node\+\_\+pt()}}.
+Referenced by oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::p\+\_\+nst(), and oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$\+::pressure\+\_\+node\+\_\+pt().
 
 
 

@@ -18,13 +18,13 @@ Inheritance diagram for oomph\+::Quad\+Tree\+Root\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1QuadTreeRoot_a30cf086b11949193946818c43aeec5e5}{Quad\+Tree\+Root}} (\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_a7d630dad19ef861ab6a5f37ad6ea67f4}{object\+\_\+pt}})
+\mbox{\hyperlink{classoomph_1_1QuadTreeRoot_a30cf086b11949193946818c43aeec5e5}{Quad\+Tree\+Root}} (\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_a2f2eeb0f1dd161f696cccc652974ff4c}{object\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Constructor for the (empty) root quadtree\+: Pass pointer to associated object, a \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_012_01_4}{Refineable\+QElement$<$2$>$}}. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1QuadTreeRoot_a4213fe660982c75c4f8b4f61fd3c8d0f}{Quad\+Tree\+Root}} (const \mbox{\hyperlink{classoomph_1_1QuadTreeRoot}{Quad\+Tree\+Root}} \&dummy)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QuadTreeRoot_a0d10479c4c80576b3b185add5c402643}{operator=}} (const \mbox{\hyperlink{classoomph_1_1QuadTreeRoot}{Quad\+Tree\+Root}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
-int \& \mbox{\hyperlink{classoomph_1_1QuadTreeRoot_a01811c91fc5fe174ca6678e556f0beee}{north\+\_\+equivalent}} (const int \&neighbour)
+int \& \mbox{\hyperlink{classoomph_1_1QuadTreeRoot_a9b91196bd6112e7f205c0882b163ea2a}{north\+\_\+equivalent}} (const int \&neighbour)
 \begin{DoxyCompactList}\small\item\em Return north equivalent of the neighbours in specified direction\+: When viewed from the current quadtree\textquotesingle{}s {\ttfamily neighbour} neighbour, our northern direction is the neighbour\textquotesingle{}s north\+\_\+equivalent(neighbour) direction. If there\textquotesingle{}s no rotation, this map contains the identify so that, e.\+g. {\ttfamily north\+\_\+equivalent(\+W)=N} (read as\+: \char`\"{}in my Western neighbour, my North is its North\char`\"{}). If the western neighbour is rotated by 180 degrees relative to the current quadtree, say, we have {\ttfamily north\+\_\+equivalent(\+W)=S} (read as\+: \char`\"{}in my Western neighbour, my North is its South\char`\"{}); etc. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classoomph_1_1QuadTreeRoot_ac106ae83ae55b7a510d8bad7c5f0db65}{direction\+\_\+of\+\_\+neighbour}} (\mbox{\hyperlink{classoomph_1_1QuadTreeRoot}{Quad\+Tree\+Root}} $\ast$quadtree\+\_\+root\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em If quadtree\+\_\+root\+\_\+pt is a neighbour, return the direction \mbox{[}N/\+S/\+E/W\mbox{]} in which it is found, otherwise return OMEGA. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -39,7 +39,7 @@ int \mbox{\hyperlink{classoomph_1_1QuadTreeRoot_ac106ae83ae55b7a510d8bad7c5f0db6
 \doxysubsection{Detailed Description}
 \mbox{\hyperlink{classoomph_1_1QuadTreeRoot}{Quad\+Tree\+Root}} is a \mbox{\hyperlink{classoomph_1_1QuadTree}{Quad\+Tree}} that forms the root of a (recursive) quadtree. The \char`\"{}root node\char`\"{} is special as it holds additional information about its neighbours and their relative rotation (inside a \mbox{\hyperlink{classoomph_1_1QuadTreeForest}{Quad\+Tree\+Forest}}). 
 
-Definition at line \mbox{\hyperlink{quadtree_8h_source_l00292}{292}} of file \mbox{\hyperlink{quadtree_8h_source}{quadtree.\+h}}.
+Definition at line 292 of file quadtree.\+h.
 
 
 
@@ -56,11 +56,11 @@ Constructor for the (empty) root quadtree\+: Pass pointer to associated object, 
 
 
 
-Definition at line \mbox{\hyperlink{quadtree_8h_source_l00309}{309}} of file \mbox{\hyperlink{quadtree_8h_source}{quadtree.\+h}}.
+Definition at line 309 of file quadtree.\+h.
 
 
 
-References \mbox{\hyperlink{quadtree_8h_source_l00061}{oomph\+::\+Quad\+Tree\+Names\+::E}}, \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, \mbox{\hyperlink{quadtree_8h_source_l00304}{North\+\_\+equivalent}}, \mbox{\hyperlink{quadtree_8h_source_l00062}{oomph\+::\+Quad\+Tree\+Names\+::S}}, \mbox{\hyperlink{quadtree_8h_source_l00232}{oomph\+::\+Quad\+Tree\+::\+Static\+\_\+data\+\_\+has\+\_\+been\+\_\+setup}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
+References oomph\+::\+Quad\+Tree\+Names\+::E, oomph\+::\+Quad\+Tree\+Names\+::N, North\+\_\+equivalent, oomph\+::\+Quad\+Tree\+Names\+::S, oomph\+::\+Quad\+Tree\+::\+Static\+\_\+data\+\_\+has\+\_\+been\+\_\+setup, oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), and oomph\+::\+Quad\+Tree\+Names\+::W.
 
 \mbox{\Hypertarget{classoomph_1_1QuadTreeRoot_a4213fe660982c75c4f8b4f61fd3c8d0f}\label{classoomph_1_1QuadTreeRoot_a4213fe660982c75c4f8b4f61fd3c8d0f}} 
 \index{oomph::QuadTreeRoot@{oomph::QuadTreeRoot}!QuadTreeRoot@{QuadTreeRoot}}
@@ -87,21 +87,21 @@ If quadtree\+\_\+root\+\_\+pt is a neighbour, return the direction \mbox{[}N/\+S
 
 
 
-Definition at line \mbox{\hyperlink{quadtree_8h_source_l00377}{377}} of file \mbox{\hyperlink{quadtree_8h_source}{quadtree.\+h}}.
+Definition at line 377 of file quadtree.\+h.
 
 
 
-References \mbox{\hyperlink{quadtree_8h_source_l00061}{oomph\+::\+Quad\+Tree\+Names\+::E}}, \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, \mbox{\hyperlink{tree_8h_source_l00330}{oomph\+::\+Tree\+Root\+::\+Neighbour\+\_\+pt}}, \mbox{\hyperlink{tree_8h_source_l00262}{oomph\+::\+Tree\+::\+OMEGA}}, \mbox{\hyperlink{quadtree_8h_source_l00062}{oomph\+::\+Quad\+Tree\+Names\+::S}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
+References oomph\+::\+Quad\+Tree\+Names\+::E, oomph\+::\+Quad\+Tree\+Names\+::N, oomph\+::\+Tree\+Root\+::\+Neighbour\+\_\+pt, oomph\+::\+Tree\+::\+OMEGA, oomph\+::\+Quad\+Tree\+Names\+::S, and oomph\+::\+Quad\+Tree\+Names\+::W.
 
 
 
-Referenced by \mbox{\hyperlink{quadtree_8cc_source_l01067}{oomph\+::\+Quad\+Tree\+Forest\+::construct\+\_\+north\+\_\+equivalents()}}.
+Referenced by oomph\+::\+Quad\+Tree\+Forest\+::construct\+\_\+north\+\_\+equivalents().
 
-\mbox{\Hypertarget{classoomph_1_1QuadTreeRoot_a01811c91fc5fe174ca6678e556f0beee}\label{classoomph_1_1QuadTreeRoot_a01811c91fc5fe174ca6678e556f0beee}} 
+\mbox{\Hypertarget{classoomph_1_1QuadTreeRoot_a9b91196bd6112e7f205c0882b163ea2a}\label{classoomph_1_1QuadTreeRoot_a9b91196bd6112e7f205c0882b163ea2a}} 
 \index{oomph::QuadTreeRoot@{oomph::QuadTreeRoot}!north\_equivalent@{north\_equivalent}}
 \index{north\_equivalent@{north\_equivalent}!oomph::QuadTreeRoot@{oomph::QuadTreeRoot}}
 \doxysubsubsection{\texorpdfstring{north\_equivalent()}{north\_equivalent()}}
-{\footnotesize\ttfamily int \& oomph\+::\+Quad\+Tree\+Root\+::north\+\_\+equivalent (\begin{DoxyParamCaption}\item[{const int \&}]{neighbour }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily int\& oomph\+::\+Quad\+Tree\+Root\+::north\+\_\+equivalent (\begin{DoxyParamCaption}\item[{const int \&}]{neighbour }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -109,15 +109,15 @@ Return north equivalent of the neighbours in specified direction\+: When viewed 
 
 
 
-Definition at line \mbox{\hyperlink{quadtree_8h_source_l00354}{354}} of file \mbox{\hyperlink{quadtree_8h_source}{quadtree.\+h}}.
+Definition at line 354 of file quadtree.\+h.
 
 
 
-References \mbox{\hyperlink{quadtree_8h_source_l00199}{oomph\+::\+Quad\+Tree\+::\+Direct\+\_\+string}}, \mbox{\hyperlink{quadtree_8h_source_l00061}{oomph\+::\+Quad\+Tree\+Names\+::E}}, \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, \mbox{\hyperlink{quadtree_8h_source_l00304}{North\+\_\+equivalent}}, \mbox{\hyperlink{quadtree_8h_source_l00062}{oomph\+::\+Quad\+Tree\+Names\+::S}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
+References oomph\+::\+Quad\+Tree\+::\+Direct\+\_\+string, oomph\+::\+Quad\+Tree\+Names\+::E, oomph\+::\+Quad\+Tree\+Names\+::N, North\+\_\+equivalent, oomph\+::\+Quad\+Tree\+Names\+::S, and oomph\+::\+Quad\+Tree\+Names\+::W.
 
 
 
-Referenced by \mbox{\hyperlink{quadtree_8cc_source_l01067}{oomph\+::\+Quad\+Tree\+Forest\+::construct\+\_\+north\+\_\+equivalents()}}, and \mbox{\hyperlink{quadtree_8cc_source_l00413}{oomph\+::\+Quad\+Tree\+::gteq\+\_\+edge\+\_\+neighbour()}}.
+Referenced by oomph\+::\+Quad\+Tree\+Forest\+::construct\+\_\+north\+\_\+equivalents(), and oomph\+::\+Quad\+Tree\+::gteq\+\_\+edge\+\_\+neighbour().
 
 \mbox{\Hypertarget{classoomph_1_1QuadTreeRoot_a0d10479c4c80576b3b185add5c402643}\label{classoomph_1_1QuadTreeRoot_a0d10479c4c80576b3b185add5c402643}} 
 \index{oomph::QuadTreeRoot@{oomph::QuadTreeRoot}!operator=@{operator=}}
@@ -144,11 +144,11 @@ Broken assignment operator.
 
 
 
-Definition at line \mbox{\hyperlink{quadtree_8h_source_l00304}{304}} of file \mbox{\hyperlink{quadtree_8h_source}{quadtree.\+h}}.
+Definition at line 304 of file quadtree.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{quadtree_8h_source_l00354}{north\+\_\+equivalent()}}, and \mbox{\hyperlink{quadtree_8h_source_l00309}{Quad\+Tree\+Root()}}.
+Referenced by north\+\_\+equivalent(), and Quad\+Tree\+Root().
 
 
 

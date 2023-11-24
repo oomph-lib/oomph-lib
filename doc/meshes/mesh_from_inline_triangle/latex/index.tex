@@ -63,9 +63,11 @@ A number of issues are important\+:
 ~\newline
 
 \item the history values of the nodal positions. This is important for moving mesh problems where the mesh velocity is required to evaluate the ALE time-\/derivatives.
+\end{DoxyItemize}
 \end{DoxyItemize}~\newline
 ~\newline
 
+\begin{DoxyItemize}
 \item The ability to automatically project the solution from the old to the new mesh requires the elements, of type {\ttfamily ELEMENT}, say, to be wrapped in the templated {\ttfamily Projectable\+Element$<$\+ELEMENT$>$} class. This class requires the specification of various element characteristics (such as the number of fields to be projected, the number of history values, etc) in the form of virtual functions. This is much more straightforward than upgrading an existing element to become a refineable element for use in an adaptive computation on a structured mesh because the \char`\"{}mesh adaptation by mesh re-\/generation\char`\"{} avoids the creation of hanging nodes. See the section \mbox{\hyperlink{index_wrapper}{Upgrading elements to become \char`\"{}projectable\char`\"{}}} for a slightly more detailed discussion of this aspect. ~\newline
  ~\newline
 ~\newline
@@ -98,7 +100,7 @@ Following our usual practice, we use a namespace to define the source function a
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===== start\_of\_namespace=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for exact solution for Poisson equation with "{}sharp step"{} }}
-\DoxyCodeLine{\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceTanhSolnForPoisson}{TanhSolnForPoisson}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -145,7 +147,7 @@ We start by processing command line arguments which allow us to run the code in 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_main========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver code for demo of inline triangle mesh generation}}
-\DoxyCodeLine{\textcolor{comment}{//============================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//============================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{mesh__from__inline__triangle_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} **argv)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ \textcolor{comment}{// Store command line arguments}}
@@ -216,7 +218,7 @@ The problem class contains the usual member functions. As discussed above, the b
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_problem\_class============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Class definition}}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classUnstructuredPoissonProblem}{UnstructuredPoissonProblem}} : \textcolor{keyword}{public} \textcolor{keyword}{virtual} Problem}
 \DoxyCodeLine{\{}
@@ -284,7 +286,7 @@ Most of the problem constructor is concerned with the specification of the mesh 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_constructor=====================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classUnstructuredPoissonProblem_a26e7610a714aea17c9278beec4842371}{UnstructuredPoissonProblem<ELEMENT>::UnstructuredPoissonProblem}}()}
 \DoxyCodeLine{\{          }
@@ -604,8 +606,8 @@ As discussed above, the helper function {\ttfamily complete\+\_\+problem\+\_\+se
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_complete======================================================}}
-\DoxyCodeLine{\textcolor{comment}{ /// Set boundary condition exactly, and complete the build of }\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// all elements}}
+\DoxyCodeLine{\textcolor{comment}{ /// Set boundary condition exactly, and complete the build of }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// all elements}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classUnstructuredPoissonProblem_a5cbf00790e8469b43c64c6aaadfe7b41}{UnstructuredPoissonProblem<ELEMENT>::complete\_problem\_setup}}()}
@@ -669,7 +671,7 @@ The function {\ttfamily apply\+\_\+boundary\+\_\+conditions()} does exactly what
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_apply\_bc=====================================================}}
 \DoxyCodeLine{\textcolor{comment}{ /// Helper function to apply boundary conditions}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classUnstructuredPoissonProblem_ace8b8b3097ae2024a0589b2bf9b4ee7b}{UnstructuredPoissonProblem<ELEMENT>::apply\_boundary\_conditions}}()}
 \DoxyCodeLine{\{}
@@ -710,7 +712,7 @@ We compare the computed solution against the exact solution\+:
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_doc\_solution=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classUnstructuredPoissonProblem_a9b21a3c3f574da71411f852006fe2a0c}{UnstructuredPoissonProblem<ELEMENT>::doc\_solution}}(\textcolor{keyword}{const} }
 \DoxyCodeLine{                                                       std::string\& comment)}

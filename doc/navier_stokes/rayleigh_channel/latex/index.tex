@@ -63,7 +63,7 @@ As usual, we use a namespace to define the problem parameters, the Reynolds numb
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_namespace=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for global parameters}}
-\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Parameters}{Global\_Parameters}}}
 \DoxyCodeLine{\{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Reynolds number}}
@@ -91,7 +91,7 @@ We use another namespace to define the exact, time-\/periodic parallel-\/flow so
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_exact\_solution=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for exact solution}}
-\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceExactSoln}{ExactSoln}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ \textcolor{comment}{}}
@@ -154,7 +154,7 @@ We use optional command line arguments to specify which mode the code is run in\
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_main======================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver code for Rayleigh channel problem}}
-\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{rayleigh__channel_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[]) }
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -262,8 +262,8 @@ The problem class is very similar to that used in the \href{../../driven_cavity/
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_problem\_class=============================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Rayleigh-\/type problem: 2D channel whose upper}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// wall oscillates periodically.}}
+\DoxyCodeLine{\textcolor{comment}{/// Rayleigh-\/type problem: 2D channel whose upper}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// wall oscillates periodically.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classRayleighProblem}{RayleighProblem}} : \textcolor{keyword}{public} Problem}
@@ -358,7 +358,7 @@ We start by building the timestepper, determining its type from the class\textqu
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_constructor=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Problem constructor}}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT,\textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\mbox{\hyperlink{classRayleighProblem_a53aeda7918553889b3fa0dd70cdb30f1}{RayleighProblem<ELEMENT,TIMESTEPPER>::RayleighProblem}}}
 \DoxyCodeLine{(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&nx, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&ny,}
@@ -446,8 +446,8 @@ The application of initial conditions for vector-\/valued problems is performed 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//======================start\_of\_set\_initial\_condition====================}}
-\DoxyCodeLine{\textcolor{comment}{/// Set initial condition: Assign previous and current values}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// from exact solution.}}
+\DoxyCodeLine{\textcolor{comment}{/// Set initial condition: Assign previous and current values}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// from exact solution.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT,\textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRayleighProblem_a5c54c02c45c656cabbe8f8808e2cfd6b}{RayleighProblem<ELEMENT,TIMESTEPPER>::set\_initial\_condition}}()}
@@ -543,7 +543,7 @@ The function {\ttfamily doc\+\_\+solution(...)} is similar to those used in the 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_doc\_solution=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT,\textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRayleighProblem_aca1b0f4134bc745c75ae524450e97109}{RayleighProblem<ELEMENT,TIMESTEPPER>::doc\_solution}}(DocInfo\& doc\_info)}
 \DoxyCodeLine{\{ }
@@ -637,7 +637,7 @@ The function {\ttfamily unsteady\+\_\+run(...)} is used to perform the timestepp
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_unsteady\_run=====================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Unsteady run...}}
-\DoxyCodeLine{\textcolor{comment}{//=============================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=============================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT,\textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRayleighProblem_a7404085b8be8865ffc07fd4133e40151}{RayleighProblem<ELEMENT,TIMESTEPPER>::unsteady\_run}}(DocInfo\& doc\_info)}
 \DoxyCodeLine{\{}

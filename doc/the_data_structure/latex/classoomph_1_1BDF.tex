@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1BDF}{}\doxysection{oomph\+::BDF\texorpdfstring{$<$}{<} NSTEPS \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1BDF}{}\doxysection{oomph\+::BDF$<$ NSTEPS $>$ Class Template Reference}
 \label{classoomph_1_1BDF}\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
 
 
@@ -9,7 +9,7 @@
 
 {\ttfamily \#include $<$timesteppers.\+h$>$}
 
-Inheritance diagram for oomph\+::BDF\texorpdfstring{$<$}{<} NSTEPS \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::BDF$<$ NSTEPS $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{classoomph_1_1BDF}
@@ -114,11 +114,12 @@ double \mbox{\hyperlink{classoomph_1_1BDF_a64fe5c2a1e2872698dd72033d9f0087f}{Err
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$unsigned NSTEPS$>$\newline
 class oomph\+::\+BDF$<$ NSTEPS $>$}
+
 ////////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////// 
 
 Templated class for BDF-\/type time-\/steppers with fixed or variable timestep. 1st time derivative recovered directly from the previous function values. Template parameter represents the number of previous timesteps stored, so that BDF$<$1$>$ is the classical first order backward \mbox{\hyperlink{classoomph_1_1Euler}{Euler}} scheme. Need to reset weights after every change in timestep. 
 
-Definition at line \mbox{\hyperlink{timesteppers_8h_source_l01164}{1164}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
+Definition at line 1164 of file timesteppers.\+h.
 
 
 
@@ -136,7 +137,7 @@ Typedef for function that returns the (scalar) initial value at a given value of
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8h_source_l01302}{1302}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
+Definition at line 1302 of file timesteppers.\+h.
 
 
 
@@ -154,11 +155,7 @@ Constructor for the case when we allow adaptive timestepping.
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8h_source_l01193}{1193}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
-
-
-
-References \mbox{\hyperlink{timesteppers_8h_source_l00245}{oomph\+::\+Time\+Stepper\+::\+Adaptive\+\_\+\+Flag}}, \mbox{\hyperlink{timesteppers_8h_source_l00273}{oomph\+::\+Time\+Stepper\+::\+Predictor\+\_\+storage\+\_\+index}}, \mbox{\hyperlink{timesteppers_8h_source_l01186}{oomph\+::\+BDF$<$ NSTEPS $>$\+::\+Predictor\+\_\+weight}}, \mbox{\hyperlink{matrices_8h_source_l00498}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::resize()}}, \mbox{\hyperlink{timesteppers_8h_source_l00241}{oomph\+::\+Time\+Stepper\+::\+Type}}, and \mbox{\hyperlink{timesteppers_8h_source_l00237}{oomph\+::\+Time\+Stepper\+::\+Weight}}.
+Definition at line 1193 of file timesteppers.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BDF_ab90066621c7160c9e8805d15f3ce6e3b}\label{classoomph_1_1BDF_ab90066621c7160c9e8805d15f3ce6e3b}} 
 \index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!BDF@{BDF}}
@@ -187,11 +184,11 @@ Initialise the time-\/history for the \mbox{\hyperlink{classoomph_1_1Data}{Data}
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8h_source_l01307}{1307}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
+Definition at line 1307 of file timesteppers.\+h.
 
 
 
-References \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}, \mbox{\hyperlink{nodes_8h_source_l00271}{oomph\+::\+Data\+::set\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{timesteppers_8h_source_l00123}{oomph\+::\+Time\+::time()}}, and \mbox{\hyperlink{timesteppers_8h_source_l00234}{oomph\+::\+Time\+Stepper\+::\+Time\+\_\+pt}}.
+References oomph\+::\+Data\+::nvalue(), oomph\+::\+Data\+::set\+\_\+value(), and t.
 
 \mbox{\Hypertarget{classoomph_1_1BDF_a2506824a840f47d5d816b68f6144c7e7}\label{classoomph_1_1BDF_a2506824a840f47d5d816b68f6144c7e7}} 
 \index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!assign\_initial\_positions\_impulsive@{assign\_initial\_positions\_impulsive}}
@@ -210,11 +207,11 @@ Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_ab66972f0eaf3ba34645793e23
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8h_source_l01263}{1263}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
+Definition at line 1263 of file timesteppers.\+h.
 
 
 
-References \mbox{\hyperlink{timesteppers_8h_source_l00623}{oomph\+::\+Time\+Stepper\+::adaptive\+\_\+flag()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{nodes_8h_source_l01016}{oomph\+::\+Node\+::nposition\+\_\+type()}}, \mbox{\hyperlink{nodes_8h_source_l01113}{oomph\+::\+Node\+::position\+\_\+is\+\_\+a\+\_\+copy()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{nodes_8h_source_l01126}{oomph\+::\+Node\+::x\+\_\+gen()}}.
+References i, oomph\+::\+Node\+::ndim(), oomph\+::\+Node\+::nposition\+\_\+type(), oomph\+::\+Node\+::position\+\_\+is\+\_\+a\+\_\+copy(), t, and oomph\+::\+Node\+::x\+\_\+gen().
 
 \mbox{\Hypertarget{classoomph_1_1BDF_a569e571e8f96382bfa9cecd7abb05af4}\label{classoomph_1_1BDF_a569e571e8f96382bfa9cecd7abb05af4}} 
 \index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!assign\_initial\_values\_impulsive@{assign\_initial\_values\_impulsive}}
@@ -233,11 +230,11 @@ Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a7e894df13c88c96dd8eced270
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8h_source_l01234}{1234}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
+Definition at line 1234 of file timesteppers.\+h.
 
 
 
-References \mbox{\hyperlink{timesteppers_8h_source_l00623}{oomph\+::\+Time\+Stepper\+::adaptive\+\_\+flag()}}, \mbox{\hyperlink{nodes_8h_source_l00253}{oomph\+::\+Data\+::is\+\_\+a\+\_\+copy()}}, \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}, \mbox{\hyperlink{nodes_8h_source_l00271}{oomph\+::\+Data\+::set\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{nodes_8h_source_l00293}{oomph\+::\+Data\+::value()}}.
+References oomph\+::\+Data\+::is\+\_\+a\+\_\+copy(), oomph\+::\+Data\+::nvalue(), oomph\+::\+Data\+::set\+\_\+value(), t, and oomph\+::\+Data\+::value().
 
 \mbox{\Hypertarget{classoomph_1_1BDF_a4542664b2fcd531a6f328b671fc1ec59}\label{classoomph_1_1BDF_a4542664b2fcd531a6f328b671fc1ec59}} 
 \index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!calculate\_predicted\_positions@{calculate\_predicted\_positions}}
@@ -255,11 +252,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_a2e7fafceb9330ac97
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00148}{148}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+Definition at line 148 of file timesteppers.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{nodes_8h_source_l01113}{oomph\+::\+Node\+::position\+\_\+is\+\_\+a\+\_\+copy()}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
+References i, oomph\+::\+Node\+::ndim(), oomph\+::\+Node\+::position\+\_\+is\+\_\+a\+\_\+copy(), and oomph\+::\+Node\+::x().
 
 \mbox{\Hypertarget{classoomph_1_1BDF_ac18181b30a4087e50df9b7f1447c4628}\label{classoomph_1_1BDF_ac18181b30a4087e50df9b7f1447c4628}} 
 \index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!calculate\_predicted\_positions@{calculate\_predicted\_positions}}
@@ -277,11 +274,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_a2e7fafceb9330ac97
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00310}{310}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+Definition at line 310 of file timesteppers.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{nodes_8h_source_l01113}{oomph\+::\+Node\+::position\+\_\+is\+\_\+a\+\_\+copy()}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
+References i, oomph\+::\+Node\+::ndim(), oomph\+::\+Node\+::position\+\_\+is\+\_\+a\+\_\+copy(), and oomph\+::\+Node\+::x().
 
 \mbox{\Hypertarget{classoomph_1_1BDF_a725c01b15133c89f0330265303ae7ad5}\label{classoomph_1_1BDF_a725c01b15133c89f0330265303ae7ad5}} 
 \index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!calculate\_predicted\_positions@{calculate\_predicted\_positions}}
@@ -299,7 +296,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_a2e7fafceb9330ac97
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00453}{453}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+Definition at line 453 of file timesteppers.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1BDF_a24a8bcf4fffc8cd4514ef36fc2c997f8}\label{classoomph_1_1BDF_a24a8bcf4fffc8cd4514ef36fc2c997f8}} 
 \index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!calculate\_predicted\_positions@{calculate\_predicted\_positions}}
@@ -332,11 +329,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_a159d508b1ae643fe3
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00115}{115}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+Definition at line 115 of file timesteppers.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l00253}{oomph\+::\+Data\+::is\+\_\+a\+\_\+copy()}}, \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}, \mbox{\hyperlink{nodes_8h_source_l00271}{oomph\+::\+Data\+::set\+\_\+value()}}, and \mbox{\hyperlink{nodes_8h_source_l00293}{oomph\+::\+Data\+::value()}}.
+References i, oomph\+::\+Data\+::is\+\_\+a\+\_\+copy(), oomph\+::\+Data\+::nvalue(), oomph\+::\+Data\+::set\+\_\+value(), and oomph\+::\+Data\+::value().
 
 \mbox{\Hypertarget{classoomph_1_1BDF_ae6df3030f401934811c5404302931c43}\label{classoomph_1_1BDF_ae6df3030f401934811c5404302931c43}} 
 \index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!calculate\_predicted\_values@{calculate\_predicted\_values}}
@@ -354,11 +351,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_a159d508b1ae643fe3
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00277}{277}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+Definition at line 277 of file timesteppers.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l00253}{oomph\+::\+Data\+::is\+\_\+a\+\_\+copy()}}, \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}, \mbox{\hyperlink{nodes_8h_source_l00271}{oomph\+::\+Data\+::set\+\_\+value()}}, and \mbox{\hyperlink{nodes_8h_source_l00293}{oomph\+::\+Data\+::value()}}.
+References i, oomph\+::\+Data\+::is\+\_\+a\+\_\+copy(), oomph\+::\+Data\+::nvalue(), oomph\+::\+Data\+::set\+\_\+value(), and oomph\+::\+Data\+::value().
 
 \mbox{\Hypertarget{classoomph_1_1BDF_a962e127ab9a9753073e796d077ca0351}\label{classoomph_1_1BDF_a962e127ab9a9753073e796d077ca0351}} 
 \index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!calculate\_predicted\_values@{calculate\_predicted\_values}}
@@ -376,7 +373,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_a159d508b1ae643fe3
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00445}{445}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+Definition at line 445 of file timesteppers.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1BDF_a4c3da151a405c2041103cb2795c3ff95}\label{classoomph_1_1BDF_a4c3da151a405c2041103cb2795c3ff95}} 
 \index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!calculate\_predicted\_values@{calculate\_predicted\_values}}
@@ -410,7 +407,7 @@ Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a00e57b6436cff4fc82af481b8
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8h_source_l01440}{1440}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
+Definition at line 1440 of file timesteppers.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BDF_ae6fac2faf065b8abf2afff64b63874f6}\label{classoomph_1_1BDF_ae6fac2faf065b8abf2afff64b63874f6}} 
 \index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!nprev\_values@{nprev\_values}}
@@ -429,11 +426,7 @@ Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a0f38713ed304c18d9f7b5cf81
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8h_source_l01434}{1434}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
-
-
-
-Referenced by \mbox{\hyperlink{timesteppers_8h_source_l01333}{oomph\+::\+BDF$<$ NSTEPS $>$\+::shift\+\_\+time\+\_\+values()}}.
+Definition at line 1434 of file timesteppers.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BDF_a7b3914aa4c684707ebc6fef2502393cc}\label{classoomph_1_1BDF_a7b3914aa4c684707ebc6fef2502393cc}} 
 \index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!operator=@{operator=}}
@@ -463,7 +456,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_a251e5d4b37381e582
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8h_source_l01227}{1227}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
+Definition at line 1227 of file timesteppers.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BDF_aaaa65898eacdbaf30f4863334d737633}\label{classoomph_1_1BDF_aaaa65898eacdbaf30f4863334d737633}} 
 \index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!set\_error\_weights@{set\_error\_weights}}
@@ -481,7 +474,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_aee0c1da870a603e64
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00181}{181}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+Definition at line 181 of file timesteppers.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1BDF_a86a9de5ebf4262f48070bd4890a0a3fd}\label{classoomph_1_1BDF_a86a9de5ebf4262f48070bd4890a0a3fd}} 
 \index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!set\_error\_weights@{set\_error\_weights}}
@@ -499,7 +492,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_aee0c1da870a603e64
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00343}{343}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+Definition at line 343 of file timesteppers.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1BDF_a8c1a5f1f2bfeecd1a89af839d8bcb113}\label{classoomph_1_1BDF_a8c1a5f1f2bfeecd1a89af839d8bcb113}} 
 \index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!set\_error\_weights@{set\_error\_weights}}
@@ -517,7 +510,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_aee0c1da870a603e64
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00461}{461}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+Definition at line 461 of file timesteppers.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1BDF_ae7edaffc90cfe8cca6817751fa3cccb8}\label{classoomph_1_1BDF_ae7edaffc90cfe8cca6817751fa3cccb8}} 
 \index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!set\_error\_weights@{set\_error\_weights}}
@@ -550,7 +543,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_a2dfb949155ba43306
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00092}{92}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+Definition at line 92 of file timesteppers.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1BDF_ae7707775e9680fced8c73e8ffad6e128}\label{classoomph_1_1BDF_ae7707775e9680fced8c73e8ffad6e128}} 
 \index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!set\_predictor\_weights@{set\_predictor\_weights}}
@@ -568,7 +561,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_a2dfb949155ba43306
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00253}{253}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+Definition at line 253 of file timesteppers.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1BDF_a56cb4ff554d97a3930fe26e5dd073611}\label{classoomph_1_1BDF_a56cb4ff554d97a3930fe26e5dd073611}} 
 \index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!set\_predictor\_weights@{set\_predictor\_weights}}
@@ -586,7 +579,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_a2dfb949155ba43306
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00429}{429}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+Definition at line 429 of file timesteppers.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1BDF_a9c5b309e589b0e0da14d912556e5cc4a}\label{classoomph_1_1BDF_a9c5b309e589b0e0da14d912556e5cc4a}} 
 \index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!set\_predictor\_weights@{set\_predictor\_weights}}
@@ -619,7 +612,7 @@ Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a028fa3a8d3c6db6b0ddf580cb
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00080}{80}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+Definition at line 80 of file timesteppers.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1BDF_a6247877f68b3f05a666f48b2ae1bba19}\label{classoomph_1_1BDF_a6247877f68b3f05a666f48b2ae1bba19}} 
 \index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!set\_weights@{set\_weights}}
@@ -637,7 +630,7 @@ Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a028fa3a8d3c6db6b0ddf580cb
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00232}{232}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+Definition at line 232 of file timesteppers.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1BDF_a9147291c6a4007d1cbfc9e3761f277f4}\label{classoomph_1_1BDF_a9147291c6a4007d1cbfc9e3761f277f4}} 
 \index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!set\_weights@{set\_weights}}
@@ -655,11 +648,11 @@ Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a028fa3a8d3c6db6b0ddf580cb
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00402}{402}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+Definition at line 402 of file timesteppers.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References i.
 
 \mbox{\Hypertarget{classoomph_1_1BDF_a59cfd069cfa09e8b342cbf2d5234c7ce}\label{classoomph_1_1BDF_a59cfd069cfa09e8b342cbf2d5234c7ce}} 
 \index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!set\_weights@{set\_weights}}
@@ -693,11 +686,11 @@ Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a518b1bee5dc3aae8c5ef13560
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8h_source_l01373}{1373}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
+Definition at line 1373 of file timesteppers.\+h.
 
 
 
-References \mbox{\hyperlink{timesteppers_8h_source_l00623}{oomph\+::\+Time\+Stepper\+::adaptive\+\_\+flag()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{nodes_8h_source_l01016}{oomph\+::\+Node\+::nposition\+\_\+type()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, \mbox{\hyperlink{nodes_8h_source_l01113}{oomph\+::\+Node\+::position\+\_\+is\+\_\+a\+\_\+copy()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{timesteppers_8h_source_l00237}{oomph\+::\+Time\+Stepper\+::\+Weight}}, and \mbox{\hyperlink{nodes_8h_source_l01126}{oomph\+::\+Node\+::x\+\_\+gen()}}.
+References i, oomph\+::\+Node\+::ndim(), oomph\+::\+Node\+::nposition\+\_\+type(), oomph\+::\+Node\+::position\+\_\+is\+\_\+a\+\_\+copy(), t, and oomph\+::\+Node\+::x\+\_\+gen().
 
 \mbox{\Hypertarget{classoomph_1_1BDF_a037ce83f202e4ba2e61666bfdb1ce4b9}\label{classoomph_1_1BDF_a037ce83f202e4ba2e61666bfdb1ce4b9}} 
 \index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!shift\_time\_values@{shift\_time\_values}}
@@ -716,11 +709,11 @@ Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a010a3b03a23a1c48dd8ca1064
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8h_source_l01333}{1333}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
+Definition at line 1333 of file timesteppers.\+h.
 
 
 
-References \mbox{\hyperlink{timesteppers_8h_source_l00623}{oomph\+::\+Time\+Stepper\+::adaptive\+\_\+flag()}}, \mbox{\hyperlink{nodes_8h_source_l00253}{oomph\+::\+Data\+::is\+\_\+a\+\_\+copy()}}, \mbox{\hyperlink{timesteppers_8h_source_l01434}{oomph\+::\+BDF$<$ NSTEPS $>$\+::nprev\+\_\+values()}}, \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}, \mbox{\hyperlink{nodes_8h_source_l00271}{oomph\+::\+Data\+::set\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{timesteppers_8h_source_l00502}{oomph\+::\+Time\+Stepper\+::time\+\_\+derivative()}}, and \mbox{\hyperlink{nodes_8h_source_l00293}{oomph\+::\+Data\+::value()}}.
+References oomph\+::\+Data\+::is\+\_\+a\+\_\+copy(), oomph\+::\+Data\+::nvalue(), oomph\+::\+Data\+::set\+\_\+value(), t, and oomph\+::\+Data\+::value().
 
 \mbox{\Hypertarget{classoomph_1_1BDF_a4224776ca068afa5d942d27c53257bbf}\label{classoomph_1_1BDF_a4224776ca068afa5d942d27c53257bbf}} 
 \index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!temporal\_error\_in\_position@{temporal\_error\_in\_position}}
@@ -738,11 +731,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_ac463807aff4bcbedd
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00190}{190}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+Definition at line 190 of file timesteppers.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
+References i, and oomph\+::\+Node\+::x().
 
 \mbox{\Hypertarget{classoomph_1_1BDF_a0312c8a7b70393901dd23fa642afbb4c}\label{classoomph_1_1BDF_a0312c8a7b70393901dd23fa642afbb4c}} 
 \index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!temporal\_error\_in\_position@{temporal\_error\_in\_position}}
@@ -760,11 +753,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_ac463807aff4bcbedd
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00362}{362}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+Definition at line 362 of file timesteppers.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
+References i, and oomph\+::\+Node\+::x().
 
 \mbox{\Hypertarget{classoomph_1_1BDF_a55d6a294f551a13862facdae3c0cc43c}\label{classoomph_1_1BDF_a55d6a294f551a13862facdae3c0cc43c}} 
 \index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!temporal\_error\_in\_position@{temporal\_error\_in\_position}}
@@ -782,7 +775,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_ac463807aff4bcbedd
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00471}{471}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+Definition at line 471 of file timesteppers.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1BDF_ae4ef2e161fb944b7e6fcf6f7ee47579b}\label{classoomph_1_1BDF_ae4ef2e161fb944b7e6fcf6f7ee47579b}} 
 \index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!temporal\_error\_in\_position@{temporal\_error\_in\_position}}
@@ -815,11 +808,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_a27f66759f6d9b2040
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00210}{210}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+Definition at line 210 of file timesteppers.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{nodes_8h_source_l00293}{oomph\+::\+Data\+::value()}}.
+References i, and oomph\+::\+Data\+::value().
 
 \mbox{\Hypertarget{classoomph_1_1BDF_a3e79ecd14a1d3050a2aafd87144f79c9}\label{classoomph_1_1BDF_a3e79ecd14a1d3050a2aafd87144f79c9}} 
 \index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!temporal\_error\_in\_value@{temporal\_error\_in\_value}}
@@ -837,11 +830,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_a27f66759f6d9b2040
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00382}{382}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+Definition at line 382 of file timesteppers.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{nodes_8h_source_l00293}{oomph\+::\+Data\+::value()}}.
+References i, and oomph\+::\+Data\+::value().
 
 \mbox{\Hypertarget{classoomph_1_1BDF_aea8acbe8a110fdd94b183bf71c9d1c29}\label{classoomph_1_1BDF_aea8acbe8a110fdd94b183bf71c9d1c29}} 
 \index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!temporal\_error\_in\_value@{temporal\_error\_in\_value}}
@@ -859,7 +852,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_a27f66759f6d9b2040
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00484}{484}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+Definition at line 484 of file timesteppers.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1BDF_aab34e35252db11052c72ae7692825149}\label{classoomph_1_1BDF_aab34e35252db11052c72ae7692825149}} 
 \index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!temporal\_error\_in\_value@{temporal\_error\_in\_value}}
@@ -892,7 +885,7 @@ Private data for the error weight.
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8h_source_l01189}{1189}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
+Definition at line 1189 of file timesteppers.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BDF_a8973b856c5829681fd890323e43e03ae}\label{classoomph_1_1BDF_a8973b856c5829681fd890323e43e03ae}} 
 \index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!Predictor\_weight@{Predictor\_weight}}
@@ -907,11 +900,7 @@ Private data for the predictor weights.
 
 
 
-Definition at line \mbox{\hyperlink{timesteppers_8h_source_l01186}{1186}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
-
-
-
-Referenced by \mbox{\hyperlink{timesteppers_8h_source_l01193}{oomph\+::\+BDF$<$ NSTEPS $>$\+::\+BDF()}}.
+Definition at line 1186 of file timesteppers.\+h.
 
 
 

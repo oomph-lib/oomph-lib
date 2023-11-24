@@ -88,7 +88,7 @@ Here\textquotesingle{}s a listing of the complete driver code\+:
 \DoxyCodeLine{\textcolor{comment}{//LIC// multi-\/physics finite-\/element library, available }}
 \DoxyCodeLine{\textcolor{comment}{//LIC// at http://www.oomph-\/lib.org.}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// }}
-\DoxyCodeLine{\textcolor{comment}{//LIC// Copyright (C) 2006-\/2022 Matthias Heil and Andrew Hazel}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// Copyright (C) 2006-\/2023 Matthias Heil and Andrew Hazel}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// }}
 \DoxyCodeLine{\textcolor{comment}{//LIC// This library is free software; you can redistribute it and/or}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// modify it under the terms of the GNU Lesser General Public}}
@@ -152,35 +152,35 @@ Here\textquotesingle{}s a listing of the complete driver code\+:
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Constructor:  Pass start and end points}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classMyStraightLine_a2c63e574f21703250a31fc446ab8045d}{MyStraightLine}}(\textcolor{keyword}{const} Vector<double>\& r\_start, \textcolor{keyword}{const} Vector<double>\& r\_end) }
-\DoxyCodeLine{  :  GeomObject(1,2), \mbox{\hyperlink{classMyStraightLine_a0f66636dd5d1e7ff6ec93acf90879f0c}{R\_start}}(r\_start), \mbox{\hyperlink{classMyStraightLine_afa466e12301ccea99a02fe1bde615691}{R\_end}}(r\_end)}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}(\textcolor{keyword}{const} Vector<double>\& r\_start, \textcolor{keyword}{const} Vector<double>\& r\_end) }
+\DoxyCodeLine{  :  GeomObject(1,2), R\_start(r\_start), R\_end(r\_end)}
 \DoxyCodeLine{  \{ \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Broken copy constructor}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classMyStraightLine_a2c63e574f21703250a31fc446ab8045d}{MyStraightLine}}(\textcolor{keyword}{const} \mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}\& dummy) }
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}(\textcolor{keyword}{const} \mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}\& dummy) }
 \DoxyCodeLine{  \{ }
 \DoxyCodeLine{   BrokenCopy::broken\_copy(\textcolor{stringliteral}{"{}MyStraightLine"{}});}
 \DoxyCodeLine{  \} }
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Destructor:  Empty}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classMyStraightLine_ae2f9a5860652a726b2f4dc94d1332ef1}{\string~MyStraightLine}}()\{\}}
+\DoxyCodeLine{\textcolor{comment}{} \string~\mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}()\{\}}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Position Vector at Lagrangian coordinate zeta }}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classMyStraightLine_ae3ee51a7b81acc2ef652bec4ee955d2f}{position}}(\textcolor{keyword}{const} Vector<double>\& zeta, Vector<double>\& r)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} position(\textcolor{keyword}{const} Vector<double>\& zeta, Vector<double>\& r)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\textcolor{keyword}{  }\{}
 \DoxyCodeLine{   \textcolor{comment}{// Position Vector}}
-\DoxyCodeLine{   r[0] = \mbox{\hyperlink{classMyStraightLine_a0f66636dd5d1e7ff6ec93acf90879f0c}{R\_start}}[0]+(\mbox{\hyperlink{classMyStraightLine_afa466e12301ccea99a02fe1bde615691}{R\_end}}[0]-\/\mbox{\hyperlink{classMyStraightLine_a0f66636dd5d1e7ff6ec93acf90879f0c}{R\_start}}[0])*zeta[0];}
-\DoxyCodeLine{   r[1] = \mbox{\hyperlink{classMyStraightLine_a0f66636dd5d1e7ff6ec93acf90879f0c}{R\_start}}[1]+(\mbox{\hyperlink{classMyStraightLine_afa466e12301ccea99a02fe1bde615691}{R\_end}}[1]-\/\mbox{\hyperlink{classMyStraightLine_a0f66636dd5d1e7ff6ec93acf90879f0c}{R\_start}}[1])*zeta[0];}
+\DoxyCodeLine{   r[0] = R\_start[0]+(R\_end[0]-\/R\_start[0])*zeta[0];}
+\DoxyCodeLine{   r[1] = R\_start[1]+(R\_end[1]-\/R\_start[1])*zeta[0];}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ }
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Start point of line}}
-\DoxyCodeLine{\textcolor{comment}{} Vector<double> \mbox{\hyperlink{classMyStraightLine_a0f66636dd5d1e7ff6ec93acf90879f0c}{R\_start}};}
+\DoxyCodeLine{\textcolor{comment}{} Vector<double> R\_start;}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// End point of line}}
-\DoxyCodeLine{\textcolor{comment}{} Vector<double> \mbox{\hyperlink{classMyStraightLine_afa466e12301ccea99a02fe1bde615691}{R\_end}};}
+\DoxyCodeLine{\textcolor{comment}{} Vector<double> R\_end;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\};}
 \DoxyCodeLine{}
@@ -215,10 +215,10 @@ Here\textquotesingle{}s a listing of the complete driver code\+:
 \DoxyCodeLine{\textcolor{comment}{} std::complex<double> \mbox{\hyperlink{namespaceGlobal__Parameters_a373950a959cd784c8f8028099807c2fb}{Nu}}(std::complex<double>(0.3,0.0));}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Define the non-\/dimensional Young's modulus}}
-\DoxyCodeLine{\textcolor{comment}{} Vector<std::complex<double> > \mbox{\hyperlink{namespaceGlobal__Parameters_a6ca3f639e01df7af855729cd128a6d69}{E}}(2,std::complex<double>(1.0,0.0));}
+\DoxyCodeLine{\textcolor{comment}{} Vector<std::complex<double> > \mbox{\hyperlink{namespaceGlobal__Parameters_aa961bcca2115ce9cb37cc8ccb1b90cae}{E}}(2,std::complex<double>(1.0,0.0));}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Non-\/dim square of frequency for solid -\/-\/ dependent variable!}}
-\DoxyCodeLine{\textcolor{comment}{} Vector<std::complex<double> > \mbox{\hyperlink{namespaceGlobal__Parameters_a64666b7f54095b6095ce9214285e0b01}{Omega\_sq}}(2,std::complex<double>(100.0,0.0));}
+\DoxyCodeLine{\textcolor{comment}{} Vector<std::complex<double> > \mbox{\hyperlink{namespaceGlobal__Parameters_a91314f7f1cc80c43543948568f50f405}{Omega\_sq}}(2,std::complex<double>(100.0,0.0));}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Density ratio: solid to fluid}}
 \DoxyCodeLine{\textcolor{comment}{}Vector<double> \mbox{\hyperlink{namespaceGlobal__Parameters_a517d4c31b8bce6563c2f605266dd9679}{Density\_ratio}}(2,1.0);}
@@ -226,8 +226,8 @@ Here\textquotesingle{}s a listing of the complete driver code\+:
 \DoxyCodeLine{\textcolor{comment}{ /// Function to update dependent parameter values}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceGlobal__Parameters_ae0f9a80fb7510dbfbbef22582da231b7}{update\_parameter\_values}}()}
 \DoxyCodeLine{ \{}
-\DoxyCodeLine{  \mbox{\hyperlink{namespaceGlobal__Parameters_a64666b7f54095b6095ce9214285e0b01}{Omega\_sq}}[0]=\mbox{\hyperlink{namespaceGlobal__Parameters_a517d4c31b8bce6563c2f605266dd9679}{Density\_ratio}}[0]*\mbox{\hyperlink{namespaceGlobal__Parameters_a7814fddf663e56168174a42d2cd6b4c1}{Q}};}
-\DoxyCodeLine{  \mbox{\hyperlink{namespaceGlobal__Parameters_a64666b7f54095b6095ce9214285e0b01}{Omega\_sq}}[1]=\mbox{\hyperlink{namespaceGlobal__Parameters_a517d4c31b8bce6563c2f605266dd9679}{Density\_ratio}}[1]*\mbox{\hyperlink{namespaceGlobal__Parameters_a7814fddf663e56168174a42d2cd6b4c1}{Q}};}
+\DoxyCodeLine{  \mbox{\hyperlink{namespaceGlobal__Parameters_a91314f7f1cc80c43543948568f50f405}{Omega\_sq}}[0]=\mbox{\hyperlink{namespaceGlobal__Parameters_a517d4c31b8bce6563c2f605266dd9679}{Density\_ratio}}[0]*\mbox{\hyperlink{namespaceGlobal__Parameters_a7814fddf663e56168174a42d2cd6b4c1}{Q}};}
+\DoxyCodeLine{  \mbox{\hyperlink{namespaceGlobal__Parameters_a91314f7f1cc80c43543948568f50f405}{Omega\_sq}}[1]=\mbox{\hyperlink{namespaceGlobal__Parameters_a517d4c31b8bce6563c2f605266dd9679}{Density\_ratio}}[1]*\mbox{\hyperlink{namespaceGlobal__Parameters_a7814fddf663e56168174a42d2cd6b4c1}{Q}};}
 \DoxyCodeLine{ \}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Uniform pressure}}
@@ -268,121 +268,121 @@ Here\textquotesingle{}s a listing of the complete driver code\+:
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Constructor:}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classCoatedSphereProblem_ab9c983e7f0bed66f13d59bd65d6d151b}{CoatedSphereProblem}}();}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classCoatedSphereProblem}{CoatedSphereProblem}}();}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update function (empty)}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classCoatedSphereProblem_aa268009485d4d2bb6b4856bfa318aaa9}{actions\_before\_newton\_solve}}()\{\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_newton\_solve()\{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update function (empty)}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classCoatedSphereProblem_ae5287efab54b16ec1bd5cced98971c9c}{actions\_after\_newton\_solve}}() \{\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_newton\_solve() \{\}}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Actions before adapt: Wipe the face meshes}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classCoatedSphereProblem_a0cd5d4eea9d34eefd829f7539c41c998}{actions\_before\_adapt}}();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_adapt();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Actions after adapt: Rebuild the face meshes}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classCoatedSphereProblem_a77906dadd8ceb1d1d3182f298a0ca2d2}{actions\_after\_adapt}}();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_adapt();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Recompute gamma integral before checking Newton residuals}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classCoatedSphereProblem_a2f55bc904971ca96eb9af3451ef5b4c4}{actions\_before\_newton\_convergence\_check}}()}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_newton\_convergence\_check()}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   \mbox{\hyperlink{classCoatedSphereProblem_abb33720ab0a096c5e1d6be33310bff21}{Helmholtz\_DtN\_mesh\_pt}}-\/>setup\_gamma();}
+\DoxyCodeLine{   Helmholtz\_DtN\_mesh\_pt-\/>setup\_gamma();}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{  \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classCoatedSphereProblem_aaeade2a110160c002b2b45954a5a0edc}{doc\_solution}}(DocInfo\& doc\_info);}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} doc\_solution(DocInfo\& doc\_info);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Create FSI traction elements}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classCoatedSphereProblem_a2d342158b3058cd5392e2de3fd7595da}{create\_fsi\_traction\_elements}}();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} create\_fsi\_traction\_elements();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Create Helmholtz FSI flux elements}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classCoatedSphereProblem_a9a301689052eefd53552aadc23ff893b}{create\_helmholtz\_fsi\_flux\_elements}}(); }
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} create\_helmholtz\_fsi\_flux\_elements(); }
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Setup interaction}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classCoatedSphereProblem_aeea43c892871a6c65df992aedc3b3547}{setup\_interaction}}();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} setup\_interaction();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Create DtN elements on outer boundary}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classCoatedSphereProblem_a867f4ed706f00a73c87c2c862dcf19c3}{create\_helmholtz\_DtN\_elements}}();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} create\_helmholtz\_DtN\_elements();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Create solid traction elements }}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classCoatedSphereProblem_a93cb1d435858c7a1835cbd74f7cb5db8}{create\_solid\_traction\_elements}}();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} create\_solid\_traction\_elements();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Delete (face) elements in specified mesh }}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classCoatedSphereProblem_a1092568f8c12afcefe7cbf56ebbb115c}{delete\_face\_elements}}(Mesh* \textcolor{keyword}{const} \& boundary\_mesh\_pt);}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} delete\_face\_elements(Mesh* \textcolor{keyword}{const} \& boundary\_mesh\_pt);}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Complete problem setup}}
-\DoxyCodeLine{ \textcolor{keywordtype}{void} \mbox{\hyperlink{classCoatedSphereProblem_a7417ba994216c3d817259891176cd392}{complete\_problem\_setup}}();}
+\DoxyCodeLine{ \textcolor{keywordtype}{void} complete\_problem\_setup();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Boundary ID of upper symmetry boundary}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classCoatedSphereProblem_add071e3a8d3159b181b31559ca233408}{Upper\_symmetry\_boundary\_id}};}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} Upper\_symmetry\_boundary\_id;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Boundary ID of lower symmetry boundary}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classCoatedSphereProblem_a9bfac78ea8fcd9d1fc4844e9db66c0d1}{Lower\_symmetry\_boundary\_id}};}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} Lower\_symmetry\_boundary\_id;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Boundary ID of upper inner boundary}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classCoatedSphereProblem_abdd54d39d9757a4da7d2eb56bab1c392}{Upper\_inner\_boundary\_id}};}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} Upper\_inner\_boundary\_id;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Boundary ID of lower inner boundary}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classCoatedSphereProblem_ac5b9684155899ef6c43d73c1dbffc076}{Lower\_inner\_boundary\_id}};}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} Lower\_inner\_boundary\_id;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Boundary ID of outer boundary}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classCoatedSphereProblem_abf88cdcfd5fe2e91dde565ef0801ed47}{Outer\_boundary\_id}};}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} Outer\_boundary\_id;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Boundary ID of rib divider}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classCoatedSphereProblem_a4eeb21412dc4a62d33c03048286fb4b6}{Rib\_divider\_boundary\_id}};}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} Rib\_divider\_boundary\_id;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Boundary ID of outer boundary in Helmholtz mesh}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classCoatedSphereProblem_a7462cad0a109f08ee2dcff2b45bff9bc}{HH\_outer\_boundary\_id}};}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} HH\_outer\_boundary\_id;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Boundary ID of inner boundary in Helmholtz mesh}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classCoatedSphereProblem_a2d8f60f068d2e9442a9f096843ffb098}{HH\_inner\_boundary\_id}};}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} HH\_inner\_boundary\_id;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Boundary ID of upper boundary in Helmholtz mesh}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classCoatedSphereProblem_a020701b863392278cc7e1dfb3ff8fc3b}{HH\_upper\_symmetry\_boundary\_id}};}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} HH\_upper\_symmetry\_boundary\_id;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Boundary ID of lower boundary in Helmholtz mesh}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classCoatedSphereProblem_a92c1c0e05c620f01d8b6851d952cfc19}{HH\_lower\_symmetry\_boundary\_id}};}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} HH\_lower\_symmetry\_boundary\_id;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{preprocessor}{\#ifdef ADAPTIVE}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to solid mesh}}
-\DoxyCodeLine{\textcolor{comment}{} RefineableTriangleMesh<ELASTICITY\_ELEMENT>* \mbox{\hyperlink{classCoatedSphereProblem_a4bba1d667061b296208039207bd3347d}{Solid\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} RefineableTriangleMesh<ELASTICITY\_ELEMENT>* Solid\_mesh\_pt;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{preprocessor}{\#else}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to solid mesh}}
-\DoxyCodeLine{\textcolor{comment}{} TriangleMesh<ELASTICITY\_ELEMENT>* \mbox{\hyperlink{classCoatedSphereProblem_a4bba1d667061b296208039207bd3347d}{Solid\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} TriangleMesh<ELASTICITY\_ELEMENT>* Solid\_mesh\_pt;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to mesh of solid traction elements}}
-\DoxyCodeLine{\textcolor{comment}{} Mesh* \mbox{\hyperlink{classCoatedSphereProblem_aa51300e92727226f4b150eac2c62ddd7}{Solid\_traction\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} Mesh* Solid\_traction\_mesh\_pt;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to mesh of FSI traction elements}}
-\DoxyCodeLine{\textcolor{comment}{} Mesh* \mbox{\hyperlink{classCoatedSphereProblem_a4bb400e47b8d3713bfd5e27ae2c89683}{FSI\_traction\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} Mesh* FSI\_traction\_mesh\_pt;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{preprocessor}{\#ifdef ADAPTIVE}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to Helmholtz mesh}}
-\DoxyCodeLine{\textcolor{comment}{} RefineableTriangleMesh<HELMHOLTZ\_ELEMENT>* \mbox{\hyperlink{classCoatedSphereProblem_a73e496c225b61138eca66e652e1c5d22}{Helmholtz\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} RefineableTriangleMesh<HELMHOLTZ\_ELEMENT>* Helmholtz\_mesh\_pt;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{preprocessor}{\#else}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to Helmholtz mesh}}
-\DoxyCodeLine{\textcolor{comment}{} TriangleMesh<HELMHOLTZ\_ELEMENT>* \mbox{\hyperlink{classCoatedSphereProblem_a73e496c225b61138eca66e652e1c5d22}{Helmholtz\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} TriangleMesh<HELMHOLTZ\_ELEMENT>* Helmholtz\_mesh\_pt;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to mesh of Helmholtz FSI flux elements}}
-\DoxyCodeLine{\textcolor{comment}{} Mesh* \mbox{\hyperlink{classCoatedSphereProblem_aef75017cfe8c77449e00f8f70aa4dcef}{Helmholtz\_fsi\_flux\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} Mesh* Helmholtz\_fsi\_flux\_mesh\_pt;}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to mesh containing the DtN elements}}
-\DoxyCodeLine{\textcolor{comment}{} FourierDecomposedHelmholtzDtNMesh<HELMHOLTZ\_ELEMENT>* \mbox{\hyperlink{classCoatedSphereProblem_abb33720ab0a096c5e1d6be33310bff21}{Helmholtz\_DtN\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} FourierDecomposedHelmholtzDtNMesh<HELMHOLTZ\_ELEMENT>* Helmholtz\_DtN\_mesh\_pt;}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Trace file}}
-\DoxyCodeLine{\textcolor{comment}{} ofstream \mbox{\hyperlink{classCoatedSphereProblem_a79847476b26744153c0359041a52a270}{Trace\_file}};}
+\DoxyCodeLine{\textcolor{comment}{} ofstream Trace\_file;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\};\textcolor{comment}{// end\_of\_problem\_class}}
 \DoxyCodeLine{}
@@ -1041,10 +1041,10 @@ Here\textquotesingle{}s a listing of the complete driver code\+:
 \DoxyCodeLine{     el\_pt-\/>nu\_pt() = \&\mbox{\hyperlink{namespaceGlobal__Parameters_a373950a959cd784c8f8028099807c2fb}{Global\_Parameters::Nu}};}
 \DoxyCodeLine{      }
 \DoxyCodeLine{     \textcolor{comment}{// Square of non-\/dim frequency}}
-\DoxyCodeLine{     el\_pt-\/>omega\_sq\_pt()= \&\mbox{\hyperlink{namespaceGlobal__Parameters_a64666b7f54095b6095ce9214285e0b01}{Global\_Parameters::Omega\_sq}}[r];}
+\DoxyCodeLine{     el\_pt-\/>omega\_sq\_pt()= \&\mbox{\hyperlink{namespaceGlobal__Parameters_a91314f7f1cc80c43543948568f50f405}{Global\_Parameters::Omega\_sq}}[r];}
 \DoxyCodeLine{}
 \DoxyCodeLine{     \textcolor{comment}{// Set the pointer to non-\/dim Young's modulus}}
-\DoxyCodeLine{     el\_pt-\/>youngs\_modulus\_pt() = \&\mbox{\hyperlink{namespaceGlobal__Parameters_a6ca3f639e01df7af855729cd128a6d69}{Global\_Parameters::E}}[r];}
+\DoxyCodeLine{     el\_pt-\/>youngs\_modulus\_pt() = \&\mbox{\hyperlink{namespaceGlobal__Parameters_aa961bcca2115ce9cb37cc8ccb1b90cae}{Global\_Parameters::E}}[r];}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{  \}    }
@@ -1347,9 +1347,9 @@ Here\textquotesingle{}s a listing of the complete driver code\+:
 \DoxyCodeLine{ oomph\_info << \textcolor{stringliteral}{"{}Fluid wavenumber : k\string^2 = "{}} << \mbox{\hyperlink{namespaceGlobal__Parameters_a91a3fa265abaf9e724c668ee800ffb29}{Global\_Parameters::K\_squared}}}
 \DoxyCodeLine{            << std::endl;}
 \DoxyCodeLine{ oomph\_info << \textcolor{stringliteral}{"{}Solid wavenumber : Omega\_sq = "{}} }
-\DoxyCodeLine{            << \mbox{\hyperlink{namespaceGlobal__Parameters_a64666b7f54095b6095ce9214285e0b01}{Global\_Parameters::Omega\_sq}}[0] << std::endl;}
+\DoxyCodeLine{            << \mbox{\hyperlink{namespaceGlobal__Parameters_a91314f7f1cc80c43543948568f50f405}{Global\_Parameters::Omega\_sq}}[0] << std::endl;}
 \DoxyCodeLine{ oomph\_info << \textcolor{stringliteral}{"{}Solid wavenumber : Omega\_sq = "{}} }
-\DoxyCodeLine{            << \mbox{\hyperlink{namespaceGlobal__Parameters_a64666b7f54095b6095ce9214285e0b01}{Global\_Parameters::Omega\_sq}}[1] }
+\DoxyCodeLine{            << \mbox{\hyperlink{namespaceGlobal__Parameters_a91314f7f1cc80c43543948568f50f405}{Global\_Parameters::Omega\_sq}}[1] }
 \DoxyCodeLine{            << std::endl << std::endl; }
 \DoxyCodeLine{}
 \DoxyCodeLine{}
@@ -1417,8 +1417,8 @@ Here\textquotesingle{}s a listing of the complete driver code\+:
 \DoxyCodeLine{            << \mbox{\hyperlink{namespaceGlobal__Parameters_a91a3fa265abaf9e724c668ee800ffb29}{Global\_Parameters::K\_squared}} << \textcolor{stringliteral}{"{} "{}}}
 \DoxyCodeLine{            << \mbox{\hyperlink{namespaceGlobal__Parameters_a517d4c31b8bce6563c2f605266dd9679}{Global\_Parameters::Density\_ratio}}[0] << \textcolor{stringliteral}{"{} "{}}}
 \DoxyCodeLine{            << \mbox{\hyperlink{namespaceGlobal__Parameters_a517d4c31b8bce6563c2f605266dd9679}{Global\_Parameters::Density\_ratio}}[1] << \textcolor{stringliteral}{"{} "{}}}
-\DoxyCodeLine{            << \mbox{\hyperlink{namespaceGlobal__Parameters_a64666b7f54095b6095ce9214285e0b01}{Global\_Parameters::Omega\_sq}}[0].real() << \textcolor{stringliteral}{"{} "{}}}
-\DoxyCodeLine{            << \mbox{\hyperlink{namespaceGlobal__Parameters_a64666b7f54095b6095ce9214285e0b01}{Global\_Parameters::Omega\_sq}}[1].real() << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{            << \mbox{\hyperlink{namespaceGlobal__Parameters_a91314f7f1cc80c43543948568f50f405}{Global\_Parameters::Omega\_sq}}[0].real() << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{            << \mbox{\hyperlink{namespaceGlobal__Parameters_a91314f7f1cc80c43543948568f50f405}{Global\_Parameters::Omega\_sq}}[1].real() << \textcolor{stringliteral}{"{} "{}}}
 \DoxyCodeLine{            << power << \textcolor{stringliteral}{"{} "{}} }
 \DoxyCodeLine{            << std::endl;}
 \DoxyCodeLine{   }
@@ -1515,7 +1515,7 @@ Here\textquotesingle{}s a listing of the complete driver code\+:
 \DoxyCodeLine{   \textcolor{comment}{// Make rib a lot heavier but keep its stiffness}}
 \DoxyCodeLine{   \textcolor{keywordflow}{if} (i==0)}
 \DoxyCodeLine{    \{}
-\DoxyCodeLine{     \mbox{\hyperlink{namespaceGlobal__Parameters_a6ca3f639e01df7af855729cd128a6d69}{Global\_Parameters::E}}[1]=1.0;}
+\DoxyCodeLine{     \mbox{\hyperlink{namespaceGlobal__Parameters_aa961bcca2115ce9cb37cc8ccb1b90cae}{Global\_Parameters::E}}[1]=1.0;}
 \DoxyCodeLine{     \mbox{\hyperlink{namespaceGlobal__Parameters_a517d4c31b8bce6563c2f605266dd9679}{Global\_Parameters::Density\_ratio}}[1]=10.0; }
 \DoxyCodeLine{     \mbox{\hyperlink{namespaceGlobal__Parameters_ae0f9a80fb7510dbfbbef22582da231b7}{Global\_Parameters::update\_parameter\_values}}();}
 \DoxyCodeLine{    \}}
@@ -1523,7 +1523,7 @@ Here\textquotesingle{}s a listing of the complete driver code\+:
 \DoxyCodeLine{   \textcolor{comment}{// Make rib very soft and inertia-\/less}}
 \DoxyCodeLine{   \textcolor{keywordflow}{if} (i==1)}
 \DoxyCodeLine{    \{}
-\DoxyCodeLine{     \mbox{\hyperlink{namespaceGlobal__Parameters_a6ca3f639e01df7af855729cd128a6d69}{Global\_Parameters::E}}[1]=1.0e-\/16;}
+\DoxyCodeLine{     \mbox{\hyperlink{namespaceGlobal__Parameters_aa961bcca2115ce9cb37cc8ccb1b90cae}{Global\_Parameters::E}}[1]=1.0e-\/16;}
 \DoxyCodeLine{     \mbox{\hyperlink{namespaceGlobal__Parameters_a517d4c31b8bce6563c2f605266dd9679}{Global\_Parameters::Density\_ratio}}[1]=0.0; }
 \DoxyCodeLine{     \mbox{\hyperlink{namespaceGlobal__Parameters_ae0f9a80fb7510dbfbbef22582da231b7}{Global\_Parameters::update\_parameter\_values}}();}
 \DoxyCodeLine{    \}}

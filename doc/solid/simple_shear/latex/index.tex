@@ -7,7 +7,7 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{\textcolor{comment}{//LIC// multi-\/physics finite-\/element library, available }}
 \DoxyCodeLine{\textcolor{comment}{//LIC// at http://www.oomph-\/lib.org.}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// }}
-\DoxyCodeLine{\textcolor{comment}{//LIC// Copyright (C) 2006-\/2022 Matthias Heil and Andrew Hazel}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// Copyright (C) 2006-\/2023 Matthias Heil and Andrew Hazel}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// }}
 \DoxyCodeLine{\textcolor{comment}{//LIC// This library is free software; you can redistribute it and/or}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// modify it under the terms of the GNU Lesser General Public}}
@@ -60,7 +60,7 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Constructor: }}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classElasticCubicMesh_aa09317d23e99358728bd81d0c67410a4}{ElasticCubicMesh}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&nx, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&ny, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&nz,}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classElasticCubicMesh}{ElasticCubicMesh}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&nx, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&ny, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&nz,}
 \DoxyCodeLine{                  \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&a, \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&b, \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&c,}
 \DoxyCodeLine{                  TimeStepper* time\_stepper\_pt=\&Mesh::Default\_TimeStepper) :}
 \DoxyCodeLine{  SimpleCubicMesh<ELEMENT>(nx,ny,nz,-\/a,a,-\/b,b,-\/c,c,time\_stepper\_pt)}
@@ -70,7 +70,7 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Empty Destructor}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \mbox{\hyperlink{classElasticCubicMesh_a64cc078916561417462636f399a71e88}{\string~ElasticCubicMesh}}() \{ \}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \string~\mbox{\hyperlink{classElasticCubicMesh}{ElasticCubicMesh}}() \{ \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\};}
 \DoxyCodeLine{}
@@ -131,27 +131,27 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classSimpleShearProblem}{SimpleShearProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
-\DoxyCodeLine{ \textcolor{keywordtype}{double} \mbox{\hyperlink{classSimpleShearProblem_a3844145c334e84c6ed94d803aeb1a337}{Shear}};}
+\DoxyCodeLine{ \textcolor{keywordtype}{double} Shear;}
 \DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{keywordtype}{void} \mbox{\hyperlink{classSimpleShearProblem_a3e5d5f57fc041531ee683f50395536f0}{set\_incompressible}}(ELEMENT *el\_pt,\textcolor{keyword}{const} \textcolor{keywordtype}{bool} \&incompressible);}
+\DoxyCodeLine{ \textcolor{keywordtype}{void} set\_incompressible(ELEMENT *el\_pt,\textcolor{keyword}{const} \textcolor{keywordtype}{bool} \&incompressible);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Constructor:}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classSimpleShearProblem_ada0881781b3332f88362528be39613d2}{SimpleShearProblem}}(\textcolor{keyword}{const} \textcolor{keywordtype}{bool} \&incompressible);}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classSimpleShearProblem}{SimpleShearProblem}}(\textcolor{keyword}{const} \textcolor{keywordtype}{bool} \&incompressible);}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Run simulation.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classSimpleShearProblem_ac1746a2634e310571d40d70719d509c0}{run}}(\textcolor{keyword}{const} std::string \&dirname);}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} run(\textcolor{keyword}{const} std::string \&dirname);}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Access function for the mesh}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classElasticCubicMesh}{ElasticCubicMesh<ELEMENT>}}* \mbox{\hyperlink{classSimpleShearProblem_a4939a469c0b494296c2d3adc21638fc3}{mesh\_pt}}() }
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classElasticCubicMesh}{ElasticCubicMesh<ELEMENT>}}* mesh\_pt() }
 \DoxyCodeLine{  \{\textcolor{keywordflow}{return} \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classElasticCubicMesh}{ElasticCubicMesh<ELEMENT>}}*\textcolor{keyword}{>}(Problem::mesh\_pt());\} }
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classSimpleShearProblem_a24c087d9ea194229930bcf9f889a048e}{doc\_solution}}(DocInfo\& doc\_info);}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} doc\_solution(DocInfo\& doc\_info);}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update function (empty)}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classSimpleShearProblem_ab476064967687537e335dfd40d770dbc}{actions\_after\_newton\_solve}}() \{\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_newton\_solve() \{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update before solve: We're dealing with a static problem so}}
 \DoxyCodeLine{\textcolor{comment}{ /// the nodal positions before the next solve merely serve as}}
@@ -162,24 +162,24 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{\textcolor{comment}{ /// Newton method to fail -\/-\/> the overall method is actually more robust}}
 \DoxyCodeLine{\textcolor{comment}{ /// if we use the nodal positions as determined by the Domain/MacroElement-\/}}
 \DoxyCodeLine{\textcolor{comment}{ /// based mesh update as initial guesses. }}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classSimpleShearProblem_a2c63e1a6c120da147b0c4ec9764e1510}{actions\_before\_newton\_solve}}()}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_newton\_solve()}
 \DoxyCodeLine{  \{ }
-\DoxyCodeLine{   \mbox{\hyperlink{classSimpleShearProblem_a1069985934b36d269b4bc8cb3ba00902}{apply\_boundary\_conditions}}();}
+\DoxyCodeLine{   apply\_boundary\_conditions();}
 \DoxyCodeLine{   \textcolor{keywordtype}{bool} update\_all\_solid\_nodes=\textcolor{keyword}{true};}
-\DoxyCodeLine{   \mbox{\hyperlink{classSimpleShearProblem_a4939a469c0b494296c2d3adc21638fc3}{mesh\_pt}}()-\/>node\_update(update\_all\_solid\_nodes);}
+\DoxyCodeLine{   mesh\_pt()-\/>node\_update(update\_all\_solid\_nodes);}
 \DoxyCodeLine{  \}   }
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Shear the top}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classSimpleShearProblem_a1069985934b36d269b4bc8cb3ba00902}{apply\_boundary\_conditions}}()}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} apply\_boundary\_conditions()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{keywordtype}{unsigned} ibound = 5;}
-\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} num\_nod=\mbox{\hyperlink{classSimpleShearProblem_a4939a469c0b494296c2d3adc21638fc3}{mesh\_pt}}()-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} num\_nod=mesh\_pt()-\/>nboundary\_node(ibound);}
 \DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} inod=0;inod<num\_nod;inod++)}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     SolidNode *solid\_nod\_pt = \textcolor{keyword}{static\_cast<}SolidNode*\textcolor{keyword}{>}(}
-\DoxyCodeLine{     \mbox{\hyperlink{classSimpleShearProblem_a4939a469c0b494296c2d3adc21638fc3}{mesh\_pt}}()-\/>boundary\_node\_pt(ibound,inod));}
+\DoxyCodeLine{     mesh\_pt()-\/>boundary\_node\_pt(ibound,inod));}
 \DoxyCodeLine{}
-\DoxyCodeLine{     solid\_nod\_pt-\/>x(0) = solid\_nod\_pt-\/>xi(0) + \mbox{\hyperlink{classSimpleShearProblem_a3844145c334e84c6ed94d803aeb1a337}{Shear}}*}
+\DoxyCodeLine{     solid\_nod\_pt-\/>x(0) = solid\_nod\_pt-\/>xi(0) + Shear*}
 \DoxyCodeLine{      solid\_nod\_pt-\/>xi(2);}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{  \}}

@@ -32,7 +32,7 @@ Paraview makes it possible to animate sequences of plots from time-\/dependent s
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{  \textcolor{comment}{//=================paraview\_helper=================================}}
 \DoxyCodeLine{\textcolor{comment}{  /// Namespace for paraview-\/style output helper functions}}
-\DoxyCodeLine{  \textcolor{comment}{//=================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}  \textcolor{comment}{//=================================================================}}
 \DoxyCodeLine{  \textcolor{keyword}{namespace }ParaviewHelper}
 \DoxyCodeLine{  \{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{    /// Write the pvd file header}}
@@ -77,7 +77,7 @@ The {\ttfamily oomph-\/lib} distribution contains three scripts\+:
 \begin{DoxyEnumerate}
 \item Add {\ttfamily oomph-\/lib\textquotesingle{}s} bin directory to your path (in the example shown here, {\ttfamily oomph-\/lib} is installed in the directory {\ttfamily /home/mheil/version185/oomph})\+: ~\newline
 ~\newline
- 
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{biowulf: 10:31:50\$ PATH=\$PATH:/home/mheil/version185/oomph/bin}
 
@@ -86,7 +86,7 @@ The {\ttfamily oomph-\/lib} distribution contains three scripts\+:
 
 \item Here is what\textquotesingle{}s in the current directory at the moment\+: {\ttfamily curved\+\_\+pipe.\+dat} is the {\ttfamily oomph-\/lib} output produced from \href{../../navier_stokes/curved_pipe/html/index.html}{\texttt{ a simulation of steady flow through a curved pipe.}} ~\newline
 ~\newline
- 
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{biowulf: 11:05:10\$ ll}
 \DoxyCodeLine{total 824}
@@ -97,7 +97,7 @@ The {\ttfamily oomph-\/lib} distribution contains three scripts\+:
 
 \item Run {\ttfamily oomph-\/convert.\+py} ~\newline
 ~\newline
- 
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{biowulf: 11:16:18\$  oomph-\/convert curved\_pipe.dat}
 \DoxyCodeLine{}
@@ -121,7 +121,7 @@ The {\ttfamily oomph-\/lib} distribution contains three scripts\+:
 
 \item We now have the corresponding {\ttfamily $\ast$} {\ttfamily }.vtu file ~\newline
 ~\newline
- 
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{biowulf: 11:32:08\$ ll}
 \DoxyCodeLine{total 1024}
@@ -133,7 +133,7 @@ The {\ttfamily oomph-\/lib} distribution contains three scripts\+:
 
 \item ...which we can visualise with paraview\+: ~\newline
 ~\newline
- 
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{biowulf: 11:34:08\$ paraview -\/-\/data=curved\_pipe.vtu}
 
@@ -250,7 +250,7 @@ Here is a quick demonstration of {\ttfamily oomph-\/convert} and {\ttfamily make
 \begin{DoxyEnumerate}
 \item Add {\ttfamily oomph-\/lib\textquotesingle{}s} bin directory to your path (in the example shown here, {\ttfamily oomph-\/lib} is installed in the directory {\ttfamily /home/mheil/version185/oomph})\+: ~\newline
 ~\newline
- 
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{biowulf: 10:31:50\$ PATH=\$PATH:/home/mheil/version185/oomph/bin}
 
@@ -259,7 +259,7 @@ Here is a quick demonstration of {\ttfamily oomph-\/convert} and {\ttfamily make
 
 \item Here is what\textquotesingle{}s in the current directory at the moment\+: {\ttfamily soln}?. {\ttfamily dat} are the {\ttfamily oomph-\/lib} output files that illustrate the progress of the mesh adaptation during \href{../../poisson/fish_poisson/html/index.html}{\texttt{ the adaptive solution of a Poisson equation in a fish-\/shaped domain.}} ~\newline
 ~\newline
- 
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{biowulf: 11:05:10\$ ll}
 \DoxyCodeLine{total 824}
@@ -273,7 +273,7 @@ Here is a quick demonstration of {\ttfamily oomph-\/convert} and {\ttfamily make
 
 \item Run {\ttfamily oomph-\/convert} on all files (the -\/z option adds zeroes to the numbers -- this is only required if the files are to combined into an animation by paraview) ~\newline
 ~\newline
- 
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{biowulf: 11:16:13\$ oomph-\/convert -\/z soln*.dat}
 \DoxyCodeLine{}
@@ -311,7 +311,7 @@ Here is a quick demonstration of {\ttfamily oomph-\/convert} and {\ttfamily make
 
 \item We now have the corresponding {\ttfamily $\ast$} {\ttfamily }.vtu files ~\newline
 ~\newline
- 
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{biowulf: 12:37:05\$ ll}
 \DoxyCodeLine{total 2568}
@@ -343,7 +343,7 @@ Here is a quick demonstration of {\ttfamily oomph-\/convert} and {\ttfamily make
 
 \item ...and visualise it\+: ~\newline
 ~\newline
- 
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{biowulf: 12:42:08\$ paraview -\/-\/data=mysoln.pvd  }
 
@@ -371,14 +371,14 @@ Here\textquotesingle{}s a screenshot from the paraview session\+: once the {\ttf
 \hypertarget{index_py_sample_mult_par}{}\doxysubsection{An example session for data from a parallel computation}\label{index_py_sample_mult_par}
 {\ttfamily oomph-\/lib} typically outputs results from parallel (distributed) computations on a processor-\/by-\/processor basis, resulting in filenames of the form 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{soln\_proc0\_0.dat                \(\backslash\) }
-\DoxyCodeLine{soln\_proc1\_0.dat                | }
+\DoxyCodeLine{soln\_proc0\_0.dat                \(\backslash\) 
+soln\_proc1\_0.dat                | }
 \DoxyCodeLine{        :                       | Data \textcolor{keywordflow}{for} timestep 0 }
 \DoxyCodeLine{soln\_proc[NPROC-\/1]\_0.dat        / }
 \DoxyCodeLine{        }
 \DoxyCodeLine{}
-\DoxyCodeLine{soln\_proc0\_1.dat                \(\backslash\) }
-\DoxyCodeLine{soln\_proc1\_1.dat                | }
+\DoxyCodeLine{soln\_proc0\_1.dat                \(\backslash\) 
+soln\_proc1\_1.dat                | }
 \DoxyCodeLine{        :                       | Data \textcolor{keywordflow}{for} timestep 1 }
 \DoxyCodeLine{soln\_proc[NPROC-\/1]\_1.dat,       /}
 \DoxyCodeLine{}
@@ -492,7 +492,7 @@ Click on the button\+: ~\newline
   \mbox{\includegraphics[width=0.03\textwidth]{selec4_button}}
 \end{DoxyImageNoCaption}
  {\ttfamily Select} {\ttfamily Points} {\ttfamily Through} to select points through the region selected (3D selection) ~\newline
-When your selection is highlighted, go to {\ttfamily Filters-\/\texorpdfstring{$>$}{>}Data} {\ttfamily Analysis-\/\texorpdfstring{$>$}{>}Extract} {\ttfamily Selection} and  
+When your selection is highlighted, go to {\ttfamily Filters-\/$>$Data} {\ttfamily Analysis-\/$>$Extract} {\ttfamily Selection} and  
 \begin{DoxyImageNoCaption}
   \mbox{\includegraphics[width=0.07\textwidth]{apply_button}}
 \end{DoxyImageNoCaption}

@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1RefineableQuadMesh}{}\doxysection{oomph\+::Refineable\+Quad\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1RefineableQuadMesh}{}\doxysection{oomph\+::Refineable\+Quad\+Mesh$<$ ELEMENT $>$ Class Template Reference}
 \label{classoomph_1_1RefineableQuadMesh}\index{oomph::RefineableQuadMesh$<$ ELEMENT $>$@{oomph::RefineableQuadMesh$<$ ELEMENT $>$}}
 
 
@@ -9,7 +9,7 @@ Intermediate mesh class that implements the mesh adaptation functions specified 
 
 {\ttfamily \#include $<$refineable\+\_\+quad\+\_\+mesh.\+h$>$}
 
-Inheritance diagram for oomph\+::Refineable\+Quad\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Refineable\+Quad\+Mesh$<$ ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=9.804714cm]{classoomph_1_1RefineableQuadMesh}
@@ -34,11 +34,12 @@ void \mbox{\hyperlink{classoomph_1_1RefineableQuadMesh_ab27780da6f9be1b625d75fc4
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class ELEMENT$>$\newline
 class oomph\+::\+Refineable\+Quad\+Mesh$<$ ELEMENT $>$}
+
 Intermediate mesh class that implements the mesh adaptation functions specified in the \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMesh}{Tree\+Based\+Refineable\+Mesh}} class for meshes that contain the refineable variant of \mbox{\hyperlink{classoomph_1_1QElement}{QElement}} s \mbox{[}The class ELEMENT provided as the template parameter must be of type \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_012_01_4}{Refineable\+QElement$<$2$>$}}\mbox{]}. 
 
 \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} adaptation/refinement is implemented by \mbox{\hyperlink{classoomph_1_1QuadTree}{Quad\+Tree}} procedures and any concrete implementation of this class needs to provide a \mbox{\hyperlink{classoomph_1_1QuadTreeForest}{Quad\+Tree\+Forest}} representation of the initial (coarse) mesh. 
 
-Definition at line \mbox{\hyperlink{refineable__quad__mesh_8h_source_l00051}{51}} of file \mbox{\hyperlink{refineable__quad__mesh_8h_source}{refineable\+\_\+quad\+\_\+mesh.\+h}}.
+Definition at line 51 of file refineable\+\_\+quad\+\_\+mesh.\+h.
 
 
 
@@ -56,11 +57,11 @@ Constructor\+: Setup static quadtree data.
 
 
 
-Definition at line \mbox{\hyperlink{refineable__quad__mesh_8h_source_l00056}{56}} of file \mbox{\hyperlink{refineable__quad__mesh_8h_source}{refineable\+\_\+quad\+\_\+mesh.\+h}}.
+Definition at line 56 of file refineable\+\_\+quad\+\_\+mesh.\+h.
 
 
 
-References \mbox{\hyperlink{quadtree_8cc_source_l00120}{oomph\+::\+Quad\+Tree\+::setup\+\_\+static\+\_\+data()}}.
+References oomph\+::\+Quad\+Tree\+::setup\+\_\+static\+\_\+data().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQuadMesh_a88abf69582dd24ec786d149bbbe33359}\label{classoomph_1_1RefineableQuadMesh_a88abf69582dd24ec786d149bbbe33359}} 
 \index{oomph::RefineableQuadMesh$<$ ELEMENT $>$@{oomph::RefineableQuadMesh$<$ ELEMENT $>$}!RefineableQuadMesh@{RefineableQuadMesh}}
@@ -86,7 +87,7 @@ Broken assignment operator.
 
 Destructor\+: 
 
-Definition at line \mbox{\hyperlink{refineable__quad__mesh_8h_source_l00075}{75}} of file \mbox{\hyperlink{refineable__quad__mesh_8h_source}{refineable\+\_\+quad\+\_\+mesh.\+h}}.
+Definition at line 75 of file refineable\+\_\+quad\+\_\+mesh.\+h.
 
 
 
@@ -104,15 +105,15 @@ Set up \mbox{\hyperlink{classoomph_1_1QuadTreeForest}{Quad\+Tree\+Forest}}. Wipe
 
 
 
-Definition at line \mbox{\hyperlink{refineable__quad__mesh_8h_source_l00088}{88}} of file \mbox{\hyperlink{refineable__quad__mesh_8h_source}{refineable\+\_\+quad\+\_\+mesh.\+h}}.
+Definition at line 88 of file refineable\+\_\+quad\+\_\+mesh.\+h.
 
 
 
-References \mbox{\hyperlink{mesh_8h_source_l00119}{oomph\+::\+Mesh\+::\+Comm\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00460}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{tree_8h_source_l00135}{oomph\+::\+Tree\+::flush\+\_\+sons()}}, \mbox{\hyperlink{tree_8h_source_l00472}{oomph\+::\+Tree\+Forest\+::flush\+\_\+trees()}}, \mbox{\hyperlink{refineable__mesh_8h_source_l00768}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::\+Forest\+\_\+pt}}, \mbox{\hyperlink{refineable__mesh_8cc_source_l00830}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::get\+\_\+refinement\+\_\+levels()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{tree_8h_source_l00129}{oomph\+::\+Tree\+::nsons()}}, \mbox{\hyperlink{tree_8h_source_l00088}{oomph\+::\+Tree\+::object\+\_\+pt()}}, \mbox{\hyperlink{refineable__elements_8h_source_l00314}{oomph\+::\+Refineable\+Element\+::refinement\+\_\+level()}}, \mbox{\hyperlink{tree_8h_source_l00141}{oomph\+::\+Tree\+::root\+\_\+pt()}}, \mbox{\hyperlink{tree_8h_source_l00241}{oomph\+::\+Tree\+::set\+\_\+father\+\_\+pt()}}, \mbox{\hyperlink{tree_8h_source_l00123}{oomph\+::\+Tree\+::set\+\_\+son\+\_\+pt()}}, \mbox{\hyperlink{tree_8h_source_l00103}{oomph\+::\+Tree\+::son\+\_\+pt()}}, \mbox{\hyperlink{tree_8cc_source_l00277}{oomph\+::\+Tree\+::stick\+\_\+all\+\_\+tree\+\_\+nodes\+\_\+into\+\_\+vector()}}, and \mbox{\hyperlink{tree_8cc_source_l00405}{oomph\+::\+Tree\+Forest\+::stick\+\_\+all\+\_\+tree\+\_\+nodes\+\_\+into\+\_\+vector()}}.
+References oomph\+::\+Mesh\+::\+Comm\+\_\+pt, e, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Tree\+::flush\+\_\+sons(), oomph\+::\+Tree\+Forest\+::flush\+\_\+trees(), oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::\+Forest\+\_\+pt, oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::get\+\_\+refinement\+\_\+levels(), i, oomph\+::\+Mesh\+::nelement(), oomph\+::\+Tree\+::nsons(), oomph\+::\+Tree\+::object\+\_\+pt(), oomph\+::\+Refineable\+Element\+::refinement\+\_\+level(), oomph\+::\+Tree\+::root\+\_\+pt(), oomph\+::\+Tree\+::set\+\_\+father\+\_\+pt(), oomph\+::\+Tree\+::set\+\_\+son\+\_\+pt(), oomph\+::\+Tree\+::son\+\_\+pt(), oomph\+::\+Tree\+::stick\+\_\+all\+\_\+tree\+\_\+nodes\+\_\+into\+\_\+vector(), and oomph\+::\+Tree\+Forest\+::stick\+\_\+all\+\_\+tree\+\_\+nodes\+\_\+into\+\_\+vector().
 
 
 
-Referenced by \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00429}{oomph\+::\+Elastic\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Rectangular\+Quad\+Mesh()}}, \mbox{\hyperlink{channel__with__leaflet__mesh_8template_8h_source_l00306}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Channel\+With\+Leaflet\+Mesh$<$ ELEMENT $>$\+::\+Macro\+Element\+Node\+Update\+Refineable\+Channel\+With\+Leaflet\+Mesh()}}, \mbox{\hyperlink{collapsible__channel__mesh_8template_8h_source_l00375}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::\+Macro\+Element\+Node\+Update\+Refineable\+Collapsible\+Channel\+Mesh()}}, \mbox{\hyperlink{channel__with__leaflet__mesh_8template_8h_source_l00483}{oomph\+::\+Refineable\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Algebraic\+Channel\+With\+Leaflet\+Mesh()}}, \mbox{\hyperlink{collapsible__channel__mesh_8template_8h_source_l00598}{oomph\+::\+Refineable\+Algebraic\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Algebraic\+Collapsible\+Channel\+Mesh()}}, \mbox{\hyperlink{cylinder__with__flag__mesh_8template_8h_source_l00361}{oomph\+::\+Refineable\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Algebraic\+Cylinder\+With\+Flag\+Mesh()}}, \mbox{\hyperlink{fsi__driven__cavity__mesh_8template_8h_source_l00225}{oomph\+::\+Refineable\+Algebraic\+FSIDriven\+Cavity\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Algebraic\+FSIDriven\+Cavity\+Mesh()}}, \mbox{\hyperlink{backward__step__mesh_8template_8h_source_l00103}{oomph\+::\+Refineable\+Backward\+Step\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Backward\+Step\+Quad\+Mesh()}}, \mbox{\hyperlink{channel__with__leaflet__mesh_8template_8h_source_l00119}{oomph\+::\+Refineable\+Channel\+With\+Leaflet\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Channel\+With\+Leaflet\+Mesh()}}, \mbox{\hyperlink{collapsible__channel__mesh_8template_8h_source_l00190}{oomph\+::\+Refineable\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Collapsible\+Channel\+Mesh()}}, \mbox{\hyperlink{cylinder__with__flag__mesh_8template_8h_source_l00107}{oomph\+::\+Refineable\+Cylinder\+With\+Flag\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Cylinder\+With\+Flag\+Mesh()}}, \mbox{\hyperlink{fsi__driven__cavity__mesh_8template_8h_source_l00127}{oomph\+::\+Refineable\+FSIDriven\+Cavity\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+FSIDriven\+Cavity\+Mesh()}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8h_source_l00196}{oomph\+::\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Quarter\+Circle\+Sector\+Mesh()}}, \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00280}{oomph\+::\+Refineable\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh()}}, \mbox{\hyperlink{rectangle__with__hole__mesh_8template_8h_source_l00265}{oomph\+::\+Refineable\+Rectangle\+With\+Hole\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Rectangle\+With\+Hole\+Mesh()}}, \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00332}{oomph\+::\+Refineable\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Rectangular\+Quad\+Mesh()}}, \mbox{\hyperlink{annular__mesh_8template_8h_source_l00111}{oomph\+::\+Refineable\+Two\+DAnnular\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Two\+DAnnular\+Mesh()}}, and \mbox{\hyperlink{refineable__quad__mesh_8h_source_l00080}{oomph\+::\+Refineable\+Quad\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+tree\+\_\+forest()}}.
+Referenced by oomph\+::\+Elastic\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Rectangular\+Quad\+Mesh(), oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Channel\+With\+Leaflet\+Mesh$<$ ELEMENT $>$\+::\+Macro\+Element\+Node\+Update\+Refineable\+Channel\+With\+Leaflet\+Mesh(), oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::\+Macro\+Element\+Node\+Update\+Refineable\+Collapsible\+Channel\+Mesh(), oomph\+::\+Refineable\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Algebraic\+Channel\+With\+Leaflet\+Mesh(), oomph\+::\+Refineable\+Algebraic\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Algebraic\+Collapsible\+Channel\+Mesh(), oomph\+::\+Refineable\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Algebraic\+Cylinder\+With\+Flag\+Mesh(), oomph\+::\+Refineable\+Algebraic\+FSIDriven\+Cavity\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Algebraic\+FSIDriven\+Cavity\+Mesh(), oomph\+::\+Refineable\+Backward\+Step\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Backward\+Step\+Quad\+Mesh(), oomph\+::\+Refineable\+Channel\+With\+Leaflet\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Channel\+With\+Leaflet\+Mesh(), oomph\+::\+Refineable\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Collapsible\+Channel\+Mesh(), oomph\+::\+Refineable\+Cylinder\+With\+Flag\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Cylinder\+With\+Flag\+Mesh(), oomph\+::\+Refineable\+FSIDriven\+Cavity\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+FSIDriven\+Cavity\+Mesh(), oomph\+::\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Quarter\+Circle\+Sector\+Mesh(), oomph\+::\+Refineable\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh(), oomph\+::\+Refineable\+Rectangle\+With\+Hole\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Rectangle\+With\+Hole\+Mesh(), oomph\+::\+Refineable\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Rectangular\+Quad\+Mesh(), oomph\+::\+Refineable\+Two\+DAnnular\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Two\+DAnnular\+Mesh(), and oomph\+::\+Refineable\+Quad\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+tree\+\_\+forest().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQuadMesh_ae3fed75707aa829323aeaf25ac343247}\label{classoomph_1_1RefineableQuadMesh_ae3fed75707aa829323aeaf25ac343247}} 
 \index{oomph::RefineableQuadMesh$<$ ELEMENT $>$@{oomph::RefineableQuadMesh$<$ ELEMENT $>$}!setup\_tree\_forest@{setup\_tree\_forest}}
@@ -131,11 +132,11 @@ Implements \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMeshBase_aab7cbaa68
 
 
 
-Definition at line \mbox{\hyperlink{refineable__quad__mesh_8h_source_l00080}{80}} of file \mbox{\hyperlink{refineable__quad__mesh_8h_source}{refineable\+\_\+quad\+\_\+mesh.\+h}}.
+Definition at line 80 of file refineable\+\_\+quad\+\_\+mesh.\+h.
 
 
 
-References \mbox{\hyperlink{refineable__quad__mesh_8h_source_l00088}{oomph\+::\+Refineable\+Quad\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+quadtree\+\_\+forest()}}.
+References oomph\+::\+Refineable\+Quad\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+quadtree\+\_\+forest().
 
 
 

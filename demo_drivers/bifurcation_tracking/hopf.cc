@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -250,7 +250,8 @@ void PredPreyProblem<ELEMENT>::solve()
 {
  //Assign memory for the eigenvalues and eigenvectors
  Vector<complex<double> > eigenvalues;
- Vector< DoubleVector > eigenvectors;
+ Vector< DoubleVector > eigenvector_real;
+ Vector< DoubleVector > eigenvector_imag;
 
  Desired_newton_iterations_ds = 2;
  Desired_proportion_of_arc_length = 0.5;
@@ -273,7 +274,7 @@ void PredPreyProblem<ELEMENT>::solve()
          << mesh_pt()->element_pt(0)->internal_data_pt(0)->value(2) 
          << std::endl;
    
-   solve_eigenproblem(3,eigenvalues,eigenvectors);
+   solve_eigenproblem(3,eigenvalues,eigenvector_real,eigenvector_imag);
    
    for(unsigned e=0;e<eigenvalues.size();e++)
     {
@@ -284,12 +285,12 @@ void PredPreyProblem<ELEMENT>::solve()
  trace.close();
 
  Max_newton_iterations = 10;
- for(unsigned i=0;i<3;i++) {std::cout << eigenvectors[0][i] << " "	
-        << eigenvectors[1][i] << std::endl;}
+ for(unsigned i=0;i<3;i++) {std::cout << eigenvector_real[0][i] << " "	
+        << eigenvector_imag[0][i] << std::endl;}
  //activate_hopf_tracking(Global_Physical_Variables::Lambda_pt);
  activate_hopf_tracking(Global_Physical_Variables::Lambda_pt,
                         eigenvalues[0].imag(),
-                        eigenvectors[0],eigenvectors[1]);
+                        eigenvector_real[0],eigenvector_imag[0]);
 
 
 

@@ -38,7 +38,7 @@ We define the various physical variables in a global namespace. We define Poisso
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_namespace==========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Global variables}}
-\DoxyCodeLine{\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Poisson's ratio}}
@@ -85,7 +85,7 @@ Initially, we specify an output directory and instantiate a constitutive equatio
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===========start\_main===================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Demonstrate how to solve an unstructured solid problem}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{unstructured__adaptive__solid_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} **argv)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
@@ -162,7 +162,7 @@ The {\ttfamily Problem} class has the obvious member functions as well as a func
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==============start\_problem=========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Unstructured solid problem}}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT> }
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classUnstructuredSolidProblem}{UnstructuredSolidProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -216,7 +216,7 @@ We begin by building the closed, piecewise linear boundary of the undeformed sol
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===============start\_constructor========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for unstructured solid problem}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classUnstructuredSolidProblem_a18ce02b6e4bbc86403c9e1b32c095772}{UnstructuredSolidProblem<ELEMENT>::UnstructuredSolidProblem}}() :}
 \DoxyCodeLine{ Incompressible(false)}
@@ -378,7 +378,7 @@ The {\ttfamily actions\+\_\+before\+\_\+adapt()} function simply deletes the tra
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==============start\_actions\_before\_adapt================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Actions before adapt: remove the traction elements in the surface mesh}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classUnstructuredSolidProblem_a463b4b976fdd12129ac2bd23bece1b8b}{UnstructuredSolidProblem<ELEMENT>::actions\_before\_adapt}}()}
 \DoxyCodeLine{\{}
@@ -495,7 +495,7 @@ The strain energy is computed by looping over all elements in the bulk mesh and 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//================start\_get\_strain\_energy================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Calculate the strain energy in the entire elastic solid}}
-\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{double} \mbox{\hyperlink{classUnstructuredSolidProblem_a4da918a1f0cf94ebccc5112b58c28ece}{UnstructuredSolidProblem<ELEMENT>::get\_strain\_energy}}()}
 \DoxyCodeLine{\{}

@@ -128,8 +128,8 @@ Here is a complete example of a specific {\ttfamily Geom\+Object\+:}
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======================start\_of\_unit\_circle==============================}}
-\DoxyCodeLine{\textcolor{comment}{/// Unit circle in 2D, centred at the origin, parametrised by a single}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// Lagrangian coordinate, the polar angle.}}
+\DoxyCodeLine{\textcolor{comment}{/// Unit circle in 2D, centred at the origin, parametrised by a single}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// Lagrangian coordinate, the polar angle.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classUnitCircle}{UnitCircle}} : \textcolor{keyword}{public} GeomObject}
 \DoxyCodeLine{\{}
@@ -208,9 +208,9 @@ To see how this works internally, let us have a look at the {\ttfamily Fish\+Dom
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{    /// Constructor: Pass pointer to GeomObject that represents the}}
-\DoxyCodeLine{\textcolor{comment}{    /// (upper) curved boundary of the fish's body, and the start and end values}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{    /// of the Lagrangian coordinates along the GeomObject.}}
+\DoxyCodeLine{    \textcolor{comment}{/// Constructor: Pass pointer to GeomObject that represents the}}
+\DoxyCodeLine{\textcolor{comment}{    /// (upper) curved boundary of the fish's body, and the start and end values}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// of the Lagrangian coordinates along the GeomObject.}}
 \DoxyCodeLine{\textcolor{comment}{}    FishDomain(GeomObject* back\_pt,}
 \DoxyCodeLine{               \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& xi\_nose,}
 \DoxyCodeLine{               \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& xi\_tail)}
@@ -248,17 +248,17 @@ To see how this works internally, let us have a look at the {\ttfamily Fish\+Dom
 \end{DoxyImage}
 
 
-Since the shape of the domain can evolve in time, the full interface for the function includes an additional parameter, {\ttfamily t}, which indicates the (discrete) time level at which the domain shape is to be evaluated. If {\ttfamily t=0} the function computes the domain shape at the current time; if {\ttfamily t\texorpdfstring{$>$}{>}0} it computes the shape at the {\ttfamily t} -\/th previous timestep. (\href{../../../unsteady_heat/two_d_unsteady_heat_ALE/html/index.html}{\texttt{ Another example}} in which we solve the unsteady heat equation in a moving domain, provides a a more detailed discussion of this aspect.) Here is the full interface for the {\ttfamily Fish\+Domain\+::macro\+\_\+element\+\_\+boundary(...)} function\+:
+Since the shape of the domain can evolve in time, the full interface for the function includes an additional parameter, {\ttfamily t}, which indicates the (discrete) time level at which the domain shape is to be evaluated. If {\ttfamily t=0} the function computes the domain shape at the current time; if {\ttfamily t$>$0} it computes the shape at the {\ttfamily t} -\/th previous timestep. (\href{../../../unsteady_heat/two_d_unsteady_heat_ALE/html/index.html}{\texttt{ Another example}} in which we solve the unsteady heat equation in a moving domain, provides a a more detailed discussion of this aspect.) Here is the full interface for the {\ttfamily Fish\+Domain\+::macro\+\_\+element\+\_\+boundary(...)} function\+:
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{    /// Vector representation of the  i\_macro-\/th macro element}}
-\DoxyCodeLine{\textcolor{comment}{    /// boundary i\_direct (N/S/W/E) at the discrete time level t}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{    /// (t=0: present; t>0: previous): \(\backslash\)f\$ \{\(\backslash\)bf r\}(\{\(\backslash\)bf zeta\}) \(\backslash\)f\$}}
-\DoxyCodeLine{\textcolor{comment}{    /// Note that the local coordinate \(\backslash\)b zeta is a 1D}}
-\DoxyCodeLine{\textcolor{comment}{    /// Vector rather than a scalar -\/-\/ this is unavoidable because}}
-\DoxyCodeLine{\textcolor{comment}{    /// this function implements the pure virtual function in the}}
-\DoxyCodeLine{\textcolor{comment}{    /// Domain base class.}}
+\DoxyCodeLine{    \textcolor{comment}{/// Vector representation of the  i\_macro-\/th macro element}}
+\DoxyCodeLine{\textcolor{comment}{    /// boundary i\_direct (N/S/W/E) at the discrete time level t}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// (t=0: present; t>0: previous): \(\backslash\)f\$ \{\(\backslash\)bf r\}(\{\(\backslash\)bf zeta\}) \(\backslash\)f\$}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// Note that the local coordinate \(\backslash\)b zeta is a 1D}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// Vector rather than a scalar -\/-\/ this is unavoidable because}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// this function implements the pure virtual function in the}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// Domain base class.}}
 \DoxyCodeLine{\textcolor{comment}{}    \textcolor{keywordtype}{void} macro\_element\_boundary(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& t,}
 \DoxyCodeLine{                                \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& i\_macro,}
 \DoxyCodeLine{                                \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& i\_direct,}
@@ -273,13 +273,13 @@ To illustrate the general procedure, here is the complete listing of the {\ttfam
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{  \textcolor{comment}{//==========start\_of\_macro\_element\_boundary========================}}
-\DoxyCodeLine{\textcolor{comment}{  /// Vector representation of the  imacro-\/th macro element}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{  /// boundary idirect (N/S/W/E) at time level t}}
-\DoxyCodeLine{\textcolor{comment}{  /// (t=0: present; t>0: previous): \(\backslash\)f\$ \{\(\backslash\)bf r\}(\{\(\backslash\)bf zeta\}) \(\backslash\)f\$}}
-\DoxyCodeLine{\textcolor{comment}{  /// Note that the local coordinate \(\backslash\)b zeta is a 1D}}
-\DoxyCodeLine{\textcolor{comment}{  /// Vector rather than a scalar -\/-\/ this is unavoidable because}}
-\DoxyCodeLine{\textcolor{comment}{  /// this function implements the pure virtual function in the}}
-\DoxyCodeLine{\textcolor{comment}{  /// Domain base class.}}
+\DoxyCodeLine{\textcolor{comment}{  /// Vector representation of the  imacro-\/th macro element}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// boundary idirect (N/S/W/E) at time level t}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// (t=0: present; t>0: previous): \(\backslash\)f\$ \{\(\backslash\)bf r\}(\{\(\backslash\)bf zeta\}) \(\backslash\)f\$}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// Note that the local coordinate \(\backslash\)b zeta is a 1D}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// Vector rather than a scalar -\/-\/ this is unavoidable because}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// this function implements the pure virtual function in the}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// Domain base class.}}
 \DoxyCodeLine{\textcolor{comment}{}  \textcolor{comment}{//=================================================================}}
 \DoxyCodeLine{  \textcolor{keywordtype}{void} FishDomain::macro\_element\_boundary(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& t,}
 \DoxyCodeLine{                                          \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& imacro,}
@@ -460,7 +460,7 @@ Here are a few of the private member functions that define individual {\ttfamily
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{  \textcolor{comment}{//===============start\_of\_r\_upper\_body\_N==============================}}
 \DoxyCodeLine{\textcolor{comment}{  /// Northern edge of upper body macro element; \(\backslash\)f\$ \(\backslash\)zeta \(\backslash\)in [-\/1,1] \(\backslash\)f\$}}
-\DoxyCodeLine{  \textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}  \textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{  \textcolor{keywordtype}{void} FishDomain::r\_upper\_body\_N(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& t,}
 \DoxyCodeLine{                                  \textcolor{keyword}{const} Vector<double>\& zeta,}
 \DoxyCodeLine{                                  Vector<double>\& r)}
@@ -480,7 +480,7 @@ Here are a few of the private member functions that define individual {\ttfamily
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{  \textcolor{comment}{//================start\_of\_r\_upper\_body\_E=============================}}
 \DoxyCodeLine{\textcolor{comment}{  /// Eastern edge of upper body macro element; \(\backslash\)f\$ \(\backslash\)zeta \(\backslash\)in [-\/1,1] \(\backslash\)f\$}}
-\DoxyCodeLine{  \textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}  \textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{  \textcolor{keywordtype}{void} FishDomain::r\_upper\_body\_E(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& t,}
 \DoxyCodeLine{                                  \textcolor{keyword}{const} Vector<double>\& zeta,}
 \DoxyCodeLine{                                  Vector<double>\& r)}
@@ -508,7 +508,7 @@ Here are a few of the private member functions that define individual {\ttfamily
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{  \textcolor{comment}{//==================start\_of\_r\_upper\_body\_S============================}}
 \DoxyCodeLine{\textcolor{comment}{  /// Southern edge of upper body macro element; \(\backslash\)f\$ \(\backslash\)zeta \(\backslash\)in [-\/1,1] \(\backslash\)f\$}}
-\DoxyCodeLine{  \textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}  \textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{  \textcolor{keywordtype}{void} FishDomain::r\_upper\_body\_S(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& t,}
 \DoxyCodeLine{                                  \textcolor{keyword}{const} Vector<double>\& zeta,}
 \DoxyCodeLine{                                  Vector<double>\& r)}
@@ -531,7 +531,7 @@ Here are a few of the private member functions that define individual {\ttfamily
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{  \textcolor{comment}{//===============start\_of\_r\_upper\_body\_W==============================}}
 \DoxyCodeLine{\textcolor{comment}{  /// Western edge of upper body macro element; \(\backslash\)f\$ \(\backslash\)zeta \(\backslash\)in [-\/1,1] \(\backslash\)f\$}}
-\DoxyCodeLine{  \textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}  \textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{  \textcolor{keywordtype}{void} FishDomain::r\_upper\_body\_W(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& t,}
 \DoxyCodeLine{                                  \textcolor{keyword}{const} Vector<double>\& zeta,}
 \DoxyCodeLine{                                  Vector<double>\& r)}
@@ -558,7 +558,7 @@ Here are a few of the private member functions that define individual {\ttfamily
 
 \item The S\mbox{[}outhern\mbox{]} boundary of macro element 0 (which represents the lower body) is simply a reflection of the N\mbox{[}orthern\mbox{]} boundary of macro element 2\+:  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{    /// Southern boundary of lower body macro element zeta \(\backslash\)f\$\(\backslash\)in [-\/1,1] \(\backslash\)f\$}}
+\DoxyCodeLine{    \textcolor{comment}{/// Southern boundary of lower body macro element zeta \(\backslash\)f\$\(\backslash\)in [-\/1,1] \(\backslash\)f\$}}
 \DoxyCodeLine{    \textcolor{keywordtype}{void} r\_lower\_body\_S(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& t,}
 \DoxyCodeLine{                        \textcolor{keyword}{const} Vector<double>\& zeta,}
 \DoxyCodeLine{                        Vector<double>\& f)}
@@ -597,10 +597,10 @@ The following code fragment illustrates the trivial modifications to the driver 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=================start\_of\_main==========================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Demonstrate how to solve 2D Poisson problem in }\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// fish-\/shaped domain with black-\/box mesh adaptation}}
-\DoxyCodeLine{\textcolor{comment}{/// and domain updates in response to changes in the domain}}
-\DoxyCodeLine{\textcolor{comment}{/// shape.}}
+\DoxyCodeLine{\textcolor{comment}{/// Demonstrate how to solve 2D Poisson problem in }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// fish-\/shaped domain with black-\/box mesh adaptation}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// and domain updates in response to changes in the domain}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// shape.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{fish__poisson__node__update_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
 \DoxyCodeLine{\{}
@@ -622,7 +622,7 @@ The following code fragment illustrates the trivial modifications to the driver 
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Get pointer to GeomObject that defines the position of the}}
 \DoxyCodeLine{   \textcolor{comment}{// fish's back:}}
-\DoxyCodeLine{   GeomObject* fish\_back\_pt=problem.\mbox{\hyperlink{classRefineableFishPoissonProblem_a6331b79c5c77d3f2fa7c37c3bb5308d9}{mesh\_pt}}()-\/>fish\_back\_pt();}
+\DoxyCodeLine{   GeomObject* fish\_back\_pt=problem.\mbox{\hyperlink{classRefineableFishPoissonProblem_a803c9050b07b35aba22f08a5a9e59f2c}{mesh\_pt}}()-\/>fish\_back\_pt();}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Recast to pointer to Circle object to get access to the member function}}
 \DoxyCodeLine{   \textcolor{comment}{// that sets the y-\/position of the Circle's centre and decrease its}}
@@ -631,7 +631,7 @@ The following code fragment illustrates the trivial modifications to the driver 
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Update the domain shape in response to the changes in its}}
 \DoxyCodeLine{   \textcolor{comment}{// boundary}}
-\DoxyCodeLine{   problem.\mbox{\hyperlink{classRefineableFishPoissonProblem_a6331b79c5c77d3f2fa7c37c3bb5308d9}{mesh\_pt}}()-\/>node\_update();}
+\DoxyCodeLine{   problem.\mbox{\hyperlink{classRefineableFishPoissonProblem_a803c9050b07b35aba22f08a5a9e59f2c}{mesh\_pt}}()-\/>node\_update();}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Solve the problem, allowing for up to two levels of refinement}}
 \DoxyCodeLine{   problem.newton\_solve(2);}

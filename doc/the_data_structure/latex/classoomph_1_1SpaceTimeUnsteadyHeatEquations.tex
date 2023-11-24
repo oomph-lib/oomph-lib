@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations}{}\doxysection{oomph\+::Space\+Time\+Unsteady\+Heat\+Equations\texorpdfstring{$<$}{<} SPATIAL\+\_\+\+DIM \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations}{}\doxysection{oomph\+::Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$ Class Template Reference}
 \label{classoomph_1_1SpaceTimeUnsteadyHeatEquations}\index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}}
 
 
@@ -9,7 +9,7 @@ A class for all isoparametric elements that solve the Space\+Time\+Unsteady\+Hea
 
 {\ttfamily \#include $<$space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Space\+Time\+Unsteady\+Heat\+Equations\texorpdfstring{$<$}{<} SPATIAL\+\_\+\+DIM \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=0.935204cm]{classoomph_1_1SpaceTimeUnsteadyHeatEquations}
@@ -63,19 +63,19 @@ void \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_ab73fc7cf1405
 \begin{DoxyCompactList}\small\item\em Write values of the i-\/th scalar field at the plot points. Needs to be implemented for each new specific element type. \end{DoxyCompactList}\item 
 std\+::string \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a7fba86b99ed5646b87d94f61fc4ee3f0}{scalar\+\_\+name\+\_\+paraview}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Name of the i-\/th scalar field. Default implementation returns V1 for the first one, V2 for the second etc. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a35294bb50e768e05875d0603d7ab1d39}{Space\+Time\+Unsteady\+Heat\+Source\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a731ffd54d96cc9ef4ccdba1484a4618e}{source\+\_\+fct\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a35294bb50e768e05875d0603d7ab1d39}{Space\+Time\+Unsteady\+Heat\+Source\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_af13a35cc5092e93ac8c5183191852f2d}{source\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to source function. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a35294bb50e768e05875d0603d7ab1d39}{Space\+Time\+Unsteady\+Heat\+Source\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a5f251b88e4f51aa784eacf66ea10034a}{source\+\_\+fct\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to source function. Const version. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_afa5e2c872d2a7c15f7e11eb4242c4e4f}{get\+\_\+source\+\_\+ust\+\_\+heat}} (const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&ipt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&source) const
 \begin{DoxyCompactList}\small\item\em Get source term at continous time t and (Eulerian) position x. Virtual so it can be overloaded in derived multi-\/physics elements. \end{DoxyCompactList}\item 
-const double \& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_ab8b56f78b5ac0eb8856624f95b3b179b}{alpha}} () const
+const double \& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a5a2e09d71918394f56c79b1dc845680a}{alpha}} () const
 \begin{DoxyCompactList}\small\item\em Alpha parameter (thermal inertia) \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a0a8e43fc467937ee818c8abeef63e102}{alpha\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a6f573fd13b3652e2e17c948ecdf4e3bf}{alpha\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to Alpha parameter (thermal inertia) \end{DoxyCompactList}\item 
-const double \& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_aacc38d40ebbbcc51b935a4aacba16503}{beta}} () const
+const double \& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a88ddcffb05ef74371370301ff11db8db}{beta}} () const
 \begin{DoxyCompactList}\small\item\em Beta parameter (thermal conductivity) \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a3b136c76fcc3f09ea181e25a801b4e3d}{beta\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a10dd2df4e766d42fc19ded57f1586c4c}{beta\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to Beta parameter (thermal conductivity) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_ad7da7e32dd88db0a067ac89220111244}{get\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux) const
 \begin{DoxyCompactList}\small\item\em Get flux\+: flux\mbox{[}i\mbox{]}=du/dx\+\_\+i. \end{DoxyCompactList}\item 
@@ -133,19 +133,19 @@ void \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_ab73fc7cf1405
 \begin{DoxyCompactList}\small\item\em Write values of the i-\/th scalar field at the plot points. Needs to be implemented for each new specific element type. \end{DoxyCompactList}\item 
 std\+::string \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a7fba86b99ed5646b87d94f61fc4ee3f0}{scalar\+\_\+name\+\_\+paraview}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Name of the i-\/th scalar field. Default implementation returns V1 for the first one, V2 for the second etc. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a35294bb50e768e05875d0603d7ab1d39}{Space\+Time\+Unsteady\+Heat\+Source\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a731ffd54d96cc9ef4ccdba1484a4618e}{source\+\_\+fct\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a35294bb50e768e05875d0603d7ab1d39}{Space\+Time\+Unsteady\+Heat\+Source\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_af13a35cc5092e93ac8c5183191852f2d}{source\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to source function. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a35294bb50e768e05875d0603d7ab1d39}{Space\+Time\+Unsteady\+Heat\+Source\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a5f251b88e4f51aa784eacf66ea10034a}{source\+\_\+fct\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to source function. Const version. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_afa5e2c872d2a7c15f7e11eb4242c4e4f}{get\+\_\+source\+\_\+ust\+\_\+heat}} (const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&ipt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&source) const
 \begin{DoxyCompactList}\small\item\em Get source term at continous time t and (Eulerian) position x. Virtual so it can be overloaded in derived multi-\/physics elements. \end{DoxyCompactList}\item 
-const double \& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_ab8b56f78b5ac0eb8856624f95b3b179b}{alpha}} () const
+const double \& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a5a2e09d71918394f56c79b1dc845680a}{alpha}} () const
 \begin{DoxyCompactList}\small\item\em Alpha parameter (thermal inertia) \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a0a8e43fc467937ee818c8abeef63e102}{alpha\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a6f573fd13b3652e2e17c948ecdf4e3bf}{alpha\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to Alpha parameter (thermal inertia) \end{DoxyCompactList}\item 
-const double \& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_aacc38d40ebbbcc51b935a4aacba16503}{beta}} () const
+const double \& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a88ddcffb05ef74371370301ff11db8db}{beta}} () const
 \begin{DoxyCompactList}\small\item\em Beta parameter (thermal conductivity) \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a3b136c76fcc3f09ea181e25a801b4e3d}{beta\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a10dd2df4e766d42fc19ded57f1586c4c}{beta\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to Beta parameter (thermal conductivity) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_ad7da7e32dd88db0a067ac89220111244}{get\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux) const
 \begin{DoxyCompactList}\small\item\em Get flux\+: flux\mbox{[}i\mbox{]}=du/dx\+\_\+i. \end{DoxyCompactList}\item 
@@ -204,11 +204,12 @@ static double \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a7cb
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$unsigned SPATIAL\+\_\+\+DIM$>$\newline
 class oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$}
+
 A class for all isoparametric elements that solve the Space\+Time\+Unsteady\+Heat equations. 
 
 \[ \frac{\partial^2 u}{\partial x_i^2}=\frac{\partial u}{\partial t}+f(t,x_j) \] This contains the generic maths. \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} functions, geometric mapping etc. must get implemented in derived class. Note that this class assumes an isoparametric formulation, i.\+e. that the scalar unknown is interpolated using the same shape funcitons as the position. 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00075}{75}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 75 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -226,7 +227,7 @@ Function pointer to source function fct(t,x,f(x,t)) -- x is a Vector! DRAIG\+: W
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00082}{82}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 82 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a35294bb50e768e05875d0603d7ab1d39}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a35294bb50e768e05875d0603d7ab1d39}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!SpaceTimeUnsteadyHeatSourceFctPt@{SpaceTimeUnsteadyHeatSourceFctPt}}
@@ -241,7 +242,7 @@ Function pointer to source function fct(t,x,f(x,t)) -- x is a Vector! DRAIG\+: W
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l00081}{81}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 81 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -259,11 +260,11 @@ Constructor\+: Initialises the Source\+\_\+fct\+\_\+pt to null and sets flag to 
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00091}{91}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 91 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00675}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Alpha\+\_\+pt}}, \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00678}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Beta\+\_\+pt}}, \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00683}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Default\+\_\+alpha\+\_\+parameter}}, and \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00687}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Default\+\_\+beta\+\_\+parameter}}.
+References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Alpha\+\_\+pt, oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Beta\+\_\+pt, oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Default\+\_\+alpha\+\_\+parameter, and oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Default\+\_\+beta\+\_\+parameter.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a28cd8407c5498fbb85e72f51b2e482ea}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a28cd8407c5498fbb85e72f51b2e482ea}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!SpaceTimeUnsteadyHeatEquations@{SpaceTimeUnsteadyHeatEquations}}
@@ -289,11 +290,11 @@ Constructor\+: Initialises the Source\+\_\+fct\+\_\+pt to null and sets flag to 
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l00090}{90}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 90 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00675}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Alpha\+\_\+pt}}, \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00678}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Beta\+\_\+pt}}, \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00683}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Default\+\_\+alpha\+\_\+parameter}}, and \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00687}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Default\+\_\+beta\+\_\+parameter}}.
+References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Alpha\+\_\+pt, oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Beta\+\_\+pt, oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Default\+\_\+alpha\+\_\+parameter, and oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Default\+\_\+beta\+\_\+parameter.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a28cd8407c5498fbb85e72f51b2e482ea}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a28cd8407c5498fbb85e72f51b2e482ea}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!SpaceTimeUnsteadyHeatEquations@{SpaceTimeUnsteadyHeatEquations}}
@@ -309,12 +310,12 @@ Broken copy constructor.
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_ab8b56f78b5ac0eb8856624f95b3b179b}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_ab8b56f78b5ac0eb8856624f95b3b179b}} 
+\mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a5a2e09d71918394f56c79b1dc845680a}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a5a2e09d71918394f56c79b1dc845680a}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!alpha@{alpha}}
 \index{alpha@{alpha}!oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}}
 \doxysubsubsection{\texorpdfstring{alpha()}{alpha()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$unsigned SPATIAL\+\_\+\+DIM$>$ \\
-const double \& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations}}$<$ SPATIAL\+\_\+\+DIM $>$\+::alpha (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+const double\& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations}}$<$ SPATIAL\+\_\+\+DIM $>$\+::alpha (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -322,18 +323,18 @@ Alpha parameter (thermal inertia)
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00418}{418}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 418 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00675}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Alpha\+\_\+pt}}.
+References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Alpha\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_ab8b56f78b5ac0eb8856624f95b3b179b}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_ab8b56f78b5ac0eb8856624f95b3b179b}} 
+\mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a5a2e09d71918394f56c79b1dc845680a}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a5a2e09d71918394f56c79b1dc845680a}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!alpha@{alpha}}
 \index{alpha@{alpha}!oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}}
 \doxysubsubsection{\texorpdfstring{alpha()}{alpha()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned SPATIAL\+\_\+\+DIM$>$ \\
-const double \& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations}}$<$ SPATIAL\+\_\+\+DIM $>$\+::alpha (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+const double\& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations}}$<$ SPATIAL\+\_\+\+DIM $>$\+::alpha (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -341,18 +342,18 @@ Alpha parameter (thermal inertia)
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l00417}{417}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 417 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00675}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Alpha\+\_\+pt}}.
+References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Alpha\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a0a8e43fc467937ee818c8abeef63e102}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a0a8e43fc467937ee818c8abeef63e102}} 
+\mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a6f573fd13b3652e2e17c948ecdf4e3bf}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a6f573fd13b3652e2e17c948ecdf4e3bf}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!alpha\_pt@{alpha\_pt}}
 \index{alpha\_pt@{alpha\_pt}!oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}}
 \doxysubsubsection{\texorpdfstring{alpha\_pt()}{alpha\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$unsigned SPATIAL\+\_\+\+DIM$>$ \\
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations}}$<$ SPATIAL\+\_\+\+DIM $>$\+::alpha\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+double$\ast$\& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations}}$<$ SPATIAL\+\_\+\+DIM $>$\+::alpha\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -360,18 +361,18 @@ Pointer to Alpha parameter (thermal inertia)
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00426}{426}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 426 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00675}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Alpha\+\_\+pt}}.
+References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Alpha\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a0a8e43fc467937ee818c8abeef63e102}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a0a8e43fc467937ee818c8abeef63e102}} 
+\mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a6f573fd13b3652e2e17c948ecdf4e3bf}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a6f573fd13b3652e2e17c948ecdf4e3bf}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!alpha\_pt@{alpha\_pt}}
 \index{alpha\_pt@{alpha\_pt}!oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}}
 \doxysubsubsection{\texorpdfstring{alpha\_pt()}{alpha\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned SPATIAL\+\_\+\+DIM$>$ \\
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations}}$<$ SPATIAL\+\_\+\+DIM $>$\+::alpha\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+double$\ast$\& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations}}$<$ SPATIAL\+\_\+\+DIM $>$\+::alpha\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -379,18 +380,18 @@ Pointer to Alpha parameter (thermal inertia)
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l00425}{425}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 425 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00675}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Alpha\+\_\+pt}}.
+References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Alpha\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_aacc38d40ebbbcc51b935a4aacba16503}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_aacc38d40ebbbcc51b935a4aacba16503}} 
+\mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a88ddcffb05ef74371370301ff11db8db}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a88ddcffb05ef74371370301ff11db8db}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!beta@{beta}}
 \index{beta@{beta}!oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}}
 \doxysubsubsection{\texorpdfstring{beta()}{beta()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$unsigned SPATIAL\+\_\+\+DIM$>$ \\
-const double \& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations}}$<$ SPATIAL\+\_\+\+DIM $>$\+::beta (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+const double\& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations}}$<$ SPATIAL\+\_\+\+DIM $>$\+::beta (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -398,18 +399,18 @@ Beta parameter (thermal conductivity)
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00434}{434}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 434 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00678}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Beta\+\_\+pt}}.
+References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Beta\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_aacc38d40ebbbcc51b935a4aacba16503}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_aacc38d40ebbbcc51b935a4aacba16503}} 
+\mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a88ddcffb05ef74371370301ff11db8db}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a88ddcffb05ef74371370301ff11db8db}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!beta@{beta}}
 \index{beta@{beta}!oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}}
 \doxysubsubsection{\texorpdfstring{beta()}{beta()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned SPATIAL\+\_\+\+DIM$>$ \\
-const double \& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations}}$<$ SPATIAL\+\_\+\+DIM $>$\+::beta (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+const double\& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations}}$<$ SPATIAL\+\_\+\+DIM $>$\+::beta (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -417,18 +418,18 @@ Beta parameter (thermal conductivity)
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l00433}{433}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 433 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00678}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Beta\+\_\+pt}}.
+References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Beta\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a3b136c76fcc3f09ea181e25a801b4e3d}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a3b136c76fcc3f09ea181e25a801b4e3d}} 
+\mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a10dd2df4e766d42fc19ded57f1586c4c}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a10dd2df4e766d42fc19ded57f1586c4c}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!beta\_pt@{beta\_pt}}
 \index{beta\_pt@{beta\_pt}!oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}}
 \doxysubsubsection{\texorpdfstring{beta\_pt()}{beta\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$unsigned SPATIAL\+\_\+\+DIM$>$ \\
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations}}$<$ SPATIAL\+\_\+\+DIM $>$\+::beta\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+double$\ast$\& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations}}$<$ SPATIAL\+\_\+\+DIM $>$\+::beta\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -436,18 +437,18 @@ Pointer to Beta parameter (thermal conductivity)
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00442}{442}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 442 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00678}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Beta\+\_\+pt}}.
+References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Beta\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a3b136c76fcc3f09ea181e25a801b4e3d}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a3b136c76fcc3f09ea181e25a801b4e3d}} 
+\mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a10dd2df4e766d42fc19ded57f1586c4c}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a10dd2df4e766d42fc19ded57f1586c4c}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!beta\_pt@{beta\_pt}}
 \index{beta\_pt@{beta\_pt}!oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}}
 \doxysubsubsection{\texorpdfstring{beta\_pt()}{beta\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$unsigned SPATIAL\+\_\+\+DIM$>$ \\
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations}}$<$ SPATIAL\+\_\+\+DIM $>$\+::beta\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+double$\ast$\& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations}}$<$ SPATIAL\+\_\+\+DIM $>$\+::beta\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -455,11 +456,11 @@ Pointer to Beta parameter (thermal conductivity)
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l00441}{441}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 441 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00678}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Beta\+\_\+pt}}.
+References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Beta\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a08686f490d1238df7b78a9947dc357c8}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a08686f490d1238df7b78a9947dc357c8}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!compute\_error@{compute\_error}}
@@ -480,11 +481,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a73c79a1f1e5b1d3
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8cc_source_l00529}{529}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8cc_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+cc}}.
+Definition at line 529 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
+References i, s, and oomph\+::\+Quad\+Tree\+Names\+::W.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a08686f490d1238df7b78a9947dc357c8}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a08686f490d1238df7b78a9947dc357c8}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!compute\_error@{compute\_error}}
@@ -520,11 +521,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a7f67853506dc73f
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8cc_source_l00619}{619}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8cc_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+cc}}.
+Definition at line 619 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
+References i, s, and oomph\+::\+Quad\+Tree\+Names\+::W.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a3efc0694d865bf17136aa66bb0a4df0a}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a3efc0694d865bf17136aa66bb0a4df0a}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!compute\_error@{compute\_error}}
@@ -558,11 +559,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_af2025a472d
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8cc_source_l00242}{242}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8cc_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+cc}}.
+Definition at line 242 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
+References i, s, and oomph\+::\+Quad\+Tree\+Names\+::W.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a6161d7d1b8ace8b34d8a4256af0c95f2}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a6161d7d1b8ace8b34d8a4256af0c95f2}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!compute\_norm@{compute\_norm}}
@@ -596,11 +597,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a625ea6d3f9baccf
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00107}{107}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 107 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00672}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+ALE\+\_\+is\+\_\+disabled}}.
+References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+ALE\+\_\+is\+\_\+disabled.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_aa2ffbfd2b7ee2455ef14d368a4fd1c8e}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_aa2ffbfd2b7ee2455ef14d368a4fd1c8e}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!disable\_ALE@{disable\_ALE}}
@@ -619,11 +620,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a625ea6d3f9baccf
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l00106}{106}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 106 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00672}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+ALE\+\_\+is\+\_\+disabled}}.
+References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+ALE\+\_\+is\+\_\+disabled.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a82689c95ea9680d3089ce1bd5e9f74b3}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a82689c95ea9680d3089ce1bd5e9f74b3}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!dshape\_and\_dtest\_eulerian\_at\_knot\_ust\_heat@{dshape\_and\_dtest\_eulerian\_at\_knot\_ust\_heat}}
@@ -698,11 +699,11 @@ Calculate du/dt at the n-\/th local node. Uses suitably interpolated value for h
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00586}{586}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 586 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00601}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::interpolated\+\_\+du\+\_\+dt\+\_\+ust\+\_\+heat()}}, \mbox{\hyperlink{elements_8h_source_l01842}{oomph\+::\+Finite\+Element\+::local\+\_\+coordinate\+\_\+of\+\_\+node()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::interpolated\+\_\+du\+\_\+dt\+\_\+ust\+\_\+heat(), oomph\+::\+Finite\+Element\+::local\+\_\+coordinate\+\_\+of\+\_\+node(), and s.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_ad3b8104ee6f97f589f346ced928b26c1}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_ad3b8104ee6f97f589f346ced928b26c1}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!du\_dt\_ust\_heat@{du\_dt\_ust\_heat}}
@@ -717,11 +718,11 @@ Calculate du/dt at the n-\/th local node. Uses suitably interpolated value for h
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l00585}{585}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 585 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00601}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::interpolated\+\_\+du\+\_\+dt\+\_\+ust\+\_\+heat()}}, \mbox{\hyperlink{elements_8h_source_l01842}{oomph\+::\+Finite\+Element\+::local\+\_\+coordinate\+\_\+of\+\_\+node()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::interpolated\+\_\+du\+\_\+dt\+\_\+ust\+\_\+heat(), oomph\+::\+Finite\+Element\+::local\+\_\+coordinate\+\_\+of\+\_\+node(), and s.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_ae5512e1cadba8840b1e625a2f14e470d}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_ae5512e1cadba8840b1e625a2f14e470d}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!enable\_ALE@{enable\_ALE}}
@@ -740,11 +741,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a92ef8967fa4e2d6
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00118}{118}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 118 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00672}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+ALE\+\_\+is\+\_\+disabled}}.
+References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+ALE\+\_\+is\+\_\+disabled.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_ae5512e1cadba8840b1e625a2f14e470d}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_ae5512e1cadba8840b1e625a2f14e470d}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!enable\_ALE@{enable\_ALE}}
@@ -763,11 +764,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a92ef8967fa4e2d6
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l00117}{117}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 117 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00672}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+ALE\+\_\+is\+\_\+disabled}}.
+References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+ALE\+\_\+is\+\_\+disabled.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a39f2f53a87b2b5b563b4846c503025cf}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a39f2f53a87b2b5b563b4846c503025cf}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
@@ -786,11 +787,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00498}{498}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 498 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{space__time__unsteady__heat__elements_8cc_source_l00065}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+ust\+\_\+heat()}}.
+References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+ust\+\_\+heat().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a39f2f53a87b2b5b563b4846c503025cf}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a39f2f53a87b2b5b563b4846c503025cf}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
@@ -809,11 +810,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l00497}{497}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 497 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{space__time__unsteady__heat__elements_8cc_source_l00065}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+ust\+\_\+heat()}}.
+References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+ust\+\_\+heat().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a181023577dd1aa632f6618038fd17654}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a181023577dd1aa632f6618038fd17654}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
@@ -832,11 +833,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00488}{488}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 488 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00227}{oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix}}, and \mbox{\hyperlink{space__time__unsteady__heat__elements_8cc_source_l00065}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+ust\+\_\+heat()}}.
+References oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix, and oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+ust\+\_\+heat().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a181023577dd1aa632f6618038fd17654}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a181023577dd1aa632f6618038fd17654}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
@@ -855,11 +856,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l00487}{487}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 487 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00227}{oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix}}, and \mbox{\hyperlink{space__time__unsteady__heat__elements_8cc_source_l00065}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+ust\+\_\+heat()}}.
+References oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix, and oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+ust\+\_\+heat().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a98e27cf96f3bb2f7d32cc946e1559e81}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a98e27cf96f3bb2f7d32cc946e1559e81}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!fill\_in\_generic\_residual\_contribution\_ust\_heat@{fill\_in\_generic\_residual\_contribution\_ust\_heat}}
@@ -878,19 +879,19 @@ flag=0\+: compute only residual vector flag=1\+: compute both
 
 Pure version without hanging nodes 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeUnsteadyHeatEquations_a3cdab62da2f5575258a57b5360798c56}{oomph\+::\+Refineable\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeUnsteadyHeatEquations_a93500040be9ffc22dc8347bf27a4f48c}{oomph\+::\+Refineable\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeUnsteadyHeatEquations_a93500040be9ffc22dc8347bf27a4f48c}{oomph\+::\+Refineable\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeUnsteadyHeatEquations_a3cdab62da2f5575258a57b5360798c56}{oomph\+::\+Refineable\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8cc_source_l00064}{64}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8cc_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+cc}}.
+Definition at line 64 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
+References i, s, and oomph\+::\+Quad\+Tree\+Names\+::W.
 
 
 
-Referenced by \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00498}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, and \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00488}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
+Referenced by oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a0df98764257ad3d29f92e4ad633ace48}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a0df98764257ad3d29f92e4ad633ace48}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!fill\_in\_generic\_residual\_contribution\_ust\_heat@{fill\_in\_generic\_residual\_contribution\_ust\_heat}}
@@ -905,7 +906,7 @@ Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} only (i
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeUnsteadyHeatEquations_a3cdab62da2f5575258a57b5360798c56}{oomph\+::\+Refineable\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeUnsteadyHeatEquations_a93500040be9ffc22dc8347bf27a4f48c}{oomph\+::\+Refineable\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeUnsteadyHeatEquations_a93500040be9ffc22dc8347bf27a4f48c}{oomph\+::\+Refineable\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeUnsteadyHeatEquations_a3cdab62da2f5575258a57b5360798c56}{oomph\+::\+Refineable\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$}}.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_ad7da7e32dd88db0a067ac89220111244}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_ad7da7e32dd88db0a067ac89220111244}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!get\_flux@{get\_flux}}
@@ -920,11 +921,11 @@ Get flux\+: flux\mbox{[}i\mbox{]}=du/dx\+\_\+i.
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00450}{450}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 450 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l03298}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00543}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::u\+\_\+index\+\_\+ust\+\_\+heat()}}.
+References oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), s, and oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::u\+\_\+index\+\_\+ust\+\_\+heat().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_ad7da7e32dd88db0a067ac89220111244}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_ad7da7e32dd88db0a067ac89220111244}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!get\_flux@{get\_flux}}
@@ -939,11 +940,11 @@ Get flux\+: flux\mbox{[}i\mbox{]}=du/dx\+\_\+i.
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l00449}{449}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 449 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l03298}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00543}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::u\+\_\+index\+\_\+ust\+\_\+heat()}}.
+References oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), s, and oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::u\+\_\+index\+\_\+ust\+\_\+heat().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_afa5e2c872d2a7c15f7e11eb4242c4e4f}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_afa5e2c872d2a7c15f7e11eb4242c4e4f}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!get\_source\_ust\_heat@{get\_source\_ust\_heat}}
@@ -958,11 +959,11 @@ Get source term at continous time t and (Eulerian) position x. Virtual so it can
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00397}{397}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 397 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00667}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Source\+\_\+fct\+\_\+pt}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Source\+\_\+fct\+\_\+pt, and t.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_afa5e2c872d2a7c15f7e11eb4242c4e4f}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_afa5e2c872d2a7c15f7e11eb4242c4e4f}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!get\_source\_ust\_heat@{get\_source\_ust\_heat}}
@@ -977,11 +978,11 @@ Get source term at continous time t and (Eulerian) position x. Virtual so it can
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l00396}{396}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 396 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00667}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Source\+\_\+fct\+\_\+pt}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Source\+\_\+fct\+\_\+pt, and t.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a868d0c82be4ee88f7ac6c42cadede525}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a868d0c82be4ee88f7ac6c42cadede525}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!interpolated\_du\_dt\_ust\_heat@{interpolated\_du\_dt\_ust\_heat}}
@@ -996,15 +997,15 @@ Return FE representation of function value du/dt(s) at local coordinate s.
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00601}{601}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 601 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l03298}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00543}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::u\+\_\+index\+\_\+ust\+\_\+heat()}}.
+References oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), s, and oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::u\+\_\+index\+\_\+ust\+\_\+heat().
 
 
 
-Referenced by \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00586}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::du\+\_\+dt\+\_\+ust\+\_\+heat()}}.
+Referenced by oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::du\+\_\+dt\+\_\+ust\+\_\+heat().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a868d0c82be4ee88f7ac6c42cadede525}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a868d0c82be4ee88f7ac6c42cadede525}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!interpolated\_du\_dt\_ust\_heat@{interpolated\_du\_dt\_ust\_heat}}
@@ -1019,11 +1020,11 @@ Return FE representation of function value du/dt(s) at local coordinate s.
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l00600}{600}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 600 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l03298}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00543}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::u\+\_\+index\+\_\+ust\+\_\+heat()}}.
+References oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), s, and oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::u\+\_\+index\+\_\+ust\+\_\+heat().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_ab186808a07e818afec2a4409ec2f8148}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_ab186808a07e818afec2a4409ec2f8148}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!interpolated\_u\_ust\_heat@{interpolated\_u\_ust\_heat}}
@@ -1038,11 +1039,11 @@ Return FE representation of function value u(s) at local coordinate s at previou
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00554}{554}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 554 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00543}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::u\+\_\+index\+\_\+ust\+\_\+heat()}}.
+References oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), s, oomph\+::\+Finite\+Element\+::shape(), t, and oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::u\+\_\+index\+\_\+ust\+\_\+heat().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_ab186808a07e818afec2a4409ec2f8148}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_ab186808a07e818afec2a4409ec2f8148}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!interpolated\_u\_ust\_heat@{interpolated\_u\_ust\_heat}}
@@ -1057,11 +1058,11 @@ Return FE representation of function value u(s) at local coordinate s at previou
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l00553}{553}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 553 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00543}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::u\+\_\+index\+\_\+ust\+\_\+heat()}}.
+References oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), s, oomph\+::\+Finite\+Element\+::shape(), t, and oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::u\+\_\+index\+\_\+ust\+\_\+heat().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a48a257738a3d9c7710c825a0610350f0}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a48a257738a3d9c7710c825a0610350f0}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!interpolated\_u\_ust\_heat@{interpolated\_u\_ust\_heat}}
@@ -1076,15 +1077,15 @@ Return FE representation of function value u(s) at local coordinate s.
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00507}{507}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 507 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00543}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::u\+\_\+index\+\_\+ust\+\_\+heat()}}.
+References oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), s, oomph\+::\+Finite\+Element\+::shape(), and oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::u\+\_\+index\+\_\+ust\+\_\+heat().
 
 
 
-Referenced by \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00208}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::scalar\+\_\+value\+\_\+paraview()}}.
+Referenced by oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::scalar\+\_\+value\+\_\+paraview().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a48a257738a3d9c7710c825a0610350f0}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a48a257738a3d9c7710c825a0610350f0}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!interpolated\_u\_ust\_heat@{interpolated\_u\_ust\_heat}}
@@ -1099,11 +1100,11 @@ Return FE representation of function value u(s) at local coordinate s.
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l00506}{506}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 506 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00543}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::u\+\_\+index\+\_\+ust\+\_\+heat()}}.
+References oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), s, oomph\+::\+Finite\+Element\+::shape(), and oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::u\+\_\+index\+\_\+ust\+\_\+heat().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a5cb8f7cecf3a6a730055bba7ab639d73}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a5cb8f7cecf3a6a730055bba7ab639d73}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!nscalar\_paraview@{nscalar\_paraview}}
@@ -1122,7 +1123,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a865e2e5586552ba
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00199}{199}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 199 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a5cb8f7cecf3a6a730055bba7ab639d73}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a5cb8f7cecf3a6a730055bba7ab639d73}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!nscalar\_paraview@{nscalar\_paraview}}
@@ -1141,7 +1142,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a865e2e5586552ba
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l00198}{198}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 198 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a49fb126a5c8c9129d9b6528d9905ebed}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a49fb126a5c8c9129d9b6528d9905ebed}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!output@{output}}
@@ -1164,11 +1165,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_ac
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00146}{146}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 146 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00130}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::output()}}.
+References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a49fb126a5c8c9129d9b6528d9905ebed}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a49fb126a5c8c9129d9b6528d9905ebed}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!output@{output}}
@@ -1191,11 +1192,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_ac
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l00145}{145}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 145 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00130}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::output()}}.
+References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a8ec51722d2716b431b737b3d826fea3f}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a8ec51722d2716b431b737b3d826fea3f}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!output@{output}}
@@ -1218,11 +1219,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_aa
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8cc_source_l00367}{367}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8cc_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+cc}}.
+Definition at line 367 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References i, and s.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a8ec51722d2716b431b737b3d826fea3f}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a8ec51722d2716b431b737b3d826fea3f}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!output@{output}}
@@ -1264,15 +1265,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_ac
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00130}{130}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 130 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00130}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::output()}}.
-
-
-
-Referenced by \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00130}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::output()}}, and \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00730}{oomph\+::\+QUnsteady\+Heat\+Space\+Time\+Element$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1\+D $>$\+::output()}}.
+Referenced by oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::output(), and oomph\+::\+QUnsteady\+Heat\+Space\+Time\+Element$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1\+D $>$\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a85444812c98a167c9bc952beb7d9f031}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a85444812c98a167c9bc952beb7d9f031}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!output@{output}}
@@ -1295,11 +1292,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_ac
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l00129}{129}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 129 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00130}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::output()}}.
+References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a507bbdc5ab85e2add0a0bb7487f49434}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a507bbdc5ab85e2add0a0bb7487f49434}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!output@{output}}
@@ -1322,11 +1319,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_ac
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8cc_source_l00327}{327}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8cc_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+cc}}.
+Definition at line 327 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References i, and s.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a507bbdc5ab85e2add0a0bb7487f49434}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a507bbdc5ab85e2add0a0bb7487f49434}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!output@{output}}
@@ -1360,11 +1357,11 @@ C-\/style output FE representation of soln\+: x,y,u or x,y,z,u at nplot$^\wedge$
 
 Output function\+: x,t,u or x,y,t,u at nplot points in each coordinate direction. 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8cc_source_l00714}{714}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8cc_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+cc}}.
+Definition at line 714 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References i.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_aa56a3233e865a0132da6499532ff3530}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_aa56a3233e865a0132da6499532ff3530}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!output\_element\_paraview@{output\_element\_paraview}}
@@ -1398,11 +1395,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_ab
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8cc_source_l00464}{464}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8cc_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+cc}}.
+Definition at line 464 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References i, and s.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a4bb7aab203192b307fdbece414cbf7ac}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a4bb7aab203192b307fdbece414cbf7ac}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!output\_fct@{output\_fct}}
@@ -1444,15 +1441,15 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_ad
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8cc_source_l00407}{407}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8cc_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+cc}}.
+Definition at line 407 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References i, and s.
 
 
 
-Referenced by \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00766}{oomph\+::\+QUnsteady\+Heat\+Space\+Time\+Element$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1\+D $>$\+::output\+\_\+fct()}}.
+Referenced by oomph\+::\+QUnsteady\+Heat\+Space\+Time\+Element$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1\+D $>$\+::output\+\_\+fct().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a073aa06236cc2025ac4d5d3e39050006}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a073aa06236cc2025ac4d5d3e39050006}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!output\_fct@{output\_fct}}
@@ -1490,11 +1487,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a49cc2d4f7ed5772
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00356}{356}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 356 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References i.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a7fba86b99ed5646b87d94f61fc4ee3f0}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a7fba86b99ed5646b87d94f61fc4ee3f0}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!scalar\_name\_paraview@{scalar\_name\_paraview}}
@@ -1513,11 +1510,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a49cc2d4f7ed5772
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l00355}{355}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 355 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References i.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_ab73fc7cf1405d2626a2d9eedfc485019}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_ab73fc7cf1405d2626a2d9eedfc485019}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!scalar\_value\_fct\_paraview@{scalar\_value\_fct\_paraview}}
@@ -1536,11 +1533,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_ab566cc2b0a758b0
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00296}{296}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 296 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03148}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l02862}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points\+\_\+paraview()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot(), i, oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Finite\+Element\+::nplot\+\_\+points\+\_\+paraview(), and s.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_ab73fc7cf1405d2626a2d9eedfc485019}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_ab73fc7cf1405d2626a2d9eedfc485019}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!scalar\_value\_fct\_paraview@{scalar\_value\_fct\_paraview}}
@@ -1559,11 +1556,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_ab566cc2b0a758b0
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l00295}{295}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 295 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03148}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l02862}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points\+\_\+paraview()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot(), i, oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Finite\+Element\+::nplot\+\_\+points\+\_\+paraview(), and s.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a3fd91a862fc6f1fb4828103e9ef1baa9}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a3fd91a862fc6f1fb4828103e9ef1baa9}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!scalar\_value\_fct\_paraview@{scalar\_value\_fct\_paraview}}
@@ -1582,11 +1579,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_ac6ce34f52481195
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00243}{243}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 243 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03148}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l02862}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points\+\_\+paraview()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot(), i, oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Finite\+Element\+::nplot\+\_\+points\+\_\+paraview(), and s.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a3fd91a862fc6f1fb4828103e9ef1baa9}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a3fd91a862fc6f1fb4828103e9ef1baa9}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!scalar\_value\_fct\_paraview@{scalar\_value\_fct\_paraview}}
@@ -1605,11 +1602,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_ac6ce34f52481195
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l00242}{242}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 242 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03148}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l02862}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points\+\_\+paraview()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot(), i, oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Finite\+Element\+::nplot\+\_\+points\+\_\+paraview(), and s.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a1d6ea5ac43862704ba82878c811e89b5}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a1d6ea5ac43862704ba82878c811e89b5}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!scalar\_value\_paraview@{scalar\_value\_paraview}}
@@ -1628,11 +1625,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a02cf8832a5e2886
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00208}{208}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 208 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03148}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00507}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::interpolated\+\_\+u\+\_\+ust\+\_\+heat()}}, \mbox{\hyperlink{elements_8h_source_l02862}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points\+\_\+paraview()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot(), i, oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::interpolated\+\_\+u\+\_\+ust\+\_\+heat(), oomph\+::\+Finite\+Element\+::nplot\+\_\+points\+\_\+paraview(), and s.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a1d6ea5ac43862704ba82878c811e89b5}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a1d6ea5ac43862704ba82878c811e89b5}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!scalar\_value\_paraview@{scalar\_value\_paraview}}
@@ -1651,11 +1648,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a02cf8832a5e2886
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l00207}{207}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 207 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03148}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00507}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::interpolated\+\_\+u\+\_\+ust\+\_\+heat()}}, \mbox{\hyperlink{elements_8h_source_l02862}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points\+\_\+paraview()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot(), i, oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::interpolated\+\_\+u\+\_\+ust\+\_\+heat(), oomph\+::\+Finite\+Element\+::nplot\+\_\+points\+\_\+paraview(), and s.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a6735d3aabfb2a16190d18805d1936b68}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a6735d3aabfb2a16190d18805d1936b68}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!self\_test@{self\_test}}
@@ -1674,11 +1671,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_af94c5a5e22175d5
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8cc_source_l00294}{294}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8cc_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+cc}}.
+Definition at line 294 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l04440}{oomph\+::\+Finite\+Element\+::self\+\_\+test()}}.
+References oomph\+::\+Finite\+Element\+::self\+\_\+test().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a6735d3aabfb2a16190d18805d1936b68}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a6735d3aabfb2a16190d18805d1936b68}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!self\_test@{self\_test}}
@@ -1695,12 +1692,12 @@ Self-\/test\+: Return 0 for OK.
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_af94c5a5e22175d5420b33b3b79e46ed3}{oomph\+::\+Finite\+Element}}.
 
-\mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a731ffd54d96cc9ef4ccdba1484a4618e}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a731ffd54d96cc9ef4ccdba1484a4618e}} 
+\mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_af13a35cc5092e93ac8c5183191852f2d}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_af13a35cc5092e93ac8c5183191852f2d}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!source\_fct\_pt@{source\_fct\_pt}}
 \index{source\_fct\_pt@{source\_fct\_pt}!oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}}
 \doxysubsubsection{\texorpdfstring{source\_fct\_pt()}{source\_fct\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
 {\footnotesize\ttfamily template$<$unsigned SPATIAL\+\_\+\+DIM$>$ \\
-\mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a35294bb50e768e05875d0603d7ab1d39}{Space\+Time\+Unsteady\+Heat\+Source\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations}}$<$ SPATIAL\+\_\+\+DIM $>$\+::source\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a35294bb50e768e05875d0603d7ab1d39}{Space\+Time\+Unsteady\+Heat\+Source\+Fct\+Pt}}\& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations}}$<$ SPATIAL\+\_\+\+DIM $>$\+::source\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -1708,26 +1705,26 @@ Access function\+: Pointer to source function.
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquationsBase_aa4834b0df720e343e6f56856d8cb7688}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations\+Base}}.
+Implements \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquationsBase_a9342bcc275d4e6952da5b9579e5bff7d}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations\+Base}}.
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00380}{380}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 380 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00667}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Source\+\_\+fct\+\_\+pt}}.
+References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Source\+\_\+fct\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{refineable__space__time__unsteady__heat__elements_8h_source_l00189}{oomph\+::\+Refineable\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::further\+\_\+build()}}.
+Referenced by oomph\+::\+Refineable\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::further\+\_\+build().
 
-\mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a731ffd54d96cc9ef4ccdba1484a4618e}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a731ffd54d96cc9ef4ccdba1484a4618e}} 
+\mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_af13a35cc5092e93ac8c5183191852f2d}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_af13a35cc5092e93ac8c5183191852f2d}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!source\_fct\_pt@{source\_fct\_pt}}
 \index{source\_fct\_pt@{source\_fct\_pt}!oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}}
 \doxysubsubsection{\texorpdfstring{source\_fct\_pt()}{source\_fct\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
 {\footnotesize\ttfamily template$<$unsigned SPATIAL\+\_\+\+DIM$>$ \\
-\mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a35294bb50e768e05875d0603d7ab1d39}{Space\+Time\+Unsteady\+Heat\+Source\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations}}$<$ SPATIAL\+\_\+\+DIM $>$\+::source\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a35294bb50e768e05875d0603d7ab1d39}{Space\+Time\+Unsteady\+Heat\+Source\+Fct\+Pt}}\& \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations}}$<$ SPATIAL\+\_\+\+DIM $>$\+::source\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -1735,15 +1732,15 @@ Access function\+: Pointer to source function.
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquationsBase_aa4834b0df720e343e6f56856d8cb7688}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations\+Base}}.
+Implements \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquationsBase_a9342bcc275d4e6952da5b9579e5bff7d}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations\+Base}}.
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l00379}{379}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 379 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00667}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Source\+\_\+fct\+\_\+pt}}.
+References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Source\+\_\+fct\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a5f251b88e4f51aa784eacf66ea10034a}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a5f251b88e4f51aa784eacf66ea10034a}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!source\_fct\_pt@{source\_fct\_pt}}
@@ -1758,11 +1755,11 @@ Access function\+: Pointer to source function. Const version.
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00388}{388}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 388 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00667}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Source\+\_\+fct\+\_\+pt}}.
+References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Source\+\_\+fct\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a5f251b88e4f51aa784eacf66ea10034a}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a5f251b88e4f51aa784eacf66ea10034a}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!source\_fct\_pt@{source\_fct\_pt}}
@@ -1777,11 +1774,11 @@ Access function\+: Pointer to source function. Const version.
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l00387}{387}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 387 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00667}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Source\+\_\+fct\+\_\+pt}}.
+References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Source\+\_\+fct\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_aa60dba450c24092648ba711751a565b8}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_aa60dba450c24092648ba711751a565b8}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!u\_index\_ust\_heat@{u\_index\_ust\_heat}}
@@ -1796,11 +1793,11 @@ Return the index at which the unknown value is stored. The default value, 0, is 
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00543}{543}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 543 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00450}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::get\+\_\+flux()}}, \mbox{\hyperlink{refineable__space__time__unsteady__heat__elements_8h_source_l00123}{oomph\+::\+Refineable\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::get\+\_\+interpolated\+\_\+values()}}, \mbox{\hyperlink{refineable__space__time__unsteady__heat__elements_8h_source_l00082}{oomph\+::\+Refineable\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::get\+\_\+\+Z2\+\_\+flux()}}, \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00601}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::interpolated\+\_\+du\+\_\+dt\+\_\+ust\+\_\+heat()}}, and \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00507}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::interpolated\+\_\+u\+\_\+ust\+\_\+heat()}}.
+Referenced by oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::get\+\_\+flux(), oomph\+::\+Refineable\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::get\+\_\+interpolated\+\_\+values(), oomph\+::\+Refineable\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::get\+\_\+\+Z2\+\_\+flux(), oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::interpolated\+\_\+du\+\_\+dt\+\_\+ust\+\_\+heat(), and oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::interpolated\+\_\+u\+\_\+ust\+\_\+heat().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_aa60dba450c24092648ba711751a565b8}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_aa60dba450c24092648ba711751a565b8}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!u\_index\_ust\_heat@{u\_index\_ust\_heat}}
@@ -1815,7 +1812,7 @@ Return the index at which the unknown value is stored. The default value, 0, is 
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l00542}{542}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 542 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -1833,11 +1830,11 @@ Boolean flag to indicate if ALE formulation is disabled when time-\/derivatives 
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00672}{672}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 672 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00107}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::disable\+\_\+\+ALE()}}, \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00118}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::enable\+\_\+\+ALE()}}, and \mbox{\hyperlink{refineable__space__time__unsteady__heat__elements_8h_source_l00189}{oomph\+::\+Refineable\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::further\+\_\+build()}}.
+Referenced by oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::disable\+\_\+\+ALE(), oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::enable\+\_\+\+ALE(), and oomph\+::\+Refineable\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::further\+\_\+build().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a63236349dfad49b9978201bd0ba01707}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a63236349dfad49b9978201bd0ba01707}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!Alpha\_pt@{Alpha\_pt}}
@@ -1852,11 +1849,11 @@ Pointer to Alpha parameter (thermal inertia)
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00675}{675}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 675 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00418}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::alpha()}}, \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00426}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::alpha\+\_\+pt()}}, and \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00091}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Space\+Time\+Unsteady\+Heat\+Equations()}}.
+Referenced by oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::alpha(), oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::alpha\+\_\+pt(), and oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Space\+Time\+Unsteady\+Heat\+Equations().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a5a6ddaf1ad993163121e2ff9fc1b228d}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a5a6ddaf1ad993163121e2ff9fc1b228d}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!Beta\_pt@{Beta\_pt}}
@@ -1871,11 +1868,11 @@ Pointer to Beta parameter (thermal conductivity)
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00678}{678}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 678 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00434}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::beta()}}, \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00442}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::beta\+\_\+pt()}}, and \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00091}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Space\+Time\+Unsteady\+Heat\+Equations()}}.
+Referenced by oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::beta(), oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::beta\+\_\+pt(), and oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Space\+Time\+Unsteady\+Heat\+Equations().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_af792669290c2f7539ba32e84f5ba0ed1}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_af792669290c2f7539ba32e84f5ba0ed1}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!Default\_alpha\_parameter@{Default\_alpha\_parameter}}
@@ -1896,11 +1893,11 @@ Static default value for the Alpha parameter (thermal inertia)\+: One for natura
 
 Default value for Alpha parameter (thermal inertia) 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00683}{683}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 683 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00091}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Space\+Time\+Unsteady\+Heat\+Equations()}}.
+Referenced by oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Space\+Time\+Unsteady\+Heat\+Equations().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a7cb8efdc9dd7da3e9e0f522c35bd9ef5}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a7cb8efdc9dd7da3e9e0f522c35bd9ef5}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!Default\_beta\_parameter@{Default\_beta\_parameter}}
@@ -1921,11 +1918,11 @@ Static default value for the Beta parameter (thermal conductivity)\+: One for na
 
 Default value for Beta parameter (thermal conductivity) 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00687}{687}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 687 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00091}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Space\+Time\+Unsteady\+Heat\+Equations()}}.
+Referenced by oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::\+Space\+Time\+Unsteady\+Heat\+Equations().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeUnsteadyHeatEquations_aa82dec41ffaf9f44e11a41da4f718ae1}\label{classoomph_1_1SpaceTimeUnsteadyHeatEquations_aa82dec41ffaf9f44e11a41da4f718ae1}} 
 \index{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$@{oomph::SpaceTimeUnsteadyHeatEquations$<$ SPATIAL\_DIM $>$}!Source\_fct\_pt@{Source\_fct\_pt}}
@@ -1940,11 +1937,11 @@ Pointer to source function\+:
 
 
 
-Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00667}{667}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 667 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{refineable__space__time__unsteady__heat__elements_8h_source_l00189}{oomph\+::\+Refineable\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::further\+\_\+build()}}, \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00397}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::get\+\_\+source\+\_\+ust\+\_\+heat()}}, and \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00380}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::source\+\_\+fct\+\_\+pt()}}.
+Referenced by oomph\+::\+Refineable\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::further\+\_\+build(), oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::get\+\_\+source\+\_\+ust\+\_\+heat(), and oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ SPATIAL\+\_\+\+DIM $>$\+::source\+\_\+fct\+\_\+pt().
 
 
 

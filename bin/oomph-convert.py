@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 #
 # Copyright (C) 2007- Angelo Simone (TU Delft)
 # Licensed under the GNU LGPL Version 2.1
@@ -46,6 +46,9 @@
 #             ignoring any lines that contains an ascii character which
 #             ignores floating point numbers in scientific notation!
 #
+# 20220610  Andrew Hazel
+#           - Converted to python3
+#
 ###############################################################################
 import os
 import getopt
@@ -53,7 +56,7 @@ import string
 import sys
 import time
 import re
-from commands import getoutput
+from subprocess import getoutput
 
 #
 ###############################################################################
@@ -62,7 +65,7 @@ from commands import getoutput
 def usage():
     """ Display usage
     """
-    print """\
+    print("""\
 
 NAME
         oomph-convert.py - script for converting from oomph-lib tecplot format to VTK XML. 
@@ -99,7 +102,7 @@ TYPICAL USAGE EXAMPLES
         oomph-convert.py -p3 soln12.dat nsol2.vtp           -> generate nsol2.vtp
         oomph-convert.py -p2 -z soln12.dat nsol2.vtp        -> generate nsol00002.vtp
         oomph-convert.py -p3 soln.dat                       -> generate soln.vtp
-        oomph-convert.py -p2 -z soln.dat                    -> generate soln00000.vtp"""
+        oomph-convert.py -p2 -z soln.dat                    -> generate soln00000.vtp""")
 
 #
 ###############################################################################
@@ -108,16 +111,12 @@ TYPICAL USAGE EXAMPLES
 def main(argv):
     """ Main function
     """
-    print "* oomph-convert.py, ver. 20110615"
+    print("* oomph-convert.py, ver. 20110615")
 
-    # Check python version. Bark at user if < 2.3 or if major is > 2
-    if sys.version_info<(2,3): 
-        print >>sys.stderr, "You need at least Python 2.3 " 
-        sys.exit(3) 
-
+    # Check python version. Bark at user if major is < 3
     major = sys.version_info[0]
-    if major > 2:
-        print >>sys.stderr, "Python 3 and above versions are not supported yet "
+    if major < 3:
+        print("Python 2 is not supported by this script. Use oomph-convert.py2 instead", file=sys.stderr)
         sys.exit(3)
 
     # Get command-line arguments
@@ -196,8 +195,8 @@ def main(argv):
             error("Sorry, cannot convert between .%s and .%s file formats." % (isuffix, osuffix))
 
         end = time.time()
-        print "* Conversion done in %d seconds" % (end - start)
-        print '* Output file name: %(fn)s ' %{'fn': ofilename}
+        print("* Conversion done in %d seconds" % (end - start))
+        print('* Output file name: %(fn)s ' %{'fn': ofilename})
 
 
 def ok_to_write_ofile(flag, in_file_name, out_file_name):
@@ -207,22 +206,22 @@ def ok_to_write_ofile(flag, in_file_name, out_file_name):
     if not os.path.exists(out_file_name):
         return True
 
-    print "File", in_file_name, "already exists!"
+    print("File", out_file_name, "already exists!")
 
     # Get modification times (in seconds since unix epoch I think)
     in_mtime = os.path.getmtime(in_file_name)
     out_mtime = os.path.getmtime(out_file_name)
     
     if flag:
-        print "Overwriting regardless of modification times because of flag."
+        print("Overwriting regardless of modification times because of flag.")
         return True
     
     elif in_mtime > out_mtime:
-        print "Overwriting because input file is newer than output file"
+        print("Overwriting because input file is newer than output file")
         return True
 
     else:
-        print "Not overwriting."
+        print("Not overwriting.")
         return False
 
 
@@ -291,7 +290,7 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
         linetmp = line
         try:
             (zone, line) = TecplotZone.parse(input, line)
-        except TecplotParsingError, e:
+        except TecplotParsingError as e:
             input.close()
             error(str(e))
         
@@ -299,7 +298,7 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
             zones.append(zone)
             ignoredlines+=line-linetmp-1-zone.nodesCount()
         else:
-            print "done"
+            print("done")
             input.close() # Close input file
             break
 
@@ -325,8 +324,8 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
     # Get the solution dimension (compute the maximum value)
     dimension=0
     for zone in zones:
-        if zone.dimension > dimension:
-            dimension=zone.dimension
+        if (zone.dimension)[0] > dimension:
+            dimension=(zone.dimension)[0]
 
     if dimension == 1:
         error("1D is not supported. Use GnuPlot to display the data file.")
@@ -364,7 +363,7 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
         for node in zone.nodes:
             output.write("%e %e %e\n" %(node.coordinates[0], node.coordinates[1], node.coordinates[2]))
     output.write(VtkXml.pointsFooter)
-    print "done"
+    print("done")
 
     #---------------------------------------------------------------------------
     # Cells
@@ -463,7 +462,7 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
                 pos += dimI * dimJ
 
     output.write(VtkXml.connectivityFooter)
-    print "done"
+    print("done")
 
     # Cell offset
     #---------------------------------------------------------------------------
@@ -485,7 +484,7 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
                 offset +=8
             output.write(str(offset) + "\n")
     output.write(VtkXml.offsetsFooter)
-    print "done"
+    print("done")
 
     # Cell types
     #---------------------------------------------------------------------------
@@ -513,7 +512,7 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
         output.write(zone.cellsCount[0] * (cellType + "\n"))
 
     output.write(VtkXml.typesFooter)
-    print "done"
+    print("done")
     if warn == 1:
         sys.stdout.write("Warning: Different types of elements \n")
     output.write(VtkXml.cellsFooter)
@@ -530,7 +529,7 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
             for node in zone.nodes:
                 output.write("%e\n" % node.fields[fieldIndex])
 
-        print "done"
+        print("done")
         output.write(VtkXml.fieldFooter)
 
     output.write(VtkXml.pointDataFooter)
@@ -878,14 +877,14 @@ def tecplot_to_vtpxml(inputFilename, outputFilename, dim):
             count+=1
             prev_line=line
 
-        except TecplotParsingError, e:
+        except TecplotParsingError as e:
             input.close()
             error(str(e))
 
         if point:
             points.append(point)
         else:
-            print "done"
+            print("done")
             input.close() # Close input file
             break
 
@@ -925,7 +924,7 @@ def tecplot_to_vtpxml(inputFilename, outputFilename, dim):
     for point in points:
         output.write("%e %e %e\n" %(point.coordinates[0], point.coordinates[1], point.coordinates[2]))
     output.write(VtpXml.pointsFooter)
-    print "done"
+    print("done")
  
     #---------------------------------------------------------------------------
     # Fields
@@ -938,7 +937,7 @@ def tecplot_to_vtpxml(inputFilename, outputFilename, dim):
         for point in points:
             output.write("%e\n" % point.fields[fieldIndex])
 
-        print "done"
+        print("done")
         output.write(VtpXml.fieldFooter)
 
     output.write(VtpXml.pointDataFooter)

@@ -32,11 +32,11 @@ void \mbox{\hyperlink{classoomph_1_1BiharmonicPreconditioner_a8f4c9b8a387e271916
 \begin{DoxyCompactList}\small\item\em Setup the preconditioner. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BiharmonicPreconditioner_a205babb3fe007ed93113a0c52ee4cf7d}{preconditioner\+\_\+solve}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&r, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&z)
 \begin{DoxyCompactList}\small\item\em Apply preconditioner to r. \end{DoxyCompactList}\item 
-unsigned \& \mbox{\hyperlink{classoomph_1_1BiharmonicPreconditioner_a2c285bbf5118a9bb479197faf2773a98}{preconditioner\+\_\+type}} ()
+unsigned \& \mbox{\hyperlink{classoomph_1_1BiharmonicPreconditioner_a6cbd786702f1faf6f9c3dca1b823e444}{preconditioner\+\_\+type}} ()
 \begin{DoxyCompactList}\small\item\em Access function to the preconditioner type ~\newline
 . \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\& \mbox{\hyperlink{classoomph_1_1BiharmonicPreconditioner_a0b513afd5998601176362f7118204c81}{bulk\+\_\+element\+\_\+mesh\+\_\+pt}} ()
-\begin{DoxyCompactList}\small\item\em Access function to the mesh pt for the bulk elements. The mesh should only contain Biharmonic\+Element$<$2$>$ and \mbox{\hyperlink{classoomph_1_1Hijacked}{Hijacked}}\texorpdfstring{$<$}{<}Biharmonic\+Element$<$2$>$ \texorpdfstring{$>$}{>} elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\& \mbox{\hyperlink{classoomph_1_1BiharmonicPreconditioner_abf6fed648ba0686273c79d0b85f61993}{bulk\+\_\+element\+\_\+mesh\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function to the mesh pt for the bulk elements. The mesh should only contain Biharmonic\+Element$<$2$>$ and \mbox{\hyperlink{classoomph_1_1Hijacked}{Hijacked}}$<$Biharmonic\+Element$<$2$>$ $>$ elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -57,7 +57,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1BiharmonicPreconditioner_a9779339955a27e
 \doxysubsection{Detailed Description}
 Biharmonic \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} -\/ for two dimensional problems. 
 
-Definition at line \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00087}{87}} of file \mbox{\hyperlink{biharmonic__preconditioner_8h_source}{biharmonic\+\_\+preconditioner.\+h}}.
+Definition at line 87 of file biharmonic\+\_\+preconditioner.\+h.
 
 
 
@@ -74,11 +74,11 @@ Constructor -\/ by default inexact preconditioning is used.
 
 
 
-Definition at line \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00091}{91}} of file \mbox{\hyperlink{biharmonic__preconditioner_8h_source}{biharmonic\+\_\+preconditioner.\+h}}.
+Definition at line 91 of file biharmonic\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00174}{Bulk\+\_\+element\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00171}{Hijacked\+\_\+sub\+\_\+block\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00162}{Preconditioner\+\_\+type}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02851}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::set\+\_\+nmesh()}}, \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00165}{Sub\+\_\+preconditioner\+\_\+1\+\_\+pt}}, and \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00168}{Sub\+\_\+preconditioner\+\_\+2\+\_\+pt}}.
+References Bulk\+\_\+element\+\_\+mesh\+\_\+pt, Hijacked\+\_\+sub\+\_\+block\+\_\+preconditioner\+\_\+pt, Preconditioner\+\_\+type, oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::set\+\_\+nmesh(), Sub\+\_\+preconditioner\+\_\+1\+\_\+pt, and Sub\+\_\+preconditioner\+\_\+2\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicPreconditioner_a589dcedc9044e01c438b17e15b7f7037}\label{classoomph_1_1BiharmonicPreconditioner_a589dcedc9044e01c438b17e15b7f7037}} 
 \index{oomph::BiharmonicPreconditioner@{oomph::BiharmonicPreconditioner}!````~BiharmonicPreconditioner@{$\sim$BiharmonicPreconditioner}}
@@ -92,11 +92,11 @@ destructor -\/ cleans up preconditioners and delete matrices
 
 
 
-Definition at line \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00112}{112}} of file \mbox{\hyperlink{biharmonic__preconditioner_8h_source}{biharmonic\+\_\+preconditioner.\+h}}.
+Definition at line 112 of file biharmonic\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00118}{clean\+\_\+up\+\_\+memory()}}.
+References clean\+\_\+up\+\_\+memory().
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicPreconditioner_a56db6a01774fd53d70e4c1e94733a574}\label{classoomph_1_1BiharmonicPreconditioner_a56db6a01774fd53d70e4c1e94733a574}} 
 \index{oomph::BiharmonicPreconditioner@{oomph::BiharmonicPreconditioner}!BiharmonicPreconditioner@{BiharmonicPreconditioner}}
@@ -111,23 +111,23 @@ Broken copy constructor.
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1BiharmonicPreconditioner_a0b513afd5998601176362f7118204c81}\label{classoomph_1_1BiharmonicPreconditioner_a0b513afd5998601176362f7118204c81}} 
+\mbox{\Hypertarget{classoomph_1_1BiharmonicPreconditioner_abf6fed648ba0686273c79d0b85f61993}\label{classoomph_1_1BiharmonicPreconditioner_abf6fed648ba0686273c79d0b85f61993}} 
 \index{oomph::BiharmonicPreconditioner@{oomph::BiharmonicPreconditioner}!bulk\_element\_mesh\_pt@{bulk\_element\_mesh\_pt}}
 \index{bulk\_element\_mesh\_pt@{bulk\_element\_mesh\_pt}!oomph::BiharmonicPreconditioner@{oomph::BiharmonicPreconditioner}}
 \doxysubsubsection{\texorpdfstring{bulk\_element\_mesh\_pt()}{bulk\_element\_mesh\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\& oomph\+::\+Biharmonic\+Preconditioner\+::bulk\+\_\+element\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}$\ast$\& oomph\+::\+Biharmonic\+Preconditioner\+::bulk\+\_\+element\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Access function to the mesh pt for the bulk elements. The mesh should only contain Biharmonic\+Element$<$2$>$ and \mbox{\hyperlink{classoomph_1_1Hijacked}{Hijacked}}\texorpdfstring{$<$}{<}Biharmonic\+Element$<$2$>$ \texorpdfstring{$>$}{>} elements. 
+Access function to the mesh pt for the bulk elements. The mesh should only contain Biharmonic\+Element$<$2$>$ and \mbox{\hyperlink{classoomph_1_1Hijacked}{Hijacked}}$<$Biharmonic\+Element$<$2$>$ $>$ elements. 
 
 
 
-Definition at line \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00151}{151}} of file \mbox{\hyperlink{biharmonic__preconditioner_8h_source}{biharmonic\+\_\+preconditioner.\+h}}.
+Definition at line 151 of file biharmonic\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00174}{Bulk\+\_\+element\+\_\+mesh\+\_\+pt}}.
+References Bulk\+\_\+element\+\_\+mesh\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicPreconditioner_a1eec48fe85c0246c1a9ba1ad4cfa74e6}\label{classoomph_1_1BiharmonicPreconditioner_a1eec48fe85c0246c1a9ba1ad4cfa74e6}} 
 \index{oomph::BiharmonicPreconditioner@{oomph::BiharmonicPreconditioner}!clean\_up\_memory@{clean\_up\_memory}}
@@ -145,15 +145,15 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Preconditioner_a46c31c416829be
 
 
 
-Definition at line \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00118}{118}} of file \mbox{\hyperlink{biharmonic__preconditioner_8h_source}{biharmonic\+\_\+preconditioner.\+h}}.
+Definition at line 118 of file biharmonic\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00171}{Hijacked\+\_\+sub\+\_\+block\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00165}{Sub\+\_\+preconditioner\+\_\+1\+\_\+pt}}, and \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00168}{Sub\+\_\+preconditioner\+\_\+2\+\_\+pt}}.
+References Hijacked\+\_\+sub\+\_\+block\+\_\+preconditioner\+\_\+pt, Sub\+\_\+preconditioner\+\_\+1\+\_\+pt, and Sub\+\_\+preconditioner\+\_\+2\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{biharmonic__preconditioner_8cc_source_l00107}{setup()}}, and \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00112}{$\sim$\+Biharmonic\+Preconditioner()}}.
+Referenced by setup(), and $\sim$\+Biharmonic\+Preconditioner().
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicPreconditioner_a63690a06e5159c42933fff0a92a108eb}\label{classoomph_1_1BiharmonicPreconditioner_a63690a06e5159c42933fff0a92a108eb}} 
 \index{oomph::BiharmonicPreconditioner@{oomph::BiharmonicPreconditioner}!operator=@{operator=}}
@@ -181,17 +181,17 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34
 
 
 
-Definition at line \mbox{\hyperlink{biharmonic__preconditioner_8cc_source_l00243}{243}} of file \mbox{\hyperlink{biharmonic__preconditioner_8cc_source}{biharmonic\+\_\+preconditioner.\+cc}}.
+Definition at line 243 of file biharmonic\+\_\+preconditioner.\+cc.
 
 
 
-References \mbox{\hyperlink{double__vector_8h_source_l00142}{oomph\+::\+Double\+Vector\+::clear()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04186}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00171}{Hijacked\+\_\+sub\+\_\+block\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{double__vector_8cc_source_l00123}{oomph\+::\+Double\+Vector\+::initialise()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01670}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::nblock\+\_\+types()}}, \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34884bb64ec8}{oomph\+::\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04489}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::return\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00165}{Sub\+\_\+preconditioner\+\_\+1\+\_\+pt}}, and \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00168}{Sub\+\_\+preconditioner\+\_\+2\+\_\+pt}}.
+References oomph\+::\+Double\+Vector\+::clear(), oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+block\+\_\+vector(), Hijacked\+\_\+sub\+\_\+block\+\_\+preconditioner\+\_\+pt, oomph\+::\+Double\+Vector\+::initialise(), oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::nblock\+\_\+types(), oomph\+::\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::return\+\_\+block\+\_\+vector(), Sub\+\_\+preconditioner\+\_\+1\+\_\+pt, and Sub\+\_\+preconditioner\+\_\+2\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1BiharmonicPreconditioner_a2c285bbf5118a9bb479197faf2773a98}\label{classoomph_1_1BiharmonicPreconditioner_a2c285bbf5118a9bb479197faf2773a98}} 
+\mbox{\Hypertarget{classoomph_1_1BiharmonicPreconditioner_a6cbd786702f1faf6f9c3dca1b823e444}\label{classoomph_1_1BiharmonicPreconditioner_a6cbd786702f1faf6f9c3dca1b823e444}} 
 \index{oomph::BiharmonicPreconditioner@{oomph::BiharmonicPreconditioner}!preconditioner\_type@{preconditioner\_type}}
 \index{preconditioner\_type@{preconditioner\_type}!oomph::BiharmonicPreconditioner@{oomph::BiharmonicPreconditioner}}
 \doxysubsubsection{\texorpdfstring{preconditioner\_type()}{preconditioner\_type()}}
-{\footnotesize\ttfamily unsigned \& oomph\+::\+Biharmonic\+Preconditioner\+::preconditioner\+\_\+type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily unsigned\& oomph\+::\+Biharmonic\+Preconditioner\+::preconditioner\+\_\+type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -208,11 +208,11 @@ Access function to the preconditioner type ~\newline
 \item 3 \+: block diagonal (3x3)+(1x1) 
 \end{DoxyItemize}
 
-Definition at line \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00143}{143}} of file \mbox{\hyperlink{biharmonic__preconditioner_8h_source}{biharmonic\+\_\+preconditioner.\+h}}.
+Definition at line 143 of file biharmonic\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00162}{Preconditioner\+\_\+type}}.
+References Preconditioner\+\_\+type.
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicPreconditioner_a8f4c9b8a387e27191659e528f0ff82a1}\label{classoomph_1_1BiharmonicPreconditioner_a8f4c9b8a387e27191659e528f0ff82a1}} 
 \index{oomph::BiharmonicPreconditioner@{oomph::BiharmonicPreconditioner}!setup@{setup}}
@@ -230,11 +230,11 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb1
 
 
 
-Definition at line \mbox{\hyperlink{biharmonic__preconditioner_8cc_source_l00107}{107}} of file \mbox{\hyperlink{biharmonic__preconditioner_8cc_source}{biharmonic\+\_\+preconditioner.\+cc}}.
+Definition at line 107 of file biharmonic\+\_\+preconditioner.\+cc.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8cc_source_l02483}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::block\+\_\+setup()}}, \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00174}{Bulk\+\_\+element\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00118}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00673}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+block()}}, \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00171}{Hijacked\+\_\+sub\+\_\+block\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00520}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::matrix\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01670}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::nblock\+\_\+types()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00162}{Preconditioner\+\_\+type}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02866}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::set\+\_\+mesh()}}, \mbox{\hyperlink{preconditioner_8h_source_l00094}{oomph\+::\+Preconditioner\+::setup()}}, \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00165}{Sub\+\_\+preconditioner\+\_\+1\+\_\+pt}}, and \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00168}{Sub\+\_\+preconditioner\+\_\+2\+\_\+pt}}.
+References oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::block\+\_\+setup(), Bulk\+\_\+element\+\_\+mesh\+\_\+pt, clean\+\_\+up\+\_\+memory(), oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+block(), Hijacked\+\_\+sub\+\_\+block\+\_\+preconditioner\+\_\+pt, oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::matrix\+\_\+pt(), oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::nblock\+\_\+types(), oomph\+::oomph\+\_\+info, Preconditioner\+\_\+type, oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::set\+\_\+mesh(), oomph\+::\+Preconditioner\+::setup(), Sub\+\_\+preconditioner\+\_\+1\+\_\+pt, and Sub\+\_\+preconditioner\+\_\+2\+\_\+pt.
 
 
 
@@ -251,11 +251,11 @@ the bulk element mesh pt
 
 
 
-Definition at line \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00174}{174}} of file \mbox{\hyperlink{biharmonic__preconditioner_8h_source}{biharmonic\+\_\+preconditioner.\+h}}.
+Definition at line 174 of file biharmonic\+\_\+preconditioner.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00091}{Biharmonic\+Preconditioner()}}, \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00151}{bulk\+\_\+element\+\_\+mesh\+\_\+pt()}}, and \mbox{\hyperlink{biharmonic__preconditioner_8cc_source_l00107}{setup()}}.
+Referenced by Biharmonic\+Preconditioner(), bulk\+\_\+element\+\_\+mesh\+\_\+pt(), and setup().
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicPreconditioner_a16f712c1c5ddcd5110f9fad2b10218bc}\label{classoomph_1_1BiharmonicPreconditioner_a16f712c1c5ddcd5110f9fad2b10218bc}} 
 \index{oomph::BiharmonicPreconditioner@{oomph::BiharmonicPreconditioner}!Hijacked\_sub\_block\_preconditioner\_pt@{Hijacked\_sub\_block\_preconditioner\_pt}}
@@ -269,11 +269,11 @@ Referenced by \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00091}{Biha
 
 
 
-Definition at line \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00171}{171}} of file \mbox{\hyperlink{biharmonic__preconditioner_8h_source}{biharmonic\+\_\+preconditioner.\+h}}.
+Definition at line 171 of file biharmonic\+\_\+preconditioner.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00091}{Biharmonic\+Preconditioner()}}, \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00118}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{biharmonic__preconditioner_8cc_source_l00243}{preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{biharmonic__preconditioner_8cc_source_l00107}{setup()}}.
+Referenced by Biharmonic\+Preconditioner(), clean\+\_\+up\+\_\+memory(), preconditioner\+\_\+solve(), and setup().
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicPreconditioner_a9779339955a27e1a98d2808f69e2879d}\label{classoomph_1_1BiharmonicPreconditioner_a9779339955a27e1a98d2808f69e2879d}} 
 \index{oomph::BiharmonicPreconditioner@{oomph::BiharmonicPreconditioner}!Preconditioner\_type@{Preconditioner\_type}}
@@ -296,11 +296,11 @@ preconditioner type ~\newline
 \item 3 \+: block diagonal (3x3)+(1x1) 
 \end{DoxyItemize}
 
-Definition at line \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00162}{162}} of file \mbox{\hyperlink{biharmonic__preconditioner_8h_source}{biharmonic\+\_\+preconditioner.\+h}}.
+Definition at line 162 of file biharmonic\+\_\+preconditioner.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00091}{Biharmonic\+Preconditioner()}}, \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00143}{preconditioner\+\_\+type()}}, and \mbox{\hyperlink{biharmonic__preconditioner_8cc_source_l00107}{setup()}}.
+Referenced by Biharmonic\+Preconditioner(), preconditioner\+\_\+type(), and setup().
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicPreconditioner_af48a50ac97077ffe5ec2ec4f0bf113ed}\label{classoomph_1_1BiharmonicPreconditioner_af48a50ac97077ffe5ec2ec4f0bf113ed}} 
 \index{oomph::BiharmonicPreconditioner@{oomph::BiharmonicPreconditioner}!Sub\_preconditioner\_1\_pt@{Sub\_preconditioner\_1\_pt}}
@@ -314,11 +314,11 @@ Exact \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} Pointer.
 
 
 
-Definition at line \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00165}{165}} of file \mbox{\hyperlink{biharmonic__preconditioner_8h_source}{biharmonic\+\_\+preconditioner.\+h}}.
+Definition at line 165 of file biharmonic\+\_\+preconditioner.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00091}{Biharmonic\+Preconditioner()}}, \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00118}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{biharmonic__preconditioner_8cc_source_l00243}{preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{biharmonic__preconditioner_8cc_source_l00107}{setup()}}.
+Referenced by Biharmonic\+Preconditioner(), clean\+\_\+up\+\_\+memory(), preconditioner\+\_\+solve(), and setup().
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicPreconditioner_a1b1f41821ab9b74d1170331934557db7}\label{classoomph_1_1BiharmonicPreconditioner_a1b1f41821ab9b74d1170331934557db7}} 
 \index{oomph::BiharmonicPreconditioner@{oomph::BiharmonicPreconditioner}!Sub\_preconditioner\_2\_pt@{Sub\_preconditioner\_2\_pt}}
@@ -332,11 +332,11 @@ Inexact \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} Pointer.
 
 
 
-Definition at line \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00168}{168}} of file \mbox{\hyperlink{biharmonic__preconditioner_8h_source}{biharmonic\+\_\+preconditioner.\+h}}.
+Definition at line 168 of file biharmonic\+\_\+preconditioner.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00091}{Biharmonic\+Preconditioner()}}, \mbox{\hyperlink{biharmonic__preconditioner_8h_source_l00118}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{biharmonic__preconditioner_8cc_source_l00243}{preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{biharmonic__preconditioner_8cc_source_l00107}{setup()}}.
+Referenced by Biharmonic\+Preconditioner(), clean\+\_\+up\+\_\+memory(), preconditioner\+\_\+solve(), and setup().
 
 
 

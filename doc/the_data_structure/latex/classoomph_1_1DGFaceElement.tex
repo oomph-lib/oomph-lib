@@ -22,7 +22,7 @@ Inheritance diagram for oomph\+::DGFace\+Element\+:\begin{figure}[H]
 \begin{DoxyCompactList}\small\item\em Empty Constructor. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1DGFaceElement_a03b59fa4babd8c2300d7cd733782cd08}{$\sim$\+DGFace\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Empty Destructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} $\ast$ \mbox{\hyperlink{classoomph_1_1DGFaceElement_aaaeb5307caf7302c816a797391bbfab2}{neighbour\+\_\+face\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} $\ast$ \mbox{\hyperlink{classoomph_1_1DGFaceElement_aef1ba8459a58727387d5217daed72a41}{neighbour\+\_\+face\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Access function for neighbouring face information. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1DGFaceElement_a23d30d2a32fb5c04531de2339e21ea06}{setup\+\_\+neighbour\+\_\+info}} (const bool \&add\+\_\+neighbour\+\_\+data\+\_\+to\+\_\+bulk)
 \begin{DoxyCompactList}\small\item\em Setup information from the neighbouring face, return a set of nodes (as data) in the neighour. The boolean flag is used to determine whether the data in the neighbour are added as external data to the bulk element --- required when computing the jacobian of the system. \end{DoxyCompactList}\item 
@@ -62,7 +62,7 @@ virtual unsigned \mbox{\hyperlink{classoomph_1_1DGFaceElement_af45b5a88226a143c8
 \doxysubsection{Detailed Description}
 Base class for Discontinuous Galerkin Faces. These are responsible for calculating the normal fluxes that provide the communication between the discontinuous elements. 
 
-Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00049}{49}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+Definition at line 49 of file dg\+\_\+elements.\+h.
 
 
 
@@ -79,7 +79,7 @@ Empty Constructor.
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00081}{81}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+Definition at line 81 of file dg\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1DGFaceElement_a03b59fa4babd8c2300d7cd733782cd08}\label{classoomph_1_1DGFaceElement_a03b59fa4babd8c2300d7cd733782cd08}} 
 \index{oomph::DGFaceElement@{oomph::DGFaceElement}!````~DGFaceElement@{$\sim$DGFaceElement}}
@@ -93,7 +93,7 @@ Empty Destructor.
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00084}{84}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+Definition at line 84 of file dg\+\_\+elements.\+h.
 
 
 
@@ -110,15 +110,15 @@ Add the contribution from integrating the numerical flux.
 
 Calculate the integrated (numerical) flux out of the face and add it to the residuals vector. 
 
-Definition at line \mbox{\hyperlink{dg__elements_8cc_source_l00416}{416}} of file \mbox{\hyperlink{dg__elements_8cc_source}{dg\+\_\+elements.\+cc}}.
+Definition at line 416 of file dg\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l04735}{oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l04825}{oomph\+::\+Face\+Element\+::bulk\+\_\+node\+\_\+number()}}, \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l00311}{oomph\+::\+Generalised\+Element\+::external\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{octree_8h_source_l00074}{oomph\+::\+Oc\+Tree\+Names\+::F}}, \mbox{\hyperlink{dg__elements_8h_source_l00068}{flux\+\_\+index()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8cc_source_l05328}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{dg__elements_8h_source_l00063}{Neighbour\+\_\+external\+\_\+data}}, \mbox{\hyperlink{dg__elements_8h_source_l00052}{Neighbour\+\_\+face\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{dg__elements_8cc_source_l00266}{numerical\+\_\+flux\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{dg__elements_8h_source_l00074}{required\+\_\+nflux()}}, \mbox{\hyperlink{elements_8cc_source_l03220}{oomph\+::\+Finite\+Element\+::shape\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}, and \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral\+::weight()}}.
+References oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt(), oomph\+::\+Face\+Element\+::bulk\+\_\+node\+\_\+number(), oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Generalised\+Element\+::external\+\_\+local\+\_\+eqn(), oomph\+::\+Oc\+Tree\+Names\+::F, flux\+\_\+index(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian\+\_\+at\+\_\+knot(), Neighbour\+\_\+external\+\_\+data, Neighbour\+\_\+face\+\_\+pt, oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), numerical\+\_\+flux\+\_\+at\+\_\+knot(), oomph\+::\+Integral\+::nweight(), required\+\_\+nflux(), oomph\+::\+Finite\+Element\+::shape\+\_\+at\+\_\+knot(), oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Integral\+::weight().
 
 
 
-Referenced by \mbox{\hyperlink{dg__elements_8h_source_l00406}{oomph\+::\+DGElement\+::add\+\_\+flux\+\_\+contributions\+\_\+to\+\_\+residuals()}}.
+Referenced by oomph\+::\+DGElement\+::add\+\_\+flux\+\_\+contributions\+\_\+to\+\_\+residuals().
 
 \mbox{\Hypertarget{classoomph_1_1DGFaceElement_aa905f22c530f3f640373eccbe90874b8}\label{classoomph_1_1DGFaceElement_aa905f22c530f3f640373eccbe90874b8}} 
 \index{oomph::DGFaceElement@{oomph::DGFaceElement}!dnumerical\_flux\_du@{dnumerical\_flux\_du}}
@@ -132,15 +132,15 @@ Calculate the derivative of the normal flux, which is the dot product of our app
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8cc_source_l00338}{338}} of file \mbox{\hyperlink{dg__elements_8cc_source}{dg\+\_\+elements.\+cc}}.
+Definition at line 338 of file dg\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01198}{oomph\+::\+Generalised\+Element\+::\+Default\+\_\+fd\+\_\+jacobian\+\_\+step}}, \mbox{\hyperlink{dg__elements_8h_source_l00121}{numerical\+\_\+flux()}}, and \mbox{\hyperlink{dg__elements_8h_source_l00074}{required\+\_\+nflux()}}.
+References oomph\+::\+Generalised\+Element\+::\+Default\+\_\+fd\+\_\+jacobian\+\_\+step, numerical\+\_\+flux(), and required\+\_\+nflux().
 
 
 
-Referenced by \mbox{\hyperlink{dg__elements_8cc_source_l00266}{numerical\+\_\+flux\+\_\+at\+\_\+knot()}}.
+Referenced by numerical\+\_\+flux\+\_\+at\+\_\+knot().
 
 \mbox{\Hypertarget{classoomph_1_1DGFaceElement_adc7c48b430c00660c049957c45d59261}\label{classoomph_1_1DGFaceElement_adc7c48b430c00660c049957c45d59261}} 
 \index{oomph::DGFaceElement@{oomph::DGFaceElement}!flux\_index@{flux\_index}}
@@ -154,15 +154,15 @@ Return the index at which the i-\/th unknown flux is stored.
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00068}{68}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+Definition at line 68 of file dg\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References i.
 
 
 
-Referenced by \mbox{\hyperlink{dg__elements_8cc_source_l00416}{add\+\_\+flux\+\_\+contributions()}}, \mbox{\hyperlink{dg__elements_8cc_source_l00196}{interpolated\+\_\+u()}}, and \mbox{\hyperlink{dg__elements_8cc_source_l00266}{numerical\+\_\+flux\+\_\+at\+\_\+knot()}}.
+Referenced by add\+\_\+flux\+\_\+contributions(), interpolated\+\_\+u(), and numerical\+\_\+flux\+\_\+at\+\_\+knot().
 
 \mbox{\Hypertarget{classoomph_1_1DGFaceElement_a03e126e44f91c84f8b21069fb84c274a}\label{classoomph_1_1DGFaceElement_a03e126e44f91c84f8b21069fb84c274a}} 
 \index{oomph::DGFaceElement@{oomph::DGFaceElement}!get\_interpolation\_data@{get\_interpolation\_data}}
@@ -176,15 +176,15 @@ Get the data that are used to interpolate the unkowns in the element. These must
 
 Add all the data that are used to interpolate the unknowns. This must be consistent with the interpolated\+\_\+u function above and the default implementation assumes pure nodal interpolaton. 
 
-Definition at line \mbox{\hyperlink{dg__elements_8cc_source_l00241}{241}} of file \mbox{\hyperlink{dg__elements_8cc_source}{dg\+\_\+elements.\+cc}}.
+Definition at line 241 of file dg\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References oomph\+::\+Finite\+Element\+::nnode(), and oomph\+::\+Finite\+Element\+::node\+\_\+pt().
 
 
 
-Referenced by \mbox{\hyperlink{dg__elements_8cc_source_l00042}{setup\+\_\+neighbour\+\_\+info()}}.
+Referenced by setup\+\_\+neighbour\+\_\+info().
 
 \mbox{\Hypertarget{classoomph_1_1DGFaceElement_ab58cee592775f0ae54ac0b0087eb9d35}\label{classoomph_1_1DGFaceElement_ab58cee592775f0ae54ac0b0087eb9d35}} 
 \index{oomph::DGFaceElement@{oomph::DGFaceElement}!interpolated\_u@{interpolated\_u}}
@@ -202,21 +202,21 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1DGEulerFaceReflectionElement_a28
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8cc_source_l00196}{196}} of file \mbox{\hyperlink{dg__elements_8cc_source}{dg\+\_\+elements.\+cc}}.
+Definition at line 196 of file dg\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{dg__elements_8h_source_l00068}{flux\+\_\+index()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{dg__elements_8h_source_l00074}{required\+\_\+nflux()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{nodes_8cc_source_l02408}{oomph\+::\+Node\+::value()}}.
+References flux\+\_\+index(), i, oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), required\+\_\+nflux(), oomph\+::\+Finite\+Element\+::shape(), and oomph\+::\+Node\+::value().
 
 
 
-Referenced by \mbox{\hyperlink{dg__elements_8cc_source_l00266}{numerical\+\_\+flux\+\_\+at\+\_\+knot()}}.
+Referenced by numerical\+\_\+flux\+\_\+at\+\_\+knot().
 
-\mbox{\Hypertarget{classoomph_1_1DGFaceElement_aaaeb5307caf7302c816a797391bbfab2}\label{classoomph_1_1DGFaceElement_aaaeb5307caf7302c816a797391bbfab2}} 
+\mbox{\Hypertarget{classoomph_1_1DGFaceElement_aef1ba8459a58727387d5217daed72a41}\label{classoomph_1_1DGFaceElement_aef1ba8459a58727387d5217daed72a41}} 
 \index{oomph::DGFaceElement@{oomph::DGFaceElement}!neighbour\_face\_pt@{neighbour\_face\_pt}}
 \index{neighbour\_face\_pt@{neighbour\_face\_pt}!oomph::DGFaceElement@{oomph::DGFaceElement}}
 \doxysubsubsection{\texorpdfstring{neighbour\_face\_pt()}{neighbour\_face\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} $\ast$ oomph\+::\+DGFace\+Element\+::neighbour\+\_\+face\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}}$\ast$ oomph\+::\+DGFace\+Element\+::neighbour\+\_\+face\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -224,11 +224,11 @@ Access function for neighbouring face information.
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00087}{87}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+Definition at line 87 of file dg\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{dg__elements_8h_source_l00052}{Neighbour\+\_\+face\+\_\+pt}}.
+References i, and Neighbour\+\_\+face\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1DGFaceElement_a023e05bcee73952fbc2c1f816a0a0860}\label{classoomph_1_1DGFaceElement_a023e05bcee73952fbc2c1f816a0a0860}} 
 \index{oomph::DGFaceElement@{oomph::DGFaceElement}!numerical\_flux@{numerical\_flux}}
@@ -242,15 +242,15 @@ Calculate the normal flux, which is the dot product of our approximation to the 
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1DGEulerFaceElement_a44655910de79b442bfffaefe0152f776}{oomph\+::\+DGEuler\+Face\+Element$<$ ELEMENT $>$}}, and \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionFaceElement_afdbb802744c914451223b5664bb589e4}{oomph\+::\+DGScalar\+Advection\+Face\+Element$<$ ELEMENT $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionFaceElement_afdbb802744c914451223b5664bb589e4}{oomph\+::\+DGScalar\+Advection\+Face\+Element$<$ ELEMENT $>$}}, and \mbox{\hyperlink{classoomph_1_1DGEulerFaceElement_a44655910de79b442bfffaefe0152f776}{oomph\+::\+DGEuler\+Face\+Element$<$ ELEMENT $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00121}{121}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+Definition at line 121 of file dg\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{dg__elements_8cc_source_l00338}{dnumerical\+\_\+flux\+\_\+du()}}, and \mbox{\hyperlink{dg__elements_8cc_source_l00266}{numerical\+\_\+flux\+\_\+at\+\_\+knot()}}.
+Referenced by dnumerical\+\_\+flux\+\_\+du(), and numerical\+\_\+flux\+\_\+at\+\_\+knot().
 
 \mbox{\Hypertarget{classoomph_1_1DGFaceElement_ab75e12cd6a07fac5daabb122ffa29429}\label{classoomph_1_1DGFaceElement_ab75e12cd6a07fac5daabb122ffa29429}} 
 \index{oomph::DGFaceElement@{oomph::DGFaceElement}!numerical\_flux\_at\_knot@{numerical\_flux\_at\_knot}}
@@ -264,15 +264,15 @@ Calculate the normal numerical flux at the integration point. This is the most g
 
 Calculate the numerical flux at the knot point ipt. This is the most general interface than can be overloaded if desired. The shape functions at the knot point will be passed into this function. 
 
-Definition at line \mbox{\hyperlink{dg__elements_8cc_source_l00266}{266}} of file \mbox{\hyperlink{dg__elements_8cc_source}{dg\+\_\+elements.\+cc}}.
+Definition at line 266 of file dg\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{dg__elements_8cc_source_l00338}{dnumerical\+\_\+flux\+\_\+du()}}, \mbox{\hyperlink{dg__elements_8h_source_l00068}{flux\+\_\+index()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{dg__elements_8cc_source_l00196}{interpolated\+\_\+u()}}, \mbox{\hyperlink{dg__elements_8h_source_l00052}{Neighbour\+\_\+face\+\_\+pt}}, \mbox{\hyperlink{dg__elements_8h_source_l00055}{Neighbour\+\_\+local\+\_\+coordinate}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02484}{oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{dg__elements_8h_source_l00121}{numerical\+\_\+flux()}}, \mbox{\hyperlink{elements_8cc_source_l06006}{oomph\+::\+Face\+Element\+::outer\+\_\+unit\+\_\+normal()}}, and \mbox{\hyperlink{dg__elements_8h_source_l00074}{required\+\_\+nflux()}}.
+References dnumerical\+\_\+flux\+\_\+du(), flux\+\_\+index(), i, interpolated\+\_\+u(), Neighbour\+\_\+face\+\_\+pt, Neighbour\+\_\+local\+\_\+coordinate, oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), numerical\+\_\+flux(), oomph\+::\+Face\+Element\+::outer\+\_\+unit\+\_\+normal(), and required\+\_\+nflux().
 
 
 
-Referenced by \mbox{\hyperlink{dg__elements_8cc_source_l00416}{add\+\_\+flux\+\_\+contributions()}}.
+Referenced by add\+\_\+flux\+\_\+contributions().
 
 \mbox{\Hypertarget{classoomph_1_1DGFaceElement_a2a0dd5c6307080b580fc696a8b65fb0e}\label{classoomph_1_1DGFaceElement_a2a0dd5c6307080b580fc696a8b65fb0e}} 
 \index{oomph::DGFaceElement@{oomph::DGFaceElement}!report\_info@{report\_info}}
@@ -286,15 +286,15 @@ Output information about the present element and its neighbour.
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8cc_source_l00123}{123}} of file \mbox{\hyperlink{dg__elements_8cc_source}{dg\+\_\+elements.\+cc}}.
+Definition at line 123 of file dg\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l04528}{oomph\+::\+Face\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{dg__elements_8h_source_l00052}{Neighbour\+\_\+face\+\_\+pt}}, \mbox{\hyperlink{dg__elements_8h_source_l00055}{Neighbour\+\_\+local\+\_\+coordinate}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02484}{oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References oomph\+::\+Finite\+Element\+::dim(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Face\+Element\+::interpolated\+\_\+x(), oomph\+::\+Integral\+::knot(), Neighbour\+\_\+face\+\_\+pt, Neighbour\+\_\+local\+\_\+coordinate, oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension(), oomph\+::\+Integral\+::nweight(), oomph\+::oomph\+\_\+info, and s.
 
 
 
-Referenced by \mbox{\hyperlink{dg__elements_8h_source_l00393}{oomph\+::\+DGElement\+::setup\+\_\+face\+\_\+neighbour\+\_\+info()}}.
+Referenced by oomph\+::\+DGElement\+::setup\+\_\+face\+\_\+neighbour\+\_\+info().
 
 \mbox{\Hypertarget{classoomph_1_1DGFaceElement_af45b5a88226a143c8fafbc5f3e097526}\label{classoomph_1_1DGFaceElement_af45b5a88226a143c8fafbc5f3e097526}} 
 \index{oomph::DGFaceElement@{oomph::DGFaceElement}!required\_nflux@{required\_nflux}}
@@ -308,15 +308,15 @@ Set the number of flux components.
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1DGEulerFaceElement_aa20647527c6e5dc1febb13e575d971bb}{oomph\+::\+DGEuler\+Face\+Element$<$ ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1DGEulerFaceReflectionElement_a51f6048bc1f1c033933c65430dd0c323}{oomph\+::\+DGEuler\+Face\+Reflection\+Element$<$ ELEMENT $>$}}, and \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionFaceElement_ae3c10d2af6a6aae42ced528040a4d530}{oomph\+::\+DGScalar\+Advection\+Face\+Element$<$ ELEMENT $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionFaceElement_ae3c10d2af6a6aae42ced528040a4d530}{oomph\+::\+DGScalar\+Advection\+Face\+Element$<$ ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1DGEulerFaceReflectionElement_a51f6048bc1f1c033933c65430dd0c323}{oomph\+::\+DGEuler\+Face\+Reflection\+Element$<$ ELEMENT $>$}}, and \mbox{\hyperlink{classoomph_1_1DGEulerFaceElement_aa20647527c6e5dc1febb13e575d971bb}{oomph\+::\+DGEuler\+Face\+Element$<$ ELEMENT $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00074}{74}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+Definition at line 74 of file dg\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{dg__elements_8cc_source_l00416}{add\+\_\+flux\+\_\+contributions()}}, \mbox{\hyperlink{dg__elements_8cc_source_l00338}{dnumerical\+\_\+flux\+\_\+du()}}, \mbox{\hyperlink{dg__elements_8cc_source_l00196}{interpolated\+\_\+u()}}, and \mbox{\hyperlink{dg__elements_8cc_source_l00266}{numerical\+\_\+flux\+\_\+at\+\_\+knot()}}.
+Referenced by add\+\_\+flux\+\_\+contributions(), dnumerical\+\_\+flux\+\_\+du(), interpolated\+\_\+u(), and numerical\+\_\+flux\+\_\+at\+\_\+knot().
 
 \mbox{\Hypertarget{classoomph_1_1DGFaceElement_a23d30d2a32fb5c04531de2339e21ea06}\label{classoomph_1_1DGFaceElement_a23d30d2a32fb5c04531de2339e21ea06}} 
 \index{oomph::DGFaceElement@{oomph::DGFaceElement}!setup\_neighbour\_info@{setup\_neighbour\_info}}
@@ -330,15 +330,15 @@ Setup information from the neighbouring face, return a set of nodes (as data) in
 
 Find pointers to neighbouring faces and the local coordinates in those faces that correspond to the integration points in the present face. This is achieved by moving up to the bulk element and thence the mesh which MUST have implemented a neighbour finding scheme. 
 
-Definition at line \mbox{\hyperlink{dg__elements_8cc_source_l00042}{42}} of file \mbox{\hyperlink{dg__elements_8cc_source}{dg\+\_\+elements.\+cc}}.
+Definition at line 42 of file dg\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l00307}{oomph\+::\+Generalised\+Element\+::add\+\_\+external\+\_\+data()}}, \mbox{\hyperlink{elements_8h_source_l04735}{oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l04626}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}, \mbox{\hyperlink{dg__elements_8cc_source_l00241}{get\+\_\+interpolation\+\_\+data()}}, \mbox{\hyperlink{elements_8cc_source_l06384}{oomph\+::\+Face\+Element\+::get\+\_\+local\+\_\+coordinate\+\_\+in\+\_\+bulk()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{dg__elements_8h_source_l00063}{Neighbour\+\_\+external\+\_\+data}}, \mbox{\hyperlink{dg__elements_8h_source_l00052}{Neighbour\+\_\+face\+\_\+pt}}, \mbox{\hyperlink{dg__elements_8h_source_l00055}{Neighbour\+\_\+local\+\_\+coordinate}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References oomph\+::\+Generalised\+Element\+::add\+\_\+external\+\_\+data(), oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt(), oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Face\+Element\+::face\+\_\+index(), get\+\_\+interpolation\+\_\+data(), oomph\+::\+Face\+Element\+::get\+\_\+local\+\_\+coordinate\+\_\+in\+\_\+bulk(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Integral\+::knot(), Neighbour\+\_\+external\+\_\+data, Neighbour\+\_\+face\+\_\+pt, Neighbour\+\_\+local\+\_\+coordinate, oomph\+::\+Integral\+::nweight(), and s.
 
 
 
-Referenced by \mbox{\hyperlink{dg__elements_8h_source_l00393}{oomph\+::\+DGElement\+::setup\+\_\+face\+\_\+neighbour\+\_\+info()}}.
+Referenced by oomph\+::\+DGElement\+::setup\+\_\+face\+\_\+neighbour\+\_\+info().
 
 
 
@@ -355,11 +355,11 @@ Referenced by \mbox{\hyperlink{dg__elements_8h_source_l00393}{oomph\+::\+DGEleme
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00063}{63}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+Definition at line 63 of file dg\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{dg__elements_8cc_source_l00416}{add\+\_\+flux\+\_\+contributions()}}, and \mbox{\hyperlink{dg__elements_8cc_source_l00042}{setup\+\_\+neighbour\+\_\+info()}}.
+Referenced by add\+\_\+flux\+\_\+contributions(), and setup\+\_\+neighbour\+\_\+info().
 
 \mbox{\Hypertarget{classoomph_1_1DGFaceElement_a35240deb7d12eebe5e45e5e4ff2e9dae}\label{classoomph_1_1DGFaceElement_a35240deb7d12eebe5e45e5e4ff2e9dae}} 
 \index{oomph::DGFaceElement@{oomph::DGFaceElement}!Neighbour\_face\_pt@{Neighbour\_face\_pt}}
@@ -373,11 +373,11 @@ Referenced by \mbox{\hyperlink{dg__elements_8cc_source_l00416}{add\+\_\+flux\+\_
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00052}{52}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+Definition at line 52 of file dg\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{dg__elements_8cc_source_l00416}{add\+\_\+flux\+\_\+contributions()}}, \mbox{\hyperlink{dg__elements_8h_source_l00087}{neighbour\+\_\+face\+\_\+pt()}}, \mbox{\hyperlink{dg__elements_8cc_source_l00266}{numerical\+\_\+flux\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{dg__elements_8cc_source_l00123}{report\+\_\+info()}}, and \mbox{\hyperlink{dg__elements_8cc_source_l00042}{setup\+\_\+neighbour\+\_\+info()}}.
+Referenced by add\+\_\+flux\+\_\+contributions(), neighbour\+\_\+face\+\_\+pt(), numerical\+\_\+flux\+\_\+at\+\_\+knot(), report\+\_\+info(), and setup\+\_\+neighbour\+\_\+info().
 
 \mbox{\Hypertarget{classoomph_1_1DGFaceElement_ad3fdd3f2199aa96f3d01422ac2ffe944}\label{classoomph_1_1DGFaceElement_ad3fdd3f2199aa96f3d01422ac2ffe944}} 
 \index{oomph::DGFaceElement@{oomph::DGFaceElement}!Neighbour\_local\_coordinate@{Neighbour\_local\_coordinate}}
@@ -391,11 +391,11 @@ Referenced by \mbox{\hyperlink{dg__elements_8cc_source_l00416}{add\+\_\+flux\+\_
 
 
 
-Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00055}{55}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+Definition at line 55 of file dg\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{dg__elements_8cc_source_l00266}{numerical\+\_\+flux\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{dg__elements_8cc_source_l00123}{report\+\_\+info()}}, and \mbox{\hyperlink{dg__elements_8cc_source_l00042}{setup\+\_\+neighbour\+\_\+info()}}.
+Referenced by numerical\+\_\+flux\+\_\+at\+\_\+knot(), report\+\_\+info(), and setup\+\_\+neighbour\+\_\+info().
 
 
 

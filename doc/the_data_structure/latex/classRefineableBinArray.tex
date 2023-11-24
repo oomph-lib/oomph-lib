@@ -26,9 +26,9 @@ void \mbox{\hyperlink{classRefineableBinArray_a406e1a7f7521c32915f9e8a4e33492e2}
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classRefineableBinArray_a0ab4375c167506d001a9522307805ab4}{$\sim$\+Refineable\+Bin\+Array}} ()
 \begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classRefineableBinArray}{Refineable\+Bin\+Array}} $\ast$ \mbox{\hyperlink{classRefineableBinArray_a67acf7be335ccf874517fd36ac27433b}{root\+\_\+bin\+\_\+array\+\_\+pt}} () const
+\mbox{\hyperlink{classRefineableBinArray}{Refineable\+Bin\+Array}} $\ast$ \mbox{\hyperlink{classRefineableBinArray_a827b6f05fefe24b6099044159c01ea34}{root\+\_\+bin\+\_\+array\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Root bin array. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classRefineableBin}{Refineable\+Bin}} $\ast$ \mbox{\hyperlink{classRefineableBinArray_aab485f3d5cac273ab89883ba5c782408}{bin\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\mbox{\hyperlink{classRefineableBin}{Refineable\+Bin}} $\ast$ \mbox{\hyperlink{classRefineableBinArray_ad4a6e34791849b9f8349281cf416beaa}{bin\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Pointer to i-\/th bin; can be null if bin is empty. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classRefineableBinArray_a5975657726af982a4d67ff6470abb9d1}{nbin}} () const
 \begin{DoxyCompactList}\small\item\em Number of bins (not taking recursion into account) \end{DoxyCompactList}\item 
@@ -40,13 +40,13 @@ void \mbox{\hyperlink{classRefineableBinArray_a477a68e97b7cb297d38a0b2a844f53a5}
 \begin{DoxyCompactList}\small\item\em Add specified \mbox{\hyperlink{classSamplePoint}{Sample\+Point}} to \mbox{\hyperlink{classRefineableBinArray}{Refineable\+Bin\+Array}}. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classRefineableBinArray_a4f2f78efe9b05fda23d94e857d00cfa1}{locate\+\_\+zeta}} (const Vector$<$ double $>$ \&zeta, Geom\+Object $\ast$\&sub\+\_\+geom\+\_\+object\+\_\+pt, Vector$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
 \begin{DoxyCompactList}\small\item\em Find sub-\/\+Geom\+Object (finite element) and the local coordinate s within it that contains point with global coordinate zeta. sub\+\_\+geom\+\_\+object\+\_\+pt=0 if point can\textquotesingle{}t be found. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classRefineableBinArray_aaf7e968daa598e460269fac55dfb55ca}{get\+\_\+bin\+\_\+boundaries}} (const unsigned \&bin\+\_\+index, Vector$<$ std\+::pair$<$ double, double $>$ $>$ \&\mbox{\hyperlink{classSamplePointContainer_aac031f93652a7fcd21b5917a780d3022}{min\+\_\+and\+\_\+max\+\_\+coordinates}})
+void \mbox{\hyperlink{classRefineableBinArray_abb9308f34cddb6b01db9240d8e14f850}{get\+\_\+bin\+\_\+boundaries}} (const unsigned \&bin\+\_\+index, Vector$<$ std\+::pair$<$ double, double $>$$>$ \&\mbox{\hyperlink{classSamplePointContainer_a6799027f7c569176934457b17bfddf0f}{min\+\_\+and\+\_\+max\+\_\+coordinates}})
 \begin{DoxyCompactList}\small\item\em Boundaries of specified bin in each coordinate direction. $\ast$.first = min; $\ast$.second = max. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classRefineableBinArray_a07632b2aa85958ed406ca980f0cd025b}{depth}} () const
 \begin{DoxyCompactList}\small\item\em Depth of the hierarchical bin\+\_\+array. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classRefineableBinArray_a1ada9a3c5cb95bbd690dd1d68421014a}{max\+\_\+depth}} () const
 \begin{DoxyCompactList}\small\item\em Max depth of the hierarchical bin\+\_\+array; const version. \end{DoxyCompactList}\item 
-unsigned \& \mbox{\hyperlink{classRefineableBinArray_af23bddd8d9f462f8dd9c44eeed960125}{max\+\_\+depth}} ()
+unsigned \& \mbox{\hyperlink{classRefineableBinArray_a0782afebde6635674c231555a3f6b228}{max\+\_\+depth}} ()
 \begin{DoxyCompactList}\small\item\em Max depth of the hierarchical bin\+\_\+array. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classRefineableBinArray_a3450f66578018c21cb0e46a75788b6c3}{bin\+\_\+array\+\_\+is\+\_\+recursive}} () const
 \begin{DoxyCompactList}\small\item\em Is the \mbox{\hyperlink{classBinArray}{Bin\+Array}} recursive? \end{DoxyCompactList}\item 
@@ -58,15 +58,15 @@ void \mbox{\hyperlink{classRefineableBinArray_a982851086eb3973d4f17d5a5364d8faa}
 \begin{DoxyCompactList}\small\item\em Output bin vertices (allowing display of bins as zones). \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classRefineableBinArray_a98b6de46ffffbdc8045831c6fc03b159}{output\+\_\+neighbouring\+\_\+bins}} (const unsigned \&bin\+\_\+index, const unsigned \&radius, std\+::ofstream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output neighbouring bins at given \char`\"{}radius\char`\"{} of the specified bin. \end{DoxyCompactList}\item 
-unsigned \& \mbox{\hyperlink{classRefineableBinArray_a00fcd3ddc867085313ac945fc4553115}{total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level}} ()
+unsigned \& \mbox{\hyperlink{classRefineableBinArray_a551adefafd0be9d184c4daa6adf16512}{total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level}} ()
 \begin{DoxyCompactList}\small\item\em Counter to keep track of how many sample points we\textquotesingle{}ve visited during top level call to locate\+\_\+zeta. \end{DoxyCompactList}\item 
-unsigned \& \mbox{\hyperlink{classRefineableBinArray_af02301fa30cd6dd5807efd949df9f5de}{first\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta}} ()
+unsigned \& \mbox{\hyperlink{classRefineableBinArray_aade552fd473125fd624222672c90a3d5}{first\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta}} ()
 \begin{DoxyCompactList}\small\item\em When searching through sample points recursively from the top level \mbox{\hyperlink{classRefineableBinArray}{Refineable\+Bin\+Array}} (in deterministic order!) only actually do the locate\+\_\+zeta calls when when the counter exceeds this value. \end{DoxyCompactList}\item 
-unsigned \& \mbox{\hyperlink{classRefineableBinArray_a4e91f20ad3d7f334f90af31feca1e8b9}{last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta}} ()
+unsigned \& \mbox{\hyperlink{classRefineableBinArray_ad8dd347e3f9cd98555ebc96f9c968807}{last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta}} ()
 \begin{DoxyCompactList}\small\item\em When searching through sample points recursively from the top level \mbox{\hyperlink{classRefineableBinArray}{Refineable\+Bin\+Array}} (in deterministic order!) only actually do the locate\+\_\+zeta calls when when the counter is less than this value. \end{DoxyCompactList}\item 
-unsigned \& \mbox{\hyperlink{classRefineableBinArray_a2367a6337a800cce5a6413548b49f75f}{multiplier\+\_\+for\+\_\+max\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta}} ()
+unsigned \& \mbox{\hyperlink{classRefineableBinArray_ae5dc08202a4716df1b2138f3dce84e85}{multiplier\+\_\+for\+\_\+max\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta}} ()
 \begin{DoxyCompactList}\small\item\em Every time we\textquotesingle{}ve completed a \char`\"{}spiral\char`\"{}, visiting a finite number of sample points in a deterministic order, use this multiplier to increase the max. number of sample points to be visited. Using a multiplier rather than a constant increment increases the amount of (more and more unlikely to yield anything!) work done locally before doing another costly mpi round trip when we\textquotesingle{}re already far from the point we\textquotesingle{}re trying to find. \end{DoxyCompactList}\item 
-unsigned \& \mbox{\hyperlink{classRefineableBinArray_aedb53aae2b2ecb83a254ba992c848459}{initial\+\_\+last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta}} ()
+unsigned \& \mbox{\hyperlink{classRefineableBinArray_a517b1704286e6ee44b771af5348a6854}{initial\+\_\+last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta}} ()
 \begin{DoxyCompactList}\small\item\em When searching through sample points recursively from the top level \mbox{\hyperlink{classRefineableBinArray}{Refineable\+Bin\+Array}} (in deterministic order!) only actually do the locate\+\_\+zeta calls when when the counter exceeds this value. This is the initial value when starting the spiral based search. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
@@ -111,7 +111,7 @@ unsigned \mbox{\hyperlink{classRefineableBinArray_ace7075adbe1606ef0b01cbb14c380
 
 \mbox{\hyperlink{classRefineableBinArray}{Refineable\+Bin\+Array}} class. 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00520}{520}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 520 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -130,11 +130,11 @@ Constructor.
 
 Constructor 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8cc_source_l00841}{841}} of file \mbox{\hyperlink{sample__point__container_8cc_source}{sample\+\_\+point\+\_\+container.\+cc}}.
+Definition at line 841 of file sample\+\_\+point\+\_\+container.\+cc.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8h_source_l00763}{Bin\+\_\+array\+\_\+is\+\_\+recursive}}, \mbox{\hyperlink{sample__point__container_8h_source_l00759}{Bin\+\_\+pt}}, \mbox{\hyperlink{sample__point__container_8h_source_l00568}{Default\+\_\+n\+\_\+bin\+\_\+1d}}, \mbox{\hyperlink{sample__point__container_8h_source_l00768}{Depth}}, \mbox{\hyperlink{sample__point__container_8h_source_l00508}{Bin\+Array\+::\+Dimensions\+\_\+of\+\_\+bin\+\_\+array}}, \mbox{\hyperlink{sample__point__container_8h_source_l00346}{Sample\+Point\+Container\+::\+Enable\+\_\+timing\+\_\+of\+\_\+setup}}, \mbox{\hyperlink{sample__point__container_8cc_source_l01882}{fill\+\_\+bin\+\_\+array()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00785}{First\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{sample__point__container_8h_source_l00806}{Initial\+\_\+last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta}}, \mbox{\hyperlink{sample__point__container_8h_source_l00790}{Last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta}}, \mbox{\hyperlink{sample__point__container_8h_source_l00771}{Max\+\_\+depth}}, \mbox{\hyperlink{sample__point__container_8h_source_l00775}{Max\+\_\+number\+\_\+of\+\_\+sample\+\_\+point\+\_\+per\+\_\+bin}}, \mbox{\hyperlink{sample__point__container_8h_source_l00357}{Sample\+Point\+Container\+::\+Mesh\+\_\+pt}}, \mbox{\hyperlink{sample__point__container_8h_source_l00363}{Sample\+Point\+Container\+::\+Min\+\_\+and\+\_\+max\+\_\+coordinates}}, \mbox{\hyperlink{sample__point__container_8h_source_l00800}{Multiplier\+\_\+for\+\_\+max\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{sample__point__container_8h_source_l00547}{root\+\_\+bin\+\_\+array\+\_\+pt()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00778}{Root\+\_\+bin\+\_\+array\+\_\+pt}}, \mbox{\hyperlink{sample__point__container_8cc_source_l00684}{Sample\+Point\+Container\+::setup\+\_\+min\+\_\+and\+\_\+max\+\_\+coordinates()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l01820}{total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+computed\+\_\+recursively()}}, and \mbox{\hyperlink{sample__point__container_8h_source_l00382}{Sample\+Point\+Container\+::\+Total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level}}.
+References Bin\+\_\+array\+\_\+is\+\_\+recursive, Bin\+\_\+pt, Default\+\_\+n\+\_\+bin\+\_\+1d, Depth, Bin\+Array\+::\+Dimensions\+\_\+of\+\_\+bin\+\_\+array, Sample\+Point\+Container\+::\+Enable\+\_\+timing\+\_\+of\+\_\+setup, fill\+\_\+bin\+\_\+array(), First\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta, i, Initial\+\_\+last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta, Last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta, Max\+\_\+depth, Max\+\_\+number\+\_\+of\+\_\+sample\+\_\+point\+\_\+per\+\_\+bin, Sample\+Point\+Container\+::\+Mesh\+\_\+pt, Sample\+Point\+Container\+::\+Min\+\_\+and\+\_\+max\+\_\+coordinates, Multiplier\+\_\+for\+\_\+max\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta, oomph\+::oomph\+\_\+info, root\+\_\+bin\+\_\+array\+\_\+pt(), Root\+\_\+bin\+\_\+array\+\_\+pt, Sample\+Point\+Container\+::setup\+\_\+min\+\_\+and\+\_\+max\+\_\+coordinates(), oomph\+::\+Timing\+Helpers\+::timer(), total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+computed\+\_\+recursively(), and Sample\+Point\+Container\+::\+Total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level.
 
 \mbox{\Hypertarget{classRefineableBinArray_aeecaf1657c6b3866efce1d5ce42b815c}\label{classRefineableBinArray_aeecaf1657c6b3866efce1d5ce42b815c}} 
 \index{RefineableBinArray@{RefineableBinArray}!RefineableBinArray@{RefineableBinArray}}
@@ -158,11 +158,11 @@ Destructor.
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00533}{533}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 533 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8h_source_l00759}{Bin\+\_\+pt}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References Bin\+\_\+pt, and i.
 
 
 
@@ -179,15 +179,15 @@ Add specified \mbox{\hyperlink{classSamplePoint}{Sample\+Point}} to \mbox{\hyper
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00612}{612}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 612 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8h_source_l00759}{Bin\+\_\+pt}}, and \mbox{\hyperlink{sample__point__container_8cc_source_l01840}{Bin\+Array\+::coords\+\_\+to\+\_\+bin\+\_\+index()}}.
+References Bin\+\_\+pt, and Bin\+Array\+::coords\+\_\+to\+\_\+bin\+\_\+index().
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8h_source_l00574}{fill\+\_\+bin\+\_\+array()}}.
+Referenced by fill\+\_\+bin\+\_\+array().
 
 \mbox{\Hypertarget{classRefineableBinArray_a3450f66578018c21cb0e46a75788b6c3}\label{classRefineableBinArray_a3450f66578018c21cb0e46a75788b6c3}} 
 \index{RefineableBinArray@{RefineableBinArray}!bin\_array\_is\_recursive@{bin\_array\_is\_recursive}}
@@ -201,17 +201,17 @@ Is the \mbox{\hyperlink{classBinArray}{Bin\+Array}} recursive?
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00659}{659}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 659 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8h_source_l00763}{Bin\+\_\+array\+\_\+is\+\_\+recursive}}.
+References Bin\+\_\+array\+\_\+is\+\_\+recursive.
 
-\mbox{\Hypertarget{classRefineableBinArray_aab485f3d5cac273ab89883ba5c782408}\label{classRefineableBinArray_aab485f3d5cac273ab89883ba5c782408}} 
+\mbox{\Hypertarget{classRefineableBinArray_ad4a6e34791849b9f8349281cf416beaa}\label{classRefineableBinArray_ad4a6e34791849b9f8349281cf416beaa}} 
 \index{RefineableBinArray@{RefineableBinArray}!bin\_pt@{bin\_pt}}
 \index{bin\_pt@{bin\_pt}!RefineableBinArray@{RefineableBinArray}}
 \doxysubsubsection{\texorpdfstring{bin\_pt()}{bin\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classRefineableBin}{Refineable\+Bin}} $\ast$ Refineable\+Bin\+Array\+::bin\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classRefineableBin}{Refineable\+Bin}}$\ast$ Refineable\+Bin\+Array\+::bin\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -219,11 +219,11 @@ Pointer to i-\/th bin; can be null if bin is empty.
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00553}{553}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 553 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8h_source_l00759}{Bin\+\_\+pt}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References Bin\+\_\+pt, and i.
 
 \mbox{\Hypertarget{classRefineableBinArray_ac8f32afc025239c62a5d7e7e2535313e}\label{classRefineableBinArray_ac8f32afc025239c62a5d7e7e2535313e}} 
 \index{RefineableBinArray@{RefineableBinArray}!create\_sample\_points\_from\_element@{create\_sample\_points\_from\_element}}
@@ -247,11 +247,11 @@ Depth of the hierarchical bin\+\_\+array.
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00641}{641}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 641 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8h_source_l00768}{Depth}}.
+References Depth.
 
 \mbox{\Hypertarget{classRefineableBinArray_a89a3c1f13eeceec0fb11e399cc58d57d}\label{classRefineableBinArray_a89a3c1f13eeceec0fb11e399cc58d57d}} 
 \index{RefineableBinArray@{RefineableBinArray}!fill\_bin\_array@{fill\_bin\_array}}
@@ -265,15 +265,15 @@ Fill the bin array with sample points from Finite\+Elements stored in mesh.
 
 For all the sample points we have to create ...
 
-Definition at line \mbox{\hyperlink{sample__point__container_8cc_source_l01882}{1882}} of file \mbox{\hyperlink{sample__point__container_8cc_source}{sample\+\_\+point\+\_\+container.\+cc}}.
+Definition at line 1882 of file sample\+\_\+point\+\_\+container.\+cc.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8h_source_l00759}{Bin\+\_\+pt}}, \mbox{\hyperlink{sample__point__container_8cc_source_l01840}{Bin\+Array\+::coords\+\_\+to\+\_\+bin\+\_\+index()}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{sample__point__container_8h_source_l00357}{Sample\+Point\+Container\+::\+Mesh\+\_\+pt}}, \mbox{\hyperlink{sample__point__container_8h_source_l00363}{Sample\+Point\+Container\+::\+Min\+\_\+and\+\_\+max\+\_\+coordinates}}, \mbox{\hyperlink{sample__point__container_8h_source_l00480}{Bin\+Array\+::ndim\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00377}{Sample\+Point\+Container\+::\+Nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{sample__point__container_8h_source_l00343}{Sample\+Point\+Container\+::\+Use\+\_\+equally\+\_\+spaced\+\_\+interior\+\_\+sample\+\_\+points}}, and \mbox{\hyperlink{sample__point__container_8h_source_l00367}{Sample\+Point\+Container\+::\+Use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup}}.
+References Bin\+\_\+pt, Bin\+Array\+::coords\+\_\+to\+\_\+bin\+\_\+index(), e, i, Sample\+Point\+Container\+::\+Mesh\+\_\+pt, Sample\+Point\+Container\+::\+Min\+\_\+and\+\_\+max\+\_\+coordinates, Bin\+Array\+::ndim\+\_\+zeta(), Sample\+Point\+Container\+::\+Nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element, s, Sample\+Point\+Container\+::\+Use\+\_\+equally\+\_\+spaced\+\_\+interior\+\_\+sample\+\_\+points, and Sample\+Point\+Container\+::\+Use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup.
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8cc_source_l00841}{Refineable\+Bin\+Array()}}.
+Referenced by Refineable\+Bin\+Array().
 
 \mbox{\Hypertarget{classRefineableBinArray_a324600bc7ba047fb17adcb3918ea5c17}\label{classRefineableBinArray_a324600bc7ba047fb17adcb3918ea5c17}} 
 \index{RefineableBinArray@{RefineableBinArray}!fill\_bin\_array@{fill\_bin\_array}}
@@ -287,17 +287,17 @@ Fill the bin array with specified Sample\+Points.
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00574}{574}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 574 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8h_source_l00612}{add\+\_\+sample\+\_\+point()}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{sample__point__container_8h_source_l00357}{Sample\+Point\+Container\+::\+Mesh\+\_\+pt}}, \mbox{\hyperlink{sample__point__container_8h_source_l00480}{Bin\+Array\+::ndim\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00377}{Sample\+Point\+Container\+::\+Nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{sample__point__container_8h_source_l00343}{Sample\+Point\+Container\+::\+Use\+\_\+equally\+\_\+spaced\+\_\+interior\+\_\+sample\+\_\+points}}, and \mbox{\hyperlink{sample__point__container_8h_source_l00367}{Sample\+Point\+Container\+::\+Use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup}}.
+References add\+\_\+sample\+\_\+point(), e, i, Sample\+Point\+Container\+::\+Mesh\+\_\+pt, Bin\+Array\+::ndim\+\_\+zeta(), Sample\+Point\+Container\+::\+Nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element, s, Sample\+Point\+Container\+::\+Use\+\_\+equally\+\_\+spaced\+\_\+interior\+\_\+sample\+\_\+points, and Sample\+Point\+Container\+::\+Use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup.
 
-\mbox{\Hypertarget{classRefineableBinArray_af02301fa30cd6dd5807efd949df9f5de}\label{classRefineableBinArray_af02301fa30cd6dd5807efd949df9f5de}} 
+\mbox{\Hypertarget{classRefineableBinArray_aade552fd473125fd624222672c90a3d5}\label{classRefineableBinArray_aade552fd473125fd624222672c90a3d5}} 
 \index{RefineableBinArray@{RefineableBinArray}!first\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta@{first\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta}}
 \index{first\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta@{first\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta}!RefineableBinArray@{RefineableBinArray}}
 \doxysubsubsection{\texorpdfstring{first\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta()}{first\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta()}}
-{\footnotesize\ttfamily unsigned \& Refineable\+Bin\+Array\+::first\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily unsigned\& Refineable\+Bin\+Array\+::first\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -305,21 +305,21 @@ When searching through sample points recursively from the top level \mbox{\hyper
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00712}{712}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 712 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8h_source_l00785}{First\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta}}.
+References First\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta.
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l00524}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}.
+Referenced by oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction().
 
-\mbox{\Hypertarget{classRefineableBinArray_aaf7e968daa598e460269fac55dfb55ca}\label{classRefineableBinArray_aaf7e968daa598e460269fac55dfb55ca}} 
+\mbox{\Hypertarget{classRefineableBinArray_abb9308f34cddb6b01db9240d8e14f850}\label{classRefineableBinArray_abb9308f34cddb6b01db9240d8e14f850}} 
 \index{RefineableBinArray@{RefineableBinArray}!get\_bin\_boundaries@{get\_bin\_boundaries}}
 \index{get\_bin\_boundaries@{get\_bin\_boundaries}!RefineableBinArray@{RefineableBinArray}}
 \doxysubsubsection{\texorpdfstring{get\_bin\_boundaries()}{get\_bin\_boundaries()}}
-{\footnotesize\ttfamily void Refineable\+Bin\+Array\+::get\+\_\+bin\+\_\+boundaries (\begin{DoxyParamCaption}\item[{const unsigned \&}]{bin\+\_\+index,  }\item[{Vector$<$ std\+::pair$<$ double, double $>$ $>$ \&}]{min\+\_\+and\+\_\+max\+\_\+coordinates }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Refineable\+Bin\+Array\+::get\+\_\+bin\+\_\+boundaries (\begin{DoxyParamCaption}\item[{const unsigned \&}]{bin\+\_\+index,  }\item[{Vector$<$ std\+::pair$<$ double, double $>$$>$ \&}]{min\+\_\+and\+\_\+max\+\_\+coordinates }\end{DoxyParamCaption})}
 
 
 
@@ -327,21 +327,21 @@ Boundaries of specified bin in each coordinate direction. $\ast$.first = min; $\
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8cc_source_l00995}{995}} of file \mbox{\hyperlink{sample__point__container_8cc_source}{sample\+\_\+point\+\_\+container.\+cc}}.
+Definition at line 995 of file sample\+\_\+point\+\_\+container.\+cc.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8h_source_l00486}{Bin\+Array\+::dimension\+\_\+of\+\_\+bin\+\_\+array()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00508}{Bin\+Array\+::\+Dimensions\+\_\+of\+\_\+bin\+\_\+array}}, \mbox{\hyperlink{sample__point__container_8h_source_l00363}{Sample\+Point\+Container\+::\+Min\+\_\+and\+\_\+max\+\_\+coordinates}}, and \mbox{\hyperlink{sample__point__container_8h_source_l00480}{Bin\+Array\+::ndim\+\_\+zeta()}}.
+References Bin\+Array\+::dimension\+\_\+of\+\_\+bin\+\_\+array(), Bin\+Array\+::\+Dimensions\+\_\+of\+\_\+bin\+\_\+array, Sample\+Point\+Container\+::\+Min\+\_\+and\+\_\+max\+\_\+coordinates, and Bin\+Array\+::ndim\+\_\+zeta().
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8cc_source_l01044}{output\+\_\+neighbouring\+\_\+bins()}}.
+Referenced by output\+\_\+neighbouring\+\_\+bins().
 
-\mbox{\Hypertarget{classRefineableBinArray_aedb53aae2b2ecb83a254ba992c848459}\label{classRefineableBinArray_aedb53aae2b2ecb83a254ba992c848459}} 
+\mbox{\Hypertarget{classRefineableBinArray_a517b1704286e6ee44b771af5348a6854}\label{classRefineableBinArray_a517b1704286e6ee44b771af5348a6854}} 
 \index{RefineableBinArray@{RefineableBinArray}!initial\_last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta@{initial\_last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta}}
 \index{initial\_last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta@{initial\_last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta}!RefineableBinArray@{RefineableBinArray}}
 \doxysubsubsection{\texorpdfstring{initial\_last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta()}{initial\_last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta()}}
-{\footnotesize\ttfamily unsigned \& Refineable\+Bin\+Array\+::initial\+\_\+last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily unsigned\& Refineable\+Bin\+Array\+::initial\+\_\+last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -349,21 +349,21 @@ When searching through sample points recursively from the top level \mbox{\hyper
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00741}{741}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 741 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8h_source_l00806}{Initial\+\_\+last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta}}.
+References Initial\+\_\+last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta.
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l00524}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}.
+Referenced by oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction().
 
-\mbox{\Hypertarget{classRefineableBinArray_a4e91f20ad3d7f334f90af31feca1e8b9}\label{classRefineableBinArray_a4e91f20ad3d7f334f90af31feca1e8b9}} 
+\mbox{\Hypertarget{classRefineableBinArray_ad8dd347e3f9cd98555ebc96f9c968807}\label{classRefineableBinArray_ad8dd347e3f9cd98555ebc96f9c968807}} 
 \index{RefineableBinArray@{RefineableBinArray}!last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta@{last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta}}
 \index{last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta@{last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta}!RefineableBinArray@{RefineableBinArray}}
 \doxysubsubsection{\texorpdfstring{last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta()}{last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta()}}
-{\footnotesize\ttfamily unsigned \& Refineable\+Bin\+Array\+::last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily unsigned\& Refineable\+Bin\+Array\+::last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -371,15 +371,15 @@ When searching through sample points recursively from the top level \mbox{\hyper
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00720}{720}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 720 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8h_source_l00790}{Last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta}}.
+References Last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta.
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l00524}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}.
+Referenced by oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction().
 
 \mbox{\Hypertarget{classRefineableBinArray_a4f2f78efe9b05fda23d94e857d00cfa1}\label{classRefineableBinArray_a4f2f78efe9b05fda23d94e857d00cfa1}} 
 \index{RefineableBinArray@{RefineableBinArray}!locate\_zeta@{locate\_zeta}}
@@ -397,17 +397,17 @@ Implements \mbox{\hyperlink{classSamplePointContainer_acca8dbae8346d6c8924b1f815
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8cc_source_l02002}{2002}} of file \mbox{\hyperlink{sample__point__container_8cc_source}{sample\+\_\+point\+\_\+container.\+cc}}.
+Definition at line 2002 of file sample\+\_\+point\+\_\+container.\+cc.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8h_source_l00339}{Sample\+Point\+Container\+::\+Always\+\_\+fail\+\_\+elemental\+\_\+locate\+\_\+zeta}}, \mbox{\hyperlink{sample__point__container_8h_source_l00759}{Bin\+\_\+pt}}, \mbox{\hyperlink{sample__point__container_8cc_source_l01840}{Bin\+Array\+::coords\+\_\+to\+\_\+bin\+\_\+index()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l01969}{Bin\+Array\+::coords\+\_\+to\+\_\+vectorial\+\_\+bin\+\_\+index()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00768}{Depth}}, \mbox{\hyperlink{sample__point__container_8h_source_l00508}{Bin\+Array\+::\+Dimensions\+\_\+of\+\_\+bin\+\_\+array}}, \mbox{\hyperlink{sample__point__container_8cc_source_l01350}{Bin\+Array\+::get\+\_\+neighbouring\+\_\+bins\+\_\+helper()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{sample__point__container_8h_source_l00327}{Sample\+Point\+Container\+::max\+\_\+search\+\_\+radius()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00363}{Sample\+Point\+Container\+::\+Min\+\_\+and\+\_\+max\+\_\+coordinates}}, \mbox{\hyperlink{sample__point__container_8h_source_l00559}{nbin()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00480}{Bin\+Array\+::ndim\+\_\+zeta()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{sample__point__container_8cc_source_l01820}{total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+computed\+\_\+recursively()}}, and \mbox{\hyperlink{sample__point__container_8h_source_l00382}{Sample\+Point\+Container\+::\+Total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level}}.
+References Sample\+Point\+Container\+::\+Always\+\_\+fail\+\_\+elemental\+\_\+locate\+\_\+zeta, Bin\+\_\+pt, Bin\+Array\+::coords\+\_\+to\+\_\+bin\+\_\+index(), Bin\+Array\+::coords\+\_\+to\+\_\+vectorial\+\_\+bin\+\_\+index(), Depth, Bin\+Array\+::\+Dimensions\+\_\+of\+\_\+bin\+\_\+array, Bin\+Array\+::get\+\_\+neighbouring\+\_\+bins\+\_\+helper(), i, Sample\+Point\+Container\+::max\+\_\+search\+\_\+radius(), Sample\+Point\+Container\+::\+Min\+\_\+and\+\_\+max\+\_\+coordinates, nbin(), Bin\+Array\+::ndim\+\_\+zeta(), s, total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+computed\+\_\+recursively(), and Sample\+Point\+Container\+::\+Total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level.
 
-\mbox{\Hypertarget{classRefineableBinArray_af23bddd8d9f462f8dd9c44eeed960125}\label{classRefineableBinArray_af23bddd8d9f462f8dd9c44eeed960125}} 
+\mbox{\Hypertarget{classRefineableBinArray_a0782afebde6635674c231555a3f6b228}\label{classRefineableBinArray_a0782afebde6635674c231555a3f6b228}} 
 \index{RefineableBinArray@{RefineableBinArray}!max\_depth@{max\_depth}}
 \index{max\_depth@{max\_depth}!RefineableBinArray@{RefineableBinArray}}
 \doxysubsubsection{\texorpdfstring{max\_depth()}{max\_depth()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily unsigned \& Refineable\+Bin\+Array\+::max\+\_\+depth (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily unsigned\& Refineable\+Bin\+Array\+::max\+\_\+depth (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -415,11 +415,11 @@ Max depth of the hierarchical bin\+\_\+array.
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00653}{653}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 653 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8h_source_l00771}{Max\+\_\+depth}}.
+References Max\+\_\+depth.
 
 \mbox{\Hypertarget{classRefineableBinArray_a1ada9a3c5cb95bbd690dd1d68421014a}\label{classRefineableBinArray_a1ada9a3c5cb95bbd690dd1d68421014a}} 
 \index{RefineableBinArray@{RefineableBinArray}!max\_depth@{max\_depth}}
@@ -433,11 +433,11 @@ Max depth of the hierarchical bin\+\_\+array; const version.
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00647}{647}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 647 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8h_source_l00771}{Max\+\_\+depth}}.
+References Max\+\_\+depth.
 
 \mbox{\Hypertarget{classRefineableBinArray_aec5b36a2a2b631093e53d0ea640eeffc}\label{classRefineableBinArray_aec5b36a2a2b631093e53d0ea640eeffc}} 
 \index{RefineableBinArray@{RefineableBinArray}!max\_number\_of\_sample\_point\_per\_bin@{max\_number\_of\_sample\_point\_per\_bin}}
@@ -451,17 +451,17 @@ Maximum number of sample points in bin (before its subdivided recursively)
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00666}{666}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 666 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8h_source_l00775}{Max\+\_\+number\+\_\+of\+\_\+sample\+\_\+point\+\_\+per\+\_\+bin}}.
+References Max\+\_\+number\+\_\+of\+\_\+sample\+\_\+point\+\_\+per\+\_\+bin.
 
-\mbox{\Hypertarget{classRefineableBinArray_a2367a6337a800cce5a6413548b49f75f}\label{classRefineableBinArray_a2367a6337a800cce5a6413548b49f75f}} 
+\mbox{\Hypertarget{classRefineableBinArray_ae5dc08202a4716df1b2138f3dce84e85}\label{classRefineableBinArray_ae5dc08202a4716df1b2138f3dce84e85}} 
 \index{RefineableBinArray@{RefineableBinArray}!multiplier\_for\_max\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta@{multiplier\_for\_max\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta}}
 \index{multiplier\_for\_max\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta@{multiplier\_for\_max\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta}!RefineableBinArray@{RefineableBinArray}}
 \doxysubsubsection{\texorpdfstring{multiplier\_for\_max\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta()}{multiplier\_for\_max\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta()}}
-{\footnotesize\ttfamily unsigned \& Refineable\+Bin\+Array\+::multiplier\+\_\+for\+\_\+max\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily unsigned\& Refineable\+Bin\+Array\+::multiplier\+\_\+for\+\_\+max\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -469,15 +469,15 @@ Every time we\textquotesingle{}ve completed a \char`\"{}spiral\char`\"{}, visiti
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00732}{732}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 732 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8h_source_l00800}{Multiplier\+\_\+for\+\_\+max\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta}}.
+References Multiplier\+\_\+for\+\_\+max\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta.
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l00524}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}.
+Referenced by oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction().
 
 \mbox{\Hypertarget{classRefineableBinArray_a5975657726af982a4d67ff6470abb9d1}\label{classRefineableBinArray_a5975657726af982a4d67ff6470abb9d1}} 
 \index{RefineableBinArray@{RefineableBinArray}!nbin@{nbin}}
@@ -495,15 +495,15 @@ Implements \mbox{\hyperlink{classBinArray_aad085bf99d78162120c419f7504d256b}{Bin
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00559}{559}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 559 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8h_source_l00759}{Bin\+\_\+pt}}.
+References Bin\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8cc_source_l02002}{locate\+\_\+zeta()}}, and \mbox{\hyperlink{sample__point__container_8cc_source_l01820}{total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+computed\+\_\+recursively()}}.
+Referenced by locate\+\_\+zeta(), and total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+computed\+\_\+recursively().
 
 \mbox{\Hypertarget{classRefineableBinArray_a406e1a7f7521c32915f9e8a4e33492e2}\label{classRefineableBinArray_a406e1a7f7521c32915f9e8a4e33492e2}} 
 \index{RefineableBinArray@{RefineableBinArray}!operator=@{operator=}}
@@ -531,11 +531,11 @@ Implements \mbox{\hyperlink{classBinArray_afc595a05f2ab19e1bb973c5a076b1432}{Bin
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8cc_source_l01027}{1027}} of file \mbox{\hyperlink{sample__point__container_8cc_source}{sample\+\_\+point\+\_\+container.\+cc}}.
+Definition at line 1027 of file sample\+\_\+point\+\_\+container.\+cc.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8h_source_l00759}{Bin\+\_\+pt}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References Bin\+\_\+pt, and i.
 
 \mbox{\Hypertarget{classRefineableBinArray_ab92ef5225b96b684b58f3a0905aacf75}\label{classRefineableBinArray_ab92ef5225b96b684b58f3a0905aacf75}} 
 \index{RefineableBinArray@{RefineableBinArray}!output\_bins@{output\_bins}}
@@ -553,11 +553,11 @@ Implements \mbox{\hyperlink{classBinArray_a66fe7e379a53e3fee81ead7ef4045b40}{Bin
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00672}{672}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 672 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8h_source_l00759}{Bin\+\_\+pt}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References Bin\+\_\+pt, and i.
 
 \mbox{\Hypertarget{classRefineableBinArray_a98b6de46ffffbdc8045831c6fc03b159}\label{classRefineableBinArray_a98b6de46ffffbdc8045831c6fc03b159}} 
 \index{RefineableBinArray@{RefineableBinArray}!output\_neighbouring\_bins@{output\_neighbouring\_bins}}
@@ -571,17 +571,17 @@ Output neighbouring bins at given \char`\"{}radius\char`\"{} of the specified bi
 
 Output neighbouring bins up to given \char`\"{}radius\char`\"{} of the specified bin. 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8cc_source_l01044}{1044}} of file \mbox{\hyperlink{sample__point__container_8cc_source}{sample\+\_\+point\+\_\+container.\+cc}}.
+Definition at line 1044 of file sample\+\_\+point\+\_\+container.\+cc.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8cc_source_l00995}{get\+\_\+bin\+\_\+boundaries()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l01350}{Bin\+Array\+::get\+\_\+neighbouring\+\_\+bins\+\_\+helper()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{sample__point__container_8h_source_l00290}{Sample\+Point\+Container\+::min\+\_\+and\+\_\+max\+\_\+coordinates()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00363}{Sample\+Point\+Container\+::\+Min\+\_\+and\+\_\+max\+\_\+coordinates}}, \mbox{\hyperlink{sample__point__container_8h_source_l00480}{Bin\+Array\+::ndim\+\_\+zeta()}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}.
+References get\+\_\+bin\+\_\+boundaries(), Bin\+Array\+::get\+\_\+neighbouring\+\_\+bins\+\_\+helper(), i, Sample\+Point\+Container\+::min\+\_\+and\+\_\+max\+\_\+coordinates(), Sample\+Point\+Container\+::\+Min\+\_\+and\+\_\+max\+\_\+coordinates, Bin\+Array\+::ndim\+\_\+zeta(), and oomph\+::oomph\+\_\+info.
 
-\mbox{\Hypertarget{classRefineableBinArray_a67acf7be335ccf874517fd36ac27433b}\label{classRefineableBinArray_a67acf7be335ccf874517fd36ac27433b}} 
+\mbox{\Hypertarget{classRefineableBinArray_a827b6f05fefe24b6099044159c01ea34}\label{classRefineableBinArray_a827b6f05fefe24b6099044159c01ea34}} 
 \index{RefineableBinArray@{RefineableBinArray}!root\_bin\_array\_pt@{root\_bin\_array\_pt}}
 \index{root\_bin\_array\_pt@{root\_bin\_array\_pt}!RefineableBinArray@{RefineableBinArray}}
 \doxysubsubsection{\texorpdfstring{root\_bin\_array\_pt()}{root\_bin\_array\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classRefineableBinArray}{Refineable\+Bin\+Array}} $\ast$ Refineable\+Bin\+Array\+::root\+\_\+bin\+\_\+array\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classRefineableBinArray}{Refineable\+Bin\+Array}}$\ast$ Refineable\+Bin\+Array\+::root\+\_\+bin\+\_\+array\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -589,15 +589,15 @@ Root bin array.
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00547}{547}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 547 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8h_source_l00778}{Root\+\_\+bin\+\_\+array\+\_\+pt}}.
+References Root\+\_\+bin\+\_\+array\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8cc_source_l00841}{Refineable\+Bin\+Array()}}.
+Referenced by Refineable\+Bin\+Array().
 
 \mbox{\Hypertarget{classRefineableBinArray_a267d58bd06dafc53aff7b42927500a8b}\label{classRefineableBinArray_a267d58bd06dafc53aff7b42927500a8b}} 
 \index{RefineableBinArray@{RefineableBinArray}!total\_number\_of\_sample\_points\_computed\_recursively@{total\_number\_of\_sample\_points\_computed\_recursively}}
@@ -615,21 +615,21 @@ Implements \mbox{\hyperlink{classSamplePointContainer_ac7bf51a6987a9180c7715d621
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8cc_source_l01819}{1819}} of file \mbox{\hyperlink{sample__point__container_8cc_source}{sample\+\_\+point\+\_\+container.\+cc}}.
+Definition at line 1819 of file sample\+\_\+point\+\_\+container.\+cc.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8h_source_l00759}{Bin\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{sample__point__container_8h_source_l00559}{nbin()}}.
+References Bin\+\_\+pt, i, and nbin().
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l00524}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l02002}{locate\+\_\+zeta()}}, and \mbox{\hyperlink{sample__point__container_8cc_source_l00841}{Refineable\+Bin\+Array()}}.
+Referenced by oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction(), locate\+\_\+zeta(), and Refineable\+Bin\+Array().
 
-\mbox{\Hypertarget{classRefineableBinArray_a00fcd3ddc867085313ac945fc4553115}\label{classRefineableBinArray_a00fcd3ddc867085313ac945fc4553115}} 
+\mbox{\Hypertarget{classRefineableBinArray_a551adefafd0be9d184c4daa6adf16512}\label{classRefineableBinArray_a551adefafd0be9d184c4daa6adf16512}} 
 \index{RefineableBinArray@{RefineableBinArray}!total\_number\_of\_sample\_points\_visited\_during\_locate\_zeta\_from\_top\_level@{total\_number\_of\_sample\_points\_visited\_during\_locate\_zeta\_from\_top\_level}}
 \index{total\_number\_of\_sample\_points\_visited\_during\_locate\_zeta\_from\_top\_level@{total\_number\_of\_sample\_points\_visited\_during\_locate\_zeta\_from\_top\_level}!RefineableBinArray@{RefineableBinArray}}
 \doxysubsubsection{\texorpdfstring{total\_number\_of\_sample\_points\_visited\_during\_locate\_zeta\_from\_top\_level()}{total\_number\_of\_sample\_points\_visited\_during\_locate\_zeta\_from\_top\_level()}}
-{\footnotesize\ttfamily unsigned \& Refineable\+Bin\+Array\+::total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily unsigned\& Refineable\+Bin\+Array\+::total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -637,19 +637,19 @@ Counter to keep track of how many sample points we\textquotesingle{}ve visited d
 
 
 
-Reimplemented from \mbox{\hyperlink{classSamplePointContainer_a16ac5bc68c5f0e161e65bbc4799b5ec4}{Sample\+Point\+Container}}.
+Reimplemented from \mbox{\hyperlink{classSamplePointContainer_af05aff0424680eec183a5680c4d6d65f}{Sample\+Point\+Container}}.
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00696}{696}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 696 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8h_source_l00768}{Depth}}, \mbox{\hyperlink{sample__point__container_8h_source_l00778}{Root\+\_\+bin\+\_\+array\+\_\+pt}}, \mbox{\hyperlink{sample__point__container_8h_source_l00382}{Sample\+Point\+Container\+::\+Total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level}}, and \mbox{\hyperlink{sample__point__container_8h_source_l00696}{total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level()}}.
+References Depth, Root\+\_\+bin\+\_\+array\+\_\+pt, Sample\+Point\+Container\+::\+Total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level, and total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level().
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8h_source_l00696}{total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level()}}.
+Referenced by total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level().
 
 
 
@@ -666,11 +666,11 @@ Variable which stores if the \mbox{\hyperlink{classRefineableBinArray}{Refineabl
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00763}{763}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 763 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8h_source_l00659}{bin\+\_\+array\+\_\+is\+\_\+recursive()}}, and \mbox{\hyperlink{sample__point__container_8cc_source_l00841}{Refineable\+Bin\+Array()}}.
+Referenced by bin\+\_\+array\+\_\+is\+\_\+recursive(), and Refineable\+Bin\+Array().
 
 \mbox{\Hypertarget{classRefineableBinArray_a164db8709f15119c8c5a761e9715d1a4}\label{classRefineableBinArray_a164db8709f15119c8c5a761e9715d1a4}} 
 \index{RefineableBinArray@{RefineableBinArray}!Bin\_pt@{Bin\_pt}}
@@ -684,11 +684,11 @@ Vector of pointers to constituent Refineable\+Bins.
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00759}{759}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 759 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8h_source_l00612}{add\+\_\+sample\+\_\+point()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00553}{bin\+\_\+pt()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l01882}{fill\+\_\+bin\+\_\+array()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l02002}{locate\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00559}{nbin()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l01027}{output\+\_\+bin\+\_\+vertices()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00672}{output\+\_\+bins()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l00841}{Refineable\+Bin\+Array()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l01820}{total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+computed\+\_\+recursively()}}, and \mbox{\hyperlink{sample__point__container_8h_source_l00533}{$\sim$\+Refineable\+Bin\+Array()}}.
+Referenced by add\+\_\+sample\+\_\+point(), bin\+\_\+pt(), fill\+\_\+bin\+\_\+array(), locate\+\_\+zeta(), nbin(), output\+\_\+bin\+\_\+vertices(), output\+\_\+bins(), Refineable\+Bin\+Array(), total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+computed\+\_\+recursively(), and $\sim$\+Refineable\+Bin\+Array().
 
 \mbox{\Hypertarget{classRefineableBinArray_a34a623036985925b9adc0b28c89ad1c2}\label{classRefineableBinArray_a34a623036985925b9adc0b28c89ad1c2}} 
 \index{RefineableBinArray@{RefineableBinArray}!Default\_n\_bin\_1d@{Default\_n\_bin\_1d}}
@@ -702,11 +702,11 @@ Default number of bins (in each coordinate direction) (Note\+: don\textquotesing
 
 Default number of bins (in each coordinate direction) 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00568}{568}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 568 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8cc_source_l00841}{Refineable\+Bin\+Array()}}.
+Referenced by Refineable\+Bin\+Array().
 
 \mbox{\Hypertarget{classRefineableBinArray_a5ecc65773101eced0ff7afe57fe04804}\label{classRefineableBinArray_a5ecc65773101eced0ff7afe57fe04804}} 
 \index{RefineableBinArray@{RefineableBinArray}!Depth@{Depth}}
@@ -720,11 +720,11 @@ Variable which stores the Depth value of the bin\+\_\+array. Useful for debuggin
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00768}{768}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 768 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8h_source_l00641}{depth()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l02002}{locate\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l00841}{Refineable\+Bin\+Array()}}, and \mbox{\hyperlink{sample__point__container_8h_source_l00696}{total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level()}}.
+Referenced by depth(), locate\+\_\+zeta(), Refineable\+Bin\+Array(), and total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level().
 
 \mbox{\Hypertarget{classRefineableBinArray_a2eb9af06f24bef587e220675d56c5042}\label{classRefineableBinArray_a2eb9af06f24bef587e220675d56c5042}} 
 \index{RefineableBinArray@{RefineableBinArray}!First\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta@{First\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta}}
@@ -738,11 +738,11 @@ When searching through sample points recursively from the top level \mbox{\hyper
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00785}{785}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 785 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8h_source_l00712}{first\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta()}}, and \mbox{\hyperlink{sample__point__container_8cc_source_l00841}{Refineable\+Bin\+Array()}}.
+Referenced by first\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta(), and Refineable\+Bin\+Array().
 
 \mbox{\Hypertarget{classRefineableBinArray_ace7075adbe1606ef0b01cbb14c380812}\label{classRefineableBinArray_ace7075adbe1606ef0b01cbb14c380812}} 
 \index{RefineableBinArray@{RefineableBinArray}!Initial\_last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta@{Initial\_last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta}}
@@ -756,11 +756,11 @@ When searching through sample points recursively from the top level \mbox{\hyper
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00806}{806}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 806 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8h_source_l00741}{initial\+\_\+last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta()}}, and \mbox{\hyperlink{sample__point__container_8cc_source_l00841}{Refineable\+Bin\+Array()}}.
+Referenced by initial\+\_\+last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta(), and Refineable\+Bin\+Array().
 
 \mbox{\Hypertarget{classRefineableBinArray_aa2f3e80292b0b82fc0a41815dac9958d}\label{classRefineableBinArray_aa2f3e80292b0b82fc0a41815dac9958d}} 
 \index{RefineableBinArray@{RefineableBinArray}!Last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta@{Last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta}}
@@ -774,11 +774,11 @@ When searching through sample points recursively from the top level \mbox{\hyper
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00790}{790}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 790 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8h_source_l00720}{last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta()}}, and \mbox{\hyperlink{sample__point__container_8cc_source_l00841}{Refineable\+Bin\+Array()}}.
+Referenced by last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta(), and Refineable\+Bin\+Array().
 
 \mbox{\Hypertarget{classRefineableBinArray_a234ea22c1be2373c08ee64721735d898}\label{classRefineableBinArray_a234ea22c1be2373c08ee64721735d898}} 
 \index{RefineableBinArray@{RefineableBinArray}!Max\_depth@{Max\_depth}}
@@ -792,11 +792,11 @@ Max depth of the hierarchical bin\+\_\+array.
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00771}{771}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 771 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8h_source_l00647}{max\+\_\+depth()}}, and \mbox{\hyperlink{sample__point__container_8cc_source_l00841}{Refineable\+Bin\+Array()}}.
+Referenced by max\+\_\+depth(), and Refineable\+Bin\+Array().
 
 \mbox{\Hypertarget{classRefineableBinArray_a6841cb84bc34762a8b192db60393a98a}\label{classRefineableBinArray_a6841cb84bc34762a8b192db60393a98a}} 
 \index{RefineableBinArray@{RefineableBinArray}!Max\_number\_of\_sample\_point\_per\_bin@{Max\_number\_of\_sample\_point\_per\_bin}}
@@ -810,11 +810,11 @@ Maximum number of sample points in bin (before it\textquotesingle{}s subdivided 
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00775}{775}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 775 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8h_source_l00666}{max\+\_\+number\+\_\+of\+\_\+sample\+\_\+point\+\_\+per\+\_\+bin()}}, and \mbox{\hyperlink{sample__point__container_8cc_source_l00841}{Refineable\+Bin\+Array()}}.
+Referenced by max\+\_\+number\+\_\+of\+\_\+sample\+\_\+point\+\_\+per\+\_\+bin(), and Refineable\+Bin\+Array().
 
 \mbox{\Hypertarget{classRefineableBinArray_a058f9e44828158525e7655d4007cae76}\label{classRefineableBinArray_a058f9e44828158525e7655d4007cae76}} 
 \index{RefineableBinArray@{RefineableBinArray}!Multiplier\_for\_max\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta@{Multiplier\_for\_max\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta}}
@@ -828,11 +828,11 @@ Every time we\textquotesingle{}ve completed a \char`\"{}spiral\char`\"{}, visiti
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00800}{800}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 800 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8h_source_l00732}{multiplier\+\_\+for\+\_\+max\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta()}}, and \mbox{\hyperlink{sample__point__container_8cc_source_l00841}{Refineable\+Bin\+Array()}}.
+Referenced by multiplier\+\_\+for\+\_\+max\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta(), and Refineable\+Bin\+Array().
 
 \mbox{\Hypertarget{classRefineableBinArray_a5b75f5d76558759afe6ebae878f35f50}\label{classRefineableBinArray_a5b75f5d76558759afe6ebae878f35f50}} 
 \index{RefineableBinArray@{RefineableBinArray}!Root\_bin\_array\_pt@{Root\_bin\_array\_pt}}
@@ -846,11 +846,11 @@ Pointer to root bin array.
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00778}{778}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 778 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8cc_source_l00841}{Refineable\+Bin\+Array()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00547}{root\+\_\+bin\+\_\+array\+\_\+pt()}}, and \mbox{\hyperlink{sample__point__container_8h_source_l00696}{total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level()}}.
+Referenced by Refineable\+Bin\+Array(), root\+\_\+bin\+\_\+array\+\_\+pt(), and total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level().
 
 
 

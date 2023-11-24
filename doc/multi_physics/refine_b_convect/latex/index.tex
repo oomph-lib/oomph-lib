@@ -17,8 +17,8 @@ We start by setting the direction of gravity, and constructing the problem using
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===============start\_of\_main========================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Driver code for 2D Boussinesq convection problem with }\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// adaptivity.}}
+\DoxyCodeLine{\textcolor{comment}{/// Driver code for 2D Boussinesq convection problem with }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// adaptivity.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{refineable__b__convection_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
 \DoxyCodeLine{\{}
@@ -73,9 +73,9 @@ The problem class contains the constructor and (empty) destructor, the usual act
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_problem\_class=======================================}}
-\DoxyCodeLine{\textcolor{comment}{/// 2D Convection  problem on rectangular domain, discretised }\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// with refineable elements. The specific type}}
-\DoxyCodeLine{\textcolor{comment}{/// of element is specified via the template parameter.}}
+\DoxyCodeLine{\textcolor{comment}{/// 2D Convection  problem on rectangular domain, discretised }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// with refineable elements. The specific type}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// of element is specified via the template parameter.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT> }
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classRefineableConvectionProblem}{RefineableConvectionProblem}} : \textcolor{keyword}{public} Problem}
@@ -98,7 +98,7 @@ The problem class contains the constructor and (empty) destructor, the usual act
 \DoxyCodeLine{\textcolor{comment}{ /// Overloaded version of the problem's access function to }}
 \DoxyCodeLine{\textcolor{comment}{ /// the mesh. Recasts the pointer to the base Mesh object to }}
 \DoxyCodeLine{\textcolor{comment}{ /// the actual mesh type.}}
-\DoxyCodeLine{\textcolor{comment}{} RectangularQuadMesh<ELEMENT>* \mbox{\hyperlink{classRefineableConvectionProblem_ab39a08708e152e4f119832dc5e1bc96c}{mesh\_pt}}() }
+\DoxyCodeLine{\textcolor{comment}{} RectangularQuadMesh<ELEMENT>* \mbox{\hyperlink{classRefineableConvectionProblem_a837d2412cee6996c78a2d2c5adf720f3}{mesh\_pt}}() }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{keywordflow}{return} \textcolor{keyword}{dynamic\_cast<}RectangularQuadMesh<ELEMENT>*\textcolor{keyword}{>}(}
 \DoxyCodeLine{    Problem::mesh\_pt());}
@@ -173,7 +173,7 @@ We pass the element type as a template parameter to the problem constructor, whi
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_constructor=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for adaptive thermal convection problem}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classRefineableConvectionProblem_a97e661986093402bf55fb6c32b782ddc}{RefineableConvectionProblem<ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classRefineableConvectionProblem_a97e661986093402bf55fb6c32b782ddc}{RefineableConvectionProblem}}() : Imperfect(false)}
@@ -285,7 +285,7 @@ We pass the element type as a template parameter to the problem constructor, whi
 \hypertarget{index_fix_p}{}\doxysubsection{The function fix\+\_\+pressure(...)}\label{index_fix_p}
 This function is a simple wrapper to the element\textquotesingle{}s {\ttfamily fix\+\_\+pressure(...)} function.  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Fix pressure in element e at pressure dof pdof and set to pvalue}}
+\DoxyCodeLine{ \textcolor{comment}{/// Fix pressure in element e at pressure dof pdof and set to pvalue}}
 \DoxyCodeLine{ \textcolor{keywordtype}{void} fix\_pressure(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&e, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&pdof, }
 \DoxyCodeLine{                   \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&pvalue)}
 \DoxyCodeLine{  \{}
@@ -303,8 +303,8 @@ The function is used to set the specific values of the Dirichlet boundary condit
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===================start\_actions\_before\_newton\_solve===========================}}
-\DoxyCodeLine{\textcolor{comment}{/// Update the problem specs before solve: (Re-\/)set boundary conditions}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// to include an imperfection (or not) depending on the control flag.}}
+\DoxyCodeLine{\textcolor{comment}{/// Update the problem specs before solve: (Re-\/)set boundary conditions}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// to include an imperfection (or not) depending on the control flag.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableConvectionProblem_a694f0be87fe09a30d94e92acfce85eee}{RefineableConvectionProblem<ELEMENT>::actions\_before\_newton\_solve}}()}
@@ -362,7 +362,7 @@ This function writes the complete velocity, pressure and temperature fields to a
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//====================start\_of\_doc\_solution===============================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableConvectionProblem_a47efcb3467931e13e12687303135e38b}{RefineableConvectionProblem<ELEMENT>::doc\_solution}}()}
 \DoxyCodeLine{\{ }
@@ -395,24 +395,24 @@ As in the \href{../../b_convection/html/index.html}{\texttt{ non-\/refineable ve
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{  \textcolor{comment}{//============start\_element\_class============================================}}
-\DoxyCodeLine{\textcolor{comment}{  /// A RefineableElement class that solves the}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{  /// Boussinesq approximation of the Navier-\/-\/Stokes}}
-\DoxyCodeLine{\textcolor{comment}{  /// and energy equations by coupling two pre-\/existing classes.}}
-\DoxyCodeLine{\textcolor{comment}{  /// The RefineableQAdvectionDiffusionElement}}
-\DoxyCodeLine{\textcolor{comment}{  /// with bi-\/quadratic interpolation for the}}
-\DoxyCodeLine{\textcolor{comment}{  /// scalar variable (temperature) and}}
-\DoxyCodeLine{\textcolor{comment}{  /// RefineableQCrouzeixRaviartElement which solves the Navier-\/-\/Stokes}}
-\DoxyCodeLine{\textcolor{comment}{  /// equations using bi-\/quadratic interpolation for the velocities and a}}
-\DoxyCodeLine{\textcolor{comment}{  /// discontinuous bi-\/linear interpolation for the pressure. Note that we are}}
-\DoxyCodeLine{\textcolor{comment}{  /// free to choose the order in which we store the variables at the nodes. In}}
-\DoxyCodeLine{\textcolor{comment}{  /// this case we choose to store the variables in the order fluid velocities}}
-\DoxyCodeLine{\textcolor{comment}{  /// followed by temperature. We must, therefore, overload the function}}
-\DoxyCodeLine{\textcolor{comment}{  /// AdvectionDiffusionEquations<DIM>::u\_index\_adv\_diff() to indicate that}}
-\DoxyCodeLine{\textcolor{comment}{  /// the temperature is stored at the DIM-\/th position not the 0-\/th. We do not}}
-\DoxyCodeLine{\textcolor{comment}{  /// need to overload the corresponding function in the}}
-\DoxyCodeLine{\textcolor{comment}{  /// NavierStokesEquations<DIM> class because the velocities are stored}}
-\DoxyCodeLine{\textcolor{comment}{  /// first. Finally, we choose to use the flux-\/recovery calculation from the}}
-\DoxyCodeLine{\textcolor{comment}{  /// fluid velocities to provide the error used in the mesh adaptation.}}
+\DoxyCodeLine{\textcolor{comment}{  /// A RefineableElement class that solves the}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// Boussinesq approximation of the Navier-\/-\/Stokes}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// and energy equations by coupling two pre-\/existing classes.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// The RefineableQAdvectionDiffusionElement}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// with bi-\/quadratic interpolation for the}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// scalar variable (temperature) and}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// RefineableQCrouzeixRaviartElement which solves the Navier-\/-\/Stokes}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// equations using bi-\/quadratic interpolation for the velocities and a}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// discontinuous bi-\/linear interpolation for the pressure. Note that we are}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// free to choose the order in which we store the variables at the nodes. In}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// this case we choose to store the variables in the order fluid velocities}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// followed by temperature. We must, therefore, overload the function}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// AdvectionDiffusionEquations<DIM>::u\_index\_adv\_diff() to indicate that}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// the temperature is stored at the DIM-\/th position not the 0-\/th. We do not}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// need to overload the corresponding function in the}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// NavierStokesEquations<DIM> class because the velocities are stored}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// first. Finally, we choose to use the flux-\/recovery calculation from the}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// fluid velocities to provide the error used in the mesh adaptation.}}
 \DoxyCodeLine{\textcolor{comment}{}  \textcolor{comment}{//==========================================================================}}
 \DoxyCodeLine{  \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned} DIM>}
 \DoxyCodeLine{  \textcolor{keyword}{class }RefineableBuoyantQCrouzeixRaviartElement}
@@ -438,7 +438,7 @@ Both constituent elements are derived from the {\ttfamily Element\+With\+Z2\+Err
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{    /// The recovery order is that of the NavierStokes elements.}}
+\DoxyCodeLine{    \textcolor{comment}{/// The recovery order is that of the NavierStokes elements.}}
 \DoxyCodeLine{    \textcolor{keywordtype}{unsigned} nrecovery\_order()}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{      \textcolor{keywordflow}{return} RefineableQCrouzeixRaviartElement<DIM>::nrecovery\_order();}
@@ -486,9 +486,9 @@ Both constituent elements are derived from the {\ttfamily Element\+With\+Z2\+Err
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{    /// The number of compound fluxes is two (one for the fluid and}}
+\DoxyCodeLine{    \textcolor{comment}{/// The number of compound fluxes is two (one for the fluid and}}
 \DoxyCodeLine{\textcolor{comment}{    /// one for the temperature)}}
-\DoxyCodeLine{    \textcolor{keywordtype}{unsigned} ncompound\_fluxes()}
+\DoxyCodeLine{\textcolor{comment}{}    \textcolor{keywordtype}{unsigned} ncompound\_fluxes()}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{      \textcolor{keywordflow}{return} 2;}
 \DoxyCodeLine{    \}}
@@ -528,9 +528,9 @@ The vertex nodes are defined by the underlying geometric element, but require a 
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{    /// Number of vertex nodes in the element is obtained from the}}
+\DoxyCodeLine{    \textcolor{comment}{/// Number of vertex nodes in the element is obtained from the}}
 \DoxyCodeLine{\textcolor{comment}{    /// geometric element.}}
-\DoxyCodeLine{    \textcolor{keywordtype}{unsigned} nvertex\_node()\textcolor{keyword}{ const}}
+\DoxyCodeLine{\textcolor{comment}{}    \textcolor{keywordtype}{unsigned} nvertex\_node()\textcolor{keyword}{ const}}
 \DoxyCodeLine{\textcolor{keyword}{    }\{}
 \DoxyCodeLine{      \textcolor{keywordflow}{return} QElement<DIM, 3>::nvertex\_node();}
 \DoxyCodeLine{    \}}
@@ -538,9 +538,9 @@ The vertex nodes are defined by the underlying geometric element, but require a 
 \end{DoxyCodeInclude}
   
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{    /// Pointer to the j-\/th vertex node in the element,}}
+\DoxyCodeLine{    \textcolor{comment}{/// Pointer to the j-\/th vertex node in the element,}}
 \DoxyCodeLine{\textcolor{comment}{    /// Call the geometric element's function.}}
-\DoxyCodeLine{    Node* vertex\_node\_pt(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\textcolor{comment}{}    Node* vertex\_node\_pt(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\textcolor{keyword}{    }\{}
 \DoxyCodeLine{      \textcolor{keywordflow}{return} QElement<DIM, 3>::vertex\_node\_pt(j);}
 \DoxyCodeLine{    \}}
@@ -558,9 +558,9 @@ The vertex nodes are defined by the underlying geometric element, but require a 
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{    /// Get the continuously interpolated values at the local coordinate}}
-\DoxyCodeLine{\textcolor{comment}{    /// s. We choose to put the fluid velocities first, followed by the}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{    /// temperature.}}
+\DoxyCodeLine{    \textcolor{comment}{/// Get the continuously interpolated values at the local coordinate}}
+\DoxyCodeLine{\textcolor{comment}{    /// s. We choose to put the fluid velocities first, followed by the}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// temperature.}}
 \DoxyCodeLine{\textcolor{comment}{}    \textcolor{keywordtype}{void} get\_interpolated\_values(\textcolor{keyword}{const} Vector<double>\& s,}
 \DoxyCodeLine{                                 Vector<double>\& values)}
 \DoxyCodeLine{    \{}
@@ -627,9 +627,9 @@ The vertex nodes are defined by the underlying geometric element, but require a 
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{    /// The additional hanging node information must be set up}}
+\DoxyCodeLine{    \textcolor{comment}{/// The additional hanging node information must be set up}}
 \DoxyCodeLine{\textcolor{comment}{    /// for both single-\/physics elements.}}
-\DoxyCodeLine{    \textcolor{keywordtype}{void} further\_setup\_hanging\_nodes()}
+\DoxyCodeLine{\textcolor{comment}{}    \textcolor{keywordtype}{void} further\_setup\_hanging\_nodes()}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{      RefineableQCrouzeixRaviartElement<DIM>::further\_setup\_hanging\_nodes();}
 \DoxyCodeLine{      RefineableQAdvectionDiffusionElement<DIM,}

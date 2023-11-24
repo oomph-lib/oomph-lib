@@ -46,7 +46,7 @@ The problem class is very similar to that used in the non-\/refineable version o
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_problem\_class=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Periodic loading problem}}
-\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classRefineablePeriodicLoadProblem}{RefineablePeriodicLoadProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -147,8 +147,8 @@ This is illustrated in the following code segment which shows the revised versio
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_constructor=============================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Problem constructor: Pass number of elements in the coordinate}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// directions and the domain sizes.}}
+\DoxyCodeLine{\textcolor{comment}{/// Problem constructor: Pass number of elements in the coordinate}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// directions and the domain sizes.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classRefineablePeriodicLoadProblem_ae950fdcf80e684eddb29358e1f9a3412}{RefineablePeriodicLoadProblem<ELEMENT>::RefineablePeriodicLoadProblem}}}
@@ -250,6 +250,7 @@ When setting up periodic boundary conditions, it is obviously important to corre
 \begin{DoxyEnumerate}
 \item comment out the assignment of the periodic tree neighbours
 \item force the refinement of a single element next to the left boundary, say.
+\end{DoxyEnumerate}
 \end{DoxyEnumerate}The relevant code is for the latter task is, in fact, already implemented in the problem constructor because the driver code acts as a self-\/test for this functionality.  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \textcolor{comment}{// Do selective refinement of one element so that we can test}}
@@ -261,7 +262,6 @@ When setting up periodic boundary conditions, it is obviously important to corre
 
 \end{DoxyCodeInclude}
  {\bfseries{Note\+:}} To facilitate the visualisation of the discontinuity it is helpful to perform this test with the bilinear {\ttfamily Refineable\+QLinear\+Elasticity\+Element$<$2,2$>$}, with a shallower domain (e.\+g. $ L_y = 0.5 $ ), and without any further spatial refinement (set {\ttfamily max\+\_\+adapt=0} in {\ttfamily \mbox{\hyperlink{periodic__load_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main()}}} ).
-\end{DoxyEnumerate}
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}

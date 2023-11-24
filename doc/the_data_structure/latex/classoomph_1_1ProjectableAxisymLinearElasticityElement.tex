@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1ProjectableAxisymLinearElasticityElement}{}\doxysection{oomph\+::Projectable\+Axisym\+Linear\+Elasticity\+Element\texorpdfstring{$<$}{<} AXISYM\+\_\+\+LINEAR\+\_\+\+ELAST\+\_\+\+ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1ProjectableAxisymLinearElasticityElement}{}\doxysection{oomph\+::Projectable\+Axisym\+Linear\+Elasticity\+Element$<$ AXISYM\+\_\+\+LINEAR\+\_\+\+ELAST\+\_\+\+ELEMENT $>$ Class Template Reference}
 \label{classoomph_1_1ProjectableAxisymLinearElasticityElement}\index{oomph::ProjectableAxisymLinearElasticityElement$<$ AXISYM\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableAxisymLinearElasticityElement$<$ AXISYM\_LINEAR\_ELAST\_ELEMENT $>$}}
 
 
@@ -9,7 +9,7 @@
 
 {\ttfamily \#include $<$axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Projectable\+Axisym\+Linear\+Elasticity\+Element\texorpdfstring{$<$}{<} AXISYM\+\_\+\+LINEAR\+\_\+\+ELAST\+\_\+\+ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Projectable\+Axisym\+Linear\+Elasticity\+Element$<$ AXISYM\+\_\+\+LINEAR\+\_\+\+ELAST\+\_\+\+ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=1.315789cm]{classoomph_1_1ProjectableAxisymLinearElasticityElement}
@@ -20,7 +20,7 @@ Inheritance diagram for oomph\+::Projectable\+Axisym\+Linear\+Elasticity\+Elemen
 \item 
 \mbox{\hyperlink{classoomph_1_1ProjectableAxisymLinearElasticityElement_a766f5fc9a53b9eb9e385021c5673e531}{Projectable\+Axisym\+Linear\+Elasticity\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards...\mbox{]}. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableAxisymLinearElasticityElement_a23cf66f786b8e7b09f1b48e450faefaf}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableAxisymLinearElasticityElement_a58b7ecc48231638bc2edff3cc75bb8b7}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. In the underlying linear elasticity elements the the displacements are stored at the nodal values. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableAxisymLinearElasticityElement_ae470acc9389f7737d54f27751593429e}{nfields\+\_\+for\+\_\+projection}} ()
 \begin{DoxyCompactList}\small\item\em Number of fields to be projected\+: 3, corresponding to the displacement components. \end{DoxyCompactList}\item 
@@ -31,7 +31,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1ProjectableAxisymLinearElasticityElement
 double \mbox{\hyperlink{classoomph_1_1ProjectableAxisymLinearElasticityElement_a86f342760e932e4ae53f0fe36d784bd0}{jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field}} (const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi)
 \begin{DoxyCompactList}\small\item\em Return Jacobian of mapping and shape functions of field fld at local coordinate s. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1ProjectableAxisymLinearElasticityElement_a125b64cda7cc665d987660bccedd3c39}{get\+\_\+field}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
-\begin{DoxyCompactList}\small\item\em Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: history values) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t$>$0\+: history values) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableAxisymLinearElasticityElement_a00715989f89c46ba103194baf8e359b2}{nvalue\+\_\+of\+\_\+field}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Return number of values in field fld. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classoomph_1_1ProjectableAxisymLinearElasticityElement_a449c2dd77bc7f66fac46affb6223a04b}{local\+\_\+equation}} (const unsigned \&fld, const unsigned \&j)
@@ -42,11 +42,12 @@ int \mbox{\hyperlink{classoomph_1_1ProjectableAxisymLinearElasticityElement_a449
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class AXISYM\+\_\+\+LINEAR\+\_\+\+ELAST\+\_\+\+ELEMENT$>$\newline
 class oomph\+::\+Projectable\+Axisym\+Linear\+Elasticity\+Element$<$ AXISYM\+\_\+\+LINEAR\+\_\+\+ELAST\+\_\+\+ELEMENT $>$}
+
 ///////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////// 
 
 Axisym linear elasticity upgraded to become projectable 
 
-Definition at line \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_source_l00659}{659}} of file \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_source}{axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
+Definition at line 659 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
@@ -64,17 +65,17 @@ Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards
 
 
 
-Definition at line \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_source_l00665}{665}} of file \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_source}{axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
+Definition at line 665 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1ProjectableAxisymLinearElasticityElement_a23cf66f786b8e7b09f1b48e450faefaf}\label{classoomph_1_1ProjectableAxisymLinearElasticityElement_a23cf66f786b8e7b09f1b48e450faefaf}} 
+\mbox{\Hypertarget{classoomph_1_1ProjectableAxisymLinearElasticityElement_a58b7ecc48231638bc2edff3cc75bb8b7}\label{classoomph_1_1ProjectableAxisymLinearElasticityElement_a58b7ecc48231638bc2edff3cc75bb8b7}} 
 \index{oomph::ProjectableAxisymLinearElasticityElement$<$ AXISYM\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableAxisymLinearElasticityElement$<$ AXISYM\_LINEAR\_ELAST\_ELEMENT $>$}!data\_values\_of\_field@{data\_values\_of\_field}}
 \index{data\_values\_of\_field@{data\_values\_of\_field}!oomph::ProjectableAxisymLinearElasticityElement$<$ AXISYM\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableAxisymLinearElasticityElement$<$ AXISYM\_LINEAR\_ELAST\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{data\_values\_of\_field()}{data\_values\_of\_field()}}
 {\footnotesize\ttfamily template$<$class AXISYM\+\_\+\+LINEAR\+\_\+\+ELAST\+\_\+\+ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableAxisymLinearElasticityElement}{oomph\+::\+Projectable\+Axisym\+Linear\+Elasticity\+Element}}$<$ AXISYM\+\_\+\+LINEAR\+\_\+\+ELAST\+\_\+\+ELEMENT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$std\+::pair$<$\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$, unsigned$>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableAxisymLinearElasticityElement}{oomph\+::\+Projectable\+Axisym\+Linear\+Elasticity\+Element}}$<$ AXISYM\+\_\+\+LINEAR\+\_\+\+ELAST\+\_\+\+ELEMENT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -82,15 +83,15 @@ Specify the values associated with field fld. The information is returned in a v
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a2292bd9c58694f89839bd7d198cfe86a}{oomph\+::\+Projectable\+Element\+Base}}.
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a63b0053dde1172be726f9a6c75fb66ea}{oomph\+::\+Projectable\+Element\+Base}}.
 
 
 
-Definition at line \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_source_l00673}{673}} of file \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_source}{axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
+Definition at line 673 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References oomph\+::\+Finite\+Element\+::nnode(), and oomph\+::\+Finite\+Element\+::node\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableAxisymLinearElasticityElement_a125b64cda7cc665d987660bccedd3c39}\label{classoomph_1_1ProjectableAxisymLinearElasticityElement_a125b64cda7cc665d987660bccedd3c39}} 
 \index{oomph::ProjectableAxisymLinearElasticityElement$<$ AXISYM\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableAxisymLinearElasticityElement$<$ AXISYM\_LINEAR\_ELAST\_ELEMENT $>$}!get\_field@{get\_field}}
@@ -101,7 +102,7 @@ double \mbox{\hyperlink{classoomph_1_1ProjectableAxisymLinearElasticityElement}{
 
 
 
-Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: history values) 
+Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t$>$0\+: history values) 
 
 
 
@@ -109,11 +110,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ae4da5b565b6d33
 
 
 
-Definition at line \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_source_l00739}{739}} of file \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_source}{axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
+Definition at line 739 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
+References oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), and oomph\+::\+Finite\+Element\+::shape().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableAxisymLinearElasticityElement_a86f342760e932e4ae53f0fe36d784bd0}\label{classoomph_1_1ProjectableAxisymLinearElasticityElement_a86f342760e932e4ae53f0fe36d784bd0}} 
 \index{oomph::ProjectableAxisymLinearElasticityElement$<$ AXISYM\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableAxisymLinearElasticityElement$<$ AXISYM\_LINEAR\_ELAST\_ELEMENT $>$}!jacobian\_and\_shape\_of\_field@{jacobian\_and\_shape\_of\_field}}
@@ -132,11 +133,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ad45c21b58c0985
 
 
 
-Definition at line \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_source_l00723}{723}} of file \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_source}{axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
+Definition at line 723 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8cc_source_l03298}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian()}}, and \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}.
+References oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian(), and oomph\+::\+Finite\+Element\+::nnode().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableAxisymLinearElasticityElement_a449c2dd77bc7f66fac46affb6223a04b}\label{classoomph_1_1ProjectableAxisymLinearElasticityElement_a449c2dd77bc7f66fac46affb6223a04b}} 
 \index{oomph::ProjectableAxisymLinearElasticityElement$<$ AXISYM\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableAxisymLinearElasticityElement$<$ AXISYM\_LINEAR\_ELAST\_ELEMENT $>$}!local\_equation@{local\_equation}}
@@ -155,11 +156,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac5c27ae929ff63
 
 
 
-Definition at line \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_source_l00771}{771}} of file \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_source}{axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
+Definition at line 771 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}.
+References oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableAxisymLinearElasticityElement_ae470acc9389f7737d54f27751593429e}\label{classoomph_1_1ProjectableAxisymLinearElasticityElement_ae470acc9389f7737d54f27751593429e}} 
 \index{oomph::ProjectableAxisymLinearElasticityElement$<$ AXISYM\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableAxisymLinearElasticityElement$<$ AXISYM\_LINEAR\_ELAST\_ELEMENT $>$}!nfields\_for\_projection@{nfields\_for\_projection}}
@@ -178,7 +179,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a44634aa4049332
 
 
 
-Definition at line \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_source_l00692}{692}} of file \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_source}{axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
+Definition at line 692 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableAxisymLinearElasticityElement_a56a9ecb113858a8ab28a1125e879416d}\label{classoomph_1_1ProjectableAxisymLinearElasticityElement_a56a9ecb113858a8ab28a1125e879416d}} 
 \index{oomph::ProjectableAxisymLinearElasticityElement$<$ AXISYM\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableAxisymLinearElasticityElement$<$ AXISYM\_LINEAR\_ELAST\_ELEMENT $>$}!nhistory\_values\_for\_coordinate\_projection@{nhistory\_values\_for\_coordinate\_projection}}
@@ -197,11 +198,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ab4ecd0cd24000a
 
 
 
-Definition at line \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_source_l00716}{716}} of file \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_source}{axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
+Definition at line 716 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, and \mbox{\hyperlink{nodes_8h_source_l01022}{oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt()}}.
+References oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Time\+Stepper\+::ntstorage(), and oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableAxisymLinearElasticityElement_ac728e9dd1f32500ecabd559f4f457fd6}\label{classoomph_1_1ProjectableAxisymLinearElasticityElement_ac728e9dd1f32500ecabd559f4f457fd6}} 
 \index{oomph::ProjectableAxisymLinearElasticityElement$<$ AXISYM\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableAxisymLinearElasticityElement$<$ AXISYM\_LINEAR\_ELAST\_ELEMENT $>$}!nhistory\_values\_for\_projection@{nhistory\_values\_for\_projection}}
@@ -220,11 +221,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac6790f394630b9
 
 
 
-Definition at line \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_source_l00699}{699}} of file \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_source}{axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
+Definition at line 699 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8cc_source_l00879}{oomph\+::\+Data\+::ntstorage()}}.
+References oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Data\+::ntstorage().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableAxisymLinearElasticityElement_a00715989f89c46ba103194baf8e359b2}\label{classoomph_1_1ProjectableAxisymLinearElasticityElement_a00715989f89c46ba103194baf8e359b2}} 
 \index{oomph::ProjectableAxisymLinearElasticityElement$<$ AXISYM\_LINEAR\_ELAST\_ELEMENT $>$@{oomph::ProjectableAxisymLinearElasticityElement$<$ AXISYM\_LINEAR\_ELAST\_ELEMENT $>$}!nvalue\_of\_field@{nvalue\_of\_field}}
@@ -243,11 +244,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a1a9a6de16f3511
 
 
 
-Definition at line \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_source_l00764}{764}} of file \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_source}{axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
+Definition at line 764 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}.
+References oomph\+::\+Finite\+Element\+::nnode().
 
 
 

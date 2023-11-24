@@ -50,15 +50,15 @@ then the out\+\_\+vector is
 
 Communication is required between processors. The sum of the global number of rows in the in vectors must equal to the global number of rows in the out vector. This condition must be met if one is to supply an out vector with a distribution, otherwise we can let the function generate the out vector distribution itself. 
 
-Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00993}{993}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+Definition at line 993 of file double\+\_\+vector.\+cc.
 
 
 
-References \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00335}{oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00261}{oomph\+::\+Linear\+Algebra\+Distribution\+::first\+\_\+row()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00387}{oomph\+::\+Linear\+Algebra\+Distribution\+::rank\+\_\+of\+\_\+global\+\_\+row()}}, and \mbox{\hyperlink{double__vector_8h_source_l00254}{oomph\+::\+Double\+Vector\+::values\+\_\+pt()}}.
+References oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Double\+Vector\+::built(), oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Linear\+Algebra\+Distribution\+::first\+\_\+row(), i, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), oomph\+::\+Linear\+Algebra\+Distribution\+::rank\+\_\+of\+\_\+global\+\_\+row(), and oomph\+::\+Double\+Vector\+::values\+\_\+pt().
 
 
 
-Referenced by \mbox{\hyperlink{double__vector_8cc_source_l01381}{concatenate()}}, \mbox{\hyperlink{helmholtz__geometric__multigrid_8h_source_l00375}{oomph\+::\+Helmholtz\+MGPreconditioner$<$ DIM $>$\+::direct\+\_\+solve()}}, and \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8cc_source_l00181}{oomph\+::\+Exact\+DGPBlock\+Preconditioner$<$ MATRIX $>$\+::preconditioner\+\_\+solve()}}.
+Referenced by concatenate(), oomph\+::\+Helmholtz\+MGPreconditioner$<$ DIM $>$\+::direct\+\_\+solve(), and oomph\+::\+Exact\+DGPBlock\+Preconditioner$<$ MATRIX $>$\+::preconditioner\+\_\+solve().
 
 \mbox{\Hypertarget{namespaceoomph_1_1DoubleVectorHelpers_ae2e2b5728675ea85a48158f5d93f6593}\label{namespaceoomph_1_1DoubleVectorHelpers_ae2e2b5728675ea85a48158f5d93f6593}} 
 \index{oomph::DoubleVectorHelpers@{oomph::DoubleVectorHelpers}!concatenate@{concatenate}}
@@ -72,11 +72,11 @@ Wrapper around the other concatenate(...) function. Be careful with \mbox{\hyper
 
 
 
-Definition at line \mbox{\hyperlink{double__vector_8cc_source_l01381}{1381}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+Definition at line 1381 of file double\+\_\+vector.\+cc.
 
 
 
-References \mbox{\hyperlink{double__vector_8cc_source_l00993}{concatenate()}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References concatenate(), and i.
 
 \mbox{\Hypertarget{namespaceoomph_1_1DoubleVectorHelpers_a3ea9f7c40548e1a88402312e6f15d1fc}\label{namespaceoomph_1_1DoubleVectorHelpers_a3ea9f7c40548e1a88402312e6f15d1fc}} 
 \index{oomph::DoubleVectorHelpers@{oomph::DoubleVectorHelpers}!concatenate\_without\_communication@{concatenate\_without\_communication}}
@@ -120,15 +120,15 @@ Note (1)\+: The out vector may not be uniformly distributed even if the the in v
 
 There are no MPI send and receive, the data stays on the processor as defined by the distributions from the in vectors. 
 
-Definition at line \mbox{\hyperlink{double__vector_8cc_source_l01856}{1856}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+Definition at line 1856 of file double\+\_\+vector.\+cc.
 
 
 
-References \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00171}{oomph\+::\+Linear\+Algebra\+Distribution\+::clear()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00335}{oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8cc_source_l00367}{oomph\+::\+Linear\+Algebra\+Distribution\+Helpers\+::concatenate()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, and \mbox{\hyperlink{double__vector_8h_source_l00254}{oomph\+::\+Double\+Vector\+::values\+\_\+pt()}}.
+References oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Double\+Vector\+::built(), oomph\+::\+Linear\+Algebra\+Distribution\+::clear(), oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt(), oomph\+::\+Linear\+Algebra\+Distribution\+Helpers\+::concatenate(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), and oomph\+::\+Double\+Vector\+::values\+\_\+pt().
 
 
 
-Referenced by \mbox{\hyperlink{double__vector_8cc_source_l02039}{concatenate\+\_\+without\+\_\+communication()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04186}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l02939}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block\+\_\+vectors()}}, and \mbox{\hyperlink{block__preconditioner_8cc_source_l05671}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+dof\+\_\+level\+\_\+block()}}.
+Referenced by concatenate\+\_\+without\+\_\+communication(), oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block\+\_\+vectors(), and oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+dof\+\_\+level\+\_\+block().
 
 \mbox{\Hypertarget{namespaceoomph_1_1DoubleVectorHelpers_a568db46f65c1d234ac6f96ab54fafe60}\label{namespaceoomph_1_1DoubleVectorHelpers_a568db46f65c1d234ac6f96ab54fafe60}} 
 \index{oomph::DoubleVectorHelpers@{oomph::DoubleVectorHelpers}!concatenate\_without\_communication@{concatenate\_without\_communication}}
@@ -142,11 +142,11 @@ Wrapper around the other concatenate\+\_\+without\+\_\+communication(...) functi
 
 
 
-Definition at line \mbox{\hyperlink{double__vector_8cc_source_l02039}{2039}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+Definition at line 2039 of file double\+\_\+vector.\+cc.
 
 
 
-References \mbox{\hyperlink{double__vector_8cc_source_l01856}{concatenate\+\_\+without\+\_\+communication()}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References concatenate\+\_\+without\+\_\+communication(), and i.
 
 \mbox{\Hypertarget{namespaceoomph_1_1DoubleVectorHelpers_a3c0fa6de2c35301c556b9530c9ab2bc4}\label{namespaceoomph_1_1DoubleVectorHelpers_a3c0fa6de2c35301c556b9530c9ab2bc4}} 
 \index{oomph::DoubleVectorHelpers@{oomph::DoubleVectorHelpers}!split@{split}}
@@ -166,15 +166,15 @@ vec\+\_\+B\+: \mbox{[}a0\mbox{]} (on p0) vec\+\_\+C\+: \mbox{[}a2\mbox{]} (on p0
 
 Communication is required between processors. The out\+\_\+vector\+\_\+pt must contain pointers to \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} which has already been built with the correct distribution; the sum of the number of global row of the out vectors must be the same the the number of global rows of the in vector. 
 
-Definition at line \mbox{\hyperlink{double__vector_8cc_source_l01413}{1413}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+Definition at line 1413 of file double\+\_\+vector.\+cc.
 
 
 
-References \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00335}{oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00481}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{double__vector_8h_source_l00254}{oomph\+::\+Double\+Vector\+::values\+\_\+pt()}}.
+References oomph\+::\+Double\+Vector\+::built(), oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), and oomph\+::\+Double\+Vector\+::values\+\_\+pt().
 
 
 
-Referenced by \mbox{\hyperlink{helmholtz__geometric__multigrid_8h_source_l00375}{oomph\+::\+Helmholtz\+MGPreconditioner$<$ DIM $>$\+::direct\+\_\+solve()}}, \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8cc_source_l00181}{oomph\+::\+Exact\+DGPBlock\+Preconditioner$<$ MATRIX $>$\+::preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{double__vector_8cc_source_l01805}{split()}}.
+Referenced by oomph\+::\+Helmholtz\+MGPreconditioner$<$ DIM $>$\+::direct\+\_\+solve(), oomph\+::\+Exact\+DGPBlock\+Preconditioner$<$ MATRIX $>$\+::preconditioner\+\_\+solve(), and split().
 
 \mbox{\Hypertarget{namespaceoomph_1_1DoubleVectorHelpers_a111654d0a7b7bfaae9cdd8101c8005ca}\label{namespaceoomph_1_1DoubleVectorHelpers_a111654d0a7b7bfaae9cdd8101c8005ca}} 
 \index{oomph::DoubleVectorHelpers@{oomph::DoubleVectorHelpers}!split@{split}}
@@ -188,11 +188,11 @@ Wrapper around the other split(...) function. Be careful with \mbox{\hyperlink{c
 
 
 
-Definition at line \mbox{\hyperlink{double__vector_8cc_source_l01805}{1805}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+Definition at line 1805 of file double\+\_\+vector.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{double__vector_8cc_source_l01413}{split()}}.
+References i, and split().
 
 \mbox{\Hypertarget{namespaceoomph_1_1DoubleVectorHelpers_aa87594da930b3eed12a27838972f10f8}\label{namespaceoomph_1_1DoubleVectorHelpers_aa87594da930b3eed12a27838972f10f8}} 
 \index{oomph::DoubleVectorHelpers@{oomph::DoubleVectorHelpers}!split\_without\_communication@{split\_without\_communication}}
@@ -210,15 +210,15 @@ vec\+\_\+B\+: \mbox{[}a0\mbox{]} (on p0) vec\+\_\+C\+: \mbox{[}a1\mbox{]} (on p0
 
 This means that the distribution of the in vector MUST be a concatenation of the out vector distributions, refer to Linear\+Algebra\+Distribution\+Helpers\+::concatenate(...) to concatenate distributions. 
 
-Definition at line \mbox{\hyperlink{double__vector_8cc_source_l02075}{2075}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+Definition at line 2075 of file double\+\_\+vector.\+cc.
 
 
 
-References \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00171}{oomph\+::\+Linear\+Algebra\+Distribution\+::clear()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00335}{oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8cc_source_l00367}{oomph\+::\+Linear\+Algebra\+Distribution\+Helpers\+::concatenate()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, and \mbox{\hyperlink{double__vector_8h_source_l00254}{oomph\+::\+Double\+Vector\+::values\+\_\+pt()}}.
+References oomph\+::\+Double\+Vector\+::built(), oomph\+::\+Linear\+Algebra\+Distribution\+::clear(), oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt(), oomph\+::\+Linear\+Algebra\+Distribution\+Helpers\+::concatenate(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), and oomph\+::\+Double\+Vector\+::values\+\_\+pt().
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8cc_source_l04489}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::return\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l03443}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::return\+\_\+block\+\_\+vectors()}}, and \mbox{\hyperlink{double__vector_8cc_source_l02216}{split\+\_\+without\+\_\+communication()}}.
+Referenced by oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::return\+\_\+block\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::return\+\_\+block\+\_\+vectors(), and split\+\_\+without\+\_\+communication().
 
 \mbox{\Hypertarget{namespaceoomph_1_1DoubleVectorHelpers_a66afcc493558424fb89f26bc23dd5bf2}\label{namespaceoomph_1_1DoubleVectorHelpers_a66afcc493558424fb89f26bc23dd5bf2}} 
 \index{oomph::DoubleVectorHelpers@{oomph::DoubleVectorHelpers}!split\_without\_communication@{split\_without\_communication}}
@@ -232,9 +232,9 @@ Wrapper around the other split\+\_\+without\+\_\+communication(...) function. Be
 
 
 
-Definition at line \mbox{\hyperlink{double__vector_8cc_source_l02216}{2216}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+Definition at line 2216 of file double\+\_\+vector.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{double__vector_8cc_source_l02075}{split\+\_\+without\+\_\+communication()}}.
+References i, and split\+\_\+without\+\_\+communication().
 

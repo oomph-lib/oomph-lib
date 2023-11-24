@@ -26,7 +26,7 @@ Source functions and problem parameters generally need to be accessible to a var
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_namespace================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for fish-\/shaped solution of 1D Poisson equation}}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceFishSolnOneDPoisson}{FishSolnOneDPoisson}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -64,7 +64,7 @@ Once the problem has been created, we execute {\ttfamily Problem\+::self\+\_\+te
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//======start\_of\_main==================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver for 1D Poisson problem}}
-\DoxyCodeLine{\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{one__d__poisson_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
@@ -126,7 +126,7 @@ The {\ttfamily \mbox{\hyperlink{classOneDPoissonProblem}{One\+DPoisson\+Problem}
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_problem\_class============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// 1D Poisson problem in unit interval.}}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT> }
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classOneDPoissonProblem}{OneDPoissonProblem}} : \textcolor{keyword}{public} Problem}
 
@@ -208,9 +208,9 @@ In the {\ttfamily Problem} constructor, we define the domain length and build a 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====start\_of\_constructor===============================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Constructor for 1D Poisson problem in unit interval.}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// Discretise the 1D domain with n\_element elements of type ELEMENT.}}
-\DoxyCodeLine{\textcolor{comment}{/// Specify function pointer to source function. }}
+\DoxyCodeLine{\textcolor{comment}{/// Constructor for 1D Poisson problem in unit interval.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// Discretise the 1D domain with n\_element elements of type ELEMENT.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// Specify function pointer to source function. }}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classOneDPoissonProblem_ab814af5dfd3b7ae665cd20e27da5d9ae}{OneDPoissonProblem<ELEMENT>::OneDPoissonProblem}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_element,}
@@ -279,8 +279,8 @@ The pure virtual function {\ttfamily Problem\+::actions\+\_\+before\+\_\+newton\
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_actions\_before\_newton\_solve========================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Update the problem specs before solve: (Re)set boundary values}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// from the exact solution. }}
+\DoxyCodeLine{\textcolor{comment}{/// Update the problem specs before solve: (Re)set boundary values}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// from the exact solution. }}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classOneDPoissonProblem_a6e42423869771fbd216326cba516a76b}{OneDPoissonProblem<ELEMENT>::actions\_before\_newton\_solve}}()}
@@ -339,7 +339,7 @@ The function {\ttfamily doc\+\_\+solution(...)} writes the FE solution and the c
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_doc=========================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution in tecplot format. Label files with label.}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classOneDPoissonProblem_aaf42d034e42e7615acfa262a9c56b638}{OneDPoissonProblem<ELEMENT>::doc\_solution}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& label)}
 \DoxyCodeLine{\{ }

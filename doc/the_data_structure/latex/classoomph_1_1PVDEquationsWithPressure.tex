@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1PVDEquationsWithPressure}{}\doxysection{oomph\+::PVDEquations\+With\+Pressure\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1PVDEquationsWithPressure}{}\doxysection{oomph\+::PVDEquations\+With\+Pressure$<$ DIM $>$ Class Template Reference}
 \label{classoomph_1_1PVDEquationsWithPressure}\index{oomph::PVDEquationsWithPressure$<$ DIM $>$@{oomph::PVDEquationsWithPressure$<$ DIM $>$}}
 
 
@@ -9,7 +9,7 @@
 
 {\ttfamily \#include $<$solid\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::PVDEquations\+With\+Pressure\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::PVDEquations\+With\+Pressure$<$ DIM $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.020618cm]{classoomph_1_1PVDEquationsWithPressure}
@@ -54,7 +54,7 @@ void \mbox{\hyperlink{classoomph_1_1PVDEquationsWithPressure_ad216a201134e2b239e
 \begin{DoxyCompactList}\small\item\em Compute the diagonal of the displacement mass matrix for LSC preconditioner. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1PVDEquationsWithPressure_ac7b6036faac154cd6a535ab5083c6d84}{ndof\+\_\+types}} () const
 \begin{DoxyCompactList}\small\item\em returns the number of DOF types associated with this element\+: displacement components and pressure \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PVDEquationsWithPressure_a46331a93e6ac8cff7b4badad1c7a7a03}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
+void \mbox{\hyperlink{classoomph_1_1PVDEquationsWithPressure_a500ca8d255757889f18bc9f805325a4b}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&dof\+\_\+lookup\+\_\+list) const
 \begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+DOF\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) There are DIM+1 types of DOF\+: displacement compnents and pressure. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -84,11 +84,12 @@ bool \mbox{\hyperlink{classoomph_1_1PVDEquationsWithPressure_aac3148726106893e28
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$unsigned DIM$>$\newline
 class oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$}
+
 //////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// 
 
 A class for elements that solve the equations of solid mechanics, based on the principle of virtual displacements, with a contitutive equation that involves a pressure. This formulation is required in the case of incompressible materials, in which the additional constraint that volume must be conserved is applied. In this case, the Incompressible flag must be set to true. If the Incompressible flag is not set to true, we use the nearly-\/incompressible formulation of the constitutive equations. 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l00860}{860}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 860 of file solid\+\_\+elements.\+h.
 
 
 
@@ -106,7 +107,7 @@ Constructor, by default the element is NOT incompressible.
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l00866}{866}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 866 of file solid\+\_\+elements.\+h.
 
 
 
@@ -124,11 +125,11 @@ Output\+: x,y,\mbox{[}z\mbox{]},xi0,xi1,\mbox{[}xi2\mbox{]},gamma and the strain
 
 Output\+: x,y,\mbox{[}z\mbox{]},xi0,xi1,\mbox{[}xi2\mbox{]},gamma strain and stress components. 
 
-Definition at line \mbox{\hyperlink{solid__elements_8cc_source_l02116}{2116}} of file \mbox{\hyperlink{solid__elements_8cc_source}{solid\+\_\+elements.\+cc}}.
+Definition at line 2116 of file solid\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References i, and s.
 
 \mbox{\Hypertarget{classoomph_1_1PVDEquationsWithPressure_ac1d61d6c3be895e5d033cfbcbfc8bd71}\label{classoomph_1_1PVDEquationsWithPressure_ac1d61d6c3be895e5d033cfbcbfc8bd71}} 
 \index{oomph::PVDEquationsWithPressure$<$ DIM $>$@{oomph::PVDEquationsWithPressure$<$ DIM $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
@@ -147,11 +148,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a3167a2005e
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l00914}{914}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 914 of file solid\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00227}{oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix}}, \mbox{\hyperlink{solid__elements_8h_source_l00430}{oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::\+Evaluate\+\_\+jacobian\+\_\+by\+\_\+fd}}, \mbox{\hyperlink{solid__elements_8cc_source_l01271}{oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+pvd\+\_\+with\+\_\+pressure()}}, \mbox{\hyperlink{elements_8cc_source_l06985}{oomph\+::\+Solid\+Finite\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+solid\+\_\+position\+\_\+by\+\_\+fd()}}, \mbox{\hyperlink{elements_8h_source_l04131}{oomph\+::\+Solid\+Finite\+Element\+::\+Solid\+\_\+ic\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l04302}{oomph\+::\+Solid\+Finite\+Element\+::\+Solve\+\_\+for\+\_\+consistent\+\_\+newmark\+\_\+accel\+\_\+flag}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
+References oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix, oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::\+Evaluate\+\_\+jacobian\+\_\+by\+\_\+fd, oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+pvd\+\_\+with\+\_\+pressure(), oomph\+::\+Solid\+Finite\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+solid\+\_\+position\+\_\+by\+\_\+fd(), oomph\+::\+Solid\+Finite\+Element\+::\+Solid\+\_\+ic\+\_\+pt, oomph\+::\+Solid\+Finite\+Element\+::\+Solve\+\_\+for\+\_\+consistent\+\_\+newmark\+\_\+accel\+\_\+flag, and oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
 
 \mbox{\Hypertarget{classoomph_1_1PVDEquationsWithPressure_ab505539c0e5f904d34e698544142ef7a}\label{classoomph_1_1PVDEquationsWithPressure_ab505539c0e5f904d34e698544142ef7a}} 
 \index{oomph::PVDEquationsWithPressure$<$ DIM $>$@{oomph::PVDEquationsWithPressure$<$ DIM $>$}!fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix@{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix}}
@@ -170,11 +171,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a2b6294a730
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l00958}{958}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 958 of file solid\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{solid__elements_8h_source_l00430}{oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::\+Evaluate\+\_\+jacobian\+\_\+by\+\_\+fd}}, \mbox{\hyperlink{solid__elements_8cc_source_l01271}{oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+pvd\+\_\+with\+\_\+pressure()}}, \mbox{\hyperlink{elements_8cc_source_l06985}{oomph\+::\+Solid\+Finite\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+solid\+\_\+position\+\_\+by\+\_\+fd()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{elements_8h_source_l04131}{oomph\+::\+Solid\+Finite\+Element\+::\+Solid\+\_\+ic\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l04302}{oomph\+::\+Solid\+Finite\+Element\+::\+Solve\+\_\+for\+\_\+consistent\+\_\+newmark\+\_\+accel\+\_\+flag}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
+References oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::\+Evaluate\+\_\+jacobian\+\_\+by\+\_\+fd, oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+pvd\+\_\+with\+\_\+pressure(), oomph\+::\+Solid\+Finite\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+solid\+\_\+position\+\_\+by\+\_\+fd(), i, oomph\+::\+Generalised\+Element\+::ndof(), oomph\+::\+Solid\+Finite\+Element\+::\+Solid\+\_\+ic\+\_\+pt, oomph\+::\+Solid\+Finite\+Element\+::\+Solve\+\_\+for\+\_\+consistent\+\_\+newmark\+\_\+accel\+\_\+flag, and oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
 
 \mbox{\Hypertarget{classoomph_1_1PVDEquationsWithPressure_a6e44d72eea0bbb65d43d01789fcf452c}\label{classoomph_1_1PVDEquationsWithPressure_a6e44d72eea0bbb65d43d01789fcf452c}} 
 \index{oomph::PVDEquationsWithPressure$<$ DIM $>$@{oomph::PVDEquationsWithPressure$<$ DIM $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
@@ -193,11 +194,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l00899}{899}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 899 of file solid\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00227}{oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix}}, and \mbox{\hyperlink{solid__elements_8cc_source_l01271}{oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+pvd\+\_\+with\+\_\+pressure()}}.
+References oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix, and oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+pvd\+\_\+with\+\_\+pressure().
 
 \mbox{\Hypertarget{classoomph_1_1PVDEquationsWithPressure_a59c8c6164edf79148deb8dbeab79376d}\label{classoomph_1_1PVDEquationsWithPressure_a59c8c6164edf79148deb8dbeab79376d}} 
 \index{oomph::PVDEquationsWithPressure$<$ DIM $>$@{oomph::PVDEquationsWithPressure$<$ DIM $>$}!fill\_in\_generic\_residual\_contribution\_pvd\_with\_pressure@{fill\_in\_generic\_residual\_contribution\_pvd\_with\_pressure}}
@@ -223,15 +224,15 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineablePVDEquationsWithPressu
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8cc_source_l01270}{1270}} of file \mbox{\hyperlink{solid__elements_8cc_source}{solid\+\_\+elements.\+cc}}.
+Definition at line 1270 of file solid\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{mesh__smooth_8h_source_l00055}{oomph\+::\+Helper\+\_\+namespace\+\_\+for\+\_\+mesh\+\_\+smoothing\+::\+Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l02096}{oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::offset()}}, \mbox{\hyperlink{shape_8h_source_l00487}{oomph\+::\+DShape\+::offset()}}, \mbox{\hyperlink{matrices_8h_source_l02564}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::offset()}}, \mbox{\hyperlink{matrices_8h_source_l02078}{oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::raw\+\_\+direct\+\_\+access()}}, \mbox{\hyperlink{matrices_8h_source_l02545}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::raw\+\_\+direct\+\_\+access()}}, \mbox{\hyperlink{shape_8h_source_l00469}{oomph\+::\+DShape\+::raw\+\_\+direct\+\_\+access()}}, \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a446452158a8ae9fbc3dde4277155f824}{oomph\+::\+Constitutive\+Law\+::requires\+\_\+incompressibility\+\_\+constraint()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
+References oomph\+::\+Helper\+\_\+namespace\+\_\+for\+\_\+mesh\+\_\+smoothing\+::\+Constitutive\+\_\+law\+\_\+pt, i, oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::offset(), oomph\+::\+DShape\+::offset(), oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::offset(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::raw\+\_\+direct\+\_\+access(), oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::raw\+\_\+direct\+\_\+access(), oomph\+::\+DShape\+::raw\+\_\+direct\+\_\+access(), oomph\+::\+Constitutive\+Law\+::requires\+\_\+incompressibility\+\_\+constraint(), s, and oomph\+::\+Quad\+Tree\+Names\+::W.
 
 
 
-Referenced by \mbox{\hyperlink{solid__elements_8h_source_l00914}{oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{solid__elements_8h_source_l00958}{oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix()}}, and \mbox{\hyperlink{solid__elements_8h_source_l00899}{oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
+Referenced by oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix(), and oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
 
 \mbox{\Hypertarget{classoomph_1_1PVDEquationsWithPressure_a5b2bc099a877ef18bf641480fdf67262}\label{classoomph_1_1PVDEquationsWithPressure_a5b2bc099a877ef18bf641480fdf67262}} 
 \index{oomph::PVDEquationsWithPressure$<$ DIM $>$@{oomph::PVDEquationsWithPressure$<$ DIM $>$}!get\_d\_stress\_dG\_upper@{get\_d\_stress\_dG\_upper}}
@@ -246,11 +247,11 @@ Return the derivative of the 2nd Piola Kirchhoff stress tensor, as calculated fr
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l01288}{1288}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 1288 of file solid\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{constitutive__laws_8cc_source_l00352}{oomph\+::\+Constitutive\+Law\+::calculate\+\_\+d\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress\+\_\+d\+G()}}, \mbox{\hyperlink{solid__elements_8h_source_l00415}{oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::\+Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{solid__elements_8h_source_l01011}{oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::interpolated\+\_\+solid\+\_\+p()}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
+References oomph\+::\+Constitutive\+Law\+::calculate\+\_\+d\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress\+\_\+d\+G(), oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::\+Constitutive\+\_\+law\+\_\+pt, oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::interpolated\+\_\+solid\+\_\+p(), and oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
 
 \mbox{\Hypertarget{classoomph_1_1PVDEquationsWithPressure_a35b1c9e4ebd765bbb185421c2c02aa1a}\label{classoomph_1_1PVDEquationsWithPressure_a35b1c9e4ebd765bbb185421c2c02aa1a}} 
 \index{oomph::PVDEquationsWithPressure$<$ DIM $>$@{oomph::PVDEquationsWithPressure$<$ DIM $>$}!get\_d\_stress\_dG\_upper@{get\_d\_stress\_dG\_upper}}
@@ -265,18 +266,18 @@ Return the derivative of the deviatoric part of the 2nd Piola Kirchhoff stress t
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l01177}{1177}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 1177 of file solid\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{constitutive__laws_8cc_source_l00352}{oomph\+::\+Constitutive\+Law\+::calculate\+\_\+d\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress\+\_\+d\+G()}}, \mbox{\hyperlink{solid__elements_8h_source_l00415}{oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::\+Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{solid__elements_8h_source_l01011}{oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::interpolated\+\_\+solid\+\_\+p()}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
+References oomph\+::\+Constitutive\+Law\+::calculate\+\_\+d\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress\+\_\+d\+G(), oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::\+Constitutive\+\_\+law\+\_\+pt, oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::interpolated\+\_\+solid\+\_\+p(), and oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
 
-\mbox{\Hypertarget{classoomph_1_1PVDEquationsWithPressure_a46331a93e6ac8cff7b4badad1c7a7a03}\label{classoomph_1_1PVDEquationsWithPressure_a46331a93e6ac8cff7b4badad1c7a7a03}} 
+\mbox{\Hypertarget{classoomph_1_1PVDEquationsWithPressure_a500ca8d255757889f18bc9f805325a4b}\label{classoomph_1_1PVDEquationsWithPressure_a500ca8d255757889f18bc9f805325a4b}} 
 \index{oomph::PVDEquationsWithPressure$<$ DIM $>$@{oomph::PVDEquationsWithPressure$<$ DIM $>$}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
 \index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::PVDEquationsWithPressure$<$ DIM $>$@{oomph::PVDEquationsWithPressure$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PVDEquationsWithPressure}{oomph\+::\+PVDEquations\+With\+Pressure}}$<$ DIM $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classoomph_1_1PVDEquationsWithPressure}{oomph\+::\+PVDEquations\+With\+Pressure}}$<$ DIM $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -284,15 +285,15 @@ Create a list of pairs for all unknowns in this element, so that the first entry
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1PVDEquationsBase_af17c01ce27e3a8aa21f86aaed70bc34e}{oomph\+::\+PVDEquations\+Base$<$ DIM $>$}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1PVDEquationsBase_a56a5df1e14d4f10d23026f2a0b5c9da8}{oomph\+::\+PVDEquations\+Base$<$ DIM $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l01077}{1077}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 1077 of file solid\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02463}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02484}{oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension()}}, \mbox{\hyperlink{solid__elements_8h_source_l00171}{oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::npres\+\_\+solid()}}, \mbox{\hyperlink{elements_8h_source_l04137}{oomph\+::\+Solid\+Finite\+Element\+::position\+\_\+local\+\_\+eqn()}}, and \mbox{\hyperlink{solid__elements_8h_source_l00178}{oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::solid\+\_\+p\+\_\+local\+\_\+eqn()}}.
+References oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), i, oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension(), oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::npres\+\_\+solid(), oomph\+::\+Solid\+Finite\+Element\+::position\+\_\+local\+\_\+eqn(), and oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::solid\+\_\+p\+\_\+local\+\_\+eqn().
 
 \mbox{\Hypertarget{classoomph_1_1PVDEquationsWithPressure_ad216a201134e2b239e3d5bcaedd56973}\label{classoomph_1_1PVDEquationsWithPressure_ad216a201134e2b239e3d5bcaedd56973}} 
 \index{oomph::PVDEquationsWithPressure$<$ DIM $>$@{oomph::PVDEquationsWithPressure$<$ DIM $>$}!get\_mass\_matrix\_diagonal@{get\_mass\_matrix\_diagonal}}
@@ -311,11 +312,11 @@ Implements \mbox{\hyperlink{classoomph_1_1SolidElementWithDiagonalMassMatrix_ad2
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8cc_source_l02198}{2198}} of file \mbox{\hyperlink{solid__elements_8cc_source}{solid\+\_\+elements.\+cc}}.
+Definition at line 2198 of file solid\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
+References i, and oomph\+::\+Quad\+Tree\+Names\+::W.
 
 \mbox{\Hypertarget{classoomph_1_1PVDEquationsWithPressure_a2fb01dcbdef6214a04b89485c9142dc8}\label{classoomph_1_1PVDEquationsWithPressure_a2fb01dcbdef6214a04b89485c9142dc8}} 
 \index{oomph::PVDEquationsWithPressure$<$ DIM $>$@{oomph::PVDEquationsWithPressure$<$ DIM $>$}!get\_stress@{get\_stress}}
@@ -330,11 +331,11 @@ Return the deviatoric part of the 2nd Piola Kirchhoff stress tensor, as calculat
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l01258}{1258}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 1258 of file solid\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a93527d910de908035feb8f41b0401065}{oomph\+::\+Constitutive\+Law\+::calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress()}}, \mbox{\hyperlink{solid__elements_8h_source_l00415}{oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::\+Constitutive\+\_\+law\+\_\+pt}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
+References oomph\+::\+Constitutive\+Law\+::calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress(), oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::\+Constitutive\+\_\+law\+\_\+pt, and oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
 
 \mbox{\Hypertarget{classoomph_1_1PVDEquationsWithPressure_a4ae331361c8fd63725a55050e90e9e2d}\label{classoomph_1_1PVDEquationsWithPressure_a4ae331361c8fd63725a55050e90e9e2d}} 
 \index{oomph::PVDEquationsWithPressure$<$ DIM $>$@{oomph::PVDEquationsWithPressure$<$ DIM $>$}!get\_stress@{get\_stress}}
@@ -349,11 +350,11 @@ Return the deviatoric part of the 2nd Piola Kirchhoff stress tensor, as calculat
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l01145}{1145}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 1145 of file solid\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a93527d910de908035feb8f41b0401065}{oomph\+::\+Constitutive\+Law\+::calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress()}}, \mbox{\hyperlink{solid__elements_8h_source_l00415}{oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::\+Constitutive\+\_\+law\+\_\+pt}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
+References oomph\+::\+Constitutive\+Law\+::calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress(), oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::\+Constitutive\+\_\+law\+\_\+pt, and oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
 
 \mbox{\Hypertarget{classoomph_1_1PVDEquationsWithPressure_a15cfb4084a47c24f7cf108554a4b850d}\label{classoomph_1_1PVDEquationsWithPressure_a15cfb4084a47c24f7cf108554a4b850d}} 
 \index{oomph::PVDEquationsWithPressure$<$ DIM $>$@{oomph::PVDEquationsWithPressure$<$ DIM $>$}!get\_stress@{get\_stress}}
@@ -372,11 +373,11 @@ Implements \mbox{\hyperlink{classoomph_1_1PVDEquationsBase_ad429d68f0129d5f7a387
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8cc_source_l02267}{2267}} of file \mbox{\hyperlink{solid__elements_8cc_source}{solid\+\_\+elements.\+cc}}.
+Definition at line 2267 of file solid\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References i, and s.
 
 \mbox{\Hypertarget{classoomph_1_1PVDEquationsWithPressure_a9d8ecc731f98d8d4aae18b55f835bc61}\label{classoomph_1_1PVDEquationsWithPressure_a9d8ecc731f98d8d4aae18b55f835bc61}} 
 \index{oomph::PVDEquationsWithPressure$<$ DIM $>$@{oomph::PVDEquationsWithPressure$<$ DIM $>$}!interpolated\_solid\_p@{interpolated\_solid\_p}}
@@ -391,15 +392,15 @@ Return the interpolated\+\_\+solid\+\_\+pressure.
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l01011}{1011}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 1011 of file solid\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{solid__elements_8h_source_l01011}{oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::interpolated\+\_\+solid\+\_\+p()}}, \mbox{\hyperlink{solid__elements_8h_source_l00171}{oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::npres\+\_\+solid()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1PVDEquationsWithPressure_a2f447e84104fbdd8afe9efe52c62f2b3}{oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::solid\+\_\+p()}}, and \mbox{\hyperlink{classoomph_1_1PVDEquationsWithPressure_ad580f7919412f6b574b76f514f56282c}{oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::solid\+\_\+pshape()}}.
+References oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::npres\+\_\+solid(), s, oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::solid\+\_\+p(), and oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::solid\+\_\+pshape().
 
 
 
-Referenced by \mbox{\hyperlink{refineable__solid__elements_8h_source_l00594}{oomph\+::\+Refineable\+QPVDElement\+With\+Pressure$<$ DIM $>$\+::further\+\_\+build()}}, \mbox{\hyperlink{solid__elements_8h_source_l01177}{oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::get\+\_\+d\+\_\+stress\+\_\+d\+G\+\_\+upper()}}, \mbox{\hyperlink{refineable__solid__elements_8h_source_l00856}{oomph\+::\+Refineable\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$\+::get\+\_\+interpolated\+\_\+values()}}, and \mbox{\hyperlink{solid__elements_8h_source_l01011}{oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::interpolated\+\_\+solid\+\_\+p()}}.
+Referenced by oomph\+::\+Refineable\+QPVDElement\+With\+Pressure$<$ DIM $>$\+::further\+\_\+build(), oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::get\+\_\+d\+\_\+stress\+\_\+d\+G\+\_\+upper(), and oomph\+::\+Refineable\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$\+::get\+\_\+interpolated\+\_\+values().
 
 \mbox{\Hypertarget{classoomph_1_1PVDEquationsWithPressure_acdcef316bde216f8b70520248b83f40c}\label{classoomph_1_1PVDEquationsWithPressure_acdcef316bde216f8b70520248b83f40c}} 
 \index{oomph::PVDEquationsWithPressure$<$ DIM $>$@{oomph::PVDEquationsWithPressure$<$ DIM $>$}!is\_incompressible@{is\_incompressible}}
@@ -414,15 +415,15 @@ Return whether the material is incompressible.
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l00875}{875}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 875 of file solid\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{solid__elements_8h_source_l01237}{oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::\+Incompressible}}.
+References oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::\+Incompressible.
 
 
 
-Referenced by \mbox{\hyperlink{refineable__solid__elements_8h_source_l00386}{oomph\+::\+Refineable\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::further\+\_\+build()}}.
+Referenced by oomph\+::\+Refineable\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::further\+\_\+build().
 
 \mbox{\Hypertarget{classoomph_1_1PVDEquationsWithPressure_ac7b6036faac154cd6a535ab5083c6d84}\label{classoomph_1_1PVDEquationsWithPressure_ac7b6036faac154cd6a535ab5083c6d84}} 
 \index{oomph::PVDEquationsWithPressure$<$ DIM $>$@{oomph::PVDEquationsWithPressure$<$ DIM $>$}!ndof\_types@{ndof\_types}}
@@ -441,7 +442,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1PVDEquationsBase_a749f42fea2b7
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l01064}{1064}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 1064 of file solid\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PVDEquationsWithPressure_ae6d9a646cfd9be12134aeba45249d7c7}\label{classoomph_1_1PVDEquationsWithPressure_ae6d9a646cfd9be12134aeba45249d7c7}} 
 \index{oomph::PVDEquationsWithPressure$<$ DIM $>$@{oomph::PVDEquationsWithPressure$<$ DIM $>$}!output@{output}}
@@ -460,15 +461,15 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1QPVDElementWithPressure_adf19767f05bb8227c56b011c3f6931e5}{oomph\+::\+QPVDElement\+With\+Pressure$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_ae44d9dd8f7a28dafd17e20a0408f4708}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1TPVDElementWithContinuousPressure_a082f3c2e891783a923daeaee5686203c}{oomph\+::\+TPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1TPVDElementWithContinuousPressure_a082f3c2e891783a923daeaee5686203c}{oomph\+::\+TPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_ae44d9dd8f7a28dafd17e20a0408f4708}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1QPVDElementWithPressure_adf19767f05bb8227c56b011c3f6931e5}{oomph\+::\+QPVDElement\+With\+Pressure$<$ DIM $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l01044}{1044}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 1044 of file solid\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{solid__elements_8h_source_l01033}{oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::output()}}.
+References oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1PVDEquationsWithPressure_a27aee23c253bef90a7f389acd376fd27}\label{classoomph_1_1PVDEquationsWithPressure_a27aee23c253bef90a7f389acd376fd27}} 
 \index{oomph::PVDEquationsWithPressure$<$ DIM $>$@{oomph::PVDEquationsWithPressure$<$ DIM $>$}!output@{output}}
@@ -487,15 +488,15 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1QPVDElementWithPressure_a129f52703db667b9b67a2aa7a6f7fb3e}{oomph\+::\+QPVDElement\+With\+Pressure$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_af9d764cc0daeb7151b37284bf2082162}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1TPVDElementWithContinuousPressure_a943ae7f4fcad3538108a207325160c92}{oomph\+::\+TPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1TPVDElementWithContinuousPressure_a943ae7f4fcad3538108a207325160c92}{oomph\+::\+TPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_af9d764cc0daeb7151b37284bf2082162}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1QPVDElementWithPressure_a129f52703db667b9b67a2aa7a6f7fb3e}{oomph\+::\+QPVDElement\+With\+Pressure$<$ DIM $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8cc_source_l01990}{1990}} of file \mbox{\hyperlink{solid__elements_8cc_source}{solid\+\_\+elements.\+cc}}.
+Definition at line 1990 of file solid\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References i, and s.
 
 \mbox{\Hypertarget{classoomph_1_1PVDEquationsWithPressure_a1853eace3f079f90cc34df8029bd3dba}\label{classoomph_1_1PVDEquationsWithPressure_a1853eace3f079f90cc34df8029bd3dba}} 
 \index{oomph::PVDEquationsWithPressure$<$ DIM $>$@{oomph::PVDEquationsWithPressure$<$ DIM $>$}!output@{output}}
@@ -514,19 +515,15 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1QPVDElementWithPressure_a442248cc27256d32e674ab2ffc1aa032}{oomph\+::\+QPVDElement\+With\+Pressure$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_acc858925ae5724c02fc1073130f67430}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1TPVDElementWithContinuousPressure_a33bc9dab61e60a0de1cb784020c5f056}{oomph\+::\+TPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1TPVDElementWithContinuousPressure_a33bc9dab61e60a0de1cb784020c5f056}{oomph\+::\+TPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_acc858925ae5724c02fc1073130f67430}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1QPVDElementWithPressure_a442248cc27256d32e674ab2ffc1aa032}{oomph\+::\+QPVDElement\+With\+Pressure$<$ DIM $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l01033}{1033}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 1033 of file solid\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{solid__elements_8h_source_l01033}{oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::output()}}.
-
-
-
-Referenced by \mbox{\hyperlink{solid__elements_8h_source_l01033}{oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::output()}}, \mbox{\hyperlink{solid__elements_8h_source_l01409}{oomph\+::\+QPVDElement\+With\+Pressure$<$ DIM $>$\+::output()}}, \mbox{\hyperlink{solid__elements_8h_source_l01611}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$\+::output()}}, and \mbox{\hyperlink{solid__elements_8h_source_l02200}{oomph\+::\+TPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$\+::output()}}.
+Referenced by oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::output(), oomph\+::\+QPVDElement\+With\+Pressure$<$ DIM $>$\+::output(), oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$\+::output(), and oomph\+::\+TPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1PVDEquationsWithPressure_a3522de42dcebba5f7531c5913857303d}\label{classoomph_1_1PVDEquationsWithPressure_a3522de42dcebba5f7531c5913857303d}} 
 \index{oomph::PVDEquationsWithPressure$<$ DIM $>$@{oomph::PVDEquationsWithPressure$<$ DIM $>$}!output@{output}}
@@ -545,15 +542,15 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1QPVDElementWithPressure_ad47eebe6e14138c64fc313f3ecda8d6e}{oomph\+::\+QPVDElement\+With\+Pressure$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_a52659b143c819c1fcc86a6473ef324f0}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1TPVDElementWithContinuousPressure_aefeba130e3533f5af5286830d271028d}{oomph\+::\+TPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1TPVDElementWithContinuousPressure_aefeba130e3533f5af5286830d271028d}{oomph\+::\+TPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_a52659b143c819c1fcc86a6473ef324f0}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1QPVDElementWithPressure_ad47eebe6e14138c64fc313f3ecda8d6e}{oomph\+::\+QPVDElement\+With\+Pressure$<$ DIM $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8cc_source_l01934}{1934}} of file \mbox{\hyperlink{solid__elements_8cc_source}{solid\+\_\+elements.\+cc}}.
+Definition at line 1934 of file solid\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References i, and s.
 
 \mbox{\Hypertarget{classoomph_1_1PVDEquationsWithPressure_a21c262fef599637b72c6e2fd82a00fe5}\label{classoomph_1_1PVDEquationsWithPressure_a21c262fef599637b72c6e2fd82a00fe5}} 
 \index{oomph::PVDEquationsWithPressure$<$ DIM $>$@{oomph::PVDEquationsWithPressure$<$ DIM $>$}!set\_compressible@{set\_compressible}}
@@ -568,11 +565,11 @@ Set the material to be compressible.
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l00887}{887}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 887 of file solid\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{solid__elements_8h_source_l01237}{oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::\+Incompressible}}.
+References oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::\+Incompressible.
 
 \mbox{\Hypertarget{classoomph_1_1PVDEquationsWithPressure_ad816b1c0bbe67f32a30b0152daef0756}\label{classoomph_1_1PVDEquationsWithPressure_ad816b1c0bbe67f32a30b0152daef0756}} 
 \index{oomph::PVDEquationsWithPressure$<$ DIM $>$@{oomph::PVDEquationsWithPressure$<$ DIM $>$}!set\_incompressible@{set\_incompressible}}
@@ -587,11 +584,11 @@ Set the material to be incompressible.
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l00881}{881}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 881 of file solid\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{solid__elements_8h_source_l01237}{oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::\+Incompressible}}.
+References oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::\+Incompressible.
 
 \mbox{\Hypertarget{classoomph_1_1PVDEquationsWithPressure_a35b462a689e05929fa15a9abd2b920f0}\label{classoomph_1_1PVDEquationsWithPressure_a35b462a689e05929fa15a9abd2b920f0}} 
 \index{oomph::PVDEquationsWithPressure$<$ DIM $>$@{oomph::PVDEquationsWithPressure$<$ DIM $>$}!set\_solid\_p@{set\_solid\_p}}
@@ -606,7 +603,7 @@ Set the lth solid pressure to p\+\_\+value.
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1QPVDElementWithPressure_a50241b9156808fb68182405335438769}{oomph\+::\+QPVDElement\+With\+Pressure$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_a796553fe8e806158167c598e4c85596f}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1TPVDElementWithContinuousPressure_a3dd6618975cc1eb47cb4a4da4c3f9274}{oomph\+::\+TPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1TPVDElementWithContinuousPressure_a3dd6618975cc1eb47cb4a4da4c3f9274}{oomph\+::\+TPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_a796553fe8e806158167c598e4c85596f}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1QPVDElementWithPressure_a50241b9156808fb68182405335438769}{oomph\+::\+QPVDElement\+With\+Pressure$<$ DIM $>$}}.
 
 \mbox{\Hypertarget{classoomph_1_1PVDEquationsWithPressure_a2f447e84104fbdd8afe9efe52c62f2b3}\label{classoomph_1_1PVDEquationsWithPressure_a2f447e84104fbdd8afe9efe52c62f2b3}} 
 \index{oomph::PVDEquationsWithPressure$<$ DIM $>$@{oomph::PVDEquationsWithPressure$<$ DIM $>$}!solid\_p@{solid\_p}}
@@ -621,11 +618,11 @@ Return the lth solid pressure.
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1QPVDElementWithPressure_ae60d58f767b89eb8ecf147da5e646bf3}{oomph\+::\+QPVDElement\+With\+Pressure$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_a28df8e859a4201842857e6ad7dbc7ecd}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1TPVDElementWithContinuousPressure_aa0a9aad423ffe12eb10f07af6850191c}{oomph\+::\+TPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1TPVDElementWithContinuousPressure_aa0a9aad423ffe12eb10f07af6850191c}{oomph\+::\+TPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_a28df8e859a4201842857e6ad7dbc7ecd}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1QPVDElementWithPressure_ae60d58f767b89eb8ecf147da5e646bf3}{oomph\+::\+QPVDElement\+With\+Pressure$<$ DIM $>$}}.
 
 
 
-Referenced by \mbox{\hyperlink{solid__elements_8h_source_l01011}{oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::interpolated\+\_\+solid\+\_\+p()}}.
+Referenced by oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::interpolated\+\_\+solid\+\_\+p().
 
 \mbox{\Hypertarget{classoomph_1_1PVDEquationsWithPressure_ad580f7919412f6b574b76f514f56282c}\label{classoomph_1_1PVDEquationsWithPressure_ad580f7919412f6b574b76f514f56282c}} 
 \index{oomph::PVDEquationsWithPressure$<$ DIM $>$@{oomph::PVDEquationsWithPressure$<$ DIM $>$}!solid\_pshape@{solid\_pshape}}
@@ -640,11 +637,11 @@ Return the solid pressure shape functions.
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1QPVDElementWithPressure_a2775e60c755528c5d8eaf403450f93e2}{oomph\+::\+QPVDElement\+With\+Pressure$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QPVDElementWithPressure_a9e12eb079c27aade696a3d43a006d1e9}{oomph\+::\+QPVDElement\+With\+Pressure$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QPVDElementWithPressure_aa7ed162df0c43e24b54fc853340e5f17}{oomph\+::\+QPVDElement\+With\+Pressure$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_a917e2f9e3b1bd9ff49d28006e47e438f}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_ab48638387c6474924fa9b4719c586f30}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_a3ae7aa0cf24e89e4c946efed81244727}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1TPVDElementWithContinuousPressure_a5bb00d8bab9b92063a4cef340154438d}{oomph\+::\+TPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1TPVDElementWithContinuousPressure_aa33acd1ed78ba0c48f535af0039395fd}{oomph\+::\+TPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1TPVDElementWithContinuousPressure_a51defb0dbc2433b09fdcd1c3ac9f20dc}{oomph\+::\+TPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1TPVDElementWithContinuousPressure_a51defb0dbc2433b09fdcd1c3ac9f20dc}{oomph\+::\+TPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1TPVDElementWithContinuousPressure_aa33acd1ed78ba0c48f535af0039395fd}{oomph\+::\+TPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1TPVDElementWithContinuousPressure_a5bb00d8bab9b92063a4cef340154438d}{oomph\+::\+TPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_a3ae7aa0cf24e89e4c946efed81244727}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_ab48638387c6474924fa9b4719c586f30}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_a917e2f9e3b1bd9ff49d28006e47e438f}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QPVDElementWithPressure_aa7ed162df0c43e24b54fc853340e5f17}{oomph\+::\+QPVDElement\+With\+Pressure$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QPVDElementWithPressure_a9e12eb079c27aade696a3d43a006d1e9}{oomph\+::\+QPVDElement\+With\+Pressure$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1QPVDElementWithPressure_a2775e60c755528c5d8eaf403450f93e2}{oomph\+::\+QPVDElement\+With\+Pressure$<$ DIM $>$}}.
 
 
 
-Referenced by \mbox{\hyperlink{solid__elements_8h_source_l01011}{oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::interpolated\+\_\+solid\+\_\+p()}}, and \mbox{\hyperlink{solid__elements_8h_source_l01220}{oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::solid\+\_\+pshape\+\_\+at\+\_\+knot()}}.
+Referenced by oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::interpolated\+\_\+solid\+\_\+p(), and oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::solid\+\_\+pshape\+\_\+at\+\_\+knot().
 
 \mbox{\Hypertarget{classoomph_1_1PVDEquationsWithPressure_a73c998eb5cab4d5fe980006115b2aeab}\label{classoomph_1_1PVDEquationsWithPressure_a73c998eb5cab4d5fe980006115b2aeab}} 
 \index{oomph::PVDEquationsWithPressure$<$ DIM $>$@{oomph::PVDEquationsWithPressure$<$ DIM $>$}!solid\_pshape\_at\_knot@{solid\_pshape\_at\_knot}}
@@ -659,11 +656,11 @@ Return the stored solid shape functions at the knots.
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l01220}{1220}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 1220 of file solid\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00060}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Dim}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{classoomph_1_1PVDEquationsWithPressure_ad580f7919412f6b574b76f514f56282c}{oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::solid\+\_\+pshape()}}.
+References oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Dim, i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Integral\+::knot(), s, and oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::solid\+\_\+pshape().
 
 
 
@@ -681,11 +678,11 @@ Boolean to determine whether the solid is incompressible or not.
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l01237}{1237}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 1237 of file solid\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{refineable__solid__elements_8h_source_l00386}{oomph\+::\+Refineable\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::further\+\_\+build()}}, \mbox{\hyperlink{solid__elements_8h_source_l00875}{oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::is\+\_\+incompressible()}}, \mbox{\hyperlink{solid__elements_8h_source_l00887}{oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::set\+\_\+compressible()}}, and \mbox{\hyperlink{solid__elements_8h_source_l00881}{oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::set\+\_\+incompressible()}}.
+Referenced by oomph\+::\+Refineable\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::further\+\_\+build(), oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::is\+\_\+incompressible(), oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::set\+\_\+compressible(), and oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::set\+\_\+incompressible().
 
 
 

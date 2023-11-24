@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -390,9 +390,6 @@ RotatingProblem<ELEMENT>::RotatingProblem
  static_cast<HSL_MA42*>(linear_solver_pt())->lenbuf_factor1() = 3.0;
  static_cast<HSL_MA42*>(linear_solver_pt())->lenbuf_factor2() = 3.0;
  static_cast<HSL_MA42*>(linear_solver_pt())->front_factor() = 3.0;*/
-
- //Specify the eigensolver shift
- static_cast<ARPACK*>(eigen_solver_pt())->set_shift(5.0);
 
  //Complete the build of the elements 
  finish_problem_setup();

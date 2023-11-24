@@ -56,7 +56,7 @@ Overall, the structure of the driver code is very similar to that used for the \
 \DoxyCodeLine{\textcolor{comment}{//LIC// multi-\/physics finite-\/element library, available }}
 \DoxyCodeLine{\textcolor{comment}{//LIC// at http://www.oomph-\/lib.org.}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// }}
-\DoxyCodeLine{\textcolor{comment}{//LIC// Copyright (C) 2006-\/2022 Matthias Heil and Andrew Hazel}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// Copyright (C) 2006-\/2023 Matthias Heil and Andrew Hazel}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// }}
 \DoxyCodeLine{\textcolor{comment}{//LIC// This library is free software; you can redistribute it and/or}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// modify it under the terms of the GNU Lesser General Public}}
@@ -150,29 +150,29 @@ Overall, the structure of the driver code is very similar to that used for the \
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Constructor: Pass pointer to source and wind functions, and}}
 \DoxyCodeLine{\textcolor{comment}{ /// flag to indicate if stabilisation is to be used.}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classSUPGAdvectionDiffusionProblem_a95aa4192c1b42327b12cdbb75295d192}{SUPGAdvectionDiffusionProblem}}(}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classSUPGAdvectionDiffusionProblem}{SUPGAdvectionDiffusionProblem}}(}
 \DoxyCodeLine{  AdvectionDiffusionEquations<2>::AdvectionDiffusionSourceFctPt source\_fct\_pt,}
 \DoxyCodeLine{  AdvectionDiffusionEquations<2>::AdvectionDiffusionWindFctPt wind\_fct\_pt,}
 \DoxyCodeLine{  \textcolor{keyword}{const} \textcolor{keywordtype}{bool}\& use\_stabilisation);}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Destructor. Empty}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classSUPGAdvectionDiffusionProblem_a2112492d8a8a2ad9c0d8ef79e892ebd1}{\string~SUPGAdvectionDiffusionProblem}}()\{\}}
+\DoxyCodeLine{\textcolor{comment}{} \string~\mbox{\hyperlink{classSUPGAdvectionDiffusionProblem}{SUPGAdvectionDiffusionProblem}}()\{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs before solve: Reset boundary conditions}}
 \DoxyCodeLine{\textcolor{comment}{ /// to the values from the tanh solution and compute stabilisation}}
 \DoxyCodeLine{\textcolor{comment}{ /// parameter.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classSUPGAdvectionDiffusionProblem_affa45863033de517e1fba088aaae7eb5}{actions\_before\_newton\_solve}}();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_newton\_solve();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update the problem after solve (empty)}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classSUPGAdvectionDiffusionProblem_a7ca10f3d82af3c3fec4c1a3260062ff2}{actions\_after\_newton\_solve}}()\{\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_newton\_solve()\{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Doc the solution.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classSUPGAdvectionDiffusionProblem_a3133ba26f0917f5d210d69ea0ddcb1fe}{doc\_solution}}();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} doc\_solution();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Overloaded version of the problem's access function to }}
 \DoxyCodeLine{\textcolor{comment}{ /// the mesh. Recasts the pointer to the base Mesh object to }}
 \DoxyCodeLine{\textcolor{comment}{ /// the actual mesh type.}}
-\DoxyCodeLine{\textcolor{comment}{} RectangularQuadMesh<ELEMENT>* \mbox{\hyperlink{classSUPGAdvectionDiffusionProblem_a41139c639c691f95f066c8939378762b}{mesh\_pt}}() }
+\DoxyCodeLine{\textcolor{comment}{} RectangularQuadMesh<ELEMENT>* mesh\_pt() }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{keywordflow}{return} \textcolor{keyword}{dynamic\_cast<}RectangularQuadMesh<ELEMENT>*\textcolor{keyword}{>}(}
 \DoxyCodeLine{    Problem::mesh\_pt());}
@@ -181,16 +181,16 @@ Overall, the structure of the driver code is very similar to that used for the \
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// DocInfo object}}
-\DoxyCodeLine{\textcolor{comment}{} DocInfo \mbox{\hyperlink{classSUPGAdvectionDiffusionProblem_af80606875e03033c0de217f7a861d0af}{Doc\_info}};}
+\DoxyCodeLine{\textcolor{comment}{} DocInfo Doc\_info;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to source function}}
-\DoxyCodeLine{\textcolor{comment}{} AdvectionDiffusionEquations<2>::AdvectionDiffusionSourceFctPt \mbox{\hyperlink{classSUPGAdvectionDiffusionProblem_a9bf04de8641dd4151514c2e2603f3ac5}{Source\_fct\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} AdvectionDiffusionEquations<2>::AdvectionDiffusionSourceFctPt Source\_fct\_pt;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to wind function}}
-\DoxyCodeLine{\textcolor{comment}{} AdvectionDiffusionEquations<2>::AdvectionDiffusionWindFctPt \mbox{\hyperlink{classSUPGAdvectionDiffusionProblem_a89bc22484946ccf51bb7cf7328bc9df6}{Wind\_fct\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} AdvectionDiffusionEquations<2>::AdvectionDiffusionWindFctPt Wind\_fct\_pt;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Flag to indicate if stabilisation is to be used}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{bool} \mbox{\hyperlink{classSUPGAdvectionDiffusionProblem_ab8c19428c17ac7d8bb776e91940734bd}{Use\_stabilisation}};}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{bool} Use\_stabilisation;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\}; \textcolor{comment}{// end of problem class}}
 \DoxyCodeLine{}

@@ -18,13 +18,13 @@ Inheritance diagram for oomph\+::Oc\+Tree\+Root\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1OcTreeRoot_a594278fd254e72415e1523b1b8e7273d}{Oc\+Tree\+Root}} (\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_a7d630dad19ef861ab6a5f37ad6ea67f4}{object\+\_\+pt}})
+\mbox{\hyperlink{classoomph_1_1OcTreeRoot_a594278fd254e72415e1523b1b8e7273d}{Oc\+Tree\+Root}} (\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_a2f2eeb0f1dd161f696cccc652974ff4c}{object\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Constructor for the root octree\+: Pass pointer to the \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_013_01_4}{Refineable\+QElement$<$3$>$}} that is represented by the \mbox{\hyperlink{classoomph_1_1OcTree}{Oc\+Tree}}. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1OcTreeRoot_a3da527433d221179d7e5eed13d547336}{Oc\+Tree\+Root}} (const \mbox{\hyperlink{classoomph_1_1OcTreeRoot}{Oc\+Tree\+Root}} \&dummy)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1OcTreeRoot_a6941e4a38b81116bec7f6b6c2e8e88de}{operator=}} (const \mbox{\hyperlink{classoomph_1_1OcTreeRoot}{Oc\+Tree\+Root}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1OcTreeRoot_af585f52c64a66a70b216cae42c19a78d}{edge\+\_\+neighbour\+\_\+pt}} (const unsigned \&edge\+\_\+direction)
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1OcTreeRoot_acef513b8401e5fd32d1311bdebe86f45}{edge\+\_\+neighbour\+\_\+pt}} (const unsigned \&edge\+\_\+direction)
 \begin{DoxyCompactList}\small\item\em Return vector of pointers to the edge-\/neighbouring Tree\+Roots in the (enumerated) (edge) direction. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1OcTreeRoot_add3c1de4903d2db75d19274719912ea3}{nedge\+\_\+neighbour}} (const unsigned \&edge\+\_\+direction)
 \begin{DoxyCompactList}\small\item\em Return number of edge-\/neighbouring \mbox{\hyperlink{classoomph_1_1OcTreeRoot}{Oc\+Tree\+Root}} in the (enumerated) (edge) direction. \end{DoxyCompactList}\item 
@@ -55,7 +55,7 @@ std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} $\ast$, int 
 \doxysubsection{Detailed Description}
 \mbox{\hyperlink{classoomph_1_1OcTreeRoot}{Oc\+Tree\+Root}} is a \mbox{\hyperlink{classoomph_1_1OcTree}{Oc\+Tree}} that forms the root of a (recursive) octree. The \char`\"{}root node\char`\"{} is special as it holds additional information about its neighbours and their relative rotation (inside a \mbox{\hyperlink{classoomph_1_1OcTreeForest}{Oc\+Tree\+Forest}}). 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00610}{610}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 610 of file octree.\+h.
 
 
 
@@ -72,11 +72,11 @@ Constructor for the root octree\+: Pass pointer to the \mbox{\hyperlink{classoom
 
 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00641}{641}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 641 of file octree.\+h.
 
 
 
-References \mbox{\hyperlink{octree_8h_source_l00412}{oomph\+::\+Oc\+Tree\+::\+Static\+\_\+data\+\_\+has\+\_\+been\+\_\+setup}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
+References oomph\+::\+Oc\+Tree\+::\+Static\+\_\+data\+\_\+has\+\_\+been\+\_\+setup, and oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
 
 \mbox{\Hypertarget{classoomph_1_1OcTreeRoot_a3da527433d221179d7e5eed13d547336}\label{classoomph_1_1OcTreeRoot_a3da527433d221179d7e5eed13d547336}} 
 \index{oomph::OcTreeRoot@{oomph::OcTreeRoot}!OcTreeRoot@{OcTreeRoot}}
@@ -103,15 +103,15 @@ Add pointer to the edge-\/neighbouring \mbox{[}Oc\mbox{]}\mbox{\hyperlink{classo
 
 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00716}{716}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 716 of file octree.\+h.
 
 
 
-References \mbox{\hyperlink{octree_8h_source_l00059}{oomph\+::\+Oc\+Tree\+Names\+::\+DB}}, \mbox{\hyperlink{octree_8h_source_l00067}{oomph\+::\+Oc\+Tree\+Names\+::\+DF}}, \mbox{\hyperlink{octree_8h_source_l00329}{oomph\+::\+Oc\+Tree\+::\+Direct\+\_\+string}}, \mbox{\hyperlink{octree_8h_source_l00616}{Edge\+\_\+neighbour\+\_\+pt}}, \mbox{\hyperlink{octree_8h_source_l00057}{oomph\+::\+Oc\+Tree\+Names\+::\+LB}}, \mbox{\hyperlink{octree_8h_source_l00061}{oomph\+::\+Oc\+Tree\+Names\+::\+LD}}, \mbox{\hyperlink{octree_8h_source_l00065}{oomph\+::\+Oc\+Tree\+Names\+::\+LF}}, \mbox{\hyperlink{octree_8h_source_l00063}{oomph\+::\+Oc\+Tree\+Names\+::\+LU}}, \mbox{\hyperlink{octree_8h_source_l00058}{oomph\+::\+Oc\+Tree\+Names\+::\+RB}}, \mbox{\hyperlink{octree_8h_source_l00062}{oomph\+::\+Oc\+Tree\+Names\+::\+RD}}, \mbox{\hyperlink{octree_8h_source_l00066}{oomph\+::\+Oc\+Tree\+Names\+::\+RF}}, \mbox{\hyperlink{octree_8h_source_l00064}{oomph\+::\+Oc\+Tree\+Names\+::\+RU}}, \mbox{\hyperlink{octree_8h_source_l00060}{oomph\+::\+Oc\+Tree\+Names\+::\+UB}}, and \mbox{\hyperlink{octree_8h_source_l00068}{oomph\+::\+Oc\+Tree\+Names\+::\+UF}}.
+References oomph\+::\+Oc\+Tree\+Names\+::\+DB, oomph\+::\+Oc\+Tree\+Names\+::\+DF, oomph\+::\+Oc\+Tree\+::\+Direct\+\_\+string, Edge\+\_\+neighbour\+\_\+pt, oomph\+::\+Oc\+Tree\+Names\+::\+LB, oomph\+::\+Oc\+Tree\+Names\+::\+LD, oomph\+::\+Oc\+Tree\+Names\+::\+LF, oomph\+::\+Oc\+Tree\+Names\+::\+LU, oomph\+::\+Oc\+Tree\+Names\+::\+RB, oomph\+::\+Oc\+Tree\+Names\+::\+RD, oomph\+::\+Oc\+Tree\+Names\+::\+RF, oomph\+::\+Oc\+Tree\+Names\+::\+RU, oomph\+::\+Oc\+Tree\+Names\+::\+UB, and oomph\+::\+Oc\+Tree\+Names\+::\+UF.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8cc_source_l04913}{oomph\+::\+Oc\+Tree\+Forest\+::find\+\_\+neighbours()}}.
+Referenced by oomph\+::\+Oc\+Tree\+Forest\+::find\+\_\+neighbours().
 
 \mbox{\Hypertarget{classoomph_1_1OcTreeRoot_a6b6730957601b05b991ffc9972d31f8b}\label{classoomph_1_1OcTreeRoot_a6b6730957601b05b991ffc9972d31f8b}} 
 \index{oomph::OcTreeRoot@{oomph::OcTreeRoot}!direction\_of\_neighbour@{direction\_of\_neighbour}}
@@ -125,21 +125,21 @@ If octree\+\_\+root\+\_\+pt is a neighbour, return the direction \mbox{[}faces L
 
 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00814}{814}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 814 of file octree.\+h.
 
 
 
-References \mbox{\hyperlink{octree_8h_source_l00073}{oomph\+::\+Oc\+Tree\+Names\+::B}}, \mbox{\hyperlink{octree_8h_source_l00071}{oomph\+::\+Oc\+Tree\+Names\+::D}}, \mbox{\hyperlink{octree_8h_source_l00059}{oomph\+::\+Oc\+Tree\+Names\+::\+DB}}, \mbox{\hyperlink{octree_8h_source_l00067}{oomph\+::\+Oc\+Tree\+Names\+::\+DF}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{octree_8h_source_l00668}{edge\+\_\+neighbour\+\_\+pt()}}, \mbox{\hyperlink{octree_8h_source_l00074}{oomph\+::\+Oc\+Tree\+Names\+::F}}, \mbox{\hyperlink{octree_8h_source_l00069}{oomph\+::\+Oc\+Tree\+Names\+::L}}, \mbox{\hyperlink{octree_8h_source_l00057}{oomph\+::\+Oc\+Tree\+Names\+::\+LB}}, \mbox{\hyperlink{octree_8h_source_l00061}{oomph\+::\+Oc\+Tree\+Names\+::\+LD}}, \mbox{\hyperlink{octree_8h_source_l00065}{oomph\+::\+Oc\+Tree\+Names\+::\+LF}}, \mbox{\hyperlink{octree_8h_source_l00063}{oomph\+::\+Oc\+Tree\+Names\+::\+LU}}, \mbox{\hyperlink{tree_8h_source_l00330}{oomph\+::\+Tree\+Root\+::\+Neighbour\+\_\+pt}}, \mbox{\hyperlink{tree_8h_source_l00262}{oomph\+::\+Tree\+::\+OMEGA}}, \mbox{\hyperlink{octree_8h_source_l00070}{oomph\+::\+Oc\+Tree\+Names\+::R}}, \mbox{\hyperlink{octree_8h_source_l00058}{oomph\+::\+Oc\+Tree\+Names\+::\+RB}}, \mbox{\hyperlink{octree_8h_source_l00062}{oomph\+::\+Oc\+Tree\+Names\+::\+RD}}, \mbox{\hyperlink{octree_8h_source_l00066}{oomph\+::\+Oc\+Tree\+Names\+::\+RF}}, \mbox{\hyperlink{octree_8h_source_l00064}{oomph\+::\+Oc\+Tree\+Names\+::\+RU}}, \mbox{\hyperlink{octree_8h_source_l00072}{oomph\+::\+Oc\+Tree\+Names\+::U}}, \mbox{\hyperlink{octree_8h_source_l00060}{oomph\+::\+Oc\+Tree\+Names\+::\+UB}}, and \mbox{\hyperlink{octree_8h_source_l00068}{oomph\+::\+Oc\+Tree\+Names\+::\+UF}}.
+References oomph\+::\+Oc\+Tree\+Names\+::B, oomph\+::\+Oc\+Tree\+Names\+::D, oomph\+::\+Oc\+Tree\+Names\+::\+DB, oomph\+::\+Oc\+Tree\+Names\+::\+DF, e, edge\+\_\+neighbour\+\_\+pt(), oomph\+::\+Oc\+Tree\+Names\+::F, oomph\+::\+Oc\+Tree\+Names\+::L, oomph\+::\+Oc\+Tree\+Names\+::\+LB, oomph\+::\+Oc\+Tree\+Names\+::\+LD, oomph\+::\+Oc\+Tree\+Names\+::\+LF, oomph\+::\+Oc\+Tree\+Names\+::\+LU, oomph\+::\+Tree\+Root\+::\+Neighbour\+\_\+pt, oomph\+::\+Tree\+::\+OMEGA, oomph\+::\+Oc\+Tree\+Names\+::R, oomph\+::\+Oc\+Tree\+Names\+::\+RB, oomph\+::\+Oc\+Tree\+Names\+::\+RD, oomph\+::\+Oc\+Tree\+Names\+::\+RF, oomph\+::\+Oc\+Tree\+Names\+::\+RU, oomph\+::\+Oc\+Tree\+Names\+::U, oomph\+::\+Oc\+Tree\+Names\+::\+UB, and oomph\+::\+Oc\+Tree\+Names\+::\+UF.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8cc_source_l05255}{oomph\+::\+Oc\+Tree\+Forest\+::construct\+\_\+up\+\_\+right\+\_\+equivalents()}}, \mbox{\hyperlink{octree_8h_source_l00790}{right\+\_\+equivalent()}}, and \mbox{\hyperlink{octree_8h_source_l00757}{up\+\_\+equivalent()}}.
+Referenced by oomph\+::\+Oc\+Tree\+Forest\+::construct\+\_\+up\+\_\+right\+\_\+equivalents(), right\+\_\+equivalent(), and up\+\_\+equivalent().
 
-\mbox{\Hypertarget{classoomph_1_1OcTreeRoot_af585f52c64a66a70b216cae42c19a78d}\label{classoomph_1_1OcTreeRoot_af585f52c64a66a70b216cae42c19a78d}} 
+\mbox{\Hypertarget{classoomph_1_1OcTreeRoot_acef513b8401e5fd32d1311bdebe86f45}\label{classoomph_1_1OcTreeRoot_acef513b8401e5fd32d1311bdebe86f45}} 
 \index{oomph::OcTreeRoot@{oomph::OcTreeRoot}!edge\_neighbour\_pt@{edge\_neighbour\_pt}}
 \index{edge\_neighbour\_pt@{edge\_neighbour\_pt}!oomph::OcTreeRoot@{oomph::OcTreeRoot}}
 \doxysubsubsection{\texorpdfstring{edge\_neighbour\_pt()}{edge\_neighbour\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} $\ast$ $>$ oomph\+::\+Oc\+Tree\+Root\+::edge\+\_\+neighbour\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{edge\+\_\+direction }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}}$\ast$$>$ oomph\+::\+Oc\+Tree\+Root\+::edge\+\_\+neighbour\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{edge\+\_\+direction }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -147,15 +147,15 @@ Return vector of pointers to the edge-\/neighbouring Tree\+Roots in the (enumera
 
 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00668}{668}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 668 of file octree.\+h.
 
 
 
-References \mbox{\hyperlink{octree_8h_source_l00059}{oomph\+::\+Oc\+Tree\+Names\+::\+DB}}, \mbox{\hyperlink{octree_8h_source_l00067}{oomph\+::\+Oc\+Tree\+Names\+::\+DF}}, \mbox{\hyperlink{octree_8h_source_l00329}{oomph\+::\+Oc\+Tree\+::\+Direct\+\_\+string}}, \mbox{\hyperlink{octree_8h_source_l00616}{Edge\+\_\+neighbour\+\_\+pt}}, \mbox{\hyperlink{octree_8h_source_l00057}{oomph\+::\+Oc\+Tree\+Names\+::\+LB}}, \mbox{\hyperlink{octree_8h_source_l00061}{oomph\+::\+Oc\+Tree\+Names\+::\+LD}}, \mbox{\hyperlink{octree_8h_source_l00065}{oomph\+::\+Oc\+Tree\+Names\+::\+LF}}, \mbox{\hyperlink{octree_8h_source_l00063}{oomph\+::\+Oc\+Tree\+Names\+::\+LU}}, \mbox{\hyperlink{octree_8h_source_l00058}{oomph\+::\+Oc\+Tree\+Names\+::\+RB}}, \mbox{\hyperlink{octree_8h_source_l00062}{oomph\+::\+Oc\+Tree\+Names\+::\+RD}}, \mbox{\hyperlink{octree_8h_source_l00066}{oomph\+::\+Oc\+Tree\+Names\+::\+RF}}, \mbox{\hyperlink{octree_8h_source_l00064}{oomph\+::\+Oc\+Tree\+Names\+::\+RU}}, \mbox{\hyperlink{octree_8h_source_l00060}{oomph\+::\+Oc\+Tree\+Names\+::\+UB}}, and \mbox{\hyperlink{octree_8h_source_l00068}{oomph\+::\+Oc\+Tree\+Names\+::\+UF}}.
+References oomph\+::\+Oc\+Tree\+Names\+::\+DB, oomph\+::\+Oc\+Tree\+Names\+::\+DF, oomph\+::\+Oc\+Tree\+::\+Direct\+\_\+string, Edge\+\_\+neighbour\+\_\+pt, oomph\+::\+Oc\+Tree\+Names\+::\+LB, oomph\+::\+Oc\+Tree\+Names\+::\+LD, oomph\+::\+Oc\+Tree\+Names\+::\+LF, oomph\+::\+Oc\+Tree\+Names\+::\+LU, oomph\+::\+Oc\+Tree\+Names\+::\+RB, oomph\+::\+Oc\+Tree\+Names\+::\+RD, oomph\+::\+Oc\+Tree\+Names\+::\+RF, oomph\+::\+Oc\+Tree\+Names\+::\+RU, oomph\+::\+Oc\+Tree\+Names\+::\+UB, and oomph\+::\+Oc\+Tree\+Names\+::\+UF.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8h_source_l00814}{direction\+\_\+of\+\_\+neighbour()}}.
+Referenced by direction\+\_\+of\+\_\+neighbour(), and oomph\+::\+Oc\+Tree\+Forest\+::oc\+\_\+edge\+\_\+neigh\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1OcTreeRoot_add3c1de4903d2db75d19274719912ea3}\label{classoomph_1_1OcTreeRoot_add3c1de4903d2db75d19274719912ea3}} 
 \index{oomph::OcTreeRoot@{oomph::OcTreeRoot}!nedge\_neighbour@{nedge\_neighbour}}
@@ -169,11 +169,11 @@ Return number of edge-\/neighbouring \mbox{\hyperlink{classoomph_1_1OcTreeRoot}{
 
 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00693}{693}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 693 of file octree.\+h.
 
 
 
-References \mbox{\hyperlink{octree_8h_source_l00059}{oomph\+::\+Oc\+Tree\+Names\+::\+DB}}, \mbox{\hyperlink{octree_8h_source_l00067}{oomph\+::\+Oc\+Tree\+Names\+::\+DF}}, \mbox{\hyperlink{octree_8h_source_l00329}{oomph\+::\+Oc\+Tree\+::\+Direct\+\_\+string}}, \mbox{\hyperlink{octree_8h_source_l00616}{Edge\+\_\+neighbour\+\_\+pt}}, \mbox{\hyperlink{octree_8h_source_l00057}{oomph\+::\+Oc\+Tree\+Names\+::\+LB}}, \mbox{\hyperlink{octree_8h_source_l00061}{oomph\+::\+Oc\+Tree\+Names\+::\+LD}}, \mbox{\hyperlink{octree_8h_source_l00065}{oomph\+::\+Oc\+Tree\+Names\+::\+LF}}, \mbox{\hyperlink{octree_8h_source_l00063}{oomph\+::\+Oc\+Tree\+Names\+::\+LU}}, \mbox{\hyperlink{octree_8h_source_l00058}{oomph\+::\+Oc\+Tree\+Names\+::\+RB}}, \mbox{\hyperlink{octree_8h_source_l00062}{oomph\+::\+Oc\+Tree\+Names\+::\+RD}}, \mbox{\hyperlink{octree_8h_source_l00066}{oomph\+::\+Oc\+Tree\+Names\+::\+RF}}, \mbox{\hyperlink{octree_8h_source_l00064}{oomph\+::\+Oc\+Tree\+Names\+::\+RU}}, \mbox{\hyperlink{octree_8h_source_l00060}{oomph\+::\+Oc\+Tree\+Names\+::\+UB}}, and \mbox{\hyperlink{octree_8h_source_l00068}{oomph\+::\+Oc\+Tree\+Names\+::\+UF}}.
+References oomph\+::\+Oc\+Tree\+Names\+::\+DB, oomph\+::\+Oc\+Tree\+Names\+::\+DF, oomph\+::\+Oc\+Tree\+::\+Direct\+\_\+string, Edge\+\_\+neighbour\+\_\+pt, oomph\+::\+Oc\+Tree\+Names\+::\+LB, oomph\+::\+Oc\+Tree\+Names\+::\+LD, oomph\+::\+Oc\+Tree\+Names\+::\+LF, oomph\+::\+Oc\+Tree\+Names\+::\+LU, oomph\+::\+Oc\+Tree\+Names\+::\+RB, oomph\+::\+Oc\+Tree\+Names\+::\+RD, oomph\+::\+Oc\+Tree\+Names\+::\+RF, oomph\+::\+Oc\+Tree\+Names\+::\+RU, oomph\+::\+Oc\+Tree\+Names\+::\+UB, and oomph\+::\+Oc\+Tree\+Names\+::\+UF.
 
 \mbox{\Hypertarget{classoomph_1_1OcTreeRoot_a6941e4a38b81116bec7f6b6c2e8e88de}\label{classoomph_1_1OcTreeRoot_a6941e4a38b81116bec7f6b6c2e8e88de}} 
 \index{oomph::OcTreeRoot@{oomph::OcTreeRoot}!operator=@{operator=}}
@@ -197,15 +197,15 @@ The same thing as up\+\_\+equivalent, but for the right direction\+: When viewed
 
 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00790}{790}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 790 of file octree.\+h.
 
 
 
-References \mbox{\hyperlink{octree_8h_source_l00814}{direction\+\_\+of\+\_\+neighbour()}}, \mbox{\hyperlink{tree_8h_source_l00262}{oomph\+::\+Tree\+::\+OMEGA}}, and \mbox{\hyperlink{octree_8h_source_l00635}{Right\+\_\+equivalent}}.
+References direction\+\_\+of\+\_\+neighbour(), oomph\+::\+Tree\+::\+OMEGA, and Right\+\_\+equivalent.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8cc_source_l03373}{oomph\+::\+Oc\+Tree\+::gteq\+\_\+face\+\_\+neighbour()}}, and \mbox{\hyperlink{octree_8cc_source_l03618}{oomph\+::\+Oc\+Tree\+::gteq\+\_\+true\+\_\+edge\+\_\+neighbour()}}.
+Referenced by oomph\+::\+Oc\+Tree\+::gteq\+\_\+face\+\_\+neighbour(), and oomph\+::\+Oc\+Tree\+::gteq\+\_\+true\+\_\+edge\+\_\+neighbour().
 
 \mbox{\Hypertarget{classoomph_1_1OcTreeRoot_aa462fe159838307aee0870ad089836f5}\label{classoomph_1_1OcTreeRoot_aa462fe159838307aee0870ad089836f5}} 
 \index{oomph::OcTreeRoot@{oomph::OcTreeRoot}!set\_right\_equivalent@{set\_right\_equivalent}}
@@ -219,15 +219,15 @@ The same thing as up\+\_\+equivalent, but for the right direction\+: When viewed
 
 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00806}{806}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 806 of file octree.\+h.
 
 
 
-References \mbox{\hyperlink{octree_8h_source_l00635}{Right\+\_\+equivalent}}.
+References Right\+\_\+equivalent.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8cc_source_l05255}{oomph\+::\+Oc\+Tree\+Forest\+::construct\+\_\+up\+\_\+right\+\_\+equivalents()}}.
+Referenced by oomph\+::\+Oc\+Tree\+Forest\+::construct\+\_\+up\+\_\+right\+\_\+equivalents().
 
 \mbox{\Hypertarget{classoomph_1_1OcTreeRoot_a91210b8fab8bb9f092518303551e0c33}\label{classoomph_1_1OcTreeRoot_a91210b8fab8bb9f092518303551e0c33}} 
 \index{oomph::OcTreeRoot@{oomph::OcTreeRoot}!set\_up\_equivalent@{set\_up\_equivalent}}
@@ -241,15 +241,15 @@ Set up equivalent of the neighbours specified by pointer\+: When viewed from the
 
 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00779}{779}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 779 of file octree.\+h.
 
 
 
-References \mbox{\hyperlink{octree_8h_source_l00627}{Up\+\_\+equivalent}}.
+References Up\+\_\+equivalent.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8cc_source_l05255}{oomph\+::\+Oc\+Tree\+Forest\+::construct\+\_\+up\+\_\+right\+\_\+equivalents()}}.
+Referenced by oomph\+::\+Oc\+Tree\+Forest\+::construct\+\_\+up\+\_\+right\+\_\+equivalents().
 
 \mbox{\Hypertarget{classoomph_1_1OcTreeRoot_a961a28583236f1b92bc35de064d2dba6}\label{classoomph_1_1OcTreeRoot_a961a28583236f1b92bc35de064d2dba6}} 
 \index{oomph::OcTreeRoot@{oomph::OcTreeRoot}!up\_equivalent@{up\_equivalent}}
@@ -263,15 +263,15 @@ Return up equivalent of the neighbours specified by pointer\+: When viewed from 
 
 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00757}{757}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 757 of file octree.\+h.
 
 
 
-References \mbox{\hyperlink{octree_8h_source_l00814}{direction\+\_\+of\+\_\+neighbour()}}, \mbox{\hyperlink{tree_8h_source_l00262}{oomph\+::\+Tree\+::\+OMEGA}}, and \mbox{\hyperlink{octree_8h_source_l00627}{Up\+\_\+equivalent}}.
+References direction\+\_\+of\+\_\+neighbour(), oomph\+::\+Tree\+::\+OMEGA, and Up\+\_\+equivalent.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8cc_source_l03373}{oomph\+::\+Oc\+Tree\+::gteq\+\_\+face\+\_\+neighbour()}}, and \mbox{\hyperlink{octree_8cc_source_l03618}{oomph\+::\+Oc\+Tree\+::gteq\+\_\+true\+\_\+edge\+\_\+neighbour()}}.
+Referenced by oomph\+::\+Oc\+Tree\+::gteq\+\_\+face\+\_\+neighbour(), and oomph\+::\+Oc\+Tree\+::gteq\+\_\+true\+\_\+edge\+\_\+neighbour().
 
 
 
@@ -288,11 +288,11 @@ Map of pointers to the edge-\/neighbouring \mbox{[}Oc\mbox{]}Tree\+Roots\+: Edge
 
 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00616}{616}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 616 of file octree.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8h_source_l00716}{add\+\_\+edge\+\_\+neighbour\+\_\+pt()}}, \mbox{\hyperlink{octree_8h_source_l00668}{edge\+\_\+neighbour\+\_\+pt()}}, and \mbox{\hyperlink{octree_8h_source_l00693}{nedge\+\_\+neighbour()}}.
+Referenced by add\+\_\+edge\+\_\+neighbour\+\_\+pt(), edge\+\_\+neighbour\+\_\+pt(), and nedge\+\_\+neighbour().
 
 \mbox{\Hypertarget{classoomph_1_1OcTreeRoot_a739d09d26896cfb6924f4d023f5d791f}\label{classoomph_1_1OcTreeRoot_a739d09d26896cfb6924f4d023f5d791f}} 
 \index{oomph::OcTreeRoot@{oomph::OcTreeRoot}!Right\_equivalent@{Right\_equivalent}}
@@ -306,11 +306,11 @@ Map giving the Right equivalent of the neighbour specified by pointer\+: When vi
 
 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00635}{635}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 635 of file octree.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8h_source_l00790}{right\+\_\+equivalent()}}, and \mbox{\hyperlink{octree_8h_source_l00806}{set\+\_\+right\+\_\+equivalent()}}.
+Referenced by right\+\_\+equivalent(), and set\+\_\+right\+\_\+equivalent().
 
 \mbox{\Hypertarget{classoomph_1_1OcTreeRoot_a247955b8a3eb01e227ec2ee1f3bb96ce}\label{classoomph_1_1OcTreeRoot_a247955b8a3eb01e227ec2ee1f3bb96ce}} 
 \index{oomph::OcTreeRoot@{oomph::OcTreeRoot}!Up\_equivalent@{Up\_equivalent}}
@@ -324,11 +324,11 @@ Map giving the Up equivalent of the neighbour specified by pointer\+: When viewe
 
 
 
-Definition at line \mbox{\hyperlink{octree_8h_source_l00627}{627}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+Definition at line 627 of file octree.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{octree_8h_source_l00779}{set\+\_\+up\+\_\+equivalent()}}, and \mbox{\hyperlink{octree_8h_source_l00757}{up\+\_\+equivalent()}}.
+Referenced by set\+\_\+up\+\_\+equivalent(), and up\+\_\+equivalent().
 
 
 

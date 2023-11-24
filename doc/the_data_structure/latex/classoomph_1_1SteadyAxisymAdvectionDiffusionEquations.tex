@@ -43,17 +43,17 @@ void \mbox{\hyperlink{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a444
 \begin{DoxyCompactList}\small\item\em Output exact soln\+: r,z,u\+\_\+exact at nplot$^\wedge$2 plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a29e7e201c998ddc00999e5bda55741b1}{compute\+\_\+error}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt, double \&error, double \&norm)
 \begin{DoxyCompactList}\small\item\em Get error against and norm of exact solution. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a1a8121ed2ce92dc69aa85c71975489d0}{Steady\+Axisym\+Advection\+Diffusion\+Source\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_ae4bf4aae28a8a00e5397ce2995850722}{source\+\_\+fct\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a1a8121ed2ce92dc69aa85c71975489d0}{Steady\+Axisym\+Advection\+Diffusion\+Source\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a26824483f165925c3879548846400a9e}{source\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to source function. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a1a8121ed2ce92dc69aa85c71975489d0}{Steady\+Axisym\+Advection\+Diffusion\+Source\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a0d539f7d7024cdefd9ec14be1c3d3ce1}{source\+\_\+fct\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to source function. Const version. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_af8fad98c36589cff579a35bd32641b25}{Steady\+Axisym\+Advection\+Diffusion\+Wind\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a8b78824e6726650858f559b6fdc9efe9}{wind\+\_\+fct\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_af8fad98c36589cff579a35bd32641b25}{Steady\+Axisym\+Advection\+Diffusion\+Wind\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a725fab19401c9e97023b2099bd9c29ed}{wind\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to wind function. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_af8fad98c36589cff579a35bd32641b25}{Steady\+Axisym\+Advection\+Diffusion\+Wind\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a8f4ab2d2f2c0eabb37699689cfd2ac2b}{wind\+\_\+fct\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to wind function. Const version. \end{DoxyCompactList}\item 
-const double \& \mbox{\hyperlink{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a68b0411a91c505c9d689de8da648e681}{pe}} () const
+const double \& \mbox{\hyperlink{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a2ebfde954ef0bbefd65e15f5f615eae0}{pe}} () const
 \begin{DoxyCompactList}\small\item\em Peclet number. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a98e743c225d49671e6421caf2449def9}{pe\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_ae9596c6afc800717ef1520a87d5eaa7f}{pe\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to Peclet number. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a3e934ba20c0415976c8ef68e639c245a}{get\+\_\+source\+\_\+axisym\+\_\+adv\+\_\+diff}} (const unsigned \&ipt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&source) const
 \begin{DoxyCompactList}\small\item\em Get source term at (Eulerian) position x. This function is virtual to allow overloading in multi-\/physics problems where the strength of the source function might be determined by another system of equations. \end{DoxyCompactList}\item 
@@ -102,7 +102,7 @@ A class for all elements that solve the \mbox{\hyperlink{classoomph_1_1Steady}{S
 
 \[ Pe \mathbf{w}\cdot(\mathbf{x}) \nabla u = \nabla \cdot \left( \nabla u \right) + f(\mathbf{x}) \] This contains the generic maths. \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} functions, geometric mapping etc. must get implemented in derived class. 
 
-Definition at line \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00051}{51}} of file \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source}{steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
+Definition at line 51 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -119,7 +119,7 @@ Function pointer to source function fct(x,f(x)) -- x is a Vector!
 
 
 
-Definition at line \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00056}{56}} of file \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source}{steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
+Definition at line 56 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_af8fad98c36589cff579a35bd32641b25}\label{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_af8fad98c36589cff579a35bd32641b25}} 
 \index{oomph::SteadyAxisymAdvectionDiffusionEquations@{oomph::SteadyAxisymAdvectionDiffusionEquations}!SteadyAxisymAdvectionDiffusionWindFctPt@{SteadyAxisymAdvectionDiffusionWindFctPt}}
@@ -133,7 +133,7 @@ Function pointer to wind function fct(x,w(x)) -- x is a Vector!
 
 
 
-Definition at line \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00062}{62}} of file \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source}{steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
+Definition at line 62 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
@@ -150,11 +150,11 @@ Constructor\+: Initialise the Source\+\_\+fct\+\_\+pt and Wind\+\_\+fct\+\_\+pt 
 
 
 
-Definition at line \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00068}{68}} of file \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source}{steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
+Definition at line 68 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00407}{Default\+\_\+peclet\+\_\+number}}, and \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00397}{Pe\+\_\+pt}}.
+References Default\+\_\+peclet\+\_\+number, and Pe\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a0e7b29ff2cbeae9111ac03217f00f8ea}\label{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a0e7b29ff2cbeae9111ac03217f00f8ea}} 
 \index{oomph::SteadyAxisymAdvectionDiffusionEquations@{oomph::SteadyAxisymAdvectionDiffusionEquations}!SteadyAxisymAdvectionDiffusionEquations@{SteadyAxisymAdvectionDiffusionEquations}}
@@ -187,11 +187,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a73c79a1f1e5b1d3
 
 
 
-Definition at line \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8cc_source_l00355}{355}} of file \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8cc_source}{steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc}}.
+Definition at line 355 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00279}{interpolated\+\_\+u\+\_\+adv\+\_\+diff()}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8cc_source_l04103}{oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}, and \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral\+::weight()}}.
+References i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), interpolated\+\_\+u\+\_\+adv\+\_\+diff(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Integral\+::knot(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Integral\+::nweight(), s, oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Integral\+::weight().
 
 \mbox{\Hypertarget{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a11120f6c10f689ac0406054f3c026eda}\label{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a11120f6c10f689ac0406054f3c026eda}} 
 \index{oomph::SteadyAxisymAdvectionDiffusionEquations@{oomph::SteadyAxisymAdvectionDiffusionEquations}!dinterpolated\_u\_adv\_diff\_ddata@{dinterpolated\_u\_adv\_diff\_ddata}}
@@ -205,11 +205,11 @@ Return derivative of u at point s with respect to all data that can affect its v
 
 
 
-Definition at line \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00311}{311}} of file \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source}{steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
+Definition at line 311 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{nodes_8h_source_l00367}{oomph\+::\+Data\+::eqn\+\_\+number()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00094}{u\+\_\+index\+\_\+axisym\+\_\+adv\+\_\+diff()}}.
+References oomph\+::\+Data\+::eqn\+\_\+number(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), s, oomph\+::\+Finite\+Element\+::shape(), and u\+\_\+index\+\_\+axisym\+\_\+adv\+\_\+diff().
 
 \mbox{\Hypertarget{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a0c28aea2e5996566b1a9bf2db033aa49}\label{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a0c28aea2e5996566b1a9bf2db033aa49}} 
 \index{oomph::SteadyAxisymAdvectionDiffusionEquations@{oomph::SteadyAxisymAdvectionDiffusionEquations}!dshape\_and\_dtest\_eulerian\_adv\_diff@{dshape\_and\_dtest\_eulerian\_adv\_diff}}
@@ -241,7 +241,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1QSteadyAxisymAdvectionDiffusionEle
 
 
 
-Referenced by \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8cc_source_l00046}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff()}}.
+Referenced by fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff().
 
 \mbox{\Hypertarget{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_afb560268691d5b469b8998a6dfe758b8}\label{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_afb560268691d5b469b8998a6dfe758b8}} 
 \index{oomph::SteadyAxisymAdvectionDiffusionEquations@{oomph::SteadyAxisymAdvectionDiffusionEquations}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
@@ -259,11 +259,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0
 
 
 
-Definition at line \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00269}{269}} of file \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source}{steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
+Definition at line 269 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00227}{oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix}}, and \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8cc_source_l00046}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff()}}.
+References oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix, and fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff().
 
 \mbox{\Hypertarget{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a7e42c76888ac644f855b17d9d7b3740b}\label{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a7e42c76888ac644f855b17d9d7b3740b}} 
 \index{oomph::SteadyAxisymAdvectionDiffusionEquations@{oomph::SteadyAxisymAdvectionDiffusionEquations}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
@@ -281,11 +281,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00255}{255}} of file \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source}{steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
+Definition at line 255 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00227}{oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix}}, and \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8cc_source_l00046}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff()}}.
+References oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix, and fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff().
 
 \mbox{\Hypertarget{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_aa284f6d5072e793b2f363241d9d2c3ba}\label{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_aa284f6d5072e793b2f363241d9d2c3ba}} 
 \index{oomph::SteadyAxisymAdvectionDiffusionEquations@{oomph::SteadyAxisymAdvectionDiffusionEquations}!fill\_in\_generic\_residual\_contribution\_adv\_diff@{fill\_in\_generic\_residual\_contribution\_adv\_diff}}
@@ -303,15 +303,15 @@ flag=1\+: compute both flag=0\+: compute only residual \mbox{\hyperlink{classoom
 
 Pure version without hanging nodes 
 
-Definition at line \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8cc_source_l00045}{45}} of file \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8cc_source}{steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc}}.
+Definition at line 45 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a169cdaf88ac3dae29c77fba726346a0c}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+adv\+\_\+diff()}}, \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00179}{get\+\_\+source\+\_\+axisym\+\_\+adv\+\_\+diff()}}, \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00200}{get\+\_\+wind\+\_\+axisym\+\_\+adv\+\_\+diff()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00164}{pe()}}, \mbox{\hyperlink{elements_8cc_source_l01686}{oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+position()}}, \mbox{\hyperlink{elements_8h_source_l02576}{oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00094}{u\+\_\+index\+\_\+axisym\+\_\+adv\+\_\+diff()}}, \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}, and \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral\+::weight()}}.
+References dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+adv\+\_\+diff(), get\+\_\+source\+\_\+axisym\+\_\+adv\+\_\+diff(), get\+\_\+wind\+\_\+axisym\+\_\+adv\+\_\+diff(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Integral\+::knot(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), oomph\+::\+Integral\+::nweight(), pe(), oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+position(), oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+value(), s, u\+\_\+index\+\_\+axisym\+\_\+adv\+\_\+diff(), oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Integral\+::weight().
 
 
 
-Referenced by \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00269}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, and \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00255}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
+Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
 
 \mbox{\Hypertarget{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a46303dd5c0af7fc086136779fcc9847c}\label{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a46303dd5c0af7fc086136779fcc9847c}} 
 \index{oomph::SteadyAxisymAdvectionDiffusionEquations@{oomph::SteadyAxisymAdvectionDiffusionEquations}!get\_flux@{get\_flux}}
@@ -325,11 +325,11 @@ Get flux\+: $ \mbox{flux}[i] = \nabla u = \mbox{d}u / \mbox{d}x_i $.
 
 
 
-Definition at line \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00221}{221}} of file \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source}{steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
+Definition at line 221 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l03298}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00094}{u\+\_\+index\+\_\+axisym\+\_\+adv\+\_\+diff()}}.
+References oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), s, and u\+\_\+index\+\_\+axisym\+\_\+adv\+\_\+diff().
 
 \mbox{\Hypertarget{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a3e934ba20c0415976c8ef68e639c245a}\label{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a3e934ba20c0415976c8ef68e639c245a}} 
 \index{oomph::SteadyAxisymAdvectionDiffusionEquations@{oomph::SteadyAxisymAdvectionDiffusionEquations}!get\_source\_axisym\_adv\_diff@{get\_source\_axisym\_adv\_diff}}
@@ -343,15 +343,15 @@ Get source term at (Eulerian) position x. This function is virtual to allow over
 
 
 
-Definition at line \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00179}{179}} of file \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source}{steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
+Definition at line 179 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00400}{Source\+\_\+fct\+\_\+pt}}.
+References Source\+\_\+fct\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8cc_source_l00046}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff()}}.
+Referenced by fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff().
 
 \mbox{\Hypertarget{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a256417c37083a6146991b4d2098e0fa4}\label{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a256417c37083a6146991b4d2098e0fa4}} 
 \index{oomph::SteadyAxisymAdvectionDiffusionEquations@{oomph::SteadyAxisymAdvectionDiffusionEquations}!get\_wind\_axisym\_adv\_diff@{get\_wind\_axisym\_adv\_diff}}
@@ -365,15 +365,15 @@ Get wind at (Eulerian) position x and/or local coordinate s. This function is vi
 
 
 
-Definition at line \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00200}{200}} of file \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source}{steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
+Definition at line 200 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00403}{Wind\+\_\+fct\+\_\+pt}}.
+References i, and Wind\+\_\+fct\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8cc_source_l00046}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff()}}, and \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8cc_source_l00217}{output()}}.
+Referenced by fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff(), and output().
 
 \mbox{\Hypertarget{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a9a7e5c2649193e0bda6f8e749ce53154}\label{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a9a7e5c2649193e0bda6f8e749ce53154}} 
 \index{oomph::SteadyAxisymAdvectionDiffusionEquations@{oomph::SteadyAxisymAdvectionDiffusionEquations}!interpolated\_u\_adv\_diff@{interpolated\_u\_adv\_diff}}
@@ -387,15 +387,15 @@ Return FE representation of function value u(s) at local coordinate s.
 
 
 
-Definition at line \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00279}{279}} of file \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source}{steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
+Definition at line 279 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00094}{u\+\_\+index\+\_\+axisym\+\_\+adv\+\_\+diff()}}.
+References oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), s, oomph\+::\+Finite\+Element\+::shape(), and u\+\_\+index\+\_\+axisym\+\_\+adv\+\_\+diff().
 
 
 
-Referenced by \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8cc_source_l00355}{compute\+\_\+error()}}, and \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8cc_source_l00217}{output()}}.
+Referenced by compute\+\_\+error(), and output().
 
 \mbox{\Hypertarget{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a8d3b38d7db43bf626f2a57d785ab666f}\label{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a8d3b38d7db43bf626f2a57d785ab666f}} 
 \index{oomph::SteadyAxisymAdvectionDiffusionEquations@{oomph::SteadyAxisymAdvectionDiffusionEquations}!output@{output}}
@@ -417,11 +417,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QSteadyAxisymAdvectionDiffusionE
 
 
 
-Definition at line \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00112}{112}} of file \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source}{steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
+Definition at line 112 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00100}{output()}}.
+References output().
 
 \mbox{\Hypertarget{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a73bafda6b2fe21fff87952630f86aa31}\label{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a73bafda6b2fe21fff87952630f86aa31}} 
 \index{oomph::SteadyAxisymAdvectionDiffusionEquations@{oomph::SteadyAxisymAdvectionDiffusionEquations}!output@{output}}
@@ -447,11 +447,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QSteadyAxisymAdvectionDiffusionE
 
 
 
-Definition at line \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8cc_source_l00268}{268}} of file \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8cc_source}{steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc}}.
+Definition at line 268 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03148}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00279}{interpolated\+\_\+u\+\_\+adv\+\_\+diff()}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l03186}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{elements_8h_source_l03161}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}, and \mbox{\hyperlink{elements_8h_source_l03174}{oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer()}}.
+References oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot(), i, interpolated\+\_\+u\+\_\+adv\+\_\+diff(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Finite\+Element\+::nplot\+\_\+points(), s, oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string(), and oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer().
 
 \mbox{\Hypertarget{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_ae34254471ce4bd77abc5ed6ed772bec4}\label{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_ae34254471ce4bd77abc5ed6ed772bec4}} 
 \index{oomph::SteadyAxisymAdvectionDiffusionEquations@{oomph::SteadyAxisymAdvectionDiffusionEquations}!output@{output}}
@@ -473,15 +473,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QSteadyAxisymAdvectionDiffusionE
 
 
 
-Definition at line \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00100}{100}} of file \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source}{steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
+Definition at line 100 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00100}{output()}}.
-
-
-
-Referenced by \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00100}{output()}}, and \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00458}{oomph\+::\+QSteady\+Axisym\+Advection\+Diffusion\+Element$<$ NNODE\+\_\+1\+D $>$\+::output()}}.
+Referenced by output(), and oomph\+::\+QSteady\+Axisym\+Advection\+Diffusion\+Element$<$ NNODE\+\_\+1\+D $>$\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a8bfb52d77bb064940b0b82f9e347f323}\label{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a8bfb52d77bb064940b0b82f9e347f323}} 
 \index{oomph::SteadyAxisymAdvectionDiffusionEquations@{oomph::SteadyAxisymAdvectionDiffusionEquations}!output@{output}}
@@ -507,11 +503,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QSteadyAxisymAdvectionDiffusionE
 
 
 
-Definition at line \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8cc_source_l00217}{217}} of file \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8cc_source}{steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc}}.
+Definition at line 217 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03148}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00200}{get\+\_\+wind\+\_\+axisym\+\_\+adv\+\_\+diff()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00279}{interpolated\+\_\+u\+\_\+adv\+\_\+diff()}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l03186}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{elements_8h_source_l03161}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}, and \mbox{\hyperlink{elements_8h_source_l03174}{oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer()}}.
+References oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot(), get\+\_\+wind\+\_\+axisym\+\_\+adv\+\_\+diff(), i, interpolated\+\_\+u\+\_\+adv\+\_\+diff(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Finite\+Element\+::nplot\+\_\+points(), s, oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string(), and oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer().
 
 \mbox{\Hypertarget{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a444263cb79d63da6bd1e7b47f9c60c72}\label{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a444263cb79d63da6bd1e7b47f9c60c72}} 
 \index{oomph::SteadyAxisymAdvectionDiffusionEquations@{oomph::SteadyAxisymAdvectionDiffusionEquations}!output\_fct@{output\_fct}}
@@ -537,21 +533,21 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QSteadyAxisymAdvectionDiffusionE
 
 
 
-Definition at line \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8cc_source_l00304}{304}} of file \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8cc_source}{steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc}}.
+Definition at line 304 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03148}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l03186}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{elements_8h_source_l03161}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}, and \mbox{\hyperlink{elements_8h_source_l03174}{oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer()}}.
+References oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot(), i, oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Finite\+Element\+::nplot\+\_\+points(), s, oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string(), and oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer().
 
 
 
-Referenced by \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00487}{oomph\+::\+QSteady\+Axisym\+Advection\+Diffusion\+Element$<$ NNODE\+\_\+1\+D $>$\+::output\+\_\+fct()}}.
+Referenced by oomph\+::\+QSteady\+Axisym\+Advection\+Diffusion\+Element$<$ NNODE\+\_\+1\+D $>$\+::output\+\_\+fct().
 
-\mbox{\Hypertarget{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a68b0411a91c505c9d689de8da648e681}\label{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a68b0411a91c505c9d689de8da648e681}} 
+\mbox{\Hypertarget{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a2ebfde954ef0bbefd65e15f5f615eae0}\label{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a2ebfde954ef0bbefd65e15f5f615eae0}} 
 \index{oomph::SteadyAxisymAdvectionDiffusionEquations@{oomph::SteadyAxisymAdvectionDiffusionEquations}!pe@{pe}}
 \index{pe@{pe}!oomph::SteadyAxisymAdvectionDiffusionEquations@{oomph::SteadyAxisymAdvectionDiffusionEquations}}
 \doxysubsubsection{\texorpdfstring{pe()}{pe()}}
-{\footnotesize\ttfamily const double \& oomph\+::\+Steady\+Axisym\+Advection\+Diffusion\+Equations\+::pe (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const double\& oomph\+::\+Steady\+Axisym\+Advection\+Diffusion\+Equations\+::pe (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -559,21 +555,21 @@ Peclet number.
 
 
 
-Definition at line \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00164}{164}} of file \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source}{steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
+Definition at line 164 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00397}{Pe\+\_\+pt}}.
+References Pe\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8cc_source_l00046}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff()}}.
+Referenced by fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff().
 
-\mbox{\Hypertarget{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a98e743c225d49671e6421caf2449def9}\label{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a98e743c225d49671e6421caf2449def9}} 
+\mbox{\Hypertarget{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_ae9596c6afc800717ef1520a87d5eaa7f}\label{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_ae9596c6afc800717ef1520a87d5eaa7f}} 
 \index{oomph::SteadyAxisymAdvectionDiffusionEquations@{oomph::SteadyAxisymAdvectionDiffusionEquations}!pe\_pt@{pe\_pt}}
 \index{pe\_pt@{pe\_pt}!oomph::SteadyAxisymAdvectionDiffusionEquations@{oomph::SteadyAxisymAdvectionDiffusionEquations}}
 \doxysubsubsection{\texorpdfstring{pe\_pt()}{pe\_pt()}}
-{\footnotesize\ttfamily double $\ast$\& oomph\+::\+Steady\+Axisym\+Advection\+Diffusion\+Equations\+::pe\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double$\ast$\& oomph\+::\+Steady\+Axisym\+Advection\+Diffusion\+Equations\+::pe\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -581,11 +577,11 @@ Pointer to Peclet number.
 
 
 
-Definition at line \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00170}{170}} of file \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source}{steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
+Definition at line 170 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00397}{Pe\+\_\+pt}}.
+References Pe\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a2e50d7fafef6baa759e2807765ddc364}\label{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a2e50d7fafef6baa759e2807765ddc364}} 
 \index{oomph::SteadyAxisymAdvectionDiffusionEquations@{oomph::SteadyAxisymAdvectionDiffusionEquations}!self\_test@{self\_test}}
@@ -603,17 +599,17 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_af94c5a5e22175d5
 
 
 
-Definition at line \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8cc_source_l00188}{188}} of file \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8cc_source}{steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc}}.
+Definition at line 188 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l04440}{oomph\+::\+Finite\+Element\+::self\+\_\+test()}}.
+References oomph\+::\+Finite\+Element\+::self\+\_\+test().
 
-\mbox{\Hypertarget{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_ae4bf4aae28a8a00e5397ce2995850722}\label{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_ae4bf4aae28a8a00e5397ce2995850722}} 
+\mbox{\Hypertarget{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a26824483f165925c3879548846400a9e}\label{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a26824483f165925c3879548846400a9e}} 
 \index{oomph::SteadyAxisymAdvectionDiffusionEquations@{oomph::SteadyAxisymAdvectionDiffusionEquations}!source\_fct\_pt@{source\_fct\_pt}}
 \index{source\_fct\_pt@{source\_fct\_pt}!oomph::SteadyAxisymAdvectionDiffusionEquations@{oomph::SteadyAxisymAdvectionDiffusionEquations}}
 \doxysubsubsection{\texorpdfstring{source\_fct\_pt()}{source\_fct\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a1a8121ed2ce92dc69aa85c71975489d0}{Steady\+Axisym\+Advection\+Diffusion\+Source\+Fct\+Pt}} \& oomph\+::\+Steady\+Axisym\+Advection\+Diffusion\+Equations\+::source\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a1a8121ed2ce92dc69aa85c71975489d0}{Steady\+Axisym\+Advection\+Diffusion\+Source\+Fct\+Pt}}\& oomph\+::\+Steady\+Axisym\+Advection\+Diffusion\+Equations\+::source\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -621,11 +617,11 @@ Access function\+: Pointer to source function.
 
 
 
-Definition at line \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00135}{135}} of file \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source}{steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
+Definition at line 135 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00400}{Source\+\_\+fct\+\_\+pt}}.
+References Source\+\_\+fct\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a0d539f7d7024cdefd9ec14be1c3d3ce1}\label{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a0d539f7d7024cdefd9ec14be1c3d3ce1}} 
 \index{oomph::SteadyAxisymAdvectionDiffusionEquations@{oomph::SteadyAxisymAdvectionDiffusionEquations}!source\_fct\_pt@{source\_fct\_pt}}
@@ -639,11 +635,11 @@ Access function\+: Pointer to source function. Const version.
 
 
 
-Definition at line \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00142}{142}} of file \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source}{steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
+Definition at line 142 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00400}{Source\+\_\+fct\+\_\+pt}}.
+References Source\+\_\+fct\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_ab56bb475d2985b9278b9c6a0ba5b89b3}\label{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_ab56bb475d2985b9278b9c6a0ba5b89b3}} 
 \index{oomph::SteadyAxisymAdvectionDiffusionEquations@{oomph::SteadyAxisymAdvectionDiffusionEquations}!u\_index\_axisym\_adv\_diff@{u\_index\_axisym\_adv\_diff}}
@@ -657,17 +653,17 @@ Broken assignment operator.
 
 Return the index at which the unknown value is stored. The default value, 0, is appropriate for single-\/physics problems, when there is only one variable, the value that satisfies the steady axisymmetric advection-\/diffusion equation. In derived multi-\/physics elements, this function should be overloaded to reflect the chosen storage scheme. Note that these equations require that the unknown is always stored at the same index at each node. 
 
-Definition at line \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00094}{94}} of file \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source}{steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
+Definition at line 94 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00311}{dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata()}}, \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8cc_source_l00046}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff()}}, \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00221}{get\+\_\+flux()}}, \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00279}{interpolated\+\_\+u\+\_\+adv\+\_\+diff()}}, and \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00818}{oomph\+::\+Steady\+Axisym\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::\+Steady\+Axisym\+Advection\+Diffusion\+Flux\+Element()}}.
+Referenced by dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata(), fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff(), get\+\_\+flux(), interpolated\+\_\+u\+\_\+adv\+\_\+diff(), and oomph\+::\+Steady\+Axisym\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::\+Steady\+Axisym\+Advection\+Diffusion\+Flux\+Element().
 
-\mbox{\Hypertarget{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a8b78824e6726650858f559b6fdc9efe9}\label{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a8b78824e6726650858f559b6fdc9efe9}} 
+\mbox{\Hypertarget{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a725fab19401c9e97023b2099bd9c29ed}\label{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a725fab19401c9e97023b2099bd9c29ed}} 
 \index{oomph::SteadyAxisymAdvectionDiffusionEquations@{oomph::SteadyAxisymAdvectionDiffusionEquations}!wind\_fct\_pt@{wind\_fct\_pt}}
 \index{wind\_fct\_pt@{wind\_fct\_pt}!oomph::SteadyAxisymAdvectionDiffusionEquations@{oomph::SteadyAxisymAdvectionDiffusionEquations}}
 \doxysubsubsection{\texorpdfstring{wind\_fct\_pt()}{wind\_fct\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_af8fad98c36589cff579a35bd32641b25}{Steady\+Axisym\+Advection\+Diffusion\+Wind\+Fct\+Pt}} \& oomph\+::\+Steady\+Axisym\+Advection\+Diffusion\+Equations\+::wind\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_af8fad98c36589cff579a35bd32641b25}{Steady\+Axisym\+Advection\+Diffusion\+Wind\+Fct\+Pt}}\& oomph\+::\+Steady\+Axisym\+Advection\+Diffusion\+Equations\+::wind\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -675,11 +671,11 @@ Access function\+: Pointer to wind function.
 
 
 
-Definition at line \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00149}{149}} of file \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source}{steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
+Definition at line 149 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00403}{Wind\+\_\+fct\+\_\+pt}}.
+References Wind\+\_\+fct\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a8f4ab2d2f2c0eabb37699689cfd2ac2b}\label{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a8f4ab2d2f2c0eabb37699689cfd2ac2b}} 
 \index{oomph::SteadyAxisymAdvectionDiffusionEquations@{oomph::SteadyAxisymAdvectionDiffusionEquations}!wind\_fct\_pt@{wind\_fct\_pt}}
@@ -693,11 +689,11 @@ Access function\+: Pointer to wind function. Const version.
 
 
 
-Definition at line \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00156}{156}} of file \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source}{steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
+Definition at line 156 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00403}{Wind\+\_\+fct\+\_\+pt}}.
+References Wind\+\_\+fct\+\_\+pt.
 
 
 
@@ -716,11 +712,11 @@ Static default value for the Peclet number.
 
 Default value for Peclet number 
 
-Definition at line \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00407}{407}} of file \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source}{steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
+Definition at line 407 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00068}{Steady\+Axisym\+Advection\+Diffusion\+Equations()}}.
+Referenced by Steady\+Axisym\+Advection\+Diffusion\+Equations().
 
 \mbox{\Hypertarget{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a8183cdef608c998b509e9f1e5e6d51e4}\label{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a8183cdef608c998b509e9f1e5e6d51e4}} 
 \index{oomph::SteadyAxisymAdvectionDiffusionEquations@{oomph::SteadyAxisymAdvectionDiffusionEquations}!Pe\_pt@{Pe\_pt}}
@@ -734,11 +730,11 @@ Pointer to global Peclet number.
 
 
 
-Definition at line \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00397}{397}} of file \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source}{steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
+Definition at line 397 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00164}{pe()}}, \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00170}{pe\+\_\+pt()}}, and \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00068}{Steady\+Axisym\+Advection\+Diffusion\+Equations()}}.
+Referenced by pe(), pe\+\_\+pt(), and Steady\+Axisym\+Advection\+Diffusion\+Equations().
 
 \mbox{\Hypertarget{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a13e505efbd49d7c9e5df2b4977d31956}\label{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a13e505efbd49d7c9e5df2b4977d31956}} 
 \index{oomph::SteadyAxisymAdvectionDiffusionEquations@{oomph::SteadyAxisymAdvectionDiffusionEquations}!Source\_fct\_pt@{Source\_fct\_pt}}
@@ -752,11 +748,11 @@ Pointer to source function\+:
 
 
 
-Definition at line \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00400}{400}} of file \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source}{steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
+Definition at line 400 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00179}{get\+\_\+source\+\_\+axisym\+\_\+adv\+\_\+diff()}}, and \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00135}{source\+\_\+fct\+\_\+pt()}}.
+Referenced by get\+\_\+source\+\_\+axisym\+\_\+adv\+\_\+diff(), and source\+\_\+fct\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a76a3b36c6873258989b7ab6d0a54503a}\label{classoomph_1_1SteadyAxisymAdvectionDiffusionEquations_a76a3b36c6873258989b7ab6d0a54503a}} 
 \index{oomph::SteadyAxisymAdvectionDiffusionEquations@{oomph::SteadyAxisymAdvectionDiffusionEquations}!Wind\_fct\_pt@{Wind\_fct\_pt}}
@@ -770,11 +766,11 @@ Pointer to wind function\+:
 
 
 
-Definition at line \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00403}{403}} of file \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source}{steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
+Definition at line 403 of file steady\+\_\+axisym\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00200}{get\+\_\+wind\+\_\+axisym\+\_\+adv\+\_\+diff()}}, and \mbox{\hyperlink{steady__axisym__advection__diffusion__elements_8h_source_l00149}{wind\+\_\+fct\+\_\+pt()}}.
+Referenced by get\+\_\+wind\+\_\+axisym\+\_\+adv\+\_\+diff(), and wind\+\_\+fct\+\_\+pt().
 
 
 

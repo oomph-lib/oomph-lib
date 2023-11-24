@@ -20,7 +20,7 @@ Inheritance diagram for oomph\+::Hopf\+Handler\+:\begin{figure}[H]
 \item 
 \mbox{\hyperlink{classoomph_1_1HopfHandler_ac219516b8263300eb5102d38baab05d7}{Hopf\+Handler}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&problem\+\_\+pt, double $\ast$const \&parameter\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1HopfHandler_a5799482b1a7d06cbefcbcc862d33b41a}{Hopf\+Handler}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&problem\+\_\+pt, double $\ast$const \&paramter\+\_\+pt, const double \&\mbox{\hyperlink{classoomph_1_1HopfHandler_a91e378f3b34adeedeadc411980ce70cd}{omega}}, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&phi, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&psi)
+\mbox{\hyperlink{classoomph_1_1HopfHandler_a5799482b1a7d06cbefcbcc862d33b41a}{Hopf\+Handler}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&problem\+\_\+pt, double $\ast$const \&paramter\+\_\+pt, const double \&\mbox{\hyperlink{classoomph_1_1HopfHandler_a788a0cf74664712827f46bf26e078994}{omega}}, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&phi, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&psi)
 \begin{DoxyCompactList}\small\item\em Constructor with initial guesses for the frequency and null vectors, such as might be provided by an eigensolver. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1HopfHandler_a2b2822861fc417fea32cbba38f9dd650}{$\sim$\+Hopf\+Handler}} ()
 \begin{DoxyCompactList}\small\item\em Destructor, return the problem to its original state, before the augmented system was added. \end{DoxyCompactList}\item 
@@ -40,11 +40,11 @@ void \mbox{\hyperlink{classoomph_1_1HopfHandler_a74b0266ee15bcb294dbb946156095f8
 \begin{DoxyCompactList}\small\item\em Overload the hessian vector product function so that it breaks. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classoomph_1_1HopfHandler_a789de82e82adaac82b366bbaa7f7ce59}{bifurcation\+\_\+type}} () const
 \begin{DoxyCompactList}\small\item\em Indicate that we are tracking a Hopf bifurcation by returning 3. \end{DoxyCompactList}\item 
-double $\ast$ \mbox{\hyperlink{classoomph_1_1HopfHandler_a01482ef72340e535e1057fb5ddb1a6d3}{bifurcation\+\_\+parameter\+\_\+pt}} () const
+double $\ast$ \mbox{\hyperlink{classoomph_1_1HopfHandler_a49f4d0a78ac46ea1412d71d3bb9cc6a1}{bifurcation\+\_\+parameter\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Return a pointer to the bifurcation parameter in bifurcation tracking problems. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HopfHandler_a9d1ee586e6274cfa0baa15f82b9fa0ae}{get\+\_\+eigenfunction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&eigenfunction)
 \begin{DoxyCompactList}\small\item\em Return the eigenfunction(s) associated with the bifurcation that has been detected in bifurcation tracking problems. \end{DoxyCompactList}\item 
-const double \& \mbox{\hyperlink{classoomph_1_1HopfHandler_a91e378f3b34adeedeadc411980ce70cd}{omega}} () const
+const double \& \mbox{\hyperlink{classoomph_1_1HopfHandler_a788a0cf74664712827f46bf26e078994}{omega}} () const
 \begin{DoxyCompactList}\small\item\em Return the frequency of the bifurcation. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HopfHandler_acd2149152659deef1d938739222dbcf2}{solve\+\_\+standard\+\_\+system}} ()
 \begin{DoxyCompactList}\small\item\em Set to solve the standard system. \end{DoxyCompactList}\item 
@@ -85,7 +85,7 @@ A class that is used to assemble the augmented system that defines a Hopf bifurc
 
 \[ R(u,\lambda) = 0, \] \[ J\phi + \omega M \psi = 0, \] \[ J\psi - \omega M \phi = 0, \] \[ c \cdot \phi = 1. \] \[ c \cdot \psi = 0. \] In the above $ J $ is the usual Jacobian matrix, $ dR/du $ and $ M $ is the mass matrix that multiplies the time derivative terms. $ \phi + i\psi $ is the (complex) null vector of the complex matrix $ J - i\omega M $, where $ \omega $ is the critical frequency. $ c $ is a constant vector that is used to ensure that the null vector is non-\/trivial. 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l01049}{1049}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 1049 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -102,11 +102,11 @@ Constructor.
 
 Constructor\+: Initialise the hopf handler, by setting initial guesses for Phi, Psi and calculating Count. If the system changes, a new handler must be constructed. 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l04435}{4435}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 4435 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8cc_source_l00035}{oomph\+::\+Linear\+Algebra\+Distribution\+::build()}}, \mbox{\hyperlink{assembly__handler_8h_source_l01081}{C}}, \mbox{\hyperlink{problem_8h_source_l01246}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l01086}{Count}}, \mbox{\hyperlink{linear__solver_8h_source_l00144}{oomph\+::\+Linear\+Solver\+::disable\+\_\+resolve()}}, \mbox{\hyperlink{problem_8h_source_l00460}{oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00554}{oomph\+::\+Problem\+::\+Dof\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00448}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{linear__solver_8h_source_l00135}{oomph\+::\+Linear\+Solver\+::enable\+\_\+resolve()}}, \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{problem_8cc_source_l07887}{oomph\+::\+Problem\+::get\+\_\+derivative\+\_\+wrt\+\_\+global\+\_\+parameter()}}, \mbox{\hyperlink{linear__solver_8h_source_l00128}{oomph\+::\+Linear\+Solver\+::is\+\_\+resolve\+\_\+enabled()}}, \mbox{\hyperlink{problem_8h_source_l01466}{oomph\+::\+Problem\+::linear\+\_\+solver\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l01280}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l01068}{Ndof}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{problem_8h_source_l01674}{oomph\+::\+Problem\+::ndof()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{assembly__handler_8h_source_l01071}{Omega}}, \mbox{\hyperlink{assembly__handler_8h_source_l01074}{Phi}}, \mbox{\hyperlink{assembly__handler_8h_source_l01061}{Problem\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l01077}{Psi}}, \mbox{\hyperlink{linear__solver_8h_source_l00225}{oomph\+::\+Linear\+Solver\+::resolve()}}, \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}{oomph\+::\+Linear\+Solver\+::solve()}}, and \mbox{\hyperlink{problem_8h_source_l00667}{oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation}}.
+References oomph\+::\+Linear\+Algebra\+Distribution\+::build(), C, oomph\+::\+Problem\+::communicator\+\_\+pt(), Count, oomph\+::\+Linear\+Solver\+::disable\+\_\+resolve(), oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt, oomph\+::\+Problem\+::\+Dof\+\_\+pt, e, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Linear\+Solver\+::enable\+\_\+resolve(), oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), oomph\+::\+Problem\+::get\+\_\+derivative\+\_\+wrt\+\_\+global\+\_\+parameter(), oomph\+::\+Linear\+Solver\+::is\+\_\+resolve\+\_\+enabled(), oomph\+::\+Problem\+::linear\+\_\+solver\+\_\+pt(), oomph\+::\+Problem\+::mesh\+\_\+pt(), Ndof, oomph\+::\+Generalised\+Element\+::ndof(), oomph\+::\+Problem\+::ndof(), oomph\+::\+Mesh\+::nelement(), Omega, Phi, Problem\+\_\+pt, Psi, oomph\+::\+Linear\+Solver\+::resolve(), oomph\+::\+Linear\+Solver\+::solve(), and oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation.
 
 \mbox{\Hypertarget{classoomph_1_1HopfHandler_a5799482b1a7d06cbefcbcc862d33b41a}\label{classoomph_1_1HopfHandler_a5799482b1a7d06cbefcbcc862d33b41a}} 
 \index{oomph::HopfHandler@{oomph::HopfHandler}!HopfHandler@{HopfHandler}}
@@ -120,11 +120,11 @@ Constructor with initial guesses for the frequency and null vectors, such as mig
 
 Constructor\+: Initialise the hopf handler, by setting initial guesses for Phi, Psi, Omega and calculating Count. If the system changes, a new handler must be constructed. 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l04569}{4569}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 4569 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8cc_source_l00035}{oomph\+::\+Linear\+Algebra\+Distribution\+::build()}}, \mbox{\hyperlink{assembly__handler_8h_source_l01081}{C}}, \mbox{\hyperlink{problem_8h_source_l01246}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l01086}{Count}}, \mbox{\hyperlink{problem_8h_source_l00460}{oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00554}{oomph\+::\+Problem\+::\+Dof\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00448}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{problem_8h_source_l01280}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l01068}{Ndof}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{problem_8h_source_l01674}{oomph\+::\+Problem\+::ndof()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{assembly__handler_8h_source_l01071}{Omega}}, \mbox{\hyperlink{assembly__handler_8h_source_l01074}{Phi}}, \mbox{\hyperlink{assembly__handler_8h_source_l01061}{Problem\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l01077}{Psi}}, and \mbox{\hyperlink{problem_8h_source_l00667}{oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation}}.
+References oomph\+::\+Linear\+Algebra\+Distribution\+::build(), C, oomph\+::\+Problem\+::communicator\+\_\+pt(), Count, oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt, oomph\+::\+Problem\+::\+Dof\+\_\+pt, e, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), oomph\+::\+Problem\+::mesh\+\_\+pt(), Ndof, oomph\+::\+Generalised\+Element\+::ndof(), oomph\+::\+Problem\+::ndof(), oomph\+::\+Mesh\+::nelement(), Omega, Phi, Problem\+\_\+pt, Psi, and oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation.
 
 \mbox{\Hypertarget{classoomph_1_1HopfHandler_a2b2822861fc417fea32cbba38f9dd650}\label{classoomph_1_1HopfHandler_a2b2822861fc417fea32cbba38f9dd650}} 
 \index{oomph::HopfHandler@{oomph::HopfHandler}!````~HopfHandler@{$\sim$HopfHandler}}
@@ -138,20 +138,20 @@ Destructor, return the problem to its original state, before the augmented syste
 
 Destructor return the problem to its original (non-\/augmented) state. 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l04640}{4640}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 4640 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8cc_source_l00035}{oomph\+::\+Linear\+Algebra\+Distribution\+::build()}}, \mbox{\hyperlink{problem_8h_source_l01246}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l00460}{oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00554}{oomph\+::\+Problem\+::\+Dof\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l01466}{oomph\+::\+Problem\+::linear\+\_\+solver\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l01023}{oomph\+::\+Block\+Hopf\+Linear\+Solver\+::linear\+\_\+solver\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l01068}{Ndof}}, \mbox{\hyperlink{assembly__handler_8h_source_l01061}{Problem\+\_\+pt}}, and \mbox{\hyperlink{problem_8h_source_l00667}{oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation}}.
+References oomph\+::\+Linear\+Algebra\+Distribution\+::build(), oomph\+::\+Problem\+::communicator\+\_\+pt(), oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt, oomph\+::\+Problem\+::\+Dof\+\_\+pt, oomph\+::\+Problem\+::linear\+\_\+solver\+\_\+pt(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::linear\+\_\+solver\+\_\+pt(), Ndof, Problem\+\_\+pt, and oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1HopfHandler_a01482ef72340e535e1057fb5ddb1a6d3}\label{classoomph_1_1HopfHandler_a01482ef72340e535e1057fb5ddb1a6d3}} 
+\mbox{\Hypertarget{classoomph_1_1HopfHandler_a49f4d0a78ac46ea1412d71d3bb9cc6a1}\label{classoomph_1_1HopfHandler_a49f4d0a78ac46ea1412d71d3bb9cc6a1}} 
 \index{oomph::HopfHandler@{oomph::HopfHandler}!bifurcation\_parameter\_pt@{bifurcation\_parameter\_pt}}
 \index{bifurcation\_parameter\_pt@{bifurcation\_parameter\_pt}!oomph::HopfHandler@{oomph::HopfHandler}}
 \doxysubsubsection{\texorpdfstring{bifurcation\_parameter\_pt()}{bifurcation\_parameter\_pt()}}
-{\footnotesize\ttfamily double $\ast$ oomph\+::\+Hopf\+Handler\+::bifurcation\+\_\+parameter\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily double$\ast$ oomph\+::\+Hopf\+Handler\+::bifurcation\+\_\+parameter\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -163,11 +163,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a3e369ec692c3d
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l01150}{1150}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 1150 of file assembly\+\_\+handler.\+h.
 
 
 
-References \mbox{\hyperlink{assembly__handler_8h_source_l01064}{Parameter\+\_\+pt}}.
+References Parameter\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1HopfHandler_a789de82e82adaac82b366bbaa7f7ce59}\label{classoomph_1_1HopfHandler_a789de82e82adaac82b366bbaa7f7ce59}} 
 \index{oomph::HopfHandler@{oomph::HopfHandler}!bifurcation\_type@{bifurcation\_type}}
@@ -185,7 +185,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a22c5f240674e4
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l01143}{1143}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 1143 of file assembly\+\_\+handler.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1HopfHandler_a9feb8087e8b9554164c0de002f4ec056}\label{classoomph_1_1HopfHandler_a9feb8087e8b9554164c0de002f4ec056}} 
 \index{oomph::HopfHandler@{oomph::HopfHandler}!eqn\_number@{eqn\_number}}
@@ -203,15 +203,15 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a94d28e2de2559
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l04693}{4693}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 4693 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{assembly__handler_8h_source_l01068}{Ndof}}, and \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}.
+References oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), Ndof, and oomph\+::\+Generalised\+Element\+::ndof().
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l04782}{get\+\_\+jacobian()}}.
+Referenced by get\+\_\+jacobian().
 
 \mbox{\Hypertarget{classoomph_1_1HopfHandler_a59fb2c41d850cfe1fdccc3e97ca75135}\label{classoomph_1_1HopfHandler_a59fb2c41d850cfe1fdccc3e97ca75135}} 
 \index{oomph::HopfHandler@{oomph::HopfHandler}!get\_djacobian\_dparameter@{get\_djacobian\_dparameter}}
@@ -229,7 +229,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_aefc0c13a65342
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l04991}{4991}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 4991 of file assembly\+\_\+handler.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1HopfHandler_a2953368ecc48dc22f8ea1f563064ece2}\label{classoomph_1_1HopfHandler_a2953368ecc48dc22f8ea1f563064ece2}} 
 \index{oomph::HopfHandler@{oomph::HopfHandler}!get\_dresiduals\_dparameter@{get\_dresiduals\_dparameter}}
@@ -247,11 +247,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a2ee980ccabe0a
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l04937}{4937}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 4937 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{elements_8h_source_l01061}{oomph\+::\+Generalised\+Element\+::get\+\_\+djacobian\+\_\+and\+\_\+dmass\+\_\+matrix\+\_\+dparameter()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{assembly__handler_8h_source_l01071}{Omega}}, \mbox{\hyperlink{assembly__handler_8h_source_l01074}{Phi}}, \mbox{\hyperlink{assembly__handler_8h_source_l01077}{Psi}}, and \mbox{\hyperlink{assembly__handler_8h_source_l01058}{Solve\+\_\+which\+\_\+system}}.
+References oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), oomph\+::\+Generalised\+Element\+::get\+\_\+djacobian\+\_\+and\+\_\+dmass\+\_\+matrix\+\_\+dparameter(), i, oomph\+::\+Generalised\+Element\+::ndof(), Omega, Phi, Psi, and Solve\+\_\+which\+\_\+system.
 
 \mbox{\Hypertarget{classoomph_1_1HopfHandler_a9d1ee586e6274cfa0baa15f82b9fa0ae}\label{classoomph_1_1HopfHandler_a9d1ee586e6274cfa0baa15f82b9fa0ae}} 
 \index{oomph::HopfHandler@{oomph::HopfHandler}!get\_eigenfunction@{get\_eigenfunction}}
@@ -269,11 +269,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a6d614b1b3809d
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l05034}{5034}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 5034 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{problem_8h_source_l01246}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l01068}{Ndof}}, \mbox{\hyperlink{assembly__handler_8h_source_l01074}{Phi}}, \mbox{\hyperlink{assembly__handler_8h_source_l01061}{Problem\+\_\+pt}}, and \mbox{\hyperlink{assembly__handler_8h_source_l01077}{Psi}}.
+References oomph\+::\+Problem\+::communicator\+\_\+pt(), Ndof, Phi, Problem\+\_\+pt, and Psi.
 
 \mbox{\Hypertarget{classoomph_1_1HopfHandler_a74b0266ee15bcb294dbb946156095f8c}\label{classoomph_1_1HopfHandler_a74b0266ee15bcb294dbb946156095f8c}} 
 \index{oomph::HopfHandler@{oomph::HopfHandler}!get\_hessian\_vector\_products@{get\_hessian\_vector\_products}}
@@ -291,7 +291,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a296bef49838d2
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l05012}{5012}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 5012 of file assembly\+\_\+handler.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1HopfHandler_ab36c50421f53accced01dd9e04d904ef}\label{classoomph_1_1HopfHandler_ab36c50421f53accced01dd9e04d904ef}} 
 \index{oomph::HopfHandler@{oomph::HopfHandler}!get\_jacobian@{get\_jacobian}}
@@ -309,11 +309,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_ad43c3d8760be0
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l04782}{4782}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 4782 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{problem_8h_source_l01151}{oomph\+::\+Problem\+::actions\+\_\+after\+\_\+change\+\_\+in\+\_\+bifurcation\+\_\+parameter()}}, \mbox{\hyperlink{assembly__handler_8h_source_l01081}{C}}, \mbox{\hyperlink{assembly__handler_8h_source_l01086}{Count}}, \mbox{\hyperlink{problem_8h_source_l00554}{oomph\+::\+Problem\+::\+Dof\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l04693}{eqn\+\_\+number()}}, \mbox{\hyperlink{black__box__newton__solver_8cc_source_l00054}{oomph\+::\+Black\+Box\+FDNewton\+Solver\+::\+FD\+\_\+step}}, \mbox{\hyperlink{elements_8h_source_l00990}{oomph\+::\+Generalised\+Element\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{elements_8h_source_l01016}{oomph\+::\+Generalised\+Element\+::get\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l04725}{get\+\_\+residuals()}}, \mbox{\hyperlink{assembly__handler_8h_source_l01068}{Ndof}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l04665}{ndof()}}, \mbox{\hyperlink{assembly__handler_8h_source_l01071}{Omega}}, \mbox{\hyperlink{assembly__handler_8h_source_l01074}{Phi}}, \mbox{\hyperlink{assembly__handler_8h_source_l01061}{Problem\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l01077}{Psi}}, and \mbox{\hyperlink{assembly__handler_8h_source_l01058}{Solve\+\_\+which\+\_\+system}}.
+References oomph\+::\+Problem\+::actions\+\_\+after\+\_\+change\+\_\+in\+\_\+bifurcation\+\_\+parameter(), C, Count, oomph\+::\+Problem\+::\+Dof\+\_\+pt, oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), eqn\+\_\+number(), oomph\+::\+Black\+Box\+FDNewton\+Solver\+::\+FD\+\_\+step, oomph\+::\+Generalised\+Element\+::get\+\_\+jacobian(), oomph\+::\+Generalised\+Element\+::get\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix(), get\+\_\+residuals(), Ndof, oomph\+::\+Generalised\+Element\+::ndof(), ndof(), Omega, Phi, Problem\+\_\+pt, Psi, and Solve\+\_\+which\+\_\+system.
 
 \mbox{\Hypertarget{classoomph_1_1HopfHandler_a61a4006161da6532a9acfec0f979aafa}\label{classoomph_1_1HopfHandler_a61a4006161da6532a9acfec0f979aafa}} 
 \index{oomph::HopfHandler@{oomph::HopfHandler}!get\_residuals@{get\_residuals}}
@@ -331,15 +331,15 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a7a6203b0ab90d
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l04725}{4725}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 4725 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{assembly__handler_8h_source_l01081}{C}}, \mbox{\hyperlink{assembly__handler_8h_source_l01086}{Count}}, \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{elements_8h_source_l01016}{oomph\+::\+Generalised\+Element\+::get\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{problem_8h_source_l01280}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{assembly__handler_8h_source_l01071}{Omega}}, \mbox{\hyperlink{assembly__handler_8h_source_l01074}{Phi}}, \mbox{\hyperlink{assembly__handler_8h_source_l01061}{Problem\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l01077}{Psi}}, and \mbox{\hyperlink{assembly__handler_8h_source_l01058}{Solve\+\_\+which\+\_\+system}}.
+References C, Count, oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), oomph\+::\+Generalised\+Element\+::get\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix(), i, oomph\+::\+Problem\+::mesh\+\_\+pt(), oomph\+::\+Generalised\+Element\+::ndof(), oomph\+::\+Mesh\+::nelement(), Omega, Phi, Problem\+\_\+pt, Psi, and Solve\+\_\+which\+\_\+system.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l04782}{get\+\_\+jacobian()}}.
+Referenced by get\+\_\+jacobian().
 
 \mbox{\Hypertarget{classoomph_1_1HopfHandler_a8d1b73ec4e9b8b27252b4bacf2ef7f38}\label{classoomph_1_1HopfHandler_a8d1b73ec4e9b8b27252b4bacf2ef7f38}} 
 \index{oomph::HopfHandler@{oomph::HopfHandler}!ndof@{ndof}}
@@ -357,21 +357,21 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a09213be8f4aa0
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l04665}{4665}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 4665 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, and \mbox{\hyperlink{assembly__handler_8h_source_l01058}{Solve\+\_\+which\+\_\+system}}.
+References oomph\+::\+Generalised\+Element\+::ndof(), and Solve\+\_\+which\+\_\+system.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l04782}{get\+\_\+jacobian()}}.
+Referenced by get\+\_\+jacobian().
 
-\mbox{\Hypertarget{classoomph_1_1HopfHandler_a91e378f3b34adeedeadc411980ce70cd}\label{classoomph_1_1HopfHandler_a91e378f3b34adeedeadc411980ce70cd}} 
+\mbox{\Hypertarget{classoomph_1_1HopfHandler_a788a0cf74664712827f46bf26e078994}\label{classoomph_1_1HopfHandler_a788a0cf74664712827f46bf26e078994}} 
 \index{oomph::HopfHandler@{oomph::HopfHandler}!omega@{omega}}
 \index{omega@{omega}!oomph::HopfHandler@{oomph::HopfHandler}}
 \doxysubsubsection{\texorpdfstring{omega()}{omega()}}
-{\footnotesize\ttfamily const double \& oomph\+::\+Hopf\+Handler\+::omega (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const double\& oomph\+::\+Hopf\+Handler\+::omega (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -379,11 +379,11 @@ Return the frequency of the bifurcation.
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l01160}{1160}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 1160 of file assembly\+\_\+handler.\+h.
 
 
 
-References \mbox{\hyperlink{assembly__handler_8h_source_l01071}{Omega}}.
+References Omega.
 
 \mbox{\Hypertarget{classoomph_1_1HopfHandler_ac7feecfa644ae33b4a4a9fa8d1d993af}\label{classoomph_1_1HopfHandler_ac7feecfa644ae33b4a4a9fa8d1d993af}} 
 \index{oomph::HopfHandler@{oomph::HopfHandler}!solve\_complex\_system@{solve\_complex\_system}}
@@ -397,15 +397,15 @@ Set to solve the complex system.
 
 Set to solve the complex (jacobian and mass matrix) system. 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l05071}{5071}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 5071 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8cc_source_l00035}{oomph\+::\+Linear\+Algebra\+Distribution\+::build()}}, \mbox{\hyperlink{problem_8h_source_l01246}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l00460}{oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00554}{oomph\+::\+Problem\+::\+Dof\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l01068}{Ndof}}, \mbox{\hyperlink{assembly__handler_8h_source_l01074}{Phi}}, \mbox{\hyperlink{assembly__handler_8h_source_l01061}{Problem\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l01058}{Solve\+\_\+which\+\_\+system}}, and \mbox{\hyperlink{problem_8h_source_l00667}{oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation}}.
+References oomph\+::\+Linear\+Algebra\+Distribution\+::build(), oomph\+::\+Problem\+::communicator\+\_\+pt(), oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt, oomph\+::\+Problem\+::\+Dof\+\_\+pt, Ndof, Phi, Problem\+\_\+pt, Solve\+\_\+which\+\_\+system, and oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l03621}{oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l03966}{oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs()}}.
+Referenced by oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve(), and oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs().
 
 \mbox{\Hypertarget{classoomph_1_1HopfHandler_a507681043126f6bea58cc90deed16d1d}\label{classoomph_1_1HopfHandler_a507681043126f6bea58cc90deed16d1d}} 
 \index{oomph::HopfHandler@{oomph::HopfHandler}!solve\_full\_system@{solve\_full\_system}}
@@ -419,15 +419,15 @@ Solve non-\/block system.
 
 Set to Solve full system system. 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l05097}{5097}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 5097 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8cc_source_l00035}{oomph\+::\+Linear\+Algebra\+Distribution\+::build()}}, \mbox{\hyperlink{problem_8h_source_l01246}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l00460}{oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00554}{oomph\+::\+Problem\+::\+Dof\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l01068}{Ndof}}, \mbox{\hyperlink{assembly__handler_8h_source_l01071}{Omega}}, \mbox{\hyperlink{assembly__handler_8h_source_l01064}{Parameter\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l01074}{Phi}}, \mbox{\hyperlink{assembly__handler_8h_source_l01061}{Problem\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l01077}{Psi}}, \mbox{\hyperlink{assembly__handler_8h_source_l01058}{Solve\+\_\+which\+\_\+system}}, and \mbox{\hyperlink{problem_8h_source_l00667}{oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation}}.
+References oomph\+::\+Linear\+Algebra\+Distribution\+::build(), oomph\+::\+Problem\+::communicator\+\_\+pt(), oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt, oomph\+::\+Problem\+::\+Dof\+\_\+pt, Ndof, Omega, Parameter\+\_\+pt, Phi, Problem\+\_\+pt, Psi, Solve\+\_\+which\+\_\+system, and oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l03621}{oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l03966}{oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs()}}.
+Referenced by oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve(), and oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs().
 
 \mbox{\Hypertarget{classoomph_1_1HopfHandler_acd2149152659deef1d938739222dbcf2}\label{classoomph_1_1HopfHandler_acd2149152659deef1d938739222dbcf2}} 
 \index{oomph::HopfHandler@{oomph::HopfHandler}!solve\_standard\_system@{solve\_standard\_system}}
@@ -441,15 +441,15 @@ Set to solve the standard system.
 
 Set to solve the standard (underlying jacobian) system. 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l05054}{5054}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+Definition at line 5054 of file assembly\+\_\+handler.\+cc.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8cc_source_l00035}{oomph\+::\+Linear\+Algebra\+Distribution\+::build()}}, \mbox{\hyperlink{problem_8h_source_l01246}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l00460}{oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00554}{oomph\+::\+Problem\+::\+Dof\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l01068}{Ndof}}, \mbox{\hyperlink{assembly__handler_8h_source_l01061}{Problem\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l01058}{Solve\+\_\+which\+\_\+system}}, and \mbox{\hyperlink{problem_8h_source_l00667}{oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation}}.
+References oomph\+::\+Linear\+Algebra\+Distribution\+::build(), oomph\+::\+Problem\+::communicator\+\_\+pt(), oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt, oomph\+::\+Problem\+::\+Dof\+\_\+pt, Ndof, Problem\+\_\+pt, Solve\+\_\+which\+\_\+system, and oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l03621}{oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l03966}{oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs()}}.
+Referenced by oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve(), and oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs().
 
 
 
@@ -462,7 +462,7 @@ Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l03621}{oomph\+::\+B
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l01051}{1051}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 1051 of file assembly\+\_\+handler.\+h.
 
 
 
@@ -479,11 +479,11 @@ A constant vector used to ensure that the null vector is not trivial.
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l01081}{1081}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 1081 of file assembly\+\_\+handler.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l04782}{get\+\_\+jacobian()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l04725}{get\+\_\+residuals()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l04435}{Hopf\+Handler()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03621}{oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l03966}{oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs()}}.
+Referenced by get\+\_\+jacobian(), get\+\_\+residuals(), Hopf\+Handler(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve(), and oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs().
 
 \mbox{\Hypertarget{classoomph_1_1HopfHandler_a1b429a8220b316a487998cae04f46ec7}\label{classoomph_1_1HopfHandler_a1b429a8220b316a487998cae04f46ec7}} 
 \index{oomph::HopfHandler@{oomph::HopfHandler}!Count@{Count}}
@@ -497,11 +497,11 @@ A vector that is used to determine how many elements contribute to a particular 
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l01086}{1086}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 1086 of file assembly\+\_\+handler.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l04782}{get\+\_\+jacobian()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l04725}{get\+\_\+residuals()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l04435}{Hopf\+Handler()}}.
+Referenced by get\+\_\+jacobian(), get\+\_\+residuals(), and Hopf\+Handler().
 
 \mbox{\Hypertarget{classoomph_1_1HopfHandler_ac35b7c357ab453b686e80d8efe761945}\label{classoomph_1_1HopfHandler_ac35b7c357ab453b686e80d8efe761945}} 
 \index{oomph::HopfHandler@{oomph::HopfHandler}!Ndof@{Ndof}}
@@ -515,11 +515,11 @@ Store the number of degrees of freedom in the non-\/augmented problem.
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l01068}{1068}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 1068 of file assembly\+\_\+handler.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l04693}{eqn\+\_\+number()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l05034}{get\+\_\+eigenfunction()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l04782}{get\+\_\+jacobian()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l04435}{Hopf\+Handler()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l05071}{solve\+\_\+complex\+\_\+system()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l05097}{solve\+\_\+full\+\_\+system()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l05054}{solve\+\_\+standard\+\_\+system()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l04640}{$\sim$\+Hopf\+Handler()}}.
+Referenced by eqn\+\_\+number(), get\+\_\+eigenfunction(), get\+\_\+jacobian(), Hopf\+Handler(), solve\+\_\+complex\+\_\+system(), solve\+\_\+full\+\_\+system(), solve\+\_\+standard\+\_\+system(), and $\sim$\+Hopf\+Handler().
 
 \mbox{\Hypertarget{classoomph_1_1HopfHandler_a1dc27019f4889918cd01207576eabaea}\label{classoomph_1_1HopfHandler_a1dc27019f4889918cd01207576eabaea}} 
 \index{oomph::HopfHandler@{oomph::HopfHandler}!Omega@{Omega}}
@@ -533,11 +533,11 @@ The critical frequency of the bifurcation.
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l01071}{1071}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 1071 of file assembly\+\_\+handler.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l04937}{get\+\_\+dresiduals\+\_\+dparameter()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l04782}{get\+\_\+jacobian()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l04725}{get\+\_\+residuals()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l04435}{Hopf\+Handler()}}, \mbox{\hyperlink{assembly__handler_8h_source_l01160}{omega()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03621}{oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03966}{oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l05097}{solve\+\_\+full\+\_\+system()}}.
+Referenced by get\+\_\+dresiduals\+\_\+dparameter(), get\+\_\+jacobian(), get\+\_\+residuals(), Hopf\+Handler(), omega(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs(), and solve\+\_\+full\+\_\+system().
 
 \mbox{\Hypertarget{classoomph_1_1HopfHandler_aff98f00728cd365d552229fec352f4e6}\label{classoomph_1_1HopfHandler_aff98f00728cd365d552229fec352f4e6}} 
 \index{oomph::HopfHandler@{oomph::HopfHandler}!Parameter\_pt@{Parameter\_pt}}
@@ -551,11 +551,11 @@ Pointer to the parameter.
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l01064}{1064}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 1064 of file assembly\+\_\+handler.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8h_source_l01150}{bifurcation\+\_\+parameter\+\_\+pt()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l05097}{solve\+\_\+full\+\_\+system()}}.
+Referenced by bifurcation\+\_\+parameter\+\_\+pt(), and solve\+\_\+full\+\_\+system().
 
 \mbox{\Hypertarget{classoomph_1_1HopfHandler_a117a5e192857e2f51c9c5d392fd6e5e7}\label{classoomph_1_1HopfHandler_a117a5e192857e2f51c9c5d392fd6e5e7}} 
 \index{oomph::HopfHandler@{oomph::HopfHandler}!Phi@{Phi}}
@@ -569,11 +569,11 @@ The real part of the null vector.
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l01074}{1074}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 1074 of file assembly\+\_\+handler.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l04937}{get\+\_\+dresiduals\+\_\+dparameter()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l05034}{get\+\_\+eigenfunction()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l04782}{get\+\_\+jacobian()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l04725}{get\+\_\+residuals()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l04435}{Hopf\+Handler()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03621}{oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l05071}{solve\+\_\+complex\+\_\+system()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03966}{oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l05097}{solve\+\_\+full\+\_\+system()}}.
+Referenced by get\+\_\+dresiduals\+\_\+dparameter(), get\+\_\+eigenfunction(), get\+\_\+jacobian(), get\+\_\+residuals(), Hopf\+Handler(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve(), solve\+\_\+complex\+\_\+system(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs(), and solve\+\_\+full\+\_\+system().
 
 \mbox{\Hypertarget{classoomph_1_1HopfHandler_aa4464f9abb45bad3222f748703c31155}\label{classoomph_1_1HopfHandler_aa4464f9abb45bad3222f748703c31155}} 
 \index{oomph::HopfHandler@{oomph::HopfHandler}!Problem\_pt@{Problem\_pt}}
@@ -587,11 +587,11 @@ Pointer to the problem.
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l01061}{1061}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 1061 of file assembly\+\_\+handler.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l05034}{get\+\_\+eigenfunction()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l04782}{get\+\_\+jacobian()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l04725}{get\+\_\+residuals()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l04435}{Hopf\+Handler()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l05071}{solve\+\_\+complex\+\_\+system()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l05097}{solve\+\_\+full\+\_\+system()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l05054}{solve\+\_\+standard\+\_\+system()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l04640}{$\sim$\+Hopf\+Handler()}}.
+Referenced by get\+\_\+eigenfunction(), get\+\_\+jacobian(), get\+\_\+residuals(), Hopf\+Handler(), solve\+\_\+complex\+\_\+system(), solve\+\_\+full\+\_\+system(), solve\+\_\+standard\+\_\+system(), and $\sim$\+Hopf\+Handler().
 
 \mbox{\Hypertarget{classoomph_1_1HopfHandler_a9f4d4f9e8962f1cd666df8de85a37d2a}\label{classoomph_1_1HopfHandler_a9f4d4f9e8962f1cd666df8de85a37d2a}} 
 \index{oomph::HopfHandler@{oomph::HopfHandler}!Psi@{Psi}}
@@ -605,11 +605,11 @@ The imaginary part of the null vector.
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l01077}{1077}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 1077 of file assembly\+\_\+handler.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l04937}{get\+\_\+dresiduals\+\_\+dparameter()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l05034}{get\+\_\+eigenfunction()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l04782}{get\+\_\+jacobian()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l04725}{get\+\_\+residuals()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l04435}{Hopf\+Handler()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03621}{oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03966}{oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l05097}{solve\+\_\+full\+\_\+system()}}.
+Referenced by get\+\_\+dresiduals\+\_\+dparameter(), get\+\_\+eigenfunction(), get\+\_\+jacobian(), get\+\_\+residuals(), Hopf\+Handler(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs(), and solve\+\_\+full\+\_\+system().
 
 \mbox{\Hypertarget{classoomph_1_1HopfHandler_aa3d4d806a328a460edaae915670edad3}\label{classoomph_1_1HopfHandler_aa3d4d806a328a460edaae915670edad3}} 
 \index{oomph::HopfHandler@{oomph::HopfHandler}!Solve\_which\_system@{Solve\_which\_system}}
@@ -623,11 +623,11 @@ Integer flag to indicate which system should be assembled. There are three possi
 
 
 
-Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l01058}{1058}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+Definition at line 1058 of file assembly\+\_\+handler.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l04937}{get\+\_\+dresiduals\+\_\+dparameter()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l04782}{get\+\_\+jacobian()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l04725}{get\+\_\+residuals()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l04665}{ndof()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l05071}{solve\+\_\+complex\+\_\+system()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l05097}{solve\+\_\+full\+\_\+system()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l05054}{solve\+\_\+standard\+\_\+system()}}.
+Referenced by get\+\_\+dresiduals\+\_\+dparameter(), get\+\_\+jacobian(), get\+\_\+residuals(), ndof(), solve\+\_\+complex\+\_\+system(), solve\+\_\+full\+\_\+system(), and solve\+\_\+standard\+\_\+system().
 
 
 

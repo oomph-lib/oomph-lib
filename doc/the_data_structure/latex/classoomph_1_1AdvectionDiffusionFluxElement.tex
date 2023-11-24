@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1AdvectionDiffusionFluxElement}{}\doxysection{oomph\+::Advection\+Diffusion\+Flux\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1AdvectionDiffusionFluxElement}{}\doxysection{oomph\+::Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$ Class Template Reference}
 \label{classoomph_1_1AdvectionDiffusionFluxElement}\index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}}
 
 
@@ -9,7 +9,7 @@
 
 {\ttfamily \#include $<$advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Advection\+Diffusion\+Flux\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.333333cm]{classoomph_1_1AdvectionDiffusionFluxElement}
@@ -23,7 +23,7 @@ typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_acdb4a523d9680f6f42128044591c73e0}{Advection\+Diffusion\+Flux\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&bulk\+\_\+el\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}})
+\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_acdb4a523d9680f6f42128044591c73e0}{Advection\+Diffusion\+Flux\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&bulk\+\_\+el\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a478d577ac6db67ecc80f1f02ae3ab170}{face\+\_\+index}})
 \begin{DoxyCompactList}\small\item\em Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the index of the face to be created. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_af91991cc6e255d038f0f8443e0339643}{Advection\+Diffusion\+Flux\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Broken empty constructor. \end{DoxyCompactList}\item 
@@ -31,7 +31,7 @@ typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a5b5c458e348df45df4047ef68f5db7ce}{operator=}} (const \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{Advection\+Diffusion\+Flux\+Element}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_aeb9eb0a65d6dfe3673f6910a6fd7cf59}{Advection\+Diffusion\+Prescribed\+Flux\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a3f73f20f42205eed2b8be68a65eb63b8}{flux\+\_\+fct\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_aeb9eb0a65d6dfe3673f6910a6fd7cf59}{Advection\+Diffusion\+Prescribed\+Flux\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a8d78c95241fe2615ea63040e4072627d}{flux\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for the prescribed-\/flux function pointer. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a7448e4359840f5090f879bc82b2319f8}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector. \end{DoxyCompactList}\item 
@@ -72,11 +72,12 @@ unsigned \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_a70092d79a
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class ELEMENT$>$\newline
 class oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$}
+
 ///////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////// 
 
 A class for elements that allow the imposition of an applied flux on the boundaries of Advection Diffusion elements. The element geometry is obtained from the Face\+Geometry$<$\+ELEMENT$>$ policy class. 
 
-Definition at line \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00053}{53}} of file \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source}{advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 53 of file advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -94,7 +95,7 @@ Function pointer to the prescribed-\/flux function fct(x,f(x)) -- x is a Vector!
 
 
 
-Definition at line \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00059}{59}} of file \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source}{advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 59 of file advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -114,11 +115,11 @@ Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the i
 
 Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the index of the face to be created 
 
-Definition at line \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00232}{232}} of file \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source}{advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 232 of file advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l05132}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00215}{oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::\+Dim}}, \mbox{\hyperlink{elements_8h_source_l04626}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}, \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00212}{oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l02470}{oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes()}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00091}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+adv\+\_\+diff()}}, and \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00218}{oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+adv\+\_\+diff}}.
+References oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::\+Dim, oomph\+::\+Face\+Element\+::face\+\_\+index(), oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt, oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes(), oomph\+::\+Node\+::ndim(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+adv\+\_\+diff(), and oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+adv\+\_\+diff.
 
 \mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionFluxElement_af91991cc6e255d038f0f8443e0339643}\label{classoomph_1_1AdvectionDiffusionFluxElement_af91991cc6e255d038f0f8443e0339643}} 
 \index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}!AdvectionDiffusionFluxElement@{AdvectionDiffusionFluxElement}}
@@ -133,7 +134,7 @@ Broken empty constructor.
 
 
 
-Definition at line \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00070}{70}} of file \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source}{advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 70 of file advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionFluxElement_a40817103c71c931dcacaa10234302d71}\label{classoomph_1_1AdvectionDiffusionFluxElement_a40817103c71c931dcacaa10234302d71}} 
 \index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}!AdvectionDiffusionFluxElement@{AdvectionDiffusionFluxElement}}
@@ -166,11 +167,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a6ae09fc0d6
 
 
 
-Definition at line \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00104}{104}} of file \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source}{advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 104 of file advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00384}{oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff\+\_\+flux()}}.
+References oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff\+\_\+flux().
 
 \mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionFluxElement_a7448e4359840f5090f879bc82b2319f8}\label{classoomph_1_1AdvectionDiffusionFluxElement_a7448e4359840f5090f879bc82b2319f8}} 
 \index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
@@ -189,11 +190,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00093}{93}} of file \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source}{advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 93 of file advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00227}{oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix}}, and \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00384}{oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff\+\_\+flux()}}.
+References oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix, and oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff\+\_\+flux().
 
 \mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionFluxElement_acbc0c8e1e486601c0f09f7ecbb1995c4}\label{classoomph_1_1AdvectionDiffusionFluxElement_acbc0c8e1e486601c0f09f7ecbb1995c4}} 
 \index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}!fill\_in\_generic\_residual\_contribution\_adv\_diff\_flux@{fill\_in\_generic\_residual\_contribution\_adv\_diff\_flux}}
@@ -208,22 +209,22 @@ Add the element\textquotesingle{}s contribution to its residual vector. flag=1(o
 
 Compute the element\textquotesingle{}s residual vector and the (zero) Jacobian matrix. 
 
-Definition at line \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00383}{383}} of file \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source}{advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 383 of file advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{multi__domain_8cc_source_l00060}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Dim}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
+References oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Dim, i, s, and oomph\+::\+Quad\+Tree\+Names\+::W.
 
 
 
-Referenced by \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00104}{oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, and \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00093}{oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
+Referenced by oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
 
-\mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionFluxElement_a3f73f20f42205eed2b8be68a65eb63b8}\label{classoomph_1_1AdvectionDiffusionFluxElement_a3f73f20f42205eed2b8be68a65eb63b8}} 
+\mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionFluxElement_a8d78c95241fe2615ea63040e4072627d}\label{classoomph_1_1AdvectionDiffusionFluxElement_a8d78c95241fe2615ea63040e4072627d}} 
 \index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}!flux\_fct\_pt@{flux\_fct\_pt}}
 \index{flux\_fct\_pt@{flux\_fct\_pt}!oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{flux\_fct\_pt()}{flux\_fct\_pt()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_aeb9eb0a65d6dfe3673f6910a6fd7cf59}{Advection\+Diffusion\+Prescribed\+Flux\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{oomph\+::\+Advection\+Diffusion\+Flux\+Element}}$<$ ELEMENT $>$\+::flux\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement_aeb9eb0a65d6dfe3673f6910a6fd7cf59}{Advection\+Diffusion\+Prescribed\+Flux\+Fct\+Pt}}\& \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionFluxElement}{oomph\+::\+Advection\+Diffusion\+Flux\+Element}}$<$ ELEMENT $>$\+::flux\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -231,11 +232,11 @@ Access function for the prescribed-\/flux function pointer.
 
 
 
-Definition at line \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00086}{86}} of file \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source}{advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 86 of file advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00212}{oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt}}.
+References oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionFluxElement_ab21b7655c7d09d338bc4be4baf4dfca6}\label{classoomph_1_1AdvectionDiffusionFluxElement_ab21b7655c7d09d338bc4be4baf4dfca6}} 
 \index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}!get\_flux@{get\_flux}}
@@ -250,11 +251,11 @@ Function to calculate the prescribed flux at a given spatial position.
 
 
 
-Definition at line \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00190}{190}} of file \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source}{advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 190 of file advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00212}{oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt}}.
+References oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionFluxElement_a5b5c458e348df45df4047ef68f5db7ce}\label{classoomph_1_1AdvectionDiffusionFluxElement_a5b5c458e348df45df4047ef68f5db7ce}} 
 \index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}!operator=@{operator=}}
@@ -284,11 +285,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00126}{126}} of file \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source}{advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 126 of file advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
+References oomph\+::\+Finite\+Element\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionFluxElement_a6a080d1e107612072d9069f909a2b5b0}\label{classoomph_1_1AdvectionDiffusionFluxElement_a6a080d1e107612072d9069f909a2b5b0}} 
 \index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}!output@{output}}
@@ -307,11 +308,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00133}{133}} of file \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source}{advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 133 of file advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
+References oomph\+::\+Finite\+Element\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionFluxElement_a735b7f2134a85a1f856582f52ad773b1}\label{classoomph_1_1AdvectionDiffusionFluxElement_a735b7f2134a85a1f856582f52ad773b1}} 
 \index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}!shape\_and\_test@{shape\_and\_test}}
@@ -326,11 +327,11 @@ Function to compute the shape and test functions and to return the Jacobian of m
 
 
 
-Definition at line \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00143}{143}} of file \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source}{advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 143 of file advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l05242}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
+References i, oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Finite\+Element\+::nnode(), s, and oomph\+::\+Finite\+Element\+::shape().
 
 \mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionFluxElement_a32af9be97192954538f40cba54facd83}\label{classoomph_1_1AdvectionDiffusionFluxElement_a32af9be97192954538f40cba54facd83}} 
 \index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}!shape\_and\_test\_at\_knot@{shape\_and\_test\_at\_knot}}
@@ -345,11 +346,11 @@ Function to compute the shape and test functions and to return the Jacobian of m
 
 
 
-Definition at line \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00167}{167}} of file \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source}{advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 167 of file advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l05328}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8cc_source_l03220}{oomph\+::\+Finite\+Element\+::shape\+\_\+at\+\_\+knot()}}.
+References i, oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian\+\_\+at\+\_\+knot(), oomph\+::\+Finite\+Element\+::nnode(), and oomph\+::\+Finite\+Element\+::shape\+\_\+at\+\_\+knot().
 
 \mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionFluxElement_aaf962dc2e0fccdafa7210bbaaf2fbbd6}\label{classoomph_1_1AdvectionDiffusionFluxElement_aaf962dc2e0fccdafa7210bbaaf2fbbd6}} 
 \index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}!zeta\_nodal@{zeta\_nodal}}
@@ -368,11 +369,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a849561c5fbcbc07
 
 
 
-Definition at line \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00117}{117}} of file \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source}{advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 117 of file advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l04497}{oomph\+::\+Face\+Element\+::zeta\+\_\+nodal()}}.
+References i, and oomph\+::\+Face\+Element\+::zeta\+\_\+nodal().
 
 
 
@@ -390,11 +391,11 @@ The spatial dimension of the problem.
 
 
 
-Definition at line \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00215}{215}} of file \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source}{advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 215 of file advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00232}{oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::\+Advection\+Diffusion\+Flux\+Element()}}.
+Referenced by oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::\+Advection\+Diffusion\+Flux\+Element().
 
 \mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionFluxElement_a7c0b0eda4c03c14b18963c59b2c80a67}\label{classoomph_1_1AdvectionDiffusionFluxElement_a7c0b0eda4c03c14b18963c59b2c80a67}} 
 \index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}!Flux\_fct\_pt@{Flux\_fct\_pt}}
@@ -409,11 +410,11 @@ Function pointer to the (global) prescribed-\/flux function.
 
 
 
-Definition at line \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00212}{212}} of file \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source}{advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 212 of file advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00232}{oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::\+Advection\+Diffusion\+Flux\+Element()}}, \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00086}{oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::flux\+\_\+fct\+\_\+pt()}}, and \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00190}{oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::get\+\_\+flux()}}.
+Referenced by oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::\+Advection\+Diffusion\+Flux\+Element(), oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::flux\+\_\+fct\+\_\+pt(), and oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::get\+\_\+flux().
 
 \mbox{\Hypertarget{classoomph_1_1AdvectionDiffusionFluxElement_a70092d79adb469c7b8fb34b1c31903a1}\label{classoomph_1_1AdvectionDiffusionFluxElement_a70092d79adb469c7b8fb34b1c31903a1}} 
 \index{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$@{oomph::AdvectionDiffusionFluxElement$<$ ELEMENT $>$}!U\_index\_adv\_diff@{U\_index\_adv\_diff}}
@@ -428,11 +429,11 @@ The index at which the unknown is stored at the nodes.
 
 
 
-Definition at line \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00218}{218}} of file \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source}{advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 218 of file advection\+\_\+diffusion\+\_\+flux\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00232}{oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::\+Advection\+Diffusion\+Flux\+Element()}}.
+Referenced by oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::\+Advection\+Diffusion\+Flux\+Element().
 
 
 

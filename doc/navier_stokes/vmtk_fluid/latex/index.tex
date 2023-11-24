@@ -34,7 +34,8 @@ The figure below shows more clearly that the in-\/ and outflow from the upstream
 \hypertarget{index_parallel_flow}{}\doxysection{Imposing parallel in-\/ and outflow}\label{index_parallel_flow}
 In most of the Navier-\/\+Stokes problems we have considered so far, the geometry of the fluid domain was such that the in-\/ and outflow cross-\/sections were aligned with the Cartesian coordinate planes. In such geometries the imposition of parallel in-\/ and outflow is straightforward as it only requires pinning of the transverse velocity components. A pressure drop between upstream and downstream ends can be applied by attaching {\ttfamily Navier\+Stokes\+Traction\+Elements} to the bulk elements that are adjacent to the relevant domain boundaries.
 
-In the current problem, the in-\/ and outflow cross-\/sections have some arbitrary orientation, implying that when the in-\/ or outflow is parallel (or, more accurately, orthogonal to the in-\/ or outflow cross sections), neither of the three velocity components vanishes. The easiest way to enforce parallel outflow in such situations is to employ Lagrange multipliers to enforce the two constraints \[ {\bf u} \cdot {\bf t}_\alpha = 0 \mbox{\ \ \ \ for $\alpha = 1,2$,} \] where $ {\bf t}_\alpha $ (for $\alpha = 1,2$) are the two tangent vectors spanning the in-\/ or outflow cross-\/sections. Physically, the Lagrange multipliers act as tangential tractions that enforce the parallel flow. The Lagrange multipliers introduce additional degrees of freedom into the problem and their implementation as {\ttfamily Impose\+Parallel\+Outflow\+Elements} employs a technique similar to that used to enforce prescribed boundary displacements in solid mechanics problems. (This is discussed in \href{../../../solid/prescribed_displ_lagr_mult/html/index.html}{\texttt{ another tutorial}}.) The {\ttfamily Impose\+Parallel\+Outflow\+Elements} also allow the specification of a pressure that acts on the fluid (in the direction opposite to the outer unit normal on the bulk fluid element).
+In the current problem, the in-\/ and outflow cross-\/sections have some arbitrary orientation, implying that when the in-\/ or outflow is parallel (or, more accurately, orthogonal to the in-\/ or outflow cross sections), neither of the three velocity components vanishes. The easiest way to enforce parallel outflow in such situations is to employ Lagrange multipliers to enforce the two constraints \[ {\bf u} \cdot {\bf t}_\alpha = 0 \mbox{\ \ \ \ for $\alpha = 1,2$,} \] ~\newline
+ where $ {\bf t}_\alpha $ (for $\alpha = 1,2$) are the two tangent vectors spanning the in-\/ or outflow cross-\/sections. Physically, the Lagrange multipliers act as tangential tractions that enforce the parallel flow. The Lagrange multipliers introduce additional degrees of freedom into the problem and their implementation as {\ttfamily Impose\+Parallel\+Outflow\+Elements} employs a technique similar to that used to enforce prescribed boundary displacements in solid mechanics problems. (This is discussed in \href{../../../solid/prescribed_displ_lagr_mult/html/index.html}{\texttt{ another tutorial}}.) The {\ttfamily Impose\+Parallel\+Outflow\+Elements} also allow the specification of a pressure that acts on the fluid (in the direction opposite to the outer unit normal on the bulk fluid element).
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -49,7 +50,7 @@ The namespace specifying the problem parameters contains the Reynolds number and
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_namespace==========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Global variables}}
-\DoxyCodeLine{\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Parameters}{Global\_Parameters}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -82,7 +83,7 @@ The problem constructor is also very similar. We start by building the fluid mes
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==========start\_constructor=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for unstructured 3D fluid problem}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classUnstructuredFluidProblem_a9751f4afac540e148b3d90ae43dd5187}{UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem}}()}
 \DoxyCodeLine{\{ }
@@ -330,7 +331,7 @@ The helper function {\ttfamily create\+\_\+parallel\+\_\+outflow\+\_\+lagrange\+
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_lagrange\_multiplier\_elements======================}}
 \DoxyCodeLine{\textcolor{comment}{/// Create Lagrange multiplier elements that impose parallel outflow}}
-\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classUnstructuredFluidProblem_aea2fa32b4dd90aab81da540566b9925a}{UnstructuredFluidProblem<ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classUnstructuredFluidProblem_aea2fa32b4dd90aab81da540566b9925a}{create\_parallel\_outflow\_lagrange\_elements}}()}

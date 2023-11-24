@@ -50,7 +50,7 @@ As usual, we use a namespace to define the problem parameters, the Reynolds numb
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_namespace=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namepspace for global parameters}}
-\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Parameters}{Global\_Parameters}}}
 \DoxyCodeLine{\{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Reynolds number}}
@@ -78,7 +78,7 @@ We use a second namespace to define the time-\/periodic, parallel flow $ {\bf u}
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_exact\_solution=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for exact solution}}
-\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceExactSoln}{ExactSoln}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ \textcolor{comment}{}}
@@ -146,7 +146,7 @@ As in the \href{../../rayleigh_channel/html/index.html}{\texttt{ previous exampl
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_main======================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver code for Rayleigh-\/type problem}}
-\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{rayleigh__traction__channel_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[]) }
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
@@ -256,7 +256,7 @@ The problem class remains similar to that in the \href{../../rayleigh_channel/ht
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_problem\_class=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Rayleigh-\/type problem: 2D channel flow driven by traction bc}}
-\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classRayleighTractionProblem}{RayleighTractionProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -328,7 +328,7 @@ We start by building the timestepper, determining its type from the class\textqu
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_constructor=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Problem constructor}}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT,\textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\mbox{\hyperlink{classRayleighTractionProblem_a6be21517d8294957f768184a2d51844a}{RayleighTractionProblem<ELEMENT,TIMESTEPPER>::RayleighTractionProblem}}}
 \DoxyCodeLine{(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&nx, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&ny,}
@@ -471,9 +471,9 @@ The creation of the traction elements is performed exactly as in the \href{../..
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_traction\_elements==========================}}
-\DoxyCodeLine{\textcolor{comment}{/// Create Navier-\/Stokes traction elements on the b-\/th boundary of the}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// Mesh object pointed to by bulk\_mesh\_pt and add the elements to the }}
-\DoxyCodeLine{\textcolor{comment}{/// Mesh object pointeed to by surface\_mesh\_pt.}}
+\DoxyCodeLine{\textcolor{comment}{/// Create Navier-\/Stokes traction elements on the b-\/th boundary of the}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// Mesh object pointed to by bulk\_mesh\_pt and add the elements to the }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// Mesh object pointeed to by surface\_mesh\_pt.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT,\textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRayleighTractionProblem_a3a94c245abf443c436eb8a94be19a9f9}{RayleighTractionProblem<ELEMENT,TIMESTEPPER>::}}}

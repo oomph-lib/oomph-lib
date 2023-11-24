@@ -32,17 +32,17 @@ int \mbox{\hyperlink{classoomph_1_1OomphLibPreconditionerEpetraOperator_a6272811
 \begin{DoxyCompactList}\small\item\em applies the oomph-\/lib preconditioner. Converts the Epetra vector applys the preconditioner by calling the oomph-\/lib preconditioner\textquotesingle{}s preconditioner\+\_\+solve functionality. NOTE \+: the oomph-\/lib preconditioner is setup prior to being passed to this class \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1OomphLibPreconditionerEpetraOperator_ac08f2645cbfbaf4b566fe4089c8fae22}{Norm\+Inf}} () const
 \begin{DoxyCompactList}\small\item\em Broken Epetra\+\_\+\+Operator member -\/ Norm\+Inf. \end{DoxyCompactList}\item 
-const char $\ast$ \mbox{\hyperlink{classoomph_1_1OomphLibPreconditionerEpetraOperator_a82464d4b372ba6e97ecc47bb8596fbbf}{Label}} () const
+const char $\ast$ \mbox{\hyperlink{classoomph_1_1OomphLibPreconditionerEpetraOperator_a53e01cbbf1c42a7d8baaf9904545969e}{Label}} () const
 \begin{DoxyCompactList}\small\item\em Epetra\+\_\+\+Operator\+::\+Label -\/ returns a string describing the operator. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1OomphLibPreconditionerEpetraOperator_aa70ab70fe3188e78fc623d3240f7af19}{Use\+Transpose}} () const
 \begin{DoxyCompactList}\small\item\em Broken Epetra\+\_\+\+Operator member -\/ Use\+Transpose. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1OomphLibPreconditionerEpetraOperator_a584ad443e96d730d6abbcf6291298545}{Has\+Norm\+Inf}} () const
 \begin{DoxyCompactList}\small\item\em Broken Epetra\+\_\+\+Operator member -\/ Has\+Norm\+Inf. \end{DoxyCompactList}\item 
-const Epetra\+\_\+\+Comm \& \mbox{\hyperlink{classoomph_1_1OomphLibPreconditionerEpetraOperator_abf80be4bf09e7f17d7c9f14019a3213f}{Comm}} () const
+const Epetra\+\_\+\+Comm \& \mbox{\hyperlink{classoomph_1_1OomphLibPreconditionerEpetraOperator_ade006ce21f59cf90af05b652eca79308}{Comm}} () const
 \begin{DoxyCompactList}\small\item\em Returns the Epetra MPI\+\_\+\+Comm object. \end{DoxyCompactList}\item 
-const Epetra\+\_\+\+Map \& \mbox{\hyperlink{classoomph_1_1OomphLibPreconditionerEpetraOperator_ac52c527076aececb4df71c1e7ebdf3cc}{Operator\+Domain\+Map}} () const
+const Epetra\+\_\+\+Map \& \mbox{\hyperlink{classoomph_1_1OomphLibPreconditionerEpetraOperator_a2e2aab300fa0c7e9f6d0a395b21ef0e0}{Operator\+Domain\+Map}} () const
 \begin{DoxyCompactList}\small\item\em Epetra\+\_\+\+Operator member -\/ Operator\+Domain\+Map. \end{DoxyCompactList}\item 
-const Epetra\+\_\+\+Map \& \mbox{\hyperlink{classoomph_1_1OomphLibPreconditionerEpetraOperator_aee7a1f7477be8cb9a59daa8f0d91ba72}{Operator\+Range\+Map}} () const
+const Epetra\+\_\+\+Map \& \mbox{\hyperlink{classoomph_1_1OomphLibPreconditionerEpetraOperator_a3aaef66dbb5a054aeccc339ba48bac69}{Operator\+Range\+Map}} () const
 \begin{DoxyCompactList}\small\item\em Epetra\+\_\+\+Operator member -\/ Operator\+Range\+Map. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -64,7 +64,7 @@ std\+::string \mbox{\hyperlink{classoomph_1_1OomphLibPreconditionerEpetraOperato
 \doxysubsection{Detailed Description}
 An Epetra\+\_\+\+Operator class for oomph-\/lib preconditioners. A helper class for Trilinos\+Oomph\+Lib\+Preconditioner to allow an oomph-\/lib preconditioner (i.\+e. one derived from \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}}) to be used with a trilinos solver (\mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver}{Trilinos\+Aztec\+OOSolver}}) 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00042}{42}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 42 of file trilinos\+\_\+solver.\+h.
 
 
 
@@ -81,11 +81,11 @@ Constructor -\/ takes the pointer to the oomph-\/lib preconditioner and the dist
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00052}{52}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 52 of file trilinos\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{trilinos__helpers_8cc_source_l00977}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+epetra\+\_\+map()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00231}{Oomph\+\_\+lib\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00250}{Operator\+\_\+map\+\_\+pt}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00253}{Preconditioner\+\_\+label}}.
+References oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+epetra\+\_\+map(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), Oomph\+\_\+lib\+\_\+preconditioner\+\_\+pt, Operator\+\_\+map\+\_\+pt, and Preconditioner\+\_\+label.
 
 \mbox{\Hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator_a42dda35e58da55e29cea6f6ecebc4119}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator_a42dda35e58da55e29cea6f6ecebc4119}} 
 \index{oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}!OomphLibPreconditionerEpetraOperator@{OomphLibPreconditionerEpetraOperator}}
@@ -112,7 +112,7 @@ Broken Epetra\+\_\+\+Operator member -\/ Apply.
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00100}{100}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 100 of file trilinos\+\_\+solver.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator_a6272811acfd9ad5b70e1d30447e0742b}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator_a6272811acfd9ad5b70e1d30447e0742b}} 
 \index{oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}!ApplyInverse@{ApplyInverse}}
@@ -126,17 +126,17 @@ applies the oomph-\/lib preconditioner. Converts the Epetra vector applys the pr
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00115}{115}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 115 of file trilinos\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00193}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local()}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00231}{Oomph\+\_\+lib\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34884bb64ec8}{oomph\+::\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{double__vector_8h_source_l00167}{oomph\+::\+Double\+Vector\+::set\+\_\+external\+\_\+values()}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00244}{Use\+\_\+epetra\+\_\+values}}.
+References oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), i, oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local(), Oomph\+\_\+lib\+\_\+preconditioner\+\_\+pt, oomph\+::\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Double\+Vector\+::set\+\_\+external\+\_\+values(), and Use\+\_\+epetra\+\_\+values.
 
-\mbox{\Hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator_abf80be4bf09e7f17d7c9f14019a3213f}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator_abf80be4bf09e7f17d7c9f14019a3213f}} 
+\mbox{\Hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator_ade006ce21f59cf90af05b652eca79308}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator_ade006ce21f59cf90af05b652eca79308}} 
 \index{oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}!Comm@{Comm}}
 \index{Comm@{Comm}!oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}}
 \doxysubsubsection{\texorpdfstring{Comm()}{Comm()}}
-{\footnotesize\ttfamily const Epetra\+\_\+\+Comm \& oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Comm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const Epetra\+\_\+\+Comm\& oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Comm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -144,11 +144,11 @@ Returns the Epetra MPI\+\_\+\+Comm object.
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00211}{211}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 211 of file trilinos\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{trilinos__solver_8h_source_l00235}{Operator\+\_\+comm}}.
+References Operator\+\_\+comm.
 
 \mbox{\Hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator_a584ad443e96d730d6abbcf6291298545}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator_a584ad443e96d730d6abbcf6291298545}} 
 \index{oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}!HasNormInf@{HasNormInf}}
@@ -162,13 +162,13 @@ Broken Epetra\+\_\+\+Operator member -\/ Has\+Norm\+Inf.
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00201}{201}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 201 of file trilinos\+\_\+solver.\+h.
 
-\mbox{\Hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator_a82464d4b372ba6e97ecc47bb8596fbbf}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator_a82464d4b372ba6e97ecc47bb8596fbbf}} 
+\mbox{\Hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator_a53e01cbbf1c42a7d8baaf9904545969e}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator_a53e01cbbf1c42a7d8baaf9904545969e}} 
 \index{oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}!Label@{Label}}
 \index{Label@{Label}!oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}}
 \doxysubsubsection{\texorpdfstring{Label()}{Label()}}
-{\footnotesize\ttfamily const char $\ast$ oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Label (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const char$\ast$ oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Label (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -176,11 +176,11 @@ Epetra\+\_\+\+Operator\+::\+Label -\/ returns a string describing the operator.
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00184}{184}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 184 of file trilinos\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{trilinos__solver_8h_source_l00253}{Preconditioner\+\_\+label}}.
+References Preconditioner\+\_\+label.
 
 \mbox{\Hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator_ac08f2645cbfbaf4b566fe4089c8fae22}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator_ac08f2645cbfbaf4b566fe4089c8fae22}} 
 \index{oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}!NormInf@{NormInf}}
@@ -194,7 +194,7 @@ Broken Epetra\+\_\+\+Operator member -\/ Norm\+Inf.
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00174}{174}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 174 of file trilinos\+\_\+solver.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator_a9acb2f803a0cec47dd802b9b5648984a}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator_a9acb2f803a0cec47dd802b9b5648984a}} 
 \index{oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}!operator=@{operator=}}
@@ -206,11 +206,11 @@ Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00174}{174}} of 
 
 Broken assignment operator. 
 
-\mbox{\Hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator_ac52c527076aececb4df71c1e7ebdf3cc}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator_ac52c527076aececb4df71c1e7ebdf3cc}} 
+\mbox{\Hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator_a2e2aab300fa0c7e9f6d0a395b21ef0e0}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator_a2e2aab300fa0c7e9f6d0a395b21ef0e0}} 
 \index{oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}!OperatorDomainMap@{OperatorDomainMap}}
 \index{OperatorDomainMap@{OperatorDomainMap}!oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}}
 \doxysubsubsection{\texorpdfstring{OperatorDomainMap()}{OperatorDomainMap()}}
-{\footnotesize\ttfamily const Epetra\+\_\+\+Map \& oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Operator\+Domain\+Map (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const Epetra\+\_\+\+Map\& oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Operator\+Domain\+Map (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -218,17 +218,17 @@ Epetra\+\_\+\+Operator member -\/ Operator\+Domain\+Map.
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00217}{217}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 217 of file trilinos\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{trilinos__solver_8h_source_l00250}{Operator\+\_\+map\+\_\+pt}}.
+References Operator\+\_\+map\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator_aee7a1f7477be8cb9a59daa8f0d91ba72}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator_aee7a1f7477be8cb9a59daa8f0d91ba72}} 
+\mbox{\Hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator_a3aaef66dbb5a054aeccc339ba48bac69}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator_a3aaef66dbb5a054aeccc339ba48bac69}} 
 \index{oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}!OperatorRangeMap@{OperatorRangeMap}}
 \index{OperatorRangeMap@{OperatorRangeMap}!oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}}
 \doxysubsubsection{\texorpdfstring{OperatorRangeMap()}{OperatorRangeMap()}}
-{\footnotesize\ttfamily const Epetra\+\_\+\+Map \& oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Operator\+Range\+Map (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const Epetra\+\_\+\+Map\& oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Operator\+Range\+Map (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -236,11 +236,11 @@ Epetra\+\_\+\+Operator member -\/ Operator\+Range\+Map.
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00223}{223}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 223 of file trilinos\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{trilinos__solver_8h_source_l00250}{Operator\+\_\+map\+\_\+pt}}.
+References Operator\+\_\+map\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator_acfeb8c93b3361cc68def1051ccc8525a}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator_acfeb8c93b3361cc68def1051ccc8525a}} 
 \index{oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}!SetUseTranspose@{SetUseTranspose}}
@@ -254,7 +254,7 @@ Broken Epetra\+\_\+\+Operator member -\/ Set\+Use\+Transpose.
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00089}{89}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 89 of file trilinos\+\_\+solver.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator_aa70ab70fe3188e78fc623d3240f7af19}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator_aa70ab70fe3188e78fc623d3240f7af19}} 
 \index{oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}!UseTranspose@{UseTranspose}}
@@ -268,7 +268,7 @@ Broken Epetra\+\_\+\+Operator member -\/ Use\+Transpose.
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00190}{190}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 190 of file trilinos\+\_\+solver.\+h.
 
 
 
@@ -285,11 +285,11 @@ A pointer to the oomph-\/lib preconditioner.
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00231}{231}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 231 of file trilinos\+\_\+solver.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{trilinos__solver_8h_source_l00115}{Apply\+Inverse()}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00052}{Oomph\+Lib\+Preconditioner\+Epetra\+Operator()}}.
+Referenced by Apply\+Inverse(), and Oomph\+Lib\+Preconditioner\+Epetra\+Operator().
 
 \mbox{\Hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator_a319c368461dabf218b9589dfc8d47f14}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator_a319c368461dabf218b9589dfc8d47f14}} 
 \index{oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}!Operator\_comm@{Operator\_comm}}
@@ -303,11 +303,11 @@ An Epetra MPI Comm object.
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00235}{235}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 235 of file trilinos\+\_\+solver.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{trilinos__solver_8h_source_l00211}{Comm()}}.
+Referenced by Comm().
 
 \mbox{\Hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator_a093d431cfa9ad601e1ead0dd324b3d49}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator_a093d431cfa9ad601e1ead0dd324b3d49}} 
 \index{oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}!Operator\_comm@{Operator\_comm}}
@@ -321,7 +321,7 @@ An Epetra Serial Comm object.
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00238}{238}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 238 of file trilinos\+\_\+solver.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator_af111fc1ede49a86c5ed37ad1f5573e2e}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator_af111fc1ede49a86c5ed37ad1f5573e2e}} 
 \index{oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}!Operator\_map\_pt@{Operator\_map\_pt}}
@@ -335,11 +335,11 @@ A pointer to an Epetra\+\_\+\+Map object -\/ describes distribution of the preco
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00250}{250}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 250 of file trilinos\+\_\+solver.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{trilinos__solver_8h_source_l00052}{Oomph\+Lib\+Preconditioner\+Epetra\+Operator()}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00217}{Operator\+Domain\+Map()}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00223}{Operator\+Range\+Map()}}.
+Referenced by Oomph\+Lib\+Preconditioner\+Epetra\+Operator(), Operator\+Domain\+Map(), and Operator\+Range\+Map().
 
 \mbox{\Hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator_a9f1c739fe5868b1d9dcaee080d63cb5b}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator_a9f1c739fe5868b1d9dcaee080d63cb5b}} 
 \index{oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}!Preconditioner\_label@{Preconditioner\_label}}
@@ -353,11 +353,11 @@ a label for the preconditioner ( for Epetra\+\_\+\+Operator\+::\+Label() )
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00253}{253}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 253 of file trilinos\+\_\+solver.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{trilinos__solver_8h_source_l00184}{Label()}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00052}{Oomph\+Lib\+Preconditioner\+Epetra\+Operator()}}.
+Referenced by Label(), and Oomph\+Lib\+Preconditioner\+Epetra\+Operator().
 
 \mbox{\Hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator_a47942736149f13371582896aedf80f24}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator_a47942736149f13371582896aedf80f24}} 
 \index{oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}!Use\_epetra\_values@{Use\_epetra\_values}}
@@ -371,11 +371,11 @@ Use the epetra data within the vectors passed to the oomph-\/lib preconditioner.
 
 
 
-Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00244}{244}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+Definition at line 244 of file trilinos\+\_\+solver.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{trilinos__solver_8h_source_l00115}{Apply\+Inverse()}}.
+Referenced by Apply\+Inverse().
 
 
 

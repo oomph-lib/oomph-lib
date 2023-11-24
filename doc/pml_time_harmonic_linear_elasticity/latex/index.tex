@@ -51,7 +51,7 @@ The choice of $ \gamma_j $ depends on the orientation of the PML layer. Since we
 \end{DoxyImage}
 
 
-We follow the work of \href{http://www.sciencedirect.com/science/article/pii/S0045782502006424}{\texttt{ U. Basu and A. Chopra \char`\"{}\+Perfectly matched layers for time-\/harmonic elastodynamics of unbounded domains\+: theory and finite-\/element implementation\char`\"{}, Computer Methods in Applied Mechanics and Engineering {\bfseries{192}} 1337-\/1375(2003)}} and choose\+:
+We follow the work of \href{http://www.sciencedirect.com/science/article/pii/S0045782502006424}{\texttt{ U. Basu and A. Chopra "{}Perfectly matched layers for time-\/harmonic elastodynamics of unbounded domains\+: theory and finite-\/element implementation"{}, Computer Methods in Applied Mechanics and Engineering {\bfseries{192}} 1337-\/1375(2003)}} and choose\+:
 \begin{DoxyItemize}
 \item For layers that are aligned with the y axis (such as the left and right PML layers in the sketch, with vertical stripes) we set \[ \gamma_{x}(x) = 1 +i\frac{f_0}{a_0}\ \sigma_{x}(x) \ \ \ \ \ \ \ \mbox{ \ \ \ with \ \ \ } \sigma_{x}(x) = \frac{1}{|X_{PML_{out}}-x|}-\frac{1}{|X_{PML_{out}}-X_{PML_{in}}|}, \ \ \ \ \ (4) \] where $ a_0 = \sqrt{2.0(1.0+\nu)}\Omega$, $ f_0 $ is a constant to be tuned, $ X_{PML_{in}} $ is the x-\/coordinate of the inner boundary of the PML layer (the coordinate of the interface with the physical domain), $ X_{PML_{out}} $ is the x-\/coordinate of the outer boundary of the PML layer , and \[ \gamma_y = 1. \]
 \item For layers that are aligned with the x axis (such as the top and bottom PML layers in the sketch, with horizontal stripes) we set \[ \gamma_x = 1, \] and \[ \gamma_{y}(y) = 1+i\frac{f_0}{a_0} \ \sigma_{y}(y) \ \ \ \ \ \ \ \mbox{ \ \ \ with \ \ \ } \sigma_{y}(y) = \frac{1}{|Y_{PML_{out}}-y|}-\frac{1}{|Y_{PML_{out}}-Y_{PML_{in}}|}, \ \ \ \ \ (5) \] where $ Y_{PML} $ is the y-\/coordinate of the outer boundary of the PML layer.
@@ -148,7 +148,7 @@ As usual, we define all non-\/dimensional parameters in a namespace where we als
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_namespace==========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Global variables}}
-\DoxyCodeLine{\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Parameters}{Global\_Parameters}}}
 \DoxyCodeLine{\{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// helper to set target mesh element size}}
@@ -225,7 +225,7 @@ We start by reading the command line arguments, which allow the specification of
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_main==================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver for annular disk loaded by pressure}}
-\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{time__harmonic__elasticity__driver_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} **argv)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
@@ -343,7 +343,7 @@ The {\ttfamily Problem} class is very simple and is very similar to that employe
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=============begin\_problem============================================ }}
 \DoxyCodeLine{\textcolor{comment}{/// Annular disk}}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================== }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================== }}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELASTICITY\_ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classElasticAnnulusProblem}{ElasticAnnulusProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -379,7 +379,7 @@ The {\ttfamily Problem} class is very simple and is very similar to that employe
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Pointer to solid mesh}}
+\DoxyCodeLine{ \textcolor{comment}{/// Pointer to solid mesh}}
 \DoxyCodeLine{ TriangleMesh<ELASTICITY\_ELEMENT>* Solid\_mesh\_pt;}
 
 \end{DoxyCodeInclude}
@@ -387,7 +387,7 @@ The {\ttfamily Problem} class is very simple and is very similar to that employe
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Pointer to the right PML mesh}}
+\DoxyCodeLine{ \textcolor{comment}{/// Pointer to the right PML mesh}}
 \DoxyCodeLine{ Mesh* PML\_right\_mesh\_pt;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to the top PML mesh}}
@@ -438,7 +438,7 @@ We start by creating the {\ttfamily Circle} object that defines the inner bounda
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===========start\_of\_constructor======================================= }}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor: }}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================== }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================== }}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELASTICITY\_ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classElasticAnnulusProblem_aedf3d30576ccc20e2d8aa809cf075228}{ElasticAnnulusProblem<ELASTICITY\_ELEMENT>::ElasticAnnulusProblem}}() }
 \DoxyCodeLine{\{}
@@ -630,7 +630,7 @@ We pass the problem parameters to all elements, which are used in the equation c
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====================start\_of\_complete\_problem\_setup====================}}
 \DoxyCodeLine{\textcolor{comment}{/// Complete problem setup}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELASTICITY\_ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticAnnulusProblem_a06d509ff3316e5f3072ad5f9144cc33f}{ElasticAnnulusProblem<ELASTICITY\_ELEMENT>::complete\_problem\_setup}}()}
 \DoxyCodeLine{\{}

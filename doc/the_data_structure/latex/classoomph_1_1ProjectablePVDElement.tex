@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1ProjectablePVDElement}{}\doxysection{oomph\+::Projectable\+PVDElement\texorpdfstring{$<$}{<} PVD\+\_\+\+ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1ProjectablePVDElement}{}\doxysection{oomph\+::Projectable\+PVDElement$<$ PVD\+\_\+\+ELEMENT $>$ Class Template Reference}
 \label{classoomph_1_1ProjectablePVDElement}\index{oomph::ProjectablePVDElement$<$ PVD\_ELEMENT $>$@{oomph::ProjectablePVDElement$<$ PVD\_ELEMENT $>$}}
 
 
@@ -9,7 +9,7 @@ PVDElement\+With\+Continuous\+Pressure upgraded to become projectable.
 
 {\ttfamily \#include $<$solid\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Projectable\+PVDElement\texorpdfstring{$<$}{<} PVD\+\_\+\+ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Projectable\+PVDElement$<$ PVD\+\_\+\+ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.243590cm]{classoomph_1_1ProjectablePVDElement}
@@ -20,7 +20,7 @@ Inheritance diagram for oomph\+::Projectable\+PVDElement\texorpdfstring{$<$}{<} 
 \item 
 \mbox{\hyperlink{classoomph_1_1ProjectablePVDElement_aa34288da3b895e1900bd3d1dd509ae39}{Projectable\+PVDElement}} ()
 \begin{DoxyCompactList}\small\item\em Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards...\mbox{]}. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectablePVDElement_a024ee7b86def85d49a3d233603920533}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectablePVDElement_a9b96cd20304eeb7e30bf224594e7237e}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. In the underlying PVD elements there are no field values. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectablePVDElement_a3ef16d41268f4cdb67718a5c2fca3cab}{nfields\+\_\+for\+\_\+projection}} ()
 \begin{DoxyCompactList}\small\item\em Number of fields to be projected\+: 0. \end{DoxyCompactList}\item 
@@ -31,7 +31,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1ProjectablePVDElement_a82923f600601aa9f0
 double \mbox{\hyperlink{classoomph_1_1ProjectablePVDElement_afc3aa618b5fe62f6389a620b45fcae2a}{jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field}} (const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi)
 \begin{DoxyCompactList}\small\item\em Return Jacobian of mapping and shape functions of field fld at local coordinate s. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1ProjectablePVDElement_a4a193dadf4194ff1967c0e955b8b7666}{get\+\_\+field}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
-\begin{DoxyCompactList}\small\item\em Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: history values) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t$>$0\+: history values) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectablePVDElement_a07fd8297f68847c095aff3f97fa4d91e}{nvalue\+\_\+of\+\_\+field}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Return number of values in field fld. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classoomph_1_1ProjectablePVDElement_acd838813683d89c331dab13ba6d5726a}{local\+\_\+equation}} (const unsigned \&fld, const unsigned \&j)
@@ -42,9 +42,10 @@ int \mbox{\hyperlink{classoomph_1_1ProjectablePVDElement_acd838813683d89c331dab1
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class PVD\+\_\+\+ELEMENT$>$\newline
 class oomph\+::\+Projectable\+PVDElement$<$ PVD\+\_\+\+ELEMENT $>$}
+
 PVDElement\+With\+Continuous\+Pressure upgraded to become projectable. 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l00733}{733}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 733 of file solid\+\_\+elements.\+h.
 
 
 
@@ -62,17 +63,17 @@ Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l00738}{738}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 738 of file solid\+\_\+elements.\+h.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1ProjectablePVDElement_a024ee7b86def85d49a3d233603920533}\label{classoomph_1_1ProjectablePVDElement_a024ee7b86def85d49a3d233603920533}} 
+\mbox{\Hypertarget{classoomph_1_1ProjectablePVDElement_a9b96cd20304eeb7e30bf224594e7237e}\label{classoomph_1_1ProjectablePVDElement_a9b96cd20304eeb7e30bf224594e7237e}} 
 \index{oomph::ProjectablePVDElement$<$ PVD\_ELEMENT $>$@{oomph::ProjectablePVDElement$<$ PVD\_ELEMENT $>$}!data\_values\_of\_field@{data\_values\_of\_field}}
 \index{data\_values\_of\_field@{data\_values\_of\_field}!oomph::ProjectablePVDElement$<$ PVD\_ELEMENT $>$@{oomph::ProjectablePVDElement$<$ PVD\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{data\_values\_of\_field()}{data\_values\_of\_field()}}
 {\footnotesize\ttfamily template$<$class PVD\+\_\+\+ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectablePVDElement}{oomph\+::\+Projectable\+PVDElement}}$<$ PVD\+\_\+\+ELEMENT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$std\+::pair$<$\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$, unsigned$>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectablePVDElement}{oomph\+::\+Projectable\+PVDElement}}$<$ PVD\+\_\+\+ELEMENT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -80,11 +81,11 @@ Specify the values associated with field fld. The information is returned in a v
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a2292bd9c58694f89839bd7d198cfe86a}{oomph\+::\+Projectable\+Element\+Base}}.
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a63b0053dde1172be726f9a6c75fb66ea}{oomph\+::\+Projectable\+Element\+Base}}.
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l00745}{745}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 745 of file solid\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectablePVDElement_a4a193dadf4194ff1967c0e955b8b7666}\label{classoomph_1_1ProjectablePVDElement_a4a193dadf4194ff1967c0e955b8b7666}} 
 \index{oomph::ProjectablePVDElement$<$ PVD\_ELEMENT $>$@{oomph::ProjectablePVDElement$<$ PVD\_ELEMENT $>$}!get\_field@{get\_field}}
@@ -95,7 +96,7 @@ double \mbox{\hyperlink{classoomph_1_1ProjectablePVDElement}{oomph\+::\+Projecta
 
 
 
-Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: history values) 
+Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t$>$0\+: history values) 
 
 
 
@@ -103,7 +104,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ae4da5b565b6d33
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l00794}{794}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 794 of file solid\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectablePVDElement_afc3aa618b5fe62f6389a620b45fcae2a}\label{classoomph_1_1ProjectablePVDElement_afc3aa618b5fe62f6389a620b45fcae2a}} 
 \index{oomph::ProjectablePVDElement$<$ PVD\_ELEMENT $>$@{oomph::ProjectablePVDElement$<$ PVD\_ELEMENT $>$}!jacobian\_and\_shape\_of\_field@{jacobian\_and\_shape\_of\_field}}
@@ -122,11 +123,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ad45c21b58c0985
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l00784}{784}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 784 of file solid\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l04103}{oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian()}}.
+References oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectablePVDElement_acd838813683d89c331dab13ba6d5726a}\label{classoomph_1_1ProjectablePVDElement_acd838813683d89c331dab13ba6d5726a}} 
 \index{oomph::ProjectablePVDElement$<$ PVD\_ELEMENT $>$@{oomph::ProjectablePVDElement$<$ PVD\_ELEMENT $>$}!local\_equation@{local\_equation}}
@@ -145,7 +146,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac5c27ae929ff63
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l00811}{811}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 811 of file solid\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectablePVDElement_a3ef16d41268f4cdb67718a5c2fca3cab}\label{classoomph_1_1ProjectablePVDElement_a3ef16d41268f4cdb67718a5c2fca3cab}} 
 \index{oomph::ProjectablePVDElement$<$ PVD\_ELEMENT $>$@{oomph::ProjectablePVDElement$<$ PVD\_ELEMENT $>$}!nfields\_for\_projection@{nfields\_for\_projection}}
@@ -164,7 +165,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a44634aa4049332
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l00764}{764}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 764 of file solid\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectablePVDElement_a82923f600601aa9f0c9e1b168f0d8fa5}\label{classoomph_1_1ProjectablePVDElement_a82923f600601aa9f0c9e1b168f0d8fa5}} 
 \index{oomph::ProjectablePVDElement$<$ PVD\_ELEMENT $>$@{oomph::ProjectablePVDElement$<$ PVD\_ELEMENT $>$}!nhistory\_values\_for\_coordinate\_projection@{nhistory\_values\_for\_coordinate\_projection}}
@@ -183,11 +184,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ab4ecd0cd24000a
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l00777}{777}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 777 of file solid\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, and \mbox{\hyperlink{nodes_8h_source_l01022}{oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt()}}.
+References oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Time\+Stepper\+::ntstorage(), and oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectablePVDElement_a1fe76f1370f13c75f81f8dc860240084}\label{classoomph_1_1ProjectablePVDElement_a1fe76f1370f13c75f81f8dc860240084}} 
 \index{oomph::ProjectablePVDElement$<$ PVD\_ELEMENT $>$@{oomph::ProjectablePVDElement$<$ PVD\_ELEMENT $>$}!nhistory\_values\_for\_projection@{nhistory\_values\_for\_projection}}
@@ -206,7 +207,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac6790f394630b9
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l00771}{771}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 771 of file solid\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectablePVDElement_a07fd8297f68847c095aff3f97fa4d91e}\label{classoomph_1_1ProjectablePVDElement_a07fd8297f68847c095aff3f97fa4d91e}} 
 \index{oomph::ProjectablePVDElement$<$ PVD\_ELEMENT $>$@{oomph::ProjectablePVDElement$<$ PVD\_ELEMENT $>$}!nvalue\_of\_field@{nvalue\_of\_field}}
@@ -225,7 +226,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a1a9a6de16f3511
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l00804}{804}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 804 of file solid\+\_\+elements.\+h.
 
 
 

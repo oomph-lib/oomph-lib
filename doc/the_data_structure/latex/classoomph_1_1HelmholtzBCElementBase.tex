@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1HelmholtzBCElementBase}{}\doxysection{oomph\+::Helmholtz\+BCElement\+Base\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1HelmholtzBCElementBase}{}\doxysection{oomph\+::Helmholtz\+BCElement\+Base$<$ ELEMENT $>$ Class Template Reference}
 \label{classoomph_1_1HelmholtzBCElementBase}\index{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}}
 
 
@@ -9,7 +9,7 @@
 
 {\ttfamily \#include $<$helmholtz\+\_\+bc\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Helmholtz\+BCElement\+Base\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.925810cm]{classoomph_1_1HelmholtzBCElementBase}
@@ -18,7 +18,7 @@ Inheritance diagram for oomph\+::Helmholtz\+BCElement\+Base\texorpdfstring{$<$}{
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_a3d3dae6a01616db735b2624f5a06bdd5}{Helmholtz\+BCElement\+Base}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&bulk\+\_\+el\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}})
+\mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_a3d3dae6a01616db735b2624f5a06bdd5}{Helmholtz\+BCElement\+Base}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&bulk\+\_\+el\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a478d577ac6db67ecc80f1f02ae3ab170}{face\+\_\+index}})
 \begin{DoxyCompactList}\small\item\em Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the index of the face to which the element is attached. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_a5d421cc79d20936a49dea012ef38077a}{Helmholtz\+BCElement\+Base}} ()
 \begin{DoxyCompactList}\small\item\em Broken empty constructor. \end{DoxyCompactList}\item 
@@ -34,13 +34,13 @@ void \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_a6dbcc0b0a81ab422f6a4
 \begin{DoxyCompactList}\small\item\em C-\/style output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_ac521eae27bbc9dbd72c788ecfe59f4cc}{output}} (FILE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em C-\/style output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... \end{DoxyCompactList}\item 
-virtual std\+::complex$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_a507a50a4e5b750b07cf4ed91b69a2e44}{u\+\_\+index\+\_\+helmholtz}} () const
+virtual std\+::complex$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_a756997c0a98903754b30fed24c92091a}{u\+\_\+index\+\_\+helmholtz}} () const
 \begin{DoxyCompactList}\small\item\em Return the index at which the real/imag unknown value is stored. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_a32688fe93c7350d93b90ee0a81add3e5}{global\+\_\+power\+\_\+contribution}} ()
 \begin{DoxyCompactList}\small\item\em Compute the element\textquotesingle{}s contribution to the time-\/averaged radiated power over the artificial boundary. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_a406cb34eb2852b9507cca4f97b3002bc}{global\+\_\+power\+\_\+contribution}} (std\+::ofstream \&outfile)
 \begin{DoxyCompactList}\small\item\em Compute the element\textquotesingle{}s contribution to the time-\/averaged radiated power over the artificial boundary. Also output the power density as a fct of the polar angle in the specified output file if it\textquotesingle{}s open. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_a893de4dec96142dfbc64ea78e88737ec}{compute\+\_\+contribution\+\_\+to\+\_\+fourier\+\_\+components}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&a\+\_\+coeff\+\_\+pos, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&a\+\_\+coeff\+\_\+neg)
+void \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_ab49842fa3eac63f0da1f5584637b296c}{compute\+\_\+contribution\+\_\+to\+\_\+fourier\+\_\+components}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&a\+\_\+coeff\+\_\+pos, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&a\+\_\+coeff\+\_\+neg)
 \begin{DoxyCompactList}\small\item\em Compute element\textquotesingle{}s contribution to Fourier components of the solution -- length of vector indicates number of terms to be computed. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -62,11 +62,12 @@ unsigned \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase_ad01f0d13e7319e28
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class ELEMENT$>$\newline
 class oomph\+::\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$}
+
 ////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////// 
 
 A class for elements that allow the approximation of the Sommerfeld radiation BC. The element geometry is obtained from the Face\+Geometry$<$\+ELEMENT$>$ policy class. 
 
-Definition at line \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l00166}{166}} of file \mbox{\hyperlink{helmholtz__bc__elements_8h_source}{helmholtz\+\_\+bc\+\_\+elements.\+h}}.
+Definition at line 166 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
@@ -84,11 +85,11 @@ Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the i
 
 Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the face index. 
 
-Definition at line \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l01877}{1877}} of file \mbox{\hyperlink{helmholtz__bc__elements_8h_source}{helmholtz\+\_\+bc\+\_\+elements.\+h}}.
+Definition at line 1877 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l05132}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l00547}{oomph\+::\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::\+Dim}}, \mbox{\hyperlink{elements_8h_source_l04626}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l00544}{oomph\+::\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+helmholtz}}, and \mbox{\hyperlink{helmholtz__elements_8h_source_l00080}{oomph\+::\+Helmholtz\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+helmholtz()}}.
+References oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), oomph\+::\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::\+Dim, oomph\+::\+Face\+Element\+::face\+\_\+index(), oomph\+::\+Node\+::ndim(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), oomph\+::\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+helmholtz, and oomph\+::\+Helmholtz\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+helmholtz().
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzBCElementBase_a5d421cc79d20936a49dea012ef38077a}\label{classoomph_1_1HelmholtzBCElementBase_a5d421cc79d20936a49dea012ef38077a}} 
 \index{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}!HelmholtzBCElementBase@{HelmholtzBCElementBase}}
@@ -103,7 +104,7 @@ Broken empty constructor.
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l00176}{176}} of file \mbox{\hyperlink{helmholtz__bc__elements_8h_source}{helmholtz\+\_\+bc\+\_\+elements.\+h}}.
+Definition at line 176 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzBCElementBase_a8748a705a064d1caac6ff7dc29866283}\label{classoomph_1_1HelmholtzBCElementBase_a8748a705a064d1caac6ff7dc29866283}} 
 \index{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}!HelmholtzBCElementBase@{HelmholtzBCElementBase}}
@@ -119,12 +120,12 @@ Broken copy constructor.
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1HelmholtzBCElementBase_a893de4dec96142dfbc64ea78e88737ec}\label{classoomph_1_1HelmholtzBCElementBase_a893de4dec96142dfbc64ea78e88737ec}} 
+\mbox{\Hypertarget{classoomph_1_1HelmholtzBCElementBase_ab49842fa3eac63f0da1f5584637b296c}\label{classoomph_1_1HelmholtzBCElementBase_ab49842fa3eac63f0da1f5584637b296c}} 
 \index{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}!compute\_contribution\_to\_fourier\_components@{compute\_contribution\_to\_fourier\_components}}
 \index{compute\_contribution\_to\_fourier\_components@{compute\_contribution\_to\_fourier\_components}!oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{compute\_contribution\_to\_fourier\_components()}{compute\_contribution\_to\_fourier\_components()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase}{oomph\+::\+Helmholtz\+BCElement\+Base}}$<$ ELEMENT $>$\+::compute\+\_\+contribution\+\_\+to\+\_\+fourier\+\_\+components (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{a\+\_\+coeff\+\_\+pos,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{a\+\_\+coeff\+\_\+neg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase}{oomph\+::\+Helmholtz\+BCElement\+Base}}$<$ ELEMENT $>$\+::compute\+\_\+contribution\+\_\+to\+\_\+fourier\+\_\+components (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{a\+\_\+coeff\+\_\+pos,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{a\+\_\+coeff\+\_\+neg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -132,15 +133,15 @@ Compute element\textquotesingle{}s contribution to Fourier components of the sol
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l00389}{389}} of file \mbox{\hyperlink{helmholtz__bc__elements_8h_source}{helmholtz\+\_\+bc\+\_\+elements.\+h}}.
+Definition at line 389 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l00547}{oomph\+::\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::\+Dim}}, \mbox{\hyperlink{elements_8h_source_l01981}{oomph\+::\+Finite\+Element\+::dshape\+\_\+local()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{namespaceoomph_1_1MathematicalConstants_a609ab3b897b174e49ddf7a19fd95f2ef}{oomph\+::\+Mathematical\+Constants\+::\+I()}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l04528}{oomph\+::\+Face\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02317}{oomph\+::\+Finite\+Element\+::nodal\+\_\+position()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l00544}{oomph\+::\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+helmholtz}}, and \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral\+::weight()}}.
+References oomph\+::\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::\+Dim, oomph\+::\+Finite\+Element\+::dshape\+\_\+local(), i, oomph\+::\+Mathematical\+Constants\+::\+I(), oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Face\+Element\+::interpolated\+\_\+x(), oomph\+::\+Integral\+::knot(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+position(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), oomph\+::\+Integral\+::nweight(), s, oomph\+::\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+helmholtz, and oomph\+::\+Integral\+::weight().
 
 
 
-Referenced by \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l01621}{oomph\+::\+Helmholtz\+Dt\+NMesh$<$ ELEMENT $>$\+::compute\+\_\+fourier\+\_\+components()}}.
+Referenced by oomph\+::\+Helmholtz\+Dt\+NMesh$<$ ELEMENT $>$\+::compute\+\_\+fourier\+\_\+components().
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzBCElementBase_ab3183e6c6d742852fc890742a4e06d3f}\label{classoomph_1_1HelmholtzBCElementBase_ab3183e6c6d742852fc890742a4e06d3f}} 
 \index{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}!d\_shape\_and\_test\_local@{d\_shape\_and\_test\_local}}
@@ -155,15 +156,15 @@ Function to compute the shape, test functions and derivates and to return the Ja
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l00517}{517}} of file \mbox{\hyperlink{helmholtz__bc__elements_8h_source}{helmholtz\+\_\+bc\+\_\+elements.\+h}}.
+Definition at line 517 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l00547}{oomph\+::\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::\+Dim}}, \mbox{\hyperlink{elements_8h_source_l01981}{oomph\+::\+Finite\+Element\+::dshape\+\_\+local()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l05242}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References oomph\+::\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::\+Dim, oomph\+::\+Finite\+Element\+::dshape\+\_\+local(), i, oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Finite\+Element\+::nnode(), and s.
 
 
 
-Referenced by \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l00691}{oomph\+::\+Helmholtz\+Absorbing\+BCElement$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+abc()}}.
+Referenced by oomph\+::\+Helmholtz\+Absorbing\+BCElement$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+abc().
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzBCElementBase_a32688fe93c7350d93b90ee0a81add3e5}\label{classoomph_1_1HelmholtzBCElementBase_a32688fe93c7350d93b90ee0a81add3e5}} 
 \index{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}!global\_power\_contribution@{global\_power\_contribution}}
@@ -178,15 +179,7 @@ Compute the element\textquotesingle{}s contribution to the time-\/averaged radia
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l00248}{248}} of file \mbox{\hyperlink{helmholtz__bc__elements_8h_source}{helmholtz\+\_\+bc\+\_\+elements.\+h}}.
-
-
-
-References \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l00248}{oomph\+::\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::global\+\_\+power\+\_\+contribution()}}.
-
-
-
-Referenced by \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l00248}{oomph\+::\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::global\+\_\+power\+\_\+contribution()}}.
+Definition at line 248 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzBCElementBase_a406cb34eb2852b9507cca4f97b3002bc}\label{classoomph_1_1HelmholtzBCElementBase_a406cb34eb2852b9507cca4f97b3002bc}} 
 \index{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}!global\_power\_contribution@{global\_power\_contribution}}
@@ -201,11 +194,11 @@ Compute the element\textquotesingle{}s contribution to the time-\/averaged radia
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l00259}{259}} of file \mbox{\hyperlink{helmholtz__bc__elements_8h_source}{helmholtz\+\_\+bc\+\_\+elements.\+h}}.
+Definition at line 259 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l04735}{oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l04528}{oomph\+::\+Face\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8cc_source_l05242}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{elements_8cc_source_l06353}{oomph\+::\+Face\+Element\+::local\+\_\+coordinate\+\_\+in\+\_\+bulk()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{elements_8cc_source_l06006}{oomph\+::\+Face\+Element\+::outer\+\_\+unit\+\_\+normal()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l00240}{oomph\+::\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::u\+\_\+index\+\_\+helmholtz()}}, \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}, and \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral\+::weight()}}.
+References oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt(), oomph\+::\+Finite\+Element\+::dim(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Face\+Element\+::interpolated\+\_\+x(), oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Integral\+::knot(), oomph\+::\+Face\+Element\+::local\+\_\+coordinate\+\_\+in\+\_\+bulk(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), oomph\+::\+Integral\+::nweight(), oomph\+::\+Face\+Element\+::outer\+\_\+unit\+\_\+normal(), s, oomph\+::\+Finite\+Element\+::shape(), oomph\+::\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::u\+\_\+index\+\_\+helmholtz(), oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Integral\+::weight().
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzBCElementBase_a6dbcc0b0a81ab422f6a45f4d4a63d9a3}\label{classoomph_1_1HelmholtzBCElementBase_a6dbcc0b0a81ab422f6a45f4d4a63d9a3}} 
 \index{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}!output@{output}}
@@ -224,11 +217,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l00225}{225}} of file \mbox{\hyperlink{helmholtz__bc__elements_8h_source}{helmholtz\+\_\+bc\+\_\+elements.\+h}}.
+Definition at line 225 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
+References oomph\+::\+Finite\+Element\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzBCElementBase_ac521eae27bbc9dbd72c788ecfe59f4cc}\label{classoomph_1_1HelmholtzBCElementBase_ac521eae27bbc9dbd72c788ecfe59f4cc}} 
 \index{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}!output@{output}}
@@ -247,11 +240,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l00233}{233}} of file \mbox{\hyperlink{helmholtz__bc__elements_8h_source}{helmholtz\+\_\+bc\+\_\+elements.\+h}}.
+Definition at line 233 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
+References oomph\+::\+Finite\+Element\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzBCElementBase_a7337e98fa91e804f02d2d1642b01977b}\label{classoomph_1_1HelmholtzBCElementBase_a7337e98fa91e804f02d2d1642b01977b}} 
 \index{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}!output@{output}}
@@ -270,11 +263,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l00211}{211}} of file \mbox{\hyperlink{helmholtz__bc__elements_8h_source}{helmholtz\+\_\+bc\+\_\+elements.\+h}}.
+Definition at line 211 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
+References oomph\+::\+Finite\+Element\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzBCElementBase_a10eda724d26f4b2e10b914cba57c8339}\label{classoomph_1_1HelmholtzBCElementBase_a10eda724d26f4b2e10b914cba57c8339}} 
 \index{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}!output@{output}}
@@ -293,11 +286,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l00218}{218}} of file \mbox{\hyperlink{helmholtz__bc__elements_8h_source}{helmholtz\+\_\+bc\+\_\+elements.\+h}}.
+Definition at line 218 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
+References oomph\+::\+Finite\+Element\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzBCElementBase_a0ab124ee22e66e97013264cad6cc0c07}\label{classoomph_1_1HelmholtzBCElementBase_a0ab124ee22e66e97013264cad6cc0c07}} 
 \index{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}!test\_only@{test\_only}}
@@ -312,22 +305,22 @@ Function to compute the shape and test functions and to return the Jacobian of m
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l00504}{504}} of file \mbox{\hyperlink{helmholtz__bc__elements_8h_source}{helmholtz\+\_\+bc\+\_\+elements.\+h}}.
+Definition at line 504 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l05242}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
+References oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian(), s, and oomph\+::\+Finite\+Element\+::shape().
 
 
 
-Referenced by \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l01228}{oomph\+::\+Helmholtz\+Dt\+NBoundary\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+\+Dt\+N\+\_\+bc()}}.
+Referenced by oomph\+::\+Helmholtz\+Dt\+NBoundary\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+\+Dt\+N\+\_\+bc().
 
-\mbox{\Hypertarget{classoomph_1_1HelmholtzBCElementBase_a507a50a4e5b750b07cf4ed91b69a2e44}\label{classoomph_1_1HelmholtzBCElementBase_a507a50a4e5b750b07cf4ed91b69a2e44}} 
+\mbox{\Hypertarget{classoomph_1_1HelmholtzBCElementBase_a756997c0a98903754b30fed24c92091a}\label{classoomph_1_1HelmholtzBCElementBase_a756997c0a98903754b30fed24c92091a}} 
 \index{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}!u\_index\_helmholtz@{u\_index\_helmholtz}}
 \index{u\_index\_helmholtz@{u\_index\_helmholtz}!oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{u\_index\_helmholtz()}{u\_index\_helmholtz()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-virtual std\+::complex$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase}{oomph\+::\+Helmholtz\+BCElement\+Base}}$<$ ELEMENT $>$\+::u\+\_\+index\+\_\+helmholtz (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+virtual std\+::complex$<$unsigned$>$ \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase}{oomph\+::\+Helmholtz\+BCElement\+Base}}$<$ ELEMENT $>$\+::u\+\_\+index\+\_\+helmholtz (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -335,15 +328,15 @@ Return the index at which the real/imag unknown value is stored.
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l00240}{240}} of file \mbox{\hyperlink{helmholtz__bc__elements_8h_source}{helmholtz\+\_\+bc\+\_\+elements.\+h}}.
+Definition at line 240 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l00544}{oomph\+::\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+helmholtz}}.
+References oomph\+::\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+helmholtz.
 
 
 
-Referenced by \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l00259}{oomph\+::\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::global\+\_\+power\+\_\+contribution()}}, and \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l01674}{oomph\+::\+Helmholtz\+Dt\+NMesh$<$ ELEMENT $>$\+::setup\+\_\+gamma()}}.
+Referenced by oomph\+::\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::global\+\_\+power\+\_\+contribution(), and oomph\+::\+Helmholtz\+Dt\+NMesh$<$ ELEMENT $>$\+::setup\+\_\+gamma().
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzBCElementBase_a66defe3dfc1150d37015c43c08fd93b1}\label{classoomph_1_1HelmholtzBCElementBase_a66defe3dfc1150d37015c43c08fd93b1}} 
 \index{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}!zeta\_nodal@{zeta\_nodal}}
@@ -362,11 +355,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FaceElement_a58c9f93705c7741f7
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l00201}{201}} of file \mbox{\hyperlink{helmholtz__bc__elements_8h_source}{helmholtz\+\_\+bc\+\_\+elements.\+h}}.
+Definition at line 201 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l04497}{oomph\+::\+Face\+Element\+::zeta\+\_\+nodal()}}.
+References i, and oomph\+::\+Face\+Element\+::zeta\+\_\+nodal().
 
 
 
@@ -384,11 +377,11 @@ The spatial dimension of the problem.
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l00547}{547}} of file \mbox{\hyperlink{helmholtz__bc__elements_8h_source}{helmholtz\+\_\+bc\+\_\+elements.\+h}}.
+Definition at line 547 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l00389}{oomph\+::\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::compute\+\_\+contribution\+\_\+to\+\_\+fourier\+\_\+components()}}, \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l00517}{oomph\+::\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::d\+\_\+shape\+\_\+and\+\_\+test\+\_\+local()}}, \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l00691}{oomph\+::\+Helmholtz\+Absorbing\+BCElement$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+abc()}}, \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l01228}{oomph\+::\+Helmholtz\+Dt\+NBoundary\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+\+Dt\+N\+\_\+bc()}}, and \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l01877}{oomph\+::\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::\+Helmholtz\+BCElement\+Base()}}.
+Referenced by oomph\+::\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::compute\+\_\+contribution\+\_\+to\+\_\+fourier\+\_\+components(), oomph\+::\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::d\+\_\+shape\+\_\+and\+\_\+test\+\_\+local(), oomph\+::\+Helmholtz\+Absorbing\+BCElement$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+abc(), oomph\+::\+Helmholtz\+Dt\+NBoundary\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+\+Dt\+N\+\_\+bc(), and oomph\+::\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::\+Helmholtz\+BCElement\+Base().
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzBCElementBase_ad3e6d12158c24f428c295bd5ad54365e}\label{classoomph_1_1HelmholtzBCElementBase_ad3e6d12158c24f428c295bd5ad54365e}} 
 \index{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$@{oomph::HelmholtzBCElementBase$<$ ELEMENT $>$}!U\_index\_helmholtz@{U\_index\_helmholtz}}
@@ -403,11 +396,11 @@ The index at which the real and imag part of the unknown is stored at the nodes.
 
 
 
-Definition at line \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l00544}{544}} of file \mbox{\hyperlink{helmholtz__bc__elements_8h_source}{helmholtz\+\_\+bc\+\_\+elements.\+h}}.
+Definition at line 544 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l00389}{oomph\+::\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::compute\+\_\+contribution\+\_\+to\+\_\+fourier\+\_\+components()}}, \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l00691}{oomph\+::\+Helmholtz\+Absorbing\+BCElement$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+abc()}}, \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l01228}{oomph\+::\+Helmholtz\+Dt\+NBoundary\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+\+Dt\+N\+\_\+bc()}}, \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l01877}{oomph\+::\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::\+Helmholtz\+BCElement\+Base()}}, and \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l00240}{oomph\+::\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::u\+\_\+index\+\_\+helmholtz()}}.
+Referenced by oomph\+::\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::compute\+\_\+contribution\+\_\+to\+\_\+fourier\+\_\+components(), oomph\+::\+Helmholtz\+Absorbing\+BCElement$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+abc(), oomph\+::\+Helmholtz\+Dt\+NBoundary\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+\+Dt\+N\+\_\+bc(), oomph\+::\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::\+Helmholtz\+BCElement\+Base(), and oomph\+::\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::u\+\_\+index\+\_\+helmholtz().
 
 
 

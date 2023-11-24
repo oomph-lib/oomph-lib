@@ -26,7 +26,7 @@ The driver code for this example is given below\+:
 \DoxyCodeLine{\textcolor{comment}{//LIC// multi-\/physics finite-\/element library, available }}
 \DoxyCodeLine{\textcolor{comment}{//LIC// at http://www.oomph-\/lib.org.}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// }}
-\DoxyCodeLine{\textcolor{comment}{//LIC// Copyright (C) 2006-\/2022 Matthias Heil and Andrew Hazel}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// Copyright (C) 2006-\/2023 Matthias Heil and Andrew Hazel}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// }}
 \DoxyCodeLine{\textcolor{comment}{//LIC// This library is free software; you can redistribute it and/or}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// modify it under the terms of the GNU Lesser General Public}}
@@ -78,41 +78,41 @@ The driver code for this example is given below\+:
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to a private data member, the thermal expansion coefficient}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double}* \mbox{\hyperlink{classQThermalPVDElement_a97267a52ceec2a2153b23e18e2a2c631}{Alpha\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double}* Alpha\_pt;}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// The static default value of Alpha}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{static} \textcolor{keywordtype}{double} \mbox{\hyperlink{classQThermalPVDElement_ad0722326e8c25746f63b35a46cac5886}{Default\_Physical\_Constant\_Value}};}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{static} \textcolor{keywordtype}{double} Default\_Physical\_Constant\_Value;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{public}:\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Constructor: call the underlying constructors and }}
 \DoxyCodeLine{\textcolor{comment}{ /// initialise the pointer to Alpha to point}}
 \DoxyCodeLine{\textcolor{comment}{ /// to the default value of 1.0.}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classQThermalPVDElement_a24d60d6461b169603388f263cbdccd75}{QThermalPVDElement}}() : QPVDElement<DIM,3>(),}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classQThermalPVDElement}{QThermalPVDElement}}() : QPVDElement<DIM,3>(),}
 \DoxyCodeLine{                        QUnsteadyHeatElement<DIM,3>() }
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   \mbox{\hyperlink{classQThermalPVDElement_a97267a52ceec2a2153b23e18e2a2c631}{Alpha\_pt}} = \&\mbox{\hyperlink{classQThermalPVDElement_ad0722326e8c25746f63b35a46cac5886}{Default\_Physical\_Constant\_Value}};}
+\DoxyCodeLine{   Alpha\_pt = \&Default\_Physical\_Constant\_Value;}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// The required number of values stored at the nodes is the sum of the}}
 \DoxyCodeLine{\textcolor{comment}{ /// required values of the two single-\/physics elements. Note that this step is}}
 \DoxyCodeLine{\textcolor{comment}{ /// generic for any multi-\/physics element of this type.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classQThermalPVDElement_a55025994fc3d2799fde6f9c1142340af}{required\_nvalue}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&n)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} required\_nvalue(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&n)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\textcolor{keyword}{  }\{\textcolor{keywordflow}{return} (QUnsteadyHeatElement<DIM,3>::required\_nvalue(n) +}
 \DoxyCodeLine{           QPVDElement<DIM,3>::required\_nvalue(n));\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Access function for the thermal expansion coefficient (const version)}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&\mbox{\hyperlink{classQThermalPVDElement_a0f7eb960519ec1bf7263da9a90f1f29a}{alpha}}()\textcolor{keyword}{ const }\{\textcolor{keywordflow}{return} *\mbox{\hyperlink{classQThermalPVDElement_a97267a52ceec2a2153b23e18e2a2c631}{Alpha\_pt}};\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&alpha()\textcolor{keyword}{ const }\{\textcolor{keywordflow}{return} *Alpha\_pt;\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Access function for the pointer to the thermal expansion coefficientr}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double}* \&\mbox{\hyperlink{classQThermalPVDElement_af4cf775ecf7d0f26c30b1e522fb89a0f}{alpha\_pt}}() \{\textcolor{keywordflow}{return} \mbox{\hyperlink{classQThermalPVDElement_a97267a52ceec2a2153b23e18e2a2c631}{Alpha\_pt}};\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double}* \&alpha\_pt() \{\textcolor{keywordflow}{return} Alpha\_pt;\}}
 \DoxyCodeLine{  \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ ///  Overload the standard output function with the broken default}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classQThermalPVDElement_a99e482f47a98c1b5ec7ec069211de827}{output}}(ostream \&outfile) \{FiniteElement::output(outfile);\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} output(ostream \&outfile) \{FiniteElement::output(outfile);\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Output function:  }}
 \DoxyCodeLine{\textcolor{comment}{ ///  Output x, y, u, v, p, theta at Nplot\string^DIM plot points}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{comment}{// Start of output function}}
-\DoxyCodeLine{ \textcolor{keywordtype}{void} \mbox{\hyperlink{classQThermalPVDElement_a99e482f47a98c1b5ec7ec069211de827}{output}}(ostream \&outfile, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&nplot)}
+\DoxyCodeLine{ \textcolor{keywordtype}{void} output(ostream \&outfile, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&nplot)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{//vector of local coordinates}}
 \DoxyCodeLine{   Vector<double> s(DIM);}
@@ -145,15 +145,15 @@ The driver code for this example is given below\+:
 \DoxyCodeLine{  \} \textcolor{comment}{//End of output function}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// C-\/style output function: Broken default}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classQThermalPVDElement_a99e482f47a98c1b5ec7ec069211de827}{output}}(FILE* file\_pt)}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} output(FILE* file\_pt)}
 \DoxyCodeLine{  \{FiniteElement::output(file\_pt);\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ ///  C-\/style output function: Broken default}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classQThermalPVDElement_a99e482f47a98c1b5ec7ec069211de827}{output}}(FILE* file\_pt, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&n\_plot)}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} output(FILE* file\_pt, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&n\_plot)}
 \DoxyCodeLine{  \{FiniteElement::output(file\_pt,n\_plot);\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Output function for an exact solution: Broken default}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classQThermalPVDElement_accda081c3fb783b2c24715ec0c8e8e19}{output\_fct}}(ostream \&outfile, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&Nplot,}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} output\_fct(ostream \&outfile, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&Nplot,}
 \DoxyCodeLine{                 FiniteElement::SteadyExactSolutionFctPt }
 \DoxyCodeLine{                 exact\_soln\_pt)}
 \DoxyCodeLine{  \{FiniteElement::output\_fct(outfile,Nplot,exact\_soln\_pt);\}}
@@ -161,7 +161,7 @@ The driver code for this example is given below\+:
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Output function for a time-\/dependent exact solution:}}
 \DoxyCodeLine{\textcolor{comment}{ /// Broken default.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classQThermalPVDElement_accda081c3fb783b2c24715ec0c8e8e19}{output\_fct}}(ostream \&outfile, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&Nplot,}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} output\_fct(ostream \&outfile, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&Nplot,}
 \DoxyCodeLine{                 \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
 \DoxyCodeLine{                 FiniteElement::UnsteadyExactSolutionFctPt }
 \DoxyCodeLine{                 exact\_soln\_pt)}
@@ -172,7 +172,7 @@ The driver code for this example is given below\+:
 \DoxyCodeLine{  \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Compute norm of solution: use the version in the unsteady heat}}
 \DoxyCodeLine{\textcolor{comment}{ /// class }}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classQThermalPVDElement_a7824ab9fd50480c1eb8b20e57620afe5}{compute\_norm}}(\textcolor{keywordtype}{double}\& el\_norm)}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} compute\_norm(\textcolor{keywordtype}{double}\& el\_norm)}
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  QUnsteadyHeatElement<DIM,3>::compute\_norm(el\_norm);}
 \DoxyCodeLine{ \}}
@@ -182,7 +182,7 @@ The driver code for this example is given below\+:
 \DoxyCodeLine{\textcolor{comment}{ /// Plot at a given number of plot points and compute L2 error}}
 \DoxyCodeLine{\textcolor{comment}{ /// and L2 norm of velocity solution over element}}
 \DoxyCodeLine{\textcolor{comment}{ /// Call the broken default}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classQThermalPVDElement_a64e5047e9a054544b61a6e8cf5534364}{compute\_error}}(ostream \&outfile,}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} compute\_error(ostream \&outfile,}
 \DoxyCodeLine{                    FiniteElement::UnsteadyExactSolutionFctPt exact\_soln\_pt,}
 \DoxyCodeLine{                    \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
 \DoxyCodeLine{                    \textcolor{keywordtype}{double}\& error, \textcolor{keywordtype}{double}\& norm)}
@@ -194,14 +194,14 @@ The driver code for this example is given below\+:
 \DoxyCodeLine{\textcolor{comment}{ /// Plot at a given number of plot points and compute L2 error}}
 \DoxyCodeLine{\textcolor{comment}{ /// and L2 norm of velocity solution over element}}
 \DoxyCodeLine{\textcolor{comment}{ /// Call the broken default}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classQThermalPVDElement_a64e5047e9a054544b61a6e8cf5534364}{compute\_error}}(ostream \&outfile,}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} compute\_error(ostream \&outfile,}
 \DoxyCodeLine{                    FiniteElement::SteadyExactSolutionFctPt exact\_soln\_pt,}
 \DoxyCodeLine{                    \textcolor{keywordtype}{double}\& error, \textcolor{keywordtype}{double}\& norm)}
 \DoxyCodeLine{  \{FiniteElement::compute\_error(outfile,exact\_soln\_pt,error,norm);\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Overload the growth function in the advection-\/diffusion equations.}}
 \DoxyCodeLine{\textcolor{comment}{ /// to be temperature-\/dependent.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classQThermalPVDElement_a25774a0b8d2a7ec688e91420527cc5c4}{get\_isotropic\_growth}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ipt, \textcolor{keyword}{const} Vector<double> \&s, }
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} get\_isotropic\_growth(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ipt, \textcolor{keyword}{const} Vector<double> \&s, }
 \DoxyCodeLine{                           \textcolor{keyword}{const} Vector<double>\& xi, \textcolor{keywordtype}{double} \&gamma)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\textcolor{keyword}{ }\{}
 \DoxyCodeLine{  \textcolor{comment}{//The growth is the undeformed coefficient plus linear thermal}}
@@ -212,7 +212,7 @@ The driver code for this example is given below\+:
 \DoxyCodeLine{\textcolor{comment}{ /// Calculate the contribution to the residual vector.}}
 \DoxyCodeLine{\textcolor{comment}{ /// We assume that the vector has been initialised to zero}}
 \DoxyCodeLine{\textcolor{comment}{ /// before this function is called.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classQThermalPVDElement_ab26361e4164834860ec74603276b0207}{fill\_in\_contribution\_to\_residuals}}(Vector<double> \&residuals)}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} fill\_in\_contribution\_to\_residuals(Vector<double> \&residuals)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{//Call the residuals of the advection-\/diffusion eqautions}}
 \DoxyCodeLine{   UnsteadyHeatEquations<DIM>::}
@@ -225,7 +225,7 @@ The driver code for this example is given below\+:
 \DoxyCodeLine{\textcolor{comment}{ /// Compute the element's residual Vector and the jacobian matrix}}
 \DoxyCodeLine{\textcolor{comment}{ /// We assume that the residuals vector and jacobian matrix have been}}
 \DoxyCodeLine{\textcolor{comment}{ /// initialised to zero before calling this function}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classQThermalPVDElement_a6fe89466bee5ebcf16a14a68550ff447}{fill\_in\_contribution\_to\_jacobian}}(Vector<double> \&residuals,}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} fill\_in\_contribution\_to\_jacobian(Vector<double> \&residuals,}
 \DoxyCodeLine{                                       DenseMatrix<double> \&jacobian)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{//Just call standard finite difference for a SolidFiniteElement so }}
@@ -276,27 +276,27 @@ The driver code for this example is given below\+:
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Constructor}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classThermalProblem_a12ad5d383929b1ef4ed29503c5a271b0}{ThermalProblem}}();}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classThermalProblem}{ThermalProblem}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Destructor. Empty}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classThermalProblem_af563f946765bdae233c202738bf7e725}{\string~ThermalProblem}}() \{\}}
+\DoxyCodeLine{\textcolor{comment}{} \string~\mbox{\hyperlink{classThermalProblem}{ThermalProblem}}() \{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs before solve (empty)}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classThermalProblem_ab2d2efaf155756144c9796b76af3ee8d}{actions\_before\_newton\_solve}}() \{\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_newton\_solve() \{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update the problem after solve (empty)}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classThermalProblem_ad38edfd46e049fdbc5b00bafb661f8e2}{actions\_after\_newton\_solve}}()\{\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_newton\_solve()\{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Actions before adapt:(empty)}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classThermalProblem_a40bda0a4d45851f7e45dc461107d7c0f}{actions\_before\_adapt}}()\{\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_adapt()\{\}}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Doc the solution.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classThermalProblem_aa085f248542811385fefe623a9193fd8}{doc\_solution}}();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} doc\_solution();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Overloaded version of the problem's access function to }}
 \DoxyCodeLine{\textcolor{comment}{ /// the mesh. Recasts the pointer to the base Mesh object to }}
 \DoxyCodeLine{\textcolor{comment}{ /// the actual mesh type.}}
-\DoxyCodeLine{\textcolor{comment}{} ElasticRectangularQuadMesh<ELEMENT>* \mbox{\hyperlink{classThermalProblem_a7fb970db30cf4f352fda8a86827b8d09}{mesh\_pt}}() }
+\DoxyCodeLine{\textcolor{comment}{} ElasticRectangularQuadMesh<ELEMENT>* mesh\_pt() }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{keywordflow}{return} \textcolor{keyword}{dynamic\_cast<}ElasticRectangularQuadMesh<ELEMENT>*\textcolor{keyword}{>}(}
 \DoxyCodeLine{    Problem::mesh\_pt());}
@@ -305,7 +305,7 @@ The driver code for this example is given below\+:
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// DocInfo object}}
-\DoxyCodeLine{\textcolor{comment}{} DocInfo \mbox{\hyperlink{classThermalProblem_ae03e6df96a793f3735d1674e4e8a6cb3}{Doc\_info}};}
+\DoxyCodeLine{\textcolor{comment}{} DocInfo Doc\_info;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\}; \textcolor{comment}{// end of problem class}}
 \DoxyCodeLine{}

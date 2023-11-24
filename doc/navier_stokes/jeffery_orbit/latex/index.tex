@@ -50,7 +50,7 @@ We use a namespace to define the parameters used in the problem
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_namespace==============================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for Problem Parameters}}
-\DoxyCodeLine{\textcolor{comment}{//==================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==================================================}}
 \DoxyCodeLine{ \textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceProblem__Parameter}{Problem\_Parameter}}}
 \DoxyCodeLine{ \{    \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{  /// Reynolds number}}
@@ -91,10 +91,10 @@ We create a basic {\ttfamily Geom\+Object} to represent the ellipse whose bounda
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===================start\_of\_general\_ellipse=================================}}
-\DoxyCodeLine{\textcolor{comment}{/// A geometric object for an ellipse with initial centre of mass at}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// (centre\_x, centre\_y) with axis in the x direction given by 2a}}
-\DoxyCodeLine{\textcolor{comment}{/// and in the y-\/direction given by 2b. The boundary of the ellipse is}}
-\DoxyCodeLine{\textcolor{comment}{/// parametrised by its angle.}}
+\DoxyCodeLine{\textcolor{comment}{/// A geometric object for an ellipse with initial centre of mass at}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// (centre\_x, centre\_y) with axis in the x direction given by 2a}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// and in the y-\/direction given by 2b. The boundary of the ellipse is}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// parametrised by its angle.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//============================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classGeneralEllipse}{GeneralEllipse}} : \textcolor{keyword}{public} GeomObject}
 \DoxyCodeLine{\{}
@@ -143,7 +143,7 @@ After parsing the command-\/line arguments, which are used to modify certain par
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==========start\_of\_main======================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver code for immersed ellipse problem}}
-\DoxyCodeLine{\textcolor{comment}{//============================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//============================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{jeffery__orbit_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} **argv)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ \textcolor{comment}{// Store command line arguments}}
@@ -240,8 +240,8 @@ The class also provides storage for the meshes, the rigid body and file handles 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_problem\_class============================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Unstructured Navier-\/Stokes ALE Problem for a rigid ellipse }\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// immersed within a viscous fluid}}
+\DoxyCodeLine{\textcolor{comment}{/// Unstructured Navier-\/Stokes ALE Problem for a rigid ellipse }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// immersed within a viscous fluid}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classUnstructuredImmersedEllipseProblem}{UnstructuredImmersedEllipseProblem}} : \textcolor{keyword}{public} Problem}
@@ -359,8 +359,8 @@ We begin by opening the output files and allocating two time steppers, one for t
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_constructor=====================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Constructor: Open output files, construct time steppers, build }\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{///  fluid mesh, immersed rigid body and combine to form the problem}}
+\DoxyCodeLine{\textcolor{comment}{/// Constructor: Open output files, construct time steppers, build }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///  fluid mesh, immersed rigid body and combine to form the problem}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classUnstructuredImmersedEllipseProblem_a544a35f261200bb4a4e29a88faa1a69c}{UnstructuredImmersedEllipseProblem<ELEMENT>::}}}
@@ -670,9 +670,9 @@ The helper function {\ttfamily complete\+\_\+problem\+\_\+setup()} starts by (re
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_complete\_problem\_setup=================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Set boundary condition, assign auxiliary node update fct.}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// Complete the build of all elements, attach power elements that allow}}
-\DoxyCodeLine{\textcolor{comment}{/// computation of drag vector}}
+\DoxyCodeLine{\textcolor{comment}{/// Set boundary condition, assign auxiliary node update fct.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// Complete the build of all elements, attach power elements that allow}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// computation of drag vector}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classUnstructuredImmersedEllipseProblem_a42b13e3306ff2a94053907644ba17c8d}{UnstructuredImmersedEllipseProblem<ELEMENT>::complete\_problem\_setup}}()}
@@ -791,10 +791,10 @@ The initial nodal positions are made consistent with the weakly-\/imposed displa
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==========start\_solve\_for\_consistent\_nodal\_positions================}}
-\DoxyCodeLine{\textcolor{comment}{/// Assemble and solve a simplified problem that ensures that the }\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// positions of the boundary nodes are consistent with the weak }}
-\DoxyCodeLine{\textcolor{comment}{/// imposition of the displacement boundary conditions on the surface}}
-\DoxyCodeLine{\textcolor{comment}{/// of the ellipse.}}
+\DoxyCodeLine{\textcolor{comment}{/// Assemble and solve a simplified problem that ensures that the }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// positions of the boundary nodes are consistent with the weak }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// imposition of the displacement boundary conditions on the surface}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// of the ellipse.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//===================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classUnstructuredImmersedEllipseProblem_a2a88b40ff1988de0fc696f1eb755ea54}{UnstructuredImmersedEllipseProblem<ELEMENT>::}}}

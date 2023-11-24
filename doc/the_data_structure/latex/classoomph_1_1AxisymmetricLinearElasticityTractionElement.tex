@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1AxisymmetricLinearElasticityTractionElement}{}\doxysection{oomph\+::Axisymmetric\+Linear\+Elasticity\+Traction\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1AxisymmetricLinearElasticityTractionElement}{}\doxysection{oomph\+::Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$ Class Template Reference}
 \label{classoomph_1_1AxisymmetricLinearElasticityTractionElement}\index{oomph::AxisymmetricLinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::AxisymmetricLinearElasticityTractionElement$<$ ELEMENT $>$}}
 
 
@@ -9,7 +9,7 @@ A class for elements that allow the imposition of an applied traction in the equ
 
 {\ttfamily \#include $<$axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Axisymmetric\+Linear\+Elasticity\+Traction\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=1.890295cm]{classoomph_1_1AxisymmetricLinearElasticityTractionElement}
@@ -18,7 +18,7 @@ Inheritance diagram for oomph\+::Axisymmetric\+Linear\+Elasticity\+Traction\+Ele
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a9b68dc55eee5ecabeaaab18d47af9008}{Axisymmetric\+Linear\+Elasticity\+Traction\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&element\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}})
+\mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a9b68dc55eee5ecabeaaab18d47af9008}{Axisymmetric\+Linear\+Elasticity\+Traction\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&element\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a478d577ac6db67ecc80f1f02ae3ab170}{face\+\_\+index}})
 \begin{DoxyCompactList}\small\item\em Constructor, which takes a \char`\"{}bulk\char`\"{} element and the value of the index and its limit. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityTractionElement_aeaffd515a63ba1bfc91868005545ef55}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em Return the residuals. \end{DoxyCompactList}\item 
@@ -39,7 +39,7 @@ void \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityTractionElement_
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-void($\ast$\&)(const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a28af87bac3d8d0c935564e69277e215e}{traction}}) \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a4fb4d60f1274e323747630c03a518cf0}{traction\+\_\+fct\+\_\+pt}} ()
+void($\ast$\&)(const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a28af87bac3d8d0c935564e69277e215e}{traction}}) \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a6bebe0d0dd5e39b4b1c8318a25e1a4b3}{traction\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Reference to the traction function pointer. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -61,9 +61,10 @@ void($\ast$ \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityTractionE
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class ELEMENT$>$\newline
 class oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$}
+
 A class for elements that allow the imposition of an applied traction in the equations of axisymmetric linear elasticity. The geometrical information can be read from the Face\+Geometry$<$\+ELEMENT$>$ class and and thus, we can be generic enough without the need to have a separate equations class. 
 
-Definition at line \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source_l00078}{78}} of file \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source}{axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h}}.
+Definition at line 78 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
 
 
 
@@ -81,11 +82,11 @@ Constructor, which takes a \char`\"{}bulk\char`\"{} element and the value of the
 
 
 
-Definition at line \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source_l00123}{123}} of file \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source}{axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h}}.
+Definition at line 123 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l05132}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{elements_8h_source_l04626}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02484}{oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension()}}, \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source_l00091}{oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::\+Traction\+\_\+fct\+\_\+pt}}, and \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source_l00055}{oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element\+Helper\+::\+Zero\+\_\+traction\+\_\+fct()}}.
+References oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), oomph\+::\+Face\+Element\+::face\+\_\+index(), i, oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension(), oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::\+Traction\+\_\+fct\+\_\+pt, and oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element\+Helper\+::\+Zero\+\_\+traction\+\_\+fct().
 
 
 
@@ -107,11 +108,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a6ae09fc0d6
 
 
 
-Definition at line \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source_l00168}{168}} of file \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source}{axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h}}.
+Definition at line 168 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source_l00334}{oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity\+\_\+traction()}}.
+References oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity\+\_\+traction().
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricLinearElasticityTractionElement_aeaffd515a63ba1bfc91868005545ef55}\label{classoomph_1_1AxisymmetricLinearElasticityTractionElement_aeaffd515a63ba1bfc91868005545ef55}} 
 \index{oomph::AxisymmetricLinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::AxisymmetricLinearElasticityTractionElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
@@ -130,11 +131,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source_l00160}{160}} of file \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source}{axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h}}.
+Definition at line 160 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source_l00334}{oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity\+\_\+traction()}}.
+References oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity\+\_\+traction().
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricLinearElasticityTractionElement_aa263f7ced169d93b2e4fbb03738d059b}\label{classoomph_1_1AxisymmetricLinearElasticityTractionElement_aa263f7ced169d93b2e4fbb03738d059b}} 
 \index{oomph::AxisymmetricLinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::AxisymmetricLinearElasticityTractionElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_residuals\_axisymmetric\_linear\_elasticity\_traction@{fill\_in\_contribution\_to\_residuals\_axisymmetric\_linear\_elasticity\_traction}}
@@ -149,15 +150,15 @@ Helper function that actually calculates the residuals.
 
 Return the residuals for the \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityTractionElement}{Axisymmetric\+Linear\+Elasticity\+Traction\+Element}} equations. 
 
-Definition at line \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source_l00333}{333}} of file \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source}{axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h}}.
+Definition at line 333 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
+References i, and oomph\+::\+Quad\+Tree\+Names\+::W.
 
 
 
-Referenced by \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source_l00168}{oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, and \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source_l00160}{oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
+Referenced by oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a4ec6aee7438ab15aef197407e9c7ef8b}\label{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a4ec6aee7438ab15aef197407e9c7ef8b}} 
 \index{oomph::AxisymmetricLinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::AxisymmetricLinearElasticityTractionElement$<$ ELEMENT $>$}!get\_traction@{get\_traction}}
@@ -172,15 +173,15 @@ Get the traction vector\+: Pass number of integration point (dummy), Eulerian co
 
 
 
-Definition at line \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source_l00102}{102}} of file \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source}{axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h}}.
+Definition at line 102 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source_l00307}{oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::traction()}}, and \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source_l00091}{oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::\+Traction\+\_\+fct\+\_\+pt}}.
+References oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::traction(), and oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::\+Traction\+\_\+fct\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source_l00196}{oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::output()}}.
+Referenced by oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a3d7e3ee90159e221abb5ff860dd27cc6}\label{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a3d7e3ee90159e221abb5ff860dd27cc6}} 
 \index{oomph::AxisymmetricLinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::AxisymmetricLinearElasticityTractionElement$<$ ELEMENT $>$}!output@{output}}
@@ -199,11 +200,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee
 
 
 
-Definition at line \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source_l00277}{277}} of file \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source}{axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h}}.
+Definition at line 277 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
+References oomph\+::\+Finite\+Element\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a0c3231cf4b9d70b1b3080f195b1bf813}\label{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a0c3231cf4b9d70b1b3080f195b1bf813}} 
 \index{oomph::AxisymmetricLinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::AxisymmetricLinearElasticityTractionElement$<$ ELEMENT $>$}!output@{output}}
@@ -222,11 +223,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f
 
 
 
-Definition at line \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source_l00283}{283}} of file \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source}{axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h}}.
+Definition at line 283 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
+References oomph\+::\+Finite\+Element\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a5823855e2697fcf80ab41378d29cff5b}\label{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a5823855e2697fcf80ab41378d29cff5b}} 
 \index{oomph::AxisymmetricLinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::AxisymmetricLinearElasticityTractionElement$<$ ELEMENT $>$}!output@{output}}
@@ -245,15 +246,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source_l00189}{189}} of file \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source}{axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h}}.
-
-
-
-References \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source_l00189}{oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::output()}}.
-
-
-
-Referenced by \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source_l00189}{oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::output()}}.
+Definition at line 189 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricLinearElasticityTractionElement_ad2f848b61c90a1c1424ad0480eee4ba0}\label{classoomph_1_1AxisymmetricLinearElasticityTractionElement_ad2f848b61c90a1c1424ad0480eee4ba0}} 
 \index{oomph::AxisymmetricLinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::AxisymmetricLinearElasticityTractionElement$<$ ELEMENT $>$}!output@{output}}
@@ -272,11 +265,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source_l00196}{196}} of file \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source}{axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h}}.
+Definition at line 196 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03148}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source_l00102}{oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::get\+\_\+traction()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l04528}{oomph\+::\+Face\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02484}{oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension()}}, \mbox{\hyperlink{elements_8h_source_l02317}{oomph\+::\+Finite\+Element\+::nodal\+\_\+position()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l03186}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, \mbox{\hyperlink{elements_8cc_source_l06006}{oomph\+::\+Face\+Element\+::outer\+\_\+unit\+\_\+normal()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, \mbox{\hyperlink{elements_8h_source_l03161}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}, \mbox{\hyperlink{timesteppers_8h_source_l00123}{oomph\+::\+Time\+::time()}}, \mbox{\hyperlink{timesteppers_8h_source_l00572}{oomph\+::\+Time\+Stepper\+::time\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00238}{oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt()}}, and \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source_l00307}{oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::traction()}}.
+References oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot(), oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::get\+\_\+traction(), i, oomph\+::\+Face\+Element\+::interpolated\+\_\+x(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension(), oomph\+::\+Finite\+Element\+::nodal\+\_\+position(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Finite\+Element\+::nplot\+\_\+points(), oomph\+::\+Face\+Element\+::outer\+\_\+unit\+\_\+normal(), s, oomph\+::\+Finite\+Element\+::shape(), oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string(), oomph\+::\+Time\+::time(), oomph\+::\+Time\+Stepper\+::time\+\_\+pt(), oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt(), and oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::traction().
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a28af87bac3d8d0c935564e69277e215e}\label{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a28af87bac3d8d0c935564e69277e215e}} 
 \index{oomph::AxisymmetricLinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::AxisymmetricLinearElasticityTractionElement$<$ ELEMENT $>$}!traction@{traction}}
@@ -293,15 +286,15 @@ Compute traction vector at specified local coordinate Should only be used for po
 
 Compute traction vector at specified local coordinate Should only be used for post-\/processing; ignores dependence on integration point! 
 
-Definition at line \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source_l00307}{307}} of file \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source}{axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h}}.
+Definition at line 307 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References s.
 
 
 
-Referenced by \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source_l00102}{oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::get\+\_\+traction()}}, and \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source_l00196}{oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::output()}}.
+Referenced by oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::get\+\_\+traction(), and oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a1eeca70977b3ba93cffc2d811b054a9a}\label{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a1eeca70977b3ba93cffc2d811b054a9a}} 
 \index{oomph::AxisymmetricLinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::AxisymmetricLinearElasticityTractionElement$<$ ELEMENT $>$}!zeta\_nodal@{zeta\_nodal}}
@@ -320,21 +313,21 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a849561c5fbcbc07
 
 
 
-Definition at line \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source_l00181}{181}} of file \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source}{axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h}}.
+Definition at line 181 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l04497}{oomph\+::\+Face\+Element\+::zeta\+\_\+nodal()}}.
+References i, and oomph\+::\+Face\+Element\+::zeta\+\_\+nodal().
 
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a4fb4d60f1274e323747630c03a518cf0}\label{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a4fb4d60f1274e323747630c03a518cf0}} 
+\mbox{\Hypertarget{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a6bebe0d0dd5e39b4b1c8318a25e1a4b3}\label{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a6bebe0d0dd5e39b4b1c8318a25e1a4b3}} 
 \index{oomph::AxisymmetricLinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::AxisymmetricLinearElasticityTractionElement$<$ ELEMENT $>$}!traction\_fct\_pt@{traction\_fct\_pt}}
 \index{traction\_fct\_pt@{traction\_fct\_pt}!oomph::AxisymmetricLinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::AxisymmetricLinearElasticityTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{traction\_fct\_pt}{traction\_fct\_pt}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-void($\ast$\&)(const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a28af87bac3d8d0c935564e69277e215e}{traction}}) \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityTractionElement}{oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element}}$<$ ELEMENT $>$\+::traction\+\_\+fct\+\_\+pt()\hspace{0.3cm}{\ttfamily [inline]}}
+void($\ast$\&)(const double\& time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& n, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a28af87bac3d8d0c935564e69277e215e}{traction}}) \mbox{\hyperlink{classoomph_1_1AxisymmetricLinearElasticityTractionElement}{oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element}}$<$ ELEMENT $>$\+::traction\+\_\+fct\+\_\+pt()\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -342,7 +335,7 @@ Reference to the traction function pointer.
 
 
 
-Definition at line \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source_l00150}{150}} of file \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source}{axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h}}.
+Definition at line 150 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a4e8f5cdb73984c400c4297a0f963a520}\label{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a4e8f5cdb73984c400c4297a0f963a520}} 
 \index{oomph::AxisymmetricLinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::AxisymmetricLinearElasticityTractionElement$<$ ELEMENT $>$}!Traction\_fct\_pt@{Traction\_fct\_pt}}
@@ -357,11 +350,11 @@ Pointer to an imposed traction function. Arguments\+: Eulerian coordinate; outer
 
 
 
-Definition at line \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source_l00091}{91}} of file \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source}{axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h}}.
+Definition at line 91 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source_l00123}{oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element()}}, and \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source_l00102}{oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::get\+\_\+traction()}}.
+Referenced by oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element(), and oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::get\+\_\+traction().
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a2b4e580e5a53714c55b606575ad89669}\label{classoomph_1_1AxisymmetricLinearElasticityTractionElement_a2b4e580e5a53714c55b606575ad89669}} 
 \index{oomph::AxisymmetricLinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::AxisymmetricLinearElasticityTractionElement$<$ ELEMENT $>$}!U\_index\_axisymmetric\_linear\_elasticity\_traction@{U\_index\_axisymmetric\_linear\_elasticity\_traction}}
@@ -376,7 +369,7 @@ Index at which the i-\/th displacement component is stored.
 
 
 
-Definition at line \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source_l00084}{84}} of file \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source}{axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h}}.
+Definition at line 84 of file axisym\+\_\+linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
 
 
 

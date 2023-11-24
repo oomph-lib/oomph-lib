@@ -9,7 +9,7 @@ The nodal positions in the fluid domain is updated by {\ttfamily Macro\+Elements
 \DoxyCodeLine{\textcolor{comment}{//LIC// multi-\/physics finite-\/element library, available }}
 \DoxyCodeLine{\textcolor{comment}{//LIC// at http://www.oomph-\/lib.org.}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// }}
-\DoxyCodeLine{\textcolor{comment}{//LIC// Copyright (C) 2006-\/2022 Matthias Heil and Andrew Hazel}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// Copyright (C) 2006-\/2023 Matthias Heil and Andrew Hazel}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// }}
 \DoxyCodeLine{\textcolor{comment}{//LIC// This library is free software; you can redistribute it and/or}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// modify it under the terms of the GNU Lesser General Public}}
@@ -94,33 +94,33 @@ The nodal positions in the fluid domain is updated by {\ttfamily Macro\+Elements
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Constructor: Pass timestep and function pointer to the }}
 \DoxyCodeLine{\textcolor{comment}{ /// solution that provides the initial conditions for the fluid}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classOscRingNStProblem_acd5f633c43eb4cfb43c45361ecf85e6b}{OscRingNStProblem}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& dt,}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classOscRingNStProblem}{OscRingNStProblem}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& dt,}
 \DoxyCodeLine{                   FiniteElement::UnsteadyExactSolutionFctPt IC\_fct\_pt);}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Destructor (empty)}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classOscRingNStProblem_a96e43adf75d4e33270218ceb3397443c}{\string~OscRingNStProblem}}()\{\}}
+\DoxyCodeLine{\textcolor{comment}{} \string~\mbox{\hyperlink{classOscRingNStProblem}{OscRingNStProblem}}()\{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Get pointer to wall as geometric object}}
-\DoxyCodeLine{\textcolor{comment}{} GeomObject* \mbox{\hyperlink{classOscRingNStProblem_a6a62e926867df3c85c87cf59691be0e1}{wall\_pt}}()}
+\DoxyCodeLine{\textcolor{comment}{} GeomObject* wall\_pt()}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{keywordflow}{return} \mbox{\hyperlink{classOscRingNStProblem_a1349ecb860cacb34792fde6807d92905}{Wall\_pt}};}
+\DoxyCodeLine{   \textcolor{keywordflow}{return} Wall\_pt;}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update after solve (empty)}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classOscRingNStProblem_a6e4be6a46ab263941b76ab4e6706f63a}{actions\_after\_newton\_solve}}()\{\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_newton\_solve()\{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs before solve (empty)}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classOscRingNStProblem_a7d8ff9543c042752b649ed326d6c5915}{actions\_before\_newton\_solve}}()\{\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_newton\_solve()\{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs before checking Newton}}
 \DoxyCodeLine{\textcolor{comment}{ /// convergence: Update the fluid mesh and re-\/set velocity}}
 \DoxyCodeLine{\textcolor{comment}{ ///  boundary conditions -\/-\/ no slip velocity on the wall means}}
 \DoxyCodeLine{\textcolor{comment}{ /// that the velocity on the wall is dependent.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classOscRingNStProblem_a98d4c847cd9d53ab3569b8418ecb0c6b}{actions\_before\_newton\_convergence\_check}}() }
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_newton\_convergence\_check() }
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{comment}{// Update the fluid mesh -\/-\/ auxiliary update function for algebraic}}
 \DoxyCodeLine{  \textcolor{comment}{// nodes automatically updates no slip condition.}}
-\DoxyCodeLine{  \mbox{\hyperlink{classOscRingNStProblem_a67d88d19c34d72a239cb26fcedd0b451}{fluid\_mesh\_pt}}()-\/>node\_update(); }
+\DoxyCodeLine{  fluid\_mesh\_pt()-\/>node\_update(); }
 \DoxyCodeLine{ \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -128,7 +128,7 @@ The nodal positions in the fluid domain is updated by {\ttfamily Macro\+Elements
 \DoxyCodeLine{\textcolor{comment}{ /// Set auxiliary update function that applies no slip on all }}
 \DoxyCodeLine{\textcolor{comment}{ /// boundary nodes and choose fluid pressure dof that drives}}
 \DoxyCodeLine{\textcolor{comment}{ /// the wall deformation}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classOscRingNStProblem_a2dd1cb9b211f2cbd2ea9aea625685bcb}{actions\_after\_adapt}}() }
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_adapt() }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Ring boundary: No slip; this also implies that the velocity needs}}
 \DoxyCodeLine{   \textcolor{comment}{// to be updated in response to wall motion. This needs to be reset}}
@@ -138,70 +138,70 @@ The nodal positions in the fluid domain is updated by {\ttfamily Macro\+Elements
 \DoxyCodeLine{   \textcolor{comment}{// occur exclusively at boundaries)}}
 \DoxyCodeLine{   \textcolor{keywordtype}{unsigned} ibound=1;}
 \DoxyCodeLine{   \{}
-\DoxyCodeLine{    \textcolor{keywordtype}{unsigned} num\_nod= \mbox{\hyperlink{classOscRingNStProblem_a67d88d19c34d72a239cb26fcedd0b451}{fluid\_mesh\_pt}}()-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{    \textcolor{keywordtype}{unsigned} num\_nod= fluid\_mesh\_pt()-\/>nboundary\_node(ibound);}
 \DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} inod=0;inod<num\_nod;inod++)}
 \DoxyCodeLine{     \{}
-\DoxyCodeLine{      \mbox{\hyperlink{classOscRingNStProblem_a67d88d19c34d72a239cb26fcedd0b451}{fluid\_mesh\_pt}}()-\/>boundary\_node\_pt(ibound,inod)-\/>}
+\DoxyCodeLine{      fluid\_mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>}
 \DoxyCodeLine{       set\_auxiliary\_node\_update\_fct\_pt(}
 \DoxyCodeLine{        FSI\_functions::apply\_no\_slip\_on\_moving\_wall); }
 \DoxyCodeLine{     \}}
 \DoxyCodeLine{   \}}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Set the reference pressure as the constant pressure in element 0}}
-\DoxyCodeLine{   \textcolor{keyword}{dynamic\_cast<}PseudoBucklingRingElement*\textcolor{keyword}{>}(\mbox{\hyperlink{classOscRingNStProblem_a1349ecb860cacb34792fde6807d92905}{Wall\_pt}})}
-\DoxyCodeLine{    -\/>set\_reference\_pressure\_pt(\mbox{\hyperlink{classOscRingNStProblem_a67d88d19c34d72a239cb26fcedd0b451}{fluid\_mesh\_pt}}()-\/>element\_pt(0)}
+\DoxyCodeLine{   \textcolor{keyword}{dynamic\_cast<}PseudoBucklingRingElement*\textcolor{keyword}{>}(Wall\_pt)}
+\DoxyCodeLine{    -\/>set\_reference\_pressure\_pt(fluid\_mesh\_pt()-\/>element\_pt(0)}
 \DoxyCodeLine{                                -\/>internal\_data\_pt(0));}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{   \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Run the time integration for ntsteps steps}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classOscRingNStProblem_a00e957fb6a313a9c1de784d0fa3a7a36}{unsteady\_run}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&ntsteps, \textcolor{keyword}{const} \textcolor{keywordtype}{bool}\& restarted,}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} unsteady\_run(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&ntsteps, \textcolor{keyword}{const} \textcolor{keywordtype}{bool}\& restarted,}
 \DoxyCodeLine{                   DocInfo\& doc\_info);}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Set initial condition (incl previous timesteps) according}}
 \DoxyCodeLine{\textcolor{comment}{ /// to specified function. }}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classOscRingNStProblem_ab1f2083699d00da4b7f6116e10792e86}{set\_initial\_condition}}();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} set\_initial\_condition();}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classOscRingNStProblem_a7de5df21c2179db1c97cc83332dcc82c}{doc\_solution}}(DocInfo\& doc\_info);}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} doc\_solution(DocInfo\& doc\_info);}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Access function for the fluid mesh}}
-\DoxyCodeLine{\textcolor{comment}{} MacroElementNodeUpdateRefineableQuarterCircleSectorMesh<ELEMENT>* \mbox{\hyperlink{classOscRingNStProblem_a67d88d19c34d72a239cb26fcedd0b451}{fluid\_mesh\_pt}}()}
+\DoxyCodeLine{\textcolor{comment}{} MacroElementNodeUpdateRefineableQuarterCircleSectorMesh<ELEMENT>* fluid\_mesh\_pt()}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{keywordflow}{return} \mbox{\hyperlink{classOscRingNStProblem_af9ccaa9a5c41ffadda773d704793c76e}{Fluid\_mesh\_pt}}; }
+\DoxyCodeLine{   \textcolor{keywordflow}{return} Fluid\_mesh\_pt; }
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Dump problem data.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classOscRingNStProblem_af32f94658174188b1f029446161755b2}{dump\_it}}(ofstream\& dump\_file, DocInfo doc\_info);}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} dump\_it(ofstream\& dump\_file, DocInfo doc\_info);}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Read problem data.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classOscRingNStProblem_a0cf01737b8d53213d644413e84251d0f}{restart}}(ifstream\& restart\_file);}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} restart(ifstream\& restart\_file);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Write header for trace file}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classOscRingNStProblem_a96e12e5bb761d765ebe9065b9990112f}{write\_trace\_file\_header}}();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} write\_trace\_file\_header();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Function pointer to set the intial condition}}
-\DoxyCodeLine{\textcolor{comment}{} FiniteElement::UnsteadyExactSolutionFctPt \mbox{\hyperlink{classOscRingNStProblem_ad9b2810092588c7708660c5325c73256}{IC\_Fct\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} FiniteElement::UnsteadyExactSolutionFctPt IC\_Fct\_pt;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to wall}}
-\DoxyCodeLine{\textcolor{comment}{} GeomObject* \mbox{\hyperlink{classOscRingNStProblem_a1349ecb860cacb34792fde6807d92905}{Wall\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} GeomObject* Wall\_pt;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to fluid mesh}}
-\DoxyCodeLine{\textcolor{comment}{} MacroElementNodeUpdateRefineableQuarterCircleSectorMesh<ELEMENT>* \mbox{\hyperlink{classOscRingNStProblem_af9ccaa9a5c41ffadda773d704793c76e}{Fluid\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} MacroElementNodeUpdateRefineableQuarterCircleSectorMesh<ELEMENT>* Fluid\_mesh\_pt;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to wall mesh (contains only a single GeneralisedElement)}}
-\DoxyCodeLine{\textcolor{comment}{} Mesh* \mbox{\hyperlink{classOscRingNStProblem_aafee49228dbbee7178448da624b96c3f}{Wall\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} Mesh* Wall\_mesh\_pt;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Trace file}}
-\DoxyCodeLine{\textcolor{comment}{} ofstream \mbox{\hyperlink{classOscRingNStProblem_a37c1af48245859045bed1c3fc36be3da}{Trace\_file}};}
+\DoxyCodeLine{\textcolor{comment}{} ofstream Trace\_file;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to node on coarsest mesh on which velocity is traced}}
-\DoxyCodeLine{\textcolor{comment}{} Node* \mbox{\hyperlink{classOscRingNStProblem_aed51269a285ffdc064739d6d363b1179}{Veloc\_trace\_node\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} Node* Veloc\_trace\_node\_pt;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to node in symmetry plane on coarsest mesh at }}
 \DoxyCodeLine{\textcolor{comment}{ /// which velocity is traced}}
-\DoxyCodeLine{\textcolor{comment}{} Node* \mbox{\hyperlink{classOscRingNStProblem_a6688cac5da1f4092a9cd343ad5fdfd53}{Sarah\_veloc\_trace\_node\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} Node* Sarah\_veloc\_trace\_node\_pt;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\};}
 \DoxyCodeLine{}

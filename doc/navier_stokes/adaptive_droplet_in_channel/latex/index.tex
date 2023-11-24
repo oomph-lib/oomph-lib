@@ -46,7 +46,7 @@ The namespace containing the dimensionless parameters contains an additional vis
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{  /// Viscosity ratio of the droplet to the surrounding fluid}}
+\DoxyCodeLine{  \textcolor{comment}{/// Viscosity ratio of the droplet to the surrounding fluid}}
 \DoxyCodeLine{  \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceProblem__Parameter_afdb95f68bd3c77e4c12001a29bd26e31}{Viscosity\_ratio}} = 10.0;}
 
 \end{DoxyCodeInclude}
@@ -119,8 +119,8 @@ As usual we impose the kinematic and dynamic boundary condition at the interface
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_free\_surface\_elements===============}}
-\DoxyCodeLine{\textcolor{comment}{/// Create elements that impose the kinematic and dynamic bcs}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// for the pseudo-\/solid fluid mesh}}
+\DoxyCodeLine{\textcolor{comment}{/// Create elements that impose the kinematic and dynamic bcs}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// for the pseudo-\/solid fluid mesh}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classDropInChannelProblem_a73b989e3bedbd3630f576b0dba0f724f}{DropInChannelProblem<ELEMENT>::create\_free\_surface\_elements}}()}
@@ -170,7 +170,7 @@ As usual we impose the kinematic and dynamic boundary condition at the interface
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_volume\_constraint\_elements=================}}
 \DoxyCodeLine{\textcolor{comment}{/// Create elements that impose volume constraint on the drop}}
-\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classDropInChannelProblem_a53b96cd50b4e6c9bee294b8fb7dd51bd}{DropInChannelProblem<ELEMENT>::create\_volume\_constraint\_elements}}()}
 \DoxyCodeLine{\{ }
@@ -244,7 +244,7 @@ The function {\ttfamily remove\+\_\+volume\+\_\+constraint()}, resets the boolea
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Change the boundary conditions to remove the volume constraint}}
+\DoxyCodeLine{ \textcolor{comment}{/// Change the boundary conditions to remove the volume constraint}}
 \DoxyCodeLine{ \textcolor{keywordtype}{void} remove\_volume\_constraint()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Ignore all volume constraint stuff from here onwards}}

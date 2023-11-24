@@ -18,7 +18,7 @@ Inheritance diagram for Sample\+Point\+Container\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classSamplePointContainer_a68326e89f80f01690d8c2d03effb8508}{Sample\+Point\+Container}} (Mesh $\ast$\mbox{\hyperlink{classSamplePointContainer_aa638ec17fc518066a473e49ad148b122}{mesh\+\_\+pt}}, const Vector$<$ std\+::pair$<$ double, double $>$ $>$ \&\mbox{\hyperlink{classSamplePointContainer_aac031f93652a7fcd21b5917a780d3022}{min\+\_\+and\+\_\+max\+\_\+coordinates}}, const bool \&\mbox{\hyperlink{classSamplePointContainer_a6b6b42a9e6bd8f116af8699e03a78d44}{use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup}}, const bool \&\mbox{\hyperlink{classSamplePointContainer_a399d246c1afdfd993ceb80e6f2de1400}{ignore\+\_\+halo\+\_\+elements\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+search}}, const unsigned \&\mbox{\hyperlink{classSamplePointContainer_a816528cf500a37fa9ecabe6381b31852}{nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element}})
+\mbox{\hyperlink{classSamplePointContainer_ab4b07edb6a654c43dc33725c2d368ce2}{Sample\+Point\+Container}} (Mesh $\ast$\mbox{\hyperlink{classSamplePointContainer_ae170916821b5f8f00255d251cd7f2d8c}{mesh\+\_\+pt}}, const Vector$<$ std\+::pair$<$ double, double $>$$>$ \&\mbox{\hyperlink{classSamplePointContainer_a6799027f7c569176934457b17bfddf0f}{min\+\_\+and\+\_\+max\+\_\+coordinates}}, const bool \&\mbox{\hyperlink{classSamplePointContainer_a6b6b42a9e6bd8f116af8699e03a78d44}{use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup}}, const bool \&\mbox{\hyperlink{classSamplePointContainer_a399d246c1afdfd993ceb80e6f2de1400}{ignore\+\_\+halo\+\_\+elements\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+search}}, const unsigned \&\mbox{\hyperlink{classSamplePointContainer_a48e5ae762e0d56f67645ce4e7dd886d7}{nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element}})
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classSamplePointContainer_a6801f78c9d6b55a69f7e60a372dc9bf2}{Sample\+Point\+Container}} ()
 \begin{DoxyCompactList}\small\item\em Broken default constructor; needed for broken copy constructors. Don\textquotesingle{}t call. It will die. \end{DoxyCompactList}\item 
@@ -30,25 +30,25 @@ virtual \mbox{\hyperlink{classSamplePointContainer_a753a58798c528e01d384a4f44436
 \begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classSamplePointContainer_acca8dbae8346d6c8924b1f815aa5f049}{locate\+\_\+zeta}} (const Vector$<$ double $>$ \&zeta, Geom\+Object $\ast$\&sub\+\_\+geom\+\_\+object\+\_\+pt, Vector$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})=0
 \begin{DoxyCompactList}\small\item\em Find sub-\/\+Geom\+Object (finite element) and the local coordinate s within it that contains point with global coordinate zeta. sub\+\_\+geom\+\_\+object\+\_\+pt=0 if point can\textquotesingle{}t be found. \end{DoxyCompactList}\item 
-virtual unsigned \& \mbox{\hyperlink{classSamplePointContainer_a16ac5bc68c5f0e161e65bbc4799b5ec4}{total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level}} ()
+virtual unsigned \& \mbox{\hyperlink{classSamplePointContainer_af05aff0424680eec183a5680c4d6d65f}{total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level}} ()
 \begin{DoxyCompactList}\small\item\em Counter to keep track of how many sample points we\textquotesingle{}ve visited during top level call to locate\+\_\+zeta. Virtual so it can be overloaded for different versions. \end{DoxyCompactList}\item 
 virtual unsigned \mbox{\hyperlink{classSamplePointContainer_ac7bf51a6987a9180c7715d6211fdbb46}{total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+computed\+\_\+recursively}} () const =0
 \begin{DoxyCompactList}\small\item\em Total number of sample points in sample point container, possibly computed recursively. \end{DoxyCompactList}\item 
 virtual unsigned \mbox{\hyperlink{classSamplePointContainer_af2cfee8a92a28addb59a5533dfd138e7}{ndim\+\_\+zeta}} () const =0
 \begin{DoxyCompactList}\small\item\em Dimension of the zeta ( = dim of local coordinate of elements) \end{DoxyCompactList}\item 
-Mesh $\ast$ \mbox{\hyperlink{classSamplePointContainer_aa638ec17fc518066a473e49ad148b122}{mesh\+\_\+pt}} () const
+Mesh $\ast$ \mbox{\hyperlink{classSamplePointContainer_ae170916821b5f8f00255d251cd7f2d8c}{mesh\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Pointer to mesh from whose Finite\+Elements sample points are created. \end{DoxyCompactList}\item 
-const std\+::pair$<$ double, double $>$ \& \mbox{\hyperlink{classSamplePointContainer_aac031f93652a7fcd21b5917a780d3022}{min\+\_\+and\+\_\+max\+\_\+coordinates}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+const std\+::pair$<$ double, double $>$ \& \mbox{\hyperlink{classSamplePointContainer_a6799027f7c569176934457b17bfddf0f}{min\+\_\+and\+\_\+max\+\_\+coordinates}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Pair of doubles for min and maximum coordinates in i-\/th direction\+: min (first) and max. (second) coordinates. \end{DoxyCompactList}\item 
-const Vector$<$ std\+::pair$<$ double, double $>$ $>$ \& \mbox{\hyperlink{classSamplePointContainer_aa0d2d5baaf1b124a1eac77cd4f6d5005}{min\+\_\+and\+\_\+max\+\_\+coordinates}} () const
+const Vector$<$ std\+::pair$<$ double, double $>$ $>$ \& \mbox{\hyperlink{classSamplePointContainer_a6aaae3b3713a9b1d53182d58fc6050df}{min\+\_\+and\+\_\+max\+\_\+coordinates}} () const
 \begin{DoxyCompactList}\small\item\em Vector of pair of doubles for min and maximum coordinates. min (first) and max. (second) coordinates. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classSamplePointContainer_a399d246c1afdfd993ceb80e6f2de1400}{ignore\+\_\+halo\+\_\+elements\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+search}} () const
 \begin{DoxyCompactList}\small\item\em Ignore halo elements? \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classSamplePointContainer_a6b6b42a9e6bd8f116af8699e03a78d44}{use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup}} () const
 \begin{DoxyCompactList}\small\item\em Use Eulerian coordinates (i.\+e. interpolated\+\_\+x) rather than zeta itself (i.\+e. interpolated\+\_\+zeta) to identify point. \end{DoxyCompactList}\item 
-unsigned \& \mbox{\hyperlink{classSamplePointContainer_a816528cf500a37fa9ecabe6381b31852}{nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element}} ()
+unsigned \& \mbox{\hyperlink{classSamplePointContainer_a48e5ae762e0d56f67645ce4e7dd886d7}{nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element}} ()
 \begin{DoxyCompactList}\small\item\em \char`\"{}\+Measure of\char`\"{} number of sample points generated in each element \end{DoxyCompactList}\item 
-double \& \mbox{\hyperlink{classSamplePointContainer_ac69b644e4974dfdf9c9d3b31f5f75e72}{max\+\_\+search\+\_\+radius}} ()
+double \& \mbox{\hyperlink{classSamplePointContainer_ad38b50923288cd35ff5e24ada05d0c59}{max\+\_\+search\+\_\+radius}} ()
 \begin{DoxyCompactList}\small\item\em Set maximum search radius for locate zeta. This is initialised do DBL\+\_\+\+MAX so we brutally search through the entire bin structure, no matter how big it is until we\textquotesingle{}ve found the required point (or failed to do so. This can be VERY costly with fine meshes. Here the user takes full responsibility and states that we have no chance in hell to find the required point in a bin whose closest vertex is further than the specified max search radius. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
@@ -92,16 +92,16 @@ double \mbox{\hyperlink{classSamplePointContainer_aae6e7df15b2dbbdf18467716da817
 
 Base class for all sample point containers 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00205}{205}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 205 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classSamplePointContainer_a68326e89f80f01690d8c2d03effb8508}\label{classSamplePointContainer_a68326e89f80f01690d8c2d03effb8508}} 
+\mbox{\Hypertarget{classSamplePointContainer_ab4b07edb6a654c43dc33725c2d368ce2}\label{classSamplePointContainer_ab4b07edb6a654c43dc33725c2d368ce2}} 
 \index{SamplePointContainer@{SamplePointContainer}!SamplePointContainer@{SamplePointContainer}}
 \index{SamplePointContainer@{SamplePointContainer}!SamplePointContainer@{SamplePointContainer}}
 \doxysubsubsection{\texorpdfstring{SamplePointContainer()}{SamplePointContainer()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
-{\footnotesize\ttfamily Sample\+Point\+Container\+::\+Sample\+Point\+Container (\begin{DoxyParamCaption}\item[{Mesh $\ast$}]{mesh\+\_\+pt,  }\item[{const Vector$<$ std\+::pair$<$ double, double $>$ $>$ \&}]{min\+\_\+and\+\_\+max\+\_\+coordinates,  }\item[{const bool \&}]{use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup,  }\item[{const bool \&}]{ignore\+\_\+halo\+\_\+elements\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+search,  }\item[{const unsigned \&}]{nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily Sample\+Point\+Container\+::\+Sample\+Point\+Container (\begin{DoxyParamCaption}\item[{Mesh $\ast$}]{mesh\+\_\+pt,  }\item[{const Vector$<$ std\+::pair$<$ double, double $>$$>$ \&}]{min\+\_\+and\+\_\+max\+\_\+coordinates,  }\item[{const bool \&}]{use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup,  }\item[{const bool \&}]{ignore\+\_\+halo\+\_\+elements\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+search,  }\item[{const unsigned \&}]{nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -109,11 +109,11 @@ Constructor.
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00209}{209}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 209 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8h_source_l00389}{Max\+\_\+search\+\_\+radius}}.
+References Max\+\_\+search\+\_\+radius.
 
 \mbox{\Hypertarget{classSamplePointContainer_a6801f78c9d6b55a69f7e60a372dc9bf2}\label{classSamplePointContainer_a6801f78c9d6b55a69f7e60a372dc9bf2}} 
 \index{SamplePointContainer@{SamplePointContainer}!SamplePointContainer@{SamplePointContainer}}
@@ -127,7 +127,7 @@ Broken default constructor; needed for broken copy constructors. Don\textquotesi
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00233}{233}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 233 of file sample\+\_\+point\+\_\+container.\+h.
 
 \mbox{\Hypertarget{classSamplePointContainer_a6fa9329fb09b49f9db769e167edd21ba}\label{classSamplePointContainer_a6fa9329fb09b49f9db769e167edd21ba}} 
 \index{SamplePointContainer@{SamplePointContainer}!SamplePointContainer@{SamplePointContainer}}
@@ -151,7 +151,7 @@ Virtual destructor.
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00248}{248}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 248 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -168,15 +168,15 @@ Ignore halo elements?
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00299}{299}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 299 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8h_source_l00372}{Ignore\+\_\+halo\+\_\+elements\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+search}}.
+References Ignore\+\_\+halo\+\_\+elements\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+search.
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8cc_source_l03821}{CGALSample\+Point\+Container\+::limited\+\_\+locate\+\_\+zeta()}}, and \mbox{\hyperlink{sample__point__container_8cc_source_l03606}{CGALSample\+Point\+Container\+::locate\+\_\+zeta()}}.
+Referenced by CGALSample\+Point\+Container\+::limited\+\_\+locate\+\_\+zeta(), and CGALSample\+Point\+Container\+::locate\+\_\+zeta().
 
 \mbox{\Hypertarget{classSamplePointContainer_acca8dbae8346d6c8924b1f815aa5f049}\label{classSamplePointContainer_acca8dbae8346d6c8924b1f815aa5f049}} 
 \index{SamplePointContainer@{SamplePointContainer}!locate\_zeta@{locate\_zeta}}
@@ -190,17 +190,17 @@ Find sub-\/\+Geom\+Object (finite element) and the local coordinate s within it 
 
 
 
-Implemented in \mbox{\hyperlink{classRefineableBinArray_a4f2f78efe9b05fda23d94e857d00cfa1}{Refineable\+Bin\+Array}}, \mbox{\hyperlink{classNonRefineableBinArray_a27abcdeac898d37af63968ed97427e36}{Non\+Refineable\+Bin\+Array}}, and \mbox{\hyperlink{classCGALSamplePointContainer_a059a8f0ebd74ffbc48722122b01e172b}{CGALSample\+Point\+Container}}.
+Implemented in \mbox{\hyperlink{classCGALSamplePointContainer_a059a8f0ebd74ffbc48722122b01e172b}{CGALSample\+Point\+Container}}, \mbox{\hyperlink{classNonRefineableBinArray_a27abcdeac898d37af63968ed97427e36}{Non\+Refineable\+Bin\+Array}}, and \mbox{\hyperlink{classRefineableBinArray_a4f2f78efe9b05fda23d94e857d00cfa1}{Refineable\+Bin\+Array}}.
 
 
 
-Referenced by \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00373}{oomph\+::\+Mesh\+As\+Geom\+Object\+::locate\+\_\+zeta()}}.
+Referenced by oomph\+::\+Mesh\+As\+Geom\+Object\+::locate\+\_\+zeta().
 
-\mbox{\Hypertarget{classSamplePointContainer_ac69b644e4974dfdf9c9d3b31f5f75e72}\label{classSamplePointContainer_ac69b644e4974dfdf9c9d3b31f5f75e72}} 
+\mbox{\Hypertarget{classSamplePointContainer_ad38b50923288cd35ff5e24ada05d0c59}\label{classSamplePointContainer_ad38b50923288cd35ff5e24ada05d0c59}} 
 \index{SamplePointContainer@{SamplePointContainer}!max\_search\_radius@{max\_search\_radius}}
 \index{max\_search\_radius@{max\_search\_radius}!SamplePointContainer@{SamplePointContainer}}
 \doxysubsubsection{\texorpdfstring{max\_search\_radius()}{max\_search\_radius()}}
-{\footnotesize\ttfamily double \& Sample\+Point\+Container\+::max\+\_\+search\+\_\+radius (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double\& Sample\+Point\+Container\+::max\+\_\+search\+\_\+radius (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -208,21 +208,21 @@ Set maximum search radius for locate zeta. This is initialised do DBL\+\_\+\+MAX
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00327}{327}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 327 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8h_source_l00389}{Max\+\_\+search\+\_\+radius}}.
+References Max\+\_\+search\+\_\+radius.
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8cc_source_l02002}{Refineable\+Bin\+Array\+::locate\+\_\+zeta()}}, and \mbox{\hyperlink{line__visualiser_8h_source_l00668}{oomph\+::\+Line\+Visualiser\+::setup()}}.
+Referenced by Refineable\+Bin\+Array\+::locate\+\_\+zeta(), and oomph\+::\+Line\+Visualiser\+::setup().
 
-\mbox{\Hypertarget{classSamplePointContainer_aa638ec17fc518066a473e49ad148b122}\label{classSamplePointContainer_aa638ec17fc518066a473e49ad148b122}} 
+\mbox{\Hypertarget{classSamplePointContainer_ae170916821b5f8f00255d251cd7f2d8c}\label{classSamplePointContainer_ae170916821b5f8f00255d251cd7f2d8c}} 
 \index{SamplePointContainer@{SamplePointContainer}!mesh\_pt@{mesh\_pt}}
 \index{mesh\_pt@{mesh\_pt}!SamplePointContainer@{SamplePointContainer}}
 \doxysubsubsection{\texorpdfstring{mesh\_pt()}{mesh\_pt()}}
-{\footnotesize\ttfamily Mesh $\ast$ Sample\+Point\+Container\+::mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily Mesh$\ast$ Sample\+Point\+Container\+::mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -230,17 +230,17 @@ Pointer to mesh from whose Finite\+Elements sample points are created.
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00275}{275}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 275 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8h_source_l00357}{Mesh\+\_\+pt}}.
+References Mesh\+\_\+pt.
 
-\mbox{\Hypertarget{classSamplePointContainer_aa0d2d5baaf1b124a1eac77cd4f6d5005}\label{classSamplePointContainer_aa0d2d5baaf1b124a1eac77cd4f6d5005}} 
+\mbox{\Hypertarget{classSamplePointContainer_a6aaae3b3713a9b1d53182d58fc6050df}\label{classSamplePointContainer_a6aaae3b3713a9b1d53182d58fc6050df}} 
 \index{SamplePointContainer@{SamplePointContainer}!min\_and\_max\_coordinates@{min\_and\_max\_coordinates}}
 \index{min\_and\_max\_coordinates@{min\_and\_max\_coordinates}!SamplePointContainer@{SamplePointContainer}}
 \doxysubsubsection{\texorpdfstring{min\_and\_max\_coordinates()}{min\_and\_max\_coordinates()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily const Vector$<$ std\+::pair$<$ double, double $>$ $>$ \& Sample\+Point\+Container\+::min\+\_\+and\+\_\+max\+\_\+coordinates (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const Vector$<$std\+::pair$<$double, double$>$ $>$\& Sample\+Point\+Container\+::min\+\_\+and\+\_\+max\+\_\+coordinates (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -248,21 +248,21 @@ Vector of pair of doubles for min and maximum coordinates. min (first) and max. 
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00290}{290}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 290 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8h_source_l00363}{Min\+\_\+and\+\_\+max\+\_\+coordinates}}.
+References Min\+\_\+and\+\_\+max\+\_\+coordinates.
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8cc_source_l01044}{Refineable\+Bin\+Array\+::output\+\_\+neighbouring\+\_\+bins()}}.
+Referenced by Refineable\+Bin\+Array\+::output\+\_\+neighbouring\+\_\+bins().
 
-\mbox{\Hypertarget{classSamplePointContainer_aac031f93652a7fcd21b5917a780d3022}\label{classSamplePointContainer_aac031f93652a7fcd21b5917a780d3022}} 
+\mbox{\Hypertarget{classSamplePointContainer_a6799027f7c569176934457b17bfddf0f}\label{classSamplePointContainer_a6799027f7c569176934457b17bfddf0f}} 
 \index{SamplePointContainer@{SamplePointContainer}!min\_and\_max\_coordinates@{min\_and\_max\_coordinates}}
 \index{min\_and\_max\_coordinates@{min\_and\_max\_coordinates}!SamplePointContainer@{SamplePointContainer}}
 \doxysubsubsection{\texorpdfstring{min\_and\_max\_coordinates()}{min\_and\_max\_coordinates()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily const std\+::pair$<$ double, double $>$ \& Sample\+Point\+Container\+::min\+\_\+and\+\_\+max\+\_\+coordinates (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const std\+::pair$<$double, double$>$\& Sample\+Point\+Container\+::min\+\_\+and\+\_\+max\+\_\+coordinates (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -270,15 +270,15 @@ Pair of doubles for min and maximum coordinates in i-\/th direction\+: min (firs
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00282}{282}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 282 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{sample__point__container_8h_source_l00363}{Min\+\_\+and\+\_\+max\+\_\+coordinates}}.
+References i, and Min\+\_\+and\+\_\+max\+\_\+coordinates.
 
 
 
-Referenced by \mbox{\hyperlink{gmsh__tet__mesh_8template_8cc_source_l00040}{oomph\+::\+Refineable\+Gmsh\+Tet\+Mesh$<$ ELEMENT $>$\+::adapt()}}.
+Referenced by oomph\+::\+Refineable\+Gmsh\+Tet\+Mesh$<$ ELEMENT $>$\+::adapt().
 
 \mbox{\Hypertarget{classSamplePointContainer_af2cfee8a92a28addb59a5533dfd138e7}\label{classSamplePointContainer_af2cfee8a92a28addb59a5533dfd138e7}} 
 \index{SamplePointContainer@{SamplePointContainer}!ndim\_zeta@{ndim\_zeta}}
@@ -292,13 +292,13 @@ Dimension of the zeta ( = dim of local coordinate of elements)
 
 
 
-Implemented in \mbox{\hyperlink{classBinArray_a8e0c4a67385d7dcc714de95ce9965f34}{Bin\+Array}}, and \mbox{\hyperlink{classCGALSamplePointContainer_a0fb2970a09f9fa0e21b04cbf7690a5a2}{CGALSample\+Point\+Container}}.
+Implemented in \mbox{\hyperlink{classCGALSamplePointContainer_a0fb2970a09f9fa0e21b04cbf7690a5a2}{CGALSample\+Point\+Container}}, and \mbox{\hyperlink{classBinArray_a8e0c4a67385d7dcc714de95ce9965f34}{Bin\+Array}}.
 
-\mbox{\Hypertarget{classSamplePointContainer_a816528cf500a37fa9ecabe6381b31852}\label{classSamplePointContainer_a816528cf500a37fa9ecabe6381b31852}} 
+\mbox{\Hypertarget{classSamplePointContainer_a48e5ae762e0d56f67645ce4e7dd886d7}\label{classSamplePointContainer_a48e5ae762e0d56f67645ce4e7dd886d7}} 
 \index{SamplePointContainer@{SamplePointContainer}!nsample\_points\_generated\_per\_element@{nsample\_points\_generated\_per\_element}}
 \index{nsample\_points\_generated\_per\_element@{nsample\_points\_generated\_per\_element}!SamplePointContainer@{SamplePointContainer}}
 \doxysubsubsection{\texorpdfstring{nsample\_points\_generated\_per\_element()}{nsample\_points\_generated\_per\_element()}}
-{\footnotesize\ttfamily unsigned \& Sample\+Point\+Container\+::nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily unsigned\& Sample\+Point\+Container\+::nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -306,15 +306,15 @@ Implemented in \mbox{\hyperlink{classBinArray_a8e0c4a67385d7dcc714de95ce9965f34}
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00314}{314}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 314 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8h_source_l00377}{Nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element}}.
+References Nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element.
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8cc_source_l03821}{CGALSample\+Point\+Container\+::limited\+\_\+locate\+\_\+zeta()}}, and \mbox{\hyperlink{sample__point__container_8cc_source_l03606}{CGALSample\+Point\+Container\+::locate\+\_\+zeta()}}.
+Referenced by CGALSample\+Point\+Container\+::limited\+\_\+locate\+\_\+zeta(), and CGALSample\+Point\+Container\+::locate\+\_\+zeta().
 
 \mbox{\Hypertarget{classSamplePointContainer_aec11fe761eb5769d975ab4874f1ae332}\label{classSamplePointContainer_aec11fe761eb5769d975ab4874f1ae332}} 
 \index{SamplePointContainer@{SamplePointContainer}!operator=@{operator=}}
@@ -338,15 +338,15 @@ Helper function to compute the min and max coordinates for the mesh, in each dim
 
 Setup the min and max coordinates for the mesh, in each dimension. 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8cc_source_l00684}{684}} of file \mbox{\hyperlink{sample__point__container_8cc_source}{sample\+\_\+point\+\_\+container.\+cc}}.
+Definition at line 684 of file sample\+\_\+point\+\_\+container.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References e, and i.
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8cc_source_l03390}{CGALSample\+Point\+Container\+::\+CGALSample\+Point\+Container()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l02169}{Non\+Refineable\+Bin\+Array\+::\+Non\+Refineable\+Bin\+Array()}}, and \mbox{\hyperlink{sample__point__container_8cc_source_l00841}{Refineable\+Bin\+Array\+::\+Refineable\+Bin\+Array()}}.
+Referenced by CGALSample\+Point\+Container\+::\+CGALSample\+Point\+Container(), Non\+Refineable\+Bin\+Array\+::\+Non\+Refineable\+Bin\+Array(), and Refineable\+Bin\+Array\+::\+Refineable\+Bin\+Array().
 
 \mbox{\Hypertarget{classSamplePointContainer_ac7bf51a6987a9180c7715d6211fdbb46}\label{classSamplePointContainer_ac7bf51a6987a9180c7715d6211fdbb46}} 
 \index{SamplePointContainer@{SamplePointContainer}!total\_number\_of\_sample\_points\_computed\_recursively@{total\_number\_of\_sample\_points\_computed\_recursively}}
@@ -360,13 +360,13 @@ Total number of sample points in sample point container, possibly computed recur
 
 
 
-Implemented in \mbox{\hyperlink{classRefineableBinArray_a267d58bd06dafc53aff7b42927500a8b}{Refineable\+Bin\+Array}}, \mbox{\hyperlink{classNonRefineableBinArray_a937a83d5482e159270b498b4b15a1e48}{Non\+Refineable\+Bin\+Array}}, and \mbox{\hyperlink{classCGALSamplePointContainer_ae6d735524cdc0af760e1f096eb12f6c1}{CGALSample\+Point\+Container}}.
+Implemented in \mbox{\hyperlink{classCGALSamplePointContainer_ae6d735524cdc0af760e1f096eb12f6c1}{CGALSample\+Point\+Container}}, \mbox{\hyperlink{classNonRefineableBinArray_a937a83d5482e159270b498b4b15a1e48}{Non\+Refineable\+Bin\+Array}}, and \mbox{\hyperlink{classRefineableBinArray_a267d58bd06dafc53aff7b42927500a8b}{Refineable\+Bin\+Array}}.
 
-\mbox{\Hypertarget{classSamplePointContainer_a16ac5bc68c5f0e161e65bbc4799b5ec4}\label{classSamplePointContainer_a16ac5bc68c5f0e161e65bbc4799b5ec4}} 
+\mbox{\Hypertarget{classSamplePointContainer_af05aff0424680eec183a5680c4d6d65f}\label{classSamplePointContainer_af05aff0424680eec183a5680c4d6d65f}} 
 \index{SamplePointContainer@{SamplePointContainer}!total\_number\_of\_sample\_points\_visited\_during\_locate\_zeta\_from\_top\_level@{total\_number\_of\_sample\_points\_visited\_during\_locate\_zeta\_from\_top\_level}}
 \index{total\_number\_of\_sample\_points\_visited\_during\_locate\_zeta\_from\_top\_level@{total\_number\_of\_sample\_points\_visited\_during\_locate\_zeta\_from\_top\_level}!SamplePointContainer@{SamplePointContainer}}
 \doxysubsubsection{\texorpdfstring{total\_number\_of\_sample\_points\_visited\_during\_locate\_zeta\_from\_top\_level()}{total\_number\_of\_sample\_points\_visited\_during\_locate\_zeta\_from\_top\_level()}}
-{\footnotesize\ttfamily virtual unsigned \& Sample\+Point\+Container\+::total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual unsigned\& Sample\+Point\+Container\+::total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -374,19 +374,19 @@ Counter to keep track of how many sample points we\textquotesingle{}ve visited d
 
 
 
-Reimplemented in \mbox{\hyperlink{classRefineableBinArray_a00fcd3ddc867085313ac945fc4553115}{Refineable\+Bin\+Array}}.
+Reimplemented in \mbox{\hyperlink{classRefineableBinArray_a551adefafd0be9d184c4daa6adf16512}{Refineable\+Bin\+Array}}.
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00261}{261}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 261 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8h_source_l00382}{Total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level}}.
+References Total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level.
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8cc_source_l03821}{CGALSample\+Point\+Container\+::limited\+\_\+locate\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l03088}{Non\+Refineable\+Bin\+Array\+::locate\+\_\+zeta()}}, and \mbox{\hyperlink{sample__point__container_8cc_source_l03606}{CGALSample\+Point\+Container\+::locate\+\_\+zeta()}}.
+Referenced by CGALSample\+Point\+Container\+::limited\+\_\+locate\+\_\+zeta(), Non\+Refineable\+Bin\+Array\+::locate\+\_\+zeta(), and CGALSample\+Point\+Container\+::locate\+\_\+zeta().
 
 \mbox{\Hypertarget{classSamplePointContainer_a6b6b42a9e6bd8f116af8699e03a78d44}\label{classSamplePointContainer_a6b6b42a9e6bd8f116af8699e03a78d44}} 
 \index{SamplePointContainer@{SamplePointContainer}!use\_eulerian\_coordinates\_during\_setup@{use\_eulerian\_coordinates\_during\_setup}}
@@ -400,15 +400,15 @@ Use Eulerian coordinates (i.\+e. interpolated\+\_\+x) rather than zeta itself (i
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00308}{308}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 308 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8h_source_l00367}{Use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup}}.
+References Use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup.
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8cc_source_l03821}{CGALSample\+Point\+Container\+::limited\+\_\+locate\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l03088}{Non\+Refineable\+Bin\+Array\+::locate\+\_\+zeta()}}, and \mbox{\hyperlink{sample__point__container_8cc_source_l03606}{CGALSample\+Point\+Container\+::locate\+\_\+zeta()}}.
+Referenced by CGALSample\+Point\+Container\+::limited\+\_\+locate\+\_\+zeta(), Non\+Refineable\+Bin\+Array\+::locate\+\_\+zeta(), and CGALSample\+Point\+Container\+::locate\+\_\+zeta().
 
 
 
@@ -425,11 +425,11 @@ Boolean flag to make to make locate zeta fail. Used for debugging/ illustration 
 
 Boolean flag to make to make locate zeta fail. 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00339}{339}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 339 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8cc_source_l03821}{CGALSample\+Point\+Container\+::limited\+\_\+locate\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l00438}{Refineable\+Bin\+::locate\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l02002}{Refineable\+Bin\+Array\+::locate\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l03088}{Non\+Refineable\+Bin\+Array\+::locate\+\_\+zeta()}}, and \mbox{\hyperlink{sample__point__container_8cc_source_l03606}{CGALSample\+Point\+Container\+::locate\+\_\+zeta()}}.
+Referenced by CGALSample\+Point\+Container\+::limited\+\_\+locate\+\_\+zeta(), Refineable\+Bin\+::locate\+\_\+zeta(), Refineable\+Bin\+Array\+::locate\+\_\+zeta(), Non\+Refineable\+Bin\+Array\+::locate\+\_\+zeta(), and CGALSample\+Point\+Container\+::locate\+\_\+zeta().
 
 \mbox{\Hypertarget{classSamplePointContainer_a1755d4419776cc87ab27e845d03449de}\label{classSamplePointContainer_a1755d4419776cc87ab27e845d03449de}} 
 \index{SamplePointContainer@{SamplePointContainer}!Enable\_timing\_of\_setup@{Enable\_timing\_of\_setup}}
@@ -443,11 +443,11 @@ Time setup?
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00346}{346}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 346 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8cc_source_l03390}{CGALSample\+Point\+Container\+::\+CGALSample\+Point\+Container()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l03480}{CGALSample\+Point\+Container\+::get\+\_\+sample\+\_\+points()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l02169}{Non\+Refineable\+Bin\+Array\+::\+Non\+Refineable\+Bin\+Array()}}, and \mbox{\hyperlink{sample__point__container_8cc_source_l00841}{Refineable\+Bin\+Array\+::\+Refineable\+Bin\+Array()}}.
+Referenced by CGALSample\+Point\+Container\+::\+CGALSample\+Point\+Container(), CGALSample\+Point\+Container\+::get\+\_\+sample\+\_\+points(), Non\+Refineable\+Bin\+Array\+::\+Non\+Refineable\+Bin\+Array(), and Refineable\+Bin\+Array\+::\+Refineable\+Bin\+Array().
 
 \mbox{\Hypertarget{classSamplePointContainer_a5b1f32943385600039df3a76b13a216b}\label{classSamplePointContainer_a5b1f32943385600039df3a76b13a216b}} 
 \index{SamplePointContainer@{SamplePointContainer}!Ignore\_halo\_elements\_during\_locate\_zeta\_search@{Ignore\_halo\_elements\_during\_locate\_zeta\_search}}
@@ -461,11 +461,11 @@ Ignore halo elements?
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00372}{372}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 372 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8h_source_l00299}{ignore\+\_\+halo\+\_\+elements\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+search()}}, and \mbox{\hyperlink{sample__point__container_8cc_source_l03088}{Non\+Refineable\+Bin\+Array\+::locate\+\_\+zeta()}}.
+Referenced by ignore\+\_\+halo\+\_\+elements\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+search(), and Non\+Refineable\+Bin\+Array\+::locate\+\_\+zeta().
 
 \mbox{\Hypertarget{classSamplePointContainer_aae6e7df15b2dbbdf18467716da817f22}\label{classSamplePointContainer_aae6e7df15b2dbbdf18467716da817f22}} 
 \index{SamplePointContainer@{SamplePointContainer}!Max\_search\_radius@{Max\_search\_radius}}
@@ -479,11 +479,11 @@ Max radius beyond which we stop searching the bin. Initialised to DBL\+\_\+\+MAX
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00389}{389}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 389 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8cc_source_l03821}{CGALSample\+Point\+Container\+::limited\+\_\+locate\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l03088}{Non\+Refineable\+Bin\+Array\+::locate\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l03606}{CGALSample\+Point\+Container\+::locate\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00327}{max\+\_\+search\+\_\+radius()}}, and \mbox{\hyperlink{sample__point__container_8h_source_l00209}{Sample\+Point\+Container()}}.
+Referenced by CGALSample\+Point\+Container\+::limited\+\_\+locate\+\_\+zeta(), Non\+Refineable\+Bin\+Array\+::locate\+\_\+zeta(), CGALSample\+Point\+Container\+::locate\+\_\+zeta(), max\+\_\+search\+\_\+radius(), and Sample\+Point\+Container().
 
 \mbox{\Hypertarget{classSamplePointContainer_a9f044cf51ea29b0a1a85e029defd81d5}\label{classSamplePointContainer_a9f044cf51ea29b0a1a85e029defd81d5}} 
 \index{SamplePointContainer@{SamplePointContainer}!Mesh\_pt@{Mesh\_pt}}
@@ -497,11 +497,11 @@ Pointer to mesh from whose Finite\+Elements sample points are created.
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00357}{357}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 357 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8cc_source_l03390}{CGALSample\+Point\+Container\+::\+CGALSample\+Point\+Container()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l01882}{Refineable\+Bin\+Array\+::fill\+\_\+bin\+\_\+array()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l02402}{Non\+Refineable\+Bin\+Array\+::fill\+\_\+bin\+\_\+array()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l03480}{CGALSample\+Point\+Container\+::get\+\_\+sample\+\_\+points()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l03821}{CGALSample\+Point\+Container\+::limited\+\_\+locate\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l03606}{CGALSample\+Point\+Container\+::locate\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00275}{mesh\+\_\+pt()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l02169}{Non\+Refineable\+Bin\+Array\+::\+Non\+Refineable\+Bin\+Array()}}, and \mbox{\hyperlink{sample__point__container_8cc_source_l00841}{Refineable\+Bin\+Array\+::\+Refineable\+Bin\+Array()}}.
+Referenced by CGALSample\+Point\+Container\+::\+CGALSample\+Point\+Container(), Refineable\+Bin\+Array\+::fill\+\_\+bin\+\_\+array(), Non\+Refineable\+Bin\+Array\+::fill\+\_\+bin\+\_\+array(), CGALSample\+Point\+Container\+::get\+\_\+sample\+\_\+points(), CGALSample\+Point\+Container\+::limited\+\_\+locate\+\_\+zeta(), CGALSample\+Point\+Container\+::locate\+\_\+zeta(), mesh\+\_\+pt(), Non\+Refineable\+Bin\+Array\+::\+Non\+Refineable\+Bin\+Array(), and Refineable\+Bin\+Array\+::\+Refineable\+Bin\+Array().
 
 \mbox{\Hypertarget{classSamplePointContainer_a1607ff8abb3f3b6364bc169a6ea4a79c}\label{classSamplePointContainer_a1607ff8abb3f3b6364bc169a6ea4a79c}} 
 \index{SamplePointContainer@{SamplePointContainer}!Min\_and\_max\_coordinates@{Min\_and\_max\_coordinates}}
@@ -515,11 +515,11 @@ Vector of pairs of doubles for min and maximum coordinates. Call\+: Min\+\_\+and
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00363}{363}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 363 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8cc_source_l03390}{CGALSample\+Point\+Container\+::\+CGALSample\+Point\+Container()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l01840}{Bin\+Array\+::coords\+\_\+to\+\_\+bin\+\_\+index()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l01969}{Bin\+Array\+::coords\+\_\+to\+\_\+vectorial\+\_\+bin\+\_\+index()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l01882}{Refineable\+Bin\+Array\+::fill\+\_\+bin\+\_\+array()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l02402}{Non\+Refineable\+Bin\+Array\+::fill\+\_\+bin\+\_\+array()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l02794}{Non\+Refineable\+Bin\+Array\+::get\+\_\+bin()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l00995}{Refineable\+Bin\+Array\+::get\+\_\+bin\+\_\+boundaries()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l02912}{Non\+Refineable\+Bin\+Array\+::get\+\_\+bin\+\_\+vertices()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l03480}{CGALSample\+Point\+Container\+::get\+\_\+sample\+\_\+points()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l02002}{Refineable\+Bin\+Array\+::locate\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l03088}{Non\+Refineable\+Bin\+Array\+::locate\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l03606}{CGALSample\+Point\+Container\+::locate\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00282}{min\+\_\+and\+\_\+max\+\_\+coordinates()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l02169}{Non\+Refineable\+Bin\+Array\+::\+Non\+Refineable\+Bin\+Array()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l01044}{Refineable\+Bin\+Array\+::output\+\_\+neighbouring\+\_\+bins()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l01227}{Bin\+Array\+::profile\+\_\+get\+\_\+neighbouring\+\_\+bins\+\_\+helper()}}, and \mbox{\hyperlink{sample__point__container_8cc_source_l00841}{Refineable\+Bin\+Array\+::\+Refineable\+Bin\+Array()}}.
+Referenced by CGALSample\+Point\+Container\+::\+CGALSample\+Point\+Container(), Bin\+Array\+::coords\+\_\+to\+\_\+bin\+\_\+index(), Bin\+Array\+::coords\+\_\+to\+\_\+vectorial\+\_\+bin\+\_\+index(), Refineable\+Bin\+Array\+::fill\+\_\+bin\+\_\+array(), Non\+Refineable\+Bin\+Array\+::fill\+\_\+bin\+\_\+array(), Non\+Refineable\+Bin\+Array\+::get\+\_\+bin(), Refineable\+Bin\+Array\+::get\+\_\+bin\+\_\+boundaries(), Non\+Refineable\+Bin\+Array\+::get\+\_\+bin\+\_\+vertices(), CGALSample\+Point\+Container\+::get\+\_\+sample\+\_\+points(), Refineable\+Bin\+Array\+::locate\+\_\+zeta(), Non\+Refineable\+Bin\+Array\+::locate\+\_\+zeta(), CGALSample\+Point\+Container\+::locate\+\_\+zeta(), min\+\_\+and\+\_\+max\+\_\+coordinates(), Non\+Refineable\+Bin\+Array\+::\+Non\+Refineable\+Bin\+Array(), Refineable\+Bin\+Array\+::output\+\_\+neighbouring\+\_\+bins(), Bin\+Array\+::profile\+\_\+get\+\_\+neighbouring\+\_\+bins\+\_\+helper(), and Refineable\+Bin\+Array\+::\+Refineable\+Bin\+Array().
 
 \mbox{\Hypertarget{classSamplePointContainer_a849e85891df1b33c5cbe65c8a1f3b4f7}\label{classSamplePointContainer_a849e85891df1b33c5cbe65c8a1f3b4f7}} 
 \index{SamplePointContainer@{SamplePointContainer}!Nsample\_points\_generated\_per\_element@{Nsample\_points\_generated\_per\_element}}
@@ -533,11 +533,11 @@ Referenced by \mbox{\hyperlink{sample__point__container_8cc_source_l03390}{CGALS
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00377}{377}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 377 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8cc_source_l01882}{Refineable\+Bin\+Array\+::fill\+\_\+bin\+\_\+array()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l02402}{Non\+Refineable\+Bin\+Array\+::fill\+\_\+bin\+\_\+array()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l03480}{CGALSample\+Point\+Container\+::get\+\_\+sample\+\_\+points()}}, and \mbox{\hyperlink{sample__point__container_8h_source_l00314}{nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element()}}.
+Referenced by Refineable\+Bin\+Array\+::fill\+\_\+bin\+\_\+array(), Non\+Refineable\+Bin\+Array\+::fill\+\_\+bin\+\_\+array(), CGALSample\+Point\+Container\+::get\+\_\+sample\+\_\+points(), and nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element().
 
 \mbox{\Hypertarget{classSamplePointContainer_a13035786055416a2da9ae7eec515bccd}\label{classSamplePointContainer_a13035786055416a2da9ae7eec515bccd}} 
 \index{SamplePointContainer@{SamplePointContainer}!Percentage\_offset@{Percentage\_offset}}
@@ -551,11 +551,11 @@ Offset of sample point container boundaries beyond max/min coords.
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00349}{349}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 349 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8cc_source_l02402}{Non\+Refineable\+Bin\+Array\+::fill\+\_\+bin\+\_\+array()}}.
+Referenced by Non\+Refineable\+Bin\+Array\+::fill\+\_\+bin\+\_\+array().
 
 \mbox{\Hypertarget{classSamplePointContainer_a8a2db41f731f23e430bb751e6ea17723}\label{classSamplePointContainer_a8a2db41f731f23e430bb751e6ea17723}} 
 \index{SamplePointContainer@{SamplePointContainer}!Total\_number\_of\_sample\_points\_visited\_during\_locate\_zeta\_from\_top\_level@{Total\_number\_of\_sample\_points\_visited\_during\_locate\_zeta\_from\_top\_level}}
@@ -569,11 +569,11 @@ Counter to keep track of how many sample points we\textquotesingle{}ve visited d
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00382}{382}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 382 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8cc_source_l03390}{CGALSample\+Point\+Container\+::\+CGALSample\+Point\+Container()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l03821}{CGALSample\+Point\+Container\+::limited\+\_\+locate\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l02002}{Refineable\+Bin\+Array\+::locate\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l03088}{Non\+Refineable\+Bin\+Array\+::locate\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l03606}{CGALSample\+Point\+Container\+::locate\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l00841}{Refineable\+Bin\+Array\+::\+Refineable\+Bin\+Array()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00261}{total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level()}}, and \mbox{\hyperlink{sample__point__container_8h_source_l00696}{Refineable\+Bin\+Array\+::total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level()}}.
+Referenced by CGALSample\+Point\+Container\+::\+CGALSample\+Point\+Container(), CGALSample\+Point\+Container\+::limited\+\_\+locate\+\_\+zeta(), Refineable\+Bin\+Array\+::locate\+\_\+zeta(), Non\+Refineable\+Bin\+Array\+::locate\+\_\+zeta(), CGALSample\+Point\+Container\+::locate\+\_\+zeta(), Refineable\+Bin\+Array\+::\+Refineable\+Bin\+Array(), total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level(), and Refineable\+Bin\+Array\+::total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level().
 
 \mbox{\Hypertarget{classSamplePointContainer_affcd582fab41aa86bfe46e1bf92fafd1}\label{classSamplePointContainer_affcd582fab41aa86bfe46e1bf92fafd1}} 
 \index{SamplePointContainer@{SamplePointContainer}!Use\_equally\_spaced\_interior\_sample\_points@{Use\_equally\_spaced\_interior\_sample\_points}}
@@ -587,11 +587,11 @@ Use equally spaced sample points? (otherwise vertices are sampled repeatedly.
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00343}{343}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 343 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8cc_source_l01882}{Refineable\+Bin\+Array\+::fill\+\_\+bin\+\_\+array()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l02402}{Non\+Refineable\+Bin\+Array\+::fill\+\_\+bin\+\_\+array()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l03480}{CGALSample\+Point\+Container\+::get\+\_\+sample\+\_\+points()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l03821}{CGALSample\+Point\+Container\+::limited\+\_\+locate\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l00438}{Refineable\+Bin\+::locate\+\_\+zeta()}}, and \mbox{\hyperlink{sample__point__container_8cc_source_l03606}{CGALSample\+Point\+Container\+::locate\+\_\+zeta()}}.
+Referenced by Refineable\+Bin\+Array\+::fill\+\_\+bin\+\_\+array(), Non\+Refineable\+Bin\+Array\+::fill\+\_\+bin\+\_\+array(), CGALSample\+Point\+Container\+::get\+\_\+sample\+\_\+points(), CGALSample\+Point\+Container\+::limited\+\_\+locate\+\_\+zeta(), Refineable\+Bin\+::locate\+\_\+zeta(), and CGALSample\+Point\+Container\+::locate\+\_\+zeta().
 
 \mbox{\Hypertarget{classSamplePointContainer_a8d7215f8363d751343efe60a1b051e6a}\label{classSamplePointContainer_a8d7215f8363d751343efe60a1b051e6a}} 
 \index{SamplePointContainer@{SamplePointContainer}!Use\_eulerian\_coordinates\_during\_setup@{Use\_eulerian\_coordinates\_during\_setup}}
@@ -605,11 +605,11 @@ Use Eulerian coordinates (i.\+e. interpolated\+\_\+x) rather than zeta itself (i
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00367}{367}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 367 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8cc_source_l01882}{Refineable\+Bin\+Array\+::fill\+\_\+bin\+\_\+array()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l02402}{Non\+Refineable\+Bin\+Array\+::fill\+\_\+bin\+\_\+array()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l03480}{CGALSample\+Point\+Container\+::get\+\_\+sample\+\_\+points()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l02308}{Non\+Refineable\+Bin\+Array\+::output\+\_\+bins()}}, and \mbox{\hyperlink{sample__point__container_8h_source_l00308}{use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup()}}.
+Referenced by Refineable\+Bin\+Array\+::fill\+\_\+bin\+\_\+array(), Non\+Refineable\+Bin\+Array\+::fill\+\_\+bin\+\_\+array(), CGALSample\+Point\+Container\+::get\+\_\+sample\+\_\+points(), Non\+Refineable\+Bin\+Array\+::output\+\_\+bins(), and use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup().
 
 \mbox{\Hypertarget{classSamplePointContainer_ad08a1cb658b3783bcf7d8491e90965f3}\label{classSamplePointContainer_ad08a1cb658b3783bcf7d8491e90965f3}} 
 \index{SamplePointContainer@{SamplePointContainer}!Visited\_sample\_points\_file@{Visited\_sample\_points\_file}}
@@ -625,11 +625,11 @@ File to record sequence of visited sample points in. Used for debugging/ illustr
 
 File to record sequence of visited sample points in 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00335}{335}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 335 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8cc_source_l03821}{CGALSample\+Point\+Container\+::limited\+\_\+locate\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l00438}{Refineable\+Bin\+::locate\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l03088}{Non\+Refineable\+Bin\+Array\+::locate\+\_\+zeta()}}, and \mbox{\hyperlink{sample__point__container_8cc_source_l03606}{CGALSample\+Point\+Container\+::locate\+\_\+zeta()}}.
+Referenced by CGALSample\+Point\+Container\+::limited\+\_\+locate\+\_\+zeta(), Refineable\+Bin\+::locate\+\_\+zeta(), Non\+Refineable\+Bin\+Array\+::locate\+\_\+zeta(), and CGALSample\+Point\+Container\+::locate\+\_\+zeta().
 
 
 

@@ -31,20 +31,20 @@ typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquation
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a0b88d243a11f06c27361e10320d8823a}{operator=}} (const \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations}{Axisym\+Foepplvon\+Karman\+Equations}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
-const double \& \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_ae673deef259932935a19da9f0dfd137f}{nu}} () const
+const double \& \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_af9e39f4e7643aaecc50d3535ac976f35}{nu}} () const
 \begin{DoxyCompactList}\small\item\em Poisson\textquotesingle{}s ratio. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a0f88a1ab5c4bb678af1ec65c6e2345c8}{nu\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_afef1c827b8e8e8fc1ea3e99a8947c68f}{nu\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to Poisson\textquotesingle{}s ratio. \end{DoxyCompactList}\item 
-const double \& \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a019c62a99a7d17487f21ec97292fbf69}{eta}} () const
+const double \& \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a89a897222e4a40e2d258f4e95eb4ceeb}{eta}} () const
 \begin{DoxyCompactList}\small\item\em FvK parameter. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a35374a948b3c69f85be4ec3990389a2f}{eta\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_ad175782af3c07f8ca4348cda7ba3d58f}{eta\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to FvK parameter. \end{DoxyCompactList}\item 
 virtual unsigned \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a481e2bbbd87723e7b91a79bcb83e361c}{nodal\+\_\+index\+\_\+fvk}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}=0) const
 \begin{DoxyCompactList}\small\item\em Return the index at which the i-\/th unknown value is stored. The default value, i, is appropriate for single-\/physics problems. By default, these are\+: 0\+: transverse displacement w 1\+: laplacian w 2\+: radial displacement u In derived multi-\/physics elements, this function should be overloaded to reflect the chosen storage scheme. Note that these equations require that the unknown is always stored at the same index at each node. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a162b507ce3d9126a558790e77ec86e70}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output with default number of plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a704051a00a2c8624edb98f3ba05e63a2}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em Output FE representation of soln\+: r,w,sigma\+\_\+r\+\_\+r,sigma\+\_\+phi\+\_\+phi at n\+\_\+plot plot points. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Output FE representation of soln\+: r,w,u,sigma\+\_\+r\+\_\+r,sigma\+\_\+phi\+\_\+phi at n\+\_\+plot plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a236f169caf08c0214ff686e939b9dd33}{output}} (FILE $\ast$file\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em C\+\_\+style output with default number of plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a5278f37c336b7a4bd2931fdedd2945f8}{output}} (FILE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
@@ -57,7 +57,7 @@ void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_abbcf5312db19
 \begin{DoxyCompactList}\small\item\em Get error against and norm of exact solution. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a239536a30ed45a68f678037b9bdc7c9b}{compute\+\_\+error}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt, const double \&time, double \&error, double \&norm)
 \begin{DoxyCompactList}\small\item\em Dummy, time dependent error checker. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a504878b18d793ef8a6540eb0f2b086c8}{Axisym\+Foepplvon\+Karman\+Pressure\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a65a3d8cc2b0db29061b5428a1f9e3cff}{pressure\+\_\+fct\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a504878b18d793ef8a6540eb0f2b086c8}{Axisym\+Foepplvon\+Karman\+Pressure\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a65fd07792735f269b470f4e4cb3c06a2}{pressure\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to pressure function. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a504878b18d793ef8a6540eb0f2b086c8}{Axisym\+Foepplvon\+Karman\+Pressure\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a02dd3dab84e6492d88fdd144a2eed64b}{pressure\+\_\+fct\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to pressure function. Const version. \end{DoxyCompactList}\item 
@@ -83,9 +83,9 @@ void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_abddb3d7358a6
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a0b88d243a11f06c27361e10320d8823a}{operator=}} (const \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations}{Axisym\+Foepplvon\+Karman\+Equations}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
-const double \& \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a019c62a99a7d17487f21ec97292fbf69}{eta}} () const
+const double \& \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a89a897222e4a40e2d258f4e95eb4ceeb}{eta}} () const
 \begin{DoxyCompactList}\small\item\em FvK parameter. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a35374a948b3c69f85be4ec3990389a2f}{eta\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_ad175782af3c07f8ca4348cda7ba3d58f}{eta\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to FvK parameter. \end{DoxyCompactList}\item 
 virtual unsigned \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a481e2bbbd87723e7b91a79bcb83e361c}{nodal\+\_\+index\+\_\+fvk}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}=0) const
 \begin{DoxyCompactList}\small\item\em Return the index at which the i-\/th unknown value is stored. The default value, i, is appropriate for single-\/physics problems. By default, these are\+: 0\+: w 1\+: laplacian w 2\+: phi 3\+: laplacian phi 4-\/5\+: smooth first derivatives In derived multi-\/physics elements, this function should be overloaded to reflect the chosen storage scheme. Note that these equations require that the unknown is always stored at the same index at each node. \end{DoxyCompactList}\item 
@@ -105,11 +105,11 @@ void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_abbcf5312db19
 \begin{DoxyCompactList}\small\item\em Get error against and norm of exact solution. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a239536a30ed45a68f678037b9bdc7c9b}{compute\+\_\+error}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt, const double \&time, double \&error, double \&norm)
 \begin{DoxyCompactList}\small\item\em Dummy, time dependent error checker. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a504878b18d793ef8a6540eb0f2b086c8}{Axisym\+Foepplvon\+Karman\+Pressure\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a65a3d8cc2b0db29061b5428a1f9e3cff}{pressure\+\_\+fct\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a504878b18d793ef8a6540eb0f2b086c8}{Axisym\+Foepplvon\+Karman\+Pressure\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a65fd07792735f269b470f4e4cb3c06a2}{pressure\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to pressure function. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a504878b18d793ef8a6540eb0f2b086c8}{Axisym\+Foepplvon\+Karman\+Pressure\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a02dd3dab84e6492d88fdd144a2eed64b}{pressure\+\_\+fct\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to pressure function. Const version. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a504878b18d793ef8a6540eb0f2b086c8}{Axisym\+Foepplvon\+Karman\+Pressure\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a0c49c0ec419d72fae32b5c65d341fdb5}{airy\+\_\+forcing\+\_\+fct\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a504878b18d793ef8a6540eb0f2b086c8}{Axisym\+Foepplvon\+Karman\+Pressure\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a644b70b3796d567b158d8708b811a601}{airy\+\_\+forcing\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to Airy forcing function. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a504878b18d793ef8a6540eb0f2b086c8}{Axisym\+Foepplvon\+Karman\+Pressure\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_af38f42d03989cb589ad127b2ccbc7ae8}{airy\+\_\+forcing\+\_\+fct\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to Airy forcing function. Const version. \end{DoxyCompactList}\item 
@@ -168,7 +168,7 @@ A class for all isoparametric elements that solve the axisum Foeppl von Karman e
 
 This contains the generic maths. \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} functions, geometric mapping etc. must get implemented in derived class. 
 
-Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00050}{50}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 50 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h.
 
 
 
@@ -185,7 +185,7 @@ Function pointer to pressure function fct(r,f(r)) -- r is a Vector!
 
 
 
-Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00055}{55}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 55 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a504878b18d793ef8a6540eb0f2b086c8}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a504878b18d793ef8a6540eb0f2b086c8}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!AxisymFoepplvonKarmanPressureFctPt@{AxisymFoepplvonKarmanPressureFctPt}}
@@ -199,7 +199,7 @@ Function pointer to pressure function fct(r,f(r)) -- r is a Vector!
 
 
 
-Definition at line \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00055}{55}} of file \mbox{\hyperlink{axisym__fvk__elements_8h_source}{axisym\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 55 of file axisym\+\_\+fvk\+\_\+elements.\+h.
 
 
 
@@ -216,7 +216,7 @@ Constructor (must initialise the Pressure\+\_\+fct\+\_\+pt). Also set physical p
 
 
 
-Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00060}{60}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 60 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_adafc6ca47610775a65aed5f8f55f23a3}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_adafc6ca47610775a65aed5f8f55f23a3}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!AxisymFoepplvonKarmanEquations@{AxisymFoepplvonKarmanEquations}}
@@ -240,11 +240,11 @@ Constructor (must initialise the Pressure\+\_\+fct\+\_\+pt and Airy\+\_\+forcing
 
 
 
-Definition at line \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00061}{61}} of file \mbox{\hyperlink{axisym__fvk__elements_8h_source}{axisym\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 61 of file axisym\+\_\+fvk\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00386}{Default\+\_\+\+Physical\+\_\+\+Constant\+\_\+\+Value}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00372}{Eta\+\_\+pt}}, and \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00382}{Linear\+\_\+bending\+\_\+model}}.
+References Default\+\_\+\+Physical\+\_\+\+Constant\+\_\+\+Value, Eta\+\_\+pt, and Linear\+\_\+bending\+\_\+model.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_adafc6ca47610775a65aed5f8f55f23a3}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_adafc6ca47610775a65aed5f8f55f23a3}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!AxisymFoepplvonKarmanEquations@{AxisymFoepplvonKarmanEquations}}
@@ -259,11 +259,11 @@ Broken copy constructor.
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a0c49c0ec419d72fae32b5c65d341fdb5}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a0c49c0ec419d72fae32b5c65d341fdb5}} 
+\mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a644b70b3796d567b158d8708b811a601}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a644b70b3796d567b158d8708b811a601}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!airy\_forcing\_fct\_pt@{airy\_forcing\_fct\_pt}}
 \index{airy\_forcing\_fct\_pt@{airy\_forcing\_fct\_pt}!oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}}
 \doxysubsubsection{\texorpdfstring{airy\_forcing\_fct\_pt()}{airy\_forcing\_fct\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a504878b18d793ef8a6540eb0f2b086c8}{Axisym\+Foepplvon\+Karman\+Pressure\+Fct\+Pt}} \& oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::airy\+\_\+forcing\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a504878b18d793ef8a6540eb0f2b086c8}{Axisym\+Foepplvon\+Karman\+Pressure\+Fct\+Pt}}\& oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::airy\+\_\+forcing\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -271,11 +271,11 @@ Access function\+: Pointer to Airy forcing function.
 
 
 
-Definition at line \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00181}{181}} of file \mbox{\hyperlink{axisym__fvk__elements_8h_source}{axisym\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 181 of file axisym\+\_\+fvk\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00365}{Airy\+\_\+forcing\+\_\+fct\+\_\+pt}}.
+References Airy\+\_\+forcing\+\_\+fct\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_af38f42d03989cb589ad127b2ccbc7ae8}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_af38f42d03989cb589ad127b2ccbc7ae8}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!airy\_forcing\_fct\_pt@{airy\_forcing\_fct\_pt}}
@@ -289,11 +289,11 @@ Access function\+: Pointer to Airy forcing function. Const version.
 
 
 
-Definition at line \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00187}{187}} of file \mbox{\hyperlink{axisym__fvk__elements_8h_source}{axisym\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 187 of file axisym\+\_\+fvk\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00365}{Airy\+\_\+forcing\+\_\+fct\+\_\+pt}}.
+References Airy\+\_\+forcing\+\_\+fct\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_abbcf5312db19fdbe66f5dab3bbe9bfda}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_abbcf5312db19fdbe66f5dab3bbe9bfda}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!compute\_error@{compute\_error}}
@@ -313,11 +313,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a73c79a1f1e5b1d3
 
 
 
-Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8cc_source_l00433}{433}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8cc_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+cc}}.
+Definition at line 433 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00249}{interpolated\+\_\+w\+\_\+fvk()}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8cc_source_l04103}{oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}, and \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral\+::weight()}}.
+References oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), interpolated\+\_\+w\+\_\+fvk(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Integral\+::knot(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Integral\+::nweight(), s, oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Integral\+::weight().
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_abbcf5312db19fdbe66f5dab3bbe9bfda}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_abbcf5312db19fdbe66f5dab3bbe9bfda}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!compute\_error@{compute\_error}}
@@ -349,7 +349,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a7f67853506dc73f
 
 
 
-Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00167}{167}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 167 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a239536a30ed45a68f678037b9bdc7c9b}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a239536a30ed45a68f678037b9bdc7c9b}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!compute\_error@{compute\_error}}
@@ -367,7 +367,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a7f67853506dc73f
 
 
 
-Definition at line \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00155}{155}} of file \mbox{\hyperlink{axisym__fvk__elements_8h_source}{axisym\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 155 of file axisym\+\_\+fvk\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a456a9c27c326d6d1e55e3ab822ac1a5f}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a456a9c27c326d6d1e55e3ab822ac1a5f}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!dshape\_and\_dtest\_eulerian\_at\_knot\_axisym\_fvk@{dshape\_and\_dtest\_eulerian\_at\_knot\_axisym\_fvk}}
@@ -385,7 +385,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a2084
 
 
 
-Referenced by \mbox{\hyperlink{axisym__displ__based__fvk__elements_8cc_source_l00045}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
+Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a456a9c27c326d6d1e55e3ab822ac1a5f}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a456a9c27c326d6d1e55e3ab822ac1a5f}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!dshape\_and\_dtest\_eulerian\_at\_knot\_axisym\_fvk@{dshape\_and\_dtest\_eulerian\_at\_knot\_axisym\_fvk}}
@@ -429,11 +429,11 @@ Shape/test functions and derivs w.\+r.\+t. to global coords at local coord. s; r
 
 Implemented in \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a0eb2dfad7aef696dfeabb51595db46db}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a0eb2dfad7aef696dfeabb51595db46db}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D $>$}}.
 
-\mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a019c62a99a7d17487f21ec97292fbf69}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a019c62a99a7d17487f21ec97292fbf69}} 
+\mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a89a897222e4a40e2d258f4e95eb4ceeb}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a89a897222e4a40e2d258f4e95eb4ceeb}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!eta@{eta}}
 \index{eta@{eta}!oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}}
 \doxysubsubsection{\texorpdfstring{eta()}{eta()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily const double \& oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::eta (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const double\& oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::eta (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -441,21 +441,21 @@ FvK parameter.
 
 
 
-Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00091}{91}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 91 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00372}{Eta\+\_\+pt}}.
+References Eta\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{axisym__displ__based__fvk__elements_8cc_source_l00045}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
+Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
 
-\mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a019c62a99a7d17487f21ec97292fbf69}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a019c62a99a7d17487f21ec97292fbf69}} 
+\mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a89a897222e4a40e2d258f4e95eb4ceeb}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a89a897222e4a40e2d258f4e95eb4ceeb}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!eta@{eta}}
 \index{eta@{eta}!oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}}
 \doxysubsubsection{\texorpdfstring{eta()}{eta()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily const double \& oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::eta (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const double\& oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::eta (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -463,17 +463,17 @@ FvK parameter.
 
 
 
-Definition at line \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00077}{77}} of file \mbox{\hyperlink{axisym__fvk__elements_8h_source}{axisym\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 77 of file axisym\+\_\+fvk\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00372}{Eta\+\_\+pt}}.
+References Eta\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a35374a948b3c69f85be4ec3990389a2f}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a35374a948b3c69f85be4ec3990389a2f}} 
+\mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_ad175782af3c07f8ca4348cda7ba3d58f}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_ad175782af3c07f8ca4348cda7ba3d58f}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!eta\_pt@{eta\_pt}}
 \index{eta\_pt@{eta\_pt}!oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}}
 \doxysubsubsection{\texorpdfstring{eta\_pt()}{eta\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily double $\ast$\& oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::eta\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double$\ast$\& oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::eta\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -481,17 +481,17 @@ Pointer to FvK parameter.
 
 
 
-Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00097}{97}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 97 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00372}{Eta\+\_\+pt}}.
+References Eta\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a35374a948b3c69f85be4ec3990389a2f}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a35374a948b3c69f85be4ec3990389a2f}} 
+\mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_ad175782af3c07f8ca4348cda7ba3d58f}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_ad175782af3c07f8ca4348cda7ba3d58f}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!eta\_pt@{eta\_pt}}
 \index{eta\_pt@{eta\_pt}!oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}}
 \doxysubsubsection{\texorpdfstring{eta\_pt()}{eta\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily double $\ast$\& oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::eta\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double$\ast$\& oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::eta\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -499,11 +499,11 @@ Pointer to FvK parameter.
 
 
 
-Definition at line \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00083}{83}} of file \mbox{\hyperlink{axisym__fvk__elements_8h_source}{axisym\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 83 of file axisym\+\_\+fvk\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00372}{Eta\+\_\+pt}}.
+References Eta\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a18148b60b9a4addc513f1aed354bd63d}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a18148b60b9a4addc513f1aed354bd63d}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
@@ -523,11 +523,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8cc_source_l00045}{45}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8cc_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+cc}}.
+Definition at line 45 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a456a9c27c326d6d1e55e3ab822ac1a5f}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+axisym\+\_\+fvk()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00091}{eta()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00196}{get\+\_\+pressure\+\_\+fvk()}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00382}{Linear\+\_\+bending\+\_\+model}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00111}{nodal\+\_\+index\+\_\+fvk()}}, \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00070}{nu()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{elements_8cc_source_l01686}{oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+position()}}, \mbox{\hyperlink{elements_8h_source_l02576}{oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+value()}}, \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}, and \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral\+::weight()}}.
+References dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+axisym\+\_\+fvk(), eta(), get\+\_\+pressure\+\_\+fvk(), oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), Linear\+\_\+bending\+\_\+model, oomph\+::\+Finite\+Element\+::nnode(), nodal\+\_\+index\+\_\+fvk(), oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), nu(), oomph\+::\+Integral\+::nweight(), oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+position(), oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+value(), oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Integral\+::weight().
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a18148b60b9a4addc513f1aed354bd63d}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a18148b60b9a4addc513f1aed354bd63d}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
@@ -555,11 +555,11 @@ Get Airy forcing term at (Eulerian) position r. This function is virtual to allo
 
 
 
-Definition at line \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00216}{216}} of file \mbox{\hyperlink{axisym__fvk__elements_8h_source}{axisym\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 216 of file axisym\+\_\+fvk\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00365}{Airy\+\_\+forcing\+\_\+fct\+\_\+pt}}.
+References Airy\+\_\+forcing\+\_\+fct\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a564c34e37df2ed58d16903221528e94c}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a564c34e37df2ed58d16903221528e94c}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!get\_gradient\_of\_deflection@{get\_gradient\_of\_deflection}}
@@ -573,11 +573,11 @@ Get gradient of deflection\+: gradient\mbox{[}i\mbox{]} = dw/dr\+\_\+i $\ast$/.
 
 
 
-Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00213}{213}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 213 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l03298}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00111}{nodal\+\_\+index\+\_\+fvk()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian(), oomph\+::\+Finite\+Element\+::nnode(), nodal\+\_\+index\+\_\+fvk(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), and s.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a564c34e37df2ed58d16903221528e94c}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a564c34e37df2ed58d16903221528e94c}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!get\_gradient\_of\_deflection@{get\_gradient\_of\_deflection}}
@@ -591,11 +591,11 @@ Get gradient of deflection\+: gradient\mbox{[}i\mbox{]} = dw/dr\+\_\+i $\ast$/.
 
 
 
-Definition at line \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00233}{233}} of file \mbox{\hyperlink{axisym__fvk__elements_8h_source}{axisym\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 233 of file axisym\+\_\+fvk\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l03298}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00111}{nodal\+\_\+index\+\_\+fvk()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian(), oomph\+::\+Finite\+Element\+::nnode(), nodal\+\_\+index\+\_\+fvk(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), and s.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_acadd8cb7ef617690c79c0c76d7ed0000}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_acadd8cb7ef617690c79c0c76d7ed0000}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!get\_pressure\_fvk@{get\_pressure\_fvk}}
@@ -613,15 +613,15 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_
 
 
 
-Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00196}{196}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 196 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00375}{Pressure\+\_\+fct\+\_\+pt}}.
+References Pressure\+\_\+fct\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{axisym__displ__based__fvk__elements_8cc_source_l00045}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}, and \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00701}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$\+::get\+\_\+pressure\+\_\+fvk()}}.
+Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), and oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$\+::get\+\_\+pressure\+\_\+fvk().
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_acadd8cb7ef617690c79c0c76d7ed0000}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_acadd8cb7ef617690c79c0c76d7ed0000}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!get\_pressure\_fvk@{get\_pressure\_fvk}}
@@ -639,11 +639,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_
 
 
 
-Definition at line \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00196}{196}} of file \mbox{\hyperlink{axisym__fvk__elements_8h_source}{axisym\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 196 of file axisym\+\_\+fvk\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00375}{Pressure\+\_\+fct\+\_\+pt}}.
+References Pressure\+\_\+fct\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a3462c52b14649baaea863ea664a41c16}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a3462c52b14649baaea863ea664a41c16}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!interpolated\_stress@{interpolated\_stress}}
@@ -657,11 +657,11 @@ Compute in-\/plane stresses. Return boolean to indicate success (false if attemp
 
 
 
-Definition at line \mbox{\hyperlink{axisym__fvk__elements_8cc_source_l00277}{277}} of file \mbox{\hyperlink{axisym__fvk__elements_8cc_source}{axisym\+\_\+fvk\+\_\+elements.\+cc}}.
+Definition at line 277 of file axisym\+\_\+fvk\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8cc_source_l03298}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian()}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00382}{Linear\+\_\+bending\+\_\+model}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00111}{nodal\+\_\+index\+\_\+fvk()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{elements_8cc_source_l01686}{oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+position()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), Linear\+\_\+bending\+\_\+model, oomph\+::\+Finite\+Element\+::nnode(), nodal\+\_\+index\+\_\+fvk(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+position(), and s.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a22d4a63c862395cae211773748c4c896}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a22d4a63c862395cae211773748c4c896}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!interpolated\_stress@{interpolated\_stress}}
@@ -675,15 +675,15 @@ Compute in-\/plane stresses. Return boolean to indicate success (false if attemp
 
 
 
-Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8cc_source_l00234}{234}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8cc_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+cc}}.
+Definition at line 234 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8cc_source_l03298}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian()}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00382}{Linear\+\_\+bending\+\_\+model}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00111}{nodal\+\_\+index\+\_\+fvk()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00070}{nu()}}, \mbox{\hyperlink{elements_8cc_source_l01686}{oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+position()}}, \mbox{\hyperlink{elements_8h_source_l02576}{oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+value()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), Linear\+\_\+bending\+\_\+model, oomph\+::\+Finite\+Element\+::nnode(), nodal\+\_\+index\+\_\+fvk(), nu(), oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+position(), oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+value(), and s.
 
 
 
-Referenced by \mbox{\hyperlink{axisym__displ__based__fvk__elements_8cc_source_l00317}{output()}}, and \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00864}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$\+::output()}}.
+Referenced by output(), and oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_ac24fc0416243162170ad09c7f3261ebd}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_ac24fc0416243162170ad09c7f3261ebd}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!interpolated\_u\_fvk@{interpolated\_u\_fvk}}
@@ -697,15 +697,15 @@ Return FE representation of radial displacement.
 
 
 
-Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00277}{277}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 277 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00111}{nodal\+\_\+index\+\_\+fvk()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
+References oomph\+::\+Finite\+Element\+::nnode(), nodal\+\_\+index\+\_\+fvk(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), s, and oomph\+::\+Finite\+Element\+::shape().
 
 
 
-Referenced by \mbox{\hyperlink{axisym__displ__based__fvk__elements_8cc_source_l00317}{output()}}.
+Referenced by output().
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_aca5188335be3d0432fbf92d493026558}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_aca5188335be3d0432fbf92d493026558}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!interpolated\_w\_fvk@{interpolated\_w\_fvk}}
@@ -719,15 +719,15 @@ Return FE representation of transverse displacement.
 
 
 
-Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00249}{249}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 249 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00111}{nodal\+\_\+index\+\_\+fvk()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
+References oomph\+::\+Finite\+Element\+::nnode(), nodal\+\_\+index\+\_\+fvk(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), s, and oomph\+::\+Finite\+Element\+::shape().
 
 
 
-Referenced by \mbox{\hyperlink{axisym__displ__based__fvk__elements_8cc_source_l00433}{compute\+\_\+error()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8cc_source_l00317}{output()}}, and \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00864}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$\+::output()}}.
+Referenced by compute\+\_\+error(), output(), and oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_aca5188335be3d0432fbf92d493026558}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_aca5188335be3d0432fbf92d493026558}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!interpolated\_w\_fvk@{interpolated\_w\_fvk}}
@@ -741,11 +741,11 @@ Return FE representation of vertical displacement, w\+\_\+fvk(s) at local coordi
 
 
 
-Definition at line \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00269}{269}} of file \mbox{\hyperlink{axisym__fvk__elements_8h_source}{axisym\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 269 of file axisym\+\_\+fvk\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00111}{nodal\+\_\+index\+\_\+fvk()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
+References oomph\+::\+Finite\+Element\+::nnode(), nodal\+\_\+index\+\_\+fvk(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), s, and oomph\+::\+Finite\+Element\+::shape().
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a481e2bbbd87723e7b91a79bcb83e361c}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a481e2bbbd87723e7b91a79bcb83e361c}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!nodal\_index\_fvk@{nodal\_index\_fvk}}
@@ -759,15 +759,15 @@ Return the index at which the i-\/th unknown value is stored. The default value,
 
 
 
-Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00111}{111}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 111 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References i.
 
 
 
-Referenced by \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00648}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$\+::dposition\+\_\+dt()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8cc_source_l00045}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00213}{get\+\_\+gradient\+\_\+of\+\_\+deflection()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8cc_source_l00234}{interpolated\+\_\+stress()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00277}{interpolated\+\_\+u\+\_\+fvk()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00249}{interpolated\+\_\+w\+\_\+fvk()}}, \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00734}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$\+::output\+\_\+integration\+\_\+points()}}, \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00614}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$\+::position()}}, and \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00321}{use\+\_\+linear\+\_\+bending\+\_\+model()}}.
+Referenced by oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$\+::dposition\+\_\+dt(), fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), get\+\_\+gradient\+\_\+of\+\_\+deflection(), interpolated\+\_\+stress(), interpolated\+\_\+u\+\_\+fvk(), interpolated\+\_\+w\+\_\+fvk(), oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$\+::output\+\_\+integration\+\_\+points(), oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$\+::position(), and use\+\_\+linear\+\_\+bending\+\_\+model().
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a481e2bbbd87723e7b91a79bcb83e361c}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a481e2bbbd87723e7b91a79bcb83e361c}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!nodal\_index\_fvk@{nodal\_index\_fvk}}
@@ -781,17 +781,17 @@ Return the index at which the i-\/th unknown value is stored. The default value,
 
 
 
-Definition at line \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00099}{99}} of file \mbox{\hyperlink{axisym__fvk__elements_8h_source}{axisym\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 99 of file axisym\+\_\+fvk\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References i.
 
-\mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_ae673deef259932935a19da9f0dfd137f}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_ae673deef259932935a19da9f0dfd137f}} 
+\mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_af9e39f4e7643aaecc50d3535ac976f35}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_af9e39f4e7643aaecc50d3535ac976f35}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!nu@{nu}}
 \index{nu@{nu}!oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}}
 \doxysubsubsection{\texorpdfstring{nu()}{nu()}}
-{\footnotesize\ttfamily const double \& oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::nu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const double\& oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::nu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -799,21 +799,21 @@ Poisson\textquotesingle{}s ratio.
 
 
 
-Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00070}{70}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 70 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00378}{Nu\+\_\+pt}}.
+References Nu\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{axisym__displ__based__fvk__elements_8cc_source_l00045}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}, and \mbox{\hyperlink{axisym__displ__based__fvk__elements_8cc_source_l00234}{interpolated\+\_\+stress()}}.
+Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), and interpolated\+\_\+stress().
 
-\mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a0f88a1ab5c4bb678af1ec65c6e2345c8}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a0f88a1ab5c4bb678af1ec65c6e2345c8}} 
+\mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_afef1c827b8e8e8fc1ea3e99a8947c68f}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_afef1c827b8e8e8fc1ea3e99a8947c68f}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!nu\_pt@{nu\_pt}}
 \index{nu\_pt@{nu\_pt}!oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}}
 \doxysubsubsection{\texorpdfstring{nu\_pt()}{nu\_pt()}}
-{\footnotesize\ttfamily double $\ast$\& oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::nu\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double$\ast$\& oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::nu\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -821,11 +821,11 @@ Pointer to Poisson\textquotesingle{}s ratio.
 
 
 
-Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00085}{85}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 85 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00378}{Nu\+\_\+pt}}.
+References Nu\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a0b88d243a11f06c27361e10320d8823a}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a0b88d243a11f06c27361e10320d8823a}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!operator=@{operator=}}
@@ -867,11 +867,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a17
 
 
 
-Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00128}{128}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 128 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00117}{output()}}.
+References output().
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a236f169caf08c0214ff686e939b9dd33}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a236f169caf08c0214ff686e939b9dd33}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!output@{output}}
@@ -893,11 +893,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a17
 
 
 
-Definition at line \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00116}{116}} of file \mbox{\hyperlink{axisym__fvk__elements_8h_source}{axisym\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 116 of file axisym\+\_\+fvk\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00117}{output()}}.
+References output().
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a5278f37c336b7a4bd2931fdedd2945f8}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a5278f37c336b7a4bd2931fdedd2945f8}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!output@{output}}
@@ -909,7 +909,9 @@ References \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00117
 
 C-\/style output FE representation of soln\+: r,w at n\+\_\+plot plot points. 
 
-C-\/style output function\+: r,w nplot points. 
+C-\/style output function\+: r,w nplot points.
+
+C-\/style output function\+: r,w,u nplot points. 
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f03320eeb9d110d48c}{oomph\+::\+Finite\+Element}}.
 
@@ -919,11 +921,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a09
 
 
 
-Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8cc_source_l00351}{351}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8cc_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+cc}}.
+Definition at line 351 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03148}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00277}{interpolated\+\_\+u\+\_\+fvk()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00249}{interpolated\+\_\+w\+\_\+fvk()}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l03186}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{elements_8h_source_l03161}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}, and \mbox{\hyperlink{elements_8h_source_l03174}{oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer()}}.
+References oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot(), interpolated\+\_\+u\+\_\+fvk(), interpolated\+\_\+w\+\_\+fvk(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Finite\+Element\+::nplot\+\_\+points(), s, oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string(), and oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer().
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a5278f37c336b7a4bd2931fdedd2945f8}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a5278f37c336b7a4bd2931fdedd2945f8}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!output@{output}}
@@ -963,15 +965,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a76
 
 
 
-Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00117}{117}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 117 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00117}{output()}}.
-
-
-
-Referenced by \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00117}{output()}}, and \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00435}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D $>$\+::output()}}.
+Referenced by output(), and oomph\+::\+Axisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D $>$\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a162b507ce3d9126a558790e77ec86e70}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a162b507ce3d9126a558790e77ec86e70}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!output@{output}}
@@ -993,11 +991,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a76
 
 
 
-Definition at line \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00105}{105}} of file \mbox{\hyperlink{axisym__fvk__elements_8h_source}{axisym\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 105 of file axisym\+\_\+fvk\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00117}{output()}}.
+References output().
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a704051a00a2c8624edb98f3ba05e63a2}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a704051a00a2c8624edb98f3ba05e63a2}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!output@{output}}
@@ -1007,23 +1005,25 @@ References \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00117
 
 
 
-Output FE representation of soln\+: r,w,sigma\+\_\+r\+\_\+r,sigma\+\_\+phi\+\_\+phi at n\+\_\+plot plot points. 
+Output FE representation of soln\+: r,w,u,sigma\+\_\+r\+\_\+r,sigma\+\_\+phi\+\_\+phi at n\+\_\+plot plot points. 
 
-Output function\+: r, w, sigma\+\_\+r\+\_\+r, sigma\+\_\+phi\+\_\+phi nplot points. 
+Output function\+: r, w, sigma\+\_\+r\+\_\+r, sigma\+\_\+phi\+\_\+phi nplot points.
+
+Output function\+: r, w, u, sigma\+\_\+r\+\_\+r, sigma\+\_\+phi\+\_\+phi nplot points. 
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b43e6679c9dd28c457}{oomph\+::\+Finite\+Element}}.
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a435aab946dfcaa0b23e7df59e9bc3933}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a435aab946dfcaa0b23e7df59e9bc3933}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a03c82e935db8c1c93dfe2f443ec5e817}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a03c82e935db8c1c93dfe2f443ec5e817}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a435aab946dfcaa0b23e7df59e9bc3933}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a435aab946dfcaa0b23e7df59e9bc3933}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8cc_source_l00317}{317}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8cc_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+cc}}.
+Definition at line 317 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03148}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8cc_source_l00234}{interpolated\+\_\+stress()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00277}{interpolated\+\_\+u\+\_\+fvk()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00249}{interpolated\+\_\+w\+\_\+fvk()}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l03186}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot(), interpolated\+\_\+stress(), interpolated\+\_\+u\+\_\+fvk(), interpolated\+\_\+w\+\_\+fvk(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Finite\+Element\+::nplot\+\_\+points(), and s.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a704051a00a2c8624edb98f3ba05e63a2}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a704051a00a2c8624edb98f3ba05e63a2}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!output@{output}}
@@ -1041,7 +1041,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a435aab946dfcaa0b23e7df59e9bc3933}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a03c82e935db8c1c93dfe2f443ec5e817}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a03c82e935db8c1c93dfe2f443ec5e817}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$}}, and \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a435aab946dfcaa0b23e7df59e9bc3933}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D $>$}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a14d84273c5e7a3cdec8fb9b228d675c3}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a14d84273c5e7a3cdec8fb9b228d675c3}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!output\_fct@{output\_fct}}
@@ -1063,7 +1063,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a29
 
 
 
-Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00146}{146}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 146 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a14d84273c5e7a3cdec8fb9b228d675c3}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a14d84273c5e7a3cdec8fb9b228d675c3}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!output\_fct@{output\_fct}}
@@ -1085,7 +1085,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a29
 
 
 
-Definition at line \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00134}{134}} of file \mbox{\hyperlink{axisym__fvk__elements_8h_source}{axisym\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 134 of file axisym\+\_\+fvk\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_aae7ed0c9ae0e1a1e2656534807a24527}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_aae7ed0c9ae0e1a1e2656534807a24527}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!output\_fct@{output\_fct}}
@@ -1111,15 +1111,15 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_aee
 
 
 
-Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8cc_source_l00385}{385}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8cc_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+cc}}.
+Definition at line 385 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03148}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l03186}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{elements_8h_source_l03161}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}, and \mbox{\hyperlink{elements_8h_source_l03174}{oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer()}}.
+References oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Finite\+Element\+::nplot\+\_\+points(), s, oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string(), and oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer().
 
 
 
-Referenced by \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00463}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D $>$\+::output\+\_\+fct()}}.
+Referenced by oomph\+::\+Axisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D $>$\+::output\+\_\+fct().
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_aae7ed0c9ae0e1a1e2656534807a24527}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_aae7ed0c9ae0e1a1e2656534807a24527}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!output\_fct@{output\_fct}}
@@ -1139,11 +1139,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a22b695c714f60ee
 
 Reimplemented in \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_aee745c3439aa18c82ddbe8b90fade1c0}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D $>$}}.
 
-\mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a65a3d8cc2b0db29061b5428a1f9e3cff}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a65a3d8cc2b0db29061b5428a1f9e3cff}} 
+\mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a65fd07792735f269b470f4e4cb3c06a2}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a65fd07792735f269b470f4e4cb3c06a2}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!pressure\_fct\_pt@{pressure\_fct\_pt}}
 \index{pressure\_fct\_pt@{pressure\_fct\_pt}!oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}}
 \doxysubsubsection{\texorpdfstring{pressure\_fct\_pt()}{pressure\_fct\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a504878b18d793ef8a6540eb0f2b086c8}{Axisym\+Foepplvon\+Karman\+Pressure\+Fct\+Pt}} \& oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::pressure\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a504878b18d793ef8a6540eb0f2b086c8}{Axisym\+Foepplvon\+Karman\+Pressure\+Fct\+Pt}}\& oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::pressure\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1151,17 +1151,17 @@ Access function\+: Pointer to pressure function.
 
 
 
-Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00181}{181}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 181 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00375}{Pressure\+\_\+fct\+\_\+pt}}.
+References Pressure\+\_\+fct\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a65a3d8cc2b0db29061b5428a1f9e3cff}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a65a3d8cc2b0db29061b5428a1f9e3cff}} 
+\mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a65fd07792735f269b470f4e4cb3c06a2}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a65fd07792735f269b470f4e4cb3c06a2}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!pressure\_fct\_pt@{pressure\_fct\_pt}}
 \index{pressure\_fct\_pt@{pressure\_fct\_pt}!oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}}
 \doxysubsubsection{\texorpdfstring{pressure\_fct\_pt()}{pressure\_fct\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a504878b18d793ef8a6540eb0f2b086c8}{Axisym\+Foepplvon\+Karman\+Pressure\+Fct\+Pt}} \& oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::pressure\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a504878b18d793ef8a6540eb0f2b086c8}{Axisym\+Foepplvon\+Karman\+Pressure\+Fct\+Pt}}\& oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::pressure\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1169,11 +1169,11 @@ Access function\+: Pointer to pressure function.
 
 
 
-Definition at line \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00169}{169}} of file \mbox{\hyperlink{axisym__fvk__elements_8h_source}{axisym\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 169 of file axisym\+\_\+fvk\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00375}{Pressure\+\_\+fct\+\_\+pt}}.
+References Pressure\+\_\+fct\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a02dd3dab84e6492d88fdd144a2eed64b}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a02dd3dab84e6492d88fdd144a2eed64b}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!pressure\_fct\_pt@{pressure\_fct\_pt}}
@@ -1187,11 +1187,11 @@ Access function\+: Pointer to pressure function. Const version.
 
 
 
-Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00187}{187}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 187 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00375}{Pressure\+\_\+fct\+\_\+pt}}.
+References Pressure\+\_\+fct\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a02dd3dab84e6492d88fdd144a2eed64b}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a02dd3dab84e6492d88fdd144a2eed64b}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!pressure\_fct\_pt@{pressure\_fct\_pt}}
@@ -1205,11 +1205,11 @@ Access function\+: Pointer to pressure function. Const version.
 
 
 
-Definition at line \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00175}{175}} of file \mbox{\hyperlink{axisym__fvk__elements_8h_source}{axisym\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 175 of file axisym\+\_\+fvk\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00375}{Pressure\+\_\+fct\+\_\+pt}}.
+References Pressure\+\_\+fct\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a2ececacf1a7dd89188a4a20e5abbb7c0}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a2ececacf1a7dd89188a4a20e5abbb7c0}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!self\_test@{self\_test}}
@@ -1227,11 +1227,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_af94c5a5e22175d5
 
 
 
-Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8cc_source_l00208}{208}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8cc_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+cc}}.
+Definition at line 208 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l04440}{oomph\+::\+Finite\+Element\+::self\+\_\+test()}}.
+References oomph\+::\+Finite\+Element\+::self\+\_\+test().
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a2ececacf1a7dd89188a4a20e5abbb7c0}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a2ececacf1a7dd89188a4a20e5abbb7c0}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!self\_test@{self\_test}}
@@ -1259,11 +1259,11 @@ Sets a flag to signify that we are solving the linear, pure bending equations, a
 
 
 
-Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00321}{321}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 321 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00382}{Linear\+\_\+bending\+\_\+model}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00111}{nodal\+\_\+index\+\_\+fvk()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8h_source_l00385}{oomph\+::\+Data\+::pin()}}.
+References Linear\+\_\+bending\+\_\+model, oomph\+::\+Finite\+Element\+::nnode(), nodal\+\_\+index\+\_\+fvk(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Data\+::pin().
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_abddb3d7358a6039420bf6ed58e7a5547}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_abddb3d7358a6039420bf6ed58e7a5547}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!use\_linear\_bending\_model@{use\_linear\_bending\_model}}
@@ -1277,11 +1277,11 @@ Sets a flag to signify that we are solving the linear, pure bending equations, a
 
 
 
-Definition at line \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00308}{308}} of file \mbox{\hyperlink{axisym__fvk__elements_8h_source}{axisym\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 308 of file axisym\+\_\+fvk\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00382}{Linear\+\_\+bending\+\_\+model}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00111}{nodal\+\_\+index\+\_\+fvk()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8h_source_l00385}{oomph\+::\+Data\+::pin()}}.
+References Linear\+\_\+bending\+\_\+model, oomph\+::\+Finite\+Element\+::nnode(), nodal\+\_\+index\+\_\+fvk(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Data\+::pin().
 
 
 
@@ -1298,11 +1298,11 @@ Pointer to Airy forcing function.
 
 
 
-Definition at line \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00365}{365}} of file \mbox{\hyperlink{axisym__fvk__elements_8h_source}{axisym\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 365 of file axisym\+\_\+fvk\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00181}{airy\+\_\+forcing\+\_\+fct\+\_\+pt()}}, and \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00216}{get\+\_\+airy\+\_\+forcing\+\_\+fvk()}}.
+Referenced by airy\+\_\+forcing\+\_\+fct\+\_\+pt(), and get\+\_\+airy\+\_\+forcing\+\_\+fvk().
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a0b63093c406541a97199a2a68dcd29e7}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a0b63093c406541a97199a2a68dcd29e7}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!Default\_Physical\_Constant\_Value@{Default\_Physical\_Constant\_Value}}
@@ -1316,11 +1316,11 @@ Default value for physical constants.
 
 Default value physical constants. 
 
-Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00386}{386}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 386 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00061}{Axisym\+Foepplvon\+Karman\+Equations()}}.
+Referenced by Axisym\+Foepplvon\+Karman\+Equations().
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a31a8e3c278b1c2ce7238b71902812ffd}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a31a8e3c278b1c2ce7238b71902812ffd}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!Eta\_pt@{Eta\_pt}}
@@ -1334,11 +1334,11 @@ Pointer to FvK parameter.
 
 
 
-Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00372}{372}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 372 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00061}{Axisym\+Foepplvon\+Karman\+Equations()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00091}{eta()}}, and \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00097}{eta\+\_\+pt()}}.
+Referenced by Axisym\+Foepplvon\+Karman\+Equations(), eta(), and eta\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a86ab587e241e8950409e38698692c109}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a86ab587e241e8950409e38698692c109}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!Linear\_bending\_model@{Linear\_bending\_model}}
@@ -1352,11 +1352,11 @@ Flag which stores whether we are using a linear, pure bending model instead of t
 
 
 
-Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00382}{382}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 382 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00061}{Axisym\+Foepplvon\+Karman\+Equations()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8cc_source_l00045}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}, \mbox{\hyperlink{axisym__displ__based__fvk__elements_8cc_source_l00234}{interpolated\+\_\+stress()}}, and \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00321}{use\+\_\+linear\+\_\+bending\+\_\+model()}}.
+Referenced by Axisym\+Foepplvon\+Karman\+Equations(), fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), interpolated\+\_\+stress(), and use\+\_\+linear\+\_\+bending\+\_\+model().
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a02dd0294aa3239752ea7c21018ac65b6}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a02dd0294aa3239752ea7c21018ac65b6}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!Nu\_pt@{Nu\_pt}}
@@ -1370,11 +1370,11 @@ Pointer to Poisson\textquotesingle{}s ratio.
 
 
 
-Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00378}{378}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 378 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00070}{nu()}}, and \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00085}{nu\+\_\+pt()}}.
+Referenced by nu(), and nu\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanEquations_a06ebccc2c0b2638657c98f6137de7d4b}\label{classoomph_1_1AxisymFoepplvonKarmanEquations_a06ebccc2c0b2638657c98f6137de7d4b}} 
 \index{oomph::AxisymFoepplvonKarmanEquations@{oomph::AxisymFoepplvonKarmanEquations}!Pressure\_fct\_pt@{Pressure\_fct\_pt}}
@@ -1388,11 +1388,11 @@ Pointer to pressure function\+:
 
 
 
-Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00375}{375}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h}}.
+Definition at line 375 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00196}{get\+\_\+pressure\+\_\+fvk()}}, and \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00181}{pressure\+\_\+fct\+\_\+pt()}}.
+Referenced by get\+\_\+pressure\+\_\+fvk(), and pressure\+\_\+fct\+\_\+pt().
 
 
 

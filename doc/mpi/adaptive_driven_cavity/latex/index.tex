@@ -12,7 +12,7 @@ In our demo driver codes, we surround all parallel sections of code with {\ttfam
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_main======================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver for RefineableDrivenCavity test problem }}
-\DoxyCodeLine{\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} **argv)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
@@ -72,7 +72,7 @@ A particular feature of the \href{../../../navier_stokes/adaptive_driven_cavity/
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// After adaptation: Unpin pressure and pin redundant pressure dofs.}}
+\DoxyCodeLine{ \textcolor{comment}{/// After adaptation: Unpin pressure and pin redundant pressure dofs.}}
 \DoxyCodeLine{ \textcolor{keywordtype}{void} actions\_after\_adapt()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Unpin all pressure dofs}}
@@ -116,7 +116,7 @@ The {\ttfamily doc\+\_\+solution()} routine requires a slight modification to en
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_doc\_solution=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} RefineableDrivenCavityProblem<ELEMENT>::doc\_solution(DocInfo\& doc\_info)}
 \DoxyCodeLine{\{ }

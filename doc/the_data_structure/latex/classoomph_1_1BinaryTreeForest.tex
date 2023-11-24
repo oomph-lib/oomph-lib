@@ -39,9 +39,9 @@ unsigned \mbox{\hyperlink{classoomph_1_1BinaryTreeForest_a7cf3ec0bdb4c0955ca35bc
 \item 
 void \mbox{\hyperlink{classoomph_1_1BinaryTreeForest_a01845fafe6ef29f11226bf11e07eec1a}{find\+\_\+neighbours}} ()
 \begin{DoxyCompactList}\small\item\em Construct the neighbour lookup scheme. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1BinaryTreeRoot}{Binary\+Tree\+Root}} $\ast$ \mbox{\hyperlink{classoomph_1_1BinaryTreeForest_a08c7c91a50f0c679bc61fda3ae06cbef}{binary\+\_\+tree\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\mbox{\hyperlink{classoomph_1_1BinaryTreeRoot}{Binary\+Tree\+Root}} $\ast$ \mbox{\hyperlink{classoomph_1_1BinaryTreeForest_a21c3136cc71dc64d68e1799cccf267b0}{binary\+\_\+tree\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Return pointer to i-\/th root binary tree in this forest (performs a dynamic cast from the \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} to a \mbox{\hyperlink{classoomph_1_1BinaryTreeRoot}{Binary\+Tree\+Root}}). \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1BinaryTreeRoot}{Binary\+Tree\+Root}} $\ast$ \mbox{\hyperlink{classoomph_1_1BinaryTreeForest_a130188a77f8358f082e6b6fca5b72286}{binary\+\_\+neigh\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const int \&direction)
+\mbox{\hyperlink{classoomph_1_1BinaryTreeRoot}{Binary\+Tree\+Root}} $\ast$ \mbox{\hyperlink{classoomph_1_1BinaryTreeForest_ab4b0d2442ea99b55620af7126a78f930}{binary\+\_\+neigh\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const int \&direction)
 \begin{DoxyCompactList}\small\item\em Given the number i of the root binary tree in this forest, return a pointer to its neighbour in the specified direction. NULL if neighbour doesn\textquotesingle{}t exist. (This does the dynamic cast from a \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} to a \mbox{\hyperlink{classoomph_1_1BinaryTreeRoot}{Binary\+Tree\+Root}} internally). \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -49,7 +49,7 @@ void \mbox{\hyperlink{classoomph_1_1BinaryTreeForest_a01845fafe6ef29f11226bf11e0
 \doxysubsection{Detailed Description}
 A \mbox{\hyperlink{classoomph_1_1BinaryTreeForest}{Binary\+Tree\+Forest}} consists of a collection of Binary\+Tree\+Roots. Each member tree can have neighbours to its left and right. 
 
-Definition at line \mbox{\hyperlink{binary__tree_8h_source_l00285}{285}} of file \mbox{\hyperlink{binary__tree_8h_source}{binary\+\_\+tree.\+h}}.
+Definition at line 285 of file binary\+\_\+tree.\+h.
 
 
 
@@ -66,7 +66,7 @@ Default constructor (empty and broken)
 
 
 
-Definition at line \mbox{\hyperlink{binary__tree_8h_source_l00289}{289}} of file \mbox{\hyperlink{binary__tree_8h_source}{binary\+\_\+tree.\+h}}.
+Definition at line 289 of file binary\+\_\+tree.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BinaryTreeForest_a534e8527d8701034afb5a8d6ab343de2}\label{classoomph_1_1BinaryTreeForest_a534e8527d8701034afb5a8d6ab343de2}} 
 \index{oomph::BinaryTreeForest@{oomph::BinaryTreeForest}!BinaryTreeForest@{BinaryTreeForest}}
@@ -85,11 +85,11 @@ Pass\+:
 \item trees\+\_\+pt\mbox{[}\mbox{]}, the \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to the constituent trees (\mbox{\hyperlink{classoomph_1_1BinaryTreeRoot}{Binary\+Tree\+Root}} objects) 
 \end{DoxyItemize}
 
-Definition at line \mbox{\hyperlink{binary__tree_8cc_source_l00438}{438}} of file \mbox{\hyperlink{binary__tree_8cc_source}{binary\+\_\+tree.\+cc}}.
+Definition at line 438 of file binary\+\_\+tree.\+cc.
 
 
 
-References \mbox{\hyperlink{binary__tree_8cc_source_l00454}{find\+\_\+neighbours()}}.
+References find\+\_\+neighbours().
 
 \mbox{\Hypertarget{classoomph_1_1BinaryTreeForest_acb08554836a1a5187ea354d8a7108b7a}\label{classoomph_1_1BinaryTreeForest_acb08554836a1a5187ea354d8a7108b7a}} 
 \index{oomph::BinaryTreeForest@{oomph::BinaryTreeForest}!BinaryTreeForest@{BinaryTreeForest}}
@@ -113,16 +113,16 @@ Destructor\+: Delete the constituent binary trees (and thus the objects associat
 
 
 
-Definition at line \mbox{\hyperlink{binary__tree_8h_source_l00310}{310}} of file \mbox{\hyperlink{binary__tree_8h_source}{binary\+\_\+tree.\+h}}.
+Definition at line 310 of file binary\+\_\+tree.\+h.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1BinaryTreeForest_a130188a77f8358f082e6b6fca5b72286}\label{classoomph_1_1BinaryTreeForest_a130188a77f8358f082e6b6fca5b72286}} 
+\mbox{\Hypertarget{classoomph_1_1BinaryTreeForest_ab4b0d2442ea99b55620af7126a78f930}\label{classoomph_1_1BinaryTreeForest_ab4b0d2442ea99b55620af7126a78f930}} 
 \index{oomph::BinaryTreeForest@{oomph::BinaryTreeForest}!binary\_neigh\_pt@{binary\_neigh\_pt}}
 \index{binary\_neigh\_pt@{binary\_neigh\_pt}!oomph::BinaryTreeForest@{oomph::BinaryTreeForest}}
 \doxysubsubsection{\texorpdfstring{binary\_neigh\_pt()}{binary\_neigh\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1BinaryTreeRoot}{Binary\+Tree\+Root}} $\ast$ oomph\+::\+Binary\+Tree\+Forest\+::binary\+\_\+neigh\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i,  }\item[{const int \&}]{direction }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1BinaryTreeRoot}{Binary\+Tree\+Root}}$\ast$ oomph\+::\+Binary\+Tree\+Forest\+::binary\+\_\+neigh\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i,  }\item[{const int \&}]{direction }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
@@ -130,17 +130,17 @@ Given the number i of the root binary tree in this forest, return a pointer to i
 
 
 
-Definition at line \mbox{\hyperlink{binary__tree_8h_source_l00345}{345}} of file \mbox{\hyperlink{binary__tree_8h_source}{binary\+\_\+tree.\+h}}.
+Definition at line 345 of file binary\+\_\+tree.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{tree_8h_source_l00480}{oomph\+::\+Tree\+Forest\+::\+Trees\+\_\+pt}}.
+References i.
 
-\mbox{\Hypertarget{classoomph_1_1BinaryTreeForest_a08c7c91a50f0c679bc61fda3ae06cbef}\label{classoomph_1_1BinaryTreeForest_a08c7c91a50f0c679bc61fda3ae06cbef}} 
+\mbox{\Hypertarget{classoomph_1_1BinaryTreeForest_a21c3136cc71dc64d68e1799cccf267b0}\label{classoomph_1_1BinaryTreeForest_a21c3136cc71dc64d68e1799cccf267b0}} 
 \index{oomph::BinaryTreeForest@{oomph::BinaryTreeForest}!binary\_tree\_pt@{binary\_tree\_pt}}
 \index{binary\_tree\_pt@{binary\_tree\_pt}!oomph::BinaryTreeForest@{oomph::BinaryTreeForest}}
 \doxysubsubsection{\texorpdfstring{binary\_tree\_pt()}{binary\_tree\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1BinaryTreeRoot}{Binary\+Tree\+Root}} $\ast$ oomph\+::\+Binary\+Tree\+Forest\+::binary\+\_\+tree\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1BinaryTreeRoot}{Binary\+Tree\+Root}}$\ast$ oomph\+::\+Binary\+Tree\+Forest\+::binary\+\_\+tree\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
@@ -148,11 +148,11 @@ Return pointer to i-\/th root binary tree in this forest (performs a dynamic cas
 
 
 
-Definition at line \mbox{\hyperlink{binary__tree_8h_source_l00336}{336}} of file \mbox{\hyperlink{binary__tree_8h_source}{binary\+\_\+tree.\+h}}.
+Definition at line 336 of file binary\+\_\+tree.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{tree_8h_source_l00480}{oomph\+::\+Tree\+Forest\+::\+Trees\+\_\+pt}}.
+References i.
 
 \mbox{\Hypertarget{classoomph_1_1BinaryTreeForest_a2e99234fcdc75760e00afb7d140c74ec}\label{classoomph_1_1BinaryTreeForest_a2e99234fcdc75760e00afb7d140c74ec}} 
 \index{oomph::BinaryTreeForest@{oomph::BinaryTreeForest}!check\_all\_neighbours@{check\_all\_neighbours}}
@@ -170,11 +170,11 @@ Implements \mbox{\hyperlink{classoomph_1_1TreeForest_a0e6a7f821d9f14374c6d23d876
 
 
 
-Definition at line \mbox{\hyperlink{binary__tree_8cc_source_l00548}{548}} of file \mbox{\hyperlink{binary__tree_8cc_source}{binary\+\_\+tree.\+cc}}.
+Definition at line 548 of file binary\+\_\+tree.\+cc.
 
 
 
-References \mbox{\hyperlink{oomph__utilities_8h_source_l00524}{oomph\+::\+Doc\+Info\+::directory()}}, \mbox{\hyperlink{binary__tree_8cc_source_l00668}{oomph\+::\+Binary\+Tree\+::doc\+\_\+neighbours()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00548}{oomph\+::\+Doc\+Info\+::is\+\_\+doc\+\_\+enabled()}}, \mbox{\hyperlink{tree_8h_source_l00255}{oomph\+::\+Tree\+::max\+\_\+neighbour\+\_\+finding\+\_\+tolerance()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00554}{oomph\+::\+Doc\+Info\+::number()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, and \mbox{\hyperlink{tree_8cc_source_l00405}{oomph\+::\+Tree\+Forest\+::stick\+\_\+all\+\_\+tree\+\_\+nodes\+\_\+into\+\_\+vector()}}.
+References oomph\+::\+Doc\+Info\+::directory(), oomph\+::\+Binary\+Tree\+::doc\+\_\+neighbours(), oomph\+::\+Doc\+Info\+::is\+\_\+doc\+\_\+enabled(), oomph\+::\+Tree\+::max\+\_\+neighbour\+\_\+finding\+\_\+tolerance(), oomph\+::\+Doc\+Info\+::number(), oomph\+::oomph\+\_\+info, and oomph\+::\+Tree\+Forest\+::stick\+\_\+all\+\_\+tree\+\_\+nodes\+\_\+into\+\_\+vector().
 
 \mbox{\Hypertarget{classoomph_1_1BinaryTreeForest_a01845fafe6ef29f11226bf11e07eec1a}\label{classoomph_1_1BinaryTreeForest_a01845fafe6ef29f11226bf11e07eec1a}} 
 \index{oomph::BinaryTreeForest@{oomph::BinaryTreeForest}!find\_neighbours@{find\_neighbours}}
@@ -188,15 +188,15 @@ Construct the neighbour lookup scheme.
 
 Set up the neighbour lookup schemes for all constituent binary trees. 
 
-Definition at line \mbox{\hyperlink{binary__tree_8cc_source_l00454}{454}} of file \mbox{\hyperlink{binary__tree_8cc_source}{binary\+\_\+tree.\+cc}}.
+Definition at line 454 of file binary\+\_\+tree.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{binary__tree_8h_source_l00050}{oomph\+::\+Binary\+Tree\+Names\+::L}}, \mbox{\hyperlink{tree_8h_source_l00460}{oomph\+::\+Tree\+Forest\+::ntree()}}, \mbox{\hyperlink{binary__tree_8h_source_l00051}{oomph\+::\+Binary\+Tree\+Names\+::R}}, and \mbox{\hyperlink{tree_8h_source_l00480}{oomph\+::\+Tree\+Forest\+::\+Trees\+\_\+pt}}.
+References i, oomph\+::\+Binary\+Tree\+Names\+::L, oomph\+::\+Tree\+Forest\+::ntree(), oomph\+::\+Binary\+Tree\+Names\+::R, and oomph\+::\+Tree\+Forest\+::\+Trees\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{binary__tree_8cc_source_l00438}{Binary\+Tree\+Forest()}}.
+Referenced by Binary\+Tree\+Forest().
 
 \mbox{\Hypertarget{classoomph_1_1BinaryTreeForest_a7cf07f826ebdb73a0270791a6f300f9e}\label{classoomph_1_1BinaryTreeForest_a7cf07f826ebdb73a0270791a6f300f9e}} 
 \index{oomph::BinaryTreeForest@{oomph::BinaryTreeForest}!open\_hanging\_node\_files@{open\_hanging\_node\_files}}
@@ -214,7 +214,7 @@ Implements \mbox{\hyperlink{classoomph_1_1TreeForest_a635443274eaa2fb1afa889e4e7
 
 
 
-Definition at line \mbox{\hyperlink{binary__tree_8h_source_l00319}{319}} of file \mbox{\hyperlink{binary__tree_8h_source}{binary\+\_\+tree.\+h}}.
+Definition at line 319 of file binary\+\_\+tree.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BinaryTreeForest_a6cf5abb1ccfaef5577f36d334b37e0b3}\label{classoomph_1_1BinaryTreeForest_a6cf5abb1ccfaef5577f36d334b37e0b3}} 
 \index{oomph::BinaryTreeForest@{oomph::BinaryTreeForest}!operator=@{operator=}}
@@ -238,11 +238,11 @@ Self-\/test\+: Check all neighbours. Return success (0) if the maximum distance 
 
 Self test\+: Check neighbour finding routine. For each element in the tree and for each vertex, determine the distance between the vertex and its position in the neighbour. If the difference is less than \mbox{\hyperlink{classoomph_1_1Tree_aef9abebc166fa3bf81ecb59ec0d5d6b2}{Tree\+::\+Max\+\_\+neighbour\+\_\+finding\+\_\+tolerance}} return success (0), otherwise failure (1). 
 
-Definition at line \mbox{\hyperlink{binary__tree_8cc_source_l00624}{624}} of file \mbox{\hyperlink{binary__tree_8cc_source}{binary\+\_\+tree.\+cc}}.
+Definition at line 624 of file binary\+\_\+tree.\+cc.
 
 
 
-References \mbox{\hyperlink{binary__tree_8cc_source_l00668}{oomph\+::\+Binary\+Tree\+::doc\+\_\+neighbours()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{tree_8h_source_l00255}{oomph\+::\+Tree\+::max\+\_\+neighbour\+\_\+finding\+\_\+tolerance()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, and \mbox{\hyperlink{tree_8cc_source_l00405}{oomph\+::\+Tree\+Forest\+::stick\+\_\+all\+\_\+tree\+\_\+nodes\+\_\+into\+\_\+vector()}}.
+References oomph\+::\+Binary\+Tree\+::doc\+\_\+neighbours(), i, oomph\+::\+Tree\+::max\+\_\+neighbour\+\_\+finding\+\_\+tolerance(), oomph\+::oomph\+\_\+info, and oomph\+::\+Tree\+Forest\+::stick\+\_\+all\+\_\+tree\+\_\+nodes\+\_\+into\+\_\+vector().
 
 
 

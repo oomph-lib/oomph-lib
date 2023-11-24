@@ -9,6 +9,8 @@ Here is an overview of the structure of this document\+:
 \item \mbox{\hyperlink{index_boundary_conditions}{Free Surface and Interface Boundary Conditions}}
 \item \mbox{\hyperlink{index_surface_transport}{Surface Transport Equations}}
 \end{DoxyItemize}
+\end{DoxyItemize}
+\begin{DoxyItemize}
 \item \mbox{\hyperlink{index_fs_implementation}{Implementation}}
 \begin{DoxyItemize}
 \item \mbox{\hyperlink{index_fluid_interface}{The Fluid\+Interface\+Element class}}
@@ -148,7 +150,7 @@ The class \mbox{\hyperlink{classoomph_1_1SurfaceDerivatives}{oomph\+::\+Surface\
 \hypertarget{index_spine_formulation}{}\doxysection{The Spine\+Line/\+Axi/\+Surface\+Fluid\+Interface\+Element classes}\label{index_spine_formulation}
 We shall discuss the \char`\"{}line\char`\"{} version of the elements, but the others are essentially the same.
 
-The class \mbox{\hyperlink{classoomph_1_1SpineLineFluidInterfaceElement}{oomph\+::\+Spine\+Line\+Fluid\+Interface\+Element}} is templated by the bulk element type, {\ttfamily ELEMENT}, and inherits from {\ttfamily Fluid\+Interface\+Element}, Line\+Derivatives and {\ttfamily Hijacked\texorpdfstring{$<$}{<}Spine\+Element\texorpdfstring{$<$}{<}Face\+Geometry$<$\+ELEMENT$>$} \texorpdfstring{$>$}{>} \texorpdfstring{$>$}{>}. The hijacking is only required for imposition of contact angle boundary conditions, see \href{../../static_single_layer/html/index.html}{\texttt{ another tutorial }} for more details.
+The class \mbox{\hyperlink{classoomph_1_1SpineLineFluidInterfaceElement}{oomph\+::\+Spine\+Line\+Fluid\+Interface\+Element}} is templated by the bulk element type, {\ttfamily ELEMENT}, and inherits from {\ttfamily Fluid\+Interface\+Element}, Line\+Derivatives and {\ttfamily Hijacked$<$Spine\+Element$<$Face\+Geometry$<$\+ELEMENT$>$} $>$ $>$. The hijacking is only required for imposition of contact angle boundary conditions, see \href{../../static_single_layer/html/index.html}{\texttt{ another tutorial }} for more details.
 
 Note that the use of templates to make the code generic makes it hard to read. A simplified constructor is given below and simply builds the element based on the {\ttfamily Face\+Geometry} of the bulk element and sets the indices associated with the bulk fluid velocity components from the bulk element.
 
@@ -177,7 +179,7 @@ If a spine method is used to update the nodal positions then the spine height is
 \hypertarget{index_elastic_formulation}{}\doxysection{The Elastic\+Line/\+Axi/\+Surface\+Fluid\+Interface\+Element classes}\label{index_elastic_formulation}
 We shall discuss the \char`\"{}line\char`\"{} version of the elements, but the others are essentially the same.
 
-The class \mbox{\hyperlink{classoomph_1_1ElasticLineFluidInterfaceElement}{oomph\+::\+Elastic\+Line\+Fluid\+Interface\+Element}} is templated by the bulk element type, {\ttfamily ELEMENT}, and inherits from {\ttfamily Line\+Derivatives}, Fluid\+Interface\+Element and {\ttfamily Hijacked\texorpdfstring{$<$}{<}Face\+Geometry$<$\+ELEMENT$>$} \texorpdfstring{$>$}{>}. The hijacking is again only required for imposition of contact angle boundary conditions.
+The class \mbox{\hyperlink{classoomph_1_1ElasticLineFluidInterfaceElement}{oomph\+::\+Elastic\+Line\+Fluid\+Interface\+Element}} is templated by the bulk element type, {\ttfamily ELEMENT}, and inherits from {\ttfamily Line\+Derivatives}, Fluid\+Interface\+Element and {\ttfamily Hijacked$<$Face\+Geometry$<$\+ELEMENT$>$} $>$. The hijacking is again only required for imposition of contact angle boundary conditions.
 
 The \char`\"{}elastic\char`\"{} versions of the elements are more complicated than the \char`\"{}spine\char`\"{} versions because the kinematic condition is imposed using Lagrange multipliers, following the method described by Cairncross et al A finite element method for free surface flows of incompressible fluids in three dimensions. Part I. Boundary fitted mesh motion\textquotesingle{} (2000). These Lagrange multipliers must be added to the {\ttfamily Nodes} on the free surface and their introduction adds additional terms to the equations governing the bulk mesh motion.
 
@@ -190,7 +192,7 @@ The constructor is given below and in addition to building the element based on 
 \end{DoxyCodeInclude}
  The kinematic boundary condition is associated with the Lagrange multiplier and {\ttfamily kinematic\+\_\+local\+\_\+eqn(...)} is overloaded accordingly  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{    /// (This is the equation for the Lagrange multiplier)}}
+\DoxyCodeLine{    \textcolor{comment}{/// (This is the equation for the Lagrange multiplier)}}
 \DoxyCodeLine{    \textcolor{keyword}{inline} \textcolor{keywordtype}{int} kinematic\_local\_eqn(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n)}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{      \textcolor{comment}{// Get the index of the nodal value associated with Lagrange multiplier}}

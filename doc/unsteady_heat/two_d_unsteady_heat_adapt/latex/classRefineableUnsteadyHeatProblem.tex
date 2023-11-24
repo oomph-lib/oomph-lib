@@ -1,11 +1,11 @@
-\hypertarget{classRefineableUnsteadyHeatProblem}{}\doxysection{Refineable\+Unsteady\+Heat\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classRefineableUnsteadyHeatProblem}{}\doxysection{Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$ Class Template Reference}
 \label{classRefineableUnsteadyHeatProblem}\index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}}
 
 
 ///////////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////////////  
 
 
-Inheritance diagram for Refineable\+Unsteady\+Heat\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{classRefineableUnsteadyHeatProblem}
@@ -32,7 +32,7 @@ void \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a1f8a9e91269440c799a207
 \begin{DoxyCompactList}\small\item\em Actions after adapt\+: Rebuild the mesh of prescribed flux elements. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a30e2e1d62b059982f7014b74f4fe2be9}{set\+\_\+initial\+\_\+condition}} ()
 \begin{DoxyCompactList}\small\item\em Set initial condition (incl previous timesteps) according to specified function. Note that his overloads the virtual function in the Problem base class and is therefore executed automatically to re-\/assign the initial conditions during the spatially adaptive solution at the first timestep. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a65601ec64c73ac578b43f4af04c46569}{create\+\_\+flux\+\_\+elements}} (const unsigned \&b, Mesh $\ast$const \&\mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a49ee185e10fdab1851a67150cbb0710a}{bulk\+\_\+mesh\+\_\+pt}}, Mesh $\ast$const \&surface\+\_\+mesh\+\_\+pt)
+void \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a65601ec64c73ac578b43f4af04c46569}{create\+\_\+flux\+\_\+elements}} (const unsigned \&b, Mesh $\ast$const \&\mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a4d8eec1505a3c53960a3182ec462b4e7}{bulk\+\_\+mesh\+\_\+pt}}, Mesh $\ast$const \&surface\+\_\+mesh\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Create Unsteady\+Heat flux elements on boundary b of the Mesh pointed to by bulk\+\_\+mesh\+\_\+pt and add them to the Mesh object pointed to by surface\+\_\+mesh\+\_\+pt. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_ad2e53af5c385e44e33e400b430b610e8}{delete\+\_\+flux\+\_\+elements}} (Mesh $\ast$const \&surface\+\_\+mesh\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Delete Unsteady\+Heat flux elements and wipe the surface mesh. \end{DoxyCompactList}\item 
@@ -42,7 +42,7 @@ void \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a1fb939c3f9c258fd49328b
 \begin{DoxyCompactList}\small\item\em Dump problem data to allow for later restart. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_af36fa71e72852367411e21b50b179625}{restart}} (ifstream \&restart\+\_\+file)
 \begin{DoxyCompactList}\small\item\em Read problem data for restart. \end{DoxyCompactList}\item 
-Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$ $\ast$ \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a49ee185e10fdab1851a67150cbb0710a}{bulk\+\_\+mesh\+\_\+pt}} ()
+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$ $\ast$ \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a4d8eec1505a3c53960a3182ec462b4e7}{bulk\+\_\+mesh\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to bulk mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -66,11 +66,12 @@ ofstream \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a8f62ba78fb856d2e07
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class ELEMENT$>$\newline
 class Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$}
+
 ///////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////// 
 
 Unsteady heat problem in quarter circle domain. 
 
-Definition at line \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00187}{187}} of file \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc}}.
+Definition at line 187 of file two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc.
 
 
 
@@ -88,11 +89,11 @@ Constructor\+: Pass pointer to source function.
 
 Constructor for Unsteady\+Heat problem in quarter circle domain. Pass pointer to source function. 
 
-Definition at line \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00280}{280}} of file \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc}}.
+Definition at line 280 of file two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc.
 
 
 
-References \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00103}{Tanh\+Soln\+For\+Unsteady\+Heat\+::\+Alpha}}, \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00106}{Tanh\+Soln\+For\+Unsteady\+Heat\+::\+Beta}}, \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00253}{Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Boundary\+\_\+pt}}, \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00259}{Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00799}{Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::create\+\_\+flux\+\_\+elements()}}, \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00268}{Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Doc\+\_\+info}}, \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00265}{Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Doc\+\_\+node\+\_\+pt}}, \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00109}{Tanh\+Soln\+For\+Unsteady\+Heat\+::\+Gamma}}, \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00157}{Tanh\+Soln\+For\+Unsteady\+Heat\+::prescribed\+\_\+flux\+\_\+on\+\_\+fixed\+\_\+y\+\_\+boundary()}}, \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00256}{Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Source\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00262}{Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Surface\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00112}{Tanh\+Soln\+For\+Unsteady\+Heat\+::\+Tan\+Phi}}, and \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00271}{Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Trace\+\_\+file}}.
+References Tanh\+Soln\+For\+Unsteady\+Heat\+::\+Alpha, Tanh\+Soln\+For\+Unsteady\+Heat\+::\+Beta, Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Boundary\+\_\+pt, Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Bulk\+\_\+mesh\+\_\+pt, Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::create\+\_\+flux\+\_\+elements(), Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Doc\+\_\+info, Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Doc\+\_\+node\+\_\+pt, Tanh\+Soln\+For\+Unsteady\+Heat\+::\+Gamma, Tanh\+Soln\+For\+Unsteady\+Heat\+::prescribed\+\_\+flux\+\_\+on\+\_\+fixed\+\_\+y\+\_\+boundary(), Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Source\+\_\+fct\+\_\+pt, Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Surface\+\_\+mesh\+\_\+pt, Tanh\+Soln\+For\+Unsteady\+Heat\+::\+Tan\+Phi, and Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Trace\+\_\+file.
 
 \mbox{\Hypertarget{classRefineableUnsteadyHeatProblem_a975e00f5e87d77b4e1bf4d50482dea2b}\label{classRefineableUnsteadyHeatProblem_a975e00f5e87d77b4e1bf4d50482dea2b}} 
 \index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!````~RefineableUnsteadyHeatProblem@{$\sim$RefineableUnsteadyHeatProblem}}
@@ -107,7 +108,7 @@ Destructor\+: Close trace file.
 
 
 
-Definition at line \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00435}{435}} of file \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc}}.
+Definition at line 435 of file two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc.
 
 
 
@@ -125,11 +126,11 @@ Actions after adapt\+: Rebuild the mesh of prescribed flux elements.
 
 
 
-Definition at line \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00496}{496}} of file \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc}}.
+Definition at line 496 of file two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc.
 
 
 
-References \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00157}{Tanh\+Soln\+For\+Unsteady\+Heat\+::prescribed\+\_\+flux\+\_\+on\+\_\+fixed\+\_\+y\+\_\+boundary()}}.
+References Tanh\+Soln\+For\+Unsteady\+Heat\+::prescribed\+\_\+flux\+\_\+on\+\_\+fixed\+\_\+y\+\_\+boundary().
 
 \mbox{\Hypertarget{classRefineableUnsteadyHeatProblem_aa740f2eb1b3909100a04709b401c0b41}\label{classRefineableUnsteadyHeatProblem_aa740f2eb1b3909100a04709b401c0b41}} 
 \index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!actions\_after\_implicit\_timestep@{actions\_after\_implicit\_timestep}}
@@ -144,7 +145,7 @@ Update the problem specs after timestep (empty)
 
 
 
-Definition at line \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00206}{206}} of file \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc}}.
+Definition at line 206 of file two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc.
 
 \mbox{\Hypertarget{classRefineableUnsteadyHeatProblem_ada522772b79e92a75edf3724d0a273da}\label{classRefineableUnsteadyHeatProblem_ada522772b79e92a75edf3724d0a273da}} 
 \index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
@@ -159,7 +160,7 @@ Update the problem specs after solve (empty)
 
 
 
-Definition at line \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00200}{200}} of file \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc}}.
+Definition at line 200 of file two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc.
 
 \mbox{\Hypertarget{classRefineableUnsteadyHeatProblem_a4419fcea0ccbf0509f1d5dd37d8301de}\label{classRefineableUnsteadyHeatProblem_a4419fcea0ccbf0509f1d5dd37d8301de}} 
 \index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!actions\_before\_adapt@{actions\_before\_adapt}}
@@ -174,7 +175,7 @@ Actions before adapt\+: Wipe the mesh of prescribed flux elements.
 
 
 
-Definition at line \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00480}{480}} of file \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc}}.
+Definition at line 480 of file two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc.
 
 \mbox{\Hypertarget{classRefineableUnsteadyHeatProblem_ac754f1313cd6d684c149443beb5bcf9e}\label{classRefineableUnsteadyHeatProblem_ac754f1313cd6d684c149443beb5bcf9e}} 
 \index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!actions\_before\_implicit\_timestep@{actions\_before\_implicit\_timestep}}
@@ -189,11 +190,11 @@ Update the problem specs before next timestep\+: Set Dirchlet boundary condition
 
 Actions before timestep\+: Set the boundary conditions for the current time. 
 
-Definition at line \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00447}{447}} of file \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc}}.
+Definition at line 447 of file two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc.
 
 
 
-References \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00121}{Tanh\+Soln\+For\+Unsteady\+Heat\+::get\+\_\+exact\+\_\+u()}}.
+References Tanh\+Soln\+For\+Unsteady\+Heat\+::get\+\_\+exact\+\_\+u().
 
 \mbox{\Hypertarget{classRefineableUnsteadyHeatProblem_aac1935e15c67b196e6db97dd058511b5}\label{classRefineableUnsteadyHeatProblem_aac1935e15c67b196e6db97dd058511b5}} 
 \index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
@@ -208,14 +209,14 @@ Update the problem specs before solve (empty)
 
 
 
-Definition at line \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00203}{203}} of file \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc}}.
+Definition at line 203 of file two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc.
 
-\mbox{\Hypertarget{classRefineableUnsteadyHeatProblem_a49ee185e10fdab1851a67150cbb0710a}\label{classRefineableUnsteadyHeatProblem_a49ee185e10fdab1851a67150cbb0710a}} 
+\mbox{\Hypertarget{classRefineableUnsteadyHeatProblem_a4d8eec1505a3c53960a3182ec462b4e7}\label{classRefineableUnsteadyHeatProblem_a4d8eec1505a3c53960a3182ec462b4e7}} 
 \index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!bulk\_mesh\_pt@{bulk\_mesh\_pt}}
 \index{bulk\_mesh\_pt@{bulk\_mesh\_pt}!RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{bulk\_mesh\_pt()}{bulk\_mesh\_pt()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$ $\ast$ \mbox{\hyperlink{classRefineableUnsteadyHeatProblem}{Refineable\+Unsteady\+Heat\+Problem}}$<$ ELEMENT $>$\+::bulk\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ELEMENT$>$$\ast$ \mbox{\hyperlink{classRefineableUnsteadyHeatProblem}{Refineable\+Unsteady\+Heat\+Problem}}$<$ ELEMENT $>$\+::bulk\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -223,15 +224,11 @@ Pointer to bulk mesh.
 
 
 
-Definition at line \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00244}{244}} of file \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc}}.
+Definition at line 244 of file two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc.
 
 
 
-References \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00259}{Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}.
-
-
-
-Referenced by \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00884}{main()}}.
+Referenced by main().
 
 \mbox{\Hypertarget{classRefineableUnsteadyHeatProblem_a65601ec64c73ac578b43f4af04c46569}\label{classRefineableUnsteadyHeatProblem_a65601ec64c73ac578b43f4af04c46569}} 
 \index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!create\_flux\_elements@{create\_flux\_elements}}
@@ -246,11 +243,11 @@ Create Unsteady\+Heat flux elements on boundary b of the Mesh pointed to by bulk
 
 Create Unsteady\+Heat Flux Elements on the b-\/th boundary of the Mesh object pointed to by bulk\+\_\+mesh\+\_\+pt and add the elements to the Mesh object pointed to by surface\+\_\+mesh\+\_\+pt. 
 
-Definition at line \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00798}{798}} of file \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc}}.
+Definition at line 798 of file two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00280}{Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Unsteady\+Heat\+Problem()}}.
+Referenced by Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Unsteady\+Heat\+Problem().
 
 \mbox{\Hypertarget{classRefineableUnsteadyHeatProblem_ad2e53af5c385e44e33e400b430b610e8}\label{classRefineableUnsteadyHeatProblem_ad2e53af5c385e44e33e400b430b610e8}} 
 \index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!delete\_flux\_elements@{delete\_flux\_elements}}
@@ -265,7 +262,7 @@ Delete Unsteady\+Heat flux elements and wipe the surface mesh.
 
 Delete Unsteady\+Heat Flux Elements and wipe the surface mesh. 
 
-Definition at line \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00831}{831}} of file \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc}}.
+Definition at line 831 of file two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc.
 
 \mbox{\Hypertarget{classRefineableUnsteadyHeatProblem_a77d590171785b6b5f4070af9401c0e37}\label{classRefineableUnsteadyHeatProblem_a77d590171785b6b5f4070af9401c0e37}} 
 \index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!doc\_solution@{doc\_solution}}
@@ -280,15 +277,15 @@ Doc the solution.
 
 
 
-Definition at line \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00658}{658}} of file \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc}}.
+Definition at line 658 of file two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc.
 
 
 
-References \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00121}{Tanh\+Soln\+For\+Unsteady\+Heat\+::get\+\_\+exact\+\_\+u()}}, and \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00115}{Tanh\+Soln\+For\+Unsteady\+Heat\+::step\+\_\+position()}}.
+References Tanh\+Soln\+For\+Unsteady\+Heat\+::get\+\_\+exact\+\_\+u(), and Tanh\+Soln\+For\+Unsteady\+Heat\+::step\+\_\+position().
 
 
 
-Referenced by \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00884}{main()}}.
+Referenced by main().
 
 \mbox{\Hypertarget{classRefineableUnsteadyHeatProblem_a1fb939c3f9c258fd49328bb1516ced98}\label{classRefineableUnsteadyHeatProblem_a1fb939c3f9c258fd49328bb1516ced98}} 
 \index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!dump\_it@{dump\_it}}
@@ -303,7 +300,7 @@ Dump problem data to allow for later restart.
 
 Dump the solution to disk. 
 
-Definition at line \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00854}{854}} of file \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc}}.
+Definition at line 854 of file two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc.
 
 \mbox{\Hypertarget{classRefineableUnsteadyHeatProblem_af36fa71e72852367411e21b50b179625}\label{classRefineableUnsteadyHeatProblem_af36fa71e72852367411e21b50b179625}} 
 \index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!restart@{restart}}
@@ -318,7 +315,7 @@ Read problem data for restart.
 
 Read solution from disk. 
 
-Definition at line \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00865}{865}} of file \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc}}.
+Definition at line 865 of file two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc.
 
 \mbox{\Hypertarget{classRefineableUnsteadyHeatProblem_a30e2e1d62b059982f7014b74f4fe2be9}\label{classRefineableUnsteadyHeatProblem_a30e2e1d62b059982f7014b74f4fe2be9}} 
 \index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!set\_initial\_condition@{set\_initial\_condition}}
@@ -333,15 +330,15 @@ Set initial condition (incl previous timesteps) according to specified function.
 
 Set initial condition\+: Assign previous and current values from exact solution. 
 
-Definition at line \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00526}{526}} of file \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc}}.
+Definition at line 526 of file two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc.
 
 
 
-References \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00121}{Tanh\+Soln\+For\+Unsteady\+Heat\+::get\+\_\+exact\+\_\+u()}}.
+References Tanh\+Soln\+For\+Unsteady\+Heat\+::get\+\_\+exact\+\_\+u().
 
 
 
-Referenced by \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00884}{main()}}.
+Referenced by main().
 
 
 
@@ -359,11 +356,11 @@ Pointer to Geom\+Object that specifies the domain bondary.
 
 
 
-Definition at line \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00253}{253}} of file \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc}}.
+Definition at line 253 of file two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00280}{Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Unsteady\+Heat\+Problem()}}.
+Referenced by Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Unsteady\+Heat\+Problem().
 
 \mbox{\Hypertarget{classRefineableUnsteadyHeatProblem_afade341e03a4c97e62444c80adc9552f}\label{classRefineableUnsteadyHeatProblem_afade341e03a4c97e62444c80adc9552f}} 
 \index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!Bulk\_mesh\_pt@{Bulk\_mesh\_pt}}
@@ -378,11 +375,11 @@ Pointer to the \char`\"{}bulk\char`\"{} mesh.
 
 
 
-Definition at line \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00259}{259}} of file \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc}}.
+Definition at line 259 of file two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00244}{Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::bulk\+\_\+mesh\+\_\+pt()}}, and \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00280}{Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Unsteady\+Heat\+Problem()}}.
+Referenced by Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Unsteady\+Heat\+Problem().
 
 \mbox{\Hypertarget{classRefineableUnsteadyHeatProblem_a9ea9d79a57cb16a6292a637965767f7e}\label{classRefineableUnsteadyHeatProblem_a9ea9d79a57cb16a6292a637965767f7e}} 
 \index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!Doc\_info@{Doc\_info}}
@@ -397,11 +394,11 @@ Doc info object.
 
 
 
-Definition at line \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00268}{268}} of file \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc}}.
+Definition at line 268 of file two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00280}{Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Unsteady\+Heat\+Problem()}}.
+Referenced by Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Unsteady\+Heat\+Problem().
 
 \mbox{\Hypertarget{classRefineableUnsteadyHeatProblem_a7ff1982af5819bab492c693178be0c24}\label{classRefineableUnsteadyHeatProblem_a7ff1982af5819bab492c693178be0c24}} 
 \index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!Doc\_node\_pt@{Doc\_node\_pt}}
@@ -416,11 +413,11 @@ Pointer to central node (exists at all refinement levels) for doc.
 
 
 
-Definition at line \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00265}{265}} of file \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc}}.
+Definition at line 265 of file two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00280}{Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Unsteady\+Heat\+Problem()}}.
+Referenced by Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Unsteady\+Heat\+Problem().
 
 \mbox{\Hypertarget{classRefineableUnsteadyHeatProblem_a99eb5a2cd4b680b4f83e739bd4e16639}\label{classRefineableUnsteadyHeatProblem_a99eb5a2cd4b680b4f83e739bd4e16639}} 
 \index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!Source\_fct\_pt@{Source\_fct\_pt}}
@@ -435,11 +432,11 @@ Pointer to source function.
 
 
 
-Definition at line \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00256}{256}} of file \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc}}.
+Definition at line 256 of file two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00280}{Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Unsteady\+Heat\+Problem()}}.
+Referenced by Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Unsteady\+Heat\+Problem().
 
 \mbox{\Hypertarget{classRefineableUnsteadyHeatProblem_a2febbb317a74e427bf6304235d779fe6}\label{classRefineableUnsteadyHeatProblem_a2febbb317a74e427bf6304235d779fe6}} 
 \index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!Surface\_mesh\_pt@{Surface\_mesh\_pt}}
@@ -454,11 +451,11 @@ Pointer to the \char`\"{}surface\char`\"{} mesh.
 
 
 
-Definition at line \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00262}{262}} of file \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc}}.
+Definition at line 262 of file two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00280}{Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Unsteady\+Heat\+Problem()}}.
+Referenced by Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Unsteady\+Heat\+Problem().
 
 \mbox{\Hypertarget{classRefineableUnsteadyHeatProblem_a8f62ba78fb856d2e07b00254ca7a0e6a}\label{classRefineableUnsteadyHeatProblem_a8f62ba78fb856d2e07b00254ca7a0e6a}} 
 \index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!Trace\_file@{Trace\_file}}
@@ -473,11 +470,11 @@ Trace file.
 
 
 
-Definition at line \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00271}{271}} of file \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc}}.
+Definition at line 271 of file two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00280}{Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Unsteady\+Heat\+Problem()}}.
+Referenced by Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Unsteady\+Heat\+Problem().
 
 
 

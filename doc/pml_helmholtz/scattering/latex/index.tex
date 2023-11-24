@@ -112,7 +112,7 @@ As usual, we define the problem parameters in a global namespace. After non-\/di
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===== start\_of\_namespace=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for the Helmholtz problem parameters}}
-\DoxyCodeLine{\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobalParameters}{GlobalParameters}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -132,7 +132,7 @@ The driver code is very straightforward. We start by building the {\ttfamily Pro
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==========start\_of\_main=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Solve 2D Helmholtz problem}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{unstructured__two__d__helmholtz_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} **argv)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ \textcolor{comment}{// Set up the problem with 2D six-\/node elements from the}}
@@ -170,8 +170,8 @@ The problem class is very similar to that employed for the \href{../../../helmho
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//========= start\_of\_problem\_class=====================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Problem class to demonstrate use of perfectly matched layers}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// for Helmholtz problems.}}
+\DoxyCodeLine{\textcolor{comment}{/// Problem class to demonstrate use of perfectly matched layers}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// for Helmholtz problems.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classPMLProblem}{PMLProblem}} : \textcolor{keyword}{public} Problem}
@@ -206,7 +206,7 @@ The problem class is very similar to that employed for the \href{../../../helmho
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Pointer to the "{}bulk"{} mesh}}
+\DoxyCodeLine{ \textcolor{comment}{/// Pointer to the "{}bulk"{} mesh}}
 \DoxyCodeLine{ TriangleMesh<ELEMENT>* Bulk\_mesh\_pt;}
 
 \end{DoxyCodeInclude}
@@ -214,7 +214,7 @@ The problem class is very similar to that employed for the \href{../../../helmho
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Pointer to the right PML mesh}}
+\DoxyCodeLine{ \textcolor{comment}{/// Pointer to the right PML mesh}}
 \DoxyCodeLine{ Mesh* PML\_right\_mesh\_pt;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to the top PML mesh}}
@@ -251,7 +251,7 @@ We start by creating the {\ttfamily Circle} object that defines the inner bounda
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_constructor=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for Helmholtz problem}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classPMLProblem_ae6cc833e2485ad6d37d6dd14105bf407}{PMLProblem<ELEMENT>::PMLProblem}}()}
 \DoxyCodeLine{\{}
@@ -453,7 +453,7 @@ We pin both nodal values (representing the real and imaginary part of the soluti
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==================start\_of\_apply\_boundary\_conditions====================}}
 \DoxyCodeLine{\textcolor{comment}{/// Apply boundary conditions}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classPMLProblem_a2d2cdf5c1e99a7600d91353fd0584d5c}{PMLProblem<ELEMENT>::apply\_boundary\_conditions}}()}
 \DoxyCodeLine{\{}
@@ -489,7 +489,7 @@ The post-\/processing function {\ttfamily doc\+\_\+solution(...)} simply outputs
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====================start\_of\_doc=======================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution: doc\_info contains labels/output directory etc.}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classPMLProblem_ae04985b020a9e0526ab829ca316adb26}{PMLProblem<ELEMENT>::doc\_solution}}(DocInfo\& doc\_info)}
 \DoxyCodeLine{\{}

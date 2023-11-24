@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1VorticitySmoother}{}\doxysection{oomph\+::Vorticity\+Smoother\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1VorticitySmoother}{}\doxysection{oomph\+::Vorticity\+Smoother$<$ ELEMENT $>$ Class Template Reference}
 \label{classoomph_1_1VorticitySmoother}\index{oomph::VorticitySmoother$<$ ELEMENT $>$@{oomph::VorticitySmoother$<$ ELEMENT $>$}}
 
 
@@ -12,7 +12,7 @@
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1VorticitySmoother_aa848dd59d224d397c568e86922962c4b}{Vorticity\+Smoother}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1VorticitySmoother_a0b9b51639b0196ec0553b88a169eb7d0}{recovery\+\_\+order}})
+\mbox{\hyperlink{classoomph_1_1VorticitySmoother_aa848dd59d224d397c568e86922962c4b}{Vorticity\+Smoother}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1VorticitySmoother_aa6f69b6e4063b73ccfbcdc6443bce623}{recovery\+\_\+order}})
 \begin{DoxyCompactList}\small\item\em Constructor\+: Set order of recovery shape functions. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1VorticitySmoother_a63f9db0ba0a243965a4ca0ac6b4a3193}{Vorticity\+Smoother}} (const \mbox{\hyperlink{classoomph_1_1VorticitySmoother}{Vorticity\+Smoother}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
@@ -20,11 +20,11 @@ void \mbox{\hyperlink{classoomph_1_1VorticitySmoother_aaa18a8649777088f00d06959e
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1VorticitySmoother_a58770377b1a6c0e3e0922015bae8040d}{$\sim$\+Vorticity\+Smoother}} ()
 \begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\item 
-unsigned \& \mbox{\hyperlink{classoomph_1_1VorticitySmoother_a0b9b51639b0196ec0553b88a169eb7d0}{recovery\+\_\+order}} ()
+unsigned \& \mbox{\hyperlink{classoomph_1_1VorticitySmoother_aa6f69b6e4063b73ccfbcdc6443bce623}{recovery\+\_\+order}} ()
 \begin{DoxyCompactList}\small\item\em Access function for order of recovery polynomials. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1VorticitySmoother_a7c6a0c1333a418b70ae3e629d63f7bf6}{shape\+\_\+rec}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&psi\+\_\+r)
 \begin{DoxyCompactList}\small\item\em Recovery shape functions as functions of the global, Eulerian coordinate x of dimension dim. The recovery shape functions are complete polynomials of the order specified by Recovery\+\_\+order. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Integral}{Integral}} $\ast$ \mbox{\hyperlink{classoomph_1_1VorticitySmoother_a73c7b5151b46a82cf08b0b24783a9253}{integral\+\_\+rec}} (const bool \&is\+\_\+q\+\_\+mesh)
+\mbox{\hyperlink{classoomph_1_1Integral}{Integral}} $\ast$ \mbox{\hyperlink{classoomph_1_1VorticitySmoother_a9b758449024e0dd49d5062fcc502aed7}{integral\+\_\+rec}} (const bool \&is\+\_\+q\+\_\+mesh)
 \begin{DoxyCompactList}\small\item\em Integation scheme associated with the recovery shape functions must be of sufficiently high order to integrate the mass matrix associated with the recovery shape functions. The argument is the dimension of the elements. The integration is performed locally over the elements, so the integration scheme does depend on the geometry of the element. The type of element is specified by the boolean which is true if elements in the patch are QElements and false if they are TElements (will need change if we ever have other element types) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1VorticitySmoother_ae8e49f99dfb35e6ee5eebbce87131d44}{setup\+\_\+patches}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&mesh\+\_\+pt, std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ ELEMENT $\ast$ $>$ $\ast$ $>$ \&adjacent\+\_\+elements\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ \&vertex\+\_\+node\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Setup patches\+: For each vertex node pointed to by nod\+\_\+pt, adjacent\+\_\+elements\+\_\+pt\mbox{[}nod\+\_\+pt\mbox{]} contains the pointer to the vector that contains the pointers to the elements that the node is part of. Also returns a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of vertex nodes for use in get\+\_\+element\+\_\+errors. \end{DoxyCompactList}\item 
@@ -46,11 +46,12 @@ unsigned \mbox{\hyperlink{classoomph_1_1VorticitySmoother_acda3329b3b841aa78abf7
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class ELEMENT$>$\newline
 class oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$}
+
 /////////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////////// 
 
 \mbox{\hyperlink{classoomph_1_1Smoother}{Smoother}} for vorticity in 2D 
 
-Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l01836}{1836}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+Definition at line 1836 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -68,7 +69,7 @@ Constructor\+: Set order of recovery shape functions.
 
 
 
-Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l01840}{1840}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+Definition at line 1840 of file vorticity\+\_\+smoother.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1VorticitySmoother_a63f9db0ba0a243965a4ca0ac6b4a3193}\label{classoomph_1_1VorticitySmoother_a63f9db0ba0a243965a4ca0ac6b4a3193}} 
 \index{oomph::VorticitySmoother$<$ ELEMENT $>$@{oomph::VorticitySmoother$<$ ELEMENT $>$}!VorticitySmoother@{VorticitySmoother}}
@@ -94,7 +95,7 @@ Empty virtual destructor.
 
 
 
-Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l01852}{1852}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+Definition at line 1852 of file vorticity\+\_\+smoother.\+h.
 
 
 
@@ -112,22 +113,22 @@ Given the vector of elements that make up a patch, compute the vector of recover
 
 
 
-Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l02115}{2115}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+Definition at line 2115 of file vorticity\+\_\+smoother.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01926}{oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::integral\+\_\+rec()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{matrices_8cc_source_l00202}{oomph\+::\+Dense\+Double\+Matrix\+::lubksub()}}, \mbox{\hyperlink{matrices_8cc_source_l00192}{oomph\+::\+Dense\+Double\+Matrix\+::ludecompose()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01864}{oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::shape\+\_\+rec()}}, \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}, and \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral\+::weight()}}.
+References e, i, oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::integral\+\_\+rec(), oomph\+::\+Integral\+::knot(), oomph\+::\+Dense\+Double\+Matrix\+::lubksub(), oomph\+::\+Dense\+Double\+Matrix\+::ludecompose(), oomph\+::\+Integral\+::nweight(), oomph\+::oomph\+\_\+info, s, oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::shape\+\_\+rec(), oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Integral\+::weight().
 
 
 
-Referenced by \mbox{\hyperlink{vorticity__smoother_8h_source_l02448}{oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::recover\+\_\+vorticity()}}.
+Referenced by oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::recover\+\_\+vorticity().
 
-\mbox{\Hypertarget{classoomph_1_1VorticitySmoother_a73c7b5151b46a82cf08b0b24783a9253}\label{classoomph_1_1VorticitySmoother_a73c7b5151b46a82cf08b0b24783a9253}} 
+\mbox{\Hypertarget{classoomph_1_1VorticitySmoother_a9b758449024e0dd49d5062fcc502aed7}\label{classoomph_1_1VorticitySmoother_a9b758449024e0dd49d5062fcc502aed7}} 
 \index{oomph::VorticitySmoother$<$ ELEMENT $>$@{oomph::VorticitySmoother$<$ ELEMENT $>$}!integral\_rec@{integral\_rec}}
 \index{integral\_rec@{integral\_rec}!oomph::VorticitySmoother$<$ ELEMENT $>$@{oomph::VorticitySmoother$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{integral\_rec()}{integral\_rec()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1Integral}{Integral}} $\ast$ \mbox{\hyperlink{classoomph_1_1VorticitySmoother}{oomph\+::\+Vorticity\+Smoother}}$<$ ELEMENT $>$\+::integral\+\_\+rec (\begin{DoxyParamCaption}\item[{const bool \&}]{is\+\_\+q\+\_\+mesh }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1Integral}{Integral}}$\ast$ \mbox{\hyperlink{classoomph_1_1VorticitySmoother}{oomph\+::\+Vorticity\+Smoother}}$<$ ELEMENT $>$\+::integral\+\_\+rec (\begin{DoxyParamCaption}\item[{const bool \&}]{is\+\_\+q\+\_\+mesh }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -135,15 +136,15 @@ Integation scheme associated with the recovery shape functions must be of suffic
 
 Find order of recovery shape functions
 
-Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l01926}{1926}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+Definition at line 1926 of file vorticity\+\_\+smoother.\+h.
 
 
 
-References \mbox{\hyperlink{vorticity__smoother_8h_source_l01855}{oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::recovery\+\_\+order()}}.
+References oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::recovery\+\_\+order().
 
 
 
-Referenced by \mbox{\hyperlink{vorticity__smoother_8h_source_l02115}{oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::get\+\_\+recovered\+\_\+vorticity\+\_\+in\+\_\+patch()}}.
+Referenced by oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::get\+\_\+recovered\+\_\+vorticity\+\_\+in\+\_\+patch().
 
 \mbox{\Hypertarget{classoomph_1_1VorticitySmoother_a203602aa127f5c89480304a2f10426f1}\label{classoomph_1_1VorticitySmoother_a203602aa127f5c89480304a2f10426f1}} 
 \index{oomph::VorticitySmoother$<$ ELEMENT $>$@{oomph::VorticitySmoother$<$ ELEMENT $>$}!nrecovery\_order@{nrecovery\_order}}
@@ -158,15 +159,15 @@ Get the recovery order.
 
 
 
-Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l02393}{2393}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+Definition at line 2393 of file vorticity\+\_\+smoother.\+h.
 
 
 
-References \mbox{\hyperlink{vorticity__smoother_8h_source_l02665}{oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::\+Recovery\+\_\+order}}.
+References oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::\+Recovery\+\_\+order.
 
 
 
-Referenced by \mbox{\hyperlink{vorticity__smoother_8h_source_l02448}{oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::recover\+\_\+vorticity()}}.
+Referenced by oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::recover\+\_\+vorticity().
 
 \mbox{\Hypertarget{classoomph_1_1VorticitySmoother_aaa18a8649777088f00d06959ea0db4ac}\label{classoomph_1_1VorticitySmoother_aaa18a8649777088f00d06959ea0db4ac}} 
 \index{oomph::VorticitySmoother$<$ ELEMENT $>$@{oomph::VorticitySmoother$<$ ELEMENT $>$}!operator=@{operator=}}
@@ -192,15 +193,11 @@ Recover vorticity from patches.
 
 
 
-Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l02434}{2434}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+Definition at line 2434 of file vorticity\+\_\+smoother.\+h.
 
 
 
-References \mbox{\hyperlink{oomph__utilities_8h_source_l00542}{oomph\+::\+Doc\+Info\+::disable\+\_\+doc()}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l02434}{oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::recover\+\_\+vorticity()}}.
-
-
-
-Referenced by \mbox{\hyperlink{vorticity__smoother_8h_source_l02434}{oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::recover\+\_\+vorticity()}}.
+References oomph\+::\+Doc\+Info\+::disable\+\_\+doc().
 
 \mbox{\Hypertarget{classoomph_1_1VorticitySmoother_a43d407cf76048465189095a82c4f1e32}\label{classoomph_1_1VorticitySmoother_a43d407cf76048465189095a82c4f1e32}} 
 \index{oomph::VorticitySmoother$<$ ELEMENT $>$@{oomph::VorticitySmoother$<$ ELEMENT $>$}!recover\_vorticity@{recover\_vorticity}}
@@ -215,18 +212,18 @@ Recover vorticity from patches -- output intermediate steps to directory specifi
 
 
 
-Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l02448}{2448}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+Definition at line 2448 of file vorticity\+\_\+smoother.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00448}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l02115}{oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::get\+\_\+recovered\+\_\+vorticity\+\_\+in\+\_\+patch()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{mesh_8h_source_l00596}{oomph\+::\+Mesh\+::nnode()}}, \mbox{\hyperlink{mesh_8h_source_l00436}{oomph\+::\+Mesh\+::node\+\_\+pt()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l02393}{oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::nrecovery\+\_\+order()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{nodes_8h_source_l00271}{oomph\+::\+Data\+::set\+\_\+value()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01999}{oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::setup\+\_\+patches()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01864}{oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::shape\+\_\+rec()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}.
+References e, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::get\+\_\+recovered\+\_\+vorticity\+\_\+in\+\_\+patch(), i, oomph\+::\+Mesh\+::nnode(), oomph\+::\+Mesh\+::node\+\_\+pt(), oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::nrecovery\+\_\+order(), oomph\+::oomph\+\_\+info, s, oomph\+::\+Data\+::set\+\_\+value(), oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::setup\+\_\+patches(), oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::shape\+\_\+rec(), and oomph\+::\+Timing\+Helpers\+::timer().
 
-\mbox{\Hypertarget{classoomph_1_1VorticitySmoother_a0b9b51639b0196ec0553b88a169eb7d0}\label{classoomph_1_1VorticitySmoother_a0b9b51639b0196ec0553b88a169eb7d0}} 
+\mbox{\Hypertarget{classoomph_1_1VorticitySmoother_aa6f69b6e4063b73ccfbcdc6443bce623}\label{classoomph_1_1VorticitySmoother_aa6f69b6e4063b73ccfbcdc6443bce623}} 
 \index{oomph::VorticitySmoother$<$ ELEMENT $>$@{oomph::VorticitySmoother$<$ ELEMENT $>$}!recovery\_order@{recovery\_order}}
 \index{recovery\_order@{recovery\_order}!oomph::VorticitySmoother$<$ ELEMENT $>$@{oomph::VorticitySmoother$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{recovery\_order()}{recovery\_order()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-unsigned \& \mbox{\hyperlink{classoomph_1_1VorticitySmoother}{oomph\+::\+Vorticity\+Smoother}}$<$ ELEMENT $>$\+::recovery\+\_\+order (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+unsigned\& \mbox{\hyperlink{classoomph_1_1VorticitySmoother}{oomph\+::\+Vorticity\+Smoother}}$<$ ELEMENT $>$\+::recovery\+\_\+order (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -234,15 +231,15 @@ Access function for order of recovery polynomials.
 
 
 
-Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l01855}{1855}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+Definition at line 1855 of file vorticity\+\_\+smoother.\+h.
 
 
 
-References \mbox{\hyperlink{vorticity__smoother_8h_source_l02665}{oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::\+Recovery\+\_\+order}}.
+References oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::\+Recovery\+\_\+order.
 
 
 
-Referenced by \mbox{\hyperlink{vorticity__smoother_8h_source_l01926}{oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::integral\+\_\+rec()}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l01864}{oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::shape\+\_\+rec()}}.
+Referenced by oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::integral\+\_\+rec(), and oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::shape\+\_\+rec().
 
 \mbox{\Hypertarget{classoomph_1_1VorticitySmoother_ae8e49f99dfb35e6ee5eebbce87131d44}\label{classoomph_1_1VorticitySmoother_ae8e49f99dfb35e6ee5eebbce87131d44}} 
 \index{oomph::VorticitySmoother$<$ ELEMENT $>$@{oomph::VorticitySmoother$<$ ELEMENT $>$}!setup\_patches@{setup\_patches}}
@@ -257,15 +254,15 @@ Setup patches\+: For each vertex node pointed to by nod\+\_\+pt, adjacent\+\_\+e
 
 
 
-Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l01999}{1999}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+Definition at line 1999 of file vorticity\+\_\+smoother.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00448}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l02665}{oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::\+Recovery\+\_\+order}}.
+References e, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Mesh\+::nelement(), oomph\+::oomph\+\_\+info, and oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::\+Recovery\+\_\+order.
 
 
 
-Referenced by \mbox{\hyperlink{vorticity__smoother_8h_source_l02448}{oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::recover\+\_\+vorticity()}}.
+Referenced by oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::recover\+\_\+vorticity().
 
 \mbox{\Hypertarget{classoomph_1_1VorticitySmoother_a7c6a0c1333a418b70ae3e629d63f7bf6}\label{classoomph_1_1VorticitySmoother_a7c6a0c1333a418b70ae3e629d63f7bf6}} 
 \index{oomph::VorticitySmoother$<$ ELEMENT $>$@{oomph::VorticitySmoother$<$ ELEMENT $>$}!shape\_rec@{shape\_rec}}
@@ -280,15 +277,15 @@ Recovery shape functions as functions of the global, Eulerian coordinate x of di
 
 
 
-Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l01864}{1864}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+Definition at line 1864 of file vorticity\+\_\+smoother.\+h.
 
 
 
-References \mbox{\hyperlink{vorticity__smoother_8h_source_l01855}{oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::recovery\+\_\+order()}}.
+References oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::recovery\+\_\+order().
 
 
 
-Referenced by \mbox{\hyperlink{vorticity__smoother_8h_source_l02115}{oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::get\+\_\+recovered\+\_\+vorticity\+\_\+in\+\_\+patch()}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l02448}{oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::recover\+\_\+vorticity()}}.
+Referenced by oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::get\+\_\+recovered\+\_\+vorticity\+\_\+in\+\_\+patch(), and oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::recover\+\_\+vorticity().
 
 
 
@@ -306,11 +303,11 @@ Order of recovery polynomials.
 
 
 
-Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l02665}{2665}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+Definition at line 2665 of file vorticity\+\_\+smoother.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{vorticity__smoother_8h_source_l02393}{oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::nrecovery\+\_\+order()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01855}{oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::recovery\+\_\+order()}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l01999}{oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::setup\+\_\+patches()}}.
+Referenced by oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::nrecovery\+\_\+order(), oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::recovery\+\_\+order(), and oomph\+::\+Vorticity\+Smoother$<$ ELEMENT $>$\+::setup\+\_\+patches().
 
 
 

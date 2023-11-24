@@ -30,7 +30,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a
 \begin{DoxyCompactList}\small\item\em Order of recovery shape functions for Z2 error estimation\+: Same order as shape functions. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1RefineableLinearisedQTaylorHoodElement_ad2f150987cca5fb4d8e64fdec5fe3f65}{nvertex\+\_\+node}} () const
 \begin{DoxyCompactList}\small\item\em Number of vertex nodes in the element. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a259bd183aedae0c689178e03bddc99f9}{vertex\+\_\+node\+\_\+pt}} (const unsigned \&j) const
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableLinearisedQTaylorHoodElement_afe6944d2b619253c840a326460f32eaa}{vertex\+\_\+node\+\_\+pt}} (const unsigned \&j) const
 \begin{DoxyCompactList}\small\item\em Pointer to the j-\/th vertex node in the element. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a8c4ef6c32ff8a6ebec168bacf151ed6a}{get\+\_\+interpolated\+\_\+values}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&values)
 \begin{DoxyCompactList}\small\item\em Get the function value u in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. \end{DoxyCompactList}\item 
@@ -38,11 +38,11 @@ void \mbox{\hyperlink{classoomph_1_1RefineableLinearisedQTaylorHoodElement_abcb2
 \begin{DoxyCompactList}\small\item\em Get the function value u in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a744e9dabce8e94de320d9baa362786af}{further\+\_\+setup\+\_\+hanging\+\_\+nodes}} ()
 \begin{DoxyCompactList}\small\item\em Perform additional hanging node procedures for variables that are not interpolated by all nodes. The two pressure components are stored at the 6th and 7th location in each node. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a6957984a4d9bf9abc1926c0075728292}{interpolating\+\_\+node\+\_\+pt}} (const unsigned \&n, const int \&n\+\_\+value)
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a85ac5379a96e6ca0cbe712218e494962}{interpolating\+\_\+node\+\_\+pt}} (const unsigned \&n, const int \&n\+\_\+value)
 \begin{DoxyCompactList}\small\item\em The velocities are isoparametric and so the \char`\"{}nodes\char`\"{} interpolating the velocities are the geometric nodes. The pressure \char`\"{}nodes\char`\"{} are a subset of the nodes, so when n\+\_\+value==6 or 7, the n-\/th pressure node is returned. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a0dffc62fd56ef284763d9dc4ac7fa616}{local\+\_\+one\+\_\+d\+\_\+fraction\+\_\+of\+\_\+interpolating\+\_\+node}} (const unsigned \&n1d, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const int \&n\+\_\+value)
 \begin{DoxyCompactList}\small\item\em The pressure nodes are the corner nodes, so when n\+\_\+value==6 or 7, the fraction is the same as the 1d node number, 0 or 1. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a54807a5227439ee517c29e9bc0d02d31}{get\+\_\+interpolating\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const int \&n\+\_\+value)
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a3ca81c787638e7e8a66d123f7c52feb7}{get\+\_\+interpolating\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const int \&n\+\_\+value)
 \begin{DoxyCompactList}\small\item\em The velocity nodes are the same as the geometric nodes. The pressure nodes must be calculated by using the same methods as the geometric nodes, but by recalling that there are only two pressure nodes per edge. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1RefineableLinearisedQTaylorHoodElement_ad9f71c10f18b87bd43ade29ba9741665}{ninterpolating\+\_\+node\+\_\+1d}} (const int \&n\+\_\+value)
 \begin{DoxyCompactList}\small\item\em The number of 1d pressure nodes is 2, the number of 1d velocity nodes is the same as the number of 1d geometric nodes. \end{DoxyCompactList}\item 
@@ -53,7 +53,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableLinearisedQTaylorHoodElement_af968
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableLinearisedQTaylorHoodElement_af1469c5afc1ef3a7b1b672d9e70a9c7a}{pressure\+\_\+node\+\_\+pt}} (const unsigned \&n\+\_\+p)
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a547bdaeae9d032bfe65d19a7e538dc42}{pressure\+\_\+node\+\_\+pt}} (const unsigned \&n\+\_\+p)
 \begin{DoxyCompactList}\small\item\em Pointer to n\+\_\+p-\/th pressure node. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a42718cd6cb563e4a07b886ade967c8a2}{unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs}} ()
 \begin{DoxyCompactList}\small\item\em Unpin all pressure dofs. \end{DoxyCompactList}\item 
@@ -67,7 +67,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a9f9e
 
 Refineable version of linearised axisymmetric quadratic Taylor-\/\+Hood elements 
 
-Definition at line \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source_l00605}{605}} of file \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source}{refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 605 of file refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -84,7 +84,7 @@ Constructor\+:
 
 
 
-Definition at line \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source_l00679}{679}} of file \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source}{refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 679 of file refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -105,11 +105,11 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_012_01_4_a01e1eb0
 
 
 
-Definition at line \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source_l00797}{797}} of file \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source}{refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 797 of file refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{refineable__quad__element_8cc_source_l01506}{oomph\+::\+Refineable\+QElement$<$ 2 $>$\+::setup\+\_\+hang\+\_\+for\+\_\+value()}}.
+References i, and oomph\+::\+Refineable\+QElement$<$ 2 $>$\+::setup\+\_\+hang\+\_\+for\+\_\+value().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableLinearisedQTaylorHoodElement_abcb292a51258b089db4004d6ac3769f1}\label{classoomph_1_1RefineableLinearisedQTaylorHoodElement_abcb292a51258b089db4004d6ac3769f1}} 
 \index{oomph::RefineableLinearisedQTaylorHoodElement@{oomph::RefineableLinearisedQTaylorHoodElement}!get\_interpolated\_values@{get\_interpolated\_values}}
@@ -127,11 +127,11 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_ada6f0efe831ffefb1d2
 
 
 
-Definition at line \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source_l00755}{755}} of file \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source}{refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 755 of file refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linearised__navier__stokes__elements_8h_source_l00554}{oomph\+::\+Linearised\+Navier\+Stokes\+Equations\+::interpolated\+\_\+p\+\_\+linearised\+\_\+nst()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{linearised__navier__stokes__elements_8h_source_l00380}{oomph\+::\+Linearised\+Navier\+Stokes\+Equations\+::u\+\_\+index\+\_\+linearised\+\_\+nst()}}.
+References i, oomph\+::\+Linearised\+Navier\+Stokes\+Equations\+::interpolated\+\_\+p\+\_\+linearised\+\_\+nst(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), s, oomph\+::\+Finite\+Element\+::shape(), t, and oomph\+::\+Linearised\+Navier\+Stokes\+Equations\+::u\+\_\+index\+\_\+linearised\+\_\+nst().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a8c4ef6c32ff8a6ebec168bacf151ed6a}\label{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a8c4ef6c32ff8a6ebec168bacf151ed6a}} 
 \index{oomph::RefineableLinearisedQTaylorHoodElement@{oomph::RefineableLinearisedQTaylorHoodElement}!get\_interpolated\_values@{get\_interpolated\_values}}
@@ -149,17 +149,17 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_ad9a4f928806
 
 
 
-Definition at line \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source_l00728}{728}} of file \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source}{refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 728 of file refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linearised__navier__stokes__elements_8h_source_l00554}{oomph\+::\+Linearised\+Navier\+Stokes\+Equations\+::interpolated\+\_\+p\+\_\+linearised\+\_\+nst()}}, \mbox{\hyperlink{linearised__navier__stokes__elements_8h_source_l00525}{oomph\+::\+Linearised\+Navier\+Stokes\+Equations\+::interpolated\+\_\+u\+\_\+linearised\+\_\+nst()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References i, oomph\+::\+Linearised\+Navier\+Stokes\+Equations\+::interpolated\+\_\+p\+\_\+linearised\+\_\+nst(), oomph\+::\+Linearised\+Navier\+Stokes\+Equations\+::interpolated\+\_\+u\+\_\+linearised\+\_\+nst(), and s.
 
-\mbox{\Hypertarget{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a54807a5227439ee517c29e9bc0d02d31}\label{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a54807a5227439ee517c29e9bc0d02d31}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a3ca81c787638e7e8a66d123f7c52feb7}\label{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a3ca81c787638e7e8a66d123f7c52feb7}} 
 \index{oomph::RefineableLinearisedQTaylorHoodElement@{oomph::RefineableLinearisedQTaylorHoodElement}!get\_interpolating\_node\_at\_local\_coordinate@{get\_interpolating\_node\_at\_local\_coordinate}}
 \index{get\_interpolating\_node\_at\_local\_coordinate@{get\_interpolating\_node\_at\_local\_coordinate}!oomph::RefineableLinearisedQTaylorHoodElement@{oomph::RefineableLinearisedQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{get\_interpolating\_node\_at\_local\_coordinate()}{get\_interpolating\_node\_at\_local\_coordinate()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ oomph\+::\+Refineable\+Linearised\+QTaylor\+Hood\+Element\+::get\+\_\+interpolating\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const int \&}]{n\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$ oomph\+::\+Refineable\+Linearised\+QTaylor\+Hood\+Element\+::get\+\_\+interpolating\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const int \&}]{n\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -167,15 +167,15 @@ The velocity nodes are the same as the geometric nodes. The pressure nodes must 
 
 Construct the general pressure index from the components.
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a98332b71c658a2a6d4293380e58473b3}{oomph\+::\+Refineable\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_ad920e66c00888c450f926f08c7793f78}{oomph\+::\+Refineable\+Element}}.
 
 
 
-Definition at line \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source_l00847}{847}} of file \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source}{refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 847 of file refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l03882}{oomph\+::\+Finite\+Element\+::get\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01374}{oomph\+::\+Finite\+Element\+::\+Node\+\_\+location\+\_\+tolerance}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{linearised__navier__stokes__elements_8h_source_l00935}{oomph\+::\+Linearised\+QTaylor\+Hood\+Element\+::\+Pconv}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References oomph\+::\+Finite\+Element\+::get\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate(), i, oomph\+::\+Finite\+Element\+::\+Node\+\_\+location\+\_\+tolerance, oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and s.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableLinearisedQTaylorHoodElement_af968db8940e99a22734568c400fb8af2}\label{classoomph_1_1RefineableLinearisedQTaylorHoodElement_af968db8940e99a22734568c400fb8af2}} 
 \index{oomph::RefineableLinearisedQTaylorHoodElement@{oomph::RefineableLinearisedQTaylorHoodElement}!interpolating\_basis@{interpolating\_basis}}
@@ -193,17 +193,17 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a8ca420443c2
 
 
 
-Definition at line \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source_l00940}{940}} of file \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source}{refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 940 of file refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{linearised__navier__stokes__elements_8h_source_l01129}{oomph\+::\+Linearised\+QTaylor\+Hood\+Element\+::pshape\+\_\+linearised\+\_\+nst()}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
+References oomph\+::\+Linearised\+QCrouzeix\+Raviart\+Element\+::pshape\+\_\+linearised\+\_\+nst(), and oomph\+::\+Finite\+Element\+::shape().
 
-\mbox{\Hypertarget{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a6957984a4d9bf9abc1926c0075728292}\label{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a6957984a4d9bf9abc1926c0075728292}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a85ac5379a96e6ca0cbe712218e494962}\label{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a85ac5379a96e6ca0cbe712218e494962}} 
 \index{oomph::RefineableLinearisedQTaylorHoodElement@{oomph::RefineableLinearisedQTaylorHoodElement}!interpolating\_node\_pt@{interpolating\_node\_pt}}
 \index{interpolating\_node\_pt@{interpolating\_node\_pt}!oomph::RefineableLinearisedQTaylorHoodElement@{oomph::RefineableLinearisedQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{interpolating\_node\_pt()}{interpolating\_node\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ oomph\+::\+Refineable\+Linearised\+QTaylor\+Hood\+Element\+::interpolating\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const int \&}]{n\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$ oomph\+::\+Refineable\+Linearised\+QTaylor\+Hood\+Element\+::interpolating\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const int \&}]{n\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -211,15 +211,15 @@ The velocities are isoparametric and so the \char`\"{}nodes\char`\"{} interpolat
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a7ce034d6dff9963f1620f878ca714052}{oomph\+::\+Refineable\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_ab27986fc2f6033a4758662cde78a7b76}{oomph\+::\+Refineable\+Element}}.
 
 
 
-Definition at line \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source_l00809}{809}} of file \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source}{refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 809 of file refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{linearised__navier__stokes__elements_8h_source_l00935}{oomph\+::\+Linearised\+QTaylor\+Hood\+Element\+::\+Pconv}}.
+References oomph\+::\+Finite\+Element\+::node\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a0dffc62fd56ef284763d9dc4ac7fa616}\label{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a0dffc62fd56ef284763d9dc4ac7fa616}} 
 \index{oomph::RefineableLinearisedQTaylorHoodElement@{oomph::RefineableLinearisedQTaylorHoodElement}!local\_one\_d\_fraction\_of\_interpolating\_node@{local\_one\_d\_fraction\_of\_interpolating\_node}}
@@ -237,11 +237,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_ac4e4ae53741
 
 
 
-Definition at line \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source_l00827}{827}} of file \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source}{refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 827 of file refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l01858}{oomph\+::\+Finite\+Element\+::local\+\_\+one\+\_\+d\+\_\+fraction\+\_\+of\+\_\+node()}}.
+References i, and oomph\+::\+Finite\+Element\+::local\+\_\+one\+\_\+d\+\_\+fraction\+\_\+of\+\_\+node().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a16a99dc576178ec2c1b9f93df45d326a}\label{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a16a99dc576178ec2c1b9f93df45d326a}} 
 \index{oomph::RefineableLinearisedQTaylorHoodElement@{oomph::RefineableLinearisedQTaylorHoodElement}!ncont\_interpolated\_values@{ncont\_interpolated\_values}}
@@ -259,7 +259,7 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_a53e171a18c9f43f1db9
 
 
 
-Definition at line \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source_l00697}{697}} of file \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source}{refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 697 of file refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableLinearisedQTaylorHoodElement_af3ac207744e86fefd03948c30f3bdb33}\label{classoomph_1_1RefineableLinearisedQTaylorHoodElement_af3ac207744e86fefd03948c30f3bdb33}} 
 \index{oomph::RefineableLinearisedQTaylorHoodElement@{oomph::RefineableLinearisedQTaylorHoodElement}!ninterpolating\_node@{ninterpolating\_node}}
@@ -277,11 +277,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a8b1b5031b55
 
 
 
-Definition at line \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source_l00926}{926}} of file \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source}{refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 926 of file refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}.
+References oomph\+::\+Finite\+Element\+::nnode().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableLinearisedQTaylorHoodElement_ad9f71c10f18b87bd43ade29ba9741665}\label{classoomph_1_1RefineableLinearisedQTaylorHoodElement_ad9f71c10f18b87bd43ade29ba9741665}} 
 \index{oomph::RefineableLinearisedQTaylorHoodElement@{oomph::RefineableLinearisedQTaylorHoodElement}!ninterpolating\_node\_1d@{ninterpolating\_node\_1d}}
@@ -299,11 +299,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a850180084aa
 
 
 
-Definition at line \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source_l00912}{912}} of file \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source}{refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 912 of file refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02218}{oomph\+::\+Finite\+Element\+::nnode\+\_\+1d()}}.
+References oomph\+::\+Finite\+Element\+::nnode\+\_\+1d().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a086b235ae15bc49e1043ae6f09217ae9}\label{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a086b235ae15bc49e1043ae6f09217ae9}} 
 \index{oomph::RefineableLinearisedQTaylorHoodElement@{oomph::RefineableLinearisedQTaylorHoodElement}!nrecovery\_order@{nrecovery\_order}}
@@ -321,7 +321,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_af39480835
 
 
 
-Definition at line \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source_l00707}{707}} of file \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source}{refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 707 of file refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableLinearisedQTaylorHoodElement_ad2f150987cca5fb4d8e64fdec5fe3f65}\label{classoomph_1_1RefineableLinearisedQTaylorHoodElement_ad2f150987cca5fb4d8e64fdec5fe3f65}} 
 \index{oomph::RefineableLinearisedQTaylorHoodElement@{oomph::RefineableLinearisedQTaylorHoodElement}!nvertex\_node@{nvertex\_node}}
@@ -339,11 +339,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a19495a0e7
 
 
 
-Definition at line \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source_l00713}{713}} of file \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source}{refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 713 of file refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02491}{oomph\+::\+Finite\+Element\+::nvertex\+\_\+node()}}.
+References oomph\+::\+Finite\+Element\+::nvertex\+\_\+node().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a9f9e9989fcfca1fba2b5ba1778897b4a}\label{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a9f9e9989fcfca1fba2b5ba1778897b4a}} 
 \index{oomph::RefineableLinearisedQTaylorHoodElement@{oomph::RefineableLinearisedQTaylorHoodElement}!pin\_elemental\_redundant\_nodal\_pressure\_dofs@{pin\_elemental\_redundant\_nodal\_pressure\_dofs}}
@@ -361,17 +361,17 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableLinearisedNavierStok
 
 
 
-Definition at line \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source_l00641}{641}} of file \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source}{refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 641 of file refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l01285}{oomph\+::\+Node\+::is\+\_\+hanging()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{linearised__navier__stokes__elements_8h_source_l01021}{oomph\+::\+Linearised\+QTaylor\+Hood\+Element\+::npres\+\_\+linearised\+\_\+nst()}}, \mbox{\hyperlink{linearised__navier__stokes__elements_8h_source_l00983}{oomph\+::\+Linearised\+QTaylor\+Hood\+Element\+::p\+\_\+index\+\_\+linearised\+\_\+nst()}}, \mbox{\hyperlink{linearised__navier__stokes__elements_8h_source_l00935}{oomph\+::\+Linearised\+QTaylor\+Hood\+Element\+::\+Pconv}}, \mbox{\hyperlink{nodes_8h_source_l00385}{oomph\+::\+Data\+::pin()}}, and \mbox{\hyperlink{nodes_8h_source_l00391}{oomph\+::\+Data\+::unpin()}}.
+References i, oomph\+::\+Node\+::is\+\_\+hanging(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Linearised\+QCrouzeix\+Raviart\+Element\+::npres\+\_\+linearised\+\_\+nst(), oomph\+::\+Linearised\+Navier\+Stokes\+Equations\+::p\+\_\+index\+\_\+linearised\+\_\+nst(), oomph\+::\+Data\+::pin(), and oomph\+::\+Data\+::unpin().
 
-\mbox{\Hypertarget{classoomph_1_1RefineableLinearisedQTaylorHoodElement_af1469c5afc1ef3a7b1b672d9e70a9c7a}\label{classoomph_1_1RefineableLinearisedQTaylorHoodElement_af1469c5afc1ef3a7b1b672d9e70a9c7a}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a547bdaeae9d032bfe65d19a7e538dc42}\label{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a547bdaeae9d032bfe65d19a7e538dc42}} 
 \index{oomph::RefineableLinearisedQTaylorHoodElement@{oomph::RefineableLinearisedQTaylorHoodElement}!pressure\_node\_pt@{pressure\_node\_pt}}
 \index{pressure\_node\_pt@{pressure\_node\_pt}!oomph::RefineableLinearisedQTaylorHoodElement@{oomph::RefineableLinearisedQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{pressure\_node\_pt()}{pressure\_node\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ oomph\+::\+Refineable\+Linearised\+QTaylor\+Hood\+Element\+::pressure\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$ oomph\+::\+Refineable\+Linearised\+QTaylor\+Hood\+Element\+::pressure\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
 
 
 
@@ -379,15 +379,15 @@ Pointer to n\+\_\+p-\/th pressure node.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableLinearisedNavierStokesEquations_ab129dd22f69db01ff3f7dbdead2288c0}{oomph\+::\+Refineable\+Linearised\+Navier\+Stokes\+Equations}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableLinearisedNavierStokesEquations_abb2f7a5ecb5695a12d44929a8ffe822b}{oomph\+::\+Refineable\+Linearised\+Navier\+Stokes\+Equations}}.
 
 
 
-Definition at line \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source_l00612}{612}} of file \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source}{refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 612 of file refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{linearised__navier__stokes__elements_8h_source_l00935}{oomph\+::\+Linearised\+QTaylor\+Hood\+Element\+::\+Pconv}}.
+References oomph\+::\+Finite\+Element\+::node\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a8a66062e7746027d25599a050b8ee85b}\label{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a8a66062e7746027d25599a050b8ee85b}} 
 \index{oomph::RefineableLinearisedQTaylorHoodElement@{oomph::RefineableLinearisedQTaylorHoodElement}!rebuild\_from\_sons@{rebuild\_from\_sons}}
@@ -405,7 +405,7 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_a33324be27833fa4b782
 
 
 
-Definition at line \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source_l00703}{703}} of file \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source}{refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 703 of file refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a16716cc6af73490d9e2577dd090ac587}\label{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a16716cc6af73490d9e2577dd090ac587}} 
 \index{oomph::RefineableLinearisedQTaylorHoodElement@{oomph::RefineableLinearisedQTaylorHoodElement}!required\_nvalue@{required\_nvalue}}
@@ -423,7 +423,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearisedQTaylorHoodElement_a
 
 
 
-Definition at line \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source_l00690}{690}} of file \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source}{refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 690 of file refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a42718cd6cb563e4a07b886ade967c8a2}\label{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a42718cd6cb563e4a07b886ade967c8a2}} 
 \index{oomph::RefineableLinearisedQTaylorHoodElement@{oomph::RefineableLinearisedQTaylorHoodElement}!unpin\_elemental\_pressure\_dofs@{unpin\_elemental\_pressure\_dofs}}
@@ -441,17 +441,17 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableLinearisedNavierStokesEquati
 
 
 
-Definition at line \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source_l00618}{618}} of file \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source}{refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 618 of file refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{linearised__navier__stokes__elements_8h_source_l00983}{oomph\+::\+Linearised\+QTaylor\+Hood\+Element\+::p\+\_\+index\+\_\+linearised\+\_\+nst()}}, and \mbox{\hyperlink{nodes_8h_source_l00391}{oomph\+::\+Data\+::unpin()}}.
+References i, oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Linearised\+Navier\+Stokes\+Equations\+::p\+\_\+index\+\_\+linearised\+\_\+nst(), and oomph\+::\+Data\+::unpin().
 
-\mbox{\Hypertarget{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a259bd183aedae0c689178e03bddc99f9}\label{classoomph_1_1RefineableLinearisedQTaylorHoodElement_a259bd183aedae0c689178e03bddc99f9}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableLinearisedQTaylorHoodElement_afe6944d2b619253c840a326460f32eaa}\label{classoomph_1_1RefineableLinearisedQTaylorHoodElement_afe6944d2b619253c840a326460f32eaa}} 
 \index{oomph::RefineableLinearisedQTaylorHoodElement@{oomph::RefineableLinearisedQTaylorHoodElement}!vertex\_node\_pt@{vertex\_node\_pt}}
 \index{vertex\_node\_pt@{vertex\_node\_pt}!oomph::RefineableLinearisedQTaylorHoodElement@{oomph::RefineableLinearisedQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{vertex\_node\_pt()}{vertex\_node\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ oomph\+::\+Refineable\+Linearised\+QTaylor\+Hood\+Element\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$ oomph\+::\+Refineable\+Linearised\+QTaylor\+Hood\+Element\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -459,15 +459,15 @@ Pointer to the j-\/th vertex node in the element.
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a6d852edae3d9f6bddeb5aaf136ebbb8b}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a0eedccc33519f852c5dc2055ddf2774b}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
 
 
 
-Definition at line \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source_l00719}{719}} of file \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8h_source}{refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 719 of file refineable\+\_\+linearised\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02500}{oomph\+::\+Finite\+Element\+::vertex\+\_\+node\+\_\+pt()}}.
+References oomph\+::\+Finite\+Element\+::vertex\+\_\+node\+\_\+pt().
 
 
 

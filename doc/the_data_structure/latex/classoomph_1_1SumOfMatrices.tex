@@ -20,7 +20,7 @@ Inheritance diagram for oomph\+::Sum\+Of\+Matrices\+:\begin{figure}[H]
 \item 
 \mbox{\hyperlink{classoomph_1_1SumOfMatrices_a627e945a69e2ba0709678e3ac0f8f195}{Sum\+Of\+Matrices}} ()
 \begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1SumOfMatrices_a1d482525c8a83e339b729c43667ca1a3}{Sum\+Of\+Matrices}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$\mbox{\hyperlink{classoomph_1_1SumOfMatrices_aae26075d453b7c0cdee467196c0b957e}{main\+\_\+matrix\+\_\+pt}})
+\mbox{\hyperlink{classoomph_1_1SumOfMatrices_a1d482525c8a83e339b729c43667ca1a3}{Sum\+Of\+Matrices}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$\mbox{\hyperlink{classoomph_1_1SumOfMatrices_a8e5bb86791c0d2b17703d45104e1d1ce}{main\+\_\+matrix\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Constructor taking a pointer to the main matrix as input. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1SumOfMatrices_a0d61ed8b4abb092139a1c87cb997e7ac}{Sum\+Of\+Matrices}} (const \mbox{\hyperlink{classoomph_1_1SumOfMatrices}{Sum\+Of\+Matrices}} \&matrix)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
@@ -28,9 +28,9 @@ void \mbox{\hyperlink{classoomph_1_1SumOfMatrices_aa64f741169700b953b158fe325026
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1SumOfMatrices_af6cc954e345acc8587bf861d92a678fc}{$\sim$\+Sum\+Of\+Matrices}} ()
 \begin{DoxyCompactList}\small\item\em Destructor\+: delete matrices as instructed by Should\+\_\+delete\+\_\+added\+\_\+matrix vector and Should\+\_\+delete\+\_\+main\+\_\+matrix. \end{DoxyCompactList}\item 
-const \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$ \mbox{\hyperlink{classoomph_1_1SumOfMatrices_aae26075d453b7c0cdee467196c0b957e}{main\+\_\+matrix\+\_\+pt}} () const
+const \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$ \mbox{\hyperlink{classoomph_1_1SumOfMatrices_a8e5bb86791c0d2b17703d45104e1d1ce}{main\+\_\+matrix\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Access to the main matrix. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$\& \mbox{\hyperlink{classoomph_1_1SumOfMatrices_a418847e6562fb451b1b06c16bf7fb3fc}{main\+\_\+matrix\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$\& \mbox{\hyperlink{classoomph_1_1SumOfMatrices_affa3ce9dd151fba3d33ecfffa5523c74}{main\+\_\+matrix\+\_\+pt}} ()
 \item 
 void \mbox{\hyperlink{classoomph_1_1SumOfMatrices_a873f5f3e937c1fa203506b2ccc81bd2e}{set\+\_\+delete\+\_\+main\+\_\+matrix}} ()
 \begin{DoxyCompactList}\small\item\em Set the main matrix to be deleted by the destructor of the \mbox{\hyperlink{classoomph_1_1SumOfMatrices}{Sum\+Of\+Matrices}} (default is to not delete it). \end{DoxyCompactList}\item 
@@ -42,11 +42,11 @@ void \mbox{\hyperlink{classoomph_1_1SumOfMatrices_abc094faeb49c465a2907830afe71a
 \begin{DoxyCompactList}\small\item\em Get a list of row/col indices and total entry for non-\/zeros in the matrix. e.\+g. for use as input to other matrix classes. Warning this is SLOW! for sparse matrices. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SumOfMatrices_a950924dfc285c908aac317f3be4fd158}{add\+\_\+matrix}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$added\+\_\+matrix\+\_\+pt\+\_\+in, const \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup}{Added\+Main\+Numbering\+Lookup}} $\ast$main\+\_\+to\+\_\+added\+\_\+rows\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup}{Added\+Main\+Numbering\+Lookup}} $\ast$main\+\_\+to\+\_\+added\+\_\+cols\+\_\+pt, bool should\+\_\+delete\+\_\+matrix=false)
 \begin{DoxyCompactList}\small\item\em Add a new matrix to the sum by giving a matrix pointer and a mapping from the main matrix numbering to the added matrix\textquotesingle{}s numbering. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$ \mbox{\hyperlink{classoomph_1_1SumOfMatrices_aea0062a941a940d3f7ffbfef27eb0580}{added\+\_\+matrix\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$ \mbox{\hyperlink{classoomph_1_1SumOfMatrices_a4d305ca67acad2600f833accd4acf982}{added\+\_\+matrix\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Access function for ith added matrix (main matrix not included in numbering). \end{DoxyCompactList}\item 
-const \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup}{Added\+Main\+Numbering\+Lookup}} $\ast$ \mbox{\hyperlink{classoomph_1_1SumOfMatrices_a5bf6ccd4af2e08e94d48b68a555d85dc}{row\+\_\+map\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+const \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup}{Added\+Main\+Numbering\+Lookup}} $\ast$ \mbox{\hyperlink{classoomph_1_1SumOfMatrices_a502c316c8fc583a15ff52d025fb45e5e}{row\+\_\+map\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Access to the maps. \end{DoxyCompactList}\item 
-const \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup}{Added\+Main\+Numbering\+Lookup}} $\ast$ \mbox{\hyperlink{classoomph_1_1SumOfMatrices_a9a5636bde953bf79bd3c067ba3aa5884}{col\+\_\+map\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+const \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup}{Added\+Main\+Numbering\+Lookup}} $\ast$ \mbox{\hyperlink{classoomph_1_1SumOfMatrices_ac9fbec5f36f904c4fee889fb0f628c2f}{col\+\_\+map\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \item 
 unsigned long \mbox{\hyperlink{classoomph_1_1SumOfMatrices_a5d3b790f7e4f1bce927ecfb61844a52a}{nrow}} () const
 \begin{DoxyCompactList}\small\item\em Return the number of rows of the main matrix. \end{DoxyCompactList}\item 
@@ -56,7 +56,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1SumOfMatrices_a4b75af475c7e1d9d7e5a66065
 \begin{DoxyCompactList}\small\item\em Return the number of added matrices in the sum. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SumOfMatrices_ae6c97ff92220835df3c3eeb1b0a85cc5}{multiply}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&soln) const
 \begin{DoxyCompactList}\small\item\em Multiply\+: just call multiply on each of the matrices and add up the results (with appropriate bookeeping of the relative positions). \end{DoxyCompactList}\item 
-double \& \mbox{\hyperlink{classoomph_1_1SumOfMatrices_ace6003b73b241e9e7eaa154e180f73a9}{entry}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned long \&j) const
+double \& \mbox{\hyperlink{classoomph_1_1SumOfMatrices_a848fff3077a0074c5cd33cc75913fbbd}{entry}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned long \&j) const
 \begin{DoxyCompactList}\small\item\em Broken operator() because it does not make sense to return anything by reference. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1SumOfMatrices_a934664ec676d36115ef27a9758827f7c}{operator()}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned long \&j) const
 \begin{DoxyCompactList}\small\item\em Access function to get the total value of entries in position (i,j). Warning\+: this way of getting entries is far too slow to use inside of loops. \end{DoxyCompactList}\item 
@@ -85,7 +85,7 @@ Class for a matrix of the form M = S + G + H + ... where S is the main matrix an
 
 Maps mut be provided which gives a map from the rows/cols of the main matrix to the rows/cols of each of the added matrices. 
 
-Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00260}{260}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+Definition at line 260 of file sum\+\_\+of\+\_\+matrices.\+h.
 
 
 
@@ -102,7 +102,7 @@ Default constructor.
 
 
 
-Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00287}{287}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+Definition at line 287 of file sum\+\_\+of\+\_\+matrices.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SumOfMatrices_a1d482525c8a83e339b729c43667ca1a3}\label{classoomph_1_1SumOfMatrices_a1d482525c8a83e339b729c43667ca1a3}} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!SumOfMatrices@{SumOfMatrices}}
@@ -116,7 +116,7 @@ Constructor taking a pointer to the main matrix as input.
 
 
 
-Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00298}{298}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+Definition at line 298 of file sum\+\_\+of\+\_\+matrices.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SumOfMatrices_a0d61ed8b4abb092139a1c87cb997e7ac}\label{classoomph_1_1SumOfMatrices_a0d61ed8b4abb092139a1c87cb997e7ac}} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!SumOfMatrices@{SumOfMatrices}}
@@ -140,11 +140,7 @@ Destructor\+: delete matrices as instructed by Should\+\_\+delete\+\_\+added\+\_
 
 
 
-Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00316}{316}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
-
-
-
-References \mbox{\hyperlink{sum__of__matrices_8h_source_l00268}{Added\+\_\+matrix\+\_\+pt}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00265}{Main\+\_\+matrix\+\_\+pt}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00279}{Should\+\_\+delete\+\_\+added\+\_\+matrix}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00283}{Should\+\_\+delete\+\_\+main\+\_\+matrix}}.
+Definition at line 316 of file sum\+\_\+of\+\_\+matrices.\+h.
 
 
 
@@ -161,17 +157,17 @@ Add a new matrix to the sum by giving a matrix pointer and a mapping from the ma
 
 
 
-Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00415}{415}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+Definition at line 415 of file sum\+\_\+of\+\_\+matrices.\+h.
 
 
 
-References \mbox{\hyperlink{sum__of__matrices_8h_source_l00268}{Added\+\_\+matrix\+\_\+pt}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00184}{oomph\+::\+Added\+Main\+Numbering\+Lookup\+::added\+\_\+to\+\_\+main\+\_\+mapping\+\_\+pt()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00276}{Col\+\_\+map\+\_\+pt}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00333}{main\+\_\+matrix\+\_\+pt()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00190}{oomph\+::\+Added\+Main\+Numbering\+Lookup\+::main\+\_\+to\+\_\+added\+\_\+mapping\+\_\+pt()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00515}{ncol()}}, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a253feffbf1db1976cdd86c6134c50abe}{oomph\+::\+Double\+Matrix\+Base\+::ncol()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00501}{nrow()}}, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_acdcd6e1ea2bf2380f1a2fa32c7829cb5}{oomph\+::\+Double\+Matrix\+Base\+::nrow()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00272}{Row\+\_\+map\+\_\+pt}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00279}{Should\+\_\+delete\+\_\+added\+\_\+matrix}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, and \mbox{\hyperlink{oomph__utilities_8h_source_l00189}{oomph\+::\+String\+Conversion\+::to\+\_\+string()}}.
+References oomph\+::\+Added\+Main\+Numbering\+Lookup\+::added\+\_\+to\+\_\+main\+\_\+mapping\+\_\+pt(), oomph\+::\+Added\+Main\+Numbering\+Lookup\+::main\+\_\+to\+\_\+added\+\_\+mapping\+\_\+pt(), oomph\+::\+Double\+Matrix\+Base\+::ncol(), oomph\+::\+Double\+Matrix\+Base\+::nrow(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), and oomph\+::\+String\+Conversion\+::to\+\_\+string().
 
-\mbox{\Hypertarget{classoomph_1_1SumOfMatrices_aea0062a941a940d3f7ffbfef27eb0580}\label{classoomph_1_1SumOfMatrices_aea0062a941a940d3f7ffbfef27eb0580}} 
+\mbox{\Hypertarget{classoomph_1_1SumOfMatrices_a4d305ca67acad2600f833accd4acf982}\label{classoomph_1_1SumOfMatrices_a4d305ca67acad2600f833accd4acf982}} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!added\_matrix\_pt@{added\_matrix\_pt}}
 \index{added\_matrix\_pt@{added\_matrix\_pt}!oomph::SumOfMatrices@{oomph::SumOfMatrices}}
 \doxysubsubsection{\texorpdfstring{added\_matrix\_pt()}{added\_matrix\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$ oomph\+::\+Sum\+Of\+Matrices\+::added\+\_\+matrix\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}}$\ast$ oomph\+::\+Sum\+Of\+Matrices\+::added\+\_\+matrix\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -179,35 +175,35 @@ Access function for ith added matrix (main matrix not included in numbering).
 
 
 
-Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00485}{485}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+Definition at line 485 of file sum\+\_\+of\+\_\+matrices.\+h.
 
 
 
-References \mbox{\hyperlink{sum__of__matrices_8h_source_l00268}{Added\+\_\+matrix\+\_\+pt}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References i.
 
 
 
-Referenced by \mbox{\hyperlink{sum__of__matrices_8cc_source_l00040}{multiply()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00552}{operator()()}}.
+Referenced by multiply().
 
-\mbox{\Hypertarget{classoomph_1_1SumOfMatrices_a9a5636bde953bf79bd3c067ba3aa5884}\label{classoomph_1_1SumOfMatrices_a9a5636bde953bf79bd3c067ba3aa5884}} 
+\mbox{\Hypertarget{classoomph_1_1SumOfMatrices_ac9fbec5f36f904c4fee889fb0f628c2f}\label{classoomph_1_1SumOfMatrices_ac9fbec5f36f904c4fee889fb0f628c2f}} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!col\_map\_pt@{col\_map\_pt}}
 \index{col\_map\_pt@{col\_map\_pt}!oomph::SumOfMatrices@{oomph::SumOfMatrices}}
 \doxysubsubsection{\texorpdfstring{col\_map\_pt()}{col\_map\_pt()}}
-{\footnotesize\ttfamily const \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup}{Added\+Main\+Numbering\+Lookup}} $\ast$ oomph\+::\+Sum\+Of\+Matrices\+::col\+\_\+map\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup}{Added\+Main\+Numbering\+Lookup}}$\ast$ oomph\+::\+Sum\+Of\+Matrices\+::col\+\_\+map\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00495}{495}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+Definition at line 495 of file sum\+\_\+of\+\_\+matrices.\+h.
 
 
 
-References \mbox{\hyperlink{sum__of__matrices_8h_source_l00276}{Col\+\_\+map\+\_\+pt}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References i.
 
-\mbox{\Hypertarget{classoomph_1_1SumOfMatrices_ace6003b73b241e9e7eaa154e180f73a9}\label{classoomph_1_1SumOfMatrices_ace6003b73b241e9e7eaa154e180f73a9}} 
+\mbox{\Hypertarget{classoomph_1_1SumOfMatrices_a848fff3077a0074c5cd33cc75913fbbd}\label{classoomph_1_1SumOfMatrices_a848fff3077a0074c5cd33cc75913fbbd}} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!entry@{entry}}
 \index{entry@{entry}!oomph::SumOfMatrices@{oomph::SumOfMatrices}}
 \doxysubsubsection{\texorpdfstring{entry()}{entry()}}
-{\footnotesize\ttfamily double \& oomph\+::\+Sum\+Of\+Matrices\+::entry (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i,  }\item[{const unsigned long \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double\& oomph\+::\+Sum\+Of\+Matrices\+::entry (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i,  }\item[{const unsigned long \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -215,11 +211,7 @@ Broken operator() because it does not make sense to return anything by reference
 
 
 
-Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00540}{540}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
-
-
-
-Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00389}{get\+\_\+as\+\_\+indices()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00369}{sparse\+\_\+indexed\+\_\+output\+\_\+helper()}}.
+Definition at line 540 of file sum\+\_\+of\+\_\+matrices.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SumOfMatrices_abc094faeb49c465a2907830afe71ab79}\label{classoomph_1_1SumOfMatrices_abc094faeb49c465a2907830afe71ab79}} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!get\_as\_indices@{get\_as\_indices}}
@@ -233,31 +225,27 @@ Get a list of row/col indices and total entry for non-\/zeros in the matrix. e.\
 
 
 
-Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00389}{389}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+Definition at line 389 of file sum\+\_\+of\+\_\+matrices.\+h.
 
 
 
-References \mbox{\hyperlink{sum__of__matrices_8h_source_l00540}{entry()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00515}{ncol()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00501}{nrow()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00552}{operator()()}}.
+References i.
 
-\mbox{\Hypertarget{classoomph_1_1SumOfMatrices_a418847e6562fb451b1b06c16bf7fb3fc}\label{classoomph_1_1SumOfMatrices_a418847e6562fb451b1b06c16bf7fb3fc}} 
+\mbox{\Hypertarget{classoomph_1_1SumOfMatrices_affa3ce9dd151fba3d33ecfffa5523c74}\label{classoomph_1_1SumOfMatrices_affa3ce9dd151fba3d33ecfffa5523c74}} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!main\_matrix\_pt@{main\_matrix\_pt}}
 \index{main\_matrix\_pt@{main\_matrix\_pt}!oomph::SumOfMatrices@{oomph::SumOfMatrices}}
 \doxysubsubsection{\texorpdfstring{main\_matrix\_pt()}{main\_matrix\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$\& oomph\+::\+Sum\+Of\+Matrices\+::main\+\_\+matrix\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}}$\ast$\& oomph\+::\+Sum\+Of\+Matrices\+::main\+\_\+matrix\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00337}{337}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+Definition at line 337 of file sum\+\_\+of\+\_\+matrices.\+h.
 
-
-
-References \mbox{\hyperlink{sum__of__matrices_8h_source_l00265}{Main\+\_\+matrix\+\_\+pt}}.
-
-\mbox{\Hypertarget{classoomph_1_1SumOfMatrices_aae26075d453b7c0cdee467196c0b957e}\label{classoomph_1_1SumOfMatrices_aae26075d453b7c0cdee467196c0b957e}} 
+\mbox{\Hypertarget{classoomph_1_1SumOfMatrices_a8e5bb86791c0d2b17703d45104e1d1ce}\label{classoomph_1_1SumOfMatrices_a8e5bb86791c0d2b17703d45104e1d1ce}} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!main\_matrix\_pt@{main\_matrix\_pt}}
 \index{main\_matrix\_pt@{main\_matrix\_pt}!oomph::SumOfMatrices@{oomph::SumOfMatrices}}
 \doxysubsubsection{\texorpdfstring{main\_matrix\_pt()}{main\_matrix\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily const \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$ oomph\+::\+Sum\+Of\+Matrices\+::main\+\_\+matrix\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}}$\ast$ oomph\+::\+Sum\+Of\+Matrices\+::main\+\_\+matrix\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -265,15 +253,7 @@ Access to the main matrix.
 
 
 
-Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00333}{333}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
-
-
-
-References \mbox{\hyperlink{sum__of__matrices_8h_source_l00265}{Main\+\_\+matrix\+\_\+pt}}.
-
-
-
-Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00415}{add\+\_\+matrix()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00552}{operator()()}}.
+Definition at line 333 of file sum\+\_\+of\+\_\+matrices.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SumOfMatrices_ae6c97ff92220835df3c3eeb1b0a85cc5}\label{classoomph_1_1SumOfMatrices_ae6c97ff92220835df3c3eeb1b0a85cc5}} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!multiply@{multiply}}
@@ -291,11 +271,11 @@ Implements \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a78204eab557e0dc99618
 
 
 
-Definition at line \mbox{\hyperlink{sum__of__matrices_8cc_source_l00040}{40}} of file \mbox{\hyperlink{sum__of__matrices_8cc_source}{sum\+\_\+of\+\_\+matrices.\+cc}}.
+Definition at line 40 of file sum\+\_\+of\+\_\+matrices.\+cc.
 
 
 
-References \mbox{\hyperlink{sum__of__matrices_8h_source_l00268}{Added\+\_\+matrix\+\_\+pt}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00485}{added\+\_\+matrix\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8cc_source_l00035}{oomph\+::\+Linear\+Algebra\+Distribution\+::build()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00276}{Col\+\_\+map\+\_\+pt}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00265}{Main\+\_\+matrix\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a78204eab557e0dc99618e41a28a5c092}{oomph\+::\+Double\+Matrix\+Base\+::multiply()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00515}{ncol()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00501}{nrow()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00272}{Row\+\_\+map\+\_\+pt}}.
+References Added\+\_\+matrix\+\_\+pt, added\+\_\+matrix\+\_\+pt(), oomph\+::\+Linear\+Algebra\+Distribution\+::build(), Col\+\_\+map\+\_\+pt, Main\+\_\+matrix\+\_\+pt, oomph\+::\+Double\+Matrix\+Base\+::multiply(), ncol(), nrow(), and Row\+\_\+map\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1SumOfMatrices_a0028fb64f602aa07ff557b0a11a1c659}\label{classoomph_1_1SumOfMatrices_a0028fb64f602aa07ff557b0a11a1c659}} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!multiply\_transpose@{multiply\_transpose}}
@@ -313,7 +293,7 @@ Implements \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a843d44405b70da1d96b4
 
 
 
-Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00573}{573}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+Definition at line 573 of file sum\+\_\+of\+\_\+matrices.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SumOfMatrices_a4b75af475c7e1d9d7e5a66065895abe7}\label{classoomph_1_1SumOfMatrices_a4b75af475c7e1d9d7e5a66065895abe7}} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!n\_added\_matrix@{n\_added\_matrix}}
@@ -327,15 +307,7 @@ Return the number of added matrices in the sum.
 
 
 
-Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00529}{529}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
-
-
-
-References \mbox{\hyperlink{sum__of__matrices_8h_source_l00268}{Added\+\_\+matrix\+\_\+pt}}.
-
-
-
-Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00552}{operator()()}}.
+Definition at line 529 of file sum\+\_\+of\+\_\+matrices.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SumOfMatrices_ad18b4591850b5e89ee6695407aaeec54}\label{classoomph_1_1SumOfMatrices_ad18b4591850b5e89ee6695407aaeec54}} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!ncol@{ncol}}
@@ -353,15 +325,15 @@ Implements \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a253feffbf1db1976cdd8
 
 
 
-Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00515}{515}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+Definition at line 515 of file sum\+\_\+of\+\_\+matrices.\+h.
 
 
 
-References \mbox{\hyperlink{sum__of__matrices_8h_source_l00265}{Main\+\_\+matrix\+\_\+pt}}, and \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a253feffbf1db1976cdd86c6134c50abe}{oomph\+::\+Double\+Matrix\+Base\+::ncol()}}.
+References oomph\+::\+Double\+Matrix\+Base\+::ncol().
 
 
 
-Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00415}{add\+\_\+matrix()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00389}{get\+\_\+as\+\_\+indices()}}, \mbox{\hyperlink{sum__of__matrices_8cc_source_l00040}{multiply()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00353}{output\+\_\+bottom\+\_\+right\+\_\+zero\+\_\+helper()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00369}{sparse\+\_\+indexed\+\_\+output\+\_\+helper()}}.
+Referenced by multiply().
 
 \mbox{\Hypertarget{classoomph_1_1SumOfMatrices_a5d3b790f7e4f1bce927ecfb61844a52a}\label{classoomph_1_1SumOfMatrices_a5d3b790f7e4f1bce927ecfb61844a52a}} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!nrow@{nrow}}
@@ -379,15 +351,15 @@ Implements \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_acdcd6e1ea2bf2380f1a2
 
 
 
-Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00501}{501}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+Definition at line 501 of file sum\+\_\+of\+\_\+matrices.\+h.
 
 
 
-References \mbox{\hyperlink{sum__of__matrices_8h_source_l00265}{Main\+\_\+matrix\+\_\+pt}}, and \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_acdcd6e1ea2bf2380f1a2fa32c7829cb5}{oomph\+::\+Double\+Matrix\+Base\+::nrow()}}.
+References oomph\+::\+Double\+Matrix\+Base\+::nrow().
 
 
 
-Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00415}{add\+\_\+matrix()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00389}{get\+\_\+as\+\_\+indices()}}, \mbox{\hyperlink{sum__of__matrices_8cc_source_l00040}{multiply()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00353}{output\+\_\+bottom\+\_\+right\+\_\+zero\+\_\+helper()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00369}{sparse\+\_\+indexed\+\_\+output\+\_\+helper()}}.
+Referenced by multiply().
 
 \mbox{\Hypertarget{classoomph_1_1SumOfMatrices_a934664ec676d36115ef27a9758827f7c}\label{classoomph_1_1SumOfMatrices_a934664ec676d36115ef27a9758827f7c}} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!operator()@{operator()}}
@@ -405,15 +377,11 @@ Implements \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a20b85f0286f80464f42f
 
 
 
-Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00552}{552}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+Definition at line 552 of file sum\+\_\+of\+\_\+matrices.\+h.
 
 
 
-References \mbox{\hyperlink{sum__of__matrices_8h_source_l00485}{added\+\_\+matrix\+\_\+pt()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00276}{Col\+\_\+map\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00333}{main\+\_\+matrix\+\_\+pt()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00529}{n\+\_\+added\+\_\+matrix()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00272}{Row\+\_\+map\+\_\+pt}}.
-
-
-
-Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00389}{get\+\_\+as\+\_\+indices()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00353}{output\+\_\+bottom\+\_\+right\+\_\+zero\+\_\+helper()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00369}{sparse\+\_\+indexed\+\_\+output\+\_\+helper()}}.
+References i.
 
 \mbox{\Hypertarget{classoomph_1_1SumOfMatrices_aa64f741169700b953b158fe325026377}\label{classoomph_1_1SumOfMatrices_aa64f741169700b953b158fe325026377}} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!operator=@{operator=}}
@@ -441,17 +409,13 @@ Implements \mbox{\hyperlink{classoomph_1_1Matrix_a10ee338f4d3893010291a692aea042
 
 
 
-Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00353}{353}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+Definition at line 353 of file sum\+\_\+of\+\_\+matrices.\+h.
 
-
-
-References \mbox{\hyperlink{sum__of__matrices_8h_source_l00515}{ncol()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00501}{nrow()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00552}{operator()()}}.
-
-\mbox{\Hypertarget{classoomph_1_1SumOfMatrices_a5bf6ccd4af2e08e94d48b68a555d85dc}\label{classoomph_1_1SumOfMatrices_a5bf6ccd4af2e08e94d48b68a555d85dc}} 
+\mbox{\Hypertarget{classoomph_1_1SumOfMatrices_a502c316c8fc583a15ff52d025fb45e5e}\label{classoomph_1_1SumOfMatrices_a502c316c8fc583a15ff52d025fb45e5e}} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!row\_map\_pt@{row\_map\_pt}}
 \index{row\_map\_pt@{row\_map\_pt}!oomph::SumOfMatrices@{oomph::SumOfMatrices}}
 \doxysubsubsection{\texorpdfstring{row\_map\_pt()}{row\_map\_pt()}}
-{\footnotesize\ttfamily const \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup}{Added\+Main\+Numbering\+Lookup}} $\ast$ oomph\+::\+Sum\+Of\+Matrices\+::row\+\_\+map\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup}{Added\+Main\+Numbering\+Lookup}}$\ast$ oomph\+::\+Sum\+Of\+Matrices\+::row\+\_\+map\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -459,11 +423,11 @@ Access to the maps.
 
 
 
-Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00491}{491}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+Definition at line 491 of file sum\+\_\+of\+\_\+matrices.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00272}{Row\+\_\+map\+\_\+pt}}.
+References i.
 
 \mbox{\Hypertarget{classoomph_1_1SumOfMatrices_a873f5f3e937c1fa203506b2ccc81bd2e}\label{classoomph_1_1SumOfMatrices_a873f5f3e937c1fa203506b2ccc81bd2e}} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!set\_delete\_main\_matrix@{set\_delete\_main\_matrix}}
@@ -477,11 +441,7 @@ Set the main matrix to be deleted by the destructor of the \mbox{\hyperlink{clas
 
 
 
-Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00344}{344}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
-
-
-
-References \mbox{\hyperlink{sum__of__matrices_8h_source_l00283}{Should\+\_\+delete\+\_\+main\+\_\+matrix}}.
+Definition at line 344 of file sum\+\_\+of\+\_\+matrices.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SumOfMatrices_af93e5663c282ab73bc01c8dff58d0e82}\label{classoomph_1_1SumOfMatrices_af93e5663c282ab73bc01c8dff58d0e82}} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!sparse\_indexed\_output\_helper@{sparse\_indexed\_output\_helper}}
@@ -499,11 +459,11 @@ Implements \mbox{\hyperlink{classoomph_1_1Matrix_a7a5b44e7688ce2c2f7552da104e615
 
 
 
-Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00369}{369}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+Definition at line 369 of file sum\+\_\+of\+\_\+matrices.\+h.
 
 
 
-References \mbox{\hyperlink{sum__of__matrices_8h_source_l00540}{entry()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00515}{ncol()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00501}{nrow()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00552}{operator()()}}.
+References i.
 
 
 
@@ -520,11 +480,11 @@ List of pointers to the matrices that are added to the main matrix.
 
 
 
-Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00268}{268}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+Definition at line 268 of file sum\+\_\+of\+\_\+matrices.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00415}{add\+\_\+matrix()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00485}{added\+\_\+matrix\+\_\+pt()}}, \mbox{\hyperlink{sum__of__matrices_8cc_source_l00040}{multiply()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00529}{n\+\_\+added\+\_\+matrix()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00316}{$\sim$\+Sum\+Of\+Matrices()}}.
+Referenced by multiply().
 
 \mbox{\Hypertarget{classoomph_1_1SumOfMatrices_a67b29b2c909a515cd328a45db2016a6c}\label{classoomph_1_1SumOfMatrices_a67b29b2c909a515cd328a45db2016a6c}} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!Col\_map\_pt@{Col\_map\_pt}}
@@ -538,11 +498,11 @@ List of maps between col numbers of the main matrix and the added matrices.
 
 
 
-Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00276}{276}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+Definition at line 276 of file sum\+\_\+of\+\_\+matrices.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00415}{add\+\_\+matrix()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00495}{col\+\_\+map\+\_\+pt()}}, \mbox{\hyperlink{sum__of__matrices_8cc_source_l00040}{multiply()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00552}{operator()()}}.
+Referenced by multiply().
 
 \mbox{\Hypertarget{classoomph_1_1SumOfMatrices_afa2c914fc55c972b1389de3d9b7a7266}\label{classoomph_1_1SumOfMatrices_afa2c914fc55c972b1389de3d9b7a7266}} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!Main\_matrix\_pt@{Main\_matrix\_pt}}
@@ -556,11 +516,11 @@ Pointer to the matrix which we are adding the others to.
 
 
 
-Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00265}{265}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+Definition at line 265 of file sum\+\_\+of\+\_\+matrices.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00333}{main\+\_\+matrix\+\_\+pt()}}, \mbox{\hyperlink{sum__of__matrices_8cc_source_l00040}{multiply()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00515}{ncol()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00501}{nrow()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00316}{$\sim$\+Sum\+Of\+Matrices()}}.
+Referenced by multiply().
 
 \mbox{\Hypertarget{classoomph_1_1SumOfMatrices_ab9c2057db624b4cfeb41dd5ffa117abf}\label{classoomph_1_1SumOfMatrices_ab9c2057db624b4cfeb41dd5ffa117abf}} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!Row\_map\_pt@{Row\_map\_pt}}
@@ -574,11 +534,11 @@ List of maps between row numbers of the main matrix and the added matrices.
 
 
 
-Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00272}{272}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+Definition at line 272 of file sum\+\_\+of\+\_\+matrices.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00415}{add\+\_\+matrix()}}, \mbox{\hyperlink{sum__of__matrices_8cc_source_l00040}{multiply()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00552}{operator()()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00491}{row\+\_\+map\+\_\+pt()}}.
+Referenced by multiply().
 
 \mbox{\Hypertarget{classoomph_1_1SumOfMatrices_abba55a2123febe3b1bb89ee010a56eb5}\label{classoomph_1_1SumOfMatrices_abba55a2123febe3b1bb89ee010a56eb5}} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!Should\_delete\_added\_matrix@{Should\_delete\_added\_matrix}}
@@ -592,11 +552,7 @@ Should we delete the sub matrices when destructor is called?
 
 
 
-Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00279}{279}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
-
-
-
-Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00415}{add\+\_\+matrix()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00316}{$\sim$\+Sum\+Of\+Matrices()}}.
+Definition at line 279 of file sum\+\_\+of\+\_\+matrices.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SumOfMatrices_af1a5407d43ff8bbf0715d28f6d9e1642}\label{classoomph_1_1SumOfMatrices_af1a5407d43ff8bbf0715d28f6d9e1642}} 
 \index{oomph::SumOfMatrices@{oomph::SumOfMatrices}!Should\_delete\_main\_matrix@{Should\_delete\_main\_matrix}}
@@ -610,11 +566,7 @@ Should we delete the main matrix when destructor is called? Default is no.
 
 
 
-Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00283}{283}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
-
-
-
-Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00344}{set\+\_\+delete\+\_\+main\+\_\+matrix()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00316}{$\sim$\+Sum\+Of\+Matrices()}}.
+Definition at line 283 of file sum\+\_\+of\+\_\+matrices.\+h.
 
 
 

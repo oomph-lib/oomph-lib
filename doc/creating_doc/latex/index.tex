@@ -60,7 +60,7 @@ The \char`\"{}source\char`\"{} of the documentation is contained in the {\ttfami
 
 \end{DoxyCode}
  The main body of the text just follows as in a {\ttfamily La\+TeX} document, with line spacings indicating paragraph breaks.\hypertarget{index_html}{}\doxysubsection{HTML}\label{index_html}
-Any standard html tags can be used (for example, {\ttfamily \texorpdfstring{$<$}{<}hr\texorpdfstring{$>$}{>}} inserts a horizontal line). Hyperlinks are inserted in the following way\+: 
+Any standard html tags can be used (for example, {\ttfamily $<$hr$>$} inserts a horizontal line). Hyperlinks are inserted in the following way\+: 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{This is illustrated in an <A HREF=\textcolor{stringliteral}{"{}../figures/my\_movie.avi"{}}>animation</A>.}
 
@@ -165,8 +165,8 @@ To include blocks of code such as the one immediately above this line of text, u
 
 To include sections of the demo code which you are documenting, e.\+g. the main function of {\ttfamily spin\+\_\+up}.{\ttfamily cc}, use the following syntax\+: 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\(\backslash\)dontinclude spin\_up.cc}
-\DoxyCodeLine{\(\backslash\)skipline start\_of\_main}
+\DoxyCodeLine{\(\backslash\)dontinclude spin\_up.cc
+\(\backslash\)skipline start\_of\_main}
 \DoxyCodeLine{\(\backslash\)until end of main}
 
 \end{DoxyCode}

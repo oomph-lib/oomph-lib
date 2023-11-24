@@ -27,7 +27,7 @@ Following our usual practice, we use a namespace, {\ttfamily \mbox{\hyperlink{na
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=============start\_of\_namespace=====================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for exact solution for Poisson equation with sharp step }}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceTanhSolnForPoisson}{TanhSolnForPoisson}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -115,10 +115,10 @@ Otherwise the driver code is very similar to that used in the \href{../../../poi
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=========start\_of\_main=============================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Driver for 3D Poisson problem in eighth of a sphere. Solution }\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// has a sharp step. If there are}}
-\DoxyCodeLine{\textcolor{comment}{/// any command line arguments, we regard this as a validation run}}
-\DoxyCodeLine{\textcolor{comment}{/// and perform only a single adaptation.}}
+\DoxyCodeLine{\textcolor{comment}{/// Driver for 3D Poisson problem in eighth of a sphere. Solution }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// has a sharp step. If there are}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// any command line arguments, we regard this as a validation run}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// and perform only a single adaptation.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//===================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{eighth__sphere__poisson_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[]) }
 \DoxyCodeLine{\{ }
@@ -207,7 +207,7 @@ The problem class has the usual structure -- the only difference to the correspo
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_class\_definition====================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Poisson problem in refineable eighth of a sphere mesh.}}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classEighthSpherePoissonProblem}{EighthSpherePoissonProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -223,7 +223,7 @@ The problem class has the usual structure -- the only difference to the correspo
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Overload generic access function by one that returns}}
 \DoxyCodeLine{\textcolor{comment}{ /// a pointer to the specific  mesh}}
-\DoxyCodeLine{\textcolor{comment}{} RefineableEighthSphereMesh<ELEMENT>* \mbox{\hyperlink{classEighthSpherePoissonProblem_a6264a1973b4779b4ffc8fcc1b584b775}{mesh\_pt}}() }
+\DoxyCodeLine{\textcolor{comment}{} RefineableEighthSphereMesh<ELEMENT>* \mbox{\hyperlink{classEighthSpherePoissonProblem_aa33edbb75ba8fe8d4daac3c940a7ff6a}{mesh\_pt}}() }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{keywordflow}{return} \textcolor{keyword}{dynamic\_cast<}RefineableEighthSphereMesh<ELEMENT>*\textcolor{keyword}{>}(Problem::mesh\_pt());}
 \DoxyCodeLine{  \}}
@@ -236,14 +236,14 @@ The problem class has the usual structure -- the only difference to the correspo
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classEighthSpherePoissonProblem_af82dd7abdf631950a68c997af314be5d}{actions\_before\_newton\_solve}}()}
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{comment}{//Loop over the boundaries}}
-\DoxyCodeLine{  \textcolor{keywordtype}{unsigned} num\_bound = \mbox{\hyperlink{classEighthSpherePoissonProblem_a6264a1973b4779b4ffc8fcc1b584b775}{mesh\_pt}}()-\/>nboundary();}
+\DoxyCodeLine{  \textcolor{keywordtype}{unsigned} num\_bound = \mbox{\hyperlink{classEighthSpherePoissonProblem_aa33edbb75ba8fe8d4daac3c940a7ff6a}{mesh\_pt}}()-\/>nboundary();}
 \DoxyCodeLine{  \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} ibound=0;ibound<num\_bound;ibound++)}
 \DoxyCodeLine{   \{}
 \DoxyCodeLine{    \textcolor{comment}{// Loop over the nodes on boundary}}
-\DoxyCodeLine{    \textcolor{keywordtype}{unsigned} num\_nod=\mbox{\hyperlink{classEighthSpherePoissonProblem_a6264a1973b4779b4ffc8fcc1b584b775}{mesh\_pt}}()-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{    \textcolor{keywordtype}{unsigned} num\_nod=\mbox{\hyperlink{classEighthSpherePoissonProblem_aa33edbb75ba8fe8d4daac3c940a7ff6a}{mesh\_pt}}()-\/>nboundary\_node(ibound);}
 \DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} inod=0;inod<num\_nod;inod++)}
 \DoxyCodeLine{    \{}
-\DoxyCodeLine{     Node* nod\_pt=\mbox{\hyperlink{classEighthSpherePoissonProblem_a6264a1973b4779b4ffc8fcc1b584b775}{mesh\_pt}}()-\/>boundary\_node\_pt(ibound,inod);}
+\DoxyCodeLine{     Node* nod\_pt=\mbox{\hyperlink{classEighthSpherePoissonProblem_aa33edbb75ba8fe8d4daac3c940a7ff6a}{mesh\_pt}}()-\/>boundary\_node\_pt(ibound,inod);}
 \DoxyCodeLine{     \textcolor{keywordtype}{double} u;}
 \DoxyCodeLine{     Vector<double> x(3);}
 \DoxyCodeLine{     x[0]=nod\_pt-\/>x(0);}
@@ -277,7 +277,7 @@ In the {\ttfamily Problem} constructor, we set the \char`\"{}steepness parameter
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//====================start\_of\_constructor================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for Poisson problem on eighth of a sphere mesh}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classEighthSpherePoissonProblem_ae51db2c3e80f0d5628e4d81eb1c11db4}{EighthSpherePoissonProblem<ELEMENT>::EighthSpherePoissonProblem}}(}
 \DoxyCodeLine{   PoissonEquations<3>::PoissonSourceFctPt source\_fct\_pt) : }
@@ -376,7 +376,7 @@ The function {\ttfamily doc\+\_\+solution(...)} writes the FE solution and the c
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//========================start\_of\_doc====================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classEighthSpherePoissonProblem_ac8e9911536d04bab829cfe92bb40e302}{EighthSpherePoissonProblem<ELEMENT>::doc\_solution}}(DocInfo\& doc\_info)}
 \DoxyCodeLine{\{}

@@ -47,7 +47,7 @@ As usual we use a namespace to define the (single) global parameter, the Reynold
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_global\_parameters=======================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Global parameters}}
-\DoxyCodeLine{\textcolor{comment}{//===================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//===================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -65,8 +65,8 @@ We specify the leaflet geometry and its time-\/dependent motion by representing 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_leaflet\_class===========================================}}
-\DoxyCodeLine{\textcolor{comment}{/// GeomObject representing a vertical leaflet that performs}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// bending and stretching oscillations. }}
+\DoxyCodeLine{\textcolor{comment}{/// GeomObject representing a vertical leaflet that performs}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// bending and stretching oscillations. }}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classLeaflet}{Leaflet}} : \textcolor{keyword}{public} GeomObject}
 \DoxyCodeLine{\{}
@@ -78,9 +78,9 @@ We specify the leaflet geometry and its time-\/dependent motion by representing 
 \DoxyCodeLine{\textcolor{comment}{ /// the x-\/coordinate of the origin and the period of the oscillation.}}
 \DoxyCodeLine{\textcolor{comment}{ /// Passes the number of Lagrangian and Eulerian coordinates to the}}
 \DoxyCodeLine{\textcolor{comment}{ /// constructor of the GeomObject base class.}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classLeaflet_acb53ccf4578a9981216cf0afd4b38453}{Leaflet}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{classLeaflet_a7a28827b7081107ac9e33087598ca868}{length}}, \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{classLeaflet_a48b7c945eca16ff01995cc70cbf54210}{d\_x}},\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{classLeaflet_a8ff8044a3da540c7c9d7a89790b6ee58}{d\_y}},}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classLeaflet_acb53ccf4578a9981216cf0afd4b38453}{Leaflet}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{classLeaflet_a7a28827b7081107ac9e33087598ca868}{length}}, \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{classLeaflet_a48e4d16790ffd9de527093eac8ff566c}{d\_x}},\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{classLeaflet_a8ff8044a3da540c7c9d7a89790b6ee58}{d\_y}},}
 \DoxyCodeLine{         \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{classLeaflet_af4a819a3ba64960f4b796dc5a0d3eb5b}{x\_0}}, \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& period, Time* time\_pt)}
-\DoxyCodeLine{  : GeomObject(1,2), \mbox{\hyperlink{classLeaflet_a64c27b796ceece358d09d137f15bbf20}{Length}}(\mbox{\hyperlink{classLeaflet_a7a28827b7081107ac9e33087598ca868}{length}}), \mbox{\hyperlink{classLeaflet_a473b6f4ef98bfba9e2c6974027ba4f4b}{D\_x}}(\mbox{\hyperlink{classLeaflet_a48b7c945eca16ff01995cc70cbf54210}{d\_x}}), \mbox{\hyperlink{classLeaflet_af9c75c7aeecae4b14f7ba0fb245eb8ee}{D\_y}}(\mbox{\hyperlink{classLeaflet_a8ff8044a3da540c7c9d7a89790b6ee58}{d\_y}}), \mbox{\hyperlink{classLeaflet_a29a25366a0cf97ad0dd36172fdfa3d0c}{X\_0}}(\mbox{\hyperlink{classLeaflet_af4a819a3ba64960f4b796dc5a0d3eb5b}{x\_0}}),}
+\DoxyCodeLine{  : GeomObject(1,2), \mbox{\hyperlink{classLeaflet_a64c27b796ceece358d09d137f15bbf20}{Length}}(\mbox{\hyperlink{classLeaflet_a7a28827b7081107ac9e33087598ca868}{length}}), \mbox{\hyperlink{classLeaflet_a473b6f4ef98bfba9e2c6974027ba4f4b}{D\_x}}(\mbox{\hyperlink{classLeaflet_a48e4d16790ffd9de527093eac8ff566c}{d\_x}}), \mbox{\hyperlink{classLeaflet_af9c75c7aeecae4b14f7ba0fb245eb8ee}{D\_y}}(\mbox{\hyperlink{classLeaflet_a8ff8044a3da540c7c9d7a89790b6ee58}{d\_y}}), \mbox{\hyperlink{classLeaflet_a29a25366a0cf97ad0dd36172fdfa3d0c}{X\_0}}(\mbox{\hyperlink{classLeaflet_af4a819a3ba64960f4b796dc5a0d3eb5b}{x\_0}}),}
 \DoxyCodeLine{   \mbox{\hyperlink{classLeaflet_a0d78b5fb3ec71009d4a9bcc79f8a85a9}{T}}(period),\mbox{\hyperlink{classLeaflet_ac10f13ad45456dc714ab57042861de53}{Time\_pt}}(time\_pt) \{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -113,7 +113,7 @@ We specify the leaflet geometry and its time-\/dependent motion by representing 
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{classLeaflet_a7a28827b7081107ac9e33087598ca868}{length}}() \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classLeaflet_a64c27b796ceece358d09d137f15bbf20}{Length}}; \}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Amplitude of horizontal tip displacement}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{classLeaflet_a48b7c945eca16ff01995cc70cbf54210}{d\_x}}() \{\textcolor{keywordflow}{return} \mbox{\hyperlink{classLeaflet_a473b6f4ef98bfba9e2c6974027ba4f4b}{D\_x}};\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{classLeaflet_a48e4d16790ffd9de527093eac8ff566c}{d\_x}}() \{\textcolor{keywordflow}{return} \mbox{\hyperlink{classLeaflet_a473b6f4ef98bfba9e2c6974027ba4f4b}{D\_x}};\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Amplitude of vertical tip displacement}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{classLeaflet_a8ff8044a3da540c7c9d7a89790b6ee58}{d\_y}}() \{\textcolor{keywordflow}{return} \mbox{\hyperlink{classLeaflet_af9c75c7aeecae4b14f7ba0fb245eb8ee}{D\_y}};\}}
@@ -154,8 +154,8 @@ We store the command line arguments, create a {\ttfamily Doc\+Info} object, and 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//======start\_of\_main==================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Driver code -\/-\/ pass a command line argument if you want to run}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// the code in validation mode where it only performs a few steps}}
+\DoxyCodeLine{\textcolor{comment}{/// Driver code -\/-\/ pass a command line argument if you want to run}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// the code in validation mode where it only performs a few steps}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{channel__with__leaflet_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
@@ -302,7 +302,7 @@ The problem class has the usual member functions to perform actions after the me
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_problem\_class===========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Problem class}}
-\DoxyCodeLine{\textcolor{comment}{//===================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//===================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classChannelWithLeafletProblem}{ChannelWithLeafletProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -330,7 +330,7 @@ The problem class has the usual member functions to perform actions after the me
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classChannelWithLeafletProblem_a5dec8333d345e4bcaac7fcd5b463eafc}{\string~ChannelWithLeafletProblem}}()\{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Overloaded access function to specific mesh}}
-\DoxyCodeLine{\textcolor{comment}{} RefineableAlgebraicChannelWithLeafletMesh<ELEMENT>* \mbox{\hyperlink{classChannelWithLeafletProblem_acfb056c1240242094b953a80bbc36c4e}{mesh\_pt}}() }
+\DoxyCodeLine{\textcolor{comment}{} RefineableAlgebraicChannelWithLeafletMesh<ELEMENT>* \mbox{\hyperlink{classChannelWithLeafletProblem_a023dc7718a98f820e4bc4541150a0c08}{mesh\_pt}}() }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Upcast from pointer to the Mesh base class to the specific }}
 \DoxyCodeLine{   \textcolor{comment}{// element type that we're using here.}}
@@ -492,8 +492,8 @@ Before each timestep we update the nodal positions in the mesh and re-\/apply th
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====start\_of\_actions\_before\_implicit\_timestep=========================}}
-\DoxyCodeLine{\textcolor{comment}{/// Actions before implicit timestep: Update domain shape and}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// the velocity boundary conditions}}
+\DoxyCodeLine{\textcolor{comment}{/// Actions before implicit timestep: Update domain shape and}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// the velocity boundary conditions}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT> }
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classChannelWithLeafletProblem_acef6ec771775162f77295a8f92d695ac}{ChannelWithLeafletProblem<ELEMENT>::actions\_before\_implicit\_timestep}}()}
@@ -555,7 +555,7 @@ The function {\ttfamily doc\+\_\+solution(...)} documents the results.
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_doc\_solution=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classChannelWithLeafletProblem_adb8e1420844f7b40d71beae81111c4d0}{ChannelWithLeafletProblem<ELEMENT>::doc\_solution}}(DocInfo\& doc\_info)}
 \DoxyCodeLine{\{ }

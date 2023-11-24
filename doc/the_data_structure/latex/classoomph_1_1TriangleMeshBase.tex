@@ -34,7 +34,7 @@ void \mbox{\hyperlink{classoomph_1_1TriangleMeshBase_ad3f02167046a1f96481b87dc48
 \begin{DoxyCompactList}\small\item\em write access for Use\+\_\+triangulateio\+\_\+restart. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TriangleMeshBase_a8f34ac9d3a8b7ee39a1134eadc47ff23}{disable\+\_\+triangulateio\+\_\+restart}} ()
 \begin{DoxyCompactList}\small\item\em write access for Use\+\_\+triangulateio\+\_\+restart. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structoomph_1_1TriangulateIO}{Triangulate\+IO}} \& \mbox{\hyperlink{classoomph_1_1TriangleMeshBase_aca322b4782c4c9171149266460b17fbe}{triangulateio\+\_\+representation}} ()
+\mbox{\hyperlink{structoomph_1_1TriangulateIO}{Triangulate\+IO}} \& \mbox{\hyperlink{classoomph_1_1TriangleMeshBase_a1cd134700f02b81239a7de630a496dcf}{triangulateio\+\_\+representation}} ()
 \begin{DoxyCompactList}\small\item\em Access to the triangulateio representation of the mesh. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TriangleMeshBase_ac6bf9ce6546b2e853c3c84cd44837c31}{write\+\_\+triangulateio}} (\mbox{\hyperlink{structoomph_1_1TriangulateIO}{Triangulate\+IO}} \&triangulate\+\_\+io, std\+::string \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
 \begin{DoxyCompactList}\small\item\em Helper function. Write a \mbox{\hyperlink{structoomph_1_1TriangulateIO}{Triangulate\+IO}} object file with all the triangulateio fields. String s is add to assign a different value for the input and/or output structure. \end{DoxyCompactList}\item 
@@ -58,7 +58,7 @@ virtual void \mbox{\hyperlink{classoomph_1_1TriangleMeshBase_a2e7f54673e522b9be0
 \begin{DoxyCompactList}\small\item\em Virtual function that is used for specific remeshing from the triangulateio. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1TriangleMeshBase_ad6e2c45db7c67e5a6fd063f0ea9bbfe7}{load\+\_\+balance}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&target\+\_\+domain\+\_\+for\+\_\+local\+\_\+non\+\_\+halo\+\_\+element)
 \begin{DoxyCompactList}\small\item\em Virtual function to perform the load balance rutines. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1TriangleMeshBase_adbb7621302c427dfc55dbc1ee2b7e77b}{reset\+\_\+boundary\+\_\+element\+\_\+info}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&ntmp\+\_\+boundary\+\_\+elements, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ $>$ \&ntmp\+\_\+boundary\+\_\+elements\+\_\+in\+\_\+region, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&deleted\+\_\+elements)
+virtual void \mbox{\hyperlink{classoomph_1_1TriangleMeshBase_ace8d65fe72a943aa50330566d4e6c633}{reset\+\_\+boundary\+\_\+element\+\_\+info}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&ntmp\+\_\+boundary\+\_\+elements, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$$>$ \&ntmp\+\_\+boundary\+\_\+elements\+\_\+in\+\_\+region, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&deleted\+\_\+elements)
 \begin{DoxyCompactList}\small\item\em Virtual function to perform the reset boundary elements info rutines. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -73,7 +73,7 @@ bool \mbox{\hyperlink{classoomph_1_1TriangleMeshBase_a503839a1350bee25717570fbf5
 \doxysubsection{Detailed Description}
 Base class for triangle meshes (meshes made of 2D triangle elements). Note\+: we choose to template \mbox{\hyperlink{classoomph_1_1TriangleMeshBase}{Triangle\+Mesh\+Base}} here because certain functions in \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase}{Unstructured\+Two\+DMesh\+Geometry\+Base}} need template parameters and it\textquotesingle{}s much cleaner simply to template the entire class. 
 
-Definition at line \mbox{\hyperlink{triangle__mesh_8h_source_l00050}{50}} of file \mbox{\hyperlink{triangle__mesh_8h_source}{triangle\+\_\+mesh.\+h}}.
+Definition at line 50 of file triangle\+\_\+mesh.\+h.
 
 
 
@@ -90,11 +90,11 @@ Constructor.
 
 
 
-Definition at line \mbox{\hyperlink{triangle__mesh_8h_source_l00055}{55}} of file \mbox{\hyperlink{triangle__mesh_8h_source}{triangle\+\_\+mesh.\+h}}.
+Definition at line 55 of file triangle\+\_\+mesh.\+h.
 
 
 
-References \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8cc_source_l00091}{oomph\+::\+Triangle\+Helper\+::initialise\+\_\+triangulateio()}}, \mbox{\hyperlink{triangle__mesh_8h_source_l00261}{Triangulateio}}, and \mbox{\hyperlink{triangle__mesh_8h_source_l00265}{Use\+\_\+triangulateio\+\_\+restart}}.
+References oomph\+::\+Triangle\+Helper\+::initialise\+\_\+triangulateio(), Triangulateio, and Use\+\_\+triangulateio\+\_\+restart.
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMeshBase_a657a217156067b509238c9bf635b7e99}\label{classoomph_1_1TriangleMeshBase_a657a217156067b509238c9bf635b7e99}} 
 \index{oomph::TriangleMeshBase@{oomph::TriangleMeshBase}!TriangleMeshBase@{TriangleMeshBase}}
@@ -118,11 +118,11 @@ Broken assignment operator.
 
 Destructor (empty) 
 
-Definition at line \mbox{\hyperlink{triangle__mesh_8h_source_l00078}{78}} of file \mbox{\hyperlink{triangle__mesh_8h_source}{triangle\+\_\+mesh.\+h}}.
+Definition at line 78 of file triangle\+\_\+mesh.\+h.
 
 
 
-References \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8cc_source_l00044}{oomph\+::\+Triangle\+Helper\+::clear\+\_\+triangulateio()}}, and \mbox{\hyperlink{triangle__mesh_8h_source_l00261}{Triangulateio}}.
+References oomph\+::\+Triangle\+Helper\+::clear\+\_\+triangulateio(), and Triangulateio.
 
 
 
@@ -139,11 +139,11 @@ Helper function. Clean up the memory associated with the \mbox{\hyperlink{struct
 
 
 
-Definition at line \mbox{\hyperlink{triangle__mesh_8h_source_l00131}{131}} of file \mbox{\hyperlink{triangle__mesh_8h_source}{triangle\+\_\+mesh.\+h}}.
+Definition at line 131 of file triangle\+\_\+mesh.\+h.
 
 
 
-References \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8cc_source_l00044}{oomph\+::\+Triangle\+Helper\+::clear\+\_\+triangulateio()}}, and \mbox{\hyperlink{triangle__mesh_8h_source_l00261}{Triangulateio}}.
+References oomph\+::\+Triangle\+Helper\+::clear\+\_\+triangulateio(), and Triangulateio.
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMeshBase_a8f34ac9d3a8b7ee39a1134eadc47ff23}\label{classoomph_1_1TriangleMeshBase_a8f34ac9d3a8b7ee39a1134eadc47ff23}} 
 \index{oomph::TriangleMeshBase@{oomph::TriangleMeshBase}!disable\_triangulateio\_restart@{disable\_triangulateio\_restart}}
@@ -157,11 +157,11 @@ write access for Use\+\_\+triangulateio\+\_\+restart.
 
 
 
-Definition at line \mbox{\hyperlink{triangle__mesh_8h_source_l00112}{112}} of file \mbox{\hyperlink{triangle__mesh_8h_source}{triangle\+\_\+mesh.\+h}}.
+Definition at line 112 of file triangle\+\_\+mesh.\+h.
 
 
 
-References \mbox{\hyperlink{triangle__mesh_8h_source_l00265}{Use\+\_\+triangulateio\+\_\+restart}}.
+References Use\+\_\+triangulateio\+\_\+restart.
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMeshBase_ad8e275d5f2528d9958964438086be8f4}\label{classoomph_1_1TriangleMeshBase_ad8e275d5f2528d9958964438086be8f4}} 
 \index{oomph::TriangleMeshBase@{oomph::TriangleMeshBase}!dump\_distributed\_info\_for\_restart@{dump\_distributed\_info\_for\_restart}}
@@ -179,11 +179,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TriangleMesh_ab4472dde562e25eaa5
 
 
 
-Definition at line \mbox{\hyperlink{triangle__mesh_8h_source_l00143}{143}} of file \mbox{\hyperlink{triangle__mesh_8h_source}{triangle\+\_\+mesh.\+h}}.
+Definition at line 143 of file triangle\+\_\+mesh.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{problem_8cc_source_l12029}{oomph\+::\+Problem\+::dump()}}.
+Referenced by oomph\+::\+Problem\+::dump().
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMeshBase_a4254c01acfaf43213d96491902334148}\label{classoomph_1_1TriangleMeshBase_a4254c01acfaf43213d96491902334148}} 
 \index{oomph::TriangleMeshBase@{oomph::TriangleMeshBase}!dump\_info\_to\_reset\_halo\_haloed\_scheme@{dump\_info\_to\_reset\_halo\_haloed\_scheme}}
@@ -197,7 +197,7 @@ Virtual function that is used to dump info. related with distributed triangle me
 
 
 
-Definition at line \mbox{\hyperlink{triangle__mesh_8h_source_l00156}{156}} of file \mbox{\hyperlink{triangle__mesh_8h_source}{triangle\+\_\+mesh.\+h}}.
+Definition at line 156 of file triangle\+\_\+mesh.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMeshBase_a3b27444232702a4bbbeb95aa9c963c07}\label{classoomph_1_1TriangleMeshBase_a3b27444232702a4bbbeb95aa9c963c07}} 
 \index{oomph::TriangleMeshBase@{oomph::TriangleMeshBase}!dump\_triangulateio@{dump\_triangulateio}}
@@ -211,15 +211,15 @@ Dump the triangulateio structure to a dump file and record boundary coordinates 
 
 
 
-Definition at line \mbox{\hyperlink{triangle__mesh_8cc_source_l00040}{40}} of file \mbox{\hyperlink{triangle__mesh_8cc_source}{triangle\+\_\+mesh.\+cc}}.
+Definition at line 40 of file triangle\+\_\+mesh.\+cc.
 
 
 
-References \mbox{\hyperlink{mesh_8h_source_l00190}{oomph\+::\+Mesh\+::\+Boundary\+\_\+coordinate\+\_\+exists}}, \mbox{\hyperlink{mesh_8h_source_l00493}{oomph\+::\+Mesh\+::boundary\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8cc_source_l00709}{oomph\+::\+Triangle\+Helper\+::dump\+\_\+triangulateio()}}, \mbox{\hyperlink{nodes_8cc_source_l02379}{oomph\+::\+Node\+::get\+\_\+coordinates\+\_\+on\+\_\+boundary()}}, \mbox{\hyperlink{mesh_8h_source_l01588}{oomph\+::\+Mesh\+::is\+\_\+mesh\+\_\+distributed()}}, \mbox{\hyperlink{mesh_8h_source_l00827}{oomph\+::\+Mesh\+::nboundary()}}, \mbox{\hyperlink{mesh_8h_source_l00833}{oomph\+::\+Mesh\+::nboundary\+\_\+node()}}, and \mbox{\hyperlink{triangle__mesh_8h_source_l00261}{Triangulateio}}.
+References oomph\+::\+Mesh\+::\+Boundary\+\_\+coordinate\+\_\+exists, oomph\+::\+Mesh\+::boundary\+\_\+node\+\_\+pt(), oomph\+::\+Triangle\+Helper\+::dump\+\_\+triangulateio(), oomph\+::\+Node\+::get\+\_\+coordinates\+\_\+on\+\_\+boundary(), oomph\+::\+Mesh\+::is\+\_\+mesh\+\_\+distributed(), oomph\+::\+Mesh\+::nboundary(), oomph\+::\+Mesh\+::nboundary\+\_\+node(), and Triangulateio.
 
 
 
-Referenced by \mbox{\hyperlink{problem_8cc_source_l12029}{oomph\+::\+Problem\+::dump()}}.
+Referenced by oomph\+::\+Problem\+::dump().
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMeshBase_ad3f02167046a1f96481b87dc48b09032}\label{classoomph_1_1TriangleMeshBase_ad3f02167046a1f96481b87dc48b09032}} 
 \index{oomph::TriangleMeshBase@{oomph::TriangleMeshBase}!enable\_triangulateio\_restart@{enable\_triangulateio\_restart}}
@@ -233,11 +233,11 @@ write access for Use\+\_\+triangulateio\+\_\+restart.
 
 
 
-Definition at line \mbox{\hyperlink{triangle__mesh_8h_source_l00106}{106}} of file \mbox{\hyperlink{triangle__mesh_8h_source}{triangle\+\_\+mesh.\+h}}.
+Definition at line 106 of file triangle\+\_\+mesh.\+h.
 
 
 
-References \mbox{\hyperlink{triangle__mesh_8h_source_l00265}{Use\+\_\+triangulateio\+\_\+restart}}.
+References Use\+\_\+triangulateio\+\_\+restart.
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMeshBase_ad6e2c45db7c67e5a6fd063f0ea9bbfe7}\label{classoomph_1_1TriangleMeshBase_ad6e2c45db7c67e5a6fd063f0ea9bbfe7}} 
 \index{oomph::TriangleMeshBase@{oomph::TriangleMeshBase}!load\_balance@{load\_balance}}
@@ -251,11 +251,11 @@ Virtual function to perform the load balance rutines.
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_aaffa40b7d036f8ed8639bf9396f1088a}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$}}, and \mbox{\hyperlink{classoomph_1_1TriangleMesh_a712bfd68d4b55e9c475347c0146fc8ac}{oomph\+::\+Triangle\+Mesh$<$ ELEMENT $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1TriangleMesh_a712bfd68d4b55e9c475347c0146fc8ac}{oomph\+::\+Triangle\+Mesh$<$ ELEMENT $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_aaffa40b7d036f8ed8639bf9396f1088a}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{triangle__mesh_8h_source_l00230}{230}} of file \mbox{\hyperlink{triangle__mesh_8h_source}{triangle\+\_\+mesh.\+h}}.
+Definition at line 230 of file triangle\+\_\+mesh.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMeshBase_a56273b6d7b690d37f07632c7028adcf8}\label{classoomph_1_1TriangleMeshBase_a56273b6d7b690d37f07632c7028adcf8}} 
 \index{oomph::TriangleMeshBase@{oomph::TriangleMeshBase}!read\_distributed\_info\_for\_restart@{read\_distributed\_info\_for\_restart}}
@@ -273,11 +273,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TriangleMesh_ac023e6d962d37d1cc3
 
 
 
-Definition at line \mbox{\hyperlink{triangle__mesh_8h_source_l00169}{169}} of file \mbox{\hyperlink{triangle__mesh_8h_source}{triangle\+\_\+mesh.\+h}}.
+Definition at line 169 of file triangle\+\_\+mesh.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{problem_8cc_source_l12251}{oomph\+::\+Problem\+::read()}}.
+Referenced by oomph\+::\+Problem\+::read().
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMeshBase_ae37b5239c84808e3e66aa0eac4396a2c}\label{classoomph_1_1TriangleMeshBase_ae37b5239c84808e3e66aa0eac4396a2c}} 
 \index{oomph::TriangleMeshBase@{oomph::TriangleMeshBase}!reestablish\_distribution\_info\_for\_restart@{reestablish\_distribution\_info\_for\_restart}}
@@ -291,15 +291,15 @@ Virtual function used to re-\/establish any additional info. related with the di
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1TriangleMesh_aa4b1cfd4537c1e511fe1f2fb14b1e8a6}{oomph\+::\+Triangle\+Mesh$<$ ELEMENT $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a3ecdb3b15c3fefbc96f407c4fdf5b155}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a3ecdb3b15c3fefbc96f407c4fdf5b155}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$}}, and \mbox{\hyperlink{classoomph_1_1TriangleMesh_aa4b1cfd4537c1e511fe1f2fb14b1e8a6}{oomph\+::\+Triangle\+Mesh$<$ ELEMENT $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{triangle__mesh_8h_source_l00182}{182}} of file \mbox{\hyperlink{triangle__mesh_8h_source}{triangle\+\_\+mesh.\+h}}.
+Definition at line 182 of file triangle\+\_\+mesh.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{problem_8cc_source_l12251}{oomph\+::\+Problem\+::read()}}.
+Referenced by oomph\+::\+Problem\+::read().
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMeshBase_a2e7f54673e522b9be0543f0256afd04b}\label{classoomph_1_1TriangleMeshBase_a2e7f54673e522b9be0543f0256afd04b}} 
 \index{oomph::TriangleMeshBase@{oomph::TriangleMeshBase}!remesh\_from\_internal\_triangulateio@{remesh\_from\_internal\_triangulateio}}
@@ -317,11 +317,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TriangleMesh_a9bc95b0f26f8cd3529
 
 
 
-Definition at line \mbox{\hyperlink{triangle__mesh_8h_source_l00218}{218}} of file \mbox{\hyperlink{triangle__mesh_8h_source}{triangle\+\_\+mesh.\+h}}.
+Definition at line 218 of file triangle\+\_\+mesh.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{triangle__mesh_8cc_source_l00087}{remesh\+\_\+from\+\_\+triangulateio()}}.
+Referenced by remesh\+\_\+from\+\_\+triangulateio().
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMeshBase_a8e8d7354b213cba989b661f0b748d8b5}\label{classoomph_1_1TriangleMeshBase_a8e8d7354b213cba989b661f0b748d8b5}} 
 \index{oomph::TriangleMeshBase@{oomph::TriangleMeshBase}!remesh\_from\_triangulateio@{remesh\_from\_triangulateio}}
@@ -335,21 +335,21 @@ Regenerate the mesh from a dumped triangulateio file and dumped boundary coordin
 
 
 
-Definition at line \mbox{\hyperlink{triangle__mesh_8cc_source_l00087}{87}} of file \mbox{\hyperlink{triangle__mesh_8cc_source}{triangle\+\_\+mesh.\+cc}}.
+Definition at line 87 of file triangle\+\_\+mesh.\+cc.
 
 
 
-References \mbox{\hyperlink{mesh_8h_source_l00190}{oomph\+::\+Mesh\+::\+Boundary\+\_\+coordinate\+\_\+exists}}, \mbox{\hyperlink{mesh_8h_source_l00493}{oomph\+::\+Mesh\+::boundary\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8cc_source_l00044}{oomph\+::\+Triangle\+Helper\+::clear\+\_\+triangulateio()}}, \mbox{\hyperlink{mesh_8h_source_l01588}{oomph\+::\+Mesh\+::is\+\_\+mesh\+\_\+distributed()}}, \mbox{\hyperlink{mesh_8h_source_l00827}{oomph\+::\+Mesh\+::nboundary()}}, \mbox{\hyperlink{mesh_8h_source_l00833}{oomph\+::\+Mesh\+::nboundary\+\_\+node()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8cc_source_l00853}{oomph\+::\+Triangle\+Helper\+::read\+\_\+triangulateio()}}, \mbox{\hyperlink{triangle__mesh_8h_source_l00218}{remesh\+\_\+from\+\_\+internal\+\_\+triangulateio()}}, \mbox{\hyperlink{nodes_8cc_source_l02394}{oomph\+::\+Node\+::set\+\_\+coordinates\+\_\+on\+\_\+boundary()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, and \mbox{\hyperlink{triangle__mesh_8h_source_l00261}{Triangulateio}}.
+References oomph\+::\+Mesh\+::\+Boundary\+\_\+coordinate\+\_\+exists, oomph\+::\+Mesh\+::boundary\+\_\+node\+\_\+pt(), oomph\+::\+Triangle\+Helper\+::clear\+\_\+triangulateio(), oomph\+::\+Mesh\+::is\+\_\+mesh\+\_\+distributed(), oomph\+::\+Mesh\+::nboundary(), oomph\+::\+Mesh\+::nboundary\+\_\+node(), oomph\+::oomph\+\_\+info, oomph\+::\+Triangle\+Helper\+::read\+\_\+triangulateio(), remesh\+\_\+from\+\_\+internal\+\_\+triangulateio(), oomph\+::\+Node\+::set\+\_\+coordinates\+\_\+on\+\_\+boundary(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), and Triangulateio.
 
 
 
-Referenced by \mbox{\hyperlink{problem_8cc_source_l12251}{oomph\+::\+Problem\+::read()}}.
+Referenced by oomph\+::\+Problem\+::read().
 
-\mbox{\Hypertarget{classoomph_1_1TriangleMeshBase_adbb7621302c427dfc55dbc1ee2b7e77b}\label{classoomph_1_1TriangleMeshBase_adbb7621302c427dfc55dbc1ee2b7e77b}} 
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshBase_ace8d65fe72a943aa50330566d4e6c633}\label{classoomph_1_1TriangleMeshBase_ace8d65fe72a943aa50330566d4e6c633}} 
 \index{oomph::TriangleMeshBase@{oomph::TriangleMeshBase}!reset\_boundary\_element\_info@{reset\_boundary\_element\_info}}
 \index{reset\_boundary\_element\_info@{reset\_boundary\_element\_info}!oomph::TriangleMeshBase@{oomph::TriangleMeshBase}}
 \doxysubsubsection{\texorpdfstring{reset\_boundary\_element\_info()}{reset\_boundary\_element\_info()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Triangle\+Mesh\+Base\+::reset\+\_\+boundary\+\_\+element\+\_\+info (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{ntmp\+\_\+boundary\+\_\+elements,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ $>$ \&}]{ntmp\+\_\+boundary\+\_\+elements\+\_\+in\+\_\+region,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&}]{deleted\+\_\+elements }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Triangle\+Mesh\+Base\+::reset\+\_\+boundary\+\_\+element\+\_\+info (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{ntmp\+\_\+boundary\+\_\+elements,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$$>$ \&}]{ntmp\+\_\+boundary\+\_\+elements\+\_\+in\+\_\+region,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \&}]{deleted\+\_\+elements }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -357,19 +357,19 @@ Virtual function to perform the reset boundary elements info rutines.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1Mesh_a37c3944a403f03316324a56a8878813f}{oomph\+::\+Mesh}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Mesh_ac481de51900d57248dd601b53816891f}{oomph\+::\+Mesh}}.
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1TriangleMesh_a47080ac440e82c099c390b37bf694cfe}{oomph\+::\+Triangle\+Mesh$<$ ELEMENT $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1TriangleMesh_a5213a8126947509f566071c648e4716c}{oomph\+::\+Triangle\+Mesh$<$ ELEMENT $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{triangle__mesh_8h_source_l00242}{242}} of file \mbox{\hyperlink{triangle__mesh_8h_source}{triangle\+\_\+mesh.\+h}}.
+Definition at line 242 of file triangle\+\_\+mesh.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{mesh_8cc_source_l04959}{oomph\+::\+Mesh\+::distribute()}}.
+Referenced by oomph\+::\+Mesh\+::distribute().
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMeshBase_aa78fe0d750c842df53e1fa2237205e51}\label{classoomph_1_1TriangleMeshBase_aa78fe0d750c842df53e1fa2237205e51}} 
 \index{oomph::TriangleMeshBase@{oomph::TriangleMeshBase}!setup\_boundary\_element\_info@{setup\_boundary\_element\_info}}
@@ -387,15 +387,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Mesh_a6cc8bcd6b41209f0e9295cc9
 
 
 
-Definition at line \mbox{\hyperlink{triangle__mesh_8h_source_l00088}{88}} of file \mbox{\hyperlink{triangle__mesh_8h_source}{triangle\+\_\+mesh.\+h}}.
-
-
-
-References \mbox{\hyperlink{triangle__mesh_8h_source_l00088}{setup\+\_\+boundary\+\_\+element\+\_\+info()}}.
-
-
-
-Referenced by \mbox{\hyperlink{triangle__mesh_8h_source_l00088}{setup\+\_\+boundary\+\_\+element\+\_\+info()}}.
+Definition at line 88 of file triangle\+\_\+mesh.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMeshBase_a187fd9dbc558b9d19a02d92ce876507c}\label{classoomph_1_1TriangleMeshBase_a187fd9dbc558b9d19a02d92ce876507c}} 
 \index{oomph::TriangleMeshBase@{oomph::TriangleMeshBase}!setup\_boundary\_element\_info@{setup\_boundary\_element\_info}}
@@ -413,17 +405,17 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Mesh_a413cbcbea4fb1111703da9ee
 
 
 
-Definition at line \mbox{\hyperlink{triangle__mesh_8cc_source_l00400}{400}} of file \mbox{\hyperlink{triangle__mesh_8cc_source}{triangle\+\_\+mesh.\+cc}}.
+Definition at line 400 of file triangle\+\_\+mesh.\+cc.
 
 
 
-References \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l05616}{oomph\+::\+Triangle\+Boundary\+Helper\+::\+BCInfo\+::\+Boundary}}, \mbox{\hyperlink{mesh_8h_source_l00091}{oomph\+::\+Mesh\+::\+Boundary\+\_\+element\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01212}{oomph\+::\+Leak\+Check\+Names\+::doc()}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l05613}{oomph\+::\+Triangle\+Boundary\+Helper\+::\+BCInfo\+::\+Face\+\_\+id}}, \mbox{\hyperlink{mesh_8h_source_l00095}{oomph\+::\+Mesh\+::\+Face\+\_\+index\+\_\+at\+\_\+boundary}}, \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l05619}{oomph\+::\+Triangle\+Boundary\+Helper\+::\+BCInfo\+::\+FE\+\_\+pt}}, \mbox{\hyperlink{mesh_8h_source_l00473}{oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l01365}{oomph\+::\+Node\+::get\+\_\+boundaries\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{mesh_8h_source_l00087}{oomph\+::\+Mesh\+::\+Lookup\+\_\+for\+\_\+elements\+\_\+next\+\_\+boundary\+\_\+is\+\_\+setup}}, \mbox{\hyperlink{mesh_8h_source_l00827}{oomph\+::\+Mesh\+::nboundary()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, and \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References oomph\+::\+Triangle\+Boundary\+Helper\+::\+BCInfo\+::\+Boundary, oomph\+::\+Mesh\+::\+Boundary\+\_\+element\+\_\+pt, oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Leak\+Check\+Names\+::doc(), e, oomph\+::\+Triangle\+Boundary\+Helper\+::\+BCInfo\+::\+Face\+\_\+id, oomph\+::\+Mesh\+::\+Face\+\_\+index\+\_\+at\+\_\+boundary, oomph\+::\+Triangle\+Boundary\+Helper\+::\+BCInfo\+::\+FE\+\_\+pt, oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), oomph\+::\+Node\+::get\+\_\+boundaries\+\_\+pt(), i, oomph\+::\+Mesh\+::\+Lookup\+\_\+for\+\_\+elements\+\_\+next\+\_\+boundary\+\_\+is\+\_\+setup, oomph\+::\+Mesh\+::nboundary(), oomph\+::\+Mesh\+::nelement(), and oomph\+::\+Finite\+Element\+::node\+\_\+pt().
 
-\mbox{\Hypertarget{classoomph_1_1TriangleMeshBase_aca322b4782c4c9171149266460b17fbe}\label{classoomph_1_1TriangleMeshBase_aca322b4782c4c9171149266460b17fbe}} 
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshBase_a1cd134700f02b81239a7de630a496dcf}\label{classoomph_1_1TriangleMeshBase_a1cd134700f02b81239a7de630a496dcf}} 
 \index{oomph::TriangleMeshBase@{oomph::TriangleMeshBase}!triangulateio\_representation@{triangulateio\_representation}}
 \index{triangulateio\_representation@{triangulateio\_representation}!oomph::TriangleMeshBase@{oomph::TriangleMeshBase}}
 \doxysubsubsection{\texorpdfstring{triangulateio\_representation()}{triangulateio\_representation()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structoomph_1_1TriangulateIO}{Triangulate\+IO}} \& oomph\+::\+Triangle\+Mesh\+Base\+::triangulateio\+\_\+representation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structoomph_1_1TriangulateIO}{Triangulate\+IO}}\& oomph\+::\+Triangle\+Mesh\+Base\+::triangulateio\+\_\+representation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -431,15 +423,15 @@ Access to the triangulateio representation of the mesh.
 
 
 
-Definition at line \mbox{\hyperlink{triangle__mesh_8h_source_l00118}{118}} of file \mbox{\hyperlink{triangle__mesh_8h_source}{triangle\+\_\+mesh.\+h}}.
+Definition at line 118 of file triangle\+\_\+mesh.\+h.
 
 
 
-References \mbox{\hyperlink{triangle__mesh_8h_source_l00261}{Triangulateio}}.
+References Triangulateio.
 
 
 
-Referenced by \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l29595}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::adapt()}}.
+Referenced by oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::adapt().
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMeshBase_ae822f78ce56d1ff9a3c06d7ec8bc2563}\label{classoomph_1_1TriangleMeshBase_ae822f78ce56d1ff9a3c06d7ec8bc2563}} 
 \index{oomph::TriangleMeshBase@{oomph::TriangleMeshBase}!update\_polyline\_representation\_from\_restart@{update\_polyline\_representation\_from\_restart}}
@@ -457,7 +449,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh_a26cdfda4
 
 
 
-Definition at line \mbox{\hyperlink{triangle__mesh_8h_source_l00199}{199}} of file \mbox{\hyperlink{triangle__mesh_8h_source}{triangle\+\_\+mesh.\+h}}.
+Definition at line 199 of file triangle\+\_\+mesh.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMeshBase_a69a2fe3d5e77ec39b9df4b3174b58c47}\label{classoomph_1_1TriangleMeshBase_a69a2fe3d5e77ec39b9df4b3174b58c47}} 
 \index{oomph::TriangleMeshBase@{oomph::TriangleMeshBase}!use\_triangulateio\_restart@{use\_triangulateio\_restart}}
@@ -471,15 +463,15 @@ const access for Use\+\_\+triangulateio\+\_\+restart.
 
 
 
-Definition at line \mbox{\hyperlink{triangle__mesh_8h_source_l00100}{100}} of file \mbox{\hyperlink{triangle__mesh_8h_source}{triangle\+\_\+mesh.\+h}}.
+Definition at line 100 of file triangle\+\_\+mesh.\+h.
 
 
 
-References \mbox{\hyperlink{triangle__mesh_8h_source_l00265}{Use\+\_\+triangulateio\+\_\+restart}}.
+References Use\+\_\+triangulateio\+\_\+restart.
 
 
 
-Referenced by \mbox{\hyperlink{problem_8cc_source_l12029}{oomph\+::\+Problem\+::dump()}}, and \mbox{\hyperlink{problem_8cc_source_l12251}{oomph\+::\+Problem\+::read()}}.
+Referenced by oomph\+::\+Problem\+::dump(), and oomph\+::\+Problem\+::read().
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMeshBase_ac6bf9ce6546b2e853c3c84cd44837c31}\label{classoomph_1_1TriangleMeshBase_ac6bf9ce6546b2e853c3c84cd44837c31}} 
 \index{oomph::TriangleMeshBase@{oomph::TriangleMeshBase}!write\_triangulateio@{write\_triangulateio}}
@@ -493,11 +485,11 @@ Helper function. Write a \mbox{\hyperlink{structoomph_1_1TriangulateIO}{Triangul
 
 Write a Triangulateio\+\_\+object file of the \mbox{\hyperlink{structoomph_1_1TriangulateIO}{Triangulate\+IO}} object String s is add to assign a different value for input and/or output structure. The function give the same result of the \char`\"{}report\char`\"{} function included in the tricall.\+c, esternal\+\_\+src. 
 
-Definition at line \mbox{\hyperlink{triangle__mesh_8cc_source_l00221}{221}} of file \mbox{\hyperlink{triangle__mesh_8cc_source}{triangle\+\_\+mesh.\+cc}}.
+Definition at line 221 of file triangle\+\_\+mesh.\+cc.
 
 
 
-References \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l00081}{oomph\+::\+Triangulate\+IO\+::holelist}}, \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l00074}{oomph\+::\+Triangulate\+IO\+::numberofcorners}}, \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l00082}{oomph\+::\+Triangulate\+IO\+::numberofholes}}, \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l00067}{oomph\+::\+Triangulate\+IO\+::numberofpointattributes}}, \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l00066}{oomph\+::\+Triangulate\+IO\+::numberofpoints}}, \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l00085}{oomph\+::\+Triangulate\+IO\+::numberofregions}}, \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l00079}{oomph\+::\+Triangulate\+IO\+::numberofsegments}}, \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l00075}{oomph\+::\+Triangulate\+IO\+::numberoftriangleattributes}}, \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l00073}{oomph\+::\+Triangulate\+IO\+::numberoftriangles}}, \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l00062}{oomph\+::\+Triangulate\+IO\+::pointattributelist}}, \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l00059}{oomph\+::\+Triangulate\+IO\+::pointlist}}, \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l00065}{oomph\+::\+Triangulate\+IO\+::pointmarkerlist}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l00077}{oomph\+::\+Triangulate\+IO\+::segmentlist}}, \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l00078}{oomph\+::\+Triangulate\+IO\+::segmentmarkerlist}}, \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l00071}{oomph\+::\+Triangulate\+IO\+::trianglearealist}}, and \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l00069}{oomph\+::\+Triangulate\+IO\+::trianglelist}}.
+References oomph\+::\+Triangulate\+IO\+::holelist, oomph\+::\+Triangulate\+IO\+::numberofcorners, oomph\+::\+Triangulate\+IO\+::numberofholes, oomph\+::\+Triangulate\+IO\+::numberofpointattributes, oomph\+::\+Triangulate\+IO\+::numberofpoints, oomph\+::\+Triangulate\+IO\+::numberofregions, oomph\+::\+Triangulate\+IO\+::numberofsegments, oomph\+::\+Triangulate\+IO\+::numberoftriangleattributes, oomph\+::\+Triangulate\+IO\+::numberoftriangles, oomph\+::\+Triangulate\+IO\+::pointattributelist, oomph\+::\+Triangulate\+IO\+::pointlist, oomph\+::\+Triangulate\+IO\+::pointmarkerlist, s, oomph\+::\+Triangulate\+IO\+::segmentlist, oomph\+::\+Triangulate\+IO\+::segmentmarkerlist, oomph\+::\+Triangulate\+IO\+::trianglearealist, and oomph\+::\+Triangulate\+IO\+::trianglelist.
 
 
 
@@ -514,11 +506,11 @@ References \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source
 
 
 
-Definition at line \mbox{\hyperlink{triangle__mesh_8h_source_l00261}{261}} of file \mbox{\hyperlink{triangle__mesh_8h_source}{triangle\+\_\+mesh.\+h}}.
+Definition at line 261 of file triangle\+\_\+mesh.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{triangle__mesh_8h_source_l00131}{clear\+\_\+triangulateio()}}, \mbox{\hyperlink{triangle__mesh_8cc_source_l00040}{dump\+\_\+triangulateio()}}, \mbox{\hyperlink{triangle__mesh_8template_8h_source_l01205}{oomph\+::\+Triangle\+Mesh$<$ ELEMENT $>$\+::generic\+\_\+constructor()}}, \mbox{\hyperlink{triangle__mesh_8template_8h_source_l01060}{oomph\+::\+Triangle\+Mesh$<$ ELEMENT $>$\+::remesh\+\_\+from\+\_\+internal\+\_\+triangulateio()}}, \mbox{\hyperlink{triangle__mesh_8cc_source_l00087}{remesh\+\_\+from\+\_\+triangulateio()}}, \mbox{\hyperlink{triangle__mesh_8template_8h_source_l00448}{oomph\+::\+Triangle\+Mesh$<$ ELEMENT $>$\+::\+Triangle\+Mesh()}}, \mbox{\hyperlink{triangle__mesh_8h_source_l00055}{Triangle\+Mesh\+Base()}}, \mbox{\hyperlink{triangle__mesh_8h_source_l00118}{triangulateio\+\_\+representation()}}, \mbox{\hyperlink{triangle__mesh_8template_8h_source_l00979}{oomph\+::\+Triangle\+Mesh$<$ ELEMENT $>$\+::update\+\_\+triangulateio()}}, \mbox{\hyperlink{triangle__mesh_8template_8h_source_l00854}{oomph\+::\+Triangle\+Mesh$<$ ELEMENT $>$\+::$\sim$\+Triangle\+Mesh()}}, and \mbox{\hyperlink{triangle__mesh_8h_source_l00078}{$\sim$\+Triangle\+Mesh\+Base()}}.
+Referenced by clear\+\_\+triangulateio(), dump\+\_\+triangulateio(), oomph\+::\+Triangle\+Mesh$<$ ELEMENT $>$\+::generic\+\_\+constructor(), oomph\+::\+Triangle\+Mesh$<$ ELEMENT $>$\+::remesh\+\_\+from\+\_\+internal\+\_\+triangulateio(), remesh\+\_\+from\+\_\+triangulateio(), oomph\+::\+Triangle\+Mesh$<$ ELEMENT $>$\+::\+Triangle\+Mesh(), Triangle\+Mesh\+Base(), triangulateio\+\_\+representation(), oomph\+::\+Triangle\+Mesh$<$ ELEMENT $>$\+::update\+\_\+triangulateio(), oomph\+::\+Triangle\+Mesh$<$ ELEMENT $>$\+::$\sim$\+Triangle\+Mesh(), and $\sim$\+Triangle\+Mesh\+Base().
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMeshBase_a503839a1350bee25717570fbf504a2e1}\label{classoomph_1_1TriangleMeshBase_a503839a1350bee25717570fbf504a2e1}} 
 \index{oomph::TriangleMeshBase@{oomph::TriangleMeshBase}!Use\_triangulateio\_restart@{Use\_triangulateio\_restart}}
@@ -532,11 +524,11 @@ Should we use triangulateio specific parts for dump/restart? (Doesn\textquotesin
 
 
 
-Definition at line \mbox{\hyperlink{triangle__mesh_8h_source_l00265}{265}} of file \mbox{\hyperlink{triangle__mesh_8h_source}{triangle\+\_\+mesh.\+h}}.
+Definition at line 265 of file triangle\+\_\+mesh.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{triangle__mesh_8h_source_l00112}{disable\+\_\+triangulateio\+\_\+restart()}}, \mbox{\hyperlink{triangle__mesh_8h_source_l00106}{enable\+\_\+triangulateio\+\_\+restart()}}, \mbox{\hyperlink{triangle__mesh_8h_source_l00055}{Triangle\+Mesh\+Base()}}, and \mbox{\hyperlink{triangle__mesh_8h_source_l00100}{use\+\_\+triangulateio\+\_\+restart()}}.
+Referenced by disable\+\_\+triangulateio\+\_\+restart(), enable\+\_\+triangulateio\+\_\+restart(), Triangle\+Mesh\+Base(), and use\+\_\+triangulateio\+\_\+restart().
 
 
 

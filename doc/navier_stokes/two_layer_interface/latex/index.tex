@@ -72,7 +72,7 @@ As in the \href{../../single_layer_free_surface/html/index.html\#namespace}{\tex
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_namespace====================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for physical parameters}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -117,7 +117,7 @@ The driver code is very similar to the \href{../../single_layer_free_surface/htm
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_main=========================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver code for two-\/dimensional two fluid interface problem}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{elastic__two__layer__interface_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[]) }
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ \textcolor{comment}{// Store command line arguments}}
@@ -156,7 +156,7 @@ The driver code is very similar to the \href{../../single_layer_free_surface/htm
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Maximum time}}
+\DoxyCodeLine{ \textcolor{comment}{/// Maximum time}}
 \DoxyCodeLine{ \textcolor{keywordtype}{double} t\_max = 0.6;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Duration of timestep}}
@@ -197,10 +197,10 @@ In the \href{../../single_layer_free_surface/html/index.html\#main}{\texttt{ pre
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_specific\_mesh\_class==========================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Two layer mesh which employs a pseudo-\/solid node-\/update strategy.}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// This class is essentially a wrapper to an }}
-\DoxyCodeLine{\textcolor{comment}{/// ElasticRefineableRectangularQuadMesh, with an additional boundary}}
-\DoxyCodeLine{\textcolor{comment}{/// to represent the interface between the two fluid layers.}}
+\DoxyCodeLine{\textcolor{comment}{/// Two layer mesh which employs a pseudo-\/solid node-\/update strategy.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// This class is essentially a wrapper to an }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// ElasticRefineableRectangularQuadMesh, with an additional boundary}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// to represent the interface between the two fluid layers.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ElasticRefineableTwoLayerMesh}} :}
@@ -283,7 +283,7 @@ This is very similar to the problem class in the \href{../../single_layer_free_s
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Strip off the interface elements before adapting the bulk mesh}}
+\DoxyCodeLine{ \textcolor{comment}{/// Strip off the interface elements before adapting the bulk mesh}}
 \DoxyCodeLine{ \textcolor{keywordtype}{void} actions\_before\_adapt();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Rebuild the mesh of interface elements after adapting the bulk mesh}}
@@ -294,7 +294,7 @@ This is very similar to the problem class in the \href{../../single_layer_free_s
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Create the 1d interface elements}}
+\DoxyCodeLine{ \textcolor{comment}{/// Create the 1d interface elements}}
 \DoxyCodeLine{ \textcolor{keywordtype}{void} create\_interface\_elements();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Delete the 1d interface elements}}
@@ -305,7 +305,7 @@ This is very similar to the problem class in the \href{../../single_layer_free_s
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Fix pressure in element e at pressure dof pdof and set to pvalue}}
+\DoxyCodeLine{ \textcolor{comment}{/// Fix pressure in element e at pressure dof pdof and set to pvalue}}
 \DoxyCodeLine{ \textcolor{keywordtype}{void} fix\_pressure(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&e,}
 \DoxyCodeLine{                   \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&pdof, }
 \DoxyCodeLine{                   \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&pvalue)}
@@ -325,7 +325,7 @@ The constructor starts by building the timestepper and setting the dimensions of
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_constructor==================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for two fluid interface problem}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\mbox{\hyperlink{classInterfaceProblem_a5889be7fc8eab5d222f1bfb750c845ba}{InterfaceProblem<ELEMENT,TIMESTEPPER>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classInterfaceProblem_a5889be7fc8eab5d222f1bfb750c845ba}{InterfaceProblem}}()}
@@ -560,7 +560,7 @@ The mesh adaptation is driven by the error estimates in the bulk elements and on
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_actions\_before\_adapt=========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Strip off the interface elements before adapting the bulk mesh}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classInterfaceProblem_a944e5754e9b3f3394211b6c62f705abe}{InterfaceProblem<ELEMENT,TIMESTEPPER>::actions\_before\_adapt}}()}
 \DoxyCodeLine{\{}
@@ -582,7 +582,7 @@ After the bulk mesh has been adapted we must create new interface elements and r
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_actions\_after\_adapt==========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Rebuild the mesh of interface elements after adapting the bulk mesh}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classInterfaceProblem_a1c8a5dee970dccc3f1da993cf531872d}{InterfaceProblem<ELEMENT,TIMESTEPPER>::actions\_after\_adapt}}()}
 \DoxyCodeLine{\{}
@@ -630,9 +630,9 @@ This function is used to `attach' interface elements to the upper face of those 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_create\_interface\_elements====================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Create interface elements between the two fluids in the mesh}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// pointed to by Bulk\_mesh\_pt and add the elements to the Mesh object}}
-\DoxyCodeLine{\textcolor{comment}{/// pointed to by Surface\_mesh\_pt.}}
+\DoxyCodeLine{\textcolor{comment}{/// Create interface elements between the two fluids in the mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// pointed to by Bulk\_mesh\_pt and add the elements to the Mesh object}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// pointed to by Surface\_mesh\_pt.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classInterfaceProblem_a94e2cc71fe27c0c329030874e05734b8}{InterfaceProblem<ELEMENT,TIMESTEPPER>::create\_interface\_elements}}()}
@@ -708,7 +708,7 @@ This function loops over all the interface elements (i.\+e. those in the surface
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_delete\_interface\_elements====================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Delete the interface elements and wipe the surface mesh}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classInterfaceProblem_ac2aaab086d9bbd3913ce8bc0d244413d}{InterfaceProblem<ELEMENT,TIMESTEPPER>::delete\_interface\_elements}}()}
 \DoxyCodeLine{\{}
@@ -736,7 +736,7 @@ At the beginning of the simulation the interface is deformed by a prescribed fun
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_deform\_free\_surface==========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Deform the mesh/free surface to a prescribed function}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classInterfaceProblem_a2319232b08d9df1ab473f6cbd40939d5}{InterfaceProblem<ELEMENT,TIMESTEPPER>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classInterfaceProblem_a2319232b08d9df1ab473f6cbd40939d5}{deform\_free\_surface}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double} \&epsilon,\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&n\_periods)}
@@ -776,7 +776,7 @@ The function {\ttfamily unsteady\+\_\+run(...)} is used to perform the timestepp
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_unsteady\_run=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Perform run up to specified time t\_max with given timestep dt}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classInterfaceProblem_adf1f4e43d10939e4323e0e315b711085}{InterfaceProblem<ELEMENT,TIMESTEPPER>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classInterfaceProblem_adf1f4e43d10939e4323e0e315b711085}{unsteady\_run}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double} \&t\_max, \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&dt)}

@@ -46,7 +46,7 @@ Typedef for function pointer to to function that translates spatial error into w
 
 
 
-Definition at line \mbox{\hyperlink{partitioning_8h_source_l00083}{83}} of file \mbox{\hyperlink{partitioning_8h_source}{partitioning.\+h}}.
+Definition at line 83 of file partitioning.\+h.
 
 
 
@@ -63,11 +63,11 @@ Default function that translates spatial error into weight for \mbox{\hyperlink{
 
 Default function that translates spatial error into weight for \mbox{\hyperlink{namespaceoomph_1_1METIS}{METIS}} partitioning (unit weight regardless of input) 
 
-Definition at line \mbox{\hyperlink{partitioning_8cc_source_l00053}{53}} of file \mbox{\hyperlink{partitioning_8cc_source}{partitioning.\+cc}}.
+Definition at line 53 of file partitioning.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{partitioning_8cc_source_l00116}{partition\+\_\+mesh()}}.
+Referenced by partition\+\_\+mesh().
 
 \mbox{\Hypertarget{namespaceoomph_1_1METIS_a9d95103cfa79d38f80b3b0a6db949701}\label{namespaceoomph_1_1METIS_a9d95103cfa79d38f80b3b0a6db949701}} 
 \index{oomph::METIS@{oomph::METIS}!partition\_distributed\_mesh@{partition\_distributed\_mesh}}
@@ -93,15 +93,15 @@ Objective\+:
 \item objective=1\+: minimise total communications volume.
 \end{DoxyItemize}The partioning is based on the dof graph of the complete mesh by taking into account which global equation numbers are affected by each element and connecting elements which affect the same global equation number. Partitioning is done such that all elements associated with the same tree root move together. Non-\/refineable elements are treated as their own root elements. If the optional boolean flag is set to true (it defaults to false) each processor assigns a dumb-\/but-\/repeatable equidistribution of its non-\/halo elements over the domains and outputs the input that would have gone into \mbox{\hyperlink{namespaceoomph_1_1METIS}{METIS}} in the file metis\+\_\+input\+\_\+for\+\_\+validation.\+dat 
 
-Definition at line \mbox{\hyperlink{partitioning_8cc_source_l00567}{567}} of file \mbox{\hyperlink{partitioning_8cc_source}{partitioning.\+cc}}.
+Definition at line 589 of file partitioning.\+cc.
 
 
 
-References \mbox{\hyperlink{problem_8h_source_l01246}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00448}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l00864}{oomph\+::\+Problem\+::elemental\+\_\+assembly\+\_\+time()}}, \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01163}{oomph\+::\+Generalised\+Element\+::is\+\_\+halo()}}, \mbox{\hyperlink{problem_8h_source_l01280}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{namespaceoomph_a86e73012a914a19df3d849e1c6f4b9a1}{oomph\+::\+METIS\+\_\+\+Part\+Graph\+Kway()}}, \mbox{\hyperlink{namespaceoomph_abf5fe3c38b4c12aad8fdfd89b05599bd}{oomph\+::\+METIS\+\_\+\+Part\+Graph\+VKway()}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, and \mbox{\hyperlink{refineable__elements_8h_source_l00524}{oomph\+::\+Refineable\+Element\+::root\+\_\+element\+\_\+pt()}}.
+References oomph\+::\+Problem\+::communicator\+\_\+pt(), e, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Problem\+::elemental\+\_\+assembly\+\_\+time(), oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), i, oomph\+::\+Generalised\+Element\+::is\+\_\+halo(), oomph\+::\+Problem\+::mesh\+\_\+pt(), oomph\+::\+METIS\+\_\+\+Part\+Graph\+Kway(), oomph\+::\+METIS\+\_\+\+Part\+Graph\+VKway(), oomph\+::\+Generalised\+Element\+::ndof(), oomph\+::\+Mesh\+::nelement(), oomph\+::oomph\+\_\+info, and oomph\+::\+Refineable\+Element\+::root\+\_\+element\+\_\+pt().
 
 
 
-Referenced by \mbox{\hyperlink{problem_8cc_source_l17190}{oomph\+::\+Problem\+::load\+\_\+balance()}}.
+Referenced by oomph\+::\+Problem\+::load\+\_\+balance().
 
 \mbox{\Hypertarget{namespaceoomph_1_1METIS_a7504999ec1517cc95d0393753a714fe9}\label{namespaceoomph_1_1METIS_a7504999ec1517cc95d0393753a714fe9}} 
 \index{oomph::METIS@{oomph::METIS}!partition\_mesh@{partition\_mesh}}
@@ -139,15 +139,15 @@ Use \mbox{\hyperlink{namespaceoomph_1_1METIS}{METIS}} to assign each element to 
 \item objective=1\+: minimise total communications volume.
 \end{DoxyItemize}Partioning is based on dual graph of mesh. 
 
-Definition at line \mbox{\hyperlink{partitioning_8cc_source_l00116}{116}} of file \mbox{\hyperlink{partitioning_8cc_source}{partitioning.\+cc}}.
+Definition at line 116 of file partitioning.\+cc.
 
 
 
-References \mbox{\hyperlink{partitioning_8cc_source_l00053}{default\+\_\+error\+\_\+to\+\_\+weight\+\_\+fct()}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00448}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{partitioning_8cc_source_l00063}{Error\+\_\+to\+\_\+weight\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{error__estimator_8h_source_l00056}{oomph\+::\+Error\+Estimator\+::get\+\_\+element\+\_\+errors()}}, \mbox{\hyperlink{problem_8h_source_l01280}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{namespaceoomph_a86e73012a914a19df3d849e1c6f4b9a1}{oomph\+::\+METIS\+\_\+\+Part\+Graph\+Kway()}}, \mbox{\hyperlink{namespaceoomph_abf5fe3c38b4c12aad8fdfd89b05599bd}{oomph\+::\+METIS\+\_\+\+Part\+Graph\+VKway()}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{problem_8h_source_l01323}{oomph\+::\+Problem\+::nsub\+\_\+mesh()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{refineable__mesh_8h_source_l00143}{oomph\+::\+Refineable\+Mesh\+Base\+::spatial\+\_\+error\+\_\+estimator\+\_\+pt()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l00243}{oomph\+::\+Cumulative\+Timings\+::start()}}.
+References oomph\+::\+Problem\+::communicator\+\_\+pt(), default\+\_\+error\+\_\+to\+\_\+weight\+\_\+fct(), e, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), Error\+\_\+to\+\_\+weight\+\_\+fct\+\_\+pt, oomph\+::\+Error\+Estimator\+::get\+\_\+element\+\_\+errors(), oomph\+::\+Problem\+::mesh\+\_\+pt(), oomph\+::\+METIS\+\_\+\+Part\+Graph\+Kway(), oomph\+::\+METIS\+\_\+\+Part\+Graph\+VKway(), oomph\+::\+Generalised\+Element\+::ndof(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Problem\+::nsub\+\_\+mesh(), oomph\+::oomph\+\_\+info, oomph\+::\+Refineable\+Mesh\+Base\+::spatial\+\_\+error\+\_\+estimator\+\_\+pt(), and oomph\+::\+Cumulative\+Timings\+::start().
 
 
 
-Referenced by \mbox{\hyperlink{problem_8cc_source_l00878}{oomph\+::\+Problem\+::partition\+\_\+global\+\_\+mesh()}}.
+Referenced by oomph\+::\+Problem\+::partition\+\_\+global\+\_\+mesh().
 
 \mbox{\Hypertarget{namespaceoomph_1_1METIS_a58831157b0cfadc57485c3de01df7d78}\label{namespaceoomph_1_1METIS_a58831157b0cfadc57485c3de01df7d78}} 
 \index{oomph::METIS@{oomph::METIS}!uniform\_partition\_mesh@{uniform\_partition\_mesh}}
@@ -161,11 +161,11 @@ Partition mesh uniformly by dividing elements equally over the partitions, in th
 
 
 
-Definition at line \mbox{\hyperlink{partitioning_8cc_source_l00076}{76}} of file \mbox{\hyperlink{partitioning_8cc_source}{partitioning.\+cc}}.
+Definition at line 76 of file partitioning.\+cc.
 
 
 
-References \mbox{\hyperlink{problem_8h_source_l01280}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, and \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}.
+References oomph\+::\+Problem\+::mesh\+\_\+pt(), and oomph\+::\+Mesh\+::nelement().
 
 
 
@@ -182,9 +182,9 @@ Function pointer to to function that translates spatial error into weight for \m
 
 
 
-Definition at line \mbox{\hyperlink{partitioning_8cc_source_l00063}{63}} of file \mbox{\hyperlink{partitioning_8cc_source}{partitioning.\+cc}}.
+Definition at line 63 of file partitioning.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{partitioning_8cc_source_l00116}{partition\+\_\+mesh()}}.
+Referenced by partition\+\_\+mesh().
 

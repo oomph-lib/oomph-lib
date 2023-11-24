@@ -13,7 +13,7 @@ Calling {\ttfamily MPI\+\_\+\+Helpers\+::init(argc,argv)} is equivalent to calli
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_main=============================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver code for generic mpi stuff}}
-\DoxyCodeLine{\textcolor{comment}{//=============================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=============================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
@@ -201,9 +201,9 @@ A {\ttfamily CRDouble\+Matrix} has three fundamental states\+:
 
 
 \begin{DoxyItemize}
-\item A {\ttfamily CRDouble\+Matrix} can have no distribution or coefficients in which case {\ttfamily my\+\_\+matrix-\/\texorpdfstring{$>$}{>}distribution\+\_\+built()} and {\ttfamily my\+\_\+matrix-\/\texorpdfstring{$>$}{>}built()} are both {\ttfamily false}.
-\item A (built) distribution but no coefficients in which case {\ttfamily my\+\_\+matrix-\/\texorpdfstring{$>$}{>}distribution\+\_\+built()} is {\ttfamily true} but {\ttfamily my\+\_\+matrix-\/\texorpdfstring{$>$}{>}built()} is still {\ttfamily false}.
-\item A (built) distribution and coefficients in which case {\ttfamily my\+\_\+matrix-\/\texorpdfstring{$>$}{>}distribution\+\_\+built()} and {\ttfamily my\+\_\+matrix-\/\texorpdfstring{$>$}{>}built()} are both {\ttfamily true}. ~\newline
+\item A {\ttfamily CRDouble\+Matrix} can have no distribution or coefficients in which case {\ttfamily my\+\_\+matrix-\/$>$distribution\+\_\+built()} and {\ttfamily my\+\_\+matrix-\/$>$built()} are both {\ttfamily false}.
+\item A (built) distribution but no coefficients in which case {\ttfamily my\+\_\+matrix-\/$>$distribution\+\_\+built()} is {\ttfamily true} but {\ttfamily my\+\_\+matrix-\/$>$built()} is still {\ttfamily false}.
+\item A (built) distribution and coefficients in which case {\ttfamily my\+\_\+matrix-\/$>$distribution\+\_\+built()} and {\ttfamily my\+\_\+matrix-\/$>$built()} are both {\ttfamily true}. ~\newline
 
 \end{DoxyItemize}
 

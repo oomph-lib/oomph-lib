@@ -21,7 +21,7 @@ We use multiple inheritance to upgrade the already-\/existing refineable \char`\
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//======================start\_mesh=========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Simple quarter tube mesh upgraded to become a solid mesh}}
-\DoxyCodeLine{\textcolor{comment}{//=========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{RefineableElasticQuarterTubeMesh}} : }
 \DoxyCodeLine{ \textcolor{keyword}{public} \textcolor{keyword}{virtual} RefineableQuarterTubeMesh<ELEMENT>, }
@@ -63,7 +63,7 @@ As usual, we define a namespace, {\ttfamily \mbox{\hyperlink{namespaceGlobal__Ph
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_namespace==========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Global variables}}
-\DoxyCodeLine{\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -109,7 +109,7 @@ If the code is executed without command line arguments we perform a single simul
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_main==================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver for 3D cantilever beam loaded by gravity}}
-\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{three__d__cantilever_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
@@ -174,7 +174,7 @@ The problem class contains the usual member functions. No action is required bef
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=============begin\_problem============================================ }}
 \DoxyCodeLine{\textcolor{comment}{/// Problem class for the 3D cantilever "{}beam"{} structure.}}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================== }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================== }}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classCantileverProblem}{CantileverProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -198,7 +198,7 @@ The problem class contains the usual member functions. No action is required bef
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Pin the redundant solid pressures (if any)}}
 \DoxyCodeLine{   PVDEquationsBase<3>::pin\_redundant\_nodal\_solid\_pressures(}
-\DoxyCodeLine{    \mbox{\hyperlink{classCantileverProblem_afae2bac330172d85ab316bb94a27c822}{mesh\_pt}}()-\/>element\_pt());}
+\DoxyCodeLine{    \mbox{\hyperlink{classCantileverProblem_a20f03209a5031e1bda39da9f2d2ce845}{mesh\_pt}}()-\/>element\_pt());}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Doc the solution}}
@@ -209,7 +209,7 @@ The problem class contains the usual member functions. No action is required bef
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Access function for the mesh}}
+\DoxyCodeLine{ \textcolor{comment}{/// Access function for the mesh}}
 \DoxyCodeLine{ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{RefineableElasticQuarterTubeMesh<ELEMENT>}}* mesh\_pt()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{keywordflow}{return} \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{RefineableElasticQuarterTubeMesh<ELEMENT>}}*\textcolor{keyword}{>}(}
@@ -238,7 +238,7 @@ We start by creating the {\ttfamily Geom\+Object} that defines the curvilinear b
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===========start\_of\_constructor======================================= }}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor: }}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================== }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================== }}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classCantileverProblem_abba97fc4b8402bc0363fdf16322f6572}{CantileverProblem<ELEMENT>::CantileverProblem}}() }
 \DoxyCodeLine{\{}
@@ -357,7 +357,7 @@ The post-\/processing function {\ttfamily doc\+\_\+solution()} simply outputs th
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==============start\_doc===========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{//==================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classCantileverProblem_a7571348f8724e71be4e67dc64cea3877}{CantileverProblem<ELEMENT>::doc\_solution}}()}
 \DoxyCodeLine{\{}

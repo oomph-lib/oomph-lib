@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1NonLinearElasticitySmoothMesh}{}\doxysection{oomph\+::Non\+Linear\+Elasticity\+Smooth\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1NonLinearElasticitySmoothMesh}{}\doxysection{oomph\+::Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$ Class Template Reference}
 \label{classoomph_1_1NonLinearElasticitySmoothMesh}\index{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$@{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$}}
 
 
@@ -9,7 +9,7 @@
 
 {\ttfamily \#include $<$mesh\+\_\+smooth.\+h$>$}
 
-Inheritance diagram for oomph\+::Non\+Linear\+Elasticity\+Smooth\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=3.000000cm]{classoomph_1_1NonLinearElasticitySmoothMesh}
@@ -49,6 +49,7 @@ void \mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh_a47de05f2c3a8c
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class ELEMENT$>$\newline
 class oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$}
+
 /////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////// 
 
 Auxiliary \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} to smooth a \mbox{\hyperlink{classoomph_1_1SolidMesh}{Solid\+Mesh}} by adjusting the internal nodal positions via the solution of a nonlinear solid mechanics problem. The mesh will typically have been created with an unstructured mesh generator that uses a low-\/order (simplex) representation of the element geometry; some of the nodes, typically non-\/vertex nodes on the domain\textquotesingle{}s curvilinear boundaries, were then moved to their new position to provide a more accurate representation of the geometry. This class should be used to deal with elements that may have become inverted during the node motion. ~\newline
@@ -57,7 +58,7 @@ Auxiliary \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} to smooth a \mbox{\h
 \item It is important that the Lagrangian coordinates of all nodes still indicate their original position, i.\+e. their position before (some of) them were moved to their new position. This is because we apply the boundary displacements in small increments.
 \end{DoxyItemize}Template argument specifies type of element. It must be a pure solid mechanics element! This shouldn\textquotesingle{}t cause any problems since mesh smoothing operations tend to be performed off-\/line so the mesh may as well be built with pure solid elements even if it is ultimately to be used with other element types. (This restriction could easily be avoided but would require double templating and would generally be messy...) 
 
-Definition at line \mbox{\hyperlink{mesh__smooth_8h_source_l00097}{97}} of file \mbox{\hyperlink{mesh__smooth_8h_source}{mesh\+\_\+smooth.\+h}}.
+Definition at line 97 of file mesh\+\_\+smooth.\+h.
 
 
 
@@ -75,7 +76,7 @@ Destructor (empty)
 
 
 
-Definition at line \mbox{\hyperlink{mesh__smooth_8h_source_l00390}{390}} of file \mbox{\hyperlink{mesh__smooth_8h_source}{mesh\+\_\+smooth.\+h}}.
+Definition at line 390 of file mesh\+\_\+smooth.\+h.
 
 
 
@@ -97,11 +98,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Problem_a0c8d70891f7369bb4bf84
 
 
 
-Definition at line \mbox{\hyperlink{mesh__smooth_8h_source_l00395}{395}} of file \mbox{\hyperlink{mesh__smooth_8h_source}{mesh\+\_\+smooth.\+h}}.
+Definition at line 395 of file mesh\+\_\+smooth.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{mesh_8h_source_l00596}{oomph\+::\+Mesh\+::nnode()}}, \mbox{\hyperlink{mesh_8h_source_l02594}{oomph\+::\+Solid\+Mesh\+::node\+\_\+pt()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{mesh__smooth_8h_source_l00492}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::\+Orig\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{mesh__smooth_8h_source_l00486}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::\+Orig\+\_\+node\+\_\+pos}}, \mbox{\hyperlink{mesh__smooth_8h_source_l00059}{oomph\+::\+Helper\+\_\+namespace\+\_\+for\+\_\+mesh\+\_\+smoothing\+::\+Scale}}, \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}, and \mbox{\hyperlink{nodes_8h_source_l01883}{oomph\+::\+Solid\+Node\+::xi()}}.
+References i, oomph\+::\+Node\+::ndim(), oomph\+::\+Mesh\+::nnode(), oomph\+::\+Solid\+Mesh\+::node\+\_\+pt(), oomph\+::oomph\+\_\+info, oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::\+Orig\+\_\+mesh\+\_\+pt, oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::\+Orig\+\_\+node\+\_\+pos, oomph\+::\+Helper\+\_\+namespace\+\_\+for\+\_\+mesh\+\_\+smoothing\+::\+Scale, oomph\+::\+Node\+::x(), and oomph\+::\+Solid\+Node\+::xi().
 
 \mbox{\Hypertarget{classoomph_1_1NonLinearElasticitySmoothMesh_a07ef87c5d5c74b5d9ceb23800608c87a}\label{classoomph_1_1NonLinearElasticitySmoothMesh_a07ef87c5d5c74b5d9ceb23800608c87a}} 
 \index{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$@{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$}!backup@{backup}}
@@ -116,15 +117,15 @@ Backup nodal positions in dummy mesh to allow for reset after non-\/convergence 
 
 
 
-Definition at line \mbox{\hyperlink{mesh__smooth_8h_source_l00416}{416}} of file \mbox{\hyperlink{mesh__smooth_8h_source}{mesh\+\_\+smooth.\+h}}.
+Definition at line 416 of file mesh\+\_\+smooth.\+h.
 
 
 
-References \mbox{\hyperlink{mesh__smooth_8h_source_l00489}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::\+Backup\+\_\+node\+\_\+pos}}, \mbox{\hyperlink{mesh__smooth_8h_source_l00495}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::\+Dummy\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{mesh_8h_source_l00596}{oomph\+::\+Mesh\+::nnode()}}, \mbox{\hyperlink{mesh_8h_source_l02594}{oomph\+::\+Solid\+Mesh\+::node\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
+References oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::\+Backup\+\_\+node\+\_\+pos, oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::\+Dummy\+\_\+mesh\+\_\+pt, i, oomph\+::\+Node\+::ndim(), oomph\+::\+Mesh\+::nnode(), oomph\+::\+Solid\+Mesh\+::node\+\_\+pt(), and oomph\+::\+Node\+::x().
 
 
 
-Referenced by \mbox{\hyperlink{mesh__smooth_8h_source_l00141}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::operator()()}}.
+Referenced by oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::operator()().
 
 \mbox{\Hypertarget{classoomph_1_1NonLinearElasticitySmoothMesh_a47de05f2c3a8c3fb712dbdb7a1349db6}\label{classoomph_1_1NonLinearElasticitySmoothMesh_a47de05f2c3a8c3fb712dbdb7a1349db6}} 
 \index{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$@{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$}!doc\_solution@{doc\_solution}}
@@ -139,15 +140,15 @@ Doc the solution.
 
 
 
-Definition at line \mbox{\hyperlink{mesh__smooth_8h_source_l00450}{450}} of file \mbox{\hyperlink{mesh__smooth_8h_source}{mesh\+\_\+smooth.\+h}}.
+Definition at line 450 of file mesh\+\_\+smooth.\+h.
 
 
 
-References \mbox{\hyperlink{mesh_8cc_source_l00870}{oomph\+::\+Mesh\+::check\+\_\+inverted\+\_\+elements()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00524}{oomph\+::\+Doc\+Info\+::directory()}}, \mbox{\hyperlink{mesh__smooth_8h_source_l00495}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::\+Dummy\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00548}{oomph\+::\+Doc\+Info\+::is\+\_\+doc\+\_\+enabled()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00554}{oomph\+::\+Doc\+Info\+::number()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, and \mbox{\hyperlink{mesh_8cc_source_l02027}{oomph\+::\+Mesh\+::output()}}.
+References oomph\+::\+Mesh\+::check\+\_\+inverted\+\_\+elements(), oomph\+::\+Doc\+Info\+::directory(), oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::\+Dummy\+\_\+mesh\+\_\+pt, oomph\+::\+Doc\+Info\+::is\+\_\+doc\+\_\+enabled(), oomph\+::\+Doc\+Info\+::number(), oomph\+::oomph\+\_\+info, and oomph\+::\+Mesh\+::output().
 
 
 
-Referenced by \mbox{\hyperlink{mesh__smooth_8h_source_l00141}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::operator()()}}.
+Referenced by oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::operator()().
 
 \mbox{\Hypertarget{classoomph_1_1NonLinearElasticitySmoothMesh_a08291c80b1b4e30fdce23be10c54d3bb}\label{classoomph_1_1NonLinearElasticitySmoothMesh_a08291c80b1b4e30fdce23be10c54d3bb}} 
 \index{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$@{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$}!operator()@{operator()}}
@@ -162,11 +163,11 @@ Functor to update the nodal positions in \mbox{\hyperlink{classoomph_1_1SolidMes
 
 
 
-Definition at line \mbox{\hyperlink{mesh__smooth_8h_source_l00112}{112}} of file \mbox{\hyperlink{mesh__smooth_8h_source}{mesh\+\_\+smooth.\+h}}.
+Definition at line 112 of file mesh\+\_\+smooth.\+h.
 
 
 
-References \mbox{\hyperlink{oomph__utilities_8h_source_l00542}{oomph\+::\+Doc\+Info\+::disable\+\_\+doc()}}.
+References oomph\+::\+Doc\+Info\+::disable\+\_\+doc().
 
 \mbox{\Hypertarget{classoomph_1_1NonLinearElasticitySmoothMesh_a426905484f20903c02c995b297df36a6}\label{classoomph_1_1NonLinearElasticitySmoothMesh_a426905484f20903c02c995b297df36a6}} 
 \index{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$@{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$}!operator()@{operator()}}
@@ -181,11 +182,11 @@ Functor to update the nodal positions in \mbox{\hyperlink{classoomph_1_1SolidMes
 
 
 
-Definition at line \mbox{\hyperlink{mesh__smooth_8h_source_l00141}{141}} of file \mbox{\hyperlink{mesh__smooth_8h_source}{mesh\+\_\+smooth.\+h}}.
+Definition at line 141 of file mesh\+\_\+smooth.\+h.
 
 
 
-References \mbox{\hyperlink{problem_8h_source_l01330}{oomph\+::\+Problem\+::add\+\_\+sub\+\_\+mesh()}}, \mbox{\hyperlink{problem_8cc_source_l01989}{oomph\+::\+Problem\+::assign\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{mesh__smooth_8h_source_l00416}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::backup()}}, \mbox{\hyperlink{mesh_8h_source_l00840}{oomph\+::\+Mesh\+::boundary\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{problem_8cc_source_l01493}{oomph\+::\+Problem\+::build\+\_\+global\+\_\+mesh()}}, \mbox{\hyperlink{mesh__smooth_8h_source_l00055}{oomph\+::\+Helper\+\_\+namespace\+\_\+for\+\_\+mesh\+\_\+smoothing\+::\+Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{mesh__smooth_8h_source_l00450}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{mesh__smooth_8h_source_l00495}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::\+Dummy\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00448}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00896}{oomph\+::\+Mesh\+::face\+\_\+index\+\_\+at\+\_\+boundary()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{mesh_8h_source_l00827}{oomph\+::\+Mesh\+::nboundary()}}, \mbox{\hyperlink{mesh_8h_source_l00878}{oomph\+::\+Mesh\+::nboundary\+\_\+element()}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{problem_8cc_source_l08783}{oomph\+::\+Problem\+::newton\+\_\+solve()}}, \mbox{\hyperlink{mesh_8h_source_l00596}{oomph\+::\+Mesh\+::nnode()}}, \mbox{\hyperlink{mesh_8h_source_l02594}{oomph\+::\+Solid\+Mesh\+::node\+\_\+pt()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00554}{oomph\+::\+Doc\+Info\+::number()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{mesh__smooth_8h_source_l00492}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::\+Orig\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{mesh__smooth_8h_source_l00486}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::\+Orig\+\_\+node\+\_\+pos}}, \mbox{\hyperlink{mesh__smooth_8h_source_l00435}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::reset()}}, \mbox{\hyperlink{mesh__smooth_8h_source_l00059}{oomph\+::\+Helper\+\_\+namespace\+\_\+for\+\_\+mesh\+\_\+smoothing\+::\+Scale}}, \mbox{\hyperlink{mesh__smooth_8h_source_l00062}{oomph\+::\+Helper\+\_\+namespace\+\_\+for\+\_\+mesh\+\_\+smoothing\+::\+Scale\+\_\+increment}}, \mbox{\hyperlink{elements_8h_source_l04482}{oomph\+::\+Face\+Element\+::set\+\_\+boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh()}}, \mbox{\hyperlink{solid__traction__elements_8h_source_l01209}{oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ ELEMENT $>$\+::set\+\_\+boundary\+\_\+shape\+\_\+geom\+\_\+object\+\_\+pt()}}, \mbox{\hyperlink{mesh_8cc_source_l09564}{oomph\+::\+Solid\+Mesh\+::set\+\_\+lagrangian\+\_\+nodal\+\_\+coordinates()}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
+References oomph\+::\+Problem\+::add\+\_\+sub\+\_\+mesh(), oomph\+::\+Problem\+::assign\+\_\+eqn\+\_\+numbers(), oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::backup(), oomph\+::\+Mesh\+::boundary\+\_\+element\+\_\+pt(), oomph\+::\+Problem\+::build\+\_\+global\+\_\+mesh(), oomph\+::\+Helper\+\_\+namespace\+\_\+for\+\_\+mesh\+\_\+smoothing\+::\+Constitutive\+\_\+law\+\_\+pt, oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::doc\+\_\+solution(), oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::\+Dummy\+\_\+mesh\+\_\+pt, e, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Mesh\+::face\+\_\+index\+\_\+at\+\_\+boundary(), i, oomph\+::\+Mesh\+::nboundary(), oomph\+::\+Mesh\+::nboundary\+\_\+element(), oomph\+::\+Node\+::ndim(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Problem\+::newton\+\_\+solve(), oomph\+::\+Mesh\+::nnode(), oomph\+::\+Solid\+Mesh\+::node\+\_\+pt(), oomph\+::\+Doc\+Info\+::number(), oomph\+::oomph\+\_\+info, oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::\+Orig\+\_\+mesh\+\_\+pt, oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::\+Orig\+\_\+node\+\_\+pos, oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::reset(), oomph\+::\+Helper\+\_\+namespace\+\_\+for\+\_\+mesh\+\_\+smoothing\+::\+Scale, oomph\+::\+Helper\+\_\+namespace\+\_\+for\+\_\+mesh\+\_\+smoothing\+::\+Scale\+\_\+increment, oomph\+::\+Face\+Element\+::set\+\_\+boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh(), oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ ELEMENT $>$\+::set\+\_\+boundary\+\_\+shape\+\_\+geom\+\_\+object\+\_\+pt(), oomph\+::\+Solid\+Mesh\+::set\+\_\+lagrangian\+\_\+nodal\+\_\+coordinates(), and oomph\+::\+Node\+::x().
 
 \mbox{\Hypertarget{classoomph_1_1NonLinearElasticitySmoothMesh_a7c6d16d244b89aece322e31cb4c83588}\label{classoomph_1_1NonLinearElasticitySmoothMesh_a7c6d16d244b89aece322e31cb4c83588}} 
 \index{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$@{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$}!reset@{reset}}
@@ -200,15 +201,15 @@ Reset nodal positions in dummy mesh to allow for restart of Newton method with r
 
 
 
-Definition at line \mbox{\hyperlink{mesh__smooth_8h_source_l00435}{435}} of file \mbox{\hyperlink{mesh__smooth_8h_source}{mesh\+\_\+smooth.\+h}}.
+Definition at line 435 of file mesh\+\_\+smooth.\+h.
 
 
 
-References \mbox{\hyperlink{mesh__smooth_8h_source_l00489}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::\+Backup\+\_\+node\+\_\+pos}}, \mbox{\hyperlink{mesh__smooth_8h_source_l00495}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::\+Dummy\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{mesh_8h_source_l00596}{oomph\+::\+Mesh\+::nnode()}}, \mbox{\hyperlink{mesh_8h_source_l02594}{oomph\+::\+Solid\+Mesh\+::node\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
+References oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::\+Backup\+\_\+node\+\_\+pos, oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::\+Dummy\+\_\+mesh\+\_\+pt, i, oomph\+::\+Node\+::ndim(), oomph\+::\+Mesh\+::nnode(), oomph\+::\+Solid\+Mesh\+::node\+\_\+pt(), and oomph\+::\+Node\+::x().
 
 
 
-Referenced by \mbox{\hyperlink{mesh__smooth_8h_source_l00141}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::operator()()}}.
+Referenced by oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::operator()().
 
 
 
@@ -226,11 +227,11 @@ Backup nodal positions.
 
 
 
-Definition at line \mbox{\hyperlink{mesh__smooth_8h_source_l00489}{489}} of file \mbox{\hyperlink{mesh__smooth_8h_source}{mesh\+\_\+smooth.\+h}}.
+Definition at line 489 of file mesh\+\_\+smooth.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{mesh__smooth_8h_source_l00416}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::backup()}}, and \mbox{\hyperlink{mesh__smooth_8h_source_l00435}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::reset()}}.
+Referenced by oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::backup(), and oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::reset().
 
 \mbox{\Hypertarget{classoomph_1_1NonLinearElasticitySmoothMesh_a3034da1f2e87fd7dcbabd6883ba7cdd9}\label{classoomph_1_1NonLinearElasticitySmoothMesh_a3034da1f2e87fd7dcbabd6883ba7cdd9}} 
 \index{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$@{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$}!Dummy\_mesh\_pt@{Dummy\_mesh\_pt}}
@@ -245,11 +246,11 @@ Copy of mesh to work on.
 
 
 
-Definition at line \mbox{\hyperlink{mesh__smooth_8h_source_l00495}{495}} of file \mbox{\hyperlink{mesh__smooth_8h_source}{mesh\+\_\+smooth.\+h}}.
+Definition at line 495 of file mesh\+\_\+smooth.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{mesh__smooth_8h_source_l00416}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::backup()}}, \mbox{\hyperlink{mesh__smooth_8h_source_l00450}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{mesh__smooth_8h_source_l00141}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::operator()()}}, and \mbox{\hyperlink{mesh__smooth_8h_source_l00435}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::reset()}}.
+Referenced by oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::backup(), oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::doc\+\_\+solution(), oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::operator()(), and oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::reset().
 
 \mbox{\Hypertarget{classoomph_1_1NonLinearElasticitySmoothMesh_a24fd838e1a0a8b8a7fe59249349e7da3}\label{classoomph_1_1NonLinearElasticitySmoothMesh_a24fd838e1a0a8b8a7fe59249349e7da3}} 
 \index{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$@{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$}!Orig\_mesh\_pt@{Orig\_mesh\_pt}}
@@ -264,11 +265,11 @@ Bulk original mesh.
 
 
 
-Definition at line \mbox{\hyperlink{mesh__smooth_8h_source_l00492}{492}} of file \mbox{\hyperlink{mesh__smooth_8h_source}{mesh\+\_\+smooth.\+h}}.
+Definition at line 492 of file mesh\+\_\+smooth.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{mesh__smooth_8h_source_l00395}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve()}}, and \mbox{\hyperlink{mesh__smooth_8h_source_l00141}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::operator()()}}.
+Referenced by oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve(), and oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::operator()().
 
 \mbox{\Hypertarget{classoomph_1_1NonLinearElasticitySmoothMesh_a0d59ca9e732fafa9c1d70c85cdefbb74}\label{classoomph_1_1NonLinearElasticitySmoothMesh_a0d59ca9e732fafa9c1d70c85cdefbb74}} 
 \index{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$@{oomph::NonLinearElasticitySmoothMesh$<$ ELEMENT $>$}!Orig\_node\_pos@{Orig\_node\_pos}}
@@ -283,11 +284,11 @@ Original nodal positions.
 
 
 
-Definition at line \mbox{\hyperlink{mesh__smooth_8h_source_l00486}{486}} of file \mbox{\hyperlink{mesh__smooth_8h_source}{mesh\+\_\+smooth.\+h}}.
+Definition at line 486 of file mesh\+\_\+smooth.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{mesh__smooth_8h_source_l00395}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve()}}, and \mbox{\hyperlink{mesh__smooth_8h_source_l00141}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::operator()()}}.
+Referenced by oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve(), and oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::operator()().
 
 
 

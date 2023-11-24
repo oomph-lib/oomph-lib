@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1MapMatrixMixed}{}\doxysection{oomph\+::Map\+Matrix\+Mixed\texorpdfstring{$<$}{<} KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1MapMatrixMixed}{}\doxysection{oomph\+::Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$ Class Template Reference}
 \label{classoomph_1_1MapMatrixMixed}\index{oomph::MapMatrixMixed$<$ KEY\_TYPE\_ROW, KEY\_TYPE\_COL, VALUE\_TYPE $>$@{oomph::MapMatrixMixed$<$ KEY\_TYPE\_ROW, KEY\_TYPE\_COL, VALUE\_TYPE $>$}}
 
 
@@ -9,6 +9,12 @@
 
 {\ttfamily \#include $<$map\+\_\+matrix.\+h$>$}
 
+Inheritance diagram for oomph\+::Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1MapMatrixMixed}
+\end{center}
+\end{figure}
 \doxysubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
@@ -39,7 +45,7 @@ virtual \mbox{\hyperlink{classoomph_1_1MapMatrixMixed_a7cf0f3eb68c457db64d4bd821
 \begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1MapMatrixMixed_ab061e2b557441b3b2a9fee98fe105af2}{clear}} ()
 \begin{DoxyCompactList}\small\item\em Wipe all entries. \end{DoxyCompactList}\item 
-VALUE\+\_\+\+TYPE \& \mbox{\hyperlink{classoomph_1_1MapMatrixMixed_a00484c1f232697e008b77ef57239e137}{operator()}} (const KEY\+\_\+\+TYPE\+\_\+\+ROW \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const KEY\+\_\+\+TYPE\+\_\+\+COL \&j)
+VALUE\+\_\+\+TYPE \& \mbox{\hyperlink{classoomph_1_1MapMatrixMixed_ad348711a05b2266ccd0fa80b82992610}{operator()}} (const KEY\+\_\+\+TYPE\+\_\+\+ROW \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const KEY\+\_\+\+TYPE\+\_\+\+COL \&j)
 \begin{DoxyCompactList}\small\item\em Return (reference to) entry. Careful\+: If the entry does not exist then it is created and set to zero. \end{DoxyCompactList}\item 
 VALUE\+\_\+\+TYPE \mbox{\hyperlink{classoomph_1_1MapMatrixMixed_aee00d676e6d7833a9b2399bf919bb58a}{get}} (const KEY\+\_\+\+TYPE\+\_\+\+ROW \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const KEY\+\_\+\+TYPE\+\_\+\+COL \&j) const
 \begin{DoxyCompactList}\small\item\em Get an element corresponding to the key (i,j) Searches the container for an element with a key equivalent to (i,j) and returns the element if found, otherwise the default 0 value for the value type is returned. The container is not modified. \end{DoxyCompactList}\item 
@@ -56,7 +62,7 @@ unsigned long \mbox{\hyperlink{classoomph_1_1MapMatrixMixed_ae3f2f66dd90a57957c7
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-VALUE\+\_\+\+TYPE $\ast$ \mbox{\hyperlink{classoomph_1_1MapMatrixMixed_a1fe030cd6f8c6b1a66ca2289af74b57f}{entry\+\_\+pt}} (const KEY\+\_\+\+TYPE\+\_\+\+ROW \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const KEY\+\_\+\+TYPE\+\_\+\+COL \&j)
+VALUE\+\_\+\+TYPE $\ast$ \mbox{\hyperlink{classoomph_1_1MapMatrixMixed_a964536bfab6dc7426ddcdca07fe25d12}{entry\+\_\+pt}} (const KEY\+\_\+\+TYPE\+\_\+\+ROW \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const KEY\+\_\+\+TYPE\+\_\+\+COL \&j)
 \begin{DoxyCompactList}\small\item\em Return pointer to entry. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -68,6 +74,7 @@ std\+::map$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, std\+::map$<$ KEY\+\_\+\+TYPE\+\_\+\+C
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class KEY\+\_\+\+TYPE\+\_\+\+ROW, class KEY\+\_\+\+TYPE\+\_\+\+COL, class VALUE\+\_\+\+TYPE$>$\newline
 class oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$}
+
 \mbox{\hyperlink{classoomph_1_1MapMatrixMixed}{Map\+Matrix\+Mixed}} is a generalised, STL-\/map-\/based, sparse(ish) matrix class with mixed indices. 
 
 The matrix is indexed by indices of type KEY\+\_\+\+TYPE\+\_\+\+ROW and KEY\+\_\+\+TYPE\+\_\+\+COL and has entries of type VALUE\+\_\+\+TYPE.
@@ -116,7 +123,7 @@ Example of usage\+:
 \end{DoxyCode}
  
 
-Definition at line \mbox{\hyperlink{map__matrix_8h_source_l00108}{108}} of file \mbox{\hyperlink{map__matrix_8h_source}{map\+\_\+matrix.\+h}}.
+Definition at line 108 of file map\+\_\+matrix.\+h.
 
 
 
@@ -134,7 +141,7 @@ Typedef to keep the code more readable const version.
 
 
 
-Definition at line \mbox{\hyperlink{map__matrix_8h_source_l00124}{124}} of file \mbox{\hyperlink{map__matrix_8h_source}{map\+\_\+matrix.\+h}}.
+Definition at line 124 of file map\+\_\+matrix.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1MapMatrixMixed_aae407586fb40aaf48fd20a0678adb591}\label{classoomph_1_1MapMatrixMixed_aae407586fb40aaf48fd20a0678adb591}} 
 \index{oomph::MapMatrixMixed$<$ KEY\_TYPE\_ROW, KEY\_TYPE\_COL, VALUE\_TYPE $>$@{oomph::MapMatrixMixed$<$ KEY\_TYPE\_ROW, KEY\_TYPE\_COL, VALUE\_TYPE $>$}!ConstOuterMixedIt@{ConstOuterMixedIt}}
@@ -149,7 +156,7 @@ Typedef to keep the code more readable const version.
 
 
 
-Definition at line \mbox{\hyperlink{map__matrix_8h_source_l00134}{134}} of file \mbox{\hyperlink{map__matrix_8h_source}{map\+\_\+matrix.\+h}}.
+Definition at line 134 of file map\+\_\+matrix.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1MapMatrixMixed_a58406e7750878e6eebecd73c1266268a}\label{classoomph_1_1MapMatrixMixed_a58406e7750878e6eebecd73c1266268a}} 
 \index{oomph::MapMatrixMixed$<$ KEY\_TYPE\_ROW, KEY\_TYPE\_COL, VALUE\_TYPE $>$@{oomph::MapMatrixMixed$<$ KEY\_TYPE\_ROW, KEY\_TYPE\_COL, VALUE\_TYPE $>$}!InnerMapMixed@{InnerMapMixed}}
@@ -164,7 +171,7 @@ Typedef to keep the code more readable.
 
 
 
-Definition at line \mbox{\hyperlink{map__matrix_8h_source_l00118}{118}} of file \mbox{\hyperlink{map__matrix_8h_source}{map\+\_\+matrix.\+h}}.
+Definition at line 118 of file map\+\_\+matrix.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1MapMatrixMixed_a88516855a59e81851521a52d5355e9c9}\label{classoomph_1_1MapMatrixMixed_a88516855a59e81851521a52d5355e9c9}} 
 \index{oomph::MapMatrixMixed$<$ KEY\_TYPE\_ROW, KEY\_TYPE\_COL, VALUE\_TYPE $>$@{oomph::MapMatrixMixed$<$ KEY\_TYPE\_ROW, KEY\_TYPE\_COL, VALUE\_TYPE $>$}!InnerMixedIt@{InnerMixedIt}}
@@ -179,7 +186,7 @@ Typedef to keep the code more readable.
 
 
 
-Definition at line \mbox{\hyperlink{map__matrix_8h_source_l00121}{121}} of file \mbox{\hyperlink{map__matrix_8h_source}{map\+\_\+matrix.\+h}}.
+Definition at line 121 of file map\+\_\+matrix.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1MapMatrixMixed_af5c496215f2a807e5a130a684d1811df}\label{classoomph_1_1MapMatrixMixed_af5c496215f2a807e5a130a684d1811df}} 
 \index{oomph::MapMatrixMixed$<$ KEY\_TYPE\_ROW, KEY\_TYPE\_COL, VALUE\_TYPE $>$@{oomph::MapMatrixMixed$<$ KEY\_TYPE\_ROW, KEY\_TYPE\_COL, VALUE\_TYPE $>$}!OuterMapMixed@{OuterMapMixed}}
@@ -194,7 +201,7 @@ Typedef to keep the code more readable.
 
 
 
-Definition at line \mbox{\hyperlink{map__matrix_8h_source_l00128}{128}} of file \mbox{\hyperlink{map__matrix_8h_source}{map\+\_\+matrix.\+h}}.
+Definition at line 128 of file map\+\_\+matrix.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1MapMatrixMixed_ae9b361be3e0ce68e8f6618b95cbad231}\label{classoomph_1_1MapMatrixMixed_ae9b361be3e0ce68e8f6618b95cbad231}} 
 \index{oomph::MapMatrixMixed$<$ KEY\_TYPE\_ROW, KEY\_TYPE\_COL, VALUE\_TYPE $>$@{oomph::MapMatrixMixed$<$ KEY\_TYPE\_ROW, KEY\_TYPE\_COL, VALUE\_TYPE $>$}!OuterMixedIt@{OuterMixedIt}}
@@ -209,7 +216,7 @@ Typedef to keep the code more readable.
 
 
 
-Definition at line \mbox{\hyperlink{map__matrix_8h_source_l00131}{131}} of file \mbox{\hyperlink{map__matrix_8h_source}{map\+\_\+matrix.\+h}}.
+Definition at line 131 of file map\+\_\+matrix.\+h.
 
 
 
@@ -227,7 +234,7 @@ Default (empty) constructor.
 
 
 
-Definition at line \mbox{\hyperlink{map__matrix_8h_source_l00112}{112}} of file \mbox{\hyperlink{map__matrix_8h_source}{map\+\_\+matrix.\+h}}.
+Definition at line 112 of file map\+\_\+matrix.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1MapMatrixMixed_ae510212b296340607ddce4083b3ed36a}\label{classoomph_1_1MapMatrixMixed_ae510212b296340607ddce4083b3ed36a}} 
 \index{oomph::MapMatrixMixed$<$ KEY\_TYPE\_ROW, KEY\_TYPE\_COL, VALUE\_TYPE $>$@{oomph::MapMatrixMixed$<$ KEY\_TYPE\_ROW, KEY\_TYPE\_COL, VALUE\_TYPE $>$}!MapMatrixMixed@{MapMatrixMixed}}
@@ -242,11 +249,11 @@ Copy constructor.
 
 
 
-Definition at line \mbox{\hyperlink{map__matrix_8h_source_l00138}{138}} of file \mbox{\hyperlink{map__matrix_8h_source}{map\+\_\+matrix.\+h}}.
+Definition at line 138 of file map\+\_\+matrix.\+h.
 
 
 
-References \mbox{\hyperlink{map__matrix_8h_source_l00432}{oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::\+Row\+\_\+pt}}.
+References oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::\+Row\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1MapMatrixMixed_a7cf0f3eb68c457db64d4bd8213594618}\label{classoomph_1_1MapMatrixMixed_a7cf0f3eb68c457db64d4bd8213594618}} 
 \index{oomph::MapMatrixMixed$<$ KEY\_TYPE\_ROW, KEY\_TYPE\_COL, VALUE\_TYPE $>$@{oomph::MapMatrixMixed$<$ KEY\_TYPE\_ROW, KEY\_TYPE\_COL, VALUE\_TYPE $>$}!````~MapMatrixMixed@{$\sim$MapMatrixMixed}}
@@ -261,11 +268,11 @@ Destructor.
 
 
 
-Definition at line \mbox{\hyperlink{map__matrix_8h_source_l00194}{194}} of file \mbox{\hyperlink{map__matrix_8h_source}{map\+\_\+matrix.\+h}}.
+Definition at line 194 of file map\+\_\+matrix.\+h.
 
 
 
-References \mbox{\hyperlink{map__matrix_8h_source_l00432}{oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::\+Row\+\_\+pt}}.
+References oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::\+Row\+\_\+pt.
 
 
 
@@ -283,11 +290,11 @@ Wipe all entries.
 
 
 
-Definition at line \mbox{\hyperlink{map__matrix_8h_source_l00209}{209}} of file \mbox{\hyperlink{map__matrix_8h_source}{map\+\_\+matrix.\+h}}.
+Definition at line 209 of file map\+\_\+matrix.\+h.
 
 
 
-References \mbox{\hyperlink{map__matrix_8h_source_l00432}{oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::\+Row\+\_\+pt}}.
+References oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::\+Row\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1MapMatrixMixed_a2cd31cfd9771420625c92fc2a3a53210}\label{classoomph_1_1MapMatrixMixed_a2cd31cfd9771420625c92fc2a3a53210}} 
 \index{oomph::MapMatrixMixed$<$ KEY\_TYPE\_ROW, KEY\_TYPE\_COL, VALUE\_TYPE $>$@{oomph::MapMatrixMixed$<$ KEY\_TYPE\_ROW, KEY\_TYPE\_COL, VALUE\_TYPE $>$}!copy\_column@{copy\_column}}
@@ -302,18 +309,18 @@ Copy a single column into its own map.
 
 
 
-Definition at line \mbox{\hyperlink{map__matrix_8h_source_l00170}{170}} of file \mbox{\hyperlink{map__matrix_8h_source}{map\+\_\+matrix.\+h}}.
+Definition at line 170 of file map\+\_\+matrix.\+h.
 
 
 
-References \mbox{\hyperlink{map__matrix_8h_source_l00432}{oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::\+Row\+\_\+pt}}.
+References oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::\+Row\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1MapMatrixMixed_a1fe030cd6f8c6b1a66ca2289af74b57f}\label{classoomph_1_1MapMatrixMixed_a1fe030cd6f8c6b1a66ca2289af74b57f}} 
+\mbox{\Hypertarget{classoomph_1_1MapMatrixMixed_a964536bfab6dc7426ddcdca07fe25d12}\label{classoomph_1_1MapMatrixMixed_a964536bfab6dc7426ddcdca07fe25d12}} 
 \index{oomph::MapMatrixMixed$<$ KEY\_TYPE\_ROW, KEY\_TYPE\_COL, VALUE\_TYPE $>$@{oomph::MapMatrixMixed$<$ KEY\_TYPE\_ROW, KEY\_TYPE\_COL, VALUE\_TYPE $>$}!entry\_pt@{entry\_pt}}
 \index{entry\_pt@{entry\_pt}!oomph::MapMatrixMixed$<$ KEY\_TYPE\_ROW, KEY\_TYPE\_COL, VALUE\_TYPE $>$@{oomph::MapMatrixMixed$<$ KEY\_TYPE\_ROW, KEY\_TYPE\_COL, VALUE\_TYPE $>$}}
 \doxysubsubsection{\texorpdfstring{entry\_pt()}{entry\_pt()}}
 {\footnotesize\ttfamily template$<$class KEY\+\_\+\+TYPE\+\_\+\+ROW , class KEY\+\_\+\+TYPE\+\_\+\+COL , class VALUE\+\_\+\+TYPE $>$ \\
-VALUE\+\_\+\+TYPE $\ast$ \mbox{\hyperlink{classoomph_1_1MapMatrixMixed}{oomph\+::\+Map\+Matrix\+Mixed}}$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::entry\+\_\+pt (\begin{DoxyParamCaption}\item[{const KEY\+\_\+\+TYPE\+\_\+\+ROW \&}]{i,  }\item[{const KEY\+\_\+\+TYPE\+\_\+\+COL \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+VALUE\+\_\+\+TYPE$\ast$ \mbox{\hyperlink{classoomph_1_1MapMatrixMixed}{oomph\+::\+Map\+Matrix\+Mixed}}$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::entry\+\_\+pt (\begin{DoxyParamCaption}\item[{const KEY\+\_\+\+TYPE\+\_\+\+ROW \&}]{i,  }\item[{const KEY\+\_\+\+TYPE\+\_\+\+COL \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -321,15 +328,15 @@ Return pointer to entry.
 
 
 
-Definition at line \mbox{\hyperlink{map__matrix_8h_source_l00412}{412}} of file \mbox{\hyperlink{map__matrix_8h_source}{map\+\_\+matrix.\+h}}.
+Definition at line 412 of file map\+\_\+matrix.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{map__matrix_8h_source_l00432}{oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::\+Row\+\_\+pt}}.
+References i, and oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::\+Row\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{map__matrix_8h_source_l00227}{oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::operator()()}}.
+Referenced by oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::operator()().
 
 \mbox{\Hypertarget{classoomph_1_1MapMatrixMixed_aee00d676e6d7833a9b2399bf919bb58a}\label{classoomph_1_1MapMatrixMixed_aee00d676e6d7833a9b2399bf919bb58a}} 
 \index{oomph::MapMatrixMixed$<$ KEY\_TYPE\_ROW, KEY\_TYPE\_COL, VALUE\_TYPE $>$@{oomph::MapMatrixMixed$<$ KEY\_TYPE\_ROW, KEY\_TYPE\_COL, VALUE\_TYPE $>$}!get@{get}}
@@ -344,11 +351,11 @@ Get an element corresponding to the key (i,j) Searches the container for an elem
 
 
 
-Definition at line \mbox{\hyperlink{map__matrix_8h_source_l00236}{236}} of file \mbox{\hyperlink{map__matrix_8h_source}{map\+\_\+matrix.\+h}}.
+Definition at line 236 of file map\+\_\+matrix.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{map__matrix_8h_source_l00432}{oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::\+Row\+\_\+pt}}.
+References i, and oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::\+Row\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1MapMatrixMixed_a24bcb7415eaecc66e0649122ba748e5c}\label{classoomph_1_1MapMatrixMixed_a24bcb7415eaecc66e0649122ba748e5c}} 
 \index{oomph::MapMatrixMixed$<$ KEY\_TYPE\_ROW, KEY\_TYPE\_COL, VALUE\_TYPE $>$@{oomph::MapMatrixMixed$<$ KEY\_TYPE\_ROW, KEY\_TYPE\_COL, VALUE\_TYPE $>$}!nnz@{nnz}}
@@ -363,11 +370,11 @@ Work out number of non-\/`zero' entries.
 
 
 
-Definition at line \mbox{\hyperlink{map__matrix_8h_source_l00295}{295}} of file \mbox{\hyperlink{map__matrix_8h_source}{map\+\_\+matrix.\+h}}.
+Definition at line 295 of file map\+\_\+matrix.\+h.
 
 
 
-References \mbox{\hyperlink{map__matrix_8h_source_l00432}{oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::\+Row\+\_\+pt}}.
+References oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::\+Row\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1MapMatrixMixed_a578320f7979e3f69578e8fb8a42c3ee6}\label{classoomph_1_1MapMatrixMixed_a578320f7979e3f69578e8fb8a42c3ee6}} 
 \index{oomph::MapMatrixMixed$<$ KEY\_TYPE\_ROW, KEY\_TYPE\_COL, VALUE\_TYPE $>$@{oomph::MapMatrixMixed$<$ KEY\_TYPE\_ROW, KEY\_TYPE\_COL, VALUE\_TYPE $>$}!nnz@{nnz}}
@@ -382,18 +389,18 @@ Work out number of non-\/`zero' entries, const version.
 
 
 
-Definition at line \mbox{\hyperlink{map__matrix_8h_source_l00325}{325}} of file \mbox{\hyperlink{map__matrix_8h_source}{map\+\_\+matrix.\+h}}.
+Definition at line 325 of file map\+\_\+matrix.\+h.
 
 
 
-References \mbox{\hyperlink{map__matrix_8h_source_l00432}{oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::\+Row\+\_\+pt}}.
+References oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::\+Row\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1MapMatrixMixed_a00484c1f232697e008b77ef57239e137}\label{classoomph_1_1MapMatrixMixed_a00484c1f232697e008b77ef57239e137}} 
+\mbox{\Hypertarget{classoomph_1_1MapMatrixMixed_ad348711a05b2266ccd0fa80b82992610}\label{classoomph_1_1MapMatrixMixed_ad348711a05b2266ccd0fa80b82992610}} 
 \index{oomph::MapMatrixMixed$<$ KEY\_TYPE\_ROW, KEY\_TYPE\_COL, VALUE\_TYPE $>$@{oomph::MapMatrixMixed$<$ KEY\_TYPE\_ROW, KEY\_TYPE\_COL, VALUE\_TYPE $>$}!operator()@{operator()}}
 \index{operator()@{operator()}!oomph::MapMatrixMixed$<$ KEY\_TYPE\_ROW, KEY\_TYPE\_COL, VALUE\_TYPE $>$@{oomph::MapMatrixMixed$<$ KEY\_TYPE\_ROW, KEY\_TYPE\_COL, VALUE\_TYPE $>$}}
 \doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
 {\footnotesize\ttfamily template$<$class KEY\+\_\+\+TYPE\+\_\+\+ROW , class KEY\+\_\+\+TYPE\+\_\+\+COL , class VALUE\+\_\+\+TYPE $>$ \\
-VALUE\+\_\+\+TYPE \& \mbox{\hyperlink{classoomph_1_1MapMatrixMixed}{oomph\+::\+Map\+Matrix\+Mixed}}$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::operator() (\begin{DoxyParamCaption}\item[{const KEY\+\_\+\+TYPE\+\_\+\+ROW \&}]{i,  }\item[{const KEY\+\_\+\+TYPE\+\_\+\+COL \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+VALUE\+\_\+\+TYPE\& \mbox{\hyperlink{classoomph_1_1MapMatrixMixed}{oomph\+::\+Map\+Matrix\+Mixed}}$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::operator() (\begin{DoxyParamCaption}\item[{const KEY\+\_\+\+TYPE\+\_\+\+ROW \&}]{i,  }\item[{const KEY\+\_\+\+TYPE\+\_\+\+COL \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -401,11 +408,11 @@ Return (reference to) entry. Careful\+: If the entry does not exist then it is c
 
 
 
-Definition at line \mbox{\hyperlink{map__matrix_8h_source_l00227}{227}} of file \mbox{\hyperlink{map__matrix_8h_source}{map\+\_\+matrix.\+h}}.
+Definition at line 227 of file map\+\_\+matrix.\+h.
 
 
 
-References \mbox{\hyperlink{map__matrix_8h_source_l00412}{oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::entry\+\_\+pt()}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::entry\+\_\+pt(), and i.
 
 \mbox{\Hypertarget{classoomph_1_1MapMatrixMixed_a0a7dca8c9abdbf2933f31e95f588faf6}\label{classoomph_1_1MapMatrixMixed_a0a7dca8c9abdbf2933f31e95f588faf6}} 
 \index{oomph::MapMatrixMixed$<$ KEY\_TYPE\_ROW, KEY\_TYPE\_COL, VALUE\_TYPE $>$@{oomph::MapMatrixMixed$<$ KEY\_TYPE\_ROW, KEY\_TYPE\_COL, VALUE\_TYPE $>$}!operator=@{operator=}}
@@ -431,11 +438,11 @@ Dump all non-\/`zero' entries to file. Output is in the format `i', `j', `entry\
 
 
 
-Definition at line \mbox{\hyperlink{map__matrix_8h_source_l00262}{262}} of file \mbox{\hyperlink{map__matrix_8h_source}{map\+\_\+matrix.\+h}}.
+Definition at line 262 of file map\+\_\+matrix.\+h.
 
 
 
-References \mbox{\hyperlink{map__matrix_8h_source_l00432}{oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::\+Row\+\_\+pt}}.
+References oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::\+Row\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1MapMatrixMixed_af26d8be251e0d02354d242f84622c1ff}\label{classoomph_1_1MapMatrixMixed_af26d8be251e0d02354d242f84622c1ff}} 
 \index{oomph::MapMatrixMixed$<$ KEY\_TYPE\_ROW, KEY\_TYPE\_COL, VALUE\_TYPE $>$@{oomph::MapMatrixMixed$<$ KEY\_TYPE\_ROW, KEY\_TYPE\_COL, VALUE\_TYPE $>$}!size@{size}}
@@ -450,11 +457,11 @@ Work out total number of entries.
 
 
 
-Definition at line \mbox{\hyperlink{map__matrix_8h_source_l00357}{357}} of file \mbox{\hyperlink{map__matrix_8h_source}{map\+\_\+matrix.\+h}}.
+Definition at line 357 of file map\+\_\+matrix.\+h.
 
 
 
-References \mbox{\hyperlink{map__matrix_8h_source_l00432}{oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::\+Row\+\_\+pt}}.
+References oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::\+Row\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1MapMatrixMixed_ae3f2f66dd90a57957c732a9ef1dd5197}\label{classoomph_1_1MapMatrixMixed_ae3f2f66dd90a57957c732a9ef1dd5197}} 
 \index{oomph::MapMatrixMixed$<$ KEY\_TYPE\_ROW, KEY\_TYPE\_COL, VALUE\_TYPE $>$@{oomph::MapMatrixMixed$<$ KEY\_TYPE\_ROW, KEY\_TYPE\_COL, VALUE\_TYPE $>$}!size@{size}}
@@ -469,11 +476,11 @@ Work out total number of entries const version.
 
 
 
-Definition at line \mbox{\hyperlink{map__matrix_8h_source_l00383}{383}} of file \mbox{\hyperlink{map__matrix_8h_source}{map\+\_\+matrix.\+h}}.
+Definition at line 383 of file map\+\_\+matrix.\+h.
 
 
 
-References \mbox{\hyperlink{map__matrix_8h_source_l00432}{oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::\+Row\+\_\+pt}}.
+References oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::\+Row\+\_\+pt.
 
 
 
@@ -491,11 +498,11 @@ Here\textquotesingle{}s the generalised matrix structure\+: A map of pointers to
 
 
 
-Definition at line \mbox{\hyperlink{map__matrix_8h_source_l00432}{432}} of file \mbox{\hyperlink{map__matrix_8h_source}{map\+\_\+matrix.\+h}}.
+Definition at line 432 of file map\+\_\+matrix.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{map__matrix_8h_source_l00209}{oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::clear()}}, \mbox{\hyperlink{map__matrix_8h_source_l00170}{oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::copy\+\_\+column()}}, \mbox{\hyperlink{map__matrix_8h_source_l00412}{oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::entry\+\_\+pt()}}, \mbox{\hyperlink{map__matrix_8h_source_l00236}{oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::get()}}, \mbox{\hyperlink{map__matrix_8h_source_l00532}{oomph\+::\+Map\+Matrix$<$ KEY\+\_\+\+TYPE, VALUE\+\_\+\+TYPE $>$\+::\+Map\+Matrix()}}, \mbox{\hyperlink{map__matrix_8h_source_l00138}{oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::\+Map\+Matrix\+Mixed()}}, \mbox{\hyperlink{map__matrix_8h_source_l00295}{oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::nnz()}}, \mbox{\hyperlink{map__matrix_8h_source_l00262}{oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::output()}}, \mbox{\hyperlink{map__matrix_8h_source_l00357}{oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::size()}}, and \mbox{\hyperlink{map__matrix_8h_source_l00194}{oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::$\sim$\+Map\+Matrix\+Mixed()}}.
+Referenced by oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::clear(), oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::copy\+\_\+column(), oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::entry\+\_\+pt(), oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::get(), oomph\+::\+Map\+Matrix$<$ KEY\+\_\+\+TYPE, VALUE\+\_\+\+TYPE $>$\+::\+Map\+Matrix(), oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::\+Map\+Matrix\+Mixed(), oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::nnz(), oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::output(), oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::size(), and oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE\+\_\+\+ROW, KEY\+\_\+\+TYPE\+\_\+\+COL, VALUE\+\_\+\+TYPE $>$\+::$\sim$\+Map\+Matrix\+Mixed().
 
 
 

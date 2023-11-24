@@ -46,6 +46,9 @@ You may also wish to consult the following documents\+:
 \item \href{\#beam}{\texttt{ Beam structures}}
 \item \href{\#shell}{\texttt{ Shell structures}}
 \end{DoxyItemize}
+\end{DoxyItemize}
+\end{DoxyEnumerate}
+\begin{DoxyItemize}
 \item Multi-\/physics problems\+:
 \begin{DoxyItemize}
 \item \href{\#fsi}{\texttt{ Large-\/displacement fluid-\/structure interaction problems}}
@@ -53,26 +56,39 @@ You may also wish to consult the following documents\+:
 \item \href{\#fd_acoustic_fsi}{\texttt{ Azimuthally Fourier-\/decomposed 3D acoustic fluid-\/structure interaction problems}}
 \item \href{\#multi}{\texttt{ Multi-\/physics problems}}
 \end{DoxyItemize}
+\end{DoxyItemize}
+
+
+\begin{DoxyItemize}
 \item Eigenproblems\+:
 \begin{DoxyItemize}
 \item \href{\#eigen}{\texttt{ How to formulate and solve an eigenproblem}}
 \end{DoxyItemize}
 \end{DoxyItemize}
+
+
+\begin{DoxyEnumerate}
 \item \href{\#meshes}{\texttt{ Mesh generation}}
 \begin{DoxyItemize}
 \item \href{\#available_meshes}{\texttt{ Structured meshes}}
 \item \href{\#third_party_meshes}{\texttt{ Unstructured meshes generated via input from third-\/party mesh generators}}
 \end{DoxyItemize}
+\end{DoxyEnumerate}
+\begin{DoxyEnumerate}
 \item \href{\#solvers}{\texttt{ Linear solvers and preconditioners}}
 \begin{DoxyItemize}
 \item \href{\#linear_solvers}{\texttt{ Direct and iterative linear solvers and general-\/purpose preconditioners}}
 \item \href{\#lin_alg}{\texttt{ (Distributed) linear algebra}}
 \item \href{\#specific_preconditioners}{\texttt{ Problem-\/specific preconditioners}}
 \end{DoxyItemize}
+\end{DoxyEnumerate}
+\begin{DoxyEnumerate}
 \item \href{\#visualisation}{\texttt{ Visualisation}}
 \begin{DoxyItemize}
 \item \href{\#paraview}{\texttt{ Visualising oomph-\/lib\textquotesingle{}s output files with Paraview}}
 \end{DoxyItemize}
+\end{DoxyEnumerate}
+\begin{DoxyEnumerate}
 \item \href{\#parallel}{\texttt{ Parallel driver codes}}
 \begin{DoxyItemize}
 \item \href{\#distributed}{\texttt{ Distributed problems}}
@@ -676,6 +692,8 @@ A classical fluid mechanics problem\+: Spin-\/up of a viscous fluid. A key featu
 \item Free Surface and Interface Boundary Conditions
 \item Surface Transport Equations
 \end{DoxyItemize}
+\end{DoxyItemize}
+\begin{DoxyItemize}
 \item Implementation
 \begin{DoxyItemize}
 \item The Fluid\+Interface\+Element class
@@ -762,6 +780,8 @@ Uses a pseudo-\/elastic remesh strategy and unstructured spatial adaptivity in a
 \item Redistributing segments between polylines in cases when the nodes on the free surface all get convected into one region.
 \item Why you shouldn\textquotesingle{}t use {\ttfamily Triangle\+Mesh\+Curvi\+Lines} to describe the initial shape of (initially curvilinear) free boundaries.
 \end{DoxyItemize}
+\end{DoxyItemize}
+\begin{DoxyItemize}
 \item How to impose a volume constraint onto an enclosed \char`\"{}bubble\char`\"{} in a viscous fluid.
 \end{DoxyItemize}
 
@@ -826,6 +846,8 @@ In this document we discuss the theoretical background and the practical impleme
 \item Isotropic growth.
 \item Specialisation to a cartesian basis and finite element discretisation
 \end{DoxyItemize}
+\end{DoxyItemize}
+\begin{DoxyItemize}
 \item Implementation\+:
 \begin{DoxyItemize}
 \item The {\ttfamily Solid\+Node} class
@@ -833,6 +855,8 @@ In this document we discuss the theoretical background and the practical impleme
 \item The {\ttfamily Solid\+Mesh} class
 \item The {\ttfamily Solid\+Traction\+Element} class
 \end{DoxyItemize}
+\end{DoxyItemize}
+\begin{DoxyItemize}
 \item Timestepping and the generation of initial conditions for solid mechanics problems
 \end{DoxyItemize}
 
@@ -1439,8 +1463,7 @@ We demonstrate an alternative approach to the solution of multi-\/field problems
 
 \\\cline{1-2}
 \label{_thermo}%
- \href{../../multi_physics/thermo/html/index.html}{\texttt{ {\bfseries{ Thermoelasticity\+: How to combine single-\/physics elements with solid ~\newline
- mechanics elements.}} }}
+ \href{../../multi_physics/thermo/html/index.html}{\texttt{ {\bfseries{ Thermoelasticity\+: How to combine single-\/physics elements with solid  mechanics elements.}} }}
 
 We demonstrate how to \char`\"{}combine\char`\"{} a {\ttfamily QUnsteady\+Heat\+Element} and {\ttfamily QPVDElement} into a single {\ttfamily QThermal\+PVDElement} that solves the equations governing elastic deformations coupled to uniform thermal expansion. The geometric coupling back to the heat equation is completely hidden.  &
 \begin{DoxyItemize}

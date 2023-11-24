@@ -74,7 +74,7 @@ This procedure is the obvious generalisation of the procedure for steady problem
 \begin{DoxyEnumerate}
 \item In a steady problem the interpolation of the solution onto the adapted mesh (step 4 in the above sketch) merely serves to provide an initial guess for the solution on the refined mesh. It is irrelevant if the interpolation from the coarse mesh provides a poor approximation of the actual solution as the solution is completely recomputed anyway. ~\newline
 ~\newline
- In an unsteady problem, we also have to interpolate the history values (the solution at previous timesteps in a BDF scheme) onto the adapted mesh. Their values are {\itshape not} changed when the solution is advanced from time $ t $ to $ t+ dt. $ In time-\/dependent problems, the benefit of repeated mesh adaptations (i.\+e. {\ttfamily max\+\_\+adapt} \texorpdfstring{$>$}{>} 1) is therefore limited by the fact that mesh refinement cannot improve their accuracy -- the history values are always given by the (possibly poor) approximations obtained by interpolation from the coarser mesh employed at the previous timestep. We therefore recommend limiting the number of spatial adaptations to {\ttfamily max\+\_\+adapt} = 1. We stress that, in practice, this is not a serious restriction because the time-\/integration procedure will only provide (temporally) accurate results if the timestep {\ttfamily dt} is so small that the solution at time $ t $ only differs slightly from that at time $ t + dt $ . One level of mesh adaptation per timestep should therefore be sufficient to adapt the mesh in response to these changes.
+ In an unsteady problem, we also have to interpolate the history values (the solution at previous timesteps in a BDF scheme) onto the adapted mesh. Their values are {\itshape not} changed when the solution is advanced from time $ t $ to $ t+ dt. $ In time-\/dependent problems, the benefit of repeated mesh adaptations (i.\+e. {\ttfamily max\+\_\+adapt} $>$ 1) is therefore limited by the fact that mesh refinement cannot improve their accuracy -- the history values are always given by the (possibly poor) approximations obtained by interpolation from the coarser mesh employed at the previous timestep. We therefore recommend limiting the number of spatial adaptations to {\ttfamily max\+\_\+adapt} = 1. We stress that, in practice, this is not a serious restriction because the time-\/integration procedure will only provide (temporally) accurate results if the timestep {\ttfamily dt} is so small that the solution at time $ t $ only differs slightly from that at time $ t + dt $ . One level of mesh adaptation per timestep should therefore be sufficient to adapt the mesh in response to these changes.
 \item The only exception to this recommendation arises during the computation of the first timestep, illustrated in the following sketch\+:  
 \begin{DoxyImage}
 \includegraphics[width=0.75\textwidth]{adapted_ic1}
@@ -117,9 +117,9 @@ As discussed \href{../../../poisson/fish_poisson2/html/index.html}{\texttt{ else
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_MyUnitCircle====================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Unit circle as GeomObject}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)f[ x = \(\backslash\)cos(\(\backslash\)xi)  \(\backslash\)f]}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)f[ y = \(\backslash\)sin(\(\backslash\)xi)  \(\backslash\)f]}}
+\DoxyCodeLine{\textcolor{comment}{/// Unit circle as GeomObject}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)f[ x = \(\backslash\)cos(\(\backslash\)xi)  \(\backslash\)f]}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)f[ y = \(\backslash\)sin(\(\backslash\)xi)  \(\backslash\)f]}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classMyUnitCircle}{MyUnitCircle}} : \textcolor{keyword}{public} GeomObject}
 \DoxyCodeLine{\{}
@@ -168,9 +168,9 @@ As before, we use command line arguments to (optionally) specify a restart file.
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//======start\_of\_main=====================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Demonstrate how to solve an unsteady heat problem}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// with mesh adaptation. Command line arguments specify }}
-\DoxyCodeLine{\textcolor{comment}{/// the name of the restart file. }}
+\DoxyCodeLine{\textcolor{comment}{/// Demonstrate how to solve an unsteady heat problem}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// with mesh adaptation. Command line arguments specify }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// the name of the restart file. }}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
@@ -272,7 +272,7 @@ As discussed above, the problem class mainly contains verbatim copies of the mem
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====start\_of\_problem\_class=========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Unsteady heat problem in quarter circle domain.}}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classRefineableUnsteadyHeatProblem}{RefineableUnsteadyHeatProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -315,7 +315,7 @@ As discussed above, the problem class mainly contains verbatim copies of the mem
 \DoxyCodeLine{\textcolor{comment}{ /// Create UnsteadyHeat flux elements on boundary b of the Mesh pointed}}
 \DoxyCodeLine{\textcolor{comment}{ /// to by bulk\_mesh\_pt and add them to the Mesh object pointed to by }}
 \DoxyCodeLine{\textcolor{comment}{ /// surface\_mesh\_pt}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a65601ec64c73ac578b43f4af04c46569}{create\_flux\_elements}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&b, Mesh* \textcolor{keyword}{const} \&\mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a49ee185e10fdab1851a67150cbb0710a}{bulk\_mesh\_pt}},}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a65601ec64c73ac578b43f4af04c46569}{create\_flux\_elements}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&b, Mesh* \textcolor{keyword}{const} \&\mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a4d8eec1505a3c53960a3182ec462b4e7}{bulk\_mesh\_pt}},}
 \DoxyCodeLine{                           Mesh* \textcolor{keyword}{const} \&surface\_mesh\_pt);}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Delete UnsteadyHeat flux elements and wipe the surface mesh}}
@@ -331,7 +331,7 @@ As discussed above, the problem class mainly contains verbatim copies of the mem
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_af36fa71e72852367411e21b50b179625}{restart}}(ifstream\& restart\_file);}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to bulk mesh}}
-\DoxyCodeLine{\textcolor{comment}{} RefineableQuarterCircleSectorMesh<ELEMENT>* \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a49ee185e10fdab1851a67150cbb0710a}{bulk\_mesh\_pt}}()}
+\DoxyCodeLine{\textcolor{comment}{} RefineableQuarterCircleSectorMesh<ELEMENT>* \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a4d8eec1505a3c53960a3182ec462b4e7}{bulk\_mesh\_pt}}()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{keywordflow}{return} \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_afade341e03a4c97e62444c80adc9552f}{Bulk\_mesh\_pt}};}
 \DoxyCodeLine{  \}}
@@ -373,8 +373,8 @@ The problem constructor combines the constructors of the \href{../../../poisson/
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//========start\_of\_constructor============================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Constructor for UnsteadyHeat problem in quarter circle domain.}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// Pass pointer to source function.}}
+\DoxyCodeLine{\textcolor{comment}{/// Constructor for UnsteadyHeat problem in quarter circle domain.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// Pass pointer to source function.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a894f3bd6c1c23c307a736de6898e4e98}{RefineableUnsteadyHeatProblem<ELEMENT>::RefineableUnsteadyHeatProblem}}(}
@@ -577,7 +577,7 @@ It is worth examining the dump and restart functions, however, as they demonstra
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_dump\_it=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Dump the solution to disk}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a1fb939c3f9c258fd49328bb1516ced98}{RefineableUnsteadyHeatProblem<ELEMENT>::dump\_it}}(ofstream\& dump\_file)}
 \DoxyCodeLine{\{}

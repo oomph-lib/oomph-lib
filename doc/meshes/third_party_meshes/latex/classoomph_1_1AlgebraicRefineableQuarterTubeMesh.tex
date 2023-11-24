@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1AlgebraicRefineableQuarterTubeMesh}{}\doxysection{oomph\+::Algebraic\+Refineable\+Quarter\+Tube\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1AlgebraicRefineableQuarterTubeMesh}{}\doxysection{oomph\+::Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$ Class Template Reference}
 \label{classoomph_1_1AlgebraicRefineableQuarterTubeMesh}\index{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}}
 
 
@@ -9,7 +9,7 @@ Algebraic\+Mesh version of \mbox{\hyperlink{classoomph_1_1RefineableQuarterTubeM
 
 {\ttfamily \#include $<$quarter\+\_\+tube\+\_\+mesh.\+template.\+h$>$}
 
-Inheritance diagram for oomph\+::Algebraic\+Refineable\+Quarter\+Tube\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.056933cm]{classoomph_1_1AlgebraicRefineableQuarterTubeMesh}
@@ -18,16 +18,16 @@ Inheritance diagram for oomph\+::Algebraic\+Refineable\+Quarter\+Tube\+Mesh\texo
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_ad8ff9f32d4d180d815da65ddc3c4b90a}{Algebraic\+Refineable\+Quarter\+Tube\+Mesh}} (Geom\+Object $\ast$\mbox{\hyperlink{classoomph_1_1QuarterTubeMesh_a1a8c0a74513d5d2a4f0772ac39b2d024}{wall\+\_\+pt}}, const Vector$<$ double $>$ \&xi\+\_\+lo, const double \&fract\+\_\+mid, const Vector$<$ double $>$ \&xi\+\_\+hi, const unsigned \&nlayer, const double centre\+\_\+box\+\_\+size=1.\+0, Time\+Stepper $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_ad8ff9f32d4d180d815da65ddc3c4b90a}{Algebraic\+Refineable\+Quarter\+Tube\+Mesh}} (Geom\+Object $\ast$\mbox{\hyperlink{classoomph_1_1QuarterTubeMesh_af59c4cde343ddd76caea4bc8c8ad8b94}{wall\+\_\+pt}}, const Vector$<$ double $>$ \&xi\+\_\+lo, const double \&fract\+\_\+mid, const Vector$<$ double $>$ \&xi\+\_\+hi, const unsigned \&nlayer, const double centre\+\_\+box\+\_\+size=1.\+0, Time\+Stepper $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
 \begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to geometric object, start and end coordinates of the geometric object and the fraction along the 2nd Lagrangian coordinate at which the dividing line between region 1 and region 2 is to be placed, and timestepper (defaults to (Steady) default timestepper defined in Mesh). Sets up the refineable mesh (by calling the constructor for the underlying \mbox{\hyperlink{classoomph_1_1RefineableQuarterTubeMesh}{Refineable\+Quarter\+Tube\+Mesh}}). \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a1ad71be8274f4073b7e18cb53d574f10}{self\+\_\+test}} ()
 \begin{DoxyCompactList}\small\item\em Run self-\/test for algebraic mesh -- return 0/1 for OK/failure. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1QuarterTubeDomain_ae347af42a5dcb9b3b82c2247975b01db}{Quarter\+Tube\+Domain\+::\+Axial\+Spacing\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a66b6f6855d25e272a2730f28d2108a40}{axial\+\_\+spacing\+\_\+fct\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1QuarterTubeDomain_ae347af42a5dcb9b3b82c2247975b01db}{Quarter\+Tube\+Domain\+::\+Axial\+Spacing\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_ac6518f83dd81c5ef1a8d908be8c9f473}{axial\+\_\+spacing\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Broken version of the \mbox{\hyperlink{classoomph_1_1QuarterTubeDomain}{Quarter\+Tube\+Domain}} function Function is broken because axial spacing isn\textquotesingle{}t implemented yet for the Algebraic version of the \mbox{\hyperlink{classoomph_1_1RefineableQuarterTubeMesh}{Refineable\+Quarter\+Tube\+Mesh}}. Note\+: this function must be used BEFORE algebraic\+\_\+node\+\_\+update(...) is called. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_af521c0a76cf0bd14692979bd7747507d}{node\+\_\+update}} (const bool \&update\+\_\+all\+\_\+solid\+\_\+nodes=false)
 \begin{DoxyCompactList}\small\item\em Resolve mesh update\+: Update current nodal positions via algebraic node update. \mbox{[}Doesn\textquotesingle{}t make sense to use this mesh with Solid\+Elements anyway, so we buffer the case if update\+\_\+all\+\_\+solid\+\_\+nodes is set to true.\mbox{]}. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_af98a0aaff29c54ffa35f72f7dcf6b8c7}{algebraic\+\_\+node\+\_\+update}} (const unsigned \&t, Algebraic\+Node $\ast$\&node\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em Implement the algebraic node update function for a node at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous)\+: Update with the node\textquotesingle{}s first (default) update function. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Implement the algebraic node update function for a node at time level t (t=0\+: present; t$>$0\+: previous)\+: Update with the node\textquotesingle{}s first (default) update function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a7ed9f4ce0442a6f962a1561318542a67}{update\+\_\+node\+\_\+update}} (Algebraic\+Node $\ast$\&node\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Update the node update info for specified algebraic node following any spatial mesh adaptation. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Types}
@@ -66,6 +66,7 @@ double \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a8e3b05
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class ELEMENT$>$\newline
 class oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$}
+
 Algebraic\+Mesh version of \mbox{\hyperlink{classoomph_1_1RefineableQuarterTubeMesh}{Refineable\+Quarter\+Tube\+Mesh}}. 
 
 Algebraic 3D quarter tube mesh class.
@@ -101,7 +102,7 @@ Cross section through mesh looking along tube......... \begin{DoxyVerb}         
 
 Elements need to be derived from Algebraic\+Element\+Base. In addition to the refinement procedures available for the \mbox{\hyperlink{classoomph_1_1RefineableQuarterTubeMesh}{Refineable\+Quarter\+Tube\+Mesh}} which forms the basis for this mesh, three algebraic node update functions are implemented for the nodes in the three regions defined by the Domain Macro\+Elements. Note\+: it is assumed the cross section down the tube is uniform when \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a2d0312615834a2aec8d0d6d4e2c846ef}{setup\+\_\+algebraic\+\_\+node\+\_\+update()}} is called. 
 
-Definition at line \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00436}{436}} of file \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source}{quarter\+\_\+tube\+\_\+mesh.\+template.\+h}}.
+Definition at line 436 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
 
 
 
@@ -131,7 +132,7 @@ Upper\+\_\+left\+\_\+region&\\
 \end{DoxyEnumFields}
 
 
-Definition at line \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00614}{614}} of file \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source}{quarter\+\_\+tube\+\_\+mesh.\+template.\+h}}.
+Definition at line 614 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
 
 
 
@@ -149,11 +150,11 @@ Constructor\+: Pass pointer to geometric object, start and end coordinates of th
 
 
 
-Definition at line \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00448}{448}} of file \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source}{quarter\+\_\+tube\+\_\+mesh.\+template.\+h}}.
+Definition at line 448 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
 
 
 
-References \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00525}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update()}}, \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l00660}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update()}}, and \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00086}{oomph\+::\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::wall\+\_\+pt()}}.
+References oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update(), and oomph\+::\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::wall\+\_\+pt().
 
 
 
@@ -167,22 +168,22 @@ void \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh}{oomph\+:
 
 
 
-Implement the algebraic node update function for a node at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous)\+: Update with the node\textquotesingle{}s first (default) update function. 
+Implement the algebraic node update function for a node at time level t (t=0\+: present; t$>$0\+: previous)\+: Update with the node\textquotesingle{}s first (default) update function. 
 
 
 
-Definition at line \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00551}{551}} of file \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source}{quarter\+\_\+tube\+\_\+mesh.\+template.\+h}}.
+Definition at line 551 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
 
 
 
-References \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00616}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Central\+\_\+region}}, \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00617}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Lower\+\_\+right\+\_\+region}}, \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l00961}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+central\+\_\+region()}}, \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l01051}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+lower\+\_\+right\+\_\+region()}}, \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l01168}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+upper\+\_\+left\+\_\+region()}}, and \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00618}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Upper\+\_\+left\+\_\+region}}.
+References oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Central\+\_\+region, oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Lower\+\_\+right\+\_\+region, oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+central\+\_\+region(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+lower\+\_\+right\+\_\+region(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+upper\+\_\+left\+\_\+region(), and oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Upper\+\_\+left\+\_\+region.
 
-\mbox{\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a66b6f6855d25e272a2730f28d2108a40}\label{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a66b6f6855d25e272a2730f28d2108a40}} 
+\mbox{\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_ac6518f83dd81c5ef1a8d908be8c9f473}\label{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_ac6518f83dd81c5ef1a8d908be8c9f473}} 
 \index{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}!axial\_spacing\_fct\_pt@{axial\_spacing\_fct\_pt}}
 \index{axial\_spacing\_fct\_pt@{axial\_spacing\_fct\_pt}!oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{axial\_spacing\_fct\_pt()}{axial\_spacing\_fct\_pt()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1QuarterTubeDomain_ae347af42a5dcb9b3b82c2247975b01db}{Quarter\+Tube\+Domain\+::\+Axial\+Spacing\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh}}$<$ ELEMENT $>$\+::axial\+\_\+spacing\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1QuarterTubeDomain_ae347af42a5dcb9b3b82c2247975b01db}{Quarter\+Tube\+Domain\+::\+Axial\+Spacing\+Fct\+Pt}}\& \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh}}$<$ ELEMENT $>$\+::axial\+\_\+spacing\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -190,15 +191,15 @@ Broken version of the \mbox{\hyperlink{classoomph_1_1QuarterTubeDomain}{Quarter\
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh_ab4c35233e74407691a0d22549034ecb9}{oomph\+::\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh_a5c880d6214a07676a533227f813634d8}{oomph\+::\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00505}{505}} of file \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source}{quarter\+\_\+tube\+\_\+mesh.\+template.\+h}}.
+Definition at line 505 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
 
 
 
-References \mbox{\hyperlink{quarter__tube__domain_8h_source_l00116}{oomph\+::\+Quarter\+Tube\+Domain\+::axial\+\_\+spacing\+\_\+fct\+\_\+pt()}}, and \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00121}{oomph\+::\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Domain\+\_\+pt}}.
+References oomph\+::\+Quarter\+Tube\+Domain\+::axial\+\_\+spacing\+\_\+fct\+\_\+pt(), and oomph\+::\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Domain\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_af521c0a76cf0bd14692979bd7747507d}\label{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_af521c0a76cf0bd14692979bd7747507d}} 
 \index{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}!node\_update@{node\_update}}
@@ -213,11 +214,11 @@ Resolve mesh update\+: Update current nodal positions via algebraic node update.
 
 
 
-Definition at line \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00525}{525}} of file \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source}{quarter\+\_\+tube\+\_\+mesh.\+template.\+h}}.
+Definition at line 525 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00448}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh()}}.
+Referenced by oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh().
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a064653020f5d2a0c7de789283dac305c}\label{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a064653020f5d2a0c7de789283dac305c}} 
 \index{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}!node\_update\_central\_region@{node\_update\_central\_region}}
@@ -230,13 +231,13 @@ void \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh}{oomph\+:
 
 Algebraic update function for a node that is located in the central region. 
 
-Algebraic update function\+: Update in central region according to wall shape at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous) 
+Algebraic update function\+: Update in central region according to wall shape at time level t (t=0\+: present; t$>$0\+: previous) 
 
-Definition at line \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l00961}{961}} of file \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source}{quarter\+\_\+tube\+\_\+mesh.\+template.\+cc}}.
+Definition at line 961 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00551}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::algebraic\+\_\+node\+\_\+update()}}.
+Referenced by oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::algebraic\+\_\+node\+\_\+update().
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a52fb1161ebff25b5c638ac35cb541817}\label{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a52fb1161ebff25b5c638ac35cb541817}} 
 \index{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}!node\_update\_lower\_right\_region@{node\_update\_lower\_right\_region}}
@@ -249,13 +250,13 @@ void \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh}{oomph\+:
 
 Algebraic update function for a node that is located in the lower-\/right region. 
 
-Algebraic update function\+: Update in lower-\/right region according to wall shape at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous) 
+Algebraic update function\+: Update in lower-\/right region according to wall shape at time level t (t=0\+: present; t$>$0\+: previous) 
 
-Definition at line \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l01051}{1051}} of file \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source}{quarter\+\_\+tube\+\_\+mesh.\+template.\+cc}}.
+Definition at line 1051 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00551}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::algebraic\+\_\+node\+\_\+update()}}.
+Referenced by oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::algebraic\+\_\+node\+\_\+update().
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_ac82a39ccaed8016a9b1e841d91658a75}\label{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_ac82a39ccaed8016a9b1e841d91658a75}} 
 \index{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}!node\_update\_upper\_left\_region@{node\_update\_upper\_left\_region}}
@@ -268,13 +269,13 @@ void \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh}{oomph\+:
 
 Algebraic update function for a node that is located in the upper-\/left region. 
 
-Algebraic update function\+: Update in upper left region according to wall shape at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous) 
+Algebraic update function\+: Update in upper left region according to wall shape at time level t (t=0\+: present; t$>$0\+: previous) 
 
-Definition at line \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l01168}{1168}} of file \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source}{quarter\+\_\+tube\+\_\+mesh.\+template.\+cc}}.
+Definition at line 1168 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00551}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::algebraic\+\_\+node\+\_\+update()}}.
+Referenced by oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::algebraic\+\_\+node\+\_\+update().
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a1ad71be8274f4073b7e18cb53d574f10}\label{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a1ad71be8274f4073b7e18cb53d574f10}} 
 \index{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}!self\_test@{self\_test}}
@@ -289,7 +290,7 @@ Run self-\/test for algebraic mesh -- return 0/1 for OK/failure.
 
 
 
-Definition at line \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00495}{495}} of file \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source}{quarter\+\_\+tube\+\_\+mesh.\+template.\+h}}.
+Definition at line 495 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a2d0312615834a2aec8d0d6d4e2c846ef}\label{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a2d0312615834a2aec8d0d6d4e2c846ef}} 
 \index{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}!setup\_algebraic\_node\_update@{setup\_algebraic\_node\_update}}
@@ -311,11 +312,11 @@ Setup algebraic update operation for all nodes.
 \item Nodes in the two outer regions (bottom right and top left) are located on straight lines running from the edges of the central region to the outer wall. 
 \end{DoxyItemize}Pointer to first algebraic element in central region
 
-Definition at line \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l00660}{660}} of file \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source}{quarter\+\_\+tube\+\_\+mesh.\+template.\+cc}}.
+Definition at line 660 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00448}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh()}}.
+Referenced by oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh().
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a7ed9f4ce0442a6f962a1561318542a67}\label{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a7ed9f4ce0442a6f962a1561318542a67}} 
 \index{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}!update\_node\_update@{update\_node\_update}}
@@ -330,11 +331,11 @@ Update the node update info for specified algebraic node following any spatial m
 
 
 
-Definition at line \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00595}{595}} of file \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source}{quarter\+\_\+tube\+\_\+mesh.\+template.\+h}}.
+Definition at line 595 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
 
 
 
-References \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l01288}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::update\+\_\+node\+\_\+update\+\_\+in\+\_\+region()}}.
+References oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::update\+\_\+node\+\_\+update\+\_\+in\+\_\+region().
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_ae2014e91ad7f5a226b35aa96964f4bf1}\label{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_ae2014e91ad7f5a226b35aa96964f4bf1}} 
 \index{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}!update\_node\_update\_in\_region@{update\_node\_update\_in\_region}}
@@ -349,11 +350,11 @@ Update algebraic node update function for nodes in the region defined by region\
 
 Update algebraic update function for nodes in region defined by region\+\_\+id. 
 
-Definition at line \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l01288}{1288}} of file \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source}{quarter\+\_\+tube\+\_\+mesh.\+template.\+cc}}.
+Definition at line 1288 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00595}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::update\+\_\+node\+\_\+update()}}.
+Referenced by oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::update\+\_\+node\+\_\+update().
 
 
 
@@ -371,7 +372,7 @@ Size of centre box.
 
 
 
-Definition at line \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00611}{611}} of file \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source}{quarter\+\_\+tube\+\_\+mesh.\+template.\+h}}.
+Definition at line 611 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a5bb15683ec46078f9e3ab6d9caba54cf}\label{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a5bb15683ec46078f9e3ab6d9caba54cf}} 
 \index{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}!Lambda\_x@{Lambda\_x}}
@@ -386,7 +387,7 @@ Fractional width of central region.
 
 
 
-Definition at line \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00622}{622}} of file \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source}{quarter\+\_\+tube\+\_\+mesh.\+template.\+h}}.
+Definition at line 622 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a8e3b05ebb0b69e3ca3cbedb39b5b8e47}\label{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a8e3b05ebb0b69e3ca3cbedb39b5b8e47}} 
 \index{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}!Lambda\_y@{Lambda\_y}}
@@ -401,7 +402,7 @@ Fractional height of central region.
 
 
 
-Definition at line \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00625}{625}} of file \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source}{quarter\+\_\+tube\+\_\+mesh.\+template.\+h}}.
+Definition at line 625 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
 
 
 

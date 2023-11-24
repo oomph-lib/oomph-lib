@@ -97,7 +97,7 @@ The Reynolds number and the Womersley number (the product of the Reynolds and St
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_namespace====================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for physical parameters}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -119,7 +119,7 @@ We start by specifying the (non-\/dimensional) length of time we want to run the
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_main=========================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver code for axisymmetric spin-\/up problem}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{spin__up_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ \textcolor{comment}{// Store command line arguments}}
@@ -200,8 +200,8 @@ The {\ttfamily Problem} class for our unsteady axisymmetric Navier--Stokes probl
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_problem\_class================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Refineable rotating cylinder problem in a rectangular}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// axisymmetric domain}}
+\DoxyCodeLine{\textcolor{comment}{/// Refineable rotating cylinder problem in a rectangular}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// axisymmetric domain}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classRotatingCylinderProblem}{RotatingCylinderProblem}} : \textcolor{keyword}{public} Problem}
@@ -235,7 +235,7 @@ The {\ttfamily Problem} class for our unsteady axisymmetric Navier--Stokes probl
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Access function for the specific mesh}}
+\DoxyCodeLine{ \textcolor{comment}{/// Access function for the specific mesh}}
 \DoxyCodeLine{ RefineableRectangularQuadMesh<ELEMENT>* mesh\_pt() }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{keywordflow}{return} \textcolor{keyword}{dynamic\_cast<}RefineableRectangularQuadMesh<ELEMENT>*\textcolor{keyword}{>}}
@@ -261,9 +261,9 @@ The {\ttfamily Problem} class for our unsteady axisymmetric Navier--Stokes probl
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// After adaptation: Pin pressure again (the previously pinned}}
+\DoxyCodeLine{ \textcolor{comment}{/// After adaptation: Pin pressure again (the previously pinned}}
 \DoxyCodeLine{\textcolor{comment}{ /// value might have disappeared) and pin redudant pressure dofs}}
-\DoxyCodeLine{ \textcolor{keywordtype}{void} actions\_after\_adapt()}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_adapt()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Unpin all pressure dofs}}
 \DoxyCodeLine{   RefineableAxisymmetricNavierStokesEquations::}
@@ -283,7 +283,7 @@ The {\ttfamily Problem} class for our unsteady axisymmetric Navier--Stokes probl
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Fix pressure in element e at pressure dof pdof and set to pvalue}}
+\DoxyCodeLine{ \textcolor{comment}{/// Fix pressure in element e at pressure dof pdof and set to pvalue}}
 \DoxyCodeLine{ \textcolor{keywordtype}{void} fix\_pressure(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& e,}
 \DoxyCodeLine{                   \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& pdof, }
 \DoxyCodeLine{                   \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& pvalue)}
@@ -305,7 +305,7 @@ We start by building the timestepper, determining its type from the class\textqu
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_constructor==================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for refineable rotating cylinder problem}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\mbox{\hyperlink{classRotatingCylinderProblem_a436b0ff8c4ac33acfe10492c587ad80d}{RotatingCylinderProblem<ELEMENT,TIMESTEPPER>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classRotatingCylinderProblem_a436b0ff8c4ac33acfe10492c587ad80d}{RotatingCylinderProblem}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_r, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_z,}
@@ -423,8 +423,8 @@ The function {\ttfamily set\+\_\+initial\+\_\+condition()} sets the initial cond
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_set\_initial\_condition========================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Set initial conditions: Set all nodal velocities to zero and}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// initialise the previous velocities to correspond to an impulsive start}}
+\DoxyCodeLine{\textcolor{comment}{/// Set initial conditions: Set all nodal velocities to zero and}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// initialise the previous velocities to correspond to an impulsive start}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRotatingCylinderProblem_a5e4316cce2306c4aab4a20b88cdfe6e3}{RotatingCylinderProblem<ELEMENT,TIMESTEPPER>::set\_initial\_condition}}()}
@@ -458,9 +458,9 @@ The function {\ttfamily set\+\_\+boundary\+\_\+conditions()} sets the boundary c
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_set\_boundary\_conditions======================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Set boundary conditions: Set both velocity components to zero}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// on the bottom (solid) wall and the horizontal component only to zero}}
-\DoxyCodeLine{\textcolor{comment}{/// on the side (periodic) boundaries}}
+\DoxyCodeLine{\textcolor{comment}{/// Set boundary conditions: Set both velocity components to zero}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// on the bottom (solid) wall and the horizontal component only to zero}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// on the side (periodic) boundaries}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRotatingCylinderProblem_a37efdb2d7059535a48b12f69869996ee}{RotatingCylinderProblem<ELEMENT,TIMESTEPPER>::set\_boundary\_conditions}}()}
@@ -512,7 +512,7 @@ As expected, this member function documents the computed solution. We first prin
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_doc\_solution=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Document the solution}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRotatingCylinderProblem_a22f82fba41d68b9748642f9a29a12592}{RotatingCylinderProblem<ELEMENT,TIMESTEPPER>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classRotatingCylinderProblem_a22f82fba41d68b9748642f9a29a12592}{doc\_solution}}(DocInfo\& doc\_info)}

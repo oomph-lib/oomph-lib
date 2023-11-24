@@ -1,11 +1,11 @@
-\hypertarget{classDiskShockWaveProblem}{}\doxysection{Disk\+Shock\+Wave\+Problem\texorpdfstring{$<$}{<} ELEMENT, TIMESTEPPER \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classDiskShockWaveProblem}{}\doxysection{Disk\+Shock\+Wave\+Problem$<$ ELEMENT, TIMESTEPPER $>$ Class Template Reference}
 \label{classDiskShockWaveProblem}\index{DiskShockWaveProblem$<$ ELEMENT, TIMESTEPPER $>$@{DiskShockWaveProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 
 
 ////////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////////  
 
 
-Inheritance diagram for Disk\+Shock\+Wave\+Problem\texorpdfstring{$<$}{<} ELEMENT, TIMESTEPPER \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for Disk\+Shock\+Wave\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{classDiskShockWaveProblem}
@@ -18,9 +18,9 @@ Inheritance diagram for Disk\+Shock\+Wave\+Problem\texorpdfstring{$<$}{<} ELEMEN
 \begin{DoxyCompactList}\small\item\em Constructor\+: \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classDiskShockWaveProblem_af8dc3befd3eba59b008c315bfe077340}{run}} (const unsigned \&case\+\_\+number)
 \begin{DoxyCompactList}\small\item\em Run the problem; specify case\+\_\+number to label output directory. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh}}$<$ ELEMENT $>$ $\ast$\& \mbox{\hyperlink{classDiskShockWaveProblem_a7313e96ea296dbd10b47a1e00f02341e}{solid\+\_\+mesh\+\_\+pt}} ()
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh}}$<$ ELEMENT $>$ $\ast$\& \mbox{\hyperlink{classDiskShockWaveProblem_a558dc0ca72e4e1974c98cdf5203d015b}{solid\+\_\+mesh\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for the solid mesh. \end{DoxyCompactList}\item 
-Solid\+Mesh $\ast$\& \mbox{\hyperlink{classDiskShockWaveProblem_ab8b15ee82d66441cdffc2bab1b49ffa6}{traction\+\_\+mesh\+\_\+pt}} ()
+Solid\+Mesh $\ast$\& \mbox{\hyperlink{classDiskShockWaveProblem_aade14ed9df7e698c3e90abea96090ab5}{traction\+\_\+mesh\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for the mesh of surface traction elements. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classDiskShockWaveProblem_a7685309caac199d18f3f81468d9fcb23}{doc\+\_\+solution}} ()
 \begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\item 
@@ -54,11 +54,12 @@ Solid\+Mesh $\ast$ \mbox{\hyperlink{classDiskShockWaveProblem_a286fe7d51aa16f07f
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class ELEMENT, class TIMESTEPPER$>$\newline
 class Disk\+Shock\+Wave\+Problem$<$ ELEMENT, TIMESTEPPER $>$}
+
 ////////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////// 
 
 \char`\"{}\+Shock\char`\"{} wave propagates through an impulsively loaded circular disk. 
 
-Definition at line \mbox{\hyperlink{shock__disk_8cc_source_l00207}{207}} of file \mbox{\hyperlink{shock__disk_8cc_source}{shock\+\_\+disk.\+cc}}.
+Definition at line 207 of file shock\+\_\+disk.\+cc.
 
 
 
@@ -76,11 +77,11 @@ Constructor\+:
 
 Constructor. 
 
-Definition at line \mbox{\hyperlink{shock__disk_8cc_source_l00282}{282}} of file \mbox{\hyperlink{shock__disk_8cc_source}{shock\+\_\+disk.\+cc}}.
+Definition at line 282 of file shock\+\_\+disk.\+cc.
 
 
 
-References \mbox{\hyperlink{shock__disk_8cc_source_l00067}{Global\+\_\+\+Physical\+\_\+\+Variables\+::constant\+\_\+pressure()}}, and \mbox{\hyperlink{shock__disk_8cc_source_l00055}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Constitutive\+\_\+law\+\_\+pt}}.
+References Global\+\_\+\+Physical\+\_\+\+Variables\+::constant\+\_\+pressure(), and Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Constitutive\+\_\+law\+\_\+pt.
 
 
 
@@ -98,11 +99,11 @@ Actions after adaption\+: Kill and then re-\/build the traction elements on boun
 
 Kill and then re-\/build the traction elements on boundary 1, pin redundant pressure dofs and re-\/assign the equation numbers. 
 
-Definition at line \mbox{\hyperlink{shock__disk_8cc_source_l00436}{436}} of file \mbox{\hyperlink{shock__disk_8cc_source}{shock\+\_\+disk.\+cc}}.
+Definition at line 436 of file shock\+\_\+disk.\+cc.
 
 
 
-References \mbox{\hyperlink{shock__disk_8cc_source_l00067}{Global\+\_\+\+Physical\+\_\+\+Variables\+::constant\+\_\+pressure()}}.
+References Global\+\_\+\+Physical\+\_\+\+Variables\+::constant\+\_\+pressure().
 
 \mbox{\Hypertarget{classDiskShockWaveProblem_a46f6a25da58128f6abfdbbe92ea49d11}\label{classDiskShockWaveProblem_a46f6a25da58128f6abfdbbe92ea49d11}} 
 \index{DiskShockWaveProblem$<$ ELEMENT, TIMESTEPPER $>$@{DiskShockWaveProblem$<$ ELEMENT, TIMESTEPPER $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
@@ -117,7 +118,7 @@ Update function (empty)
 
 
 
-Definition at line \mbox{\hyperlink{shock__disk_8cc_source_l00235}{235}} of file \mbox{\hyperlink{shock__disk_8cc_source}{shock\+\_\+disk.\+cc}}.
+Definition at line 235 of file shock\+\_\+disk.\+cc.
 
 \mbox{\Hypertarget{classDiskShockWaveProblem_a50ba8e9b29ff7796fa9cb7ede8598376}\label{classDiskShockWaveProblem_a50ba8e9b29ff7796fa9cb7ede8598376}} 
 \index{DiskShockWaveProblem$<$ ELEMENT, TIMESTEPPER $>$@{DiskShockWaveProblem$<$ ELEMENT, TIMESTEPPER $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
@@ -132,7 +133,7 @@ Update function (empty)
 
 
 
-Definition at line \mbox{\hyperlink{shock__disk_8cc_source_l00238}{238}} of file \mbox{\hyperlink{shock__disk_8cc_source}{shock\+\_\+disk.\+cc}}.
+Definition at line 238 of file shock\+\_\+disk.\+cc.
 
 \mbox{\Hypertarget{classDiskShockWaveProblem_a75403423b0a031adabb5b487fa88373f}\label{classDiskShockWaveProblem_a75403423b0a031adabb5b487fa88373f}} 
 \index{DiskShockWaveProblem$<$ ELEMENT, TIMESTEPPER $>$@{DiskShockWaveProblem$<$ ELEMENT, TIMESTEPPER $>$}!doc\_displ\_and\_veloc@{doc\_displ\_and\_veloc}}
@@ -147,7 +148,7 @@ Doc displacement and velocity\+: label file with before and after.
 
 Doc displacement and veloc in displ\+\_\+and\+\_\+veloc$\ast$.dat. The int stage defaults to 0, in which case the \textquotesingle{}$\ast$\textquotesingle{} in the filename is simply the step number specified by the Problem\textquotesingle{}s Doc\+Info object. If it\textquotesingle{}s +/-\/1, the word \char`\"{}before\char`\"{} and \char`\"{}after\char`\"{} get inserted. This allows checking of the veloc/displacment interpolation during adaptive mesh refinement. 
 
-Definition at line \mbox{\hyperlink{shock__disk_8cc_source_l00613}{613}} of file \mbox{\hyperlink{shock__disk_8cc_source}{shock\+\_\+disk.\+cc}}.
+Definition at line 613 of file shock\+\_\+disk.\+cc.
 
 \mbox{\Hypertarget{classDiskShockWaveProblem_a7685309caac199d18f3f81468d9fcb23}\label{classDiskShockWaveProblem_a7685309caac199d18f3f81468d9fcb23}} 
 \index{DiskShockWaveProblem$<$ ELEMENT, TIMESTEPPER $>$@{DiskShockWaveProblem$<$ ELEMENT, TIMESTEPPER $>$}!doc\_solution@{doc\_solution}}
@@ -162,7 +163,7 @@ Doc the solution.
 
 
 
-Definition at line \mbox{\hyperlink{shock__disk_8cc_source_l00474}{474}} of file \mbox{\hyperlink{shock__disk_8cc_source}{shock\+\_\+disk.\+cc}}.
+Definition at line 474 of file shock\+\_\+disk.\+cc.
 
 \mbox{\Hypertarget{classDiskShockWaveProblem_a2eaf91d3e0eb5f37b9920fc3d9d54cb9}\label{classDiskShockWaveProblem_a2eaf91d3e0eb5f37b9920fc3d9d54cb9}} 
 \index{DiskShockWaveProblem$<$ ELEMENT, TIMESTEPPER $>$@{DiskShockWaveProblem$<$ ELEMENT, TIMESTEPPER $>$}!dump\_it@{dump\_it}}
@@ -177,7 +178,7 @@ Dump problem-\/specific parameters values, then dump generic problem data.
 
 Dump the solution. 
 
-Definition at line \mbox{\hyperlink{shock__disk_8cc_source_l00690}{690}} of file \mbox{\hyperlink{shock__disk_8cc_source}{shock\+\_\+disk.\+cc}}.
+Definition at line 690 of file shock\+\_\+disk.\+cc.
 
 \mbox{\Hypertarget{classDiskShockWaveProblem_ae883625e9bbe6ea442413f7c970d3fb1}\label{classDiskShockWaveProblem_ae883625e9bbe6ea442413f7c970d3fb1}} 
 \index{DiskShockWaveProblem$<$ ELEMENT, TIMESTEPPER $>$@{DiskShockWaveProblem$<$ ELEMENT, TIMESTEPPER $>$}!restart@{restart}}
@@ -192,7 +193,7 @@ Read problem-\/specific parameter values, then recover generic problem data.
 
 Read solution from disk. 
 
-Definition at line \mbox{\hyperlink{shock__disk_8cc_source_l00702}{702}} of file \mbox{\hyperlink{shock__disk_8cc_source}{shock\+\_\+disk.\+cc}}.
+Definition at line 702 of file shock\+\_\+disk.\+cc.
 
 \mbox{\Hypertarget{classDiskShockWaveProblem_af8dc3befd3eba59b008c315bfe077340}\label{classDiskShockWaveProblem_af8dc3befd3eba59b008c315bfe077340}} 
 \index{DiskShockWaveProblem$<$ ELEMENT, TIMESTEPPER $>$@{DiskShockWaveProblem$<$ ELEMENT, TIMESTEPPER $>$}!run@{run}}
@@ -207,22 +208,22 @@ Run the problem; specify case\+\_\+number to label output directory.
 
 
 
-Definition at line \mbox{\hyperlink{shock__disk_8cc_source_l00714}{714}} of file \mbox{\hyperlink{shock__disk_8cc_source}{shock\+\_\+disk.\+cc}}.
+Definition at line 714 of file shock\+\_\+disk.\+cc.
 
 
 
-References \mbox{\hyperlink{shock__disk_8cc_source_l00064}{Global\+\_\+\+Physical\+\_\+\+Variables\+::P}}.
+References Global\+\_\+\+Physical\+\_\+\+Variables\+::P.
 
 
 
-Referenced by \mbox{\hyperlink{shock__disk_8cc_source_l00838}{main()}}.
+Referenced by main().
 
-\mbox{\Hypertarget{classDiskShockWaveProblem_a7313e96ea296dbd10b47a1e00f02341e}\label{classDiskShockWaveProblem_a7313e96ea296dbd10b47a1e00f02341e}} 
+\mbox{\Hypertarget{classDiskShockWaveProblem_a558dc0ca72e4e1974c98cdf5203d015b}\label{classDiskShockWaveProblem_a558dc0ca72e4e1974c98cdf5203d015b}} 
 \index{DiskShockWaveProblem$<$ ELEMENT, TIMESTEPPER $>$@{DiskShockWaveProblem$<$ ELEMENT, TIMESTEPPER $>$}!solid\_mesh\_pt@{solid\_mesh\_pt}}
 \index{solid\_mesh\_pt@{solid\_mesh\_pt}!DiskShockWaveProblem$<$ ELEMENT, TIMESTEPPER $>$@{DiskShockWaveProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{solid\_mesh\_pt()}{solid\_mesh\_pt()}}
 {\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
-\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh}}$<$ ELEMENT $>$ $\ast$\& \mbox{\hyperlink{classDiskShockWaveProblem}{Disk\+Shock\+Wave\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::solid\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh}}$<$ELEMENT$>$$\ast$\& \mbox{\hyperlink{classDiskShockWaveProblem}{Disk\+Shock\+Wave\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::solid\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -230,18 +231,14 @@ Access function for the solid mesh.
 
 
 
-Definition at line \mbox{\hyperlink{shock__disk_8cc_source_l00220}{220}} of file \mbox{\hyperlink{shock__disk_8cc_source}{shock\+\_\+disk.\+cc}}.
+Definition at line 220 of file shock\+\_\+disk.\+cc.
 
-
-
-References \mbox{\hyperlink{shock__disk_8cc_source_l00267}{Disk\+Shock\+Wave\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Solid\+\_\+mesh\+\_\+pt}}.
-
-\mbox{\Hypertarget{classDiskShockWaveProblem_ab8b15ee82d66441cdffc2bab1b49ffa6}\label{classDiskShockWaveProblem_ab8b15ee82d66441cdffc2bab1b49ffa6}} 
+\mbox{\Hypertarget{classDiskShockWaveProblem_aade14ed9df7e698c3e90abea96090ab5}\label{classDiskShockWaveProblem_aade14ed9df7e698c3e90abea96090ab5}} 
 \index{DiskShockWaveProblem$<$ ELEMENT, TIMESTEPPER $>$@{DiskShockWaveProblem$<$ ELEMENT, TIMESTEPPER $>$}!traction\_mesh\_pt@{traction\_mesh\_pt}}
 \index{traction\_mesh\_pt@{traction\_mesh\_pt}!DiskShockWaveProblem$<$ ELEMENT, TIMESTEPPER $>$@{DiskShockWaveProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{traction\_mesh\_pt()}{traction\_mesh\_pt()}}
 {\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
-Solid\+Mesh $\ast$\& \mbox{\hyperlink{classDiskShockWaveProblem}{Disk\+Shock\+Wave\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::traction\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+Solid\+Mesh$\ast$\& \mbox{\hyperlink{classDiskShockWaveProblem}{Disk\+Shock\+Wave\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::traction\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -249,11 +246,7 @@ Access function for the mesh of surface traction elements.
 
 
 
-Definition at line \mbox{\hyperlink{shock__disk_8cc_source_l00226}{226}} of file \mbox{\hyperlink{shock__disk_8cc_source}{shock\+\_\+disk.\+cc}}.
-
-
-
-References \mbox{\hyperlink{shock__disk_8cc_source_l00270}{Disk\+Shock\+Wave\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Traction\+\_\+mesh\+\_\+pt}}.
+Definition at line 226 of file shock\+\_\+disk.\+cc.
 
 
 
@@ -267,7 +260,7 @@ Doc\+Info \mbox{\hyperlink{classDiskShockWaveProblem}{Disk\+Shock\+Wave\+Problem
 
 
 
-Definition at line \mbox{\hyperlink{shock__disk_8cc_source_l00258}{258}} of file \mbox{\hyperlink{shock__disk_8cc_source}{shock\+\_\+disk.\+cc}}.
+Definition at line 258 of file shock\+\_\+disk.\+cc.
 
 \mbox{\Hypertarget{classDiskShockWaveProblem_a6efbcb695e829d63f810a7a9bb5a81a4}\label{classDiskShockWaveProblem_a6efbcb695e829d63f810a7a9bb5a81a4}} 
 \index{DiskShockWaveProblem$<$ ELEMENT, TIMESTEPPER $>$@{DiskShockWaveProblem$<$ ELEMENT, TIMESTEPPER $>$}!Solid\_mesh\_pt@{Solid\_mesh\_pt}}
@@ -282,11 +275,7 @@ Pointer to solid mesh.
 
 
 
-Definition at line \mbox{\hyperlink{shock__disk_8cc_source_l00267}{267}} of file \mbox{\hyperlink{shock__disk_8cc_source}{shock\+\_\+disk.\+cc}}.
-
-
-
-Referenced by \mbox{\hyperlink{shock__disk_8cc_source_l00220}{Disk\+Shock\+Wave\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::solid\+\_\+mesh\+\_\+pt()}}.
+Definition at line 267 of file shock\+\_\+disk.\+cc.
 
 \mbox{\Hypertarget{classDiskShockWaveProblem_a8ec35b07dc6870e4d5b729288053c4fe}\label{classDiskShockWaveProblem_a8ec35b07dc6870e4d5b729288053c4fe}} 
 \index{DiskShockWaveProblem$<$ ELEMENT, TIMESTEPPER $>$@{DiskShockWaveProblem$<$ ELEMENT, TIMESTEPPER $>$}!Trace\_file@{Trace\_file}}
@@ -301,7 +290,7 @@ Trace file.
 
 
 
-Definition at line \mbox{\hyperlink{shock__disk_8cc_source_l00261}{261}} of file \mbox{\hyperlink{shock__disk_8cc_source}{shock\+\_\+disk.\+cc}}.
+Definition at line 261 of file shock\+\_\+disk.\+cc.
 
 \mbox{\Hypertarget{classDiskShockWaveProblem_a7ab6db65bbf28185b238e84bbc16c1b8}\label{classDiskShockWaveProblem_a7ab6db65bbf28185b238e84bbc16c1b8}} 
 \index{DiskShockWaveProblem$<$ ELEMENT, TIMESTEPPER $>$@{DiskShockWaveProblem$<$ ELEMENT, TIMESTEPPER $>$}!Trace\_node\_pt@{Trace\_node\_pt}}
@@ -316,7 +305,7 @@ Vector of pointers to nodes whose position we\textquotesingle{}re tracing.
 
 
 
-Definition at line \mbox{\hyperlink{shock__disk_8cc_source_l00264}{264}} of file \mbox{\hyperlink{shock__disk_8cc_source}{shock\+\_\+disk.\+cc}}.
+Definition at line 264 of file shock\+\_\+disk.\+cc.
 
 \mbox{\Hypertarget{classDiskShockWaveProblem_a286fe7d51aa16f07f0444ae7c553f140}\label{classDiskShockWaveProblem_a286fe7d51aa16f07f0444ae7c553f140}} 
 \index{DiskShockWaveProblem$<$ ELEMENT, TIMESTEPPER $>$@{DiskShockWaveProblem$<$ ELEMENT, TIMESTEPPER $>$}!Traction\_mesh\_pt@{Traction\_mesh\_pt}}
@@ -331,11 +320,7 @@ Pointer to mesh of traction elements.
 
 
 
-Definition at line \mbox{\hyperlink{shock__disk_8cc_source_l00270}{270}} of file \mbox{\hyperlink{shock__disk_8cc_source}{shock\+\_\+disk.\+cc}}.
-
-
-
-Referenced by \mbox{\hyperlink{shock__disk_8cc_source_l00226}{Disk\+Shock\+Wave\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::traction\+\_\+mesh\+\_\+pt()}}.
+Definition at line 270 of file shock\+\_\+disk.\+cc.
 
 
 

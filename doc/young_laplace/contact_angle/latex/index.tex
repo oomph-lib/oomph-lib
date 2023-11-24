@@ -114,7 +114,7 @@ The namespace that defines the problem parameters is very similar to that used i
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//======start\_of\_namespace========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for "{}global"{} problem parameters}}
-\DoxyCodeLine{\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobalParameters}{GlobalParameters}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -220,7 +220,7 @@ We start by defining the output directory and open a trace file to record the lo
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===============start\_of\_main============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Drive code}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{refineable__t__junction_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
@@ -310,9 +310,9 @@ The problem class contains the usual member functions. The functions {\ttfamily 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//====== start\_of\_problem\_class=======================================}}
-\DoxyCodeLine{\textcolor{comment}{/// 2D RefineableYoungLaplace problem on rectangular domain, discretised with}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// 2D QRefineableYoungLaplace elements. The specific type of element is}}
-\DoxyCodeLine{\textcolor{comment}{/// specified via the template parameter.}}
+\DoxyCodeLine{\textcolor{comment}{/// 2D RefineableYoungLaplace problem on rectangular domain, discretised with}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// 2D QRefineableYoungLaplace elements. The specific type of element is}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// specified via the template parameter.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT> }
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classRefineableYoungLaplaceProblem}{RefineableYoungLaplaceProblem}} : \textcolor{keyword}{public} Problem}
@@ -418,7 +418,7 @@ We start by creating the \char`\"{}bulk\char`\"{} mesh of refineable Young Lapla
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====start\_of\_constructor===============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for RefineableYoungLaplace problem}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classRefineableYoungLaplaceProblem_a78f77a299f2770a82378fcccf86a0b71}{RefineableYoungLaplaceProblem<ELEMENT>::RefineableYoungLaplaceProblem}}()}
 \DoxyCodeLine{\{ }
@@ -612,8 +612,8 @@ The function {\ttfamily create\+\_\+contact\+\_\+angle\+\_\+elements()} attaches
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_contact\_angle\_elements=====================}}
-\DoxyCodeLine{\textcolor{comment}{/// Create YoungLaplace contact angle elements on the b-\/th boundary of the }\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// bulk mesh and add them to the contact angle mesh}}
+\DoxyCodeLine{\textcolor{comment}{/// Create YoungLaplace contact angle elements on the b-\/th boundary of the }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// bulk mesh and add them to the contact angle mesh}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableYoungLaplaceProblem_a00d1304e030120e76d9f316dd4053116}{RefineableYoungLaplaceProblem<ELEMENT>::create\_contact\_angle\_elements}}(}
@@ -655,7 +655,7 @@ The function {\ttfamily delete\+\_\+contact\+\_\+angle\+\_\+elements()} deletes 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_delete\_contact\_angle\_elements=====================}}
 \DoxyCodeLine{\textcolor{comment}{/// Delete YoungLaplace contact angle elements}}
-\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableYoungLaplaceProblem_aaa270ba8da395897a5a99d052f076e0c}{RefineableYoungLaplaceProblem<ELEMENT>::delete\_contact\_angle\_elements}}()}
 \DoxyCodeLine{\{}
@@ -688,7 +688,7 @@ We output the load-\/displacement data, the meniscus shape, and various contact 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===============start\_of\_doc=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution: doc\_info contains labels/output directory etc.}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableYoungLaplaceProblem_a4ec7313c8e4015b0c2af0bbef789e70f}{RefineableYoungLaplaceProblem<ELEMENT>::doc\_solution}}(DocInfo\& doc\_info,}
 \DoxyCodeLine{                                              ofstream\& trace\_file)}

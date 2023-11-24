@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1ThinLayerBrickOnTetMesh}{}\doxysection{oomph\+::Thin\+Layer\+Brick\+On\+Tet\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1ThinLayerBrickOnTetMesh}{}\doxysection{oomph\+::Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$ Class Template Reference}
 \label{classoomph_1_1ThinLayerBrickOnTetMesh}\index{oomph::ThinLayerBrickOnTetMesh$<$ ELEMENT $>$@{oomph::ThinLayerBrickOnTetMesh$<$ ELEMENT $>$}}
 
 
@@ -9,7 +9,7 @@ Brick mesh layer built on top of a given tet mesh. Typically used in FSI problem
 
 {\ttfamily \#include $<$thin\+\_\+layer\+\_\+brick\+\_\+on\+\_\+tet\+\_\+mesh.\+template.\+h$>$}
 
-Inheritance diagram for oomph\+::Thin\+Layer\+Brick\+On\+Tet\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=1.458333cm]{classoomph_1_1ThinLayerBrickOnTetMesh}
@@ -23,13 +23,13 @@ typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1ThinLayerBrickOnTetMesh_aed34
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1ThinLayerBrickOnTetMesh_ad452469bc94bff203012e68e80ee543c}{Thin\+Layer\+Brick\+On\+Tet\+Mesh}} (Mesh $\ast$tet\+\_\+mesh\+\_\+pt, const Vector$<$ unsigned $>$ \&boundary\+\_\+ids, \mbox{\hyperlink{classoomph_1_1ThinLayerBrickOnTetMesh_aed34f7d1e9a5c6b5f3e220cb5bdf4550}{Thickness\+Fct\+Pt}} thickness\+\_\+fct\+\_\+pt, const unsigned \&nlayer, const Vector$<$ Vector$<$ unsigned $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1ThinLayerBrickOnTetMesh_ab3b948a7715ca95dc05e75bbbe7bd110}{in\+\_\+out\+\_\+boundary\+\_\+id}}, Time\+Stepper $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\mbox{\hyperlink{classoomph_1_1ThinLayerBrickOnTetMesh_ac77c00405f3f02855f0722570dd7824a}{Thin\+Layer\+Brick\+On\+Tet\+Mesh}} (Mesh $\ast$tet\+\_\+mesh\+\_\+pt, const Vector$<$ unsigned $>$ \&boundary\+\_\+ids, \mbox{\hyperlink{classoomph_1_1ThinLayerBrickOnTetMesh_aed34f7d1e9a5c6b5f3e220cb5bdf4550}{Thickness\+Fct\+Pt}} thickness\+\_\+fct\+\_\+pt, const unsigned \&nlayer, const Vector$<$ Vector$<$ unsigned $>$$>$ \&\mbox{\hyperlink{classoomph_1_1ThinLayerBrickOnTetMesh_a3cfd55eb5bbd6801e9d4cd271e602cd8}{in\+\_\+out\+\_\+boundary\+\_\+id}}, Time\+Stepper $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
 \begin{DoxyCompactList}\small\item\em Constructor\+: Specify (quadratic) tet mesh, boundary IDs of boundary on which the current mesh is to be erected (in an FSI context this boundary tends to be the FSI boundary of the fluid mesh. Also specify the uniform thickness of layer, and the number of element layers. The vectors stored in in\+\_\+out\+\_\+boundary\+\_\+ids contain the boundary IDs of the other boundaries in the tet mesh. In an FSI context these typically identify the in/outflow boundaries in the fluid mesh. The boundary enumeration of the current mesh follows the one of the underlying fluid mesh\+: The enumeration of the FSI boundary matches (to enable the setup of the FSI matching); the \char`\"{}in/outflow\char`\"{} faces in this mesh inherit the same enumeration as the in/outflow faces in the underlying fluid mesh. Finally, the \char`\"{}outer\char`\"{} boundary gets its own boundary ID. Timestepper defaults to steady pseudo-\/timestepper. \end{DoxyCompactList}\item 
-Vector$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1ThinLayerBrickOnTetMesh_ac69889bc842936bcd202fe78d0cbcfbd}{fsi\+\_\+boundary\+\_\+id}} ()
+Vector$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1ThinLayerBrickOnTetMesh_ada2e50ab8dfb631a26fc4111eb2fe9ad}{fsi\+\_\+boundary\+\_\+id}} ()
 \begin{DoxyCompactList}\small\item\em Access functions to the Vector of oomph-\/lib boundary ids that make up boundary on which the mesh was erected (typically the FSI interface in an FSI problem) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ThinLayerBrickOnTetMesh_aa753cb61dc2b1ed692dff8feeff67930}{outer\+\_\+boundary\+\_\+id}} ()
 \begin{DoxyCompactList}\small\item\em Boundary ID of the \char`\"{}outer\char`\"{} surface -- in an FSI context this is the non-\/wetted tube surface at a distance h\+\_\+thick from the FSI surface. \end{DoxyCompactList}\item 
-Vector$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1ThinLayerBrickOnTetMesh_ab3b948a7715ca95dc05e75bbbe7bd110}{in\+\_\+out\+\_\+boundary\+\_\+id}} (const unsigned \&boundary\+\_\+id)
+Vector$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1ThinLayerBrickOnTetMesh_a3cfd55eb5bbd6801e9d4cd271e602cd8}{in\+\_\+out\+\_\+boundary\+\_\+id}} (const unsigned \&boundary\+\_\+id)
 \begin{DoxyCompactList}\small\item\em Access function to the vector containing the ids of the oomph-\/lib mesh boundaries that make up the specified in/outflow boundaries as specified in constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -47,9 +47,10 @@ Vector$<$ Vector$<$ unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ThinLayerBri
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class ELEMENT$>$\newline
 class oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$}
+
 Brick mesh layer built on top of a given tet mesh. Typically used in FSI problems where the tet mesh is the fluid mesh and this mesh acts as the solid mesh that surrounds the FSI interface. 
 
-Definition at line \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8h_source_l00041}{41}} of file \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8h_source}{thin\+\_\+layer\+\_\+brick\+\_\+on\+\_\+tet\+\_\+mesh.\+template.\+h}}.
+Definition at line 41 of file thin\+\_\+layer\+\_\+brick\+\_\+on\+\_\+tet\+\_\+mesh.\+template.\+h.
 
 
 
@@ -67,17 +68,17 @@ Function pointer to function that specifies the wall thickness as a fct of the c
 
 
 
-Definition at line \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8h_source_l00046}{46}} of file \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8h_source}{thin\+\_\+layer\+\_\+brick\+\_\+on\+\_\+tet\+\_\+mesh.\+template.\+h}}.
+Definition at line 46 of file thin\+\_\+layer\+\_\+brick\+\_\+on\+\_\+tet\+\_\+mesh.\+template.\+h.
 
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classoomph_1_1ThinLayerBrickOnTetMesh_ad452469bc94bff203012e68e80ee543c}\label{classoomph_1_1ThinLayerBrickOnTetMesh_ad452469bc94bff203012e68e80ee543c}} 
+\mbox{\Hypertarget{classoomph_1_1ThinLayerBrickOnTetMesh_ac77c00405f3f02855f0722570dd7824a}\label{classoomph_1_1ThinLayerBrickOnTetMesh_ac77c00405f3f02855f0722570dd7824a}} 
 \index{oomph::ThinLayerBrickOnTetMesh$<$ ELEMENT $>$@{oomph::ThinLayerBrickOnTetMesh$<$ ELEMENT $>$}!ThinLayerBrickOnTetMesh@{ThinLayerBrickOnTetMesh}}
 \index{ThinLayerBrickOnTetMesh@{ThinLayerBrickOnTetMesh}!oomph::ThinLayerBrickOnTetMesh$<$ ELEMENT $>$@{oomph::ThinLayerBrickOnTetMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{ThinLayerBrickOnTetMesh()}{ThinLayerBrickOnTetMesh()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1ThinLayerBrickOnTetMesh}{oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1ThinLayerBrickOnTetMesh}{Thin\+Layer\+Brick\+On\+Tet\+Mesh}} (\begin{DoxyParamCaption}\item[{Mesh $\ast$}]{tet\+\_\+mesh\+\_\+pt,  }\item[{const Vector$<$ unsigned $>$ \&}]{boundary\+\_\+ids,  }\item[{\mbox{\hyperlink{classoomph_1_1ThinLayerBrickOnTetMesh_aed34f7d1e9a5c6b5f3e220cb5bdf4550}{Thickness\+Fct\+Pt}}}]{thickness\+\_\+fct\+\_\+pt,  }\item[{const unsigned \&}]{nlayer,  }\item[{const Vector$<$ Vector$<$ unsigned $>$ $>$ \&}]{in\+\_\+out\+\_\+boundary\+\_\+id,  }\item[{Time\+Stepper $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})}
+\mbox{\hyperlink{classoomph_1_1ThinLayerBrickOnTetMesh}{oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1ThinLayerBrickOnTetMesh}{Thin\+Layer\+Brick\+On\+Tet\+Mesh}} (\begin{DoxyParamCaption}\item[{Mesh $\ast$}]{tet\+\_\+mesh\+\_\+pt,  }\item[{const Vector$<$ unsigned $>$ \&}]{boundary\+\_\+ids,  }\item[{\mbox{\hyperlink{classoomph_1_1ThinLayerBrickOnTetMesh_aed34f7d1e9a5c6b5f3e220cb5bdf4550}{Thickness\+Fct\+Pt}}}]{thickness\+\_\+fct\+\_\+pt,  }\item[{const unsigned \&}]{nlayer,  }\item[{const Vector$<$ Vector$<$ unsigned $>$$>$ \&}]{in\+\_\+out\+\_\+boundary\+\_\+id,  }\item[{Time\+Stepper $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})}
 
 
 
@@ -85,21 +86,21 @@ Constructor\+: Specify (quadratic) tet mesh, boundary IDs of boundary on which t
 
 
 
-Definition at line \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8cc_source_l00053}{53}} of file \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8cc_source}{thin\+\_\+layer\+\_\+brick\+\_\+on\+\_\+tet\+\_\+mesh.\+template.\+cc}}.
+Definition at line 53 of file thin\+\_\+layer\+\_\+brick\+\_\+on\+\_\+tet\+\_\+mesh.\+template.\+cc.
 
 
 
-References \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8h_source_l00100}{oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$\+::\+FSI\+\_\+boundary\+\_\+id}}, \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8h_source_l00090}{oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$\+::in\+\_\+out\+\_\+boundary\+\_\+id()}}, \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8h_source_l00108}{oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$\+::\+In\+\_\+out\+\_\+boundary\+\_\+id}}, \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8h_source_l00104}{oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$\+::\+Outer\+\_\+boundary\+\_\+id}}, and \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8h_source_l00112}{oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$\+::\+Thickness\+\_\+fct\+\_\+pt}}.
+References oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$\+::\+FSI\+\_\+boundary\+\_\+id, oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$\+::in\+\_\+out\+\_\+boundary\+\_\+id(), oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$\+::\+In\+\_\+out\+\_\+boundary\+\_\+id, oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$\+::\+Outer\+\_\+boundary\+\_\+id, and oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$\+::\+Thickness\+\_\+fct\+\_\+pt.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1ThinLayerBrickOnTetMesh_ac69889bc842936bcd202fe78d0cbcfbd}\label{classoomph_1_1ThinLayerBrickOnTetMesh_ac69889bc842936bcd202fe78d0cbcfbd}} 
+\mbox{\Hypertarget{classoomph_1_1ThinLayerBrickOnTetMesh_ada2e50ab8dfb631a26fc4111eb2fe9ad}\label{classoomph_1_1ThinLayerBrickOnTetMesh_ada2e50ab8dfb631a26fc4111eb2fe9ad}} 
 \index{oomph::ThinLayerBrickOnTetMesh$<$ ELEMENT $>$@{oomph::ThinLayerBrickOnTetMesh$<$ ELEMENT $>$}!fsi\_boundary\_id@{fsi\_boundary\_id}}
 \index{fsi\_boundary\_id@{fsi\_boundary\_id}!oomph::ThinLayerBrickOnTetMesh$<$ ELEMENT $>$@{oomph::ThinLayerBrickOnTetMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{fsi\_boundary\_id()}{fsi\_boundary\_id()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-Vector$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1ThinLayerBrickOnTetMesh}{oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh}}$<$ ELEMENT $>$\+::fsi\+\_\+boundary\+\_\+id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+Vector$<$unsigned$>$ \mbox{\hyperlink{classoomph_1_1ThinLayerBrickOnTetMesh}{oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh}}$<$ ELEMENT $>$\+::fsi\+\_\+boundary\+\_\+id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -107,18 +108,18 @@ Access functions to the Vector of oomph-\/lib boundary ids that make up boundary
 
 
 
-Definition at line \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8h_source_l00074}{74}} of file \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8h_source}{thin\+\_\+layer\+\_\+brick\+\_\+on\+\_\+tet\+\_\+mesh.\+template.\+h}}.
+Definition at line 74 of file thin\+\_\+layer\+\_\+brick\+\_\+on\+\_\+tet\+\_\+mesh.\+template.\+h.
 
 
 
-References \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8h_source_l00100}{oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$\+::\+FSI\+\_\+boundary\+\_\+id}}.
+References oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$\+::\+FSI\+\_\+boundary\+\_\+id.
 
-\mbox{\Hypertarget{classoomph_1_1ThinLayerBrickOnTetMesh_ab3b948a7715ca95dc05e75bbbe7bd110}\label{classoomph_1_1ThinLayerBrickOnTetMesh_ab3b948a7715ca95dc05e75bbbe7bd110}} 
+\mbox{\Hypertarget{classoomph_1_1ThinLayerBrickOnTetMesh_a3cfd55eb5bbd6801e9d4cd271e602cd8}\label{classoomph_1_1ThinLayerBrickOnTetMesh_a3cfd55eb5bbd6801e9d4cd271e602cd8}} 
 \index{oomph::ThinLayerBrickOnTetMesh$<$ ELEMENT $>$@{oomph::ThinLayerBrickOnTetMesh$<$ ELEMENT $>$}!in\_out\_boundary\_id@{in\_out\_boundary\_id}}
 \index{in\_out\_boundary\_id@{in\_out\_boundary\_id}!oomph::ThinLayerBrickOnTetMesh$<$ ELEMENT $>$@{oomph::ThinLayerBrickOnTetMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{in\_out\_boundary\_id()}{in\_out\_boundary\_id()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-Vector$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1ThinLayerBrickOnTetMesh}{oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh}}$<$ ELEMENT $>$\+::in\+\_\+out\+\_\+boundary\+\_\+id (\begin{DoxyParamCaption}\item[{const unsigned \&}]{boundary\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+Vector$<$unsigned$>$ \mbox{\hyperlink{classoomph_1_1ThinLayerBrickOnTetMesh}{oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh}}$<$ ELEMENT $>$\+::in\+\_\+out\+\_\+boundary\+\_\+id (\begin{DoxyParamCaption}\item[{const unsigned \&}]{boundary\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -126,15 +127,15 @@ Access function to the vector containing the ids of the oomph-\/lib mesh boundar
 
 
 
-Definition at line \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8h_source_l00090}{90}} of file \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8h_source}{thin\+\_\+layer\+\_\+brick\+\_\+on\+\_\+tet\+\_\+mesh.\+template.\+h}}.
+Definition at line 90 of file thin\+\_\+layer\+\_\+brick\+\_\+on\+\_\+tet\+\_\+mesh.\+template.\+h.
 
 
 
-References \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8h_source_l00108}{oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$\+::\+In\+\_\+out\+\_\+boundary\+\_\+id}}.
+References oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$\+::\+In\+\_\+out\+\_\+boundary\+\_\+id.
 
 
 
-Referenced by \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8cc_source_l00053}{oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh()}}.
+Referenced by oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh().
 
 \mbox{\Hypertarget{classoomph_1_1ThinLayerBrickOnTetMesh_aa753cb61dc2b1ed692dff8feeff67930}\label{classoomph_1_1ThinLayerBrickOnTetMesh_aa753cb61dc2b1ed692dff8feeff67930}} 
 \index{oomph::ThinLayerBrickOnTetMesh$<$ ELEMENT $>$@{oomph::ThinLayerBrickOnTetMesh$<$ ELEMENT $>$}!outer\_boundary\_id@{outer\_boundary\_id}}
@@ -149,11 +150,11 @@ Boundary ID of the \char`\"{}outer\char`\"{} surface -- in an FSI context this i
 
 
 
-Definition at line \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8h_source_l00082}{82}} of file \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8h_source}{thin\+\_\+layer\+\_\+brick\+\_\+on\+\_\+tet\+\_\+mesh.\+template.\+h}}.
+Definition at line 82 of file thin\+\_\+layer\+\_\+brick\+\_\+on\+\_\+tet\+\_\+mesh.\+template.\+h.
 
 
 
-References \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8h_source_l00104}{oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$\+::\+Outer\+\_\+boundary\+\_\+id}}.
+References oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$\+::\+Outer\+\_\+boundary\+\_\+id.
 
 
 
@@ -171,11 +172,11 @@ Vector of oomph-\/lib boundary ids that make up boundary on which the mesh was e
 
 
 
-Definition at line \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8h_source_l00100}{100}} of file \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8h_source}{thin\+\_\+layer\+\_\+brick\+\_\+on\+\_\+tet\+\_\+mesh.\+template.\+h}}.
+Definition at line 100 of file thin\+\_\+layer\+\_\+brick\+\_\+on\+\_\+tet\+\_\+mesh.\+template.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8h_source_l00074}{oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$\+::fsi\+\_\+boundary\+\_\+id()}}, and \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8cc_source_l00053}{oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh()}}.
+Referenced by oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$\+::fsi\+\_\+boundary\+\_\+id(), and oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh().
 
 \mbox{\Hypertarget{classoomph_1_1ThinLayerBrickOnTetMesh_aa8990092c886c1f5ac89b4476bf75b39}\label{classoomph_1_1ThinLayerBrickOnTetMesh_aa8990092c886c1f5ac89b4476bf75b39}} 
 \index{oomph::ThinLayerBrickOnTetMesh$<$ ELEMENT $>$@{oomph::ThinLayerBrickOnTetMesh$<$ ELEMENT $>$}!In\_out\_boundary\_id@{In\_out\_boundary\_id}}
@@ -190,11 +191,11 @@ Vector of vectors containing the ids of the oomph-\/lib mesh boundaries that mak
 
 
 
-Definition at line \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8h_source_l00108}{108}} of file \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8h_source}{thin\+\_\+layer\+\_\+brick\+\_\+on\+\_\+tet\+\_\+mesh.\+template.\+h}}.
+Definition at line 108 of file thin\+\_\+layer\+\_\+brick\+\_\+on\+\_\+tet\+\_\+mesh.\+template.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8h_source_l00090}{oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$\+::in\+\_\+out\+\_\+boundary\+\_\+id()}}, and \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8cc_source_l00053}{oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh()}}.
+Referenced by oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$\+::in\+\_\+out\+\_\+boundary\+\_\+id(), and oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh().
 
 \mbox{\Hypertarget{classoomph_1_1ThinLayerBrickOnTetMesh_a93acb15ee2a6fd52a21c31830b2a984b}\label{classoomph_1_1ThinLayerBrickOnTetMesh_a93acb15ee2a6fd52a21c31830b2a984b}} 
 \index{oomph::ThinLayerBrickOnTetMesh$<$ ELEMENT $>$@{oomph::ThinLayerBrickOnTetMesh$<$ ELEMENT $>$}!Outer\_boundary\_id@{Outer\_boundary\_id}}
@@ -209,11 +210,11 @@ Boundary ID of the \char`\"{}outer\char`\"{} surface -- the non-\/wetted tube su
 
 
 
-Definition at line \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8h_source_l00104}{104}} of file \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8h_source}{thin\+\_\+layer\+\_\+brick\+\_\+on\+\_\+tet\+\_\+mesh.\+template.\+h}}.
+Definition at line 104 of file thin\+\_\+layer\+\_\+brick\+\_\+on\+\_\+tet\+\_\+mesh.\+template.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8h_source_l00082}{oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$\+::outer\+\_\+boundary\+\_\+id()}}, and \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8cc_source_l00053}{oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh()}}.
+Referenced by oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$\+::outer\+\_\+boundary\+\_\+id(), and oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh().
 
 \mbox{\Hypertarget{classoomph_1_1ThinLayerBrickOnTetMesh_a51d5c130c6b267fc8996e02d1172c81d}\label{classoomph_1_1ThinLayerBrickOnTetMesh_a51d5c130c6b267fc8996e02d1172c81d}} 
 \index{oomph::ThinLayerBrickOnTetMesh$<$ ELEMENT $>$@{oomph::ThinLayerBrickOnTetMesh$<$ ELEMENT $>$}!Thickness\_fct\_pt@{Thickness\_fct\_pt}}
@@ -228,11 +229,11 @@ Function pointer to function that specifies the wall thickness as a fct of the c
 
 
 
-Definition at line \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8h_source_l00112}{112}} of file \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8h_source}{thin\+\_\+layer\+\_\+brick\+\_\+on\+\_\+tet\+\_\+mesh.\+template.\+h}}.
+Definition at line 112 of file thin\+\_\+layer\+\_\+brick\+\_\+on\+\_\+tet\+\_\+mesh.\+template.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8cc_source_l00053}{oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh()}}.
+Referenced by oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh().
 
 
 

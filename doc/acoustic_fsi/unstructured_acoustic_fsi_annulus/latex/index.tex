@@ -92,7 +92,7 @@ Here\textquotesingle{}s a listing of the complete driver code\+:
 \DoxyCodeLine{\textcolor{comment}{//LIC// multi-\/physics finite-\/element library, available }}
 \DoxyCodeLine{\textcolor{comment}{//LIC// at http://www.oomph-\/lib.org.}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// }}
-\DoxyCodeLine{\textcolor{comment}{//LIC// Copyright (C) 2006-\/2022 Matthias Heil and Andrew Hazel}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// Copyright (C) 2006-\/2023 Matthias Heil and Andrew Hazel}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// }}
 \DoxyCodeLine{\textcolor{comment}{//LIC// This library is free software; you can redistribute it and/or}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// modify it under the terms of the GNU Lesser General Public}}
@@ -144,42 +144,42 @@ Here\textquotesingle{}s a listing of the complete driver code\+:
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Constructor:  Pass start and end points}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classMyStraightLine_a2c63e574f21703250a31fc446ab8045d}{MyStraightLine}}(\textcolor{keyword}{const} Vector<double>\& r\_start, \textcolor{keyword}{const} Vector<double>\& r\_end) }
-\DoxyCodeLine{  :  GeomObject(1,2), \mbox{\hyperlink{classMyStraightLine_a0f66636dd5d1e7ff6ec93acf90879f0c}{R\_start}}(r\_start), \mbox{\hyperlink{classMyStraightLine_afa466e12301ccea99a02fe1bde615691}{R\_end}}(r\_end)}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}(\textcolor{keyword}{const} Vector<double>\& r\_start, \textcolor{keyword}{const} Vector<double>\& r\_end) }
+\DoxyCodeLine{  :  GeomObject(1,2), R\_start(r\_start), R\_end(r\_end)}
 \DoxyCodeLine{  \{ \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Broken copy constructor}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classMyStraightLine_a2c63e574f21703250a31fc446ab8045d}{MyStraightLine}}(\textcolor{keyword}{const} \mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}\& dummy) }
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}(\textcolor{keyword}{const} \mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}\& dummy) }
 \DoxyCodeLine{  \{ }
 \DoxyCodeLine{   BrokenCopy::broken\_copy(\textcolor{stringliteral}{"{}MyStraightLine"{}});}
 \DoxyCodeLine{  \} }
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Broken assignment operator}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classMyStraightLine_a926ab921fec52ded94509efce06b66a7}{operator=}}(\textcolor{keyword}{const} \mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}\&) }
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} operator=(\textcolor{keyword}{const} \mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}\&) }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   BrokenCopy::broken\_assign(\textcolor{stringliteral}{"{}MyStraightLine"{}});}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Destructor:  Empty}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classMyStraightLine_ae2f9a5860652a726b2f4dc94d1332ef1}{\string~MyStraightLine}}()\{\}}
+\DoxyCodeLine{\textcolor{comment}{} \string~\mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}()\{\}}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Position Vector at Lagrangian coordinate zeta }}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classMyStraightLine_ae3ee51a7b81acc2ef652bec4ee955d2f}{position}}(\textcolor{keyword}{const} Vector<double>\& zeta, Vector<double>\& r)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} position(\textcolor{keyword}{const} Vector<double>\& zeta, Vector<double>\& r)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\textcolor{keyword}{  }\{}
 \DoxyCodeLine{   \textcolor{comment}{// Position Vector}}
-\DoxyCodeLine{   r[0] = \mbox{\hyperlink{classMyStraightLine_a0f66636dd5d1e7ff6ec93acf90879f0c}{R\_start}}[0]+(\mbox{\hyperlink{classMyStraightLine_afa466e12301ccea99a02fe1bde615691}{R\_end}}[0]-\/\mbox{\hyperlink{classMyStraightLine_a0f66636dd5d1e7ff6ec93acf90879f0c}{R\_start}}[0])*zeta[0];}
-\DoxyCodeLine{   r[1] = \mbox{\hyperlink{classMyStraightLine_a0f66636dd5d1e7ff6ec93acf90879f0c}{R\_start}}[1]+(\mbox{\hyperlink{classMyStraightLine_afa466e12301ccea99a02fe1bde615691}{R\_end}}[1]-\/\mbox{\hyperlink{classMyStraightLine_a0f66636dd5d1e7ff6ec93acf90879f0c}{R\_start}}[1])*zeta[0];}
+\DoxyCodeLine{   r[0] = R\_start[0]+(R\_end[0]-\/R\_start[0])*zeta[0];}
+\DoxyCodeLine{   r[1] = R\_start[1]+(R\_end[1]-\/R\_start[1])*zeta[0];}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ }
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Start point of line}}
-\DoxyCodeLine{\textcolor{comment}{} Vector<double> \mbox{\hyperlink{classMyStraightLine_a0f66636dd5d1e7ff6ec93acf90879f0c}{R\_start}};}
+\DoxyCodeLine{\textcolor{comment}{} Vector<double> R\_start;}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// End point of line}}
-\DoxyCodeLine{\textcolor{comment}{} Vector<double> \mbox{\hyperlink{classMyStraightLine_afa466e12301ccea99a02fe1bde615691}{R\_end}};}
+\DoxyCodeLine{\textcolor{comment}{} Vector<double> R\_end;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\};}
 \DoxyCodeLine{}
@@ -271,87 +271,87 @@ Here\textquotesingle{}s a listing of the complete driver code\+:
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Constructor:}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classCoatedDiskProblem_a9585ca5b422c72dc2b91cbb3e311b736}{CoatedDiskProblem}}();}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classCoatedDiskProblem}{CoatedDiskProblem}}();}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update function (empty)}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classCoatedDiskProblem_a3b94aaddee6a8f386ba249f418813963}{actions\_before\_newton\_solve}}() \{\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_newton\_solve() \{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update function (empty)}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classCoatedDiskProblem_aa0b9b4e706cdb1b31738c3db8759e9ee}{actions\_after\_newton\_solve}}() \{\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_newton\_solve() \{\}}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Actions before adapt: Wipe the face meshes}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classCoatedDiskProblem_a89e972df172b024b1358f0fac7646d6d}{actions\_before\_adapt}}();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_adapt();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Actions after adapt: Rebuild the face meshes}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classCoatedDiskProblem_a93f9d34cd24f08ca1ec726ae0057b939}{actions\_after\_adapt}}();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_adapt();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classCoatedDiskProblem_af8e103d494f526c0e24c0c4ccef4ea6b}{doc\_solution}}();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} doc\_solution();}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Complete problem setup}}
-\DoxyCodeLine{ \textcolor{keywordtype}{void} \mbox{\hyperlink{classCoatedDiskProblem_a4d63252d3916bda71f28b637d6590627}{complete\_problem\_setup}}(); }
+\DoxyCodeLine{ \textcolor{keywordtype}{void} complete\_problem\_setup(); }
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Create solid traction elements}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classCoatedDiskProblem_a31c3707de78a720e3936e3b34e70b1ba}{create\_solid\_traction\_elements}}();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} create\_solid\_traction\_elements();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Create FSI traction elements}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classCoatedDiskProblem_a143908e8db74ad6bd8b7efaaa26c78c3}{create\_fsi\_traction\_elements}}();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} create\_fsi\_traction\_elements();}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Create Helmholtz FSI flux elements}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classCoatedDiskProblem_a34f61c03b152f2ac06e1e771b0dbe09b}{create\_helmholtz\_fsi\_flux\_elements}}();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} create\_helmholtz\_fsi\_flux\_elements();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Delete (face) elements in specified mesh }}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classCoatedDiskProblem_a55b4cead41e01ab5fd728b607f62bb74}{delete\_face\_elements}}(Mesh* \textcolor{keyword}{const} \& boundary\_mesh\_pt);}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} delete\_face\_elements(Mesh* \textcolor{keyword}{const} \& boundary\_mesh\_pt);}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Create ABC face elements }}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classCoatedDiskProblem_ade4e1e8fd2e8b0f7592f26514f3d18cc}{create\_helmholtz\_ABC\_elements}}();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} create\_helmholtz\_ABC\_elements();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Setup interaction}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classCoatedDiskProblem_ad24d43389155a6a9f2f66faf4b239c26}{setup\_interaction}}();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} setup\_interaction();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to refineable solid mesh}}
-\DoxyCodeLine{\textcolor{comment}{} RefineableTriangleMesh<ELASTICITY\_ELEMENT>* \mbox{\hyperlink{classCoatedDiskProblem_aa9e9529dcb4bfd7793b868ab42a5d10e}{Solid\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} RefineableTriangleMesh<ELASTICITY\_ELEMENT>* Solid\_mesh\_pt;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to mesh of solid traction elements}}
-\DoxyCodeLine{\textcolor{comment}{} Mesh* \mbox{\hyperlink{classCoatedDiskProblem_a40be95c16554cc776ee45129c9153cae}{Solid\_traction\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} Mesh* Solid\_traction\_mesh\_pt;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to mesh of FSI traction elements}}
-\DoxyCodeLine{\textcolor{comment}{} Mesh* \mbox{\hyperlink{classCoatedDiskProblem_aefeabd04f0fd48be258e57a8b73038b4}{FSI\_traction\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} Mesh* FSI\_traction\_mesh\_pt;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to Helmholtz mesh}}
-\DoxyCodeLine{\textcolor{comment}{} TreeBasedRefineableMeshBase* \mbox{\hyperlink{classCoatedDiskProblem_ad434a37897336e7dfdb720c0b8941c8a}{Helmholtz\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} TreeBasedRefineableMeshBase* Helmholtz\_mesh\_pt;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to mesh of Helmholtz FSI flux elements}}
-\DoxyCodeLine{\textcolor{comment}{} Mesh* \mbox{\hyperlink{classCoatedDiskProblem_a1737537bbd37b74915e3bfe43e3e4d3e}{Helmholtz\_fsi\_flux\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} Mesh* Helmholtz\_fsi\_flux\_mesh\_pt;}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to mesh containing the ABC elements}}
-\DoxyCodeLine{\textcolor{comment}{} Mesh* \mbox{\hyperlink{classCoatedDiskProblem_a142852ffdecdb2f76acf3e4c11ce4b04}{Helmholtz\_outer\_boundary\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} Mesh* Helmholtz\_outer\_boundary\_mesh\_pt;}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Boundary ID of upper symmetry boundary}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classCoatedDiskProblem_ab0fb6d4bdf876fb2df1f2fa05606526b}{Upper\_symmetry\_boundary\_id}};}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} Upper\_symmetry\_boundary\_id;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Boundary ID of lower symmetry boundary}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classCoatedDiskProblem_a42d2f2b46b0b1a7add92533bd5968033}{Lower\_symmetry\_boundary\_id}};}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} Lower\_symmetry\_boundary\_id;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Boundary ID of upper inner boundary}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classCoatedDiskProblem_ae22c200ea010aa2420b96c2592034cd5}{Upper\_inner\_boundary\_id}};}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} Upper\_inner\_boundary\_id;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Boundary ID of lower inner boundary}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classCoatedDiskProblem_a693be7a3e4c968c52d5c19d9a35a05b3}{Lower\_inner\_boundary\_id}};}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} Lower\_inner\_boundary\_id;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Boundary ID of outer boundary}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classCoatedDiskProblem_acdffaaa300e0c67b5ceb7c85925a46f0}{Outer\_boundary\_id}};}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} Outer\_boundary\_id;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Boundary ID of rib divider}}
-\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classCoatedDiskProblem_a0f241ef5043d002c90d68a93831e9212}{Rib\_divider\_boundary\_id}};}
+\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} Rib\_divider\_boundary\_id;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// DocInfo object for output}}
-\DoxyCodeLine{\textcolor{comment}{} DocInfo \mbox{\hyperlink{classCoatedDiskProblem_ab389fe08ad443c10ddbdd12127903477}{Doc\_info}};}
+\DoxyCodeLine{\textcolor{comment}{} DocInfo Doc\_info;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Trace file}}
-\DoxyCodeLine{\textcolor{comment}{} ofstream \mbox{\hyperlink{classCoatedDiskProblem_a5a6336e64a200817fedd99a333d2c0be}{Trace\_file}};}
+\DoxyCodeLine{\textcolor{comment}{} ofstream Trace\_file;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\};}
 \DoxyCodeLine{}

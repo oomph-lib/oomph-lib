@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1RefineableQPVDElementWithContinuousPressure}{}\doxysection{oomph\+::Refineable\+QPVDElement\+With\+Continuous\+Pressure\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1RefineableQPVDElementWithContinuousPressure}{}\doxysection{oomph\+::Refineable\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$ Class Template Reference}
 \label{classoomph_1_1RefineableQPVDElementWithContinuousPressure}\index{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$}}
 
 
@@ -9,7 +9,7 @@ Class for refineable solid mechanics elements in near-\/incompressible/ incompre
 
 {\ttfamily \#include $<$refineable\+\_\+solid\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Refineable\+QPVDElement\+With\+Continuous\+Pressure\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Refineable\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=1.010309cm]{classoomph_1_1RefineableQPVDElementWithContinuousPressure}
@@ -36,15 +36,15 @@ void \mbox{\hyperlink{classoomph_1_1RefineableQPVDElementWithContinuousPressure_
 \begin{DoxyCompactList}\small\item\em Pin the redundant solid pressure. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1RefineableQPVDElementWithContinuousPressure_a4cf706224993a10a0c774a314d4c25c4}{nvertex\+\_\+node}} () const
 \begin{DoxyCompactList}\small\item\em Number of vertex nodes in the element. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQPVDElementWithContinuousPressure_a10af3890daea1072c7d142bdb166a44a}{vertex\+\_\+node\+\_\+pt}} (const unsigned \&j) const
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQPVDElementWithContinuousPressure_a9afc4605536e3f3a637ae1694c0d9065}{vertex\+\_\+node\+\_\+pt}} (const unsigned \&j) const
 \begin{DoxyCompactList}\small\item\em Pointer to the j-\/th vertex node in the element. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1RefineableQPVDElementWithContinuousPressure_aa0689547ae0239df24c07a985e891a16}{nrecovery\+\_\+order}} ()
 \begin{DoxyCompactList}\small\item\em Order of recovery shape functions for Z2 error estimation\+: Same order as shape functions. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQPVDElementWithContinuousPressure_a7197edb65b6555797d59b5cdaf5f2608}{interpolating\+\_\+node\+\_\+pt}} (const unsigned \&n, const int \&value\+\_\+id)
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQPVDElementWithContinuousPressure_a935ead3e5472150fe627587abb12cbf8}{interpolating\+\_\+node\+\_\+pt}} (const unsigned \&n, const int \&value\+\_\+id)
 \begin{DoxyCompactList}\small\item\em The pressure \char`\"{}nodes\char`\"{} are a subset of the nodes, so when value\+\_\+id==0, the n-\/th pressure node is returned. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1RefineableQPVDElementWithContinuousPressure_a02fc56894e2c1157f6a081ca42954650}{local\+\_\+one\+\_\+d\+\_\+fraction\+\_\+of\+\_\+interpolating\+\_\+node}} (const unsigned \&n1d, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const int \&value\+\_\+id)
 \begin{DoxyCompactList}\small\item\em The pressure nodes are the corner nodes, so when value\+\_\+id==0, the fraction is the same as the 1d node number, 0 or 1. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQPVDElementWithContinuousPressure_ad2c4bf2a45b3b8fd5735966edb249f5d}{get\+\_\+interpolating\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const int \&value\+\_\+id)
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQPVDElementWithContinuousPressure_ac2b58d140461e737e6e013ea26489e0c}{get\+\_\+interpolating\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const int \&value\+\_\+id)
 \begin{DoxyCompactList}\small\item\em The velocity nodes are the same as the geometric nodes. The pressure nodes must be calculated by using the same methods as the geometric nodes, but by recalling that there are only two pressure nodes per edge. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1RefineableQPVDElementWithContinuousPressure_a9b38f35f3251638b00e5b095f0294e07}{ninterpolating\+\_\+node\+\_\+1d}} (const int \&value\+\_\+id)
 \begin{DoxyCompactList}\small\item\em The number of 1d pressure nodes is 2, otherwise we have the positional nodes. \end{DoxyCompactList}\item 
@@ -54,7 +54,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableQPVDElementWithContinuousPressure_
 \begin{DoxyCompactList}\small\item\em The basis interpolating the pressure is given by pshape(). / The basis interpolating the velocity is \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{shape()}}. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableQPVDElementWithContinuousPressure_ad7b2c17ed107adb4b231dd3f748122ed}{further\+\_\+setup\+\_\+hanging\+\_\+nodes}} ()
 \begin{DoxyCompactList}\small\item\em Perform additional hanging node procedures for variables that are not interpolated by all nodes. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQPVDElementWithContinuousPressure_abbf48abde03f47221e614b218e2bd64a}{solid\+\_\+pressure\+\_\+node\+\_\+pt}} (const unsigned \&l)
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQPVDElementWithContinuousPressure_a78ac41286548a45383abb385a1be4598}{solid\+\_\+pressure\+\_\+node\+\_\+pt}} (const unsigned \&l)
 \end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -62,9 +62,10 @@ void \mbox{\hyperlink{classoomph_1_1RefineableQPVDElementWithContinuousPressure_
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$unsigned DIM$>$\newline
 class oomph\+::\+Refineable\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}
+
 Class for refineable solid mechanics elements in near-\/incompressible/ incompressible formulation, so a pressure is included! These elements include a continuously interpolated pressure a la Taylor Hood/. 
 
-Definition at line \mbox{\hyperlink{refineable__solid__elements_8h_source_l00822}{822}} of file \mbox{\hyperlink{refineable__solid__elements_8h_source}{refineable\+\_\+solid\+\_\+elements.\+h}}.
+Definition at line 822 of file refineable\+\_\+solid\+\_\+elements.\+h.
 
 
 
@@ -82,7 +83,7 @@ Constructor\+:
 
 
 
-Definition at line \mbox{\hyperlink{refineable__solid__elements_8h_source_l00829}{829}} of file \mbox{\hyperlink{refineable__solid__elements_8h_source}{refineable\+\_\+solid\+\_\+elements.\+h}}.
+Definition at line 829 of file refineable\+\_\+solid\+\_\+elements.\+h.
 
 
 
@@ -104,11 +105,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a86ea01c485f
 
 
 
-Definition at line \mbox{\hyperlink{refineable__solid__elements_8h_source_l01108}{1108}} of file \mbox{\hyperlink{refineable__solid__elements_8h_source}{refineable\+\_\+solid\+\_\+elements.\+h}}.
+Definition at line 1108 of file refineable\+\_\+solid\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{solid__elements_8h_source_l01566}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$\+::solid\+\_\+p\+\_\+nodal\+\_\+index()}}.
+References oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$\+::solid\+\_\+p\+\_\+nodal\+\_\+index().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQPVDElementWithContinuousPressure_afed4014b4823a87360efcf723d52b5f5}\label{classoomph_1_1RefineableQPVDElementWithContinuousPressure_afed4014b4823a87360efcf723d52b5f5}} 
 \index{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$}!get\_interpolated\_values@{get\_interpolated\_values}}
@@ -127,11 +128,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineablePVDEquationsWithPres
 
 
 
-Definition at line \mbox{\hyperlink{refineable__solid__elements_8h_source_l00867}{867}} of file \mbox{\hyperlink{refineable__solid__elements_8h_source}{refineable\+\_\+solid\+\_\+elements.\+h}}.
+Definition at line 867 of file refineable\+\_\+solid\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{solid__elements_8h_source_l01011}{oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::interpolated\+\_\+solid\+\_\+p()}}.
+References oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::interpolated\+\_\+solid\+\_\+p().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQPVDElementWithContinuousPressure_aa30cbff68622fc6db42a85ce0afa3e77}\label{classoomph_1_1RefineableQPVDElementWithContinuousPressure_aa30cbff68622fc6db42a85ce0afa3e77}} 
 \index{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$}!get\_interpolated\_values@{get\_interpolated\_values}}
@@ -150,18 +151,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineablePVDEquationsWithPres
 
 
 
-Definition at line \mbox{\hyperlink{refineable__solid__elements_8h_source_l00856}{856}} of file \mbox{\hyperlink{refineable__solid__elements_8h_source}{refineable\+\_\+solid\+\_\+elements.\+h}}.
+Definition at line 856 of file refineable\+\_\+solid\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{solid__elements_8h_source_l01011}{oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::interpolated\+\_\+solid\+\_\+p()}}.
+References oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::interpolated\+\_\+solid\+\_\+p().
 
-\mbox{\Hypertarget{classoomph_1_1RefineableQPVDElementWithContinuousPressure_ad2c4bf2a45b3b8fd5735966edb249f5d}\label{classoomph_1_1RefineableQPVDElementWithContinuousPressure_ad2c4bf2a45b3b8fd5735966edb249f5d}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableQPVDElementWithContinuousPressure_ac2b58d140461e737e6e013ea26489e0c}\label{classoomph_1_1RefineableQPVDElementWithContinuousPressure_ac2b58d140461e737e6e013ea26489e0c}} 
 \index{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$}!get\_interpolating\_node\_at\_local\_coordinate@{get\_interpolating\_node\_at\_local\_coordinate}}
 \index{get\_interpolating\_node\_at\_local\_coordinate@{get\_interpolating\_node\_at\_local\_coordinate}!oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_interpolating\_node\_at\_local\_coordinate()}{get\_interpolating\_node\_at\_local\_coordinate()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQPVDElementWithContinuousPressure}{oomph\+::\+Refineable\+QPVDElement\+With\+Continuous\+Pressure}}$<$ DIM $>$\+::get\+\_\+interpolating\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const int \&}]{value\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQPVDElementWithContinuousPressure}{oomph\+::\+Refineable\+QPVDElement\+With\+Continuous\+Pressure}}$<$ DIM $>$\+::get\+\_\+interpolating\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const int \&}]{value\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -169,15 +170,15 @@ The velocity nodes are the same as the geometric nodes. The pressure nodes must 
 
 Construct the general pressure index from the components.
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a98332b71c658a2a6d4293380e58473b3}{oomph\+::\+Refineable\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_ad920e66c00888c450f926f08c7793f78}{oomph\+::\+Refineable\+Element}}.
 
 
 
-Definition at line \mbox{\hyperlink{refineable__solid__elements_8h_source_l00986}{986}} of file \mbox{\hyperlink{refineable__solid__elements_8h_source}{refineable\+\_\+solid\+\_\+elements.\+h}}.
+Definition at line 986 of file refineable\+\_\+solid\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{refineable__elements_8cc_source_l00053}{oomph\+::\+Refineable\+Element\+::check\+\_\+value\+\_\+id()}}, \mbox{\hyperlink{elements_8cc_source_l03882}{oomph\+::\+Finite\+Element\+::get\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01374}{oomph\+::\+Finite\+Element\+::\+Node\+\_\+location\+\_\+tolerance}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{refineable__solid__elements_8h_source_l01114}{oomph\+::\+Refineable\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$\+::solid\+\_\+pressure\+\_\+node\+\_\+pt()}}.
+References oomph\+::\+Refineable\+Element\+::check\+\_\+value\+\_\+id(), oomph\+::\+Finite\+Element\+::get\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate(), i, oomph\+::\+Finite\+Element\+::\+Node\+\_\+location\+\_\+tolerance, s, and oomph\+::\+Refineable\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$\+::solid\+\_\+pressure\+\_\+node\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQPVDElementWithContinuousPressure_a207dc7a156db01065f965adf6cfc41fd}\label{classoomph_1_1RefineableQPVDElementWithContinuousPressure_a207dc7a156db01065f965adf6cfc41fd}} 
 \index{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$}!interpolating\_basis@{interpolating\_basis}}
@@ -196,18 +197,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a8ca420443c2
 
 
 
-Definition at line \mbox{\hyperlink{refineable__solid__elements_8h_source_l01087}{1087}} of file \mbox{\hyperlink{refineable__solid__elements_8h_source}{refineable\+\_\+solid\+\_\+elements.\+h}}.
+Definition at line 1087 of file refineable\+\_\+solid\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{refineable__elements_8cc_source_l00053}{oomph\+::\+Refineable\+Element\+::check\+\_\+value\+\_\+id()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure_a917e2f9e3b1bd9ff49d28006e47e438f}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$\+::solid\+\_\+pshape()}}.
+References oomph\+::\+Refineable\+Element\+::check\+\_\+value\+\_\+id(), oomph\+::\+Finite\+Element\+::shape(), and oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$\+::solid\+\_\+pshape().
 
-\mbox{\Hypertarget{classoomph_1_1RefineableQPVDElementWithContinuousPressure_a7197edb65b6555797d59b5cdaf5f2608}\label{classoomph_1_1RefineableQPVDElementWithContinuousPressure_a7197edb65b6555797d59b5cdaf5f2608}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableQPVDElementWithContinuousPressure_a935ead3e5472150fe627587abb12cbf8}\label{classoomph_1_1RefineableQPVDElementWithContinuousPressure_a935ead3e5472150fe627587abb12cbf8}} 
 \index{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$}!interpolating\_node\_pt@{interpolating\_node\_pt}}
 \index{interpolating\_node\_pt@{interpolating\_node\_pt}!oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{interpolating\_node\_pt()}{interpolating\_node\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQPVDElementWithContinuousPressure}{oomph\+::\+Refineable\+QPVDElement\+With\+Continuous\+Pressure}}$<$ DIM $>$\+::interpolating\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const int \&}]{value\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQPVDElementWithContinuousPressure}{oomph\+::\+Refineable\+QPVDElement\+With\+Continuous\+Pressure}}$<$ DIM $>$\+::interpolating\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const int \&}]{value\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -215,15 +216,15 @@ The pressure \char`\"{}nodes\char`\"{} are a subset of the nodes, so when value\
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a7ce034d6dff9963f1620f878ca714052}{oomph\+::\+Refineable\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_ab27986fc2f6033a4758662cde78a7b76}{oomph\+::\+Refineable\+Element}}.
 
 
 
-Definition at line \mbox{\hyperlink{refineable__solid__elements_8h_source_l00942}{942}} of file \mbox{\hyperlink{refineable__solid__elements_8h_source}{refineable\+\_\+solid\+\_\+elements.\+h}}.
+Definition at line 942 of file refineable\+\_\+solid\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{refineable__elements_8cc_source_l00053}{oomph\+::\+Refineable\+Element\+::check\+\_\+value\+\_\+id()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{refineable__solid__elements_8h_source_l01114}{oomph\+::\+Refineable\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$\+::solid\+\_\+pressure\+\_\+node\+\_\+pt()}}.
+References oomph\+::\+Refineable\+Element\+::check\+\_\+value\+\_\+id(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Refineable\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$\+::solid\+\_\+pressure\+\_\+node\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQPVDElementWithContinuousPressure_a02fc56894e2c1157f6a081ca42954650}\label{classoomph_1_1RefineableQPVDElementWithContinuousPressure_a02fc56894e2c1157f6a081ca42954650}} 
 \index{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$}!local\_one\_d\_fraction\_of\_interpolating\_node@{local\_one\_d\_fraction\_of\_interpolating\_node}}
@@ -242,11 +243,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_ac4e4ae53741
 
 
 
-Definition at line \mbox{\hyperlink{refineable__solid__elements_8h_source_l00962}{962}} of file \mbox{\hyperlink{refineable__solid__elements_8h_source}{refineable\+\_\+solid\+\_\+elements.\+h}}.
+Definition at line 962 of file refineable\+\_\+solid\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{refineable__elements_8cc_source_l00053}{oomph\+::\+Refineable\+Element\+::check\+\_\+value\+\_\+id()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l01858}{oomph\+::\+Finite\+Element\+::local\+\_\+one\+\_\+d\+\_\+fraction\+\_\+of\+\_\+node()}}.
+References oomph\+::\+Refineable\+Element\+::check\+\_\+value\+\_\+id(), i, and oomph\+::\+Finite\+Element\+::local\+\_\+one\+\_\+d\+\_\+fraction\+\_\+of\+\_\+node().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQPVDElementWithContinuousPressure_ace99412d0a2d0015ce56c3ee4c375254}\label{classoomph_1_1RefineableQPVDElementWithContinuousPressure_ace99412d0a2d0015ce56c3ee4c375254}} 
 \index{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$}!ncont\_interpolated\_values@{ncont\_interpolated\_values}}
@@ -265,7 +266,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineablePVDEquationsWithPres
 
 
 
-Definition at line \mbox{\hyperlink{refineable__solid__elements_8h_source_l00847}{847}} of file \mbox{\hyperlink{refineable__solid__elements_8h_source}{refineable\+\_\+solid\+\_\+elements.\+h}}.
+Definition at line 847 of file refineable\+\_\+solid\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQPVDElementWithContinuousPressure_a376ff088df9caf8cbb9a653e8837987e}\label{classoomph_1_1RefineableQPVDElementWithContinuousPressure_a376ff088df9caf8cbb9a653e8837987e}} 
 \index{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$}!ninterpolating\_node@{ninterpolating\_node}}
@@ -284,11 +285,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a8b1b5031b55
 
 
 
-Definition at line \mbox{\hyperlink{refineable__solid__elements_8h_source_l01069}{1069}} of file \mbox{\hyperlink{refineable__solid__elements_8h_source}{refineable\+\_\+solid\+\_\+elements.\+h}}.
+Definition at line 1069 of file refineable\+\_\+solid\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{refineable__elements_8cc_source_l00053}{oomph\+::\+Refineable\+Element\+::check\+\_\+value\+\_\+id()}}, and \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}.
+References oomph\+::\+Refineable\+Element\+::check\+\_\+value\+\_\+id(), and oomph\+::\+Finite\+Element\+::nnode().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQPVDElementWithContinuousPressure_a9b38f35f3251638b00e5b095f0294e07}\label{classoomph_1_1RefineableQPVDElementWithContinuousPressure_a9b38f35f3251638b00e5b095f0294e07}} 
 \index{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$}!ninterpolating\_node\_1d@{ninterpolating\_node\_1d}}
@@ -307,11 +308,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a850180084aa
 
 
 
-Definition at line \mbox{\hyperlink{refineable__solid__elements_8h_source_l01051}{1051}} of file \mbox{\hyperlink{refineable__solid__elements_8h_source}{refineable\+\_\+solid\+\_\+elements.\+h}}.
+Definition at line 1051 of file refineable\+\_\+solid\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{refineable__elements_8cc_source_l00053}{oomph\+::\+Refineable\+Element\+::check\+\_\+value\+\_\+id()}}, and \mbox{\hyperlink{elements_8h_source_l02218}{oomph\+::\+Finite\+Element\+::nnode\+\_\+1d()}}.
+References oomph\+::\+Refineable\+Element\+::check\+\_\+value\+\_\+id(), and oomph\+::\+Finite\+Element\+::nnode\+\_\+1d().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQPVDElementWithContinuousPressure_aa0689547ae0239df24c07a985e891a16}\label{classoomph_1_1RefineableQPVDElementWithContinuousPressure_aa0689547ae0239df24c07a985e891a16}} 
 \index{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$}!nrecovery\_order@{nrecovery\_order}}
@@ -330,7 +331,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_af39480835
 
 
 
-Definition at line \mbox{\hyperlink{refineable__solid__elements_8h_source_l00933}{933}} of file \mbox{\hyperlink{refineable__solid__elements_8h_source}{refineable\+\_\+solid\+\_\+elements.\+h}}.
+Definition at line 933 of file refineable\+\_\+solid\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQPVDElementWithContinuousPressure_a4cf706224993a10a0c774a314d4c25c4}\label{classoomph_1_1RefineableQPVDElementWithContinuousPressure_a4cf706224993a10a0c774a314d4c25c4}} 
 \index{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$}!nvertex\_node@{nvertex\_node}}
@@ -349,11 +350,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a19495a0e7
 
 
 
-Definition at line \mbox{\hyperlink{refineable__solid__elements_8h_source_l00920}{920}} of file \mbox{\hyperlink{refineable__solid__elements_8h_source}{refineable\+\_\+solid\+\_\+elements.\+h}}.
+Definition at line 920 of file refineable\+\_\+solid\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02491}{oomph\+::\+Finite\+Element\+::nvertex\+\_\+node()}}.
+References oomph\+::\+Finite\+Element\+::nvertex\+\_\+node().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQPVDElementWithContinuousPressure_a5f2c7682c947acf7ce7689a30d31f48a}\label{classoomph_1_1RefineableQPVDElementWithContinuousPressure_a5f2c7682c947acf7ce7689a30d31f48a}} 
 \index{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$}!pin\_elemental\_redundant\_nodal\_solid\_pressures@{pin\_elemental\_redundant\_nodal\_solid\_pressures}}
@@ -372,11 +373,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1PVDEquationsBase_a1e0c99884cc3
 
 
 
-Definition at line \mbox{\hyperlink{refineable__solid__elements_8h_source_l00893}{893}} of file \mbox{\hyperlink{refineable__solid__elements_8h_source}{refineable\+\_\+solid\+\_\+elements.\+h}}.
+Definition at line 893 of file refineable\+\_\+solid\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{nodes_8h_source_l01285}{oomph\+::\+Node\+::is\+\_\+hanging()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{solid__elements_8h_source_l01592}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$\+::npres\+\_\+solid()}}, \mbox{\hyperlink{nodes_8h_source_l00385}{oomph\+::\+Data\+::pin()}}, \mbox{\hyperlink{solid__elements_8h_source_l01566}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$\+::solid\+\_\+p\+\_\+nodal\+\_\+index()}}, \mbox{\hyperlink{refineable__solid__elements_8h_source_l01114}{oomph\+::\+Refineable\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$\+::solid\+\_\+pressure\+\_\+node\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8h_source_l00391}{oomph\+::\+Data\+::unpin()}}.
+References oomph\+::\+Node\+::is\+\_\+hanging(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$\+::npres\+\_\+solid(), oomph\+::\+Data\+::pin(), oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$\+::solid\+\_\+p\+\_\+nodal\+\_\+index(), oomph\+::\+Refineable\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$\+::solid\+\_\+pressure\+\_\+node\+\_\+pt(), and oomph\+::\+Data\+::unpin().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQPVDElementWithContinuousPressure_a1a0d400c3d74157cacca3f3329a07436}\label{classoomph_1_1RefineableQPVDElementWithContinuousPressure_a1a0d400c3d74157cacca3f3329a07436}} 
 \index{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$}!rebuild\_from\_sons@{rebuild\_from\_sons}}
@@ -395,7 +396,7 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_a33324be27833fa4b782
 
 
 
-Definition at line \mbox{\hyperlink{refineable__solid__elements_8h_source_l00853}{853}} of file \mbox{\hyperlink{refineable__solid__elements_8h_source}{refineable\+\_\+solid\+\_\+elements.\+h}}.
+Definition at line 853 of file refineable\+\_\+solid\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQPVDElementWithContinuousPressure_a1ab39caa5f26573cb1d38ab8f9f0d76d}\label{classoomph_1_1RefineableQPVDElementWithContinuousPressure_a1ab39caa5f26573cb1d38ab8f9f0d76d}} 
 \index{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$}!required\_nvalue@{required\_nvalue}}
@@ -414,30 +415,30 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPress
 
 
 
-Definition at line \mbox{\hyperlink{refineable__solid__elements_8h_source_l00841}{841}} of file \mbox{\hyperlink{refineable__solid__elements_8h_source}{refineable\+\_\+solid\+\_\+elements.\+h}}.
+Definition at line 841 of file refineable\+\_\+solid\+\_\+elements.\+h.
 
-\mbox{\Hypertarget{classoomph_1_1RefineableQPVDElementWithContinuousPressure_abbf48abde03f47221e614b218e2bd64a}\label{classoomph_1_1RefineableQPVDElementWithContinuousPressure_abbf48abde03f47221e614b218e2bd64a}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableQPVDElementWithContinuousPressure_a78ac41286548a45383abb385a1be4598}\label{classoomph_1_1RefineableQPVDElementWithContinuousPressure_a78ac41286548a45383abb385a1be4598}} 
 \index{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$}!solid\_pressure\_node\_pt@{solid\_pressure\_node\_pt}}
 \index{solid\_pressure\_node\_pt@{solid\_pressure\_node\_pt}!oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{solid\_pressure\_node\_pt()}{solid\_pressure\_node\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQPVDElementWithContinuousPressure}{oomph\+::\+Refineable\+QPVDElement\+With\+Continuous\+Pressure}}$<$ DIM $>$\+::solid\+\_\+pressure\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{l }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQPVDElementWithContinuousPressure}{oomph\+::\+Refineable\+QPVDElement\+With\+Continuous\+Pressure}}$<$ DIM $>$\+::solid\+\_\+pressure\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{l }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineablePVDEquationsWithPressure_a95ddd44e1c5e4e5b33e4a045159e0df0}{oomph\+::\+Refineable\+PVDEquations\+With\+Pressure$<$ DIM $>$}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineablePVDEquationsWithPressure_a4e94b11315f8345030fa4b3b923bd91b}{oomph\+::\+Refineable\+PVDEquations\+With\+Pressure$<$ DIM $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{refineable__solid__elements_8h_source_l01114}{1114}} of file \mbox{\hyperlink{refineable__solid__elements_8h_source}{refineable\+\_\+solid\+\_\+elements.\+h}}.
+Definition at line 1114 of file refineable\+\_\+solid\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{solid__elements_8h_source_l01545}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$\+::\+Pconv}}.
+References oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$\+::\+Pconv.
 
 
 
-Referenced by \mbox{\hyperlink{refineable__solid__elements_8h_source_l00986}{oomph\+::\+Refineable\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$\+::get\+\_\+interpolating\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate()}}, \mbox{\hyperlink{refineable__solid__elements_8h_source_l00942}{oomph\+::\+Refineable\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$\+::interpolating\+\_\+node\+\_\+pt()}}, and \mbox{\hyperlink{refineable__solid__elements_8h_source_l00893}{oomph\+::\+Refineable\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+solid\+\_\+pressures()}}.
+Referenced by oomph\+::\+Refineable\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$\+::get\+\_\+interpolating\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate(), oomph\+::\+Refineable\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$\+::interpolating\+\_\+node\+\_\+pt(), and oomph\+::\+Refineable\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+solid\+\_\+pressures().
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQPVDElementWithContinuousPressure_a7dd0d23afdb19626b2eb1ddfa0dc9612}\label{classoomph_1_1RefineableQPVDElementWithContinuousPressure_a7dd0d23afdb19626b2eb1ddfa0dc9612}} 
 \index{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$}!unpin\_elemental\_solid\_pressure\_dofs@{unpin\_elemental\_solid\_pressure\_dofs}}
@@ -456,18 +457,18 @@ Implements \mbox{\hyperlink{classoomph_1_1PVDEquationsBase_abd9064a8651728806dda
 
 
 
-Definition at line \mbox{\hyperlink{refineable__solid__elements_8h_source_l00879}{879}} of file \mbox{\hyperlink{refineable__solid__elements_8h_source}{refineable\+\_\+solid\+\_\+elements.\+h}}.
+Definition at line 879 of file refineable\+\_\+solid\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{solid__elements_8h_source_l01566}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$\+::solid\+\_\+p\+\_\+nodal\+\_\+index()}}, and \mbox{\hyperlink{nodes_8h_source_l00391}{oomph\+::\+Data\+::unpin()}}.
+References oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$\+::solid\+\_\+p\+\_\+nodal\+\_\+index(), and oomph\+::\+Data\+::unpin().
 
-\mbox{\Hypertarget{classoomph_1_1RefineableQPVDElementWithContinuousPressure_a10af3890daea1072c7d142bdb166a44a}\label{classoomph_1_1RefineableQPVDElementWithContinuousPressure_a10af3890daea1072c7d142bdb166a44a}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableQPVDElementWithContinuousPressure_a9afc4605536e3f3a637ae1694c0d9065}\label{classoomph_1_1RefineableQPVDElementWithContinuousPressure_a9afc4605536e3f3a637ae1694c0d9065}} 
 \index{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$}!vertex\_node\_pt@{vertex\_node\_pt}}
 \index{vertex\_node\_pt@{vertex\_node\_pt}!oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$@{oomph::RefineableQPVDElementWithContinuousPressure$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{vertex\_node\_pt()}{vertex\_node\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQPVDElementWithContinuousPressure}{oomph\+::\+Refineable\+QPVDElement\+With\+Continuous\+Pressure}}$<$ DIM $>$\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQPVDElementWithContinuousPressure}{oomph\+::\+Refineable\+QPVDElement\+With\+Continuous\+Pressure}}$<$ DIM $>$\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -475,15 +476,15 @@ Pointer to the j-\/th vertex node in the element.
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a6d852edae3d9f6bddeb5aaf136ebbb8b}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a0eedccc33519f852c5dc2055ddf2774b}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
 
 
 
-Definition at line \mbox{\hyperlink{refineable__solid__elements_8h_source_l00926}{926}} of file \mbox{\hyperlink{refineable__solid__elements_8h_source}{refineable\+\_\+solid\+\_\+elements.\+h}}.
+Definition at line 926 of file refineable\+\_\+solid\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02500}{oomph\+::\+Finite\+Element\+::vertex\+\_\+node\+\_\+pt()}}.
+References oomph\+::\+Finite\+Element\+::vertex\+\_\+node\+\_\+pt().
 
 
 

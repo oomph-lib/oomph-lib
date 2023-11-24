@@ -25,7 +25,7 @@ Inheritance diagram for oomph\+::Double\+Vector\+:\begin{figure}[H]
 \mbox{\hyperlink{classoomph_1_1DoubleVector_a29d22a13eeaa61d5467d5cfa37e1f38f}{Double\+Vector}} (const \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&dist, const double \&v=0.\+0)
 \begin{DoxyCompactList}\small\item\em Constructor. Assembles a \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} with a prescribed distribution. Additionally every entry can be set (with argument v -\/ defaults to 0). \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1DoubleVector_a53441aa63f3acfa65dc4556ffa0b5573}{$\sim$\+Double\+Vector}} ()
-\begin{DoxyCompactList}\small\item\em Destructor -\/ just calls this-\/\texorpdfstring{$>$}{>}\mbox{\hyperlink{classoomph_1_1DoubleVector_af1677445056759263b1b076966e7bfae}{clear()}} to delete the distribution and data. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Destructor -\/ just calls this-\/$>$\mbox{\hyperlink{classoomph_1_1DoubleVector_af1677445056759263b1b076966e7bfae}{clear()}} to delete the distribution and data. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1DoubleVector_af547ee3b90c4a5598b655ed57ed78b2f}{Double\+Vector}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&new\+\_\+vector)
 \begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1DoubleVector_ab5f56f41d86a18bba358912b1c4f2dac}{operator=}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&old\+\_\+vector)
@@ -70,9 +70,9 @@ const double \& \mbox{\hyperlink{classoomph_1_1DoubleVector_a54cec3cc3e28f6781c2
 \begin{DoxyCompactList}\small\item\em \mbox{[}\mbox{]} access function to the (local) values of this vector \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1DoubleVector_a4c176b562f503701d65882a930d5b8f5}{max}} () const
 \begin{DoxyCompactList}\small\item\em returns the maximum coefficient \end{DoxyCompactList}\item 
-double $\ast$ \mbox{\hyperlink{classoomph_1_1DoubleVector_ae3484a5eb4cb663e09640806ef1bf05a}{values\+\_\+pt}} ()
+double $\ast$ \mbox{\hyperlink{classoomph_1_1DoubleVector_a8c3dcdf8a602a1f266bbe72d98fde2e7}{values\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em access function to the underlying values \end{DoxyCompactList}\item 
-double $\ast$ \mbox{\hyperlink{classoomph_1_1DoubleVector_a1e2a19113e346db74e6fe34e0e945022}{values\+\_\+pt}} () const
+double $\ast$ \mbox{\hyperlink{classoomph_1_1DoubleVector_ab88fb798be9cc01d3f3fb64db2c8c9f6}{values\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em access function to the underlying values (const version) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1DoubleVector_aa258eab026007d7f02847b6e5ef3d1dc}{output}} (std\+::ostream \&outfile, const int \&output\+\_\+precision=-\/1) const
 \begin{DoxyCompactList}\small\item\em output the global contents of the vector \end{DoxyCompactList}\item 
@@ -104,7 +104,7 @@ bool \mbox{\hyperlink{classoomph_1_1DoubleVector_ab72c78c801b28fdd00391a9c266413
 \doxysubsection*{Friends}
 \begin{DoxyCompactItemize}
 \item 
-std\+::ostream \& \mbox{\hyperlink{classoomph_1_1DoubleVector_ab24e12068a4b36f10e302b038eed0a1f}{operator$<$$<$}} (std\+::ostream \&out, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&v)
+std\+::ostream \& \mbox{\hyperlink{classoomph_1_1DoubleVector_a738e90fa5474b2ab868b50d76347a20d}{operator$<$$<$}} (std\+::ostream \&out, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&v)
 \begin{DoxyCompactList}\small\item\em Ouput operator for \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -112,7 +112,7 @@ std\+::ostream \& \mbox{\hyperlink{classoomph_1_1DoubleVector_ab24e12068a4b36f10
 \doxysubsection{Detailed Description}
 A vector in the mathematical sense, initially developed for linear algebra type applications. If MPI then this vector can be distributed -\/ its distribution is described by the \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} object at Distribution\+\_\+pt. \mbox{\hyperlink{classoomph_1_1Data}{Data}} is stored in a C-\/style pointer vector (double$\ast$) 
 
-Definition at line \mbox{\hyperlink{double__vector_8h_source_l00057}{57}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+Definition at line 57 of file double\+\_\+vector.\+h.
 
 
 
@@ -129,7 +129,7 @@ Constructor for an uninitialized \mbox{\hyperlink{classoomph_1_1DoubleVector}{Do
 
 
 
-Definition at line \mbox{\hyperlink{double__vector_8h_source_l00061}{61}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+Definition at line 61 of file double\+\_\+vector.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1DoubleVector_a21f824524cd7bc779af3cbdbfe1d3ef8}\label{classoomph_1_1DoubleVector_a21f824524cd7bc779af3cbdbfe1d3ef8}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!DoubleVector@{DoubleVector}}
@@ -143,11 +143,11 @@ Constructor. Assembles a \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Ve
 
 
 
-Definition at line \mbox{\hyperlink{double__vector_8h_source_l00066}{66}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+Definition at line 66 of file double\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{double__vector_8cc_source_l00035}{build()}}.
+References build().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleVector_a29d22a13eeaa61d5467d5cfa37e1f38f}\label{classoomph_1_1DoubleVector_a29d22a13eeaa61d5467d5cfa37e1f38f}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!DoubleVector@{DoubleVector}}
@@ -161,11 +161,11 @@ Constructor. Assembles a \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Ve
 
 
 
-Definition at line \mbox{\hyperlink{double__vector_8h_source_l00076}{76}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+Definition at line 76 of file double\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{double__vector_8cc_source_l00035}{build()}}.
+References build().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleVector_a53441aa63f3acfa65dc4556ffa0b5573}\label{classoomph_1_1DoubleVector_a53441aa63f3acfa65dc4556ffa0b5573}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!````~DoubleVector@{$\sim$DoubleVector}}
@@ -175,15 +175,15 @@ References \mbox{\hyperlink{double__vector_8cc_source_l00035}{build()}}.
 
 
 
-Destructor -\/ just calls this-\/\texorpdfstring{$>$}{>}\mbox{\hyperlink{classoomph_1_1DoubleVector_af1677445056759263b1b076966e7bfae}{clear()}} to delete the distribution and data. 
+Destructor -\/ just calls this-\/$>$\mbox{\hyperlink{classoomph_1_1DoubleVector_af1677445056759263b1b076966e7bfae}{clear()}} to delete the distribution and data. 
 
 
 
-Definition at line \mbox{\hyperlink{double__vector_8h_source_l00084}{84}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+Definition at line 84 of file double\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{double__vector_8h_source_l00142}{clear()}}.
+References clear().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleVector_af547ee3b90c4a5598b655ed57ed78b2f}\label{classoomph_1_1DoubleVector_af547ee3b90c4a5598b655ed57ed78b2f}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!DoubleVector@{DoubleVector}}
@@ -197,11 +197,11 @@ Copy constructor.
 
 
 
-Definition at line \mbox{\hyperlink{double__vector_8h_source_l00090}{90}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+Definition at line 90 of file double\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{double__vector_8cc_source_l00035}{build()}}.
+References build().
 
 
 
@@ -218,15 +218,15 @@ Just copys the argument \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vec
 
 
 
-Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00035}{35}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+Definition at line 35 of file double\+\_\+vector.\+cc.
 
 
 
-References \mbox{\hyperlink{double__vector_8cc_source_l00035}{build()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00500}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{double__vector_8h_source_l00323}{Internal\+\_\+values}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{double__vector_8h_source_l00254}{values\+\_\+pt()}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+built(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), Internal\+\_\+values, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), values\+\_\+pt(), and Values\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{trilinos__solver_8h_source_l00115}{oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Apply\+Inverse()}}, \mbox{\hyperlink{double__vector_8cc_source_l00035}{build()}}, \mbox{\hyperlink{complex__smoother_8h_source_l00532}{oomph\+::\+Complex\+Damped\+Jacobi$<$ MATRIX $>$\+::complex\+\_\+solve\+\_\+helper()}}, \mbox{\hyperlink{double__vector_8cc_source_l00993}{oomph\+::\+Double\+Vector\+Helpers\+::concatenate()}}, \mbox{\hyperlink{double__vector_8cc_source_l01856}{oomph\+::\+Double\+Vector\+Helpers\+::concatenate\+\_\+without\+\_\+communication()}}, \mbox{\hyperlink{double__vector_8h_source_l00066}{Double\+Vector()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04186}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{problem_8cc_source_l02479}{oomph\+::\+Problem\+::get\+\_\+dofs()}}, \mbox{\hyperlink{problem_8cc_source_l03579}{oomph\+::\+Problem\+::get\+\_\+inverse\+\_\+mass\+\_\+matrix\+\_\+times\+\_\+residuals()}}, \mbox{\hyperlink{problem_8cc_source_l03890}{oomph\+::\+Problem\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{problem_8cc_source_l03714}{oomph\+::\+Problem\+::get\+\_\+residuals()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01086}{oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solve()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04599}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+get\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04009}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+get\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00657}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l01782}{oomph\+::\+CRDouble\+Matrix\+::multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l00294}{oomph\+::\+Dense\+Double\+Matrix\+::multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l00622}{oomph\+::\+CCDouble\+Matrix\+::multiply()}}, \mbox{\hyperlink{matrix__vector__product_8cc_source_l00108}{oomph\+::\+Matrix\+Vector\+Product\+::multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l01882}{oomph\+::\+CRDouble\+Matrix\+::multiply\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8cc_source_l00385}{oomph\+::\+Dense\+Double\+Matrix\+::multiply\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8cc_source_l00715}{oomph\+::\+CCDouble\+Matrix\+::multiply\+\_\+transpose()}}, \mbox{\hyperlink{matrix__vector__product_8cc_source_l00177}{oomph\+::\+Matrix\+Vector\+Product\+::multiply\+\_\+transpose()}}, \mbox{\hyperlink{double__vector_8h_source_l00100}{operator=()}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00213}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::operator=()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02677}{oomph\+::\+Pitch\+Fork\+Handler\+::\+Pitch\+Fork\+Handler()}}, \mbox{\hyperlink{general__purpose__block__preconditioners_8cc_source_l00211}{oomph\+::\+Block\+Diagonal\+Preconditioner$<$ MATRIX $>$\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00615}{oomph\+::\+Dummy\+Block\+Preconditioner$<$ MATRIX $>$\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00117}{oomph\+::\+Matrix\+Based\+Diag\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00280}{oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{trilinos__preconditioners_8cc_source_l00126}{oomph\+::\+Trilinos\+Preconditioner\+Base\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00373}{oomph\+::\+FSIPreconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00280}{oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00310}{oomph\+::\+Lagrange\+Enforced\+Flow\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00658}{oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{solid__preconditioners_8cc_source_l00493}{oomph\+::\+Pressure\+Based\+Solid\+LSCPreconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00482}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l00677}{oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::resolve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02007}{oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02510}{oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve()}}, \mbox{\hyperlink{frontal__solver_8cc_source_l00888}{oomph\+::\+HSL\+\_\+\+MA42\+::resolve()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00489}{oomph\+::\+Trilinos\+Aztec\+OOSolver\+::resolve()}}, \mbox{\hyperlink{problem_8cc_source_l00230}{oomph\+::\+Problem\+::setup\+\_\+element\+\_\+count\+\_\+per\+\_\+dof()}}, \mbox{\hyperlink{linear__solver_8cc_source_l00419}{oomph\+::\+Dense\+LU\+::solve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l00405}{oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::solve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02275}{oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve()}}, \mbox{\hyperlink{frontal__solver_8cc_source_l00127}{oomph\+::\+HSL\+\_\+\+MA42\+::solve()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l00950}{oomph\+::\+CG$<$ MATRIX $>$\+::solve()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l00090}{oomph\+::\+Bi\+CGStab$<$ MATRIX $>$\+::solve()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l01362}{oomph\+::\+GS$<$ CRDouble\+Matrix $>$\+::solve()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02161}{oomph\+::\+GMRES$<$ MATRIX $>$\+::solve()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02746}{oomph\+::\+Augmented\+Problem\+GMRES\+::solve()}}, \mbox{\hyperlink{linear__solver_8cc_source_l00814}{oomph\+::\+Super\+LUSolver\+::solve()}}, \mbox{\hyperlink{mumps__solver_8cc_source_l00894}{oomph\+::\+Mumps\+Solver\+::solve()}}, \mbox{\hyperlink{complex__smoother_8h_source_l01806}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve()}}, \mbox{\hyperlink{complex__smoother_8h_source_l03284}{oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::solve()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00043}{oomph\+::\+Trilinos\+Aztec\+OOSolver\+::solve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03966}{oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l00605}{oomph\+::\+CG$<$ MATRIX $>$\+::solve\+\_\+helper()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l00171}{oomph\+::\+Bi\+CGStab$<$ MATRIX $>$\+::solve\+\_\+helper()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l01164}{oomph\+::\+GS$<$ MATRIX $>$\+::solve\+\_\+helper()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l01480}{oomph\+::\+GS$<$ CRDouble\+Matrix $>$\+::solve\+\_\+helper()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l01922}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::solve\+\_\+helper()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02250}{oomph\+::\+GMRES$<$ MATRIX $>$\+::solve\+\_\+helper()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02862}{oomph\+::\+Augmented\+Problem\+GMRES\+::solve\+\_\+helper()}}, \mbox{\hyperlink{complex__smoother_8h_source_l02453}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve\+\_\+helper()}}, \mbox{\hyperlink{complex__smoother_8h_source_l03551}{oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::solve\+\_\+helper()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01293}{oomph\+::\+Super\+LUSolver\+::solve\+\_\+transpose()}}, and \mbox{\hyperlink{explicit__timesteppers_8cc_source_l00378}{oomph\+::\+Low\+Storage\+Runge\+Kutta$<$ ORDER $>$\+::timestep()}}.
+Referenced by oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Apply\+Inverse(), build(), oomph\+::\+Complex\+Damped\+Jacobi$<$ MATRIX $>$\+::complex\+\_\+solve\+\_\+helper(), oomph\+::\+Double\+Vector\+Helpers\+::concatenate(), oomph\+::\+Double\+Vector\+Helpers\+::concatenate\+\_\+without\+\_\+communication(), Double\+Vector(), oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block\+\_\+vector(), oomph\+::\+Problem\+::get\+\_\+dofs(), oomph\+::\+Problem\+::get\+\_\+inverse\+\_\+mass\+\_\+matrix\+\_\+times\+\_\+residuals(), oomph\+::\+Problem\+::get\+\_\+jacobian(), oomph\+::\+Problem\+::get\+\_\+residuals(), oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solve(), oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+get\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+get\+\_\+block\+\_\+vector(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply(), oomph\+::\+CRDouble\+Matrix\+::multiply(), oomph\+::\+Dense\+Double\+Matrix\+::multiply(), oomph\+::\+CCDouble\+Matrix\+::multiply(), oomph\+::\+Matrix\+Vector\+Product\+::multiply(), oomph\+::\+CRDouble\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+Dense\+Double\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+CCDouble\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+Matrix\+Vector\+Product\+::multiply\+\_\+transpose(), operator=(), oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::operator=(), oomph\+::\+Pitch\+Fork\+Handler\+::\+Pitch\+Fork\+Handler(), oomph\+::\+Block\+Diagonal\+Preconditioner$<$ MATRIX $>$\+::preconditioner\+\_\+solve(), oomph\+::\+Dummy\+Block\+Preconditioner$<$ MATRIX $>$\+::preconditioner\+\_\+solve(), oomph\+::\+Matrix\+Based\+Diag\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::preconditioner\+\_\+solve(), oomph\+::\+Trilinos\+Preconditioner\+Base\+::preconditioner\+\_\+solve(), oomph\+::\+FSIPreconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Lagrange\+Enforced\+Flow\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Pressure\+Based\+Solid\+LSCPreconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::resolve(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), oomph\+::\+HSL\+\_\+\+MA42\+::resolve(), oomph\+::\+Trilinos\+Aztec\+OOSolver\+::resolve(), oomph\+::\+Problem\+::setup\+\_\+element\+\_\+count\+\_\+per\+\_\+dof(), oomph\+::\+Dense\+LU\+::solve(), oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::solve(), oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), oomph\+::\+HSL\+\_\+\+MA42\+::solve(), oomph\+::\+CG$<$ MATRIX $>$\+::solve(), oomph\+::\+Bi\+CGStab$<$ MATRIX $>$\+::solve(), oomph\+::\+GS$<$ CRDouble\+Matrix $>$\+::solve(), oomph\+::\+GMRES$<$ MATRIX $>$\+::solve(), oomph\+::\+Augmented\+Problem\+GMRES\+::solve(), oomph\+::\+Super\+LUSolver\+::solve(), oomph\+::\+Mumps\+Solver\+::solve(), oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve(), oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::solve(), oomph\+::\+Trilinos\+Aztec\+OOSolver\+::solve(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs(), oomph\+::\+CG$<$ MATRIX $>$\+::solve\+\_\+helper(), oomph\+::\+Bi\+CGStab$<$ MATRIX $>$\+::solve\+\_\+helper(), oomph\+::\+GS$<$ MATRIX $>$\+::solve\+\_\+helper(), oomph\+::\+GS$<$ CRDouble\+Matrix $>$\+::solve\+\_\+helper(), oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::solve\+\_\+helper(), oomph\+::\+GMRES$<$ MATRIX $>$\+::solve\+\_\+helper(), oomph\+::\+Augmented\+Problem\+GMRES\+::solve\+\_\+helper(), oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve\+\_\+helper(), oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::solve\+\_\+helper(), oomph\+::\+Super\+LUSolver\+::solve\+\_\+transpose(), and oomph\+::\+Low\+Storage\+Runge\+Kutta$<$ ORDER $>$\+::timestep().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleVector_ad22d075ba35995e26f40209de1b25746}\label{classoomph_1_1DoubleVector_ad22d075ba35995e26f40209de1b25746}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!build@{build}}
@@ -240,11 +240,11 @@ Assembles a \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} with d
 
 
 
-Definition at line \mbox{\hyperlink{double__vector_8h_source_l00110}{110}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+Definition at line 110 of file double\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{double__vector_8cc_source_l00035}{build()}}.
+References build().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleVector_a73332fc4a200a32d7281ceb548375d8a}\label{classoomph_1_1DoubleVector_a73332fc4a200a32d7281ceb548375d8a}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!build@{build}}
@@ -258,11 +258,11 @@ Assembles a \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} with a
 
 
 
-Definition at line \mbox{\hyperlink{double__vector_8h_source_l00123}{123}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+Definition at line 123 of file double\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{double__vector_8cc_source_l00035}{build()}}.
+References build().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleVector_a84d5a0b2335fb1af865c84f8f25421e9}\label{classoomph_1_1DoubleVector_a84d5a0b2335fb1af865c84f8f25421e9}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!build@{build}}
@@ -276,11 +276,11 @@ Assembles a \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} with d
 
 Assembles a \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} with distribution dist, if v is specified each row is set to v. 
 
-Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00059}{59}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+Definition at line 59 of file double\+\_\+vector.\+cc.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{double__vector_8h_source_l00326}{Built}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00342}{oomph\+::\+Linear\+Algebra\+Distribution\+::built()}}, \mbox{\hyperlink{double__vector_8h_source_l00142}{clear()}}, \mbox{\hyperlink{double__vector_8h_source_l00323}{Internal\+\_\+values}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution(), Built, oomph\+::\+Linear\+Algebra\+Distribution\+::built(), clear(), Internal\+\_\+values, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), and Values\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1DoubleVector_a4e6219936d6b23265b46dd3a25acb7c8}\label{classoomph_1_1DoubleVector_a4e6219936d6b23265b46dd3a25acb7c8}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!build@{build}}
@@ -294,11 +294,11 @@ Assembles a \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} with a
 
 
 
-Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00091}{91}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+Definition at line 91 of file double\+\_\+vector.\+cc.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{double__vector_8h_source_l00326}{Built}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00342}{oomph\+::\+Linear\+Algebra\+Distribution\+::built()}}, \mbox{\hyperlink{double__vector_8h_source_l00142}{clear()}}, \mbox{\hyperlink{double__vector_8cc_source_l00123}{initialise()}}, \mbox{\hyperlink{double__vector_8h_source_l00323}{Internal\+\_\+values}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution(), Built, oomph\+::\+Linear\+Algebra\+Distribution\+::built(), clear(), initialise(), Internal\+\_\+values, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), and Values\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1DoubleVector_aae402d422ec4344a4a45cdb7659b7161}\label{classoomph_1_1DoubleVector_aae402d422ec4344a4a45cdb7659b7161}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!built@{built}}
@@ -308,15 +308,15 @@ References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomp
 
 
 
-Definition at line \mbox{\hyperlink{double__vector_8h_source_l00154}{154}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+Definition at line 154 of file double\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{double__vector_8h_source_l00326}{Built}}.
+References Built.
 
 
 
-Referenced by \mbox{\hyperlink{mumps__solver_8cc_source_l00526}{oomph\+::\+Mumps\+Solver\+::backsub()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02503}{oomph\+::\+Super\+LUSolver\+::backsub\+\_\+serial()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02593}{oomph\+::\+Super\+LUSolver\+::backsub\+\_\+transpose\+\_\+serial()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l01029}{oomph\+::\+Smoother\+::check\+\_\+validity\+\_\+of\+\_\+solve\+\_\+helper\+\_\+inputs()}}, \mbox{\hyperlink{double__vector_8cc_source_l00993}{oomph\+::\+Double\+Vector\+Helpers\+::concatenate()}}, \mbox{\hyperlink{double__vector_8cc_source_l01856}{oomph\+::\+Double\+Vector\+Helpers\+::concatenate\+\_\+without\+\_\+communication()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00180}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::copy\+\_\+to\+\_\+oomphlib\+\_\+vector()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00041}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+vector()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00146}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+epetra\+\_\+vector\+\_\+view\+\_\+data()}}, \mbox{\hyperlink{double__vector_8cc_source_l00805}{dot()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04793}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04186}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l02939}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block\+\_\+vectors()}}, \mbox{\hyperlink{problem_8cc_source_l03890}{oomph\+::\+Problem\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{problem_8cc_source_l03714}{oomph\+::\+Problem\+::get\+\_\+residuals()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01086}{oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solve()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04599}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+get\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04009}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+get\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l03131}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+get\+\_\+block\+\_\+vectors()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04850}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+return\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04293}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+return\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l03684}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+return\+\_\+block\+\_\+vectors()}}, \mbox{\hyperlink{matrices_8cc_source_l01749}{oomph\+::\+CRDouble\+Matrix\+::lubksub()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00657}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l01782}{oomph\+::\+CRDouble\+Matrix\+::multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l00294}{oomph\+::\+Dense\+Double\+Matrix\+::multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l00622}{oomph\+::\+CCDouble\+Matrix\+::multiply()}}, \mbox{\hyperlink{matrix__vector__product_8cc_source_l00108}{oomph\+::\+Matrix\+Vector\+Product\+::multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l01882}{oomph\+::\+CRDouble\+Matrix\+::multiply\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8cc_source_l00385}{oomph\+::\+Dense\+Double\+Matrix\+::multiply\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8cc_source_l00715}{oomph\+::\+CCDouble\+Matrix\+::multiply\+\_\+transpose()}}, \mbox{\hyperlink{matrix__vector__product_8cc_source_l00177}{oomph\+::\+Matrix\+Vector\+Product\+::multiply\+\_\+transpose()}}, \mbox{\hyperlink{double__vector_8cc_source_l00867}{norm()}}, \mbox{\hyperlink{double__vector_8cc_source_l00459}{operator+=()}}, \mbox{\hyperlink{double__vector_8cc_source_l00504}{operator-\/=()}}, \mbox{\hyperlink{double__vector_8cc_source_l00426}{operator==()}}, \mbox{\hyperlink{general__purpose__block__preconditioners_8cc_source_l00211}{oomph\+::\+Block\+Diagonal\+Preconditioner$<$ MATRIX $>$\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00117}{oomph\+::\+Matrix\+Based\+Diag\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00280}{oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00624}{oomph\+::\+ILUZero\+Preconditioner$<$ CCDouble\+Matrix $>$\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00682}{oomph\+::\+ILUZero\+Preconditioner$<$ CRDouble\+Matrix $>$\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01775}{oomph\+::\+Hypre\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{preconditioner_8h_source_l00292}{oomph\+::\+Identity\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00373}{oomph\+::\+FSIPreconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00310}{oomph\+::\+Lagrange\+Enforced\+Flow\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00658}{oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{solid__preconditioners_8cc_source_l00493}{oomph\+::\+Pressure\+Based\+Solid\+LSCPreconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l00677}{oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::resolve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02007}{oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02510}{oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01532}{oomph\+::\+Hypre\+Solver\+::resolve()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00489}{oomph\+::\+Trilinos\+Aztec\+OOSolver\+::resolve()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l05046}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::return\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04489}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::return\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l03443}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::return\+\_\+block\+\_\+vectors()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l02774}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::return\+\_\+concatenated\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{mumps__solver_8cc_source_l00724}{oomph\+::\+Mumps\+Solver\+::solve()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01436}{oomph\+::\+Hypre\+Solver\+::solve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l00405}{oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::solve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01705}{oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02275}{oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03621}{oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l00090}{oomph\+::\+Bi\+CGStab$<$ MATRIX $>$\+::solve()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02161}{oomph\+::\+GMRES$<$ MATRIX $>$\+::solve()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02746}{oomph\+::\+Augmented\+Problem\+GMRES\+::solve()}}, \mbox{\hyperlink{linear__solver_8cc_source_l00575}{oomph\+::\+FD\+\_\+\+LU\+::solve()}}, \mbox{\hyperlink{linear__solver_8cc_source_l00814}{oomph\+::\+Super\+LUSolver\+::solve()}}, \mbox{\hyperlink{complex__smoother_8h_source_l01806}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve()}}, \mbox{\hyperlink{complex__smoother_8h_source_l03284}{oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::solve()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00043}{oomph\+::\+Trilinos\+Aztec\+OOSolver\+::solve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03966}{oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l00605}{oomph\+::\+CG$<$ MATRIX $>$\+::solve\+\_\+helper()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l00171}{oomph\+::\+Bi\+CGStab$<$ MATRIX $>$\+::solve\+\_\+helper()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02250}{oomph\+::\+GMRES$<$ MATRIX $>$\+::solve\+\_\+helper()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02862}{oomph\+::\+Augmented\+Problem\+GMRES\+::solve\+\_\+helper()}}, \mbox{\hyperlink{complex__smoother_8h_source_l02453}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve\+\_\+helper()}}, \mbox{\hyperlink{complex__smoother_8h_source_l03551}{oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::solve\+\_\+helper()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01293}{oomph\+::\+Super\+LUSolver\+::solve\+\_\+transpose()}}, \mbox{\hyperlink{double__vector_8cc_source_l01413}{oomph\+::\+Double\+Vector\+Helpers\+::split()}}, and \mbox{\hyperlink{double__vector_8cc_source_l02075}{oomph\+::\+Double\+Vector\+Helpers\+::split\+\_\+without\+\_\+communication()}}.
+Referenced by oomph\+::\+Mumps\+Solver\+::backsub(), oomph\+::\+Super\+LUSolver\+::backsub\+\_\+serial(), oomph\+::\+Super\+LUSolver\+::backsub\+\_\+transpose\+\_\+serial(), oomph\+::\+Smoother\+::check\+\_\+validity\+\_\+of\+\_\+solve\+\_\+helper\+\_\+inputs(), oomph\+::\+Double\+Vector\+Helpers\+::concatenate(), oomph\+::\+Double\+Vector\+Helpers\+::concatenate\+\_\+without\+\_\+communication(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::copy\+\_\+to\+\_\+oomphlib\+\_\+vector(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+vector(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+epetra\+\_\+vector\+\_\+view\+\_\+data(), dot(), oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block\+\_\+vectors(), oomph\+::\+Problem\+::get\+\_\+jacobian(), oomph\+::\+Problem\+::get\+\_\+residuals(), oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solve(), oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+get\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+get\+\_\+block\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+get\+\_\+block\+\_\+vectors(), oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+return\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+return\+\_\+block\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+return\+\_\+block\+\_\+vectors(), oomph\+::\+CRDouble\+Matrix\+::lubksub(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply(), oomph\+::\+CRDouble\+Matrix\+::multiply(), oomph\+::\+Dense\+Double\+Matrix\+::multiply(), oomph\+::\+CCDouble\+Matrix\+::multiply(), oomph\+::\+Matrix\+Vector\+Product\+::multiply(), oomph\+::\+CRDouble\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+Dense\+Double\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+CCDouble\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+Matrix\+Vector\+Product\+::multiply\+\_\+transpose(), norm(), operator+=(), operator-\/=(), operator==(), oomph\+::\+Block\+Diagonal\+Preconditioner$<$ MATRIX $>$\+::preconditioner\+\_\+solve(), oomph\+::\+Matrix\+Based\+Diag\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::preconditioner\+\_\+solve(), oomph\+::\+ILUZero\+Preconditioner$<$ CCDouble\+Matrix $>$\+::preconditioner\+\_\+solve(), oomph\+::\+ILUZero\+Preconditioner$<$ CRDouble\+Matrix $>$\+::preconditioner\+\_\+solve(), oomph\+::\+Hypre\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Identity\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+FSIPreconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Lagrange\+Enforced\+Flow\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Pressure\+Based\+Solid\+LSCPreconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::resolve(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), oomph\+::\+Hypre\+Solver\+::resolve(), oomph\+::\+Trilinos\+Aztec\+OOSolver\+::resolve(), oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::return\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::return\+\_\+block\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::return\+\_\+block\+\_\+vectors(), oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::return\+\_\+concatenated\+\_\+block\+\_\+vector(), oomph\+::\+Mumps\+Solver\+::solve(), oomph\+::\+Hypre\+Solver\+::solve(), oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::solve(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve(), oomph\+::\+Bi\+CGStab$<$ MATRIX $>$\+::solve(), oomph\+::\+GMRES$<$ MATRIX $>$\+::solve(), oomph\+::\+Augmented\+Problem\+GMRES\+::solve(), oomph\+::\+FD\+\_\+\+LU\+::solve(), oomph\+::\+Super\+LUSolver\+::solve(), oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve(), oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::solve(), oomph\+::\+Trilinos\+Aztec\+OOSolver\+::solve(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs(), oomph\+::\+CG$<$ MATRIX $>$\+::solve\+\_\+helper(), oomph\+::\+Bi\+CGStab$<$ MATRIX $>$\+::solve\+\_\+helper(), oomph\+::\+GMRES$<$ MATRIX $>$\+::solve\+\_\+helper(), oomph\+::\+Augmented\+Problem\+GMRES\+::solve\+\_\+helper(), oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve\+\_\+helper(), oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::solve\+\_\+helper(), oomph\+::\+Super\+LUSolver\+::solve\+\_\+transpose(), oomph\+::\+Double\+Vector\+Helpers\+::split(), and oomph\+::\+Double\+Vector\+Helpers\+::split\+\_\+without\+\_\+communication().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleVector_af1677445056759263b1b076966e7bfae}\label{classoomph_1_1DoubleVector_af1677445056759263b1b076966e7bfae}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!clear@{clear}}
@@ -330,15 +330,15 @@ wipes the \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}}
 
 
 
-Definition at line \mbox{\hyperlink{double__vector_8h_source_l00142}{142}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+Definition at line 142 of file double\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{double__vector_8h_source_l00326}{Built}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00522}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::clear\+\_\+distribution()}}, \mbox{\hyperlink{double__vector_8h_source_l00323}{Internal\+\_\+values}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+References Built, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::clear\+\_\+distribution(), Internal\+\_\+values, and Values\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{double__vector_8cc_source_l00059}{build()}}, \mbox{\hyperlink{problem_8cc_source_l08783}{oomph\+::\+Problem\+::newton\+\_\+solve()}}, \mbox{\hyperlink{problem_8cc_source_l09396}{oomph\+::\+Problem\+::newton\+\_\+solve\+\_\+continuation()}}, \mbox{\hyperlink{biharmonic__preconditioner_8cc_source_l00243}{oomph\+::\+Biharmonic\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{biharmonic__preconditioner_8cc_source_l00657}{oomph\+::\+Inexact\+Sub\+Biharmonic\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00373}{oomph\+::\+FSIPreconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00280}{oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00310}{oomph\+::\+Lagrange\+Enforced\+Flow\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00658}{oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{solid__preconditioners_8cc_source_l00493}{oomph\+::\+Pressure\+Based\+Solid\+LSCPreconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00482}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source_l01045}{oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Subsidiary\+Block\+Preconditioner\+Old\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{linear__solver_8h_source_l00300}{oomph\+::\+Linear\+Solver\+::reset\+\_\+gradient()}}, \mbox{\hyperlink{double__vector_8h_source_l00167}{set\+\_\+external\+\_\+values()}}, \mbox{\hyperlink{eigen__solver_8cc_source_l00072}{oomph\+::\+ARPACK\+::solve\+\_\+eigenproblem()}}, and \mbox{\hyperlink{double__vector_8h_source_l00084}{$\sim$\+Double\+Vector()}}.
+Referenced by build(), oomph\+::\+Problem\+::newton\+\_\+solve(), oomph\+::\+Problem\+::newton\+\_\+solve\+\_\+continuation(), oomph\+::\+Biharmonic\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Inexact\+Sub\+Biharmonic\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+FSIPreconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Lagrange\+Enforced\+Flow\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Pressure\+Based\+Solid\+LSCPreconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Subsidiary\+Block\+Preconditioner\+Old\+::preconditioner\+\_\+solve(), oomph\+::\+Linear\+Solver\+::reset\+\_\+gradient(), set\+\_\+external\+\_\+values(), oomph\+::\+ARPACK\+::solve\+\_\+eigenproblem\+\_\+legacy(), and $\sim$\+Double\+Vector().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleVector_abd20e2e394c8e08749ed34c7228c8506}\label{classoomph_1_1DoubleVector_abd20e2e394c8e08749ed34c7228c8506}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!dot@{dot}}
@@ -352,15 +352,15 @@ compute the dot product of this vector with the vector vec.
 
 compute the dot product of this vector with the vector vec 
 
-Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00805}{805}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+Definition at line 805 of file double\+\_\+vector.\+cc.
 
 
 
-References \mbox{\hyperlink{double__vector_8h_source_l00154}{built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{double__vector_8h_source_l00254}{values\+\_\+pt()}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+References built(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), i, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), values\+\_\+pt(), and Values\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{iterative__linear__solver_8h_source_l01697}{oomph\+::\+Augmented\+Problem\+GMRES\+::augmented\+\_\+matrix\+\_\+multiply()}}, \mbox{\hyperlink{problem_8cc_source_l09912}{oomph\+::\+Problem\+::calculate\+\_\+continuation\+\_\+derivatives\+\_\+helper()}}, \mbox{\hyperlink{double__vector_8cc_source_l00914}{norm()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00729}{oomph\+::\+GMRESBlock\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02007}{oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01705}{oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l00605}{oomph\+::\+CG$<$ MATRIX $>$\+::solve\+\_\+helper()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l00171}{oomph\+::\+Bi\+CGStab$<$ MATRIX $>$\+::solve\+\_\+helper()}}, and \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02862}{oomph\+::\+Augmented\+Problem\+GMRES\+::solve\+\_\+helper()}}.
+Referenced by oomph\+::\+Augmented\+Problem\+GMRES\+::augmented\+\_\+matrix\+\_\+multiply(), oomph\+::\+Problem\+::calculate\+\_\+continuation\+\_\+derivatives\+\_\+helper(), norm(), oomph\+::\+GMRESBlock\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), oomph\+::\+CG$<$ MATRIX $>$\+::solve\+\_\+helper(), oomph\+::\+Bi\+CGStab$<$ MATRIX $>$\+::solve\+\_\+helper(), and oomph\+::\+Augmented\+Problem\+GMRES\+::solve\+\_\+helper().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleVector_a180c1057a29f4ed721da46040a619ecd}\label{classoomph_1_1DoubleVector_a180c1057a29f4ed721da46040a619ecd}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!initialise@{initialise}}
@@ -374,15 +374,15 @@ initialise the whole vector with value v
 
 
 
-Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00123}{123}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+Definition at line 123 of file double\+\_\+vector.\+cc.
 
 
 
-References \mbox{\hyperlink{double__vector_8h_source_l00326}{Built}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+References Built, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), and Values\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{double__vector_8cc_source_l00091}{build()}}, \mbox{\hyperlink{problem_8cc_source_l03890}{oomph\+::\+Problem\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{matrices_8cc_source_l01782}{oomph\+::\+CRDouble\+Matrix\+::multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l00294}{oomph\+::\+Dense\+Double\+Matrix\+::multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l00622}{oomph\+::\+CCDouble\+Matrix\+::multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l01882}{oomph\+::\+CRDouble\+Matrix\+::multiply\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8cc_source_l00385}{oomph\+::\+Dense\+Double\+Matrix\+::multiply\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8cc_source_l00715}{oomph\+::\+CCDouble\+Matrix\+::multiply\+\_\+transpose()}}, \mbox{\hyperlink{biharmonic__preconditioner_8cc_source_l00243}{oomph\+::\+Biharmonic\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l00605}{oomph\+::\+CG$<$ MATRIX $>$\+::solve\+\_\+helper()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l00171}{oomph\+::\+Bi\+CGStab$<$ MATRIX $>$\+::solve\+\_\+helper()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l01164}{oomph\+::\+GS$<$ MATRIX $>$\+::solve\+\_\+helper()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l01480}{oomph\+::\+GS$<$ CRDouble\+Matrix $>$\+::solve\+\_\+helper()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l01922}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::solve\+\_\+helper()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02250}{oomph\+::\+GMRES$<$ MATRIX $>$\+::solve\+\_\+helper()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02862}{oomph\+::\+Augmented\+Problem\+GMRES\+::solve\+\_\+helper()}}, \mbox{\hyperlink{complex__smoother_8h_source_l02453}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve\+\_\+helper()}}, and \mbox{\hyperlink{complex__smoother_8h_source_l03551}{oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::solve\+\_\+helper()}}.
+Referenced by build(), oomph\+::\+Problem\+::get\+\_\+jacobian(), oomph\+::\+CRDouble\+Matrix\+::multiply(), oomph\+::\+Dense\+Double\+Matrix\+::multiply(), oomph\+::\+CCDouble\+Matrix\+::multiply(), oomph\+::\+CRDouble\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+Dense\+Double\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+CCDouble\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+Biharmonic\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+CG$<$ MATRIX $>$\+::solve\+\_\+helper(), oomph\+::\+Bi\+CGStab$<$ MATRIX $>$\+::solve\+\_\+helper(), oomph\+::\+GS$<$ MATRIX $>$\+::solve\+\_\+helper(), oomph\+::\+GS$<$ CRDouble\+Matrix $>$\+::solve\+\_\+helper(), oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::solve\+\_\+helper(), oomph\+::\+GMRES$<$ MATRIX $>$\+::solve\+\_\+helper(), oomph\+::\+Augmented\+Problem\+GMRES\+::solve\+\_\+helper(), oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve\+\_\+helper(), and oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::solve\+\_\+helper().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleVector_ae3ce2b88e72d8b084e9be8e9af10c487}\label{classoomph_1_1DoubleVector_ae3ce2b88e72d8b084e9be8e9af10c487}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!initialise@{initialise}}
@@ -396,11 +396,11 @@ initialise the vector with coefficient from the vector v. Note\+: The vector v m
 
 
 
-Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00138}{138}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+Definition at line 138 of file double\+\_\+vector.\+cc.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00481}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), and Values\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1DoubleVector_a4c176b562f503701d65882a930d5b8f5}\label{classoomph_1_1DoubleVector_a4c176b562f503701d65882a930d5b8f5}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!max@{max}}
@@ -414,15 +414,15 @@ returns the maximum coefficient
 
 
 
-Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00604}{604}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+Definition at line 604 of file double\+\_\+vector.\+cc.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{double__vector_8cc_source_l00604}{max()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), i, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), and Values\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{double__vector_8cc_source_l00604}{max()}}, \mbox{\hyperlink{matrices_8h_source_l00348}{oomph\+::\+Double\+Matrix\+Base\+::max\+\_\+residual()}}, \mbox{\hyperlink{problem_8cc_source_l08783}{oomph\+::\+Problem\+::newton\+\_\+solve()}}, \mbox{\hyperlink{problem_8cc_source_l09396}{oomph\+::\+Problem\+::newton\+\_\+solve\+\_\+continuation()}}, \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00538}{oomph\+::\+Segregatable\+FSIProblem\+::segregated\+\_\+solve()}}, and \mbox{\hyperlink{elastic__problems_8h_source_l00356}{oomph\+::\+Solid\+ICProblem\+::set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+consistently()}}.
+Referenced by oomph\+::\+Double\+Matrix\+Base\+::max\+\_\+residual(), oomph\+::\+Problem\+::newton\+\_\+solve(), oomph\+::\+Problem\+::newton\+\_\+solve\+\_\+continuation(), oomph\+::\+Segregatable\+FSIProblem\+::segregated\+\_\+solve(), and oomph\+::\+Solid\+ICProblem\+::set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+consistently().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleVector_a9ac9245cac87ddcdb70cfcd697553a55}\label{classoomph_1_1DoubleVector_a9ac9245cac87ddcdb70cfcd697553a55}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!norm@{norm}}
@@ -436,15 +436,15 @@ compute the 2 norm of this vector
 
 
 
-Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00867}{867}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+Definition at line 867 of file double\+\_\+vector.\+cc.
 
 
 
-References \mbox{\hyperlink{double__vector_8h_source_l00154}{built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+References built(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), i, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), and Values\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{complex__smoother_8h_source_l00532}{oomph\+::\+Complex\+Damped\+Jacobi$<$ MATRIX $>$\+::complex\+\_\+solve\+\_\+helper()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01086}{oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02677}{oomph\+::\+Pitch\+Fork\+Handler\+::\+Pitch\+Fork\+Handler()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00729}{oomph\+::\+GMRESBlock\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l00605}{oomph\+::\+CG$<$ MATRIX $>$\+::solve\+\_\+helper()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l00171}{oomph\+::\+Bi\+CGStab$<$ MATRIX $>$\+::solve\+\_\+helper()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l01164}{oomph\+::\+GS$<$ MATRIX $>$\+::solve\+\_\+helper()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l01480}{oomph\+::\+GS$<$ CRDouble\+Matrix $>$\+::solve\+\_\+helper()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l01922}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::solve\+\_\+helper()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02250}{oomph\+::\+GMRES$<$ MATRIX $>$\+::solve\+\_\+helper()}}, and \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02862}{oomph\+::\+Augmented\+Problem\+GMRES\+::solve\+\_\+helper()}}.
+Referenced by oomph\+::\+Complex\+Damped\+Jacobi$<$ MATRIX $>$\+::complex\+\_\+solve\+\_\+helper(), oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solve(), oomph\+::\+Pitch\+Fork\+Handler\+::\+Pitch\+Fork\+Handler(), oomph\+::\+GMRESBlock\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+CG$<$ MATRIX $>$\+::solve\+\_\+helper(), oomph\+::\+Bi\+CGStab$<$ MATRIX $>$\+::solve\+\_\+helper(), oomph\+::\+GS$<$ MATRIX $>$\+::solve\+\_\+helper(), oomph\+::\+GS$<$ CRDouble\+Matrix $>$\+::solve\+\_\+helper(), oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::solve\+\_\+helper(), oomph\+::\+GMRES$<$ MATRIX $>$\+::solve\+\_\+helper(), and oomph\+::\+Augmented\+Problem\+GMRES\+::solve\+\_\+helper().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleVector_abe25ba0bd83ba1e963103c4ad95328cc}\label{classoomph_1_1DoubleVector_abe25ba0bd83ba1e963103c4ad95328cc}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!norm@{norm}}
@@ -458,11 +458,11 @@ compute the A-\/norm using the matrix at matrix\+\_\+pt
 
 
 
-Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00914}{914}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+Definition at line 914 of file double\+\_\+vector.\+cc.
 
 
 
-References \mbox{\hyperlink{double__vector_8h_source_l00154}{built()}}, \mbox{\hyperlink{matrices_8h_source_l01210}{oomph\+::\+CRDouble\+Matrix\+::built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{double__vector_8cc_source_l00805}{dot()}}, and \mbox{\hyperlink{matrices_8cc_source_l01782}{oomph\+::\+CRDouble\+Matrix\+::multiply()}}.
+References built(), oomph\+::\+CRDouble\+Matrix\+::built(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), dot(), and oomph\+::\+CRDouble\+Matrix\+::multiply().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleVector_a691d884622e4221e61436f2bc457c6e2}\label{classoomph_1_1DoubleVector_a691d884622e4221e61436f2bc457c6e2}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!operator$\ast$=@{operator$\ast$=}}
@@ -476,15 +476,15 @@ multiply by a double
 
 Multiply by double. 
 
-Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00550}{550}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+Definition at line 550 of file double\+\_\+vector.\+cc.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00500}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+built()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+built(), i, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), and Values\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{double__vector_8cc_source_l00573}{operator/=()}}.
+Referenced by operator/=().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleVector_a2724cce5d107b7e6535d9ae071d6d603}\label{classoomph_1_1DoubleVector_a2724cce5d107b7e6535d9ae071d6d603}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!operator+=@{operator+=}}
@@ -498,11 +498,11 @@ Referenced by \mbox{\hyperlink{double__vector_8cc_source_l00573}{operator/=()}}.
 
 += operator 
 
-Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00459}{459}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+Definition at line 459 of file double\+\_\+vector.\+cc.
 
 
 
-References \mbox{\hyperlink{double__vector_8h_source_l00154}{built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{double__vector_8h_source_l00254}{values\+\_\+pt()}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+References built(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), i, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), values\+\_\+pt(), and Values\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1DoubleVector_aaeb013d502cff3ee0b7e036945ece1ea}\label{classoomph_1_1DoubleVector_aaeb013d502cff3ee0b7e036945ece1ea}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!operator-\/=@{operator-\/=}}
@@ -516,11 +516,11 @@ References \mbox{\hyperlink{double__vector_8h_source_l00154}{built()}}, \mbox{\h
 
 -\/= operator 
 
-Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00504}{504}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+Definition at line 504 of file double\+\_\+vector.\+cc.
 
 
 
-References \mbox{\hyperlink{double__vector_8h_source_l00154}{built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00500}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{double__vector_8h_source_l00254}{values\+\_\+pt()}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+References built(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+built(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), i, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), values\+\_\+pt(), and Values\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1DoubleVector_ab3cb62619709401a0e8f4bc4bee9dff3}\label{classoomph_1_1DoubleVector_ab3cb62619709401a0e8f4bc4bee9dff3}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!operator/=@{operator/=}}
@@ -534,11 +534,11 @@ divide by a double
 
 Divide by double. 
 
-Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00573}{573}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+Definition at line 573 of file double\+\_\+vector.\+cc.
 
 
 
-References \mbox{\hyperlink{double__vector_8cc_source_l00550}{operator$\ast$=()}}.
+References operator$\ast$=().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleVector_ab5f56f41d86a18bba358912b1c4f2dac}\label{classoomph_1_1DoubleVector_ab5f56f41d86a18bba358912b1c4f2dac}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!operator=@{operator=}}
@@ -552,11 +552,11 @@ assignment operator
 
 
 
-Definition at line \mbox{\hyperlink{double__vector_8h_source_l00100}{100}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+Definition at line 100 of file double\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{double__vector_8cc_source_l00035}{build()}}.
+References build().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleVector_a4da2f710fccabe5a5349d8a5238b36cc}\label{classoomph_1_1DoubleVector_a4da2f710fccabe5a5349d8a5238b36cc}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!operator==@{operator==}}
@@ -570,11 +570,11 @@ References \mbox{\hyperlink{double__vector_8cc_source_l00035}{build()}}.
 
 
 
-Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00426}{426}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+Definition at line 426 of file double\+\_\+vector.\+cc.
 
 
 
-References \mbox{\hyperlink{double__vector_8h_source_l00154}{built()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{double__vector_8h_source_l00254}{values\+\_\+pt()}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+References built(), i, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), values\+\_\+pt(), and Values\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1DoubleVector_acea3779324129da50076341bf6644d25}\label{classoomph_1_1DoubleVector_acea3779324129da50076341bf6644d25}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!operator\mbox{[}\mbox{]}@{operator[]}}
@@ -588,11 +588,11 @@ References \mbox{\hyperlink{double__vector_8h_source_l00154}{built()}}, \mbox{\h
 
 
 
-Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00408}{408}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+Definition at line 408 of file double\+\_\+vector.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+References i, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), and Values\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1DoubleVector_a54cec3cc3e28f6781c28c0dbcfcffa3e}\label{classoomph_1_1DoubleVector_a54cec3cc3e28f6781c28c0dbcfcffa3e}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!operator\mbox{[}\mbox{]}@{operator[]}}
@@ -606,11 +606,11 @@ References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{lin
 
 
 
-Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00586}{586}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+Definition at line 586 of file double\+\_\+vector.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+References i, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), and Values\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1DoubleVector_aa258eab026007d7f02847b6e5ef3d1dc}\label{classoomph_1_1DoubleVector_aa258eab026007d7f02847b6e5ef3d1dc}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!output@{output}}
@@ -624,15 +624,15 @@ output the global contents of the vector
 
 output the contents of the vector 
 
-Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00653}{653}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+Definition at line 653 of file double\+\_\+vector.\+cc.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00335}{oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00481}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+References oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row(), i, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), and Values\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{double__vector_8h_source_l00269}{output()}}.
+Referenced by output().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleVector_ab236e5a906d16e8c7edc6b9acafa23e4}\label{classoomph_1_1DoubleVector_ab236e5a906d16e8c7edc6b9acafa23e4}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!output@{output}}
@@ -646,11 +646,11 @@ output the global contents of the vector
 
 
 
-Definition at line \mbox{\hyperlink{double__vector_8h_source_l00269}{269}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+Definition at line 269 of file double\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{double__vector_8cc_source_l00653}{output()}}.
+References output().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleVector_a2cdcd660a9a90868ba1f837095403649}\label{classoomph_1_1DoubleVector_a2cdcd660a9a90868ba1f837095403649}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!output\_local\_values@{output\_local\_values}}
@@ -664,15 +664,15 @@ output the local contents of the vector
 
 
 
-Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00742}{742}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+Definition at line 742 of file double\+\_\+vector.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+References i, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), and Values\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{double__vector_8h_source_l00283}{output\+\_\+local\+\_\+values()}}.
+Referenced by output\+\_\+local\+\_\+values().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleVector_a1cbc454999c271e7cb476f7c5c76ce72}\label{classoomph_1_1DoubleVector_a1cbc454999c271e7cb476f7c5c76ce72}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!output\_local\_values@{output\_local\_values}}
@@ -686,11 +686,11 @@ output the local contents of the vector
 
 
 
-Definition at line \mbox{\hyperlink{double__vector_8h_source_l00283}{283}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+Definition at line 283 of file double\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{double__vector_8cc_source_l00742}{output\+\_\+local\+\_\+values()}}.
+References output\+\_\+local\+\_\+values().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleVector_afc5d6ab2c9ba7a0f307cc419a331df70}\label{classoomph_1_1DoubleVector_afc5d6ab2c9ba7a0f307cc419a331df70}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!output\_local\_values\_with\_offset@{output\_local\_values\_with\_offset}}
@@ -704,15 +704,15 @@ output the local contents of the vector
 
 output the local contents of the vector with the first row offset. 
 
-Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00772}{772}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+Definition at line 772 of file double\+\_\+vector.\+cc.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00481}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row(), i, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), and Values\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{double__vector_8h_source_l00298}{output\+\_\+local\+\_\+values\+\_\+with\+\_\+offset()}}.
+Referenced by output\+\_\+local\+\_\+values\+\_\+with\+\_\+offset().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleVector_aa9f03b47d00fe70e4f5e4f2474b48bf4}\label{classoomph_1_1DoubleVector_aa9f03b47d00fe70e4f5e4f2474b48bf4}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!output\_local\_values\_with\_offset@{output\_local\_values\_with\_offset}}
@@ -726,11 +726,11 @@ output the local contents of the vector
 
 
 
-Definition at line \mbox{\hyperlink{double__vector_8h_source_l00298}{298}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+Definition at line 298 of file double\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{double__vector_8cc_source_l00772}{output\+\_\+local\+\_\+values\+\_\+with\+\_\+offset()}}.
+References output\+\_\+local\+\_\+values\+\_\+with\+\_\+offset().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleVector_a9396b861977c16606d8eca39056976c8}\label{classoomph_1_1DoubleVector_a9396b861977c16606d8eca39056976c8}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!redistribute@{redistribute}}
@@ -744,15 +744,15 @@ The contents of the vector are redistributed to match the new distribution. In a
 
 The contents of the vector are redistributed to match the new distribution. In a non-\/\+MPI build this method works, but does nothing. {\bfseries{NOTE}} 1\+: The current distribution and the new distribution must have the same number of global rows. {\bfseries{NOTE}} 2\+: The current distribution and the new distribution must have the same Communicator. 
 
-Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00164}{164}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+Definition at line 164 of file double\+\_\+vector.\+cc.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00335}{oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00329}{oomph\+::\+Linear\+Algebra\+Distribution\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00261}{oomph\+::\+Linear\+Algebra\+Distribution\+::first\+\_\+row()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00481}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{double__vector_8h_source_l00323}{Internal\+\_\+values}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00186}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00193}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution(), oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt(), oomph\+::\+Linear\+Algebra\+Distribution\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Linear\+Algebra\+Distribution\+::first\+\_\+row(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row(), i, Internal\+\_\+values, oomph\+::\+Linear\+Algebra\+Distribution\+::nrow(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), and Values\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{mumps__solver_8cc_source_l00526}{oomph\+::\+Mumps\+Solver\+::backsub()}}, \mbox{\hyperlink{problem_8cc_source_l09912}{oomph\+::\+Problem\+::calculate\+\_\+continuation\+\_\+derivatives\+\_\+helper()}}, \mbox{\hyperlink{problem_8cc_source_l03997}{oomph\+::\+Problem\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01086}{oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solve()}}, \mbox{\hyperlink{problem_8cc_source_l08783}{oomph\+::\+Problem\+::newton\+\_\+solve()}}, \mbox{\hyperlink{problem_8cc_source_l09396}{oomph\+::\+Problem\+::newton\+\_\+solve\+\_\+continuation()}}, \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00624}{oomph\+::\+ILUZero\+Preconditioner$<$ CCDouble\+Matrix $>$\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00682}{oomph\+::\+ILUZero\+Preconditioner$<$ CRDouble\+Matrix $>$\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02007}{oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01705}{oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l00950}{oomph\+::\+CG$<$ MATRIX $>$\+::solve()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l00090}{oomph\+::\+Bi\+CGStab$<$ MATRIX $>$\+::solve()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02161}{oomph\+::\+GMRES$<$ MATRIX $>$\+::solve()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02746}{oomph\+::\+Augmented\+Problem\+GMRES\+::solve()}}, \mbox{\hyperlink{linear__solver_8cc_source_l00814}{oomph\+::\+Super\+LUSolver\+::solve()}}, \mbox{\hyperlink{mumps__solver_8cc_source_l00894}{oomph\+::\+Mumps\+Solver\+::solve()}}, \mbox{\hyperlink{complex__smoother_8h_source_l01806}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve()}}, \mbox{\hyperlink{complex__smoother_8h_source_l03284}{oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::solve()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00043}{oomph\+::\+Trilinos\+Aztec\+OOSolver\+::solve()}}, and \mbox{\hyperlink{linear__solver_8cc_source_l01293}{oomph\+::\+Super\+LUSolver\+::solve\+\_\+transpose()}}.
+Referenced by oomph\+::\+Problem\+::add\+\_\+eigenvector\+\_\+to\+\_\+dofs(), oomph\+::\+Problem\+::assign\+\_\+eigenvector\+\_\+to\+\_\+dofs(), oomph\+::\+Mumps\+Solver\+::backsub(), oomph\+::\+Problem\+::calculate\+\_\+continuation\+\_\+derivatives\+\_\+helper(), oomph\+::\+Problem\+::get\+\_\+jacobian(), oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solve(), oomph\+::\+Problem\+::newton\+\_\+solve(), oomph\+::\+Problem\+::newton\+\_\+solve\+\_\+continuation(), oomph\+::\+ILUZero\+Preconditioner$<$ CCDouble\+Matrix $>$\+::preconditioner\+\_\+solve(), oomph\+::\+ILUZero\+Preconditioner$<$ CRDouble\+Matrix $>$\+::preconditioner\+\_\+solve(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), oomph\+::\+CG$<$ MATRIX $>$\+::solve(), oomph\+::\+Bi\+CGStab$<$ MATRIX $>$\+::solve(), oomph\+::\+GMRES$<$ MATRIX $>$\+::solve(), oomph\+::\+Augmented\+Problem\+GMRES\+::solve(), oomph\+::\+Super\+LUSolver\+::solve(), oomph\+::\+Mumps\+Solver\+::solve(), oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve(), oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::solve(), oomph\+::\+Trilinos\+Aztec\+OOSolver\+::solve(), and oomph\+::\+Super\+LUSolver\+::solve\+\_\+transpose().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleVector_a4715c8cf47f9fc56d95889343d1a3b82}\label{classoomph_1_1DoubleVector_a4715c8cf47f9fc56d95889343d1a3b82}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!set\_external\_values@{set\_external\_values}}
@@ -771,15 +771,15 @@ Allows are external data to be used by this vector. WARNING\+: The size of the e
 \item External values are only deleted by this vector if delete\+\_\+external\+\_\+values = true. 
 \end{DoxyEnumerate}
 
-Definition at line \mbox{\hyperlink{double__vector_8h_source_l00167}{167}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+Definition at line 167 of file double\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{double__vector_8h_source_l00326}{Built}}, \mbox{\hyperlink{double__vector_8h_source_l00142}{clear()}}, and \mbox{\hyperlink{double__vector_8h_source_l00167}{set\+\_\+external\+\_\+values()}}.
+References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution(), Built, and clear().
 
 
 
-Referenced by \mbox{\hyperlink{trilinos__solver_8h_source_l00115}{oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Apply\+Inverse()}}, \mbox{\hyperlink{problem_8cc_source_l03997}{oomph\+::\+Problem\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{problem_8cc_source_l03714}{oomph\+::\+Problem\+::get\+\_\+residuals()}}, and \mbox{\hyperlink{double__vector_8h_source_l00167}{set\+\_\+external\+\_\+values()}}.
+Referenced by oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Apply\+Inverse(), oomph\+::\+Problem\+::get\+\_\+jacobian(), and oomph\+::\+Problem\+::get\+\_\+residuals().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleVector_a0626a448c259a12bd2b7d50f92da91e3}\label{classoomph_1_1DoubleVector_a0626a448c259a12bd2b7d50f92da91e3}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!set\_external\_values@{set\_external\_values}}
@@ -798,17 +798,17 @@ Allows are external data to be used by this vector. WARNING\+: The size of the e
 \item External values are only deleted by this vector if delete\+\_\+external\+\_\+values = true. 
 \end{DoxyEnumerate}
 
-Definition at line \mbox{\hyperlink{double__vector_8h_source_l00191}{191}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+Definition at line 191 of file double\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00500}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+built()}}, \mbox{\hyperlink{double__vector_8h_source_l00323}{Internal\+\_\+values}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+built(), Internal\+\_\+values, and Values\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1DoubleVector_ae3484a5eb4cb663e09640806ef1bf05a}\label{classoomph_1_1DoubleVector_ae3484a5eb4cb663e09640806ef1bf05a}} 
+\mbox{\Hypertarget{classoomph_1_1DoubleVector_a8c3dcdf8a602a1f266bbe72d98fde2e7}\label{classoomph_1_1DoubleVector_a8c3dcdf8a602a1f266bbe72d98fde2e7}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!values\_pt@{values\_pt}}
 \index{values\_pt@{values\_pt}!oomph::DoubleVector@{oomph::DoubleVector}}
 \doxysubsubsection{\texorpdfstring{values\_pt()}{values\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily double $\ast$ oomph\+::\+Double\+Vector\+::values\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double$\ast$ oomph\+::\+Double\+Vector\+::values\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -816,21 +816,21 @@ access function to the underlying values
 
 
 
-Definition at line \mbox{\hyperlink{double__vector_8h_source_l00254}{254}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+Definition at line 254 of file double\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+References Values\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{linear__solver_8cc_source_l00320}{oomph\+::\+Dense\+LU\+::backsub()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02340}{oomph\+::\+Super\+LUSolver\+::backsub\+\_\+distributed()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02503}{oomph\+::\+Super\+LUSolver\+::backsub\+\_\+serial()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02593}{oomph\+::\+Super\+LUSolver\+::backsub\+\_\+transpose\+\_\+serial()}}, \mbox{\hyperlink{double__vector_8cc_source_l00035}{build()}}, \mbox{\hyperlink{problem_8cc_source_l09912}{oomph\+::\+Problem\+::calculate\+\_\+continuation\+\_\+derivatives\+\_\+helper()}}, \mbox{\hyperlink{double__vector_8cc_source_l00993}{oomph\+::\+Double\+Vector\+Helpers\+::concatenate()}}, \mbox{\hyperlink{double__vector_8cc_source_l01856}{oomph\+::\+Double\+Vector\+Helpers\+::concatenate\+\_\+without\+\_\+communication()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00180}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::copy\+\_\+to\+\_\+oomphlib\+\_\+vector()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00041}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+vector()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00146}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+epetra\+\_\+vector\+\_\+view\+\_\+data()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00178}{oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+HYPRE\+\_\+\+Vector()}}, \mbox{\hyperlink{double__vector_8cc_source_l00805}{dot()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01086}{oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solve()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04599}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+get\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04009}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+get\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l03131}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+get\+\_\+block\+\_\+vectors()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04850}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+return\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04293}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+return\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l03684}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+return\+\_\+block\+\_\+vectors()}}, \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source_l00503}{oomph\+::\+Pseudo\+Elastic\+Preconditioner\+::lagrange\+\_\+multiplier\+\_\+preconditioner\+\_\+solve()}}, \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source_l00762}{oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Old\+::lagrange\+\_\+multiplier\+\_\+preconditioner\+\_\+solve()}}, \mbox{\hyperlink{matrices_8cc_source_l01782}{oomph\+::\+CRDouble\+Matrix\+::multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l00294}{oomph\+::\+Dense\+Double\+Matrix\+::multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l00622}{oomph\+::\+CCDouble\+Matrix\+::multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l01882}{oomph\+::\+CRDouble\+Matrix\+::multiply\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8cc_source_l00385}{oomph\+::\+Dense\+Double\+Matrix\+::multiply\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8cc_source_l00715}{oomph\+::\+CCDouble\+Matrix\+::multiply\+\_\+transpose()}}, \mbox{\hyperlink{problem_8cc_source_l08783}{oomph\+::\+Problem\+::newton\+\_\+solve()}}, \mbox{\hyperlink{problem_8cc_source_l09396}{oomph\+::\+Problem\+::newton\+\_\+solve\+\_\+continuation()}}, \mbox{\hyperlink{double__vector_8cc_source_l00459}{operator+=()}}, \mbox{\hyperlink{double__vector_8cc_source_l00504}{operator-\/=()}}, \mbox{\hyperlink{double__vector_8cc_source_l00426}{operator==()}}, \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00117}{oomph\+::\+Matrix\+Based\+Diag\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00310}{oomph\+::\+Lagrange\+Enforced\+Flow\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00729}{oomph\+::\+GMRESBlock\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{matrices_8h_source_l00326}{oomph\+::\+Double\+Matrix\+Base\+::residual()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02250}{oomph\+::\+GMRES$<$ MATRIX $>$\+::solve\+\_\+helper()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02862}{oomph\+::\+Augmented\+Problem\+GMRES\+::solve\+\_\+helper()}}, \mbox{\hyperlink{double__vector_8cc_source_l01413}{oomph\+::\+Double\+Vector\+Helpers\+::split()}}, \mbox{\hyperlink{double__vector_8cc_source_l02075}{oomph\+::\+Double\+Vector\+Helpers\+::split\+\_\+without\+\_\+communication()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00420}{oomph\+::\+GMRESBlock\+Preconditioner\+::update()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01368}{oomph\+::\+GMRES$<$ MATRIX $>$\+::update()}}, and \mbox{\hyperlink{iterative__linear__solver_8h_source_l01790}{oomph\+::\+Augmented\+Problem\+GMRES\+::update()}}.
+Referenced by oomph\+::\+Dense\+LU\+::backsub(), oomph\+::\+Super\+LUSolver\+::backsub\+\_\+distributed(), oomph\+::\+Super\+LUSolver\+::backsub\+\_\+serial(), oomph\+::\+Super\+LUSolver\+::backsub\+\_\+transpose\+\_\+serial(), build(), oomph\+::\+Problem\+::calculate\+\_\+continuation\+\_\+derivatives\+\_\+helper(), oomph\+::\+Double\+Vector\+Helpers\+::concatenate(), oomph\+::\+Double\+Vector\+Helpers\+::concatenate\+\_\+without\+\_\+communication(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::copy\+\_\+to\+\_\+oomphlib\+\_\+vector(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+vector(), oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+epetra\+\_\+vector\+\_\+view\+\_\+data(), oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+HYPRE\+\_\+\+Vector(), dot(), oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solve(), oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+get\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+get\+\_\+block\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+get\+\_\+block\+\_\+vectors(), oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+return\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+return\+\_\+block\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+return\+\_\+block\+\_\+vectors(), oomph\+::\+Pseudo\+Elastic\+Preconditioner\+::lagrange\+\_\+multiplier\+\_\+preconditioner\+\_\+solve(), oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Old\+::lagrange\+\_\+multiplier\+\_\+preconditioner\+\_\+solve(), oomph\+::\+CRDouble\+Matrix\+::multiply(), oomph\+::\+Dense\+Double\+Matrix\+::multiply(), oomph\+::\+CCDouble\+Matrix\+::multiply(), oomph\+::\+CRDouble\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+Dense\+Double\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+CCDouble\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+Problem\+::newton\+\_\+solve(), oomph\+::\+Problem\+::newton\+\_\+solve\+\_\+continuation(), operator+=(), operator-\/=(), operator==(), oomph\+::\+Matrix\+Based\+Diag\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Lagrange\+Enforced\+Flow\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+GMRESBlock\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Double\+Matrix\+Base\+::residual(), oomph\+::\+GMRES$<$ MATRIX $>$\+::solve\+\_\+helper(), oomph\+::\+Augmented\+Problem\+GMRES\+::solve\+\_\+helper(), oomph\+::\+Double\+Vector\+Helpers\+::split(), oomph\+::\+Double\+Vector\+Helpers\+::split\+\_\+without\+\_\+communication(), oomph\+::\+GMRESBlock\+Preconditioner\+::update(), oomph\+::\+GMRES$<$ MATRIX $>$\+::update(), and oomph\+::\+Augmented\+Problem\+GMRES\+::update().
 
-\mbox{\Hypertarget{classoomph_1_1DoubleVector_a1e2a19113e346db74e6fe34e0e945022}\label{classoomph_1_1DoubleVector_a1e2a19113e346db74e6fe34e0e945022}} 
+\mbox{\Hypertarget{classoomph_1_1DoubleVector_ab88fb798be9cc01d3f3fb64db2c8c9f6}\label{classoomph_1_1DoubleVector_ab88fb798be9cc01d3f3fb64db2c8c9f6}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!values\_pt@{values\_pt}}
 \index{values\_pt@{values\_pt}!oomph::DoubleVector@{oomph::DoubleVector}}
 \doxysubsubsection{\texorpdfstring{values\_pt()}{values\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily double $\ast$ oomph\+::\+Double\+Vector\+::values\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double$\ast$ oomph\+::\+Double\+Vector\+::values\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -838,20 +838,20 @@ access function to the underlying values (const version)
 
 
 
-Definition at line \mbox{\hyperlink{double__vector_8h_source_l00260}{260}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+Definition at line 260 of file double\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+References Values\+\_\+pt.
 
 
 
 \doxysubsection{Friends And Related Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1DoubleVector_ab24e12068a4b36f10e302b038eed0a1f}\label{classoomph_1_1DoubleVector_ab24e12068a4b36f10e302b038eed0a1f}} 
+\mbox{\Hypertarget{classoomph_1_1DoubleVector_a738e90fa5474b2ab868b50d76347a20d}\label{classoomph_1_1DoubleVector_a738e90fa5474b2ab868b50d76347a20d}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!operator$<$$<$@{operator$<$$<$}}
 \index{operator$<$$<$@{operator$<$$<$}!oomph::DoubleVector@{oomph::DoubleVector}}
 \doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
-{\footnotesize\ttfamily std\+::ostream \& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out,  }\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+{\footnotesize\ttfamily std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out,  }\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
 
 
 
@@ -859,7 +859,7 @@ Ouput operator for \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}}
 
 
 
-Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00949}{949}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+Definition at line 949 of file double\+\_\+vector.\+cc.
 
 
 
@@ -876,11 +876,11 @@ indicates that the vector has been built and is usable
 
 
 
-Definition at line \mbox{\hyperlink{double__vector_8h_source_l00326}{326}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+Definition at line 326 of file double\+\_\+vector.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{double__vector_8cc_source_l00059}{build()}}, \mbox{\hyperlink{double__vector_8h_source_l00154}{built()}}, \mbox{\hyperlink{double__vector_8h_source_l00142}{clear()}}, \mbox{\hyperlink{double__vector_8cc_source_l00123}{initialise()}}, and \mbox{\hyperlink{double__vector_8h_source_l00167}{set\+\_\+external\+\_\+values()}}.
+Referenced by build(), built(), clear(), initialise(), and set\+\_\+external\+\_\+values().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleVector_a9b205077360d67c9de07e538199f335f}\label{classoomph_1_1DoubleVector_a9b205077360d67c9de07e538199f335f}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!Internal\_values@{Internal\_values}}
@@ -894,11 +894,11 @@ Boolean flag to indicate whether the vector\textquotesingle{}s data (values\+\_\
 
 
 
-Definition at line \mbox{\hyperlink{double__vector_8h_source_l00323}{323}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+Definition at line 323 of file double\+\_\+vector.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{double__vector_8cc_source_l00035}{build()}}, \mbox{\hyperlink{double__vector_8h_source_l00142}{clear()}}, \mbox{\hyperlink{double__vector_8cc_source_l00164}{redistribute()}}, and \mbox{\hyperlink{double__vector_8h_source_l00191}{set\+\_\+external\+\_\+values()}}.
+Referenced by build(), clear(), redistribute(), and set\+\_\+external\+\_\+values().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleVector_abbb699b9364ece68a4cb483291c04c25}\label{classoomph_1_1DoubleVector_abbb699b9364ece68a4cb483291c04c25}} 
 \index{oomph::DoubleVector@{oomph::DoubleVector}!Values\_pt@{Values\_pt}}
@@ -912,11 +912,11 @@ the local vector
 
 
 
-Definition at line \mbox{\hyperlink{double__vector_8h_source_l00319}{319}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+Definition at line 319 of file double\+\_\+vector.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{double__vector_8cc_source_l00035}{build()}}, \mbox{\hyperlink{double__vector_8h_source_l00142}{clear()}}, \mbox{\hyperlink{double__vector_8cc_source_l00805}{dot()}}, \mbox{\hyperlink{double__vector_8cc_source_l00123}{initialise()}}, \mbox{\hyperlink{double__vector_8cc_source_l00604}{max()}}, \mbox{\hyperlink{double__vector_8cc_source_l00867}{norm()}}, \mbox{\hyperlink{double__vector_8cc_source_l00550}{operator$\ast$=()}}, \mbox{\hyperlink{double__vector_8cc_source_l00459}{operator+=()}}, \mbox{\hyperlink{double__vector_8cc_source_l00504}{operator-\/=()}}, \mbox{\hyperlink{double__vector_8cc_source_l00426}{operator==()}}, \mbox{\hyperlink{double__vector_8cc_source_l00408}{operator\mbox{[}$\,$\mbox{]}()}}, \mbox{\hyperlink{double__vector_8cc_source_l00653}{output()}}, \mbox{\hyperlink{double__vector_8cc_source_l00742}{output\+\_\+local\+\_\+values()}}, \mbox{\hyperlink{double__vector_8cc_source_l00772}{output\+\_\+local\+\_\+values\+\_\+with\+\_\+offset()}}, \mbox{\hyperlink{double__vector_8cc_source_l00164}{redistribute()}}, \mbox{\hyperlink{double__vector_8h_source_l00191}{set\+\_\+external\+\_\+values()}}, and \mbox{\hyperlink{double__vector_8h_source_l00254}{values\+\_\+pt()}}.
+Referenced by build(), clear(), dot(), initialise(), max(), norm(), operator$\ast$=(), operator+=(), operator-\/=(), operator==(), operator\mbox{[}$\,$\mbox{]}(), output(), output\+\_\+local\+\_\+values(), output\+\_\+local\+\_\+values\+\_\+with\+\_\+offset(), redistribute(), set\+\_\+external\+\_\+values(), and values\+\_\+pt().
 
 
 

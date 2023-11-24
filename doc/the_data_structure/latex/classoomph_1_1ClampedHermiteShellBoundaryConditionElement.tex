@@ -18,7 +18,7 @@ Inheritance diagram for oomph\+::Clamped\+Hermite\+Shell\+Boundary\+Condition\+E
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_ac2c060fc25233cb0c73fdff218c25922}{Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&bulk\+\_\+el\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}})
+\mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_ac2c060fc25233cb0c73fdff218c25922}{Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&bulk\+\_\+el\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a478d577ac6db67ecc80f1f02ae3ab170}{face\+\_\+index}})
 \begin{DoxyCompactList}\small\item\em Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the face index. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a72fed47743a1a079d39307c63d06a65b}{Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Broken empty constructor. \end{DoxyCompactList}\item 
@@ -44,7 +44,7 @@ void \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_
 \begin{DoxyCompactList}\small\item\em C-\/style output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a189db759eda561b5ae63ae9527b3ae39}{ndof\+\_\+types}} () const
 \begin{DoxyCompactList}\small\item\em The number of \char`\"{}\+DOF types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: Just the solid degrees of freedom themselves. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a7b18a5df8ade2926ccd6e7bcfa182dd9}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
+void \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a8630533c1a86f7f748e83fb1513345f6}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&dof\+\_\+lookup\+\_\+list) const
 \begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+DOF types\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -61,7 +61,7 @@ Element that allows the imposition of boundary conditions for a shell that is cl
 {\bfseries{Note}} {\bfseries{1}}\+: Note that the introduction of the Lagrange multiplier adds two additional values (relative to the number of values before the addition of the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}}) to the nodes. This ensures that nodes that are shared by adjacent Face\+Elements are not resized repeatedly but also means that this won\textquotesingle{}t work if two \char`\"{}edges\char`\"{} of the shell (that share a node) are subject to different constraints, each applied with its own independent Lagrange multiplier. In such cases a modified version of this class must be written. ~\newline
  {\bfseries{Note}} {\bfseries{2}}\+: The \mbox{\hyperlink{classoomph_1_1FaceGeometry}{Face\+Geometry}} for a \mbox{\hyperlink{classoomph_1_1HermiteShellElement}{Hermite\+Shell\+Element}} is the 1D two-\/node element \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement}{Solid\+QHermite\+Element$<$1$>$}} which has four shape functions (two nodes, two types -- representing the shape functions that interpolate the value and the derivative). These are the \char`\"{}correct\char`\"{} shape functions for the interpolation of the Lagrange multiplier and the isoparametric representation of the geometry. However, when applying the contribution from the constraint equation to the bulk equations, we have to take all four types of dof into account so the element has to reset the number of positional dofs to four. To avoid any clashes we overload (the relevant subset of) the access functions to the shape functions and their derivatives and set the shape functions associated with the spurious positional dofs to zero. This is a bit hacky but the only way (?) this can be done... 
 
-Definition at line \mbox{\hyperlink{shell__elements_8h_source_l00629}{629}} of file \mbox{\hyperlink{shell__elements_8h_source}{shell\+\_\+elements.\+h}}.
+Definition at line 629 of file shell\+\_\+elements.\+h.
 
 
 
@@ -80,11 +80,11 @@ Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the f
 
 Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element, the index of the fixed local coordinate and its value represented by an integer (+/-\/ 1), indicating that the face is located at the max. or min. value of the \char`\"{}fixed\char`\"{} local coordinate in the bulk element. 
 
-Definition at line \mbox{\hyperlink{shell__elements_8cc_source_l01455}{1455}} of file \mbox{\hyperlink{shell__elements_8cc_source}{shell\+\_\+elements.\+cc}}.
+Definition at line 1455 of file shell\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l05132}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{elements_8h_source_l04805}{oomph\+::\+Face\+Element\+::bulk\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l04838}{oomph\+::\+Face\+Element\+::bulk\+\_\+position\+\_\+type\+\_\+resize()}}, \mbox{\hyperlink{elements_8h_source_l04626}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}, \mbox{\hyperlink{shell__elements_8h_source_l00766}{Normal\+\_\+to\+\_\+clamping\+\_\+plane}}, \mbox{\hyperlink{elements_8h_source_l04882}{oomph\+::\+Face\+Element\+::resize\+\_\+nodes()}}, and \mbox{\hyperlink{elements_8h_source_l01396}{oomph\+::\+Finite\+Element\+::set\+\_\+nnodal\+\_\+position\+\_\+type()}}.
+References oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), oomph\+::\+Face\+Element\+::bulk\+\_\+position\+\_\+type(), oomph\+::\+Face\+Element\+::bulk\+\_\+position\+\_\+type\+\_\+resize(), oomph\+::\+Face\+Element\+::face\+\_\+index(), Normal\+\_\+to\+\_\+clamping\+\_\+plane, oomph\+::\+Face\+Element\+::resize\+\_\+nodes(), and oomph\+::\+Finite\+Element\+::set\+\_\+nnodal\+\_\+position\+\_\+type().
 
 \mbox{\Hypertarget{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a72fed47743a1a079d39307c63d06a65b}\label{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a72fed47743a1a079d39307c63d06a65b}} 
 \index{oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}!ClampedHermiteShellBoundaryConditionElement@{ClampedHermiteShellBoundaryConditionElement}}
@@ -98,7 +98,7 @@ Broken empty constructor.
 
 
 
-Definition at line \mbox{\hyperlink{shell__elements_8h_source_l00641}{641}} of file \mbox{\hyperlink{shell__elements_8h_source}{shell\+\_\+elements.\+h}}.
+Definition at line 641 of file shell\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_ab8bd6188dd7ee02316baf91d366e24d4}\label{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_ab8bd6188dd7ee02316baf91d366e24d4}} 
 \index{oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}!ClampedHermiteShellBoundaryConditionElement@{ClampedHermiteShellBoundaryConditionElement}}
@@ -129,11 +129,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a9db1456b827131c
 
 
 
-Definition at line \mbox{\hyperlink{shell__elements_8h_source_l00694}{694}} of file \mbox{\hyperlink{shell__elements_8h_source}{shell\+\_\+elements.\+h}}.
+Definition at line 694 of file shell\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{shape_8h_source_l00259}{oomph\+::\+Shape\+::nindex1()}}, \mbox{\hyperlink{shape_8h_source_l00494}{oomph\+::\+DShape\+::nindex1()}}, \mbox{\hyperlink{shape_8h_source_l00265}{oomph\+::\+Shape\+::nindex2()}}, \mbox{\hyperlink{shape_8h_source_l00500}{oomph\+::\+DShape\+::nindex2()}}, \mbox{\hyperlink{shape_8h_source_l00506}{oomph\+::\+DShape\+::nindex3()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References i, oomph\+::\+Shape\+::nindex1(), oomph\+::\+DShape\+::nindex1(), oomph\+::\+Shape\+::nindex2(), oomph\+::\+DShape\+::nindex2(), oomph\+::\+DShape\+::nindex3(), and s.
 
 \mbox{\Hypertarget{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_ab50bd8d39186b633c398c508f9caf7fb}\label{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_ab50bd8d39186b633c398c508f9caf7fb}} 
 \index{oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
@@ -151,17 +151,17 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line \mbox{\hyperlink{shell__elements_8cc_source_l01519}{1519}} of file \mbox{\hyperlink{shell__elements_8cc_source}{shell\+\_\+elements.\+cc}}.
+Definition at line 1519 of file shell\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l04735}{oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{shell__elements_8cc_source_l00072}{oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::get\+\_\+normal()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8cc_source_l05242}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{elements_8cc_source_l06353}{oomph\+::\+Face\+Element\+::local\+\_\+coordinate\+\_\+in\+\_\+bulk()}}, \mbox{\hyperlink{elements_8h_source_l04413}{oomph\+::\+Face\+Element\+::\+Nbulk\+\_\+value}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{shell__elements_8h_source_l00766}{Normal\+\_\+to\+\_\+clamping\+\_\+plane}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{elements_8h_source_l04137}{oomph\+::\+Solid\+Finite\+Element\+::position\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{shell__elements_8h_source_l00676}{shape()}}, \mbox{\hyperlink{nodes_8cc_source_l02408}{oomph\+::\+Node\+::value()}}, \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}, \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral\+::weight()}}, and \mbox{\hyperlink{nodes_8h_source_l01126}{oomph\+::\+Node\+::x\+\_\+gen()}}.
+References oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt(), oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::get\+\_\+normal(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Integral\+::knot(), oomph\+::\+Face\+Element\+::local\+\_\+coordinate\+\_\+in\+\_\+bulk(), oomph\+::\+Face\+Element\+::\+Nbulk\+\_\+value, oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), Normal\+\_\+to\+\_\+clamping\+\_\+plane, oomph\+::\+Integral\+::nweight(), oomph\+::\+Solid\+Finite\+Element\+::position\+\_\+local\+\_\+eqn(), s, shape(), oomph\+::\+Node\+::value(), oomph\+::\+Quad\+Tree\+Names\+::W, oomph\+::\+Integral\+::weight(), and oomph\+::\+Node\+::x\+\_\+gen().
 
-\mbox{\Hypertarget{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a7b18a5df8ade2926ccd6e7bcfa182dd9}\label{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a7b18a5df8ade2926ccd6e7bcfa182dd9}} 
+\mbox{\Hypertarget{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a8630533c1a86f7f748e83fb1513345f6}\label{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a8630533c1a86f7f748e83fb1513345f6}} 
 \index{oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
 \index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}}
 \doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
-{\footnotesize\ttfamily void oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -169,15 +169,15 @@ Create a list of pairs for all unknowns in this element, so that the first entry
 
 Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+DOF types\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) This element is only in charge of the solid dofs. 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a069f59bfc3e607a5bebba52c6314d777}{oomph\+::\+Generalised\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a29c6fb71cd7cabb29b4c289598aec601}{oomph\+::\+Generalised\+Element}}.
 
 
 
-Definition at line \mbox{\hyperlink{shell__elements_8cc_source_l01788}{1788}} of file \mbox{\hyperlink{shell__elements_8cc_source}{shell\+\_\+elements.\+cc}}.
+Definition at line 1788 of file shell\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02463}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02484}{oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension()}}, \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}, and \mbox{\hyperlink{elements_8h_source_l04137}{oomph\+::\+Solid\+Finite\+Element\+::position\+\_\+local\+\_\+eqn()}}.
+References oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), i, oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension(), oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Data\+::nvalue(), and oomph\+::\+Solid\+Finite\+Element\+::position\+\_\+local\+\_\+eqn().
 
 \mbox{\Hypertarget{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a189db759eda561b5ae63ae9527b3ae39}\label{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a189db759eda561b5ae63ae9527b3ae39}} 
 \index{oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}!ndof\_types@{ndof\_types}}
@@ -195,7 +195,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a0c6037a870
 
 
 
-Definition at line \mbox{\hyperlink{shell__elements_8h_source_l00749}{749}} of file \mbox{\hyperlink{shell__elements_8h_source}{shell\+\_\+elements.\+h}}.
+Definition at line 749 of file shell\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_aac071e6c4dbc8f981560c6bb305eb747}\label{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_aac071e6c4dbc8f981560c6bb305eb747}} 
 \index{oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}!operator=@{operator=}}
@@ -223,11 +223,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee
 
 
 
-Definition at line \mbox{\hyperlink{shell__elements_8h_source_l00734}{734}} of file \mbox{\hyperlink{shell__elements_8h_source}{shell\+\_\+elements.\+h}}.
+Definition at line 734 of file shell\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
+References oomph\+::\+Finite\+Element\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_ade7c773aa9f4587d25945b4f4860a690}\label{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_ade7c773aa9f4587d25945b4f4860a690}} 
 \index{oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}!output@{output}}
@@ -245,11 +245,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f
 
 
 
-Definition at line \mbox{\hyperlink{shell__elements_8h_source_l00742}{742}} of file \mbox{\hyperlink{shell__elements_8h_source}{shell\+\_\+elements.\+h}}.
+Definition at line 742 of file shell\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
+References oomph\+::\+Finite\+Element\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a1595e604991ff18f4d907da5a8fdf40b}\label{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a1595e604991ff18f4d907da5a8fdf40b}} 
 \index{oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}!output@{output}}
@@ -267,11 +267,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line \mbox{\hyperlink{shell__elements_8h_source_l00724}{724}} of file \mbox{\hyperlink{shell__elements_8h_source}{shell\+\_\+elements.\+h}}.
+Definition at line 724 of file shell\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
+References oomph\+::\+Finite\+Element\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a099a046661da996bac32617c0479b220}\label{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a099a046661da996bac32617c0479b220}} 
 \index{oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}!output@{output}}
@@ -289,11 +289,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line \mbox{\hyperlink{shell__elements_8cc_source_l01678}{1678}} of file \mbox{\hyperlink{shell__elements_8cc_source}{shell\+\_\+elements.\+cc}}.
+Definition at line 1678 of file shell\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l04735}{oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{shell__elements_8cc_source_l00072}{oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::get\+\_\+normal()}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l04528}{oomph\+::\+Face\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8cc_source_l07104}{oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi()}}, \mbox{\hyperlink{elements_8h_source_l04937}{oomph\+::\+Solid\+Face\+Element\+::interpolated\+\_\+xi()}}, \mbox{\hyperlink{elements_8cc_source_l05242}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{elements_8cc_source_l05328}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{elements_8cc_source_l06353}{oomph\+::\+Face\+Element\+::local\+\_\+coordinate\+\_\+in\+\_\+bulk()}}, \mbox{\hyperlink{elements_8h_source_l04413}{oomph\+::\+Face\+Element\+::\+Nbulk\+\_\+value}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{shell__elements_8h_source_l00766}{Normal\+\_\+to\+\_\+clamping\+\_\+plane}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{shell__elements_8h_source_l00676}{shape()}}, and \mbox{\hyperlink{nodes_8cc_source_l02408}{oomph\+::\+Node\+::value()}}.
+References oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt(), oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::get\+\_\+normal(), oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Face\+Element\+::interpolated\+\_\+x(), oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi(), oomph\+::\+Solid\+Face\+Element\+::interpolated\+\_\+xi(), oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian\+\_\+at\+\_\+knot(), oomph\+::\+Integral\+::knot(), oomph\+::\+Face\+Element\+::local\+\_\+coordinate\+\_\+in\+\_\+bulk(), oomph\+::\+Face\+Element\+::\+Nbulk\+\_\+value, oomph\+::\+Finite\+Element\+::node\+\_\+pt(), Normal\+\_\+to\+\_\+clamping\+\_\+plane, oomph\+::\+Integral\+::nweight(), oomph\+::oomph\+\_\+info, s, shape(), and oomph\+::\+Node\+::value().
 
 \mbox{\Hypertarget{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a965c9a87e809f21f77ea4eb635fdd996}\label{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_a965c9a87e809f21f77ea4eb635fdd996}} 
 \index{oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}!set\_symmetry\_line@{set\_symmetry\_line}}
@@ -307,11 +307,11 @@ Set normal vector to clamping plane.
 
 
 
-Definition at line \mbox{\hyperlink{shell__elements_8h_source_l00657}{657}} of file \mbox{\hyperlink{shell__elements_8h_source}{shell\+\_\+elements.\+h}}.
+Definition at line 657 of file shell\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{shell__elements_8h_source_l00766}{Normal\+\_\+to\+\_\+clamping\+\_\+plane}}.
+References Normal\+\_\+to\+\_\+clamping\+\_\+plane.
 
 \mbox{\Hypertarget{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_ae9a3033b7bcba34dafcb7154be331b7f}\label{classoomph_1_1ClampedHermiteShellBoundaryConditionElement_ae9a3033b7bcba34dafcb7154be331b7f}} 
 \index{oomph::ClampedHermiteShellBoundaryConditionElement@{oomph::ClampedHermiteShellBoundaryConditionElement}!shape@{shape}}
@@ -329,15 +329,15 @@ Implements \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a
 
 
 
-Definition at line \mbox{\hyperlink{shell__elements_8h_source_l00676}{676}} of file \mbox{\hyperlink{shell__elements_8h_source}{shell\+\_\+elements.\+h}}.
+Definition at line 676 of file shell\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{shape_8h_source_l00259}{oomph\+::\+Shape\+::nindex1()}}, \mbox{\hyperlink{shape_8h_source_l00265}{oomph\+::\+Shape\+::nindex2()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{shape_8h_source_l00564}{oomph\+::\+One\+Dim\+Lagrange\+::shape()}}.
+References i, oomph\+::\+Shape\+::nindex1(), oomph\+::\+Shape\+::nindex2(), s, and oomph\+::\+One\+Dim\+Lagrange\+::shape().
 
 
 
-Referenced by \mbox{\hyperlink{shell__elements_8cc_source_l01520}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}, and \mbox{\hyperlink{shell__elements_8cc_source_l01678}{output()}}.
+Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), and output().
 
 
 
@@ -354,11 +354,11 @@ Normal vector to the clamping plane.
 
 
 
-Definition at line \mbox{\hyperlink{shell__elements_8h_source_l00766}{766}} of file \mbox{\hyperlink{shell__elements_8h_source}{shell\+\_\+elements.\+h}}.
+Definition at line 766 of file shell\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{shell__elements_8cc_source_l01456}{Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element()}}, \mbox{\hyperlink{shell__elements_8cc_source_l01520}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}, \mbox{\hyperlink{shell__elements_8cc_source_l01678}{output()}}, and \mbox{\hyperlink{shell__elements_8h_source_l00657}{set\+\_\+symmetry\+\_\+line()}}.
+Referenced by Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element(), fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), output(), and set\+\_\+symmetry\+\_\+line().
 
 
 

@@ -20,14 +20,14 @@ Inheritance diagram for oomph\+::PMLMapping\+:\begin{figure}[H]
 \item 
 \mbox{\hyperlink{classoomph_1_1PMLMapping_a9642a52ea6b195a6da7d732b58030467}{PMLMapping}} ()
 \begin{DoxyCompactList}\small\item\em Default constructor (empty) \end{DoxyCompactList}\item 
-virtual std\+::complex$<$ double $>$ \mbox{\hyperlink{classoomph_1_1PMLMapping_a748bcc76abc77d6df3ea83a174ebfb65}{gamma}} (const double \&nu\+\_\+i, const double \&pml\+\_\+width\+\_\+i, const double \&wavenumber\+\_\+squared, const double \&alpha\+\_\+shift=0.\+0)=0
+virtual std\+::complex$<$ double $>$ \mbox{\hyperlink{classoomph_1_1PMLMapping_a4402061fe7e7b8a1d7a53f990c9a22fb}{gamma}} (const double \&nu\+\_\+i, const double \&pml\+\_\+width\+\_\+i, const double \&wavenumber\+\_\+squared, const double \&alpha\+\_\+shift=0.\+0)=0
 \begin{DoxyCompactList}\small\item\em Pure virtual to return Pml mapping gamma, where gamma is the $d\tilde x / d x$ as function of $\nu$ where $\nu = x - h$ where h is the vector from the origin to the start of the Pml. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Class to hold the mapping function (gamma) for the Pml which defines how the coordinates are transformed in the Pml. This class holds the one dimensional or uniaxial case which is the most common. 
 
-Definition at line \mbox{\hyperlink{pml__mapping__functions_8h_source_l00045}{45}} of file \mbox{\hyperlink{pml__mapping__functions_8h_source}{pml\+\_\+mapping\+\_\+functions.\+h}}.
+Definition at line 45 of file pml\+\_\+mapping\+\_\+functions.\+h.
 
 
 
@@ -44,16 +44,16 @@ Default constructor (empty)
 
 
 
-Definition at line \mbox{\hyperlink{pml__mapping__functions_8h_source_l00049}{49}} of file \mbox{\hyperlink{pml__mapping__functions_8h_source}{pml\+\_\+mapping\+\_\+functions.\+h}}.
+Definition at line 49 of file pml\+\_\+mapping\+\_\+functions.\+h.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1PMLMapping_a748bcc76abc77d6df3ea83a174ebfb65}\label{classoomph_1_1PMLMapping_a748bcc76abc77d6df3ea83a174ebfb65}} 
+\mbox{\Hypertarget{classoomph_1_1PMLMapping_a4402061fe7e7b8a1d7a53f990c9a22fb}\label{classoomph_1_1PMLMapping_a4402061fe7e7b8a1d7a53f990c9a22fb}} 
 \index{oomph::PMLMapping@{oomph::PMLMapping}!gamma@{gamma}}
 \index{gamma@{gamma}!oomph::PMLMapping@{oomph::PMLMapping}}
 \doxysubsubsection{\texorpdfstring{gamma()}{gamma()}}
-{\footnotesize\ttfamily virtual std\+::complex$<$ double $>$ oomph\+::\+PMLMapping\+::gamma (\begin{DoxyParamCaption}\item[{const double \&}]{nu\+\_\+i,  }\item[{const double \&}]{pml\+\_\+width\+\_\+i,  }\item[{const double \&}]{wavenumber\+\_\+squared,  }\item[{const double \&}]{alpha\+\_\+shift = {\ttfamily 0.0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual std\+::complex$<$double$>$ oomph\+::\+PMLMapping\+::gamma (\begin{DoxyParamCaption}\item[{const double \&}]{nu\+\_\+i,  }\item[{const double \&}]{pml\+\_\+width\+\_\+i,  }\item[{const double \&}]{wavenumber\+\_\+squared,  }\item[{const double \&}]{alpha\+\_\+shift = {\ttfamily 0.0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -61,11 +61,11 @@ Pure virtual to return Pml mapping gamma, where gamma is the $d\tilde x / d x$ a
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1BermudezPMLMapping_aa25c88beeed8d1ebf47d1f84cb91b2ba}{oomph\+::\+Bermudez\+PMLMapping}}, and \mbox{\hyperlink{classoomph_1_1ContinuousBermudezPMLMapping_a46c5e7d168dc1557697f08c49d5b63ea}{oomph\+::\+Continuous\+Bermudez\+PMLMapping}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1ContinuousBermudezPMLMapping_adf847966554fa3833336685d50604cf4}{oomph\+::\+Continuous\+Bermudez\+PMLMapping}}, and \mbox{\hyperlink{classoomph_1_1BermudezPMLMapping_ad738b0e8db65632151d5f2e7ae5f5d31}{oomph\+::\+Bermudez\+PMLMapping}}.
 
 
 
-Referenced by \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00331}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::compute\+\_\+pml\+\_\+coefficients()}}, and \mbox{\hyperlink{pml__helmholtz__elements_8h_source_l00546}{oomph\+::\+PMLHelmholtz\+Equations$<$ DIM $>$\+::compute\+\_\+pml\+\_\+coefficients()}}.
+Referenced by oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::compute\+\_\+pml\+\_\+coefficients(), and oomph\+::\+PMLHelmholtz\+Equations$<$ DIM $>$\+::compute\+\_\+pml\+\_\+coefficients().
 
 
 

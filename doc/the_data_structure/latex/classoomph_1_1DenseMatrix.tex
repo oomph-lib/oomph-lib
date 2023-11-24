@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1DenseMatrix}{}\doxysection{oomph\+::Dense\+Matrix\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1DenseMatrix}{}\doxysection{oomph\+::Dense\+Matrix$<$ T $>$ Class Template Reference}
 \label{classoomph_1_1DenseMatrix}\index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}}
 
 
@@ -9,7 +9,7 @@
 
 {\ttfamily \#include $<$matrices.\+h$>$}
 
-Inheritance diagram for oomph\+::Dense\+Matrix\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Dense\+Matrix$<$ T $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{classoomph_1_1DenseMatrix}
@@ -22,9 +22,9 @@ Inheritance diagram for oomph\+::Dense\+Matrix\texorpdfstring{$<$}{<} T \texorpd
 \begin{DoxyCompactList}\small\item\em Empty constructor, simply assign the lengths N and M to 0. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1DenseMatrix_a1d8bf7ffb6cc91b882be17b25ff6d452}{Dense\+Matrix}} (const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}} \&source\+\_\+matrix)
 \begin{DoxyCompactList}\small\item\em Copy constructor\+: Deep copy! \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}} \& \mbox{\hyperlink{classoomph_1_1DenseMatrix_a01b02acc166aa69ec0a7d9153076b5f4}{operator=}} (const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}} \&source\+\_\+matrix)
+\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}} \& \mbox{\hyperlink{classoomph_1_1DenseMatrix_a01cb48599a5ecdfca9fd02bcdd43bf88}{operator=}} (const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}} \&source\+\_\+matrix)
 \begin{DoxyCompactList}\small\item\em Copy assignment. \end{DoxyCompactList}\item 
-T \& \mbox{\hyperlink{classoomph_1_1DenseMatrix_a727aed44cb4b695daa4120178517c03d}{entry}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned long \&j)
+T \& \mbox{\hyperlink{classoomph_1_1DenseMatrix_a0260bf942b1ca7d05515bda03acfe8ec}{entry}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned long \&j)
 \begin{DoxyCompactList}\small\item\em The access function that will be called by the read-\/write round-\/bracket operator. \end{DoxyCompactList}\item 
 T \mbox{\hyperlink{classoomph_1_1DenseMatrix_a0b03682b4c7d8f820599bd2681a01ee0}{get\+\_\+entry}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned long \&j) const
 \begin{DoxyCompactList}\small\item\em The access function the will be called by the read-\/only (const version) round-\/bracket operator. \end{DoxyCompactList}\item 
@@ -75,11 +75,12 @@ unsigned long \mbox{\hyperlink{classoomph_1_1DenseMatrix_aa36631ee95fe55afe69737
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class T$>$\newline
 class oomph\+::\+Dense\+Matrix$<$ T $>$}
+
 //////////////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////////////// 
 
 Class for dense matrices, storing all the values of the matrix as a pointer to a pointer with assorted output functions inherited from Matrix$<$\+T$>$. The curious recursive template pattern is used here to pass the specific class to the base class so that round bracket access can be inlined. 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l00385}{385}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 385 of file matrices.\+h.
 
 
 
@@ -97,7 +98,7 @@ Empty constructor, simply assign the lengths N and M to 0.
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l00399}{399}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 399 of file matrices.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1DenseMatrix_a1d8bf7ffb6cc91b882be17b25ff6d452}\label{classoomph_1_1DenseMatrix_a1d8bf7ffb6cc91b882be17b25ff6d452}} 
 \index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!DenseMatrix@{DenseMatrix}}
@@ -112,11 +113,11 @@ Copy constructor\+: Deep copy!
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l00402}{402}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 402 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l00395}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l00389}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::\+Matrixdata}}, \mbox{\hyperlink{matrices_8h_source_l00392}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::N}}, \mbox{\hyperlink{matrices_8h_source_l00491}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::ncol()}}, \mbox{\hyperlink{matrices_8h_source_l00485}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::nrow()}}, and \mbox{\hyperlink{elements_8h_source_l01242}{oomph\+::\+Element\+Geometry\+::T}}.
+References i, oomph\+::\+Dense\+Matrix$<$ T $>$\+::M, oomph\+::\+Dense\+Matrix$<$ T $>$\+::\+Matrixdata, oomph\+::\+Dense\+Matrix$<$ T $>$\+::N, oomph\+::\+Dense\+Matrix$<$ T $>$\+::ncol(), oomph\+::\+Dense\+Matrix$<$ T $>$\+::nrow(), and oomph\+::\+Element\+Geometry\+::T.
 
 \mbox{\Hypertarget{classoomph_1_1DenseMatrix_a2291404def276dcee1a6099d054d44d6}\label{classoomph_1_1DenseMatrix_a2291404def276dcee1a6099d054d44d6}} 
 \index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!DenseMatrix@{DenseMatrix}}
@@ -133,11 +134,11 @@ Constructor to build a square n by n matrix.
 
 Constructor to build a square n by n matrix 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l02906}{2906}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 2906 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, and \mbox{\hyperlink{elements_8h_source_l01242}{oomph\+::\+Element\+Geometry\+::T}}.
+References oomph\+::\+Quad\+Tree\+Names\+::N, and oomph\+::\+Element\+Geometry\+::T.
 
 \mbox{\Hypertarget{classoomph_1_1DenseMatrix_a5afcfd56a9720541e67a6e8d002016d4}\label{classoomph_1_1DenseMatrix_a5afcfd56a9720541e67a6e8d002016d4}} 
 \index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!DenseMatrix@{DenseMatrix}}
@@ -152,11 +153,11 @@ Constructor to build a matrix with n rows and m columns.
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l02924}{2924}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 2924 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, and \mbox{\hyperlink{elements_8h_source_l01242}{oomph\+::\+Element\+Geometry\+::T}}.
+References oomph\+::\+Quad\+Tree\+Names\+::N, and oomph\+::\+Element\+Geometry\+::T.
 
 \mbox{\Hypertarget{classoomph_1_1DenseMatrix_a7b599610bd78a7818b2e4d0835b27e3a}\label{classoomph_1_1DenseMatrix_a7b599610bd78a7818b2e4d0835b27e3a}} 
 \index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!DenseMatrix@{DenseMatrix}}
@@ -171,11 +172,11 @@ Constructor to build a matrix with n rows and m columns, with initial value init
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l02941}{2941}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 2941 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, and \mbox{\hyperlink{elements_8h_source_l01242}{oomph\+::\+Element\+Geometry\+::T}}.
+References oomph\+::\+Quad\+Tree\+Names\+::N, and oomph\+::\+Element\+Geometry\+::T.
 
 \mbox{\Hypertarget{classoomph_1_1DenseMatrix_a673e04c72174ec084e56ad5f53ba51da}\label{classoomph_1_1DenseMatrix_a673e04c72174ec084e56ad5f53ba51da}} 
 \index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!````~DenseMatrix@{$\sim$DenseMatrix}}
@@ -190,21 +191,21 @@ Destructor, clean up the matrix data.
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l00478}{478}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 478 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l00389}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::\+Matrixdata}}.
+References oomph\+::\+Dense\+Matrix$<$ T $>$\+::\+Matrixdata.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1DenseMatrix_a727aed44cb4b695daa4120178517c03d}\label{classoomph_1_1DenseMatrix_a727aed44cb4b695daa4120178517c03d}} 
+\mbox{\Hypertarget{classoomph_1_1DenseMatrix_a0260bf942b1ca7d05515bda03acfe8ec}\label{classoomph_1_1DenseMatrix_a0260bf942b1ca7d05515bda03acfe8ec}} 
 \index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!entry@{entry}}
 \index{entry@{entry}!oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{entry()}{entry()}}
 {\footnotesize\ttfamily template$<$class T $>$ \\
-T \& \mbox{\hyperlink{classoomph_1_1DenseMatrix}{oomph\+::\+Dense\+Matrix}}$<$ T $>$\+::entry (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i,  }\item[{const unsigned long \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+T\& \mbox{\hyperlink{classoomph_1_1DenseMatrix}{oomph\+::\+Dense\+Matrix}}$<$ T $>$\+::entry (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i,  }\item[{const unsigned long \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -212,15 +213,15 @@ The access function that will be called by the read-\/write round-\/bracket oper
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l00447}{447}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 447 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l00395}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l00389}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::\+Matrixdata}}, and \mbox{\hyperlink{matrices_8h_source_l00078}{oomph\+::\+Matrix$<$ T, Dense\+Matrix$<$ T $>$ $>$\+::range\+\_\+check()}}.
+References i, oomph\+::\+Dense\+Matrix$<$ T $>$\+::M, oomph\+::\+Dense\+Matrix$<$ T $>$\+::\+Matrixdata, and oomph\+::\+Matrix$<$ T, Dense\+Matrix$<$ T $>$ $>$\+::range\+\_\+check().
 
 
 
-Referenced by \mbox{\hyperlink{matrices_8h_source_l01316}{oomph\+::\+Dense\+Double\+Matrix\+::operator()()}}.
+Referenced by oomph\+::\+Dense\+Double\+Matrix\+::operator()().
 
 \mbox{\Hypertarget{classoomph_1_1DenseMatrix_a0b03682b4c7d8f820599bd2681a01ee0}\label{classoomph_1_1DenseMatrix_a0b03682b4c7d8f820599bd2681a01ee0}} 
 \index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!get\_entry@{get\_entry}}
@@ -235,15 +236,15 @@ The access function the will be called by the read-\/only (const version) round-
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l00457}{457}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 457 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l00395}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l00389}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::\+Matrixdata}}, and \mbox{\hyperlink{matrices_8h_source_l00078}{oomph\+::\+Matrix$<$ T, Dense\+Matrix$<$ T $>$ $>$\+::range\+\_\+check()}}.
+References i, oomph\+::\+Dense\+Matrix$<$ T $>$\+::M, oomph\+::\+Dense\+Matrix$<$ T $>$\+::\+Matrixdata, and oomph\+::\+Matrix$<$ T, Dense\+Matrix$<$ T $>$ $>$\+::range\+\_\+check().
 
 
 
-Referenced by \mbox{\hyperlink{matrices_8h_source_l01308}{oomph\+::\+Dense\+Double\+Matrix\+::operator()()}}.
+Referenced by oomph\+::\+Dense\+Double\+Matrix\+::operator()().
 
 \mbox{\Hypertarget{classoomph_1_1DenseMatrix_a440b549690cfc07c85f395eb06951321}\label{classoomph_1_1DenseMatrix_a440b549690cfc07c85f395eb06951321}} 
 \index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!indexed\_output@{indexed\_output}}
@@ -258,11 +259,11 @@ Indexed output function to print a matrix to the stream outfile as i,j,a(i,j)
 
 Indexed output as i,j,a(i,j) 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l03089}{3089}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 3089 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}.
+References i, and oomph\+::\+Quad\+Tree\+Names\+::N.
 
 \mbox{\Hypertarget{classoomph_1_1DenseMatrix_a5730d359fa98ea501ab7115147a4bd87}\label{classoomph_1_1DenseMatrix_a5730d359fa98ea501ab7115147a4bd87}} 
 \index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!indexed\_output@{indexed\_output}}
@@ -277,7 +278,7 @@ Indexed output function to print a matrix to a file as i,j,a(i,j). Specify filen
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l03108}{3108}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 3108 of file matrices.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1DenseMatrix_aafcfbb0309fdcbd84f8654fe1b5601fd}\label{classoomph_1_1DenseMatrix_aafcfbb0309fdcbd84f8654fe1b5601fd}} 
 \index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!initialise@{initialise}}
@@ -292,15 +293,15 @@ Initialize all values in the matrix to val.
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l00514}{514}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 514 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l00395}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l00389}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::\+Matrixdata}}, and \mbox{\hyperlink{matrices_8h_source_l00392}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::N}}.
+References i, oomph\+::\+Dense\+Matrix$<$ T $>$\+::M, oomph\+::\+Dense\+Matrix$<$ T $>$\+::\+Matrixdata, and oomph\+::\+Dense\+Matrix$<$ T $>$\+::N.
 
 
 
-Referenced by \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00643}{oomph\+::\+Periodic\+Orbit\+Temporal\+Mesh$<$ ELEMENT $>$\+::assemble\+\_\+residuals\+\_\+and\+\_\+jacobian()}}, \mbox{\hyperlink{beam__elements_8cc_source_l01199}{oomph\+::\+FSIHermite\+Beam\+Element\+::dposition\+\_\+dlagrangian\+\_\+at\+\_\+local\+\_\+coordinate()}}, \mbox{\hyperlink{shell__elements_8cc_source_l01332}{oomph\+::\+FSIDiag\+Hermite\+Shell\+Element\+::dposition\+\_\+dlagrangian\+\_\+at\+\_\+local\+\_\+coordinate()}}, \mbox{\hyperlink{elements_8h_source_l01061}{oomph\+::\+Generalised\+Element\+::get\+\_\+djacobian\+\_\+and\+\_\+dmass\+\_\+matrix\+\_\+dparameter()}}, \mbox{\hyperlink{elements_8h_source_l01046}{oomph\+::\+Generalised\+Element\+::get\+\_\+djacobian\+\_\+dparameter()}}, \mbox{\hyperlink{elements_8h_source_l01083}{oomph\+::\+Generalised\+Element\+::get\+\_\+hessian\+\_\+vector\+\_\+products()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l01472}{oomph\+::\+Periodic\+Orbit\+Base\+Element\+::get\+\_\+inner\+\_\+product\+\_\+matrix()}}, \mbox{\hyperlink{dg__elements_8cc_source_l00614}{oomph\+::\+DGElement\+::get\+\_\+inverse\+\_\+mass\+\_\+matrix\+\_\+times\+\_\+residuals()}}, \mbox{\hyperlink{problem_8cc_source_l03890}{oomph\+::\+Problem\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{elements_8h_source_l00990}{oomph\+::\+Generalised\+Element\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{elements_8h_source_l01016}{oomph\+::\+Generalised\+Element\+::get\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix()}}, \mbox{\hyperlink{elements_8h_source_l01003}{oomph\+::\+Generalised\+Element\+::get\+\_\+mass\+\_\+matrix()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00745}{oomph\+::\+Pseudo\+Buckling\+Ring\+Element\+::get\+\_\+residuals\+\_\+generic()}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8cc_source_l01536}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::get\+\_\+vorticity()}}, \mbox{\hyperlink{mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8cc_source_l01543}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ DIM $>$\+::get\+\_\+vorticity()}}, \mbox{\hyperlink{timesteppers_8h_source_l00374}{oomph\+::\+Time\+Stepper\+::make\+\_\+steady()}}, \mbox{\hyperlink{dg__elements_8cc_source_l00578}{oomph\+::\+DGElement\+::pre\+\_\+compute\+\_\+mass\+\_\+matrix()}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8cc_source_l01468}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::strain\+\_\+rate()}}, and \mbox{\hyperlink{mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8cc_source_l01475}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ DIM $>$\+::strain\+\_\+rate()}}.
+Referenced by oomph\+::\+Periodic\+Orbit\+Temporal\+Mesh$<$ ELEMENT $>$\+::assemble\+\_\+residuals\+\_\+and\+\_\+jacobian(), oomph\+::\+FSIHermite\+Beam\+Element\+::dposition\+\_\+dlagrangian\+\_\+at\+\_\+local\+\_\+coordinate(), oomph\+::\+FSIDiag\+Hermite\+Shell\+Element\+::dposition\+\_\+dlagrangian\+\_\+at\+\_\+local\+\_\+coordinate(), oomph\+::\+Generalised\+Element\+::get\+\_\+djacobian\+\_\+and\+\_\+dmass\+\_\+matrix\+\_\+dparameter(), oomph\+::\+Generalised\+Element\+::get\+\_\+djacobian\+\_\+dparameter(), oomph\+::\+Generalised\+Element\+::get\+\_\+hessian\+\_\+vector\+\_\+products(), oomph\+::\+Periodic\+Orbit\+Base\+Element\+::get\+\_\+inner\+\_\+product\+\_\+matrix(), oomph\+::\+DGElement\+::get\+\_\+inverse\+\_\+mass\+\_\+matrix\+\_\+times\+\_\+residuals(), oomph\+::\+Problem\+::get\+\_\+jacobian(), oomph\+::\+Generalised\+Element\+::get\+\_\+jacobian(), oomph\+::\+Generalised\+Element\+::get\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix(), oomph\+::\+Generalised\+Element\+::get\+\_\+mass\+\_\+matrix(), oomph\+::\+Pseudo\+Buckling\+Ring\+Element\+::get\+\_\+residuals\+\_\+generic(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::get\+\_\+vorticity(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ DIM $>$\+::get\+\_\+vorticity(), oomph\+::\+Time\+Stepper\+::make\+\_\+steady(), oomph\+::\+DGElement\+::pre\+\_\+compute\+\_\+mass\+\_\+matrix(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::strain\+\_\+rate(), and oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ DIM $>$\+::strain\+\_\+rate().
 
 \mbox{\Hypertarget{classoomph_1_1DenseMatrix_a9937181f1cb4cfaed7aaf3b483c42456}\label{classoomph_1_1DenseMatrix_a9937181f1cb4cfaed7aaf3b483c42456}} 
 \index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!ncol@{ncol}}
@@ -319,15 +320,15 @@ Implements \mbox{\hyperlink{classoomph_1_1Matrix_ad1af46b34096c348272b0dfacb5ce6
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l00491}{491}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 491 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l00395}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::M}}.
+References oomph\+::\+Dense\+Matrix$<$ T $>$\+::M.
 
 
 
-Referenced by \mbox{\hyperlink{constitutive__laws_8cc_source_l00052}{oomph\+::\+Constitutive\+Law\+::are\+\_\+matrices\+\_\+of\+\_\+equal\+\_\+dimensions()}}, \mbox{\hyperlink{constitutive__laws_8cc_source_l00113}{oomph\+::\+Constitutive\+Law\+::calculate\+\_\+contravariant()}}, \mbox{\hyperlink{constitutive__laws_8cc_source_l00225}{oomph\+::\+Constitutive\+Law\+::calculate\+\_\+d\+\_\+contravariant\+\_\+d\+G()}}, \mbox{\hyperlink{constitutive__laws_8cc_source_l00352}{oomph\+::\+Constitutive\+Law\+::calculate\+\_\+d\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress\+\_\+d\+G()}}, \mbox{\hyperlink{matrices_8cc_source_l04349}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::concatenate()}}, \mbox{\hyperlink{matrices_8cc_source_l05223}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::concatenate\+\_\+without\+\_\+communication()}}, \mbox{\hyperlink{matrices_8h_source_l00402}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::\+Dense\+Matrix()}}, \mbox{\hyperlink{elements_8cc_source_l02669}{oomph\+::\+Finite\+Element\+::d\+J\+\_\+eulerian\+\_\+dnodal\+\_\+coordinates()}}, \mbox{\hyperlink{matrices_8cc_source_l00224}{oomph\+::\+Dense\+Double\+Matrix\+::eigenvalues\+\_\+by\+\_\+jacobi()}}, \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8cc_source_l00977}{oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::extrapolated\+\_\+strain\+\_\+rate()}}, \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8cc_source_l01175}{oomph\+::\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ DIM $>$\+::extrapolated\+\_\+strain\+\_\+rate()}}, \mbox{\hyperlink{matrices_8cc_source_l04003}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::gershgorin\+\_\+eigenvalue\+\_\+estimate()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l02537}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+blocks()}}, \mbox{\hyperlink{linear__elasticity__elements_8cc_source_l00047}{oomph\+::\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::get\+\_\+strain()}}, \mbox{\hyperlink{poroelasticity__elements_8cc_source_l00054}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::get\+\_\+strain()}}, \mbox{\hyperlink{solid__elements_8cc_source_l00047}{oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::get\+\_\+strain()}}, \mbox{\hyperlink{linear__elasticity__elements_8cc_source_l00145}{oomph\+::\+Linear\+Elasticity\+Equations$<$ DIM $>$\+::get\+\_\+stress()}}, \mbox{\hyperlink{poroelasticity__elements_8cc_source_l00154}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::get\+\_\+stress()}}, \mbox{\hyperlink{matrices_8cc_source_l03731}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::inf\+\_\+norm()}}, \mbox{\hyperlink{constitutive__laws_8cc_source_l00036}{oomph\+::\+Constitutive\+Law\+::is\+\_\+matrix\+\_\+square()}}, \mbox{\hyperlink{matrices_8h_source_l01301}{oomph\+::\+Dense\+Double\+Matrix\+::ncol()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, \mbox{\hyperlink{matrices_8h_source_l00420}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::operator=()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00507}{oomph\+::\+Lagrange\+Enforced\+Flow\+Preconditioner\+::setup()}}, \mbox{\hyperlink{axisym__navier__stokes__elements_8cc_source_l00725}{oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::strain\+\_\+rate()}}, \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8cc_source_l00749}{oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::strain\+\_\+rate()}}, \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8cc_source_l01012}{oomph\+::\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ DIM $>$\+::strain\+\_\+rate()}}, \mbox{\hyperlink{linearised__axisym__navier__stokes__elements_8cc_source_l00255}{oomph\+::\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations\+::strain\+\_\+rate()}}, \mbox{\hyperlink{navier__stokes__elements_8cc_source_l01185}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::strain\+\_\+rate()}}, \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l00822}{oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::strain\+\_\+rate()}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8cc_source_l01468}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::strain\+\_\+rate()}}, \mbox{\hyperlink{mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8cc_source_l01475}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ DIM $>$\+::strain\+\_\+rate()}}, \mbox{\hyperlink{linearised__navier__stokes__elements_8cc_source_l00248}{oomph\+::\+Linearised\+Navier\+Stokes\+Equations\+::strain\+\_\+rate()}}, and \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l00909}{oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::strain\+\_\+rate\+\_\+by\+\_\+r()}}.
+Referenced by oomph\+::\+Constitutive\+Law\+::are\+\_\+matrices\+\_\+of\+\_\+equal\+\_\+dimensions(), oomph\+::\+Constitutive\+Law\+::calculate\+\_\+contravariant(), oomph\+::\+Constitutive\+Law\+::calculate\+\_\+d\+\_\+contravariant\+\_\+d\+G(), oomph\+::\+Constitutive\+Law\+::calculate\+\_\+d\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress\+\_\+d\+G(), oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base(), oomph\+::\+CRDouble\+Matrix\+Helpers\+::concatenate(), oomph\+::\+CRDouble\+Matrix\+Helpers\+::concatenate\+\_\+without\+\_\+communication(), oomph\+::\+Dense\+Matrix$<$ T $>$\+::\+Dense\+Matrix(), oomph\+::\+Finite\+Element\+::d\+J\+\_\+eulerian\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Dense\+Double\+Matrix\+::eigenvalues\+\_\+by\+\_\+jacobi(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::extrapolated\+\_\+strain\+\_\+rate(), oomph\+::\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ DIM $>$\+::extrapolated\+\_\+strain\+\_\+rate(), oomph\+::\+CRDouble\+Matrix\+Helpers\+::gershgorin\+\_\+eigenvalue\+\_\+estimate(), oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+blocks(), oomph\+::\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::get\+\_\+strain(), oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::get\+\_\+strain(), oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::get\+\_\+strain(), oomph\+::\+Linear\+Elasticity\+Equations$<$ DIM $>$\+::get\+\_\+stress(), oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::get\+\_\+stress(), oomph\+::\+CRDouble\+Matrix\+Helpers\+::inf\+\_\+norm(), oomph\+::\+Constitutive\+Law\+::is\+\_\+matrix\+\_\+square(), oomph\+::\+Dense\+Double\+Matrix\+::ncol(), oomph\+::\+Time\+Stepper\+::ntstorage(), oomph\+::\+Dense\+Matrix$<$ T $>$\+::operator=(), oomph\+::\+Lagrange\+Enforced\+Flow\+Preconditioner\+::setup(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::strain\+\_\+rate(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::strain\+\_\+rate(), oomph\+::\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ DIM $>$\+::strain\+\_\+rate(), oomph\+::\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations\+::strain\+\_\+rate(), oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::strain\+\_\+rate(), oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::strain\+\_\+rate(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::strain\+\_\+rate(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ DIM $>$\+::strain\+\_\+rate(), oomph\+::\+Linearised\+Navier\+Stokes\+Equations\+::strain\+\_\+rate(), and oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::strain\+\_\+rate\+\_\+by\+\_\+r().
 
 \mbox{\Hypertarget{classoomph_1_1DenseMatrix_a1b425094510d833ffe91920747a0a962}\label{classoomph_1_1DenseMatrix_a1b425094510d833ffe91920747a0a962}} 
 \index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!nrow@{nrow}}
@@ -346,22 +347,22 @@ Implements \mbox{\hyperlink{classoomph_1_1Matrix_ac366ca5324d3e00e23d9800f3d5f4d
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l00485}{485}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 485 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l00392}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::N}}.
+References oomph\+::\+Dense\+Matrix$<$ T $>$\+::N.
 
 
 
-Referenced by \mbox{\hyperlink{constitutive__laws_8cc_source_l00052}{oomph\+::\+Constitutive\+Law\+::are\+\_\+matrices\+\_\+of\+\_\+equal\+\_\+dimensions()}}, \mbox{\hyperlink{helmholtz__geometric__multigrid_8h_source_l00873}{oomph\+::\+Helmholtz\+MGPreconditioner$<$ DIM $>$\+::block\+\_\+preconditioner\+\_\+self\+\_\+test()}}, \mbox{\hyperlink{constitutive__laws_8cc_source_l00682}{oomph\+::\+Generalised\+Hookean\+::calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress()}}, \mbox{\hyperlink{constitutive__laws_8cc_source_l00896}{oomph\+::\+Isotropic\+Strain\+Energy\+Function\+Constitutive\+Law\+::calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress()}}, \mbox{\hyperlink{matrices_8cc_source_l04349}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::concatenate()}}, \mbox{\hyperlink{matrices_8cc_source_l05223}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::concatenate\+\_\+without\+\_\+communication()}}, \mbox{\hyperlink{matrices_8h_source_l00402}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::\+Dense\+Matrix()}}, \mbox{\hyperlink{elements_8cc_source_l02669}{oomph\+::\+Finite\+Element\+::d\+J\+\_\+eulerian\+\_\+dnodal\+\_\+coordinates()}}, \mbox{\hyperlink{matrices_8cc_source_l00224}{oomph\+::\+Dense\+Double\+Matrix\+::eigenvalues\+\_\+by\+\_\+jacobi()}}, \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8cc_source_l00977}{oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::extrapolated\+\_\+strain\+\_\+rate()}}, \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8cc_source_l01175}{oomph\+::\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ DIM $>$\+::extrapolated\+\_\+strain\+\_\+rate()}}, \mbox{\hyperlink{axisym__navier__stokes__elements_8cc_source_l03239}{oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+hessian\+\_\+vector\+\_\+products()}}, \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8cc_source_l04098}{oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+hessian\+\_\+vector\+\_\+products()}}, \mbox{\hyperlink{displacement__based__foeppl__von__karman__elements_8h_source_l00451}{oomph\+::\+Displacement\+Based\+Foepplvon\+Karman\+Equations\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix()}}, \mbox{\hyperlink{matrices_8cc_source_l04003}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::gershgorin\+\_\+eigenvalue\+\_\+estimate()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l02537}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+blocks()}}, \mbox{\hyperlink{linear__elasticity__elements_8cc_source_l00047}{oomph\+::\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::get\+\_\+strain()}}, \mbox{\hyperlink{poroelasticity__elements_8cc_source_l00054}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::get\+\_\+strain()}}, \mbox{\hyperlink{solid__elements_8cc_source_l00047}{oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::get\+\_\+strain()}}, \mbox{\hyperlink{linear__elasticity__elements_8cc_source_l00145}{oomph\+::\+Linear\+Elasticity\+Equations$<$ DIM $>$\+::get\+\_\+stress()}}, \mbox{\hyperlink{poroelasticity__elements_8cc_source_l00154}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::get\+\_\+stress()}}, \mbox{\hyperlink{timesteppers_8h_source_l00318}{oomph\+::\+Time\+Stepper\+::highest\+\_\+derivative()}}, \mbox{\hyperlink{matrices_8cc_source_l03731}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::inf\+\_\+norm()}}, \mbox{\hyperlink{constitutive__laws_8cc_source_l00036}{oomph\+::\+Constitutive\+Law\+::is\+\_\+matrix\+\_\+square()}}, \mbox{\hyperlink{matrices_8h_source_l01295}{oomph\+::\+Dense\+Double\+Matrix\+::nrow()}}, \mbox{\hyperlink{matrices_8h_source_l00420}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::operator=()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00163}{oomph\+::\+Second\+Invariant\+Helper\+::second\+\_\+invariant()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00507}{oomph\+::\+Lagrange\+Enforced\+Flow\+Preconditioner\+::setup()}}, \mbox{\hyperlink{axisym__navier__stokes__elements_8cc_source_l00725}{oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::strain\+\_\+rate()}}, \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8cc_source_l00749}{oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::strain\+\_\+rate()}}, \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8cc_source_l01012}{oomph\+::\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ DIM $>$\+::strain\+\_\+rate()}}, \mbox{\hyperlink{linearised__axisym__navier__stokes__elements_8cc_source_l00255}{oomph\+::\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations\+::strain\+\_\+rate()}}, \mbox{\hyperlink{navier__stokes__elements_8cc_source_l01185}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::strain\+\_\+rate()}}, \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l00822}{oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::strain\+\_\+rate()}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8cc_source_l01468}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::strain\+\_\+rate()}}, \mbox{\hyperlink{mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8cc_source_l01475}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ DIM $>$\+::strain\+\_\+rate()}}, \mbox{\hyperlink{linearised__navier__stokes__elements_8cc_source_l00248}{oomph\+::\+Linearised\+Navier\+Stokes\+Equations\+::strain\+\_\+rate()}}, and \mbox{\hyperlink{polar__navier__stokes__elements_8cc_source_l00909}{oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::strain\+\_\+rate\+\_\+by\+\_\+r()}}.
+Referenced by oomph\+::\+Constitutive\+Law\+::are\+\_\+matrices\+\_\+of\+\_\+equal\+\_\+dimensions(), oomph\+::\+Helmholtz\+MGPreconditioner$<$ DIM $>$\+::block\+\_\+preconditioner\+\_\+self\+\_\+test(), oomph\+::\+Generalised\+Hookean\+::calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress(), oomph\+::\+Isotropic\+Strain\+Energy\+Function\+Constitutive\+Law\+::calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress(), oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base(), oomph\+::\+CRDouble\+Matrix\+Helpers\+::concatenate(), oomph\+::\+CRDouble\+Matrix\+Helpers\+::concatenate\+\_\+without\+\_\+communication(), oomph\+::\+Dense\+Matrix$<$ T $>$\+::\+Dense\+Matrix(), oomph\+::\+Finite\+Element\+::d\+J\+\_\+eulerian\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Dense\+Double\+Matrix\+::eigenvalues\+\_\+by\+\_\+jacobi(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::extrapolated\+\_\+strain\+\_\+rate(), oomph\+::\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ DIM $>$\+::extrapolated\+\_\+strain\+\_\+rate(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+hessian\+\_\+vector\+\_\+products(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+hessian\+\_\+vector\+\_\+products(), oomph\+::\+Displacement\+Based\+Foepplvon\+Karman\+Equations\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix(), oomph\+::\+CRDouble\+Matrix\+Helpers\+::gershgorin\+\_\+eigenvalue\+\_\+estimate(), oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+blocks(), oomph\+::\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::get\+\_\+strain(), oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::get\+\_\+strain(), oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::get\+\_\+strain(), oomph\+::\+Linear\+Elasticity\+Equations$<$ DIM $>$\+::get\+\_\+stress(), oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::get\+\_\+stress(), oomph\+::\+Time\+Stepper\+::highest\+\_\+derivative(), oomph\+::\+CRDouble\+Matrix\+Helpers\+::inf\+\_\+norm(), oomph\+::\+Constitutive\+Law\+::is\+\_\+matrix\+\_\+square(), oomph\+::\+Dense\+Double\+Matrix\+::nrow(), oomph\+::\+Dense\+Matrix$<$ T $>$\+::operator=(), oomph\+::\+Second\+Invariant\+Helper\+::second\+\_\+invariant(), oomph\+::\+Lagrange\+Enforced\+Flow\+Preconditioner\+::setup(), oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::strain\+\_\+rate(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::strain\+\_\+rate(), oomph\+::\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ DIM $>$\+::strain\+\_\+rate(), oomph\+::\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations\+::strain\+\_\+rate(), oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::strain\+\_\+rate(), oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::strain\+\_\+rate(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$\+::strain\+\_\+rate(), oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ DIM $>$\+::strain\+\_\+rate(), oomph\+::\+Linearised\+Navier\+Stokes\+Equations\+::strain\+\_\+rate(), and oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::strain\+\_\+rate\+\_\+by\+\_\+r().
 
-\mbox{\Hypertarget{classoomph_1_1DenseMatrix_a01b02acc166aa69ec0a7d9153076b5f4}\label{classoomph_1_1DenseMatrix_a01b02acc166aa69ec0a7d9153076b5f4}} 
+\mbox{\Hypertarget{classoomph_1_1DenseMatrix_a01cb48599a5ecdfca9fd02bcdd43bf88}\label{classoomph_1_1DenseMatrix_a01cb48599a5ecdfca9fd02bcdd43bf88}} 
 \index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
 {\footnotesize\ttfamily template$<$class T $>$ \\
-\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}} \& \mbox{\hyperlink{classoomph_1_1DenseMatrix}{oomph\+::\+Dense\+Matrix}}$<$ T $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ T $>$ \&}]{source\+\_\+matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}\& \mbox{\hyperlink{classoomph_1_1DenseMatrix}{oomph\+::\+Dense\+Matrix}}$<$ T $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ T $>$ \&}]{source\+\_\+matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -369,11 +370,11 @@ Copy assignment.
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l00420}{420}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 420 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l00395}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l00392}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::N}}, \mbox{\hyperlink{matrices_8h_source_l00491}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::ncol()}}, \mbox{\hyperlink{matrices_8h_source_l00485}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::nrow()}}, and \mbox{\hyperlink{matrices_8h_source_l00498}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::resize()}}.
+References i, oomph\+::\+Dense\+Matrix$<$ T $>$\+::M, oomph\+::\+Dense\+Matrix$<$ T $>$\+::N, oomph\+::\+Dense\+Matrix$<$ T $>$\+::ncol(), oomph\+::\+Dense\+Matrix$<$ T $>$\+::nrow(), and oomph\+::\+Dense\+Matrix$<$ T $>$\+::resize().
 
 \mbox{\Hypertarget{classoomph_1_1DenseMatrix_a03e20626e889a1ab4582614f55784165}\label{classoomph_1_1DenseMatrix_a03e20626e889a1ab4582614f55784165}} 
 \index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!output@{output}}
@@ -392,11 +393,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Matrix_ace9b59cbe514c77f0b3816
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l03054}{3054}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 3054 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}.
+References i, and oomph\+::\+Quad\+Tree\+Names\+::N.
 
 \mbox{\Hypertarget{classoomph_1_1DenseMatrix_a4ab60b1e7db98bcb5b75b080266e452e}\label{classoomph_1_1DenseMatrix_a4ab60b1e7db98bcb5b75b080266e452e}} 
 \index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!output@{output}}
@@ -411,11 +412,11 @@ Output function to print a matrix row-\/by-\/row to a file. Specify filename.
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l03074}{3074}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 3074 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
+References oomph\+::\+Command\+Line\+Args\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1DenseMatrix_aa02dc7c9b2f4e1cc1204cc8281f030f9}\label{classoomph_1_1DenseMatrix_aa02dc7c9b2f4e1cc1204cc8281f030f9}} 
 \index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!output\_bottom\_right\_zero\_helper@{output\_bottom\_right\_zero\_helper}}
@@ -434,11 +435,11 @@ Implements \mbox{\hyperlink{classoomph_1_1Matrix_a10ee338f4d3893010291a692aea042
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l03124}{3124}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 3124 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, and \mbox{\hyperlink{elements_8h_source_l01242}{oomph\+::\+Element\+Geometry\+::T}}.
+References oomph\+::\+Quad\+Tree\+Names\+::N, and oomph\+::\+Element\+Geometry\+::T.
 
 \mbox{\Hypertarget{classoomph_1_1DenseMatrix_adec1ef741b1c5048a12ba9a540c2719c}\label{classoomph_1_1DenseMatrix_adec1ef741b1c5048a12ba9a540c2719c}} 
 \index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!resize@{resize}}
@@ -453,15 +454,11 @@ Resize to a square nxn matrix; any values already present will be transfered.
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l00498}{498}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 498 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{matrices_8h_source_l00498}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::resize()}}.
-
-
-
-Referenced by \mbox{\hyperlink{timesteppers_8h_source_l01193}{oomph\+::\+BDF$<$ NSTEPS $>$\+::\+BDF()}}, \mbox{\hyperlink{matrices_8cc_source_l00224}{oomph\+::\+Dense\+Double\+Matrix\+::eigenvalues\+\_\+by\+\_\+jacobi()}}, \mbox{\hyperlink{periodic__orbit__handler_8cc_source_l00077}{oomph\+::\+Periodic\+Orbit\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+orbit()}}, \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source_l01435}{oomph\+::\+Refineable\+Navier\+Stokes\+Boussinesq\+Element$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::get\+\_\+dbody\+\_\+force\+\_\+nst\+\_\+dexternal\+\_\+element\+\_\+data()}}, \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source_l01377}{oomph\+::\+Navier\+Stokes\+Boussinesq\+Element$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::get\+\_\+dbody\+\_\+force\+\_\+nst\+\_\+dexternal\+\_\+element\+\_\+data()}}, \mbox{\hyperlink{problem_8cc_source_l07823}{oomph\+::\+Problem\+::get\+\_\+fd\+\_\+jacobian()}}, \mbox{\hyperlink{dg__elements_8cc_source_l00614}{oomph\+::\+DGElement\+::get\+\_\+inverse\+\_\+mass\+\_\+matrix\+\_\+times\+\_\+residuals()}}, \mbox{\hyperlink{problem_8cc_source_l03890}{oomph\+::\+Problem\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{implicit__midpoint__rule_8h_source_l00047}{oomph\+::\+IMRBase\+::\+IMRBase()}}, \mbox{\hyperlink{matrices_8cc_source_l00481}{oomph\+::\+Dense\+Double\+Matrix\+::matrix\+\_\+reduction()}}, \mbox{\hyperlink{generalised__timesteppers_8h_source_l00126}{oomph\+::\+Continuation\+Storage\+Scheme\+::modify\+\_\+storage()}}, \mbox{\hyperlink{matrices_8cc_source_l00521}{oomph\+::\+Dense\+Double\+Matrix\+::multiply()}}, \mbox{\hyperlink{matrices_8h_source_l00420}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::operator=()}}, \mbox{\hyperlink{dg__elements_8cc_source_l00578}{oomph\+::\+DGElement\+::pre\+\_\+compute\+\_\+mass\+\_\+matrix()}}, \mbox{\hyperlink{matrices_8h_source_l00498}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::resize()}}, \mbox{\hyperlink{octree_8cc_source_l01040}{oomph\+::\+Oc\+Tree\+::setup\+\_\+static\+\_\+data()}}, \mbox{\hyperlink{quadtree_8cc_source_l00120}{oomph\+::\+Quad\+Tree\+::setup\+\_\+static\+\_\+data()}}, \mbox{\hyperlink{frontal__solver_8cc_source_l00127}{oomph\+::\+HSL\+\_\+\+MA42\+::solve()}}, and \mbox{\hyperlink{timesteppers_8h_source_l00279}{oomph\+::\+Time\+Stepper\+::\+Time\+Stepper()}}.
+Referenced by oomph\+::\+Spectral\+Element\+::assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base(), oomph\+::\+Dense\+Double\+Matrix\+::eigenvalues\+\_\+by\+\_\+jacobi(), oomph\+::\+Periodic\+Orbit\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+orbit(), oomph\+::\+Refineable\+Navier\+Stokes\+Boussinesq\+Element$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::get\+\_\+dbody\+\_\+force\+\_\+nst\+\_\+dexternal\+\_\+element\+\_\+data(), oomph\+::\+Navier\+Stokes\+Boussinesq\+Element$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::get\+\_\+dbody\+\_\+force\+\_\+nst\+\_\+dexternal\+\_\+element\+\_\+data(), oomph\+::\+Problem\+::get\+\_\+fd\+\_\+jacobian(), oomph\+::\+DGElement\+::get\+\_\+inverse\+\_\+mass\+\_\+matrix\+\_\+times\+\_\+residuals(), oomph\+::\+Problem\+::get\+\_\+jacobian(), oomph\+::\+IMRBase\+::\+IMRBase(), oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::\+Kirchhoff\+Love\+Shell\+Equations(), oomph\+::\+Dense\+Double\+Matrix\+::matrix\+\_\+reduction(), oomph\+::\+Continuation\+Storage\+Scheme\+::modify\+\_\+storage(), oomph\+::\+Dense\+Double\+Matrix\+::multiply(), oomph\+::\+Dense\+Matrix$<$ T $>$\+::operator=(), oomph\+::\+DGElement\+::pre\+\_\+compute\+\_\+mass\+\_\+matrix(), oomph\+::\+Binary\+Tree\+::setup\+\_\+static\+\_\+data(), oomph\+::\+Oc\+Tree\+::setup\+\_\+static\+\_\+data(), oomph\+::\+Quad\+Tree\+::setup\+\_\+static\+\_\+data(), oomph\+::\+HSL\+\_\+\+MA42\+::solve(), and oomph\+::\+Time\+Stepper\+::\+Time\+Stepper().
 
 \mbox{\Hypertarget{classoomph_1_1DenseMatrix_a0f01dd97b1c71868371f93259efc26b0}\label{classoomph_1_1DenseMatrix_a0f01dd97b1c71868371f93259efc26b0}} 
 \index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!resize@{resize}}
@@ -476,11 +473,11 @@ Resize to a non-\/square n x m matrix; any values already present will be transf
 
 Resize to a non-\/square n\+\_\+row x m\+\_\+col matrix, where any values already present will be transfered. 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l02959}{2959}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 2959 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, and \mbox{\hyperlink{elements_8h_source_l01242}{oomph\+::\+Element\+Geometry\+::T}}.
+References i, oomph\+::\+Quad\+Tree\+Names\+::N, and oomph\+::\+Element\+Geometry\+::T.
 
 \mbox{\Hypertarget{classoomph_1_1DenseMatrix_aeb6daf6539fee8d3d6f7a81306798b10}\label{classoomph_1_1DenseMatrix_aeb6daf6539fee8d3d6f7a81306798b10}} 
 \index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!resize@{resize}}
@@ -495,11 +492,11 @@ Resize to a non-\/square n x m matrix and initialize the new values to initial\+
 
 Resize to a non-\/square n\+\_\+row x m\+\_\+col matrix and initialize the new entries to specified value. 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l03008}{3008}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 3008 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, and \mbox{\hyperlink{elements_8h_source_l01242}{oomph\+::\+Element\+Geometry\+::T}}.
+References i, oomph\+::\+Quad\+Tree\+Names\+::N, and oomph\+::\+Element\+Geometry\+::T.
 
 \mbox{\Hypertarget{classoomph_1_1DenseMatrix_a6e9084acc11e036d4c5f7e5322d12034}\label{classoomph_1_1DenseMatrix_a6e9084acc11e036d4c5f7e5322d12034}} 
 \index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!sparse\_indexed\_output\_helper@{sparse\_indexed\_output\_helper}}
@@ -518,11 +515,11 @@ Implements \mbox{\hyperlink{classoomph_1_1Matrix_a7a5b44e7688ce2c2f7552da104e615
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l03143}{3143}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 3143 of file matrices.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, and \mbox{\hyperlink{elements_8h_source_l01242}{oomph\+::\+Element\+Geometry\+::T}}.
+References i, oomph\+::\+Quad\+Tree\+Names\+::N, and oomph\+::\+Element\+Geometry\+::T.
 
 
 
@@ -540,11 +537,11 @@ Number of columns.
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l00395}{395}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 395 of file matrices.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{matrices_8h_source_l00402}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::\+Dense\+Matrix()}}, \mbox{\hyperlink{matrices_8h_source_l00447}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::entry()}}, \mbox{\hyperlink{matrices_8h_source_l00457}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::get\+\_\+entry()}}, \mbox{\hyperlink{matrices_8h_source_l00514}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::initialise()}}, \mbox{\hyperlink{matrices_8h_source_l00491}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::ncol()}}, and \mbox{\hyperlink{matrices_8h_source_l00420}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::operator=()}}.
+Referenced by oomph\+::\+Dense\+Matrix$<$ T $>$\+::\+Dense\+Matrix(), oomph\+::\+Dense\+Matrix$<$ T $>$\+::entry(), oomph\+::\+Dense\+Matrix$<$ T $>$\+::get\+\_\+entry(), oomph\+::\+Dense\+Matrix$<$ T $>$\+::initialise(), oomph\+::\+Dense\+Matrix$<$ T $>$\+::ncol(), and oomph\+::\+Dense\+Matrix$<$ T $>$\+::operator=().
 
 \mbox{\Hypertarget{classoomph_1_1DenseMatrix_a92a2eea603a42e22fd4d3ea0a258e6f8}\label{classoomph_1_1DenseMatrix_a92a2eea603a42e22fd4d3ea0a258e6f8}} 
 \index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!Matrixdata@{Matrixdata}}
@@ -559,11 +556,11 @@ Internal representation of matrix as a pointer to data.
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l00389}{389}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 389 of file matrices.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{matrices_8h_source_l00402}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::\+Dense\+Matrix()}}, \mbox{\hyperlink{matrices_8h_source_l00447}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::entry()}}, \mbox{\hyperlink{matrices_8h_source_l00457}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::get\+\_\+entry()}}, \mbox{\hyperlink{matrices_8h_source_l00514}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::initialise()}}, and \mbox{\hyperlink{matrices_8h_source_l00478}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::$\sim$\+Dense\+Matrix()}}.
+Referenced by oomph\+::\+Dense\+Matrix$<$ T $>$\+::\+Dense\+Matrix(), oomph\+::\+Dense\+Matrix$<$ T $>$\+::entry(), oomph\+::\+Dense\+Matrix$<$ T $>$\+::get\+\_\+entry(), oomph\+::\+Dense\+Matrix$<$ T $>$\+::initialise(), and oomph\+::\+Dense\+Matrix$<$ T $>$\+::$\sim$\+Dense\+Matrix().
 
 \mbox{\Hypertarget{classoomph_1_1DenseMatrix_a23cb539be0b4ef0381b9f18e8e50f75e}\label{classoomph_1_1DenseMatrix_a23cb539be0b4ef0381b9f18e8e50f75e}} 
 \index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!N@{N}}
@@ -578,11 +575,11 @@ Number of rows.
 
 
 
-Definition at line \mbox{\hyperlink{matrices_8h_source_l00392}{392}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+Definition at line 392 of file matrices.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{matrices_8h_source_l00402}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::\+Dense\+Matrix()}}, \mbox{\hyperlink{matrices_8h_source_l00514}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::initialise()}}, \mbox{\hyperlink{matrices_8h_source_l00485}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::nrow()}}, and \mbox{\hyperlink{matrices_8h_source_l00420}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::operator=()}}.
+Referenced by oomph\+::\+Dense\+Matrix$<$ T $>$\+::\+Dense\+Matrix(), oomph\+::\+Dense\+Matrix$<$ T $>$\+::initialise(), oomph\+::\+Dense\+Matrix$<$ T $>$\+::nrow(), and oomph\+::\+Dense\+Matrix$<$ T $>$\+::operator=().
 
 
 

@@ -50,7 +50,7 @@ We use a namespace to define the parameters for the pseudo-\/solid mesh constitu
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//====start\_of\_namespace=================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for phyical parameters}}
-\DoxyCodeLine{\textcolor{comment}{//=======================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -77,7 +77,7 @@ We shall solve the problem twice, once using the external pressure as the degree
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_main=======================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Main driver: Build problem and initiate parameter study}}
-\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{static__single__layer_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{  \textcolor{comment}{// Solve the pseudosolid problem twice, once hijacking an internal, once}}
@@ -107,9 +107,9 @@ The problem class consists of a constructor that takes the aforementioned boolea
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===========start\_of\_pseudo\_elastic\_class====================================}}
-\DoxyCodeLine{\textcolor{comment}{/// A class that solves the Navier-\/-\/Stokes equations}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// to compute the shape of a static interface in a rectangular container}}
-\DoxyCodeLine{\textcolor{comment}{/// with imposed contact angle at the boundary.}}
+\DoxyCodeLine{\textcolor{comment}{/// A class that solves the Navier-\/-\/Stokes equations}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// to compute the shape of a static interface in a rectangular container}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// with imposed contact angle at the boundary.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//============================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classPseudoSolidCapProblem}{PseudoSolidCapProblem}} : \textcolor{keyword}{public} Problem}
@@ -203,9 +203,9 @@ The constructor first initialises the member data and sets the outer unit normal
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_constructor=====================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Constructor: Pass boolean flag to indicate if the volume}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// constraint is applied by hijacking an internal pressure}}
-\DoxyCodeLine{\textcolor{comment}{/// or the external pressure}}
+\DoxyCodeLine{\textcolor{comment}{/// Constructor: Pass boolean flag to indicate if the volume}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// constraint is applied by hijacking an internal pressure}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// or the external pressure}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classPseudoSolidCapProblem_a4ac05a07dd55950bb67f7f79cb9fbb77}{PseudoSolidCapProblem<ELEMENT>::PseudoSolidCapProblem}}(\textcolor{keyword}{const} \textcolor{keywordtype}{bool}\& hijack\_internal) :}
@@ -440,7 +440,7 @@ The volume constraint condition is enforced by two different types of element. A
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_volume\_constraint\_elements==================}}
 \DoxyCodeLine{\textcolor{comment}{/// Create the volume constraint elements}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classPseudoSolidCapProblem_a0289801610e2bc864c67d4d8557d56b1}{PseudoSolidCapProblem<ELEMENT>::create\_volume\_constraint\_elements}}()}
 \DoxyCodeLine{\{}
@@ -538,8 +538,8 @@ The {\ttfamily parameter\+\_\+study}(..) function creates a {\ttfamily Doc\+Info
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//================start\_of\_parameter\_study===========================}}
-\DoxyCodeLine{\textcolor{comment}{/// Perform a parameter study. Pass name of output directory as }\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// a string}}
+\DoxyCodeLine{\textcolor{comment}{/// Perform a parameter study. Pass name of output directory as }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// a string}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classPseudoSolidCapProblem_ae86ecaf62fa0920f5d14bf82a7f83b0e}{PseudoSolidCapProblem<ELEMENT>::parameter\_study}}(\textcolor{keyword}{const} \textcolor{keywordtype}{string}\& dir\_name)}
@@ -582,7 +582,7 @@ The {\ttfamily doc\+\_\+solution} function writes the bulk fluid mesh into an ou
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==============start\_of\_doc\_solution=====================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classPseudoSolidCapProblem_a2fb98a37bde5742cbdf3c91cb1f5eb2f}{PseudoSolidCapProblem<ELEMENT>::doc\_solution}}(DocInfo\& doc\_info)}
 \DoxyCodeLine{\{ }

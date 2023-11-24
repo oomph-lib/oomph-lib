@@ -18,9 +18,9 @@ Inheritance diagram for oomph\+::Pseudo\+Buckling\+Ring\+Element\+:\begin{figure
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1PseudoBucklingRingElement_aec9c719fb7663e158b2cdefa088bb254}{Pseudo\+Buckling\+Ring\+Element}} (const double \&\mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_ad28891383abe71a473a079721c6dd53e}{eps\+\_\+buckl}}, const double \&\mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_ade2881e77f7cf0be26970c78c70d3a4d}{ampl\+\_\+ratio}}, const unsigned n\+\_\+buckl, const double \&\mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_ad202df097c0a68d93a5b2f99abf4c39b}{r\+\_\+0}}, const double \&\mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_af53f509aa119f74c77ae45046023f28f}{T}}, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$\mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\+\_\+stepper\+\_\+pt}})
+\mbox{\hyperlink{classoomph_1_1PseudoBucklingRingElement_aec9c719fb7663e158b2cdefa088bb254}{Pseudo\+Buckling\+Ring\+Element}} (const double \&\mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_ad28891383abe71a473a079721c6dd53e}{eps\+\_\+buckl}}, const double \&\mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_ade2881e77f7cf0be26970c78c70d3a4d}{ampl\+\_\+ratio}}, const unsigned n\+\_\+buckl, const double \&\mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_ad202df097c0a68d93a5b2f99abf4c39b}{r\+\_\+0}}, const double \&\mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_af53f509aa119f74c77ae45046023f28f}{T}}, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$\mbox{\hyperlink{classoomph_1_1GeomObject_a3c92023891dd4a0e818022f467eeb7f1}{time\+\_\+stepper\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Constructor\+: Build pseudo buckling ring from doubles that describe the geometry. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1PseudoBucklingRingElement_abe188902d3d2ab9dede7f958b5c3eb68}{Pseudo\+Buckling\+Ring\+Element}} (const double \&\mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_ad28891383abe71a473a079721c6dd53e}{eps\+\_\+buckl}}, const double \&HoR, const unsigned \&n\+\_\+buckl, const unsigned \&imode, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$\mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\+\_\+stepper\+\_\+pt}})
+\mbox{\hyperlink{classoomph_1_1PseudoBucklingRingElement_abe188902d3d2ab9dede7f958b5c3eb68}{Pseudo\+Buckling\+Ring\+Element}} (const double \&\mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_ad28891383abe71a473a079721c6dd53e}{eps\+\_\+buckl}}, const double \&HoR, const unsigned \&n\+\_\+buckl, const unsigned \&imode, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$\mbox{\hyperlink{classoomph_1_1GeomObject_a3c92023891dd4a0e818022f467eeb7f1}{time\+\_\+stepper\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Constructor\+: Pass buckling amplitude, h/R, buckling wavenumbe and pointer to global timestepper. Other parameters get set up to represent oscillating ring with mode imode (1 or 2). All geometric data is pinned by default. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1PseudoBucklingRingElement_ad07fe7b0956073ec5035b8db72e80890}{Pseudo\+Buckling\+Ring\+Element}} (const \mbox{\hyperlink{classoomph_1_1PseudoBucklingRingElement}{Pseudo\+Buckling\+Ring\+Element}} \&dummy)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
@@ -32,7 +32,7 @@ virtual void \mbox{\hyperlink{classoomph_1_1PseudoBucklingRingElement_ad4f6c2b06
 \begin{DoxyCompactList}\small\item\em Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} (wrapper) \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1PseudoBucklingRingElement_afa1eca6b17521ac4e9ca4367a695f500}{get\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} and element Jacobian matrix (wrapper) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \& \mbox{\hyperlink{classoomph_1_1PseudoBucklingRingElement_ad14fc54491c85b97fa67119eb2045434}{reference\+\_\+pressure\+\_\+pt}} () const
+\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const  \& \mbox{\hyperlink{classoomph_1_1PseudoBucklingRingElement_aee6f3e5157ff065ddc132d24496b9378}{reference\+\_\+pressure\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Pointer to pressure data that is used as reference pressure. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1PseudoBucklingRingElement_aff68b0969259a49194526660ed8a93a2}{reference\+\_\+pressure}} () const
 \begin{DoxyCompactList}\small\item\em Return the reference pressure. \end{DoxyCompactList}\item 
@@ -65,9 +65,9 @@ unsigned \mbox{\hyperlink{classoomph_1_1PseudoBucklingRingElement_a5be4c42822597
 \doxysubsection{Detailed Description}
 //////////////////////////////////////////////////////////////////// 
 
-//////////////////////////////////////////////////////////////////// Pseudo buckling ring\+: Circular ring deformed by the N-\/th buckling mode of a thin-\/wall elastic ring. \[ x = R_0 \cos(\zeta) + \epsilon \left( \cos(N \zeta) \cos(\zeta) - A \sin(N \zeta) \sin(\zeta) \right) sin(2 \pi t/T) \] \[ y = R_0 \sin(\zeta) + \epsilon \left( \cos(N \zeta) \sin(\zeta) + A \sin(N \zeta) \cos(\zeta) \right) sin(2 \pi t/T) \] where A is the ratio of the aziumuthal to the radial buckling amplitude (A=-\/1/N for statically buckling rings) and epsilon is the buckling amplitude. Scale R\+\_\+0 is adjusted to ensure conservation of (computational) volume/area. This is implemented by a pseudo-\/elasticity approach\+: The governing equation for $ R_0 $ is\+: \[ p_{ref} = R_0 - 1.0 \] The pointer to the reference pressure needs to be set with \mbox{\hyperlink{classoomph_1_1PseudoBucklingRingElement_ad14fc54491c85b97fa67119eb2045434}{reference\+\_\+pressure\+\_\+pt()}}. 
+//////////////////////////////////////////////////////////////////// Pseudo buckling ring\+: Circular ring deformed by the N-\/th buckling mode of a thin-\/wall elastic ring. \[ x = R_0 \cos(\zeta) + \epsilon \left( \cos(N \zeta) \cos(\zeta) - A \sin(N \zeta) \sin(\zeta) \right) sin(2 \pi t/T) \] \[ y = R_0 \sin(\zeta) + \epsilon \left( \cos(N \zeta) \sin(\zeta) + A \sin(N \zeta) \cos(\zeta) \right) sin(2 \pi t/T) \] where A is the ratio of the aziumuthal to the radial buckling amplitude (A=-\/1/N for statically buckling rings) and epsilon is the buckling amplitude. Scale R\+\_\+0 is adjusted to ensure conservation of (computational) volume/area. This is implemented by a pseudo-\/elasticity approach\+: The governing equation for $ R_0 $ is\+: \[ p_{ref} = R_0 - 1.0 \] The pointer to the reference pressure needs to be set with \mbox{\hyperlink{classoomph_1_1PseudoBucklingRingElement_aee6f3e5157ff065ddc132d24496b9378}{reference\+\_\+pressure\+\_\+pt()}}. 
 
-Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00582}{582}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+Definition at line 582 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
@@ -84,11 +84,11 @@ Constructor\+: Build pseudo buckling ring from doubles that describe the geometr
 
 
 
-Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00614}{614}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+Definition at line 614 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l00062}{oomph\+::\+Generalised\+Element\+::add\+\_\+internal\+\_\+data()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00553}{oomph\+::\+Pseudo\+Buckling\+Ring\+::\+Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00588}{Internal\+\_\+geometric\+\_\+variable\+\_\+index}}.
+References oomph\+::\+Generalised\+Element\+::add\+\_\+internal\+\_\+data(), oomph\+::\+Pseudo\+Buckling\+Ring\+::\+Geom\+\_\+data\+\_\+pt, i, and Internal\+\_\+geometric\+\_\+variable\+\_\+index.
 
 \mbox{\Hypertarget{classoomph_1_1PseudoBucklingRingElement_abe188902d3d2ab9dede7f958b5c3eb68}\label{classoomph_1_1PseudoBucklingRingElement_abe188902d3d2ab9dede7f958b5c3eb68}} 
 \index{oomph::PseudoBucklingRingElement@{oomph::PseudoBucklingRingElement}!PseudoBucklingRingElement@{PseudoBucklingRingElement}}
@@ -102,11 +102,11 @@ Constructor\+: Pass buckling amplitude, h/R, buckling wavenumbe and pointer to g
 
 
 
-Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00648}{648}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+Definition at line 648 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l00062}{oomph\+::\+Generalised\+Element\+::add\+\_\+internal\+\_\+data()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00553}{oomph\+::\+Pseudo\+Buckling\+Ring\+::\+Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00588}{Internal\+\_\+geometric\+\_\+variable\+\_\+index}}.
+References oomph\+::\+Generalised\+Element\+::add\+\_\+internal\+\_\+data(), oomph\+::\+Pseudo\+Buckling\+Ring\+::\+Geom\+\_\+data\+\_\+pt, i, and Internal\+\_\+geometric\+\_\+variable\+\_\+index.
 
 \mbox{\Hypertarget{classoomph_1_1PseudoBucklingRingElement_ad07fe7b0956073ec5035b8db72e80890}\label{classoomph_1_1PseudoBucklingRingElement_ad07fe7b0956073ec5035b8db72e80890}} 
 \index{oomph::PseudoBucklingRingElement@{oomph::PseudoBucklingRingElement}!PseudoBucklingRingElement@{PseudoBucklingRingElement}}
@@ -130,11 +130,11 @@ Destructor\+: Kill internal data and set to NULL.
 
 
 
-Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00682}{682}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+Definition at line 682 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
-References \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00556}{oomph\+::\+Pseudo\+Buckling\+Ring\+::\+Must\+\_\+clean\+\_\+up}}.
+References oomph\+::\+Pseudo\+Buckling\+Ring\+::\+Must\+\_\+clean\+\_\+up.
 
 
 
@@ -151,15 +151,15 @@ Return the local equation number of the internal geometric variable.
 
 
 
-Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00599}{599}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+Definition at line 599 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
-References \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00588}{Internal\+\_\+geometric\+\_\+variable\+\_\+index}}, and \mbox{\hyperlink{elements_8h_source_l00267}{oomph\+::\+Generalised\+Element\+::internal\+\_\+local\+\_\+eqn()}}.
+References Internal\+\_\+geometric\+\_\+variable\+\_\+index, and oomph\+::\+Generalised\+Element\+::internal\+\_\+local\+\_\+eqn().
 
 
 
-Referenced by \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00745}{get\+\_\+residuals\+\_\+generic()}}.
+Referenced by get\+\_\+residuals\+\_\+generic().
 
 \mbox{\Hypertarget{classoomph_1_1PseudoBucklingRingElement_afa1eca6b17521ac4e9ca4367a695f500}\label{classoomph_1_1PseudoBucklingRingElement_afa1eca6b17521ac4e9ca4367a695f500}} 
 \index{oomph::PseudoBucklingRingElement@{oomph::PseudoBucklingRingElement}!get\_jacobian@{get\_jacobian}}
@@ -177,11 +177,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_ab915bdad7e
 
 
 
-Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00704}{704}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+Definition at line 704 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
-References \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00745}{get\+\_\+residuals\+\_\+generic()}}.
+References get\+\_\+residuals\+\_\+generic().
 
 \mbox{\Hypertarget{classoomph_1_1PseudoBucklingRingElement_ad4f6c2b06b3f114dd08db33781484641}\label{classoomph_1_1PseudoBucklingRingElement_ad4f6c2b06b3f114dd08db33781484641}} 
 \index{oomph::PseudoBucklingRingElement@{oomph::PseudoBucklingRingElement}!get\_residuals@{get\_residuals}}
@@ -199,11 +199,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a53d348ab71
 
 
 
-Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00693}{693}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+Definition at line 693 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
-References \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00745}{get\+\_\+residuals\+\_\+generic()}}.
+References get\+\_\+residuals\+\_\+generic().
 
 \mbox{\Hypertarget{classoomph_1_1PseudoBucklingRingElement_a6cde480f22d2a89a9322b172028eb8a9}\label{classoomph_1_1PseudoBucklingRingElement_a6cde480f22d2a89a9322b172028eb8a9}} 
 \index{oomph::PseudoBucklingRingElement@{oomph::PseudoBucklingRingElement}!get\_residuals\_generic@{get\_residuals\_generic}}
@@ -217,15 +217,15 @@ Compute element residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} (only i
 
 
 
-Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00745}{745}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+Definition at line 745 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
-References \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00599}{geometric\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{Vector_8h_source_l00167}{oomph\+::\+Vector$<$ \+\_\+\+Tp $>$\+::initialise()}}, \mbox{\hyperlink{matrices_8h_source_l00514}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::initialise()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00293}{oomph\+::\+Pseudo\+Buckling\+Ring\+::r\+\_\+0()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00718}{reference\+\_\+pressure()}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00605}{reference\+\_\+pressure\+\_\+local\+\_\+eqn()}}.
+References geometric\+\_\+local\+\_\+eqn(), oomph\+::\+Vector$<$ \+\_\+\+Tp $>$\+::initialise(), oomph\+::\+Dense\+Matrix$<$ T $>$\+::initialise(), oomph\+::\+Pseudo\+Buckling\+Ring\+::r\+\_\+0(), reference\+\_\+pressure(), and reference\+\_\+pressure\+\_\+local\+\_\+eqn().
 
 
 
-Referenced by \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00704}{get\+\_\+jacobian()}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00693}{get\+\_\+residuals()}}.
+Referenced by get\+\_\+jacobian(), and get\+\_\+residuals().
 
 \mbox{\Hypertarget{classoomph_1_1PseudoBucklingRingElement_af4e45bb2eb7bdd69f55c62bb0ce541d1}\label{classoomph_1_1PseudoBucklingRingElement_af4e45bb2eb7bdd69f55c62bb0ce541d1}} 
 \index{oomph::PseudoBucklingRingElement@{oomph::PseudoBucklingRingElement}!operator=@{operator=}}
@@ -249,15 +249,15 @@ Return the reference pressure.
 
 
 
-Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00718}{718}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+Definition at line 718 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
-References \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00596}{External\+\_\+reference\+\_\+pressure\+\_\+pt}}, and \mbox{\hyperlink{nodes_8h_source_l00293}{oomph\+::\+Data\+::value()}}.
+References External\+\_\+reference\+\_\+pressure\+\_\+pt, and oomph\+::\+Data\+::value().
 
 
 
-Referenced by \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00745}{get\+\_\+residuals\+\_\+generic()}}.
+Referenced by get\+\_\+residuals\+\_\+generic().
 
 \mbox{\Hypertarget{classoomph_1_1PseudoBucklingRingElement_a4e3f180b2cb5a3f7992e3f1bfff488bb}\label{classoomph_1_1PseudoBucklingRingElement_a4e3f180b2cb5a3f7992e3f1bfff488bb}} 
 \index{oomph::PseudoBucklingRingElement@{oomph::PseudoBucklingRingElement}!reference\_pressure\_local\_eqn@{reference\_pressure\_local\_eqn}}
@@ -271,21 +271,21 @@ Return the local equation number of the reference pressure variable.
 
 
 
-Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00605}{605}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+Definition at line 605 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00311}{oomph\+::\+Generalised\+Element\+::external\+\_\+local\+\_\+eqn()}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00592}{External\+\_\+reference\+\_\+pressure\+\_\+index}}.
+References oomph\+::\+Generalised\+Element\+::external\+\_\+local\+\_\+eqn(), and External\+\_\+reference\+\_\+pressure\+\_\+index.
 
 
 
-Referenced by \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00745}{get\+\_\+residuals\+\_\+generic()}}.
+Referenced by get\+\_\+residuals\+\_\+generic().
 
-\mbox{\Hypertarget{classoomph_1_1PseudoBucklingRingElement_ad14fc54491c85b97fa67119eb2045434}\label{classoomph_1_1PseudoBucklingRingElement_ad14fc54491c85b97fa67119eb2045434}} 
+\mbox{\Hypertarget{classoomph_1_1PseudoBucklingRingElement_aee6f3e5157ff065ddc132d24496b9378}\label{classoomph_1_1PseudoBucklingRingElement_aee6f3e5157ff065ddc132d24496b9378}} 
 \index{oomph::PseudoBucklingRingElement@{oomph::PseudoBucklingRingElement}!reference\_pressure\_pt@{reference\_pressure\_pt}}
 \index{reference\_pressure\_pt@{reference\_pressure\_pt}!oomph::PseudoBucklingRingElement@{oomph::PseudoBucklingRingElement}}
 \doxysubsubsection{\texorpdfstring{reference\_pressure\_pt()}{reference\_pressure\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const  \& oomph\+::\+Pseudo\+Buckling\+Ring\+Element\+::reference\+\_\+pressure\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$ const\& oomph\+::\+Pseudo\+Buckling\+Ring\+Element\+::reference\+\_\+pressure\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -293,11 +293,11 @@ Pointer to pressure data that is used as reference pressure.
 
 
 
-Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00712}{712}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+Definition at line 712 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00659}{oomph\+::\+Generalised\+Element\+::external\+\_\+data\+\_\+pt()}}.
+References oomph\+::\+Generalised\+Element\+::external\+\_\+data\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1PseudoBucklingRingElement_a763b31017a3f39c0553182ad264a4057}\label{classoomph_1_1PseudoBucklingRingElement_a763b31017a3f39c0553182ad264a4057}} 
 \index{oomph::PseudoBucklingRingElement@{oomph::PseudoBucklingRingElement}!set\_reference\_pressure\_pt@{set\_reference\_pressure\_pt}}
@@ -311,11 +311,11 @@ Set the pressure data that is used as reference pressure.
 
 
 
-Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00732}{732}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+Definition at line 732 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l00307}{oomph\+::\+Generalised\+Element\+::add\+\_\+external\+\_\+data()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00592}{External\+\_\+reference\+\_\+pressure\+\_\+index}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00596}{External\+\_\+reference\+\_\+pressure\+\_\+pt}}, and \mbox{\hyperlink{elements_8cc_source_l00387}{oomph\+::\+Generalised\+Element\+::flush\+\_\+external\+\_\+data()}}.
+References oomph\+::\+Generalised\+Element\+::add\+\_\+external\+\_\+data(), External\+\_\+reference\+\_\+pressure\+\_\+index, External\+\_\+reference\+\_\+pressure\+\_\+pt, and oomph\+::\+Generalised\+Element\+::flush\+\_\+external\+\_\+data().
 
 
 
@@ -332,11 +332,11 @@ The \mbox{\hyperlink{classoomph_1_1Data}{Data}} object that represents the refer
 
 
 
-Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00592}{592}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+Definition at line 592 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00605}{reference\+\_\+pressure\+\_\+local\+\_\+eqn()}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00732}{set\+\_\+reference\+\_\+pressure\+\_\+pt()}}.
+Referenced by reference\+\_\+pressure\+\_\+local\+\_\+eqn(), and set\+\_\+reference\+\_\+pressure\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1PseudoBucklingRingElement_a236c62ff5aa7f3daab7861cea26c6bbd}\label{classoomph_1_1PseudoBucklingRingElement_a236c62ff5aa7f3daab7861cea26c6bbd}} 
 \index{oomph::PseudoBucklingRingElement@{oomph::PseudoBucklingRingElement}!External\_reference\_pressure\_pt@{External\_reference\_pressure\_pt}}
@@ -350,11 +350,11 @@ Pointer to the data object that represents the external reference pressure.
 
 
 
-Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00596}{596}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+Definition at line 596 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00718}{reference\+\_\+pressure()}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00732}{set\+\_\+reference\+\_\+pressure\+\_\+pt()}}.
+Referenced by reference\+\_\+pressure(), and set\+\_\+reference\+\_\+pressure\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1PseudoBucklingRingElement_ac31e920cff8bff50372bc28b9525b990}\label{classoomph_1_1PseudoBucklingRingElement_ac31e920cff8bff50372bc28b9525b990}} 
 \index{oomph::PseudoBucklingRingElement@{oomph::PseudoBucklingRingElement}!Internal\_geometric\_variable\_index@{Internal\_geometric\_variable\_index}}
@@ -368,11 +368,11 @@ Index of the value stored in the single geometric object that has become an unkn
 
 
 
-Definition at line \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00588}{588}} of file \mbox{\hyperlink{pseudo__buckling__ring_8h_source}{pseudo\+\_\+buckling\+\_\+ring.\+h}}.
+Definition at line 588 of file pseudo\+\_\+buckling\+\_\+ring.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00599}{geometric\+\_\+local\+\_\+eqn()}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00614}{Pseudo\+Buckling\+Ring\+Element()}}.
+Referenced by geometric\+\_\+local\+\_\+eqn(), and Pseudo\+Buckling\+Ring\+Element().
 
 
 

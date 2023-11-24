@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1UnsteadyHeatFluxElement}{}\doxysection{oomph\+::Unsteady\+Heat\+Flux\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1UnsteadyHeatFluxElement}{}\doxysection{oomph\+::Unsteady\+Heat\+Flux\+Element$<$ ELEMENT $>$ Class Template Reference}
 \label{classoomph_1_1UnsteadyHeatFluxElement}\index{oomph::UnsteadyHeatFluxElement$<$ ELEMENT $>$@{oomph::UnsteadyHeatFluxElement$<$ ELEMENT $>$}}
 
 
@@ -9,7 +9,7 @@ A class for elements that allow the imposition of an applied flux on the boundar
 
 {\ttfamily \#include $<$unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Unsteady\+Heat\+Flux\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Unsteady\+Heat\+Flux\+Element$<$ ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.565865cm]{classoomph_1_1UnsteadyHeatFluxElement}
@@ -23,11 +23,11 @@ typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1UnsteadyHeatFluxElement_ab60a
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1UnsteadyHeatFluxElement_aa65a97bfa54e4fb70c853ec8592611ef}{Unsteady\+Heat\+Flux\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&bulk\+\_\+el\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}})
+\mbox{\hyperlink{classoomph_1_1UnsteadyHeatFluxElement_aa65a97bfa54e4fb70c853ec8592611ef}{Unsteady\+Heat\+Flux\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&bulk\+\_\+el\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a478d577ac6db67ecc80f1f02ae3ab170}{face\+\_\+index}})
 \begin{DoxyCompactList}\small\item\em Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the index of the face to be created. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1UnsteadyHeatFluxElement_abc8f1ba4cf4a7254932affc6856c9e4e}{Unsteady\+Heat\+Flux\+Element}} (const \mbox{\hyperlink{classoomph_1_1UnsteadyHeatFluxElement}{Unsteady\+Heat\+Flux\+Element}} \&dummy)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1UnsteadyHeatFluxElement_ab60a211e1cee492be6c9b93d6aa36883}{Unsteady\+Heat\+Prescribed\+Flux\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1UnsteadyHeatFluxElement_a16158815fcf283247fb27961ea83e327}{flux\+\_\+fct\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1UnsteadyHeatFluxElement_ab60a211e1cee492be6c9b93d6aa36883}{Unsteady\+Heat\+Prescribed\+Flux\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1UnsteadyHeatFluxElement_a8e1f2f3ef05006ff79bbe6e4795c80e9}{flux\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1UnsteadyHeatFluxElement_a6036eb80ba835cb022d0e31688732100}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em Compute the element residual vector. \end{DoxyCompactList}\item 
@@ -70,9 +70,10 @@ unsigned \mbox{\hyperlink{classoomph_1_1UnsteadyHeatFluxElement_aa7109f19bb7404d
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class ELEMENT$>$\newline
 class oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ ELEMENT $>$}
+
 A class for elements that allow the imposition of an applied flux on the boundaries of Unsteady\+Heat elements. The element geometry is obtained from the Face\+Geometry$<$\+ELEMENT$>$ policy class. 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source_l00054}{54}} of file \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source}{unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 54 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -90,7 +91,7 @@ Function pointer to the prescribed-\/flux function fct(x,f(x)) -- x is a Vector!
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source_l00060}{60}} of file \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source}{unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 60 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -110,11 +111,11 @@ Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the i
 
 Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the index of the face to be created. 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source_l00215}{215}} of file \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source}{unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 215 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l05132}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source_l00200}{oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ ELEMENT $>$\+::\+Dim}}, \mbox{\hyperlink{elements_8h_source_l04626}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}, \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source_l00197}{oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l02470}{oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes()}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00112}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+ust\+\_\+heat()}}, and \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source_l00203}{oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+ust\+\_\+heat}}.
+References oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ ELEMENT $>$\+::\+Dim, oomph\+::\+Face\+Element\+::face\+\_\+index(), oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt, oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes(), oomph\+::\+Node\+::ndim(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+ust\+\_\+heat(), and oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+ust\+\_\+heat.
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatFluxElement_abc8f1ba4cf4a7254932affc6856c9e4e}\label{classoomph_1_1UnsteadyHeatFluxElement_abc8f1ba4cf4a7254932affc6856c9e4e}} 
 \index{oomph::UnsteadyHeatFluxElement$<$ ELEMENT $>$@{oomph::UnsteadyHeatFluxElement$<$ ELEMENT $>$}!UnsteadyHeatFluxElement@{UnsteadyHeatFluxElement}}
@@ -147,11 +148,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source_l00098}{98}} of file \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source}{unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 98 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source_l00367}{oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+ust\+\_\+heat\+\_\+flux()}}.
+References oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+ust\+\_\+heat\+\_\+flux().
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatFluxElement_a6036eb80ba835cb022d0e31688732100}\label{classoomph_1_1UnsteadyHeatFluxElement_a6036eb80ba835cb022d0e31688732100}} 
 \index{oomph::UnsteadyHeatFluxElement$<$ ELEMENT $>$@{oomph::UnsteadyHeatFluxElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
@@ -170,11 +171,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source_l00088}{88}} of file \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source}{unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 88 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00227}{oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix}}, and \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source_l00367}{oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+ust\+\_\+heat\+\_\+flux()}}.
+References oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix, and oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+ust\+\_\+heat\+\_\+flux().
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatFluxElement_ad8558d61594ce5f92ecc4a898f2221b6}\label{classoomph_1_1UnsteadyHeatFluxElement_ad8558d61594ce5f92ecc4a898f2221b6}} 
 \index{oomph::UnsteadyHeatFluxElement$<$ ELEMENT $>$@{oomph::UnsteadyHeatFluxElement$<$ ELEMENT $>$}!fill\_in\_generic\_residual\_contribution\_ust\_heat\_flux@{fill\_in\_generic\_residual\_contribution\_ust\_heat\_flux}}
@@ -189,22 +190,22 @@ Compute the element residual vector. flag=1(or 0)\+: do (or don\textquotesingle{
 
 Compute the element\textquotesingle{}s residual vector and the (zero) Jacobian matrix. 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source_l00366}{366}} of file \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source}{unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 366 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{multi__domain_8cc_source_l00060}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Dim}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
+References oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Dim, i, s, and oomph\+::\+Quad\+Tree\+Names\+::W.
 
 
 
-Referenced by \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source_l00098}{oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, and \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source_l00088}{oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
+Referenced by oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
 
-\mbox{\Hypertarget{classoomph_1_1UnsteadyHeatFluxElement_a16158815fcf283247fb27961ea83e327}\label{classoomph_1_1UnsteadyHeatFluxElement_a16158815fcf283247fb27961ea83e327}} 
+\mbox{\Hypertarget{classoomph_1_1UnsteadyHeatFluxElement_a8e1f2f3ef05006ff79bbe6e4795c80e9}\label{classoomph_1_1UnsteadyHeatFluxElement_a8e1f2f3ef05006ff79bbe6e4795c80e9}} 
 \index{oomph::UnsteadyHeatFluxElement$<$ ELEMENT $>$@{oomph::UnsteadyHeatFluxElement$<$ ELEMENT $>$}!flux\_fct\_pt@{flux\_fct\_pt}}
 \index{flux\_fct\_pt@{flux\_fct\_pt}!oomph::UnsteadyHeatFluxElement$<$ ELEMENT $>$@{oomph::UnsteadyHeatFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{flux\_fct\_pt()}{flux\_fct\_pt()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1UnsteadyHeatFluxElement_ab60a211e1cee492be6c9b93d6aa36883}{Unsteady\+Heat\+Prescribed\+Flux\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1UnsteadyHeatFluxElement}{oomph\+::\+Unsteady\+Heat\+Flux\+Element}}$<$ ELEMENT $>$\+::flux\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1UnsteadyHeatFluxElement_ab60a211e1cee492be6c9b93d6aa36883}{Unsteady\+Heat\+Prescribed\+Flux\+Fct\+Pt}}\& \mbox{\hyperlink{classoomph_1_1UnsteadyHeatFluxElement}{oomph\+::\+Unsteady\+Heat\+Flux\+Element}}$<$ ELEMENT $>$\+::flux\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -212,11 +213,11 @@ Broken assignment operator.
 
 Access function for the prescribed-\/flux function pointer 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source_l00082}{82}} of file \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source}{unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 82 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source_l00197}{oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt}}.
+References oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatFluxElement_a3d15dd6c50e869f72a228ed8bc26147e}\label{classoomph_1_1UnsteadyHeatFluxElement_a3d15dd6c50e869f72a228ed8bc26147e}} 
 \index{oomph::UnsteadyHeatFluxElement$<$ ELEMENT $>$@{oomph::UnsteadyHeatFluxElement$<$ ELEMENT $>$}!get\_flux@{get\_flux}}
@@ -231,11 +232,11 @@ Function to calculate the prescribed flux at a given spatial position and at a g
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source_l00174}{174}} of file \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source}{unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 174 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source_l00197}{oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt}}.
+References oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatFluxElement_a96ad3606e27ea00fc36c9ceb1cb9986b}\label{classoomph_1_1UnsteadyHeatFluxElement_a96ad3606e27ea00fc36c9ceb1cb9986b}} 
 \index{oomph::UnsteadyHeatFluxElement$<$ ELEMENT $>$@{oomph::UnsteadyHeatFluxElement$<$ ELEMENT $>$}!output@{output}}
@@ -254,11 +255,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source_l00135}{135}} of file \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source}{unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 135 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
+References oomph\+::\+Command\+Line\+Args\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatFluxElement_aadaff4b6890b01fb9081408d69806b52}\label{classoomph_1_1UnsteadyHeatFluxElement_aadaff4b6890b01fb9081408d69806b52}} 
 \index{oomph::UnsteadyHeatFluxElement$<$ ELEMENT $>$@{oomph::UnsteadyHeatFluxElement$<$ ELEMENT $>$}!output@{output}}
@@ -277,11 +278,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source_l00143}{143}} of file \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source}{unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 143 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
+References oomph\+::\+Command\+Line\+Args\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatFluxElement_acd0d11f32966ffdb498ab7f64303bdc9}\label{classoomph_1_1UnsteadyHeatFluxElement_acd0d11f32966ffdb498ab7f64303bdc9}} 
 \index{oomph::UnsteadyHeatFluxElement$<$ ELEMENT $>$@{oomph::UnsteadyHeatFluxElement$<$ ELEMENT $>$}!output@{output}}
@@ -300,11 +301,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source_l00121}{121}} of file \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source}{unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 121 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
+References oomph\+::\+Command\+Line\+Args\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatFluxElement_ae3bc4021112b2fff59ae1d34ea1f7364}\label{classoomph_1_1UnsteadyHeatFluxElement_ae3bc4021112b2fff59ae1d34ea1f7364}} 
 \index{oomph::UnsteadyHeatFluxElement$<$ ELEMENT $>$@{oomph::UnsteadyHeatFluxElement$<$ ELEMENT $>$}!output@{output}}
@@ -323,11 +324,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source_l00128}{128}} of file \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source}{unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 128 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
+References oomph\+::\+Command\+Line\+Args\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatFluxElement_a0dc6fd954b29201949c26582d10c541c}\label{classoomph_1_1UnsteadyHeatFluxElement_a0dc6fd954b29201949c26582d10c541c}} 
 \index{oomph::UnsteadyHeatFluxElement$<$ ELEMENT $>$@{oomph::UnsteadyHeatFluxElement$<$ ELEMENT $>$}!shape\_and\_test@{shape\_and\_test}}
@@ -342,11 +343,11 @@ Function to compute the shape and test functions and to return the Jacobian of m
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source_l00152}{152}} of file \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source}{unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 152 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l05242}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
+References i, oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Finite\+Element\+::nnode(), s, and oomph\+::\+Finite\+Element\+::shape().
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatFluxElement_a5ee386604e4a99eb2daa220c98f17513}\label{classoomph_1_1UnsteadyHeatFluxElement_a5ee386604e4a99eb2daa220c98f17513}} 
 \index{oomph::UnsteadyHeatFluxElement$<$ ELEMENT $>$@{oomph::UnsteadyHeatFluxElement$<$ ELEMENT $>$}!zeta\_nodal@{zeta\_nodal}}
@@ -365,11 +366,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FaceElement_a58c9f93705c7741f7
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source_l00112}{112}} of file \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source}{unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 112 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l04497}{oomph\+::\+Face\+Element\+::zeta\+\_\+nodal()}}.
+References i, and oomph\+::\+Face\+Element\+::zeta\+\_\+nodal().
 
 
 
@@ -387,11 +388,11 @@ The spatial dimension of the problem.
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source_l00200}{200}} of file \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source}{unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 200 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source_l00215}{oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ ELEMENT $>$\+::\+Unsteady\+Heat\+Flux\+Element()}}.
+Referenced by oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ ELEMENT $>$\+::\+Unsteady\+Heat\+Flux\+Element().
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatFluxElement_a49f232c696f25117cad07bcee6e0c868}\label{classoomph_1_1UnsteadyHeatFluxElement_a49f232c696f25117cad07bcee6e0c868}} 
 \index{oomph::UnsteadyHeatFluxElement$<$ ELEMENT $>$@{oomph::UnsteadyHeatFluxElement$<$ ELEMENT $>$}!Flux\_fct\_pt@{Flux\_fct\_pt}}
@@ -406,11 +407,11 @@ Function pointer to the (global) prescribed-\/flux function.
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source_l00197}{197}} of file \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source}{unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 197 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source_l00082}{oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ ELEMENT $>$\+::flux\+\_\+fct\+\_\+pt()}}, \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source_l00174}{oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ ELEMENT $>$\+::get\+\_\+flux()}}, and \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source_l00215}{oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ ELEMENT $>$\+::\+Unsteady\+Heat\+Flux\+Element()}}.
+Referenced by oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ ELEMENT $>$\+::flux\+\_\+fct\+\_\+pt(), oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ ELEMENT $>$\+::get\+\_\+flux(), and oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ ELEMENT $>$\+::\+Unsteady\+Heat\+Flux\+Element().
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatFluxElement_aa7109f19bb7404d1ba7abab5a2501d01}\label{classoomph_1_1UnsteadyHeatFluxElement_aa7109f19bb7404d1ba7abab5a2501d01}} 
 \index{oomph::UnsteadyHeatFluxElement$<$ ELEMENT $>$@{oomph::UnsteadyHeatFluxElement$<$ ELEMENT $>$}!U\_index\_ust\_heat@{U\_index\_ust\_heat}}
@@ -425,11 +426,11 @@ The index at which the unknown is stored at the nodes.
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source_l00203}{203}} of file \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source}{unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 203 of file unsteady\+\_\+heat\+\_\+flux\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source_l00215}{oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ ELEMENT $>$\+::\+Unsteady\+Heat\+Flux\+Element()}}.
+Referenced by oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ ELEMENT $>$\+::\+Unsteady\+Heat\+Flux\+Element().
 
 
 

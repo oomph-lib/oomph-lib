@@ -29,7 +29,7 @@ The application of Dirichlet and Neumann boundary conditions is straightforward 
 \hypertarget{index_ABCs}{}\doxysubsection{Approximate/absorbing boundary conditions (\+ABCs)}\label{index_ABCs}
 It is possible to derive approximate versions of the Sommerfeld radiation condition in which the normal derivative of the solution on the artificial boundary is related to its value and possibly its tangential derivatives. Such boundary conditions (sometimes referred to as approximate or absorbing boundary conditions -- ABCs) are typically derived from asymptotic expansions of the solution at large distances from the origin and become more accurate the larger the radius $ R $ of the artificial boundary $ \Gamma $ is. Higher accuracy can therefore only be achieved by increasing the size of the computational domain, with an associated increase in computational cost.
 
-{\ttfamily oomph-\/lib} provides an implementation of the following three boundary conditions (all taken from J. J. Shirron \& I. Babuska\textquotesingle{}s paper \char`\"{}\+A comparison of approximate boundary  conditions and infinite element methods for exterior Helmholtz problems\char`\"{}, Computer Methods in Applied Mechanics and Engineering {\bfseries{164}} 121-\/139 (1998), in which the authors compare the accuracy of these and many other approximate boundary conditions).
+{\ttfamily oomph-\/lib} provides an implementation of the following three boundary conditions (all taken from J. J. Shirron \& I. Babuska\textquotesingle{}s paper "{}A comparison of approximate boundary conditions and infinite element methods for exterior Helmholtz problems"{}, Computer Methods in Applied Mechanics and Engineering {\bfseries{164}} 121-\/139 (1998), in which the authors compare the accuracy of these and many other approximate boundary conditions).
 
 
 \begin{DoxyItemize}
@@ -102,9 +102,9 @@ The function {\ttfamily get\+\_\+exact\+\_\+u} returns the exact solution for th
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Exact solution for scattered field }}
+\DoxyCodeLine{ \textcolor{comment}{/// Exact solution for scattered field }}
 \DoxyCodeLine{\textcolor{comment}{ /// (vector returns real and impaginary parts).}}
-\DoxyCodeLine{ \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceGlobalParameters_ae2320da6053f5527b2af5ebb362a8a07}{get\_exact\_u}}(\textcolor{keyword}{const} Vector<double>\& x, Vector<double>\& u)}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceGlobalParameters_ae2320da6053f5527b2af5ebb362a8a07}{get\_exact\_u}}(\textcolor{keyword}{const} Vector<double>\& x, Vector<double>\& u)}
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{comment}{// Switch to polar coordinates}}
 \DoxyCodeLine{  \textcolor{keywordtype}{double} r;}
@@ -175,9 +175,9 @@ The function {\ttfamily get\+\_\+exact\+\_\+u} returns the exact solution for th
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Flux (normal derivative) on the unit disk}}
+\DoxyCodeLine{ \textcolor{comment}{/// Flux (normal derivative) on the unit disk}}
 \DoxyCodeLine{\textcolor{comment}{ /// for a planar incoming wave}}
-\DoxyCodeLine{ \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceGlobalParameters_a5183de63b992338ee60bb4da78a45039}{prescribed\_incoming\_flux}}(\textcolor{keyword}{const} Vector<double>\& x, }
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceGlobalParameters_a5183de63b992338ee60bb4da78a45039}{prescribed\_incoming\_flux}}(\textcolor{keyword}{const} Vector<double>\& x, }
 \DoxyCodeLine{                               complex<double>\& flux)}
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{comment}{// Switch to polar coordinates}}
@@ -239,8 +239,8 @@ The driver code is very straightforward. We parse the command line to determine 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==========start\_of\_main=================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Solve 2D Helmholtz problem for scattering of a planar wave from a }\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// unit disk }}
+\DoxyCodeLine{\textcolor{comment}{/// Solve 2D Helmholtz problem for scattering of a planar wave from a }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// unit disk }}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{scattering_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} **argv)}
 \DoxyCodeLine{\{}
@@ -355,7 +355,7 @@ The problem class is very similar to that employed for the \href{../../../poisso
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//========= start\_of\_problem\_class=====================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Problem class to compute scattering of planar wave from unit disk}}
-\DoxyCodeLine{\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT> }
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classScatteringProblem}{ScatteringProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -448,7 +448,7 @@ We start by building the bulk mesh, using the refineable or non-\/refineable ver
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_constructor=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for Helmholtz problem}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classScatteringProblem_a94710f5d2ee52abc3df9dc8d1fd3eb71}{ScatteringProblem<ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classScatteringProblem_a94710f5d2ee52abc3df9dc8d1fd3eb71}{ScatteringProblem}}()}
@@ -582,7 +582,7 @@ The mesh adaptation is driven by the error estimates for the bulk elements. The 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====================start\_of\_actions\_before\_adapt======================}}
 \DoxyCodeLine{\textcolor{comment}{/// Actions before adapt: Wipe the mesh of face elements}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classScatteringProblem_aca1b756a307f9c1d8a70c7b7e68a296b}{ScatteringProblem<ELEMENT>::actions\_before\_adapt}}()}
 \DoxyCodeLine{\{ }
@@ -607,7 +607,7 @@ After the (bulk-\/)mesh has been adapted, the flux elements must be re-\/attache
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====================start\_of\_actions\_after\_adapt=======================}}
 \DoxyCodeLine{\textcolor{comment}{///  Actions after adapt: Rebuild the face element meshes}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classScatteringProblem_a13d8f85e74666c260de7364917359ed5}{ScatteringProblem<ELEMENT>::actions\_after\_adapt}}()}
 \DoxyCodeLine{\{}
@@ -638,7 +638,7 @@ The helper function {\ttfamily delete\+\_\+face\+\_\+elements()} is used to dele
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_delete\_face\_elements================}}
 \DoxyCodeLine{\textcolor{comment}{/// Delete face elements and wipe the boundary mesh}}
-\DoxyCodeLine{\textcolor{comment}{//==========================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==========================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classScatteringProblem_aaef8a78e317333ddadd0be6a500c1134}{ScatteringProblem<ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classScatteringProblem_aaef8a78e317333ddadd0be6a500c1134}{delete\_face\_elements}}(Mesh* \textcolor{keyword}{const} \& boundary\_mesh\_pt)}
@@ -665,9 +665,9 @@ The functions {\ttfamily create\+\_\+flux\+\_\+elements(...)} and {\ttfamily cre
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_outer\_bc\_elements==============================}}
-\DoxyCodeLine{\textcolor{comment}{/// Create outer BC elements on the b-\/th boundary of }\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// the Mesh object pointed to by bulk\_mesh\_pt and add the elements }}
-\DoxyCodeLine{\textcolor{comment}{/// to the Mesh object pointed to by helmholtz\_outer\_boundary\_mesh\_pt.}}
+\DoxyCodeLine{\textcolor{comment}{/// Create outer BC elements on the b-\/th boundary of }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// the Mesh object pointed to by bulk\_mesh\_pt and add the elements }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// to the Mesh object pointed to by helmholtz\_outer\_boundary\_mesh\_pt.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//===========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classScatteringProblem_a408e05fbe1f1456ab7013a7e8ab29ccc}{ScatteringProblem<ELEMENT>::}}}
@@ -720,7 +720,7 @@ The post-\/processing function {\ttfamily doc\+\_\+solution(...)} computes and o
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====================start\_of\_doc=======================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution: doc\_info contains labels/output directory etc.}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classScatteringProblem_af83ab14c4f4750ea17c21466f6c6364f}{ScatteringProblem<ELEMENT>::doc\_solution}}(DocInfo\& }
 \DoxyCodeLine{                                              doc\_info) }

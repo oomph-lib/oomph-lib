@@ -141,7 +141,7 @@ The namespace {\ttfamily \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_namespace=========================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for physical parameters}}
-\DoxyCodeLine{\textcolor{comment}{//==================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -175,7 +175,7 @@ The namespace {\ttfamily \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{
 \DoxyCodeLine{\textcolor{comment}{ /// load on the elastic ring.}}
 \DoxyCodeLine{\textcolor{comment}{ /// A reference is obtained by de-\/referencing the pointer to the}}
 \DoxyCodeLine{\textcolor{comment}{ /// data value that contains the external load}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_accc1e6e92957e427340871d606b8835d}{external\_pressure}}() }
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8c25ac6a672ea50d1b709292d1f4837b}{external\_pressure}}() }
 \DoxyCodeLine{  \{\textcolor{keywordflow}{return} *\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a9d598320fb3d7ecf94101088e8f376d2}{Pext\_data\_pt}}-\/>value\_pt(0);\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
@@ -192,7 +192,7 @@ The main function builds two different versions of the problem, demonstrating th
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_main=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver for ring test problem }}
-\DoxyCodeLine{\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{steady__ring_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ \textcolor{comment}{// Number of elements}}
@@ -251,7 +251,7 @@ The problem class is very similar to the one used ~\newline
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//========start\_of\_problem\_class========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Ring problem}}
-\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classElasticRingProblem}{ElasticRingProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -265,7 +265,7 @@ The problem class is very similar to the one used ~\newline
 \DoxyCodeLine{                    \textcolor{keywordtype}{bool}\& load\_data\_already\_exists);}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Access function for the specific mesh}}
-\DoxyCodeLine{\textcolor{comment}{} OneDLagrangianMesh<ELEMENT>* \mbox{\hyperlink{classElasticRingProblem_a34742403e3b79007c042c1441c4fd857}{mesh\_pt}}() }
+\DoxyCodeLine{\textcolor{comment}{} OneDLagrangianMesh<ELEMENT>* \mbox{\hyperlink{classElasticRingProblem_a7e956ca937741ce71cf400eb492825b3}{mesh\_pt}}() }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{keywordflow}{return} \textcolor{keyword}{dynamic\_cast<}OneDLagrangianMesh<ELEMENT>*\textcolor{keyword}{>}(Problem::mesh\_pt());}
 \DoxyCodeLine{  \}}
@@ -304,7 +304,7 @@ The first half of the constructor is similar to the one used in \href{../../tens
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//======start\_of\_constructor============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for elastic ring problem}}
-\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classElasticRingProblem_a46779ff320754561750e22216f7605e3}{ElasticRingProblem<ELEMENT>::ElasticRingProblem}}}
 \DoxyCodeLine{(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_element, \textcolor{keywordtype}{bool}\& displ\_control, \textcolor{keywordtype}{bool}\& load\_data\_already\_exists) : }
@@ -513,7 +513,7 @@ The post-\/processing function documents the ring shapes and adds the load/displ
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_doc=====================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Document solution}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticRingProblem_ab644c5fd57310f2d4c858f64d8c5a223}{ElasticRingProblem<ELEMENT>::doc\_solution}}(DocInfo\& doc\_info,}
 \DoxyCodeLine{                                               ofstream\& trace\_file)}
@@ -563,7 +563,7 @@ We start by opening a trace file to record the load/displacement characteristics
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//========start\_of\_run=====================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Solver loop to perform parameter study}}
-\DoxyCodeLine{\textcolor{comment}{//=========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticRingProblem_afed9c0948c535c315c3e22e92e3266d3}{ElasticRingProblem<ELEMENT>::parameter\_study}}(DocInfo\& doc\_info)}
 \DoxyCodeLine{\{}
@@ -630,7 +630,7 @@ We start by opening a trace file to record the load/displacement characteristics
 \DoxyCodeLine{   \textcolor{keywordflow}{if} (!Displ\_control) }
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     \textcolor{comment}{// Increment pressure}}
-\DoxyCodeLine{     \mbox{\hyperlink{namespaceGlobal__Physical__Variables_accc1e6e92957e427340871d606b8835d}{Global\_Physical\_Variables::external\_pressure}}() += pext\_increment;}
+\DoxyCodeLine{     \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8c25ac6a672ea50d1b709292d1f4837b}{Global\_Physical\_Variables::external\_pressure}}() += pext\_increment;}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{   \textcolor{keywordflow}{else}}
 \DoxyCodeLine{    \{}
@@ -660,7 +660,7 @@ Then we reset the perturbation pressure to zero and reduce the ring\textquotesin
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Set initial values for parameters that are to be incremented}}
 \DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1c774c9cb221df909201e81e84b15f40}{Global\_Physical\_Variables::Xprescr}}-\/=displ\_increment;}
-\DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_accc1e6e92957e427340871d606b8835d}{Global\_Physical\_Variables::external\_pressure}}() += pext\_increment;}
+\DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8c25ac6a672ea50d1b709292d1f4837b}{Global\_Physical\_Variables::external\_pressure}}() += pext\_increment;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Start new zone for tecplot}}
 \DoxyCodeLine{ trace\_file << \textcolor{stringliteral}{"{}ZONE"{}} << std::endl;}
@@ -674,7 +674,7 @@ Then we reset the perturbation pressure to zero and reduce the ring\textquotesin
 \DoxyCodeLine{   \textcolor{keywordflow}{if} (!Displ\_control) }
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     \textcolor{comment}{// Increment pressure}}
-\DoxyCodeLine{     \mbox{\hyperlink{namespaceGlobal__Physical__Variables_accc1e6e92957e427340871d606b8835d}{Global\_Physical\_Variables::external\_pressure}}() -\/= pext\_increment;}
+\DoxyCodeLine{     \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8c25ac6a672ea50d1b709292d1f4837b}{Global\_Physical\_Variables::external\_pressure}}() -\/= pext\_increment;}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{   \textcolor{keywordflow}{else}}
 \DoxyCodeLine{    \{}

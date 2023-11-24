@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1PoissonFluxElement}{}\doxysection{oomph\+::Poisson\+Flux\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1PoissonFluxElement}{}\doxysection{oomph\+::Poisson\+Flux\+Element$<$ ELEMENT $>$ Class Template Reference}
 \label{classoomph_1_1PoissonFluxElement}\index{oomph::PoissonFluxElement$<$ ELEMENT $>$@{oomph::PoissonFluxElement$<$ ELEMENT $>$}}
 
 
@@ -9,7 +9,7 @@ A class for elements that allow the imposition of an applied flux on the boundar
 
 {\ttfamily \#include $<$poisson\+\_\+flux\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Poisson\+Flux\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Poisson\+Flux\+Element$<$ ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.905318cm]{classoomph_1_1PoissonFluxElement}
@@ -23,7 +23,7 @@ typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a667254e1d
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a484772fcf9b2488d6c8e6d8d0c1c95db}{Poisson\+Flux\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&bulk\+\_\+el\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}})
+\mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a484772fcf9b2488d6c8e6d8d0c1c95db}{Poisson\+Flux\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&bulk\+\_\+el\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a478d577ac6db67ecc80f1f02ae3ab170}{face\+\_\+index}})
 \begin{DoxyCompactList}\small\item\em Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the index of the face to which the element is attached. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a137480da853112a2180a9eafb30ace49}{Poisson\+Flux\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Broken empty constructor. \end{DoxyCompactList}\item 
@@ -33,7 +33,7 @@ void \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a2e7215aa7abfcffacdfba356
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_acf4651fa89a7f6c5a23c1960423dc8e6}{zeta\+\_\+nodal}} (const unsigned \&n, const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Specify the value of nodal zeta from the face geometry The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} representation, by default (needed to break indeterminacy if bulk element is Solid\+Element) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a667254e1d7fea39ba393e0d9853f216d}{Poisson\+Prescribed\+Flux\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a12cb2e6e8076c8b052dacee3e94d7c8d}{flux\+\_\+fct\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a667254e1d7fea39ba393e0d9853f216d}{Poisson\+Prescribed\+Flux\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a95afd87915bf4c678d4304cab9daa219}{flux\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for the prescribed-\/flux function pointer. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_aca66501e8cbbf029660e45819f3ba7d8}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector. \end{DoxyCompactList}\item 
@@ -76,9 +76,10 @@ unsigned \mbox{\hyperlink{classoomph_1_1PoissonFluxElement_ab504c339a71a90ae4975
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class ELEMENT$>$\newline
 class oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$}
+
 A class for elements that allow the imposition of an applied flux on the boundaries of Poisson elements. The element geometry is obtained from the Face\+Geometry$<$\+ELEMENT$>$ policy class. 
 
-Definition at line \mbox{\hyperlink{poisson__flux__elements_8h_source_l00049}{49}} of file \mbox{\hyperlink{poisson__flux__elements_8h_source}{poisson\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 49 of file poisson\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -96,7 +97,7 @@ Function pointer to the prescribed-\/flux function fct(x,f(x)) -- x is a Vector!
 
 
 
-Definition at line \mbox{\hyperlink{poisson__flux__elements_8h_source_l00055}{55}} of file \mbox{\hyperlink{poisson__flux__elements_8h_source}{poisson\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 55 of file poisson\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -116,11 +117,11 @@ Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the i
 
 Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element, the index of the fixed local coordinate and its value represented by an integer (+/-\/ 1), indicating that the face is located at the max. or min. value of the \char`\"{}fixed\char`\"{} local coordinate in the bulk element. 
 
-Definition at line \mbox{\hyperlink{poisson__flux__elements_8h_source_l00271}{271}} of file \mbox{\hyperlink{poisson__flux__elements_8h_source}{poisson\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 271 of file poisson\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l05132}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{poisson__flux__elements_8h_source_l00252}{oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::\+Dim}}, \mbox{\hyperlink{elements_8h_source_l04626}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}, \mbox{\hyperlink{poisson__flux__elements_8h_source_l00249}{oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l02470}{oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes()}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, \mbox{\hyperlink{poisson__elements_8h_source_l00085}{oomph\+::\+Poisson\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+poisson()}}, and \mbox{\hyperlink{poisson__flux__elements_8h_source_l00255}{oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+poisson}}.
+References oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::\+Dim, oomph\+::\+Face\+Element\+::face\+\_\+index(), oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt, oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes(), oomph\+::\+Node\+::ndim(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), oomph\+::\+Poisson\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+poisson(), and oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+poisson.
 
 \mbox{\Hypertarget{classoomph_1_1PoissonFluxElement_a137480da853112a2180a9eafb30ace49}\label{classoomph_1_1PoissonFluxElement_a137480da853112a2180a9eafb30ace49}} 
 \index{oomph::PoissonFluxElement$<$ ELEMENT $>$@{oomph::PoissonFluxElement$<$ ELEMENT $>$}!PoissonFluxElement@{PoissonFluxElement}}
@@ -135,7 +136,7 @@ Broken empty constructor.
 
 
 
-Definition at line \mbox{\hyperlink{poisson__flux__elements_8h_source_l00063}{63}} of file \mbox{\hyperlink{poisson__flux__elements_8h_source}{poisson\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 63 of file poisson\+\_\+flux\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PoissonFluxElement_a1c3c4a8216c6764c0845d2deb169b39e}\label{classoomph_1_1PoissonFluxElement_a1c3c4a8216c6764c0845d2deb169b39e}} 
 \index{oomph::PoissonFluxElement$<$ ELEMENT $>$@{oomph::PoissonFluxElement$<$ ELEMENT $>$}!PoissonFluxElement@{PoissonFluxElement}}
@@ -168,11 +169,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0
 
 
 
-Definition at line \mbox{\hyperlink{poisson__flux__elements_8h_source_l00107}{107}} of file \mbox{\hyperlink{poisson__flux__elements_8h_source}{poisson\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 107 of file poisson\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{poisson__flux__elements_8h_source_l00422}{oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+poisson\+\_\+flux()}}.
+References oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+poisson\+\_\+flux().
 
 \mbox{\Hypertarget{classoomph_1_1PoissonFluxElement_aca66501e8cbbf029660e45819f3ba7d8}\label{classoomph_1_1PoissonFluxElement_aca66501e8cbbf029660e45819f3ba7d8}} 
 \index{oomph::PoissonFluxElement$<$ ELEMENT $>$@{oomph::PoissonFluxElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
@@ -191,11 +192,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line \mbox{\hyperlink{poisson__flux__elements_8h_source_l00096}{96}} of file \mbox{\hyperlink{poisson__flux__elements_8h_source}{poisson\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 96 of file poisson\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00227}{oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix}}, and \mbox{\hyperlink{poisson__flux__elements_8h_source_l00422}{oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+poisson\+\_\+flux()}}.
+References oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix, and oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+poisson\+\_\+flux().
 
 \mbox{\Hypertarget{classoomph_1_1PoissonFluxElement_a78a7d6879d80f26ea06a905b721a3d25}\label{classoomph_1_1PoissonFluxElement_a78a7d6879d80f26ea06a905b721a3d25}} 
 \index{oomph::PoissonFluxElement$<$ ELEMENT $>$@{oomph::PoissonFluxElement$<$ ELEMENT $>$}!fill\_in\_generic\_residual\_contribution\_poisson\_flux@{fill\_in\_generic\_residual\_contribution\_poisson\_flux}}
@@ -210,22 +211,22 @@ Add the element\textquotesingle{}s contribution to its residual vector. flag=1(o
 
 Compute the element\textquotesingle{}s residual vector and the (zero) Jacobian matrix. 
 
-Definition at line \mbox{\hyperlink{poisson__flux__elements_8h_source_l00421}{421}} of file \mbox{\hyperlink{poisson__flux__elements_8h_source}{poisson\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 421 of file poisson\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{multi__domain_8cc_source_l00060}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Dim}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
+References oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Dim, i, s, and oomph\+::\+Quad\+Tree\+Names\+::W.
 
 
 
-Referenced by \mbox{\hyperlink{poisson__flux__elements_8h_source_l00107}{oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, and \mbox{\hyperlink{poisson__flux__elements_8h_source_l00096}{oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
+Referenced by oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
 
-\mbox{\Hypertarget{classoomph_1_1PoissonFluxElement_a12cb2e6e8076c8b052dacee3e94d7c8d}\label{classoomph_1_1PoissonFluxElement_a12cb2e6e8076c8b052dacee3e94d7c8d}} 
+\mbox{\Hypertarget{classoomph_1_1PoissonFluxElement_a95afd87915bf4c678d4304cab9daa219}\label{classoomph_1_1PoissonFluxElement_a95afd87915bf4c678d4304cab9daa219}} 
 \index{oomph::PoissonFluxElement$<$ ELEMENT $>$@{oomph::PoissonFluxElement$<$ ELEMENT $>$}!flux\_fct\_pt@{flux\_fct\_pt}}
 \index{flux\_fct\_pt@{flux\_fct\_pt}!oomph::PoissonFluxElement$<$ ELEMENT $>$@{oomph::PoissonFluxElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{flux\_fct\_pt()}{flux\_fct\_pt()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a667254e1d7fea39ba393e0d9853f216d}{Poisson\+Prescribed\+Flux\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1PoissonFluxElement}{oomph\+::\+Poisson\+Flux\+Element}}$<$ ELEMENT $>$\+::flux\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1PoissonFluxElement_a667254e1d7fea39ba393e0d9853f216d}{Poisson\+Prescribed\+Flux\+Fct\+Pt}}\& \mbox{\hyperlink{classoomph_1_1PoissonFluxElement}{oomph\+::\+Poisson\+Flux\+Element}}$<$ ELEMENT $>$\+::flux\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -233,11 +234,11 @@ Access function for the prescribed-\/flux function pointer.
 
 
 
-Definition at line \mbox{\hyperlink{poisson__flux__elements_8h_source_l00089}{89}} of file \mbox{\hyperlink{poisson__flux__elements_8h_source}{poisson\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 89 of file poisson\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{poisson__flux__elements_8h_source_l00249}{oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt}}.
+References oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1PoissonFluxElement_a51a332a35b271f1d61512ae66397aecb}\label{classoomph_1_1PoissonFluxElement_a51a332a35b271f1d61512ae66397aecb}} 
 \index{oomph::PoissonFluxElement$<$ ELEMENT $>$@{oomph::PoissonFluxElement$<$ ELEMENT $>$}!get\_flux@{get\_flux}}
@@ -252,15 +253,15 @@ Function to calculate the prescribed flux at a given spatial position.
 
 
 
-Definition at line \mbox{\hyperlink{poisson__flux__elements_8h_source_l00224}{224}} of file \mbox{\hyperlink{poisson__flux__elements_8h_source}{poisson\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 224 of file poisson\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{poisson__flux__elements_8h_source_l00249}{oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt}}.
+References oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::\+Flux\+\_\+fct\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{poisson__flux__elements_8h_source_l00123}{oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::output()}}.
+Referenced by oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1PoissonFluxElement_a2e7215aa7abfcffacdfba35643c17ea6}\label{classoomph_1_1PoissonFluxElement_a2e7215aa7abfcffacdfba35643c17ea6}} 
 \index{oomph::PoissonFluxElement$<$ ELEMENT $>$@{oomph::PoissonFluxElement$<$ ELEMENT $>$}!operator=@{operator=}}
@@ -290,11 +291,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee
 
 
 
-Definition at line \mbox{\hyperlink{poisson__flux__elements_8h_source_l00159}{159}} of file \mbox{\hyperlink{poisson__flux__elements_8h_source}{poisson\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 159 of file poisson\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
+References oomph\+::\+Finite\+Element\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1PoissonFluxElement_acef72a7460036c88ba254d58e26bc820}\label{classoomph_1_1PoissonFluxElement_acef72a7460036c88ba254d58e26bc820}} 
 \index{oomph::PoissonFluxElement$<$ ELEMENT $>$@{oomph::PoissonFluxElement$<$ ELEMENT $>$}!output@{output}}
@@ -313,11 +314,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f
 
 
 
-Definition at line \mbox{\hyperlink{poisson__flux__elements_8h_source_l00167}{167}} of file \mbox{\hyperlink{poisson__flux__elements_8h_source}{poisson\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 167 of file poisson\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
+References oomph\+::\+Finite\+Element\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1PoissonFluxElement_ab8b5786144b8fed902bd7c47754675ba}\label{classoomph_1_1PoissonFluxElement_ab8b5786144b8fed902bd7c47754675ba}} 
 \index{oomph::PoissonFluxElement$<$ ELEMENT $>$@{oomph::PoissonFluxElement$<$ ELEMENT $>$}!output@{output}}
@@ -336,15 +337,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line \mbox{\hyperlink{poisson__flux__elements_8h_source_l00116}{116}} of file \mbox{\hyperlink{poisson__flux__elements_8h_source}{poisson\+\_\+flux\+\_\+elements.\+h}}.
-
-
-
-References \mbox{\hyperlink{poisson__flux__elements_8h_source_l00116}{oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::output()}}.
-
-
-
-Referenced by \mbox{\hyperlink{poisson__flux__elements_8h_source_l00116}{oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::output()}}.
+Definition at line 116 of file poisson\+\_\+flux\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PoissonFluxElement_a81b328ed2127556fa9e5b948d94aca97}\label{classoomph_1_1PoissonFluxElement_a81b328ed2127556fa9e5b948d94aca97}} 
 \index{oomph::PoissonFluxElement$<$ ELEMENT $>$@{oomph::PoissonFluxElement$<$ ELEMENT $>$}!output@{output}}
@@ -363,11 +356,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line \mbox{\hyperlink{poisson__flux__elements_8h_source_l00123}{123}} of file \mbox{\hyperlink{poisson__flux__elements_8h_source}{poisson\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 123 of file poisson\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{poisson__flux__elements_8h_source_l00224}{oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::get\+\_\+flux()}}, \mbox{\hyperlink{elements_8h_source_l03148}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l04528}{oomph\+::\+Face\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l03186}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{elements_8h_source_l03161}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}, and \mbox{\hyperlink{elements_8h_source_l03174}{oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer()}}.
+References oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::get\+\_\+flux(), oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot(), i, oomph\+::\+Face\+Element\+::interpolated\+\_\+x(), oomph\+::\+Finite\+Element\+::nplot\+\_\+points(), s, oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string(), and oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer().
 
 \mbox{\Hypertarget{classoomph_1_1PoissonFluxElement_a027e2abd393a9e53d0da0374eb556aab}\label{classoomph_1_1PoissonFluxElement_a027e2abd393a9e53d0da0374eb556aab}} 
 \index{oomph::PoissonFluxElement$<$ ELEMENT $>$@{oomph::PoissonFluxElement$<$ ELEMENT $>$}!shape\_and\_test@{shape\_and\_test}}
@@ -382,11 +375,11 @@ Function to compute the shape and test functions and to return the Jacobian of m
 
 
 
-Definition at line \mbox{\hyperlink{poisson__flux__elements_8h_source_l00177}{177}} of file \mbox{\hyperlink{poisson__flux__elements_8h_source}{poisson\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 177 of file poisson\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l05242}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
+References i, oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Finite\+Element\+::nnode(), s, and oomph\+::\+Finite\+Element\+::shape().
 
 \mbox{\Hypertarget{classoomph_1_1PoissonFluxElement_a49ebbe60e94144a39bfa0169df410cfc}\label{classoomph_1_1PoissonFluxElement_a49ebbe60e94144a39bfa0169df410cfc}} 
 \index{oomph::PoissonFluxElement$<$ ELEMENT $>$@{oomph::PoissonFluxElement$<$ ELEMENT $>$}!shape\_and\_test\_at\_knot@{shape\_and\_test\_at\_knot}}
@@ -401,11 +394,11 @@ Function to compute the shape and test functions and to return the Jacobian of m
 
 
 
-Definition at line \mbox{\hyperlink{poisson__flux__elements_8h_source_l00201}{201}} of file \mbox{\hyperlink{poisson__flux__elements_8h_source}{poisson\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 201 of file poisson\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l05328}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8cc_source_l03220}{oomph\+::\+Finite\+Element\+::shape\+\_\+at\+\_\+knot()}}.
+References i, oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian\+\_\+at\+\_\+knot(), oomph\+::\+Finite\+Element\+::nnode(), and oomph\+::\+Finite\+Element\+::shape\+\_\+at\+\_\+knot().
 
 \mbox{\Hypertarget{classoomph_1_1PoissonFluxElement_acf4651fa89a7f6c5a23c1960423dc8e6}\label{classoomph_1_1PoissonFluxElement_acf4651fa89a7f6c5a23c1960423dc8e6}} 
 \index{oomph::PoissonFluxElement$<$ ELEMENT $>$@{oomph::PoissonFluxElement$<$ ELEMENT $>$}!zeta\_nodal@{zeta\_nodal}}
@@ -424,11 +417,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FaceElement_a58c9f93705c7741f7
 
 
 
-Definition at line \mbox{\hyperlink{poisson__flux__elements_8h_source_l00081}{81}} of file \mbox{\hyperlink{poisson__flux__elements_8h_source}{poisson\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 81 of file poisson\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l04497}{oomph\+::\+Face\+Element\+::zeta\+\_\+nodal()}}.
+References i, and oomph\+::\+Face\+Element\+::zeta\+\_\+nodal().
 
 
 
@@ -446,11 +439,11 @@ The spatial dimension of the problem.
 
 
 
-Definition at line \mbox{\hyperlink{poisson__flux__elements_8h_source_l00252}{252}} of file \mbox{\hyperlink{poisson__flux__elements_8h_source}{poisson\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 252 of file poisson\+\_\+flux\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{poisson__flux__elements_8h_source_l00271}{oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::\+Poisson\+Flux\+Element()}}.
+Referenced by oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::\+Poisson\+Flux\+Element().
 
 \mbox{\Hypertarget{classoomph_1_1PoissonFluxElement_ad737032d93200748f1c48e22c2cc0e9b}\label{classoomph_1_1PoissonFluxElement_ad737032d93200748f1c48e22c2cc0e9b}} 
 \index{oomph::PoissonFluxElement$<$ ELEMENT $>$@{oomph::PoissonFluxElement$<$ ELEMENT $>$}!Flux\_fct\_pt@{Flux\_fct\_pt}}
@@ -465,11 +458,11 @@ Function pointer to the (global) prescribed-\/flux function.
 
 
 
-Definition at line \mbox{\hyperlink{poisson__flux__elements_8h_source_l00249}{249}} of file \mbox{\hyperlink{poisson__flux__elements_8h_source}{poisson\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 249 of file poisson\+\_\+flux\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{poisson__flux__elements_8h_source_l00089}{oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::flux\+\_\+fct\+\_\+pt()}}, \mbox{\hyperlink{poisson__flux__elements_8h_source_l00224}{oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::get\+\_\+flux()}}, and \mbox{\hyperlink{poisson__flux__elements_8h_source_l00271}{oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::\+Poisson\+Flux\+Element()}}.
+Referenced by oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::flux\+\_\+fct\+\_\+pt(), oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::get\+\_\+flux(), and oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::\+Poisson\+Flux\+Element().
 
 \mbox{\Hypertarget{classoomph_1_1PoissonFluxElement_ab504c339a71a90ae4975071368b1f84c}\label{classoomph_1_1PoissonFluxElement_ab504c339a71a90ae4975071368b1f84c}} 
 \index{oomph::PoissonFluxElement$<$ ELEMENT $>$@{oomph::PoissonFluxElement$<$ ELEMENT $>$}!U\_index\_poisson@{U\_index\_poisson}}
@@ -484,11 +477,11 @@ The index at which the unknown is stored at the nodes.
 
 
 
-Definition at line \mbox{\hyperlink{poisson__flux__elements_8h_source_l00255}{255}} of file \mbox{\hyperlink{poisson__flux__elements_8h_source}{poisson\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 255 of file poisson\+\_\+flux\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{poisson__flux__elements_8h_source_l00271}{oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::\+Poisson\+Flux\+Element()}}.
+Referenced by oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::\+Poisson\+Flux\+Element().
 
 
 

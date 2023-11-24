@@ -50,10 +50,10 @@ As usual, we represent the moving wall as a {\ttfamily Geom\+Object} and define 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_MyEllipse===========================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Oscillating ellipse}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)f[ x = (A + \(\backslash\)widehat\{A\} \(\backslash\)cos(2\(\backslash\)pi t/T)) \(\backslash\)cos(\(\backslash\)xi)  \(\backslash\)f]}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)f[ y = \(\backslash\)frac\{\(\backslash\)sin(\(\backslash\)xi)\}\{A + \(\backslash\)widehat\{A\} \(\backslash\)cos(2\(\backslash\)pi t/T)\}   \(\backslash\)f]}}
-\DoxyCodeLine{\textcolor{comment}{/// Note that cross-\/sectional area is conserved.}}
+\DoxyCodeLine{\textcolor{comment}{/// Oscillating ellipse}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)f[ x = (A + \(\backslash\)widehat\{A\} \(\backslash\)cos(2\(\backslash\)pi t/T)) \(\backslash\)cos(\(\backslash\)xi)  \(\backslash\)f]}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)f[ y = \(\backslash\)frac\{\(\backslash\)sin(\(\backslash\)xi)\}\{A + \(\backslash\)widehat\{A\} \(\backslash\)cos(2\(\backslash\)pi t/T)\}   \(\backslash\)f]}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// Note that cross-\/sectional area is conserved.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classMyEllipse}{MyEllipse}} : \textcolor{keyword}{public} GeomObject}
 \DoxyCodeLine{\{}
@@ -123,7 +123,7 @@ As in most previous examples, we use a namespace to define and initialise global
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_namespace=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namepspace for global parameters}}
-\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -188,9 +188,9 @@ As in most previous unsteady demo codes, we allow the code to be run in a valida
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//======start\_of\_main=================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Driver code for unsteady Navier-\/Stokes flow, driven by}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// oscillating ellipse. If the code is executed with command line}}
-\DoxyCodeLine{\textcolor{comment}{/// arguments, a validation run is performed. }}
+\DoxyCodeLine{\textcolor{comment}{/// Driver code for unsteady Navier-\/Stokes flow, driven by}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// oscillating ellipse. If the code is executed with command line}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// arguments, a validation run is performed. }}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{osc__quarter__ellipse_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
@@ -250,7 +250,7 @@ Most of the problem class is a straightforward combination of the problem classe
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====start\_of\_problem\_class=========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Navier-\/Stokes problem in an oscillating ellipse domain.}}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classOscEllipseProblem}{OscEllipseProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -521,8 +521,8 @@ This function assigns \char`\"{}history values\char`\"{} for the velocities and 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//======================start\_of\_set\_initial\_condition====================}}
-\DoxyCodeLine{\textcolor{comment}{/// Set initial condition: Assign previous and current values}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// from exact solution.}}
+\DoxyCodeLine{\textcolor{comment}{/// Set initial condition: Assign previous and current values}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// from exact solution.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT,\textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classOscEllipseProblem_ae638f238a7b0e0acb5d6087b7363fe01}{OscEllipseProblem<ELEMENT,TIMESTEPPER>::set\_initial\_condition}}()}
@@ -603,7 +603,7 @@ The function {\ttfamily doc\+\_\+solution(...)} is similar to that in the \href{
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_doc\_solution============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classOscEllipseProblem_afca2cc3e3e64ac764323f232cacc7e3b}{OscEllipseProblem<ELEMENT,TIMESTEPPER>::doc\_solution}}(DocInfo\& doc\_info)}
 \DoxyCodeLine{\{ }
@@ -702,7 +702,7 @@ The timestepping loop is extremely straightforward\+: We choose a timestep and t
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_unsteady\_run============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Unsteady run}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classOscEllipseProblem_ad0d879edbbd8b09b61e802ab66ef98a3}{OscEllipseProblem<ELEMENT,TIMESTEPPER>::unsteady\_run}}(DocInfo\& doc\_info)}
 \DoxyCodeLine{\{}

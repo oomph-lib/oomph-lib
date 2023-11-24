@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement}{}\doxysection{oomph\+::Projectable\+Taylor\+Hood\+Space\+Time\+Element\texorpdfstring{$<$}{<} TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement}{}\doxysection{oomph\+::Projectable\+Taylor\+Hood\+Space\+Time\+Element$<$ TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$ Class Template Reference}
 \label{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement}\index{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}}
 
 
@@ -9,7 +9,7 @@
 
 {\ttfamily \#include $<$discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Projectable\+Taylor\+Hood\+Space\+Time\+Element\texorpdfstring{$<$}{<} TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Projectable\+Taylor\+Hood\+Space\+Time\+Element$<$ TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=0.966184cm]{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement}
@@ -20,7 +20,7 @@ Inheritance diagram for oomph\+::Projectable\+Taylor\+Hood\+Space\+Time\+Element
 \item 
 \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_ad5d4fa3306af7f3b79c2fbddde30661b}{Projectable\+Taylor\+Hood\+Space\+Time\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards...\mbox{]}. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a64ee8339b79b1e579da8e90f12aff9e1}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a8bf43e372cee6badaef9e6aa66b03e21}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. In the underlying Taylor Hood elements the fld-\/th velocities are stored at the fld-\/th value of the nodes; the pressures (the dim-\/th field) are the dim-\/th values at the vertex nodes etc. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a662e3e5663832e82dd995543d06a2ffc}{nfields\+\_\+for\+\_\+projection}} ()
 \begin{DoxyCompactList}\small\item\em Number of fields to be projected\+: dim+1, corresponding to velocity components and pressure. \end{DoxyCompactList}\item 
@@ -31,14 +31,14 @@ unsigned \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a8
 double \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_acb335e83a84b752d26c92f5207128bd2}{jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field}} (const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi)
 \begin{DoxyCompactList}\small\item\em Return the Jacobian of the mapping and the shape functions of field fld at local coordinate s. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a565ba9ed0cf7828d3217111f8c59b489}{get\+\_\+field}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
-\begin{DoxyCompactList}\small\item\em Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: history values) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t$>$0\+: history values) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a7ff4171a511f42a9f0648629cf90b25e}{nvalue\+\_\+of\+\_\+field}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Return number of values in field fld. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_abc5ca8c244aa7f3a6bb68856dab812ba}{local\+\_\+equation}} (const unsigned \&fld, const unsigned \&j)
 \begin{DoxyCompactList}\small\item\em Return local equation number of value j in field fld. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_ad5d4fa3306af7f3b79c2fbddde30661b}{Projectable\+Taylor\+Hood\+Space\+Time\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards...\mbox{]}. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a64ee8339b79b1e579da8e90f12aff9e1}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a8bf43e372cee6badaef9e6aa66b03e21}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. In the underlying Taylor Hood elements the fld-\/th velocities are stored at the fld-\/th value of the nodes; the pressures (the dim-\/th field) are the dim-\/th values at the vertex nodes etc. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a662e3e5663832e82dd995543d06a2ffc}{nfields\+\_\+for\+\_\+projection}} ()
 \begin{DoxyCompactList}\small\item\em Number of fields to be projected\+: dim+1, corresponding to velocity components and pressure. \end{DoxyCompactList}\item 
@@ -49,14 +49,14 @@ unsigned \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a8
 double \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_acb335e83a84b752d26c92f5207128bd2}{jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field}} (const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi)
 \begin{DoxyCompactList}\small\item\em Return the Jacobian of the mapping and the shape functions of field fld at local coordinate s. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a565ba9ed0cf7828d3217111f8c59b489}{get\+\_\+field}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
-\begin{DoxyCompactList}\small\item\em Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: history values) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t$>$0\+: history values) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a7ff4171a511f42a9f0648629cf90b25e}{nvalue\+\_\+of\+\_\+field}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Return number of values in field fld. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_abc5ca8c244aa7f3a6bb68856dab812ba}{local\+\_\+equation}} (const unsigned \&fld, const unsigned \&j)
 \begin{DoxyCompactList}\small\item\em Return local equation number of value j in field fld. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_ad5d4fa3306af7f3b79c2fbddde30661b}{Projectable\+Taylor\+Hood\+Space\+Time\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards...\mbox{]}. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a64ee8339b79b1e579da8e90f12aff9e1}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a8bf43e372cee6badaef9e6aa66b03e21}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. In the underlying Taylor Hood elements the fld-\/th velocities are stored at the fld-\/th value of the nodes; the pressures (the dim-\/th field) are the dim-\/th values at the vertex nodes etc. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a662e3e5663832e82dd995543d06a2ffc}{nfields\+\_\+for\+\_\+projection}} ()
 \begin{DoxyCompactList}\small\item\em Number of fields to be projected\+: dim+1, corresponding to velocity components and pressure. \end{DoxyCompactList}\item 
@@ -67,7 +67,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a8
 double \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_acb335e83a84b752d26c92f5207128bd2}{jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field}} (const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi)
 \begin{DoxyCompactList}\small\item\em Return the Jacobian of the mapping and the shape functions of field fld at local coordinate s. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a565ba9ed0cf7828d3217111f8c59b489}{get\+\_\+field}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
-\begin{DoxyCompactList}\small\item\em Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: history values) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t$>$0\+: history values) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a7ff4171a511f42a9f0648629cf90b25e}{nvalue\+\_\+of\+\_\+field}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Return number of values in field fld. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_abc5ca8c244aa7f3a6bb68856dab812ba}{local\+\_\+equation}} (const unsigned \&fld, const unsigned \&j)
@@ -78,11 +78,12 @@ int \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_abc5ca8
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT$>$\newline
 class oomph\+::\+Projectable\+Taylor\+Hood\+Space\+Time\+Element$<$ TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$}
+
 ///////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////// 
 
 Taylor Hood upgraded to become projectable 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02928}{2928}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2928 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -100,7 +101,7 @@ Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02934}{2934}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2934 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_ad5d4fa3306af7f3b79c2fbddde30661b}\label{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_ad5d4fa3306af7f3b79c2fbddde30661b}} 
 \index{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!ProjectableTaylorHoodSpaceTimeElement@{ProjectableTaylorHoodSpaceTimeElement}}
@@ -115,7 +116,7 @@ Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l02951}{2951}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2951 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_ad5d4fa3306af7f3b79c2fbddde30661b}\label{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_ad5d4fa3306af7f3b79c2fbddde30661b}} 
 \index{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!ProjectableTaylorHoodSpaceTimeElement@{ProjectableTaylorHoodSpaceTimeElement}}
@@ -130,17 +131,17 @@ Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards
 
 
 
-Definition at line \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source_l02634}{2634}} of file \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2634 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a64ee8339b79b1e579da8e90f12aff9e1}\label{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a64ee8339b79b1e579da8e90f12aff9e1}} 
+\mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a8bf43e372cee6badaef9e6aa66b03e21}\label{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a8bf43e372cee6badaef9e6aa66b03e21}} 
 \index{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!data\_values\_of\_field@{data\_values\_of\_field}}
 \index{data\_values\_of\_field@{data\_values\_of\_field}!oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{data\_values\_of\_field()}{data\_values\_of\_field()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
 {\footnotesize\ttfamily template$<$class TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement}{oomph\+::\+Projectable\+Taylor\+Hood\+Space\+Time\+Element}}$<$ TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$std\+::pair$<$\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$, unsigned$>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement}{oomph\+::\+Projectable\+Taylor\+Hood\+Space\+Time\+Element}}$<$ TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -148,18 +149,18 @@ Specify the values associated with field fld. The information is returned in a v
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a2292bd9c58694f89839bd7d198cfe86a}{oomph\+::\+Projectable\+Element\+Base}}.
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a63b0053dde1172be726f9a6c75fb66ea}{oomph\+::\+Projectable\+Element\+Base}}.
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02943}{2943}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2943 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
-\mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a64ee8339b79b1e579da8e90f12aff9e1}\label{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a64ee8339b79b1e579da8e90f12aff9e1}} 
+\mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a8bf43e372cee6badaef9e6aa66b03e21}\label{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a8bf43e372cee6badaef9e6aa66b03e21}} 
 \index{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!data\_values\_of\_field@{data\_values\_of\_field}}
 \index{data\_values\_of\_field@{data\_values\_of\_field}!oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{data\_values\_of\_field()}{data\_values\_of\_field()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
 {\footnotesize\ttfamily template$<$class TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement}{oomph\+::\+Projectable\+Taylor\+Hood\+Space\+Time\+Element}}$<$ TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$std\+::pair$<$\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$, unsigned$>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement}{oomph\+::\+Projectable\+Taylor\+Hood\+Space\+Time\+Element}}$<$ TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -167,18 +168,18 @@ Specify the values associated with field fld. The information is returned in a v
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a2292bd9c58694f89839bd7d198cfe86a}{oomph\+::\+Projectable\+Element\+Base}}.
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a63b0053dde1172be726f9a6c75fb66ea}{oomph\+::\+Projectable\+Element\+Base}}.
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l02960}{2960}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2960 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
-\mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a64ee8339b79b1e579da8e90f12aff9e1}\label{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a64ee8339b79b1e579da8e90f12aff9e1}} 
+\mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a8bf43e372cee6badaef9e6aa66b03e21}\label{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a8bf43e372cee6badaef9e6aa66b03e21}} 
 \index{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!data\_values\_of\_field@{data\_values\_of\_field}}
 \index{data\_values\_of\_field@{data\_values\_of\_field}!oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{data\_values\_of\_field()}{data\_values\_of\_field()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
 {\footnotesize\ttfamily template$<$class TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement}{oomph\+::\+Projectable\+Taylor\+Hood\+Space\+Time\+Element}}$<$ TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$std\+::pair$<$\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$, unsigned$>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement}{oomph\+::\+Projectable\+Taylor\+Hood\+Space\+Time\+Element}}$<$ TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -186,11 +187,11 @@ Specify the values associated with field fld. The information is returned in a v
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a2292bd9c58694f89839bd7d198cfe86a}{oomph\+::\+Projectable\+Element\+Base}}.
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a63b0053dde1172be726f9a6c75fb66ea}{oomph\+::\+Projectable\+Element\+Base}}.
 
 
 
-Definition at line \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source_l02642}{2642}} of file \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2642 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a565ba9ed0cf7828d3217111f8c59b489}\label{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a565ba9ed0cf7828d3217111f8c59b489}} 
 \index{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!get\_field@{get\_field}}
@@ -201,7 +202,7 @@ double \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement}{oom
 
 
 
-Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: history values) 
+Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t$>$0\+: history values) 
 
 
 
@@ -209,11 +210,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ae4da5b565b6d33
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l03084}{3084}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 3084 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{shape_8h_source_l00564}{oomph\+::\+One\+Dim\+Lagrange\+::shape()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+References s, oomph\+::\+One\+Dim\+Lagrange\+::shape(), and t.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a565ba9ed0cf7828d3217111f8c59b489}\label{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a565ba9ed0cf7828d3217111f8c59b489}} 
 \index{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!get\_field@{get\_field}}
@@ -224,7 +225,7 @@ double \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement}{oom
 
 
 
-Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: history values) 
+Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t$>$0\+: history values) 
 
 
 
@@ -232,11 +233,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ae4da5b565b6d33
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l03101}{3101}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 3101 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{shape_8h_source_l00564}{oomph\+::\+One\+Dim\+Lagrange\+::shape()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+References s, oomph\+::\+One\+Dim\+Lagrange\+::shape(), and t.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a565ba9ed0cf7828d3217111f8c59b489}\label{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a565ba9ed0cf7828d3217111f8c59b489}} 
 \index{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!get\_field@{get\_field}}
@@ -247,7 +248,7 @@ double \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement}{oom
 
 
 
-Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: history values) 
+Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t$>$0\+: history values) 
 
 
 
@@ -255,11 +256,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ae4da5b565b6d33
 
 
 
-Definition at line \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source_l02783}{2783}} of file \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2783 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{shape_8h_source_l00564}{oomph\+::\+One\+Dim\+Lagrange\+::shape()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+References s, oomph\+::\+One\+Dim\+Lagrange\+::shape(), and t.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_acb335e83a84b752d26c92f5207128bd2}\label{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_acb335e83a84b752d26c92f5207128bd2}} 
 \index{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!jacobian\_and\_shape\_of\_field@{jacobian\_and\_shape\_of\_field}}
@@ -278,11 +279,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ad45c21b58c0985
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l03025}{3025}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 3025 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References s.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_acb335e83a84b752d26c92f5207128bd2}\label{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_acb335e83a84b752d26c92f5207128bd2}} 
 \index{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!jacobian\_and\_shape\_of\_field@{jacobian\_and\_shape\_of\_field}}
@@ -301,11 +302,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ad45c21b58c0985
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l03042}{3042}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 3042 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References s.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_acb335e83a84b752d26c92f5207128bd2}\label{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_acb335e83a84b752d26c92f5207128bd2}} 
 \index{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!jacobian\_and\_shape\_of\_field@{jacobian\_and\_shape\_of\_field}}
@@ -324,11 +325,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ad45c21b58c0985
 
 
 
-Definition at line \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source_l02724}{2724}} of file \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2724 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References s.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_abc5ca8c244aa7f3a6bb68856dab812ba}\label{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_abc5ca8c244aa7f3a6bb68856dab812ba}} 
 \index{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!local\_equation@{local\_equation}}
@@ -347,7 +348,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac5c27ae929ff63
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l03136}{3136}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 3136 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_abc5ca8c244aa7f3a6bb68856dab812ba}\label{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_abc5ca8c244aa7f3a6bb68856dab812ba}} 
 \index{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!local\_equation@{local\_equation}}
@@ -366,7 +367,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac5c27ae929ff63
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l03153}{3153}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 3153 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_abc5ca8c244aa7f3a6bb68856dab812ba}\label{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_abc5ca8c244aa7f3a6bb68856dab812ba}} 
 \index{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!local\_equation@{local\_equation}}
@@ -385,7 +386,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac5c27ae929ff63
 
 
 
-Definition at line \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source_l02835}{2835}} of file \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2835 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a662e3e5663832e82dd995543d06a2ffc}\label{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a662e3e5663832e82dd995543d06a2ffc}} 
 \index{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!nfields\_for\_projection@{nfields\_for\_projection}}
@@ -404,7 +405,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a44634aa4049332
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02987}{2987}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2987 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a662e3e5663832e82dd995543d06a2ffc}\label{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a662e3e5663832e82dd995543d06a2ffc}} 
 \index{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!nfields\_for\_projection@{nfields\_for\_projection}}
@@ -423,7 +424,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a44634aa4049332
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l03004}{3004}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 3004 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a662e3e5663832e82dd995543d06a2ffc}\label{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a662e3e5663832e82dd995543d06a2ffc}} 
 \index{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!nfields\_for\_projection@{nfields\_for\_projection}}
@@ -442,7 +443,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a44634aa4049332
 
 
 
-Definition at line \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source_l02686}{2686}} of file \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2686 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a8241aafbd16b4e2a50bcb8a1a839f530}\label{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a8241aafbd16b4e2a50bcb8a1a839f530}} 
 \index{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!nhistory\_values\_for\_coordinate\_projection@{nhistory\_values\_for\_coordinate\_projection}}
@@ -461,7 +462,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ab4ecd0cd24000a
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l03016}{3016}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 3016 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a8241aafbd16b4e2a50bcb8a1a839f530}\label{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a8241aafbd16b4e2a50bcb8a1a839f530}} 
 \index{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!nhistory\_values\_for\_coordinate\_projection@{nhistory\_values\_for\_coordinate\_projection}}
@@ -480,7 +481,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ab4ecd0cd24000a
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l03033}{3033}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 3033 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a8241aafbd16b4e2a50bcb8a1a839f530}\label{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a8241aafbd16b4e2a50bcb8a1a839f530}} 
 \index{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!nhistory\_values\_for\_coordinate\_projection@{nhistory\_values\_for\_coordinate\_projection}}
@@ -499,7 +500,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ab4ecd0cd24000a
 
 
 
-Definition at line \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source_l02715}{2715}} of file \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2715 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_ae361a8ca7dffa909f09d34b17bdf5046}\label{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_ae361a8ca7dffa909f09d34b17bdf5046}} 
 \index{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!nhistory\_values\_for\_projection@{nhistory\_values\_for\_projection}}
@@ -518,7 +519,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac6790f394630b9
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l02997}{2997}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2997 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_ae361a8ca7dffa909f09d34b17bdf5046}\label{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_ae361a8ca7dffa909f09d34b17bdf5046}} 
 \index{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!nhistory\_values\_for\_projection@{nhistory\_values\_for\_projection}}
@@ -537,7 +538,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac6790f394630b9
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l03014}{3014}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 3014 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_ae361a8ca7dffa909f09d34b17bdf5046}\label{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_ae361a8ca7dffa909f09d34b17bdf5046}} 
 \index{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!nhistory\_values\_for\_projection@{nhistory\_values\_for\_projection}}
@@ -556,7 +557,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac6790f394630b9
 
 
 
-Definition at line \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source_l02696}{2696}} of file \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2696 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a7ff4171a511f42a9f0648629cf90b25e}\label{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a7ff4171a511f42a9f0648629cf90b25e}} 
 \index{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!nvalue\_of\_field@{nvalue\_of\_field}}
@@ -575,7 +576,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a1a9a6de16f3511
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l03122}{3122}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 3122 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a7ff4171a511f42a9f0648629cf90b25e}\label{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a7ff4171a511f42a9f0648629cf90b25e}} 
 \index{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!nvalue\_of\_field@{nvalue\_of\_field}}
@@ -594,7 +595,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a1a9a6de16f3511
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l03139}{3139}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 3139 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a7ff4171a511f42a9f0648629cf90b25e}\label{classoomph_1_1ProjectableTaylorHoodSpaceTimeElement_a7ff4171a511f42a9f0648629cf90b25e}} 
 \index{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$@{oomph::ProjectableTaylorHoodSpaceTimeElement$<$ TAYLOR\_HOOD\_ELEMENT $>$}!nvalue\_of\_field@{nvalue\_of\_field}}
@@ -613,7 +614,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a1a9a6de16f3511
 
 
 
-Definition at line \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source_l02821}{2821}} of file \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 2821 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 

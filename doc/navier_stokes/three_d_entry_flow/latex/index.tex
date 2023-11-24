@@ -37,7 +37,7 @@ The problem only contains one global parameter, the Reynolds number, which we de
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=start\_of\_namespace================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for physical parameters}}
-\DoxyCodeLine{\textcolor{comment}{//===================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//===================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Reynolds number}}
@@ -57,9 +57,9 @@ Since the 3D computations can take a long time, and since all demo codes are exe
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=start\_of\_main=======================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Driver for 3D entry flow into a quarter tube. If there are}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// any command line arguments, we regard this as a validation run}}
-\DoxyCodeLine{\textcolor{comment}{/// and perform only a single adaptation}}
+\DoxyCodeLine{\textcolor{comment}{/// Driver for 3D entry flow into a quarter tube. If there are}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// any command line arguments, we regard this as a validation run}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// and perform only a single adaptation}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{three__d__entry__flow_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[]) }
 \DoxyCodeLine{\{}
@@ -164,7 +164,7 @@ The problem class is very similar to the ones used in the \href{../../circular_d
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=start\_of\_problem\_class=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Entry flow problem in quarter tube domain}}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classEntryFlowProblem}{EntryFlowProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -247,7 +247,7 @@ We start by building the adaptive mesh for the quarter tube domain. As for most 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=start\_of\_constructor===================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor: Pass DocInfo object and error targets}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classEntryFlowProblem_a0d527811321d270d769224dcbac8d240}{EntryFlowProblem<ELEMENT>::EntryFlowProblem}}(DocInfo\& doc\_info,}
 \DoxyCodeLine{                                            \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& min\_error\_target,}
@@ -441,7 +441,7 @@ We use the function {\ttfamily Problem\+::actions\+\_\+before\+\_\+newton\+\_\+s
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=start\_of\_actions\_before\_newton\_solve==========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Set the inflow boundary conditions}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classEntryFlowProblem_ae4dde95573350d8fdb19463849991130}{EntryFlowProblem<ELEMENT>::actions\_before\_newton\_solve}}()}
 \DoxyCodeLine{\{}
@@ -476,7 +476,7 @@ This function remains exactly the same as in the \href{../../driven_cavity/html/
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=start\_of\_doc\_solution==================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classEntryFlowProblem_a8ba37cd2a4af4356e4182929027d7828}{EntryFlowProblem<ELEMENT>::doc\_solution}}()}
 \DoxyCodeLine{\{ }

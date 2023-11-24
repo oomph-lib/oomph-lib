@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1RefineableSolidThinLayerBrickOnTetMesh}{}\doxysection{oomph\+::Refineable\+Solid\+Thin\+Layer\+Brick\+On\+Tet\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1RefineableSolidThinLayerBrickOnTetMesh}{}\doxysection{oomph\+::Refineable\+Solid\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$ Class Template Reference}
 \label{classoomph_1_1RefineableSolidThinLayerBrickOnTetMesh}\index{oomph::RefineableSolidThinLayerBrickOnTetMesh$<$ ELEMENT $>$@{oomph::RefineableSolidThinLayerBrickOnTetMesh$<$ ELEMENT $>$}}
 
 
@@ -9,7 +9,7 @@
 
 {\ttfamily \#include $<$thin\+\_\+layer\+\_\+brick\+\_\+on\+\_\+tet\+\_\+mesh.\+template.\+h$>$}
 
-Inheritance diagram for oomph\+::Refineable\+Solid\+Thin\+Layer\+Brick\+On\+Tet\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Refineable\+Solid\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.187500cm]{classoomph_1_1RefineableSolidThinLayerBrickOnTetMesh}
@@ -23,7 +23,7 @@ typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1RefineableSolidThinLayerBrick
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1RefineableSolidThinLayerBrickOnTetMesh_adda15e0208b20e1c1f5404c27850fb1b}{Refineable\+Solid\+Thin\+Layer\+Brick\+On\+Tet\+Mesh}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$tet\+\_\+mesh\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&boundary\+\_\+ids, \mbox{\hyperlink{classoomph_1_1RefineableSolidThinLayerBrickOnTetMesh_a45af8cb1926cec40d597eb18b75b96da}{Thickness\+Fct\+Pt}} thickness\+\_\+fct\+\_\+pt, const unsigned \&nlayer, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1ThinLayerBrickOnTetMesh_ab3b948a7715ca95dc05e75bbbe7bd110}{in\+\_\+out\+\_\+boundary\+\_\+id}}, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
+\mbox{\hyperlink{classoomph_1_1RefineableSolidThinLayerBrickOnTetMesh_aabf9d1a88f274bb09d5befe5ab9a22ee}{Refineable\+Solid\+Thin\+Layer\+Brick\+On\+Tet\+Mesh}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$tet\+\_\+mesh\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&boundary\+\_\+ids, \mbox{\hyperlink{classoomph_1_1RefineableSolidThinLayerBrickOnTetMesh_a45af8cb1926cec40d597eb18b75b96da}{Thickness\+Fct\+Pt}} thickness\+\_\+fct\+\_\+pt, const unsigned \&nlayer, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$$>$ \&\mbox{\hyperlink{classoomph_1_1ThinLayerBrickOnTetMesh_a3cfd55eb5bbd6801e9d4cd271e602cd8}{in\+\_\+out\+\_\+boundary\+\_\+id}}, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
 \begin{DoxyCompactList}\small\item\em Constructor\+: Specify (quadratic) tet mesh, boundary IDs of boundary on which the current mesh is to be erected (in an FSI context this boundary tends to be the FSI boundary of the fluid mesh. Also specify the uniform thickness of layer, and the number of element layers. The vectors stored in in\+\_\+out\+\_\+boundary\+\_\+ids contain the boundary IDs of the other boundaries in the tet mesh. In an FSI context these typically identify the in/outflow boundaries in the fluid mesh. The boundary enumeration of the current mesh follows the one of the underlying fluid mesh\+: The enumeration of the FSI boundary matches (to enable the setup of the FSI matching); the \char`\"{}in/outflow\char`\"{} faces in this mesh inherit the same enumeration as the in/outflow faces in the underlying fluid mesh. Finally, the \char`\"{}outer\char`\"{} boundary gets its own boundary ID. Timestepper defaults to steady pseudo-\/timestepper. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -31,11 +31,12 @@ typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1RefineableSolidThinLayerBrick
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class ELEMENT$>$\newline
 class oomph\+::\+Refineable\+Solid\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$}
+
 //////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// 
 
 Refineable solid brick mesh layer built on top of a given tet mesh. Typically used in FSI problems where the tet mesh is the fluid mesh and this mesh acts as the solid mesh that surrounds the FSI interface. 
 
-Definition at line \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8h_source_l00238}{238}} of file \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8h_source}{thin\+\_\+layer\+\_\+brick\+\_\+on\+\_\+tet\+\_\+mesh.\+template.\+h}}.
+Definition at line 238 of file thin\+\_\+layer\+\_\+brick\+\_\+on\+\_\+tet\+\_\+mesh.\+template.\+h.
 
 
 
@@ -53,17 +54,17 @@ Function pointer to function that specifies the wall thickness as a fct of the c
 
 
 
-Definition at line \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8h_source_l00246}{246}} of file \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8h_source}{thin\+\_\+layer\+\_\+brick\+\_\+on\+\_\+tet\+\_\+mesh.\+template.\+h}}.
+Definition at line 246 of file thin\+\_\+layer\+\_\+brick\+\_\+on\+\_\+tet\+\_\+mesh.\+template.\+h.
 
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classoomph_1_1RefineableSolidThinLayerBrickOnTetMesh_adda15e0208b20e1c1f5404c27850fb1b}\label{classoomph_1_1RefineableSolidThinLayerBrickOnTetMesh_adda15e0208b20e1c1f5404c27850fb1b}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableSolidThinLayerBrickOnTetMesh_aabf9d1a88f274bb09d5befe5ab9a22ee}\label{classoomph_1_1RefineableSolidThinLayerBrickOnTetMesh_aabf9d1a88f274bb09d5befe5ab9a22ee}} 
 \index{oomph::RefineableSolidThinLayerBrickOnTetMesh$<$ ELEMENT $>$@{oomph::RefineableSolidThinLayerBrickOnTetMesh$<$ ELEMENT $>$}!RefineableSolidThinLayerBrickOnTetMesh@{RefineableSolidThinLayerBrickOnTetMesh}}
 \index{RefineableSolidThinLayerBrickOnTetMesh@{RefineableSolidThinLayerBrickOnTetMesh}!oomph::RefineableSolidThinLayerBrickOnTetMesh$<$ ELEMENT $>$@{oomph::RefineableSolidThinLayerBrickOnTetMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{RefineableSolidThinLayerBrickOnTetMesh()}{RefineableSolidThinLayerBrickOnTetMesh()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1RefineableSolidThinLayerBrickOnTetMesh}{oomph\+::\+Refineable\+Solid\+Thin\+Layer\+Brick\+On\+Tet\+Mesh}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableSolidThinLayerBrickOnTetMesh}{Refineable\+Solid\+Thin\+Layer\+Brick\+On\+Tet\+Mesh}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$}]{tet\+\_\+mesh\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{boundary\+\_\+ids,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableSolidThinLayerBrickOnTetMesh_a45af8cb1926cec40d597eb18b75b96da}{Thickness\+Fct\+Pt}}}]{thickness\+\_\+fct\+\_\+pt,  }\item[{const unsigned \&}]{nlayer,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ $>$ \&}]{in\+\_\+out\+\_\+boundary\+\_\+id,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1RefineableSolidThinLayerBrickOnTetMesh}{oomph\+::\+Refineable\+Solid\+Thin\+Layer\+Brick\+On\+Tet\+Mesh}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableSolidThinLayerBrickOnTetMesh}{Refineable\+Solid\+Thin\+Layer\+Brick\+On\+Tet\+Mesh}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$}]{tet\+\_\+mesh\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{boundary\+\_\+ids,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableSolidThinLayerBrickOnTetMesh_a45af8cb1926cec40d597eb18b75b96da}{Thickness\+Fct\+Pt}}}]{thickness\+\_\+fct\+\_\+pt,  }\item[{const unsigned \&}]{nlayer,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$$>$ \&}]{in\+\_\+out\+\_\+boundary\+\_\+id,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -71,11 +72,11 @@ Constructor\+: Specify (quadratic) tet mesh, boundary IDs of boundary on which t
 
 
 
-Definition at line \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8h_source_l00262}{262}} of file \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8template_8h_source}{thin\+\_\+layer\+\_\+brick\+\_\+on\+\_\+tet\+\_\+mesh.\+template.\+h}}.
+Definition at line 262 of file thin\+\_\+layer\+\_\+brick\+\_\+on\+\_\+tet\+\_\+mesh.\+template.\+h.
 
 
 
-References \mbox{\hyperlink{mesh_8cc_source_l09564}{oomph\+::\+Solid\+Mesh\+::set\+\_\+lagrangian\+\_\+nodal\+\_\+coordinates()}}, and \mbox{\hyperlink{refineable__brick__mesh_8h_source_l00088}{oomph\+::\+Refineable\+Brick\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+octree\+\_\+forest()}}.
+References oomph\+::\+Solid\+Mesh\+::set\+\_\+lagrangian\+\_\+nodal\+\_\+coordinates(), and oomph\+::\+Refineable\+Brick\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+octree\+\_\+forest().
 
 
 

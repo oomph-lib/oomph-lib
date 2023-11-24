@@ -39,10 +39,10 @@ The problem class is virtually identical to that in the \href{../../two_d_poisso
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//========= start\_of\_problem\_class=====================================}}
-\DoxyCodeLine{\textcolor{comment}{/// 2D Poisson problem on rectangular domain, discretised with}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// 2D QPoisson elements. Flux boundary conditions are applied}}
-\DoxyCodeLine{\textcolor{comment}{/// along boundary 1 (the boundary where x=L). The specific type of }}
-\DoxyCodeLine{\textcolor{comment}{/// element is specified via the template parameter.}}
+\DoxyCodeLine{\textcolor{comment}{/// 2D Poisson problem on rectangular domain, discretised with}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// 2D QPoisson elements. Flux boundary conditions are applied}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// along boundary 1 (the boundary where x=L). The specific type of }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// element is specified via the template parameter.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT> }
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classTwoMeshFluxPoissonProblem}{TwoMeshFluxPoissonProblem}} : \textcolor{keyword}{public} Problem}
@@ -99,7 +99,7 @@ As before we start by creating the \char`\"{}bulk\char`\"{} mesh and store a poi
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_constructor=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for Poisson problem: Pass pointer to source function.}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classTwoMeshFluxPoissonProblem_ace5a47aa61da5fd2a8761a16ffb3711c}{TwoMeshFluxPoissonProblem<ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classTwoMeshFluxPoissonProblem_ace5a47aa61da5fd2a8761a16ffb3711c}{TwoMeshFluxPoissonProblem}}(PoissonEquations<2>::PoissonSourceFctPt source\_fct\_pt)}
@@ -227,8 +227,8 @@ If we had set up the boundary lookup scheme in the surface mesh, the constructor
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//====================start\_of\_actions\_before\_newton\_solve=======================}}
-\DoxyCodeLine{\textcolor{comment}{/// Update the problem specs before solve: Reset boundary conditions}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// to the values from the exact solution.}}
+\DoxyCodeLine{\textcolor{comment}{/// Update the problem specs before solve: Reset boundary conditions}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// to the values from the exact solution.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classTwoMeshFluxPoissonProblem_a520768a954d00d3972115ccf0b304854}{TwoMeshFluxPoissonProblem<ELEMENT>::actions\_before\_newton\_solve}}()}
@@ -277,7 +277,7 @@ The post-\/processing, implemented in {\ttfamily doc\+\_\+solution(...)} is now 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====================start\_of\_doc=======================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution: doc\_info contains labels/output directory etc.}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classTwoMeshFluxPoissonProblem_a6320ad6d71f24a2d7e03a7bb7e691b31}{TwoMeshFluxPoissonProblem<ELEMENT>::doc\_solution}}(DocInfo\& doc\_info)}
 \DoxyCodeLine{\{ }

@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1ProjectableAdvectionDiffusionReactionElement}{}\doxysection{oomph\+::Projectable\+Advection\+Diffusion\+Reaction\+Element\texorpdfstring{$<$}{<} ADR\+\_\+\+ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1ProjectableAdvectionDiffusionReactionElement}{}\doxysection{oomph\+::Projectable\+Advection\+Diffusion\+Reaction\+Element$<$ ADR\+\_\+\+ELEMENT $>$ Class Template Reference}
 \label{classoomph_1_1ProjectableAdvectionDiffusionReactionElement}\index{oomph::ProjectableAdvectionDiffusionReactionElement$<$ ADR\_ELEMENT $>$@{oomph::ProjectableAdvectionDiffusionReactionElement$<$ ADR\_ELEMENT $>$}}
 
 
@@ -9,7 +9,7 @@ Advection\+Diffusion\+Reaction upgraded to become projectable.
 
 {\ttfamily \#include $<$advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Projectable\+Advection\+Diffusion\+Reaction\+Element\texorpdfstring{$<$}{<} ADR\+\_\+\+ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Projectable\+Advection\+Diffusion\+Reaction\+Element$<$ ADR\+\_\+\+ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=1.583710cm]{classoomph_1_1ProjectableAdvectionDiffusionReactionElement}
@@ -18,7 +18,7 @@ Inheritance diagram for oomph\+::Projectable\+Advection\+Diffusion\+Reaction\+El
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableAdvectionDiffusionReactionElement_afc1fa3cde832af238c9015fc3ff65aba}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableAdvectionDiffusionReactionElement_a4476bfcf3041ada4e2b191066e7926c7}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableAdvectionDiffusionReactionElement_a03a11cb3cc0a4a0974302ee8bea7c3ec}{nfields\+\_\+for\+\_\+projection}} ()
 \begin{DoxyCompactList}\small\item\em Number of fields to be projected\+: Just one. \end{DoxyCompactList}\item 
@@ -29,7 +29,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1ProjectableAdvectionDiffusionReactionEle
 double \mbox{\hyperlink{classoomph_1_1ProjectableAdvectionDiffusionReactionElement_a7f3245cd32436bcebccf698285b7f69e}{jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field}} (const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi)
 \begin{DoxyCompactList}\small\item\em Return Jacobian of mapping and shape functions of field fld at local coordinate s. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1ProjectableAdvectionDiffusionReactionElement_a635af86efa15af8c52e34970467f91c8}{get\+\_\+field}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
-\begin{DoxyCompactList}\small\item\em Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: history values) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t$>$0\+: history values) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableAdvectionDiffusionReactionElement_a28ca9f5ed7dfabdaeb589c39f1972bbf}{nvalue\+\_\+of\+\_\+field}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Return number of values in field fld\+: One per node. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classoomph_1_1ProjectableAdvectionDiffusionReactionElement_a105bd57ef8857ddf058fff0314e1e223}{local\+\_\+equation}} (const unsigned \&fld, const unsigned \&j)
@@ -40,19 +40,20 @@ int \mbox{\hyperlink{classoomph_1_1ProjectableAdvectionDiffusionReactionElement_
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class ADR\+\_\+\+ELEMENT$>$\newline
 class oomph\+::\+Projectable\+Advection\+Diffusion\+Reaction\+Element$<$ ADR\+\_\+\+ELEMENT $>$}
+
 Advection\+Diffusion\+Reaction upgraded to become projectable. 
 
-Definition at line \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source_l00875}{875}} of file \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source}{advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h}}.
+Definition at line 875 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1ProjectableAdvectionDiffusionReactionElement_afc1fa3cde832af238c9015fc3ff65aba}\label{classoomph_1_1ProjectableAdvectionDiffusionReactionElement_afc1fa3cde832af238c9015fc3ff65aba}} 
+\mbox{\Hypertarget{classoomph_1_1ProjectableAdvectionDiffusionReactionElement_a4476bfcf3041ada4e2b191066e7926c7}\label{classoomph_1_1ProjectableAdvectionDiffusionReactionElement_a4476bfcf3041ada4e2b191066e7926c7}} 
 \index{oomph::ProjectableAdvectionDiffusionReactionElement$<$ ADR\_ELEMENT $>$@{oomph::ProjectableAdvectionDiffusionReactionElement$<$ ADR\_ELEMENT $>$}!data\_values\_of\_field@{data\_values\_of\_field}}
 \index{data\_values\_of\_field@{data\_values\_of\_field}!oomph::ProjectableAdvectionDiffusionReactionElement$<$ ADR\_ELEMENT $>$@{oomph::ProjectableAdvectionDiffusionReactionElement$<$ ADR\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{data\_values\_of\_field()}{data\_values\_of\_field()}}
 {\footnotesize\ttfamily template$<$class ADR\+\_\+\+ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableAdvectionDiffusionReactionElement}{oomph\+::\+Projectable\+Advection\+Diffusion\+Reaction\+Element}}$<$ ADR\+\_\+\+ELEMENT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$std\+::pair$<$\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$, unsigned$>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableAdvectionDiffusionReactionElement}{oomph\+::\+Projectable\+Advection\+Diffusion\+Reaction\+Element}}$<$ ADR\+\_\+\+ELEMENT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -60,15 +61,15 @@ Specify the values associated with field fld. The information is returned in a v
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a2292bd9c58694f89839bd7d198cfe86a}{oomph\+::\+Projectable\+Element\+Base}}.
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a63b0053dde1172be726f9a6c75fb66ea}{oomph\+::\+Projectable\+Element\+Base}}.
 
 
 
-Definition at line \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source_l00882}{882}} of file \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source}{advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h}}.
+Definition at line 882 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References oomph\+::\+Finite\+Element\+::nnode(), and oomph\+::\+Finite\+Element\+::node\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableAdvectionDiffusionReactionElement_a635af86efa15af8c52e34970467f91c8}\label{classoomph_1_1ProjectableAdvectionDiffusionReactionElement_a635af86efa15af8c52e34970467f91c8}} 
 \index{oomph::ProjectableAdvectionDiffusionReactionElement$<$ ADR\_ELEMENT $>$@{oomph::ProjectableAdvectionDiffusionReactionElement$<$ ADR\_ELEMENT $>$}!get\_field@{get\_field}}
@@ -79,7 +80,7 @@ double \mbox{\hyperlink{classoomph_1_1ProjectableAdvectionDiffusionReactionEleme
 
 
 
-Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: history values) 
+Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t$>$0\+: history values) 
 
 
 
@@ -87,11 +88,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ae4da5b565b6d33
 
 
 
-Definition at line \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source_l00937}{937}} of file \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source}{advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h}}.
+Definition at line 937 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
+References oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), and oomph\+::\+Finite\+Element\+::shape().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableAdvectionDiffusionReactionElement_a7f3245cd32436bcebccf698285b7f69e}\label{classoomph_1_1ProjectableAdvectionDiffusionReactionElement_a7f3245cd32436bcebccf698285b7f69e}} 
 \index{oomph::ProjectableAdvectionDiffusionReactionElement$<$ ADR\_ELEMENT $>$@{oomph::ProjectableAdvectionDiffusionReactionElement$<$ ADR\_ELEMENT $>$}!jacobian\_and\_shape\_of\_field@{jacobian\_and\_shape\_of\_field}}
@@ -110,11 +111,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ad45c21b58c0985
 
 
 
-Definition at line \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source_l00921}{921}} of file \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source}{advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h}}.
+Definition at line 921 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Finite\+Element\+::nnode(), and s.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableAdvectionDiffusionReactionElement_a105bd57ef8857ddf058fff0314e1e223}\label{classoomph_1_1ProjectableAdvectionDiffusionReactionElement_a105bd57ef8857ddf058fff0314e1e223}} 
 \index{oomph::ProjectableAdvectionDiffusionReactionElement$<$ ADR\_ELEMENT $>$@{oomph::ProjectableAdvectionDiffusionReactionElement$<$ ADR\_ELEMENT $>$}!local\_equation@{local\_equation}}
@@ -133,11 +134,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac5c27ae929ff63
 
 
 
-Definition at line \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source_l00971}{971}} of file \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source}{advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h}}.
+Definition at line 971 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}.
+References oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableAdvectionDiffusionReactionElement_a03a11cb3cc0a4a0974302ee8bea7c3ec}\label{classoomph_1_1ProjectableAdvectionDiffusionReactionElement_a03a11cb3cc0a4a0974302ee8bea7c3ec}} 
 \index{oomph::ProjectableAdvectionDiffusionReactionElement$<$ ADR\_ELEMENT $>$@{oomph::ProjectableAdvectionDiffusionReactionElement$<$ ADR\_ELEMENT $>$}!nfields\_for\_projection@{nfields\_for\_projection}}
@@ -156,7 +157,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a44634aa4049332
 
 
 
-Definition at line \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source_l00900}{900}} of file \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source}{advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h}}.
+Definition at line 900 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableAdvectionDiffusionReactionElement_ab92aff0c177a54d021a313440eecfa23}\label{classoomph_1_1ProjectableAdvectionDiffusionReactionElement_ab92aff0c177a54d021a313440eecfa23}} 
 \index{oomph::ProjectableAdvectionDiffusionReactionElement$<$ ADR\_ELEMENT $>$@{oomph::ProjectableAdvectionDiffusionReactionElement$<$ ADR\_ELEMENT $>$}!nhistory\_values\_for\_coordinate\_projection@{nhistory\_values\_for\_coordinate\_projection}}
@@ -175,11 +176,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ab4ecd0cd24000a
 
 
 
-Definition at line \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source_l00914}{914}} of file \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source}{advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h}}.
+Definition at line 914 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, and \mbox{\hyperlink{nodes_8h_source_l01022}{oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt()}}.
+References oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Time\+Stepper\+::ntstorage(), and oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableAdvectionDiffusionReactionElement_a1b5321bacbe986828d5726b53cec8633}\label{classoomph_1_1ProjectableAdvectionDiffusionReactionElement_a1b5321bacbe986828d5726b53cec8633}} 
 \index{oomph::ProjectableAdvectionDiffusionReactionElement$<$ ADR\_ELEMENT $>$@{oomph::ProjectableAdvectionDiffusionReactionElement$<$ ADR\_ELEMENT $>$}!nhistory\_values\_for\_projection@{nhistory\_values\_for\_projection}}
@@ -198,11 +199,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac6790f394630b9
 
 
 
-Definition at line \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source_l00907}{907}} of file \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source}{advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h}}.
+Definition at line 907 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8cc_source_l00879}{oomph\+::\+Data\+::ntstorage()}}.
+References oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Data\+::ntstorage().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableAdvectionDiffusionReactionElement_a28ca9f5ed7dfabdaeb589c39f1972bbf}\label{classoomph_1_1ProjectableAdvectionDiffusionReactionElement_a28ca9f5ed7dfabdaeb589c39f1972bbf}} 
 \index{oomph::ProjectableAdvectionDiffusionReactionElement$<$ ADR\_ELEMENT $>$@{oomph::ProjectableAdvectionDiffusionReactionElement$<$ ADR\_ELEMENT $>$}!nvalue\_of\_field@{nvalue\_of\_field}}
@@ -221,11 +222,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a1a9a6de16f3511
 
 
 
-Definition at line \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source_l00964}{964}} of file \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source}{advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h}}.
+Definition at line 964 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}.
+References oomph\+::\+Finite\+Element\+::nnode().
 
 
 

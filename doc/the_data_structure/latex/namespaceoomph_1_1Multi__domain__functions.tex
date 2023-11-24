@@ -39,7 +39,7 @@ void \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a81f7a581bfb6ab
 \begin{DoxyCompactList}\small\item\em Helper function that computes the dimension of the elements within each of the specified meshes (and checks they are the same). Stores result in Dim. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a45a7960bff85287284bea3939dcda5c2}{clean\+\_\+up}} ()
 \begin{DoxyCompactList}\small\item\em Helper function that clears all the information used during the external storage creation. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aee712f5dc126a26cd46b6f717aa1d6c2}{first\+\_\+closer\+\_\+than\+\_\+second}} (const std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&p1, const std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&p2)
+bool \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_ad9baf8c647dbd10164c28f12cbb04f85}{first\+\_\+closer\+\_\+than\+\_\+second}} (const std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&p1, const std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&p2)
 \begin{DoxyCompactList}\small\item\em Comparison function for sorting entries in bin\+: Returns true if point identified by p1 (comprising pointer to finite element and vector of local coordinates within that element) is closer to Zeta\+\_\+coords\+\_\+for\+\_\+further\+\_\+away\+\_\+comparison than p2. \end{DoxyCompactList}\item 
 {\footnotesize template$<$class BULK\+\_\+\+ELEMENT , unsigned DIM$>$ }\\void \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a35d48459a5261d565afbc106cb61fe60}{setup\+\_\+bulk\+\_\+elements\+\_\+adjacent\+\_\+to\+\_\+face\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&boundary\+\_\+in\+\_\+bulk\+\_\+mesh, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$const \&bulk\+\_\+mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$ $>$ \&face\+\_\+mesh\+\_\+pt, const unsigned \&interaction=0)
 \begin{DoxyCompactList}\small\item\em Identify the {\ttfamily Face\+Elements} (stored in the mesh pointed to by {\ttfamily face\+\_\+mesh\+\_\+pt}) that are adjacent to the bulk elements next to the {\ttfamily boundary\+\_\+in\+\_\+bulk\+\_\+mesh} -\/th boundary of the mesh pointed to by {\ttfamily bulk\+\_\+mesh\+\_\+pt}. The {\ttfamily Face\+Elements} must be derived from the {\ttfamily \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement}{Element\+With\+External\+Element}}} base class and the adjacent bulk elements are stored as their external elements. \end{DoxyCompactList}\item 
@@ -139,7 +139,7 @@ Not\+\_\+found&\\
 \end{DoxyEnumFields}
 
 
-Definition at line \mbox{\hyperlink{multi__domain_8h_source_l00147}{147}} of file \mbox{\hyperlink{multi__domain_8h_source}{multi\+\_\+domain.\+h}}.
+Definition at line 147 of file multi\+\_\+domain.\+h.
 
 
 
@@ -157,11 +157,11 @@ Helper function to add external halo node that is a master.
 
 
 
-Definition at line \mbox{\hyperlink{multi__domain_8template_8cc_source_l02027}{2027}} of file \mbox{\hyperlink{multi__domain_8template_8cc_source}{multi\+\_\+domain.\+template.\+cc}}.
+Definition at line 2027 of file multi\+\_\+domain.\+template.\+cc.
 
 
 
-References \mbox{\hyperlink{multi__domain_8cc_source_l00134}{Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+unsigneds}}, \mbox{\hyperlink{mesh_8h_source_l02377}{oomph\+::\+Mesh\+::external\+\_\+halo\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00118}{Flat\+\_\+packed\+\_\+unsigneds}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}.
+References Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+unsigneds, oomph\+::\+Mesh\+::external\+\_\+halo\+\_\+node\+\_\+pt(), Flat\+\_\+packed\+\_\+unsigneds, and oomph\+::oomph\+\_\+info.
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_abbec3c28e0cdbe77c6ce3c9021528247}\label{namespaceoomph_1_1Multi__domain__functions_abbec3c28e0cdbe77c6ce3c9021528247}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!add\_external\_halo\_node\_helper@{add\_external\_halo\_node\_helper}}
@@ -175,11 +175,11 @@ Helper functiono to add external halo node that is not a master.
 
 Helper function to add external halo node that is not a master. 
 
-Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l01404}{1404}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+Definition at line 1404 of file multi\+\_\+domain.\+cc.
 
 
 
-References \mbox{\hyperlink{multi__domain_8cc_source_l01452}{construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00134}{Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+unsigneds}}, \mbox{\hyperlink{mesh_8h_source_l02377}{oomph\+::\+Mesh\+::external\+\_\+halo\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00118}{Flat\+\_\+packed\+\_\+unsigneds}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}.
+References construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper(), Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+unsigneds, oomph\+::\+Mesh\+::external\+\_\+halo\+\_\+node\+\_\+pt(), Flat\+\_\+packed\+\_\+unsigneds, oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::oomph\+\_\+info.
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a6415c5c0119c75e162418a0c9b59b4f7}\label{namespaceoomph_1_1Multi__domain__functions_a6415c5c0119c75e162418a0c9b59b4f7}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!add\_external\_halo\_node\_to\_storage@{add\_external\_halo\_node\_to\_storage}}
@@ -194,11 +194,11 @@ Helper function to add external halo nodes, including any masters, based on info
 
 
 
-Definition at line \mbox{\hyperlink{multi__domain_8template_8cc_source_l01924}{1924}} of file \mbox{\hyperlink{multi__domain_8template_8cc_source}{multi\+\_\+domain.\+template.\+cc}}.
+Definition at line 1924 of file multi\+\_\+domain.\+template.\+cc.
 
 
 
-References \mbox{\hyperlink{missing__masters_8cc_source_l01220}{oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::add\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper()}}.
+References oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::add\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper().
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a7116b75de2083297cc1ab4e4b1ca2e48}\label{namespaceoomph_1_1Multi__domain__functions_a7116b75de2083297cc1ab4e4b1ca2e48}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!add\_external\_haloed\_master\_node\_helper@{add\_external\_haloed\_master\_node\_helper}}
@@ -212,15 +212,15 @@ Helper function to add external haloed node that is a master.
 
 
 
-Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00699}{699}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+Definition at line 699 of file multi\+\_\+domain.\+cc.
 
 
 
-References \mbox{\hyperlink{mesh_8cc_source_l09516}{oomph\+::\+Mesh\+::add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00118}{Flat\+\_\+packed\+\_\+unsigneds}}, \mbox{\hyperlink{multi__domain_8cc_source_l00125}{Flat\+\_\+packed\+\_\+unsigneds\+\_\+string}}, \mbox{\hyperlink{multi__domain_8cc_source_l01010}{get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper()}}, and \mbox{\hyperlink{mesh_8h_source_l02412}{oomph\+::\+Mesh\+::nexternal\+\_\+haloed\+\_\+node()}}.
+References oomph\+::\+Mesh\+::add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+pt(), Flat\+\_\+packed\+\_\+unsigneds, Flat\+\_\+packed\+\_\+unsigneds\+\_\+string, get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), and oomph\+::\+Mesh\+::nexternal\+\_\+haloed\+\_\+node().
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain_8cc_source_l00577}{recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node()}}.
+Referenced by recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node().
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_aac4036d305c98081e778e16d568ae560}\label{namespaceoomph_1_1Multi__domain__functions_aac4036d305c98081e778e16d568ae560}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!add\_external\_haloed\_node\_helper@{add\_external\_haloed\_node\_helper}}
@@ -234,15 +234,15 @@ Helper to add external haloed node that is not a master.
 
 Helper function to add external haloed node that is not a master. 
 
-Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00643}{643}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+Definition at line 643 of file multi\+\_\+domain.\+cc.
 
 
 
-References \mbox{\hyperlink{mesh_8cc_source_l09516}{oomph\+::\+Mesh\+::add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00118}{Flat\+\_\+packed\+\_\+unsigneds}}, \mbox{\hyperlink{multi__domain_8cc_source_l00125}{Flat\+\_\+packed\+\_\+unsigneds\+\_\+string}}, \mbox{\hyperlink{multi__domain_8cc_source_l00754}{get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper()}}, and \mbox{\hyperlink{mesh_8h_source_l02412}{oomph\+::\+Mesh\+::nexternal\+\_\+haloed\+\_\+node()}}.
+References oomph\+::\+Mesh\+::add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+pt(), Flat\+\_\+packed\+\_\+unsigneds, Flat\+\_\+packed\+\_\+unsigneds\+\_\+string, get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), and oomph\+::\+Mesh\+::nexternal\+\_\+haloed\+\_\+node().
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain_8cc_source_l00557}{add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+to\+\_\+storage()}}.
+Referenced by add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+to\+\_\+storage().
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_aea9c2b1984158b8f560c6fff7c0adea7}\label{namespaceoomph_1_1Multi__domain__functions_aea9c2b1984158b8f560c6fff7c0adea7}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!add\_external\_haloed\_node\_to\_storage@{add\_external\_haloed\_node\_to\_storage}}
@@ -256,15 +256,15 @@ Helper function to add external haloed nodes, including any masters.
 
 Helper function to add external haloed nodes, inc. masters of external haloed nodes. 
 
-Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00557}{557}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+Definition at line 557 of file multi\+\_\+domain.\+cc.
 
 
 
-References \mbox{\hyperlink{multi__domain_8cc_source_l00643}{add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+helper()}}, and \mbox{\hyperlink{multi__domain_8cc_source_l00577}{recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node()}}.
+References add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+helper(), and recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node().
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain_8cc_source_l01010}{get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper()}}, and \mbox{\hyperlink{multi__domain_8cc_source_l01797}{locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates()}}.
+Referenced by get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), and locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates().
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_af84f07f5b4632433203f4c4abf57da5f}\label{namespaceoomph_1_1Multi__domain__functions_af84f07f5b4632433203f4c4abf57da5f}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!aux\_setup\_multi\_domain\_interaction@{aux\_setup\_multi\_domain\_interaction}}
@@ -281,11 +281,11 @@ This routine calls the locate\+\_\+zeta routine (simultaneously on each processo
 
 Vector-\/based version operates simultaneously on the meshes contained in the vectors. If it\textquotesingle{}s is now zero then break out of the spirals loop
 
-Definition at line \mbox{\hyperlink{multi__domain_8template_8cc_source_l00524}{524}} of file \mbox{\hyperlink{multi__domain_8template_8cc_source}{multi\+\_\+domain.\+template.\+cc}}.
+Definition at line 524 of file multi\+\_\+domain.\+template.\+cc.
 
 
 
-References \mbox{\hyperlink{multi__domain_8cc_source_l00056}{Accept\+\_\+failed\+\_\+locate\+\_\+zeta\+\_\+in\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction}}, \mbox{\hyperlink{multi__domain_8cc_source_l02413}{clean\+\_\+up()}}, \mbox{\hyperlink{problem_8h_source_l01246}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00891}{Non\+Refineable\+Bin\+Array\+::current\+\_\+max\+\_\+spiral\+\_\+level()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00885}{Non\+Refineable\+Bin\+Array\+::current\+\_\+min\+\_\+spiral\+\_\+level()}}, \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00060}{Dim}}, \mbox{\hyperlink{missing__masters_8cc_source_l00067}{oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::\+Doc\+\_\+full\+\_\+stats}}, \mbox{\hyperlink{missing__masters_8cc_source_l00063}{oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::\+Doc\+\_\+stats}}, \mbox{\hyperlink{missing__masters_8cc_source_l00059}{oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::\+Doc\+\_\+timings}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00448}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00068}{External\+\_\+element\+\_\+located}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00107}{oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00473}{oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00712}{Refineable\+Bin\+Array\+::first\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8h_source_l01067}{CGALSample\+Point\+Container\+::first\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00074}{Flat\+\_\+packed\+\_\+zetas\+\_\+not\+\_\+found\+\_\+locally}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{sample__point__container_8h_source_l00741}{Refineable\+Bin\+Array\+::initial\+\_\+last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8h_source_l01095}{CGALSample\+Point\+Container\+::initial\+\_\+last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta()}}, \mbox{\hyperlink{element__with__external__element_8cc_source_l00076}{oomph\+::\+Element\+With\+External\+Element\+::initialise\+\_\+external\+\_\+element\+\_\+storage()}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l01163}{oomph\+::\+Generalised\+Element\+::is\+\_\+halo()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00720}{Refineable\+Bin\+Array\+::last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8h_source_l01074}{CGALSample\+Point\+Container\+::last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta()}}, \mbox{\hyperlink{multi__domain_8cc_source_l02153}{locate\+\_\+zeta\+\_\+for\+\_\+local\+\_\+coordinates()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01797}{locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l00659}{Bin\+Array\+::max\+\_\+bin\+\_\+dimension()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00732}{Refineable\+Bin\+Array\+::multiplier\+\_\+for\+\_\+max\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8h_source_l01087}{CGALSample\+Point\+Container\+::multiplier\+\_\+for\+\_\+max\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00866}{Non\+Refineable\+Bin\+Array\+::n\+\_\+spiral\+\_\+chunk()}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{mesh_8h_source_l02222}{oomph\+::\+Mesh\+::nexternal\+\_\+halo\+\_\+element()}}, \mbox{\hyperlink{mesh_8h_source_l02308}{oomph\+::\+Mesh\+::nexternal\+\_\+halo\+\_\+node()}}, \mbox{\hyperlink{mesh_8h_source_l02267}{oomph\+::\+Mesh\+::nexternal\+\_\+haloed\+\_\+element()}}, \mbox{\hyperlink{mesh_8h_source_l02412}{oomph\+::\+Mesh\+::nexternal\+\_\+haloed\+\_\+node()}}, \mbox{\hyperlink{mesh_8h_source_l01878}{oomph\+::\+Mesh\+::nhalo\+\_\+node()}}, \mbox{\hyperlink{mesh_8h_source_l01985}{oomph\+::\+Mesh\+::nhaloed\+\_\+node()}}, \mbox{\hyperlink{mesh_8h_source_l00596}{oomph\+::\+Mesh\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l01830}{oomph\+::\+Mesh\+::nroot\+\_\+halo\+\_\+element()}}, \mbox{\hyperlink{mesh_8h_source_l01921}{oomph\+::\+Mesh\+::nroot\+\_\+haloed\+\_\+element()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}, \mbox{\hyperlink{classBinArray_a66fe7e379a53e3fee81ead7ef4045b40}{Bin\+Array\+::output\+\_\+bins()}}, \mbox{\hyperlink{problem_8h_source_l02178}{oomph\+::\+Problem\+::problem\+\_\+has\+\_\+been\+\_\+distributed()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{multi__domain_8cc_source_l00264}{send\+\_\+and\+\_\+receive\+\_\+located\+\_\+info()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00177}{send\+\_\+and\+\_\+receive\+\_\+missing\+\_\+zetas()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l01820}{Refineable\+Bin\+Array\+::total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+computed\+\_\+recursively()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l03594}{CGALSample\+Point\+Container\+::total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+computed\+\_\+recursively()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00142}{Use\+\_\+bulk\+\_\+element\+\_\+as\+\_\+external}}, \mbox{\hyperlink{sample__point__parameters_8h_source_l00045}{oomph\+::\+Use\+CGALSample\+Point\+Container}}, \mbox{\hyperlink{sample__point__parameters_8h_source_l00042}{oomph\+::\+Use\+Non\+Refineable\+Bin\+Array}}, and \mbox{\hyperlink{sample__point__parameters_8h_source_l00041}{oomph\+::\+Use\+Refineable\+Bin\+Array}}.
+References Accept\+\_\+failed\+\_\+locate\+\_\+zeta\+\_\+in\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction, clean\+\_\+up(), oomph\+::\+Problem\+::communicator\+\_\+pt(), Non\+Refineable\+Bin\+Array\+::current\+\_\+max\+\_\+spiral\+\_\+level(), Non\+Refineable\+Bin\+Array\+::current\+\_\+min\+\_\+spiral\+\_\+level(), oomph\+::\+Finite\+Element\+::dim(), Dim, oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::\+Doc\+\_\+full\+\_\+stats, oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::\+Doc\+\_\+stats, oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::\+Doc\+\_\+timings, e, oomph\+::\+Mesh\+::element\+\_\+pt(), External\+\_\+element\+\_\+located, oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+pt(), oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), Refineable\+Bin\+Array\+::first\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta(), CGALSample\+Point\+Container\+::first\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta(), Flat\+\_\+packed\+\_\+zetas\+\_\+not\+\_\+found\+\_\+locally, i, Refineable\+Bin\+Array\+::initial\+\_\+last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta(), CGALSample\+Point\+Container\+::initial\+\_\+last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta(), oomph\+::\+Element\+With\+External\+Element\+::initialise\+\_\+external\+\_\+element\+\_\+storage(), oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Generalised\+Element\+::is\+\_\+halo(), oomph\+::\+Integral\+::knot(), Refineable\+Bin\+Array\+::last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta(), CGALSample\+Point\+Container\+::last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta(), locate\+\_\+zeta\+\_\+for\+\_\+local\+\_\+coordinates(), locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates(), Bin\+Array\+::max\+\_\+bin\+\_\+dimension(), Refineable\+Bin\+Array\+::multiplier\+\_\+for\+\_\+max\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta(), CGALSample\+Point\+Container\+::multiplier\+\_\+for\+\_\+max\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta(), Non\+Refineable\+Bin\+Array\+::n\+\_\+spiral\+\_\+chunk(), oomph\+::\+Node\+::ndim(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Mesh\+::nexternal\+\_\+halo\+\_\+element(), oomph\+::\+Mesh\+::nexternal\+\_\+halo\+\_\+node(), oomph\+::\+Mesh\+::nexternal\+\_\+haloed\+\_\+element(), oomph\+::\+Mesh\+::nexternal\+\_\+haloed\+\_\+node(), oomph\+::\+Mesh\+::nhalo\+\_\+node(), oomph\+::\+Mesh\+::nhaloed\+\_\+node(), oomph\+::\+Mesh\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Mesh\+::nroot\+\_\+halo\+\_\+element(), oomph\+::\+Mesh\+::nroot\+\_\+haloed\+\_\+element(), oomph\+::\+Integral\+::nweight(), oomph\+::oomph\+\_\+info, oomph\+::\+Finite\+Element\+::output(), Bin\+Array\+::output\+\_\+bins(), oomph\+::\+Problem\+::problem\+\_\+has\+\_\+been\+\_\+distributed(), s, send\+\_\+and\+\_\+receive\+\_\+located\+\_\+info(), send\+\_\+and\+\_\+receive\+\_\+missing\+\_\+zetas(), t, oomph\+::\+Timing\+Helpers\+::timer(), Refineable\+Bin\+Array\+::total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+computed\+\_\+recursively(), CGALSample\+Point\+Container\+::total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+computed\+\_\+recursively(), Use\+\_\+bulk\+\_\+element\+\_\+as\+\_\+external, oomph\+::\+Use\+CGALSample\+Point\+Container, oomph\+::\+Use\+Non\+Refineable\+Bin\+Array, and oomph\+::\+Use\+Refineable\+Bin\+Array.
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_ae63441bb68e6512082f1248c65f6208d}\label{namespaceoomph_1_1Multi__domain__functions_ae63441bb68e6512082f1248c65f6208d}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!aux\_setup\_multi\_domain\_interaction@{aux\_setup\_multi\_domain\_interaction}}
@@ -300,7 +300,7 @@ Auxiliary helper function.
 
 This routine calls the locate\+\_\+zeta routine (simultaneously on each processor for each individual processor\textquotesingle{}s element set if necessary) and sets up the external (halo) element and node storage as necessary. The locate\+\_\+zeta procedure here works for all multi-\/domain problems where either two meshes occupy the same physical space but have differing element types (e.\+g. a Boussinesq convection problem where Advection\+Diffusion elements interact with Navier-\/\+Stokes type elements) or two meshes interact along some boundary of the external mesh, represented by a \char`\"{}face mesh\char`\"{}, such as an FSI problem. 
 
-Definition at line \mbox{\hyperlink{multi__domain_8template_8cc_source_l00485}{485}} of file \mbox{\hyperlink{multi__domain_8template_8cc_source}{multi\+\_\+domain.\+template.\+cc}}.
+Definition at line 485 of file multi\+\_\+domain.\+template.\+cc.
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a45a7960bff85287284bea3939dcda5c2}\label{namespaceoomph_1_1Multi__domain__functions_a45a7960bff85287284bea3939dcda5c2}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!clean\_up@{clean\_up}}
@@ -314,15 +314,15 @@ Helper function that clears all the information used during the external storage
 
 Helper function that clears all the intermediate information used during the external storage creation at the end of the procedure. 
 
-Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l02413}{2413}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+Definition at line 2413 of file multi\+\_\+domain.\+cc.
 
 
 
-References \mbox{\hyperlink{multi__domain_8cc_source_l00068}{External\+\_\+element\+\_\+located}}, \mbox{\hyperlink{multi__domain_8cc_source_l00106}{Flat\+\_\+packed\+\_\+doubles}}, \mbox{\hyperlink{multi__domain_8cc_source_l00102}{Flat\+\_\+packed\+\_\+located\+\_\+coordinates}}, \mbox{\hyperlink{multi__domain_8cc_source_l00118}{Flat\+\_\+packed\+\_\+unsigneds}}, \mbox{\hyperlink{multi__domain_8cc_source_l00074}{Flat\+\_\+packed\+\_\+zetas\+\_\+not\+\_\+found\+\_\+locally}}, \mbox{\hyperlink{multi__domain_8cc_source_l00098}{Located\+\_\+element\+\_\+status}}, \mbox{\hyperlink{multi__domain_8cc_source_l00091}{Proc\+\_\+id\+\_\+plus\+\_\+one\+\_\+of\+\_\+external\+\_\+element}}, and \mbox{\hyperlink{multi__domain_8cc_source_l00082}{Received\+\_\+flat\+\_\+packed\+\_\+zetas\+\_\+to\+\_\+be\+\_\+found}}.
+References External\+\_\+element\+\_\+located, Flat\+\_\+packed\+\_\+doubles, Flat\+\_\+packed\+\_\+located\+\_\+coordinates, Flat\+\_\+packed\+\_\+unsigneds, Flat\+\_\+packed\+\_\+zetas\+\_\+not\+\_\+found\+\_\+locally, Located\+\_\+element\+\_\+status, Proc\+\_\+id\+\_\+plus\+\_\+one\+\_\+of\+\_\+external\+\_\+element, and Received\+\_\+flat\+\_\+packed\+\_\+zetas\+\_\+to\+\_\+be\+\_\+found.
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l00524}{aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}.
+Referenced by aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction().
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_aa50dde1349bfc2809a8fb5c1bb971b0b}\label{namespaceoomph_1_1Multi__domain__functions_aa50dde1349bfc2809a8fb5c1bb971b0b}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!construct\_new\_external\_halo\_master\_node\_helper@{construct\_new\_external\_halo\_master\_node\_helper}}
@@ -341,11 +341,11 @@ Helper function which constructs a new external halo master node with the requir
 
 Now call update\+\_\+node\+\_\+update
 
-Definition at line \mbox{\hyperlink{multi__domain_8template_8cc_source_l02068}{2068}} of file \mbox{\hyperlink{multi__domain_8template_8cc_source}{multi\+\_\+domain.\+template.\+cc}}.
+Definition at line 2068 of file multi\+\_\+domain.\+template.\+cc.
 
 
 
-References \mbox{\hyperlink{mesh_8cc_source_l00243}{oomph\+::\+Mesh\+::add\+\_\+boundary\+\_\+node()}}, \mbox{\hyperlink{mesh_8h_source_l02259}{oomph\+::\+Mesh\+::add\+\_\+external\+\_\+halo\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l02368}{oomph\+::\+Mesh\+::add\+\_\+external\+\_\+halo\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00280}{oomph\+::\+Algebraic\+Node\+::add\+\_\+node\+\_\+update\+\_\+info()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00112}{Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+doubles}}, \mbox{\hyperlink{multi__domain_8cc_source_l00134}{Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+unsigneds}}, \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{mesh_8h_source_l02251}{oomph\+::\+Mesh\+::external\+\_\+halo\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00106}{Flat\+\_\+packed\+\_\+doubles}}, \mbox{\hyperlink{multi__domain_8cc_source_l00118}{Flat\+\_\+packed\+\_\+unsigneds}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00835}{oomph\+::\+Algebraic\+Mesh\+::geom\+\_\+object\+\_\+list\+\_\+pt()}}, \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00516}{oomph\+::\+Macro\+Element\+Node\+Update\+Mesh\+::geom\+\_\+object\+\_\+vector\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l02046}{oomph\+::\+Boundary\+Node\+Base\+::index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l01842}{oomph\+::\+Finite\+Element\+::local\+\_\+coordinate\+\_\+of\+\_\+node()}}, \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00376}{oomph\+::\+Macro\+Element\+Node\+Update\+Mesh\+::macro\+\_\+domain\+\_\+pt()}}, \mbox{\hyperlink{domain_8h_source_l00116}{oomph\+::\+Domain\+::macro\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00101}{oomph\+::\+Macro\+Element\+Node\+Update\+Node\+::node\+\_\+update\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{Qelements_8h_source_l00186}{oomph\+::\+QElement\+Base\+::s\+\_\+macro\+\_\+ll()}}, \mbox{\hyperlink{Qelements_8h_source_l00202}{oomph\+::\+QElement\+Base\+::s\+\_\+macro\+\_\+ur()}}, \mbox{\hyperlink{elements_8h_source_l01872}{oomph\+::\+Finite\+Element\+::set\+\_\+macro\+\_\+elem\+\_\+pt()}}, \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00161}{oomph\+::\+Macro\+Element\+Node\+Update\+Node\+::set\+\_\+node\+\_\+update\+\_\+info()}}, \mbox{\hyperlink{nodes_8h_source_l00271}{oomph\+::\+Data\+::set\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{problem_8h_source_l01524}{oomph\+::\+Problem\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1AlgebraicMesh_a6c6a35ae2be6e2766f5b80d85693c1ce}{oomph\+::\+Algebraic\+Mesh\+::update\+\_\+node\+\_\+update()}}, \mbox{\hyperlink{nodes_8h_source_l01765}{oomph\+::\+Solid\+Node\+::variable\+\_\+position\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
+References oomph\+::\+Mesh\+::add\+\_\+boundary\+\_\+node(), oomph\+::\+Mesh\+::add\+\_\+external\+\_\+halo\+\_\+element\+\_\+pt(), oomph\+::\+Mesh\+::add\+\_\+external\+\_\+halo\+\_\+node\+\_\+pt(), oomph\+::\+Algebraic\+Node\+::add\+\_\+node\+\_\+update\+\_\+info(), Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+doubles, Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+unsigneds, oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Mesh\+::external\+\_\+halo\+\_\+element\+\_\+pt(), Flat\+\_\+packed\+\_\+doubles, Flat\+\_\+packed\+\_\+unsigneds, oomph\+::\+Algebraic\+Mesh\+::geom\+\_\+object\+\_\+list\+\_\+pt(), oomph\+::\+Macro\+Element\+Node\+Update\+Mesh\+::geom\+\_\+object\+\_\+vector\+\_\+pt(), i, oomph\+::\+Boundary\+Node\+Base\+::index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt(), oomph\+::\+Finite\+Element\+::local\+\_\+coordinate\+\_\+of\+\_\+node(), oomph\+::\+Macro\+Element\+Node\+Update\+Mesh\+::macro\+\_\+domain\+\_\+pt(), oomph\+::\+Domain\+::macro\+\_\+element\+\_\+pt(), oomph\+::\+Node\+::ndim(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Macro\+Element\+Node\+Update\+Node\+::node\+\_\+update\+\_\+element\+\_\+pt(), oomph\+::\+Time\+Stepper\+::ntstorage(), oomph\+::\+Data\+::nvalue(), oomph\+::oomph\+\_\+info, oomph\+::\+QElement\+Base\+::s\+\_\+macro\+\_\+ll(), oomph\+::\+QElement\+Base\+::s\+\_\+macro\+\_\+ur(), oomph\+::\+Finite\+Element\+::set\+\_\+macro\+\_\+elem\+\_\+pt(), oomph\+::\+Macro\+Element\+Node\+Update\+Node\+::set\+\_\+node\+\_\+update\+\_\+info(), oomph\+::\+Data\+::set\+\_\+value(), t, oomph\+::\+Problem\+::time\+\_\+stepper\+\_\+pt(), oomph\+::\+Algebraic\+Mesh\+::update\+\_\+node\+\_\+update(), oomph\+::\+Solid\+Node\+::variable\+\_\+position\+\_\+pt(), and oomph\+::\+Node\+::x().
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_aa0a1707ca80a12f948616e016a1ed191}\label{namespaceoomph_1_1Multi__domain__functions_aa0a1707ca80a12f948616e016a1ed191}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!construct\_new\_external\_halo\_node\_helper@{construct\_new\_external\_halo\_node\_helper}}
@@ -365,15 +365,15 @@ For the received update\+\_\+id, ref\+\_\+value, geom\+\_\+object call add\+\_\+
 
 Now call update\+\_\+node\+\_\+update
 
-Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l01452}{1452}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+Definition at line 1452 of file multi\+\_\+domain.\+cc.
 
 
 
-References \mbox{\hyperlink{mesh_8cc_source_l00243}{oomph\+::\+Mesh\+::add\+\_\+boundary\+\_\+node()}}, \mbox{\hyperlink{mesh_8h_source_l02368}{oomph\+::\+Mesh\+::add\+\_\+external\+\_\+halo\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00280}{oomph\+::\+Algebraic\+Node\+::add\+\_\+node\+\_\+update\+\_\+info()}}, \mbox{\hyperlink{elements_8h_source_l02538}{oomph\+::\+Finite\+Element\+::construct\+\_\+boundary\+\_\+node()}}, \mbox{\hyperlink{elements_8h_source_l02509}{oomph\+::\+Finite\+Element\+::construct\+\_\+node()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00112}{Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+doubles}}, \mbox{\hyperlink{multi__domain_8cc_source_l00134}{Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+unsigneds}}, \mbox{\hyperlink{multi__domain_8cc_source_l00106}{Flat\+\_\+packed\+\_\+doubles}}, \mbox{\hyperlink{multi__domain_8cc_source_l00118}{Flat\+\_\+packed\+\_\+unsigneds}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00835}{oomph\+::\+Algebraic\+Mesh\+::geom\+\_\+object\+\_\+list\+\_\+pt()}}, \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00516}{oomph\+::\+Macro\+Element\+Node\+Update\+Mesh\+::geom\+\_\+object\+\_\+vector\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l02046}{oomph\+::\+Boundary\+Node\+Base\+::index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l01842}{oomph\+::\+Finite\+Element\+::local\+\_\+coordinate\+\_\+of\+\_\+node()}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{nodes_8cc_source_l02167}{oomph\+::\+Node\+::resize()}}, \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00161}{oomph\+::\+Macro\+Element\+Node\+Update\+Node\+::set\+\_\+node\+\_\+update\+\_\+info()}}, \mbox{\hyperlink{nodes_8h_source_l00271}{oomph\+::\+Data\+::set\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{problem_8h_source_l01524}{oomph\+::\+Problem\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1AlgebraicMesh_a6c6a35ae2be6e2766f5b80d85693c1ce}{oomph\+::\+Algebraic\+Mesh\+::update\+\_\+node\+\_\+update()}}, \mbox{\hyperlink{nodes_8h_source_l01765}{oomph\+::\+Solid\+Node\+::variable\+\_\+position\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
+References oomph\+::\+Mesh\+::add\+\_\+boundary\+\_\+node(), oomph\+::\+Mesh\+::add\+\_\+external\+\_\+halo\+\_\+node\+\_\+pt(), oomph\+::\+Algebraic\+Node\+::add\+\_\+node\+\_\+update\+\_\+info(), oomph\+::\+Finite\+Element\+::construct\+\_\+boundary\+\_\+node(), oomph\+::\+Finite\+Element\+::construct\+\_\+node(), Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+doubles, Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+unsigneds, Flat\+\_\+packed\+\_\+doubles, Flat\+\_\+packed\+\_\+unsigneds, oomph\+::\+Algebraic\+Mesh\+::geom\+\_\+object\+\_\+list\+\_\+pt(), oomph\+::\+Macro\+Element\+Node\+Update\+Mesh\+::geom\+\_\+object\+\_\+vector\+\_\+pt(), i, oomph\+::\+Boundary\+Node\+Base\+::index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt(), oomph\+::\+Finite\+Element\+::local\+\_\+coordinate\+\_\+of\+\_\+node(), oomph\+::\+Node\+::ndim(), oomph\+::\+Time\+Stepper\+::ntstorage(), oomph\+::\+Data\+::nvalue(), oomph\+::oomph\+\_\+info, oomph\+::\+Node\+::resize(), oomph\+::\+Macro\+Element\+Node\+Update\+Node\+::set\+\_\+node\+\_\+update\+\_\+info(), oomph\+::\+Data\+::set\+\_\+value(), t, oomph\+::\+Problem\+::time\+\_\+stepper\+\_\+pt(), oomph\+::\+Algebraic\+Mesh\+::update\+\_\+node\+\_\+update(), oomph\+::\+Solid\+Node\+::variable\+\_\+position\+\_\+pt(), and oomph\+::\+Node\+::x().
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain_8cc_source_l01404}{add\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper()}}.
+Referenced by add\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper().
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_aa653ac4cf76e54d98ab9f10a499523d1}\label{namespaceoomph_1_1Multi__domain__functions_aa653ac4cf76e54d98ab9f10a499523d1}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!create\_external\_halo\_elements@{create\_external\_halo\_elements}}
@@ -388,17 +388,17 @@ Create external (halo) elements on the loop process based on the information rec
 
 Creates external (halo) elements on the loop process based on the information received from each locate\+\_\+zeta call on other processes. vector based version. 
 
-Definition at line \mbox{\hyperlink{multi__domain_8template_8cc_source_l01677}{1677}} of file \mbox{\hyperlink{multi__domain_8template_8cc_source}{multi\+\_\+domain.\+template.\+cc}}.
+Definition at line 1677 of file multi\+\_\+domain.\+template.\+cc.
 
 
 
-References \mbox{\hyperlink{mesh_8h_source_l02259}{oomph\+::\+Mesh\+::add\+\_\+external\+\_\+halo\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l01246}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00112}{Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+doubles}}, \mbox{\hyperlink{multi__domain_8cc_source_l00134}{Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+unsigneds}}, \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00136}{oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+local\+\_\+coord()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00068}{External\+\_\+element\+\_\+located}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00107}{oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l02251}{oomph\+::\+Mesh\+::external\+\_\+halo\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00106}{Flat\+\_\+packed\+\_\+doubles}}, \mbox{\hyperlink{multi__domain_8cc_source_l00102}{Flat\+\_\+packed\+\_\+located\+\_\+coordinates}}, \mbox{\hyperlink{multi__domain_8cc_source_l00118}{Flat\+\_\+packed\+\_\+unsigneds}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l01163}{oomph\+::\+Generalised\+Element\+::is\+\_\+halo()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00098}{Located\+\_\+element\+\_\+status}}, \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00376}{oomph\+::\+Macro\+Element\+Node\+Update\+Mesh\+::macro\+\_\+domain\+\_\+pt()}}, \mbox{\hyperlink{domain_8h_source_l00116}{oomph\+::\+Domain\+::macro\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{multi__domain_8h_source_l00149}{New}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{multi__domain_8cc_source_l00091}{Proc\+\_\+id\+\_\+plus\+\_\+one\+\_\+of\+\_\+external\+\_\+element}}, \mbox{\hyperlink{Qelements_8h_source_l00186}{oomph\+::\+QElement\+Base\+::s\+\_\+macro\+\_\+ll()}}, \mbox{\hyperlink{Qelements_8h_source_l00202}{oomph\+::\+QElement\+Base\+::s\+\_\+macro\+\_\+ur()}}, and \mbox{\hyperlink{elements_8h_source_l01872}{oomph\+::\+Finite\+Element\+::set\+\_\+macro\+\_\+elem\+\_\+pt()}}.
+References oomph\+::\+Mesh\+::add\+\_\+external\+\_\+halo\+\_\+element\+\_\+pt(), oomph\+::\+Problem\+::communicator\+\_\+pt(), Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+doubles, Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+unsigneds, oomph\+::\+Finite\+Element\+::dim(), e, oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+local\+\_\+coord(), External\+\_\+element\+\_\+located, oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+pt(), oomph\+::\+Mesh\+::external\+\_\+halo\+\_\+element\+\_\+pt(), Flat\+\_\+packed\+\_\+doubles, Flat\+\_\+packed\+\_\+located\+\_\+coordinates, Flat\+\_\+packed\+\_\+unsigneds, i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Generalised\+Element\+::is\+\_\+halo(), Located\+\_\+element\+\_\+status, oomph\+::\+Macro\+Element\+Node\+Update\+Mesh\+::macro\+\_\+domain\+\_\+pt(), oomph\+::\+Domain\+::macro\+\_\+element\+\_\+pt(), New, oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Integral\+::nweight(), oomph\+::oomph\+\_\+info, Proc\+\_\+id\+\_\+plus\+\_\+one\+\_\+of\+\_\+external\+\_\+element, oomph\+::\+QElement\+Base\+::s\+\_\+macro\+\_\+ll(), oomph\+::\+QElement\+Base\+::s\+\_\+macro\+\_\+ur(), and oomph\+::\+Finite\+Element\+::set\+\_\+macro\+\_\+elem\+\_\+pt().
 
-\mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_aee712f5dc126a26cd46b6f717aa1d6c2}\label{namespaceoomph_1_1Multi__domain__functions_aee712f5dc126a26cd46b6f717aa1d6c2}} 
+\mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_ad9baf8c647dbd10164c28f12cbb04f85}\label{namespaceoomph_1_1Multi__domain__functions_ad9baf8c647dbd10164c28f12cbb04f85}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!first\_closer\_than\_second@{first\_closer\_than\_second}}
 \index{first\_closer\_than\_second@{first\_closer\_than\_second}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
 \doxysubsubsection{\texorpdfstring{first\_closer\_than\_second()}{first\_closer\_than\_second()}}
-{\footnotesize\ttfamily bool oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::first\+\_\+closer\+\_\+than\+\_\+second (\begin{DoxyParamCaption}\item[{const std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&}]{p1,  }\item[{const std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&}]{p2 }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily bool oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::first\+\_\+closer\+\_\+than\+\_\+second (\begin{DoxyParamCaption}\item[{const std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&}]{p1,  }\item[{const std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&}]{p2 }\end{DoxyParamCaption})}
 
 
 
@@ -406,11 +406,11 @@ Comparison function for sorting entries in bin\+: Returns true if point identifi
 
 
 
-Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l02433}{2433}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+Definition at line 2433 of file multi\+\_\+domain.\+cc.
 
 
 
-References \mbox{\hyperlink{multi__domain_8cc_source_l00060}{Dim}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l04675}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+zeta()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{multi__domain_8cc_source_l02427}{Zeta\+\_\+coords\+\_\+for\+\_\+further\+\_\+away\+\_\+comparison}}.
+References Dim, i, oomph\+::\+Finite\+Element\+::interpolated\+\_\+zeta(), s, and Zeta\+\_\+coords\+\_\+for\+\_\+further\+\_\+away\+\_\+comparison.
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a81f7a581bfb6abfcce009546b80b9898}\label{namespaceoomph_1_1Multi__domain__functions_a81f7a581bfb6abfcce009546b80b9898}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!get\_dim\_helper@{get\_dim\_helper}}
@@ -424,15 +424,15 @@ Helper function that computes the dimension of the elements within each of the s
 
 Helper function that computes the dimension of the elements within each of the specified meshes (and checks they are the same) Stores result in Dim. 
 
-Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l02343}{2343}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+Definition at line 2343 of file multi\+\_\+domain.\+cc.
 
 
 
-References \mbox{\hyperlink{problem_8h_source_l01246}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00060}{Dim}}, \mbox{\hyperlink{mesh_8h_source_l00448}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, and \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}.
+References oomph\+::\+Problem\+::communicator\+\_\+pt(), Dim, oomph\+::\+Mesh\+::element\+\_\+pt(), and oomph\+::\+Mesh\+::nelement().
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l00280}{setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}.
+Referenced by setup\+\_\+multi\+\_\+domain\+\_\+interaction().
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a3b08cda68388e72b4159bbc0fa0826ee}\label{namespaceoomph_1_1Multi__domain__functions_a3b08cda68388e72b4159bbc0fa0826ee}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!get\_required\_master\_nodal\_information\_helper@{get\_required\_master\_nodal\_information\_helper}}
@@ -446,15 +446,15 @@ Helper function to get the required master nodal information from an external ha
 
 Helper function to get the required master nodal information from an external haloed master node so that a fully-\/functional external halo master node (and possible element) can be created on the receiving proc. 
 
-Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l01010}{1010}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+Definition at line 1010 of file multi\+\_\+domain.\+cc.
 
 
 
-References \mbox{\hyperlink{mesh_8cc_source_l09475}{oomph\+::\+Mesh\+::add\+\_\+external\+\_\+haloed\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00557}{add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+to\+\_\+storage()}}, \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00106}{Flat\+\_\+packed\+\_\+doubles}}, \mbox{\hyperlink{multi__domain_8cc_source_l00118}{Flat\+\_\+packed\+\_\+unsigneds}}, \mbox{\hyperlink{multi__domain_8cc_source_l00125}{Flat\+\_\+packed\+\_\+unsigneds\+\_\+string}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00835}{oomph\+::\+Algebraic\+Mesh\+::geom\+\_\+object\+\_\+list\+\_\+pt()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00229}{oomph\+::\+Algebraic\+Node\+::geom\+\_\+object\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l02046}{oomph\+::\+Boundary\+Node\+Base\+::index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l01373}{oomph\+::\+Node\+::is\+\_\+on\+\_\+boundary()}}, \mbox{\hyperlink{elements_8h_source_l01878}{oomph\+::\+Finite\+Element\+::macro\+\_\+elem\+\_\+pt()}}, \mbox{\hyperlink{macro__element_8h_source_l00223}{oomph\+::\+Macro\+Element\+::macro\+\_\+element\+\_\+number()}}, \mbox{\hyperlink{mesh_8h_source_l00827}{oomph\+::\+Mesh\+::nboundary()}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{mesh_8h_source_l02267}{oomph\+::\+Mesh\+::nexternal\+\_\+haloed\+\_\+element()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00184}{oomph\+::\+Algebraic\+Node\+::ngeom\+\_\+object()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00829}{oomph\+::\+Algebraic\+Mesh\+::ngeom\+\_\+object\+\_\+list\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l01870}{oomph\+::\+Solid\+Node\+::nlagrangian()}}, \mbox{\hyperlink{nodes_8h_source_l01877}{oomph\+::\+Solid\+Node\+::nlagrangian\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00101}{oomph\+::\+Macro\+Element\+Node\+Update\+Node\+::node\+\_\+update\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00146}{oomph\+::\+Algebraic\+Node\+::node\+\_\+update\+\_\+fct\+\_\+id()}}, \mbox{\hyperlink{nodes_8h_source_l01016}{oomph\+::\+Node\+::nposition\+\_\+type()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00235}{oomph\+::\+Algebraic\+Node\+::nref\+\_\+value()}}, \mbox{\hyperlink{problem_8h_source_l01680}{oomph\+::\+Problem\+::ntime\+\_\+stepper()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00267}{oomph\+::\+Algebraic\+Node\+::ref\+\_\+value()}}, \mbox{\hyperlink{Qelements_8h_source_l00186}{oomph\+::\+QElement\+Base\+::s\+\_\+macro\+\_\+ll()}}, \mbox{\hyperlink{Qelements_8h_source_l00202}{oomph\+::\+QElement\+Base\+::s\+\_\+macro\+\_\+ur()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{nodes_8h_source_l00238}{oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l01524}{oomph\+::\+Problem\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00293}{oomph\+::\+Data\+::value()}}, \mbox{\hyperlink{nodes_8cc_source_l02408}{oomph\+::\+Node\+::value()}}, \mbox{\hyperlink{nodes_8h_source_l01765}{oomph\+::\+Solid\+Node\+::variable\+\_\+position\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
+References oomph\+::\+Mesh\+::add\+\_\+external\+\_\+haloed\+\_\+element\+\_\+pt(), add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+to\+\_\+storage(), oomph\+::\+Finite\+Element\+::dim(), Flat\+\_\+packed\+\_\+doubles, Flat\+\_\+packed\+\_\+unsigneds, Flat\+\_\+packed\+\_\+unsigneds\+\_\+string, oomph\+::\+Algebraic\+Mesh\+::geom\+\_\+object\+\_\+list\+\_\+pt(), oomph\+::\+Algebraic\+Node\+::geom\+\_\+object\+\_\+pt(), i, oomph\+::\+Boundary\+Node\+Base\+::index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt(), oomph\+::\+Node\+::is\+\_\+on\+\_\+boundary(), oomph\+::\+Finite\+Element\+::macro\+\_\+elem\+\_\+pt(), oomph\+::\+Macro\+Element\+::macro\+\_\+element\+\_\+number(), oomph\+::\+Mesh\+::nboundary(), oomph\+::\+Node\+::ndim(), oomph\+::\+Mesh\+::nexternal\+\_\+haloed\+\_\+element(), oomph\+::\+Algebraic\+Node\+::ngeom\+\_\+object(), oomph\+::\+Algebraic\+Mesh\+::ngeom\+\_\+object\+\_\+list\+\_\+pt(), oomph\+::\+Solid\+Node\+::nlagrangian(), oomph\+::\+Solid\+Node\+::nlagrangian\+\_\+type(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Macro\+Element\+Node\+Update\+Node\+::node\+\_\+update\+\_\+element\+\_\+pt(), oomph\+::\+Algebraic\+Node\+::node\+\_\+update\+\_\+fct\+\_\+id(), oomph\+::\+Node\+::nposition\+\_\+type(), oomph\+::\+Algebraic\+Node\+::nref\+\_\+value(), oomph\+::\+Problem\+::ntime\+\_\+stepper(), oomph\+::\+Time\+Stepper\+::ntstorage(), oomph\+::\+Data\+::nvalue(), oomph\+::\+Algebraic\+Node\+::ref\+\_\+value(), oomph\+::\+QElement\+Base\+::s\+\_\+macro\+\_\+ll(), oomph\+::\+QElement\+Base\+::s\+\_\+macro\+\_\+ur(), t, oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt(), oomph\+::\+Problem\+::time\+\_\+stepper\+\_\+pt(), oomph\+::\+Data\+::value(), oomph\+::\+Node\+::value(), oomph\+::\+Solid\+Node\+::variable\+\_\+position\+\_\+pt(), and oomph\+::\+Node\+::x().
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain_8cc_source_l00699}{add\+\_\+external\+\_\+haloed\+\_\+master\+\_\+node\+\_\+helper()}}.
+Referenced by add\+\_\+external\+\_\+haloed\+\_\+master\+\_\+node\+\_\+helper().
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_aaf7f6048aab50adfe33d24f8ff9f8390}\label{namespaceoomph_1_1Multi__domain__functions_aaf7f6048aab50adfe33d24f8ff9f8390}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!get\_required\_nodal\_information\_helper@{get\_required\_nodal\_information\_helper}}
@@ -468,15 +468,15 @@ Helper function to get the required nodal information from an external haloed no
 
 
 
-Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00754}{754}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+Definition at line 754 of file multi\+\_\+domain.\+cc.
 
 
 
-References \mbox{\hyperlink{multi__domain_8cc_source_l00106}{Flat\+\_\+packed\+\_\+doubles}}, \mbox{\hyperlink{multi__domain_8cc_source_l00118}{Flat\+\_\+packed\+\_\+unsigneds}}, \mbox{\hyperlink{multi__domain_8cc_source_l00125}{Flat\+\_\+packed\+\_\+unsigneds\+\_\+string}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00835}{oomph\+::\+Algebraic\+Mesh\+::geom\+\_\+object\+\_\+list\+\_\+pt()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00229}{oomph\+::\+Algebraic\+Node\+::geom\+\_\+object\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l02046}{oomph\+::\+Boundary\+Node\+Base\+::index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l01373}{oomph\+::\+Node\+::is\+\_\+on\+\_\+boundary()}}, \mbox{\hyperlink{mesh_8h_source_l00827}{oomph\+::\+Mesh\+::nboundary()}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00184}{oomph\+::\+Algebraic\+Node\+::ngeom\+\_\+object()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00829}{oomph\+::\+Algebraic\+Mesh\+::ngeom\+\_\+object\+\_\+list\+\_\+pt()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00146}{oomph\+::\+Algebraic\+Node\+::node\+\_\+update\+\_\+fct\+\_\+id()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00235}{oomph\+::\+Algebraic\+Node\+::nref\+\_\+value()}}, \mbox{\hyperlink{problem_8h_source_l01680}{oomph\+::\+Problem\+::ntime\+\_\+stepper()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00267}{oomph\+::\+Algebraic\+Node\+::ref\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{nodes_8h_source_l00238}{oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l01524}{oomph\+::\+Problem\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00293}{oomph\+::\+Data\+::value()}}, \mbox{\hyperlink{nodes_8cc_source_l02408}{oomph\+::\+Node\+::value()}}, \mbox{\hyperlink{nodes_8h_source_l01765}{oomph\+::\+Solid\+Node\+::variable\+\_\+position\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
+References Flat\+\_\+packed\+\_\+doubles, Flat\+\_\+packed\+\_\+unsigneds, Flat\+\_\+packed\+\_\+unsigneds\+\_\+string, oomph\+::\+Algebraic\+Mesh\+::geom\+\_\+object\+\_\+list\+\_\+pt(), oomph\+::\+Algebraic\+Node\+::geom\+\_\+object\+\_\+pt(), i, oomph\+::\+Boundary\+Node\+Base\+::index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt(), oomph\+::\+Node\+::is\+\_\+on\+\_\+boundary(), oomph\+::\+Mesh\+::nboundary(), oomph\+::\+Node\+::ndim(), oomph\+::\+Algebraic\+Node\+::ngeom\+\_\+object(), oomph\+::\+Algebraic\+Mesh\+::ngeom\+\_\+object\+\_\+list\+\_\+pt(), oomph\+::\+Algebraic\+Node\+::node\+\_\+update\+\_\+fct\+\_\+id(), oomph\+::\+Algebraic\+Node\+::nref\+\_\+value(), oomph\+::\+Problem\+::ntime\+\_\+stepper(), oomph\+::\+Time\+Stepper\+::ntstorage(), oomph\+::\+Data\+::nvalue(), oomph\+::\+Algebraic\+Node\+::ref\+\_\+value(), t, oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt(), oomph\+::\+Problem\+::time\+\_\+stepper\+\_\+pt(), oomph\+::\+Data\+::value(), oomph\+::\+Node\+::value(), oomph\+::\+Solid\+Node\+::variable\+\_\+position\+\_\+pt(), and oomph\+::\+Node\+::x().
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain_8cc_source_l00643}{add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+helper()}}.
+Referenced by add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+helper().
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a969b893c0f6f013c78076e4013c0f34c}\label{namespaceoomph_1_1Multi__domain__functions_a969b893c0f6f013c78076e4013c0f34c}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!locate\_zeta\_for\_local\_coordinates@{locate\_zeta\_for\_local\_coordinates}}
@@ -490,15 +490,15 @@ locate zeta for current set of \char`\"{}local\char`\"{} coordinates vector-\/ba
 
 Helper function to locate \char`\"{}local\char`\"{} zeta coordinates This is the vector-\/based version which operates simultaenously on the meshes contained in the Vectors. 
 
-Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l02153}{2153}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+Definition at line 2153 of file multi\+\_\+domain.\+cc.
 
 
 
-References \mbox{\hyperlink{multi__domain_8cc_source_l00149}{Allow\+\_\+use\+\_\+of\+\_\+halo\+\_\+elements\+\_\+as\+\_\+external\+\_\+elements}}, \mbox{\hyperlink{elements_8h_source_l04735}{oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00060}{Dim}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00136}{oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+local\+\_\+coord()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00068}{External\+\_\+element\+\_\+located}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00107}{oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00074}{Flat\+\_\+packed\+\_\+zetas\+\_\+not\+\_\+found\+\_\+locally}}, \mbox{\hyperlink{elements_8cc_source_l06384}{oomph\+::\+Face\+Element\+::get\+\_\+local\+\_\+coordinate\+\_\+in\+\_\+bulk()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8cc_source_l04675}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+zeta()}}, \mbox{\hyperlink{elements_8h_source_l01163}{oomph\+::\+Generalised\+Element\+::is\+\_\+halo()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, and \mbox{\hyperlink{multi__domain_8cc_source_l00142}{Use\+\_\+bulk\+\_\+element\+\_\+as\+\_\+external}}.
+References Allow\+\_\+use\+\_\+of\+\_\+halo\+\_\+elements\+\_\+as\+\_\+external\+\_\+elements, oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt(), oomph\+::\+Finite\+Element\+::dim(), Dim, e, oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+local\+\_\+coord(), External\+\_\+element\+\_\+located, oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+pt(), Flat\+\_\+packed\+\_\+zetas\+\_\+not\+\_\+found\+\_\+locally, oomph\+::\+Face\+Element\+::get\+\_\+local\+\_\+coordinate\+\_\+in\+\_\+bulk(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+zeta(), oomph\+::\+Generalised\+Element\+::is\+\_\+halo(), oomph\+::\+Integral\+::knot(), oomph\+::\+Integral\+::nweight(), and Use\+\_\+bulk\+\_\+element\+\_\+as\+\_\+external.
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l00524}{aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}.
+Referenced by aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction().
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_af094851b9ae730f6e8a37a793be05bc9}\label{namespaceoomph_1_1Multi__domain__functions_af094851b9ae730f6e8a37a793be05bc9}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!locate\_zeta\_for\_missing\_coordinates@{locate\_zeta\_for\_missing\_coordinates}}
@@ -512,15 +512,15 @@ Locate zeta for current set of missing coordinates; vector-\/based version.
 
 Helper function to locate these \char`\"{}missing\char`\"{} zeta coordinates. This is the vector-\/based function which operates simultaneously on the meshes contained in the vectors. 
 
-Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l01797}{1797}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+Definition at line 1797 of file multi\+\_\+domain.\+cc.
 
 
 
-References \mbox{\hyperlink{mesh_8cc_source_l09475}{oomph\+::\+Mesh\+::add\+\_\+external\+\_\+haloed\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00557}{add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+to\+\_\+storage()}}, \mbox{\hyperlink{elements_8h_source_l04735}{oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l01246}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00060}{Dim}}, \mbox{\hyperlink{multi__domain_8h_source_l00150}{Exists}}, \mbox{\hyperlink{multi__domain_8cc_source_l00106}{Flat\+\_\+packed\+\_\+doubles}}, \mbox{\hyperlink{multi__domain_8cc_source_l00102}{Flat\+\_\+packed\+\_\+located\+\_\+coordinates}}, \mbox{\hyperlink{multi__domain_8cc_source_l00118}{Flat\+\_\+packed\+\_\+unsigneds}}, \mbox{\hyperlink{multi__domain_8cc_source_l00125}{Flat\+\_\+packed\+\_\+unsigneds\+\_\+string}}, \mbox{\hyperlink{multi__domain_8cc_source_l00074}{Flat\+\_\+packed\+\_\+zetas\+\_\+not\+\_\+found\+\_\+locally}}, \mbox{\hyperlink{elements_8cc_source_l06384}{oomph\+::\+Face\+Element\+::get\+\_\+local\+\_\+coordinate\+\_\+in\+\_\+bulk()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01163}{oomph\+::\+Generalised\+Element\+::is\+\_\+halo()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00098}{Located\+\_\+element\+\_\+status}}, \mbox{\hyperlink{elements_8h_source_l01878}{oomph\+::\+Finite\+Element\+::macro\+\_\+elem\+\_\+pt()}}, \mbox{\hyperlink{macro__element_8h_source_l00223}{oomph\+::\+Macro\+Element\+::macro\+\_\+element\+\_\+number()}}, \mbox{\hyperlink{multi__domain_8h_source_l00149}{New}}, \mbox{\hyperlink{mesh_8h_source_l02267}{oomph\+::\+Mesh\+::nexternal\+\_\+haloed\+\_\+element()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{multi__domain_8h_source_l00151}{Not\+\_\+found}}, \mbox{\hyperlink{multi__domain_8cc_source_l00091}{Proc\+\_\+id\+\_\+plus\+\_\+one\+\_\+of\+\_\+external\+\_\+element}}, \mbox{\hyperlink{multi__domain_8cc_source_l00082}{Received\+\_\+flat\+\_\+packed\+\_\+zetas\+\_\+to\+\_\+be\+\_\+found}}, \mbox{\hyperlink{Qelements_8h_source_l00186}{oomph\+::\+QElement\+Base\+::s\+\_\+macro\+\_\+ll()}}, \mbox{\hyperlink{Qelements_8h_source_l00202}{oomph\+::\+QElement\+Base\+::s\+\_\+macro\+\_\+ur()}}, and \mbox{\hyperlink{multi__domain_8cc_source_l00142}{Use\+\_\+bulk\+\_\+element\+\_\+as\+\_\+external}}.
+References oomph\+::\+Mesh\+::add\+\_\+external\+\_\+haloed\+\_\+element\+\_\+pt(), add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+to\+\_\+storage(), oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt(), oomph\+::\+Problem\+::communicator\+\_\+pt(), oomph\+::\+Finite\+Element\+::dim(), Dim, Exists, Flat\+\_\+packed\+\_\+doubles, Flat\+\_\+packed\+\_\+located\+\_\+coordinates, Flat\+\_\+packed\+\_\+unsigneds, Flat\+\_\+packed\+\_\+unsigneds\+\_\+string, Flat\+\_\+packed\+\_\+zetas\+\_\+not\+\_\+found\+\_\+locally, oomph\+::\+Face\+Element\+::get\+\_\+local\+\_\+coordinate\+\_\+in\+\_\+bulk(), i, oomph\+::\+Generalised\+Element\+::is\+\_\+halo(), Located\+\_\+element\+\_\+status, oomph\+::\+Finite\+Element\+::macro\+\_\+elem\+\_\+pt(), oomph\+::\+Macro\+Element\+::macro\+\_\+element\+\_\+number(), New, oomph\+::\+Mesh\+::nexternal\+\_\+haloed\+\_\+element(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), Not\+\_\+found, Proc\+\_\+id\+\_\+plus\+\_\+one\+\_\+of\+\_\+external\+\_\+element, Received\+\_\+flat\+\_\+packed\+\_\+zetas\+\_\+to\+\_\+be\+\_\+found, oomph\+::\+QElement\+Base\+::s\+\_\+macro\+\_\+ll(), oomph\+::\+QElement\+Base\+::s\+\_\+macro\+\_\+ur(), and Use\+\_\+bulk\+\_\+element\+\_\+as\+\_\+external.
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l00524}{aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}.
+Referenced by aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction().
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a8eeb905c3ef62453b87a512e4c3eafdd}\label{namespaceoomph_1_1Multi__domain__functions_a8eeb905c3ef62453b87a512e4c3eafdd}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!recursively\_add\_masters\_of\_external\_halo\_node\_to\_storage@{recursively\_add\_masters\_of\_external\_halo\_node\_to\_storage}}
@@ -535,11 +535,11 @@ Recursively add masters of external halo nodes (and their masters, etc) based on
 
 
 
-Definition at line \mbox{\hyperlink{multi__domain_8template_8cc_source_l01959}{1959}} of file \mbox{\hyperlink{multi__domain_8template_8cc_source}{multi\+\_\+domain.\+template.\+cc}}.
+Definition at line 1959 of file multi\+\_\+domain.\+template.\+cc.
 
 
 
-References \mbox{\hyperlink{multi__domain_8cc_source_l00112}{Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+doubles}}, \mbox{\hyperlink{multi__domain_8cc_source_l00134}{Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+unsigneds}}, \mbox{\hyperlink{multi__domain_8cc_source_l00106}{Flat\+\_\+packed\+\_\+doubles}}, \mbox{\hyperlink{multi__domain_8cc_source_l00118}{Flat\+\_\+packed\+\_\+unsigneds}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{nodes_8cc_source_l02068}{oomph\+::\+Node\+::set\+\_\+hanging\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8cc_source_l01474}{oomph\+::\+Hang\+Info\+::set\+\_\+master\+\_\+node\+\_\+pt()}}.
+References Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+doubles, Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+unsigneds, Flat\+\_\+packed\+\_\+doubles, Flat\+\_\+packed\+\_\+unsigneds, oomph\+::oomph\+\_\+info, oomph\+::\+Node\+::set\+\_\+hanging\+\_\+pt(), and oomph\+::\+Hang\+Info\+::set\+\_\+master\+\_\+node\+\_\+pt().
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_abaafd14a3e78c1965c294797913b44bf}\label{namespaceoomph_1_1Multi__domain__functions_abaafd14a3e78c1965c294797913b44bf}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!recursively\_add\_masters\_of\_external\_haloed\_node@{recursively\_add\_masters\_of\_external\_haloed\_node}}
@@ -553,15 +553,15 @@ Recursively add any master nodes (and their master nodes etc) of external nodes.
 
 Recursively add any master nodes (and their master nodes etc) of external haloed nodes. 
 
-Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00577}{577}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+Definition at line 577 of file multi\+\_\+domain.\+cc.
 
 
 
-References \mbox{\hyperlink{multi__domain_8cc_source_l00699}{add\+\_\+external\+\_\+haloed\+\_\+master\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00106}{Flat\+\_\+packed\+\_\+doubles}}, \mbox{\hyperlink{multi__domain_8cc_source_l00118}{Flat\+\_\+packed\+\_\+unsigneds}}, \mbox{\hyperlink{multi__domain_8cc_source_l00125}{Flat\+\_\+packed\+\_\+unsigneds\+\_\+string}}, \mbox{\hyperlink{nodes_8h_source_l01228}{oomph\+::\+Node\+::hanging\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l01285}{oomph\+::\+Node\+::is\+\_\+hanging()}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00808}{oomph\+::\+Hang\+Info\+::master\+\_\+weight()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, and \mbox{\hyperlink{multi__domain_8cc_source_l00577}{recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node()}}.
+References add\+\_\+external\+\_\+haloed\+\_\+master\+\_\+node\+\_\+helper(), Flat\+\_\+packed\+\_\+doubles, Flat\+\_\+packed\+\_\+unsigneds, Flat\+\_\+packed\+\_\+unsigneds\+\_\+string, oomph\+::\+Node\+::hanging\+\_\+pt(), oomph\+::\+Node\+::is\+\_\+hanging(), oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt(), oomph\+::\+Hang\+Info\+::master\+\_\+weight(), and oomph\+::\+Hang\+Info\+::nmaster().
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain_8cc_source_l00557}{add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+to\+\_\+storage()}}, and \mbox{\hyperlink{multi__domain_8cc_source_l00577}{recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node()}}.
+Referenced by add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+to\+\_\+storage().
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a131c53d0a1557066df4719d24796b3a8}\label{namespaceoomph_1_1Multi__domain__functions_a131c53d0a1557066df4719d24796b3a8}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!send\_and\_receive\_located\_info@{send\_and\_receive\_located\_info}}
@@ -575,15 +575,15 @@ Send location information from current process; Received location information fr
 
 Helper function to send back any located information. 
 
-Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00264}{264}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+Definition at line 264 of file multi\+\_\+domain.\+cc.
 
 
 
-References \mbox{\hyperlink{problem_8h_source_l01246}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00060}{Dim}}, \mbox{\hyperlink{multi__domain_8cc_source_l00106}{Flat\+\_\+packed\+\_\+doubles}}, \mbox{\hyperlink{multi__domain_8cc_source_l00102}{Flat\+\_\+packed\+\_\+located\+\_\+coordinates}}, \mbox{\hyperlink{multi__domain_8cc_source_l00118}{Flat\+\_\+packed\+\_\+unsigneds}}, \mbox{\hyperlink{multi__domain_8cc_source_l00125}{Flat\+\_\+packed\+\_\+unsigneds\+\_\+string}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{multi__domain_8cc_source_l00098}{Located\+\_\+element\+\_\+status}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{multi__domain_8cc_source_l00091}{Proc\+\_\+id\+\_\+plus\+\_\+one\+\_\+of\+\_\+external\+\_\+element}}, and \mbox{\hyperlink{multi__domain_8cc_source_l00082}{Received\+\_\+flat\+\_\+packed\+\_\+zetas\+\_\+to\+\_\+be\+\_\+found}}.
+References oomph\+::\+Problem\+::communicator\+\_\+pt(), Dim, Flat\+\_\+packed\+\_\+doubles, Flat\+\_\+packed\+\_\+located\+\_\+coordinates, Flat\+\_\+packed\+\_\+unsigneds, Flat\+\_\+packed\+\_\+unsigneds\+\_\+string, i, Located\+\_\+element\+\_\+status, oomph\+::oomph\+\_\+info, Proc\+\_\+id\+\_\+plus\+\_\+one\+\_\+of\+\_\+external\+\_\+element, and Received\+\_\+flat\+\_\+packed\+\_\+zetas\+\_\+to\+\_\+be\+\_\+found.
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l00524}{aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}.
+Referenced by aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction().
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a2fb1a620c45f362039bef826b32b6785}\label{namespaceoomph_1_1Multi__domain__functions_a2fb1a620c45f362039bef826b32b6785}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!send\_and\_receive\_missing\_zetas@{send\_and\_receive\_missing\_zetas}}
@@ -597,15 +597,15 @@ Send the zeta coordinates from the current process to the next process; receive 
 
 Helper function to send any \char`\"{}missing\char`\"{} zeta coordinates to the next process and receive any coordinates from previous process. 
 
-Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00177}{177}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+Definition at line 177 of file multi\+\_\+domain.\+cc.
 
 
 
-References \mbox{\hyperlink{problem_8h_source_l01246}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00074}{Flat\+\_\+packed\+\_\+zetas\+\_\+not\+\_\+found\+\_\+locally}}, and \mbox{\hyperlink{multi__domain_8cc_source_l00082}{Received\+\_\+flat\+\_\+packed\+\_\+zetas\+\_\+to\+\_\+be\+\_\+found}}.
+References oomph\+::\+Problem\+::communicator\+\_\+pt(), Flat\+\_\+packed\+\_\+zetas\+\_\+not\+\_\+found\+\_\+locally, and Received\+\_\+flat\+\_\+packed\+\_\+zetas\+\_\+to\+\_\+be\+\_\+found.
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l00524}{aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}.
+Referenced by aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction().
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_adcfac96ed755990c71f35b722bacbde7}\label{namespaceoomph_1_1Multi__domain__functions_adcfac96ed755990c71f35b722bacbde7}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!setup\_bulk\_elements\_adjacent\_to\_face\_mesh@{setup\_bulk\_elements\_adjacent\_to\_face\_mesh}}
@@ -620,7 +620,7 @@ Identify the {\ttfamily Face\+Elements} (stored in the mesh pointed to by {\ttfa
 
 
 
-Definition at line \mbox{\hyperlink{multi__domain_8template_8cc_source_l00207}{207}} of file \mbox{\hyperlink{multi__domain_8template_8cc_source}{multi\+\_\+domain.\+template.\+cc}}.
+Definition at line 207 of file multi\+\_\+domain.\+template.\+cc.
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a35d48459a5261d565afbc106cb61fe60}\label{namespaceoomph_1_1Multi__domain__functions_a35d48459a5261d565afbc106cb61fe60}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!setup\_bulk\_elements\_adjacent\_to\_face\_mesh@{setup\_bulk\_elements\_adjacent\_to\_face\_mesh}}
@@ -641,15 +641,15 @@ Identify the {\ttfamily Face\+Elements} (stored in the mesh pointed to by {\ttfa
 
 This is the vector-\/based version which deals with multiple bulk mesh boundaries at the same time. 
 
-Definition at line \mbox{\hyperlink{multi__domain_8template_8cc_source_l00072}{72}} of file \mbox{\hyperlink{multi__domain_8template_8cc_source}{multi\+\_\+domain.\+template.\+cc}}.
+Definition at line 72 of file multi\+\_\+domain.\+template.\+cc.
 
 
 
-References \mbox{\hyperlink{multi__domain_8cc_source_l00047}{Doc\+\_\+boundary\+\_\+coordinate\+\_\+file}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{elements_8h_source_l03148}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l04528}{oomph\+::\+Face\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8cc_source_l04675}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+zeta()}}, \mbox{\hyperlink{elements_8h_source_l03186}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{elements_8h_source_l04482}{oomph\+::\+Face\+Element\+::set\+\_\+boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l00280}{setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}, \mbox{\hyperlink{elements_8h_source_l03161}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}, and \mbox{\hyperlink{elements_8h_source_l03174}{oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer()}}.
+References Doc\+\_\+boundary\+\_\+coordinate\+\_\+file, e, oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot(), i, oomph\+::\+Face\+Element\+::interpolated\+\_\+x(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+zeta(), oomph\+::\+Finite\+Element\+::nplot\+\_\+points(), s, oomph\+::\+Face\+Element\+::set\+\_\+boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh(), setup\+\_\+multi\+\_\+domain\+\_\+interaction(), oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string(), and oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer().
 
 
 
-Referenced by \mbox{\hyperlink{fsi_8h_source_l00601}{oomph\+::\+FSI\+\_\+functions\+::setup\+\_\+fluid\+\_\+load\+\_\+info\+\_\+for\+\_\+solid\+\_\+elements()}}, and \mbox{\hyperlink{fsi_8h_source_l00665}{oomph\+::\+FSI\+\_\+functions\+::setup\+\_\+solid\+\_\+elements\+\_\+for\+\_\+displacement\+\_\+bc()}}.
+Referenced by oomph\+::\+FSI\+\_\+functions\+::setup\+\_\+fluid\+\_\+load\+\_\+info\+\_\+for\+\_\+solid\+\_\+elements(), and oomph\+::\+FSI\+\_\+functions\+::setup\+\_\+solid\+\_\+elements\+\_\+for\+\_\+displacement\+\_\+bc().
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_ae7dbd6a7da9a8988ea4c58163da52883}\label{namespaceoomph_1_1Multi__domain__functions_ae7dbd6a7da9a8988ea4c58163da52883}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!setup\_multi\_domain\_interaction@{setup\_multi\_domain\_interaction}}
@@ -678,11 +678,11 @@ Function to set up the one-\/way multi-\/domain interaction for FSI-\/like probl
 \item The interaction\+\_\+index parameter defaults to zero and must otherwise be set by the user if there is more than one mesh that provides \char`\"{}external   elements\char`\"{} for the \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} pointed to by mesh\+\_\+pt (e.\+g. in the case when a beam or shell structure is loaded by fluid from both sides.)
 \end{DoxyItemize}Vector-\/based version operates simultaneously on the meshes contained in the vectors. 
 
-Definition at line \mbox{\hyperlink{multi__domain_8template_8cc_source_l00400}{400}} of file \mbox{\hyperlink{multi__domain_8template_8cc_source}{multi\+\_\+domain.\+template.\+cc}}.
+Definition at line 400 of file multi\+\_\+domain.\+template.\+cc.
 
 
 
-References \mbox{\hyperlink{multi__domain_8cc_source_l00060}{Dim}}, \mbox{\hyperlink{multi__domain_8cc_source_l02343}{get\+\_\+dim\+\_\+helper()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{multi__domain_8cc_source_l00142}{Use\+\_\+bulk\+\_\+element\+\_\+as\+\_\+external}}.
+References Dim, get\+\_\+dim\+\_\+helper(), i, and Use\+\_\+bulk\+\_\+element\+\_\+as\+\_\+external.
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_ac64183e03f173c69ed6ed6f493a1a67e}\label{namespaceoomph_1_1Multi__domain__functions_ac64183e03f173c69ed6ed6f493a1a67e}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!setup\_multi\_domain\_interaction@{setup\_multi\_domain\_interaction}}
@@ -705,15 +705,15 @@ Function to set up the one-\/way multi-\/domain interaction for problems where t
 \item The interaction\+\_\+index parameter defaults to zero and must be otherwise set by the user if there is more than one mesh that provides sources for the \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} pointed to by mesh\+\_\+pt. 
 \end{DoxyItemize}
 
-Definition at line \mbox{\hyperlink{multi__domain_8template_8cc_source_l00280}{280}} of file \mbox{\hyperlink{multi__domain_8template_8cc_source}{multi\+\_\+domain.\+template.\+cc}}.
+Definition at line 280 of file multi\+\_\+domain.\+template.\+cc.
 
 
 
-References \mbox{\hyperlink{multi__domain_8cc_source_l00060}{Dim}}, \mbox{\hyperlink{multi__domain_8cc_source_l02343}{get\+\_\+dim\+\_\+helper()}}, and \mbox{\hyperlink{multi__domain_8cc_source_l00142}{Use\+\_\+bulk\+\_\+element\+\_\+as\+\_\+external}}.
+References Dim, get\+\_\+dim\+\_\+helper(), and Use\+\_\+bulk\+\_\+element\+\_\+as\+\_\+external.
 
 
 
-Referenced by \mbox{\hyperlink{projection_8h_source_l00748}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::project()}}, and \mbox{\hyperlink{multi__domain_8template_8cc_source_l00072}{setup\+\_\+bulk\+\_\+elements\+\_\+adjacent\+\_\+to\+\_\+face\+\_\+mesh()}}.
+Referenced by oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::project(), and setup\+\_\+bulk\+\_\+elements\+\_\+adjacent\+\_\+to\+\_\+face\+\_\+mesh().
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a5fb45ad7165cc546b5e34e01a53478d8}\label{namespaceoomph_1_1Multi__domain__functions_a5fb45ad7165cc546b5e34e01a53478d8}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!setup\_multi\_domain\_interaction@{setup\_multi\_domain\_interaction}}
@@ -734,11 +734,11 @@ Function to set up the one-\/way multi-\/domain interaction for FSI-\/like probl
 \item The interaction\+\_\+index parameter defaults to zero and must otherwise be set by the user if there is more than one mesh that provides \char`\"{}external   elements\char`\"{} for the \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} pointed to by mesh\+\_\+pt (e.\+g. in the case when a beam or shell structure is loaded by fluid from both sides.) 
 \end{DoxyItemize}
 
-Definition at line \mbox{\hyperlink{multi__domain_8template_8cc_source_l00336}{336}} of file \mbox{\hyperlink{multi__domain_8template_8cc_source}{multi\+\_\+domain.\+template.\+cc}}.
+Definition at line 336 of file multi\+\_\+domain.\+template.\+cc.
 
 
 
-References \mbox{\hyperlink{multi__domain_8cc_source_l00060}{Dim}}, \mbox{\hyperlink{multi__domain_8cc_source_l02343}{get\+\_\+dim\+\_\+helper()}}, and \mbox{\hyperlink{multi__domain_8cc_source_l00142}{Use\+\_\+bulk\+\_\+element\+\_\+as\+\_\+external}}.
+References Dim, get\+\_\+dim\+\_\+helper(), and Use\+\_\+bulk\+\_\+element\+\_\+as\+\_\+external.
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a4a7ac2c45985582b30ed3ecb5d2623d2}\label{namespaceoomph_1_1Multi__domain__functions_a4a7ac2c45985582b30ed3ecb5d2623d2}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!setup\_multi\_domain\_interactions@{setup\_multi\_domain\_interactions}}
@@ -753,11 +753,11 @@ Set up the two-\/way multi-\/domain interactions for the problem pointed to by {
 
 
 
-Definition at line \mbox{\hyperlink{multi__domain_8template_8cc_source_l00244}{244}} of file \mbox{\hyperlink{multi__domain_8template_8cc_source}{multi\+\_\+domain.\+template.\+cc}}.
+Definition at line 244 of file multi\+\_\+domain.\+template.\+cc.
 
 
 
-References \mbox{\hyperlink{mesh_8cc_source_l09190}{oomph\+::\+Mesh\+::delete\+\_\+all\+\_\+external\+\_\+storage()}}.
+References oomph\+::\+Mesh\+::delete\+\_\+all\+\_\+external\+\_\+storage().
 
 
 
@@ -774,11 +774,11 @@ Boolean to indicate that failure in setup multi domain functions is acceptable; 
 
 
 
-Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00056}{56}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+Definition at line 56 of file multi\+\_\+domain.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l00524}{aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}.
+Referenced by aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction().
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_aa3b57b233a416885018e8993db0b291c}\label{namespaceoomph_1_1Multi__domain__functions_aa3b57b233a416885018e8993db0b291c}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Allow\_use\_of\_halo\_elements\_as\_external\_elements@{Allow\_use\_of\_halo\_elements\_as\_external\_elements}}
@@ -792,11 +792,11 @@ Boolean to indicate if we\textquotesingle{}re allowed to use halo elements as ex
 
 
 
-Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00149}{149}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+Definition at line 149 of file multi\+\_\+domain.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain_8cc_source_l02153}{locate\+\_\+zeta\+\_\+for\+\_\+local\+\_\+coordinates()}}.
+Referenced by locate\+\_\+zeta\+\_\+for\+\_\+local\+\_\+coordinates().
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_aa45f040b8ffc6448777fae76190d308c}\label{namespaceoomph_1_1Multi__domain__functions_aa45f040b8ffc6448777fae76190d308c}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Allow\_use\_of\_halo\_elements\_as\_external\_elements\_for\_projection@{Allow\_use\_of\_halo\_elements\_as\_external\_elements\_for\_projection}}
@@ -810,7 +810,7 @@ Indicate whether we are allowed to use halo elements as external elements for pr
 
 
 
-Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00155}{155}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+Definition at line 155 of file multi\+\_\+domain.\+cc.
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_aeb7431547acc61e750fcc456a25ffc13}\label{namespaceoomph_1_1Multi__domain__functions_aeb7431547acc61e750fcc456a25ffc13}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Counter\_for\_flat\_packed\_doubles@{Counter\_for\_flat\_packed\_doubles}}
@@ -824,11 +824,11 @@ Counter used when processing vector of flat-\/packed doubles -- this is really \
 
 
 
-Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00112}{112}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+Definition at line 112 of file multi\+\_\+domain.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l02068}{construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01452}{construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l19416}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::construct\+\_\+new\+\_\+halo\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l27905}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::construct\+\_\+new\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l01677}{create\+\_\+external\+\_\+halo\+\_\+elements()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l20451}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::load\+\_\+balance()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l01960}{recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+halo\+\_\+node\+\_\+to\+\_\+storage()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l15486}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::reset\+\_\+halo\+\_\+haloed\+\_\+scheme()}}, and \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l17655}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::reset\+\_\+halo\+\_\+haloed\+\_\+scheme\+\_\+helper()}}.
+Referenced by construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::construct\+\_\+new\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::construct\+\_\+new\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper(), create\+\_\+external\+\_\+halo\+\_\+elements(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::load\+\_\+balance(), recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+halo\+\_\+node\+\_\+to\+\_\+storage(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::reset\+\_\+halo\+\_\+haloed\+\_\+scheme(), and oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::reset\+\_\+halo\+\_\+haloed\+\_\+scheme\+\_\+helper().
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a20f6de2e1bd15cb40c461d2ca3940bd7}\label{namespaceoomph_1_1Multi__domain__functions_a20f6de2e1bd15cb40c461d2ca3940bd7}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Counter\_for\_flat\_packed\_unsigneds@{Counter\_for\_flat\_packed\_unsigneds}}
@@ -842,11 +842,11 @@ Counter used when processing vector of flat-\/packed unsigneds -- this is really
 
 
 
-Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00134}{134}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+Definition at line 134 of file multi\+\_\+domain.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l27584}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::add\+\_\+element\+\_\+load\+\_\+balance\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l02027}{add\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01404}{add\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l19199}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::add\+\_\+halo\+\_\+element\+\_\+helper()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l19360}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::add\+\_\+halo\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l27841}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::add\+\_\+received\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l02068}{construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01452}{construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l19416}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::construct\+\_\+new\+\_\+halo\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l27905}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::construct\+\_\+new\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l27501}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::create\+\_\+element\+\_\+load\+\_\+balance\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l01677}{create\+\_\+external\+\_\+halo\+\_\+elements()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l19111}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::create\+\_\+halo\+\_\+element()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l20451}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::load\+\_\+balance()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l01960}{recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+halo\+\_\+node\+\_\+to\+\_\+storage()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l15486}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::reset\+\_\+halo\+\_\+haloed\+\_\+scheme()}}, and \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l17655}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::reset\+\_\+halo\+\_\+haloed\+\_\+scheme\+\_\+helper()}}.
+Referenced by oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::add\+\_\+element\+\_\+load\+\_\+balance\+\_\+helper(), add\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), add\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::add\+\_\+halo\+\_\+element\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::add\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::add\+\_\+received\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper(), construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::construct\+\_\+new\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::construct\+\_\+new\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::create\+\_\+element\+\_\+load\+\_\+balance\+\_\+helper(), create\+\_\+external\+\_\+halo\+\_\+elements(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::create\+\_\+halo\+\_\+element(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::load\+\_\+balance(), recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+halo\+\_\+node\+\_\+to\+\_\+storage(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::reset\+\_\+halo\+\_\+haloed\+\_\+scheme(), and oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::reset\+\_\+halo\+\_\+haloed\+\_\+scheme\+\_\+helper().
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a27cbb5ec7f6fea2f237c11659ffeef58}\label{namespaceoomph_1_1Multi__domain__functions_a27cbb5ec7f6fea2f237c11659ffeef58}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Dim@{Dim}}
@@ -860,11 +860,11 @@ Dimension of zeta tuples (set by get\+\_\+dim\+\_\+helper) -- needed because we 
 
 
 
-Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00060}{60}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+Definition at line 60 of file multi\+\_\+domain.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l00524}{aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}, \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l01459}{oomph\+::\+Helmholtz\+Dt\+NBoundary\+Element$<$ ELEMENT $>$\+::compute\+\_\+gamma\+\_\+contribution()}}, \mbox{\hyperlink{supg__advection__diffusion__elements_8cc_source_l00107}{oomph\+::\+QSUPGAdvection\+Diffusion\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+adv\+\_\+diff()}}, \mbox{\hyperlink{polar__fluid__traction__elements_8h_source_l00317}{oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution()}}, \mbox{\hyperlink{advection__diffusion__flux__elements_8h_source_l00384}{oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff\+\_\+flux()}}, \mbox{\hyperlink{axisym__poroelastic__fsi__face__elements_8h_source_l00812}{oomph\+::\+Linearised\+Axisym\+Poroelastic\+BJS\+\_\+\+FSIElement$<$ FLUID\+\_\+\+BULK\+\_\+\+ELEMENT, POROELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axisym\+\_\+poroelastic\+\_\+fsi()}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00313}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction()}}, \mbox{\hyperlink{mixed__order__petrov__galerkin__space__time__fluid__traction__elements_8h_source_l00340}{oomph\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction()}}, \mbox{\hyperlink{fluid__traction__elements_8h_source_l00237}{oomph\+::\+Navier\+Stokes\+Traction\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction()}}, \mbox{\hyperlink{axisym__fluid__traction__elements_8h_source_l00883}{oomph\+::\+Linearised\+FSIAxisymmetric\+NSt\+No\+Slip\+BCElement\+Element$<$ FLUID\+\_\+\+BULK\+\_\+\+ELEMENT, SOLID\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fsi\+\_\+no\+\_\+slip\+\_\+axisym()}}, \mbox{\hyperlink{helmholtz__flux__elements_8h_source_l00420}{oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+flux()}}, \mbox{\hyperlink{pml__helmholtz__flux__elements_8h_source_l00973}{oomph\+::\+PMLHelmholtz\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+flux()}}, \mbox{\hyperlink{fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00741}{oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+flux\+\_\+from\+\_\+displacement()}}, \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00815}{oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+flux\+\_\+from\+\_\+displacement()}}, \mbox{\hyperlink{pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l01048}{oomph\+::\+PMLHelmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+flux\+\_\+from\+\_\+displacement()}}, \mbox{\hyperlink{linear__wave__flux__elements_8h_source_l00372}{oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+lin\+\_\+wave\+\_\+flux()}}, \mbox{\hyperlink{poisson__flux__elements_8h_source_l00422}{oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+poisson\+\_\+flux()}}, \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source_l00367}{oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+ust\+\_\+heat\+\_\+flux()}}, \mbox{\hyperlink{multi__domain_8cc_source_l02433}{first\+\_\+closer\+\_\+than\+\_\+second()}}, \mbox{\hyperlink{multi__domain_8cc_source_l02343}{get\+\_\+dim\+\_\+helper()}}, \mbox{\hyperlink{polar__stress__integral__elements_8h_source_l00224}{oomph\+::\+Polar\+Stress\+Integral\+Element$<$ ELEMENT $>$\+::get\+\_\+shear\+\_\+stress()}}, \mbox{\hyperlink{multi__domain_8cc_source_l02153}{locate\+\_\+zeta\+\_\+for\+\_\+local\+\_\+coordinates()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01797}{locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates()}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00394}{oomph\+::\+Storable\+Shape\+Element\+Base\+::pre\+\_\+compute\+\_\+d2shape\+\_\+local\+\_\+at\+\_\+knots()}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00321}{oomph\+::\+Storable\+Shape\+Element\+Base\+::pre\+\_\+compute\+\_\+dshape\+\_\+local\+\_\+at\+\_\+knots()}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00513}{oomph\+::\+Refineable\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction()}}, \mbox{\hyperlink{mixed__order__petrov__galerkin__space__time__fluid__traction__elements_8h_source_l00540}{oomph\+::\+Refineable\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction()}}, \mbox{\hyperlink{fluid__traction__elements_8h_source_l00398}{oomph\+::\+Refineable\+Navier\+Stokes\+Traction\+Element$<$ ELEMENT $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00264}{send\+\_\+and\+\_\+receive\+\_\+located\+\_\+info()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l00280}{setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}, and \mbox{\hyperlink{solid__elements_8h_source_l01220}{oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::solid\+\_\+pshape\+\_\+at\+\_\+knot()}}.
+Referenced by aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction(), oomph\+::\+Helmholtz\+Dt\+NBoundary\+Element$<$ ELEMENT $>$\+::compute\+\_\+gamma\+\_\+contribution(), oomph\+::\+QSUPGAdvection\+Diffusion\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+adv\+\_\+diff(), oomph\+::\+Polar\+Navier\+Stokes\+Traction\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution(), oomph\+::\+Advection\+Diffusion\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff\+\_\+flux(), oomph\+::\+Linearised\+Axisym\+Poroelastic\+BJS\+\_\+\+FSIElement$<$ FLUID\+\_\+\+BULK\+\_\+\+ELEMENT, POROELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axisym\+\_\+poroelastic\+\_\+fsi(), oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction(), oomph\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction(), oomph\+::\+Navier\+Stokes\+Traction\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction(), oomph\+::\+Linearised\+FSIAxisymmetric\+NSt\+No\+Slip\+BCElement\+Element$<$ FLUID\+\_\+\+BULK\+\_\+\+ELEMENT, SOLID\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fsi\+\_\+no\+\_\+slip\+\_\+axisym(), oomph\+::\+Helmholtz\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+flux(), oomph\+::\+PMLHelmholtz\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+flux(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+flux\+\_\+from\+\_\+displacement(), oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+flux\+\_\+from\+\_\+displacement(), oomph\+::\+PMLHelmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+flux\+\_\+from\+\_\+displacement(), oomph\+::\+Linear\+Wave\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+lin\+\_\+wave\+\_\+flux(), oomph\+::\+Poisson\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+poisson\+\_\+flux(), oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+ust\+\_\+heat\+\_\+flux(), first\+\_\+closer\+\_\+than\+\_\+second(), get\+\_\+dim\+\_\+helper(), oomph\+::\+Polar\+Stress\+Integral\+Element$<$ ELEMENT $>$\+::get\+\_\+shear\+\_\+stress(), locate\+\_\+zeta\+\_\+for\+\_\+local\+\_\+coordinates(), locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates(), oomph\+::\+Storable\+Shape\+Element\+Base\+::pre\+\_\+compute\+\_\+d2shape\+\_\+local\+\_\+at\+\_\+knots(), oomph\+::\+Storable\+Shape\+Element\+Base\+::pre\+\_\+compute\+\_\+dshape\+\_\+local\+\_\+at\+\_\+knots(), oomph\+::\+Refineable\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction(), oomph\+::\+Refineable\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction(), oomph\+::\+Refineable\+Navier\+Stokes\+Traction\+Element$<$ ELEMENT $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction(), send\+\_\+and\+\_\+receive\+\_\+located\+\_\+info(), setup\+\_\+multi\+\_\+domain\+\_\+interaction(), and oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$\+::solid\+\_\+pshape\+\_\+at\+\_\+knot().
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a87a54c04fcc68b716adf10ca29a1f449}\label{namespaceoomph_1_1Multi__domain__functions_a87a54c04fcc68b716adf10ca29a1f449}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Doc\_boundary\_coordinate\_file@{Doc\_boundary\_coordinate\_file}}
@@ -878,11 +878,11 @@ Output file to document the boundary coordinate along the mesh boundary of the b
 
 
 
-Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00047}{47}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+Definition at line 47 of file multi\+\_\+domain.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l00072}{setup\+\_\+bulk\+\_\+elements\+\_\+adjacent\+\_\+to\+\_\+face\+\_\+mesh()}}.
+Referenced by setup\+\_\+bulk\+\_\+elements\+\_\+adjacent\+\_\+to\+\_\+face\+\_\+mesh().
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_aa5969c7c730e13e9d5a2c268f3045203}\label{namespaceoomph_1_1Multi__domain__functions_aa5969c7c730e13e9d5a2c268f3045203}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Doc\_full\_stats@{Doc\_full\_stats}}
@@ -896,11 +896,11 @@ Boolean to indicate whether to output further info during \mbox{\hyperlink{names
 
 Boolean to indicate whether to document further info (to screen) during \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_ac64183e03f173c69ed6ed6f493a1a67e}{setup\+\_\+multi\+\_\+domain\+\_\+interaction()}} routines. 
 
-Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00166}{166}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+Definition at line 166 of file multi\+\_\+domain.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l29595}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::adapt()}}.
+Referenced by oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::adapt().
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_aa490ae6349c68dc3c5b40f6a4a40e718}\label{namespaceoomph_1_1Multi__domain__functions_aa490ae6349c68dc3c5b40f6a4a40e718}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Doc\_stats@{Doc\_stats}}
@@ -914,11 +914,11 @@ Boolean to indicate whether to output basic info during \mbox{\hyperlink{namespa
 
 Boolean to indicate whether to document basic info (to screen) during \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_ac64183e03f173c69ed6ed6f493a1a67e}{setup\+\_\+multi\+\_\+domain\+\_\+interaction()}} routines. 
 
-Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00162}{162}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+Definition at line 162 of file multi\+\_\+domain.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l29595}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::adapt()}}.
+Referenced by oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::adapt().
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a64dc4667540a9a2591b00635dea88423}\label{namespaceoomph_1_1Multi__domain__functions_a64dc4667540a9a2591b00635dea88423}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Doc\_timings@{Doc\_timings}}
@@ -932,11 +932,11 @@ Boolean to indicate whether to doc timings or not.
 
 
 
-Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00158}{158}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+Definition at line 158 of file multi\+\_\+domain.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l29595}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::adapt()}}.
+Referenced by oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::adapt().
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a2325d66c90ff388dfd6b2649a48e9827}\label{namespaceoomph_1_1Multi__domain__functions_a2325d66c90ff388dfd6b2649a48e9827}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!External\_element\_located@{External\_element\_located}}
@@ -950,11 +950,11 @@ Lookup scheme for whether a local element\textquotesingle{}s integration point h
 
 
 
-Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00068}{68}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+Definition at line 68 of file multi\+\_\+domain.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l00524}{aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}, \mbox{\hyperlink{multi__domain_8cc_source_l02413}{clean\+\_\+up()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l01677}{create\+\_\+external\+\_\+halo\+\_\+elements()}}, and \mbox{\hyperlink{multi__domain_8cc_source_l02153}{locate\+\_\+zeta\+\_\+for\+\_\+local\+\_\+coordinates()}}.
+Referenced by aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction(), clean\+\_\+up(), create\+\_\+external\+\_\+halo\+\_\+elements(), and locate\+\_\+zeta\+\_\+for\+\_\+local\+\_\+coordinates().
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a2fa0a4a4e31700e161441b19f88c4bf3}\label{namespaceoomph_1_1Multi__domain__functions_a2fa0a4a4e31700e161441b19f88c4bf3}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Flat\_packed\_doubles@{Flat\_packed\_doubles}}
@@ -968,11 +968,11 @@ Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l00524}{aux\+\
 
 
 
-Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00106}{106}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+Definition at line 106 of file multi\+\_\+domain.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain_8cc_source_l02413}{clean\+\_\+up()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l02068}{construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01452}{construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l19416}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::construct\+\_\+new\+\_\+halo\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l27905}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::construct\+\_\+new\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l01677}{create\+\_\+external\+\_\+halo\+\_\+elements()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01010}{get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00754}{get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l18330}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l26810}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+load\+\_\+balance\+\_\+helper()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l20451}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::load\+\_\+balance()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01797}{locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l01960}{recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+halo\+\_\+node\+\_\+to\+\_\+storage()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00577}{recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l15486}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::reset\+\_\+halo\+\_\+haloed\+\_\+scheme()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l17655}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::reset\+\_\+halo\+\_\+haloed\+\_\+scheme\+\_\+helper()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l18955}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::send\+\_\+and\+\_\+receive\+\_\+elements\+\_\+nodes\+\_\+info()}}, and \mbox{\hyperlink{multi__domain_8cc_source_l00264}{send\+\_\+and\+\_\+receive\+\_\+located\+\_\+info()}}.
+Referenced by clean\+\_\+up(), construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::construct\+\_\+new\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::construct\+\_\+new\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper(), create\+\_\+external\+\_\+halo\+\_\+elements(), get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+load\+\_\+balance\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::load\+\_\+balance(), locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates(), recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+halo\+\_\+node\+\_\+to\+\_\+storage(), recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::reset\+\_\+halo\+\_\+haloed\+\_\+scheme(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::reset\+\_\+halo\+\_\+haloed\+\_\+scheme\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::send\+\_\+and\+\_\+receive\+\_\+elements\+\_\+nodes\+\_\+info(), and send\+\_\+and\+\_\+receive\+\_\+located\+\_\+info().
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a095771257db01cdebaaf92facc3057a3}\label{namespaceoomph_1_1Multi__domain__functions_a095771257db01cdebaaf92facc3057a3}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Flat\_packed\_located\_coordinates@{Flat\_packed\_located\_coordinates}}
@@ -986,11 +986,11 @@ Referenced by \mbox{\hyperlink{multi__domain_8cc_source_l02413}{clean\+\_\+up()}
 
 
 
-Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00102}{102}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+Definition at line 102 of file multi\+\_\+domain.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain_8cc_source_l02413}{clean\+\_\+up()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l01677}{create\+\_\+external\+\_\+halo\+\_\+elements()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01797}{locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates()}}, and \mbox{\hyperlink{multi__domain_8cc_source_l00264}{send\+\_\+and\+\_\+receive\+\_\+located\+\_\+info()}}.
+Referenced by clean\+\_\+up(), create\+\_\+external\+\_\+halo\+\_\+elements(), locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates(), and send\+\_\+and\+\_\+receive\+\_\+located\+\_\+info().
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a5748b2389912d36f8f05cb175105c0a3}\label{namespaceoomph_1_1Multi__domain__functions_a5748b2389912d36f8f05cb175105c0a3}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Flat\_packed\_unsigneds@{Flat\_packed\_unsigneds}}
@@ -1004,11 +1004,11 @@ Referenced by \mbox{\hyperlink{multi__domain_8cc_source_l02413}{clean\+\_\+up()}
 
 
 
-Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00118}{118}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+Definition at line 118 of file multi\+\_\+domain.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l27584}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::add\+\_\+element\+\_\+load\+\_\+balance\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l02027}{add\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01404}{add\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00699}{add\+\_\+external\+\_\+haloed\+\_\+master\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00643}{add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l19199}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::add\+\_\+halo\+\_\+element\+\_\+helper()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l19360}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::add\+\_\+halo\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l18903}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::add\+\_\+haloed\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l26752}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::add\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l27841}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::add\+\_\+received\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l02413}{clean\+\_\+up()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l02068}{construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01452}{construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l19416}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::construct\+\_\+new\+\_\+halo\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l27905}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::construct\+\_\+new\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l27501}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::create\+\_\+element\+\_\+load\+\_\+balance\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l01677}{create\+\_\+external\+\_\+halo\+\_\+elements()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l19111}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::create\+\_\+halo\+\_\+element()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l17993}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::get\+\_\+required\+\_\+elemental\+\_\+information\+\_\+helper()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l26361}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::get\+\_\+required\+\_\+elemental\+\_\+information\+\_\+load\+\_\+balance\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01010}{get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00754}{get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l18330}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l26810}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+load\+\_\+balance\+\_\+helper()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l20451}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::load\+\_\+balance()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01797}{locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l01960}{recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+halo\+\_\+node\+\_\+to\+\_\+storage()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00577}{recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l15486}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::reset\+\_\+halo\+\_\+haloed\+\_\+scheme()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l17655}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::reset\+\_\+halo\+\_\+haloed\+\_\+scheme\+\_\+helper()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l18955}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::send\+\_\+and\+\_\+receive\+\_\+elements\+\_\+nodes\+\_\+info()}}, and \mbox{\hyperlink{multi__domain_8cc_source_l00264}{send\+\_\+and\+\_\+receive\+\_\+located\+\_\+info()}}.
+Referenced by oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::add\+\_\+element\+\_\+load\+\_\+balance\+\_\+helper(), add\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), add\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper(), add\+\_\+external\+\_\+haloed\+\_\+master\+\_\+node\+\_\+helper(), add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::add\+\_\+halo\+\_\+element\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::add\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::add\+\_\+haloed\+\_\+node\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::add\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::add\+\_\+received\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper(), clean\+\_\+up(), construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::construct\+\_\+new\+\_\+halo\+\_\+node\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::construct\+\_\+new\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::create\+\_\+element\+\_\+load\+\_\+balance\+\_\+helper(), create\+\_\+external\+\_\+halo\+\_\+elements(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::create\+\_\+halo\+\_\+element(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::get\+\_\+required\+\_\+elemental\+\_\+information\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::get\+\_\+required\+\_\+elemental\+\_\+information\+\_\+load\+\_\+balance\+\_\+helper(), get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+load\+\_\+balance\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::load\+\_\+balance(), locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates(), recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+halo\+\_\+node\+\_\+to\+\_\+storage(), recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::reset\+\_\+halo\+\_\+haloed\+\_\+scheme(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::reset\+\_\+halo\+\_\+haloed\+\_\+scheme\+\_\+helper(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::send\+\_\+and\+\_\+receive\+\_\+elements\+\_\+nodes\+\_\+info(), and send\+\_\+and\+\_\+receive\+\_\+located\+\_\+info().
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a910c65c750d007e76f9175993179d151}\label{namespaceoomph_1_1Multi__domain__functions_a910c65c750d007e76f9175993179d151}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Flat\_packed\_unsigneds\_string@{Flat\_packed\_unsigneds\_string}}
@@ -1018,11 +1018,11 @@ Referenced by \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l27584}{oomph
 
 
 
-Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00125}{125}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+Definition at line 125 of file multi\+\_\+domain.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain_8cc_source_l00699}{add\+\_\+external\+\_\+haloed\+\_\+master\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00643}{add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01010}{get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00754}{get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01797}{locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00577}{recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node()}}, and \mbox{\hyperlink{multi__domain_8cc_source_l00264}{send\+\_\+and\+\_\+receive\+\_\+located\+\_\+info()}}.
+Referenced by add\+\_\+external\+\_\+haloed\+\_\+master\+\_\+node\+\_\+helper(), add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+helper(), get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates(), recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node(), and send\+\_\+and\+\_\+receive\+\_\+located\+\_\+info().
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a880374b0f685eeddca0c70b5a5d40a85}\label{namespaceoomph_1_1Multi__domain__functions_a880374b0f685eeddca0c70b5a5d40a85}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Flat\_packed\_zetas\_not\_found\_locally@{Flat\_packed\_zetas\_not\_found\_locally}}
@@ -1036,11 +1036,11 @@ Referenced by \mbox{\hyperlink{multi__domain_8cc_source_l00699}{add\+\_\+externa
 
 
 
-Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00074}{74}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+Definition at line 74 of file multi\+\_\+domain.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l00524}{aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}, \mbox{\hyperlink{multi__domain_8cc_source_l02413}{clean\+\_\+up()}}, \mbox{\hyperlink{multi__domain_8cc_source_l02153}{locate\+\_\+zeta\+\_\+for\+\_\+local\+\_\+coordinates()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01797}{locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates()}}, and \mbox{\hyperlink{multi__domain_8cc_source_l00177}{send\+\_\+and\+\_\+receive\+\_\+missing\+\_\+zetas()}}.
+Referenced by aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction(), clean\+\_\+up(), locate\+\_\+zeta\+\_\+for\+\_\+local\+\_\+coordinates(), locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates(), and send\+\_\+and\+\_\+receive\+\_\+missing\+\_\+zetas().
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_ae6f22430d0d0df252be95eeda5c03151}\label{namespaceoomph_1_1Multi__domain__functions_ae6f22430d0d0df252be95eeda5c03151}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Located\_element\_status@{Located\_element\_status}}
@@ -1054,11 +1054,11 @@ Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l00524}{aux\+\
 
 
 
-Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00098}{98}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+Definition at line 98 of file multi\+\_\+domain.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain_8cc_source_l02413}{clean\+\_\+up()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l01677}{create\+\_\+external\+\_\+halo\+\_\+elements()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01797}{locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates()}}, and \mbox{\hyperlink{multi__domain_8cc_source_l00264}{send\+\_\+and\+\_\+receive\+\_\+located\+\_\+info()}}.
+Referenced by clean\+\_\+up(), create\+\_\+external\+\_\+halo\+\_\+elements(), locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates(), and send\+\_\+and\+\_\+receive\+\_\+located\+\_\+info().
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a05cf6413be5c69ff7535ebf0b8a153e3}\label{namespaceoomph_1_1Multi__domain__functions_a05cf6413be5c69ff7535ebf0b8a153e3}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Proc\_id\_plus\_one\_of\_external\_element@{Proc\_id\_plus\_one\_of\_external\_element}}
@@ -1072,11 +1072,11 @@ Proc\+\_\+id\+\_\+plus\+\_\+one\+\_\+of\+\_\+external\+\_\+element\mbox{[}i\mbox
 
 
 
-Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00091}{91}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+Definition at line 91 of file multi\+\_\+domain.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain_8cc_source_l02413}{clean\+\_\+up()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l01677}{create\+\_\+external\+\_\+halo\+\_\+elements()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01797}{locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates()}}, and \mbox{\hyperlink{multi__domain_8cc_source_l00264}{send\+\_\+and\+\_\+receive\+\_\+located\+\_\+info()}}.
+Referenced by clean\+\_\+up(), create\+\_\+external\+\_\+halo\+\_\+elements(), locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates(), and send\+\_\+and\+\_\+receive\+\_\+located\+\_\+info().
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_aa5bb8d568feb34660caf8f88928f3be7}\label{namespaceoomph_1_1Multi__domain__functions_aa5bb8d568feb34660caf8f88928f3be7}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Received\_flat\_packed\_zetas\_to\_be\_found@{Received\_flat\_packed\_zetas\_to\_be\_found}}
@@ -1090,11 +1090,11 @@ Referenced by \mbox{\hyperlink{multi__domain_8cc_source_l02413}{clean\+\_\+up()}
 
 
 
-Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00082}{82}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+Definition at line 82 of file multi\+\_\+domain.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain_8cc_source_l02413}{clean\+\_\+up()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01797}{locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00264}{send\+\_\+and\+\_\+receive\+\_\+located\+\_\+info()}}, and \mbox{\hyperlink{multi__domain_8cc_source_l00177}{send\+\_\+and\+\_\+receive\+\_\+missing\+\_\+zetas()}}.
+Referenced by clean\+\_\+up(), locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates(), send\+\_\+and\+\_\+receive\+\_\+located\+\_\+info(), and send\+\_\+and\+\_\+receive\+\_\+missing\+\_\+zetas().
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_abc1119753cf68493ba6ea43c2a8bc378}\label{namespaceoomph_1_1Multi__domain__functions_abc1119753cf68493ba6ea43c2a8bc378}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Use\_bulk\_element\_as\_external@{Use\_bulk\_element\_as\_external}}
@@ -1108,11 +1108,11 @@ Boolean to indicate when to use the bulk element as the external element. Defaul
 
 
 
-Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00142}{142}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+Definition at line 142 of file multi\+\_\+domain.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l00524}{aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}, \mbox{\hyperlink{multi__domain_8cc_source_l02153}{locate\+\_\+zeta\+\_\+for\+\_\+local\+\_\+coordinates()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01797}{locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates()}}, and \mbox{\hyperlink{multi__domain_8template_8cc_source_l00280}{setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}.
+Referenced by aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction(), locate\+\_\+zeta\+\_\+for\+\_\+local\+\_\+coordinates(), locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates(), and setup\+\_\+multi\+\_\+domain\+\_\+interaction().
 
 \mbox{\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a5f14db731fddbd057f4099fbdba95cc0}\label{namespaceoomph_1_1Multi__domain__functions_a5f14db731fddbd057f4099fbdba95cc0}} 
 \index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Zeta\_coords\_for\_further\_away\_comparison@{Zeta\_coords\_for\_further\_away\_comparison}}
@@ -1126,9 +1126,9 @@ Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l00524}{aux\+\
 
 
 
-Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l02427}{2427}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+Definition at line 2427 of file multi\+\_\+domain.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain_8cc_source_l02433}{first\+\_\+closer\+\_\+than\+\_\+second()}}.
+Referenced by first\+\_\+closer\+\_\+than\+\_\+second().
 

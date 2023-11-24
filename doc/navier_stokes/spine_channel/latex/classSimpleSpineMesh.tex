@@ -1,11 +1,11 @@
-\hypertarget{classSimpleSpineMesh}{}\doxysection{Simple\+Spine\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classSimpleSpineMesh}{}\doxysection{Simple\+Spine\+Mesh$<$ ELEMENT $>$ Class Template Reference}
 \label{classSimpleSpineMesh}\index{SimpleSpineMesh$<$ ELEMENT $>$@{SimpleSpineMesh$<$ ELEMENT $>$}}
 
 
 ////////////////////////////////////////////////////////////////////  
 
 
-Inheritance diagram for Simple\+Spine\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for Simple\+Spine\+Mesh$<$ ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{classSimpleSpineMesh}
@@ -21,12 +21,12 @@ typedef double($\ast$ \mbox{\hyperlink{classSimpleSpineMesh_a671d96f0143dfeb7aab
 \item 
 \mbox{\hyperlink{classSimpleSpineMesh_a69815e3a950e6e5ede2f85004796dadb}{Simple\+Spine\+Mesh}} (const unsigned \&nx, const unsigned \&ny, const double \&lx, const double \&h, Geom\+Object $\ast$substrate\+\_\+pt, Time\+Stepper $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
 \begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in x-\/direction, number of elements in y-\/direction, length in x direction, initial height of mesh, and pointer to timestepper (defaults to Steady timestepper) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classSimpleSpineMesh_a671d96f0143dfeb7aaba8af56c0c0620}{Height\+Fct\+Pt}} \& \mbox{\hyperlink{classSimpleSpineMesh_ae7e3ca1d4c8377de6fe21048d22958cc}{height\+\_\+fct\+\_\+pt}} ()
+\mbox{\hyperlink{classSimpleSpineMesh_a671d96f0143dfeb7aaba8af56c0c0620}{Height\+Fct\+Pt}} \& \mbox{\hyperlink{classSimpleSpineMesh_af84290225b4aea3fd6ba27ad979059a0}{height\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to height function. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classSimpleSpineMesh_a99398fc7ef50db36d30f6c1d01aa3758}{height\+\_\+fct}} (const double \&x)
 \begin{DoxyCompactList}\small\item\em Height function -- this is called by \mbox{\hyperlink{classSimpleSpineMesh_a2248fb8df448b0a02377a0cfb6f57851}{update\+\_\+spine\+\_\+heights()}} when spine heights are assigned. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classSimpleSpineMesh_a2248fb8df448b0a02377a0cfb6f57851}{update\+\_\+spine\+\_\+heights}} ()
-\begin{DoxyCompactList}\small\item\em Update the spine heights according to the function specified by \mbox{\hyperlink{classSimpleSpineMesh_ae7e3ca1d4c8377de6fe21048d22958cc}{height\+\_\+fct\+\_\+pt()}}. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Update the spine heights according to the function specified by \mbox{\hyperlink{classSimpleSpineMesh_af84290225b4aea3fd6ba27ad979059a0}{height\+\_\+fct\+\_\+pt()}}. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classSimpleSpineMesh_a4735e047eab146cafc3090f829373ef2}{spine\+\_\+node\+\_\+update}} (Spine\+Node $\ast$spine\+\_\+node\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em General node update function implements pure virtual function defined in Spine\+Mesh base class and performs specific node update actions\+: Nodes are located along vertical \char`\"{}spines\char`\"{} that emanate from the \char`\"{}substrate\char`\"{} (the lower wall) specified by a Geom\+Object. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
@@ -43,11 +43,12 @@ Geom\+Object $\ast$ \mbox{\hyperlink{classSimpleSpineMesh_a9031e27d5855e029312d3
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class ELEMENT$>$\newline
 class Simple\+Spine\+Mesh$<$ ELEMENT $>$}
+
 //////////////////////////////////////////////////////////////////// 
 
 Simple spine mesh class derived from standard 2D mesh. Vertical lines of nodes are located on spines. 
 
-Definition at line \mbox{\hyperlink{simple__spine__channel_8cc_source_l00089}{89}} of file \mbox{\hyperlink{simple__spine__channel_8cc_source}{simple\+\_\+spine\+\_\+channel.\+cc}}.
+Definition at line 89 of file simple\+\_\+spine\+\_\+channel.\+cc.
 
 
 
@@ -65,7 +66,7 @@ Function pointer to function, h(x), that may be used to specify the \char`\"{}he
 
 
 
-Definition at line \mbox{\hyperlink{simple__spine__channel_8cc_source_l00110}{110}} of file \mbox{\hyperlink{simple__spine__channel_8cc_source}{simple\+\_\+spine\+\_\+channel.\+cc}}.
+Definition at line 110 of file simple\+\_\+spine\+\_\+channel.\+cc.
 
 
 
@@ -83,13 +84,13 @@ Constructor\+: Pass number of elements in x-\/direction, number of elements in y
 
 Constructor for spine 2D mesh\+: Pass number of elements in x-\/direction, number of elements in y-\/direction, axial length and height of layer, pointer to geometric object that specifies the substrate (the lower wall) and pointer to timestepper (defaults to Static timestepper).
 
-The mesh contains a layer of spine-\/ified fluid elements (of type ELEMENT; e.\+g Spine\+Element\texorpdfstring{$<$}{<}QCrouzeix\+Raviart\+Element$<$2$>$) 
+The mesh contains a layer of spine-\/ified fluid elements (of type ELEMENT; e.\+g Spine\+Element$<$QCrouzeix\+Raviart\+Element$<$2$>$) 
 
-Definition at line \mbox{\hyperlink{simple__spine__channel_8cc_source_l00206}{206}} of file \mbox{\hyperlink{simple__spine__channel_8cc_source}{simple\+\_\+spine\+\_\+channel.\+cc}}.
+Definition at line 206 of file simple\+\_\+spine\+\_\+channel.\+cc.
 
 
 
-References \mbox{\hyperlink{simple__spine__channel_8cc_source_l00190}{Simple\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Substrate\+\_\+pt}}.
+References Simple\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Substrate\+\_\+pt.
 
 
 
@@ -107,22 +108,14 @@ Height function -- this is called by \mbox{\hyperlink{classSimpleSpineMesh_a2248
 
 
 
-Definition at line \mbox{\hyperlink{simple__spine__channel_8cc_source_l00121}{121}} of file \mbox{\hyperlink{simple__spine__channel_8cc_source}{simple\+\_\+spine\+\_\+channel.\+cc}}.
+Definition at line 121 of file simple\+\_\+spine\+\_\+channel.\+cc.
 
-
-
-References \mbox{\hyperlink{simple__spine__channel_8cc_source_l00184}{Simple\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Default\+\_\+height}}, and \mbox{\hyperlink{simple__spine__channel_8cc_source_l00187}{Simple\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Height\+\_\+fct\+\_\+pt}}.
-
-
-
-Referenced by \mbox{\hyperlink{simple__spine__channel_8cc_source_l00137}{Simple\+Spine\+Mesh$<$ ELEMENT $>$\+::update\+\_\+spine\+\_\+heights()}}.
-
-\mbox{\Hypertarget{classSimpleSpineMesh_ae7e3ca1d4c8377de6fe21048d22958cc}\label{classSimpleSpineMesh_ae7e3ca1d4c8377de6fe21048d22958cc}} 
+\mbox{\Hypertarget{classSimpleSpineMesh_af84290225b4aea3fd6ba27ad979059a0}\label{classSimpleSpineMesh_af84290225b4aea3fd6ba27ad979059a0}} 
 \index{SimpleSpineMesh$<$ ELEMENT $>$@{SimpleSpineMesh$<$ ELEMENT $>$}!height\_fct\_pt@{height\_fct\_pt}}
 \index{height\_fct\_pt@{height\_fct\_pt}!SimpleSpineMesh$<$ ELEMENT $>$@{SimpleSpineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{height\_fct\_pt()}{height\_fct\_pt()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-\mbox{\hyperlink{classSimpleSpineMesh_a671d96f0143dfeb7aaba8af56c0c0620}{Height\+Fct\+Pt}} \& \mbox{\hyperlink{classSimpleSpineMesh}{Simple\+Spine\+Mesh}}$<$ ELEMENT $>$\+::height\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classSimpleSpineMesh_a671d96f0143dfeb7aaba8af56c0c0620}{Height\+Fct\+Pt}}\& \mbox{\hyperlink{classSimpleSpineMesh}{Simple\+Spine\+Mesh}}$<$ ELEMENT $>$\+::height\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -130,11 +123,7 @@ Access function\+: Pointer to height function.
 
 
 
-Definition at line \mbox{\hyperlink{simple__spine__channel_8cc_source_l00113}{113}} of file \mbox{\hyperlink{simple__spine__channel_8cc_source}{simple\+\_\+spine\+\_\+channel.\+cc}}.
-
-
-
-References \mbox{\hyperlink{simple__spine__channel_8cc_source_l00187}{Simple\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Height\+\_\+fct\+\_\+pt}}.
+Definition at line 113 of file simple\+\_\+spine\+\_\+channel.\+cc.
 
 \mbox{\Hypertarget{classSimpleSpineMesh_a4735e047eab146cafc3090f829373ef2}\label{classSimpleSpineMesh_a4735e047eab146cafc3090f829373ef2}} 
 \index{SimpleSpineMesh$<$ ELEMENT $>$@{SimpleSpineMesh$<$ ELEMENT $>$}!spine\_node\_update@{spine\_node\_update}}
@@ -149,7 +138,7 @@ General node update function implements pure virtual function defined in Spine\+
 
 
 
-Definition at line \mbox{\hyperlink{simple__spine__channel_8cc_source_l00157}{157}} of file \mbox{\hyperlink{simple__spine__channel_8cc_source}{simple\+\_\+spine\+\_\+channel.\+cc}}.
+Definition at line 157 of file simple\+\_\+spine\+\_\+channel.\+cc.
 
 \mbox{\Hypertarget{classSimpleSpineMesh_a2248fb8df448b0a02377a0cfb6f57851}\label{classSimpleSpineMesh_a2248fb8df448b0a02377a0cfb6f57851}} 
 \index{SimpleSpineMesh$<$ ELEMENT $>$@{SimpleSpineMesh$<$ ELEMENT $>$}!update\_spine\_heights@{update\_spine\_heights}}
@@ -160,15 +149,11 @@ void \mbox{\hyperlink{classSimpleSpineMesh}{Simple\+Spine\+Mesh}}$<$ ELEMENT $>$
 
 
 
-Update the spine heights according to the function specified by \mbox{\hyperlink{classSimpleSpineMesh_ae7e3ca1d4c8377de6fe21048d22958cc}{height\+\_\+fct\+\_\+pt()}}. 
+Update the spine heights according to the function specified by \mbox{\hyperlink{classSimpleSpineMesh_af84290225b4aea3fd6ba27ad979059a0}{height\+\_\+fct\+\_\+pt()}}. 
 
 
 
-Definition at line \mbox{\hyperlink{simple__spine__channel_8cc_source_l00137}{137}} of file \mbox{\hyperlink{simple__spine__channel_8cc_source}{simple\+\_\+spine\+\_\+channel.\+cc}}.
-
-
-
-References \mbox{\hyperlink{simple__spine__channel_8cc_source_l00121}{Simple\+Spine\+Mesh$<$ ELEMENT $>$\+::height\+\_\+fct()}}.
+Definition at line 137 of file simple\+\_\+spine\+\_\+channel.\+cc.
 
 
 
@@ -186,11 +171,7 @@ Default height.
 
 
 
-Definition at line \mbox{\hyperlink{simple__spine__channel_8cc_source_l00184}{184}} of file \mbox{\hyperlink{simple__spine__channel_8cc_source}{simple\+\_\+spine\+\_\+channel.\+cc}}.
-
-
-
-Referenced by \mbox{\hyperlink{simple__spine__channel_8cc_source_l00121}{Simple\+Spine\+Mesh$<$ ELEMENT $>$\+::height\+\_\+fct()}}.
+Definition at line 184 of file simple\+\_\+spine\+\_\+channel.\+cc.
 
 \mbox{\Hypertarget{classSimpleSpineMesh_ac0509d0d0868d37ef87834b39d2a084b}\label{classSimpleSpineMesh_ac0509d0d0868d37ef87834b39d2a084b}} 
 \index{SimpleSpineMesh$<$ ELEMENT $>$@{SimpleSpineMesh$<$ ELEMENT $>$}!Height\_fct\_pt@{Height\_fct\_pt}}
@@ -205,11 +186,7 @@ Pointer to height function.
 
 
 
-Definition at line \mbox{\hyperlink{simple__spine__channel_8cc_source_l00187}{187}} of file \mbox{\hyperlink{simple__spine__channel_8cc_source}{simple\+\_\+spine\+\_\+channel.\+cc}}.
-
-
-
-Referenced by \mbox{\hyperlink{simple__spine__channel_8cc_source_l00121}{Simple\+Spine\+Mesh$<$ ELEMENT $>$\+::height\+\_\+fct()}}, and \mbox{\hyperlink{simple__spine__channel_8cc_source_l00113}{Simple\+Spine\+Mesh$<$ ELEMENT $>$\+::height\+\_\+fct\+\_\+pt()}}.
+Definition at line 187 of file simple\+\_\+spine\+\_\+channel.\+cc.
 
 \mbox{\Hypertarget{classSimpleSpineMesh_a9031e27d5855e029312d356f6a38da76}\label{classSimpleSpineMesh_a9031e27d5855e029312d356f6a38da76}} 
 \index{SimpleSpineMesh$<$ ELEMENT $>$@{SimpleSpineMesh$<$ ELEMENT $>$}!Substrate\_pt@{Substrate\_pt}}
@@ -224,11 +201,11 @@ Pointer to Geom\+Object that specifies the \char`\"{}substrate\char`\"{} (the lo
 
 
 
-Definition at line \mbox{\hyperlink{simple__spine__channel_8cc_source_l00190}{190}} of file \mbox{\hyperlink{simple__spine__channel_8cc_source}{simple\+\_\+spine\+\_\+channel.\+cc}}.
+Definition at line 190 of file simple\+\_\+spine\+\_\+channel.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{simple__spine__channel_8cc_source_l00206}{Simple\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Simple\+Spine\+Mesh()}}.
+Referenced by Simple\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Simple\+Spine\+Mesh().
 
 
 

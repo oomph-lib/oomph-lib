@@ -18,7 +18,7 @@ Inheritance diagram for Bin\+Array\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classBinArray_ae441b5dcc0d0276f4661a09ff735b581}{Bin\+Array}} (Mesh $\ast$\mbox{\hyperlink{classSamplePointContainer_aa638ec17fc518066a473e49ad148b122}{mesh\+\_\+pt}}, const Vector$<$ std\+::pair$<$ double, double $>$ $>$ \&\mbox{\hyperlink{classSamplePointContainer_aac031f93652a7fcd21b5917a780d3022}{min\+\_\+and\+\_\+max\+\_\+coordinates}}, const Vector$<$ unsigned $>$ \&\mbox{\hyperlink{classBinArray_a55a09b07aea56637d29ba63e28f21f1b}{dimensions\+\_\+of\+\_\+bin\+\_\+array}}, const bool \&\mbox{\hyperlink{classSamplePointContainer_a6b6b42a9e6bd8f116af8699e03a78d44}{use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup}}, const bool \&\mbox{\hyperlink{classSamplePointContainer_a399d246c1afdfd993ceb80e6f2de1400}{ignore\+\_\+halo\+\_\+elements\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+search}}, const unsigned \&\mbox{\hyperlink{classSamplePointContainer_a816528cf500a37fa9ecabe6381b31852}{nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element}})
+\mbox{\hyperlink{classBinArray_af617decca4f8d1ce338d78030366ff17}{Bin\+Array}} (Mesh $\ast$\mbox{\hyperlink{classSamplePointContainer_ae170916821b5f8f00255d251cd7f2d8c}{mesh\+\_\+pt}}, const Vector$<$ std\+::pair$<$ double, double $>$$>$ \&\mbox{\hyperlink{classSamplePointContainer_a6799027f7c569176934457b17bfddf0f}{min\+\_\+and\+\_\+max\+\_\+coordinates}}, const Vector$<$ unsigned $>$ \&\mbox{\hyperlink{classBinArray_a527596c024da9b9baf817778af18704a}{dimensions\+\_\+of\+\_\+bin\+\_\+array}}, const bool \&\mbox{\hyperlink{classSamplePointContainer_a6b6b42a9e6bd8f116af8699e03a78d44}{use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup}}, const bool \&\mbox{\hyperlink{classSamplePointContainer_a399d246c1afdfd993ceb80e6f2de1400}{ignore\+\_\+halo\+\_\+elements\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+search}}, const unsigned \&\mbox{\hyperlink{classSamplePointContainer_a48e5ae762e0d56f67645ce4e7dd886d7}{nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element}})
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classBinArray_ae1bd440bc2eb6436158d306e26309eba}{Bin\+Array}} ()
 \begin{DoxyCompactList}\small\item\em Broken default constructor; needed for broken copy constructors. Don\textquotesingle{}t call. It will die. \end{DoxyCompactList}\item 
@@ -48,7 +48,7 @@ unsigned \mbox{\hyperlink{classBinArray_a8e0c4a67385d7dcc714de95ce9965f34}{ndim\
 \begin{DoxyCompactList}\small\item\em Dimension of the zeta ( = dim of local coordinate of elements) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classBinArray_a0148631c80ef91ad21b985986ae24394}{dimension\+\_\+of\+\_\+bin\+\_\+array}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Number of bins in coordinate direction i. \end{DoxyCompactList}\item 
-Vector$<$ unsigned $>$ \mbox{\hyperlink{classBinArray_a55a09b07aea56637d29ba63e28f21f1b}{dimensions\+\_\+of\+\_\+bin\+\_\+array}} () const
+Vector$<$ unsigned $>$ \mbox{\hyperlink{classBinArray_a527596c024da9b9baf817778af18704a}{dimensions\+\_\+of\+\_\+bin\+\_\+array}} () const
 \begin{DoxyCompactList}\small\item\em Number of bins in coordinate directions. Const vector-\/based version. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classBinArray_a7814241e3fa3da0f5449a85a6d0d2ee1}{dimensions\+\_\+of\+\_\+bin\+\_\+array}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Number of bins in specified coordinate direction. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -65,16 +65,16 @@ Vector$<$ unsigned $>$ \mbox{\hyperlink{classBinArray_aaab4005f8563e42df5fc8e7ac
 
 Base class for all bin arrays 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00401}{401}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 401 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classBinArray_ae441b5dcc0d0276f4661a09ff735b581}\label{classBinArray_ae441b5dcc0d0276f4661a09ff735b581}} 
+\mbox{\Hypertarget{classBinArray_af617decca4f8d1ce338d78030366ff17}\label{classBinArray_af617decca4f8d1ce338d78030366ff17}} 
 \index{BinArray@{BinArray}!BinArray@{BinArray}}
 \index{BinArray@{BinArray}!BinArray@{BinArray}}
 \doxysubsubsection{\texorpdfstring{BinArray()}{BinArray()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
-{\footnotesize\ttfamily Bin\+Array\+::\+Bin\+Array (\begin{DoxyParamCaption}\item[{Mesh $\ast$}]{mesh\+\_\+pt,  }\item[{const Vector$<$ std\+::pair$<$ double, double $>$ $>$ \&}]{min\+\_\+and\+\_\+max\+\_\+coordinates,  }\item[{const Vector$<$ unsigned $>$ \&}]{dimensions\+\_\+of\+\_\+bin\+\_\+array,  }\item[{const bool \&}]{use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup,  }\item[{const bool \&}]{ignore\+\_\+halo\+\_\+elements\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+search,  }\item[{const unsigned \&}]{nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily Bin\+Array\+::\+Bin\+Array (\begin{DoxyParamCaption}\item[{Mesh $\ast$}]{mesh\+\_\+pt,  }\item[{const Vector$<$ std\+::pair$<$ double, double $>$$>$ \&}]{min\+\_\+and\+\_\+max\+\_\+coordinates,  }\item[{const Vector$<$ unsigned $>$ \&}]{dimensions\+\_\+of\+\_\+bin\+\_\+array,  }\item[{const bool \&}]{use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup,  }\item[{const bool \&}]{ignore\+\_\+halo\+\_\+elements\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+search,  }\item[{const unsigned \&}]{nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -82,7 +82,7 @@ Constructor.
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00405}{405}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 405 of file sample\+\_\+point\+\_\+container.\+h.
 
 \mbox{\Hypertarget{classBinArray_ae1bd440bc2eb6436158d306e26309eba}\label{classBinArray_ae1bd440bc2eb6436158d306e26309eba}} 
 \index{BinArray@{BinArray}!BinArray@{BinArray}}
@@ -96,7 +96,7 @@ Broken default constructor; needed for broken copy constructors. Don\textquotesi
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00425}{425}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 425 of file sample\+\_\+point\+\_\+container.\+h.
 
 \mbox{\Hypertarget{classBinArray_ad60dd2a93b57b4fb7dae54cc342e9173}\label{classBinArray_ad60dd2a93b57b4fb7dae54cc342e9173}} 
 \index{BinArray@{BinArray}!BinArray@{BinArray}}
@@ -120,7 +120,7 @@ Virtual destructor.
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00440}{440}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 440 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
@@ -137,15 +137,15 @@ Get (linearly enumerated) bin index of bin that contains specified zeta.
 
 Update the coef and the bin index
 
-Definition at line \mbox{\hyperlink{sample__point__container_8cc_source_l01840}{1840}} of file \mbox{\hyperlink{sample__point__container_8cc_source}{sample\+\_\+point\+\_\+container.\+cc}}.
+Definition at line 1840 of file sample\+\_\+point\+\_\+container.\+cc.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8h_source_l00494}{dimensions\+\_\+of\+\_\+bin\+\_\+array()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00363}{Sample\+Point\+Container\+::\+Min\+\_\+and\+\_\+max\+\_\+coordinates}}, and \mbox{\hyperlink{sample__point__container_8h_source_l00480}{ndim\+\_\+zeta()}}.
+References dimensions\+\_\+of\+\_\+bin\+\_\+array(), Sample\+Point\+Container\+::\+Min\+\_\+and\+\_\+max\+\_\+coordinates, and ndim\+\_\+zeta().
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8h_source_l00612}{Refineable\+Bin\+Array\+::add\+\_\+sample\+\_\+point()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l01882}{Refineable\+Bin\+Array\+::fill\+\_\+bin\+\_\+array()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l02002}{Refineable\+Bin\+Array\+::locate\+\_\+zeta()}}, and \mbox{\hyperlink{sample__point__container_8cc_source_l01227}{profile\+\_\+get\+\_\+neighbouring\+\_\+bins\+\_\+helper()}}.
+Referenced by Refineable\+Bin\+Array\+::add\+\_\+sample\+\_\+point(), Refineable\+Bin\+Array\+::fill\+\_\+bin\+\_\+array(), Refineable\+Bin\+Array\+::locate\+\_\+zeta(), and profile\+\_\+get\+\_\+neighbouring\+\_\+bins\+\_\+helper().
 
 \mbox{\Hypertarget{classBinArray_afc41ba4569c25acdf56000a6a82e7859}\label{classBinArray_afc41ba4569c25acdf56000a6a82e7859}} 
 \index{BinArray@{BinArray}!coords\_to\_vectorial\_bin\_index@{coords\_to\_vectorial\_bin\_index}}
@@ -159,15 +159,15 @@ Get \char`\"{}coordinates\char`\"{} of bin that contains specified zeta.
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8cc_source_l01969}{1969}} of file \mbox{\hyperlink{sample__point__container_8cc_source}{sample\+\_\+point\+\_\+container.\+cc}}.
+Definition at line 1969 of file sample\+\_\+point\+\_\+container.\+cc.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8h_source_l00494}{dimensions\+\_\+of\+\_\+bin\+\_\+array()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00363}{Sample\+Point\+Container\+::\+Min\+\_\+and\+\_\+max\+\_\+coordinates}}, and \mbox{\hyperlink{sample__point__container_8h_source_l00480}{ndim\+\_\+zeta()}}.
+References dimensions\+\_\+of\+\_\+bin\+\_\+array(), Sample\+Point\+Container\+::\+Min\+\_\+and\+\_\+max\+\_\+coordinates, and ndim\+\_\+zeta().
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8cc_source_l02002}{Refineable\+Bin\+Array\+::locate\+\_\+zeta()}}, and \mbox{\hyperlink{sample__point__container_8cc_source_l01227}{profile\+\_\+get\+\_\+neighbouring\+\_\+bins\+\_\+helper()}}.
+Referenced by Refineable\+Bin\+Array\+::locate\+\_\+zeta(), and profile\+\_\+get\+\_\+neighbouring\+\_\+bins\+\_\+helper().
 
 \mbox{\Hypertarget{classBinArray_a0148631c80ef91ad21b985986ae24394}\label{classBinArray_a0148631c80ef91ad21b985986ae24394}} 
 \index{BinArray@{BinArray}!dimension\_of\_bin\_array@{dimension\_of\_bin\_array}}
@@ -181,21 +181,21 @@ Number of bins in coordinate direction i.
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00486}{486}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 486 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8h_source_l00508}{Dimensions\+\_\+of\+\_\+bin\+\_\+array}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References Dimensions\+\_\+of\+\_\+bin\+\_\+array, and i.
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8cc_source_l00995}{Refineable\+Bin\+Array\+::get\+\_\+bin\+\_\+boundaries()}}.
+Referenced by Refineable\+Bin\+Array\+::get\+\_\+bin\+\_\+boundaries().
 
-\mbox{\Hypertarget{classBinArray_a55a09b07aea56637d29ba63e28f21f1b}\label{classBinArray_a55a09b07aea56637d29ba63e28f21f1b}} 
+\mbox{\Hypertarget{classBinArray_a527596c024da9b9baf817778af18704a}\label{classBinArray_a527596c024da9b9baf817778af18704a}} 
 \index{BinArray@{BinArray}!dimensions\_of\_bin\_array@{dimensions\_of\_bin\_array}}
 \index{dimensions\_of\_bin\_array@{dimensions\_of\_bin\_array}!BinArray@{BinArray}}
 \doxysubsubsection{\texorpdfstring{dimensions\_of\_bin\_array()}{dimensions\_of\_bin\_array()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily Vector$<$ unsigned $>$ Bin\+Array\+::dimensions\+\_\+of\+\_\+bin\+\_\+array (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily Vector$<$unsigned$>$ Bin\+Array\+::dimensions\+\_\+of\+\_\+bin\+\_\+array (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -203,15 +203,15 @@ Number of bins in coordinate directions. Const vector-\/based version.
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00494}{494}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 494 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8h_source_l00508}{Dimensions\+\_\+of\+\_\+bin\+\_\+array}}.
+References Dimensions\+\_\+of\+\_\+bin\+\_\+array.
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8cc_source_l01840}{coords\+\_\+to\+\_\+bin\+\_\+index()}}, and \mbox{\hyperlink{sample__point__container_8cc_source_l01969}{coords\+\_\+to\+\_\+vectorial\+\_\+bin\+\_\+index()}}.
+Referenced by coords\+\_\+to\+\_\+bin\+\_\+index(), and coords\+\_\+to\+\_\+vectorial\+\_\+bin\+\_\+index().
 
 \mbox{\Hypertarget{classBinArray_a7814241e3fa3da0f5449a85a6d0d2ee1}\label{classBinArray_a7814241e3fa3da0f5449a85a6d0d2ee1}} 
 \index{BinArray@{BinArray}!dimensions\_of\_bin\_array@{dimensions\_of\_bin\_array}}
@@ -225,11 +225,11 @@ Number of bins in specified coordinate direction.
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00501}{501}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 501 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8h_source_l00508}{Dimensions\+\_\+of\+\_\+bin\+\_\+array}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References Dimensions\+\_\+of\+\_\+bin\+\_\+array, and i.
 
 \mbox{\Hypertarget{classBinArray_a704060ec54de24dd65c73af63a25d2b2}\label{classBinArray_a704060ec54de24dd65c73af63a25d2b2}} 
 \index{BinArray@{BinArray}!get\_neighbouring\_bins\_helper@{get\_neighbouring\_bins\_helper}}
@@ -243,15 +243,15 @@ Helper function for computing the bin indices of neighbouring bins at a given \c
 
 Helper function for computing the bin indices of neighbouring bins at a given \char`\"{}radius\char`\"{} of the specified bin. 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8cc_source_l01350}{1350}} of file \mbox{\hyperlink{sample__point__container_8cc_source}{sample\+\_\+point\+\_\+container.\+cc}}.
+Definition at line 1350 of file sample\+\_\+point\+\_\+container.\+cc.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8h_source_l00508}{Dimensions\+\_\+of\+\_\+bin\+\_\+array}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{sample__point__container_8h_source_l00480}{ndim\+\_\+zeta()}}.
+References Dimensions\+\_\+of\+\_\+bin\+\_\+array, i, and ndim\+\_\+zeta().
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8cc_source_l02667}{Non\+Refineable\+Bin\+Array\+::fill\+\_\+bin\+\_\+by\+\_\+diffusion()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l02002}{Refineable\+Bin\+Array\+::locate\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l03088}{Non\+Refineable\+Bin\+Array\+::locate\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l01044}{Refineable\+Bin\+Array\+::output\+\_\+neighbouring\+\_\+bins()}}, and \mbox{\hyperlink{sample__point__container_8cc_source_l01227}{profile\+\_\+get\+\_\+neighbouring\+\_\+bins\+\_\+helper()}}.
+Referenced by Non\+Refineable\+Bin\+Array\+::fill\+\_\+bin\+\_\+by\+\_\+diffusion(), Refineable\+Bin\+Array\+::locate\+\_\+zeta(), Non\+Refineable\+Bin\+Array\+::locate\+\_\+zeta(), Refineable\+Bin\+Array\+::output\+\_\+neighbouring\+\_\+bins(), and profile\+\_\+get\+\_\+neighbouring\+\_\+bins\+\_\+helper().
 
 \mbox{\Hypertarget{classBinArray_a1bd867e26195feb7ae95a8e77acadca8}\label{classBinArray_a1bd867e26195feb7ae95a8e77acadca8}} 
 \index{BinArray@{BinArray}!max\_bin\_dimension@{max\_bin\_dimension}}
@@ -265,11 +265,11 @@ Max. bin dimension (number of bins in coordinate directions)
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8cc_source_l00659}{659}} of file \mbox{\hyperlink{sample__point__container_8cc_source}{sample\+\_\+point\+\_\+container.\+cc}}.
+Definition at line 659 of file sample\+\_\+point\+\_\+container.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l00524}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}, and \mbox{\hyperlink{sample__point__container_8cc_source_l02169}{Non\+Refineable\+Bin\+Array\+::\+Non\+Refineable\+Bin\+Array()}}.
+Referenced by oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction(), and Non\+Refineable\+Bin\+Array\+::\+Non\+Refineable\+Bin\+Array().
 
 \mbox{\Hypertarget{classBinArray_aad085bf99d78162120c419f7504d256b}\label{classBinArray_aad085bf99d78162120c419f7504d256b}} 
 \index{BinArray@{BinArray}!nbin@{nbin}}
@@ -283,7 +283,7 @@ Number of bins (not taking recursion into account for refineable versions)
 
 
 
-Implemented in \mbox{\hyperlink{classRefineableBinArray_a5975657726af982a4d67ff6470abb9d1}{Refineable\+Bin\+Array}}, and \mbox{\hyperlink{classNonRefineableBinArray_af591a06dbe5bbf379c5a52d7a2f1d611}{Non\+Refineable\+Bin\+Array}}.
+Implemented in \mbox{\hyperlink{classNonRefineableBinArray_af591a06dbe5bbf379c5a52d7a2f1d611}{Non\+Refineable\+Bin\+Array}}, and \mbox{\hyperlink{classRefineableBinArray_a5975657726af982a4d67ff6470abb9d1}{Refineable\+Bin\+Array}}.
 
 \mbox{\Hypertarget{classBinArray_a8e0c4a67385d7dcc714de95ce9965f34}\label{classBinArray_a8e0c4a67385d7dcc714de95ce9965f34}} 
 \index{BinArray@{BinArray}!ndim\_zeta@{ndim\_zeta}}
@@ -301,15 +301,15 @@ Implements \mbox{\hyperlink{classSamplePointContainer_af2cfee8a92a28addb59a5533d
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00480}{480}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 480 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8h_source_l00508}{Dimensions\+\_\+of\+\_\+bin\+\_\+array}}.
+References Dimensions\+\_\+of\+\_\+bin\+\_\+array.
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8cc_source_l01840}{coords\+\_\+to\+\_\+bin\+\_\+index()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l01969}{coords\+\_\+to\+\_\+vectorial\+\_\+bin\+\_\+index()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l01882}{Refineable\+Bin\+Array\+::fill\+\_\+bin\+\_\+array()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l02402}{Non\+Refineable\+Bin\+Array\+::fill\+\_\+bin\+\_\+array()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l02794}{Non\+Refineable\+Bin\+Array\+::get\+\_\+bin()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l00995}{Refineable\+Bin\+Array\+::get\+\_\+bin\+\_\+boundaries()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l02912}{Non\+Refineable\+Bin\+Array\+::get\+\_\+bin\+\_\+vertices()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l01350}{get\+\_\+neighbouring\+\_\+bins\+\_\+helper()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l02002}{Refineable\+Bin\+Array\+::locate\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l03088}{Non\+Refineable\+Bin\+Array\+::locate\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l03057}{Non\+Refineable\+Bin\+Array\+::min\+\_\+distance()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00845}{Non\+Refineable\+Bin\+Array\+::nbin()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l02357}{Non\+Refineable\+Bin\+Array\+::output\+\_\+bin\+\_\+vertices()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l02308}{Non\+Refineable\+Bin\+Array\+::output\+\_\+bins()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l01044}{Refineable\+Bin\+Array\+::output\+\_\+neighbouring\+\_\+bins()}}, and \mbox{\hyperlink{sample__point__container_8cc_source_l01227}{profile\+\_\+get\+\_\+neighbouring\+\_\+bins\+\_\+helper()}}.
+Referenced by coords\+\_\+to\+\_\+bin\+\_\+index(), coords\+\_\+to\+\_\+vectorial\+\_\+bin\+\_\+index(), Refineable\+Bin\+Array\+::fill\+\_\+bin\+\_\+array(), Non\+Refineable\+Bin\+Array\+::fill\+\_\+bin\+\_\+array(), Non\+Refineable\+Bin\+Array\+::get\+\_\+bin(), Refineable\+Bin\+Array\+::get\+\_\+bin\+\_\+boundaries(), Non\+Refineable\+Bin\+Array\+::get\+\_\+bin\+\_\+vertices(), get\+\_\+neighbouring\+\_\+bins\+\_\+helper(), Refineable\+Bin\+Array\+::locate\+\_\+zeta(), Non\+Refineable\+Bin\+Array\+::locate\+\_\+zeta(), Non\+Refineable\+Bin\+Array\+::min\+\_\+distance(), Non\+Refineable\+Bin\+Array\+::nbin(), Non\+Refineable\+Bin\+Array\+::output\+\_\+bin\+\_\+vertices(), Non\+Refineable\+Bin\+Array\+::output\+\_\+bins(), Refineable\+Bin\+Array\+::output\+\_\+neighbouring\+\_\+bins(), and profile\+\_\+get\+\_\+neighbouring\+\_\+bins\+\_\+helper().
 
 \mbox{\Hypertarget{classBinArray_af8cb652301eb452d7a908407134d36d1}\label{classBinArray_af8cb652301eb452d7a908407134d36d1}} 
 \index{BinArray@{BinArray}!operator=@{operator=}}
@@ -333,7 +333,7 @@ Output bin vertices (allowing display of bin boundaries as zones).
 
 
 
-Implemented in \mbox{\hyperlink{classRefineableBinArray_a982851086eb3973d4f17d5a5364d8faa}{Refineable\+Bin\+Array}}, and \mbox{\hyperlink{classNonRefineableBinArray_a9db5392fc81650a23251f1f5de52f0af}{Non\+Refineable\+Bin\+Array}}.
+Implemented in \mbox{\hyperlink{classNonRefineableBinArray_a9db5392fc81650a23251f1f5de52f0af}{Non\+Refineable\+Bin\+Array}}, and \mbox{\hyperlink{classRefineableBinArray_a982851086eb3973d4f17d5a5364d8faa}{Refineable\+Bin\+Array}}.
 
 \mbox{\Hypertarget{classBinArray_a66fe7e379a53e3fee81ead7ef4045b40}\label{classBinArray_a66fe7e379a53e3fee81ead7ef4045b40}} 
 \index{BinArray@{BinArray}!output\_bins@{output\_bins}}
@@ -347,11 +347,11 @@ Output bins (boundaries and number of sample points in them)
 
 
 
-Implemented in \mbox{\hyperlink{classRefineableBinArray_ab92ef5225b96b684b58f3a0905aacf75}{Refineable\+Bin\+Array}}, and \mbox{\hyperlink{classNonRefineableBinArray_aace5835e23625cc491a2fe084823ac3a}{Non\+Refineable\+Bin\+Array}}.
+Implemented in \mbox{\hyperlink{classNonRefineableBinArray_aace5835e23625cc491a2fe084823ac3a}{Non\+Refineable\+Bin\+Array}}, and \mbox{\hyperlink{classRefineableBinArray_ab92ef5225b96b684b58f3a0905aacf75}{Refineable\+Bin\+Array}}.
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l00524}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}.
+Referenced by oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction().
 
 \mbox{\Hypertarget{classBinArray_af2a223b6a244b75d4c1e358a95aa57f1}\label{classBinArray_af2a223b6a244b75d4c1e358a95aa57f1}} 
 \index{BinArray@{BinArray}!profile\_get\_neighbouring\_bins\_helper@{profile\_get\_neighbouring\_bins\_helper}}
@@ -365,11 +365,11 @@ Profiling function to compare performance of two different versions of the get\+
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8cc_source_l01227}{1227}} of file \mbox{\hyperlink{sample__point__container_8cc_source}{sample\+\_\+point\+\_\+container.\+cc}}.
+Definition at line 1227 of file sample\+\_\+point\+\_\+container.\+cc.
 
 
 
-References \mbox{\hyperlink{sample__point__container_8cc_source_l01840}{coords\+\_\+to\+\_\+bin\+\_\+index()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l01969}{coords\+\_\+to\+\_\+vectorial\+\_\+bin\+\_\+index()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00508}{Dimensions\+\_\+of\+\_\+bin\+\_\+array}}, \mbox{\hyperlink{sample__point__container_8cc_source_l01350}{get\+\_\+neighbouring\+\_\+bins\+\_\+helper()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{sample__point__container_8h_source_l00363}{Sample\+Point\+Container\+::\+Min\+\_\+and\+\_\+max\+\_\+coordinates}}, \mbox{\hyperlink{sample__point__container_8h_source_l00480}{ndim\+\_\+zeta()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}.
+References coords\+\_\+to\+\_\+bin\+\_\+index(), coords\+\_\+to\+\_\+vectorial\+\_\+bin\+\_\+index(), Dimensions\+\_\+of\+\_\+bin\+\_\+array, get\+\_\+neighbouring\+\_\+bins\+\_\+helper(), i, Sample\+Point\+Container\+::\+Min\+\_\+and\+\_\+max\+\_\+coordinates, ndim\+\_\+zeta(), oomph\+::oomph\+\_\+info, and oomph\+::\+Timing\+Helpers\+::timer().
 
 
 
@@ -386,11 +386,11 @@ Number of bins in each coordinate direction.
 
 
 
-Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00508}{508}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+Definition at line 508 of file sample\+\_\+point\+\_\+container.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{sample__point__container_8h_source_l00486}{dimension\+\_\+of\+\_\+bin\+\_\+array()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00494}{dimensions\+\_\+of\+\_\+bin\+\_\+array()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l02402}{Non\+Refineable\+Bin\+Array\+::fill\+\_\+bin\+\_\+array()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l02794}{Non\+Refineable\+Bin\+Array\+::get\+\_\+bin()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l00995}{Refineable\+Bin\+Array\+::get\+\_\+bin\+\_\+boundaries()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l02912}{Non\+Refineable\+Bin\+Array\+::get\+\_\+bin\+\_\+vertices()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l01350}{get\+\_\+neighbouring\+\_\+bins\+\_\+helper()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l02002}{Refineable\+Bin\+Array\+::locate\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l03088}{Non\+Refineable\+Bin\+Array\+::locate\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00845}{Non\+Refineable\+Bin\+Array\+::nbin()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00480}{ndim\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l02169}{Non\+Refineable\+Bin\+Array\+::\+Non\+Refineable\+Bin\+Array()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l02357}{Non\+Refineable\+Bin\+Array\+::output\+\_\+bin\+\_\+vertices()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l02308}{Non\+Refineable\+Bin\+Array\+::output\+\_\+bins()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l01227}{profile\+\_\+get\+\_\+neighbouring\+\_\+bins\+\_\+helper()}}, and \mbox{\hyperlink{sample__point__container_8cc_source_l00841}{Refineable\+Bin\+Array\+::\+Refineable\+Bin\+Array()}}.
+Referenced by dimension\+\_\+of\+\_\+bin\+\_\+array(), dimensions\+\_\+of\+\_\+bin\+\_\+array(), Non\+Refineable\+Bin\+Array\+::fill\+\_\+bin\+\_\+array(), Non\+Refineable\+Bin\+Array\+::get\+\_\+bin(), Refineable\+Bin\+Array\+::get\+\_\+bin\+\_\+boundaries(), Non\+Refineable\+Bin\+Array\+::get\+\_\+bin\+\_\+vertices(), get\+\_\+neighbouring\+\_\+bins\+\_\+helper(), Refineable\+Bin\+Array\+::locate\+\_\+zeta(), Non\+Refineable\+Bin\+Array\+::locate\+\_\+zeta(), Non\+Refineable\+Bin\+Array\+::nbin(), ndim\+\_\+zeta(), Non\+Refineable\+Bin\+Array\+::\+Non\+Refineable\+Bin\+Array(), Non\+Refineable\+Bin\+Array\+::output\+\_\+bin\+\_\+vertices(), Non\+Refineable\+Bin\+Array\+::output\+\_\+bins(), profile\+\_\+get\+\_\+neighbouring\+\_\+bins\+\_\+helper(), and Refineable\+Bin\+Array\+::\+Refineable\+Bin\+Array().
 
 
 

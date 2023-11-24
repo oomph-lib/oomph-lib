@@ -43,7 +43,7 @@ A base class that represents the fourth-\/rank elasticity tensor $E_{ijkl}$ defi
 
 \[\tau_{ij} = E_{ijkl} e_{kl},\] where $e_{ij}$ is the infinitessimal (Cauchy) strain tensor and $\tau_{ij}$ is the stress tensor. The symmetries of the tensor are such that \[E_{ijkl} = E_{jikl} = E_{ijlk} = E_{klij}\] and thus there are relatively few independent components. These symmetries are included in the definition of the object so that non-\/physical symmetries cannot be accidentally imposed. 
 
-Definition at line \mbox{\hyperlink{time__harmonic__elasticity__tensor_8h_source_l00054}{54}} of file \mbox{\hyperlink{time__harmonic__elasticity__tensor_8h_source}{time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h}}.
+Definition at line 54 of file time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h.
 
 
 
@@ -60,7 +60,7 @@ Empty Constructor.
 
 
 
-Definition at line \mbox{\hyperlink{time__harmonic__elasticity__tensor_8h_source_l00113}{113}} of file \mbox{\hyperlink{time__harmonic__elasticity__tensor_8h_source}{time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h}}.
+Definition at line 113 of file time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TimeHarmonicElasticityTensor_aa1813e96fe387cfb05ae97892a1fdd84}\label{classoomph_1_1TimeHarmonicElasticityTensor_aa1813e96fe387cfb05ae97892a1fdd84}} 
 \index{oomph::TimeHarmonicElasticityTensor@{oomph::TimeHarmonicElasticityTensor}!````~TimeHarmonicElasticityTensor@{$\sim$TimeHarmonicElasticityTensor}}
@@ -74,7 +74,7 @@ Empty virtual Destructor.
 
 
 
-Definition at line \mbox{\hyperlink{time__harmonic__elasticity__tensor_8h_source_l00117}{117}} of file \mbox{\hyperlink{time__harmonic__elasticity__tensor_8h_source}{time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h}}.
+Definition at line 117 of file time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h.
 
 
 
@@ -95,11 +95,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1TimeHarmonicIsotropicElasticityT
 
 
 
-Definition at line \mbox{\hyperlink{time__harmonic__elasticity__tensor_8h_source_l00063}{63}} of file \mbox{\hyperlink{time__harmonic__elasticity__tensor_8h_source}{time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h}}.
+Definition at line 63 of file time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{time__harmonic__elasticity__tensor_8h_source_l00122}{operator()()}}.
+Referenced by operator()().
 
 \mbox{\Hypertarget{classoomph_1_1TimeHarmonicElasticityTensor_a9af7ee0d97cb9308092795098b775b11}\label{classoomph_1_1TimeHarmonicElasticityTensor_a9af7ee0d97cb9308092795098b775b11}} 
 \index{oomph::TimeHarmonicElasticityTensor@{oomph::TimeHarmonicElasticityTensor}!operator()@{operator()}}
@@ -113,11 +113,11 @@ Return the appropriate independent component via the index translation scheme (c
 
 
 
-Definition at line \mbox{\hyperlink{time__harmonic__elasticity__tensor_8h_source_l00122}{122}} of file \mbox{\hyperlink{time__harmonic__elasticity__tensor_8h_source}{time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h}}.
+Definition at line 122 of file time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{time__harmonic__elasticity__tensor_8h_source_l00063}{independent\+\_\+component()}}, \mbox{\hyperlink{time__harmonic__elasticity__tensor_8h_source_l00058}{Index}}, and \mbox{\hyperlink{time__harmonic__elasticity__tensor_8h_source_l00073}{range\+\_\+check()}}.
+References i, independent\+\_\+component(), Index, and range\+\_\+check().
 
 \mbox{\Hypertarget{classoomph_1_1TimeHarmonicElasticityTensor_a825792d8631abc2a23ed5f12c445384c}\label{classoomph_1_1TimeHarmonicElasticityTensor_a825792d8631abc2a23ed5f12c445384c}} 
 \index{oomph::TimeHarmonicElasticityTensor@{oomph::TimeHarmonicElasticityTensor}!range\_check@{range\_check}}
@@ -131,15 +131,15 @@ Helper range checking function (Note that this only captures over-\/runs in 3D b
 
 
 
-Definition at line \mbox{\hyperlink{time__harmonic__elasticity__tensor_8h_source_l00073}{73}} of file \mbox{\hyperlink{time__harmonic__elasticity__tensor_8h_source}{time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h}}.
+Definition at line 73 of file time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References i.
 
 
 
-Referenced by \mbox{\hyperlink{time__harmonic__elasticity__tensor_8h_source_l00122}{operator()()}}.
+Referenced by operator()().
 
 
 
@@ -174,11 +174,11 @@ Translation scheme that takes account of the symmetries of the tensor. The indep
 
 / \[\begin{array}{cc} 0 & E_{1111} \\ 1 & E_{1112} \\ 2 & E_{1122} \\ 3 & E_{1212} \\ 4 & E_{1222} \\ 5 & E_{2222} \\ 6 & E_{1113} \\ 7 & E_{1123} \\ 8 & E_{1133} \\ 9 & E_{1213} \\ 10 & E_{1223} \\ 11 & E_{1233} \\ 12 & E_{1313} \\ 13 & E_{1322} \\ 14 & E_{1323} \\ 15 & E_{1333} \\ 16 & E_{2223} \\ 17 & E_{2233} \\ 18 & E_{2323} \\ 19 & E_{2333} \\ 20 & E_{3333} \end{array}\] / 
 
-Definition at line \mbox{\hyperlink{time__harmonic__elasticity__tensor_8h_source_l00058}{58}} of file \mbox{\hyperlink{time__harmonic__elasticity__tensor_8h_source}{time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h}}.
+Definition at line 58 of file time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{time__harmonic__elasticity__tensor_8h_source_l00122}{operator()()}}.
+Referenced by operator()().
 
 
 

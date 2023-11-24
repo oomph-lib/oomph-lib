@@ -24,12 +24,16 @@ Inheritance diagram for oomph\+::Eigen\+Solver\+:\begin{figure}[H]
 \begin{DoxyCompactList}\small\item\em Empty copy constructor. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1EigenSolver_a05742af42f53f3904b06c7650e3c10c5}{$\sim$\+Eigen\+Solver}} ()
 \begin{DoxyCompactList}\small\item\em Empty destructor. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1EigenSolver_a6a6b09612ce16457b26fa0cfe996fa71}{solve\+\_\+eigenproblem}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&problem\+\_\+pt, const int \&n\+\_\+eval, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&eigenvalue, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&eigenvector)=0
-\begin{DoxyCompactList}\small\item\em Actual eigensolver. This takes a pointer to a problem and returns a vector of complex numbers representing the eigenvalues and a corresponding vector of eigenvectors. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1EigenSolver_adbaf38eeb5bab7fe47b7f8cdc94d59b5}{solve\+\_\+eigenproblem\+\_\+legacy}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&problem\+\_\+pt, const int \&n\+\_\+eval, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&eigenvalue, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&eigenvector, const bool \&do\+\_\+adjoint\+\_\+problem=false)=0
+\begin{DoxyCompactList}\small\item\em Eigensolver. This takes a pointer to a problem and returns a vector of complex numbers representing the eigenvalues and a corresponding vector of eigenvectors. n\+\_\+eval specifies the min. number of eigenvalues/vectors required. This is primarily used in Arnoldi type implementations; direct solvers such as QZ compute all the eigenvalues/vectors. Note\+: this is a legacy version of this function that stores re \& imag parts of eigenvectors in some solver-\/specific collection of real vectors. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1EigenSolver_ac7e25aa6bd8e700ce3cec41b51f9a858}{solve\+\_\+eigenproblem}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&problem\+\_\+pt, const int \&n\+\_\+eval, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&eigenvalue, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&eigenvector\+\_\+real, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&eigenvector\+\_\+imag, const bool \&do\+\_\+adjoint\+\_\+problem=false)
+\begin{DoxyCompactList}\small\item\em Solve the real eigenproblem that is assembled by elements in a mesh in a \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} object. Note that the assembled matrices include the shift and are real. The eigenvalues and eigenvectors are, in general, complex, and the eigenvalues can be Na\+Ns or Infs. This function is therefore merely provided as a convenience, to be used if the user is confident that Na\+Ns don\textquotesingle{}t arise (e.\+g. in Arnoldi based solvers where typically only a small number of (finite) eigenvalues are computed), or if the users is happy to deal with Na\+Ns in the subsequent post-\/processing. Function is virtual so it can be overloaded for Arnoldi type solvers that compute the (finite) eigenvalues directly At least n\+\_\+eval eigenvalues are computed. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1EigenSolver_aad724fb650a5c8dc9dfe8cd0587a01ca}{solve\+\_\+eigenproblem}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&problem\+\_\+pt, const int \&n\+\_\+eval, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&alpha, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&beta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&eigenvector\+\_\+real, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&eigenvector\+\_\+imag, const bool \&do\+\_\+adjoint\+\_\+problem=false)=0
+\begin{DoxyCompactList}\small\item\em Solve the real eigenproblem that is assembled by elements in a mesh in a \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} object. Note that the assembled matrices include the shift and are real. The eigenvalues and eigenvectors are, in general, complex. Eigenvalues may be infinite and are therefore returned as $ \lambda_i = \alpha_i / \beta_i $ where $ \alpha_i $ is complex while $ \beta_i $ is real. The actual eigenvalues may then be computed by doing the division, checking for zero betas to avoid Na\+Ns. There\textquotesingle{}s a convenience wrapper to this function that simply computes these eigenvalues regardless. That version may die in NaN checking is enabled (via the fenv.\+h header and the associated feenable function). At least n\+\_\+eval eigenvalues are computed. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1EigenSolver_a8ab55677b39f98ed8ddb1b1ae682f07b}{set\+\_\+shift}} (const double \&shift\+\_\+value)
-\begin{DoxyCompactList}\small\item\em Set the value of the shift. \end{DoxyCompactList}\item 
-const double \& \mbox{\hyperlink{classoomph_1_1EigenSolver_a7322889dc43a88480d6eab8e5406c976}{get\+\_\+shift}} () const
-\begin{DoxyCompactList}\small\item\em Return the value of the shift (const version) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Set the value of the (real) shift. \end{DoxyCompactList}\item 
+const double \& \mbox{\hyperlink{classoomph_1_1EigenSolver_ad468f4b075f09cee5efd6ac726ecad6e}{get\+\_\+shift}} () const
+\begin{DoxyCompactList}\small\item\em Return the value of the (real) shift (const version) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -41,7 +45,7 @@ double \mbox{\hyperlink{classoomph_1_1EigenSolver_ab0ead9f50f12f8d6acf9be4521de9
 \doxysubsection{Detailed Description}
 Base class for all Eigen\+Problem solves. This simply defines standard interfaces so that different solvers can be used easily. 
 
-Definition at line \mbox{\hyperlink{eigen__solver_8h_source_l00060}{60}} of file \mbox{\hyperlink{eigen__solver_8h_source}{eigen\+\_\+solver.\+h}}.
+Definition at line 60 of file eigen\+\_\+solver.\+h.
 
 
 
@@ -58,7 +62,7 @@ Empty constructor.
 
 
 
-Definition at line \mbox{\hyperlink{eigen__solver_8h_source_l00069}{69}} of file \mbox{\hyperlink{eigen__solver_8h_source}{eigen\+\_\+solver.\+h}}.
+Definition at line 69 of file eigen\+\_\+solver.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1EigenSolver_a2ab3e3ffc0a171dd5299d12d8be5d1b2}\label{classoomph_1_1EigenSolver_a2ab3e3ffc0a171dd5299d12d8be5d1b2}} 
 \index{oomph::EigenSolver@{oomph::EigenSolver}!EigenSolver@{EigenSolver}}
@@ -72,7 +76,7 @@ Empty copy constructor.
 
 
 
-Definition at line \mbox{\hyperlink{eigen__solver_8h_source_l00072}{72}} of file \mbox{\hyperlink{eigen__solver_8h_source}{eigen\+\_\+solver.\+h}}.
+Definition at line 72 of file eigen\+\_\+solver.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1EigenSolver_a05742af42f53f3904b06c7650e3c10c5}\label{classoomph_1_1EigenSolver_a05742af42f53f3904b06c7650e3c10c5}} 
 \index{oomph::EigenSolver@{oomph::EigenSolver}!````~EigenSolver@{$\sim$EigenSolver}}
@@ -86,28 +90,28 @@ Empty destructor.
 
 
 
-Definition at line \mbox{\hyperlink{eigen__solver_8h_source_l00075}{75}} of file \mbox{\hyperlink{eigen__solver_8h_source}{eigen\+\_\+solver.\+h}}.
+Definition at line 75 of file eigen\+\_\+solver.\+h.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1EigenSolver_a7322889dc43a88480d6eab8e5406c976}\label{classoomph_1_1EigenSolver_a7322889dc43a88480d6eab8e5406c976}} 
+\mbox{\Hypertarget{classoomph_1_1EigenSolver_ad468f4b075f09cee5efd6ac726ecad6e}\label{classoomph_1_1EigenSolver_ad468f4b075f09cee5efd6ac726ecad6e}} 
 \index{oomph::EigenSolver@{oomph::EigenSolver}!get\_shift@{get\_shift}}
 \index{get\_shift@{get\_shift}!oomph::EigenSolver@{oomph::EigenSolver}}
 \doxysubsubsection{\texorpdfstring{get\_shift()}{get\_shift()}}
-{\footnotesize\ttfamily const double \& oomph\+::\+Eigen\+Solver\+::get\+\_\+shift (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const double\& oomph\+::\+Eigen\+Solver\+::get\+\_\+shift (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Return the value of the shift (const version) 
+Return the value of the (real) shift (const version) 
 
 
 
-Definition at line \mbox{\hyperlink{eigen__solver_8h_source_l00093}{93}} of file \mbox{\hyperlink{eigen__solver_8h_source}{eigen\+\_\+solver.\+h}}.
+Definition at line 161 of file eigen\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{eigen__solver_8h_source_l00065}{Sigma\+\_\+real}}.
+References Sigma\+\_\+real.
 
 \mbox{\Hypertarget{classoomph_1_1EigenSolver_a8ab55677b39f98ed8ddb1b1ae682f07b}\label{classoomph_1_1EigenSolver_a8ab55677b39f98ed8ddb1b1ae682f07b}} 
 \index{oomph::EigenSolver@{oomph::EigenSolver}!set\_shift@{set\_shift}}
@@ -117,33 +121,73 @@ References \mbox{\hyperlink{eigen__solver_8h_source_l00065}{Sigma\+\_\+real}}.
 
 
 
-Set the value of the shift. 
+Set the value of the (real) shift. 
 
 
 
-Definition at line \mbox{\hyperlink{eigen__solver_8h_source_l00087}{87}} of file \mbox{\hyperlink{eigen__solver_8h_source}{eigen\+\_\+solver.\+h}}.
+Definition at line 155 of file eigen\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{eigen__solver_8h_source_l00065}{Sigma\+\_\+real}}.
+References Sigma\+\_\+real.
 
-\mbox{\Hypertarget{classoomph_1_1EigenSolver_a6a6b09612ce16457b26fa0cfe996fa71}\label{classoomph_1_1EigenSolver_a6a6b09612ce16457b26fa0cfe996fa71}} 
+\mbox{\Hypertarget{classoomph_1_1EigenSolver_aad724fb650a5c8dc9dfe8cd0587a01ca}\label{classoomph_1_1EigenSolver_aad724fb650a5c8dc9dfe8cd0587a01ca}} 
 \index{oomph::EigenSolver@{oomph::EigenSolver}!solve\_eigenproblem@{solve\_eigenproblem}}
 \index{solve\_eigenproblem@{solve\_eigenproblem}!oomph::EigenSolver@{oomph::EigenSolver}}
-\doxysubsubsection{\texorpdfstring{solve\_eigenproblem()}{solve\_eigenproblem()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Eigen\+Solver\+::solve\+\_\+eigenproblem (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&}]{problem\+\_\+pt,  }\item[{const int \&}]{n\+\_\+eval,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{eigenvalue,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{eigenvector }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+\doxysubsubsection{\texorpdfstring{solve\_eigenproblem()}{solve\_eigenproblem()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Eigen\+Solver\+::solve\+\_\+eigenproblem (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&}]{problem\+\_\+pt,  }\item[{const int \&}]{n\+\_\+eval,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{alpha,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{beta,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{eigenvector\+\_\+real,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{eigenvector\+\_\+imag,  }\item[{const bool \&}]{do\+\_\+adjoint\+\_\+problem = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
-Actual eigensolver. This takes a pointer to a problem and returns a vector of complex numbers representing the eigenvalues and a corresponding vector of eigenvectors. 
+Solve the real eigenproblem that is assembled by elements in a mesh in a \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} object. Note that the assembled matrices include the shift and are real. The eigenvalues and eigenvectors are, in general, complex. Eigenvalues may be infinite and are therefore returned as $ \lambda_i = \alpha_i / \beta_i $ where $ \alpha_i $ is complex while $ \beta_i $ is real. The actual eigenvalues may then be computed by doing the division, checking for zero betas to avoid Na\+Ns. There\textquotesingle{}s a convenience wrapper to this function that simply computes these eigenvalues regardless. That version may die in NaN checking is enabled (via the fenv.\+h header and the associated feenable function). At least n\+\_\+eval eigenvalues are computed. 
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1ARPACK_ac644213623ea3d91a42cf1ea4608cdf3}{oomph\+::\+ARPACK}}, \mbox{\hyperlink{classoomph_1_1LAPACK__QZ_ae1efb27c494ea6fb0ce1267233c78f74}{oomph\+::\+LAPACK\+\_\+\+QZ}}, and \mbox{\hyperlink{classoomph_1_1ANASAZI_a5b13a2a77a422033c6a522ec68549fa5}{oomph\+::\+ANASAZI}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1LAPACK__QZ_a6857491fb96b3c3b0c883c5a129282f5}{oomph\+::\+LAPACK\+\_\+\+QZ}}, \mbox{\hyperlink{classoomph_1_1ARPACK_a87ac5689ef50d404af3de61ebf925a32}{oomph\+::\+ARPACK}}, and \mbox{\hyperlink{classoomph_1_1ANASAZI_a020970ef3b2e232b1661fcb6c4e86aa8}{oomph\+::\+ANASAZI}}.
+
+\mbox{\Hypertarget{classoomph_1_1EigenSolver_ac7e25aa6bd8e700ce3cec41b51f9a858}\label{classoomph_1_1EigenSolver_ac7e25aa6bd8e700ce3cec41b51f9a858}} 
+\index{oomph::EigenSolver@{oomph::EigenSolver}!solve\_eigenproblem@{solve\_eigenproblem}}
+\index{solve\_eigenproblem@{solve\_eigenproblem}!oomph::EigenSolver@{oomph::EigenSolver}}
+\doxysubsubsection{\texorpdfstring{solve\_eigenproblem()}{solve\_eigenproblem()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Eigen\+Solver\+::solve\+\_\+eigenproblem (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&}]{problem\+\_\+pt,  }\item[{const int \&}]{n\+\_\+eval,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{eigenvalue,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{eigenvector\+\_\+real,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{eigenvector\+\_\+imag,  }\item[{const bool \&}]{do\+\_\+adjoint\+\_\+problem = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
-Referenced by \mbox{\hyperlink{problem_8cc_source_l08313}{oomph\+::\+Problem\+::solve\+\_\+eigenproblem()}}.
+Solve the real eigenproblem that is assembled by elements in a mesh in a \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} object. Note that the assembled matrices include the shift and are real. The eigenvalues and eigenvectors are, in general, complex, and the eigenvalues can be Na\+Ns or Infs. This function is therefore merely provided as a convenience, to be used if the user is confident that Na\+Ns don\textquotesingle{}t arise (e.\+g. in Arnoldi based solvers where typically only a small number of (finite) eigenvalues are computed), or if the users is happy to deal with Na\+Ns in the subsequent post-\/processing. Function is virtual so it can be overloaded for Arnoldi type solvers that compute the (finite) eigenvalues directly At least n\+\_\+eval eigenvalues are computed. 
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1ANASAZI_a683d93a2d8af92730b4b14e00ff79eb5}{oomph\+::\+ANASAZI}}.
+
+
+
+Definition at line 106 of file eigen\+\_\+solver.\+h.
+
+
+
+References i.
+
+
+
+Referenced by oomph\+::\+Problem\+::solve\+\_\+adjoint\+\_\+eigenproblem(), and oomph\+::\+Problem\+::solve\+\_\+eigenproblem().
+
+\mbox{\Hypertarget{classoomph_1_1EigenSolver_adbaf38eeb5bab7fe47b7f8cdc94d59b5}\label{classoomph_1_1EigenSolver_adbaf38eeb5bab7fe47b7f8cdc94d59b5}} 
+\index{oomph::EigenSolver@{oomph::EigenSolver}!solve\_eigenproblem\_legacy@{solve\_eigenproblem\_legacy}}
+\index{solve\_eigenproblem\_legacy@{solve\_eigenproblem\_legacy}!oomph::EigenSolver@{oomph::EigenSolver}}
+\doxysubsubsection{\texorpdfstring{solve\_eigenproblem\_legacy()}{solve\_eigenproblem\_legacy()}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Eigen\+Solver\+::solve\+\_\+eigenproblem\+\_\+legacy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&}]{problem\+\_\+pt,  }\item[{const int \&}]{n\+\_\+eval,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{eigenvalue,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{eigenvector,  }\item[{const bool \&}]{do\+\_\+adjoint\+\_\+problem = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Eigensolver. This takes a pointer to a problem and returns a vector of complex numbers representing the eigenvalues and a corresponding vector of eigenvectors. n\+\_\+eval specifies the min. number of eigenvalues/vectors required. This is primarily used in Arnoldi type implementations; direct solvers such as QZ compute all the eigenvalues/vectors. Note\+: this is a legacy version of this function that stores re \& imag parts of eigenvectors in some solver-\/specific collection of real vectors. 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1LAPACK__QZ_ace099d9e0f27de3ae2f944375486f614}{oomph\+::\+LAPACK\+\_\+\+QZ}}, \mbox{\hyperlink{classoomph_1_1ARPACK_a4cde4899c6a57f395d5feba7587df49c}{oomph\+::\+ARPACK}}, and \mbox{\hyperlink{classoomph_1_1ANASAZI_a9c26757517b3b802d33543d3081ce663}{oomph\+::\+ANASAZI}}.
+
+
+
+Referenced by oomph\+::\+Problem\+::solve\+\_\+adjoint\+\_\+eigenproblem\+\_\+legacy(), and oomph\+::\+Problem\+::solve\+\_\+eigenproblem\+\_\+legacy().
 
 
 
@@ -160,11 +204,11 @@ Double value that represents the real part of the shift in shifted eigensolvers.
 
 
 
-Definition at line \mbox{\hyperlink{eigen__solver_8h_source_l00065}{65}} of file \mbox{\hyperlink{eigen__solver_8h_source}{eigen\+\_\+solver.\+h}}.
+Definition at line 65 of file eigen\+\_\+solver.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{eigen__solver_8h_source_l00093}{get\+\_\+shift()}}, \mbox{\hyperlink{eigen__solver_8h_source_l00087}{set\+\_\+shift()}}, \mbox{\hyperlink{eigen__solver_8cc_source_l00072}{oomph\+::\+ARPACK\+::solve\+\_\+eigenproblem()}}, \mbox{\hyperlink{eigen__solver_8cc_source_l00540}{oomph\+::\+LAPACK\+\_\+\+QZ\+::solve\+\_\+eigenproblem()}}, and \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00662}{oomph\+::\+ANASAZI\+::solve\+\_\+eigenproblem()}}.
+Referenced by oomph\+::\+LAPACK\+\_\+\+QZ\+::find\+\_\+eigenvalues(), get\+\_\+shift(), set\+\_\+shift(), oomph\+::\+ANASAZI\+::solve\+\_\+eigenproblem(), oomph\+::\+LAPACK\+\_\+\+QZ\+::solve\+\_\+eigenproblem\+\_\+helper(), oomph\+::\+ANASAZI\+::solve\+\_\+eigenproblem\+\_\+legacy(), and oomph\+::\+ARPACK\+::solve\+\_\+eigenproblem\+\_\+legacy().
 
 
 

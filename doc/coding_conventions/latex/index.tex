@@ -15,6 +15,10 @@ All C++ source files end with the standard extensions $\ast$.h and $\ast$.cc.
 \item member functions of classes that do not have any template parameters
 \item member functions of templated classes for which it is known a priori which instantiations are required. Examples are classes that are templated by the spatial dimension. In this case we\textquotesingle{}re unlikely to require instantiations for any values other than 0,1,2 and 3.
 \end{DoxyItemize}
+\end{DoxyItemize}
+
+
+\begin{DoxyItemize}
 \item {\ttfamily $\ast$}.template.\+cc\+: Contains any non-\/inline member function of templated classes. This file must be included (together with the corresponding {\ttfamily $\ast$}.h file) when a specific instantiation of a templated class is required. For instance, most specific {\ttfamily Mesh} classes are templated by the element type and the mesh writer can obviously not predict which element types his/her specific mesh is going to be used with.
 \end{DoxyItemize}\hypertarget{index_variables}{}\doxysubsection{General variables}\label{index_variables}
 
@@ -77,17 +81,17 @@ Many classes have member functions that provide access to data in private contai
 \item Use singular for the access function to the container, i.\+e. 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{comment}{/// Return pointer to e-\/th element}}
-\DoxyCodeLine{FiniteElement* element\_pt(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& e);}
+\DoxyCodeLine{\textcolor{comment}{}FiniteElement* element\_pt(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& e);}
 
 \end{DoxyCode}
  rather than {\ttfamily elements\+\_\+pt(...)} 
 \item Use a prefix `{\ttfamily n'} for the access function for the number of entries in the container, i.\+e. 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{comment}{/// Total number of elements}}
-\DoxyCodeLine{\textcolor{keywordtype}{unsigned} nelement();}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{keywordtype}{unsigned} nelement();}
 
 \end{DoxyCode}
- {\bfseries{Notes\+:}} (i) No underscore between the \char`\"{}n\char`\"{} and the container\textquotesingle{}s name; you can then use the underscore for the name of the local variable that stores the value, e.\+g. {\ttfamily unsigned} {\ttfamily n\+\_\+element} {\ttfamily =} {\ttfamily my\+\_\+mesh\+\_\+pt-\/\texorpdfstring{$>$}{>}nelement()}; (ii) No trailing {\ttfamily \+\_\+pt} in the function that returns the number of objects in the container.
+ {\bfseries{Notes\+:}} (i) No underscore between the \char`\"{}n\char`\"{} and the container\textquotesingle{}s name; you can then use the underscore for the name of the local variable that stores the value, e.\+g. {\ttfamily unsigned} {\ttfamily n\+\_\+element} {\ttfamily =} {\ttfamily my\+\_\+mesh\+\_\+pt-\/$>$nelement()}; (ii) No trailing {\ttfamily \+\_\+pt} in the function that returns the number of objects in the container.
 \end{DoxyItemize}\hypertarget{index_template}{}\doxysubsection{Template parameters}\label{index_template}
 
 \begin{DoxyItemize}
@@ -171,6 +175,22 @@ Many classes have member functions that provide access to data in private contai
 
 \end{DoxyCode}
  Note the triple slash \char`\"{}///\char`\"{} in the comment block that preceeds the function definition -- comments contained in such lines are automatically extracted by doxygen and inserted into the code documentation.
+\item All member data is defined (and annotated) on a separate line, otherwise doxygen gets confused. So use 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{/// Number of elements}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{keywordtype}{unsigned} Nelement;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// Number of nodes}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{keywordtype}{unsigned} Nnode;}
+
+\end{DoxyCode}
+ rather than 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{/// Number of elements and nodes}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{keywordtype}{unsigned} Nelement, Nnode;}
+
+\end{DoxyCode}
+
 \end{DoxyItemize}\hypertarget{index_oomph}{}\doxysubsection{The oomph-\/lib namespace}\label{index_oomph}
 
 \begin{DoxyItemize}
@@ -273,7 +293,7 @@ Here is an example of a complete header file, including include guards and libra
 ~\newline
  Here\textquotesingle{}s an example\+: ~\newline
 ~\newline
- 
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{comment}{// Has a global mesh already been built?}}
 \DoxyCodeLine{\textcolor{keywordflow}{if}(Mesh\_pt!=0)}
@@ -345,7 +365,7 @@ Here is an example of a complete header file, including include guards and libra
 
 \begin{DoxyItemize}
 \item Just as the name of a variable gives some indication of its likely use, its type does too. For instance this code fragment ~\newline
- 
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{comment}{// Create a counter}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} counter=0;}
@@ -353,7 +373,7 @@ Here is an example of a complete header file, including include guards and libra
 \end{DoxyCode}
  ~\newline
  immediately raises the question why the programmer anticipates circumstances in which the counter might be negative. Are negative values used to indicate special cases; etc? If the name of the variable was chosen correctly (i.\+e. if the variable really is used as a counter) then ~\newline
- 
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{comment}{// Create a counter}}
 \DoxyCodeLine{\textcolor{keywordtype}{unsigned} counter=0;}
@@ -373,10 +393,10 @@ Here is an example of a complete header file, including include guards and libra
  ~\newline
  With the advent of C++11, this can be done easily using the {\ttfamily delete} keyword\+: ~\newline
 ~\newline
- 
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{comment}{/// Broken copy constructor}}
-\DoxyCodeLine{Mesh(\textcolor{keyword}{const} Mesh\& dummy) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{\textcolor{comment}{}Mesh(\textcolor{keyword}{const} Mesh\& dummy) = \textcolor{keyword}{delete};}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{/// Broken assignment operator}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{keywordtype}{void} operator=(\textcolor{keyword}{const} Mesh\&) = \textcolor{keyword}{delete};}
@@ -389,8 +409,8 @@ Here is an example of a complete header file, including include guards and libra
 \item If values are returned from a function, put them at the end of the argument list.
 \item \char`\"{}\+Time\char`\"{} arguments always come first, e.\+g. 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Return FE interpolated coordinate x[i] at local coordinate s}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// at previous timestep t (t=0: present; t>0: previous timestep)}}
+\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Return FE interpolated coordinate x[i] at local coordinate s}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// at previous timestep t (t=0: present; t>0: previous timestep)}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{keyword}{virtual} \textcolor{keywordtype}{double} interpolated\_x(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& t,}
 \DoxyCodeLine{                              \textcolor{keyword}{const} Vector<double>\& s,}
 \DoxyCodeLine{                              \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& i) \textcolor{keyword}{const};}

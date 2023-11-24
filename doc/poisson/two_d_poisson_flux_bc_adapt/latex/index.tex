@@ -47,10 +47,10 @@ The problem class is very similar to that in the \href{../../two_d_poisson_flux_
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//========= start\_of\_problem\_class=====================================}}
-\DoxyCodeLine{\textcolor{comment}{/// 2D Poisson problem on rectangular domain, discretised with}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// 2D QPoisson elements. Flux boundary conditions are applied}}
-\DoxyCodeLine{\textcolor{comment}{/// along boundary 1 (the boundary where x=L). The specific type of }}
-\DoxyCodeLine{\textcolor{comment}{/// element is specified via the template parameter.}}
+\DoxyCodeLine{\textcolor{comment}{/// 2D Poisson problem on rectangular domain, discretised with}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// 2D QPoisson elements. Flux boundary conditions are applied}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// along boundary 1 (the boundary where x=L). The specific type of }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// element is specified via the template parameter.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT> }
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classRefineableTwoMeshFluxPoissonProblem}{RefineableTwoMeshFluxPoissonProblem}} : \textcolor{keyword}{public} Problem}
@@ -120,7 +120,7 @@ We create the bulk mesh and surface mesh as \href{../../two_d_poisson_flux_bc2/h
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_constructor=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for Poisson problem: Pass pointer to source function.}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classRefineableTwoMeshFluxPoissonProblem_a6568980564c4e39544b1c2bcb71cf3b6}{RefineableTwoMeshFluxPoissonProblem<ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classRefineableTwoMeshFluxPoissonProblem_a6568980564c4e39544b1c2bcb71cf3b6}{RefineableTwoMeshFluxPoissonProblem}}(PoissonEquations<2>::PoissonSourceFctPt source\_fct\_pt)}
@@ -223,7 +223,7 @@ The mesh adaptation is driven by the error estimates in the bulk elements and on
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====================start\_of\_actions\_before\_adapt======================}}
 \DoxyCodeLine{\textcolor{comment}{/// Actions before adapt: Wipe the mesh of prescribed flux elements}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableTwoMeshFluxPoissonProblem_a10d2a67a5ac599161ddcf876b31334f6}{RefineableTwoMeshFluxPoissonProblem<ELEMENT>::actions\_before\_adapt}}()}
 \DoxyCodeLine{\{}
@@ -245,7 +245,7 @@ After the (bulk-\/)mesh has been adapted, the flux elements must be re-\/attache
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====================start\_of\_actions\_after\_adapt=======================}}
 \DoxyCodeLine{\textcolor{comment}{///  Actions after adapt: Rebuild the mesh of prescribed flux elements}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableTwoMeshFluxPoissonProblem_a0140155529861f5e63ab32feece3c9b6}{RefineableTwoMeshFluxPoissonProblem<ELEMENT>::actions\_after\_adapt}}()}
 \DoxyCodeLine{\{}
@@ -280,7 +280,7 @@ This function loops over all the flux elements (i.\+e. those in the surface mesh
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_delete\_flux\_elements==============================}}
 \DoxyCodeLine{\textcolor{comment}{/// Delete Poisson Flux Elements and wipe the surface mesh}}
-\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableTwoMeshFluxPoissonProblem_ab35087cadc6dbc7a602441b9a986d650}{RefineableTwoMeshFluxPoissonProblem<ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classRefineableTwoMeshFluxPoissonProblem_ab35087cadc6dbc7a602441b9a986d650}{delete\_flux\_elements}}(Mesh* \textcolor{keyword}{const} \&surface\_mesh\_pt)}

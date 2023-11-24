@@ -48,7 +48,7 @@ Here\textquotesingle{}s a listing of the complete driver code\+:
 \DoxyCodeLine{\textcolor{comment}{//LIC// multi-\/physics finite-\/element library, available }}
 \DoxyCodeLine{\textcolor{comment}{//LIC// at http://www.oomph-\/lib.org.}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// }}
-\DoxyCodeLine{\textcolor{comment}{//LIC// Copyright (C) 2006-\/2022 Matthias Heil and Andrew Hazel}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// Copyright (C) 2006-\/2023 Matthias Heil and Andrew Hazel}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// }}
 \DoxyCodeLine{\textcolor{comment}{//LIC// This library is free software; you can redistribute it and/or}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// modify it under the terms of the GNU Lesser General Public}}
@@ -224,16 +224,16 @@ Here\textquotesingle{}s a listing of the complete driver code\+:
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespaceProblemParameters_aa529b33b7feb959e0c044447bf0f6c6f}{Nterms\_for\_DtN}}=6;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Number of terms in the exact solution}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}{N\_terms}}=6; }
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespacePlanarWave_a56abdb2474ccaffd88346ee3607d8672}{N\_terms}}=6; }
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Coefficients in the exact solution}}
-\DoxyCodeLine{\textcolor{comment}{} Vector<double> \mbox{\hyperlink{namespaceProblemParameters_acb1788444ef78fe2adec824504f24246}{Coeff}}(\mbox{\hyperlink{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}{N\_terms}},1.0);}
+\DoxyCodeLine{\textcolor{comment}{} Vector<double> \mbox{\hyperlink{namespaceProblemParameters_acb1788444ef78fe2adec824504f24246}{Coeff}}(\mbox{\hyperlink{namespacePlanarWave_a56abdb2474ccaffd88346ee3607d8672}{N\_terms}},1.0);}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Imaginary unit }}
-\DoxyCodeLine{\textcolor{comment}{} std::complex<double> \mbox{\hyperlink{namespaceProblemParameters_acfe6a3fe73272672d596ebe2afd0092e}{I}}(0.0,1.0); }
+\DoxyCodeLine{\textcolor{comment}{} std::complex<double> \mbox{\hyperlink{namespacePlanarWave_a541691caf71477c8c389062797c0fdab}{I}}(0.0,1.0); }
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Exact solution as a Vector of size 2, containing real and imag parts}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceProblemParameters_af750b29069b29bd38b5220ecf534e7f7}{get\_exact\_u}}(\textcolor{keyword}{const} Vector<double>\& x, Vector<double>\& u)}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacePlanarWave_a00f252bcf0181187c656a58ce36b07b5}{get\_exact\_u}}(\textcolor{keyword}{const} Vector<double>\& x, Vector<double>\& u)}
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{comment}{// Switch to spherical coordinates}}
 \DoxyCodeLine{  \textcolor{keywordtype}{double} R=sqrt(x[0]*x[0]+x[1]*x[1]);}
@@ -248,11 +248,11 @@ Here\textquotesingle{}s a listing of the complete driver code\+:
 \DoxyCodeLine{  \textcolor{keywordtype}{double} bessel\_offset=0.5;}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{// Evaluate Bessel/Hankel functions}}
-\DoxyCodeLine{  Vector<double> jv(\mbox{\hyperlink{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}{N\_terms}});}
-\DoxyCodeLine{  Vector<double> yv(\mbox{\hyperlink{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}{N\_terms}});}
-\DoxyCodeLine{  Vector<double> djv(\mbox{\hyperlink{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}{N\_terms}});}
-\DoxyCodeLine{  Vector<double> dyv(\mbox{\hyperlink{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}{N\_terms}});}
-\DoxyCodeLine{  \textcolor{keywordtype}{double} order\_max\_in=double(\mbox{\hyperlink{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}{N\_terms}}-\/1)+bessel\_offset;}
+\DoxyCodeLine{  Vector<double> jv(\mbox{\hyperlink{namespacePlanarWave_a56abdb2474ccaffd88346ee3607d8672}{N\_terms}});}
+\DoxyCodeLine{  Vector<double> yv(\mbox{\hyperlink{namespacePlanarWave_a56abdb2474ccaffd88346ee3607d8672}{N\_terms}});}
+\DoxyCodeLine{  Vector<double> djv(\mbox{\hyperlink{namespacePlanarWave_a56abdb2474ccaffd88346ee3607d8672}{N\_terms}});}
+\DoxyCodeLine{  Vector<double> dyv(\mbox{\hyperlink{namespacePlanarWave_a56abdb2474ccaffd88346ee3607d8672}{N\_terms}});}
+\DoxyCodeLine{  \textcolor{keywordtype}{double} order\_max\_in=double(\mbox{\hyperlink{namespacePlanarWave_a56abdb2474ccaffd88346ee3607d8672}{N\_terms}}-\/1)+bessel\_offset;}
 \DoxyCodeLine{  \textcolor{keywordtype}{double} order\_max\_out=0;}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// This function returns vectors containing }}
@@ -274,13 +274,13 @@ Here\textquotesingle{}s a listing of the complete driver code\+:
 \DoxyCodeLine{  \textcolor{comment}{// Assemble  exact solution (actually no need to add terms}}
 \DoxyCodeLine{  \textcolor{comment}{// below i=N\_fourier as Legendre polynomial would be zero anyway)}}
 \DoxyCodeLine{  complex<double> u\_ex(0.0,0.0);}
-\DoxyCodeLine{  \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=\mbox{\hyperlink{namespaceProblemParameters_aaa674958a1ca6ee0b99de3377288c93f}{N\_fourier}};i<\mbox{\hyperlink{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}{N\_terms}};i++)}
+\DoxyCodeLine{  \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=\mbox{\hyperlink{namespaceProblemParameters_aaa674958a1ca6ee0b99de3377288c93f}{N\_fourier}};i<\mbox{\hyperlink{namespacePlanarWave_a56abdb2474ccaffd88346ee3607d8672}{N\_terms}};i++)}
 \DoxyCodeLine{   \{}
 \DoxyCodeLine{    \textcolor{comment}{//Associated\_legendre\_functions}}
 \DoxyCodeLine{    \textcolor{keywordtype}{double} p=Legendre\_functions\_helper::plgndr2(i,\mbox{\hyperlink{namespaceProblemParameters_aaa674958a1ca6ee0b99de3377288c93f}{N\_fourier}},}
 \DoxyCodeLine{                                                cos(theta));}
 \DoxyCodeLine{    \textcolor{comment}{// Set exact solution}}
-\DoxyCodeLine{    u\_ex+=\mbox{\hyperlink{namespaceProblemParameters_acb1788444ef78fe2adec824504f24246}{Coeff}}[i]*sqrt(MathematicalConstants::Pi/(2.0*kr))*(jv[i]+\mbox{\hyperlink{namespaceProblemParameters_acfe6a3fe73272672d596ebe2afd0092e}{I}}*yv[i])*p;}
+\DoxyCodeLine{    u\_ex+=\mbox{\hyperlink{namespaceProblemParameters_acb1788444ef78fe2adec824504f24246}{Coeff}}[i]*sqrt(MathematicalConstants::Pi/(2.0*kr))*(jv[i]+\mbox{\hyperlink{namespacePlanarWave_a541691caf71477c8c389062797c0fdab}{I}}*yv[i])*p;}
 \DoxyCodeLine{   \}}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Get the real \& imaginary part of the result}}
@@ -313,11 +313,11 @@ Here\textquotesingle{}s a listing of the complete driver code\+:
 \DoxyCodeLine{  \textcolor{keywordtype}{double} bessel\_offset=0.5;}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{// Evaluate Bessel/Hankel functions}}
-\DoxyCodeLine{  Vector<double> jv(\mbox{\hyperlink{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}{N\_terms}});}
-\DoxyCodeLine{  Vector<double> yv(\mbox{\hyperlink{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}{N\_terms}});}
-\DoxyCodeLine{  Vector<double> djv(\mbox{\hyperlink{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}{N\_terms}});}
-\DoxyCodeLine{  Vector<double> dyv(\mbox{\hyperlink{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}{N\_terms}});}
-\DoxyCodeLine{  \textcolor{keywordtype}{double} order\_max\_in=double(\mbox{\hyperlink{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}{N\_terms}}-\/1)+bessel\_offset;}
+\DoxyCodeLine{  Vector<double> jv(\mbox{\hyperlink{namespacePlanarWave_a56abdb2474ccaffd88346ee3607d8672}{N\_terms}});}
+\DoxyCodeLine{  Vector<double> yv(\mbox{\hyperlink{namespacePlanarWave_a56abdb2474ccaffd88346ee3607d8672}{N\_terms}});}
+\DoxyCodeLine{  Vector<double> djv(\mbox{\hyperlink{namespacePlanarWave_a56abdb2474ccaffd88346ee3607d8672}{N\_terms}});}
+\DoxyCodeLine{  Vector<double> dyv(\mbox{\hyperlink{namespacePlanarWave_a56abdb2474ccaffd88346ee3607d8672}{N\_terms}});}
+\DoxyCodeLine{  \textcolor{keywordtype}{double} order\_max\_in=double(\mbox{\hyperlink{namespacePlanarWave_a56abdb2474ccaffd88346ee3607d8672}{N\_terms}}-\/1)+bessel\_offset;}
 \DoxyCodeLine{  \textcolor{keywordtype}{double} order\_max\_out=0;}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// This function returns vectors containing }}
@@ -339,14 +339,14 @@ Here\textquotesingle{}s a listing of the complete driver code\+:
 \DoxyCodeLine{  \textcolor{comment}{// Assemble  exact solution (actually no need to add terms}}
 \DoxyCodeLine{  \textcolor{comment}{// below i=N\_fourier as Legendre polynomial would be zero anyway)}}
 \DoxyCodeLine{  complex<double> u\_ex(0.0,0.0);}
-\DoxyCodeLine{  \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=\mbox{\hyperlink{namespaceProblemParameters_aaa674958a1ca6ee0b99de3377288c93f}{N\_fourier}};i<\mbox{\hyperlink{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}{N\_terms}};i++)}
+\DoxyCodeLine{  \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=\mbox{\hyperlink{namespaceProblemParameters_aaa674958a1ca6ee0b99de3377288c93f}{N\_fourier}};i<\mbox{\hyperlink{namespacePlanarWave_a56abdb2474ccaffd88346ee3607d8672}{N\_terms}};i++)}
 \DoxyCodeLine{   \{}
 \DoxyCodeLine{    \textcolor{comment}{//Associated\_legendre\_functions}}
 \DoxyCodeLine{    \textcolor{keywordtype}{double} p=Legendre\_functions\_helper::plgndr2(i,\mbox{\hyperlink{namespaceProblemParameters_aaa674958a1ca6ee0b99de3377288c93f}{N\_fourier}},}
 \DoxyCodeLine{                                                cos(theta));}
 \DoxyCodeLine{    \textcolor{comment}{// Set flux of exact solution}}
 \DoxyCodeLine{    flux-\/=\mbox{\hyperlink{namespaceProblemParameters_acb1788444ef78fe2adec824504f24246}{Coeff}}[i]*sqrt(MathematicalConstants::Pi/(2.0*kr))*p*}
-\DoxyCodeLine{     ( k*(djv[i]+\mbox{\hyperlink{namespaceProblemParameters_acfe6a3fe73272672d596ebe2afd0092e}{I}}*dyv[i]) -\/ (0.5*(jv[i]+\mbox{\hyperlink{namespaceProblemParameters_acfe6a3fe73272672d596ebe2afd0092e}{I}}*yv[i])/R) );}
+\DoxyCodeLine{     ( k*(djv[i]+\mbox{\hyperlink{namespacePlanarWave_a541691caf71477c8c389062797c0fdab}{I}}*dyv[i]) -\/ (0.5*(jv[i]+\mbox{\hyperlink{namespacePlanarWave_a541691caf71477c8c389062797c0fdab}{I}}*yv[i])/R) );}
 \DoxyCodeLine{   \}}
 \DoxyCodeLine{  }
 \DoxyCodeLine{ \}\textcolor{comment}{// end of exact\_normal\_derivative}}
@@ -372,50 +372,50 @@ Here\textquotesingle{}s a listing of the complete driver code\+:
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Constructor}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_ab368ed8fe04d4e3db67d13bab9e7b52e}{FourierDecomposedHelmholtzProblem}}();}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem}{FourierDecomposedHelmholtzProblem}}();}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Destructor (empty)}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_a03174fa5a35b7c38f08f91bcd2a80c20}{\string~FourierDecomposedHelmholtzProblem}}()\{\}}
+\DoxyCodeLine{\textcolor{comment}{} \string~\mbox{\hyperlink{classFourierDecomposedHelmholtzProblem}{FourierDecomposedHelmholtzProblem}}()\{\}}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs before solve (empty)}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_a82ef5a969f4404fc1acb35c38c800ce6}{actions\_before\_newton\_solve}}()\{\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_newton\_solve()\{\}}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update the problem after solve (empty)}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_a5a37ba3fcf8563764f80108c9a657929}{actions\_after\_newton\_solve}}()\{\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_newton\_solve()\{\}}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Doc the solution. DocInfo object stores flags/labels for where the}}
 \DoxyCodeLine{\textcolor{comment}{ /// output gets written to}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_a893efb01f8f1d254315201121766d882}{doc\_solution}}(DocInfo\& doc\_info);}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} doc\_solution(DocInfo\& doc\_info);}
 \DoxyCodeLine{  \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Recompute gamma integral before checking Newton residuals}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_ae80673ef299e4935ddcac177ed919da3}{actions\_before\_newton\_convergence\_check}}()}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_newton\_convergence\_check()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{keywordflow}{if} (!CommandLineArgs::command\_line\_flag\_has\_been\_set(\textcolor{stringliteral}{"{}-\/-\/square\_domain"{}}))}
 \DoxyCodeLine{    \{}
-\DoxyCodeLine{     \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_ab7aafa9c0ab982d9e1fdc31d802d309b}{Helmholtz\_outer\_boundary\_mesh\_pt}}-\/>setup\_gamma();}
+\DoxyCodeLine{     Helmholtz\_outer\_boundary\_mesh\_pt-\/>setup\_gamma();}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Actions before adapt: Wipe the mesh of prescribed flux elements}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_acbc6f3c692463e5a098ccec7fe9029c1}{actions\_before\_adapt}}();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_adapt();}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Actions after adapt: Rebuild the mesh of prescribed flux elements}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_a3258e3817d8747aac0409eca1a24d14b}{actions\_after\_adapt}}();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_adapt();}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Check gamma computation}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_ac4f3f737660b11e8762a61bca999eb0f}{check\_gamma}}(DocInfo\& doc\_info);}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} check\_gamma(DocInfo\& doc\_info);}
 \DoxyCodeLine{  }
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Create BC elements on outer boundary}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_a359d402bb4aed7d83973248d82085efb}{create\_outer\_bc\_elements}}();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} create\_outer\_bc\_elements();}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Create flux elements on inner boundary}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_a81d64611f2de2492cec6b0621d8124b0}{create\_flux\_elements\_on\_inner\_boundary}}();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} create\_flux\_elements\_on\_inner\_boundary();}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Delete boundary face elements and wipe the surface mesh}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_aa2c19a495d042fbeca1e226e2ff73080}{delete\_face\_elements}}( Mesh* \textcolor{keyword}{const} \& boundary\_mesh\_pt)}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} delete\_face\_elements( Mesh* \textcolor{keyword}{const} \& boundary\_mesh\_pt)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Loop over the surface elements}}
 \DoxyCodeLine{   \textcolor{keywordtype}{unsigned} n\_element = boundary\_mesh\_pt-\/>nelement();}
@@ -433,24 +433,24 @@ Here\textquotesingle{}s a listing of the complete driver code\+:
 \DoxyCodeLine{\textcolor{preprocessor}{\#ifdef ADAPTIVE}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to the "{}bulk"{} mesh}}
-\DoxyCodeLine{\textcolor{comment}{} RefineableTriangleMesh<ELEMENT>* \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_ad5927e4a2156e96c55ebce044c6f9653}{Bulk\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} RefineableTriangleMesh<ELEMENT>* Bulk\_mesh\_pt;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{preprocessor}{\#else}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to the "{}bulk"{} mesh}}
-\DoxyCodeLine{\textcolor{comment}{} TriangleMesh<ELEMENT>* \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_ad5927e4a2156e96c55ebce044c6f9653}{Bulk\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} TriangleMesh<ELEMENT>* Bulk\_mesh\_pt;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{  \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to mesh containing the DtN boundary}}
 \DoxyCodeLine{\textcolor{comment}{ /// condition elements}}
-\DoxyCodeLine{\textcolor{comment}{} FourierDecomposedHelmholtzDtNMesh<ELEMENT>* \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_ab7aafa9c0ab982d9e1fdc31d802d309b}{Helmholtz\_outer\_boundary\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} FourierDecomposedHelmholtzDtNMesh<ELEMENT>* Helmholtz\_outer\_boundary\_mesh\_pt;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// on the inner boundary}}
-\DoxyCodeLine{\textcolor{comment}{} Mesh* \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_a3ecc5a3fc3407de8985ed9a61402f2f0}{Helmholtz\_inner\_boundary\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} Mesh* Helmholtz\_inner\_boundary\_mesh\_pt;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Trace file}}
-\DoxyCodeLine{\textcolor{comment}{} ofstream \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_ab9786130005c43637f8b305c2becc555}{Trace\_file}};}
+\DoxyCodeLine{\textcolor{comment}{} ofstream Trace\_file;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\}; \textcolor{comment}{// end of problem class}}
 \DoxyCodeLine{}

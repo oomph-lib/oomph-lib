@@ -12,7 +12,7 @@
 Inheritance diagram for oomph\+::Element\+With\+Moving\+Nodes\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=1.300000cm]{classoomph_1_1ElementWithMovingNodes}
+\includegraphics[height=1.733333cm]{classoomph_1_1ElementWithMovingNodes}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Types}
@@ -56,7 +56,7 @@ void \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_aba14c845323dc4ef435a
 \begin{DoxyCompactList}\small\item\em Evaluate shape derivatives by chain rule. Currently disabled by default because it\textquotesingle{}s broken; can re-\/enable use by setting optional boolean to true. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_ae49a756cbadda1b02c1599db34f9e019}{evaluate\+\_\+shape\+\_\+derivs\+\_\+by\+\_\+fastest\+\_\+method}} (const bool \&i\+\_\+know\+\_\+what\+\_\+i\+\_\+am\+\_\+doing=false)
 \begin{DoxyCompactList}\small\item\em Evaluate shape derivatives by (anticipated) fastest method. Currently disabled by default because it\textquotesingle{}s broken; can re-\/enable use by setting optional boolean to true. \end{DoxyCompactList}\item 
-int \& \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_aa3559717ddcceb96109cc5dafbc11de2}{method\+\_\+for\+\_\+shape\+\_\+derivs}} ()
+int \& \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a600d39b3c167989dd8eed5869726d35b}{method\+\_\+for\+\_\+shape\+\_\+derivs}} ()
 \begin{DoxyCompactList}\small\item\em Access to method (enumerated flag) for determination of shape derivs. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a580ecb70417536ceb1121afd3bea0d54}{enable\+\_\+bypass\+\_\+fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data}} ()
 \begin{DoxyCompactList}\small\item\em Bypass the call to fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data. \end{DoxyCompactList}\item 
@@ -105,7 +105,7 @@ int \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a7b02491715adf7a315631
 
 A policy class that serves to establish the common interfaces for elements that contain moving nodes. This class provides storage for the geometric data that affect the update of all the nodes of the element, i.\+e. USUALLY all data that are using during a call to the Element\textquotesingle{}s \mbox{\hyperlink{classoomph_1_1FiniteElement_ac27d707cb4f7c1429793c0fdb2fd093b}{node\+\_\+update()}} function. In some cases (e.\+g. Fluid\+Interface\+Edge elements), \mbox{\hyperlink{classoomph_1_1FiniteElement_ac27d707cb4f7c1429793c0fdb2fd093b}{node\+\_\+update()}} is overloaded to perform an update of the bulk element, in which case the additional bulk geometric data become external data of the element and the function Generalised\+Element\+::update\+\_\+in\+\_\+external\+\_\+fd(i) is overloaded to also perform the bulk node update. The storage is populated during the assignment of the equation numbers via the \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_a6d2fa178f36d4b8413a9ce4f24e9c87e}{complete\+\_\+setup\+\_\+of\+\_\+dependencies()}} function and then local equations numbers are assigned to these data, accessible via geometric\+\_\+data\+\_\+local\+\_\+eqn(n,i). Finally, a function is provided that calculates the terms in the jacobian matrix by due to these geometric data by finite differences. 
 
-Definition at line \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00064}{64}} of file \mbox{\hyperlink{element__with__moving__nodes_8h_source}{element\+\_\+with\+\_\+moving\+\_\+nodes.\+h}}.
+Definition at line 64 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
@@ -134,7 +134,7 @@ Shape\+\_\+derivs\+\_\+by\+\_\+fastest\+\_\+method&\\
 \end{DoxyEnumFields}
 
 
-Definition at line \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00068}{68}} of file \mbox{\hyperlink{element__with__moving__nodes_8h_source}{element\+\_\+with\+\_\+moving\+\_\+nodes.\+h}}.
+Definition at line 68 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
@@ -151,7 +151,7 @@ Constructor.
 
 
 
-Definition at line \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00076}{76}} of file \mbox{\hyperlink{element__with__moving__nodes_8h_source}{element\+\_\+with\+\_\+moving\+\_\+nodes.\+h}}.
+Definition at line 76 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithMovingNodes_a4ac72d373d8b7a1edeb366541545f84a}\label{classoomph_1_1ElementWithMovingNodes_a4ac72d373d8b7a1edeb366541545f84a}} 
 \index{oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}!ElementWithMovingNodes@{ElementWithMovingNodes}}
@@ -175,11 +175,11 @@ Virtual destructor (clean up and allocated memory)
 
 
 
-Definition at line \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00109}{109}} of file \mbox{\hyperlink{element__with__moving__nodes_8h_source}{element\+\_\+with\+\_\+moving\+\_\+nodes.\+h}}.
+Definition at line 109 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00353}{Geometric\+\_\+data\+\_\+local\+\_\+eqn}}.
+References Geometric\+\_\+data\+\_\+local\+\_\+eqn.
 
 
 
@@ -196,11 +196,11 @@ Return whether shape derivatives are evaluated by fd.
 
 
 
-Definition at line \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00186}{186}} of file \mbox{\hyperlink{element__with__moving__nodes_8h_source}{element\+\_\+with\+\_\+moving\+\_\+nodes.\+h}}.
+Definition at line 186 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00367}{Evaluate\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates\+\_\+by\+\_\+fd}}.
+References Evaluate\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates\+\_\+by\+\_\+fd.
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithMovingNodes_ace3d71716d0b99c174582917486dbb7d}\label{classoomph_1_1ElementWithMovingNodes_ace3d71716d0b99c174582917486dbb7d}} 
 \index{oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}!assemble\_set\_of\_all\_geometric\_data@{assemble\_set\_of\_all\_geometric\_data}}
@@ -216,15 +216,15 @@ Return a set of all geometric data associated with the element.
 
 //////////////////////////////////////////////////////////////// Return a set of all geometric data associated with the element\textquotesingle{}s node update function 
 
-Definition at line \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00043}{43}} of file \mbox{\hyperlink{element__with__moving__nodes_8cc_source}{element\+\_\+with\+\_\+moving\+\_\+nodes.\+cc}}.
+Definition at line 43 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+cc.
 
 
 
-References \mbox{\hyperlink{nodes_8h_source_l01632}{oomph\+::\+Node\+::all\+\_\+geom\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l01647}{oomph\+::\+Node\+::all\+\_\+geom\+\_\+object\+\_\+pt()}}, \mbox{\hyperlink{geom__objects_8h_source_l00233}{oomph\+::\+Geom\+Object\+::geom\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l01228}{oomph\+::\+Node\+::hanging\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l01285}{oomph\+::\+Node\+::is\+\_\+hanging()}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{geom__objects_8h_source_l00209}{oomph\+::\+Geom\+Object\+::ngeom\+\_\+data()}}, \mbox{\hyperlink{nodes_8h_source_l01625}{oomph\+::\+Node\+::ngeom\+\_\+data()}}, \mbox{\hyperlink{nodes_8h_source_l01639}{oomph\+::\+Node\+::ngeom\+\_\+object()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References oomph\+::\+Node\+::all\+\_\+geom\+\_\+data\+\_\+pt(), oomph\+::\+Node\+::all\+\_\+geom\+\_\+object\+\_\+pt(), oomph\+::\+Geom\+Object\+::geom\+\_\+data\+\_\+pt(), oomph\+::\+Node\+::hanging\+\_\+pt(), i, oomph\+::\+Node\+::is\+\_\+hanging(), oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt(), oomph\+::\+Geom\+Object\+::ngeom\+\_\+data(), oomph\+::\+Node\+::ngeom\+\_\+data(), oomph\+::\+Node\+::ngeom\+\_\+object(), oomph\+::\+Hang\+Info\+::nmaster(), oomph\+::\+Finite\+Element\+::nnode(), and oomph\+::\+Finite\+Element\+::node\+\_\+pt().
 
 
 
-Referenced by \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00138}{complete\+\_\+setup\+\_\+of\+\_\+dependencies()}}, and \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00352}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::make\+\_\+bounding\+\_\+element()}}.
+Referenced by complete\+\_\+setup\+\_\+of\+\_\+dependencies(), and oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::make\+\_\+bounding\+\_\+element().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithMovingNodes_a5fdaf955e508b80e5fd5673f574472d5}\label{classoomph_1_1ElementWithMovingNodes_a5fdaf955e508b80e5fd5673f574472d5}} 
 \index{oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}!assign\_all\_generic\_local\_eqn\_numbers@{assign\_all\_generic\_local\_eqn\_numbers}}
@@ -242,19 +242,19 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a564ba080f681327
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a82531e83f80254735130558f0562cdff}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ ELEMENT, NODE\+\_\+\+TYPE $>$}}, \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a82531e83f80254735130558f0562cdff}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ ELEMENT, Algebraic\+Node $>$}}, \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a82531e83f80254735130558f0562cdff}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ ELEMENT, Macro\+Element\+Node\+Update\+Node $>$}}, and \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a82531e83f80254735130558f0562cdff}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ ELEMENT, Spine\+Node $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a82531e83f80254735130558f0562cdff}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ ELEMENT, NODE\+\_\+\+TYPE $>$}}, \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a82531e83f80254735130558f0562cdff}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ ELEMENT, Spine\+Node $>$}}, \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a82531e83f80254735130558f0562cdff}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ ELEMENT, Algebraic\+Node $>$}}, and \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a82531e83f80254735130558f0562cdff}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ ELEMENT, Macro\+Element\+Node\+Update\+Node $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00197}{197}} of file \mbox{\hyperlink{element__with__moving__nodes_8cc_source}{element\+\_\+with\+\_\+moving\+\_\+nodes.\+cc}}.
+Definition at line 197 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l00156}{oomph\+::\+Generalised\+Element\+::add\+\_\+global\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{elements_8h_source_l00231}{oomph\+::\+Generalised\+Element\+::\+Dof\+\_\+pt\+\_\+deque}}, \mbox{\hyperlink{nodes_8h_source_l00367}{oomph\+::\+Data\+::eqn\+\_\+number()}}, \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00340}{Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00353}{Geometric\+\_\+data\+\_\+local\+\_\+eqn}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l00183}{oomph\+::\+Data\+::\+Is\+\_\+pinned}}, \mbox{\hyperlink{nodes_8h_source_l00192}{oomph\+::\+Data\+::\+Is\+\_\+unclassified}}, \mbox{\hyperlink{elements_8h_source_l00726}{oomph\+::\+Generalised\+Element\+::local\+\_\+eqn\+\_\+number()}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00345}{ngeom\+\_\+data()}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00357}{Ngeom\+\_\+dof}}, \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}, and \mbox{\hyperlink{nodes_8h_source_l00324}{oomph\+::\+Data\+::value\+\_\+pt()}}.
+References oomph\+::\+Generalised\+Element\+::add\+\_\+global\+\_\+eqn\+\_\+numbers(), oomph\+::\+Generalised\+Element\+::\+Dof\+\_\+pt\+\_\+deque, oomph\+::\+Data\+::eqn\+\_\+number(), oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), Geom\+\_\+data\+\_\+pt, Geometric\+\_\+data\+\_\+local\+\_\+eqn, i, oomph\+::\+Data\+::\+Is\+\_\+pinned, oomph\+::\+Data\+::\+Is\+\_\+unclassified, oomph\+::\+Generalised\+Element\+::local\+\_\+eqn\+\_\+number(), oomph\+::\+Generalised\+Element\+::ndof(), ngeom\+\_\+data(), Ngeom\+\_\+dof, oomph\+::\+Data\+::nvalue(), and oomph\+::\+Data\+::value\+\_\+pt().
 
 
 
-Referenced by \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00497}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ ELEMENT, NODE\+\_\+\+TYPE $>$\+::assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers()}}.
+Referenced by oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ ELEMENT, NODE\+\_\+\+TYPE $>$\+::assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithMovingNodes_a6d2fa178f36d4b8413a9ce4f24e9c87e}\label{classoomph_1_1ElementWithMovingNodes_a6d2fa178f36d4b8413a9ce4f24e9c87e}} 
 \index{oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}!complete\_setup\_of\_dependencies@{complete\_setup\_of\_dependencies}}
@@ -272,19 +272,19 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_af03c43b9df
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_ae54ee1d8772757d72d9df3e7229d8ecf}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ ELEMENT, NODE\+\_\+\+TYPE $>$}}, \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_ae54ee1d8772757d72d9df3e7229d8ecf}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ ELEMENT, Algebraic\+Node $>$}}, \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_ae54ee1d8772757d72d9df3e7229d8ecf}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ ELEMENT, Macro\+Element\+Node\+Update\+Node $>$}}, \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_ae54ee1d8772757d72d9df3e7229d8ecf}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ ELEMENT, Spine\+Node $>$}}, \mbox{\hyperlink{classoomph_1_1SpineElement_a867b5e4eb64d60da9585f8a791fbac36}{oomph\+::\+Spine\+Element$<$ ELEMENT $>$}}, and \mbox{\hyperlink{classoomph_1_1SpineElement_a867b5e4eb64d60da9585f8a791fbac36}{oomph\+::\+Spine\+Element$<$ Face\+Geometry$<$ ELEMENT $>$ $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1SpineElement_a867b5e4eb64d60da9585f8a791fbac36}{oomph\+::\+Spine\+Element$<$ ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1SpineElement_a867b5e4eb64d60da9585f8a791fbac36}{oomph\+::\+Spine\+Element$<$ Face\+Geometry$<$ ELEMENT $>$ $>$}}, \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_ae54ee1d8772757d72d9df3e7229d8ecf}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ ELEMENT, NODE\+\_\+\+TYPE $>$}}, \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_ae54ee1d8772757d72d9df3e7229d8ecf}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ ELEMENT, Spine\+Node $>$}}, \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_ae54ee1d8772757d72d9df3e7229d8ecf}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ ELEMENT, Algebraic\+Node $>$}}, and \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_ae54ee1d8772757d72d9df3e7229d8ecf}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ ELEMENT, Macro\+Element\+Node\+Update\+Node $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00138}{138}} of file \mbox{\hyperlink{element__with__moving__nodes_8cc_source}{element\+\_\+with\+\_\+moving\+\_\+nodes.\+cc}}.
+Definition at line 138 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+cc.
 
 
 
-References \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00043}{assemble\+\_\+set\+\_\+of\+\_\+all\+\_\+geometric\+\_\+data()}}, and \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00340}{Geom\+\_\+data\+\_\+pt}}.
+References assemble\+\_\+set\+\_\+of\+\_\+all\+\_\+geometric\+\_\+data(), and Geom\+\_\+data\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00485}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ ELEMENT, NODE\+\_\+\+TYPE $>$\+::complete\+\_\+setup\+\_\+of\+\_\+dependencies()}}.
+Referenced by oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ ELEMENT, NODE\+\_\+\+TYPE $>$\+::complete\+\_\+setup\+\_\+of\+\_\+dependencies().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithMovingNodes_ab80f172afa65872255959c1af3fb7809}\label{classoomph_1_1ElementWithMovingNodes_ab80f172afa65872255959c1af3fb7809}} 
 \index{oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}!describe\_local\_dofs@{describe\_local\_dofs}}
@@ -302,19 +302,19 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_aad9f9ebb2996fd9
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_abbcb617eac0cb1d5763fae6ff81cb154}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ ELEMENT, NODE\+\_\+\+TYPE $>$}}, \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_abbcb617eac0cb1d5763fae6ff81cb154}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ ELEMENT, Algebraic\+Node $>$}}, \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_abbcb617eac0cb1d5763fae6ff81cb154}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ ELEMENT, Macro\+Element\+Node\+Update\+Node $>$}}, and \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_abbcb617eac0cb1d5763fae6ff81cb154}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ ELEMENT, Spine\+Node $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_abbcb617eac0cb1d5763fae6ff81cb154}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ ELEMENT, NODE\+\_\+\+TYPE $>$}}, \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_abbcb617eac0cb1d5763fae6ff81cb154}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ ELEMENT, Spine\+Node $>$}}, \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_abbcb617eac0cb1d5763fae6ff81cb154}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ ELEMENT, Algebraic\+Node $>$}}, and \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_abbcb617eac0cb1d5763fae6ff81cb154}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ ELEMENT, Macro\+Element\+Node\+Update\+Node $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00170}{170}} of file \mbox{\hyperlink{element__with__moving__nodes_8cc_source}{element\+\_\+with\+\_\+moving\+\_\+nodes.\+cc}}.
+Definition at line 170 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+cc.
 
 
 
-References \mbox{\hyperlink{nodes_8cc_source_l00939}{oomph\+::\+Data\+::describe\+\_\+dofs()}}, \mbox{\hyperlink{elements_8cc_source_l01709}{oomph\+::\+Finite\+Element\+::describe\+\_\+local\+\_\+dofs()}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00340}{Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00345}{ngeom\+\_\+data()}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
+References oomph\+::\+Data\+::describe\+\_\+dofs(), oomph\+::\+Finite\+Element\+::describe\+\_\+local\+\_\+dofs(), Geom\+\_\+data\+\_\+pt, i, ngeom\+\_\+data(), and oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
 
 
 
-Referenced by \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00392}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ ELEMENT, NODE\+\_\+\+TYPE $>$\+::describe\+\_\+local\+\_\+dofs()}}.
+Referenced by oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ ELEMENT, NODE\+\_\+\+TYPE $>$\+::describe\+\_\+local\+\_\+dofs().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithMovingNodes_ad8493e8dbf92f44106c10f8f58bfffa3}\label{classoomph_1_1ElementWithMovingNodes_ad8493e8dbf92f44106c10f8f58bfffa3}} 
 \index{oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}!disable\_always\_evaluate\_dresidual\_dnodal\_coordinates\_by\_fd@{disable\_always\_evaluate\_dresidual\_dnodal\_coordinates\_by\_fd}}
@@ -328,11 +328,11 @@ Insist that shape derivatives are always evaluated using the overloaded version 
 
 
 
-Definition at line \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00204}{204}} of file \mbox{\hyperlink{element__with__moving__nodes_8h_source}{element\+\_\+with\+\_\+moving\+\_\+nodes.\+h}}.
+Definition at line 204 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00367}{Evaluate\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates\+\_\+by\+\_\+fd}}.
+References Evaluate\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates\+\_\+by\+\_\+fd.
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithMovingNodes_a4f1d999320dd5bbece88b33241816e9e}\label{classoomph_1_1ElementWithMovingNodes_a4f1d999320dd5bbece88b33241816e9e}} 
 \index{oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}!disable\_bypass\_fill\_in\_jacobian\_from\_geometric\_data@{disable\_bypass\_fill\_in\_jacobian\_from\_geometric\_data}}
@@ -346,11 +346,11 @@ Do not bypass the call to fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\
 
 
 
-Definition at line \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00280}{280}} of file \mbox{\hyperlink{element__with__moving__nodes_8h_source}{element\+\_\+with\+\_\+moving\+\_\+nodes.\+h}}.
+Definition at line 280 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00361}{Bypass\+\_\+fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data}}.
+References Bypass\+\_\+fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data.
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithMovingNodes_af3b9389f9b34d941ca1b9a058ce4cc2c}\label{classoomph_1_1ElementWithMovingNodes_af3b9389f9b34d941ca1b9a058ce4cc2c}} 
 \index{oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}!enable\_always\_evaluate\_dresidual\_dnodal\_coordinates\_by\_fd@{enable\_always\_evaluate\_dresidual\_dnodal\_coordinates\_by\_fd}}
@@ -364,15 +364,15 @@ Insist that shape derivatives are always evaluated by fd (using \mbox{\hyperlink
 
 
 
-Definition at line \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00194}{194}} of file \mbox{\hyperlink{element__with__moving__nodes_8h_source}{element\+\_\+with\+\_\+moving\+\_\+nodes.\+h}}.
+Definition at line 194 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00367}{Evaluate\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates\+\_\+by\+\_\+fd}}.
+References Evaluate\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates\+\_\+by\+\_\+fd.
 
 
 
-Referenced by \mbox{\hyperlink{refineable__brick__element_8cc_source_l01293}{oomph\+::\+Refineable\+QElement$<$ 3 $>$\+::build()}}, \mbox{\hyperlink{refineable__line__element_8cc_source_l00212}{oomph\+::\+Refineable\+QElement$<$ 1 $>$\+::build()}}, and \mbox{\hyperlink{refineable__quad__element_8cc_source_l00642}{oomph\+::\+Refineable\+QElement$<$ 2 $>$\+::build()}}.
+Referenced by oomph\+::\+Refineable\+QElement$<$ 3 $>$\+::build(), oomph\+::\+Refineable\+QElement$<$ 1 $>$\+::build(), and oomph\+::\+Refineable\+QElement$<$ 2 $>$\+::build().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithMovingNodes_a580ecb70417536ceb1121afd3bea0d54}\label{classoomph_1_1ElementWithMovingNodes_a580ecb70417536ceb1121afd3bea0d54}} 
 \index{oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}!enable\_bypass\_fill\_in\_jacobian\_from\_geometric\_data@{enable\_bypass\_fill\_in\_jacobian\_from\_geometric\_data}}
@@ -386,15 +386,15 @@ Bypass the call to fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data
 
 
 
-Definition at line \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00274}{274}} of file \mbox{\hyperlink{element__with__moving__nodes_8h_source}{element\+\_\+with\+\_\+moving\+\_\+nodes.\+h}}.
+Definition at line 274 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00361}{Bypass\+\_\+fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data}}.
+References Bypass\+\_\+fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data.
 
 
 
-Referenced by \mbox{\hyperlink{refineable__brick__element_8cc_source_l01293}{oomph\+::\+Refineable\+QElement$<$ 3 $>$\+::build()}}, \mbox{\hyperlink{refineable__line__element_8cc_source_l00212}{oomph\+::\+Refineable\+QElement$<$ 1 $>$\+::build()}}, and \mbox{\hyperlink{refineable__quad__element_8cc_source_l00642}{oomph\+::\+Refineable\+QElement$<$ 2 $>$\+::build()}}.
+Referenced by oomph\+::\+Refineable\+QElement$<$ 3 $>$\+::build(), oomph\+::\+Refineable\+QElement$<$ 1 $>$\+::build(), and oomph\+::\+Refineable\+QElement$<$ 2 $>$\+::build().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithMovingNodes_aba14c845323dc4ef435afd18314ede70}\label{classoomph_1_1ElementWithMovingNodes_aba14c845323dc4ef435afd18314ede70}} 
 \index{oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}!evaluate\_shape\_derivs\_by\_chain\_rule@{evaluate\_shape\_derivs\_by\_chain\_rule}}
@@ -408,11 +408,11 @@ Evaluate shape derivatives by chain rule. Currently disabled by default because 
 
 
 
-Definition at line \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00220}{220}} of file \mbox{\hyperlink{element__with__moving__nodes_8h_source}{element\+\_\+with\+\_\+moving\+\_\+nodes.\+h}}.
+Definition at line 220 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00371}{Method\+\_\+for\+\_\+shape\+\_\+derivs}}, and \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00070}{Shape\+\_\+derivs\+\_\+by\+\_\+chain\+\_\+rule}}.
+References Method\+\_\+for\+\_\+shape\+\_\+derivs, and Shape\+\_\+derivs\+\_\+by\+\_\+chain\+\_\+rule.
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithMovingNodes_aad094d008fb6aa1531f730c012c46494}\label{classoomph_1_1ElementWithMovingNodes_aad094d008fb6aa1531f730c012c46494}} 
 \index{oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}!evaluate\_shape\_derivs\_by\_direct\_fd@{evaluate\_shape\_derivs\_by\_direct\_fd}}
@@ -426,11 +426,11 @@ Evaluate shape derivatives by direct finite differencing.
 
 
 
-Definition at line \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00210}{210}} of file \mbox{\hyperlink{element__with__moving__nodes_8h_source}{element\+\_\+with\+\_\+moving\+\_\+nodes.\+h}}.
+Definition at line 210 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00371}{Method\+\_\+for\+\_\+shape\+\_\+derivs}}, and \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00071}{Shape\+\_\+derivs\+\_\+by\+\_\+direct\+\_\+fd}}.
+References Method\+\_\+for\+\_\+shape\+\_\+derivs, and Shape\+\_\+derivs\+\_\+by\+\_\+direct\+\_\+fd.
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithMovingNodes_ae49a756cbadda1b02c1599db34f9e019}\label{classoomph_1_1ElementWithMovingNodes_ae49a756cbadda1b02c1599db34f9e019}} 
 \index{oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}!evaluate\_shape\_derivs\_by\_fastest\_method@{evaluate\_shape\_derivs\_by\_fastest\_method}}
@@ -444,11 +444,11 @@ Evaluate shape derivatives by (anticipated) fastest method. Currently disabled b
 
 
 
-Definition at line \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00245}{245}} of file \mbox{\hyperlink{element__with__moving__nodes_8h_source}{element\+\_\+with\+\_\+moving\+\_\+nodes.\+h}}.
+Definition at line 245 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00371}{Method\+\_\+for\+\_\+shape\+\_\+derivs}}, and \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00072}{Shape\+\_\+derivs\+\_\+by\+\_\+fastest\+\_\+method}}.
+References Method\+\_\+for\+\_\+shape\+\_\+derivs, and Shape\+\_\+derivs\+\_\+by\+\_\+fastest\+\_\+method.
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithMovingNodes_ac9750cea96c52b31fe059ba109fea076}\label{classoomph_1_1ElementWithMovingNodes_ac9750cea96c52b31fe059ba109fea076}} 
 \index{oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}!fill\_in\_jacobian\_from\_geometric\_data@{fill\_in\_jacobian\_from\_geometric\_data}}
@@ -462,11 +462,11 @@ Calculate the contributions to the Jacobian matrix from the geometric data. This
 
 
 
-Definition at line \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00320}{320}} of file \mbox{\hyperlink{element__with__moving__nodes_8h_source}{element\+\_\+with\+\_\+moving\+\_\+nodes.\+h}}.
+Definition at line 320 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00361}{Bypass\+\_\+fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data}}, \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00323}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data()}}, \mbox{\hyperlink{elements_8h_source_l00980}{oomph\+::\+Generalised\+Element\+::get\+\_\+residuals()}}, and \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}.
+References Bypass\+\_\+fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data, fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data(), oomph\+::\+Generalised\+Element\+::get\+\_\+residuals(), and oomph\+::\+Generalised\+Element\+::ndof().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithMovingNodes_ad0f8a6ecdbc0e410fee8ae90f7464ded}\label{classoomph_1_1ElementWithMovingNodes_ad0f8a6ecdbc0e410fee8ae90f7464ded}} 
 \index{oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}!fill\_in\_jacobian\_from\_geometric\_data@{fill\_in\_jacobian\_from\_geometric\_data}}
@@ -480,15 +480,15 @@ Calculate the contributions to the Jacobian matrix from the geometric data. This
 
 Calculate the node-\/update--related entries in the Jacobian. The vector passed in residuals has to contain the nonlinear residuals, evaluated for the current values of the unknowns, in case FDing is used to computed the derivatives. 
 
-Definition at line \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00323}{323}} of file \mbox{\hyperlink{element__with__moving__nodes_8cc_source}{element\+\_\+with\+\_\+moving\+\_\+nodes.\+cc}}.
+Definition at line 323 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+cc.
 
 
 
-References \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00361}{Bypass\+\_\+fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data}}, \mbox{\hyperlink{elements_8h_source_l01198}{oomph\+::\+Generalised\+Element\+::\+Default\+\_\+fd\+\_\+jacobian\+\_\+step}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00367}{Evaluate\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates\+\_\+by\+\_\+fd}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00340}{Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00126}{geometric\+\_\+data\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00538}{get\+\_\+dnodal\+\_\+coordinates\+\_\+dgeom\+\_\+dofs()}}, \mbox{\hyperlink{elements_8cc_source_l03744}{oomph\+::\+Finite\+Element\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates()}}, \mbox{\hyperlink{elements_8h_source_l00980}{oomph\+::\+Generalised\+Element\+::get\+\_\+residuals()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00371}{Method\+\_\+for\+\_\+shape\+\_\+derivs}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00345}{ngeom\+\_\+data()}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00357}{Ngeom\+\_\+dof}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{elements_8cc_source_l05072}{oomph\+::\+Finite\+Element\+::node\+\_\+update()}}, \mbox{\hyperlink{refineable__elements_8h_source_l00627}{oomph\+::\+Refineable\+Element\+::nshape\+\_\+controlling\+\_\+nodes()}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00070}{Shape\+\_\+derivs\+\_\+by\+\_\+chain\+\_\+rule}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00071}{Shape\+\_\+derivs\+\_\+by\+\_\+direct\+\_\+fd}}, and \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00072}{Shape\+\_\+derivs\+\_\+by\+\_\+fastest\+\_\+method}}.
+References Bypass\+\_\+fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data, oomph\+::\+Generalised\+Element\+::\+Default\+\_\+fd\+\_\+jacobian\+\_\+step, Evaluate\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates\+\_\+by\+\_\+fd, Geom\+\_\+data\+\_\+pt, geometric\+\_\+data\+\_\+local\+\_\+eqn(), get\+\_\+dnodal\+\_\+coordinates\+\_\+dgeom\+\_\+dofs(), oomph\+::\+Finite\+Element\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates(), oomph\+::\+Generalised\+Element\+::get\+\_\+residuals(), i, Method\+\_\+for\+\_\+shape\+\_\+derivs, oomph\+::\+Node\+::ndim(), oomph\+::\+Generalised\+Element\+::ndof(), ngeom\+\_\+data(), Ngeom\+\_\+dof, oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Finite\+Element\+::node\+\_\+update(), oomph\+::\+Refineable\+Element\+::nshape\+\_\+controlling\+\_\+nodes(), Shape\+\_\+derivs\+\_\+by\+\_\+chain\+\_\+rule, Shape\+\_\+derivs\+\_\+by\+\_\+direct\+\_\+fd, and Shape\+\_\+derivs\+\_\+by\+\_\+fastest\+\_\+method.
 
 
 
-Referenced by \mbox{\hyperlink{constrained__volume__elements_8h_source_l00442}{oomph\+::\+Spine\+Line\+Volume\+Constraint\+Bounding\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{constrained__volume__elements_8h_source_l00676}{oomph\+::\+Spine\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{constrained__volume__elements_8h_source_l00834}{oomph\+::\+Spine\+Surface\+Volume\+Constraint\+Bounding\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00279}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00459}{oomph\+::\+Spine\+Point\+Fluid\+Interface\+Bounding\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00524}{oomph\+::\+Spine\+Line\+Fluid\+Interface\+Bounding\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00320}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data()}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00506}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ ELEMENT, NODE\+\_\+\+TYPE $>$\+::get\+\_\+jacobian()}}, and \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00516}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ ELEMENT, NODE\+\_\+\+TYPE $>$\+::get\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix()}}.
+Referenced by oomph\+::\+Spine\+Line\+Volume\+Constraint\+Bounding\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+Spine\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+Spine\+Surface\+Volume\+Constraint\+Bounding\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+Spine\+Point\+Fluid\+Interface\+Bounding\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+Spine\+Line\+Fluid\+Interface\+Bounding\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data(), oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ ELEMENT, NODE\+\_\+\+TYPE $>$\+::get\+\_\+jacobian(), and oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ ELEMENT, NODE\+\_\+\+TYPE $>$\+::get\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithMovingNodes_a2005bd9a0f38ad2eab3ec1250c8a7ba4}\label{classoomph_1_1ElementWithMovingNodes_a2005bd9a0f38ad2eab3ec1250c8a7ba4}} 
 \index{oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}!geometric\_data\_local\_eqn@{geometric\_data\_local\_eqn}}
@@ -502,15 +502,15 @@ Return the local equation number corresponding to the i-\/th value at the n-\/th
 
 
 
-Definition at line \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00126}{126}} of file \mbox{\hyperlink{element__with__moving__nodes_8h_source}{element\+\_\+with\+\_\+moving\+\_\+nodes.\+h}}.
+Definition at line 126 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00340}{Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00353}{Geometric\+\_\+data\+\_\+local\+\_\+eqn}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References Geom\+\_\+data\+\_\+pt, Geometric\+\_\+data\+\_\+local\+\_\+eqn, and i.
 
 
 
-Referenced by \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00323}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data()}}, \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00538}{get\+\_\+dnodal\+\_\+coordinates\+\_\+dgeom\+\_\+dofs()}}, and \mbox{\hyperlink{spines_8h_source_l00521}{oomph\+::\+Spine\+Element$<$ ELEMENT $>$\+::spine\+\_\+local\+\_\+eqn()}}.
+Referenced by fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data(), get\+\_\+dnodal\+\_\+coordinates\+\_\+dgeom\+\_\+dofs(), and oomph\+::\+Spine\+Element$<$ ELEMENT $>$\+::spine\+\_\+local\+\_\+eqn().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithMovingNodes_a639f9c0e3cf3a8173497011e8a496750}\label{classoomph_1_1ElementWithMovingNodes_a639f9c0e3cf3a8173497011e8a496750}} 
 \index{oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}!get\_dnodal\_coordinates\_dgeom\_dofs@{get\_dnodal\_coordinates\_dgeom\_dofs}}
@@ -524,15 +524,15 @@ Compute derivatives of the nodal coordinates w.\+r.\+t. to the geometric dofs. D
 
 
 
-Definition at line \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00538}{538}} of file \mbox{\hyperlink{element__with__moving__nodes_8cc_source}{element\+\_\+with\+\_\+moving\+\_\+nodes.\+cc}}.
+Definition at line 538 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01198}{oomph\+::\+Generalised\+Element\+::\+Default\+\_\+fd\+\_\+jacobian\+\_\+step}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00340}{Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00126}{geometric\+\_\+data\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00345}{ngeom\+\_\+data()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{elements_8cc_source_l05072}{oomph\+::\+Finite\+Element\+::node\+\_\+update()}}, \mbox{\hyperlink{refineable__elements_8h_source_l00627}{oomph\+::\+Refineable\+Element\+::nshape\+\_\+controlling\+\_\+nodes()}}, \mbox{\hyperlink{nodes_8cc_source_l02499}{oomph\+::\+Node\+::position()}}, and \mbox{\hyperlink{refineable__elements_8h_source_l00636}{oomph\+::\+Refineable\+Element\+::shape\+\_\+controlling\+\_\+node\+\_\+lookup()}}.
+References oomph\+::\+Generalised\+Element\+::\+Default\+\_\+fd\+\_\+jacobian\+\_\+step, Geom\+\_\+data\+\_\+pt, geometric\+\_\+data\+\_\+local\+\_\+eqn(), i, oomph\+::\+Node\+::ndim(), ngeom\+\_\+data(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Finite\+Element\+::node\+\_\+update(), oomph\+::\+Refineable\+Element\+::nshape\+\_\+controlling\+\_\+nodes(), oomph\+::\+Node\+::position(), and oomph\+::\+Refineable\+Element\+::shape\+\_\+controlling\+\_\+node\+\_\+lookup().
 
 
 
-Referenced by \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00323}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data()}}.
+Referenced by fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithMovingNodes_ac85f9921f2ed1020f734f5c47a612809}\label{classoomph_1_1ElementWithMovingNodes_ac85f9921f2ed1020f734f5c47a612809}} 
 \index{oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}!identify\_geometric\_data@{identify\_geometric\_data}}
@@ -550,11 +550,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0eea5ad6500576d
 
 
 
-Definition at line \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00175}{175}} of file \mbox{\hyperlink{element__with__moving__nodes_8h_source}{element\+\_\+with\+\_\+moving\+\_\+nodes.\+h}}.
+Definition at line 175 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00340}{Geom\+\_\+data\+\_\+pt}}.
+References Geom\+\_\+data\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithMovingNodes_a9e6450d4fff45393640ab3043d17ac96}\label{classoomph_1_1ElementWithMovingNodes_a9e6450d4fff45393640ab3043d17ac96}} 
 \index{oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}!is\_fill\_in\_jacobian\_from\_geometric\_data\_bypassed@{is\_fill\_in\_jacobian\_from\_geometric\_data\_bypassed}}
@@ -568,17 +568,17 @@ Test whether the call to fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_
 
 
 
-Definition at line \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00287}{287}} of file \mbox{\hyperlink{element__with__moving__nodes_8h_source}{element\+\_\+with\+\_\+moving\+\_\+nodes.\+h}}.
+Definition at line 287 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00361}{Bypass\+\_\+fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data}}.
+References Bypass\+\_\+fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data.
 
-\mbox{\Hypertarget{classoomph_1_1ElementWithMovingNodes_aa3559717ddcceb96109cc5dafbc11de2}\label{classoomph_1_1ElementWithMovingNodes_aa3559717ddcceb96109cc5dafbc11de2}} 
+\mbox{\Hypertarget{classoomph_1_1ElementWithMovingNodes_a600d39b3c167989dd8eed5869726d35b}\label{classoomph_1_1ElementWithMovingNodes_a600d39b3c167989dd8eed5869726d35b}} 
 \index{oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}!method\_for\_shape\_derivs@{method\_for\_shape\_derivs}}
 \index{method\_for\_shape\_derivs@{method\_for\_shape\_derivs}!oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}}
 \doxysubsubsection{\texorpdfstring{method\_for\_shape\_derivs()}{method\_for\_shape\_derivs()}}
-{\footnotesize\ttfamily int \& oomph\+::\+Element\+With\+Moving\+Nodes\+::method\+\_\+for\+\_\+shape\+\_\+derivs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily int\& oomph\+::\+Element\+With\+Moving\+Nodes\+::method\+\_\+for\+\_\+shape\+\_\+derivs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -586,15 +586,15 @@ Access to method (enumerated flag) for determination of shape derivs.
 
 
 
-Definition at line \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00268}{268}} of file \mbox{\hyperlink{element__with__moving__nodes_8h_source}{element\+\_\+with\+\_\+moving\+\_\+nodes.\+h}}.
+Definition at line 268 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00371}{Method\+\_\+for\+\_\+shape\+\_\+derivs}}.
+References Method\+\_\+for\+\_\+shape\+\_\+derivs.
 
 
 
-Referenced by \mbox{\hyperlink{refineable__brick__element_8cc_source_l01293}{oomph\+::\+Refineable\+QElement$<$ 3 $>$\+::build()}}, \mbox{\hyperlink{refineable__line__element_8cc_source_l00212}{oomph\+::\+Refineable\+QElement$<$ 1 $>$\+::build()}}, and \mbox{\hyperlink{refineable__quad__element_8cc_source_l00642}{oomph\+::\+Refineable\+QElement$<$ 2 $>$\+::build()}}.
+Referenced by oomph\+::\+Refineable\+QElement$<$ 3 $>$\+::build(), oomph\+::\+Refineable\+QElement$<$ 1 $>$\+::build(), and oomph\+::\+Refineable\+QElement$<$ 2 $>$\+::build().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithMovingNodes_acd9274afc02b66bb15b368e359c40a6f}\label{classoomph_1_1ElementWithMovingNodes_acd9274afc02b66bb15b368e359c40a6f}} 
 \index{oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}!ngeom\_data@{ngeom\_data}}
@@ -612,15 +612,15 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_a19d325347e19964e12
 
 
 
-Definition at line \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00345}{345}} of file \mbox{\hyperlink{element__with__moving__nodes_8h_source}{element\+\_\+with\+\_\+moving\+\_\+nodes.\+h}}.
+Definition at line 345 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00340}{Geom\+\_\+data\+\_\+pt}}.
+References Geom\+\_\+data\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00197}{assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00170}{describe\+\_\+local\+\_\+dofs()}}, \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00323}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data()}}, \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00538}{get\+\_\+dnodal\+\_\+coordinates\+\_\+dgeom\+\_\+dofs()}}, and \mbox{\hyperlink{spines_8h_source_l00521}{oomph\+::\+Spine\+Element$<$ ELEMENT $>$\+::spine\+\_\+local\+\_\+eqn()}}.
+Referenced by assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers(), describe\+\_\+local\+\_\+dofs(), fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data(), get\+\_\+dnodal\+\_\+coordinates\+\_\+dgeom\+\_\+dofs(), and oomph\+::\+Spine\+Element$<$ ELEMENT $>$\+::spine\+\_\+local\+\_\+eqn().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithMovingNodes_a14f1abd33151ddaa8705b23d93d57037}\label{classoomph_1_1ElementWithMovingNodes_a14f1abd33151ddaa8705b23d93d57037}} 
 \index{oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}!ngeom\_dof@{ngeom\_dof}}
@@ -634,11 +634,11 @@ Number of geometric dofs.
 
 
 
-Definition at line \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00119}{119}} of file \mbox{\hyperlink{element__with__moving__nodes_8h_source}{element\+\_\+with\+\_\+moving\+\_\+nodes.\+h}}.
+Definition at line 119 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00357}{Ngeom\+\_\+dof}}.
+References Ngeom\+\_\+dof.
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithMovingNodes_a39cd75628d79a8ef21ba57016b99c82c}\label{classoomph_1_1ElementWithMovingNodes_a39cd75628d79a8ef21ba57016b99c82c}} 
 \index{oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}!operator=@{operator=}}
@@ -665,11 +665,11 @@ Set flag to true to bypass calculation of Jacobain entries resulting from geomet
 
 
 
-Definition at line \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00361}{361}} of file \mbox{\hyperlink{element__with__moving__nodes_8h_source}{element\+\_\+with\+\_\+moving\+\_\+nodes.\+h}}.
+Definition at line 361 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00280}{disable\+\_\+bypass\+\_\+fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data()}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00274}{enable\+\_\+bypass\+\_\+fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data()}}, \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00323}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data()}}, and \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00287}{is\+\_\+fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data\+\_\+bypassed()}}.
+Referenced by disable\+\_\+bypass\+\_\+fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data(), enable\+\_\+bypass\+\_\+fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data(), fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data(), and is\+\_\+fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data\+\_\+bypassed().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithMovingNodes_a48a91f84864bc2346ee4b9d50d2250b1}\label{classoomph_1_1ElementWithMovingNodes_a48a91f84864bc2346ee4b9d50d2250b1}} 
 \index{oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}!Evaluate\_dresidual\_dnodal\_coordinates\_by\_fd@{Evaluate\_dresidual\_dnodal\_coordinates\_by\_fd}}
@@ -683,11 +683,11 @@ Boolean to decide if shape derivatives are to be evaluated by fd (using \mbox{\h
 
 
 
-Definition at line \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00367}{367}} of file \mbox{\hyperlink{element__with__moving__nodes_8h_source}{element\+\_\+with\+\_\+moving\+\_\+nodes.\+h}}.
+Definition at line 367 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00186}{are\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates\+\_\+always\+\_\+evaluated\+\_\+by\+\_\+fd()}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00204}{disable\+\_\+always\+\_\+evaluate\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates\+\_\+by\+\_\+fd()}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00194}{enable\+\_\+always\+\_\+evaluate\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates\+\_\+by\+\_\+fd()}}, and \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00323}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data()}}.
+Referenced by are\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates\+\_\+always\+\_\+evaluated\+\_\+by\+\_\+fd(), disable\+\_\+always\+\_\+evaluate\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates\+\_\+by\+\_\+fd(), enable\+\_\+always\+\_\+evaluate\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates\+\_\+by\+\_\+fd(), and fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithMovingNodes_a18986c6ad81149cf779a2d930825dad5}\label{classoomph_1_1ElementWithMovingNodes_a18986c6ad81149cf779a2d930825dad5}} 
 \index{oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}!Geom\_data\_pt@{Geom\_data\_pt}}
@@ -701,11 +701,11 @@ Referenced by \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00186}{ar
 
 
 
-Definition at line \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00340}{340}} of file \mbox{\hyperlink{element__with__moving__nodes_8h_source}{element\+\_\+with\+\_\+moving\+\_\+nodes.\+h}}.
+Definition at line 340 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00197}{assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00138}{complete\+\_\+setup\+\_\+of\+\_\+dependencies()}}, \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00170}{describe\+\_\+local\+\_\+dofs()}}, \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00323}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data()}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00126}{geometric\+\_\+data\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00538}{get\+\_\+dnodal\+\_\+coordinates\+\_\+dgeom\+\_\+dofs()}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00175}{identify\+\_\+geometric\+\_\+data()}}, and \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00345}{ngeom\+\_\+data()}}.
+Referenced by assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers(), complete\+\_\+setup\+\_\+of\+\_\+dependencies(), describe\+\_\+local\+\_\+dofs(), fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data(), geometric\+\_\+data\+\_\+local\+\_\+eqn(), get\+\_\+dnodal\+\_\+coordinates\+\_\+dgeom\+\_\+dofs(), identify\+\_\+geometric\+\_\+data(), and ngeom\+\_\+data().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithMovingNodes_ad4f650e53dab1492ef757ab5e69c66ff}\label{classoomph_1_1ElementWithMovingNodes_ad4f650e53dab1492ef757ab5e69c66ff}} 
 \index{oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}!Geometric\_data\_local\_eqn@{Geometric\_data\_local\_eqn}}
@@ -719,11 +719,11 @@ Array to hold local eqn number information for the geometric \mbox{\hyperlink{cl
 
 
 
-Definition at line \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00353}{353}} of file \mbox{\hyperlink{element__with__moving__nodes_8h_source}{element\+\_\+with\+\_\+moving\+\_\+nodes.\+h}}.
+Definition at line 353 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00197}{assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00126}{geometric\+\_\+data\+\_\+local\+\_\+eqn()}}, and \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00109}{$\sim$\+Element\+With\+Moving\+Nodes()}}.
+Referenced by assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers(), geometric\+\_\+data\+\_\+local\+\_\+eqn(), and $\sim$\+Element\+With\+Moving\+Nodes().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithMovingNodes_a7b02491715adf7a315631938138362af}\label{classoomph_1_1ElementWithMovingNodes_a7b02491715adf7a315631938138362af}} 
 \index{oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}!Method\_for\_shape\_derivs@{Method\_for\_shape\_derivs}}
@@ -737,11 +737,11 @@ Choose method for evaluation of shape derivatives (this takes one of the values 
 
 
 
-Definition at line \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00371}{371}} of file \mbox{\hyperlink{element__with__moving__nodes_8h_source}{element\+\_\+with\+\_\+moving\+\_\+nodes.\+h}}.
+Definition at line 371 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00220}{evaluate\+\_\+shape\+\_\+derivs\+\_\+by\+\_\+chain\+\_\+rule()}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00210}{evaluate\+\_\+shape\+\_\+derivs\+\_\+by\+\_\+direct\+\_\+fd()}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00245}{evaluate\+\_\+shape\+\_\+derivs\+\_\+by\+\_\+fastest\+\_\+method()}}, \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00323}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data()}}, and \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00268}{method\+\_\+for\+\_\+shape\+\_\+derivs()}}.
+Referenced by evaluate\+\_\+shape\+\_\+derivs\+\_\+by\+\_\+chain\+\_\+rule(), evaluate\+\_\+shape\+\_\+derivs\+\_\+by\+\_\+direct\+\_\+fd(), evaluate\+\_\+shape\+\_\+derivs\+\_\+by\+\_\+fastest\+\_\+method(), fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data(), and method\+\_\+for\+\_\+shape\+\_\+derivs().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithMovingNodes_a346ca61cbdd374683a4fa1073a5f5dec}\label{classoomph_1_1ElementWithMovingNodes_a346ca61cbdd374683a4fa1073a5f5dec}} 
 \index{oomph::ElementWithMovingNodes@{oomph::ElementWithMovingNodes}!Ngeom\_dof@{Ngeom\_dof}}
@@ -755,11 +755,11 @@ Number of geometric dofs (computed on the fly when equation numbers are set up)
 
 
 
-Definition at line \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00357}{357}} of file \mbox{\hyperlink{element__with__moving__nodes_8h_source}{element\+\_\+with\+\_\+moving\+\_\+nodes.\+h}}.
+Definition at line 357 of file element\+\_\+with\+\_\+moving\+\_\+nodes.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00197}{assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00323}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data()}}, and \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00119}{ngeom\+\_\+dof()}}.
+Referenced by assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers(), fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data(), and ngeom\+\_\+dof().
 
 
 

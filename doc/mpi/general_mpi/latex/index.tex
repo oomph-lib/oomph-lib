@@ -15,7 +15,7 @@
 \begin{DoxyItemize}
 \item To compile {\ttfamily oomph-\/lib} with MPI support you must specify the configure flag ~\newline
 ~\newline
- 
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{-\/-\/enable-\/MPI}
 
@@ -26,7 +26,7 @@
 
 \item When {\ttfamily oomph-\/lib} is built with MPI support, the macro {\ttfamily OOMPH\+\_\+\+HAS\+\_\+\+MPI} is defined. It is used to isolate parallel sections of code to ensure that the library can be used in serial and parallel\+: {\itshape  e.\+g. } ~\newline
 ~\newline
- 
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{[...]}
 \DoxyCodeLine{}
@@ -56,7 +56,7 @@
 \begin{DoxyItemize}
 \item MPI {\bfseries{ must }} be initialised in every driver code that is to be run in parallel, which means that the commands {\ttfamily MPI\+\_\+\+Helpers\+::init(...)} and {\ttfamily MPI\+\_\+\+Helpers\+::finalize()} must be added to the beginning and end of the {\ttfamily main(...)} function, respectively ~\newline
 ~\newline
- 
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} **argv)}
 \DoxyCodeLine{  \{ }
@@ -85,7 +85,7 @@
 
 \item The command used to run a parallel job depends on your particular MPI installation. If you use \href{http://www.open-mpi.org/}{\texttt{ Open\+MPI}}, for example, the executable {\ttfamily parallel\+\_\+executable} is run on, say, four processors by issuing the command ~\newline
 ~\newline
- 
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{mpirun -\/np 4 ./parallel\_executable}
 
@@ -113,7 +113,7 @@
 \begin{DoxyItemize}
 \item The configure flag {\ttfamily --with-\/mpi-\/self-\/tests} includes {\ttfamily oomph-\/lib\textquotesingle{}s} parallel demo driver codes into the self-\/tests executed when {\ttfamily make} {\ttfamily check} is run. The self-\/tests require the executable to be run on two processors and the command that spawns a two-\/processor parallel job on the target machine must be specified as an argument to the configure flag. For example, under \href{http://www.lam-mpi.org/}{\texttt{ LAM}} ~\newline
 ~\newline
- 
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{-\/-\/with-\/mpi-\/\textcolor{keyword}{self}-\/tests=\textcolor{stringliteral}{"{}mpirun -\/np 2"{}}}
 
@@ -121,7 +121,7 @@
  ~\newline
  Some self-\/tests are performed with a greater number of processors. To perform these tests as part of the {\ttfamily make} {\ttfamily test} procedure, add the configure flag {\ttfamily --with-\/mpi-\/self-\/tests-\/variablenp} to the configure options. Its argument has to specify how to spawn an mpi job on an arbitrary number of processors, using the placeholder {\ttfamily OOMPHNP} for the number of processors. E.\+g. ~\newline
 ~\newline
- 
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{-\/-\/with-\/mpi-\/\textcolor{keyword}{self}-\/tests-\/variablenp=\textcolor{stringliteral}{"{}mpirun -\/np OOMPHNP"{}}}
 
@@ -145,7 +145,7 @@ To address this problem, {\ttfamily oomph-\/lib\textquotesingle{}s} domain decom
 \begin{DoxyItemize}
 \item In most cases the problem distribution is extremely straightforward. Given an existing serial driver code, modified by the addition of calls to {\ttfamily MPI\+\_\+\+Helpers\+::init(...)} and {\ttfamily MPI\+\_\+\+Helpers\+::finalize()}, the function ~\newline
 ~\newline
- 
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::distribute()}
 
@@ -162,7 +162,7 @@ To address this problem, {\ttfamily oomph-\/lib\textquotesingle{}s} domain decom
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_doc\_solution=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} RefineableDrivenCavityProblem<ELEMENT>::doc\_solution(DocInfo\& doc\_info)}
 \DoxyCodeLine{\{ }
@@ -197,7 +197,7 @@ To address this problem, {\ttfamily oomph-\/lib\textquotesingle{}s} domain decom
  ~\newline
  or ~\newline
 ~\newline
- 
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Mesh::disable\_output\_of halo\_elements()}
 

@@ -94,38 +94,38 @@ As usual, we represent the moving wall as a {\ttfamily Geom\+Object} and define 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===============start\_of\_oscillating\_wall=================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Straight, horizontal channel wall at \(\backslash\)f\$ y=H \(\backslash\)f\$ deforms into an }\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// oscillating parabola. The amplitude of the oscillation }}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)f\$ A \(\backslash\)f\$ and its period is \(\backslash\)f\$ T \(\backslash\)f\$.}}
-\DoxyCodeLine{\textcolor{comment}{/// The position vector to a point on the wall, parametrised by}}
-\DoxyCodeLine{\textcolor{comment}{/// the Lagrangian coordinate \(\backslash\)f\$ \(\backslash\)zeta \(\backslash\)in [0,L]\(\backslash\)f\$, is therefore given by}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)f[ \{\(\backslash\)bf R\}(\(\backslash\)zeta,t) = }}
-\DoxyCodeLine{\textcolor{comment}{///   \(\backslash\)left(}}
-\DoxyCodeLine{\textcolor{comment}{///   \(\backslash\)begin\{array\}\{c\}}}
-\DoxyCodeLine{\textcolor{comment}{///   L\_\{up\} + \(\backslash\)zeta  \(\backslash\)\(\backslash\)   1 }}
-\DoxyCodeLine{\textcolor{comment}{///   \(\backslash\)end\{array\}}}
-\DoxyCodeLine{\textcolor{comment}{///   \(\backslash\)right)}}
-\DoxyCodeLine{\textcolor{comment}{///   + A}}
-\DoxyCodeLine{\textcolor{comment}{///   \(\backslash\)left(}}
-\DoxyCodeLine{\textcolor{comment}{///   \(\backslash\)begin\{array\}\{l\}}}
-\DoxyCodeLine{\textcolor{comment}{///   -\/ B \(\backslash\)sin\(\backslash\)left(\(\backslash\)frac\{2\(\backslash\)pi\}\{L\_\{collapsible\}\}\(\backslash\)zeta\(\backslash\)right) \(\backslash\)\(\backslash\) \(\backslash\)left(}}
-\DoxyCodeLine{\textcolor{comment}{///   \(\backslash\)frac\{2\}\{L\_\{collapsible\}\}\(\backslash\)right)\string^2 \(\backslash\)zeta \(\backslash\) (L-\/\(\backslash\)zeta)}}
-\DoxyCodeLine{\textcolor{comment}{///   \(\backslash\)end\{array\}}}
-\DoxyCodeLine{\textcolor{comment}{///   \(\backslash\)right)   }}
-\DoxyCodeLine{\textcolor{comment}{///   \(\backslash\) \(\backslash\)sin\(\backslash\)left(\(\backslash\)frac\{2\(\backslash\)pi t\}\{T\}\(\backslash\)right)}}
-\DoxyCodeLine{\textcolor{comment}{///   \(\backslash\) \{\(\backslash\)cal R\}(t)}}
-\DoxyCodeLine{\textcolor{comment}{///  \(\backslash\)f]}}
-\DoxyCodeLine{\textcolor{comment}{/// The parameter \(\backslash\)f\$ B \(\backslash\)f\$ is zero by default. If it is set to a nonzero}}
-\DoxyCodeLine{\textcolor{comment}{/// value, the material particles on the wall also perform some }}
-\DoxyCodeLine{\textcolor{comment}{/// horizontal motion. The "{}ramp"{} function }}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)f[ }}
-\DoxyCodeLine{\textcolor{comment}{/// \{\(\backslash\)cal R\}(t) =  \(\backslash\)left\(\backslash\)\{ }}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)begin\{array\}\{ll\}  }}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)frac\{1\}\{2\}(1-\/\(\backslash\)cos(\(\backslash\)pi t/T)) \& \(\backslash\)mbox\{for \$t<T\$\} \(\backslash\)\(\backslash\) 1 \& \(\backslash\)mbox\{for \$t \(\backslash\)ge T\$\}}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)end\{array\} }}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)right.}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)f]}}
-\DoxyCodeLine{\textcolor{comment}{/// provides a "{}smooth"{} startup of the oscillation. }}
+\DoxyCodeLine{\textcolor{comment}{/// Straight, horizontal channel wall at \(\backslash\)f\$ y=H \(\backslash\)f\$ deforms into an }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// oscillating parabola. The amplitude of the oscillation }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)f\$ A \(\backslash\)f\$ and its period is \(\backslash\)f\$ T \(\backslash\)f\$.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// The position vector to a point on the wall, parametrised by}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// the Lagrangian coordinate \(\backslash\)f\$ \(\backslash\)zeta \(\backslash\)in [0,L]\(\backslash\)f\$, is therefore given by}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)f[ \{\(\backslash\)bf R\}(\(\backslash\)zeta,t) = }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///   \(\backslash\)left(}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///   \(\backslash\)begin\{array\}\{c\}}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///   L\_\{up\} + \(\backslash\)zeta  \(\backslash\)\(\backslash\)   1 }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///   \(\backslash\)end\{array\}}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///   \(\backslash\)right)}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///   + A}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///   \(\backslash\)left(}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///   \(\backslash\)begin\{array\}\{l\}}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///   -\/ B \(\backslash\)sin\(\backslash\)left(\(\backslash\)frac\{2\(\backslash\)pi\}\{L\_\{collapsible\}\}\(\backslash\)zeta\(\backslash\)right) \(\backslash\)\(\backslash\) \(\backslash\)left(}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///   \(\backslash\)frac\{2\}\{L\_\{collapsible\}\}\(\backslash\)right)\string^2 \(\backslash\)zeta \(\backslash\) (L-\/\(\backslash\)zeta)}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///   \(\backslash\)end\{array\}}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///   \(\backslash\)right)   }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///   \(\backslash\) \(\backslash\)sin\(\backslash\)left(\(\backslash\)frac\{2\(\backslash\)pi t\}\{T\}\(\backslash\)right)}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///   \(\backslash\) \{\(\backslash\)cal R\}(t)}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///  \(\backslash\)f]}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// The parameter \(\backslash\)f\$ B \(\backslash\)f\$ is zero by default. If it is set to a nonzero}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// value, the material particles on the wall also perform some }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// horizontal motion. The "{}ramp"{} function }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)f[ }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \{\(\backslash\)cal R\}(t) =  \(\backslash\)left\(\backslash\)\{ }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)begin\{array\}\{ll\}  }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)frac\{1\}\{2\}(1-\/\(\backslash\)cos(\(\backslash\)pi t/T)) \& \(\backslash\)mbox\{for \$t<T\$\} \(\backslash\)\(\backslash\) 1 \& \(\backslash\)mbox\{for \$t \(\backslash\)ge T\$\}}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)end\{array\} }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)right.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)f]}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// provides a "{}smooth"{} startup of the oscillation. }}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{class }OscillatingWall : \textcolor{keyword}{public} GeomObject}
 \DoxyCodeLine{\{}
@@ -240,7 +240,7 @@ As usual, we define the problem parameters in a namespace and assign default val
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//====start\_of\_Global\_Physical\_Variables================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for phyical parameters}}
-\DoxyCodeLine{\textcolor{comment}{//======================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }Global\_Physical\_Variables}
 \DoxyCodeLine{\{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Reynolds number}}
@@ -284,10 +284,10 @@ After storing the command line arguments, we choose the number of elements in th
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_driver\_code==================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Driver code for an unsteady adaptive collapsible channel problem}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// with prescribed wall motion. Presence of command line arguments}}
-\DoxyCodeLine{\textcolor{comment}{/// indicates validation run with coarse resolution and small number of}}
-\DoxyCodeLine{\textcolor{comment}{/// timesteps.}}
+\DoxyCodeLine{\textcolor{comment}{/// Driver code for an unsteady adaptive collapsible channel problem}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// with prescribed wall motion. Presence of command line arguments}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// indicates validation run with coarse resolution and small number of}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// timesteps.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=============================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
@@ -465,7 +465,7 @@ As usual, we template the problem class by the element type and provide an acces
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_problem\_class=======================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Problem class}}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }CollapsibleChannelProblem : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -617,7 +617,7 @@ We store the parameters in the problem\textquotesingle{}s private member data an
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_constructor=======================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for the collapsible channel problem}}
-\DoxyCodeLine{\textcolor{comment}{//===============================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//===============================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{CollapsibleChannelProblem<ELEMENT>::CollapsibleChannelProblem(}
 \DoxyCodeLine{ \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nup, }
@@ -849,7 +849,7 @@ The function {\ttfamily doc\+\_\+solution(...)} documents the results, and recor
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//====start\_of\_doc\_solution===================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{//============================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//============================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} CollapsibleChannelProblem<ELEMENT>:: doc\_solution(DocInfo\& doc\_info, }
 \DoxyCodeLine{                                                       ofstream\& trace\_file)}
@@ -908,7 +908,7 @@ The creation of the applied traction elements follows the usual pattern, explain
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==========start\_of\_create\_traction\_elements==================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Create the traction elements}}
-\DoxyCodeLine{\textcolor{comment}{//============================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//============================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} CollapsibleChannelProblem<ELEMENT>::create\_traction\_elements(}
 \DoxyCodeLine{ \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&b, Mesh* \textcolor{keyword}{const} \&bulk\_mesh\_pt, Mesh* \textcolor{keyword}{const} \&surface\_mesh\_pt)}
@@ -947,7 +947,7 @@ Since the \char`\"{}bulk\char`\"{} elements that the applied traction elements a
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_delete\_traction\_elements==============================}}
 \DoxyCodeLine{\textcolor{comment}{/// Delete traction elements and wipe the surface mesh}}
-\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} CollapsibleChannelProblem<ELEMENT>::}
 \DoxyCodeLine{delete\_traction\_elements(Mesh* \textcolor{keyword}{const} \&surface\_mesh\_pt)}
@@ -977,7 +977,7 @@ Initial conditions are applied as usual. We start by confirming that the timeste
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_apply\_initial\_conditions===================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Apply initial conditions: Impulsive start from steady Poiseuille flow}}
-\DoxyCodeLine{\textcolor{comment}{//============================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//============================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} CollapsibleChannelProblem<ELEMENT>::set\_initial\_condition()}
 \DoxyCodeLine{\{ }
@@ -1028,8 +1028,8 @@ Before each timestep, we update the nodal positions in the fluid mesh, and apply
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====start\_of\_actions\_before\_implicit\_timestep==============================}}
-\DoxyCodeLine{\textcolor{comment}{/// Execute the actions before timestep: Update the velocity}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// boundary condition on the moving wall}}
+\DoxyCodeLine{\textcolor{comment}{/// Execute the actions before timestep: Update the velocity}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// boundary condition on the moving wall}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//============================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} CollapsibleChannelProblem<ELEMENT>::actions\_before\_implicit\_timestep()}
@@ -1061,7 +1061,7 @@ As discussed above, we delete the applied traction elements before performing an
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=========start\_of\_actions\_before\_adapt==================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Actions before adapt: Wipe the mesh of prescribed traction elements}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} CollapsibleChannelProblem<ELEMENT>::actions\_before\_adapt()}
 \DoxyCodeLine{\{}
@@ -1083,7 +1083,7 @@ Once the mesh has been adapted, we (re-\/)create the prescribed traction element
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==========start\_of\_actions\_after\_adapt==================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Actions after adapt: Rebuild the mesh of prescribed traction elements}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} CollapsibleChannelProblem<ELEMENT>::actions\_after\_adapt()}
 \DoxyCodeLine{\{}
@@ -1116,7 +1116,7 @@ Once the mesh has been adapted, we (re-\/)create the prescribed traction element
 \begin{DoxyEnumerate}
 \item Check the non-\/dimensionalisation of the governing equations and confirm that a (non-\/dimensional) upstream pressure $ p_{up} = 12 \ L_{total} $ is required to drive the steady Poiseuille flow specified by (3) through the static, undeformed channel. Use this to \char`\"{}validate\char`\"{} (well, \char`\"{}plausibility-\/check\char`\"{}, anyway...) the code by setting the amplitude of the wall oscillation to zero.
 \item Double the upstream pressure while keeping the amplitude of the wall oscillation at zero and confirm that the flow accelerates until it (asymptotically) approaches Poiseuille flow with twice the initial flowrate as $ t \to \infty. $
-\item The flow field has the largest velocity gradients in the thin Stokes layers near the wall, causing the automatic mesh adaptation procedure to refine the mesh pre-\/dominantly in these regions. To facilitate the resolution of such layers the {\ttfamily Collapsible\+Channel\+Domain} and {\ttfamily Collapsible\+Channel\+Mesh} allow the specification of a mapping \mbox{[}0,1\mbox{]} -\/\texorpdfstring{$>$}{>} \mbox{[}0,1\mbox{]} that redistributes the nodal points in the vertical direction so that the elements near the wall become more squashed. By default the \char`\"{}boundary-\/layer squash function\char`\"{} is the identity but it may be overloaded by specifying a function pointer to an alternative function. The driver code already includes a demonstration of this capability which may be activated by compiling the driver code with {\ttfamily -\/DUSE\+\_\+\+BL\+\_\+\+SQUASH\+\_\+\+FCT}. This activates the code segment  
+\item The flow field has the largest velocity gradients in the thin Stokes layers near the wall, causing the automatic mesh adaptation procedure to refine the mesh pre-\/dominantly in these regions. To facilitate the resolution of such layers the {\ttfamily Collapsible\+Channel\+Domain} and {\ttfamily Collapsible\+Channel\+Mesh} allow the specification of a mapping \mbox{[}0,1\mbox{]} -\/$>$ \mbox{[}0,1\mbox{]} that redistributes the nodal points in the vertical direction so that the elements near the wall become more squashed. By default the \char`\"{}boundary-\/layer squash function\char`\"{} is the identity but it may be overloaded by specifying a function pointer to an alternative function. The driver code already includes a demonstration of this capability which may be activated by compiling the driver code with {\ttfamily -\/DUSE\+\_\+\+BL\+\_\+\+SQUASH\+\_\+\+FCT}. This activates the code segment  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{preprocessor}{\#ifdef USE\_BL\_SQUASH\_FCT}}
 \DoxyCodeLine{}
@@ -1132,8 +1132,8 @@ Once the mesh has been adapted, we (re-\/)create the prescribed traction element
  in the Problem constructor. The \char`\"{}squash function\char`\"{} used for this example is defined in the following namespace\+:  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==========start\_of\_BL\_Squash =========================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Namespace to define the mapping [0,1] -\/> [0,1] that re-\/distributes}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// nodal points across the channel width.}}
+\DoxyCodeLine{\textcolor{comment}{/// Namespace to define the mapping [0,1] -\/> [0,1] that re-\/distributes}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// nodal points across the channel width.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceBL__Squash}{BL\_Squash}}}
 \DoxyCodeLine{\{}

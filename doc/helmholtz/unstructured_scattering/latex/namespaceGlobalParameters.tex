@@ -2,7 +2,7 @@
 \label{namespaceGlobalParameters}\index{GlobalParameters@{GlobalParameters}}
 
 
-////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////  
+Namespace for \char`\"{}global\char`\"{} problem parameters.  
 
 
 \doxysubsection*{Enumerations}
@@ -17,12 +17,6 @@ enum \mbox{\hyperlink{namespaceGlobalParameters_adde04e4243b82e3d4bd2f82d37a2d6b
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceGlobalParameters_a7642bd7303d39de0d680340586b7df60}{I}} (0.\+0, 1.\+0)
-\begin{DoxyCompactList}\small\item\em Imaginary unit. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceGlobalParameters_ae2320da6053f5527b2af5ebb362a8a07}{get\+\_\+exact\+\_\+u}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&u)
-\begin{DoxyCompactList}\small\item\em Exact solution for scattered field (vector returns real and impaginary parts). \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceGlobalParameters_a5183de63b992338ee60bb4da78a45039}{prescribed\+\_\+incoming\+\_\+flux}} (const Vector$<$ double $>$ \&x, complex$<$ double $>$ \&flux)
-\begin{DoxyCompactList}\small\item\em Flux (normal derivative) on the unit disk for a planar incoming wave. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobalParameters_a4571d41514b16946dd31d075d44c5593}{get\+\_\+exact\+\_\+kappa}} ()
 \begin{DoxyCompactList}\small\item\em Exact kappa. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceGlobalParameters_ac81daf87f8d3f075d9fd108427e70c4f}{spine\+\_\+base\+\_\+function}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&spine\+\_\+B, Vector$<$ Vector$<$ double $>$ $>$ \&dspine\+\_\+B)
@@ -30,20 +24,16 @@ void \mbox{\hyperlink{namespaceGlobalParameters_ac81daf87f8d3f075d9fd108427e70c4
 void \mbox{\hyperlink{namespaceGlobalParameters_a82df8c67f58e78a236fb6a0cc8bf8284}{spine\+\_\+function}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&spine, Vector$<$ Vector$<$ double $>$ $>$ \&dspine)
 \begin{DoxyCompactList}\small\item\em Spine\+: The spine vector field as a function of the two coordinates x\+\_\+1 and x\+\_\+2, and its derivatives w.\+r.\+t. to these coordinates\+: dspine\mbox{[}i\mbox{]}\mbox{[}j\mbox{]} = d spine\mbox{[}j\mbox{]} / dx\+\_\+i. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceGlobalParameters_aedbc21f2c81d445634badfc5cdd77436}{setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check}} ()
-\begin{DoxyCompactList}\small\item\em Setup dependent parameters and perform sanity check. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Setup dependent parameters and perform sanity check. \end{DoxyCompactList}\item 
+std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceGlobalParameters_a7642bd7303d39de0d680340586b7df60}{I}} (0.\+0, 1.\+0)
+\begin{DoxyCompactList}\small\item\em Imaginary unit. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceGlobalParameters_ae2320da6053f5527b2af5ebb362a8a07}{get\+\_\+exact\+\_\+u}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&u)
+\begin{DoxyCompactList}\small\item\em Exact solution for scattered field (vector returns real and impaginary parts). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceGlobalParameters_a5183de63b992338ee60bb4da78a45039}{prescribed\+\_\+incoming\+\_\+flux}} (const Vector$<$ double $>$ \&x, complex$<$ double $>$ \&flux)
+\begin{DoxyCompactList}\small\item\em Flux (normal derivative) on the unit disk for a planar incoming wave. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-double \mbox{\hyperlink{namespaceGlobalParameters_aae73cb63b27d51a87845c3392cd944eb}{K\+\_\+squared}} =10.\+0
-\begin{DoxyCompactList}\small\item\em Square of the wavenumber. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{namespaceGlobalParameters_ae4df03bf0ffa55b741ac846ca7b6c155}{N\+\_\+fourier}} =10
-\begin{DoxyCompactList}\small\item\em Number of terms used in the computation of the exact solution. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{namespaceGlobalParameters_a6e2bba1769e86a5d3db88e2c7062bc63}{Dt\+N\+\_\+\+BC}} =false
-\begin{DoxyCompactList}\small\item\em Flag to choose the Dirichlet to Neumann BC or ABC BC. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{namespaceGlobalParameters_a552eed3548a269715a95161ad3c4b96a}{ABC\+\_\+order}} =3
-\begin{DoxyCompactList}\small\item\em Flag to choose wich order to use. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{namespaceGlobalParameters_a61b086072a6b8fd38af1a85f1dd1674a}{Outer\+\_\+radius}} =1.\+5
-\begin{DoxyCompactList}\small\item\em Radius of outer boundary (must be a circle!) \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobalParameters_a3731f24a02ce4f306d65a9a488f85c96}{Controlled\+\_\+height}} = 0.\+0
 \begin{DoxyCompactList}\small\item\em Height control value. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobalParameters_ae8fa7610a34b7a2a8223eade99a5c22f}{Alpha\+\_\+min}} = Mathematical\+Constants\+::\+Pi/2.\+0$\ast$1.\+5
@@ -87,13 +77,23 @@ double \mbox{\hyperlink{namespaceGlobalParameters_aeb7f1ae574be563e0b603662c6fff
 double \mbox{\hyperlink{namespaceGlobalParameters_aa34aff6eb29a2a1245e9ffc2fac42caa}{Beta\+\_\+max}} = Mathematical\+Constants\+::\+Pi/2.\+0
 \begin{DoxyCompactList}\small\item\em Max. second pine angle against horizontal plane. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{namespaceGlobalParameters_a69a238365a4fef33b1abdae287185f3e}{Rotate\+\_\+spines\+\_\+in\+\_\+both\+\_\+directions}} = true
-\begin{DoxyCompactList}\small\item\em Should the spines rotate in the x and y directions (true)? \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Should the spines rotate in the x and y directions (true)? \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobalParameters_aae73cb63b27d51a87845c3392cd944eb}{K\+\_\+squared}} =10.\+0
+\begin{DoxyCompactList}\small\item\em Square of the wavenumber. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{namespaceGlobalParameters_ae4df03bf0ffa55b741ac846ca7b6c155}{N\+\_\+fourier}} =10
+\begin{DoxyCompactList}\small\item\em Number of terms used in the computation of the exact solution. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespaceGlobalParameters_a6e2bba1769e86a5d3db88e2c7062bc63}{Dt\+N\+\_\+\+BC}} =false
+\begin{DoxyCompactList}\small\item\em Flag to choose the Dirichlet to Neumann BC or ABC BC. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{namespaceGlobalParameters_a552eed3548a269715a95161ad3c4b96a}{ABC\+\_\+order}} =3
+\begin{DoxyCompactList}\small\item\em Flag to choose wich order to use. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobalParameters_a61b086072a6b8fd38af1a85f1dd1674a}{Outer\+\_\+radius}} =1.\+5
+\begin{DoxyCompactList}\small\item\em Radius of outer boundary (must be a circle!) \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////// 
+Namespace for \char`\"{}global\char`\"{} problem parameters. 
 
-Namespace for \char`\"{}global\char`\"{} problem parameters.
+////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////
 
 Namespace for the Helmholtz problem parameters 
 
@@ -128,7 +128,7 @@ T\+\_\+junction\+\_\+with\+\_\+nonzero\+\_\+contact\+\_\+angle&\\
 \end{DoxyEnumFields}
 
 
-Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00046}{46}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+Definition at line 46 of file common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h.
 
 
 
@@ -145,15 +145,15 @@ Exact kappa.
 
 
 
-Definition at line \mbox{\hyperlink{barrel_8cc_source_l00054}{54}} of file \mbox{\hyperlink{barrel_8cc_source}{barrel.\+cc}}.
+Definition at line 54 of file barrel.\+cc.
 
 
 
-References \mbox{\hyperlink{barrel_8cc_source_l00051}{Controlled\+\_\+height}}.
+References Controlled\+\_\+height.
 
 
 
-Referenced by \mbox{\hyperlink{barrel_8cc_source_l00291}{Young\+Laplace\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}.
+Referenced by Young\+Laplace\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution().
 
 \mbox{\Hypertarget{namespaceGlobalParameters_ae2320da6053f5527b2af5ebb362a8a07}\label{namespaceGlobalParameters_ae2320da6053f5527b2af5ebb362a8a07}} 
 \index{GlobalParameters@{GlobalParameters}!get\_exact\_u@{get\_exact\_u}}
@@ -167,15 +167,15 @@ Exact solution for scattered field (vector returns real and impaginary parts).
 
 
 
-Definition at line \mbox{\hyperlink{scattering_8cc_source_l00086}{86}} of file \mbox{\hyperlink{scattering_8cc_source}{scattering.\+cc}}.
+Definition at line 86 of file scattering.\+cc.
 
 
 
-References \mbox{\hyperlink{namespaceGlobalParameters_a7642bd7303d39de0d680340586b7df60}{I()}}, \mbox{\hyperlink{scattering_8cc_source_l00064}{K\+\_\+squared}}, and \mbox{\hyperlink{scattering_8cc_source_l00068}{N\+\_\+fourier}}.
+References I(), K\+\_\+squared, and N\+\_\+fourier.
 
 
 
-Referenced by \mbox{\hyperlink{scattering_8cc_source_l00516}{Scattering\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}.
+Referenced by Scattering\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution().
 
 \mbox{\Hypertarget{namespaceGlobalParameters_a7642bd7303d39de0d680340586b7df60}\label{namespaceGlobalParameters_a7642bd7303d39de0d680340586b7df60}} 
 \index{GlobalParameters@{GlobalParameters}!I@{I}}
@@ -189,7 +189,7 @@ Imaginary unit.
 
 
 
-Referenced by \mbox{\hyperlink{scattering_8cc_source_l00086}{get\+\_\+exact\+\_\+u()}}, and \mbox{\hyperlink{scattering_8cc_source_l00156}{prescribed\+\_\+incoming\+\_\+flux()}}.
+Referenced by get\+\_\+exact\+\_\+u(), and prescribed\+\_\+incoming\+\_\+flux().
 
 \mbox{\Hypertarget{namespaceGlobalParameters_a5183de63b992338ee60bb4da78a45039}\label{namespaceGlobalParameters_a5183de63b992338ee60bb4da78a45039}} 
 \index{GlobalParameters@{GlobalParameters}!prescribed\_incoming\_flux@{prescribed\_incoming\_flux}}
@@ -203,15 +203,15 @@ Flux (normal derivative) on the unit disk for a planar incoming wave.
 
 
 
-Definition at line \mbox{\hyperlink{scattering_8cc_source_l00156}{156}} of file \mbox{\hyperlink{scattering_8cc_source}{scattering.\+cc}}.
+Definition at line 156 of file scattering.\+cc.
 
 
 
-References \mbox{\hyperlink{namespaceGlobalParameters_a7642bd7303d39de0d680340586b7df60}{I()}}, \mbox{\hyperlink{scattering_8cc_source_l00064}{K\+\_\+squared}}, and \mbox{\hyperlink{scattering_8cc_source_l00068}{N\+\_\+fourier}}.
+References I(), K\+\_\+squared, and N\+\_\+fourier.
 
 
 
-Referenced by \mbox{\hyperlink{scattering_8cc_source_l00493}{Scattering\+Problem$<$ ELEMENT $>$\+::set\+\_\+prescribed\+\_\+incoming\+\_\+flux\+\_\+pt()}}.
+Referenced by Scattering\+Problem$<$ ELEMENT $>$\+::set\+\_\+prescribed\+\_\+incoming\+\_\+flux\+\_\+pt().
 
 \mbox{\Hypertarget{namespaceGlobalParameters_aedbc21f2c81d445634badfc5cdd77436}\label{namespaceGlobalParameters_aedbc21f2c81d445634badfc5cdd77436}} 
 \index{GlobalParameters@{GlobalParameters}!setup\_dependent\_parameters\_and\_sanity\_check@{setup\_dependent\_parameters\_and\_sanity\_check}}
@@ -225,11 +225,11 @@ Setup dependent parameters and perform sanity check.
 
 
 
-Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00126}{126}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+Definition at line 126 of file common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h.
 
 
 
-References \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00047}{All\+\_\+pinned}}, \mbox{\hyperlink{barrel_8cc_source_l00099}{Alpha\+\_\+max}}, \mbox{\hyperlink{barrel_8cc_source_l00096}{Alpha\+\_\+min}}, \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00048}{Barrel\+\_\+shape}}, \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00053}{Case}}, \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00090}{Control\+\_\+element}}, \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00061}{Cos\+\_\+gamma}}, \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00060}{Gamma}}, \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00067}{Kappa\+\_\+initial}}, \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00096}{L\+\_\+x}}, \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00097}{L\+\_\+y}}, \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00100}{N\+\_\+x}}, \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00101}{N\+\_\+y}}, \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00119}{Rotate\+\_\+spines\+\_\+in\+\_\+both\+\_\+directions}}, \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00046}{Spherical\+\_\+cap\+\_\+in\+\_\+cylinder\+\_\+pinned}}, and \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00049}{T\+\_\+junction\+\_\+with\+\_\+nonzero\+\_\+contact\+\_\+angle}}.
+References All\+\_\+pinned, Alpha\+\_\+max, Alpha\+\_\+min, Barrel\+\_\+shape, Case, Control\+\_\+element, Cos\+\_\+gamma, Gamma, Kappa\+\_\+initial, L\+\_\+x, L\+\_\+y, N\+\_\+x, N\+\_\+y, Rotate\+\_\+spines\+\_\+in\+\_\+both\+\_\+directions, Spherical\+\_\+cap\+\_\+in\+\_\+cylinder\+\_\+pinned, and T\+\_\+junction\+\_\+with\+\_\+nonzero\+\_\+contact\+\_\+angle.
 
 \mbox{\Hypertarget{namespaceGlobalParameters_ac81daf87f8d3f075d9fd108427e70c4f}\label{namespaceGlobalParameters_ac81daf87f8d3f075d9fd108427e70c4f}} 
 \index{GlobalParameters@{GlobalParameters}!spine\_base\_function@{spine\_base\_function}}
@@ -243,11 +243,11 @@ Spine basis\+: The position vector to the basis of the spine as a function of th
 
 
 
-Definition at line \mbox{\hyperlink{barrel_8cc_source_l00072}{72}} of file \mbox{\hyperlink{barrel_8cc_source}{barrel.\+cc}}.
+Definition at line 72 of file barrel.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{refineable__t__junction_8cc_source_l00226}{Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Young\+Laplace\+Problem()}}, and \mbox{\hyperlink{barrel_8cc_source_l00180}{Young\+Laplace\+Problem$<$ ELEMENT $>$\+::\+Young\+Laplace\+Problem()}}.
+Referenced by Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Young\+Laplace\+Problem(), and Young\+Laplace\+Problem$<$ ELEMENT $>$\+::\+Young\+Laplace\+Problem().
 
 \mbox{\Hypertarget{namespaceGlobalParameters_a82df8c67f58e78a236fb6a0cc8bf8284}\label{namespaceGlobalParameters_a82df8c67f58e78a236fb6a0cc8bf8284}} 
 \index{GlobalParameters@{GlobalParameters}!spine\_function@{spine\_function}}
@@ -273,15 +273,15 @@ Spines are dependent of x\mbox{[}0\mbox{]} AND x\mbox{[}1\mbox{]} and rotate in 
 
 Spines (and derivatives) are independent of x\mbox{[}0\mbox{]} and rotate in the x\mbox{[}1\mbox{]}-\/direction
 
-Definition at line \mbox{\hyperlink{barrel_8cc_source_l00104}{104}} of file \mbox{\hyperlink{barrel_8cc_source}{barrel.\+cc}}.
+Definition at line 104 of file barrel.\+cc.
 
 
 
-References \mbox{\hyperlink{barrel_8cc_source_l00099}{Alpha\+\_\+max}}, and \mbox{\hyperlink{barrel_8cc_source_l00096}{Alpha\+\_\+min}}.
+References Alpha\+\_\+max, and Alpha\+\_\+min.
 
 
 
-Referenced by \mbox{\hyperlink{refineable__t__junction_8cc_source_l00226}{Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Young\+Laplace\+Problem()}}, and \mbox{\hyperlink{barrel_8cc_source_l00180}{Young\+Laplace\+Problem$<$ ELEMENT $>$\+::\+Young\+Laplace\+Problem()}}.
+Referenced by Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Young\+Laplace\+Problem(), and Young\+Laplace\+Problem$<$ ELEMENT $>$\+::\+Young\+Laplace\+Problem().
 
 
 
@@ -298,11 +298,11 @@ Flag to choose wich order to use.
 
 
 
-Definition at line \mbox{\hyperlink{scattering_8cc_source_l00076}{76}} of file \mbox{\hyperlink{scattering_8cc_source}{scattering.\+cc}}.
+Definition at line 76 of file scattering.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{scattering_8cc_source_l00709}{main()}}, and \mbox{\hyperlink{scattering_8cc_source_l00451}{Scattering\+Problem$<$ ELEMENT $>$\+::setup\+\_\+outer\+\_\+boundary()}}.
+Referenced by main(), and Scattering\+Problem$<$ ELEMENT $>$\+::setup\+\_\+outer\+\_\+boundary().
 
 \mbox{\Hypertarget{namespaceGlobalParameters_a19d04a02b0b5ef5c72e9c30d822e4dc7}\label{namespaceGlobalParameters_a19d04a02b0b5ef5c72e9c30d822e4dc7}} 
 \index{GlobalParameters@{GlobalParameters}!Alpha\_max@{Alpha\_max}}
@@ -316,11 +316,11 @@ Max. spine angle against horizontal plane.
 
 Max. first spine angle against horizontal plane. 
 
-Definition at line \mbox{\hyperlink{barrel_8cc_source_l00099}{99}} of file \mbox{\hyperlink{barrel_8cc_source}{barrel.\+cc}}.
+Definition at line 99 of file barrel.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00126}{setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check()}}, and \mbox{\hyperlink{barrel_8cc_source_l00104}{spine\+\_\+function()}}.
+Referenced by setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check(), and spine\+\_\+function().
 
 \mbox{\Hypertarget{namespaceGlobalParameters_ae8fa7610a34b7a2a8223eade99a5c22f}\label{namespaceGlobalParameters_ae8fa7610a34b7a2a8223eade99a5c22f}} 
 \index{GlobalParameters@{GlobalParameters}!Alpha\_min@{Alpha\_min}}
@@ -334,11 +334,11 @@ Min. spine angle against horizontal plane.
 
 Min. first spine angle against horizontal plane. 
 
-Definition at line \mbox{\hyperlink{barrel_8cc_source_l00096}{96}} of file \mbox{\hyperlink{barrel_8cc_source}{barrel.\+cc}}.
+Definition at line 96 of file barrel.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00126}{setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check()}}, and \mbox{\hyperlink{barrel_8cc_source_l00104}{spine\+\_\+function()}}.
+Referenced by setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check(), and spine\+\_\+function().
 
 \mbox{\Hypertarget{namespaceGlobalParameters_aa34aff6eb29a2a1245e9ffc2fac42caa}\label{namespaceGlobalParameters_aa34aff6eb29a2a1245e9ffc2fac42caa}} 
 \index{GlobalParameters@{GlobalParameters}!Beta\_max@{Beta\_max}}
@@ -352,7 +352,7 @@ Max. second pine angle against horizontal plane.
 
 
 
-Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00116}{116}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+Definition at line 116 of file common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h.
 
 \mbox{\Hypertarget{namespaceGlobalParameters_aeb7f1ae574be563e0b603662c6fff5aa}\label{namespaceGlobalParameters_aeb7f1ae574be563e0b603662c6fff5aa}} 
 \index{GlobalParameters@{GlobalParameters}!Beta\_min@{Beta\_min}}
@@ -366,7 +366,7 @@ Min. second spine angle against horizontal plane.
 
 
 
-Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00113}{113}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+Definition at line 113 of file common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h.
 
 \mbox{\Hypertarget{namespaceGlobalParameters_aeb4257eec7a4c5a92e2b88e93248a201}\label{namespaceGlobalParameters_aeb4257eec7a4c5a92e2b88e93248a201}} 
 \index{GlobalParameters@{GlobalParameters}!Case@{Case}}
@@ -380,11 +380,11 @@ What case are we considering\+: Choose one from the enumeration Cases.
 
 
 
-Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00053}{53}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+Definition at line 53 of file common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{refineable__young__laplace_8cc_source_l00079}{Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+adapt()}}, \mbox{\hyperlink{refineable__young__laplace_8cc_source_l00616}{main()}}, and \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00126}{setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check()}}.
+Referenced by Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+adapt(), main(), and setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check().
 
 \mbox{\Hypertarget{namespaceGlobalParameters_a3a90a762edbce6d2a95456df26e85cea}\label{namespaceGlobalParameters_a3a90a762edbce6d2a95456df26e85cea}} 
 \index{GlobalParameters@{GlobalParameters}!Control\_element@{Control\_element}}
@@ -398,11 +398,11 @@ Number of element in bulk mesh at which height control is applied. Initialise to
 
 
 
-Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00090}{90}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+Definition at line 90 of file common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00126}{setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check()}}.
+Referenced by setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check().
 
 \mbox{\Hypertarget{namespaceGlobalParameters_a3731f24a02ce4f306d65a9a488f85c96}\label{namespaceGlobalParameters_a3731f24a02ce4f306d65a9a488f85c96}} 
 \index{GlobalParameters@{GlobalParameters}!Controlled\_height@{Controlled\_height}}
@@ -416,11 +416,11 @@ Height control value.
 
 Height control value for displacement control. 
 
-Definition at line \mbox{\hyperlink{barrel_8cc_source_l00051}{51}} of file \mbox{\hyperlink{barrel_8cc_source}{barrel.\+cc}}.
+Definition at line 51 of file barrel.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{barrel_8cc_source_l00054}{get\+\_\+exact\+\_\+kappa()}}, \mbox{\hyperlink{refineable__young__laplace_8cc_source_l00391}{Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::increment\+\_\+parameters()}}, \mbox{\hyperlink{barrel_8cc_source_l00321}{main()}}, \mbox{\hyperlink{refineable__t__junction_8cc_source_l00226}{Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Young\+Laplace\+Problem()}}, and \mbox{\hyperlink{barrel_8cc_source_l00180}{Young\+Laplace\+Problem$<$ ELEMENT $>$\+::\+Young\+Laplace\+Problem()}}.
+Referenced by get\+\_\+exact\+\_\+kappa(), Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::increment\+\_\+parameters(), main(), Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Young\+Laplace\+Problem(), and Young\+Laplace\+Problem$<$ ELEMENT $>$\+::\+Young\+Laplace\+Problem().
 
 \mbox{\Hypertarget{namespaceGlobalParameters_a65fe7fd6c6c54d7ba89fab47cd4a9141}\label{namespaceGlobalParameters_a65fe7fd6c6c54d7ba89fab47cd4a9141}} 
 \index{GlobalParameters@{GlobalParameters}!Controlled\_height\_increment@{Controlled\_height\_increment}}
@@ -434,11 +434,11 @@ Increment for height control.
 
 
 
-Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00085}{85}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+Definition at line 85 of file common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{refineable__young__laplace_8cc_source_l00391}{Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::increment\+\_\+parameters()}}, and \mbox{\hyperlink{refineable__young__laplace_8cc_source_l00616}{main()}}.
+Referenced by Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::increment\+\_\+parameters(), and main().
 
 \mbox{\Hypertarget{namespaceGlobalParameters_ae982fcb894e82c683d07d3c2fbbead3d}\label{namespaceGlobalParameters_ae982fcb894e82c683d07d3c2fbbead3d}} 
 \index{GlobalParameters@{GlobalParameters}!Cos\_gamma@{Cos\_gamma}}
@@ -452,11 +452,11 @@ Cos of contact angle.
 
 
 
-Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00061}{61}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+Definition at line 61 of file common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{refineable__t__junction_8cc_source_l00167}{Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+adapt()}}, \mbox{\hyperlink{refineable__t__junction_8cc_source_l00226}{Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Young\+Laplace\+Problem()}}, and \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00126}{setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check()}}.
+Referenced by Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+adapt(), Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Young\+Laplace\+Problem(), and setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check().
 
 \mbox{\Hypertarget{namespaceGlobalParameters_a6e2bba1769e86a5d3db88e2c7062bc63}\label{namespaceGlobalParameters_a6e2bba1769e86a5d3db88e2c7062bc63}} 
 \index{GlobalParameters@{GlobalParameters}!DtN\_BC@{DtN\_BC}}
@@ -470,11 +470,11 @@ Flag to choose the Dirichlet to Neumann BC or ABC BC.
 
 
 
-Definition at line \mbox{\hyperlink{scattering_8cc_source_l00072}{72}} of file \mbox{\hyperlink{scattering_8cc_source}{scattering.\+cc}}.
+Definition at line 72 of file scattering.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{scattering_8cc_source_l00244}{Scattering\+Problem$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()}}, \mbox{\hyperlink{scattering_8cc_source_l00645}{Scattering\+Problem$<$ ELEMENT $>$\+::create\+\_\+outer\+\_\+bc\+\_\+elements()}}, \mbox{\hyperlink{scattering_8cc_source_l00709}{main()}}, and \mbox{\hyperlink{scattering_8cc_source_l00451}{Scattering\+Problem$<$ ELEMENT $>$\+::setup\+\_\+outer\+\_\+boundary()}}.
+Referenced by Scattering\+Problem$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check(), Scattering\+Problem$<$ ELEMENT $>$\+::create\+\_\+outer\+\_\+bc\+\_\+elements(), main(), and Scattering\+Problem$<$ ELEMENT $>$\+::setup\+\_\+outer\+\_\+boundary().
 
 \mbox{\Hypertarget{namespaceGlobalParameters_adb0a994119055242fcc762cac5edc317}\label{namespaceGlobalParameters_adb0a994119055242fcc762cac5edc317}} 
 \index{GlobalParameters@{GlobalParameters}!Gamma@{Gamma}}
@@ -488,11 +488,11 @@ Contact angle and its cos (dependent parameter -- is reassigned)
 
 
 
-Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00060}{60}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+Definition at line 60 of file common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{refineable__young__laplace_8cc_source_l00616}{main()}}, and \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00126}{setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check()}}.
+Referenced by main(), and setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check().
 
 \mbox{\Hypertarget{namespaceGlobalParameters_aae73cb63b27d51a87845c3392cd944eb}\label{namespaceGlobalParameters_aae73cb63b27d51a87845c3392cd944eb}} 
 \index{GlobalParameters@{GlobalParameters}!K\_squared@{K\_squared}}
@@ -506,11 +506,11 @@ Square of the wavenumber.
 
 
 
-Definition at line \mbox{\hyperlink{scattering_8cc_source_l00064}{64}} of file \mbox{\hyperlink{scattering_8cc_source}{scattering.\+cc}}.
+Definition at line 64 of file scattering.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{scattering_8cc_source_l00086}{get\+\_\+exact\+\_\+u()}}, \mbox{\hyperlink{scattering_8cc_source_l00156}{prescribed\+\_\+incoming\+\_\+flux()}}, and \mbox{\hyperlink{scattering_8cc_source_l00308}{Scattering\+Problem$<$ ELEMENT $>$\+::\+Scattering\+Problem()}}.
+Referenced by get\+\_\+exact\+\_\+u(), prescribed\+\_\+incoming\+\_\+flux(), and Scattering\+Problem$<$ ELEMENT $>$\+::\+Scattering\+Problem().
 
 \mbox{\Hypertarget{namespaceGlobalParameters_a74cc88d6dc206cd556fb12e7e3101032}\label{namespaceGlobalParameters_a74cc88d6dc206cd556fb12e7e3101032}} 
 \index{GlobalParameters@{GlobalParameters}!Kappa\_increment@{Kappa\_increment}}
@@ -524,11 +524,11 @@ Increment for prescribed curvature.
 
 
 
-Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00082}{82}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+Definition at line 82 of file common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{refineable__young__laplace_8cc_source_l00391}{Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::increment\+\_\+parameters()}}.
+Referenced by Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::increment\+\_\+parameters().
 
 \mbox{\Hypertarget{namespaceGlobalParameters_ae7651e73d3f8346da9fcfdbb149bc22e}\label{namespaceGlobalParameters_ae7651e73d3f8346da9fcfdbb149bc22e}} 
 \index{GlobalParameters@{GlobalParameters}!Kappa\_initial@{Kappa\_initial}}
@@ -542,11 +542,11 @@ Initial value for kappa.
 
 
 
-Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00067}{67}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+Definition at line 67 of file common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00126}{setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check()}}.
+Referenced by setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check().
 
 \mbox{\Hypertarget{namespaceGlobalParameters_ac6234184cce40ab2c6bec92b37e4ae41}\label{namespaceGlobalParameters_ac6234184cce40ab2c6bec92b37e4ae41}} 
 \index{GlobalParameters@{GlobalParameters}!Kappa\_pt@{Kappa\_pt}}
@@ -560,11 +560,11 @@ Pointer to Data object that stores the prescribed curvature.
 
 
 
-Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00064}{64}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+Definition at line 64 of file common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{barrel_8cc_source_l00291}{Young\+Laplace\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{refineable__t__junction_8cc_source_l00430}{Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{refineable__young__laplace_8cc_source_l00391}{Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::increment\+\_\+parameters()}}, \mbox{\hyperlink{refineable__t__junction_8cc_source_l00226}{Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Young\+Laplace\+Problem()}}, and \mbox{\hyperlink{barrel_8cc_source_l00180}{Young\+Laplace\+Problem$<$ ELEMENT $>$\+::\+Young\+Laplace\+Problem()}}.
+Referenced by Young\+Laplace\+Problem$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve(), Young\+Laplace\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution(), Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution(), Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::increment\+\_\+parameters(), Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Young\+Laplace\+Problem(), and Young\+Laplace\+Problem$<$ ELEMENT $>$\+::\+Young\+Laplace\+Problem().
 
 \mbox{\Hypertarget{namespaceGlobalParameters_a36ebf514fdd1e78fff69907b39e25af6}\label{namespaceGlobalParameters_a36ebf514fdd1e78fff69907b39e25af6}} 
 \index{GlobalParameters@{GlobalParameters}!L\_x@{L\_x}}
@@ -578,11 +578,11 @@ Length and width of the domain.
 
 Length of domain. 
 
-Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00096}{96}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+Definition at line 96 of file common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{refineable__young__laplace_8cc_source_l00616}{main()}}, \mbox{\hyperlink{refineable__t__junction_8cc_source_l00226}{Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Young\+Laplace\+Problem()}}, and \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00126}{setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check()}}.
+Referenced by main(), Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Young\+Laplace\+Problem(), and setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check().
 
 \mbox{\Hypertarget{namespaceGlobalParameters_ac8774b3418c4551091d64ec72c169b2e}\label{namespaceGlobalParameters_ac8774b3418c4551091d64ec72c169b2e}} 
 \index{GlobalParameters@{GlobalParameters}!L\_y@{L\_y}}
@@ -596,11 +596,11 @@ Width of domain.
 
 
 
-Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00097}{97}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+Definition at line 97 of file common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{refineable__young__laplace_8cc_source_l00616}{main()}}, \mbox{\hyperlink{refineable__t__junction_8cc_source_l00226}{Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Young\+Laplace\+Problem()}}, and \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00126}{setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check()}}.
+Referenced by main(), Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Young\+Laplace\+Problem(), and setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check().
 
 \mbox{\Hypertarget{namespaceGlobalParameters_ae4df03bf0ffa55b741ac846ca7b6c155}\label{namespaceGlobalParameters_ae4df03bf0ffa55b741ac846ca7b6c155}} 
 \index{GlobalParameters@{GlobalParameters}!N\_fourier@{N\_fourier}}
@@ -614,11 +614,11 @@ Number of terms used in the computation of the exact solution.
 
 
 
-Definition at line \mbox{\hyperlink{scattering_8cc_source_l00068}{68}} of file \mbox{\hyperlink{scattering_8cc_source}{scattering.\+cc}}.
+Definition at line 68 of file scattering.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{scattering_8cc_source_l00086}{get\+\_\+exact\+\_\+u()}}, \mbox{\hyperlink{scattering_8cc_source_l00156}{prescribed\+\_\+incoming\+\_\+flux()}}, and \mbox{\hyperlink{scattering_8cc_source_l00308}{Scattering\+Problem$<$ ELEMENT $>$\+::\+Scattering\+Problem()}}.
+Referenced by get\+\_\+exact\+\_\+u(), prescribed\+\_\+incoming\+\_\+flux(), and Scattering\+Problem$<$ ELEMENT $>$\+::\+Scattering\+Problem().
 
 \mbox{\Hypertarget{namespaceGlobalParameters_ab020cb50fa321b26e8d2127d2cff23b9}\label{namespaceGlobalParameters_ab020cb50fa321b26e8d2127d2cff23b9}} 
 \index{GlobalParameters@{GlobalParameters}!N\_x@{N\_x}}
@@ -632,11 +632,11 @@ Number of elements in the mesh.
 
 
 
-Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00100}{100}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+Definition at line 100 of file common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00126}{setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check()}}.
+Referenced by setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check().
 
 \mbox{\Hypertarget{namespaceGlobalParameters_a711d6f05552ddaac30bd245ae8bdf878}\label{namespaceGlobalParameters_a711d6f05552ddaac30bd245ae8bdf878}} 
 \index{GlobalParameters@{GlobalParameters}!N\_y@{N\_y}}
@@ -646,11 +646,11 @@ Referenced by \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00126}{s
 
 
 
-Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00101}{101}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+Definition at line 101 of file common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00126}{setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check()}}.
+Referenced by setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check().
 
 \mbox{\Hypertarget{namespaceGlobalParameters_aa6c94936d7c81286bb747e14a90d7ba0}\label{namespaceGlobalParameters_aa6c94936d7c81286bb747e14a90d7ba0}} 
 \index{GlobalParameters@{GlobalParameters}!Nsteps@{Nsteps}}
@@ -664,11 +664,11 @@ Number of steps.
 
 
 
-Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00079}{79}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+Definition at line 79 of file common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{refineable__young__laplace_8cc_source_l00616}{main()}}, and \mbox{\hyperlink{refineable__young__laplace_8cc_source_l00541}{run\+\_\+it()}}.
+Referenced by main(), and run\+\_\+it().
 
 \mbox{\Hypertarget{namespaceGlobalParameters_a61b086072a6b8fd38af1a85f1dd1674a}\label{namespaceGlobalParameters_a61b086072a6b8fd38af1a85f1dd1674a}} 
 \index{GlobalParameters@{GlobalParameters}!Outer\_radius@{Outer\_radius}}
@@ -682,11 +682,11 @@ Radius of outer boundary (must be a circle!)
 
 
 
-Definition at line \mbox{\hyperlink{scattering_8cc_source_l00079}{79}} of file \mbox{\hyperlink{scattering_8cc_source}{scattering.\+cc}}.
+Definition at line 79 of file scattering.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{scattering_8cc_source_l00308}{Scattering\+Problem$<$ ELEMENT $>$\+::\+Scattering\+Problem()}}, and \mbox{\hyperlink{scattering_8cc_source_l00451}{Scattering\+Problem$<$ ELEMENT $>$\+::setup\+\_\+outer\+\_\+boundary()}}.
+Referenced by Scattering\+Problem$<$ ELEMENT $>$\+::\+Scattering\+Problem(), and Scattering\+Problem$<$ ELEMENT $>$\+::setup\+\_\+outer\+\_\+boundary().
 
 \mbox{\Hypertarget{namespaceGlobalParameters_a69a238365a4fef33b1abdae287185f3e}\label{namespaceGlobalParameters_a69a238365a4fef33b1abdae287185f3e}} 
 \index{GlobalParameters@{GlobalParameters}!Rotate\_spines\_in\_both\_directions@{Rotate\_spines\_in\_both\_directions}}
@@ -700,11 +700,11 @@ Should the spines rotate in the x and y directions (true)?
 
 
 
-Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00119}{119}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+Definition at line 119 of file common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00126}{setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check()}}.
+Referenced by setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check().
 
 \mbox{\Hypertarget{namespaceGlobalParameters_aeb81cc1c282502497ef6df576559b650}\label{namespaceGlobalParameters_aeb81cc1c282502497ef6df576559b650}} 
 \index{GlobalParameters@{GlobalParameters}!Step\_sign@{Step\_sign}}
@@ -718,7 +718,7 @@ Increase or decrease the value of the control parameters?
 
 
 
-Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00076}{76}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+Definition at line 76 of file common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h.
 
 \mbox{\Hypertarget{namespaceGlobalParameters_a624713d35bc418b2d5fa79f4d385a27a}\label{namespaceGlobalParameters_a624713d35bc418b2d5fa79f4d385a27a}} 
 \index{GlobalParameters@{GlobalParameters}!Use\_height\_control@{Use\_height\_control}}
@@ -732,11 +732,11 @@ Use height control (true) or not (false)?
 
 
 
-Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00043}{43}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+Definition at line 43 of file common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{refineable__young__laplace_8cc_source_l00391}{Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::increment\+\_\+parameters()}}.
+Referenced by Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::increment\+\_\+parameters().
 
 \mbox{\Hypertarget{namespaceGlobalParameters_a7cd7766fae9d0ca421d7e24677be3131}\label{namespaceGlobalParameters_a7cd7766fae9d0ca421d7e24677be3131}} 
 \index{GlobalParameters@{GlobalParameters}!Use\_spines@{Use\_spines}}
@@ -750,9 +750,9 @@ Use spines (true) or not (false)
 
 
 
-Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00040}{40}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+Definition at line 40 of file common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{refineable__young__laplace_8cc_source_l00616}{main()}}.
+Referenced by main().
 

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::AdjointProblemBasedShiftInvertOperator Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Installation<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/the_distribution/html/index.html">Installation guide</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.1 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1AdjointProblemBasedShiftInvertOperator.html">AdjointProblemBasedShiftInvertOperator</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1AdjointProblemBasedShiftInvertOperator-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">oomph::AdjointProblemBasedShiftInvertOperator Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Class for the adjoing problem shift invert operation.  
+ <a href="classoomph_1_1AdjointProblemBasedShiftInvertOperator.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::AdjointProblemBasedShiftInvertOperator:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1AdjointProblemBasedShiftInvertOperator.png" usemap="#oomph::AdjointProblemBasedShiftInvertOperator_map" alt=""/>
+  <map id="oomph::AdjointProblemBasedShiftInvertOperator_map" name="oomph::AdjointProblemBasedShiftInvertOperator_map">
+<area href="classoomph_1_1DoubleMultiVectorOperator.html" title="Base class for Oomph-lib&#39;s Vector Operator classes that will be used with the DoubleMultiVector." alt="oomph::DoubleMultiVectorOperator" shape="rect" coords="0,0,283,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a6089acd7925110efa22da7aeb652ee3c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AdjointProblemBasedShiftInvertOperator.html#a6089acd7925110efa22da7aeb652ee3c">AdjointProblemBasedShiftInvertOperator</a> (<a class="el" href="classoomph_1_1Problem.html">Problem</a> *const &amp;problem_pt, <a class="el" href="classoomph_1_1LinearSolver.html">LinearSolver</a> *const &amp;linear_solver_pt, const double &amp;sigma=0.0)</td></tr>
+<tr class="separator:a6089acd7925110efa22da7aeb652ee3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66d8841e7796d3bfcc87508307c1b222"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AdjointProblemBasedShiftInvertOperator.html#a66d8841e7796d3bfcc87508307c1b222">apply</a> (const <a class="el" href="classoomph_1_1DoubleMultiVector.html">DoubleMultiVector</a> &amp;x, <a class="el" href="classoomph_1_1DoubleMultiVector.html">DoubleMultiVector</a> &amp;y) const</td></tr>
+<tr class="memdesc:a66d8841e7796d3bfcc87508307c1b222"><td class="mdescLeft">&#160;</td><td class="mdescRight">Now specify how to apply the operator.  <a href="classoomph_1_1AdjointProblemBasedShiftInvertOperator.html#a66d8841e7796d3bfcc87508307c1b222">More...</a><br /></td></tr>
+<tr class="separator:a66d8841e7796d3bfcc87508307c1b222"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1DoubleMultiVectorOperator"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1DoubleMultiVectorOperator')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1DoubleMultiVectorOperator.html">oomph::DoubleMultiVectorOperator</a></td></tr>
+<tr class="memitem:a21b0b94da2dc0b7303e3d8cb58fb8acb inherit pub_methods_classoomph_1_1DoubleMultiVectorOperator"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVectorOperator.html#a21b0b94da2dc0b7303e3d8cb58fb8acb">DoubleMultiVectorOperator</a> ()</td></tr>
+<tr class="memdesc:a21b0b94da2dc0b7303e3d8cb58fb8acb inherit pub_methods_classoomph_1_1DoubleMultiVectorOperator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty constructor.  <a href="classoomph_1_1DoubleMultiVectorOperator.html#a21b0b94da2dc0b7303e3d8cb58fb8acb">More...</a><br /></td></tr>
+<tr class="separator:a21b0b94da2dc0b7303e3d8cb58fb8acb inherit pub_methods_classoomph_1_1DoubleMultiVectorOperator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c3c0579a42bd89650c9701d3a07f31b inherit pub_methods_classoomph_1_1DoubleMultiVectorOperator"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVectorOperator.html#a4c3c0579a42bd89650c9701d3a07f31b">~DoubleMultiVectorOperator</a> ()</td></tr>
+<tr class="memdesc:a4c3c0579a42bd89650c9701d3a07f31b inherit pub_methods_classoomph_1_1DoubleMultiVectorOperator"><td class="mdescLeft">&#160;</td><td class="mdescRight">virtual destructor  <a href="classoomph_1_1DoubleMultiVectorOperator.html#a4c3c0579a42bd89650c9701d3a07f31b">More...</a><br /></td></tr>
+<tr class="separator:a4c3c0579a42bd89650c9701d3a07f31b inherit pub_methods_classoomph_1_1DoubleMultiVectorOperator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a5d15a64b7b5431de8df10eb136ceebfa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Problem.html">Problem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AdjointProblemBasedShiftInvertOperator.html#a5d15a64b7b5431de8df10eb136ceebfa">Problem_pt</a></td></tr>
+<tr class="memdesc:a5d15a64b7b5431de8df10eb136ceebfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the problem.  <a href="classoomph_1_1AdjointProblemBasedShiftInvertOperator.html#a5d15a64b7b5431de8df10eb136ceebfa">More...</a><br /></td></tr>
+<tr class="separator:a5d15a64b7b5431de8df10eb136ceebfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa81088e2e50a95c35c22ee156cc73e1b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1LinearSolver.html">LinearSolver</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AdjointProblemBasedShiftInvertOperator.html#aa81088e2e50a95c35c22ee156cc73e1b">Linear_solver_pt</a></td></tr>
+<tr class="memdesc:aa81088e2e50a95c35c22ee156cc73e1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the linear solver used.  <a href="classoomph_1_1AdjointProblemBasedShiftInvertOperator.html#aa81088e2e50a95c35c22ee156cc73e1b">More...</a><br /></td></tr>
+<tr class="separator:aa81088e2e50a95c35c22ee156cc73e1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69695f1a0498536268a71891affa23cf"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AdjointProblemBasedShiftInvertOperator.html#a69695f1a0498536268a71891affa23cf">Sigma</a></td></tr>
+<tr class="memdesc:a69695f1a0498536268a71891affa23cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Storage for the shift.  <a href="classoomph_1_1AdjointProblemBasedShiftInvertOperator.html#a69695f1a0498536268a71891affa23cf">More...</a><br /></td></tr>
+<tr class="separator:a69695f1a0498536268a71891affa23cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac25bcdf5b2feb6fffe5756930c12612b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AdjointProblemBasedShiftInvertOperator.html#ac25bcdf5b2feb6fffe5756930c12612b">M_pt</a></td></tr>
+<tr class="memdesc:ac25bcdf5b2feb6fffe5756930c12612b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Storage for the matrices.  <a href="classoomph_1_1AdjointProblemBasedShiftInvertOperator.html#ac25bcdf5b2feb6fffe5756930c12612b">More...</a><br /></td></tr>
+<tr class="separator:ac25bcdf5b2feb6fffe5756930c12612b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bc43fcdf4fee1d328e6b63505404543"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AdjointProblemBasedShiftInvertOperator.html#a0bc43fcdf4fee1d328e6b63505404543">AsigmaM_pt</a></td></tr>
+<tr class="separator:a0bc43fcdf4fee1d328e6b63505404543"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class for the adjoing problem shift invert operation. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00588">588</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a6089acd7925110efa22da7aeb652ee3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6089acd7925110efa22da7aeb652ee3c">&#9670;&nbsp;</a></span>AdjointProblemBasedShiftInvertOperator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::AdjointProblemBasedShiftInvertOperator::AdjointProblemBasedShiftInvertOperator </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Problem.html">Problem</a> *const &amp;&#160;</td>
+          <td class="paramname"><em>problem_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1LinearSolver.html">LinearSolver</a> *const &amp;&#160;</td>
+          <td class="paramname"><em>linear_solver_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>sigma</em> = <code>0.0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Before we get into the Arnoldi loop solve the shifted matrix problem Allocated Row compressed matrices for the mass matrix and shifted main matrix</p>
+<p>Assemble the matrices</p>
+<p>Get the transpose of the mass and jacobian NB Only difference to <a class="el" href="classoomph_1_1ProblemBasedShiftInvertOperator.html" title="Class for the shift invert operation.">ProblemBasedShiftInvertOperator</a></p>
+<p>Do not report the time taken</p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00605">605</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="trilinos__eigen__solver_8h_source.html#l00602">AsigmaM_pt</a>, <a class="el" href="linear__solver_8h_source.html#l00116">oomph::LinearSolver::disable_doc_time()</a>, <a class="el" href="problem_8h_source.html#l01672">oomph::Problem::dof_distribution_pt()</a>, <a class="el" href="problem_8cc_source.html#l08602">oomph::Problem::get_eigenproblem_matrices()</a>, <a class="el" href="matrices_8cc_source.html#l03271">oomph::CRDoubleMatrix::get_matrix_transpose()</a>, <a class="el" href="trilinos__eigen__solver_8h_source.html#l00596">Linear_solver_pt</a>, <a class="el" href="trilinos__eigen__solver_8h_source.html#l00602">M_pt</a>, and <a class="el" href="trilinos__eigen__solver_8h_source.html#l00599">Sigma</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a66d8841e7796d3bfcc87508307c1b222"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66d8841e7796d3bfcc87508307c1b222">&#9670;&nbsp;</a></span>apply()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::AdjointProblemBasedShiftInvertOperator::apply </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DoubleMultiVector.html">DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleMultiVector.html">DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Now specify how to apply the operator. </p>
+<p>Solve the first vector</p>
+<p>Premultiply by mass matrix</p>
+<p>Create output vector</p>
+<p>Now loop over the others and resolve</p>
+
+<p>Implements <a class="el" href="classoomph_1_1DoubleMultiVectorOperator.html#a58ada02505907b7b51e336ee1d79031c">oomph::DoubleMultiVectorOperator</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00631">631</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="trilinos__eigen__solver_8h_source.html#l00602">AsigmaM_pt</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00457">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00692">oomph::DoubleMultiVector::doublevector()</a>, <a class="el" href="linear__solver_8h_source.html#l00135">oomph::LinearSolver::enable_resolve()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="trilinos__eigen__solver_8h_source.html#l00596">Linear_solver_pt</a>, <a class="el" href="trilinos__eigen__solver_8h_source.html#l00602">M_pt</a>, <a class="el" href="matrices_8cc_source.html#l01782">oomph::CRDoubleMatrix::multiply()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00469">oomph::DistributableLinearAlgebraObject::nrow_local()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00211">oomph::DoubleMultiVector::nvector()</a>, <a class="el" href="linear__solver_8h_source.html#l00225">oomph::LinearSolver::resolve()</a>, and <a class="el" href="classoomph_1_1LinearSolver.html#a15ce22542b74ed1826ea485edacbeb6e">oomph::LinearSolver::solve()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a0bc43fcdf4fee1d328e6b63505404543"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bc43fcdf4fee1d328e6b63505404543">&#9670;&nbsp;</a></span>AsigmaM_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> * oomph::AdjointProblemBasedShiftInvertOperator::AsigmaM_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00602">602</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="trilinos__eigen__solver_8h_source.html#l00605">AdjointProblemBasedShiftInvertOperator()</a>, and <a class="el" href="trilinos__eigen__solver_8h_source.html#l00631">apply()</a>.</p>
+
+</div>
+</div>
+<a id="aa81088e2e50a95c35c22ee156cc73e1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa81088e2e50a95c35c22ee156cc73e1b">&#9670;&nbsp;</a></span>Linear_solver_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1LinearSolver.html">LinearSolver</a>* oomph::AdjointProblemBasedShiftInvertOperator::Linear_solver_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the linear solver used. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00596">596</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="trilinos__eigen__solver_8h_source.html#l00605">AdjointProblemBasedShiftInvertOperator()</a>, and <a class="el" href="trilinos__eigen__solver_8h_source.html#l00631">apply()</a>.</p>
+
+</div>
+</div>
+<a id="ac25bcdf5b2feb6fffe5756930c12612b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac25bcdf5b2feb6fffe5756930c12612b">&#9670;&nbsp;</a></span>M_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a>* oomph::AdjointProblemBasedShiftInvertOperator::M_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Storage for the matrices. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00602">602</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="trilinos__eigen__solver_8h_source.html#l00605">AdjointProblemBasedShiftInvertOperator()</a>, and <a class="el" href="trilinos__eigen__solver_8h_source.html#l00631">apply()</a>.</p>
+
+</div>
+</div>
+<a id="a5d15a64b7b5431de8df10eb136ceebfa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d15a64b7b5431de8df10eb136ceebfa">&#9670;&nbsp;</a></span>Problem_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Problem.html">Problem</a>* oomph::AdjointProblemBasedShiftInvertOperator::Problem_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the problem. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00593">593</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+</div>
+</div>
+<a id="a69695f1a0498536268a71891affa23cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69695f1a0498536268a71891affa23cf">&#9670;&nbsp;</a></span>Sigma</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::AdjointProblemBasedShiftInvertOperator::Sigma</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Storage for the shift. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00599">599</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="trilinos__eigen__solver_8h_source.html#l00605">AdjointProblemBasedShiftInvertOperator()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Nov 24 2023 14:42:45
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

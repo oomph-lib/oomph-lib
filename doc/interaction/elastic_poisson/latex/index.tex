@@ -14,7 +14,7 @@ Detailed documentation to be written. Here\textquotesingle{}s a plot of the resu
 \DoxyCodeLine{\textcolor{comment}{//LIC// multi-\/physics finite-\/element library, available }}
 \DoxyCodeLine{\textcolor{comment}{//LIC// at http://www.oomph-\/lib.org.}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// }}
-\DoxyCodeLine{\textcolor{comment}{//LIC// Copyright (C) 2006-\/2022 Matthias Heil and Andrew Hazel}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// Copyright (C) 2006-\/2023 Matthias Heil and Andrew Hazel}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// }}
 \DoxyCodeLine{\textcolor{comment}{//LIC// This library is free software; you can redistribute it and/or}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// modify it under the terms of the GNU Lesser General Public}}
@@ -101,7 +101,7 @@ Detailed documentation to be written. Here\textquotesingle{}s a plot of the resu
 \DoxyCodeLine{ \textcolor{comment}{// called first! -\/-\/> this is where we need to build the mesh;}}
 \DoxyCodeLine{ \textcolor{comment}{// the constructors of the derived meshes don't call the}}
 \DoxyCodeLine{ \textcolor{comment}{// base constructor again and simply add the extra functionality.}}
-\DoxyCodeLine{ \mbox{\hyperlink{classElasticFishMesh_a76c4d63d48b9ee48c3742e55057cfba0}{ElasticFishMesh}}(GeomObject* back\_pt, GeomObject* undeformed\_back\_pt, }
+\DoxyCodeLine{ \mbox{\hyperlink{classElasticFishMesh}{ElasticFishMesh}}(GeomObject* back\_pt, GeomObject* undeformed\_back\_pt, }
 \DoxyCodeLine{                 TimeStepper* time\_stepper\_pt=\&Mesh::Default\_TimeStepper) : }
 \DoxyCodeLine{  FishMesh<ELEMENT>(back\_pt,time\_stepper\_pt), }
 \DoxyCodeLine{  RefineableFishMesh<ELEMENT>(back\_pt,time\_stepper\_pt)}
@@ -120,7 +120,7 @@ Detailed documentation to be written. Here\textquotesingle{}s a plot of the resu
 \DoxyCodeLine{   \textcolor{comment}{// of any newly created SolidNodes during mesh refinement}}
 \DoxyCodeLine{   \textcolor{keywordtype}{double} xi\_nose = this-\/>Domain\_pt-\/>xi\_nose(); }
 \DoxyCodeLine{   \textcolor{keywordtype}{double} xi\_tail = this-\/>Domain\_pt-\/>xi\_tail();}
-\DoxyCodeLine{   \mbox{\hyperlink{classElasticFishMesh_acc86ce0248b350ee3e24142f393f2b08}{Undeformed\_domain\_pt}}=\textcolor{keyword}{new} FishDomain(undeformed\_back\_pt,xi\_nose,xi\_tail);}
+\DoxyCodeLine{   Undeformed\_domain\_pt=\textcolor{keyword}{new} FishDomain(undeformed\_back\_pt,xi\_nose,xi\_tail);}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Loop over all elements and set the undeformed macro element pointer}}
 \DoxyCodeLine{   \textcolor{keywordtype}{unsigned} n\_element=this-\/>nelement();}
@@ -133,15 +133,15 @@ Detailed documentation to be written. Here\textquotesingle{}s a plot of the resu
 \DoxyCodeLine{     \textcolor{comment}{// of the undeformed mesh/domain get picked up during adaptive}}
 \DoxyCodeLine{     \textcolor{comment}{// mesh refinement}}
 \DoxyCodeLine{     el\_pt-\/>set\_undeformed\_macro\_elem\_pt(}
-\DoxyCodeLine{      \mbox{\hyperlink{classElasticFishMesh_acc86ce0248b350ee3e24142f393f2b08}{Undeformed\_domain\_pt}}-\/>macro\_element\_pt(e));}
+\DoxyCodeLine{      Undeformed\_domain\_pt-\/>macro\_element\_pt(e));}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{   }
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Destructor: Kill "{}undeformed"{} Domain}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \mbox{\hyperlink{classElasticFishMesh_ab8e084bb7551b9765b95dc38e82ab1be}{\string~ElasticFishMesh}}()}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \string~\mbox{\hyperlink{classElasticFishMesh}{ElasticFishMesh}}()}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{keyword}{delete} \mbox{\hyperlink{classElasticFishMesh_acc86ce0248b350ee3e24142f393f2b08}{Undeformed\_domain\_pt}};}
+\DoxyCodeLine{   \textcolor{keyword}{delete} Undeformed\_domain\_pt;}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{private}:}
@@ -149,7 +149,7 @@ Detailed documentation to be written. Here\textquotesingle{}s a plot of the resu
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to "{}undeformed"{} Domain -\/-\/ used to determine the}}
 \DoxyCodeLine{\textcolor{comment}{ /// Lagrangian coordinates of any newly created SolidNodes during}}
 \DoxyCodeLine{\textcolor{comment}{ /// Mesh refinement}}
-\DoxyCodeLine{\textcolor{comment}{} Domain* \mbox{\hyperlink{classElasticFishMesh_acc86ce0248b350ee3e24142f393f2b08}{Undeformed\_domain\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} Domain* Undeformed\_domain\_pt;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\};}
 \DoxyCodeLine{}
@@ -194,20 +194,20 @@ Detailed documentation to be written. Here\textquotesingle{}s a plot of the resu
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Constructor:}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classDeformableFishPoissonProblem_a383952a668f3cec16b85c6b35f437ddd}{DeformableFishPoissonProblem}}();}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classDeformableFishPoissonProblem}{DeformableFishPoissonProblem}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Run simulation}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classDeformableFishPoissonProblem_a0ef0e4ab464ab41a6f0b7e8a74a9c8a5}{run}}();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} run();}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Access function for the specific mesh}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classElasticFishMesh}{ElasticFishMesh<ELEMENT>}}* \mbox{\hyperlink{classDeformableFishPoissonProblem_a4bf037fcb2420103fff50147a682c9f9}{mesh\_pt}}() }
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classElasticFishMesh}{ElasticFishMesh<ELEMENT>}}* mesh\_pt() }
 \DoxyCodeLine{  \{\textcolor{keywordflow}{return} \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classElasticFishMesh}{ElasticFishMesh<ELEMENT>}}*\textcolor{keyword}{>}(Problem::mesh\_pt());\} }
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classDeformableFishPoissonProblem_aee9b59f35d1ae98cda29fba0c01b226a}{doc\_solution}}(DocInfo\& doc\_info);}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} doc\_solution(DocInfo\& doc\_info);}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update function (empty)}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classDeformableFishPoissonProblem_a18fdfaadd9ae10257088b9533f139182}{actions\_after\_newton\_solve}}() \{\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_newton\_solve() \{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update before solve: We're dealing with a static problem so}}
 \DoxyCodeLine{\textcolor{comment}{ /// the nodal positions before the next solve merely serve as}}
@@ -218,32 +218,32 @@ Detailed documentation to be written. Here\textquotesingle{}s a plot of the resu
 \DoxyCodeLine{\textcolor{comment}{ /// Newton method to fail -\/-\/> the overall method is actually more robust}}
 \DoxyCodeLine{\textcolor{comment}{ /// if we use the nodal positions as determined by the Domain/MacroElement-\/}}
 \DoxyCodeLine{\textcolor{comment}{ /// based mesh update as initial guesses. }}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classDeformableFishPoissonProblem_ad9d03c8349a059430f7329354033b450}{actions\_before\_newton\_solve}}()}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_newton\_solve()}
 \DoxyCodeLine{  \{ }
 \DoxyCodeLine{   \textcolor{keywordtype}{bool} update\_all\_solid\_nodes=\textcolor{keyword}{true};}
-\DoxyCodeLine{   \mbox{\hyperlink{classDeformableFishPoissonProblem_a4bf037fcb2420103fff50147a682c9f9}{mesh\_pt}}()-\/>node\_update(update\_all\_solid\_nodes);}
+\DoxyCodeLine{   mesh\_pt()-\/>node\_update(update\_all\_solid\_nodes);}
 \DoxyCodeLine{  \}   }
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update after adapt: Pin all redundant solid pressure nodes (if required)}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classDeformableFishPoissonProblem_ada340a31a3b019116ecb7c0bb1d4c779}{actions\_after\_adapt}}()}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_adapt()}
 \DoxyCodeLine{  \{ }
 \DoxyCodeLine{   \textcolor{comment}{// Pin the redundant solid pressures (if any)}}
 \DoxyCodeLine{   PVDEquationsBase<2>::pin\_redundant\_nodal\_solid\_pressures(}
-\DoxyCodeLine{    \mbox{\hyperlink{classDeformableFishPoissonProblem_a4bf037fcb2420103fff50147a682c9f9}{mesh\_pt}}()-\/>element\_pt());}
+\DoxyCodeLine{    mesh\_pt()-\/>element\_pt());}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Node at which the solution of the Poisson equation is documented}}
-\DoxyCodeLine{\textcolor{comment}{} Node* \mbox{\hyperlink{classDeformableFishPoissonProblem_acdb029d569c5ecefa5a71f2f099e7f27}{Doc\_node\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} Node* Doc\_node\_pt;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Trace file}}
-\DoxyCodeLine{\textcolor{comment}{} ofstream \mbox{\hyperlink{classDeformableFishPoissonProblem_a9fc310452a96891d566f50f3a231d5d5}{Trace\_file}};}
+\DoxyCodeLine{\textcolor{comment}{} ofstream Trace\_file;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Geometric object/generalised element that represents the deformable }}
 \DoxyCodeLine{ \textcolor{comment}{// fish back}}
-\DoxyCodeLine{ ElasticallySupportedRingElement* \mbox{\hyperlink{classDeformableFishPoissonProblem_a88745d43dc7a9377c13190ce1bed79e7}{Fish\_back\_pt}};}
+\DoxyCodeLine{ ElasticallySupportedRingElement* Fish\_back\_pt;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\};}
 \DoxyCodeLine{}

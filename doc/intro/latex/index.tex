@@ -25,7 +25,8 @@ We usually write all PDEs in \char`\"{}residual form\char`\"{}, obtained by movi
 \hline
 \begin{center} {\bfseries{ Problem P }} \end{center} 
 
-\begin{center} \[ {\cal R}\left(x_i; u(x_i), \frac{\partial u}{\partial x_i}, \frac{\partial^2 u}{\partial x_i \ \partial x_j}\right) = 0 \ \mbox{ \ \ \ \ in \ \ \ } D,\] with Dirichlet (essential) boundary conditions on $ \partial D $ \[ \hfill u|_{\partial D} = g, \] where the function $g$ is given \end{center}    \\\cline{1-1}
+\begin{center} \[ {\cal R}\left(x_i; u(x_i), \frac{\partial u}{\partial x_i}, \frac{\partial^2 u}{\partial x_i \ \partial x_j}\right) = 0 \ \mbox{ \ \ \ \ in \ \ \ } D,\]~\newline
+ with Dirichlet (essential) boundary conditions on $ \partial D $ \[ \hfill u|_{\partial D} = g, \] where the function $g$ is given \end{center}    \\\cline{1-1}
 \end{longtabu}
 \end{center} 
 
@@ -118,7 +119,8 @@ It is important to realise that the choice of suitable function spaces for $u(x_
 \hypertarget{index_galerkin}{}\doxysubsection{The Galerkin method}\label{index_galerkin}
 We now exploit the definition of the weak solution to develop a numerical method that can be used to determine approximate solutions to problem P\textsubscript{weak}. We start by splitting the solution into two parts, \[ u(x_i) = u_{h}(x_i) + u_{p}(x_i), \] where $ u_{p}(x_i)$ is an (arbitrary) function that satisfies the Dirichlet boundary conditions, \[ u_{p}|_{\partial D} = g. \] The unknown function $ u_{h}(x_i) $ then has to satisfy the homogeneous boundary conditions \[ u_{h}|_{\partial D} = 0.\] We expand $ u_{h}(x_i) $ in terms of a (given) infinite set of basis functions $ \psi_j(x_i) \in H_0(D) \ \ \ (j=1,...,\infty) $, \[ u(x_i) = u_{p}(x_i) + \sum_{j=1}^{\infty} U_j \psi_j(x_i), \ \ \ \ \ \ (5) \] which discretises the problem because the solution is now determined by the (as yet unknown) discrete coefficients $ U_j \ \ \ (j=1,...,\infty). $ There are many possible sets of basis functions\+: polynomials, trigonometric functions, systems of eigenfunctions; mathematically speaking, the only requirement is that the basis functions are sufficiently general that the solution can be represented by the expansion (5). In other words, the functions must be a complete basis for $H_0(D)$.
 
-How do we determine the discrete coefficients $ U_j $? Inserting the expansion for $u(x)$ into the definition of the weighted residual yields \[ r = \int_{D} {\cal R}\left(x_i; \ u_{p}(x_i)+\sum_{j=1}^{\infty} U_j \psi_j(x_i)\right) \ \phi^{(test)}(x_i) \ \mbox{d}x_1 \mbox{d}x_2 = 0, \ \ \ \ \ \ (6) \] and we recall that this equation must be satisfied for {\itshape any} test function $ \phi^{(test)} \in H_0(D) $. The functions $\psi_j(x_i)$ form a complete basis for $ H_0(D)$, and so all possible test functions $ \phi^{(test)}(x_i) $ may be represented as \[ \phi^{(test)}(x_i) = \sum_{k=1}^{\infty} \Phi_k \psi_k(x_i). \ \ \ \ \ \ \ (7) \] Thus, the condition \[ \mbox{...for any basis function $ \phi^{(test)}(x_i) $...} \] becomes \[ \mbox{...for any values of the coefficients $ \Phi_k$...} \] Inserting the expansion (7) into the definition of the weak solution (6) yields \[ r = \sum_{k=1}^{\infty} \Phi_k \ r_k(U_1, U_2,...) = 0, \ \ \ \ \ (8) \] where \[ r_k(U_1, U_2,...) = \int_{D} {\cal R}\left(x_i; \ u_{p}(x_i)+\sum_{j=1}^{\infty} U_j \psi_j(x_i)\right) \ \psi_k(x_i) \ \mbox{d}x_1 \mbox{d}x_2. \ \ \ \ \ \ \ (9) \] Equation (8) must hold for {\itshape any} value of the coefficients $ \Phi_k $, so the coefficients $ U_j $ must satisfy the equations \[ r_k(U_1, U_2,...) = 0, \mbox{ \ \ \ \ for } k=1,2,... \]
+How do we determine the discrete coefficients $ U_j $? Inserting the expansion for $u(x)$ into the definition of the weighted residual yields \[ r = \int_{D} {\cal R}\left(x_i; \ u_{p}(x_i)+\sum_{j=1}^{\infty} U_j \psi_j(x_i)\right) \ \phi^{(test)}(x_i) \ \mbox{d}x_1 \mbox{d}x_2 = 0, \ \ \ \ \ \ (6) \]~\newline
+ and we recall that this equation must be satisfied for {\itshape any} test function $ \phi^{(test)} \in H_0(D) $. The functions $\psi_j(x_i)$ form a complete basis for $ H_0(D)$, and so all possible test functions $ \phi^{(test)}(x_i) $ may be represented as \[ \phi^{(test)}(x_i) = \sum_{k=1}^{\infty} \Phi_k \psi_k(x_i). \ \ \ \ \ \ \ (7) \] Thus, the condition \[ \mbox{...for any basis function $ \phi^{(test)}(x_i) $...} \] becomes \[ \mbox{...for any values of the coefficients $ \Phi_k$...} \] Inserting the expansion (7) into the definition of the weak solution (6) yields \[ r = \sum_{k=1}^{\infty} \Phi_k \ r_k(U_1, U_2,...) = 0, \ \ \ \ \ (8) \] where \[ r_k(U_1, U_2,...) = \int_{D} {\cal R}\left(x_i; \ u_{p}(x_i)+\sum_{j=1}^{\infty} U_j \psi_j(x_i)\right) \ \psi_k(x_i) \ \mbox{d}x_1 \mbox{d}x_2. \ \ \ \ \ \ \ (9) \] Equation (8) must hold for {\itshape any} value of the coefficients $ \Phi_k $, so the coefficients $ U_j $ must satisfy the equations \[ r_k(U_1, U_2,...) = 0, \mbox{ \ \ \ \ for } k=1,2,... \]
 
 In practice, we truncate the expansions (5) and (7) after a finite number of terms to obtain the approximations (indicated by tildes) \[ \widetilde{u}(x_i) = u_p(x_i) + \sum_{j=1}^{M} U_j \psi_j(x_i) \mbox{ \ \ and \ \ } \widetilde{\phi^{(test)}}(x_i) = \sum_{k=1}^{M} \Phi_k \psi_k(x_i), \ \ \ \ \ \ (10) \] and we determine the $M$ unknown coefficients, $U_1,...,U_M$, from the $M$ algebraic equations \[ r_k(U_1,...,U_M)=0, \mbox{\ \ where \ \ $k=1,...,M$}. \ \ \ \ \ \ \ \ (11) \] The number of terms in each truncated expansion must be the same, so that we obtain $M$ equations for $M$ unknowns.
 
@@ -198,9 +200,9 @@ Galerkin\textquotesingle{}s method is an efficient method for finding the approx
 \item spans the function space $ H_0(D)$,
 \item vanishes on the domain boundary, and
 \item leads to a sparse Jacobian matrix.
+\end{DoxyEnumerate}
 \end{DoxyEnumerate}. ~\newline
  We shall now develop the finite element method\+: an implementation of Galerkin\textquotesingle{}s method that automatically satisfies all the above requirements.
-\end{DoxyEnumerate}
 
 \DoxyHorRuler{0}
 \hypertarget{index_fe_basis_fct}{}\doxysubsection{Finite Element shape functions}\label{index_fe_basis_fct}
@@ -305,12 +307,16 @@ Furthermore, we associate each unknown nodal value, $ U_j $, with a distinct equ
 \item Assign its value according to the (known) boundary condition \[ U_j = g(X_j) \]
 \item Assign a negative equation number to reflect its \char`\"{}pinned\char`\"{} status\+: \[ {\cal E}(j) = -1 \]
 \end{DoxyItemize}
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+
+\begin{DoxyItemize}
 \item Else\+:
 \begin{DoxyItemize}
 \item Increment the number of the unknowns \[ M=M+1 \]
 \item Assign the equation number \[ {\cal E}(j) = M \]
 \item Provide an initial guess for the unknown nodal value, e.\+g. \[ U_j=0. \]
-\end{DoxyItemize}
 \end{DoxyItemize}
 \end{DoxyItemize}
 
@@ -350,9 +356,9 @@ Furthermore, we associate each unknown nodal value, $ U_j $, with a distinct equ
 \item Determine the equation number\+: $ {\cal E}(j) $
 \item If $ {\cal E}(j) \ne -1 $\+:
 \item Correct the initial guess via \[ U_{{\cal E}(j)} = U_{{\cal E}(j)} + y_{{\cal E}(j)} \]
+\end{DoxyItemize}
 \end{DoxyItemize}. ~\newline
-   
-\end{DoxyItemize}\\\cline{1-1}
+   \\\cline{1-1}
 \end{longtabu}
 
 \begin{DoxyItemize}
@@ -456,9 +462,13 @@ In order to add the elemental contributions to the correct {\itshape global} ent
 \item Add the entry to the lookup scheme that relates local and global equation numbers, $ \widehat{\cal E}(j_{dof},e) = {\cal E}(j_{global})$
 \end{DoxyItemize}
 \end{DoxyItemize}
+\end{DoxyItemize}
+\end{DoxyItemize}
+\begin{DoxyItemize}
 \item Assign the number of degrees of freedom in the element, $ {\cal N}_{dof}(e)=j_{dof} $
 \end{DoxyItemize}
-\end{DoxyItemize}For the 1D problem P1 with two-\/node elements, the lookup scheme has the following form\+: \[ \mbox{ \begin{tabular}{l l l l l l l l l l l } \hline \\ \mbox{Element $e$} & 1 & 2 & & 3 & & ... & $N_E-1$ & & $N_E$ \\ \hline \\ \mbox{Number of degrees of freedom ${\cal N}_{dof}(e)$} & 1 & 2 & & 2 & & ... & 2 & & 1\\ \hline \\ \mbox{Local equation number $i_{local}$} & 1 & 1 & 2 & 1 & 2 & ... & 1 & 2 & 1\\ \hline \\ \mbox{Global equation number $\widehat{\cal E}(i_{local},e)$} & 1 & 1 & 2 & 2 & 3 & ... & $N-3$ & $N-2$ & $N-2$ \\ \hline \\ \end{tabular} } \]
+
+For the 1D problem P1 with two-\/node elements, the lookup scheme has the following form\+: \[ \mbox{ \begin{tabular}{l l l l l l l l l l l } \hline \\ \mbox{Element $e$} & 1 & 2 & & 3 & & ... & $N_E-1$ & & $N_E$ \\ \hline \\ \mbox{Number of degrees of freedom ${\cal N}_{dof}(e)$} & 1 & 2 & & 2 & & ... & 2 & & 1\\ \hline \\ \mbox{Local equation number $i_{local}$} & 1 & 1 & 2 & 1 & 2 & ... & 1 & 2 & 1\\ \hline \\ \mbox{Global equation number $\widehat{\cal E}(i_{local},e)$} & 1 & 1 & 2 & 2 & 3 & ... & $N-3$ & $N-2$ & $N-2$ \\ \hline \\ \end{tabular} } \]
 
 Using this lookup scheme, we can re-\/arrange the computation of the residual vector and the Jacobian matrix as follows\+:
 
@@ -495,6 +505,7 @@ $ \bullet $ Increment the counter for the local degrees of freedom $ j_{dof}= j_
 $ \bullet $ Determine the entry in the element\textquotesingle{}s Jacobian matrix \[ J_{i_{dof}j_{dof}}^{(e)} = \int_{e} \left( \frac{\mbox{d} \psi_{k_{global}}(x)}{\mbox{d} x} \ \frac{\mbox{d} \psi_{j_{global}}(x)}{\mbox{d} x} \right) dx \]~\newline
 
 \end{DoxyItemize}
+\end{DoxyItemize}
 \end{DoxyItemize}~\newline
  ~\newline
  ~\newline
@@ -510,7 +521,6 @@ $ \bullet $ Determine the entry in the element\textquotesingle{}s Jacobian matri
 ~\newline
  $ \bullet $ Add the element\textquotesingle{}s contribution to the global Jacobian matrix \[ J_{\widehat{\cal E}(i_{dof},e)\widehat{\cal E}(j_{dof},e) } = J_{\widehat{\cal E}(i_{dof},e)\widehat{\cal E}(j_{dof},e) } + J_{i_{dof} j_{dof}}^{(e)} \]~\newline
 
-\end{DoxyItemize}
 \end{DoxyItemize}
 \end{DoxyItemize}
 \end{DoxyItemize}
@@ -551,8 +561,10 @@ Store the local equation number associated with the current local node\+: $ {\ca
 \end{longtabu}
 
 \end{DoxyItemize}
-\item Assign the number of degrees of freedom in the element, $ {\cal N}_{dof}(e)=j_{dof} $
 \end{DoxyItemize}
+\end{DoxyItemize}
+\begin{DoxyItemize}
+\item Assign the number of degrees of freedom in the element, $ {\cal N}_{dof}(e)=j_{dof} $
 \end{DoxyItemize}
 
 For the 1D problem P1 with two-\/node elements the elements, the lookup table $ {\cal L}(j_{local},e)$ has the following entries\+: \[ \mbox{ \begin{tabular}{l l l l l l l l l l l l } \hline \\ \mbox{Element $e$} & 1 & & 2 & & 3 & & ... & $N_E-1$ & & $N_E$ & \\ \hline \\ \mbox{Local node number $j_{local}$} & 1 & 2 & 1 & 2 & 1 & 2 & ... & 1 & 2 & 1 & 2 \\ \hline \\ \mbox{Local equation number ${\cal L}(j_{local},e)$} & -1 & 1 & 1 & 2 & 1 & 2 & ... & 1 & 2 & 1 & -1\\ \hline \\ \end{tabular} } \] Using this lookup scheme, we revise Algorithm 6 as follows (only the highlighted regions have changed; we have removed the initialisation of the \char`\"{}counters\char`\"{} for the equation numbers since they are no longer computed \char`\"{}on the fly\char`\"{})\+:
@@ -595,11 +607,14 @@ $ \bullet $ Determine the entry in the element\textquotesingle{}s residual vecto
 \item Determine the entry in the element\textquotesingle{}s Jacobian matrix \[ J_{i_{dof}j_{dof}}^{(e)} = \int_{e} \left( \frac{\mbox{d} \psi_{k_{global}}(x)}{\mbox{d} x} \ \frac{\mbox{d} \psi_{j_{global}}(x)}{\mbox{d} x} \right) dx \]~\newline
 
 \end{DoxyItemize}
+\end{DoxyItemize}
+\end{DoxyItemize}
 \end{DoxyItemize}~\newline
  ~\newline
  ~\newline
  \begin{center} {\bfseries{ Add the element\textquotesingle{}s contribution to the global residual vector and Jacobian matrix }} \end{center}  ~\newline
 
+\begin{DoxyItemize}
 \item Loop over the local degrees of freedom $ i_{dof}=1,...,n_{dof} $
 \begin{DoxyItemize}
 \item Add the element\textquotesingle{}s contribution to the global residual vector \[ r_{\widehat{\cal E}(i_{dof},e)} = r_{\widehat{\cal E}(i_{dof},e)} + r_{i_{dof}}^{(e)} \]
@@ -610,7 +625,8 @@ $ \bullet $ Determine the entry in the element\textquotesingle{}s residual vecto
 \end{DoxyItemize}
 \end{DoxyItemize}
 \end{DoxyItemize}
-\end{DoxyItemize}\DoxyHorRuler{0}
+
+\DoxyHorRuler{0}
 \hypertarget{index_local_coords}{}\doxysubsubsection{Local coordinates}\label{index_local_coords}
 Algorithm 9 computes the residual vector and the Jacobian matrix using an element-\/by-\/element assembly process. The basis functions are still based on a global definition (17) that involves unnecessary references to quantities external to the element. For example, in element $ j $ the tests for $ x < X_j$ and $ x > X_{j+1}$ in (17) are unnecessary because these coordinate ranges are always outside the element. We shall now develop an alternative, local representation of the shape functions that involves only quantities that are intrinsic to each element. ~\newline
  For this purpose, we introduce a local coordinate $s \in [-1,1] $ that parametrises the position $ x(s) $ within an element so that (for two-\/node elements) the local coordinates $s=\pm 1$ correspond to local nodes 1 and 2, respectively. The local linear shape functions \[ \psi_1(s) = \frac{1}{2}(1-s) \mbox{\ \ \ and \ \ \ } \psi_2(s) = \frac{1}{2}(1+s)\] are the natural generalisations of the global shape functions\+:
@@ -686,11 +702,18 @@ We have now developed the necessary tools to formulate the final version of the 
 \item Add the entry to the lookup scheme that relates global and local equation numbers, $ \widehat{\cal E}(j_{dof},e) = {\cal E}(j_{global})$
 \item Store the local equation number associated with the current local node\+: $ {\cal L}(j_{local},e)=j_{dof}.$
 \end{DoxyItemize}
+\end{DoxyItemize}
+\end{DoxyItemize}
+\end{DoxyItemize}
+\begin{DoxyItemize}
 \item Else\+:
 \begin{DoxyItemize}
 \item Set the local equation number associated with the current local node to -\/1 to indicate that it is pinned\+: $ {\cal L}(j_{local},e)=-1$
 \end{DoxyItemize}
 \end{DoxyItemize}
+
+
+\begin{DoxyItemize}
 \item Assign the number of degrees of freedom in the element $ {\cal N}_{dof}(e)=j_{dof} $
 \end{DoxyItemize}
 
@@ -704,6 +727,9 @@ The derivatives of the local shape functions, $ \psi_j $, with respect to the gl
 {\bfseries{ Phase 2\+: Solution }}
 
 {\bfseries{ Phase 2a\+: Set up the linear system }}
+
+
+\begin{DoxyItemize}
 \item Initialise the global residual vector, $ r_j=0 $ for $j=1,...,M $ and the global Jacobian matrix $ J_{jk}=0 $ for $j,k=1,...,M $
 \item Loop over the elements $ e=1,...,N_E$ ~\newline
 ~\newline
@@ -736,11 +762,14 @@ The derivatives of the local shape functions, $ \psi_j $, with respect to the gl
  $ \bullet $ Determine the local equation number from the element\textquotesingle{}s lookup scheme $ j_{dof}= {\cal L}(k_{local},e)$.~\newline
  $ \bullet $ Add the contribution to the element\textquotesingle{}s Jacobian matrix \[ J_{i_{dof}j_{dof}}^{(e)} = J_{i_{dof}j_{dof}}^{(e)} + \left( \frac{\mbox{d} \psi_{k_{local}}}{\mbox{d} x} \ \frac{\mbox{d} \psi_{j_{local}}}{\mbox{d} x} \right) \widehat{\cal J} \ W_{i_{int}} \]
 \end{DoxyItemize}
+\end{DoxyItemize}
+\end{DoxyItemize}
 \end{DoxyItemize}~\newline
  ~\newline
  ~\newline
  \begin{center} {\bfseries{ Add the element\textquotesingle{}s contribution to the global residual vector and Jacobian matrix }} \end{center}  ~\newline
 
+\begin{DoxyItemize}
 \item Loop over the local degrees of freedom $ i_{dof}=1,...,n_{dof} $
 \begin{DoxyItemize}
 \item Add the element\textquotesingle{}s contribution to the global residual vector \[ r_{\widehat{\cal E}(i_{dof},e)} = r_{\widehat{\cal E}(i_{dof},e)} + r_{i_{dof}}^{(e)} \]
@@ -748,7 +777,12 @@ The derivatives of the local shape functions, $ \psi_j $, with respect to the gl
  $\bullet $ Add the element\textquotesingle{}s contribution to the global Jacobian matrix \[ J_{\widehat{\cal E}(i_{dof},e)\widehat{\cal E}(j_{dof},e) } = J_{\widehat{\cal E}(i_{dof},e)\widehat{\cal E}(j_{dof},e) } + J_{i_{dof} j_{dof}}^{(e)} \]~\newline
 
 \end{DoxyItemize}
-\end{DoxyItemize}{\bfseries{ Phase 2b\+: Solve the linear system }}
+\end{DoxyItemize}
+
+{\bfseries{ Phase 2b\+: Solve the linear system }}
+
+
+\begin{DoxyItemize}
 \item Solve the $ M \times M$ linear system \[ \sum_{j=1}^{M} J_{jk} \ y_k = - r_j \mbox{\ \ \ for $j=1,...,M.$} \] for $ y_k \ \ (k=1,...,M).$
 
 {\bfseries{ Phase 2c\+: Update the initial guess }}
@@ -793,6 +827,8 @@ Thus far, we have only discussed the implementation of the finite element method
 \item decomposes the domain into 2D elements
 \item assigns two coordinates for each nodal point.
 \end{DoxyItemize}
+\end{DoxyItemize}
+\begin{DoxyItemize}
 \item define suitable (local) shape functions for the elements
 \item implement the computation of the elements\textquotesingle{} residuals and Jacobian matrices which correspond to the (integrated-\/by-\/parts) weak form of problem P2, \[ r_k = \int_D \sum_{l=1}^2 \frac{\partial u(x_i)}{\partial x_l} \ \frac{\partial \psi_k(x_i)}{\partial x_l} \ dx_1 dx_2 + \int_D f(x_i) \ \psi_k(x_i) \ dx_1 dx_2 =0. \]
 \end{DoxyItemize}

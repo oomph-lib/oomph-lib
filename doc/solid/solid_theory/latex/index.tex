@@ -13,6 +13,8 @@ Here is an overview of the structure of this document\+:
 \item \mbox{\hyperlink{index_isotropic_growth}{Isotropic growth.}}
 \item \mbox{\hyperlink{index_CartesianLagrangian}{Specialisation to a Cartesian basis and finite element discretisation}}
 \end{DoxyItemize}
+\end{DoxyItemize}
+\begin{DoxyItemize}
 \item \mbox{\hyperlink{index_solid_implementation}{Implementation}}
 \begin{DoxyItemize}
 \item \mbox{\hyperlink{index_solid_node}{The Solid\+Node class}}
@@ -20,6 +22,8 @@ Here is an overview of the structure of this document\+:
 \item \mbox{\hyperlink{index_solid_mesh}{The Solid\+Mesh class}}
 \item \mbox{\hyperlink{index_solid_traction}{The Solid\+Traction\+Element class}}
 \end{DoxyItemize}
+\end{DoxyItemize}
+\begin{DoxyItemize}
 \item \mbox{\hyperlink{index_Solid_IC}{Timestepping and the generation of initial conditions for solid mechanics problems}}
 \end{DoxyItemize}If you\textquotesingle{}re not keen on theory, you may prefer to start by exploring the solid mechanics tutorials in {\ttfamily oomph-\/lib\textquotesingle{}s} \href{../../../example_code_list/html/index.html\#solid}{\texttt{ list of example driver codes.}}
 
@@ -79,6 +83,8 @@ The functional form of the constitutive equation is different for compressible/i
 \item The contravariant deformed metric tensor $ G^{ij} $
 \item The determinant of the deformed metric tensor $ \det G_{ij} $ which is required in equation (4) whose solution determines the pressure.
 \end{DoxyItemize}
+\end{DoxyEnumerate}
+\begin{DoxyEnumerate}
 \item {\bfseries{Nearly}} {\bfseries{Incompressible}} {\bfseries{Behaviour\+:}} ~\newline
  If the material is nearly incompressible, it is advantageous to split the stress into its deviatoric and hydrostatic parts by writing the constitutive law in the form \[ \sigma^{ij} = -p G^{ij} + \overline{\sigma}^{ij}\big(\gamma_{kl}\big), \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6) \] where the deviatoric part of the stress tensor, $ \overline{\sigma}^{ij}, $ depends on the strain. This form of the constitutive law is identical to that of the incompressible case and it involves a pressure $ p $ which must be determined from an additional equation. In the incompressible case, this equation was given by the incompressibility constraint (4). Here, we must augment the constitutive law for the deviatoric stress by an additional equation for the pressure. Generally this takes the form \[ p = - \kappa \ d, \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7) \] where $ \kappa $ is the \char`\"{}bulk modulus\char`\"{}, a material property that must be specified by the constitutive law. ~\newline
  $ d $ is the (generalised) dilatation, i.\+e. the relative change in the volume of an infinitesimal material element (or some suitable generalised quantity that is related to it). As the material approaches incompressibility, $ \kappa \to \infty$, so that infinitely large pressures would be required to achieve any change in volume. To facilitate the implementation of (7) as the equation for the pressure, we re-\/write it in the form \[ p \ \frac{1}{\kappa} + d\big(g_{ij},G_{ij}\big) = 0, \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (8) \] which only involves quantities that remain finite as we approach true incompressibility. ~\newline
@@ -88,8 +94,8 @@ The functional form of the constitutive equation is different for compressible/i
 \item The contravariant deformed metric tensor $ G^{ij} $
 \item The generalised dilatation $ d $
 \item The inverse of the bulk modulus $ \kappa $
-\end{DoxyItemize}The abstract base class {\ttfamily Constitutive\+Law} provides interfaces for the computation of the stress in all three forms.
-\end{DoxyEnumerate}\hypertarget{index_strain-energy}{}\doxysubsubsection{Strain-\/energy functions}\label{index_strain-energy}
+\end{DoxyItemize}
+\end{DoxyEnumerate}The abstract base class {\ttfamily Constitutive\+Law} provides interfaces for the computation of the stress in all three forms.\hypertarget{index_strain-energy}{}\doxysubsubsection{Strain-\/energy functions}\label{index_strain-energy}
 A hyperelastic material is one for which the stress can be derived from a potential function $ W(\gamma_{ij})$, known as the strain-\/energy function, and \[ \sigma^{ij} = \frac{\partial W}{\partial \gamma_{ij}}. \] A strain-\/energy function exists if the elastic deformations are reversible and isothermal, or reversible and isentropic. If the material is homogeneous and isotropic then the strain-\/energy function depends only on the three strain invariants\+: \[ I_{1} = g^{ij} G_{ij},\quad I_{2} = G^{ij} g_{ij} I_{3},\quad I_{3} = G/g \] and can be written $W(I_{1},I_{2},I_{3})$. It may be shown, see Green \& Zerna, that \[ \sigma^{ij} = \Phi g^{ij} + \Psi B^{ij} + p G^{ij},\] where \[ \Phi = 2\, \frac{\partial W}{\partial I_{1}},\quad \Psi = 2\, \frac{\partial W}{\partial I_{2}},\quad p = 2 I_{3} \frac{\partial W}{\partial I_{3}} \quad\mbox{and}\quad B^{ij} = I_{1} g^{ij} - g^{ir}g^{js}G_{rs} \]
 
 The abstract base class {\ttfamily Strain\+Energy\+Function} provides the interfaces $ W(\gamma_{ij}) $ and $ W(I_{1},I_{2},I_{3}) $ and should be used as the base class for all strain-\/energy functions. A class {\ttfamily Strain\+Energy\+Function\+Constitutive\+Law} that inherits from {\ttfamily Constitutive\+Law} uses a specified strain-\/energy function to compute the appropriate stresses.

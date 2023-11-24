@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1XdaTetMesh}{}\doxysection{oomph\+::Xda\+Tet\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1XdaTetMesh}{}\doxysection{oomph\+::Xda\+Tet\+Mesh$<$ ELEMENT $>$ Class Template Reference}
 \label{classoomph_1_1XdaTetMesh}\index{oomph::XdaTetMesh$<$ ELEMENT $>$@{oomph::XdaTetMesh$<$ ELEMENT $>$}}
 
 
@@ -9,7 +9,7 @@ Tet mesh made of quadratic (ten node) tets built from xda input file.
 
 {\ttfamily \#include $<$xda\+\_\+tet\+\_\+mesh.\+template.\+h$>$}
 
-Inheritance diagram for oomph\+::Xda\+Tet\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Xda\+Tet\+Mesh$<$ ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=4.000000cm]{classoomph_1_1XdaTetMesh}
@@ -26,7 +26,7 @@ void \mbox{\hyperlink{classoomph_1_1XdaTetMesh_a415f0211f064766f8c38bca6f877c192
 \begin{DoxyCompactList}\small\item\em Setup boundary coordinate on boundary b while is temporarily flattened to simplex faces. Boundary coordinates are the x-\/y coordinates in the plane of that boundary with the x-\/axis along the line from the (lexicographically) \char`\"{}lower left\char`\"{} to the \char`\"{}upper right\char`\"{} node. The y axis is obtained by taking the cross-\/product of the positive x direction with the outer unit normal computed by the face elements (or its negative if switch\+\_\+normal is set to true). Doc faces in output file. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1XdaTetMesh_ad81712bc6c7215d64494ccafc8c99dd5}{nxda\+\_\+boundary}} ()
 \begin{DoxyCompactList}\small\item\em Access function to the number of distinct boundaries specified in the original xda enumeration. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1XdaTetMesh_a0597a3e3d72a756631beac452b9240c5}{oomph\+\_\+lib\+\_\+boundary\+\_\+ids}} (const unsigned \&xda\+\_\+boundary\+\_\+id)
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1XdaTetMesh_ab690c0224586bfc7b46ff173da855ddd}{oomph\+\_\+lib\+\_\+boundary\+\_\+ids}} (const unsigned \&xda\+\_\+boundary\+\_\+id)
 \begin{DoxyCompactList}\small\item\em Access functions to the \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of oomph-\/lib boundary ids that make up boundary b in the original xda enumeration. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -39,9 +39,10 @@ unsigned \mbox{\hyperlink{classoomph_1_1XdaTetMesh_ad81712bc6c7215d64494ccafc8c9
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class ELEMENT$>$\newline
 class oomph\+::\+Xda\+Tet\+Mesh$<$ ELEMENT $>$}
+
 Tet mesh made of quadratic (ten node) tets built from xda input file. 
 
-Definition at line \mbox{\hyperlink{xda__tet__mesh_8template_8h_source_l00053}{53}} of file \mbox{\hyperlink{xda__tet__mesh_8template_8h_source}{xda\+\_\+tet\+\_\+mesh.\+template.\+h}}.
+Definition at line 53 of file xda\+\_\+tet\+\_\+mesh.\+template.\+h.
 
 
 
@@ -59,11 +60,11 @@ Constructor\+: Pass name of xda file. Note that all boundary elements get their 
 
 Constructor\+: Pass name of xda file. Note that all boundary elements get their own ID -- this is required for FSI problems. The vector containing the oomph-\/lib boundary IDs of all oomph-\/lib boundaries that collectively form a given boundary as specified in the xda input file can be obtained from the access function oomph\+\_\+lib\+\_\+boundary\+\_\+ids(...). Timestepper defaults to steady pseudo-\/timestepper. 
 
-Definition at line \mbox{\hyperlink{xda__tet__mesh_8template_8cc_source_l00046}{46}} of file \mbox{\hyperlink{xda__tet__mesh_8template_8cc_source}{xda\+\_\+tet\+\_\+mesh.\+template.\+cc}}.
+Definition at line 46 of file xda\+\_\+tet\+\_\+mesh.\+template.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
+References e, i, and oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
 
 
 
@@ -81,18 +82,18 @@ Access function to the number of distinct boundaries specified in the original x
 
 
 
-Definition at line \mbox{\hyperlink{xda__tet__mesh_8template_8h_source_l00098}{98}} of file \mbox{\hyperlink{xda__tet__mesh_8template_8h_source}{xda\+\_\+tet\+\_\+mesh.\+template.\+h}}.
+Definition at line 98 of file xda\+\_\+tet\+\_\+mesh.\+template.\+h.
 
 
 
-References \mbox{\hyperlink{xda__tet__mesh_8template_8h_source_l00113}{oomph\+::\+Xda\+Tet\+Mesh$<$ ELEMENT $>$\+::\+Boundary\+\_\+id}}.
+References oomph\+::\+Xda\+Tet\+Mesh$<$ ELEMENT $>$\+::\+Boundary\+\_\+id.
 
-\mbox{\Hypertarget{classoomph_1_1XdaTetMesh_a0597a3e3d72a756631beac452b9240c5}\label{classoomph_1_1XdaTetMesh_a0597a3e3d72a756631beac452b9240c5}} 
+\mbox{\Hypertarget{classoomph_1_1XdaTetMesh_ab690c0224586bfc7b46ff173da855ddd}\label{classoomph_1_1XdaTetMesh_ab690c0224586bfc7b46ff173da855ddd}} 
 \index{oomph::XdaTetMesh$<$ ELEMENT $>$@{oomph::XdaTetMesh$<$ ELEMENT $>$}!oomph\_lib\_boundary\_ids@{oomph\_lib\_boundary\_ids}}
 \index{oomph\_lib\_boundary\_ids@{oomph\_lib\_boundary\_ids}!oomph::XdaTetMesh$<$ ELEMENT $>$@{oomph::XdaTetMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{oomph\_lib\_boundary\_ids()}{oomph\_lib\_boundary\_ids()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1XdaTetMesh}{oomph\+::\+Xda\+Tet\+Mesh}}$<$ ELEMENT $>$\+::oomph\+\_\+lib\+\_\+boundary\+\_\+ids (\begin{DoxyParamCaption}\item[{const unsigned \&}]{xda\+\_\+boundary\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$unsigned$>$ \mbox{\hyperlink{classoomph_1_1XdaTetMesh}{oomph\+::\+Xda\+Tet\+Mesh}}$<$ ELEMENT $>$\+::oomph\+\_\+lib\+\_\+boundary\+\_\+ids (\begin{DoxyParamCaption}\item[{const unsigned \&}]{xda\+\_\+boundary\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -100,11 +101,11 @@ Access functions to the \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of oomph
 
 
 
-Definition at line \mbox{\hyperlink{xda__tet__mesh_8template_8h_source_l00105}{105}} of file \mbox{\hyperlink{xda__tet__mesh_8template_8h_source}{xda\+\_\+tet\+\_\+mesh.\+template.\+h}}.
+Definition at line 105 of file xda\+\_\+tet\+\_\+mesh.\+template.\+h.
 
 
 
-References \mbox{\hyperlink{xda__tet__mesh_8template_8h_source_l00113}{oomph\+::\+Xda\+Tet\+Mesh$<$ ELEMENT $>$\+::\+Boundary\+\_\+id}}.
+References oomph\+::\+Xda\+Tet\+Mesh$<$ ELEMENT $>$\+::\+Boundary\+\_\+id.
 
 \mbox{\Hypertarget{classoomph_1_1XdaTetMesh_a3a09ba1d3e29133dd032519ced703815}\label{classoomph_1_1XdaTetMesh_a3a09ba1d3e29133dd032519ced703815}} 
 \index{oomph::XdaTetMesh$<$ ELEMENT $>$@{oomph::XdaTetMesh$<$ ELEMENT $>$}!setup\_boundary\_coordinates@{setup\_boundary\_coordinates}}
@@ -119,15 +120,7 @@ Setup boundary coordinate on boundary b while is temporarily flattened to simple
 
 
 
-Definition at line \mbox{\hyperlink{xda__tet__mesh_8template_8h_source_l00075}{75}} of file \mbox{\hyperlink{xda__tet__mesh_8template_8h_source}{xda\+\_\+tet\+\_\+mesh.\+template.\+h}}.
-
-
-
-References \mbox{\hyperlink{xda__tet__mesh_8template_8h_source_l00075}{oomph\+::\+Xda\+Tet\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+boundary\+\_\+coordinates()}}.
-
-
-
-Referenced by \mbox{\hyperlink{xda__tet__mesh_8template_8h_source_l00075}{oomph\+::\+Xda\+Tet\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+boundary\+\_\+coordinates()}}.
+Definition at line 75 of file xda\+\_\+tet\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1XdaTetMesh_a415f0211f064766f8c38bca6f877c192}\label{classoomph_1_1XdaTetMesh_a415f0211f064766f8c38bca6f877c192}} 
 \index{oomph::XdaTetMesh$<$ ELEMENT $>$@{oomph::XdaTetMesh$<$ ELEMENT $>$}!setup\_boundary\_coordinates@{setup\_boundary\_coordinates}}
@@ -142,11 +135,11 @@ Setup boundary coordinate on boundary b while is temporarily flattened to simple
 
 
 
-Definition at line \mbox{\hyperlink{xda__tet__mesh_8template_8cc_source_l00345}{345}} of file \mbox{\hyperlink{xda__tet__mesh_8template_8cc_source}{xda\+\_\+tet\+\_\+mesh.\+template.\+cc}}.
+Definition at line 345 of file xda\+\_\+tet\+\_\+mesh.\+template.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8cc_source_l02499}{oomph\+::\+Node\+::position()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{nodes_8cc_source_l02394}{oomph\+::\+Node\+::set\+\_\+coordinates\+\_\+on\+\_\+boundary()}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
+References e, i, oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Node\+::position(), s, oomph\+::\+Node\+::set\+\_\+coordinates\+\_\+on\+\_\+boundary(), and oomph\+::\+Node\+::x().
 
 
 
@@ -164,11 +157,11 @@ References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{cfo
 
 
 
-Definition at line \mbox{\hyperlink{xda__tet__mesh_8template_8h_source_l00113}{113}} of file \mbox{\hyperlink{xda__tet__mesh_8template_8h_source}{xda\+\_\+tet\+\_\+mesh.\+template.\+h}}.
+Definition at line 113 of file xda\+\_\+tet\+\_\+mesh.\+template.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{xda__tet__mesh_8template_8h_source_l00098}{oomph\+::\+Xda\+Tet\+Mesh$<$ ELEMENT $>$\+::nxda\+\_\+boundary()}}, and \mbox{\hyperlink{xda__tet__mesh_8template_8h_source_l00105}{oomph\+::\+Xda\+Tet\+Mesh$<$ ELEMENT $>$\+::oomph\+\_\+lib\+\_\+boundary\+\_\+ids()}}.
+Referenced by oomph\+::\+Xda\+Tet\+Mesh$<$ ELEMENT $>$\+::nxda\+\_\+boundary(), and oomph\+::\+Xda\+Tet\+Mesh$<$ ELEMENT $>$\+::oomph\+\_\+lib\+\_\+boundary\+\_\+ids().
 
 
 

@@ -38,9 +38,9 @@ The only change to the main function is that we record the command line argument
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_main====================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Driver code for unsteady heat equation with option for}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// restart from disk: Only a single command line argument is allowed.}}
-\DoxyCodeLine{\textcolor{comment}{/// If specified it is interpreted as the name of the restart file.}}
+\DoxyCodeLine{\textcolor{comment}{/// Driver code for unsteady heat equation with option for}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// restart from disk: Only a single command line argument is allowed.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// If specified it is interpreted as the name of the restart file.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{two__d__unsteady__heat__restarted_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
@@ -58,7 +58,7 @@ The problem class contains the two additional member functions
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Dump problem to disk to allow for restart.}}
+\DoxyCodeLine{ \textcolor{comment}{/// Dump problem to disk to allow for restart.}}
 \DoxyCodeLine{ \textcolor{keywordtype}{void} dump\_it(ofstream\& dump\_file);}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Read problem for restart from specified restart file.}}
@@ -89,8 +89,8 @@ We start by checking the validity of the command line arguments, accessible via 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//======================start\_of\_set\_initial\_condition====================}}
-\DoxyCodeLine{\textcolor{comment}{/// Set initial condition: Assign previous and current values}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// from exact solution or from restart file.}}
+\DoxyCodeLine{\textcolor{comment}{/// Set initial condition: Assign previous and current values}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// from exact solution or from restart file.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classUnsteadyHeatProblem_a98de3ed2d9cf5409323121bbb482bc1b}{UnsteadyHeatProblem<ELEMENT>::set\_initial\_condition}}()}
@@ -248,7 +248,7 @@ The {\ttfamily Problem\+::dump(...)} function writes the generic {\ttfamily Prob
 Briefly, the dump file contains\+:
 \begin{DoxyItemize}
 \item A flag that indicates if the data was produced by a time-\/dependent simulation.
-\item The current value of the \char`\"{}continuous\char`\"{} time, i.\+e. the value returned by {\ttfamily Problem\+::time\+\_\+pt()-\/\texorpdfstring{$>$}{>}time()};
+\item The current value of the \char`\"{}continuous\char`\"{} time, i.\+e. the value returned by {\ttfamily Problem\+::time\+\_\+pt()-\/$>$time()};
 \item The number of previous timesteps, {\ttfamily dt}, stored in the {\ttfamily Problem\textquotesingle{}s} {\ttfamily Time} object, and their values.
 \item The values and history values for all {\ttfamily Data} objects in the {\ttfamily Problem}, as well as the present and previous coordinates of all {\ttfamily Nodes}.
 \end{DoxyItemize}The \char`\"{}raw data\char`\"{} is augmented by brief comments that facilitate the identification of individual entries.
@@ -259,7 +259,7 @@ In the present problem, the generic {\ttfamily Problem\+::dump(...)} function is
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====start\_of\_dump\_it===================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Dump the solution to disk to allow for restart}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classUnsteadyHeatProblem_a9a60874a6471414819301705f1a2afd1}{UnsteadyHeatProblem<ELEMENT>::dump\_it}}(ofstream\& dump\_file)}
 \DoxyCodeLine{\{}
@@ -281,7 +281,7 @@ Since the restart file was written by the generic {\ttfamily Problem\+::dump(...
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=================start\_of\_restart=======================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Read solution from disk for restart}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classUnsteadyHeatProblem_ad0a4a1c1da24f6d62f64b0d40be31709}{UnsteadyHeatProblem<ELEMENT>::restart}}(ifstream\& restart\_file)}
 \DoxyCodeLine{\{}
@@ -298,7 +298,7 @@ Since the restart file was written by the generic {\ttfamily Problem\+::dump(...
 The {\ttfamily Problem\+::dump(...)} and {\ttfamily Problem\+::read(...)} functions write/read the generic data that is common to all {\ttfamily oomph-\/lib} problems. Occasionally, it is necessary to record additional data to re-\/create the system\textquotesingle{}s state when the simulations is restarted. We will explore this in more detail in \href{../../two_d_unsteady_heat_2adapt/html/index.html}{\texttt{ another example}}. Here we provide a brief exercise that illustrates the general idea and addresses a shortcoming of the driver code\+: Currently the program computes the same number of timesteps, regardless of whether or not the simulation was restarted. If a simulation is restarted, the computation therefore continues past $ t=t_{max}. $\hypertarget{index_exercises}{}\doxysubsection{Exercises}\label{index_exercises}
 
 \begin{DoxyItemize}
-\item Change the {\ttfamily for} loop over the fixed number of timesteps in the {\ttfamily main} function to a {\ttfamily while} loop that checks if the continuous time, accessible via {\ttfamily Problem\+::time\+\_\+pt()-\/\texorpdfstring{$>$}{>}time()}, has reached or exceeded $ t_{max} $. This works because the {\ttfamily Problem\+::dump(...)} and {\ttfamily Problem\+::read(...)} functions dump and restore the value of the continuous time.
+\item Change the {\ttfamily for} loop over the fixed number of timesteps in the {\ttfamily main} function to a {\ttfamily while} loop that checks if the continuous time, accessible via {\ttfamily Problem\+::time\+\_\+pt()-\/$>$time()}, has reached or exceeded $ t_{max} $. This works because the {\ttfamily Problem\+::dump(...)} and {\ttfamily Problem\+::read(...)} functions dump and restore the value of the continuous time.
 \item Following this trivial change, the restarted simulation is terminated at the appropriate point but the numbering of the output files begins at 0, making it difficult to merge the results from the original and the restarted simulations. Modify the functions {\ttfamily dump\+\_\+it(...)} and {\ttfamily restart(...)} so that they write/read the current label for the output files to/from the restart file. ~\newline
 ~\newline
  {\bfseries{Hints\+:}} {\bfseries{(i)}} You can write to/read from the restart file before calling {\ttfamily Problem\+::dump(...)} and {\ttfamily Problem\+::read(...)}; just make sure you do it in the same order in both functions. {\bfseries{(ii)}} The easiest way to make the label, currently stored in the {\ttfamily Doc\+Info} object in the {\ttfamily main} function, accessible to all member functions in the {\ttfamily Problem} is to make the {\ttfamily Doc\+Info} object a private data member of the {\ttfamily Problem} class.

@@ -6,7 +6,6 @@
 # in current directory.
 #=====================================================
 full_test_text='tempfile'
-echo $full_test
 
 awk 'BEGIN{
       next_line_is_dir=0; 

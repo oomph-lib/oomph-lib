@@ -69,7 +69,7 @@ To perform this node-\/update procedure for a specific node, we generally have t
 ~\newline
 
 \item A pointer to the {\ttfamily Algebraic\+Mesh} that implements the node-\/update procedure.
-\end{DoxyItemize}Since the node-\/update data is node-\/specific, we provide storage for it in the {\ttfamily Algebraic\+Node} class -- a class that is derived from the {\ttfamily Node} class. The node-\/update function itself is shared by many nodes in the mesh and is implemented in {\ttfamily Algebraic\+Mesh\+::algebraic\+\_\+node\+\_\+update(...)}. This function extracts the node-\/update parameters, $ \omega_j, \ \zeta_j $, and $ X^{(A)}_j $ and the pointer to the {\ttfamily Geom\+Object} that parametrises the wall, {\ttfamily wall\+\_\+pt}, say, from the {\ttfamily Algebraic\+Node} passed to it. With these parameters, the position of reference point ${\bf A}\textnormal{\textquotesingle}_j $ is given by $ {\bf A}\textnormal{\textquotesingle}_j = (X_j^{(A)},0)^T $ while the coordinates of reference point $ {\bf B}\textnormal{\textquotesingle}_j = {\bf R}(\zeta_j,t)$ may be obtained from a call to {\ttfamily wall\+\_\+pt-\/\texorpdfstring{$>$}{>}position(...)}. The nodal position $ {\bf r}_j $ may then be updated via \[ {\bf r}_j = {\bf A}_j\textnormal{\textquotesingle} + \omega_j \left( {\bf B}_j\textnormal{\textquotesingle}-{\bf A}_j\textnormal{\textquotesingle} \right) \]
+\end{DoxyItemize}Since the node-\/update data is node-\/specific, we provide storage for it in the {\ttfamily Algebraic\+Node} class -- a class that is derived from the {\ttfamily Node} class. The node-\/update function itself is shared by many nodes in the mesh and is implemented in {\ttfamily Algebraic\+Mesh\+::algebraic\+\_\+node\+\_\+update(...)}. This function extracts the node-\/update parameters, $ \omega_j, \ \zeta_j $, and $ X^{(A)}_j $ and the pointer to the {\ttfamily Geom\+Object} that parametrises the wall, {\ttfamily wall\+\_\+pt}, say, from the {\ttfamily Algebraic\+Node} passed to it. With these parameters, the position of reference point ${\bf A}\textnormal{\textquotesingle}_j $ is given by $ {\bf A}\textnormal{\textquotesingle}_j = (X_j^{(A)},0)^T $ while the coordinates of reference point $ {\bf B}\textnormal{\textquotesingle}_j = {\bf R}(\zeta_j,t)$ may be obtained from a call to {\ttfamily wall\+\_\+pt-\/$>$position(...)}. The nodal position $ {\bf r}_j $ may then be updated via \[ {\bf r}_j = {\bf A}_j\textnormal{\textquotesingle} + \omega_j \left( {\bf B}_j\textnormal{\textquotesingle}-{\bf A}_j\textnormal{\textquotesingle} \right) \]
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -86,7 +86,7 @@ To ensure that the {\ttfamily Finite\+Element\+::construct\+\_\+node(...)} funct
 \end{DoxyCode}
 
 
-which overloads the {\ttfamily Finite\+Element\+::construct\+\_\+node(...)} function so that it creates {\ttfamily Algebraic\+Nodes} instead. In most other respects, the \char`\"{}wrapped\char`\"{} element behaves exactly as the underlying {\ttfamily ELEMENT} itself. To use an existing {\ttfamily Algebraic\+Mesh} with a certain element type, {\ttfamily QTaylor\+Hood\+Element$<$2$>$}, say, we simply \char`\"{}upgrade\char`\"{} the element to an {\ttfamily Algebraic\+Element} by specifying the element type as {\ttfamily Algebraic\+Element\texorpdfstring{$<$}{<}QTaylor\+Hood\+Element$<$2$>$} \texorpdfstring{$>$}{>}. ~\newline
+which overloads the {\ttfamily Finite\+Element\+::construct\+\_\+node(...)} function so that it creates {\ttfamily Algebraic\+Nodes} instead. In most other respects, the \char`\"{}wrapped\char`\"{} element behaves exactly as the underlying {\ttfamily ELEMENT} itself. To use an existing {\ttfamily Algebraic\+Mesh} with a certain element type, {\ttfamily QTaylor\+Hood\+Element$<$2$>$}, say, we simply \char`\"{}upgrade\char`\"{} the element to an {\ttfamily Algebraic\+Element} by specifying the element type as {\ttfamily Algebraic\+Element$<$QTaylor\+Hood\+Element$<$2$>$} $>$. ~\newline
 
 
 The changes to an existing driver code that performs the node update by the default {\ttfamily Domain/\+Macro\+Element} methodology are therefore completely trivial. You may wish to compare the driver code \href{../../../../demo_drivers/navier_stokes/collapsible_channel/collapsible_channel.cc}{\texttt{ collapsible\+\_\+channel.\+cc}}, discussed in \href{../../collapsible_channel/html/index.html}{\texttt{ an earlier example}}, to the driver code \href{../../../../demo_drivers/navier_stokes/collapsible_channel/collapsible_channel_algebraic.cc}{\texttt{ collapsible\+\_\+channel\+\_\+algebraic.\+cc}} in which the fluid domain is discretised by the {\ttfamily My\+Algebraic\+Collapsible\+Channel\+Mesh}, discussed below.
@@ -104,7 +104,7 @@ We construct the mesh by multiple inheritance from the {\ttfamily Algebraic\+Mes
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===========start\_algebraic\_mesh==================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Collapsible channel mesh with algebraic node update}}
-\DoxyCodeLine{\textcolor{comment}{//=================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }MyAlgebraicCollapsibleChannelMesh : }
 \DoxyCodeLine{  \textcolor{keyword}{public} AlgebraicMesh,}
@@ -143,9 +143,9 @@ We construct the mesh by multiple inheritance from the {\ttfamily Algebraic\+Mes
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Update nodal position at time level t (t=0: present; }}
+\DoxyCodeLine{ \textcolor{comment}{/// Update nodal position at time level t (t=0: present; }}
 \DoxyCodeLine{\textcolor{comment}{ /// t>0: previous)}}
-\DoxyCodeLine{ \textcolor{keywordtype}{void} algebraic\_node\_update(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& t, AlgebraicNode*\& node\_pt);}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} algebraic\_node\_update(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& t, AlgebraicNode*\& node\_pt);}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update the geometric references that are used }}
 \DoxyCodeLine{\textcolor{comment}{ /// to update node after mesh adaptation.}}
@@ -178,8 +178,8 @@ To set up the algebraic node-\/update data, we start by extracting the lengths o
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_setup\_algebraic\_node\_update====================}}
-\DoxyCodeLine{\textcolor{comment}{/// Setup algebraic mesh update -\/-\/ assumes that mesh has}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// initially been set up with the wall in its undeformed position.}}
+\DoxyCodeLine{\textcolor{comment}{/// Setup algebraic mesh update -\/-\/ assumes that mesh has}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// initially been set up with the wall in its undeformed position.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} MyAlgebraicCollapsibleChannelMesh<ELEMENT>::setup\_algebraic\_node\_update()}
@@ -313,8 +313,8 @@ The function {\ttfamily algebraic\+\_\+node\+\_\+update(...)} reverses the setup
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=============start\_of\_algebraic\_node\_update======================}}
-\DoxyCodeLine{\textcolor{comment}{/// Perform algebraic mesh update at time level t (t=0: present; }\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// t>0: previous)}}
+\DoxyCodeLine{\textcolor{comment}{/// Perform algebraic mesh update at time level t (t=0: present; }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// t>0: previous)}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} MyAlgebraicCollapsibleChannelMesh<ELEMENT>::algebraic\_node\_update(}
@@ -422,8 +422,8 @@ and obtain the current wall position from the wall {\ttfamily Geom\+Object}.
   
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===========start\_refineable\_algebraic\_collapsible\_channel\_mesh======}}
-\DoxyCodeLine{\textcolor{comment}{/// Refineable version of the CollapsibleChannel mesh with}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// algebraic node update.}}
+\DoxyCodeLine{\textcolor{comment}{/// Refineable version of the CollapsibleChannel mesh with}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// algebraic node update.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }MyRefineableAlgebraicCollapsibleChannelMesh : }

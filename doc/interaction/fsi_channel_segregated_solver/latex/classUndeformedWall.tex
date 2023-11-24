@@ -23,7 +23,7 @@ Inheritance diagram for Undeformed\+Wall\+:\begin{figure}[H]
 void \mbox{\hyperlink{classUndeformedWall_ab0410681e2096091319a79e79937cba3}{position}} (const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r) const
 \begin{DoxyCompactList}\small\item\em Position vector at Lagrangian coordinate zeta. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classUndeformedWall_a9cbb52e30fd47d1841c1c3dc812f4b96}{position}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r) const
-\begin{DoxyCompactList}\small\item\em Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous timestep. Calls steady version. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t$>$0\+: previous timestep. Calls steady version. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classUndeformedWall_a709e65fc95e9443a886125e455595e5d}{d2position}} (const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r, Dense\+Matrix$<$ double $>$ \&drdzeta, Rank\+Three\+Tensor$<$ double $>$ \&ddrdzeta) const
 \begin{DoxyCompactList}\small\item\em Posn vector and its 1st \& 2nd derivatives w.\+r.\+t. to coordinates\+: $ \frac{dR_i}{d \zeta_\alpha}$ = drdzeta(alpha,i). $ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$ = ddrdzeta(alpha,beta,i). Evaluated at current time. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
@@ -40,7 +40,7 @@ double \mbox{\hyperlink{classUndeformedWall_a4525dbe0b5d2108ee51f16bee9af88ef}{H
 
 Undeformed wall is a steady, straight 1D line in 2D space \[ x = X_0 + \zeta \] \[ y = H \] 
 
-Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00155}{155}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
+Definition at line 155 of file fsi\+\_\+chan\+\_\+problem.\+h.
 
 
 
@@ -57,11 +57,11 @@ Constructor\+: arguments are the starting point and the height above y=0.
 
 
 
-Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00162}{162}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
+Definition at line 162 of file fsi\+\_\+chan\+\_\+problem.\+h.
 
 
 
-References \mbox{\hyperlink{fsi__chan__problem_8h_source_l00220}{H}}, and \mbox{\hyperlink{fsi__chan__problem_8h_source_l00217}{X0}}.
+References H, and X0.
 
 
 
@@ -78,11 +78,11 @@ Posn vector and its 1st \& 2nd derivatives w.\+r.\+t. to coordinates\+: $ \frac{
 
 
 
-Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00195}{195}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
+Definition at line 195 of file fsi\+\_\+chan\+\_\+problem.\+h.
 
 
 
-References \mbox{\hyperlink{fsi__chan__problem_8h_source_l00220}{H}}, and \mbox{\hyperlink{fsi__chan__problem_8h_source_l00217}{X0}}.
+References H, and X0.
 
 \mbox{\Hypertarget{classUndeformedWall_a9cbb52e30fd47d1841c1c3dc812f4b96}\label{classUndeformedWall_a9cbb52e30fd47d1841c1c3dc812f4b96}} 
 \index{UndeformedWall@{UndeformedWall}!position@{position}}
@@ -92,15 +92,15 @@ References \mbox{\hyperlink{fsi__chan__problem_8h_source_l00220}{H}}, and \mbox{
 
 
 
-Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous timestep. Calls steady version. 
+Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t$>$0\+: previous timestep. Calls steady version. 
 
 
 
-Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00181}{181}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
+Definition at line 181 of file fsi\+\_\+chan\+\_\+problem.\+h.
 
 
 
-References \mbox{\hyperlink{fsi__chan__problem_8h_source_l00170}{position()}}.
+References position().
 
 \mbox{\Hypertarget{classUndeformedWall_ab0410681e2096091319a79e79937cba3}\label{classUndeformedWall_ab0410681e2096091319a79e79937cba3}} 
 \index{UndeformedWall@{UndeformedWall}!position@{position}}
@@ -114,15 +114,15 @@ Position vector at Lagrangian coordinate zeta.
 
 
 
-Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00170}{170}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
+Definition at line 170 of file fsi\+\_\+chan\+\_\+problem.\+h.
 
 
 
-References \mbox{\hyperlink{fsi__chan__problem_8h_source_l00220}{H}}, and \mbox{\hyperlink{fsi__chan__problem_8h_source_l00217}{X0}}.
+References H, and X0.
 
 
 
-Referenced by \mbox{\hyperlink{fsi__chan__problem_8h_source_l00181}{position()}}.
+Referenced by position().
 
 
 
@@ -139,11 +139,11 @@ Height of the undeformed wall above y=0.
 
 
 
-Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00220}{220}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
+Definition at line 220 of file fsi\+\_\+chan\+\_\+problem.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{fsi__chan__problem_8h_source_l00195}{d2position()}}, \mbox{\hyperlink{fsi__chan__problem_8h_source_l00170}{position()}}, and \mbox{\hyperlink{fsi__chan__problem_8h_source_l00162}{Undeformed\+Wall()}}.
+Referenced by d2position(), position(), and Undeformed\+Wall().
 
 \mbox{\Hypertarget{classUndeformedWall_a7ab875c46fef905df33eb47e0336581b}\label{classUndeformedWall_a7ab875c46fef905df33eb47e0336581b}} 
 \index{UndeformedWall@{UndeformedWall}!X0@{X0}}
@@ -157,11 +157,11 @@ x position of the undeformed beam\textquotesingle{}s left end.
 
 
 
-Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00217}{217}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
+Definition at line 217 of file fsi\+\_\+chan\+\_\+problem.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{fsi__chan__problem_8h_source_l00195}{d2position()}}, \mbox{\hyperlink{fsi__chan__problem_8h_source_l00170}{position()}}, and \mbox{\hyperlink{fsi__chan__problem_8h_source_l00162}{Undeformed\+Wall()}}.
+Referenced by d2position(), position(), and Undeformed\+Wall().
 
 
 

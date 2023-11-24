@@ -124,7 +124,7 @@ The Reynolds number is the only non-\/dimensional parameter needed in this probl
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_namespace==============================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for physical parameters}}
-\DoxyCodeLine{\textcolor{comment}{//==================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -142,8 +142,8 @@ We start by creating a {\ttfamily Doc\+Info} object to store the output director
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_main======================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Driver for RectangularDrivenCavity test problem -\/-\/ test drive}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// with two different types of element.}}
+\DoxyCodeLine{\textcolor{comment}{/// Driver for RectangularDrivenCavity test problem -\/-\/ test drive}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// with two different types of element.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{driven__cavity_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
 \DoxyCodeLine{\{}
@@ -219,7 +219,7 @@ The {\ttfamily Problem} class for our steady Navier-\/\+Stokes problem is very s
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_problem\_class============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driven cavity problem in rectangular domain}}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classRectangularDrivenCavityProblem}{RectangularDrivenCavityProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -238,7 +238,7 @@ The {\ttfamily Problem} class for our steady Navier-\/\+Stokes problem is very s
 \DoxyCodeLine{                   \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&pvalue)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{//Cast to full element type and fix the pressure at that element}}
-\DoxyCodeLine{   \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(\mbox{\hyperlink{classRectangularDrivenCavityProblem_a8ec8787540381698d45c5d46cf2dd7c9}{mesh\_pt}}()-\/>element\_pt(e))-\/>}
+\DoxyCodeLine{   \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(\mbox{\hyperlink{classRectangularDrivenCavityProblem_a408035d1f224641db75a2f48074e9593}{mesh\_pt}}()-\/>element\_pt(e))-\/>}
 \DoxyCodeLine{                          \mbox{\hyperlink{classRectangularDrivenCavityProblem_ac02d80f5241eeb04571577ce3b9f35a3}{fix\_pressure}}(pdof,pvalue);}
 \DoxyCodeLine{  \} \textcolor{comment}{// end of fix\_pressure}}
 
@@ -247,7 +247,7 @@ The {\ttfamily Problem} class for our steady Navier-\/\+Stokes problem is very s
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Update the after solve (empty)}}
+\DoxyCodeLine{ \textcolor{comment}{/// Update the after solve (empty)}}
 \DoxyCodeLine{ \textcolor{keywordtype}{void} actions\_after\_newton\_solve()\{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -313,7 +313,7 @@ Since this is a steady problem, the constructor is quite simple. We begin by bui
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_constructor==================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for RectangularDrivenCavity problem }}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classRectangularDrivenCavityProblem_ad7382f68a780f86ea5f0e9b7d4d119ec}{RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem}}()}
 \DoxyCodeLine{\{ }
@@ -402,7 +402,7 @@ As expected, this member function documents the computed solution.
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_doc\_solution=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRectangularDrivenCavityProblem_ab9540b4f539b7d62a1165cc42b4190ea}{RectangularDrivenCavityProblem<ELEMENT>::doc\_solution}}(DocInfo\& doc\_info)}
 \DoxyCodeLine{\{ }

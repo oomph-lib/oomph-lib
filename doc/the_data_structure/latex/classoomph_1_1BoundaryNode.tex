@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1BoundaryNode}{}\doxysection{oomph\+::Boundary\+Node\texorpdfstring{$<$}{<} NODE\+\_\+\+TYPE \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1BoundaryNode}{}\doxysection{oomph\+::Boundary\+Node$<$ NODE\+\_\+\+TYPE $>$ Class Template Reference}
 \label{classoomph_1_1BoundaryNode}\index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}}
 
 
@@ -9,7 +9,7 @@ A template Class for Boundary\+Nodes; that is Nodes that MAY live on the boundar
 
 {\ttfamily \#include $<$nodes.\+h$>$}
 
-Inheritance diagram for oomph\+::Boundary\+Node\texorpdfstring{$<$}{<} NODE\+\_\+\+TYPE \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Boundary\+Node$<$ NODE\+\_\+\+TYPE $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{classoomph_1_1BoundaryNode}
@@ -70,7 +70,7 @@ bool \mbox{\hyperlink{classoomph_1_1BoundaryNode_a373e3a5c0f617eb91a54fa88c8e83c
 \begin{DoxyCompactList}\small\item\em Return a boolean to indicate whether the data contains any copied values. If the node is periodic all values are copied. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1BoundaryNode_a787efb1b118065987222b4c40c15570d}{is\+\_\+a\+\_\+copy}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Return a boolean to indicate whether the i-\/th value is a copied value. If the node is periodic all values are copies. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1BoundaryNode_ac9fa4614f6410c5e845b62019d1070f0}{copied\+\_\+node\+\_\+pt}} () const
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1BoundaryNode_a37a3162c70bd12ab77d697a5ba35a789}{copied\+\_\+node\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Return pointer to copied node (null if the current node is not a copy) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BoundaryNode_a86dd914c93b468a84d5c3d202a34f33e}{assign\+\_\+eqn\+\_\+numbers}} (unsigned long \&global\+\_\+ndof, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $\ast$ $>$ \&dof\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Overload the equation assignment operation. \end{DoxyCompactList}\item 
@@ -91,9 +91,10 @@ void \mbox{\hyperlink{classoomph_1_1BoundaryNode_ab0ef928d7afc2ea759d35dbf4690b3
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class NODE\+\_\+\+TYPE$>$\newline
 class oomph\+::\+Boundary\+Node$<$ NODE\+\_\+\+TYPE $>$}
+
 A template Class for Boundary\+Nodes; that is Nodes that MAY live on the boundary of a \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}. The class is formed by a simple composition of the template parameter NODE\+\_\+\+TYPE, which must be a \mbox{\hyperlink{classoomph_1_1Node}{Node}} class and the \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase}{Boundary\+Node\+Base}} class. Final overloading of functions is always in favour of the \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase}{Boundary\+Node\+Base}} implementation; i.\+e. these nodes can live on boundaries. 
 
-Definition at line \mbox{\hyperlink{nodes_8h_source_l02241}{2241}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+Definition at line 2241 of file nodes.\+h.
 
 
 
@@ -111,7 +112,7 @@ Default Constructor.
 
 
 
-Definition at line \mbox{\hyperlink{nodes_8h_source_l02382}{2382}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+Definition at line 2382 of file nodes.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNode_a3d76a60cda13edec1549693fc6e49214}\label{classoomph_1_1BoundaryNode_a3d76a60cda13edec1549693fc6e49214}} 
 \index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!BoundaryNode@{BoundaryNode}}
@@ -126,7 +127,7 @@ Definition at line \mbox{\hyperlink{nodes_8h_source_l02382}{2382}} of file \mbox
 
 
 
-Definition at line \mbox{\hyperlink{nodes_8h_source_l02391}{2391}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+Definition at line 2391 of file nodes.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNode_a1a18c0a20d10ae670671de9600846edb}\label{classoomph_1_1BoundaryNode_a1a18c0a20d10ae670671de9600846edb}} 
 \index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!BoundaryNode@{BoundaryNode}}
@@ -141,7 +142,7 @@ Unsteady constructor for a \mbox{\hyperlink{classoomph_1_1BoundaryNode}{Boundary
 
 
 
-Definition at line \mbox{\hyperlink{nodes_8h_source_l02407}{2407}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+Definition at line 2407 of file nodes.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNode_a65d27f75e6e015ceb1978be7d3cd83bc}\label{classoomph_1_1BoundaryNode_a65d27f75e6e015ceb1978be7d3cd83bc}} 
 \index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!BoundaryNode@{BoundaryNode}}
@@ -156,7 +157,7 @@ Definition at line \mbox{\hyperlink{nodes_8h_source_l02407}{2407}} of file \mbox
 
 
 
-Definition at line \mbox{\hyperlink{nodes_8h_source_l02424}{2424}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+Definition at line 2424 of file nodes.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNode_a969b9b49766f702d755c71f3981cfe98}\label{classoomph_1_1BoundaryNode_a969b9b49766f702d755c71f3981cfe98}} 
 \index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!BoundaryNode@{BoundaryNode}}
@@ -171,7 +172,7 @@ Unsteady constructor for Solid-\/type boundary nodes Allocates storage for initi
 
 
 
-Definition at line \mbox{\hyperlink{nodes_8h_source_l02445}{2445}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+Definition at line 2445 of file nodes.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNode_a29f6d775e2f97943ad0588ed4df5de51}\label{classoomph_1_1BoundaryNode_a29f6d775e2f97943ad0588ed4df5de51}} 
 \index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!````~BoundaryNode@{$\sim$BoundaryNode}}
@@ -186,11 +187,11 @@ Destructor resets pointers if.
 
 
 
-Definition at line \mbox{\hyperlink{nodes_8h_source_l02462}{2462}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+Definition at line 2462 of file nodes.\+h.
 
 
 
-References \mbox{\hyperlink{nodes_8h_source_l02288}{oomph\+::\+Boundary\+Node$<$ NODE\+\_\+\+TYPE $>$\+::clear\+\_\+additional\+\_\+copied\+\_\+pointers()}}, \mbox{\hyperlink{nodes_8h_source_l02021}{oomph\+::\+Boundary\+Node\+Base\+::\+Copied\+\_\+node\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l02017}{oomph\+::\+Boundary\+Node\+Base\+::\+Index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt}}, and \mbox{\hyperlink{nodes_8cc_source_l00102}{oomph\+::\+Data\+::remove\+\_\+copy()}}.
+References oomph\+::\+Boundary\+Node$<$ NODE\+\_\+\+TYPE $>$\+::clear\+\_\+additional\+\_\+copied\+\_\+pointers(), oomph\+::\+Boundary\+Node\+Base\+::\+Copied\+\_\+node\+\_\+pt, i, oomph\+::\+Boundary\+Node\+Base\+::\+Index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt, and oomph\+::\+Data\+::remove\+\_\+copy().
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNode_a367f3be5bd90318a35d512185d6c645e}\label{classoomph_1_1BoundaryNode_a367f3be5bd90318a35d512185d6c645e}} 
 \index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!BoundaryNode@{BoundaryNode}}
@@ -219,11 +220,11 @@ Add the node to mesh boundary b, final overload.
 
 
 
-Definition at line \mbox{\hyperlink{nodes_8h_source_l02545}{2545}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+Definition at line 2545 of file nodes.\+h.
 
 
 
-References \mbox{\hyperlink{nodes_8cc_source_l03028}{oomph\+::\+Boundary\+Node\+Base\+::add\+\_\+to\+\_\+boundary()}}.
+References oomph\+::\+Boundary\+Node\+Base\+::add\+\_\+to\+\_\+boundary().
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNode_a04ba9bf0b13ec5a8da2e2a27d41a1ef5}\label{classoomph_1_1BoundaryNode_a04ba9bf0b13ec5a8da2e2a27d41a1ef5}} 
 \index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!assign\_additional\_values\_with\_face\_id@{assign\_additional\_values\_with\_face\_id}}
@@ -242,11 +243,11 @@ Implements \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase_a2af96b956e59182fe8bf
 
 
 
-Definition at line \mbox{\hyperlink{nodes_8h_source_l02677}{2677}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+Definition at line 2677 of file nodes.\+h.
 
 
 
-References \mbox{\hyperlink{nodes_8h_source_l02017}{oomph\+::\+Boundary\+Node\+Base\+::\+Index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt}}, \mbox{\hyperlink{nodes_8h_source_l02610}{oomph\+::\+Boundary\+Node$<$ NODE\+\_\+\+TYPE $>$\+::nvalue\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element()}}, and \mbox{\hyperlink{nodes_8h_source_l02854}{oomph\+::\+Boundary\+Node$<$ NODE\+\_\+\+TYPE $>$\+::resize()}}.
+References oomph\+::\+Boundary\+Node\+Base\+::\+Index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt, oomph\+::\+Boundary\+Node$<$ NODE\+\_\+\+TYPE $>$\+::nvalue\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element(), and oomph\+::\+Boundary\+Node$<$ NODE\+\_\+\+TYPE $>$\+::resize().
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNode_a86dd914c93b468a84d5c3d202a34f33e}\label{classoomph_1_1BoundaryNode_a86dd914c93b468a84d5c3d202a34f33e}} 
 \index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!assign\_eqn\_numbers@{assign\_eqn\_numbers}}
@@ -261,11 +262,11 @@ Overload the equation assignment operation.
 
 
 
-Definition at line \mbox{\hyperlink{nodes_8h_source_l02828}{2828}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+Definition at line 2828 of file nodes.\+h.
 
 
 
-References \mbox{\hyperlink{nodes_8cc_source_l00896}{oomph\+::\+Data\+::assign\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{nodes_8h_source_l02021}{oomph\+::\+Boundary\+Node\+Base\+::\+Copied\+\_\+node\+\_\+pt}}, and \mbox{\hyperlink{nodes_8h_source_l01765}{oomph\+::\+Solid\+Node\+::variable\+\_\+position\+\_\+pt()}}.
+References oomph\+::\+Data\+::assign\+\_\+eqn\+\_\+numbers(), oomph\+::\+Boundary\+Node\+Base\+::\+Copied\+\_\+node\+\_\+pt, and oomph\+::\+Solid\+Node\+::variable\+\_\+position\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNode_abf4d213105e2a484dab50e718a8ae654}\label{classoomph_1_1BoundaryNode_abf4d213105e2a484dab50e718a8ae654}} 
 \index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!boundary\_coordinates\_have\_been\_set\_up@{boundary\_coordinates\_have\_been\_set\_up}}
@@ -280,11 +281,11 @@ Have boundary coordinates been set up?
 
 
 
-Definition at line \mbox{\hyperlink{nodes_8h_source_l02517}{2517}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+Definition at line 2517 of file nodes.\+h.
 
 
 
-References \mbox{\hyperlink{nodes_8h_source_l02170}{oomph\+::\+Boundary\+Node\+Base\+::boundary\+\_\+coordinates\+\_\+have\+\_\+been\+\_\+set\+\_\+up()}}.
+References oomph\+::\+Boundary\+Node\+Base\+::boundary\+\_\+coordinates\+\_\+have\+\_\+been\+\_\+set\+\_\+up().
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNode_ab0ef928d7afc2ea759d35dbf4690b341}\label{classoomph_1_1BoundaryNode_ab0ef928d7afc2ea759d35dbf4690b341}} 
 \index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!clear\_additional\_copied\_pointers@{clear\_additional\_copied\_pointers}}
@@ -299,15 +300,15 @@ Copy over additional information so that if the node is periodic it can remain a
 
 
 
-Definition at line \mbox{\hyperlink{nodes_8h_source_l02288}{2288}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+Definition at line 2288 of file nodes.\+h.
 
 
 
-References \mbox{\hyperlink{nodes_8h_source_l02021}{oomph\+::\+Boundary\+Node\+Base\+::\+Copied\+\_\+node\+\_\+pt}}, and \mbox{\hyperlink{nodes_8h_source_l02046}{oomph\+::\+Boundary\+Node\+Base\+::index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt()}}.
+References oomph\+::\+Boundary\+Node\+Base\+::\+Copied\+\_\+node\+\_\+pt, and oomph\+::\+Boundary\+Node\+Base\+::index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt().
 
 
 
-Referenced by \mbox{\hyperlink{nodes_8h_source_l02462}{oomph\+::\+Boundary\+Node$<$ NODE\+\_\+\+TYPE $>$\+::$\sim$\+Boundary\+Node()}}.
+Referenced by oomph\+::\+Boundary\+Node$<$ NODE\+\_\+\+TYPE $>$\+::$\sim$\+Boundary\+Node().
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNode_a8310f571e69ee1d3f9de4fd4ac32c656}\label{classoomph_1_1BoundaryNode_a8310f571e69ee1d3f9de4fd4ac32c656}} 
 \index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!clear\_copied\_pointers@{clear\_copied\_pointers}}
@@ -322,18 +323,18 @@ Clear pointers to the copied data used when we have periodic nodes. The shallow 
 
 
 
-Definition at line \mbox{\hyperlink{nodes_8h_source_l02332}{2332}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+Definition at line 2332 of file nodes.\+h.
 
 
 
-References \mbox{\hyperlink{nodes_8h_source_l02021}{oomph\+::\+Boundary\+Node\+Base\+::\+Copied\+\_\+node\+\_\+pt}}, \mbox{\hyperlink{nodes_8h_source_l00367}{oomph\+::\+Data\+::eqn\+\_\+number()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{nodes_8cc_source_l02408}{oomph\+::\+Node\+::value()}}.
+References oomph\+::\+Boundary\+Node\+Base\+::\+Copied\+\_\+node\+\_\+pt, oomph\+::\+Data\+::eqn\+\_\+number(), i, t, and oomph\+::\+Node\+::value().
 
-\mbox{\Hypertarget{classoomph_1_1BoundaryNode_ac9fa4614f6410c5e845b62019d1070f0}\label{classoomph_1_1BoundaryNode_ac9fa4614f6410c5e845b62019d1070f0}} 
+\mbox{\Hypertarget{classoomph_1_1BoundaryNode_a37a3162c70bd12ab77d697a5ba35a789}\label{classoomph_1_1BoundaryNode_a37a3162c70bd12ab77d697a5ba35a789}} 
 \index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!copied\_node\_pt@{copied\_node\_pt}}
 \index{copied\_node\_pt@{copied\_node\_pt}!oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}}
 \doxysubsubsection{\texorpdfstring{copied\_node\_pt()}{copied\_node\_pt()}}
 {\footnotesize\ttfamily template$<$class NODE\+\_\+\+TYPE $>$ \\
-\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1BoundaryNode}{oomph\+::\+Boundary\+Node}}$<$ NODE\+\_\+\+TYPE $>$\+::copied\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$ \mbox{\hyperlink{classoomph_1_1BoundaryNode}{oomph\+::\+Boundary\+Node}}$<$ NODE\+\_\+\+TYPE $>$\+::copied\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -341,11 +342,11 @@ Return pointer to copied node (null if the current node is not a copy)
 
 
 
-Definition at line \mbox{\hyperlink{nodes_8h_source_l02822}{2822}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+Definition at line 2822 of file nodes.\+h.
 
 
 
-References \mbox{\hyperlink{nodes_8h_source_l02021}{oomph\+::\+Boundary\+Node\+Base\+::\+Copied\+\_\+node\+\_\+pt}}.
+References oomph\+::\+Boundary\+Node\+Base\+::\+Copied\+\_\+node\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNode_af0ed7828ec05bded2cd8d1c5576fbe5d}\label{classoomph_1_1BoundaryNode_af0ed7828ec05bded2cd8d1c5576fbe5d}} 
 \index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!get\_boundaries\_pt@{get\_boundaries\_pt}}
@@ -360,11 +361,11 @@ Access to pointer to set of mesh boundaries that this node occupies; NULL if the
 
 
 
-Definition at line \mbox{\hyperlink{nodes_8h_source_l02525}{2525}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+Definition at line 2525 of file nodes.\+h.
 
 
 
-References \mbox{\hyperlink{nodes_8h_source_l02177}{oomph\+::\+Boundary\+Node\+Base\+::get\+\_\+boundaries\+\_\+pt()}}.
+References oomph\+::\+Boundary\+Node\+Base\+::get\+\_\+boundaries\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNode_af333382e63fa01ba1a22d9964cfe92c0}\label{classoomph_1_1BoundaryNode_af333382e63fa01ba1a22d9964cfe92c0}} 
 \index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!get\_coordinates\_on\_boundary@{get\_coordinates\_on\_boundary}}
@@ -379,11 +380,11 @@ Return the vector of k-\/th generalised boundary coordinates on mesh boundary b 
 
 
 
-Definition at line \mbox{\hyperlink{nodes_8h_source_l02583}{2583}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+Definition at line 2583 of file nodes.\+h.
 
 
 
-References \mbox{\hyperlink{nodes_8h_source_l02201}{oomph\+::\+Boundary\+Node\+Base\+::get\+\_\+coordinates\+\_\+on\+\_\+boundary()}}.
+References oomph\+::\+Boundary\+Node\+Base\+::get\+\_\+coordinates\+\_\+on\+\_\+boundary().
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNode_ac532d47cb38f559cae6f4ed9bdd248cd}\label{classoomph_1_1BoundaryNode_ac532d47cb38f559cae6f4ed9bdd248cd}} 
 \index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!get\_coordinates\_on\_boundary@{get\_coordinates\_on\_boundary}}
@@ -398,11 +399,11 @@ Return the vector of coordinates on mesh boundary b Final overload.
 
 
 
-Definition at line \mbox{\hyperlink{nodes_8h_source_l02566}{2566}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+Definition at line 2566 of file nodes.\+h.
 
 
 
-References \mbox{\hyperlink{nodes_8h_source_l02201}{oomph\+::\+Boundary\+Node\+Base\+::get\+\_\+coordinates\+\_\+on\+\_\+boundary()}}.
+References oomph\+::\+Boundary\+Node\+Base\+::get\+\_\+coordinates\+\_\+on\+\_\+boundary().
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNode_a373e3a5c0f617eb91a54fa88c8e83c9e}\label{classoomph_1_1BoundaryNode_a373e3a5c0f617eb91a54fa88c8e83c9e}} 
 \index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!is\_a\_copy@{is\_a\_copy}}
@@ -417,11 +418,11 @@ Return a boolean to indicate whether the data contains any copied values. If the
 
 
 
-Definition at line \mbox{\hyperlink{nodes_8h_source_l02792}{2792}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+Definition at line 2792 of file nodes.\+h.
 
 
 
-References \mbox{\hyperlink{nodes_8h_source_l02021}{oomph\+::\+Boundary\+Node\+Base\+::\+Copied\+\_\+node\+\_\+pt}}.
+References oomph\+::\+Boundary\+Node\+Base\+::\+Copied\+\_\+node\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNode_a787efb1b118065987222b4c40c15570d}\label{classoomph_1_1BoundaryNode_a787efb1b118065987222b4c40c15570d}} 
 \index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!is\_a\_copy@{is\_a\_copy}}
@@ -436,11 +437,11 @@ Return a boolean to indicate whether the i-\/th value is a copied value. If the 
 
 
 
-Definition at line \mbox{\hyperlink{nodes_8h_source_l02807}{2807}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+Definition at line 2807 of file nodes.\+h.
 
 
 
-References \mbox{\hyperlink{nodes_8h_source_l02021}{oomph\+::\+Boundary\+Node\+Base\+::\+Copied\+\_\+node\+\_\+pt}}.
+References oomph\+::\+Boundary\+Node\+Base\+::\+Copied\+\_\+node\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNode_a70e488e087d1da3ec13c4412935e5644}\label{classoomph_1_1BoundaryNode_a70e488e087d1da3ec13c4412935e5644}} 
 \index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!is\_on\_boundary@{is\_on\_boundary}}
@@ -455,15 +456,15 @@ Test whether the node lies on a boundary Final overload.
 
 
 
-Definition at line \mbox{\hyperlink{nodes_8h_source_l02532}{2532}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+Definition at line 2532 of file nodes.\+h.
 
 
 
-References \mbox{\hyperlink{nodes_8h_source_l02189}{oomph\+::\+Boundary\+Node\+Base\+::is\+\_\+on\+\_\+boundary()}}.
+References oomph\+::\+Boundary\+Node\+Base\+::is\+\_\+on\+\_\+boundary().
 
 
 
-Referenced by \mbox{\hyperlink{hermite__element__quad__mesh_8template_8cc_source_l00116}{oomph\+::\+Hermite\+Quad\+Mesh$<$ ELEMENT $>$\+::set\+\_\+position\+\_\+of\+\_\+boundary\+\_\+node()}}.
+Referenced by oomph\+::\+Hermite\+Quad\+Mesh$<$ ELEMENT $>$\+::set\+\_\+position\+\_\+of\+\_\+boundary\+\_\+node().
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNode_afd7aca2edeec2464ed080163b90d26a1}\label{classoomph_1_1BoundaryNode_afd7aca2edeec2464ed080163b90d26a1}} 
 \index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!is\_on\_boundary@{is\_on\_boundary}}
@@ -478,11 +479,11 @@ Test whether the node lies on mesh boundary b Final overload.
 
 
 
-Definition at line \mbox{\hyperlink{nodes_8h_source_l02539}{2539}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+Definition at line 2539 of file nodes.\+h.
 
 
 
-References \mbox{\hyperlink{nodes_8h_source_l02189}{oomph\+::\+Boundary\+Node\+Base\+::is\+\_\+on\+\_\+boundary()}}.
+References oomph\+::\+Boundary\+Node\+Base\+::is\+\_\+on\+\_\+boundary().
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNode_a96a34bd1911f8a125be570f361d3a211}\label{classoomph_1_1BoundaryNode_a96a34bd1911f8a125be570f361d3a211}} 
 \index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!make\_periodic@{make\_periodic}}
@@ -497,11 +498,11 @@ Make the node periodic.
 
 
 
-Definition at line \mbox{\hyperlink{nodes_8h_source_l02778}{2778}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+Definition at line 2778 of file nodes.\+h.
 
 
 
-References \mbox{\hyperlink{nodes_8cc_source_l02951}{oomph\+::\+Boundary\+Node\+Base\+::make\+\_\+node\+\_\+periodic()}}.
+References oomph\+::\+Boundary\+Node\+Base\+::make\+\_\+node\+\_\+periodic().
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNode_a11c0b14661482e08d65fb9ecaa9d73ec}\label{classoomph_1_1BoundaryNode_a11c0b14661482e08d65fb9ecaa9d73ec}} 
 \index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!make\_periodic@{make\_periodic}}
@@ -515,11 +516,11 @@ Make the node periodic.
 
 
 
-Definition at line \mbox{\hyperlink{nodes_8h_source_l02885}{2885}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+Definition at line 2885 of file nodes.\+h.
 
 
 
-References \mbox{\hyperlink{nodes_8cc_source_l02951}{oomph\+::\+Boundary\+Node\+Base\+::make\+\_\+node\+\_\+periodic()}}.
+References oomph\+::\+Boundary\+Node\+Base\+::make\+\_\+node\+\_\+periodic().
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNode_a540781a9eecfc8b4c2fa28723d088745}\label{classoomph_1_1BoundaryNode_a540781a9eecfc8b4c2fa28723d088745}} 
 \index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!make\_periodic\_nodes@{make\_periodic\_nodes}}
@@ -534,11 +535,11 @@ Make the nodes passed in periodic\+\_\+nodes periodic from this node.
 
 
 
-Definition at line \mbox{\hyperlink{nodes_8h_source_l02785}{2785}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+Definition at line 2785 of file nodes.\+h.
 
 
 
-References \mbox{\hyperlink{nodes_8cc_source_l02896}{oomph\+::\+Boundary\+Node\+Base\+::make\+\_\+nodes\+\_\+periodic()}}.
+References oomph\+::\+Boundary\+Node\+Base\+::make\+\_\+nodes\+\_\+periodic().
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNode_a1fdf098d397c0b677566f353efae23a7}\label{classoomph_1_1BoundaryNode_a1fdf098d397c0b677566f353efae23a7}} 
 \index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!ncoordinates\_on\_boundary@{ncoordinates\_on\_boundary}}
@@ -553,11 +554,11 @@ Get the number of boundary coordinates on mesh boundary b.
 
 
 
-Definition at line \mbox{\hyperlink{nodes_8h_source_l02558}{2558}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+Definition at line 2558 of file nodes.\+h.
 
 
 
-References \mbox{\hyperlink{nodes_8cc_source_l03119}{oomph\+::\+Boundary\+Node\+Base\+::ncoordinates\+\_\+on\+\_\+boundary()}}.
+References oomph\+::\+Boundary\+Node\+Base\+::ncoordinates\+\_\+on\+\_\+boundary().
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNode_ac3a1c7120899518a10ae86bb8b1b6f17}\label{classoomph_1_1BoundaryNode_ac3a1c7120899518a10ae86bb8b1b6f17}} 
 \index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!nvalue\_assigned\_by\_face\_element@{nvalue\_assigned\_by\_face\_element}}
@@ -576,15 +577,15 @@ Implements \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase_ae0d9f15e311861a09073
 
 
 
-Definition at line \mbox{\hyperlink{nodes_8h_source_l02610}{2610}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+Definition at line 2610 of file nodes.\+h.
 
 
 
-References \mbox{\hyperlink{nodes_8h_source_l02017}{oomph\+::\+Boundary\+Node\+Base\+::\+Index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt}}.
+References oomph\+::\+Boundary\+Node\+Base\+::\+Index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{nodes_8h_source_l02677}{oomph\+::\+Boundary\+Node$<$ NODE\+\_\+\+TYPE $>$\+::assign\+\_\+additional\+\_\+values\+\_\+with\+\_\+face\+\_\+id()}}.
+Referenced by oomph\+::\+Boundary\+Node$<$ NODE\+\_\+\+TYPE $>$\+::assign\+\_\+additional\+\_\+values\+\_\+with\+\_\+face\+\_\+id().
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNode_a2d3498b4d0ac4760a4cbc503a20c4c58}\label{classoomph_1_1BoundaryNode_a2d3498b4d0ac4760a4cbc503a20c4c58}} 
 \index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!operator=@{operator=}}
@@ -610,11 +611,11 @@ Remover the node from mesh boundary b, final overload.
 
 
 
-Definition at line \mbox{\hyperlink{nodes_8h_source_l02551}{2551}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+Definition at line 2551 of file nodes.\+h.
 
 
 
-References \mbox{\hyperlink{nodes_8cc_source_l03062}{oomph\+::\+Boundary\+Node\+Base\+::remove\+\_\+from\+\_\+boundary()}}.
+References oomph\+::\+Boundary\+Node\+Base\+::remove\+\_\+from\+\_\+boundary().
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNode_ab90ca88d1178cfab62445d198470d404}\label{classoomph_1_1BoundaryNode_ab90ca88d1178cfab62445d198470d404}} 
 \index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!reset\_copied\_pointers@{reset\_copied\_pointers}}
@@ -629,11 +630,11 @@ Set pointers to the copied data used when we have periodic nodes.
 
 
 
-Definition at line \mbox{\hyperlink{nodes_8h_source_l02245}{2245}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+Definition at line 2245 of file nodes.\+h.
 
 
 
-References \mbox{\hyperlink{nodes_8h_source_l02021}{oomph\+::\+Boundary\+Node\+Base\+::\+Copied\+\_\+node\+\_\+pt}}, \mbox{\hyperlink{nodes_8h_source_l00116}{oomph\+::\+Data\+::\+Eqn\+\_\+number}}, \mbox{\hyperlink{nodes_8h_source_l02046}{oomph\+::\+Boundary\+Node\+Base\+::index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}, and \mbox{\hyperlink{nodes_8h_source_l00112}{oomph\+::\+Data\+::\+Value}}.
+References oomph\+::\+Boundary\+Node\+Base\+::\+Copied\+\_\+node\+\_\+pt, oomph\+::\+Data\+::\+Eqn\+\_\+number, oomph\+::\+Boundary\+Node\+Base\+::index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt(), oomph\+::\+Data\+::nvalue(), and oomph\+::\+Data\+::\+Value.
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNode_a8ceaf97ad0211572e251091f84e4f607}\label{classoomph_1_1BoundaryNode_a8ceaf97ad0211572e251091f84e4f607}} 
 \index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!resize@{resize}}
@@ -648,15 +649,15 @@ Resize the number of equations.
 
 
 
-Definition at line \mbox{\hyperlink{nodes_8h_source_l02854}{2854}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+Definition at line 2854 of file nodes.\+h.
 
 
 
-References \mbox{\hyperlink{nodes_8h_source_l02021}{oomph\+::\+Boundary\+Node\+Base\+::\+Copied\+\_\+node\+\_\+pt}}, and \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}.
+References oomph\+::\+Boundary\+Node\+Base\+::\+Copied\+\_\+node\+\_\+pt, and oomph\+::\+Data\+::nvalue().
 
 
 
-Referenced by \mbox{\hyperlink{nodes_8h_source_l02677}{oomph\+::\+Boundary\+Node$<$ NODE\+\_\+\+TYPE $>$\+::assign\+\_\+additional\+\_\+values\+\_\+with\+\_\+face\+\_\+id()}}.
+Referenced by oomph\+::\+Boundary\+Node$<$ NODE\+\_\+\+TYPE $>$\+::assign\+\_\+additional\+\_\+values\+\_\+with\+\_\+face\+\_\+id().
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNode_ae47b80084ac968d1a7db32917749c56f}\label{classoomph_1_1BoundaryNode_ae47b80084ac968d1a7db32917749c56f}} 
 \index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!set\_coordinates\_on\_boundary@{set\_coordinates\_on\_boundary}}
@@ -671,11 +672,11 @@ Set the vector of k-\/th generalised boundary coordinates on mesh boundary b. Fi
 
 
 
-Definition at line \mbox{\hyperlink{nodes_8h_source_l02592}{2592}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+Definition at line 2592 of file nodes.\+h.
 
 
 
-References \mbox{\hyperlink{nodes_8h_source_l02210}{oomph\+::\+Boundary\+Node\+Base\+::set\+\_\+coordinates\+\_\+on\+\_\+boundary()}}.
+References oomph\+::\+Boundary\+Node\+Base\+::set\+\_\+coordinates\+\_\+on\+\_\+boundary().
 
 \mbox{\Hypertarget{classoomph_1_1BoundaryNode_a3478a8db5e0bb06a7091e53c467f31db}\label{classoomph_1_1BoundaryNode_a3478a8db5e0bb06a7091e53c467f31db}} 
 \index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!set\_coordinates\_on\_boundary@{set\_coordinates\_on\_boundary}}
@@ -690,15 +691,15 @@ Set the vector of coordinates on mesh boundary b Final overload.
 
 
 
-Definition at line \mbox{\hyperlink{nodes_8h_source_l02574}{2574}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+Definition at line 2574 of file nodes.\+h.
 
 
 
-References \mbox{\hyperlink{nodes_8h_source_l02210}{oomph\+::\+Boundary\+Node\+Base\+::set\+\_\+coordinates\+\_\+on\+\_\+boundary()}}.
+References oomph\+::\+Boundary\+Node\+Base\+::set\+\_\+coordinates\+\_\+on\+\_\+boundary().
 
 
 
-Referenced by \mbox{\hyperlink{hermite__element__quad__mesh_8template_8cc_source_l00116}{oomph\+::\+Hermite\+Quad\+Mesh$<$ ELEMENT $>$\+::set\+\_\+position\+\_\+of\+\_\+boundary\+\_\+node()}}.
+Referenced by oomph\+::\+Hermite\+Quad\+Mesh$<$ ELEMENT $>$\+::set\+\_\+position\+\_\+of\+\_\+boundary\+\_\+node().
 
 
 

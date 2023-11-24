@@ -62,7 +62,7 @@ As usual we define the global problem parameters in a namespace. We provide poin
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============namespace\_for\_problem\_parameters=====================}}
 \DoxyCodeLine{\textcolor{comment}{/// Global variables}}
-\DoxyCodeLine{\textcolor{comment}{//=================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to strain energy function}}
@@ -130,7 +130,7 @@ The driver code is very short\+: We store the command line arguments (as usual, 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====start\_of\_main====================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver code for disk-\/compression}}
-\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{disk__compression_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
@@ -293,16 +293,16 @@ We formulate the problem in cartesian coordinates (ignoring the problem\textquot
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==========start\_mesh=================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Elastic quarter circle sector mesh with functionality to}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// attach traction elements to the curved surface. We "{}upgrade"{}}}
-\DoxyCodeLine{\textcolor{comment}{/// the RefineableQuarterCircleSectorMesh to become an}}
-\DoxyCodeLine{\textcolor{comment}{/// SolidMesh and equate the Eulerian and Lagrangian coordinates,}}
-\DoxyCodeLine{\textcolor{comment}{/// thus making the domain represented by the mesh the stress-\/free }}
-\DoxyCodeLine{\textcolor{comment}{/// configuration. }}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)n\(\backslash\)n}}
-\DoxyCodeLine{\textcolor{comment}{/// The member function \(\backslash\)c make\_traction\_element\_mesh() creates}}
-\DoxyCodeLine{\textcolor{comment}{/// a separate mesh of SolidTractionElements that are attached to the}}
-\DoxyCodeLine{\textcolor{comment}{/// mesh's curved boundary (boundary 1). }}
+\DoxyCodeLine{\textcolor{comment}{/// Elastic quarter circle sector mesh with functionality to}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// attach traction elements to the curved surface. We "{}upgrade"{}}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// the RefineableQuarterCircleSectorMesh to become an}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// SolidMesh and equate the Eulerian and Lagrangian coordinates,}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// thus making the domain represented by the mesh the stress-\/free }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// configuration. }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// The member function \(\backslash\)c make\_traction\_element\_mesh() creates}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// a separate mesh of SolidTractionElements that are attached to the}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// mesh's curved boundary (boundary 1). }}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ElasticRefineableQuarterCircleSectorMesh}} :}

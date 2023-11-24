@@ -28,13 +28,13 @@ void \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_a292f8f8a2f2ad1a1
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_a14f33794f4ca25faad844a8b061ae164}{storage\+\_\+has\+\_\+been\+\_\+allocated}} () const
 \begin{DoxyCompactList}\small\item\em Helper function to check if storage has actually been allocated. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\& \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_aab865822c3ad3d29393f8d74153d180e}{external\+\_\+element\+\_\+pt}} (const unsigned \&interaction\+\_\+index, const unsigned \&ipt)
+\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\& \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_a30c8347cfed1bb9d4ebc500f705bc739}{external\+\_\+element\+\_\+pt}} (const unsigned \&interaction\+\_\+index, const unsigned \&ipt)
 \begin{DoxyCompactList}\small\item\em Access function to source element for specified interaction index at specified integration point. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \& \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_a8889aa8e2b42b68b98850e8532a640c3}{external\+\_\+element\+\_\+pt}} (const unsigned \&interaction\+\_\+index, const unsigned \&ipt) const
+\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const  \& \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_a1207eae30d379008502855f6a40021ab}{external\+\_\+element\+\_\+pt}} (const unsigned \&interaction\+\_\+index, const unsigned \&ipt) const
 \begin{DoxyCompactList}\small\item\em Access function to source element, const version. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \& \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_a13e8fd3c9a0723f0fb6539ba3853b149}{external\+\_\+element\+\_\+local\+\_\+coord}} (const unsigned \&interaction\+\_\+index, const unsigned \&ipt)
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \& \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_a0f4b305e2da000ad7523ab02163c36cb}{external\+\_\+element\+\_\+local\+\_\+coord}} (const unsigned \&interaction\+\_\+index, const unsigned \&ipt)
 \begin{DoxyCompactList}\small\item\em Access function to get source element\textquotesingle{}s local coords for specified interaction index at specified integration point. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ const \& \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_ae99c49d2fc7c008d7ffe12b037097344}{external\+\_\+element\+\_\+local\+\_\+coord}} (const unsigned \&interaction\+\_\+index, const unsigned \&ipt) const
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ const  \& \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_af9da1e0b0cc58d18e32967763a697765}{external\+\_\+element\+\_\+local\+\_\+coord}} (const unsigned \&interaction\+\_\+index, const unsigned \&ipt) const
 \begin{DoxyCompactList}\small\item\em Access function to get source element\textquotesingle{}s coords, const version. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_a081a1881e0e5844e731178f277c17f1c}{output\+\_\+external\+\_\+elements}} (std\+::ostream \&outfile, const unsigned \&interaction\+\_\+index)
 \begin{DoxyCompactList}\small\item\em Output by plotting vector from integration point to corresponding point in external element for specified interaction index. \end{DoxyCompactList}\item 
@@ -46,13 +46,13 @@ void \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_a180b99d0cf83f3b2
 \begin{DoxyCompactList}\small\item\em Set the number of interactions in the element This function is usually called in the specific element\textquotesingle{}s constructor. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_ad63351d9c35ebe15e194a898a5daebc1}{ninteraction}} () const
 \begin{DoxyCompactList}\small\item\em Return the number of interactions in the element. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_aa6bbfc084b5f4654cc7f8c61a6f7a81b}{identify\+\_\+all\+\_\+field\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::set$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ $>$ const \&external\+\_\+elements\+\_\+pt, std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&paired\+\_\+interaction\+\_\+data)
+virtual void \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_acd9b05781cb87ada3c5cd6d57a1b58b1}{identify\+\_\+all\+\_\+field\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::set$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$$>$ const \&external\+\_\+elements\+\_\+pt, std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&paired\+\_\+interaction\+\_\+data)
 \begin{DoxyCompactList}\small\item\em Function that must return all the data involved in the desired interactions from the external element. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_a47aa0ca3b37d885d8432815c3418b769}{identify\+\_\+all\+\_\+geometric\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::set$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ $>$ const \&external\+\_\+elements\+\_\+pt, std\+::set$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ $>$ \&external\+\_\+geometric\+\_\+data\+\_\+pt)
+virtual void \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_a3cf75e1289d1a09b113fde7da01a61a5}{identify\+\_\+all\+\_\+geometric\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::set$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$$>$ const \&external\+\_\+elements\+\_\+pt, std\+::set$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ $>$ \&external\+\_\+geometric\+\_\+data\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Function that must return all geometric data involved in the desired interactions from the external element. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_a4b36dae007dc177425c50f30211890de}{nexternal\+\_\+interaction\+\_\+field\+\_\+data}} () const
 \begin{DoxyCompactList}\small\item\em Return the number of \mbox{\hyperlink{classoomph_1_1Data}{Data}} items that affect the external interactions in this element. This includes e.\+g. fluid velocities and pressures in adjacent fluid elements in an FSI problem. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_af526135c5fca4fc8d48061801e94c51e}{external\+\_\+interaction\+\_\+field\+\_\+data\+\_\+pt}} () const
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_a7d6b40e7100178b1edbb94f179555a34}{external\+\_\+interaction\+\_\+field\+\_\+data\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Return vector of pointers to the field \mbox{\hyperlink{classoomph_1_1Data}{Data}} objects that affect the interactions on the element. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_a4688ff13802ca29d654f925f6697df87}{nexternal\+\_\+interaction\+\_\+geometric\+\_\+data}} () const
 \begin{DoxyCompactList}\small\item\em Return the number of geometric \mbox{\hyperlink{classoomph_1_1Data}{Data}} items that affect the external interactions in this element\+: i.\+e. any geometric \mbox{\hyperlink{classoomph_1_1Data}{Data}} in the problem that affects the nodal positions in the external elements. \end{DoxyCompactList}\item 
@@ -60,7 +60,7 @@ bool \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_a41eabd3e3473b7f7
 \begin{DoxyCompactList}\small\item\em Are we including external geometric data in the element\textquotesingle{}s Jacobian. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_aa95c0d31dc83b46f30d43bb2379c0698}{add\+\_\+external\+\_\+interaction\+\_\+data}} ()
 \begin{DoxyCompactList}\small\item\em Are we including external data in the element\textquotesingle{}s Jacobian. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_a69c9bf653df874f36ab1d5fddf9ab503}{external\+\_\+interaction\+\_\+geometric\+\_\+data\+\_\+pt}} () const
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_ad9632a0a9391964020177d3507261545}{external\+\_\+interaction\+\_\+geometric\+\_\+data\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Return vector of pointers to the geometric \mbox{\hyperlink{classoomph_1_1Data}{Data}} objects that affect the interactions on the element. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_ad491ce37b07b2e15a95bb450409eb2b6}{ignore\+\_\+external\+\_\+geometric\+\_\+data}} ()
 \begin{DoxyCompactList}\small\item\em Do not include any external geometric data when computing the element\textquotesingle{}s Jacobian. This function should be called if the external element does not move and/or if the \char`\"{}source term\char`\"{} does not depend on spatial derivatives of the field computed by the other element. \end{DoxyCompactList}\item 
@@ -160,7 +160,7 @@ int $\ast$ \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_ae4da8e21a1
 \doxysubsection{Detailed Description}
 This is a base class for all elements that require external sources (e.\+g. FSI, multi-\/domain problems such as Helmholtz, multi-\/mesh Boussinesq convection, etc.). It provides storage for the source element and corresponding local coordinate at each integration point, and allows use of locate\+\_\+zeta to obtain such source elements. In addition separate storage is allocated for all field data in the external elements and all geometric data that can affect the field data in the external elements. Generic finite difference routines are provided to calculate entries in the Jacobian from the data of the external elements. 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00055}{55}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 55 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
@@ -177,7 +177,7 @@ Constructor. Initialise member data and pointers to data associated with the ext
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00060}{60}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 60 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a50c9f65653e46d6e018b31c0d941d391}\label{classoomph_1_1ElementWithExternalElement_a50c9f65653e46d6e018b31c0d941d391}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!````~ElementWithExternalElement@{$\sim$ElementWithExternalElement}}
@@ -191,11 +191,11 @@ The destructor, clean up any allocated memory.
 
 Destructor, clean up any memory allocated for the equation numbering schemes and storage for the external elements. 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8cc_source_l00036}{36}} of file \mbox{\hyperlink{element__with__external__element_8cc_source}{element\+\_\+with\+\_\+external\+\_\+element.\+cc}}.
+Definition at line 36 of file element\+\_\+with\+\_\+external\+\_\+element.\+cc.
 
 
 
-References \mbox{\hyperlink{element__with__external__element_8h_source_l00609}{External\+\_\+interaction\+\_\+field\+\_\+data\+\_\+index}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00613}{External\+\_\+interaction\+\_\+field\+\_\+data\+\_\+local\+\_\+eqn}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00515}{External\+\_\+interaction\+\_\+field\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00618}{External\+\_\+interaction\+\_\+geometric\+\_\+data\+\_\+index}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00622}{External\+\_\+interaction\+\_\+geometric\+\_\+data\+\_\+local\+\_\+eqn}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00519}{External\+\_\+interaction\+\_\+geometric\+\_\+data\+\_\+pt}}, and \mbox{\hyperlink{element__with__external__element_8cc_source_l00125}{flush\+\_\+all\+\_\+external\+\_\+element\+\_\+storage()}}.
+References External\+\_\+interaction\+\_\+field\+\_\+data\+\_\+index, External\+\_\+interaction\+\_\+field\+\_\+data\+\_\+local\+\_\+eqn, External\+\_\+interaction\+\_\+field\+\_\+data\+\_\+pt, External\+\_\+interaction\+\_\+geometric\+\_\+data\+\_\+index, External\+\_\+interaction\+\_\+geometric\+\_\+data\+\_\+local\+\_\+eqn, External\+\_\+interaction\+\_\+geometric\+\_\+data\+\_\+pt, and flush\+\_\+all\+\_\+external\+\_\+element\+\_\+storage().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a0d07a9edcb3e3e89c2a17252236fe03b}\label{classoomph_1_1ElementWithExternalElement_a0d07a9edcb3e3e89c2a17252236fe03b}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!ElementWithExternalElement@{ElementWithExternalElement}}
@@ -222,15 +222,15 @@ Are we including external geometric data in the element\textquotesingle{}s Jacob
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00238}{238}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 238 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__external__element_8h_source_l00511}{Add\+\_\+external\+\_\+geometric\+\_\+data}}.
+References Add\+\_\+external\+\_\+geometric\+\_\+data.
 
 
 
-Referenced by \mbox{\hyperlink{projection_8h_source_l00548}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::enable\+\_\+projection()}}.
+Referenced by oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::enable\+\_\+projection().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_aa95c0d31dc83b46f30d43bb2379c0698}\label{classoomph_1_1ElementWithExternalElement_aa95c0d31dc83b46f30d43bb2379c0698}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!add\_external\_interaction\_data@{add\_external\_interaction\_data}}
@@ -244,15 +244,15 @@ Are we including external data in the element\textquotesingle{}s Jacobian.
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00244}{244}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 244 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__external__element_8h_source_l00508}{Add\+\_\+external\+\_\+interaction\+\_\+data}}.
+References Add\+\_\+external\+\_\+interaction\+\_\+data.
 
 
 
-Referenced by \mbox{\hyperlink{projection_8h_source_l00548}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::enable\+\_\+projection()}}.
+Referenced by oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::enable\+\_\+projection().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_ade1035d03b79379a8d7b786217102214}\label{classoomph_1_1ElementWithExternalElement_ade1035d03b79379a8d7b786217102214}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!assign\_external\_interaction\_data\_local\_eqn\_numbers@{assign\_external\_interaction\_data\_local\_eqn\_numbers}}
@@ -266,15 +266,15 @@ Assign the local equation numbers for those \mbox{\hyperlink{classoomph_1_1Data}
 
 This function determines the all \mbox{\hyperlink{classoomph_1_1Data}{Data}} in external elemetns that affects the residuals of the element and adds their global equation numbers to the local-\/to-\/global look-\/up scheme. Note that we only include \mbox{\hyperlink{classoomph_1_1Data}{Data}} items into the element\textquotesingle{}s External\+\_\+interaction\+\_\+data if they are not already included in the element\textquotesingle{}s nodal positional \mbox{\hyperlink{classoomph_1_1Data}{Data}}, its internal or external \mbox{\hyperlink{classoomph_1_1Data}{Data}}. 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8cc_source_l00245}{245}} of file \mbox{\hyperlink{element__with__external__element_8cc_source}{element\+\_\+with\+\_\+external\+\_\+element.\+cc}}.
+Definition at line 245 of file element\+\_\+with\+\_\+external\+\_\+element.\+cc.
 
 
 
-References \mbox{\hyperlink{element__with__external__element_8h_source_l00511}{Add\+\_\+external\+\_\+geometric\+\_\+data}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00508}{Add\+\_\+external\+\_\+interaction\+\_\+data}}, \mbox{\hyperlink{elements_8cc_source_l00156}{oomph\+::\+Generalised\+Element\+::add\+\_\+global\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{elements_8h_source_l00231}{oomph\+::\+Generalised\+Element\+::\+Dof\+\_\+pt\+\_\+deque}}, \mbox{\hyperlink{nodes_8h_source_l00367}{oomph\+::\+Data\+::eqn\+\_\+number()}}, \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{elements_8h_source_l00659}{oomph\+::\+Generalised\+Element\+::external\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00107}{external\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00609}{External\+\_\+interaction\+\_\+field\+\_\+data\+\_\+index}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00613}{External\+\_\+interaction\+\_\+field\+\_\+data\+\_\+local\+\_\+eqn}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00515}{External\+\_\+interaction\+\_\+field\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00618}{External\+\_\+interaction\+\_\+geometric\+\_\+data\+\_\+index}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00622}{External\+\_\+interaction\+\_\+geometric\+\_\+data\+\_\+local\+\_\+eqn}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00519}{External\+\_\+interaction\+\_\+geometric\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l02667}{oomph\+::\+Finite\+Element\+::geom\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{element__with__external__element_8cc_source_l00152}{identify\+\_\+all\+\_\+field\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction()}}, \mbox{\hyperlink{element__with__external__element_8cc_source_l00178}{identify\+\_\+all\+\_\+geometric\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction()}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l00622}{oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l01163}{oomph\+::\+Generalised\+Element\+::is\+\_\+halo()}}, \mbox{\hyperlink{nodes_8h_source_l00183}{oomph\+::\+Data\+::\+Is\+\_\+pinned}}, \mbox{\hyperlink{elements_8h_source_l00726}{oomph\+::\+Generalised\+Element\+::local\+\_\+eqn\+\_\+number()}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{elements_8h_source_l00829}{oomph\+::\+Generalised\+Element\+::nexternal\+\_\+data()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00205}{nexternal\+\_\+interaction\+\_\+field\+\_\+data()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00591}{Nexternal\+\_\+interaction\+\_\+field\+\_\+data}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00232}{nexternal\+\_\+interaction\+\_\+geometric\+\_\+data()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00594}{Nexternal\+\_\+interaction\+\_\+geometric\+\_\+data}}, \mbox{\hyperlink{elements_8h_source_l02660}{oomph\+::\+Finite\+Element\+::ngeom\+\_\+data()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00184}{ninteraction()}}, \mbox{\hyperlink{elements_8h_source_l00823}{oomph\+::\+Generalised\+Element\+::ninternal\+\_\+data()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, and \mbox{\hyperlink{nodes_8h_source_l01765}{oomph\+::\+Solid\+Node\+::variable\+\_\+position\+\_\+pt()}}.
+References Add\+\_\+external\+\_\+geometric\+\_\+data, Add\+\_\+external\+\_\+interaction\+\_\+data, oomph\+::\+Generalised\+Element\+::add\+\_\+global\+\_\+eqn\+\_\+numbers(), oomph\+::\+Generalised\+Element\+::\+Dof\+\_\+pt\+\_\+deque, oomph\+::\+Data\+::eqn\+\_\+number(), oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), oomph\+::\+Generalised\+Element\+::external\+\_\+data\+\_\+pt(), external\+\_\+element\+\_\+pt(), External\+\_\+interaction\+\_\+field\+\_\+data\+\_\+index, External\+\_\+interaction\+\_\+field\+\_\+data\+\_\+local\+\_\+eqn, External\+\_\+interaction\+\_\+field\+\_\+data\+\_\+pt, External\+\_\+interaction\+\_\+geometric\+\_\+data\+\_\+index, External\+\_\+interaction\+\_\+geometric\+\_\+data\+\_\+local\+\_\+eqn, External\+\_\+interaction\+\_\+geometric\+\_\+data\+\_\+pt, oomph\+::\+Finite\+Element\+::geom\+\_\+data\+\_\+pt(), i, identify\+\_\+all\+\_\+field\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction(), identify\+\_\+all\+\_\+geometric\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction(), oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt(), oomph\+::\+Generalised\+Element\+::is\+\_\+halo(), oomph\+::\+Data\+::\+Is\+\_\+pinned, oomph\+::\+Generalised\+Element\+::local\+\_\+eqn\+\_\+number(), oomph\+::\+Generalised\+Element\+::ndof(), oomph\+::\+Generalised\+Element\+::nexternal\+\_\+data(), nexternal\+\_\+interaction\+\_\+field\+\_\+data(), Nexternal\+\_\+interaction\+\_\+field\+\_\+data, nexternal\+\_\+interaction\+\_\+geometric\+\_\+data(), Nexternal\+\_\+interaction\+\_\+geometric\+\_\+data, oomph\+::\+Finite\+Element\+::ngeom\+\_\+data(), ninteraction(), oomph\+::\+Generalised\+Element\+::ninternal\+\_\+data(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Data\+::nvalue(), oomph\+::\+Integral\+::nweight(), and oomph\+::\+Solid\+Node\+::variable\+\_\+position\+\_\+pt().
 
 
 
-Referenced by \mbox{\hyperlink{element__with__external__element_8h_source_l00320}{assign\+\_\+internal\+\_\+and\+\_\+external\+\_\+local\+\_\+eqn\+\_\+numbers()}}.
+Referenced by assign\+\_\+internal\+\_\+and\+\_\+external\+\_\+local\+\_\+eqn\+\_\+numbers().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_ab8f4dda35ec3b01fe97701d7047b3a9d}\label{classoomph_1_1ElementWithExternalElement_ab8f4dda35ec3b01fe97701d7047b3a9d}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!assign\_internal\_and\_external\_local\_eqn\_numbers@{assign\_internal\_and\_external\_local\_eqn\_numbers}}
@@ -292,11 +292,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_aa4884467f3
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00320}{320}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 320 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__external__element_8cc_source_l00246}{assign\+\_\+external\+\_\+interaction\+\_\+data\+\_\+local\+\_\+eqn\+\_\+numbers()}}, and \mbox{\hyperlink{elements_8cc_source_l00938}{oomph\+::\+Generalised\+Element\+::assign\+\_\+internal\+\_\+and\+\_\+external\+\_\+local\+\_\+eqn\+\_\+numbers()}}.
+References assign\+\_\+external\+\_\+interaction\+\_\+data\+\_\+local\+\_\+eqn\+\_\+numbers(), and oomph\+::\+Generalised\+Element\+::assign\+\_\+internal\+\_\+and\+\_\+external\+\_\+local\+\_\+eqn\+\_\+numbers().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a6fd8c3cb72d4feedeb8750d830f66222}\label{classoomph_1_1ElementWithExternalElement_a6fd8c3cb72d4feedeb8750d830f66222}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!check\_storage\_allocated@{check\_storage\_allocated}}
@@ -310,15 +310,15 @@ Helper function to check that storage has actually been allocated.
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00523}{523}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 523 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__external__element_8h_source_l00605}{External\+\_\+element\+\_\+local\+\_\+coord}}, and \mbox{\hyperlink{element__with__external__element_8h_source_l00600}{External\+\_\+element\+\_\+pt}}.
+References External\+\_\+element\+\_\+local\+\_\+coord, and External\+\_\+element\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{element__with__external__element_8h_source_l00136}{external\+\_\+element\+\_\+local\+\_\+coord()}}, and \mbox{\hyperlink{element__with__external__element_8h_source_l00107}{external\+\_\+element\+\_\+pt()}}.
+Referenced by external\+\_\+element\+\_\+local\+\_\+coord(), and external\+\_\+element\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a2a1753bed2e822d399aa3525f1bdac4b}\label{classoomph_1_1ElementWithExternalElement_a2a1753bed2e822d399aa3525f1bdac4b}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!describe\_local\_dofs@{describe\_local\_dofs}}
@@ -336,25 +336,25 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_aad9f9ebb2996fd9
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1FaceElementAsGeomObject_a13703c5fac7edda661a3c5cd1f22b9fd}{oomph\+::\+Face\+Element\+As\+Geom\+Object$<$ ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1FSIWallElement_afe120348dddfc3acfd95e7d08c2d0a1d}{oomph\+::\+FSIWall\+Element}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a9e7e6d213f5e28d4b1e91433d4efb74c}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a9e7e6d213f5e28d4b1e91433d4efb74c}{oomph\+::\+Projectable\+Element$<$ CROUZEIX\+\_\+\+RAVIART\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a9e7e6d213f5e28d4b1e91433d4efb74c}{oomph\+::\+Projectable\+Element$<$ TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a9e7e6d213f5e28d4b1e91433d4efb74c}{oomph\+::\+Projectable\+Element$<$ ADR\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a9e7e6d213f5e28d4b1e91433d4efb74c}{oomph\+::\+Projectable\+Element$<$ AXISYM\+\_\+\+LINEAR\+\_\+\+ELAST\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a9e7e6d213f5e28d4b1e91433d4efb74c}{oomph\+::\+Projectable\+Element$<$ AXISYMMETRIC\+\_\+\+POROELASTICITY\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a9e7e6d213f5e28d4b1e91433d4efb74c}{oomph\+::\+Projectable\+Element$<$ DARCY\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a9e7e6d213f5e28d4b1e91433d4efb74c}{oomph\+::\+Projectable\+Element$<$ FVK\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a9e7e6d213f5e28d4b1e91433d4efb74c}{oomph\+::\+Projectable\+Element$<$ FOURIER\+\_\+\+DECOMPOSED\+\_\+\+HELMHOLTZ\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a9e7e6d213f5e28d4b1e91433d4efb74c}{oomph\+::\+Projectable\+Element$<$ HELMHOLTZ\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a9e7e6d213f5e28d4b1e91433d4efb74c}{oomph\+::\+Projectable\+Element$<$ LINEAR\+\_\+\+ELAST\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a9e7e6d213f5e28d4b1e91433d4efb74c}{oomph\+::\+Projectable\+Element$<$ TIME\+\_\+\+HARMONIC\+\_\+\+LINEAR\+\_\+\+ELAST\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a9e7e6d213f5e28d4b1e91433d4efb74c}{oomph\+::\+Projectable\+Element$<$ PVD\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a9e7e6d213f5e28d4b1e91433d4efb74c}{oomph\+::\+Projectable\+Element$<$ POISSON\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a9e7e6d213f5e28d4b1e91433d4efb74c}{oomph\+::\+Projectable\+Element$<$ UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$}}, and \mbox{\hyperlink{classoomph_1_1FSIImposeDisplacementByLagrangeMultiplierElement_ad53849f509cfd0d3eb469bfacf7cfabf}{oomph\+::\+FSIImpose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ ELEMENT $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1FSIImposeDisplacementByLagrangeMultiplierElement_ad53849f509cfd0d3eb469bfacf7cfabf}{oomph\+::\+FSIImpose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a9e7e6d213f5e28d4b1e91433d4efb74c}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a9e7e6d213f5e28d4b1e91433d4efb74c}{oomph\+::\+Projectable\+Element$<$ FVK\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a9e7e6d213f5e28d4b1e91433d4efb74c}{oomph\+::\+Projectable\+Element$<$ AXISYM\+\_\+\+LINEAR\+\_\+\+ELAST\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a9e7e6d213f5e28d4b1e91433d4efb74c}{oomph\+::\+Projectable\+Element$<$ UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a9e7e6d213f5e28d4b1e91433d4efb74c}{oomph\+::\+Projectable\+Element$<$ LINEAR\+\_\+\+ELAST\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a9e7e6d213f5e28d4b1e91433d4efb74c}{oomph\+::\+Projectable\+Element$<$ CROUZEIX\+\_\+\+RAVIART\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a9e7e6d213f5e28d4b1e91433d4efb74c}{oomph\+::\+Projectable\+Element$<$ HELMHOLTZ\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a9e7e6d213f5e28d4b1e91433d4efb74c}{oomph\+::\+Projectable\+Element$<$ AXISYMMETRIC\+\_\+\+POROELASTICITY\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a9e7e6d213f5e28d4b1e91433d4efb74c}{oomph\+::\+Projectable\+Element$<$ TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a9e7e6d213f5e28d4b1e91433d4efb74c}{oomph\+::\+Projectable\+Element$<$ PVD\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a9e7e6d213f5e28d4b1e91433d4efb74c}{oomph\+::\+Projectable\+Element$<$ ADR\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a9e7e6d213f5e28d4b1e91433d4efb74c}{oomph\+::\+Projectable\+Element$<$ DARCY\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a9e7e6d213f5e28d4b1e91433d4efb74c}{oomph\+::\+Projectable\+Element$<$ POISSON\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a9e7e6d213f5e28d4b1e91433d4efb74c}{oomph\+::\+Projectable\+Element$<$ FOURIER\+\_\+\+DECOMPOSED\+\_\+\+HELMHOLTZ\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a9e7e6d213f5e28d4b1e91433d4efb74c}{oomph\+::\+Projectable\+Element$<$ TIME\+\_\+\+HARMONIC\+\_\+\+LINEAR\+\_\+\+ELAST\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1FSIWallElement_afe120348dddfc3acfd95e7d08c2d0a1d}{oomph\+::\+FSIWall\+Element}}, and \mbox{\hyperlink{classoomph_1_1FaceElementAsGeomObject_a13703c5fac7edda661a3c5cd1f22b9fd}{oomph\+::\+Face\+Element\+As\+Geom\+Object$<$ ELEMENT $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8cc_source_l00205}{205}} of file \mbox{\hyperlink{element__with__external__element_8cc_source}{element\+\_\+with\+\_\+external\+\_\+element.\+cc}}.
+Definition at line 205 of file element\+\_\+with\+\_\+external\+\_\+element.\+cc.
 
 
 
-References \mbox{\hyperlink{nodes_8cc_source_l00939}{oomph\+::\+Data\+::describe\+\_\+dofs()}}, \mbox{\hyperlink{elements_8cc_source_l00573}{oomph\+::\+Generalised\+Element\+::describe\+\_\+local\+\_\+dofs()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00515}{External\+\_\+interaction\+\_\+field\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00519}{External\+\_\+interaction\+\_\+geometric\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00205}{nexternal\+\_\+interaction\+\_\+field\+\_\+data()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00232}{nexternal\+\_\+interaction\+\_\+geometric\+\_\+data()}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
+References oomph\+::\+Data\+::describe\+\_\+dofs(), oomph\+::\+Generalised\+Element\+::describe\+\_\+local\+\_\+dofs(), External\+\_\+interaction\+\_\+field\+\_\+data\+\_\+pt, External\+\_\+interaction\+\_\+geometric\+\_\+data\+\_\+pt, i, nexternal\+\_\+interaction\+\_\+field\+\_\+data(), nexternal\+\_\+interaction\+\_\+geometric\+\_\+data(), and oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
 
 
 
-Referenced by \mbox{\hyperlink{face__element__as__geometric__object_8h_source_l00160}{oomph\+::\+Face\+Element\+As\+Geom\+Object$<$ ELEMENT $>$\+::describe\+\_\+local\+\_\+dofs()}}, \mbox{\hyperlink{projection_8h_source_l00209}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::describe\+\_\+local\+\_\+dofs()}}, and \mbox{\hyperlink{solid__traction__elements_8h_source_l02548}{oomph\+::\+FSIImpose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ ELEMENT $>$\+::describe\+\_\+local\+\_\+dofs()}}.
+Referenced by oomph\+::\+Face\+Element\+As\+Geom\+Object$<$ ELEMENT $>$\+::describe\+\_\+local\+\_\+dofs(), oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::describe\+\_\+local\+\_\+dofs(), and oomph\+::\+FSIImpose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ ELEMENT $>$\+::describe\+\_\+local\+\_\+dofs().
 
-\mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a13e8fd3c9a0723f0fb6539ba3853b149}\label{classoomph_1_1ElementWithExternalElement_a13e8fd3c9a0723f0fb6539ba3853b149}} 
+\mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a0f4b305e2da000ad7523ab02163c36cb}\label{classoomph_1_1ElementWithExternalElement_a0f4b305e2da000ad7523ab02163c36cb}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!external\_element\_local\_coord@{external\_element\_local\_coord}}
 \index{external\_element\_local\_coord@{external\_element\_local\_coord}!oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}}
 \doxysubsubsection{\texorpdfstring{external\_element\_local\_coord()}{external\_element\_local\_coord()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \& oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+local\+\_\+coord (\begin{DoxyParamCaption}\item[{const unsigned \&}]{interaction\+\_\+index,  }\item[{const unsigned \&}]{ipt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+local\+\_\+coord (\begin{DoxyParamCaption}\item[{const unsigned \&}]{interaction\+\_\+index,  }\item[{const unsigned \&}]{ipt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -362,21 +362,21 @@ Access function to get source element\textquotesingle{}s local coords for specif
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00136}{136}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 136 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__external__element_8h_source_l00523}{check\+\_\+storage\+\_\+allocated()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00605}{External\+\_\+element\+\_\+local\+\_\+coord}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00584}{Nintpt}}, and \mbox{\hyperlink{element__with__external__element_8h_source_l00546}{range\+\_\+check()}}.
+References check\+\_\+storage\+\_\+allocated(), External\+\_\+element\+\_\+local\+\_\+coord, Nintpt, and range\+\_\+check().
 
 
 
-Referenced by \mbox{\hyperlink{axisym__poroelastic__fsi__face__elements_8h_source_l00447}{oomph\+::\+Linearised\+Axisym\+Poroelastic\+BJS\+\_\+\+FSIElement$<$ FLUID\+\_\+\+BULK\+\_\+\+ELEMENT, POROELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::contribution\+\_\+to\+\_\+total\+\_\+porous\+\_\+flux()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l01677}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::create\+\_\+external\+\_\+halo\+\_\+elements()}}, \mbox{\hyperlink{fsi_8h_source_l00724}{oomph\+::\+FSI\+\_\+functions\+::doc\+\_\+fsi()}}, \mbox{\hyperlink{solid__traction__elements_8h_source_l02780}{oomph\+::\+FSIImpose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+fsi\+\_\+displ\+\_\+lagr\+\_\+multiplier()}}, \mbox{\hyperlink{fsi_8cc_source_l00162}{oomph\+::\+FSIWall\+Element\+::fluid\+\_\+load\+\_\+vector()}}, \mbox{\hyperlink{multi__domain__linearised__axisym__navier__stokes__elements_8h_source_l00108}{Linearised\+Axisymmetric\+QTaylor\+Hood\+Multi\+Domain\+Element\+::get\+\_\+base\+\_\+flow\+\_\+dudx()}}, \mbox{\hyperlink{multi__domain__linearised__axisym__navier__stokes__elements_8h_source_l00228}{Linearised\+Axisymmetric\+QCrouzeix\+Raviart\+Multi\+Domain\+Element\+::get\+\_\+base\+\_\+flow\+\_\+dudx()}}, \mbox{\hyperlink{multi__domain__linearised__axisym__navier__stokes__elements_8h_source_l00349}{Refineable\+Linearised\+Axisymmetric\+QTaylor\+Hood\+Multi\+Domain\+Element\+::get\+\_\+base\+\_\+flow\+\_\+dudx()}}, \mbox{\hyperlink{multi__domain__linearised__axisym__navier__stokes__elements_8h_source_l00470}{Refineable\+Linearised\+Axisymmetric\+QCrouzeix\+Raviart\+Multi\+Domain\+Element\+::get\+\_\+base\+\_\+flow\+\_\+dudx()}}, \mbox{\hyperlink{multi__domain__linearised__navier__stokes__elements_8h_source_l00108}{Linearised\+QTaylor\+Hood\+Multi\+Domain\+Element\+::get\+\_\+base\+\_\+flow\+\_\+dudx()}}, \mbox{\hyperlink{multi__domain__linearised__navier__stokes__elements_8h_source_l00226}{Linearised\+QCrouzeix\+Raviart\+Multi\+Domain\+Element\+::get\+\_\+base\+\_\+flow\+\_\+dudx()}}, \mbox{\hyperlink{multi__domain__linearised__navier__stokes__elements_8h_source_l00345}{Refineable\+Linearised\+QTaylor\+Hood\+Multi\+Domain\+Element\+::get\+\_\+base\+\_\+flow\+\_\+dudx()}}, \mbox{\hyperlink{multi__domain__linearised__navier__stokes__elements_8h_source_l00465}{Refineable\+Linearised\+QCrouzeix\+Raviart\+Multi\+Domain\+Element\+::get\+\_\+base\+\_\+flow\+\_\+dudx()}}, \mbox{\hyperlink{multi__domain__linearised__axisym__navier__stokes__elements_8h_source_l00075}{Linearised\+Axisymmetric\+QTaylor\+Hood\+Multi\+Domain\+Element\+::get\+\_\+base\+\_\+flow\+\_\+u()}}, \mbox{\hyperlink{multi__domain__linearised__axisym__navier__stokes__elements_8h_source_l00195}{Linearised\+Axisymmetric\+QCrouzeix\+Raviart\+Multi\+Domain\+Element\+::get\+\_\+base\+\_\+flow\+\_\+u()}}, \mbox{\hyperlink{multi__domain__linearised__axisym__navier__stokes__elements_8h_source_l00316}{Refineable\+Linearised\+Axisymmetric\+QTaylor\+Hood\+Multi\+Domain\+Element\+::get\+\_\+base\+\_\+flow\+\_\+u()}}, \mbox{\hyperlink{multi__domain__linearised__axisym__navier__stokes__elements_8h_source_l00437}{Refineable\+Linearised\+Axisymmetric\+QCrouzeix\+Raviart\+Multi\+Domain\+Element\+::get\+\_\+base\+\_\+flow\+\_\+u()}}, \mbox{\hyperlink{multi__domain__linearised__navier__stokes__elements_8h_source_l00075}{Linearised\+QTaylor\+Hood\+Multi\+Domain\+Element\+::get\+\_\+base\+\_\+flow\+\_\+u()}}, \mbox{\hyperlink{multi__domain__linearised__navier__stokes__elements_8h_source_l00193}{Linearised\+QCrouzeix\+Raviart\+Multi\+Domain\+Element\+::get\+\_\+base\+\_\+flow\+\_\+u()}}, \mbox{\hyperlink{multi__domain__linearised__navier__stokes__elements_8h_source_l00312}{Refineable\+Linearised\+QTaylor\+Hood\+Multi\+Domain\+Element\+::get\+\_\+base\+\_\+flow\+\_\+u()}}, \mbox{\hyperlink{multi__domain__linearised__navier__stokes__elements_8h_source_l00432}{Refineable\+Linearised\+QCrouzeix\+Raviart\+Multi\+Domain\+Element\+::get\+\_\+base\+\_\+flow\+\_\+u()}}, \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source_l00123}{oomph\+::\+Refineable\+Navier\+Stokes\+Boussinesq\+Element$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::get\+\_\+body\+\_\+force\+\_\+nst()}}, \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source_l00522}{oomph\+::\+Refineable\+Advection\+Diffusion\+Boussinesq\+Element$<$ AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT $>$\+::get\+\_\+dwind\+\_\+adv\+\_\+diff\+\_\+dexternal\+\_\+element\+\_\+data()}}, \mbox{\hyperlink{axisym__poroelasticity__face__elements_8h_source_l01006}{oomph\+::\+FSILinearised\+Axisym\+Poroelastic\+Traction\+Element$<$ POROELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, NAVIER\+\_\+\+STOKES\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::get\+\_\+pressure()}}, \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00701}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$\+::get\+\_\+pressure\+\_\+fvk()}}, \mbox{\hyperlink{axisym__poroelasticity__face__elements_8h_source_l00934}{oomph\+::\+FSILinearised\+Axisym\+Poroelastic\+Traction\+Element$<$ POROELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, NAVIER\+\_\+\+STOKES\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::get\+\_\+traction()}}, \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source_l00456}{oomph\+::\+Refineable\+Advection\+Diffusion\+Boussinesq\+Element$<$ AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT $>$\+::get\+\_\+wind\+\_\+adv\+\_\+diff()}}, \mbox{\hyperlink{multi__domain_8cc_source_l02153}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::locate\+\_\+zeta\+\_\+for\+\_\+local\+\_\+coordinates()}}, \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source_l00596}{oomph\+::\+FSIAxisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, NAVIER\+\_\+\+STOKES\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output()}}, \mbox{\hyperlink{axisym__fluid__traction__elements_8h_source_l00690}{oomph\+::\+Linearised\+FSIAxisymmetric\+NSt\+No\+Slip\+BCElement\+Element$<$ FLUID\+\_\+\+BULK\+\_\+\+ELEMENT, SOLID\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output()}}, \mbox{\hyperlink{axisym__poroelastic__fsi__face__elements_8h_source_l00231}{oomph\+::\+Linearised\+Axisym\+Poroelastic\+BJS\+\_\+\+FSIElement$<$ FLUID\+\_\+\+BULK\+\_\+\+ELEMENT, POROELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output()}}, \mbox{\hyperlink{fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00181}{oomph\+::\+Fourier\+Decomposed\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output()}}, \mbox{\hyperlink{fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00510}{oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output()}}, \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00175}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output()}}, \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00506}{oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output()}}, \mbox{\hyperlink{pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00178}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+PMLHelmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output()}}, \mbox{\hyperlink{pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00738}{oomph\+::\+PMLHelmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output()}}, \mbox{\hyperlink{element__with__external__element_8cc_source_l00798}{output\+\_\+external\+\_\+elements()}}, \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00734}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$\+::output\+\_\+integration\+\_\+points()}}, \mbox{\hyperlink{solid__traction__elements_8h_source_l03133}{oomph\+::\+Refineable\+FSIImpose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ ELEMENT $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+fsi\+\_\+displ\+\_\+lagr\+\_\+multiplier()}}, \mbox{\hyperlink{axisym__poroelasticity__elements_8h_source_l01752}{oomph\+::\+Projectable\+Axisymmetric\+Poroelasticity\+Element$<$ AXISYMMETRIC\+\_\+\+POROELASTICITY\+\_\+\+ELEMENT $>$\+::residual\+\_\+for\+\_\+projection()}}, \mbox{\hyperlink{darcy__elements_8h_source_l00804}{oomph\+::\+Projectable\+Darcy\+Element$<$ DARCY\+\_\+\+ELEMENT $>$\+::residual\+\_\+for\+\_\+projection()}}, and \mbox{\hyperlink{projection_8h_source_l00240}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::residual\+\_\+for\+\_\+projection()}}.
+Referenced by oomph\+::\+Linearised\+Axisym\+Poroelastic\+BJS\+\_\+\+FSIElement$<$ FLUID\+\_\+\+BULK\+\_\+\+ELEMENT, POROELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::contribution\+\_\+to\+\_\+total\+\_\+porous\+\_\+flux(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::create\+\_\+external\+\_\+halo\+\_\+elements(), oomph\+::\+FSI\+\_\+functions\+::doc\+\_\+fsi(), oomph\+::\+FSIImpose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+fsi\+\_\+displ\+\_\+lagr\+\_\+multiplier(), oomph\+::\+FSIWall\+Element\+::fluid\+\_\+load\+\_\+vector(), oomph\+::\+Refineable\+Navier\+Stokes\+Boussinesq\+Element$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::get\+\_\+body\+\_\+force\+\_\+nst(), oomph\+::\+Refineable\+Advection\+Diffusion\+Boussinesq\+Element$<$ AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT $>$\+::get\+\_\+dwind\+\_\+adv\+\_\+diff\+\_\+dexternal\+\_\+element\+\_\+data(), oomph\+::\+FSILinearised\+Axisym\+Poroelastic\+Traction\+Element$<$ POROELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, NAVIER\+\_\+\+STOKES\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::get\+\_\+pressure(), oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$\+::get\+\_\+pressure\+\_\+fvk(), oomph\+::\+FSILinearised\+Axisym\+Poroelastic\+Traction\+Element$<$ POROELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, NAVIER\+\_\+\+STOKES\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::get\+\_\+traction(), oomph\+::\+Refineable\+Advection\+Diffusion\+Boussinesq\+Element$<$ AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT $>$\+::get\+\_\+wind\+\_\+adv\+\_\+diff(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::locate\+\_\+zeta\+\_\+for\+\_\+local\+\_\+coordinates(), oomph\+::\+FSIAxisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, NAVIER\+\_\+\+STOKES\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output(), oomph\+::\+Linearised\+FSIAxisymmetric\+NSt\+No\+Slip\+BCElement\+Element$<$ FLUID\+\_\+\+BULK\+\_\+\+ELEMENT, SOLID\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output(), oomph\+::\+Linearised\+Axisym\+Poroelastic\+BJS\+\_\+\+FSIElement$<$ FLUID\+\_\+\+BULK\+\_\+\+ELEMENT, POROELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output(), oomph\+::\+Fourier\+Decomposed\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output(), oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output(), oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output(), oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+PMLHelmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output(), oomph\+::\+PMLHelmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output(), output\+\_\+external\+\_\+elements(), oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$\+::output\+\_\+integration\+\_\+points(), oomph\+::\+Refineable\+FSIImpose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ ELEMENT $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+fsi\+\_\+displ\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Projectable\+Axisymmetric\+Poroelasticity\+Element$<$ AXISYMMETRIC\+\_\+\+POROELASTICITY\+\_\+\+ELEMENT $>$\+::residual\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Darcy\+Element$<$ DARCY\+\_\+\+ELEMENT $>$\+::residual\+\_\+for\+\_\+projection(), and oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::residual\+\_\+for\+\_\+projection().
 
-\mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_ae99c49d2fc7c008d7ffe12b037097344}\label{classoomph_1_1ElementWithExternalElement_ae99c49d2fc7c008d7ffe12b037097344}} 
+\mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_af9da1e0b0cc58d18e32967763a697765}\label{classoomph_1_1ElementWithExternalElement_af9da1e0b0cc58d18e32967763a697765}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!external\_element\_local\_coord@{external\_element\_local\_coord}}
 \index{external\_element\_local\_coord@{external\_element\_local\_coord}!oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}}
 \doxysubsubsection{\texorpdfstring{external\_element\_local\_coord()}{external\_element\_local\_coord()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ const  \& oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+local\+\_\+coord (\begin{DoxyParamCaption}\item[{const unsigned \&}]{interaction\+\_\+index,  }\item[{const unsigned \&}]{ipt }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ const\& oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+local\+\_\+coord (\begin{DoxyParamCaption}\item[{const unsigned \&}]{interaction\+\_\+index,  }\item[{const unsigned \&}]{ipt }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -384,17 +384,17 @@ Access function to get source element\textquotesingle{}s coords, const version.
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00149}{149}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 149 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__external__element_8h_source_l00523}{check\+\_\+storage\+\_\+allocated()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00605}{External\+\_\+element\+\_\+local\+\_\+coord}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00584}{Nintpt}}, and \mbox{\hyperlink{element__with__external__element_8h_source_l00546}{range\+\_\+check()}}.
+References check\+\_\+storage\+\_\+allocated(), External\+\_\+element\+\_\+local\+\_\+coord, Nintpt, and range\+\_\+check().
 
-\mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_aab865822c3ad3d29393f8d74153d180e}\label{classoomph_1_1ElementWithExternalElement_aab865822c3ad3d29393f8d74153d180e}} 
+\mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a30c8347cfed1bb9d4ebc500f705bc739}\label{classoomph_1_1ElementWithExternalElement_a30c8347cfed1bb9d4ebc500f705bc739}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!external\_element\_pt@{external\_element\_pt}}
 \index{external\_element\_pt@{external\_element\_pt}!oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}}
 \doxysubsubsection{\texorpdfstring{external\_element\_pt()}{external\_element\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\& oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{interaction\+\_\+index,  }\item[{const unsigned \&}]{ipt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}}$\ast$\& oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{interaction\+\_\+index,  }\item[{const unsigned \&}]{ipt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -402,21 +402,21 @@ Access function to source element for specified interaction index at specified i
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00107}{107}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 107 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__external__element_8h_source_l00523}{check\+\_\+storage\+\_\+allocated()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00600}{External\+\_\+element\+\_\+pt}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00584}{Nintpt}}, and \mbox{\hyperlink{element__with__external__element_8h_source_l00546}{range\+\_\+check()}}.
+References check\+\_\+storage\+\_\+allocated(), External\+\_\+element\+\_\+pt, Nintpt, and range\+\_\+check().
 
 
 
-Referenced by \mbox{\hyperlink{element__with__external__element_8cc_source_l00246}{assign\+\_\+external\+\_\+interaction\+\_\+data\+\_\+local\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l00524}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}, \mbox{\hyperlink{axisym__poroelastic__fsi__face__elements_8h_source_l00447}{oomph\+::\+Linearised\+Axisym\+Poroelastic\+BJS\+\_\+\+FSIElement$<$ FLUID\+\_\+\+BULK\+\_\+\+ELEMENT, POROELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::contribution\+\_\+to\+\_\+total\+\_\+porous\+\_\+flux()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l01677}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::create\+\_\+external\+\_\+halo\+\_\+elements()}}, \mbox{\hyperlink{fsi_8h_source_l00724}{oomph\+::\+FSI\+\_\+functions\+::doc\+\_\+fsi()}}, \mbox{\hyperlink{solid__traction__elements_8h_source_l02780}{oomph\+::\+FSIImpose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+fsi\+\_\+displ\+\_\+lagr\+\_\+multiplier()}}, \mbox{\hyperlink{fsi_8cc_source_l00162}{oomph\+::\+FSIWall\+Element\+::fluid\+\_\+load\+\_\+vector()}}, \mbox{\hyperlink{multi__domain__linearised__axisym__navier__stokes__elements_8h_source_l00108}{Linearised\+Axisymmetric\+QTaylor\+Hood\+Multi\+Domain\+Element\+::get\+\_\+base\+\_\+flow\+\_\+dudx()}}, \mbox{\hyperlink{multi__domain__linearised__axisym__navier__stokes__elements_8h_source_l00228}{Linearised\+Axisymmetric\+QCrouzeix\+Raviart\+Multi\+Domain\+Element\+::get\+\_\+base\+\_\+flow\+\_\+dudx()}}, \mbox{\hyperlink{multi__domain__linearised__axisym__navier__stokes__elements_8h_source_l00349}{Refineable\+Linearised\+Axisymmetric\+QTaylor\+Hood\+Multi\+Domain\+Element\+::get\+\_\+base\+\_\+flow\+\_\+dudx()}}, \mbox{\hyperlink{multi__domain__linearised__axisym__navier__stokes__elements_8h_source_l00470}{Refineable\+Linearised\+Axisymmetric\+QCrouzeix\+Raviart\+Multi\+Domain\+Element\+::get\+\_\+base\+\_\+flow\+\_\+dudx()}}, \mbox{\hyperlink{multi__domain__linearised__navier__stokes__elements_8h_source_l00108}{Linearised\+QTaylor\+Hood\+Multi\+Domain\+Element\+::get\+\_\+base\+\_\+flow\+\_\+dudx()}}, \mbox{\hyperlink{multi__domain__linearised__navier__stokes__elements_8h_source_l00226}{Linearised\+QCrouzeix\+Raviart\+Multi\+Domain\+Element\+::get\+\_\+base\+\_\+flow\+\_\+dudx()}}, \mbox{\hyperlink{multi__domain__linearised__navier__stokes__elements_8h_source_l00345}{Refineable\+Linearised\+QTaylor\+Hood\+Multi\+Domain\+Element\+::get\+\_\+base\+\_\+flow\+\_\+dudx()}}, \mbox{\hyperlink{multi__domain__linearised__navier__stokes__elements_8h_source_l00465}{Refineable\+Linearised\+QCrouzeix\+Raviart\+Multi\+Domain\+Element\+::get\+\_\+base\+\_\+flow\+\_\+dudx()}}, \mbox{\hyperlink{multi__domain__linearised__axisym__navier__stokes__elements_8h_source_l00075}{Linearised\+Axisymmetric\+QTaylor\+Hood\+Multi\+Domain\+Element\+::get\+\_\+base\+\_\+flow\+\_\+u()}}, \mbox{\hyperlink{multi__domain__linearised__axisym__navier__stokes__elements_8h_source_l00195}{Linearised\+Axisymmetric\+QCrouzeix\+Raviart\+Multi\+Domain\+Element\+::get\+\_\+base\+\_\+flow\+\_\+u()}}, \mbox{\hyperlink{multi__domain__linearised__axisym__navier__stokes__elements_8h_source_l00316}{Refineable\+Linearised\+Axisymmetric\+QTaylor\+Hood\+Multi\+Domain\+Element\+::get\+\_\+base\+\_\+flow\+\_\+u()}}, \mbox{\hyperlink{multi__domain__linearised__axisym__navier__stokes__elements_8h_source_l00437}{Refineable\+Linearised\+Axisymmetric\+QCrouzeix\+Raviart\+Multi\+Domain\+Element\+::get\+\_\+base\+\_\+flow\+\_\+u()}}, \mbox{\hyperlink{multi__domain__linearised__navier__stokes__elements_8h_source_l00075}{Linearised\+QTaylor\+Hood\+Multi\+Domain\+Element\+::get\+\_\+base\+\_\+flow\+\_\+u()}}, \mbox{\hyperlink{multi__domain__linearised__navier__stokes__elements_8h_source_l00193}{Linearised\+QCrouzeix\+Raviart\+Multi\+Domain\+Element\+::get\+\_\+base\+\_\+flow\+\_\+u()}}, \mbox{\hyperlink{multi__domain__linearised__navier__stokes__elements_8h_source_l00312}{Refineable\+Linearised\+QTaylor\+Hood\+Multi\+Domain\+Element\+::get\+\_\+base\+\_\+flow\+\_\+u()}}, \mbox{\hyperlink{multi__domain__linearised__navier__stokes__elements_8h_source_l00432}{Refineable\+Linearised\+QCrouzeix\+Raviart\+Multi\+Domain\+Element\+::get\+\_\+base\+\_\+flow\+\_\+u()}}, \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source_l00123}{oomph\+::\+Refineable\+Navier\+Stokes\+Boussinesq\+Element$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::get\+\_\+body\+\_\+force\+\_\+nst()}}, \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source_l00522}{oomph\+::\+Refineable\+Advection\+Diffusion\+Boussinesq\+Element$<$ AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT $>$\+::get\+\_\+dwind\+\_\+adv\+\_\+diff\+\_\+dexternal\+\_\+element\+\_\+data()}}, \mbox{\hyperlink{axisym__poroelasticity__face__elements_8h_source_l01006}{oomph\+::\+FSILinearised\+Axisym\+Poroelastic\+Traction\+Element$<$ POROELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, NAVIER\+\_\+\+STOKES\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::get\+\_\+pressure()}}, \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00701}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$\+::get\+\_\+pressure\+\_\+fvk()}}, \mbox{\hyperlink{axisym__poroelasticity__face__elements_8h_source_l00934}{oomph\+::\+FSILinearised\+Axisym\+Poroelastic\+Traction\+Element$<$ POROELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, NAVIER\+\_\+\+STOKES\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::get\+\_\+traction()}}, \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source_l00456}{oomph\+::\+Refineable\+Advection\+Diffusion\+Boussinesq\+Element$<$ AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT $>$\+::get\+\_\+wind\+\_\+adv\+\_\+diff()}}, \mbox{\hyperlink{pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00357}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+PMLHelmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::global\+\_\+flux\+\_\+contribution\+\_\+from\+\_\+helmholtz()}}, \mbox{\hyperlink{multi__domain_8cc_source_l02153}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::locate\+\_\+zeta\+\_\+for\+\_\+local\+\_\+coordinates()}}, \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00832}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$\+::node\+\_\+update\+\_\+adjacent\+\_\+fluid\+\_\+elements()}}, \mbox{\hyperlink{fsi_8cc_source_l00230}{oomph\+::\+FSIWall\+Element\+::node\+\_\+update\+\_\+adjacent\+\_\+fluid\+\_\+elements()}}, \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source_l00596}{oomph\+::\+FSIAxisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, NAVIER\+\_\+\+STOKES\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output()}}, \mbox{\hyperlink{axisym__fluid__traction__elements_8h_source_l00690}{oomph\+::\+Linearised\+FSIAxisymmetric\+NSt\+No\+Slip\+BCElement\+Element$<$ FLUID\+\_\+\+BULK\+\_\+\+ELEMENT, SOLID\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output()}}, \mbox{\hyperlink{axisym__poroelastic__fsi__face__elements_8h_source_l00231}{oomph\+::\+Linearised\+Axisym\+Poroelastic\+BJS\+\_\+\+FSIElement$<$ FLUID\+\_\+\+BULK\+\_\+\+ELEMENT, POROELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output()}}, \mbox{\hyperlink{fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00181}{oomph\+::\+Fourier\+Decomposed\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output()}}, \mbox{\hyperlink{fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00510}{oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output()}}, \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00175}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output()}}, \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00506}{oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output()}}, \mbox{\hyperlink{pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00178}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+PMLHelmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output()}}, \mbox{\hyperlink{pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00738}{oomph\+::\+PMLHelmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output()}}, \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00783}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$\+::output\+\_\+adjacent\+\_\+fluid\+\_\+elements()}}, \mbox{\hyperlink{element__with__external__element_8cc_source_l00798}{output\+\_\+external\+\_\+elements()}}, \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00734}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$\+::output\+\_\+integration\+\_\+points()}}, \mbox{\hyperlink{solid__traction__elements_8h_source_l03133}{oomph\+::\+Refineable\+FSIImpose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ ELEMENT $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+fsi\+\_\+displ\+\_\+lagr\+\_\+multiplier()}}, \mbox{\hyperlink{axisym__poroelasticity__elements_8h_source_l01752}{oomph\+::\+Projectable\+Axisymmetric\+Poroelasticity\+Element$<$ AXISYMMETRIC\+\_\+\+POROELASTICITY\+\_\+\+ELEMENT $>$\+::residual\+\_\+for\+\_\+projection()}}, \mbox{\hyperlink{darcy__elements_8h_source_l00804}{oomph\+::\+Projectable\+Darcy\+Element$<$ DARCY\+\_\+\+ELEMENT $>$\+::residual\+\_\+for\+\_\+projection()}}, and \mbox{\hyperlink{projection_8h_source_l00240}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::residual\+\_\+for\+\_\+projection()}}.
+Referenced by assign\+\_\+external\+\_\+interaction\+\_\+data\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction(), oomph\+::\+Linearised\+Axisym\+Poroelastic\+BJS\+\_\+\+FSIElement$<$ FLUID\+\_\+\+BULK\+\_\+\+ELEMENT, POROELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::contribution\+\_\+to\+\_\+total\+\_\+porous\+\_\+flux(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::create\+\_\+external\+\_\+halo\+\_\+elements(), oomph\+::\+FSI\+\_\+functions\+::doc\+\_\+fsi(), oomph\+::\+FSIImpose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+fsi\+\_\+displ\+\_\+lagr\+\_\+multiplier(), oomph\+::\+FSIWall\+Element\+::fluid\+\_\+load\+\_\+vector(), oomph\+::\+Refineable\+Navier\+Stokes\+Boussinesq\+Element$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::get\+\_\+body\+\_\+force\+\_\+nst(), oomph\+::\+Refineable\+Advection\+Diffusion\+Boussinesq\+Element$<$ AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT $>$\+::get\+\_\+dwind\+\_\+adv\+\_\+diff\+\_\+dexternal\+\_\+element\+\_\+data(), oomph\+::\+FSILinearised\+Axisym\+Poroelastic\+Traction\+Element$<$ POROELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, NAVIER\+\_\+\+STOKES\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::get\+\_\+pressure(), oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$\+::get\+\_\+pressure\+\_\+fvk(), oomph\+::\+FSILinearised\+Axisym\+Poroelastic\+Traction\+Element$<$ POROELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, NAVIER\+\_\+\+STOKES\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::get\+\_\+traction(), oomph\+::\+Refineable\+Advection\+Diffusion\+Boussinesq\+Element$<$ AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT $>$\+::get\+\_\+wind\+\_\+adv\+\_\+diff(), oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+PMLHelmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::global\+\_\+flux\+\_\+contribution\+\_\+from\+\_\+helmholtz(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::locate\+\_\+zeta\+\_\+for\+\_\+local\+\_\+coordinates(), oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$\+::node\+\_\+update\+\_\+adjacent\+\_\+fluid\+\_\+elements(), oomph\+::\+FSIWall\+Element\+::node\+\_\+update\+\_\+adjacent\+\_\+fluid\+\_\+elements(), oomph\+::\+FSIAxisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, NAVIER\+\_\+\+STOKES\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output(), oomph\+::\+Linearised\+FSIAxisymmetric\+NSt\+No\+Slip\+BCElement\+Element$<$ FLUID\+\_\+\+BULK\+\_\+\+ELEMENT, SOLID\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output(), oomph\+::\+Linearised\+Axisym\+Poroelastic\+BJS\+\_\+\+FSIElement$<$ FLUID\+\_\+\+BULK\+\_\+\+ELEMENT, POROELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output(), oomph\+::\+Fourier\+Decomposed\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output(), oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output(), oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output(), oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+PMLHelmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output(), oomph\+::\+PMLHelmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output(), oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$\+::output\+\_\+adjacent\+\_\+fluid\+\_\+elements(), output\+\_\+external\+\_\+elements(), oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$\+::output\+\_\+integration\+\_\+points(), oomph\+::\+Refineable\+FSIImpose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ ELEMENT $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+fsi\+\_\+displ\+\_\+lagr\+\_\+multiplier(), oomph\+::\+Projectable\+Axisymmetric\+Poroelasticity\+Element$<$ AXISYMMETRIC\+\_\+\+POROELASTICITY\+\_\+\+ELEMENT $>$\+::residual\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Darcy\+Element$<$ DARCY\+\_\+\+ELEMENT $>$\+::residual\+\_\+for\+\_\+projection(), and oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::residual\+\_\+for\+\_\+projection().
 
-\mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a8889aa8e2b42b68b98850e8532a640c3}\label{classoomph_1_1ElementWithExternalElement_a8889aa8e2b42b68b98850e8532a640c3}} 
+\mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a1207eae30d379008502855f6a40021ab}\label{classoomph_1_1ElementWithExternalElement_a1207eae30d379008502855f6a40021ab}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!external\_element\_pt@{external\_element\_pt}}
 \index{external\_element\_pt@{external\_element\_pt}!oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}}
 \doxysubsubsection{\texorpdfstring{external\_element\_pt()}{external\_element\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const  \& oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{interaction\+\_\+index,  }\item[{const unsigned \&}]{ipt }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}}$\ast$ const\& oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{interaction\+\_\+index,  }\item[{const unsigned \&}]{ipt }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -424,11 +424,11 @@ Access function to source element, const version.
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00121}{121}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 121 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__external__element_8h_source_l00523}{check\+\_\+storage\+\_\+allocated()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00600}{External\+\_\+element\+\_\+pt}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00584}{Nintpt}}, and \mbox{\hyperlink{element__with__external__element_8h_source_l00546}{range\+\_\+check()}}.
+References check\+\_\+storage\+\_\+allocated(), External\+\_\+element\+\_\+pt, Nintpt, and range\+\_\+check().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a1d06766dadb846bca94f49365809606e}\label{classoomph_1_1ElementWithExternalElement_a1d06766dadb846bca94f49365809606e}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!external\_geometric\_data\_is\_included@{external\_geometric\_data\_is\_included}}
@@ -442,21 +442,21 @@ Is the external geometric data taken into account when forming the Jacobian?
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00301}{301}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 301 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__external__element_8h_source_l00511}{Add\+\_\+external\+\_\+geometric\+\_\+data}}.
+References Add\+\_\+external\+\_\+geometric\+\_\+data.
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source_l00097}{oomph\+::\+Refineable\+Navier\+Stokes\+Boussinesq\+Element$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::further\+\_\+build()}}.
+Referenced by oomph\+::\+Refineable\+Navier\+Stokes\+Boussinesq\+Element$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::further\+\_\+build().
 
-\mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_af526135c5fca4fc8d48061801e94c51e}\label{classoomph_1_1ElementWithExternalElement_af526135c5fca4fc8d48061801e94c51e}} 
+\mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a7d6b40e7100178b1edbb94f179555a34}\label{classoomph_1_1ElementWithExternalElement_a7d6b40e7100178b1edbb94f179555a34}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!external\_interaction\_field\_data\_pt@{external\_interaction\_field\_data\_pt}}
 \index{external\_interaction\_field\_data\_pt@{external\_interaction\_field\_data\_pt}!oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}}
 \doxysubsubsection{\texorpdfstring{external\_interaction\_field\_data\_pt()}{external\_interaction\_field\_data\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ $>$ oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+interaction\+\_\+field\+\_\+data\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$$>$ oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+interaction\+\_\+field\+\_\+data\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -464,21 +464,21 @@ Return vector of pointers to the field \mbox{\hyperlink{classoomph_1_1Data}{Data
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00212}{212}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 212 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__external__element_8h_source_l00515}{External\+\_\+interaction\+\_\+field\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{element__with__external__element_8h_source_l00205}{nexternal\+\_\+interaction\+\_\+field\+\_\+data()}}.
+References External\+\_\+interaction\+\_\+field\+\_\+data\+\_\+pt, i, and nexternal\+\_\+interaction\+\_\+field\+\_\+data().
 
 
 
-Referenced by \mbox{\hyperlink{elements_8cc_source_l00691}{oomph\+::\+Generalised\+Element\+::assign\+\_\+local\+\_\+eqn\+\_\+numbers()}}, and \mbox{\hyperlink{fsi_8h_source_l00724}{oomph\+::\+FSI\+\_\+functions\+::doc\+\_\+fsi()}}.
+Referenced by oomph\+::\+Generalised\+Element\+::assign\+\_\+local\+\_\+eqn\+\_\+numbers(), and oomph\+::\+FSI\+\_\+functions\+::doc\+\_\+fsi().
 
-\mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a69c9bf653df874f36ab1d5fddf9ab503}\label{classoomph_1_1ElementWithExternalElement_a69c9bf653df874f36ab1d5fddf9ab503}} 
+\mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_ad9632a0a9391964020177d3507261545}\label{classoomph_1_1ElementWithExternalElement_ad9632a0a9391964020177d3507261545}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!external\_interaction\_geometric\_data\_pt@{external\_interaction\_geometric\_data\_pt}}
 \index{external\_interaction\_geometric\_data\_pt@{external\_interaction\_geometric\_data\_pt}!oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}}
 \doxysubsubsection{\texorpdfstring{external\_interaction\_geometric\_data\_pt()}{external\_interaction\_geometric\_data\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ $>$ oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+interaction\+\_\+geometric\+\_\+data\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$$>$ oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+interaction\+\_\+geometric\+\_\+data\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -486,15 +486,15 @@ Return vector of pointers to the geometric \mbox{\hyperlink{classoomph_1_1Data}{
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00251}{251}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 251 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__external__element_8h_source_l00519}{External\+\_\+interaction\+\_\+geometric\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{element__with__external__element_8h_source_l00232}{nexternal\+\_\+interaction\+\_\+geometric\+\_\+data()}}.
+References External\+\_\+interaction\+\_\+geometric\+\_\+data\+\_\+pt, i, and nexternal\+\_\+interaction\+\_\+geometric\+\_\+data().
 
 
 
-Referenced by \mbox{\hyperlink{elements_8cc_source_l00691}{oomph\+::\+Generalised\+Element\+::assign\+\_\+local\+\_\+eqn\+\_\+numbers()}}, and \mbox{\hyperlink{fsi_8h_source_l00724}{oomph\+::\+FSI\+\_\+functions\+::doc\+\_\+fsi()}}.
+Referenced by oomph\+::\+Generalised\+Element\+::assign\+\_\+local\+\_\+eqn\+\_\+numbers(), and oomph\+::\+FSI\+\_\+functions\+::doc\+\_\+fsi().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_ae5fb09552a8271e891438f8d058ca1b8}\label{classoomph_1_1ElementWithExternalElement_ae5fb09552a8271e891438f8d058ca1b8}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
@@ -512,19 +512,19 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a6ae09fc0d6
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1FaceElementAsGeomObject_a2835ee6ef417ec603c39a1f0f4e356f0}{oomph\+::\+Face\+Element\+As\+Geom\+Object$<$ ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1FSIWallElement_a7817d2662c24540d3757cb1a1194a635}{oomph\+::\+FSIWall\+Element}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a5b6894eda403bd2b9d2cf1e0314d7a23}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a5b6894eda403bd2b9d2cf1e0314d7a23}{oomph\+::\+Projectable\+Element$<$ CROUZEIX\+\_\+\+RAVIART\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a5b6894eda403bd2b9d2cf1e0314d7a23}{oomph\+::\+Projectable\+Element$<$ TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a5b6894eda403bd2b9d2cf1e0314d7a23}{oomph\+::\+Projectable\+Element$<$ ADR\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a5b6894eda403bd2b9d2cf1e0314d7a23}{oomph\+::\+Projectable\+Element$<$ AXISYM\+\_\+\+LINEAR\+\_\+\+ELAST\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a5b6894eda403bd2b9d2cf1e0314d7a23}{oomph\+::\+Projectable\+Element$<$ AXISYMMETRIC\+\_\+\+POROELASTICITY\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a5b6894eda403bd2b9d2cf1e0314d7a23}{oomph\+::\+Projectable\+Element$<$ DARCY\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a5b6894eda403bd2b9d2cf1e0314d7a23}{oomph\+::\+Projectable\+Element$<$ FVK\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a5b6894eda403bd2b9d2cf1e0314d7a23}{oomph\+::\+Projectable\+Element$<$ FOURIER\+\_\+\+DECOMPOSED\+\_\+\+HELMHOLTZ\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a5b6894eda403bd2b9d2cf1e0314d7a23}{oomph\+::\+Projectable\+Element$<$ HELMHOLTZ\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a5b6894eda403bd2b9d2cf1e0314d7a23}{oomph\+::\+Projectable\+Element$<$ LINEAR\+\_\+\+ELAST\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a5b6894eda403bd2b9d2cf1e0314d7a23}{oomph\+::\+Projectable\+Element$<$ TIME\+\_\+\+HARMONIC\+\_\+\+LINEAR\+\_\+\+ELAST\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a5b6894eda403bd2b9d2cf1e0314d7a23}{oomph\+::\+Projectable\+Element$<$ PVD\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a5b6894eda403bd2b9d2cf1e0314d7a23}{oomph\+::\+Projectable\+Element$<$ POISSON\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a5b6894eda403bd2b9d2cf1e0314d7a23}{oomph\+::\+Projectable\+Element$<$ UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classLinearisedAxisymmetricQTaylorHoodMultiDomainElement_adc20fbe7a713cb4b1d80c750698416ed}{Linearised\+Axisymmetric\+QTaylor\+Hood\+Multi\+Domain\+Element}}, \mbox{\hyperlink{classLinearisedAxisymmetricQCrouzeixRaviartMultiDomainElement_a3920198ff369a194c7d0ca4628af1a8c}{Linearised\+Axisymmetric\+QCrouzeix\+Raviart\+Multi\+Domain\+Element}}, \mbox{\hyperlink{classRefineableLinearisedAxisymmetricQTaylorHoodMultiDomainElement_a057d824e17f4e7ed12b496629dfe67fd}{Refineable\+Linearised\+Axisymmetric\+QTaylor\+Hood\+Multi\+Domain\+Element}}, \mbox{\hyperlink{classRefineableLinearisedAxisymmetricQCrouzeixRaviartMultiDomainElement_a5040c64ce7752b950ee33fa18e8eb7c1}{Refineable\+Linearised\+Axisymmetric\+QCrouzeix\+Raviart\+Multi\+Domain\+Element}}, \mbox{\hyperlink{classLinearisedQTaylorHoodMultiDomainElement_ae408b0f2829214b7b5d5be7f5d03a604}{Linearised\+QTaylor\+Hood\+Multi\+Domain\+Element}}, \mbox{\hyperlink{classLinearisedQCrouzeixRaviartMultiDomainElement_a7798d37a41ab3e965da4142b1731a9e4}{Linearised\+QCrouzeix\+Raviart\+Multi\+Domain\+Element}}, \mbox{\hyperlink{classRefineableLinearisedQTaylorHoodMultiDomainElement_ae9582bd850c53a41150ffd4c67dd0f00}{Refineable\+Linearised\+QTaylor\+Hood\+Multi\+Domain\+Element}}, \mbox{\hyperlink{classRefineableLinearisedQCrouzeixRaviartMultiDomainElement_a0ee5de787e1dfe477236eef98fc46092}{Refineable\+Linearised\+QCrouzeix\+Raviart\+Multi\+Domain\+Element}}, \mbox{\hyperlink{classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_ac5f6369682a12573e07f07651ffb2a5f}{oomph\+::\+Fourier\+Decomposed\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzFluxFromNormalDisplacementBCElement_a721d81ba5e0e9c8d811303e7a9ce5a8a}{oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a151fa0b3aa8df4a582d62d82ae42f40e}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_a5e10f6e632c05ce464548f51c8381b43}{oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesBoussinesqElement_aab6bae7d0704ab7e3e121ee594ac887a}{oomph\+::\+Refineable\+Navier\+Stokes\+Boussinesq\+Element$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionBoussinesqElement_a89bbdff66fd1fe24f4ae1d681a88d583}{oomph\+::\+Refineable\+Advection\+Diffusion\+Boussinesq\+Element$<$ AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1NavierStokesBoussinesqElement_a01483469b070309aeb8948273b974feb}{oomph\+::\+Navier\+Stokes\+Boussinesq\+Element$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionBoussinesqElement_afc63db5ad4e397df7809447ee3ca56ac}{oomph\+::\+Advection\+Diffusion\+Boussinesq\+Element$<$ AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement_aec08514d7dbb65dc5c05af3131828daa}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+PMLHelmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1PMLHelmholtzFluxFromNormalDisplacementBCElement_a159c7c508fc565f7d70481cd467a5152}{oomph\+::\+PMLHelmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1FSIDiagHermiteShellElement_a5e48d1c0291cf16cacaa8b42112efe90}{oomph\+::\+FSIDiag\+Hermite\+Shell\+Element}}, \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement_a789bdb99ca30e3c7b56adab5be79a59d}{oomph\+::\+FSISolid\+Traction\+Element$<$ ELEMENT, DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableFSISolidTractionElement_a886a6bcb5722c9535f6f78ccefdc0646}{oomph\+::\+Refineable\+FSISolid\+Traction\+Element$<$ ELEMENT, DIM $>$}}, \mbox{\hyperlink{classoomph_1_1FSIImposeDisplacementByLagrangeMultiplierElement_a48006d22e0ad79703914c687390150b8}{oomph\+::\+FSIImpose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ ELEMENT $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableFSIImposeDisplacementByLagrangeMultiplierElement_a3c86bf6884cd7cfdfa8e7381fbd16fcf}{oomph\+::\+Refineable\+FSIImpose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ ELEMENT $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableFSIImposeDisplacementByLagrangeMultiplierElement_a3c86bf6884cd7cfdfa8e7381fbd16fcf}{oomph\+::\+Refineable\+FSIImpose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1FSIImposeDisplacementByLagrangeMultiplierElement_a48006d22e0ad79703914c687390150b8}{oomph\+::\+FSIImpose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableFSISolidTractionElement_a886a6bcb5722c9535f6f78ccefdc0646}{oomph\+::\+Refineable\+FSISolid\+Traction\+Element$<$ ELEMENT, DIM $>$}}, \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement_a789bdb99ca30e3c7b56adab5be79a59d}{oomph\+::\+FSISolid\+Traction\+Element$<$ ELEMENT, DIM $>$}}, \mbox{\hyperlink{classoomph_1_1FSIDiagHermiteShellElement_a5e48d1c0291cf16cacaa8b42112efe90}{oomph\+::\+FSIDiag\+Hermite\+Shell\+Element}}, \mbox{\hyperlink{classoomph_1_1PMLHelmholtzFluxFromNormalDisplacementBCElement_a159c7c508fc565f7d70481cd467a5152}{oomph\+::\+PMLHelmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement_aec08514d7dbb65dc5c05af3131828daa}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+PMLHelmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionBoussinesqElement_afc63db5ad4e397df7809447ee3ca56ac}{oomph\+::\+Advection\+Diffusion\+Boussinesq\+Element$<$ AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1NavierStokesBoussinesqElement_a01483469b070309aeb8948273b974feb}{oomph\+::\+Navier\+Stokes\+Boussinesq\+Element$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionBoussinesqElement_a89bbdff66fd1fe24f4ae1d681a88d583}{oomph\+::\+Refineable\+Advection\+Diffusion\+Boussinesq\+Element$<$ AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesBoussinesqElement_aab6bae7d0704ab7e3e121ee594ac887a}{oomph\+::\+Refineable\+Navier\+Stokes\+Boussinesq\+Element$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_a5e10f6e632c05ce464548f51c8381b43}{oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a151fa0b3aa8df4a582d62d82ae42f40e}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1FourierDecomposedHelmholtzFluxFromNormalDisplacementBCElement_a721d81ba5e0e9c8d811303e7a9ce5a8a}{oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_ac5f6369682a12573e07f07651ffb2a5f}{oomph\+::\+Fourier\+Decomposed\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classRefineableLinearisedQCrouzeixRaviartMultiDomainElement_a0ee5de787e1dfe477236eef98fc46092}{Refineable\+Linearised\+QCrouzeix\+Raviart\+Multi\+Domain\+Element}}, \mbox{\hyperlink{classRefineableLinearisedQTaylorHoodMultiDomainElement_ae9582bd850c53a41150ffd4c67dd0f00}{Refineable\+Linearised\+QTaylor\+Hood\+Multi\+Domain\+Element}}, \mbox{\hyperlink{classLinearisedQCrouzeixRaviartMultiDomainElement_a7798d37a41ab3e965da4142b1731a9e4}{Linearised\+QCrouzeix\+Raviart\+Multi\+Domain\+Element}}, \mbox{\hyperlink{classLinearisedQTaylorHoodMultiDomainElement_ae408b0f2829214b7b5d5be7f5d03a604}{Linearised\+QTaylor\+Hood\+Multi\+Domain\+Element}}, \mbox{\hyperlink{classRefineableLinearisedAxisymmetricQCrouzeixRaviartMultiDomainElement_a5040c64ce7752b950ee33fa18e8eb7c1}{Refineable\+Linearised\+Axisymmetric\+QCrouzeix\+Raviart\+Multi\+Domain\+Element}}, \mbox{\hyperlink{classRefineableLinearisedAxisymmetricQTaylorHoodMultiDomainElement_a057d824e17f4e7ed12b496629dfe67fd}{Refineable\+Linearised\+Axisymmetric\+QTaylor\+Hood\+Multi\+Domain\+Element}}, \mbox{\hyperlink{classLinearisedAxisymmetricQCrouzeixRaviartMultiDomainElement_a3920198ff369a194c7d0ca4628af1a8c}{Linearised\+Axisymmetric\+QCrouzeix\+Raviart\+Multi\+Domain\+Element}}, \mbox{\hyperlink{classLinearisedAxisymmetricQTaylorHoodMultiDomainElement_adc20fbe7a713cb4b1d80c750698416ed}{Linearised\+Axisymmetric\+QTaylor\+Hood\+Multi\+Domain\+Element}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a5b6894eda403bd2b9d2cf1e0314d7a23}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a5b6894eda403bd2b9d2cf1e0314d7a23}{oomph\+::\+Projectable\+Element$<$ FVK\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a5b6894eda403bd2b9d2cf1e0314d7a23}{oomph\+::\+Projectable\+Element$<$ AXISYM\+\_\+\+LINEAR\+\_\+\+ELAST\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a5b6894eda403bd2b9d2cf1e0314d7a23}{oomph\+::\+Projectable\+Element$<$ UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a5b6894eda403bd2b9d2cf1e0314d7a23}{oomph\+::\+Projectable\+Element$<$ LINEAR\+\_\+\+ELAST\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a5b6894eda403bd2b9d2cf1e0314d7a23}{oomph\+::\+Projectable\+Element$<$ CROUZEIX\+\_\+\+RAVIART\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a5b6894eda403bd2b9d2cf1e0314d7a23}{oomph\+::\+Projectable\+Element$<$ HELMHOLTZ\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a5b6894eda403bd2b9d2cf1e0314d7a23}{oomph\+::\+Projectable\+Element$<$ AXISYMMETRIC\+\_\+\+POROELASTICITY\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a5b6894eda403bd2b9d2cf1e0314d7a23}{oomph\+::\+Projectable\+Element$<$ TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a5b6894eda403bd2b9d2cf1e0314d7a23}{oomph\+::\+Projectable\+Element$<$ PVD\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a5b6894eda403bd2b9d2cf1e0314d7a23}{oomph\+::\+Projectable\+Element$<$ ADR\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a5b6894eda403bd2b9d2cf1e0314d7a23}{oomph\+::\+Projectable\+Element$<$ DARCY\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a5b6894eda403bd2b9d2cf1e0314d7a23}{oomph\+::\+Projectable\+Element$<$ POISSON\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a5b6894eda403bd2b9d2cf1e0314d7a23}{oomph\+::\+Projectable\+Element$<$ FOURIER\+\_\+\+DECOMPOSED\+\_\+\+HELMHOLTZ\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ProjectableElement_a5b6894eda403bd2b9d2cf1e0314d7a23}{oomph\+::\+Projectable\+Element$<$ TIME\+\_\+\+HARMONIC\+\_\+\+LINEAR\+\_\+\+ELAST\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1FSIWallElement_a7817d2662c24540d3757cb1a1194a635}{oomph\+::\+FSIWall\+Element}}, and \mbox{\hyperlink{classoomph_1_1FaceElementAsGeomObject_a2835ee6ef417ec603c39a1f0f4e356f0}{oomph\+::\+Face\+Element\+As\+Geom\+Object$<$ ELEMENT $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00427}{427}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 427 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00357}{oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}, \mbox{\hyperlink{elements_8cc_source_l01199}{oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+by\+\_\+fd()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00345}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+by\+\_\+fd()}}, \mbox{\hyperlink{elements_8cc_source_l01102}{oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+internal\+\_\+by\+\_\+fd()}}, \mbox{\hyperlink{elements_8cc_source_l03660}{oomph\+::\+Finite\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+nodal\+\_\+by\+\_\+fd()}}, \mbox{\hyperlink{elements_8h_source_l00980}{oomph\+::\+Generalised\+Element\+::get\+\_\+residuals()}}, and \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}.
+References oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+by\+\_\+fd(), fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+by\+\_\+fd(), oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+internal\+\_\+by\+\_\+fd(), oomph\+::\+Finite\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+nodal\+\_\+by\+\_\+fd(), oomph\+::\+Generalised\+Element\+::get\+\_\+residuals(), and oomph\+::\+Generalised\+Element\+::ndof().
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source_l00867}{oomph\+::\+Navier\+Stokes\+Boussinesq\+Element$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, and \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source_l01169}{oomph\+::\+Advection\+Diffusion\+Boussinesq\+Element$<$ AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}.
+Referenced by oomph\+::\+Navier\+Stokes\+Boussinesq\+Element$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and oomph\+::\+Advection\+Diffusion\+Boussinesq\+Element$<$ AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a8a1610a620f55a8051c0426f937f11b5}\label{classoomph_1_1ElementWithExternalElement_a8a1610a620f55a8051c0426f937f11b5}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!fill\_in\_jacobian\_from\_external\_interaction\_by\_fd@{fill\_in\_jacobian\_from\_external\_interaction\_by\_fd}}
@@ -538,11 +538,11 @@ Calculate the contributions to the jacobian from all enternal interaction degree
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00360}{360}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 360 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__external__element_8h_source_l00345}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+by\+\_\+fd()}}, \mbox{\hyperlink{elements_8h_source_l00980}{oomph\+::\+Generalised\+Element\+::get\+\_\+residuals()}}, and \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}.
+References fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+by\+\_\+fd(), oomph\+::\+Generalised\+Element\+::get\+\_\+residuals(), and oomph\+::\+Generalised\+Element\+::ndof().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a80731cecc55aee156fb92aa72a77e882}\label{classoomph_1_1ElementWithExternalElement_a80731cecc55aee156fb92aa72a77e882}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!fill\_in\_jacobian\_from\_external\_interaction\_by\_fd@{fill\_in\_jacobian\_from\_external\_interaction\_by\_fd}}
@@ -556,15 +556,15 @@ Calculate the contributions to the jacobian from all external interaction degree
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00345}{345}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 345 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__external__element_8cc_source_l00638}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+field\+\_\+by\+\_\+fd()}}, and \mbox{\hyperlink{element__with__external__element_8cc_source_l00720}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+by\+\_\+fd()}}.
+References fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+field\+\_\+by\+\_\+fd(), and fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+by\+\_\+fd().
 
 
 
-Referenced by \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source_l00558}{oomph\+::\+FSIAxisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, NAVIER\+\_\+\+STOKES\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{axisym__fluid__traction__elements_8h_source_l00670}{oomph\+::\+Linearised\+FSIAxisymmetric\+NSt\+No\+Slip\+BCElement\+Element$<$ FLUID\+\_\+\+BULK\+\_\+\+ELEMENT, SOLID\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{axisym__poroelasticity__face__elements_8h_source_l01170}{oomph\+::\+FSILinearised\+Axisym\+Poroelastic\+Traction\+Element$<$ POROELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, NAVIER\+\_\+\+STOKES\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{beam__elements_8h_source_l00437}{oomph\+::\+FSIHermite\+Beam\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00427}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{fsi_8h_source_l00323}{oomph\+::\+FSIWall\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{multi__domain__linearised__axisym__navier__stokes__elements_8h_source_l00146}{Linearised\+Axisymmetric\+QTaylor\+Hood\+Multi\+Domain\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{multi__domain__linearised__axisym__navier__stokes__elements_8h_source_l00266}{Linearised\+Axisymmetric\+QCrouzeix\+Raviart\+Multi\+Domain\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{multi__domain__linearised__axisym__navier__stokes__elements_8h_source_l00387}{Refineable\+Linearised\+Axisymmetric\+QTaylor\+Hood\+Multi\+Domain\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{multi__domain__linearised__axisym__navier__stokes__elements_8h_source_l00508}{Refineable\+Linearised\+Axisymmetric\+QCrouzeix\+Raviart\+Multi\+Domain\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{multi__domain__linearised__navier__stokes__elements_8h_source_l00145}{Linearised\+QTaylor\+Hood\+Multi\+Domain\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{multi__domain__linearised__navier__stokes__elements_8h_source_l00263}{Linearised\+QCrouzeix\+Raviart\+Multi\+Domain\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{multi__domain__linearised__navier__stokes__elements_8h_source_l00382}{Refineable\+Linearised\+QTaylor\+Hood\+Multi\+Domain\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{multi__domain__linearised__navier__stokes__elements_8h_source_l00502}{Refineable\+Linearised\+QCrouzeix\+Raviart\+Multi\+Domain\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00143}{oomph\+::\+Fourier\+Decomposed\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00490}{oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00137}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00486}{oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source_l00156}{oomph\+::\+Refineable\+Navier\+Stokes\+Boussinesq\+Element$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source_l00476}{oomph\+::\+Refineable\+Advection\+Diffusion\+Boussinesq\+Element$<$ AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00140}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+PMLHelmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00718}{oomph\+::\+PMLHelmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{shell__elements_8h_source_l00564}{oomph\+::\+FSIDiag\+Hermite\+Shell\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{solid__traction__elements_8h_source_l00838}{oomph\+::\+FSISolid\+Traction\+Element$<$ ELEMENT, DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{solid__traction__elements_8h_source_l01071}{oomph\+::\+Refineable\+FSISolid\+Traction\+Element$<$ ELEMENT, DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{solid__traction__elements_8h_source_l02640}{oomph\+::\+FSIImpose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{solid__traction__elements_8h_source_l03118}{oomph\+::\+Refineable\+FSIImpose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, and \mbox{\hyperlink{element__with__external__element_8h_source_l00360}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+by\+\_\+fd()}}.
+Referenced by oomph\+::\+FSIAxisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, NAVIER\+\_\+\+STOKES\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+Linearised\+FSIAxisymmetric\+NSt\+No\+Slip\+BCElement\+Element$<$ FLUID\+\_\+\+BULK\+\_\+\+ELEMENT, SOLID\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+FSILinearised\+Axisym\+Poroelastic\+Traction\+Element$<$ POROELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, NAVIER\+\_\+\+STOKES\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+FSIHermite\+Beam\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+FSIWall\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+Fourier\+Decomposed\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+Refineable\+Navier\+Stokes\+Boussinesq\+Element$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+Refineable\+Advection\+Diffusion\+Boussinesq\+Element$<$ AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+PMLHelmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+PMLHelmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+FSIDiag\+Hermite\+Shell\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+FSISolid\+Traction\+Element$<$ ELEMENT, DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+Refineable\+FSISolid\+Traction\+Element$<$ ELEMENT, DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+FSIImpose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+Refineable\+FSIImpose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+by\+\_\+fd().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a4a1a2b23e08881c57488b27da45d4ef0}\label{classoomph_1_1ElementWithExternalElement_a4a1a2b23e08881c57488b27da45d4ef0}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!fill\_in\_jacobian\_from\_external\_interaction\_field\_by\_fd@{fill\_in\_jacobian\_from\_external\_interaction\_field\_by\_fd}}
@@ -578,11 +578,11 @@ Calculate the contributions to the jacobian from the enternal interaction degree
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00385}{385}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 385 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__external__element_8cc_source_l00638}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+field\+\_\+by\+\_\+fd()}}, \mbox{\hyperlink{elements_8h_source_l00980}{oomph\+::\+Generalised\+Element\+::get\+\_\+residuals()}}, and \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}.
+References fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+field\+\_\+by\+\_\+fd(), oomph\+::\+Generalised\+Element\+::get\+\_\+residuals(), and oomph\+::\+Generalised\+Element\+::ndof().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a62e562dd53ec309e124c2e1962cee9e7}\label{classoomph_1_1ElementWithExternalElement_a62e562dd53ec309e124c2e1962cee9e7}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!fill\_in\_jacobian\_from\_external\_interaction\_field\_by\_fd@{fill\_in\_jacobian\_from\_external\_interaction\_field\_by\_fd}}
@@ -596,15 +596,15 @@ Calculate the contributions to the jacobian from the external interaction degree
 
 This function calculates the entries of Jacobian matrix, used in the Newton method, associated with the external interaction degrees of freedom for external fields. It does this using finite differences, rather than an analytical formulation, so can be done in total generality. 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8cc_source_l00637}{637}} of file \mbox{\hyperlink{element__with__external__element_8cc_source}{element\+\_\+with\+\_\+external\+\_\+element.\+cc}}.
+Definition at line 637 of file element\+\_\+with\+\_\+external\+\_\+element.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01198}{oomph\+::\+Generalised\+Element\+::\+Default\+\_\+fd\+\_\+jacobian\+\_\+step}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00609}{External\+\_\+interaction\+\_\+field\+\_\+data\+\_\+index}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00613}{External\+\_\+interaction\+\_\+field\+\_\+data\+\_\+local\+\_\+eqn}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00515}{External\+\_\+interaction\+\_\+field\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l00980}{oomph\+::\+Generalised\+Element\+::get\+\_\+residuals()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00205}{nexternal\+\_\+interaction\+\_\+field\+\_\+data()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00456}{reset\+\_\+after\+\_\+external\+\_\+interaction\+\_\+field\+\_\+fd()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00470}{reset\+\_\+in\+\_\+external\+\_\+interaction\+\_\+field\+\_\+fd()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00450}{update\+\_\+before\+\_\+external\+\_\+interaction\+\_\+field\+\_\+fd()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00461}{update\+\_\+in\+\_\+external\+\_\+interaction\+\_\+field\+\_\+fd()}}, and \mbox{\hyperlink{nodes_8h_source_l00324}{oomph\+::\+Data\+::value\+\_\+pt()}}.
+References oomph\+::\+Generalised\+Element\+::\+Default\+\_\+fd\+\_\+jacobian\+\_\+step, External\+\_\+interaction\+\_\+field\+\_\+data\+\_\+index, External\+\_\+interaction\+\_\+field\+\_\+data\+\_\+local\+\_\+eqn, External\+\_\+interaction\+\_\+field\+\_\+data\+\_\+pt, oomph\+::\+Generalised\+Element\+::get\+\_\+residuals(), i, oomph\+::\+Generalised\+Element\+::ndof(), nexternal\+\_\+interaction\+\_\+field\+\_\+data(), reset\+\_\+after\+\_\+external\+\_\+interaction\+\_\+field\+\_\+fd(), reset\+\_\+in\+\_\+external\+\_\+interaction\+\_\+field\+\_\+fd(), update\+\_\+before\+\_\+external\+\_\+interaction\+\_\+field\+\_\+fd(), update\+\_\+in\+\_\+external\+\_\+interaction\+\_\+field\+\_\+fd(), and oomph\+::\+Data\+::value\+\_\+pt().
 
 
 
-Referenced by \mbox{\hyperlink{element__with__external__element_8h_source_l00345}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+by\+\_\+fd()}}, and \mbox{\hyperlink{element__with__external__element_8h_source_l00385}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+field\+\_\+by\+\_\+fd()}}.
+Referenced by fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+by\+\_\+fd(), and fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+field\+\_\+by\+\_\+fd().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_adbdc1df03ef1c5f24d51c5ad6061c672}\label{classoomph_1_1ElementWithExternalElement_adbdc1df03ef1c5f24d51c5ad6061c672}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!fill\_in\_jacobian\_from\_external\_interaction\_geometric\_by\_fd@{fill\_in\_jacobian\_from\_external\_interaction\_geometric\_by\_fd}}
@@ -618,11 +618,11 @@ Calculate the contributions to the jacobian from the external interaction degree
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00411}{411}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 411 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__external__element_8cc_source_l00720}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+by\+\_\+fd()}}, \mbox{\hyperlink{elements_8h_source_l00980}{oomph\+::\+Generalised\+Element\+::get\+\_\+residuals()}}, and \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}.
+References fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+by\+\_\+fd(), oomph\+::\+Generalised\+Element\+::get\+\_\+residuals(), and oomph\+::\+Generalised\+Element\+::ndof().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_ac0bd87a3f4ec8e87acb0fb450fa7e892}\label{classoomph_1_1ElementWithExternalElement_ac0bd87a3f4ec8e87acb0fb450fa7e892}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!fill\_in\_jacobian\_from\_external\_interaction\_geometric\_by\_fd@{fill\_in\_jacobian\_from\_external\_interaction\_geometric\_by\_fd}}
@@ -636,15 +636,15 @@ Calculate the contributions to the jacobian from the external interaction degree
 
 This function calculates the entries of Jacobian matrix, used in the Newton method, associated with the external interaction degrees of freedom for external geometric data. It does this using finite differences, rather than an analytical formulation, so can be done in total generality. 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8cc_source_l00719}{719}} of file \mbox{\hyperlink{element__with__external__element_8cc_source}{element\+\_\+with\+\_\+external\+\_\+element.\+cc}}.
+Definition at line 719 of file element\+\_\+with\+\_\+external\+\_\+element.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01198}{oomph\+::\+Generalised\+Element\+::\+Default\+\_\+fd\+\_\+jacobian\+\_\+step}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00618}{External\+\_\+interaction\+\_\+geometric\+\_\+data\+\_\+index}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00622}{External\+\_\+interaction\+\_\+geometric\+\_\+data\+\_\+local\+\_\+eqn}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00519}{External\+\_\+interaction\+\_\+geometric\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l00980}{oomph\+::\+Generalised\+Element\+::get\+\_\+residuals()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00232}{nexternal\+\_\+interaction\+\_\+geometric\+\_\+data()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00487}{reset\+\_\+after\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+fd()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00501}{reset\+\_\+in\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+fd()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00481}{update\+\_\+before\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+fd()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00492}{update\+\_\+in\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+fd()}}, and \mbox{\hyperlink{nodes_8h_source_l00324}{oomph\+::\+Data\+::value\+\_\+pt()}}.
+References oomph\+::\+Generalised\+Element\+::\+Default\+\_\+fd\+\_\+jacobian\+\_\+step, External\+\_\+interaction\+\_\+geometric\+\_\+data\+\_\+index, External\+\_\+interaction\+\_\+geometric\+\_\+data\+\_\+local\+\_\+eqn, External\+\_\+interaction\+\_\+geometric\+\_\+data\+\_\+pt, oomph\+::\+Generalised\+Element\+::get\+\_\+residuals(), i, oomph\+::\+Generalised\+Element\+::ndof(), nexternal\+\_\+interaction\+\_\+geometric\+\_\+data(), reset\+\_\+after\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+fd(), reset\+\_\+in\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+fd(), update\+\_\+before\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+fd(), update\+\_\+in\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+fd(), and oomph\+::\+Data\+::value\+\_\+pt().
 
 
 
-Referenced by \mbox{\hyperlink{element__with__external__element_8h_source_l00345}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+by\+\_\+fd()}}, and \mbox{\hyperlink{element__with__external__element_8h_source_l00411}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+by\+\_\+fd()}}.
+Referenced by fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+by\+\_\+fd(), and fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+by\+\_\+fd().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_af8ad5670124479401b925f923a9713b0}\label{classoomph_1_1ElementWithExternalElement_af8ad5670124479401b925f923a9713b0}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!flush\_all\_external\_element\_storage@{flush\_all\_external\_element\_storage}}
@@ -658,21 +658,21 @@ Flush the storage for external elements.
 
 Clear the storage for pointers to external elements and their associated local coordinates. 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8cc_source_l00125}{125}} of file \mbox{\hyperlink{element__with__external__element_8cc_source}{element\+\_\+with\+\_\+external\+\_\+element.\+cc}}.
+Definition at line 125 of file element\+\_\+with\+\_\+external\+\_\+element.\+cc.
 
 
 
-References \mbox{\hyperlink{element__with__external__element_8h_source_l00605}{External\+\_\+element\+\_\+local\+\_\+coord}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00600}{External\+\_\+element\+\_\+pt}}, and \mbox{\hyperlink{element__with__external__element_8h_source_l00588}{Nexternal\+\_\+element\+\_\+storage}}.
+References External\+\_\+element\+\_\+local\+\_\+coord, External\+\_\+element\+\_\+pt, and Nexternal\+\_\+element\+\_\+storage.
 
 
 
-Referenced by \mbox{\hyperlink{element__with__external__element_8cc_source_l00036}{$\sim$\+Element\+With\+External\+Element()}}.
+Referenced by $\sim$\+Element\+With\+External\+Element().
 
-\mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_aa6bbfc084b5f4654cc7f8c61a6f7a81b}\label{classoomph_1_1ElementWithExternalElement_aa6bbfc084b5f4654cc7f8c61a6f7a81b}} 
+\mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_acd9b05781cb87ada3c5cd6d57a1b58b1}\label{classoomph_1_1ElementWithExternalElement_acd9b05781cb87ada3c5cd6d57a1b58b1}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!identify\_all\_field\_data\_for\_external\_interaction@{identify\_all\_field\_data\_for\_external\_interaction}}
 \index{identify\_all\_field\_data\_for\_external\_interaction@{identify\_all\_field\_data\_for\_external\_interaction}!oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}}
 \doxysubsubsection{\texorpdfstring{identify\_all\_field\_data\_for\_external\_interaction()}{identify\_all\_field\_data\_for\_external\_interaction()}}
-{\footnotesize\ttfamily void oomph\+::\+Element\+With\+External\+Element\+::identify\+\_\+all\+\_\+field\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::set$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ $>$ const \&}]{external\+\_\+elements\+\_\+pt,  }\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&}]{paired\+\_\+interaction\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Element\+With\+External\+Element\+::identify\+\_\+all\+\_\+field\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::set$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$$>$ const \&}]{external\+\_\+elements\+\_\+pt,  }\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&}]{paired\+\_\+interaction\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -680,25 +680,25 @@ Function that must return all the data involved in the desired interactions from
 
 Function that must return all the data involved in the desired interactions from the external element Default is to call the identify\+\_\+field\+\_\+data\+\_\+for\+\_\+interaction() for each element. 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionBoussinesqElement_a025d5b61839fa15d926fb8f4a277a9ae}{oomph\+::\+Refineable\+Advection\+Diffusion\+Boussinesq\+Element$<$ AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT $>$}}, and \mbox{\hyperlink{classoomph_1_1FSIWallElement_a16256fcbc5ddc279db3ab776b92b46a1}{oomph\+::\+FSIWall\+Element}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1FSIWallElement_ab35aeda12ebf581ab65586d4d2f6818b}{oomph\+::\+FSIWall\+Element}}, and \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionBoussinesqElement_a097dc0bbbe304b6c2650c78cfb863f13}{oomph\+::\+Refineable\+Advection\+Diffusion\+Boussinesq\+Element$<$ AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8cc_source_l00151}{151}} of file \mbox{\hyperlink{element__with__external__element_8cc_source}{element\+\_\+with\+\_\+external\+\_\+element.\+cc}}.
+Definition at line 151 of file element\+\_\+with\+\_\+external\+\_\+element.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{element__with__external__element_8h_source_l00184}{ninteraction()}}.
+References i, and ninteraction().
 
 
 
-Referenced by \mbox{\hyperlink{element__with__external__element_8cc_source_l00246}{assign\+\_\+external\+\_\+interaction\+\_\+data\+\_\+local\+\_\+eqn\+\_\+numbers()}}.
+Referenced by assign\+\_\+external\+\_\+interaction\+\_\+data\+\_\+local\+\_\+eqn\+\_\+numbers().
 
-\mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a47aa0ca3b37d885d8432815c3418b769}\label{classoomph_1_1ElementWithExternalElement_a47aa0ca3b37d885d8432815c3418b769}} 
+\mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a3cf75e1289d1a09b113fde7da01a61a5}\label{classoomph_1_1ElementWithExternalElement_a3cf75e1289d1a09b113fde7da01a61a5}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!identify\_all\_geometric\_data\_for\_external\_interaction@{identify\_all\_geometric\_data\_for\_external\_interaction}}
 \index{identify\_all\_geometric\_data\_for\_external\_interaction@{identify\_all\_geometric\_data\_for\_external\_interaction}!oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}}
 \doxysubsubsection{\texorpdfstring{identify\_all\_geometric\_data\_for\_external\_interaction()}{identify\_all\_geometric\_data\_for\_external\_interaction()}}
-{\footnotesize\ttfamily void oomph\+::\+Element\+With\+External\+Element\+::identify\+\_\+all\+\_\+geometric\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::set$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ $>$ const \&}]{external\+\_\+elements\+\_\+pt,  }\item[{std\+::set$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ $>$ \&}]{external\+\_\+geometric\+\_\+data\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Element\+With\+External\+Element\+::identify\+\_\+all\+\_\+geometric\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::set$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$$>$ const \&}]{external\+\_\+elements\+\_\+pt,  }\item[{std\+::set$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ $>$ \&}]{external\+\_\+geometric\+\_\+data\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -706,19 +706,19 @@ Function that must return all geometric data involved in the desired interaction
 
 Function that must return all geometric data involved in the desired interactions from the external element Default is to add all geometric data for each element for each interaction. 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1FSIWallElement_a27ef2e85f3486083f7c0577f33327d22}{oomph\+::\+FSIWall\+Element}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1FSIWallElement_a71a4db4c74bc6eeac246f55026878aee}{oomph\+::\+FSIWall\+Element}}.
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8cc_source_l00177}{177}} of file \mbox{\hyperlink{element__with__external__element_8cc_source}{element\+\_\+with\+\_\+external\+\_\+element.\+cc}}.
+Definition at line 177 of file element\+\_\+with\+\_\+external\+\_\+element.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{element__with__external__element_8h_source_l00184}{ninteraction()}}.
+References i, and ninteraction().
 
 
 
-Referenced by \mbox{\hyperlink{element__with__external__element_8cc_source_l00246}{assign\+\_\+external\+\_\+interaction\+\_\+data\+\_\+local\+\_\+eqn\+\_\+numbers()}}.
+Referenced by assign\+\_\+external\+\_\+interaction\+\_\+data\+\_\+local\+\_\+eqn\+\_\+numbers().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_ad491ce37b07b2e15a95bb450409eb2b6}\label{classoomph_1_1ElementWithExternalElement_ad491ce37b07b2e15a95bb450409eb2b6}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!ignore\_external\_geometric\_data@{ignore\_external\_geometric\_data}}
@@ -732,15 +732,15 @@ Do not include any external geometric data when computing the element\textquotes
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00271}{271}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 271 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__external__element_8h_source_l00511}{Add\+\_\+external\+\_\+geometric\+\_\+data}}.
+References Add\+\_\+external\+\_\+geometric\+\_\+data.
 
 
 
-Referenced by \mbox{\hyperlink{projection_8h_source_l00583}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::disable\+\_\+projection()}}, \mbox{\hyperlink{projection_8h_source_l00548}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::enable\+\_\+projection()}}, and \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source_l00097}{oomph\+::\+Refineable\+Navier\+Stokes\+Boussinesq\+Element$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::further\+\_\+build()}}.
+Referenced by oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::disable\+\_\+projection(), oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::enable\+\_\+projection(), oomph\+::\+Refineable\+Navier\+Stokes\+Boussinesq\+Element$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::further\+\_\+build(), Linearised\+Axisymmetric\+QCrouzeix\+Raviart\+Multi\+Domain\+Element\+::\+Linearised\+Axisymmetric\+QCrouzeix\+Raviart\+Multi\+Domain\+Element(), Linearised\+Axisymmetric\+QTaylor\+Hood\+Multi\+Domain\+Element\+::\+Linearised\+Axisymmetric\+QTaylor\+Hood\+Multi\+Domain\+Element(), Linearised\+QCrouzeix\+Raviart\+Multi\+Domain\+Element\+::\+Linearised\+QCrouzeix\+Raviart\+Multi\+Domain\+Element(), Linearised\+QTaylor\+Hood\+Multi\+Domain\+Element\+::\+Linearised\+QTaylor\+Hood\+Multi\+Domain\+Element(), Refineable\+Linearised\+Axisymmetric\+QCrouzeix\+Raviart\+Multi\+Domain\+Element\+::\+Refineable\+Linearised\+Axisymmetric\+QCrouzeix\+Raviart\+Multi\+Domain\+Element(), Refineable\+Linearised\+Axisymmetric\+QTaylor\+Hood\+Multi\+Domain\+Element\+::\+Refineable\+Linearised\+Axisymmetric\+QTaylor\+Hood\+Multi\+Domain\+Element(), Refineable\+Linearised\+QCrouzeix\+Raviart\+Multi\+Domain\+Element\+::\+Refineable\+Linearised\+QCrouzeix\+Raviart\+Multi\+Domain\+Element(), and Refineable\+Linearised\+QTaylor\+Hood\+Multi\+Domain\+Element\+::\+Refineable\+Linearised\+QTaylor\+Hood\+Multi\+Domain\+Element().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a59bfba4d5a3c0f1cc8d35f144bba6df1}\label{classoomph_1_1ElementWithExternalElement_a59bfba4d5a3c0f1cc8d35f144bba6df1}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!ignore\_external\_interaction\_data@{ignore\_external\_interaction\_data}}
@@ -754,15 +754,15 @@ Do not include any external interaction data when computing the element\textquot
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00278}{278}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 278 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__external__element_8h_source_l00508}{Add\+\_\+external\+\_\+interaction\+\_\+data}}.
+References Add\+\_\+external\+\_\+interaction\+\_\+data.
 
 
 
-Referenced by \mbox{\hyperlink{projection_8h_source_l00583}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::disable\+\_\+projection()}}, and \mbox{\hyperlink{projection_8h_source_l00548}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::enable\+\_\+projection()}}.
+Referenced by oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::disable\+\_\+projection(), oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::enable\+\_\+projection(), Linearised\+Axisymmetric\+QCrouzeix\+Raviart\+Multi\+Domain\+Element\+::\+Linearised\+Axisymmetric\+QCrouzeix\+Raviart\+Multi\+Domain\+Element(), Linearised\+Axisymmetric\+QTaylor\+Hood\+Multi\+Domain\+Element\+::\+Linearised\+Axisymmetric\+QTaylor\+Hood\+Multi\+Domain\+Element(), Refineable\+Linearised\+Axisymmetric\+QCrouzeix\+Raviart\+Multi\+Domain\+Element\+::\+Refineable\+Linearised\+Axisymmetric\+QCrouzeix\+Raviart\+Multi\+Domain\+Element(), and Refineable\+Linearised\+Axisymmetric\+QTaylor\+Hood\+Multi\+Domain\+Element\+::\+Refineable\+Linearised\+Axisymmetric\+QTaylor\+Hood\+Multi\+Domain\+Element().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a1e91155332a266a1672791e8711c409d}\label{classoomph_1_1ElementWithExternalElement_a1e91155332a266a1672791e8711c409d}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!include\_external\_geometric\_data@{include\_external\_geometric\_data}}
@@ -776,15 +776,15 @@ Do include external geometric data when computing the element\textquotesingle{}s
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00286}{286}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 286 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__external__element_8h_source_l00511}{Add\+\_\+external\+\_\+geometric\+\_\+data}}.
+References Add\+\_\+external\+\_\+geometric\+\_\+data.
 
 
 
-Referenced by \mbox{\hyperlink{projection_8h_source_l00583}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::disable\+\_\+projection()}}.
+Referenced by oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::disable\+\_\+projection().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_aac430d183896ee8a560d3a5c4143ad8d}\label{classoomph_1_1ElementWithExternalElement_aac430d183896ee8a560d3a5c4143ad8d}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!include\_external\_interaction\_data@{include\_external\_interaction\_data}}
@@ -798,15 +798,15 @@ Do include external geometric data when computing the element\textquotesingle{}s
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00294}{294}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 294 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__external__element_8h_source_l00508}{Add\+\_\+external\+\_\+interaction\+\_\+data}}.
+References Add\+\_\+external\+\_\+interaction\+\_\+data.
 
 
 
-Referenced by \mbox{\hyperlink{projection_8h_source_l00583}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::disable\+\_\+projection()}}.
+Referenced by oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::disable\+\_\+projection().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a1df25bb9135b84569486401f86c11b5a}\label{classoomph_1_1ElementWithExternalElement_a1df25bb9135b84569486401f86c11b5a}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!initialise\_external\_element\_storage@{initialise\_external\_element\_storage}}
@@ -820,15 +820,15 @@ Initialise storage for pointers to external elements and their local coordinates
 
 Initialise storage for source elements and their associated local coordinates for the specified number of interactions. 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8cc_source_l00076}{76}} of file \mbox{\hyperlink{element__with__external__element_8cc_source}{element\+\_\+with\+\_\+external\+\_\+element.\+cc}}.
+Definition at line 76 of file element\+\_\+with\+\_\+external\+\_\+element.\+cc.
 
 
 
-References \mbox{\hyperlink{element__with__external__element_8h_source_l00605}{External\+\_\+element\+\_\+local\+\_\+coord}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00600}{External\+\_\+element\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00588}{Nexternal\+\_\+element\+\_\+storage}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00581}{Ninteraction}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00584}{Nintpt}}, and \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}.
+References External\+\_\+element\+\_\+local\+\_\+coord, External\+\_\+element\+\_\+pt, i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), Nexternal\+\_\+element\+\_\+storage, Ninteraction, Nintpt, and oomph\+::\+Integral\+::nweight().
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l00524}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}.
+Referenced by oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a4b36dae007dc177425c50f30211890de}\label{classoomph_1_1ElementWithExternalElement_a4b36dae007dc177425c50f30211890de}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!nexternal\_interaction\_field\_data@{nexternal\_interaction\_field\_data}}
@@ -842,15 +842,15 @@ Return the number of \mbox{\hyperlink{classoomph_1_1Data}{Data}} items that affe
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00205}{205}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 205 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__external__element_8h_source_l00591}{Nexternal\+\_\+interaction\+\_\+field\+\_\+data}}.
+References Nexternal\+\_\+interaction\+\_\+field\+\_\+data.
 
 
 
-Referenced by \mbox{\hyperlink{element__with__external__element_8cc_source_l00246}{assign\+\_\+external\+\_\+interaction\+\_\+data\+\_\+local\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{elements_8cc_source_l00691}{oomph\+::\+Generalised\+Element\+::assign\+\_\+local\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{element__with__external__element_8cc_source_l00205}{describe\+\_\+local\+\_\+dofs()}}, \mbox{\hyperlink{fsi_8cc_source_l00078}{oomph\+::\+FSIWall\+Element\+::describe\+\_\+local\+\_\+dofs()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00212}{external\+\_\+interaction\+\_\+field\+\_\+data\+\_\+pt()}}, and \mbox{\hyperlink{element__with__external__element_8cc_source_l00638}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+field\+\_\+by\+\_\+fd()}}.
+Referenced by assign\+\_\+external\+\_\+interaction\+\_\+data\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Generalised\+Element\+::assign\+\_\+local\+\_\+eqn\+\_\+numbers(), describe\+\_\+local\+\_\+dofs(), oomph\+::\+FSIWall\+Element\+::describe\+\_\+local\+\_\+dofs(), external\+\_\+interaction\+\_\+field\+\_\+data\+\_\+pt(), and fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+field\+\_\+by\+\_\+fd().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a4688ff13802ca29d654f925f6697df87}\label{classoomph_1_1ElementWithExternalElement_a4688ff13802ca29d654f925f6697df87}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!nexternal\_interaction\_geometric\_data@{nexternal\_interaction\_geometric\_data}}
@@ -864,15 +864,15 @@ Return the number of geometric \mbox{\hyperlink{classoomph_1_1Data}{Data}} items
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00232}{232}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 232 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__external__element_8h_source_l00594}{Nexternal\+\_\+interaction\+\_\+geometric\+\_\+data}}.
+References Nexternal\+\_\+interaction\+\_\+geometric\+\_\+data.
 
 
 
-Referenced by \mbox{\hyperlink{element__with__external__element_8cc_source_l00246}{assign\+\_\+external\+\_\+interaction\+\_\+data\+\_\+local\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{elements_8cc_source_l00691}{oomph\+::\+Generalised\+Element\+::assign\+\_\+local\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{element__with__external__element_8cc_source_l00205}{describe\+\_\+local\+\_\+dofs()}}, \mbox{\hyperlink{fsi_8cc_source_l00078}{oomph\+::\+FSIWall\+Element\+::describe\+\_\+local\+\_\+dofs()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00251}{external\+\_\+interaction\+\_\+geometric\+\_\+data\+\_\+pt()}}, and \mbox{\hyperlink{element__with__external__element_8cc_source_l00720}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+by\+\_\+fd()}}.
+Referenced by assign\+\_\+external\+\_\+interaction\+\_\+data\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Generalised\+Element\+::assign\+\_\+local\+\_\+eqn\+\_\+numbers(), describe\+\_\+local\+\_\+dofs(), oomph\+::\+FSIWall\+Element\+::describe\+\_\+local\+\_\+dofs(), external\+\_\+interaction\+\_\+geometric\+\_\+data\+\_\+pt(), and fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+by\+\_\+fd().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_ad63351d9c35ebe15e194a898a5daebc1}\label{classoomph_1_1ElementWithExternalElement_ad63351d9c35ebe15e194a898a5daebc1}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!ninteraction@{ninteraction}}
@@ -886,15 +886,15 @@ Return the number of interactions in the element.
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00184}{184}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 184 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__external__element_8h_source_l00581}{Ninteraction}}.
+References Ninteraction.
 
 
 
-Referenced by \mbox{\hyperlink{element__with__external__element_8cc_source_l00246}{assign\+\_\+external\+\_\+interaction\+\_\+data\+\_\+local\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{projection_8h_source_l00548}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::enable\+\_\+projection()}}, \mbox{\hyperlink{element__with__external__element_8cc_source_l00152}{identify\+\_\+all\+\_\+field\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction()}}, \mbox{\hyperlink{fsi_8cc_source_l00279}{oomph\+::\+FSIWall\+Element\+::identify\+\_\+all\+\_\+field\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction()}}, \mbox{\hyperlink{element__with__external__element_8cc_source_l00178}{identify\+\_\+all\+\_\+geometric\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction()}}, and \mbox{\hyperlink{fsi_8cc_source_l00317}{oomph\+::\+FSIWall\+Element\+::identify\+\_\+all\+\_\+geometric\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction()}}.
+Referenced by assign\+\_\+external\+\_\+interaction\+\_\+data\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::enable\+\_\+projection(), identify\+\_\+all\+\_\+field\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction(), oomph\+::\+FSIWall\+Element\+::identify\+\_\+all\+\_\+field\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction(), identify\+\_\+all\+\_\+geometric\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction(), and oomph\+::\+FSIWall\+Element\+::identify\+\_\+all\+\_\+geometric\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a292f8f8a2f2ad1a1bb64e90d02934907}\label{classoomph_1_1ElementWithExternalElement_a292f8f8a2f2ad1a1bb64e90d02934907}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!operator=@{operator=}}
@@ -918,11 +918,11 @@ Output by plotting vector from integration point to corresponding point in exter
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8cc_source_l00798}{798}} of file \mbox{\hyperlink{element__with__external__element_8cc_source}{element\+\_\+with\+\_\+external\+\_\+element.\+cc}}.
+Definition at line 798 of file element\+\_\+with\+\_\+external\+\_\+element.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00136}{external\+\_\+element\+\_\+local\+\_\+coord()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00107}{external\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References oomph\+::\+Finite\+Element\+::dim(), external\+\_\+element\+\_\+local\+\_\+coord(), external\+\_\+element\+\_\+pt(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Integral\+::knot(), oomph\+::\+Node\+::ndim(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Integral\+::nweight(), and s.
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a78d8fa19cbc1279a8aeb1756ce64c0df}\label{classoomph_1_1ElementWithExternalElement_a78d8fa19cbc1279a8aeb1756ce64c0df}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!range\_check@{range\_check}}
@@ -936,15 +936,15 @@ Helper function for range checking in the access functions.
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00546}{546}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 546 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__external__element_8h_source_l00581}{Ninteraction}}, and \mbox{\hyperlink{element__with__external__element_8h_source_l00584}{Nintpt}}.
+References Ninteraction, and Nintpt.
 
 
 
-Referenced by \mbox{\hyperlink{element__with__external__element_8h_source_l00136}{external\+\_\+element\+\_\+local\+\_\+coord()}}, and \mbox{\hyperlink{element__with__external__element_8h_source_l00107}{external\+\_\+element\+\_\+pt()}}.
+Referenced by external\+\_\+element\+\_\+local\+\_\+coord(), and external\+\_\+element\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a3852c0042b81305b0488fc67f37ad632}\label{classoomph_1_1ElementWithExternalElement_a3852c0042b81305b0488fc67f37ad632}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!reset\_after\_external\_interaction\_field\_fd@{reset\_after\_external\_interaction\_field\_fd}}
@@ -962,11 +962,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1FSIWallElement_a5ba540936e15a03a
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00456}{456}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 456 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{element__with__external__element_8cc_source_l00638}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+field\+\_\+by\+\_\+fd()}}.
+Referenced by fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+field\+\_\+by\+\_\+fd().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a902a29b3e23a6fb6a6b06e672162a578}\label{classoomph_1_1ElementWithExternalElement_a902a29b3e23a6fb6a6b06e672162a578}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!reset\_after\_external\_interaction\_geometric\_fd@{reset\_after\_external\_interaction\_geometric\_fd}}
@@ -980,15 +980,15 @@ Function that is call after the finite differencing of the external interaction 
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a1c8b7e327f305f8399e4d9a2d5deddff}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$}}, and \mbox{\hyperlink{classoomph_1_1FSIWallElement_ad1d147ea9d6f49f7d0507d783d7572e2}{oomph\+::\+FSIWall\+Element}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1FSIWallElement_ad1d147ea9d6f49f7d0507d783d7572e2}{oomph\+::\+FSIWall\+Element}}, and \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a1c8b7e327f305f8399e4d9a2d5deddff}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00487}{487}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 487 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{element__with__external__element_8cc_source_l00720}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+by\+\_\+fd()}}.
+Referenced by fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+by\+\_\+fd().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a4ee53afaf9a09c5e2e5cbc488ca7cd7f}\label{classoomph_1_1ElementWithExternalElement_a4ee53afaf9a09c5e2e5cbc488ca7cd7f}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!reset\_in\_external\_interaction\_field\_fd@{reset\_in\_external\_interaction\_field\_fd}}
@@ -1006,15 +1006,15 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1FSIWallElement_adc6d07122f1624e2
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00470}{470}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 470 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{element__with__external__element_8h_source_l00461}{update\+\_\+in\+\_\+external\+\_\+interaction\+\_\+field\+\_\+fd()}}.
+References i, and update\+\_\+in\+\_\+external\+\_\+interaction\+\_\+field\+\_\+fd().
 
 
 
-Referenced by \mbox{\hyperlink{element__with__external__element_8cc_source_l00638}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+field\+\_\+by\+\_\+fd()}}.
+Referenced by fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+field\+\_\+by\+\_\+fd().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a2bc7a069b01795d9c8036fb81e8b319d}\label{classoomph_1_1ElementWithExternalElement_a2bc7a069b01795d9c8036fb81e8b319d}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!reset\_in\_external\_interaction\_geometric\_fd@{reset\_in\_external\_interaction\_geometric\_fd}}
@@ -1028,19 +1028,19 @@ Function called within the finite difference loop for external interaction data 
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_aea15fbe491357b33db4b0de7df957314}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$}}, and \mbox{\hyperlink{classoomph_1_1FSIWallElement_aa0b511d7c276578c95d26550576a9be0}{oomph\+::\+FSIWall\+Element}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1FSIWallElement_aa0b511d7c276578c95d26550576a9be0}{oomph\+::\+FSIWall\+Element}}, and \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_aea15fbe491357b33db4b0de7df957314}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00501}{501}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 501 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{element__with__external__element_8h_source_l00492}{update\+\_\+in\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+fd()}}.
+References i, and update\+\_\+in\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+fd().
 
 
 
-Referenced by \mbox{\hyperlink{element__with__external__element_8cc_source_l00720}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+by\+\_\+fd()}}.
+Referenced by fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+by\+\_\+fd().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a180b99d0cf83f3b2d90427e77b90fc96}\label{classoomph_1_1ElementWithExternalElement_a180b99d0cf83f3b2d90427e77b90fc96}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!set\_ninteraction@{set\_ninteraction}}
@@ -1054,15 +1054,15 @@ Set the number of interactions in the element This function is usually called in
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00178}{178}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 178 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__external__element_8h_source_l00581}{Ninteraction}}.
+References Ninteraction.
 
 
 
-Referenced by \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source_l01076}{oomph\+::\+Advection\+Diffusion\+Boussinesq\+Element$<$ AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT $>$\+::\+Advection\+Diffusion\+Boussinesq\+Element()}}, \mbox{\hyperlink{projection_8h_source_l00583}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::disable\+\_\+projection()}}, \mbox{\hyperlink{fsi_8cc_source_l00138}{oomph\+::\+FSIWall\+Element\+::enable\+\_\+fluid\+\_\+loading\+\_\+on\+\_\+both\+\_\+sides()}}, \mbox{\hyperlink{projection_8h_source_l00548}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::enable\+\_\+projection()}}, \mbox{\hyperlink{fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00653}{oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::\+Fourier\+Decomposed\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement()}}, \mbox{\hyperlink{fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00076}{oomph\+::\+Fourier\+Decomposed\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::\+Fourier\+Decomposed\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement()}}, \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00563}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$\+::\+FSIAxisym\+Foepplvon\+Karman\+Element()}}, \mbox{\hyperlink{axisym__linear__elasticity__traction__elements_8h_source_l00521}{oomph\+::\+FSIAxisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, NAVIER\+\_\+\+STOKES\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::\+FSIAxisymmetric\+Linear\+Elasticity\+Traction\+Element()}}, \mbox{\hyperlink{solid__traction__elements_8h_source_l02560}{oomph\+::\+FSIImpose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ ELEMENT $>$\+::\+FSIImpose\+Displacement\+By\+Lagrange\+Multiplier\+Element()}}, \mbox{\hyperlink{axisym__poroelasticity__face__elements_8h_source_l01042}{oomph\+::\+FSILinearised\+Axisym\+Poroelastic\+Traction\+Element$<$ POROELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, NAVIER\+\_\+\+STOKES\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::\+FSILinearised\+Axisym\+Poroelastic\+Traction\+Element()}}, \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00658}{oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement()}}, \mbox{\hyperlink{multi__domain__linearised__axisym__navier__stokes__elements_8h_source_l00176}{Linearised\+Axisymmetric\+QCrouzeix\+Raviart\+Multi\+Domain\+Element\+::\+Linearised\+Axisymmetric\+QCrouzeix\+Raviart\+Multi\+Domain\+Element()}}, \mbox{\hyperlink{multi__domain__linearised__axisym__navier__stokes__elements_8h_source_l00057}{Linearised\+Axisymmetric\+QTaylor\+Hood\+Multi\+Domain\+Element\+::\+Linearised\+Axisymmetric\+QTaylor\+Hood\+Multi\+Domain\+Element()}}, \mbox{\hyperlink{axisym__poroelastic__fsi__face__elements_8h_source_l00734}{oomph\+::\+Linearised\+Axisym\+Poroelastic\+BJS\+\_\+\+FSIElement$<$ FLUID\+\_\+\+BULK\+\_\+\+ELEMENT, POROELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::\+Linearised\+Axisym\+Poroelastic\+BJS\+\_\+\+FSIElement()}}, \mbox{\hyperlink{axisym__fluid__traction__elements_8h_source_l00829}{oomph\+::\+Linearised\+FSIAxisymmetric\+NSt\+No\+Slip\+BCElement\+Element$<$ FLUID\+\_\+\+BULK\+\_\+\+ELEMENT, SOLID\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::\+Linearised\+FSIAxisymmetric\+NSt\+No\+Slip\+BCElement\+Element()}}, \mbox{\hyperlink{multi__domain__linearised__navier__stokes__elements_8h_source_l00175}{Linearised\+QCrouzeix\+Raviart\+Multi\+Domain\+Element\+::\+Linearised\+QCrouzeix\+Raviart\+Multi\+Domain\+Element()}}, \mbox{\hyperlink{multi__domain__linearised__navier__stokes__elements_8h_source_l00057}{Linearised\+QTaylor\+Hood\+Multi\+Domain\+Element\+::\+Linearised\+QTaylor\+Hood\+Multi\+Domain\+Element()}}, \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source_l00827}{oomph\+::\+Navier\+Stokes\+Boussinesq\+Element$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::\+Navier\+Stokes\+Boussinesq\+Element()}}, \mbox{\hyperlink{pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00890}{oomph\+::\+PMLHelmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::\+PMLHelmholtz\+Flux\+From\+Normal\+Displacement\+BCElement()}}, \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source_l00381}{oomph\+::\+Refineable\+Advection\+Diffusion\+Boussinesq\+Element$<$ AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT $>$\+::\+Refineable\+Advection\+Diffusion\+Boussinesq\+Element()}}, \mbox{\hyperlink{multi__domain__linearised__axisym__navier__stokes__elements_8h_source_l00418}{Refineable\+Linearised\+Axisymmetric\+QCrouzeix\+Raviart\+Multi\+Domain\+Element\+::\+Refineable\+Linearised\+Axisymmetric\+QCrouzeix\+Raviart\+Multi\+Domain\+Element()}}, \mbox{\hyperlink{multi__domain__linearised__axisym__navier__stokes__elements_8h_source_l00297}{Refineable\+Linearised\+Axisymmetric\+QTaylor\+Hood\+Multi\+Domain\+Element\+::\+Refineable\+Linearised\+Axisymmetric\+QTaylor\+Hood\+Multi\+Domain\+Element()}}, \mbox{\hyperlink{multi__domain__linearised__navier__stokes__elements_8h_source_l00413}{Refineable\+Linearised\+QCrouzeix\+Raviart\+Multi\+Domain\+Element\+::\+Refineable\+Linearised\+QCrouzeix\+Raviart\+Multi\+Domain\+Element()}}, \mbox{\hyperlink{multi__domain__linearised__navier__stokes__elements_8h_source_l00294}{Refineable\+Linearised\+QTaylor\+Hood\+Multi\+Domain\+Element\+::\+Refineable\+Linearised\+QTaylor\+Hood\+Multi\+Domain\+Element()}}, \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source_l00071}{oomph\+::\+Refineable\+Navier\+Stokes\+Boussinesq\+Element$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::\+Refineable\+Navier\+Stokes\+Boussinesq\+Element()}}, \mbox{\hyperlink{fsi_8cc_source_l00121}{oomph\+::\+FSIWall\+Element\+::setup\+\_\+fsi\+\_\+wall\+\_\+element()}}, \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00074}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement()}}, and \mbox{\hyperlink{pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00076}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+PMLHelmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+PMLHelmholtz\+Pressure\+BCElement()}}.
+Referenced by oomph\+::\+Advection\+Diffusion\+Boussinesq\+Element$<$ AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT $>$\+::\+Advection\+Diffusion\+Boussinesq\+Element(), oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::disable\+\_\+projection(), oomph\+::\+FSIWall\+Element\+::enable\+\_\+fluid\+\_\+loading\+\_\+on\+\_\+both\+\_\+sides(), oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::enable\+\_\+projection(), oomph\+::\+Fourier\+Decomposed\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::\+Fourier\+Decomposed\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement(), oomph\+::\+Fourier\+Decomposed\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::\+Fourier\+Decomposed\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement(), oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$\+::\+FSIAxisym\+Foepplvon\+Karman\+Element(), oomph\+::\+FSIAxisymmetric\+Linear\+Elasticity\+Traction\+Element$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, NAVIER\+\_\+\+STOKES\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::\+FSIAxisymmetric\+Linear\+Elasticity\+Traction\+Element(), oomph\+::\+FSIImpose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ ELEMENT $>$\+::\+FSIImpose\+Displacement\+By\+Lagrange\+Multiplier\+Element(), oomph\+::\+FSILinearised\+Axisym\+Poroelastic\+Traction\+Element$<$ POROELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, NAVIER\+\_\+\+STOKES\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::\+FSILinearised\+Axisym\+Poroelastic\+Traction\+Element(), oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement(), oomph\+::\+Linearised\+Axisym\+Poroelastic\+BJS\+\_\+\+FSIElement$<$ FLUID\+\_\+\+BULK\+\_\+\+ELEMENT, POROELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::\+Linearised\+Axisym\+Poroelastic\+BJS\+\_\+\+FSIElement(), oomph\+::\+Linearised\+FSIAxisymmetric\+NSt\+No\+Slip\+BCElement\+Element$<$ FLUID\+\_\+\+BULK\+\_\+\+ELEMENT, SOLID\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::\+Linearised\+FSIAxisymmetric\+NSt\+No\+Slip\+BCElement\+Element(), oomph\+::\+Navier\+Stokes\+Boussinesq\+Element$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::\+Navier\+Stokes\+Boussinesq\+Element(), oomph\+::\+PMLHelmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::\+PMLHelmholtz\+Flux\+From\+Normal\+Displacement\+BCElement(), oomph\+::\+Refineable\+Advection\+Diffusion\+Boussinesq\+Element$<$ AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT $>$\+::\+Refineable\+Advection\+Diffusion\+Boussinesq\+Element(), oomph\+::\+Refineable\+Navier\+Stokes\+Boussinesq\+Element$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::\+Refineable\+Navier\+Stokes\+Boussinesq\+Element(), oomph\+::\+FSIWall\+Element\+::setup\+\_\+fsi\+\_\+wall\+\_\+element(), oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement(), and oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+PMLHelmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+PMLHelmholtz\+Pressure\+BCElement().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a14f33794f4ca25faad844a8b061ae164}\label{classoomph_1_1ElementWithExternalElement_a14f33794f4ca25faad844a8b061ae164}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!storage\_has\_been\_allocated@{storage\_has\_been\_allocated}}
@@ -1076,11 +1076,11 @@ Helper function to check if storage has actually been allocated.
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00090}{90}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 90 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{element__with__external__element_8h_source_l00605}{External\+\_\+element\+\_\+local\+\_\+coord}}, and \mbox{\hyperlink{element__with__external__element_8h_source_l00600}{External\+\_\+element\+\_\+pt}}.
+References External\+\_\+element\+\_\+local\+\_\+coord, and External\+\_\+element\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a040508496c08c90492f104dfeaef142c}\label{classoomph_1_1ElementWithExternalElement_a040508496c08c90492f104dfeaef142c}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!update\_before\_external\_interaction\_field\_fd@{update\_before\_external\_interaction\_field\_fd}}
@@ -1094,11 +1094,11 @@ Function that is called before the finite differencing of any external interacti
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00450}{450}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 450 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{element__with__external__element_8cc_source_l00638}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+field\+\_\+by\+\_\+fd()}}.
+Referenced by fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+field\+\_\+by\+\_\+fd().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a2460f9def76ae512936eba0a1010cdc2}\label{classoomph_1_1ElementWithExternalElement_a2460f9def76ae512936eba0a1010cdc2}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!update\_before\_external\_interaction\_geometric\_fd@{update\_before\_external\_interaction\_geometric\_fd}}
@@ -1116,11 +1116,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00481}{481}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 481 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{element__with__external__element_8cc_source_l00720}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+by\+\_\+fd()}}.
+Referenced by fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+by\+\_\+fd().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_ae8dac1e4db8e6833fda1150583ce5a21}\label{classoomph_1_1ElementWithExternalElement_ae8dac1e4db8e6833fda1150583ce5a21}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!update\_in\_external\_interaction\_field\_fd@{update\_in\_external\_interaction\_field\_fd}}
@@ -1138,11 +1138,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1FSIWallElement_ab427113ed6de36a5
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00461}{461}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 461 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{element__with__external__element_8cc_source_l00638}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+field\+\_\+by\+\_\+fd()}}, and \mbox{\hyperlink{element__with__external__element_8h_source_l00470}{reset\+\_\+in\+\_\+external\+\_\+interaction\+\_\+field\+\_\+fd()}}.
+Referenced by fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+field\+\_\+by\+\_\+fd(), and reset\+\_\+in\+\_\+external\+\_\+interaction\+\_\+field\+\_\+fd().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_ab34f7db5cb5a473c6f5552f34af4a651}\label{classoomph_1_1ElementWithExternalElement_ab34f7db5cb5a473c6f5552f34af4a651}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!update\_in\_external\_interaction\_geometric\_fd@{update\_in\_external\_interaction\_geometric\_fd}}
@@ -1156,15 +1156,15 @@ Function called within the finite difference loop for external interaction data 
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_ac3284ec67a975078466ec03d55f65416}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$}}, and \mbox{\hyperlink{classoomph_1_1FSIWallElement_a495cc7de04e097186f497a7416655736}{oomph\+::\+FSIWall\+Element}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1FSIWallElement_a495cc7de04e097186f497a7416655736}{oomph\+::\+FSIWall\+Element}}, and \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_ac3284ec67a975078466ec03d55f65416}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00492}{492}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 492 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{element__with__external__element_8cc_source_l00720}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+by\+\_\+fd()}}, and \mbox{\hyperlink{element__with__external__element_8h_source_l00501}{reset\+\_\+in\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+fd()}}.
+Referenced by fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+by\+\_\+fd(), and reset\+\_\+in\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+fd().
 
 
 
@@ -1181,11 +1181,11 @@ Boolean flag to indicate whether to include the external geometric data.
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00511}{511}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 511 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{element__with__external__element_8h_source_l00238}{add\+\_\+external\+\_\+geometric\+\_\+data()}}, \mbox{\hyperlink{element__with__external__element_8cc_source_l00246}{assign\+\_\+external\+\_\+interaction\+\_\+data\+\_\+local\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00301}{external\+\_\+geometric\+\_\+data\+\_\+is\+\_\+included()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00271}{ignore\+\_\+external\+\_\+geometric\+\_\+data()}}, and \mbox{\hyperlink{element__with__external__element_8h_source_l00286}{include\+\_\+external\+\_\+geometric\+\_\+data()}}.
+Referenced by add\+\_\+external\+\_\+geometric\+\_\+data(), assign\+\_\+external\+\_\+interaction\+\_\+data\+\_\+local\+\_\+eqn\+\_\+numbers(), external\+\_\+geometric\+\_\+data\+\_\+is\+\_\+included(), ignore\+\_\+external\+\_\+geometric\+\_\+data(), and include\+\_\+external\+\_\+geometric\+\_\+data().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_aba9cc26e0c5dfca9f3b39e7b7105d079}\label{classoomph_1_1ElementWithExternalElement_aba9cc26e0c5dfca9f3b39e7b7105d079}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!Add\_external\_interaction\_data@{Add\_external\_interaction\_data}}
@@ -1199,11 +1199,11 @@ Boolean flag to indicate whether to include the external data.
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00508}{508}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 508 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{element__with__external__element_8h_source_l00244}{add\+\_\+external\+\_\+interaction\+\_\+data()}}, \mbox{\hyperlink{element__with__external__element_8cc_source_l00246}{assign\+\_\+external\+\_\+interaction\+\_\+data\+\_\+local\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{fsi_8h_source_l00282}{oomph\+::\+FSIWall\+Element\+::exclude\+\_\+external\+\_\+load\+\_\+data()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00278}{ignore\+\_\+external\+\_\+interaction\+\_\+data()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00294}{include\+\_\+external\+\_\+interaction\+\_\+data()}}, and \mbox{\hyperlink{fsi_8h_source_l00290}{oomph\+::\+FSIWall\+Element\+::include\+\_\+external\+\_\+load\+\_\+data()}}.
+Referenced by add\+\_\+external\+\_\+interaction\+\_\+data(), assign\+\_\+external\+\_\+interaction\+\_\+data\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+::\+FSIWall\+Element\+::exclude\+\_\+external\+\_\+load\+\_\+data(), ignore\+\_\+external\+\_\+interaction\+\_\+data(), include\+\_\+external\+\_\+interaction\+\_\+data(), and oomph\+::\+FSIWall\+Element\+::include\+\_\+external\+\_\+load\+\_\+data().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a7de6fe7b0230003be863e156e516d803}\label{classoomph_1_1ElementWithExternalElement_a7de6fe7b0230003be863e156e516d803}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!External\_element\_local\_coord@{External\_element\_local\_coord}}
@@ -1217,11 +1217,11 @@ Storage for vectors of local coordinates in external elements that correspond to
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00605}{605}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 605 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{element__with__external__element_8h_source_l00523}{check\+\_\+storage\+\_\+allocated()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00136}{external\+\_\+element\+\_\+local\+\_\+coord()}}, \mbox{\hyperlink{element__with__external__element_8cc_source_l00125}{flush\+\_\+all\+\_\+external\+\_\+element\+\_\+storage()}}, \mbox{\hyperlink{element__with__external__element_8cc_source_l00076}{initialise\+\_\+external\+\_\+element\+\_\+storage()}}, and \mbox{\hyperlink{element__with__external__element_8h_source_l00090}{storage\+\_\+has\+\_\+been\+\_\+allocated()}}.
+Referenced by check\+\_\+storage\+\_\+allocated(), external\+\_\+element\+\_\+local\+\_\+coord(), flush\+\_\+all\+\_\+external\+\_\+element\+\_\+storage(), initialise\+\_\+external\+\_\+element\+\_\+storage(), and storage\+\_\+has\+\_\+been\+\_\+allocated().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a716c9187aad0ca94fc39391fed292f96}\label{classoomph_1_1ElementWithExternalElement_a716c9187aad0ca94fc39391fed292f96}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!External\_element\_pt@{External\_element\_pt}}
@@ -1235,11 +1235,11 @@ Storage for pointers to elements that provide contributions to the residuals of 
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00600}{600}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 600 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{element__with__external__element_8h_source_l00523}{check\+\_\+storage\+\_\+allocated()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00107}{external\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{element__with__external__element_8cc_source_l00125}{flush\+\_\+all\+\_\+external\+\_\+element\+\_\+storage()}}, \mbox{\hyperlink{element__with__external__element_8cc_source_l00076}{initialise\+\_\+external\+\_\+element\+\_\+storage()}}, and \mbox{\hyperlink{element__with__external__element_8h_source_l00090}{storage\+\_\+has\+\_\+been\+\_\+allocated()}}.
+Referenced by check\+\_\+storage\+\_\+allocated(), external\+\_\+element\+\_\+pt(), flush\+\_\+all\+\_\+external\+\_\+element\+\_\+storage(), initialise\+\_\+external\+\_\+element\+\_\+storage(), and storage\+\_\+has\+\_\+been\+\_\+allocated().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a4974acb07f164a01a41912e7aae63f02}\label{classoomph_1_1ElementWithExternalElement_a4974acb07f164a01a41912e7aae63f02}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!External\_interaction\_field\_data\_index@{External\_interaction\_field\_data\_index}}
@@ -1253,11 +1253,11 @@ Storage for the index of the values in the external field data that affect the i
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00609}{609}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 609 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{element__with__external__element_8cc_source_l00246}{assign\+\_\+external\+\_\+interaction\+\_\+data\+\_\+local\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{element__with__external__element_8cc_source_l00638}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+field\+\_\+by\+\_\+fd()}}, and \mbox{\hyperlink{element__with__external__element_8cc_source_l00036}{$\sim$\+Element\+With\+External\+Element()}}.
+Referenced by assign\+\_\+external\+\_\+interaction\+\_\+data\+\_\+local\+\_\+eqn\+\_\+numbers(), fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+field\+\_\+by\+\_\+fd(), and $\sim$\+Element\+With\+External\+Element().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a7dfd20a89ea1ad65f4263525aacdab59}\label{classoomph_1_1ElementWithExternalElement_a7dfd20a89ea1ad65f4263525aacdab59}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!External\_interaction\_field\_data\_local\_eqn@{External\_interaction\_field\_data\_local\_eqn}}
@@ -1271,11 +1271,11 @@ Storage for the local equation number associated with the external field data th
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00613}{613}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 613 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{element__with__external__element_8cc_source_l00246}{assign\+\_\+external\+\_\+interaction\+\_\+data\+\_\+local\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{element__with__external__element_8cc_source_l00638}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+field\+\_\+by\+\_\+fd()}}, and \mbox{\hyperlink{element__with__external__element_8cc_source_l00036}{$\sim$\+Element\+With\+External\+Element()}}.
+Referenced by assign\+\_\+external\+\_\+interaction\+\_\+data\+\_\+local\+\_\+eqn\+\_\+numbers(), fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+field\+\_\+by\+\_\+fd(), and $\sim$\+Element\+With\+External\+Element().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a78e89193aa13a86a88c8b6b16141e194}\label{classoomph_1_1ElementWithExternalElement_a78e89193aa13a86a88c8b6b16141e194}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!External\_interaction\_field\_data\_pt@{External\_interaction\_field\_data\_pt}}
@@ -1289,11 +1289,11 @@ Referenced by \mbox{\hyperlink{element__with__external__element_8cc_source_l0024
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00515}{515}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 515 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{element__with__external__element_8cc_source_l00246}{assign\+\_\+external\+\_\+interaction\+\_\+data\+\_\+local\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{element__with__external__element_8cc_source_l00205}{describe\+\_\+local\+\_\+dofs()}}, \mbox{\hyperlink{fsi_8cc_source_l00078}{oomph\+::\+FSIWall\+Element\+::describe\+\_\+local\+\_\+dofs()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00212}{external\+\_\+interaction\+\_\+field\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{element__with__external__element_8cc_source_l00638}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+field\+\_\+by\+\_\+fd()}}, and \mbox{\hyperlink{element__with__external__element_8cc_source_l00036}{$\sim$\+Element\+With\+External\+Element()}}.
+Referenced by assign\+\_\+external\+\_\+interaction\+\_\+data\+\_\+local\+\_\+eqn\+\_\+numbers(), describe\+\_\+local\+\_\+dofs(), oomph\+::\+FSIWall\+Element\+::describe\+\_\+local\+\_\+dofs(), external\+\_\+interaction\+\_\+field\+\_\+data\+\_\+pt(), fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+field\+\_\+by\+\_\+fd(), and $\sim$\+Element\+With\+External\+Element().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_aba1db798c02c38ae859b381c5d00b7dc}\label{classoomph_1_1ElementWithExternalElement_aba1db798c02c38ae859b381c5d00b7dc}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!External\_interaction\_geometric\_data\_index@{External\_interaction\_geometric\_data\_index}}
@@ -1307,11 +1307,11 @@ Storage for the index of the values in the external geometric data that affect t
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00618}{618}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 618 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{element__with__external__element_8cc_source_l00246}{assign\+\_\+external\+\_\+interaction\+\_\+data\+\_\+local\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{element__with__external__element_8cc_source_l00720}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+by\+\_\+fd()}}, and \mbox{\hyperlink{element__with__external__element_8cc_source_l00036}{$\sim$\+Element\+With\+External\+Element()}}.
+Referenced by assign\+\_\+external\+\_\+interaction\+\_\+data\+\_\+local\+\_\+eqn\+\_\+numbers(), fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+by\+\_\+fd(), and $\sim$\+Element\+With\+External\+Element().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_ae4da8e21a19748487f716505f08c0d5f}\label{classoomph_1_1ElementWithExternalElement_ae4da8e21a19748487f716505f08c0d5f}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!External\_interaction\_geometric\_data\_local\_eqn@{External\_interaction\_geometric\_data\_local\_eqn}}
@@ -1325,11 +1325,11 @@ Storage for the local equation number associated with the external geometric dat
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00622}{622}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 622 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{element__with__external__element_8cc_source_l00246}{assign\+\_\+external\+\_\+interaction\+\_\+data\+\_\+local\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{element__with__external__element_8cc_source_l00720}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+by\+\_\+fd()}}, and \mbox{\hyperlink{element__with__external__element_8cc_source_l00036}{$\sim$\+Element\+With\+External\+Element()}}.
+Referenced by assign\+\_\+external\+\_\+interaction\+\_\+data\+\_\+local\+\_\+eqn\+\_\+numbers(), fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+by\+\_\+fd(), and $\sim$\+Element\+With\+External\+Element().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_ab72abfc5f23aebc3ea25083be8857c3e}\label{classoomph_1_1ElementWithExternalElement_ab72abfc5f23aebc3ea25083be8857c3e}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!External\_interaction\_geometric\_data\_pt@{External\_interaction\_geometric\_data\_pt}}
@@ -1343,11 +1343,11 @@ Referenced by \mbox{\hyperlink{element__with__external__element_8cc_source_l0024
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00519}{519}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 519 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{element__with__external__element_8cc_source_l00246}{assign\+\_\+external\+\_\+interaction\+\_\+data\+\_\+local\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{element__with__external__element_8cc_source_l00205}{describe\+\_\+local\+\_\+dofs()}}, \mbox{\hyperlink{fsi_8cc_source_l00078}{oomph\+::\+FSIWall\+Element\+::describe\+\_\+local\+\_\+dofs()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00251}{external\+\_\+interaction\+\_\+geometric\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{element__with__external__element_8cc_source_l00720}{fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+by\+\_\+fd()}}, and \mbox{\hyperlink{element__with__external__element_8cc_source_l00036}{$\sim$\+Element\+With\+External\+Element()}}.
+Referenced by assign\+\_\+external\+\_\+interaction\+\_\+data\+\_\+local\+\_\+eqn\+\_\+numbers(), describe\+\_\+local\+\_\+dofs(), oomph\+::\+FSIWall\+Element\+::describe\+\_\+local\+\_\+dofs(), external\+\_\+interaction\+\_\+geometric\+\_\+data\+\_\+pt(), fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+geometric\+\_\+by\+\_\+fd(), and $\sim$\+Element\+With\+External\+Element().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a206553e5b109dd57b8b8fae4214d7a80}\label{classoomph_1_1ElementWithExternalElement_a206553e5b109dd57b8b8fae4214d7a80}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!Nexternal\_element\_storage@{Nexternal\_element\_storage}}
@@ -1361,11 +1361,11 @@ Number of entries in the external element storage schemes (Nintergation\+\_\+pt 
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00588}{588}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 588 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{element__with__external__element_8cc_source_l00125}{flush\+\_\+all\+\_\+external\+\_\+element\+\_\+storage()}}, and \mbox{\hyperlink{element__with__external__element_8cc_source_l00076}{initialise\+\_\+external\+\_\+element\+\_\+storage()}}.
+Referenced by flush\+\_\+all\+\_\+external\+\_\+element\+\_\+storage(), and initialise\+\_\+external\+\_\+element\+\_\+storage().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a0efc97c132438693e09a50224cb82a24}\label{classoomph_1_1ElementWithExternalElement_a0efc97c132438693e09a50224cb82a24}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!Nexternal\_interaction\_field\_data@{Nexternal\_interaction\_field\_data}}
@@ -1379,11 +1379,11 @@ Number of external interaction field data.
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00591}{591}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 591 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{element__with__external__element_8cc_source_l00246}{assign\+\_\+external\+\_\+interaction\+\_\+data\+\_\+local\+\_\+eqn\+\_\+numbers()}}, and \mbox{\hyperlink{element__with__external__element_8h_source_l00205}{nexternal\+\_\+interaction\+\_\+field\+\_\+data()}}.
+Referenced by assign\+\_\+external\+\_\+interaction\+\_\+data\+\_\+local\+\_\+eqn\+\_\+numbers(), and nexternal\+\_\+interaction\+\_\+field\+\_\+data().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_a36b114ef8617af637cf3726308cb4304}\label{classoomph_1_1ElementWithExternalElement_a36b114ef8617af637cf3726308cb4304}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!Nexternal\_interaction\_geometric\_data@{Nexternal\_interaction\_geometric\_data}}
@@ -1397,11 +1397,11 @@ Number of external interaction geometric data.
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00594}{594}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 594 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{element__with__external__element_8cc_source_l00246}{assign\+\_\+external\+\_\+interaction\+\_\+data\+\_\+local\+\_\+eqn\+\_\+numbers()}}, and \mbox{\hyperlink{element__with__external__element_8h_source_l00232}{nexternal\+\_\+interaction\+\_\+geometric\+\_\+data()}}.
+Referenced by assign\+\_\+external\+\_\+interaction\+\_\+data\+\_\+local\+\_\+eqn\+\_\+numbers(), and nexternal\+\_\+interaction\+\_\+geometric\+\_\+data().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_ae0507a6c0f498237fa1e8fb75425374e}\label{classoomph_1_1ElementWithExternalElement_ae0507a6c0f498237fa1e8fb75425374e}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!Ninteraction@{Ninteraction}}
@@ -1415,11 +1415,11 @@ Number of interactions.
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00581}{581}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 581 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{element__with__external__element_8cc_source_l00076}{initialise\+\_\+external\+\_\+element\+\_\+storage()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00184}{ninteraction()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00546}{range\+\_\+check()}}, and \mbox{\hyperlink{element__with__external__element_8h_source_l00178}{set\+\_\+ninteraction()}}.
+Referenced by initialise\+\_\+external\+\_\+element\+\_\+storage(), ninteraction(), range\+\_\+check(), and set\+\_\+ninteraction().
 
 \mbox{\Hypertarget{classoomph_1_1ElementWithExternalElement_adf2db2b2968b867ff989b31eda9cc245}\label{classoomph_1_1ElementWithExternalElement_adf2db2b2968b867ff989b31eda9cc245}} 
 \index{oomph::ElementWithExternalElement@{oomph::ElementWithExternalElement}!Nintpt@{Nintpt}}
@@ -1433,11 +1433,11 @@ Number of intergation point in the element.
 
 
 
-Definition at line \mbox{\hyperlink{element__with__external__element_8h_source_l00584}{584}} of file \mbox{\hyperlink{element__with__external__element_8h_source}{element\+\_\+with\+\_\+external\+\_\+element.\+h}}.
+Definition at line 584 of file element\+\_\+with\+\_\+external\+\_\+element.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{element__with__external__element_8h_source_l00136}{external\+\_\+element\+\_\+local\+\_\+coord()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00107}{external\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{element__with__external__element_8cc_source_l00076}{initialise\+\_\+external\+\_\+element\+\_\+storage()}}, and \mbox{\hyperlink{element__with__external__element_8h_source_l00546}{range\+\_\+check()}}.
+Referenced by external\+\_\+element\+\_\+local\+\_\+coord(), external\+\_\+element\+\_\+pt(), initialise\+\_\+external\+\_\+element\+\_\+storage(), and range\+\_\+check().
 
 
 

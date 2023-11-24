@@ -52,15 +52,15 @@ For generality, we implement the mathematics to assemble contributions to the Ja
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{/// A class for all elements that solve the simple one-\/dimensional}}
-\DoxyCodeLine{\textcolor{comment}{/// eigenvalue problem}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)f[ }}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)frac\{\(\backslash\)partial\string^2 u\}\{\(\backslash\)partial x\_i\string^2\}  + \(\backslash\)lambda u = 0}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)f] }}
-\DoxyCodeLine{\textcolor{comment}{/// These elements are very closely related to the Poisson}}
-\DoxyCodeLine{\textcolor{comment}{/// elements and could inherit from them. They are here developed}}
-\DoxyCodeLine{\textcolor{comment}{/// from scratch for pedagogical purposes.}}
-\DoxyCodeLine{\textcolor{comment}{/// This class  contains the generic maths. Shape functions, geometric}}
-\DoxyCodeLine{\textcolor{comment}{/// mapping etc. must get implemented in derived class.}}
+\DoxyCodeLine{\textcolor{comment}{/// eigenvalue problem}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)f[ }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)frac\{\(\backslash\)partial\string^2 u\}\{\(\backslash\)partial x\_i\string^2\}  + \(\backslash\)lambda u = 0}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)f] }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// These elements are very closely related to the Poisson}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// elements and could inherit from them. They are here developed}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// from scratch for pedagogical purposes.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// This class  contains the generic maths. Shape functions, geometric}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// mapping etc. must get implemented in derived class.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{class }HarmonicEquations : \textcolor{keyword}{public} \textcolor{keyword}{virtual} FiniteElement}
 \DoxyCodeLine{\{}
@@ -200,12 +200,10 @@ The problem class takes a single argument corresponding to the number of element
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_element=100; \textcolor{comment}{//Number of elements}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ clock\_t t\_start1 = clock();}
-\DoxyCodeLine{ \textcolor{comment}{//Solve with ARPACK}}
+\DoxyCodeLine{ \textcolor{comment}{//Solve with LAPACK\_QZ}}
 \DoxyCodeLine{ \{}
-\DoxyCodeLine{  \mbox{\hyperlink{classHarmonicProblem}{HarmonicProblem<QHarmonicElement<3>}},ARPACK> }
+\DoxyCodeLine{  \mbox{\hyperlink{classHarmonicProblem}{HarmonicProblem<QHarmonicElement<3>}},LAPACK\_QZ> }
 \DoxyCodeLine{   problem(n\_element);}
-\DoxyCodeLine{  }
-\DoxyCodeLine{  std::cout << \textcolor{stringliteral}{"{}Matrix size "{}} << problem.ndof() << std::endl;}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  problem.solve(1);}
 \DoxyCodeLine{ \}}
@@ -217,11 +215,10 @@ The problem class takes a single argument corresponding to the number of element
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ clock\_t t\_start2 = clock();}
-\DoxyCodeLine{ \textcolor{comment}{//Solve with LAPACK\_QZ}}
+\DoxyCodeLine{\textcolor{comment}{//Solve with Anasazi}}
 \DoxyCodeLine{ \{}
-\DoxyCodeLine{  \mbox{\hyperlink{classHarmonicProblem}{HarmonicProblem<QHarmonicElement<3>}},LAPACK\_QZ> }
-\DoxyCodeLine{   problem(n\_element);}
-\DoxyCodeLine{  }
+\DoxyCodeLine{  \textcolor{comment}{// hierher Andrew: This doesn't seem to be included in the self tests}}
+\DoxyCodeLine{  \mbox{\hyperlink{classHarmonicProblem}{HarmonicProblem<QHarmonicElement<3>}},ANASAZI> problem(n\_element);}
 \DoxyCodeLine{  problem.solve(2);}
 \DoxyCodeLine{ \}}
 \DoxyCodeLine{ clock\_t t\_end2 = clock();}
@@ -238,7 +235,7 @@ The {\ttfamily \mbox{\hyperlink{classHarmonicProblem}{Harmonic\+Problem}}} is de
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_problem\_class============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// 1D Harmonic problem in unit interval.}}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT,\textcolor{keyword}{class} EIGEN\_SOLVER> }
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classHarmonicProblem}{HarmonicProblem}} : \textcolor{keyword}{public} Problem}
 
@@ -259,9 +256,9 @@ In the {\ttfamily Problem} constructor, we start by creating the eigensolver spe
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====start\_of\_constructor===============================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Constructor for 1D Harmonic problem in unit interval.}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// Discretise the 1D domain with n\_element elements of type ELEMENT.}}
-\DoxyCodeLine{\textcolor{comment}{/// Specify function pointer to source function. }}
+\DoxyCodeLine{\textcolor{comment}{/// Constructor for 1D Harmonic problem in unit interval.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// Discretise the 1D domain with n\_element elements of type ELEMENT.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// Specify function pointer to source function. }}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT,\textcolor{keyword}{class} EIGEN\_SOLVER>}
 \DoxyCodeLine{\mbox{\hyperlink{classHarmonicProblem_a77a25847f00ae50c83218530149e3e57}{HarmonicProblem<ELEMENT,EIGEN\_SOLVER>::HarmonicProblem}}(}
@@ -269,10 +266,6 @@ In the {\ttfamily Problem} constructor, we start by creating the eigensolver spe
 \DoxyCodeLine{\{ }
 \DoxyCodeLine{ \textcolor{comment}{//Create the eigen solver}}
 \DoxyCodeLine{ this-\/>eigen\_solver\_pt() = \textcolor{keyword}{new} EIGEN\_SOLVER;}
-\DoxyCodeLine{ }
-\DoxyCodeLine{ \textcolor{comment}{//Get the positive eigenvalues, shift is zero by default}}
-\DoxyCodeLine{ \textcolor{keyword}{static\_cast<}EIGEN\_SOLVER*\textcolor{keyword}{>}(eigen\_solver\_pt())}
-\DoxyCodeLine{  -\/>get\_eigenvalues\_right\_of\_shift(); }
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Set domain length }}
 \DoxyCodeLine{ \textcolor{keywordtype}{double} L=1.0;}
@@ -309,20 +302,21 @@ The function {\ttfamily Problem\+::solve\+\_\+eigenproblem(...)} plays an equiva
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======================start\_of\_solve==============================}}
 \DoxyCodeLine{\textcolor{comment}{/// Solve the eigenproblem }}
-\DoxyCodeLine{\textcolor{comment}{//===================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//===================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT,\textcolor{keyword}{class} EIGEN\_SOLVER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classHarmonicProblem_aba2b3fd58a67f03ca0481e426d385c5d}{HarmonicProblem<ELEMENT,EIGEN\_SOLVER>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classHarmonicProblem_aba2b3fd58a67f03ca0481e426d385c5d}{solve}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& label)}
 \DoxyCodeLine{\{ }
 \DoxyCodeLine{ \textcolor{comment}{//Set external storage for the eigenvalues}}
-\DoxyCodeLine{ Vector<complex<double> > eigenvalues;}
+\DoxyCodeLine{ Vector<complex<double> > eigenvalue;}
 \DoxyCodeLine{ \textcolor{comment}{//Set external storage for the eigenvectors}}
-\DoxyCodeLine{ Vector<DoubleVector> eigenvectors;}
+\DoxyCodeLine{ Vector<DoubleVector> eigenvector\_real;}
+\DoxyCodeLine{ Vector<DoubleVector> eigenvector\_imag;}
 \DoxyCodeLine{ \textcolor{comment}{//Desired number eigenvalues}}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_eval=4;}
-\DoxyCodeLine{}
+\DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{//Solve the eigenproblem}}
-\DoxyCodeLine{ this-\/>solve\_eigenproblem(n\_eval,eigenvalues,eigenvectors);}
+\DoxyCodeLine{ this-\/>solve\_eigenproblem(n\_eval,eigenvalue,eigenvector\_real,eigenvector\_imag);}
 
 \end{DoxyCodeInclude}
  The rest of the function post-\/processes the output from the eigensolver. In order to ensure repeatability of the output for our self-\/tests the eigenvalues are sorted on the size of their real part. The eigenfunction associated with the second smallest eigenvalue is normalised to have unit length and then output to a file.
@@ -333,50 +327,50 @@ Finally, the sorted eigenvalues are reported and also saved to a file.
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{}
+\DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{//We now need to sort the output based on the size of the real part}}
 \DoxyCodeLine{ \textcolor{comment}{//of the eigenvalues.}}
 \DoxyCodeLine{ \textcolor{comment}{//This is because the solver does not necessarily sort the eigenvalues}}
-\DoxyCodeLine{ Vector<complex<double> > sorted\_eigenvalues = eigenvalues;}
-\DoxyCodeLine{ sort(sorted\_eigenvalues.begin(),sorted\_eigenvalues.end(),}
+\DoxyCodeLine{ Vector<complex<double> > sorted\_eigenvalue = eigenvalue;}
+\DoxyCodeLine{ sort(sorted\_eigenvalue.begin(),sorted\_eigenvalue.end(),}
 \DoxyCodeLine{      \mbox{\hyperlink{classComplexLess}{ComplexLess<double>}}());}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Read out the second smallest eigenvalue}}
-\DoxyCodeLine{ complex<double> temp\_evalue = sorted\_eigenvalues[1];}
+\DoxyCodeLine{ complex<double> temp\_evalue = sorted\_eigenvalue[1];}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} second\_smallest\_index=0;}
 \DoxyCodeLine{ \textcolor{comment}{//Loop over the unsorted eigenvalues and find the entry that corresponds}}
 \DoxyCodeLine{ \textcolor{comment}{//to our second smallest eigenvalue.}}
-\DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<eigenvalues.size();i++)}
+\DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<eigenvalue.size();i++)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{//Note that equality tests for doubles are bad, but it was just}}
 \DoxyCodeLine{   \textcolor{comment}{//sorted data, so should be fine}}
-\DoxyCodeLine{   \textcolor{keywordflow}{if}(eigenvalues[i] == temp\_evalue) \{second\_smallest\_index=i; \textcolor{keywordflow}{break};\}}
+\DoxyCodeLine{   \textcolor{keywordflow}{if}(eigenvalue[i] == temp\_evalue) \{second\_smallest\_index=i; \textcolor{keywordflow}{break};\}}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Normalise the eigenvector }}
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{comment}{//Get the dimension of the eigenvector}}
-\DoxyCodeLine{  \textcolor{keywordtype}{unsigned} dim = eigenvectors[second\_smallest\_index].nrow();}
+\DoxyCodeLine{  \textcolor{keywordtype}{unsigned} dim = eigenvector\_real[second\_smallest\_index].nrow();}
 \DoxyCodeLine{  \textcolor{keywordtype}{double} length=0.0;}
 \DoxyCodeLine{  \textcolor{comment}{//Loop over all the entries}}
 \DoxyCodeLine{  \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<dim;i++)}
 \DoxyCodeLine{   \{}
 \DoxyCodeLine{    \textcolor{comment}{//Add the contribution to the length}}
-\DoxyCodeLine{    length += std::pow(eigenvectors[second\_smallest\_index][i],2.0);}
+\DoxyCodeLine{    length += std::pow(eigenvector\_real[second\_smallest\_index][i],2.0);}
 \DoxyCodeLine{   \}}
 \DoxyCodeLine{  \textcolor{comment}{//Now take the magnitude}}
 \DoxyCodeLine{  length = sqrt(length);}
 \DoxyCodeLine{  \textcolor{comment}{//Fix the sign}}
-\DoxyCodeLine{  \textcolor{keywordflow}{if}(eigenvectors[second\_smallest\_index][0] < 0) \{length *= -\/1.0;\}}
+\DoxyCodeLine{  \textcolor{keywordflow}{if}(eigenvector\_real[second\_smallest\_index][0] < 0) \{length *= -\/1.0;\}}
 \DoxyCodeLine{  \textcolor{comment}{//Finally normalise}}
 \DoxyCodeLine{  \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<dim;i++)}
 \DoxyCodeLine{   \{}
-\DoxyCodeLine{    eigenvectors[second\_smallest\_index][i] /= length;}
+\DoxyCodeLine{    eigenvector\_real[second\_smallest\_index][i] /= length;}
 \DoxyCodeLine{   \}}
 \DoxyCodeLine{ \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Now assign the second eigenvector to the dofs of the problem}}
-\DoxyCodeLine{ this-\/>assign\_eigenvector\_to\_dofs(eigenvectors[second\_smallest\_index]);}
+\DoxyCodeLine{ this-\/>assign\_eigenvector\_to\_dofs(eigenvector\_real[second\_smallest\_index]);}
 \DoxyCodeLine{ \textcolor{comment}{//Output solution for this case (label output files with "{}1"{})}}
 \DoxyCodeLine{ this-\/>\mbox{\hyperlink{classHarmonicProblem_a95e94f87cf4f63e332c09bd9f1bbae7c}{doc\_solution}}(label);}
 \DoxyCodeLine{}
@@ -388,11 +382,11 @@ Finally, the sorted eigenvalues are reported and also saved to a file.
 \DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<n\_eval;i++)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{//Print to screen}}
-\DoxyCodeLine{   cout << sorted\_eigenvalues[i].real() << \textcolor{stringliteral}{"{} "{}} }
-\DoxyCodeLine{        << sorted\_eigenvalues[i].imag() << std::endl;}
+\DoxyCodeLine{   cout << sorted\_eigenvalue[i].real() << \textcolor{stringliteral}{"{} "{}} }
+\DoxyCodeLine{        << sorted\_eigenvalue[i].imag() << std::endl;}
 \DoxyCodeLine{   \textcolor{comment}{//Send to file}}
-\DoxyCodeLine{   evalues << sorted\_eigenvalues[i].real() << \textcolor{stringliteral}{"{} "{}} }
-\DoxyCodeLine{           << sorted\_eigenvalues[i].imag() << std::endl;}
+\DoxyCodeLine{   evalues << sorted\_eigenvalue[i].real() << \textcolor{stringliteral}{"{} "{}} }
+\DoxyCodeLine{           << sorted\_eigenvalue[i].imag() << std::endl;}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ evalues.close();}

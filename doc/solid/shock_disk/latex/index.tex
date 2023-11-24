@@ -7,7 +7,7 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{\textcolor{comment}{//LIC// multi-\/physics finite-\/element library, available }}
 \DoxyCodeLine{\textcolor{comment}{//LIC// at http://www.oomph-\/lib.org.}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// }}
-\DoxyCodeLine{\textcolor{comment}{//LIC// Copyright (C) 2006-\/2022 Matthias Heil and Andrew Hazel}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// Copyright (C) 2006-\/2023 Matthias Heil and Andrew Hazel}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// }}
 \DoxyCodeLine{\textcolor{comment}{//LIC// This library is free software; you can redistribute it and/or}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// modify it under the terms of the GNU Lesser General Public}}
@@ -141,7 +141,7 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Function to create mesh made of traction elements}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh_ad9734ea7aee2141079544bb782d3ace1}{make\_traction\_element\_mesh}}(SolidMesh*\& traction\_mesh\_pt)}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} make\_traction\_element\_mesh(SolidMesh*\& traction\_mesh\_pt)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Make new mesh}}
@@ -166,7 +166,7 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Function to wipe and re-\/create mesh made of traction elements}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh_a33ef5828fc64fcf4e50e6c38d626ffcb}{remake\_traction\_element\_mesh}}(SolidMesh*\& traction\_mesh\_pt)}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} remake\_traction\_element\_mesh(SolidMesh*\& traction\_mesh\_pt)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Wipe existing mesh (but don't call it's destructor as this}}
@@ -214,64 +214,64 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Constructor:}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classDiskShockWaveProblem_ae670d0120936f410134ba3e3b61aa880}{DiskShockWaveProblem}}();}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classDiskShockWaveProblem}{DiskShockWaveProblem}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Run the problem; specify case\_number to label output}}
 \DoxyCodeLine{\textcolor{comment}{ /// directory}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classDiskShockWaveProblem_af8dc3befd3eba59b008c315bfe077340}{run}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& case\_number);}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} run(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& case\_number);}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Access function for the solid mesh}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ElasticRefineableQuarterCircleSectorMesh<ELEMENT>}}*\& \mbox{\hyperlink{classDiskShockWaveProblem_a7313e96ea296dbd10b47a1e00f02341e}{solid\_mesh\_pt}}() }
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ElasticRefineableQuarterCircleSectorMesh<ELEMENT>}}*\& solid\_mesh\_pt() }
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{keywordflow}{return} \mbox{\hyperlink{classDiskShockWaveProblem_a6efbcb695e829d63f810a7a9bb5a81a4}{Solid\_mesh\_pt}};  }
+\DoxyCodeLine{   \textcolor{keywordflow}{return} Solid\_mesh\_pt;  }
 \DoxyCodeLine{  \} }
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Access function for the mesh of surface traction elements}}
-\DoxyCodeLine{\textcolor{comment}{} SolidMesh*\& \mbox{\hyperlink{classDiskShockWaveProblem_ab8b15ee82d66441cdffc2bab1b49ffa6}{traction\_mesh\_pt}}() }
+\DoxyCodeLine{\textcolor{comment}{} SolidMesh*\& traction\_mesh\_pt() }
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{keywordflow}{return} \mbox{\hyperlink{classDiskShockWaveProblem_a286fe7d51aa16f07f0444ae7c553f140}{Traction\_mesh\_pt}};  }
+\DoxyCodeLine{   \textcolor{keywordflow}{return} Traction\_mesh\_pt;  }
 \DoxyCodeLine{  \} }
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classDiskShockWaveProblem_a7685309caac199d18f3f81468d9fcb23}{doc\_solution}}();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} doc\_solution();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update function (empty)}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classDiskShockWaveProblem_a46f6a25da58128f6abfdbbe92ea49d11}{actions\_after\_newton\_solve}}() \{\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_newton\_solve() \{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update function (empty)}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classDiskShockWaveProblem_a50ba8e9b29ff7796fa9cb7ede8598376}{actions\_before\_newton\_solve}}() \{\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_newton\_solve() \{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Actions after adaption: Kill and then re-\/build the traction }}
 \DoxyCodeLine{\textcolor{comment}{ /// elements on boundary 1 and re-\/assign the equation numbers}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classDiskShockWaveProblem_ac2a22a8399355e461d1a9ad1e5425c9a}{actions\_after\_adapt}}();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_adapt();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Doc displacement and velocity: label file with before and after}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classDiskShockWaveProblem_a75403423b0a031adabb5b487fa88373f}{doc\_displ\_and\_veloc}}(\textcolor{keyword}{const} \textcolor{keywordtype}{int}\& stage=0);}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} doc\_displ\_and\_veloc(\textcolor{keyword}{const} \textcolor{keywordtype}{int}\& stage=0);}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Dump problem-\/specific parameters values, then dump}}
 \DoxyCodeLine{\textcolor{comment}{ /// generic problem data.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classDiskShockWaveProblem_a2eaf91d3e0eb5f37b9920fc3d9d54cb9}{dump\_it}}(ofstream\& dump\_file);}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} dump\_it(ofstream\& dump\_file);}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Read problem-\/specific parameter values, then recover}}
 \DoxyCodeLine{\textcolor{comment}{ /// generic problem data.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classDiskShockWaveProblem_ae883625e9bbe6ea442413f7c970d3fb1}{restart}}(ifstream\& restart\_file);}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} restart(ifstream\& restart\_file);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output}}
-\DoxyCodeLine{ DocInfo \mbox{\hyperlink{classDiskShockWaveProblem_a8e445e31a1067ebbd3bd667cc02e8662}{Doc\_info}};}
+\DoxyCodeLine{ DocInfo Doc\_info;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Trace file}}
-\DoxyCodeLine{\textcolor{comment}{} ofstream \mbox{\hyperlink{classDiskShockWaveProblem_a8ec35b07dc6870e4d5b729288053c4fe}{Trace\_file}};}
+\DoxyCodeLine{\textcolor{comment}{} ofstream Trace\_file;}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Vector of pointers to nodes whose position we're tracing}}
-\DoxyCodeLine{\textcolor{comment}{} Vector<Node*> \mbox{\hyperlink{classDiskShockWaveProblem_a7ab6db65bbf28185b238e84bbc16c1b8}{Trace\_node\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} Vector<Node*> Trace\_node\_pt;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to solid mesh}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ElasticRefineableQuarterCircleSectorMesh<ELEMENT>}}* \mbox{\hyperlink{classDiskShockWaveProblem_a6efbcb695e829d63f810a7a9bb5a81a4}{Solid\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ElasticRefineableQuarterCircleSectorMesh<ELEMENT>}}* Solid\_mesh\_pt;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to mesh of traction elements}}
-\DoxyCodeLine{\textcolor{comment}{} SolidMesh* \mbox{\hyperlink{classDiskShockWaveProblem_a286fe7d51aa16f07f0444ae7c553f140}{Traction\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} SolidMesh* Traction\_mesh\_pt;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\};}
 \DoxyCodeLine{}

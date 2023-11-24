@@ -28,11 +28,11 @@ bool \mbox{\hyperlink{classoomph_1_1QElementBase_a3899ee1cbbe7b89bde7232b437a0a6
 \begin{DoxyCompactList}\small\item\em Check whether the local coordinate are valid or not. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QElementBase_a9afe6bb8b04af4c016a78f98de9b22d0}{move\+\_\+local\+\_\+coord\+\_\+back\+\_\+into\+\_\+element}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) const
 \begin{DoxyCompactList}\small\item\em Adjust local coordinates so that they\textquotesingle{}re located inside the element. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1QElementBase_a072ce3dcdffdc446f439ec86ea01ae7e}{set\+\_\+macro\+\_\+elem\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a801bbe89619c28e181afa8fa3e9ac836}{macro\+\_\+elem\+\_\+pt}})
+virtual void \mbox{\hyperlink{classoomph_1_1QElementBase_a072ce3dcdffdc446f439ec86ea01ae7e}{set\+\_\+macro\+\_\+elem\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_aa8bce95f69e3199a508672eea7ecc226}{macro\+\_\+elem\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Set pointer to macro element also sets up storage for the reference coordinates and initialises them. \end{DoxyCompactList}\item 
-double \& \mbox{\hyperlink{classoomph_1_1QElementBase_a6c5743d593aa67f9dbfcde9556a9bdd7}{s\+\_\+macro\+\_\+ll}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+double \& \mbox{\hyperlink{classoomph_1_1QElementBase_a788011c6b64ed0c6e314b7a1f3165687}{s\+\_\+macro\+\_\+ll}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Access fct to the i-\/th coordinate of the element\textquotesingle{}s \char`\"{}lower left\char`\"{} vertex in the associated \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}}. \end{DoxyCompactList}\item 
-double \& \mbox{\hyperlink{classoomph_1_1QElementBase_a0e02d2c0be2b93967700723d77891cb2}{s\+\_\+macro\+\_\+ur}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+double \& \mbox{\hyperlink{classoomph_1_1QElementBase_aec37122110d976a88d60a061262592a2}{s\+\_\+macro\+\_\+ur}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Access fct to the i-\/th coordinate of the element\textquotesingle{}s \char`\"{}upper right\char`\"{} vertex in the associated \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}}. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1QElementBase_aa7fb5176489dad1bc9ab6cb21f1ede5f}{s\+\_\+macro\+\_\+ll}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Access fct to the i-\/th coordinate of the element\textquotesingle{}s \char`\"{}lower left\char`\"{} vertex in the associated \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}}. (const version) \end{DoxyCompactList}\item 
@@ -41,7 +41,7 @@ double \mbox{\hyperlink{classoomph_1_1QElementBase_ad761688aa29832c214b439db2786
 void \mbox{\hyperlink{classoomph_1_1QElementBase_a9382eae5e06bceba2d107592ad111075}{get\+\_\+x\+\_\+from\+\_\+macro\+\_\+element}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x) const
 \begin{DoxyCompactList}\small\item\em Global coordinates as function of local coordinates. using the macro element representation. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QElementBase_a61b722ea5221157266b894bdbb255011}{get\+\_\+x\+\_\+from\+\_\+macro\+\_\+element}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x)
-\begin{DoxyCompactList}\small\item\em Global coordinates as function of local coordinates at previous time \char`\"{}level\char`\"{} t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous) using the macro element representation. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Global coordinates as function of local coordinates at previous time \char`\"{}level\char`\"{} t (t=0\+: present; t$>$0\+: previous) using the macro element representation. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1QElementBase_ab5f6a8eda4ea33ebc15b3b5fb623ec80}{nnode\+\_\+on\+\_\+face}} () const
 \begin{DoxyCompactList}\small\item\em Return number of nodes on one face of the element. Always nnode\+\_\+1d$^\wedge$(el\+\_\+dim -\/ 1). \end{DoxyCompactList}\item 
 \mbox{\hyperlink{namespaceoomph_1_1ElementGeometry_a86ff99972b0205d7524e294c58c1182a}{Element\+Geometry\+::\+Element\+Geometry}} \mbox{\hyperlink{classoomph_1_1QElementBase_a3e802dea8060d1b95c2fe505e0b0df1f}{element\+\_\+geometry}} () const
@@ -61,7 +61,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1QElementBase_ab5f6a8eda4ea33ebc15b3b5fb6
 
 Base class for Qelements 
 
-Definition at line \mbox{\hyperlink{Qelements_8h_source_l00090}{90}} of file \mbox{\hyperlink{Qelements_8h_source}{Qelements.\+h}}.
+Definition at line 90 of file Qelements.\+h.
 
 
 
@@ -78,7 +78,7 @@ Constructor\+: Initialise pointers to macro element reference coords.
 
 
 
-Definition at line \mbox{\hyperlink{Qelements_8h_source_l00094}{94}} of file \mbox{\hyperlink{Qelements_8h_source}{Qelements.\+h}}.
+Definition at line 94 of file Qelements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1QElementBase_a1a047600f19813a2e328d6c0718a0e96}\label{classoomph_1_1QElementBase_a1a047600f19813a2e328d6c0718a0e96}} 
 \index{oomph::QElementBase@{oomph::QElementBase}!QElementBase@{QElementBase}}
@@ -102,11 +102,11 @@ Broken assignment operator.
 
 Destructor\+: Kill storage for macro element reference coords 
 
-Definition at line \mbox{\hyperlink{Qelements_8h_source_l00103}{103}} of file \mbox{\hyperlink{Qelements_8h_source}{Qelements.\+h}}.
+Definition at line 103 of file Qelements.\+h.
 
 
 
-References \mbox{\hyperlink{Qelements_8h_source_l00314}{S\+\_\+macro\+\_\+ll\+\_\+pt}}, and \mbox{\hyperlink{Qelements_8h_source_l00317}{S\+\_\+macro\+\_\+ur\+\_\+pt}}.
+References S\+\_\+macro\+\_\+ll\+\_\+pt, and S\+\_\+macro\+\_\+ur\+\_\+pt.
 
 
 
@@ -127,11 +127,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a66de72bbd8d710f
 
 
 
-Definition at line \mbox{\hyperlink{Qelements_8h_source_l00307}{307}} of file \mbox{\hyperlink{Qelements_8h_source}{Qelements.\+h}}.
+Definition at line 307 of file Qelements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01241}{oomph\+::\+Element\+Geometry\+::Q}}.
+References oomph\+::\+Element\+Geometry\+::Q.
 
 \mbox{\Hypertarget{classoomph_1_1QElementBase_a61b722ea5221157266b894bdbb255011}\label{classoomph_1_1QElementBase_a61b722ea5221157266b894bdbb255011}} 
 \index{oomph::QElementBase@{oomph::QElementBase}!get\_x\_from\_macro\_element@{get\_x\_from\_macro\_element}}
@@ -141,7 +141,7 @@ References \mbox{\hyperlink{elements_8h_source_l01241}{oomph\+::\+Element\+Geome
 
 
 
-Global coordinates as function of local coordinates at previous time \char`\"{}level\char`\"{} t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous) using the macro element representation. 
+Global coordinates as function of local coordinates at previous time \char`\"{}level\char`\"{} t (t=0\+: present; t$>$0\+: previous) using the macro element representation. 
 
 
 
@@ -149,11 +149,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_ac14a15f09e03660
 
 
 
-Definition at line \mbox{\hyperlink{Qelements_8h_source_l00274}{274}} of file \mbox{\hyperlink{Qelements_8h_source}{Qelements.\+h}}.
+Definition at line 274 of file Qelements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01683}{oomph\+::\+Finite\+Element\+::\+Macro\+\_\+elem\+\_\+pt}}, \mbox{\hyperlink{macro__element_8h_source_l00126}{oomph\+::\+Macro\+Element\+::macro\+\_\+map()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{Qelements_8h_source_l00186}{s\+\_\+macro\+\_\+ll()}}, \mbox{\hyperlink{Qelements_8h_source_l00202}{s\+\_\+macro\+\_\+ur()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+References oomph\+::\+Finite\+Element\+::dim(), i, oomph\+::\+Finite\+Element\+::\+Macro\+\_\+elem\+\_\+pt, oomph\+::\+Macro\+Element\+::macro\+\_\+map(), s, s\+\_\+macro\+\_\+ll(), s\+\_\+macro\+\_\+ur(), and t.
 
 \mbox{\Hypertarget{classoomph_1_1QElementBase_a9382eae5e06bceba2d107592ad111075}\label{classoomph_1_1QElementBase_a9382eae5e06bceba2d107592ad111075}} 
 \index{oomph::QElementBase@{oomph::QElementBase}!get\_x\_from\_macro\_element@{get\_x\_from\_macro\_element}}
@@ -171,11 +171,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_abe28529e35222f2
 
 
 
-Definition at line \mbox{\hyperlink{Qelements_8h_source_l00249}{249}} of file \mbox{\hyperlink{Qelements_8h_source}{Qelements.\+h}}.
+Definition at line 249 of file Qelements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01683}{oomph\+::\+Finite\+Element\+::\+Macro\+\_\+elem\+\_\+pt}}, \mbox{\hyperlink{macro__element_8h_source_l00126}{oomph\+::\+Macro\+Element\+::macro\+\_\+map()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{Qelements_8h_source_l00186}{s\+\_\+macro\+\_\+ll()}}, and \mbox{\hyperlink{Qelements_8h_source_l00202}{s\+\_\+macro\+\_\+ur()}}.
+References oomph\+::\+Finite\+Element\+::dim(), i, oomph\+::\+Finite\+Element\+::\+Macro\+\_\+elem\+\_\+pt, oomph\+::\+Macro\+Element\+::macro\+\_\+map(), s, s\+\_\+macro\+\_\+ll(), and s\+\_\+macro\+\_\+ur().
 
 \mbox{\Hypertarget{classoomph_1_1QElementBase_a3899ee1cbbe7b89bde7232b437a0a65c}\label{classoomph_1_1QElementBase_a3899ee1cbbe7b89bde7232b437a0a65c}} 
 \index{oomph::QElementBase@{oomph::QElementBase}!local\_coord\_is\_valid@{local\_coord\_is\_valid}}
@@ -193,11 +193,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a9ae98c5b577d833
 
 
 
-Definition at line \mbox{\hyperlink{Qelements_8h_source_l00113}{113}} of file \mbox{\hyperlink{Qelements_8h_source}{Qelements.\+h}}.
+Definition at line 113 of file Qelements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{elements_8h_source_l02803}{oomph\+::\+Finite\+Element\+::s\+\_\+max()}}, and \mbox{\hyperlink{elements_8h_source_l02793}{oomph\+::\+Finite\+Element\+::s\+\_\+min()}}.
+References oomph\+::\+Finite\+Element\+::dim(), i, s, oomph\+::\+Finite\+Element\+::s\+\_\+max(), and oomph\+::\+Finite\+Element\+::s\+\_\+min().
 
 \mbox{\Hypertarget{classoomph_1_1QElementBase_a9afe6bb8b04af4c016a78f98de9b22d0}\label{classoomph_1_1QElementBase_a9afe6bb8b04af4c016a78f98de9b22d0}} 
 \index{oomph::QElementBase@{oomph::QElementBase}!move\_local\_coord\_back\_into\_element@{move\_local\_coord\_back\_into\_element}}
@@ -215,11 +215,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_aa042b56813a8dd8
 
 
 
-Definition at line \mbox{\hyperlink{Qelements_8h_source_l00129}{129}} of file \mbox{\hyperlink{Qelements_8h_source}{Qelements.\+h}}.
+Definition at line 129 of file Qelements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{elements_8h_source_l02803}{oomph\+::\+Finite\+Element\+::s\+\_\+max()}}, and \mbox{\hyperlink{elements_8h_source_l02793}{oomph\+::\+Finite\+Element\+::s\+\_\+min()}}.
+References oomph\+::\+Finite\+Element\+::dim(), i, s, oomph\+::\+Finite\+Element\+::s\+\_\+max(), and oomph\+::\+Finite\+Element\+::s\+\_\+min().
 
 \mbox{\Hypertarget{classoomph_1_1QElementBase_ab5f6a8eda4ea33ebc15b3b5fb623ec80}\label{classoomph_1_1QElementBase_ab5f6a8eda4ea33ebc15b3b5fb623ec80}} 
 \index{oomph::QElementBase@{oomph::QElementBase}!nnode\_on\_face@{nnode\_on\_face}}
@@ -237,17 +237,17 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_ad656ea761ed8274
 
 
 
-Definition at line \mbox{\hyperlink{Qelements_8h_source_l00299}{299}} of file \mbox{\hyperlink{Qelements_8h_source}{Qelements.\+h}}.
+Definition at line 299 of file Qelements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, and \mbox{\hyperlink{elements_8h_source_l02218}{oomph\+::\+Finite\+Element\+::nnode\+\_\+1d()}}.
+References oomph\+::\+Finite\+Element\+::dim(), and oomph\+::\+Finite\+Element\+::nnode\+\_\+1d().
 
-\mbox{\Hypertarget{classoomph_1_1QElementBase_a6c5743d593aa67f9dbfcde9556a9bdd7}\label{classoomph_1_1QElementBase_a6c5743d593aa67f9dbfcde9556a9bdd7}} 
+\mbox{\Hypertarget{classoomph_1_1QElementBase_a788011c6b64ed0c6e314b7a1f3165687}\label{classoomph_1_1QElementBase_a788011c6b64ed0c6e314b7a1f3165687}} 
 \index{oomph::QElementBase@{oomph::QElementBase}!s\_macro\_ll@{s\_macro\_ll}}
 \index{s\_macro\_ll@{s\_macro\_ll}!oomph::QElementBase@{oomph::QElementBase}}
 \doxysubsubsection{\texorpdfstring{s\_macro\_ll()}{s\_macro\_ll()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily double \& oomph\+::\+QElement\+Base\+::s\+\_\+macro\+\_\+ll (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double\& oomph\+::\+QElement\+Base\+::s\+\_\+macro\+\_\+ll (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -255,15 +255,15 @@ Access fct to the i-\/th coordinate of the element\textquotesingle{}s \char`\"{}
 
 
 
-Definition at line \mbox{\hyperlink{Qelements_8h_source_l00186}{186}} of file \mbox{\hyperlink{Qelements_8h_source}{Qelements.\+h}}.
+Definition at line 186 of file Qelements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{Qelements_8h_source_l00314}{S\+\_\+macro\+\_\+ll\+\_\+pt}}.
+References i, and S\+\_\+macro\+\_\+ll\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{refineable__brick__element_8cc_source_l01293}{oomph\+::\+Refineable\+QElement$<$ 3 $>$\+::build()}}, \mbox{\hyperlink{refineable__brick__element_8h_source_l00294}{oomph\+::\+Refineable\+Solid\+QElement$<$ 3 $>$\+::build()}}, \mbox{\hyperlink{refineable__line__element_8cc_source_l00212}{oomph\+::\+Refineable\+QElement$<$ 1 $>$\+::build()}}, \mbox{\hyperlink{refineable__quad__element_8cc_source_l00642}{oomph\+::\+Refineable\+QElement$<$ 2 $>$\+::build()}}, \mbox{\hyperlink{refineable__quad__element_8h_source_l00278}{oomph\+::\+Refineable\+Solid\+QElement$<$ 2 $>$\+::build()}}, \mbox{\hyperlink{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00099}{oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l02068}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{missing__masters_8template_8cc_source_l00251}{oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l01677}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::create\+\_\+external\+\_\+halo\+\_\+elements()}}, \mbox{\hyperlink{missing__masters_8cc_source_l00658}{oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01010}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper()}}, \mbox{\hyperlink{Qelements_8h_source_l00379}{oomph\+::\+QSolid\+Element\+Base\+::get\+\_\+x\+\_\+and\+\_\+xi()}}, \mbox{\hyperlink{Qelements_8h_source_l00249}{get\+\_\+x\+\_\+from\+\_\+macro\+\_\+element()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01797}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates()}}, \mbox{\hyperlink{hp__refineable__elements_8cc_source_l01757}{oomph\+::\+PRefineable\+QElement$<$ 2, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::pre\+\_\+build()}}, and \mbox{\hyperlink{Qelements_8h_source_l00143}{set\+\_\+macro\+\_\+elem\+\_\+pt()}}.
+Referenced by oomph\+::\+Refineable\+QElement$<$ 3 $>$\+::build(), oomph\+::\+Refineable\+Solid\+QElement$<$ 3 $>$\+::build(), oomph\+::\+Refineable\+QElement$<$ 1 $>$\+::build(), oomph\+::\+Refineable\+QElement$<$ 2 $>$\+::build(), oomph\+::\+Refineable\+Solid\+QElement$<$ 2 $>$\+::build(), oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::create\+\_\+external\+\_\+halo\+\_\+elements(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+QSolid\+Element\+Base\+::get\+\_\+x\+\_\+and\+\_\+xi(), get\+\_\+x\+\_\+from\+\_\+macro\+\_\+element(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates(), oomph\+::\+PRefineable\+QElement$<$ 2, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::pre\+\_\+build(), and set\+\_\+macro\+\_\+elem\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1QElementBase_aa7fb5176489dad1bc9ab6cb21f1ede5f}\label{classoomph_1_1QElementBase_aa7fb5176489dad1bc9ab6cb21f1ede5f}} 
 \index{oomph::QElementBase@{oomph::QElementBase}!s\_macro\_ll@{s\_macro\_ll}}
@@ -277,17 +277,17 @@ Access fct to the i-\/th coordinate of the element\textquotesingle{}s \char`\"{}
 
 
 
-Definition at line \mbox{\hyperlink{Qelements_8h_source_l00218}{218}} of file \mbox{\hyperlink{Qelements_8h_source}{Qelements.\+h}}.
+Definition at line 218 of file Qelements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{Qelements_8h_source_l00314}{S\+\_\+macro\+\_\+ll\+\_\+pt}}.
+References i, and S\+\_\+macro\+\_\+ll\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1QElementBase_a0e02d2c0be2b93967700723d77891cb2}\label{classoomph_1_1QElementBase_a0e02d2c0be2b93967700723d77891cb2}} 
+\mbox{\Hypertarget{classoomph_1_1QElementBase_aec37122110d976a88d60a061262592a2}\label{classoomph_1_1QElementBase_aec37122110d976a88d60a061262592a2}} 
 \index{oomph::QElementBase@{oomph::QElementBase}!s\_macro\_ur@{s\_macro\_ur}}
 \index{s\_macro\_ur@{s\_macro\_ur}!oomph::QElementBase@{oomph::QElementBase}}
 \doxysubsubsection{\texorpdfstring{s\_macro\_ur()}{s\_macro\_ur()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily double \& oomph\+::\+QElement\+Base\+::s\+\_\+macro\+\_\+ur (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double\& oomph\+::\+QElement\+Base\+::s\+\_\+macro\+\_\+ur (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -295,15 +295,15 @@ Access fct to the i-\/th coordinate of the element\textquotesingle{}s \char`\"{}
 
 
 
-Definition at line \mbox{\hyperlink{Qelements_8h_source_l00202}{202}} of file \mbox{\hyperlink{Qelements_8h_source}{Qelements.\+h}}.
+Definition at line 202 of file Qelements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{Qelements_8h_source_l00317}{S\+\_\+macro\+\_\+ur\+\_\+pt}}.
+References i, and S\+\_\+macro\+\_\+ur\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{refineable__brick__element_8cc_source_l01293}{oomph\+::\+Refineable\+QElement$<$ 3 $>$\+::build()}}, \mbox{\hyperlink{refineable__brick__element_8h_source_l00294}{oomph\+::\+Refineable\+Solid\+QElement$<$ 3 $>$\+::build()}}, \mbox{\hyperlink{refineable__line__element_8cc_source_l00212}{oomph\+::\+Refineable\+QElement$<$ 1 $>$\+::build()}}, \mbox{\hyperlink{refineable__quad__element_8cc_source_l00642}{oomph\+::\+Refineable\+QElement$<$ 2 $>$\+::build()}}, \mbox{\hyperlink{refineable__quad__element_8h_source_l00278}{oomph\+::\+Refineable\+Solid\+QElement$<$ 2 $>$\+::build()}}, \mbox{\hyperlink{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00099}{oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l02068}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{missing__masters_8template_8cc_source_l00251}{oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l01677}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::create\+\_\+external\+\_\+halo\+\_\+elements()}}, \mbox{\hyperlink{missing__masters_8cc_source_l00658}{oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01010}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper()}}, \mbox{\hyperlink{Qelements_8h_source_l00379}{oomph\+::\+QSolid\+Element\+Base\+::get\+\_\+x\+\_\+and\+\_\+xi()}}, \mbox{\hyperlink{Qelements_8h_source_l00249}{get\+\_\+x\+\_\+from\+\_\+macro\+\_\+element()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01797}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates()}}, \mbox{\hyperlink{hp__refineable__elements_8cc_source_l01757}{oomph\+::\+PRefineable\+QElement$<$ 2, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::pre\+\_\+build()}}, and \mbox{\hyperlink{Qelements_8h_source_l00143}{set\+\_\+macro\+\_\+elem\+\_\+pt()}}.
+Referenced by oomph\+::\+Refineable\+QElement$<$ 3 $>$\+::build(), oomph\+::\+Refineable\+Solid\+QElement$<$ 3 $>$\+::build(), oomph\+::\+Refineable\+QElement$<$ 1 $>$\+::build(), oomph\+::\+Refineable\+QElement$<$ 2 $>$\+::build(), oomph\+::\+Refineable\+Solid\+QElement$<$ 2 $>$\+::build(), oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::create\+\_\+external\+\_\+halo\+\_\+elements(), oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+QSolid\+Element\+Base\+::get\+\_\+x\+\_\+and\+\_\+xi(), get\+\_\+x\+\_\+from\+\_\+macro\+\_\+element(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates(), oomph\+::\+PRefineable\+QElement$<$ 2, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::pre\+\_\+build(), and set\+\_\+macro\+\_\+elem\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1QElementBase_ad761688aa29832c214b439db278625f2}\label{classoomph_1_1QElementBase_ad761688aa29832c214b439db278625f2}} 
 \index{oomph::QElementBase@{oomph::QElementBase}!s\_macro\_ur@{s\_macro\_ur}}
@@ -317,11 +317,11 @@ Access fct to the i-\/th coordinate of the element\textquotesingle{}s \char`\"{}
 
 
 
-Definition at line \mbox{\hyperlink{Qelements_8h_source_l00234}{234}} of file \mbox{\hyperlink{Qelements_8h_source}{Qelements.\+h}}.
+Definition at line 234 of file Qelements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{Qelements_8h_source_l00317}{S\+\_\+macro\+\_\+ur\+\_\+pt}}.
+References i, and S\+\_\+macro\+\_\+ur\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1QElementBase_a072ce3dcdffdc446f439ec86ea01ae7e}\label{classoomph_1_1QElementBase_a072ce3dcdffdc446f439ec86ea01ae7e}} 
 \index{oomph::QElementBase@{oomph::QElementBase}!set\_macro\_elem\_pt@{set\_macro\_elem\_pt}}
@@ -339,19 +339,19 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a170b030b8365ebb
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1QSolidElementBase_a0ceca47c039bbb38b0feb3baa330a27f}{oomph\+::\+QSolid\+Element\+Base}}, \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_013_01_4_a2b1aa7874048e0f38370ae7bf761d315}{oomph\+::\+Refineable\+Solid\+QElement$<$ 3 $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_011_01_4_ae0cd264bee16dd1d05d35f79e33dd408}{oomph\+::\+Refineable\+Solid\+QElement$<$ 1 $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_012_01_4_aac8a230631c509dd854d71a5f68b6483}{oomph\+::\+Refineable\+Solid\+QElement$<$ 2 $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_012_01_4_aac8a230631c509dd854d71a5f68b6483}{oomph\+::\+Refineable\+Solid\+QElement$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_011_01_4_ae0cd264bee16dd1d05d35f79e33dd408}{oomph\+::\+Refineable\+Solid\+QElement$<$ 1 $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_013_01_4_a2b1aa7874048e0f38370ae7bf761d315}{oomph\+::\+Refineable\+Solid\+QElement$<$ 3 $>$}}, and \mbox{\hyperlink{classoomph_1_1QSolidElementBase_a0ceca47c039bbb38b0feb3baa330a27f}{oomph\+::\+QSolid\+Element\+Base}}.
 
 
 
-Definition at line \mbox{\hyperlink{Qelements_8h_source_l00143}{143}} of file \mbox{\hyperlink{Qelements_8h_source}{Qelements.\+h}}.
+Definition at line 143 of file Qelements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01878}{oomph\+::\+Finite\+Element\+::macro\+\_\+elem\+\_\+pt()}}, \mbox{\hyperlink{Qelements_8h_source_l00186}{s\+\_\+macro\+\_\+ll()}}, \mbox{\hyperlink{Qelements_8h_source_l00314}{S\+\_\+macro\+\_\+ll\+\_\+pt}}, \mbox{\hyperlink{Qelements_8h_source_l00202}{s\+\_\+macro\+\_\+ur()}}, \mbox{\hyperlink{Qelements_8h_source_l00317}{S\+\_\+macro\+\_\+ur\+\_\+pt}}, and \mbox{\hyperlink{elements_8h_source_l01872}{oomph\+::\+Finite\+Element\+::set\+\_\+macro\+\_\+elem\+\_\+pt()}}.
+References oomph\+::\+Finite\+Element\+::dim(), i, oomph\+::\+Finite\+Element\+::macro\+\_\+elem\+\_\+pt(), s\+\_\+macro\+\_\+ll(), S\+\_\+macro\+\_\+ll\+\_\+pt, s\+\_\+macro\+\_\+ur(), S\+\_\+macro\+\_\+ur\+\_\+pt, and oomph\+::\+Finite\+Element\+::set\+\_\+macro\+\_\+elem\+\_\+pt().
 
 
 
-Referenced by \mbox{\hyperlink{Qelements_8h_source_l00349}{oomph\+::\+QSolid\+Element\+Base\+::set\+\_\+macro\+\_\+elem\+\_\+pt()}}.
+Referenced by oomph\+::\+QSolid\+Element\+Base\+::set\+\_\+macro\+\_\+elem\+\_\+pt().
 
 
 
@@ -368,11 +368,11 @@ Pointer to vector of lower left vertex coords. in macro element.
 
 
 
-Definition at line \mbox{\hyperlink{Qelements_8h_source_l00314}{314}} of file \mbox{\hyperlink{Qelements_8h_source}{Qelements.\+h}}.
+Definition at line 314 of file Qelements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{Qelements_8h_source_l00186}{s\+\_\+macro\+\_\+ll()}}, \mbox{\hyperlink{Qelements_8h_source_l00143}{set\+\_\+macro\+\_\+elem\+\_\+pt()}}, and \mbox{\hyperlink{Qelements_8h_source_l00103}{$\sim$\+QElement\+Base()}}.
+Referenced by s\+\_\+macro\+\_\+ll(), set\+\_\+macro\+\_\+elem\+\_\+pt(), and $\sim$\+QElement\+Base().
 
 \mbox{\Hypertarget{classoomph_1_1QElementBase_a2799b73c77a7d6bcff3e0f78d6bf0876}\label{classoomph_1_1QElementBase_a2799b73c77a7d6bcff3e0f78d6bf0876}} 
 \index{oomph::QElementBase@{oomph::QElementBase}!S\_macro\_ur\_pt@{S\_macro\_ur\_pt}}
@@ -386,11 +386,11 @@ Pointer to vector of upper right vertex coords. in macro element.
 
 
 
-Definition at line \mbox{\hyperlink{Qelements_8h_source_l00317}{317}} of file \mbox{\hyperlink{Qelements_8h_source}{Qelements.\+h}}.
+Definition at line 317 of file Qelements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{Qelements_8h_source_l00202}{s\+\_\+macro\+\_\+ur()}}, \mbox{\hyperlink{Qelements_8h_source_l00143}{set\+\_\+macro\+\_\+elem\+\_\+pt()}}, and \mbox{\hyperlink{Qelements_8h_source_l00103}{$\sim$\+QElement\+Base()}}.
+Referenced by s\+\_\+macro\+\_\+ur(), set\+\_\+macro\+\_\+elem\+\_\+pt(), and $\sim$\+QElement\+Base().
 
 
 

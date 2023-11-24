@@ -77,7 +77,7 @@ We construct the mesh by multiple inheritance, combining the already existing {\
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{  \textcolor{comment}{//========start\_of\_algebraic\_collapsible\_channel\_mesh==============}}
 \DoxyCodeLine{\textcolor{comment}{  /// Collapsible channel mesh with algebraic node update}}
-\DoxyCodeLine{  \textcolor{comment}{//=================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}  \textcolor{comment}{//=================================================================}}
 \DoxyCodeLine{  \textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{  \textcolor{keyword}{class }AlgebraicCollapsibleChannelMesh}
 \DoxyCodeLine{    : \textcolor{keyword}{public} \textcolor{keyword}{virtual} CollapsibleChannelMesh<ELEMENT>,}
@@ -132,9 +132,9 @@ We construct the mesh by multiple inheritance, combining the already existing {\
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{    /// Update nodal position at time level t (t=0: present;}}
+\DoxyCodeLine{    \textcolor{comment}{/// Update nodal position at time level t (t=0: present;}}
 \DoxyCodeLine{\textcolor{comment}{    /// t>0: previous)}}
-\DoxyCodeLine{    \textcolor{keywordtype}{void} algebraic\_node\_update(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& t, AlgebraicNode*\& node\_pt);}
+\DoxyCodeLine{\textcolor{comment}{}    \textcolor{keywordtype}{void} algebraic\_node\_update(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& t, AlgebraicNode*\& node\_pt);}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{    /// Update the node-\/udate data after mesh adaptation.}}
 \DoxyCodeLine{\textcolor{comment}{    /// Empty -\/-\/ no update of node update required as this is}}
@@ -159,8 +159,8 @@ We start by determining the x and y-\/coordinates of the nodes and decide if the
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{  \textcolor{comment}{//=====start\_setup=================================================}}
-\DoxyCodeLine{\textcolor{comment}{  /// Setup algebraic mesh update -\/-\/ assumes that mesh has}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{  /// initially been set up with a flush upper wall}}
+\DoxyCodeLine{\textcolor{comment}{  /// Setup algebraic mesh update -\/-\/ assumes that mesh has}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// initially been set up with a flush upper wall}}
 \DoxyCodeLine{\textcolor{comment}{}  \textcolor{comment}{//=================================================================}}
 \DoxyCodeLine{  \textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{  \textcolor{keywordtype}{void} AlgebraicCollapsibleChannelMesh<ELEMENT>::setup\_algebraic\_node\_update()}
@@ -374,7 +374,7 @@ The improved sparsity leads to a very significant speedup compared to the {\ttfa
 ~\newline
  {\bfseries{Hint\+:}} You can either copy the basic {\ttfamily My\+Algebraic\+Collapsible\+Channel\+Mesh} in the file \href{../../../../demo_drivers/navier_stokes/collapsible_channel/my_alg_channel_mesh.h}{\texttt{ my\+\_\+algebraic\+\_\+collapsible\+\_\+channel\+\_\+mesh.\+h}}, developed for the \href{../../../navier_stokes/algebraic_collapsible_channel/html/index.html}{\texttt{ non-\/\+FSI version of the collapsible channel problem,}} into the FSI driver code \href{../../../../demo_drivers/interaction/fsi_collapsible_channel/fsi_collapsible_channel.cc}{\texttt{ fsi\+\_\+collapsible\+\_\+channel.\+cc}} and use that mesh instead of the {\ttfamily Algebraic\+Collapsible\+Channel\+Mesh}, or replace the line ~\newline
 ~\newline
- 
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{this-\/>Wall\_pt-\/>locate\_zeta(zeta,geom\_obj\_pt,s);}
 
@@ -383,7 +383,7 @@ The improved sparsity leads to a very significant speedup compared to the {\ttfa
 ~\newline
  in the function {\ttfamily Algebraic\+Collapsible\+Channel\+Mesh$<$\+ELEMENT$>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update()} in \href{../../../../src/meshes/collapsible_channel_mesh.template.cc}{\texttt{ collapsible\+\_\+channel\+\_\+mesh.\+template.\+cc}} by ~\newline
 ~\newline
- 
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{this-\/>Wall\_pt-\/>GeomObject::locate\_zeta(zeta,geom\_obj\_pt,s);}
 

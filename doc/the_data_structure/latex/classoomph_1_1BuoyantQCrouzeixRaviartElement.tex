@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement}{}\doxysection{oomph\+::Buoyant\+QCrouzeix\+Raviart\+Element\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement}{}\doxysection{oomph\+::Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$ Class Template Reference}
 \label{classoomph_1_1BuoyantQCrouzeixRaviartElement}\index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}}
 
 
@@ -9,7 +9,7 @@
 
 {\ttfamily \#include $<$boussinesq\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Buoyant\+QCrouzeix\+Raviart\+Element\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=1.671642cm]{classoomph_1_1BuoyantQCrouzeixRaviartElement}
@@ -24,9 +24,9 @@ void \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_a9468f7a594a5
 \begin{DoxyCompactList}\small\item\em Unpin p\+\_\+dof-\/th pressure dof. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_a64b84c9cf74a06680136d465ff9e037b}{required\+\_\+nvalue}} (const unsigned \&n) const
 \begin{DoxyCompactList}\small\item\em The required number of values stored at the nodes is the sum of the required values of the two single-\/physics elements. Note that this step is generic for any multi-\/physics element of this type. \end{DoxyCompactList}\item 
-const double \& \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_aabd99c1834c82a2cd9e41729e107eb63}{ra}} () const
+const double \& \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_a5876310641d9f5028de6d4263013e247}{ra}} () const
 \begin{DoxyCompactList}\small\item\em Access function for the Rayleigh number (const version) \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_a1afd9a2227716058ff18f5ec2276e9f2}{ra\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_a73d4fa66488001d737e8a5ee595bd59b}{ra\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for the pointer to the Rayleigh number. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_a534fc134280b7447eecc4cad46b2e4c5}{disable\+\_\+\+ALE}} ()
 \begin{DoxyCompactList}\small\item\em Final override for disable ALE. \end{DoxyCompactList}\item 
@@ -101,11 +101,12 @@ static double \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement_a321
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$unsigned DIM$>$\newline
 class oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$}
+
 ////////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////// 
 
 A class that solves the Boussinesq approximation of the Navier--Stokes and energy equations by coupling two pre-\/existing classes. The \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{QAdvection\+Diffusion\+Element}} with bi-\/quadratic interpolation for the scalar variable (temperature) and \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement}{QCrouzeix\+Raviart\+Element}} which solves the Navier--Stokes equations using bi-\/quadratic interpolation for the velocities and a discontinuous bi-\/linear interpolation for the pressure. Note that we are free to choose the order in which we store the variables at the nodes. In this case we choose to store the variables in the order fluid velocities followed by temperature. We must, therefore, overload the function \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_aadffa26c42be5d4a1156a7467de48fb8}{Advection\+Diffusion\+Equations$<$\+DIM$>$\+::u\+\_\+index\+\_\+adv\+\_\+diff()}} to indicate that the temperature is stored at the DIM-\/th position not the 0-\/th. We do not need to overload the corresponding function in the Navier\+Stokes\+Equations$<$\+DIM$>$ class because the velocities are stored first. 
 
-Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00065}{65}} of file \mbox{\hyperlink{boussinesq__elements_8h_source}{boussinesq\+\_\+elements.\+h}}.
+Definition at line 65 of file boussinesq\+\_\+elements.\+h.
 
 
 
@@ -123,11 +124,11 @@ Constructor\+: call the underlying constructors and initialise the pointer to th
 
 
 
-Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00080}{80}} of file \mbox{\hyperlink{boussinesq__elements_8h_source}{boussinesq\+\_\+elements.\+h}}.
+Definition at line 80 of file boussinesq\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{boussinesq__elements_8h_source_l00074}{oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::\+Default\+\_\+\+Physical\+\_\+\+Constant\+\_\+\+Value}}, and \mbox{\hyperlink{boussinesq__elements_8h_source_l00071}{oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::\+Ra\+\_\+pt}}.
+References oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::\+Default\+\_\+\+Physical\+\_\+\+Constant\+\_\+\+Value, and oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::\+Ra\+\_\+pt.
 
 
 
@@ -149,11 +150,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_ac
 
 
 
-Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00272}{272}} of file \mbox{\hyperlink{boussinesq__elements_8h_source}{boussinesq\+\_\+elements.\+h}}.
+Definition at line 272 of file boussinesq\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03198}{oomph\+::\+Finite\+Element\+::compute\+\_\+error()}}.
+References oomph\+::\+Finite\+Element\+::compute\+\_\+error().
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_a53d343548b707c62e9f11a04d2dda986}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_a53d343548b707c62e9f11a04d2dda986}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!compute\_error@{compute\_error}}
@@ -172,11 +173,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a8
 
 
 
-Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00258}{258}} of file \mbox{\hyperlink{boussinesq__elements_8h_source}{boussinesq\+\_\+elements.\+h}}.
+Definition at line 258 of file boussinesq\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03198}{oomph\+::\+Finite\+Element\+::compute\+\_\+error()}}.
+References oomph\+::\+Finite\+Element\+::compute\+\_\+error().
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_aa720ea32e994671b46457fca078282b5}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_aa720ea32e994671b46457fca078282b5}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!Default\_Physical\_Constant\_Value@{Default\_Physical\_Constant\_Value}}
@@ -190,7 +191,7 @@ Set the default physical value to be zero.
 
 
 
-Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00744}{744}} of file \mbox{\hyperlink{boussinesq__elements_8h_source}{boussinesq\+\_\+elements.\+h}}.
+Definition at line 744 of file boussinesq\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_a4898e9179aebf392f1ffdfdb3fbea4a3}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_a4898e9179aebf392f1ffdfdb3fbea4a3}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!Default\_Physical\_Constant\_Value@{Default\_Physical\_Constant\_Value}}
@@ -200,7 +201,7 @@ Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00744}{744}}
 
 
 
-Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00747}{747}} of file \mbox{\hyperlink{boussinesq__elements_8h_source}{boussinesq\+\_\+elements.\+h}}.
+Definition at line 747 of file boussinesq\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_a534fc134280b7447eecc4cad46b2e4c5}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_a534fc134280b7447eecc4cad46b2e4c5}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!disable\_ALE@{disable\_ALE}}
@@ -219,11 +220,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_aa
 
 
 
-Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00114}{114}} of file \mbox{\hyperlink{boussinesq__elements_8h_source}{boussinesq\+\_\+elements.\+h}}.
+Definition at line 114 of file boussinesq\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00125}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::disable\+\_\+\+ALE()}}, and \mbox{\hyperlink{navier__stokes__elements_8h_source_l00909}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::disable\+\_\+\+ALE()}}.
+References oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::disable\+\_\+\+ALE(), and oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::disable\+\_\+\+ALE().
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_af551bb70aa118a8db4498f41272fe776}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_af551bb70aa118a8db4498f41272fe776}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!enable\_ALE@{enable\_ALE}}
@@ -242,11 +243,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a9
 
 
 
-Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00122}{122}} of file \mbox{\hyperlink{boussinesq__elements_8h_source}{boussinesq\+\_\+elements.\+h}}.
+Definition at line 122 of file boussinesq\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00135}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::enable\+\_\+\+ALE()}}, and \mbox{\hyperlink{navier__stokes__elements_8h_source_l00918}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::enable\+\_\+\+ALE()}}.
+References oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::enable\+\_\+\+ALE(), and oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::enable\+\_\+\+ALE().
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_a7bd9313dd697c1219cee4a65692388b5}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_a7bd9313dd697c1219cee4a65692388b5}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
@@ -265,11 +266,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a6
 
 
 
-Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00341}{341}} of file \mbox{\hyperlink{boussinesq__elements_8h_source}{boussinesq\+\_\+elements.\+h}}.
+Definition at line 341 of file boussinesq\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01735}{oomph\+::\+Finite\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}.
+References oomph\+::\+Finite\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian().
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_a7bd9313dd697c1219cee4a65692388b5}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_a7bd9313dd697c1219cee4a65692388b5}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
@@ -288,11 +289,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a6
 
 
 
-Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00516}{516}} of file \mbox{\hyperlink{boussinesq__elements_8h_source}{boussinesq\+\_\+elements.\+h}}.
+Definition at line 516 of file boussinesq\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00435}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l01273}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, and \mbox{\hyperlink{boussinesq__elements_8h_source_l00369}{oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+jacobian\+\_\+blocks\+\_\+by\+\_\+fd()}}.
+References oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+jacobian\+\_\+blocks\+\_\+by\+\_\+fd().
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_a7bd9313dd697c1219cee4a65692388b5}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_a7bd9313dd697c1219cee4a65692388b5}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
@@ -311,11 +312,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a6
 
 
 
-Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00696}{696}} of file \mbox{\hyperlink{boussinesq__elements_8h_source}{boussinesq\+\_\+elements.\+h}}.
+Definition at line 696 of file boussinesq\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00435}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l01273}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, and \mbox{\hyperlink{boussinesq__elements_8h_source_l00564}{oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+jacobian\+\_\+blocks\+\_\+analytic()}}.
+References oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+jacobian\+\_\+blocks\+\_\+analytic().
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_a7d22156d87949e4c64d597d60fe00225}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_a7d22156d87949e4c64d597d60fe00225}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix@{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix}}
@@ -334,15 +335,15 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_ae
 
 
 
-Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00350}{350}} of file \mbox{\hyperlink{boussinesq__elements_8h_source}{boussinesq\+\_\+elements.\+h}}.
+Definition at line 350 of file boussinesq\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l01322}{oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix()}}.
+References oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix().
 
 
 
-Referenced by \mbox{\hyperlink{boussinesq__elements_8h_source_l00537}{oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix()}}.
+Referenced by oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix().
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_a7d22156d87949e4c64d597d60fe00225}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_a7d22156d87949e4c64d597d60fe00225}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix@{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix}}
@@ -361,11 +362,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_ae
 
 
 
-Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00537}{537}} of file \mbox{\hyperlink{boussinesq__elements_8h_source}{boussinesq\+\_\+elements.\+h}}.
+Definition at line 537 of file boussinesq\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{boussinesq__elements_8h_source_l00350}{oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix()}}, and \mbox{\hyperlink{boussinesq__elements_8h_source_l00369}{oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+jacobian\+\_\+blocks\+\_\+by\+\_\+fd()}}.
+References oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix(), and oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+jacobian\+\_\+blocks\+\_\+by\+\_\+fd().
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_a7d22156d87949e4c64d597d60fe00225}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_a7d22156d87949e4c64d597d60fe00225}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix@{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix}}
@@ -384,11 +385,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_ae
 
 
 
-Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00716}{716}} of file \mbox{\hyperlink{boussinesq__elements_8h_source}{boussinesq\+\_\+elements.\+h}}.
+Definition at line 716 of file boussinesq\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{boussinesq__elements_8h_source_l00350}{oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix()}}, and \mbox{\hyperlink{boussinesq__elements_8h_source_l00564}{oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+jacobian\+\_\+blocks\+\_\+analytic()}}.
+References oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix(), and oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+jacobian\+\_\+blocks\+\_\+analytic().
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_ab87ed100a54d40884a70a67fcc305ecf}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_ab87ed100a54d40884a70a67fcc305ecf}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
@@ -407,11 +408,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_ae
 
 
 
-Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00323}{323}} of file \mbox{\hyperlink{boussinesq__elements_8h_source}{boussinesq\+\_\+elements.\+h}}.
+Definition at line 323 of file boussinesq\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00421}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}, and \mbox{\hyperlink{navier__stokes__elements_8h_source_l01260}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
+References oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), and oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_aa344d9c1a36501baefc4afd56f227b94}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_aa344d9c1a36501baefc4afd56f227b94}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!fill\_in\_off\_diagonal\_jacobian\_blocks\_analytic@{fill\_in\_off\_diagonal\_jacobian\_blocks\_analytic}}
@@ -426,15 +427,15 @@ Helper function to get the off-\/diagonal blocks of the Jacobian matrix analytic
 
 
 
-Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00564}{564}} of file \mbox{\hyperlink{boussinesq__elements_8h_source}{boussinesq\+\_\+elements.\+h}}.
+Definition at line 564 of file boussinesq\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{navier__stokes__elements_8h_source_l01981}{oomph\+::\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+nst()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l00765}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::g()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00318}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::pe()}}, \mbox{\hyperlink{boussinesq__elements_8h_source_l00102}{oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::ra()}}, \mbox{\hyperlink{elements_8h_source_l02576}{oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+value()}}, \mbox{\hyperlink{boussinesq__elements_8h_source_l00248}{oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::u\+\_\+index\+\_\+adv\+\_\+diff()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l00866}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+nst()}}, \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}, and \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral\+::weight()}}.
+References oomph\+::\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+nst(), oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::g(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), oomph\+::\+Integral\+::nweight(), oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::pe(), oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::ra(), oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+value(), oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::u\+\_\+index\+\_\+adv\+\_\+diff(), oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+nst(), oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Integral\+::weight().
 
 
 
-Referenced by \mbox{\hyperlink{boussinesq__elements_8h_source_l00696}{oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, and \mbox{\hyperlink{boussinesq__elements_8h_source_l00716}{oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix()}}.
+Referenced by oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix().
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_a5c64aaf8e6cefc31d89c62c28fc6f19b}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_a5c64aaf8e6cefc31d89c62c28fc6f19b}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!fill\_in\_off\_diagonal\_jacobian\_blocks\_by\_fd@{fill\_in\_off\_diagonal\_jacobian\_blocks\_by\_fd}}
@@ -449,15 +450,15 @@ Helper function to get the off-\/diagonal blocks of the Jacobian matrix by finit
 
 
 
-Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00369}{369}} of file \mbox{\hyperlink{boussinesq__elements_8h_source}{boussinesq\+\_\+elements.\+h}}.
+Definition at line 369 of file boussinesq\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01198}{oomph\+::\+Generalised\+Element\+::\+Default\+\_\+fd\+\_\+jacobian\+\_\+step}}, \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00421}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l01260}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{boussinesq__elements_8h_source_l00248}{oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::u\+\_\+index\+\_\+adv\+\_\+diff()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l00866}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+nst()}}, and \mbox{\hyperlink{nodes_8h_source_l00324}{oomph\+::\+Data\+::value\+\_\+pt()}}.
+References oomph\+::\+Generalised\+Element\+::\+Default\+\_\+fd\+\_\+jacobian\+\_\+step, oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), i, oomph\+::\+Generalised\+Element\+::ndof(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::u\+\_\+index\+\_\+adv\+\_\+diff(), oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+nst(), and oomph\+::\+Data\+::value\+\_\+pt().
 
 
 
-Referenced by \mbox{\hyperlink{boussinesq__elements_8h_source_l00516}{oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, and \mbox{\hyperlink{boussinesq__elements_8h_source_l00537}{oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix()}}.
+Referenced by oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix().
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_aeeef7868070fd692b33e5afa811af1da}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_aeeef7868070fd692b33e5afa811af1da}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!get\_body\_force\_nst@{get\_body\_force\_nst}}
@@ -476,11 +477,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a8a3f44d
 
 
 
-Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00298}{298}} of file \mbox{\hyperlink{boussinesq__elements_8h_source}{boussinesq\+\_\+elements.\+h}}.
+Definition at line 298 of file boussinesq\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00458}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::interpolated\+\_\+u\+\_\+adv\+\_\+diff()}}, and \mbox{\hyperlink{boussinesq__elements_8h_source_l00102}{oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::ra()}}.
+References i, oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::interpolated\+\_\+u\+\_\+adv\+\_\+diff(), and oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::ra().
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_ade5820ae7c44a9371dcc348ca5a3ab1c}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_ade5820ae7c44a9371dcc348ca5a3ab1c}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!get\_wind\_adv\_diff@{get\_wind\_adv\_diff}}
@@ -499,11 +500,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a3
 
 
 
-Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00283}{283}} of file \mbox{\hyperlink{boussinesq__elements_8h_source}{boussinesq\+\_\+elements.\+h}}.
+Definition at line 283 of file boussinesq\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{navier__stokes__elements_8h_source_l01505}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::interpolated\+\_\+u\+\_\+nst()}}.
+References oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::interpolated\+\_\+u\+\_\+nst().
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_a5103e49416e1a0e36a2e8e117fb78623}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_a5103e49416e1a0e36a2e8e117fb78623}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!nscalar\_paraview@{nscalar\_paraview}}
@@ -522,7 +523,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a7
 
 
 
-Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00132}{132}} of file \mbox{\hyperlink{boussinesq__elements_8h_source}{boussinesq\+\_\+elements.\+h}}.
+Definition at line 132 of file boussinesq\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_a9ba77409f12b80862262f6695829055b}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_a9ba77409f12b80862262f6695829055b}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!output@{output}}
@@ -541,11 +542,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a0
 
 
 
-Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00216}{216}} of file \mbox{\hyperlink{boussinesq__elements_8h_source}{boussinesq\+\_\+elements.\+h}}.
+Definition at line 216 of file boussinesq\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
+References oomph\+::\+Finite\+Element\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_a48039bbb2f32897b70fb0858ff739516}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_a48039bbb2f32897b70fb0858ff739516}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!output@{output}}
@@ -564,11 +565,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a0
 
 
 
-Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00222}{222}} of file \mbox{\hyperlink{boussinesq__elements_8h_source}{boussinesq\+\_\+elements.\+h}}.
+Definition at line 222 of file boussinesq\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
+References oomph\+::\+Finite\+Element\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_a3817706dbf3c755b4029917dac80bad7}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_a3817706dbf3c755b4029917dac80bad7}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!output@{output}}
@@ -587,11 +588,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a3
 
 
 
-Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00167}{167}} of file \mbox{\hyperlink{boussinesq__elements_8h_source}{boussinesq\+\_\+elements.\+h}}.
+Definition at line 167 of file boussinesq\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
+References oomph\+::\+Finite\+Element\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_a855783400ac22a61e151d1611ad8e47e}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_a855783400ac22a61e151d1611ad8e47e}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!output@{output}}
@@ -610,11 +611,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_ad
 
 
 
-Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00175}{175}} of file \mbox{\hyperlink{boussinesq__elements_8h_source}{boussinesq\+\_\+elements.\+h}}.
+Definition at line 175 of file boussinesq\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03148}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l01639}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::interpolated\+\_\+p\+\_\+nst()}}, \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00458}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::interpolated\+\_\+u\+\_\+adv\+\_\+diff()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l01505}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::interpolated\+\_\+u\+\_\+nst()}}, \mbox{\hyperlink{elements_8cc_source_l03962}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l03186}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{elements_8h_source_l03161}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}, and \mbox{\hyperlink{elements_8h_source_l03174}{oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer()}}.
+References oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot(), i, oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::interpolated\+\_\+p\+\_\+nst(), oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::interpolated\+\_\+u\+\_\+adv\+\_\+diff(), oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::interpolated\+\_\+u\+\_\+nst(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Finite\+Element\+::nplot\+\_\+points(), s, oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string(), and oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer().
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_ae1c6dc6850532af9ec618415ba31e053}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_ae1c6dc6850532af9ec618415ba31e053}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!output\_fct@{output\_fct}}
@@ -633,11 +634,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_af
 
 
 
-Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00238}{238}} of file \mbox{\hyperlink{boussinesq__elements_8h_source}{boussinesq\+\_\+elements.\+h}}.
+Definition at line 238 of file boussinesq\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03104}{oomph\+::\+Finite\+Element\+::output\+\_\+fct()}}.
+References oomph\+::\+Finite\+Element\+::output\+\_\+fct().
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_ad36c2a18f2de8b00f76baccc15b768c2}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_ad36c2a18f2de8b00f76baccc15b768c2}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!output\_fct@{output\_fct}}
@@ -656,18 +657,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_ab
 
 
 
-Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00228}{228}} of file \mbox{\hyperlink{boussinesq__elements_8h_source}{boussinesq\+\_\+elements.\+h}}.
+Definition at line 228 of file boussinesq\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03104}{oomph\+::\+Finite\+Element\+::output\+\_\+fct()}}.
+References oomph\+::\+Finite\+Element\+::output\+\_\+fct().
 
-\mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_aabd99c1834c82a2cd9e41729e107eb63}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_aabd99c1834c82a2cd9e41729e107eb63}} 
+\mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_a5876310641d9f5028de6d4263013e247}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_a5876310641d9f5028de6d4263013e247}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!ra@{ra}}
 \index{ra@{ra}!oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{ra()}{ra()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-const double \& \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement}{oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element}}$<$ DIM $>$\+::ra (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+const double\& \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement}{oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element}}$<$ DIM $>$\+::ra (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -675,22 +676,22 @@ Access function for the Rayleigh number (const version)
 
 
 
-Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00102}{102}} of file \mbox{\hyperlink{boussinesq__elements_8h_source}{boussinesq\+\_\+elements.\+h}}.
+Definition at line 102 of file boussinesq\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{boussinesq__elements_8h_source_l00071}{oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::\+Ra\+\_\+pt}}.
+References oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::\+Ra\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{boussinesq__elements_8h_source_l00564}{oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+jacobian\+\_\+blocks\+\_\+analytic()}}, and \mbox{\hyperlink{boussinesq__elements_8h_source_l00298}{oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::get\+\_\+body\+\_\+force\+\_\+nst()}}.
+Referenced by oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+jacobian\+\_\+blocks\+\_\+analytic(), and oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::get\+\_\+body\+\_\+force\+\_\+nst().
 
-\mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_a1afd9a2227716058ff18f5ec2276e9f2}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_a1afd9a2227716058ff18f5ec2276e9f2}} 
+\mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_a73d4fa66488001d737e8a5ee595bd59b}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_a73d4fa66488001d737e8a5ee595bd59b}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!ra\_pt@{ra\_pt}}
 \index{ra\_pt@{ra\_pt}!oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{ra\_pt()}{ra\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement}{oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element}}$<$ DIM $>$\+::ra\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+double$\ast$\& \mbox{\hyperlink{classoomph_1_1BuoyantQCrouzeixRaviartElement}{oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element}}$<$ DIM $>$\+::ra\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -698,11 +699,11 @@ Access function for the pointer to the Rayleigh number.
 
 
 
-Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00108}{108}} of file \mbox{\hyperlink{boussinesq__elements_8h_source}{boussinesq\+\_\+elements.\+h}}.
+Definition at line 108 of file boussinesq\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{boussinesq__elements_8h_source_l00071}{oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::\+Ra\+\_\+pt}}.
+References oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::\+Ra\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_a64b84c9cf74a06680136d465ff9e037b}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_a64b84c9cf74a06680136d465ff9e037b}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!required\_nvalue@{required\_nvalue}}
@@ -721,7 +722,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement_a02594
 
 
 
-Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00095}{95}} of file \mbox{\hyperlink{boussinesq__elements_8h_source}{boussinesq\+\_\+elements.\+h}}.
+Definition at line 95 of file boussinesq\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_a26f8112d2ba9c77087e534145a2477c9}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_a26f8112d2ba9c77087e534145a2477c9}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!scalar\_name\_paraview@{scalar\_name\_paraview}}
@@ -740,11 +741,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a3
 
 
 
-Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00160}{160}} of file \mbox{\hyperlink{boussinesq__elements_8h_source}{boussinesq\+\_\+elements.\+h}}.
+Definition at line 160 of file boussinesq\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{oomph__utilities_8h_source_l00189}{oomph\+::\+String\+Conversion\+::to\+\_\+string()}}.
+References i, and oomph\+::\+String\+Conversion\+::to\+\_\+string().
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_a33130eacdbdee41536fce76166c4a769}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_a33130eacdbdee41536fce76166c4a769}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!scalar\_value\_paraview@{scalar\_value\_paraview}}
@@ -763,7 +764,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a7
 
 
 
-Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00146}{146}} of file \mbox{\hyperlink{boussinesq__elements_8h_source}{boussinesq\+\_\+elements.\+h}}.
+Definition at line 146 of file boussinesq\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_acf5fa44f694c5374c61a964020437bf4}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_acf5fa44f694c5374c61a964020437bf4}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!u\_index\_adv\_diff@{u\_index\_adv\_diff}}
@@ -782,11 +783,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_aa
 
 
 
-Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00248}{248}} of file \mbox{\hyperlink{boussinesq__elements_8h_source}{boussinesq\+\_\+elements.\+h}}.
+Definition at line 248 of file boussinesq\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{boussinesq__elements_8h_source_l00564}{oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+jacobian\+\_\+blocks\+\_\+analytic()}}, and \mbox{\hyperlink{boussinesq__elements_8h_source_l00369}{oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+jacobian\+\_\+blocks\+\_\+by\+\_\+fd()}}.
+Referenced by oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+jacobian\+\_\+blocks\+\_\+analytic(), and oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+jacobian\+\_\+blocks\+\_\+by\+\_\+fd().
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_a9468f7a594a5b9a9a07d3bf27dbcff45}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_a9468f7a594a5b9a9a07d3bf27dbcff45}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!unfix\_pressure@{unfix\_pressure}}
@@ -801,11 +802,11 @@ Unpin p\+\_\+dof-\/th pressure dof.
 
 
 
-Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00087}{87}} of file \mbox{\hyperlink{boussinesq__elements_8h_source}{boussinesq\+\_\+elements.\+h}}.
+Definition at line 87 of file boussinesq\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00622}{oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l01757}{oomph\+::\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::\+P\+\_\+nst\+\_\+internal\+\_\+index}}, and \mbox{\hyperlink{nodes_8h_source_l00391}{oomph\+::\+Data\+::unpin()}}.
+References oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt(), oomph\+::\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::\+P\+\_\+nst\+\_\+internal\+\_\+index, and oomph\+::\+Data\+::unpin().
 
 
 
@@ -823,11 +824,11 @@ The static default value of the Rayleigh number.
 
 
 
-Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00074}{74}} of file \mbox{\hyperlink{boussinesq__elements_8h_source}{boussinesq\+\_\+elements.\+h}}.
+Definition at line 74 of file boussinesq\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{boussinesq__elements_8h_source_l00080}{oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::\+Buoyant\+QCrouzeix\+Raviart\+Element()}}.
+Referenced by oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::\+Buoyant\+QCrouzeix\+Raviart\+Element().
 
 \mbox{\Hypertarget{classoomph_1_1BuoyantQCrouzeixRaviartElement_a054ffb965ec8cce9b6b2da2336a1e7d8}\label{classoomph_1_1BuoyantQCrouzeixRaviartElement_a054ffb965ec8cce9b6b2da2336a1e7d8}} 
 \index{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$@{oomph::BuoyantQCrouzeixRaviartElement$<$ DIM $>$}!Ra\_pt@{Ra\_pt}}
@@ -842,11 +843,11 @@ Pointer to a private data member, the Rayleigh number.
 
 
 
-Definition at line \mbox{\hyperlink{boussinesq__elements_8h_source_l00071}{71}} of file \mbox{\hyperlink{boussinesq__elements_8h_source}{boussinesq\+\_\+elements.\+h}}.
+Definition at line 71 of file boussinesq\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{boussinesq__elements_8h_source_l00080}{oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::\+Buoyant\+QCrouzeix\+Raviart\+Element()}}, \mbox{\hyperlink{boussinesq__elements_8h_source_l00102}{oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::ra()}}, and \mbox{\hyperlink{boussinesq__elements_8h_source_l00108}{oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::ra\+\_\+pt()}}.
+Referenced by oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::\+Buoyant\+QCrouzeix\+Raviart\+Element(), oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::ra(), and oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::ra\+\_\+pt().
 
 
 

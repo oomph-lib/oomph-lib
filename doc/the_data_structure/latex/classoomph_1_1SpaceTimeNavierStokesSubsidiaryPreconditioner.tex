@@ -58,15 +58,15 @@ void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditione
 \begin{DoxyCompactList}\small\item\em Don\textquotesingle{}t document the memory usage! \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_ac9a41866bc2e54bb4e52c16e6a2dd8ad}{get\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes}} ()
 \begin{DoxyCompactList}\small\item\em Get the memory statistics. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a0b95e7159585b5151f9e5dc1d1713655}{setup}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_aec1a6eda2d78d1e3b41ced805534d72d}{matrix\+\_\+pt}})
+void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a0b95e7159585b5151f9e5dc1d1713655}{setup}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a9aac48fd53e579e6db8eeed58933a14b}{matrix\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em For some reason we need to remind the compiler that there is also a function named setup in the base class. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a783fae97e4b898f8de72b504a4f4bec6}{setup}} (const \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_aec1a6eda2d78d1e3b41ced805534d72d}{matrix\+\_\+pt}})
+void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a783fae97e4b898f8de72b504a4f4bec6}{setup}} (const \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a9aac48fd53e579e6db8eeed58933a14b}{matrix\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em For some reason we need to remind the compiler that there is also a function named setup in the base class. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_af4886f4efe510e5c9b0eb19422943588}{setup}} ()=0
 \begin{DoxyCompactList}\small\item\em For some reason we need to remind the compiler that there is also a function named setup in the base class. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a0b95e7159585b5151f9e5dc1d1713655}{setup}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_aec1a6eda2d78d1e3b41ced805534d72d}{matrix\+\_\+pt}})
+void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a0b95e7159585b5151f9e5dc1d1713655}{setup}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a9aac48fd53e579e6db8eeed58933a14b}{matrix\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em For some reason we need to remind the compiler that there is also a function named setup in the base class. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a783fae97e4b898f8de72b504a4f4bec6}{setup}} (const \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_aec1a6eda2d78d1e3b41ced805534d72d}{matrix\+\_\+pt}})
+void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a783fae97e4b898f8de72b504a4f4bec6}{setup}} (const \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a9aac48fd53e579e6db8eeed58933a14b}{matrix\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em For some reason we need to remind the compiler that there is also a function named setup in the base class. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_af4886f4efe510e5c9b0eb19422943588}{setup}} ()=0
 \begin{DoxyCompactList}\small\item\em For some reason we need to remind the compiler that there is also a function named setup in the base class. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -97,7 +97,7 @@ double \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditio
 \doxysubsection{Detailed Description}
 General purpose block triangular preconditioner. By default this is Upper triangular. Also, by default \mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner}{Super\+LUPreconditioner}} (or Super\+LUDist\+Preconditioner) is used to solve the subsidiary systems, but other preconditioners can be used by setting them using passing a pointer to a function of type Subsidiary\+Preconditioner\+Fct\+Pt to the method subsidiary\+\_\+preconditioner\+\_\+function\+\_\+pt(). 
 
-Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00054}{54}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
+Definition at line 54 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
 
 
 
@@ -114,11 +114,11 @@ Constructor. (By default this preconditioner is upper triangular).
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00059}{59}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
+Definition at line 59 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00225}{Compute\+\_\+memory\+\_\+statistics}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00232}{F\+\_\+mat\+\_\+vec\+\_\+pt}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00208}{F\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00235}{G\+\_\+mat\+\_\+vec\+\_\+pt}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00229}{Memory\+\_\+usage\+\_\+in\+\_\+bytes}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00211}{P\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00221}{Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00214}{Using\+\_\+default\+\_\+f\+\_\+preconditioner}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00217}{Using\+\_\+default\+\_\+p\+\_\+preconditioner}}.
+References Compute\+\_\+memory\+\_\+statistics, F\+\_\+mat\+\_\+vec\+\_\+pt, F\+\_\+preconditioner\+\_\+pt, G\+\_\+mat\+\_\+vec\+\_\+pt, Memory\+\_\+usage\+\_\+in\+\_\+bytes, P\+\_\+preconditioner\+\_\+pt, Preconditioner\+\_\+has\+\_\+been\+\_\+setup, Using\+\_\+default\+\_\+f\+\_\+preconditioner, and Using\+\_\+default\+\_\+p\+\_\+preconditioner.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a0437f70b507c14a25c8a84d696f0cafe}\label{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a0437f70b507c14a25c8a84d696f0cafe}} 
 \index{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner@{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner}!````~SpaceTimeNavierStokesSubsidiaryPreconditioner@{$\sim$SpaceTimeNavierStokesSubsidiaryPreconditioner}}
@@ -132,11 +132,11 @@ Destructor -\/ delete the preconditioner matrices.
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00090}{90}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
+Definition at line 90 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00097}{clean\+\_\+up\+\_\+memory()}}.
+References clean\+\_\+up\+\_\+memory().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_af03edad19a7cb5038dbdba9973a9862c}\label{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_af03edad19a7cb5038dbdba9973a9862c}} 
 \index{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner@{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner}!SpaceTimeNavierStokesSubsidiaryPreconditioner@{SpaceTimeNavierStokesSubsidiaryPreconditioner}}
@@ -160,11 +160,11 @@ Constructor. (By default this preconditioner is upper triangular).
 
 
 
-Definition at line \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source_l00060}{60}} of file \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h}}.
+Definition at line 60 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00225}{Compute\+\_\+memory\+\_\+statistics}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00232}{F\+\_\+mat\+\_\+vec\+\_\+pt}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00208}{F\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00235}{G\+\_\+mat\+\_\+vec\+\_\+pt}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00229}{Memory\+\_\+usage\+\_\+in\+\_\+bytes}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00211}{P\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00221}{Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00214}{Using\+\_\+default\+\_\+f\+\_\+preconditioner}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00217}{Using\+\_\+default\+\_\+p\+\_\+preconditioner}}.
+References Compute\+\_\+memory\+\_\+statistics, F\+\_\+mat\+\_\+vec\+\_\+pt, F\+\_\+preconditioner\+\_\+pt, G\+\_\+mat\+\_\+vec\+\_\+pt, Memory\+\_\+usage\+\_\+in\+\_\+bytes, P\+\_\+preconditioner\+\_\+pt, Preconditioner\+\_\+has\+\_\+been\+\_\+setup, Using\+\_\+default\+\_\+f\+\_\+preconditioner, and Using\+\_\+default\+\_\+p\+\_\+preconditioner.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a0437f70b507c14a25c8a84d696f0cafe}\label{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a0437f70b507c14a25c8a84d696f0cafe}} 
 \index{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner@{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner}!````~SpaceTimeNavierStokesSubsidiaryPreconditioner@{$\sim$SpaceTimeNavierStokesSubsidiaryPreconditioner}}
@@ -178,11 +178,11 @@ Destructor -\/ delete the preconditioner matrices.
 
 
 
-Definition at line \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source_l00091}{91}} of file \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h}}.
+Definition at line 91 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00097}{clean\+\_\+up\+\_\+memory()}}.
+References clean\+\_\+up\+\_\+memory().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_af03edad19a7cb5038dbdba9973a9862c}\label{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_af03edad19a7cb5038dbdba9973a9862c}} 
 \index{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner@{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner}!SpaceTimeNavierStokesSubsidiaryPreconditioner@{SpaceTimeNavierStokesSubsidiaryPreconditioner}}
@@ -213,15 +213,15 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Preconditioner_a46c31c416829be
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00097}{97}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
+Definition at line 97 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00232}{F\+\_\+mat\+\_\+vec\+\_\+pt}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00208}{F\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00235}{G\+\_\+mat\+\_\+vec\+\_\+pt}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00211}{P\+\_\+preconditioner\+\_\+pt}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00221}{Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}.
+References F\+\_\+mat\+\_\+vec\+\_\+pt, F\+\_\+preconditioner\+\_\+pt, G\+\_\+mat\+\_\+vec\+\_\+pt, P\+\_\+preconditioner\+\_\+pt, and Preconditioner\+\_\+has\+\_\+been\+\_\+setup.
 
 
 
-Referenced by \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00061}{setup()}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00090}{$\sim$\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner()}}.
+Referenced by setup(), and $\sim$\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a9f08be6180639747c3eb7afcc248707f}\label{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a9f08be6180639747c3eb7afcc248707f}} 
 \index{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner@{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner}!clean\_up\_memory@{clean\_up\_memory}}
@@ -239,11 +239,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Preconditioner_a46c31c416829be
 
 
 
-Definition at line \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source_l00098}{98}} of file \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h}}.
+Definition at line 98 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00232}{F\+\_\+mat\+\_\+vec\+\_\+pt}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00208}{F\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00235}{G\+\_\+mat\+\_\+vec\+\_\+pt}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00211}{P\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00221}{Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00214}{Using\+\_\+default\+\_\+f\+\_\+preconditioner}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00217}{Using\+\_\+default\+\_\+p\+\_\+preconditioner}}.
+References F\+\_\+mat\+\_\+vec\+\_\+pt, F\+\_\+preconditioner\+\_\+pt, G\+\_\+mat\+\_\+vec\+\_\+pt, P\+\_\+preconditioner\+\_\+pt, Preconditioner\+\_\+has\+\_\+been\+\_\+setup, Using\+\_\+default\+\_\+f\+\_\+preconditioner, and Using\+\_\+default\+\_\+p\+\_\+preconditioner.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a95ffacaedf33d5a45393dde0315f3770}\label{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a95ffacaedf33d5a45393dde0315f3770}} 
 \index{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner@{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner}!disable\_doc\_memory\_usage@{disable\_doc\_memory\_usage}}
@@ -257,11 +257,11 @@ Don\textquotesingle{}t document the memory usage!
 
 Set the appropriate flag to false
 
-Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00147}{147}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
+Definition at line 147 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00225}{Compute\+\_\+memory\+\_\+statistics}}.
+References Compute\+\_\+memory\+\_\+statistics.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a95ffacaedf33d5a45393dde0315f3770}\label{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a95ffacaedf33d5a45393dde0315f3770}} 
 \index{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner@{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner}!disable\_doc\_memory\_usage@{disable\_doc\_memory\_usage}}
@@ -275,11 +275,11 @@ Don\textquotesingle{}t document the memory usage!
 
 Set the appropriate flag to false
 
-Definition at line \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source_l00154}{154}} of file \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h}}.
+Definition at line 154 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00225}{Compute\+\_\+memory\+\_\+statistics}}.
+References Compute\+\_\+memory\+\_\+statistics.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_aa1831727caf588508438eec1776ede6d}\label{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_aa1831727caf588508438eec1776ede6d}} 
 \index{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner@{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner}!enable\_doc\_memory\_usage@{enable\_doc\_memory\_usage}}
@@ -293,15 +293,15 @@ Document the memory usage.
 
 Set the appropriate flag to true
 
-Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00139}{139}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
+Definition at line 139 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00225}{Compute\+\_\+memory\+\_\+statistics}}.
+References Compute\+\_\+memory\+\_\+statistics.
 
 
 
-Referenced by \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00575}{oomph\+::\+GMRESBlock\+Preconditioner\+::setup()}}.
+Referenced by oomph\+::\+GMRESBlock\+Preconditioner\+::setup().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_aa1831727caf588508438eec1776ede6d}\label{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_aa1831727caf588508438eec1776ede6d}} 
 \index{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner@{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner}!enable\_doc\_memory\_usage@{enable\_doc\_memory\_usage}}
@@ -315,11 +315,11 @@ Document the memory usage.
 
 Set the appropriate flag to true
 
-Definition at line \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source_l00146}{146}} of file \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h}}.
+Definition at line 146 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00225}{Compute\+\_\+memory\+\_\+statistics}}.
+References Compute\+\_\+memory\+\_\+statistics.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_ac9a41866bc2e54bb4e52c16e6a2dd8ad}\label{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_ac9a41866bc2e54bb4e52c16e6a2dd8ad}} 
 \index{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner@{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner}!get\_memory\_usage\_in\_bytes@{get\_memory\_usage\_in\_bytes}}
@@ -333,15 +333,15 @@ Get the memory statistics.
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00155}{155}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
+Definition at line 155 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00225}{Compute\+\_\+memory\+\_\+statistics}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00229}{Memory\+\_\+usage\+\_\+in\+\_\+bytes}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00221}{Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}.
+References Compute\+\_\+memory\+\_\+statistics, Memory\+\_\+usage\+\_\+in\+\_\+bytes, and Preconditioner\+\_\+has\+\_\+been\+\_\+setup.
 
 
 
-Referenced by \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8cc_source_l00218}{oomph\+::\+Banded\+Block\+Triangular\+Preconditioner$<$ MATRIX $>$\+::setup()}}.
+Referenced by oomph\+::\+Banded\+Block\+Triangular\+Preconditioner$<$ MATRIX $>$\+::setup().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_ac9a41866bc2e54bb4e52c16e6a2dd8ad}\label{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_ac9a41866bc2e54bb4e52c16e6a2dd8ad}} 
 \index{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner@{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner}!get\_memory\_usage\_in\_bytes@{get\_memory\_usage\_in\_bytes}}
@@ -355,11 +355,11 @@ Get the memory statistics.
 
 
 
-Definition at line \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source_l00162}{162}} of file \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h}}.
+Definition at line 162 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00225}{Compute\+\_\+memory\+\_\+statistics}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00229}{Memory\+\_\+usage\+\_\+in\+\_\+bytes}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00221}{Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}.
+References Compute\+\_\+memory\+\_\+statistics, Memory\+\_\+usage\+\_\+in\+\_\+bytes, and Preconditioner\+\_\+has\+\_\+been\+\_\+setup.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a66e143786c49141efd2cbd4f766def4f}\label{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a66e143786c49141efd2cbd4f766def4f}} 
 \index{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner@{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner}!operator=@{operator=}}
@@ -397,15 +397,15 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00482}{482}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+cc}}.
+Definition at line 482 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+cc.
 
 
 
-References \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00342}{oomph\+::\+Linear\+Algebra\+Distribution\+::built()}}, \mbox{\hyperlink{double__vector_8h_source_l00142}{oomph\+::\+Double\+Vector\+::clear()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00232}{F\+\_\+mat\+\_\+vec\+\_\+pt}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00208}{F\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00235}{G\+\_\+mat\+\_\+vec\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04186}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{matrix__vector__product_8cc_source_l00108}{oomph\+::\+Matrix\+Vector\+Product\+::multiply()}}, \mbox{\hyperlink{matrix__vector__product_8cc_source_l00177}{oomph\+::\+Matrix\+Vector\+Product\+::multiply\+\_\+transpose()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00211}{P\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34884bb64ec8}{oomph\+::\+Preconditioner\+::preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{block__preconditioner_8cc_source_l04489}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::return\+\_\+block\+\_\+vector()}}.
+References oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Linear\+Algebra\+Distribution\+::built(), oomph\+::\+Double\+Vector\+::clear(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), F\+\_\+mat\+\_\+vec\+\_\+pt, F\+\_\+preconditioner\+\_\+pt, G\+\_\+mat\+\_\+vec\+\_\+pt, oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+block\+\_\+vector(), oomph\+::\+Matrix\+Vector\+Product\+::multiply(), oomph\+::\+Matrix\+Vector\+Product\+::multiply\+\_\+transpose(), P\+\_\+preconditioner\+\_\+pt, oomph\+::\+Preconditioner\+::preconditioner\+\_\+solve(), and oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::return\+\_\+block\+\_\+vector().
 
 
 
-Referenced by \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00729}{oomph\+::\+GMRESBlock\+Preconditioner\+::preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00420}{oomph\+::\+GMRESBlock\+Preconditioner\+::update()}}.
+Referenced by oomph\+::\+GMRESBlock\+Preconditioner\+::preconditioner\+\_\+solve(), and oomph\+::\+GMRESBlock\+Preconditioner\+::update().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a95fa1d146686ea3b0dbf42104117f4d0}\label{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a95fa1d146686ea3b0dbf42104117f4d0}} 
 \index{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner@{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner}!preconditioner\_solve@{preconditioner\_solve}}
@@ -441,15 +441,15 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb1
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00061}{61}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+cc}}.
+Definition at line 61 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+cc.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8cc_source_l02483}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::block\+\_\+setup()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00097}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00225}{Compute\+\_\+memory\+\_\+statistics}}, \mbox{\hyperlink{matrices_8cc_source_l04349}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::concatenate()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00232}{F\+\_\+mat\+\_\+vec\+\_\+pt}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00208}{F\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00235}{G\+\_\+mat\+\_\+vec\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00673}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+block()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02061}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::is\+\_\+subsidiary\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00520}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::matrix\+\_\+pt()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00229}{Memory\+\_\+usage\+\_\+in\+\_\+bytes}}, \mbox{\hyperlink{matrices_8cc_source_l01782}{oomph\+::\+CRDouble\+Matrix\+::multiply()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01670}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::nblock\+\_\+types()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01694}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::ndof\+\_\+types()}}, \mbox{\hyperlink{matrices_8h_source_l01096}{oomph\+::\+CRDouble\+Matrix\+::nnz()}}, \mbox{\hyperlink{matrices_8h_source_l01002}{oomph\+::\+CRDouble\+Matrix\+::nrow()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00313}{oomph\+::oomph\+\_\+nullstream}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00211}{P\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00221}{Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00045}{oomph\+::\+Hypre\+\_\+default\+\_\+settings\+::set\+\_\+defaults\+\_\+for\+\_\+2\+D\+\_\+poisson\+\_\+problem()}}, \mbox{\hyperlink{preconditioner_8h_source_l00094}{oomph\+::\+Preconditioner\+::setup()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02397}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::setup\+\_\+matrix\+\_\+vector\+\_\+product()}}, \mbox{\hyperlink{preconditioner_8h_source_l00229}{oomph\+::\+Preconditioner\+::\+Silent\+\_\+preconditioner\+\_\+setup}}, \mbox{\hyperlink{matrices_8h_source_l01031}{oomph\+::\+CRDouble\+Matrix\+::sparse\+\_\+indexed\+\_\+output\+\_\+with\+\_\+offset()}}, \mbox{\hyperlink{oomph__definitions_8h_source_l00464}{oomph\+::\+Oomph\+Info\+::stream\+\_\+pt()}}, \mbox{\hyperlink{preconditioner_8h_source_l00232}{oomph\+::\+Preconditioner\+::\+Stream\+\_\+pt}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00214}{Using\+\_\+default\+\_\+f\+\_\+preconditioner}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00217}{Using\+\_\+default\+\_\+p\+\_\+preconditioner}}.
+References oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::block\+\_\+setup(), clean\+\_\+up\+\_\+memory(), Compute\+\_\+memory\+\_\+statistics, oomph\+::\+CRDouble\+Matrix\+Helpers\+::concatenate(), F\+\_\+mat\+\_\+vec\+\_\+pt, F\+\_\+preconditioner\+\_\+pt, G\+\_\+mat\+\_\+vec\+\_\+pt, oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+block(), i, oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::is\+\_\+subsidiary\+\_\+block\+\_\+preconditioner(), oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::matrix\+\_\+pt(), Memory\+\_\+usage\+\_\+in\+\_\+bytes, oomph\+::\+CRDouble\+Matrix\+::multiply(), oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::nblock\+\_\+types(), oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::ndof\+\_\+types(), oomph\+::\+CRDouble\+Matrix\+::nnz(), oomph\+::\+CRDouble\+Matrix\+::nrow(), oomph\+::oomph\+\_\+info, oomph\+::oomph\+\_\+nullstream, P\+\_\+preconditioner\+\_\+pt, Preconditioner\+\_\+has\+\_\+been\+\_\+setup, oomph\+::\+Hypre\+\_\+default\+\_\+settings\+::set\+\_\+defaults\+\_\+for\+\_\+2\+D\+\_\+poisson\+\_\+problem(), oomph\+::\+Preconditioner\+::setup(), oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::setup\+\_\+matrix\+\_\+vector\+\_\+product(), oomph\+::\+Preconditioner\+::\+Silent\+\_\+preconditioner\+\_\+setup, oomph\+::\+CRDouble\+Matrix\+::sparse\+\_\+indexed\+\_\+output\+\_\+with\+\_\+offset(), oomph\+::\+Oomph\+Info\+::stream\+\_\+pt(), oomph\+::\+Preconditioner\+::\+Stream\+\_\+pt, oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), oomph\+::\+Timing\+Helpers\+::timer(), Using\+\_\+default\+\_\+f\+\_\+preconditioner, and Using\+\_\+default\+\_\+p\+\_\+preconditioner.
 
 
 
-Referenced by \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00575}{oomph\+::\+GMRESBlock\+Preconditioner\+::setup()}}.
+Referenced by oomph\+::\+GMRESBlock\+Preconditioner\+::setup().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a416c107b8095d5083b7a84775bae9881}\label{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a416c107b8095d5083b7a84775bae9881}} 
 \index{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner@{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner}!setup@{setup}}
@@ -469,7 +469,7 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb1
 \index{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner@{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner}!setup@{setup}}
 \index{setup@{setup}!oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner@{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner}}
 \doxysubsubsection{\texorpdfstring{setup()}{setup()}\hspace{0.1cm}{\footnotesize\ttfamily [3/8]}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Preconditioner\+::setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Preconditioner\+::setup\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -483,7 +483,7 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb1
 \index{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner@{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner}!setup@{setup}}
 \index{setup@{setup}!oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner@{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner}}
 \doxysubsubsection{\texorpdfstring{setup()}{setup()}\hspace{0.1cm}{\footnotesize\ttfamily [4/8]}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Preconditioner\+::setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Preconditioner\+::setup\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -497,7 +497,7 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb1
 \index{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner@{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner}!setup@{setup}}
 \index{setup@{setup}!oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner@{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner}}
 \doxysubsubsection{\texorpdfstring{setup()}{setup()}\hspace{0.1cm}{\footnotesize\ttfamily [5/8]}}
-{\footnotesize\ttfamily void oomph\+::\+Preconditioner\+::setup (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$}]{matrix\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Preconditioner\+::setup\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -505,13 +505,17 @@ For some reason we need to remind the compiler that there is also a function nam
 
 
 
-Definition at line \mbox{\hyperlink{preconditioner_8h_source_l00120}{120}} of file \mbox{\hyperlink{preconditioner_8h_source}{preconditioner.\+h}}.
+Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb19422943588}{oomph\+::\+Preconditioner}}.
+
+
+
+Definition at line 120 of file preconditioner.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a783fae97e4b898f8de72b504a4f4bec6}\label{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a783fae97e4b898f8de72b504a4f4bec6}} 
 \index{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner@{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner}!setup@{setup}}
 \index{setup@{setup}!oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner@{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner}}
 \doxysubsubsection{\texorpdfstring{setup()}{setup()}\hspace{0.1cm}{\footnotesize\ttfamily [6/8]}}
-{\footnotesize\ttfamily void oomph\+::\+Preconditioner\+::setup (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$}]{matrix\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Preconditioner\+::setup\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -519,13 +523,17 @@ For some reason we need to remind the compiler that there is also a function nam
 
 
 
-Definition at line \mbox{\hyperlink{preconditioner_8h_source_l00120}{120}} of file \mbox{\hyperlink{preconditioner_8h_source}{preconditioner.\+h}}.
+Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb19422943588}{oomph\+::\+Preconditioner}}.
+
+
+
+Definition at line 120 of file preconditioner.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a0b95e7159585b5151f9e5dc1d1713655}\label{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a0b95e7159585b5151f9e5dc1d1713655}} 
 \index{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner@{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner}!setup@{setup}}
 \index{setup@{setup}!oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner@{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner}}
 \doxysubsubsection{\texorpdfstring{setup()}{setup()}\hspace{0.1cm}{\footnotesize\ttfamily [7/8]}}
-{\footnotesize\ttfamily void oomph\+::\+Preconditioner\+::setup (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$}]{matrix\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Preconditioner\+::setup\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -533,13 +541,17 @@ For some reason we need to remind the compiler that there is also a function nam
 
 
 
-Definition at line \mbox{\hyperlink{preconditioner_8h_source_l00094}{94}} of file \mbox{\hyperlink{preconditioner_8h_source}{preconditioner.\+h}}.
+Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb19422943588}{oomph\+::\+Preconditioner}}.
+
+
+
+Definition at line 94 of file preconditioner.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a0b95e7159585b5151f9e5dc1d1713655}\label{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a0b95e7159585b5151f9e5dc1d1713655}} 
 \index{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner@{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner}!setup@{setup}}
 \index{setup@{setup}!oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner@{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner}}
 \doxysubsubsection{\texorpdfstring{setup()}{setup()}\hspace{0.1cm}{\footnotesize\ttfamily [8/8]}}
-{\footnotesize\ttfamily void oomph\+::\+Preconditioner\+::setup (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$}]{matrix\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Preconditioner\+::setup\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -547,7 +559,11 @@ For some reason we need to remind the compiler that there is also a function nam
 
 
 
-Definition at line \mbox{\hyperlink{preconditioner_8h_source_l00094}{94}} of file \mbox{\hyperlink{preconditioner_8h_source}{preconditioner.\+h}}.
+Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb19422943588}{oomph\+::\+Preconditioner}}.
+
+
+
+Definition at line 94 of file preconditioner.\+h.
 
 
 
@@ -564,11 +580,11 @@ Flag to indicate whether or not to record the memory statistics this preconditio
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00225}{225}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
+Definition at line 225 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00147}{disable\+\_\+doc\+\_\+memory\+\_\+usage()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00139}{enable\+\_\+doc\+\_\+memory\+\_\+usage()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00155}{get\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00061}{setup()}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00059}{Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner()}}.
+Referenced by disable\+\_\+doc\+\_\+memory\+\_\+usage(), enable\+\_\+doc\+\_\+memory\+\_\+usage(), get\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes(), setup(), and Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a78b54093aa97ef7ade5c4776ce8049db}\label{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a78b54093aa97ef7ade5c4776ce8049db}} 
 \index{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner@{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner}!F\_mat\_vec\_pt@{F\_mat\_vec\_pt}}
@@ -582,11 +598,11 @@ Referenced by \mbox{\hyperlink{general__purpose__space__time__subsidiary__block_
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00232}{232}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
+Definition at line 232 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00097}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00482}{preconditioner\+\_\+solve()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00061}{setup()}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00059}{Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner()}}.
+Referenced by clean\+\_\+up\+\_\+memory(), preconditioner\+\_\+solve(), setup(), and Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_ae692fab2d26015ef902eb4e0fb2bf4de}\label{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_ae692fab2d26015ef902eb4e0fb2bf4de}} 
 \index{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner@{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner}!F\_preconditioner\_pt@{F\_preconditioner\_pt}}
@@ -600,11 +616,11 @@ Pointer to the \textquotesingle{}preconditioner\textquotesingle{} for the F matr
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00208}{208}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
+Definition at line 208 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00097}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00482}{preconditioner\+\_\+solve()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00061}{setup()}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00059}{Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner()}}.
+Referenced by clean\+\_\+up\+\_\+memory(), preconditioner\+\_\+solve(), setup(), and Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a5ecfa11c7f2e35aa18d6106f67a655ad}\label{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a5ecfa11c7f2e35aa18d6106f67a655ad}} 
 \index{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner@{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner}!G\_mat\_vec\_pt@{G\_mat\_vec\_pt}}
@@ -618,11 +634,11 @@ Referenced by \mbox{\hyperlink{general__purpose__space__time__subsidiary__block_
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00235}{235}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
+Definition at line 235 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00097}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00482}{preconditioner\+\_\+solve()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00061}{setup()}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00059}{Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner()}}.
+Referenced by clean\+\_\+up\+\_\+memory(), preconditioner\+\_\+solve(), setup(), and Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a0934ebec95e816941f7022d191ecde50}\label{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a0934ebec95e816941f7022d191ecde50}} 
 \index{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner@{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner}!Memory\_usage\_in\_bytes@{Memory\_usage\_in\_bytes}}
@@ -636,11 +652,11 @@ Storage for the memory usage of the solver if the flag above is set to true (in 
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00229}{229}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
+Definition at line 229 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00155}{get\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00061}{setup()}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00059}{Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner()}}.
+Referenced by get\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes(), setup(), and Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a054d9971c8c9faa144801e8852a062d0}\label{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a054d9971c8c9faa144801e8852a062d0}} 
 \index{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner@{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner}!P\_preconditioner\_pt@{P\_preconditioner\_pt}}
@@ -654,11 +670,11 @@ Pointer to the \textquotesingle{}preconditioner\textquotesingle{} for the pressu
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00211}{211}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
+Definition at line 211 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00097}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00482}{preconditioner\+\_\+solve()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00061}{setup()}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00059}{Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner()}}.
+Referenced by clean\+\_\+up\+\_\+memory(), preconditioner\+\_\+solve(), setup(), and Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a504de942a571ff4e82a22a663acb8618}\label{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a504de942a571ff4e82a22a663acb8618}} 
 \index{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner@{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner}!Preconditioner\_has\_been\_setup@{Preconditioner\_has\_been\_setup}}
@@ -672,11 +688,11 @@ Control flag is true if the preconditioner has been setup (used so we can wipe t
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00221}{221}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
+Definition at line 221 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00097}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00155}{get\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00061}{setup()}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00059}{Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner()}}.
+Referenced by clean\+\_\+up\+\_\+memory(), get\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes(), setup(), and Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a9b858a2f71021c384245c191bf45234b}\label{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_a9b858a2f71021c384245c191bf45234b}} 
 \index{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner@{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner}!Using\_default\_f\_preconditioner@{Using\_default\_f\_preconditioner}}
@@ -690,11 +706,11 @@ Flag indicating whether the default F preconditioner is used.
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00214}{214}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
+Definition at line 214 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source_l00098}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00061}{setup()}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00059}{Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner()}}.
+Referenced by clean\+\_\+up\+\_\+memory(), setup(), and Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner().
 
 \mbox{\Hypertarget{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_abe00c433a21ec13f2b2f8053048da97d}\label{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner_abe00c433a21ec13f2b2f8053048da97d}} 
 \index{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner@{oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner}!Using\_default\_p\_preconditioner@{Using\_default\_p\_preconditioner}}
@@ -708,11 +724,11 @@ Flag indicating whether the default P preconditioner is used.
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00217}{217}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
+Definition at line 217 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source_l00098}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00061}{setup()}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00059}{Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner()}}.
+Referenced by clean\+\_\+up\+\_\+memory(), setup(), and Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner().
 
 
 

@@ -25,7 +25,7 @@ Detailed documentation to be written. Here\textquotesingle{}s the driver code...
 \DoxyCodeLine{\textcolor{comment}{//LIC// multi-\/physics finite-\/element library, available }}
 \DoxyCodeLine{\textcolor{comment}{//LIC// at http://www.oomph-\/lib.org.}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// }}
-\DoxyCodeLine{\textcolor{comment}{//LIC// Copyright (C) 2006-\/2022 Matthias Heil and Andrew Hazel}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// Copyright (C) 2006-\/2023 Matthias Heil and Andrew Hazel}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// }}
 \DoxyCodeLine{\textcolor{comment}{//LIC// This library is free software; you can redistribute it and/or}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// modify it under the terms of the GNU Lesser General Public}}
@@ -69,36 +69,36 @@ Detailed documentation to be written. Here\textquotesingle{}s the driver code...
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Constructor that takes the radius and curvature of the tube}}
 \DoxyCodeLine{\textcolor{comment}{ /// as its arguments}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classMyCurvedCylinder_a2af55228ec569d864957af4ab7d63d2b}{MyCurvedCylinder}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double} \&radius, \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&delta) :}
-\DoxyCodeLine{  GeomObject(3,3), \mbox{\hyperlink{classMyCurvedCylinder_aaf7aa0ded93fced8b112d61e634a9df2}{Radius}}(radius), \mbox{\hyperlink{classMyCurvedCylinder_abacb5dddfb1971d098b2c07608fdaf50}{Delta}}(delta) \{ \}}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classMyCurvedCylinder}{MyCurvedCylinder}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double} \&radius, \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&delta) :}
+\DoxyCodeLine{  GeomObject(3,3), Radius(radius), \mbox{\hyperlink{namespaceGlobal__Physical__Variables_add290b9e4a9c0e4c18a13faa7e29d857}{Delta}}(delta) \{ \}}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{/// Destructor}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{keyword}{virtual}\mbox{\hyperlink{classMyCurvedCylinder_af474ed1dc8e4a1d433d4f1e77712b0a3}{\string~MyCurvedCylinder}}()\{\}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{keyword}{virtual}\string~\mbox{\hyperlink{classMyCurvedCylinder}{MyCurvedCylinder}}()\{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{/// Lagrangian coordinate xi}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{keywordtype}{void} \mbox{\hyperlink{classMyCurvedCylinder_a6b0a9178fef82a1279efded76a611692}{position}} (\textcolor{keyword}{const} Vector<double>\& xi, Vector<double>\& r)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{keywordtype}{void} position (\textcolor{keyword}{const} Vector<double>\& xi, Vector<double>\& r)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\textcolor{keyword}{}\{}
-\DoxyCodeLine{ r[0] = (1.0/\mbox{\hyperlink{classMyCurvedCylinder_abacb5dddfb1971d098b2c07608fdaf50}{Delta}})*cos(xi[0]) + xi[2]*\mbox{\hyperlink{classMyCurvedCylinder_aaf7aa0ded93fced8b112d61e634a9df2}{Radius}}*cos(xi[0])*cos(xi[1]);}
-\DoxyCodeLine{ r[1] = (1.0/\mbox{\hyperlink{classMyCurvedCylinder_abacb5dddfb1971d098b2c07608fdaf50}{Delta}})*sin(xi[0]) + xi[2]*\mbox{\hyperlink{classMyCurvedCylinder_aaf7aa0ded93fced8b112d61e634a9df2}{Radius}}*sin(xi[0])*cos(xi[1]);}
-\DoxyCodeLine{ r[2] = -\/xi[2]*\mbox{\hyperlink{classMyCurvedCylinder_aaf7aa0ded93fced8b112d61e634a9df2}{Radius}}*sin(xi[1]);}
+\DoxyCodeLine{ r[0] = (1.0/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_add290b9e4a9c0e4c18a13faa7e29d857}{Delta}})*cos(xi[0]) + xi[2]*Radius*cos(xi[0])*cos(xi[1]);}
+\DoxyCodeLine{ r[1] = (1.0/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_add290b9e4a9c0e4c18a13faa7e29d857}{Delta}})*sin(xi[0]) + xi[2]*Radius*sin(xi[0])*cos(xi[1]);}
+\DoxyCodeLine{ r[2] = -\/xi[2]*Radius*sin(xi[1]);}
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{/// Return the position of the tube as a function of time }}
 \DoxyCodeLine{\textcolor{comment}{/// (doesn't move as a function of time)}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{keywordtype}{void} \mbox{\hyperlink{classMyCurvedCylinder_a6b0a9178fef82a1279efded76a611692}{position}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& t, }
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{keywordtype}{void} position(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& t, }
 \DoxyCodeLine{              \textcolor{keyword}{const} Vector<double>\& xi, Vector<double>\& r)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\textcolor{keyword}{  }\{}
-\DoxyCodeLine{   \mbox{\hyperlink{classMyCurvedCylinder_a6b0a9178fef82a1279efded76a611692}{position}}(xi,r);}
+\DoxyCodeLine{   position(xi,r);}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Storage for the radius of the tube}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{classMyCurvedCylinder_aaf7aa0ded93fced8b112d61e634a9df2}{Radius}};}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} Radius;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Storage for the curvature of the tube}}
-\DoxyCodeLine{ \textcolor{keywordtype}{double} \mbox{\hyperlink{classMyCurvedCylinder_abacb5dddfb1971d098b2c07608fdaf50}{Delta}};}
+\DoxyCodeLine{ \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_add290b9e4a9c0e4c18a13faa7e29d857}{Delta}};}
 \DoxyCodeLine{\};}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{//=start\_of\_namespace================================================}\textcolor{comment}{}}
@@ -124,29 +124,29 @@ Detailed documentation to be written. Here\textquotesingle{}s the driver code...
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Constructor: Pass DocInfo object and target errors}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classSteadyCurvedTubeProblem_ac276276fa87e57ff486e3af24b72e38b}{SteadyCurvedTubeProblem}}(DocInfo\& doc\_info, \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& min\_error\_target,}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classSteadyCurvedTubeProblem}{SteadyCurvedTubeProblem}}(DocInfo\& doc\_info, \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& min\_error\_target,}
 \DoxyCodeLine{                  \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& max\_error\_target);}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Destructor (empty)}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classSteadyCurvedTubeProblem_a1adfde23500217008be5445934830115}{\string~SteadyCurvedTubeProblem}}() \{\}}
+\DoxyCodeLine{\textcolor{comment}{} \string~\mbox{\hyperlink{classSteadyCurvedTubeProblem}{SteadyCurvedTubeProblem}}() \{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs before solve }}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classSteadyCurvedTubeProblem_a90f3197b2cd58a6d24d7064018db3bac}{actions\_before\_newton\_solve}}();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_newton\_solve();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// After adaptation: Pin redudant pressure dofs.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classSteadyCurvedTubeProblem_a536ebee9cdb86bb1533531c85e5fd125}{actions\_after\_adapt}}()}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_adapt()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Pin redudant pressure dofs}}
 \DoxyCodeLine{   RefineableNavierStokesEquations<3>::}
-\DoxyCodeLine{    pin\_redundant\_nodal\_pressures(\mbox{\hyperlink{classSteadyCurvedTubeProblem_a79b8c2c0e3945aa6a9b69dfd55e456e1}{mesh\_pt}}()-\/>element\_pt());}
+\DoxyCodeLine{    pin\_redundant\_nodal\_pressures(mesh\_pt()-\/>element\_pt());}
 \DoxyCodeLine{  \} }
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classSteadyCurvedTubeProblem_a544bdf06e254393094a39561944af6b7}{doc\_solution}}();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} doc\_solution();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Overload generic access function by one that returns}}
 \DoxyCodeLine{\textcolor{comment}{ /// a pointer to the specific  mesh}}
-\DoxyCodeLine{\textcolor{comment}{} RefineableTubeMesh<ELEMENT>* \mbox{\hyperlink{classSteadyCurvedTubeProblem_a79b8c2c0e3945aa6a9b69dfd55e456e1}{mesh\_pt}}() }
+\DoxyCodeLine{\textcolor{comment}{} RefineableTubeMesh<ELEMENT>* mesh\_pt() }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{keywordflow}{return} \textcolor{keyword}{dynamic\_cast<}RefineableTubeMesh<ELEMENT>*\textcolor{keyword}{>}(Problem::mesh\_pt());}
 \DoxyCodeLine{  \}}
@@ -154,10 +154,10 @@ Detailed documentation to be written. Here\textquotesingle{}s the driver code...
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Doc info object}}
-\DoxyCodeLine{\textcolor{comment}{} DocInfo \mbox{\hyperlink{classSteadyCurvedTubeProblem_a1a48437e34e38bf6d96aef540fda70b6}{Doc\_info}};}
+\DoxyCodeLine{\textcolor{comment}{} DocInfo Doc\_info;}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to GeomObject that specifies the domain volume}}
-\DoxyCodeLine{\textcolor{comment}{} GeomObject *\mbox{\hyperlink{classSteadyCurvedTubeProblem_a06fa168a75e0ce3b0cd0eccacf226a6c}{Volume\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} GeomObject *Volume\_pt;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\}; \textcolor{comment}{// end\_of\_problem\_class}}
 \DoxyCodeLine{}

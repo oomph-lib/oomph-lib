@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1UnsteadyHeatEquations}{}\doxysection{oomph\+::Unsteady\+Heat\+Equations\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1UnsteadyHeatEquations}{}\doxysection{oomph\+::Unsteady\+Heat\+Equations$<$ DIM $>$ Class Template Reference}
 \label{classoomph_1_1UnsteadyHeatEquations}\index{oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}}
 
 
@@ -9,7 +9,7 @@ A class for all isoparametric elements that solve the Unsteady\+Heat equations.
 
 {\ttfamily \#include $<$unsteady\+\_\+heat\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Unsteady\+Heat\+Equations\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Unsteady\+Heat\+Equations$<$ DIM $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.955145cm]{classoomph_1_1UnsteadyHeatEquations}
@@ -53,19 +53,19 @@ void \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_a14e50a4b041d961cf3450
 \begin{DoxyCompactList}\small\item\em Get error against and norm of exact solution. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_ab6d9162fbdc253de4cc7064e3c1459aa}{compute\+\_\+error}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt, const double \&time, double \&error, double \&norm)
 \begin{DoxyCompactList}\small\item\em Get error against and norm of exact solution. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_a967135cc2be2cb4b16fe0dc0b4d68a68}{Unsteady\+Heat\+Source\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_a8c9229229db6018df12b5286daca2816}{source\+\_\+fct\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_a967135cc2be2cb4b16fe0dc0b4d68a68}{Unsteady\+Heat\+Source\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_a8bd87b25f079be4dbee6edfc00127d47}{source\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to source function. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_a967135cc2be2cb4b16fe0dc0b4d68a68}{Unsteady\+Heat\+Source\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_a97883b388b84d415b8954ce9670f73af}{source\+\_\+fct\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to source function. Const version. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_a8907d972136ac4e81f297b196968ebe8}{get\+\_\+source\+\_\+ust\+\_\+heat}} (const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&ipt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&source) const
 \begin{DoxyCompactList}\small\item\em Get source term at continous time t and (Eulerian) position x. Virtual so it can be overloaded in derived multiphysics elements. \end{DoxyCompactList}\item 
-const double \& \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_ac583ec25724348503555d2b7c06dbf06}{alpha}} () const
+const double \& \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_a840e6d385ae22b44795f73fdd008fc3e}{alpha}} () const
 \begin{DoxyCompactList}\small\item\em Alpha parameter (thermal inertia) \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_add8f58c7064a6f82dc768a595d4a1c51}{alpha\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_aacedcce21ecb4da2f6fda094da3aa057}{alpha\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to Alpha parameter (thermal inertia) \end{DoxyCompactList}\item 
-const double \& \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_aa47222b0237d1d00212002cd808ea5ce}{beta}} () const
+const double \& \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_aca11360903e1f4c7513e1f91e8a1e4b7}{beta}} () const
 \begin{DoxyCompactList}\small\item\em Beta parameter (thermal conductivity) \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_a39efb5d737b8e2866a786b0aed60fafc}{beta\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_acec4dab1c04bee562e953153bf39159e}{beta\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to Beta parameter (thermal conductivity) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_a16a237c1055f7d8f577eab77ca00a03c}{get\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux) const
 \begin{DoxyCompactList}\small\item\em Get flux\+: flux\mbox{[}i\mbox{]} = du/dx\+\_\+i. \end{DoxyCompactList}\item 
@@ -114,11 +114,12 @@ static double \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_a85ec71a0ce9a
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$unsigned DIM$>$\newline
 class oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$}
+
 A class for all isoparametric elements that solve the Unsteady\+Heat equations. 
 
 \[ \frac{\partial^2 u}{\partial x_i^2}=\frac{\partial u}{\partial t}+f(t,x_j) \] This contains the generic maths. \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} functions, geometric mapping etc. must get implemented in derived class. Note that this class assumes an isoparametric formulation, i.\+e. that the scalar unknown is interpolated using the same shape funcitons as the position. 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00071}{71}} of file \mbox{\hyperlink{unsteady__heat__elements_8h_source}{unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 71 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -136,7 +137,7 @@ Function pointer to source function fct(t,x,f(x,t)) -- x is a Vector!
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00076}{76}} of file \mbox{\hyperlink{unsteady__heat__elements_8h_source}{unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 76 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
@@ -154,11 +155,11 @@ Constructor\+: Initialises the Source\+\_\+fct\+\_\+pt to null and sets flag to 
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00085}{85}} of file \mbox{\hyperlink{unsteady__heat__elements_8h_source}{unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 85 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00454}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::\+Alpha\+\_\+pt}}, \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00457}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::\+Beta\+\_\+pt}}, \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00462}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::\+Default\+\_\+alpha\+\_\+parameter}}, and \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00466}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::\+Default\+\_\+beta\+\_\+parameter}}.
+References oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::\+Alpha\+\_\+pt, oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::\+Beta\+\_\+pt, oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::\+Default\+\_\+alpha\+\_\+parameter, and oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::\+Default\+\_\+beta\+\_\+parameter.
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_a9907a521919d014a129e5849874282a0}\label{classoomph_1_1UnsteadyHeatEquations_a9907a521919d014a129e5849874282a0}} 
 \index{oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}!UnsteadyHeatEquations@{UnsteadyHeatEquations}}
@@ -174,12 +175,12 @@ Broken copy constructor.
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_ac583ec25724348503555d2b7c06dbf06}\label{classoomph_1_1UnsteadyHeatEquations_ac583ec25724348503555d2b7c06dbf06}} 
+\mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_a840e6d385ae22b44795f73fdd008fc3e}\label{classoomph_1_1UnsteadyHeatEquations_a840e6d385ae22b44795f73fdd008fc3e}} 
 \index{oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}!alpha@{alpha}}
 \index{alpha@{alpha}!oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{alpha()}{alpha()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-const double \& \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations}{oomph\+::\+Unsteady\+Heat\+Equations}}$<$ DIM $>$\+::alpha (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+const double\& \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations}{oomph\+::\+Unsteady\+Heat\+Equations}}$<$ DIM $>$\+::alpha (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -187,18 +188,18 @@ Alpha parameter (thermal inertia)
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00255}{255}} of file \mbox{\hyperlink{unsteady__heat__elements_8h_source}{unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 255 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00454}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::\+Alpha\+\_\+pt}}.
+References oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::\+Alpha\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_add8f58c7064a6f82dc768a595d4a1c51}\label{classoomph_1_1UnsteadyHeatEquations_add8f58c7064a6f82dc768a595d4a1c51}} 
+\mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_aacedcce21ecb4da2f6fda094da3aa057}\label{classoomph_1_1UnsteadyHeatEquations_aacedcce21ecb4da2f6fda094da3aa057}} 
 \index{oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}!alpha\_pt@{alpha\_pt}}
 \index{alpha\_pt@{alpha\_pt}!oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{alpha\_pt()}{alpha\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations}{oomph\+::\+Unsteady\+Heat\+Equations}}$<$ DIM $>$\+::alpha\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+double$\ast$\& \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations}{oomph\+::\+Unsteady\+Heat\+Equations}}$<$ DIM $>$\+::alpha\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -206,18 +207,18 @@ Pointer to Alpha parameter (thermal inertia)
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00261}{261}} of file \mbox{\hyperlink{unsteady__heat__elements_8h_source}{unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 261 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00454}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::\+Alpha\+\_\+pt}}.
+References oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::\+Alpha\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_aa47222b0237d1d00212002cd808ea5ce}\label{classoomph_1_1UnsteadyHeatEquations_aa47222b0237d1d00212002cd808ea5ce}} 
+\mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_aca11360903e1f4c7513e1f91e8a1e4b7}\label{classoomph_1_1UnsteadyHeatEquations_aca11360903e1f4c7513e1f91e8a1e4b7}} 
 \index{oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}!beta@{beta}}
 \index{beta@{beta}!oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{beta()}{beta()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-const double \& \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations}{oomph\+::\+Unsteady\+Heat\+Equations}}$<$ DIM $>$\+::beta (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+const double\& \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations}{oomph\+::\+Unsteady\+Heat\+Equations}}$<$ DIM $>$\+::beta (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -225,18 +226,18 @@ Beta parameter (thermal conductivity)
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00268}{268}} of file \mbox{\hyperlink{unsteady__heat__elements_8h_source}{unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 268 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00457}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::\+Beta\+\_\+pt}}.
+References oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::\+Beta\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_a39efb5d737b8e2866a786b0aed60fafc}\label{classoomph_1_1UnsteadyHeatEquations_a39efb5d737b8e2866a786b0aed60fafc}} 
+\mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_acec4dab1c04bee562e953153bf39159e}\label{classoomph_1_1UnsteadyHeatEquations_acec4dab1c04bee562e953153bf39159e}} 
 \index{oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}!beta\_pt@{beta\_pt}}
 \index{beta\_pt@{beta\_pt}!oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{beta\_pt()}{beta\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations}{oomph\+::\+Unsteady\+Heat\+Equations}}$<$ DIM $>$\+::beta\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+double$\ast$\& \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations}{oomph\+::\+Unsteady\+Heat\+Equations}}$<$ DIM $>$\+::beta\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -244,11 +245,11 @@ Pointer to Beta parameter (thermal conductivity)
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00274}{274}} of file \mbox{\hyperlink{unsteady__heat__elements_8h_source}{unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 274 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00457}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::\+Beta\+\_\+pt}}.
+References oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::\+Beta\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_a14e50a4b041d961cf3450788a3e231f0}\label{classoomph_1_1UnsteadyHeatEquations_a14e50a4b041d961cf3450788a3e231f0}} 
 \index{oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}!compute\_error@{compute\_error}}
@@ -269,11 +270,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a73c79a1f1e5b1d3
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__elements_8cc_source_l00472}{472}} of file \mbox{\hyperlink{unsteady__heat__elements_8cc_source}{unsteady\+\_\+heat\+\_\+elements.\+cc}}.
+Definition at line 472 of file unsteady\+\_\+heat\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
+References i, s, and oomph\+::\+Quad\+Tree\+Names\+::W.
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_ab6d9162fbdc253de4cc7064e3c1459aa}\label{classoomph_1_1UnsteadyHeatEquations_ab6d9162fbdc253de4cc7064e3c1459aa}} 
 \index{oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}!compute\_error@{compute\_error}}
@@ -294,11 +295,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a7f67853506dc73f
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__elements_8cc_source_l00551}{551}} of file \mbox{\hyperlink{unsteady__heat__elements_8cc_source}{unsteady\+\_\+heat\+\_\+elements.\+cc}}.
+Definition at line 551 of file unsteady\+\_\+heat\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
+References i, s, and oomph\+::\+Quad\+Tree\+Names\+::W.
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_a0b5413cd78f410efd7ab3273a34cca5f}\label{classoomph_1_1UnsteadyHeatEquations_a0b5413cd78f410efd7ab3273a34cca5f}} 
 \index{oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}!compute\_norm@{compute\_norm}}
@@ -317,11 +318,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_af2025a472d
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__elements_8cc_source_l00215}{215}} of file \mbox{\hyperlink{unsteady__heat__elements_8cc_source}{unsteady\+\_\+heat\+\_\+elements.\+cc}}.
+Definition at line 215 of file unsteady\+\_\+heat\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
+References i, s, and oomph\+::\+Quad\+Tree\+Names\+::W.
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_a25113368ba4d7b4b054ca4a046fe9ff7}\label{classoomph_1_1UnsteadyHeatEquations_a25113368ba4d7b4b054ca4a046fe9ff7}} 
 \index{oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}!disable\_ALE@{disable\_ALE}}
@@ -340,11 +341,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a625ea6d3f9baccf
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00148}{148}} of file \mbox{\hyperlink{unsteady__heat__elements_8h_source}{unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 148 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00451}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::\+ALE\+\_\+is\+\_\+disabled}}.
+References oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::\+ALE\+\_\+is\+\_\+disabled.
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_aa6ab5a2e2bbf3830dfb17f8f2d1281b0}\label{classoomph_1_1UnsteadyHeatEquations_aa6ab5a2e2bbf3830dfb17f8f2d1281b0}} 
 \index{oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}!dshape\_and\_dtest\_eulerian\_at\_knot\_ust\_heat@{dshape\_and\_dtest\_eulerian\_at\_knot\_ust\_heat}}
@@ -359,7 +360,7 @@ Shape/test functions and derivs w.\+r.\+t. to global coords at integration point
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement_a0e7b03ebbf897295a34bae8d0dfe9686}{oomph\+::\+TUnsteady\+Heat\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatElement_ab9d47c020336e2c5accdca2014a5218e}{oomph\+::\+QUnsteady\+Heat\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatElement_ab9d47c020336e2c5accdca2014a5218e}{oomph\+::\+QUnsteady\+Heat\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement_a0e7b03ebbf897295a34bae8d0dfe9686}{oomph\+::\+TUnsteady\+Heat\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}.
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_a70c72c1d6e716657d819264f1131b77c}\label{classoomph_1_1UnsteadyHeatEquations_a70c72c1d6e716657d819264f1131b77c}} 
 \index{oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}!dshape\_and\_dtest\_eulerian\_ust\_heat@{dshape\_and\_dtest\_eulerian\_ust\_heat}}
@@ -374,7 +375,7 @@ Shape/test functions and derivs w.\+r.\+t. to global coords at local coord. s; r
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement_ab957ee8223e82d47e75eafde43c1a3e3}{oomph\+::\+TUnsteady\+Heat\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatElement_a6ebc0c1826e01fbd03132b1617673ff7}{oomph\+::\+QUnsteady\+Heat\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatElement_a6ebc0c1826e01fbd03132b1617673ff7}{oomph\+::\+QUnsteady\+Heat\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement_ab957ee8223e82d47e75eafde43c1a3e3}{oomph\+::\+TUnsteady\+Heat\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}.
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_ad5a19b842365b704972610e115adb3c9}\label{classoomph_1_1UnsteadyHeatEquations_ad5a19b842365b704972610e115adb3c9}} 
 \index{oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}!du\_dt\_ust\_heat@{du\_dt\_ust\_heat}}
@@ -389,15 +390,15 @@ du/dt at local node n. Uses suitably interpolated value for hanging nodes.
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00119}{119}} of file \mbox{\hyperlink{unsteady__heat__elements_8h_source}{unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 119 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{timesteppers_8h_source_l00389}{oomph\+::\+Time\+Stepper\+::is\+\_\+steady()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00238}{oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00112}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+ust\+\_\+heat()}}, and \mbox{\hyperlink{timesteppers_8h_source_l00594}{oomph\+::\+Time\+Stepper\+::weight()}}.
+References oomph\+::\+Time\+Stepper\+::is\+\_\+steady(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Time\+Stepper\+::ntstorage(), t, oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt(), oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt(), oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+ust\+\_\+heat(), and oomph\+::\+Time\+Stepper\+::weight().
 
 
 
-Referenced by \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00392}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::interpolated\+\_\+du\+\_\+dt\+\_\+ust\+\_\+heat()}}.
+Referenced by oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::interpolated\+\_\+du\+\_\+dt\+\_\+ust\+\_\+heat().
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_a38abdb9f1afd465289bb31d684daa360}\label{classoomph_1_1UnsteadyHeatEquations_a38abdb9f1afd465289bb31d684daa360}} 
 \index{oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}!enable\_ALE@{enable\_ALE}}
@@ -416,11 +417,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a92ef8967fa4e2d6
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00158}{158}} of file \mbox{\hyperlink{unsteady__heat__elements_8h_source}{unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 158 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00451}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::\+ALE\+\_\+is\+\_\+disabled}}.
+References oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::\+ALE\+\_\+is\+\_\+disabled.
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_a17f787d9bb9e6de030b28d2d12f41fd4}\label{classoomph_1_1UnsteadyHeatEquations_a17f787d9bb9e6de030b28d2d12f41fd4}} 
 \index{oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
@@ -439,11 +440,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00324}{324}} of file \mbox{\hyperlink{unsteady__heat__elements_8h_source}{unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 324 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{unsteady__heat__elements_8cc_source_l00060}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+ust\+\_\+heat()}}.
+References oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+ust\+\_\+heat().
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_a46541bba4b3116b8db9d15a4f213b0e6}\label{classoomph_1_1UnsteadyHeatEquations_a46541bba4b3116b8db9d15a4f213b0e6}} 
 \index{oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
@@ -462,11 +463,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00314}{314}} of file \mbox{\hyperlink{unsteady__heat__elements_8h_source}{unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 314 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00227}{oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix}}, and \mbox{\hyperlink{unsteady__heat__elements_8cc_source_l00060}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+ust\+\_\+heat()}}.
+References oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix, and oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+ust\+\_\+heat().
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_acde24104d5adcabe8a76a3a52c17ab5f}\label{classoomph_1_1UnsteadyHeatEquations_acde24104d5adcabe8a76a3a52c17ab5f}} 
 \index{oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}!fill\_in\_generic\_residual\_contribution\_ust\_heat@{fill\_in\_generic\_residual\_contribution\_ust\_heat}}
@@ -489,15 +490,15 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableUnsteadyHeatEquations_
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__elements_8cc_source_l00059}{59}} of file \mbox{\hyperlink{unsteady__heat__elements_8cc_source}{unsteady\+\_\+heat\+\_\+elements.\+cc}}.
+Definition at line 59 of file unsteady\+\_\+heat\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
+References i, s, and oomph\+::\+Quad\+Tree\+Names\+::W.
 
 
 
-Referenced by \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00324}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, and \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00314}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
+Referenced by oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_a16a237c1055f7d8f577eab77ca00a03c}\label{classoomph_1_1UnsteadyHeatEquations_a16a237c1055f7d8f577eab77ca00a03c}} 
 \index{oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}!get\_flux@{get\_flux}}
@@ -512,15 +513,15 @@ Get flux\+: flux\mbox{[}i\mbox{]} = du/dx\+\_\+i.
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00280}{280}} of file \mbox{\hyperlink{unsteady__heat__elements_8h_source}{unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 280 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l03298}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00112}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+ust\+\_\+heat()}}.
+References oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), s, and oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+ust\+\_\+heat().
 
 
 
-Referenced by \mbox{\hyperlink{refineable__unsteady__heat__elements_8h_source_l00091}{oomph\+::\+Refineable\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::get\+\_\+\+Z2\+\_\+flux()}}, and \mbox{\hyperlink{Tunsteady__heat__elements_8h_source_l00190}{oomph\+::\+TUnsteady\+Heat\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::get\+\_\+\+Z2\+\_\+flux()}}.
+Referenced by oomph\+::\+Refineable\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::get\+\_\+\+Z2\+\_\+flux(), and oomph\+::\+TUnsteady\+Heat\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::get\+\_\+\+Z2\+\_\+flux().
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_a8907d972136ac4e81f297b196968ebe8}\label{classoomph_1_1UnsteadyHeatEquations_a8907d972136ac4e81f297b196968ebe8}} 
 \index{oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}!get\_source\_ust\_heat@{get\_source\_ust\_heat}}
@@ -535,11 +536,11 @@ Get source term at continous time t and (Eulerian) position x. Virtual so it can
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00237}{237}} of file \mbox{\hyperlink{unsteady__heat__elements_8h_source}{unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 237 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00446}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::\+Source\+\_\+fct\+\_\+pt}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+References oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::\+Source\+\_\+fct\+\_\+pt, and t.
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_ac113fbfb338fa3d20b937035ba8f6fd3}\label{classoomph_1_1UnsteadyHeatEquations_ac113fbfb338fa3d20b937035ba8f6fd3}} 
 \index{oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}!interpolated\_du\_dt\_ust\_heat@{interpolated\_du\_dt\_ust\_heat}}
@@ -554,11 +555,11 @@ Return FE representation of function value du/dt(s) at local coordinate s.
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00392}{392}} of file \mbox{\hyperlink{unsteady__heat__elements_8h_source}{unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 392 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00119}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::du\+\_\+dt\+\_\+ust\+\_\+heat()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
+References oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::du\+\_\+dt\+\_\+ust\+\_\+heat(), oomph\+::\+Finite\+Element\+::nnode(), s, and oomph\+::\+Finite\+Element\+::shape().
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_a267490c49a2e6556ac74e37220882ad3}\label{classoomph_1_1UnsteadyHeatEquations_a267490c49a2e6556ac74e37220882ad3}} 
 \index{oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}!interpolated\_u\_ust\_heat@{interpolated\_u\_ust\_heat}}
@@ -573,11 +574,11 @@ Return FE representation of function value u(s) at local coordinate s at previou
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00362}{362}} of file \mbox{\hyperlink{unsteady__heat__elements_8h_source}{unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 362 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00112}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+ust\+\_\+heat()}}.
+References oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), s, oomph\+::\+Finite\+Element\+::shape(), t, and oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+ust\+\_\+heat().
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_a6e9c1454f84d2b55e5c573df195b4946}\label{classoomph_1_1UnsteadyHeatEquations_a6e9c1454f84d2b55e5c573df195b4946}} 
 \index{oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}!interpolated\_u\_ust\_heat@{interpolated\_u\_ust\_heat}}
@@ -592,11 +593,11 @@ Return FE representation of function value u(s) at local coordinate s.
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00333}{333}} of file \mbox{\hyperlink{unsteady__heat__elements_8h_source}{unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 333 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, and \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00112}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+ust\+\_\+heat()}}.
+References oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), s, oomph\+::\+Finite\+Element\+::shape(), and oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+ust\+\_\+heat().
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_a1e8bd563df8386a5935be50dc5d3d640}\label{classoomph_1_1UnsteadyHeatEquations_a1e8bd563df8386a5935be50dc5d3d640}} 
 \index{oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}!output@{output}}
@@ -619,11 +620,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatElement_a8fc87ff881
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00179}{179}} of file \mbox{\hyperlink{unsteady__heat__elements_8h_source}{unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 179 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00167}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::output()}}.
+References oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_aa63371c8600cb17a05b7bd00d89d1d2b}\label{classoomph_1_1UnsteadyHeatEquations_aa63371c8600cb17a05b7bd00d89d1d2b}} 
 \index{oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}!output@{output}}
@@ -650,11 +651,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatElement_af582182bc9
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__elements_8cc_source_l00330}{330}} of file \mbox{\hyperlink{unsteady__heat__elements_8cc_source}{unsteady\+\_\+heat\+\_\+elements.\+cc}}.
+Definition at line 330 of file unsteady\+\_\+heat\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References i, and s.
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_a1d73897c7329f0b82f29542cb5c72fff}\label{classoomph_1_1UnsteadyHeatEquations_a1d73897c7329f0b82f29542cb5c72fff}} 
 \index{oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}!output@{output}}
@@ -677,15 +678,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatElement_a50c15ed85f
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00167}{167}} of file \mbox{\hyperlink{unsteady__heat__elements_8h_source}{unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 167 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00167}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::output()}}.
-
-
-
-Referenced by \mbox{\hyperlink{Tunsteady__heat__elements_8h_source_l00093}{oomph\+::\+TUnsteady\+Heat\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::output()}}, \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00167}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::output()}}, and \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00512}{oomph\+::\+QUnsteady\+Heat\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::output()}}.
+Referenced by oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::output(), oomph\+::\+TUnsteady\+Heat\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::output(), and oomph\+::\+QUnsteady\+Heat\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_a68794ad133c4a06bed09488cc7cd5e94}\label{classoomph_1_1UnsteadyHeatEquations_a68794ad133c4a06bed09488cc7cd5e94}} 
 \index{oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}!output@{output}}
@@ -712,11 +709,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatElement_ae54ed4ee8b
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__elements_8cc_source_l00294}{294}} of file \mbox{\hyperlink{unsteady__heat__elements_8cc_source}{unsteady\+\_\+heat\+\_\+elements.\+cc}}.
+Definition at line 294 of file unsteady\+\_\+heat\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References i, and s.
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_ab6f0a3d6afeec2fc0395f6185d91e588}\label{classoomph_1_1UnsteadyHeatEquations_ab6f0a3d6afeec2fc0395f6185d91e588}} 
 \index{oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}!output\_fct@{output\_fct}}
@@ -739,15 +736,15 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2a8426dccd57b92
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement_af550a3be2cd261c495ee0c97a3ca29a7}{oomph\+::\+TUnsteady\+Heat\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatElement_acf12936a99c1b43eb9459035e0c2648d}{oomph\+::\+QUnsteady\+Heat\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatElement_acf12936a99c1b43eb9459035e0c2648d}{oomph\+::\+QUnsteady\+Heat\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1TUnsteadyHeatElement_af550a3be2cd261c495ee0c97a3ca29a7}{oomph\+::\+TUnsteady\+Heat\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}.
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__elements_8cc_source_l00418}{418}} of file \mbox{\hyperlink{unsteady__heat__elements_8cc_source}{unsteady\+\_\+heat\+\_\+elements.\+cc}}.
+Definition at line 418 of file unsteady\+\_\+heat\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References i, and s.
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_acdd4e941a196d267ad9534aef16db1a9}\label{classoomph_1_1UnsteadyHeatEquations_acdd4e941a196d267ad9534aef16db1a9}} 
 \index{oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}!output\_fct@{output\_fct}}
@@ -774,15 +771,15 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatElement_a4a9b973582
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__elements_8cc_source_l00366}{366}} of file \mbox{\hyperlink{unsteady__heat__elements_8cc_source}{unsteady\+\_\+heat\+\_\+elements.\+cc}}.
+Definition at line 366 of file unsteady\+\_\+heat\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References i, and s.
 
 
 
-Referenced by \mbox{\hyperlink{Tunsteady__heat__elements_8h_source_l00124}{oomph\+::\+TUnsteady\+Heat\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::output\+\_\+fct()}}, and \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00544}{oomph\+::\+QUnsteady\+Heat\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::output\+\_\+fct()}}.
+Referenced by oomph\+::\+TUnsteady\+Heat\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::output\+\_\+fct(), and oomph\+::\+QUnsteady\+Heat\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::output\+\_\+fct().
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_a6f16f48984d7edf9e67818d9e4bbcf13}\label{classoomph_1_1UnsteadyHeatEquations_a6f16f48984d7edf9e67818d9e4bbcf13}} 
 \index{oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}!self\_test@{self\_test}}
@@ -801,18 +798,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_af94c5a5e22175d5
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__elements_8cc_source_l00264}{264}} of file \mbox{\hyperlink{unsteady__heat__elements_8cc_source}{unsteady\+\_\+heat\+\_\+elements.\+cc}}.
+Definition at line 264 of file unsteady\+\_\+heat\+\_\+elements.\+cc.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l04440}{oomph\+::\+Finite\+Element\+::self\+\_\+test()}}.
+References oomph\+::\+Finite\+Element\+::self\+\_\+test().
 
-\mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_a8c9229229db6018df12b5286daca2816}\label{classoomph_1_1UnsteadyHeatEquations_a8c9229229db6018df12b5286daca2816}} 
+\mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_a8bd87b25f079be4dbee6edfc00127d47}\label{classoomph_1_1UnsteadyHeatEquations_a8bd87b25f079be4dbee6edfc00127d47}} 
 \index{oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}!source\_fct\_pt@{source\_fct\_pt}}
 \index{source\_fct\_pt@{source\_fct\_pt}!oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{source\_fct\_pt()}{source\_fct\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-\mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_a967135cc2be2cb4b16fe0dc0b4d68a68}{Unsteady\+Heat\+Source\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations}{oomph\+::\+Unsteady\+Heat\+Equations}}$<$ DIM $>$\+::source\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_a967135cc2be2cb4b16fe0dc0b4d68a68}{Unsteady\+Heat\+Source\+Fct\+Pt}}\& \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations}{oomph\+::\+Unsteady\+Heat\+Equations}}$<$ DIM $>$\+::source\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -820,19 +817,19 @@ Access function\+: Pointer to source function.
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquationsBase_ab5f65377e69b3219626ad2fda6db570c}{oomph\+::\+Unsteady\+Heat\+Equations\+Base}}.
+Implements \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquationsBase_a723b841dae0679dcfda13e565dd40f6b}{oomph\+::\+Unsteady\+Heat\+Equations\+Base}}.
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00222}{222}} of file \mbox{\hyperlink{unsteady__heat__elements_8h_source}{unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 222 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00446}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::\+Source\+\_\+fct\+\_\+pt}}.
+References oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::\+Source\+\_\+fct\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{refineable__unsteady__heat__elements_8h_source_l00162}{oomph\+::\+Refineable\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::further\+\_\+build()}}.
+Referenced by oomph\+::\+Refineable\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::further\+\_\+build().
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_a97883b388b84d415b8954ce9670f73af}\label{classoomph_1_1UnsteadyHeatEquations_a97883b388b84d415b8954ce9670f73af}} 
 \index{oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}!source\_fct\_pt@{source\_fct\_pt}}
@@ -847,11 +844,11 @@ Access function\+: Pointer to source function. Const version.
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00229}{229}} of file \mbox{\hyperlink{unsteady__heat__elements_8h_source}{unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 229 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00446}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::\+Source\+\_\+fct\+\_\+pt}}.
+References oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::\+Source\+\_\+fct\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_ae8d208c5b107bbdf5b5ef28e33f0b6c6}\label{classoomph_1_1UnsteadyHeatEquations_ae8d208c5b107bbdf5b5ef28e33f0b6c6}} 
 \index{oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}!u\_index\_ust\_heat@{u\_index\_ust\_heat}}
@@ -866,11 +863,11 @@ Broken assignment operator.
 
 Return the index at which the unknown value is stored. The default value, 0, is appropriate for single-\/physics problems, when there is only one variable, the value that satisfies the unsteady heat equation. In derived multi-\/physics elements, this function should be overloaded to reflect the chosen storage scheme. Note that these equations require that the unknown is always stored at the same index at each node. 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00112}{112}} of file \mbox{\hyperlink{unsteady__heat__elements_8h_source}{unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 112 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00119}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::du\+\_\+dt\+\_\+ust\+\_\+heat()}}, \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00280}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::get\+\_\+flux()}}, \mbox{\hyperlink{refineable__unsteady__heat__elements_8h_source_l00100}{oomph\+::\+Refineable\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::get\+\_\+interpolated\+\_\+values()}}, \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00333}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::interpolated\+\_\+u\+\_\+ust\+\_\+heat()}}, and \mbox{\hyperlink{unsteady__heat__flux__elements_8h_source_l00215}{oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ ELEMENT $>$\+::\+Unsteady\+Heat\+Flux\+Element()}}.
+Referenced by oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::du\+\_\+dt\+\_\+ust\+\_\+heat(), oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::get\+\_\+flux(), oomph\+::\+Refineable\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::get\+\_\+interpolated\+\_\+values(), oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::interpolated\+\_\+u\+\_\+ust\+\_\+heat(), and oomph\+::\+Unsteady\+Heat\+Flux\+Element$<$ ELEMENT $>$\+::\+Unsteady\+Heat\+Flux\+Element().
 
 
 
@@ -888,11 +885,11 @@ Boolean flag to indicate if ALE formulation is disabled when time-\/derivatives 
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00451}{451}} of file \mbox{\hyperlink{unsteady__heat__elements_8h_source}{unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 451 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00148}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::disable\+\_\+\+ALE()}}, \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00158}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::enable\+\_\+\+ALE()}}, and \mbox{\hyperlink{refineable__unsteady__heat__elements_8h_source_l00162}{oomph\+::\+Refineable\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::further\+\_\+build()}}.
+Referenced by oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::disable\+\_\+\+ALE(), oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::enable\+\_\+\+ALE(), and oomph\+::\+Refineable\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::further\+\_\+build().
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_aeb5d0e576ea07b635fc0c6c74a3f3130}\label{classoomph_1_1UnsteadyHeatEquations_aeb5d0e576ea07b635fc0c6c74a3f3130}} 
 \index{oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}!Alpha\_pt@{Alpha\_pt}}
@@ -907,11 +904,11 @@ Pointer to Alpha parameter (thermal inertia)
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00454}{454}} of file \mbox{\hyperlink{unsteady__heat__elements_8h_source}{unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 454 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00255}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::alpha()}}, \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00261}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::alpha\+\_\+pt()}}, and \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00085}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::\+Unsteady\+Heat\+Equations()}}.
+Referenced by oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::alpha(), oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::alpha\+\_\+pt(), and oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::\+Unsteady\+Heat\+Equations().
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_ad1b36eb20c42a8ce7e3eba9d2b182bb8}\label{classoomph_1_1UnsteadyHeatEquations_ad1b36eb20c42a8ce7e3eba9d2b182bb8}} 
 \index{oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}!Beta\_pt@{Beta\_pt}}
@@ -926,11 +923,11 @@ Pointer to Beta parameter (thermal conductivity)
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00457}{457}} of file \mbox{\hyperlink{unsteady__heat__elements_8h_source}{unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 457 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00268}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::beta()}}, \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00274}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::beta\+\_\+pt()}}, and \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00085}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::\+Unsteady\+Heat\+Equations()}}.
+Referenced by oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::beta(), oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::beta\+\_\+pt(), and oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::\+Unsteady\+Heat\+Equations().
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_ad2647a621a4cb3f4a8301a56badd1e4e}\label{classoomph_1_1UnsteadyHeatEquations_ad2647a621a4cb3f4a8301a56badd1e4e}} 
 \index{oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}!Default\_alpha\_parameter@{Default\_alpha\_parameter}}
@@ -947,11 +944,11 @@ Static default value for the Alpha parameter\+: (thermal inertia)\+: One for nat
 
 Default value for Alpha parameter (thermal inertia) 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00462}{462}} of file \mbox{\hyperlink{unsteady__heat__elements_8h_source}{unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 462 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00085}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::\+Unsteady\+Heat\+Equations()}}.
+Referenced by oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::\+Unsteady\+Heat\+Equations().
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_a85ec71a0ce9a5b85ce30b0aab0495ee4}\label{classoomph_1_1UnsteadyHeatEquations_a85ec71a0ce9a5b85ce30b0aab0495ee4}} 
 \index{oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}!Default\_beta\_parameter@{Default\_beta\_parameter}}
@@ -966,11 +963,11 @@ Static default value for the Beta parameter (thermal conductivity)\+: One for na
 
 Default value for Beta parameter (thermal conductivity) 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00466}{466}} of file \mbox{\hyperlink{unsteady__heat__elements_8h_source}{unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 466 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00085}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::\+Unsteady\+Heat\+Equations()}}.
+Referenced by oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::\+Unsteady\+Heat\+Equations().
 
 \mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquations_a775c7525ac08c848d6c980c1913f1e12}\label{classoomph_1_1UnsteadyHeatEquations_a775c7525ac08c848d6c980c1913f1e12}} 
 \index{oomph::UnsteadyHeatEquations$<$ DIM $>$@{oomph::UnsteadyHeatEquations$<$ DIM $>$}!Source\_fct\_pt@{Source\_fct\_pt}}
@@ -985,11 +982,11 @@ Pointer to source function\+:
 
 
 
-Definition at line \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00446}{446}} of file \mbox{\hyperlink{unsteady__heat__elements_8h_source}{unsteady\+\_\+heat\+\_\+elements.\+h}}.
+Definition at line 446 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{refineable__unsteady__heat__elements_8h_source_l00162}{oomph\+::\+Refineable\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::further\+\_\+build()}}, \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00237}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::get\+\_\+source\+\_\+ust\+\_\+heat()}}, and \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00222}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::source\+\_\+fct\+\_\+pt()}}.
+Referenced by oomph\+::\+Refineable\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::further\+\_\+build(), oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::get\+\_\+source\+\_\+ust\+\_\+heat(), and oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::source\+\_\+fct\+\_\+pt().
 
 
 

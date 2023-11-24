@@ -29,9 +29,9 @@ void \mbox{\hyperlink{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain_a7f1
 void \mbox{\hyperlink{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain_a2730470eda2dee9ffda25e12d8dc1885}{linear\+\_\+interpolate}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&left, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&right, const double \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Helper function to interpolate linearly between the \char`\"{}right\char`\"{} and \char`\"{}left\char`\"{} points; $ s \in [-1,1] $. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain_a6993f80b22b9418c93254ba6791dd2a5}{macro\+\_\+element\+\_\+boundary}} (const double \&time, const unsigned \&m, const unsigned \&direction, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&f)
-\begin{DoxyCompactList}\small\item\em Parametrisation of macro element boundaries\+: f(s) is the position vector to macro-\/element m\textquotesingle{}s boundary in the specified direction \mbox{[}N/\+S/\+E/W\mbox{]} at the specified discrete time level (time=0\+: present; time\texorpdfstring{$>$}{>}0\+: previous) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Parametrisation of macro element boundaries\+: f(s) is the position vector to macro-\/element m\textquotesingle{}s boundary in the specified direction \mbox{[}N/\+S/\+E/W\mbox{]} at the specified discrete time level (time=0\+: present; time$>$0\+: previous) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain_ad36aee594ee03f7947c2bcd4e2198284}{macro\+\_\+element\+\_\+boundary}} (const unsigned \&time, const unsigned \&m, const unsigned \&direction, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&f)
-\begin{DoxyCompactList}\small\item\em Parametrisation of macro element boundaries\+: f(s) is the position vector to macro-\/element m\textquotesingle{}s boundary in the specified direction \mbox{[}N/\+S/\+E/W\mbox{]} at the specified discrete time level (time=0\+: present; time\texorpdfstring{$>$}{>}0\+: previous) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Parametrisation of macro element boundaries\+: f(s) is the position vector to macro-\/element m\textquotesingle{}s boundary in the specified direction \mbox{[}N/\+S/\+E/W\mbox{]} at the specified discrete time level (time=0\+: present; time$>$0\+: previous) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -61,7 +61,7 @@ double \mbox{\hyperlink{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain_ab
 \doxysubsection{Detailed Description}
 Rectangular domain with circular whole DRAIG\+: This looks like a redefinition of the \mbox{\hyperlink{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain}{Rectangle\+With\+Hole\+And\+Annular\+Region\+Domain}} in src/meshes but it creates 8 macro-\/elements instead of 4 macro-\/elements and creates an annular region around the cylinder. It\textquotesingle{}s probably a good idea to rename this class to avoid ambiguity and a name clash... 
 
-Definition at line \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00053}{53}} of file \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source}{rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+h}}.
+Definition at line 53 of file rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+h.
 
 
 
@@ -78,11 +78,15 @@ Constructor. Pass pointer to geometric object that represents the cylinder, the 
 
 
 
-Definition at line \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00061}{61}} of file \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source}{rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+h}}.
+Definition at line 61 of file rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00175}{Lower\+\_\+left}}, \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00181}{Lower\+\_\+mid\+\_\+left}}, \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00184}{Lower\+\_\+mid\+\_\+right}}, \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00178}{Lower\+\_\+right}}, \mbox{\hyperlink{domain_8h_source_l00301}{oomph\+::\+Domain\+::\+Macro\+\_\+element\+\_\+pt}}, \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00187}{Upper\+\_\+left}}, \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00193}{Upper\+\_\+mid\+\_\+left}}, \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00196}{Upper\+\_\+mid\+\_\+right}}, and \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00190}{Upper\+\_\+right}}.
+References i, Lower\+\_\+left, Lower\+\_\+mid\+\_\+left, Lower\+\_\+mid\+\_\+right, Lower\+\_\+right, oomph\+::\+Domain\+::\+Macro\+\_\+element\+\_\+pt, Upper\+\_\+left, Upper\+\_\+mid\+\_\+left, Upper\+\_\+mid\+\_\+right, and Upper\+\_\+right.
+
+
+
+Referenced by oomph\+::\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh$<$ ELEMENT $>$\+::\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh().
 
 \mbox{\Hypertarget{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain_a6b49b3005ce115f161c3abc7e66e1fdf}\label{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain_a6b49b3005ce115f161c3abc7e66e1fdf}} 
 \index{oomph::RectangleWithHoleAndAnnularRegionDomain@{oomph::RectangleWithHoleAndAnnularRegionDomain}!````~RectangleWithHoleAndAnnularRegionDomain@{$\sim$RectangleWithHoleAndAnnularRegionDomain}}
@@ -96,7 +100,7 @@ Destructor\+: Empty; macro elements are deleted in base class destructor.
 
 
 
-Definition at line \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00117}{117}} of file \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source}{rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+h}}.
+Definition at line 117 of file rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+h.
 
 
 
@@ -113,15 +117,15 @@ Helper function to interpolate linearly between the \char`\"{}right\char`\"{} an
 
 
 
-Definition at line \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00139}{139}} of file \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source}{rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+h}}.
+Definition at line 139 of file rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References i, and s.
 
 
 
-Referenced by \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8cc_source_l00127}{macro\+\_\+element\+\_\+boundary()}}.
+Referenced by macro\+\_\+element\+\_\+boundary().
 
 \mbox{\Hypertarget{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain_a6993f80b22b9418c93254ba6791dd2a5}\label{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain_a6993f80b22b9418c93254ba6791dd2a5}} 
 \index{oomph::RectangleWithHoleAndAnnularRegionDomain@{oomph::RectangleWithHoleAndAnnularRegionDomain}!macro\_element\_boundary@{macro\_element\_boundary}}
@@ -131,7 +135,7 @@ Referenced by \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template
 
 
 
-Parametrisation of macro element boundaries\+: f(s) is the position vector to macro-\/element m\textquotesingle{}s boundary in the specified direction \mbox{[}N/\+S/\+E/W\mbox{]} at the specified discrete time level (time=0\+: present; time\texorpdfstring{$>$}{>}0\+: previous) 
+Parametrisation of macro element boundaries\+: f(s) is the position vector to macro-\/element m\textquotesingle{}s boundary in the specified direction \mbox{[}N/\+S/\+E/W\mbox{]} at the specified discrete time level (time=0\+: present; time$>$0\+: previous) 
 
 
 
@@ -139,11 +143,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Domain_a10142c029e8a57c5470d22
 
 
 
-Definition at line \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8cc_source_l00127}{127}} of file \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8cc_source}{rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+cc}}.
+Definition at line 127 of file rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+cc.
 
 
 
-References \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00199}{Cylinder\+\_\+pt}}, \mbox{\hyperlink{quadtree_8h_source_l00061}{oomph\+::\+Quad\+Tree\+Names\+::E}}, \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00139}{linear\+\_\+interpolate()}}, \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00181}{Lower\+\_\+mid\+\_\+left}}, \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00184}{Lower\+\_\+mid\+\_\+right}}, \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8cc_source_l00039}{project\+\_\+point\+\_\+on\+\_\+cylinder\+\_\+to\+\_\+annular\+\_\+boundary()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{quadtree_8h_source_l00062}{oomph\+::\+Quad\+Tree\+Names\+::S}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00193}{Upper\+\_\+mid\+\_\+left}}, \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00196}{Upper\+\_\+mid\+\_\+right}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
+References Cylinder\+\_\+pt, oomph\+::\+Quad\+Tree\+Names\+::E, linear\+\_\+interpolate(), Lower\+\_\+mid\+\_\+left, Lower\+\_\+mid\+\_\+right, oomph\+::\+Quad\+Tree\+Names\+::N, oomph\+::\+Geom\+Object\+::position(), project\+\_\+point\+\_\+on\+\_\+cylinder\+\_\+to\+\_\+annular\+\_\+boundary(), s, oomph\+::\+Quad\+Tree\+Names\+::S, oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), Upper\+\_\+mid\+\_\+left, Upper\+\_\+mid\+\_\+right, and oomph\+::\+Quad\+Tree\+Names\+::W.
 
 \mbox{\Hypertarget{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain_ad36aee594ee03f7947c2bcd4e2198284}\label{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain_ad36aee594ee03f7947c2bcd4e2198284}} 
 \index{oomph::RectangleWithHoleAndAnnularRegionDomain@{oomph::RectangleWithHoleAndAnnularRegionDomain}!macro\_element\_boundary@{macro\_element\_boundary}}
@@ -153,7 +157,7 @@ References \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h
 
 
 
-Parametrisation of macro element boundaries\+: f(s) is the position vector to macro-\/element m\textquotesingle{}s boundary in the specified direction \mbox{[}N/\+S/\+E/W\mbox{]} at the specified discrete time level (time=0\+: present; time\texorpdfstring{$>$}{>}0\+: previous) 
+Parametrisation of macro element boundaries\+: f(s) is the position vector to macro-\/element m\textquotesingle{}s boundary in the specified direction \mbox{[}N/\+S/\+E/W\mbox{]} at the specified discrete time level (time=0\+: present; time$>$0\+: previous) 
 
 
 
@@ -161,11 +165,11 @@ Implements \mbox{\hyperlink{classoomph_1_1Domain_a95f3e00d28ea37e6c4d3027bfac910
 
 
 
-Definition at line \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8cc_source_l00517}{517}} of file \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8cc_source}{rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+cc}}.
+Definition at line 517 of file rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+cc.
 
 
 
-References \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00199}{Cylinder\+\_\+pt}}, \mbox{\hyperlink{quadtree_8h_source_l00061}{oomph\+::\+Quad\+Tree\+Names\+::E}}, \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00139}{linear\+\_\+interpolate()}}, \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00181}{Lower\+\_\+mid\+\_\+left}}, \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00184}{Lower\+\_\+mid\+\_\+right}}, \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8cc_source_l00039}{project\+\_\+point\+\_\+on\+\_\+cylinder\+\_\+to\+\_\+annular\+\_\+boundary()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{quadtree_8h_source_l00062}{oomph\+::\+Quad\+Tree\+Names\+::S}}, \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00193}{Upper\+\_\+mid\+\_\+left}}, \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00196}{Upper\+\_\+mid\+\_\+right}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
+References Cylinder\+\_\+pt, oomph\+::\+Quad\+Tree\+Names\+::E, linear\+\_\+interpolate(), Lower\+\_\+mid\+\_\+left, Lower\+\_\+mid\+\_\+right, oomph\+::\+Quad\+Tree\+Names\+::N, oomph\+::\+Geom\+Object\+::position(), project\+\_\+point\+\_\+on\+\_\+cylinder\+\_\+to\+\_\+annular\+\_\+boundary(), s, oomph\+::\+Quad\+Tree\+Names\+::S, Upper\+\_\+mid\+\_\+left, Upper\+\_\+mid\+\_\+right, and oomph\+::\+Quad\+Tree\+Names\+::W.
 
 \mbox{\Hypertarget{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain_a7f1d242a7111fbb3cfafc76edb2bc9d1}\label{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain_a7f1d242a7111fbb3cfafc76edb2bc9d1}} 
 \index{oomph::RectangleWithHoleAndAnnularRegionDomain@{oomph::RectangleWithHoleAndAnnularRegionDomain}!project\_point\_on\_cylinder\_to\_annular\_boundary@{project\_point\_on\_cylinder\_to\_annular\_boundary}}
@@ -179,11 +183,11 @@ Helper function that, given the Lagrangian coordinate, xi, (associated with a po
 
 
 
-Definition at line \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8cc_source_l00083}{83}} of file \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8cc_source}{rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+cc}}.
+Definition at line 83 of file rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+cc.
 
 
 
-References \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00205}{Annular\+\_\+region\+\_\+radius}}, \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00199}{Cylinder\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}.
+References Annular\+\_\+region\+\_\+radius, Cylinder\+\_\+pt, i, and oomph\+::\+Geom\+Object\+::position().
 
 \mbox{\Hypertarget{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain_a73e91d2b01cd584a03f450b3064fa892}\label{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain_a73e91d2b01cd584a03f450b3064fa892}} 
 \index{oomph::RectangleWithHoleAndAnnularRegionDomain@{oomph::RectangleWithHoleAndAnnularRegionDomain}!project\_point\_on\_cylinder\_to\_annular\_boundary@{project\_point\_on\_cylinder\_to\_annular\_boundary}}
@@ -197,15 +201,15 @@ Helper function that, given the Lagrangian coordinate, xi, (associated with a po
 
 Rectangular domain with circular whole. 
 
-Definition at line \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8cc_source_l00038}{38}} of file \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8cc_source}{rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+cc}}.
+Definition at line 38 of file rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+cc.
 
 
 
-References \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00205}{Annular\+\_\+region\+\_\+radius}}, \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00199}{Cylinder\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}.
+References Annular\+\_\+region\+\_\+radius, Cylinder\+\_\+pt, i, and oomph\+::\+Geom\+Object\+::position().
 
 
 
-Referenced by \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8cc_source_l00127}{macro\+\_\+element\+\_\+boundary()}}.
+Referenced by macro\+\_\+element\+\_\+boundary().
 
 
 
@@ -222,11 +226,11 @@ The radius of the outer boundary of the annular region whose inner boundary is d
 
 
 
-Definition at line \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00205}{205}} of file \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source}{rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+h}}.
+Definition at line 205 of file rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8cc_source_l00039}{project\+\_\+point\+\_\+on\+\_\+cylinder\+\_\+to\+\_\+annular\+\_\+boundary()}}.
+Referenced by project\+\_\+point\+\_\+on\+\_\+cylinder\+\_\+to\+\_\+annular\+\_\+boundary().
 
 \mbox{\Hypertarget{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain_a6bcc36773dacee43cead3191c948a14a}\label{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain_a6bcc36773dacee43cead3191c948a14a}} 
 \index{oomph::RectangleWithHoleAndAnnularRegionDomain@{oomph::RectangleWithHoleAndAnnularRegionDomain}!Cylinder\_pt@{Cylinder\_pt}}
@@ -240,11 +244,11 @@ Pointer to geometric object that represents the central cylinder.
 
 
 
-Definition at line \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00199}{199}} of file \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source}{rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+h}}.
+Definition at line 199 of file rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8cc_source_l00127}{macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8cc_source_l00039}{project\+\_\+point\+\_\+on\+\_\+cylinder\+\_\+to\+\_\+annular\+\_\+boundary()}}.
+Referenced by macro\+\_\+element\+\_\+boundary(), and project\+\_\+point\+\_\+on\+\_\+cylinder\+\_\+to\+\_\+annular\+\_\+boundary().
 
 \mbox{\Hypertarget{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain_ace56101c4efff9944ead9188eafc82fd}\label{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain_ace56101c4efff9944ead9188eafc82fd}} 
 \index{oomph::RectangleWithHoleAndAnnularRegionDomain@{oomph::RectangleWithHoleAndAnnularRegionDomain}!Lower\_left@{Lower\_left}}
@@ -258,11 +262,11 @@ Lower left corner of rectangle.
 
 
 
-Definition at line \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00175}{175}} of file \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source}{rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+h}}.
+Definition at line 175 of file rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00061}{Rectangle\+With\+Hole\+And\+Annular\+Region\+Domain()}}.
+Referenced by Rectangle\+With\+Hole\+And\+Annular\+Region\+Domain().
 
 \mbox{\Hypertarget{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain_a78feaead73cad22e0ca9e876abff38ce}\label{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain_a78feaead73cad22e0ca9e876abff38ce}} 
 \index{oomph::RectangleWithHoleAndAnnularRegionDomain@{oomph::RectangleWithHoleAndAnnularRegionDomain}!Lower\_mid\_left@{Lower\_mid\_left}}
@@ -276,11 +280,11 @@ Where the \char`\"{}radial\char`\"{} line from circle meets lower boundary on le
 
 
 
-Definition at line \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00181}{181}} of file \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source}{rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+h}}.
+Definition at line 181 of file rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8cc_source_l00127}{macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00061}{Rectangle\+With\+Hole\+And\+Annular\+Region\+Domain()}}.
+Referenced by macro\+\_\+element\+\_\+boundary(), and Rectangle\+With\+Hole\+And\+Annular\+Region\+Domain().
 
 \mbox{\Hypertarget{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain_ab1eadbe97ac2de76175c8027f22a59f2}\label{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain_ab1eadbe97ac2de76175c8027f22a59f2}} 
 \index{oomph::RectangleWithHoleAndAnnularRegionDomain@{oomph::RectangleWithHoleAndAnnularRegionDomain}!Lower\_mid\_right@{Lower\_mid\_right}}
@@ -294,11 +298,11 @@ Where the \char`\"{}radial\char`\"{} line from circle meets lower boundary on ri
 
 
 
-Definition at line \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00184}{184}} of file \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source}{rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+h}}.
+Definition at line 184 of file rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8cc_source_l00127}{macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00061}{Rectangle\+With\+Hole\+And\+Annular\+Region\+Domain()}}.
+Referenced by macro\+\_\+element\+\_\+boundary(), and Rectangle\+With\+Hole\+And\+Annular\+Region\+Domain().
 
 \mbox{\Hypertarget{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain_a28b7e5bf185627a0b655657dddb82c65}\label{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain_a28b7e5bf185627a0b655657dddb82c65}} 
 \index{oomph::RectangleWithHoleAndAnnularRegionDomain@{oomph::RectangleWithHoleAndAnnularRegionDomain}!Lower\_right@{Lower\_right}}
@@ -312,11 +316,11 @@ Lower right corner of rectangle.
 
 
 
-Definition at line \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00178}{178}} of file \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source}{rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+h}}.
+Definition at line 178 of file rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00061}{Rectangle\+With\+Hole\+And\+Annular\+Region\+Domain()}}.
+Referenced by Rectangle\+With\+Hole\+And\+Annular\+Region\+Domain().
 
 \mbox{\Hypertarget{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain_af8ff6dd36c3fe374ed93610a5788e13a}\label{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain_af8ff6dd36c3fe374ed93610a5788e13a}} 
 \index{oomph::RectangleWithHoleAndAnnularRegionDomain@{oomph::RectangleWithHoleAndAnnularRegionDomain}!Upper\_left@{Upper\_left}}
@@ -330,11 +334,11 @@ Upper left corner of rectangle.
 
 
 
-Definition at line \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00187}{187}} of file \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source}{rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+h}}.
+Definition at line 187 of file rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00061}{Rectangle\+With\+Hole\+And\+Annular\+Region\+Domain()}}.
+Referenced by Rectangle\+With\+Hole\+And\+Annular\+Region\+Domain().
 
 \mbox{\Hypertarget{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain_a1c8efccc34e87842539c3306ceb10e15}\label{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain_a1c8efccc34e87842539c3306ceb10e15}} 
 \index{oomph::RectangleWithHoleAndAnnularRegionDomain@{oomph::RectangleWithHoleAndAnnularRegionDomain}!Upper\_mid\_left@{Upper\_mid\_left}}
@@ -348,11 +352,11 @@ Where the \char`\"{}radial\char`\"{} line from circle meets upper boundary on le
 
 
 
-Definition at line \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00193}{193}} of file \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source}{rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+h}}.
+Definition at line 193 of file rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8cc_source_l00127}{macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00061}{Rectangle\+With\+Hole\+And\+Annular\+Region\+Domain()}}.
+Referenced by macro\+\_\+element\+\_\+boundary(), and Rectangle\+With\+Hole\+And\+Annular\+Region\+Domain().
 
 \mbox{\Hypertarget{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain_abb5b883a6900b5a19be524e8c1144888}\label{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain_abb5b883a6900b5a19be524e8c1144888}} 
 \index{oomph::RectangleWithHoleAndAnnularRegionDomain@{oomph::RectangleWithHoleAndAnnularRegionDomain}!Upper\_mid\_right@{Upper\_mid\_right}}
@@ -366,11 +370,11 @@ Where the \char`\"{}radial\char`\"{} line from circle meets upper boundary on ri
 
 
 
-Definition at line \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00196}{196}} of file \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source}{rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+h}}.
+Definition at line 196 of file rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8cc_source_l00127}{macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00061}{Rectangle\+With\+Hole\+And\+Annular\+Region\+Domain()}}.
+Referenced by macro\+\_\+element\+\_\+boundary(), and Rectangle\+With\+Hole\+And\+Annular\+Region\+Domain().
 
 \mbox{\Hypertarget{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain_a5ce5207044a7aedfb2500316d6b70051}\label{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain_a5ce5207044a7aedfb2500316d6b70051}} 
 \index{oomph::RectangleWithHoleAndAnnularRegionDomain@{oomph::RectangleWithHoleAndAnnularRegionDomain}!Upper\_right@{Upper\_right}}
@@ -384,11 +388,11 @@ Upper right corner of rectangle.
 
 
 
-Definition at line \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00190}{190}} of file \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source}{rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+h}}.
+Definition at line 190 of file rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00061}{Rectangle\+With\+Hole\+And\+Annular\+Region\+Domain()}}.
+Referenced by Rectangle\+With\+Hole\+And\+Annular\+Region\+Domain().
 
 
 

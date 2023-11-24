@@ -21,7 +21,7 @@ Detailed documentation to be written. Here\textquotesingle{}s a plot of the resu
 \DoxyCodeLine{\textcolor{comment}{//LIC// multi-\/physics finite-\/element library, available }}
 \DoxyCodeLine{\textcolor{comment}{//LIC// at http://www.oomph-\/lib.org.}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// }}
-\DoxyCodeLine{\textcolor{comment}{//LIC// Copyright (C) 2006-\/2022 Matthias Heil and Andrew Hazel}}
+\DoxyCodeLine{\textcolor{comment}{//LIC// Copyright (C) 2006-\/2023 Matthias Heil and Andrew Hazel}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// }}
 \DoxyCodeLine{\textcolor{comment}{//LIC// This library is free software; you can redistribute it and/or}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// modify it under the terms of the GNU Lesser General Public}}
@@ -103,84 +103,84 @@ Detailed documentation to be written. Here\textquotesingle{}s a plot of the resu
 \DoxyCodeLine{\textcolor{comment}{ ///  Constructor: Bool flag specifies if position of fish back is}}
 \DoxyCodeLine{\textcolor{comment}{ /// prescribed or computed from the coupled problem. String specifies}}
 \DoxyCodeLine{\textcolor{comment}{ /// output directory.}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classRefineableFishPoissonProblem_a2585d906fab348e09bfb9b4c111ac161}{RefineableFishPoissonProblem}}(}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classRefineableFishPoissonProblem}{RefineableFishPoissonProblem}}(}
 \DoxyCodeLine{  \textcolor{keyword}{const} \textcolor{keywordtype}{bool}\& fix\_position, \textcolor{keyword}{const} \textcolor{keywordtype}{string}\& directory\_name,}
 \DoxyCodeLine{  \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& i\_case);}
 \DoxyCodeLine{  \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Destructor}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \mbox{\hyperlink{classRefineableFishPoissonProblem_a7039a3409520850908940927b91af9ab}{\string~RefineableFishPoissonProblem}}();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \string~\mbox{\hyperlink{classRefineableFishPoissonProblem}{RefineableFishPoissonProblem}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update after Newton step: Update mesh in response to }}
 \DoxyCodeLine{\textcolor{comment}{ /// possible changes in the wall shape}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableFishPoissonProblem_a8d8fb7ef1c571c57c02073edab4a7759}{actions\_before\_newton\_convergence\_check}}()}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_newton\_convergence\_check()}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   \mbox{\hyperlink{classRefineableFishPoissonProblem_a7b6a368aa599f73d3c578b985af2fecc}{fish\_mesh\_pt}}()-\/>node\_update();}
+\DoxyCodeLine{   fish\_mesh\_pt()-\/>node\_update();}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs after solve (empty)}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableFishPoissonProblem_a7f6c356f7c8bd0130de957297e999f40}{actions\_after\_newton\_solve}}()\{\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_newton\_solve()\{\}}
 \DoxyCodeLine{  \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs before solve: Update mesh}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableFishPoissonProblem_a58098181f3b88c2fc65f24fb15c1a529}{actions\_before\_newton\_solve}}() }
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_newton\_solve() }
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   \mbox{\hyperlink{classRefineableFishPoissonProblem_a7b6a368aa599f73d3c578b985af2fecc}{fish\_mesh\_pt}}()-\/>node\_update();}
+\DoxyCodeLine{   fish\_mesh\_pt()-\/>node\_update();}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Access function for the fish mesh}}
-\DoxyCodeLine{ AlgebraicRefineableFishMesh<ELEMENT>* \mbox{\hyperlink{classRefineableFishPoissonProblem_a7b6a368aa599f73d3c578b985af2fecc}{fish\_mesh\_pt}}() }
+\DoxyCodeLine{ AlgebraicRefineableFishMesh<ELEMENT>* fish\_mesh\_pt() }
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{keywordflow}{return} \mbox{\hyperlink{classRefineableFishPoissonProblem_af915f09b6e4ae2f4ded2ad1a25ed7f01}{Fish\_mesh\_pt}};}
+\DoxyCodeLine{   \textcolor{keywordflow}{return} Fish\_mesh\_pt;}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Return value of the "{}load"{} on the elastically supported ring}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{classRefineableFishPoissonProblem_a4de3473b96dd9fc401f44717f68a9896}{load}}()}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double}\& load()}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{keywordflow}{return} *\mbox{\hyperlink{classRefineableFishPoissonProblem_a9a9ce82a4308be486701578134d06210}{Load\_pt}}-\/>value\_pt(0);}
+\DoxyCodeLine{   \textcolor{keywordflow}{return} *Load\_pt-\/>value\_pt(0);}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Return value of the vertical displacement of the ring that}}
 \DoxyCodeLine{\textcolor{comment}{ /// represents the fish's back}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{classRefineableFishPoissonProblem_a5096bfa3d5e90c0b66c2d2c7340567c9}{y\_c}}()}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double}\& y\_c()}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}ElasticallySupportedRingElement*\textcolor{keyword}{>}(\mbox{\hyperlink{classRefineableFishPoissonProblem_a7b6a368aa599f73d3c578b985af2fecc}{fish\_mesh\_pt}}()-\/>}
-\DoxyCodeLine{                                                        fish\_back\_pt())-\/>\mbox{\hyperlink{classRefineableFishPoissonProblem_a5096bfa3d5e90c0b66c2d2c7340567c9}{y\_c}}();}
+\DoxyCodeLine{   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}ElasticallySupportedRingElement*\textcolor{keyword}{>}(fish\_mesh\_pt()-\/>}
+\DoxyCodeLine{                                                        fish\_back\_pt())-\/>y\_c();}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableFishPoissonProblem_a6db25ff0bd3014aa531d9f0e8b385beb}{doc\_solution}}();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} doc\_solution();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Access to DocInfo object}}
-\DoxyCodeLine{\textcolor{comment}{} DocInfo\& \mbox{\hyperlink{classRefineableFishPoissonProblem_a5585bb39205a7ab53da4fb39c1393dc3}{doc\_info}}() \{\textcolor{keywordflow}{return} \mbox{\hyperlink{classRefineableFishPoissonProblem_ad6d382f1d38425323627f34e0559b28f}{Doc\_info}};\}}
+\DoxyCodeLine{\textcolor{comment}{} DocInfo\& doc\_info() \{\textcolor{keywordflow}{return} Doc\_info;\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Helper fct to set method for evaluation of shape derivs}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableFishPoissonProblem_a122cddf55249eaf0ee813818ff101fb4}{set\_shape\_deriv\_method}}()}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} set\_shape\_deriv\_method()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{keywordtype}{bool} done=\textcolor{keyword}{false};}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{//Loop over elements and set pointers to source function}}
-\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} n\_element = \mbox{\hyperlink{classRefineableFishPoissonProblem_a7b6a368aa599f73d3c578b985af2fecc}{fish\_mesh\_pt}}()-\/>nelement();}
+\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} n\_element = fish\_mesh\_pt()-\/>nelement();}
 \DoxyCodeLine{   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<n\_element;i++)}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     \textcolor{comment}{// Upcast from FiniteElement to the present element}}
-\DoxyCodeLine{     ELEMENT *el\_pt = \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(\mbox{\hyperlink{classRefineableFishPoissonProblem_a7b6a368aa599f73d3c578b985af2fecc}{fish\_mesh\_pt}}()-\/>element\_pt(i));}
+\DoxyCodeLine{     ELEMENT *el\_pt = \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(fish\_mesh\_pt()-\/>element\_pt(i));}
 \DoxyCodeLine{     }
 \DoxyCodeLine{     \textcolor{comment}{// Direct FD}}
-\DoxyCodeLine{     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classRefineableFishPoissonProblem_af6f409d7fe711ad809d9e784d98ca036}{Case\_id}}==0)}
+\DoxyCodeLine{     \textcolor{keywordflow}{if} (Case\_id==0)}
 \DoxyCodeLine{      \{}
 \DoxyCodeLine{       el\_pt-\/>evaluate\_shape\_derivs\_by\_direct\_fd();       }
 \DoxyCodeLine{       \textcolor{keywordflow}{if} (!done) std::cout << \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n [CR residuals] Direct FD"{}} << std::endl;}
 \DoxyCodeLine{      \}}
 \DoxyCodeLine{     \textcolor{comment}{// Chain rule with/without FD}}
-\DoxyCodeLine{     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( (\mbox{\hyperlink{classRefineableFishPoissonProblem_af6f409d7fe711ad809d9e784d98ca036}{Case\_id}}==1) ||  (\mbox{\hyperlink{classRefineableFishPoissonProblem_af6f409d7fe711ad809d9e784d98ca036}{Case\_id}}==2) )}
+\DoxyCodeLine{     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( (Case\_id==1) ||  (Case\_id==2) )}
 \DoxyCodeLine{      \{}
 \DoxyCodeLine{       \textcolor{comment}{// It's broken but let's call it anyway to keep self-\/test alive}}
 \DoxyCodeLine{       \textcolor{keywordtype}{bool} i\_know\_what\_i\_am\_doing=\textcolor{keyword}{true};}
 \DoxyCodeLine{       el\_pt-\/>evaluate\_shape\_derivs\_by\_chain\_rule(i\_know\_what\_i\_am\_doing);}
-\DoxyCodeLine{       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classRefineableFishPoissonProblem_af6f409d7fe711ad809d9e784d98ca036}{Case\_id}}==1)}
+\DoxyCodeLine{       \textcolor{keywordflow}{if} (Case\_id==1)}
 \DoxyCodeLine{        \{}
 \DoxyCodeLine{         el\_pt-\/>enable\_always\_evaluate\_dresidual\_dnodal\_coordinates\_by\_fd();}
 \DoxyCodeLine{         \textcolor{keywordflow}{if} (!done) std::cout << \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n [CR residuals] Chain rule and FD"{}} }
@@ -194,12 +194,12 @@ Detailed documentation to be written. Here\textquotesingle{}s a plot of the resu
 \DoxyCodeLine{        \}}
 \DoxyCodeLine{      \}}
 \DoxyCodeLine{     \textcolor{comment}{// Fastest with/without FD}}
-\DoxyCodeLine{     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( (\mbox{\hyperlink{classRefineableFishPoissonProblem_af6f409d7fe711ad809d9e784d98ca036}{Case\_id}}==3) ||  (\mbox{\hyperlink{classRefineableFishPoissonProblem_af6f409d7fe711ad809d9e784d98ca036}{Case\_id}}==4) )}
+\DoxyCodeLine{     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ( (Case\_id==3) ||  (Case\_id==4) )}
 \DoxyCodeLine{      \{}
 \DoxyCodeLine{       \textcolor{comment}{// It's broken but let's call it anyway to keep self-\/test alive}}
 \DoxyCodeLine{       \textcolor{keywordtype}{bool} i\_know\_what\_i\_am\_doing=\textcolor{keyword}{true};}
 \DoxyCodeLine{       el\_pt-\/>evaluate\_shape\_derivs\_by\_fastest\_method(i\_know\_what\_i\_am\_doing);}
-\DoxyCodeLine{       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classRefineableFishPoissonProblem_af6f409d7fe711ad809d9e784d98ca036}{Case\_id}}==3)}
+\DoxyCodeLine{       \textcolor{keywordflow}{if} (Case\_id==3)}
 \DoxyCodeLine{        \{}
 \DoxyCodeLine{         el\_pt-\/>enable\_always\_evaluate\_dresidual\_dnodal\_coordinates\_by\_fd();}
 \DoxyCodeLine{         \textcolor{keywordflow}{if} (!done) std::cout << \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n [CR residuals] Fastest and FD"{}} }
@@ -219,29 +219,29 @@ Detailed documentation to be written. Here\textquotesingle{}s a plot of the resu
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Node at which the solution of the Poisson equation is documented}}
-\DoxyCodeLine{\textcolor{comment}{} Node* \mbox{\hyperlink{classRefineableFishPoissonProblem_a5dce47aa14fdbc33d8a865f4f4b1e1ea}{Doc\_node\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} Node* Doc\_node\_pt;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Trace file}}
-\DoxyCodeLine{\textcolor{comment}{} ofstream \mbox{\hyperlink{classRefineableFishPoissonProblem_aa358e2b0fa91780bdca32ae4676717ff}{Trace\_file}};}
+\DoxyCodeLine{\textcolor{comment}{} ofstream Trace\_file;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to fish mesh}}
-\DoxyCodeLine{\textcolor{comment}{} AlgebraicRefineableFishMesh<ELEMENT>* \mbox{\hyperlink{classRefineableFishPoissonProblem_af915f09b6e4ae2f4ded2ad1a25ed7f01}{Fish\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} AlgebraicRefineableFishMesh<ELEMENT>* Fish\_mesh\_pt;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to single-\/element mesh that stores the GeneralisedElement}}
 \DoxyCodeLine{\textcolor{comment}{ /// that represents the fish back}}
-\DoxyCodeLine{\textcolor{comment}{} Mesh* \mbox{\hyperlink{classRefineableFishPoissonProblem_ac0f6f58b393715961214d98e11dfad57}{Fish\_back\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} Mesh* Fish\_back\_mesh\_pt;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to data item that stores the "{}load"{} on the fish back}}
-\DoxyCodeLine{\textcolor{comment}{} Data* \mbox{\hyperlink{classRefineableFishPoissonProblem_a9a9ce82a4308be486701578134d06210}{Load\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} Data* Load\_pt;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Is the position of the fish back prescribed?}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{bool} \mbox{\hyperlink{classRefineableFishPoissonProblem_a51c10ea7cbf4ab61fd953f011f72a1c4}{Fix\_position}};}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{bool} Fix\_position;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Doc info object}}
-\DoxyCodeLine{\textcolor{comment}{} DocInfo \mbox{\hyperlink{classRefineableFishPoissonProblem_ad6d382f1d38425323627f34e0559b28f}{Doc\_info}};}
+\DoxyCodeLine{\textcolor{comment}{} DocInfo Doc\_info;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Case id}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classRefineableFishPoissonProblem_af6f409d7fe711ad809d9e784d98ca036}{Case\_id}};}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} Case\_id;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\};}
 \DoxyCodeLine{}

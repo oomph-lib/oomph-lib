@@ -59,7 +59,7 @@ void \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a71199dc59da3f50778038
 \begin{DoxyCompactList}\small\item\em Apply the block-\/diagonal Schur complement preconditioner to compute the LHS which has size N+1 (the augmented system size) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a1ff5a4b43235b43d2254af0db6195dc7}{solve\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&matrix\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&solution)
 \begin{DoxyCompactList}\small\item\em General interface to solve function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_ab7513cfa22054fa1bff319c72aac8313}{update}} (const unsigned \&k, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&H, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&v, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&x)
+void \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a2831faedac86c6e6acd34351c138fe52}{update}} (const unsigned \&k, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&H, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&v, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&x)
 \begin{DoxyCompactList}\small\item\em Helper function to update the result vector using the result, x=x\+\_\+0+\+V\+\_\+m$\ast$y. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a74bb2d9ceab6473c1922b166ebf48681}{generate\+\_\+plane\+\_\+rotation}} (double \&dx, double \&dy, double \&cs, double \&sn)
 \begin{DoxyCompactList}\small\item\em Helper function\+: Generate a plane rotation. This is done by finding the values of $ \cos(\theta) $ (i.\+e. cs) and \textbackslash{}sin(\textbackslash{}theta) (i.\+e. sn) such that\+: \end{DoxyCompactList}\item 
@@ -100,7 +100,7 @@ bool \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_ab32f761ac00fb98acfc66
 
 The \mbox{\hyperlink{classoomph_1_1GMRES}{GMRES}} method. 
 
-Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01548}{1548}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+Definition at line 1548 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
@@ -117,11 +117,11 @@ Constructor.
 
 
 
-Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01552}{1552}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+Definition at line 1552 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{iterative__linear__solver_8h_source_l01933}{Iteration\+\_\+restart}}, and \mbox{\hyperlink{iterative__linear__solver_8h_source_l01963}{Preconditioner\+\_\+\+LHS}}.
+References Iteration\+\_\+restart, and Preconditioner\+\_\+\+LHS.
 
 \mbox{\Hypertarget{classoomph_1_1AugmentedProblemGMRES_ab2593fd534e6db559b93c1301306c69b}\label{classoomph_1_1AugmentedProblemGMRES_ab2593fd534e6db559b93c1301306c69b}} 
 \index{oomph::AugmentedProblemGMRES@{oomph::AugmentedProblemGMRES}!````~AugmentedProblemGMRES@{$\sim$AugmentedProblemGMRES}}
@@ -135,11 +135,11 @@ Destructor\+: Clean up storage.
 
 
 
-Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01571}{1571}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+Definition at line 1571 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{iterative__linear__solver_8h_source_l01687}{clean\+\_\+up\+\_\+memory()}}.
+References clean\+\_\+up\+\_\+memory().
 
 \mbox{\Hypertarget{classoomph_1_1AugmentedProblemGMRES_a5c19aa1ff1b23b8400f1e81b29f7e7de}\label{classoomph_1_1AugmentedProblemGMRES_a5c19aa1ff1b23b8400f1e81b29f7e7de}} 
 \index{oomph::AugmentedProblemGMRES@{oomph::AugmentedProblemGMRES}!AugmentedProblemGMRES@{AugmentedProblemGMRES}}
@@ -166,11 +166,11 @@ Helper function\+: Apply plane rotation. This is done using the update\+:
 
 \[ \begin{bmatrix} dx \newline dy \end{bmatrix} \leftarrow \begin{bmatrix} \cos\theta & \sin\theta \newline -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \newline dy \end{bmatrix}. \] 
 
-Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01913}{1913}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+Definition at line 1913 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02862}{solve\+\_\+helper()}}.
+Referenced by solve\+\_\+helper().
 
 \mbox{\Hypertarget{classoomph_1_1AugmentedProblemGMRES_a71199dc59da3f5077803829e36ad4aec}\label{classoomph_1_1AugmentedProblemGMRES_a71199dc59da3f5077803829e36ad4aec}} 
 \index{oomph::AugmentedProblemGMRES@{oomph::AugmentedProblemGMRES}!apply\_schur\_complement\_preconditioner@{apply\_schur\_complement\_preconditioner}}
@@ -184,15 +184,15 @@ Apply the block-\/diagonal Schur complement preconditioner to compute the LHS wh
 
 
 
-Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01736}{1736}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+Definition at line 1736 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00186}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00095}{oomph\+::\+Iterative\+Linear\+Solver\+::preconditioner\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34884bb64ec8}{oomph\+::\+Preconditioner\+::preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{iterative__linear__solver_8h_source_l01951}{Schur\+\_\+complement\+\_\+scalar}}.
+References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), i, oomph\+::\+Linear\+Algebra\+Distribution\+::nrow(), oomph\+::\+Iterative\+Linear\+Solver\+::preconditioner\+\_\+pt(), oomph\+::\+Preconditioner\+::preconditioner\+\_\+solve(), and Schur\+\_\+complement\+\_\+scalar.
 
 
 
-Referenced by \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02862}{solve\+\_\+helper()}}, and \mbox{\hyperlink{iterative__linear__solver_8h_source_l01790}{update()}}.
+Referenced by solve\+\_\+helper(), and update().
 
 \mbox{\Hypertarget{classoomph_1_1AugmentedProblemGMRES_a98bde93ede0909eb0170ef490c6d184d}\label{classoomph_1_1AugmentedProblemGMRES_a98bde93ede0909eb0170ef490c6d184d}} 
 \index{oomph::AugmentedProblemGMRES@{oomph::AugmentedProblemGMRES}!augmented\_matrix\_multiply@{augmented\_matrix\_multiply}}
@@ -206,15 +206,15 @@ Multiply the vector x by the augmented system matrix.
 
 
 
-Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01697}{1697}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+Definition at line 1697 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{iterative__linear__solver_8h_source_l01942}{C\+\_\+pt}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{double__vector_8cc_source_l00805}{oomph\+::\+Double\+Vector\+::dot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8cc_source_l01782}{oomph\+::\+CRDouble\+Matrix\+::multiply()}}, and \mbox{\hyperlink{matrices_8h_source_l01002}{oomph\+::\+CRDouble\+Matrix\+::nrow()}}.
+References C\+\_\+pt, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Double\+Vector\+::dot(), i, oomph\+::\+CRDouble\+Matrix\+::multiply(), and oomph\+::\+CRDouble\+Matrix\+::nrow().
 
 
 
-Referenced by \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02862}{solve\+\_\+helper()}}.
+Referenced by solve\+\_\+helper().
 
 \mbox{\Hypertarget{classoomph_1_1AugmentedProblemGMRES_aa4fbf2fd3d7ce466e7ea74620c4bdcea}\label{classoomph_1_1AugmentedProblemGMRES_aa4fbf2fd3d7ce466e7ea74620c4bdcea}} 
 \index{oomph::AugmentedProblemGMRES@{oomph::AugmentedProblemGMRES}!clean\_up\_memory@{clean\_up\_memory}}
@@ -232,15 +232,15 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a9d66f3262e80ca06
 
 
 
-Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01687}{1687}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+Definition at line 1687 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{iterative__linear__solver_8h_source_l01959}{Matrix\+\_\+can\+\_\+be\+\_\+deleted}}, and \mbox{\hyperlink{iterative__linear__solver_8h_source_l01936}{Matrix\+\_\+pt}}.
+References Matrix\+\_\+can\+\_\+be\+\_\+deleted, and Matrix\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{iterative__linear__solver_8h_source_l01583}{disable\+\_\+resolve()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02746}{solve()}}, and \mbox{\hyperlink{iterative__linear__solver_8h_source_l01571}{$\sim$\+Augmented\+Problem\+GMRES()}}.
+Referenced by disable\+\_\+resolve(), solve(), and $\sim$\+Augmented\+Problem\+GMRES().
 
 \mbox{\Hypertarget{classoomph_1_1AugmentedProblemGMRES_a478992300f83afa08cde46ac11569986}\label{classoomph_1_1AugmentedProblemGMRES_a478992300f83afa08cde46ac11569986}} 
 \index{oomph::AugmentedProblemGMRES@{oomph::AugmentedProblemGMRES}!disable\_iteration\_restart@{disable\_iteration\_restart}}
@@ -254,11 +254,11 @@ Switches off iteration restart.
 
 
 
-Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01668}{1668}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+Definition at line 1668 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{iterative__linear__solver_8h_source_l01933}{Iteration\+\_\+restart}}.
+References Iteration\+\_\+restart.
 
 \mbox{\Hypertarget{classoomph_1_1AugmentedProblemGMRES_a338c1108f68089ba78104a93ec2cbbca}\label{classoomph_1_1AugmentedProblemGMRES_a338c1108f68089ba78104a93ec2cbbca}} 
 \index{oomph::AugmentedProblemGMRES@{oomph::AugmentedProblemGMRES}!disable\_resolve@{disable\_resolve}}
@@ -276,11 +276,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_ad61c63af94c59618
 
 
 
-Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01583}{1583}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+Definition at line 1583 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{iterative__linear__solver_8h_source_l01687}{clean\+\_\+up\+\_\+memory()}}, and \mbox{\hyperlink{linear__solver_8h_source_l00144}{oomph\+::\+Linear\+Solver\+::disable\+\_\+resolve()}}.
+References clean\+\_\+up\+\_\+memory(), and oomph\+::\+Linear\+Solver\+::disable\+\_\+resolve().
 
 \mbox{\Hypertarget{classoomph_1_1AugmentedProblemGMRES_a7baee709b4066c7e3dce35afe76a0792}\label{classoomph_1_1AugmentedProblemGMRES_a7baee709b4066c7e3dce35afe76a0792}} 
 \index{oomph::AugmentedProblemGMRES@{oomph::AugmentedProblemGMRES}!enable\_iteration\_restart@{enable\_iteration\_restart}}
@@ -294,11 +294,11 @@ switches on iteration restarting and takes as an argument the number of iteratio
 
 
 
-Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01661}{1661}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+Definition at line 1661 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{iterative__linear__solver_8h_source_l01933}{Iteration\+\_\+restart}}, and \mbox{\hyperlink{iterative__linear__solver_8h_source_l01930}{Restart}}.
+References Iteration\+\_\+restart, and Restart.
 
 \mbox{\Hypertarget{classoomph_1_1AugmentedProblemGMRES_a74bb2d9ceab6473c1922b166ebf48681}\label{classoomph_1_1AugmentedProblemGMRES_a74bb2d9ceab6473c1922b166ebf48681}} 
 \index{oomph::AugmentedProblemGMRES@{oomph::AugmentedProblemGMRES}!generate\_plane\_rotation@{generate\_plane\_rotation}}
@@ -310,13 +310,13 @@ References \mbox{\hyperlink{iterative__linear__solver_8h_source_l01933}{Iteratio
 
 Helper function\+: Generate a plane rotation. This is done by finding the values of $ \cos(\theta) $ (i.\+e. cs) and \textbackslash{}sin(\textbackslash{}theta) (i.\+e. sn) such that\+: 
 
-\[ \begin{bmatrix} \cos\theta & \sin\theta \newline -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \newline dy \end{bmatrix} = \begin{bmatrix} r \newline 0 \end{bmatrix}, \] where $ r=\sqrt{pow(dx,2)+pow(dy,2)} $. The values of a and b are given by\+: \[ \cos\theta&=\dfrac{dx}{\sqrt{pow(dx,2)+pow(dy,2)}}, \] and \[ \sin\theta&=\dfrac{dy}{\sqrt{pow(dx,2)+pow(dy,2)}}. \] Taken from\+: Saad Y.\char`\"{}\+Iterative methods for sparse linear systems\char`\"{}, p.\+192 
+\[ \begin{bmatrix} \cos\theta & \sin\theta \newline -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \newline dy \end{bmatrix} = \begin{bmatrix} r \newline 0 \end{bmatrix}, \] where $ r=\sqrt{pow(dx,2)+pow(dy,2)} $. The values of a and b are given by\+: \[ \cos\theta=\dfrac{dx}{\sqrt{pow(dx,2)+pow(dy,2)}}, \] and \[ \sin\theta=\dfrac{dy}{\sqrt{pow(dx,2)+pow(dy,2)}}. \] Taken from\+: Saad Y.\char`\"{}\+Iterative methods for sparse linear systems\char`\"{}, p.\+192 
 
-Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01868}{1868}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+Definition at line 1868 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02862}{solve\+\_\+helper()}}.
+Referenced by solve\+\_\+helper().
 
 \mbox{\Hypertarget{classoomph_1_1AugmentedProblemGMRES_a5e3a50ebf6ce2d2c3a0a53b7e6f24300}\label{classoomph_1_1AugmentedProblemGMRES_a5e3a50ebf6ce2d2c3a0a53b7e6f24300}} 
 \index{oomph::AugmentedProblemGMRES@{oomph::AugmentedProblemGMRES}!iteration\_restart@{iteration\_restart}}
@@ -330,11 +330,11 @@ access function indicating whether restarted \mbox{\hyperlink{classoomph_1_1GMRE
 
 
 
-Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01653}{1653}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+Definition at line 1653 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{iterative__linear__solver_8h_source_l01933}{Iteration\+\_\+restart}}.
+References Iteration\+\_\+restart.
 
 \mbox{\Hypertarget{classoomph_1_1AugmentedProblemGMRES_a0e6fb26306985fc6bde851d372b78708}\label{classoomph_1_1AugmentedProblemGMRES_a0e6fb26306985fc6bde851d372b78708}} 
 \index{oomph::AugmentedProblemGMRES@{oomph::AugmentedProblemGMRES}!iterations@{iterations}}
@@ -352,11 +352,11 @@ Implements \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a5fe7f7b5e4847fd
 
 
 
-Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01647}{1647}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+Definition at line 1647 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{iterative__linear__solver_8h_source_l01926}{Iterations}}.
+References Iterations.
 
 \mbox{\Hypertarget{classoomph_1_1AugmentedProblemGMRES_aa59dc0dfad8c26eeba778dde0cdc0d8d}\label{classoomph_1_1AugmentedProblemGMRES_aa59dc0dfad8c26eeba778dde0cdc0d8d}} 
 \index{oomph::AugmentedProblemGMRES@{oomph::AugmentedProblemGMRES}!operator=@{operator=}}
@@ -384,11 +384,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033ed
 
 
 
-Definition at line \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02831}{2831}} of file \mbox{\hyperlink{iterative__linear__solver_8cc_source}{iterative\+\_\+linear\+\_\+solver.\+cc}}.
+Definition at line 2831 of file iterative\+\_\+linear\+\_\+solver.\+cc.
 
 
 
-References \mbox{\hyperlink{iterative__linear__solver_8h_source_l01936}{Matrix\+\_\+pt}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01955}{Resolving}}, and \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02746}{solve()}}.
+References Matrix\+\_\+pt, Resolving, and solve().
 
 \mbox{\Hypertarget{classoomph_1_1AugmentedProblemGMRES_ae29f07a20c4e1290ae1c85f4c5756adc}\label{classoomph_1_1AugmentedProblemGMRES_ae29f07a20c4e1290ae1c85f4c5756adc}} 
 \index{oomph::AugmentedProblemGMRES@{oomph::AugmentedProblemGMRES}!set\_preconditioner\_LHS@{set\_preconditioner\_LHS}}
@@ -402,11 +402,11 @@ Set left preconditioning (the default)
 
 
 
-Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01674}{1674}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+Definition at line 1674 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{iterative__linear__solver_8h_source_l01963}{Preconditioner\+\_\+\+LHS}}.
+References Preconditioner\+\_\+\+LHS.
 
 \mbox{\Hypertarget{classoomph_1_1AugmentedProblemGMRES_ab9349ea974f4e84d4ae3d7de096e60bd}\label{classoomph_1_1AugmentedProblemGMRES_ab9349ea974f4e84d4ae3d7de096e60bd}} 
 \index{oomph::AugmentedProblemGMRES@{oomph::AugmentedProblemGMRES}!set\_preconditioner\_RHS@{set\_preconditioner\_RHS}}
@@ -420,11 +420,11 @@ Enable right preconditioning.
 
 
 
-Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01680}{1680}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+Definition at line 1680 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{iterative__linear__solver_8h_source_l01963}{Preconditioner\+\_\+\+LHS}}.
+References Preconditioner\+\_\+\+LHS.
 
 \mbox{\Hypertarget{classoomph_1_1AugmentedProblemGMRES_a0e7809509296cc1b6d355a7e02d0f989}\label{classoomph_1_1AugmentedProblemGMRES_a0e7809509296cc1b6d355a7e02d0f989}} 
 \index{oomph::AugmentedProblemGMRES@{oomph::AugmentedProblemGMRES}!solve@{solve}}
@@ -442,11 +442,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a546c09822d18191d
 
 
 
-Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01596}{1596}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+Definition at line 1596 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__solver_8h_source_l00073}{oomph\+::\+Linear\+Solver\+::\+Enable\+\_\+resolve}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01959}{Matrix\+\_\+can\+\_\+be\+\_\+deleted}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01936}{Matrix\+\_\+pt}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01955}{Resolving}}, and \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02862}{solve\+\_\+helper()}}.
+References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Linear\+Solver\+::\+Enable\+\_\+resolve, Matrix\+\_\+can\+\_\+be\+\_\+deleted, Matrix\+\_\+pt, Resolving, and solve\+\_\+helper().
 
 \mbox{\Hypertarget{classoomph_1_1AugmentedProblemGMRES_a6dc70380e15f0c35f3d4e1d3dc827c97}\label{classoomph_1_1AugmentedProblemGMRES_a6dc70380e15f0c35f3d4e1d3dc827c97}} 
 \index{oomph::AugmentedProblemGMRES@{oomph::AugmentedProblemGMRES}!solve@{solve}}
@@ -464,11 +464,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a1f7a2ee2cd18d3da
 
 
 
-Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01634}{1634}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+Definition at line 1634 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}{oomph\+::\+Linear\+Solver\+::solve()}}.
+References oomph\+::\+Linear\+Solver\+::solve().
 
 \mbox{\Hypertarget{classoomph_1_1AugmentedProblemGMRES_a73d8d3d8b161084e6291560cdd7984dc}\label{classoomph_1_1AugmentedProblemGMRES_a73d8d3d8b161084e6291560cdd7984dc}} 
 \index{oomph::AugmentedProblemGMRES@{oomph::AugmentedProblemGMRES}!solve@{solve}}
@@ -488,15 +488,15 @@ Implements \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485e
 
 
 
-Definition at line \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02746}{2746}} of file \mbox{\hyperlink{iterative__linear__solver_8cc_source}{iterative\+\_\+linear\+\_\+solver.\+cc}}.
+Definition at line 2746 of file iterative\+\_\+linear\+\_\+solver.\+cc.
 
 
 
-References \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01687}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{problem_8h_source_l01246}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__solver_8h_source_l00077}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, \mbox{\hyperlink{linear__solver_8h_source_l00073}{oomph\+::\+Linear\+Solver\+::\+Enable\+\_\+resolve}}, \mbox{\hyperlink{problem_8cc_source_l03890}{oomph\+::\+Problem\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00248}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Jacobian\+\_\+setup\+\_\+time}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01959}{Matrix\+\_\+can\+\_\+be\+\_\+deleted}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01936}{Matrix\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l01674}{oomph\+::\+Problem\+::ndof()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{double__vector_8cc_source_l00164}{oomph\+::\+Double\+Vector\+::redistribute()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01955}{Resolving}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01951}{Schur\+\_\+complement\+\_\+scalar}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02862}{solve\+\_\+helper()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}.
+References oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution(), oomph\+::\+Double\+Vector\+::built(), clean\+\_\+up\+\_\+memory(), oomph\+::\+Problem\+::communicator\+\_\+pt(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time, oomph\+::\+Linear\+Solver\+::\+Enable\+\_\+resolve, oomph\+::\+Problem\+::get\+\_\+jacobian(), oomph\+::\+Iterative\+Linear\+Solver\+::\+Jacobian\+\_\+setup\+\_\+time, Matrix\+\_\+can\+\_\+be\+\_\+deleted, Matrix\+\_\+pt, oomph\+::\+Problem\+::ndof(), oomph\+::oomph\+\_\+info, oomph\+::\+Double\+Vector\+::redistribute(), Resolving, Schur\+\_\+complement\+\_\+scalar, solve\+\_\+helper(), and oomph\+::\+Timing\+Helpers\+::timer().
 
 
 
-Referenced by \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02831}{resolve()}}.
+Referenced by resolve().
 
 \mbox{\Hypertarget{classoomph_1_1AugmentedProblemGMRES_a1ff5a4b43235b43d2254af0db6195dc7}\label{classoomph_1_1AugmentedProblemGMRES_a1ff5a4b43235b43d2254af0db6195dc7}} 
 \index{oomph::AugmentedProblemGMRES@{oomph::AugmentedProblemGMRES}!solve\_helper@{solve\_helper}}
@@ -510,21 +510,21 @@ General interface to solve function.
 
 Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. based on the algorithm presented in Templates for the Solution of Linear Systems\+: Building Blocks for Iterative Methods, Barrett, Berry et al, SIAM, 2006 and the implementation in the IML++ library \+: \href{http://math.nist.gov/iml++/}{\texttt{ http\+://math.\+nist.\+gov/iml++/}}. 
 
-Definition at line \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02862}{2862}} of file \mbox{\hyperlink{iterative__linear__solver_8cc_source}{iterative\+\_\+linear\+\_\+solver.\+cc}}.
+Definition at line 2862 of file iterative\+\_\+linear\+\_\+solver.\+cc.
 
 
 
-References \mbox{\hyperlink{iterative__linear__solver_8h_source_l01913}{apply\+\_\+plane\+\_\+rotation()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01736}{apply\+\_\+schur\+\_\+complement\+\_\+preconditioner()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01697}{augmented\+\_\+matrix\+\_\+multiply()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01939}{B\+\_\+pt}}, \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01942}{C\+\_\+pt}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00335}{oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00329}{oomph\+::\+Linear\+Algebra\+Distribution\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00228}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Doc\+\_\+convergence\+\_\+history}}, \mbox{\hyperlink{linear__solver_8h_source_l00077}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, \mbox{\hyperlink{double__vector_8cc_source_l00805}{oomph\+::\+Double\+Vector\+::dot()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01868}{generate\+\_\+plane\+\_\+rotation()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{double__vector_8cc_source_l00123}{oomph\+::\+Double\+Vector\+::initialise()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01933}{Iteration\+\_\+restart}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01926}{Iterations}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00242}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Max\+\_\+iter}}, \mbox{\hyperlink{double__vector_8cc_source_l00867}{oomph\+::\+Double\+Vector\+::norm()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow()}}, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_acdcd6e1ea2bf2380f1a2fa32c7829cb5}{oomph\+::\+Double\+Matrix\+Base\+::nrow()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00231}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Output\+\_\+file\+\_\+stream}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01963}{Preconditioner\+\_\+\+LHS}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00095}{oomph\+::\+Iterative\+Linear\+Solver\+::preconditioner\+\_\+pt()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00254}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Preconditioner\+\_\+setup\+\_\+time}}, \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34884bb64ec8}{oomph\+::\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01955}{Resolving}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01930}{Restart}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01951}{Schur\+\_\+complement\+\_\+scalar}}, \mbox{\hyperlink{preconditioner_8h_source_l00094}{oomph\+::\+Preconditioner\+::setup()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00258}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Setup\+\_\+preconditioner\+\_\+before\+\_\+solve}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00251}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Solution\+\_\+time}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00262}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Throw\+\_\+error\+\_\+after\+\_\+max\+\_\+iter}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00239}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Tolerance}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01790}{update()}}, and \mbox{\hyperlink{double__vector_8h_source_l00254}{oomph\+::\+Double\+Vector\+::values\+\_\+pt()}}.
+References apply\+\_\+plane\+\_\+rotation(), apply\+\_\+schur\+\_\+complement\+\_\+preconditioner(), augmented\+\_\+matrix\+\_\+multiply(), B\+\_\+pt, oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Double\+Vector\+::built(), C\+\_\+pt, oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt(), oomph\+::\+Linear\+Algebra\+Distribution\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Iterative\+Linear\+Solver\+::\+Doc\+\_\+convergence\+\_\+history, oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time, oomph\+::\+Double\+Vector\+::dot(), generate\+\_\+plane\+\_\+rotation(), i, oomph\+::\+Double\+Vector\+::initialise(), Iteration\+\_\+restart, Iterations, oomph\+::\+Iterative\+Linear\+Solver\+::\+Max\+\_\+iter, oomph\+::\+Double\+Vector\+::norm(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), oomph\+::\+Double\+Matrix\+Base\+::nrow(), oomph\+::oomph\+\_\+info, oomph\+::\+Iterative\+Linear\+Solver\+::\+Output\+\_\+file\+\_\+stream, Preconditioner\+\_\+\+LHS, oomph\+::\+Iterative\+Linear\+Solver\+::preconditioner\+\_\+pt(), oomph\+::\+Iterative\+Linear\+Solver\+::\+Preconditioner\+\_\+setup\+\_\+time, oomph\+::\+Preconditioner\+::preconditioner\+\_\+solve(), Resolving, Restart, s, Schur\+\_\+complement\+\_\+scalar, oomph\+::\+Preconditioner\+::setup(), oomph\+::\+Iterative\+Linear\+Solver\+::\+Setup\+\_\+preconditioner\+\_\+before\+\_\+solve, oomph\+::\+Iterative\+Linear\+Solver\+::\+Solution\+\_\+time, oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), oomph\+::\+Iterative\+Linear\+Solver\+::\+Throw\+\_\+error\+\_\+after\+\_\+max\+\_\+iter, oomph\+::\+Timing\+Helpers\+::timer(), oomph\+::\+Iterative\+Linear\+Solver\+::\+Tolerance, update(), and oomph\+::\+Double\+Vector\+::values\+\_\+pt().
 
 
 
-Referenced by \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02746}{solve()}}.
+Referenced by solve().
 
-\mbox{\Hypertarget{classoomph_1_1AugmentedProblemGMRES_ab7513cfa22054fa1bff319c72aac8313}\label{classoomph_1_1AugmentedProblemGMRES_ab7513cfa22054fa1bff319c72aac8313}} 
+\mbox{\Hypertarget{classoomph_1_1AugmentedProblemGMRES_a2831faedac86c6e6acd34351c138fe52}\label{classoomph_1_1AugmentedProblemGMRES_a2831faedac86c6e6acd34351c138fe52}} 
 \index{oomph::AugmentedProblemGMRES@{oomph::AugmentedProblemGMRES}!update@{update}}
 \index{update@{update}!oomph::AugmentedProblemGMRES@{oomph::AugmentedProblemGMRES}}
 \doxysubsubsection{\texorpdfstring{update()}{update()}}
-{\footnotesize\ttfamily void oomph\+::\+Augmented\+Problem\+GMRES\+::update (\begin{DoxyParamCaption}\item[{const unsigned \&}]{k,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&}]{H,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{v,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily void oomph\+::\+Augmented\+Problem\+GMRES\+::update (\begin{DoxyParamCaption}\item[{const unsigned \&}]{k,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&}]{H,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{v,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
@@ -532,15 +532,15 @@ Helper function to update the result vector using the result, x=x\+\_\+0+\+V\+\_
 
 
 
-Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01790}{1790}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+Definition at line 1790 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
-References \mbox{\hyperlink{iterative__linear__solver_8h_source_l01736}{apply\+\_\+schur\+\_\+complement\+\_\+preconditioner()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01963}{Preconditioner\+\_\+\+LHS}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{double__vector_8h_source_l00254}{oomph\+::\+Double\+Vector\+::values\+\_\+pt()}}.
+References apply\+\_\+schur\+\_\+complement\+\_\+preconditioner(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), i, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), Preconditioner\+\_\+\+LHS, s, and oomph\+::\+Double\+Vector\+::values\+\_\+pt().
 
 
 
-Referenced by \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02862}{solve\+\_\+helper()}}.
+Referenced by solve\+\_\+helper().
 
 
 
@@ -557,11 +557,11 @@ Pointer to the column vector in the bordered system.
 
 
 
-Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01939}{1939}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+Definition at line 1939 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02862}{solve\+\_\+helper()}}.
+Referenced by solve\+\_\+helper().
 
 \mbox{\Hypertarget{classoomph_1_1AugmentedProblemGMRES_a1f483fcae38f24ceda96c111333ebd2b}\label{classoomph_1_1AugmentedProblemGMRES_a1f483fcae38f24ceda96c111333ebd2b}} 
 \index{oomph::AugmentedProblemGMRES@{oomph::AugmentedProblemGMRES}!C\_pt@{C\_pt}}
@@ -575,11 +575,11 @@ Pointer to the row vector in the bordered system.
 
 
 
-Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01942}{1942}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+Definition at line 1942 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{iterative__linear__solver_8h_source_l01697}{augmented\+\_\+matrix\+\_\+multiply()}}, and \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02862}{solve\+\_\+helper()}}.
+Referenced by augmented\+\_\+matrix\+\_\+multiply(), and solve\+\_\+helper().
 
 \mbox{\Hypertarget{classoomph_1_1AugmentedProblemGMRES_a447c3077e0763deb70e7e9ac34748d74}\label{classoomph_1_1AugmentedProblemGMRES_a447c3077e0763deb70e7e9ac34748d74}} 
 \index{oomph::AugmentedProblemGMRES@{oomph::AugmentedProblemGMRES}!Iteration\_restart@{Iteration\_restart}}
@@ -593,11 +593,11 @@ boolean indicating if iteration restarting is used
 
 
 
-Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01933}{1933}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+Definition at line 1933 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{iterative__linear__solver_8h_source_l01552}{Augmented\+Problem\+GMRES()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01668}{disable\+\_\+iteration\+\_\+restart()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01661}{enable\+\_\+iteration\+\_\+restart()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01653}{iteration\+\_\+restart()}}, and \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02862}{solve\+\_\+helper()}}.
+Referenced by Augmented\+Problem\+GMRES(), disable\+\_\+iteration\+\_\+restart(), enable\+\_\+iteration\+\_\+restart(), iteration\+\_\+restart(), and solve\+\_\+helper().
 
 \mbox{\Hypertarget{classoomph_1_1AugmentedProblemGMRES_a9be7f8a66aefc1352e95741c5f265443}\label{classoomph_1_1AugmentedProblemGMRES_a9be7f8a66aefc1352e95741c5f265443}} 
 \index{oomph::AugmentedProblemGMRES@{oomph::AugmentedProblemGMRES}!Iterations@{Iterations}}
@@ -611,11 +611,11 @@ Number of iterations taken.
 
 
 
-Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01926}{1926}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+Definition at line 1926 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{iterative__linear__solver_8h_source_l01647}{iterations()}}, and \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02862}{solve\+\_\+helper()}}.
+Referenced by iterations(), and solve\+\_\+helper().
 
 \mbox{\Hypertarget{classoomph_1_1AugmentedProblemGMRES_a9e906e80cad4f9261729e75f2448fc63}\label{classoomph_1_1AugmentedProblemGMRES_a9e906e80cad4f9261729e75f2448fc63}} 
 \index{oomph::AugmentedProblemGMRES@{oomph::AugmentedProblemGMRES}!Matrix\_can\_be\_deleted@{Matrix\_can\_be\_deleted}}
@@ -629,11 +629,11 @@ Boolean flag to indicate if the matrix pointed to be Matrix\+\_\+pt can be delet
 
 
 
-Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01959}{1959}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+Definition at line 1959 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{iterative__linear__solver_8h_source_l01687}{clean\+\_\+up\+\_\+memory()}}, and \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02746}{solve()}}.
+Referenced by clean\+\_\+up\+\_\+memory(), and solve().
 
 \mbox{\Hypertarget{classoomph_1_1AugmentedProblemGMRES_a2dd7330c78b780ccc87c0922656a72b2}\label{classoomph_1_1AugmentedProblemGMRES_a2dd7330c78b780ccc87c0922656a72b2}} 
 \index{oomph::AugmentedProblemGMRES@{oomph::AugmentedProblemGMRES}!Matrix\_pt@{Matrix\_pt}}
@@ -647,11 +647,11 @@ Pointer to matrix.
 
 
 
-Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01936}{1936}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+Definition at line 1936 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{iterative__linear__solver_8h_source_l01687}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02831}{resolve()}}, and \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02746}{solve()}}.
+Referenced by clean\+\_\+up\+\_\+memory(), resolve(), and solve().
 
 \mbox{\Hypertarget{classoomph_1_1AugmentedProblemGMRES_ab32f761ac00fb98acfc66f07a62932c9}\label{classoomph_1_1AugmentedProblemGMRES_ab32f761ac00fb98acfc66f07a62932c9}} 
 \index{oomph::AugmentedProblemGMRES@{oomph::AugmentedProblemGMRES}!Preconditioner\_LHS@{Preconditioner\_LHS}}
@@ -665,11 +665,11 @@ boolean indicating use of left hand preconditioning (if true) or right hand prec
 
 
 
-Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01963}{1963}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+Definition at line 1963 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{iterative__linear__solver_8h_source_l01552}{Augmented\+Problem\+GMRES()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01674}{set\+\_\+preconditioner\+\_\+\+LHS()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01680}{set\+\_\+preconditioner\+\_\+\+RHS()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02862}{solve\+\_\+helper()}}, and \mbox{\hyperlink{iterative__linear__solver_8h_source_l01790}{update()}}.
+Referenced by Augmented\+Problem\+GMRES(), set\+\_\+preconditioner\+\_\+\+LHS(), set\+\_\+preconditioner\+\_\+\+RHS(), solve\+\_\+helper(), and update().
 
 \mbox{\Hypertarget{classoomph_1_1AugmentedProblemGMRES_a1c8bdfdfbba0518cf24ad56970186714}\label{classoomph_1_1AugmentedProblemGMRES_a1c8bdfdfbba0518cf24ad56970186714}} 
 \index{oomph::AugmentedProblemGMRES@{oomph::AugmentedProblemGMRES}!Resolving@{Resolving}}
@@ -683,11 +683,11 @@ Boolean flag to indicate if the solve is done in re-\/solve mode, bypassing setu
 
 
 
-Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01955}{1955}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+Definition at line 1955 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02831}{resolve()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02746}{solve()}}, and \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02862}{solve\+\_\+helper()}}.
+Referenced by resolve(), solve(), and solve\+\_\+helper().
 
 \mbox{\Hypertarget{classoomph_1_1AugmentedProblemGMRES_a472af506241c412c2a6fe4c53529118e}\label{classoomph_1_1AugmentedProblemGMRES_a472af506241c412c2a6fe4c53529118e}} 
 \index{oomph::AugmentedProblemGMRES@{oomph::AugmentedProblemGMRES}!Restart@{Restart}}
@@ -701,11 +701,11 @@ The number of iterations before the iteration proceedure is restarted if iterati
 
 
 
-Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01930}{1930}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+Definition at line 1930 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{iterative__linear__solver_8h_source_l01661}{enable\+\_\+iteration\+\_\+restart()}}, and \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02862}{solve\+\_\+helper()}}.
+Referenced by enable\+\_\+iteration\+\_\+restart(), and solve\+\_\+helper().
 
 \mbox{\Hypertarget{classoomph_1_1AugmentedProblemGMRES_a5f7815e661ee9a79da7fdc485a8bc652}\label{classoomph_1_1AugmentedProblemGMRES_a5f7815e661ee9a79da7fdc485a8bc652}} 
 \index{oomph::AugmentedProblemGMRES@{oomph::AugmentedProblemGMRES}!Rhs\_pt@{Rhs\_pt}}
@@ -719,7 +719,7 @@ Pointer to the last entry of the RHS vector in the bordered system.
 
 
 
-Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01948}{1948}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+Definition at line 1948 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AugmentedProblemGMRES_a837e46fe93f07fa0740b5a7a9f40ebcb}\label{classoomph_1_1AugmentedProblemGMRES_a837e46fe93f07fa0740b5a7a9f40ebcb}} 
 \index{oomph::AugmentedProblemGMRES@{oomph::AugmentedProblemGMRES}!Schur\_complement\_scalar@{Schur\_complement\_scalar}}
@@ -733,11 +733,11 @@ The scalar component of the Schur complement preconditioner.
 
 
 
-Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01951}{1951}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+Definition at line 1951 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{iterative__linear__solver_8h_source_l01736}{apply\+\_\+schur\+\_\+complement\+\_\+preconditioner()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02746}{solve()}}, and \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02862}{solve\+\_\+helper()}}.
+Referenced by apply\+\_\+schur\+\_\+complement\+\_\+preconditioner(), solve(), and solve\+\_\+helper().
 
 \mbox{\Hypertarget{classoomph_1_1AugmentedProblemGMRES_a947a6617c3909fc2ffaebb9ebf001cfa}\label{classoomph_1_1AugmentedProblemGMRES_a947a6617c3909fc2ffaebb9ebf001cfa}} 
 \index{oomph::AugmentedProblemGMRES@{oomph::AugmentedProblemGMRES}!X\_pt@{X\_pt}}
@@ -751,7 +751,7 @@ Pointer to the last entry of the LHS vector in the bordered system.
 
 
 
-Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01945}{1945}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+Definition at line 1945 of file iterative\+\_\+linear\+\_\+solver.\+h.
 
 
 

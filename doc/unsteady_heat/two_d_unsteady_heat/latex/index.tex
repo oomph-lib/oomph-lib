@@ -47,7 +47,7 @@ As usual, we store the problem parameters in a namespace.
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//======start\_of\_ExactSolnForUnsteadyHeat=====================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for unforced exact solution for UnsteadyHeat equation }}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceExactSolnForUnsteadyHeat}{ExactSolnForUnsteadyHeat}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -90,7 +90,7 @@ We start by building the {\ttfamily Problem} object, create a {\ttfamily Doc\+In
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_main====================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver code for unsteady heat equation}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{two__d__unsteady__heat_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
@@ -170,7 +170,7 @@ Next we assign the initial conditions by calling {\ttfamily set\+\_\+initial\+\_
 \DoxyCodeLine{\}; \textcolor{comment}{// end of main}}
 
 \end{DoxyCodeInclude}
- In this loop, each call to the unsteady Newton solver, {\ttfamily Problem\+::unsteady\+\_\+newton\+\_\+solve(...)}, advances the solution from its current state, at time $ t = $ {\ttfamily Problem\+::time\+\_\+pt()-\/\texorpdfstring{$>$}{>}time()}, to $ t \ + $ {\ttfamily dt}. The unsteady Newton solver automatically \char`\"{}shifts\char`\"{} the history values \char`\"{}backwards\char`\"{} and advances the value of the continuous time.
+ In this loop, each call to the unsteady Newton solver, {\ttfamily Problem\+::unsteady\+\_\+newton\+\_\+solve(...)}, advances the solution from its current state, at time $ t = $ {\ttfamily Problem\+::time\+\_\+pt()-\/$>$time()}, to $ t \ + $ {\ttfamily dt}. The unsteady Newton solver automatically \char`\"{}shifts\char`\"{} the history values \char`\"{}backwards\char`\"{} and advances the value of the continuous time.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -186,7 +186,7 @@ Finally, the private member data {\ttfamily Control\+\_\+node\+\_\+pt} provides 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====start\_of\_problem\_class=========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// UnsteadyHeat problem }}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classUnsteadyHeatProblem}{UnsteadyHeatProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -241,7 +241,7 @@ We start by constructing the {\ttfamily Time\+Stepper}, the second-\/order accur
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//========start\_of\_constructor============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for UnsteadyHeat problem in square domain}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classUnsteadyHeatProblem_abd3a46eea132b1e5872be6a6309a51b2}{UnsteadyHeatProblem<ELEMENT>::UnsteadyHeatProblem}}(}
 \DoxyCodeLine{ UnsteadyHeatEquations<2>::UnsteadyHeatSourceFctPt source\_fct\_pt) : }
@@ -404,8 +404,8 @@ We overload the (empty) virtual function {\ttfamily Problem\+::actions\+\_\+befo
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=========start of actions\_before\_implicit\_timestep===============================}}
-\DoxyCodeLine{\textcolor{comment}{/// Actions before timestep: update the domain, then reset the }\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// boundary conditions for the current time.}}
+\DoxyCodeLine{\textcolor{comment}{/// Actions before timestep: update the domain, then reset the }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// boundary conditions for the current time.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classUnsteadyHeatProblem_a7074e52f6a3a791549687e1b4ddd059a}{UnsteadyHeatProblem<ELEMENT>::actions\_before\_implicit\_timestep}}()}
@@ -448,7 +448,7 @@ Before starting a time-\/dependent simulation, the current and history values of
 \hline
 \label{index_conv_t_arg}%
 \Hypertarget{index_conv_t_arg}%
-\begin{center}{\bfseries{A general convention}}\end{center}  Many functions in {\ttfamily oomph-\/lib} have steady and time-\/dependent versions which usually differ in their first argument. Typically, the first argument of the time-\/dependent function is an additional (unsigned) integer, {\ttfamily t}, say. As a general convention, the time-\/dependent versions return values (or perform actions) that are appropriate for the current time if called with {\ttfamily t=0}, and return values (or perform actions) that are appropriate for previous time levels if the argument is set to {\ttfamily t\texorpdfstring{$>$}{>}0}. Note that we refer to previous time levels, rather than previous timesteps, because history values do not necessarily represent values at previous timesteps, as they do for {\ttfamily BDF} schemes. For instance, in {\ttfamily Newmark} timestepping schemes, the history values include approximations of the first and second time-\/derivatives at the previous timestep.
+\begin{center}{\bfseries{A general convention}}\end{center}  Many functions in {\ttfamily oomph-\/lib} have steady and time-\/dependent versions which usually differ in their first argument. Typically, the first argument of the time-\/dependent function is an additional (unsigned) integer, {\ttfamily t}, say. As a general convention, the time-\/dependent versions return values (or perform actions) that are appropriate for the current time if called with {\ttfamily t=0}, and return values (or perform actions) that are appropriate for previous time levels if the argument is set to {\ttfamily t$>$0}. Note that we refer to previous time levels, rather than previous timesteps, because history values do not necessarily represent values at previous timesteps, as they do for {\ttfamily BDF} schemes. For instance, in {\ttfamily Newmark} timestepping schemes, the history values include approximations of the first and second time-\/derivatives at the previous timestep.
 
 \DoxyHorRuler{1}
  \label{index_conv_hist_vals}%
@@ -478,8 +478,8 @@ As an example, {\ttfamily BDF$<$4$>$\+::ntstorage()} returns 5.   \\\cline{1-1}
 Here is the source code for the {\ttfamily set\+\_\+initial\+\_\+condition()} function\+: 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//======================start\_of\_set\_initial\_condition====================}}
-\DoxyCodeLine{\textcolor{comment}{/// Set initial condition: Assign previous and current values}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// from exact solution.}}
+\DoxyCodeLine{\textcolor{comment}{/// Set initial condition: Assign previous and current values}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// from exact solution.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classUnsteadyHeatProblem_a98de3ed2d9cf5409323121bbb482bc1b}{UnsteadyHeatProblem<ELEMENT>::set\_initial\_condition}}()}
@@ -551,7 +551,7 @@ As in many previous examples, this member function outputs the computed solution
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_doc\_solution============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classUnsteadyHeatProblem_a2c0c4b762d2dbde7396dca2a6750f433}{UnsteadyHeatProblem<ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classUnsteadyHeatProblem_a2c0c4b762d2dbde7396dca2a6750f433}{doc\_solution}}(DocInfo\& doc\_info,ofstream\& trace\_file)}

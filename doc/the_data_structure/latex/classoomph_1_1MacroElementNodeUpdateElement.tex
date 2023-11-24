@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1MacroElementNodeUpdateElement}{}\doxysection{oomph\+::Macro\+Element\+Node\+Update\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1MacroElementNodeUpdateElement}{}\doxysection{oomph\+::Macro\+Element\+Node\+Update\+Element$<$ ELEMENT $>$ Class Template Reference}
 \label{classoomph_1_1MacroElementNodeUpdateElement}\index{oomph::MacroElementNodeUpdateElement$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateElement$<$ ELEMENT $>$}}
 
 
@@ -9,7 +9,7 @@ Macro\+Element\+Node\+Update elements are elements that can not only be updated 
 
 {\ttfamily \#include $<$macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h$>$}
 
-Inheritance diagram for oomph\+::Macro\+Element\+Node\+Update\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Macro\+Element\+Node\+Update\+Element$<$ ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=1.774398cm]{classoomph_1_1MacroElementNodeUpdateElement}
@@ -26,7 +26,7 @@ Inheritance diagram for oomph\+::Macro\+Element\+Node\+Update\+Element\texorpdfs
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElement_a0010eb32e2ef063ef8911c63a66ab515}{$\sim$\+Macro\+Element\+Node\+Update\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Empty destructor to clean up allocated memory. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElement_a9a9671e70a90435f36a971495ba342cf}{set\+\_\+node\+\_\+update\+\_\+info}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$ $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElementBase_afcffd290cc0292a571e7a443bc23728b}{geom\+\_\+object\+\_\+pt}})
+void \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElement_a9a9671e70a90435f36a971495ba342cf}{set\+\_\+node\+\_\+update\+\_\+info}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$ $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElementBase_a45d0d15ee371799c84f59bb13cdac304}{geom\+\_\+object\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElement_a42c232507a0a46b065615dabad1304eb}{rebuild\+\_\+from\+\_\+sons}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&mesh\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Rebuild after unrefinement\+: Reset the node update information for all nodes so that the nodes get updated by this element. If we don\textquotesingle{}t do that, some nodes might still want to be updated by elements that no longer exist which leads to the most wonderful seg fault... Afterwards, call the template element\textquotesingle{}s own rebuild\+\_\+from\+\_\+son() function (if it\textquotesingle{}s a \mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}}) \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -36,11 +36,12 @@ void \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElement_a42c232507a0a4
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class ELEMENT$>$\newline
 class oomph\+::\+Macro\+Element\+Node\+Update\+Element$<$ ELEMENT $>$}
+
 Macro\+Element\+Node\+Update elements are elements that can not only be updated via their \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} representation (in princple any \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} could do that...) but also allows the geometric \mbox{\hyperlink{classoomph_1_1Data}{Data}} contained in the Geom\+Objects that affect the Macro\+Element-\/based node update operations to be unknowns in the overall \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}. 
 
 The element wraps around the ELEMENT specified by the template parameter and computes the derivatives of the residual vector with respect to the geometric \mbox{\hyperlink{classoomph_1_1Data}{Data}} (needed in the setup of the element\textquotesingle{}s Jacobian matrix) by finite differencing. Otherwise the element behaves exactly like the templace element. 
 
-Definition at line \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00261}{261}} of file \mbox{\hyperlink{macro__element__node__update__element_8h_source}{macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h}}.
+Definition at line 261 of file macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h.
 
 
 
@@ -58,7 +59,7 @@ Constructor\+: Call constructor of underlying element.
 
 
 
-Definition at line \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00268}{268}} of file \mbox{\hyperlink{macro__element__node__update__element_8h_source}{macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h}}.
+Definition at line 268 of file macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1MacroElementNodeUpdateElement_a9c5e49933712f3dd500068b021f8dfdc}\label{classoomph_1_1MacroElementNodeUpdateElement_a9c5e49933712f3dd500068b021f8dfdc}} 
 \index{oomph::MacroElementNodeUpdateElement$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateElement$<$ ELEMENT $>$}!MacroElementNodeUpdateElement@{MacroElementNodeUpdateElement}}
@@ -73,7 +74,7 @@ Constructor used for face elements.
 
 
 
-Definition at line \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00275}{275}} of file \mbox{\hyperlink{macro__element__node__update__element_8h_source}{macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h}}.
+Definition at line 275 of file macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1MacroElementNodeUpdateElement_ade87a7c41a7a8a338a791146b537f920}\label{classoomph_1_1MacroElementNodeUpdateElement_ade87a7c41a7a8a338a791146b537f920}} 
 \index{oomph::MacroElementNodeUpdateElement$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateElement$<$ ELEMENT $>$}!MacroElementNodeUpdateElement@{MacroElementNodeUpdateElement}}
@@ -99,7 +100,7 @@ Empty destructor to clean up allocated memory.
 
 
 
-Definition at line \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00288}{288}} of file \mbox{\hyperlink{macro__element__node__update__element_8h_source}{macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h}}.
+Definition at line 288 of file macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h.
 
 
 
@@ -117,11 +118,11 @@ Rebuild after unrefinement\+: Reset the node update information for all nodes so
 
 
 
-Definition at line \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00330}{330}} of file \mbox{\hyperlink{macro__element__node__update__element_8h_source}{macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h}}.
+Definition at line 330 of file macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00243}{oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::\+Geom\+\_\+object\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l01842}{oomph\+::\+Finite\+Element\+::local\+\_\+coordinate\+\_\+of\+\_\+node()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00297}{oomph\+::\+Macro\+Element\+Node\+Update\+Element$<$ ELEMENT $>$\+::set\+\_\+node\+\_\+update\+\_\+info()}}.
+References oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::\+Geom\+\_\+object\+\_\+pt, oomph\+::\+Finite\+Element\+::local\+\_\+coordinate\+\_\+of\+\_\+node(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Macro\+Element\+Node\+Update\+Element$<$ ELEMENT $>$\+::set\+\_\+node\+\_\+update\+\_\+info().
 
 \mbox{\Hypertarget{classoomph_1_1MacroElementNodeUpdateElement_a9a9671e70a90435f36a971495ba342cf}\label{classoomph_1_1MacroElementNodeUpdateElement_a9a9671e70a90435f36a971495ba342cf}} 
 \index{oomph::MacroElementNodeUpdateElement$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateElement$<$ ELEMENT $>$}!set\_node\_update\_info@{set\_node\_update\_info}}
@@ -140,15 +141,15 @@ Implements \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElementBase_aa24
 
 
 
-Definition at line \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00297}{297}} of file \mbox{\hyperlink{macro__element__node__update__element_8h_source}{macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h}}.
+Definition at line 297 of file macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h.
 
 
 
-References \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00227}{oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::geom\+\_\+object\+\_\+pt()}}, \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00243}{oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::\+Geom\+\_\+object\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01842}{oomph\+::\+Finite\+Element\+::local\+\_\+coordinate\+\_\+of\+\_\+node()}}, \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00220}{oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::ngeom\+\_\+object()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00297}{oomph\+::\+Macro\+Element\+Node\+Update\+Element$<$ ELEMENT $>$\+::set\+\_\+node\+\_\+update\+\_\+info()}}.
+References oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::geom\+\_\+object\+\_\+pt(), oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::\+Geom\+\_\+object\+\_\+pt, i, oomph\+::\+Finite\+Element\+::local\+\_\+coordinate\+\_\+of\+\_\+node(), oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::ngeom\+\_\+object(), oomph\+::\+Finite\+Element\+::nnode(), and oomph\+::\+Finite\+Element\+::node\+\_\+pt().
 
 
 
-Referenced by \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00330}{oomph\+::\+Macro\+Element\+Node\+Update\+Element$<$ ELEMENT $>$\+::rebuild\+\_\+from\+\_\+sons()}}, and \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00297}{oomph\+::\+Macro\+Element\+Node\+Update\+Element$<$ ELEMENT $>$\+::set\+\_\+node\+\_\+update\+\_\+info()}}.
+Referenced by oomph\+::\+Macro\+Element\+Node\+Update\+Element$<$ ELEMENT $>$\+::rebuild\+\_\+from\+\_\+sons().
 
 
 

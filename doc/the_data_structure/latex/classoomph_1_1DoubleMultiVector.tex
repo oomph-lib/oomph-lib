@@ -33,7 +33,7 @@ Inheritance diagram for oomph\+::Double\+Multi\+Vector\+:\begin{figure}[H]
 \mbox{\hyperlink{classoomph_1_1DoubleMultiVector_af9eb30b7fa130f8d6211b8f63c962e68}{Double\+Multi\+Vector}} (const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{Double\+Multi\+Vector}} \&new\+\_\+vector)
 \begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1DoubleMultiVector_a551268cff3ee84866a102db6fb1fd6b0}{$\sim$\+Double\+Multi\+Vector}} ()
-\begin{DoxyCompactList}\small\item\em Destructor -\/ just calls this-\/\texorpdfstring{$>$}{>}\mbox{\hyperlink{classoomph_1_1DoubleMultiVector_a6e4ab708964cd1dce2d47ea2c0fc91df}{clear()}} to delete the distribution and data. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Destructor -\/ just calls this-\/$>$\mbox{\hyperlink{classoomph_1_1DoubleMultiVector_a6e4ab708964cd1dce2d47ea2c0fc91df}{clear()}} to delete the distribution and data. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1DoubleMultiVector_a7f48a5a0d0330bd6ee2f9b0ac1c5fa08}{operator=}} (const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{Double\+Multi\+Vector}} \&old\+\_\+vector)
 \begin{DoxyCompactList}\small\item\em assignment operator (deep copy) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1DoubleMultiVector_ae5d4d50a01bb6537701921e0d1a1cdff}{nvector}} () const
@@ -58,7 +58,7 @@ bool \mbox{\hyperlink{classoomph_1_1DoubleMultiVector_ad7ba248dc49b6bda0b49c28c6
 \item 
 void \mbox{\hyperlink{classoomph_1_1DoubleMultiVector_a1a7f714e738c77e1938304c5911e09bf}{redistribute}} (const \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} $\ast$const \&dist\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Allows are external data to be used by this vector. WARNING\+: The size of the external data must correspond to the \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} dist\+\_\+pt argument. \end{DoxyCompactList}\item 
-double \& \mbox{\hyperlink{classoomph_1_1DoubleMultiVector_a909469237e8d3cf140e782766d61b8ac}{operator()}} (int v, int \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+double \& \mbox{\hyperlink{classoomph_1_1DoubleMultiVector_a6c3d82fb4be996cc1da79c1477a4a8c8}{operator()}} (int v, int \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em \mbox{[}\mbox{]} access function to the (local) values of the v-\/th vector \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1DoubleMultiVector_ab06d289ff582170e19500861e8bd7e90}{operator==}} (const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{Double\+Multi\+Vector}} \&vec)
 \begin{DoxyCompactList}\small\item\em == operator \end{DoxyCompactList}\item 
@@ -68,17 +68,17 @@ void \mbox{\hyperlink{classoomph_1_1DoubleMultiVector_ab9d6d470f442410ee4df68e00
 \begin{DoxyCompactList}\small\item\em -\/= operator \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1DoubleMultiVector_a4edb706ef2c1e5861a7f7310b5059f03}{operator$\ast$=}} (const double \&scalar\+\_\+value)
 \begin{DoxyCompactList}\small\item\em Multiply by a scalar. \end{DoxyCompactList}\item 
-double $\ast$$\ast$ \mbox{\hyperlink{classoomph_1_1DoubleMultiVector_a4efcbd36f9205c8b3eeaf735f6e2ff4d}{values}} ()
+double $\ast$$\ast$ \mbox{\hyperlink{classoomph_1_1DoubleMultiVector_ab6e0f86c71dffe3678598d6c714d113c}{values}} ()
 \begin{DoxyCompactList}\small\item\em access function to the underlying values \end{DoxyCompactList}\item 
-double $\ast$$\ast$ \mbox{\hyperlink{classoomph_1_1DoubleMultiVector_ab319ef072bdf91377bdbb3d9ebca7e72}{values}} () const
+double $\ast$$\ast$ \mbox{\hyperlink{classoomph_1_1DoubleMultiVector_a36a7c886943d35cb36a498f57dbd1964}{values}} () const
 \begin{DoxyCompactList}\small\item\em access function to the underlying values (const version) \end{DoxyCompactList}\item 
-double $\ast$ \mbox{\hyperlink{classoomph_1_1DoubleMultiVector_ae707e90f0ccfb85fe9493c4e5c35e4ff}{values}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+double $\ast$ \mbox{\hyperlink{classoomph_1_1DoubleMultiVector_a1c6ed33851839407108fd33650d332cb}{values}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em access function to the i-\/th vector\textquotesingle{}s data \end{DoxyCompactList}\item 
-double $\ast$ \mbox{\hyperlink{classoomph_1_1DoubleMultiVector_a169073705b89c67d5d28ee267629a57f}{values}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+double $\ast$ \mbox{\hyperlink{classoomph_1_1DoubleMultiVector_a8590d3a32b972e5ef0a2f801cd6cd80b}{values}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em access function to the i-\/th vector\textquotesingle{}s data (const version) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \& \mbox{\hyperlink{classoomph_1_1DoubleMultiVector_afea423fd8f76d3831ae13e9d05ec21a3}{doublevector}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \& \mbox{\hyperlink{classoomph_1_1DoubleMultiVector_a9ec00020512cc85190a754332ed00cb7}{doublevector}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em access to the \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} representatoin \end{DoxyCompactList}\item 
-const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \& \mbox{\hyperlink{classoomph_1_1DoubleMultiVector_a09c71db2f4bfb57e64922d19e2f5c250}{doublevector}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \& \mbox{\hyperlink{classoomph_1_1DoubleMultiVector_acac28efef0b5f55c715d1893a5dca3d5}{doublevector}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em access to the \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} representation (const version) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1DoubleMultiVector_a0dbfe401ddb32b128f01fd3bb4755c4f}{output}} (std\+::ostream \&outfile) const
 \begin{DoxyCompactList}\small\item\em output the contents of the vector \end{DoxyCompactList}\item 
@@ -112,7 +112,7 @@ bool \mbox{\hyperlink{classoomph_1_1DoubleMultiVector_a86924834b6045e4824a6088e9
 \doxysubsection{Detailed Description}
 A multi vector in the mathematical sense, initially developed for linear algebra type applications. If MPI then this multi vector can be distributed -\/ its distribution is described by the \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} object at Distribution\+\_\+pt. \mbox{\hyperlink{classoomph_1_1Data}{Data}} is stored in a C-\/style pointer vector (double$\ast$) 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l00055}{55}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 55 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
@@ -129,7 +129,7 @@ Constructor for an uninitialized \mbox{\hyperlink{classoomph_1_1DoubleMultiVecto
 
 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l00059}{59}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 59 of file double\+\_\+multi\+\_\+vector.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_a1a24f514e2589235589de6edadf5c058}\label{classoomph_1_1DoubleMultiVector_a1a24f514e2589235589de6edadf5c058}} 
 \index{oomph::DoubleMultiVector@{oomph::DoubleMultiVector}!DoubleMultiVector@{DoubleMultiVector}}
@@ -143,11 +143,11 @@ Constructor. Assembles a \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{Doubl
 
 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l00068}{68}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 68 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{double__multi__vector_8h_source_l00281}{build()}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l00988}{setup\+\_\+doublevector\+\_\+representation()}}.
+References build(), and setup\+\_\+doublevector\+\_\+representation().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_a05fb9669ba09de5a9c375a5f27859200}\label{classoomph_1_1DoubleMultiVector_a05fb9669ba09de5a9c375a5f27859200}} 
 \index{oomph::DoubleMultiVector@{oomph::DoubleMultiVector}!DoubleMultiVector@{DoubleMultiVector}}
@@ -161,11 +161,11 @@ Constructor. Assembles a \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{Doubl
 
 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l00081}{81}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 81 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{double__multi__vector_8h_source_l00281}{build()}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l00988}{setup\+\_\+doublevector\+\_\+representation()}}.
+References build(), and setup\+\_\+doublevector\+\_\+representation().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_a31b889c87de57fa9a9e994e8e138b8c4}\label{classoomph_1_1DoubleMultiVector_a31b889c87de57fa9a9e994e8e138b8c4}} 
 \index{oomph::DoubleMultiVector@{oomph::DoubleMultiVector}!DoubleMultiVector@{DoubleMultiVector}}
@@ -179,11 +179,11 @@ Constructor. Build a multivector using the same distribution of the input vector
 
 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l00093}{93}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 93 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{double__multi__vector_8h_source_l00281}{build()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l00988}{setup\+\_\+doublevector\+\_\+representation()}}.
+References build(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), and setup\+\_\+doublevector\+\_\+representation().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_a38d29d498100228299b29f1dc46b4251}\label{classoomph_1_1DoubleMultiVector_a38d29d498100228299b29f1dc46b4251}} 
 \index{oomph::DoubleMultiVector@{oomph::DoubleMultiVector}!DoubleMultiVector@{DoubleMultiVector}}
@@ -197,11 +197,11 @@ Constructor that builds a multivector from selected columns of the input multive
 
 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l00105}{105}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 105 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{double__multi__vector_8h_source_l00281}{build()}}, \mbox{\hyperlink{matrices_8h_source_l03490}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::deep\+\_\+copy()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00988}{setup\+\_\+doublevector\+\_\+representation()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00217}{shallow\+\_\+build()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00668}{values()}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l01002}{Values}}.
+References build(), oomph\+::\+CRDouble\+Matrix\+Helpers\+::deep\+\_\+copy(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), i, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), setup\+\_\+doublevector\+\_\+representation(), shallow\+\_\+build(), values(), and Values.
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_a7dec1c0b074c260ee22207cdfed20eca}\label{classoomph_1_1DoubleMultiVector_a7dec1c0b074c260ee22207cdfed20eca}} 
 \index{oomph::DoubleMultiVector@{oomph::DoubleMultiVector}!DoubleMultiVector@{DoubleMultiVector}}
@@ -215,11 +215,11 @@ Constructor that builds a multivector from selected columns of the input multive
 
 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l00144}{144}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 144 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{double__multi__vector_8h_source_l00281}{build()}}, \mbox{\hyperlink{matrices_8h_source_l03490}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::deep\+\_\+copy()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00988}{setup\+\_\+doublevector\+\_\+representation()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00217}{shallow\+\_\+build()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00668}{values()}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l01002}{Values}}.
+References build(), oomph\+::\+CRDouble\+Matrix\+Helpers\+::deep\+\_\+copy(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), i, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), setup\+\_\+doublevector\+\_\+representation(), shallow\+\_\+build(), values(), and Values.
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_af9eb30b7fa130f8d6211b8f63c962e68}\label{classoomph_1_1DoubleMultiVector_af9eb30b7fa130f8d6211b8f63c962e68}} 
 \index{oomph::DoubleMultiVector@{oomph::DoubleMultiVector}!DoubleMultiVector@{DoubleMultiVector}}
@@ -233,11 +233,11 @@ Copy constructor.
 
 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l00184}{184}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 184 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{double__multi__vector_8h_source_l00281}{build()}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l00988}{setup\+\_\+doublevector\+\_\+representation()}}.
+References build(), and setup\+\_\+doublevector\+\_\+representation().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_a551268cff3ee84866a102db6fb1fd6b0}\label{classoomph_1_1DoubleMultiVector_a551268cff3ee84866a102db6fb1fd6b0}} 
 \index{oomph::DoubleMultiVector@{oomph::DoubleMultiVector}!````~DoubleMultiVector@{$\sim$DoubleMultiVector}}
@@ -247,15 +247,15 @@ References \mbox{\hyperlink{double__multi__vector_8h_source_l00281}{build()}}, a
 
 
 
-Destructor -\/ just calls this-\/\texorpdfstring{$>$}{>}\mbox{\hyperlink{classoomph_1_1DoubleMultiVector_a6e4ab708964cd1dce2d47ea2c0fc91df}{clear()}} to delete the distribution and data. 
+Destructor -\/ just calls this-\/$>$\mbox{\hyperlink{classoomph_1_1DoubleMultiVector_a6e4ab708964cd1dce2d47ea2c0fc91df}{clear()}} to delete the distribution and data. 
 
 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l00198}{198}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 198 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{double__multi__vector_8h_source_l00387}{clear()}}.
+References clear().
 
 
 
@@ -272,15 +272,15 @@ Provides a (deep) copy of the old\+\_\+vector.
 
 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l00281}{281}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 281 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{double__multi__vector_8h_source_l00281}{build()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00500}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{double__multi__vector_8h_source_l01009}{Internal\+\_\+values}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00211}{nvector()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l01005}{Nvector}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00668}{values()}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l01002}{Values}}.
+References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+built(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), i, Internal\+\_\+values, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), nvector(), Nvector, values(), and Values.
 
 
 
-Referenced by \mbox{\hyperlink{double__multi__vector_8h_source_l00281}{build()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00068}{Double\+Multi\+Vector()}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l00204}{operator=()}}.
+Referenced by build(), Double\+Multi\+Vector(), and operator=().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_a77d4b7b0d647f08995f6197843608fc2}\label{classoomph_1_1DoubleMultiVector_a77d4b7b0d647f08995f6197843608fc2}} 
 \index{oomph::DoubleMultiVector@{oomph::DoubleMultiVector}!build@{build}}
@@ -294,11 +294,11 @@ Assembles a \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{Double\+Multi\+Vec
 
 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l00313}{313}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 313 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{double__multi__vector_8h_source_l00281}{build()}}.
+References build().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_a38714b8e2c119a373b34eb8b616a1c09}\label{classoomph_1_1DoubleMultiVector_a38714b8e2c119a373b34eb8b616a1c09}} 
 \index{oomph::DoubleMultiVector@{oomph::DoubleMultiVector}!build@{build}}
@@ -312,11 +312,11 @@ Assembles a \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{Double\+Multi\+Vec
 
 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l00323}{323}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 323 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l01012}{Built}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00342}{oomph\+::\+Linear\+Algebra\+Distribution\+::built()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00387}{clear()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{double__multi__vector_8h_source_l01009}{Internal\+\_\+values}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l01005}{Nvector}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00668}{values()}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l01002}{Values}}.
+References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution(), Built, oomph\+::\+Linear\+Algebra\+Distribution\+::built(), clear(), i, Internal\+\_\+values, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), Nvector, values(), and Values.
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_ad7ba248dc49b6bda0b49c28c677a82e7}\label{classoomph_1_1DoubleMultiVector_ad7ba248dc49b6bda0b49c28c677a82e7}} 
 \index{oomph::DoubleMultiVector@{oomph::DoubleMultiVector}!built@{built}}
@@ -326,15 +326,15 @@ References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomp
 
 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l00413}{413}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 413 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{double__multi__vector_8h_source_l01012}{Built}}.
+References Built.
 
 
 
-Referenced by \mbox{\hyperlink{double__multi__vector_8h_source_l00809}{dot()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00889}{norm()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00549}{operator+=()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00596}{operator-\/=()}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l00514}{operator==()}}.
+Referenced by dot(), norm(), operator+=(), operator-\/=(), and operator==().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_a6e4ab708964cd1dce2d47ea2c0fc91df}\label{classoomph_1_1DoubleMultiVector_a6e4ab708964cd1dce2d47ea2c0fc91df}} 
 \index{oomph::DoubleMultiVector@{oomph::DoubleMultiVector}!clear@{clear}}
@@ -348,15 +348,15 @@ initialise the vector with coefficient from the vector v. Note\+: The vector v m
 
 wipes the \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l00387}{387}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 387 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{double__multi__vector_8h_source_l01012}{Built}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00522}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::clear\+\_\+distribution()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l01009}{Internal\+\_\+values}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l01002}{Values}}.
+References Built, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::clear\+\_\+distribution(), Internal\+\_\+values, and Values.
 
 
 
-Referenced by \mbox{\hyperlink{double__multi__vector_8h_source_l00323}{build()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00252}{shallow\+\_\+build()}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l00198}{$\sim$\+Double\+Multi\+Vector()}}.
+Referenced by build(), shallow\+\_\+build(), and $\sim$\+Double\+Multi\+Vector().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_a873f053a08f9d52537c5cb6077bfef7d}\label{classoomph_1_1DoubleMultiVector_a873f053a08f9d52537c5cb6077bfef7d}} 
 \index{oomph::DoubleMultiVector@{oomph::DoubleMultiVector}!dot@{dot}}
@@ -370,21 +370,21 @@ compute the 2 norm of this vector
 
 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l00809}{809}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 809 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{double__multi__vector_8h_source_l00413}{built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00211}{nvector()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00668}{values()}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l01002}{Values}}.
+References built(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), i, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), nvector(), values(), and Values.
 
 
 
-Referenced by \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00302}{Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Mv\+Dot()}}.
+Referenced by Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Mv\+Dot().
 
-\mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_afea423fd8f76d3831ae13e9d05ec21a3}\label{classoomph_1_1DoubleMultiVector_afea423fd8f76d3831ae13e9d05ec21a3}} 
+\mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_a9ec00020512cc85190a754332ed00cb7}\label{classoomph_1_1DoubleMultiVector_a9ec00020512cc85190a754332ed00cb7}} 
 \index{oomph::DoubleMultiVector@{oomph::DoubleMultiVector}!doublevector@{doublevector}}
 \index{doublevector@{doublevector}!oomph::DoubleMultiVector@{oomph::DoubleMultiVector}}
 \doxysubsubsection{\texorpdfstring{doublevector()}{doublevector()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \& oomph\+::\+Double\+Multi\+Vector\+::doublevector (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}}\& oomph\+::\+Double\+Multi\+Vector\+::doublevector (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -392,21 +392,21 @@ access to the \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} repr
 
 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l00692}{692}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 692 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l01015}{Internal\+\_\+doublevector}}.
+References i, and Internal\+\_\+doublevector.
 
 
 
-Referenced by \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00524}{oomph\+::\+Problem\+Based\+Shift\+Invert\+Operator\+::apply()}}.
+Referenced by oomph\+::\+Problem\+Based\+Shift\+Invert\+Operator\+::apply(), and oomph\+::\+Adjoint\+Problem\+Based\+Shift\+Invert\+Operator\+::apply().
 
-\mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_a09c71db2f4bfb57e64922d19e2f5c250}\label{classoomph_1_1DoubleMultiVector_a09c71db2f4bfb57e64922d19e2f5c250}} 
+\mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_acac28efef0b5f55c715d1893a5dca3d5}\label{classoomph_1_1DoubleMultiVector_acac28efef0b5f55c715d1893a5dca3d5}} 
 \index{oomph::DoubleMultiVector@{oomph::DoubleMultiVector}!doublevector@{doublevector}}
 \index{doublevector@{doublevector}!oomph::DoubleMultiVector@{oomph::DoubleMultiVector}}
 \doxysubsubsection{\texorpdfstring{doublevector()}{doublevector()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \& oomph\+::\+Double\+Multi\+Vector\+::doublevector (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}}\& oomph\+::\+Double\+Multi\+Vector\+::doublevector (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -414,11 +414,11 @@ access to the \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} repr
 
 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l00698}{698}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 698 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l01015}{Internal\+\_\+doublevector}}.
+References i, and Internal\+\_\+doublevector.
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_a69f75b786cd1b2b45922075f1fa39de7}\label{classoomph_1_1DoubleMultiVector_a69f75b786cd1b2b45922075f1fa39de7}} 
 \index{oomph::DoubleMultiVector@{oomph::DoubleMultiVector}!initialise@{initialise}}
@@ -432,15 +432,15 @@ initialise the whole vector with value v
 
 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l00364}{364}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 364 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{double__multi__vector_8h_source_l01012}{Built}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l01005}{Nvector}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l01002}{Values}}.
+References Built, i, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), Nvector, and Values.
 
 
 
-Referenced by \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00411}{Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Mv\+Init()}}.
+Referenced by Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Mv\+Init().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_a886c01ce65486490e3b3d38389182566}\label{classoomph_1_1DoubleMultiVector_a886c01ce65486490e3b3d38389182566}} 
 \index{oomph::DoubleMultiVector@{oomph::DoubleMultiVector}!norm@{norm}}
@@ -454,15 +454,15 @@ compute the 2 norm of this vector
 
 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l00889}{889}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 889 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{double__multi__vector_8h_source_l00413}{built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00211}{nvector()}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l01002}{Values}}.
+References built(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), i, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), nvector(), and Values.
 
 
 
-Referenced by \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00314}{Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Mv\+Norm()}}.
+Referenced by Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Mv\+Norm().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_ae5d4d50a01bb6537701921e0d1a1cdff}\label{classoomph_1_1DoubleMultiVector_ae5d4d50a01bb6537701921e0d1a1cdff}} 
 \index{oomph::DoubleMultiVector@{oomph::DoubleMultiVector}!nvector@{nvector}}
@@ -476,21 +476,21 @@ Return the number of vectors.
 
 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l00211}{211}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 211 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{double__multi__vector_8h_source_l01005}{Nvector}}.
+References Nvector.
 
 
 
-Referenced by \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00524}{oomph\+::\+Problem\+Based\+Shift\+Invert\+Operator\+::apply()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00281}{build()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00809}{dot()}}, \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00148}{Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Get\+Number\+Vecs()}}, \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00189}{Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Mv\+Add\+Mv()}}, \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00396}{Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Mv\+Random()}}, \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00216}{Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Mv\+Scale()}}, \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00154}{Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Mv\+Times\+Mat\+Add\+Mv()}}, \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00233}{Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Mv\+Trans\+Mv()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00889}{norm()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00642}{operator$\ast$=()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00549}{operator+=()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00596}{operator-\/=()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00514}{operator==()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00704}{output()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00988}{setup\+\_\+doublevector\+\_\+representation()}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l00217}{shallow\+\_\+build()}}.
+Referenced by oomph\+::\+Problem\+Based\+Shift\+Invert\+Operator\+::apply(), oomph\+::\+Adjoint\+Problem\+Based\+Shift\+Invert\+Operator\+::apply(), build(), dot(), Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Get\+Number\+Vecs(), Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Mv\+Add\+Mv(), Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Mv\+Random(), Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Mv\+Scale(), Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Mv\+Times\+Mat\+Add\+Mv(), Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Mv\+Trans\+Mv(), norm(), operator$\ast$=(), operator+=(), operator-\/=(), operator==(), output(), setup\+\_\+doublevector\+\_\+representation(), and shallow\+\_\+build().
 
-\mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_a909469237e8d3cf140e782766d61b8ac}\label{classoomph_1_1DoubleMultiVector_a909469237e8d3cf140e782766d61b8ac}} 
+\mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_a6c3d82fb4be996cc1da79c1477a4a8c8}\label{classoomph_1_1DoubleMultiVector_a6c3d82fb4be996cc1da79c1477a4a8c8}} 
 \index{oomph::DoubleMultiVector@{oomph::DoubleMultiVector}!operator()@{operator()}}
 \index{operator()@{operator()}!oomph::DoubleMultiVector@{oomph::DoubleMultiVector}}
 \doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
-{\footnotesize\ttfamily double \& oomph\+::\+Double\+Multi\+Vector\+::operator() (\begin{DoxyParamCaption}\item[{int}]{v,  }\item[{int}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double\& oomph\+::\+Double\+Multi\+Vector\+::operator() (\begin{DoxyParamCaption}\item[{int}]{v,  }\item[{int}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -498,11 +498,11 @@ Referenced by \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00524}{oomph\+
 
 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l00484}{484}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 484 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l01005}{Nvector}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l01002}{Values}}.
+References i, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), Nvector, and Values.
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_a4edb706ef2c1e5861a7f7310b5059f03}\label{classoomph_1_1DoubleMultiVector_a4edb706ef2c1e5861a7f7310b5059f03}} 
 \index{oomph::DoubleMultiVector@{oomph::DoubleMultiVector}!operator$\ast$=@{operator$\ast$=}}
@@ -516,11 +516,11 @@ Multiply by a scalar.
 
 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l00642}{642}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 642 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00500}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+built()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00211}{nvector()}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l01002}{Values}}.
+References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+built(), i, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), nvector(), and Values.
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_ac5dad0557a1a0a62a4155aa6809de948}\label{classoomph_1_1DoubleMultiVector_ac5dad0557a1a0a62a4155aa6809de948}} 
 \index{oomph::DoubleMultiVector@{oomph::DoubleMultiVector}!operator+=@{operator+=}}
@@ -534,11 +534,11 @@ References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00500}{oomp
 
 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l00549}{549}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 549 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{double__multi__vector_8h_source_l00413}{built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00211}{nvector()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00668}{values()}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l01002}{Values}}.
+References built(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), i, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), nvector(), values(), and Values.
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_ab9d6d470f442410ee4df68e008d5ec7f}\label{classoomph_1_1DoubleMultiVector_ab9d6d470f442410ee4df68e008d5ec7f}} 
 \index{oomph::DoubleMultiVector@{oomph::DoubleMultiVector}!operator-\/=@{operator-\/=}}
@@ -552,11 +552,11 @@ References \mbox{\hyperlink{double__multi__vector_8h_source_l00413}{built()}}, \
 
 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l00596}{596}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 596 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{double__multi__vector_8h_source_l00413}{built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00500}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00211}{nvector()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00668}{values()}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l01002}{Values}}.
+References built(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+built(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), i, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), nvector(), values(), and Values.
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_a7f48a5a0d0330bd6ee2f9b0ac1c5fa08}\label{classoomph_1_1DoubleMultiVector_a7f48a5a0d0330bd6ee2f9b0ac1c5fa08}} 
 \index{oomph::DoubleMultiVector@{oomph::DoubleMultiVector}!operator=@{operator=}}
@@ -570,11 +570,11 @@ assignment operator (deep copy)
 
 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l00204}{204}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 204 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{double__multi__vector_8h_source_l00281}{build()}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l00988}{setup\+\_\+doublevector\+\_\+representation()}}.
+References build(), and setup\+\_\+doublevector\+\_\+representation().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_ab06d289ff582170e19500861e8bd7e90}\label{classoomph_1_1DoubleMultiVector_ab06d289ff582170e19500861e8bd7e90}} 
 \index{oomph::DoubleMultiVector@{oomph::DoubleMultiVector}!operator==@{operator==}}
@@ -588,11 +588,11 @@ References \mbox{\hyperlink{double__multi__vector_8h_source_l00281}{build()}}, a
 
 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l00514}{514}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 514 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{double__multi__vector_8h_source_l00413}{built()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00211}{nvector()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00668}{values()}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l01002}{Values}}.
+References built(), i, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), nvector(), values(), and Values.
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_a0dbfe401ddb32b128f01fd3bb4755c4f}\label{classoomph_1_1DoubleMultiVector_a0dbfe401ddb32b128f01fd3bb4755c4f}} 
 \index{oomph::DoubleMultiVector@{oomph::DoubleMultiVector}!output@{output}}
@@ -606,15 +606,15 @@ output the contents of the vector
 
 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l00704}{704}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 704 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00335}{oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00481}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00211}{nvector()}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l01002}{Values}}.
+References oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row(), i, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), nvector(), and Values.
 
 
 
-Referenced by \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00425}{Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Mv\+Print()}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l00798}{output()}}.
+Referenced by Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Mv\+Print(), and output().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_ae465b1dd1100941eb39e7604cab5175d}\label{classoomph_1_1DoubleMultiVector_ae465b1dd1100941eb39e7604cab5175d}} 
 \index{oomph::DoubleMultiVector@{oomph::DoubleMultiVector}!output@{output}}
@@ -628,11 +628,11 @@ output the contents of the vector
 
 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l00798}{798}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 798 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{double__multi__vector_8h_source_l00704}{output()}}.
+References output().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_a1a7f714e738c77e1938304c5911e09bf}\label{classoomph_1_1DoubleMultiVector_a1a7f714e738c77e1938304c5911e09bf}} 
 \index{oomph::DoubleMultiVector@{oomph::DoubleMultiVector}!redistribute@{redistribute}}
@@ -658,11 +658,11 @@ The contents of the vector are redistributed to match the new distribution. In a
 \item External values are only deleted by this vector if delete\+\_\+external\+\_\+values = true. The contents of the vector are redistributed to match the new distribution. In a non-\/\+MPI rebuild this method works, but does nothing. {\bfseries{NOTE}} 1\+: The current distribution and the new distribution must have the same number of global rows. {\bfseries{NOTE}} 2\+: The current distribution and the new distribution must have the same Communicator. 
 \end{DoxyEnumerate}
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8cc_source_l00037}{37}} of file \mbox{\hyperlink{double__multi__vector_8cc_source}{double\+\_\+multi\+\_\+vector.\+cc}}.
+Definition at line 37 of file double\+\_\+multi\+\_\+vector.\+cc.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00335}{oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00329}{oomph\+::\+Linear\+Algebra\+Distribution\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00261}{oomph\+::\+Linear\+Algebra\+Distribution\+::first\+\_\+row()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00481}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{double__multi__vector_8h_source_l01009}{Internal\+\_\+values}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00186}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00193}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l01005}{Nvector}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00988}{setup\+\_\+doublevector\+\_\+representation()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00668}{values()}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l01002}{Values}}.
+References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution(), oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt(), oomph\+::\+Linear\+Algebra\+Distribution\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Linear\+Algebra\+Distribution\+::first\+\_\+row(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row(), i, Internal\+\_\+values, oomph\+::\+Linear\+Algebra\+Distribution\+::nrow(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), Nvector, setup\+\_\+doublevector\+\_\+representation(), values(), and Values.
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_a09b97b4d4c7d0945178e8bf190813cdd}\label{classoomph_1_1DoubleMultiVector_a09b97b4d4c7d0945178e8bf190813cdd}} 
 \index{oomph::DoubleMultiVector@{oomph::DoubleMultiVector}!setup\_doublevector\_representation@{setup\_doublevector\_representation}}
@@ -676,15 +676,15 @@ compute the A-\/norm using the matrix at matrix\+\_\+pt
 
 Setup the doublevector representation 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l00988}{988}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 988 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l01015}{Internal\+\_\+doublevector}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00211}{nvector()}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l00668}{values()}}.
+References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), Internal\+\_\+doublevector, nvector(), and values().
 
 
 
-Referenced by \mbox{\hyperlink{double__multi__vector_8h_source_l00068}{Double\+Multi\+Vector()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00204}{operator=()}}, and \mbox{\hyperlink{double__multi__vector_8cc_source_l00037}{redistribute()}}.
+Referenced by Double\+Multi\+Vector(), operator=(), and redistribute().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_a9a414941fb00967f670a1700bc87af7e}\label{classoomph_1_1DoubleMultiVector_a9a414941fb00967f670a1700bc87af7e}} 
 \index{oomph::DoubleMultiVector@{oomph::DoubleMultiVector}!shallow\_build@{shallow\_build}}
@@ -698,15 +698,15 @@ Provide a (shallow) copy of the old vector.
 
 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l00217}{217}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 217 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00500}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l01009}{Internal\+\_\+values}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00211}{nvector()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l01005}{Nvector}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00217}{shallow\+\_\+build()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00668}{values()}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l01002}{Values}}.
+References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+built(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), Internal\+\_\+values, nvector(), Nvector, values(), and Values.
 
 
 
-Referenced by \mbox{\hyperlink{double__multi__vector_8h_source_l00105}{Double\+Multi\+Vector()}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l00217}{shallow\+\_\+build()}}.
+Referenced by Double\+Multi\+Vector(), and shallow\+\_\+build().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_a2e870d0ff926823ec177b2c5bd1cdd0b}\label{classoomph_1_1DoubleMultiVector_a2e870d0ff926823ec177b2c5bd1cdd0b}} 
 \index{oomph::DoubleMultiVector@{oomph::DoubleMultiVector}!shallow\_build@{shallow\_build}}
@@ -720,11 +720,11 @@ Build the storage for pointers to vectors with a given distribution, but do not 
 
 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l00243}{243}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 243 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{double__multi__vector_8h_source_l00217}{shallow\+\_\+build()}}.
+References shallow\+\_\+build().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_acd1ee1d155838e203a95fc70cdc1552c}\label{classoomph_1_1DoubleMultiVector_acd1ee1d155838e203a95fc70cdc1552c}} 
 \index{oomph::DoubleMultiVector@{oomph::DoubleMultiVector}!shallow\_build@{shallow\_build}}
@@ -738,17 +738,17 @@ Build the storage for pointers to vectors with a given distribution, but do not 
 
 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l00252}{252}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 252 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l01012}{Built}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00342}{oomph\+::\+Linear\+Algebra\+Distribution\+::built()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00387}{clear()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l01009}{Internal\+\_\+values}}, \mbox{\hyperlink{double__multi__vector_8h_source_l01005}{Nvector}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l01002}{Values}}.
+References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution(), Built, oomph\+::\+Linear\+Algebra\+Distribution\+::built(), clear(), Internal\+\_\+values, Nvector, and Values.
 
-\mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_a4efcbd36f9205c8b3eeaf735f6e2ff4d}\label{classoomph_1_1DoubleMultiVector_a4efcbd36f9205c8b3eeaf735f6e2ff4d}} 
+\mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_ab6e0f86c71dffe3678598d6c714d113c}\label{classoomph_1_1DoubleMultiVector_ab6e0f86c71dffe3678598d6c714d113c}} 
 \index{oomph::DoubleMultiVector@{oomph::DoubleMultiVector}!values@{values}}
 \index{values@{values}!oomph::DoubleMultiVector@{oomph::DoubleMultiVector}}
 \doxysubsubsection{\texorpdfstring{values()}{values()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
-{\footnotesize\ttfamily double $\ast$$\ast$ oomph\+::\+Double\+Multi\+Vector\+::values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double$\ast$$\ast$ oomph\+::\+Double\+Multi\+Vector\+::values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -756,21 +756,21 @@ access function to the underlying values
 
 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l00668}{668}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 668 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{double__multi__vector_8h_source_l01002}{Values}}.
+References Values.
 
 
 
-Referenced by \mbox{\hyperlink{double__multi__vector_8h_source_l00281}{build()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00809}{dot()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00105}{Double\+Multi\+Vector()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00549}{operator+=()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00596}{operator-\/=()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00514}{operator==()}}, \mbox{\hyperlink{double__multi__vector_8cc_source_l00037}{redistribute()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00988}{setup\+\_\+doublevector\+\_\+representation()}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l00217}{shallow\+\_\+build()}}.
+Referenced by build(), dot(), Double\+Multi\+Vector(), operator+=(), operator-\/=(), operator==(), redistribute(), setup\+\_\+doublevector\+\_\+representation(), and shallow\+\_\+build().
 
-\mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_ab319ef072bdf91377bdbb3d9ebca7e72}\label{classoomph_1_1DoubleMultiVector_ab319ef072bdf91377bdbb3d9ebca7e72}} 
+\mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_a36a7c886943d35cb36a498f57dbd1964}\label{classoomph_1_1DoubleMultiVector_a36a7c886943d35cb36a498f57dbd1964}} 
 \index{oomph::DoubleMultiVector@{oomph::DoubleMultiVector}!values@{values}}
 \index{values@{values}!oomph::DoubleMultiVector@{oomph::DoubleMultiVector}}
 \doxysubsubsection{\texorpdfstring{values()}{values()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily double $\ast$$\ast$ oomph\+::\+Double\+Multi\+Vector\+::values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double$\ast$$\ast$ oomph\+::\+Double\+Multi\+Vector\+::values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -778,17 +778,17 @@ access function to the underlying values (const version)
 
 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l00674}{674}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 674 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{double__multi__vector_8h_source_l01002}{Values}}.
+References Values.
 
-\mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_ae707e90f0ccfb85fe9493c4e5c35e4ff}\label{classoomph_1_1DoubleMultiVector_ae707e90f0ccfb85fe9493c4e5c35e4ff}} 
+\mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_a1c6ed33851839407108fd33650d332cb}\label{classoomph_1_1DoubleMultiVector_a1c6ed33851839407108fd33650d332cb}} 
 \index{oomph::DoubleMultiVector@{oomph::DoubleMultiVector}!values@{values}}
 \index{values@{values}!oomph::DoubleMultiVector@{oomph::DoubleMultiVector}}
 \doxysubsubsection{\texorpdfstring{values()}{values()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
-{\footnotesize\ttfamily double $\ast$ oomph\+::\+Double\+Multi\+Vector\+::values (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double$\ast$ oomph\+::\+Double\+Multi\+Vector\+::values (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -796,17 +796,17 @@ access function to the i-\/th vector\textquotesingle{}s data
 
 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l00680}{680}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 680 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l01002}{Values}}.
+References i, and Values.
 
-\mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_a169073705b89c67d5d28ee267629a57f}\label{classoomph_1_1DoubleMultiVector_a169073705b89c67d5d28ee267629a57f}} 
+\mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_a8590d3a32b972e5ef0a2f801cd6cd80b}\label{classoomph_1_1DoubleMultiVector_a8590d3a32b972e5ef0a2f801cd6cd80b}} 
 \index{oomph::DoubleMultiVector@{oomph::DoubleMultiVector}!values@{values}}
 \index{values@{values}!oomph::DoubleMultiVector@{oomph::DoubleMultiVector}}
 \doxysubsubsection{\texorpdfstring{values()}{values()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
-{\footnotesize\ttfamily double $\ast$ oomph\+::\+Double\+Multi\+Vector\+::values (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double$\ast$ oomph\+::\+Double\+Multi\+Vector\+::values (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -814,11 +814,11 @@ access function to the i-\/th vector\textquotesingle{}s data (const version)
 
 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l00686}{686}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 686 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l01002}{Values}}.
+References i, and Values.
 
 
 
@@ -835,11 +835,11 @@ indicates that the vector has been built and is usable
 
 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l01012}{1012}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 1012 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{double__multi__vector_8h_source_l00323}{build()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00413}{built()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00387}{clear()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00364}{initialise()}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l00252}{shallow\+\_\+build()}}.
+Referenced by build(), built(), clear(), initialise(), and shallow\+\_\+build().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_a668c57e389403b0d0c8bafdfa3f66b82}\label{classoomph_1_1DoubleMultiVector_a668c57e389403b0d0c8bafdfa3f66b82}} 
 \index{oomph::DoubleMultiVector@{oomph::DoubleMultiVector}!Internal\_doublevector@{Internal\_doublevector}}
@@ -853,11 +853,11 @@ Need a vector of Double\+Vectors to interface with our linear solvers.
 
 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l01015}{1015}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 1015 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{double__multi__vector_8h_source_l00692}{doublevector()}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l00988}{setup\+\_\+doublevector\+\_\+representation()}}.
+Referenced by doublevector(), and setup\+\_\+doublevector\+\_\+representation().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_adf8fe4053c07e949f8e9cbea9e29e6e6}\label{classoomph_1_1DoubleMultiVector_adf8fe4053c07e949f8e9cbea9e29e6e6}} 
 \index{oomph::DoubleMultiVector@{oomph::DoubleMultiVector}!Internal\_values@{Internal\_values}}
@@ -871,11 +871,11 @@ Boolean flag to indicate whether the vector\textquotesingle{}s data (values\+\_\
 
 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l01009}{1009}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 1009 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{double__multi__vector_8h_source_l00281}{build()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00387}{clear()}}, \mbox{\hyperlink{double__multi__vector_8cc_source_l00037}{redistribute()}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l00217}{shallow\+\_\+build()}}.
+Referenced by build(), clear(), redistribute(), and shallow\+\_\+build().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_a21446924694c708c6a82cc908bf7846a}\label{classoomph_1_1DoubleMultiVector_a21446924694c708c6a82cc908bf7846a}} 
 \index{oomph::DoubleMultiVector@{oomph::DoubleMultiVector}!Nvector@{Nvector}}
@@ -889,11 +889,11 @@ The number of vectors.
 
 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l01005}{1005}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 1005 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{double__multi__vector_8h_source_l00281}{build()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00364}{initialise()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00211}{nvector()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00484}{operator()()}}, \mbox{\hyperlink{double__multi__vector_8cc_source_l00037}{redistribute()}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l00217}{shallow\+\_\+build()}}.
+Referenced by build(), initialise(), nvector(), operator()(), redistribute(), and shallow\+\_\+build().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMultiVector_a562d13abfae53ad5b3e3c6020b4da0e5}\label{classoomph_1_1DoubleMultiVector_a562d13abfae53ad5b3e3c6020b4da0e5}} 
 \index{oomph::DoubleMultiVector@{oomph::DoubleMultiVector}!Values@{Values}}
@@ -907,11 +907,11 @@ the local data, need a pointer to a pointer so that the individual vectors can b
 
 
 
-Definition at line \mbox{\hyperlink{double__multi__vector_8h_source_l01002}{1002}} of file \mbox{\hyperlink{double__multi__vector_8h_source}{double\+\_\+multi\+\_\+vector.\+h}}.
+Definition at line 1002 of file double\+\_\+multi\+\_\+vector.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{double__multi__vector_8h_source_l00281}{build()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00387}{clear()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00809}{dot()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00105}{Double\+Multi\+Vector()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00364}{initialise()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00889}{norm()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00484}{operator()()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00642}{operator$\ast$=()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00549}{operator+=()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00596}{operator-\/=()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00514}{operator==()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00704}{output()}}, \mbox{\hyperlink{double__multi__vector_8cc_source_l00037}{redistribute()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00217}{shallow\+\_\+build()}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l00668}{values()}}.
+Referenced by build(), clear(), dot(), Double\+Multi\+Vector(), initialise(), norm(), operator()(), operator$\ast$=(), operator+=(), operator-\/=(), operator==(), output(), redistribute(), shallow\+\_\+build(), and values().
 
 
 

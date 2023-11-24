@@ -26,7 +26,7 @@ double \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_a
 \begin{DoxyCompactList}\small\item\em Poisson\textquotesingle{}s ratio. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_a87798565f87daddd8b370ef4cb94f734}{update\+\_\+constitutive\+\_\+parameters}} (const double \&\mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_a6cc0a05cf8555f8a233894f65c38b555}{nu}}, const double \&E=1.\+0)
 \begin{DoxyCompactList}\small\item\em Update parameters\+: Specify values of the Poisson\textquotesingle{}s ratio and (optionally) Young\textquotesingle{}s modulus (interpreted as the ratio of the actual Young\textquotesingle{}s modulus to the Young\textquotesingle{}s modulus (or other reference stiffness) used to non-\/dimensionalise stresses and tractions in the governing equations). \end{DoxyCompactList}\item 
-std\+::complex$<$ double $>$ \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_aee557f8f75af142cc59094cd3ab40a9c}{independent\+\_\+component}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+std\+::complex$<$ double $>$ \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_a650332deea93cd5838fc614ac253ec1c}{independent\+\_\+component}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Overload the independent coefficient function. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
@@ -51,7 +51,7 @@ static const unsigned \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicIsotropicEla
 \doxysubsection{Detailed Description}
 An isotropic elasticity tensor defined in terms of Young\textquotesingle{}s modulus and Poisson\textquotesingle{}s ratio. The elasticity tensor is assumed to be non-\/dimensionalised on some reference value for Young\textquotesingle{}s modulus so the value provided to the constructor (if any) is to be interpreted as the ratio of the actual Young\textquotesingle{}s modulus to the Young\textquotesingle{}s modulus used to non-\/dimensionalise the stresses/tractions in the governing equations. 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00148}{148}} of file \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h}}.
+Definition at line 148 of file pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h.
 
 
 
@@ -68,11 +68,11 @@ Constructor. Passing in the values of the Poisson\textquotesingle{}s ratio and Y
 
 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00167}{167}} of file \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h}}.
+Definition at line 167 of file pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h.
 
 
 
-References \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00152}{C}}, \mbox{\hyperlink{quadtree_8h_source_l00061}{oomph\+::\+Quad\+Tree\+Names\+::E}}, \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00194}{nu()}}, and \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00223}{set\+\_\+lame\+\_\+coefficients()}}.
+References C, oomph\+::\+Quad\+Tree\+Names\+::E, nu(), and set\+\_\+lame\+\_\+coefficients().
 
 \mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_a60b7dc4f2a2b71f5fdb4af8026134fbd}\label{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_a60b7dc4f2a2b71f5fdb4af8026134fbd}} 
 \index{oomph::PMLTimeHarmonicIsotropicElasticityTensor@{oomph::PMLTimeHarmonicIsotropicElasticityTensor}!PMLTimeHarmonicIsotropicElasticityTensor@{PMLTimeHarmonicIsotropicElasticityTensor}}
@@ -86,20 +86,20 @@ Constructor. Passing in the value of the Poisson\textquotesingle{}s ratio. Stres
 
 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00180}{180}} of file \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h}}.
+Definition at line 180 of file pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h.
 
 
 
-References \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00152}{C}}, \mbox{\hyperlink{quadtree_8h_source_l00061}{oomph\+::\+Quad\+Tree\+Names\+::E}}, \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00194}{nu()}}, and \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00223}{set\+\_\+lame\+\_\+coefficients()}}.
+References C, oomph\+::\+Quad\+Tree\+Names\+::E, nu(), and set\+\_\+lame\+\_\+coefficients().
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_aee557f8f75af142cc59094cd3ab40a9c}\label{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_aee557f8f75af142cc59094cd3ab40a9c}} 
+\mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_a650332deea93cd5838fc614ac253ec1c}\label{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_a650332deea93cd5838fc614ac253ec1c}} 
 \index{oomph::PMLTimeHarmonicIsotropicElasticityTensor@{oomph::PMLTimeHarmonicIsotropicElasticityTensor}!independent\_component@{independent\_component}}
 \index{independent\_component@{independent\_component}!oomph::PMLTimeHarmonicIsotropicElasticityTensor@{oomph::PMLTimeHarmonicIsotropicElasticityTensor}}
 \doxysubsubsection{\texorpdfstring{independent\_component()}{independent\_component()}}
-{\footnotesize\ttfamily std\+::complex$<$ double $>$ oomph\+::\+PMLTime\+Harmonic\+Isotropic\+Elasticity\+Tensor\+::independent\+\_\+component (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily std\+::complex$<$double$>$ oomph\+::\+PMLTime\+Harmonic\+Isotropic\+Elasticity\+Tensor\+::independent\+\_\+component (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -107,15 +107,15 @@ Overload the independent coefficient function.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicElasticityTensor_a9d07ac639fb398e15295e73bb87152b1}{oomph\+::\+PMLTime\+Harmonic\+Elasticity\+Tensor}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicElasticityTensor_a80876070e0c45dd00bbc21fe9c527a21}{oomph\+::\+PMLTime\+Harmonic\+Elasticity\+Tensor}}.
 
 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00215}{215}} of file \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h}}.
+Definition at line 215 of file pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h.
 
 
 
-References \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00152}{C}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00156}{Static\+Index}}.
+References C, i, and Static\+Index.
 
 \mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_a6cc0a05cf8555f8a233894f65c38b555}\label{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_a6cc0a05cf8555f8a233894f65c38b555}} 
 \index{oomph::PMLTimeHarmonicIsotropicElasticityTensor@{oomph::PMLTimeHarmonicIsotropicElasticityTensor}!nu@{nu}}
@@ -129,15 +129,15 @@ Poisson\textquotesingle{}s ratio.
 
 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00194}{194}} of file \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h}}.
+Definition at line 194 of file pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h.
 
 
 
-References \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00159}{Nu}}.
+References Nu.
 
 
 
-Referenced by \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00194}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::nu()}}, \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00167}{PMLTime\+Harmonic\+Isotropic\+Elasticity\+Tensor()}}, and \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00204}{update\+\_\+constitutive\+\_\+parameters()}}.
+Referenced by oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::nu(), PMLTime\+Harmonic\+Isotropic\+Elasticity\+Tensor(), and update\+\_\+constitutive\+\_\+parameters().
 
 \mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_ae0b7edb4584cac4bfdf2cf9b74486a23}\label{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_ae0b7edb4584cac4bfdf2cf9b74486a23}} 
 \index{oomph::PMLTimeHarmonicIsotropicElasticityTensor@{oomph::PMLTimeHarmonicIsotropicElasticityTensor}!set\_lame\_coefficients@{set\_lame\_coefficients}}
@@ -147,15 +147,15 @@ Referenced by \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements
 
 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00223}{223}} of file \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h}}.
+Definition at line 223 of file pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h.
 
 
 
-References \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00152}{C}}.
+References C.
 
 
 
-Referenced by \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00167}{PMLTime\+Harmonic\+Isotropic\+Elasticity\+Tensor()}}, and \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00204}{update\+\_\+constitutive\+\_\+parameters()}}.
+Referenced by PMLTime\+Harmonic\+Isotropic\+Elasticity\+Tensor(), and update\+\_\+constitutive\+\_\+parameters().
 
 \mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_a87798565f87daddd8b370ef4cb94f734}\label{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_a87798565f87daddd8b370ef4cb94f734}} 
 \index{oomph::PMLTimeHarmonicIsotropicElasticityTensor@{oomph::PMLTimeHarmonicIsotropicElasticityTensor}!update\_constitutive\_parameters@{update\_constitutive\_parameters}}
@@ -169,11 +169,11 @@ Update parameters\+: Specify values of the Poisson\textquotesingle{}s ratio and 
 
 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00204}{204}} of file \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h}}.
+Definition at line 204 of file pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h.
 
 
 
-References \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00152}{C}}, \mbox{\hyperlink{quadtree_8h_source_l00061}{oomph\+::\+Quad\+Tree\+Names\+::E}}, \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00194}{nu()}}, and \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00223}{set\+\_\+lame\+\_\+coefficients()}}.
+References C, oomph\+::\+Quad\+Tree\+Names\+::E, nu(), and set\+\_\+lame\+\_\+coefficients().
 
 
 
@@ -190,11 +190,11 @@ Storage for the independent components of the elasticity tensor.
 
 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00152}{152}} of file \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h}}.
+Definition at line 152 of file pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00215}{independent\+\_\+component()}}, \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00167}{PMLTime\+Harmonic\+Isotropic\+Elasticity\+Tensor()}}, \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00223}{set\+\_\+lame\+\_\+coefficients()}}, and \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00204}{update\+\_\+constitutive\+\_\+parameters()}}.
+Referenced by independent\+\_\+component(), PMLTime\+Harmonic\+Isotropic\+Elasticity\+Tensor(), set\+\_\+lame\+\_\+coefficients(), and update\+\_\+constitutive\+\_\+parameters().
 
 \mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_a6515ab800426cca35c724f8d7f96e681}\label{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_a6515ab800426cca35c724f8d7f96e681}} 
 \index{oomph::PMLTimeHarmonicIsotropicElasticityTensor@{oomph::PMLTimeHarmonicIsotropicElasticityTensor}!Nu@{Nu}}
@@ -208,11 +208,11 @@ Poisson\textquotesingle{}s ratio.
 
 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00159}{159}} of file \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h}}.
+Definition at line 159 of file pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00194}{nu()}}.
+Referenced by nu().
 
 \mbox{\Hypertarget{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_ac1c39fcce5b79af772e89e86def6f623}\label{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_ac1c39fcce5b79af772e89e86def6f623}} 
 \index{oomph::PMLTimeHarmonicIsotropicElasticityTensor@{oomph::PMLTimeHarmonicIsotropicElasticityTensor}!StaticIndex@{StaticIndex}}
@@ -232,11 +232,11 @@ Translation scheme between the 21 independent components of the general elastici
 
 Translation scheme for the isotropic elasticity tensor. 
 
-Definition at line \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00156}{156}} of file \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h}}.
+Definition at line 156 of file pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00215}{independent\+\_\+component()}}.
+Referenced by independent\+\_\+component().
 
 
 

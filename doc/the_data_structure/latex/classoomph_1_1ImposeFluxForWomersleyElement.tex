@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1ImposeFluxForWomersleyElement}{}\doxysection{oomph\+::Impose\+Flux\+For\+Womersley\+Element\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1ImposeFluxForWomersleyElement}{}\doxysection{oomph\+::Impose\+Flux\+For\+Womersley\+Element$<$ DIM $>$ Class Template Reference}
 \label{classoomph_1_1ImposeFluxForWomersleyElement}\index{oomph::ImposeFluxForWomersleyElement$<$ DIM $>$@{oomph::ImposeFluxForWomersleyElement$<$ DIM $>$}}
 
 
@@ -9,7 +9,7 @@
 
 {\ttfamily \#include $<$womersley\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Impose\+Flux\+For\+Womersley\+Element\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Impose\+Flux\+For\+Womersley\+Element$<$ DIM $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{classoomph_1_1ImposeFluxForWomersleyElement}
@@ -20,7 +20,7 @@ Inheritance diagram for oomph\+::Impose\+Flux\+For\+Womersley\+Element\texorpdfs
 \item 
 \mbox{\hyperlink{classoomph_1_1ImposeFluxForWomersleyElement_ac7fc5594b9f38a3587f0cd798ff3dfb2}{Impose\+Flux\+For\+Womersley\+Element}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$womersley\+\_\+mesh\+\_\+pt, double $\ast$prescribed\+\_\+flux\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to mesh that contains the Womersley elements whose volume flux is controlled, and pointer to double that contains the instantaneous value of the prescribed flux. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1ImposeFluxForWomersleyElement_ad97201dc27a953ef24290fde0aa57310}{pressure\+\_\+gradient\+\_\+data\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1ImposeFluxForWomersleyElement_a77a13b7dad46eaf222164be9a62b0269}{pressure\+\_\+gradient\+\_\+data\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Read-\/only access to the single-\/valued \mbox{\hyperlink{classoomph_1_1Data}{Data}} item that stores the pressure gradient (to be determined via the flux control) \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1ImposeFluxForWomersleyElement_a9e3ca0a6477d9d4bb89d726f4e0f07b1}{total\+\_\+volume\+\_\+flux}} ()
 \begin{DoxyCompactList}\small\item\em Get volume flux through all Womersley elements. \end{DoxyCompactList}\item 
@@ -43,11 +43,12 @@ double $\ast$ \mbox{\hyperlink{classoomph_1_1ImposeFluxForWomersleyElement_a40cd
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$unsigned DIM$>$\newline
 class oomph\+::\+Impose\+Flux\+For\+Womersley\+Element$<$ DIM $>$}
+
 //////////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////////// 
 
 Element to impose volume flux through collection of Womersley elements, in exchange for treating the pressure gradient as an unknown. The pressure gradient is created (as a single-\/valued \mbox{\hyperlink{classoomph_1_1Data}{Data}} item) in the constructor for this element which also takes a pointer to the \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} containing the Womersley elements whose total flux is being controlled. While doing this we tell them that their pressure gradient is now an unknown and must be treated as external \mbox{\hyperlink{classoomph_1_1Data}{Data}}. 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00503}{503}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 503 of file womersley\+\_\+elements.\+h.
 
 
 
@@ -65,11 +66,11 @@ Constructor\+: Pass pointer to mesh that contains the Womersley elements whose v
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00510}{510}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 510 of file womersley\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l00062}{oomph\+::\+Generalised\+Element\+::add\+\_\+internal\+\_\+data()}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00448}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{womersley__elements_8h_source_l00613}{oomph\+::\+Impose\+Flux\+For\+Womersley\+Element$<$ DIM $>$\+::\+Pressure\+\_\+gradient\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{womersley__elements_8h_source_l00478}{oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::set\+\_\+pressure\+\_\+gradient\+\_\+and\+\_\+add\+\_\+as\+\_\+external\+\_\+data()}}, \mbox{\hyperlink{nodes_8h_source_l00271}{oomph\+::\+Data\+::set\+\_\+value()}}, and \mbox{\hyperlink{womersley__elements_8h_source_l00609}{oomph\+::\+Impose\+Flux\+For\+Womersley\+Element$<$ DIM $>$\+::\+Womersley\+\_\+mesh\+\_\+pt}}.
+References oomph\+::\+Generalised\+Element\+::add\+\_\+internal\+\_\+data(), e, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Impose\+Flux\+For\+Womersley\+Element$<$ DIM $>$\+::\+Pressure\+\_\+gradient\+\_\+data\+\_\+pt, oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::set\+\_\+pressure\+\_\+gradient\+\_\+and\+\_\+add\+\_\+as\+\_\+external\+\_\+data(), oomph\+::\+Data\+::set\+\_\+value(), and oomph\+::\+Impose\+Flux\+For\+Womersley\+Element$<$ DIM $>$\+::\+Womersley\+\_\+mesh\+\_\+pt.
 
 
 
@@ -91,11 +92,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_ab915bdad7e
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00592}{592}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 592 of file womersley\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{womersley__elements_8h_source_l00575}{oomph\+::\+Impose\+Flux\+For\+Womersley\+Element$<$ DIM $>$\+::get\+\_\+residuals()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}.
+References oomph\+::\+Impose\+Flux\+For\+Womersley\+Element$<$ DIM $>$\+::get\+\_\+residuals(), i, and oomph\+::\+Generalised\+Element\+::ndof().
 
 \mbox{\Hypertarget{classoomph_1_1ImposeFluxForWomersleyElement_a6109bae3e5eb55b567e7ea85fca10884}\label{classoomph_1_1ImposeFluxForWomersleyElement_a6109bae3e5eb55b567e7ea85fca10884}} 
 \index{oomph::ImposeFluxForWomersleyElement$<$ DIM $>$@{oomph::ImposeFluxForWomersleyElement$<$ DIM $>$}!get\_residuals@{get\_residuals}}
@@ -114,22 +115,22 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a53d348ab71
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00575}{575}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 575 of file womersley\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l00267}{oomph\+::\+Generalised\+Element\+::internal\+\_\+local\+\_\+eqn()}}, and \mbox{\hyperlink{womersley__elements_8h_source_l00553}{oomph\+::\+Impose\+Flux\+For\+Womersley\+Element$<$ DIM $>$\+::total\+\_\+volume\+\_\+flux()}}.
+References oomph\+::\+Generalised\+Element\+::internal\+\_\+local\+\_\+eqn(), and oomph\+::\+Impose\+Flux\+For\+Womersley\+Element$<$ DIM $>$\+::total\+\_\+volume\+\_\+flux().
 
 
 
-Referenced by \mbox{\hyperlink{womersley__elements_8h_source_l00592}{oomph\+::\+Impose\+Flux\+For\+Womersley\+Element$<$ DIM $>$\+::get\+\_\+jacobian()}}.
+Referenced by oomph\+::\+Impose\+Flux\+For\+Womersley\+Element$<$ DIM $>$\+::get\+\_\+jacobian().
 
-\mbox{\Hypertarget{classoomph_1_1ImposeFluxForWomersleyElement_ad97201dc27a953ef24290fde0aa57310}\label{classoomph_1_1ImposeFluxForWomersleyElement_ad97201dc27a953ef24290fde0aa57310}} 
+\mbox{\Hypertarget{classoomph_1_1ImposeFluxForWomersleyElement_a77a13b7dad46eaf222164be9a62b0269}\label{classoomph_1_1ImposeFluxForWomersleyElement_a77a13b7dad46eaf222164be9a62b0269}} 
 \index{oomph::ImposeFluxForWomersleyElement$<$ DIM $>$@{oomph::ImposeFluxForWomersleyElement$<$ DIM $>$}!pressure\_gradient\_data\_pt@{pressure\_gradient\_data\_pt}}
 \index{pressure\_gradient\_data\_pt@{pressure\_gradient\_data\_pt}!oomph::ImposeFluxForWomersleyElement$<$ DIM $>$@{oomph::ImposeFluxForWomersleyElement$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{pressure\_gradient\_data\_pt()}{pressure\_gradient\_data\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
-\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$ \mbox{\hyperlink{classoomph_1_1ImposeFluxForWomersleyElement}{oomph\+::\+Impose\+Flux\+For\+Womersley\+Element}}$<$ DIM $>$\+::pressure\+\_\+gradient\+\_\+data\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$ \mbox{\hyperlink{classoomph_1_1ImposeFluxForWomersleyElement}{oomph\+::\+Impose\+Flux\+For\+Womersley\+Element}}$<$ DIM $>$\+::pressure\+\_\+gradient\+\_\+data\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -137,11 +138,11 @@ Read-\/only access to the single-\/valued \mbox{\hyperlink{classoomph_1_1Data}{D
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00546}{546}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 546 of file womersley\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{womersley__elements_8h_source_l00613}{oomph\+::\+Impose\+Flux\+For\+Womersley\+Element$<$ DIM $>$\+::\+Pressure\+\_\+gradient\+\_\+data\+\_\+pt}}.
+References oomph\+::\+Impose\+Flux\+For\+Womersley\+Element$<$ DIM $>$\+::\+Pressure\+\_\+gradient\+\_\+data\+\_\+pt.
 
 \mbox{\Hypertarget{classoomph_1_1ImposeFluxForWomersleyElement_a9e3ca0a6477d9d4bb89d726f4e0f07b1}\label{classoomph_1_1ImposeFluxForWomersleyElement_a9e3ca0a6477d9d4bb89d726f4e0f07b1}} 
 \index{oomph::ImposeFluxForWomersleyElement$<$ DIM $>$@{oomph::ImposeFluxForWomersleyElement$<$ DIM $>$}!total\_volume\_flux@{total\_volume\_flux}}
@@ -156,15 +157,15 @@ Get volume flux through all Womersley elements.
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00553}{553}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 553 of file womersley\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00448}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{womersley__elements_8cc_source_l00219}{oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::get\+\_\+volume\+\_\+flux()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, and \mbox{\hyperlink{womersley__elements_8h_source_l00609}{oomph\+::\+Impose\+Flux\+For\+Womersley\+Element$<$ DIM $>$\+::\+Womersley\+\_\+mesh\+\_\+pt}}.
+References e, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::get\+\_\+volume\+\_\+flux(), oomph\+::\+Mesh\+::nelement(), and oomph\+::\+Impose\+Flux\+For\+Womersley\+Element$<$ DIM $>$\+::\+Womersley\+\_\+mesh\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{womersley__elements_8h_source_l00575}{oomph\+::\+Impose\+Flux\+For\+Womersley\+Element$<$ DIM $>$\+::get\+\_\+residuals()}}.
+Referenced by oomph\+::\+Impose\+Flux\+For\+Womersley\+Element$<$ DIM $>$\+::get\+\_\+residuals().
 
 
 
@@ -182,7 +183,7 @@ Pointer to current value of prescribed flux.
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00616}{616}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 616 of file womersley\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ImposeFluxForWomersleyElement_a4c8079994c71ce43a36645c2b2dc4580}\label{classoomph_1_1ImposeFluxForWomersleyElement_a4c8079994c71ce43a36645c2b2dc4580}} 
 \index{oomph::ImposeFluxForWomersleyElement$<$ DIM $>$@{oomph::ImposeFluxForWomersleyElement$<$ DIM $>$}!Pressure\_gradient\_data\_pt@{Pressure\_gradient\_data\_pt}}
@@ -197,11 +198,11 @@ Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00616}{616}} 
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00613}{613}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 613 of file womersley\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{womersley__elements_8h_source_l00510}{oomph\+::\+Impose\+Flux\+For\+Womersley\+Element$<$ DIM $>$\+::\+Impose\+Flux\+For\+Womersley\+Element()}}, and \mbox{\hyperlink{womersley__elements_8h_source_l00546}{oomph\+::\+Impose\+Flux\+For\+Womersley\+Element$<$ DIM $>$\+::pressure\+\_\+gradient\+\_\+data\+\_\+pt()}}.
+Referenced by oomph\+::\+Impose\+Flux\+For\+Womersley\+Element$<$ DIM $>$\+::\+Impose\+Flux\+For\+Womersley\+Element(), and oomph\+::\+Impose\+Flux\+For\+Womersley\+Element$<$ DIM $>$\+::pressure\+\_\+gradient\+\_\+data\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1ImposeFluxForWomersleyElement_aa6b7bb4b9d527576ca8ee16918d0cbb4}\label{classoomph_1_1ImposeFluxForWomersleyElement_aa6b7bb4b9d527576ca8ee16918d0cbb4}} 
 \index{oomph::ImposeFluxForWomersleyElement$<$ DIM $>$@{oomph::ImposeFluxForWomersleyElement$<$ DIM $>$}!Womersley\_mesh\_pt@{Womersley\_mesh\_pt}}
@@ -216,11 +217,11 @@ Pointer to mesh that contains the Womersley elements.
 
 
 
-Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00609}{609}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+Definition at line 609 of file womersley\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{womersley__elements_8h_source_l00510}{oomph\+::\+Impose\+Flux\+For\+Womersley\+Element$<$ DIM $>$\+::\+Impose\+Flux\+For\+Womersley\+Element()}}, and \mbox{\hyperlink{womersley__elements_8h_source_l00553}{oomph\+::\+Impose\+Flux\+For\+Womersley\+Element$<$ DIM $>$\+::total\+\_\+volume\+\_\+flux()}}.
+Referenced by oomph\+::\+Impose\+Flux\+For\+Womersley\+Element$<$ DIM $>$\+::\+Impose\+Flux\+For\+Womersley\+Element(), and oomph\+::\+Impose\+Flux\+For\+Womersley\+Element$<$ DIM $>$\+::total\+\_\+volume\+\_\+flux().
 
 
 

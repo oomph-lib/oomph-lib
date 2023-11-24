@@ -18,7 +18,7 @@ Inheritance diagram for oomph\+::Lagrange\+Enforced\+Flow\+Preconditioner\+:\beg
 \doxysubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
-typedef \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} $\ast$($\ast$ \mbox{\hyperlink{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a296664999ac8c6af2f60312d19abb4a7}{Subsidiary\+Preconditioner\+Fct\+Pt}}) ()
+typedef \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} $\ast$($\ast$ \mbox{\hyperlink{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a080854ab4a9c4d1f8abca5121433b1d9}{Subsidiary\+Preconditioner\+Fct\+Pt}}) ()
 \begin{DoxyCompactList}\small\item\em This preconditioner includes the option to use subsidiary operators other than \mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner}{Super\+LUPreconditioner}} for this problem. This is the typedef of a function that should return an instance of a subsidiary preconditioning operator. This preconditioner is responsible for the destruction of the subsidiary preconditioners. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -35,7 +35,7 @@ void \mbox{\hyperlink{classoomph_1_1LagrangeEnforcedFlowPreconditioner_aadcbdb5a
 \begin{DoxyCompactList}\small\item\em Setup method for the \mbox{\hyperlink{classoomph_1_1LagrangeEnforcedFlowPreconditioner}{Lagrange\+Enforced\+Flow\+Preconditioner}}. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a519940fc2faee5faac00b80004f3edea}{preconditioner\+\_\+solve}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&r, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&z)
 \begin{DoxyCompactList}\small\item\em Apply the preconditioner. r is the residual (rhs), z will contain the solution. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a84cbce901e94c3ea53a92638ea928bf3}{set\+\_\+meshes}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$ $>$ \&\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a295ad63173fcd9cfff7cbbdc6c518e9a}{mesh\+\_\+pt}})
+void \mbox{\hyperlink{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a84cbce901e94c3ea53a92638ea928bf3}{set\+\_\+meshes}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$ $>$ \&\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a3c0e92cb77c3e3179007fe9fd99b6428}{mesh\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Set the meshes, the first mesh in the vector must be the bulk mesh. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a9a0db8be07c39ebb30f02e4461658efd}{use\+\_\+norm\+\_\+f\+\_\+for\+\_\+scaling\+\_\+sigma}} ()
 \begin{DoxyCompactList}\small\item\em Set flag to use the infinite norm of the Navier-\/\+Stokes F matrix as the scaling sigma. This is the default behaviour. Note\+: the norm of the NS F matrix positive, however, we actually use the negative of the norm. This is because the underlying Navier-\/\+Stokes Jacobian is multiplied by -\/1. Ask Andrew/\+Matthias for more detail. \end{DoxyCompactList}\item 
@@ -130,18 +130,18 @@ bulk mesh 0 mesh 1 \mbox{[}0 1 2 3\mbox{]} \mbox{[}4 5 6 7 8 \mbox{]} \mbox{[}9 
 
 Via the appropriate mapping, the block\+\_\+setup(...) function will re-\/order the DOF types into the following block types\+:
 
-0 1 2 3 4 5 6 7 8 9 10 11 12 \texorpdfstring{$<$}{<}-\/ Block type 0 4 9 1 5 10 2 6 11 3 7 8 12 \texorpdfstring{$<$}{<}-\/ DOF type \mbox{[}u up ut v vp vt w wp wt \mbox{]} \mbox{[}p\mbox{]} \mbox{[}Lp1 Lp2 Lt1\mbox{]} 
+0 1 2 3 4 5 6 7 8 9 10 11 12 $<$-\/ Block type 0 4 9 1 5 10 2 6 11 3 7 8 12 $<$-\/ DOF type \mbox{[}u up ut v vp vt w wp wt \mbox{]} \mbox{[}p\mbox{]} \mbox{[}Lp1 Lp2 Lt1\mbox{]} 
 
-Definition at line \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00166}{166}} of file \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source}{lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h}}.
+Definition at line 166 of file lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h.
 
 
 
 \doxysubsection{Member Typedef Documentation}
-\mbox{\Hypertarget{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a296664999ac8c6af2f60312d19abb4a7}\label{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a296664999ac8c6af2f60312d19abb4a7}} 
+\mbox{\Hypertarget{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a080854ab4a9c4d1f8abca5121433b1d9}\label{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a080854ab4a9c4d1f8abca5121433b1d9}} 
 \index{oomph::LagrangeEnforcedFlowPreconditioner@{oomph::LagrangeEnforcedFlowPreconditioner}!SubsidiaryPreconditionerFctPt@{SubsidiaryPreconditionerFctPt}}
 \index{SubsidiaryPreconditionerFctPt@{SubsidiaryPreconditionerFctPt}!oomph::LagrangeEnforcedFlowPreconditioner@{oomph::LagrangeEnforcedFlowPreconditioner}}
 \doxysubsubsection{\texorpdfstring{SubsidiaryPreconditionerFctPt}{SubsidiaryPreconditionerFctPt}}
-{\footnotesize\ttfamily typedef \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} $\ast$($\ast$ oomph\+::\+Lagrange\+Enforced\+Flow\+Preconditioner\+::\+Subsidiary\+Preconditioner\+Fct\+Pt) ()}
+{\footnotesize\ttfamily typedef \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}}$\ast$($\ast$ oomph\+::\+Lagrange\+Enforced\+Flow\+Preconditioner\+::\+Subsidiary\+Preconditioner\+Fct\+Pt) ()}
 
 
 
@@ -149,7 +149,7 @@ This preconditioner includes the option to use subsidiary operators other than \
 
 
 
-Definition at line \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00175}{175}} of file \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source}{lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h}}.
+Definition at line 175 of file lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h.
 
 
 
@@ -166,11 +166,11 @@ Constructor -\/ initialise variables.
 
 
 
-Definition at line \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00178}{178}} of file \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source}{lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h}}.
+Definition at line 178 of file lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00331}{My\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00335}{My\+\_\+ndof\+\_\+types\+\_\+in\+\_\+mesh}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00339}{My\+\_\+nmesh}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00345}{N\+\_\+fluid\+\_\+doftypes}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00342}{N\+\_\+lagrange\+\_\+doftypes}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00348}{N\+\_\+velocity\+\_\+doftypes}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00323}{Navier\+\_\+stokes\+\_\+preconditioner\+\_\+is\+\_\+block\+\_\+preconditioner}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00319}{Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00306}{Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00309}{Scaling\+\_\+sigma}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00313}{Use\+\_\+norm\+\_\+f\+\_\+for\+\_\+scaling\+\_\+sigma}}, and \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00326}{Using\+\_\+superlu\+\_\+ns\+\_\+preconditioner}}.
+References My\+\_\+mesh\+\_\+pt, My\+\_\+ndof\+\_\+types\+\_\+in\+\_\+mesh, My\+\_\+nmesh, N\+\_\+fluid\+\_\+doftypes, N\+\_\+lagrange\+\_\+doftypes, N\+\_\+velocity\+\_\+doftypes, Navier\+\_\+stokes\+\_\+preconditioner\+\_\+is\+\_\+block\+\_\+preconditioner, Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt, Preconditioner\+\_\+has\+\_\+been\+\_\+setup, Scaling\+\_\+sigma, Use\+\_\+norm\+\_\+f\+\_\+for\+\_\+scaling\+\_\+sigma, and Using\+\_\+superlu\+\_\+ns\+\_\+preconditioner.
 
 \mbox{\Hypertarget{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a9958f85a43c683c5a97b449faa35ca74}\label{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a9958f85a43c683c5a97b449faa35ca74}} 
 \index{oomph::LagrangeEnforcedFlowPreconditioner@{oomph::LagrangeEnforcedFlowPreconditioner}!````~LagrangeEnforcedFlowPreconditioner@{$\sim$LagrangeEnforcedFlowPreconditioner}}
@@ -184,11 +184,11 @@ Destructor.
 
 
 
-Definition at line \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00208}{208}} of file \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source}{lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h}}.
+Definition at line 208 of file lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l01250}{clean\+\_\+up\+\_\+memory()}}.
+References clean\+\_\+up\+\_\+memory().
 
 \mbox{\Hypertarget{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a42c105fbbbacfa736650bfb9ebb36db4}\label{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a42c105fbbbacfa736650bfb9ebb36db4}} 
 \index{oomph::LagrangeEnforcedFlowPreconditioner@{oomph::LagrangeEnforcedFlowPreconditioner}!LagrangeEnforcedFlowPreconditioner@{LagrangeEnforcedFlowPreconditioner}}
@@ -219,15 +219,15 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Preconditioner_a46c31c416829be
 
 
 
-Definition at line \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l01250}{1250}} of file \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source}{lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+cc}}.
+Definition at line 1250 of file lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+cc.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l02159}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00319}{Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00306}{Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}, and \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00326}{Using\+\_\+superlu\+\_\+ns\+\_\+preconditioner}}.
+References oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base(), Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt, Preconditioner\+\_\+has\+\_\+been\+\_\+setup, and Using\+\_\+superlu\+\_\+ns\+\_\+preconditioner.
 
 
 
-Referenced by \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00507}{setup()}}, and \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00208}{$\sim$\+Lagrange\+Enforced\+Flow\+Preconditioner()}}.
+Referenced by setup(), and $\sim$\+Lagrange\+Enforced\+Flow\+Preconditioner().
 
 \mbox{\Hypertarget{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a9e4241546e226e835631c1d1ddb6da0f}\label{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a9e4241546e226e835631c1d1ddb6da0f}} 
 \index{oomph::LagrangeEnforcedFlowPreconditioner@{oomph::LagrangeEnforcedFlowPreconditioner}!operator=@{operator=}}
@@ -257,11 +257,11 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34
 
 
 
-Definition at line \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00310}{310}} of file \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source}{lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+cc}}.
+Definition at line 310 of file lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+cc.
 
 
 
-References \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00342}{oomph\+::\+Linear\+Algebra\+Distribution\+::built()}}, \mbox{\hyperlink{double__vector_8h_source_l00142}{oomph\+::\+Double\+Vector\+::clear()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04186}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l02608}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+concatenated\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00316}{Inv\+\_\+w\+\_\+diag\+\_\+values}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00345}{N\+\_\+fluid\+\_\+doftypes}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00342}{N\+\_\+lagrange\+\_\+doftypes}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00319}{Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00306}{Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}, \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34884bb64ec8}{oomph\+::\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04489}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::return\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l02774}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::return\+\_\+concatenated\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00326}{Using\+\_\+superlu\+\_\+ns\+\_\+preconditioner}}, and \mbox{\hyperlink{double__vector_8h_source_l00254}{oomph\+::\+Double\+Vector\+::values\+\_\+pt()}}.
+References oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Double\+Vector\+::built(), oomph\+::\+Linear\+Algebra\+Distribution\+::built(), oomph\+::\+Double\+Vector\+::clear(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+block\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+concatenated\+\_\+block\+\_\+vector(), i, Inv\+\_\+w\+\_\+diag\+\_\+values, N\+\_\+fluid\+\_\+doftypes, N\+\_\+lagrange\+\_\+doftypes, Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), Preconditioner\+\_\+has\+\_\+been\+\_\+setup, oomph\+::\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::return\+\_\+block\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::return\+\_\+concatenated\+\_\+block\+\_\+vector(), Using\+\_\+superlu\+\_\+ns\+\_\+preconditioner, and oomph\+::\+Double\+Vector\+::values\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a63ef6de02fbf4486ca99d2a560ff47a4}\label{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a63ef6de02fbf4486ca99d2a560ff47a4}} 
 \index{oomph::LagrangeEnforcedFlowPreconditioner@{oomph::LagrangeEnforcedFlowPreconditioner}!scaling\_sigma@{scaling\_sigma}}
@@ -275,15 +275,15 @@ Read (const) function to get the scaling sigma.
 
 
 
-Definition at line \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00277}{277}} of file \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source}{lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h}}.
+Definition at line 277 of file lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00309}{Scaling\+\_\+sigma}}.
+References Scaling\+\_\+sigma.
 
 
 
-Referenced by \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00246}{set\+\_\+scaling\+\_\+sigma()}}.
+Referenced by set\+\_\+scaling\+\_\+sigma().
 
 \mbox{\Hypertarget{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a84cbce901e94c3ea53a92638ea928bf3}\label{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a84cbce901e94c3ea53a92638ea928bf3}} 
 \index{oomph::LagrangeEnforcedFlowPreconditioner@{oomph::LagrangeEnforcedFlowPreconditioner}!set\_meshes@{set\_meshes}}
@@ -297,11 +297,11 @@ Set the meshes, the first mesh in the vector must be the bulk mesh.
 
 
 
-Definition at line \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00419}{419}} of file \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source}{lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+cc}}.
+Definition at line 419 of file lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+cc.
 
 
 
-References \mbox{\hyperlink{mesh_8cc_source_l08917}{oomph\+::\+Mesh\+::elemental\+\_\+dimension()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01782}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00331}{My\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00339}{My\+\_\+nmesh}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01816}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::nmesh()}}, \mbox{\hyperlink{mesh_8cc_source_l09055}{oomph\+::\+Mesh\+::nodal\+\_\+dimension()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02866}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::set\+\_\+mesh()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02851}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::set\+\_\+nmesh()}}.
+References oomph\+::\+Mesh\+::elemental\+\_\+dimension(), oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::mesh\+\_\+pt(), My\+\_\+mesh\+\_\+pt, My\+\_\+nmesh, oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::nmesh(), oomph\+::\+Mesh\+::nodal\+\_\+dimension(), oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::set\+\_\+mesh(), and oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::set\+\_\+nmesh().
 
 \mbox{\Hypertarget{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a3512f2a0c6b03977590591a81846c50d}\label{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a3512f2a0c6b03977590591a81846c50d}} 
 \index{oomph::LagrangeEnforcedFlowPreconditioner@{oomph::LagrangeEnforcedFlowPreconditioner}!set\_navier\_stokes\_preconditioner@{set\_navier\_stokes\_preconditioner}}
@@ -315,11 +315,11 @@ Set a new Navier-\/\+Stokes matrix preconditioner (inexact solver)
 
 Function to set a new momentum matrix preconditioner (inexact solver) 
 
-Definition at line \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l01214}{1214}} of file \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source}{lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+cc}}.
+Definition at line 1214 of file lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+cc.
 
 
 
-References \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00319}{Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt}}, and \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00326}{Using\+\_\+superlu\+\_\+ns\+\_\+preconditioner}}.
+References Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt, and Using\+\_\+superlu\+\_\+ns\+\_\+preconditioner.
 
 \mbox{\Hypertarget{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a14023f7ee6150f3b2ebdb0eab534242d}\label{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a14023f7ee6150f3b2ebdb0eab534242d}} 
 \index{oomph::LagrangeEnforcedFlowPreconditioner@{oomph::LagrangeEnforcedFlowPreconditioner}!set\_scaling\_sigma@{set\_scaling\_sigma}}
@@ -333,11 +333,11 @@ Access function to set the scaling sigma. Note\+: this also sets the flag to use
 
 
 
-Definition at line \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00246}{246}} of file \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source}{lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h}}.
+Definition at line 246 of file lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00277}{scaling\+\_\+sigma()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00309}{Scaling\+\_\+sigma}}, and \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00313}{Use\+\_\+norm\+\_\+f\+\_\+for\+\_\+scaling\+\_\+sigma}}.
+References scaling\+\_\+sigma(), Scaling\+\_\+sigma, and Use\+\_\+norm\+\_\+f\+\_\+for\+\_\+scaling\+\_\+sigma.
 
 \mbox{\Hypertarget{classoomph_1_1LagrangeEnforcedFlowPreconditioner_ad523330041a714da26bc4931995023b8}\label{classoomph_1_1LagrangeEnforcedFlowPreconditioner_ad523330041a714da26bc4931995023b8}} 
 \index{oomph::LagrangeEnforcedFlowPreconditioner@{oomph::LagrangeEnforcedFlowPreconditioner}!set\_superlu\_for\_navier\_stokes\_preconditioner@{set\_superlu\_for\_navier\_stokes\_preconditioner}}
@@ -351,11 +351,11 @@ Set Navier-\/\+Stokes matrix preconditioner (inexact solver) to Super\+LU.
 
 
 
-Definition at line \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00289}{289}} of file \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source}{lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h}}.
+Definition at line 289 of file lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00319}{Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt}}, and \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00326}{Using\+\_\+superlu\+\_\+ns\+\_\+preconditioner}}.
+References Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt, and Using\+\_\+superlu\+\_\+ns\+\_\+preconditioner.
 
 \mbox{\Hypertarget{classoomph_1_1LagrangeEnforcedFlowPreconditioner_aadcbdb5af92d7889c956098cb86dee87}\label{classoomph_1_1LagrangeEnforcedFlowPreconditioner_aadcbdb5af92d7889c956098cb86dee87}} 
 \index{oomph::LagrangeEnforcedFlowPreconditioner@{oomph::LagrangeEnforcedFlowPreconditioner}!setup@{setup}}
@@ -373,11 +373,11 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb1
 
 
 
-Definition at line \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00507}{507}} of file \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source}{lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+cc}}.
+Definition at line 507 of file lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+cc.
 
 
 
-References \mbox{\hyperlink{block__preconditioner_8h_source_l03277}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::\+Block\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l02483}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::block\+\_\+setup()}}, \mbox{\hyperlink{matrices_8cc_source_l01672}{oomph\+::\+CRDouble\+Matrix\+::build()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l01250}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{matrices_8cc_source_l03465}{oomph\+::\+CRDouble\+Matrix\+::diagonal\+\_\+entries()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00673}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+block()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01134}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+concatenated\+\_\+block()}}, \mbox{\hyperlink{matrices_8cc_source_l03731}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::inf\+\_\+norm()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00316}{Inv\+\_\+w\+\_\+diag\+\_\+values}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02061}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::is\+\_\+subsidiary\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00520}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::matrix\+\_\+pt()}}, \mbox{\hyperlink{matrices_8cc_source_l01782}{oomph\+::\+CRDouble\+Matrix\+::multiply()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00331}{My\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00335}{My\+\_\+ndof\+\_\+types\+\_\+in\+\_\+mesh}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00339}{My\+\_\+nmesh}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00345}{N\+\_\+fluid\+\_\+doftypes}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00342}{N\+\_\+lagrange\+\_\+doftypes}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00348}{N\+\_\+velocity\+\_\+doftypes}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00323}{Navier\+\_\+stokes\+\_\+preconditioner\+\_\+is\+\_\+block\+\_\+preconditioner}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00319}{Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{matrices_8h_source_l00491}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::ncol()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01694}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::ndof\+\_\+types()}}, \mbox{\hyperlink{matrices_8h_source_l01096}{oomph\+::\+CRDouble\+Matrix\+::nnz()}}, \mbox{\hyperlink{matrices_8h_source_l00485}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::nrow()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00306}{Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00309}{Scaling\+\_\+sigma}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02911}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::set\+\_\+replacement\+\_\+dof\+\_\+block()}}, \mbox{\hyperlink{preconditioner_8h_source_l00094}{oomph\+::\+Preconditioner\+::setup()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l02376}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::turn\+\_\+into\+\_\+subsidiary\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00313}{Use\+\_\+norm\+\_\+f\+\_\+for\+\_\+scaling\+\_\+sigma}}, and \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00326}{Using\+\_\+superlu\+\_\+ns\+\_\+preconditioner}}.
+References oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::\+Block\+\_\+distribution\+\_\+pt, oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::block\+\_\+setup(), oomph\+::\+CRDouble\+Matrix\+::build(), clean\+\_\+up\+\_\+memory(), oomph\+::\+CRDouble\+Matrix\+::diagonal\+\_\+entries(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+block(), oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+concatenated\+\_\+block(), oomph\+::\+CRDouble\+Matrix\+Helpers\+::inf\+\_\+norm(), Inv\+\_\+w\+\_\+diag\+\_\+values, oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::is\+\_\+subsidiary\+\_\+block\+\_\+preconditioner(), oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::matrix\+\_\+pt(), oomph\+::\+CRDouble\+Matrix\+::multiply(), My\+\_\+mesh\+\_\+pt, My\+\_\+ndof\+\_\+types\+\_\+in\+\_\+mesh, My\+\_\+nmesh, N\+\_\+fluid\+\_\+doftypes, N\+\_\+lagrange\+\_\+doftypes, N\+\_\+velocity\+\_\+doftypes, Navier\+\_\+stokes\+\_\+preconditioner\+\_\+is\+\_\+block\+\_\+preconditioner, Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt, oomph\+::\+Dense\+Matrix$<$ T $>$\+::ncol(), oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::ndof\+\_\+types(), oomph\+::\+CRDouble\+Matrix\+::nnz(), oomph\+::\+Dense\+Matrix$<$ T $>$\+::nrow(), Preconditioner\+\_\+has\+\_\+been\+\_\+setup, Scaling\+\_\+sigma, oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::set\+\_\+replacement\+\_\+dof\+\_\+block(), oomph\+::\+Preconditioner\+::setup(), oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::turn\+\_\+into\+\_\+subsidiary\+\_\+block\+\_\+preconditioner(), Use\+\_\+norm\+\_\+f\+\_\+for\+\_\+scaling\+\_\+sigma, and Using\+\_\+superlu\+\_\+ns\+\_\+preconditioner.
 
 \mbox{\Hypertarget{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a9a0db8be07c39ebb30f02e4461658efd}\label{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a9a0db8be07c39ebb30f02e4461658efd}} 
 \index{oomph::LagrangeEnforcedFlowPreconditioner@{oomph::LagrangeEnforcedFlowPreconditioner}!use\_norm\_f\_for\_scaling\_sigma@{use\_norm\_f\_for\_scaling\_sigma}}
@@ -391,11 +391,11 @@ Set flag to use the infinite norm of the Navier-\/\+Stokes F matrix as the scali
 
 
 
-Definition at line \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00236}{236}} of file \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source}{lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h}}.
+Definition at line 236 of file lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h.
 
 
 
-References \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00313}{Use\+\_\+norm\+\_\+f\+\_\+for\+\_\+scaling\+\_\+sigma}}.
+References Use\+\_\+norm\+\_\+f\+\_\+for\+\_\+scaling\+\_\+sigma.
 
 
 
@@ -412,11 +412,11 @@ Inverse W values.
 
 
 
-Definition at line \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00316}{316}} of file \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source}{lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h}}.
+Definition at line 316 of file lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00310}{preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00507}{setup()}}.
+Referenced by preconditioner\+\_\+solve(), and setup().
 
 \mbox{\Hypertarget{classoomph_1_1LagrangeEnforcedFlowPreconditioner_ae9f26444d532bd55864f3d38bf369108}\label{classoomph_1_1LagrangeEnforcedFlowPreconditioner_ae9f26444d532bd55864f3d38bf369108}} 
 \index{oomph::LagrangeEnforcedFlowPreconditioner@{oomph::LagrangeEnforcedFlowPreconditioner}!My\_mesh\_pt@{My\_mesh\_pt}}
@@ -430,11 +430,11 @@ Storage for the meshes. In our implementation, the first mesh must always be the
 
 
 
-Definition at line \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00331}{331}} of file \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source}{lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h}}.
+Definition at line 331 of file lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00178}{Lagrange\+Enforced\+Flow\+Preconditioner()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00419}{set\+\_\+meshes()}}, and \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00507}{setup()}}.
+Referenced by Lagrange\+Enforced\+Flow\+Preconditioner(), set\+\_\+meshes(), and setup().
 
 \mbox{\Hypertarget{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a6bbfdf74c3cdc461831f03858f9cb1b7}\label{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a6bbfdf74c3cdc461831f03858f9cb1b7}} 
 \index{oomph::LagrangeEnforcedFlowPreconditioner@{oomph::LagrangeEnforcedFlowPreconditioner}!My\_ndof\_types\_in\_mesh@{My\_ndof\_types\_in\_mesh}}
@@ -448,11 +448,11 @@ The number of DOF types in each mesh. This is used create various lookup lists.
 
 
 
-Definition at line \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00335}{335}} of file \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source}{lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h}}.
+Definition at line 335 of file lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00178}{Lagrange\+Enforced\+Flow\+Preconditioner()}}, and \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00507}{setup()}}.
+Referenced by Lagrange\+Enforced\+Flow\+Preconditioner(), and setup().
 
 \mbox{\Hypertarget{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a862f54ac1db0001ebcd205b1ecc8ad08}\label{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a862f54ac1db0001ebcd205b1ecc8ad08}} 
 \index{oomph::LagrangeEnforcedFlowPreconditioner@{oomph::LagrangeEnforcedFlowPreconditioner}!My\_nmesh@{My\_nmesh}}
@@ -466,11 +466,11 @@ The number of meshes. This is used to create various lookup lists.
 
 
 
-Definition at line \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00339}{339}} of file \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source}{lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h}}.
+Definition at line 339 of file lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00178}{Lagrange\+Enforced\+Flow\+Preconditioner()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00419}{set\+\_\+meshes()}}, and \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00507}{setup()}}.
+Referenced by Lagrange\+Enforced\+Flow\+Preconditioner(), set\+\_\+meshes(), and setup().
 
 \mbox{\Hypertarget{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a1c3f53129425f029bf918f33430c0635}\label{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a1c3f53129425f029bf918f33430c0635}} 
 \index{oomph::LagrangeEnforcedFlowPreconditioner@{oomph::LagrangeEnforcedFlowPreconditioner}!N\_fluid\_doftypes@{N\_fluid\_doftypes}}
@@ -484,11 +484,11 @@ The number of fluid DOF types (including pressure).
 
 
 
-Definition at line \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00345}{345}} of file \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source}{lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h}}.
+Definition at line 345 of file lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00178}{Lagrange\+Enforced\+Flow\+Preconditioner()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00310}{preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00507}{setup()}}.
+Referenced by Lagrange\+Enforced\+Flow\+Preconditioner(), preconditioner\+\_\+solve(), and setup().
 
 \mbox{\Hypertarget{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a0d62cc72563ff5a2feae895d91ebca1e}\label{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a0d62cc72563ff5a2feae895d91ebca1e}} 
 \index{oomph::LagrangeEnforcedFlowPreconditioner@{oomph::LagrangeEnforcedFlowPreconditioner}!N\_lagrange\_doftypes@{N\_lagrange\_doftypes}}
@@ -502,11 +502,11 @@ The number of Lagrange multiplier DOF types.
 
 
 
-Definition at line \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00342}{342}} of file \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source}{lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h}}.
+Definition at line 342 of file lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00178}{Lagrange\+Enforced\+Flow\+Preconditioner()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00310}{preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00507}{setup()}}.
+Referenced by Lagrange\+Enforced\+Flow\+Preconditioner(), preconditioner\+\_\+solve(), and setup().
 
 \mbox{\Hypertarget{classoomph_1_1LagrangeEnforcedFlowPreconditioner_afdf4577b51473f146c55cb6016b11797}\label{classoomph_1_1LagrangeEnforcedFlowPreconditioner_afdf4577b51473f146c55cb6016b11797}} 
 \index{oomph::LagrangeEnforcedFlowPreconditioner@{oomph::LagrangeEnforcedFlowPreconditioner}!N\_velocity\_doftypes@{N\_velocity\_doftypes}}
@@ -520,11 +520,11 @@ The number of velocity DOF types.
 
 
 
-Definition at line \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00348}{348}} of file \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source}{lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h}}.
+Definition at line 348 of file lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00178}{Lagrange\+Enforced\+Flow\+Preconditioner()}}, and \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00507}{setup()}}.
+Referenced by Lagrange\+Enforced\+Flow\+Preconditioner(), and setup().
 
 \mbox{\Hypertarget{classoomph_1_1LagrangeEnforcedFlowPreconditioner_abd83bbbc271df1e5d5f5a96054b0742a}\label{classoomph_1_1LagrangeEnforcedFlowPreconditioner_abd83bbbc271df1e5d5f5a96054b0742a}} 
 \index{oomph::LagrangeEnforcedFlowPreconditioner@{oomph::LagrangeEnforcedFlowPreconditioner}!Navier\_stokes\_preconditioner\_is\_block\_preconditioner@{Navier\_stokes\_preconditioner\_is\_block\_preconditioner}}
@@ -538,11 +538,11 @@ Flag to indicate if the preconditioner for the Navier-\/\+Stokes block is a bloc
 
 
 
-Definition at line \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00323}{323}} of file \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source}{lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h}}.
+Definition at line 323 of file lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00178}{Lagrange\+Enforced\+Flow\+Preconditioner()}}, and \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00507}{setup()}}.
+Referenced by Lagrange\+Enforced\+Flow\+Preconditioner(), and setup().
 
 \mbox{\Hypertarget{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a03e1316c85ca538a3b6912154e57fd42}\label{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a03e1316c85ca538a3b6912154e57fd42}} 
 \index{oomph::LagrangeEnforcedFlowPreconditioner@{oomph::LagrangeEnforcedFlowPreconditioner}!Navier\_stokes\_preconditioner\_pt@{Navier\_stokes\_preconditioner\_pt}}
@@ -556,11 +556,11 @@ Pointer to the \textquotesingle{}preconditioner\textquotesingle{} for the Navier
 
 
 
-Definition at line \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00319}{319}} of file \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source}{lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h}}.
+Definition at line 319 of file lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l01250}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00178}{Lagrange\+Enforced\+Flow\+Preconditioner()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00310}{preconditioner\+\_\+solve()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l01214}{set\+\_\+navier\+\_\+stokes\+\_\+preconditioner()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00289}{set\+\_\+superlu\+\_\+for\+\_\+navier\+\_\+stokes\+\_\+preconditioner()}}, and \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00507}{setup()}}.
+Referenced by clean\+\_\+up\+\_\+memory(), Lagrange\+Enforced\+Flow\+Preconditioner(), preconditioner\+\_\+solve(), set\+\_\+navier\+\_\+stokes\+\_\+preconditioner(), set\+\_\+superlu\+\_\+for\+\_\+navier\+\_\+stokes\+\_\+preconditioner(), and setup().
 
 \mbox{\Hypertarget{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a4a886ec6c0ec223b5f24e27efcc9584b}\label{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a4a886ec6c0ec223b5f24e27efcc9584b}} 
 \index{oomph::LagrangeEnforcedFlowPreconditioner@{oomph::LagrangeEnforcedFlowPreconditioner}!Preconditioner\_has\_been\_setup@{Preconditioner\_has\_been\_setup}}
@@ -574,11 +574,11 @@ Control flag is true if the preconditioner has been setup (used so we can wipe t
 
 
 
-Definition at line \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00306}{306}} of file \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source}{lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h}}.
+Definition at line 306 of file lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l01250}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00178}{Lagrange\+Enforced\+Flow\+Preconditioner()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00310}{preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00507}{setup()}}.
+Referenced by clean\+\_\+up\+\_\+memory(), Lagrange\+Enforced\+Flow\+Preconditioner(), preconditioner\+\_\+solve(), and setup().
 
 \mbox{\Hypertarget{classoomph_1_1LagrangeEnforcedFlowPreconditioner_aa555c464abd2ac23045a52336123c0a2}\label{classoomph_1_1LagrangeEnforcedFlowPreconditioner_aa555c464abd2ac23045a52336123c0a2}} 
 \index{oomph::LagrangeEnforcedFlowPreconditioner@{oomph::LagrangeEnforcedFlowPreconditioner}!Scaling\_sigma@{Scaling\_sigma}}
@@ -592,11 +592,11 @@ Scaling for the augmentation\+: Scaling\+\_\+sigma$\ast$(LL$^\wedge$T)
 
 
 
-Definition at line \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00309}{309}} of file \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source}{lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h}}.
+Definition at line 309 of file lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00178}{Lagrange\+Enforced\+Flow\+Preconditioner()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00277}{scaling\+\_\+sigma()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00246}{set\+\_\+scaling\+\_\+sigma()}}, and \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00507}{setup()}}.
+Referenced by Lagrange\+Enforced\+Flow\+Preconditioner(), scaling\+\_\+sigma(), set\+\_\+scaling\+\_\+sigma(), and setup().
 
 \mbox{\Hypertarget{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a4da1aa7fd0b1a4f9d8eef074f4d1ed81}\label{classoomph_1_1LagrangeEnforcedFlowPreconditioner_a4da1aa7fd0b1a4f9d8eef074f4d1ed81}} 
 \index{oomph::LagrangeEnforcedFlowPreconditioner@{oomph::LagrangeEnforcedFlowPreconditioner}!Use\_norm\_f\_for\_scaling\_sigma@{Use\_norm\_f\_for\_scaling\_sigma}}
@@ -610,11 +610,11 @@ Flag to indicate if we want to use the infinite norm of the Navier-\/\+Stokes mo
 
 
 
-Definition at line \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00313}{313}} of file \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source}{lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h}}.
+Definition at line 313 of file lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00178}{Lagrange\+Enforced\+Flow\+Preconditioner()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00246}{set\+\_\+scaling\+\_\+sigma()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00507}{setup()}}, and \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00236}{use\+\_\+norm\+\_\+f\+\_\+for\+\_\+scaling\+\_\+sigma()}}.
+Referenced by Lagrange\+Enforced\+Flow\+Preconditioner(), set\+\_\+scaling\+\_\+sigma(), setup(), and use\+\_\+norm\+\_\+f\+\_\+for\+\_\+scaling\+\_\+sigma().
 
 \mbox{\Hypertarget{classoomph_1_1LagrangeEnforcedFlowPreconditioner_ab447b9d1830e1b470e090efa13201844}\label{classoomph_1_1LagrangeEnforcedFlowPreconditioner_ab447b9d1830e1b470e090efa13201844}} 
 \index{oomph::LagrangeEnforcedFlowPreconditioner@{oomph::LagrangeEnforcedFlowPreconditioner}!Using\_superlu\_ns\_preconditioner@{Using\_superlu\_ns\_preconditioner}}
@@ -628,11 +628,11 @@ Flag to indicate whether the default NS preconditioner is used.
 
 
 
-Definition at line \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00326}{326}} of file \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source}{lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h}}.
+Definition at line 326 of file lagrange\+\_\+enforced\+\_\+flow\+\_\+preconditioner.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l01250}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00178}{Lagrange\+Enforced\+Flow\+Preconditioner()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00310}{preconditioner\+\_\+solve()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l01214}{set\+\_\+navier\+\_\+stokes\+\_\+preconditioner()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8h_source_l00289}{set\+\_\+superlu\+\_\+for\+\_\+navier\+\_\+stokes\+\_\+preconditioner()}}, and \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00507}{setup()}}.
+Referenced by clean\+\_\+up\+\_\+memory(), Lagrange\+Enforced\+Flow\+Preconditioner(), preconditioner\+\_\+solve(), set\+\_\+navier\+\_\+stokes\+\_\+preconditioner(), set\+\_\+superlu\+\_\+for\+\_\+navier\+\_\+stokes\+\_\+preconditioner(), and setup().
 
 
 

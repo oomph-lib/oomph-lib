@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1ProjectablePMLHelmholtzElement}{}\doxysection{oomph\+::Projectable\+PMLHelmholtz\+Element\texorpdfstring{$<$}{<} HELMHOLTZ\+\_\+\+ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1ProjectablePMLHelmholtzElement}{}\doxysection{oomph\+::Projectable\+PMLHelmholtz\+Element$<$ HELMHOLTZ\+\_\+\+ELEMENT $>$ Class Template Reference}
 \label{classoomph_1_1ProjectablePMLHelmholtzElement}\index{oomph::ProjectablePMLHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$@{oomph::ProjectablePMLHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$}}
 
 
@@ -9,7 +9,7 @@
 
 {\ttfamily \#include $<$pml\+\_\+helmholtz\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Projectable\+PMLHelmholtz\+Element\texorpdfstring{$<$}{<} HELMHOLTZ\+\_\+\+ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Projectable\+PMLHelmholtz\+Element$<$ HELMHOLTZ\+\_\+\+ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=1.678657cm]{classoomph_1_1ProjectablePMLHelmholtzElement}
@@ -20,7 +20,7 @@ Inheritance diagram for oomph\+::Projectable\+PMLHelmholtz\+Element\texorpdfstri
 \item 
 \mbox{\hyperlink{classoomph_1_1ProjectablePMLHelmholtzElement_a005f750d15074893d3ac428b49f2318d}{Projectable\+PMLHelmholtz\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards...\mbox{]}. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectablePMLHelmholtzElement_a2ac97950e14139eb85840fb5adc8d6f1}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectablePMLHelmholtzElement_a5a185319c02784f000aaee07c279377b}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectablePMLHelmholtzElement_ab90d84e474fccf3a814ea99ecd02e61c}{nfields\+\_\+for\+\_\+projection}} ()
 \begin{DoxyCompactList}\small\item\em Number of fields to be projected\+: 2 (real and imag part) \end{DoxyCompactList}\item 
@@ -31,7 +31,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1ProjectablePMLHelmholtzElement_a3af221fe
 double \mbox{\hyperlink{classoomph_1_1ProjectablePMLHelmholtzElement_aa4af5bb878fed3d1b286bde1da0f5419}{jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field}} (const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi)
 \begin{DoxyCompactList}\small\item\em Return Jacobian of mapping and shape functions of field fld at local coordinate s. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1ProjectablePMLHelmholtzElement_a14a5a245ec1fa36c371a3937a3fb4e96}{get\+\_\+field}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
-\begin{DoxyCompactList}\small\item\em Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: history values) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t$>$0\+: history values) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectablePMLHelmholtzElement_a08c9eee991edbaff38b8df1682e49a8e}{nvalue\+\_\+of\+\_\+field}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Return number of values in field fld\+: One per node. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classoomph_1_1ProjectablePMLHelmholtzElement_aaa23dc2e79e4185e5ee8665cd69ecc8d}{local\+\_\+equation}} (const unsigned \&fld, const unsigned \&j)
@@ -44,11 +44,12 @@ void \mbox{\hyperlink{classoomph_1_1ProjectablePMLHelmholtzElement_afc31f9a26ca4
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class HELMHOLTZ\+\_\+\+ELEMENT$>$\newline
 class oomph\+::\+Projectable\+PMLHelmholtz\+Element$<$ HELMHOLTZ\+\_\+\+ELEMENT $>$}
+
 ///////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////// 
 
 PMLHelmholtz upgraded to become projectable 
 
-Definition at line \mbox{\hyperlink{pml__helmholtz__elements_8h_source_l01013}{1013}} of file \mbox{\hyperlink{pml__helmholtz__elements_8h_source}{pml\+\_\+helmholtz\+\_\+elements.\+h}}.
+Definition at line 1013 of file pml\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -66,17 +67,17 @@ Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards
 
 
 
-Definition at line \mbox{\hyperlink{pml__helmholtz__elements_8h_source_l01019}{1019}} of file \mbox{\hyperlink{pml__helmholtz__elements_8h_source}{pml\+\_\+helmholtz\+\_\+elements.\+h}}.
+Definition at line 1019 of file pml\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1ProjectablePMLHelmholtzElement_a2ac97950e14139eb85840fb5adc8d6f1}\label{classoomph_1_1ProjectablePMLHelmholtzElement_a2ac97950e14139eb85840fb5adc8d6f1}} 
+\mbox{\Hypertarget{classoomph_1_1ProjectablePMLHelmholtzElement_a5a185319c02784f000aaee07c279377b}\label{classoomph_1_1ProjectablePMLHelmholtzElement_a5a185319c02784f000aaee07c279377b}} 
 \index{oomph::ProjectablePMLHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$@{oomph::ProjectablePMLHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$}!data\_values\_of\_field@{data\_values\_of\_field}}
 \index{data\_values\_of\_field@{data\_values\_of\_field}!oomph::ProjectablePMLHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$@{oomph::ProjectablePMLHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{data\_values\_of\_field()}{data\_values\_of\_field()}}
 {\footnotesize\ttfamily template$<$class HELMHOLTZ\+\_\+\+ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectablePMLHelmholtzElement}{oomph\+::\+Projectable\+PMLHelmholtz\+Element}}$<$ HELMHOLTZ\+\_\+\+ELEMENT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$std\+::pair$<$\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$, unsigned$>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectablePMLHelmholtzElement}{oomph\+::\+Projectable\+PMLHelmholtz\+Element}}$<$ HELMHOLTZ\+\_\+\+ELEMENT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -84,15 +85,15 @@ Specify the values associated with field fld. The information is returned in a v
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a2292bd9c58694f89839bd7d198cfe86a}{oomph\+::\+Projectable\+Element\+Base}}.
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a63b0053dde1172be726f9a6c75fb66ea}{oomph\+::\+Projectable\+Element\+Base}}.
 
 
 
-Definition at line \mbox{\hyperlink{pml__helmholtz__elements_8h_source_l01024}{1024}} of file \mbox{\hyperlink{pml__helmholtz__elements_8h_source}{pml\+\_\+helmholtz\+\_\+elements.\+h}}.
+Definition at line 1024 of file pml\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References oomph\+::\+Finite\+Element\+::nnode(), and oomph\+::\+Finite\+Element\+::node\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectablePMLHelmholtzElement_a14a5a245ec1fa36c371a3937a3fb4e96}\label{classoomph_1_1ProjectablePMLHelmholtzElement_a14a5a245ec1fa36c371a3937a3fb4e96}} 
 \index{oomph::ProjectablePMLHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$@{oomph::ProjectablePMLHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$}!get\_field@{get\_field}}
@@ -103,7 +104,7 @@ double \mbox{\hyperlink{classoomph_1_1ProjectablePMLHelmholtzElement}{oomph\+::\
 
 
 
-Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: history values) 
+Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t$>$0\+: history values) 
 
 
 
@@ -111,11 +112,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ae4da5b565b6d33
 
 
 
-Definition at line \mbox{\hyperlink{pml__helmholtz__elements_8h_source_l01110}{1110}} of file \mbox{\hyperlink{pml__helmholtz__elements_8h_source}{pml\+\_\+helmholtz\+\_\+elements.\+h}}.
+Definition at line 1110 of file pml\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
+References oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), and oomph\+::\+Finite\+Element\+::shape().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectablePMLHelmholtzElement_aa4af5bb878fed3d1b286bde1da0f5419}\label{classoomph_1_1ProjectablePMLHelmholtzElement_aa4af5bb878fed3d1b286bde1da0f5419}} 
 \index{oomph::ProjectablePMLHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$@{oomph::ProjectablePMLHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$}!jacobian\_and\_shape\_of\_field@{jacobian\_and\_shape\_of\_field}}
@@ -134,11 +135,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ad45c21b58c0985
 
 
 
-Definition at line \mbox{\hyperlink{pml__helmholtz__elements_8h_source_l01084}{1084}} of file \mbox{\hyperlink{pml__helmholtz__elements_8h_source}{pml\+\_\+helmholtz\+\_\+elements.\+h}}.
+Definition at line 1084 of file pml\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Finite\+Element\+::nnode(), and s.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectablePMLHelmholtzElement_aaa23dc2e79e4185e5ee8665cd69ecc8d}\label{classoomph_1_1ProjectablePMLHelmholtzElement_aaa23dc2e79e4185e5ee8665cd69ecc8d}} 
 \index{oomph::ProjectablePMLHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$@{oomph::ProjectablePMLHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$}!local\_equation@{local\_equation}}
@@ -157,11 +158,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac5c27ae929ff63
 
 
 
-Definition at line \mbox{\hyperlink{pml__helmholtz__elements_8h_source_l01174}{1174}} of file \mbox{\hyperlink{pml__helmholtz__elements_8h_source}{pml\+\_\+helmholtz\+\_\+elements.\+h}}.
+Definition at line 1174 of file pml\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}.
+References oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectablePMLHelmholtzElement_ab90d84e474fccf3a814ea99ecd02e61c}\label{classoomph_1_1ProjectablePMLHelmholtzElement_ab90d84e474fccf3a814ea99ecd02e61c}} 
 \index{oomph::ProjectablePMLHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$@{oomph::ProjectablePMLHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$}!nfields\_for\_projection@{nfields\_for\_projection}}
@@ -180,7 +181,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a44634aa4049332
 
 
 
-Definition at line \mbox{\hyperlink{pml__helmholtz__elements_8h_source_l01053}{1053}} of file \mbox{\hyperlink{pml__helmholtz__elements_8h_source}{pml\+\_\+helmholtz\+\_\+elements.\+h}}.
+Definition at line 1053 of file pml\+\_\+helmholtz\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectablePMLHelmholtzElement_a3af221fe8b94d8a50917c92c3cc94b5d}\label{classoomph_1_1ProjectablePMLHelmholtzElement_a3af221fe8b94d8a50917c92c3cc94b5d}} 
 \index{oomph::ProjectablePMLHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$@{oomph::ProjectablePMLHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$}!nhistory\_values\_for\_coordinate\_projection@{nhistory\_values\_for\_coordinate\_projection}}
@@ -199,11 +200,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ab4ecd0cd24000a
 
 
 
-Definition at line \mbox{\hyperlink{pml__helmholtz__elements_8h_source_l01077}{1077}} of file \mbox{\hyperlink{pml__helmholtz__elements_8h_source}{pml\+\_\+helmholtz\+\_\+elements.\+h}}.
+Definition at line 1077 of file pml\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, and \mbox{\hyperlink{nodes_8h_source_l01022}{oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt()}}.
+References oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Time\+Stepper\+::ntstorage(), and oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectablePMLHelmholtzElement_a5b0bad4b386bf0d31aeccb963e0814a0}\label{classoomph_1_1ProjectablePMLHelmholtzElement_a5b0bad4b386bf0d31aeccb963e0814a0}} 
 \index{oomph::ProjectablePMLHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$@{oomph::ProjectablePMLHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$}!nhistory\_values\_for\_projection@{nhistory\_values\_for\_projection}}
@@ -222,11 +223,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac6790f394630b9
 
 
 
-Definition at line \mbox{\hyperlink{pml__helmholtz__elements_8h_source_l01060}{1060}} of file \mbox{\hyperlink{pml__helmholtz__elements_8h_source}{pml\+\_\+helmholtz\+\_\+elements.\+h}}.
+Definition at line 1060 of file pml\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8cc_source_l00879}{oomph\+::\+Data\+::ntstorage()}}.
+References oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Data\+::ntstorage().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectablePMLHelmholtzElement_a08c9eee991edbaff38b8df1682e49a8e}\label{classoomph_1_1ProjectablePMLHelmholtzElement_a08c9eee991edbaff38b8df1682e49a8e}} 
 \index{oomph::ProjectablePMLHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$@{oomph::ProjectablePMLHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$}!nvalue\_of\_field@{nvalue\_of\_field}}
@@ -245,11 +246,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a1a9a6de16f3511
 
 
 
-Definition at line \mbox{\hyperlink{pml__helmholtz__elements_8h_source_l01157}{1157}} of file \mbox{\hyperlink{pml__helmholtz__elements_8h_source}{pml\+\_\+helmholtz\+\_\+elements.\+h}}.
+Definition at line 1157 of file pml\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}.
+References oomph\+::\+Finite\+Element\+::nnode().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectablePMLHelmholtzElement_afc31f9a26ca4d6ac5089ef430139c380}\label{classoomph_1_1ProjectablePMLHelmholtzElement_afc31f9a26ca4d6ac5089ef430139c380}} 
 \index{oomph::ProjectablePMLHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$@{oomph::ProjectablePMLHelmholtzElement$<$ HELMHOLTZ\_ELEMENT $>$}!output@{output}}
@@ -268,11 +269,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line \mbox{\hyperlink{pml__helmholtz__elements_8h_source_l01201}{1201}} of file \mbox{\hyperlink{pml__helmholtz__elements_8h_source}{pml\+\_\+helmholtz\+\_\+elements.\+h}}.
+Definition at line 1201 of file pml\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
+References oomph\+::\+Command\+Line\+Args\+::output().
 
 
 

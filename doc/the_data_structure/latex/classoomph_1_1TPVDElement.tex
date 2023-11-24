@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1TPVDElement}{}\doxysection{oomph\+::TPVDElement\texorpdfstring{$<$}{<} DIM, NNODE\+\_\+1D \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1TPVDElement}{}\doxysection{oomph\+::TPVDElement$<$ DIM, NNODE\+\_\+1D $>$ Class Template Reference}
 \label{classoomph_1_1TPVDElement}\index{oomph::TPVDElement$<$ DIM, NNODE\_1D $>$@{oomph::TPVDElement$<$ DIM, NNODE\_1D $>$}}
 
 
@@ -9,7 +9,7 @@
 
 {\ttfamily \#include $<$solid\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::TPVDElement\texorpdfstring{$<$}{<} DIM, NNODE\+\_\+1D \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::TPVDElement$<$ DIM, NNODE\+\_\+1D $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=3.157895cm]{classoomph_1_1TPVDElement}
@@ -32,7 +32,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1TPVDElement_a85176c5881f61e045e9783460ca
 \begin{DoxyCompactList}\small\item\em Order of recovery shape functions for Z2 error estimation\+: Same order as shape functions. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1TPVDElement_aa23910847f4faa1d3701756c0f5a1e58}{nvertex\+\_\+node}} () const
 \begin{DoxyCompactList}\small\item\em Number of vertex nodes in the element. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1TPVDElement_ad9db81b93ae86bcdd6d1ff151e03ecaa}{vertex\+\_\+node\+\_\+pt}} (const unsigned \&j) const
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1TPVDElement_a3251ad69f6f52975c923120e06487217}{vertex\+\_\+node\+\_\+pt}} (const unsigned \&j) const
 \begin{DoxyCompactList}\small\item\em Pointer to the j-\/th vertex node in the element. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1TPVDElement_a2cae6a6faf4fd3f7555f672fad077061}{num\+\_\+\+Z2\+\_\+flux\+\_\+terms}} ()
 \begin{DoxyCompactList}\small\item\em Number of \textquotesingle{}flux\textquotesingle{} terms for Z2 error estimation. \end{DoxyCompactList}\item 
@@ -46,11 +46,12 @@ void \mbox{\hyperlink{classoomph_1_1TPVDElement_ad0eb4d88aa6e0d32560f22706255569
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$\newline
 class oomph\+::\+TPVDElement$<$ DIM, NNODE\+\_\+1\+D $>$}
+
 /////////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////////// 
 
 An Element that solves the solid mechanics equations, based on the principle of virtual displacements in Cartesian coordinates, using Solid\+TElements for the interpolation of the variable positions. 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l01753}{1753}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 1753 of file solid\+\_\+elements.\+h.
 
 
 
@@ -68,7 +69,7 @@ Constructor, there are no internal data points.
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l01759}{1759}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 1759 of file solid\+\_\+elements.\+h.
 
 
 
@@ -78,7 +79,7 @@ Definition at line \mbox{\hyperlink{solid__elements_8h_source_l01759}{1759}} of 
 \index{describe\_local\_dofs@{describe\_local\_dofs}!oomph::TPVDElement$<$ DIM, NNODE\_1D $>$@{oomph::TPVDElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{describe\_local\_dofs()}{describe\_local\_dofs()}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-void oomph\+::\+Solid\+Finite\+Element\+::describe\+\_\+local\+\_\+dofs (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out,  }\item[{const std\+::string \&}]{current\+\_\+string }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+void oomph\+::\+Solid\+Finite\+Element\+::describe\+\_\+local\+\_\+dofs}
 
 
 
@@ -86,15 +87,11 @@ Function to describe the local dofs of the element. The ostream specifies the ou
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_aad9f9ebb2996fd9c44caf34da8bc7941}{oomph\+::\+Finite\+Element}}.
+Definition at line 3885 of file elements.\+cc.
 
 
 
-Definition at line \mbox{\hyperlink{elements_8cc_source_l03885}{3885}} of file \mbox{\hyperlink{elements_8cc_source}{elements.\+cc}}.
-
-
-
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01842}{oomph\+::\+Finite\+Element\+::local\+\_\+coordinate\+\_\+of\+\_\+node()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References i, oomph\+::\+Finite\+Element\+::local\+\_\+coordinate\+\_\+of\+\_\+node(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and s.
 
 \mbox{\Hypertarget{classoomph_1_1TPVDElement_a156300359d98bc69d81773b3b609329f}\label{classoomph_1_1TPVDElement_a156300359d98bc69d81773b3b609329f}} 
 \index{oomph::TPVDElement$<$ DIM, NNODE\_1D $>$@{oomph::TPVDElement$<$ DIM, NNODE\_1D $>$}!get\_Z2\_flux@{get\_Z2\_flux}}
@@ -113,11 +110,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a5688ff5f5
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l01824}{1824}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 1824 of file solid\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{solid__elements_8cc_source_l00047}{oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::get\+\_\+strain()}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::get\+\_\+strain(), and i.
 
 \mbox{\Hypertarget{classoomph_1_1TPVDElement_a85176c5881f61e045e9783460ca0064f}\label{classoomph_1_1TPVDElement_a85176c5881f61e045e9783460ca0064f}} 
 \index{oomph::TPVDElement$<$ DIM, NNODE\_1D $>$@{oomph::TPVDElement$<$ DIM, NNODE\_1D $>$}!nrecovery\_order@{nrecovery\_order}}
@@ -136,7 +133,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_af39480835
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l01788}{1788}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 1788 of file solid\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TPVDElement_a2cae6a6faf4fd3f7555f672fad077061}\label{classoomph_1_1TPVDElement_a2cae6a6faf4fd3f7555f672fad077061}} 
 \index{oomph::TPVDElement$<$ DIM, NNODE\_1D $>$@{oomph::TPVDElement$<$ DIM, NNODE\_1D $>$}!num\_Z2\_flux\_terms@{num\_Z2\_flux\_terms}}
@@ -155,7 +152,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_ae82c57289
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l01816}{1816}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 1816 of file solid\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TPVDElement_aa23910847f4faa1d3701756c0f5a1e58}\label{classoomph_1_1TPVDElement_aa23910847f4faa1d3701756c0f5a1e58}} 
 \index{oomph::TPVDElement$<$ DIM, NNODE\_1D $>$@{oomph::TPVDElement$<$ DIM, NNODE\_1D $>$}!nvertex\_node@{nvertex\_node}}
@@ -174,7 +171,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a19495a0e7
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l01794}{1794}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 1794 of file solid\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TPVDElement_a272dff6c1e74e2634e2df71b33319e19}\label{classoomph_1_1TPVDElement_a272dff6c1e74e2634e2df71b33319e19}} 
 \index{oomph::TPVDElement$<$ DIM, NNODE\_1D $>$@{oomph::TPVDElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
@@ -193,11 +190,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1PVDEquations_ae5cf4a0254fbb7db
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l01775}{1775}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 1775 of file solid\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{solid__elements_8h_source_l00506}{oomph\+::\+PVDEquations$<$ DIM $>$\+::output()}}.
+References oomph\+::\+PVDEquations$<$ DIM $>$\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1TPVDElement_a439c64bf9eefec5c472dfe91099c2ffd}\label{classoomph_1_1TPVDElement_a439c64bf9eefec5c472dfe91099c2ffd}} 
 \index{oomph::TPVDElement$<$ DIM, NNODE\_1D $>$@{oomph::TPVDElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
@@ -216,11 +213,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1PVDEquations_ac35042c495411ffc
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l01781}{1781}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 1781 of file solid\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{solid__elements_8h_source_l00506}{oomph\+::\+PVDEquations$<$ DIM $>$\+::output()}}.
+References oomph\+::\+PVDEquations$<$ DIM $>$\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1TPVDElement_a048f0db11c13863fadc1606483c5a5e2}\label{classoomph_1_1TPVDElement_a048f0db11c13863fadc1606483c5a5e2}} 
 \index{oomph::TPVDElement$<$ DIM, NNODE\_1D $>$@{oomph::TPVDElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
@@ -239,11 +236,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1PVDEquations_ab9e919921934cfe7
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l01762}{1762}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 1762 of file solid\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{solid__elements_8h_source_l00506}{oomph\+::\+PVDEquations$<$ DIM $>$\+::output()}}.
+References oomph\+::\+PVDEquations$<$ DIM $>$\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1TPVDElement_a16716e0b772f7a13b885faeb4def1cfa}\label{classoomph_1_1TPVDElement_a16716e0b772f7a13b885faeb4def1cfa}} 
 \index{oomph::TPVDElement$<$ DIM, NNODE\_1D $>$@{oomph::TPVDElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
@@ -262,18 +259,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1PVDEquations_a5e3a09d059ced1ee
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l01768}{1768}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 1768 of file solid\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{solid__elements_8h_source_l00506}{oomph\+::\+PVDEquations$<$ DIM $>$\+::output()}}.
+References oomph\+::\+PVDEquations$<$ DIM $>$\+::output().
 
-\mbox{\Hypertarget{classoomph_1_1TPVDElement_ad9db81b93ae86bcdd6d1ff151e03ecaa}\label{classoomph_1_1TPVDElement_ad9db81b93ae86bcdd6d1ff151e03ecaa}} 
+\mbox{\Hypertarget{classoomph_1_1TPVDElement_a3251ad69f6f52975c923120e06487217}\label{classoomph_1_1TPVDElement_a3251ad69f6f52975c923120e06487217}} 
 \index{oomph::TPVDElement$<$ DIM, NNODE\_1D $>$@{oomph::TPVDElement$<$ DIM, NNODE\_1D $>$}!vertex\_node\_pt@{vertex\_node\_pt}}
 \index{vertex\_node\_pt@{vertex\_node\_pt}!oomph::TPVDElement$<$ DIM, NNODE\_1D $>$@{oomph::TPVDElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{vertex\_node\_pt()}{vertex\_node\_pt()}}
 {\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
-\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1TPVDElement}{oomph\+::\+TPVDElement}}$<$ DIM, NNODE\+\_\+1D $>$\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$ \mbox{\hyperlink{classoomph_1_1TPVDElement}{oomph\+::\+TPVDElement}}$<$ DIM, NNODE\+\_\+1D $>$\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -281,11 +278,11 @@ Pointer to the j-\/th vertex node in the element.
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a6d852edae3d9f6bddeb5aaf136ebbb8b}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a0eedccc33519f852c5dc2055ddf2774b}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
 
 
 
-Definition at line \mbox{\hyperlink{solid__elements_8h_source_l01800}{1800}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
+Definition at line 1800 of file solid\+\_\+elements.\+h.
 
 
 

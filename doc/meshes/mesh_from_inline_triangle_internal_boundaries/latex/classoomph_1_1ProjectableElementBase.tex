@@ -22,7 +22,7 @@ Inheritance diagram for oomph\+::Projectable\+Element\+Base\+:\begin{figure}[H]
 \begin{DoxyCompactList}\small\item\em Constructor\+: Initialise data so that we don\textquotesingle{}t project but solve the \char`\"{}normal\char`\"{} equations associated with the element. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a668500db9bcaab7aa983d3c92f94e34b}{$\sim$\+Projectable\+Element\+Base}} ()
 \begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
-virtual Vector$<$ std\+::pair$<$ Data $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a2292bd9c58694f89839bd7d198cfe86a}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)=0
+virtual Vector$<$ std\+::pair$<$ Data $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a63b0053dde1172be726f9a6c75fb66ea}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)=0
 \begin{DoxyCompactList}\small\item\em Pure virtual function in which the element writer must specify the values associated with field fld. The information is returned in a vector of pairs which comprise the Data object and the value within it, that correspond to field fld. E.\+g. in Taylor Hood elements the fld-\/th velocities are stored at the fld-\/th value of the nodes; the pressures (the DIM-\/th field) are the DIM-\/th values at the vertex nodes etc. \end{DoxyCompactList}\item 
 virtual unsigned \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a44634aa4049332a580d249c25564638c}{nfields\+\_\+for\+\_\+projection}} ()=0
 \begin{DoxyCompactList}\small\item\em Number of fields of the problem, so e.\+g. for 2D Navier Stokes this would be 3 (for the two velocities and one pressure) \end{DoxyCompactList}\item 
@@ -37,7 +37,7 @@ virtual int \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac5c27ae929ff6
 virtual double \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ad45c21b58c0985d52f68ab2d79cbb488}{jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field}} (const unsigned \&fld, const Vector$<$ double $>$ \&s, Shape \&psi)=0
 \begin{DoxyCompactList}\small\item\em Return Jacobian of mapping and the shape functions associated with field fld. The number of shape functions must match the number of values specified in nvalue\+\_\+of\+\_\+field(...). For Lagrange-\/type interpolations the shape functinos are simply the \char`\"{}normal\char`\"{} nodal shape functions; if the element contains internal Data that is not associated with shape functions, simply set the corresonding shape function to 1. \end{DoxyCompactList}\item 
 virtual double \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ae4da5b565b6d333be2f5920f7be763cd}{get\+\_\+field}} (const unsigned \&time, const unsigned \&fld, const Vector$<$ double $>$ \&s)=0
-\begin{DoxyCompactList}\small\item\em Return the fld-\/th field at local coordinates s at time-\/level time (time=0\+: current value; time\texorpdfstring{$>$}{>}0\+: history values) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Return the fld-\/th field at local coordinates s at time-\/level time (time=0\+: current value; time$>$0\+: history values) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Types}
 \begin{DoxyCompactItemize}
 \item 
@@ -52,7 +52,7 @@ enum \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_aa6b28955725b5626cc4c
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_aa71079c0f1075ac390708063fd7d2731}{Projected\+\_\+field}}
 \begin{DoxyCompactList}\small\item\em Field that is currently being projected. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a4698e178e500468c0af8c37bd47d0bd3}{Time\+\_\+level\+\_\+for\+\_\+projection}}
-\begin{DoxyCompactList}\small\item\em Time level we are projecting (0=current values; \texorpdfstring{$>$}{>}0\+: history values) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Time level we are projecting (0=current values; $>$0\+: history values) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ab712be6423145fae3c23e444187db0e2}{Projected\+\_\+coordinate}}
 \begin{DoxyCompactList}\small\item\em When projecting the history values of the nodal coordinates, this is the coordinate we\textquotesingle{}re projecting. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a1034f9a066d1e4116f5b6acf5e5a279c}{Projected\+\_\+lagrangian}}
@@ -72,7 +72,7 @@ bool \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a0f9195c254f229b178a8
 \doxysubsection{Detailed Description}
 Template-\/free Base class for projectable elements. 
 
-Definition at line \mbox{\hyperlink{projection_8h_source_l00054}{54}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+Definition at line 54 of file projection.\+h.
 
 
 
@@ -103,7 +103,7 @@ Value&\\
 \end{DoxyEnumFields}
 
 
-Definition at line \mbox{\hyperlink{projection_8h_source_l00059}{59}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+Definition at line 59 of file projection.\+h.
 
 
 
@@ -120,7 +120,7 @@ Constructor\+: Initialise data so that we don\textquotesingle{}t project but sol
 
 
 
-Definition at line \mbox{\hyperlink{projection_8h_source_l00110}{110}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+Definition at line 110 of file projection.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableElementBase_a668500db9bcaab7aa983d3c92f94e34b}\label{classoomph_1_1ProjectableElementBase_a668500db9bcaab7aa983d3c92f94e34b}} 
 \index{oomph::ProjectableElementBase@{oomph::ProjectableElementBase}!````~ProjectableElementBase@{$\sim$ProjectableElementBase}}
@@ -134,16 +134,16 @@ Virtual destructor.
 
 
 
-Definition at line \mbox{\hyperlink{projection_8h_source_l00123}{123}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+Definition at line 123 of file projection.\+h.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1ProjectableElementBase_a2292bd9c58694f89839bd7d198cfe86a}\label{classoomph_1_1ProjectableElementBase_a2292bd9c58694f89839bd7d198cfe86a}} 
+\mbox{\Hypertarget{classoomph_1_1ProjectableElementBase_a63b0053dde1172be726f9a6c75fb66ea}\label{classoomph_1_1ProjectableElementBase_a63b0053dde1172be726f9a6c75fb66ea}} 
 \index{oomph::ProjectableElementBase@{oomph::ProjectableElementBase}!data\_values\_of\_field@{data\_values\_of\_field}}
 \index{data\_values\_of\_field@{data\_values\_of\_field}!oomph::ProjectableElementBase@{oomph::ProjectableElementBase}}
 \doxysubsubsection{\texorpdfstring{data\_values\_of\_field()}{data\_values\_of\_field()}}
-{\footnotesize\ttfamily virtual Vector$<$ std\+::pair$<$ Data $\ast$, unsigned $>$ $>$ oomph\+::\+Projectable\+Element\+Base\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual Vector$<$std\+::pair$<$Data$\ast$, unsigned$>$ $>$ oomph\+::\+Projectable\+Element\+Base\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -157,11 +157,11 @@ Pure virtual function in which the element writer must specify the values associ
 
 
 
-Return the fld-\/th field at local coordinates s at time-\/level time (time=0\+: current value; time\texorpdfstring{$>$}{>}0\+: history values) 
+Return the fld-\/th field at local coordinates s at time-\/level time (time=0\+: current value; time$>$0\+: history values) 
 
 
 
-Referenced by \mbox{\hyperlink{projection_8h_source_l00240}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::residual\+\_\+for\+\_\+projection()}}.
+Referenced by oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::residual\+\_\+for\+\_\+projection().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableElementBase_ad45c21b58c0985d52f68ab2d79cbb488}\label{classoomph_1_1ProjectableElementBase_ad45c21b58c0985d52f68ab2d79cbb488}} 
 \index{oomph::ProjectableElementBase@{oomph::ProjectableElementBase}!jacobian\_and\_shape\_of\_field@{jacobian\_and\_shape\_of\_field}}
@@ -175,7 +175,7 @@ Return Jacobian of mapping and the shape functions associated with field fld. Th
 
 
 
-Referenced by \mbox{\hyperlink{projection_8h_source_l00240}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::residual\+\_\+for\+\_\+projection()}}.
+Referenced by oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::residual\+\_\+for\+\_\+projection().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableElementBase_ac5c27ae929ff636dc7747fe23fd4f738}\label{classoomph_1_1ProjectableElementBase_ac5c27ae929ff636dc7747fe23fd4f738}} 
 \index{oomph::ProjectableElementBase@{oomph::ProjectableElementBase}!local\_equation@{local\_equation}}
@@ -189,7 +189,7 @@ Return local equation numbers associated with value ivalue of field fld within t
 
 
 
-Referenced by \mbox{\hyperlink{projection_8h_source_l00240}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::residual\+\_\+for\+\_\+projection()}}.
+Referenced by oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::residual\+\_\+for\+\_\+projection().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableElementBase_a44634aa4049332a580d249c25564638c}\label{classoomph_1_1ProjectableElementBase_a44634aa4049332a580d249c25564638c}} 
 \index{oomph::ProjectableElementBase@{oomph::ProjectableElementBase}!nfields\_for\_projection@{nfields\_for\_projection}}
@@ -233,7 +233,7 @@ Return number of values (pinned or not) associated with field fld within the ele
 
 
 
-Referenced by \mbox{\hyperlink{projection_8h_source_l00240}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::residual\+\_\+for\+\_\+projection()}}.
+Referenced by oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::residual\+\_\+for\+\_\+projection().
 
 
 
@@ -250,11 +250,11 @@ Remember if the element includes external geometric data when used in non-\/proj
 
 
 
-Definition at line \mbox{\hyperlink{projection_8h_source_l00098}{98}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+Definition at line 98 of file projection.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{projection_8h_source_l00583}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::disable\+\_\+projection()}}, and \mbox{\hyperlink{projection_8h_source_l00548}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::enable\+\_\+projection()}}.
+Referenced by oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::disable\+\_\+projection(), and oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::enable\+\_\+projection().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableElementBase_a0f9195c254f229b178a8844f2572c7d4}\label{classoomph_1_1ProjectableElementBase_a0f9195c254f229b178a8844f2572c7d4}} 
 \index{oomph::ProjectableElementBase@{oomph::ProjectableElementBase}!Backup\_external\_interaction\_data@{Backup\_external\_interaction\_data}}
@@ -268,11 +268,11 @@ Remember if the element includes external data when used in non-\/projection mod
 
 
 
-Definition at line \mbox{\hyperlink{projection_8h_source_l00104}{104}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+Definition at line 104 of file projection.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{projection_8h_source_l00583}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::disable\+\_\+projection()}}, and \mbox{\hyperlink{projection_8h_source_l00548}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::enable\+\_\+projection()}}.
+Referenced by oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::disable\+\_\+projection(), and oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::enable\+\_\+projection().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableElementBase_a638bf48f5b8dd513c18413cd3878c0d1}\label{classoomph_1_1ProjectableElementBase_a638bf48f5b8dd513c18413cd3878c0d1}} 
 \index{oomph::ProjectableElementBase@{oomph::ProjectableElementBase}!Backup\_ninteraction@{Backup\_ninteraction}}
@@ -286,11 +286,11 @@ Store number of \char`\"{}external\char`\"{} interactions that were assigned to 
 
 
 
-Definition at line \mbox{\hyperlink{projection_8h_source_l00093}{93}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+Definition at line 93 of file projection.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{projection_8h_source_l00583}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::disable\+\_\+projection()}}, and \mbox{\hyperlink{projection_8h_source_l00548}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::enable\+\_\+projection()}}.
+Referenced by oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::disable\+\_\+projection(), and oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::enable\+\_\+projection().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableElementBase_a8e6db97455edb38611347e258593f592}\label{classoomph_1_1ProjectableElementBase_a8e6db97455edb38611347e258593f592}} 
 \index{oomph::ProjectableElementBase@{oomph::ProjectableElementBase}!Do\_projection@{Do\_projection}}
@@ -304,11 +304,11 @@ Bool to know if we do projection or not. If false (the default) we solve the ele
 
 
 
-Definition at line \mbox{\hyperlink{projection_8h_source_l00088}{88}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+Definition at line 88 of file projection.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{projection_8h_source_l00583}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::disable\+\_\+projection()}}, \mbox{\hyperlink{projection_8h_source_l00548}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::enable\+\_\+projection()}}, \mbox{\hyperlink{projection_8h_source_l00217}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{projection_8h_source_l00186}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}, and \mbox{\hyperlink{projection_8h_source_l00531}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::zeta\+\_\+nodal()}}.
+Referenced by oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::disable\+\_\+projection(), oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::enable\+\_\+projection(), oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), and oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::zeta\+\_\+nodal().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableElementBase_ab712be6423145fae3c23e444187db0e2}\label{classoomph_1_1ProjectableElementBase_ab712be6423145fae3c23e444187db0e2}} 
 \index{oomph::ProjectableElementBase@{oomph::ProjectableElementBase}!Projected\_coordinate@{Projected\_coordinate}}
@@ -322,11 +322,11 @@ When projecting the history values of the nodal coordinates, this is the coordin
 
 
 
-Definition at line \mbox{\hyperlink{projection_8h_source_l00074}{74}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+Definition at line 74 of file projection.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{projection_8h_source_l00645}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::projected\+\_\+coordinate()}}, and \mbox{\hyperlink{projection_8h_source_l00240}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::residual\+\_\+for\+\_\+projection()}}.
+Referenced by oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::projected\+\_\+coordinate(), and oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::residual\+\_\+for\+\_\+projection().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableElementBase_aa71079c0f1075ac390708063fd7d2731}\label{classoomph_1_1ProjectableElementBase_aa71079c0f1075ac390708063fd7d2731}} 
 \index{oomph::ProjectableElementBase@{oomph::ProjectableElementBase}!Projected\_field@{Projected\_field}}
@@ -340,11 +340,11 @@ Field that is currently being projected.
 
 
 
-Definition at line \mbox{\hyperlink{projection_8h_source_l00067}{67}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+Definition at line 67 of file projection.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{projection_8h_source_l00632}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::projected\+\_\+field()}}, and \mbox{\hyperlink{projection_8h_source_l00240}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::residual\+\_\+for\+\_\+projection()}}.
+Referenced by oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::projected\+\_\+field(), and oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::residual\+\_\+for\+\_\+projection().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableElementBase_a1034f9a066d1e4116f5b6acf5e5a279c}\label{classoomph_1_1ProjectableElementBase_a1034f9a066d1e4116f5b6acf5e5a279c}} 
 \index{oomph::ProjectableElementBase@{oomph::ProjectableElementBase}!Projected\_lagrangian@{Projected\_lagrangian}}
@@ -358,11 +358,11 @@ When projecting the Lagrangain coordinates indicate which coordiante is to be pr
 
 
 
-Definition at line \mbox{\hyperlink{projection_8h_source_l00078}{78}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+Definition at line 78 of file projection.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{projection_8h_source_l00652}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::projected\+\_\+lagrangian\+\_\+coordinate()}}, and \mbox{\hyperlink{projection_8h_source_l00240}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::residual\+\_\+for\+\_\+projection()}}.
+Referenced by oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::projected\+\_\+lagrangian\+\_\+coordinate(), and oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::residual\+\_\+for\+\_\+projection().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableElementBase_a1081b0f4b3633612639f92d13a187db5}\label{classoomph_1_1ProjectableElementBase_a1081b0f4b3633612639f92d13a187db5}} 
 \index{oomph::ProjectableElementBase@{oomph::ProjectableElementBase}!Projection\_type@{Projection\_type}}
@@ -376,11 +376,11 @@ Variable to indicate if we\textquotesingle{}re projecting the history values of 
 
 
 
-Definition at line \mbox{\hyperlink{projection_8h_source_l00083}{83}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+Definition at line 83 of file projection.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{projection_8h_source_l00240}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::residual\+\_\+for\+\_\+projection()}}, \mbox{\hyperlink{projection_8h_source_l00613}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::set\+\_\+project\+\_\+coordinates()}}, \mbox{\hyperlink{projection_8h_source_l00625}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::set\+\_\+project\+\_\+lagrangian()}}, and \mbox{\hyperlink{projection_8h_source_l00619}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::set\+\_\+project\+\_\+values()}}.
+Referenced by oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::residual\+\_\+for\+\_\+projection(), oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::set\+\_\+project\+\_\+coordinates(), oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::set\+\_\+project\+\_\+lagrangian(), and oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::set\+\_\+project\+\_\+values().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableElementBase_a4698e178e500468c0af8c37bd47d0bd3}\label{classoomph_1_1ProjectableElementBase_a4698e178e500468c0af8c37bd47d0bd3}} 
 \index{oomph::ProjectableElementBase@{oomph::ProjectableElementBase}!Time\_level\_for\_projection@{Time\_level\_for\_projection}}
@@ -390,15 +390,15 @@ Referenced by \mbox{\hyperlink{projection_8h_source_l00240}{oomph\+::\+Projectab
 
 
 
-Time level we are projecting (0=current values; \texorpdfstring{$>$}{>}0\+: history values) 
+Time level we are projecting (0=current values; $>$0\+: history values) 
 
 
 
-Definition at line \mbox{\hyperlink{projection_8h_source_l00070}{70}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+Definition at line 70 of file projection.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{projection_8h_source_l00240}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::residual\+\_\+for\+\_\+projection()}}, and \mbox{\hyperlink{projection_8h_source_l00638}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::time\+\_\+level\+\_\+for\+\_\+projection()}}.
+Referenced by oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::residual\+\_\+for\+\_\+projection(), and oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::time\+\_\+level\+\_\+for\+\_\+projection().
 
 
 

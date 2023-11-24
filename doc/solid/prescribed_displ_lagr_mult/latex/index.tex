@@ -48,16 +48,16 @@ Here is the implementation of the prescribed boundary shape as the {\ttfamily \m
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//======Start\_of\_warped\_line===============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Warped line in 2D space}}
-\DoxyCodeLine{\textcolor{comment}{//=========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classWarpedLine}{WarpedLine}} : \textcolor{keyword}{public} GeomObject}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Constructor: Specify amplitude of deflection from straight horizontal line}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classWarpedLine_a9d80dca2c907b426f7130579c94f3310}{WarpedLine}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{classWarpedLine_aea69e0dccb0af23ffeb8cd98c0aa6853}{ampl}}) : GeomObject(1,2)}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classWarpedLine_a9d80dca2c907b426f7130579c94f3310}{WarpedLine}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{classWarpedLine_ae43c2f997b9c0de62783375341ac5794}{ampl}}) : GeomObject(1,2)}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   \mbox{\hyperlink{classWarpedLine_ac44286e84ff213e67e0f247d00ad50af}{Ampl}}=\mbox{\hyperlink{classWarpedLine_aea69e0dccb0af23ffeb8cd98c0aa6853}{ampl}};}
+\DoxyCodeLine{   \mbox{\hyperlink{classWarpedLine_ac44286e84ff213e67e0f247d00ad50af}{Ampl}}=\mbox{\hyperlink{classWarpedLine_ae43c2f997b9c0de62783375341ac5794}{ampl}};}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Broken copy constructor}}
@@ -94,7 +94,7 @@ Here is the implementation of the prescribed boundary shape as the {\ttfamily \m
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Access to amplitude}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{classWarpedLine_aea69e0dccb0af23ffeb8cd98c0aa6853}{ampl}}() \{\textcolor{keywordflow}{return} \mbox{\hyperlink{classWarpedLine_ac44286e84ff213e67e0f247d00ad50af}{Ampl}};\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{classWarpedLine_ae43c2f997b9c0de62783375341ac5794}{ampl}}() \{\textcolor{keywordflow}{return} \mbox{\hyperlink{classWarpedLine_ac44286e84ff213e67e0f247d00ad50af}{Ampl}};\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// How many items of Data does the shape of the object depend on?}}
 \DoxyCodeLine{\textcolor{comment}{ /// None.}}
@@ -122,7 +122,7 @@ As usual we define the problem parameters in a global namespace. We provide an i
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_namespace==========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Global parameters}}
-\DoxyCodeLine{\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -149,7 +149,7 @@ We build an instantiation of the {\ttfamily Problem} class (described below), us
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_main==================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver code}}
-\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{prescribed__displ__lagr__mult_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ }
@@ -176,7 +176,7 @@ We perform a parameter study, increasing the amplitude of the prescribed boundar
 \DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<nstep;i++)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Increment imposed boundary displacement}}
-\DoxyCodeLine{   \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab0a184463cbaaa353f2235411adef3c4}{Global\_Physical\_Variables::Boundary\_geom\_object}}.\mbox{\hyperlink{classWarpedLine_aea69e0dccb0af23ffeb8cd98c0aa6853}{ampl}}()+=0.1;}
+\DoxyCodeLine{   \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab0a184463cbaaa353f2235411adef3c4}{Global\_Physical\_Variables::Boundary\_geom\_object}}.\mbox{\hyperlink{classWarpedLine_ae43c2f997b9c0de62783375341ac5794}{ampl}}()+=0.1;}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Solve the problem with Newton's method, allowing}}
 \DoxyCodeLine{   \textcolor{comment}{// up to max\_adapt mesh adaptations after every solve.}}
@@ -196,7 +196,7 @@ We perform a parameter study, increasing the amplitude of the prescribed boundar
 \DoxyCodeLine{   \textcolor{comment}{// parameter study no longer corresponds to a physical experiment}}
 \DoxyCodeLine{   \textcolor{comment}{// but is what we'd do if we wanted to use the solid solve}}
 \DoxyCodeLine{   \textcolor{comment}{// to update a fluid mesh in an FSI problem, say.}}
-\DoxyCodeLine{   problem.\mbox{\hyperlink{classPrescribedBoundaryDisplacementProblem_a4fd215944a513b61ff9e9ea328abfa67}{solid\_mesh\_pt}}()-\/>set\_lagrangian\_nodal\_coordinates();}
+\DoxyCodeLine{   problem.\mbox{\hyperlink{classPrescribedBoundaryDisplacementProblem_ac0fc3028f61cec5ac4b01670d7728934}{solid\_mesh\_pt}}()-\/>set\_lagrangian\_nodal\_coordinates();}
 \DoxyCodeLine{   }
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ }
@@ -211,8 +211,8 @@ The definition of the {\ttfamily Problem} class follows the usual pattern. We pr
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=============begin\_problem============================================ }}
-\DoxyCodeLine{\textcolor{comment}{/// Problem class for deformation of elastic block by prescribed}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// boundary motion.}}
+\DoxyCodeLine{\textcolor{comment}{/// Problem class for deformation of elastic block by prescribed}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// boundary motion.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================== }}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classPrescribedBoundaryDisplacementProblem}{PrescribedBoundaryDisplacementProblem}} : \textcolor{keyword}{public} Problem}
@@ -230,7 +230,7 @@ The definition of the {\ttfamily Problem} class follows the usual pattern. We pr
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classPrescribedBoundaryDisplacementProblem_ad2184bb8d7391da21bec62d4aacf5c20}{actions\_before\_newton\_solve}}() \{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Access function for the solid mesh}}
-\DoxyCodeLine{\textcolor{comment}{} ElasticRefineableRectangularQuadMesh<ELEMENT>*\& \mbox{\hyperlink{classPrescribedBoundaryDisplacementProblem_a4fd215944a513b61ff9e9ea328abfa67}{solid\_mesh\_pt}}() }
+\DoxyCodeLine{\textcolor{comment}{} ElasticRefineableRectangularQuadMesh<ELEMENT>*\& \mbox{\hyperlink{classPrescribedBoundaryDisplacementProblem_ac0fc3028f61cec5ac4b01670d7728934}{solid\_mesh\_pt}}() }
 \DoxyCodeLine{  \{\textcolor{keywordflow}{return} \mbox{\hyperlink{classPrescribedBoundaryDisplacementProblem_a6d2cdbd9ae1077c80831d938bdb72a61}{Solid\_mesh\_pt}};\} }
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Actions before adapt: Wipe the mesh of Lagrange multiplier elements}}
@@ -273,7 +273,7 @@ We start by creating the \char`\"{}bulk\char`\"{} mesh, discretising the domain 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===========start\_of\_constructor======================================= }}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor: }}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================== }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================== }}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classPrescribedBoundaryDisplacementProblem_ac0c8b47eeb75ba2c618757e6b56e62dc}{PrescribedBoundaryDisplacementProblem<ELEMENT>::PrescribedBoundaryDisplacementProblem}}() }
 \DoxyCodeLine{\{}
@@ -389,8 +389,8 @@ As usual, we remove the {\ttfamily Face\+Elements} that apply the displacement c
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====================start\_of\_actions\_before\_adapt======================}}
-\DoxyCodeLine{\textcolor{comment}{/// Actions before adapt: Wipe the mesh of elements that impose}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// the prescribed boundary displacements}}
+\DoxyCodeLine{\textcolor{comment}{/// Actions before adapt: Wipe the mesh of elements that impose}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// the prescribed boundary displacements}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classPrescribedBoundaryDisplacementProblem_a2e9f335e8680b0f2338b579e37e9d38a}{PrescribedBoundaryDisplacementProblem<ELEMENT>::actions\_before\_adapt}}()}
@@ -412,8 +412,8 @@ We re-\/attach the {\ttfamily Face\+Elements} that apply the displacement constr
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====================start\_of\_actions\_after\_adapt=======================}}
-\DoxyCodeLine{\textcolor{comment}{///  Actions after adapt: Rebuild the mesh of elements that impose}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// the prescribed boundary displacements}}
+\DoxyCodeLine{\textcolor{comment}{///  Actions after adapt: Rebuild the mesh of elements that impose}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// the prescribed boundary displacements}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classPrescribedBoundaryDisplacementProblem_aae7225db18ad5c8429c0eb96fa37b585}{PrescribedBoundaryDisplacementProblem<ELEMENT>::actions\_after\_adapt}}()}
@@ -442,7 +442,7 @@ The creation of the Lagrange multiplier elements that impose the displacement co
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_lagrange\_multiplier\_elements===============}}
 \DoxyCodeLine{\textcolor{comment}{/// Create elements that impose the prescribed boundary displacement}}
-\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classPrescribedBoundaryDisplacementProblem_adf4798f13809f5b2f2be6e3d63421edc}{PrescribedBoundaryDisplacementProblem<ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classPrescribedBoundaryDisplacementProblem_adf4798f13809f5b2f2be6e3d63421edc}{create\_lagrange\_multiplier\_elements}}()}
@@ -538,8 +538,8 @@ The function {\ttfamily delete\+\_\+lagrange\+\_\+multiplier\+\_\+elements()} de
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//====start\_of\_delete\_lagrange\_multiplier\_elements=======================}}
-\DoxyCodeLine{\textcolor{comment}{/// Delete elements that impose the prescribed boundary displacement}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// and wipe the associated mesh}}
+\DoxyCodeLine{\textcolor{comment}{/// Delete elements that impose the prescribed boundary displacement}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// and wipe the associated mesh}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classPrescribedBoundaryDisplacementProblem_a0204ae947ffd18ed3d7690395901a1e8}{PrescribedBoundaryDisplacementProblem<ELEMENT>::delete\_lagrange\_multiplier\_elements}}()}
@@ -569,7 +569,7 @@ The function {\ttfamily doc\+\_\+solution()} outputs the shape of the deformed b
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==============start\_doc===========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{//==================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classPrescribedBoundaryDisplacementProblem_abc58821d6b49cd9773dcd90b240aab6e}{PrescribedBoundaryDisplacementProblem<ELEMENT>::doc\_solution}}()}
 \DoxyCodeLine{\{}
@@ -624,7 +624,7 @@ As mentioned in the introduction, there is an alternative, much simpler way of i
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Update boundary position directly}}
+\DoxyCodeLine{ \textcolor{comment}{/// Update boundary position directly}}
 \DoxyCodeLine{ \textcolor{keywordtype}{void} actions\_before\_newton\_solve()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{}

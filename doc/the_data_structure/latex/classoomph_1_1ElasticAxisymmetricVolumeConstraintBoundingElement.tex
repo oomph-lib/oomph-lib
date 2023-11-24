@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1ElasticAxisymmetricVolumeConstraintBoundingElement}{}\doxysection{oomph\+::Elastic\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1ElasticAxisymmetricVolumeConstraintBoundingElement}{}\doxysection{oomph\+::Elastic\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element$<$ ELEMENT $>$ Class Template Reference}
 \label{classoomph_1_1ElasticAxisymmetricVolumeConstraintBoundingElement}\index{oomph::ElasticAxisymmetricVolumeConstraintBoundingElement$<$ ELEMENT $>$@{oomph::ElasticAxisymmetricVolumeConstraintBoundingElement$<$ ELEMENT $>$}}
 
 
@@ -9,7 +9,7 @@
 
 {\ttfamily \#include $<$constrained\+\_\+volume\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Elastic\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Elastic\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element$<$ ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.477876cm]{classoomph_1_1ElasticAxisymmetricVolumeConstraintBoundingElement}
@@ -18,7 +18,7 @@ Inheritance diagram for oomph\+::Elastic\+Axisymmetric\+Volume\+Constraint\+Boun
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1ElasticAxisymmetricVolumeConstraintBoundingElement_a533376e1f314fabc4c014f9c7547f5e8}{Elastic\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&element\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}})
+\mbox{\hyperlink{classoomph_1_1ElasticAxisymmetricVolumeConstraintBoundingElement_a533376e1f314fabc4c014f9c7547f5e8}{Elastic\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&element\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a478d577ac6db67ecc80f1f02ae3ab170}{face\+\_\+index}})
 \begin{DoxyCompactList}\small\item\em Contructor\+: Specify bulk element and index of face to which this face element is to be attached. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ElasticAxisymmetricVolumeConstraintBoundingElement_adc7f5296f867251fe4b97b01f40c11e7}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Fill in contribution to residuals and Jacobian. This is specific to solid-\/based elements in which derivatives w.\+r.\+t. to nodal positions are evaluated by finite differencing. \end{DoxyCompactList}\item 
@@ -30,11 +30,12 @@ double \mbox{\hyperlink{classoomph_1_1ElasticAxisymmetricVolumeConstraintBoundin
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class ELEMENT$>$\newline
 class oomph\+::\+Elastic\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element$<$ ELEMENT $>$}
+
 /////////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////////// 
 
 The axisymmetric (one-\/dimensional) interface elements that allow imposition of a volume constraint specialised for the case when the nodal positions of the bulk elements are treated as solid degrees of freedom. To enforce that a fluid volume has a certain volume, attach these elements to all faces of the (2D axisymmetric) bulk fluid elements (of type ELEMENT) that bound that region and then specify the \char`\"{}pressure\char`\"{} value that is traded for the constraint. 
 
-Definition at line \mbox{\hyperlink{constrained__volume__elements_8h_source_l00602}{602}} of file \mbox{\hyperlink{constrained__volume__elements_8h_source}{constrained\+\_\+volume\+\_\+elements.\+h}}.
+Definition at line 602 of file constrained\+\_\+volume\+\_\+elements.\+h.
 
 
 
@@ -52,11 +53,11 @@ Contructor\+: Specify bulk element and index of face to which this face element 
 
 
 
-Definition at line \mbox{\hyperlink{constrained__volume__elements_8h_source_l00609}{609}} of file \mbox{\hyperlink{constrained__volume__elements_8h_source}{constrained\+\_\+volume\+\_\+elements.\+h}}.
+Definition at line 609 of file constrained\+\_\+volume\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l05132}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, and \mbox{\hyperlink{elements_8h_source_l04626}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}.
+References oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), and oomph\+::\+Face\+Element\+::face\+\_\+index().
 
 
 
@@ -78,11 +79,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a6ae09fc0d6
 
 
 
-Definition at line \mbox{\hyperlink{constrained__volume__elements_8h_source_l00621}{621}} of file \mbox{\hyperlink{constrained__volume__elements_8h_source}{constrained\+\_\+volume\+\_\+elements.\+h}}.
+Definition at line 621 of file constrained\+\_\+volume\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{constrained__volume__elements_8cc_source_l00352}{oomph\+::\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+volume\+\_\+constraint()}}.
+References oomph\+::\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+volume\+\_\+constraint().
 
 \mbox{\Hypertarget{classoomph_1_1ElasticAxisymmetricVolumeConstraintBoundingElement_a8fe8843e542a626dd374cc4cd6850bcb}\label{classoomph_1_1ElasticAxisymmetricVolumeConstraintBoundingElement_a8fe8843e542a626dd374cc4cd6850bcb}} 
 \index{oomph::ElasticAxisymmetricVolumeConstraintBoundingElement$<$ ELEMENT $>$@{oomph::ElasticAxisymmetricVolumeConstraintBoundingElement$<$ ELEMENT $>$}!zeta\_nodal@{zeta\_nodal}}
@@ -101,11 +102,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a849561c5fbcbc07
 
 
 
-Definition at line \mbox{\hyperlink{constrained__volume__elements_8h_source_l00635}{635}} of file \mbox{\hyperlink{constrained__volume__elements_8h_source}{constrained\+\_\+volume\+\_\+elements.\+h}}.
+Definition at line 635 of file constrained\+\_\+volume\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l04497}{oomph\+::\+Face\+Element\+::zeta\+\_\+nodal()}}.
+References i, and oomph\+::\+Face\+Element\+::zeta\+\_\+nodal().
 
 
 

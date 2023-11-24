@@ -20,16 +20,16 @@ Inheritance diagram for oomph\+::Bermudez\+PMLMapping\+And\+Transformed\+Coordin
 \item 
 \mbox{\hyperlink{classoomph_1_1BermudezPMLMappingAndTransformedCoordinate_a3ead83a42ceccbcdcb6ca47a66c807af}{Bermudez\+PMLMapping\+And\+Transformed\+Coordinate}} ()
 \begin{DoxyCompactList}\small\item\em Default constructor (empty) \end{DoxyCompactList}\item 
-std\+::complex$<$ double $>$ \mbox{\hyperlink{classoomph_1_1BermudezPMLMappingAndTransformedCoordinate_a55856d2c1fb1793830a170570228d9f6}{gamma}} (const double \&nu\+\_\+i, const double \&pml\+\_\+width\+\_\+i, const double \&k\+\_\+squared)
+std\+::complex$<$ double $>$ \mbox{\hyperlink{classoomph_1_1BermudezPMLMappingAndTransformedCoordinate_a06fc613059c82b59dc45c2125347ec6a}{gamma}} (const double \&nu\+\_\+i, const double \&pml\+\_\+width\+\_\+i, const double \&k\+\_\+squared)
 \begin{DoxyCompactList}\small\item\em Overwrite the pure PML mapping coefficient function to return the mapping function proposed by Bermudez et al. \end{DoxyCompactList}\item 
-std\+::complex$<$ double $>$ \mbox{\hyperlink{classoomph_1_1BermudezPMLMappingAndTransformedCoordinate_a3664f16b314b4d72a82d5c0acc8a36de}{transformed\+\_\+coordinate}} (const double \&nu\+\_\+i, const double \&pml\+\_\+width\+\_\+i, const double \&pml\+\_\+inner\+\_\+boundary, const double \&k\+\_\+squared)
+std\+::complex$<$ double $>$ \mbox{\hyperlink{classoomph_1_1BermudezPMLMappingAndTransformedCoordinate_a29d87b67e0894297f752141e67ae6e0e}{transformed\+\_\+coordinate}} (const double \&nu\+\_\+i, const double \&pml\+\_\+width\+\_\+i, const double \&pml\+\_\+inner\+\_\+boundary, const double \&k\+\_\+squared)
 \begin{DoxyCompactList}\small\item\em Overwrite the pure PML mapping coefficient function to return the transformed coordinate proposed by Bermudez et al. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 The mapping function propsed by Bermudez et al, appears to be the best and so this will be the default mapping (see definition of \mbox{\hyperlink{classoomph_1_1PMLHelmholtzEquations}{PMLHelmholtz\+Equations}}) 
 
-Definition at line \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__elements_8h_source_l00108}{108}} of file \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__elements_8h_source}{pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h}}.
+Definition at line 108 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
@@ -46,16 +46,16 @@ Default constructor (empty)
 
 
 
-Definition at line \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__elements_8h_source_l00113}{113}} of file \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__elements_8h_source}{pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h}}.
+Definition at line 113 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1BermudezPMLMappingAndTransformedCoordinate_a55856d2c1fb1793830a170570228d9f6}\label{classoomph_1_1BermudezPMLMappingAndTransformedCoordinate_a55856d2c1fb1793830a170570228d9f6}} 
+\mbox{\Hypertarget{classoomph_1_1BermudezPMLMappingAndTransformedCoordinate_a06fc613059c82b59dc45c2125347ec6a}\label{classoomph_1_1BermudezPMLMappingAndTransformedCoordinate_a06fc613059c82b59dc45c2125347ec6a}} 
 \index{oomph::BermudezPMLMappingAndTransformedCoordinate@{oomph::BermudezPMLMappingAndTransformedCoordinate}!gamma@{gamma}}
 \index{gamma@{gamma}!oomph::BermudezPMLMappingAndTransformedCoordinate@{oomph::BermudezPMLMappingAndTransformedCoordinate}}
 \doxysubsubsection{\texorpdfstring{gamma()}{gamma()}}
-{\footnotesize\ttfamily std\+::complex$<$ double $>$ oomph\+::\+Bermudez\+PMLMapping\+And\+Transformed\+Coordinate\+::gamma (\begin{DoxyParamCaption}\item[{const double \&}]{nu\+\_\+i,  }\item[{const double \&}]{pml\+\_\+width\+\_\+i,  }\item[{const double \&}]{k\+\_\+squared }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily std\+::complex$<$double$>$ oomph\+::\+Bermudez\+PMLMapping\+And\+Transformed\+Coordinate\+::gamma (\begin{DoxyParamCaption}\item[{const double \&}]{nu\+\_\+i,  }\item[{const double \&}]{pml\+\_\+width\+\_\+i,  }\item[{const double \&}]{k\+\_\+squared }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -63,17 +63,17 @@ Overwrite the pure PML mapping coefficient function to return the mapping functi
 
 return $\gamma=1 + (1/k)(i/|outer_boundary - x|)$ or more abstractly $\gamma = 1 + \frac i {k\delta_{pml}}(1/|1-\bar\nu|)$
 
-Implements \mbox{\hyperlink{classoomph_1_1PMLMappingAndTransformedCoordinate_a4aa777dd66ec1e2c0bf15c68446148ac}{oomph\+::\+PMLMapping\+And\+Transformed\+Coordinate}}.
+Implements \mbox{\hyperlink{classoomph_1_1PMLMappingAndTransformedCoordinate_a230b0df052d95ba0d9e1c6d0082a6ab4}{oomph\+::\+PMLMapping\+And\+Transformed\+Coordinate}}.
 
 
 
-Definition at line \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__elements_8h_source_l00117}{117}} of file \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__elements_8h_source}{pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h}}.
+Definition at line 117 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
-\mbox{\Hypertarget{classoomph_1_1BermudezPMLMappingAndTransformedCoordinate_a3664f16b314b4d72a82d5c0acc8a36de}\label{classoomph_1_1BermudezPMLMappingAndTransformedCoordinate_a3664f16b314b4d72a82d5c0acc8a36de}} 
+\mbox{\Hypertarget{classoomph_1_1BermudezPMLMappingAndTransformedCoordinate_a29d87b67e0894297f752141e67ae6e0e}\label{classoomph_1_1BermudezPMLMappingAndTransformedCoordinate_a29d87b67e0894297f752141e67ae6e0e}} 
 \index{oomph::BermudezPMLMappingAndTransformedCoordinate@{oomph::BermudezPMLMappingAndTransformedCoordinate}!transformed\_coordinate@{transformed\_coordinate}}
 \index{transformed\_coordinate@{transformed\_coordinate}!oomph::BermudezPMLMappingAndTransformedCoordinate@{oomph::BermudezPMLMappingAndTransformedCoordinate}}
 \doxysubsubsection{\texorpdfstring{transformed\_coordinate()}{transformed\_coordinate()}}
-{\footnotesize\ttfamily std\+::complex$<$ double $>$ oomph\+::\+Bermudez\+PMLMapping\+And\+Transformed\+Coordinate\+::transformed\+\_\+coordinate (\begin{DoxyParamCaption}\item[{const double \&}]{nu\+\_\+i,  }\item[{const double \&}]{pml\+\_\+width\+\_\+i,  }\item[{const double \&}]{pml\+\_\+inner\+\_\+boundary,  }\item[{const double \&}]{k\+\_\+squared }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily std\+::complex$<$double$>$ oomph\+::\+Bermudez\+PMLMapping\+And\+Transformed\+Coordinate\+::transformed\+\_\+coordinate (\begin{DoxyParamCaption}\item[{const double \&}]{nu\+\_\+i,  }\item[{const double \&}]{pml\+\_\+width\+\_\+i,  }\item[{const double \&}]{pml\+\_\+inner\+\_\+boundary,  }\item[{const double \&}]{k\+\_\+squared }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -81,11 +81,11 @@ Overwrite the pure PML mapping coefficient function to return the transformed co
 
 return $\tilde x = h + \nu + \log(1-|\nu / \delta|)$
 
-Implements \mbox{\hyperlink{classoomph_1_1PMLMappingAndTransformedCoordinate_a462de87e501ec68731181d87c0faf473}{oomph\+::\+PMLMapping\+And\+Transformed\+Coordinate}}.
+Implements \mbox{\hyperlink{classoomph_1_1PMLMappingAndTransformedCoordinate_a4aa793ab5eb360d14deb408ef32266b8}{oomph\+::\+PMLMapping\+And\+Transformed\+Coordinate}}.
 
 
 
-Definition at line \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__elements_8h_source_l00130}{130}} of file \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__elements_8h_source}{pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h}}.
+Definition at line 130 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
 
 
 

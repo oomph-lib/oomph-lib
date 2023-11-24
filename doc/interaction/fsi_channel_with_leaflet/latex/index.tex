@@ -56,7 +56,7 @@ As usual we use a namespace to define the problem parameters\+: The Reynolds num
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==== start\_of\_global\_parameters================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Global parameters}}
-\DoxyCodeLine{\textcolor{comment}{//===============================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//===============================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Reynolds number}}
@@ -116,7 +116,7 @@ We use a {\ttfamily Geom\+Object} to describe the initial, stress-\/free shape o
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====start\_of\_undeformed\_leaflet=================================}}
 \DoxyCodeLine{\textcolor{comment}{/// GeomObject: Undeformed straight, vertical leaflet}}
-\DoxyCodeLine{\textcolor{comment}{//=================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classUndeformedLeaflet}{UndeformedLeaflet}} : \textcolor{keyword}{public} GeomObject}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
@@ -190,8 +190,8 @@ As with most time-\/dependent demo codes, the specification of a non-\/zero numb
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//======= start\_of\_main================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Driver code  -\/-\/ pass a command line argument if you want to run}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// the code in validation mode where it only performs a few steps}}
+\DoxyCodeLine{\textcolor{comment}{/// Driver code  -\/-\/ pass a command line argument if you want to run}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// the code in validation mode where it only performs a few steps}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{fsi__channel__with__leaflet_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
@@ -346,7 +346,7 @@ The {\ttfamily Problem} class contains the usual member functions, most of which
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====start\_of\_problem\_class========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// FSI leaflet in channel}}
-\DoxyCodeLine{\textcolor{comment}{//===================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//===================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classFSIChannelWithLeafletProblem}{FSIChannelWithLeafletProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -381,13 +381,13 @@ The {\ttfamily Problem} class contains the usual member functions, most of which
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classFSIChannelWithLeafletProblem_acc3f4745ea9b4524aebbc4f2556d1286}{actions\_after\_adapt}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Access function to the wall mesh}}
-\DoxyCodeLine{\textcolor{comment}{} OneDLagrangianMesh<FSIHermiteBeamElement>* \mbox{\hyperlink{classFSIChannelWithLeafletProblem_a6505a8ecf982304b71b513dac4f47e89}{wall\_mesh\_pt}}() }
+\DoxyCodeLine{\textcolor{comment}{} OneDLagrangianMesh<FSIHermiteBeamElement>* \mbox{\hyperlink{classFSIChannelWithLeafletProblem_ab6a1c532882a71ddd576c752da389de0}{wall\_mesh\_pt}}() }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{keywordflow}{return} \mbox{\hyperlink{classFSIChannelWithLeafletProblem_a943437726f0a54fa8f7fc9ffb12bc4cd}{Wall\_mesh\_pt}};}
 \DoxyCodeLine{  \} }
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Access function to fluid mesh}}
-\DoxyCodeLine{\textcolor{comment}{} RefineableAlgebraicChannelWithLeafletMesh<ELEMENT>* \mbox{\hyperlink{classFSIChannelWithLeafletProblem_ad4408b6e1367fcbe976d48b55d9fd78e}{fluid\_mesh\_pt}}()}
+\DoxyCodeLine{\textcolor{comment}{} RefineableAlgebraicChannelWithLeafletMesh<ELEMENT>* \mbox{\hyperlink{classFSIChannelWithLeafletProblem_aec9244497829f9a85cbca7307c4d4e10}{fluid\_mesh\_pt}}()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{keywordflow}{return} \mbox{\hyperlink{classFSIChannelWithLeafletProblem_a40cee3652918bdcf67569afc89d3074d}{Fluid\_mesh\_pt}};}
 \DoxyCodeLine{  \}}
@@ -469,7 +469,7 @@ We start the problem construction by creating two timesteppers\+: A {\ttfamily B
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====start\_of\_constructor==============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor}}
-\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classFSIChannelWithLeafletProblem_aaa0a455e91c4fb2dd9696607b802d01b}{FSIChannelWithLeafletProblem<ELEMENT>::FSIChannelWithLeafletProblem}}(}
 \DoxyCodeLine{ \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& lleft,}
@@ -768,7 +768,7 @@ Once the fluid mesh has been adapted we free all pressure degrees of freedom and
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==== start\_of\_actions\_after\_adapt=================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Actions\_after\_adapt()}}
-\DoxyCodeLine{\textcolor{comment}{//==================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classFSIChannelWithLeafletProblem_acc3f4745ea9b4524aebbc4f2556d1286}{FSIChannelWithLeafletProblem<ELEMENT>::actions\_after\_adapt}}()}
 \DoxyCodeLine{\{}
@@ -847,7 +847,7 @@ The function {\ttfamily doc\+\_\+solution(...)} documents the results. We output
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_doc\_solution=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classFSIChannelWithLeafletProblem_a055f124f38dca43bc3ed36b80c5c0880}{FSIChannelWithLeafletProblem<ELEMENT>::doc\_solution}}(DocInfo\& doc\_info,}
 \DoxyCodeLine{                                                         ofstream\& trace)}
@@ -1020,7 +1020,7 @@ The function {\ttfamily doc\+\_\+solution(...)} documents the results. We output
 \end{DoxyImage}
  Clearly, the normal points in the wrong direction and the tractions have the wrong sign. This can be made \char`\"{}consistent\char`\"{}, however, by also swapping the association between the mesh boundaries and the leaflet\textquotesingle{}s faces. I.\+e. if we associate mesh boundary 5 with the \char`\"{}front\char`\"{} via ~\newline
 ~\newline
- 
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{comment}{// Front of leaflet: face 0}}
 \DoxyCodeLine{face=0; }
@@ -1031,7 +1031,7 @@ The function {\ttfamily doc\+\_\+solution(...)} documents the results. We output
  ~\newline
  and mesh boundary 4 with the \char`\"{}back\char`\"{} via ~\newline
 ~\newline
- 
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{comment}{// Back of leaflet: face 1}}
 \DoxyCodeLine{face=1; }

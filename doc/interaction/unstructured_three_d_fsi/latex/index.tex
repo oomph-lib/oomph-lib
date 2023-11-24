@@ -93,7 +93,7 @@ As usual we define the various problem parameters in a global namespace. We defi
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_namespace==========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Global variables}}
-\DoxyCodeLine{\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Parameters}{Global\_Parameters}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -165,7 +165,7 @@ Following the procedure discussed in the \href{../../../solid/unstructured_three
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==========start\_solid\_mesh===============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Tetgen-\/based mesh upgraded to become a solid mesh}}
-\DoxyCodeLine{\textcolor{comment}{//=========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classMySolidTetgenMesh}{MySolidTetgenMesh}} : \textcolor{keyword}{public} \textcolor{keyword}{virtual} TetgenMesh<ELEMENT>, }
 \DoxyCodeLine{                       \textcolor{keyword}{public} \textcolor{keyword}{virtual} SolidMesh }
@@ -209,7 +209,7 @@ Following the procedure discussed in the \href{../../../solid/unstructured_three
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Empty Destructor}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \mbox{\hyperlink{classMySolidTetgenMesh}{\string~MySolidTetgenMesh}}() \{ \}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \string~\mbox{\hyperlink{classMySolidTetgenMesh}{MySolidTetgenMesh}}() \{ \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\};}
 
@@ -225,7 +225,7 @@ The creation of the fluid mesh follows the same process but uses the mesh create
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==============start\_fluid\_mesh===========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Tetgen-\/based mesh upgraded to become a (pseudo-\/) solid mesh}}
-\DoxyCodeLine{\textcolor{comment}{//=========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classFluidTetMesh}{FluidTetMesh}} : \textcolor{keyword}{public} \textcolor{keyword}{virtual} TetgenMesh<ELEMENT>,}
 \DoxyCodeLine{                     \textcolor{keyword}{public} \textcolor{keyword}{virtual} SolidMesh }
@@ -278,7 +278,7 @@ The creation of the fluid mesh follows the same process but uses the mesh create
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Empty Destructor}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \mbox{\hyperlink{classFluidTetMesh}{\string~FluidTetMesh}}() \{ \}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \string~\mbox{\hyperlink{classFluidTetMesh}{FluidTetMesh}}() \{ \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\};}
 
@@ -294,7 +294,7 @@ We specify an output directory and instantiate the constitutive equation ({\ttfa
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//========================= start\_of\_main=================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Demonstrate how to solve an unstructured 3D FSI problem}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{unstructured__three__d__fsi_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} **argv)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ \textcolor{comment}{// Label for output}}
@@ -361,7 +361,7 @@ The {\ttfamily Problem} class has the usual members, with access functions to th
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===============start\_of\_problem\_class===============================}}
 \DoxyCodeLine{\textcolor{comment}{/// Unstructured 3D FSI problem}}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} FLUID\_ELEMENT, \textcolor{keyword}{class} SOLID\_ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classUnstructuredFSIProblem}{UnstructuredFSIProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -508,7 +508,7 @@ We start by building the fluid mesh, using the files created by \href{http://wia
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==========start\_of\_constructor==========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for unstructured 3D FSI problem}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} FLUID\_ELEMENT, \textcolor{keyword}{class} SOLID\_ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classUnstructuredFSIProblem_a6a31fd839e0215ef1312942cf7284bd2}{UnstructuredFSIProblem<FLUID\_ELEMENT,SOLID\_ELEMENT>::UnstructuredFSIProblem}}()}
 \DoxyCodeLine{\{ }
@@ -1003,7 +1003,7 @@ The creation of the FSI traction elements that apply the fluid traction to the s
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_fsi\_traction\_elements======================}}
 \DoxyCodeLine{\textcolor{comment}{/// Create FSI traction elements }}
-\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} FLUID\_ELEMENT,\textcolor{keyword}{class} SOLID\_ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classUnstructuredFSIProblem_a934a587c99668fca969a72814b3142a7}{UnstructuredFSIProblem<FLUID\_ELEMENT,SOLID\_ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classUnstructuredFSIProblem_a934a587c99668fca969a72814b3142a7}{create\_fsi\_traction\_elements}}()}
@@ -1139,7 +1139,7 @@ The helper function {\ttfamily create\+\_\+fluid\+\_\+traction\+\_\+elements()} 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_fluid\_traction\_elements==============================}}
 \DoxyCodeLine{\textcolor{comment}{/// Create fluid traction elements }}
-\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} FLUID\_ELEMENT,\textcolor{keyword}{class} SOLID\_ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classUnstructuredFSIProblem_af766e3bbc8963a286678cb1d277909f5}{UnstructuredFSIProblem<FLUID\_ELEMENT,SOLID\_ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classUnstructuredFSIProblem_af766e3bbc8963a286678cb1d277909f5}{create\_fluid\_traction\_elements}}()}
@@ -1220,7 +1220,7 @@ The post-\/processing routine simply executes the output functions for the fluid
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//========start\_of\_doc\_solution===========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} FLUID\_ELEMENT, \textcolor{keyword}{class} SOLID\_ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classUnstructuredFSIProblem_a15f581318b505de07f50bd570da8c8d0}{UnstructuredFSIProblem<FLUID\_ELEMENT,SOLID\_ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classUnstructuredFSIProblem_a15f581318b505de07f50bd570da8c8d0}{doc\_solution}}(DocInfo\& doc\_info)}
@@ -1432,11 +1432,14 @@ Here are a few things that can (and often do) go wrong in unstructured, three-\/
 ~\newline
 
 \item not creating the Lagrange-\/multiplier elements that enforce the solid displacements onto the fluid mesh.
-\end{DoxyEnumerate}~\newline
+\end{DoxyEnumerate}
+\end{DoxyEnumerate}
+\end{DoxyItemize}~\newline
 ~\newline
  This completely uncouples the two problems, although they will be solved simultaneously, allowing you to replicate the single-\/physics parameter studies already performed. ~\newline
 ~\newline
 
+\begin{DoxyEnumerate}
 \item Now switch on the various interactions, one-\/by-\/one, while carefully validating the results at each stage. We tend to proceed as follows\+: ~\newline
 ~\newline
 
@@ -1452,10 +1455,11 @@ Here are a few things that can (and often do) go wrong in unstructured, three-\/
 
 \item Gently increase the value of the FSI parameter, $ Q $, remembering that it represents the ratio of the typical viscous fluid stresses to the stiffness of the solid. Hence, even relatively small values of $ Q $ tend to lead to relatively large solid displacements. Be gentle!
 \end{DoxyEnumerate}
-\end{DoxyEnumerate}~\newline
+\end{DoxyEnumerate}
+
+~\newline
 ~\newline
 
-\end{DoxyItemize}
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}

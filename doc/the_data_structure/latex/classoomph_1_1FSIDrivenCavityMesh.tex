@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1FSIDrivenCavityMesh}{}\doxysection{oomph\+::FSIDriven\+Cavity\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1FSIDrivenCavityMesh}{}\doxysection{oomph\+::FSIDriven\+Cavity\+Mesh$<$ ELEMENT $>$ Class Template Reference}
 \label{classoomph_1_1FSIDrivenCavityMesh}\index{oomph::FSIDrivenCavityMesh$<$ ELEMENT $>$@{oomph::FSIDrivenCavityMesh$<$ ELEMENT $>$}}
 
 
@@ -9,7 +9,7 @@
 
 {\ttfamily \#include $<$fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+h$>$}
 
-Inheritance diagram for oomph\+::FSIDriven\+Cavity\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::FSIDriven\+Cavity\+Mesh$<$ ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=4.375000cm]{classoomph_1_1FSIDrivenCavityMesh}
@@ -18,7 +18,7 @@ Inheritance diagram for oomph\+::FSIDriven\+Cavity\+Mesh\texorpdfstring{$<$}{<} 
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1FSIDrivenCavityMesh_af227477a1de5faf56352d21913a91feb}{FSIDriven\+Cavity\+Mesh}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a84f59d74c6d9038231fb138c29420ed7}{nx}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a2fb0d63a354817c162e37507673e26e9}{ny}}, const double \&lx, const double \&ly, const double \&gap\+\_\+fraction, \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$wall\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
+\mbox{\hyperlink{classoomph_1_1FSIDrivenCavityMesh_af227477a1de5faf56352d21913a91feb}{FSIDriven\+Cavity\+Mesh}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a4ff7678ec433180e2245ea2147f222b7}{nx}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a45011f22dedd480392b1f376e4269921}{ny}}, const double \&lx, const double \&ly, const double \&gap\+\_\+fraction, \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$wall\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
 \begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements, number of elements, fractional height of the gap above the moving wall, pointer to \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} that defines the collapsible segment and pointer to \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} (defaults to the default timestepper, \mbox{\hyperlink{classoomph_1_1Steady}{Steady}}). \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -37,6 +37,7 @@ double \mbox{\hyperlink{classoomph_1_1FSIDrivenCavityMesh_ad95b3650cfa765b1ac6a0
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class ELEMENT$>$\newline
 class oomph\+::\+FSIDriven\+Cavity\+Mesh$<$ ELEMENT $>$}
+
 \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} for W. Wall\textquotesingle{}s FSI driven cavity problem. The mesh is derived from the {\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Simple\+Rectangular\+Quad\+Mesh}}} so it\textquotesingle{}s node and element numbering scheme is the same as in that mesh. Only the boundaries are numbered differently to allow the easy identification of the \char`\"{}collapsible\char`\"{} segment. Boundary coordinates are set up for all nodes located on boundary 3 (the collapsible segment). The curvilinear (\char`\"{}collapsible\char`\"{}) segment is defined by a {\ttfamily \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}}. 
 
 
@@ -49,7 +50,7 @@ class oomph\+::\+FSIDriven\+Cavity\+Mesh$<$ ELEMENT $>$}
 \item Boundary 5 is the gap above the moving lid on the left wall 
 \end{DoxyItemize}
 
-Definition at line \mbox{\hyperlink{fsi__driven__cavity__mesh_8template_8h_source_l00065}{65}} of file \mbox{\hyperlink{fsi__driven__cavity__mesh_8template_8h_source}{fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+h}}.
+Definition at line 65 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+h.
 
 
 
@@ -67,11 +68,11 @@ Constructor\+: Pass number of elements, number of elements, fractional height of
 
 Constructor\+: Pass number of elements, lengths, pointer to \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} that defines the collapsible segment and pointer to \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} (defaults to the default timestepper, \mbox{\hyperlink{classoomph_1_1Steady}{Steady}}). 
 
-Definition at line \mbox{\hyperlink{fsi__driven__cavity__mesh_8template_8cc_source_l00041}{41}} of file \mbox{\hyperlink{fsi__driven__cavity__mesh_8template_8cc_source}{fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+cc}}.
+Definition at line 41 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+cc.
 
 
 
-References \mbox{\hyperlink{mesh_8cc_source_l00243}{oomph\+::\+Mesh\+::add\+\_\+boundary\+\_\+node()}}, \mbox{\hyperlink{mesh_8h_source_l00190}{oomph\+::\+Mesh\+::\+Boundary\+\_\+coordinate\+\_\+exists}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00473}{oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{fsi__driven__cavity__mesh_8template_8h_source_l00090}{oomph\+::\+FSIDriven\+Cavity\+Mesh$<$ ELEMENT $>$\+::\+Gap\+\_\+fraction}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{mesh_8h_source_l00827}{oomph\+::\+Mesh\+::nboundary()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{mesh_8h_source_l00596}{oomph\+::\+Mesh\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02218}{oomph\+::\+Finite\+Element\+::nnode\+\_\+1d()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00436}{oomph\+::\+Mesh\+::node\+\_\+pt()}}, \mbox{\hyperlink{simple__rectangular__quadmesh_8template_8h_source_l00071}{oomph\+::\+Simple\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::nx()}}, \mbox{\hyperlink{simple__rectangular__quadmesh_8template_8h_source_l00077}{oomph\+::\+Simple\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::ny()}}, \mbox{\hyperlink{mesh_8cc_source_l00204}{oomph\+::\+Mesh\+::remove\+\_\+boundary\+\_\+nodes()}}, \mbox{\hyperlink{nodes_8cc_source_l02394}{oomph\+::\+Node\+::set\+\_\+coordinates\+\_\+on\+\_\+boundary()}}, \mbox{\hyperlink{mesh_8h_source_l00505}{oomph\+::\+Mesh\+::set\+\_\+nboundary()}}, \mbox{\hyperlink{quad__mesh_8h_source_l00073}{oomph\+::\+Quad\+Mesh\+Base\+::setup\+\_\+boundary\+\_\+element\+\_\+info()}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
+References oomph\+::\+Mesh\+::add\+\_\+boundary\+\_\+node(), oomph\+::\+Mesh\+::\+Boundary\+\_\+coordinate\+\_\+exists, e, oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), oomph\+::\+FSIDriven\+Cavity\+Mesh$<$ ELEMENT $>$\+::\+Gap\+\_\+fraction, i, oomph\+::\+Mesh\+::nboundary(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Mesh\+::nnode(), oomph\+::\+Finite\+Element\+::nnode\+\_\+1d(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Mesh\+::node\+\_\+pt(), oomph\+::\+Simple\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::nx(), oomph\+::\+Simple\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::ny(), oomph\+::\+Mesh\+::remove\+\_\+boundary\+\_\+nodes(), oomph\+::\+Node\+::set\+\_\+coordinates\+\_\+on\+\_\+boundary(), oomph\+::\+Mesh\+::set\+\_\+nboundary(), oomph\+::\+Quad\+Mesh\+Base\+::setup\+\_\+boundary\+\_\+element\+\_\+info(), and oomph\+::\+Node\+::x().
 
 
 
@@ -89,11 +90,11 @@ Fraction of the gap next to moving lid, relative to the height of the domain.
 
 
 
-Definition at line \mbox{\hyperlink{fsi__driven__cavity__mesh_8template_8h_source_l00090}{90}} of file \mbox{\hyperlink{fsi__driven__cavity__mesh_8template_8h_source}{fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+h}}.
+Definition at line 90 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{fsi__driven__cavity__mesh_8template_8cc_source_l00041}{oomph\+::\+FSIDriven\+Cavity\+Mesh$<$ ELEMENT $>$\+::\+FSIDriven\+Cavity\+Mesh()}}.
+Referenced by oomph\+::\+FSIDriven\+Cavity\+Mesh$<$ ELEMENT $>$\+::\+FSIDriven\+Cavity\+Mesh().
 
 \mbox{\Hypertarget{classoomph_1_1FSIDrivenCavityMesh_a179f742e7bb521e8943107be3005d49b}\label{classoomph_1_1FSIDrivenCavityMesh_a179f742e7bb521e8943107be3005d49b}} 
 \index{oomph::FSIDrivenCavityMesh$<$ ELEMENT $>$@{oomph::FSIDrivenCavityMesh$<$ ELEMENT $>$}!Nx@{Nx}}
@@ -108,7 +109,7 @@ Number of elements in x direction.
 
 
 
-Definition at line \mbox{\hyperlink{fsi__driven__cavity__mesh_8template_8h_source_l00083}{83}} of file \mbox{\hyperlink{fsi__driven__cavity__mesh_8template_8h_source}{fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+h}}.
+Definition at line 83 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FSIDrivenCavityMesh_af80a5662c2f61ebe49caba4ab08886b9}\label{classoomph_1_1FSIDrivenCavityMesh_af80a5662c2f61ebe49caba4ab08886b9}} 
 \index{oomph::FSIDrivenCavityMesh$<$ ELEMENT $>$@{oomph::FSIDrivenCavityMesh$<$ ELEMENT $>$}!Ny@{Ny}}
@@ -123,7 +124,7 @@ Number of elements in y direction.
 
 
 
-Definition at line \mbox{\hyperlink{fsi__driven__cavity__mesh_8template_8h_source_l00086}{86}} of file \mbox{\hyperlink{fsi__driven__cavity__mesh_8template_8h_source}{fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+h}}.
+Definition at line 86 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FSIDrivenCavityMesh_a4f05e03a223ac1f8370bdd39c56a5638}\label{classoomph_1_1FSIDrivenCavityMesh_a4f05e03a223ac1f8370bdd39c56a5638}} 
 \index{oomph::FSIDrivenCavityMesh$<$ ELEMENT $>$@{oomph::FSIDrivenCavityMesh$<$ ELEMENT $>$}!Wall\_pt@{Wall\_pt}}
@@ -138,7 +139,7 @@ Pointer to geometric object that represents the moving wall.
 
 
 
-Definition at line \mbox{\hyperlink{fsi__driven__cavity__mesh_8template_8h_source_l00093}{93}} of file \mbox{\hyperlink{fsi__driven__cavity__mesh_8template_8h_source}{fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+h}}.
+Definition at line 93 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+h.
 
 
 

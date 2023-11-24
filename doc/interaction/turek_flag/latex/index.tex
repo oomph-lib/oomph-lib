@@ -1,4 +1,4 @@
-In this example we consider the flow in a 2D channel past a cylinder with an attached elastic \char`\"{}flag\char`\"{}. This is the FSI benchmark problem proposed by Turek \& Hron, \begin{center} \char`\"{}\+Proposal for Numerical Benchmarking of \+Fluid-\/\+Structure Interaction between an Elastic Object and a Laminar \+Incompressible Flow\char`\"{}, S. Turek \& J. Hron, pp. 371-\/385. In\+: \char`\"{}\+Fluid-\/\+Structure Interaction\char`\"{} Springer Lecture Notes in Computational Science and Engineering {\bfseries{53}}. Ed. H.-\/J. Bungartz \& M. Schaefer. Springer Verlag 2006. \end{center} 
+In this example we consider the flow in a 2D channel past a cylinder with an attached elastic \char`\"{}flag\char`\"{}. This is the FSI benchmark problem proposed by Turek \& Hron, \begin{center} "{}Proposal for Numerical Benchmarking of Fluid-\/\+Structure Interaction between an Elastic Object and a Laminar Incompressible Flow\char`\"{}, S. Turek \& J. Hron, pp. 371-\/385. In\+:  \char`\"{}Fluid-\/\+Structure Interaction"{} Springer Lecture Notes in Computational Science and Engineering {\bfseries{53}}. Ed. H.-\/J. Bungartz \& M. Schaefer. Springer Verlag 2006. \end{center} 
 
 The problem combines the two single-\/physics problems of ~\newline
 ~\newline
@@ -143,7 +143,7 @@ As usual, We use a namespace to define the (many) global parameters, using defau
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====start\_of\_global\_parameters=================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Global variables}}
-\DoxyCodeLine{\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Parameters}{Global\_Parameters}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -339,7 +339,7 @@ The driver code has the usual structure, though in this case we use the command 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_main==================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver }}
-\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{turek__flag_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ \textcolor{comment}{// Store command line arguments}}
@@ -464,7 +464,7 @@ The {\ttfamily Problem} class contains the usual member functions, such as acces
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//====start\_of\_problem\_class=========================================== }}
 \DoxyCodeLine{\textcolor{comment}{/// Problem class}}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================== }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================== }}
 \DoxyCodeLine{\textcolor{keyword}{template}< \textcolor{keyword}{class} FLUID\_ELEMENT,\textcolor{keyword}{class} SOLID\_ELEMENT >}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classTurekProblem}{TurekProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -475,15 +475,15 @@ The {\ttfamily Problem} class contains the usual member functions, such as acces
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classTurekProblem_a69f6624fd854393f0c0e5303603ec749}{TurekProblem}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double} \&length, \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&height);}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Access function for the fluid mesh }}
-\DoxyCodeLine{\textcolor{comment}{} RefineableAlgebraicCylinderWithFlagMesh<FLUID\_ELEMENT>* \mbox{\hyperlink{classTurekProblem_a3b4ac71e11bcded191a0711ff1d475f5}{fluid\_mesh\_pt}}() }
+\DoxyCodeLine{\textcolor{comment}{} RefineableAlgebraicCylinderWithFlagMesh<FLUID\_ELEMENT>* \mbox{\hyperlink{classTurekProblem_a0fc23b86efec256cb7f4450a928f7999}{fluid\_mesh\_pt}}() }
 \DoxyCodeLine{  \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classTurekProblem_a18a0daace5dc50db4b93879e4a600e6a}{Fluid\_mesh\_pt}};\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Access function for the solid mesh}}
-\DoxyCodeLine{\textcolor{comment}{} ElasticRefineableRectangularQuadMesh<SOLID\_ELEMENT>*\& \mbox{\hyperlink{classTurekProblem_a82b6ed236144e95a5f20ea10857fc147}{solid\_mesh\_pt}}() }
+\DoxyCodeLine{\textcolor{comment}{} ElasticRefineableRectangularQuadMesh<SOLID\_ELEMENT>*\& \mbox{\hyperlink{classTurekProblem_a89430ae6d87a85a83e23e14e0b0d72b7}{solid\_mesh\_pt}}() }
 \DoxyCodeLine{  \{\textcolor{keywordflow}{return} \mbox{\hyperlink{classTurekProblem_a1a449088ae3cc96ade1c58979294afed}{Solid\_mesh\_pt}};\} }
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Access function for the i-\/th mesh of FSI traction elements}}
-\DoxyCodeLine{\textcolor{comment}{} SolidMesh*\& \mbox{\hyperlink{classTurekProblem_a84ebb085e77f079232738e95d1090857}{traction\_mesh\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& i)}
+\DoxyCodeLine{\textcolor{comment}{} SolidMesh*\& \mbox{\hyperlink{classTurekProblem_a93a4b3d4e598a499631e00cfa701ee3c}{traction\_mesh\_pt}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& i)}
 \DoxyCodeLine{  \{\textcolor{keywordflow}{return} \mbox{\hyperlink{classTurekProblem_a0b8588d0f133ffb9a281c5747786f95f}{Traction\_mesh\_pt}}[i];\} }
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Actions after adapt: Re-\/setup the fsi lookup scheme}}
@@ -549,7 +549,7 @@ We start by building the solid mesh, using an initial discretisation with 20 x 2
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====start\_of\_constructor============================================= }}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor: Pass length and height of domain}}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================== }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================== }}
 \DoxyCodeLine{\textcolor{keyword}{template}< \textcolor{keyword}{class} FLUID\_ELEMENT,\textcolor{keyword}{class} SOLID\_ELEMENT >}
 \DoxyCodeLine{\mbox{\hyperlink{classTurekProblem_a69f6624fd854393f0c0e5303603ec749}{TurekProblem<FLUID\_ELEMENT,SOLID\_ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classTurekProblem_a69f6624fd854393f0c0e5303603ec749}{TurekProblem}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double} \&length,}
@@ -916,4 +916,380 @@ We start by building the solid mesh, using an initial discretisation with 20 x 2
 \DoxyCodeLine{  \}\textcolor{comment}{//end\_of\_loop}}
 
 \end{DoxyCodeInclude}
- Setting up the fluid-\/structure interaction is done from \char`\"{}both\char`\"{} sides\char`\"{} of the fluid-\/solid interface\+: First we ensure that the no-\/slip condition is automatically applied to all fluid nodes that are  located on the three faces of the flag (mesh boundaries 5, 6 and 7). \+This is done by passing the function pointer to the  $<$br$>$ \textbackslash{}c FSI\+\_\+functions\+::apply\+\_\+no\+\_\+slip\+\_\+on\+\_\+moving\+\_\+wall() function to the relevant fluid nodes ($<$\+A href=\char`\"{}../../../navier\+\_\+stokes/osc\+\_\+ellipse/html/index.html\char`\"{}$>$recall$<$/\+A$>$ that the auxiliary node update functions are automatically executed whenever the position of a node  is updated by the algebraic node update). \+Since the no-\/slip condition (1) involves the Strouhal number (which, in the current problem, is not equal to the default value of \textbackslash{}c FSI\+\_\+functions\+::\+Strouhal\+\_\+for\+\_\+no\+\_\+slip=1.\+0), we overwrite the default assignment with the actual Strouhal number in the problem.  \textbackslash{}until // done automatic application of no-\/slip  \+Next, we set up the lookup schemes required by the \textbackslash{}c FSISolid\+Traction\+Elements to establish which fluid elements affect the traction onto the solid\+:  \textbackslash{}until \}   \+All interactions have now been specified and we conclude by assigning the equation numbers   \textbackslash{}skipline // Assign equation numbers \textbackslash{}until //end\+\_\+of\+\_\+constructor  $<$\+HR$>$ $<$\+HR$>$  @section set\+\_\+traction Create traction elements  \+This is a helper function that attaches \textbackslash{}c FSISolid\+Traction\+Element to the solid elements that are exposed to the fluid traction. \+We store the elements in three distinct sub-\/meshes -- one for each face. (\+Yet another mesh, pointed to by \textbackslash{}c \+Combined\+\_\+traction\+\_\+mesh\+\_\+pt, is created for post-\/processing  purposes.)  \textbackslash{}skipline start\+\_\+of\+\_\+create\+\_\+traction\+\_\+elements \textbackslash{}until  // end of create\+\_\+traction\+\_\+elements   $<$\+HR$>$ $<$\+HR$>$ @section check Actions before Newton convergence check  \+The algebraic node-\/update procedure updates the positions in response to changes in the solid displacements but this is not done automatically when the Newton solver updates the solid mechanics degrees of freedom. We therefore force a node-\/update before the Newton convergence check.  \textbackslash{}dontinclude turek\+\_\+flag.\+cc \textbackslash{}skipline start\+\_\+of\+\_\+actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check \textbackslash{}until \}  $<$\+HR$>$ $<$\+HR$>$  @section timestep Actions before the timestep  \+Before each timestep we update the inflow profile for all fluid nodes on mesh boundary 3.  \textbackslash{}skipline start\+\_\+of\+\_\+actions\+\_\+before\+\_\+implicit\+\_\+timestep \textbackslash{}until end\+\_\+of\+\_\+actions\+\_\+before\+\_\+implicit\+\_\+timestep   $<$\+HR$>$  $<$\+HR$>$  @section after\+\_\+adapt Actions after adapt  \+After each adaptation, we unpin and re-\/pin all redundant pressures degrees of freedom. This is necessary because their \char`\"{}redundant-\/ness\char`\"{} may have been altered by changes in the refinement  pattern; see $<$\+A href=\char`\"{}../../../navier\+\_\+stokes/adaptive\+\_\+driven\+\_\+cavity/html/index.html\char`\"{}$>$ another tutorial$<$/\+A$>$ for details. We ensure the automatic application of the no-\/slip condition on fluid nodes that are located on the faces of the flag, and re-\/setup the FSI lookup scheme that tells \textbackslash{}c FSISolid\+Traction\+Elements which fluid elements are located next to their Gauss points.  \textbackslash{}skipline actions\+\_\+after\+\_\+adapt \textbackslash{}until end of actions\+\_\+after\+\_\+adapt    $<$\+HR$>$ $<$\+HR$>$  @section doc Post-\/processing  \+The function \textbackslash{}c doc\+\_\+solution(...) produces the output for the fluid, solid and traction meshes and writes selected data to the trace file.  \textbackslash{}skipline start\+\_\+of\+\_\+doc\+\_\+solution \textbackslash{}until end\+\_\+of\+\_\+doc\+\_\+solution    $<$\+HR$>$ $<$\+HR$>$  @section com\+\_\+ex Further comments and exercises  -\/ When completing the build of the \textbackslash{}c FSISolid\+Traction\+Elements   (the elements that apply the fluid traction to the    solid elements that are exposed to the fluid) we specified the    number of the solid mesh boundary they are located on, using   \textbackslash{}n\textbackslash{}n   @code    elem\+\_\+pt-\/$>$set\+\_\+boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh(bound);   \textbackslash{}endcode   \textbackslash{}n   This information is required when setting up the fluid-\/structure   interaction because the \textbackslash{}c Mesh\+As\+Geom\+Object representation of the   mesh of \textbackslash{}c FSISolid\+Traction\+Elements is parametrised by the    boundary coordinate in the solid mesh. Explore the details of   the implementation by commenting out the relevant line of    code and use the debugger to find out how and where the code   fails. \textbackslash{}b Note\+: Since this step is somewhat subtle and therefore   easily forgotten, the  \textbackslash{}c FSISolid\+Traction\+Elements issue   an explicit warning if the bulk boundary number has not been set --   but only if the the library is compiled in PARANOID mode.   \textbackslash{}n\textbackslash{}n -\/ When comparing our results against those in Turek \& Hron\textquotesingle{}s   benchmark, we only focused on the period and amplitude of the   fully-\/developed self-\/excited oscillations. The benchmark data also    provides data on the time-\/dependent variations of the drag and lift   coefficients. Design suitable \textbackslash{}c Face\+Elements (to be attached   to the faces of the Navier-\/\+Stokes elements that are adjacent   to the flag or the cylinder) to compute these quantities.   The    $<$a href=\char`\"{}../../../the\+\_\+data\+\_\+structure/html/classoomph\+\_\+1\+\_\+1\+Navier\+Stokes\+Surface\+Power\+Element.html\char`\"{}$>$   $<$code$>$\+Navier\+Stokes\+Surface\+Power\+Elements$<$/code$>$$<$/a$>$   should provide a good basis for these.     $<$\+HR$>$ $<$\+HR$>$  @section ackn Acknowledgements   -\/ This code was originally developed by    Stefan Kollmannsberger and his students Iason Papaioannou and  $<$br$>$   Orkun Oezkan Doenmez. It was completed by Floraine Cordier.  $<$\+HR$>$ $<$\+HR$>$  @section sources Source files for this tutorial -\/ The source files for this tutorial are located in the directory\+:\textbackslash{}n\textbackslash{}n $<$\+CENTER$>$ $<$\+A href=\char`\"{}../../../../demo\+\_\+drivers/interaction/turek\+\_\+flag/\char`\"{}$>$ demo\+\_\+drivers/interaction/turek\+\_\+flag/ $<$/\+A$>$ $<$/\+CENTER$>$\textbackslash{}n -\/ The driver code is\+: \textbackslash{}n\textbackslash{}n $<$\+CENTER$>$ $<$\+A href=\char`\"{}../../../../demo\+\_\+drivers/interaction/turek\+\_\+flag/turek\+\_\+flag.cc\char`\"{}$>$ demo\+\_\+drivers/interaction/turek\+\_\+flag/turek\+\_\+flag.\+cc $<$/\+A$>$ $<$/\+CENTER$>$  $<$hr$>$ $<$hr$>$ @section pdf PDF file \+A $<$a href=\char`\"{}../latex/refman.pdf"{}\texorpdfstring{$>$}{>}pdf version of this document is available. \end{document}
+ Setting up the fluid-\/structure interaction is done from \char`\"{}both\char`\"{} sides"{} of the fluid-\/solid interface\+: First we ensure that the no-\/slip condition is automatically applied to all fluid nodes that are located on the three faces of the flag (mesh boundaries 5, 6 and 7). This is done by passing the function pointer to the ~\newline
+ {\ttfamily FSI\+\_\+functions\+::apply\+\_\+no\+\_\+slip\+\_\+on\+\_\+moving\+\_\+wall()} function to the relevant fluid nodes (\href{../../../navier_stokes/osc_ellipse/html/index.html}{\texttt{ recall}} that the auxiliary node update functions are automatically executed whenever the position of a node is updated by the algebraic node update). Since the no-\/slip condition (1) involves the Strouhal number (which, in the current problem, is not equal to the default value of {\ttfamily FSI\+\_\+functions\+::\+Strouhal\+\_\+for\+\_\+no\+\_\+slip=1.\+0}), we overwrite the default assignment with the actual Strouhal number in the problem.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{// Setup FSI}}
+\DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{ }
+\DoxyCodeLine{ \textcolor{comment}{// Pass Strouhal number to the helper function that automatically applies}}
+\DoxyCodeLine{ \textcolor{comment}{// the no-\/slip condition}}
+\DoxyCodeLine{ FSI\_functions::Strouhal\_for\_no\_slip=\mbox{\hyperlink{namespaceGlobal__Parameters_af1af40a0df651e86bc1be273fafa98da}{Global\_Parameters::St}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{// The velocity of the fluid nodes on the wall (fluid mesh boundary 5,6,7)}}
+\DoxyCodeLine{ \textcolor{comment}{// is set by the wall motion -\/-\/ hence the no-\/slip condition must be}}
+\DoxyCodeLine{ \textcolor{comment}{// re-\/applied whenever a node update is performed for these nodes. }}
+\DoxyCodeLine{ \textcolor{comment}{// Such tasks may be performed automatically by the auxiliary node update }}
+\DoxyCodeLine{ \textcolor{comment}{// function specified by a function pointer:}}
+\DoxyCodeLine{ \textcolor{keywordflow}{if} (!\mbox{\hyperlink{namespaceGlobal__Parameters_aac13d615d2acd78d22a3137ffd62f7aa}{Global\_Parameters::Ignore\_fluid\_loading}})}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} ibound=5;ibound<8;ibound++ )}
+\DoxyCodeLine{    \{ }
+\DoxyCodeLine{     \textcolor{keywordtype}{unsigned} num\_nod= Fluid\_mesh\_pt-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} inod=0;inod<num\_nod;inod++)}
+\DoxyCodeLine{      \{   }
+\DoxyCodeLine{       Fluid\_mesh\_pt-\/>boundary\_node\_pt(ibound, inod)-\/>}
+\DoxyCodeLine{        set\_auxiliary\_node\_update\_fct\_pt(}
+\DoxyCodeLine{         FSI\_functions::apply\_no\_slip\_on\_moving\_wall);}
+\DoxyCodeLine{      \}}
+\DoxyCodeLine{    \} \textcolor{comment}{// done automatic application of no-\/slip}}
+
+\end{DoxyCodeInclude}
+ Next, we set up the lookup schemes required by the {\ttfamily FSISolid\+Traction\+Elements} to establish which fluid elements affect the traction onto the solid\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{  }
+\DoxyCodeLine{   \textcolor{comment}{// Work out which fluid dofs affect the residuals of the wall elements:}}
+\DoxyCodeLine{   \textcolor{comment}{// We pass the boundary between the fluid and solid meshes and }}
+\DoxyCodeLine{   \textcolor{comment}{// pointers to the meshes. The interaction boundary are boundaries 5,6,7}}
+\DoxyCodeLine{   \textcolor{comment}{// of the 2D fluid mesh.}}
+\DoxyCodeLine{   FSI\_functions::setup\_fluid\_load\_info\_for\_solid\_elements<FLUID\_ELEMENT,2>}
+\DoxyCodeLine{    (\textcolor{keyword}{this},5,Fluid\_mesh\_pt,Traction\_mesh\_pt[0]);  }
+\DoxyCodeLine{   }
+\DoxyCodeLine{   FSI\_functions::setup\_fluid\_load\_info\_for\_solid\_elements<FLUID\_ELEMENT,2>}
+\DoxyCodeLine{    (\textcolor{keyword}{this},6,Fluid\_mesh\_pt,Traction\_mesh\_pt[2]);  }
+\DoxyCodeLine{   }
+\DoxyCodeLine{   FSI\_functions::setup\_fluid\_load\_info\_for\_solid\_elements<FLUID\_ELEMENT,2>}
+\DoxyCodeLine{    (\textcolor{keyword}{this},7,Fluid\_mesh\_pt,Traction\_mesh\_pt[1]); }
+\DoxyCodeLine{  \} }
+
+\end{DoxyCodeInclude}
+
+
+All interactions have now been specified and we conclude by assigning the equation numbers
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{ \textcolor{comment}{// Assign equation numbers}}
+\DoxyCodeLine{ cout << assign\_eqn\_numbers() << std::endl; }
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\textcolor{comment}{//end\_of\_constructor}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_set_traction}{}\doxysection{Create traction elements}\label{index_set_traction}
+This is a helper function that attaches {\ttfamily FSISolid\+Traction\+Element} to the solid elements that are exposed to the fluid traction. We store the elements in three distinct sub-\/meshes -- one for each face. (Yet another mesh, pointed to by {\ttfamily Combined\+\_\+traction\+\_\+mesh\+\_\+pt}, is created for post-\/processing purposes.)
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_traction\_elements==============================}}
+\DoxyCodeLine{\textcolor{comment}{/// Create FSI traction elements }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} FLUID\_ELEMENT,\textcolor{keyword}{class} SOLID\_ELEMENT >}
+\DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classTurekProblem_ad460a2e860c9425297cf70ee125de10b}{TurekProblem<FLUID\_ELEMENT,SOLID\_ELEMENT>::create\_fsi\_traction\_elements}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{// Container to collect all nodes in the traction meshes}}
+\DoxyCodeLine{ std::set<SolidNode*> all\_nodes;}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{// Traction elements are located on boundaries 0-\/2:}}
+\DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} b=0;b<3;b++)}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   \textcolor{comment}{// How many bulk elements are adjacent to boundary b?}}
+\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} n\_element = solid\_mesh\_pt()-\/>nboundary\_element(b);}
+\DoxyCodeLine{   }
+\DoxyCodeLine{   \textcolor{comment}{// Loop over the bulk elements adjacent to boundary b?}}
+\DoxyCodeLine{   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} e=0;e<n\_element;e++)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{     \textcolor{comment}{// Get pointer to the bulk element that is adjacent to boundary b}}
+\DoxyCodeLine{     SOLID\_ELEMENT* bulk\_elem\_pt = \textcolor{keyword}{dynamic\_cast<}SOLID\_ELEMENT*\textcolor{keyword}{>}(}
+\DoxyCodeLine{      solid\_mesh\_pt()-\/>boundary\_element\_pt(b,e));}
+\DoxyCodeLine{     }
+\DoxyCodeLine{     \textcolor{comment}{//What is the index of the face of the element e along boundary b}}
+\DoxyCodeLine{     \textcolor{keywordtype}{int} face\_index = solid\_mesh\_pt()-\/>face\_index\_at\_boundary(b,e);}
+\DoxyCodeLine{          }
+\DoxyCodeLine{     \textcolor{comment}{// Create new element and add to mesh}}
+\DoxyCodeLine{     Traction\_mesh\_pt[b]-\/>add\_element\_pt(}
+\DoxyCodeLine{      \textcolor{keyword}{new} FSISolidTractionElement<SOLID\_ELEMENT,2>(bulk\_elem\_pt,face\_index));}
+\DoxyCodeLine{     }
+\DoxyCodeLine{    \} \textcolor{comment}{//end of loop over bulk elements adjacent to boundary b}}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{// Identify unique nodes}}
+\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} nnod=solid\_mesh\_pt()-\/>nboundary\_node(b);}
+\DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j=0;j<nnod;j++)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{     all\_nodes.insert(solid\_mesh\_pt()-\/>boundary\_node\_pt(b,j));}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{// Build combined mesh of fsi traction elements}}
+\DoxyCodeLine{ Combined\_traction\_mesh\_pt=\textcolor{keyword}{new} SolidMesh(Traction\_mesh\_pt);}
+\DoxyCodeLine{ }
+\DoxyCodeLine{ \textcolor{comment}{// Stick nodes into combined traction mesh}}
+\DoxyCodeLine{ \textcolor{keywordflow}{for} (std::set<SolidNode*>::iterator it=all\_nodes.begin();}
+\DoxyCodeLine{      it!=all\_nodes.end();it++)}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   Combined\_traction\_mesh\_pt-\/>add\_node\_pt(*it);}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\} \textcolor{comment}{// end of create\_traction\_elements}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_check}{}\doxysection{Actions before Newton convergence check}\label{index_check}
+The algebraic node-\/update procedure updates the positions in response to changes in the solid displacements but this is not done automatically when the Newton solver updates the solid mechanics degrees of freedom. We therefore force a node-\/update before the Newton convergence check.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//====start\_of\_actions\_before\_newton\_convergence\_check===================}}
+\DoxyCodeLine{\textcolor{comment}{/// Update the (dependent) fluid node positions following the}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// update of the solid variables}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} FLUID\_ELEMENT,\textcolor{keyword}{class} SOLID\_ELEMENT> }
+\DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classTurekProblem_aa896171b1a817ca35cba9b723bb15ed2}{TurekProblem<FLUID\_ELEMENT,SOLID\_ELEMENT>}}}
+\DoxyCodeLine{\mbox{\hyperlink{classTurekProblem_aa896171b1a817ca35cba9b723bb15ed2}{::actions\_before\_newton\_convergence\_check}} ()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{ fluid\_mesh\_pt()-\/>node\_update();}
+\DoxyCodeLine{\}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_timestep}{}\doxysection{Actions before the timestep}\label{index_timestep}
+Before each timestep we update the inflow profile for all fluid nodes on mesh boundary 3.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===== start\_of\_actions\_before\_implicit\_timestep=========================}}
+\DoxyCodeLine{\textcolor{comment}{/// Actions before implicit timestep: Update inflow profile}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} FLUID\_ELEMENT,\textcolor{keyword}{class} SOLID\_ELEMENT> }
+\DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classTurekProblem_a4ad226ceec27cb3c3ea4d1ecfd4e573f}{TurekProblem<FLUID\_ELEMENT,SOLID\_ELEMENT>::}}}
+\DoxyCodeLine{\mbox{\hyperlink{classTurekProblem_a4ad226ceec27cb3c3ea4d1ecfd4e573f}{actions\_before\_implicit\_timestep}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{ \textcolor{comment}{// Current time}}
+\DoxyCodeLine{ \textcolor{keywordtype}{double} t=time\_pt()-\/>time();}
+\DoxyCodeLine{ }
+\DoxyCodeLine{ \textcolor{comment}{// Amplitude of flow}}
+\DoxyCodeLine{ \textcolor{keywordtype}{double} ampl=\mbox{\hyperlink{namespaceGlobal__Parameters_a536aa5314a6cdb36af852e9513351d55}{Global\_Parameters::flux}}(t);}
+\DoxyCodeLine{ }
+\DoxyCodeLine{ \textcolor{comment}{// Update parabolic flow along boundary 3}}
+\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} ibound=3; }
+\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} num\_nod= Fluid\_mesh\_pt-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} inod=0;inod<num\_nod;inod++)}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   \textcolor{keywordtype}{double} ycoord = Fluid\_mesh\_pt-\/>boundary\_node\_pt(ibound,inod)-\/>x(1); }
+\DoxyCodeLine{   \textcolor{keywordtype}{double} uy = ampl*6.0*ycoord/Domain\_height*(1.0-\/ycoord/Domain\_height);}
+\DoxyCodeLine{   Fluid\_mesh\_pt-\/>boundary\_node\_pt(ibound,inod)-\/>set\_value(0,uy);}
+\DoxyCodeLine{   Fluid\_mesh\_pt-\/>boundary\_node\_pt(ibound,inod)-\/>set\_value(1,0.0);    }
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\} \textcolor{comment}{//end\_of\_actions\_before\_implicit\_timestep}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_after_adapt}{}\doxysection{Actions after adapt}\label{index_after_adapt}
+After each adaptation, we unpin and re-\/pin all redundant pressures degrees of freedom. This is necessary because their \char`\"{}redundant-\/ness\char`\"{} may have been altered by changes in the refinement pattern; see \href{../../../navier_stokes/adaptive_driven_cavity/html/index.html}{\texttt{ another tutorial}} for details. We ensure the automatic application of the no-\/slip condition on fluid nodes that are located on the faces of the flag, and re-\/setup the FSI lookup scheme that tells {\ttfamily FSISolid\+Traction\+Elements} which fluid elements are located next to their Gauss points.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=====================start\_of\_actions\_after\_adapt=======================}}
+\DoxyCodeLine{\textcolor{comment}{///  Actions after adapt: Re-\/setup FSI}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} FLUID\_ELEMENT,\textcolor{keyword}{class} SOLID\_ELEMENT >}
+\DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classTurekProblem_a39df0332d7606a5befe89bb0e581184b}{TurekProblem<FLUID\_ELEMENT,SOLID\_ELEMENT>::actions\_after\_adapt}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{ \textcolor{comment}{// Unpin all pressure dofs}}
+\DoxyCodeLine{ RefineableNavierStokesEquations<2>::}
+\DoxyCodeLine{  unpin\_all\_pressure\_dofs(fluid\_mesh\_pt()-\/>element\_pt());}
+\DoxyCodeLine{ }
+\DoxyCodeLine{ \textcolor{comment}{// Pin redundant pressure dofs}}
+\DoxyCodeLine{ RefineableNavierStokesEquations<2>::}
+\DoxyCodeLine{  pin\_redundant\_nodal\_pressures(fluid\_mesh\_pt()-\/>element\_pt());}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{// Unpin all solid pressure dofs}}
+\DoxyCodeLine{ PVDEquationsBase<2>::}
+\DoxyCodeLine{  unpin\_all\_solid\_pressure\_dofs(solid\_mesh\_pt()-\/>element\_pt());}
+\DoxyCodeLine{ }
+\DoxyCodeLine{ \textcolor{comment}{// Pin the redundant solid pressures (if any)}}
+\DoxyCodeLine{ PVDEquationsBase<2>::pin\_redundant\_nodal\_solid\_pressures(}
+\DoxyCodeLine{  solid\_mesh\_pt()-\/>element\_pt());}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{// The velocity of the fluid nodes on the wall (fluid mesh boundary 5,6,7)}}
+\DoxyCodeLine{ \textcolor{comment}{// is set by the wall motion -\/-\/ hence the no-\/slip condition must be}}
+\DoxyCodeLine{ \textcolor{comment}{// re-\/applied whenever a node update is performed for these nodes. }}
+\DoxyCodeLine{ \textcolor{comment}{// Such tasks may be performed automatically by the auxiliary node update }}
+\DoxyCodeLine{ \textcolor{comment}{// function specified by a function pointer:}}
+\DoxyCodeLine{ \textcolor{keywordflow}{if} (!\mbox{\hyperlink{namespaceGlobal__Parameters_aac13d615d2acd78d22a3137ffd62f7aa}{Global\_Parameters::Ignore\_fluid\_loading}})}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} ibound=5;ibound<8;ibound++ )}
+\DoxyCodeLine{    \{ }
+\DoxyCodeLine{     \textcolor{keywordtype}{unsigned} num\_nod= Fluid\_mesh\_pt-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} inod=0;inod<num\_nod;inod++)}
+\DoxyCodeLine{      \{   }
+\DoxyCodeLine{       Fluid\_mesh\_pt-\/>boundary\_node\_pt(ibound, inod)-\/>}
+\DoxyCodeLine{        set\_auxiliary\_node\_update\_fct\_pt(}
+\DoxyCodeLine{         FSI\_functions::apply\_no\_slip\_on\_moving\_wall);}
+\DoxyCodeLine{      \}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{ }
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{// Re-\/setup the fluid load information for fsi solid traction elements}}
+\DoxyCodeLine{   FSI\_functions::setup\_fluid\_load\_info\_for\_solid\_elements<FLUID\_ELEMENT,2>}
+\DoxyCodeLine{    (\textcolor{keyword}{this},5,Fluid\_mesh\_pt,Traction\_mesh\_pt[0]); }
+\DoxyCodeLine{   }
+\DoxyCodeLine{   FSI\_functions::setup\_fluid\_load\_info\_for\_solid\_elements<FLUID\_ELEMENT,2>}
+\DoxyCodeLine{    (\textcolor{keyword}{this},6,Fluid\_mesh\_pt,Traction\_mesh\_pt[2]); }
+\DoxyCodeLine{   }
+\DoxyCodeLine{   FSI\_functions::setup\_fluid\_load\_info\_for\_solid\_elements<FLUID\_ELEMENT,2>}
+\DoxyCodeLine{    (\textcolor{keyword}{this},7,Fluid\_mesh\_pt,Traction\_mesh\_pt[1]); }
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{ }
+\DoxyCodeLine{\}\textcolor{comment}{// end of actions\_after\_adapt}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_doc}{}\doxysection{Post-\/processing}\label{index_doc}
+The function {\ttfamily doc\+\_\+solution(...)} produces the output for the fluid, solid and traction meshes and writes selected data to the trace file.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=====start\_of\_doc\_solution========================================}}
+\DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} FLUID\_ELEMENT,\textcolor{keyword}{class} SOLID\_ELEMENT >}
+\DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classTurekProblem_a2cf0eb1610b4c3a7cdbd3c7948cdd46e}{TurekProblem<FLUID\_ELEMENT,SOLID\_ELEMENT>::doc\_solution}}(}
+\DoxyCodeLine{ DocInfo\& doc\_info, ofstream\& trace\_file)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{ }
+\DoxyCodeLine{\textcolor{comment}{//  FSI\_functions::doc\_fsi<AlgebraicNode>(Fluid\_mesh\_pt,}}
+\DoxyCodeLine{\textcolor{comment}{//                                        Combined\_traction\_mesh\_pt,}}
+\DoxyCodeLine{\textcolor{comment}{//                                        doc\_info);}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//  pause("{}done"{});}}
+\DoxyCodeLine{}
+\DoxyCodeLine{ ofstream some\_file;}
+\DoxyCodeLine{ \textcolor{keywordtype}{char} filename[100];}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{// Number of plot points}}
+\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_plot = 5; }
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{// Output solid solution}}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/solid\_soln\%i.dat"{}},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{         doc\_info.number());}
+\DoxyCodeLine{ some\_file.open(filename);}
+\DoxyCodeLine{ solid\_mesh\_pt()-\/>output(some\_file,n\_plot);}
+\DoxyCodeLine{ some\_file.close();}
+\DoxyCodeLine{ }
+\DoxyCodeLine{ \textcolor{comment}{// Output fluid solution}}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{         doc\_info.number());}
+\DoxyCodeLine{ some\_file.open(filename);}
+\DoxyCodeLine{ fluid\_mesh\_pt()-\/>output(some\_file,n\_plot);}
+\DoxyCodeLine{ some\_file.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//Output the traction}}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/traction\%i.dat"{}},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{         doc\_info.number());}
+\DoxyCodeLine{ some\_file.open(filename);}
+\DoxyCodeLine{\textcolor{comment}{// Loop over the traction meshes}}
+\DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<3;i++)}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{   \textcolor{comment}{// Loop over the element in traction\_mesh\_pt}}
+\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} n\_element = Traction\_mesh\_pt[i]-\/>nelement();}
+\DoxyCodeLine{   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} e=0;e<n\_element;e++)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{     FSISolidTractionElement<SOLID\_ELEMENT,2>* el\_pt = }
+\DoxyCodeLine{      \textcolor{keyword}{dynamic\_cast<}FSISolidTractionElement<SOLID\_ELEMENT,2>* \textcolor{keyword}{>} (}
+\DoxyCodeLine{       Traction\_mesh\_pt[i]-\/>element\_pt(e) );}
+\DoxyCodeLine{     }
+\DoxyCodeLine{     el\_pt-\/>output(some\_file,5);}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{ some\_file.close();  }
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{// Write trace (we're only using Taylor Hood elements so we know that}}
+\DoxyCodeLine{ \textcolor{comment}{// the pressure is the third value at the fluid control node...}}
+\DoxyCodeLine{ trace\_file << time\_pt()-\/>time() << \textcolor{stringliteral}{"{} "{}} }
+\DoxyCodeLine{            << Solid\_control\_node\_pt-\/>x(0) << \textcolor{stringliteral}{"{} "{}} }
+\DoxyCodeLine{            << Solid\_control\_node\_pt-\/>x(1) << \textcolor{stringliteral}{"{} "{}} }
+\DoxyCodeLine{            << Fluid\_control\_node\_pt-\/>value(2) << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{            << \mbox{\hyperlink{namespaceGlobal__Parameters_a536aa5314a6cdb36af852e9513351d55}{Global\_Parameters::flux}}(time\_pt()-\/>time()) << \textcolor{stringliteral}{"{} "{}} }
+\DoxyCodeLine{            << std::endl;}
+\DoxyCodeLine{ }
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}Doced solution for step "{}} }
+\DoxyCodeLine{      << doc\_info.number() }
+\DoxyCodeLine{      << std::endl << std::endl << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\textcolor{comment}{//end\_of\_doc\_solution}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_com_ex}{}\doxysection{Further comments and exercises}\label{index_com_ex}
+
+\begin{DoxyItemize}
+\item When completing the build of the {\ttfamily FSISolid\+Traction\+Elements} (the elements that apply the fluid traction to the solid elements that are exposed to the fluid) we specified the number of the solid mesh boundary they are located on, using ~\newline
+~\newline
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{elem\_pt-\/>set\_boundary\_number\_in\_bulk\_mesh(bound);}
+
+\end{DoxyCode}
+ ~\newline
+ This information is required when setting up the fluid-\/structure interaction because the {\ttfamily Mesh\+As\+Geom\+Object} representation of the mesh of {\ttfamily FSISolid\+Traction\+Elements} is parametrised by the boundary coordinate in the solid mesh. Explore the details of the implementation by commenting out the relevant line of code and use the debugger to find out how and where the code fails. {\bfseries{Note\+:}} Since this step is somewhat subtle and therefore easily forgotten, the {\ttfamily FSISolid\+Traction\+Elements} issue an explicit warning if the bulk boundary number has not been set -- but only if the the library is compiled in PARANOID mode. ~\newline
+~\newline
+
+\item When comparing our results against those in Turek \& Hron\textquotesingle{}s benchmark, we only focused on the period and amplitude of the fully-\/developed self-\/excited oscillations. The benchmark data also provides data on the time-\/dependent variations of the drag and lift coefficients. Design suitable {\ttfamily Face\+Elements} (to be attached to the faces of the Navier-\/\+Stokes elements that are adjacent to the flag or the cylinder) to compute these quantities. The \href{../../../the_data_structure/html/classoomph_1_1NavierStokesSurfacePowerElement.html}{\texttt{ {\ttfamily Navier\+Stokes\+Surface\+Power\+Elements}}} should provide a good basis for these.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_ackn}{}\doxysection{Acknowledgements}\label{index_ackn}
+
+\begin{DoxyItemize}
+\item This code was originally developed by Stefan Kollmannsberger and his students Iason Papaioannou and ~\newline
+ Orkun Oezkan Doenmez. It was completed by Floraine Cordier.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_sources}{}\doxysection{Source files for this tutorial}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+:~\newline
+~\newline
+\begin{center} \href{../../../../demo_drivers/interaction/turek_flag/}{\texttt{ demo\+\_\+drivers/interaction/turek\+\_\+flag/ }} \end{center} ~\newline
+
+\item The driver code is\+: ~\newline
+~\newline
+\begin{center} \href{../../../../demo_drivers/interaction/turek_flag/turek_flag.cc}{\texttt{ demo\+\_\+drivers/interaction/turek\+\_\+flag/turek\+\_\+flag.\+cc }} \end{center} 
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

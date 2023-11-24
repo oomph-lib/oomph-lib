@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1ProjectableFoepplvonKarmanElement}{}\doxysection{oomph\+::Projectable\+Foepplvon\+Karman\+Element\texorpdfstring{$<$}{<} FVK\+\_\+\+ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1ProjectableFoepplvonKarmanElement}{}\doxysection{oomph\+::Projectable\+Foepplvon\+Karman\+Element$<$ FVK\+\_\+\+ELEMENT $>$ Class Template Reference}
 \label{classoomph_1_1ProjectableFoepplvonKarmanElement}\index{oomph::ProjectableFoepplvonKarmanElement$<$ FVK\_ELEMENT $>$@{oomph::ProjectableFoepplvonKarmanElement$<$ FVK\_ELEMENT $>$}}
 
 
@@ -9,7 +9,7 @@
 
 {\ttfamily \#include $<$foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Projectable\+Foepplvon\+Karman\+Element\texorpdfstring{$<$}{<} FVK\+\_\+\+ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Projectable\+Foepplvon\+Karman\+Element$<$ FVK\+\_\+\+ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=1.804124cm]{classoomph_1_1ProjectableFoepplvonKarmanElement}
@@ -18,7 +18,7 @@ Inheritance diagram for oomph\+::Projectable\+Foepplvon\+Karman\+Element\texorpd
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableFoepplvonKarmanElement_ad5536f5e2df25f6d035403cb1743961d}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableFoepplvonKarmanElement_af2a8b415102e631c5ede030b68cd3821}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Specify the values associated with field fld. The information is returned in a vector of pairs which comprise the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object and the value within it, that correspond to field fld. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableFoepplvonKarmanElement_aaa74e7c246f86929e7ceeeced8819d6c}{nfields\+\_\+for\+\_\+projection}} ()
 \begin{DoxyCompactList}\small\item\em Number of fields to be projected\+: Just two. \end{DoxyCompactList}\item 
@@ -29,7 +29,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1ProjectableFoepplvonKarmanElement_a7b6ce
 double \mbox{\hyperlink{classoomph_1_1ProjectableFoepplvonKarmanElement_a1fd58ba72daf96c1849cb48350684d74}{jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field}} (const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi)
 \begin{DoxyCompactList}\small\item\em Return Jacobian of mapping and shape functions of field fld at local coordinate s. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1ProjectableFoepplvonKarmanElement_a762989fdeb0489dec57bb386ea6ebf58}{get\+\_\+field}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const unsigned \&fld, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
-\begin{DoxyCompactList}\small\item\em Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: history values) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t$>$0\+: history values) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ProjectableFoepplvonKarmanElement_aef446291cf0c740bc541b770a194d29f}{nvalue\+\_\+of\+\_\+field}} (const unsigned \&fld)
 \begin{DoxyCompactList}\small\item\em Return number of values in field fld\+: One per node. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classoomph_1_1ProjectableFoepplvonKarmanElement_ad4d911152c2f5e648f7f6558e53d4c9b}{local\+\_\+equation}} (const unsigned \&fld, const unsigned \&j)
@@ -40,21 +40,22 @@ int \mbox{\hyperlink{classoomph_1_1ProjectableFoepplvonKarmanElement_ad4d911152c
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class FVK\+\_\+\+ELEMENT$>$\newline
 class oomph\+::\+Projectable\+Foepplvon\+Karman\+Element$<$ FVK\+\_\+\+ELEMENT $>$}
+
 ///////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////// 
 
 Foeppl von Karman upgraded to become projectable 
 
-Definition at line \mbox{\hyperlink{foeppl__von__karman__elements_8h_source_l00680}{680}} of file \mbox{\hyperlink{foeppl__von__karman__elements_8h_source}{foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 680 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1ProjectableFoepplvonKarmanElement_ad5536f5e2df25f6d035403cb1743961d}\label{classoomph_1_1ProjectableFoepplvonKarmanElement_ad5536f5e2df25f6d035403cb1743961d}} 
+\mbox{\Hypertarget{classoomph_1_1ProjectableFoepplvonKarmanElement_af2a8b415102e631c5ede030b68cd3821}\label{classoomph_1_1ProjectableFoepplvonKarmanElement_af2a8b415102e631c5ede030b68cd3821}} 
 \index{oomph::ProjectableFoepplvonKarmanElement$<$ FVK\_ELEMENT $>$@{oomph::ProjectableFoepplvonKarmanElement$<$ FVK\_ELEMENT $>$}!data\_values\_of\_field@{data\_values\_of\_field}}
 \index{data\_values\_of\_field@{data\_values\_of\_field}!oomph::ProjectableFoepplvonKarmanElement$<$ FVK\_ELEMENT $>$@{oomph::ProjectableFoepplvonKarmanElement$<$ FVK\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{data\_values\_of\_field()}{data\_values\_of\_field()}}
 {\footnotesize\ttfamily template$<$class FVK\+\_\+\+ELEMENT $>$ \\
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableFoepplvonKarmanElement}{oomph\+::\+Projectable\+Foepplvon\+Karman\+Element}}$<$ FVK\+\_\+\+ELEMENT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$std\+::pair$<$\mbox{\hyperlink{classoomph_1_1Data}{Data}}$\ast$, unsigned$>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableFoepplvonKarmanElement}{oomph\+::\+Projectable\+Foepplvon\+Karman\+Element}}$<$ FVK\+\_\+\+ELEMENT $>$\+::data\+\_\+values\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -62,15 +63,15 @@ Specify the values associated with field fld. The information is returned in a v
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a2292bd9c58694f89839bd7d198cfe86a}{oomph\+::\+Projectable\+Element\+Base}}.
+Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a63b0053dde1172be726f9a6c75fb66ea}{oomph\+::\+Projectable\+Element\+Base}}.
 
 
 
-Definition at line \mbox{\hyperlink{foeppl__von__karman__elements_8h_source_l00687}{687}} of file \mbox{\hyperlink{foeppl__von__karman__elements_8h_source}{foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 687 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
+References oomph\+::\+Finite\+Element\+::nnode(), and oomph\+::\+Finite\+Element\+::node\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableFoepplvonKarmanElement_a762989fdeb0489dec57bb386ea6ebf58}\label{classoomph_1_1ProjectableFoepplvonKarmanElement_a762989fdeb0489dec57bb386ea6ebf58}} 
 \index{oomph::ProjectableFoepplvonKarmanElement$<$ FVK\_ELEMENT $>$@{oomph::ProjectableFoepplvonKarmanElement$<$ FVK\_ELEMENT $>$}!get\_field@{get\_field}}
@@ -81,7 +82,7 @@ double \mbox{\hyperlink{classoomph_1_1ProjectableFoepplvonKarmanElement}{oomph\+
 
 
 
-Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: history values) 
+Return interpolated field fld at local coordinate s, at time level t (t=0\+: present; t$>$0\+: history values) 
 
 
 
@@ -89,11 +90,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ae4da5b565b6d33
 
 
 
-Definition at line \mbox{\hyperlink{foeppl__von__karman__elements_8h_source_l00777}{777}} of file \mbox{\hyperlink{foeppl__von__karman__elements_8h_source}{foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 777 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
+References oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), and oomph\+::\+Finite\+Element\+::shape().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableFoepplvonKarmanElement_a1fd58ba72daf96c1849cb48350684d74}\label{classoomph_1_1ProjectableFoepplvonKarmanElement_a1fd58ba72daf96c1849cb48350684d74}} 
 \index{oomph::ProjectableFoepplvonKarmanElement$<$ FVK\_ELEMENT $>$@{oomph::ProjectableFoepplvonKarmanElement$<$ FVK\_ELEMENT $>$}!jacobian\_and\_shape\_of\_field@{jacobian\_and\_shape\_of\_field}}
@@ -112,11 +113,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ad45c21b58c0985
 
 
 
-Definition at line \mbox{\hyperlink{foeppl__von__karman__elements_8h_source_l00750}{750}} of file \mbox{\hyperlink{foeppl__von__karman__elements_8h_source}{foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 750 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Finite\+Element\+::nnode(), and s.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableFoepplvonKarmanElement_ad4d911152c2f5e648f7f6558e53d4c9b}\label{classoomph_1_1ProjectableFoepplvonKarmanElement_ad4d911152c2f5e648f7f6558e53d4c9b}} 
 \index{oomph::ProjectableFoepplvonKarmanElement$<$ FVK\_ELEMENT $>$@{oomph::ProjectableFoepplvonKarmanElement$<$ FVK\_ELEMENT $>$}!local\_equation@{local\_equation}}
@@ -135,11 +136,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac5c27ae929ff63
 
 
 
-Definition at line \mbox{\hyperlink{foeppl__von__karman__elements_8h_source_l00833}{833}} of file \mbox{\hyperlink{foeppl__von__karman__elements_8h_source}{foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 833 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}.
+References oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableFoepplvonKarmanElement_aaa74e7c246f86929e7ceeeced8819d6c}\label{classoomph_1_1ProjectableFoepplvonKarmanElement_aaa74e7c246f86929e7ceeeced8819d6c}} 
 \index{oomph::ProjectableFoepplvonKarmanElement$<$ FVK\_ELEMENT $>$@{oomph::ProjectableFoepplvonKarmanElement$<$ FVK\_ELEMENT $>$}!nfields\_for\_projection@{nfields\_for\_projection}}
@@ -158,7 +159,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a44634aa4049332
 
 
 
-Definition at line \mbox{\hyperlink{foeppl__von__karman__elements_8h_source_l00717}{717}} of file \mbox{\hyperlink{foeppl__von__karman__elements_8h_source}{foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 717 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableFoepplvonKarmanElement_a7b6ce72f267669ecd5fc0119f669772f}\label{classoomph_1_1ProjectableFoepplvonKarmanElement_a7b6ce72f267669ecd5fc0119f669772f}} 
 \index{oomph::ProjectableFoepplvonKarmanElement$<$ FVK\_ELEMENT $>$@{oomph::ProjectableFoepplvonKarmanElement$<$ FVK\_ELEMENT $>$}!nhistory\_values\_for\_coordinate\_projection@{nhistory\_values\_for\_coordinate\_projection}}
@@ -177,11 +178,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ab4ecd0cd24000a
 
 
 
-Definition at line \mbox{\hyperlink{foeppl__von__karman__elements_8h_source_l00743}{743}} of file \mbox{\hyperlink{foeppl__von__karman__elements_8h_source}{foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 743 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, and \mbox{\hyperlink{nodes_8h_source_l01022}{oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt()}}.
+References oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Time\+Stepper\+::ntstorage(), and oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableFoepplvonKarmanElement_afbac2a4519a482c9a7fdc9994e783147}\label{classoomph_1_1ProjectableFoepplvonKarmanElement_afbac2a4519a482c9a7fdc9994e783147}} 
 \index{oomph::ProjectableFoepplvonKarmanElement$<$ FVK\_ELEMENT $>$@{oomph::ProjectableFoepplvonKarmanElement$<$ FVK\_ELEMENT $>$}!nhistory\_values\_for\_projection@{nhistory\_values\_for\_projection}}
@@ -200,11 +201,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac6790f394630b9
 
 
 
-Definition at line \mbox{\hyperlink{foeppl__von__karman__elements_8h_source_l00724}{724}} of file \mbox{\hyperlink{foeppl__von__karman__elements_8h_source}{foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 724 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8cc_source_l00879}{oomph\+::\+Data\+::ntstorage()}}.
+References oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Data\+::ntstorage().
 
 \mbox{\Hypertarget{classoomph_1_1ProjectableFoepplvonKarmanElement_aef446291cf0c740bc541b770a194d29f}\label{classoomph_1_1ProjectableFoepplvonKarmanElement_aef446291cf0c740bc541b770a194d29f}} 
 \index{oomph::ProjectableFoepplvonKarmanElement$<$ FVK\_ELEMENT $>$@{oomph::ProjectableFoepplvonKarmanElement$<$ FVK\_ELEMENT $>$}!nvalue\_of\_field@{nvalue\_of\_field}}
@@ -223,11 +224,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a1a9a6de16f3511
 
 
 
-Definition at line \mbox{\hyperlink{foeppl__von__karman__elements_8h_source_l00815}{815}} of file \mbox{\hyperlink{foeppl__von__karman__elements_8h_source}{foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h}}.
+Definition at line 815 of file foeppl\+\_\+von\+\_\+karman\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}.
+References oomph\+::\+Finite\+Element\+::nnode().
 
 
 

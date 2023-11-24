@@ -26,11 +26,11 @@ unsigned \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon_a6ef43be1b982a8dcc2f
 \begin{DoxyCompactList}\small\item\em Number of constituent curves. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon_a050f497ebc58dd0baf036852f764dfd0}{npolyline}} () const
 \begin{DoxyCompactList}\small\item\em Number of constituent polylines. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon_a270bb799bd592f8df8a5421513218fae}{polyline\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon_a528399d7e0fe0c8d684b4f851ca08dde}{polyline\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Pointer to i-\/th constituent polyline. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon_a60ce0a4afe341e93e3f413a278d56dc2}{polyline\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon_a0e840f360ce9f33c98f928ba72ab1732}{polyline\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Pointer to i-\/th constituent polyline. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon_ae6f5a94842c673727b0e08f296f885af}{polygon\+\_\+boundary\+\_\+id}} ()
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon_a3d252deb06cbe9e6a48b55218b9dde2e}{polygon\+\_\+boundary\+\_\+id}} ()
 \begin{DoxyCompactList}\small\item\em Return vector of boundary ids of associated polylines. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon_a56e256e6814ae48ff72edba8cdceecd5}{is\+\_\+redistribution\+\_\+of\+\_\+segments\+\_\+between\+\_\+polylines\+\_\+enabled}} ()
 \begin{DoxyCompactList}\small\item\em Is re-\/distribution of polyline segments in the curve between different boundaries during adaptation enabled? \end{DoxyCompactList}\item 
@@ -67,7 +67,7 @@ bool \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon_a7f79fb03756524e23c8cc71
 
 Class defining a closed polygon for the Triangle mesh generation 
 
-Definition at line \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01450}{1450}} of file \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source}{unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h}}.
+Definition at line 1450 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
 
 
 
@@ -86,11 +86,11 @@ Constructor\+: Specify vector of pointers to \mbox{\hyperlink{classoomph_1_1Tria
 
 Constructor\+: Specify vector of pointers to \mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} that define the boundary of the segments of the polygon. Each \mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} has its own boundary ID and can contain multiple (straight-\/line) segments. For consistency across the various uses of this class, we insist that the closed boundary is represented by at least two separate \mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} whose joint vertices must be specified in both. (This is to allow the setup of unique boundary coordinate(s) around the polygon.) This may seem slightly annoying in cases where a polygon really only represents a single boundary, but... Note\+: The specified vector of pointers must consist of only \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} elements. There is a checking on the PARANOID mode for this constraint 
 
-Definition at line \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8cc_source_l01577}{1577}} of file \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8cc_source}{unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+cc}}.
+Definition at line 1577 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01436}{oomph\+::\+Triangle\+Mesh\+Closed\+Curve\+::\+Internal\+\_\+point\+\_\+pt}}, \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01482}{npolyline()}}, \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l00904}{oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::nvertex()}}, \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01488}{polyline\+\_\+pt()}}, \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8cc_source_l01103}{oomph\+::\+Tolerance\+For\+Vertex\+Mismatch\+In\+Polygons\+::\+Tolerable\+\_\+error}}, and \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l00929}{oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::vertex\+\_\+coordinate()}}.
+References i, oomph\+::\+Triangle\+Mesh\+Closed\+Curve\+::\+Internal\+\_\+point\+\_\+pt, npolyline(), oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::nvertex(), polyline\+\_\+pt(), oomph\+::\+Tolerance\+For\+Vertex\+Mismatch\+In\+Polygons\+::\+Tolerable\+\_\+error, and oomph\+::\+Triangle\+Mesh\+Poly\+Line\+::vertex\+\_\+coordinate().
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMeshPolygon_a88641d82d4b496ea61cce64045416e37}\label{classoomph_1_1TriangleMeshPolygon_a88641d82d4b496ea61cce64045416e37}} 
 \index{oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}!````~TriangleMeshPolygon@{$\sim$TriangleMeshPolygon}}
@@ -104,7 +104,7 @@ Empty virtual destructor.
 
 
 
-Definition at line \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01473}{1473}} of file \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source}{unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h}}.
+Definition at line 1473 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
 
 
 
@@ -121,15 +121,15 @@ Test whether curve can update reference.
 
 
 
-Definition at line \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01572}{1572}} of file \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source}{unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h}}.
+Definition at line 1572 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
 
 
 
-References \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01624}{Can\+\_\+update\+\_\+configuration}}.
+References Can\+\_\+update\+\_\+configuration.
 
 
 
-Referenced by \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l36453}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::surface\+\_\+remesh\+\_\+for\+\_\+inner\+\_\+hole\+\_\+boundaries()}}.
+Referenced by oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::surface\+\_\+remesh\+\_\+for\+\_\+inner\+\_\+hole\+\_\+boundaries().
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMeshPolygon_ac4c6fe4549c10509bf7a9d63ea2404b0}\label{classoomph_1_1TriangleMeshPolygon_ac4c6fe4549c10509bf7a9d63ea2404b0}} 
 \index{oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}!disable\_redistribution\_of\_segments\_between\_polylines@{disable\_redistribution\_of\_segments\_between\_polylines}}
@@ -143,11 +143,11 @@ Disable re-\/distribution of polyline segments in the curve between different bo
 
 
 
-Definition at line \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01566}{1566}} of file \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source}{unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h}}.
+Definition at line 1566 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
 
 
 
-References \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01618}{Enable\+\_\+redistribution\+\_\+of\+\_\+segments\+\_\+between\+\_\+polylines}}.
+References Enable\+\_\+redistribution\+\_\+of\+\_\+segments\+\_\+between\+\_\+polylines.
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMeshPolygon_af3988a8dfd66d748819bacdff868715d}\label{classoomph_1_1TriangleMeshPolygon_af3988a8dfd66d748819bacdff868715d}} 
 \index{oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}!enable\_redistribution\_of\_segments\_between\_polylines@{enable\_redistribution\_of\_segments\_between\_polylines}}
@@ -161,11 +161,11 @@ Enable re-\/distribution of polyline segments in the curve between different bou
 
 
 
-Definition at line \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01559}{1559}} of file \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source}{unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h}}.
+Definition at line 1559 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
 
 
 
-References \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01618}{Enable\+\_\+redistribution\+\_\+of\+\_\+segments\+\_\+between\+\_\+polylines}}.
+References Enable\+\_\+redistribution\+\_\+of\+\_\+segments\+\_\+between\+\_\+polylines.
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMeshPolygon_a0ec0347a6d806f52a441d0fc7b63cece}\label{classoomph_1_1TriangleMeshPolygon_a0ec0347a6d806f52a441d0fc7b63cece}} 
 \index{oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}!is\_fixed@{is\_fixed}}
@@ -179,11 +179,11 @@ Test whether the polygon is fixed or not.
 
 
 
-Definition at line \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01598}{1598}} of file \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source}{unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h}}.
+Definition at line 1598 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
 
 
 
-References \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01630}{Polygon\+\_\+fixed}}.
+References Polygon\+\_\+fixed.
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMeshPolygon_a56e256e6814ae48ff72edba8cdceecd5}\label{classoomph_1_1TriangleMeshPolygon_a56e256e6814ae48ff72edba8cdceecd5}} 
 \index{oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}!is\_redistribution\_of\_segments\_between\_polylines\_enabled@{is\_redistribution\_of\_segments\_between\_polylines\_enabled}}
@@ -197,15 +197,15 @@ Is re-\/distribution of polyline segments in the curve between different boundar
 
 
 
-Definition at line \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01552}{1552}} of file \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source}{unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h}}.
+Definition at line 1552 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
 
 
 
-References \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01618}{Enable\+\_\+redistribution\+\_\+of\+\_\+segments\+\_\+between\+\_\+polylines}}.
+References Enable\+\_\+redistribution\+\_\+of\+\_\+segments\+\_\+between\+\_\+polylines.
 
 
 
-Referenced by \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l35896}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::get\+\_\+face\+\_\+mesh\+\_\+representation()}}.
+Referenced by oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::get\+\_\+face\+\_\+mesh\+\_\+representation().
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMeshPolygon_a6ef43be1b982a8dcc2f10545ab251bdb}\label{classoomph_1_1TriangleMeshPolygon_a6ef43be1b982a8dcc2f10545ab251bdb}} 
 \index{oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}!ncurve\_section@{ncurve\_section}}
@@ -223,15 +223,15 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1TriangleMeshCurve_af0b316414dd
 
 
 
-Definition at line \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01476}{1476}} of file \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source}{unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h}}.
+Definition at line 1476 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
 
 
 
-References \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01482}{npolyline()}}.
+References npolyline().
 
 
 
-Referenced by \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00549}{oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::reset\+\_\+reference\+\_\+configuration()}}.
+Referenced by oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::reset\+\_\+reference\+\_\+configuration().
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMeshPolygon_a050f497ebc58dd0baf036852f764dfd0}\label{classoomph_1_1TriangleMeshPolygon_a050f497ebc58dd0baf036852f764dfd0}} 
 \index{oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}!npolyline@{npolyline}}
@@ -245,21 +245,21 @@ Number of constituent polylines.
 
 
 
-Definition at line \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01482}{1482}} of file \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source}{unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h}}.
+Definition at line 1482 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
 
 
 
-References \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01321}{oomph\+::\+Triangle\+Mesh\+Curve\+::\+Curve\+\_\+section\+\_\+pt}}.
+References oomph\+::\+Triangle\+Mesh\+Curve\+::\+Curve\+\_\+section\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l31877}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::add\+\_\+vertices\+\_\+for\+\_\+non\+\_\+deletion()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00806}{oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::assign\+\_\+zeta()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l33050}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::create\+\_\+temporary\+\_\+boundary\+\_\+connections()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l35896}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::get\+\_\+face\+\_\+mesh\+\_\+representation()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00711}{oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::get\+\_\+initial\+\_\+position()}}, \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01476}{ncurve\+\_\+section()}}, \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01536}{polygon\+\_\+boundary\+\_\+id()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l33175}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::restore\+\_\+boundary\+\_\+connections()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l36453}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::surface\+\_\+remesh\+\_\+for\+\_\+inner\+\_\+hole\+\_\+boundaries()}}, \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8cc_source_l01577}{Triangle\+Mesh\+Polygon()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l41269}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::update\+\_\+polygon\+\_\+after\+\_\+restart()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l37662}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::update\+\_\+polygon\+\_\+using\+\_\+elements\+\_\+area()}}, and \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l34138}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::update\+\_\+polygon\+\_\+using\+\_\+face\+\_\+mesh()}}.
+Referenced by oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::add\+\_\+vertices\+\_\+for\+\_\+non\+\_\+deletion(), oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::assign\+\_\+zeta(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::create\+\_\+temporary\+\_\+boundary\+\_\+connections(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::get\+\_\+face\+\_\+mesh\+\_\+representation(), oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::get\+\_\+initial\+\_\+position(), ncurve\+\_\+section(), polygon\+\_\+boundary\+\_\+id(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::restore\+\_\+boundary\+\_\+connections(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::surface\+\_\+remesh\+\_\+for\+\_\+inner\+\_\+hole\+\_\+boundaries(), Triangle\+Mesh\+Polygon(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::update\+\_\+polygon\+\_\+after\+\_\+restart(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::update\+\_\+polygon\+\_\+using\+\_\+elements\+\_\+area(), and oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::update\+\_\+polygon\+\_\+using\+\_\+face\+\_\+mesh().
 
-\mbox{\Hypertarget{classoomph_1_1TriangleMeshPolygon_ae6f5a94842c673727b0e08f296f885af}\label{classoomph_1_1TriangleMeshPolygon_ae6f5a94842c673727b0e08f296f885af}} 
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshPolygon_a3d252deb06cbe9e6a48b55218b9dde2e}\label{classoomph_1_1TriangleMeshPolygon_a3d252deb06cbe9e6a48b55218b9dde2e}} 
 \index{oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}!polygon\_boundary\_id@{polygon\_boundary\_id}}
 \index{polygon\_boundary\_id@{polygon\_boundary\_id}!oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}}
 \doxysubsubsection{\texorpdfstring{polygon\_boundary\_id()}{polygon\_boundary\_id()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ oomph\+::\+Triangle\+Mesh\+Polygon\+::polygon\+\_\+boundary\+\_\+id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$unsigned$>$ oomph\+::\+Triangle\+Mesh\+Polygon\+::polygon\+\_\+boundary\+\_\+id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -267,17 +267,17 @@ Return vector of boundary ids of associated polylines.
 
 
 
-Definition at line \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01536}{1536}} of file \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source}{unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h}}.
+Definition at line 1536 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
 
 
 
-References \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01321}{oomph\+::\+Triangle\+Mesh\+Curve\+::\+Curve\+\_\+section\+\_\+pt}}, and \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01482}{npolyline()}}.
+References oomph\+::\+Triangle\+Mesh\+Curve\+::\+Curve\+\_\+section\+\_\+pt, and npolyline().
 
-\mbox{\Hypertarget{classoomph_1_1TriangleMeshPolygon_a60ce0a4afe341e93e3f413a278d56dc2}\label{classoomph_1_1TriangleMeshPolygon_a60ce0a4afe341e93e3f413a278d56dc2}} 
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshPolygon_a0e840f360ce9f33c98f928ba72ab1732}\label{classoomph_1_1TriangleMeshPolygon_a0e840f360ce9f33c98f928ba72ab1732}} 
 \index{oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}!polyline\_pt@{polyline\_pt}}
 \index{polyline\_pt@{polyline\_pt}!oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}}
 \doxysubsubsection{\texorpdfstring{polyline\_pt()}{polyline\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ oomph\+::\+Triangle\+Mesh\+Polygon\+::polyline\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}}$\ast$ oomph\+::\+Triangle\+Mesh\+Polygon\+::polyline\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -285,17 +285,17 @@ Pointer to i-\/th constituent polyline.
 
 
 
-Definition at line \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01512}{1512}} of file \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source}{unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h}}.
+Definition at line 1512 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
 
 
 
-References \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01321}{oomph\+::\+Triangle\+Mesh\+Curve\+::\+Curve\+\_\+section\+\_\+pt}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References oomph\+::\+Triangle\+Mesh\+Curve\+::\+Curve\+\_\+section\+\_\+pt, and i.
 
-\mbox{\Hypertarget{classoomph_1_1TriangleMeshPolygon_a270bb799bd592f8df8a5421513218fae}\label{classoomph_1_1TriangleMeshPolygon_a270bb799bd592f8df8a5421513218fae}} 
+\mbox{\Hypertarget{classoomph_1_1TriangleMeshPolygon_a528399d7e0fe0c8d684b4f851ca08dde}\label{classoomph_1_1TriangleMeshPolygon_a528399d7e0fe0c8d684b4f851ca08dde}} 
 \index{oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}!polyline\_pt@{polyline\_pt}}
 \index{polyline\_pt@{polyline\_pt}!oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}}
 \doxysubsubsection{\texorpdfstring{polyline\_pt()}{polyline\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} $\ast$ oomph\+::\+Triangle\+Mesh\+Polygon\+::polyline\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}}$\ast$ oomph\+::\+Triangle\+Mesh\+Polygon\+::polyline\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -303,15 +303,15 @@ Pointer to i-\/th constituent polyline.
 
 
 
-Definition at line \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01488}{1488}} of file \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source}{unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h}}.
+Definition at line 1488 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
 
 
 
-References \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01321}{oomph\+::\+Triangle\+Mesh\+Curve\+::\+Curve\+\_\+section\+\_\+pt}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References oomph\+::\+Triangle\+Mesh\+Curve\+::\+Curve\+\_\+section\+\_\+pt, and i.
 
 
 
-Referenced by \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l31877}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::add\+\_\+vertices\+\_\+for\+\_\+non\+\_\+deletion()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00806}{oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::assign\+\_\+zeta()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l33050}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::create\+\_\+temporary\+\_\+boundary\+\_\+connections()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l35896}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::get\+\_\+face\+\_\+mesh\+\_\+representation()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00711}{oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::get\+\_\+initial\+\_\+position()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00387}{oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00549}{oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::reset\+\_\+reference\+\_\+configuration()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l33175}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::restore\+\_\+boundary\+\_\+connections()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l36453}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::surface\+\_\+remesh\+\_\+for\+\_\+inner\+\_\+hole\+\_\+boundaries()}}, \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8cc_source_l01577}{Triangle\+Mesh\+Polygon()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l41269}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::update\+\_\+polygon\+\_\+after\+\_\+restart()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l37662}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::update\+\_\+polygon\+\_\+using\+\_\+elements\+\_\+area()}}, and \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l34138}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::update\+\_\+polygon\+\_\+using\+\_\+face\+\_\+mesh()}}.
+Referenced by oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::add\+\_\+vertices\+\_\+for\+\_\+non\+\_\+deletion(), oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::assign\+\_\+zeta(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::create\+\_\+temporary\+\_\+boundary\+\_\+connections(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::get\+\_\+face\+\_\+mesh\+\_\+representation(), oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::get\+\_\+initial\+\_\+position(), oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon(), oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::reset\+\_\+reference\+\_\+configuration(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::restore\+\_\+boundary\+\_\+connections(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::surface\+\_\+remesh\+\_\+for\+\_\+inner\+\_\+hole\+\_\+boundaries(), Triangle\+Mesh\+Polygon(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::update\+\_\+polygon\+\_\+after\+\_\+restart(), oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::update\+\_\+polygon\+\_\+using\+\_\+elements\+\_\+area(), and oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::update\+\_\+polygon\+\_\+using\+\_\+face\+\_\+mesh().
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMeshPolygon_a9c569f8bf7798d423356538651292996}\label{classoomph_1_1TriangleMeshPolygon_a9c569f8bf7798d423356538651292996}} 
 \index{oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}!reset\_reference\_configuration@{reset\_reference\_configuration}}
@@ -329,11 +329,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyTriangleMeshPol
 
 
 
-Definition at line \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01579}{1579}} of file \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source}{unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h}}.
+Definition at line 1579 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l36453}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::surface\+\_\+remesh\+\_\+for\+\_\+inner\+\_\+hole\+\_\+boundaries()}}.
+Referenced by oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::surface\+\_\+remesh\+\_\+for\+\_\+inner\+\_\+hole\+\_\+boundaries().
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMeshPolygon_a359ed1b0c4a0dfd06572207a1d21f327}\label{classoomph_1_1TriangleMeshPolygon_a359ed1b0c4a0dfd06572207a1d21f327}} 
 \index{oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}!set\_fixed@{set\_fixed}}
@@ -347,11 +347,11 @@ Set the polygon to be fixed.
 
 
 
-Definition at line \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01604}{1604}} of file \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source}{unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h}}.
+Definition at line 1604 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
 
 
 
-References \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01630}{Polygon\+\_\+fixed}}.
+References Polygon\+\_\+fixed.
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMeshPolygon_a850096fb1d02794a3103102341db4ff8}\label{classoomph_1_1TriangleMeshPolygon_a850096fb1d02794a3103102341db4ff8}} 
 \index{oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}!set\_unfixed@{set\_unfixed}}
@@ -365,11 +365,11 @@ Set the polygon to be allowed to move (default)
 
 
 
-Definition at line \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01610}{1610}} of file \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source}{unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h}}.
+Definition at line 1610 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
 
 
 
-References \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01630}{Polygon\+\_\+fixed}}.
+References Polygon\+\_\+fixed.
 
 
 
@@ -386,11 +386,11 @@ Boolean flag to indicate whether the polygon can update its own reference config
 
 
 
-Definition at line \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01624}{1624}} of file \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source}{unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h}}.
+Definition at line 1624 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01572}{can\+\_\+update\+\_\+reference\+\_\+configuration()}}, and \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00387}{oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon()}}.
+Referenced by can\+\_\+update\+\_\+reference\+\_\+configuration(), and oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon().
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMeshPolygon_ad5f0494a9cda7d7e122eacb0a6c2bd27}\label{classoomph_1_1TriangleMeshPolygon_ad5f0494a9cda7d7e122eacb0a6c2bd27}} 
 \index{oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}!Enable\_redistribution\_of\_segments\_between\_polylines@{Enable\_redistribution\_of\_segments\_between\_polylines}}
@@ -404,11 +404,11 @@ Is re-\/distribution of polyline segments between different boundaries during ad
 
 
 
-Definition at line \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01618}{1618}} of file \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source}{unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h}}.
+Definition at line 1618 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01566}{disable\+\_\+redistribution\+\_\+of\+\_\+segments\+\_\+between\+\_\+polylines()}}, \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01559}{enable\+\_\+redistribution\+\_\+of\+\_\+segments\+\_\+between\+\_\+polylines()}}, and \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01552}{is\+\_\+redistribution\+\_\+of\+\_\+segments\+\_\+between\+\_\+polylines\+\_\+enabled()}}.
+Referenced by disable\+\_\+redistribution\+\_\+of\+\_\+segments\+\_\+between\+\_\+polylines(), enable\+\_\+redistribution\+\_\+of\+\_\+segments\+\_\+between\+\_\+polylines(), and is\+\_\+redistribution\+\_\+of\+\_\+segments\+\_\+between\+\_\+polylines\+\_\+enabled().
 
 \mbox{\Hypertarget{classoomph_1_1TriangleMeshPolygon_a7f79fb03756524e23c8cc717c7c66f75}\label{classoomph_1_1TriangleMeshPolygon_a7f79fb03756524e23c8cc717c7c66f75}} 
 \index{oomph::TriangleMeshPolygon@{oomph::TriangleMeshPolygon}!Polygon\_fixed@{Polygon\_fixed}}
@@ -422,11 +422,11 @@ Boolean flag to indicate whether the polygon can move (default false because if 
 
 
 
-Definition at line \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01630}{1630}} of file \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source}{unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h}}.
+Definition at line 1630 of file unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01598}{is\+\_\+fixed()}}, \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01604}{set\+\_\+fixed()}}, and \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01610}{set\+\_\+unfixed()}}.
+Referenced by is\+\_\+fixed(), set\+\_\+fixed(), and set\+\_\+unfixed().
 
 
 

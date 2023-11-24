@@ -78,7 +78,7 @@ In anticipation of the mesh\textquotesingle{}s use in a fluid-\/structure intera
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===========start\_mesh====================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Triangle-\/based mesh upgraded to become a (pseudo-\/) solid mesh}}
-\DoxyCodeLine{\textcolor{comment}{//=========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classElasticTriangleMesh}{ElasticTriangleMesh}} : \textcolor{keyword}{public} \textcolor{keyword}{virtual} TriangleMesh<ELEMENT>,}
 \DoxyCodeLine{                            \textcolor{keyword}{public} \textcolor{keyword}{virtual} SolidMesh }
@@ -168,7 +168,7 @@ We first allocate storage for three boundaries\+:
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Empty Destructor}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \mbox{\hyperlink{classElasticTriangleMesh}{\string~ElasticTriangleMesh}}() \{ \}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \string~\mbox{\hyperlink{classElasticTriangleMesh}{ElasticTriangleMesh}}() \{ \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\};}
@@ -183,7 +183,7 @@ As usual we define the various problem parameters in a global namespace. We defi
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_namespace==============================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for physical parameters}}
-\DoxyCodeLine{\textcolor{comment}{//==================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -208,7 +208,7 @@ We specify an output directory and instantiate a constitutive equation for the p
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_main======================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver for unstructured fluid test problem}}
-\DoxyCodeLine{\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{unstructured__two__d__fluid_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ \textcolor{comment}{// Label for output}}
@@ -227,7 +227,7 @@ We specify an output directory and instantiate a constitutive equation for the p
 \DoxyCodeLine{   TPVDElement<2,3> > > problem;}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Output boundaries }}
-\DoxyCodeLine{  problem.\mbox{\hyperlink{classUnstructuredFluidProblem_add8751b8347cee3103fee5d05f9674e1}{fluid\_mesh\_pt}}()-\/>output\_boundaries(\textcolor{stringliteral}{"{}RESLT\_TH/boundaries.dat"{}});}
+\DoxyCodeLine{  problem.\mbox{\hyperlink{classUnstructuredFluidProblem_abc5f7e9929eb6f174eaa49a491489ad9}{fluid\_mesh\_pt}}()-\/>output\_boundaries(\textcolor{stringliteral}{"{}RESLT\_TH/boundaries.dat"{}});}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Output the initial guess for the solution}}
 \DoxyCodeLine{  problem.doc\_solution(doc\_info);}
@@ -267,7 +267,7 @@ The {\ttfamily Problem} class has the usual member functions and provides explic
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_problem\_class============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Unstructured fluid problem}}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classUnstructuredFluidProblem}{UnstructuredFluidProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -281,7 +281,7 @@ The {\ttfamily Problem} class has the usual member functions and provides explic
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classUnstructuredFluidProblem_a4d660faa6bae35197a4ea73139ac9963}{\string~UnstructuredFluidProblem}}()\{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Access function for the fluid mesh}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classElasticTriangleMesh}{ElasticTriangleMesh<ELEMENT>}}*\& \mbox{\hyperlink{classUnstructuredFluidProblem_add8751b8347cee3103fee5d05f9674e1}{fluid\_mesh\_pt}}() }
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classElasticTriangleMesh}{ElasticTriangleMesh<ELEMENT>}}*\& \mbox{\hyperlink{classUnstructuredFluidProblem_abc5f7e9929eb6f174eaa49a491489ad9}{fluid\_mesh\_pt}}() }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{keywordflow}{return} \mbox{\hyperlink{classUnstructuredFluidProblem_a9b653c3879c846b412068d03bfe8c202}{Fluid\_mesh\_pt}};}
 \DoxyCodeLine{  \}}
@@ -310,7 +310,7 @@ We start by building the fluid mesh, using the files created by \href{http://www
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_constructor=====================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor }}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classUnstructuredFluidProblem_a9751f4afac540e148b3d90ae43dd5187}{UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem}}()}
 \DoxyCodeLine{\{ }
@@ -593,7 +593,7 @@ As mentioned above, the elements\textquotesingle{} pseudo-\/elasticity plays no 
 ~\newline
 
 \item However, if the pseudo-\/elastic capabilities are retained the fluid mesh can indeed deform as an elastic body; for example, by specifying a (solid mechanics) body force. Simply follow the steps used in \href{../../../solid/unstructured_solid/html/index.html}{\texttt{ the corresponding solid mechanics problem.}} Define the body force in the namespace {\ttfamily \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}} and pass a (function-\/)pointer to it to the elements. N.\+B. The body force for the (pseudo-\/)solid equations must be specified explicitly because the Navier-\/\+Stokes equations have their own body force pointer! The compiler will complain about ambiguities in the following code\+: ~\newline
- 
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{[...]}
 \DoxyCodeLine{}
@@ -604,7 +604,7 @@ As mentioned above, the elements\textquotesingle{} pseudo-\/elasticity plays no 
 
 \end{DoxyCode}
  Instead, we must be more specific by writing ~\newline
- 
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{[...]}
 \DoxyCodeLine{}

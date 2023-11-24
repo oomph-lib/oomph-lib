@@ -28,14 +28,14 @@ Inheritance diagram for oomph\+::Deviatoric\+Isotropic\+Elasticity\+Tensor\+:\be
 \begin{DoxyCompactList}\small\item\em Constructur. Passing in the values of the two lame coefficients directly (interpreted as the ratios of these quantities to a reference stiffness used to non-\/dimensionalised. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1DeviatoricIsotropicElasticityTensor_ab9861d265cbc24c5fa6b55f0613ead8b}{independent\+\_\+component}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Overload the independent coefficient function. \end{DoxyCompactList}\item 
-const double \& \mbox{\hyperlink{classoomph_1_1DeviatoricIsotropicElasticityTensor_a7f65bc2a74886ab32316708af84d4b67}{lambda}} () const
+const double \& \mbox{\hyperlink{classoomph_1_1DeviatoricIsotropicElasticityTensor_a6fe87541b96eae240e41bc71515500b1}{lambda}} () const
 \begin{DoxyCompactList}\small\item\em Accessor function for the first lame parameter. \end{DoxyCompactList}\item 
-const double \& \mbox{\hyperlink{classoomph_1_1DeviatoricIsotropicElasticityTensor_a40f828fa68cbacfaa4abad018dd96bce}{mu}} () const
+const double \& \mbox{\hyperlink{classoomph_1_1DeviatoricIsotropicElasticityTensor_ab460459ac81142a79e16ef2229d04b43}{mu}} () const
 \begin{DoxyCompactList}\small\item\em Accessor function for the second lame parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classoomph_1_1DeviatoricIsotropicElasticityTensor_a0f1da5acf9260a1827c15593a0cdec2d}{set\+\_\+lame\+\_\+coefficients}} (const double \&\mbox{\hyperlink{classoomph_1_1DeviatoricIsotropicElasticityTensor_a7f65bc2a74886ab32316708af84d4b67}{lambda}}, const double \&\mbox{\hyperlink{classoomph_1_1DeviatoricIsotropicElasticityTensor_a40f828fa68cbacfaa4abad018dd96bce}{mu}})
+void \mbox{\hyperlink{classoomph_1_1DeviatoricIsotropicElasticityTensor_a0f1da5acf9260a1827c15593a0cdec2d}{set\+\_\+lame\+\_\+coefficients}} (const double \&\mbox{\hyperlink{classoomph_1_1DeviatoricIsotropicElasticityTensor_a6fe87541b96eae240e41bc71515500b1}{lambda}}, const double \&\mbox{\hyperlink{classoomph_1_1DeviatoricIsotropicElasticityTensor_ab460459ac81142a79e16ef2229d04b43}{mu}})
 \end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -57,7 +57,7 @@ static const unsigned \mbox{\hyperlink{classoomph_1_1DeviatoricIsotropicElastici
 \doxysubsection{Detailed Description}
 An isotropic elasticity tensor defined in terms of Young\textquotesingle{}s modulus and Poisson\textquotesingle{}s ratio. The elasticity tensor is assumed to be non-\/dimensionalised on some reference value for Young\textquotesingle{}s modulus so the value provided to the constructor (if any) is to be interpreted as the ratio of the actual Young\textquotesingle{}s modulus to the Young\textquotesingle{}s modulus used to non-\/dimensionalise the stresses/tractions in the governing equations. 
 
-Definition at line \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00223}{223}} of file \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source}{poroelasticity/elasticity\+\_\+tensor.\+h}}.
+Definition at line 223 of file poroelasticity/elasticity\+\_\+tensor.\+h.
 
 
 
@@ -74,11 +74,11 @@ Constructor. For use with incompressibility. Requires no parameters since Poisso
 
 
 
-Definition at line \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00242}{242}} of file \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source}{poroelasticity/elasticity\+\_\+tensor.\+h}}.
+Definition at line 242 of file poroelasticity/elasticity\+\_\+tensor.\+h.
 
 
 
-References \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00226}{C}}, \mbox{\hyperlink{quadtree_8h_source_l00061}{oomph\+::\+Quad\+Tree\+Names\+::E}}, \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00300}{lambda()}}, \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00306}{mu()}}, and \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00313}{set\+\_\+lame\+\_\+coefficients()}}.
+References C, oomph\+::\+Quad\+Tree\+Names\+::E, lambda(), mu(), and set\+\_\+lame\+\_\+coefficients().
 
 \mbox{\Hypertarget{classoomph_1_1DeviatoricIsotropicElasticityTensor_a4f3edce9cd91008468599fb24b950707}\label{classoomph_1_1DeviatoricIsotropicElasticityTensor_a4f3edce9cd91008468599fb24b950707}} 
 \index{oomph::DeviatoricIsotropicElasticityTensor@{oomph::DeviatoricIsotropicElasticityTensor}!DeviatoricIsotropicElasticityTensor@{DeviatoricIsotropicElasticityTensor}}
@@ -92,11 +92,11 @@ Constructor. Passing in the values of the Poisson\textquotesingle{}s ratio and Y
 
 
 
-Definition at line \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00257}{257}} of file \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source}{poroelasticity/elasticity\+\_\+tensor.\+h}}.
+Definition at line 257 of file poroelasticity/elasticity\+\_\+tensor.\+h.
 
 
 
-References \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00226}{C}}, \mbox{\hyperlink{quadtree_8h_source_l00061}{oomph\+::\+Quad\+Tree\+Names\+::E}}, \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00300}{lambda()}}, \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00306}{mu()}}, and \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00313}{set\+\_\+lame\+\_\+coefficients()}}.
+References C, oomph\+::\+Quad\+Tree\+Names\+::E, lambda(), mu(), and set\+\_\+lame\+\_\+coefficients().
 
 \mbox{\Hypertarget{classoomph_1_1DeviatoricIsotropicElasticityTensor_a09fec2c25d55c5603723f2ab2531f78a}\label{classoomph_1_1DeviatoricIsotropicElasticityTensor_a09fec2c25d55c5603723f2ab2531f78a}} 
 \index{oomph::DeviatoricIsotropicElasticityTensor@{oomph::DeviatoricIsotropicElasticityTensor}!DeviatoricIsotropicElasticityTensor@{DeviatoricIsotropicElasticityTensor}}
@@ -110,11 +110,11 @@ Constructor. Passing in the value of the Poisson\textquotesingle{}s ratio. Stres
 
 
 
-Definition at line \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00270}{270}} of file \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source}{poroelasticity/elasticity\+\_\+tensor.\+h}}.
+Definition at line 270 of file poroelasticity/elasticity\+\_\+tensor.\+h.
 
 
 
-References \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00226}{C}}, \mbox{\hyperlink{quadtree_8h_source_l00061}{oomph\+::\+Quad\+Tree\+Names\+::E}}, \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00300}{lambda()}}, \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00306}{mu()}}, and \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00313}{set\+\_\+lame\+\_\+coefficients()}}.
+References C, oomph\+::\+Quad\+Tree\+Names\+::E, lambda(), mu(), and set\+\_\+lame\+\_\+coefficients().
 
 \mbox{\Hypertarget{classoomph_1_1DeviatoricIsotropicElasticityTensor_aeed1da3ce892934b38ce4fda23c7f21c}\label{classoomph_1_1DeviatoricIsotropicElasticityTensor_aeed1da3ce892934b38ce4fda23c7f21c}} 
 \index{oomph::DeviatoricIsotropicElasticityTensor@{oomph::DeviatoricIsotropicElasticityTensor}!DeviatoricIsotropicElasticityTensor@{DeviatoricIsotropicElasticityTensor}}
@@ -128,11 +128,11 @@ Constructur. Passing in the values of the two lame coefficients directly (interp
 
 
 
-Definition at line \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00285}{285}} of file \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source}{poroelasticity/elasticity\+\_\+tensor.\+h}}.
+Definition at line 285 of file poroelasticity/elasticity\+\_\+tensor.\+h.
 
 
 
-References \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00226}{C}}, and \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00313}{set\+\_\+lame\+\_\+coefficients()}}.
+References C, and set\+\_\+lame\+\_\+coefficients().
 
 
 
@@ -153,17 +153,17 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ElasticityTensor_a84b2a9b7a447
 
 
 
-Definition at line \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00294}{294}} of file \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source}{poroelasticity/elasticity\+\_\+tensor.\+h}}.
+Definition at line 294 of file poroelasticity/elasticity\+\_\+tensor.\+h.
 
 
 
-References \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00226}{C}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00236}{Static\+Index}}.
+References C, i, and Static\+Index.
 
-\mbox{\Hypertarget{classoomph_1_1DeviatoricIsotropicElasticityTensor_a7f65bc2a74886ab32316708af84d4b67}\label{classoomph_1_1DeviatoricIsotropicElasticityTensor_a7f65bc2a74886ab32316708af84d4b67}} 
+\mbox{\Hypertarget{classoomph_1_1DeviatoricIsotropicElasticityTensor_a6fe87541b96eae240e41bc71515500b1}\label{classoomph_1_1DeviatoricIsotropicElasticityTensor_a6fe87541b96eae240e41bc71515500b1}} 
 \index{oomph::DeviatoricIsotropicElasticityTensor@{oomph::DeviatoricIsotropicElasticityTensor}!lambda@{lambda}}
 \index{lambda@{lambda}!oomph::DeviatoricIsotropicElasticityTensor@{oomph::DeviatoricIsotropicElasticityTensor}}
 \doxysubsubsection{\texorpdfstring{lambda()}{lambda()}}
-{\footnotesize\ttfamily const double \& oomph\+::\+Deviatoric\+Isotropic\+Elasticity\+Tensor\+::lambda (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const double\& oomph\+::\+Deviatoric\+Isotropic\+Elasticity\+Tensor\+::lambda (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -171,21 +171,21 @@ Accessor function for the first lame parameter.
 
 
 
-Definition at line \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00300}{300}} of file \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source}{poroelasticity/elasticity\+\_\+tensor.\+h}}.
+Definition at line 300 of file poroelasticity/elasticity\+\_\+tensor.\+h.
 
 
 
-References \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00229}{Lambda}}.
+References Lambda.
 
 
 
-Referenced by \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00242}{Deviatoric\+Isotropic\+Elasticity\+Tensor()}}, and \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00313}{set\+\_\+lame\+\_\+coefficients()}}.
+Referenced by Deviatoric\+Isotropic\+Elasticity\+Tensor(), and set\+\_\+lame\+\_\+coefficients().
 
-\mbox{\Hypertarget{classoomph_1_1DeviatoricIsotropicElasticityTensor_a40f828fa68cbacfaa4abad018dd96bce}\label{classoomph_1_1DeviatoricIsotropicElasticityTensor_a40f828fa68cbacfaa4abad018dd96bce}} 
+\mbox{\Hypertarget{classoomph_1_1DeviatoricIsotropicElasticityTensor_ab460459ac81142a79e16ef2229d04b43}\label{classoomph_1_1DeviatoricIsotropicElasticityTensor_ab460459ac81142a79e16ef2229d04b43}} 
 \index{oomph::DeviatoricIsotropicElasticityTensor@{oomph::DeviatoricIsotropicElasticityTensor}!mu@{mu}}
 \index{mu@{mu}!oomph::DeviatoricIsotropicElasticityTensor@{oomph::DeviatoricIsotropicElasticityTensor}}
 \doxysubsubsection{\texorpdfstring{mu()}{mu()}}
-{\footnotesize\ttfamily const double \& oomph\+::\+Deviatoric\+Isotropic\+Elasticity\+Tensor\+::mu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const double\& oomph\+::\+Deviatoric\+Isotropic\+Elasticity\+Tensor\+::mu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -193,15 +193,15 @@ Accessor function for the second lame parameter.
 
 
 
-Definition at line \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00306}{306}} of file \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source}{poroelasticity/elasticity\+\_\+tensor.\+h}}.
+Definition at line 306 of file poroelasticity/elasticity\+\_\+tensor.\+h.
 
 
 
-References \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00232}{Mu}}.
+References Mu.
 
 
 
-Referenced by \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00242}{Deviatoric\+Isotropic\+Elasticity\+Tensor()}}, and \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00313}{set\+\_\+lame\+\_\+coefficients()}}.
+Referenced by Deviatoric\+Isotropic\+Elasticity\+Tensor(), and set\+\_\+lame\+\_\+coefficients().
 
 \mbox{\Hypertarget{classoomph_1_1DeviatoricIsotropicElasticityTensor_a0f1da5acf9260a1827c15593a0cdec2d}\label{classoomph_1_1DeviatoricIsotropicElasticityTensor_a0f1da5acf9260a1827c15593a0cdec2d}} 
 \index{oomph::DeviatoricIsotropicElasticityTensor@{oomph::DeviatoricIsotropicElasticityTensor}!set\_lame\_coefficients@{set\_lame\_coefficients}}
@@ -211,15 +211,15 @@ Referenced by \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l002
 
 
 
-Definition at line \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00313}{313}} of file \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source}{poroelasticity/elasticity\+\_\+tensor.\+h}}.
+Definition at line 313 of file poroelasticity/elasticity\+\_\+tensor.\+h.
 
 
 
-References \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00226}{C}}, \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00229}{Lambda}}, \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00300}{lambda()}}, \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00232}{Mu}}, and \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00306}{mu()}}.
+References C, Lambda, lambda(), Mu, and mu().
 
 
 
-Referenced by \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00242}{Deviatoric\+Isotropic\+Elasticity\+Tensor()}}.
+Referenced by Deviatoric\+Isotropic\+Elasticity\+Tensor().
 
 
 
@@ -232,11 +232,11 @@ Referenced by \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l002
 
 
 
-Definition at line \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00226}{226}} of file \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source}{poroelasticity/elasticity\+\_\+tensor.\+h}}.
+Definition at line 226 of file poroelasticity/elasticity\+\_\+tensor.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00242}{Deviatoric\+Isotropic\+Elasticity\+Tensor()}}, \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00294}{independent\+\_\+component()}}, and \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00313}{set\+\_\+lame\+\_\+coefficients()}}.
+Referenced by Deviatoric\+Isotropic\+Elasticity\+Tensor(), independent\+\_\+component(), and set\+\_\+lame\+\_\+coefficients().
 
 \mbox{\Hypertarget{classoomph_1_1DeviatoricIsotropicElasticityTensor_a0a05cc242a795eb8fbcfa51474aaf318}\label{classoomph_1_1DeviatoricIsotropicElasticityTensor_a0a05cc242a795eb8fbcfa51474aaf318}} 
 \index{oomph::DeviatoricIsotropicElasticityTensor@{oomph::DeviatoricIsotropicElasticityTensor}!Lambda@{Lambda}}
@@ -246,11 +246,11 @@ Referenced by \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l002
 
 
 
-Definition at line \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00229}{229}} of file \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source}{poroelasticity/elasticity\+\_\+tensor.\+h}}.
+Definition at line 229 of file poroelasticity/elasticity\+\_\+tensor.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00300}{lambda()}}, and \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00313}{set\+\_\+lame\+\_\+coefficients()}}.
+Referenced by lambda(), and set\+\_\+lame\+\_\+coefficients().
 
 \mbox{\Hypertarget{classoomph_1_1DeviatoricIsotropicElasticityTensor_aafe9bd480de84c98cfe1528ff7a3c528}\label{classoomph_1_1DeviatoricIsotropicElasticityTensor_aafe9bd480de84c98cfe1528ff7a3c528}} 
 \index{oomph::DeviatoricIsotropicElasticityTensor@{oomph::DeviatoricIsotropicElasticityTensor}!Mu@{Mu}}
@@ -260,11 +260,11 @@ Referenced by \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l003
 
 
 
-Definition at line \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00232}{232}} of file \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source}{poroelasticity/elasticity\+\_\+tensor.\+h}}.
+Definition at line 232 of file poroelasticity/elasticity\+\_\+tensor.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00306}{mu()}}, and \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00313}{set\+\_\+lame\+\_\+coefficients()}}.
+Referenced by mu(), and set\+\_\+lame\+\_\+coefficients().
 
 \mbox{\Hypertarget{classoomph_1_1DeviatoricIsotropicElasticityTensor_a073434d42a9e9f9520abe64c3e720337}\label{classoomph_1_1DeviatoricIsotropicElasticityTensor_a073434d42a9e9f9520abe64c3e720337}} 
 \index{oomph::DeviatoricIsotropicElasticityTensor@{oomph::DeviatoricIsotropicElasticityTensor}!StaticIndex@{StaticIndex}}
@@ -284,11 +284,11 @@ Translation scheme for the deviatoric isotropic elasticity tensor.
 
 
 
-Definition at line \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00236}{236}} of file \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source}{poroelasticity/elasticity\+\_\+tensor.\+h}}.
+Definition at line 236 of file poroelasticity/elasticity\+\_\+tensor.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00294}{independent\+\_\+component()}}.
+Referenced by independent\+\_\+component().
 
 
 

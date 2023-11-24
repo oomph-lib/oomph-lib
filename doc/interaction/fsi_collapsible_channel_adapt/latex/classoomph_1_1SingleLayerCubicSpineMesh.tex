@@ -1,15 +1,15 @@
-\hypertarget{classoomph_1_1SingleLayerCubicSpineMesh}{}\doxysection{oomph\+::Single\+Layer\+Cubic\+Spine\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1SingleLayerCubicSpineMesh}{}\doxysection{oomph\+::Single\+Layer\+Cubic\+Spine\+Mesh$<$ ELEMENT $>$ Class Template Reference}
 \label{classoomph_1_1SingleLayerCubicSpineMesh}\index{oomph::SingleLayerCubicSpineMesh$<$ ELEMENT $>$@{oomph::SingleLayerCubicSpineMesh$<$ ELEMENT $>$}}
 
 
-Spine mesh class derived from standard cubic 3D mesh. The mesh contains a layer of spinified fluid elements (of type ELEMENT; e.\+g Spine\+Element\texorpdfstring{$<$}{<}QCrouzeix\+Raviart\+Element$<$3$>$) for 3D problems, in which the interface\textquotesingle{}s vertical position can vary.  
+Spine mesh class derived from standard cubic 3D mesh. The mesh contains a layer of spinified fluid elements (of type ELEMENT; e.\+g Spine\+Element$<$QCrouzeix\+Raviart\+Element$<$3$>$) for 3D problems, in which the interface\textquotesingle{}s vertical position can vary.  
 
 
 
 
 {\ttfamily \#include $<$single\+\_\+layer\+\_\+cubic\+\_\+spine\+\_\+mesh.\+template.\+h$>$}
 
-Inheritance diagram for oomph\+::Single\+Layer\+Cubic\+Spine\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Single\+Layer\+Cubic\+Spine\+Mesh$<$ ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.718446cm]{classoomph_1_1SingleLayerCubicSpineMesh}
@@ -18,7 +18,7 @@ Inheritance diagram for oomph\+::Single\+Layer\+Cubic\+Spine\+Mesh\texorpdfstrin
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1SingleLayerCubicSpineMesh_a99a1c68b949c75b5afc9bb0eb93fec3e}{Single\+Layer\+Cubic\+Spine\+Mesh}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a1a147873325b08e1715828d500cd4d95}{nx}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a860fc1de52fdb189cbc64b0ca13efc20}{ny}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a30a7daf6d2841672f4d7e32041e81957}{nz}}, const double \&lx, const double \&ly, const double \&h, Time\+Stepper $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\mbox{\hyperlink{classoomph_1_1SingleLayerCubicSpineMesh_a99a1c68b949c75b5afc9bb0eb93fec3e}{Single\+Layer\+Cubic\+Spine\+Mesh}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_ad29c917ec0adb29ad24e086e3dcd0b6f}{nx}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a16979ec3b0e88fb37730415190021c1c}{ny}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_ad78725440e4e87598fd9339653b28e61}{nz}}, const double \&lx, const double \&ly, const double \&h, Time\+Stepper $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
 \begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in x-\/direction, number of elements in y-\/direction, number of elements in z-\/direction, lengths in x-\/ and y-\/ directions, height of layer, and pointer to timestepper (defaults to Steady timestepper) \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1SingleLayerCubicSpineMesh_a4851fbaed5be21441ad4f7b7f2a660e0}{spine\+\_\+node\+\_\+update}} (Spine\+Node $\ast$spine\+\_\+node\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em General node update function implements pure virtual function defined in Spine\+Mesh base class and performs specific node update actions\+: along vertical spines. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -33,11 +33,12 @@ virtual void \mbox{\hyperlink{classoomph_1_1SingleLayerCubicSpineMesh_a975e6943d
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class ELEMENT$>$\newline
 class oomph\+::\+Single\+Layer\+Cubic\+Spine\+Mesh$<$ ELEMENT $>$}
-Spine mesh class derived from standard cubic 3D mesh. The mesh contains a layer of spinified fluid elements (of type ELEMENT; e.\+g Spine\+Element\texorpdfstring{$<$}{<}QCrouzeix\+Raviart\+Element$<$3$>$) for 3D problems, in which the interface\textquotesingle{}s vertical position can vary. 
+
+Spine mesh class derived from standard cubic 3D mesh. The mesh contains a layer of spinified fluid elements (of type ELEMENT; e.\+g Spine\+Element$<$QCrouzeix\+Raviart\+Element$<$3$>$) for 3D problems, in which the interface\textquotesingle{}s vertical position can vary. 
 
 This mesh has been carefully designed so that the numeration of the nodes on the boundaries 0 and 5 (bottom and top) coincides with the numeration of the spines 
 
-Definition at line \mbox{\hyperlink{single__layer__cubic__spine__mesh_8template_8h_source_l00046}{46}} of file \mbox{\hyperlink{single__layer__cubic__spine__mesh_8template_8h_source}{single\+\_\+layer\+\_\+cubic\+\_\+spine\+\_\+mesh.\+template.\+h}}.
+Definition at line 46 of file single\+\_\+layer\+\_\+cubic\+\_\+spine\+\_\+mesh.\+template.\+h.
 
 
 
@@ -55,11 +56,11 @@ Constructor\+: Pass number of elements in x-\/direction, number of elements in y
 
 Constructor for spine 3D mesh\+: Pass number of elements in x-\/direction, number of elements in y-\/direction, number elements in z-\/direction, length, width and height of layer, and pointer to timestepper (defaults to Static timestepper). 
 
-Definition at line \mbox{\hyperlink{single__layer__cubic__spine__mesh_8template_8cc_source_l00041}{41}} of file \mbox{\hyperlink{single__layer__cubic__spine__mesh_8template_8cc_source}{single\+\_\+layer\+\_\+cubic\+\_\+spine\+\_\+mesh.\+template.\+cc}}.
+Definition at line 41 of file single\+\_\+layer\+\_\+cubic\+\_\+spine\+\_\+mesh.\+template.\+cc.
 
 
 
-References \mbox{\hyperlink{single__layer__cubic__spine__mesh_8template_8cc_source_l00066}{oomph\+::\+Single\+Layer\+Cubic\+Spine\+Mesh$<$ ELEMENT $>$\+::build\+\_\+single\+\_\+layer\+\_\+mesh()}}.
+References oomph\+::\+Single\+Layer\+Cubic\+Spine\+Mesh$<$ ELEMENT $>$\+::build\+\_\+single\+\_\+layer\+\_\+mesh().
 
 
 
@@ -77,11 +78,11 @@ Helper function to actually build the single-\/layer spine mesh (called from var
 
 Helper function that actually builds the single-\/layer spine mesh based on the parameters set in the various constructors. 
 
-Definition at line \mbox{\hyperlink{single__layer__cubic__spine__mesh_8template_8cc_source_l00066}{66}} of file \mbox{\hyperlink{single__layer__cubic__spine__mesh_8template_8cc_source}{single\+\_\+layer\+\_\+cubic\+\_\+spine\+\_\+mesh.\+template.\+cc}}.
+Definition at line 66 of file single\+\_\+layer\+\_\+cubic\+\_\+spine\+\_\+mesh.\+template.\+cc.
 
 
 
-Referenced by \mbox{\hyperlink{single__layer__cubic__spine__mesh_8template_8cc_source_l00041}{oomph\+::\+Single\+Layer\+Cubic\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Single\+Layer\+Cubic\+Spine\+Mesh()}}.
+Referenced by oomph\+::\+Single\+Layer\+Cubic\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Single\+Layer\+Cubic\+Spine\+Mesh().
 
 \mbox{\Hypertarget{classoomph_1_1SingleLayerCubicSpineMesh_a4851fbaed5be21441ad4f7b7f2a660e0}\label{classoomph_1_1SingleLayerCubicSpineMesh_a4851fbaed5be21441ad4f7b7f2a660e0}} 
 \index{oomph::SingleLayerCubicSpineMesh$<$ ELEMENT $>$@{oomph::SingleLayerCubicSpineMesh$<$ ELEMENT $>$}!spine\_node\_update@{spine\_node\_update}}
@@ -96,11 +97,11 @@ General node update function implements pure virtual function defined in Spine\+
 
 
 
-Definition at line \mbox{\hyperlink{single__layer__cubic__spine__mesh_8template_8h_source_l00066}{66}} of file \mbox{\hyperlink{single__layer__cubic__spine__mesh_8template_8h_source}{single\+\_\+layer\+\_\+cubic\+\_\+spine\+\_\+mesh.\+template.\+h}}.
+Definition at line 66 of file single\+\_\+layer\+\_\+cubic\+\_\+spine\+\_\+mesh.\+template.\+h.
 
 
 
-References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00198}{Global\+\_\+\+Physical\+\_\+\+Variables\+::H}}, and \mbox{\hyperlink{simple__cubic__mesh_8template_8h_source_l00148}{oomph\+::\+Simple\+Cubic\+Mesh$<$ ELEMENT $>$\+::\+Zmin}}.
+References Global\+\_\+\+Physical\+\_\+\+Variables\+::H, and oomph\+::\+Simple\+Cubic\+Mesh$<$ ELEMENT $>$\+::\+Zmin.
 
 
 

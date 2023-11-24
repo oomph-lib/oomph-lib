@@ -68,7 +68,7 @@ Since we wish to compare the stresses and displacements against the analytical s
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=================start\_wrapper==================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Wrapper class for solid element to modify the output }}
-\DoxyCodeLine{\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }MySolidElement : \textcolor{keyword}{public} \textcolor{keyword}{virtual} ELEMENT}
 \DoxyCodeLine{\{}
@@ -131,7 +131,7 @@ As usual we define the various problem parameters in a global namespace. We prep
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_namespace==========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Global variables}}
-\DoxyCodeLine{\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -188,7 +188,7 @@ The driver code solves the problem with a large number of different formulations
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_main==================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver for compressed square}}
-\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{compressed__square_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ }
@@ -382,7 +382,7 @@ The {\ttfamily Problem} class has the usual member functions. The {\ttfamily i\+
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=============begin\_problem============================================ }}
 \DoxyCodeLine{\textcolor{comment}{/// Problem class}}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================== }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================== }}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classCompressedSquareProblem}{CompressedSquareProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -428,8 +428,8 @@ We start by building the mesh -- the {\ttfamily Solid\+Mesh} version of the {\tt
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===========start\_of\_constructor======================================= }}
-\DoxyCodeLine{\textcolor{comment}{/// Constructor: Pass flag that determines if we want to enforce}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// incompressibility}}
+\DoxyCodeLine{\textcolor{comment}{/// Constructor: Pass flag that determines if we want to enforce}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// incompressibility}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================== }}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classCompressedSquareProblem_af013df43f2a9f6ee8ff16cf59ddd9439}{CompressedSquareProblem<ELEMENT>::CompressedSquareProblem}}(}

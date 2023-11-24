@@ -29,14 +29,14 @@ For generality, we implement the mathematics to assemble contributions to the Ja
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{/// A class for all elements that solve the eigenvalue problem}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)f[ }\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)frac\{\(\backslash\)partial w\}\{\(\backslash\)partial x\}  = \(\backslash\)lambda u}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)f] }}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)f[}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)frac\{\(\backslash\)partial u\}\{\(\backslash\)partial x\} = (\(\backslash\)lambda -\/ \(\backslash\)mu) w}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)f]}}
-\DoxyCodeLine{\textcolor{comment}{/// This class  contains the generic maths. Shape functions, geometric}}
-\DoxyCodeLine{\textcolor{comment}{/// mapping etc. must get implemented in derived class.}}
+\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)f[ }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)frac\{\(\backslash\)partial w\}\{\(\backslash\)partial x\}  = \(\backslash\)lambda u}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)f] }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)f[}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)frac\{\(\backslash\)partial u\}\{\(\backslash\)partial x\} = (\(\backslash\)lambda -\/ \(\backslash\)mu) w}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)f]}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// This class  contains the generic maths. Shape functions, geometric}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// mapping etc. must get implemented in derived class.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{class }ComplexHarmonicEquations : \textcolor{keyword}{public} \textcolor{keyword}{virtual} FiniteElement}
 \DoxyCodeLine{\{}
@@ -50,9 +50,9 @@ For generality, we implement the mathematics to assemble contributions to the Ja
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Access function: First eigenfunction value at local node n}}
-\DoxyCodeLine{\textcolor{comment}{ /// Note that solving the eigenproblem does not assign values}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// to this storage space. It is used for output purposes only.}}
+\DoxyCodeLine{ \textcolor{comment}{/// Access function: First eigenfunction value at local node n}}
+\DoxyCodeLine{\textcolor{comment}{ /// Note that solving the eigenproblem does not assign values}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// to this storage space. It is used for output purposes only.}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \textcolor{keyword}{inline} \textcolor{keywordtype}{double} u(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n)\textcolor{keyword}{ const }}
 \DoxyCodeLine{\textcolor{keyword}{  }\{\textcolor{keywordflow}{return} nodal\_value(n,0);\}}
 \DoxyCodeLine{\textcolor{comment}{}}

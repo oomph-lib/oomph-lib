@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1VectorMatrix}{}\doxysection{oomph\+::Vector\+Matrix\texorpdfstring{$<$}{<} VALUE\+\_\+\+TYPE \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1VectorMatrix}{}\doxysection{oomph\+::Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$ Class Template Reference}
 \label{classoomph_1_1VectorMatrix}\index{oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}}
 
 
@@ -23,10 +23,10 @@ virtual \mbox{\hyperlink{classoomph_1_1VectorMatrix_a61ef8bc51fd59119d84ce281d6d
 const unsigned \mbox{\hyperlink{classoomph_1_1VectorMatrix_a9beb051515fea3a264843aae9783e386}{nrow}} () const
 \begin{DoxyCompactList}\small\item\em returns the number of rows. This is the outer \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} size. \end{DoxyCompactList}\item 
 const unsigned \mbox{\hyperlink{classoomph_1_1VectorMatrix_a6f59576c296539356370814fc658f463}{ncol}} () const
-\begin{DoxyCompactList}\small\item\em return the number of columns. This is the size of the first inner vectors, or returns 0 if the outer vector is of size 0 (this-\/\texorpdfstring{$>$}{>}\mbox{\hyperlink{classoomph_1_1VectorMatrix_a9beb051515fea3a264843aae9783e386}{nrow()}} is 0). \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ VALUE\+\_\+\+TYPE $>$ \& \mbox{\hyperlink{classoomph_1_1VectorMatrix_aaa28d9c626fc77381259560cc936294b}{operator\mbox{[}$\,$\mbox{]}}} (const size\+\_\+t \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em return the number of columns. This is the size of the first inner vectors, or returns 0 if the outer vector is of size 0 (this-\/$>$\mbox{\hyperlink{classoomph_1_1VectorMatrix_a9beb051515fea3a264843aae9783e386}{nrow()}} is 0). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ VALUE\+\_\+\+TYPE $>$ \& \mbox{\hyperlink{classoomph_1_1VectorMatrix_aeae9e2dcc8b7df4f0efd5890917013f9}{operator\mbox{[}$\,$\mbox{]}}} (const size\+\_\+t \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em \mbox{[}\mbox{]} access function to the i-\/th inner vector. \end{DoxyCompactList}\item 
-const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ VALUE\+\_\+\+TYPE $>$ \& \mbox{\hyperlink{classoomph_1_1VectorMatrix_a472e27d3b998c6ee2412c3585f064e73}{operator\mbox{[}$\,$\mbox{]}}} (const size\+\_\+t \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ VALUE\+\_\+\+TYPE $>$ \& \mbox{\hyperlink{classoomph_1_1VectorMatrix_a9b3af1734a4b7c8ba8db95d95b316904}{operator\mbox{[}$\,$\mbox{]}}} (const size\+\_\+t \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em \mbox{[}\mbox{]} access function to the i-\/th inner vector const version \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1VectorMatrix_aa0f9cfd913d27cfb1e20e27a892d5468}{clear}} ()
 \begin{DoxyCompactList}\small\item\em Clears the outer vector. Calling Vector\+::clear() will invoke the destructor of all the inner Vectors. \end{DoxyCompactList}\item 
@@ -51,6 +51,7 @@ void \mbox{\hyperlink{classoomph_1_1VectorMatrix_a23f3efbe283e626a815be17878dc80
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class VALUE\+\_\+\+TYPE$>$\newline
 class oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$}
+
 \mbox{\hyperlink{classoomph_1_1VectorMatrix}{Vector\+Matrix}} is a generalised, STL-\/map-\/based, matrix based on a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of Vectors. 
 
 Example of usage\+: 
@@ -76,7 +77,7 @@ Example of usage\+:
 \end{DoxyCode}
  
 
-Definition at line \mbox{\hyperlink{vector__matrix_8h_source_l00078}{78}} of file \mbox{\hyperlink{vector__matrix_8h_source}{vector\+\_\+matrix.\+h}}.
+Definition at line 78 of file vector\+\_\+matrix.\+h.
 
 
 
@@ -94,11 +95,11 @@ Default constructor -\/ constructs an empty matrix.
 
 
 
-Definition at line \mbox{\hyperlink{vector__matrix_8h_source_l00082}{82}} of file \mbox{\hyperlink{vector__matrix_8h_source}{vector\+\_\+matrix.\+h}}.
+Definition at line 82 of file vector\+\_\+matrix.\+h.
 
 
 
-References \mbox{\hyperlink{vector__matrix_8h_source_l00249}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\+Vector\+\_\+matrix}}.
+References oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\+Vector\+\_\+matrix.
 
 \mbox{\Hypertarget{classoomph_1_1VectorMatrix_a9e3f4fa81b91d802885c22a0595754c8}\label{classoomph_1_1VectorMatrix_a9e3f4fa81b91d802885c22a0595754c8}} 
 \index{oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}!VectorMatrix@{VectorMatrix}}
@@ -113,11 +114,11 @@ Constructor -\/ constructs an n by m matrix with value val.
 
 
 
-Definition at line \mbox{\hyperlink{vector__matrix_8h_source_l00088}{88}} of file \mbox{\hyperlink{vector__matrix_8h_source}{vector\+\_\+matrix.\+h}}.
+Definition at line 88 of file vector\+\_\+matrix.\+h.
 
 
 
-References \mbox{\hyperlink{vector__matrix_8h_source_l00240}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::build\+\_\+vectors\+\_\+and\+\_\+value()}}.
+References oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::build\+\_\+vectors\+\_\+and\+\_\+value().
 
 \mbox{\Hypertarget{classoomph_1_1VectorMatrix_afb605d9b666be1184a9b39fddee6faec}\label{classoomph_1_1VectorMatrix_afb605d9b666be1184a9b39fddee6faec}} 
 \index{oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}!VectorMatrix@{VectorMatrix}}
@@ -132,11 +133,11 @@ Constructor -\/ constructs an n by m matrix, the value is defined by the default
 
 
 
-Definition at line \mbox{\hyperlink{vector__matrix_8h_source_l00095}{95}} of file \mbox{\hyperlink{vector__matrix_8h_source}{vector\+\_\+matrix.\+h}}.
+Definition at line 95 of file vector\+\_\+matrix.\+h.
 
 
 
-References \mbox{\hyperlink{vector__matrix_8h_source_l00234}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::build\+\_\+vectors()}}.
+References oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::build\+\_\+vectors().
 
 \mbox{\Hypertarget{classoomph_1_1VectorMatrix_a61ef8bc51fd59119d84ce281d6dd82be}\label{classoomph_1_1VectorMatrix_a61ef8bc51fd59119d84ce281d6dd82be}} 
 \index{oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}!````~VectorMatrix@{$\sim$VectorMatrix}}
@@ -151,11 +152,11 @@ Default virtual destructor.
 
 
 
-Definition at line \mbox{\hyperlink{vector__matrix_8h_source_l00101}{101}} of file \mbox{\hyperlink{vector__matrix_8h_source}{vector\+\_\+matrix.\+h}}.
+Definition at line 101 of file vector\+\_\+matrix.\+h.
 
 
 
-References \mbox{\hyperlink{vector__matrix_8h_source_l00201}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::clear()}}.
+References oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::clear().
 
 
 
@@ -173,11 +174,11 @@ Any elements held in the container before the call are destroyed and replaced by
 
 
 
-Definition at line \mbox{\hyperlink{vector__matrix_8h_source_l00226}{226}} of file \mbox{\hyperlink{vector__matrix_8h_source}{vector\+\_\+matrix.\+h}}.
+Definition at line 226 of file vector\+\_\+matrix.\+h.
 
 
 
-References \mbox{\hyperlink{vector__matrix_8h_source_l00249}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\+Vector\+\_\+matrix}}.
+References oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\+Vector\+\_\+matrix.
 
 \mbox{\Hypertarget{classoomph_1_1VectorMatrix_a0ab8c441cec95ba8322fc4ad9b97a288}\label{classoomph_1_1VectorMatrix_a0ab8c441cec95ba8322fc4ad9b97a288}} 
 \index{oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}!build\_vectors@{build\_vectors}}
@@ -192,15 +193,15 @@ Builds an n by m \mbox{\hyperlink{classoomph_1_1VectorMatrix}{Vector\+Matrix}} w
 
 
 
-Definition at line \mbox{\hyperlink{vector__matrix_8h_source_l00234}{234}} of file \mbox{\hyperlink{vector__matrix_8h_source}{vector\+\_\+matrix.\+h}}.
+Definition at line 234 of file vector\+\_\+matrix.\+h.
 
 
 
-References \mbox{\hyperlink{vector__matrix_8h_source_l00249}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\+Vector\+\_\+matrix}}.
+References oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\+Vector\+\_\+matrix.
 
 
 
-Referenced by \mbox{\hyperlink{vector__matrix_8h_source_l00095}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\+Vector\+Matrix()}}.
+Referenced by oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\+Vector\+Matrix().
 
 \mbox{\Hypertarget{classoomph_1_1VectorMatrix_a23f3efbe283e626a815be17878dc8014}\label{classoomph_1_1VectorMatrix_a23f3efbe283e626a815be17878dc8014}} 
 \index{oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}!build\_vectors\_and\_value@{build\_vectors\_and\_value}}
@@ -215,15 +216,15 @@ Build an m by n \mbox{\hyperlink{classoomph_1_1VectorMatrix}{Vector\+Matrix}} wi
 
 
 
-Definition at line \mbox{\hyperlink{vector__matrix_8h_source_l00240}{240}} of file \mbox{\hyperlink{vector__matrix_8h_source}{vector\+\_\+matrix.\+h}}.
+Definition at line 240 of file vector\+\_\+matrix.\+h.
 
 
 
-References \mbox{\hyperlink{vector__matrix_8h_source_l00249}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\+Vector\+\_\+matrix}}.
+References oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\+Vector\+\_\+matrix.
 
 
 
-Referenced by \mbox{\hyperlink{vector__matrix_8h_source_l00088}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\+Vector\+Matrix()}}.
+Referenced by oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\+Vector\+Matrix().
 
 \mbox{\Hypertarget{classoomph_1_1VectorMatrix_aa0f9cfd913d27cfb1e20e27a892d5468}\label{classoomph_1_1VectorMatrix_aa0f9cfd913d27cfb1e20e27a892d5468}} 
 \index{oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}!clear@{clear}}
@@ -238,15 +239,15 @@ Clears the outer vector. Calling Vector\+::clear() will invoke the destructor of
 
 
 
-Definition at line \mbox{\hyperlink{vector__matrix_8h_source_l00201}{201}} of file \mbox{\hyperlink{vector__matrix_8h_source}{vector\+\_\+matrix.\+h}}.
+Definition at line 201 of file vector\+\_\+matrix.\+h.
 
 
 
-References \mbox{\hyperlink{vector__matrix_8h_source_l00249}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\+Vector\+\_\+matrix}}.
+References oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\+Vector\+\_\+matrix.
 
 
 
-Referenced by \mbox{\hyperlink{vector__matrix_8h_source_l00101}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::$\sim$\+Vector\+Matrix()}}.
+Referenced by oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::$\sim$\+Vector\+Matrix().
 
 \mbox{\Hypertarget{classoomph_1_1VectorMatrix_a6f59576c296539356370814fc658f463}\label{classoomph_1_1VectorMatrix_a6f59576c296539356370814fc658f463}} 
 \index{oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}!ncol@{ncol}}
@@ -257,19 +258,19 @@ const unsigned \mbox{\hyperlink{classoomph_1_1VectorMatrix}{oomph\+::\+Vector\+M
 
 
 
-return the number of columns. This is the size of the first inner vectors, or returns 0 if the outer vector is of size 0 (this-\/\texorpdfstring{$>$}{>}\mbox{\hyperlink{classoomph_1_1VectorMatrix_a9beb051515fea3a264843aae9783e386}{nrow()}} is 0). 
+return the number of columns. This is the size of the first inner vectors, or returns 0 if the outer vector is of size 0 (this-\/$>$\mbox{\hyperlink{classoomph_1_1VectorMatrix_a9beb051515fea3a264843aae9783e386}{nrow()}} is 0). 
 
 
 
-Definition at line \mbox{\hyperlink{vector__matrix_8h_source_l00146}{146}} of file \mbox{\hyperlink{vector__matrix_8h_source}{vector\+\_\+matrix.\+h}}.
+Definition at line 146 of file vector\+\_\+matrix.\+h.
 
 
 
-References \mbox{\hyperlink{vector__matrix_8h_source_l00107}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::nrow()}}, and \mbox{\hyperlink{vector__matrix_8h_source_l00249}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\+Vector\+\_\+matrix}}.
+References oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::nrow(), and oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\+Vector\+\_\+matrix.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l01134}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+concatenated\+\_\+block()}}.
+Referenced by oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+concatenated\+\_\+block().
 
 \mbox{\Hypertarget{classoomph_1_1VectorMatrix_a9beb051515fea3a264843aae9783e386}\label{classoomph_1_1VectorMatrix_a9beb051515fea3a264843aae9783e386}} 
 \index{oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}!nrow@{nrow}}
@@ -284,22 +285,22 @@ returns the number of rows. This is the outer \mbox{\hyperlink{classoomph_1_1Vec
 
 
 
-Definition at line \mbox{\hyperlink{vector__matrix_8h_source_l00107}{107}} of file \mbox{\hyperlink{vector__matrix_8h_source}{vector\+\_\+matrix.\+h}}.
+Definition at line 107 of file vector\+\_\+matrix.\+h.
 
 
 
-References \mbox{\hyperlink{vector__matrix_8h_source_l00249}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\+Vector\+\_\+matrix}}.
+References oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\+Vector\+\_\+matrix.
 
 
 
-Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l01134}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+concatenated\+\_\+block()}}, and \mbox{\hyperlink{vector__matrix_8h_source_l00146}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::ncol()}}.
+Referenced by oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+concatenated\+\_\+block(), and oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::ncol().
 
-\mbox{\Hypertarget{classoomph_1_1VectorMatrix_aaa28d9c626fc77381259560cc936294b}\label{classoomph_1_1VectorMatrix_aaa28d9c626fc77381259560cc936294b}} 
+\mbox{\Hypertarget{classoomph_1_1VectorMatrix_aeae9e2dcc8b7df4f0efd5890917013f9}\label{classoomph_1_1VectorMatrix_aeae9e2dcc8b7df4f0efd5890917013f9}} 
 \index{oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
 \index{operator\mbox{[}\mbox{]}@{operator[]}!oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}}
 \doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$class VALUE\+\_\+\+TYPE $>$ \\
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ VALUE\+\_\+\+TYPE $>$ \& \mbox{\hyperlink{classoomph_1_1VectorMatrix}{oomph\+::\+Vector\+Matrix}}$<$ VALUE\+\_\+\+TYPE $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const size\+\_\+t}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$VALUE\+\_\+\+TYPE$>$\& \mbox{\hyperlink{classoomph_1_1VectorMatrix}{oomph\+::\+Vector\+Matrix}}$<$ VALUE\+\_\+\+TYPE $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const size\+\_\+t}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -307,18 +308,18 @@ Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l01134}{oomph\+::
 
 
 
-Definition at line \mbox{\hyperlink{vector__matrix_8h_source_l00187}{187}} of file \mbox{\hyperlink{vector__matrix_8h_source}{vector\+\_\+matrix.\+h}}.
+Definition at line 187 of file vector\+\_\+matrix.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{vector__matrix_8h_source_l00249}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\+Vector\+\_\+matrix}}.
+References i, and oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\+Vector\+\_\+matrix.
 
-\mbox{\Hypertarget{classoomph_1_1VectorMatrix_a472e27d3b998c6ee2412c3585f064e73}\label{classoomph_1_1VectorMatrix_a472e27d3b998c6ee2412c3585f064e73}} 
+\mbox{\Hypertarget{classoomph_1_1VectorMatrix_a9b3af1734a4b7c8ba8db95d95b316904}\label{classoomph_1_1VectorMatrix_a9b3af1734a4b7c8ba8db95d95b316904}} 
 \index{oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
 \index{operator\mbox{[}\mbox{]}@{operator[]}!oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}}
 \doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$class VALUE\+\_\+\+TYPE $>$ \\
-const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ VALUE\+\_\+\+TYPE $>$ \& \mbox{\hyperlink{classoomph_1_1VectorMatrix}{oomph\+::\+Vector\+Matrix}}$<$ VALUE\+\_\+\+TYPE $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const size\+\_\+t}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$VALUE\+\_\+\+TYPE$>$\& \mbox{\hyperlink{classoomph_1_1VectorMatrix}{oomph\+::\+Vector\+Matrix}}$<$ VALUE\+\_\+\+TYPE $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const size\+\_\+t}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -326,11 +327,11 @@ const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ VALUE\+\_\+\+TYPE $>$ \
 
 
 
-Definition at line \mbox{\hyperlink{vector__matrix_8h_source_l00193}{193}} of file \mbox{\hyperlink{vector__matrix_8h_source}{vector\+\_\+matrix.\+h}}.
+Definition at line 193 of file vector\+\_\+matrix.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{vector__matrix_8h_source_l00249}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\+Vector\+\_\+matrix}}.
+References i, and oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\+Vector\+\_\+matrix.
 
 \mbox{\Hypertarget{classoomph_1_1VectorMatrix_a8e7bc2b06afb92f161e35f1a180c2320}\label{classoomph_1_1VectorMatrix_a8e7bc2b06afb92f161e35f1a180c2320}} 
 \index{oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}!resize@{resize}}
@@ -345,11 +346,11 @@ Resize the existing \mbox{\hyperlink{classoomph_1_1VectorMatrix}{Vector\+Matrix}
 
 
 
-Definition at line \mbox{\hyperlink{vector__matrix_8h_source_l00211}{211}} of file \mbox{\hyperlink{vector__matrix_8h_source}{vector\+\_\+matrix.\+h}}.
+Definition at line 211 of file vector\+\_\+matrix.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{vector__matrix_8h_source_l00249}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\+Vector\+\_\+matrix}}.
+References i, and oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\+Vector\+\_\+matrix.
 
 
 
@@ -367,11 +368,11 @@ Here\textquotesingle{}s the generalised matrix structure\+: A \mbox{\hyperlink{c
 
 
 
-Definition at line \mbox{\hyperlink{vector__matrix_8h_source_l00249}{249}} of file \mbox{\hyperlink{vector__matrix_8h_source}{vector\+\_\+matrix.\+h}}.
+Definition at line 249 of file vector\+\_\+matrix.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{vector__matrix_8h_source_l00226}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::assign()}}, \mbox{\hyperlink{vector__matrix_8h_source_l00234}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::build\+\_\+vectors()}}, \mbox{\hyperlink{vector__matrix_8h_source_l00240}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::build\+\_\+vectors\+\_\+and\+\_\+value()}}, \mbox{\hyperlink{vector__matrix_8h_source_l00201}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::clear()}}, \mbox{\hyperlink{vector__matrix_8h_source_l00146}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::ncol()}}, \mbox{\hyperlink{vector__matrix_8h_source_l00107}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::nrow()}}, \mbox{\hyperlink{vector__matrix_8h_source_l00187}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::operator\mbox{[}$\,$\mbox{]}()}}, \mbox{\hyperlink{vector__matrix_8h_source_l00211}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::resize()}}, and \mbox{\hyperlink{vector__matrix_8h_source_l00082}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\+Vector\+Matrix()}}.
+Referenced by oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::assign(), oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::build\+\_\+vectors(), oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::build\+\_\+vectors\+\_\+and\+\_\+value(), oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::clear(), oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::ncol(), oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::nrow(), oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::operator\mbox{[}$\,$\mbox{]}(), oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::resize(), and oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\+Vector\+Matrix().
 
 
 

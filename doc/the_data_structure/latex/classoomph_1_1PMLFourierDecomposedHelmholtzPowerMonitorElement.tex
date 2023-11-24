@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement}{}\doxysection{oomph\+::PMLFourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement}{}\doxysection{oomph\+::PMLFourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ ELEMENT $>$ Class Template Reference}
 \label{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement}\index{oomph::PMLFourierDecomposedHelmholtzPowerMonitorElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzPowerMonitorElement$<$ ELEMENT $>$}}
 
 
@@ -9,7 +9,7 @@
 
 {\ttfamily \#include $<$pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::PMLFourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::PMLFourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=1.612671cm]{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement}
@@ -18,7 +18,7 @@ Inheritance diagram for oomph\+::PMLFourier\+Decomposed\+Helmholtz\+Power\+Monit
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement_afb1b5ec8389be0f36aeb1c6e5b41453c}{PMLFourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&bulk\+\_\+el\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}})
+\mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement_afb1b5ec8389be0f36aeb1c6e5b41453c}{PMLFourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&bulk\+\_\+el\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a478d577ac6db67ecc80f1f02ae3ab170}{face\+\_\+index}})
 \begin{DoxyCompactList}\small\item\em Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the index of the face to which the element is attached. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement_a21abbcb51942dec4b8458c31045dc644}{PMLFourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Broken empty constructor. \end{DoxyCompactList}\item 
@@ -34,7 +34,7 @@ void \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorEle
 \begin{DoxyCompactList}\small\item\em C-\/style output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement_a53af82940246d4674642d22ff92735d5}{output}} (FILE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em C-\/style output function -- forward to broken version in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} until somebody decides what exactly they want to plot here... \end{DoxyCompactList}\item 
-virtual std\+::complex$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement_af81fa08a5c40bb8bb2cb535af86b3191}{u\+\_\+index\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz}} () const
+virtual std\+::complex$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement_ab3b95be5191af9524a4f049d9db413be}{u\+\_\+index\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz}} () const
 \begin{DoxyCompactList}\small\item\em Return the index at which the real/imag unknown value is stored. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement_ae5bf09c4c5b8d9cf9439f57fc800262c}{global\+\_\+power\+\_\+contribution}} ()
 \begin{DoxyCompactList}\small\item\em Compute the element\textquotesingle{}s contribution to the time-\/averaged radiated power over the artificial boundary. NOTE\+: This may give the wrong result if the constitutive parameters genuinely vary! \end{DoxyCompactList}\item 
@@ -58,11 +58,12 @@ std\+::complex$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1PMLFourierDecompos
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class ELEMENT$>$\newline
 class oomph\+::\+PMLFourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ ELEMENT $>$}
+
 ////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////// 
 
 A class for elements that allow postprocessing of the results -- currently computes radiated power over domain boundaries. The element geometry is obtained from the Face\+Geometry$<$\+ELEMENT$>$ policy class. 
 
-Definition at line \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__flux__elements_8h_source_l00407}{407}} of file \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__flux__elements_8h_source}{pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 407 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -82,11 +83,11 @@ Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the i
 
 Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the face index. 
 
-Definition at line \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__flux__elements_8h_source_l00697}{697}} of file \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__flux__elements_8h_source}{pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 697 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l05132}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{elements_8h_source_l04626}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__elements_8h_source_l00197}{oomph\+::\+PMLFourier\+Decomposed\+Helmholtz\+Equations\+::u\+\_\+index\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz()}}, and \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__flux__elements_8h_source_l00684}{oomph\+::\+PMLFourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz}}.
+References oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), oomph\+::\+Face\+Element\+::face\+\_\+index(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), oomph\+::\+PMLFourier\+Decomposed\+Helmholtz\+Equations\+::u\+\_\+index\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz(), and oomph\+::\+PMLFourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz.
 
 \mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement_a21abbcb51942dec4b8458c31045dc644}\label{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement_a21abbcb51942dec4b8458c31045dc644}} 
 \index{oomph::PMLFourierDecomposedHelmholtzPowerMonitorElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzPowerMonitorElement$<$ ELEMENT $>$}!PMLFourierDecomposedHelmholtzPowerMonitorElement@{PMLFourierDecomposedHelmholtzPowerMonitorElement}}
@@ -101,7 +102,7 @@ Broken empty constructor.
 
 
 
-Definition at line \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__flux__elements_8h_source_l00418}{418}} of file \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__flux__elements_8h_source}{pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 418 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement_af13b7615e6792ea72d1f710f38131ead}\label{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement_af13b7615e6792ea72d1f710f38131ead}} 
 \index{oomph::PMLFourierDecomposedHelmholtzPowerMonitorElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzPowerMonitorElement$<$ ELEMENT $>$}!PMLFourierDecomposedHelmholtzPowerMonitorElement@{PMLFourierDecomposedHelmholtzPowerMonitorElement}}
@@ -130,11 +131,11 @@ Function to compute the shape, test functions and derivates and to return the Ja
 
 
 
-Definition at line \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__flux__elements_8h_source_l00657}{657}} of file \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__flux__elements_8h_source}{pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 657 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l01981}{oomph\+::\+Finite\+Element\+::dshape\+\_\+local()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l05242}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+References oomph\+::\+Finite\+Element\+::dshape\+\_\+local(), i, oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Finite\+Element\+::nnode(), and s.
 
 \mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement_ae5bf09c4c5b8d9cf9439f57fc800262c}\label{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement_ae5bf09c4c5b8d9cf9439f57fc800262c}} 
 \index{oomph::PMLFourierDecomposedHelmholtzPowerMonitorElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzPowerMonitorElement$<$ ELEMENT $>$}!global\_power\_contribution@{global\_power\_contribution}}
@@ -149,15 +150,7 @@ Compute the element\textquotesingle{}s contribution to the time-\/averaged radia
 
 
 
-Definition at line \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__flux__elements_8h_source_l00491}{491}} of file \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__flux__elements_8h_source}{pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h}}.
-
-
-
-References \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__flux__elements_8h_source_l00491}{oomph\+::\+PMLFourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ ELEMENT $>$\+::global\+\_\+power\+\_\+contribution()}}.
-
-
-
-Referenced by \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__flux__elements_8h_source_l00491}{oomph\+::\+PMLFourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ ELEMENT $>$\+::global\+\_\+power\+\_\+contribution()}}.
+Definition at line 491 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement_a87edcf6c7adc8de31c1054e15f3d8a9b}\label{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement_a87edcf6c7adc8de31c1054e15f3d8a9b}} 
 \index{oomph::PMLFourierDecomposedHelmholtzPowerMonitorElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzPowerMonitorElement$<$ ELEMENT $>$}!global\_power\_contribution@{global\_power\_contribution}}
@@ -172,11 +165,11 @@ Compute the element\textquotesingle{}s contribution to the time-\/averaged radia
 
 
 
-Definition at line \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__flux__elements_8h_source_l00503}{503}} of file \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__flux__elements_8h_source}{pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 503 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l04735}{oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l04528}{oomph\+::\+Face\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8cc_source_l05242}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{elements_8cc_source_l06353}{oomph\+::\+Face\+Element\+::local\+\_\+coordinate\+\_\+in\+\_\+bulk()}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{elements_8cc_source_l06006}{oomph\+::\+Face\+Element\+::outer\+\_\+unit\+\_\+normal()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00157}{oomph\+::\+Mathematical\+Constants\+::\+Pi}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__flux__elements_8h_source_l00479}{oomph\+::\+PMLFourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ ELEMENT $>$\+::u\+\_\+index\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz()}}, \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}, and \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral\+::weight()}}.
+References oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Face\+Element\+::interpolated\+\_\+x(), oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Integral\+::knot(), oomph\+::\+Face\+Element\+::local\+\_\+coordinate\+\_\+in\+\_\+bulk(), oomph\+::\+Node\+::ndim(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Integral\+::nweight(), oomph\+::\+Face\+Element\+::outer\+\_\+unit\+\_\+normal(), oomph\+::\+Mathematical\+Constants\+::\+Pi, s, oomph\+::\+Finite\+Element\+::shape(), oomph\+::\+PMLFourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ ELEMENT $>$\+::u\+\_\+index\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz(), oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Integral\+::weight().
 
 \mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement_a41e6fd4956dd28d122e852ce6952746a}\label{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement_a41e6fd4956dd28d122e852ce6952746a}} 
 \index{oomph::PMLFourierDecomposedHelmholtzPowerMonitorElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzPowerMonitorElement$<$ ELEMENT $>$}!output@{output}}
@@ -195,11 +188,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee
 
 
 
-Definition at line \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__flux__elements_8h_source_l00464}{464}} of file \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__flux__elements_8h_source}{pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 464 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
+References oomph\+::\+Finite\+Element\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement_a53af82940246d4674642d22ff92735d5}\label{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement_a53af82940246d4674642d22ff92735d5}} 
 \index{oomph::PMLFourierDecomposedHelmholtzPowerMonitorElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzPowerMonitorElement$<$ ELEMENT $>$}!output@{output}}
@@ -218,11 +211,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f
 
 
 
-Definition at line \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__flux__elements_8h_source_l00472}{472}} of file \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__flux__elements_8h_source}{pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 472 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
+References oomph\+::\+Finite\+Element\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement_ab8ef8d59a746a0920304ef97edd1bc34}\label{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement_ab8ef8d59a746a0920304ef97edd1bc34}} 
 \index{oomph::PMLFourierDecomposedHelmholtzPowerMonitorElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzPowerMonitorElement$<$ ELEMENT $>$}!output@{output}}
@@ -241,11 +234,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__flux__elements_8h_source_l00450}{450}} of file \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__flux__elements_8h_source}{pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 450 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
+References oomph\+::\+Finite\+Element\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement_a69d1d0e4362c38aa9e6f258af37f0bf4}\label{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement_a69d1d0e4362c38aa9e6f258af37f0bf4}} 
 \index{oomph::PMLFourierDecomposedHelmholtzPowerMonitorElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzPowerMonitorElement$<$ ELEMENT $>$}!output@{output}}
@@ -264,11 +257,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__flux__elements_8h_source_l00457}{457}} of file \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__flux__elements_8h_source}{pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 457 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l03050}{oomph\+::\+Finite\+Element\+::output()}}.
+References oomph\+::\+Finite\+Element\+::output().
 
 \mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement_a9e879d51e62110b3c59074b5a6497717}\label{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement_a9e879d51e62110b3c59074b5a6497717}} 
 \index{oomph::PMLFourierDecomposedHelmholtzPowerMonitorElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzPowerMonitorElement$<$ ELEMENT $>$}!shape\_and\_test@{shape\_and\_test}}
@@ -283,18 +276,18 @@ Function to compute the test functions and to return the Jacobian of mapping bet
 
 
 
-Definition at line \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__flux__elements_8h_source_l00636}{636}} of file \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__flux__elements_8h_source}{pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 636 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l05242}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
+References i, oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Finite\+Element\+::nnode(), s, and oomph\+::\+Finite\+Element\+::shape().
 
-\mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement_af81fa08a5c40bb8bb2cb535af86b3191}\label{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement_af81fa08a5c40bb8bb2cb535af86b3191}} 
+\mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement_ab3b95be5191af9524a4f049d9db413be}\label{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement_ab3b95be5191af9524a4f049d9db413be}} 
 \index{oomph::PMLFourierDecomposedHelmholtzPowerMonitorElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzPowerMonitorElement$<$ ELEMENT $>$}!u\_index\_pml\_fourier\_decomposed\_helmholtz@{u\_index\_pml\_fourier\_decomposed\_helmholtz}}
 \index{u\_index\_pml\_fourier\_decomposed\_helmholtz@{u\_index\_pml\_fourier\_decomposed\_helmholtz}!oomph::PMLFourierDecomposedHelmholtzPowerMonitorElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzPowerMonitorElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{u\_index\_pml\_fourier\_decomposed\_helmholtz()}{u\_index\_pml\_fourier\_decomposed\_helmholtz()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-virtual std\+::complex$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement}{oomph\+::\+PMLFourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element}}$<$ ELEMENT $>$\+::u\+\_\+index\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+virtual std\+::complex$<$unsigned$>$ \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement}{oomph\+::\+PMLFourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element}}$<$ ELEMENT $>$\+::u\+\_\+index\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -302,15 +295,15 @@ Return the index at which the real/imag unknown value is stored.
 
 
 
-Definition at line \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__flux__elements_8h_source_l00479}{479}} of file \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__flux__elements_8h_source}{pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 479 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__flux__elements_8h_source_l00684}{oomph\+::\+PMLFourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz}}.
+References oomph\+::\+PMLFourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz.
 
 
 
-Referenced by \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__flux__elements_8h_source_l00503}{oomph\+::\+PMLFourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ ELEMENT $>$\+::global\+\_\+power\+\_\+contribution()}}.
+Referenced by oomph\+::\+PMLFourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ ELEMENT $>$\+::global\+\_\+power\+\_\+contribution().
 
 \mbox{\Hypertarget{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement_a4618f13a3a0d53cc95a2f4951f7e40e9}\label{classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement_a4618f13a3a0d53cc95a2f4951f7e40e9}} 
 \index{oomph::PMLFourierDecomposedHelmholtzPowerMonitorElement$<$ ELEMENT $>$@{oomph::PMLFourierDecomposedHelmholtzPowerMonitorElement$<$ ELEMENT $>$}!zeta\_nodal@{zeta\_nodal}}
@@ -329,11 +322,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FaceElement_a58c9f93705c7741f7
 
 
 
-Definition at line \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__flux__elements_8h_source_l00440}{440}} of file \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__flux__elements_8h_source}{pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 440 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l04497}{oomph\+::\+Face\+Element\+::zeta\+\_\+nodal()}}.
+References i, and oomph\+::\+Face\+Element\+::zeta\+\_\+nodal().
 
 
 
@@ -351,11 +344,11 @@ The index at which the real and imag part of the unknown is stored at the nodes.
 
 
 
-Definition at line \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__flux__elements_8h_source_l00684}{684}} of file \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__flux__elements_8h_source}{pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 684 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__flux__elements_8h_source_l00698}{oomph\+::\+PMLFourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ ELEMENT $>$\+::\+PMLFourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element()}}, and \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__flux__elements_8h_source_l00479}{oomph\+::\+PMLFourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ ELEMENT $>$\+::u\+\_\+index\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz()}}.
+Referenced by oomph\+::\+PMLFourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ ELEMENT $>$\+::\+PMLFourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element(), and oomph\+::\+PMLFourier\+Decomposed\+Helmholtz\+Power\+Monitor\+Element$<$ ELEMENT $>$\+::u\+\_\+index\+\_\+pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz().
 
 
 

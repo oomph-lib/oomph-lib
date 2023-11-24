@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1PMLHelmholtzPowerElement}{}\doxysection{oomph\+::PMLHelmholtz\+Power\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1PMLHelmholtzPowerElement}{}\doxysection{oomph\+::PMLHelmholtz\+Power\+Element$<$ ELEMENT $>$ Class Template Reference}
 \label{classoomph_1_1PMLHelmholtzPowerElement}\index{oomph::PMLHelmholtzPowerElement$<$ ELEMENT $>$@{oomph::PMLHelmholtzPowerElement$<$ ELEMENT $>$}}
 
 
@@ -9,7 +9,7 @@ A class for elements that allow the post-\/processing of radiated power and flux
 
 {\ttfamily \#include $<$pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::PMLHelmholtz\+Power\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::PMLHelmholtz\+Power\+Element$<$ ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.448087cm]{classoomph_1_1PMLHelmholtzPowerElement}
@@ -18,7 +18,7 @@ Inheritance diagram for oomph\+::PMLHelmholtz\+Power\+Element\texorpdfstring{$<$
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1PMLHelmholtzPowerElement_a5e54346ab4784c53fe22d8b7de1845d2}{PMLHelmholtz\+Power\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&bulk\+\_\+el\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}})
+\mbox{\hyperlink{classoomph_1_1PMLHelmholtzPowerElement_a5e54346ab4784c53fe22d8b7de1845d2}{PMLHelmholtz\+Power\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&bulk\+\_\+el\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a478d577ac6db67ecc80f1f02ae3ab170}{face\+\_\+index}})
 \begin{DoxyCompactList}\small\item\em Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the index of the face to which the element is attached. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1PMLHelmholtzPowerElement_a84f1714b98197b3f22b5784cd682fb29}{PMLHelmholtz\+Power\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Broken empty constructor. \end{DoxyCompactList}\item 
@@ -26,15 +26,15 @@ Inheritance diagram for oomph\+::PMLHelmholtz\+Power\+Element\texorpdfstring{$<$
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1PMLHelmholtzPowerElement_a5ee9ddb45e780e47245fc31b7f38ba19}{zeta\+\_\+nodal}} (const unsigned \&n, const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
-virtual std\+::complex$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1PMLHelmholtzPowerElement_a886056f72aa8d41d14132ce131cdea71}{u\+\_\+index\+\_\+helmholtz}} () const
+virtual std\+::complex$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1PMLHelmholtzPowerElement_af9ede78a62532221a9a5b9ff90572a09}{u\+\_\+index\+\_\+helmholtz}} () const
 \begin{DoxyCompactList}\small\item\em Return the index at which the unknown value is stored. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1PMLHelmholtzPowerElement_a7641df9f59097452dfac823d2384c290}{global\+\_\+power\+\_\+contribution}} ()
 \begin{DoxyCompactList}\small\item\em Compute the element\textquotesingle{}s contribution to the time-\/averaged radiated power over the artificial boundary. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1PMLHelmholtzPowerElement_a2576f9adb9c0570b973084e68a8df857}{global\+\_\+power\+\_\+contribution}} (std\+::ofstream \&outfile)
 \begin{DoxyCompactList}\small\item\em Compute the element\textquotesingle{}s contribution to the time-\/averaged radiated power over the artificial boundary. Also output the power density in the specified output file if it\textquotesingle{}s open. \end{DoxyCompactList}\item 
-std\+::complex$<$ double $>$ \mbox{\hyperlink{classoomph_1_1PMLHelmholtzPowerElement_acb3078b2d628cddd9b1ef89fa18dc983}{global\+\_\+flux\+\_\+contribution}} ()
+std\+::complex$<$ double $>$ \mbox{\hyperlink{classoomph_1_1PMLHelmholtzPowerElement_a528c42eae40b3526363ccf5eb0d20918}{global\+\_\+flux\+\_\+contribution}} ()
 \begin{DoxyCompactList}\small\item\em Compute the element\textquotesingle{}s contribution to the time-\/averaged flux. \end{DoxyCompactList}\item 
-std\+::complex$<$ double $>$ \mbox{\hyperlink{classoomph_1_1PMLHelmholtzPowerElement_a1b00438b31deacc3d1ec95559e141218}{global\+\_\+flux\+\_\+contribution}} (std\+::ofstream \&outfile)
+std\+::complex$<$ double $>$ \mbox{\hyperlink{classoomph_1_1PMLHelmholtzPowerElement_aeea5a41b8fc51cfe1ee1e49a84cbf66b}{global\+\_\+flux\+\_\+contribution}} (std\+::ofstream \&outfile)
 \begin{DoxyCompactList}\small\item\em Compute the element\textquotesingle{}s contribution to the integral of the flux over the artificial boundary. Also output the flux in the specified output file if it\textquotesingle{}s open. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -49,9 +49,10 @@ unsigned \mbox{\hyperlink{classoomph_1_1PMLHelmholtzPowerElement_a8372306b2f6fbc
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class ELEMENT$>$\newline
 class oomph\+::\+PMLHelmholtz\+Power\+Element$<$ ELEMENT $>$}
+
 A class for elements that allow the post-\/processing of radiated power and flux on the boundaries of PMLHelmholtz elements. The element geometry is obtained from the Face\+Geometry$<$\+ELEMENT$>$ policy class. 
 
-Definition at line \mbox{\hyperlink{pml__helmholtz__flux__elements_8h_source_l00051}{51}} of file \mbox{\hyperlink{pml__helmholtz__flux__elements_8h_source}{pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 51 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
@@ -71,11 +72,11 @@ Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element and the i
 
 Constructor, takes the pointer to the \char`\"{}bulk\char`\"{} element, the index of the fixed local coordinate and its value represented by an integer (+/-\/ 1), indicating that the face is located at the max. or min. value of the \char`\"{}fixed\char`\"{} local coordinate in the bulk element. 
 
-Definition at line \mbox{\hyperlink{pml__helmholtz__flux__elements_8h_source_l00394}{394}} of file \mbox{\hyperlink{pml__helmholtz__flux__elements_8h_source}{pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 394 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l05132}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{pml__helmholtz__flux__elements_8h_source_l00378}{oomph\+::\+PMLHelmholtz\+Power\+Element$<$ ELEMENT $>$\+::\+Dim}}, \mbox{\hyperlink{elements_8h_source_l04626}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}, \mbox{\hyperlink{elements_8h_source_l02470}{oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes()}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{elements_8h_source_l02175}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, \mbox{\hyperlink{pml__helmholtz__elements_8h_source_l00091}{oomph\+::\+PMLHelmholtz\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+helmholtz()}}, and \mbox{\hyperlink{pml__helmholtz__flux__elements_8h_source_l00375}{oomph\+::\+PMLHelmholtz\+Power\+Element$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+helmholtz}}.
+References oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), oomph\+::\+PMLHelmholtz\+Power\+Element$<$ ELEMENT $>$\+::\+Dim, oomph\+::\+Face\+Element\+::face\+\_\+index(), oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes(), oomph\+::\+Node\+::ndim(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), oomph\+::\+PMLHelmholtz\+Equations$<$ DIM $>$\+::u\+\_\+index\+\_\+helmholtz(), and oomph\+::\+PMLHelmholtz\+Power\+Element$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+helmholtz.
 
 \mbox{\Hypertarget{classoomph_1_1PMLHelmholtzPowerElement_a84f1714b98197b3f22b5784cd682fb29}\label{classoomph_1_1PMLHelmholtzPowerElement_a84f1714b98197b3f22b5784cd682fb29}} 
 \index{oomph::PMLHelmholtzPowerElement$<$ ELEMENT $>$@{oomph::PMLHelmholtzPowerElement$<$ ELEMENT $>$}!PMLHelmholtzPowerElement@{PMLHelmholtzPowerElement}}
@@ -90,7 +91,7 @@ Broken empty constructor.
 
 
 
-Definition at line \mbox{\hyperlink{pml__helmholtz__flux__elements_8h_source_l00061}{61}} of file \mbox{\hyperlink{pml__helmholtz__flux__elements_8h_source}{pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 61 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PMLHelmholtzPowerElement_a98d568318a713ab186fc1bc9a79c129e}\label{classoomph_1_1PMLHelmholtzPowerElement_a98d568318a713ab186fc1bc9a79c129e}} 
 \index{oomph::PMLHelmholtzPowerElement$<$ ELEMENT $>$@{oomph::PMLHelmholtzPowerElement$<$ ELEMENT $>$}!PMLHelmholtzPowerElement@{PMLHelmholtzPowerElement}}
@@ -106,12 +107,12 @@ Broken copy constructor.
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1PMLHelmholtzPowerElement_acb3078b2d628cddd9b1ef89fa18dc983}\label{classoomph_1_1PMLHelmholtzPowerElement_acb3078b2d628cddd9b1ef89fa18dc983}} 
+\mbox{\Hypertarget{classoomph_1_1PMLHelmholtzPowerElement_a528c42eae40b3526363ccf5eb0d20918}\label{classoomph_1_1PMLHelmholtzPowerElement_a528c42eae40b3526363ccf5eb0d20918}} 
 \index{oomph::PMLHelmholtzPowerElement$<$ ELEMENT $>$@{oomph::PMLHelmholtzPowerElement$<$ ELEMENT $>$}!global\_flux\_contribution@{global\_flux\_contribution}}
 \index{global\_flux\_contribution@{global\_flux\_contribution}!oomph::PMLHelmholtzPowerElement$<$ ELEMENT $>$@{oomph::PMLHelmholtzPowerElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{global\_flux\_contribution()}{global\_flux\_contribution()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-std\+::complex$<$ double $>$ \mbox{\hyperlink{classoomph_1_1PMLHelmholtzPowerElement}{oomph\+::\+PMLHelmholtz\+Power\+Element}}$<$ ELEMENT $>$\+::global\+\_\+flux\+\_\+contribution (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+std\+::complex$<$double$>$ \mbox{\hyperlink{classoomph_1_1PMLHelmholtzPowerElement}{oomph\+::\+PMLHelmholtz\+Power\+Element}}$<$ ELEMENT $>$\+::global\+\_\+flux\+\_\+contribution (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -119,22 +120,14 @@ Compute the element\textquotesingle{}s contribution to the time-\/averaged flux.
 
 
 
-Definition at line \mbox{\hyperlink{pml__helmholtz__flux__elements_8h_source_l00247}{247}} of file \mbox{\hyperlink{pml__helmholtz__flux__elements_8h_source}{pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 247 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
-
-
-References \mbox{\hyperlink{pml__helmholtz__flux__elements_8h_source_l00247}{oomph\+::\+PMLHelmholtz\+Power\+Element$<$ ELEMENT $>$\+::global\+\_\+flux\+\_\+contribution()}}.
-
-
-
-Referenced by \mbox{\hyperlink{pml__helmholtz__flux__elements_8h_source_l00247}{oomph\+::\+PMLHelmholtz\+Power\+Element$<$ ELEMENT $>$\+::global\+\_\+flux\+\_\+contribution()}}.
-
-\mbox{\Hypertarget{classoomph_1_1PMLHelmholtzPowerElement_a1b00438b31deacc3d1ec95559e141218}\label{classoomph_1_1PMLHelmholtzPowerElement_a1b00438b31deacc3d1ec95559e141218}} 
+\mbox{\Hypertarget{classoomph_1_1PMLHelmholtzPowerElement_aeea5a41b8fc51cfe1ee1e49a84cbf66b}\label{classoomph_1_1PMLHelmholtzPowerElement_aeea5a41b8fc51cfe1ee1e49a84cbf66b}} 
 \index{oomph::PMLHelmholtzPowerElement$<$ ELEMENT $>$@{oomph::PMLHelmholtzPowerElement$<$ ELEMENT $>$}!global\_flux\_contribution@{global\_flux\_contribution}}
 \index{global\_flux\_contribution@{global\_flux\_contribution}!oomph::PMLHelmholtzPowerElement$<$ ELEMENT $>$@{oomph::PMLHelmholtzPowerElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{global\_flux\_contribution()}{global\_flux\_contribution()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-std\+::complex$<$ double $>$ \mbox{\hyperlink{classoomph_1_1PMLHelmholtzPowerElement}{oomph\+::\+PMLHelmholtz\+Power\+Element}}$<$ ELEMENT $>$\+::global\+\_\+flux\+\_\+contribution (\begin{DoxyParamCaption}\item[{std\+::ofstream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+std\+::complex$<$double$>$ \mbox{\hyperlink{classoomph_1_1PMLHelmholtzPowerElement}{oomph\+::\+PMLHelmholtz\+Power\+Element}}$<$ ELEMENT $>$\+::global\+\_\+flux\+\_\+contribution (\begin{DoxyParamCaption}\item[{std\+::ofstream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -142,11 +135,11 @@ Compute the element\textquotesingle{}s contribution to the integral of the flux 
 
 
 
-Definition at line \mbox{\hyperlink{pml__helmholtz__flux__elements_8h_source_l00258}{258}} of file \mbox{\hyperlink{pml__helmholtz__flux__elements_8h_source}{pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 258 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l04735}{oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l04528}{oomph\+::\+Face\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8cc_source_l05242}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{elements_8cc_source_l06353}{oomph\+::\+Face\+Element\+::local\+\_\+coordinate\+\_\+in\+\_\+bulk()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{elements_8cc_source_l06006}{oomph\+::\+Face\+Element\+::outer\+\_\+unit\+\_\+normal()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}, and \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral\+::weight()}}.
+References oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt(), oomph\+::\+Finite\+Element\+::dim(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Face\+Element\+::interpolated\+\_\+x(), oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Integral\+::knot(), oomph\+::\+Face\+Element\+::local\+\_\+coordinate\+\_\+in\+\_\+bulk(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Integral\+::nweight(), oomph\+::\+Face\+Element\+::outer\+\_\+unit\+\_\+normal(), s, oomph\+::\+Finite\+Element\+::shape(), oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Integral\+::weight().
 
 \mbox{\Hypertarget{classoomph_1_1PMLHelmholtzPowerElement_a7641df9f59097452dfac823d2384c290}\label{classoomph_1_1PMLHelmholtzPowerElement_a7641df9f59097452dfac823d2384c290}} 
 \index{oomph::PMLHelmholtzPowerElement$<$ ELEMENT $>$@{oomph::PMLHelmholtzPowerElement$<$ ELEMENT $>$}!global\_power\_contribution@{global\_power\_contribution}}
@@ -161,15 +154,7 @@ Compute the element\textquotesingle{}s contribution to the time-\/averaged radia
 
 
 
-Definition at line \mbox{\hyperlink{pml__helmholtz__flux__elements_8h_source_l00105}{105}} of file \mbox{\hyperlink{pml__helmholtz__flux__elements_8h_source}{pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h}}.
-
-
-
-References \mbox{\hyperlink{pml__helmholtz__flux__elements_8h_source_l00105}{oomph\+::\+PMLHelmholtz\+Power\+Element$<$ ELEMENT $>$\+::global\+\_\+power\+\_\+contribution()}}.
-
-
-
-Referenced by \mbox{\hyperlink{pml__helmholtz__flux__elements_8h_source_l00105}{oomph\+::\+PMLHelmholtz\+Power\+Element$<$ ELEMENT $>$\+::global\+\_\+power\+\_\+contribution()}}.
+Definition at line 105 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1PMLHelmholtzPowerElement_a2576f9adb9c0570b973084e68a8df857}\label{classoomph_1_1PMLHelmholtzPowerElement_a2576f9adb9c0570b973084e68a8df857}} 
 \index{oomph::PMLHelmholtzPowerElement$<$ ELEMENT $>$@{oomph::PMLHelmholtzPowerElement$<$ ELEMENT $>$}!global\_power\_contribution@{global\_power\_contribution}}
@@ -184,18 +169,18 @@ Compute the element\textquotesingle{}s contribution to the time-\/averaged radia
 
 
 
-Definition at line \mbox{\hyperlink{pml__helmholtz__flux__elements_8h_source_l00116}{116}} of file \mbox{\hyperlink{pml__helmholtz__flux__elements_8h_source}{pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 116 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8h_source_l04735}{oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02611}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01963}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l04528}{oomph\+::\+Face\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8cc_source_l05242}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{elements_8cc_source_l06353}{oomph\+::\+Face\+Element\+::local\+\_\+coordinate\+\_\+in\+\_\+bulk()}}, \mbox{\hyperlink{elements_8h_source_l02210}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02593}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{elements_8cc_source_l06006}{oomph\+::\+Face\+Element\+::outer\+\_\+unit\+\_\+normal()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, \mbox{\hyperlink{pml__helmholtz__flux__elements_8h_source_l00096}{oomph\+::\+PMLHelmholtz\+Power\+Element$<$ ELEMENT $>$\+::u\+\_\+index\+\_\+helmholtz()}}, \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}, and \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral\+::weight()}}.
+References oomph\+::\+Face\+Element\+::bulk\+\_\+element\+\_\+pt(), oomph\+::\+Finite\+Element\+::dim(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Face\+Element\+::interpolated\+\_\+x(), oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Integral\+::knot(), oomph\+::\+Face\+Element\+::local\+\_\+coordinate\+\_\+in\+\_\+bulk(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), oomph\+::\+Integral\+::nweight(), oomph\+::\+Face\+Element\+::outer\+\_\+unit\+\_\+normal(), s, oomph\+::\+Finite\+Element\+::shape(), oomph\+::\+PMLHelmholtz\+Power\+Element$<$ ELEMENT $>$\+::u\+\_\+index\+\_\+helmholtz(), oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Integral\+::weight().
 
-\mbox{\Hypertarget{classoomph_1_1PMLHelmholtzPowerElement_a886056f72aa8d41d14132ce131cdea71}\label{classoomph_1_1PMLHelmholtzPowerElement_a886056f72aa8d41d14132ce131cdea71}} 
+\mbox{\Hypertarget{classoomph_1_1PMLHelmholtzPowerElement_af9ede78a62532221a9a5b9ff90572a09}\label{classoomph_1_1PMLHelmholtzPowerElement_af9ede78a62532221a9a5b9ff90572a09}} 
 \index{oomph::PMLHelmholtzPowerElement$<$ ELEMENT $>$@{oomph::PMLHelmholtzPowerElement$<$ ELEMENT $>$}!u\_index\_helmholtz@{u\_index\_helmholtz}}
 \index{u\_index\_helmholtz@{u\_index\_helmholtz}!oomph::PMLHelmholtzPowerElement$<$ ELEMENT $>$@{oomph::PMLHelmholtzPowerElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{u\_index\_helmholtz()}{u\_index\_helmholtz()}}
 {\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
-virtual std\+::complex$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1PMLHelmholtzPowerElement}{oomph\+::\+PMLHelmholtz\+Power\+Element}}$<$ ELEMENT $>$\+::u\+\_\+index\+\_\+helmholtz (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+virtual std\+::complex$<$unsigned$>$ \mbox{\hyperlink{classoomph_1_1PMLHelmholtzPowerElement}{oomph\+::\+PMLHelmholtz\+Power\+Element}}$<$ ELEMENT $>$\+::u\+\_\+index\+\_\+helmholtz (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -203,15 +188,15 @@ Return the index at which the unknown value is stored.
 
 
 
-Definition at line \mbox{\hyperlink{pml__helmholtz__flux__elements_8h_source_l00096}{96}} of file \mbox{\hyperlink{pml__helmholtz__flux__elements_8h_source}{pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 96 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{pml__helmholtz__flux__elements_8h_source_l00375}{oomph\+::\+PMLHelmholtz\+Power\+Element$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+helmholtz}}.
+References oomph\+::\+PMLHelmholtz\+Power\+Element$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+helmholtz.
 
 
 
-Referenced by \mbox{\hyperlink{pml__helmholtz__flux__elements_8h_source_l00116}{oomph\+::\+PMLHelmholtz\+Power\+Element$<$ ELEMENT $>$\+::global\+\_\+power\+\_\+contribution()}}.
+Referenced by oomph\+::\+PMLHelmholtz\+Power\+Element$<$ ELEMENT $>$\+::global\+\_\+power\+\_\+contribution().
 
 \mbox{\Hypertarget{classoomph_1_1PMLHelmholtzPowerElement_a5ee9ddb45e780e47245fc31b7f38ba19}\label{classoomph_1_1PMLHelmholtzPowerElement_a5ee9ddb45e780e47245fc31b7f38ba19}} 
 \index{oomph::PMLHelmholtzPowerElement$<$ ELEMENT $>$@{oomph::PMLHelmholtzPowerElement$<$ ELEMENT $>$}!zeta\_nodal@{zeta\_nodal}}
@@ -230,11 +215,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FaceElement_a58c9f93705c7741f7
 
 
 
-Definition at line \mbox{\hyperlink{pml__helmholtz__flux__elements_8h_source_l00086}{86}} of file \mbox{\hyperlink{pml__helmholtz__flux__elements_8h_source}{pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 86 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l04497}{oomph\+::\+Face\+Element\+::zeta\+\_\+nodal()}}.
+References i, and oomph\+::\+Face\+Element\+::zeta\+\_\+nodal().
 
 
 
@@ -252,11 +237,11 @@ The spatial dimension of the problem.
 
 
 
-Definition at line \mbox{\hyperlink{pml__helmholtz__flux__elements_8h_source_l00378}{378}} of file \mbox{\hyperlink{pml__helmholtz__flux__elements_8h_source}{pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 378 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{pml__helmholtz__flux__elements_8h_source_l00394}{oomph\+::\+PMLHelmholtz\+Power\+Element$<$ ELEMENT $>$\+::\+PMLHelmholtz\+Power\+Element()}}.
+Referenced by oomph\+::\+PMLHelmholtz\+Power\+Element$<$ ELEMENT $>$\+::\+PMLHelmholtz\+Power\+Element().
 
 \mbox{\Hypertarget{classoomph_1_1PMLHelmholtzPowerElement_a3da25319b6d812c1c626dc9e52ae9e2c}\label{classoomph_1_1PMLHelmholtzPowerElement_a3da25319b6d812c1c626dc9e52ae9e2c}} 
 \index{oomph::PMLHelmholtzPowerElement$<$ ELEMENT $>$@{oomph::PMLHelmholtzPowerElement$<$ ELEMENT $>$}!U\_index\_helmholtz@{U\_index\_helmholtz}}
@@ -271,11 +256,11 @@ The index at which the real and imag part of the unknown is stored at the nodes.
 
 
 
-Definition at line \mbox{\hyperlink{pml__helmholtz__flux__elements_8h_source_l00375}{375}} of file \mbox{\hyperlink{pml__helmholtz__flux__elements_8h_source}{pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h}}.
+Definition at line 375 of file pml\+\_\+helmholtz\+\_\+flux\+\_\+elements.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{pml__helmholtz__flux__elements_8h_source_l00394}{oomph\+::\+PMLHelmholtz\+Power\+Element$<$ ELEMENT $>$\+::\+PMLHelmholtz\+Power\+Element()}}, and \mbox{\hyperlink{pml__helmholtz__flux__elements_8h_source_l00096}{oomph\+::\+PMLHelmholtz\+Power\+Element$<$ ELEMENT $>$\+::u\+\_\+index\+\_\+helmholtz()}}.
+Referenced by oomph\+::\+PMLHelmholtz\+Power\+Element$<$ ELEMENT $>$\+::\+PMLHelmholtz\+Power\+Element(), and oomph\+::\+PMLHelmholtz\+Power\+Element$<$ ELEMENT $>$\+::u\+\_\+index\+\_\+helmholtz().
 
 
 

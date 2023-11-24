@@ -85,7 +85,7 @@ We use a namespace {\ttfamily \mbox{\hyperlink{namespaceGlobal__Physical__Variab
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_namespace===================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for physical parameters}}
-\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Reynolds number}}
@@ -101,7 +101,7 @@ We use a namespace {\ttfamily \mbox{\hyperlink{namespaceGlobal__Physical__Variab
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab1a845a672b4d74b304639a976dc65c6}{Re\_invFr}}=100;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Gravity vector}}
-\DoxyCodeLine{\textcolor{comment}{} Vector<double> \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8a067a902bf49c306bed9293eb042771}{Gravity}}(2);}
+\DoxyCodeLine{\textcolor{comment}{} Vector<double> \mbox{\hyperlink{namespaceGlobal__Physical__Variables_afae321364975eb56688ad13abc8ed6b7}{Gravity}}(2);}
 
 \end{DoxyCodeInclude}
  In Problem 2, gravity is introduced via the body force function $ {\bf B}$ which we define such that Problems 1 and 2 are equivalent. (We use the gravity vector $ {\bf G} = (0,-1)$ to specify the direction of gravity, while indicating it magnitude by $ Re/Fr.$)
@@ -143,7 +143,7 @@ First we create a {\ttfamily Doc\+Info} object to control the output, and set th
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_main======================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver for QuarterCircleDrivenCavityProblem test problem }}
-\DoxyCodeLine{\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{circular__driven__cavity_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
@@ -164,8 +164,8 @@ First we create a {\ttfamily Doc\+Info} object to control the output, and set th
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{comment}{// Set up downwards-\/Gravity vector}}
-\DoxyCodeLine{  \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8a067a902bf49c306bed9293eb042771}{Global\_Physical\_Variables::Gravity}}[0] = 0.0;}
-\DoxyCodeLine{  \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8a067a902bf49c306bed9293eb042771}{Global\_Physical\_Variables::Gravity}}[1] = -\/1.0;}
+\DoxyCodeLine{  \mbox{\hyperlink{namespaceGlobal__Physical__Variables_afae321364975eb56688ad13abc8ed6b7}{Global\_Physical\_Variables::Gravity}}[0] = 0.0;}
+\DoxyCodeLine{  \mbox{\hyperlink{namespaceGlobal__Physical__Variables_afae321364975eb56688ad13abc8ed6b7}{Global\_Physical\_Variables::Gravity}}[1] = -\/1.0;}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Set up Gamma vector for stress-\/divergence form}}
 \DoxyCodeLine{  NavierStokesEquations<2>::Gamma[0]=1;}
@@ -214,8 +214,8 @@ To solve problem 2 we set the entries in the {\ttfamily Navier\+Stokes\+Equation
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{comment}{// Set up zero-\/Gravity vector}}
-\DoxyCodeLine{  \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8a067a902bf49c306bed9293eb042771}{Global\_Physical\_Variables::Gravity}}[0] = 0.0;}
-\DoxyCodeLine{  \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8a067a902bf49c306bed9293eb042771}{Global\_Physical\_Variables::Gravity}}[1] = 0.0;}
+\DoxyCodeLine{  \mbox{\hyperlink{namespaceGlobal__Physical__Variables_afae321364975eb56688ad13abc8ed6b7}{Global\_Physical\_Variables::Gravity}}[0] = 0.0;}
+\DoxyCodeLine{  \mbox{\hyperlink{namespaceGlobal__Physical__Variables_afae321364975eb56688ad13abc8ed6b7}{Global\_Physical\_Variables::Gravity}}[1] = 0.0;}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{// Set up Gamma vector for simplified form}}
 \DoxyCodeLine{  NavierStokesEquations<2>::Gamma[0]=0;}
@@ -260,8 +260,8 @@ The problem class is very similar to that used in the \href{../../adaptive_drive
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_problem\_class============================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Driven cavity problem in quarter circle domain, templated}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// by element type. }}
+\DoxyCodeLine{\textcolor{comment}{/// Driven cavity problem in quarter circle domain, templated}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// by element type. }}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classQuarterCircleDrivenCavityProblem}{QuarterCircleDrivenCavityProblem}} : \textcolor{keyword}{public} Problem}
@@ -356,7 +356,7 @@ We store the function pointer to the body force function in the private data mem
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_constructor==================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for driven cavity problem in quarter circle domain}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classQuarterCircleDrivenCavityProblem_ae5fd69acf7d28a600cb6aa0bbb6a341c}{QuarterCircleDrivenCavityProblem<ELEMENT>::QuarterCircleDrivenCavityProblem}}(}
 \DoxyCodeLine{ NavierStokesEquations<2>::NavierStokesBodyForceFctPt body\_force\_fct\_pt) :}
@@ -439,7 +439,7 @@ We store the function pointer to the body force function in the private data mem
 \DoxyCodeLine{   \textcolor{comment}{//Set the Re/Fr}}
 \DoxyCodeLine{   el\_pt-\/>re\_invfr\_pt() = \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab1a845a672b4d74b304639a976dc65c6}{Global\_Physical\_Variables::Re\_invFr}};}
 \DoxyCodeLine{   \textcolor{comment}{//Set Gravity vector}}
-\DoxyCodeLine{   el\_pt-\/>g\_pt() = \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8a067a902bf49c306bed9293eb042771}{Global\_Physical\_Variables::Gravity}};}
+\DoxyCodeLine{   el\_pt-\/>g\_pt() = \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_afae321364975eb56688ad13abc8ed6b7}{Global\_Physical\_Variables::Gravity}};}
 \DoxyCodeLine{   \textcolor{comment}{//set body force function}}
 \DoxyCodeLine{   el\_pt-\/>body\_force\_fct\_pt() = Body\_force\_fct\_pt;}
 \DoxyCodeLine{}
@@ -477,7 +477,7 @@ The post processing function remains the same as in the \href{../../driven_cavit
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_doc\_solution=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classQuarterCircleDrivenCavityProblem_a390b7b3c027a0253a2a3ac42f9715736}{QuarterCircleDrivenCavityProblem<ELEMENT>::doc\_solution}}(DocInfo\& doc\_info)}
 \DoxyCodeLine{\{ }

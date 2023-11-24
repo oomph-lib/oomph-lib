@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1SpineLineVolumeConstraintBoundingElement}{}\doxysection{oomph\+::Spine\+Line\+Volume\+Constraint\+Bounding\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1SpineLineVolumeConstraintBoundingElement}{}\doxysection{oomph\+::Spine\+Line\+Volume\+Constraint\+Bounding\+Element$<$ ELEMENT $>$ Class Template Reference}
 \label{classoomph_1_1SpineLineVolumeConstraintBoundingElement}\index{oomph::SpineLineVolumeConstraintBoundingElement$<$ ELEMENT $>$@{oomph::SpineLineVolumeConstraintBoundingElement$<$ ELEMENT $>$}}
 
 
@@ -9,7 +9,7 @@ The one-\/dimensional interface elements that allow imposition of a volume const
 
 {\ttfamily \#include $<$constrained\+\_\+volume\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Spine\+Line\+Volume\+Constraint\+Bounding\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Spine\+Line\+Volume\+Constraint\+Bounding\+Element$<$ ELEMENT $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=1.631068cm]{classoomph_1_1SpineLineVolumeConstraintBoundingElement}
@@ -18,7 +18,7 @@ Inheritance diagram for oomph\+::Spine\+Line\+Volume\+Constraint\+Bounding\+Elem
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1SpineLineVolumeConstraintBoundingElement_a5b8bb4a60ee78615103eb6b9fa3eb397}{Spine\+Line\+Volume\+Constraint\+Bounding\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&element\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}})
+\mbox{\hyperlink{classoomph_1_1SpineLineVolumeConstraintBoundingElement_a5b8bb4a60ee78615103eb6b9fa3eb397}{Spine\+Line\+Volume\+Constraint\+Bounding\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&element\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a478d577ac6db67ecc80f1f02ae3ab170}{face\+\_\+index}})
 \begin{DoxyCompactList}\small\item\em Contructor\+: Specify bulk element and index of face to which this face element is to be attached. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SpineLineVolumeConstraintBoundingElement_a9b23d5b98dc459a918045d2a8e221728}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Fill in contribution to residuals and Jacobian. This is specific to spine based elements in which the shape derivatives are evaluated using geometric data. \end{DoxyCompactList}\item 
@@ -30,9 +30,10 @@ double \mbox{\hyperlink{classoomph_1_1SpineLineVolumeConstraintBoundingElement_a
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$class ELEMENT$>$\newline
 class oomph\+::\+Spine\+Line\+Volume\+Constraint\+Bounding\+Element$<$ ELEMENT $>$}
+
 The one-\/dimensional interface elements that allow imposition of a volume constraint specialised for the case when the nodal positions of the bulk elements are adjusted using Spines. To enforce that a fluid volume has a certain volume, attach these elements to all faces of the (2D cartesian) bulk fluid elements (of type ELEMENT) that bound that region and then specify the \char`\"{}pressure\char`\"{} value that is traded for the constraint. 
 
-Definition at line \mbox{\hyperlink{constrained__volume__elements_8h_source_l00421}{421}} of file \mbox{\hyperlink{constrained__volume__elements_8h_source}{constrained\+\_\+volume\+\_\+elements.\+h}}.
+Definition at line 421 of file constrained\+\_\+volume\+\_\+elements.\+h.
 
 
 
@@ -50,11 +51,11 @@ Contructor\+: Specify bulk element and index of face to which this face element 
 
 
 
-Definition at line \mbox{\hyperlink{constrained__volume__elements_8h_source_l00428}{428}} of file \mbox{\hyperlink{constrained__volume__elements_8h_source}{constrained\+\_\+volume\+\_\+elements.\+h}}.
+Definition at line 428 of file constrained\+\_\+volume\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{elements_8cc_source_l05132}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, and \mbox{\hyperlink{elements_8h_source_l04626}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}.
+References oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), and oomph\+::\+Face\+Element\+::face\+\_\+index().
 
 
 
@@ -76,11 +77,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a6ae09fc0d6
 
 
 
-Definition at line \mbox{\hyperlink{constrained__volume__elements_8h_source_l00442}{442}} of file \mbox{\hyperlink{constrained__volume__elements_8h_source}{constrained\+\_\+volume\+\_\+elements.\+h}}.
+Definition at line 442 of file constrained\+\_\+volume\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{constrained__volume__elements_8cc_source_l00115}{oomph\+::\+Line\+Volume\+Constraint\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+volume\+\_\+constraint()}}, and \mbox{\hyperlink{element__with__moving__nodes_8cc_source_l00323}{oomph\+::\+Element\+With\+Moving\+Nodes\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data()}}.
+References oomph\+::\+Line\+Volume\+Constraint\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+volume\+\_\+constraint(), and oomph\+::\+Element\+With\+Moving\+Nodes\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+geometric\+\_\+data().
 
 \mbox{\Hypertarget{classoomph_1_1SpineLineVolumeConstraintBoundingElement_ab299a1b0cec3d35f5bd6ef683a244db6}\label{classoomph_1_1SpineLineVolumeConstraintBoundingElement_ab299a1b0cec3d35f5bd6ef683a244db6}} 
 \index{oomph::SpineLineVolumeConstraintBoundingElement$<$ ELEMENT $>$@{oomph::SpineLineVolumeConstraintBoundingElement$<$ ELEMENT $>$}!zeta\_nodal@{zeta\_nodal}}
@@ -99,11 +100,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a849561c5fbcbc07
 
 
 
-Definition at line \mbox{\hyperlink{constrained__volume__elements_8h_source_l00455}{455}} of file \mbox{\hyperlink{constrained__volume__elements_8h_source}{constrained\+\_\+volume\+\_\+elements.\+h}}.
+Definition at line 455 of file constrained\+\_\+volume\+\_\+elements.\+h.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l04497}{oomph\+::\+Face\+Element\+::zeta\+\_\+nodal()}}.
+References i, and oomph\+::\+Face\+Element\+::zeta\+\_\+nodal().
 
 
 

@@ -45,7 +45,7 @@ An element of type {\ttfamily Macro\+Element\+Node\+Update\+Element$<$\+ELEMENT$
 
 The solution of the coupled problem therefore only requires a few trivial changes to the single-\/physics (Poisson) code\+:
 \begin{DoxyEnumerate}
-\item The element type used for the solution of the \char`\"{}bulk\char`\"{} equations must be changed to its \char`\"{}wrapped\char`\"{} counterpart, as discussed above. For instance, if the single-\/physics code used a nine-\/node refineable Poisson element of type {\ttfamily Refineable\+QPoisson\+Element$<$2,3$>$}, the coupled problem must be discretised by elements of type {\ttfamily Macro\+Element\+Node\+Update\+Element\texorpdfstring{$<$}{<}Refineable\+QPoisson\+Element$<$2,3$>$} \texorpdfstring{$>$}{>} (Yes, it\textquotesingle{}s a bit of a mouthful...).
+\item The element type used for the solution of the \char`\"{}bulk\char`\"{} equations must be changed to its \char`\"{}wrapped\char`\"{} counterpart, as discussed above. For instance, if the single-\/physics code used a nine-\/node refineable Poisson element of type {\ttfamily Refineable\+QPoisson\+Element$<$2,3$>$}, the coupled problem must be discretised by elements of type {\ttfamily Macro\+Element\+Node\+Update\+Element$<$Refineable\+QPoisson\+Element$<$2,3$>$} $>$ (Yes, it\textquotesingle{}s a bit of a mouthful...).
 \item The \char`\"{}bulk\char`\"{} mesh must be \char`\"{}upgraded\char`\"{} (again via multiple inheritance) to a Mesh that is derived from the {\ttfamily Macro\+Element\+Node\+Update\+Mesh} base class.
 \item A vector of pointers to those {\ttfamily Geom\+Objects} that are involved in an element\textquotesingle{}s {\ttfamily Macro\+Element/\+Domain} -\/ based node update operation must be passed to the elements. (This is done most easily in the constructor of the \char`\"{}upgraded\char`\"{} mesh.) The geometric {\ttfamily Data} contained in these {\ttfamily Geom\+Objects} is then automatically included in the elements\textquotesingle{} list of unknowns.
 \item The Mesh\textquotesingle{}s {\ttfamily node\+\_\+update()} function must be executed whenever the Newton method has changed the values of the unknowns\+: This is because changing a value that is stored in a {\ttfamily Geom\+Object\textquotesingle{}s} geometric {\ttfamily Data} does not automatically update the positions of any dependent nodes. This is done most easily be including the {\ttfamily node\+\_\+update()} function into the {\ttfamily Problem\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()} function; we refer to \href{../../../order_of_action_functions/html/index.html}{\texttt{ another document}} for a more detailed discussion of the order in which the various \char`\"{}action\char`\"{} functions are called by {\ttfamily oomph-\/lib\textquotesingle{}s} Newton solver.
@@ -91,7 +91,7 @@ The namespace {\ttfamily \mbox{\hyperlink{namespaceConstSourceForPoisson}{Const\
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=============start\_of\_namespace=====================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for const source term in Poisson equation}}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceConstSourceForPoisson}{ConstSourceForPoisson}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -118,7 +118,7 @@ In our driver code we add the additional functionality provided by the {\ttfamil
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==========start\_of\_mesh=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Refineable, fish-\/shaped mesh with MacroElement-\/based node update.}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classMyMacroElementNodeUpdateRefineableFishMesh}{MyMacroElementNodeUpdateRefineableFishMesh}} : }
 \DoxyCodeLine{ \textcolor{keyword}{public} \textcolor{keyword}{virtual} RefineableFishMesh<ELEMENT>,}
@@ -173,7 +173,7 @@ In our driver code we add the additional functionality provided by the {\ttfamil
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Destructor: empty}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \mbox{\hyperlink{classMyMacroElementNodeUpdateRefineableFishMesh}{\string~MyMacroElementNodeUpdateRefineableFishMesh}}()\{\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \string~\mbox{\hyperlink{classMyMacroElementNodeUpdateRefineableFishMesh}{MyMacroElementNodeUpdateRefineableFishMesh}}()\{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Resolve mesh update: Node update current nodal}}
 \DoxyCodeLine{\textcolor{comment}{ /// positions via sparse MacroElement-\/based update.}}
@@ -194,7 +194,7 @@ The driver code is very simple\+: We build the problem with the \char`\"{}wrappe
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==================start\_of\_main=========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver for "{}free-\/boundary"{} fish poisson solver with adaptation.}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{macro__element__free__boundary__poisson_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
@@ -226,8 +226,8 @@ Apart from a few trivial additions, the problem class is virtually identical to 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==========start\_of\_problem\_class====================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Refineable "{}free-\/boundary"{} Poisson problem in deformable }\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// fish-\/shaped domain. Template parameter identifies the element.}}
+\DoxyCodeLine{\textcolor{comment}{/// Refineable "{}free-\/boundary"{} Poisson problem in deformable }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// fish-\/shaped domain. Template parameter identifies the element.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classFreeBoundaryPoissonProblem}{FreeBoundaryPoissonProblem}} : \textcolor{keyword}{public} Problem}
@@ -248,7 +248,7 @@ Apart from a few trivial additions, the problem class is virtually identical to 
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classFreeBoundaryPoissonProblem_aa18df6c9a9287f67ae1bff0f67aaa625}{actions\_after\_newton\_solve}}()\{\}}
 \DoxyCodeLine{  \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Access function for the fish mesh}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classMyMacroElementNodeUpdateRefineableFishMesh}{MyMacroElementNodeUpdateRefineableFishMesh<ELEMENT>}}* \mbox{\hyperlink{classFreeBoundaryPoissonProblem_aead858e61b1d405729f6c0cfbef94fe0}{fish\_mesh\_pt}}() }
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classMyMacroElementNodeUpdateRefineableFishMesh}{MyMacroElementNodeUpdateRefineableFishMesh<ELEMENT>}}* \mbox{\hyperlink{classFreeBoundaryPoissonProblem_adccab51afed9228783120934b6be37c9}{fish\_mesh\_pt}}() }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{keywordflow}{return} \mbox{\hyperlink{classFreeBoundaryPoissonProblem_ae81a7e22c2c61854696b80a94053a663}{Fish\_mesh\_pt}};}
 \DoxyCodeLine{  \}}
@@ -261,7 +261,7 @@ Apart from a few trivial additions, the problem class is virtually identical to 
 \DoxyCodeLine{\textcolor{comment}{ /// changes in the position of the domain boundary}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classFreeBoundaryPoissonProblem_a885a6e3a4efd1f02314806dced566569}{actions\_before\_newton\_convergence\_check}}()}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   \mbox{\hyperlink{classFreeBoundaryPoissonProblem_aead858e61b1d405729f6c0cfbef94fe0}{fish\_mesh\_pt}}()-\/>node\_update();}
+\DoxyCodeLine{   \mbox{\hyperlink{classFreeBoundaryPoissonProblem_adccab51afed9228783120934b6be37c9}{fish\_mesh\_pt}}()-\/>node\_update();}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{private}:}
@@ -284,8 +284,8 @@ We start by creating the {\ttfamily Geom\+Object/\+Generalised\+Element} that wi
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=========start\_of\_constructor===========================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Constructor for adaptive free-\/boundary Poisson problem in }\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// deformable fish-\/shaped domain. }}
+\DoxyCodeLine{\textcolor{comment}{/// Constructor for adaptive free-\/boundary Poisson problem in }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// deformable fish-\/shaped domain. }}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classFreeBoundaryPoissonProblem_a0efe7c342eea790fc0240830bc3c4ebc}{FreeBoundaryPoissonProblem<ELEMENT>::FreeBoundaryPoissonProblem}}()}
@@ -397,7 +397,7 @@ The post-\/processing routine writes the computed result to an output file.
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_doc================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution in tecplot format.}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classFreeBoundaryPoissonProblem_a2282d8ac1d5753771a9a3cfc0417f6b6}{FreeBoundaryPoissonProblem<ELEMENT>::doc\_solution}}()}
 \DoxyCodeLine{\{ }
@@ -420,10 +420,10 @@ The post-\/processing routine writes the computed result to an output file.
 \hypertarget{index_comments}{}\doxysection{Comments}\label{index_comments}
 A more detailed description of the theory and the implementation can be found in the paper
 \begin{DoxyItemize}
-\item Heil, M. \& Hazel, A. L. \char`\"{}$<$\+TT$>$oomph-\/lib$<$/\+TT$>$ -- An    $<$\+EM$>$\+O$<$/\+EM$>$bject-\/$<$\+EM$>$\+O$<$/\+EM$>$riented $<$\+EM$>$\+M$<$/\+EM$>$ulti-\/$<$\+EM$>$\+Ph$<$/\+EM$>$ysics   Finite-\/\+Element $<$\+EM$>$\+Lib$<$/\+EM$>$rary\char`\"{}. In\+: {\itshape Fluid-\/\+Structure Interaction}, Editors\+: M. Schafer and H.-\/J. Bungartz. Springer (Lecture Notes on Computational Science and Engineering 53, 2006), (32 pages) \href{http://www.maths.man.ac.uk/~mheil/MATTHIAS/ABSTRACTS/HeilHazelOomph2006.html}{\texttt{ (abstract)}} \href{http://www.maths.man.ac.uk/~mheil/MATTHIAS/PDF/oomph_for_www.pdf}{\texttt{ (pdf preprint)}}.
+\item Heil, M. \& Hazel, A. L. "{}{\ttfamily oomph-\/lib} -- An {\itshape O}bject-\/{\itshape O}riented {\itshape M}ulti-\/{\itshape Ph}ysics Finite-\/\+Element {\itshape Lib}rary"{}. In\+: {\itshape Fluid-\/\+Structure Interaction}, Editors\+: M. Schafer and H.-\/J. Bungartz. Springer (Lecture Notes on Computational Science and Engineering 53, 2006), (32 pages) \href{http://www.maths.man.ac.uk/~mheil/MATTHIAS/ABSTRACTS/HeilHazelOomph2006.html}{\texttt{ (abstract)}} \href{http://www.maths.man.ac.uk/~mheil/MATTHIAS/PDF/oomph_for_www.pdf}{\texttt{ (pdf preprint)}}.
 \end{DoxyItemize}and in this talk\+:
 \begin{DoxyItemize}
-\item Heil, M. \& Hazel, A. L. \char`\"{}\+An object-\/oriented approach to the    evaluation of the `shape derivatives' in monolithic fluid-\/structure    interaction solvers\char`\"{}. 7th World Congress on Computational Mechanics, LA, July 2006. \href{http://www.maths.man.ac.uk/~mheil/oomph_lib_additional_material/LA_talk_2006/LA_talk.pdf}{\texttt{ (pdf)}}.
+\item Heil, M. \& Hazel, A. L. "{}An object-\/oriented approach to the evaluation of the `shape derivatives' in monolithic fluid-\/structure interaction solvers"{}. 7th World Congress on Computational Mechanics, LA, July 2006. \href{http://www.maths.man.ac.uk/~mheil/oomph_lib_additional_material/LA_talk_2006/LA_talk.pdf}{\texttt{ (pdf)}}.
 \end{DoxyItemize}The following subsections provide a brief description of the main features.
 
 \DoxyHorRuler{0}
@@ -436,7 +436,7 @@ We start by building the Mesh as before
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==================start\_of\_main=========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver to document sparse MacroElement-\/based node update.}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{doc__sparse__macro__node__update_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}

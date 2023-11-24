@@ -19,7 +19,8 @@ In this document we discuss the solution of a standard fluid-\/structure interac
 \hline
 \begin{center} {\bfseries{Flow in a 2D collapsible channel }} \end{center} 
 
-The figure below shows a sketch of the problem\+: Flow is driven by a prescribed pressure drop through a 2D channel of width $ H^* $ and total length $ L^*_{total} = L^*_{up} + L^*_{collapsible} + L^*_{down}. $ The upstream and downstream lengths of the channel are rigid, whereas the upper wall in the central section is an elastic membrane whose shape is parametrised by a Lagrangian coordinate, $ \xi^* $ , so that the position vector to the moving wall is given by $ {\bf R}_w^*(\xi^*,t^*) $ . The wall is loaded by the external pressure $ p_{ext}^* $ and by the traction that the viscous fluid exerts on it. The components of the load vector $ {\bf f}^* $ that acts on the wall are therefore given by \[ f^*_{i} = (p^* - p^*_{ext}) N_i - \mu \left( \frac{\partial u^*_i}{\partial x^*_j} + \frac{\partial u^*_j}{\partial x^*_i} \right) N_j \ \ \ \ \ \ \mbox{for $i=1,2$,} \] where $ N_i \ (\mbox{\ for \ } i=1,2) $ are the components of the outer unit normal on the fluid domain.
+The figure below shows a sketch of the problem\+: Flow is driven by a prescribed pressure drop through a 2D channel of width $ H^* $ and total length $ L^*_{total} = L^*_{up} + L^*_{collapsible} + L^*_{down}. $ The upstream and downstream lengths of the channel are rigid, whereas the upper wall in the central section is an elastic membrane whose shape is parametrised by a Lagrangian coordinate, $ \xi^* $ , so that the position vector to the moving wall is given by $ {\bf R}_w^*(\xi^*,t^*) $ . The wall is loaded by the external pressure $ p_{ext}^* $ and by the traction that the viscous fluid exerts on it. The components of the load vector $ {\bf f}^* $ that acts on the wall are therefore given by \[ f^*_{i} = (p^* - p^*_{ext}) N_i - \mu \left( \frac{\partial u^*_i}{\partial x^*_j} + \frac{\partial u^*_j}{\partial x^*_i} \right) N_j \ \ \ \ \ \ \mbox{for $i=1,2$,} \]~\newline
+ where $ N_i \ (\mbox{\ for \ } i=1,2) $ are the components of the outer unit normal on the fluid domain.
 
  
 \begin{DoxyImage}
@@ -90,8 +91,8 @@ Once the behaviour of the two isolated single-\/physics problems is sufficiently
 \begin{DoxyEnumerate}
 \item which fluid element is adjacent to a given Gauss point in the {\ttfamily Solid\+Finite\+Elements}, and
 \item which (fluid) degrees of freedom affect the fluid traction at that point.
-\end{DoxyEnumerate}The dependence of the residuals of the {\ttfamily Solid\+Finite\+Elements} on these (fluid) degrees of freedom must be taken into account when computing the {\ttfamily Solid\+Finite\+Element\textquotesingle{}s} Jacobian matrix.
 \end{DoxyEnumerate}
+\end{DoxyEnumerate}The dependence of the residuals of the {\ttfamily Solid\+Finite\+Elements} on these (fluid) degrees of freedom must be taken into account when computing the {\ttfamily Solid\+Finite\+Element\textquotesingle{}s} Jacobian matrix.
 
 {\ttfamily oomph-\/lib} provides a number of high-\/level functions that allow the required lookup schemes to be generated completely automatically. In the following sections we shall provide a brief discussion of the methodology but we stress that the details are not particularly important for the \char`\"{}user\char`\"{}. If you just want to \char`\"{}use\char`\"{} {\ttfamily oomph-\/lib\textquotesingle{}s} fluid-\/structure interaction capabilities and don\textquotesingle{}t care too much about the technical details, you may wish to skip the next few sections and continue with the \mbox{\hyperlink{index_driver_code}{Overview of the driver code}}, where we demonstrate that, apart from a few trivial modifications, the driver code for the fully-\/coupled fluid-\/structure interaction problem is a straightforward combination of the two single-\/physics driver codes.
 
@@ -229,7 +230,7 @@ The driver code for the fully-\/coupled fluid-\/structure interaction problem is
 \begin{DoxyEnumerate}
 \item Create the wall mesh, using {\ttfamily FSIHermite\+Beam\+Elements} instead of {\ttfamily Hermite\+Beam\+Elements}.
 \item {\bfseries{NEW\+:}} Create a {\ttfamily Geom\+Object} representation of the wall mesh, using the {\ttfamily Mesh\+As\+Geom\+Object} class.
-\item Create the fluid mesh, using elements of type {\ttfamily Macro\+Element\+Node\+Update\+Element$<$\+QCrouzeix\+Raviart\+Element$<$2$>$$>$} instead of {\ttfamily QCrouzeix\+Raviart\+Element$<$2$>$}. Use the {\ttfamily Mesh\+As\+Geom\+Object} representation of the elastic wall, created in the previous step to represent the curvilinear domain boundary.
+\item Create the fluid mesh, using elements of type {\ttfamily Macro\+Element\+Node\+Update\+Element$<$QCrouzeix\+Raviart\+Element$<$2$>$$>$} instead of {\ttfamily QCrouzeix\+Raviart\+Element$<$2$>$}. Use the {\ttfamily Mesh\+As\+Geom\+Object} representation of the elastic wall, created in the previous step to represent the curvilinear domain boundary.
 \item Build a mesh of traction elements that apply the prescribed-\/traction boundary condition at the inflow. Add all three meshes (fluid, solid and traction mesh) to the {\ttfamily Problem\textquotesingle{}s} collection of sub-\/meshes and build the global mesh.
 \item Pass the relevant function pointers (for Reynolds number, external loads, etc) to the various elements and apply the boundary conditions.
 \item {\bfseries{NEW\+:}} Call the function {\ttfamily FSI\+\_\+functions\+::setup\+\_\+fluid\+\_\+load\+\_\+info\+\_\+for\+\_\+solid\+\_\+elements(...)} to set up the lookup scheme that establishes which fluid elements affect the traction on the wall.
@@ -248,7 +249,7 @@ The namespace for the \char`\"{}global\char`\"{} physical parameters contains th
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//====start\_of\_physical\_parameters=====================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for phyical parameters}}
-\DoxyCodeLine{\textcolor{comment}{//======================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Reynolds number}}
@@ -324,9 +325,9 @@ We represent the undeformed geometry of the elastic wall, defined by equation (5
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//====start\_of\_underformed\_wall============================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Undeformed wall is a steady, straight 1D line in 2D space }\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{///  \(\backslash\)f[ x = X\_0 + \(\backslash\)zeta \(\backslash\)f]}}
-\DoxyCodeLine{\textcolor{comment}{///  \(\backslash\)f[ y = H \(\backslash\)f]}}
+\DoxyCodeLine{\textcolor{comment}{/// Undeformed wall is a steady, straight 1D line in 2D space }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///  \(\backslash\)f[ x = X\_0 + \(\backslash\)zeta \(\backslash\)f]}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///  \(\backslash\)f[ y = H \(\backslash\)f]}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classUndeformedWall}{UndeformedWall}} : \textcolor{keyword}{public} GeomObject}
 \DoxyCodeLine{\{}
@@ -424,9 +425,9 @@ As with most previous time-\/dependent codes, we use command line arguments to i
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_main====================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Driver code for a collapsible channel problem with FSI.}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// Presence of command line arguments indicates validation run with }}
-\DoxyCodeLine{\textcolor{comment}{/// coarse resolution and small number of timesteps.}}
+\DoxyCodeLine{\textcolor{comment}{/// Driver code for a collapsible channel problem with FSI.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// Presence of command line arguments indicates validation run with }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// coarse resolution and small number of timesteps.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=============================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{fsi__collapsible__channel_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
@@ -566,7 +567,7 @@ The problem class is very similar to that used for the \href{../../../navier_sto
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//====start\_of\_problem\_class==========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Problem class}}
-\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsibleChannelProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -590,7 +591,7 @@ The problem class is very similar to that used for the \href{../../../navier_sto
 \end{DoxyCodeInclude}
  We provide access functions to the (pointers to) the fluid mesh, 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Access function for the specific bulk (fluid) mesh}}
+\DoxyCodeLine{ \textcolor{comment}{/// Access function for the specific bulk (fluid) mesh}}
 \DoxyCodeLine{ MacroElementNodeUpdateCollapsibleChannelMesh<ELEMENT>* bulk\_mesh\_pt() }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Upcast from pointer to the Mesh base class to the specific }}
@@ -605,7 +606,7 @@ The problem class is very similar to that used for the \href{../../../navier_sto
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Access function for the wall mesh}}
+\DoxyCodeLine{ \textcolor{comment}{/// Access function for the wall mesh}}
 \DoxyCodeLine{ OneDLagrangianMesh<FSIHermiteBeamElement>* wall\_mesh\_pt() }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{keywordflow}{return} Wall\_mesh\_pt;}
@@ -702,7 +703,7 @@ Unlike the \href{../../../navier_stokes/collapsible_channel/html/index.html}{\te
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Pointer to the "{}bulk"{} mesh}}
+\DoxyCodeLine{ \textcolor{comment}{/// Pointer to the "{}bulk"{} mesh}}
 \DoxyCodeLine{ MacroElementNodeUpdateCollapsibleChannelMesh<ELEMENT>* Bulk\_mesh\_pt;}
 
 \end{DoxyCodeInclude}
@@ -710,9 +711,9 @@ Unlike the \href{../../../navier_stokes/collapsible_channel/html/index.html}{\te
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Pointer to the "{}surface"{} mesh that applies the traction at the}}
+\DoxyCodeLine{ \textcolor{comment}{/// Pointer to the "{}surface"{} mesh that applies the traction at the}}
 \DoxyCodeLine{\textcolor{comment}{ /// inflow}}
-\DoxyCodeLine{ Mesh* Applied\_fluid\_traction\_mesh\_pt; }
+\DoxyCodeLine{\textcolor{comment}{} Mesh* Applied\_fluid\_traction\_mesh\_pt; }
 
 \end{DoxyCodeInclude}
  and the wall mesh,
@@ -750,7 +751,7 @@ We copy the various mesh parameters to the Problem\textquotesingle{}s private da
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====start\_of\_constructor======================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for the collapsible channel problem}}
-\DoxyCodeLine{\textcolor{comment}{//===============================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//===============================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classFSICollapsibleChannelProblem_afe14ae0d2bdfc9a15969c9bdcd6e2512}{FSICollapsibleChannelProblem<ELEMENT>::FSICollapsibleChannelProblem}}(}
 \DoxyCodeLine{ \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nup, }
@@ -1134,7 +1135,7 @@ The function {\ttfamily doc\+\_\+solution(...)} outputs the velocity and wall di
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//====start\_of\_doc\_solution===================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{//============================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//============================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classFSICollapsibleChannelProblem_aff5cacbc8d81f6c1beda947085496462}{FSICollapsibleChannelProblem<ELEMENT>:: doc\_solution}}(DocInfo\& doc\_info, }
 \DoxyCodeLine{                                                       ofstream\& trace\_file)}
@@ -1207,6 +1208,7 @@ This function is the same as the one used in \href{../../../navier_stokes/collap
 \item The blue numbers represent the number of internal {\ttfamily Data} values stored in an adjacent fluid element that affect the traction\+: In a 2D Crouzeix-\/\+Raviart element, each element stores three pressure values in its internal {\ttfamily Data} and all three pressure values affect the traction.
 \item Finally, the green numbers indicate the number of {\ttfamily Data} values that are (potentially) involved in the node-\/update operation for the nodes in the adjacent fluid elements. Recall that during the {\ttfamily Macro\+Element} -\/ based node-\/update we only refer to the wall via its representation as a {\ttfamily Wall\+As\+Geom\+Object}, i.\+e. as a \char`\"{}compound\char`\"{} {\ttfamily Geom\+Object}. The geometric {\ttfamily Data} of a compound {\ttfamily Geom\+Object} is given by the geometric {\ttfamily Data} of {\itshape all} its sub-\/objects. Therefore, the geometric {\ttfamily Data} of the {\ttfamily Wall\+As\+Geom\+Object} includes the positional {\ttfamily Data} of all {\ttfamily Solid\+Nodes} stored in this mesh. In an {\ttfamily FSIHermite\+Beam\+Element}, each {\ttfamily Solid\+Node} stores four values, representing the node\textquotesingle{}s x-\/ and y-\/positions and their derivatives with respect to the element\textquotesingle{}s local coordinate.
 \end{DoxyItemize}
+\end{DoxyItemize}
 \end{DoxyItemize} 
 \begin{DoxyImage}
 \includegraphics[width=0.75\textwidth]{crozier_raviart_fsi_macro}
@@ -1220,7 +1222,6 @@ Here is the corresponding animation for a discretisation with 2D Taylor-\/\+Hood
 \doxyfigcaption{Animation of the Data values that affect the fluid traction that the adjacent fluid elements exert onto the various FSIHermite\+Beam\+Elements in the wall mesh. (The fluid elements are 2D Taylor-\/\+Hood elements.) }
 \end{DoxyImage}
 
-\end{DoxyItemize}
 
 Finally, here is an animation that shows the (wall) degrees of freedom that affect the node-\/update of a given fluid node. The red square marker shows the fluid node; the green numbers show the number of the degrees of freedom at the {\ttfamily Solid\+Nodes} that are involved that fluid node\textquotesingle{}s node update. Again it is clear that the {\ttfamily Macro\+Element/\+Domain-\/based} node update procedure in which the wall mesh is represented by a compound {\ttfamily Geom\+Object} does not result in a sparse node-\/update procedure\+: Each {\ttfamily Solid\+Node} in the wall mesh is assumed to affect the position of all fluid nodes.
 
@@ -1242,8 +1243,8 @@ Finally, here is an animation that shows the (wall) degrees of freedom that affe
 \begin{DoxyEnumerate}
 \item The fluid-\/node update is not sparse\+: Since we cannot distinguish between the various sub-\/objects in the \char`\"{}compound\char`\"{} {\ttfamily Geom\+Object}, we can do no better than assuming the worst-\/case scenario, namely that {\itshape all} positional degrees of freedom of {\itshape all} {\ttfamily Solid\+Nodes} in the wall mesh potentially affect the nodal position in the fluid elements adjacent to the wall. Consequently, each {\ttfamily FSIHermite\+Beam\+Element} in the wall mesh depends on all solid mechanics degrees of freedom in the wall mesh. As a result, the wall discretisation completely loses its sparsity!
 \item When updating the position of the fluid nodes via the fluid element\textquotesingle{}s {\ttfamily Domain/\+Macro\+Element} representation, we obtain the wall shape from the {\ttfamily Geom\+Object\+::position(...)} function of the \char`\"{}compound\char`\"{} {\ttfamily Geom\+Object}, using the wall\textquotesingle{}s Lagrangian coordinate $ \xi $ as the \char`\"{}compound\char`\"{} {\ttfamily Geom\+Object\textquotesingle{}s} intrinsic coordinate. As discussed in the section \mbox{\hyperlink{index_wall_geom_object}{Representing the wall mesh as a Geom\+Object}}, this is a very costly operation, since we first have to determine which of the constituent {\ttfamily FSIHermite\+Beam\+Elements} \char`\"{}contains\char`\"{} the required Lagrangian coordinate, and then evaluate the Eulerian position of the relevant point in the element.
-\end{DoxyEnumerate}In \href{../../../interaction/fsi_collapsible_channel_algebraic/html/index.html}{\texttt{ the next example}} we will demonstrate how the use of the algebraic node update procedure, described in \href{../../../navier_stokes/algebraic_collapsible_channel/html/index.html}{\texttt{ an earlier example}}, allows us to avoid both problems, resulting in a much more efficient code.
-\end{DoxyItemize}
+\end{DoxyEnumerate}
+\end{DoxyItemize}In \href{../../../interaction/fsi_collapsible_channel_algebraic/html/index.html}{\texttt{ the next example}} we will demonstrate how the use of the algebraic node update procedure, described in \href{../../../navier_stokes/algebraic_collapsible_channel/html/index.html}{\texttt{ an earlier example}}, allows us to avoid both problems, resulting in a much more efficient code.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}

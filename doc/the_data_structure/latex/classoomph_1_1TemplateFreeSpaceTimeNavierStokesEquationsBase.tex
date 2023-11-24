@@ -29,10 +29,10 @@ virtual void \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEqu
 virtual int \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_abf2707dd8f8b4eb0d6b5358d039921e1}{p\+\_\+nodal\+\_\+index\+\_\+nst}} () const =0
 \begin{DoxyCompactList}\small\item\em Return the index at which the pressure is stored if it is stored at the nodes. If not stored at the nodes this will return a negative number. \end{DoxyCompactList}\item 
 virtual int \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_ac14a23704d1afd41be9be7cee3f75b5d}{p\+\_\+local\+\_\+eqn}} (const unsigned \&n) const =0
-\begin{DoxyCompactList}\small\item\em Access function for the local equation number information for the pressure. p\+\_\+local\+\_\+eqn\mbox{[}n\mbox{]} = local equation number or \texorpdfstring{$<$}{<} 0 if pinned. \end{DoxyCompactList}\item 
-virtual int \& \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_a5dc2c9b2ebf270f45ff2af2f5377cc48}{pinned\+\_\+fp\+\_\+pressure\+\_\+eqn}} ()=0
+\begin{DoxyCompactList}\small\item\em Access function for the local equation number information for the pressure. p\+\_\+local\+\_\+eqn\mbox{[}n\mbox{]} = local equation number or $<$ 0 if pinned. \end{DoxyCompactList}\item 
+virtual int \& \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_afc018b58bca3a36ae7abc7f7d05ff744}{pinned\+\_\+fp\+\_\+pressure\+\_\+eqn}} ()=0
 \begin{DoxyCompactList}\small\item\em Global eqn number of pressure dof that\textquotesingle{}s pinned in pressure adv diff problem. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_a8ae088f35f263d4f8de50839c9e04da3}{pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs}} (std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$ $>$ \&eqn\+\_\+number\+\_\+backup)=0
+virtual void \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_ad14f587cd6a139bf513a0fb72b8a7d0d}{pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs}} (std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$$>$ \&eqn\+\_\+number\+\_\+backup)=0
 \begin{DoxyCompactList}\small\item\em Pin all non-\/pressure dofs and backup eqn numbers of all \mbox{\hyperlink{classoomph_1_1Data}{Data}}. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_a154b81d06df3cd89e641dc95b46ef7d8}{build\+\_\+fp\+\_\+press\+\_\+adv\+\_\+diff\+\_\+robin\+\_\+bc\+\_\+element}} (const unsigned \&face\+\_\+index)=0
 \begin{DoxyCompactList}\small\item\em Build Face\+Elements that apply the Robin boundary condition to the pressure advection diffusion problem required by Fp preconditioner. \end{DoxyCompactList}\item 
@@ -51,10 +51,10 @@ virtual void \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEqu
 virtual int \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_abf2707dd8f8b4eb0d6b5358d039921e1}{p\+\_\+nodal\+\_\+index\+\_\+nst}} () const =0
 \begin{DoxyCompactList}\small\item\em Return the index at which the pressure is stored if it is stored at the nodes. If not stored at the nodes this will return a negative number. \end{DoxyCompactList}\item 
 virtual int \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_ac14a23704d1afd41be9be7cee3f75b5d}{p\+\_\+local\+\_\+eqn}} (const unsigned \&n) const =0
-\begin{DoxyCompactList}\small\item\em Access function for the local equation number information for the pressure. p\+\_\+local\+\_\+eqn\mbox{[}n\mbox{]} = local equation number or \texorpdfstring{$<$}{<} 0 if pinned. \end{DoxyCompactList}\item 
-virtual int \& \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_a5dc2c9b2ebf270f45ff2af2f5377cc48}{pinned\+\_\+fp\+\_\+pressure\+\_\+eqn}} ()=0
+\begin{DoxyCompactList}\small\item\em Access function for the local equation number information for the pressure. p\+\_\+local\+\_\+eqn\mbox{[}n\mbox{]} = local equation number or $<$ 0 if pinned. \end{DoxyCompactList}\item 
+virtual int \& \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_afc018b58bca3a36ae7abc7f7d05ff744}{pinned\+\_\+fp\+\_\+pressure\+\_\+eqn}} ()=0
 \begin{DoxyCompactList}\small\item\em Global eqn number of pressure dof that\textquotesingle{}s pinned in pressure adv diff problem. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_a8ae088f35f263d4f8de50839c9e04da3}{pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs}} (std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$ $>$ \&eqn\+\_\+number\+\_\+backup)=0
+virtual void \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_ad14f587cd6a139bf513a0fb72b8a7d0d}{pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs}} (std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$$>$ \&eqn\+\_\+number\+\_\+backup)=0
 \begin{DoxyCompactList}\small\item\em Pin all non-\/pressure dofs and backup eqn numbers of all \mbox{\hyperlink{classoomph_1_1Data}{Data}}. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_a154b81d06df3cd89e641dc95b46ef7d8}{build\+\_\+fp\+\_\+press\+\_\+adv\+\_\+diff\+\_\+robin\+\_\+bc\+\_\+element}} (const unsigned \&face\+\_\+index)=0
 \begin{DoxyCompactList}\small\item\em Build Face\+Elements that apply the Robin boundary condition to the pressure advection diffusion problem required by Fp preconditioner. \end{DoxyCompactList}\item 
@@ -73,10 +73,10 @@ virtual void \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEqu
 virtual int \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_abf2707dd8f8b4eb0d6b5358d039921e1}{p\+\_\+nodal\+\_\+index\+\_\+nst}} () const =0
 \begin{DoxyCompactList}\small\item\em Return the index at which the pressure is stored if it is stored at the nodes. If not stored at the nodes this will return a negative number. \end{DoxyCompactList}\item 
 virtual int \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_ac14a23704d1afd41be9be7cee3f75b5d}{p\+\_\+local\+\_\+eqn}} (const unsigned \&n) const =0
-\begin{DoxyCompactList}\small\item\em Access function for the local equation number information for the pressure. p\+\_\+local\+\_\+eqn\mbox{[}n\mbox{]} = local equation number or \texorpdfstring{$<$}{<} 0 if pinned. \end{DoxyCompactList}\item 
-virtual int \& \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_a5dc2c9b2ebf270f45ff2af2f5377cc48}{pinned\+\_\+fp\+\_\+pressure\+\_\+eqn}} ()=0
+\begin{DoxyCompactList}\small\item\em Access function for the local equation number information for the pressure. p\+\_\+local\+\_\+eqn\mbox{[}n\mbox{]} = local equation number or $<$ 0 if pinned. \end{DoxyCompactList}\item 
+virtual int \& \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_afc018b58bca3a36ae7abc7f7d05ff744}{pinned\+\_\+fp\+\_\+pressure\+\_\+eqn}} ()=0
 \begin{DoxyCompactList}\small\item\em Global eqn number of pressure dof that\textquotesingle{}s pinned in pressure adv diff problem. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_a8ae088f35f263d4f8de50839c9e04da3}{pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs}} (std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$ $>$ \&eqn\+\_\+number\+\_\+backup)=0
+virtual void \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_ad14f587cd6a139bf513a0fb72b8a7d0d}{pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs}} (std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$$>$ \&eqn\+\_\+number\+\_\+backup)=0
 \begin{DoxyCompactList}\small\item\em Pin all non-\/pressure dofs and backup eqn numbers of all \mbox{\hyperlink{classoomph_1_1Data}{Data}}. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_a154b81d06df3cd89e641dc95b46ef7d8}{build\+\_\+fp\+\_\+press\+\_\+adv\+\_\+diff\+\_\+robin\+\_\+bc\+\_\+element}} (const unsigned \&face\+\_\+index)=0
 \begin{DoxyCompactList}\small\item\em Build Face\+Elements that apply the Robin boundary condition to the pressure advection diffusion problem required by Fp preconditioner. \end{DoxyCompactList}\item 
@@ -92,7 +92,7 @@ virtual void \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEqu
 
 Template-\/free base class for Navier-\/\+Stokes equations to avoid casting problems 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00362}{362}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 362 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -109,7 +109,7 @@ Constructor (empty)
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00368}{368}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 368 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_ab1b0d29e41018d1c27dfc841e6de8b1d}\label{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_ab1b0d29e41018d1c27dfc841e6de8b1d}} 
 \index{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase@{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase}!````~TemplateFreeSpaceTimeNavierStokesEquationsBase@{$\sim$TemplateFreeSpaceTimeNavierStokesEquationsBase}}
@@ -123,7 +123,7 @@ Virtual destructor (empty)
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source_l00372}{372}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 372 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_a9394db2cd4884114c269f27fcd4371d7}\label{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_a9394db2cd4884114c269f27fcd4371d7}} 
 \index{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase@{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase}!TemplateFreeSpaceTimeNavierStokesEquationsBase@{TemplateFreeSpaceTimeNavierStokesEquationsBase}}
@@ -137,7 +137,7 @@ Constructor (empty)
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l00368}{368}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 368 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_ab1b0d29e41018d1c27dfc841e6de8b1d}\label{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_ab1b0d29e41018d1c27dfc841e6de8b1d}} 
 \index{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase@{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase}!````~TemplateFreeSpaceTimeNavierStokesEquationsBase@{$\sim$TemplateFreeSpaceTimeNavierStokesEquationsBase}}
@@ -151,7 +151,7 @@ Virtual destructor (empty)
 
 
 
-Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source_l00372}{372}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__navier__stokes__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 372 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_a9394db2cd4884114c269f27fcd4371d7}\label{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_a9394db2cd4884114c269f27fcd4371d7}} 
 \index{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase@{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase}!TemplateFreeSpaceTimeNavierStokesEquationsBase@{TemplateFreeSpaceTimeNavierStokesEquationsBase}}
@@ -165,7 +165,7 @@ Constructor (empty)
 
 
 
-Definition at line \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source_l00368}{368}} of file \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 368 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_ab1b0d29e41018d1c27dfc841e6de8b1d}\label{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_ab1b0d29e41018d1c27dfc841e6de8b1d}} 
 \index{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase@{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase}!````~TemplateFreeSpaceTimeNavierStokesEquationsBase@{$\sim$TemplateFreeSpaceTimeNavierStokesEquationsBase}}
@@ -179,7 +179,7 @@ Virtual destructor (empty)
 
 
 
-Definition at line \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source_l00372}{372}} of file \mbox{\hyperlink{spacetime__navier__stokes__elements_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+Definition at line 372 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
 
 
 
@@ -196,7 +196,7 @@ Build Face\+Elements that apply the Robin boundary condition to the pressure adv
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a1d5467f767697f5f7aed8c6d2de2c247}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a1d5467f767697f5f7aed8c6d2de2c247}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a1d5467f767697f5f7aed8c6d2de2c247}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aecc863dbffc26cf2961d7783bb5237c6}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aecc863dbffc26cf2961d7783bb5237c6}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aecc863dbffc26cf2961d7783bb5237c6}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aecc863dbffc26cf2961d7783bb5237c6}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aecc863dbffc26cf2961d7783bb5237c6}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aecc863dbffc26cf2961d7783bb5237c6}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a1d5467f767697f5f7aed8c6d2de2c247}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a1d5467f767697f5f7aed8c6d2de2c247}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a1d5467f767697f5f7aed8c6d2de2c247}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}.
 
 \mbox{\Hypertarget{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_a154b81d06df3cd89e641dc95b46ef7d8}\label{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_a154b81d06df3cd89e641dc95b46ef7d8}} 
 \index{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase@{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase}!build\_fp\_press\_adv\_diff\_robin\_bc\_element@{build\_fp\_press\_adv\_diff\_robin\_bc\_element}}
@@ -210,7 +210,7 @@ Build Face\+Elements that apply the Robin boundary condition to the pressure adv
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a1d5467f767697f5f7aed8c6d2de2c247}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a1d5467f767697f5f7aed8c6d2de2c247}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a1d5467f767697f5f7aed8c6d2de2c247}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aecc863dbffc26cf2961d7783bb5237c6}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aecc863dbffc26cf2961d7783bb5237c6}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aecc863dbffc26cf2961d7783bb5237c6}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aecc863dbffc26cf2961d7783bb5237c6}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aecc863dbffc26cf2961d7783bb5237c6}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aecc863dbffc26cf2961d7783bb5237c6}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a1d5467f767697f5f7aed8c6d2de2c247}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a1d5467f767697f5f7aed8c6d2de2c247}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a1d5467f767697f5f7aed8c6d2de2c247}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}.
 
 \mbox{\Hypertarget{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_a154b81d06df3cd89e641dc95b46ef7d8}\label{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_a154b81d06df3cd89e641dc95b46ef7d8}} 
 \index{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase@{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase}!build\_fp\_press\_adv\_diff\_robin\_bc\_element@{build\_fp\_press\_adv\_diff\_robin\_bc\_element}}
@@ -224,7 +224,7 @@ Build Face\+Elements that apply the Robin boundary condition to the pressure adv
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a1d5467f767697f5f7aed8c6d2de2c247}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a1d5467f767697f5f7aed8c6d2de2c247}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a1d5467f767697f5f7aed8c6d2de2c247}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aecc863dbffc26cf2961d7783bb5237c6}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aecc863dbffc26cf2961d7783bb5237c6}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aecc863dbffc26cf2961d7783bb5237c6}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aecc863dbffc26cf2961d7783bb5237c6}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aecc863dbffc26cf2961d7783bb5237c6}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aecc863dbffc26cf2961d7783bb5237c6}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a1d5467f767697f5f7aed8c6d2de2c247}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a1d5467f767697f5f7aed8c6d2de2c247}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_a1d5467f767697f5f7aed8c6d2de2c247}{oomph\+::\+Refineable\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a99f1990f0b91016e1c578b3f2d19f5d5}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}.
 
 \mbox{\Hypertarget{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_ad875a36463531c1015a1b40ad074f345}\label{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_ad875a36463531c1015a1b40ad074f345}} 
 \index{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase@{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase}!delete\_pressure\_advection\_diffusion\_robin\_elements@{delete\_pressure\_advection\_diffusion\_robin\_elements}}
@@ -368,7 +368,7 @@ Implements \mbox{\hyperlink{classoomph_1_1NavierStokesElementWithDiagonalMassMat
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a094b18cc4e05a83f4a43798c1ca0d88e}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a094b18cc4e05a83f4a43798c1ca0d88e}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a5cfde03983cee6ac154b320e1c77f1bb}{oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a5cfde03983cee6ac154b320e1c77f1bb}{oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a5cfde03983cee6ac154b320e1c77f1bb}{oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a094b18cc4e05a83f4a43798c1ca0d88e}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a094b18cc4e05a83f4a43798c1ca0d88e}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a5cfde03983cee6ac154b320e1c77f1bb}{oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a5cfde03983cee6ac154b320e1c77f1bb}{oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a5cfde03983cee6ac154b320e1c77f1bb}{oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a094b18cc4e05a83f4a43798c1ca0d88e}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a094b18cc4e05a83f4a43798c1ca0d88e}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}.
 
 \mbox{\Hypertarget{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_a0d65b8b47de40a3a41a2c234d6a47718}\label{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_a0d65b8b47de40a3a41a2c234d6a47718}} 
 \index{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase@{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase}!get\_pressure\_and\_velocity\_mass\_matrix\_diagonal@{get\_pressure\_and\_velocity\_mass\_matrix\_diagonal}}
@@ -386,7 +386,7 @@ Implements \mbox{\hyperlink{classoomph_1_1NavierStokesElementWithDiagonalMassMat
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a094b18cc4e05a83f4a43798c1ca0d88e}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a094b18cc4e05a83f4a43798c1ca0d88e}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a5cfde03983cee6ac154b320e1c77f1bb}{oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a5cfde03983cee6ac154b320e1c77f1bb}{oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a5cfde03983cee6ac154b320e1c77f1bb}{oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a094b18cc4e05a83f4a43798c1ca0d88e}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a094b18cc4e05a83f4a43798c1ca0d88e}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a5cfde03983cee6ac154b320e1c77f1bb}{oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a5cfde03983cee6ac154b320e1c77f1bb}{oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a5cfde03983cee6ac154b320e1c77f1bb}{oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a094b18cc4e05a83f4a43798c1ca0d88e}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a094b18cc4e05a83f4a43798c1ca0d88e}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}.
 
 \mbox{\Hypertarget{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_a0d65b8b47de40a3a41a2c234d6a47718}\label{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_a0d65b8b47de40a3a41a2c234d6a47718}} 
 \index{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase@{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase}!get\_pressure\_and\_velocity\_mass\_matrix\_diagonal@{get\_pressure\_and\_velocity\_mass\_matrix\_diagonal}}
@@ -404,7 +404,7 @@ Implements \mbox{\hyperlink{classoomph_1_1NavierStokesElementWithDiagonalMassMat
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a094b18cc4e05a83f4a43798c1ca0d88e}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a094b18cc4e05a83f4a43798c1ca0d88e}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a5cfde03983cee6ac154b320e1c77f1bb}{oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a5cfde03983cee6ac154b320e1c77f1bb}{oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a5cfde03983cee6ac154b320e1c77f1bb}{oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a094b18cc4e05a83f4a43798c1ca0d88e}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a094b18cc4e05a83f4a43798c1ca0d88e}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a5cfde03983cee6ac154b320e1c77f1bb}{oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a5cfde03983cee6ac154b320e1c77f1bb}{oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesEquations_a5cfde03983cee6ac154b320e1c77f1bb}{oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a094b18cc4e05a83f4a43798c1ca0d88e}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a094b18cc4e05a83f4a43798c1ca0d88e}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}.
 
 \mbox{\Hypertarget{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_ac14a23704d1afd41be9be7cee3f75b5d}\label{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_ac14a23704d1afd41be9be7cee3f75b5d}} 
 \index{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase@{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase}!p\_local\_eqn@{p\_local\_eqn}}
@@ -414,7 +414,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a09
 
 
 
-Access function for the local equation number information for the pressure. p\+\_\+local\+\_\+eqn\mbox{[}n\mbox{]} = local equation number or \texorpdfstring{$<$}{<} 0 if pinned. 
+Access function for the local equation number information for the pressure. p\+\_\+local\+\_\+eqn\mbox{[}n\mbox{]} = local equation number or $<$ 0 if pinned. 
 
 
 
@@ -428,7 +428,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a83f43
 
 
 
-Access function for the local equation number information for the pressure. p\+\_\+local\+\_\+eqn\mbox{[}n\mbox{]} = local equation number or \texorpdfstring{$<$}{<} 0 if pinned. 
+Access function for the local equation number information for the pressure. p\+\_\+local\+\_\+eqn\mbox{[}n\mbox{]} = local equation number or $<$ 0 if pinned. 
 
 
 
@@ -442,7 +442,7 @@ Implemented in \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a83f43
 
 
 
-Access function for the local equation number information for the pressure. p\+\_\+local\+\_\+eqn\mbox{[}n\mbox{]} = local equation number or \texorpdfstring{$<$}{<} 0 if pinned. 
+Access function for the local equation number information for the pressure. p\+\_\+local\+\_\+eqn\mbox{[}n\mbox{]} = local equation number or $<$ 0 if pinned. 
 
 
 
@@ -460,7 +460,7 @@ Return the index at which the pressure is stored if it is stored at the nodes. I
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a3310817460a8301d3eba3f68a2399a2a}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a3310817460a8301d3eba3f68a2399a2a}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a3310817460a8301d3eba3f68a2399a2a}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a3310817460a8301d3eba3f68a2399a2a}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a3310817460a8301d3eba3f68a2399a2a}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}, and \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a3310817460a8301d3eba3f68a2399a2a}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}.
 
 \mbox{\Hypertarget{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_abf2707dd8f8b4eb0d6b5358d039921e1}\label{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_abf2707dd8f8b4eb0d6b5358d039921e1}} 
 \index{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase@{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase}!p\_nodal\_index\_nst@{p\_nodal\_index\_nst}}
@@ -474,7 +474,7 @@ Return the index at which the pressure is stored if it is stored at the nodes. I
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a3310817460a8301d3eba3f68a2399a2a}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a3310817460a8301d3eba3f68a2399a2a}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a3310817460a8301d3eba3f68a2399a2a}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a3310817460a8301d3eba3f68a2399a2a}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a3310817460a8301d3eba3f68a2399a2a}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}, and \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a3310817460a8301d3eba3f68a2399a2a}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}.
 
 \mbox{\Hypertarget{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_abf2707dd8f8b4eb0d6b5358d039921e1}\label{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_abf2707dd8f8b4eb0d6b5358d039921e1}} 
 \index{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase@{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase}!p\_nodal\_index\_nst@{p\_nodal\_index\_nst}}
@@ -488,13 +488,13 @@ Return the index at which the pressure is stored if it is stored at the nodes. I
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a3310817460a8301d3eba3f68a2399a2a}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a3310817460a8301d3eba3f68a2399a2a}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a3310817460a8301d3eba3f68a2399a2a}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a3310817460a8301d3eba3f68a2399a2a}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a3310817460a8301d3eba3f68a2399a2a}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_a140cfd3ddcbdc3a1fd704a1bbea083cf}{oomph\+::\+QTaylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}, and \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a3310817460a8301d3eba3f68a2399a2a}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}.
 
-\mbox{\Hypertarget{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_a8ae088f35f263d4f8de50839c9e04da3}\label{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_a8ae088f35f263d4f8de50839c9e04da3}} 
+\mbox{\Hypertarget{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_ad14f587cd6a139bf513a0fb72b8a7d0d}\label{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_ad14f587cd6a139bf513a0fb72b8a7d0d}} 
 \index{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase@{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase}!pin\_all\_non\_pressure\_dofs@{pin\_all\_non\_pressure\_dofs}}
 \index{pin\_all\_non\_pressure\_dofs@{pin\_all\_non\_pressure\_dofs}!oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase@{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase}}
 \doxysubsubsection{\texorpdfstring{pin\_all\_non\_pressure\_dofs()}{pin\_all\_non\_pressure\_dofs()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Template\+Free\+Space\+Time\+Navier\+Stokes\+Equations\+Base\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs (\begin{DoxyParamCaption}\item[{std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$ $>$ \&}]{eqn\+\_\+number\+\_\+backup }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Template\+Free\+Space\+Time\+Navier\+Stokes\+Equations\+Base\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs (\begin{DoxyParamCaption}\item[{std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$$>$ \&}]{eqn\+\_\+number\+\_\+backup }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -502,13 +502,13 @@ Pin all non-\/pressure dofs and backup eqn numbers of all \mbox{\hyperlink{class
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_abbea6385303ebe299842bc8bdb2574a9}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_abbea6385303ebe299842bc8bdb2574a9}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_abbea6385303ebe299842bc8bdb2574a9}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aaf9a79f73d7d40142feb4dbf395428da}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aaf9a79f73d7d40142feb4dbf395428da}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aaf9a79f73d7d40142feb4dbf395428da}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}.
 
-\mbox{\Hypertarget{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_a8ae088f35f263d4f8de50839c9e04da3}\label{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_a8ae088f35f263d4f8de50839c9e04da3}} 
+\mbox{\Hypertarget{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_ad14f587cd6a139bf513a0fb72b8a7d0d}\label{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_ad14f587cd6a139bf513a0fb72b8a7d0d}} 
 \index{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase@{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase}!pin\_all\_non\_pressure\_dofs@{pin\_all\_non\_pressure\_dofs}}
 \index{pin\_all\_non\_pressure\_dofs@{pin\_all\_non\_pressure\_dofs}!oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase@{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase}}
 \doxysubsubsection{\texorpdfstring{pin\_all\_non\_pressure\_dofs()}{pin\_all\_non\_pressure\_dofs()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Template\+Free\+Space\+Time\+Navier\+Stokes\+Equations\+Base\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs (\begin{DoxyParamCaption}\item[{std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$ $>$ \&}]{eqn\+\_\+number\+\_\+backup }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Template\+Free\+Space\+Time\+Navier\+Stokes\+Equations\+Base\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs (\begin{DoxyParamCaption}\item[{std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$$>$ \&}]{eqn\+\_\+number\+\_\+backup }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -516,13 +516,13 @@ Pin all non-\/pressure dofs and backup eqn numbers of all \mbox{\hyperlink{class
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_abbea6385303ebe299842bc8bdb2574a9}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_abbea6385303ebe299842bc8bdb2574a9}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_abbea6385303ebe299842bc8bdb2574a9}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aaf9a79f73d7d40142feb4dbf395428da}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aaf9a79f73d7d40142feb4dbf395428da}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aaf9a79f73d7d40142feb4dbf395428da}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}.
 
-\mbox{\Hypertarget{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_a8ae088f35f263d4f8de50839c9e04da3}\label{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_a8ae088f35f263d4f8de50839c9e04da3}} 
+\mbox{\Hypertarget{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_ad14f587cd6a139bf513a0fb72b8a7d0d}\label{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_ad14f587cd6a139bf513a0fb72b8a7d0d}} 
 \index{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase@{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase}!pin\_all\_non\_pressure\_dofs@{pin\_all\_non\_pressure\_dofs}}
 \index{pin\_all\_non\_pressure\_dofs@{pin\_all\_non\_pressure\_dofs}!oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase@{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase}}
 \doxysubsubsection{\texorpdfstring{pin\_all\_non\_pressure\_dofs()}{pin\_all\_non\_pressure\_dofs()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Template\+Free\+Space\+Time\+Navier\+Stokes\+Equations\+Base\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs (\begin{DoxyParamCaption}\item[{std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$ $>$ \&}]{eqn\+\_\+number\+\_\+backup }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Template\+Free\+Space\+Time\+Navier\+Stokes\+Equations\+Base\+::pin\+\_\+all\+\_\+non\+\_\+pressure\+\_\+dofs (\begin{DoxyParamCaption}\item[{std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, std\+::vector$<$ int $>$$>$ \&}]{eqn\+\_\+number\+\_\+backup }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -530,13 +530,13 @@ Pin all non-\/pressure dofs and backup eqn numbers of all \mbox{\hyperlink{class
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_abbea6385303ebe299842bc8bdb2574a9}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_abbea6385303ebe299842bc8bdb2574a9}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_abbea6385303ebe299842bc8bdb2574a9}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aaf9a79f73d7d40142feb4dbf395428da}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aaf9a79f73d7d40142feb4dbf395428da}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aaf9a79f73d7d40142feb4dbf395428da}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}.
 
-\mbox{\Hypertarget{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_a5dc2c9b2ebf270f45ff2af2f5377cc48}\label{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_a5dc2c9b2ebf270f45ff2af2f5377cc48}} 
+\mbox{\Hypertarget{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_afc018b58bca3a36ae7abc7f7d05ff744}\label{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_afc018b58bca3a36ae7abc7f7d05ff744}} 
 \index{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase@{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase}!pinned\_fp\_pressure\_eqn@{pinned\_fp\_pressure\_eqn}}
 \index{pinned\_fp\_pressure\_eqn@{pinned\_fp\_pressure\_eqn}!oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase@{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase}}
 \doxysubsubsection{\texorpdfstring{pinned\_fp\_pressure\_eqn()}{pinned\_fp\_pressure\_eqn()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
-{\footnotesize\ttfamily virtual int \& oomph\+::\+Template\+Free\+Space\+Time\+Navier\+Stokes\+Equations\+Base\+::pinned\+\_\+fp\+\_\+pressure\+\_\+eqn (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual int\& oomph\+::\+Template\+Free\+Space\+Time\+Navier\+Stokes\+Equations\+Base\+::pinned\+\_\+fp\+\_\+pressure\+\_\+eqn (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -544,13 +544,13 @@ Global eqn number of pressure dof that\textquotesingle{}s pinned in pressure adv
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a7615a9257252b2565d98c6622bcf4f46}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a7615a9257252b2565d98c6622bcf4f46}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a7615a9257252b2565d98c6622bcf4f46}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a627c81c81889e09c54d3f30684370344}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a627c81c81889e09c54d3f30684370344}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a627c81c81889e09c54d3f30684370344}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}.
 
-\mbox{\Hypertarget{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_a5dc2c9b2ebf270f45ff2af2f5377cc48}\label{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_a5dc2c9b2ebf270f45ff2af2f5377cc48}} 
+\mbox{\Hypertarget{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_afc018b58bca3a36ae7abc7f7d05ff744}\label{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_afc018b58bca3a36ae7abc7f7d05ff744}} 
 \index{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase@{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase}!pinned\_fp\_pressure\_eqn@{pinned\_fp\_pressure\_eqn}}
 \index{pinned\_fp\_pressure\_eqn@{pinned\_fp\_pressure\_eqn}!oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase@{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase}}
 \doxysubsubsection{\texorpdfstring{pinned\_fp\_pressure\_eqn()}{pinned\_fp\_pressure\_eqn()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
-{\footnotesize\ttfamily virtual int \& oomph\+::\+Template\+Free\+Space\+Time\+Navier\+Stokes\+Equations\+Base\+::pinned\+\_\+fp\+\_\+pressure\+\_\+eqn (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual int\& oomph\+::\+Template\+Free\+Space\+Time\+Navier\+Stokes\+Equations\+Base\+::pinned\+\_\+fp\+\_\+pressure\+\_\+eqn (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -558,13 +558,13 @@ Global eqn number of pressure dof that\textquotesingle{}s pinned in pressure adv
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a7615a9257252b2565d98c6622bcf4f46}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a7615a9257252b2565d98c6622bcf4f46}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a7615a9257252b2565d98c6622bcf4f46}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a627c81c81889e09c54d3f30684370344}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a627c81c81889e09c54d3f30684370344}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a627c81c81889e09c54d3f30684370344}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}.
 
-\mbox{\Hypertarget{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_a5dc2c9b2ebf270f45ff2af2f5377cc48}\label{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_a5dc2c9b2ebf270f45ff2af2f5377cc48}} 
+\mbox{\Hypertarget{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_afc018b58bca3a36ae7abc7f7d05ff744}\label{classoomph_1_1TemplateFreeSpaceTimeNavierStokesEquationsBase_afc018b58bca3a36ae7abc7f7d05ff744}} 
 \index{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase@{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase}!pinned\_fp\_pressure\_eqn@{pinned\_fp\_pressure\_eqn}}
 \index{pinned\_fp\_pressure\_eqn@{pinned\_fp\_pressure\_eqn}!oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase@{oomph::TemplateFreeSpaceTimeNavierStokesEquationsBase}}
 \doxysubsubsection{\texorpdfstring{pinned\_fp\_pressure\_eqn()}{pinned\_fp\_pressure\_eqn()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
-{\footnotesize\ttfamily virtual int \& oomph\+::\+Template\+Free\+Space\+Time\+Navier\+Stokes\+Equations\+Base\+::pinned\+\_\+fp\+\_\+pressure\+\_\+eqn (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual int\& oomph\+::\+Template\+Free\+Space\+Time\+Navier\+Stokes\+Equations\+Base\+::pinned\+\_\+fp\+\_\+pressure\+\_\+eqn (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -572,7 +572,7 @@ Global eqn number of pressure dof that\textquotesingle{}s pinned in pressure adv
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a7615a9257252b2565d98c6622bcf4f46}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a7615a9257252b2565d98c6622bcf4f46}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a7615a9257252b2565d98c6622bcf4f46}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a627c81c81889e09c54d3f30684370344}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a627c81c81889e09c54d3f30684370344}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_a627c81c81889e09c54d3f30684370344}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ DIM $>$}}.
 
 
 

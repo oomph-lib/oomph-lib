@@ -18,25 +18,25 @@ Inheritance diagram for oomph\+::General\+Circle\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1GeneralCircle_aa4847492eeebdc2033c82734d7bcf2f2}{General\+Circle}} (const double \&\mbox{\hyperlink{classoomph_1_1GeneralCircle_a7149f657c7770fa6312179d3f10da5a9}{x\+\_\+c}}, const double \&\mbox{\hyperlink{classoomph_1_1GeneralCircle_ae7a8968f7a75a9c9f01df387382db953}{y\+\_\+c}}, const double \&r)
+\mbox{\hyperlink{classoomph_1_1GeneralCircle_aa4847492eeebdc2033c82734d7bcf2f2}{General\+Circle}} (const double \&\mbox{\hyperlink{classoomph_1_1GeneralCircle_a9c84564d8239bd8b4a2b28649638dd4a}{x\+\_\+c}}, const double \&\mbox{\hyperlink{classoomph_1_1GeneralCircle_afa91b6356920d73e05f81d6e7aaf0bf7}{y\+\_\+c}}, const double \&r)
 \begin{DoxyCompactList}\small\item\em Constructor\+: Pass x and y-\/coords of centre and radius (all pinned) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1GeneralCircle_afdcca2cddb52a51abc693c7d7ba6b173}{General\+Circle}} (Data $\ast$\mbox{\hyperlink{classoomph_1_1GeneralCircle_adf90890d68bd66550926e2611f634470}{geom\+\_\+data\+\_\+pt}})
+\mbox{\hyperlink{classoomph_1_1GeneralCircle_afdcca2cddb52a51abc693c7d7ba6b173}{General\+Circle}} (Data $\ast$\mbox{\hyperlink{classoomph_1_1GeneralCircle_ad5c33bb9a727a8fe28be0087f5baa9f5}{geom\+\_\+data\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Alternative constructor\+: Pass x and y-\/coords of centre and radius (all as part of Data) \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1GeneralCircle_a4ba230f7d22d7b116603115952ca50b0}{$\sim$\+General\+Circle}} ()
 \begin{DoxyCompactList}\small\item\em Destructor\+: Clean up if necessary. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1GeneralCircle_acc120835b4f0c69e7dce7e839db63d1d}{position}} (const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r) const
 \begin{DoxyCompactList}\small\item\em Position Vector at Lagrangian coordinate zeta. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1GeneralCircle_a94f7f58a7131f80a245007ff0da73f74}{position}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r) const
-\begin{DoxyCompactList}\small\item\em Position Vector at Lagrangian coordinate zeta at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous level). Steady object, so we simply forward the call to the steady version. \end{DoxyCompactList}\item 
-double \& \mbox{\hyperlink{classoomph_1_1GeneralCircle_a7149f657c7770fa6312179d3f10da5a9}{x\+\_\+c}} ()
+\begin{DoxyCompactList}\small\item\em Position Vector at Lagrangian coordinate zeta at time level t (t=0\+: present; t$>$0\+: previous level). Steady object, so we simply forward the call to the steady version. \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classoomph_1_1GeneralCircle_a9c84564d8239bd8b4a2b28649638dd4a}{x\+\_\+c}} ()
 \begin{DoxyCompactList}\small\item\em Access function to x-\/coordinate of centre of circle. \end{DoxyCompactList}\item 
-double \& \mbox{\hyperlink{classoomph_1_1GeneralCircle_ae7a8968f7a75a9c9f01df387382db953}{y\+\_\+c}} ()
+double \& \mbox{\hyperlink{classoomph_1_1GeneralCircle_afa91b6356920d73e05f81d6e7aaf0bf7}{y\+\_\+c}} ()
 \begin{DoxyCompactList}\small\item\em Access function to y-\/coordinate of centre of circle. \end{DoxyCompactList}\item 
-double \& \mbox{\hyperlink{classoomph_1_1GeneralCircle_a101fe4789526ebb17796de8219cb4c35}{R}} ()
+double \& \mbox{\hyperlink{classoomph_1_1GeneralCircle_adc9df8b14326bddb144231b0be5d06c0}{R}} ()
 \begin{DoxyCompactList}\small\item\em Access function to radius of circle. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1GeneralCircle_a7cd69f069bb8042ba972b89940ec1808}{ngeom\+\_\+data}} () const
 \begin{DoxyCompactList}\small\item\em How many items of Data does the shape of the object depend on? \end{DoxyCompactList}\item 
-Data $\ast$ \mbox{\hyperlink{classoomph_1_1GeneralCircle_adf90890d68bd66550926e2611f634470}{geom\+\_\+data\+\_\+pt}} (const unsigned \&j)
+Data $\ast$ \mbox{\hyperlink{classoomph_1_1GeneralCircle_ad5c33bb9a727a8fe28be0087f5baa9f5}{geom\+\_\+data\+\_\+pt}} (const unsigned \&j)
 \begin{DoxyCompactList}\small\item\em Return pointer to the j-\/th Data item that the object\textquotesingle{}s shape depends on. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -52,7 +52,7 @@ bool \mbox{\hyperlink{classoomph_1_1GeneralCircle_a6772cb425079b3afd2479663ddb0c
 
 \mbox{\hyperlink{classoomph_1_1GeneralCircle}{General\+Circle}} in 2D space. \[ x = X_c + R \cos(\zeta) \] \[ y = Y_c + R \sin(\zeta) \] The three parameters $ X_c, Y_c $ and $ R $ are represented by Data and can therefore be unknowns in the problem. 
 
-Definition at line \mbox{\hyperlink{circle_8h_source_l00095}{95}} of file \mbox{\hyperlink{circle_8h_source}{circle.\+h}}.
+Definition at line 95 of file circle.\+h.
 
 
 
@@ -69,11 +69,11 @@ Constructor\+: Pass x and y-\/coords of centre and radius (all pinned)
 
 
 
-Definition at line \mbox{\hyperlink{circle_8h_source_l00101}{101}} of file \mbox{\hyperlink{circle_8h_source}{circle.\+h}}.
+Definition at line 101 of file circle.\+h.
 
 
 
-References \mbox{\hyperlink{circle_8h_source_l00224}{Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{circle_8h_source_l00227}{Must\+\_\+clean\+\_\+up}}, \mbox{\hyperlink{circle_8h_source_l00205}{x\+\_\+c()}}, and \mbox{\hyperlink{circle_8h_source_l00208}{y\+\_\+c()}}.
+References Geom\+\_\+data\+\_\+pt, Must\+\_\+clean\+\_\+up, x\+\_\+c(), and y\+\_\+c().
 
 \mbox{\Hypertarget{classoomph_1_1GeneralCircle_afdcca2cddb52a51abc693c7d7ba6b173}\label{classoomph_1_1GeneralCircle_afdcca2cddb52a51abc693c7d7ba6b173}} 
 \index{oomph::GeneralCircle@{oomph::GeneralCircle}!GeneralCircle@{GeneralCircle}}
@@ -89,16 +89,16 @@ Alternative constructor\+: Pass x and y-\/coords of centre and radius (all as pa
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\mbox{\hyperlink{classoomph_1_1GeneralCircle_a4a707f37b32d447dbe965177e442aa76}{Geom\_data\_pt}}[0]-\/>value(0) = X\_c;}
 \DoxyCodeLine{\mbox{\hyperlink{classoomph_1_1GeneralCircle_a4a707f37b32d447dbe965177e442aa76}{Geom\_data\_pt}}[0]-\/>value(1) = Y\_c;}
-\DoxyCodeLine{\mbox{\hyperlink{classoomph_1_1GeneralCircle_a4a707f37b32d447dbe965177e442aa76}{Geom\_data\_pt}}[0]-\/>value(2) = \mbox{\hyperlink{classoomph_1_1GeneralCircle_a101fe4789526ebb17796de8219cb4c35}{R}};}
+\DoxyCodeLine{\mbox{\hyperlink{classoomph_1_1GeneralCircle_a4a707f37b32d447dbe965177e442aa76}{Geom\_data\_pt}}[0]-\/>value(2) = \mbox{\hyperlink{classoomph_1_1GeneralCircle_adc9df8b14326bddb144231b0be5d06c0}{R}};}
 
 \end{DoxyCode}
  
 
-Definition at line \mbox{\hyperlink{circle_8h_source_l00143}{143}} of file \mbox{\hyperlink{circle_8h_source}{circle.\+h}}.
+Definition at line 143 of file circle.\+h.
 
 
 
-References \mbox{\hyperlink{circle_8h_source_l00218}{geom\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{circle_8h_source_l00224}{Geom\+\_\+data\+\_\+pt}}, and \mbox{\hyperlink{circle_8h_source_l00227}{Must\+\_\+clean\+\_\+up}}.
+References geom\+\_\+data\+\_\+pt(), Geom\+\_\+data\+\_\+pt, and Must\+\_\+clean\+\_\+up.
 
 \mbox{\Hypertarget{classoomph_1_1GeneralCircle_a4ba230f7d22d7b116603115952ca50b0}\label{classoomph_1_1GeneralCircle_a4ba230f7d22d7b116603115952ca50b0}} 
 \index{oomph::GeneralCircle@{oomph::GeneralCircle}!````~GeneralCircle@{$\sim$GeneralCircle}}
@@ -112,20 +112,20 @@ Destructor\+: Clean up if necessary.
 
 
 
-Definition at line \mbox{\hyperlink{circle_8h_source_l00167}{167}} of file \mbox{\hyperlink{circle_8h_source}{circle.\+h}}.
+Definition at line 167 of file circle.\+h.
 
 
 
-References \mbox{\hyperlink{circle_8h_source_l00224}{Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{circle_8h_source_l00227}{Must\+\_\+clean\+\_\+up}}, and \mbox{\hyperlink{circle_8h_source_l00214}{ngeom\+\_\+data()}}.
+References Geom\+\_\+data\+\_\+pt, Must\+\_\+clean\+\_\+up, and ngeom\+\_\+data().
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1GeneralCircle_adf90890d68bd66550926e2611f634470}\label{classoomph_1_1GeneralCircle_adf90890d68bd66550926e2611f634470}} 
+\mbox{\Hypertarget{classoomph_1_1GeneralCircle_ad5c33bb9a727a8fe28be0087f5baa9f5}\label{classoomph_1_1GeneralCircle_ad5c33bb9a727a8fe28be0087f5baa9f5}} 
 \index{oomph::GeneralCircle@{oomph::GeneralCircle}!geom\_data\_pt@{geom\_data\_pt}}
 \index{geom\_data\_pt@{geom\_data\_pt}!oomph::GeneralCircle@{oomph::GeneralCircle}}
 \doxysubsubsection{\texorpdfstring{geom\_data\_pt()}{geom\_data\_pt()}}
-{\footnotesize\ttfamily Data $\ast$ oomph\+::\+General\+Circle\+::geom\+\_\+data\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily Data$\ast$ oomph\+::\+General\+Circle\+::geom\+\_\+data\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -133,15 +133,15 @@ Return pointer to the j-\/th Data item that the object\textquotesingle{}s shape 
 
 
 
-Definition at line \mbox{\hyperlink{circle_8h_source_l00218}{218}} of file \mbox{\hyperlink{circle_8h_source}{circle.\+h}}.
+Definition at line 218 of file circle.\+h.
 
 
 
-References \mbox{\hyperlink{circle_8h_source_l00224}{Geom\+\_\+data\+\_\+pt}}.
+References Geom\+\_\+data\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{circle_8h_source_l00143}{General\+Circle()}}.
+Referenced by General\+Circle().
 
 \mbox{\Hypertarget{classoomph_1_1GeneralCircle_a7cd69f069bb8042ba972b89940ec1808}\label{classoomph_1_1GeneralCircle_a7cd69f069bb8042ba972b89940ec1808}} 
 \index{oomph::GeneralCircle@{oomph::GeneralCircle}!ngeom\_data@{ngeom\_data}}
@@ -155,15 +155,15 @@ How many items of Data does the shape of the object depend on?
 
 
 
-Definition at line \mbox{\hyperlink{circle_8h_source_l00214}{214}} of file \mbox{\hyperlink{circle_8h_source}{circle.\+h}}.
+Definition at line 214 of file circle.\+h.
 
 
 
-References \mbox{\hyperlink{circle_8h_source_l00224}{Geom\+\_\+data\+\_\+pt}}.
+References Geom\+\_\+data\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{circle_8h_source_l00167}{$\sim$\+General\+Circle()}}.
+Referenced by $\sim$\+General\+Circle().
 
 \mbox{\Hypertarget{classoomph_1_1GeneralCircle_a94f7f58a7131f80a245007ff0da73f74}\label{classoomph_1_1GeneralCircle_a94f7f58a7131f80a245007ff0da73f74}} 
 \index{oomph::GeneralCircle@{oomph::GeneralCircle}!position@{position}}
@@ -173,15 +173,15 @@ Referenced by \mbox{\hyperlink{circle_8h_source_l00167}{$\sim$\+General\+Circle(
 
 
 
-Position Vector at Lagrangian coordinate zeta at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous level). Steady object, so we simply forward the call to the steady version. 
+Position Vector at Lagrangian coordinate zeta at time level t (t=0\+: present; t$>$0\+: previous level). Steady object, so we simply forward the call to the steady version. 
 
 
 
-Definition at line \mbox{\hyperlink{circle_8h_source_l00200}{200}} of file \mbox{\hyperlink{circle_8h_source}{circle.\+h}}.
+Definition at line 200 of file circle.\+h.
 
 
 
-References \mbox{\hyperlink{circle_8h_source_l00183}{position()}}.
+References position().
 
 \mbox{\Hypertarget{classoomph_1_1GeneralCircle_acc120835b4f0c69e7dce7e839db63d1d}\label{classoomph_1_1GeneralCircle_acc120835b4f0c69e7dce7e839db63d1d}} 
 \index{oomph::GeneralCircle@{oomph::GeneralCircle}!position@{position}}
@@ -195,21 +195,21 @@ Position Vector at Lagrangian coordinate zeta.
 
 
 
-Definition at line \mbox{\hyperlink{circle_8h_source_l00183}{183}} of file \mbox{\hyperlink{circle_8h_source}{circle.\+h}}.
+Definition at line 183 of file circle.\+h.
 
 
 
-References \mbox{\hyperlink{circle_8h_source_l00224}{Geom\+\_\+data\+\_\+pt}}, and \mbox{\hyperlink{circle_8h_source_l00211}{R()}}.
+References Geom\+\_\+data\+\_\+pt, and R().
 
 
 
-Referenced by \mbox{\hyperlink{circle_8cc_source_l00040}{main()}}, and \mbox{\hyperlink{circle_8h_source_l00200}{position()}}.
+Referenced by main(), and position().
 
-\mbox{\Hypertarget{classoomph_1_1GeneralCircle_a101fe4789526ebb17796de8219cb4c35}\label{classoomph_1_1GeneralCircle_a101fe4789526ebb17796de8219cb4c35}} 
+\mbox{\Hypertarget{classoomph_1_1GeneralCircle_adc9df8b14326bddb144231b0be5d06c0}\label{classoomph_1_1GeneralCircle_adc9df8b14326bddb144231b0be5d06c0}} 
 \index{oomph::GeneralCircle@{oomph::GeneralCircle}!R@{R}}
 \index{R@{R}!oomph::GeneralCircle@{oomph::GeneralCircle}}
 \doxysubsubsection{\texorpdfstring{R()}{R()}}
-{\footnotesize\ttfamily double \& oomph\+::\+General\+Circle\+::R (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double\& oomph\+::\+General\+Circle\+::R (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -217,21 +217,21 @@ Access function to radius of circle.
 
 
 
-Definition at line \mbox{\hyperlink{circle_8h_source_l00211}{211}} of file \mbox{\hyperlink{circle_8h_source}{circle.\+h}}.
+Definition at line 211 of file circle.\+h.
 
 
 
-References \mbox{\hyperlink{circle_8h_source_l00224}{Geom\+\_\+data\+\_\+pt}}.
+References Geom\+\_\+data\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{circle_8h_source_l00183}{position()}}.
+Referenced by position().
 
-\mbox{\Hypertarget{classoomph_1_1GeneralCircle_a7149f657c7770fa6312179d3f10da5a9}\label{classoomph_1_1GeneralCircle_a7149f657c7770fa6312179d3f10da5a9}} 
+\mbox{\Hypertarget{classoomph_1_1GeneralCircle_a9c84564d8239bd8b4a2b28649638dd4a}\label{classoomph_1_1GeneralCircle_a9c84564d8239bd8b4a2b28649638dd4a}} 
 \index{oomph::GeneralCircle@{oomph::GeneralCircle}!x\_c@{x\_c}}
 \index{x\_c@{x\_c}!oomph::GeneralCircle@{oomph::GeneralCircle}}
 \doxysubsubsection{\texorpdfstring{x\_c()}{x\_c()}}
-{\footnotesize\ttfamily double \& oomph\+::\+General\+Circle\+::x\+\_\+c (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double\& oomph\+::\+General\+Circle\+::x\+\_\+c (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -239,21 +239,21 @@ Access function to x-\/coordinate of centre of circle.
 
 
 
-Definition at line \mbox{\hyperlink{circle_8h_source_l00205}{205}} of file \mbox{\hyperlink{circle_8h_source}{circle.\+h}}.
+Definition at line 205 of file circle.\+h.
 
 
 
-References \mbox{\hyperlink{circle_8h_source_l00224}{Geom\+\_\+data\+\_\+pt}}.
+References Geom\+\_\+data\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{circle_8h_source_l00101}{General\+Circle()}}.
+Referenced by General\+Circle().
 
-\mbox{\Hypertarget{classoomph_1_1GeneralCircle_ae7a8968f7a75a9c9f01df387382db953}\label{classoomph_1_1GeneralCircle_ae7a8968f7a75a9c9f01df387382db953}} 
+\mbox{\Hypertarget{classoomph_1_1GeneralCircle_afa91b6356920d73e05f81d6e7aaf0bf7}\label{classoomph_1_1GeneralCircle_afa91b6356920d73e05f81d6e7aaf0bf7}} 
 \index{oomph::GeneralCircle@{oomph::GeneralCircle}!y\_c@{y\_c}}
 \index{y\_c@{y\_c}!oomph::GeneralCircle@{oomph::GeneralCircle}}
 \doxysubsubsection{\texorpdfstring{y\_c()}{y\_c()}}
-{\footnotesize\ttfamily double \& oomph\+::\+General\+Circle\+::y\+\_\+c (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double\& oomph\+::\+General\+Circle\+::y\+\_\+c (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -261,15 +261,15 @@ Access function to y-\/coordinate of centre of circle.
 
 
 
-Definition at line \mbox{\hyperlink{circle_8h_source_l00208}{208}} of file \mbox{\hyperlink{circle_8h_source}{circle.\+h}}.
+Definition at line 208 of file circle.\+h.
 
 
 
-References \mbox{\hyperlink{circle_8h_source_l00224}{Geom\+\_\+data\+\_\+pt}}.
+References Geom\+\_\+data\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{circle_8h_source_l00101}{General\+Circle()}}.
+Referenced by General\+Circle().
 
 
 
@@ -286,11 +286,11 @@ Vector of pointers to Data items that affects the object\textquotesingle{}s shap
 
 
 
-Definition at line \mbox{\hyperlink{circle_8h_source_l00224}{224}} of file \mbox{\hyperlink{circle_8h_source}{circle.\+h}}.
+Definition at line 224 of file circle.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{circle_8h_source_l00101}{General\+Circle()}}, \mbox{\hyperlink{circle_8h_source_l00218}{geom\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{circle_8h_source_l00214}{ngeom\+\_\+data()}}, \mbox{\hyperlink{circle_8h_source_l00183}{position()}}, \mbox{\hyperlink{circle_8h_source_l00211}{R()}}, \mbox{\hyperlink{circle_8h_source_l00205}{x\+\_\+c()}}, \mbox{\hyperlink{circle_8h_source_l00208}{y\+\_\+c()}}, and \mbox{\hyperlink{circle_8h_source_l00167}{$\sim$\+General\+Circle()}}.
+Referenced by General\+Circle(), geom\+\_\+data\+\_\+pt(), ngeom\+\_\+data(), position(), R(), x\+\_\+c(), y\+\_\+c(), and $\sim$\+General\+Circle().
 
 \mbox{\Hypertarget{classoomph_1_1GeneralCircle_a6772cb425079b3afd2479663ddb0cb81}\label{classoomph_1_1GeneralCircle_a6772cb425079b3afd2479663ddb0cb81}} 
 \index{oomph::GeneralCircle@{oomph::GeneralCircle}!Must\_clean\_up@{Must\_clean\_up}}
@@ -304,11 +304,11 @@ Do I need to clean up?
 
 
 
-Definition at line \mbox{\hyperlink{circle_8h_source_l00227}{227}} of file \mbox{\hyperlink{circle_8h_source}{circle.\+h}}.
+Definition at line 227 of file circle.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{circle_8h_source_l00101}{General\+Circle()}}, and \mbox{\hyperlink{circle_8h_source_l00167}{$\sim$\+General\+Circle()}}.
+Referenced by General\+Circle(), and $\sim$\+General\+Circle().
 
 
 

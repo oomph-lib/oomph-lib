@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1MatrixBasedLumpedPreconditioner}{}\doxysection{oomph\+::Matrix\+Based\+Lumped\+Preconditioner\texorpdfstring{$<$}{<} MATRIX \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1MatrixBasedLumpedPreconditioner}{}\doxysection{oomph\+::Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$ Class Template Reference}
 \label{classoomph_1_1MatrixBasedLumpedPreconditioner}\index{oomph::MatrixBasedLumpedPreconditioner$<$ MATRIX $>$@{oomph::MatrixBasedLumpedPreconditioner$<$ MATRIX $>$}}
 
 
@@ -9,7 +9,7 @@ Matrix-\/based lumped preconditioner.
 
 {\ttfamily \#include $<$general\+\_\+purpose\+\_\+preconditioners.\+h$>$}
 
-Inheritance diagram for oomph\+::Matrix\+Based\+Lumped\+Preconditioner\texorpdfstring{$<$}{<} MATRIX \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=3.000000cm]{classoomph_1_1MatrixBasedLumpedPreconditioner}
@@ -32,9 +32,9 @@ void \mbox{\hyperlink{classoomph_1_1MatrixBasedLumpedPreconditioner_a7fc9e4c0ef3
 \begin{DoxyCompactList}\small\item\em Setup the preconditioner (store diagonal) from the fully assembled matrix. \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} pointer is ignored. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1MatrixBasedLumpedPreconditioner_a43eed9c6a5622d62b2261e83c01d04ec}{positive\+\_\+matrix}} () const
 \begin{DoxyCompactList}\small\item\em Access function to the Positive\+\_\+matrix which indicates whether lumped matrix was positive. \end{DoxyCompactList}\item 
-double $\ast$ \mbox{\hyperlink{classoomph_1_1MatrixBasedLumpedPreconditioner_a64c24bfb89ed6e9c6567a6a7afee9c28}{inverse\+\_\+lumped\+\_\+vector\+\_\+pt}} ()
+double $\ast$ \mbox{\hyperlink{classoomph_1_1MatrixBasedLumpedPreconditioner_abbfef1f645630a06b5824b0cc69aa3e5}{inverse\+\_\+lumped\+\_\+vector\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function to the inverse of the lumped vector assembled in the preconditioner setup routine. \end{DoxyCompactList}\item 
-unsigned \& \mbox{\hyperlink{classoomph_1_1MatrixBasedLumpedPreconditioner_a8522cfc6f11560318201aab5169cfd3c}{nrow}} ()
+unsigned \& \mbox{\hyperlink{classoomph_1_1MatrixBasedLumpedPreconditioner_ad165843e92c2aac0367afd9bb0ce29b0}{nrow}} ()
 \begin{DoxyCompactList}\small\item\em Access function to number of rows for this preconditioner. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1MatrixBasedLumpedPreconditioner_a17703845dc37066eb6851e12b1f182cb}{clean\+\_\+up\+\_\+memory}} ()
 \begin{DoxyCompactList}\small\item\em clean up memory -\/ just delete the inverse lumped vector \end{DoxyCompactList}\item 
@@ -42,9 +42,9 @@ void \mbox{\hyperlink{classoomph_1_1MatrixBasedLumpedPreconditioner_a770efac3c2e
 \begin{DoxyCompactList}\small\item\em Setup the lumped preconditioner. Specialisation for \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix}{CCDouble\+Matrix}}. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1MatrixBasedLumpedPreconditioner_a0942572dde419e2658226ebc6e0d5dfd}{setup}} ()
 \begin{DoxyCompactList}\small\item\em Setup the lumped preconditioner. Specialisation for \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}}. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1MatrixBasedLumpedPreconditioner_a0b95e7159585b5151f9e5dc1d1713655}{setup}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$\mbox{\hyperlink{classoomph_1_1Preconditioner_a08e0582b77c6cbfaf85b80a4ac5c11f3}{matrix\+\_\+pt}})
+void \mbox{\hyperlink{classoomph_1_1MatrixBasedLumpedPreconditioner_a0b95e7159585b5151f9e5dc1d1713655}{setup}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$\mbox{\hyperlink{classoomph_1_1Preconditioner_a66726e9df31365df646cdf83a975aa26}{matrix\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em For some reason we need to remind the compiler that there is also a function named setup in the base class. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1MatrixBasedLumpedPreconditioner_a783fae97e4b898f8de72b504a4f4bec6}{setup}} (const \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$\mbox{\hyperlink{classoomph_1_1Preconditioner_a08e0582b77c6cbfaf85b80a4ac5c11f3}{matrix\+\_\+pt}})
+void \mbox{\hyperlink{classoomph_1_1MatrixBasedLumpedPreconditioner_a783fae97e4b898f8de72b504a4f4bec6}{setup}} (const \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$\mbox{\hyperlink{classoomph_1_1Preconditioner_a66726e9df31365df646cdf83a975aa26}{matrix\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em For some reason we need to remind the compiler that there is also a function named setup in the base class. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1MatrixBasedLumpedPreconditioner_af4886f4efe510e5c9b0eb19422943588}{setup}} ()=0
 \begin{DoxyCompactList}\small\item\em For some reason we need to remind the compiler that there is also a function named setup in the base class. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -63,9 +63,10 @@ unsigned \mbox{\hyperlink{classoomph_1_1MatrixBasedLumpedPreconditioner_a6aa1a6b
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$typename MATRIX$>$\newline
 class oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$}
+
 Matrix-\/based lumped preconditioner. 
 
-Definition at line \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00080}{80}} of file \mbox{\hyperlink{general__purpose__preconditioners_8h_source}{general\+\_\+purpose\+\_\+preconditioners.\+h}}.
+Definition at line 80 of file general\+\_\+purpose\+\_\+preconditioners.\+h.
 
 
 
@@ -83,11 +84,11 @@ Constructor.
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00084}{84}} of file \mbox{\hyperlink{general__purpose__preconditioners_8h_source}{general\+\_\+purpose\+\_\+preconditioners.\+h}}.
+Definition at line 84 of file general\+\_\+purpose\+\_\+preconditioners.\+h.
 
 
 
-References \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00166}{oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::\+Inv\+\_\+lumped\+\_\+diag\+\_\+pt}}, and \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00169}{oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::\+Positive\+\_\+matrix}}.
+References oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::\+Inv\+\_\+lumped\+\_\+diag\+\_\+pt, and oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::\+Positive\+\_\+matrix.
 
 \mbox{\Hypertarget{classoomph_1_1MatrixBasedLumpedPreconditioner_a1db36c78089a01b009fa5f26cf84d8a4}\label{classoomph_1_1MatrixBasedLumpedPreconditioner_a1db36c78089a01b009fa5f26cf84d8a4}} 
 \index{oomph::MatrixBasedLumpedPreconditioner$<$ MATRIX $>$@{oomph::MatrixBasedLumpedPreconditioner$<$ MATRIX $>$}!````~MatrixBasedLumpedPreconditioner@{$\sim$MatrixBasedLumpedPreconditioner}}
@@ -102,11 +103,11 @@ Destructor.
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00094}{94}} of file \mbox{\hyperlink{general__purpose__preconditioners_8h_source}{general\+\_\+purpose\+\_\+preconditioners.\+h}}.
+Definition at line 94 of file general\+\_\+purpose\+\_\+preconditioners.\+h.
 
 
 
-References \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00159}{oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::clean\+\_\+up\+\_\+memory()}}.
+References oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::clean\+\_\+up\+\_\+memory().
 
 \mbox{\Hypertarget{classoomph_1_1MatrixBasedLumpedPreconditioner_a1fcc7c54d67e916e8f5c689053289a58}\label{classoomph_1_1MatrixBasedLumpedPreconditioner_a1fcc7c54d67e916e8f5c689053289a58}} 
 \index{oomph::MatrixBasedLumpedPreconditioner$<$ MATRIX $>$@{oomph::MatrixBasedLumpedPreconditioner$<$ MATRIX $>$}!MatrixBasedLumpedPreconditioner@{MatrixBasedLumpedPreconditioner}}
@@ -139,22 +140,22 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Preconditioner_a46c31c416829be
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00159}{159}} of file \mbox{\hyperlink{general__purpose__preconditioners_8h_source}{general\+\_\+purpose\+\_\+preconditioners.\+h}}.
+Definition at line 159 of file general\+\_\+purpose\+\_\+preconditioners.\+h.
 
 
 
-References \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00166}{oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::\+Inv\+\_\+lumped\+\_\+diag\+\_\+pt}}.
+References oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::\+Inv\+\_\+lumped\+\_\+diag\+\_\+pt.
 
 
 
-Referenced by \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00094}{oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::$\sim$\+Matrix\+Based\+Lumped\+Preconditioner()}}.
+Referenced by oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::$\sim$\+Matrix\+Based\+Lumped\+Preconditioner().
 
-\mbox{\Hypertarget{classoomph_1_1MatrixBasedLumpedPreconditioner_a64c24bfb89ed6e9c6567a6a7afee9c28}\label{classoomph_1_1MatrixBasedLumpedPreconditioner_a64c24bfb89ed6e9c6567a6a7afee9c28}} 
+\mbox{\Hypertarget{classoomph_1_1MatrixBasedLumpedPreconditioner_abbfef1f645630a06b5824b0cc69aa3e5}\label{classoomph_1_1MatrixBasedLumpedPreconditioner_abbfef1f645630a06b5824b0cc69aa3e5}} 
 \index{oomph::MatrixBasedLumpedPreconditioner$<$ MATRIX $>$@{oomph::MatrixBasedLumpedPreconditioner$<$ MATRIX $>$}!inverse\_lumped\_vector\_pt@{inverse\_lumped\_vector\_pt}}
 \index{inverse\_lumped\_vector\_pt@{inverse\_lumped\_vector\_pt}!oomph::MatrixBasedLumpedPreconditioner$<$ MATRIX $>$@{oomph::MatrixBasedLumpedPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{inverse\_lumped\_vector\_pt()}{inverse\_lumped\_vector\_pt()}}
 {\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
-double $\ast$ \mbox{\hyperlink{classoomph_1_1MatrixBasedLumpedPreconditioner}{oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner}}$<$ MATRIX $>$\+::inverse\+\_\+lumped\+\_\+vector\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+double$\ast$ \mbox{\hyperlink{classoomph_1_1MatrixBasedLumpedPreconditioner}{oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner}}$<$ MATRIX $>$\+::inverse\+\_\+lumped\+\_\+vector\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -162,18 +163,18 @@ Access function to the inverse of the lumped vector assembled in the preconditio
 
 paranoid check that vector has been created
 
-Definition at line \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00136}{136}} of file \mbox{\hyperlink{general__purpose__preconditioners_8h_source}{general\+\_\+purpose\+\_\+preconditioners.\+h}}.
+Definition at line 136 of file general\+\_\+purpose\+\_\+preconditioners.\+h.
 
 
 
-References \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00166}{oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::\+Inv\+\_\+lumped\+\_\+diag\+\_\+pt}}.
+References oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::\+Inv\+\_\+lumped\+\_\+diag\+\_\+pt.
 
-\mbox{\Hypertarget{classoomph_1_1MatrixBasedLumpedPreconditioner_a8522cfc6f11560318201aab5169cfd3c}\label{classoomph_1_1MatrixBasedLumpedPreconditioner_a8522cfc6f11560318201aab5169cfd3c}} 
+\mbox{\Hypertarget{classoomph_1_1MatrixBasedLumpedPreconditioner_ad165843e92c2aac0367afd9bb0ce29b0}\label{classoomph_1_1MatrixBasedLumpedPreconditioner_ad165843e92c2aac0367afd9bb0ce29b0}} 
 \index{oomph::MatrixBasedLumpedPreconditioner$<$ MATRIX $>$@{oomph::MatrixBasedLumpedPreconditioner$<$ MATRIX $>$}!nrow@{nrow}}
 \index{nrow@{nrow}!oomph::MatrixBasedLumpedPreconditioner$<$ MATRIX $>$@{oomph::MatrixBasedLumpedPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{nrow()}{nrow()}}
 {\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
-unsigned \& \mbox{\hyperlink{classoomph_1_1MatrixBasedLumpedPreconditioner}{oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner}}$<$ MATRIX $>$\+::nrow (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+unsigned\& \mbox{\hyperlink{classoomph_1_1MatrixBasedLumpedPreconditioner}{oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner}}$<$ MATRIX $>$\+::nrow (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -181,11 +182,11 @@ Access function to number of rows for this preconditioner.
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00153}{153}} of file \mbox{\hyperlink{general__purpose__preconditioners_8h_source}{general\+\_\+purpose\+\_\+preconditioners.\+h}}.
+Definition at line 153 of file general\+\_\+purpose\+\_\+preconditioners.\+h.
 
 
 
-References \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00172}{oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::\+Nrow}}.
+References oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::\+Nrow.
 
 \mbox{\Hypertarget{classoomph_1_1MatrixBasedLumpedPreconditioner_aaf128ece4018169b5699d81454dc60ba}\label{classoomph_1_1MatrixBasedLumpedPreconditioner_aaf128ece4018169b5699d81454dc60ba}} 
 \index{oomph::MatrixBasedLumpedPreconditioner$<$ MATRIX $>$@{oomph::MatrixBasedLumpedPreconditioner$<$ MATRIX $>$}!operator=@{operator=}}
@@ -211,11 +212,11 @@ Access function to the Positive\+\_\+matrix which indicates whether lumped matri
 
 paranoid check that preconditioner has been setup
 
-Definition at line \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00119}{119}} of file \mbox{\hyperlink{general__purpose__preconditioners_8h_source}{general\+\_\+purpose\+\_\+preconditioners.\+h}}.
+Definition at line 119 of file general\+\_\+purpose\+\_\+preconditioners.\+h.
 
 
 
-References \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00166}{oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::\+Inv\+\_\+lumped\+\_\+diag\+\_\+pt}}, and \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00169}{oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::\+Positive\+\_\+matrix}}.
+References oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::\+Inv\+\_\+lumped\+\_\+diag\+\_\+pt, and oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::\+Positive\+\_\+matrix.
 
 \mbox{\Hypertarget{classoomph_1_1MatrixBasedLumpedPreconditioner_a48a9cbf7b1a6afbe60b050de87ec8047}\label{classoomph_1_1MatrixBasedLumpedPreconditioner_a48a9cbf7b1a6afbe60b050de87ec8047}} 
 \index{oomph::MatrixBasedLumpedPreconditioner$<$ MATRIX $>$@{oomph::MatrixBasedLumpedPreconditioner$<$ MATRIX $>$}!preconditioner\_solve@{preconditioner\_solve}}
@@ -234,11 +235,11 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00280}{280}} of file \mbox{\hyperlink{general__purpose__preconditioners_8cc_source}{general\+\_\+purpose\+\_\+preconditioners.\+cc}}.
+Definition at line 280 of file general\+\_\+purpose\+\_\+preconditioners.\+cc.
 
 
 
-References \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+References oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Double\+Vector\+::built(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), and i.
 
 \mbox{\Hypertarget{classoomph_1_1MatrixBasedLumpedPreconditioner_a770efac3c2e74f377d84937a3ff3efb7}\label{classoomph_1_1MatrixBasedLumpedPreconditioner_a770efac3c2e74f377d84937a3ff3efb7}} 
 \index{oomph::MatrixBasedLumpedPreconditioner$<$ MATRIX $>$@{oomph::MatrixBasedLumpedPreconditioner$<$ MATRIX $>$}!setup@{setup}}
@@ -256,11 +257,11 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb1
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00167}{167}} of file \mbox{\hyperlink{general__purpose__preconditioners_8cc_source}{general\+\_\+purpose\+\_\+preconditioners.\+cc}}.
+Definition at line 167 of file general\+\_\+purpose\+\_\+preconditioners.\+cc.
 
 
 
-References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l00640}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::nnz()}}, \mbox{\hyperlink{matrices_8h_source_l02704}{oomph\+::\+CCMatrix$<$ T $>$\+::row\+\_\+index()}}, and \mbox{\hyperlink{matrices_8h_source_l00616}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::value()}}.
+References i, oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::nnz(), oomph\+::\+CCMatrix$<$ T $>$\+::row\+\_\+index(), and oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::value().
 
 \mbox{\Hypertarget{classoomph_1_1MatrixBasedLumpedPreconditioner_a0942572dde419e2658226ebc6e0d5dfd}\label{classoomph_1_1MatrixBasedLumpedPreconditioner_a0942572dde419e2658226ebc6e0d5dfd}} 
 \index{oomph::MatrixBasedLumpedPreconditioner$<$ MATRIX $>$@{oomph::MatrixBasedLumpedPreconditioner$<$ MATRIX $>$}!setup@{setup}}
@@ -278,11 +279,11 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb1
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00224}{224}} of file \mbox{\hyperlink{general__purpose__preconditioners_8cc_source}{general\+\_\+purpose\+\_\+preconditioners.\+cc}}.
+Definition at line 224 of file general\+\_\+purpose\+\_\+preconditioners.\+cc.
 
 
 
-References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{matrices_8h_source_l01060}{oomph\+::\+CRDouble\+Matrix\+::row\+\_\+start()}}, and \mbox{\hyperlink{matrices_8h_source_l01084}{oomph\+::\+CRDouble\+Matrix\+::value()}}.
+References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), i, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), oomph\+::\+CRDouble\+Matrix\+::row\+\_\+start(), and oomph\+::\+CRDouble\+Matrix\+::value().
 
 \mbox{\Hypertarget{classoomph_1_1MatrixBasedLumpedPreconditioner_a7fc9e4c0ef357cbbc421a5fb37076edb}\label{classoomph_1_1MatrixBasedLumpedPreconditioner_a7fc9e4c0ef357cbbc421a5fb37076edb}} 
 \index{oomph::MatrixBasedLumpedPreconditioner$<$ MATRIX $>$@{oomph::MatrixBasedLumpedPreconditioner$<$ MATRIX $>$}!setup@{setup}}
@@ -304,7 +305,7 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb1
 \index{setup@{setup}!oomph::MatrixBasedLumpedPreconditioner$<$ MATRIX $>$@{oomph::MatrixBasedLumpedPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{setup()}{setup()}\hspace{0.1cm}{\footnotesize\ttfamily [4/6]}}
 {\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
-virtual void oomph\+::\+Preconditioner\+::setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+virtual void oomph\+::\+Preconditioner\+::setup\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -319,7 +320,7 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb1
 \index{setup@{setup}!oomph::MatrixBasedLumpedPreconditioner$<$ MATRIX $>$@{oomph::MatrixBasedLumpedPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{setup()}{setup()}\hspace{0.1cm}{\footnotesize\ttfamily [5/6]}}
 {\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
-void oomph\+::\+Preconditioner\+::setup (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$}]{matrix\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void oomph\+::\+Preconditioner\+::setup\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -327,14 +328,18 @@ For some reason we need to remind the compiler that there is also a function nam
 
 
 
-Definition at line \mbox{\hyperlink{preconditioner_8h_source_l00120}{120}} of file \mbox{\hyperlink{preconditioner_8h_source}{preconditioner.\+h}}.
+Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb19422943588}{oomph\+::\+Preconditioner}}.
+
+
+
+Definition at line 120 of file preconditioner.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1MatrixBasedLumpedPreconditioner_a0b95e7159585b5151f9e5dc1d1713655}\label{classoomph_1_1MatrixBasedLumpedPreconditioner_a0b95e7159585b5151f9e5dc1d1713655}} 
 \index{oomph::MatrixBasedLumpedPreconditioner$<$ MATRIX $>$@{oomph::MatrixBasedLumpedPreconditioner$<$ MATRIX $>$}!setup@{setup}}
 \index{setup@{setup}!oomph::MatrixBasedLumpedPreconditioner$<$ MATRIX $>$@{oomph::MatrixBasedLumpedPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{setup()}{setup()}\hspace{0.1cm}{\footnotesize\ttfamily [6/6]}}
 {\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
-void oomph\+::\+Preconditioner\+::setup (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$}]{matrix\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void oomph\+::\+Preconditioner\+::setup\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -342,7 +347,11 @@ For some reason we need to remind the compiler that there is also a function nam
 
 
 
-Definition at line \mbox{\hyperlink{preconditioner_8h_source_l00094}{94}} of file \mbox{\hyperlink{preconditioner_8h_source}{preconditioner.\+h}}.
+Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb19422943588}{oomph\+::\+Preconditioner}}.
+
+
+
+Definition at line 94 of file preconditioner.\+h.
 
 
 
@@ -360,11 +369,11 @@ double$\ast$ \mbox{\hyperlink{classoomph_1_1MatrixBasedLumpedPreconditioner}{oom
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00166}{166}} of file \mbox{\hyperlink{general__purpose__preconditioners_8h_source}{general\+\_\+purpose\+\_\+preconditioners.\+h}}.
+Definition at line 166 of file general\+\_\+purpose\+\_\+preconditioners.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00159}{oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00136}{oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::inverse\+\_\+lumped\+\_\+vector\+\_\+pt()}}, \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00084}{oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::\+Matrix\+Based\+Lumped\+Preconditioner()}}, and \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00119}{oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::positive\+\_\+matrix()}}.
+Referenced by oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::clean\+\_\+up\+\_\+memory(), oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::inverse\+\_\+lumped\+\_\+vector\+\_\+pt(), oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::\+Matrix\+Based\+Lumped\+Preconditioner(), and oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::positive\+\_\+matrix().
 
 \mbox{\Hypertarget{classoomph_1_1MatrixBasedLumpedPreconditioner_a6aa1a6b695761df04e32db3563b89272}\label{classoomph_1_1MatrixBasedLumpedPreconditioner_a6aa1a6b695761df04e32db3563b89272}} 
 \index{oomph::MatrixBasedLumpedPreconditioner$<$ MATRIX $>$@{oomph::MatrixBasedLumpedPreconditioner$<$ MATRIX $>$}!Nrow@{Nrow}}
@@ -375,11 +384,11 @@ unsigned \mbox{\hyperlink{classoomph_1_1MatrixBasedLumpedPreconditioner}{oomph\+
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00172}{172}} of file \mbox{\hyperlink{general__purpose__preconditioners_8h_source}{general\+\_\+purpose\+\_\+preconditioners.\+h}}.
+Definition at line 172 of file general\+\_\+purpose\+\_\+preconditioners.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00153}{oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::nrow()}}.
+Referenced by oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::nrow().
 
 \mbox{\Hypertarget{classoomph_1_1MatrixBasedLumpedPreconditioner_adfbe26d10029d211744f2dd6ea1508ef}\label{classoomph_1_1MatrixBasedLumpedPreconditioner_adfbe26d10029d211744f2dd6ea1508ef}} 
 \index{oomph::MatrixBasedLumpedPreconditioner$<$ MATRIX $>$@{oomph::MatrixBasedLumpedPreconditioner$<$ MATRIX $>$}!Positive\_matrix@{Positive\_matrix}}
@@ -390,11 +399,11 @@ bool \mbox{\hyperlink{classoomph_1_1MatrixBasedLumpedPreconditioner}{oomph\+::\+
 
 
 
-Definition at line \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00169}{169}} of file \mbox{\hyperlink{general__purpose__preconditioners_8h_source}{general\+\_\+purpose\+\_\+preconditioners.\+h}}.
+Definition at line 169 of file general\+\_\+purpose\+\_\+preconditioners.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00084}{oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::\+Matrix\+Based\+Lumped\+Preconditioner()}}, and \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00119}{oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::positive\+\_\+matrix()}}.
+Referenced by oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::\+Matrix\+Based\+Lumped\+Preconditioner(), and oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::positive\+\_\+matrix().
 
 
 

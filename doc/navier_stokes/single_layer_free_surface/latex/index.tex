@@ -31,7 +31,7 @@ We shall now discuss how the free surface boundary conditions are implemented in
  \DoxyHorRuler{0}
 \hypertarget{index_implementation}{}\doxysection{Implementation}\label{index_implementation}
 \hypertarget{index_kinematic_condition_implementation}{}\doxysubsection{The kinematic condition and the pseudo-\/solid node-\/update procedure}\label{index_kinematic_condition_implementation}
-In addition to solving for the fluid velocity and pressure (as in all Navier--Stokes examples), we have additional degrees of freedom in our problem due to the fact that the position of the free surface $ \mathbf{R} $ is unknown. The Navier--Stokes elements in {\ttfamily oomph-\/lib} are based on the Arbitrary Lagrangian Eulerian (ALE) form of the Navier-\/\+Stokes equations, and so can be used to solve problems in moving domains. This allows us to discretise our domain using a boundary fitted mesh, which will need to deform in response to the motion of the free surface. This is achieved by treating the interior of the mesh as a fictitious elastic solid, and solving a solid mechanics problem for the (unknown) nodal positions. This technique, which will subsequently be referred to as a `pseudo-\/solid node-\/update strategy', employs wrapper elements to existing fluid and solid equation classes. The specific element used in this example is a {\ttfamily Pseudo\+Solid\+Node\+Update\+Element\texorpdfstring{$<$}{<}QCrouzeix\+Raviart\+Element$<$2$>$}, {\ttfamily QPVDElement$<$2,3$>$} {\ttfamily \texorpdfstring{$>$}{>}} element, which takes two template arguments. The first is the standard element type used to solve the fluid problem, and the second is the element type which solves the equations that are used to control the mesh deformation.
+In addition to solving for the fluid velocity and pressure (as in all Navier--Stokes examples), we have additional degrees of freedom in our problem due to the fact that the position of the free surface $ \mathbf{R} $ is unknown. The Navier--Stokes elements in {\ttfamily oomph-\/lib} are based on the Arbitrary Lagrangian Eulerian (ALE) form of the Navier-\/\+Stokes equations, and so can be used to solve problems in moving domains. This allows us to discretise our domain using a boundary fitted mesh, which will need to deform in response to the motion of the free surface. This is achieved by treating the interior of the mesh as a fictitious elastic solid, and solving a solid mechanics problem for the (unknown) nodal positions. This technique, which will subsequently be referred to as a `pseudo-\/solid node-\/update strategy', employs wrapper elements to existing fluid and solid equation classes. The specific element used in this example is a {\ttfamily Pseudo\+Solid\+Node\+Update\+Element$<$QCrouzeix\+Raviart\+Element$<$2$>$}, {\ttfamily QPVDElement$<$2,3$>$} {\ttfamily $>$} element, which takes two template arguments. The first is the standard element type used to solve the fluid problem, and the second is the element type which solves the equations that are used to control the mesh deformation.
 
 The deformation of the free surface boundary is imposed by introducing a field of Lagrange multipliers at the free surface, following the method outlined in Cairncross et al., \`{}A finite element method for free surface flows of incompressible fluids in three dimensions. Part I. Boundary fitted mesh motion\textquotesingle{} (2000). These new unknowns are stored as nodal values, and so the vector of values at each node is resized accordingly. Since this introduces further degrees of freedom into the problem, we require an additional equation\+: the kinematic boundary condition (1).
 
@@ -135,7 +135,7 @@ As usual, we use a namespace to define the dimensionless parameters $ Re $, $ St
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_namespace====================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for physical parameters}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -172,7 +172,7 @@ We start by computing the product of the Reynolds and Strouhal numbers before sp
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_main=========================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver code for two-\/dimensional single fluid free surface problem}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{elastic__single__layer_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[]) }
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ \textcolor{comment}{// Store command line arguments}}
@@ -242,8 +242,8 @@ Since we are solving the unsteady Navier--Stokes equations, the {\ttfamily Probl
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_problem\_class================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Single fluid free surface problem in a rectangular domain which is}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// periodic in the x direction}}
+\DoxyCodeLine{\textcolor{comment}{/// Single fluid free surface problem in a rectangular domain which is}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// periodic in the x direction}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classInterfaceProblem}{InterfaceProblem}} : \textcolor{keyword}{public} Problem}
@@ -300,7 +300,7 @@ Since we are solving the unsteady Navier--Stokes equations, the {\ttfamily Probl
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{ /// Pointer to the (specific) "{}bulk"{} mesh}}
+\DoxyCodeLine{ \textcolor{comment}{/// Pointer to the (specific) "{}bulk"{} mesh}}
 \DoxyCodeLine{ ElasticRectangularQuadMesh<ELEMENT>* Bulk\_mesh\_pt;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to the "{}surface"{} mesh}}
@@ -327,7 +327,7 @@ The constructor starts by copying the width of the domain into the private membe
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_constructor==================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for single fluid free surface problem}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\mbox{\hyperlink{classInterfaceProblem_a83023535d663a2a6558959f36bf6e1e7}{InterfaceProblem<ELEMENT,TIMESTEPPER>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classInterfaceProblem_a83023535d663a2a6558959f36bf6e1e7}{InterfaceProblem}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&n\_x, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&n\_y,}
@@ -549,9 +549,9 @@ This function sets the initial conditions for the problem. We loop over all node
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_set\_initial\_condition========================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Set initial conditions: Set all nodal velocities to zero and}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// initialise the previous velocities and nodal positions to correspond}}
-\DoxyCodeLine{\textcolor{comment}{/// to an impulsive start}}
+\DoxyCodeLine{\textcolor{comment}{/// Set initial conditions: Set all nodal velocities to zero and}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// initialise the previous velocities and nodal positions to correspond}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// to an impulsive start}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classInterfaceProblem_a0d3af8378c4f0a6e38636be958c300d5}{InterfaceProblem<ELEMENT,TIMESTEPPER>::set\_initial\_condition}}()}
@@ -585,9 +585,9 @@ This function sets the boundary conditions for the problem. Since the Dirichlet 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_set\_boundary\_conditions======================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Set boundary conditions: Set both velocity components to zero}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// on the bottom (solid) wall and the horizontal component only to zero}}
-\DoxyCodeLine{\textcolor{comment}{/// on the side (periodic) boundaries}}
+\DoxyCodeLine{\textcolor{comment}{/// Set boundary conditions: Set both velocity components to zero}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// on the bottom (solid) wall and the horizontal component only to zero}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// on the side (periodic) boundaries}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classInterfaceProblem_a844445832ad7a32aa9f5d03ffdb40ebb}{InterfaceProblem<ELEMENT,TIMESTEPPER>::set\_boundary\_conditions}}()}
@@ -631,7 +631,7 @@ At the beginning of the simulation the free surface is deformed by a prescribed 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_deform\_free\_surface==========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Deform the mesh/free surface to a prescribed function}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classInterfaceProblem_a2319232b08d9df1ab473f6cbd40939d5}{InterfaceProblem<ELEMENT,TIMESTEPPER>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classInterfaceProblem_a2319232b08d9df1ab473f6cbd40939d5}{deform\_free\_surface}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double} \&epsilon,\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&n\_periods)}
@@ -666,7 +666,7 @@ As expected, this member function documents the computed solution. We first outp
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_doc\_solution=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Document the solution}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classInterfaceProblem_a49714e35e94f7d2af0b6ddd22b851f52}{InterfaceProblem<ELEMENT,TIMESTEPPER>::doc\_solution}}(DocInfo \&doc\_info)}
 \DoxyCodeLine{\{ }
@@ -734,7 +734,7 @@ The function {\ttfamily unsteady\+\_\+run(...)} is used to perform the timestepp
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_unsteady\_run=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Perform run up to specified time t\_max with given timestep dt}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classInterfaceProblem_adf1f4e43d10939e4323e0e315b711085}{InterfaceProblem<ELEMENT,TIMESTEPPER>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classInterfaceProblem_adf1f4e43d10939e4323e0e315b711085}{unsteady\_run}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double} \&t\_max, \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&dt)}

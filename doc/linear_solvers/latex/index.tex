@@ -10,6 +10,8 @@ The purpose of this tutorial is to show how to specify different linear solvers 
 \item \mbox{\hyperlink{index_iterative_linear_solvers}{Iterative linear solvers and preconditioners}}
 \item \mbox{\hyperlink{index_third_party_iterative_linear_solvers}{Third-\/party iterative linear solvers and preconditioners}}
 \end{DoxyItemize}
+\end{DoxyItemize}
+\begin{DoxyItemize}
 \item \mbox{\hyperlink{index_specific_precond}{Problem-\/specific preconditioners}}
 \end{DoxyItemize}\DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -106,6 +108,9 @@ As discussed in the \href{../../the_data_structure/html/index.html}{\texttt{ bot
 
 \item \href{../../the_data_structure/html/classoomph_1_1MumpsSolver.html}{\texttt{ {\ttfamily  Mumps\+Solver }}}\+: is a wrapper to the \href{http://graal.ens-lyon.fr/MUMPS/}{\texttt{ MUMPS }} multifrontal solver that is available when {\ttfamily oomph-\/lib} is compiled with MPI support and support for MUMPS.
 \end{DoxyItemize}
+\end{DoxyItemize}
+\end{DoxyItemize}
+\begin{DoxyItemize}
 \item {\bfseries{Iterative solvers\+:}} ~\newline
 ~\newline
 
@@ -116,7 +121,6 @@ As discussed in the \href{../../the_data_structure/html/index.html}{\texttt{ bot
 \item \href{../../the_data_structure/html/classoomph_1_1TrilinosAztecOOSolver.html}{\texttt{ {\ttfamily Trilinos\+Aztec\+OOSolver}}}\+: A wrapper to the linear solvers from the \href{http://trilinos.sandia.gov/}{\texttt{ Trilinos Project.}}~\newline
 ~\newline
 
-\end{DoxyItemize}
 \end{DoxyItemize}
 \end{DoxyItemize}
 
@@ -152,9 +156,9 @@ Specific preconditioners may be implemented by deriving from the {\ttfamily Prec
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{    /// Apply the preconditioner. Pure virtual generic interface}}
-\DoxyCodeLine{\textcolor{comment}{    /// function. This method should apply the preconditioner operator to the}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{    /// vector r and return the vector z.}}
+\DoxyCodeLine{    \textcolor{comment}{/// Apply the preconditioner. Pure virtual generic interface}}
+\DoxyCodeLine{\textcolor{comment}{    /// function. This method should apply the preconditioner operator to the}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// vector r and return the vector z.}}
 \DoxyCodeLine{\textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} preconditioner\_solve(\textcolor{keyword}{const} DoubleVector\& r,}
 \DoxyCodeLine{                                      DoubleVector\& z) = 0;}
 
@@ -163,9 +167,9 @@ Specific preconditioners may be implemented by deriving from the {\ttfamily Prec
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{    /// Setup the preconditioner. Pure virtual generic interface}}
+\DoxyCodeLine{    \textcolor{comment}{/// Setup the preconditioner. Pure virtual generic interface}}
 \DoxyCodeLine{\textcolor{comment}{    /// function.}}
-\DoxyCodeLine{    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} setup() = 0;}
+\DoxyCodeLine{\textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} setup() = 0;}
 
 \end{DoxyCodeInclude}
  Note that, by default, {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily Iterative\+Linear\+Solvers} employ left preconditioning.

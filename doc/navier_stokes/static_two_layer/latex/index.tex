@@ -30,25 +30,25 @@ We must create a two-\/layer elastic mesh that will allow us access to the eleme
 We begin by inheriting from the {\ttfamily Elastic\+Rectangular\+Quad\+Mesh}.  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_specific\_mesh\_class==========================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Two layer mesh which employs a pseudo-\/solid node-\/update strategy.}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// This class is essentially a wrapper to an }}
-\DoxyCodeLine{\textcolor{comment}{/// ElasticRectangularQuadMesh, with an additional boundary}}
-\DoxyCodeLine{\textcolor{comment}{/// to represent the interface between the two fluid layers. In addition,}}
-\DoxyCodeLine{\textcolor{comment}{/// the mesh paritions the elements into those above and below}}
-\DoxyCodeLine{\textcolor{comment}{/// the interface and relabels boundaries so that we can impose}}
-\DoxyCodeLine{\textcolor{comment}{/// a volume constraint on the lower or upper fluid.}}
-\DoxyCodeLine{\textcolor{comment}{///}}
-\DoxyCodeLine{\textcolor{comment}{///                                 3}}
-\DoxyCodeLine{\textcolor{comment}{///               -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{\textcolor{comment}{///               |                                     |}}
-\DoxyCodeLine{\textcolor{comment}{///             4 |                                     | 2}}
-\DoxyCodeLine{\textcolor{comment}{///               |                 6                   |}}
-\DoxyCodeLine{\textcolor{comment}{///               -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{\textcolor{comment}{///               |                                     |}}
-\DoxyCodeLine{\textcolor{comment}{///             5 |                                     | 1}}
-\DoxyCodeLine{\textcolor{comment}{///               |                                     |}}
-\DoxyCodeLine{\textcolor{comment}{///               -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{\textcolor{comment}{///                                 0}}
+\DoxyCodeLine{\textcolor{comment}{/// Two layer mesh which employs a pseudo-\/solid node-\/update strategy.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// This class is essentially a wrapper to an }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// ElasticRectangularQuadMesh, with an additional boundary}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// to represent the interface between the two fluid layers. In addition,}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// the mesh paritions the elements into those above and below}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// the interface and relabels boundaries so that we can impose}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// a volume constraint on the lower or upper fluid.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///                                 3}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///               -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///               |                                     |}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///             4 |                                     | 2}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///               |                 6                   |}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///               -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///               |                                     |}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///             5 |                                     | 1}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///               |                                     |}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///               -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///                                 0}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classElasticTwoLayerMesh}{ElasticTwoLayerMesh}} :}

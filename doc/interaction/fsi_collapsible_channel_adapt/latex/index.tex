@@ -34,10 +34,10 @@ For instance, the full interface to the constructor of the {\ttfamily One\+DLagr
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{    /// Constructor: Pass number of elements, length,}}
-\DoxyCodeLine{\textcolor{comment}{    /// pointer to GeomObject that defines the undeformed Eulerian position,}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{    /// and the timestepper -\/-\/ defaults to (Steady) default timestepper defined}}
-\DoxyCodeLine{\textcolor{comment}{    /// in the Mesh base class}}
+\DoxyCodeLine{    \textcolor{comment}{/// Constructor: Pass number of elements, length,}}
+\DoxyCodeLine{\textcolor{comment}{    /// pointer to GeomObject that defines the undeformed Eulerian position,}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// and the timestepper -\/-\/ defaults to (Steady) default timestepper defined}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// in the Mesh base class}}
 \DoxyCodeLine{\textcolor{comment}{}    OneDLagrangianMesh(}
 \DoxyCodeLine{      \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_element,}
 \DoxyCodeLine{      \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& length,}
@@ -148,8 +148,8 @@ To illustrate the procedure, here is the class definition for the {\ttfamily Ref
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{  \textcolor{comment}{//=====start\_of\_refineable\_algebraic\_collapsible\_channel\_mesh=====}}
-\DoxyCodeLine{\textcolor{comment}{  /// Refineable version of the CollapsibleChannel mesh with}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{  /// algebraic node update.}}
+\DoxyCodeLine{\textcolor{comment}{  /// Refineable version of the CollapsibleChannel mesh with}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// algebraic node update.}}
 \DoxyCodeLine{\textcolor{comment}{}  \textcolor{comment}{//=================================================================}}
 \DoxyCodeLine{  \textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{  \textcolor{keyword}{class }RefineableAlgebraicCollapsibleChannelMesh}
@@ -203,9 +203,9 @@ To illustrate the procedure, here is the class definition for the {\ttfamily Ref
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{    /// Update the node update data for specified node following}}
+\DoxyCodeLine{    \textcolor{comment}{/// Update the node update data for specified node following}}
 \DoxyCodeLine{\textcolor{comment}{    /// any mesh adapation}}
-\DoxyCodeLine{    \textcolor{keywordtype}{void} update\_node\_update(AlgebraicNode*\& node\_pt);}
+\DoxyCodeLine{\textcolor{comment}{}    \textcolor{keywordtype}{void} update\_node\_update(AlgebraicNode*\& node\_pt);}
 \DoxyCodeLine{  \};}
 
 \end{DoxyCodeInclude}
@@ -214,8 +214,8 @@ To illustrate the procedure, here is the class definition for the {\ttfamily Ref
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{  \textcolor{comment}{//========start\_update\_node\_update=================================}}
-\DoxyCodeLine{\textcolor{comment}{  /// Update the geometric references that are used}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{  /// to update node after mesh adaptation.}}
+\DoxyCodeLine{\textcolor{comment}{  /// Update the geometric references that are used}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// to update node after mesh adaptation.}}
 \DoxyCodeLine{\textcolor{comment}{}  \textcolor{comment}{//=================================================================}}
 \DoxyCodeLine{  \textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{  \textcolor{keywordtype}{void} RefineableAlgebraicCollapsibleChannelMesh<ELEMENT>::update\_node\_update(}
@@ -334,7 +334,7 @@ As in the \href{../../../navier_stokes/collapsible_channel/html/index.html}{\tex
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=========start\_of\_actions\_before\_adapt==================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Actions before adapt: Wipe the mesh of prescribed traction elements}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classFSICollapsibleChannelProblem_a91b30b3d0369c178d3a79f5658644f1b}{FSICollapsibleChannelProblem<ELEMENT>::actions\_before\_adapt}}()}
 \DoxyCodeLine{\{}
@@ -355,7 +355,7 @@ As usual, we then employ the function {\ttfamily Problem\+::actions\+\_\+after\+
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==========start\_of\_actions\_after\_adapt==================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Actions after adapt: Rebuild the mesh of prescribed traction elements}}
-\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classFSICollapsibleChannelProblem_ae20eb7ed895e0063ade5a6d0c6f9af2f}{FSICollapsibleChannelProblem<ELEMENT>::actions\_after\_adapt}}()}
 \DoxyCodeLine{\{}
