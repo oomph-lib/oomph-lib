@@ -172,6 +172,14 @@ with section("parse"):
                 "INSTALL_BYPRODUCTS": "*",
                 "CMAKE_CACHE_ARGS": "*",
             },
+        },
+        "oomph_path_option": {
+            "flags": ["REQUIRED"],
+            "kwargs": {
+                "FLAG": 1,
+                "DEFAULT": 1,
+                "DOCSTRING": 1,
+            },
         }
     }
     # Override configurations per-command where available
