@@ -55,7 +55,6 @@ set_source_files_properties(superlu_timer.c PROPERTIES COMPILE_FLAGS -O0)
 
 if(ENABLE_SINGLE)
   list(APPEND HEADERS slu_sdefs.h)
-
   list(
     APPEND
     SOURCES
@@ -104,7 +103,6 @@ endif()
 
 if(ENABLE_DOUBLE)
   list(APPEND HEADERS slu_ddefs.h)
-
   list(
     APPEND
     SOURCES
@@ -154,7 +152,6 @@ endif()
 
 if(ENABLE_COMPLEX)
   list(APPEND HEADERS slu_cdefs.h)
-
   list(
     APPEND
     SOURCES
@@ -204,7 +201,6 @@ endif()
 
 if(ENABLE_COMPLEX16)
   list(APPEND HEADERS slu_zdefs.h)
-
   list(
     APPEND
     SOURCES
