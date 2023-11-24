@@ -1,7 +1,7 @@
 # ==============================================================================
-# DOUBLE PRECISION SOURCES FROM SuperLU_4.3: We turn it into the library
-# oomph_superlu_4.3 to avoid clashes with any existing installations of superlu
-# (likely to be accessible via -lsuperlu)
+# DOUBLE PRECISION SOURCES FROM SuperLU_5.2.2: We turn it into the library
+# oomph_superlu_5.2.2 to avoid clashes with any existing installations of
+# superlu (likely to be accessible via -lsuperlu)
 # ==============================================================================
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(VERBOSE "Entered oomph_superlu_5.2.2 subdirectory")
