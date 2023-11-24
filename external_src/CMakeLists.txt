@@ -49,6 +49,7 @@ endif()
 
 # Add Tetgen
 if(NOT OOMPH_SUPPRESS_TETGEN_LIB)
+  # TODO: Move to the latest tetgen
   if(OOMPH_USE_NEW_TETGEN)
     # NOTE: Builds fine but breaks the meshing/adaptive_tet_meshes/ demo
     # drivers... Needs further investigation
@@ -58,49 +59,18 @@ if(NOT OOMPH_SUPPRESS_TETGEN_LIB)
   endif()
 endif()
 
-# FIXME: When are the 'ALREADY_HAVE_' variables defined? Not sure they're even
-# being used right now anywhere...
-
-# Add BLAS
-if(NOT
-   (BLAS_FOUND
-    OR OOMPH_USE_BLAS_FROM
-    OR OOMPH_USE_LAPACK_FROM))
-  add_subdirectory(oomph_blas)
-
-  # Add LAPACK/FORTRAN LAPACK
-  add_subdirectory(oomph_lapack)
-  add_subdirectory(oomph_flapack)
-endif()
-
-# Provide up-to-date sources if the user wants a "bleeding edge" oomph-lib
-if(OOMPH_TRANSITION_TO_VERSION_3)
-  # Add GKlib for METIS and METIS
-  add_subdirectory(oomph_gklib_from_metis_from_parmetis_4.0.3)
-  add_subdirectory(oomph_metis_from_parmetis_4.0.3)
-else()
-  # Add METIS
-  add_subdirectory(oomph_metis_from_parmetis_3.1.1)
-endif()
+# Add GKlib for METIS and METIS
+add_subdirectory(oomph_gklib_from_metis_from_parmetis_4.0.3)
+add_subdirectory(oomph_metis_from_parmetis_4.0.3)
 
 # Add SuperLU
-if(NOT OOMPH_USE_DEPRECATED_SUPERLU)
-  add_subdirectory(oomph_superlu_6.0.1)
-else()
-  # add_subdirectory(oomph_superlu_5.2.2)
-  add_subdirectory(oomph_superlu_4.3)
-endif()
+add_subdirectory(oomph_superlu_6.0.1)
 
 # If compiled with MPI
 if(OOMPH_HAS_MPI)
   # Provide up-to-date sources if the user wants a "bleeding edge" oomph-lib
-  if(OOMPH_TRANSITION_TO_VERSION_3)
-    add_subdirectory(oomph_parmetis_4.0.3)
-    add_subdirectory(oomph_superlu_dist_7.0.0)
-  else()
-    add_subdirectory(oomph_parmetis_3.1.1)
-    add_subdirectory(oomph_superlu_dist_3.0)
-  endif()
+  add_subdirectory(oomph_parmetis_4.0.3)
+  add_subdirectory(oomph_superlu_dist_7.0.0)
 endif()
 
 # ------------------------------------------------------------------------------
