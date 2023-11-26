@@ -75,6 +75,11 @@ oomph_library_config(
   SOURCES ${SOURCES}
   LINKLIBS ${LINKLIBS})
 
+# Silence the useless warnings produced by this library
+include(OomphTargetSilenceWarnings)
+oomph_target_silence_warnings(TARGET ${LIBNAME}
+                              C_COMPILE_FLAGS -Wno-absolute-value)
+
 # ------------------------------------------------------------------------------
 # BOILERPLATE: Update variables in parent scope
 

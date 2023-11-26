@@ -63,7 +63,7 @@ set(SOURCES
 set(LIBNAME oomph_parmetis_4.0.3)
 
 # Libraries to link against
-set(LINKLIBS oomph_metis_from_parmetis_4.0.3)
+set(LINKLIBS MPI::MPI_C oomph_metis_from_parmetis_4.0.3)
 
 # Import the OomphLibraryConfig module to handle the library creation
 include(OomphLibraryConfig)

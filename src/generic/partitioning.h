@@ -40,6 +40,10 @@
 #include "Vector.h"
 #include "problem.h"
 
+// for the new METIS API, need to use symbols defined in the standard header
+// which aren't available in the current frozen (old) version of METIS
+// Version 3 will (presumably) have this header in the include path as standard
+#include "oomph_metis_from_parmetis_4.0.3/metis.h"
 
 namespace oomph
 {
@@ -49,8 +53,20 @@ namespace oomph
   extern "C"
   {
     /// Metis graph partitioning function
-    void METIS_PartGraphKway(
-      int*, int*, int*, int*, int*, int*, int*, int*, int*, int*, int*);
+    METIS_API(int)
+    METIS_PartGraphKway(idx_t*,
+                        idx_t*,
+                        idx_t*,
+                        idx_t*,
+                        idx_t*,
+                        idx_t*,
+                        idx_t*,
+                        idx_t*,
+                        real_t*,
+                        real_t*,
+                        idx_t*,
+                        idx_t*,
+                        idx_t*);
   }
 
 

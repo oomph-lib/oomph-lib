@@ -70,7 +70,7 @@ add_subdirectory(oomph_superlu_6.0.1)
 if(OOMPH_HAS_MPI)
   # Provide up-to-date sources if the user wants a "bleeding edge" oomph-lib
   add_subdirectory(oomph_parmetis_4.0.3)
-  add_subdirectory(oomph_superlu_dist_7.0.0)
+  add_subdirectory(oomph_superlu_dist_8.2.1)
 endif()
 
 # ------------------------------------------------------------------------------

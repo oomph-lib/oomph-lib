@@ -32,7 +32,7 @@
 // for the new METIS API, need to use symbols defined in the standard header
 // which aren't available in the current frozen (old) version of METIS
 // Version 3 will (presumably) have this header in the include path as standard
-#include "metis.h"
+#include "oomph_metis_from_parmetis_4.0.3/metis.h"
 
 namespace oomph
 {
@@ -438,15 +438,38 @@ namespace oomph
       }
     }
 
+    // If ncon is the number of weights associated with each vertex, the array
+    // vwgt contains n x ncon elements where n is the number of vertices).
+    int ncon = 1;
+    int* vsize = NULL;
+    float* tpwgts = NULL;
+    float* ubvec = NULL;
+
     // Call partitioner
+    // METIS_API(int)
+    // METIS_PartGraphKway(idx_t * nvtxs,
+    //                     idx_t * ncon,
+    //                     idx_t * xadj,
+    //                     idx_t * adjncy,
+    //                     idx_t * vwgt,
+    //                     idx_t * vsize,
+    //                     idx_t * adjwgt,
+    //                     idx_t * nparts,
+    //                     real_t * tpwgts,
+    //                     real_t * ubvec,
+    //                     idx_t * options,
+    //                     idx_t * edgecut,
+    //                     idx_t * part);
     METIS_PartGraphKway(&nvertex,
+                        &ncon,
                         xadj,
                         &adjacency_vector[0],
                         vwgt,
+                        vsize,
                         adjwgt,
-                        &wgtflag,
-                        &numflag,
                         &nparts,
+                        tpwgts,
+                        ubvec,
                         options,
                         edgecut,
                         part);
@@ -1191,14 +1214,51 @@ namespace oomph
       // Actually use METIS (good but not always repeatable!)
       else
       {
+        // METIS_PartGraphKway(&nvertex,
+        //                     xadj,
+        //                     &adjacency_vector[0],
+        //                     vwgt,
+        //                     adjwgt,
+        //                     &wgtflag,
+        //                     &numflag,
+        //                     &nparts,
+        //                     options,
+        //                     edgecut,
+        //                     part);
+
+        // If ncon is the number of weights associated with each vertex, the
+        // array vwgt contains n x ncon elements where n is the number of
+        // vertices).
+        int ncon = 1;
+        int* vsize = NULL;
+        float* tpwgts = NULL;
+        float* ubvec = NULL;
+
+        // Call partitioner
+        // METIS_API(int)
+        // METIS_PartGraphKway(idx_t * nvtxs,
+        //                     idx_t * ncon,
+        //                     idx_t * xadj,
+        //                     idx_t * adjncy,
+        //                     idx_t * vwgt,
+        //                     idx_t * vsize,
+        //                     idx_t * adjwgt,
+        //                     idx_t * nparts,
+        //                     real_t * tpwgts,
+        //                     real_t * ubvec,
+        //                     idx_t * options,
+        //                     idx_t * edgecut,
+        //                     idx_t * part);
         METIS_PartGraphKway(&nvertex,
+                            &ncon,
                             xadj,
                             &adjacency_vector[0],
                             vwgt,
+                            vsize,
                             adjwgt,
-                            &wgtflag,
-                            &numflag,
                             &nparts,
+                            tpwgts,
+                            ubvec,
                             options,
                             edgecut,
                             part);
