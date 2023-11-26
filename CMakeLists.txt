@@ -211,8 +211,12 @@ message(VERBOSE "<====== Starting oomph-lib library configuration ======>")
 # always ships with)
 add_subdirectory(external_src)
 
+# FIXME: Having to duplicate CXX definitions for C code to make SuperLUDist code
+# work...
+
 # Add C++ definitions for all of the defined third-party sources that we build
 # with oomph-lib, e.g. -DOOMPH_HAS_SUPERLU, -DOOMPH_HAS_TRIANGLE, etc.
+oomph_add_c_compile_definitions(${EXTERNAL_SRC_CXX_DEFINITIONS})
 oomph_add_cxx_compile_definitions(${EXTERNAL_SRC_CXX_DEFINITIONS})
 
 # Locate the third-party libraries that the user has provided via the
@@ -221,6 +225,7 @@ include(OomphLocateOptionalThirdPartyLibs)
 
 # Add C++ definitions for all of the defined (optional) third-party libraries,
 # e.g. -DOOMPH_HAS_CGAL, -DOOMPH_HAS_MUMPS, etc.
+oomph_add_c_compile_definitions(${EXTERNAL_DIST_CXX_DEFINITIONS})
 oomph_add_cxx_compile_definitions(${EXTERNAL_DIST_CXX_DEFINITIONS})
 
 # Configure all of the main oomph-lib library sources

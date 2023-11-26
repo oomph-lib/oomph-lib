@@ -25,4 +25,10 @@ function(oomph_add_cxx_compile_definitions)
     add_compile_definitions($<$<COMPILE_LANGUAGE:CXX>:${CXX_DEFINITION}>)
   endforeach()
 endfunction()
+
+function(oomph_add_c_compile_definitions)
+  foreach(C_DEFINITION IN LISTS ARGN)
+    add_compile_definitions($<$<COMPILE_LANGUAGE:C>:${C_DEFINITION}>)
+  endforeach()
+endfunction()
 # ------------------------------------------------------------------------------
