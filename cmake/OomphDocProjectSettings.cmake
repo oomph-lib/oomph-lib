@@ -82,13 +82,16 @@ function(oomph_doc_project_settings)
   # Doc it
   message(NOTICE "${OOMPH_SETTINGS_MESSAGE}")
 
+  file(RELATIVE_PATH OOMPH_RELPATH_TO_BUILD_DIR ${CMAKE_CURRENT_SOURCE_DIR}
+       ${CMAKE_CURRENT_BINARY_DIR})
+
   # Print info about the build and install steps
   message(
     NOTICE
     "${BOLD_MAGENTA}Project configured! Don't forget to run the build step with:\n\n"
-    "\tcmake --build <build-directory>\n\n"
+    "\tcmake --build ${OOMPH_RELPATH_TO_BUILD_DIR}\n\n"
     "then the install step with:\n\n"
-    "\tcmake --install <build-directory>${RESET}\n")
+    "\tcmake --install ${OOMPH_RELPATH_TO_BUILD_DIR}${RESET}\n")
 
   # Log to file if needed
   set(OUTPUT_FILE
