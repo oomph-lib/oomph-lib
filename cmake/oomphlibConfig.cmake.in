@@ -77,8 +77,7 @@ set(OOMPH_HAS_MUMPS @OOMPH_HAS_MUMPS@)
 set(OOMPH_HAS_TRILINOS @OOMPH_HAS_TRILINOS@)
 
 # Capture user's decision to their own libraries
-set(OOMPH_USE_BLAS_FROM "@OOMPH_USE_BLAS_FROM@")
-set(OOMPH_USE_LAPACK_FROM "@OOMPH_USE_LAPACK_FROM@")
+set(OOMPH_USE_OPENBLAS_FROM "@OOMPH_USE_OPENBLAS_FROM@")
 set(OOMPH_USE_MPI_FROM "@OOMPH_USE_MPI_FROM@")
 set(OOMPH_USE_GMP_FROM "@OOMPH_USE_GMP_FROM@")
 set(OOMPH_USE_MPFR_FROM "@OOMPH_USE_MPFR_FROM@")
@@ -90,29 +89,6 @@ set(OOMPH_USE_TRILINOS_FROM "@OOMPH_USE_TRILINOS_FROM@")
 
 # The gmsh executable
 set(OOMPH_GMSH_COMMAND "@OOMPH_GMSH_COMMAND@")
-
-# ---------------------------------[ HELPERS ]---------------------------------
-
-# FIXME: Doesn't work! Argh!
-function(oomph_push_cmake_prefix_path NEW_CMAKE_PREFIX_PATH)
-  if(DEFINED OOMPH_PUSHED_CMAKE_PREFIX_PATH)
-    message(
-      FATAL_ERROR
-        "OOMPH_PUSHED_CMAKE_PREFIX_PATH already defined and set to '${OOMPH_PUSHED_CMAKE_PREFIX_PATH}'! Did you forget to pop the value?"
-    )
-  endif()
-  set(OOMPH_PUSHED_CMAKE_PREFIX_PATH "${CMAKE_PREFIX_PATH}" PARENT_SCOPE)
-  set(CMAKE_PREFIX_PATH "${NEW_CMAKE_PREFIX_PATH}" CACHE INTERNAL "" FORCE)
-endfunction()
-
-function(oomph_pop_cmake_prefix_path)
-  if(NOT DEFINED OOMPH_PUSHED_CMAKE_PREFIX_PATH)
-    message(FATAL_ERROR "OOMPH_PUSHED_CMAKE_PREFIX_PATH has not been set!")
-  endif()
-  set(CMAKE_PREFIX_PATH "${OOMPH_PUSHED_CMAKE_PREFIX_PATH}" CACHE INTERNAL ""
-      FORCE)
-  unset(OOMPH_PUSHED_CMAKE_PREFIX_PATH PARENT_SCOPE)
-endfunction()
 
 # ---------------------[ FORWARD DEPENDENCY REQUIREMENTS ]---------------------
 
@@ -136,28 +112,13 @@ if(OOMPH_HAS_MPI)
   set(OOMPH_MPI_VARIABLENP_RUN_COMMAND "@OOMPH_MPI_VARIABLENP_RUN_COMMAND@")
 endif()
 
-# -------------------------[ EXTERNAL SOURCES STUFF ]--------------------------
-
-set(BLA_VENDOR @BLA_VENDOR@)
+# ----------------------[ REQUIRED THIRD-PARTY LIBRARIES ]---------------------
+# cmake-format: off
 
 # Search for OpenBLAS/LAPACK libraries
-if(BLA_VENDOR
-   OR OOMPH_USE_BLAS_FROM
-   OR OOMPH_USE_LAPACK_FROM)
-  set(BLAS_DIRS @BLAS_DIRS@)
-  set(LAPACK_DIRS @LAPACK_DIRS@)
+find_dependency(OpenBLAS 0.3.24 REQUIRED GLOBAL PATHS ${OOMPH_USE_OPENBLAS_FROM} NO_DEFAULT_PATH)
 
-  set(BACKUP_CMAKE_PREFIX_PATH "${CMAKE_PREFIX_PATH}")
-  set(CMAKE_PREFIX_PATH "${BLAS_DIRS};${LAPACK_DIRS}" CACHE INTERNAL "" FORCE)
-
-  find_dependency(BLAS REQUIRED)
-  find_dependency(LAPACK REQUIRED)
-
-  set(CMAKE_PREFIX_PATH "${BACKUP_CMAKE_PREFIX_PATH}" CACHE INTERNAL "" FORCE)
-endif()
-
-# --------------------------[ THIRD-PARTY LIBRARIES ]--------------------------
-# cmake-format: off
+# ----------------------[ OPTIONAL THIRD-PARTY LIBRARIES ]---------------------
 
 # CGAL
 if(OOMPH_HAS_CGAL AND (NOT CGAL_FOUND))
