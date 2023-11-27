@@ -99,7 +99,7 @@ oomph_option(OOMPH_SUPPRESS_TETGEN_LIB "Suppress build of oomph-lib's copy of th
 # Paths to packages that the user has installed themselves
 oomph_path_option(
   FLAG OOMPH_USE_OPENBLAS_FROM
-  DOCSTIRNG "Path to OpenBLAS installation."
+  DOCSTRING "Path to OpenBLAS installation."
   REQUIRED
 )
 oomph_path_option(
