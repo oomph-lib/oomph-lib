@@ -92,7 +92,7 @@ oomph_option(OOMPH_SUPPRESS_TETGEN_LIB "Suppress build of oomph-lib's copy of th
 # Paths to packages that the user has installed themselves
 oomph_path_option(
   FLAG OOMPH_USE_OPENBLAS_FROM
-  DOCSTIRNG "Path to OpenBLAS installation."
+  DOCSTRING "Path to OpenBLAS installation."
   REQUIRED
 )
 oomph_path_option(
@@ -144,7 +144,10 @@ if(BUILD_SHARED_LIBS)
 endif()
 
 # The user needs to provide at least v0.3.24 of OpenBLAS
-find_package(OpenBLAS 0.3.24 REQUIRED PATHS ${OOMPH_USE_OPENBLAS_FROM})
+find_package(
+  OpenBLAS 0.3.24 REQUIRED
+  PATHS ${OOMPH_USE_OPENBLAS_FROM}
+  NO_DEFAULT_PATH)
 
 # Do we want to use Gmsh?
 if(OOMPH_USE_GMSH_FROM)

@@ -7,6 +7,8 @@ on:
     paths:
       # Only run the self-tests if we edited the demo drivers, sources, third-party
       # library code or self-tests
+      - ".github/workflows/self-tests-ubuntu.yaml"
+      - "CMakeLists.txt"
       - "demo_drivers/**"
       - "external_distributions/CMakeLists.txt"
       - "external_distributions/cmake/**"
@@ -52,10 +54,6 @@ jobs:
       - name: Install dependencies that we won't build
         if: matrix.build_third_party_libs == 'OFF'
         run: sudo apt-get install -y libopenblas-dev
-
-      - name: Check openblas directory
-        if: matrix.build_third_party_libs == 'OFF'
-        run: locate openblas
 
       - name: Install MPI dependencies (if required)
         if: matrix.build_info.enable_mpi == 'ON'
