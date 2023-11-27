@@ -3,7 +3,7 @@
 # Locate optional third-party libraries requested by the user.
 # ==============================================================================
 list(APPEND CMAKE_MESSAGE_INDENT " ")
-message(VERBOSE "Entered external_distributions subdirectory")
+message(VERBOSE "Locating third-party libraries")
 
 # Targets to store the accumulated compiler flags and external libs to link
 set(EXTERNAL_DIST_CXX_DEFINITIONS "")
@@ -94,6 +94,6 @@ if(OOMPH_USE_TRILINOS_FROM)
   set(OOMPH_HAS_TRILINOS TRUE CACHE INTERNAL "")
 endif()
 
-message(VERBOSE "Leaving external_distributions subdirectory")
+message(VERBOSE "Finished locating third-party libraries")
 # ------------------------------------------------------------------------------
 # cmake-format: on
