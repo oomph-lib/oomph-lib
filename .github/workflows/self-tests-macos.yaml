@@ -95,7 +95,7 @@ jobs:
       # -------------------
       - name: Configure
         if: matrix.build_third_party_libs == 'OFF'
-        run: cmake --preset ${{ matrix.build_info.preset }} -DOOMPH_USE_BLAS_FROM=$(brew --prefix openblas) -B build
+        run: cmake --preset ${{ matrix.build_info.preset }} -DOOMPH_USE_OPENBLAS_FROM=$(brew --prefix openblas) -B build
 
       - name: Configure with third-party libs
         if: matrix.build_third_party_libs == 'ON'

@@ -89,13 +89,6 @@ oomph_option(OOMPH_ENABLE_RANGE_CHECKING "Enable RANGE_CHECKING flag in Debug" O
 oomph_option(OOMPH_SUPPRESS_TRIANGLE_LIB "Suppress build of oomph-lib's copy of the triangle library" OFF)
 oomph_option(OOMPH_SUPPRESS_TETGEN_LIB "Suppress build of oomph-lib's copy of the tetgen library" OFF)
 
-
-#   oomph_path_option(
-#     FLAG OOMPH_THIRD_PARTY_INSTALL_DIR
-#     DEFAULT "${CMAKE_CURRENT_LIST_DIR}/install"
-#     DOCSTRING "Base installation directory for third-party libraries."
-#   )
-
 # Paths to packages that the user has installed themselves
 oomph_path_option(
   FLAG OOMPH_USE_OPENBLAS_FROM
