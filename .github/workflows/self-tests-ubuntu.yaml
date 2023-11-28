@@ -55,6 +55,10 @@ jobs:
         if: matrix.build_third_party_libs == 'OFF'
         run: sudo apt-get install -y libopenblas-dev
 
+      - name: Look for OpenBLAS
+        if: matrix.build_third_party_libs == 'OFF'
+        run: dpkg -L libopenblas-dev
+
       - name: Install MPI dependencies (if required)
         if: matrix.build_info.enable_mpi == 'ON'
         run: sudo apt-get install openmpi-bin libopenmpi-dev
@@ -96,7 +100,7 @@ jobs:
       # -------------------
       - name: Configure
         if: matrix.build_third_party_libs == 'OFF'
-        run: cmake --preset ${{ matrix.build_info.preset }} -DOOMPH_USE_OPENBLAS_FROM=/opt/OpenBLAS/ -B build
+        run: cmake --preset ${{ matrix.build_info.preset }} -DOOMPH_USE_OPENBLAS_FROM=/usr/lib/x86_64-linux-gnu/openblas-pthread -B build
 
       - name: Configure with third-party libs
         if: matrix.build_third_party_libs == 'ON'
