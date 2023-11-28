@@ -51,14 +51,6 @@ jobs:
       - name: Install dependencies
         run: sudo apt-get install -y gfortran ninja-build python2
 
-      - name: Install dependencies that we won't build
-        if: matrix.build_third_party_libs == 'OFF'
-        run: sudo apt-get install -y libopenblas-dev
-
-      - name: Look for OpenBLAS
-        if: matrix.build_third_party_libs == 'OFF'
-        run: dpkg -L libopenblas-dev
-
       - name: Install MPI dependencies (if required)
         if: matrix.build_info.enable_mpi == 'ON'
         run: sudo apt-get install openmpi-bin libopenmpi-dev
@@ -74,22 +66,34 @@ jobs:
       # -------------------
       # THIRD-PARTY LIBS:
       # -------------------
-      - name: Configure third-party libraries (optional)
-        if: matrix.build_third_party_libs == 'ON'
+      - name: Configure third-party libraries (just OpenBLAS)
+        if: matrix.build_third_party_libs == 'OFF'
         run: |
           cmake -G Ninja \
-            -DOOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTS=ON \
             -DOOMPH_ENABLE_MPI=${{ matrix.build_info.enable_mpi }} \
+            -DOOMPH_BUILD_OPENBLAS=ON \
+            -DOOMPH_BUILD_CGAL=OFF \
+            -DOOMPH_BUILD_MUMPS=OFF \
+            -DOOMPH_BUILD_HYPRE=OFF \
+            -DOOMPH_BUILD_TRILINOS=OFF \
+            -DOOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTS=ON \
             -B build
         working-directory: ./external_distributions/
 
-      - name: Build third-party libraries (optional)
+      - name: Configure third-party libraries (all libraries)
         if: matrix.build_third_party_libs == 'ON'
+        run: |
+          cmake -G Ninja \
+            -DOOMPH_ENABLE_MPI=${{ matrix.build_info.enable_mpi }} \
+            -DOOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTS=ON \
+            -B build
+        working-directory: ./external_distributions/
+
+      - name: Build third-party libraries
         run: cmake --build build
         working-directory: ./external_distributions/
 
-      - name: Upload third-party libraries build logs (optional)
-        if: matrix.build_third_party_libs == 'ON'
+      - name: Upload third-party libraries build logs
         uses: actions/upload-artifact@v3
         with:
           name: third_party_build_logs-${{ runner.os }}-MPI_${{ matrix.build_info.enable_mpi }}
@@ -99,11 +103,6 @@ jobs:
       # BUILD MAIN PROJECT:
       # -------------------
       - name: Configure
-        if: matrix.build_third_party_libs == 'OFF'
-        run: cmake --preset ${{ matrix.build_info.preset }} -DOOMPH_USE_OPENBLAS_FROM=/usr/lib/x86_64-linux-gnu/openblas-pthread -B build
-
-      - name: Configure with third-party libs
-        if: matrix.build_third_party_libs == 'ON'
         run: cmake --preset ${{ matrix.build_info.preset }} $(cat external_distributions/build/cmake_flags_for_oomph_lib.txt) -B build
 
       - name: Build
