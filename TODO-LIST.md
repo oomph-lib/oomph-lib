@@ -4,16 +4,18 @@
 
 Include tasks here that likely need some collaboration with Matthias
 
-* [ ] DISCUSS UPDATED SELF-TEST TRIGGER SYNTAX
-* [ ] Can I wipe the `config/` directory? or do we need to keep it around?
-* [ ] Discuss making `oomph_lib_third_party_libraries` a submodule so we can preserve the README badges (or add tests to main project; should only trigger those workflows if we edit external_distributions/)
+* [ ] Update doc/FAQ/...
+  * [ ] E.g. "The oomph-lib distribution includes some third-party libraries. How do I get the code to link against optimised local versions of these libraries that are already installed on my machine?"
+* [ ] Kill all scripts that will no longer be required, e.g. `move_external_libraries_and_distributions_to_permanent_location.bash`
 * [ ] Discuss switching to OpenBLAS only (need to change OOMPH_USE_BLAS/LAPACK_FROM)
 
 * [ ] Go through all new commits to the main repository in the last 1-2 years and make sure any changes in Makefiles have been reflected in their corresponding CMakeLists.txt file
 * [ ] Possibly change `oomphlib` -> `oomph_lib`? (carefully(!) avoid changing headers/sources)
+  * **CHANGE IT**
 
 * [ ] Test with `OOMPH_TRANSITION_TO_VERSION_3`
 * [ ] Add demo driver test target to "all" so `ninja` in the build directory will also cause required test files to be copied over
+  * **YES DO THIS!**
 
 ### Improvements
 
@@ -23,32 +25,17 @@ Include tasks here that likely need some collaboration with Matthias
 ### GitHub-y
 
 * [ ] Add a `destruct_test.yaml` to test lots of different configurations (e.g. with and without MPI, w/ and w/o Hypre, etc.)
-* [ ] Add constraints to when we should run the self-tests (e.g. when CMakeLists.txt, .h, .c, .cc files have been edited)
 
 ### Pure-CMake
 
 * [ ] Propagate compiler flags to users executables
 * [ ] Patch the use of shared libs
 * [ ] Update MPI tests to specify [PROCESSORS](https://cmake.org/cmake/help/latest/prop_test/PROCESSORS.html#prop_test:PROCESSORS) rather than forcing everything to run sequentially
-* [ ] Update `oomph_add_test()` to take args for `validate.sh` and explicitly pass e.g. "${OOMPH_ROOT_DIR}" and "${OOMPH_MPI_RUN_COMMAND}"
+* [x] Update `oomph_add_test()` to take args for `validate.sh` and explicitly pass e.g. "${OOMPH_ROOT_DIR}" and "${OOMPH_MPI_RUN_COMMAND}"
   * Should help make things transparent and easier for users to control
 * [ ] Update every test name to be the path to the demo driver; e.g. `mpi.distribution.adaptive_driven_cavity`
 * [ ] Patch `ninja oomph_uninstall` command for Ninja Multi-Config
 * [ ] Update build system to make sure building a demo driver target without `ctest` also runs the `check_...` target to build the target and copy files over
-* [ ] Think about *installing* `fpdiff.py` AND `validate_ok_count` incase the user wants to install `oomph-lib` but wipe everything but the demo drivers.
-  * *If* I decide to do this:
-    * [ ] Make a copy of these files in each folder (seems reasonable as 200 x 15KB = 3MB for `fpdiff.py`)
-    * [ ] Need to update `OomphAddTest.cmake` CAREFULLY as we need to know where these files will live
-      * Maybe create a variable to store the default location (e.g. `PATH_TO_FPDIFF_PY`) that either gets appended to or overwritten when the library and the `fpdiff.py` script is installed
-      * **NOTE:** If we append, we may make changes to one script and affect the demo drivers in an unclear way
-    * [ ] Update each `validate.sh` script to
-      * [ ] Remove the `OOMPH_ROOT_DIR` argument from every `validate.sh`
-      * [ ] Remove the `OOMPH_ROOT_DIR` usage from `fpdiff.py` (user can assume that it will be installed in the same folder as the `validate.sh`; i.e. outside the `Validation/` directory) and `validate_ok_count`
-  * [ ] We should be able to create a global `validation.log` using `ctest --output-log`!
-* [ ] Add a `oomph_add_pure_cpp_test()` with an `ARGS` command for arguments to pass
-  * Should define the executable AND the test target
-  * Will allow us to create an individual test per test for finer granularity
-* [ ] Add `OOMPH_BLAS_LIB`/`OOMPH_LAPACK_LIB` variables to store the path to the chosen BLAS lib **then** tidy up the Hypre `CMakeLists.txt`
 * [ ] *Add presets:*
   * [ ] For MPI configuration
   * [ ] For Intel-based Macs (`--preset macos`) and Arm-based (`--preset macos_arm64`)
@@ -58,11 +45,7 @@ Include tasks here that likely need some collaboration with Matthias
 
 ### Features to check, add or patch
 
-* [ ] ~~Add Intel MKL BLAS support~~
-* [ ] Implement `oomph_pure_cpp_test`
-  * [ ] C++ side: Add a struct to generically handle the args for a pure C++ test
 * [ ] Fix MPI-enabled demo drivers that are broken on macOS
-* [ ] Update GitHub self-tests to only run after pushing .h, .c, .cc, CMakeLists.txt code (see e.g. [here](https://github.com/scivision/mumps/blob/v5.5.1.7/.github/workflows/ci.yml)).
 * [ ] Add `check_...()` calls to make sure the C/C++/Fortran/MPI compilers work
 * [ ] Download CMake `oomph-lib` to a folder that has a space in the name
 
@@ -101,6 +84,9 @@ Include tasks here that likely need some collaboration with Matthias
 
 ## Finished
 
+* [x] Add constraints to when we should run the self-tests (e.g. when CMakeLists.txt, .h, .c, .cc files have been edited)
+* [ ] ~~Add Intel MKL BLAS support~~
+* [x] Update GitHub self-tests to only run after pushing .h, .c, .cc, CMakeLists.txt code (see e.g. [here](https://github.com/scivision/mumps/blob/v5.5.1.7/.github/workflows/ci.yml)).
 * [x] Discuss updating to C++17
   * [x] Required for Trilinos v14.4.0+ so will definitely be required for Trilinos v14.0
 * [x] Add `oomph_option(...)` commands to specify the commandline options to the user
@@ -127,6 +113,10 @@ Include tasks here that likely need some collaboration with Matthias
 * [x] Convert external library version numbers to variables?
 * [ ] ~~Address MUMPS 64-bit int (i.e. long long) compatibility issue~~
   * Not important for now
+
+* [x] DISCUSS UPDATED SELF-TEST TRIGGER SYNTAX
+* [x] Can I wipe the `config/` directory? or do we need to keep it around?
+* [x] Discuss making `oomph_lib_third_party_libraries` a submodule so we can preserve the README badges (or add tests to main project; should only trigger those workflows if we edit external_distributions/)
 
 * Add support for building and installing the following packages ourselves:
   * [x] GMP
