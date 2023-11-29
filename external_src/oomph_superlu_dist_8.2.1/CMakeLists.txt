@@ -283,6 +283,11 @@ if(MSVC AND BUILD_SHARED_LIBS)
   set_target_properties(${LIBNAME} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS ON)
 endif()
 
+# Silence the (annoying) warnings produced by this library
+include(OomphTargetSilenceWarnings)
+oomph_target_silence_warnings(
+  TARGET ${LIBNAME} C_COMPILE_FLAGS -Wno-deprecated-non-prototype -Wno-format)
+
 # ------------------------------------------------------------------------------
 # BOILERPLATE: Update variables in parent scope
 
