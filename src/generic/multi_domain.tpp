@@ -1418,7 +1418,10 @@ namespace oomph
             outfile.close();
           }
 
-          sprintf(filename, "missing_coords%s.dat", modifier.str().c_str());
+          snprintf(filename,
+                   sizeof(filename),
+                   "missing_coords%s.dat",
+                   modifier.str().c_str());
           outfile.open(filename);
           unsigned n = External_element_located.size();
           error_stream << "Number of unlocated elements " << n << std::endl;

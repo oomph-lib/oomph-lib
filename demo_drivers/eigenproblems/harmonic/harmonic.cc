@@ -338,7 +338,7 @@ void HarmonicProblem<ELEMENT,EIGEN_SOLVER>::doc_solution(const unsigned& label)
  npts=5; 
 
  // Output solution with specified number of plot points per element
- sprintf(filename,"soln%i.dat",label);
+ snprintf(filename, sizeof(filename), "soln%i.dat",label);
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
  some_file.close();
@@ -410,7 +410,7 @@ solve(const unsigned& label)
  this->doc_solution(label);
 
  char filename[100];
- sprintf(filename,"eigenvalues%i.dat",label);
+ snprintf(filename, sizeof(filename), "eigenvalues%i.dat",label);
  
  //Open an output file for the sorted eigenvalues
  ofstream evalues(filename);

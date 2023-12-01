@@ -235,7 +235,7 @@ void MovingBlockProblem<ELEMENT,MESH>::doc_solution(DocInfo& doc_info)
  npts=2; 
 
  // Output solution 
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
 	 doc_info.number());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);

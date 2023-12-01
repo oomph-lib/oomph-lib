@@ -460,8 +460,8 @@ void VorticityRecoveryProblem<ELEMENT>::check_smoothed_vorticity(
 
   ofstream some_file;
   char filename[10000];
-  sprintf(
-    filename, "%s/vorticity_convergence.dat", doc_info.directory().c_str());
+  snprintf(
+    filename, sizeof(filename), "%s/vorticity_convergence.dat", doc_info.directory().c_str());
   some_file.open(filename);
   some_file << "VARIABLES=\"nel\",\"sqrt(1/nel)\",";
   if (el_pt->nvorticity_derivatives_to_recover() >= 1)
@@ -602,8 +602,8 @@ void VorticityRecoveryProblem<ELEMENT>::doc_solution(
   unsigned npts = 2;
 
   // Create the file name
-  sprintf(
-    filename, "%s/soln%i.dat", doc_info.directory().c_str(), doc_info.number());
+  snprintf(
+    filename, sizeof(filename), "%s/soln%i.dat", doc_info.directory().c_str(), doc_info.number());
 
   // Open a file with the chosen file name
   some_file.open(filename);
@@ -616,7 +616,7 @@ void VorticityRecoveryProblem<ELEMENT>::doc_solution(
 
   // Output analytical vorticity and derivatives -- uses fake
   // (zero) data for velocities and pressure
-  sprintf(filename,
+  snprintf(filename, sizeof(filename), 
           "%s/analytical_vorticity_and_indicator%i.dat",
           doc_info.directory().c_str(),
           doc_info.number());

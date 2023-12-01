@@ -224,7 +224,8 @@ namespace oomph
     std::ofstream outfile;
     char filename[100];
 
-    sprintf(filename, "Triangulateio_object_%s.dat", s.c_str());
+    snprintf(
+      filename, sizeof(filename), "Triangulateio_object_%s.dat", s.c_str());
     outfile.open(filename);
     outfile << "# Triangulateio object values:\n\n" << std::endl;
 
@@ -273,7 +274,7 @@ namespace oomph
     std::ofstream nodefile;
     char nodename[100];
 
-    sprintf(nodename, "file_%s.1.node", s.c_str());
+    snprintf(nodename, sizeof(nodename), "file_%s.1.node", s.c_str());
     nodefile.open(nodename);
     nodefile << triangle.numberofpoints << " 2 "
              << triangle.numberofpointattributes << " 0" << std::endl;
@@ -376,7 +377,7 @@ namespace oomph
       std::ofstream elefile;
       char elename[100];
 
-      sprintf(elename, "file_%s.1.ele", s.c_str());
+      snprintf(elename, sizeof(elename), "file_%s.1.ele", s.c_str());
       elefile.open(elename);
       elefile << triangle.numberoftriangles << " 3 0" << std::endl;
       for (int j = 0; j < triangle.numberoftriangles * 3; j += 3)

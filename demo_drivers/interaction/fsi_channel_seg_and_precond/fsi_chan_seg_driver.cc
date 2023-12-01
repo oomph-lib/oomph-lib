@@ -782,21 +782,21 @@ void SegregatedFSICollapsibleChannelProblem<ELEMENT>:: doc_solution_steady(
  npts=5; 
 
  // Output fluid solution 
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  this->bulk_mesh_pt()->output(some_file,npts);
  some_file.close();
 
  // Document the wall shape
- sprintf(filename,"%s/beam%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/beam%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  this->wall_mesh_pt()->output(some_file,npts);
  some_file.close();
  
 // Write restart file
- sprintf(filename,"%s/restart%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/restart%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  some_file.precision(16);                          
@@ -863,21 +863,21 @@ void SegregatedFSICollapsibleChannelProblem<ELEMENT>::doc_solution_unsteady(
  npts=5; 
 
  // Output fluid solution 
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  this->bulk_mesh_pt()->output(some_file,npts);
  some_file.close();
 
  // Document the wall shape
- sprintf(filename,"%s/beam%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/beam%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  this->wall_mesh_pt()->output(some_file,npts);
  some_file.close();
  
 // Write restart file
- sprintf(filename,"%s/restart%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/restart%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  this->dump_it(some_file);
@@ -946,7 +946,7 @@ void SegregatedFSICollapsibleChannelProblem<ELEMENT>::steady_run()
  // Open a trace file 
  ofstream trace_file;
  char filename[100];   
- sprintf(filename,"%s/trace.dat",doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/trace.dat",doc_info.directory().c_str());
  trace_file.open(filename);
 
 
@@ -1067,7 +1067,7 @@ void SegregatedFSICollapsibleChannelProblem<ELEMENT>::steady_run()
        halt_timer();
    
        char filename[100];
-       sprintf(filename,"%s/picard_convergence%i.dat",
+       snprintf(filename, sizeof(filename), "%s/picard_convergence%i.dat",
                doc_info.directory().c_str(),
                doc_info.number());
        Convergence_file.open(filename);
@@ -1124,7 +1124,7 @@ void SegregatedFSICollapsibleChannelProblem<ELEMENT>::steady_run()
        store_solid_dofs();
    
        char filename[100];
-       sprintf(filename,"%s/newton_convergence%i.dat",
+       snprintf(filename, sizeof(filename), "%s/newton_convergence%i.dat",
                doc_info.directory().c_str(),
                doc_info.number());
        Convergence_file.open(filename);
@@ -1225,7 +1225,7 @@ void SegregatedFSICollapsibleChannelProblem<ELEMENT>::unsteady_run(
   // Open a trace file 
   ofstream trace_file;
   char filename[100];   
-  sprintf(filename,"%s/trace.dat",doc_info.directory().c_str());
+  snprintf(filename, sizeof(filename), "%s/trace.dat",doc_info.directory().c_str());
   trace_file.open(filename);
 
 
@@ -1318,7 +1318,7 @@ void SegregatedFSICollapsibleChannelProblem<ELEMENT>::unsteady_run(
         //store_solid_dofs();
         
         char filename[100];
-        sprintf(filename,"%s/picard_convergence%i.dat",
+        snprintf(filename, sizeof(filename), "%s/picard_convergence%i.dat",
                 doc_info.directory().c_str(),
                 doc_info.number());
         Convergence_file.open(filename);
@@ -1372,7 +1372,7 @@ void SegregatedFSICollapsibleChannelProblem<ELEMENT>::unsteady_run(
         store_solid_dofs();
         
         char filename[100];
-        sprintf(filename,"%s/newton_convergence%i.dat",
+        snprintf(filename, sizeof(filename), "%s/newton_convergence%i.dat",
                 doc_info.directory().c_str(),
                 doc_info.number());
         Convergence_file.open(filename);

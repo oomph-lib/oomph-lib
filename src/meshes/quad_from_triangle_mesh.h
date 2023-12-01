@@ -468,7 +468,10 @@ namespace oomph
 
       // Convert the Input string in *char required by the triangulate function
       char triswitches[100];
-      sprintf(triswitches, "%s", input_string_stream.str().c_str());
+      snprintf(triswitches,
+               sizeof(triswitches),
+               "%s",
+               input_string_stream.str().c_str());
 
       // Build the mesh using triangulate function
       triangulate(triswitches, &triangulate_io, &triangulate_out, 0);

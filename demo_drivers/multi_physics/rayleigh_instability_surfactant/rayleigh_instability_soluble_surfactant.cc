@@ -798,7 +798,7 @@ doc_solution(DocInfo &doc_info)
  const unsigned npts = 5;
 
  // Open solution output file
-// sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+// snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
 //         doc_info.number());
 // some_file.open(filename);
 
@@ -806,7 +806,7 @@ doc_solution(DocInfo &doc_info)
 // Bulk_mesh_pt->output(some_file,npts);
 // some_file.close();
  //Put interface in separate file
- sprintf(filename,"%s/int%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/int%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Interface_mesh_pt->output(some_file,npts);
@@ -827,7 +827,7 @@ doc_solution(DocInfo &doc_info)
 // some_file.close();
 
  // Output solution to file in paraview format
- //sprintf(filename,"%s/soln%i.vtu",doc_info.directory().c_str(),
+ //snprintf(filename, sizeof(filename), "%s/soln%i.vtu",doc_info.directory().c_str(),
  //        doc_info.number());
  //some_file.open(filename);
  //Bulk_mesh_pt->output_paraview(some_file,npts);
@@ -868,7 +868,7 @@ unsteady_run(const double &t_max, const double &dt)
  
  // Open trace file
  char filename[100];   
- sprintf(filename,"%s/trace.dat",doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/trace.dat",doc_info.directory().c_str());
  Trace_file.open(filename);
 
  // Initialise trace file
@@ -888,7 +888,7 @@ unsteady_run(const double &t_max, const double &dt)
  // Open pvd file -- a wrapper for all the different
  // vtu output files plus information about continuous time
  // to facilitate animations in paraview
- //sprintf(filename,"%s/soln.pvd",doc_info.directory().c_str());
+ //snprintf(filename, sizeof(filename), "%s/soln.pvd",doc_info.directory().c_str());
  //Global_Physical_Variables::Pvd_file.open(filename);
  //ParaviewHelper::write_pvd_header(Global_Physical_Variables::Pvd_file);
 

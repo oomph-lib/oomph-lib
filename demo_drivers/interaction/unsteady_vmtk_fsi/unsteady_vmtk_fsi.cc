@@ -868,7 +868,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
    
    //Doc boundary coordinates in fluid
    char filename[100];
-   sprintf(filename,"RESLT/fluid_boundary_coordinates%i.dat",i);
+   snprintf(filename, sizeof(filename), "RESLT/fluid_boundary_coordinates%i.dat",i);
    Multi_domain_functions::Doc_boundary_coordinate_file.open(filename);
    
    // Setup FSI: Pass ID of fluid FSI boundary and associated
@@ -1123,7 +1123,7 @@ doc_solid_boundary_coordinates(const unsigned& i)
  
  //Doc boundary coordinates in fluid
  char filename[100];
- sprintf(filename,"RESLT/solid_boundary_coordinates%i.dat",i);
+ snprintf(filename, sizeof(filename), "RESLT/solid_boundary_coordinates%i.dat",i);
  std::ofstream the_file(filename);
  
  // Loop over traction elements
@@ -1194,7 +1194,7 @@ doc_solution(DocInfo& doc_info)
  
  // Output solid boundaries
  //------------------------
- sprintf(filename,"%s/solid_boundaries%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/solid_boundaries%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Solid_mesh_pt->output_boundaries(some_file);
@@ -1203,7 +1203,7 @@ doc_solution(DocInfo& doc_info)
  
  // Output solid solution
  //-----------------------
- sprintf(filename,"%s/solid_soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/solid_soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Solid_mesh_pt->output(some_file,npts);
@@ -1212,7 +1212,7 @@ doc_solution(DocInfo& doc_info)
  
  // Output fluid boundaries
  //------------------------
- sprintf(filename,"%s/fluid_boundaries%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/fluid_boundaries%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Fluid_mesh_pt->output_boundaries(some_file);
@@ -1221,7 +1221,7 @@ doc_solution(DocInfo& doc_info)
  
  // Output fluid solution
  //-----------------------
- sprintf(filename,"%s/fluid_soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/fluid_soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Fluid_mesh_pt->output(some_file,npts);
@@ -1230,7 +1230,7 @@ doc_solution(DocInfo& doc_info)
    
  // Output fsi traction
  //--------------------
- sprintf(filename,"%s/fsi_traction%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/fsi_traction%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  unsigned n=nsolid_fsi_boundary();

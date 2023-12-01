@@ -320,11 +320,11 @@ public:
       {
        if(disc)
         {
-         sprintf(filename,"disc_%li_time%g.dat",mesh_pt()->nelement(),time());
+         snprintf(filename, sizeof(filename), "disc_%li_time%g.dat",mesh_pt()->nelement(),time());
         }
        else
         {
-         sprintf(filename,"cont_%li_time%g.dat",mesh_pt()->nelement(),time());
+         snprintf(filename, sizeof(filename), "cont_%li_time%g.dat",mesh_pt()->nelement(),time());
         }
        std::ofstream outfile(filename);
        mesh_pt()->output(outfile);

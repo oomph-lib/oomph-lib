@@ -781,7 +781,7 @@ namespace oomph
 
         std::ofstream target_sizes_file;
         char filename[100];
-        sprintf(filename, "target_sizes%i.dat", iter);
+        snprintf(filename, sizeof(filename), "target_sizes%i.dat", iter);
         if (output_target_sizes)
         {
           target_sizes_file.open(filename);

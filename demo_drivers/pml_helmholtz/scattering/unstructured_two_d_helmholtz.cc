@@ -462,7 +462,7 @@ void PMLProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Output solution
  //-----------------
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,npts);
@@ -470,7 +470,7 @@ void PMLProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Output coarse solution
  //-----------------------
- sprintf(filename,"%s/coarse_soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/coarse_soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  unsigned npts_coarse=2;
@@ -480,7 +480,7 @@ void PMLProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Output solution within pml domains
  //-----------------------------------
- sprintf(filename,"%s/pml_soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/pml_soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  PML_top_mesh_pt->output(some_file,npts);
@@ -506,7 +506,7 @@ void PMLProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  // unsigned nstep=40;
  // for (unsigned i=0;i<nstep;i++)
  //  {
- //   sprintf(filename,"%s/helmholtz_animation%i_frame%i.dat",
+ //   snprintf(filename, sizeof(filename), "%s/helmholtz_animation%i_frame%i.dat",
  //           doc_info.directory().c_str(),
  //           doc_info.number(),i);
  //   some_file.open(filename);

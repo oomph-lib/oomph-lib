@@ -98,7 +98,7 @@ infile.close();
 
  unsigned nn=0;
  char result[20];
- sprintf(result,"%s","mesh.quad");
+ snprintf(result, sizeof(result), "%s","mesh.quad");
  ofstream outfile(result,ios_base::out);
  outfile<<"QUAD"<<'\n';
  for(unsigned i=0;i<n_element;i++)

@@ -439,7 +439,7 @@ UnstructuredPoissonProblem<ELEMENT>::UnstructuredPoissonProblem()
 
  // Open trace file
  char filename[100];
- sprintf(filename,"RESLT/trace.dat");
+ snprintf(filename, sizeof(filename), "RESLT/trace.dat");
  Trace_file.open(filename);
 
  // Setup equation numbering scheme
@@ -544,7 +544,7 @@ void UnstructuredPoissonProblem<ELEMENT>::doc_solution(const
  unsigned npts;
  npts=5; 
  
- sprintf(filename,"RESLT/soln%i.dat",Doc_info.number());
+ snprintf(filename, sizeof(filename), "RESLT/soln%i.dat",Doc_info.number());
  some_file.open(filename);
  this->My_mesh_pt->output(some_file,npts); 
  some_file << "TEXT X = 22, Y = 92, CS=FRAME T = \"" 
@@ -553,14 +553,14 @@ void UnstructuredPoissonProblem<ELEMENT>::doc_solution(const
  
  // Output exact solution 
  //----------------------
- sprintf(filename,"RESLT/exact_soln%i.dat",Doc_info.number());
+ snprintf(filename, sizeof(filename), "RESLT/exact_soln%i.dat",Doc_info.number());
  some_file.open(filename);
  My_mesh_pt->output_fct(some_file,npts,TanhSolnForPoisson::get_exact_u); 
  some_file.close();
  
  // Output boundaries
  //------------------
- sprintf(filename,"RESLT/boundaries%i.dat",Doc_info.number());
+ snprintf(filename, sizeof(filename), "RESLT/boundaries%i.dat",Doc_info.number());
  some_file.open(filename);
  My_mesh_pt->output_boundaries(some_file);
  some_file.close();
@@ -569,7 +569,7 @@ void UnstructuredPoissonProblem<ELEMENT>::doc_solution(const
  // Doc error and return of the square of the L2 error
  //---------------------------------------------------
  double error,norm,dummy_error,zero_norm;
- sprintf(filename,"RESLT/error%i.dat",Doc_info.number());
+ snprintf(filename, sizeof(filename), "RESLT/error%i.dat",Doc_info.number());
  some_file.open(filename);
  My_mesh_pt->compute_error(some_file,TanhSolnForPoisson::get_exact_u,
                            error,norm); 
@@ -612,7 +612,7 @@ void UnstructuredPoissonProblem<ELEMENT>::doc_solution(const
    el_pt->node_pt(5)->x(0)=0.0;
    el_pt->node_pt(5)->x(1)=0.5;
 
-   sprintf(filename,"RESLT/element0.dat");
+   snprintf(filename, sizeof(filename), "RESLT/element0.dat");
    some_file.open(filename);
    el_pt->output(some_file,nplot);
    some_file.close();
@@ -621,7 +621,7 @@ void UnstructuredPoissonProblem<ELEMENT>::doc_solution(const
    Vector<double> s(2);
    Vector<double> s_orig(2);
   
-   sprintf(filename,"RESLT/sample_points_in_element0.dat");
+   snprintf(filename, sizeof(filename), "RESLT/sample_points_in_element0.dat");
    some_file.open(filename);
   
    // Tecplot header info

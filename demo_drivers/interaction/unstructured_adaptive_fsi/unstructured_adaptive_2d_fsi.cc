@@ -897,14 +897,14 @@ doc_solution(DocInfo& doc_info)
 
  // Output solution
  //----------------
- sprintf(filename,"%s/solid_soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/solid_soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Solid_mesh_pt->output(some_file,npts);
  some_file.close();
 
  //----------------
- sprintf(filename,"%s/fluid_soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/fluid_soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Fluid_mesh_pt->output(some_file,npts);

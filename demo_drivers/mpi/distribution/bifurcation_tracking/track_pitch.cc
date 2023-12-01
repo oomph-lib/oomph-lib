@@ -583,7 +583,7 @@ void RotatingProblem<ELEMENT>::solve_system()
 
    //Output data at each step
    //Create the filename, including the array index
-   /*sprintf(filename,"step%g_%g.dat",Length,Re);
+   /*snprintf(filename, sizeof(filename), "step%g_%g.dat",Length,Re);
    //Actually, write the data
    file.open(filename);
    mesh_pt()->output(file,5);

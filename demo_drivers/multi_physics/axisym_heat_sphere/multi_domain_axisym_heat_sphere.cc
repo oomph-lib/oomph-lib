@@ -477,13 +477,13 @@ int main()
    problem.newton_solve(max_adapt);
    
    //Open an output file
-   sprintf(filename,"vel_soln_Re%g.dat", Global_Parameters::Re);
+   snprintf(filename, sizeof(filename), "vel_soln_Re%g.dat", Global_Parameters::Re);
    //Doc result
    ofstream outfile(filename);
    problem.nst_mesh_pt()->output(outfile,5);
    outfile.close();
    
-   sprintf(filename,"conc_soln_Re%g.dat", Global_Parameters::Re);
+   snprintf(filename, sizeof(filename), "conc_soln_Re%g.dat", Global_Parameters::Re);
    outfile.open(filename);
    problem.adv_diff_mesh_pt()->output(outfile,5);
    outfile.close();

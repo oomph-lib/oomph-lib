@@ -294,7 +294,7 @@ void SteadyCurvedTubeProblem<ELEMENT>::doc_solution()
  //Need high precision for large radii of curvature
  //some_file.precision(10);
  // Output solution labelled by the Reynolds number
- sprintf(filename,"%s/soln_Re%g.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln_Re%g.dat",Doc_info.directory().c_str(),
          Global_Physical_Variables::Re);
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);

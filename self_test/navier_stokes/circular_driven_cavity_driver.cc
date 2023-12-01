@@ -361,7 +361,7 @@ void DrivenCavityProblem<ELEMENT,MESH>::doc_solution(DocInfo& doc_info,
  npts=5; 
 
  // Output solution 
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
@@ -458,7 +458,7 @@ void DrivenCavityProblem<ELEMENT,MESH>::run(unsigned& next_istep)
  
  // Open trace file
  char filename[100];   
- sprintf(filename,"%s/trace%i.dat",doc_info.directory().c_str(),next_istep);
+ snprintf(filename, sizeof(filename), "%s/trace%i.dat",doc_info.directory().c_str(),next_istep);
  trace_file.open(filename);
  trace_file << "# Driven cavity validation " << std::endl;
  trace_file << "# # of nodes along element edge " 

@@ -255,13 +255,13 @@ void SimpleShearProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  unsigned npts = 5; 
 
  // Output shape of deformed body
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
  some_file.close();
  
- sprintf(filename,"%s/stress%i.dat", doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/stress%i.dat", doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  //Output the appropriate stress at the centre of each element

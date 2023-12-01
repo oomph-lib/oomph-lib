@@ -306,7 +306,7 @@ void YoungLaplaceProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
  //---------------------
  ofstream some_file;
  char filename[100];
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
@@ -330,7 +330,7 @@ int main()
  //Open a trace file
  ofstream trace_file;
  char filename[100];
- sprintf(filename,"%s/trace.dat",doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/trace.dat",doc_info.directory().c_str());
  trace_file.open(filename);
  
  // Write kappa, exact kappa and height values

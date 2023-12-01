@@ -483,7 +483,7 @@ void UnsteadyHeatProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
 
  // Output solution 
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,npts);
@@ -491,14 +491,14 @@ void UnsteadyHeatProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Output solution coarsely (only element vertices for easier
  // mesh visualisation)
- sprintf(filename,"%s/coarse_soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/coarse_soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,2);
  some_file.close();
 
  // Output flux with melt
- sprintf(filename,"%s/flux_with_melt%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/flux_with_melt%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  unsigned nnod=dynamic_cast<UnsteadyHeatFluxPseudoMeltElement<ELEMENT>*>(
@@ -513,7 +513,7 @@ void UnsteadyHeatProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Output Number of Newton iterations in form that can be visualised
  // as vector in paraview
- sprintf(filename,"%s/newton_iter%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/newton_iter%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  some_file << "0 0 0 " << Nnewton_iter_taken << std::endl;

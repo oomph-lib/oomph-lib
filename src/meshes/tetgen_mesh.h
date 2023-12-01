@@ -368,7 +368,8 @@ namespace oomph
 
       // Now convert to a C-style string
       char tetswitches[100];
-      sprintf(tetswitches, "%s", input_string.str().c_str());
+      snprintf(
+        tetswitches, sizeof(tetswitches), "%s", input_string.str().c_str());
 
       // Make a new tetgen representation
       this->Tetgenio_exists = true;

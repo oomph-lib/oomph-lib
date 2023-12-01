@@ -864,21 +864,21 @@ doc_solution_steady(
  npts=5; 
 
  // Output fluid solution 
- sprintf(filename,"%s/soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  bulk_mesh_pt()->output(some_file,npts);
  some_file.close();
 
  // Document the wall shape
- sprintf(filename,"%s/beam%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/beam%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  wall_mesh_pt()->output(some_file,npts);
  some_file.close();
  
 // Write restart file
- sprintf(filename,"%s/restart%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/restart%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  some_file.precision(16);                          
@@ -926,21 +926,21 @@ doc_solution_unsteady(
  npts=5; 
 
  // Output fluid solution 
- sprintf(filename,"%s/soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  bulk_mesh_pt()->output(some_file,npts);
  some_file.close();
 
  // Document the wall shape
- sprintf(filename,"%s/beam%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/beam%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  wall_mesh_pt()->output(some_file,npts);
  some_file.close();
  
 // Write restart file
- sprintf(filename,"%s/restart%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/restart%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  dump_it(some_file);
@@ -1174,7 +1174,7 @@ void FSICollapsibleChannelProblem<ELEMENT>::steady_run()
  // Open a trace file 
  ofstream trace_file;
  char filename[100];   
- sprintf(filename,"%s/trace.dat",Doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/trace.dat",Doc_info.directory().c_str());
  trace_file.open(filename);
 
  // Write trace file header
@@ -1309,7 +1309,7 @@ void FSICollapsibleChannelProblem<ELEMENT>::unsteady_run(const double& dt)
   // Open a trace file 
   ofstream trace_file;
   char filename[100];   
-  sprintf(filename,"%s/trace.dat",Doc_info.directory().c_str());
+  snprintf(filename, sizeof(filename), "%s/trace.dat",Doc_info.directory().c_str());
   trace_file.open(filename);
 
 

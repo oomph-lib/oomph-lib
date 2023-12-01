@@ -13323,13 +13323,14 @@ namespace oomph
       //    //---------------------------------------------------------
       //    std::ofstream some_file;
       //    char filename[100];
-      //    sprintf(filename,"read_mesh%i_on_proc%i.dat",m,
+      //    snprintf(filename, sizeof(filename), "read_mesh%i_on_proc%i.dat",m,
       //            this->communicator_pt()->my_rank());
       //    some_file.open(filename);
       //    mesh_pt(m)->output(some_file);
       //    some_file.close();
 
-      //    sprintf(filename,"read_mesh%i_with_haloes_on_proc%i.dat",m,
+      //    snprintf(filename, sizeof(filename),
+      //    "read_mesh%i_with_haloes_on_proc%i.dat",m,
       //            this->communicator_pt()->my_rank());
       //    mesh_pt(m)->enable_output_of_halo_elements();
       //    some_file.open(filename);
@@ -13338,7 +13339,8 @@ namespace oomph
       //    some_file.close();
       //    oomph_info << "Doced mesh " << m << " before reading\n";
 
-      //    sprintf(filename,"read_nodes_mesh%i_on_proc%i.dat",m,
+      //    snprintf(filename, sizeof(filename),
+      //    "read_nodes_mesh%i_on_proc%i.dat",m,
       //            this->communicator_pt()->my_rank());
       //    some_file.open(filename);
       //    unsigned nnod=mesh_pt(m)->nnode();

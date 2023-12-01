@@ -875,7 +875,7 @@ void PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::doc_solution(
  ofstream file;
 
  // Fluid
- sprintf(filename,"%s/soln-fluid%i.dat",
+ snprintf(filename, sizeof(filename), "%s/soln-fluid%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  file.open(filename);
@@ -883,7 +883,7 @@ void PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::doc_solution(
  file.close();
 
  // Fluid traction
- sprintf(filename,"%s/fluid_traction%i.dat",
+ snprintf(filename, sizeof(filename), "%s/fluid_traction%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  file.open(filename);
@@ -892,7 +892,7 @@ void PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::doc_solution(
 
 
  // Fluid traction
- sprintf(filename,"%s/fluid_fsi_traction%i.dat",
+ snprintf(filename, sizeof(filename), "%s/fluid_fsi_traction%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  file.open(filename);
@@ -901,7 +901,7 @@ void PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::doc_solution(
 
 
  // // Fluid traction
- // sprintf(filename,"%s/tmp_fluid_fsi_traction%i.dat",
+ // snprintf(filename, sizeof(filename), "%s/tmp_fluid_fsi_traction%i.dat",
  //         doc_info.directory().c_str(),
  //         doc_info.number());
  // file.open(filename);
@@ -909,7 +909,7 @@ void PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::doc_solution(
  // file.close();
 
  // Solid
- sprintf(filename,"%s/soln-solid%i.dat",
+ snprintf(filename, sizeof(filename), "%s/soln-solid%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  file.open(filename);
@@ -918,7 +918,7 @@ void PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::doc_solution(
 
 
  // Solid traction
- sprintf(filename,"%s/solid_traction%i.dat",
+ snprintf(filename, sizeof(filename), "%s/solid_traction%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  file.open(filename);
@@ -927,7 +927,7 @@ void PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::doc_solution(
 
 
  // Solid traction
- sprintf(filename,"%s/outside_solid_traction%i.dat",
+ snprintf(filename, sizeof(filename), "%s/outside_solid_traction%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  file.open(filename);
@@ -936,7 +936,7 @@ void PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::doc_solution(
 
 
  // Fluid at regularly spaced points
- sprintf(filename,"%s/regular_fluid%i.dat",
+ snprintf(filename, sizeof(filename), "%s/regular_fluid%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  file.open(filename);
@@ -970,7 +970,7 @@ void PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::doc_solution(
 
  // Output "exact" pulse wave solution
  //-----------------------------------
- sprintf(filename,"%s/pulse_wave%i.dat",
+ snprintf(filename, sizeof(filename), "%s/pulse_wave%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  file.open(filename);

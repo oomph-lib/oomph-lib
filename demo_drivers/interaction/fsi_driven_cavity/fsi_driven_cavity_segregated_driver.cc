@@ -423,7 +423,7 @@ int main(int argc, char* argv[])
  // Open a trace file 
  ofstream trace_file;
  char filename[100];   
- sprintf(filename,"%s/trace.dat",doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/trace.dat",doc_info.directory().c_str());
  trace_file.open(filename);
  
  // Output the initial solution

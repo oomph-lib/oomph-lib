@@ -896,7 +896,7 @@ void UnsteadyHeatProblem<ELEMENT>::doc_solution(const bool& doc_error)
   if (GlobalParameters::Apply_time_periodic_boundary_conditions)
   {
     // Output the (numerically) approximated solution
-    sprintf(filename,"%s/soln%s%i.dat",
+    snprintf(filename, sizeof(filename), "%s/soln%s%i.dat",
             GlobalParameters::Doc_info.directory().c_str(),
             filename_suffix.c_str(),
             GlobalParameters::Doc_info.number());
@@ -905,7 +905,7 @@ void UnsteadyHeatProblem<ELEMENT>::doc_solution(const bool& doc_error)
   else
   {
     // Output the (numerically) approximated solution
-    sprintf(filename,"%s/soln_ic%i.dat",
+    snprintf(filename, sizeof(filename), "%s/soln_ic%i.dat",
             GlobalParameters::Doc_info.directory().c_str(),
             GlobalParameters::Doc_info.number());
   }
@@ -923,7 +923,7 @@ void UnsteadyHeatProblem<ELEMENT>::doc_solution(const bool& doc_error)
   // Output exact solution
   //----------------------
   // Output the exact solution
-  sprintf(filename,"%s/exact_soln%i.dat",
+  snprintf(filename, sizeof(filename), "%s/exact_soln%i.dat",
           GlobalParameters::Doc_info.directory().c_str(),
           GlobalParameters::Doc_info.number());
 
@@ -949,7 +949,7 @@ void UnsteadyHeatProblem<ELEMENT>::doc_solution(const bool& doc_error)
   double norm=0.0, error=0.0;
 
   // Output the error
-  sprintf(filename,"%s/error%s%i.dat",
+  snprintf(filename, sizeof(filename), "%s/error%s%i.dat",
           GlobalParameters::Doc_info.directory().c_str(),
           filename_suffix.c_str(),
           GlobalParameters::Doc_info.number());

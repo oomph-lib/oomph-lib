@@ -258,7 +258,7 @@ TriangleFaceTestProblem(const unsigned& h_power,const bool &permute) :
  string filestem = FileStem<ELEMENT>()();
  //Output for the errors on each face
  char error_file[100];
- sprintf(error_file,"%s_errors_%i.dat",filestem.c_str(),permute);
+ snprintf(error_file, sizeof(error_file), "%s_errors_%i.dat",filestem.c_str(),permute);
  ofstream output_error(error_file);
 
  if(permute) {std::cout << "Permuted Nodes" << std::endl;}
@@ -290,7 +290,7 @@ TriangleFaceTestProblem(const unsigned& h_power,const bool &permute) :
    Vector<double> n(2);
    Vector<double> N(2);
    char filename[100];
-   sprintf(filename,"%s_normals%i_%i.dat",
+   snprintf(filename, sizeof(filename), "%s_normals%i_%i.dat",
            filestem.c_str(),b,permute);
    ofstream output(filename);
      for(std::list<FaceElement*>::iterator it=faces_on_boundary[b].begin();

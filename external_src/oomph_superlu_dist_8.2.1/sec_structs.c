@@ -519,12 +519,12 @@ void SCT_print3D(gridinfo3d_t *grid3d, SCT_t* SCT)
     for (int i = maxLvl-1; i >-1; --i)
     {
         /* code */
-        sprintf( funName, "Grid-%d Factor:Level-%d    ", grid3d->zscp.Iam,
+        snprintf( funName, sizeof( funName),  "Grid-%d Factor:Level-%d    ", grid3d->zscp.Iam,
 		 (int) maxLvl-1-i);
         DistPrint(funName, SCT->tFactor3D[i], "Seconds", grid);
-        // sprintf( funName, "SchurCU:Level-%d   ",  maxLvl-1-i);
+        // snprintf( funName, sizeof( funName),  "SchurCU:Level-%d   ",  maxLvl-1-i);
         // DistPrint(funName, SCT->tSchCompUdt3d[i], "Seconds", grid);
-        // sprintf( funName, "PanelFact:Level-%d ",  maxLvl-1-i);
+        // snprintf( funName, sizeof( funName),  "PanelFact:Level-%d ",  maxLvl-1-i);
         // DistPrint(funName, SCT->tFactor3D[i]-SCT->tSchCompUdt3d[i], "Seconds", grid);
     }
 
@@ -550,12 +550,12 @@ void treeImbalance3D(gridinfo3d_t *grid3d, SCT_t* SCT)
         
         double tavg = tsum /(grid3d->zscp.Np>>i);
         double lLmb =  100*(tmax-tavg)/tavg;
-        sprintf( funName, "Imbalance Factor:Level-%d    ",  (int) maxLvl-1-i);
+        snprintf( funName, sizeof( funName),  "Imbalance Factor:Level-%d    ",  (int) maxLvl-1-i);
         if(!grid3d->zscp.Iam)
         DistPrint(funName, lLmb, "Seconds", grid);
-        // sprintf( funName, "SchurCU:Level-%d   ",  maxLvl-1-i);
+        // snprintf( funName, sizeof( funName),  "SchurCU:Level-%d   ",  maxLvl-1-i);
         // DistPrint(funName, SCT->tSchCompUdt3d[i], "Seconds", grid);
-        // sprintf( funName, "PanelFact:Level-%d ",  maxLvl-1-i);
+        // snprintf( funName, sizeof( funName),  "PanelFact:Level-%d ",  maxLvl-1-i);
         // DistPrint(funName, SCT->tFactor3D[i]-SCT->tSchCompUdt3d[i], "Seconds", grid);
     }
 

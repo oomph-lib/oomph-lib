@@ -336,7 +336,7 @@ UnstructuredFvKProblem<ELEMENT>::UnstructuredFvKProblem(double element_area)
  build_global_mesh();
 
  char filename[100];
- sprintf(filename, "RESLT/trace.dat");
+ snprintf(filename, sizeof(filename),  "RESLT/trace.dat");
  Trace_file.open(filename);
 
  oomph_info << "Number of equations: "
@@ -485,14 +485,14 @@ void UnstructuredFvKProblem<ELEMENT>::doc_solution()
  // Number of plot points
  unsigned npts = 5;
  
- sprintf(filename,"RESLT/soln%i.dat",Doc_info.number());
+ snprintf(filename, sizeof(filename), "RESLT/soln%i.dat",Doc_info.number());
  some_file.open(filename);
  this->My_mesh_pt->output(some_file,npts); 
  some_file.close();
  
  // Output boundaries
  //------------------
- sprintf(filename,"RESLT/boundaries%i.dat",Doc_info.number());
+ snprintf(filename, sizeof(filename), "RESLT/boundaries%i.dat",Doc_info.number());
  some_file.open(filename);
  My_mesh_pt->output_boundaries(some_file);
  some_file.close();
@@ -516,7 +516,7 @@ void UnstructuredFvKProblem<ELEMENT>::doc_solution()
 
 
  // Plot solution along radial line
- sprintf(filename,"RESLT/soln_along_radial_line%i.dat",Doc_info.number());
+ snprintf(filename, sizeof(filename), "RESLT/soln_along_radial_line%i.dat",Doc_info.number());
  some_file.open(filename);
  Vector<double> x(2);
  unsigned nplot=Radial_sample_point_pt.size();
@@ -538,7 +538,7 @@ void UnstructuredFvKProblem<ELEMENT>::doc_solution()
  // Doc error and return of the square of the L2 error
  //---------------------------------------------------
  double dummy_error,zero_norm;
- sprintf(filename,"RESLT/norm%i.dat",Doc_info.number());
+ snprintf(filename, sizeof(filename), "RESLT/norm%i.dat",Doc_info.number());
  some_file.open(filename);
  My_mesh_pt->compute_error(some_file,GlobalParameters::zero,
                            dummy_error,zero_norm);

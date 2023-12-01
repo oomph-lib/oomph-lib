@@ -583,7 +583,7 @@ void SolidFreeSurfaceRotationProblem<ELEMENT>::doc_solution()
  npts=5; 
 
  // Output solution 
- sprintf(filename,"%s/soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  unsigned n_element = Bulk_mesh_pt->nbulk();

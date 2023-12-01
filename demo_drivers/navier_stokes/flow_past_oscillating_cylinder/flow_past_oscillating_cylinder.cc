@@ -888,14 +888,14 @@ void FlowAroundCylinderProblem<ELEMENT>::doc_solution(const bool& in_unsteady)
     if (in_unsteady)
     {
       // Output solution
-      sprintf(filename,"%s/unsteady%i.dat",
+      snprintf(filename, sizeof(filename), "%s/unsteady%i.dat",
               GlobalParameters::Doc_info.directory().c_str(),
               GlobalParameters::Doc_info.number());
     }
     else
     {
       // Output solution
-      sprintf(filename,"%s/soln%i.dat",
+      snprintf(filename, sizeof(filename), "%s/soln%i.dat",
               GlobalParameters::Doc_info.directory().c_str(),
               GlobalParameters::Doc_info.number());
     }

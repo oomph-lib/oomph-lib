@@ -1358,14 +1358,14 @@ void StefanBoltzmannProblem<ELEMENT>::setup_sb_radiation()
 
    oomph_info << "Docing bins for step " << Doc_info.number() << std::endl;
 
-   sprintf(filename,"%s/populated_bins%i.dat",Doc_info.directory().c_str(),
+   snprintf(filename, sizeof(filename), "%s/populated_bins%i.dat",Doc_info.directory().c_str(),
            Doc_info.number());
    some_file.open(filename);
    StefanBoltzmannHelper::doc_bins(some_file);
    some_file.close();
    
    // Doc the sample points used to assess visibility 
-   sprintf(filename,"%s/sample_points%i.dat",Doc_info.directory().c_str(),
+   snprintf(filename, sizeof(filename), "%s/sample_points%i.dat",Doc_info.directory().c_str(),
            Doc_info.number());
    some_file.open(filename);
    StefanBoltzmannHelper::doc_sample_points(some_file,
@@ -1396,7 +1396,7 @@ void StefanBoltzmannProblem<ELEMENT>::doc_solution()
  
  // Output solution 
  //-----------------
- sprintf(filename,"%s/soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,npts);
@@ -1405,7 +1405,7 @@ void StefanBoltzmannProblem<ELEMENT>::doc_solution()
  
  // Output solution 
  //-----------------
- sprintf(filename,"%s/coarse_soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/coarse_soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  unsigned npts_coarse=2;
  some_file.open(filename);
@@ -1419,7 +1419,7 @@ void StefanBoltzmannProblem<ELEMENT>::doc_solution()
  //----------------------------------------------------
 
  // Output rays
- sprintf(filename,"%s/stefan_boltzmann_rays_left%i.dat",
+ snprintf(filename, sizeof(filename), "%s/stefan_boltzmann_rays_left%i.dat",
          Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
@@ -1429,7 +1429,7 @@ void StefanBoltzmannProblem<ELEMENT>::doc_solution()
  
 
  // Output rays
- sprintf(filename,"%s/stefan_boltzmann_rays_right%i.dat",
+ snprintf(filename, sizeof(filename), "%s/stefan_boltzmann_rays_right%i.dat",
          Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
@@ -1441,7 +1441,7 @@ void StefanBoltzmannProblem<ELEMENT>::doc_solution()
  // Output exact outer radius
  //--------------------------
  double r=GlobalParameters::radius(time_pt()->time());
- sprintf(filename,"%s/exact_melt_surface%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/exact_melt_surface%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  unsigned np=300;
@@ -1455,7 +1455,7 @@ void StefanBoltzmannProblem<ELEMENT>::doc_solution()
 
 // Output heat flux (x,y,u,flux,n_x,n_y)
 //--------------------------------------
-sprintf(filename,"%s/flux%i.dat",
+snprintf(filename, sizeof(filename), "%s/flux%i.dat",
         Doc_info.directory().c_str(),
         Doc_info.number());
 some_file.open(filename);
@@ -1481,7 +1481,7 @@ double inc_inner_exact=
  Vector<double> s(1);
  Vector<double> x(2);
  Vector<double> unit_normal(2);
- sprintf(filename,"%s/sb_radiation%i.dat",
+ snprintf(filename, sizeof(filename), "%s/sb_radiation%i.dat",
          Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
@@ -1591,7 +1591,7 @@ double melt_exact=GlobalParameters::melt_flux(time_pt()->time());
  double average_melt=0.0;
  unsigned count=0;
  Vector<double> s(1);
- sprintf(filename,"%s/melt%i.dat",
+ snprintf(filename, sizeof(filename), "%s/melt%i.dat",
          Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
@@ -1676,7 +1676,7 @@ Trace_file << time_pt()->time() << " "
 
 // Output exact solution 
 //----------------------
-sprintf(filename,"%s/exact_soln%i.dat",Doc_info.directory().c_str(),
+snprintf(filename, sizeof(filename), "%s/exact_soln%i.dat",Doc_info.directory().c_str(),
         Doc_info.number());
 some_file.open(filename);
 Bulk_mesh_pt->output_fct(some_file,npts,time_pt()->time(),
@@ -1686,7 +1686,7 @@ some_file.close();
 // Doc error
 //----------
 double error,norm;
-sprintf(filename,"%s/error%i.dat",Doc_info.directory().c_str(),
+snprintf(filename, sizeof(filename), "%s/error%i.dat",Doc_info.directory().c_str(),
         Doc_info.number());
 some_file.open(filename);
 Bulk_mesh_pt->compute_error(some_file,

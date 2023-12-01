@@ -330,7 +330,7 @@ doc_solution(DocInfo& doc_info)
  const unsigned npts = 5;
 
  // Open solution output file
- sprintf(filename,"%s/soln%i.dat",
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",
          doc_info.directory().c_str(),doc_info.number());
  some_file.open(filename);
 

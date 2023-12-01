@@ -1029,7 +1029,7 @@ void ConvectionProblem<ELEMENT,INTERFACE_ELEMENT>::doc_solution()
  double angle = 
   Global_Physical_Variables::Angle*180/Global_Physical_Variables::Pi;
  //The filename will have the angle appended here
- sprintf(filename,"%s/soln%i_%g.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i_%g.dat",Doc_info.directory().c_str(),
          Doc_info.number(),angle);
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,npts);

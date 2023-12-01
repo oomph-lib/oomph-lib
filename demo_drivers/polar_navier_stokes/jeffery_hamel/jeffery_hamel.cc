@@ -562,7 +562,7 @@ void PolarNSProblem<ELEMENT>::output_streamfunction(DocInfo &doc_info,bool eigen
  stream_problem.doc_solution(doc_info);
  //Select output file 
  char file_name[100];
- sprintf(file_name,"my_streamfunction%i.dat",doc_info.number());
+ snprintf(file_name, sizeof(file_name), "my_streamfunction%i.dat",doc_info.number());
  stream_problem.my_output(201,81,false,file_name);
 
 } //End of output_streamfunction
@@ -733,7 +733,7 @@ void PolarNSProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  npts=3; 
 
  // Output solution 
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  header( some_file );

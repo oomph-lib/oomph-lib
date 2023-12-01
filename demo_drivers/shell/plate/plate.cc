@@ -572,7 +572,7 @@ int main(int argc, char* argv[])
  doc_info.set_directory("RESLT");
  
  //Open an output trace file
- sprintf(filename,"%s/trace.dat",doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/trace.dat",doc_info.directory().c_str());
  ofstream trace_file(filename);
  trace_file << "VARIABLES=\"p_e_x_t\",\"z_ctrl\"" << std::endl;
  trace_file << "ZONE" << std::endl;
@@ -625,7 +625,7 @@ int main(int argc, char* argv[])
    
    
    //Output the shape 
-   sprintf(filename,"%s/plate%i.dat",doc_info.directory().c_str(),
+   snprintf(filename, sizeof(filename), "%s/plate%i.dat",doc_info.directory().c_str(),
            doc_info.number());
    some_file.open(filename);
    problem.mesh_pt()->output(some_file,15);

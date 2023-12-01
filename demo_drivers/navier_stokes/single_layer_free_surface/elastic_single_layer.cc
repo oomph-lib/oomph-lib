@@ -452,7 +452,7 @@ void InterfaceProblem<ELEMENT,TIMESTEPPER>::doc_solution(DocInfo &doc_info)
  const unsigned npts = 5;
  
  // Open solution output file
- sprintf(filename,"%s/soln%i.dat",
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",
          doc_info.directory().c_str(),doc_info.number());
  some_file.open(filename);
 
@@ -463,7 +463,7 @@ void InterfaceProblem<ELEMENT,TIMESTEPPER>::doc_solution(DocInfo &doc_info)
  some_file.close();
 
  // Open interface solution output file
- sprintf(filename,"%s/interface_soln%i.dat",
+ snprintf(filename, sizeof(filename), "%s/interface_soln%i.dat",
          doc_info.directory().c_str(),doc_info.number());
  some_file.open(filename);
  
@@ -505,7 +505,7 @@ unsteady_run(const double &t_max, const double &dt)
  
  // Open trace file
  char filename[100];   
- sprintf(filename,"%s/trace.dat",doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/trace.dat",doc_info.directory().c_str());
  Trace_file.open(filename);
 
  // Initialise trace file

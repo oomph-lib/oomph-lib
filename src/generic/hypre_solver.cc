@@ -449,13 +449,13 @@ namespace oomph
       // set level for ILU(k)
       args[n_args++] = "-level";
       char level_value[10];
-      sprintf(level_value, "%d", level);
+      snprintf(level_value, sizeof(level_value), "%d", level);
       args[n_args++] = level_value;
 
       // // set drop tol for ILU(k) factorization
       // args[n_args++] = "-sparseA";
       // char droptol[20];
-      // sprintf(droptol,"%f",drop_tol);
+      // snprintf(droptol, sizeof(droptol), "%f",drop_tol);
       // args[n_args++] = droptol;
 
       // // set ILUT factorization if required

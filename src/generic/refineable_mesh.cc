@@ -2754,13 +2754,13 @@ namespace oomph
                  {
                   char filename[100];
                   std::ofstream some_file;
-                  sprintf(filename,"sync_hanging_node_crash_mesh_proc%i.dat",
-                          my_rank);
+                  snprintf(filename, sizeof(filename),
+                "sync_hanging_node_crash_mesh_proc%i.dat", my_rank);
                   some_file.open(filename);
                   this->output(some_file);
                   some_file.close();
 
-                  sprintf(filename,
+                  snprintf(filename, sizeof(filename),
                           "sync_hanging_node_crash_mesh_with_haloes_proc%i.dat",
                           my_rank);
                   some_file.open(filename);

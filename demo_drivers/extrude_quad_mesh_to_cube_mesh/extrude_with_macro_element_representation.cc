@@ -536,7 +536,7 @@ doc_solution()
   // Output solution:
   //-----------------
   // Create the filename
-  sprintf(filename,"%s/soln%i.dat",
+  snprintf(filename, sizeof(filename), "%s/soln%i.dat",
           GlobalParameters::Doc_info.directory().c_str(),
           GlobalParameters::Doc_info.number());
 
@@ -552,7 +552,7 @@ doc_solution()
   //-----------------------
   // Output exact solution:
   //-----------------------
-  sprintf(filename,"%s/exact_soln%i.dat",
+  snprintf(filename, sizeof(filename), "%s/exact_soln%i.dat",
           GlobalParameters::Doc_info.directory().c_str(),
           GlobalParameters::Doc_info.number());
 
@@ -572,7 +572,7 @@ doc_solution()
   double error=0.0, norm=0.0;
 
   // Create the filename
-  sprintf(filename,"%s/error%i.dat",
+  snprintf(filename, sizeof(filename), "%s/error%i.dat",
           GlobalParameters::Doc_info.directory().c_str(),
           GlobalParameters::Doc_info.number());
 

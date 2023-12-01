@@ -217,21 +217,21 @@ void OneDPoissonProblem<ELEMENT>::doc_solution(const unsigned& label)
  npts=5; 
 
  // Output solution with specified number of plot points per element
- sprintf(filename,"soln%i.dat",label);
+ snprintf(filename, sizeof(filename), "soln%i.dat",label);
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
  some_file.close();
 
  // Output exact solution at much higher resolution (so we can
  // see how well the solutions agree between nodal points)
- sprintf(filename,"exact_soln%i.dat",label);
+ snprintf(filename, sizeof(filename), "exact_soln%i.dat",label);
  some_file.open(filename);
  mesh_pt()->output_fct(some_file,20*npts,FishSolnOneDPoisson::get_exact_u); 
  some_file.close();
 
  // Doc pointwise error and compute norm of error and of the solution
  double error,norm;
- sprintf(filename,"error%i.dat",label);
+ snprintf(filename, sizeof(filename), "error%i.dat",label);
  some_file.open(filename);
  mesh_pt()->compute_error(some_file,FishSolnOneDPoisson::get_exact_u,
                           error,norm); 

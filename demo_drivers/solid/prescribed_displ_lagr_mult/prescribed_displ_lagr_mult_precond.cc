@@ -671,7 +671,7 @@ void PrescribedBoundaryDisplacementProblem<ELEMENT>::doc_solution()
 
  // Output shape of deformed body
  //------------------------------
- sprintf(filename,"%s/soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  solid_mesh_pt()->output(some_file,n_plot);
@@ -679,7 +679,7 @@ void PrescribedBoundaryDisplacementProblem<ELEMENT>::doc_solution()
 
  // Output Lagrange multipliers
  //----------------------------
- sprintf(filename,"%s/lagr%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/lagr%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
 

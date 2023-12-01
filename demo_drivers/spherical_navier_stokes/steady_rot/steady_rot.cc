@@ -299,7 +299,7 @@ void SphericalSteadyRotationProblem<ELEMENT>::parameter_study(
    
    // Output solution 
    //-----------------
-   sprintf(filename,"soln_%s_%ix%i_%g.dat",
+   snprintf(filename, sizeof(filename), "soln_%s_%ix%i_%g.dat",
            output_dir.c_str(),Nr,Ntheta,Global_Physical_Variables::Re);
    some_file.open(filename);
    mesh_pt()->output(some_file,npts);

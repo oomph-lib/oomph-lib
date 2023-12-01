@@ -251,7 +251,7 @@ RefineableFishPoissonProblem<ELEMENT>::RefineableFishPoissonProblem(
  
  // Open trace file
  char filename[100];
- sprintf(filename,"%s/trace.dat",directory_name.c_str());
+ snprintf(filename, sizeof(filename), "%s/trace.dat",directory_name.c_str());
  Trace_file.open(filename);
 
  Trace_file 
@@ -415,12 +415,12 @@ void RefineableFishPoissonProblem<ELEMENT>::doc_solution()
  // Output solution 
  if (Case_id!=0)
   {
-   sprintf(filename,"%s/soln_%i_%i.dat",Doc_info.directory().c_str(),
+   snprintf(filename, sizeof(filename), "%s/soln_%i_%i.dat",Doc_info.directory().c_str(),
            Case_id,Doc_info.number());
   }
  else
   {
-   sprintf(filename,"%s/soln%i.dat",Doc_info.directory().c_str(),
+   snprintf(filename, sizeof(filename), "%s/soln%i.dat",Doc_info.directory().c_str(),
            Doc_info.number());
   }
  some_file.open(filename);

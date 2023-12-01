@@ -146,7 +146,7 @@ public:
    // // Output contact elements
    // ofstream some_file;
    // char filename[100];
-   // sprintf(filename,"contact_before.dat");
+   // snprintf(filename, sizeof(filename), "contact_before.dat");
    // some_file.open(filename);
    // unsigned nel=Surface_contact_mesh_pt->nelement();
    // for (unsigned e=0;e<nel;e++)
@@ -190,7 +190,7 @@ public:
    // // Output contact elements
    // ofstream some_file;
    // char filename[100];
-   // sprintf(filename,"contact_after.dat");
+   // snprintf(filename, sizeof(filename), "contact_after.dat");
    // some_file.open(filename);
    // unsigned nel=Surface_contact_mesh_pt->nelement();
    // for (unsigned e=0;e<nel;e++)
@@ -551,7 +551,7 @@ void ContactProblem<ELEMENT>::doc_solution()
  npts=5;
  
  // Output solution 
- sprintf(filename,"%s/soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,npts);
@@ -559,7 +559,7 @@ void ContactProblem<ELEMENT>::doc_solution()
  
  // Output solution coarsely (only element vertices for easier
  // mesh visualisation)
- sprintf(filename,"%s/coarse_soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/coarse_soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,2);
@@ -567,7 +567,7 @@ void ContactProblem<ELEMENT>::doc_solution()
  
  
  // Output contact elements
- sprintf(filename,"%s/contact%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/contact%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  unsigned nel=Surface_contact_mesh_pt->nelement();
@@ -580,7 +580,7 @@ void ContactProblem<ELEMENT>::doc_solution()
  
 
  // Output penetrator
- sprintf(filename,"%s/penetrator%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/penetrator%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  unsigned nplot=500;

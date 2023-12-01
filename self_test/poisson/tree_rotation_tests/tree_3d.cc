@@ -833,7 +833,7 @@ void TestPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  // Output solution 
  //-----------------
  mesh_pt()->sort_elements();
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
@@ -842,7 +842,7 @@ void TestPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Output exact solution 
  //----------------------
-//  sprintf(filename,"%s/exact_soln%i.dat",doc_info.directory().c_str(),
+//  snprintf(filename, sizeof(filename), "%s/exact_soln%i.dat",doc_info.directory().c_str(),
 //          doc_info.number());
 //  some_file.open(filename);
 //  mesh_pt()->output_fct(some_file,npts,TanhSolnForPoisson::get_exact_u); 
@@ -852,7 +852,7 @@ void TestPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 //  // Doc error
 //  //----------
 //  double error,norm;
-//  sprintf(filename,"%s/error%i.dat",doc_info.directory().c_str(),
+//  snprintf(filename, sizeof(filename), "%s/error%i.dat",doc_info.directory().c_str(),
 //          doc_info.number());
 //  some_file.open(filename);
 //  mesh_pt()->compute_error(some_file,TanhSolnForPoisson::get_exact_u,
@@ -869,7 +869,7 @@ template<class ELEMENT>
 void run_test(const unsigned &i)
 {
  char dirname[100];
- sprintf(dirname,"RESLT%i",i);
+ snprintf(dirname, sizeof(dirname), "RESLT%i",i);
  
  // Create label for output
  //------------------------

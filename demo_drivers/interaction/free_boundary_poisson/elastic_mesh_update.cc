@@ -394,7 +394,7 @@ void DeformableFishPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  unsigned npts = 5; 
 
  // Call output function for all elements
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
@@ -428,7 +428,7 @@ void DeformableFishPoissonProblem<ELEMENT>::run()
  
  // Open trace file
  char filename[100];
- sprintf(filename,"%s/trace.dat",doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/trace.dat",doc_info.directory().c_str());
  Trace_file.open(filename);
 
  Trace_file << "VARIABLES=\"y<sub>circle</sub>\",\"u<sub>control</sub>\""

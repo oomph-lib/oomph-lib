@@ -2985,7 +2985,7 @@ public:
    // // Output contact elements
    // ofstream some_file;
    // char filename[100];
-   // sprintf(filename,"contact_before.dat");
+   // snprintf(filename, sizeof(filename), "contact_before.dat");
    // some_file.open(filename);
    // unsigned nel=Surface_contact_mesh_pt->nelement();
    // for (unsigned e=0;e<nel;e++)
@@ -2999,7 +2999,7 @@ public:
    // Output impose displ elements
    ofstream some_file;
    char filename[100];
-   sprintf(filename,"impose_before.dat");
+   snprintf(filename, sizeof(filename), "impose_before.dat");
    some_file.open(filename);
    Displ_imposition_mesh_pt->output(some_file);
    some_file.close();
@@ -3057,7 +3057,7 @@ public:
    // Output impose displ elements
    ofstream some_file;
    char filename[100];
-   sprintf(filename,"impose_after.dat");
+   snprintf(filename, sizeof(filename), "impose_after.dat");
    some_file.open(filename);
    Displ_imposition_mesh_pt->output(some_file);
    some_file.close();
@@ -4381,7 +4381,7 @@ void ContactProblem<ELEMENT>::doc_solution()
 
 
  // Write restart file
-/* sprintf(filename,"%s/restart%i.dat",doc_info.directory().c_str(),
+/* snprintf(filename, sizeof(filename), "%s/restart%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  dump(some_file); 
@@ -4392,7 +4392,7 @@ void ContactProblem<ELEMENT>::doc_solution()
  npts=3;
  
  // Output solution 
- sprintf(filename,"%s/soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,npts);
@@ -4400,28 +4400,28 @@ void ContactProblem<ELEMENT>::doc_solution()
  
  // Output solution coarsely (only element vertices for easier
  // mesh visualisation)
- sprintf(filename,"%s/coarse_soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/coarse_soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,2);
  some_file.close();
 
  // Output solution 
- sprintf(filename,"%s/boulder_soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/boulder_soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  Boulder_mesh_pt->output(some_file,npts);
  some_file.close();
 
   // Output contact region on boulder
- sprintf(filename,"%s/boulder_contact%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/boulder_contact%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  Boulder_surface_contact_mesh_pt->output(some_file,npts);
  some_file.close();
 
   // Output contact region on boulder
- sprintf(filename,"%s/boulder_heat_flux%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/boulder_heat_flux%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  Boulder_surface_heat_flux_mesh_pt->output(some_file,npts);
@@ -4429,21 +4429,21 @@ void ContactProblem<ELEMENT>::doc_solution()
 
  // Output solution coarsely (only element vertices for easier
  // mesh visualisation)
- sprintf(filename,"%s/boulder_coarse_soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/boulder_coarse_soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  Boulder_mesh_pt->output(some_file,2);
  some_file.close();
  
  // Output contact elements
- sprintf(filename,"%s/imposed_displ%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/imposed_displ%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  Displ_imposition_mesh_pt->output(some_file);
  some_file.close();
 
  // Output contact elements
- sprintf(filename,"%s/contact%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/contact%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  unsigned nel=Surface_contact_mesh_pt->nelement();
@@ -4457,7 +4457,7 @@ void ContactProblem<ELEMENT>::doc_solution()
 
 
  // Output integration points of contact elements
- sprintf(filename,"%s/contact_integration_points%i.dat",
+ snprintf(filename, sizeof(filename), "%s/contact_integration_points%i.dat",
          Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
@@ -4482,7 +4482,7 @@ void ContactProblem<ELEMENT>::doc_solution()
 
 
  // Output penetrator
- sprintf(filename,"%s/penetrator%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/penetrator%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  unsigned n=500;
@@ -4492,7 +4492,7 @@ void ContactProblem<ELEMENT>::doc_solution()
  // Output contact elements and assemble total resulting force
  Vector<double> total_contact_force(2,0.0);
  Vector<double> contact_force(2,0.0);
- sprintf(filename,"%s/contact%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/contact%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  nel=Surface_contact_mesh_pt->nelement();
@@ -4537,7 +4537,7 @@ void ContactProblem<ELEMENT>::doc_solution()
   }
 
  // Output Hertzian pressure contact distribution
- sprintf(filename,"%s/hertz%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/hertz%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  n=500;

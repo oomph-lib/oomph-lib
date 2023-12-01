@@ -297,7 +297,7 @@ int main(int argc, char* argv[])
  // Output points in pslg format
  //-----------------------------
  char filename[100];
- sprintf(filename,"%s.poly",argv[1]);
+ snprintf(filename, sizeof(filename), "%s.poly",argv[1]);
  ofstream poly_file(filename);
   {
    poly_file 

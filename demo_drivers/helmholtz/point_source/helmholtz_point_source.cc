@@ -595,7 +595,7 @@ void HelmholtzPointSourceProblem<ELEMENT>::doc_solution(DocInfo&
 
  // Compute/output the radiated power
  //----------------------------------
- sprintf(filename,"%s/power%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/power%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  
@@ -613,7 +613,7 @@ void HelmholtzPointSourceProblem<ELEMENT>::doc_solution(DocInfo&
 
  // Output solution 
  //-----------------
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,npts);
@@ -621,7 +621,7 @@ void HelmholtzPointSourceProblem<ELEMENT>::doc_solution(DocInfo&
 
  // Output solution in Paraview
  //---------------------------
- sprintf(filename,"%s/soln%i.vtu",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.vtu",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output_paraview(some_file,npts);

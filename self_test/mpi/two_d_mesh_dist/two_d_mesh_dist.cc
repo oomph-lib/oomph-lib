@@ -267,7 +267,7 @@ void RefineablePoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  unsigned npts=5;
 
  // Output solution 
- sprintf(filename,"%s/soln%i_on_proc%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i_on_proc%i.dat",doc_info.directory().c_str(),
          doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
@@ -381,7 +381,7 @@ void parallel_test(const unsigned& n_refine_first,
    // Get the partition to be used from file
    unsigned n_partition=problem_pt->mesh_pt()->nelement();
    Vector<unsigned> element_partition(n_partition);
-   sprintf(filename,"two_d_mesh_dist_partition.dat");
+   snprintf(filename, sizeof(filename), "two_d_mesh_dist_partition.dat");
    input_file.open(filename);
    std::string input_string;
    for (unsigned e=0;e<n_partition;e++)
@@ -395,7 +395,7 @@ void parallel_test(const unsigned& n_refine_first,
    out_element_partition=problem_pt->distribute(element_partition,
                                                 doc_info,report_stats);
 
-   sprintf(filename,"out_two_d_mesh_dist_partition.dat");
+   snprintf(filename, sizeof(filename), "out_two_d_mesh_dist_partition.dat");
    output_file.open(filename);
    for (unsigned e=0;e<n_partition;e++)
     {

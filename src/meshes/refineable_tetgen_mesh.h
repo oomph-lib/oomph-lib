@@ -130,7 +130,10 @@ namespace oomph
 
       // Convert to a *char
       char tetswitches[100];
-      sprintf(tetswitches, "%s", input_string_stream.str().c_str());
+      snprintf(tetswitches,
+               sizeof(tetswitches),
+               "%s",
+               input_string_stream.str().c_str());
 
       // Build triangulateio refined object
       tetrahedralize(tetswitches, tetgen_input_pt, this->Tetgenio_pt);

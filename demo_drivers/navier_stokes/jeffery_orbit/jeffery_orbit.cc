@@ -1121,13 +1121,13 @@ void UnstructuredImmersedEllipseProblem<ELEMENT>::doc_solution(
  // Output solution and projection files
  if(!project)
   {
-   sprintf(filename,"%s/soln%i.dat",
+   snprintf(filename, sizeof(filename), "%s/soln%i.dat",
            this->Doc_info.directory().c_str(),
            this->Doc_info.number());
   }
  else
   {
-   sprintf(filename,"%s/proj%i.dat",
+   snprintf(filename, sizeof(filename), "%s/proj%i.dat",
            this->Doc_info.directory().c_str(),
            this->Doc_info.number()-1);
   }
@@ -1155,7 +1155,7 @@ void UnstructuredImmersedEllipseProblem<ELEMENT>::doc_solution(
  if(project) return;
 
  //Output the boundary only if not projecting
- sprintf(filename,"%s/int%i.dat",
+ snprintf(filename, sizeof(filename), "%s/int%i.dat",
          this->Doc_info.directory().c_str(),
          this->Doc_info.number());
  some_file.open(filename);

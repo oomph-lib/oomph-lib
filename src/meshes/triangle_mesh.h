@@ -782,7 +782,10 @@ namespace oomph
 
       // Convert to a *char required by the triangulate function
       char triswitches[100];
-      sprintf(triswitches, "%s", input_string_stream.str().c_str());
+      snprintf(triswitches,
+               sizeof(triswitches),
+               "%s",
+               input_string_stream.str().c_str());
 
       // Create a boolean to decide whether or not to use attributes.
       // The value of this will only be changed in build_triangulateio
@@ -1285,7 +1288,10 @@ namespace oomph
 
       // Convert the Input string in *char required by the triangulate function
       char triswitches[100];
-      sprintf(triswitches, "%s", input_string_stream.str().c_str());
+      snprintf(triswitches,
+               sizeof(triswitches),
+               "%s",
+               input_string_stream.str().c_str());
 
       // Build the mesh using triangulate function
       triangulate(triswitches, &triangulate_io, &Triangulateio, 0);
@@ -2329,7 +2335,10 @@ namespace oomph
 
       // Convert to a *char required by the triangulate function
       char triswitches[100];
-      sprintf(triswitches, "%s", input_string_stream.str().c_str());
+      snprintf(triswitches,
+               sizeof(triswitches),
+               "%s",
+               input_string_stream.str().c_str());
 
       // Build triangulateio refined object
       triangulate(triswitches, &triangle_refine, &this->Triangulateio, 0);
