@@ -138,6 +138,16 @@ oomph_path_option(
 # C++ files only
 include(OomphAddCXXCompileDefinitions)
 
+# FIXME: XCode 15.0 has a new linker implementation which breaks things; setting
+# this values tells CMake to revert to the old linker
+if(APPLE)
+  if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+    if(CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 15.0)
+      add_link_options("-Wl,-ld_classic")
+    endif()
+  endif()
+endif()
+
 # Let CMake take care of the famous -fPIC flag
 if(BUILD_SHARED_LIBS)
   set(CMAKE_POSITION_INDEPENDENT_CODE ON)

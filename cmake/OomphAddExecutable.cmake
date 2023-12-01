@@ -120,6 +120,19 @@ function(oomph_add_executable)
   # Link to the specified libraries
   target_link_libraries(${NAME}_${PATH_HASH} PUBLIC ${LIBRARIES})
 
+  # FIXME: XCode 15.0 problems :(
+  if(APPLE)
+    include(CheckLinkerFlag)
+    foreach(FLAG IN ITEMS -no_warn_duplicate_libraries -ld_classic)
+      check_linker_flag(CXX FLAG IS_CXX_FLAG)
+      if(IS_CXX_FLAG)
+        target_link_options(${NAME}_${PATH_HASH} PRIVATE LINKER:${FLAG})
+      else()
+        message(STATUS "C++ linker flag ${FLAG} is not supported.")
+      endif()
+    endforeach()
+  endif()
+
   # Provide access to the MPI libraries if we've built oomph-lib with MPI
   if(OOMPH_HAS_MPI)
     target_link_libraries(${NAME}_${PATH_HASH} PUBLIC MPI::MPI_CXX)
