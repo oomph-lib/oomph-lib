@@ -29,22 +29,6 @@ echo " "
 cat validate_sh_timing_generated_by_make_check.dat
 echo " "
 
-# hierher Start temp disk usage analysis for github actions
-echo " " 
-echo "hierher temp disk usage analysis for github actions "
-bin_dir=`dirname $0`
-echo "bin dir: "$bin_dir
-home_dir=$bin_dir/..
-echo "Home dir of script: "$home_dir
-echo " "
-echo "Disk usage after running demo driver:"
-echo "du    : "
-du -h -s $home_dir
-echo "df    : "
-df
-echo "quota : "
-quota
-# end temp disk usage analysis for github actions
 
 #echo "EXIT_CODE: " $EXIT_CODE
 if [ $EXIT_CODE -eq 0 ]; then
