@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -1664,6 +1664,10 @@ namespace oomph
       Global_data_pt.resize(0);
     }
 
+    /// Get new linear algebra distribution (you're in charge of deleting it!)
+    void create_new_linear_algebra_distribution(
+      LinearAlgebraDistribution*& dist_pt);
+
     /// Return the pointer to the dof distribution (read-only)
     LinearAlgebraDistribution* const& dof_distribution_pt() const
     {
@@ -1917,33 +1921,158 @@ namespace oomph
     //                                         &elem_pt, Vector<double>
     //                                         &result);
 
-    /// Solve an eigenproblem as assembled by EigenElements
-    /// calculate n_eval eigenvalues and return the corresponding
-    /// eigenvectors. The boolean flag (default true) specifies whether
-    /// the steady jacobian should be assembled. If the flag is false
+    /// Solve an eigenproblem as assembled by the Problem's constituent
+    /// elements. Calculate (at least) n_eval eigenvalues and return the
+    /// corresponding eigenvectors. The boolean flag (default true) specifies
+    /// whether the steady jacobian should be assembled. If the flag is false
     /// then the weighted mass-matrix terms from the timestepper will
     /// be included in the jacobian --- this is almost certainly never
-    /// wanted.
-    void solve_eigenproblem(const unsigned& n_eval,
-                            Vector<std::complex<double>>& eigenvalue,
-                            Vector<DoubleVector>& eigenvector,
-                            const bool& steady = true);
+    /// wanted. Legacy version that returns real vectors which are
+    /// related in some solver-specific way to the real and imaginary parts
+    /// of the actual, usually complex eigenvalues.
+    void solve_eigenproblem_legacy(const unsigned& n_eval,
+                                   Vector<std::complex<double>>& eigenvalue,
+                                   Vector<DoubleVector>& eigenvector,
+                                   const bool& steady = true);
 
-    /// Solve an eigenproblem as assembled by EigenElements,
-    /// but only return the eigenvalues, not the eigenvectors.
-    /// The boolean flag (default true) is used to specify whether the
-    /// weighted mass-matrix terms from the timestepping scheme should
-    /// be included in the jacobian.
-    void solve_eigenproblem(const unsigned& n_eval,
-                            Vector<std::complex<double>>& eigenvalue,
-                            const bool& steady = true)
+    /// Solve an eigenproblem as assembled by the Problem's constituent
+    /// elements. Calculate (at least) n_eval eigenvalues.
+    /// The boolean flag (default true) specifies
+    /// whether the steady jacobian should be assembled. If the flag is false
+    /// then the weighted mass-matrix terms from the timestepper will
+    /// be included in the jacobian --- this is almost certainly never
+    /// wanted. Legacy version.
+    void solve_eigenproblem_legacy(const unsigned& n_eval,
+                                   Vector<std::complex<double>>& eigenvalue,
+                                   const bool& steady = true)
     {
       // Create temporary storage for the eigenvectors (potentially wasteful)
       Vector<DoubleVector> eigenvector;
-      solve_eigenproblem(n_eval, eigenvalue, eigenvector, steady);
+      solve_eigenproblem_legacy(n_eval, eigenvalue, eigenvector, steady);
     }
 
-    /// Get the matrices required by a eigensolver. If the
+    /// Solve an eigenproblem as assembled by the Problem's constituent
+    /// elements. Calculate (at least) n_eval eigenvalues and return the
+    /// corresponding eigenvectors. The boolean flag (default true) specifies
+    /// whether the steady jacobian should be assembled. If the flag is false
+    /// then the weighted mass-matrix terms from the timestepper will
+    /// be included in the jacobian --- this is almost certainly never
+    /// wanted. The eigenvalues and eigenvectors are, in general, complex.
+    /// Eigenvalues may be infinite and are therefore returned as
+    /// \f$ \lambda_i = \alpha_i / \beta_i \f$ where \f$ \alpha_i \f$ is complex
+    /// while \f$ \beta_i \f$ is real. The actual eigenvalues may then be
+    /// computed by doing the division, checking for zero betas to avoid NaNs.
+    /// There's a convenience wrapper to this function that simply computes
+    /// these eigenvalues regardless. That version may die in NaN checking is
+    /// enabled (via the fenv.h header and the associated feenable function).
+    void solve_eigenproblem(const unsigned& n_eval,
+                            Vector<std::complex<double>>& alpha,
+                            Vector<double>& beta,
+                            Vector<DoubleVector>& eigenvector_real,
+                            Vector<DoubleVector>& eigenvector_imag,
+                            const bool& steady = true);
+
+    /// Solve an eigenproblem as assembled by the Problem's constituent
+    /// elements. Calculate (at least) n_eval eigenvalues and return the
+    /// corresponding eigenvectors. The boolean flag (default true) specifies
+    /// whether the steady jacobian should be assembled. If the flag is false
+    /// then the weighted mass-matrix terms from the timestepper will
+    /// be included in the jacobian --- this is almost certainly never
+    /// wanted. Note that the eigenvalues and eigenvectors are,
+    /// in general, complex and the eigenvalues may be infinite. In this
+    /// case it's safer to use the other version of this function which
+    /// returns the eigenvalues in terms of a fractional representation.
+    void solve_eigenproblem(const unsigned& n_eval,
+                            Vector<std::complex<double>>& eigenvalue,
+                            Vector<DoubleVector>& eigenvector_real,
+                            Vector<DoubleVector>& eigenvector_imag,
+                            const bool& steady = true);
+
+    /// Solve an eigenproblem as assembled by the Problem's constituent
+    /// elements but only return the eigenvalues, not the eigenvectors.
+    /// At least n_eval eigenvalues are computed.
+    /// The boolean flag (default true) is used to specify whether the
+    /// weighted mass-matrix terms from the timestepping scheme should
+    /// be included in the jacobian --- this is almost certainly never
+    /// wanted. Note that the eigenvalues may be infinite. In this
+    /// case it's safer to use the other version of this function which
+    /// returns the eigenvalues in terms of a fractional representation.
+    void solve_eigenproblem(const unsigned& n_eval,
+                            Vector<std::complex<double>>& eigenvalue,
+                            const bool& make_timesteppers_steady = true)
+    {
+      // Create temporary storage for the eigenvectors (potentially wasteful)
+      Vector<DoubleVector> eigenvector_real;
+      Vector<DoubleVector> eigenvector_imag;
+      solve_eigenproblem(n_eval,
+                         eigenvalue,
+                         eigenvector_real,
+                         eigenvector_imag,
+                         make_timesteppers_steady);
+    }
+
+    /// Solve an eigenproblem as assembled by the Problem's constituent
+    /// elements but only return the eigenvalues, not the eigenvectors.
+    /// At least n_eval eigenvalues are computed.
+    /// The boolean flag (default true) is used to specify whether the
+    /// weighted mass-matrix terms from the timestepping scheme should
+    /// be included in the jacobian --- this is almost certainly never
+    /// wanted. Note that the eigenvalues may be infinite
+    /// and are therefore returned as
+    /// \f$ \lambda_i = \alpha_i / \beta_i \f$ where \f$ \alpha_i \f$ is complex
+    /// while \f$ \beta_i \f$ is real. The actual eigenvalues may then be
+    /// computed by doing the division, checking for zero betas to avoid NaNs.
+    void solve_eigenproblem(const unsigned& n_eval,
+                            Vector<std::complex<double>>& alpha,
+                            Vector<double>& beta,
+                            const bool& steady = true)
+    {
+      // Create temporary storage for the eigenvectors (potentially wasteful)
+      Vector<DoubleVector> eigenvector_real;
+      Vector<DoubleVector> eigenvector_imag;
+      solve_eigenproblem(
+        n_eval, alpha, beta, eigenvector_real, eigenvector_imag, steady);
+    }
+
+    /// Solve an adjoint eigenvalue problem using the same procedure as
+    /// solve_eigenproblem. See the documentation on that function for more
+    /// details.
+    /// Note: this is a legacy version of this function that stores re & imag
+    /// parts of eigenvectors in some solver-specific collection of real
+    /// vectors.
+    void solve_adjoint_eigenproblem_legacy(
+      const unsigned& n_eval,
+      Vector<std::complex<double>>& eigenvalue,
+      Vector<DoubleVector>& eigenvector,
+      const bool& make_timesteppers_steady = true);
+
+
+    /// Solve an adjoint eigenvalue problem using the same procedure as
+    /// solve_eigenproblem. See the documentation on that function for more
+    /// details.
+    void solve_adjoint_eigenproblem(const unsigned& n_eval,
+                                    Vector<std::complex<double>>& eigenvalue,
+                                    Vector<DoubleVector>& eigenvector_real,
+                                    Vector<DoubleVector>& eigenvector_imag,
+                                    const bool& steady = true);
+
+    /// Solve an adjoint eigenvalue problem using the same procedure as
+    /// solve_eigenproblem but only return the eigenvalues, not the
+    /// eigenvectors. At least n_eval eigenvalues are computed. See the
+    /// documentation on that function for more details.
+    void solve_adjoint_eigenproblem(const unsigned& n_eval,
+                                    Vector<std::complex<double>>& eigenvalue,
+                                    const bool& steady = true)
+    {
+      // Create temporary storage for the eigenvectors (potentially wasteful)
+      Vector<DoubleVector> eigenvector_real;
+      Vector<DoubleVector> eigenvector_imag;
+      solve_adjoint_eigenproblem(
+        n_eval, eigenvalue, eigenvector_real, eigenvector_imag, steady);
+    }
+
+
+    /// \short Get the matrices required by a eigensolver. If the
     /// shift parameter is non-zero the second matrix will be shifted
     virtual void get_eigenproblem_matrices(CRDoubleMatrix& mass_matrix,
                                            CRDoubleMatrix& main_matrix,
@@ -2978,12 +3107,6 @@ namespace oomph
         maxres(Passed_maxres)
     {
     }
-
-    /*  /// Broken copy constructor */
-    /*  NewtonSolverError(const NewtonSolverError& dummy) = delete;  */
-
-    /*  /// Broken assignment operator */
-    /*  void operator=(const NewtonSolverError&) = delete; */
   };
 
 

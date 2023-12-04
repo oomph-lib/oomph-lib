@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -34583,10 +34583,9 @@ namespace oomph
         this->Boundary_curve_section_pt[bound] =
           polygon_pt->curve_section_pt(p);
 
-        if (delete_it_on_destructor)
-        {
-          this->Free_curve_section_pt.insert(polygon_pt->curve_section_pt(p));
-        }
+        // The new curve always needs to be added to the free section
+        // because we created it internally
+        this->Free_curve_section_pt.insert(polygon_pt->curve_section_pt(p));
 
       } // if(!check_only)
 

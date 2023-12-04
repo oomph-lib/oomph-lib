@@ -132,7 +132,7 @@ endif
 #OLD (PYTHON2)	echo "sed 's/.\/tmpf/date/g' script/framework.py.orig | sed 's/.\/tmpc/date/g' > script/framework.py ">> build_script.bash
 #OLD (PYTHON2)	echo "patch script/blacs.py < ../../build_scripts/blacs.py.patch  ">> build_script.bash
 	echo "echo "Building... [this can take a while!]"" >> build_script.bash
-	echo "./setup.py --downblacs --lapacklib=$(lapack_lib) --blaslib=$(blas_lib) --mpiincdir=$(mpi_include) --mpicc=$(CC) --mpif77=$(F77) --ccflags=\"$(CFLAGS)\" --fcflags=\"$(FFLAGS)\"  --ldflags_c=\"$(CFLAGS)\" --ldflags_f77=\"$(FFLAGS)\" --noopt=\"$(FFLAGS_NO_OPT)\" > scalapack.log" >> build_script.bash
+	echo "./setup.py --notesting --downblacs --lapacklib=$(lapack_lib) --blaslib=$(blas_lib) --mpiincdir=$(mpi_include) --mpicc=$(CC) --mpif77=$(F77) --ccflags=\"$(CFLAGS)\" --fcflags=\"$(FFLAGS) -fallow-argument-mismatch\"  --ldflags_c=\"$(CFLAGS)\" --ldflags_f77=\"$(FFLAGS)\" --noopt=\"$(FFLAGS_NO_OPT)\" > scalapack.log" >> build_script.bash
 	echo "" >> build_script.bash
 	echo "echo \"...done!\"" >> build_script.bash
 	echo "echo \"here's the scalapack.log:\"" >> build_script.bash
@@ -183,7 +183,7 @@ endif
 	echo "" >> build_script.bash
 	echo "# Update Makefile" >> build_script.bash
 	echo "escaped_blas_lib=\`echo $(blas_lib) | awk '{gsub(\"/\",\"\\\\\\/\"); print}' \`" >> build_script.bash
-	echo -e "sed \"s/@mpicc@/"$(CC)"/g\" Makefile.inc.template  | sed \"s/@mpif90@/"$(F77)"/g\"  | sed \"s/@blas_lib@/\044escaped_blas_lib/g\" | sed \"s/@fopts@/"$(FFLAGS)"/g\" | sed \"s/@lopts@/"$(FFLAGS)"/g\" | sed \"s/@copts@/"$(CFLAGS)"/g\" | sed \"s/@mangle@/\044fortran_mangle/g\" > MUMPS_4.10.0/Makefile.inc" >> build_script.bash
+	echo -e "sed \"s/@mpicc@/"$(CC)"/g\" Makefile.inc.template  | sed \"s/@mpif90@/"$(F77)"/g\"  | sed \"s/@blas_lib@/\044escaped_blas_lib/g\" | sed \"s/@fopts@/"$(FFLAGS) -fallow-argument-mismatch"/g\" | sed \"s/@lopts@/"$(FFLAGS)"/g\" | sed \"s/@copts@/"$(CFLAGS)"/g\" | sed \"s/@mangle@/\044fortran_mangle/g\" > MUMPS_4.10.0/Makefile.inc" >> build_script.bash
 	echo "" >> build_script.bash
 	echo "cd MUMPS_4.10.0" >> build_script.bash
 	echo "echo \"Building...\""
@@ -216,3 +216,6 @@ distclean-local:
 	rm -rf mumps
 	rm -rf scalapack
 	rm -rf mumps_and_scalapack_default_installation
+
+junk:
+	echo $(FFLAGS)

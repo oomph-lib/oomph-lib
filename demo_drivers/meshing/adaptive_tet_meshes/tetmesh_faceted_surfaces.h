@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -493,8 +493,8 @@ public:
    Tri_mesh_pt = new
     TriangleMesh<TPoissonElement<2,2> >(triangle_mesh_parameters);
 
-   // Loop over all boundary elements and rotate their nodes so that
-   // the first two nodes are on the boundary
+   // Loop over all outer boundary elements and rotate their nodes so that
+   // the first two nodes are on the outer boundary
    std::map<FiniteElement*,bool> is_on_boundary;
    for (unsigned b=0;b<2;b++)
     {
@@ -506,13 +506,12 @@ public:
        for (unsigned j=0;j<3;j++)
         {
          Node* nod_pt=el_pt->node_pt(j);
-         if (nod_pt->is_on_boundary()) count++;
+         if (nod_pt->is_on_boundary(b)) count++;
         }
        if (count==2)
         {
          is_on_boundary[el_pt]=true;
-         if ((el_pt->node_pt(0)->is_on_boundary())&&
-             (el_pt->node_pt(1)->is_on_boundary()))
+         if (!(el_pt->node_pt(2)->is_on_boundary(b)))
           {
            // fine
           }
@@ -522,13 +521,13 @@ public:
            Node* nod0_pt=el_pt->node_pt(0);
            Node* nod1_pt=el_pt->node_pt(1);
            Node* nod2_pt=el_pt->node_pt(2);
-           if (!el_pt->node_pt(0)->is_on_boundary())
+           if (!(el_pt->node_pt(0)->is_on_boundary(b)))
             {
              el_pt->node_pt(0)=nod1_pt;
              el_pt->node_pt(1)=nod2_pt;
              el_pt->node_pt(2)=nod0_pt;
             }
-           else if (!el_pt->node_pt(1)->is_on_boundary())
+           else if (!(el_pt->node_pt(1)->is_on_boundary(b)))
             {
              el_pt->node_pt(0)=nod2_pt;
              el_pt->node_pt(1)=nod0_pt;

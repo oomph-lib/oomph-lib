@@ -7,54 +7,47 @@ on:
   workflow_dispatch:
     inputs:
       publishBranch:
-        description: 'Branch to publish built docs'
+        description: "Branch to publish built docs"
         required: true
-        default: 'gh-pages'
+        default: "gh-pages"
 
 jobs:
   build-and-deploy:
-
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-      with:
-        persist-credentials: false
-        
-    - name: Install requirements (minus doxygen)
-      run: sudo apt-get install make automake libtool libtool-bin autoconf gfortran g++ texlive texlive-latex-extra texlive-font-utils
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
 
-    - name: Bleeding edge doxygen 
-      run: |
-        wget https://personal.maths.manchester.ac.uk/oomphlib/oomph-lib_external_distfiles//doxygen-1.9.2.linux.bin.tar.gz
-        tar xvfz doxygen-1.9.2.linux.bin.tar.gz
-        sudo apt install libclang1-9
-        sudo apt install libclang-cpp9
-        echo "new doxygen (as installed):"
-        doxygen-1.9.2/bin/doxygen --version
-        sudo mv doxygen-1.9.2/bin/doxygen /usr/bin/doxygen
-        echo "new doxygen (installed in /usr/bin):"
-        which doxygen
-        doxygen --version
+      - name: Install requirements
+        run: |
+             sudo apt-get install make automake libtool libtool-bin autoconf gfortran g++ texlive texlive-latex-extra texlive-font-utils doxygen
+             doxygen --version
 
-    - name: Pick configuration
-      run: cp config/configure_options/build_web_version config/configure_options/current
-    - name: Configure
-      run: ./non_interactive_autogen.sh -sn
-    - name: Build bin
-      run: make -C bin
-    - name: Build doc
-      run: |
-           make -C doc
-    - name: Run website install script
-      run: ./bin/website_install.sh
-    - name: Grab redirect file
-      run: cp ./bin/redirect.html ./build/website/index.html
-    - name: Deploy
-      uses: JamesIves/github-pages-deploy-action@releases/v3
-      with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        BRANCH: 'gh-pages' # The branch the action should deploy to.
-        FOLDER: build/website # The folder the action should deploy.
-        CLEAN: true
+      - name: Pick configuration
+        run: cp config/configure_options/build_web_version config/configure_options/current
+
+      - name: Configure
+        run: ./non_interactive_autogen.sh -sn
+
+      - name: Build bin
+        run: make -C bin
+
+      - name: Build doc
+        run: make -C doc
+
+      - name: Run website install script
+        run: ./bin/website_install.sh
+
+      - name: Grab redirect file
+        run: cp ./bin/redirect.html ./build/website/index.html
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@releases/v4
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: "gh-pages" # The branch the action should deploy to.
+          FOLDER: build/website # The folder the action should deploy.
+          CLEAN: true

@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -45,13 +45,13 @@
 
 namespace oomph
 {
-  //=============================================================================
+  //===========================================================================
   /// A multi vector in the mathematical sense, initially developed for
   /// linear algebra type applications.
   /// If MPI then this multi vector can be distributed - its distribution is
   /// described by the LinearAlgebraDistribution object at Distribution_pt.
   /// Data is stored in a C-style pointer vector (double*)
-  //=============================================================================
+  //===========================================================================
   class DoubleMultiVector : public DistributableLinearAlgebraObject
   {
   public:
