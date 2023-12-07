@@ -1818,22 +1818,24 @@ namespace oomph
 
 #endif
 
-    // String identifying processor rank. If comm_pt is null (usually because
-    // the mesh is not distributed) default to "0".
-    std::string rank_string = "0";
+    // File suffix identifying processor rank. If comm_pt is null (because 
+    // oomph-lib was built with MPI but this mesh is not distributed) the 
+    // string is empty.
+    std::string rank_string = "";
     if (comm_pt != 0)
     {
-      rank_string = comm_pt->my_rank();
+      rank_string = "_on_proc_" + comm_pt->my_rank();
     }
+
     // Setup output files
     std::ofstream some_file, feflux_file;
     std::ostringstream filename;
     filename << doc_info.directory() << "/flux_rec" << doc_info.number()
-             << "_on_proc_" << rank_string << ".dat";
+             << rank_string << ".dat";
     some_file.open(filename.str().c_str());
     filename.str("");
     filename << doc_info.directory() << "/flux_fe" << doc_info.number()
-             << "_on_proc_" << rank_string << ".dat";
+             << rank_string << ".dat";
     feflux_file.open(filename.str().c_str());
 
     unsigned nel = mesh_pt->nelement();
