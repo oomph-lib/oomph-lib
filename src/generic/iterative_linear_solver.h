@@ -1446,9 +1446,9 @@ namespace oomph
     /// \f[ \begin{bmatrix} \cos\theta & \sin\theta \newline -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \newline dy \end{bmatrix} = \begin{bmatrix} r \newline 0 \end{bmatrix}, \f]
     /// where \f$ r=\sqrt{pow(dx,2)+pow(dy,2)} \f$. The values of a and b are
     /// given by:
-    /// \f[ \cos\theta&=\dfrac{dx}{\sqrt{pow(dx,2)+pow(dy,2)}}, \f]
+    /// \f[ \cos\theta=\dfrac{dx}{\sqrt{pow(dx,2)+pow(dy,2)}}, \f]
     /// and
-    /// \f[ \sin\theta&=\dfrac{dy}{\sqrt{pow(dx,2)+pow(dy,2)}}. \f]
+    /// \f[ \sin\theta=\dfrac{dy}{\sqrt{pow(dx,2)+pow(dy,2)}}. \f]
     /// Taken from: Saad Y."Iterative methods for sparse linear systems", p.192
     void generate_plane_rotation(double& dx, double& dy, double& cs, double& sn)
     {
@@ -1861,9 +1861,9 @@ namespace oomph
     /// \f[ \begin{bmatrix} \cos\theta & \sin\theta \newline -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \newline dy \end{bmatrix} = \begin{bmatrix} r \newline 0 \end{bmatrix}, \f]
     /// where \f$ r=\sqrt{pow(dx,2)+pow(dy,2)} \f$. The values of a and b are
     /// given by:
-    /// \f[ \cos\theta&=\dfrac{dx}{\sqrt{pow(dx,2)+pow(dy,2)}}, \f]
+    /// \f[ \cos\theta=\dfrac{dx}{\sqrt{pow(dx,2)+pow(dy,2)}}, \f]
     /// and
-    /// \f[ \sin\theta&=\dfrac{dy}{\sqrt{pow(dx,2)+pow(dy,2)}}. \f]
+    /// \f[ \sin\theta=\dfrac{dy}{\sqrt{pow(dx,2)+pow(dy,2)}}. \f]
     /// Taken from: Saad Y."Iterative methods for sparse linear systems", p.192
     void generate_plane_rotation(double& dx, double& dy, double& cs, double& sn)
     {
