@@ -1818,8 +1818,8 @@ namespace oomph
 
 #endif
 
-    // File suffix identifying processor rank. If comm_pt is null (because 
-    // oomph-lib was built with MPI but this mesh is not distributed) the 
+    // File suffix identifying processor rank. If comm_pt is null (because
+    // oomph-lib was built with MPI but this mesh is not distributed) the
     // string is empty.
     std::string rank_string = "";
     if (comm_pt != 0)
