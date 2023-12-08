@@ -5,7 +5,7 @@ The authors may be contacted by email
 
 > oomph-lib@maths.man.ac.uk
 
-or via snail mail
+or via snail mail 
 
 > School of Mathematics \
 > University of Manchester \
