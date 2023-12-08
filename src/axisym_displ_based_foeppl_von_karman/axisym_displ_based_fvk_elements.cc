@@ -231,7 +231,7 @@ namespace oomph
   /// Compute in-plane stresses. Return boolean to indicate success
   /// (false if attempt to evaluate stresses at zero radius)
   //======================================================================
-  bool AxisymFoepplvonKarmanEquations::interpolated_stress(
+  void AxisymFoepplvonKarmanEquations::interpolated_stress(
     const Vector<double>& s, double& sigma_r_r, double& sigma_phi_phi) const
   {
     // No in plane stresses if linear bending
@@ -239,9 +239,6 @@ namespace oomph
     {
       sigma_r_r = 0.0;
       sigma_phi_phi = 0.0;
-
-      // Success!
-      return true;
     }
     else
     {
@@ -250,16 +247,6 @@ namespace oomph
       unsigned n_node = this->nnode();
       Shape psi(n_node);
       DShape dpsidr(n_node, n_dim);
-
-      // Check if we're dividing by zero
-      Vector<double> r(1);
-      this->interpolated_x(s, r);
-      if (r[0] == 0.0)
-      {
-        sigma_r_r = 0.0;
-        sigma_phi_phi = 0.0;
-        return false;
-      }
 
       // Get shape fcts and derivs
       dshape_eulerian(s, psi, dpsidr);
@@ -289,23 +276,40 @@ namespace oomph
           this->raw_nodal_value(l, nodal_index_fvk(2)) * dpsidr(l, 0);
       } // End of loop over nodes
 
-      // Compute the stresses:
-      //---------------------
-      sigma_r_r =
-        1.0 / (1.0 - nu_local * nu_local) *
-        (interpolated_du_rdr + 0.5 * interpolated_dwdr * interpolated_dwdr +
-         nu_local * 1.0 / interpolated_r * interpolated_u_r);
+      // The centre stress must use a different analytical form to avoid
+      // dividing by zero.  It can be found from the form below by assuming:
+      // a) u_r=0 at the origin (required under axisymmetry unless there is a
+      // puncture) which leads to the term u_r/r -> du_r/dr as r -> 0 (by
+      // L'Hopital's rule), and
+      // b) given dw/dr=0 at the origin (required for axisymmetry as there can
+      // be no kink in a plate).
+      // Note that this process results in s_{rr}=s_{\phi\phi} at the origin
+      // which is expected as the two coordinate directions are
+      // indistinguishable at the origin under axisymmetry.
+      // [zdec] Should this be interpolated_r < tolerance to prevent floating
+      // point comparison? -- AidanR
+      if (interpolated_r == 0.0)
+      {
+        // Compute the stresses:
+        sigma_r_r = (1.0 - nu_local) * interpolated_du_rdr;
+        sigma_phi_phi = sigma_r_r;
+      }
+      else
+      {
+        // Compute the stresses:
+        //---------------------
+        sigma_r_r =
+          1.0 / (1.0 - nu_local * nu_local) *
+          (interpolated_du_rdr + 0.5 * interpolated_dwdr * interpolated_dwdr +
+           nu_local * 1.0 / interpolated_r * interpolated_u_r);
 
-      sigma_phi_phi =
-        1.0 / (1.0 - nu_local * nu_local) *
-        (1.0 / interpolated_r * interpolated_u_r +
-         nu_local *
-           (interpolated_du_rdr + 0.5 * interpolated_dwdr * interpolated_dwdr));
-
-      // Success!
-      return true;
-
-    } // End if
+        sigma_phi_phi =
+          1.0 / (1.0 - nu_local * nu_local) *
+          (1.0 / interpolated_r * interpolated_u_r +
+           nu_local * (interpolated_du_rdr +
+                       0.5 * interpolated_dwdr * interpolated_dwdr));
+      } // End if origin
+    } // End if nonlinear bending
 
   } // End of interpolated_stress function
 
@@ -333,13 +337,13 @@ namespace oomph
       // Get stress
       double sigma_r_r = 0.0;
       double sigma_phi_phi = 0.0;
-      bool success = interpolated_stress(s, sigma_r_r, sigma_phi_phi);
-      if (success)
-      {
-        outfile << interpolated_x(s, 0) << " " << interpolated_w_fvk(s) << " "
-                << interpolated_u_fvk(s) << " " << sigma_r_r << " "
-                << sigma_phi_phi << std::endl;
-      }
+      interpolated_stress(s, sigma_r_r, sigma_phi_phi);
+      outfile << interpolated_x(s, 0) << " "
+	      << interpolated_w_fvk(s) << " "
+	      << interpolated_u_fvk(s) << " "
+	      << sigma_r_r << " "
+	      << sigma_phi_phi << " "
+	      << std::endl;
     }
   }
 
