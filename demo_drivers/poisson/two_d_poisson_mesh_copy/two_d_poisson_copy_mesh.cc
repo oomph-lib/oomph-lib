@@ -379,7 +379,7 @@ MyPoissonProblem<ELEMENT>::MyPoissonProblem(
   if (passed_mesh_pt)
   {
     My_mesh_pt = new TriangleMesh<ELEMENT>();
-    My_mesh_pt->deep_copy(passed_mesh_pt);
+    My_mesh_pt->build_from_another_mesh(passed_mesh_pt);
   }
   else
   {

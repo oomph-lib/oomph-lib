@@ -37,10 +37,12 @@
 namespace oomph
 {
   //======================================================================
-  /// Deep copy from passed mesh
+  /// Build mesh from the structure and geometry of another mesh.
+  /// A lot of this code is repeated in the construction of the mesh from
+  /// the scaffold mesh.
   //======================================================================
   template<class ELEMENT>
-  void TriangleMesh<ELEMENT>::deep_copy(Mesh* orig_mesh_pt)
+  void TriangleMesh<ELEMENT>::build_from_another_mesh(Mesh* orig_mesh_pt)
   {
     /// Construct the elements
 
@@ -160,6 +162,7 @@ namespace oomph
       }
     }
 
+    /// Setup the boundary element info
     this->setup_boundary_element_info();
   }
 

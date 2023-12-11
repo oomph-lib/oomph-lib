@@ -880,7 +880,8 @@ namespace oomph
 #endif
     }
 
-    void deep_copy(Mesh* orig_mesh_pt);
+    /// Build mesh from the structure and geometry of another mesh.
+    void build_from_another_mesh(Mesh* orig_mesh_pt);
 
     /// Overload set_mesh_level_time_stepper so that the stored
     /// time stepper now corresponds to the new timestepper
