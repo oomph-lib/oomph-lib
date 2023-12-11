@@ -35,8 +35,6 @@
 #include "meshes/simple_rectangular_tri_mesh.h"
 #include "meshes/triangle_mesh.h"
 
-#include "my_triangle_mesh.h"
-
 using namespace std;
 
 using namespace oomph;
