@@ -886,6 +886,8 @@ namespace oomph
 #endif
     }
 
+    void deep_copy(Mesh* orig_mesh_pt);
+
     /// Overload set_mesh_level_time_stepper so that the stored
     /// time stepper now corresponds to the new timestepper
     void set_mesh_level_time_stepper(TimeStepper* const& time_stepper_pt,

@@ -37,6 +37,134 @@
 namespace oomph
 {
   //======================================================================
+  /// Deep copy from passed mesh
+  //======================================================================
+  template<class ELEMENT>
+  void TriangleMesh<ELEMENT>::deep_copy(Mesh* orig_mesh_pt)
+  {
+    /// Construct the elements
+
+    /// Number of elements
+    unsigned nelem = orig_mesh_pt->nelement();
+    this->Element_pt.resize(nelem);
+    for (unsigned e = 0; e < nelem; e++)
+    {
+      this->Element_pt[e] = new ELEMENT;
+    }
+
+    // Number of boundaries
+    unsigned nbound = orig_mesh_pt->nboundary();
+    this->set_nboundary(nbound);
+
+    /// Construct the nodes
+
+    /// Number of nodes
+    unsigned nnod = orig_mesh_pt->nnode();
+    this->Node_pt.resize(nnod);
+
+    /// In the first instance build all nodes from within all the elements
+
+    /// Number of nodes in each element. Assuming the same for all elements.
+    unsigned nnod_el = orig_mesh_pt->finite_element_pt(0)->nnode();
+
+    /// Loop over elements in original mesh, visit their nodes
+    for (unsigned e = 0; e < nelem; e++)
+    {
+      /// Loop over all nodes in element
+      for (unsigned j = 0; j < nnod_el; j++)
+      {
+        /// Create new node, using the NEW element's construct_node
+        /// member function
+        this->finite_element_pt(e)->construct_node(j, this->Time_stepper_pt);
+      }
+    }
+
+    /// Setup nodes.
+    /// Upgrade boundary nodes and assign to boundaries.
+    /// Delete multiple nodes at the same point.
+
+    /// A map from each node pointer to its assigned global count number.
+    std::map<Node*, unsigned> global_number;
+
+    /// Global counter to loop through each unique node
+    unsigned global_count = 0;
+
+    /// Loop over elements in original mesh, visit their nodes
+    for (unsigned e = 0; e < nelem; e++)
+    {
+      /// Loop over all nodes in element
+      for (unsigned j = 0; j < nnod_el; j++)
+      {
+        /// Pointer to current node in the original mesh
+        Node* orig_node_pt = orig_mesh_pt->finite_element_pt(e)->node_pt(j);
+
+        /// Get the (pseudo-)global node number in original mesh
+        /// (It's zero [=default] if not visited this one yet)
+
+        /// The (pseudo-)global node number in original mesh
+        unsigned j_global = global_number[orig_node_pt];
+
+        /// Haven't setup this node yet
+        if (j_global == 0)
+        {
+          /// Give it a number (not necessarily the global node
+          /// number in the original mesh -- we just need something
+          /// to keep track...)
+          global_count++;
+          global_number[orig_node_pt] = global_count;
+
+          /// Copy new node, created using the NEW element's construct_node
+          /// function into global storage, using the same global
+          /// node number that we've just associated with the
+          /// corresponding node in the original mesh
+          this->Node_pt[global_count - 1] =
+            this->finite_element_pt(e)->node_pt(j);
+
+          /// Assign coordinates
+          this->Node_pt[global_count - 1]->x(0) = orig_node_pt->x(0);
+          this->Node_pt[global_count - 1]->x(1) = orig_node_pt->x(1);
+
+
+          /// Get pointer to set of mesh boundaries that this
+          /// original node occupies; NULL if the node is not on any boundary
+          std::set<unsigned>* boundaries_pt;
+          orig_node_pt->get_boundaries_pt(boundaries_pt);
+
+          /// Loop over the mesh boundaries that the node in the original mesh
+          /// occupies and assign new node to the same ones.
+          if (boundaries_pt != 0)
+          {
+            /// Convert it to a boundary node
+            this->convert_to_boundary_node(this->Node_pt[global_count - 1]);
+            /// Add the node to the boundaries
+            for (std::set<unsigned>::iterator it = boundaries_pt->begin();
+                 it != boundaries_pt->end();
+                 ++it)
+            {
+              this->add_boundary_node(*it, this->Node_pt[global_count - 1]);
+            }
+          }
+        }
+        /// This one has already been setup/visited, therefore it is not unique,
+        /// so we delete it
+        else
+        {
+          /// Delete this node
+          delete this->finite_element_pt(e)->node_pt(j);
+
+          /// Overwrite the element's pointer to local node by
+          /// pointer to the already existing node -- identified by
+          /// the number kept in the map
+          this->finite_element_pt(e)->node_pt(j) = this->Node_pt[j_global - 1];
+        }
+      }
+    }
+
+    this->setup_boundary_element_info();
+  }
+
+
+  //======================================================================
   /// Build with the help of the scaffold mesh coming
   /// from the triangle mesh generator Triangle.
   //======================================================================
