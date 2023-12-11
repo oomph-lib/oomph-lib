@@ -424,7 +424,7 @@ namespace oomph
   {
   public:
     /// Empty constructor
-    TriangleMesh()
+    TriangleMesh() : Time_stepper_pt(&Mesh::Default_TimeStepper)
     {
 #ifdef OOMPH_HAS_TRIANGLE_LIB
       // Using this constructor no Triangulateio object is built
@@ -451,6 +451,7 @@ namespace oomph
       const std::string& poly_file_name,
       TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
       const bool& allow_automatic_creation_of_vertices_on_boundaries = true)
+      : Time_stepper_pt(time_stepper_pt)
     {
       // Mesh can only be built with 2D Telements.
       MeshChecker::assert_geometric_element<TElementGeometricBase, ELEMENT>(2);
@@ -464,9 +465,6 @@ namespace oomph
       // compute the holes left by the halo elements
       First_time_compute_holes_left_by_halo_elements = true;
 #endif // #ifdef OOMPH_HAS_MPI
-
-      // Store Timestepper used to build elements
-      Time_stepper_pt = time_stepper_pt;
 
       // Check if we should use attributes. This is set to true if the .poly
       // file specifies regions
@@ -515,6 +513,7 @@ namespace oomph
     /// TriangleMeshParameters
     TriangleMesh(TriangleMeshParameters& triangle_mesh_parameters,
                  TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : Time_stepper_pt(time_stepper_pt)
     {
       // Store the region target areas
       Regions_areas = triangle_mesh_parameters.target_area_for_region();
@@ -526,9 +525,6 @@ namespace oomph
       this->Allow_automatic_creation_of_vertices_on_boundaries =
         triangle_mesh_parameters
           .is_automatic_creation_of_vertices_on_boundaries_allowed();
-
-      // Store Timestepper used to build elements
-      Time_stepper_pt = time_stepper_pt;
 
 #ifdef OOMPH_HAS_MPI
       // Initialize the flag to indicate this is the first time to
@@ -757,6 +753,7 @@ namespace oomph
       const double& element_area,
       TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
       const bool& allow_automatic_creation_of_vertices_on_boundaries = true)
+      : Time_stepper_pt(time_stepper_pt)
     {
       // Mesh can only be built with 2D Telements.
       MeshChecker::assert_geometric_element<TElementGeometricBase, ELEMENT>(2);
@@ -776,9 +773,6 @@ namespace oomph
         "This constructor hasn't been tested since last cleanup.\n";
       OomphLibWarning(
         message, "TriangleMesh::TriangleMesh()", OOMPH_EXCEPTION_LOCATION);
-
-      // Store Timestepper used to build elements
-      Time_stepper_pt = time_stepper_pt;
 
       // Create the data structures required to call the triangulate function
       TriangulateIO triangle_in;
