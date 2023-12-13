@@ -106,7 +106,7 @@ namespace oomph
       Maximum_dt(1.0e12),
       DTSF_max_increase(4.0),
       DTSF_min_decrease(0.8),
-      Adaptive_dt_safety_factor(0.9),
+      Adaptive_dt_safety_factor(1.0),
       Minimum_dt_but_still_proceed(-1.0),
       Scale_arc_length(true),
       Desired_proportion_of_arc_length(0.5),
@@ -11409,13 +11409,13 @@ namespace oomph
 
         // Calculate the scaling factor
         dt_rescaling_factor =
-          Adaptive_dt_safety_factor *
-          std::pow((epsilon / error),
+          std::pow((Target_error_safety_factor * epsilon / error),
                    (1.0 / (1.0 + time_stepper_pt()->order())));
 
-        oomph_info << "Timestep scaling factor is  " << dt_rescaling_factor
-                   << std::endl;
-        oomph_info << "Estimated timestepping error is " << error << std::endl;
+        oomph_info
+            << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - "
+            << "Timestep scaling factor is " << dt_rescaling_factor << std::endl
+            << "Estimated timestepping error is " << error << std::endl;
 
 
         // Do we have to do it again?
@@ -11434,11 +11434,20 @@ namespace oomph
                        << std::endl;
           }
           oomph_info
-            << "Note: This behaviour can be adjusted by changing the protected "
+            << "Note: This behaviour can be adjusted by changing the protected"
             << "boolean" << std::endl
+            << "    Problem::Keep_temporal_error_below_tolerance" << std::endl
             << std::endl
-            << "    Problem::Keep_temporal_error_below_tolerance" << std::endl;
+            << "Also, if you are noticing that many of your timesteps result"
+            << "in error > tolerance, try reducing the target error with"
+            << "respect to the tolerance using Target_error_safety_factor"
+            << "which can be set using the access function" << std::endl
+            << "    target_error_safety_factor() = 0.5 (e.g.)" << std::endl
+            << "This will improve the robustness of timestep selection and may"
+            << "improve efficiency."<< std::endl;
         }
+        oomph_info
+            << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ";
 
 
       } // End of if adaptive flag

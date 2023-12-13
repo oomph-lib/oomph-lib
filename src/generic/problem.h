@@ -717,11 +717,21 @@ namespace oomph
     /// with a smaller dt).
     double DTSF_min_decrease;
 
-    /// Safety factor to ensure we are aiming for an error slightly below our
-    /// tolerance. Without this, dt may repeatedly undercorrect causing the
-    /// error to converge to the tolerance from above. (Note, this only makes
-    /// sense if it is less than 1.0)
-    double Adaptive_dt_safety_factor;
+    /// Safety factor to ensure we are aiming for a target error, TARGET,
+    /// that is below our tolerance:
+    ///     TARGET = Target_error_safety_factor * TOL
+    /// For this to make sense Target_error_safety_factor should be <1.0. If
+    /// Keep_temporal_error_below_tolerance is set to true (default) then,
+    /// without this, timesteps produced by the adaptive time-step suggester
+    /// can be expected to fail (exceed TOL) about half of the time.
+    /// Harier et al. (1993, ISBN:978-3-540-56670-0, p168) suggest a value
+    /// 0.25-0.40 to be the most efficient, however this is highly problem and
+    /// timestepper dependent and sometimes as high as 0.95 can be effective
+    /// at improving the robustness of timestep prediction.
+    ///
+    /// Note: Despite this, we are setting this to default to 1.0 to prevent
+    /// introducing any change in the default behaviour of oomph-lib for now.
+    double Target_error_safety_factor;
 
     /// If  Minimum_dt_but_still_proceed positive, then dt will not be
     /// reduced below this value during adaptive timestepping and the
@@ -1596,10 +1606,10 @@ namespace oomph
       return Maximum_dt;
     }
 
-    /// Access function to tje safety factor in adaptive timestepping
-    double& adaptive_dt_safety_factor()
+    /// Access function to the safety factor in adaptive timestepping
+    double& target_error_safety_factor()
     {
-      return Adaptive_dt_safety_factor;
+      return Target_error_safety_factor;
     }
 
     /// Access function to max Newton iterations before giving up.
