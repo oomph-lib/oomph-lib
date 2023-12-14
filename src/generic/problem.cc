@@ -106,7 +106,7 @@ namespace oomph
       Maximum_dt(1.0e12),
       DTSF_max_increase(4.0),
       DTSF_min_decrease(0.8),
-      Adaptive_dt_safety_factor(1.0),
+      Target_error_safety_factor(1.0),
       Minimum_dt_but_still_proceed(-1.0),
       Scale_arc_length(true),
       Desired_proportion_of_arc_length(0.5),
