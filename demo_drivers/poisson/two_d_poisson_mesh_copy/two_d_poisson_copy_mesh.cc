@@ -110,7 +110,7 @@ public:
   /// output gets written to
   void doc_solution(DocInfo& doc_info);
 
-  Mesh* bulk_mesh_pt();
+  TriangleMesh<ELEMENT>* bulk_mesh_pt();
 }; // end of problem class
 
 
@@ -318,9 +318,9 @@ void RefineablePoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 } // end of doc
 
 template<class ELEMENT>
-Mesh* RefineablePoissonProblem<ELEMENT>::bulk_mesh_pt()
+TriangleMesh<ELEMENT>* RefineablePoissonProblem<ELEMENT>::bulk_mesh_pt()
 {
-  return dynamic_cast<Mesh*>(My_mesh_pt);
+  return dynamic_cast<TriangleMesh<ELEMENT>*>(My_mesh_pt);
 }
 
 //====== start_of_problem_class=======================================
@@ -346,8 +346,9 @@ private:
 
 public:
   /// Constructor: Pass pointer to source function
+  template<class ORIGINAL_ELEMENT>
   MyPoissonProblem(PoissonEquations<2>::PoissonSourceFctPt source_fct_pt,
-                   Mesh* mesh_pt);
+                   TriangleMesh<ORIGINAL_ELEMENT>* passed_mesh_pt);
 
   /// Destructor (empty)
   ~MyPoissonProblem() {}
@@ -369,8 +370,10 @@ public:
 /// Constructor for Poisson problem: Pass pointer to source function.
 //========================================================================
 template<class ELEMENT>
+template<class ORIGINAL_ELEMENT>
 MyPoissonProblem<ELEMENT>::MyPoissonProblem(
-  PoissonEquations<2>::PoissonSourceFctPt source_fct_pt, Mesh* passed_mesh_pt)
+  PoissonEquations<2>::PoissonSourceFctPt source_fct_pt,
+  TriangleMesh<ORIGINAL_ELEMENT>* passed_mesh_pt)
   : Source_fct_pt(source_fct_pt)
 {
   // Setup mesh
@@ -592,7 +595,8 @@ int main()
   problem.doc_solution(doc_info);
   doc_info.number()++;
 
-  Mesh* old_mesh_pt = problem.bulk_mesh_pt();
+  TriangleMesh<ProjectablePoissonElement<TPoissonElement<2, 3>>>* old_mesh_pt =
+    problem.bulk_mesh_pt();
 
   // Create new problem from initial problem's mesh
   MyPoissonProblem<TPoissonElement<2, 3>> new_problem(

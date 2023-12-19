@@ -42,12 +42,29 @@ namespace oomph
   /// the scaffold mesh.
   //======================================================================
   template<class ELEMENT>
-  void TriangleMesh<ELEMENT>::build_from_another_mesh(Mesh* orig_mesh_pt)
+  template<class ORIG_ELEMENT>
+  void TriangleMesh<ELEMENT>::build_from_another_mesh(
+    TriangleMesh<ORIG_ELEMENT>* orig_mesh_pt)
   {
+    /// Check original element and current element have the same number of
+    /// nodes and structure etc.
+    ORIG_ELEMENT* example_orig_element_pt = dynamic_cast<ORIG_ELEMENT*>(orig_mesh_pt->element_pt(0));
+    const unsigned orig_n_node = example_orig_element_pt->nnode();
+
     /// Construct the elements
 
     /// Number of elements
     unsigned nelem = orig_mesh_pt->nelement();
+
+    if (this->Element_pt.size() != 0)
+    {
+      std::ostringstream error_message;
+      error_message << "Current Element_pt vector is not empty when trying to resize to match the number of elements in the old mesh.\n";
+      throw OomphLibError(error_message.str(),
+                          "TriangleMesh::build_from_another_mesh()",
+                          OOMPH_EXCEPTION_LOCATION);
+    }
+
     this->Element_pt.resize(nelem);
     for (unsigned e = 0; e < nelem; e++)
     {
@@ -62,12 +79,29 @@ namespace oomph
 
     /// Number of nodes
     unsigned nnod = orig_mesh_pt->nnode();
+    if (this->Node_pt.size() != 0)
+    {
+      std::ostringstream error_message;
+      error_message << "Current Node_pt vector is not empty when trying to resize to match the number of nodes in the old mesh.\n";
+      throw OomphLibError(error_message.str(),
+                          "TriangleMesh::build_from_another_mesh()",
+                          OOMPH_EXCEPTION_LOCATION);
+    }
     this->Node_pt.resize(nnod);
 
     /// In the first instance build all nodes from within all the elements
 
     /// Number of nodes in each element. Assuming the same for all elements.
     unsigned nnod_el = orig_mesh_pt->finite_element_pt(0)->nnode();
+    if (nnod_el != orig_n_node)
+    {
+      std::ostringstream error_message;
+      error_message << "Number of nodes in the new elements do not match the number in the old elements. This functionality hasn't been added yet.\n";
+      throw OomphLibError(error_message.str(),
+                          "TriangleMesh::build_from_another_mesh()",
+                          OOMPH_EXCEPTION_LOCATION);
+    }
+
 
     /// Loop over elements in original mesh, visit their nodes
     for (unsigned e = 0; e < nelem; e++)

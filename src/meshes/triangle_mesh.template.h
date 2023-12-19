@@ -881,7 +881,8 @@ namespace oomph
     }
 
     /// Build mesh from the structure and geometry of another mesh.
-    void build_from_another_mesh(Mesh* orig_mesh_pt);
+    template<class ORIG_ELEMENT>
+    void build_from_another_mesh(TriangleMesh<ORIG_ELEMENT>* orig_mesh_pt);
 
     /// Overload set_mesh_level_time_stepper so that the stored
     /// time stepper now corresponds to the new timestepper
