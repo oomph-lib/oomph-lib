@@ -363,7 +363,7 @@ namespace oomph
 
       // Output interpolated global position, deflection and stress
       outfile << interpolated_x(s, 0) << " " << interpolated_w_fvk(s) << " "
-              << sigma_r_r << " " << sigma_phi_phi << " " << std::endl;
+              << sigma_r_r << " " << sigma_phi_phi << std::endl;
     }
   }
 

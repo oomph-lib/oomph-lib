@@ -291,7 +291,7 @@ namespace oomph
       if (interpolated_r == 0.0)
       {
         // Compute the stresses:
-        sigma_r_r = (1.0 - nu_local) * interpolated_du_rdr;
+        sigma_r_r = interpolated_du_rdr / (1.0 - nu_local);
         sigma_phi_phi = sigma_r_r;
       }
       else
@@ -342,7 +342,7 @@ namespace oomph
       // Output interpolated global position, displacement and stress
       outfile << interpolated_x(s, 0) << " " << interpolated_w_fvk(s) << " "
               << interpolated_u_fvk(s) << " " << sigma_r_r << " "
-              << sigma_phi_phi << " " << std::endl;
+              << sigma_phi_phi << std::endl;
     }
   }
 
