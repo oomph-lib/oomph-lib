@@ -338,12 +338,11 @@ namespace oomph
       double sigma_r_r = 0.0;
       double sigma_phi_phi = 0.0;
       interpolated_stress(s, sigma_r_r, sigma_phi_phi);
-      outfile << interpolated_x(s, 0) << " "
-	      << interpolated_w_fvk(s) << " "
-	      << interpolated_u_fvk(s) << " "
-	      << sigma_r_r << " "
-	      << sigma_phi_phi << " "
-	      << std::endl;
+
+      // Output interpolated global position, displacement and stress
+      outfile << interpolated_x(s, 0) << " " << interpolated_w_fvk(s) << " "
+              << interpolated_u_fvk(s) << " " << sigma_r_r << " "
+              << sigma_phi_phi << " " << std::endl;
     }
   }
 
@@ -496,66 +495,6 @@ namespace oomph
       // Add to error and norm
       norm += exact_soln[0] * exact_soln[0] * W;
       error += (exact_soln[0] - w_fe) * (exact_soln[0] - w_fe) * W;
-    }
-
-    {
-      // Initialise
-      error = 0.0;
-      norm = 0.0;
-
-      // Vector of local coordinates
-      Vector<double> s(1);
-
-      // Vector for coordintes
-      Vector<double> r(1);
-
-      // Find out how many nodes there are in the element
-      unsigned n_node = nnode();
-
-      Shape psi(n_node);
-
-      // Set the value of n_intpt
-      unsigned n_intpt = integral_pt()->nweight();
-
-      // Tecplot
-      outfile << "ZONE" << std::endl;
-
-      // Exact solution Vector (here a scalar)
-      // Vector<double> exact_soln(1);
-      Vector<double> exact_soln(1);
-
-      // Loop over the integration points
-      for (unsigned ipt = 0; ipt < n_intpt; ipt++)
-      {
-        // Assign values of s
-        s[0] = integral_pt()->knot(ipt, 0);
-
-        // Get the integral weight
-        double w = integral_pt()->weight(ipt);
-
-        // Get jacobian of mapping
-        double J = J_eulerian(s);
-
-        // Premultiply the weights and the Jacobian
-        double W = w * J;
-
-        // Get r position as Vector
-        interpolated_x(s, r);
-
-        // Get FE function value
-        double w_fe = interpolated_w_fvk(s);
-
-        // Get exact solution at this point
-        (*exact_soln_pt)(r, exact_soln);
-
-        // Output r error
-        outfile << r[0] << " ";
-        outfile << exact_soln[0] << " " << exact_soln[0] - w_fe << std::endl;
-
-        // Add to error and norm
-        norm += exact_soln[0] * exact_soln[0] * W;
-        error += (exact_soln[0] - w_fe) * (exact_soln[0] - w_fe) * W;
-      }
     }
   }
 

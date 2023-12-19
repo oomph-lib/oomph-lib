@@ -271,21 +271,16 @@ namespace oomph
 
 
   //======================================================================
-  /// Compute in-plane stresses. Return boolean to indicate success
-  /// (false if attempt to evaluate stresses at zero radius)
+  /// Compute in-plane stresses.
   //======================================================================
-  bool AxisymFoepplvonKarmanEquations::interpolated_stress(
-    const Vector<double>& s, double& sigma_r_r, double& sigma_phi_phi)
-
+  void AxisymFoepplvonKarmanEquations::interpolated_stress(
+    const Vector<double>& s, double& sigma_r_r, double& sigma_phi_phi) const
   {
     // No in plane stresses if linear bending
     if (Linear_bending_model)
     {
       sigma_r_r = 0.0;
       sigma_phi_phi = 0.0;
-
-      // Success!
-      return true;
     }
     else
     {
@@ -294,16 +289,6 @@ namespace oomph
       unsigned n_node = this->nnode();
       Shape psi(n_node);
       DShape dpsi_dr(n_node, n_dim);
-
-      // Check if we're dividing by zero
-      Vector<double> r(1);
-      this->interpolated_x(s, r);
-      if (r[0] == 0.0)
-      {
-        sigma_r_r = 0.0;
-        sigma_phi_phi = 0.0;
-        return false;
-      }
 
       // Get shape fcts and derivs
       dshape_eulerian(s, psi, dpsi_dr);
@@ -331,11 +316,19 @@ namespace oomph
       } // End of loop over nodes
 
       // Compute stresses
-      sigma_r_r = interpolated_dphi_dr / interpolated_r;
+      // [zdec] Should this be interpolated_r < tolerance to prevent floating
+      // point comparison? -- AidanR
+      if (interpolated_r == 0.0)
+      {
+        // To avoid dividing by zero we take advantage of axisymmetry at the
+        // origin: l'Hopitals rule => dphi_dr/r -> d2phi_dr2
+        sigma_r_r = interpolated_continuous_d2phi_dr2;
+      }
+      else
+      {
+        sigma_r_r = interpolated_dphi_dr / interpolated_r;
+      }
       sigma_phi_phi = interpolated_continuous_d2phi_dr2;
-
-      // Success!
-      return true;
 
     } // End if
 
@@ -366,12 +359,11 @@ namespace oomph
       // Get stress
       double sigma_r_r = 0.0;
       double sigma_phi_phi = 0.0;
-      bool success = interpolated_stress(s, sigma_r_r, sigma_phi_phi);
-      if (success)
-      {
-        outfile << interpolated_x(s, 0) << " " << interpolated_w_fvk(s) << " "
-                << sigma_r_r << " " << sigma_phi_phi << std::endl;
-      }
+      interpolated_stress(s, sigma_r_r, sigma_phi_phi);
+
+      // Output interpolated global position, deflection and stress
+      outfile << interpolated_x(s, 0) << " " << interpolated_w_fvk(s) << " "
+              << sigma_r_r << " " << sigma_phi_phi << " " << std::endl;
     }
   }
 
@@ -524,66 +516,6 @@ namespace oomph
       // Add to error and norm
       norm += exact_soln[0] * exact_soln[0] * W;
       error += (exact_soln[0] - w_fe) * (exact_soln[0] - w_fe) * W;
-    }
-
-    {
-      // Initialise
-      error = 0.0;
-      norm = 0.0;
-
-      // Vector of local coordinates
-      Vector<double> s(1);
-
-      // Vector for coordintes
-      Vector<double> r(1);
-
-      // Find out how many nodes there are in the element
-      unsigned n_node = nnode();
-
-      Shape psi(n_node);
-
-      // Set the value of n_intpt
-      unsigned n_intpt = integral_pt()->nweight();
-
-      // Tecplot
-      outfile << "ZONE" << std::endl;
-
-      // Exact solution Vector (here a scalar)
-      // Vector<double> exact_soln(1);
-      Vector<double> exact_soln(1);
-
-      // Loop over the integration points
-      for (unsigned ipt = 0; ipt < n_intpt; ipt++)
-      {
-        // Assign values of s
-        s[0] = integral_pt()->knot(ipt, 0);
-
-        // Get the integral weight
-        double w = integral_pt()->weight(ipt);
-
-        // Get jacobian of mapping
-        double J = J_eulerian(s);
-
-        // Premultiply the weights and the Jacobian
-        double W = w * J;
-
-        // Get r position as Vector
-        interpolated_x(s, r);
-
-        // Get FE function value
-        double w_fe = interpolated_w_fvk(s);
-
-        // Get exact solution at this point
-        (*exact_soln_pt)(r, exact_soln);
-
-        // Output r error
-        outfile << r[0] << " ";
-        outfile << exact_soln[0] << " " << exact_soln[0] - w_fe << std::endl;
-
-        // Add to error and norm
-        norm += exact_soln[0] * exact_soln[0] * W;
-        error += (exact_soln[0] - w_fe) * (exact_soln[0] - w_fe) * W;
-      }
     }
   }
 
