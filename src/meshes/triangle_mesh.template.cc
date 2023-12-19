@@ -48,7 +48,8 @@ namespace oomph
   {
     /// Check original element and current element have the same number of
     /// nodes and structure etc.
-    ORIG_ELEMENT* example_orig_element_pt = dynamic_cast<ORIG_ELEMENT*>(orig_mesh_pt->element_pt(0));
+    ORIG_ELEMENT* example_orig_element_pt =
+      dynamic_cast<ORIG_ELEMENT*>(orig_mesh_pt->element_pt(0));
     const unsigned orig_n_node = example_orig_element_pt->nnode();
 
     /// Construct the elements
@@ -59,7 +60,9 @@ namespace oomph
     if (this->Element_pt.size() != 0)
     {
       std::ostringstream error_message;
-      error_message << "Current Element_pt vector is not empty when trying to resize to match the number of elements in the old mesh.\n";
+      error_message
+        << "Current Element_pt vector is not empty when trying to resize to "
+           "match the number of elements in the old mesh.\n";
       throw OomphLibError(error_message.str(),
                           "TriangleMesh::build_from_another_mesh()",
                           OOMPH_EXCEPTION_LOCATION);
@@ -82,7 +85,8 @@ namespace oomph
     if (this->Node_pt.size() != 0)
     {
       std::ostringstream error_message;
-      error_message << "Current Node_pt vector is not empty when trying to resize to match the number of nodes in the old mesh.\n";
+      error_message << "Current Node_pt vector is not empty when trying to "
+                       "resize to match the number of nodes in the old mesh.\n";
       throw OomphLibError(error_message.str(),
                           "TriangleMesh::build_from_another_mesh()",
                           OOMPH_EXCEPTION_LOCATION);
@@ -96,7 +100,9 @@ namespace oomph
     if (nnod_el != orig_n_node)
     {
       std::ostringstream error_message;
-      error_message << "Number of nodes in the new elements do not match the number in the old elements. This functionality hasn't been added yet.\n";
+      error_message
+        << "Number of nodes in the new elements do not match the number in the "
+           "old elements. This functionality hasn't been added yet.\n";
       throw OomphLibError(error_message.str(),
                           "TriangleMesh::build_from_another_mesh()",
                           OOMPH_EXCEPTION_LOCATION);
