@@ -11413,9 +11413,9 @@ namespace oomph
                    (1.0 / (1.0 + time_stepper_pt()->order())));
 
         oomph_info
-            << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - "
-            << "Timestep scaling factor is " << dt_rescaling_factor << std::endl
-            << "Estimated timestepping error is " << error << std::endl;
+          << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - "
+          << "Timestep scaling factor is " << dt_rescaling_factor << std::endl
+          << "Estimated timestepping error is " << error << std::endl;
 
 
         // Do we have to do it again?
@@ -11444,10 +11444,10 @@ namespace oomph
             << "which can be set using the access function" << std::endl
             << "    target_error_safety_factor() = 0.5 (e.g.)" << std::endl
             << "This will improve the robustness of timestep selection and may"
-            << "improve efficiency."<< std::endl;
+            << "improve efficiency." << std::endl;
         }
         oomph_info
-            << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ";
+          << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ";
 
 
       } // End of if adaptive flag
