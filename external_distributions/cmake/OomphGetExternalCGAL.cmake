@@ -112,6 +112,7 @@ set(
   -DMPFR_LIBRARIES=${MPFR_LIBRARIES}
   -DBoost_NO_SYSTEM_PATHS=ON
   -DBoost_ROOT=${BOOST_INSTALL_DIR}
+  -DWITH_CGAL_Qt5=OFF
 )
 oomph_get_external_project_helper(
   PROJECT_NAME cgal
