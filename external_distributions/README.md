@@ -67,7 +67,7 @@ The table below contains the version of each library that you can install with t
 
 Library    | Version
 -----------|--------
-`OpenBLAS` | 0.3.24
+`OpenBLAS` | 0.3.25
 `GMP`      | 6.3.0
 `MPFR`     | 4.2.1
 `Boost`    | 1.83.0
@@ -158,7 +158,7 @@ See [Remark on `OOMPH_USE_<LIBRARY>_FROM` variables](#remark-on-oomph_use_librar
 
 ### macOS support
 
-Currently the build of OpenBLAS does not work on macOS with the compilers detected by CMake, but it does work with `gcc`/`g++`. However, we don't recommend that you specify your own compiler; instead you should let CMake pick the compiler for you. For this reason, we recommend that you install OpenBLAS, GMP and MPFR with your desired package manager (e.g. Homebrew or MacPorts). If, for example, you install these libraries with Homebrew, you can specify their paths to CMake like so
+Currently the build of OpenBLAS does not work on macOS with the compilers detected by CMake, but it does work with `gcc`/`g++`. However, we don't recommend that you specify your own compiler; instead you should let CMake pick the compiler for you. GMP and MPFR will also likely not build on macOS. For these reasons, we recommend that you install OpenBLAS, GMP and MPFR via your desired package manager (e.g. Homebrew or MacPorts). If, for example, you install these libraries with Homebrew, you can specify their paths to CMake like so
 
 ```bash
 >>> cmake -G Ninja -DOOMPH_USE_OPENBLAS_FROM=$(brew --prefix openblas) -DOOMPH_USE_GMP_FROM=$(brew --prefix gmp) -DOOMPH_USE_MPFR_FROM=$(brew --prefix mpfr) -B build

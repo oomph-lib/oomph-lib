@@ -153,9 +153,9 @@ if(BUILD_SHARED_LIBS)
   set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 endif()
 
-# The user needs to provide at least v0.3.24 of OpenBLAS
+# The user needs to provide at least v0.3.25 of OpenBLAS
 find_package(
-  OpenBLAS 0.3.24 REQUIRED
+  OpenBLAS 0.3.25 REQUIRED
   PATHS ${OOMPH_USE_OPENBLAS_FROM}
   NO_DEFAULT_PATH)
 
