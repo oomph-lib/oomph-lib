@@ -107,9 +107,9 @@
 --with-mpi-self-tests-variablenp="mpirun -np OOMPHNP"
 --with-gmsh-self-tests="/home/matthias/gmsh/gmsh-4.12.0-source/build/gmsh"
 --with-mpi-include-directory=/usr/lib/x86_64-linux-gnu/openmpi/include
-CXXFLAGS="-O3 -Wall -std=c++11"
-CFLAGS="-O3"
-FFLAGS="-O3"
+CXXFLAGS="-g -DPARANOID -DRANGE_CHECKING -Wall -std=c++11"
+CFLAGS="-g"
+FFLAGS="-g"
 FFLAGS_NO_OPT="-O0"
 CXX=mpic++
 CC=mpicc
