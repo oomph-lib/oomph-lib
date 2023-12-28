@@ -6215,10 +6215,9 @@ namespace oomph
         // --------------
 
 
-        
-         // Work-around for odd seg fault when calling MPI_Wait below.
-         MPI_Request my_request;
-         
+        // Work-around for odd seg fault when calling MPI_Wait below.
+        MPI_Request my_request;
+
         // Double data
         unsigned nflat_double_send = flat_double_send_packed_data.size();
         MPI_Isend(&nflat_double_send,
@@ -6228,7 +6227,7 @@ namespace oomph
                   3,
                   comm_pt->mpi_comm(),
                   &my_request);
-        
+
         unsigned nflat_double_receive = 0;
         MPI_Recv(&nflat_double_receive,
                  1,
@@ -6238,9 +6237,9 @@ namespace oomph
                  comm_pt->mpi_comm(),
                  &status);
 
-         // this is where it used to die without separate MPI request
-         MPI_Wait(&my_request, MPI_STATUS_IGNORE);
-        
+        // this is where it used to die without separate MPI request
+        MPI_Wait(&my_request, MPI_STATUS_IGNORE);
+
         if (nflat_double_send != 0)
         {
           MPI_Isend(&flat_double_send_packed_data[0],
