@@ -11371,7 +11371,7 @@ namespace oomph
         {
           // Reject the timestep, if we have an exception
           oomph_info << "TIMESTEP REJECTED" << std::endl;
-          reject_timestep = 1;
+          reject_timestep = true;
 
           // Half the time step
           dt_rescaling_factor = Timestep_reduction_factor_after_nonconvergence;
@@ -11407,47 +11407,50 @@ namespace oomph
         // but use absolute value just in case.
         double error = std::max(std::abs(global_temporal_error_norm()), 1e-12);
 
+        // Target error that we wish our next timestep to approximately produce
+        // as a factor of the maximum error tolerance
+        double target_error = Target_error_safety_factor * epsilon;
+
         // Calculate the scaling factor
         dt_rescaling_factor =
-          std::pow((Target_error_safety_factor * epsilon / error),
+          std::pow((target_error / error),
                    (1.0 / (1.0 + time_stepper_pt()->order())));
 
         oomph_info
-          << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - "
-          << "Timestep scaling factor is " << dt_rescaling_factor << std::endl
-          << "Estimated timestepping error is " << error << std::endl;
+          << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n"
+          << "Estimated timestepping error is " << error  << "\n"
+          << "Timestep scaling factor is " << dt_rescaling_factor << "\n";
 
 
         // Do we have to do it again?
         if (error > epsilon)
         {
           oomph_info << "Estimated timestepping error " << error
-                     << " exceeds tolerance " << epsilon << " ";
+                     << " exceeds tolerance " << epsilon << "\n";
           if (Keep_temporal_error_below_tolerance)
-          {
-            oomph_info << " --> rejecting timestep." << std::endl;
-            reject_timestep = 1;
+          { 
+            oomph_info << "    --> rejecting timestep.\n";
+            reject_timestep = true;
           }
           else
           {
-            oomph_info << " ...but we're not rejecting the timestep"
-                       << std::endl;
+            oomph_info << "    ...but we're not rejecting the timestep\n";
           }
           oomph_info
-            << "Note: This behaviour can be adjusted by changing the protected"
-            << "boolean" << std::endl
-            << "    Problem::Keep_temporal_error_below_tolerance" << std::endl
-            << std::endl
-            << "Also, if you are noticing that many of your timesteps result"
-            << "in error > tolerance, try reducing the target error with"
-            << "respect to the tolerance using Target_error_safety_factor"
-            << "which can be set using the access function" << std::endl
-            << "    target_error_safety_factor() = 0.5 (e.g.)" << std::endl
-            << "This will improve the robustness of timestep selection and may"
-            << "improve efficiency." << std::endl;
+            << "Note: This behaviour can be adjusted by changing the\n"
+            << "protected boolean\n"
+            << "    Problem::Keep_temporal_error_below_tolerance\n\n"
+            << "Also, if you are noticing that many of your timesteps result\n"
+            << "in error > tolerance, try reducing the target error with\n"
+            << "respect to the tolerance using Target_error_safety_factor\n"
+            << "which can be set using the access function\n"
+            << "    target_error_safety_factor() = 0.5 (e.g.)\n"
+            << "This will improve the robustness of timestep selection and\n"
+            << "may improve efficiency.\n";
         }
         oomph_info
-          << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ";
+          << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n"
+          << std::endl;
 
 
       } // End of if adaptive flag
