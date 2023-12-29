@@ -286,7 +286,8 @@ endif()
 # Silence the (annoying) warnings produced by this library
 include(OomphTargetSilenceWarnings)
 oomph_target_silence_warnings(
-  TARGET ${LIBNAME} C_COMPILE_FLAGS -Wno-deprecated-non-prototype -Wno-format)
+  TARGET ${LIBNAME} C_COMPILE_FLAGS -Wno-deprecated-non-prototype -Wno-format
+                                    -Wno-unused-result)
 
 # ------------------------------------------------------------------------------
 # BOILERPLATE: Update variables in parent scope

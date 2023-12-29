@@ -42,8 +42,9 @@ oomph_library_config(
 
 # Silence the annoying warnings produced by this library
 include(OomphTargetSilenceWarnings)
-oomph_target_silence_warnings(TARGET ${LIBNAME}
-                              CXX_COMPILE_FLAGS -Wno-int-to-pointer-cast)
+oomph_target_silence_warnings(
+  TARGET ${LIBNAME} CXX_COMPILE_FLAGS -Wno-int-to-pointer-cast
+                                      -Wno-unused-result)
 
 # ------------------------------------------------------------------------------
 # BOILERPLATE: Update variables in parent scope
