@@ -77,6 +77,9 @@ include(OomphCustomOptions)
 # Regular CMake option; doesn't influence the build so we won't print its value at the end
 option(OOMPH_PRINT_SETTINGS_AFTER_INSTALL "Display the oomph-lib settings at the end of the install step" ON)
 
+# FIXME: Delete
+oomph_option(OOMPH_USE_OLD_SUPERLU_DIST "Revert to SuperLU Dist 3.0" ON)
+
 # General options
 oomph_option(OOMPH_DONT_SILENCE_USELESS_WARNINGS "Display (harmless) warnings from external_src/ and src/ that are silenced" OFF)
 oomph_option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" OFF)

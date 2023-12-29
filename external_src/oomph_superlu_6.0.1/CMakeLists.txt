@@ -251,7 +251,11 @@ endif()
 # Specify the libraries that we depend on
 
 # METIS
-set(LINKLIBS oomph::oomph_metis_from_parmetis_4.0.3)
+if(OOMPH_USE_OLD_SUPERLU_DIST)
+  set(LINKLIBS oomph::oomph_metis_from_parmetis_3.1.1)
+else()
+  set(LINKLIBS oomph::oomph_metis_from_parmetis_4.0.3)
+endif()
 
 # OpenBLAS
 list(APPEND LINKLIBS ${OpenBLAS_LIBRARIES})

@@ -59,18 +59,25 @@ if(NOT OOMPH_SUPPRESS_TETGEN_LIB)
   endif()
 endif()
 
-# Add GKlib for METIS and METIS
-add_subdirectory(oomph_gklib_from_metis_from_parmetis_4.0.3)
-add_subdirectory(oomph_metis_from_parmetis_4.0.3)
-
-# Add SuperLU
-add_subdirectory(oomph_superlu_6.0.1)
-
-# If compiled with MPI
-if(OOMPH_HAS_MPI)
-  # Provide up-to-date sources if the user wants a "bleeding edge" oomph-lib
-  add_subdirectory(oomph_parmetis_4.0.3)
-  add_subdirectory(oomph_superlu_dist_8.2.1)
+# Provide up-to-date sources if the user wants a "bleeding edge" oomph-lib
+if(OOMPH_USE_OLD_SUPERLU_DIST)
+  # Add METIS
+  add_subdirectory(oomph_metis_from_parmetis_3.1.1)
+  add_subdirectory(oomph_superlu_4.3)
+  if(OOMPH_HAS_MPI)
+    add_subdirectory(oomph_parmetis_3.1.1)
+    add_subdirectory(oomph_superlu_dist_3.0)
+    list(APPEND EXTERNAL_SRC_CXX_DEFINITIONS OOMPH_USE_OLD_SUPERLU_DIST)
+  endif()
+else()
+  # Add GKlib for METIS and METIS
+  add_subdirectory(oomph_gklib_from_metis_from_parmetis_4.0.3)
+  add_subdirectory(oomph_metis_from_parmetis_4.0.3)
+  add_subdirectory(oomph_superlu_6.0.1)
+  if(OOMPH_HAS_MPI)
+    add_subdirectory(oomph_parmetis_4.0.3)
+    add_subdirectory(oomph_superlu_dist_8.2.1)
+  endif()
 endif()
 
 # ------------------------------------------------------------------------------

@@ -32,7 +32,11 @@
 // for the new METIS API, need to use symbols defined in the standard header
 // which aren't available in the current frozen (old) version of METIS
 // Version 3 will (presumably) have this header in the include path as standard
+#ifdef OOMPH_USE_OLD_SUPERLU_DIST
+#include "oomph_metis_from_parmetis_3.1.1/metis.h"
+#else
 #include "oomph_metis_from_parmetis_4.0.3/metis.h"
+#endif
 
 namespace oomph
 {
@@ -286,6 +290,7 @@ namespace oomph
     int* options = new int[10];
     options[0] = 0;
 
+#ifndef OOMPH_USE_OLD_SUPERLU_DIST
     switch (objective)
     {
       case 0:
@@ -306,6 +311,7 @@ namespace oomph
         throw OomphLibError(
           error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
+#endif
 
     // Number of cut edges in graph
     int* edgecut = new int[nelem];
@@ -438,6 +444,21 @@ namespace oomph
       }
     }
 
+#ifdef OOMPH_USE_OLD_SUPERLU_DIST
+    // Call partitioner
+    METIS_PartGraphKway(&nvertex,
+                        xadj,
+                        &adjacency_vector[0],
+                        vwgt,
+                        adjwgt,
+                        &wgtflag,
+                        &numflag,
+                        &nparts,
+                        options,
+                        edgecut,
+                        part);
+
+#else
     // If ncon is the number of weights associated with each vertex, the array
     // vwgt contains n x ncon elements where n is the number of vertices).
     int ncon = 1;
@@ -473,6 +494,7 @@ namespace oomph
                         options,
                         edgecut,
                         part);
+#endif
 
 #ifdef PARANOID
     std::vector<bool> done(nparts, false);
@@ -1089,6 +1111,7 @@ namespace oomph
       int* options = new int[10];
       options[0] = 0;
 
+#ifndef OOMPH_USE_OLD_SUPERLU_DIST
       switch (objective)
       {
         case 0:
@@ -1110,6 +1133,7 @@ namespace oomph
                               OOMPH_CURRENT_FUNCTION,
                               OOMPH_EXCEPTION_LOCATION);
       }
+#endif
 
       // Number of cut edges in graph
       int* edgecut = new int[total_number_of_root_elements];
@@ -1214,6 +1238,20 @@ namespace oomph
       // Actually use METIS (good but not always repeatable!)
       else
       {
+#ifdef OOMPH_USE_OLD_SUPERLU_DIST
+        METIS_PartGraphKway(&nvertex,
+                            xadj,
+                            &adjacency_vector[0],
+                            vwgt,
+                            adjwgt,
+                            &wgtflag,
+                            &numflag,
+                            &nparts,
+                            options,
+                            edgecut,
+                            part);
+#else
+
         // METIS_PartGraphKway(&nvertex,
         //                     xadj,
         //                     &adjacency_vector[0],
@@ -1262,6 +1300,7 @@ namespace oomph
                             options,
                             edgecut,
                             part);
+#endif
       }
 
       // Copy across
