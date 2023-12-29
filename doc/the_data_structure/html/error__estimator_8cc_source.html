@@ -1947,113 +1947,121 @@ $(function() {
 <div class="line"><a name="l01818"></a><span class="lineno"> 1818</span>&#160; </div>
 <div class="line"><a name="l01819"></a><span class="lineno"> 1819</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l01820"></a><span class="lineno"> 1820</span>&#160; </div>
-<div class="line"><a name="l01821"></a><span class="lineno"> 1821</span>&#160;    <span class="comment">// Setup output files</span></div>
-<div class="line"><a name="l01822"></a><span class="lineno"> 1822</span>&#160;    std::ofstream some_file, feflux_file;</div>
-<div class="line"><a name="l01823"></a><span class="lineno"> 1823</span>&#160;    std::ostringstream filename;</div>
-<div class="line"><a name="l01824"></a><span class="lineno"> 1824</span>&#160;    filename &lt;&lt; doc_info.<a class="code" href="classoomph_1_1DocInfo.html#a85d58bcfce0a7b7cae461624e6fcd08a">directory</a>() &lt;&lt; <span class="stringliteral">&quot;/flux_rec&quot;</span> &lt;&lt; doc_info.<a class="code" href="classoomph_1_1DocInfo.html#af27224b25da5b758442753f0947e62d4">number</a>()</div>
-<div class="line"><a name="l01825"></a><span class="lineno"> 1825</span>&#160;             &lt;&lt; <span class="stringliteral">&quot;_on_proc_&quot;</span> &lt;&lt; comm_pt-&gt;my_rank() &lt;&lt; <span class="stringliteral">&quot;.dat&quot;</span>;</div>
-<div class="line"><a name="l01826"></a><span class="lineno"> 1826</span>&#160;    some_file.open(filename.str().c_str());</div>
-<div class="line"><a name="l01827"></a><span class="lineno"> 1827</span>&#160;    filename.str(<span class="stringliteral">&quot;&quot;</span>);</div>
-<div class="line"><a name="l01828"></a><span class="lineno"> 1828</span>&#160;    filename &lt;&lt; doc_info.<a class="code" href="classoomph_1_1DocInfo.html#a85d58bcfce0a7b7cae461624e6fcd08a">directory</a>() &lt;&lt; <span class="stringliteral">&quot;/flux_fe&quot;</span> &lt;&lt; doc_info.<a class="code" href="classoomph_1_1DocInfo.html#af27224b25da5b758442753f0947e62d4">number</a>()</div>
-<div class="line"><a name="l01829"></a><span class="lineno"> 1829</span>&#160;             &lt;&lt; <span class="stringliteral">&quot;_on_proc_&quot;</span> &lt;&lt; comm_pt-&gt;my_rank() &lt;&lt; <span class="stringliteral">&quot;.dat&quot;</span>;</div>
-<div class="line"><a name="l01830"></a><span class="lineno"> 1830</span>&#160;    feflux_file.open(filename.str().c_str());</div>
-<div class="line"><a name="l01831"></a><span class="lineno"> 1831</span>&#160; </div>
-<div class="line"><a name="l01832"></a><span class="lineno"> 1832</span>&#160;    <span class="keywordtype">unsigned</span> nel = mesh_pt-&gt;<a class="code" href="classoomph_1_1Mesh.html#af01dfefb66c15579b540be62999d93ee">nelement</a>();</div>
-<div class="line"><a name="l01833"></a><span class="lineno"> 1833</span>&#160;    <span class="keywordflow">if</span> (nel &gt; 0)</div>
-<div class="line"><a name="l01834"></a><span class="lineno"> 1834</span>&#160;    {</div>
-<div class="line"><a name="l01835"></a><span class="lineno"> 1835</span>&#160;      <span class="comment">// Extract first element to determine spatial dimension</span></div>
-<div class="line"><a name="l01836"></a><span class="lineno"> 1836</span>&#160;      <a class="code" href="classoomph_1_1FiniteElement.html">FiniteElement</a>* el_pt = mesh_pt-&gt;<a class="code" href="classoomph_1_1Mesh.html#a4f274774435e9454bf77bf70de69367a">finite_element_pt</a>(0);</div>
-<div class="line"><a name="l01837"></a><span class="lineno"> 1837</span>&#160;      <span class="keywordtype">unsigned</span> dim = el_pt-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#a5f8fe59f06da1da9f6b7bbcbdb90ef93">dim</a>();</div>
-<div class="line"><a name="l01838"></a><span class="lineno"> 1838</span>&#160;      <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> <a class="code" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>(dim);</div>
-<div class="line"><a name="l01839"></a><span class="lineno"> 1839</span>&#160; </div>
-<div class="line"><a name="l01840"></a><span class="lineno"> 1840</span>&#160;      <span class="comment">// Decide on the number of plot points</span></div>
-<div class="line"><a name="l01841"></a><span class="lineno"> 1841</span>&#160;      <span class="keywordtype">unsigned</span> nplot = 5;</div>
-<div class="line"><a name="l01842"></a><span class="lineno"> 1842</span>&#160; </div>
-<div class="line"><a name="l01843"></a><span class="lineno"> 1843</span>&#160;      <span class="comment">// Loop over all elements</span></div>
-<div class="line"><a name="l01844"></a><span class="lineno"> 1844</span>&#160;      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code" href="cfortran_8h.html#a37cd013acc76697829c324bdd8562d82">e</a> = 0; <a class="code" href="cfortran_8h.html#a37cd013acc76697829c324bdd8562d82">e</a> &lt; nel; <a class="code" href="cfortran_8h.html#a37cd013acc76697829c324bdd8562d82">e</a>++)</div>
-<div class="line"><a name="l01845"></a><span class="lineno"> 1845</span>&#160;      {</div>
-<div class="line"><a name="l01846"></a><span class="lineno"> 1846</span>&#160;        <a class="code" href="classoomph_1_1ElementWithZ2ErrorEstimator.html">ElementWithZ2ErrorEstimator</a>* el_pt =</div>
-<div class="line"><a name="l01847"></a><span class="lineno"> 1847</span>&#160;          <span class="keyword">dynamic_cast&lt;</span><a class="code" href="classoomph_1_1ElementWithZ2ErrorEstimator.html">ElementWithZ2ErrorEstimator</a>*<span class="keyword">&gt;</span>(mesh_pt-&gt;<a class="code" href="classoomph_1_1Mesh.html#a876faf1f87b24b220ea21a38d6adde5b">element_pt</a>(<a class="code" href="cfortran_8h.html#a37cd013acc76697829c324bdd8562d82">e</a>));</div>
+<div class="line"><a name="l01821"></a><span class="lineno"> 1821</span>&#160;    <span class="comment">// File suffix identifying processor rank. If comm_pt is null (because</span></div>
+<div class="line"><a name="l01822"></a><span class="lineno"> 1822</span>&#160;    <span class="comment">// oomph-lib was built with MPI but this mesh is not distributed) the</span></div>
+<div class="line"><a name="l01823"></a><span class="lineno"> 1823</span>&#160;    <span class="comment">// string is empty.</span></div>
+<div class="line"><a name="l01824"></a><span class="lineno"> 1824</span>&#160;    <a class="code" href="namespaceoomph_1_1Global__string__for__annotation.html#ac5379de2fa7fe44f2cb31785fc208135">std::string</a> rank_string = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a name="l01825"></a><span class="lineno"> 1825</span>&#160;    <span class="keywordflow">if</span> (comm_pt != 0)</div>
+<div class="line"><a name="l01826"></a><span class="lineno"> 1826</span>&#160;    {</div>
+<div class="line"><a name="l01827"></a><span class="lineno"> 1827</span>&#160;      rank_string = <span class="stringliteral">&quot;_on_proc_&quot;</span> + comm_pt-&gt;my_rank();</div>
+<div class="line"><a name="l01828"></a><span class="lineno"> 1828</span>&#160;    }</div>
+<div class="line"><a name="l01829"></a><span class="lineno"> 1829</span>&#160; </div>
+<div class="line"><a name="l01830"></a><span class="lineno"> 1830</span>&#160;    <span class="comment">// Setup output files</span></div>
+<div class="line"><a name="l01831"></a><span class="lineno"> 1831</span>&#160;    std::ofstream some_file, feflux_file;</div>
+<div class="line"><a name="l01832"></a><span class="lineno"> 1832</span>&#160;    std::ostringstream filename;</div>
+<div class="line"><a name="l01833"></a><span class="lineno"> 1833</span>&#160;    filename &lt;&lt; doc_info.<a class="code" href="classoomph_1_1DocInfo.html#a85d58bcfce0a7b7cae461624e6fcd08a">directory</a>() &lt;&lt; <span class="stringliteral">&quot;/flux_rec&quot;</span> &lt;&lt; doc_info.<a class="code" href="classoomph_1_1DocInfo.html#af27224b25da5b758442753f0947e62d4">number</a>()</div>
+<div class="line"><a name="l01834"></a><span class="lineno"> 1834</span>&#160;             &lt;&lt; rank_string &lt;&lt; <span class="stringliteral">&quot;.dat&quot;</span>;</div>
+<div class="line"><a name="l01835"></a><span class="lineno"> 1835</span>&#160;    some_file.open(filename.str().c_str());</div>
+<div class="line"><a name="l01836"></a><span class="lineno"> 1836</span>&#160;    filename.str(<span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a name="l01837"></a><span class="lineno"> 1837</span>&#160;    filename &lt;&lt; doc_info.<a class="code" href="classoomph_1_1DocInfo.html#a85d58bcfce0a7b7cae461624e6fcd08a">directory</a>() &lt;&lt; <span class="stringliteral">&quot;/flux_fe&quot;</span> &lt;&lt; doc_info.<a class="code" href="classoomph_1_1DocInfo.html#af27224b25da5b758442753f0947e62d4">number</a>()</div>
+<div class="line"><a name="l01838"></a><span class="lineno"> 1838</span>&#160;             &lt;&lt; rank_string &lt;&lt; <span class="stringliteral">&quot;.dat&quot;</span>;</div>
+<div class="line"><a name="l01839"></a><span class="lineno"> 1839</span>&#160;    feflux_file.open(filename.str().c_str());</div>
+<div class="line"><a name="l01840"></a><span class="lineno"> 1840</span>&#160; </div>
+<div class="line"><a name="l01841"></a><span class="lineno"> 1841</span>&#160;    <span class="keywordtype">unsigned</span> nel = mesh_pt-&gt;<a class="code" href="classoomph_1_1Mesh.html#af01dfefb66c15579b540be62999d93ee">nelement</a>();</div>
+<div class="line"><a name="l01842"></a><span class="lineno"> 1842</span>&#160;    <span class="keywordflow">if</span> (nel &gt; 0)</div>
+<div class="line"><a name="l01843"></a><span class="lineno"> 1843</span>&#160;    {</div>
+<div class="line"><a name="l01844"></a><span class="lineno"> 1844</span>&#160;      <span class="comment">// Extract first element to determine spatial dimension</span></div>
+<div class="line"><a name="l01845"></a><span class="lineno"> 1845</span>&#160;      <a class="code" href="classoomph_1_1FiniteElement.html">FiniteElement</a>* el_pt = mesh_pt-&gt;<a class="code" href="classoomph_1_1Mesh.html#a4f274774435e9454bf77bf70de69367a">finite_element_pt</a>(0);</div>
+<div class="line"><a name="l01846"></a><span class="lineno"> 1846</span>&#160;      <span class="keywordtype">unsigned</span> dim = el_pt-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#a5f8fe59f06da1da9f6b7bbcbdb90ef93">dim</a>();</div>
+<div class="line"><a name="l01847"></a><span class="lineno"> 1847</span>&#160;      <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> <a class="code" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>(dim);</div>
 <div class="line"><a name="l01848"></a><span class="lineno"> 1848</span>&#160; </div>
-<div class="line"><a name="l01849"></a><span class="lineno"> 1849</span>&#160;        <span class="comment">// Write tecplot header</span></div>
-<div class="line"><a name="l01850"></a><span class="lineno"> 1850</span>&#160;        feflux_file &lt;&lt; el_pt-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#a3193df31f9ce38e0609d17a8ffb386c6">tecplot_zone_string</a>(nplot);</div>
-<div class="line"><a name="l01851"></a><span class="lineno"> 1851</span>&#160;        some_file &lt;&lt; el_pt-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#a3193df31f9ce38e0609d17a8ffb386c6">tecplot_zone_string</a>(nplot);</div>
-<div class="line"><a name="l01852"></a><span class="lineno"> 1852</span>&#160; </div>
-<div class="line"><a name="l01853"></a><span class="lineno"> 1853</span>&#160;        <span class="keywordtype">unsigned</span> num_plot_points = el_pt-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#a8ed563c7ff0cfd8bafdbb0132b388106">nplot_points</a>(nplot);</div>
-<div class="line"><a name="l01854"></a><span class="lineno"> 1854</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> iplot = 0; iplot &lt; num_plot_points; iplot++)</div>
-<div class="line"><a name="l01855"></a><span class="lineno"> 1855</span>&#160;        {</div>
-<div class="line"><a name="l01856"></a><span class="lineno"> 1856</span>&#160;          <span class="comment">// Get local coordinates of plot point</span></div>
-<div class="line"><a name="l01857"></a><span class="lineno"> 1857</span>&#160;          el_pt-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#a82da844fd3ebb2005842464cdc148a03">get_s_plot</a>(iplot, nplot, <a class="code" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>);</div>
-<div class="line"><a name="l01858"></a><span class="lineno"> 1858</span>&#160; </div>
-<div class="line"><a name="l01859"></a><span class="lineno"> 1859</span>&#160;          <span class="comment">// Coordinate</span></div>
-<div class="line"><a name="l01860"></a><span class="lineno"> 1860</span>&#160;          <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> x(dim);</div>
-<div class="line"><a name="l01861"></a><span class="lineno"> 1861</span>&#160;          el_pt-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#a5a9c1ead9819cd17603096e63087020f">interpolated_x</a>(<a class="code" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, x);</div>
-<div class="line"><a name="l01862"></a><span class="lineno"> 1862</span>&#160; </div>
-<div class="line"><a name="l01863"></a><span class="lineno"> 1863</span>&#160;          <span class="comment">// Number of FE nodes</span></div>
-<div class="line"><a name="l01864"></a><span class="lineno"> 1864</span>&#160;          <span class="keywordtype">unsigned</span> n_node = el_pt-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#a6219ed269a6d89b5aa14659cce48905a">nnode</a>();</div>
-<div class="line"><a name="l01865"></a><span class="lineno"> 1865</span>&#160; </div>
-<div class="line"><a name="l01866"></a><span class="lineno"> 1866</span>&#160;          <span class="comment">// FE shape function</span></div>
-<div class="line"><a name="l01867"></a><span class="lineno"> 1867</span>&#160;          <a class="code" href="classoomph_1_1Shape.html">Shape</a> psi(n_node);</div>
-<div class="line"><a name="l01868"></a><span class="lineno"> 1868</span>&#160; </div>
-<div class="line"><a name="l01869"></a><span class="lineno"> 1869</span>&#160;          <span class="comment">// Get values of FE shape function</span></div>
-<div class="line"><a name="l01870"></a><span class="lineno"> 1870</span>&#160;          el_pt-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">shape</a>(<a class="code" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, psi);</div>
+<div class="line"><a name="l01849"></a><span class="lineno"> 1849</span>&#160;      <span class="comment">// Decide on the number of plot points</span></div>
+<div class="line"><a name="l01850"></a><span class="lineno"> 1850</span>&#160;      <span class="keywordtype">unsigned</span> nplot = 5;</div>
+<div class="line"><a name="l01851"></a><span class="lineno"> 1851</span>&#160; </div>
+<div class="line"><a name="l01852"></a><span class="lineno"> 1852</span>&#160;      <span class="comment">// Loop over all elements</span></div>
+<div class="line"><a name="l01853"></a><span class="lineno"> 1853</span>&#160;      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code" href="cfortran_8h.html#a37cd013acc76697829c324bdd8562d82">e</a> = 0; <a class="code" href="cfortran_8h.html#a37cd013acc76697829c324bdd8562d82">e</a> &lt; nel; <a class="code" href="cfortran_8h.html#a37cd013acc76697829c324bdd8562d82">e</a>++)</div>
+<div class="line"><a name="l01854"></a><span class="lineno"> 1854</span>&#160;      {</div>
+<div class="line"><a name="l01855"></a><span class="lineno"> 1855</span>&#160;        <a class="code" href="classoomph_1_1ElementWithZ2ErrorEstimator.html">ElementWithZ2ErrorEstimator</a>* el_pt =</div>
+<div class="line"><a name="l01856"></a><span class="lineno"> 1856</span>&#160;          <span class="keyword">dynamic_cast&lt;</span><a class="code" href="classoomph_1_1ElementWithZ2ErrorEstimator.html">ElementWithZ2ErrorEstimator</a>*<span class="keyword">&gt;</span>(mesh_pt-&gt;<a class="code" href="classoomph_1_1Mesh.html#a876faf1f87b24b220ea21a38d6adde5b">element_pt</a>(<a class="code" href="cfortran_8h.html#a37cd013acc76697829c324bdd8562d82">e</a>));</div>
+<div class="line"><a name="l01857"></a><span class="lineno"> 1857</span>&#160; </div>
+<div class="line"><a name="l01858"></a><span class="lineno"> 1858</span>&#160;        <span class="comment">// Write tecplot header</span></div>
+<div class="line"><a name="l01859"></a><span class="lineno"> 1859</span>&#160;        feflux_file &lt;&lt; el_pt-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#a3193df31f9ce38e0609d17a8ffb386c6">tecplot_zone_string</a>(nplot);</div>
+<div class="line"><a name="l01860"></a><span class="lineno"> 1860</span>&#160;        some_file &lt;&lt; el_pt-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#a3193df31f9ce38e0609d17a8ffb386c6">tecplot_zone_string</a>(nplot);</div>
+<div class="line"><a name="l01861"></a><span class="lineno"> 1861</span>&#160; </div>
+<div class="line"><a name="l01862"></a><span class="lineno"> 1862</span>&#160;        <span class="keywordtype">unsigned</span> num_plot_points = el_pt-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#a8ed563c7ff0cfd8bafdbb0132b388106">nplot_points</a>(nplot);</div>
+<div class="line"><a name="l01863"></a><span class="lineno"> 1863</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> iplot = 0; iplot &lt; num_plot_points; iplot++)</div>
+<div class="line"><a name="l01864"></a><span class="lineno"> 1864</span>&#160;        {</div>
+<div class="line"><a name="l01865"></a><span class="lineno"> 1865</span>&#160;          <span class="comment">// Get local coordinates of plot point</span></div>
+<div class="line"><a name="l01866"></a><span class="lineno"> 1866</span>&#160;          el_pt-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#a82da844fd3ebb2005842464cdc148a03">get_s_plot</a>(iplot, nplot, <a class="code" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>);</div>
+<div class="line"><a name="l01867"></a><span class="lineno"> 1867</span>&#160; </div>
+<div class="line"><a name="l01868"></a><span class="lineno"> 1868</span>&#160;          <span class="comment">// Coordinate</span></div>
+<div class="line"><a name="l01869"></a><span class="lineno"> 1869</span>&#160;          <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> x(dim);</div>
+<div class="line"><a name="l01870"></a><span class="lineno"> 1870</span>&#160;          el_pt-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#a5a9c1ead9819cd17603096e63087020f">interpolated_x</a>(<a class="code" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, x);</div>
 <div class="line"><a name="l01871"></a><span class="lineno"> 1871</span>&#160; </div>
-<div class="line"><a name="l01872"></a><span class="lineno"> 1872</span>&#160;          <span class="comment">// Initialise recovered flux Vector</span></div>
-<div class="line"><a name="l01873"></a><span class="lineno"> 1873</span>&#160;          <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> rec_flux(num_flux_terms, 0.0);</div>
+<div class="line"><a name="l01872"></a><span class="lineno"> 1872</span>&#160;          <span class="comment">// Number of FE nodes</span></div>
+<div class="line"><a name="l01873"></a><span class="lineno"> 1873</span>&#160;          <span class="keywordtype">unsigned</span> n_node = el_pt-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#a6219ed269a6d89b5aa14659cce48905a">nnode</a>();</div>
 <div class="line"><a name="l01874"></a><span class="lineno"> 1874</span>&#160; </div>
-<div class="line"><a name="l01875"></a><span class="lineno"> 1875</span>&#160;          <span class="comment">// Loop over nodes to assemble contribution</span></div>
-<div class="line"><a name="l01876"></a><span class="lineno"> 1876</span>&#160;          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> n = 0; n &lt; n_node; n++)</div>
-<div class="line"><a name="l01877"></a><span class="lineno"> 1877</span>&#160;          {</div>
-<div class="line"><a name="l01878"></a><span class="lineno"> 1878</span>&#160;            <a class="code" href="classoomph_1_1Node.html">Node</a>* nod_pt = el_pt-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#a28ae3eb7760edc5c9d6427611d8e6fb6">node_pt</a>(n);</div>
-<div class="line"><a name="l01879"></a><span class="lineno"> 1879</span>&#160; </div>
-<div class="line"><a name="l01880"></a><span class="lineno"> 1880</span>&#160;            <span class="comment">// Loop over components</span></div>
-<div class="line"><a name="l01881"></a><span class="lineno"> 1881</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; num_flux_terms; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
-<div class="line"><a name="l01882"></a><span class="lineno"> 1882</span>&#160;            {</div>
-<div class="line"><a name="l01883"></a><span class="lineno"> 1883</span>&#160;              rec_flux[<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] += rec_flux_map(nod_pt, <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) * psi[n];</div>
-<div class="line"><a name="l01884"></a><span class="lineno"> 1884</span>&#160;            }</div>
-<div class="line"><a name="l01885"></a><span class="lineno"> 1885</span>&#160;          }</div>
-<div class="line"><a name="l01886"></a><span class="lineno"> 1886</span>&#160; </div>
-<div class="line"><a name="l01887"></a><span class="lineno"> 1887</span>&#160;          <span class="comment">// FE flux</span></div>
-<div class="line"><a name="l01888"></a><span class="lineno"> 1888</span>&#160;          <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> fe_flux(num_flux_terms);</div>
-<div class="line"><a name="l01889"></a><span class="lineno"> 1889</span>&#160;          el_pt-&gt;<a class="code" href="classoomph_1_1ElementWithZ2ErrorEstimator.html#a5688ff5f546d81771cabad82ca5a7556">get_Z2_flux</a>(<a class="code" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, fe_flux);</div>
-<div class="line"><a name="l01890"></a><span class="lineno"> 1890</span>&#160; </div>
-<div class="line"><a name="l01891"></a><span class="lineno"> 1891</span>&#160;          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; dim; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
-<div class="line"><a name="l01892"></a><span class="lineno"> 1892</span>&#160;          {</div>
-<div class="line"><a name="l01893"></a><span class="lineno"> 1893</span>&#160;            some_file &lt;&lt; x[<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a name="l01875"></a><span class="lineno"> 1875</span>&#160;          <span class="comment">// FE shape function</span></div>
+<div class="line"><a name="l01876"></a><span class="lineno"> 1876</span>&#160;          <a class="code" href="classoomph_1_1Shape.html">Shape</a> psi(n_node);</div>
+<div class="line"><a name="l01877"></a><span class="lineno"> 1877</span>&#160; </div>
+<div class="line"><a name="l01878"></a><span class="lineno"> 1878</span>&#160;          <span class="comment">// Get values of FE shape function</span></div>
+<div class="line"><a name="l01879"></a><span class="lineno"> 1879</span>&#160;          el_pt-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">shape</a>(<a class="code" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, psi);</div>
+<div class="line"><a name="l01880"></a><span class="lineno"> 1880</span>&#160; </div>
+<div class="line"><a name="l01881"></a><span class="lineno"> 1881</span>&#160;          <span class="comment">// Initialise recovered flux Vector</span></div>
+<div class="line"><a name="l01882"></a><span class="lineno"> 1882</span>&#160;          <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> rec_flux(num_flux_terms, 0.0);</div>
+<div class="line"><a name="l01883"></a><span class="lineno"> 1883</span>&#160; </div>
+<div class="line"><a name="l01884"></a><span class="lineno"> 1884</span>&#160;          <span class="comment">// Loop over nodes to assemble contribution</span></div>
+<div class="line"><a name="l01885"></a><span class="lineno"> 1885</span>&#160;          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> n = 0; n &lt; n_node; n++)</div>
+<div class="line"><a name="l01886"></a><span class="lineno"> 1886</span>&#160;          {</div>
+<div class="line"><a name="l01887"></a><span class="lineno"> 1887</span>&#160;            <a class="code" href="classoomph_1_1Node.html">Node</a>* nod_pt = el_pt-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#a28ae3eb7760edc5c9d6427611d8e6fb6">node_pt</a>(n);</div>
+<div class="line"><a name="l01888"></a><span class="lineno"> 1888</span>&#160; </div>
+<div class="line"><a name="l01889"></a><span class="lineno"> 1889</span>&#160;            <span class="comment">// Loop over components</span></div>
+<div class="line"><a name="l01890"></a><span class="lineno"> 1890</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; num_flux_terms; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
+<div class="line"><a name="l01891"></a><span class="lineno"> 1891</span>&#160;            {</div>
+<div class="line"><a name="l01892"></a><span class="lineno"> 1892</span>&#160;              rec_flux[<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] += rec_flux_map(nod_pt, <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) * psi[n];</div>
+<div class="line"><a name="l01893"></a><span class="lineno"> 1893</span>&#160;            }</div>
 <div class="line"><a name="l01894"></a><span class="lineno"> 1894</span>&#160;          }</div>
-<div class="line"><a name="l01895"></a><span class="lineno"> 1895</span>&#160;          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; num_flux_terms; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
-<div class="line"><a name="l01896"></a><span class="lineno"> 1896</span>&#160;          {</div>
-<div class="line"><a name="l01897"></a><span class="lineno"> 1897</span>&#160;            some_file &lt;&lt; rec_flux[<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
-<div class="line"><a name="l01898"></a><span class="lineno"> 1898</span>&#160;          }</div>
-<div class="line"><a name="l01899"></a><span class="lineno"> 1899</span>&#160;          some_file &lt;&lt; elemental_error[<a class="code" href="cfortran_8h.html#a37cd013acc76697829c324bdd8562d82">e</a>] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l01900"></a><span class="lineno"> 1900</span>&#160; </div>
-<div class="line"><a name="l01901"></a><span class="lineno"> 1901</span>&#160; </div>
-<div class="line"><a name="l01902"></a><span class="lineno"> 1902</span>&#160;          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; dim; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
-<div class="line"><a name="l01903"></a><span class="lineno"> 1903</span>&#160;          {</div>
-<div class="line"><a name="l01904"></a><span class="lineno"> 1904</span>&#160;            feflux_file &lt;&lt; x[<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
-<div class="line"><a name="l01905"></a><span class="lineno"> 1905</span>&#160;          }</div>
-<div class="line"><a name="l01906"></a><span class="lineno"> 1906</span>&#160;          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; num_flux_terms; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
-<div class="line"><a name="l01907"></a><span class="lineno"> 1907</span>&#160;          {</div>
-<div class="line"><a name="l01908"></a><span class="lineno"> 1908</span>&#160;            feflux_file &lt;&lt; fe_flux[<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
-<div class="line"><a name="l01909"></a><span class="lineno"> 1909</span>&#160;          }</div>
-<div class="line"><a name="l01910"></a><span class="lineno"> 1910</span>&#160;          feflux_file &lt;&lt; elemental_error[<a class="code" href="cfortran_8h.html#a37cd013acc76697829c324bdd8562d82">e</a>] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l01911"></a><span class="lineno"> 1911</span>&#160;        }</div>
-<div class="line"><a name="l01912"></a><span class="lineno"> 1912</span>&#160;      }</div>
-<div class="line"><a name="l01913"></a><span class="lineno"> 1913</span>&#160; </div>
-<div class="line"><a name="l01914"></a><span class="lineno"> 1914</span>&#160; </div>
-<div class="line"><a name="l01915"></a><span class="lineno"> 1915</span>&#160;      <span class="comment">// Write tecplot footer (e.g. FE connectivity lists)</span></div>
-<div class="line"><a name="l01916"></a><span class="lineno"> 1916</span>&#160;      <span class="comment">// using the first element&#39;s output info.</span></div>
-<div class="line"><a name="l01917"></a><span class="lineno"> 1917</span>&#160;      <a class="code" href="classoomph_1_1FiniteElement.html">FiniteElement</a>* first_el_pt = mesh_pt-&gt;<a class="code" href="classoomph_1_1Mesh.html#a4f274774435e9454bf77bf70de69367a">finite_element_pt</a>(0);</div>
-<div class="line"><a name="l01918"></a><span class="lineno"> 1918</span>&#160;      first_el_pt-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#ac3987a5ead7dc20c63d86b333466e2b5">write_tecplot_zone_footer</a>(some_file, nplot);</div>
-<div class="line"><a name="l01919"></a><span class="lineno"> 1919</span>&#160;      first_el_pt-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#ac3987a5ead7dc20c63d86b333466e2b5">write_tecplot_zone_footer</a>(feflux_file, nplot);</div>
-<div class="line"><a name="l01920"></a><span class="lineno"> 1920</span>&#160;    }</div>
+<div class="line"><a name="l01895"></a><span class="lineno"> 1895</span>&#160; </div>
+<div class="line"><a name="l01896"></a><span class="lineno"> 1896</span>&#160;          <span class="comment">// FE flux</span></div>
+<div class="line"><a name="l01897"></a><span class="lineno"> 1897</span>&#160;          <a class="code" href="classoomph_1_1Vector.html">Vector&lt;double&gt;</a> fe_flux(num_flux_terms);</div>
+<div class="line"><a name="l01898"></a><span class="lineno"> 1898</span>&#160;          el_pt-&gt;<a class="code" href="classoomph_1_1ElementWithZ2ErrorEstimator.html#a5688ff5f546d81771cabad82ca5a7556">get_Z2_flux</a>(<a class="code" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, fe_flux);</div>
+<div class="line"><a name="l01899"></a><span class="lineno"> 1899</span>&#160; </div>
+<div class="line"><a name="l01900"></a><span class="lineno"> 1900</span>&#160;          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; dim; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
+<div class="line"><a name="l01901"></a><span class="lineno"> 1901</span>&#160;          {</div>
+<div class="line"><a name="l01902"></a><span class="lineno"> 1902</span>&#160;            some_file &lt;&lt; x[<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a name="l01903"></a><span class="lineno"> 1903</span>&#160;          }</div>
+<div class="line"><a name="l01904"></a><span class="lineno"> 1904</span>&#160;          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; num_flux_terms; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
+<div class="line"><a name="l01905"></a><span class="lineno"> 1905</span>&#160;          {</div>
+<div class="line"><a name="l01906"></a><span class="lineno"> 1906</span>&#160;            some_file &lt;&lt; rec_flux[<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a name="l01907"></a><span class="lineno"> 1907</span>&#160;          }</div>
+<div class="line"><a name="l01908"></a><span class="lineno"> 1908</span>&#160;          some_file &lt;&lt; elemental_error[<a class="code" href="cfortran_8h.html#a37cd013acc76697829c324bdd8562d82">e</a>] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l01909"></a><span class="lineno"> 1909</span>&#160; </div>
+<div class="line"><a name="l01910"></a><span class="lineno"> 1910</span>&#160; </div>
+<div class="line"><a name="l01911"></a><span class="lineno"> 1911</span>&#160;          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; dim; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
+<div class="line"><a name="l01912"></a><span class="lineno"> 1912</span>&#160;          {</div>
+<div class="line"><a name="l01913"></a><span class="lineno"> 1913</span>&#160;            feflux_file &lt;&lt; x[<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a name="l01914"></a><span class="lineno"> 1914</span>&#160;          }</div>
+<div class="line"><a name="l01915"></a><span class="lineno"> 1915</span>&#160;          <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; num_flux_terms; <a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
+<div class="line"><a name="l01916"></a><span class="lineno"> 1916</span>&#160;          {</div>
+<div class="line"><a name="l01917"></a><span class="lineno"> 1917</span>&#160;            feflux_file &lt;&lt; fe_flux[<a class="code" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a name="l01918"></a><span class="lineno"> 1918</span>&#160;          }</div>
+<div class="line"><a name="l01919"></a><span class="lineno"> 1919</span>&#160;          feflux_file &lt;&lt; elemental_error[<a class="code" href="cfortran_8h.html#a37cd013acc76697829c324bdd8562d82">e</a>] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l01920"></a><span class="lineno"> 1920</span>&#160;        }</div>
 <div class="line"><a name="l01921"></a><span class="lineno"> 1921</span>&#160; </div>
-<div class="line"><a name="l01922"></a><span class="lineno"> 1922</span>&#160;    some_file.close();</div>
-<div class="line"><a name="l01923"></a><span class="lineno"> 1923</span>&#160;    feflux_file.close();</div>
-<div class="line"><a name="l01924"></a><span class="lineno"> 1924</span>&#160;  }</div>
-<div class="line"><a name="l01925"></a><span class="lineno"> 1925</span>&#160; </div>
-<div class="line"><a name="l01926"></a><span class="lineno"> 1926</span>&#160; </div>
-<div class="line"><a name="l01927"></a><span class="lineno"> 1927</span>&#160;} <span class="comment">// namespace oomph</span></div>
+<div class="line"><a name="l01922"></a><span class="lineno"> 1922</span>&#160;        <span class="comment">// Write tecplot footer (e.g. FE connectivity)</span></div>
+<div class="line"><a name="l01923"></a><span class="lineno"> 1923</span>&#160;        <span class="comment">// Do this for each element so the output is compatible with</span></div>
+<div class="line"><a name="l01924"></a><span class="lineno"> 1924</span>&#160;        <span class="comment">// oomph-convert</span></div>
+<div class="line"><a name="l01925"></a><span class="lineno"> 1925</span>&#160;        el_pt-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#ac3987a5ead7dc20c63d86b333466e2b5">write_tecplot_zone_footer</a>(some_file, nplot);</div>
+<div class="line"><a name="l01926"></a><span class="lineno"> 1926</span>&#160;        el_pt-&gt;<a class="code" href="classoomph_1_1FiniteElement.html#ac3987a5ead7dc20c63d86b333466e2b5">write_tecplot_zone_footer</a>(feflux_file, nplot);</div>
+<div class="line"><a name="l01927"></a><span class="lineno"> 1927</span>&#160;      }</div>
+<div class="line"><a name="l01928"></a><span class="lineno"> 1928</span>&#160;    }</div>
+<div class="line"><a name="l01929"></a><span class="lineno"> 1929</span>&#160; </div>
+<div class="line"><a name="l01930"></a><span class="lineno"> 1930</span>&#160;    some_file.close();</div>
+<div class="line"><a name="l01931"></a><span class="lineno"> 1931</span>&#160;    feflux_file.close();</div>
+<div class="line"><a name="l01932"></a><span class="lineno"> 1932</span>&#160;  }</div>
+<div class="line"><a name="l01933"></a><span class="lineno"> 1933</span>&#160; </div>
+<div class="line"><a name="l01934"></a><span class="lineno"> 1934</span>&#160; </div>
+<div class="line"><a name="l01935"></a><span class="lineno"> 1935</span>&#160;} <span class="comment">// namespace oomph</span></div>
 <div class="ttc" id="aTelements_8h_html"><div class="ttname"><a href="Telements_8h.html">Telements.h</a></div></div>
 <div class="ttc" id="acfortran_8h_html_a37cd013acc76697829c324bdd8562d82"><div class="ttname"><a href="cfortran_8h.html#a37cd013acc76697829c324bdd8562d82">e</a></div><div class="ttdeci">e</div><div class="ttdef"><b>Definition:</b> <a href="cfortran_8h_source.html#l00571">cfortran.h:571</a></div></div>
 <div class="ttc" id="acfortran_8h_html_ab7123126e4885ef647dd9c6e3807a21c"><div class="ttname"><a href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a></div><div class="ttdeci">static char t char * s</div><div class="ttdef"><b>Definition:</b> <a href="cfortran_8h_source.html#l00568">cfortran.h:568</a></div></div>
@@ -2178,7 +2186,7 @@ $(function() {
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Nov 24 2023 14:41:06
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Dec 29 2023 07:53:28
         </div>
       </div>
     </footer>
