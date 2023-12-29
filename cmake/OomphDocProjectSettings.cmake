@@ -13,6 +13,31 @@
 include_guard()
 
 # ------------------------------------------------------------------------------
+function(get_all_targets BASE_DIR OUTPUT_VARIABLE)
+  set(ALL_TARGETS)
+  get_all_targets_recursive(ALL_TARGETS ${${BASE_DIR}})
+  set(${OUTPUT_VARIABLE} ${ALL_TARGETS} PARENT_SCOPE)
+endfunction()
+
+macro(get_all_targets_recursive ALL_TARGETS CURRENT_DIRECTORY)
+  get_property(
+    subdirectories
+    DIRECTORY ${CURRENT_DIRECTORY}
+    PROPERTY SUBDIRECTORIES)
+
+  foreach(subdir ${subdirectories})
+    get_all_targets_recursive(${ALL_TARGETS} ${subdir})
+  endforeach()
+
+  get_property(
+    CURRENT_DIRECTORY_TARGETS
+    DIRECTORY ${CURRENT_DIRECTORY}
+    PROPERTY BUILDSYSTEM_TARGETS)
+  list(APPEND ${ALL_TARGETS} ${CURRENT_DIRECTORY_TARGETS})
+endmacro()
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
 function(oomph_doc_project_settings)
   # Define the supported set of keywords
   set(PREFIX ARG)
@@ -92,6 +117,24 @@ function(oomph_doc_project_settings)
     "\tcmake --build ${OOMPH_RELPATH_TO_BUILD_DIR}\n\n"
     "then the install step with:\n\n"
     "\tcmake --install ${OOMPH_RELPATH_TO_BUILD_DIR}${RESET}\n")
+
+  # Construct a list of all of the targets we have defined to build
+  set(BASE_DIR_FOR_FINDING_TARGETS "${CMAKE_CURRENT_SOURCE_DIR}/src")
+  get_all_targets(BASE_DIR_FOR_FINDING_TARGETS ALL_TARGETS)
+
+  # Write the post-build reminder to file; we'll print it from file
+  file(
+    WRITE "${CMAKE_CURRENT_BINARY_DIR}/oomphlib-install-step-reminder.txt"
+    "\n${BOLD_MAGENTA} Project built! Don't forget to run the install step with:\n\n\tcmake --install ${OOMPH_RELPATH_TO_BUILD_DIR}${RESET}\n"
+  )
+
+  # Create a target that gets run after all other targets in the src/ directory
+  add_custom_target(
+    post_build_remind_user_to_install_library ALL
+    ${CMAKE_COMMAND} -E cat
+    "${CMAKE_CURRENT_BINARY_DIR}/oomphlib-install-step-reminder.txt"
+    COMMENT "Post-build reminder to install the library")
+  add_dependencies(post_build_remind_user_to_install_library ${ALL_TARGETS})
 
   # Log to file if needed
   set(OUTPUT_FILE
