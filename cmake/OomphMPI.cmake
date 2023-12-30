@@ -86,10 +86,14 @@ if(NOT OOMPH_MPI_NUM_PROC MATCHES "^[0-9]+$")
   )
 endif()
 
+# FIXME: Override temporarily
+set(MPIEXEC_NUMPROC_FLAG "-np")
+
 # Set the command used to run MPI-enabled self-tests
 if(NOT DEFINED OOMPH_MPI_RUN_COMMAND)
   set(OOMPH_MPI_RUN_COMMAND
       "${MPIEXEC_EXECUTABLE} ${MPIEXEC_NUMPROC_FLAG} ${OOMPH_MPI_NUM_PROC}")
+  message(STATUS "oomph-lib MPI run command: '${OOMPH_MPI_RUN_COMMAND}'")
 endif()
 
 # Set the more complex command used to run MPI-enabled self-tests with a
@@ -98,6 +102,10 @@ endif()
 if(NOT DEFINED OOMPH_MPI_VARIABLENP_RUN_COMMAND)
   set(OOMPH_MPI_VARIABLENP_RUN_COMMAND
       "${MPIEXEC_EXECUTABLE} ${MPIEXEC_NUMPROC_FLAG} OOMPHNP ")
+  message(
+    STATUS
+      "oomph-lib MPI run command (variable NP): '${OOMPH_MPI_VARIABLENP_RUN_COMMAND}'"
+  )
 endif()
 
 # Add a preprocessor definition and a CMake cache variable to indicate that MPI
