@@ -78,7 +78,7 @@ include(OomphCustomOptions)
 option(OOMPH_PRINT_SETTINGS_AFTER_INSTALL "Display the oomph-lib settings at the end of the install step" ON)
 
 # FIXME: Delete
-oomph_option(OOMPH_USE_OLD_SUPERLU_DIST "Revert to SuperLU Dist 3.0" ON)
+oomph_option(OOMPH_USE_OLD_SUPERLU_DIST "Revert to SuperLU Dist 3.0" OFF)
 
 # General options
 oomph_option(OOMPH_DONT_SILENCE_USELESS_WARNINGS "Display (harmless) warnings from external_src/ and src/ that are silenced" OFF)
