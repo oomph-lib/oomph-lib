@@ -286,8 +286,6 @@ namespace oomph
       // Note that this process results in s_{rr}=s_{\phi\phi} at the origin
       // which is expected as the two coordinate directions are
       // indistinguishable at the origin under axisymmetry.
-      // [zdec] Should this be interpolated_r < tolerance to prevent floating
-      // point comparison? -- AidanR
       if (interpolated_r == 0.0)
       {
         // Compute the stresses:

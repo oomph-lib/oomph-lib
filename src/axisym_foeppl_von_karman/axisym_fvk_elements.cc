@@ -316,8 +316,6 @@ namespace oomph
       } // End of loop over nodes
 
       // Compute stresses
-      // [zdec] Should this be interpolated_r < tolerance to prevent floating
-      // point comparison? -- AidanR
       if (interpolated_r == 0.0)
       {
         // To avoid dividing by zero we take advantage of axisymmetry at the
