@@ -11412,13 +11412,12 @@ namespace oomph
         double target_error = Target_error_safety_factor * epsilon;
 
         // Calculate the scaling factor
-        dt_rescaling_factor =
-          std::pow((target_error / error),
-                   (1.0 / (1.0 + time_stepper_pt()->order())));
+        dt_rescaling_factor = std::pow(
+          (target_error / error), (1.0 / (1.0 + time_stepper_pt()->order())));
 
         oomph_info
           << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n"
-          << "Estimated timestepping error is " << error  << "\n"
+          << "Estimated timestepping error is " << error << "\n"
           << "Timestep scaling factor is " << dt_rescaling_factor << "\n";
 
 
@@ -11428,7 +11427,7 @@ namespace oomph
           oomph_info << "Estimated timestepping error " << error
                      << " exceeds tolerance " << epsilon << "\n";
           if (Keep_temporal_error_below_tolerance)
-          { 
+          {
             oomph_info << "    --> rejecting timestep.\n";
             reject_timestep = true;
           }
