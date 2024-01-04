@@ -722,12 +722,13 @@ namespace oomph
     ///     TARGET = Target_error_safety_factor * TOL
     /// For this to make sense Target_error_safety_factor should be <1.0. If
     /// Keep_temporal_error_below_tolerance is set to true (default) then,
-    /// without this, timesteps produced by the adaptive time-step suggester
-    /// can be expected to fail (exceed TOL) about half of the time.
+    /// without this, timesteps suggested by the adaptive time-stepper can be
+    /// expected to lead to rejection (because the error exceeds TOL) about
+    /// half of the time.
     /// Harier et al. (1993, ISBN:978-3-540-56670-0, p168) suggest a value
-    /// 0.25-0.40 to be the most efficient, however this is highly problem and
-    /// timestepper dependent and sometimes as high as 0.95 can be effective
-    /// at improving the robustness of timestep prediction.
+    /// around 0.25-0.40 to be the most efficient, however this is highly
+    /// problem and timestepper dependent and sometimes as high as 0.95 may be
+    /// effective at improving the robustness of timestep prediction.
     ///
     /// Note: Despite this, we are setting this to default to 1.0 to prevent
     /// introducing any change in the default behaviour of oomph-lib for now.
