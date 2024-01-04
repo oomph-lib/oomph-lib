@@ -1071,16 +1071,18 @@ namespace oomph
       // flag so that it does not happen again.
       if (!User_has_been_warned)
       {
+        std::string warning_string =
+          "The TGauss<2,16> integration scheme uses a high order Dunavant\n"
+          "scheme which results in a couple of knots (slightly) outside of\n"
+          "the element as well as some negative weights. These may be\n"
+          "undesirable features depending on the use case and may also break\n"
+          "some oomph-lib routines which expect points to be within the\n"
+          "bounds of an element (locate_zeta). Please ensure that the\n"
+          "integrand can be evaluated just outside the boundary of this\n"
+          "element.";
         User_has_been_warned = true;
-        OomphLibWarning("The TGauss<2,16> integration scheme uses a high order \
-Dunavant scheme which results in a couple of knots (slightly) outside of the \
-triangular element as well as some negative weights. These may be undesirable \
-features depending on the use case and may also break some oomph-lib routines \
-which expect points to be within the bounds of an element (locate_zeta). \
-Please ensure that the integrand can be evaluated just outside the boundary of \
-this element.",
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
+        OomphLibWarning(
+          warning_string, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
       }
 #endif
     };

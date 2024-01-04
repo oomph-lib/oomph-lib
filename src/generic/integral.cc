@@ -571,6 +571,13 @@ namespace oomph
     0.5 * 0.019084792755899, 0.5 * 0.006850054546542, 0.5 * 0.006850054546542,
     0.5 * 0.006850054546542, 0.5 * 0.006850054546542, 0.5 * 0.006850054546542,
     0.5 * 0.006850054546542};
+
+#ifdef PARANOID
+  // Initialise the warning flag that the TGauss<2, 16> scheme employs
+  // (see declaration in integral.h for more info)
+  bool TGauss<2, 16>::User_has_been_warned = false;
+#endif
+
   //------------------------------------------------------------
   //"Full integration" weights for 2D triangles
   // accurate up to order 15
