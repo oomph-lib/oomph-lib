@@ -92,18 +92,24 @@ namespace oomph
     }
 
     // [zdec] work in progress
-    /// Divide an element into three by creating edges from the barycentre to
-    /// each of the vertex nodes
+    /// Divide an element into three by creating edges from the centroid to
+    /// each of the vertex nodes. Take the old element pointer and fill out
+    /// vectors containing pointers to the new three elements and all the
+    /// nodes. Optionally takes a pointer to a timestepper to pass on to the
+    /// new elements and nodes.
     template<class ELEMENT>
-    void split_element_through_barycentre(TimeStepper* const &time_stepper_pt,
-					  FiniteElement* const &el_pt,
-					  Vector<FiniteElement*> &new_el_pt);
-    
+    void split_element_through_centroid(
+      FiniteElement* const& el_pt,
+      Vector<FiniteElement*>& new_el_pt,
+      Vector<Node*>& new_nod_pt,
+      TimeStepper* const& time_stepper_pt = &Mesh::Default_TimeStepper);
+
     /// Make sure no elements have two boundary edges by splitting them through
-    /// their barycentre (e.g. no corner elements straddling both boundaries)
+    /// their centroid (e.g. no corner elements straddling two boundaries).
     template<class ELEMENT>
-    void split_elements_with_multiple_boundary_edges(TimeStepper* const &time_stepper_pt);
-    
+    void split_elements_with_multiple_boundary_edges(
+      TimeStepper* const& time_stepper_pt = &Mesh::Default_TimeStepper);
+
     /// Setup lookup schemes which establish which elements are located
     /// next to mesh's boundaries. Doc in outfile (if it's open).
     void setup_boundary_element_info(std::ostream& outfile);
@@ -282,381 +288,426 @@ namespace oomph
 
 
   //==========================================================================
-  /// Divide an element into three by creating edges from the barycentre to
-  /// each of the vertex nodes
+  /// Divide an element into three by creating edges from the centroid to
+  /// each of the vertex nodes. Takes an element pointer
   //==========================================================================
   template<class ELEMENT>
-  void TriangleMeshBase::split_element_through_barycentre(TimeStepper* const &time_stepper_pt,
-							  FiniteElement* const &el_pt,
-							  Vector<FiniteElement*> &new_el_pt)
+  void TriangleMeshBase::split_element_through_centroid(
+    FiniteElement* const& el_pt,
+    Vector<FiniteElement*>& new_el_pt,
+    Vector<Node*>& new_nod_pt,
+    TimeStepper* const& time_stepper_pt)
   {
-    #ifdef PARANOID
-    // Check that the element belongs to this mesh (this seems like a good idea)
-    #endif
-    
+#ifdef PARANOID
+    // Maybe check that the element belongs to this mesh?
+    // (this seems like a good idea)
+#endif
+
     // Get the type of triangle element we are using
     unsigned n_node_1d = el_pt->nnode_1d();
     unsigned dim = el_pt->dim();
-    
 
     // We split the element depending on the number of nodes
-    switch(n_node_1d)
+    switch (n_node_1d)
     {
-    case 2:
+      case 2:
       {
-	// In this case, we need to add one new node c at the barycentre of the
-	// original element. This becomes node i of the ith element.
-	//
-	//  o2                          o2              //
-	//  | \                         |\\             //
-	//  |   \                       | \ \           //
-	//  |     \          becomes:   |  \  \         //
-	//  |       \            	|   c_  \       //
-	//  |         \          	| /    - _\     //
-	//  o0----------o1              o0----------o1  //
+        // In this case, we need to add one new node c at the centroid of the
+        // original element. This becomes node i of the ith element.
+        //
+        //  o2                          o2              //
+        //  | \                         |\\             //
+        //  |   \                       | \ \           //
+        //  |     \          becomes:   |  \  \         //
+        //  |       \                   |   c_  \       //
+        //  |         \                 | /    - _\     //
+        //  o0----------o1              o0----------o1  //
 
-	//-----------------------------------------------------------------------
-	// We start by creating the new elements
-	FiniteElement* el0_pt = new ELEMENT;
-	FiniteElement* el1_pt = new ELEMENT;
-	FiniteElement* el2_pt = new ELEMENT;
-	
-	// Store the old node pointers
-	Node* o0_pt = el_pt->node_pt(0);
-	Node* o1_pt = el_pt->node_pt(1);
-	Node* o2_pt = el_pt->node_pt(2);
-      
-	// Next, we create the new node (using the construct node function
-	// ensures that dof memory is properly allocated for us)
-	Node* c_pt = el0_pt->construct_node(0, time_stepper_pt);
+        //-----------------------------------------------------------------------
+        // We start by creating the new elements
+        FiniteElement* el0_pt = new ELEMENT;
+        FiniteElement* el1_pt = new ELEMENT;
+        FiniteElement* el2_pt = new ELEMENT;
 
-	// Set the locations of the new node
-	for(unsigned i=0; i<dim; i++)
-	{
-	  // c is the centroid of the original element
-	  c_pt->x(i) = (o0_pt->x(i) + o1_pt->x(i) + o2_pt->x(i)) / 3.0;
-	}
-      
-	// And assign the nodes to the new elements
-	// (el0, node 0 is already assigned due to its construction but we leave
-	//  it commented here for completeness)
+        // Store the old node pointers
+        Node* o0_pt = el_pt->node_pt(0);
+        Node* o1_pt = el_pt->node_pt(1);
+        Node* o2_pt = el_pt->node_pt(2);
 
-	// Element 0
-	// el0_pt->node_pt(0) = c_pt;
-	el0_pt->node_pt(1) = o1_pt;
-	el0_pt->node_pt(2) = o2_pt;
-     
-	// Element 1
-	el1_pt->node_pt(0) = o0_pt;
-	el1_pt->node_pt(1) = c_pt;
-	el1_pt->node_pt(2) = o2_pt;
+        // Next, we create the new node (using the construct node function
+        // ensures that dof memory is properly allocated for us)
+        Node* c_pt = el0_pt->construct_node(0, time_stepper_pt);
 
-	// Element 2
-	el2_pt->node_pt(0) = o0_pt;
-	el2_pt->node_pt(1) = o1_pt;
-	el2_pt->node_pt(2) = c_pt;
+        // We have three elements, fill the vector of new elements
+        new_el_pt.resize(3);
+        new_el_pt[0] = el0_pt;
+        new_el_pt[1] = el1_pt;
+        new_el_pt[2] = el2_pt;
 
-	// Lastly, fill the Vector of new elements and return
-	new_el_pt.resize(3);
-	new_el_pt[0] = el0_pt;
-	new_el_pt[1] = el1_pt;
-	new_el_pt[2] = el2_pt;
-	return;
+        // We have four nodes, fill the vector of new nodes
+        new_nod_pt.resize(4);
+        new_nod_pt[0] = o0_pt;
+        new_nod_pt[1] = o1_pt;
+        new_nod_pt[2] = o2_pt;
+        new_nod_pt[3] = c_pt;
+
+        // Set the locations of the new node
+        for (unsigned i = 0; i < dim; i++)
+        {
+          // c is the centroid of the original element
+          c_pt->x(i) = (o0_pt->x(i) + o1_pt->x(i) + o2_pt->x(i)) / 3.0;
+        }
+
+        // And assign the nodes to the new elements
+        // (el0, node 0 is already assigned due to its construction but we leave
+        //  it commented here for completeness)
+
+        // Element 0
+        // el0_pt->node_pt(0) = c_pt;
+        el0_pt->node_pt(1) = o1_pt;
+        el0_pt->node_pt(2) = o2_pt;
+
+        // Element 1
+        el1_pt->node_pt(0) = o0_pt;
+        el1_pt->node_pt(1) = c_pt;
+        el1_pt->node_pt(2) = o2_pt;
+
+        // Element 2
+        el2_pt->node_pt(0) = o0_pt;
+        el2_pt->node_pt(1) = o1_pt;
+        el2_pt->node_pt(2) = c_pt;
+
+        return;
       }
 
-    case 3:
+      case 3:
       {
-	// In this case, we need to add one new node at the original centroid c,
-	// and one new node for the midside of each of the new edges a_i where
-	// i=0,1,2.
-	//
-	//  o2                          //
-	//  | \                         //
-	//  |   \                       //
-	//  |     \                     //
-	//  |       \                   //
-	//  |         \                 //
-	//  o5          o4              //
-	//  |             \             //
-	//  |               \           //
-	//  |                 \         //
-	//  |                   \       //
-	//  |                     \     //
-	//  o0----------o3----------o1  //
-	//
-	// becomes three new elements with nodes o_j, a_i and c with i=0,1,2
-	// and j=0,..,5:
-	//
-	//  o2                          //
-	//  |\\                         //
-	//  | \ \                       //
-	//  |  \  \                     //
-	//  |   a2  \                   //
-	//  |    \    \                 //
-	//  o5    \     o4              //
-	//  |      \(el 0)\             //
-	//  |(el 1) c_      \           //
-	//  |     /    - _    \         //
-	//  |   a0         a1_  \       //
-	//  | /    (el 2)      - _\     //
-	//  o0----------o3----------o1  //
+        // In this case, we need to add one new node at the original centroid c,
+        // and one new node for the midside of each of the new edges a_i where
+        // i=0,1,2.
+        //
+        //  o2                          //
+        //  | \                         //
+        //  |   \                       //
+        //  |     \                     //
+        //  |       \                   //
+        //  |         \                 //
+        //  o5          o4              //
+        //  |             \             //
+        //  |               \           //
+        //  |                 \         //
+        //  |                   \       //
+        //  |                     \     //
+        //  o0----------o3----------o1  //
+        //
+        // becomes three new elements with nodes o_j, a_i and c with i=0,1,2
+        // and j=0,..,5:
+        //
+        //  o2                          //
+        //  |\\                         //
+        //  | \ \                       //
+        //  |  \  \                     //
+        //  |   a2  \                   //
+        //  |    \    \                 //
+        //  o5    \     o4              //
+        //  |      \(el 0)\             //
+        //  |(el 1) c_      \           //
+        //  |     /    - _    \         //
+        //  |   a0         a1_  \       //
+        //  | /    (el 2)      - _\     //
+        //  o0----------o3----------o1  //
 
-	//-----------------------------------------------------------------------
-	// We start by creating the new elements
-	FiniteElement* el0_pt = new ELEMENT;
-	FiniteElement* el1_pt = new ELEMENT;
-	FiniteElement* el2_pt = new ELEMENT;
+        //---------------------------------------------------------------------
+        // We start by creating the new elements
+        FiniteElement* el0_pt = new ELEMENT;
+        FiniteElement* el1_pt = new ELEMENT;
+        FiniteElement* el2_pt = new ELEMENT;
 
-	// Store the old node pointers
-	Node* o0_pt = el_pt->node_pt(0);
-	Node* o1_pt = el_pt->node_pt(1);
-	Node* o2_pt = el_pt->node_pt(2);
-	Node* o3_pt = el_pt->node_pt(3);
-	Node* o4_pt = el_pt->node_pt(4);
-	Node* o5_pt = el_pt->node_pt(5);
-      
-	// Next, we create the new nodes (using the construct node function
-	// ensures that dof memory is properly allocated for us)
-	Node* c_pt = el0_pt->construct_node(0, time_stepper_pt);
-	Node* a0_pt = el1_pt->construct_node(3, time_stepper_pt);
-	Node* a1_pt = el0_pt->construct_node(3, time_stepper_pt);
-	Node* a2_pt = el0_pt->construct_node(5, time_stepper_pt);
+        // Store the old node pointers
+        Node* o0_pt = el_pt->node_pt(0);
+        Node* o1_pt = el_pt->node_pt(1);
+        Node* o2_pt = el_pt->node_pt(2);
+        Node* o3_pt = el_pt->node_pt(3);
+        Node* o4_pt = el_pt->node_pt(4);
+        Node* o5_pt = el_pt->node_pt(5);
 
-	// Set the locations of the new nodes
-	for(unsigned i=0; i<dim; i++)
-	{
-	  // First c, which is the centroid of the old element
-	  c_pt->x(i) = (o0_pt->x(i) + o1_pt->x(i) + o2_pt->x(i)) / 3.0;
-	  // Next a_i, which are half way between o_i and c
-	  a0_pt->x(i) = (o0_pt->x(i) + c_pt->x(i)) / 2.0;
-	  a1_pt->x(i) = (o1_pt->x(i) + c_pt->x(i)) / 2.0;
-	  a2_pt->x(i) = (o2_pt->x(i) + c_pt->x(i)) / 2.0;
-	}
-	
-	// And assign the nodes to the new elements
-	// (some are already assigned due to their construction but we leave
-	//  them commented here for completeness)
+        // Next, we create the new nodes (using the construct node function
+        // ensures that dof memory is properly allocated for us)
+        Node* c_pt = el0_pt->construct_node(0, time_stepper_pt);
+        Node* a0_pt = el1_pt->construct_node(3, time_stepper_pt);
+        Node* a1_pt = el0_pt->construct_node(3, time_stepper_pt);
+        Node* a2_pt = el0_pt->construct_node(5, time_stepper_pt);
 
-	// Element 0
-	//el0_pt->node_pt(0) = c_pt;
-	el0_pt->node_pt(1) = o1_pt;
-	el0_pt->node_pt(2) = o2_pt;
-	// el0_pt->node_pt(3) = a1_pt;
-	 el0_pt->node_pt(4) = o4_pt;
-	// el0_pt->node_pt(5) = a2_pt;
-     
-	// Element 1
-     	el1_pt->node_pt(0) = o0_pt;
-	el1_pt->node_pt(1) = c_pt;
-	el1_pt->node_pt(2) = o2_pt;
-	// el1_pt->node_pt(3) = a0_pt;
-	el1_pt->node_pt(4) = o2_pt;
-	el1_pt->node_pt(5) = o5_pt;
+        // We have three elements, fill the vector of new elements
+        new_el_pt.resize(3);
+        new_el_pt[0] = el0_pt;
+        new_el_pt[1] = el1_pt;
+        new_el_pt[2] = el2_pt;
 
-	// Element 2
-	el2_pt->node_pt(0) = o0_pt;
-	el2_pt->node_pt(1) = o1_pt;
-	el2_pt->node_pt(2) = c_pt;
-	el2_pt->node_pt(3) = o3_pt;
-	el2_pt->node_pt(4) = a1_pt;
-	el2_pt->node_pt(5) = a0_pt;
+        // We have ten nodes, fill the vector of new nodes
+        new_nod_pt.resize(10);
+        new_nod_pt[0] = o0_pt;
+        new_nod_pt[1] = o1_pt;
+        new_nod_pt[2] = o2_pt;
+        new_nod_pt[3] = o3_pt;
+        new_nod_pt[4] = o4_pt;
+        new_nod_pt[5] = o5_pt;
+        new_nod_pt[6] = a0_pt;
+        new_nod_pt[7] = a1_pt;
+        new_nod_pt[8] = a2_pt;
+        new_nod_pt[9] = c_pt;
 
-	// Lastly, fill the Vector of new elements and return
-	new_el_pt.resize(3);
-	new_el_pt[0] = el0_pt;
-	new_el_pt[1] = el1_pt;
-	new_el_pt[2] = el2_pt;
-	return;
+        // Set the locations of the new nodes
+        for (unsigned i = 0; i < dim; i++)
+        {
+          // First c, which is the centroid of the old element
+          c_pt->x(i) = (o0_pt->x(i) + o1_pt->x(i) + o2_pt->x(i)) / 3.0;
+          // Next a_i, which are half way between o_i and c
+          a0_pt->x(i) = (o0_pt->x(i) + c_pt->x(i)) / 2.0;
+          a1_pt->x(i) = (o1_pt->x(i) + c_pt->x(i)) / 2.0;
+          a2_pt->x(i) = (o2_pt->x(i) + c_pt->x(i)) / 2.0;
+        }
+
+        // And assign the nodes to the new elements
+        // (some are already assigned due to their construction but we leave
+        //  them commented here for completeness)
+
+        // Element 0
+        // el0_pt->node_pt(0) = c_pt;
+        el0_pt->node_pt(1) = o1_pt;
+        el0_pt->node_pt(2) = o2_pt;
+        // el0_pt->node_pt(3) = a1_pt;
+        el0_pt->node_pt(4) = o4_pt;
+        // el0_pt->node_pt(5) = a2_pt;
+
+        // Element 1
+        el1_pt->node_pt(0) = o0_pt;
+        el1_pt->node_pt(1) = c_pt;
+        el1_pt->node_pt(2) = o2_pt;
+        // el1_pt->node_pt(3) = a0_pt;
+        el1_pt->node_pt(4) = o2_pt;
+        el1_pt->node_pt(5) = o5_pt;
+
+        // Element 2
+        el2_pt->node_pt(0) = o0_pt;
+        el2_pt->node_pt(1) = o1_pt;
+        el2_pt->node_pt(2) = c_pt;
+        el2_pt->node_pt(3) = o3_pt;
+        el2_pt->node_pt(4) = a1_pt;
+        el2_pt->node_pt(5) = a0_pt;
+
+        return;
       }
-      
-    case 4:
+
+      case 4:
       {
-	// In this case, we retain the original 10 nodes o_j and  need to create
-	// 9 new nodes: two for each of the three new edges that join the new
-	// elements a_i and b_i, and three mode at the centroids of each new
-	// element c_i for i=0,1,2.
-	//
-	// [zdec] IMPORTANT: o9 may need resizing as it is the only node to go
-	// from a centre node to a vertex node (changing type). To account for
-	// this, we reconstruct it immediately.
-	//
-	// The original element:
-	//                                                                      
-	//  o2                                     //
-	//  | \                                    //
-	//  |   \                                  //
-	//  |     \                                //
-	//  |       \                              //
-	//  |         \                            //
-	//  o7          o6                         //
-	//  |             \                        //
-	//  |               \                      //
-	//  |                 \                    //
-	//  |                   \                  //
-	//  |                     \                //
-	//  o8          o9          o5             //
-	//  |                         \            //
-	//  |                           \          //
-	//  |                             \        //
-	//  |                               \      //
-	//  |                                 \    //
-	//  o0----------o3----------o4----------o1 //
-	//                                         //
-	//
-	// becomes three new elements with nodes o_j, a_i, b_i, and c_i
-	// for i=0,1,2, j=0,..,9:
-	//
-	//                                         //
-	//  o2                                     //
-	//  |\\                                    //
-	//  | \ \                                  //
-	//  |  \  \                                //
-	//  |   a2  \                              //
-	//  |    \    \                            //
-	//  o7    \     o6                         //
-	//  |      \      \                        //
-	//  |       b2      \                      //
-	//  |        \        \                    //
-	//  |   c1    \    c0   \                  //
-	//  |          \  (el 0)  \                //
-	//  o8 (el 1)   o9_         o5             //
-	//  |         /     - _       \            //
-	//  |       b0          b1_     \          //
-	//  |     /       c2        - _   \        //
-	//  |   a0         (el 2)       a1_ \      //
-	//  | /                             - \    //
-	//  o0----------o3----------o4----------o1 //
+        // In this case, we retain the original 10 nodes o_j and  need to
+        // create 9 new nodes: two for each of the three new edges that join
+        // the new elements a_i and b_i, and three mode at the centroids of
+        // each new element c_i for i=0,1,2.
+        //
+        // [zdec] IMPORTANT: o9 may need resizing as it is the only node to go
+        // from a centre node to a vertex node (changing type). To account for
+        // this, we reconstruct it.
+        //
+        // The original element:
+        //
+        //  o2                                     //
+        //  | \                                    //
+        //  |   \                                  //
+        //  |     \                                //
+        //  |       \                              //
+        //  |         \                            //
+        //  o7          o6                         //
+        //  |             \                        //
+        //  |               \                      //
+        //  |                 \                    //
+        //  |                   \                  //
+        //  |                     \                //
+        //  o8          o9          o5             //
+        //  |                         \            //
+        //  |                           \          //
+        //  |                             \        //
+        //  |                               \      //
+        //  |                                 \    //
+        //  o0----------o3----------o4----------o1 //
+        //                                         //
+        //
+        // becomes three new elements with nodes o_j, a_i, b_i, and c_i
+        // for i=0,1,2, j=0,..,9:
+        //
+        //                                         //
+        //  o2                                     //
+        //  |\\                                    //
+        //  | \ \                                  //
+        //  |  \  \                                //
+        //  |   a2  \                              //
+        //  |    \    \                            //
+        //  o7    \     o6                         //
+        //  |      \      \                        //
+        //  |       b2      \                      //
+        //  |        \        \                    //
+        //  |   c1    \    c0   \                  //
+        //  |          \  (el 0)  \                //
+        //  o8 (el 1)   o9_         o5             //
+        //  |         /     - _       \            //
+        //  |       b0          b1_     \          //
+        //  |     /       c2        - _   \        //
+        //  |   a0         (el 2)       a1_ \      //
+        //  | /                             - \    //
+        //  o0----------o3----------o4----------o1 //
 
-	//-----------------------------------------------------------------------
-	// We start by creating the new elements
-	FiniteElement* el0_pt = new ELEMENT;
-	FiniteElement* el1_pt = new ELEMENT;
-	FiniteElement* el2_pt = new ELEMENT;
+        //---------------------------------------------------------------------
+        // We start by creating the new elements
+        FiniteElement* el0_pt = new ELEMENT;
+        FiniteElement* el1_pt = new ELEMENT;
+        FiniteElement* el2_pt = new ELEMENT;
 
-	// Store the old node pointers
-	Node* o0_pt = el_pt->node_pt(0);
-	Node* o1_pt = el_pt->node_pt(1);
-	Node* o2_pt = el_pt->node_pt(2);
-	Node* o3_pt = el_pt->node_pt(3);
-	Node* o4_pt = el_pt->node_pt(4);
-	Node* o5_pt = el_pt->node_pt(5);
-	Node* o6_pt = el_pt->node_pt(6);
-	Node* o7_pt = el_pt->node_pt(7);
-	Node* o8_pt = el_pt->node_pt(8);
-	Node* o9_pt = el_pt->node_pt(9);
+        // Store the old node pointers
+        Node* o0_pt = el_pt->node_pt(0);
+        Node* o1_pt = el_pt->node_pt(1);
+        Node* o2_pt = el_pt->node_pt(2);
+        Node* o3_pt = el_pt->node_pt(3);
+        Node* o4_pt = el_pt->node_pt(4);
+        Node* o5_pt = el_pt->node_pt(5);
+        Node* o6_pt = el_pt->node_pt(6);
+        Node* o7_pt = el_pt->node_pt(7);
+        Node* o8_pt = el_pt->node_pt(8);
+        Node* o9_pt = el_pt->node_pt(9);
 
-	// Reconstruct o9 as it changes from centroid node to vertex node, it
-	// may have different storage requirements
-	// Temp pointer to delete o9
-	Node* o9_temp_pt = o9_pt;
-	// Reconstruct
-	o9_pt = el0_pt->construct_node(0, time_stepper_pt);
-	// Copy the position
-	o9_pt->x(0) = o9_temp_pt->x(0);
-	o9_pt->x(1) = o9_temp_pt->x(1);
-	// Delete the original node
-	delete o9_temp_pt;
-	o9_temp_pt = 0;
-	
-	// Next, we create the new nodes (using the construct node function
-	// ensures that dof memory is properly allocated for us)
-	Node* a0_pt = el1_pt->construct_node(3, time_stepper_pt);
-	Node* a1_pt = el0_pt->construct_node(4, time_stepper_pt);
-	Node* a2_pt = el0_pt->construct_node(7, time_stepper_pt);
-	Node* b0_pt = el1_pt->construct_node(4, time_stepper_pt);
-	Node* b1_pt = el0_pt->construct_node(3, time_stepper_pt);
-	Node* b2_pt = el0_pt->construct_node(8, time_stepper_pt);
-	Node* c0_pt = el0_pt->construct_node(9, time_stepper_pt);
-	Node* c1_pt = el1_pt->construct_node(9, time_stepper_pt);
-	Node* c2_pt = el2_pt->construct_node(9, time_stepper_pt);
+        // Reconstruct o9 as it changes from centroid node to vertex node, it
+        // may have different storage requirements
+        // Temp pointer to delete o9
+        Node* o9_temp_pt = o9_pt;
+        // Reconstruct
+        o9_pt = el0_pt->construct_node(0, time_stepper_pt);
+        // Copy the position
+        o9_pt->x(0) = o9_temp_pt->x(0);
+        o9_pt->x(1) = o9_temp_pt->x(1);
+        // Delete the original centre node
+        delete o9_temp_pt;
+        o9_temp_pt = 0;
 
-	// Set the locations of the new nodes
-	for(unsigned i=0; i<dim; i++)
-	{
-	  // First a_i, which are one third of the way from o_i to o_9
-	  a0_pt->x(i) = (2.0*o0_pt->x(i) + o9_pt->x(i)) / 3.0;
-	  a1_pt->x(i) = (2.0*o1_pt->x(i) + o9_pt->x(i)) / 3.0;
-	  a2_pt->x(i) = (2.0*o2_pt->x(i) + o9_pt->x(i)) / 3.0;
-	  // Next b_i, which are two thirds of the way from o_i to o_9
-	  b0_pt->x(i) = (2.0*o9_pt->x(i) + o0_pt->x(i)) / 3.0;
-	  b1_pt->x(i) = (2.0*o9_pt->x(i) + o1_pt->x(i)) / 3.0;
-	  b2_pt->x(i) = (2.0*o9_pt->x(i) + o2_pt->x(i)) / 3.0;
-	  // Lastly c_i, which are the centroids of the new elements
-	  c0_pt->x(i) = (o1_pt->x(i) + o2_pt->x(i) + o9_pt->x(i)) / 3.0;
-	  c1_pt->x(i) = (o2_pt->x(i) + o0_pt->x(i) + o9_pt->x(i)) / 3.0;
-	  c2_pt->x(i) = (o0_pt->x(i) + o1_pt->x(i) + o9_pt->x(i)) / 3.0;
-	}
-      
-	// And assign the nodes to the new elements
-	// (some are already assigned due to their construction but we leave
-	//  them commented here for completeness)
+        // Next, we create the new nodes (using the construct node function
+        // ensures that dof memory is properly allocated for us)
+        Node* a0_pt = el1_pt->construct_node(3, time_stepper_pt);
+        Node* a1_pt = el0_pt->construct_node(4, time_stepper_pt);
+        Node* a2_pt = el0_pt->construct_node(7, time_stepper_pt);
+        Node* b0_pt = el1_pt->construct_node(4, time_stepper_pt);
+        Node* b1_pt = el0_pt->construct_node(3, time_stepper_pt);
+        Node* b2_pt = el0_pt->construct_node(8, time_stepper_pt);
+        Node* c0_pt = el0_pt->construct_node(9, time_stepper_pt);
+        Node* c1_pt = el1_pt->construct_node(9, time_stepper_pt);
+        Node* c2_pt = el2_pt->construct_node(9, time_stepper_pt);
 
-	// Element 0
-	el0_pt->node_pt(0) = o9_pt;
-	el0_pt->node_pt(1) = o1_pt;
-	el0_pt->node_pt(2) = o2_pt;
-	// el0_pt->node_pt(3) = b1_pt;
-	// el0_pt->node_pt(4) = a1_pt;
-	el0_pt->node_pt(5) = o5_pt;
-	el0_pt->node_pt(6) = o6_pt;
-	// el0_pt->node_pt(7) = a2_pt;
-	// el0_pt->node_pt(8) = b2_pt;
-	// el0_pt->node_pt(9) = c0_pt;
-     
-	// Element 1
-	el1_pt->node_pt(0) = o0_pt;
-	el1_pt->node_pt(1) = o9_pt;
-	el1_pt->node_pt(2) = o2_pt;
-	// el1_pt->node_pt(3) = a0_pt;
-	// el1_pt->node_pt(4) = b0_pt;
-	el1_pt->node_pt(5) = b2_pt;
-	el1_pt->node_pt(6) = a2_pt;
-	el1_pt->node_pt(7) = o7_pt;
-	el1_pt->node_pt(8) = o8_pt;
-	// el1_pt->node_pt(9) = c1_pt;
-     
-	// Element 2
-	el2_pt->node_pt(0) = o0_pt;
-	el2_pt->node_pt(1) = o1_pt;
-	el2_pt->node_pt(2) = o9_pt;
-	el2_pt->node_pt(3) = o3_pt;
-	el2_pt->node_pt(4) = o4_pt;
-	el2_pt->node_pt(5) = a1_pt;
-	el2_pt->node_pt(6) = b1_pt;
-	el2_pt->node_pt(7) = b0_pt;
-	el2_pt->node_pt(8) = a0_pt;
-	// el2_pt->node_pt(9) = c2_pt;
+        // We have three elements, fill the vector of new elements
+        new_el_pt.resize(3);
+        new_el_pt[0] = el0_pt;
+        new_el_pt[1] = el1_pt;
+        new_el_pt[2] = el2_pt;
 
-	// Lastly, fill the Vector of new elements and return
-	new_el_pt.resize(3);
-	new_el_pt[0] = el0_pt;
-	new_el_pt[1] = el1_pt;
-	new_el_pt[2] = el2_pt;
-	return;
+        // We have nineteen nodes, fill the vector of new nodes
+        new_nod_pt.resize(19);
+        new_nod_pt[0] = o0_pt;
+        new_nod_pt[1] = o1_pt;
+        new_nod_pt[2] = o2_pt;
+        new_nod_pt[3] = o3_pt;
+        new_nod_pt[4] = o4_pt;
+        new_nod_pt[5] = o5_pt;
+        new_nod_pt[6] = o6_pt;
+        new_nod_pt[7] = o7_pt;
+        new_nod_pt[8] = o8_pt;
+        new_nod_pt[9] = o9_pt;
+        new_nod_pt[10] = a0_pt;
+        new_nod_pt[11] = a1_pt;
+        new_nod_pt[12] = a2_pt;
+        new_nod_pt[13] = b0_pt;
+        new_nod_pt[14] = b1_pt;
+        new_nod_pt[15] = b2_pt;
+        new_nod_pt[16] = c0_pt;
+        new_nod_pt[17] = c1_pt;
+        new_nod_pt[18] = c2_pt;
+
+        // Set the locations of the new nodes
+        for (unsigned i = 0; i < dim; i++)
+        {
+          // First a_i, which are one third of the way from o_i to o_9
+          a0_pt->x(i) = (2.0 * o0_pt->x(i) + o9_pt->x(i)) / 3.0;
+          a1_pt->x(i) = (2.0 * o1_pt->x(i) + o9_pt->x(i)) / 3.0;
+          a2_pt->x(i) = (2.0 * o2_pt->x(i) + o9_pt->x(i)) / 3.0;
+          // Next b_i, which are two thirds of the way from o_i to o_9
+          b0_pt->x(i) = (2.0 * o9_pt->x(i) + o0_pt->x(i)) / 3.0;
+          b1_pt->x(i) = (2.0 * o9_pt->x(i) + o1_pt->x(i)) / 3.0;
+          b2_pt->x(i) = (2.0 * o9_pt->x(i) + o2_pt->x(i)) / 3.0;
+          // Lastly c_i, which are the centroids of the new elements
+          c0_pt->x(i) = (o1_pt->x(i) + o2_pt->x(i) + o9_pt->x(i)) / 3.0;
+          c1_pt->x(i) = (o2_pt->x(i) + o0_pt->x(i) + o9_pt->x(i)) / 3.0;
+          c2_pt->x(i) = (o0_pt->x(i) + o1_pt->x(i) + o9_pt->x(i)) / 3.0;
+        }
+
+        // And assign the nodes to the new elements
+        // (some are already assigned due to their construction but we leave
+        //  them commented here for completeness)
+
+        // Element 0
+        el0_pt->node_pt(0) = o9_pt;
+        el0_pt->node_pt(1) = o1_pt;
+        el0_pt->node_pt(2) = o2_pt;
+        // el0_pt->node_pt(3) = b1_pt;
+        // el0_pt->node_pt(4) = a1_pt;
+        el0_pt->node_pt(5) = o5_pt;
+        el0_pt->node_pt(6) = o6_pt;
+        // el0_pt->node_pt(7) = a2_pt;
+        // el0_pt->node_pt(8) = b2_pt;
+        // el0_pt->node_pt(9) = c0_pt;
+
+        // Element 1
+        el1_pt->node_pt(0) = o0_pt;
+        el1_pt->node_pt(1) = o9_pt;
+        el1_pt->node_pt(2) = o2_pt;
+        // el1_pt->node_pt(3) = a0_pt;
+        // el1_pt->node_pt(4) = b0_pt;
+        el1_pt->node_pt(5) = b2_pt;
+        el1_pt->node_pt(6) = a2_pt;
+        el1_pt->node_pt(7) = o7_pt;
+        el1_pt->node_pt(8) = o8_pt;
+        // el1_pt->node_pt(9) = c1_pt;
+
+        // Element 2
+        el2_pt->node_pt(0) = o0_pt;
+        el2_pt->node_pt(1) = o1_pt;
+        el2_pt->node_pt(2) = o9_pt;
+        el2_pt->node_pt(3) = o3_pt;
+        el2_pt->node_pt(4) = o4_pt;
+        el2_pt->node_pt(5) = a1_pt;
+        el2_pt->node_pt(6) = b1_pt;
+        el2_pt->node_pt(7) = b0_pt;
+        el2_pt->node_pt(8) = a0_pt;
+        // el2_pt->node_pt(9) = c2_pt;
+
+        return;
       }
-      
-    default:
+
+      default:
       {
-	std::string error_message = (std::string)(
-	  "Triangle elements must have nnode_1d = 2,3 or 4. This element returned\
-nnode_1d() = ")
-	  + std::to_string(n_node_1d);
-	throw OomphLibError(error_message,
-			    OOMPH_EXCEPTION_LOCATION,
-			    OOMPH_CURRENT_FUNCTION);
+        std::string error_message =
+          (std::string)("Triangle elements must have nnode_1d = 2,3 or 4.\n"
+    "This element returned nnode_1d() = ") + std::to_string(n_node_1d); 
+        throw OomphLibError(
+          error_message, OOMPH_EXCEPTION_LOCATION, OOMPH_CURRENT_FUNCTION);
       }
-      
+
     } // end switch statement
-    
   }
-  
- 
+
+
   //==========================================================================
   /// Make sure no elements have two boundary edges by splitting them through
-  /// their barycentre (e.g. corner elements straddling both boundaries)
+  /// their centroid (e.g. corner elements straddling both boundaries)
   //==========================================================================
   template<class ELEMENT>
-  void TriangleMeshBase::split_elements_with_multiple_boundary_edges(TimeStepper* const &time_stepper_pt)
+  void TriangleMeshBase::split_elements_with_multiple_boundary_edges(
+    TimeStepper* const& time_stepper_pt)
   {
     // Setup boundary lookup scheme if required
     if (!Lookup_for_elements_next_boundary_is_setup)
@@ -670,24 +721,25 @@ nnode_1d() = ")
     // [zdec] debug
     std::string filename_old = "element_debug_file_orig.dat";
     std::ofstream element_debug_old;
-    element_debug_old.open(filename_old, std::ofstream::out | std::ofstream::trunc);
+    element_debug_old.open(filename_old,
+                           std::ofstream::out | std::ofstream::trunc);
     element_debug_old.close();
     std::string filename_n_old = "node_debug_file_orig.dat";
-    element_debug_old.open(filename_n_old, std::ofstream::out | std::ofstream::trunc);
+    element_debug_old.open(filename_n_old,
+                           std::ofstream::out | std::ofstream::trunc);
     element_debug_old.close();
     for (unsigned e = 0; e < nelement(); e++)
     {
       // [zdec] debug: doc all the elements to see the mesh patches
-      oomph_info << "Adding element " << e
-		 << " at " << finite_element_pt(e)
-		 << " nodes to debug file" << std::endl;
+      oomph_info << "Adding element " << e << " at " << finite_element_pt(e)
+                 << " nodes to debug file" << std::endl;
       element_debug_old.open(filename_old, std::ios_base::app);
-      //loop over the vertex nodes
-      for(unsigned i=0; i<3; i++)
+      // loop over the vertex nodes
+      for (unsigned i = 0; i < 3; i++)
       {
-	element_debug_old << finite_element_pt(e)->node_pt(i)->x(0) << " ";
-	element_debug_old << finite_element_pt(e)->node_pt(i)->x(1) << " ";
-	element_debug_old << std::endl;
+        element_debug_old << finite_element_pt(e)->node_pt(i)->x(0) << " ";
+        element_debug_old << finite_element_pt(e)->node_pt(i)->x(1) << " ";
+        element_debug_old << std::endl;
       }
       element_debug_old << finite_element_pt(e)->node_pt(0)->x(0) << " ";
       element_debug_old << finite_element_pt(e)->node_pt(0)->x(1) << " ";
@@ -696,16 +748,16 @@ nnode_1d() = ")
       element_debug_old.close();
       // Loop over all nodes
       element_debug_old.open(filename_n_old, std::ios_base::app);
-      for(unsigned i=0; i<finite_element_pt(e)->nnode(); i++)
+      for (unsigned i = 0; i < finite_element_pt(e)->nnode(); i++)
       {
-	element_debug_old << finite_element_pt(e)->node_pt(i)->x(0) << " ";
-	element_debug_old << finite_element_pt(e)->node_pt(i)->x(1) << " ";
-	element_debug_old << std::endl;
+        element_debug_old << finite_element_pt(e)->node_pt(i)->x(0) << " ";
+        element_debug_old << finite_element_pt(e)->node_pt(i)->x(1) << " ";
+        element_debug_old << std::endl;
       }
       element_debug_old << std::endl << std::endl;
       element_debug_old.close();
     }
-    
+
     // Count the number of boundaries each element is on
     unsigned nb = this->nboundary();
     for (unsigned b = 0; b < nb; b++)
@@ -718,10 +770,10 @@ nnode_1d() = ")
         FiniteElement* el_pt = boundary_element_pt(b, e);
         // Bump up counter
         count[el_pt]++;
-	
-	// [zdec] debug
-	oomph_info << "Element at " << el_pt
-		   << " has " << count[el_pt] << " boundaries" << std::endl;
+
+        // [zdec] debug
+        oomph_info << "Element at " << el_pt << " has " << count[el_pt]
+                   << " boundaries" << std::endl;
       }
     }
 
@@ -746,15 +798,18 @@ nnode_1d() = ")
     unsigned n_el = this->nelement();
     Vector<FiniteElement*> new_or_retained_el_pt;
     new_or_retained_el_pt.reserve(n_el);
-    
+
+    //  Set for retained or newly built nodes
+    // (we use a set to prevent node pointer repetition which is hard to track)
+    std::set<Node*> new_or_retained_nod_pt;
+
     // Map which returns the 3 newly created elements for each old corner
     // element
-    std::map<FiniteElement*, Vector<FiniteElement*>>
-      old_to_new_element_map;
+    std::map<FiniteElement*, Vector<FiniteElement*>> old_to_new_element_map;
 
 
     // Loop over the elements
-    for(unsigned e = 0; e < n_el; e++)
+    for (unsigned e = 0; e < n_el; e++)
     {
       // Get pointer to the element
       FiniteElement* el_pt = this->finite_element_pt(e);
@@ -767,46 +822,54 @@ nnode_1d() = ")
       // It's not in the set, so iterator has reached end
       if (it == elements_to_be_split.end())
       {
-	// Carry it across
-	new_or_retained_el_pt.push_back(el_pt);
-	// [zdec] debug
-	oomph_info << "Not splitting element " << e << " at " << el_pt << std::endl;
+        // Carry it across
+        new_or_retained_el_pt.push_back(el_pt);
+        // Carry across its nodes
+        unsigned n_el_nod = el_pt->nnode();
+        for (unsigned i_el_nod = 0; i_el_nod < n_el_nod; i_el_nod++)
+        {
+          Node* nod_pt = el_pt->node_pt(i_el_nod);
+          new_or_retained_nod_pt.insert(nod_pt);
+        }
       }
       // It's in the set of elements to be split
       else
       {
-	// [zdec] debug
-	oomph_info << "Splitting element " << e
-		   << " at " << el_pt << " into: " << std::endl;
-	// Vector to get the pointers to the new elements
-	Vector<FiniteElement*> new_el_pt(3,0);
-	
-	// Split the element
-	split_element_through_barycentre<ELEMENT>(time_stepper_pt,
-						  el_pt,
-						  new_el_pt);
-	
-	// Add the new elements to new the Vector of pointers
-	new_or_retained_el_pt.push_back(new_el_pt[0]);
-	new_or_retained_el_pt.push_back(new_el_pt[1]);
-	new_or_retained_el_pt.push_back(new_el_pt[2]);
-	// [zdec] debug
-	oomph_info << "  " << new_el_pt[0] << std::endl;
-	oomph_info << "  " << new_el_pt[1] << std::endl;
-	oomph_info << "  " << new_el_pt[2] << std::endl;
-	
-	// Add the vector to the map
-	old_to_new_element_map.insert(
-	  std::pair<FiniteElement*, Vector<FiniteElement*>>(el_pt, new_el_pt));	
+        // [zdec] debug
+        oomph_info << "Splitting element " << e << " at " << el_pt
+                   << " into: " << std::endl;
+        // Vector to get the pointers to the new elements
+        Vector<FiniteElement*> new_el_pt(3, 0);
+        Vector<Node*> new_nod_pt;
 
-	// Delete the old element
-	delete el_pt;
+        // Split the element
+        split_element_through_centroid<ELEMENT>(
+          time_stepper_pt, el_pt, new_el_pt, new_nod_pt);
+
+        // Add the new elements to new the Vector of pointers
+        new_or_retained_el_pt.push_back(new_el_pt[0]);
+        new_or_retained_el_pt.push_back(new_el_pt[1]);
+        new_or_retained_el_pt.push_back(new_el_pt[2]);
+
+        // Add the nodes to the new Vector of pointers
+        unsigned n_new_nod = new_nod_pt.size();
+        for (unsigned i_new_nod = 0; i_new_nod < n_new_nod; i_new_nod++)
+        {
+          new_or_retained_nod_pt.insert(new_nod_pt[i_new_nod]);
+        }
+
+        // Add the vector to the map
+        old_to_new_element_map.insert(
+          std::pair<FiniteElement*, Vector<FiniteElement*>>(el_pt, new_el_pt));
+
+        // Delete the old element
+        delete el_pt;
       }
     } // End loop over elements [e]
 
     // Update mesh storage and lookup schemes for new Vector of elements
     //--------------------------------------------------------------------------
-    
+
     // Copy new vector of finite elements to meshes storage
     // Flush element storage
     Element_pt.clear();
@@ -825,37 +888,46 @@ nnode_1d() = ")
     for (unsigned e = 0; e < n_el; e++)
     {
       // [zdec] debug: doc all the elements to see the mesh patches
-      oomph_info << "Adding element " << e
-		 << " at " << new_or_retained_el_pt[e]
-		 << " nodes to debug file" << std::endl;
+      oomph_info << "Adding element " << e << " at " << new_or_retained_el_pt[e]
+                 << " nodes to debug file" << std::endl;
       element_debug.open(filename, std::ios_base::app);
-      //loop over the vertex nodes
-      for(unsigned i=0; i<3; i++)
+      // loop over the vertex nodes
+      for (unsigned i = 0; i < 3; i++)
       {
-	element_debug << new_or_retained_el_pt[e]->node_pt(i)->x(0) << " "
-		      << new_or_retained_el_pt[e]->node_pt(i)->x(1) << " "
-		      << std::endl;
+        element_debug << new_or_retained_el_pt[e]->node_pt(i)->x(0) << " "
+                      << new_or_retained_el_pt[e]->node_pt(i)->x(1) << " "
+                      << std::endl;
       }
       element_debug << new_or_retained_el_pt[e]->node_pt(0)->x(0) << " "
-		    << new_or_retained_el_pt[e]->node_pt(0)->x(1) << " "
-		    << std::endl << std::endl << std::endl;
+                    << new_or_retained_el_pt[e]->node_pt(0)->x(1) << " "
+                    << std::endl
+                    << std::endl
+                    << std::endl;
       element_debug.close();
       // Loop over all nodes
       element_debug.open(filename_n, std::ios_base::app);
-      for(unsigned i=0; i<new_or_retained_el_pt[e]->nnode(); i++)
+      for (unsigned i = 0; i < new_or_retained_el_pt[e]->nnode(); i++)
       {
-	element_debug << new_or_retained_el_pt[e]->node_pt(i)->x(0) << " "
-		      << new_or_retained_el_pt[e]->node_pt(i)->x(1) << " "
-		      << std::endl;
+        element_debug << new_or_retained_el_pt[e]->node_pt(i)->x(0) << " "
+                      << new_or_retained_el_pt[e]->node_pt(i)->x(1) << " "
+                      << std::endl;
       }
       element_debug << std::endl << std::endl;
       element_debug.close();
       Element_pt[e] = new_or_retained_el_pt[e];
     }
 
+    // Copy across nodes
+    Node_pt.clear();
+    Node_pt.insert(Node_pt.end(),
+                   new_or_retained_nod_pt.begin(),
+                   new_or_retained_nod_pt.end());
+
     // Setup boundary lookup scheme again
     setup_boundary_element_info();
 
+
+    // [zdec] THIS WAS JUST COPIED AND NEEDS CHECKING
     // -------------------------------------------------------------------------
     // The various boundary/region lookups now need updating to account for the
     // newly added/removed elements. This will be done in two stages:
@@ -884,11 +956,9 @@ nnode_1d() = ")
       oomph_info << "\nNo elements need splitting\n\n";
       return;
     }
-
-    
   }
 
-  
+
 } // namespace oomph
 
 #endif
