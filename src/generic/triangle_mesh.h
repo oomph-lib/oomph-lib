@@ -692,7 +692,8 @@ namespace oomph
       {
         std::string error_message =
           (std::string)("Triangle elements must have nnode_1d = 2,3 or 4.\n"
-    "This element returned nnode_1d() = ") + std::to_string(n_node_1d); 
+                        "This element returned nnode_1d() = ") +
+          std::to_string(n_node_1d);
         throw OomphLibError(
           error_message, OOMPH_EXCEPTION_LOCATION, OOMPH_CURRENT_FUNCTION);
       }
