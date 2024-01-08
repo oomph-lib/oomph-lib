@@ -371,12 +371,12 @@ class EulerProblem : public Problem
    
    if(sod)
     {
-     sprintf(filename,"sod_%li_time%g.dat",mesh_pt()->nelement(),
+     snprintf(filename, sizeof(filename), "sod_%li_time%g.dat",mesh_pt()->nelement(),
              this->time());
     }
    else
     {
-     sprintf(filename,"lax_%li_time%g.dat",mesh_pt()->nelement(),
+     snprintf(filename, sizeof(filename), "lax_%li_time%g.dat",mesh_pt()->nelement(),
              this->time());
     }
    outfile.open(filename);
@@ -396,12 +396,12 @@ class EulerProblem : public Problem
        {
         if(sod)
          {
-          sprintf(filename,"sod_%li_time%g.dat",mesh_pt()->nelement(),
+          snprintf(filename, sizeof(filename), "sod_%li_time%g.dat",mesh_pt()->nelement(),
                   this->time());
          }
         else
          {
-          sprintf(filename,"lax_%li_time%g.dat",mesh_pt()->nelement(),
+          snprintf(filename, sizeof(filename), "lax_%li_time%g.dat",mesh_pt()->nelement(),
                   this->time());
          }
         outfile.open(filename);

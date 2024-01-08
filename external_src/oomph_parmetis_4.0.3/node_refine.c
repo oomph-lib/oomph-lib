@@ -511,7 +511,7 @@ void KWayNodeRefine_Greedy(ctrl_t *ctrl, graph_t *graph, idx_t npasses, real_t u
           ctrl->comm);
       graph->mincut = gpwgts[2*nparts-1];
 
-      sprintf(title, "\tTotalSep [%"PRIDX"]", c);
+      snprintf(title, sizeof(title),  "\tTotalSep [%"PRIDX"]", c);
       IFSET(ctrl->dbglvl, DBG_REFINEINFO, 
           PrintNodeBalanceInfo(ctrl, nparts, gpwgts, badmaxpwgt, title));
 

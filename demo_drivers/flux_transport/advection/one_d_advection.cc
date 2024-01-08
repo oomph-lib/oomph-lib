@@ -376,12 +376,12 @@ class AdvectionProblem : public Problem
        {
         if(disc)
          {
-          sprintf(filename,"disc_%li_time%g.dat",mesh_pt()->nelement(),
+          snprintf(filename, sizeof(filename), "disc_%li_time%g.dat",mesh_pt()->nelement(),
                   this->time());
          }
         else
          {
-          sprintf(filename,"cont_%li_time%g.dat",mesh_pt()->nelement(),
+          snprintf(filename, sizeof(filename), "cont_%li_time%g.dat",mesh_pt()->nelement(),
                   this->time());
          }
         outfile.open(filename);

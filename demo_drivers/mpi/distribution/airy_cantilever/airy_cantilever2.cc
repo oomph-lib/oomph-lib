@@ -413,7 +413,7 @@ void CantileverProblem<ELEMENT>::doc_solution()
 
  // Output shape of and stress in deformed body
  //--------------------------------------------
- sprintf(filename,"%s/soln%i_on_proc%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i_on_proc%i.dat",Doc_info.directory().c_str(),
          Doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  mesh_pt()->output(some_file,n_plot);
@@ -422,7 +422,7 @@ void CantileverProblem<ELEMENT>::doc_solution()
 
  // Output St. Venant solution
  //---------------------------
- sprintf(filename,"%s/exact_soln%i_on_proc%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/exact_soln%i_on_proc%i.dat",Doc_info.directory().c_str(),
          Doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
 
@@ -526,16 +526,16 @@ void CantileverProblem<ELEMENT>::run_it(const unsigned& i_case)
  char dirname[100];   
 
 #ifdef REFINE
- sprintf(dirname,"RESLT_refine%i",i_case);
+ snprintf(dirname, sizeof(dirname), "RESLT_refine%i",i_case);
 #else
- sprintf(dirname,"RESLT_norefine%i",i_case);
+ snprintf(dirname, sizeof(dirname), "RESLT_norefine%i",i_case);
 #endif
 
  Doc_info.set_directory(dirname);
 
  // Open trace file
  char filename[100];   
- sprintf(filename,"%s/trace_on_proc%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/trace_on_proc%i.dat",Doc_info.directory().c_str(),
          this->communicator_pt()->my_rank());
  Trace_file.open(filename);
 
@@ -650,7 +650,7 @@ int main(int argc, char **argv)
      // Get the partition from file
      unsigned n_partition=problem.mesh_pt()->nelement();
      Vector<unsigned> element_partition(n_partition);
-     sprintf(filename,"airy_cantilever_%i_partition.dat",0+i*ncase);
+     snprintf(filename, sizeof(filename), "airy_cantilever_%i_partition.dat",0+i*ncase);
      input_file.open(filename);
      std::string input_string;
      for (unsigned e=0;e<n_partition;e++)
@@ -683,7 +683,7 @@ int main(int argc, char **argv)
      // Get partition from file
      unsigned n_partition=problem.mesh_pt()->nelement();
      Vector<unsigned> element_partition(n_partition);
-     sprintf(filename,"airy_cantilever_%i_partition.dat",0+i*ncase);
+     snprintf(filename, sizeof(filename), "airy_cantilever_%i_partition.dat",0+i*ncase);
      input_file.open(filename);
      std::string input_string;
      for (unsigned e=0;e<n_partition;e++)
@@ -720,7 +720,7 @@ int main(int argc, char **argv)
      // Get partition from file
      unsigned n_partition=problem.mesh_pt()->nelement();
      Vector<unsigned> element_partition(n_partition);
-     sprintf(filename,"airy_cantilever_%i_partition.dat",1+i*ncase);
+     snprintf(filename, sizeof(filename), "airy_cantilever_%i_partition.dat",1+i*ncase);
      input_file.open(filename);
      std::string input_string;
      for (unsigned e=0;e<n_partition;e++)
@@ -753,7 +753,7 @@ int main(int argc, char **argv)
      // Get partition from file
      unsigned n_partition=problem.mesh_pt()->nelement();
      Vector<unsigned> element_partition(n_partition);
-     sprintf(filename,"airy_cantilever_%i_partition.dat",1+i*ncase);
+     snprintf(filename, sizeof(filename), "airy_cantilever_%i_partition.dat",1+i*ncase);
      input_file.open(filename);
      std::string input_string;
      for (unsigned e=0;e<n_partition;e++)
@@ -788,7 +788,7 @@ int main(int argc, char **argv)
      // Get partition from file
      unsigned n_partition=problem.mesh_pt()->nelement();
      Vector<unsigned> element_partition(n_partition);
-     sprintf(filename,"airy_cantilever_%i_partition.dat",2+i*ncase);
+     snprintf(filename, sizeof(filename), "airy_cantilever_%i_partition.dat",2+i*ncase);
      input_file.open(filename);
      std::string input_string;
      for (unsigned e=0;e<n_partition;e++)
@@ -820,7 +820,7 @@ int main(int argc, char **argv)
      // Get partition from file
      unsigned n_partition=problem.mesh_pt()->nelement();
      Vector<unsigned> element_partition(n_partition);
-     sprintf(filename,"airy_cantilever_%i_partition.dat",2+i*ncase);
+     snprintf(filename, sizeof(filename), "airy_cantilever_%i_partition.dat",2+i*ncase);
      input_file.open(filename);
      std::string input_string;
      for (unsigned e=0;e<n_partition;e++)
@@ -876,7 +876,7 @@ int main(int argc, char **argv)
      // Get partition from file
      unsigned n_partition=problem.mesh_pt()->nelement();
      Vector<unsigned> element_partition(n_partition);
-     sprintf(filename,"airy_cantilever_%i_partition.dat",3+i*ncase);
+     snprintf(filename, sizeof(filename), "airy_cantilever_%i_partition.dat",3+i*ncase);
      input_file.open(filename);
      std::string input_string;
      for (unsigned e=0;e<n_partition;e++)
@@ -909,7 +909,7 @@ int main(int argc, char **argv)
      // Get partition from file
      unsigned n_partition=problem.mesh_pt()->nelement();
      Vector<unsigned> element_partition(n_partition);
-     sprintf(filename,"airy_cantilever_%i_partition.dat",3+i*ncase);
+     snprintf(filename, sizeof(filename), "airy_cantilever_%i_partition.dat",3+i*ncase);
      input_file.open(filename);
      std::string input_string;
      for (unsigned e=0;e<n_partition;e++)
@@ -946,7 +946,7 @@ int main(int argc, char **argv)
      // Get partition from file
      unsigned n_partition=problem.mesh_pt()->nelement();
      Vector<unsigned> element_partition(n_partition);
-     sprintf(filename,"airy_cantilever_%i_partition.dat",4+i*ncase);
+     snprintf(filename, sizeof(filename), "airy_cantilever_%i_partition.dat",4+i*ncase);
      input_file.open(filename);
      std::string input_string;
      for (unsigned e=0;e<n_partition;e++)
@@ -979,7 +979,7 @@ int main(int argc, char **argv)
      // Get partition from file
      unsigned n_partition=problem.mesh_pt()->nelement();
      Vector<unsigned> element_partition(n_partition);
-     sprintf(filename,"airy_cantilever_%i_partition.dat",4+i*ncase);
+     snprintf(filename, sizeof(filename), "airy_cantilever_%i_partition.dat",4+i*ncase);
      input_file.open(filename);
      std::string input_string;
      for (unsigned e=0;e<n_partition;e++)

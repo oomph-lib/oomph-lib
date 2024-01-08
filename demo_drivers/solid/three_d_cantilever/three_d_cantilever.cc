@@ -363,7 +363,7 @@ void CantileverProblem<ELEMENT>::doc_solution()
  unsigned n_plot = 5; 
 
  // Output shape of deformed body
- sprintf(filename,"%s/soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  mesh_pt()->output(some_file,n_plot);
@@ -390,9 +390,9 @@ void CantileverProblem<ELEMENT>::run_tests(const unsigned& i_case,
  char dirname[100];   
 
 #ifdef REFINE
- sprintf(dirname,"RESLT_refine%i",i_case);
+ snprintf(dirname, sizeof(dirname), "RESLT_refine%i",i_case);
 #else
- sprintf(dirname,"RESLT_norefine%i",i_case);
+ snprintf(dirname, sizeof(dirname), "RESLT_norefine%i",i_case);
 #endif
 
  // Prepare output

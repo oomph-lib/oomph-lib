@@ -229,8 +229,8 @@ void ActivatorInhibitorProblem<ELEMENT>::timestep(const double &dt,
   {
    unsteady_newton_solve(dt);
    char file1[100];
-   // sprintf(file1,"step%g.dat",time_pt()->time());
-   sprintf(file1,"step%i.dat",i+1);
+   // snprintf(file1, sizeof(file1), "step%g.dat",time_pt()->time());
+   snprintf(file1, sizeof(file1), "step%i.dat",i+1);
    ofstream out1(file1);
    mesh_pt()->output(out1,5);
    out1.close();

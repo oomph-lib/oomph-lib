@@ -48,7 +48,7 @@ $OOMPH_ROOT_DIR/scripts/fpdiff.py  ../validata/harmonic_results.dat.gz   \
 # Only if we have Trilinos
 echo "Anasazi Test: " >> validation.log
 if [ -s res_anasazi.dat ]; then
-../../../../bin/fpdiff.py  ../validata/harmonic_results.dat.gz   \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py  ../validata/harmonic_results.dat.gz   \
     res_anasazi.dat  0.1 1.0e-13 >> validation.log
 else
  echo "dummy [OK] -- Anasazi test has not run, probably because Trilinos is not installed" >> validation.log       
@@ -83,7 +83,7 @@ $OOMPH_ROOT_DIR/scripts/fpdiff.py  ../validata/comp_harmonic_results.dat.gz   \
     res_qz_complex.dat  0.1 1.0e-13 >> validation.log
 echo "Anasazi Test: " >> validation.log
 if [ -s res_anasazi_complex.dat ]; then
-../../../../bin/fpdiff.py  ../validata/comp_harmonic_results.dat.gz   \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py  ../validata/comp_harmonic_results.dat.gz   \
     res_anasazi_complex.dat  0.1 1.0e-13 >> validation.log
 else
  echo "dummy [OK] -- Anasazi test has not run, probably because Trilinos is not installed" >> validation.log       

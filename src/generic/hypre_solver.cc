@@ -161,7 +161,7 @@ namespace oomph
       }
 
       // reset Hypre's global error flag
-      hypre__global_error = 0;
+      hypre__global_error.error_flag = 0;
 
       return err;
     }
@@ -449,13 +449,13 @@ namespace oomph
       // set level for ILU(k)
       args[n_args++] = "-level";
       char level_value[10];
-      sprintf(level_value, "%d", level);
+      snprintf(level_value, sizeof(level_value), "%d", level);
       args[n_args++] = level_value;
 
       // // set drop tol for ILU(k) factorization
       // args[n_args++] = "-sparseA";
       // char droptol[20];
-      // sprintf(droptol,"%f",drop_tol);
+      // snprintf(droptol, sizeof(droptol), "%f",drop_tol);
       // args[n_args++] = droptol;
 
       // // set ILUT factorization if required
@@ -513,7 +513,7 @@ namespace oomph
   void HypreInterface::hypre_matrix_setup(CRDoubleMatrix* matrix_pt)
   {
     // reset Hypre's global error flag
-    hypre__global_error = 0;
+    hypre__global_error.error_flag = 0;
 
     // issue warning if the matrix is small compared to the number of processors
     if (unsigned(2 * matrix_pt->distribution_pt()->communicator_pt()->nproc()) >
@@ -563,7 +563,7 @@ namespace oomph
 
 
     // reset Hypre's global error flag
-    hypre__global_error = 0;
+    hypre__global_error.error_flag = 0;
 
     // create dummy Hypre vectors which are required for setup
     HYPRE_IJVector dummy_sol_ij;

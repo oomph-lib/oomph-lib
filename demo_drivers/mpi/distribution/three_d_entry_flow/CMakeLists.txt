@@ -28,7 +28,7 @@ oomph_add_test(
 set_tests_properties(mpi.three_d_entry_flow PROPERTIES PROCESSORS
                                                        ${OOMPH_MPI_NUM_PROC})
 if(APPLE)
-  set_tests_properties(mpi.three_d_entry_flow PROPERTIES DISABLED TRUE)
+  set_tests_properties(mpi.three_d_entry_flow PROPERTIES DISABLED FALSE)
 endif()
 
 message(VERBOSE "Leaving three_d_entry_flow subdirectory")

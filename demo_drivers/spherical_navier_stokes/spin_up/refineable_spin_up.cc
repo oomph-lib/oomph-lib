@@ -435,7 +435,7 @@ void RefineableSphericalSpinUpProblem<ELEMENT>::doc_solution(DocInfo& doc_info, 
 
  // Output solution 
  //-----------------
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
@@ -491,7 +491,7 @@ int main()
     // Open a trace file
     ofstream trace_file;
     char filename[100];   
-    sprintf(filename,"%s/trace0.dat",doc_info.directory().c_str());
+    snprintf(filename, sizeof(filename), "%s/trace0.dat",doc_info.directory().c_str());
     trace_file.open(filename);
     trace_file << "time " << "u " << "v " << "w "
                << std::endl;

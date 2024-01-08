@@ -1,0 +1,12 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+libdir=@pkgconfig_libdir@
+includedir=@CMAKE_INSTALL_PREFIX@/@CMAKE_INSTALL_INCLUDEDIR@
+
+Name: @CMAKE_PROJECT_NAME@
+Description: Distributed-memory direct solution of sparse systems of linear equations
+Version: @PROJECT_VERSION@
+URL: https://portal.nersc.gov/project/sparse/superlu/
+
+Libs: -L${libdir} -lsuperlu_dist
+Libs.private: @BLAS_LIB@ @LAPACK_LIB@ @PARMETIS_LIB@ @COLAMD_LIB@ @COMBBLAS_LIB@ -lm
+Cflags: -I${includedir}

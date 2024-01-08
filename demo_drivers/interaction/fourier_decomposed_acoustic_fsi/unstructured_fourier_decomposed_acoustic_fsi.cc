@@ -800,7 +800,7 @@ CoatedSphereProblem()
 
  // Open trace file
  char filename[100];
- sprintf(filename,"%s/trace.dat",Global_Parameters::Directory.c_str());
+ snprintf(filename, sizeof(filename), "%s/trace.dat",Global_Parameters::Directory.c_str());
  Trace_file.open(filename);
   
  // Setup equation numbering scheme
@@ -1276,7 +1276,7 @@ doc_solution(DocInfo& doc_info)
 
  // Compute/output the radiated power
  //----------------------------------
- sprintf(filename,"%s/power%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/power%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
 
@@ -1295,7 +1295,7 @@ doc_solution(DocInfo& doc_info)
 
  // Output displacement field
  //--------------------------
- sprintf(filename,"%s/elast_soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/elast_soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Solid_mesh_pt->output(some_file,n_plot);
@@ -1303,7 +1303,7 @@ doc_solution(DocInfo& doc_info)
 
  // Output Helmholtz
  //-----------------
- sprintf(filename,"%s/helmholtz_soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/helmholtz_soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Helmholtz_mesh_pt->output(some_file,n_plot);
@@ -1312,7 +1312,7 @@ doc_solution(DocInfo& doc_info)
 
  // Output fsi traction elements
  //----------------------------- 
- sprintf(filename,"%s/fsi_traction_soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/fsi_traction_soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  FSI_traction_mesh_pt->output(some_file,n_plot);
@@ -1321,7 +1321,7 @@ doc_solution(DocInfo& doc_info)
 
  // Output Helmholtz fsi flux elements
  //----------------------------------- 
- sprintf(filename,"%s/fsi_flux_bc_soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/fsi_flux_bc_soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Helmholtz_fsi_flux_mesh_pt->output(some_file,n_plot);

@@ -8,6 +8,7 @@
 # defined in OomphConfigureProject.cmake.
 # =============================================================================
 # Define additional variables required by the oomphlibConfig.cmake.in file here
+include_guard()
 
 # Get the compile definitions
 get_directory_property(

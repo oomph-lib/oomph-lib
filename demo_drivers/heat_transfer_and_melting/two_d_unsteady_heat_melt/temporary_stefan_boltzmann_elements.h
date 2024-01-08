@@ -2642,7 +2642,7 @@ namespace StefanBoltzmannHelper
                  {
                   if (plot_it)
                    {
-                    sprintf(filename,"RESLT/latest_ray.dat");
+                    snprintf(filename, sizeof(filename), "RESLT/latest_ray.dat");
                     some_file.open(filename);
                    }
 

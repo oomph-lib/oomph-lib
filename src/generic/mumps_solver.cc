@@ -116,7 +116,8 @@ namespace oomph
     Mumps_struc_pt->ICNTL(4) = 2;
 
     // Write matrix
-    // sprintf(Mumps_struc_pt->write_problem,"/work/e173/e173/mheil/matrix");
+    // snprintf(Mumps_struc_pt->write_problem,
+    // sizeof(Mumps_struc_pt->write_problem), "/work/e173/e173/mheil/matrix");
 
     // Assembled matrix (rather than element-by_element)
     Mumps_struc_pt->ICNTL(5) = 0;

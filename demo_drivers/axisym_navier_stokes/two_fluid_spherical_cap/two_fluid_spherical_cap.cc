@@ -370,7 +370,7 @@ void CapProblem<ELEMENT>::solve_system()
    steady_newton_solve();
 
    //Create the filename, including the array index
-   sprintf(filename,"step%i_spine.dat",i);
+   snprintf(filename, sizeof(filename), "step%i_spine.dat",i);
    //Actually, write the data
    file.open(filename);
    Bulk_mesh_pt->output(file,5);

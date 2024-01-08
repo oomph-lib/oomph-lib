@@ -282,14 +282,14 @@ ostream& convergence_file)
 
    // Output boundaries
    //------------------
-   sprintf(filename,"%s/boundaries.dat",doc_info.directory().c_str());
+   snprintf(filename, sizeof(filename), "%s/boundaries.dat",doc_info.directory().c_str());
    some_file.open(filename);
    mesh_pt()->output_boundaries(some_file);
    some_file.close();
 
    // Output solution 
    //-----------------
-   sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+   snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
            doc_info.number());
    some_file.open(filename);
    mesh_pt()->output(some_file,npts);
@@ -298,7 +298,7 @@ ostream& convergence_file)
    
    // Output exact solution 
    //----------------------
-   sprintf(filename,"%s/exact_soln%i.dat",doc_info.directory().c_str(),
+   snprintf(filename, sizeof(filename), "%s/exact_soln%i.dat",doc_info.directory().c_str(),
            doc_info.number());
    some_file.open(filename);
    mesh_pt()->output_fct(some_file,npts,TanhSolnForPoisson::get_exact_u); 
@@ -309,7 +309,7 @@ ostream& convergence_file)
  // Doc error
  //----------
  double error,norm;
- sprintf(filename,"%s/error%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/error%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  mesh_pt()->compute_error(some_file,TanhSolnForPoisson::get_exact_u,

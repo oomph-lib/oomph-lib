@@ -495,7 +495,7 @@ void BaseStateProblem<BASE_ELEMENT, TIMESTEPPER>::doc_solution(
   const unsigned npts_bulk = 2;
 
   // Open solution output file
-  sprintf(filename,
+  snprintf(filename, sizeof(filename), 
           "%s/base_soln%i.dat",
           doc_info_pt->directory().c_str(),
           doc_info_pt->number());
@@ -567,7 +567,7 @@ public:
   {
     // Open trace file
     char filename[256];
-    sprintf(filename,
+    snprintf(filename, sizeof(filename), 
             "%s/perturbed_trace_k%i.dat",
             doc_info_pt->directory().c_str(),
             Azimuthal_mode_number);
@@ -1316,7 +1316,7 @@ void PerturbedStateProblem<BASE_ELEMENT, PERTURBED_ELEMENT, TIMESTEPPER>::
     const unsigned npts_surface = 5;
 
     // Open solution output file
-    sprintf(filename,
+    snprintf(filename, sizeof(filename), 
             "%s/perturbed_k%i_soln%i.dat",
             doc_info_pt->directory().c_str(),
             Azimuthal_mode_number,
@@ -1330,7 +1330,7 @@ void PerturbedStateProblem<BASE_ELEMENT, PERTURBED_ELEMENT, TIMESTEPPER>::
     some_file.close();
 
     // Open interface solution output file
-    sprintf(filename,
+    snprintf(filename, sizeof(filename), 
             "%s/perturbation_to_interface_k%i_soln%i.dat",
             doc_info_pt->directory().c_str(),
             Azimuthal_mode_number,
@@ -1355,7 +1355,7 @@ void PerturbedStateProblem<BASE_ELEMENT, PERTURBED_ELEMENT, TIMESTEPPER>::
     some_file.close();
 
     // Open interface solution output file
-    sprintf(filename,
+    snprintf(filename, sizeof(filename), 
             "%s/combined_interface_position_k%i_soln%i.dat",
             doc_info_pt->directory().c_str(),
             Azimuthal_mode_number,
@@ -1557,7 +1557,7 @@ int main(int argc, char* argv[])
   // Create info file
   ofstream info_file;
   char info_filename[100];
-  sprintf(info_filename, "%s/info.dat", doc_info_pt->directory().c_str());
+  snprintf(info_filename, sizeof(info_filename),  "%s/info.dat", doc_info_pt->directory().c_str());
   info_file.open(info_filename);
   info_file.close();
 

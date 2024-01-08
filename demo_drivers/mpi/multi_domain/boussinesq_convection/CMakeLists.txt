@@ -55,7 +55,7 @@ oomph_add_test(
 set_tests_properties(mpi.boussinesq_convection PROPERTIES PROCESSORS
                                                           ${OOMPH_MPI_NUM_PROC})
 if(APPLE)
-  set_tests_properties(mpi.boussinesq_convection PROPERTIES DISABLED TRUE)
+  set_tests_properties(mpi.boussinesq_convection PROPERTIES DISABLED FALSE)
 endif()
 
 message(VERBOSE "Leaving boussinesq_convection subdirectory")

@@ -3628,7 +3628,7 @@ struct behavior *b;
     workstring[increment] = '%';
     workstring[increment + 1] = 'd';
     workstring[increment + 2] = '\0';
-    sprintf(b->outnodefilename, workstring, meshnumber + 1);
+    snprintf(b->outnodefilename, sizeof(b->outnodefilename),  workstring, meshnumber + 1);
     strcpy(b->outpolyfilename, b->outnodefilename);
     strcpy(b->outelefilename, b->outnodefilename);
     strcpy(b->edgefilename, b->outnodefilename);

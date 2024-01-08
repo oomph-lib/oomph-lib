@@ -1,9 +1,23 @@
 --- # ------------------------------------------------------------------------------
-name: Ubuntu
 
-# TODO: Possibly add on-push-paths triggers below to only trigger self-tests when .c, .h, .cc,
-# .cmake, .py, .sh, CMakeLists.txt and workflow files are pushed
-on: push
+name: oomph-lib self-tests (Ubuntu)
+
+on:
+  push:
+    paths:
+      # Only run the self-tests if we edited the demo drivers, sources, third-party
+      # library code or self-tests
+      - ".github/workflows/self-tests-ubuntu.yaml"
+      - "CMakeLists.txt"
+      - "demo_drivers/**"
+      - "external_distributions/CMakeLists.txt"
+      - "external_distributions/cmake/**"
+      - "external_src/**"
+      - "scripts/**"
+      - "self_test/**"
+      - "src/**"
+      # Don't run self-tests if we've just edited a Makefile.am
+      - "!**/Makefile.am"
 
 # Environment variables that can be read during jobs
 env:
@@ -19,22 +33,77 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        build_info: [{ mpi: "OFF", preset: ci }, { mpi: "ON", preset: ci-mpi }]
+        build_info:
+          [
+            { enable_mpi: "OFF", preset: ci },
+            { enable_mpi: "ON", preset: ci-mpi },
+          ]
+        build_third_party_libs: ["OFF", "ON"]
 
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v3
+      # -------------------
+      # INITIAL SETUP:
+      # -------------------
+      - name: Check out oomph-lib repository
+        uses: actions/checkout@v4
 
       - name: Install dependencies
-        run: sudo apt-get install -y gfortran ninja-build libopenblas-dev libgmp3-dev libmpfr-dev libboost-all-dev python2
+        run: sudo apt-get install -y gfortran ninja-build python2
 
       - name: Install MPI dependencies (if required)
-        if: matrix.build_info.mpi == 'ON'
+        if: matrix.build_info.enable_mpi == 'ON'
         run: sudo apt-get install openmpi-bin libopenmpi-dev
 
+      - name: Get CMake v3.24
+        uses: lukka/get-cmake@latest
+        with:
+          cmakeVersion: "~3.24.0"
+
+      - name: Check CMake version
+        run: cmake --version
+
+      # -------------------
+      # THIRD-PARTY LIBS:
+      # -------------------
+      - name: Configure third-party libraries (just OpenBLAS)
+        if: matrix.build_third_party_libs == 'OFF'
+        run: |
+          cmake -G Ninja \
+            -DOOMPH_ENABLE_MPI=${{ matrix.build_info.enable_mpi }} \
+            -DOOMPH_BUILD_OPENBLAS=ON \
+            -DOOMPH_BUILD_CGAL=OFF \
+            -DOOMPH_BUILD_MUMPS=OFF \
+            -DOOMPH_BUILD_HYPRE=OFF \
+            -DOOMPH_BUILD_TRILINOS=OFF \
+            -DOOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTS=ON \
+            -B build
+        working-directory: ./external_distributions/
+
+      - name: Configure third-party libraries (all libraries)
+        if: matrix.build_third_party_libs == 'ON'
+        run: |
+          cmake -G Ninja \
+            -DOOMPH_ENABLE_MPI=${{ matrix.build_info.enable_mpi }} \
+            -DOOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTS=ON \
+            -B build
+        working-directory: ./external_distributions/
+
+      - name: Build third-party libraries
+        run: cmake --build build
+        working-directory: ./external_distributions/
+
+      - name: Upload third-party libraries build logs
+        uses: actions/upload-artifact@v3
+        with:
+          name: third_party_build_logs-${{ runner.os }}-MPI_${{ matrix.build_info.enable_mpi }}
+          path: ./external_distributions/build/logs
+
+      # -------------------
+      # BUILD MAIN PROJECT:
+      # -------------------
       - name: Configure
-        run: cmake --preset ${{ matrix.build_info.preset }} -B build
+        run: cmake --preset ${{ matrix.build_info.preset }} $(cat external_distributions/build/cmake_flags_for_oomph_lib.txt) -B build
 
       - name: Build
         run: cmake --build build
@@ -42,6 +111,9 @@ jobs:
       - name: Install
         run: cmake --install build
 
+      # -------------------
+      # BASIC SELF-TESTS:
+      # -------------------
       - name: Configure basic self-tests
         run: cmake -G Ninja -S self_test -B self_test/build --log-level=VERBOSE
 
@@ -50,6 +122,9 @@ jobs:
         run: ctest --preset ci --test-dir self_test/build -j $(nproc)
         continue-on-error: true
 
+      # -------------------
+      # DEMO DRIVERS:
+      # -------------------
       - name: Configure demo drivers
         run: cmake -G Ninja -S demo_drivers -B demo_drivers/build --log-level=VERBOSE
 
@@ -58,10 +133,13 @@ jobs:
         run: ctest --preset ci --test-dir demo_drivers/build -j $(nproc)
         continue-on-error: true
 
+      # -------------------
+      # UPLOAD STUFF:
+      # -------------------
       - name: Upload validation log file
         uses: actions/upload-artifact@v3
         with:
-          name: validation-${{ runner.os }}-MPI_${{ matrix.build_info.mpi }}.log
+          name: validation-${{ runner.os }}-THIRD_PARTY_LIBS_${{ matrix.build_third_party_libs }}-MPI_${{ matrix.build_info.enable_mpi }}.log
           path: ./validation.log
 
       - name: Propagate CTest test status

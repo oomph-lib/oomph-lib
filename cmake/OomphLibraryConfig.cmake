@@ -183,8 +183,7 @@ function(oomph_library_config)
   endif()
 
   if(APPLE)
-    target_link_options(${LIBNAME} ${LINK_TYPE} -Wl,-no_compact_unwind
-                        -Wl,-keep_dwarf_unwind)
+    target_link_options(${LIBNAME} ${LINK_TYPE} -Wl,-no_compact_unwind)
   endif()
 
   # ----------------------------------------------------------------------------

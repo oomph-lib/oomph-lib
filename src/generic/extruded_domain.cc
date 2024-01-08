@@ -99,7 +99,7 @@ namespace oomph
       unsigned n_pts=20;
 
       // Create the file name
-      sprintf(filename,"RESLT/extruded_element%i.dat",i);
+      snprintf(filename, sizeof(filename), "RESLT/extruded_element%i.dat",i);
 
       // Open a file with the created filename
       some_file.open(filename);

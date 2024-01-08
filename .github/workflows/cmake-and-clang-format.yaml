@@ -13,24 +13,30 @@ on:
   push:
     branches-ignore:
       - main
+    paths:
+      # We only need to run this workflow if we edited the sources
+      - ".github/workflows/cmake-and-clang-format.yaml"
+      - "src/**.h"
+      - "src/**.cc"
+      - "src/**.tpp"
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       # Format all files in the src/ directory except cfortran.h, lapack_qz.h,
       # superlu.c, superlu_dist.c, which sit in the src/generic/ subdirectory.
       - name: Format oomph-lib sources
-        uses: puneetmatharu/clang-format-lint-action@v0.13
+        uses: puneetmatharu/clang-format-lint-action@v0.17
         with:
           files: ^(src)\/(?!.*(cfortran|lapack_qz))(.+)\.(h|hpp|cc|cpp|tpp)$
-          clangFormatVersion: 12
+          clangFormatVersion: 16.0.3
           style: file
           inplace: True
 
-      - uses: stefanzweifel/git-auto-commit-action@v4
+      - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_user_name: clang-format-bot
           commit_message: "Automated commit of clang-format CI changes."
@@ -42,7 +48,7 @@ jobs:
           args: --config-files .cmake-format.py --in-place
 
       - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_user_name: cmake-format-bot
           commit_message: "Automated commit of cmake-format CI changes."

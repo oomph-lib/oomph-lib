@@ -413,7 +413,7 @@ void ConvectionProblem<NST_ELEMENT,AD_ELEMENT>::doc_solution()
  unsigned npts=5;
 
  // Output Navier-Stokes solution
- sprintf(filename,"%s/fluid_soln%i_on_proc%i.dat",
+ snprintf(filename, sizeof(filename), "%s/fluid_soln%i_on_proc%i.dat",
          Doc_info.directory().c_str(),
          Doc_info.number(),
          this->communicator_pt()->my_rank());
@@ -422,7 +422,7 @@ void ConvectionProblem<NST_ELEMENT,AD_ELEMENT>::doc_solution()
  some_file.close();
 
  // Output advection diffusion solution
- sprintf(filename,"%s/temperature_soln%i_on_proc%i.dat",
+ snprintf(filename, sizeof(filename), "%s/temperature_soln%i_on_proc%i.dat",
          Doc_info.directory().c_str(),
          Doc_info.number(),
          this->communicator_pt()->my_rank());
@@ -451,7 +451,7 @@ int main(int argc, char **argv)
  // Define processor-labeled output file for all on-screen stuff
  std::ofstream output_stream;
  char filename[100];
- sprintf(filename,"OUTPUT.%i",MPI_Helpers::communicator_pt()->my_rank());
+ snprintf(filename, sizeof(filename), "OUTPUT.%i",MPI_Helpers::communicator_pt()->my_rank());
  output_stream.open(filename);
  oomph_info.stream_pt() = &output_stream;
  OomphLibWarning::set_stream_pt(&output_stream);
@@ -515,12 +515,12 @@ int main(int argc, char **argv)
    if (atoi(argv[2])==2)
     {
      oomph_info << "Using connected partitioning" << std::endl;
-     sprintf(filename,"multi_domain_boussinesq_partition_2.dat");
+     snprintf(filename, sizeof(filename), "multi_domain_boussinesq_partition_2.dat");
     }
    else
     {
      oomph_info << "Giving a mesh to each processor" << std::endl;
-     sprintf(filename,"multi_domain_boussinesq_partition.dat");
+     snprintf(filename, sizeof(filename), "multi_domain_boussinesq_partition.dat");
     }
    input_file.open(filename);
    oomph_info << "Opened: " << filename << std::endl;
@@ -550,7 +550,7 @@ int main(int argc, char **argv)
                                              mesh_doc_info,report_stats);
 
    // Write used partition to disk
-   sprintf(filename,"RESLT/partitioning.dat");
+   snprintf(filename, sizeof(filename), "RESLT/partitioning.dat");
    output_file.open(filename);
    unsigned n_used=used_element_partition.size();
    output_file << n_used << std::endl;

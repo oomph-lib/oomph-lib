@@ -2007,7 +2007,7 @@ void NavierStokesProblem<ELEMENT>::doc_solution(const bool& doc_spacetime_soln)
   // Output solution:
   //-----------------
   // Create the filename suffix
-  sprintf(filename,"%s/soln%i",
+  snprintf(filename, sizeof(filename), "%s/soln%i",
           GlobalParameters::Doc_info.directory().c_str(),
           GlobalParameters::Doc_info.number());
 

@@ -1160,7 +1160,7 @@ void BubbleInChannelProblem<ELEMENT>::doc_solution(const std::string& comment)
  
  ofstream some_file;
  char filename[100];
- sprintf(filename,"%s/soln%i.dat",
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",
          Problem_Parameter::Doc_info.directory().c_str(),
          Problem_Parameter::Doc_info.number());
 
@@ -1197,7 +1197,7 @@ void BubbleInChannelProblem<ELEMENT>::doc_solution(const std::string& comment)
 
 
  // Output boundaries
- sprintf(filename,"%s/boundaries%i.dat",
+ snprintf(filename, sizeof(filename), "%s/boundaries%i.dat",
          Problem_Parameter::Doc_info.directory().c_str(),
          Problem_Parameter::Doc_info.number());
  some_file.open(filename);

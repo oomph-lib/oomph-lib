@@ -266,7 +266,7 @@ void ThreeDPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  
  // Output boundaries
  //------------------
- sprintf(filename,"%s/boundaries%i_on_proc%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/boundaries%i_on_proc%i.dat",doc_info.directory().c_str(),
          doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  mesh_pt()->output_boundaries(some_file);
@@ -274,7 +274,7 @@ void ThreeDPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  
  // Output solution 
  //-----------------
- sprintf(filename,"%s/soln%i_on_proc%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i_on_proc%i.dat",doc_info.directory().c_str(),
          doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
@@ -283,7 +283,7 @@ void ThreeDPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  
 //  // Output exact solution 
 //  //----------------------
-//  sprintf(filename,"%s/exact_soln%i.dat",doc_info.directory().c_str(),
+//  snprintf(filename, sizeof(filename), "%s/exact_soln%i.dat",doc_info.directory().c_str(),
 //          doc_info.number());
 //  some_file.open(filename);
 //  mesh_pt()->output_fct(some_file,npts,TanhSolnForPoisson::get_exact_u); 
@@ -400,7 +400,7 @@ void parallel_test(const unsigned& n_refine_first,
    // Get partition from file
    unsigned n_partition=problem_pt->mesh_pt()->nelement();
    Vector<unsigned> element_partition(n_partition,0);
-   sprintf(filename,"three_d_mesh_dist_partition.dat");
+   snprintf(filename, sizeof(filename), "three_d_mesh_dist_partition.dat");
    input_file.open(filename);
    std::string input_string;
    for (unsigned e=0;e<n_partition;e++)
@@ -414,7 +414,7 @@ void parallel_test(const unsigned& n_refine_first,
    problem_pt->distribute(element_partition,doc_info,report_stats);
 //                           out_element_partition);
 
-//    sprintf(filename,"out_three_d_mesh_dist_partition.dat");
+//    snprintf(filename, sizeof(filename), "out_three_d_mesh_dist_partition.dat");
 //    output_file.open(filename);
 //    for (unsigned e=0;e<n_partition;e++)
 //     {

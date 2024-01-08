@@ -688,14 +688,14 @@ void FSIChannelWithLeafletProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
  npts=5;
 
  // Output fluid solution
- sprintf(filename,"%s/soln%i_on_proc%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i_on_proc%i.dat",doc_info.directory().c_str(),
          doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  Fluid_mesh_pt->output(some_file,npts);
  some_file.close();
 
  // Output wall solution
- sprintf(filename,"%s/wall_soln%i_on_proc%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/wall_soln%i_on_proc%i.dat",doc_info.directory().c_str(),
          doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  Wall_mesh_pt->output(some_file,npts);
@@ -730,7 +730,7 @@ void FSIChannelWithLeafletProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
  // Output fluid elements on fluid mesh boundary 4 (associated with
  // the "front")
  unsigned bound=4;
- sprintf(filename,"%s/fluid_boundary_elements_front_%i_on_proc%i.dat",
+ snprintf(filename, sizeof(filename), "%s/fluid_boundary_elements_front_%i_on_proc%i.dat",
          doc_info.directory().c_str(),
          doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
@@ -746,7 +746,7 @@ void FSIChannelWithLeafletProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
  // Output fluid elements on fluid mesh boundary 5 (associated with
  // the "back")
  bound=5;
- sprintf(filename,"%s/fluid_boundary_elements_back_%i_on_proc%i.dat",
+ snprintf(filename, sizeof(filename), "%s/fluid_boundary_elements_back_%i_on_proc%i.dat",
          doc_info.directory().c_str(),
          doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
@@ -760,7 +760,7 @@ void FSIChannelWithLeafletProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
 
 
  // Output normal vector on wall elements
- sprintf(filename,"%s/wall_normal_%i_on_proc%i.dat",
+ snprintf(filename, sizeof(filename), "%s/wall_normal_%i_on_proc%i.dat",
          doc_info.directory().c_str(),
          doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
@@ -820,7 +820,7 @@ int main(int argc, char* argv[])
  // Define processor-labeled output file for all on-screen stuff
  std::ofstream output_stream;
  char filename[1000];
- sprintf(filename,"OUTPUT.%i",
+ snprintf(filename, sizeof(filename), "OUTPUT.%i",
          MPI_Helpers::communicator_pt()->my_rank());
  output_stream.open(filename);
  oomph_info.stream_pt() = &output_stream;
@@ -860,7 +860,7 @@ int main(int argc, char* argv[])
  ofstream trace;
  if (problem.communicator_pt()->my_rank()==0)
   {
-   sprintf(filename,"%s/trace.dat",doc_info.directory().c_str());
+   snprintf(filename, sizeof(filename), "%s/trace.dat",doc_info.directory().c_str());
    trace.open(filename);
   }
 
@@ -902,7 +902,7 @@ int main(int argc, char* argv[])
    Vector<unsigned> in_element_partition(n_partition,0);
 
    // Get partition from file
-   sprintf(filename,"fsi_channel_with_leaflet_partition.dat");
+   snprintf(filename, sizeof(filename), "fsi_channel_with_leaflet_partition.dat");
    input_file.open(filename);
    std::string input_string;
    for (unsigned e=0;e<n_partition;e++)

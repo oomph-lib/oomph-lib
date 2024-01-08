@@ -40,6 +40,12 @@
 #include "Vector.h"
 #include "problem.h"
 
+// for the new METIS API, need to use symbols defined in the standard header
+// which aren't available in the current frozen (old) version of METIS
+// Version 3 will (presumably) have this header in the include path as standard
+#ifndef OOMPH_USE_OLD_SUPERLU_DIST
+#include "oomph_metis_from_parmetis_4.0.3/metis.h"
+#endif
 
 namespace oomph
 {
@@ -48,19 +54,25 @@ namespace oomph
   //==================================================================
   extern "C"
   {
-    /// Metis graph partitioning function
+#ifdef OOMPH_USE_OLD_SUPERLU_DIST
     void METIS_PartGraphKway(
       int*, int*, int*, int*, int*, int*, int*, int*, int*, int*, int*);
-
-#ifndef OOMPH_TRANSITION_TO_VERSION_3
-    // function from old API which no longer exists in METIS 5.1,
-    // remove this moving to oomph-lib version 3
-
-    /// Metis graph partitioning function -- decomposes
-    /// nodal graph based on minimum communication volume
-    void METIS_PartGraphVKway(
-      int*, int*, int*, int*, int*, int*, int*, int*, int*, int*, int*);
-
+#else
+    /// Metis graph partitioning function
+    METIS_API(int)
+    METIS_PartGraphKway(idx_t*,
+                        idx_t*,
+                        idx_t*,
+                        idx_t*,
+                        idx_t*,
+                        idx_t*,
+                        idx_t*,
+                        idx_t*,
+                        real_t*,
+                        real_t*,
+                        idx_t*,
+                        idx_t*,
+                        idx_t*);
 #endif
   }
 

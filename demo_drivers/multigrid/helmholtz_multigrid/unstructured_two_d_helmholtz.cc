@@ -923,7 +923,7 @@ void PMLHelmholtzMGProblem<ELEMENT>::doc_solution()
 
  // Output solution
  //-----------------
- sprintf(filename,"%s/soln%i.dat",
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",
 	 GlobalParameters::Doc_info.directory().c_str(),
          GlobalParameters::Doc_info.number());
  some_file.open(filename);
@@ -932,7 +932,7 @@ void PMLHelmholtzMGProblem<ELEMENT>::doc_solution()
 
  // Ouput exact solution
  //---------------------
- sprintf(filename,"%s/exact_soln%i.dat",
+ snprintf(filename, sizeof(filename), "%s/exact_soln%i.dat",
 	 GlobalParameters::Doc_info.directory().c_str(),
 	 GlobalParameters::Doc_info.number());
  some_file.open(filename);
@@ -944,7 +944,7 @@ void PMLHelmholtzMGProblem<ELEMENT>::doc_solution()
  {  
   // Output solution within pml domains
   //-----------------------------------
-  sprintf(filename,"%s/pml_soln%i.dat",
+  snprintf(filename, sizeof(filename), "%s/pml_soln%i.dat",
 	  GlobalParameters::Doc_info.directory().c_str(),
 	  GlobalParameters::Doc_info.number());
   some_file.open(filename);
@@ -961,7 +961,7 @@ void PMLHelmholtzMGProblem<ELEMENT>::doc_solution()
 
  // Output coarse solution
  //-----------------------
- sprintf(filename,"%s/coarse_soln%i.dat",
+ snprintf(filename, sizeof(filename), "%s/coarse_soln%i.dat",
 	 GlobalParameters::Doc_info.directory().c_str(),
          GlobalParameters::Doc_info.number());
  some_file.open(filename);
@@ -973,7 +973,7 @@ void PMLHelmholtzMGProblem<ELEMENT>::doc_solution()
  {  
   // Output coarse solution within pml domains
   //------------------------------------------
-  sprintf(filename,"%s/coarse_pml_soln%i.dat",
+  snprintf(filename, sizeof(filename), "%s/coarse_pml_soln%i.dat",
 	  GlobalParameters::Doc_info.directory().c_str(),
 	  GlobalParameters::Doc_info.number());
   some_file.open(filename);
@@ -994,7 +994,7 @@ void PMLHelmholtzMGProblem<ELEMENT>::doc_solution()
  // Doc error and solution norm
  //---------------------------- 
  double error,norm;
- sprintf(filename,"%s/error%i.dat",
+ snprintf(filename, sizeof(filename), "%s/error%i.dat",
 	 GlobalParameters::Doc_info.directory().c_str(),
          GlobalParameters::Doc_info.number());
  some_file.open(filename);

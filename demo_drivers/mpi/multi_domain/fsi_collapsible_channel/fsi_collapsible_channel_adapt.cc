@@ -716,7 +716,7 @@ void FSICollapsibleChannelProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
  npts=5; 
 
  // Output fluid solution 
- sprintf(filename,"%s/new_soln%i_on_proc%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/new_soln%i_on_proc%i.dat",doc_info.directory().c_str(),
          doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  bulk_mesh_pt()->output(some_file,npts);
@@ -724,7 +724,7 @@ void FSICollapsibleChannelProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
 
  // Document the wall shape
  // NB the wall is on every processor so this is somewhat unnecessary I guess
- sprintf(filename,"%s/new_beam%i_on_proc%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/new_beam%i_on_proc%i.dat",doc_info.directory().c_str(),
          doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  wall_mesh_pt()->output(some_file,npts);
@@ -736,7 +736,7 @@ void FSICollapsibleChannelProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
  unsigned nsteps=time_stepper_pt(1)->nprev_values();
  for (unsigned t=0;t<=nsteps;t++)
   {     
-   sprintf(filename,"%s/new_wall%i-%i_on_proc%i.dat",
+   snprintf(filename, sizeof(filename), "%s/new_wall%i-%i_on_proc%i.dat",
            doc_info.directory().c_str(),
            doc_info.number(),t,this->communicator_pt()->my_rank());
    some_file.open(filename);
@@ -987,7 +987,7 @@ int main(int argc, char* argv[])
  // Define processor-labeled output file for all on-screen stuff
  std::ofstream output_stream;
  char filename[100];
- sprintf(filename,"OUTPUT.%i",MPI_Helpers::communicator_pt()->my_rank());
+ snprintf(filename, sizeof(filename), "OUTPUT.%i",MPI_Helpers::communicator_pt()->my_rank());
  output_stream.open(filename);
  oomph_info.stream_pt() = &output_stream;
  OomphLibWarning::set_stream_pt(&output_stream);
@@ -1083,7 +1083,7 @@ int main(int argc, char* argv[])
  
  // Open a trace file 
  ofstream trace_file;
- sprintf(filename,"%s/trace.dat",doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/trace.dat",doc_info.directory().c_str());
  trace_file.open(filename);
 
  // Output the initial condition
@@ -1115,7 +1115,7 @@ int main(int argc, char* argv[])
 
  // Get partition from file
  Vector<unsigned> element_partition(n_partition,0);
- sprintf(filename,"fsi_collapsible_channel_partition.dat");
+ snprintf(filename, sizeof(filename), "fsi_collapsible_channel_partition.dat");
  input_file.open(filename);
  std::string input_string;
  for (unsigned e=0;e<n_partition;e++)

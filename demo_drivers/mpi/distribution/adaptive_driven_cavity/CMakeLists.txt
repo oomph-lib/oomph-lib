@@ -34,7 +34,7 @@ oomph_add_test(
 set_tests_properties(mpi.adaptive_driven_cavity
                      PROPERTIES PROCESSORS ${OOMPH_MPI_NUM_PROC})
 if(APPLE)
-  set_tests_properties(mpi.adaptive_driven_cavity PROPERTIES DISABLED TRUE)
+  set_tests_properties(mpi.adaptive_driven_cavity PROPERTIES DISABLED FALSE)
 endif()
 
 message(VERBOSE "Leaving adaptive_driven_cavity subdirectory")

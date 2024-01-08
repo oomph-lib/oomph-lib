@@ -171,7 +171,7 @@ public:
   // Open a trace file
   ofstream trace_file;
   char filename[100];   
-  sprintf(filename,"%s/trace.dat",doc_info.directory().c_str());
+  snprintf(filename, sizeof(filename), "%s/trace.dat",doc_info.directory().c_str());
   trace_file.open(filename);
 
 
@@ -281,7 +281,7 @@ public:
 //   unsigned npts;
 //   npts=5;
   
-//   sprintf(filename,"%s/navier_stokes_soln%i.dat",
+//   snprintf(filename, sizeof(filename), "%s/navier_stokes_soln%i.dat",
 //           doc_info.directory().c_str(),
 //           doc_info.number());
 //   some_file.open(filename);
@@ -326,7 +326,7 @@ public:
      doc_solution(doc_info,trace_file,xi_hi[0]);
 
 //     // Output Navier Stokes "solution"
-//     sprintf(filename,"%s/navier_stokes_soln%i.dat",
+//     snprintf(filename, sizeof(filename), "%s/navier_stokes_soln%i.dat",
 //             doc_info.directory().c_str(),
 //             doc_info.number());
 //     some_file.open(filename);
@@ -370,7 +370,7 @@ public:
   // Open a trace file
   ofstream trace_file;
   char filename[100];   
-  sprintf(filename,"%s/trace.dat",doc_info.directory().c_str());
+  snprintf(filename, sizeof(filename), "%s/trace.dat",doc_info.directory().c_str());
   trace_file.open(filename);
 
   // Choose simulation interval and timestep
@@ -504,7 +504,7 @@ void run_prescribed_flux()
  // Open a trace file
  ofstream trace_file;
  char filename[100];   
- sprintf(filename,"%s/trace.dat",doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/trace.dat",doc_info.directory().c_str());
  trace_file.open(filename);
 
  // Choose simulation interval and timestep
@@ -626,7 +626,7 @@ void run_prescribed_pressure_gradient()
  // Open a trace file
  ofstream trace_file;
  char filename[100];   
- sprintf(filename,"%s/trace.dat",doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/trace.dat",doc_info.directory().c_str());
  trace_file.open(filename);
 
  // Choose simulation interval and timestep

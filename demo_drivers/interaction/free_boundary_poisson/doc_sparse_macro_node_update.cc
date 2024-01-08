@@ -75,7 +75,7 @@ int main()
 
  // Output initial mesh
  unsigned count=0;
- sprintf(filename,"RESLT/soln%i.dat",count);
+ snprintf(filename, sizeof(filename), "RESLT/soln%i.dat",count);
  some_file.open(filename);
  Fish_mesh_pt->output(some_file,npts);
  some_file.close();
@@ -96,7 +96,7 @@ int main()
    Fish_mesh_pt->node_pt(i)->node_update();
 
    // Doc mesh
-   sprintf(filename,"RESLT/soln%i.dat",count);
+   snprintf(filename, sizeof(filename), "RESLT/soln%i.dat",count);
    some_file.open(filename);
    Fish_mesh_pt->output(some_file,npts);
    some_file.close();

@@ -254,7 +254,7 @@ void RefineableDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
 
  {
-  sprintf(filename,"%s/nodes%i_on_proc%i.dat",doc_info.directory().c_str(),
+  snprintf(filename, sizeof(filename), "%s/nodes%i_on_proc%i.dat",doc_info.directory().c_str(),
           doc_info.number(),this->communicator_pt()->my_rank());
   some_file.open(filename);
   unsigned nnod=mesh_pt()->nnode();
@@ -282,7 +282,7 @@ void RefineableDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
         
 
  // Output solution 
- sprintf(filename,"%s/soln%i_on_proc%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i_on_proc%i.dat",doc_info.directory().c_str(),
          doc_info.number(),my_rank);
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);

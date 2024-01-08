@@ -261,7 +261,7 @@ void PoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
 
  // Doc local node numbering
  //-------------------------
- sprintf(filename,"%s/node_numbering%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/node_numbering%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  FiniteElement* el_pt=mesh_pt()->finite_element_pt(0);
@@ -279,7 +279,7 @@ void PoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
 
  // Output boundaries
  //------------------
- sprintf(filename,"%s/boundaries%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/boundaries%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  mesh_pt()->output_boundaries(some_file);
@@ -288,7 +288,7 @@ void PoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
 
  // Output solution
  //----------------
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  mesh_pt()->output(some_file,nplot);
@@ -297,7 +297,7 @@ void PoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
 
  // Output exact solution 
  //----------------------
- sprintf(filename,"%s/exact_soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/exact_soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  mesh_pt()->output_fct(some_file,nplot,TanhSolnForPoisson::get_exact_u); 
@@ -306,7 +306,7 @@ void PoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
  // Doc error
  //----------
  double error,norm;
- sprintf(filename,"%s/error%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/error%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  mesh_pt()->compute_error(some_file,TanhSolnForPoisson::get_exact_u,
@@ -366,7 +366,7 @@ void PoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
    el_pt->node_pt(9)->x(1)=0.5;
    el_pt->node_pt(9)->x(2)=0.5;
    
-   sprintf(filename,"RESLT/nodes0.dat");
+   snprintf(filename, sizeof(filename), "RESLT/nodes0.dat");
    some_file.open(filename);
    unsigned nnod=el_pt->nnode();
    for (unsigned j=0;j<nnod;j++)
@@ -378,7 +378,7 @@ void PoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
     }
    some_file.close();
    
-   sprintf(filename,"RESLT/element0.dat");
+   snprintf(filename, sizeof(filename), "RESLT/element0.dat");
    some_file.open(filename);
    el_pt->output(some_file,nplot);
    some_file.close();
@@ -387,7 +387,7 @@ void PoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
    Vector<double> s(3);
    Vector<double> s_orig(3);
    
-   sprintf(filename,"RESLT/sample_points_in_element0.dat");
+   snprintf(filename, sizeof(filename), "RESLT/sample_points_in_element0.dat");
    some_file.open(filename);
    
    // Tecplot header info

@@ -12,7 +12,7 @@
 #                    DEPENDS_ON            <executables/targets-required-by-test>
 #                    LABELS                <string-list-of-labels>
 #                    COMMAND               <command-to-run-test>
-#                    [TEST_FILES            <files-required-by-test>]
+#                    [TEST_FILES           <files-required-by-test>]
 #                    [SILENCE_MISSING_VALIDATA_WARNING]
 #                    [NO_VALIDATE_SH])
 #
@@ -134,7 +134,8 @@ function(oomph_add_test)
   # ----------------------------------------------------------------------------
   # Declare a copy_... target to copy the required files to the build directory
   if(NOT TARGET copy_${PATH_HASH})
-    add_custom_target(copy_${PATH_HASH} WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
+    add_custom_target(copy_${PATH_HASH} ALL
+                      WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
   endif()
 
   # Flag used to control whether files are symlinked instead of copied; keeping
@@ -269,9 +270,6 @@ function(oomph_add_test)
   # user runs "ninja <TEST-NAME>", it will cause the test dependencies to get
   # built and the validata files/validate.sh script to get placed in the build
   # directory
-  #
-  # FIXME: Talk to MH; decide whether to just build and copy validation files or
-  # to run the validate.sh script too...
   add_custom_target(${TEST_NAME})
   add_dependencies(${TEST_NAME} copy_${PATH_HASH} build_targets_${PATH_HASH}
                    clean_validation_dir_${PATH_HASH})

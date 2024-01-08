@@ -333,7 +333,7 @@ void RefineableConvectionProblem<ELEMENT>::doc_solution()
 
  // Output solution 
  //-----------------
- sprintf(filename,"%s/soln%i_on_proc%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i_on_proc%i.dat",Doc_info.directory().c_str(),
          Doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
@@ -387,7 +387,7 @@ int main(int argc, char **argv)
 
    std::ifstream input_file;
    char filename[100];
-   sprintf(filename,"refineable_b_convection_partition.dat");
+   snprintf(filename, sizeof(filename), "refineable_b_convection_partition.dat");
    input_file.open(filename);
    std::string input_string;
    for (unsigned e=0;e<n_element;e++)

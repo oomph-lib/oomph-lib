@@ -91,6 +91,11 @@ oomph_library_config(
   HEADERS ${HEADERS}
   SOURCES ${SOURCES})
 
+# Silence the (annoying) warnings produced by this library
+include(OomphTargetSilenceWarnings)
+oomph_target_silence_warnings(TARGET ${LIBNAME}
+                              C_COMPILE_FLAGS -Wno-deprecated-non-prototype)
+
 if(Z_HAVE_UNISTD_H)
   target_compile_definitions(${LIBNAME} PRIVATE Z_HAVE_UNISTD_H)
 endif()

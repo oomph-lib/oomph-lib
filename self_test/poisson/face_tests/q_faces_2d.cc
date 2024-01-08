@@ -189,7 +189,7 @@ QFaceTestProblem(const unsigned& h_power) : H_power(h_power)
  string filestem = FileStem<ELEMENT>()();
  //Output for the errors on each face
  char error_file[100];
- sprintf(error_file,"%s_errors.dat",filestem.c_str());
+ snprintf(error_file, sizeof(error_file), "%s_errors.dat",filestem.c_str());
  ofstream output_error(error_file);
  
  //Construct face elements on all the boundaries
@@ -223,7 +223,7 @@ QFaceTestProblem(const unsigned& h_power) : H_power(h_power)
    Vector<double> x(2), n(2), N(2);
    //Open a filename with a unique name for each different element type
    char filename[100];
-   sprintf(filename,"%s_normals%i.dat",filestem.c_str(),b);
+   snprintf(filename, sizeof(filename), "%s_normals%i.dat",filestem.c_str(),b);
    ofstream output(filename);
 
    //Loop over the face elements

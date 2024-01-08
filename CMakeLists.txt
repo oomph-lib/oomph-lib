@@ -34,7 +34,7 @@
 # format CMake files. Do not delete them.
 # ==============================================================================
 # cmake-format: on
-cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
 project(
   oomphlib
   DESCRIPTION "A finite-element library for simulating multi-physics problems."
@@ -47,10 +47,9 @@ project(
 # Specify the location of non-standard CMake modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/")
 
-# TODO: Will likely need to move to C++17 when Trilinos v14.0 is released...
-
 # Specify the C++ standard
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_C_STANDARD 17)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 # Build in Release (fully optimised) mode by default
@@ -59,7 +58,7 @@ if(NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
 endif()
 
 # Sort out config files
-include(OomphConfigureProject)
+include(OomphConfigureCMakeInfoForProject)
 
 # Select level of verbosity (e.g. STATUS, VERBOSE, etc.). Only valid from CMake
 # 3.17 onwards. For earlier CMake versions, setting this variable has no effect
@@ -75,16 +74,17 @@ find_package(Python3 REQUIRED)
 # cmake-format: off
 include(OomphCustomOptions)
 
-# CMake-only options; doesn't influence the build of oomph-lib
-option(OOMPH_PRINT_SETTINGS_AFTER_INSTALL "Display the oomph-lib settings at the end of the install step" OFF)
+# Regular CMake option; doesn't influence the build so we won't print its value at the end
+option(OOMPH_PRINT_SETTINGS_AFTER_INSTALL "Display the oomph-lib settings at the end of the install step" ON)
+
+# FIXME: Delete
+oomph_option(OOMPH_USE_OLD_SUPERLU_DIST "Revert to SuperLU Dist 3.0" OFF)
 
 # General options
 oomph_option(OOMPH_DONT_SILENCE_USELESS_WARNINGS "Display (harmless) warnings from external_src/ and src/ that are silenced" OFF)
 oomph_option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" OFF)
 oomph_option(OOMPH_ENABLE_PARANOID "Enable the PARANOID flag in Debug" OFF)
 oomph_option(OOMPH_ENABLE_RANGE_CHECKING "Enable RANGE_CHECKING flag in Debug" OFF)
-oomph_option(OOMPH_TRANSITION_TO_VERSION_3 "Try to build with up-to-date external sources" OFF)
-oomph_option(OOMPH_USE_DEPRECATED_SUPERLU "Use oomph-lib's deprecated version of SuperLU (4.3)" OFF)
 
 # Fine-grained control of build of external_srcs.
 # FIXME: Make sure the SUPPRESS variables below actually work
@@ -92,27 +92,48 @@ oomph_option(OOMPH_USE_DEPRECATED_SUPERLU "Use oomph-lib's deprecated version of
 oomph_option(OOMPH_SUPPRESS_TRIANGLE_LIB "Suppress build of oomph-lib's copy of the triangle library" OFF)
 oomph_option(OOMPH_SUPPRESS_TETGEN_LIB "Suppress build of oomph-lib's copy of the tetgen library" OFF)
 
-# FIXME: Override OOMPH_WANT_<LIB> variables if OOMPH_USE_<LIB>_FROM is specified
-
-# Third-party libraries. [WORK IN PROGRESS.]
-oomph_option(OOMPH_WANT_CGAL "Do we want to build the CGAL library?" OFF)
-oomph_option(OOMPH_WANT_HYPRE "Use Hypre library" OFF)
-oomph_option(OOMPH_WANT_MUMPS "Use MUMPS library" OFF)
-oomph_option(OOMPH_WANT_TRILINOS "Use Trilinos library" OFF)
-oomph_option(OOMPH_WANT_NLOHMANN_JSON "Use the nlohmann JSON library" OFF)
-
 # Paths to packages that the user has installed themselves
-oomph_path_option(OOMPH_USE_MPI_FROM "Path to MPI installation" "${OOMPH_USE_MPI_FROM}")
-oomph_path_option(OOMPH_USE_GMSH_FROM "Path to 'gmsh' executable" "${OOMPH_USE_GMSH_FROM}")
-oomph_path_option(OOMPH_USE_BLAS_FROM "Path to BLAS installation" "${OOMPH_USE_BLAS_FROM}")
-oomph_path_option(OOMPH_USE_LAPACK_FROM "Path to LAPACK installation" "${OOMPH_USE_LAPACK_FROM}")
-oomph_path_option(OOMPH_USE_GMP_FROM "Path to GMP installation" "${OOMPH_USE_GMP_FROM}")
-oomph_path_option(OOMPH_USE_MPFR_FROM "Path to MPFR installation" "${OOMPH_USE_MPFR_FROM}")
-oomph_path_option(OOMPH_USE_BOOST_FROM "Path to Boost installation" "${OOMPH_USE_BOOST_FROM}")
-oomph_path_option(OOMPH_USE_CGAL_FROM "Path to CGAL installation" "${OOMPH_USE_CGAL_FROM}")
-oomph_path_option(OOMPH_USE_MUMPS_FROM "Path to MUMPS installation" "${OOMPH_USE_MUMPS_FROM}")
-oomph_path_option(OOMPH_USE_HYPRE_FROM "Path to Hypre installation" "${OOMPH_USE_HYPRE_FROM}")
-oomph_path_option(OOMPH_USE_TRILINOS_FROM "Path to Trilinos installation" "${OOMPH_USE_TRILINOS_FROM}")
+oomph_path_option(
+  FLAG OOMPH_USE_OPENBLAS_FROM
+  DOCSTRING "Path to OpenBLAS installation."
+  REQUIRED
+)
+oomph_path_option(
+  FLAG OOMPH_USE_GMSH_FROM
+  DOCSTRING "Path to 'gmsh' executable"
+)
+oomph_path_option(
+  FLAG OOMPH_USE_MPI_FROM
+  DOCSTRING "Path to MPI installation"
+)
+oomph_path_option(
+  FLAG OOMPH_USE_GMP_FROM
+  DOCSTRING "Path to GMP installation"
+)
+oomph_path_option(
+  FLAG OOMPH_USE_MPFR_FROM
+  DOCSTRING "Path to MPFR installation"
+)
+oomph_path_option(
+  FLAG OOMPH_USE_BOOST_FROM
+  DOCSTRING "Path to Boost installation"
+)
+oomph_path_option(
+  FLAG OOMPH_USE_CGAL_FROM
+  DOCSTRING "Path to CGAL installation"
+)
+oomph_path_option(
+  FLAG OOMPH_USE_MUMPS_FROM
+  DOCSTRING "Path to MUMPS installation"
+)
+oomph_path_option(
+  FLAG OOMPH_USE_HYPRE_FROM
+  DOCSTRING "Path to Hypre installation"
+)
+oomph_path_option(
+  FLAG OOMPH_USE_TRILINOS_FROM
+  DOCSTRING "Path to Trilinos installation"
+)
 
 # cmake-format: on
 # -------------------------[ PROCESS SELECTED OPTIONS ]-------------------------
@@ -120,35 +141,14 @@ oomph_path_option(OOMPH_USE_TRILINOS_FROM "Path to Trilinos installation" "${OOM
 # C++ files only
 include(OomphAddCXXCompileDefinitions)
 
-# If OOMPH_USE_GMSH_FROM is the path to an executable, make sure it is a
-# program. If it's a directory, check that we can find 'gmsh' in the directory
-if(OOMPH_USE_GMSH_FROM)
-  if(NOT EXISTS "${OOMPH_USE_GMSH_FROM}")
-    message(
-      FATAL_ERROR
-        "You said that 'gmsh' can be found here:\n\t${OOMPH_USE_GMSH_FROM}\nbut this file/directory does not exist!"
-    )
+# FIXME: XCode 15.0 has a new linker implementation which breaks things; setting
+# this values tells CMake to revert to the old linker
+if(APPLE)
+  if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+    if(CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 15.0)
+      add_link_options("-Wl,-ld_classic")
+    endif()
   endif()
-
-  # Extract path components
-  set(OOMPH_GMSH_DIR ${OOMPH_USE_GMSH_FROM})
-  set(OOMPH_GMSH_PROGRAM)
-  if(NOT IS_DIRECTORY ${OOMPH_USE_GMSH_FROM})
-    cmake_path(GET OOMPH_USE_GMSH_FROM PARENT_PATH OOMPH_GMSH_DIR)
-    cmake_path(GET OOMPH_USE_GMSH_FROM STEM OOMPH_GMSH_PROGRAM)
-  endif()
-
-  # Search for a program;
-  #
-  # TODO: Add a 'VALIDATOR' argument to check that gmsh works
-  find_program(
-    OOMPH_GMSH_COMMAND
-    NAMES gmsh ${OOMPH_GMSH_PROGRAM}
-    PATHS ${OOMPH_GMSH_DIR} REQUIRED
-    NO_DEFAULT_PATH)
-
-  # Notify user
-  message(STATUS "Found 'gmsh' at: ${OOMPH_USE_GMSH_FROM}")
 endif()
 
 # Let CMake take care of the famous -fPIC flag
@@ -156,6 +156,19 @@ if(BUILD_SHARED_LIBS)
   set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 endif()
 
+# The user needs to provide at least v0.3.25 of OpenBLAS
+find_package(
+  OpenBLAS 0.3.25 REQUIRED
+  PATHS ${OOMPH_USE_OPENBLAS_FROM}
+  NO_DEFAULT_PATH)
+
+# Do we want to use Gmsh?
+if(OOMPH_USE_GMSH_FROM)
+  include(OomphFindGmsh)
+endif()
+
+# We silence several useless warnings but if you want to see them, enable the
+# OOMPH_DONT_SILENCE_USELESS_WARNINGS flag
 if(NOT OOMPH_DONT_SILENCE_USELESS_WARNINGS)
   include(OomphSilenceWarnings)
 endif()
@@ -163,14 +176,6 @@ endif()
 # Set up MPI functionality (see cmake/OomphMPI.cmake)
 if(OOMPH_ENABLE_MPI)
   include(OomphMPI)
-
-  # Sanity check
-  if(NOT OOMPH_MPI_NUM_PROC MATCHES "^[0-9]+$")
-    message(
-      FATAL_ERROR
-        "The flag 'OOMPH_MPI_NUM_PROC' must be set an integer, not ${OOMPH_MPI_NUM_PROC}!"
-    )
-  endif()
 endif()
 
 # Add PARANOID and RANGE_CHECKING for Debug configurations (ONLY!) if desired
@@ -182,57 +187,14 @@ if((OOMPH_ENABLE_PARANOID OR OOMPH_ENABLE_RANGE_CHECKING)
   )
 endif()
 
-# Enable flags
+# Only set the PARANOID or RANGE_CHECKING compiler definitions if building the
+# Debug configuration. It doesn't make sense to build with full optimisation and
+# to enable these flags
 if(OOMPH_ENABLE_PARANOID)
   oomph_add_cxx_compile_definitions($<$<CONFIG:DEBUG,>:PARANOID>)
 endif()
 if(OOMPH_ENABLE_RANGE_CHECKING)
   oomph_add_cxx_compile_definitions($<$<CONFIG:DEBUG,>:RANGE_CHECKING>)
-endif()
-
-# If we're using up-to-date external sources/dists then make sure we have a
-# preprocessor definition to handle changes that need to be made from within
-# source files (e.g. API changes)
-if(OOMPH_TRANSITION_TO_VERSION_3)
-  oomph_add_cxx_compile_definitions(OOMPH_TRANSITION_TO_VERSION_3)
-endif()
-if(OOMPH_USE_DEPRECATED_SUPERLU)
-  oomph_add_cxx_compile_definitions(OOMPH_USE_DEPRECATED_SUPERLU)
-endif()
-
-if(BLA_VENDOR
-   OR OOMPH_USE_BLAS_FROM
-   OR OOMPH_USE_LAPACK_FROM)
-  # Temporarily set CMAKE_PREFIX_PATH to the values of OOMPH_USE_BLAS_FROM and
-  # OOMPH_USE_LAPACK_FROM if either is provided
-  if(OOMPH_USE_BLAS_FROM OR OOMPH_USE_LAPACK_FROM)
-    set(BACKUP_CMAKE_PREFIX_PATH "${CMAKE_PREFIX_PATH}" CACHE INTERNAL "")
-    set(CMAKE_PREFIX_PATH "${OOMPH_USE_BLAS_FROM};${OOMPH_USE_LAPACK_FROM}"
-        CACHE INTERNAL "" FORCE)
-  endif()
-
-  # Search for the BLAS/LAPACK libraries
-  find_package(BLAS REQUIRED)
-  find_package(LAPACK REQUIRED)
-
-  # Reset the value of CMAKE_PREFIX_PATH
-  if(OOMPH_USE_BLAS_FROM OR OOMPH_USE_LAPACK_FROM)
-    set(CMAKE_PREFIX_PATH "${BACKUP_CMAKE_PREFIX_PATH}" CACHE INTERNAL "" FORCE)
-  endif()
-
-  # Store a list of directories containing the BLAS libraries
-  set(BLAS_DIRS)
-  foreach(BLAS_LIBRARY IN LISTS BLAS_LIBRARIES)
-    cmake_path(GET BLAS_LIBRARY PARENT_PATH BLAS_DIR)
-    list(APPEND BLAS_DIRS ${BLAS_DIR})
-  endforeach()
-
-  # Store a list of directories containing the LAPACK libraries
-  set(LAPACK_DIRS)
-  foreach(LAPACK_LIBRARY IN LISTS LAPACK_LIBRARIES)
-    cmake_path(GET LAPACK_LIBRARY PARENT_PATH LAPACK_DIR)
-    list(APPEND LAPACK_DIRS ${LAPACK_DIR})
-  endforeach()
 endif()
 
 # --------------------------[ FIND REQUIRED HEADERS ]---------------------------
@@ -254,11 +216,28 @@ endif()
 
 message(VERBOSE "<====== Starting oomph-lib library configuration ======>")
 
-# Process the oomph-lib directories containing the library files
+# Configure the external sources (i.e. third-party libraries that oomph-lib
+# always ships with)
 add_subdirectory(external_src)
+
+# FIXME: Having to duplicate CXX definitions for C code to make SuperLUDist code
+# work...
+
+# Add C++ definitions for all of the defined third-party sources that we build
+# with oomph-lib, e.g. -DOOMPH_HAS_SUPERLU, -DOOMPH_HAS_TRIANGLE, etc.
+oomph_add_c_compile_definitions(${EXTERNAL_SRC_CXX_DEFINITIONS})
 oomph_add_cxx_compile_definitions(${EXTERNAL_SRC_CXX_DEFINITIONS})
-add_subdirectory(external_distributions)
+
+# Locate the third-party libraries that the user has provided via the
+# OOMPH_USE_<LIBRARY>_FROM flags
+include(OomphLocateOptionalThirdPartyLibs)
+
+# Add C++ definitions for all of the defined (optional) third-party libraries,
+# e.g. -DOOMPH_HAS_CGAL, -DOOMPH_HAS_MUMPS, etc.
+oomph_add_c_compile_definitions(${EXTERNAL_DIST_CXX_DEFINITIONS})
 oomph_add_cxx_compile_definitions(${EXTERNAL_DIST_CXX_DEFINITIONS})
+
+# Configure all of the main oomph-lib library sources
 add_subdirectory(src)
 
 message(VERBOSE "<====== Finished oomph-lib library configuration ======>")
@@ -295,11 +274,11 @@ add_custom_target(
 
 # --------------------[ PRINT PROJECT-SPECIFIC SETTINGS ]-----------------------
 
-include(OomphPrintProjectSettings)
+include(OomphDocProjectSettings)
 if(OOMPH_PRINT_SETTINGS_AFTER_INSTALL)
-  oomph_print_project_settings(ENABLE_PRINT_AFTER_INSTALL)
+  oomph_doc_project_settings(ENABLE_ALSO_PRINT_SETTINGS_AFTER_INSTALL)
 else()
-  oomph_print_project_settings()
+  oomph_doc_project_settings()
 endif()
 
 # ------------------------------------------------------------------------------

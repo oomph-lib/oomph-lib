@@ -32,7 +32,7 @@ oomph_add_test(
 set_tests_properties(mpi.bifurcation_tracking PROPERTIES PROCESSORS
                                                          ${OOMPH_MPI_NUM_PROC})
 if(APPLE)
-  set_tests_properties(mpi.bifurcation_tracking PROPERTIES DISABLED TRUE)
+  set_tests_properties(mpi.bifurcation_tracking PROPERTIES DISABLED FALSE)
 endif()
 
 message(VERBOSE "Leaving bifurcation_tracking subdirectory")

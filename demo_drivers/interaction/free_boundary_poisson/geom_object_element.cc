@@ -136,7 +136,7 @@ GeomObjectAsGeneralisedElementProblem::GeomObjectAsGeneralisedElementProblem()
   
  // Open trace file
  char filename[100];
- sprintf(filename,"%s/trace.dat",Doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/trace.dat",Doc_info.directory().c_str());
  Trace_file.open(filename);
  Trace_file << "VARIABLES=\"load\",\"y<sub>circle</sub>\"" << std::endl;
 
@@ -162,7 +162,7 @@ void GeomObjectAsGeneralisedElementProblem::doc_solution()
  Vector<double> r(2);
  
  // Output solution 
- sprintf(filename,"%s/soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  for (unsigned i=0;i<npts;i++)

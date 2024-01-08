@@ -1062,7 +1062,7 @@ void PoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
  // Output solution (be careful with the naming of the output files,
  // each file can be identified by the processor id
  //  ----------------
- sprintf(filename,"%s/soln%i_proc%i.dat",
+ snprintf(filename, sizeof(filename), "%s/soln%i_proc%i.dat",
          doc_info.directory().c_str(),
          doc_info.number(),
          this->communicator_pt()->my_rank());
@@ -1073,7 +1073,7 @@ void PoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
  
  // Output exact solution (output files in parallel)
  //----------------
- sprintf(filename,"%s/exact_soln%i_proc%i.dat",
+ snprintf(filename, sizeof(filename), "%s/exact_soln%i_proc%i.dat",
          doc_info.directory().c_str(),
          doc_info.number(),
          this->communicator_pt()->my_rank());
@@ -1195,7 +1195,7 @@ read_custom_distribution_from_file(Vector<unsigned> &output_distribution)
  FILE *file_pt;
  // Store the file name
  char file_name[500];
- sprintf(file_name, "%s/input_distribution_%i.dat", 
+ snprintf(file_name, sizeof(file_name),  "%s/input_distribution_%i.dat", 
          TestArguments::Folder_distribution_file.c_str(),
          my_rank);
  
@@ -1280,7 +1280,7 @@ save_custom_distribution_to_file(Vector<unsigned> &input_distribution)
  // Char for the output file name
  char file_name[500];
  // Set the name of the file
- sprintf(file_name, "DISTRIBUTION/input_distribution_%i.dat", my_rank);
+ snprintf(file_name, sizeof(file_name),  "DISTRIBUTION/input_distribution_%i.dat", my_rank);
  
  oomph_info << "Save custom distribution to file: " << file_name 
             << std::endl;
@@ -1449,7 +1449,7 @@ int main(int argc, char* argv[])
  // Open the trace file (the name of the trace file is different for
  // each processor)
  char trace_filename[100];
- sprintf(trace_filename,"%s/trace_proc%i.dat", 
+ snprintf(trace_filename, sizeof(trace_filename), "%s/trace_proc%i.dat", 
          doc_info.directory().c_str(), my_rank);
  
  /// Trace file to document error and norm of solution
@@ -1496,7 +1496,7 @@ int main(int argc, char* argv[])
  // This show us the elements assigned to this processor (remember to
  // disable the output of halo elements)
  problem.mesh_pt()->disable_output_of_halo_elements();
- sprintf(file_initial_distributed_mesh, 
+ snprintf(file_initial_distributed_mesh, sizeof(file_initial_distributed_mesh),  
          "%s/output_initial_distributed_mesh_%i.dat", 
          doc_info.directory().c_str(), my_rank);
  

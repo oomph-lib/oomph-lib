@@ -875,11 +875,11 @@ void TestPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
    npts=5; 
    
    // Doc orientation of the root elements
-   sprintf(filename,"%s/orientation%i.dat",doc_info.directory().c_str(),
+   snprintf(filename, sizeof(filename), "%s/orientation%i.dat",doc_info.directory().c_str(),
            doc_info.number());
    some_file.open(filename);
   
-   sprintf(filename,"%s/root_elements%i.dat",doc_info.directory().c_str(),
+   snprintf(filename, sizeof(filename), "%s/root_elements%i.dat",doc_info.directory().c_str(),
            doc_info.number());
    some_file2.open(filename);
   
@@ -941,7 +941,7 @@ void TestPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
    // Output solution 
    //-----------------
    //mesh_pt()->sort_elements();
-   sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+   snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
            doc_info.number());
    some_file.open(filename);
    mesh_pt()->output(some_file,npts);

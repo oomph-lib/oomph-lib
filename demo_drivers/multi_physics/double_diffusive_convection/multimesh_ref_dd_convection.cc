@@ -538,26 +538,26 @@ void RefineableDDConvectionProblem<NST_ELEMENT,AD_ELEMENT>::doc_solution()
 
  // Output whole solution (this will output elements from one mesh
  //----------------------  followed by the other mesh at the moment...?)
- /*sprintf(filename,"%s/soln%i.dat",Doc_info.directory().c_str(),
+ /*snprintf(filename, sizeof(filename), "%s/soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
  some_file.close();*/
 
 
- sprintf(filename,"%s/nst_soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/nst_soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  nst_mesh_pt()->output(some_file,npts);
  some_file.close();
 
- sprintf(filename,"%s/temp_soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/temp_soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  temp_mesh_pt()->output(some_file,npts);
  some_file.close();
 
- sprintf(filename,"%s/conc_soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/conc_soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  conc_mesh_pt()->output(some_file,npts);

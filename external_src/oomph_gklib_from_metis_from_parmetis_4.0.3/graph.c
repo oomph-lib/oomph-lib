@@ -115,7 +115,7 @@ gk_graph_t *gk_graph_Read(char *filename, int format, int isfewgts,
     if (fmt > 111)
       gk_errexit(SIGERR, "Cannot read this type of file format [fmt=%zu]!\n", fmt);
 
-    sprintf(fmtstr, "%03zu", fmt%1000);
+    snprintf(fmtstr, sizeof(fmtstr),  "%03zu", fmt%1000);
     readsizes = (fmtstr[0] == '1');
     readwgts  = (fmtstr[1] == '1');
     readvals  = (fmtstr[2] == '1');

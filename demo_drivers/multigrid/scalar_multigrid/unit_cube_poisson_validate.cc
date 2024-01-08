@@ -525,7 +525,7 @@ void UnitCubePoissonMGProblem<ELEMENT,MESH>::doc_solution()
  // Output solution: 
  //-----------------
  // Create the filename
- sprintf(filename,"%s/soln%i.dat",
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",
 	 Global_Parameters::Doc_info.directory().c_str(),
 	 Global_Parameters::Doc_info.number());
  
@@ -541,7 +541,7 @@ void UnitCubePoissonMGProblem<ELEMENT,MESH>::doc_solution()
  // Output exact solution:
  //-----------------------
  // Create the filename
- sprintf(filename,"%s/exact_soln%i.dat",
+ snprintf(filename, sizeof(filename), "%s/exact_soln%i.dat",
 	 Global_Parameters::Doc_info.directory().c_str(),
 	 Global_Parameters::Doc_info.number());
  
@@ -566,7 +566,7 @@ void UnitCubePoissonMGProblem<ELEMENT,MESH>::doc_solution()
  double soln=0.0;
 
  // Create the filename
- sprintf(filename,"%s/error%i.dat",
+ snprintf(filename, sizeof(filename), "%s/error%i.dat",
 	 Global_Parameters::Doc_info.directory().c_str(),
 	 Global_Parameters::Doc_info.number());
 

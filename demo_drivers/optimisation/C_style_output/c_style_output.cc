@@ -200,7 +200,7 @@ void output_both_versions(const string& file_root, Mesh* mesh_pt,
   doc_info.set_directory("RESLT_C_style");
   
   // Output solution 
-  sprintf(filename,"%s/%s.dat",doc_info.directory().c_str(),
+  snprintf(filename, sizeof(filename), "%s/%s.dat",doc_info.directory().c_str(),
           file_root.c_str());
   FILE* file_pt = fopen(filename,"w");
   clock_t t_start = clock();  
@@ -221,7 +221,7 @@ void output_both_versions(const string& file_root, Mesh* mesh_pt,
   doc_info.set_directory("RESLT_Cpp_style");
   
   // Output solution 
-  sprintf(filename,"%s/%s.dat",doc_info.directory().c_str(),
+  snprintf(filename, sizeof(filename), "%s/%s.dat",doc_info.directory().c_str(),
           file_root.c_str());
   some_file.open(filename);
   clock_t t_start = clock();  

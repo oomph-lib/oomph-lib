@@ -29,13 +29,13 @@
 #include "mesh.h"
 #include "refineable_mesh.h"
 
-#ifdef OOMPH_TRANSITION_TO_VERSION_3
-
 // for the new METIS API, need to use symbols defined in the standard header
 // which aren't available in the current frozen (old) version of METIS
 // Version 3 will (presumably) have this header in the include path as standard
-#include "metis.h"
-
+#ifdef OOMPH_USE_OLD_SUPERLU_DIST
+#include "oomph_metis_from_parmetis_3.1.1/metis.h"
+#else
+#include "oomph_metis_from_parmetis_4.0.3/metis.h"
 #endif
 
 namespace oomph
@@ -290,7 +290,7 @@ namespace oomph
     int* options = new int[10];
     options[0] = 0;
 
-#ifdef OOMPH_TRANSITION_TO_VERSION_3
+#ifndef OOMPH_USE_OLD_SUPERLU_DIST
     switch (objective)
     {
       case 0:
@@ -444,8 +444,7 @@ namespace oomph
       }
     }
 
-#ifdef OOMPH_TRANSITION_TO_VERSION_3
-
+#ifdef OOMPH_USE_OLD_SUPERLU_DIST
     // Call partitioner
     METIS_PartGraphKway(&nvertex,
                         xadj,
@@ -458,50 +457,43 @@ namespace oomph
                         options,
                         edgecut,
                         part);
+
 #else
-    // original code to delete in version 3
+    // If ncon is the number of weights associated with each vertex, the array
+    // vwgt contains n x ncon elements where n is the number of vertices).
+    int ncon = 1;
+    int* vsize = NULL;
+    float* tpwgts = NULL;
+    float* ubvec = NULL;
 
     // Call partitioner
-    if (objective == 0)
-    {
-      // Partition with the objective of minimising the edge cut
-      METIS_PartGraphKway(&nvertex,
-                          xadj,
-                          &adjacency_vector[0],
-                          vwgt,
-                          adjwgt,
-                          &wgtflag,
-                          &numflag,
-                          &nparts,
-                          options,
-                          edgecut,
-                          part);
-    }
-    else if (objective == 1)
-    {
-      // Partition with the objective of minimising the total communication
-      // volume
-      METIS_PartGraphVKway(&nvertex,
-                           xadj,
-                           &adjacency_vector[0],
-                           vwgt,
-                           adjwgt,
-                           &wgtflag,
-                           &numflag,
-                           &nparts,
-                           options,
-                           edgecut,
-                           part);
-    }
-    else
-    {
-      std::ostringstream error_stream;
-      error_stream << "Wrong objective for METIS. objective = " << objective
-                   << std::endl;
-
-      throw OomphLibError(
-        error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-    }
+    // METIS_API(int)
+    // METIS_PartGraphKway(idx_t * nvtxs,
+    //                     idx_t * ncon,
+    //                     idx_t * xadj,
+    //                     idx_t * adjncy,
+    //                     idx_t * vwgt,
+    //                     idx_t * vsize,
+    //                     idx_t * adjwgt,
+    //                     idx_t * nparts,
+    //                     real_t * tpwgts,
+    //                     real_t * ubvec,
+    //                     idx_t * options,
+    //                     idx_t * edgecut,
+    //                     idx_t * part);
+    METIS_PartGraphKway(&nvertex,
+                        &ncon,
+                        xadj,
+                        &adjacency_vector[0],
+                        vwgt,
+                        vsize,
+                        adjwgt,
+                        &nparts,
+                        tpwgts,
+                        ubvec,
+                        options,
+                        edgecut,
+                        part);
 #endif
 
 #ifdef PARANOID
@@ -1119,7 +1111,7 @@ namespace oomph
       int* options = new int[10];
       options[0] = 0;
 
-#ifdef OOMPH_TRANSITION_TO_VERSION_3
+#ifndef OOMPH_USE_OLD_SUPERLU_DIST
       switch (objective)
       {
         case 0:
@@ -1246,8 +1238,7 @@ namespace oomph
       // Actually use METIS (good but not always repeatable!)
       else
       {
-#ifdef OOMPH_TRANSITION_TO_VERSION_3
-
+#ifdef OOMPH_USE_OLD_SUPERLU_DIST
         METIS_PartGraphKway(&nvertex,
                             xadj,
                             &adjacency_vector[0],
@@ -1260,40 +1251,55 @@ namespace oomph
                             edgecut,
                             part);
 #else
-        // for old version of METIS; these two functions have been merged
-        // in the new METIS API
 
-        if (objective == 0)
-        {
-          // Partition with the objective of minimising the edge cut
-          METIS_PartGraphKway(&nvertex,
-                              xadj,
-                              &adjacency_vector[0],
-                              vwgt,
-                              adjwgt,
-                              &wgtflag,
-                              &numflag,
-                              &nparts,
-                              options,
-                              edgecut,
-                              part);
-        }
-        else if (objective == 1)
-        {
-          // Partition with the objective of minimising the total communication
-          // volume
-          METIS_PartGraphVKway(&nvertex,
-                               xadj,
-                               &adjacency_vector[0],
-                               vwgt,
-                               adjwgt,
-                               &wgtflag,
-                               &numflag,
-                               &nparts,
-                               options,
-                               edgecut,
-                               part);
-        }
+        // METIS_PartGraphKway(&nvertex,
+        //                     xadj,
+        //                     &adjacency_vector[0],
+        //                     vwgt,
+        //                     adjwgt,
+        //                     &wgtflag,
+        //                     &numflag,
+        //                     &nparts,
+        //                     options,
+        //                     edgecut,
+        //                     part);
+
+        // If ncon is the number of weights associated with each vertex, the
+        // array vwgt contains n x ncon elements where n is the number of
+        // vertices).
+        int ncon = 1;
+        int* vsize = NULL;
+        float* tpwgts = NULL;
+        float* ubvec = NULL;
+
+        // Call partitioner
+        // METIS_API(int)
+        // METIS_PartGraphKway(idx_t * nvtxs,
+        //                     idx_t * ncon,
+        //                     idx_t * xadj,
+        //                     idx_t * adjncy,
+        //                     idx_t * vwgt,
+        //                     idx_t * vsize,
+        //                     idx_t * adjwgt,
+        //                     idx_t * nparts,
+        //                     real_t * tpwgts,
+        //                     real_t * ubvec,
+        //                     idx_t * options,
+        //                     idx_t * edgecut,
+        //                     idx_t * part);
+        METIS_PartGraphKway(&nvertex,
+                            &ncon,
+                            xadj,
+                            &adjacency_vector[0],
+                            vwgt,
+                            vsize,
+                            adjwgt,
+                            &nparts,
+                            tpwgts,
+                            ubvec,
+                            options,
+                            edgecut,
+                            part);
 #endif
       }
 

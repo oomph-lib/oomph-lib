@@ -30,7 +30,7 @@ FILE *gk_fopen(char *fname, char *mode, const char *msg)
   if (fp != NULL)
     return fp;
 
-  sprintf(errmsg,"file: %s, mode: %s, [%s]", fname, mode, msg);
+  snprintf(errmsg, sizeof(errmsg), "file: %s, mode: %s, [%s]", fname, mode, msg);
   perror(errmsg);
   errexit("Failed on gk_fopen()\n");
 

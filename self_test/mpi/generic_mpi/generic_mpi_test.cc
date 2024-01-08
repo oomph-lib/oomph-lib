@@ -270,7 +270,7 @@ int main(int argc, char* argv[])
   // Define processor-labeled output file for all on-screen stuff
   std::ofstream output_stream;
   char filename[100];
-  sprintf(filename,"OUTPUT.%i",MPI_Helpers::communicator_pt()->my_rank());
+  snprintf(filename, sizeof(filename), "OUTPUT.%i",MPI_Helpers::communicator_pt()->my_rank());
   output_stream.open(filename);
   oomph_info.stream_pt() = &output_stream;
   OomphLibWarning::set_stream_pt(&output_stream);

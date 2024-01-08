@@ -472,7 +472,7 @@ FreeSurfaceRotationProblem(DocInfo& doc_info,
  //Doc the boundaries
  /*ofstream some_file;
  char filename[100];
- sprintf(filename,"boundaries.dat");
+ snprintf(filename, sizeof(filename), "boundaries.dat");
  some_file.open(filename);
  Bulk_mesh_pt->output_boundaries(some_file);
  some_file.close();*/
@@ -711,7 +711,7 @@ void FreeSurfaceRotationProblem<ELEMENT>::doc_solution()
  npts=5; 
 
  // Output solution 
- sprintf(filename,"%s/soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  unsigned n_element = Bulk_mesh_pt->nbulk();

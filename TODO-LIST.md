@@ -1,63 +1,41 @@
 # Task list
 
-## Requirements for minimum viable product
+## Fine-tuning for beta release
 
-### To patch
+Include tasks here that likely need some collaboration with Matthias
 
-* [ ] Patch Trilinos + MPI support
-* [ ] Can't reconfigure when third-party libraries are installed. Why?!
+* [ ] Update doc/FAQ/...
+  * [ ] E.g. "The oomph-lib distribution includes some third-party libraries. How do I get the code to link against optimised local versions of these libraries that are already installed on my machine?"
+* [ ] Kill all scripts that will no longer be required, e.g. `move_external_libraries_and_distributions_to_permanent_location.bash`
+* [ ] Discuss switching to OpenBLAS only (need to change OOMPH_USE_BLAS/LAPACK_FROM)
 
-### Third party library support
+* [ ] Go through all new commits to the main repository in the last 1-2 years and make sure any changes in Makefiles have been reflected in their corresponding CMakeLists.txt file
+* [ ] Possibly change `oomphlib` -> `oomph_lib`? (carefully(!) avoid changing headers/sources)
+  * **CHANGE IT**
 
-* Patch support for libraries using oomph-lib-built BLAS/LAPACK:
-  * Hypre and Trilinos rely on absolute paths to blas and lapack which doesn't work if they are built by oomph-lib...
-  * [ ] Hypre
-  * [ ] Trilinos
-  * Steps:
-    * Construct BLAS/LAPACK paths
-      * Q: Is this going to work after they've been installed?...
-    * Make sure BLAS/LAPACK are built before Hypre/Trilinos
-* [ ] Convert external library version numbers into variables? (ODR)
-* [ ] Address MUMPS 64-bit int (i.e. long long) compatibility issue
+* [ ] Test with `OOMPH_TRANSITION_TO_VERSION_3`
+* [ ] Add demo driver test target to "all" so `ninja` in the build directory will also cause required test files to be copied over
+  * **YES DO THIS!**
 
 ### Improvements
 
 * [ ] Discuss the Doxygen search engine; `SEARCHENGINE=NO` at the moment...
-* [ ] *Optional:* Convert `oomph_gzip` library to single-file?
+* [ ] *Optional:* Convert `oomph_gzip` library to single source file?
 
 ### GitHub-y
 
 * [ ] Add a `destruct_test.yaml` to test lots of different configurations (e.g. with and without MPI, w/ and w/o Hypre, etc.)
-* [ ] Add constraints to when we should run the self-tests (e.g. when CMakeLists.txt, .h, .c, .cc files have been edited)
 
 ### Pure-CMake
 
-* [ ] Add `oomph_option(...)` and `oomph_set(...)` commands to specify the commandline options to the user
-* [ ] Add functionality to specify `--gmsh_command_line`
+* [ ] Propagate compiler flags to users executables
 * [ ] Patch the use of shared libs
-* [ ] Sort out moving third-party libs after they've been built (will probably have issues with `oomphlibConfig.cmake`)
-* [ ] Update to C++17 again to patch issue in `demo_drivers/gzip/one_d_poisson`
-  * Will need to test with Trilinos as it used a function removed in C++17
 * [ ] Update MPI tests to specify [PROCESSORS](https://cmake.org/cmake/help/latest/prop_test/PROCESSORS.html#prop_test:PROCESSORS) rather than forcing everything to run sequentially
-* [ ] Update `oomph_add_test()` to take args for `validate.sh` and explicitly pass e.g. "${OOMPH_ROOT_DIR}" and "${OOMPH_MPI_RUN_COMMAND}"
+* [x] Update `oomph_add_test()` to take args for `validate.sh` and explicitly pass e.g. "${OOMPH_ROOT_DIR}" and "${OOMPH_MPI_RUN_COMMAND}"
   * Should help make things transparent and easier for users to control
 * [ ] Update every test name to be the path to the demo driver; e.g. `mpi.distribution.adaptive_driven_cavity`
 * [ ] Patch `ninja oomph_uninstall` command for Ninja Multi-Config
 * [ ] Update build system to make sure building a demo driver target without `ctest` also runs the `check_...` target to build the target and copy files over
-* [ ] Think about *installing* `fpdiff.py` AND `validate_ok_count` incase the user wants to install `oomph-lib` but wipe everything but the demo drivers.
-  * *If* I decide to do this:
-    * [ ] Make a copy of these files in each folder (seems reasonable as 200 x 15KB = 3MB for `fpdiff.py`)
-    * [ ] Need to update `OomphAddTest.cmake` CAREFULLY as we need to know where these files will live
-      * Maybe create a variable to store the default location (e.g. `PATH_TO_FPDIFF_PY`) that either gets appended to or overwritten when the library and the `fpdiff.py` script is installed
-      * **NOTE:** If we append, we may make changes to one script and affect the demo drivers in an unclear way
-    * [ ] Update each `validate.sh` script to
-      * [ ] Remove the `OOMPH_ROOT_DIR` argument from every `validate.sh`
-      * [ ] Remove the `OOMPH_ROOT_DIR` usage from `fpdiff.py` (user can assume that it will be installed in the same folder as the `validate.sh`; i.e. outside the `Validation/` directory) and `validate_ok_count`
-  * [ ] We should be able to create a global `validation.log` using `ctest --output-log`!
-* [ ] Add a `oomph_add_pure_cpp_test()` with an `ARGS` command for arguments to pass
-  * Should define the executable AND the test target
-  * Will allow us to create an individual test per test for finer granularity
-* [ ] Add `OOMPH_BLAS_LIB`/`OOMPH_LAPACK_LIB` variables to store the path to the chosen BLAS lib **then** tidy up the Hypre `CMakeLists.txt`
 * [ ] *Add presets:*
   * [ ] For MPI configuration
   * [ ] For Intel-based Macs (`--preset macos`) and Arm-based (`--preset macos_arm64`)
@@ -65,19 +43,9 @@
 * [ ] *Optional:* Update all demo drivers to stop piping output to `validation.log`; use `ctest --o validation.log --output-on-failure`
   * Ideally we'd still output `validation.log` info to this file even if the test doesn't fail... (Just incase there's a bug where a test fails but CTest doesn't catch it)
 
-### Features to add or patch
+### Features to check, add or patch
 
-* [ ] Add Intel MKL BLAS support
-* [ ] Implement `oomph_pure_cpp_test`
-  * [ ] C++ side: Add a struct to generically handle the args for a pure C++ test
-* [ ] Replace current BLAS/LAPACK with OpenBLAS
-  * Looks quite complex... Appears to contain optimised kernels for different operating systems...
-  * Could possibly be done by adding it as a submodule?
-    * **Q:** Can we restrict it to a specific tag?
 * [ ] Fix MPI-enabled demo drivers that are broken on macOS
-* [ ] Update GitHub self-tests to only run after pushing .h, .c, .cc, CMakeLists.txt code (see e.g. [here](https://github.com/scivision/mumps/blob/v5.5.1.7/.github/workflows/ci.yml)).
-* [ ] Add option to build with `ccache` support
-* [ ] Add fmtlib/fmt(?)
 * [ ] Add `check_...()` calls to make sure the C/C++/Fortran/MPI compilers work
 * [ ] Download CMake `oomph-lib` to a folder that has a space in the name
 
@@ -112,22 +80,43 @@
 * [ ] Write a breakdown of all new features and important changes, e.g.
   * [ ] C++ implementation of `fpdiff.py`
   * [ ] `validate.sh` scripts now take the path to the root directory
-* [ ] Incrementing version number (**strongly recommend using `bumpversion.cfg` to keep git version and cmake version in sync!**)
-
-### Fine-tuning for beta release
-
-Include tasks here that likely need some collaboration with Matthias
-
-* [ ] Go through all new commits to the main repository in the last 1-2 years and make sure any changes in Makefiles have been reflected in their corresponding CMakeLists.txt file
-* [ ] Possibly change `oomphlib` -> `oomph_lib`? (carefully(!) avoid changing headers/sources)
-* [ ] Discuss updating to C++17 (fresh start?)
-* [ ] Discuss distributing with `nlohmann/json`
-* [ ] Settle on how to handle versioning (e.g. should we define a `version.h`?)
-* [ ] Properly review to-do list and see if there's anything missing!
-
-### Less urgent
+* [ ] Incrementing version number (**recommend using `bumpversion.cfg` to keep git version and cmake version in sync; can make a makefile command for this 'make bump major' or 'make bump minor' or 'make bump patch'**)
 
 ## Finished
+
+* [x] Add constraints to when we should run the self-tests (e.g. when CMakeLists.txt, .h, .c, .cc files have been edited)
+* [ ] ~~Add Intel MKL BLAS support~~
+* [x] Update GitHub self-tests to only run after pushing .h, .c, .cc, CMakeLists.txt code (see e.g. [here](https://github.com/scivision/mumps/blob/v5.5.1.7/.github/workflows/ci.yml)).
+* [x] Discuss updating to C++17
+  * [x] Required for Trilinos v14.4.0+ so will definitely be required for Trilinos v14.0
+* [x] Add `oomph_option(...)` commands to specify the commandline options to the user
+* [x] Add functionality to specify `--gmsh_command_line`
+* [x] Sort out moving third-party libs after they've been built (will probably have issues with `oomphlibConfig.cmake`)
+* [x] Update to C++17 again to patch issue in `demo_drivers/gzip/one_d_poisson`
+  * Will need to test with Trilinos as it used a function removed in C++17
+* [ ] ~~Add option to build with `ccache` support~~
+* [x] Replace current BLAS/LAPACK with OpenBLAS
+  * Looks quite complex... Appears to contain optimised kernels for different operating systems...
+  * Could possibly be done by adding it as a submodule?
+    * **Q:** Can we restrict it to a specific tag?
+* [x] ~~Settle on how to handle versioning (e.g. should we define a `version.h`?)~~
+* [x] Properly review to-do list and see if there's anything missing!
+* [ ]
+* Patch support for libraries using oomph-lib-built BLAS/LAPACK:
+  * [x] Hypre
+  * [x] Trilinos
+  * N.B. Hypre and Trilinos rely on absolute paths to blas and lapack which doesn't work if they are built by oomph-lib...
+  * **Possible solution:**
+    * Construct BLAS/LAPACK paths
+      * **Q:** Is this going to work after they've been installed?...
+    * Make sure BLAS/LAPACK are built before Hypre/Trilinos
+* [x] Convert external library version numbers to variables?
+* [ ] ~~Address MUMPS 64-bit int (i.e. long long) compatibility issue~~
+  * Not important for now
+
+* [x] DISCUSS UPDATED SELF-TEST TRIGGER SYNTAX
+* [x] Can I wipe the `config/` directory? or do we need to keep it around?
+* [x] Discuss making `oomph_lib_third_party_libraries` a submodule so we can preserve the README badges (or add tests to main project; should only trigger those workflows if we edit external_distributions/)
 
 * Add support for building and installing the following packages ourselves:
   * [x] GMP
@@ -176,7 +165,6 @@ Include tasks here that likely need some collaboration with Matthias
 * [x] Update `Doxyfile`s to set `QUIET = NO` again
 * [x] Update `demo_drivers` to allow building from any level
 * Add initial support for:
-  * [x] `nlohmann::json`
   * [x] `Hypre`
   * [x] `MUMPS`
   * [x] `Trilinos`

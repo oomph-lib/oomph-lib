@@ -646,7 +646,7 @@ void UnstructuredTorusProblem<ELEMENT>::solve_system(const double &dt,
  
  //Output data after the first timestep
  //Create the filename, including the array index
- sprintf(filename,"%s/soln_Re%g_t%g.dat",directory.c_str(),Re,time());
+ snprintf(filename, sizeof(filename), "%s/soln_Re%g_t%g.dat",directory.c_str(),Re,time());
  //Actually, write the data
  file.open(filename);
  mesh_pt()->output(file,5);
@@ -667,7 +667,7 @@ void UnstructuredTorusProblem<ELEMENT>::solve_system(const double &dt,
    
    //Output data at each step
    //Create the filename, including the array index
-   sprintf(filename,"%s/soln_Re%g_t%g.dat",directory.c_str(),Re,time());
+   snprintf(filename, sizeof(filename), "%s/soln_Re%g_t%g.dat",directory.c_str(),Re,time());
    //Actually, write the data
    file.open(filename);
    mesh_pt()->output(file,5);

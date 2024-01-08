@@ -591,7 +591,7 @@ int main()
    problem.newton_solve(max_adapt);
 
    //Open an output file
-   sprintf(filename,"soln_Re%g.dat", Global_Parameters::Re);
+   snprintf(filename, sizeof(filename), "soln_Re%g.dat", Global_Parameters::Re);
    //Doc result
    ofstream outfile(filename);
    problem.mesh_pt()->output(outfile,5);

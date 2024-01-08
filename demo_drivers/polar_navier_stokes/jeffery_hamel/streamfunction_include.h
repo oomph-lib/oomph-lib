@@ -577,7 +577,7 @@ void StreamfunctionProblem::doc_solution(DocInfo& doc_info)
 
  // Output solution 
  //-----------------
- sprintf(filename,"%s/streamfunction%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/streamfunction%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  header(some_file);

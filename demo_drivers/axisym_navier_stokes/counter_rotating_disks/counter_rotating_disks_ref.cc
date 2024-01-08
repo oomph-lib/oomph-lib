@@ -368,7 +368,7 @@ doc_solution(DocInfo& doc_info)
  const unsigned npts = 5;
  
  // Open solution output file
- sprintf(filename,"%s/base_soln%i.dat",
+ snprintf(filename, sizeof(filename), "%s/base_soln%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
@@ -733,7 +733,7 @@ doc_solution(DocInfo& doc_info)
  const unsigned npts = 5;
  
  // Open solution output file
- sprintf(filename,"%s/perturbed_soln%i.dat",
+ snprintf(filename, sizeof(filename), "%s/perturbed_soln%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
@@ -1023,7 +1023,7 @@ int main(int argc, char* argv[])
   // Create and initialise trace file
   ofstream trace;
   char filename[256];
-  sprintf(filename,"%s/trace.dat",
+  snprintf(filename, sizeof(filename), "%s/trace.dat",
           doc_info.directory().c_str());
   trace.open(filename);
   trace << "Re, dominating eigenvalue, n_power_method_iterations" << std::endl;
@@ -1104,7 +1104,7 @@ int main(int argc, char* argv[])
   // Create and initialise trace file
   ofstream trace;
   char filename[256];
-  sprintf(filename,"%s/trace.dat",
+  snprintf(filename, sizeof(filename), "%s/trace.dat",
           doc_info.directory().c_str());
   trace.open(filename);
   trace << "Re, dominating eigenvalue, n_power_method_iterations" << std::endl;

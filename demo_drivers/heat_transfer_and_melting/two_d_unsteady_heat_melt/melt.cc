@@ -623,7 +623,7 @@ void UnsteadyHeatMeltProblem<ELEMENT>::doc_solution()
  cout << "=================================================" << std::endl;
  
  // Output solution 
- sprintf(filename,"%s/soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,npts);
@@ -631,14 +631,14 @@ void UnsteadyHeatMeltProblem<ELEMENT>::doc_solution()
  
  // Output solution coarsely (only element vertices for easier
  // mesh visualisation)
- sprintf(filename,"%s/coarse_soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/coarse_soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,2);
  some_file.close();
  
  // Output flux with melt
- sprintf(filename,"%s/flux_with_melt%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/flux_with_melt%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  unsigned nel=Surface_melt_mesh_pt->nelement();
@@ -652,7 +652,7 @@ void UnsteadyHeatMeltProblem<ELEMENT>::doc_solution()
  
  // Output Number of Newton iterations in form that can be visualised
  // as vector in paraview
- sprintf(filename,"%s/newton_iter%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/newton_iter%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  some_file << "0 0 0 " << Nnewton_iter_taken << std::endl;
@@ -660,7 +660,7 @@ void UnsteadyHeatMeltProblem<ELEMENT>::doc_solution()
  
  
  // Output exact solution
- sprintf(filename,"%s/exact_soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/exact_soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output_fct(
@@ -669,7 +669,7 @@ void UnsteadyHeatMeltProblem<ELEMENT>::doc_solution()
  some_file.close();
  
  // Output exact position of melting line
- sprintf(filename,"%s/exact_height%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/exact_height%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  unsigned nplot=100;

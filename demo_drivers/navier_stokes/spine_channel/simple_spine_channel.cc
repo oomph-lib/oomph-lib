@@ -638,7 +638,7 @@ void ChannelSpineFlowProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  unsigned npts=5; 
 
  // Output solution 
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
@@ -740,7 +740,7 @@ int main()
 //  unsigned npts=5; 
  
 //  // Output solution 
-//  sprintf(filename,"%s/mesh_update%i.dat",doc_info.directory().c_str(),
+//  snprintf(filename, sizeof(filename), "%s/mesh_update%i.dat",doc_info.directory().c_str(),
 //          count);
 //  count++;
  
@@ -752,7 +752,7 @@ int main()
 //    node_pt->node_update();
 //    // Output solution 
 //    some_file.open(filename);
-//    sprintf(filename,"%s/mesh_update%i.dat",doc_info.directory().c_str(),
+//    snprintf(filename, sizeof(filename), "%s/mesh_update%i.dat",doc_info.directory().c_str(),
 //            count);
 //    count++;
 //    mesh_pt->output(some_file,npts);

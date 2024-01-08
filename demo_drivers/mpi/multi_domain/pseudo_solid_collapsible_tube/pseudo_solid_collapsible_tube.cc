@@ -1728,10 +1728,10 @@ int main(int argc, char* argv[])
  std::ofstream output_stream;
  char filename[1000];
 #ifdef OOMPH_HAS_MPI
- sprintf(filename,"%s/OUTPUT.%i",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/OUTPUT.%i",doc_info.directory().c_str(),
          MPI_Helpers::communicator_pt()->my_rank());
 #else
- sprintf(filename,"%s/OUTPUT.%i",doc_info.directory().c_str(),0);
+ snprintf(filename, sizeof(filename), "%s/OUTPUT.%i",doc_info.directory().c_str(),0);
 #endif
 
  output_stream.open(filename);

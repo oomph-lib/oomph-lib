@@ -298,7 +298,7 @@ void ConvectionProblem<ELEMENT>::doc_solution()
 
  // Output solution 
  //-----------------
- sprintf(filename,"%s/soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);

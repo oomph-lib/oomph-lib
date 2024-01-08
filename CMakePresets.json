@@ -13,18 +13,7 @@
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release",
         "BUILD_SHARED_LIBS": "OFF",
-        "OOMPH_DONT_SILENCE_USELESS_WARNINGS": "OFF",
-        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-        "OOMPH_ENABLE_MPI": "OFF",
-        "OOMPH_ENABLE_PARANOID": "OFF",
-        "OOMPH_ENABLE_RANGE_CHECKING": "OFF",
-        "OOMPH_TRANSITION_TO_VERSION_3": "OFF",
-        "OOMPH_USE_DEPRECATED_SUPERLU": "OFF",
-        "OOMPH_WANT_CGAL": "OFF",
-        "OOMPH_WANT_HYPRE": "OFF",
-        "OOMPH_WANT_MUMPS": "OFF",
-        "OOMPH_WANT_NLOHMANN_JSON": "OFF",
-        "OOMPH_WANT_TRILINOS": "OFF"
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
       }
     },
     {
@@ -64,34 +53,20 @@
       "hidden": true,
       "inherits": "base",
       "generator": "Ninja",
-      "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Release",
-        "BLA_VENDOR": "OpenBLAS"
-      }
+      "cacheVariables": {}
     },
     {
       "name": "ci",
       "inherits": "ci-base",
       "displayName": "Build Config for CI/CD",
-      "cacheVariables": {
-        "OOMPH_WANT_CGAL": "ON",
-        "OOMPH_WANT_NLOHMANN_JSON": "ON",
-        "OOMPH_WANT_HYPRE": "ON",
-        "OOMPH_WANT_MUMPS": "ON",
-        "OOMPH_WANT_TRILINOS": "OFF"
-      }
+      "cacheVariables": {}
     },
     {
       "name": "ci-mpi",
       "inherits": "ci-base",
       "displayName": "MPI Build Config for CI/CD",
       "cacheVariables": {
-        "OOMPH_ENABLE_MPI": "ON",
-        "OOMPH_WANT_CGAL": "ON",
-        "OOMPH_WANT_NLOHMANN_JSON": "ON",
-        "OOMPH_WANT_HYPRE": "ON",
-        "OOMPH_WANT_MUMPS": "ON",
-        "OOMPH_WANT_TRILINOS": "OFF"
+        "OOMPH_ENABLE_MPI": "ON"
       }
     },
     {

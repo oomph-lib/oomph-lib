@@ -81,12 +81,7 @@ set(SOURCES
 set(LIBNAME oomph_superlu_dist_3.0)
 
 # Specify the libraries that we depend on
-set(LINKLIBS oomph_metis_from_parmetis_3.1.1 MPI::MPI_C)
-if(BLAS_FOUND)
-  list(APPEND LINKLIBS BLAS::BLAS)
-else()
-  list(APPEND LINKLIBS oomph_blas)
-endif()
+set(LINKLIBS oomph_metis_from_parmetis_3.1.1 ${OpenBLAS_LIBRARIES} MPI::MPI_C)
 
 # Import the OomphLibraryConfig module to handle the library creation
 include(OomphLibraryConfig)

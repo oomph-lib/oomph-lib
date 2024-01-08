@@ -57,7 +57,6 @@ set(SUBDIRS
     spherical_advection_diffusion
     spherical_navier_stokes
     steady_axisym_advection_diffusion
-    third_party
     time_harmonic_fourier_decomposed_linear_elasticity
     time_harmonic_linear_elasticity
     unsteady_heat

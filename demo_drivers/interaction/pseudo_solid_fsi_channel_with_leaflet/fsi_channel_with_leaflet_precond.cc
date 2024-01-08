@@ -973,14 +973,14 @@ void FSIChannelWithLeafletProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  npts=5; 
 
  // Output fluid solution 
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,npts);
  some_file.close();
 
  // Output wall solution 
- sprintf(filename,"%s/wall_soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/wall_soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Wall_mesh_pt->output(some_file,npts);
@@ -992,7 +992,7 @@ void FSIChannelWithLeafletProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  // Output fluid elements on fluid mesh boundary 4 (associated with
  // the "front")
  unsigned bound=4;
- sprintf(filename,"%s/bulk_boundary_elements_front_%i.dat",
+ snprintf(filename, sizeof(filename), "%s/bulk_boundary_elements_front_%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
@@ -1008,7 +1008,7 @@ void FSIChannelWithLeafletProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  // Output fluid elements on fluid mesh boundary 5 (associated with
  // the "back")
  bound=5;
- sprintf(filename,"%s/bulk_boundary_elements_back_%i.dat",
+ snprintf(filename, sizeof(filename), "%s/bulk_boundary_elements_back_%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
@@ -1022,7 +1022,7 @@ void FSIChannelWithLeafletProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
 
  // Output normal vector on wall elements
- sprintf(filename,"%s/wall_normal_%i.dat",
+ snprintf(filename, sizeof(filename), "%s/wall_normal_%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
@@ -1123,10 +1123,10 @@ int main(int argc, char **argv)
  std::ofstream output_stream;
  char filename[1000];
 #ifdef OOMPH_HAS_MPI
- sprintf(filename,"%s/OUTPUT_STEADY.%i",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/OUTPUT_STEADY.%i",doc_info.directory().c_str(),
          MPI_Helpers::communicator_pt()->my_rank());
 #else
- sprintf(filename,"%s/OUTPUT_STEADY.%i",doc_info.directory().c_str(),0);
+ snprintf(filename, sizeof(filename), "%s/OUTPUT_STEADY.%i",doc_info.directory().c_str(),0);
 #endif
 
  output_stream.open(filename);
@@ -1177,10 +1177,10 @@ int main(int argc, char **argv)
  // Define processor-labeled output file for all on-screen stuff
  output_stream.close();
 #ifdef OOMPH_HAS_MPI
- sprintf(filename,"%s/OUTPUT_UNSTEADY.%i",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/OUTPUT_UNSTEADY.%i",doc_info.directory().c_str(),
          MPI_Helpers::communicator_pt()->my_rank());
 #else
- sprintf(filename,"%s/OUTPUT_UNSTEADY.%i",doc_info.directory().c_str(),0);
+ snprintf(filename, sizeof(filename), "%s/OUTPUT_UNSTEADY.%i",doc_info.directory().c_str(),0);
 #endif
  output_stream.open(filename);
  oomph_info.stream_pt() = &output_stream;

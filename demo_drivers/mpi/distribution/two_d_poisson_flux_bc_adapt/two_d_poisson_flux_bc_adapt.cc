@@ -455,7 +455,7 @@ void RefineableTwoMeshFluxPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_inf
  // Output solution with halo elements 
  //-----------------------------------
  Bulk_mesh_pt->enable_output_of_halo_elements();
- sprintf(filename,"%s/soln_with_halo%i_on_proc%i.dat",
+ snprintf(filename, sizeof(filename), "%s/soln_with_halo%i_on_proc%i.dat",
          doc_info.directory().c_str(),
          doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
@@ -466,7 +466,7 @@ void RefineableTwoMeshFluxPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_inf
 
  // Output solution 
  //-----------------
- sprintf(filename,"%s/soln%i_on_proc%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i_on_proc%i.dat",doc_info.directory().c_str(),
          doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,npts);
@@ -474,7 +474,7 @@ void RefineableTwoMeshFluxPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_inf
 
  // Output exact solution 
  //----------------------
- sprintf(filename,"%s/exact_soln%i_on_proc%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/exact_soln%i_on_proc%i.dat",doc_info.directory().c_str(),
          doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  Bulk_mesh_pt->output_fct(some_file,npts,TanhSolnForPoisson::get_exact_u); 
@@ -484,7 +484,7 @@ void RefineableTwoMeshFluxPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_inf
  // Doc error and return of the square of the L2 error
  //---------------------------------------------------
  double error,norm;
- sprintf(filename,"%s/error%i_on_proc%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/error%i_on_proc%i.dat",doc_info.directory().c_str(),
          doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  Bulk_mesh_pt->compute_error(some_file,TanhSolnForPoisson::get_exact_u,
@@ -575,7 +575,7 @@ int main(int argc, char* argv[])
  // Define processor-labeled output file for all on-screen stuff
  std::ofstream output_stream;
  char filename[100];
- sprintf(filename,"RESLT/OUTPUT.%i",MPI_Helpers::communicator_pt()->my_rank());
+ snprintf(filename, sizeof(filename), "RESLT/OUTPUT.%i",MPI_Helpers::communicator_pt()->my_rank());
  output_stream.open(filename);
  oomph_info.stream_pt() = &output_stream;
  OomphLibWarning::set_stream_pt(&output_stream);
@@ -594,7 +594,7 @@ int main(int argc, char* argv[])
  //Get the partition from file
  Vector<unsigned> element_partition(n_el);
  std::ifstream input_file;
- sprintf(filename,"two_d_poisson_flux_partition.dat");
+ snprintf(filename, sizeof(filename), "two_d_poisson_flux_partition.dat");
  input_file.open(filename);
  std::string input_string;
  for (unsigned e=0;e<n_el;e++)

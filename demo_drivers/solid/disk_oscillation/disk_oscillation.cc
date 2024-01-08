@@ -564,7 +564,7 @@ void DiskOscillationProblem<ELEMENT>::doc_solution(
 
  // Output shape of deformed body
  //------------------------------
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
@@ -607,12 +607,12 @@ void DiskOscillationProblem<ELEMENT>::doc_solution(
   unsigned nelem=mesh_pt()->nboundary_element(0);
 
   // Open files
-  sprintf(filename,"%s/displ_along_line%i.dat",doc_info.directory().c_str(),
+  snprintf(filename, sizeof(filename), "%s/displ_along_line%i.dat",doc_info.directory().c_str(),
           doc_info.number());
   some_file.open(filename);
 
   ofstream some_file2;
-  sprintf(filename,"%s/exact_displ_along_line%i.dat",
+  snprintf(filename, sizeof(filename), "%s/exact_displ_along_line%i.dat",
           doc_info.directory().c_str(),
           doc_info.number());
   some_file2.open(filename);
@@ -676,11 +676,11 @@ void DiskOscillationProblem<ELEMENT>::doc_solution(
   unsigned nelem=mesh_pt()->nelement();
 
   // Open files
-  sprintf(filename,"%s/displ%i.dat",doc_info.directory().c_str(),
+  snprintf(filename, sizeof(filename), "%s/displ%i.dat",doc_info.directory().c_str(),
           doc_info.number());
   some_file.open(filename);
 
-  sprintf(filename,"%s/exact_displ%i.dat",
+  snprintf(filename, sizeof(filename), "%s/exact_displ%i.dat",
           doc_info.directory().c_str(),
           doc_info.number());
   some_file2.open(filename);
@@ -761,7 +761,7 @@ void DiskOscillationProblem<ELEMENT>::run(const unsigned& nstep)
 
  // Open trace file
  char filename[100];   
- sprintf(filename,"%s/trace.dat",doc_info.directory().c_str());
+ snprintf(filename, sizeof(filename), "%s/trace.dat",doc_info.directory().c_str());
  Trace_file.open(filename);
 
  // Initialise time

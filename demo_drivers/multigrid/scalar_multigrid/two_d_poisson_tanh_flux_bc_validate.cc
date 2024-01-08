@@ -634,7 +634,7 @@ void FluxPoissonMGProblem<ELEMENT,MESH>::doc_solution()
 
  // Output solution 
  //-----------------
- sprintf(filename,"%s/soln%i.dat",
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",
 	 Global_Parameters::Doc_info.directory().c_str(),
 	 Global_Parameters::Doc_info.number());
  some_file.open(filename);
@@ -643,7 +643,7 @@ void FluxPoissonMGProblem<ELEMENT,MESH>::doc_solution()
 
  // Output exact solution 
  //----------------------
- sprintf(filename,"%s/exact_soln%i.dat",
+ snprintf(filename, sizeof(filename), "%s/exact_soln%i.dat",
 	 Global_Parameters::Doc_info.directory().c_str(),
 	 Global_Parameters::Doc_info.number());
  some_file.open(filename);
@@ -657,7 +657,7 @@ void FluxPoissonMGProblem<ELEMENT,MESH>::doc_solution()
  // properly deal with two different types of elements
  //---------------------------------------------------
  double error,norm;
- sprintf(filename,"%s/error%i.dat",
+ snprintf(filename, sizeof(filename), "%s/error%i.dat",
 	 Global_Parameters::Doc_info.directory().c_str(),
 	 Global_Parameters::Doc_info.number());
  some_file.open(filename);

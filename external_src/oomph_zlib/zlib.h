@@ -1475,7 +1475,7 @@ ZEXTERN int ZEXPORTVA gzprintf Z_ARG((gzFile file, const char *format, ...));
    that this limit is not exceeded.  If it is exceeded, then gzprintf() will
    return an error (0) with nothing written.  In this case, there may also be a
    buffer overflow with unpredictable consequences, which is possible only if
-   zlib was compiled with the insecure functions sprintf() or vsprintf(),
+   zlib was compiled with the insecure functions snprintf() or vsprintf(), sizeof() or vsprintf()), 
    because the secure snprintf() or vsnprintf() functions were not available.
    This can be determined using zlibCompileFlags().
 */

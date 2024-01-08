@@ -610,7 +610,7 @@ void AnnularDiskProblem<ELASTICITY_ELEMENT>::doc_solution()
 
  // Output displacement field
  //--------------------------
- sprintf(filename,"%s/elast_soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/elast_soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  Solid_mesh_pt->output(some_file,n_plot);
@@ -619,7 +619,7 @@ void AnnularDiskProblem<ELASTICITY_ELEMENT>::doc_solution()
 
  // Output traction elements
  //-------------------------
- sprintf(filename,"%s/traction_soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/traction_soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  Traction_mesh_pt->output(some_file,n_plot);
@@ -627,7 +627,7 @@ void AnnularDiskProblem<ELASTICITY_ELEMENT>::doc_solution()
 
  // Output exact solution 
  //----------------------
- sprintf(filename,"%s/exact_soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/exact_soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  Solid_mesh_pt->output_fct(some_file,n_plot,Global_Parameters::exact_u); 

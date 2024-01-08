@@ -423,7 +423,7 @@ void FSIRingProblem::doc_solution(const unsigned& i,
     char filename[100];
     //Construct the output filename from the doc_info number and the
     //output directory
-    sprintf(filename,"%s/new_soln%i_on_proc%i.dat",
+    snprintf(filename, sizeof(filename), "%s/new_soln%i_on_proc%i.dat",
             doc_info.directory().c_str(),
             doc_info.number(),this->communicator_pt()->my_rank());
     //Open the output file
@@ -434,7 +434,7 @@ void FSIRingProblem::doc_solution(const unsigned& i,
     some_file.close();
 
     // Output the wall mesh as well
-    sprintf(filename,"%s/new_wall_soln%i_on_proc%i.dat",
+    snprintf(filename, sizeof(filename), "%s/new_wall_soln%i_on_proc%i.dat",
             doc_info.directory().c_str(),
             doc_info.number(),this->communicator_pt()->my_rank());
     //Open the output file
@@ -873,7 +873,7 @@ void FSIRingProblem::dynamic_run()
  // Get partition from file
  unsigned n_partition=mesh_pt()->nelement();
  Vector<unsigned> element_partition(n_partition);
- sprintf(filename,"fsi_osc_ring_partition.dat");
+ snprintf(filename, sizeof(filename), "fsi_osc_ring_partition.dat");
  input_file.open(filename);
  std::string input_string;
  for (unsigned e=0;e<n_partition;e++)
@@ -943,7 +943,7 @@ int main(int argc, char* argv[])
  // Define processor-labeled output file for all on-screen stuff
  std::ofstream output_stream;
  char filename[100];
- sprintf(filename,"OUTPUT.%i",MPI_Helpers::communicator_pt()->my_rank());
+ snprintf(filename, sizeof(filename), "OUTPUT.%i",MPI_Helpers::communicator_pt()->my_rank());
  output_stream.open(filename);
  oomph_info.stream_pt() = &output_stream;
  OomphLibWarning::set_stream_pt(&output_stream);

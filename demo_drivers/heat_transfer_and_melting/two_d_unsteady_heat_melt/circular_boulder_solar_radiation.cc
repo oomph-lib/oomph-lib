@@ -1174,7 +1174,7 @@ void SolarRadiationProblem<ELEMENT>::doc_solution()
  npts=5;
  
  // Output solution 
- sprintf(filename,"%s/soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,npts);
@@ -1182,14 +1182,14 @@ void SolarRadiationProblem<ELEMENT>::doc_solution()
  
  // Output solution coarsely (only element vertices for easier
  // mesh visualisation)
- sprintf(filename,"%s/coarse_soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/coarse_soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,2);
  some_file.close();
  
  // Output contact elements
- sprintf(filename,"%s/contact%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/contact%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  unsigned nel=Surface_contact_mesh_pt->nelement();
@@ -1201,7 +1201,7 @@ void SolarRadiationProblem<ELEMENT>::doc_solution()
  some_file.close();
  
  // Output exact solution
- sprintf(filename,"%s/exact_soln%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/exact_soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output_fct(
@@ -1217,7 +1217,7 @@ void SolarRadiationProblem<ELEMENT>::doc_solution()
                                           solar_flux_magnitude, 
                                           solar_flux_unit_vector, 
                                           total_diffuse_radiation);
- sprintf(filename,"%s/solar_radiation%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/solar_radiation%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  some_file << "0.0 3.5 " 
@@ -1229,7 +1229,7 @@ void SolarRadiationProblem<ELEMENT>::doc_solution()
  
 
  // Output atmospheric radiation along all exposed surfaces
- sprintf(filename,"%s/atmospheric_radiation%i.dat",
+ snprintf(filename, sizeof(filename), "%s/atmospheric_radiation%i.dat",
          Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
@@ -1244,7 +1244,7 @@ void SolarRadiationProblem<ELEMENT>::doc_solution()
 
 
  // Output illumination angles for all integration points
- sprintf(filename,"%s/illumination_angles%i.dat",
+ snprintf(filename, sizeof(filename), "%s/illumination_angles%i.dat",
          Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
@@ -1269,7 +1269,7 @@ void SolarRadiationProblem<ELEMENT>::doc_solution()
    unsigned count=0;
    for (unsigned e=0;e<nel;e++)
     {
-     sprintf(filename,"%s/diffuse_radiation_cone%i_%i.dat",
+     snprintf(filename, sizeof(filename), "%s/diffuse_radiation_cone%i_%i.dat",
              Doc_info.directory().c_str(),
              Doc_info.number(),count++);
      some_file.open(filename);
@@ -1281,7 +1281,7 @@ void SolarRadiationProblem<ELEMENT>::doc_solution()
    count=0;
    for (unsigned e=0;e<nel;e++)
     {
-     sprintf(filename,"%s/diffuse_radiation_cone_max_angle%i_%i.dat",
+     snprintf(filename, sizeof(filename), "%s/diffuse_radiation_cone_max_angle%i_%i.dat",
              Doc_info.directory().c_str(),
              Doc_info.number(),count++);
      some_file.open(filename);
@@ -1293,7 +1293,7 @@ void SolarRadiationProblem<ELEMENT>::doc_solution()
    count=0;
    for (unsigned e=0;e<nel;e++)
     {
-     sprintf(filename,"%s/diffuse_radiation_cone_min_angle%i_%i.dat",
+     snprintf(filename, sizeof(filename), "%s/diffuse_radiation_cone_min_angle%i_%i.dat",
              Doc_info.directory().c_str(),
              Doc_info.number(),count++);
      some_file.open(filename);
@@ -1306,7 +1306,7 @@ void SolarRadiationProblem<ELEMENT>::doc_solution()
 
 
  // Output penetrator
- sprintf(filename,"%s/penetrator%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/penetrator%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  unsigned n=100;
@@ -1315,7 +1315,7 @@ void SolarRadiationProblem<ELEMENT>::doc_solution()
  
  // Output Number of Newton iterations in form that can be visualised
  // as vector in paraview
- sprintf(filename,"%s/newton_iter%i.dat",Doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/newton_iter%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  some_file << "0 0 0 " << Nnewton_iter_taken << std::endl;

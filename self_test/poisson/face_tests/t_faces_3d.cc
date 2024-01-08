@@ -382,7 +382,7 @@ TFaceTestProblem(const unsigned& h_power, const unsigned &rotate,
     
      //Create an output file
      char filename[100];
-     sprintf(filename,"%s_normals%i_%i.dat",filestem.c_str(),b,rotate);
+     snprintf(filename, sizeof(filename), "%s_normals%i_%i.dat",filestem.c_str(),b,rotate);
      ofstream output(filename);
      output << flux_element_pt->tecplot_zone_string(n_pts);
      double local_error = 0.0;
@@ -476,7 +476,7 @@ TFaceTestProblem(const unsigned& h_power, const unsigned &rotate,
    Vector<double> s(2);
    
    char filename[100];
-   sprintf(filename,"%s_normals%i.dat",filestem.c_str(),b);
+   snprintf(filename, sizeof(filename), "%s_normals%i.dat",filestem.c_str(),b);
    ofstream output(filename);
    for(std::list<FaceElement*>::iterator it=faces_on_boundary[b].begin();
        it!=faces_on_boundary[b].end();++it)

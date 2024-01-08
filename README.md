@@ -144,11 +144,11 @@ Windows          | No
 ## Prerequisites
 
 `oomph-lib` uses CMake and Ninja to build and install the project.
-Make sure you have sufficiently recent versions of these programms installed on your computer:
+Make sure you have sufficiently recent versions of these programs installed on your computer:
 
 ### CMake
 
-You will need CMake 3.22+. You can install `cmake` via your native package manager, e.g.
+You will need CMake 3.24+. You can install `cmake` via your native package manager, e.g.
 
 ```bash
 # On Ubuntu:
@@ -162,7 +162,7 @@ or
 brew install cmake
 ```
 
- If your package manager does not provide a recent enough version of `cmake`, you will need to build it from source. You can find instructions on how to do this [below](#building-cmake) and on the [CMake website](https://cmake.org/install/).
+If your package manager does not provide a recent enough version of `cmake`, you will need to build it from source. You can find instructions on how to do this [below](#building-cmake) and on the [CMake website](https://cmake.org/install/).
 
 ### Ninja
 
@@ -506,7 +506,7 @@ The `CMakeLists.txt` file contains the following:
 message(VERBOSE "Entered mesh_gluing subdirectory")
 
 # Specify minimum cmake version; die if you can't find it
-cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
 
 # Name of the project, followed by languages used
 project(mesh_gluing C CXX Fortran)
@@ -1011,15 +1011,8 @@ Option                                  | Description                           
 `OOMPH_MPI_NUM_PROC`                    | Number of processes to use with MPI-enabled tests                            | 2
 `OOMPH_ENABLE_PARANOID`                 | Enable the PARANOID flag in Debug                                            | OFF
 `OOMPH_ENABLE_RANGE_CHECKING`           | Enable RANGE_CHECKING flag in Debug                                          | OFF
-`OOMPH_TRANSITION_TO_VERSION_3`         | Try to build with up-to-date external sources                                | OFF
-`OOMPH_USE_DEPRECATED_SUPERLU`          | Use oomph-lib's deprecated version of SuperLU (4.3)                          | OFF
 `OOMPH_SUPPRESS_TRIANGLE_LIB`           | Suppress build of oomph-lib's copy of the triangle library                   | OFF
 `OOMPH_SUPPRESS_TETGEN_LIB`             | Suppress build of oomph-lib's copy of the tetgen library                     | OFF
-`OOMPH_WANT_NLOHMANN_JSON`              | Enable the [`nlohmann/json`](https://github.com/nlohmann/json) JSON library  | OFF
-`OOMPH_WANT_CGAL`                       | Enable we want to build the CGAL library? **[DOESN'T WORK YET!]**            | OFF
-`OOMPH_WANT_HYPRE`                      | Enable Hypre library                                                         | OFF
-`OOMPH_WANT_MUMPS`                      | Enable MUMPS library [CURRENTLY ONLY WORKING WITH MPI]                       | OFF
-`OOMPH_WANT_TRILINOS`                   | Enable Trilinos library                                                      | OFF
 
 ## CMake Presets
 
@@ -1249,7 +1242,7 @@ For Linux, CMake provides an installer script to help you download and install C
 
 ```bash
 # Pick version and installation location
-CMAKE_VERSION=3.22.1
+CMAKE_VERSION=3.24.4
 CMAKE_DEST_DIR=~/.cmake-${CMAKE_VERSION}
 
 # Download installer script and run
@@ -1267,7 +1260,7 @@ To accommodate both Intel-based and Arm-based Macs, CMake provides a "universal 
 
 ```bash
 # Pick version and download location
-CMAKE_VERSION=3.22.1
+CMAKE_VERSION=3.24.4
 CMAKE_DEST_DIR=~/.cmake-${CMAKE_VERSION}
 
 # Download package and move to desired location

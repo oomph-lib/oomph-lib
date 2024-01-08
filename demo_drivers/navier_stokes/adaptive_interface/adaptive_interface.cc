@@ -1224,7 +1224,7 @@ void RefineableRotatingCylinderProblem<ELEMENT>::solve()
          << Bulk_mesh_pt->boundary_node_pt(2,0)->x(1) << std::endl;   
    
    char file[100];
-   sprintf(file,"step%i.dat",i);
+   snprintf(file, sizeof(file), "step%i.dat",i);
    filename.open(file);
    Bulk_mesh_pt->output(filename,5);
    Surface_mesh_pt->output(filename,5);

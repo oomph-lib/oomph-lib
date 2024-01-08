@@ -248,7 +248,7 @@ void RectangularDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  npts=5; 
 
  // Output solution 
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
@@ -377,7 +377,7 @@ void RectangularDrivenCavityProblem<ELEMENT>::compare_assembly_strategies(
   {
    ofstream matrix_file;
    char filename[100];
-   sprintf(filename,"matrix%i.dat",method);
+   snprintf(filename, sizeof(filename), "matrix%i.dat",method);
    matrix_file.open(filename);
    matrix.sparse_indexed_output(matrix_file);
    matrix_file.close();

@@ -148,7 +148,7 @@ template<class ELEMENT>
      
      // Convert to a *char required by the triangulate function
      char tetswitches[100];
-     sprintf(tetswitches,"%s",input_string_stream.str().c_str());
+     snprintf(tetswitches, sizeof(tetswitches), "%s",input_string_stream.str().c_str());
      
      // Build triangulateio refined object
      tetrahedralize(tetswitches, tetgen_input_pt, this->Tetgenio_pt);       
@@ -2128,7 +2128,7 @@ void RisingBubbleProblem<ELEMENT>::doc_solution(const unsigned& nplot,
 
  // Doc local node numbering
  //-------------------------
- sprintf(filename,"%s/node_numbering%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/node_numbering%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  FiniteElement* el_pt=Fluid_mesh_pt->finite_element_pt(0);
@@ -2149,7 +2149,7 @@ void RisingBubbleProblem<ELEMENT>::doc_solution(const unsigned& nplot,
 
  // Output boundaries
  //------------------
- sprintf(filename,"%s/surface%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/surface%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Free_surface_mesh_pt->output(some_file,nplot);
@@ -2160,7 +2160,7 @@ void RisingBubbleProblem<ELEMENT>::doc_solution(const unsigned& nplot,
 
  // Output solution
  //----------------
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ snprintf(filename, sizeof(filename), "%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Fluid_mesh_pt->output(some_file,nplot);
