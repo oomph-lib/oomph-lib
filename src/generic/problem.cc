@@ -2071,7 +2071,7 @@ namespace oomph
   //================================================================
   unsigned long Problem::assign_eqn_numbers(
     const bool& assign_local_eqn_numbers)
-{
+  {
     // Check that the global mesh has been build
 #ifdef PARANOID
     if (Mesh_pt == 0)
