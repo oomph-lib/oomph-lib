@@ -172,10 +172,10 @@ find_package(
 # that it has already found BLAS (the OpenBLAS version) and will make everything
 # (hopefully) work!
 set(BLA_VENDOR OpenBLAS)
-set(CMAKE_PREFIX_PATH_BACKUP "${CMAKE_PREFIX_PATH}")
+set(BACKUP_CMAKE_PREFIX_PATH "${CMAKE_PREFIX_PATH}")
 set(CMAKE_PREFIX_PATH ${OOMPH_USE_OPENBLAS_FROM})
 find_package(BLAS REQUIRED)
-set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH_BACKUP})
+set(CMAKE_PREFIX_PATH ${BACKUP_CMAKE_PREFIX_PATH})
 
 # Do we want to use Gmsh?
 if(OOMPH_USE_GMSH_FROM)
