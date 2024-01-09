@@ -256,6 +256,9 @@ RefineableDrivenCavityProblem<ELEMENT>::RefineableDrivenCavityProblem()
   
  // Setup equation numbering scheme
  cout <<"Number of equations: " << assign_eqn_numbers() << std::endl; 
+
+ // hierher
+ linear_solver_pt() = new MumpsSolver;
  
  // Line visualiser data allocation
 

@@ -610,7 +610,11 @@ UniformTranspiration<ELEMENT>::UniformTranspiration
  mesh_pt()->boundary_node_pt(1,0)->set_value(0,-1.0);
  
  //Attach the boundary conditions to the mesh
- cout << assign_eqn_numbers() << std::endl; 
+ cout << assign_eqn_numbers() << std::endl;
+ 
+ linear_solver_pt() =  new MumpsSolver;
+
+ 
 }
 
 //Main driver loop

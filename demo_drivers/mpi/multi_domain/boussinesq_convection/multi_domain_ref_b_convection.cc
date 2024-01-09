@@ -368,6 +368,9 @@ RefineableConvectionProblem()
  // Setup equation numbering scheme
  cout << "Number of equations: " << assign_eqn_numbers() << endl; 
 
+ // hierher
+ linear_solver_pt()=new MumpsSolver;
+ 
  // Set this to higher than default (10)
  Problem::Max_newton_iterations=20;
 

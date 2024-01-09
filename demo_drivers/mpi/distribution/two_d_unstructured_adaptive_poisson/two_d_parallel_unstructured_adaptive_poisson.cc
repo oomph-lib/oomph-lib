@@ -1152,6 +1152,8 @@ void PoissonProblem<ELEMENT>::complete_problem_setup()
  // Setup equation numbering scheme
  cout <<"Number of equations: " << assign_eqn_numbers() << std::endl;
  
+ linear_solver_pt() =  new MumpsSolver;
+
  apply_boundary_conditions();
  
 }

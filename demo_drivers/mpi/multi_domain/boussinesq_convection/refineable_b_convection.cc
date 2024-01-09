@@ -263,6 +263,9 @@ RefineableConvectionProblem() : Imperfect(false)
  // Setup equation numbering scheme
  cout <<"Number of equations: " << assign_eqn_numbers() << endl; 
 
+ // hierher
+ linear_solver_pt()=new MumpsSolver;
+ 
 } // end of constructor
 
 

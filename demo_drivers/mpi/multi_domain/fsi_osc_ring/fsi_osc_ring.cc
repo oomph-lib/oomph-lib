@@ -739,6 +739,9 @@ FSIRingProblem::FSIRingProblem(const unsigned& N,
 
  // Do equation numbering
  cout << "# of dofs " << assign_eqn_numbers() << std::endl;
+
+ // hierher
+ linear_solver_pt()=new MumpsSolver;
  
 }
 

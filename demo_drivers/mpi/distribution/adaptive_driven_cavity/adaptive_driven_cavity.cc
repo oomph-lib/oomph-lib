@@ -221,8 +221,10 @@ RefineableDrivenCavityProblem<ELEMENT>::RefineableDrivenCavityProblem()
  fix_pressure(0,0,0.0);
   
  // Setup equation numbering scheme
- cout <<"Number of equations: " << assign_eqn_numbers() << std::endl; 
+ cout <<"Number of equations: " << assign_eqn_numbers() << std::endl;
  
+ linear_solver_pt() =  new MumpsSolver;
+
 } // end_of_constructor
 
 

@@ -451,7 +451,10 @@ RotatingProblem<ELEMENT>::RotatingProblem
  
  //Setup all the equation numbering and look-up schemes 
  //(function defined in Problem class)
- oomph_info << assign_eqn_numbers() << std::endl; 
+ oomph_info << assign_eqn_numbers() << std::endl;
+
+ linear_solver_pt() =  new MumpsSolver;
+
 }
 
 //Finish the specification of the elements in the problem

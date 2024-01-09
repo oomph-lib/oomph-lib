@@ -22,7 +22,8 @@ set(SUBDIRS
     vector_concatenation
     vector_concatenation_without_communication
     vector_split
-    vector_split_without_communication)
+    vector_split_without_communication
+    metis_based_partition_tester)
 
 foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})

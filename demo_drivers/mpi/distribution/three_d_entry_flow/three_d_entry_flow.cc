@@ -231,7 +231,9 @@ EntryFlowProblem<ELEMENT>::EntryFlowProblem(DocInfo& doc_info,
  Alpha=20;
 
  //Attach the boundary conditions to the mesh
- cout <<"Number of equations: " << assign_eqn_numbers() << std::endl; 
+ cout <<"Number of equations: " << assign_eqn_numbers() << std::endl;
+ 
+ linear_solver_pt() =  new MumpsSolver;
 
 } // end_of_constructor
 

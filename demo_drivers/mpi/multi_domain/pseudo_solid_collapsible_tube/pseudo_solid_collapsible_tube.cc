@@ -911,7 +911,11 @@ PseudoElasticCollapsibleChannelProblem()
  Multi_domain_functions::Doc_boundary_coordinate_file.close();
 
  // Setup equation numbering scheme
- std::cout <<"Number of equations: " << assign_eqn_numbers() << std::endl; 
+ std::cout <<"Number of equations: " << assign_eqn_numbers() << std::endl;
+
+ // hierher
+ //linear_solver_pt()=new MumpsSolver;
+
 }
 
 
