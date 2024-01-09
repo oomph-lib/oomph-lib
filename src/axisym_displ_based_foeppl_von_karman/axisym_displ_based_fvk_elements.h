@@ -301,9 +301,8 @@ namespace oomph
     }
 
 
-    /// Compute in-plane stresses. Return boolean to indicate success
-    /// (false if attempt to evaluate stresses at zero radius)
-    bool interpolated_stress(const Vector<double>& s,
+    /// Compute in-plane stresses
+    void interpolated_stress(const Vector<double>& s,
                              double& sigma_r_r,
                              double& sigma_phi_phi) const;
 
