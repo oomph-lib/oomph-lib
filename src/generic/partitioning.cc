@@ -1083,7 +1083,7 @@ namespace oomph
 
       // Start timer
       cpu_start = clock();
-      
+
       // Number of vertices in graph
       idx_t nvertex = total_number_of_root_elements;
 
