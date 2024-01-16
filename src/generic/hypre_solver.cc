@@ -536,9 +536,9 @@ namespace oomph
       int err = HypreHelpers::check_HYPRE_error_flag(message);
       if (err)
       {
-       OomphLibWarning(message.str(),
-                             "HypreSolver::hypre_matrix_setup()",
-                             OOMPH_EXCEPTION_LOCATION);
+        OomphLibWarning(message.str(),
+                        "HypreSolver::hypre_matrix_setup()",
+                        OOMPH_EXCEPTION_LOCATION);
       }
     }
 
@@ -1823,7 +1823,7 @@ namespace oomph
 
     // perform hypre_solve
     hypre_solve(r, z);
-     
+
     // Add to cumulative solve time
     double t_end = TimingHelpers::timer();
     Cumulative_preconditioner_solve_time += (t_end - t_start);
