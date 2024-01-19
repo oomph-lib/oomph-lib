@@ -1200,23 +1200,26 @@ namespace oomph
     double t_factorise_start = TimingHelpers::timer();
 
     // hierher
-    if (1==0)
+    if (1 == 0)
     {
-     std::string filename="jac_"+
-      StringConversion::to_string(Global_unsigned::Number)+"_proc"+
-      StringConversion::to_string(MPI_Helpers::communicator_pt()->my_rank())+".dat";
-     CRDoubleMatrix* cr_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
-     cr_pt->sparse_indexed_output_with_offset(filename);
-     oomph_info << "hierher output matrix " <<  Global_unsigned::Number << std::endl;
-     Global_unsigned::Number++;
+      std::string filename =
+        "jac_" + StringConversion::to_string(Global_unsigned::Number) +
+        "_proc" +
+        StringConversion::to_string(MPI_Helpers::communicator_pt()->my_rank()) +
+        ".dat";
+      CRDoubleMatrix* cr_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
+      cr_pt->sparse_indexed_output_with_offset(filename);
+      oomph_info << "hierher output matrix " << Global_unsigned::Number
+                 << std::endl;
+      Global_unsigned::Number++;
     }
 
-    
+
     // Factorise the matrix
     factorise(matrix_pt);
 
     // oomph_info << "hierher back from factorise" << std::endl;
-    //exit(0);
+    // exit(0);
 
     // Doc the end time
     double t_factorise_end = TimingHelpers::timer();
@@ -2006,8 +2009,9 @@ namespace oomph
           cr_matrix_pt->clear();
         }
 
-        //oomph_info << "going in there  superlu_dist_distributed_matrix(); Dist_info = "
-        //           << Dist_info<< std::endl;
+        // oomph_info << "going in there  superlu_dist_distributed_matrix();
+        // Dist_info = "
+        //            << Dist_info<< std::endl;
 
         // Factorize
         superlu_dist_distributed_matrix(
@@ -2027,8 +2031,9 @@ namespace oomph
           &Dist_solver_data_pt,
           &Dist_info,
           this->distribution_pt()->communicator_pt()->mpi_comm());
-        
-        // oomph_info << "back from superlu_dist_distributed_matrix(); Dist_info = "
+
+        // oomph_info << "back from superlu_dist_distributed_matrix(); Dist_info
+        // = "
         //           << Dist_info<< std::endl;
 
         // Record that data is stored
