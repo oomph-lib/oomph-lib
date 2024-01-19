@@ -305,7 +305,7 @@ private:
 /// represent the state at the initial time.
 //===============================================================
 void FSIRingProblem::set_initial_condition()
-{ 
+{
 
  cout << "Setting wall ic" << std::endl;
  set_wall_initial_condition();

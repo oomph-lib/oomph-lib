@@ -25,11 +25,7 @@
 */
 #include <math.h>
 #ifdef USING_OOMPH_SUPERLU_DIST
-#ifdef OOMPH_USE_OLD_SUPERLU_DIST
-#include "oomph_superlu_dist_3.0.h"
-#else
 #include "oomph_superlu_dist_8.2.1.h"
-#endif
 #else
 #include <superlu_defs.h>
 #include <superlu_ddefs.h>
@@ -41,29 +37,6 @@
 #include <util_dist.h>
 #endif
 
-#ifdef OOMPH_USE_OLD_SUPERLU_DIST
-#define SCALEPERMSTRUCT_T ScalePermstruct_t
-#define LUSTRUCT_T LUstruct_t
-#define SOLVESTRUCT_T SOLVEstruct_t
-#define OPTIONS_T superlu_options_t
-#define MEM_USAGE_T mem_usage_t
-#define SCALEPERMSTRUCTINIT ScalePermstructInit
-#define LUSTRUCTINIT LUstructInit
-#define DSCALEPERMSTRUCTFREE ScalePermstructFree
-#define DDESTROY_LU Destroy_LU
-#define DLUSTRUCTFREE LUstructFree
-#else
-#define SCALEPERMSTRUCT_T dScalePermstruct_t
-#define LUSTRUCT_T dLUstruct_t
-#define SOLVESTRUCT_T dSOLVEstruct_t
-#define OPTIONS_T superlu_dist_options_t
-#define MEM_USAGE_T superlu_dist_mem_usage_t
-#define SCALEPERMSTRUCTINIT dScalePermstructInit
-#define LUSTRUCTINIT dLUstructInit
-#define DSCALEPERMSTRUCTFREE dScalePermstructFree
-#define DDESTROY_LU dDestroy_LU
-#define DLUSTRUCTFREE dLUstructFree
-#endif
 
 /* ================================================= */
 /* Struct for the lu factors  */
@@ -73,10 +46,10 @@ typedef struct
   gridinfo_t* grid;
   SuperMatrix* A;
   SuperMatrix* AC;
-  SCALEPERMSTRUCT_T* ScalePermstruct;
-  LUSTRUCT_T* LUstruct;
-  SOLVESTRUCT_T* SOLVEstruct;
-  OPTIONS_T* options;
+  dScalePermstruct_t* ScalePermstruct;
+  dLUstruct_t* LUstruct;
+  dSOLVEstruct_t* SOLVEstruct;
+  superlu_dist_options_t* options;
   int_t rowequ;
   int_t colequ;
   double anorm;
@@ -90,7 +63,7 @@ typedef struct
 struct MemoryStatisticsStorage
 {
   // Storage for the memory stats
-  MEM_USAGE_T Memory_usage;
+  superlu_dist_mem_usage_t Memory_usage;
 
   // Boolean
   int Memory_usage_has_been_recorded;
@@ -214,12 +187,12 @@ void superlu_dist_distributed_matrix(int opt_flag,
                                      MPI_Comm comm)
 {
   /* Some SuperLU structures */
-  OPTIONS_T* options;
+  superlu_dist_options_t* options;
   SuperLUStat_t stat;
   SuperMatrix* A;
-  SCALEPERMSTRUCT_T* ScalePermstruct;
-  LUSTRUCT_T* LUstruct;
-  SOLVESTRUCT_T* SOLVEstruct;
+  dScalePermstruct_t* ScalePermstruct;
+  dLUstruct_t* LUstruct;
+  dSOLVEstruct_t* SOLVEstruct;
   gridinfo_t* grid;
 
   /* Structure to hold SuperLU structures and data */
@@ -252,7 +225,7 @@ void superlu_dist_distributed_matrix(int opt_flag,
   double anorm = 0.0;
   char equed[1], norm[1];
   int ldx; /* LDA for matrix X (local). */
-  // static MEM_USAGE_T symb_mem_usage;
+  // static superlu_dist_mem_usage_t symb_mem_usage;
   fact_t Fact;
   int_t Equil, factored, notran, permc_spec;
 
@@ -290,12 +263,13 @@ void superlu_dist_distributed_matrix(int opt_flag,
     if (iam >= nprow * npcol) return;
 
     /* Allocate memory for SuperLU_DIST structures */
-    options = (OPTIONS_T*)SUPERLU_MALLOC(sizeof(OPTIONS_T));
+    options =
+      (superlu_dist_options_t*)SUPERLU_MALLOC(sizeof(superlu_dist_options_t));
     A = (SuperMatrix*)SUPERLU_MALLOC(sizeof(SuperMatrix));
     ScalePermstruct =
-      (SCALEPERMSTRUCT_T*)SUPERLU_MALLOC(sizeof(SCALEPERMSTRUCT_T));
-    LUstruct = (LUSTRUCT_T*)SUPERLU_MALLOC(sizeof(LUSTRUCT_T));
-    SOLVEstruct = (SOLVESTRUCT_T*)SUPERLU_MALLOC(sizeof(SOLVESTRUCT_T));
+      (dScalePermstruct_t*)SUPERLU_MALLOC(sizeof(dScalePermstruct_t));
+    LUstruct = (dLUstruct_t*)SUPERLU_MALLOC(sizeof(dLUstruct_t));
+    SOLVEstruct = (dSOLVEstruct_t*)SUPERLU_MALLOC(sizeof(dSOLVEstruct_t));
 
     /* Create SuperMatrix from compressed row representation */
     dCreate_CompRowLoc_Matrix_dist(A,
@@ -317,37 +291,21 @@ void superlu_dist_distributed_matrix(int opt_flag,
     /* Is the matrix transposed (NOTRANS or TRANS)? */
     options->Trans = NOTRANS;
 
-#ifdef OOMPH_USE_OLD_SUPERLU_DIST
-    /* Row permutations (NATURAL [= do nothing],     */
-    /*                   LargeDiag [default], ...)?  */
-    /*    options->RowPerm=NATURAL; */
-    options->RowPerm = LargeDiag;
-#else
     /* Row permutations (NATURAL [= do nothing],     */
     /*                   LargeDiag_MC64 [default], ...)?  */
     /*    options->RowPerm=NATURAL; */
-    options->RowPerm = LargeDiag_MC64;
-#endif
-
+    options->RowPerm = LargeDiag_MC64; /* hierher used to be LargeDiag */
+                                       /* note: LargeDiag_HWPM seems to be an opption too */
     /* Column permutations (NATURAL [= do nothing],      */
     /*                      MMD_AT_PLUS_A [default],...) */
     options->ColPerm = MMD_AT_PLUS_A;
 
-#ifdef OOMPH_USE_OLD_SUPERLU_DIST
     /* Use natural ordering instead? */
     if (allow_permutations == 0)
     {
       options->ColPerm = NATURAL;
-      options->RowPerm = NOROWPERM;
+      options->RowPerm = NATURAL; 
     }
-#else
-    /* Use natural ordering instead? */
-    if (allow_permutations == 0)
-    {
-      options->ColPerm = NATURAL;
-      options->RowPerm = NATURAL;
-    }
-#endif
 
     /*    printf("\n\n\nSWITCHING OFF EQUILIBRATION\n\n\n"); */
     /*    options->Equil=NO; */
@@ -376,13 +334,9 @@ void superlu_dist_distributed_matrix(int opt_flag,
     }
 
     /* Initialize ScalePermstruct and LUstruct. */
-    SCALEPERMSTRUCTINIT(m, n, ScalePermstruct);
-    LUSTRUCTINIT(
-#ifdef OOMPH_USE_OLD_SUPERLU_DIST
-      m,
-#endif
-      n,
-      LUstruct);
+    dScalePermstructInit(m, n, ScalePermstruct);
+    dLUstructInit(n, LUstruct); /* hierher used to have two args: LUstructInit(m, n, LUstruct); */
+    /* ok no 3 arg version exists */
 
     /* Initialization. */
     Glu_persist = LUstruct->Glu_persist;
@@ -603,19 +557,22 @@ void superlu_dist_distributed_matrix(int opt_flag,
       */
       if (Fact != SamePattern_SameRowPerm)
       {
-#ifdef OOMPH_USE_OLD_SUPERLU_DIST
-        need_value = (options->RowPerm == LargeDiag);
-#else
-        need_value = (options->RowPerm == LargeDiag_MC64);
-#endif
+        need_value = (options->RowPerm == LargeDiag_MC64);  /* hierher used to be LargeDiag */
+        /* note: LargeDiag_HWPM seems to be an opption too */
+
         pdCompRow_loc_to_CompCol_global(need_value, A, grid, &GA);
         GAstore = (NCformat*)GA.Store;
         colptr = GAstore->colptr;
         rowind = GAstore->rowind;
         nnz = GAstore->nnz;
-        if (need_value) a_GA = GAstore->nzval;
+        if (need_value)
+         {
+          a_GA = GAstore->nzval;
+         }
         else
+         {
           assert(GAstore->nzval == NULL);
+         }
       }
 
       /* ------------------------------------------------------------
@@ -772,9 +729,14 @@ void superlu_dist_distributed_matrix(int opt_flag,
     if (!factored || options->IterRefine)
     {
       /* Compute norm(A), which will be used to adjust small diagonal. */
-      if (notran) *(unsigned char*)norm = '1';
+      if (notran)
+       { 
+        *(unsigned char*)norm = '1';
+       }
       else
+       {
         *(unsigned char*)norm = 'I';
+       }
       anorm = pdlangs(norm, A, grid);
     }
 
@@ -869,17 +831,7 @@ void superlu_dist_distributed_matrix(int opt_flag,
       t = SuperLU_timer_();
       /* dist_mem_use = */
       pddistribute(
-#ifdef OOMPH_USE_OLD_SUPERLU_DIST
-        Fact,
-#else
-        options,
-#endif
-        n,
-        A,
-        ScalePermstruct,
-        Glu_freeable,
-        LUstruct,
-        grid);
+        options, n, A, ScalePermstruct, Glu_freeable, LUstruct, grid);  /* hierher options used to be Fact */
       stat.utime[DIST] = SuperLU_timer_() - t;
 
       /* Deallocate storage used in symbolic factorization. */
@@ -1070,22 +1022,19 @@ void superlu_dist_distributed_matrix(int opt_flag,
     /* ------------------------------------------------------------
        Solve the linear system.
        ------------------------------------------------------------*/
-    pdgstrs(
-#ifndef OOMPH_USE_OLD_SUPERLU_DIST
-      options,
-#endif
-      n,
-      LUstruct,
-      ScalePermstruct,
-      grid,
-      X,
-      m_loc,
-      fst_row,
-      ldb,
-      nrhs,
-      SOLVEstruct,
-      &stat,
-      info);
+    pdgstrs(options,              /* hierher options added as arg */
+            n,
+            LUstruct,
+            ScalePermstruct,
+            grid,
+            X,
+            m_loc,
+            fst_row,
+            ldb,
+            nrhs,
+            SOLVEstruct,
+            &stat,
+            info);
 
     if (*info != 0)
     {
@@ -1101,7 +1050,7 @@ void superlu_dist_distributed_matrix(int opt_flag,
     {
       /* Improve the solution by iterative refinement. */
       int_t *it, *colind_gsmv = SOLVEstruct->A_colind_gsmv;
-      /*SOLVESTRUCT_T *SOLVEstruct1;*/ /* Used by refinement. */
+      /*dSOLVEstruct_t *SOLVEstruct1;*/ /* Used by refinement. */
 
       t = SuperLU_timer_();
       if (options->RefineInitialized == NO || Fact == DOFACT)
@@ -1161,25 +1110,22 @@ void superlu_dist_distributed_matrix(int opt_flag,
         ABORT("Malloc fails for berr[].");
       }
 
-      pdgsrfs(
-#ifndef OOMPH_USE_OLD_SUPERLU_DIST
-        options,
-#endif
-        n,
-        A,
-        anorm,
-        LUstruct,
-        ScalePermstruct,
-        grid,
-        B,
-        ldb,
-        X,
-        ldx,
-        nrhs,
-        SOLVEstruct,
-        berr,
-        &stat,
-        info);
+      pdgsrfs(options,    /* hierher options added as arg */
+              n,
+              A,
+              anorm,
+              LUstruct,
+              ScalePermstruct,
+              grid,
+              B,
+              ldb,
+              X,
+              ldx,
+              nrhs,
+              SOLVEstruct,
+              berr,
+              &stat,
+              info);
 
       stat.utime[REFINE] = SuperLU_timer_() - t;
     }
@@ -1315,9 +1261,9 @@ void superlu_dist_distributed_matrix(int opt_flag,
     }
 
     /*  Free storage */
-    DSCALEPERMSTRUCTFREE(ScalePermstruct);
-    DDESTROY_LU(n, grid, LUstruct);
-    DLUSTRUCTFREE(LUstruct);
+    dScalePermstructFree(ScalePermstruct);
+    dDestroy_LU(n, grid, LUstruct);
+    dLUstructFree(LUstruct);
     dSolveFinalize(options, SOLVEstruct);
     // Destroy_CompRowLoc_Matrix_dist(&A);
 
@@ -1395,12 +1341,12 @@ void superlu_dist_global_matrix(int opt_flag,
                                 MPI_Comm comm)
 {
   /* Some SuperLU structures */
-  OPTIONS_T* options;
+  superlu_dist_options_t* options;
   SuperLUStat_t stat;
   SuperMatrix* A;
   SuperMatrix* AC;
-  SCALEPERMSTRUCT_T* ScalePermstruct;
-  LUSTRUCT_T* LUstruct;
+  dScalePermstruct_t* ScalePermstruct;
+  dLUstruct_t* LUstruct;
   gridinfo_t* grid;
 
   /* Structure to hold SuperLU structures and data */
@@ -1428,7 +1374,7 @@ void superlu_dist_global_matrix(int opt_flag,
   char equed[1], norm[1];
   int ldx; /* LDA for matrix X (local). */
   int iam;
-  // static MEM_USAGE_T  num_mem_usage, symb_mem_usage;
+  // static superlu_dist_mem_usage_t  num_mem_usage, symb_mem_usage;
   fact_t Fact;
 
 
@@ -1471,12 +1417,13 @@ void superlu_dist_global_matrix(int opt_flag,
     }
 
     /* Allocate memory for SuperLU_DIST structures */
-    options = (OPTIONS_T*)SUPERLU_MALLOC(sizeof(OPTIONS_T));
+    options =
+      (superlu_dist_options_t*)SUPERLU_MALLOC(sizeof(superlu_dist_options_t));
     A = (SuperMatrix*)SUPERLU_MALLOC(sizeof(SuperMatrix));
     AC = (SuperMatrix*)SUPERLU_MALLOC(sizeof(SuperMatrix));
     ScalePermstruct =
-      (SCALEPERMSTRUCT_T*)SUPERLU_MALLOC(sizeof(SCALEPERMSTRUCT_T));
-    LUstruct = (LUSTRUCT_T*)SUPERLU_MALLOC(sizeof(LUSTRUCT_T));
+      (dScalePermstruct_t*)SUPERLU_MALLOC(sizeof(dScalePermstruct_t));
+    LUstruct = (dLUstruct_t*)SUPERLU_MALLOC(sizeof(dLUstruct_t));
 
     /* Set the default options */
     set_default_options_dist(options);
@@ -1484,17 +1431,11 @@ void superlu_dist_global_matrix(int opt_flag,
     /* Is the matrix transposed (NOTRANS or TRANS)? */
     options->Trans = NOTRANS;
 
-#ifdef OOMPH_USE_OLD_SUPERLU_DIST
-    /* Row permutations (NATURAL [= do nothing],     */
-    /*                   LargeDiag [default], ...)?  */
-    /*    options->RowPerm=NATURAL; */
-    options->RowPerm = LargeDiag;
-#else
     /* Row permutations (NATURAL [= do nothing],     */
     /*                   LargeDiag_MC64 [default], ...)?  */
     /*    options->RowPerm=NATURAL; */
-    options->RowPerm = LargeDiag_MC64;
-#endif
+    options->RowPerm = LargeDiag_MC64;  /* hierher used to be LargeDiag */
+                                        /* note: LargeDiag_HWPM seems to be an opption too */
 
     /* Column permutations (NATURAL [= do nothing],      */
     /*                      MMD_AT_PLUS_A [default],...) */
@@ -1504,7 +1445,7 @@ void superlu_dist_global_matrix(int opt_flag,
     if (allow_permutations == 0)
     {
       options->ColPerm = NATURAL;
-      options->RowPerm = NOROWPERM;
+      options->RowPerm = NATURAL;
     }
 
     /* Iterative refinement (essential as far as I can tell).*/
@@ -1535,13 +1476,9 @@ void superlu_dist_global_matrix(int opt_flag,
       A, m, n, nnz, values, row_index, col_start, SLU_NC, SLU_D, SLU_GE);
 
     /* Initialize ScalePermstruct and LUstruct. */
-    SCALEPERMSTRUCTINIT(m, n, ScalePermstruct);
-    LUSTRUCTINIT(
-#ifdef OOMPH_USE_OLD_SUPERLU_DIST
-      m,
-#endif
-      n,
-      LUstruct);
+    dScalePermstructInit(m, n, ScalePermstruct);
+    dLUstructInit(n, LUstruct); /* hierher used to have two args: LUstructInit(m, n, LUstruct); */
+    /* ok no 3 arg version exists */
 
     /* Test the control parameters etc. */
     *info = 0;
@@ -2011,17 +1948,7 @@ void superlu_dist_global_matrix(int opt_flag,
       /* Distribute the L and U factors onto the process grid. */
       t = SuperLU_timer_();
       /* dist_mem_use = */
-      ddistribute(
-#ifdef OOMPH_USE_OLD_SUPERLU_DIST
-        Fact,
-#else
-        options,
-#endif
-        n,
-        AC,
-        Glu_freeable,
-        LUstruct,
-        grid);
+      ddistribute(options, n, AC, Glu_freeable, LUstruct, grid); /* hierher options used to be Fact */
       stat.utime[DIST] = SuperLU_timer_() - t;
 
       /* Deallocate storage used in symbolic factor. */
@@ -2240,18 +2167,7 @@ void superlu_dist_global_matrix(int opt_flag,
     /* ------------------------------------------------------------
        Solve the linear system.
        ------------------------------------------------------------*/
-    pdgstrs_Bglobal(
-#ifndef OOMPH_USE_OLD_SUPERLU_DIST
-      options,
-#endif
-      n,
-      LUstruct,
-      grid,
-      X,
-      ldb,
-      nrhs,
-      &stat,
-      info);
+    pdgstrs_Bglobal(options, n, LUstruct, grid, X, ldb, nrhs, &stat, info); /* hierher new arg: options) */
     if (*info != 0)
     {
       printf("Trouble in pdgstrs_Bglobal. Info=%i\n", *info);
@@ -2273,23 +2189,20 @@ void superlu_dist_global_matrix(int opt_flag,
         ABORT("Malloc fails for berr[].");
       }
 
-      pdgsrfs_ABXglobal(
-#ifndef OOMPH_USE_OLD_SUPERLU_DIST
-        options,
-#endif
-        n,
-        AC,
-        anorm,
-        LUstruct,
-        grid,
-        B,
-        ldb,
-        X,
-        ldx,
-        nrhs,
-        berr,
-        &stat,
-        info);
+      pdgsrfs_ABXglobal(options,  /* hierher new arg options */
+                        n,
+                        AC,
+                        anorm,
+                        LUstruct,
+                        grid,
+                        B,
+                        ldb,
+                        X,
+                        ldx,
+                        nrhs,
+                        berr,
+                        &stat,
+                        info);
       if (*info != 0)
       {
         printf("Trouble in pdgsrfs_ABXglobal. Info=%i\n", *info);
@@ -2435,9 +2348,9 @@ void superlu_dist_global_matrix(int opt_flag,
     }
 
     /*  Free storage */
-    DSCALEPERMSTRUCTFREE(ScalePermstruct);
-    DDESTROY_LU(n, grid, LUstruct);
-    DLUSTRUCTFREE(LUstruct);
+    dScalePermstructFree(ScalePermstruct);
+    dDestroy_LU(n, grid, LUstruct);
+    dLUstructFree(LUstruct);
     // Destroy_CompRowLoc_Matrix_dist(&A);
     //  Only destroy the store part of the matrix
     Destroy_SuperMatrix_Store_dist(A);
