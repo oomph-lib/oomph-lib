@@ -59,11 +59,13 @@ include(OomphOptions)
 # Boolean options
 oomph_option(OOMPH_ENABLE_MPI "Build third-party libraries with MPI support?" OFF)
 oomph_option(OOMPH_BUILD_OPENBLAS "Build OpenBLAS?" ON)
+oomph_option(OOMPH_BUILD_SUPERLU "Build SuperLU?" ON)
+oomph_option(OOMPH_BUILD_SUPERLU_DIST "Build SuperLUDist?" ON)
 oomph_option(OOMPH_BUILD_CGAL "Build CGAL?" ON)
 oomph_option(OOMPH_BUILD_MUMPS "Build MUMPS?" ON)
 oomph_option(OOMPH_BUILD_HYPRE "Build Hypre?" ON)
 oomph_option(OOMPH_BUILD_TRILINOS "Build Trilinos?" ON)
-oomph_option(OOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTS "Disable testing when building the third-party libraries?" OFF)
+oomph_option(OOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTS "Disable testing when building the third-party libraries?" ON)
 
 # Path-like flags
 oomph_path_option(
@@ -74,6 +76,18 @@ oomph_path_option(
 oomph_path_option(
   FLAG OOMPH_USE_OPENBLAS_FROM
   DOCSTRING "The path to a preinstalled version of OpenBLAS."
+)
+oomph_path_option(
+  FLAG OOMPH_USE_GKLIB_FROM
+  DOCSTRING "The path to a preinstalled version of GKLIB."
+)
+oomph_path_option(
+  FLAG OOMPH_USE_METIS_FROM
+  DOCSTRING "The path to a preinstalled version of METIS."
+)
+oomph_path_option(
+  FLAG OOMPH_USE_PARMETIS_FROM
+  DOCSTRING "The path to a preinstalled version of ParMETIS."
 )
 oomph_path_option(
   FLAG OOMPH_USE_GMP_FROM
@@ -146,6 +160,62 @@ if(OpenBLAS_LIBRARIES)
   cmake_path(GET OpenBLAS_LIBRARIES PARENT_PATH OpenBLAS_LIBDIR)
   cmake_path(GET OpenBLAS_LIBDIR PARENT_PATH OpenBLAS_ROOT)
   set(OpenBLAS_ROOT "${OpenBLAS_ROOT}" CACHE PATH "" FORCE)
+endif()
+
+# -------------------------------[ SUPERLUDIST ]-------------------------------
+
+# If we're given SuperLUDist or need to build it
+if(OOMPH_BUILD_SUPERLU OR OOMPH_BUILD_SUPERLU_DIST)
+  if((OOMPH_BUILD_SUPERLU_DIST) AND (NOT OOMPH_ENABLE_MPI))
+    message(
+      FATAL_ERROR
+        "Cannot build SuperLUDist unless MPI is enabled (with -DOOMPH_ENABLE_MPI=ON)!"
+    )
+  endif()
+
+  # If we're given GKlib
+  if(OOMPH_USE_GKLIB_FROM)
+    find_package(GKlib REQUIRED)
+  endif()
+
+  # If we're given METIS
+  if(OOMPH_USE_METIS_FROM)
+    find_package(METIS REQUIRED)
+  endif()
+
+  # If we're given ParMETIS
+  if(OOMPH_USE_PARMETIS_FROM)
+    find_package(ParMETIS REQUIRED)
+  endif()
+
+  # If we're given CGAL
+  include(OomphGetExternalSuperLUAndOrSuperLUDist)
+  set(GKLIB_FOUND TRUE)
+  set(METIS_FOUND TRUE)
+  set(PARMETIS_FOUND TRUE)
+  set(SUPERLU_FOUND TRUE)
+  set(SUPERLU_DIST_FOUND TRUE)
+else()
+  # If we haven't been asked to build SuperLUDist but the user (bizarrely) told
+  # us where to find GKlib, METIS and/or ParMETIS...
+  set(OOMPH_PASSED_SUPERLU_DEPS)
+  if(OOMPH_USE_GKLIB_FROM)
+    list(APPEND OOMPH_PASSED_SUPERLU_DEPS "'OOMPH_USE_GKLIB_FROM'")
+  endif()
+  if(OOMPH_USE_METIS_FROM)
+    list(APPEND OOMPH_PASSED_SUPERLU_DEPS "'OOMPH_USE_METIS_FROM'")
+  endif()
+  if(OOMPH_USE_PARMETIS_FROM)
+    list(APPEND OOMPH_PASSED_SUPERLU_DEPS "'OOMPH_USE_PARMETIS_FROM'")
+  endif()
+  if(OOMPH_PASSED_SUPERLU_DEPS)
+    string(JOIN " and " OOMPH_PASSED_SUPERLU_DEPS_AS_STR
+           ${OOMPH_PASSED_SUPERLU_DEPS})
+    message(
+      WARNING
+        "\nYou specified ${OOMPH_PASSED_SUPERLU_DEPS_AS_STR} but did not enable the build of SuperLU/SuperLUDist. Did you forget to pass '-DOOMPH_BUILD_SUPERLU=ON' or '-DOOMPH_BUILD_SUPERLU_DIST=ON'?"
+    )
+  endif()
 endif()
 
 # ----------------------------------[ CGAL ]-----------------------------------

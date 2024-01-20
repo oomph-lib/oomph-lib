@@ -53,6 +53,44 @@ function(oomph_print_third_party_libraries_usage)
     list(APPEND OOMPH_JSON_PRESET_FLAGS_LIST "\"OOMPH_USE_OPENBLAS_FROM\": \"${OPENBLAS_INSTALL_DIR}\",")
   endif()
 
+  # SuperLU/SuperLUDist and its dependencies
+  if(OOMPH_BUILD_SUPERLU OR OOMPH_BUILD_SUPERLU_DIST)
+    # GKlib
+    if (OOMPH_USE_GKLIB_FROM)
+      list(APPEND OOMPH_CONFIGURE_FLAGS_LIST "-DOOMPH_USE_GKLIB_FROM=${OOMPH_USE_GKLIB_FROM}")
+      list(APPEND OOMPH_JSON_PRESET_FLAGS_LIST "\"OOMPH_USE_GKLIB_FROM\": \"${OOMPH_USE_GKLIB_FROM}\",")
+    else()
+      list(APPEND OOMPH_CONFIGURE_FLAGS_LIST "-DOOMPH_USE_GKLIB_FROM=${GKLIB_INSTALL_DIR}")
+      list(APPEND OOMPH_JSON_PRESET_FLAGS_LIST "\"OOMPH_USE_GKLIB_FROM\": \"${GKLIB_INSTALL_DIR}\",")
+    endif()
+
+    # METIS
+    if (OOMPH_USE_METIS_FROM)
+      list(APPEND OOMPH_CONFIGURE_FLAGS_LIST "-DOOMPH_USE_METIS_FROM=${OOMPH_USE_METIS_FROM}")
+      list(APPEND OOMPH_JSON_PRESET_FLAGS_LIST "\"OOMPH_USE_METIS_FROM\": \"${OOMPH_USE_METIS_FROM}\",")
+    else()
+      list(APPEND OOMPH_CONFIGURE_FLAGS_LIST "-DOOMPH_USE_METIS_FROM=${METIS_INSTALL_DIR}")
+      list(APPEND OOMPH_JSON_PRESET_FLAGS_LIST "\"OOMPH_USE_METIS_FROM\": \"${METIS_INSTALL_DIR}\",")
+    endif()
+
+    # ParMETIS
+    if (OOMPH_USE_PARMETIS_FROM)
+      list(APPEND OOMPH_CONFIGURE_FLAGS_LIST "-DOOMPH_USE_PARMETIS_FROM=${OOMPH_USE_PARMETIS_FROM}")
+      list(APPEND OOMPH_JSON_PRESET_FLAGS_LIST "\"OOMPH_USE_PARMETIS_FROM\": \"${OOMPH_USE_PARMETIS_FROM}\",")
+    else()
+      list(APPEND OOMPH_CONFIGURE_FLAGS_LIST "-DOOMPH_USE_PARMETIS_FROM=${PARMETIS_INSTALL_DIR}")
+      list(APPEND OOMPH_JSON_PRESET_FLAGS_LIST "\"OOMPH_USE_PARMETIS_FROM\": \"${PARMETIS_INSTALL_DIR}\",")
+    endif()
+
+    # SuperLU
+    list(APPEND OOMPH_CONFIGURE_FLAGS_LIST "-DOOMPH_USE_SUPERLU_FROM=${SUPERLU_INSTALL_DIR}")
+    list(APPEND OOMPH_JSON_PRESET_FLAGS_LIST "\"OOMPH_USE_SUPERLU_FROM\": \"${SUPERLU_INSTALL_DIR}\",")
+
+    # SuperLUDist
+    list(APPEND OOMPH_CONFIGURE_FLAGS_LIST "-DOOMPH_USE_SUPERLU_DIST_FROM=${SUPERLU_DIST_INSTALL_DIR}")
+    list(APPEND OOMPH_JSON_PRESET_FLAGS_LIST "\"OOMPH_USE_SUPERLU_DIST_FROM\": \"${SUPERLU_DIST_INSTALL_DIR}\",")
+  endif()
+
   # CGAL and its dependencies
   if (OOMPH_BUILD_CGAL)
     # GMP
@@ -73,7 +111,7 @@ function(oomph_print_third_party_libraries_usage)
       list(APPEND OOMPH_JSON_PRESET_FLAGS_LIST "\"OOMPH_USE_MPFR_FROM\": \"${MPFR_INSTALL_DIR}\",")
     endif()
 
-    # BOOST
+    # Boost
     if (OOMPH_USE_BOOST_FROM)
       list(APPEND OOMPH_CONFIGURE_FLAGS_LIST "-DOOMPH_USE_BOOST_FROM=${OOMPH_USE_BOOST_FROM}")
       list(APPEND OOMPH_JSON_PRESET_FLAGS_LIST "\"OOMPH_USE_BOOST_FROM\": \"${OOMPH_USE_BOOST_FROM}\",")
@@ -138,6 +176,21 @@ function(oomph_print_third_party_libraries_usage)
   # Make sure to only print the message after all the targets have been built
   if(TARGET openblas)
     add_dependencies(print_usage_message_after_build openblas)
+  endif()
+  if(TARGET gklib)
+    add_dependencies(print_usage_message_after_build gklib)
+  endif()
+  if(TARGET metis)
+    add_dependencies(print_usage_message_after_build metis)
+  endif()
+  if(TARGET parmetis)
+    add_dependencies(print_usage_message_after_build parmetis)
+  endif()
+  if(TARGET superlu)
+    add_dependencies(print_usage_message_after_build superlu)
+  endif()
+  if(TARGET superlu_dist)
+    add_dependencies(print_usage_message_after_build superlu_dist)
   endif()
   if(TARGET cgal)
     add_dependencies(print_usage_message_after_build cgal)
