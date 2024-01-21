@@ -86,12 +86,10 @@ jobs:
         working-directory: ./external_distributions/
 
       - name: Build desired third-party libraries
-        if: matrix.build_third_party_libs == 'ON'
         run: cmake --build build
         working-directory: ./external_distributions/
 
-      - name: Upload third-party libraries build logs (optional)
-        if: matrix.build_third_party_libs == 'ON'
+      - name: Upload third-party libraries build logs
         uses: actions/upload-artifact@v3
         with:
           name: third_party_build_logs-${{ runner.os }}-MPI_${{ matrix.build_info.enable_mpi }}
