@@ -188,7 +188,7 @@ if(OOMPH_BUILD_SUPERLU OR OOMPH_BUILD_SUPERLU_DIST)
     find_package(ParMETIS REQUIRED)
   endif()
 
-  # If we're given CGAL
+  # Build SuperLU/SuperLUDist
   include(OomphGetExternalSuperLUAndOrSuperLUDist)
   set(GKLIB_FOUND TRUE)
   set(METIS_FOUND TRUE)
