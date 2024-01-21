@@ -6,6 +6,7 @@ name: Test third-party libraries (Ubuntu)
 on:
   push:
     paths:
+      - ".github/workflows/test-third-party-libs-on-ubuntu.yaml"
       - "external_distributions/CMakeLists.txt"
       - "external_distributions/cmake/**"
 
@@ -43,10 +44,11 @@ jobs:
         run: sudo apt-get install openmpi-bin libopenmpi-dev
 
       - name: Configure
-        run: cmake -G Ninja \
-          -DOOMPH_ENABLE_MPI=${{ matrix.mpi }} \
-          -DOOMPH_BUILD_SUPERLU_DIST=${{ matrix.mpi }} \
-          -B build
+        run: |
+          cmake -G Ninja \
+            -DOOMPH_ENABLE_MPI=${{ matrix.mpi }} \
+            -DOOMPH_BUILD_SUPERLU_DIST=${{ matrix.mpi }} \
+            -B build
         working-directory: ./external_distributions/
 
       - name: Build/install
