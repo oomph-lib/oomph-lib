@@ -43,7 +43,10 @@ jobs:
         run: sudo apt-get install openmpi-bin libopenmpi-dev
 
       - name: Configure
-        run: cmake -G Ninja -DOOMPH_ENABLE_MPI=${{ matrix.mpi }} -B build
+        run: cmake -G Ninja \
+          -DOOMPH_ENABLE_MPI=${{ matrix.mpi }} \
+          -DOOMPH_BUILD_SUPERLU_DIST=${{ matrix.mpi }} \
+          -B build
         working-directory: ./external_distributions/
 
       - name: Build/install

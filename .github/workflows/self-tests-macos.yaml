@@ -76,6 +76,7 @@ jobs:
             -DOOMPH_USE_OPENBLAS_FROM=$(brew --prefix openblas) \
             -DOOMPH_USE_GMP_FROM=$(brew --prefix gmp) \
             -DOOMPH_USE_MPFR_FROM=$(brew --prefix mpfr) \
+            -DOOMPH_BUILD_SUPERLU_DIST=${{ matrix.build_info.enable_mpi }} \
             -DOOMPH_BUILD_CGAL=${{ matrix.build_third_party_libs }} \
             -DOOMPH_BUILD_MUMPS=${{ matrix.build_third_party_libs }} \
             -DOOMPH_BUILD_HYPRE=${{ matrix.build_third_party_libs }} \

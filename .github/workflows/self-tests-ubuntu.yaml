@@ -71,6 +71,7 @@ jobs:
           cmake -G Ninja \
             -DOOMPH_ENABLE_MPI=${{ matrix.build_info.enable_mpi }} \
             -DOOMPH_BUILD_OPENBLAS=ON \
+            -DOOMPH_BUILD_SUPERLU_DIST=${{ matrix.build_info.enable_mpi }} \
             -DOOMPH_BUILD_CGAL=${{ matrix.build_third_party_libs }} \
             -DOOMPH_BUILD_MUMPS=${{ matrix.build_third_party_libs }} \
             -DOOMPH_BUILD_HYPRE=${{ matrix.build_third_party_libs }} \
