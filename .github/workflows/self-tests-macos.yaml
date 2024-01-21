@@ -68,8 +68,7 @@ jobs:
       # -------------------
       # THIRD-PARTY LIBS:
       # -------------------
-      - name: Configure third-party libraries (optional)
-        if: matrix.build_third_party_libs == 'ON'
+      - name: Configure desired third-party libraries
         run: |
           cmake -G Ninja \
             -DOOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTS=ON \
@@ -77,10 +76,14 @@ jobs:
             -DOOMPH_USE_OPENBLAS_FROM=$(brew --prefix openblas) \
             -DOOMPH_USE_GMP_FROM=$(brew --prefix gmp) \
             -DOOMPH_USE_MPFR_FROM=$(brew --prefix mpfr) \
+            -DOOMPH_BUILD_CGAL=${{ matrix.build_third_party_libs }} \
+            -DOOMPH_BUILD_MUMPS=${{ matrix.build_third_party_libs }} \
+            -DOOMPH_BUILD_HYPRE=${{ matrix.build_third_party_libs }} \
+            -DOOMPH_BUILD_TRILINOS=${{ matrix.build_third_party_libs }} \
             -B build
         working-directory: ./external_distributions/
 
-      - name: Build third-party libraries (optional)
+      - name: Build desired third-party libraries
         if: matrix.build_third_party_libs == 'ON'
         run: cmake --build build
         working-directory: ./external_distributions/

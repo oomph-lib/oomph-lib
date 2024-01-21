@@ -77,9 +77,6 @@ include(OomphCustomOptions)
 # Regular CMake option; doesn't influence the build so we won't print its value at the end
 option(OOMPH_PRINT_SETTINGS_AFTER_INSTALL "Display the oomph-lib settings at the end of the install step" ON)
 
-# FIXME: Delete
-oomph_option(OOMPH_USE_OLD_SUPERLU_DIST "Revert to SuperLU Dist 3.0" OFF)
-
 # General options
 oomph_option(OOMPH_DONT_SILENCE_USELESS_WARNINGS "Display (harmless) warnings from external_src/ and src/ that are silenced" OFF)
 oomph_option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" OFF)
@@ -97,6 +94,29 @@ oomph_path_option(
   FLAG OOMPH_USE_OPENBLAS_FROM
   DOCSTRING "Path to OpenBLAS installation."
   REQUIRED
+)
+oomph_path_option(
+  FLAG OOMPH_USE_GKLIB_FROM
+  DOCSTRING "Path to GKlib installation"
+  REQUIRED
+)
+oomph_path_option(
+  FLAG OOMPH_USE_METIS_FROM
+  DOCSTRING "Path to METIS installation"
+  REQUIRED
+)
+oomph_path_option(
+  FLAG OOMPH_USE_SUPERLU_FROM
+  DOCSTRING "Path to SuperLU installation"
+  REQUIRED
+)
+oomph_path_option(
+  FLAG OOMPH_USE_PARMETIS_FROM
+  DOCSTRING "Path to ParMETIS installation"
+)
+oomph_path_option(
+  FLAG OOMPH_USE_SUPERLU_DIST_FROM
+  DOCSTRING "Path to SuperLU_DIST installation"
 )
 oomph_path_option(
   FLAG OOMPH_USE_GMSH_FROM

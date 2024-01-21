@@ -54,6 +54,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED @CMAKE_CXX_STANDARD_REQUIRED@)
 # by a consumer of the package to correctly build code provided by oomph-lib.
 set(OOMPH_COMPILE_DEFINITIONS @OOMPH_COMPILE_DEFINITIONS@)
 
+# TODO: Remove unnecessary variables below from oomph-lib
+
 # Capture general values from the configuration step that may be required by the
 # user (mainly for the demo drivers)
 set(HAVE_HSL_SOURCES @HAVE_HSL_SOURCES@)
@@ -71,6 +73,11 @@ set(USING_OOMPH_SUPERLU @USING_OOMPH_SUPERLU@)
 # the variables won't have any values (because the _HAS_ variables won't be
 # set). However, they will still be "falsey"
 set(OOMPH_HAS_MPI @OOMPH_HAS_MPI@)
+set(OOMPH_HAS_GKLIB @OOMPH_HAS_GKLIB@)
+set(OOMPH_HAS_METIS @OOMPH_HAS_METIS@)
+set(OOMPH_HAS_SUPERLU @OOMPH_HAS_SUPERLU@)
+set(OOMPH_HAS_PARMETIS @OOMPH_HAS_PARMETIS@)
+set(OOMPH_HAS_SUPERLU_DIST @OOMPH_HAS_SUPERLU_DIST@)
 set(OOMPH_HAS_CGAL @OOMPH_HAS_CGAL@)
 set(OOMPH_HAS_HYPRE @OOMPH_HAS_HYPRE@)
 set(OOMPH_HAS_MUMPS @OOMPH_HAS_MUMPS@)
@@ -79,6 +86,11 @@ set(OOMPH_HAS_TRILINOS @OOMPH_HAS_TRILINOS@)
 # Capture user's decision to their own libraries
 set(OOMPH_USE_OPENBLAS_FROM "@OOMPH_USE_OPENBLAS_FROM@")
 set(OOMPH_USE_MPI_FROM "@OOMPH_USE_MPI_FROM@")
+set(OOMPH_USE_GKLIB_FROM "@OOMPH_USE_GKLIB_FROM@")
+set(OOMPH_USE_METIS_FROM "@OOMPH_USE_METIS_FROM@")
+set(OOMPH_USE_SUPERLU_FROM "@OOMPH_USE_SUPERLU_FROM@")
+set(OOMPH_USE_PARMETIS_FROM "@OOMPH_USE_PARMETIS_FROM@")
+set(OOMPH_USE_SUPERLU_DIST_FROM "@OOMPH_USE_SUPERLU_DIST_FROM@")
 set(OOMPH_USE_GMP_FROM "@OOMPH_USE_GMP_FROM@")
 set(OOMPH_USE_MPFR_FROM "@OOMPH_USE_MPFR_FROM@")
 set(OOMPH_USE_BOOST_FROM "@OOMPH_USE_BOOST_FROM@")
@@ -136,7 +148,31 @@ set(CMAKE_PREFIX_PATH ${BACKUP_CMAKE_PREFIX_PATH})
 
 # ----------------------[ OPTIONAL THIRD-PARTY LIBRARIES ]---------------------
 
+# -------------------
+# SuperLU/SuperLUDist
+# -------------------
+# NOTE: We wrote a custom Find*.cmake scripts to search for GKlib, METIS and ParMETIS and
+# SuperLU_DIST. They will internally read the variables OOMPH_USE_GKLIB_FROM, OOMPH_USE_METIS_FROM,
+# OOMPH_USE_PARMETIS_FROM and OOMPH_USE_SUPERLU_DIST_FROM, respectively. The CMake code for
+# SuperLU itself has been written properly so we can import it like a normal version CMake library
+set(BACKUP_CMAKE_PREFIX_PATH "${CMAKE_PREFIX_PATH}")
+set(CMAKE_PREFIX_PATH "${OOMPH_USE_GKLIB_FROM};${OOMPH_USE_METIS_FROM}" CACHE INTERNAL "" FORCE)
+find_dependency(GKlib REQUIRED GLOBAL)
+find_dependency(METIS REQUIRED GLOBAL)
+set(CMAKE_PREFIX_PATH "${BACKUP_CMAKE_PREFIX_PATH}" CACHE INTERNAL "" FORCE)
+find_dependency(superlu 6.0.1 REQUIRED GLOBAL PATHS ${OOMPH_USE_SUPERLU_FROM} NO_DEFAULT_PATH)
+
+if(OOMPH_USE_SUPERLU_DIST_FROM)
+  set(BACKUP_CMAKE_PREFIX_PATH "${CMAKE_PREFIX_PATH}")
+  set(CMAKE_PREFIX_PATH "${OOMPH_USE_PARMETIS_FROM};${OOMPH_USE_SUPERLU_DIST_FROM}" CACHE INTERNAL "" FORCE)
+  find_dependency(ParMETIS REQUIRED GLOBAL)
+  find_dependency(SuperLU_DIST REQUIRED GLOBAL)
+  set(CMAKE_PREFIX_PATH "${BACKUP_CMAKE_PREFIX_PATH}" CACHE INTERNAL "" FORCE)
+endif()
+
+# -------------------
 # CGAL
+# -------------------
 if(OOMPH_HAS_CGAL AND (NOT CGAL_FOUND))
   # NOTE: We wrote a custom FindGMP.cmake and FindMPFR.cmake script to search
   # for GMP and MPFR. Internally, they will read the variables OOMPH_USE_GMP_FROM
@@ -158,7 +194,9 @@ if(OOMPH_HAS_CGAL AND (NOT CGAL_FOUND))
   find_dependency(CGAL 5.6 REQUIRED GLOBAL PATHS ${OOMPH_USE_CGAL_FROM} NO_DEFAULT_PATH)
 endif()
 
+# -------------------
 # MUMPS
+# -------------------
 if(OOMPH_HAS_MUMPS AND (NOT MUMPS_FOUND))
   if(OOMPH_HAS_MPI)
     set(SCALAPACK_ROOT "${OOMPH_USE_MUMPS_FROM}")
@@ -167,12 +205,16 @@ if(OOMPH_HAS_MUMPS AND (NOT MUMPS_FOUND))
   find_dependency(MUMPS 5.6.2.5 REQUIRED GLOBAL PATHS ${OOMPH_USE_MUMPS_FROM} NO_DEFAULT_PATH)
 endif()
 
+# -------------------
 # HYPRE
+# -------------------
 if(OOMPH_HAS_HYPRE AND (NOT HYPRE_FOUND))
   find_dependency(HYPRE 2.29.0 REQUIRED GLOBAL PATHS ${OOMPH_USE_HYPRE_FROM} NO_DEFAULT_PATH)
 endif()
 
+# -------------------
 # Trilinos
+# -------------------
 if(OOMPH_HAS_TRILINOS AND (NOT Trilinos_FOUND))
   find_dependency(Trilinos 14.4.0 REQUIRED GLOBAL PATHS ${OOMPH_USE_TRILINOS_FROM} NO_DEFAULT_PATH)
 endif()

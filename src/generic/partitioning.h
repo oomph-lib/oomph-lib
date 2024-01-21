@@ -43,9 +43,7 @@
 // for the new METIS API, need to use symbols defined in the standard header
 // which aren't available in the current frozen (old) version of METIS
 // Version 3 will (presumably) have this header in the include path as standard
-#ifndef OOMPH_USE_OLD_SUPERLU_DIST
-#include "oomph_metis_from_parmetis_4.0.3/metis.h"
-#endif
+#include "metis.h"
 
 namespace oomph
 {
@@ -54,10 +52,6 @@ namespace oomph
   //==================================================================
   extern "C"
   {
-#ifdef OOMPH_USE_OLD_SUPERLU_DIST
-    void METIS_PartGraphKway(
-      int*, int*, int*, int*, int*, int*, int*, int*, int*, int*, int*);
-#else
     /// Metis graph partitioning function
     METIS_API(int)
     METIS_PartGraphKway(idx_t*,
@@ -73,7 +67,6 @@ namespace oomph
                         idx_t*,
                         idx_t*,
                         idx_t*);
-#endif
   }
 
 

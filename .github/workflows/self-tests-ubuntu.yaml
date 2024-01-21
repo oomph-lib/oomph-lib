@@ -66,25 +66,15 @@ jobs:
       # -------------------
       # THIRD-PARTY LIBS:
       # -------------------
-      - name: Configure third-party libraries (just OpenBLAS)
-        if: matrix.build_third_party_libs == 'OFF'
+      - name: Configure desired third-party libraries
         run: |
           cmake -G Ninja \
             -DOOMPH_ENABLE_MPI=${{ matrix.build_info.enable_mpi }} \
             -DOOMPH_BUILD_OPENBLAS=ON \
-            -DOOMPH_BUILD_CGAL=OFF \
-            -DOOMPH_BUILD_MUMPS=OFF \
-            -DOOMPH_BUILD_HYPRE=OFF \
-            -DOOMPH_BUILD_TRILINOS=OFF \
-            -DOOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTS=ON \
-            -B build
-        working-directory: ./external_distributions/
-
-      - name: Configure third-party libraries (all libraries)
-        if: matrix.build_third_party_libs == 'ON'
-        run: |
-          cmake -G Ninja \
-            -DOOMPH_ENABLE_MPI=${{ matrix.build_info.enable_mpi }} \
+            -DOOMPH_BUILD_CGAL=${{ matrix.build_third_party_libs }} \
+            -DOOMPH_BUILD_MUMPS=${{ matrix.build_third_party_libs }} \
+            -DOOMPH_BUILD_HYPRE=${{ matrix.build_third_party_libs }} \
+            -DOOMPH_BUILD_TRILINOS=${{ matrix.build_third_party_libs }} \
             -DOOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTS=ON \
             -B build
         working-directory: ./external_distributions/
