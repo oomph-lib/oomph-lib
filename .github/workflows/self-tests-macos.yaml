@@ -99,11 +99,6 @@ jobs:
       # BUILD MAIN PROJECT:
       # -------------------
       - name: Configure
-        if: matrix.build_third_party_libs == 'OFF'
-        run: cmake --preset ${{ matrix.build_info.preset }} -DOOMPH_USE_OPENBLAS_FROM=$(brew --prefix openblas) -B build
-
-      - name: Configure with third-party libs
-        if: matrix.build_third_party_libs == 'ON'
         run: cmake --preset ${{ matrix.build_info.preset }} $(cat external_distributions/build/cmake_flags_for_oomph_lib.txt) -B build
 
       - name: Build
