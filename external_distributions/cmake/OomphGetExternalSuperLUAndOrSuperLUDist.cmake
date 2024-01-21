@@ -8,10 +8,6 @@
 # =============================================================================
 include_guard()
 
-if(NOT MPI_C_COMPILER)
-  message(FATAL_ERROR "Something went wrong; MPI_C_COMPILER was not populated!")
-endif()
-
 # Locate 'make'; required for building METIS
 find_program(MAKE_EXECUTABLE NAMES make REQUIRED)
 
@@ -172,6 +168,10 @@ endif()
 
 # We can only build ParMETIS or SuperLUDist if MPI is enabled
 if (OOMPH_ENABLE_MPI)
+  if(NOT MPI_C_COMPILER)
+    message(FATAL_ERROR "Something went wrong; MPI_C_COMPILER was not populated!")
+  endif()
+
   # ---------
   # PARMETIS:
   # ---------
