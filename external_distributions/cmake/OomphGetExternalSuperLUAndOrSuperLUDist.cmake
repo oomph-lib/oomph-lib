@@ -267,6 +267,16 @@ endif()
 
 # -----------------------------------------------------------------------------
 
+# If we're building OpenBLAS, make sure it gets built before SuperLU or SuperLU_DIST
+if(TARGET openblas)
+  if(TARGET superlu)
+    add_dependencies(superlu openblas)
+  endif()
+  if(TARGET superlu_dist)
+    add_dependencies(superlu_dist openblas)
+  endif()
+endif()
+
 # METIS depends on GKlib. ParMETIS depends on both METIS and GKlib
 if((TARGET gklib) AND (TARGET metis))
   add_dependencies(metis gklib)
