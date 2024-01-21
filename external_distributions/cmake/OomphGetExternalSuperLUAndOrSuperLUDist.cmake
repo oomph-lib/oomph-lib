@@ -41,7 +41,7 @@ endif()
 # GKLIB:
 # -------------
 # Expected library path and include directory
-set(GKLIB_LIBNAME ${CMAKE_STATIC_LIBRARY_PREFIX}gklib${CMAKE_STATIC_LIBRARY_SUFFIX})
+set(GKLIB_LIBNAME ${CMAKE_STATIC_LIBRARY_PREFIX}GKlib${CMAKE_STATIC_LIBRARY_SUFFIX})
 set(GKLIB_LIBRARIES ${GKLIB_INSTALL_DIR}/lib/${GKLIB_LIBNAME} CACHE PATH "Path to GMP libraries")
 set(GKLIB_INCLUDE_DIR ${GKLIB_INSTALL_DIR}/include CACHE PATH "Path to GMP include directory")
 
