@@ -10,13 +10,7 @@
  *
  */
 
-#ifdef USING_OOMPH_SUPERLU
-
-#include "oomph_superlu_6.0.1/slu_ddefs.h"
-
-#else
 #include "slu_ddefs.h"
-#endif
 #include "math.h"
 
 /* ================================================= */

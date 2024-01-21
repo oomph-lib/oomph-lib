@@ -24,9 +24,6 @@
   ----------------------------------------------------------------
 */
 #include <math.h>
-#ifdef USING_OOMPH_SUPERLU_DIST
-#include "oomph_superlu_dist_8.2.1.h"
-#else
 #include <superlu_defs.h>
 #include <superlu_ddefs.h>
 #include <slu_Cnames.h>
@@ -37,7 +34,6 @@
 #include <superlu_dist_config.h>
 #include <superlu_enum_consts.h>
 #include <util_dist.h>
-#endif
 
 
 /* ================================================= */
