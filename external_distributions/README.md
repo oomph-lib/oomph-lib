@@ -92,10 +92,12 @@ Note that we do not need an install step; this is because we only build/install 
 The table below contains the flags that you can pass to the `cmake` command to control the build of the third-party libraries. Arguments to the `cmake` command must adhere to the format `-D<FLAG_1>=<VALUE_1>`. For examples on how to do this, see [Extended example](#extended-example).
 
 Option                                      | Description                                                | Default
---------------------------------------------|------------------------------------------------------------|--------------------------
+--------------------------------------------|------------------------------------------------------------|-------------------------------
 `OOMPH_ENABLE_MPI`                          | *Enable MPI support?*                                      | `OFF`
-`OOMPH_BUILD_CGAL`                          | *Build CGAL (with deps. GMP, MPFR and Boost)?*             | `ON`
 `OOMPH_BUILD_OPENBLAS`                      | *Build OpenBLAS?*                                          | `ON`
+`OOMPH_BUILD_SUPERLU`                       | *Build SuperLU?*                                           | `ON`
+`OOMPH_BUILD_SUPERLU_DIST`                  | *Build SuperLU DIST?*                                      | `ON` if MPI is enabled else `OFF`
+`OOMPH_BUILD_CGAL`                          | *Build CGAL (with deps. GMP, MPFR and Boost)?*             | `ON`
 `OOMPH_BUILD_MUMPS`                         | *Build MUMPS?*                                             | `ON`
 `OOMPH_BUILD_HYPRE`                         | *Build Hypre?*                                             | `ON`
 `OOMPH_BUILD_TRILINOS`                      | *Build Trilinos?*                                          | `ON`
