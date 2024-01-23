@@ -97,11 +97,9 @@ namespace oomph
     void setup();
 
   private:
-   
     /// Control flag is true if the preconditioner has been setup
     /// (used so we can wipe the data when the preconditioner is called again)
     bool Preconditioner_has_been_setup;
-
   };
 
   //=============================================================================
@@ -130,7 +128,7 @@ namespace oomph
 
       // The preconditioner has been created but it hasn't been set up yet
       Preconditioner_has_been_setup = false;
-      
+
     } // End of BandedBlockTriangularPreconditioner
 
 
@@ -222,14 +220,11 @@ namespace oomph
     } // End of is_upper_triangular
 
 
-
   protected:
-
-   /// Matrix of matrix-vector product operators for the off diagonals
-   DenseMatrix<MatrixVectorProduct*> Off_diagonal_matrix_vector_products;
+    /// Matrix of matrix-vector product operators for the off diagonals
+    DenseMatrix<MatrixVectorProduct*> Off_diagonal_matrix_vector_products;
 
   private:
-   
     /// Storage for the block bandwidth of the matrix. Defaults to -1
     /// indicating that we assume every off-diagonal block is non-empty. If
     /// the matrix is block diagonal then the value is zero
@@ -241,7 +236,6 @@ namespace oomph
     /// Control flag is true if the preconditioner has been setup
     /// (used so we can wipe the data when the preconditioner is called again)
     bool Preconditioner_has_been_setup;
-
   };
 } // End of namespace oomph
 #endif

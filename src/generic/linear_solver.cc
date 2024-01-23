@@ -1209,8 +1209,7 @@ namespace oomph
         ".dat";
       CRDoubleMatrix* cr_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
       cr_pt->sparse_indexed_output_with_offset(filename);
-      oomph_info << "output matrix " << Global_unsigned::Number
-                 << std::endl;
+      oomph_info << "output matrix " << Global_unsigned::Number << std::endl;
       Global_unsigned::Number++;
     }
 

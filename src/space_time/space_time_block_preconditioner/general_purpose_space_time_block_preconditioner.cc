@@ -387,7 +387,7 @@ namespace oomph
                << t_subsidiary_setup_total
                << "\nTotal matrix-vector product setup time [sec]: "
                << t_mvp_setup_total << std::endl;
-    
+
   } // End of setup
 
   //=============================================================================

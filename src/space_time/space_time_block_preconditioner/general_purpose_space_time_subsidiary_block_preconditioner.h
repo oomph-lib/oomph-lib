@@ -171,7 +171,8 @@ namespace oomph
         Iterations(0),
         Preconditioner_has_been_setup(false),
         Preconditioner_LHS(false)
-    {}
+    {
+    }
 
     /// Destructor
     virtual ~GMRESBlockPreconditioner()
