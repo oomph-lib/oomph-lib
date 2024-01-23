@@ -138,6 +138,9 @@ namespace oomph
     /// Document the memory usage
     void enable_doc_memory_usage()
     {
+     OOMPH_WARNING("computation of memory stats is deprecated; not switching it on!");
+     return;
+     
       /// Set the appropriate flag to true
       Compute_memory_statistics = true;
     } // End of enable_doc_memory_usage
@@ -220,6 +223,7 @@ namespace oomph
     /// (used so we can wipe the data when the preconditioner is called again)
     bool Preconditioner_has_been_setup;
 
+    // hierher deprecated
     /// Flag to indicate whether or not to record the memory statistics
     /// this preconditioner
     bool Compute_memory_statistics;
@@ -339,6 +343,9 @@ namespace oomph
     /// Document the memory usage
     void enable_doc_memory_usage()
     {
+     OOMPH_WARNING("computation of memory stats is deprecated; not switching it on!");
+     return;
+     
       /// Set the appropriate flag to true
       Compute_memory_statistics = true;
     } // End of enable_doc_memory_usage
@@ -581,6 +588,7 @@ namespace oomph
     /// Number of iterations taken
     unsigned Iterations;
 
+   // hierher deprecated
     /// Flag to indicate whether or not to record the memory statistics
     /// this preconditioner
     bool Compute_memory_statistics;

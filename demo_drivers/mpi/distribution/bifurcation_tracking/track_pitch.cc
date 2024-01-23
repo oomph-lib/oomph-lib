@@ -323,34 +323,6 @@ RotatingProblem<ELEMENT>::RotatingProblem
  Problem::mesh_pt() = 
   new CylinderMesh<ELEMENT>(Nr1,Nr2,Nz1,Nz2,Length);
 
- // hierher what's going on here? 
- //dynamic_cast<SuperLUSolver*>(this->linear_solver_pt())
- //->set_solver_type(SuperLUSolver::Serial);
-
-//  MumpsSolver* solver_pt=new MumpsSolver;
-//  this->linear_solver_pt() = solver_pt;
-//  solver_pt->enable_suppress_warning_about_MPI_COMM_WORLD();
-
-//  //Build iterative linear solver
-//  /*GMRES<CRDoubleMatrix>* iterative_linear_solver_pt = new
-//   GMRES<CRDoubleMatrix>;
- 
-//   // Set maximum number of iterations
-//   iterative_linear_solver_pt->max_iter() = 500;
- 
-// //  // Set tolerance
-//   iterative_linear_solver_pt->tolerance() = 1.0e-8;   
- 
-//   AxisymmetricNavierStokesLSCPreconditioner* prec_pt = 
-//    new AxisymmetricNavierStokesLSCPreconditioner;
-//   //Set the mesh
-//   prec_pt->set_navier_stokes_mesh(this->mesh_pt());
-
-// //  //Set the preconditioner
-//   iterative_linear_solver_pt->preconditioner_pt() = prec_pt;
- 
-// //  //Set the linear solver
-// this->linear_solver_pt() = iterative_linear_solver_pt;*/
 
 /*#ifdef OOMPH_HAS_HYPRE
 //Trap because HYPRE can't handle the case when OOMPH_HAS_MPI, but we
@@ -453,8 +425,6 @@ RotatingProblem<ELEMENT>::RotatingProblem
  //Setup all the equation numbering and look-up schemes 
  //(function defined in Problem class)
  oomph_info << assign_eqn_numbers() << std::endl;
-
- // hierher kill linear_solver_pt() =  new MumpsSolver;
 
 }
 

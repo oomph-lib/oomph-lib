@@ -51,7 +51,7 @@ namespace oomph
 {
   namespace PreconditionerCreationFunctions
   {
-    /// Helper function to create a exactpreconditioner (for use as
+    /// Helper function to create an exact preconditioner (for use as
     /// the default subsididary preconditioner creator in
     /// GeneralPurposeBlockPreconditioners).
     inline Preconditioner* create_exact_preconditioner()

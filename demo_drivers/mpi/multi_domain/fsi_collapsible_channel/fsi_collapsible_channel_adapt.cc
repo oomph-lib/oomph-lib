@@ -415,14 +415,6 @@ FSICollapsibleChannelProblem<ELEMENT>::FSICollapsibleChannelProblem(
  Ldown=ldown;
  Ly=ly;
 
- // hierher kill 
-// hierher why serial?
-// // Switch to serial solver
-//  dynamic_cast<SuperLUSolver*>(linear_solver_pt())->set_solver_type(
-//   SuperLUSolver::Serial);
-
- // hierher kill linear_solver_pt()=new MumpsSolver;
-
  // Overwrite maximum allowed residual to accomodate bad initial guesses
  Problem::Max_residuals=1000.0;
 

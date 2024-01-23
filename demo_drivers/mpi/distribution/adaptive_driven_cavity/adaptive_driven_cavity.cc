@@ -222,8 +222,6 @@ RefineableDrivenCavityProblem<ELEMENT>::RefineableDrivenCavityProblem()
   
  // Setup equation numbering scheme
  cout <<"Number of equations: " << assign_eqn_numbers() << std::endl;
- 
- // hierher kill linear_solver_pt() =  new MumpsSolver;
 
 } // end_of_constructor
 

@@ -194,7 +194,6 @@ namespace oomph
 
 
   private:
-
    
     /// Backup original state of all data associated with mesh
     void backup_original_state();
@@ -219,7 +218,6 @@ namespace oomph
     /// Newmark IC. Used to check if we have specified the correct
     /// timescale ratio (non-dim density).
     double Max_residual_after_consistent_newton_ic;
-
 
 #ifdef OOMPH_HAS_MPI
    /// Pointer to mumps solver
@@ -285,7 +283,6 @@ namespace oomph
     // positional variables can be solved; setup equation numbering
     // scheme
     setup_problem();
-
 
     // Choose the right linear solver
 #ifdef OOMPH_HAS_MPI
@@ -459,7 +456,6 @@ namespace oomph
     linear_solver_pt()=SuperLU_solver_pt;
 #endif
 
-    
     // Number of history values
     unsigned ntstorage =
       IC_pt->geom_object_pt()->time_stepper_pt()->ntstorage();
@@ -622,7 +618,6 @@ namespace oomph
 #else
     lin_solver_pt=SuperLU_solver_pt;
 #endif
-
     
     (lin_solver_pt->*solver_mem_pt)(this, correction);
 

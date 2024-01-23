@@ -232,8 +232,6 @@ EntryFlowProblem<ELEMENT>::EntryFlowProblem(DocInfo& doc_info,
 
  //Attach the boundary conditions to the mesh
  cout <<"Number of equations: " << assign_eqn_numbers() << std::endl;
- 
- // hierher kill linear_solver_pt() =  new MumpsSolver;
 
 } // end_of_constructor
 

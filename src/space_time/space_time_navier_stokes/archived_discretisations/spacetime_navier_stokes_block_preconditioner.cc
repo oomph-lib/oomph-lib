@@ -328,6 +328,8 @@ namespace oomph
       // Indicate that we're using the default preconditioner
       Using_default_p_preconditioner = true;
 
+
+      // hierher delete everywhere 
       // Do we need to doc. the memory statistics?
       if (Compute_memory_statistics)
       {
@@ -356,6 +358,7 @@ namespace oomph
       // Indicate that we're using the default preconditioner
       Using_default_f_preconditioner = true;
 
+      // hierher delete everywhere
       // Do we need to doc. the memory statistics?
       if (Compute_memory_statistics)
       {

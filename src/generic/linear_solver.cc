@@ -2068,7 +2068,6 @@ namespace oomph
         // hierher
         oomph_info << "SuperLU_dist is currently disabled" << std::endl;
         abort();
-
        
         // do the factorization
         superlu_dist_global_matrix(
@@ -2453,7 +2452,6 @@ namespace oomph
     if (Dist_distributed_solve_data_allocated)
     {
 
-
      // hierher
      oomph_info << "SuperLU_dist is currently disabled" << std::endl;
      abort();
@@ -2479,7 +2477,6 @@ namespace oomph
     }
     else if (Dist_global_solve_data_allocated)
     {
-
 
      // hierher
      oomph_info << "SuperLU_dist is currently disabled" << std::endl;
@@ -2774,12 +2771,10 @@ namespace oomph
 
       if (Dist_distributed_solve_data_allocated)
       {
-
        
        // hierher
        oomph_info << "SuperLU_dist is currently disabled" << std::endl;
        abort();
-
      
         superlu_dist_distributed_matrix(
           3,
@@ -2803,11 +2798,9 @@ namespace oomph
       if (Dist_global_solve_data_allocated)
       {
 
-
        // hierher
        oomph_info << "SuperLU_dist is currently disabled" << std::endl;
        abort();
-       
        
         superlu_dist_global_matrix(
           3,
