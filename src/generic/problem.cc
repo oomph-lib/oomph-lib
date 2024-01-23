@@ -45,7 +45,10 @@
 #include "dg_elements.h"
 #include "partitioning.h"
 #include "spines.h"
+
+#ifdef OOMPH_HAS_MPI
 #include "mumps_solver.h"
+#endif
 
 namespace oomph
 {
@@ -150,18 +153,13 @@ namespace oomph
     if (MPI_Helpers::mpi_has_been_initialised())
     {
       Linear_solver_pt = Default_linear_solver_pt = new MumpsSolver;
-      oomph_info << "I've set default solver to MumpsSolver" << std::endl;
     }
     else
     {
       Linear_solver_pt = Default_linear_solver_pt = new SuperLUSolver;
-      oomph_info << "I've set default solver to SuperLUSolver "
-                 << "(have mpi but not initialised)" << std::endl;
     }
 #else
     Linear_solver_pt = Default_linear_solver_pt = new SuperLUSolver;
-    oomph_info << "I've set default solver to SuperLUSolver (no MPI)"
-               << std::endl;
 #endif
     Mass_matrix_solver_for_explicit_timestepper_pt = Linear_solver_pt;
 

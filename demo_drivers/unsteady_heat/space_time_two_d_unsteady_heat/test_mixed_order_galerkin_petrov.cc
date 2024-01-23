@@ -1163,16 +1163,6 @@ void UnsteadyHeatProblem<ELEMENT>::set_up_spacetime_solver()
 
     // Provide the bandwidth; only subdiagonal block entries
     st_block_prec_pt->set_block_bandwidth(bandwidth);
-
-    // Do we want to document the memory usage?
-    bool document_memory_usage=true;
-
-    // If we want to document the memory usage
-    if (document_memory_usage)
-    {
-      // Tell the block preconditioner that we want it to doc. the memory usage
-      st_block_prec_pt->enable_doc_memory_usage();
-    }
   }
   // If the user provided an invalid input
   else

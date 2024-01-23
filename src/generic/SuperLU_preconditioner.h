@@ -30,7 +30,9 @@
 
 #include "linear_solver.h"
 #include "preconditioner.h"
-#include "mumps_solver.h"
+#ifdef OOMPH_HAS_MPI
+  #include "mumps_solver.h"
+#endif
 
 namespace oomph
 {

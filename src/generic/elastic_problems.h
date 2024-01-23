@@ -38,7 +38,11 @@
 #include "problem.h"
 #include "frontal_solver.h"
 #include "mesh.h"
+
+#ifdef OOMPH_HAS_MPI
 #include "mumps_solver.h"
+#endif
+
 
 namespace oomph
 {
