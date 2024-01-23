@@ -1199,7 +1199,7 @@ namespace oomph
     // Doc time for solve
     double t_factorise_start = TimingHelpers::timer();
 
-    // hierher
+    // Keep this for debugging
     if (1 == 0)
     {
       std::string filename =
@@ -1209,7 +1209,7 @@ namespace oomph
         ".dat";
       CRDoubleMatrix* cr_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
       cr_pt->sparse_indexed_output_with_offset(filename);
-      oomph_info << "hierher output matrix " << Global_unsigned::Number
+      oomph_info << "output matrix " << Global_unsigned::Number
                  << std::endl;
       Global_unsigned::Number++;
     }

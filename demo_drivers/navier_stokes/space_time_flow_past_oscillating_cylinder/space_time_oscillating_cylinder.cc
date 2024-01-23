@@ -1413,9 +1413,7 @@ void NavierStokesProblem<ELEMENT>::set_up_spacetime_solver()
   //-----------------------------------------
   // Create the master-level preconditioners:
   //-----------------------------------------
-  // Do we want to document the memory usage?
-  bool document_memory_usage=true;
-
+  
   // Solve the diagonal blocks associated with each time-slice separately
   if (GlobalParameters::Preconditioner==Diagonal_preconditioner)
   {
@@ -1438,13 +1436,6 @@ void NavierStokesProblem<ELEMENT>::set_up_spacetime_solver()
     // Provide the bandwidth; only subdiagonal block entries
     dynamic_cast<BandedBlockTriangularPreconditioner<CRDoubleMatrix>*>
     (Prec_pt)->set_block_bandwidth(temporal_order);
-
-    // If we want to document the memory usage
-    if (document_memory_usage)
-    {
-      dynamic_cast<BandedBlockTriangularPreconditioner<CRDoubleMatrix>*>
-      (Prec_pt)->enable_doc_memory_usage();
-    }
   }
   // If the user provided an invalid input
   else

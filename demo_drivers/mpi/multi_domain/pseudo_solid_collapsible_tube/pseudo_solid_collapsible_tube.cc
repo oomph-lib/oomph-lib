@@ -1626,8 +1626,6 @@ set_pseudo_elastic_fsi_solver()
 
 #ifdef OOMPH_HAS_HYPRE
 
-
-  //oomph_info << "hierher bypassing hypre for pseudo-elastic" << std::endl;
   prec_pt->pseudo_elastic_preconditioner_pt()
    ->set_elastic_subsidiary_preconditioner
    (Pseudo_Elastic_Preconditioner_Subsidiary_Operator_Helper
@@ -1652,7 +1650,6 @@ set_pseudo_elastic_fsi_solver()
 
 #ifdef OOMPH_HAS_HYPRE
   
-  //oomph_info << "hierher bypassing hypre for solid " << std::endl;
   solid_prec_pt->set_subsidiary_preconditioner_function
    (Real_Solid_Preconditioner_Helper::get_preconditioner);
 
@@ -1669,7 +1666,6 @@ set_pseudo_elastic_fsi_solver()
 
 #ifdef OOMPH_HAS_HYPRE
   
-  // oomph_info << "hierher bypassing hypre for momentum " << std::endl;
   f_prec_pt->set_subsidiary_preconditioner_function
    (LSC_Preconditioner_Helper::set_hypre_preconditioner);
 
@@ -1678,8 +1674,6 @@ set_pseudo_elastic_fsi_solver()
   ns_prec_pt->set_f_preconditioner(f_prec_pt);
   
 #ifdef OOMPH_HAS_HYPRE
-  
-  // oomph_info << "hierher bypassing hypre for pressure poisson " << std::endl;
   
   // ns pressure poisson
   HyprePreconditioner* p_prec_pt = new HyprePreconditioner;

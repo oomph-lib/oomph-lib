@@ -64,11 +64,6 @@ namespace oomph
       // The preconditioner has been created but it hasn't been set up yet
       Preconditioner_has_been_setup = false;
 
-      // By default, don't store the memory statistics of this preconditioner
-      Compute_memory_statistics = false;
-
-      // Initialise the value of Memory_usage_in_bytes
-      Memory_usage_in_bytes = 0.0;
     } // End of ExactDGPBlockPreconditioner
 
 
@@ -101,92 +96,12 @@ namespace oomph
     /// Setup the preconditioner
     void setup();
 
-
-    /// Document the memory usage
-    void enable_doc_memory_usage()
-    {
-      OOMPH_WARNING(
-        "computation of memory stats is deprecated; not switching it on!");
-      return;
-
-      /// Set the appropriate flag to true
-      Compute_memory_statistics = true;
-    } // End of enable_doc_memory_usage
-
-
-    /// Don't document the memory usage!
-    void disable_doc_memory_usage()
-    {
-      /// Set the appropriate flag to false
-      Compute_memory_statistics = false;
-    } // End of disable_doc_memory_usage
-
-
-    /// Get the memory statistics
-    double get_memory_usage_in_bytes()
-    {
-      // Has the preconditioner even been set up yet?
-      if (Preconditioner_has_been_setup)
-      {
-        // Were we meant to compute the statistics?
-        if (Compute_memory_statistics)
-        {
-          // Return the appropriate variable value
-          return Memory_usage_in_bytes;
-        }
-        else
-        {
-          // Allocate storage for an output stream
-          std::ostringstream warning_message_stream;
-
-          // Create a warning message
-          warning_message_stream
-            << "The memory statistics have not been calculated "
-            << "so I'm returning\nthe value zero." << std::endl;
-
-          // Give the user a warning
-          OomphLibWarning(warning_message_stream.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-
-          // Return the value zero
-          return 0.0;
-        }
-      }
-      // If the preconditioner hasn't been set up yet
-      else
-      {
-        // Allocate storage for an output stream
-        std::ostringstream warning_message_stream;
-
-        // Create a warning message
-        warning_message_stream
-          << "The preconditioner hasn't even been set up yet "
-          << "so I'm returning\nthe value zero." << std::endl;
-
-        // Give the user a warning
-        OomphLibWarning(warning_message_stream.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-
-        // Return the value zero
-        return 0.0;
-      } // if (Preconditioner_has_been_setup)
-    } // End of get_memory_usage_in_bytes
-
   private:
+   
     /// Control flag is true if the preconditioner has been setup
     /// (used so we can wipe the data when the preconditioner is called again)
     bool Preconditioner_has_been_setup;
 
-    // hierher deprecated
-    /// Flag to indicate whether or not to record the memory statistics
-    /// this preconditioner
-    bool Compute_memory_statistics;
-
-    /// Storage for the memory usage of the solver if the flag above
-    /// is set to true (in bytes)
-    double Memory_usage_in_bytes;
   };
 
   //=============================================================================
@@ -215,12 +130,7 @@ namespace oomph
 
       // The preconditioner has been created but it hasn't been set up yet
       Preconditioner_has_been_setup = false;
-
-      // By default, don't store the memory statistics of this preconditioner
-      Compute_memory_statistics = false;
-
-      // Initialise the value of Memory_usage_in_bytes
-      Memory_usage_in_bytes = 0.0;
+      
     } // End of BandedBlockTriangularPreconditioner
 
 
@@ -312,83 +222,14 @@ namespace oomph
     } // End of is_upper_triangular
 
 
-    /// Document the memory usage
-    void enable_doc_memory_usage()
-    {
-      OOMPH_WARNING(
-        "computation of memory stats is deprecated; not switching it on!");
-      return;
-
-      /// Set the appropriate flag to true
-      Compute_memory_statistics = true;
-    } // End of enable_doc_memory_usage
-
-
-    /// Don't document the memory usage!
-    void disable_doc_memory_usage()
-    {
-      /// Set the appropriate flag to false
-      Compute_memory_statistics = false;
-    } // End of disable_doc_memory_usage
-
-
-    /// Get the memory statistics
-    double get_memory_usage_in_bytes()
-    {
-      // Has the preconditioner even been set up yet?
-      if (Preconditioner_has_been_setup)
-      {
-        // Were we meant to compute the statistics?
-        if (Compute_memory_statistics)
-        {
-          // Return the appropriate variable value
-          return Memory_usage_in_bytes;
-        }
-        else
-        {
-          // Allocate storage for an output stream
-          std::ostringstream warning_message_stream;
-
-          // Create a warning message
-          warning_message_stream
-            << "The memory statistics have not been calculated "
-            << "so I'm returning\nthe value zero." << std::endl;
-
-          // Give the user a warning
-          OomphLibWarning(warning_message_stream.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-
-          // Return the value zero
-          return 0.0;
-        }
-      }
-      // If the preconditioner hasn't been set up yet
-      else
-      {
-        // Allocate storage for an output stream
-        std::ostringstream warning_message_stream;
-
-        // Create a warning message
-        warning_message_stream
-          << "The preconditioner hasn't even been set up yet "
-          << "so I'm returning\nthe value zero." << std::endl;
-
-        // Give the user a warning
-        OomphLibWarning(warning_message_stream.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-
-        // Return the value zero
-        return 0.0;
-      } // if (Preconditioner_has_been_setup)
-    } // End of get_memory_usage_in_bytes
 
   protected:
-    /// Matrix of matrix-vector product operators for the off diagonals
-    DenseMatrix<MatrixVectorProduct*> Off_diagonal_matrix_vector_products;
+
+   /// Matrix of matrix-vector product operators for the off diagonals
+   DenseMatrix<MatrixVectorProduct*> Off_diagonal_matrix_vector_products;
 
   private:
+   
     /// Storage for the block bandwidth of the matrix. Defaults to -1
     /// indicating that we assume every off-diagonal block is non-empty. If
     /// the matrix is block diagonal then the value is zero
@@ -401,14 +242,6 @@ namespace oomph
     /// (used so we can wipe the data when the preconditioner is called again)
     bool Preconditioner_has_been_setup;
 
-    // hierher deprecated
-    /// Flag to indicate whether or not to record the memory statistics
-    /// this preconditioner
-    bool Compute_memory_statistics;
-
-    /// Storage for the memory usage of the solver if the flag above
-    /// is set to true (in bytes)
-    double Memory_usage_in_bytes;
   };
 } // End of namespace oomph
 #endif

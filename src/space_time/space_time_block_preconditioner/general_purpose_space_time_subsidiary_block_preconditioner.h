@@ -59,12 +59,6 @@ namespace oomph
     SpaceTimeNavierStokesSubsidiaryPreconditioner()
       : BlockPreconditioner<CRDoubleMatrix>()
     {
-      // By default, don't store the memory statistics of this preconditioner
-      Compute_memory_statistics = false;
-
-      // Initialise the value of Memory_usage_in_bytes
-      Memory_usage_in_bytes = 0.0;
-
       // Flag to indicate that the preconditioner has been setup
       // previously -- if setup() is called again, data can
       // be wiped.
@@ -134,79 +128,6 @@ namespace oomph
     /// Apply preconditioner to r
     void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
-
-    /// Document the memory usage
-    void enable_doc_memory_usage()
-    {
-      OOMPH_WARNING(
-        "computation of memory stats is deprecated; not switching it on!");
-      return;
-
-      /// Set the appropriate flag to true
-      Compute_memory_statistics = true;
-    } // End of enable_doc_memory_usage
-
-
-    /// Don't document the memory usage!
-    void disable_doc_memory_usage()
-    {
-      /// Set the appropriate flag to false
-      Compute_memory_statistics = false;
-    } // End of disable_doc_memory_usage
-
-
-    /// Get the memory statistics
-    double get_memory_usage_in_bytes()
-    {
-      // Has the preconditioner even been set up yet?
-      if (Preconditioner_has_been_setup)
-      {
-        // Were we meant to compute the statistics?
-        if (Compute_memory_statistics)
-        {
-          // Return the appropriate variable value
-          return Memory_usage_in_bytes;
-        }
-        else
-        {
-          // Allocate storage for an output stream
-          std::ostringstream warning_message_stream;
-
-          // Create a warning message
-          warning_message_stream
-            << "The memory statistics have not been calculated "
-            << "so I'm returning\nthe value zero." << std::endl;
-
-          // Give the user a warning
-          OomphLibWarning(warning_message_stream.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-
-          // Return the value zero
-          return 0.0;
-        }
-      }
-      // If the preconditioner hasn't been set up yet
-      else
-      {
-        // Allocate storage for an output stream
-        std::ostringstream warning_message_stream;
-
-        // Create a warning message
-        warning_message_stream
-          << "The preconditioner hasn't even been set up yet "
-          << "so I'm returning\nthe value zero." << std::endl;
-
-        // Give the user a warning
-        OomphLibWarning(warning_message_stream.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-
-        // Return the value zero
-        return 0.0;
-      } // if (Preconditioner_has_been_setup)
-    } // End of get_memory_usage_in_bytes
-
   private:
     /// Pointer to the 'preconditioner' for the F matrix
     Preconditioner* F_preconditioner_pt;
@@ -223,15 +144,6 @@ namespace oomph
     /// Control flag is true if the preconditioner has been setup
     /// (used so we can wipe the data when the preconditioner is called again)
     bool Preconditioner_has_been_setup;
-
-    // hierher deprecated
-    /// Flag to indicate whether or not to record the memory statistics
-    /// this preconditioner
-    bool Compute_memory_statistics;
-
-    /// Storage for the memory usage of the solver if the flag above
-    /// is set to true (in bytes)
-    double Memory_usage_in_bytes;
 
     /// MatrixVectorProduct operator for F
     MatrixVectorProduct* F_mat_vec_pt;
@@ -259,13 +171,7 @@ namespace oomph
         Iterations(0),
         Preconditioner_has_been_setup(false),
         Preconditioner_LHS(false)
-    {
-      // By default, don't store the memory statistics of this preconditioner
-      Compute_memory_statistics = false;
-
-      // Initialise the value of Memory_usage_in_bytes
-      Memory_usage_in_bytes = 0.0;
-    } // End of GMRESBlockPreconditioner
+    {}
 
     /// Destructor
     virtual ~GMRESBlockPreconditioner()
@@ -339,80 +245,6 @@ namespace oomph
     {
       Preconditioner_LHS = false;
     }
-
-
-    /// Document the memory usage
-    void enable_doc_memory_usage()
-    {
-      OOMPH_WARNING(
-        "computation of memory stats is deprecated; not switching it on!");
-      return;
-
-      /// Set the appropriate flag to true
-      Compute_memory_statistics = true;
-    } // End of enable_doc_memory_usage
-
-
-    /// Don't document the memory usage!
-    void disable_doc_memory_usage()
-    {
-      /// Set the appropriate flag to false
-      Compute_memory_statistics = false;
-    } // End of disable_doc_memory_usage
-
-
-    /// Get the memory statistics
-    double get_memory_usage_in_bytes()
-    {
-      // Has the preconditioner even been set up yet?
-      if (Preconditioner_has_been_setup)
-      {
-        // Were we meant to compute the statistics?
-        if (Compute_memory_statistics)
-        {
-          // Return the appropriate variable value
-          return Memory_usage_in_bytes;
-        }
-        else
-        {
-          // Allocate storage for an output stream
-          std::ostringstream warning_message_stream;
-
-          // Create a warning message
-          warning_message_stream
-            << "The memory statistics have not been calculated "
-            << "so I'm returning\nthe value zero." << std::endl;
-
-          // Give the user a warning
-          OomphLibWarning(warning_message_stream.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-
-          // Return the value zero
-          return 0.0;
-        }
-      }
-      // If the preconditioner hasn't been set up yet
-      else
-      {
-        // Allocate storage for an output stream
-        std::ostringstream warning_message_stream;
-
-        // Create a warning message
-        warning_message_stream
-          << "The preconditioner hasn't even been set up yet "
-          << "so I'm returning\nthe value zero." << std::endl;
-
-        // Give the user a warning
-        OomphLibWarning(warning_message_stream.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-
-        // Return the value zero
-        return 0.0;
-      } // if (Preconditioner_has_been_setup)
-    } // End of get_memory_usage_in_bytes
-
 
     /// Handle to the Navier-Stokes subsidiary block preconditioner
     /// DRAIG: Make sure the desired const-ness is correct later...
@@ -589,15 +421,6 @@ namespace oomph
 
     /// Number of iterations taken
     unsigned Iterations;
-
-    // hierher deprecated
-    /// Flag to indicate whether or not to record the memory statistics
-    /// this preconditioner
-    bool Compute_memory_statistics;
-
-    /// Storage for the memory usage of the solver if the flag above
-    /// is set to true (in bytes)
-    double Memory_usage_in_bytes;
 
     /// Control flag is true if the preconditioner has been setup (used
     /// so we can wipe the data when the preconditioner is called again)

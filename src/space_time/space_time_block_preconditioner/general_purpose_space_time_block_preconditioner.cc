@@ -62,9 +62,6 @@ namespace oomph
       this->gp_preconditioner_set_all_meshes();
     }
 
-    // Initialise the memory usage variable
-    Memory_usage_in_bytes = 0.0;
-
     // If we're meant to build silently
     if (this->Silent_preconditioner_setup == true)
     {
@@ -142,44 +139,11 @@ namespace oomph
                << "\nTotal subsidiary preconditioner setup time [sec]: "
                << t_subsidiary_setup_total << std::endl;
 
-    // Do we need to doc. the memory statistics?
-    // NOTE: We're going to assume that either:
-    //    (1) GMRES is used as a subsidiary block preconditioner (preconditioned
-    //        by the Navier-Stokes subsidiary block preconditioner), or;
-    //    (2) Exact preconditioner is used as the subsidiary preconditioner.
-    if (Compute_memory_statistics)
-    {
-      // How many rows are there in the global Jacobian?
-      unsigned n_row = this->matrix_pt()->nrow();
-
-      // How many nonzeros are there in the global Jacobian?
-      unsigned n_nnz = this->matrix_pt()->nnz();
-
-      // hierher disable everywhere
-      // // Add in the subsidiary preconditioners contribution
-      // double total_memory_usage_for_setup_phase =
-      //   dynamic_cast<ExactPreconditioner*>(
-      //     this->Subsidiary_preconditioner_pt[0])
-      //     ->get_total_memory_needed_for_superlu();
-
-      // hierher disable everywhere
-      // // Add in the global Jacobian contribution
-      // total_memory_usage_for_setup_phase +=
-      //   ((2 * ((n_row + 1) * sizeof(int))) +
-      //    (n_nnz * (sizeof(int) + sizeof(double))));
-
-      // hierher delete every where
-      // // How much memory have we used in the subsidiary preconditioners?
-      // oomph_info << "\nTotal amount of memory being used after setup (MB): "
-      //            << total_memory_usage_for_setup_phase / 1.0e+06 << "\n"
-      //            << std::endl;
-
-    } // if (Compute_memory_statistics)
   } // End of setup
 
-  //=============================================================================
+  //==========================================================================
   /// Preconditioner solve for the exact preconditioner
-  //=============================================================================
+  //==========================================================================
   template<typename MATRIX>
   void ExactDGPBlockPreconditioner<MATRIX>::preconditioner_solve(
     const DoubleVector& r, DoubleVector& z)
@@ -241,9 +205,6 @@ namespace oomph
       this->gp_preconditioner_set_all_meshes();
     }
 
-    // Initialise the memory usage variable
-    Memory_usage_in_bytes = 0.0;
-
     // If we're meant to build silently
     if (this->Silent_preconditioner_setup == true)
     {
@@ -283,21 +244,6 @@ namespace oomph
       if (dynamic_cast<BlockPreconditioner<CRDoubleMatrix>*>(
             this->Subsidiary_preconditioner_pt[i]) != 0)
       {
-        // If we need to compute the memory statistics
-        if (Compute_memory_statistics)
-        {
-          // If we're dealing with a GMRES block preconditioner
-          if (dynamic_cast<GMRESBlockPreconditioner*>(
-                this->Subsidiary_preconditioner_pt[i]))
-          {
-            // Enable the doc-ing of memory usage in the GMRES block
-            // preconditioner
-            dynamic_cast<GMRESBlockPreconditioner*>(
-              this->Subsidiary_preconditioner_pt[i])
-              ->enable_doc_memory_usage();
-          }
-        } // if (Compute_memory_statistics)
-
         // Get the start time
         double t_subsidiary_setup_start = TimingHelpers::timer();
 
@@ -397,21 +343,6 @@ namespace oomph
         // Get the (i,j)-th block matrix
         CRDoubleMatrix block_matrix = this->get_block(i, j);
 
-        // Do we need to doc. the memory statistics?
-        if (Compute_memory_statistics)
-        {
-          // How many rows are there in this block?
-          unsigned n_row = block_matrix.nrow();
-
-          // How many nonzeros are there in this block?
-          unsigned n_nnz = block_matrix.nnz();
-
-          // Compute the memory usage. The only memory overhead here (for the
-          // setup phase) is the storage of the sub-diagonal blocks for the MVPs
-          Memory_usage_in_bytes += ((2 * ((n_row + 1) * sizeof(int))) +
-                                    (n_nnz * (sizeof(int) + sizeof(double))));
-        }
-
         // Get the end time
         double t_extract_end = TimingHelpers::timer();
 
@@ -456,145 +387,7 @@ namespace oomph
                << t_subsidiary_setup_total
                << "\nTotal matrix-vector product setup time [sec]: "
                << t_mvp_setup_total << std::endl;
-
-    // Do we need to doc. the memory statistics?
-    // NOTE: We're going to assume that either:
-    //    (1) GMRES is used as a subsidiary block preconditioner (preconditioned
-    //        by the Navier-Stokes subsidiary block preconditioner), or;
-    //    (2) Exact preconditioner is used as the subsidiary preconditioner.
-    if (Compute_memory_statistics)
-    {
-      // Allocate space for the total memory usage
-      double total_memory_usage_for_setup_phase = 0.0;
-
-      // How many rows are there in the global Jacobian?
-      unsigned n_row = this->matrix_pt()->nrow();
-
-      // How many nonzeros are there in the global Jacobian?
-      unsigned n_nnz = this->matrix_pt()->nnz();
-
-      // Storage for the memory usage of the global system matrix.
-      // NOTE: This calculation is done by taking into account the storage
-      // scheme for a compressed row matrix
-      double memory_usage_for_storage_of_global_jacobian_in_bytes =
-        ((2 * ((n_row + 1) * sizeof(int))) +
-         (n_nnz * (sizeof(int) + sizeof(double))));
-
-      // Allocate storage for the memory usage of the subsidiary preconditioner
-      double memory_usage_for_subsidiary_preconditioner_in_bytes = 0.0;
-
-      // Allocate storage for the memory usage of the Navier-Stokes subsidiary
-      // block preconditioner (if it's used, that is)
-      double memory_usage_for_nssbp_preconditioner_in_bytes = 0.0;
-
-      // Boolean to indicate whether we've issue a warning about not being
-      // able to compute memory statistics. If it doesn't work with one
-      // block, chances are it won't work with any of them, so don't be a
-      // pain in the gluteus maximus and just spit out the warning once
-      bool have_issued_warning_about_memory_calculations = false;
-
-      // Build the preconditioners and matrix vector products
-      for (unsigned i = 0; i < n_block_types; i++)
-      {
-        // See if the i-th subsidiary preconditioner the GMRES block
-        // preconditioner
-        if (dynamic_cast<GMRESBlockPreconditioner*>(
-              this->Subsidiary_preconditioner_pt[i]) != 0)
-        {
-          // Upcast the subsidiary preconditioner pointer to a GMRES block
-          // preconditioner pointer
-          GMRESBlockPreconditioner* gmres_block_prec_pt =
-            dynamic_cast<GMRESBlockPreconditioner*>(
-              this->Subsidiary_preconditioner_pt[i]);
-
-          // Update the subsidiary preconditioner memory usage variable
-          memory_usage_for_subsidiary_preconditioner_in_bytes +=
-            gmres_block_prec_pt->get_memory_usage_in_bytes();
-
-          // Add on the memory usage for the NS subsidiary block preconditioner
-          memory_usage_for_nssbp_preconditioner_in_bytes +=
-            gmres_block_prec_pt->navier_stokes_subsidiary_preconditioner_pt()
-              ->get_memory_usage_in_bytes();
-        }
-        // This block is preconditioned by the exact preconditioner
-        else if (dynamic_cast<ExactPreconditioner*>(
-                   this->Subsidiary_preconditioner_pt[i]) != 0)
-        {
-          // hierher disable everywhere
-          // // Update the subsidiary preconditioner memory usage variable
-          // memory_usage_for_subsidiary_preconditioner_in_bytes +=
-          //   dynamic_cast<ExactPreconditioner*>(
-          //     this->Subsidiary_preconditioner_pt[i])
-          //     ->get_total_memory_needed_for_superlu();
-        }
-        // Don't know what to do otherwise!
-        else
-        {
-          // Have we already complained once?
-          if (!have_issued_warning_about_memory_calculations)
-          {
-            // Remember that we've issued a warning now
-            have_issued_warning_about_memory_calculations = true;
-
-            // Allocate storage for an output stream
-            std::ostringstream warning_message_stream;
-
-            // Create a warning message
-            warning_message_stream
-              << "Can't compute the memory statistics for the " << i
-              << "-th diagonal block in the banded\nblock "
-              << "triangular preconditioner so I'm just going "
-              << "to skip it." << std::endl;
-
-            // Give the user a warning
-            OomphLibWarning(warning_message_stream.str(),
-                            OOMPH_CURRENT_FUNCTION,
-                            OOMPH_EXCEPTION_LOCATION);
-          }
-        }
-      } // for (unsigned i=0;i<nblock_types;i++)
-
-      // Create some space
-      oomph_info << std::endl;
-
-      // If we've got a nonzero contribution from the NSSBP
-      if (memory_usage_for_nssbp_preconditioner_in_bytes > 0.0)
-      {
-        // Doc. the memory usage for the NSSBP
-        oomph_info << "Amount of memory used by Navier-Stokes subsidiary block "
-                   << "preconditioner (MB): "
-                   << memory_usage_for_nssbp_preconditioner_in_bytes / 1.0e+06
-                   << std::endl;
-
-        // Add in the NSSBP contribution
-        total_memory_usage_for_setup_phase +=
-          memory_usage_for_nssbp_preconditioner_in_bytes;
-      }
-
-      // Add in the subsidiary preconditioners contribution
-      total_memory_usage_for_setup_phase +=
-        memory_usage_for_subsidiary_preconditioner_in_bytes;
-
-      // Add in the banded block triangular preconditioner contribution
-      total_memory_usage_for_setup_phase += get_memory_usage_in_bytes();
-
-      // Add in the global Jacobian contribution
-      total_memory_usage_for_setup_phase +=
-        memory_usage_for_storage_of_global_jacobian_in_bytes;
-
-      // How much memory have we used in the subsidiary preconditioners?
-      oomph_info
-        << "Amount of memory used by the subsidiary preconditioners "
-        << "(MB): "
-        << memory_usage_for_subsidiary_preconditioner_in_bytes / 1.0e+06
-        << "\nAmount of memory used by banded block triangular "
-        << "preconditioner (MB): " << get_memory_usage_in_bytes() / 1.0e+06
-        << "\nAmount of memory used to store (global) Jacobian (MB): "
-        << memory_usage_for_storage_of_global_jacobian_in_bytes / 1.0e+06
-        << "\nTotal amount of memory being used after setup (MB): "
-        << total_memory_usage_for_setup_phase / 1.0e+06 << "\n"
-        << std::endl;
-    } // if (Compute_memory_statistics)
+    
   } // End of setup
 
   //=============================================================================
