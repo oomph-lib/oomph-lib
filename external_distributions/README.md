@@ -98,7 +98,7 @@ Option                                      | Description                       
 `OOMPH_BUILD_SUPERLU`                       | *Build SuperLU?*                                           | `ON`
 `OOMPH_BUILD_SUPERLU_DIST`                  | *Build SuperLU DIST?*                                      | `ON` if MPI is enabled else `OFF`
 `OOMPH_BUILD_CGAL`                          | *Build CGAL (with deps. GMP, MPFR and Boost)?*             | `ON`
-`OOMPH_BUILD_MUMPS`                         | *Build MUMPS?*                                             | `ON`
+`OOMPH_BUILD_MUMPS`                         | *Build MUMPS?*                                             | `ON` if MPI is enabled else `OFF`
 `OOMPH_BUILD_HYPRE`                         | *Build Hypre?*                                             | `ON`
 `OOMPH_BUILD_TRILINOS`                      | *Build Trilinos?*                                          | `ON`
 `OOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTING` | *Disable testing when building the third-party libraries?* | `OFF`
