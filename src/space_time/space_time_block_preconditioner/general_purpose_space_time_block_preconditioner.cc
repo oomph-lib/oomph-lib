@@ -146,7 +146,7 @@ namespace oomph
     // NOTE: We're going to assume that either:
     //    (1) GMRES is used as a subsidiary block preconditioner (preconditioned
     //        by the Navier-Stokes subsidiary block preconditioner), or;
-    //    (2) SuperLU is used as the subsidiary preconditioner.
+    //    (2) Exact preconditioner is used as the subsidiary preconditioner.
     if (Compute_memory_statistics)
     {
       // How many rows are there in the global Jacobian?
@@ -155,21 +155,25 @@ namespace oomph
       // How many nonzeros are there in the global Jacobian?
       unsigned n_nnz = this->matrix_pt()->nnz();
 
-      // Add in the subsidiary preconditioners contribution
-      double total_memory_usage_for_setup_phase =
-        dynamic_cast<SuperLUPreconditioner*>(
-          this->Subsidiary_preconditioner_pt[0])
-          ->get_total_memory_needed_for_superlu();
+      // hierher disable everywhere
+      // // Add in the subsidiary preconditioners contribution
+      // double total_memory_usage_for_setup_phase =
+      //   dynamic_cast<ExactPreconditioner*>(
+      //     this->Subsidiary_preconditioner_pt[0])
+      //     ->get_total_memory_needed_for_superlu();
 
-      // Add in the global Jacobian contribution
-      total_memory_usage_for_setup_phase +=
-        ((2 * ((n_row + 1) * sizeof(int))) +
-         (n_nnz * (sizeof(int) + sizeof(double))));
+      // hierher disable everywhere
+      // // Add in the global Jacobian contribution
+      // total_memory_usage_for_setup_phase +=
+      //   ((2 * ((n_row + 1) * sizeof(int))) +
+      //    (n_nnz * (sizeof(int) + sizeof(double))));
 
-      // How much memory have we used in the subsidiary preconditioners?
-      oomph_info << "\nTotal amount of memory being used after setup (MB): "
-                 << total_memory_usage_for_setup_phase / 1.0e+06 << "\n"
-                 << std::endl;
+      // hierher delete every where
+      // // How much memory have we used in the subsidiary preconditioners?
+      // oomph_info << "\nTotal amount of memory being used after setup (MB): "
+      //            << total_memory_usage_for_setup_phase / 1.0e+06 << "\n"
+      //            << std::endl;
+      
     } // if (Compute_memory_statistics)
   } // End of setup
 
@@ -457,7 +461,7 @@ namespace oomph
     // NOTE: We're going to assume that either:
     //    (1) GMRES is used as a subsidiary block preconditioner (preconditioned
     //        by the Navier-Stokes subsidiary block preconditioner), or;
-    //    (2) SuperLU is used as the subsidiary preconditioner.
+    //    (2) Exact preconditioner is used as the subsidiary preconditioner.
     if (Compute_memory_statistics)
     {
       // Allocate space for the total memory usage
@@ -512,15 +516,16 @@ namespace oomph
             gmres_block_prec_pt->navier_stokes_subsidiary_preconditioner_pt()
               ->get_memory_usage_in_bytes();
         }
-        // This block is preconditioned by the SuperLU preconditioner
-        else if (dynamic_cast<SuperLUPreconditioner*>(
+        // This block is preconditioned by the exact preconditioner
+        else if (dynamic_cast<ExactPreconditioner*>(
                    this->Subsidiary_preconditioner_pt[i]) != 0)
         {
-          // Update the subsidiary preconditioner memory usage variable
-          memory_usage_for_subsidiary_preconditioner_in_bytes +=
-            dynamic_cast<SuperLUPreconditioner*>(
-              this->Subsidiary_preconditioner_pt[i])
-              ->get_total_memory_needed_for_superlu();
+         // hierher disable everywhere
+          // // Update the subsidiary preconditioner memory usage variable
+          // memory_usage_for_subsidiary_preconditioner_in_bytes +=
+          //   dynamic_cast<ExactPreconditioner*>(
+          //     this->Subsidiary_preconditioner_pt[i])
+          //     ->get_total_memory_needed_for_superlu();
         }
         // Don't know what to do otherwise!
         else

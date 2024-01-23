@@ -492,6 +492,11 @@ FSIRingProblem::FSIRingProblem(const unsigned& N,
  // Overwrite maximum allowed residual to accomodate bad initial guesses
  Problem::Max_residuals=1000.0;
 
+ // hierher
+ linear_solver_pt()=new MumpsSolver;
+ oomph_info << "Have set linear solver pt to mumps" << std::endl;
+
+ 
  //----------------------------------------------------------- 
  // Create timesteppers
  //-----------------------------------------------------------
@@ -740,9 +745,6 @@ FSIRingProblem::FSIRingProblem(const unsigned& N,
  // Do equation numbering
  cout << "# of dofs " << assign_eqn_numbers() << std::endl;
 
- // hierher
- linear_solver_pt()=new MumpsSolver;
- 
 }
 
 

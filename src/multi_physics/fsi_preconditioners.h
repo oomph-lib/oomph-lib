@@ -75,7 +75,7 @@ namespace oomph
         new NavierStokesSchurComplementPreconditioner(problem_pt);
 
       // Create the Solid preconditioner
-      Solid_preconditioner_pt = new SuperLUPreconditioner;
+      Solid_preconditioner_pt = new ExactPreconditioner;
 
       // Preconditioner hasn't been set up yet.
       Preconditioner_has_been_setup = false;
@@ -753,7 +753,7 @@ namespace oomph
     CRDoubleMatrix P_matrix = this->get_concatenated_block(selected_blocks);
 
     // Setup preconditioner (i.e. inexact solver) -- does the LU decomposition
-    Preconditioner_pt = new SuperLUPreconditioner;
+    Preconditioner_pt = new ExactPreconditioner;
     Preconditioner_pt->setup(&P_matrix);
   }
 

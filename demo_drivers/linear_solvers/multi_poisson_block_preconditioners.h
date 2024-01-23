@@ -148,7 +148,7 @@ namespace oomph
   Diagonal_block_preconditioner_pt.resize(nblock_types);
   for (unsigned i=0;i<nblock_types;i++)
    {
-    Diagonal_block_preconditioner_pt[i] = new SuperLUPreconditioner;
+    Diagonal_block_preconditioner_pt[i] = new ExactPreconditioner;
    }
 
   // Setup preconditioners
@@ -358,7 +358,7 @@ namespace oomph
   // Create the subsidiary preconditioners
   for (unsigned i=0;i<nblock_types;i++)
    {
-    Diagonal_block_preconditioner_pt[i] = new SuperLUPreconditioner;
+    Diagonal_block_preconditioner_pt[i] = new ExactPreconditioner;
    }
 
   // Setup preconditioners
@@ -563,7 +563,7 @@ namespace oomph
   
   // Create the subsidiary preconditioner that actually does the
   // work on the one-and-only block
-  Subsidiary_preconditioner_pt = new SuperLUPreconditioner;
+  Subsidiary_preconditioner_pt = new ExactPreconditioner;
   
   // Setup preconditioners
   {
@@ -953,7 +953,7 @@ namespace oomph
   for(unsigned i = 0; i < nblock_types; i++)
    {
     // Create the subsidiary preconditioners
-    Block_preconditioner_pt[i] = new SuperLUPreconditioner;
+    Block_preconditioner_pt[i] = new ExactPreconditioner;
     
     // Put in braces so block matrix goes out of scope when done...
     {
@@ -1200,8 +1200,8 @@ namespace oomph
              << this->nblock_types() << " block types\n";
   
   // Create the subsidiary preconditioners
-  First_subsidiary_preconditioner_pt= new SuperLUPreconditioner;
-  Second_subsidiary_preconditioner_pt= new SuperLUPreconditioner;
+  First_subsidiary_preconditioner_pt= new ExactPreconditioner;
+  Second_subsidiary_preconditioner_pt= new ExactPreconditioner;
   
   // Set diagonal solvers/preconditioners; put in own scope
   // so variable block goes out of scope
@@ -1409,8 +1409,8 @@ namespace oomph
   this->block_setup(dof_to_block_map);
   
   // Create the subsidiary preconditioners
-  First_subsidiary_preconditioner_pt= new SuperLUPreconditioner;
-  Second_subsidiary_preconditioner_pt= new SuperLUPreconditioner;
+  First_subsidiary_preconditioner_pt= new ExactPreconditioner;
+  Second_subsidiary_preconditioner_pt= new ExactPreconditioner;
 
   // Set diagonal solvers/preconditioners; put in own scope
   // so block goes out of scope

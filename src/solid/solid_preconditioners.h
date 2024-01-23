@@ -219,12 +219,12 @@ namespace oomph
     }
 
     /// Function to (re-)set pressure matrix preconditioner  (inexact
-    /// solver) to SuperLU
-    void set_p_superlu_preconditioner()
+    /// solver) to exact preconditioner
+    void set_p_exact_preconditioner()
     {
       if (!Using_default_p_preconditioner)
       {
-        P_preconditioner_pt = new SuperLUPreconditioner;
+        P_preconditioner_pt = new ExactPreconditioner;
         Using_default_p_preconditioner = true;
       }
     }
@@ -243,12 +243,12 @@ namespace oomph
     }
 
     /// Function to (re-)set momentum matrix preconditioner (inexact
-    /// solver) to SuperLU
-    void set_f_superlu_preconditioner()
+    /// solver) to exact preconditioner
+    void set_f_exact_preconditioner()
     {
       if (!Using_default_f_preconditioner)
       {
-        F_preconditioner_pt = new SuperLUPreconditioner;
+        F_preconditioner_pt = new ExactPreconditioner;
         Using_default_f_preconditioner = true;
       }
     }

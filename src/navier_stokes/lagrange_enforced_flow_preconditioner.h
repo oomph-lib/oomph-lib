@@ -168,7 +168,7 @@ namespace oomph
   {
   public:
     /// This preconditioner includes the option to use subsidiary
-    /// operators other than SuperLUPreconditioner for this problem.
+    /// operators other than ExactPreconditioner for this problem.
     /// This is the typedef of a function that should return an instance
     /// of a subsidiary preconditioning operator.  This preconditioner is
     /// responsible for the destruction of the subsidiary preconditioners.
@@ -291,7 +291,7 @@ namespace oomph
       if (!Using_superlu_ns_preconditioner)
       {
         delete Navier_stokes_preconditioner_pt;
-        Navier_stokes_preconditioner_pt = new SuperLUPreconditioner;
+        Navier_stokes_preconditioner_pt = new ExactPreconditioner;
         Using_superlu_ns_preconditioner = true;
       }
     }

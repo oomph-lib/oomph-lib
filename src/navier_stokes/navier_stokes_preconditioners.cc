@@ -566,7 +566,7 @@ namespace oomph
     // if the P preconditioner has not been setup
     if (P_preconditioner_pt == 0)
     {
-      P_preconditioner_pt = new SuperLUPreconditioner;
+      P_preconditioner_pt = new ExactPreconditioner;
       Using_default_p_preconditioner = true;
     }
 
@@ -604,7 +604,7 @@ namespace oomph
     // if the F preconditioner has not been setup
     if (F_preconditioner_pt == 0)
     {
-      F_preconditioner_pt = new SuperLUPreconditioner;
+      F_preconditioner_pt = new ExactPreconditioner;
       Using_default_f_preconditioner = true;
     }
 

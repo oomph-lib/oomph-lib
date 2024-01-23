@@ -1072,6 +1072,306 @@ We recommend that you can write your own `CMakeUserPresets.json` file. You can i
 }
 ```
 
+
+## Cheat sheet: autotools vs. cmake
+
+Assume that `$oomph_home_dir` is the `oomph-lib` home directory:
+<table>
+<tr><th>autotools</th><th>cmake</th></tr>
+
+<tr>
+<td colspan="2">
+<b>- Build and install the entire library using a helper script:</b>
+</td>
+</tr>
+<tr>
+<td>
+<pre>
+# Go to home directory
+cd $oomph_home_dir<br>
+# Run the autogen script which prompts
+# for configure options
+./autogen.sh
+
+</pre>
+</td>
+<td>
+<pre>
+# Go to home directory
+cd $oomph_home_dir<br>
+# Run the hierher script which prompts
+# for configure options
+./something_similar.sh
+</pre>
+</td>
+</tr>
+
+
+<tr>
+<td colspan="2">
+<b>- Alternative: Build and install the entire library step by step:</b>
+</td>
+</tr>
+<tr>
+<td>
+<pre>
+# Go to home directory
+cd $oomph_home_dir<br>
+# Run manual config/build/install 
+# sequence
+./configure hierher check this
+make 
+make install
+</pre>
+</td>
+<td>
+<pre>
+# Go to home directory
+cd $oomph_home_dir<br>
+# Run manual config/build/install
+# sequence
+cmake -G Ninja -B build
+cmake --build build
+cmake --install build
+</pre>
+</td>
+</tr>
+
+<tr>
+<td colspan="2">
+<b>- Run all self-tests:</b>
+</td>
+</tr>
+<tr>
+<td>
+<pre>
+# Go to home directory
+cd $oomph_home_dir<br>
+# Run the tests
+make check
+</pre>
+</td>
+<td>
+<pre>
+# Go to demo_drivers directory hierher Puneet: does this also do the tests in self_tests?
+cd $oomph_home_dir/demo_drivers<br>
+# Configure
+cmake -G Ninja -B build<br>
+# Run the tests
+cd build
+ctest
+</pre>
+</td>
+</tr>
+
+<tr>
+<td colspan="2">
+<b>- Run all self-tests in a given demo driver directory:</b>
+</td>
+</tr>
+<tr>
+<td>
+<pre>
+# Go to demo driver directory
+cd $oomph_home_dir/demo_driver/one_d_poisson<br>
+# Run the test
+make check
+</pre>
+</td>
+<td>
+<pre>
+# Go to demo driver directory
+cd $oomph_home_dir/demo_driver/one_d_poisson<br>
+# Configure
+cmake -G Ninja -B build<br>
+# Run the test
+cd build
+ctest
+</pre>
+</td>
+</tr>
+
+
+<tr>
+<td colspan="2">
+<b>- Debug demo driver code:</b>
+</td>
+</tr>
+<tr>
+<td>
+<pre>
+# Go to demo driver directory
+cd $oomph_home_dir/demo_driver/one_d_poisson<br>
+# Run the test
+make check<br>
+# Edit
+emacs one_d_poisson.cc<br>
+# Run again (make realises that 
+# code needs to be recompiled)
+make check<br>
+# Keep going until it works...
+# (of course you may do the
+# compilation/re-run in your 
+# editor/IDE; see below)
+</pre>
+</td>
+<td>
+<pre>
+# Go to demo driver directory
+cd $oomph_home_dir/demo_driver/one_d_poisson<br>
+# Configure (note that switching on the
+# debug build only helps if the library
+# itself was compiled with that option too)
+cmake -G Ninja -B build -DCMAKE_BUILD_TYPE=Debug<br>
+# Run the test (note that the executable
+# got built in the build directory!)
+cd build
+ctest<br>
+# Edit source code (note that this lives 
+# one level above the build directory!)
+emacs ../one_d_poisson.cc<br>
+# Rebuild executable(s)
+ninja <br>
+# ...or just rebuild a specific one
+ninja one_d_poisson<br>
+# If you want to see compiler errors 
+# in detail do
+ninja --verbose one_d_poisson<br>
+# Now re-run the test
+ctest<br>
+# Keep going until it works...
+# (of course you may do the
+# compilation/re-run in your 
+# editor/IDE; see below)
+</pre>
+</td>
+</tr>
+
+
+
+<tr>
+<td colspan="2">
+<b>- Edit a file in the library and rebuild:</b>
+</td>
+</tr>
+<tr>
+<td>
+<pre>
+# Go to relevant src directory
+cd $oomph_home_dir/src/poisson<br>
+# Edit the relevant file
+emacs poisson_elements.h <br>
+# Re-compile the library
+make <br>
+# You may go through this repeatedly 
+# until the code compiles... 
+<br>
+# EMACS/IDE ASIDE: If you
+# do this in emacs where you can trigger
+# the compilation with [F4] (or some 
+# other user-defined key) the command to 
+# be spawned is "make" which emacs enters 
+# by default (you can edit this); if the 
+# compilation fails, emacs allows 
+# you to jump to the source line where
+# the compilation error occurs 
+# using [F12] (on my setup; you can 
+# customise this), so the typical 
+# sequence is
+# - edit code
+# - save
+# - [F4] (spawns "make")
+# - [RETURN]
+# - [F12] (jump to error; edit)
+# - [F12] (next error; edit)
+# - ...
+# - save
+# - [F4] (spawns "make")
+# - [RETURN]
+# etc. 
+<br>
+# Install the library
+make install<br>
+# If the change also affects other 
+# dependent libraries (e.g. if you
+# edited something in src/generic
+# or a library that is used by others,
+# e.g. for multi-physics elements,
+# rebuild those libraries too. Just to be
+# on the safe side, do all of them (make
+# knows about the dependencies and will
+# only rebuild those that are affected)
+cd $oomph_home_dir/src
+make; make install</b>
+</pre>
+</td>
+<td>
+<pre>
+# Go to relevant src directory
+cd $oomph_home_dir/src/poisson<br>
+# Edit the relevant file
+emacs poisson_elements.h <br>
+# Go back to the home directory and
+# rebuild (cmake knows what needs to be
+# recompiled)
+cd $oomph_home_dir
+cmake --build build <br><br>
+# You may go through this repeatedly 
+# until the code compiles...
+<br>
+# EMACS/IDE ASIDE: If you If you
+# do this in emacs where you can trigger
+# the compilation with [F4] (or some 
+# other user-defined key), emacs
+# provides the default command "make". 
+# Edit this to 
+#
+#   cd $oomph_home_dir; cmake --build build
+#
+# then hit return. If the 
+# compilation fails, emacs allows 
+# you to jump to the source line where
+# the compilation error occurs 
+# using [F12] (on my setup; you can 
+# customise this), so the typical 
+# sequence is
+# - edit code
+# - save
+# - [F4] (spawns "make") 
+# - change make to 
+# 
+#     cd $oomph_home_dir; cmake --build build
+#
+# - [RETURN]
+# - [F12] (jump to error; edit)
+# - [F12] (next error; edit)
+# - ...
+# - save
+# - [F4] (emacs now remembers the previous
+#         command)
+# - [RETURN]
+# etc. 
+<br>
+# Install the library
+cd $oomph_home_dir
+cmake --install build<br>
+</pre>
+</td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+</table>
+
+
+
 ## Advanced testing
 
 **TODO:** Add support for `self_test`.

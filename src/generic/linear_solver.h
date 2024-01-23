@@ -645,6 +645,13 @@ namespace oomph
     /// See enum SuperLU_solver_type for more details.
     void set_solver_type(const Type& t)
     {
+     // hierher
+     if (t==Distributed)
+      {
+       oomph_info << "SuperLU_dist is currently disabled" << std::endl;
+       abort();
+      }
+     
       this->clean_up_memory();
       Solver_type = t;
     }

@@ -555,6 +555,11 @@ void print_connectivity_matrix(const Problem* const problem_pt)
 //=============================================================================
 int main(int argc, char *argv[])
 {
+
+#ifdef OOMPH_HAS_MPI
+ MPI_Helpers::init(argc,argv);
+#endif
+ 
   // number of element
   unsigned n_element = 20;
   

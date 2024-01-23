@@ -45,8 +45,8 @@ namespace oomph
 {
   //=============================================================================
   /// General purpose block triangular preconditioner. By default this is
-  /// Upper triangular. Also, by default SuperLUPreconditioner (or
-  /// SuperLUDistPreconditioner) is used to solve the subsidiary systems, but
+  /// Upper triangular. Also, by default ExactPreconditioner
+  /// is used to solve the subsidiary systems, but
   /// other preconditioners can be used by setting them using passing a pointer
   /// to a function of type SubsidiaryPreconditionerFctPt to the method
   /// subsidiary_preconditioner_function_pt().

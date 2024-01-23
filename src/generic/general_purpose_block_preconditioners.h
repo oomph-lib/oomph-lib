@@ -51,12 +51,12 @@ namespace oomph
 {
   namespace PreconditionerCreationFunctions
   {
-    /// Helper function to create a SuperLu preconditioner (for use as
+    /// Helper function to create a exactpreconditioner (for use as
     /// the default subsididary preconditioner creator in
     /// GeneralPurposeBlockPreconditioners).
-    inline Preconditioner* create_super_lu_preconditioner()
+    inline Preconditioner* create_exact_preconditioner()
     {
-      return new SuperLUPreconditioner;
+      return new ExactPreconditioner;
     }
   } // namespace PreconditionerCreationFunctions
 
@@ -87,7 +87,7 @@ namespace oomph
     GeneralPurposeBlockPreconditioner()
       : BlockPreconditioner<MATRIX>(),
         Subsidiary_preconditioner_creation_function_pt(
-          &PreconditionerCreationFunctions::create_super_lu_preconditioner)
+          &PreconditionerCreationFunctions::create_exact_preconditioner)
     {
       // Make sure that the Gp_mesh_pt container is size zero.
       Gp_mesh_pt.resize(0);
@@ -143,7 +143,7 @@ namespace oomph
     void reset_subsidiary_preconditioner_function_to_default()
     {
       Subsidiary_preconditioner_creation_function_pt =
-        &PreconditionerCreationFunctions::create_super_lu_preconditioner;
+        &PreconditionerCreationFunctions::create_exact_preconditioner;
     }
     /// Set the subsidiary preconditioner to use for block i. The
     /// subsidiary preconditioner should have been created using new (the
@@ -447,7 +447,7 @@ namespace oomph
   //=============================================================================
   /// General purpose block triangular preconditioner
   /// By default this is Upper triangular.
-  /// By default SuperLUPreconditioner (or SuperLUDistPreconditioner) is used to
+  /// By default ExactPreconditioner is used to
   /// solve the subsidiary systems, but other preconditioners can be used by
   /// setting them using passing a pointer to a function of type
   /// SubsidiaryPreconditionerFctPt to the method

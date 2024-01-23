@@ -45,11 +45,11 @@ namespace oomph
   // Forward declaration of problem class (for obsolete setup function)
   class Problem;
 
-  //=============================================================================
+  //========================================================================
   /// Preconditioner base class. Gives an interface to call all other
   /// preconditioners through and stores the matrix and communicator
   /// pointers. All preconditioners should be derived from this class.
-  //=============================================================================
+  //========================================================================
   class Preconditioner : public DistributableLinearAlgebraObject
   {
   public:
@@ -91,7 +91,7 @@ namespace oomph
     /// Setup the preconditioner: store the matrix pointer and the
     /// communicator pointer then call preconditioner specific setup()
     /// function.
-    void setup(DoubleMatrixBase* matrix_pt)
+    virtual void setup(DoubleMatrixBase* matrix_pt)
     {
       // Store matrix pointer
       set_matrix_pt(matrix_pt);

@@ -1174,7 +1174,7 @@ namespace oomph
       {
         if (Navier_stokes_preconditioner_pt == 0)
         {
-          Navier_stokes_preconditioner_pt = new SuperLUPreconditioner;
+          Navier_stokes_preconditioner_pt = new ExactPreconditioner;
         }
       }
       else
@@ -1182,7 +1182,7 @@ namespace oomph
         if (Navier_stokes_preconditioner_pt == 0)
         {
           std::ostringstream err_msg;
-          err_msg << "Not using SuperLUPreconditioner for NS block,\n"
+          err_msg << "Not using ExactPreconditioner for NS block,\n"
                   << "but the Navier_stokes_preconditioner_pt is null.\n";
           throw OomphLibError(
             err_msg.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);

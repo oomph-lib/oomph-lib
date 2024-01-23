@@ -334,7 +334,7 @@ namespace oomph
   //====================================================================
   /// An interface to allow Mumps to be used as an (exact) Preconditioner
   //====================================================================
-  class NewMumpsPreconditioner : public Preconditioner
+  class NewMumpsPreconditioner : virtual public Preconditioner
   {
   public:
     /// Constructor.

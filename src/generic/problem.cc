@@ -45,7 +45,7 @@
 #include "dg_elements.h"
 #include "partitioning.h"
 #include "spines.h"
-
+#include "mumps_solver.h"
 
 namespace oomph
 {
@@ -145,7 +145,23 @@ namespace oomph
     Time_stepper_pt.resize(0);
 
     // Set the linear solvers, eigensolver and assembly handler
+#ifdef OOMPH_HAS_MPI
+    if (MPI_Helpers::mpi_has_been_initialised())
+     {
+      Linear_solver_pt = Default_linear_solver_pt = new MumpsSolver;
+      oomph_info << "I've set default solver to MumpsSolver" << std::endl;
+     }
+    else
+     {
+      Linear_solver_pt = Default_linear_solver_pt = new SuperLUSolver;
+      oomph_info << "I've set default solver to SuperLUSolver "
+                 << "(have mpi but not initialised)" << std::endl;
+     }
+#else
     Linear_solver_pt = Default_linear_solver_pt = new SuperLUSolver;
+    oomph_info << "I've set default solver to SuperLUSolver (no MPI)"
+               << std::endl;
+#endif
     Mass_matrix_solver_for_explicit_timestepper_pt = Linear_solver_pt;
 
     Eigen_solver_pt = Default_eigen_solver_pt = new LAPACK_QZ;

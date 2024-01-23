@@ -372,7 +372,7 @@ namespace oomph
     if (P_preconditioner_pt == 0)
     {
       // Just use SuperLU
-      P_preconditioner_pt = new SuperLUPreconditioner;
+      P_preconditioner_pt = new ExactPreconditioner;
 
       // Indicate that we're using the default preconditioner
       Using_default_p_preconditioner = true;
@@ -387,10 +387,11 @@ namespace oomph
       // If we're using SuperLU as the preconditioner
       if (Using_default_p_preconditioner)
       {
-        // Add on the memory needed to store and calculate the LU factors of P
-        Memory_usage_in_bytes +=
-          dynamic_cast<SuperLUPreconditioner*>(P_preconditioner_pt)
-            ->get_total_memory_needed_for_superlu();
+       // hierher disable everywhere
+        // // Add on the memory needed to store and calculate the LU factors of P
+        // Memory_usage_in_bytes +=
+        //   dynamic_cast<ExactPreconditioner*>(P_preconditioner_pt)
+        //     ->get_total_memory_needed_for_superlu();
       }
       // Using Hypre which just really means we just store the matrix P
       else
@@ -418,7 +419,7 @@ namespace oomph
     if (F_preconditioner_pt == 0)
     {
       // Just use SuperLU
-      F_preconditioner_pt = new SuperLUPreconditioner;
+      F_preconditioner_pt = new ExactPreconditioner;
 
       // Indicate that we're using the default preconditioner
       Using_default_f_preconditioner = true;
@@ -433,10 +434,11 @@ namespace oomph
       // If we're using SuperLU as the preconditioner
       if (Using_default_f_preconditioner)
       {
-        // Add on the memory needed to store and calculate the LU factors of P
-        Memory_usage_in_bytes +=
-          dynamic_cast<SuperLUPreconditioner*>(F_preconditioner_pt)
-            ->get_total_memory_needed_for_superlu();
+       // hierher disable everywhere
+        // // Add on the memory needed to store and calculate the LU factors of P
+        // Memory_usage_in_bytes +=
+        //   dynamic_cast<ExactPreconditioner*>(F_preconditioner_pt)
+        //     ->get_total_memory_needed_for_superlu();
       }
       // Using Hypre which just really means we store the matrix F (again, as
       // it is duplicated inside Hypre)

@@ -170,7 +170,7 @@ namespace oomph
   // Create the subsidiary preconditioners
   for (unsigned i=0;i<nblock_types;i++)
    {
-    Diagonal_block_preconditioner_pt[i] = new SuperLUPreconditioner;
+    Diagonal_block_preconditioner_pt[i] = new ExactPreconditioner;
    }
 
   // Get the diagonal matrix blocks

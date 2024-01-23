@@ -40,6 +40,7 @@
 #include "../meshes/hermite_element_quad_mesh.h"
 #include "generic/SuperLU_preconditioner.h"
 #include "generic/general_purpose_preconditioners.h"
+#include "generic/mumps_solver.h"
 
 #ifdef OOMPH_HAS_HYPRE
 #include "generic/hypre_solver.h"
