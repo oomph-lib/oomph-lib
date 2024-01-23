@@ -329,7 +329,7 @@ namespace oomph
       Using_default_p_preconditioner = true;
 
 
-      // hierher delete everywhere 
+      // hierher delete everywhere
       // Do we need to doc. the memory statistics?
       if (Compute_memory_statistics)
       {

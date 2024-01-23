@@ -141,23 +141,23 @@ namespace oomph
 
     // By default no submeshes:
     Sub_mesh_pt.resize(0);
-    
+
     // No timesteppers
     Time_stepper_pt.resize(0);
 
     // Set the linear solvers, eigensolver and assembly handler
 #ifdef OOMPH_HAS_MPI
     if (MPI_Helpers::mpi_has_been_initialised())
-     {
+    {
       Linear_solver_pt = Default_linear_solver_pt = new MumpsSolver;
       oomph_info << "I've set default solver to MumpsSolver" << std::endl;
-     }
+    }
     else
-     {
+    {
       Linear_solver_pt = Default_linear_solver_pt = new SuperLUSolver;
       oomph_info << "I've set default solver to SuperLUSolver "
                  << "(have mpi but not initialised)" << std::endl;
-     }
+    }
 #else
     Linear_solver_pt = Default_linear_solver_pt = new SuperLUSolver;
     oomph_info << "I've set default solver to SuperLUSolver (no MPI)"

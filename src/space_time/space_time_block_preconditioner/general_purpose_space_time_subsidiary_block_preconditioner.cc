@@ -387,9 +387,9 @@ namespace oomph
       // If we're using SuperLU as the preconditioner
       if (Using_default_p_preconditioner)
       {
-       // hierher disable everywhere
-        // // Add on the memory needed to store and calculate the LU factors of P
-        // Memory_usage_in_bytes +=
+        // hierher disable everywhere
+        // // Add on the memory needed to store and calculate the LU factors of
+        // P Memory_usage_in_bytes +=
         //   dynamic_cast<ExactPreconditioner*>(P_preconditioner_pt)
         //     ->get_total_memory_needed_for_superlu();
       }
@@ -434,9 +434,9 @@ namespace oomph
       // If we're using SuperLU as the preconditioner
       if (Using_default_f_preconditioner)
       {
-       // hierher disable everywhere
-        // // Add on the memory needed to store and calculate the LU factors of P
-        // Memory_usage_in_bytes +=
+        // hierher disable everywhere
+        // // Add on the memory needed to store and calculate the LU factors of
+        // P Memory_usage_in_bytes +=
         //   dynamic_cast<ExactPreconditioner*>(F_preconditioner_pt)
         //     ->get_total_memory_needed_for_superlu();
       }

@@ -321,7 +321,7 @@ namespace oomph
       this->get_concatenated_block(required_blocks);
 
     // setup the preconditioner
-    Sub_preconditioner_pt = new ExactPreconditioner; 
+    Sub_preconditioner_pt = new ExactPreconditioner;
     Sub_preconditioner_pt->setup(&preconditioner_matrix);
 
     // preconditioner_matrix will now go out of scope (and is destroyed).
@@ -427,7 +427,7 @@ namespace oomph
     }
     else
     {
-      S_00_preconditioner_pt = new ExactPreconditioner; 
+      S_00_preconditioner_pt = new ExactPreconditioner;
     }
 
     // setup the preconditioner

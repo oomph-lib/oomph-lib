@@ -87,40 +87,37 @@ namespace oomph
   //======================================================================
   class SolidICProblem : public Problem
   {
-   
   public:
-
-   /// Constructor. Initialise pointer
+    /// Constructor. Initialise pointer
     /// to IC object to NULL. Create a dummy mesh that can be deleted
     /// when static problem finally goes out of scope at end of
     /// program execution.
-   SolidICProblem() : IC_pt(0)
+    SolidICProblem() : IC_pt(0)
     {
+#ifdef OOMPH_HAS_MPI
+      Mumps_solver_pt = new MumpsSolver;
+#endif
+      SuperLU_solver_pt = new SuperLUSolver;
 
-#ifdef OOMPH_HAS_MPI
-     Mumps_solver_pt=new MumpsSolver;
-#endif
-     SuperLU_solver_pt=new SuperLUSolver;
-     
-     // Create dummy mesh
-     mesh_pt() = new DummyMesh;
-     
-     // Default value for checking of consistent assignment of Newmark IC
-     Max_residual_after_consistent_newton_ic = 1.0e-12;
-    }
-   
-   /// Destructor
-   ~SolidICProblem() 
-    {     
-#ifdef OOMPH_HAS_MPI
-     delete Mumps_solver_pt;
-#endif
-     delete SuperLU_solver_pt;
+      // Create dummy mesh
+      mesh_pt() = new DummyMesh;
+
+      // Default value for checking of consistent assignment of Newmark IC
+      Max_residual_after_consistent_newton_ic = 1.0e-12;
     }
 
-   
-   /// Broken copy constructor
-   SolidICProblem(const SolidICProblem&) = delete;
+    /// Destructor
+    ~SolidICProblem()
+    {
+#ifdef OOMPH_HAS_MPI
+      delete Mumps_solver_pt;
+#endif
+      delete SuperLU_solver_pt;
+    }
+
+
+    /// Broken copy constructor
+    SolidICProblem(const SolidICProblem&) = delete;
 
     /// Broken assignment operator
     void operator=(const SolidICProblem&) = delete;
@@ -194,7 +191,6 @@ namespace oomph
 
 
   private:
-   
     /// Backup original state of all data associated with mesh
     void backup_original_state();
 
@@ -220,13 +216,12 @@ namespace oomph
     double Max_residual_after_consistent_newton_ic;
 
 #ifdef OOMPH_HAS_MPI
-   /// Pointer to mumps solver
-   MumpsSolver* Mumps_solver_pt;
+    /// Pointer to mumps solver
+    MumpsSolver* Mumps_solver_pt;
 #endif
-   
-   /// Pointer to mumps solver
-   SuperLUSolver* SuperLU_solver_pt;
 
+    /// Pointer to mumps solver
+    SuperLUSolver* SuperLU_solver_pt;
   };
 
 
@@ -287,17 +282,17 @@ namespace oomph
     // Choose the right linear solver
 #ifdef OOMPH_HAS_MPI
     if (MPI_Helpers::mpi_has_been_initialised())
-     {
-      linear_solver_pt()=Mumps_solver_pt;
-     }
+    {
+      linear_solver_pt() = Mumps_solver_pt;
+    }
     else
-     {
-      linear_solver_pt()=SuperLU_solver_pt;
-     }
+    {
+      linear_solver_pt() = SuperLU_solver_pt;
+    }
 #else
-    linear_solver_pt()=SuperLU_solver_pt;
+    linear_solver_pt() = SuperLU_solver_pt;
 #endif
-    
+
     // Store times at which we need to assign ic:
     double current_time = timestepper_pt->time_pt()->time();
     double previous_time = timestepper_pt->time_pt()->time(1);
@@ -445,15 +440,15 @@ namespace oomph
     // Choose the right linear solver
 #ifdef OOMPH_HAS_MPI
     if (MPI_Helpers::mpi_has_been_initialised())
-     {
-      linear_solver_pt()=Mumps_solver_pt;
-     }
+    {
+      linear_solver_pt() = Mumps_solver_pt;
+    }
     else
-     {
-      linear_solver_pt()=SuperLU_solver_pt;
-     }
+    {
+      linear_solver_pt() = SuperLU_solver_pt;
+    }
 #else
-    linear_solver_pt()=SuperLU_solver_pt;
+    linear_solver_pt() = SuperLU_solver_pt;
 #endif
 
     // Number of history values
@@ -605,20 +600,20 @@ namespace oomph
     SolverMemPtr solver_mem_pt = &LinearSolver::solve;
 
     // Now do the linear solve
-    LinearSolver* lin_solver_pt=0;
+    LinearSolver* lin_solver_pt = 0;
 #ifdef OOMPH_HAS_MPI
     if (MPI_Helpers::mpi_has_been_initialised())
-     {
-      lin_solver_pt=Mumps_solver_pt;
-     }
+    {
+      lin_solver_pt = Mumps_solver_pt;
+    }
     else
-     {
-      lin_solver_pt=SuperLU_solver_pt;
-     }
+    {
+      lin_solver_pt = SuperLU_solver_pt;
+    }
 #else
-    lin_solver_pt=SuperLU_solver_pt;
+    lin_solver_pt = SuperLU_solver_pt;
 #endif
-    
+
     (lin_solver_pt->*solver_mem_pt)(this, correction);
 
     // Update discrete 2nd deriv at previous time so that it's consistent

@@ -571,18 +571,18 @@ namespace oomph
     // Choose the right linear solver
 #ifdef OOMPH_HAS_MPI
     if (MPI_Helpers::mpi_has_been_initialised())
-     {
-      linear_solver_pt()=Mumps_solver_pt;
-     }
+    {
+      linear_solver_pt() = Mumps_solver_pt;
+    }
     else
-     {
-      linear_solver_pt()=SuperLU_solver_pt;
-     }
+    {
+      linear_solver_pt() = SuperLU_solver_pt;
+    }
 #else
-    linear_solver_pt()=SuperLU_solver_pt;
+    linear_solver_pt() = SuperLU_solver_pt;
 #endif
 
-    
+
     // Assign displacements
     IC_pt->ic_time_deriv() = 0;
 

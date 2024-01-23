@@ -173,7 +173,7 @@ namespace oomph
       // oomph_info << "\nTotal amount of memory being used after setup (MB): "
       //            << total_memory_usage_for_setup_phase / 1.0e+06 << "\n"
       //            << std::endl;
-      
+
     } // if (Compute_memory_statistics)
   } // End of setup
 
@@ -520,7 +520,7 @@ namespace oomph
         else if (dynamic_cast<ExactPreconditioner*>(
                    this->Subsidiary_preconditioner_pt[i]) != 0)
         {
-         // hierher disable everywhere
+          // hierher disable everywhere
           // // Update the subsidiary preconditioner memory usage variable
           // memory_usage_for_subsidiary_preconditioner_in_bytes +=
           //   dynamic_cast<ExactPreconditioner*>(
