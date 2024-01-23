@@ -263,7 +263,7 @@ PRefineableDrivenCavityProblem<ELEMENT>::PRefineableDrivenCavityProblem()
  // Setup equation numbering scheme
  oomph_info <<"Number of equations: " << assign_eqn_numbers() << std::endl; 
 
- linear_solver_pt() =  new MumpsSolver;
+ // hierher kill linear_solver_pt() =  new MumpsSolver;
 
 } // end_of_constructor
 

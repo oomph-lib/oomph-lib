@@ -268,7 +268,7 @@ QuarterCircleDrivenCavityProblem<ELEMENT>::QuarterCircleDrivenCavityProblem(
  // Setup equation numbering scheme
  cout <<"Number of equations: " << assign_eqn_numbers() << std::endl;
  
- linear_solver_pt() =  new MumpsSolver;
+ // hierher linear_solver_pt() =  new MumpsSolver;
 
 } // end_of_constructor
 

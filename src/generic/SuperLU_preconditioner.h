@@ -201,12 +201,14 @@ namespace oomph
     ExactPreconditioner()
     {
 #ifdef OOMPH_HAS_MPI
-     Mumps_preconditioner_pt=new NewMumpsPreconditioner;
+     Mumps_preconditioner_pt=new MumpsPreconditioner;
+     Mumps_preconditioner_pt->disable_doc_time();
 #endif
      SuperLU_preconditioner_pt=new SuperLUPreconditioner;
+     SuperLU_preconditioner_pt->disable_doc_time();
     }
   
-  /// Destructor. -- kill the underlying solvers
+  /// Destructor -- kill the underlying solvers
   ~ExactPreconditioner()
    {
 #ifdef OOMPH_HAS_MPI
@@ -241,17 +243,11 @@ namespace oomph
 #endif
    }
 
-
-
-
-
-  // hierher explain why we need this
-  
-    /// Setup the preconditioner: store the matrix pointer and the
-    /// communicator pointer then call preconditioner specific setup()
-    /// function.
-    void setup(DoubleMatrixBase* matrix_pt)
-    {
+  /// Setup the preconditioner: store the matrix pointer and the
+  /// communicator pointer then call preconditioner specific setup()
+  /// function. 
+  void setup(DoubleMatrixBase* matrix_pt)
+   {
 #ifdef OOMPH_HAS_MPI
     if (MPI_Helpers::mpi_has_been_initialised())
      {
@@ -264,13 +260,13 @@ namespace oomph
 #else
     SuperLU_preconditioner_pt->Preconditioner::setup(matrix_pt);
 #endif
-    }
+   }
 
   
-    /// Function applies Mumps to vector r for (exact)
-    /// preconditioning, this requires a call to setup(...) first.
-    void preconditioner_solve(const DoubleVector& r, DoubleVector& z)
-    {
+  /// Function applies Mumps to vector r for (exact)
+  /// preconditioning, this requires a call to setup(...) first.
+  void preconditioner_solve(const DoubleVector& r, DoubleVector& z)
+   {
 #ifdef OOMPH_HAS_MPI
     if (MPI_Helpers::mpi_has_been_initialised())
      {
@@ -283,13 +279,13 @@ namespace oomph
 #else
     SuperLU_preconditioner_pt->preconditioner_solve(r,z);
 #endif
-    }
-
-
-    /// Clean up memory -- forward the call to the version in
-    /// Mumps in its LinearSolver incarnation.
-    void clean_up_memory()
-    {
+   }
+  
+  
+  /// Clean up memory -- forward the call to the version in
+  /// Mumps in its LinearSolver incarnation.
+  void clean_up_memory()
+   {
 #ifdef OOMPH_HAS_MPI
     if (MPI_Helpers::mpi_has_been_initialised())
      {
@@ -302,12 +298,12 @@ namespace oomph
 #else
     SuperLU_preconditioner_pt->clean_up_memory();
 #endif
-    }
-
-
-    /// Enable documentation of timings
-    void enable_doc_time()
-    {
+   }
+  
+  
+  /// Enable documentation of timings
+  void enable_doc_time()
+   {
 #ifdef OOMPH_HAS_MPI
     if (MPI_Helpers::mpi_has_been_initialised())
      {
@@ -320,11 +316,11 @@ namespace oomph
 #else
     SuperLU_preconditioner_pt->enable_doc_time();
 #endif
-    }
-
-    /// Disable the documentation of timings
-    void disable_doc_time()
-    {
+   }
+  
+  /// Disable the documentation of timings
+  void disable_doc_time()
+   {
 #ifdef OOMPH_HAS_MPI
     if (MPI_Helpers::mpi_has_been_initialised())
      {
@@ -337,19 +333,19 @@ namespace oomph
 #else
     SuperLU_preconditioner_pt->disable_doc_time();
 #endif
-    }
-
+   }
+  
  private:
-
-
+  
+  
 #ifdef OOMPH_HAS_MPI
   /// Pointer to mumps solver
-  NewMumpsPreconditioner* Mumps_preconditioner_pt;
+  MumpsPreconditioner* Mumps_preconditioner_pt;
 #endif
   
   /// Pointer to mumps solver
   SuperLUPreconditioner* SuperLU_preconditioner_pt;
-
+  
  };
  
 } // namespace oomph

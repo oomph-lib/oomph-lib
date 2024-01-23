@@ -670,7 +670,7 @@ public :
     new NavierStokesSchurComplementPreconditioner(problem_pt);
 
    // Create the Solid preconditioner
-   Solid_preconditioner_pt = new NewMumpsPreconditioner;
+   Solid_preconditioner_pt = new ExactPreconditioner;
 
    // Create the matrix-vector product operator
    Fluid_solid_coupling_matvec_pt = new MatrixVectorProduct;

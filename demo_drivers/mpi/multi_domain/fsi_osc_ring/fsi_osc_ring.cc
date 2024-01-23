@@ -492,9 +492,9 @@ FSIRingProblem::FSIRingProblem(const unsigned& N,
  // Overwrite maximum allowed residual to accomodate bad initial guesses
  Problem::Max_residuals=1000.0;
 
- // hierher
- linear_solver_pt()=new MumpsSolver;
- oomph_info << "Have set linear solver pt to mumps" << std::endl;
+ // hierher kill 
+ // linear_solver_pt()=new MumpsSolver;
+ // oomph_info << "Have set linear solver pt to mumps" << std::endl;
 
  
  //----------------------------------------------------------- 

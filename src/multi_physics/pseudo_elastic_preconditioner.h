@@ -104,7 +104,7 @@ namespace oomph
 
   public:
     /// This preconditioner includes the option to use subsidiary
-    /// operators other than SuperLUPreconditioner for this problem.
+    /// operators other than ExactPreconditioner for this problem.
     /// This is the typedef of a function that should return an instance
     /// of a subsidiary preconditioning operator.  This preconditioner is
     /// responsible for the destruction of the subsidiary preconditioners.
@@ -200,7 +200,7 @@ namespace oomph
     }
 
     /// By default the Lagrange multiplier subsidiary systems are
-    /// preconditioner with SuperLUPreconditioner. For a different
+    /// preconditioner with ExactPreconditioner. For a different
     /// preconditioner, pass a function to this
     /// method returning a different subsidiary operator.
     void set_lagrange_multiplier_subsidiary_preconditioner(
@@ -210,7 +210,7 @@ namespace oomph
     }
 
     /// By default the elastic subsidiary systems are
-    /// preconditioner with SuperLUPreconditioner. For a different
+    /// preconditioner with ExactPreconditioner. For a different
     /// preconditioner, pass a function to this
     /// method returning a different subsidiary operator.
     void set_elastic_subsidiary_preconditioner(
@@ -307,7 +307,7 @@ namespace oomph
 
   public:
     /// This preconditioner includes the option to use subsidiary
-    /// operators other than SuperLUPreconditioner for this problem.
+    /// operators other than ExactPreconditioner for this problem.
     /// This is the typedef of a function that should return an instance
     /// of a subsidiary preconditioning operator.  This preconditioner is
     /// responsible for the destruction of the subsidiary preconditioners.
@@ -398,7 +398,7 @@ namespace oomph
     }
 
     /// By default the Lagrange multiplier subsidiary systems are
-    /// preconditioner with SuperLUPreconditioner. For a different
+    /// preconditioner with ExactPreconditioner. For a different
     /// preconditioner, pass a function to this
     /// method returning a different subsidiary operator.
     void set_lagrange_multiplier_subsidiary_preconditioner(
@@ -408,7 +408,7 @@ namespace oomph
     }
 
     /// By default the elastic subsidiary systems are
-    /// preconditioner with SuperLUPreconditioner. For a different
+    /// preconditioner with ExactPreconditioner. For a different
     /// preconditioner, pass a function to this
     /// method returning a different subsidiary operator.
     void set_elastic_subsidiary_preconditioner(
@@ -586,7 +586,7 @@ namespace oomph
   {
   public:
     /// This preconditioner includes the option to use subsidiary
-    /// operators other than SuperLUPreconditioner for this problem.
+    /// operators other than ExactPreconditioner for this problem.
     /// This is the typedef of a function that should return an instance
     /// of a subsidiary preconditioning operator.  This preconditioner is
     /// responsible for the destruction of the subsidiary preconditioners.

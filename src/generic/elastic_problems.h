@@ -287,6 +287,20 @@ namespace oomph
     setup_problem();
 
 
+    // Choose the right linear solver
+#ifdef OOMPH_HAS_MPI
+    if (MPI_Helpers::mpi_has_been_initialised())
+     {
+      linear_solver_pt()=Mumps_solver_pt;
+     }
+    else
+     {
+      linear_solver_pt()=SuperLU_solver_pt;
+     }
+#else
+    linear_solver_pt()=SuperLU_solver_pt;
+#endif
+    
     // Store times at which we need to assign ic:
     double current_time = timestepper_pt->time_pt()->time();
     double previous_time = timestepper_pt->time_pt()->time(1);
@@ -431,6 +445,21 @@ namespace oomph
     // scheme
     setup_problem();
 
+    // Choose the right linear solver
+#ifdef OOMPH_HAS_MPI
+    if (MPI_Helpers::mpi_has_been_initialised())
+     {
+      linear_solver_pt()=Mumps_solver_pt;
+     }
+    else
+     {
+      linear_solver_pt()=SuperLU_solver_pt;
+     }
+#else
+    linear_solver_pt()=SuperLU_solver_pt;
+#endif
+
+    
     // Number of history values
     unsigned ntstorage =
       IC_pt->geom_object_pt()->time_stepper_pt()->ntstorage();

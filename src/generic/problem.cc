@@ -141,6 +141,7 @@ namespace oomph
 
     // By default no submeshes:
     Sub_mesh_pt.resize(0);
+    
     // No timesteppers
     Time_stepper_pt.resize(0);
 

@@ -826,6 +826,8 @@ TurekProblem(const double &length,
     } // done automatic application of no-slip
   } // end of FSI setup
 
+
+ // hierher kill 
  // // Use SuperLU_dist as the solver
  // linear_solver_pt() = new SuperLUSolver;
  // static_cast<SuperLUSolver*>(linear_solver_pt())
@@ -833,7 +835,7 @@ TurekProblem(const double &length,
  // static_cast<SuperLUSolver*>(linear_solver_pt())
  //  ->use_distributed_solve_in_superlu_dist();
 
- linear_solver_pt()=new MumpsSolver;
+ // hierher kill linear_solver_pt()=new MumpsSolver;
 
  // Assign equation numbers
  cout << assign_eqn_numbers() << std::endl; 

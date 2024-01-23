@@ -323,6 +323,7 @@ RotatingProblem<ELEMENT>::RotatingProblem
  Problem::mesh_pt() = 
   new CylinderMesh<ELEMENT>(Nr1,Nr2,Nz1,Nz2,Length);
 
+ // hierher what's going on here? 
  //dynamic_cast<SuperLUSolver*>(this->linear_solver_pt())
  //->set_solver_type(SuperLUSolver::Serial);
 
@@ -453,7 +454,7 @@ RotatingProblem<ELEMENT>::RotatingProblem
  //(function defined in Problem class)
  oomph_info << assign_eqn_numbers() << std::endl;
 
- linear_solver_pt() =  new MumpsSolver;
+ // hierher kill linear_solver_pt() =  new MumpsSolver;
 
 }
 
