@@ -2485,18 +2485,6 @@ namespace oomph
       DenseMatrix<double>& dmass_matrix_dparam,
       unsigned flag)
   {
-    // Die if the parameter is not the Reynolds number
-    if (parameter_pt != this->re_pt())
-    {
-      std::ostringstream error_stream;
-      error_stream
-        << "Cannot compute analytic jacobian for parameter addressed by "
-        << parameter_pt << "\n";
-      error_stream << "Can only compute derivatives wrt Re (" << Re_pt << ")\n";
-      throw OomphLibError(
-        error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-    }
-
     // Which parameters are we differentiating with respect to
     bool diff_re = false;
     bool diff_re_st = false;
@@ -2508,19 +2496,32 @@ namespace oomph
     {
       diff_re = true;
     }
-    if (parameter_pt == this->re_st_pt())
+    else if (parameter_pt == this->re_st_pt())
     {
       diff_re_st = true;
     }
-    if (parameter_pt == this->re_invfr_pt())
+    else if (parameter_pt == this->re_invfr_pt())
     {
       diff_re_inv_fr = true;
     }
-    if (parameter_pt == this->re_invro_pt())
+    else if (parameter_pt == this->re_invro_pt())
     {
       diff_re_inv_ro = true;
     }
-
+    else
+    {
+      // Die if the parameter does not contain a Reynolds number
+      std::ostringstream error_stream;
+      error_stream
+        << "Cannot compute analytic jacobian for parameter addressed by "
+        << parameter_pt << "\n";
+      error_stream << "Can only compute derivatives wrt Re (" << Re_pt << "), ";
+      error_stream << "ReSt (" << ReSt_pt << "), ";
+      error_stream << "ReInvFr (" << ReInvFr_pt << "), ";
+      error_stream << "and ReInvRo (" << ReInvRo_pt << ")\n";
+      throw OomphLibError(
+        error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+    }
 
     // Find out how many nodes there are
     unsigned n_node = nnode();
