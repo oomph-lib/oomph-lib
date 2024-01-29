@@ -1217,9 +1217,6 @@ namespace oomph
     // Factorise the matrix
     factorise(matrix_pt);
 
-    // oomph_info << "hierher back from factorise" << std::endl;
-    // exit(0);
-
     // Doc the end time
     double t_factorise_end = TimingHelpers::timer();
 

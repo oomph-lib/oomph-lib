@@ -1081,7 +1081,7 @@ Assume that `$oomph_home_dir` is the `oomph-lib` home directory:
 
 <tr>
 <td colspan="2">
-<b>- Build and install the entire library using a helper script:</b>
+<b>Build and install the entire library using a helper script:</b>
 </td>
 </tr>
 <tr>
@@ -1109,7 +1109,7 @@ cd $oomph_home_dir<br>
 
 <tr>
 <td colspan="2">
-<b>- Alternative: Build and install the entire library step by step:</b>
+<b>Alternative: Build and install the entire library step by step:</b>
 </td>
 </tr>
 <tr>
@@ -1157,16 +1157,16 @@ make check
 cd $oomph_home_dir/demo_drivers<br>
 # Configure
 cmake -G Ninja -B build<br>
-# Run the tests
+# Run the tests (using 8 cores)
 cd build
-ctest
+ctest -j 8
 </pre>
 </td>
 </tr>
 
 <tr>
 <td colspan="2">
-<b>- Run all self-tests in a given demo driver directory:</b>
+<b>Run all self-tests in a given demo driver directory:</b>
 </td>
 </tr>
 <tr>
@@ -1194,7 +1194,7 @@ ctest
 
 <tr>
 <td colspan="2">
-<b>- Debug demo driver code:</b>
+<b>Debug demo driver code:</b>
 </td>
 </tr>
 <tr>
@@ -1211,7 +1211,7 @@ emacs one_d_poisson.cc<br>
 make check<br>
 # Keep going until it works...
 # (of course you may do the
-# compilation/re-run in your 
+# compilation/rerun in your 
 # editor/IDE; see below)
 </pre>
 </td>
@@ -1221,14 +1221,15 @@ make check<br>
 cd $oomph_home_dir/demo_driver/one_d_poisson<br>
 # Configure (note that switching on the
 # debug build only helps if the library
-# itself was compiled with that option too)
+# itself was compiled with that option too; 
+#  by default it is built in Release mode 
+# with full optimisation)
 cmake -G Ninja -B build -DCMAKE_BUILD_TYPE=Debug<br>
 # Run the test (note that the executable
 # got built in the build directory!)
 cd build
 ctest<br>
-# Edit source code (note that this lives 
-# one level above the build directory!)
+# Edit source code 
 emacs ../one_d_poisson.cc<br>
 # Rebuild executable(s)
 ninja <br>
@@ -1237,11 +1238,11 @@ ninja one_d_poisson<br>
 # If you want to see compiler errors 
 # in detail do
 ninja --verbose one_d_poisson<br>
-# Now re-run the test
+# Now rerun the test
 ctest<br>
 # Keep going until it works...
 # (of course you may do the
-# compilation/re-run in your 
+# compilation/rerun in your 
 # editor/IDE; see below)
 </pre>
 </td>
@@ -1251,7 +1252,7 @@ ctest<br>
 
 <tr>
 <td colspan="2">
-<b>- Edit a file in the library and rebuild:</b>
+<b>Edit a file in the library and rebuild:</b>
 </td>
 </tr>
 <tr>
@@ -1261,7 +1262,7 @@ ctest<br>
 cd $oomph_home_dir/src/poisson<br>
 # Edit the relevant file
 emacs poisson_elements.h <br>
-# Re-compile the library
+# Recompile the library
 make <br>
 # You may go through this repeatedly 
 # until the code compiles... 
@@ -1312,7 +1313,7 @@ cd $oomph_home_dir/src/poisson<br>
 # Edit the relevant file
 emacs poisson_elements.h <br>
 # Go back to the home directory and
-# rebuild (cmake knows what needs to be
+# rebuild (Cmake knows what needs to be
 # recompiled)
 cd $oomph_home_dir
 cmake --build build <br><br>
