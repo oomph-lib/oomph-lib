@@ -1234,6 +1234,7 @@ namespace oomph
       outfile << imposed_contact_angle * 180 / MathematicalConstants::Pi << ",";
       outfile << computed_contact_angle * 180 / MathematicalConstants::Pi;
       outfile << std::endl;
+      outfile << std::fixed << std::setprecision(ss);
     }
 
     void calculate_contact_angle(double& imposed_contact_angle,
