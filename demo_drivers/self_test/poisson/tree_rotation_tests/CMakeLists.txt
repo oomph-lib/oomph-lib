@@ -22,11 +22,12 @@ oomph_add_executable(
 # ---------------------------------- TESTING ----------------------------------
 
 oomph_add_test(
-  TEST_NAME tree_rotation_tests
+  TEST_NAME self_test.tree_rotation_tests
   DEPENDS_ON tree_2d tree_3d
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
   TEST_FILES validate.sh
-  LABELS poisson tree_rotation)
+  LABELS poisson tree_rotation
+  SILENCE_MISSING_VALIDATA_WARNING)
 
 message(VERBOSE "Leaving tree_rotation_tests subdirectory")
 # ------------------------------------------------------------------------------

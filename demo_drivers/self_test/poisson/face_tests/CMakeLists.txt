@@ -32,7 +32,7 @@ oomph_add_executable(
 # ---------------------------------- TESTING ----------------------------------
 
 oomph_add_test(
-  TEST_NAME poisson.face_tests
+  TEST_NAME self_test.poisson.face_tests
   DEPENDS_ON q_faces_3d q_faces_2d t_faces_2d t_faces_3d
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
   TEST_FILES validate.sh validata

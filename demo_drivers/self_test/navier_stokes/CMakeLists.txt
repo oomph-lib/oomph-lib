@@ -17,7 +17,7 @@ oomph_add_executable(
 # ---------------------------------- TESTING ----------------------------------
 
 oomph_add_test(
-  TEST_NAME navier_stokes
+  TEST_NAME self_test.navier_stokes
   DEPENDS_ON circular_driven_cavity
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
   TEST_FILES validate.sh validata

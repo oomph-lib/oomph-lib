@@ -28,7 +28,8 @@ set_target_properties(
 # Define this test with oomph_add_test() so we get help carrying the validate.sh
 # and validata/ stuff over to the build directory when we run the tests
 oomph_add_test(
-  TEST_NAME deliberately_broken_code_for_self_test_test.code_with_warning
+  TEST_NAME
+    self_test.deliberately_broken_code_for_self_test_test.code_with_warning
   DEPENDS_ON code_with_warning
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
   TEST_FILES validate.sh validata

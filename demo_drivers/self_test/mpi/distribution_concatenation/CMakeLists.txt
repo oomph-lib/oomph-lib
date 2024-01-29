@@ -20,7 +20,7 @@ include(ProcessorCount)
 ProcessorCount(NUM_PROCESSORS)
 if(NUM_PROCESSORS GREATER_EQUAL 4)
   oomph_add_test(
-    TEST_NAME mpi.distribution_concatenation
+    TEST_NAME self_test.mpi.distribution_concatenation
     DEPENDS_ON distribution_concatenation
     COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_VARIABLENP_RUN_COMMAND}
     TEST_FILES validate.sh validata

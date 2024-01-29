@@ -21,7 +21,7 @@ include(ProcessorCount)
 ProcessorCount(NUM_PROCESSORS)
 if(NUM_PROCESSORS GREATER_EQUAL 4)
   oomph_add_test(
-    TEST_NAME mpi.vector_concatenation_without_communication
+    TEST_NAME self_test.mpi.vector_concatenation_without_communication
     DEPENDS_ON vector_concatenation_without_communication
     COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_VARIABLENP_RUN_COMMAND}
     TEST_FILES validate.sh validata

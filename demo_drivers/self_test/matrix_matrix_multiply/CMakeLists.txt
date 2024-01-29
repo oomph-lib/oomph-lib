@@ -17,7 +17,7 @@ oomph_add_executable(
 # ---------------------------------- TESTING ----------------------------------
 
 oomph_add_test(
-  TEST_NAME matrix_matrix_multiply
+  TEST_NAME self_test.matrix_matrix_multiply
   DEPENDS_ON matrix_multiply_test
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
   TEST_FILES validate.sh validata

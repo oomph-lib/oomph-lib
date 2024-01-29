@@ -17,7 +17,7 @@ oomph_add_executable(
 # ---------------------------------- TESTING ----------------------------------
 
 oomph_add_test(
-  TEST_NAME poisson.octree_test
+  TEST_NAME self_test.poisson.octree_test
   DEPENDS_ON octree_test
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
   TEST_FILES validate.sh validata

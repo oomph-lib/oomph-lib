@@ -32,7 +32,7 @@ oomph_add_executable(
 # ---------------------------------- TESTING ----------------------------------
 
 oomph_add_test(
-  TEST_NAME locate_zeta
+  TEST_NAME self_test.locate_zeta
   DEPENDS_ON locate_zeta_tester locate_zeta_tester_3d
              locate_zeta_tester_triangle locate_zeta_tester_tetgen
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}

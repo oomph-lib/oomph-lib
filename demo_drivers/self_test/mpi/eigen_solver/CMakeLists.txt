@@ -20,7 +20,7 @@ endif()
 
 if(OOMPH_HAS_TRILINOS)
   oomph_add_test(
-    TEST_NAME mpi.eigen_solver
+    TEST_NAME self_test.mpi.eigen_solver
     DEPENDS_ON eigen_solver
     COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
     TEST_FILES validate.sh validata random_test_matrix.dat

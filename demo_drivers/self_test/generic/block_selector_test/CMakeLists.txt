@@ -17,7 +17,7 @@ oomph_add_executable(
 # ---------------------------------- TESTING ----------------------------------
 
 oomph_add_test(
-  TEST_NAME generic.block_selector_test
+  TEST_NAME self_test.generic.block_selector_test
   DEPENDS_ON block_selector_test
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
   TEST_FILES validate.sh validata

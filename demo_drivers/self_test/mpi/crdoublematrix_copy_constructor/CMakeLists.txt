@@ -20,7 +20,7 @@ include(ProcessorCount)
 ProcessorCount(NUM_PROCESSORS)
 if(NUM_PROCESSORS GREATER_EQUAL 4)
   oomph_add_test(
-    TEST_NAME mpi.crdoublematrix_copy_constructor
+    TEST_NAME self_test.mpi.crdoublematrix_copy_constructor
     DEPENDS_ON crdoublematrix_copy_constructor
     COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_VARIABLENP_RUN_COMMAND}
     TEST_FILES validate.sh validata

@@ -17,7 +17,7 @@ oomph_add_executable(
 # ---------------------------------- TESTING ----------------------------------
 
 oomph_add_test(
-  TEST_NAME mpi.generic_mpi
+  TEST_NAME self_test.mpi.generic_mpi
   DEPENDS_ON generic_mpi_test
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
   TEST_FILES validate.sh validata

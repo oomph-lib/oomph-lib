@@ -17,7 +17,7 @@ oomph_add_executable(
 # ---------------------------------- TESTING ----------------------------------
 
 oomph_add_test(
-  TEST_NAME mpi.three_d_mesh_dist
+  TEST_NAME self_test.mpi.three_d_mesh_dist
   DEPENDS_ON three_d_mesh_dist
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
   TEST_FILES validate.sh validata three_d_mesh_dist_partition.dat
