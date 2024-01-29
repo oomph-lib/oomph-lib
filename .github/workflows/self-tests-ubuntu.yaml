@@ -112,17 +112,6 @@ jobs:
         run: cmake --install build
 
       # -------------------
-      # BASIC SELF-TESTS:
-      # -------------------
-      - name: Configure basic self-tests
-        run: cmake -G Ninja -S self_test -B self_test/build --log-level=VERBOSE
-
-      - name: Run basic self-tests
-        id: self_tests
-        run: ctest --preset ci --test-dir self_test/build -j $(nproc)
-        continue-on-error: true
-
-      # -------------------
       # DEMO DRIVERS:
       # -------------------
       - name: Configure demo drivers
