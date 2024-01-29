@@ -285,6 +285,21 @@ oomph_target_silence_warnings(
 # propagated to the user. If a user pulls in the oomph-lib library they should
 # automatically get access to the third-party libraries; they shouldn't have to
 # manually link against all of those libraries themselves to use them.
+target_link_libraries(${LIBNAME} PUBLIC GKlib::GKlib METIS::METIS
+                                        superlu::superlu)
+
+if(OOMPH_HAS_SUPERLU_DIST)
+  if(OOMPH_HAS_MPI)
+    target_link_libraries(${LIBNAME} PUBLIC ParMETIS::ParMETIS
+                                            SuperLU_DIST::SuperLU_DIST)
+  else()
+    message(
+      FATAL_ERROR
+        "Somehow we've detected SuperLU_DIST but we don't have MPI enabled! Argh!"
+    )
+  endif()
+endif()
+
 if(OOMPH_HAS_CGAL)
   target_link_libraries(${LIBNAME} PUBLIC CGAL::CGAL)
 endif()

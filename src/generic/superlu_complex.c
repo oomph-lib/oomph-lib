@@ -10,7 +10,7 @@
  *
  */
 
-#include "oomph_superlu_6.0.1/slu_zdefs.h"
+#include "slu_zdefs.h"
 #include "math.h"
 
 

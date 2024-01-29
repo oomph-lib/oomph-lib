@@ -8,6 +8,7 @@ on:
       # Only run the self-tests if we edited the demo drivers, sources, third-party
       # library code or self-tests
       - ".github/workflows/self-tests-macos.yaml"
+      - "cmake/**"
       - "CMakeLists.txt"
       - "demo_drivers/**"
       - "external_distributions/CMakeLists.txt"
@@ -42,6 +43,7 @@ jobs:
           ]
         build_third_party_libs: ["OFF", "ON"]
 
+    name: All self-tests (MPI=${{ matrix.build_info.enable_mpi }}; TPL=${{matrix.build_third_party_libs}})
     runs-on: macos-latest
     steps:
       # -------------------
@@ -68,8 +70,7 @@ jobs:
       # -------------------
       # THIRD-PARTY LIBS:
       # -------------------
-      - name: Configure third-party libraries (optional)
-        if: matrix.build_third_party_libs == 'ON'
+      - name: Configure desired third-party libraries
         run: |
           cmake -G Ninja \
             -DOOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTS=ON \
@@ -77,16 +78,19 @@ jobs:
             -DOOMPH_USE_OPENBLAS_FROM=$(brew --prefix openblas) \
             -DOOMPH_USE_GMP_FROM=$(brew --prefix gmp) \
             -DOOMPH_USE_MPFR_FROM=$(brew --prefix mpfr) \
+            -DOOMPH_BUILD_SUPERLU_DIST=${{ matrix.build_info.enable_mpi }} \
+            -DOOMPH_BUILD_CGAL=${{ matrix.build_third_party_libs }} \
+            -DOOMPH_BUILD_MUMPS=${{ matrix.build_third_party_libs }} \
+            -DOOMPH_BUILD_HYPRE=${{ matrix.build_third_party_libs }} \
+            -DOOMPH_BUILD_TRILINOS=${{ matrix.build_third_party_libs }} \
             -B build
         working-directory: ./external_distributions/
 
-      - name: Build third-party libraries (optional)
-        if: matrix.build_third_party_libs == 'ON'
+      - name: Build desired third-party libraries
         run: cmake --build build
         working-directory: ./external_distributions/
 
-      - name: Upload third-party libraries build logs (optional)
-        if: matrix.build_third_party_libs == 'ON'
+      - name: Upload third-party libraries build logs
         uses: actions/upload-artifact@v3
         with:
           name: third_party_build_logs-${{ runner.os }}-MPI_${{ matrix.build_info.enable_mpi }}
@@ -96,11 +100,6 @@ jobs:
       # BUILD MAIN PROJECT:
       # -------------------
       - name: Configure
-        if: matrix.build_third_party_libs == 'OFF'
-        run: cmake --preset ${{ matrix.build_info.preset }} -DOOMPH_USE_OPENBLAS_FROM=$(brew --prefix openblas) -B build
-
-      - name: Configure with third-party libs
-        if: matrix.build_third_party_libs == 'ON'
         run: cmake --preset ${{ matrix.build_info.preset }} $(cat external_distributions/build/cmake_flags_for_oomph_lib.txt) -B build
 
       - name: Build

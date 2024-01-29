@@ -8,10 +8,6 @@
 # =============================================================================
 include_guard()
 
-if(NOT MPI_C_COMPILER)
-  message(FATAL_ERROR "Something went wrong; MPI_C_COMPILER was not populated!")
-endif()
-
 # Locate 'make'; required for building METIS
 find_program(MAKE_EXECUTABLE NAMES make REQUIRED)
 
@@ -45,7 +41,7 @@ endif()
 # GKLIB:
 # -------------
 # Expected library path and include directory
-set(GKLIB_LIBNAME ${CMAKE_STATIC_LIBRARY_PREFIX}gklib${CMAKE_STATIC_LIBRARY_SUFFIX})
+set(GKLIB_LIBNAME ${CMAKE_STATIC_LIBRARY_PREFIX}GKlib${CMAKE_STATIC_LIBRARY_SUFFIX})
 set(GKLIB_LIBRARIES ${GKLIB_INSTALL_DIR}/lib/${GKLIB_LIBNAME} CACHE PATH "Path to GMP libraries")
 set(GKLIB_INCLUDE_DIR ${GKLIB_INSTALL_DIR}/include CACHE PATH "Path to GMP include directory")
 
@@ -172,6 +168,10 @@ endif()
 
 # We can only build ParMETIS or SuperLUDist if MPI is enabled
 if (OOMPH_ENABLE_MPI)
+  if(NOT MPI_C_COMPILER)
+    message(FATAL_ERROR "Something went wrong; MPI_C_COMPILER was not populated!")
+  endif()
+
   # ---------
   # PARMETIS:
   # ---------
@@ -266,6 +266,16 @@ if (OOMPH_ENABLE_MPI)
 endif()
 
 # -----------------------------------------------------------------------------
+
+# If we're building OpenBLAS, make sure it gets built before SuperLU or SuperLU_DIST
+if(TARGET openblas)
+  if(TARGET superlu)
+    add_dependencies(superlu openblas)
+  endif()
+  if(TARGET superlu_dist)
+    add_dependencies(superlu_dist openblas)
+  endif()
+endif()
 
 # METIS depends on GKlib. ParMETIS depends on both METIS and GKlib
 if((TARGET gklib) AND (TARGET metis))

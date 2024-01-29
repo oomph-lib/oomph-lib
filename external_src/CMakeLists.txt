@@ -6,28 +6,6 @@
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(VERBOSE "Entered external_src subdirectory")
 
-if(ALREADY_HAVE_BLAS)
-  message(FATAL_ERROR "The variable 'ALREADY_HAVE_BLAS' has been deprecated!")
-endif()
-if(ALREADY_HAVE_LAPACK)
-  message(FATAL_ERROR "The variable 'ALREADY_HAVE_LAPACK' has been deprecated!")
-endif()
-if(ALREADY_HAVE_SUPERLU)
-  message(
-    FATAL_ERROR "The variable 'ALREADY_HAVE_SUPERLU' has been deprecated!")
-endif()
-if(ALREADY_HAVE_METIS)
-  message(FATAL_ERROR "The variable 'ALREADY_HAVE_METIS' has been deprecated!")
-endif()
-if(ALREADY_HAVE_PARMETIS)
-  message(
-    FATAL_ERROR "The variable 'ALREADY_HAVE_PARMETIS' has been deprecated!")
-endif()
-if(ALREADY_HAVE_SUPERLU_DIST)
-  message(
-    FATAL_ERROR "The variable 'ALREADY_HAVE_SUPERLU_DIST' has been deprecated!")
-endif()
-
 # Initialise the accumulated compiler flags and the external source libraries;
 # these variables will/should be updated from each subdirectory added via an
 # add_subdirectory(...) call
@@ -56,27 +34,6 @@ if(NOT OOMPH_SUPPRESS_TETGEN_LIB)
     add_subdirectory(oomph_tetgen_1.6)
   else()
     add_subdirectory(oomph_tetgen)
-  endif()
-endif()
-
-# Provide up-to-date sources if the user wants a "bleeding edge" oomph-lib
-if(OOMPH_USE_OLD_SUPERLU_DIST)
-  # Add METIS
-  add_subdirectory(oomph_metis_from_parmetis_3.1.1)
-  add_subdirectory(oomph_superlu_4.3)
-  if(OOMPH_HAS_MPI)
-    add_subdirectory(oomph_parmetis_3.1.1)
-    add_subdirectory(oomph_superlu_dist_3.0)
-  endif()
-  list(APPEND EXTERNAL_SRC_CXX_DEFINITIONS OOMPH_USE_OLD_SUPERLU_DIST)
-else()
-  # Add GKlib for METIS and METIS
-  add_subdirectory(oomph_gklib_from_metis_from_parmetis_4.0.3)
-  add_subdirectory(oomph_metis_from_parmetis_4.0.3)
-  add_subdirectory(oomph_superlu_6.0.1)
-  if(OOMPH_HAS_MPI)
-    add_subdirectory(oomph_parmetis_4.0.3)
-    add_subdirectory(oomph_superlu_dist_8.2.1)
   endif()
 endif()
 
