@@ -102,6 +102,18 @@ set(OOMPH_USE_TRILINOS_FROM "@OOMPH_USE_TRILINOS_FROM@")
 # The gmsh executable
 set(OOMPH_GMSH_COMMAND "@OOMPH_GMSH_COMMAND@")
 
+# Add warning
+set(OOMPH_CMAKE_BUILD_TYPE @CMAKE_BUILD_TYPE@)
+set(OOMPH_DO_NOT_WARN_ABOUT_CMAKE_BUILD_TYPE OFF)
+if(NOT OOMPH_DO_NOT_WARN_ABOUT_CMAKE_BUILD_TYPE)
+  if(NOT ("${CMAKE_BUILD_TYPE}" STREQUAL "${OOMPH_CMAKE_BUILD_TYPE}"))
+    message(
+      WARNING
+        "oomph-lib was built with the build type '${OOMPH_CMAKE_BUILD_TYPE}' but you are now building a project that uses oomph-lib with the build type '${CMAKE_BUILD_TYPE}'! Did you remember to build the project with -DCMAKE_BUILD_TYPE=${OOMPH_CMAKE_BUILD_TYPE}?"
+    )
+  endif()
+endif()
+
 # ---------------------[ FORWARD DEPENDENCY REQUIREMENTS ]---------------------
 
 # Python3 for self-tests
