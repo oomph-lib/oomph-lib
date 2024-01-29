@@ -109,7 +109,7 @@ if(NOT OOMPH_DO_NOT_WARN_ABOUT_CMAKE_BUILD_TYPE)
   if(NOT ("${CMAKE_BUILD_TYPE}" STREQUAL "${OOMPH_CMAKE_BUILD_TYPE}"))
     message(
       WARNING
-        "oomph-lib was built with the build type '${OOMPH_CMAKE_BUILD_TYPE}' but you are now building a project that uses oomph-lib with the build type '${CMAKE_BUILD_TYPE}'! Did you remember to build the project with -DCMAKE_BUILD_TYPE=${OOMPH_CMAKE_BUILD_TYPE}?"
+        "oomph-lib was built with the build type '${OOMPH_CMAKE_BUILD_TYPE}' but you are now building a project that uses oomph-lib with the build type '${CMAKE_BUILD_TYPE}'! Did you remember to build the project with -DCMAKE_BUILD_TYPE=\"${OOMPH_CMAKE_BUILD_TYPE}\"?"
     )
   endif()
 endif()
