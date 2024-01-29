@@ -1313,7 +1313,7 @@ cd $oomph_home_dir/src/poisson<br>
 # Edit the relevant file
 emacs poisson_elements.h <br>
 # Go back to the home directory and
-# rebuild (Cmake knows what needs to be
+# rebuild (CMake knows what needs to be
 # recompiled)
 cd $oomph_home_dir
 cmake --build build <br><br>
