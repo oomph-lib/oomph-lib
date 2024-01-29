@@ -37,14 +37,14 @@ oomph_add_test(
 
 # Just try to build the driver code
 add_test(
-  NAME deliberately_broken_code_for_self_test_test.deliberately_broken_code_for_self_test_test
+  NAME self_test.deliberately_broken_code_for_self_test_test.deliberately_broken_code_for_self_test_test
   COMMAND ${CMAKE_COMMAND} --build . --target deliberately_broken_code
   WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
 
 # Expect the deliberately-broken test to fail (i.e. cmake --build should return
 # a non-zero value)
 set_tests_properties(
-  deliberately_broken_code_for_self_test_test.deliberately_broken_code_for_self_test_test
+  self_test.deliberately_broken_code_for_self_test_test.deliberately_broken_code_for_self_test_test
   PROPERTIES WILL_FAIL TRUE)
 
 message(VERBOSE

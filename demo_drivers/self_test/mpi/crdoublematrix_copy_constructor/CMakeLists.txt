@@ -27,12 +27,12 @@ if(NUM_PROCESSORS GREATER_EQUAL 4)
     LABELS mpi matrix)
 
   # Don't run this test alongside any other tests
-  set_tests_properties(mpi.crdoublematrix_copy_constructor PROPERTIES PROCESSORS
-                                                                      4)
+  set_tests_properties(self_test.mpi.crdoublematrix_copy_constructor
+                       PROPERTIES PROCESSORS 4)
 else()
   message(
     STATUS
-      "Skipping test 'mpi.crdoublematrix_copy_constructor' as you don't have enough processors available."
+      "Skipping test 'self_test.mpi.crdoublematrix_copy_constructor' as you don't have enough processors available."
   )
 endif()
 

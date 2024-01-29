@@ -27,12 +27,12 @@ if(NUM_PROCESSORS GREATER_EQUAL 4)
     LABELS mpi vector)
 
   # Don't run this test alongside any other tests
-  set_tests_properties(mpi.vector_split_without_communication
+  set_tests_properties(self_test.mpi.vector_split_without_communication
                        PROPERTIES PROCESSORS 4)
 else()
   message(
     STATUS
-      "Skipping test 'mpi.vector_split_without_communication' as you don't have enough processors available."
+      "Skipping test 'self_test.mpi.vector_split_without_communication' as you don't have enough processors available."
   )
 endif()
 

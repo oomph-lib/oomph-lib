@@ -25,8 +25,8 @@ oomph_add_test(
   LABELS mpi adapt driven_cavity)
 
 # Don't run this test alongside any other tests
-set_tests_properties(mpi.line_visualiser PROPERTIES PROCESSORS
-                                                    ${OOMPH_MPI_NUM_PROC})
+set_tests_properties(self_test.mpi.line_visualiser
+                     PROPERTIES PROCESSORS ${OOMPH_MPI_NUM_PROC})
 
 message(VERBOSE "Leaving line_visualiser subdirectory")
 # ------------------------------------------------------------------------------

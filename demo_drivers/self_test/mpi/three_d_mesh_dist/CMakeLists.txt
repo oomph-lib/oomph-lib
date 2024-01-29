@@ -24,8 +24,8 @@ oomph_add_test(
   LABELS mpi three_d_mesh)
 
 # Don't run this test alongside any other tests
-set_tests_properties(mpi.three_d_mesh_dist PROPERTIES PROCESSORS
-                                                      ${OOMPH_MPI_NUM_PROC})
+set_tests_properties(self_test.mpi.three_d_mesh_dist
+                     PROPERTIES PROCESSORS ${OOMPH_MPI_NUM_PROC})
 
 message(VERBOSE "Leaving three_d_mesh_dist subdirectory")
 # ------------------------------------------------------------------------------

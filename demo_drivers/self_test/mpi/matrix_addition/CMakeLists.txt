@@ -27,11 +27,11 @@ if(NUM_PROCESSORS GREATER_EQUAL 4)
     LABELS mpi matrix)
 
   # Don't run this test alongside any other tests
-  set_tests_properties(mpi.matrix_addition PROPERTIES PROCESSORS 4)
+  set_tests_properties(self_test.mpi.matrix_addition PROPERTIES PROCESSORS 4)
 else()
   message(
     STATUS
-      "Skipping test 'mpi.matrix_addition' as you don't have enough processors available."
+      "Skipping test 'self_test.mpi.matrix_addition' as you don't have enough processors available."
   )
 endif()
 
