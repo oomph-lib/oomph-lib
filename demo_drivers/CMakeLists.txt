@@ -52,6 +52,7 @@ set(SUBDIRS
     poisson
     polar_navier_stokes
     reaction_diffusion
+    self_test
     shell
     solid
     spherical_advection_diffusion
