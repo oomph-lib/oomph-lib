@@ -70,6 +70,10 @@ namespace oomph
     double* Ca_pt;
 
   protected:
+    /// Pointer to the desired value of Sigma
+    double* Sigma_pt;
+
+  protected:
     /// Flag used to determine whether the contact angle is to be
     /// used (0 if not), and whether it will be applied weakly as a force term
     /// in the momentum equations (1) or by hijacking the kinematic
@@ -133,6 +137,7 @@ namespace oomph
       : Wall_unit_normal_fct_pt(0),
         Contact_angle_pt(0),
         Ca_pt(0),
+        Sigma_pt(0),
         Contact_angle_flag(0)
     {
     }
@@ -174,6 +179,12 @@ namespace oomph
       return Ca_pt;
     }
 
+    /// Access function to the pointer specifying the capillary number
+    double*& sigma_pt()
+    {
+      return Sigma_pt;
+    }
+
     /// Return the value of the capillary number
     double ca()
     {
@@ -188,6 +199,25 @@ namespace oomph
       {
         throw OomphLibError("Capillary number has not been set",
                             "FluidInterfaceBoundingElement::ca()",
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+    }
+
+    /// Return the value of the capillary number
+    double sigma()
+    {
+#ifdef PARANOID
+      if (Sigma_pt != 0)
+      {
+#endif
+        return *Sigma_pt;
+#ifdef PARANOID
+      }
+      else
+      {
+        throw OomphLibError("Sigma has not been set",
+                            "FluidInterfaceBoundingElement::sigma()",
                             OOMPH_EXCEPTION_LOCATION);
       }
 #endif

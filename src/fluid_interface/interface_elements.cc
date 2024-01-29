@@ -129,8 +129,16 @@ namespace oomph
     }
 
     // Get the value of sigma from the parent
-    double sigma_local =
-      dynamic_cast<FluidInterfaceElement*>(parent_pt)->sigma(s_parent);
+    double sigma_local = 0;
+    if (Sigma_pt)
+    {
+      sigma_local = sigma();
+    }
+    else
+    {
+      sigma_local =
+        dynamic_cast<FluidInterfaceElement*>(parent_pt)->sigma(s_parent);
+    }
 
     // Are we doing the weak form replacement
     if (Contact_angle_flag == 2)
