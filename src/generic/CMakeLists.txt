@@ -203,7 +203,7 @@ set(SOURCES
     gzip_reader.cc
     fpdiff.cc)
 
-if(OOMPH_HAS_MPI)
+if(OOMPH_HAS_SUPERLU_DIST)
   list(APPEND SOURCES superlu_dist.c)
   set_source_files_properties(
     superlu_dist.c PROPERTIES COMPILE_FLAGS -Wno-implicit-function-declaration
@@ -289,15 +289,8 @@ target_link_libraries(${LIBNAME} PUBLIC GKlib::GKlib METIS::METIS
                                         superlu::superlu)
 
 if(OOMPH_HAS_SUPERLU_DIST)
-  if(OOMPH_HAS_MPI)
-    target_link_libraries(${LIBNAME} PUBLIC ParMETIS::ParMETIS
-                                            SuperLU_DIST::SuperLU_DIST)
-  else()
-    message(
-      FATAL_ERROR
-        "Somehow we've detected SuperLU_DIST but we don't have MPI enabled! Argh!"
-    )
-  endif()
+  target_link_libraries(${LIBNAME} PUBLIC ParMETIS::ParMETIS
+                                          SuperLU_DIST::SuperLU_DIST)
 endif()
 
 if(OOMPH_HAS_CGAL)
