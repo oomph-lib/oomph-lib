@@ -6213,6 +6213,11 @@ namespace oomph
         }
 
         // --------------
+
+
+        // Work-around for odd seg fault when calling MPI_Wait below.
+        MPI_Request my_request;
+
         // Double data
         unsigned nflat_double_send = flat_double_send_packed_data.size();
         MPI_Isend(&nflat_double_send,
@@ -6221,7 +6226,7 @@ namespace oomph
                   send_proc,
                   3,
                   comm_pt->mpi_comm(),
-                  &request);
+                  &my_request);
 
         unsigned nflat_double_receive = 0;
         MPI_Recv(&nflat_double_receive,
@@ -6232,7 +6237,8 @@ namespace oomph
                  comm_pt->mpi_comm(),
                  &status);
 
-        MPI_Wait(&request, MPI_STATUS_IGNORE);
+        // this is where it used to die without separate MPI request
+        MPI_Wait(&my_request, MPI_STATUS_IGNORE);
 
         if (nflat_double_send != 0)
         {
@@ -6242,7 +6248,7 @@ namespace oomph
                     send_proc,
                     4,
                     comm_pt->mpi_comm(),
-                    &request);
+                    &my_request);
         }
 
         if (nflat_double_receive != 0)
@@ -6259,7 +6265,7 @@ namespace oomph
 
         if (nflat_double_send != 0)
         {
-          MPI_Wait(&request, MPI_STATUS_IGNORE);
+          MPI_Wait(&my_request, MPI_STATUS_IGNORE);
         }
         // --------------
 
@@ -34560,10 +34566,6 @@ namespace oomph
         this->copy_connection_information(polygon_pt->polyline_pt(p),
                                           tmp_curve_section_pt);
 
-        // Now update the polyline according to the new vertices but
-        // first check if the object is allowed to delete the representation
-        // or if it should be done by other object
-        bool delete_it_on_destructor = false;
 
         std::set<TriangleMeshCurveSection*>::iterator it =
           this->Free_curve_section_pt.find(polygon_pt->curve_section_pt(p));
@@ -34572,7 +34574,6 @@ namespace oomph
         {
           this->Free_curve_section_pt.erase(it);
           delete polygon_pt->curve_section_pt(p);
-          delete_it_on_destructor = true;
         }
 
         // ------------------------------------------------------------
