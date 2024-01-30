@@ -1199,6 +1199,21 @@ namespace oomph
     // Doc time for solve
     double t_factorise_start = TimingHelpers::timer();
 
+    // Keep this for debugging
+    if (1 == 0)
+    {
+      std::string filename =
+        "jac_" + StringConversion::to_string(Global_unsigned::Number) +
+        "_proc" +
+        StringConversion::to_string(MPI_Helpers::communicator_pt()->my_rank()) +
+        ".dat";
+      CRDoubleMatrix* cr_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
+      cr_pt->sparse_indexed_output_with_offset(filename);
+      oomph_info << "output matrix " << Global_unsigned::Number << std::endl;
+      Global_unsigned::Number++;
+    }
+
+
     // Factorise the matrix
     factorise(matrix_pt);
 
@@ -1990,6 +2005,10 @@ namespace oomph
           cr_matrix_pt->clear();
         }
 
+        // hierher
+        oomph_info << "SuperLU_dist is currently disabled" << std::endl;
+        abort();
+
         // Factorize
         superlu_dist_distributed_matrix(
           1,
@@ -2042,6 +2061,11 @@ namespace oomph
         {
           cr_matrix_pt->clear();
         }
+
+
+        // hierher
+        oomph_info << "SuperLU_dist is currently disabled" << std::endl;
+        abort();
 
         // do the factorization
         superlu_dist_global_matrix(
@@ -2115,6 +2139,10 @@ namespace oomph
       {
         serial_matrix_pt->clean_up_memory();
       }
+
+      // hierher
+      oomph_info << "SuperLU_dist is currently disabled" << std::endl;
+      abort();
 
       // do the factorization
       superlu_dist_global_matrix(
@@ -2421,6 +2449,10 @@ namespace oomph
     // Do the backsubsitition phase
     if (Dist_distributed_solve_data_allocated)
     {
+      // hierher
+      oomph_info << "SuperLU_dist is currently disabled" << std::endl;
+      abort();
+
       // Call distributed solver
       superlu_dist_distributed_matrix(
         2,
@@ -2442,6 +2474,10 @@ namespace oomph
     }
     else if (Dist_global_solve_data_allocated)
     {
+      // hierher
+      oomph_info << "SuperLU_dist is currently disabled" << std::endl;
+      abort();
+
       // Call global solver
       superlu_dist_global_matrix(
         2,
@@ -2731,6 +2767,10 @@ namespace oomph
 
       if (Dist_distributed_solve_data_allocated)
       {
+        // hierher
+        oomph_info << "SuperLU_dist is currently disabled" << std::endl;
+        abort();
+
         superlu_dist_distributed_matrix(
           3,
           -1,
@@ -2752,6 +2792,10 @@ namespace oomph
       }
       if (Dist_global_solve_data_allocated)
       {
+        // hierher
+        oomph_info << "SuperLU_dist is currently disabled" << std::endl;
+        abort();
+
         superlu_dist_global_matrix(
           3,
           -1,

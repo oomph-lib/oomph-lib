@@ -301,9 +301,11 @@ echo $folder_distribution_file_flag $folder_distribution_file_value
 # the existence of the new directory
 sleep 5
 
-echo ""
-echo "$MPI_RUN_ON_NP_COMMAND --output-filename OUTPUT_two_d_parallel_unstructured_adaptive_poisson_np2_half_circle ../two_d_parallel_unstructured_adaptive_poisson $domain_configuration_flag $domain_configuration_value $element_size_flag $element_size_value $max_adapt_flag $max_adapt_value $max_permitted_error_flag $max_permitted_error_value $min_permitted_error_flag $min_permitted_error_value $max_element_size_flag $max_element_size_value $min_element_size_flag $min_element_size_value $load_balance_flag $load_balance_value $folder_distribution_file_flag $folder_distribution_file_value"
-exit 1
+#echo ""
+#echo "$MPI_RUN_ON_NP_COMMAND --output-filename OUTPUT_two_d_parallel_unstructured_adaptive_poisson_np2_half_circle ../two_d_parallel_unstructured_adaptive_poisson $domain_configuration_flag $domain_configuration_value $element_size_flag $element_size_value $max_adapt_flag $max_adapt_value $max_permitted_error_flag $max_permitted_error_value $min_permitted_error_flag $min_permitted_error_value $max_element_size_flag $max_element_size_value $min_element_size_flag $min_element_size_value $load_balance_flag $load_balance_value $folder_distribution_file_flag $folder_distribution_file_value"
+#exit 1
+
+
 $MPI_RUN_ON_NP_COMMAND --output-filename OUTPUT_two_d_parallel_unstructured_adaptive_poisson_np2_half_circle ../two_d_parallel_unstructured_adaptive_poisson $domain_configuration_flag $domain_configuration_value $element_size_flag $element_size_value $max_adapt_flag $max_adapt_value $max_permitted_error_flag $max_permitted_error_value $min_permitted_error_flag $min_permitted_error_value $max_element_size_flag $max_element_size_value $min_element_size_flag $min_element_size_value $load_balance_flag $load_balance_value $folder_distribution_file_flag $folder_distribution_file_value
 echo "done"
 echo " " >>validation.log

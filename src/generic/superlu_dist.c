@@ -24,16 +24,18 @@
   ----------------------------------------------------------------
 */
 #include <math.h>
+#ifdef USING_OOMPH_SUPERLU_DIST
+#include "oomph_superlu_dist_8.2.1.h"
+#else
 #include <superlu_defs.h>
 #include <superlu_ddefs.h>
 #include <slu_Cnames.h>
 #include <machines.h>
 #include <psymbfact.h>
 #include <supermatrix.h>
-// #include <old_colamd.h>
-#include <superlu_dist_config.h>
-#include <superlu_enum_consts.h>
+#include <old_colamd.h>
 #include <util_dist.h>
+#endif
 
 
 /* ================================================= */
@@ -292,8 +294,8 @@ void superlu_dist_distributed_matrix(int opt_flag,
     /* Row permutations (NATURAL [= do nothing],     */
     /*                   LargeDiag_MC64 [default], ...)?  */
     /*    options->RowPerm=NATURAL; */
-    options->RowPerm = LargeDiag_MC64;
-
+    options->RowPerm = LargeDiag_MC64; /* hierher used to be LargeDiag */
+    /* note: LargeDiag_HWPM seems to be an opption too */
     /* Column permutations (NATURAL [= do nothing],      */
     /*                      MMD_AT_PLUS_A [default],...) */
     options->ColPerm = MMD_AT_PLUS_A;
@@ -302,7 +304,7 @@ void superlu_dist_distributed_matrix(int opt_flag,
     if (allow_permutations == 0)
     {
       options->ColPerm = NATURAL;
-      options->RowPerm = NOROWPERM;
+      options->RowPerm = NATURAL;
     }
 
     /*    printf("\n\n\nSWITCHING OFF EQUILIBRATION\n\n\n"); */
@@ -333,7 +335,9 @@ void superlu_dist_distributed_matrix(int opt_flag,
 
     /* Initialize ScalePermstruct and LUstruct. */
     dScalePermstructInit(m, n, ScalePermstruct);
-    dLUstructInit(n, LUstruct);
+    dLUstructInit(n, LUstruct); /* hierher used to have two args:
+                                   LUstructInit(m, n, LUstruct); */
+    /* ok no 3 arg version exists */
 
     /* Initialization. */
     Glu_persist = LUstruct->Glu_persist;
@@ -554,15 +558,23 @@ void superlu_dist_distributed_matrix(int opt_flag,
       */
       if (Fact != SamePattern_SameRowPerm)
       {
-        need_value = (options->RowPerm == LargeDiag_MC64);
+        need_value = (options->RowPerm ==
+                      LargeDiag_MC64); /* hierher used to be LargeDiag */
+        /* note: LargeDiag_HWPM seems to be an opption too */
+
         pdCompRow_loc_to_CompCol_global(need_value, A, grid, &GA);
         GAstore = (NCformat*)GA.Store;
         colptr = GAstore->colptr;
         rowind = GAstore->rowind;
         nnz = GAstore->nnz;
-        if (need_value) a_GA = GAstore->nzval;
+        if (need_value)
+        {
+          a_GA = GAstore->nzval;
+        }
         else
+        {
           assert(GAstore->nzval == NULL);
+        }
       }
 
       /* ------------------------------------------------------------
@@ -719,9 +731,14 @@ void superlu_dist_distributed_matrix(int opt_flag,
     if (!factored || options->IterRefine)
     {
       /* Compute norm(A), which will be used to adjust small diagonal. */
-      if (notran) *(unsigned char*)norm = '1';
+      if (notran)
+      {
+        *(unsigned char*)norm = '1';
+      }
       else
+      {
         *(unsigned char*)norm = 'I';
+      }
       anorm = pdlangs(norm, A, grid);
     }
 
@@ -815,8 +832,13 @@ void superlu_dist_distributed_matrix(int opt_flag,
          distribution routine. */
       t = SuperLU_timer_();
       /* dist_mem_use = */
-      pddistribute(
-        options, n, A, ScalePermstruct, Glu_freeable, LUstruct, grid);
+      pddistribute(options,
+                   n,
+                   A,
+                   ScalePermstruct,
+                   Glu_freeable,
+                   LUstruct,
+                   grid); /* hierher options used to be Fact */
       stat.utime[DIST] = SuperLU_timer_() - t;
 
       /* Deallocate storage used in symbolic factorization. */
@@ -1007,7 +1029,7 @@ void superlu_dist_distributed_matrix(int opt_flag,
     /* ------------------------------------------------------------
        Solve the linear system.
        ------------------------------------------------------------*/
-    pdgstrs(options,
+    pdgstrs(options, /* hierher options added as arg */
             n,
             LUstruct,
             ScalePermstruct,
@@ -1095,7 +1117,7 @@ void superlu_dist_distributed_matrix(int opt_flag,
         ABORT("Malloc fails for berr[].");
       }
 
-      pdgsrfs(options,
+      pdgsrfs(options, /* hierher options added as arg */
               n,
               A,
               anorm,
@@ -1419,7 +1441,8 @@ void superlu_dist_global_matrix(int opt_flag,
     /* Row permutations (NATURAL [= do nothing],     */
     /*                   LargeDiag_MC64 [default], ...)?  */
     /*    options->RowPerm=NATURAL; */
-    options->RowPerm = LargeDiag_MC64;
+    options->RowPerm = LargeDiag_MC64; /* hierher used to be LargeDiag */
+    /* note: LargeDiag_HWPM seems to be an opption too */
 
     /* Column permutations (NATURAL [= do nothing],      */
     /*                      MMD_AT_PLUS_A [default],...) */
@@ -1429,7 +1452,7 @@ void superlu_dist_global_matrix(int opt_flag,
     if (allow_permutations == 0)
     {
       options->ColPerm = NATURAL;
-      options->RowPerm = NOROWPERM;
+      options->RowPerm = NATURAL;
     }
 
     /* Iterative refinement (essential as far as I can tell).*/
@@ -1461,7 +1484,9 @@ void superlu_dist_global_matrix(int opt_flag,
 
     /* Initialize ScalePermstruct and LUstruct. */
     dScalePermstructInit(m, n, ScalePermstruct);
-    dLUstructInit(n, LUstruct);
+    dLUstructInit(n, LUstruct); /* hierher used to have two args:
+                                   LUstructInit(m, n, LUstruct); */
+    /* ok no 3 arg version exists */
 
     /* Test the control parameters etc. */
     *info = 0;
@@ -1931,7 +1956,12 @@ void superlu_dist_global_matrix(int opt_flag,
       /* Distribute the L and U factors onto the process grid. */
       t = SuperLU_timer_();
       /* dist_mem_use = */
-      ddistribute(options, n, AC, Glu_freeable, LUstruct, grid);
+      ddistribute(options,
+                  n,
+                  AC,
+                  Glu_freeable,
+                  LUstruct,
+                  grid); /* hierher options used to be Fact */
       stat.utime[DIST] = SuperLU_timer_() - t;
 
       /* Deallocate storage used in symbolic factor. */
@@ -2150,7 +2180,15 @@ void superlu_dist_global_matrix(int opt_flag,
     /* ------------------------------------------------------------
        Solve the linear system.
        ------------------------------------------------------------*/
-    pdgstrs_Bglobal(options, n, LUstruct, grid, X, ldb, nrhs, &stat, info);
+    pdgstrs_Bglobal(options,
+                    n,
+                    LUstruct,
+                    grid,
+                    X,
+                    ldb,
+                    nrhs,
+                    &stat,
+                    info); /* hierher new arg: options) */
     if (*info != 0)
     {
       printf("Trouble in pdgstrs_Bglobal. Info=%i\n", *info);
@@ -2172,7 +2210,7 @@ void superlu_dist_global_matrix(int opt_flag,
         ABORT("Malloc fails for berr[].");
       }
 
-      pdgsrfs_ABXglobal(options,
+      pdgsrfs_ABXglobal(options, /* hierher new arg options */
                         n,
                         AC,
                         anorm,

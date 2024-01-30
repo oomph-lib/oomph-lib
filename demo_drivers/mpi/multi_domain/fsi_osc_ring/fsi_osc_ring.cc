@@ -305,7 +305,7 @@ private:
 /// represent the state at the initial time.
 //===============================================================
 void FSIRingProblem::set_initial_condition()
-{ 
+{
 
  cout << "Setting wall ic" << std::endl;
  set_wall_initial_condition();
@@ -491,7 +491,7 @@ FSIRingProblem::FSIRingProblem(const unsigned& N,
 {
  // Overwrite maximum allowed residual to accomodate bad initial guesses
  Problem::Max_residuals=1000.0;
-
+ 
  //----------------------------------------------------------- 
  // Create timesteppers
  //-----------------------------------------------------------
@@ -739,7 +739,7 @@ FSIRingProblem::FSIRingProblem(const unsigned& N,
 
  // Do equation numbering
  cout << "# of dofs " << assign_eqn_numbers() << std::endl;
- 
+
 }
 
 

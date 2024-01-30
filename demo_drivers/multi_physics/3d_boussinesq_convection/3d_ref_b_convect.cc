@@ -93,7 +93,7 @@ public :
    Navier_stokes_preconditioner_pt->disable_doc_time();
 
    //Set the temperature preconditioner
-   Temperature_preconditioner_pt = new SuperLUPreconditioner;
+   Temperature_preconditioner_pt = new ExactPreconditioner;
 
    //Initialise the P and F block preconditioners
    P_preconditioner_pt = 0;

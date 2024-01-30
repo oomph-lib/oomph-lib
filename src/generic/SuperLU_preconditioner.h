@@ -30,13 +30,16 @@
 
 #include "linear_solver.h"
 #include "preconditioner.h"
+#ifdef OOMPH_HAS_MPI
+#include "mumps_solver.h"
+#endif
 
 namespace oomph
 {
   //====================================================================
   /// An interface to allow SuperLU to be used as an (exact) Preconditioner
   //====================================================================
-  class SuperLUPreconditioner : public Preconditioner
+  class SuperLUPreconditioner : public virtual Preconditioner
   {
   public:
     /// Constructor.
@@ -143,25 +146,200 @@ namespace oomph
 
       // Now return the calculated result
       return memory_usage;
-    } // End of get_memory_usage_for_superlu
+    }
 
     /// Enable documentation of solver statistics
     void enable_doc_stats()
     {
       // Enable the documentation of statistics inside SuperLU
       Solver.enable_doc_stats();
-    } // End of enable_doc_stats
+    }
 
     /// Enable documentation of solver statistics
     void disable_doc_stats()
     {
       // Disable the documentation of statistics inside SuperLU
       Solver.disable_doc_stats();
-    } // End of disable_doc_stats
+    }
+
+    /// Enable documentation of solver statistics
+    void enable_doc_time()
+    {
+      // Enable the documentation of statistics inside SuperLU
+      Solver.enable_doc_time();
+    }
+
+    /// Enable documentation of solver statistics
+    void disable_doc_time()
+    {
+      // Disable the documentation of statistics inside SuperLU
+      Solver.disable_doc_time();
+    }
 
   private:
     /// the SuperLU solver emplyed by this preconditioner
     SuperLUSolver Solver;
+  };
+
+
+  ///////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////
+
+
+  //====================================================================
+  /// An exact preconditioner, using either mumps or superlu as the
+  /// underlying direct solver.
+  //====================================================================
+  class ExactPreconditioner : virtual public Preconditioner
+  {
+  public:
+    /// Constructor.
+    ExactPreconditioner()
+    {
+#ifdef OOMPH_HAS_MPI
+      Mumps_preconditioner_pt = new MumpsPreconditioner;
+      Mumps_preconditioner_pt->disable_doc_time();
+#endif
+      SuperLU_preconditioner_pt = new SuperLUPreconditioner;
+      SuperLU_preconditioner_pt->disable_doc_time();
+    }
+
+    /// Destructor -- kill the underlying solvers
+    ~ExactPreconditioner()
+    {
+#ifdef OOMPH_HAS_MPI
+      delete Mumps_preconditioner_pt;
+#endif
+      delete SuperLU_preconditioner_pt;
+    }
+
+
+    /// Broken copy constructor.
+    ExactPreconditioner(const ExactPreconditioner&) = delete;
+
+    /// Broken assignment operator.
+    void operator=(const ExactPreconditioner&) = delete;
+
+
+    /// Function to set up a preconditioner. This function must be called
+    /// before using preconditioner_solve.
+    void setup()
+    {
+#ifdef OOMPH_HAS_MPI
+      if (MPI_Helpers::mpi_has_been_initialised())
+      {
+        Mumps_preconditioner_pt->setup();
+      }
+      else
+      {
+        SuperLU_preconditioner_pt->setup();
+      }
+#else
+      SuperLU_preconditioner_pt->setup();
+#endif
+    }
+
+    /// Setup the preconditioner: store the matrix pointer and the
+    /// communicator pointer then call preconditioner specific setup()
+    /// function.
+    void setup(DoubleMatrixBase* matrix_pt)
+    {
+#ifdef OOMPH_HAS_MPI
+      if (MPI_Helpers::mpi_has_been_initialised())
+      {
+        Mumps_preconditioner_pt->Preconditioner::setup(matrix_pt);
+      }
+      else
+      {
+        SuperLU_preconditioner_pt->Preconditioner::setup(matrix_pt);
+      }
+#else
+      SuperLU_preconditioner_pt->Preconditioner::setup(matrix_pt);
+#endif
+    }
+
+
+    /// Function applies Mumps to vector r for (exact)
+    /// preconditioning, this requires a call to setup(...) first.
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z)
+    {
+#ifdef OOMPH_HAS_MPI
+      if (MPI_Helpers::mpi_has_been_initialised())
+      {
+        Mumps_preconditioner_pt->preconditioner_solve(r, z);
+      }
+      else
+      {
+        SuperLU_preconditioner_pt->preconditioner_solve(r, z);
+      }
+#else
+      SuperLU_preconditioner_pt->preconditioner_solve(r, z);
+#endif
+    }
+
+
+    /// Clean up memory -- forward the call to the version in
+    /// Mumps in its LinearSolver incarnation.
+    void clean_up_memory()
+    {
+#ifdef OOMPH_HAS_MPI
+      if (MPI_Helpers::mpi_has_been_initialised())
+      {
+        Mumps_preconditioner_pt->clean_up_memory();
+      }
+      else
+      {
+        SuperLU_preconditioner_pt->clean_up_memory();
+      }
+#else
+      SuperLU_preconditioner_pt->clean_up_memory();
+#endif
+    }
+
+
+    /// Enable documentation of timings
+    void enable_doc_time()
+    {
+#ifdef OOMPH_HAS_MPI
+      if (MPI_Helpers::mpi_has_been_initialised())
+      {
+        Mumps_preconditioner_pt->enable_doc_time();
+      }
+      else
+      {
+        SuperLU_preconditioner_pt->enable_doc_time();
+      }
+#else
+      SuperLU_preconditioner_pt->enable_doc_time();
+#endif
+    }
+
+    /// Disable the documentation of timings
+    void disable_doc_time()
+    {
+#ifdef OOMPH_HAS_MPI
+      if (MPI_Helpers::mpi_has_been_initialised())
+      {
+        Mumps_preconditioner_pt->disable_doc_time();
+      }
+      else
+      {
+        SuperLU_preconditioner_pt->disable_doc_time();
+      }
+#else
+      SuperLU_preconditioner_pt->disable_doc_time();
+#endif
+    }
+
+  private:
+#ifdef OOMPH_HAS_MPI
+    /// Pointer to mumps solver
+    MumpsPreconditioner* Mumps_preconditioner_pt;
+#endif
+
+    /// Pointer to mumps solver
+    SuperLUPreconditioner* SuperLU_preconditioner_pt;
   };
 
 } // namespace oomph

@@ -256,8 +256,8 @@ RefineableDrivenCavityProblem<ELEMENT>::RefineableDrivenCavityProblem()
   
  // Setup equation numbering scheme
  cout <<"Number of equations: " << assign_eqn_numbers() << std::endl; 
- 
- // Line visualiser data allocation
+
+  // Line visualiser data allocation
 
  // How many points to you want?
  unsigned int  npt=100;

@@ -911,7 +911,8 @@ PseudoElasticCollapsibleChannelProblem()
  Multi_domain_functions::Doc_boundary_coordinate_file.close();
 
  // Setup equation numbering scheme
- std::cout <<"Number of equations: " << assign_eqn_numbers() << std::endl; 
+ std::cout <<"Number of equations: " << assign_eqn_numbers() << std::endl;
+
 }
 
 
@@ -1648,7 +1649,7 @@ set_pseudo_elastic_fsi_solver()
   prec_pt->set_solid_preconditioner(solid_prec_pt);
 
 #ifdef OOMPH_HAS_HYPRE
-
+  
   solid_prec_pt->set_subsidiary_preconditioner_function
    (Real_Solid_Preconditioner_Helper::get_preconditioner);
 
@@ -1664,7 +1665,7 @@ set_pseudo_elastic_fsi_solver()
    f_prec_pt = new BlockDiagonalPreconditioner<CRDoubleMatrix>;
 
 #ifdef OOMPH_HAS_HYPRE
-
+  
   f_prec_pt->set_subsidiary_preconditioner_function
    (LSC_Preconditioner_Helper::set_hypre_preconditioner);
 
@@ -1673,7 +1674,7 @@ set_pseudo_elastic_fsi_solver()
   ns_prec_pt->set_f_preconditioner(f_prec_pt);
   
 #ifdef OOMPH_HAS_HYPRE
-
+  
   // ns pressure poisson
   HyprePreconditioner* p_prec_pt = new HyprePreconditioner;
   p_prec_pt->set_amg_iterations(2);

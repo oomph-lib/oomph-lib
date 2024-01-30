@@ -415,10 +415,6 @@ FSICollapsibleChannelProblem<ELEMENT>::FSICollapsibleChannelProblem(
  Ldown=ldown;
  Ly=ly;
 
-// Switch to serial solver
- dynamic_cast<SuperLUSolver*>(linear_solver_pt())->set_solver_type(
-  SuperLUSolver::Serial);
-
  // Overwrite maximum allowed residual to accomodate bad initial guesses
  Problem::Max_residuals=1000.0;
 

@@ -261,7 +261,7 @@ PRefineableDrivenCavityProblem<ELEMENT>::PRefineableDrivenCavityProblem()
  
  // Setup equation numbering scheme
  oomph_info <<"Number of equations: " << assign_eqn_numbers() << std::endl; 
- 
+
 } // end_of_constructor
 
 

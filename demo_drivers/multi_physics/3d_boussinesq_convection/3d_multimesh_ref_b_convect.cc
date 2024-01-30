@@ -368,11 +368,11 @@ switch_to_iterative_linear_solver()
  if(MPI_Helpers::mpi_has_been_initialised())
 #endif
   {
-   // Need to create a SuperLUDistPreconditioner for the temperature ("solid")
+   // Need to create an exact preconditioner for the temperature ("solid")
    HyprePreconditioner* Temperature_prec_pt = new HyprePreconditioner;
    Hypre_default_settings::set_defaults_for_navier_stokes_momentum_block(
     static_cast<HyprePreconditioner*>(Temperature_prec_pt)); 
-   //SuperLUPreconditioner* Temperature_prec_pt =new SuperLUPreconditioner;
+   //ExactPreconditioner* Temperature_prec_pt =new ExactPreconditioner;
    prec_pt->set_solid_preconditioner_pt(Temperature_prec_pt);
    
    //Set up the internal preconditioners

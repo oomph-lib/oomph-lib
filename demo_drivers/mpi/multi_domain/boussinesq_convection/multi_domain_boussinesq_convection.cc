@@ -323,7 +323,7 @@ ConvectionProblem<NST_ELEMENT,AD_ELEMENT>::ConvectionProblem()
 
  // Setup equation numbering scheme
  cout <<"Number of equations: " << assign_eqn_numbers() << endl; 
-
+ 
 } // end of constructor
 
 

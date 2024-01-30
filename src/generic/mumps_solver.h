@@ -334,20 +334,20 @@ namespace oomph
   //====================================================================
   /// An interface to allow Mumps to be used as an (exact) Preconditioner
   //====================================================================
-  class NewMumpsPreconditioner : public Preconditioner
+  class MumpsPreconditioner : virtual public Preconditioner
   {
   public:
     /// Constructor.
-    NewMumpsPreconditioner() {}
+    MumpsPreconditioner() {}
 
     /// Destructor.
-    ~NewMumpsPreconditioner() {}
+    ~MumpsPreconditioner() {}
 
     /// Broken copy constructor.
-    NewMumpsPreconditioner(const NewMumpsPreconditioner&) = delete;
+    MumpsPreconditioner(const MumpsPreconditioner&) = delete;
 
     /// Broken assignment operator.
-    void operator=(const NewMumpsPreconditioner&) = delete;
+    void operator=(const MumpsPreconditioner&) = delete;
 
     /// Function to set up a preconditioner for the linear
     /// system defined by matrix_pt. This function must be called
@@ -370,7 +370,7 @@ namespace oomph
       {
         std::ostringstream error_message_stream;
         error_message_stream
-          << "NewMumpsPreconditioner can only be applied to matrices derived \n"
+          << "MumpsPreconditioner can only be applied to matrices derived \n"
           << "DistributableLinearAlgebraObject.\n";
         throw OomphLibError(error_message_stream.str(),
                             OOMPH_CURRENT_FUNCTION,

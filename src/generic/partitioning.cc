@@ -193,8 +193,8 @@ namespace oomph
 
 
     // Now convert into C-style packed array for interface with METIS
-    int* xadj = new int[nelem + 1];
-    Vector<int> adjacency_vector;
+    idx_t* xadj = new idx_t[nelem + 1];
+    Vector<idx_t> adjacency_vector;
 
     // Reserve (too much) space
     adjacency_vector.reserve(count);
@@ -264,13 +264,13 @@ namespace oomph
     cpu_start = clock();
 
     // Number of vertices in graph
-    int nvertex = nelem;
+    idx_t nvertex = nelem;
 
     // No vertex weights
-    int* vwgt = 0;
+    idx_t* vwgt = 0;
 
     // No edge weights
-    int* adjwgt = 0;
+    idx_t* adjwgt = 0;
 
     // Flag indicating that graph isn't weighted: 0; vertex weights only: 2
     // Note that wgtflag==2 requires nodal weights to be stored in vwgt.
@@ -280,22 +280,22 @@ namespace oomph
     int numflag = 0;
 
     // Number of desired partitions
-    int nparts = ndomain;
+    idx_t nparts = ndomain;
 
     // Use default options
-    int* options = new int[10];
-    options[0] = 0;
+    idx_t options[METIS_NOPTIONS];
+    METIS_SetDefaultOptions(options);
 
     switch (objective)
     {
       case 0:
         // Edge-cut minimization
-        options[0] = METIS_OBJTYPE_CUT;
+        options[METIS_OPTION_OBJTYPE] = METIS_OBJTYPE_CUT;
         break;
 
       case 1:
         // communication volume minimisation
-        options[0] = METIS_OBJTYPE_VOL;
+        options[METIS_OPTION_OBJTYPE] = METIS_OBJTYPE_VOL;
         break;
 
       default:
@@ -308,10 +308,10 @@ namespace oomph
     }
 
     // Number of cut edges in graph
-    int* edgecut = new int[nelem];
+    idx_t* edgecut = new idx_t[nelem];
 
     // Array containing the partition information
-    int* part = new int[nelem];
+    idx_t* part = new idx_t[nelem];
 
     // Can we get an error estimate?
 
@@ -330,7 +330,7 @@ namespace oomph
 
           // Adjust flag and provide storage for weights
           wgtflag = 2;
-          vwgt = new int[nelem];
+          vwgt = new idx_t[nelem];
 
           // Get error for all elements
           Vector<double> elemental_error(nelem);
@@ -388,7 +388,7 @@ namespace oomph
 
           // Adjust flag and provide storage for weights
           wgtflag = 2;
-          vwgt = new int[nelem];
+          vwgt = new idx_t[nelem];
 
           // Loop over submeshes
           for (unsigned i_mesh = 0; i_mesh < n_mesh; i_mesh++)
@@ -440,10 +440,10 @@ namespace oomph
 
     // If ncon is the number of weights associated with each vertex, the array
     // vwgt contains n x ncon elements where n is the number of vertices).
-    int ncon = 1;
-    int* vsize = NULL;
-    float* tpwgts = NULL;
-    float* ubvec = NULL;
+    idx_t ncon = 1;
+    idx_t* vsize = NULL;
+    real_t* tpwgts = NULL;
+    real_t* ubvec = NULL;
 
     // Call partitioner
     // METIS_API(int)
@@ -524,7 +524,6 @@ namespace oomph
     delete[] xadj;
     delete[] part;
     delete[] edgecut;
-    delete[] options;
   }
 
 
@@ -1017,8 +1016,8 @@ namespace oomph
 
       // Now convert into C-style packed array for interface with METIS
       cpu_start = clock();
-      int* xadj = new int[total_number_of_root_elements + 1];
-      Vector<int> adjacency_vector;
+      idx_t* xadj = new idx_t[total_number_of_root_elements + 1];
+      Vector<idx_t> adjacency_vector;
 
       // Reserve (too much) space
       adjacency_vector.reserve(count);
@@ -1059,7 +1058,6 @@ namespace oomph
                  << total_number_of_root_elements << "]: " << cpu0 << " sec"
                  << std::endl;
 
-
       // Call METIS graph partitioner
       //-----------------------------
 
@@ -1067,13 +1065,13 @@ namespace oomph
       cpu_start = clock();
 
       // Number of vertices in graph
-      int nvertex = total_number_of_root_elements;
+      idx_t nvertex = total_number_of_root_elements;
 
       // No vertex weights
-      int* vwgt = 0;
+      idx_t* vwgt = 0;
 
       // No edge weights
-      int* adjwgt = 0;
+      idx_t* adjwgt = 0;
 
       // Flag indicating that graph isn't weighted: 0; vertex weights only: 2
       // Note that wgtflag==2 requires nodal weights to be stored in vwgt.
@@ -1083,22 +1081,23 @@ namespace oomph
       int numflag = 0;
 
       // Number of desired partitions
-      int nparts = ndomain;
+      idx_t nparts = ndomain;
 
       // Use default options
-      int* options = new int[10];
-      options[0] = 0;
+      idx_t options[METIS_NOPTIONS];
+      METIS_SetDefaultOptions(options);
+
 
       switch (objective)
       {
         case 0:
           // Edge-cut minimization
-          options[0] = METIS_OBJTYPE_CUT;
+          options[METIS_OPTION_OBJTYPE] = METIS_OBJTYPE_CUT;
           break;
 
         case 1:
           // communication volume minimisation
-          options[0] = METIS_OBJTYPE_VOL;
+          options[METIS_OPTION_OBJTYPE] = METIS_OBJTYPE_VOL;
           break;
 
         default:
@@ -1112,17 +1111,17 @@ namespace oomph
       }
 
       // Number of cut edges in graph
-      int* edgecut = new int[total_number_of_root_elements];
+      idx_t* edgecut = new idx_t[total_number_of_root_elements];
 
       // Array containing the partition information
-      int* part = new int[total_number_of_root_elements];
+      idx_t* part = new idx_t[total_number_of_root_elements];
 
       // Now bias distribution by giving each root element
       // a weight equal to the number of elements associated with it
 
       // Adjust flag and provide storage for weights
       wgtflag = 2;
-      vwgt = new int[total_number_of_root_elements];
+      vwgt = new idx_t[total_number_of_root_elements];
 
 
       // Load balance based on assembly times of all leaf
@@ -1229,10 +1228,10 @@ namespace oomph
         // If ncon is the number of weights associated with each vertex, the
         // array vwgt contains n x ncon elements where n is the number of
         // vertices).
-        int ncon = 1;
-        int* vsize = NULL;
-        float* tpwgts = NULL;
-        float* ubvec = NULL;
+        idx_t ncon = 1;
+        idx_t* vsize = NULL;
+        real_t* tpwgts = NULL;
+        real_t* ubvec = NULL;
 
         // Call partitioner
         // METIS_API(int)
@@ -1290,7 +1289,6 @@ namespace oomph
       delete[] part;
       delete[] vwgt;
       delete[] edgecut;
-      delete[] options;
     }
 
     // Now scatter things back to processors: root_element_domain[] contains
