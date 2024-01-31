@@ -941,12 +941,12 @@ namespace oomph
 
         // Output the x,y,u,v
         for (unsigned i = 0; i < n_dim; i++)
-          outfile << this->interpolated_x(s, i) << ",";
+          outfile << this->interpolated_x(s, i) << " ";
         for (unsigned i = 0; i < n_velocity; i++)
-          outfile << this->interpolated_u(s, i) << ",";
+          outfile << this->interpolated_u(s, i) << " ";
 
         // Output a dummy pressure
-        outfile << 0.0 << ",";
+        outfile << 0.0 << " ";
 
         outfile << interpolated_lagrange << std::endl;
       }
@@ -1227,11 +1227,11 @@ namespace oomph
       // Output fields, x, y, alpha_input, alpha_output, lagrange_multiplier
       for (unsigned i = 0; i < spatial_dim; i++)
       {
-        outfile << x[i] << ",";
+        outfile << x[i] << " ";
       }
       std::streamsize ss = outfile.precision();
       outfile << std::fixed << std::setprecision(3);
-      outfile << imposed_contact_angle * 180 / MathematicalConstants::Pi << ",";
+      outfile << imposed_contact_angle * 180 / MathematicalConstants::Pi << " ";
       outfile << computed_contact_angle * 180 / MathematicalConstants::Pi;
       outfile << std::endl;
       outfile << std::fixed << std::setprecision(ss);
