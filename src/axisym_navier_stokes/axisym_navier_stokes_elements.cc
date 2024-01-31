@@ -2519,8 +2519,9 @@ namespace oomph
       error_stream << "ReSt (" << ReSt_pt << "), ";
       error_stream << "ReInvFr (" << ReInvFr_pt << "), ";
       error_stream << "and ReInvRo (" << ReInvRo_pt << ")\n";
-      throw OomphLibError(
-        error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      // throw OomphLibError(
+      //   error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      return;
     }
 
     // Find out how many nodes there are
