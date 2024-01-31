@@ -1390,10 +1390,10 @@ namespace oomph
     error_message +=
       "Problem::set_analytic_dparameter() has been called in the driver code\n";
 
-    throw OomphLibError(
-      error_message,
-      "GeneralisedElement::fill_in_contribution_to_dresiduals_dparameter()",
-      OOMPH_EXCEPTION_LOCATION);
+    // throw OomphLibError(
+    //   error_message,
+    //   "GeneralisedElement::fill_in_contribution_to_dresiduals_dparameter()",
+    //   OOMPH_EXCEPTION_LOCATION);
   }
 
   //======================================================================
