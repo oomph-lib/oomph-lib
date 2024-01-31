@@ -34566,7 +34566,6 @@ namespace oomph
         this->copy_connection_information(polygon_pt->polyline_pt(p),
                                           tmp_curve_section_pt);
 
-
         std::set<TriangleMeshCurveSection*>::iterator it =
           this->Free_curve_section_pt.find(polygon_pt->curve_section_pt(p));
 

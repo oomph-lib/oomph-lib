@@ -788,7 +788,7 @@ namespace oomph
 
       // MH: Like everything else, this hasn't been tested!
       // used to be input_string_stream<<"-pA -a" << element_area << "q30";
-      input_string_stream << "-pA -a -a" << element_area << "q30";
+      input_string_stream << "-Q -pA -a -a" << element_area << "q30";
 
       // Verify if creation of new points on boundaries is allowed
       if (!this->is_creation_of_vertices_on_boundaries_allowed())
@@ -831,7 +831,7 @@ namespace oomph
       // this->Tmp_mesh_pt = 0;
 
       // Cleanup but leave hole alone
-      bool clear_hole_data = false;
+      // bool clear_hole_data = false;
       // TriangleHelper::clear_triangulateio(triangle_in, clear_hole_data);
 
       // Setup boundary coordinates for boundaries
@@ -1114,7 +1114,7 @@ namespace oomph
       if (!this->is_mesh_distributed())
       {
         // Deform the boundary onto any geometric objects
-        this->snap_nodes_onto_geometric_objects();
+        // this->snap_nodes_onto_geometric_objects();
       }
     }
     /// Completely regenerate the mesh from the trianglateio structure
@@ -1346,7 +1346,7 @@ namespace oomph
       // input_string_stream<<"-pA -a" << element_area << " -q30" << std::fixed;
       // The repeated -a allows the specification of areas for different
       // regions (if any)
-      input_string_stream << "-pA -a -a" << element_area << " -q30"
+      input_string_stream << "-Q -pA -a -a" << element_area << " -q30"
                           << std::fixed;
 
       // Verify if creation of new points on boundaries is allowed
@@ -1402,7 +1402,7 @@ namespace oomph
       this->Tmp_mesh_pt = 0;
 
       // Cleanup but leave hole and regions alone since it's still used
-      bool clear_hole_data = false;
+      // bool clear_hole_data = false;
       // TriangleHelper::clear_triangulateio(triangulate_io, clear_hole_data);
     }
 
@@ -2405,7 +2405,7 @@ namespace oomph
 
       // Input string for triangle
       std::stringstream input_string_stream;
-      input_string_stream << "-pq30-ra";
+      input_string_stream << "-Q -pq30-ra";
 
       // Verify if creation of new points on boundaries is allowed
       if (!allow_automatic_creation_of_vertices_on_boundaries)
@@ -2444,7 +2444,7 @@ namespace oomph
       this->Tmp_mesh_pt = 0;
 
       // Cleanup but leave hole alone as it's still used
-      bool clear_hole_data = false;
+      // bool clear_hole_data = false;
       // TriangleHelper::clear_triangulateio(triangle_refine, clear_hole_data);
 
 #ifdef OOMPH_HAS_MPI
