@@ -41,20 +41,10 @@ using namespace std;
 
 using namespace oomph;
 
-//========================================================================
-/// Global variables that represent physical properties
-//========================================================================
-namespace Global_Physical_Variables
-{
-  double* Lambda_pt;
-  double* Mu_pt;
-} // namespace Global_Physical_Variables
-
 template<unsigned NNODE_1D>
 class GelfandBratuElement : public QElement<1, NNODE_1D>
 {
   double* Lambda_pt;
-
   double* Mu_pt;
 
 public:
@@ -364,10 +354,17 @@ class BratuProblem : public Problem
 {
 private:
   Node* Trace_node_pt;
+  double* Lambda_pt;
+  double* Mu_pt;
+  ofstream Trace;
+  ofstream Trace_mu;
 
 public:
   // Constructor
   BratuProblem(const unsigned& Nx);
+
+  // Destructor
+  ~BratuProblem();
 
   // Overload Access function for the mesh
   OneDMesh<ELEMENT>* mesh_pt()
@@ -379,7 +376,10 @@ public:
   void actions_after_newton_solve() {}
   void actions_before_newton_solve() {}
 
-  void solve();
+  void arc_length_step_in_lambda();
+  void activate_tracking_in_lambda();
+  void solve_for_the_fold();
+  void arc_length_step_in_mu();
 };
 
 // Constructor
@@ -394,7 +394,6 @@ BratuProblem<ELEMENT>::BratuProblem(const unsigned& Nx)
   mesh_pt()->boundary_node_pt(1, 0)->pin(0);
 
   // Assign the physical parameters
-  using namespace Global_Physical_Variables;
   // Set the pointer to the external pressure
   Lambda_pt = new double(0.0);
   Mu_pt = new double(0.1);
@@ -414,78 +413,110 @@ BratuProblem<ELEMENT>::BratuProblem(const unsigned& Nx)
   Trace_node_pt = mesh_pt()->finite_element_pt(n_element / 2)->node_pt(0);
 
   cout << assign_eqn_numbers() << " Equation numbers assigned" << std::endl;
+
+  // Compute derivatives with respect to parameters mu and lambda
+  // analytically
+  set_analytic_dparameter(Mu_pt);
+  set_analytic_dparameter(Lambda_pt);
+
+  // Open an output trace file
+  Trace.open("trace.dat");
+  Trace_mu.open("trace_mu.dat");
+}
+
+// Destructor
+template<class ELEMENT>
+BratuProblem<ELEMENT>::~BratuProblem()
+{
+  Trace.close();
+  Trace_mu.close();
+  delete Lambda_pt;
+  delete Mu_pt;
 }
 
 // Define the solve function, disp ctl and then continuation
 template<class ELEMENT>
-void BratuProblem<ELEMENT>::solve()
+void BratuProblem<ELEMENT>::arc_length_step_in_lambda()
 {
   // Set the desired number of Newton iterations
   Desired_newton_iterations_ds = 2;
   Desired_proportion_of_arc_length = 0.5;
-  // Open an output trace file
-  ofstream trace("trace.dat");
   double ds = 0.05;
   // Let's have a look at the solution
   for (unsigned i = 0; i < 5; i++)
   {
-    ds = arc_length_step_solve(Global_Physical_Variables::Lambda_pt, ds);
+    ds = arc_length_step_solve(Lambda_pt, ds);
 
     // Output the pressure
-    trace << *Global_Physical_Variables::Lambda_pt
+    Trace << *Lambda_pt
           << " "
           // Position of first trace node
           << Trace_node_pt->x(0) << " " << Trace_node_pt->value(0) << " "
           << std::endl;
   }
-  trace.close();
+}
 
-  trace.open("trace_mu.dat");
+// Define the solve function, disp ctl and then continuation
+template<class ELEMENT>
+void BratuProblem<ELEMENT>::activate_tracking_in_lambda()
+{
+  activate_fold_tracking(Lambda_pt);
+}
 
-  using namespace Global_Physical_Variables;
+// Define the solve function, disp ctl and then continuation
+template<class ELEMENT>
+void BratuProblem<ELEMENT>::solve_for_the_fold()
+{
   *Mu_pt = 2.0 * atan(1.0);
-
-
-  activate_fold_tracking(Global_Physical_Variables::Lambda_pt);
-
 
   newton_solve();
 
-
-  std::cout << "Fold at " << *Global_Physical_Variables::Lambda_pt << std::endl;
-  trace << *Mu_pt << " " << *Lambda_pt << " " << Trace_node_pt->x(0) << " "
-        << Trace_node_pt->value(0) << std::endl;
-
+  std::cout << "Fold at " << *Lambda_pt << std::endl;
+  Trace_mu << *Mu_pt << " " << *Lambda_pt << " " << Trace_node_pt->x(0) << " "
+           << Trace_node_pt->value(0) << std::endl;
 
   reset_arc_length_parameters();
+}
 
+// Define the solve function, disp ctl and then continuation
+template<class ELEMENT>
+void BratuProblem<ELEMENT>::arc_length_step_in_mu()
+{
   Desired_proportion_of_arc_length = 0.9;
   Desired_newton_iterations_ds = 2;
 
-  ds = 0.01;
+  double ds = 0.01;
   for (unsigned i = 0; i < 15; i++)
   {
     ds = arc_length_step_solve(Mu_pt, ds);
-    trace << *Mu_pt << " " << *Lambda_pt << " " << Trace_node_pt->x(0) << " "
-          << Trace_node_pt->value(0) << std::endl;
+    Trace_mu << *Mu_pt << " " << *Lambda_pt << " " << Trace_node_pt->x(0) << " "
+             << Trace_node_pt->value(0) << std::endl;
   }
-
-  trace.close();
-
-  deactivate_bifurcation_tracking();
 }
 
 // Set up and solve the problem
 int main()
 {
-  // Length of domain
-  // Set up the problem
-  BratuProblem<GelfandBratuElement<3>> problem(100);
+  const unsigned number_of_elements = 100;
+  const unsigned number_of_nodes = 3;
+  // Create the problem with the specified number of elements.
+  // The elements solve the Gelfand-Bratu equation with the given number of
+  // nodes.
+  BratuProblem<GelfandBratuElement<number_of_nodes>> problem(
+    number_of_elements);
 
-  // Compute derivatives with respect to parameters mu and lambda
-  // analytically
-  problem.set_analytic_dparameter(Global_Physical_Variables::Mu_pt);
-  problem.set_analytic_dparameter(Global_Physical_Variables::Lambda_pt);
-  // Solve the problem
-  problem.solve();
+  // Continue in lambda
+  problem.arc_length_step_in_lambda();
+
+  // Constrain the problem to the solve the problem for lambda?
+  problem.activate_tracking_in_lambda();
+
+  // Solve the problem for the fold bifurcation point
+  problem.solve_for_the_fold();
+
+  // Continue from fold point in mu
+  problem.arc_length_step_in_mu();
+
+  // Stop tracking in lambda
+  problem.deactivate_bifurcation_tracking();
 }
