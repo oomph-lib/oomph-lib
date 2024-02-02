@@ -42,15 +42,6 @@ using namespace std;
 
 using namespace oomph;
 
-//========================================================================
-/// Global variables that represent physical properties
-//========================================================================
-namespace Global_Physical_Variables
-{
-  double* Lambda_pt;
-  double* Mu_pt;
-} // namespace Global_Physical_Variables
-
 class PredatorPreyElement : public GeneralisedElement
 {
   double* Lambda_pt;
@@ -210,22 +201,36 @@ public:
 template<class ELEMENT>
 class PredPreyProblem : public Problem
 {
+  double* Lambda_pt;
+  double* Mu_pt;
+  ofstream Trace;
+  ofstream Trace_hopf;
+  ofstream Trace_eig;
+  ofstream Trace_vec;
+
 public:
   // Constructor
   PredPreyProblem();
+
+  // Destructor
+  ~PredPreyProblem();
 
   // Update functions are both empty
   void actions_after_newton_solve() {}
   void actions_before_newton_solve() {}
   void actions_before_newton_convergence_check() {}
 
-  void solve();
+  void arc_length_step_in_lambda();
+  void activate_hopf_tracking_in_lambda();
+  void solve_for_the_hopf();
+  void arc_length_step_in_mu();
 };
 
 // Constructor
 template<class ELEMENT>
 PredPreyProblem<ELEMENT>::PredPreyProblem()
 {
+  // Set the eigensolver
   eigen_solver_pt() = new LAPACK_QZ();
 
   // Now create the mesh
@@ -236,120 +241,151 @@ PredPreyProblem<ELEMENT>::PredPreyProblem()
   mesh_pt()->add_element_pt(elem_pt);
 
   // Assign the physical parameters
-  using namespace Global_Physical_Variables;
   // Set the pointer to the external pressure
-  Lambda_pt = new double(0.5); // 0.7
-  Mu_pt = new double(4.0); //(5.0);
+  Lambda_pt = new double(0.5);
+  Mu_pt = new double(4.0);
 
   // Set the load function
   elem_pt->lambda_pt() = Lambda_pt;
   elem_pt->mu_pt() = Mu_pt;
 
-  // elem_pt->internal_data_pt(0)->set_value(0,0.5);
-  // elem_pt->internal_data_pt(0)->set_value(1,0.125);
-  // elem_pt->internal_data_pt(0)->set_value(2,0.5);
-
   elem_pt->internal_data_pt(0)->set_value(0, 0.25);
   elem_pt->internal_data_pt(0)->set_value(1, 0.125);
   elem_pt->internal_data_pt(0)->set_value(2, -0.1);
 
-
   cout << assign_eqn_numbers() << " Equation numbers assigned" << std::endl;
+
+  Trace.open("trace.dat");
+  Trace_hopf.open("trace_hopf.dat");
+  Trace_eig.open("trace_eig.dat");
+  Trace_vec.open("trace_vec.dat");
 }
 
-// Define the solve function, disp ctl and then continuation
 template<class ELEMENT>
-void PredPreyProblem<ELEMENT>::solve()
+PredPreyProblem<ELEMENT>::~PredPreyProblem()
 {
-  // Assign memory for the eigenvalues and eigenvectors
+  Trace.close();
+  Trace_hopf.close();
+  Trace_eig.close();
+  Trace_vec.close();
+  delete Lambda_pt;
+  delete Mu_pt;
+}
+
+template<class ELEMENT>
+void PredPreyProblem<ELEMENT>::arc_length_step_in_lambda()
+{
   Vector<complex<double>> eigenvalues;
   Vector<DoubleVector> eigenvector_real;
   Vector<DoubleVector> eigenvector_imag;
 
   Desired_newton_iterations_ds = 2;
   Desired_proportion_of_arc_length = 0.5;
-  // Open an output trace file
-  ofstream trace("trace.dat");
   double ds = -0.05;
   // Let's have a look at the solution
   for (unsigned i = 0; i < 4 /*15*/; i++)
   {
-    //*Global_Physical_Variables::Lambda_pt += 0.1;
+    //*Lambda_pt += 0.1;
     // newton_solve();
-    /*ds = */ arc_length_step_solve(Global_Physical_Variables::Lambda_pt, ds);
+    /*ds = */ arc_length_step_solve(Lambda_pt, ds);
 
     // Output the pressure
-    trace << *Global_Physical_Variables::Lambda_pt << " "
+    Trace << *Lambda_pt << " "
           << mesh_pt()->element_pt(0)->internal_data_pt(0)->value(0) << " "
           << mesh_pt()->element_pt(0)->internal_data_pt(0)->value(1) << " "
           << mesh_pt()->element_pt(0)->internal_data_pt(0)->value(2)
           << std::endl;
 
-    solve_eigenproblem(3, eigenvalues, eigenvector_real, eigenvector_imag);
-
+    solve_eigenproblem(1, eigenvalues, eigenvector_real, eigenvector_imag);
     for (unsigned e = 0; e < eigenvalues.size(); e++)
     {
-      std::cout << eigenvalues[e] << std::endl;
+      Trace_eig << eigenvalues[e];
     }
+    Trace_eig << endl;
   }
+}
 
-  trace.close();
+template<class ELEMENT>
+void PredPreyProblem<ELEMENT>::activate_hopf_tracking_in_lambda()
+{
+  // Assign memory for the eigenvalues and eigenvectors
+  Vector<complex<double>> eigenvalues;
+  Vector<DoubleVector> eigenvector_real;
+  Vector<DoubleVector> eigenvector_imag;
 
-  Max_newton_iterations = 10;
-  for (unsigned i = 0; i < 3; i++)
+  solve_eigenproblem(1, eigenvalues, eigenvector_real, eigenvector_imag);
+
+  const unsigned N = eigenvector_real.size();
+  for (unsigned i = 0; i < N; i++)
   {
-    std::cout << eigenvector_real[0][i] << " " << eigenvector_imag[0][i]
+    Trace_vec << eigenvector_real[0][i] << " " << eigenvector_imag[0][i]
               << std::endl;
   }
-  // activate_hopf_tracking(Global_Physical_Variables::Lambda_pt);
-  activate_hopf_tracking(Global_Physical_Variables::Lambda_pt,
-                         eigenvalues[0].imag(),
-                         eigenvector_real[0],
-                         eigenvector_imag[0]);
+  // activate_hopf_tracking(Lambda_pt);
+  activate_hopf_tracking(
+    Lambda_pt, eigenvalues[0].imag(), eigenvector_real[0], eigenvector_imag[0]);
+}
 
-
+// Define the solve function, disp ctl and then continuation
+template<class ELEMENT>
+void PredPreyProblem<ELEMENT>::solve_for_the_hopf()
+{
+  Max_newton_iterations = 10;
   newton_solve();
 
-  std::cout << "Hopf bifurcation found at "
-            << *Global_Physical_Variables::Lambda_pt << " " << dof(ndof() - 1)
-            << " " << mesh_pt()->element_pt(0)->internal_data_pt(0)->value(0)
-            << " " << mesh_pt()->element_pt(0)->internal_data_pt(0)->value(1)
-            << " " << mesh_pt()->element_pt(0)->internal_data_pt(0)->value(2)
+  std::cout << "Hopf bifurcation found at " << *Lambda_pt << " "
+            << dof(ndof() - 1) << " "
+            << mesh_pt()->element_pt(0)->internal_data_pt(0)->value(0) << " "
+            << mesh_pt()->element_pt(0)->internal_data_pt(0)->value(1) << " "
+            << mesh_pt()->element_pt(0)->internal_data_pt(0)->value(2)
             << std::endl;
 
-  trace.open("trace_hopf.dat");
   // Output the details
-  trace << *Global_Physical_Variables::Lambda_pt << " "
-        << *Global_Physical_Variables::Mu_pt << " " << dof(ndof() - 1) << " "
-        << mesh_pt()->element_pt(0)->internal_data_pt(0)->value(0) << " "
-        << mesh_pt()->element_pt(0)->internal_data_pt(0)->value(1) << " "
-        << mesh_pt()->element_pt(0)->internal_data_pt(0)->value(2) << std::endl;
+  Trace_hopf << *Lambda_pt << " " << *Mu_pt << " " << dof(ndof() - 1) << " "
+             << mesh_pt()->element_pt(0)->internal_data_pt(0)->value(0) << " "
+             << mesh_pt()->element_pt(0)->internal_data_pt(0)->value(1) << " "
+             << mesh_pt()->element_pt(0)->internal_data_pt(0)->value(2)
+             << std::endl;
+}
 
+// Define the solve function, disp ctl and then continuation
+template<class ELEMENT>
+void PredPreyProblem<ELEMENT>::arc_length_step_in_mu()
+{
   // Let's track the old hopfer
-  ds = -0.01;
+  double ds = -0.01;
   // Let's have a look at the solution
   for (unsigned i = 0; i < 90; i++)
   {
-    /*ds = */ arc_length_step_solve(Global_Physical_Variables::Mu_pt, ds);
+    /*ds = */ arc_length_step_solve(Mu_pt, ds);
 
     // Output the pressure
-    trace << *Global_Physical_Variables::Lambda_pt << " "
-          << *Global_Physical_Variables::Mu_pt << " " << dof(ndof() - 1) << " "
-          << mesh_pt()->element_pt(0)->internal_data_pt(0)->value(0) << " "
-          << mesh_pt()->element_pt(0)->internal_data_pt(0)->value(1) << " "
-          << mesh_pt()->element_pt(0)->internal_data_pt(0)->value(2)
-          << std::endl;
+    Trace_hopf << *Lambda_pt << " " << *Mu_pt << " " << dof(ndof() - 1) << " "
+               << mesh_pt()->element_pt(0)->internal_data_pt(0)->value(0) << " "
+               << mesh_pt()->element_pt(0)->internal_data_pt(0)->value(1) << " "
+               << mesh_pt()->element_pt(0)->internal_data_pt(0)->value(2)
+               << std::endl;
   }
-
-  trace.close();
 }
 
 // Set up and solve the problem
 int main()
 {
-  // Length of domain
-  // Set up the problem
+  // Create the problem
   PredPreyProblem<PredatorPreyElement> problem;
+
+  // Continue in lambda
+  problem.arc_length_step_in_lambda();
+
+  // We want to seek the hopf bifurcation by varying lambda.
+  problem.activate_hopf_tracking_in_lambda();
+
   // Solve the problem
-  problem.solve();
+  problem.solve_for_the_hopf();
+
+  // Continue the hopf bifurcation in mu
+  problem.arc_length_step_in_mu();
+
+  // Stop bifurcation tracking
+  problem.deactivate_bifurcation_tracking();
 }
