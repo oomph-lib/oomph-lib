@@ -7,8 +7,6 @@
 # what's missing from outside the code. So unfortunately can't do anything
 # fancy with hypre tests etc..
 
-# Add a check for arpack... at the moment we just assume it's not there
-# because I don't know how to look for it!
 
 
 # ASSUMPTIONS:
@@ -18,7 +16,6 @@
 
 # Driver requirements are currently determined by:
 # * mpi driver <=> has "mpi" in the path.
-# * arpack drivers <=> has "eigenproblem" in the path.
 # but this is easy to change by modifying e.g. check_if_mpi_driver(...)
 
 
@@ -283,10 +280,6 @@ def check_if_mpi_driver(d: str) -> bool:
     return "mpi" in d
 
 
-def check_if_arpack_driver(d: str) -> bool:
-    return "eigenproblems" in d
-
-
 def check_if_hlib_driver(d: str) -> bool:
     # hlib is in "oomphlib", so take it out in case people use dirs called
     # oomphlib with no -.
@@ -495,8 +488,6 @@ def main():
     # Figure out if we have various features
     # ============================================================
 
-    # ??ds there MUST be a way to detect this somehow...
-    have_arpack = False
 
     # Find out if we have mpi by looking for "OOMPH_HAS_MPI" in flags in
     # Makefile.
@@ -514,11 +505,6 @@ def main():
     # this feature and have_feature--a boolean for if we have this feature
     # or not.
     oomph_features = ([
-        {
-            'feature_name': "arpack",
-            'check_driver_function': check_if_arpack_driver,
-            'have_feature': have_arpack
-        },
         {
             'feature_name': "mpi",
             'check_driver_function': check_if_mpi_driver,
