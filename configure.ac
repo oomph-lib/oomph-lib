@@ -665,34 +665,6 @@ fi;
 AM_CONDITIONAL(HAVE_HSL_SOURCES, test x$have_hsl_sources = xtrue)
 
 
-# Do we have the sources for the ARPACK Arnoldi solver?
-#---------------------------------------------------
-AC_CHECK_FILES(external_src/oomph_arpack/all_arpack_sources.f,
-               echo "Found external_src/oomph_arpack/all_arpack_sources.f"; have_arpack_sources=true,
-               echo "Not found external_src/oomph_arpack/all_arpack_sources.f"; have_arpack_sources=false)
-
-#If we don't have them check if they are private/external_src and make sym link
-#------------------------------------------------------------------------------
-if test x$have_arpack_sources = xfalse; then \
-
-  AC_CHECK_FILES(private/external_src/arpack/all_arpack_sources.f,
-                 echo "Found private/external_src/arpack/all_arpack_sources.f"; have_arpack_sources_in_private_external_src=true,
-                 echo "Not found private/external_src/arpack/all_arpack_sources.f"; have_arpack_sources_in_private_external_src=false)
-
-  if test x$have_arpack_sources_in_private_external_src = xtrue; then \
-    echo "Making symlink"; \
-    ln -s ../../private/external_src/arpack/all_arpack_sources.f external_src/oomph_arpack/all_arpack_sources.f;\
-    have_arpack_sources=true;\
-  else \
-    echo "Not making symlink";\
-  fi; \
-
-fi;
-
-AM_CONDITIONAL(HAVE_ARPACK_SOURCES, test x$have_arpack_sources = xtrue)
-AM_CONDITIONAL(WANT_EIGENPROBLEM_TESTS, test x$have_arpack_sources = xtrue)
-
-
 # Build flags that can be set during configure stage
 #---------------------------------------------------
 
@@ -2966,7 +2938,7 @@ AC_SUBST(AM_CPPFLAGS)
 # These are the third-party libraries distributed with oomph-lib.
 # They are only used if the user hasn't specified his/her own
 # local version of these.
-external_libs='-loomph_hsl -loomph_arpack -loomph_crbond_bessel'
+external_libs='-loomph_hsl -loomph_crbond_bessel'
 
 # Triangle?
 if test x$suppress_triangle = xfalse; then \

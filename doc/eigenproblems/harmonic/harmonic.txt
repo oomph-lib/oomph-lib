@@ -41,13 +41,9 @@ harmonic.cc</A> which solves the problem for the first four eigenvalues.
 
 In \c oomph-lib all eigenproblems are solved by using interfaces to third-party
 libraries. The default is LAPACK's (direct) QZ solver which is included with
-the library. An interface is also provided to the serial version of 
-ARPACK, an iterative solver, but we are not allowed to 
-redistribute the source code, so it
-must be downloaded separately. That said, much of 
-the functionality of ARPACK has
-been superseded by the ANASAZI solver that is part of The Trilinos
-Project. Thus, if you want to solve small problems, use the default QZ
+the library. An interface is also provided to the ANASAZI solver, part
+of The Trilinos Project, a suite of iterative solvers.
+Thus, if you want to solve small problems, use the default QZ
 solver; for larger problems, we recommend using ANASAZI.
 
 <HR>
@@ -226,8 +222,8 @@ and (@R[1DEigen_BC]@) in a specific \c Problem object, \c
 HarmonicProblem, which is templated by the element type and the
 eigensolver. We use \c QHarmonicElement<3>, a quadratic element and our
 three different eigensolvers, including timing statements to compare
-the three approaches. Note that if you do not have Trilinos or ARPACK
-installed then only the LAPACK_QZ solver will do anything. 
+the three approaches. Note that if you do not have Trilinos installed
+then only the LAPACK_QZ solver will do anything. 
 
 The problem class takes a single argument corresponding to the number
 of elements used to discretise the domain and contains a member
