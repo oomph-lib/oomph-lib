@@ -37,7 +37,7 @@ oomph_add_executable(
 # ---------------------------------- TESTING ----------------------------------
 
 oomph_add_test(
-  TEST_NAME mpi.boussinesq_convection
+  TEST_NAME mpi.multi_domain.boussinesq_convection
   DEPENDS_ON multi_domain_boussinesq_convection
              multi_domain_boussinesq_convection_fd multi_domain_ref_b_convection
              refineable_b_convection
@@ -52,10 +52,11 @@ oomph_add_test(
   LABELS mpi boussinesq_convection)
 
 # Don't run this test alongside any other tests
-set_tests_properties(mpi.boussinesq_convection PROPERTIES PROCESSORS
-                                                          ${OOMPH_MPI_NUM_PROC})
+set_tests_properties(mpi.multi_domain.boussinesq_convection
+                     PROPERTIES PROCESSORS ${OOMPH_MPI_NUM_PROC})
 if(APPLE)
-  set_tests_properties(mpi.boussinesq_convection PROPERTIES DISABLED FALSE)
+  set_tests_properties(mpi.multi_domain.boussinesq_convection
+                       PROPERTIES DISABLED FALSE)
 endif()
 
 message(VERBOSE "Leaving boussinesq_convection subdirectory")

@@ -21,7 +21,7 @@ endif()
 
 if(OOMPH_HAS_HYPRE AND OOMPH_HAS_TRILINOS)
   oomph_add_test(
-    TEST_NAME mpi.pseudo_solid_collapsible_tube
+    TEST_NAME mpi.multi_domain.pseudo_solid_collapsible_tube
     DEPENDS_ON pseudo_solid_collapsible_tube
     COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
     TEST_FILES validate.sh validata pseudo_solid_collapsible_tube.mcr
@@ -29,7 +29,7 @@ if(OOMPH_HAS_HYPRE AND OOMPH_HAS_TRILINOS)
     LABELS mpi pseudo_solid_collapsible_tube)
 
   # Don't run this test alongside any other tests
-  set_tests_properties(mpi.pseudo_solid_collapsible_tube
+  set_tests_properties(mpi.multi_domain.pseudo_solid_collapsible_tube
                        PROPERTIES PROCESSORS ${OOMPH_MPI_NUM_PROC})
 endif()
 

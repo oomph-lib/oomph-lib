@@ -22,7 +22,7 @@ oomph_add_executable(
 # ---------------------------------- TESTING ----------------------------------
 
 oomph_add_test(
-  TEST_NAME mpi.adaptive_driven_cavity
+  TEST_NAME mpi.distribution.adaptive_driven_cavity
   DEPENDS_ON adaptive_driven_cavity adaptive_driven_cavity_load_balance
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
   TEST_FILES validate.sh validata adaptive_cavity_1_partition.dat
@@ -31,10 +31,11 @@ oomph_add_test(
   LABELS mpi adaptive_driven_cavity adapt)
 
 # Don't run this test alongside any other tests
-set_tests_properties(mpi.adaptive_driven_cavity
+set_tests_properties(mpi.distribution.adaptive_driven_cavity
                      PROPERTIES PROCESSORS ${OOMPH_MPI_NUM_PROC})
 if(APPLE)
-  set_tests_properties(mpi.adaptive_driven_cavity PROPERTIES DISABLED FALSE)
+  set_tests_properties(mpi.distribution.adaptive_driven_cavity
+                       PROPERTIES DISABLED FALSE)
 endif()
 
 message(VERBOSE "Leaving adaptive_driven_cavity subdirectory")

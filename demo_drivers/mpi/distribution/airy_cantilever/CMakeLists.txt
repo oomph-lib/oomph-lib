@@ -18,7 +18,7 @@ oomph_add_executable(
 # ---------------------------------- TESTING ----------------------------------
 
 oomph_add_test(
-  TEST_NAME mpi.airy_cantilever
+  TEST_NAME mpi.distribution.airy_cantilever
   DEPENDS_ON airy_cantilever2_adapt
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
   TEST_FILES validate.sh
@@ -36,8 +36,8 @@ oomph_add_test(
   LABELS mpi airy_cantilever)
 
 # Don't run this test alongside any other tests
-set_tests_properties(mpi.airy_cantilever PROPERTIES PROCESSORS
-                                                    ${OOMPH_MPI_NUM_PROC})
+set_tests_properties(mpi.distribution.airy_cantilever
+                     PROPERTIES PROCESSORS ${OOMPH_MPI_NUM_PROC})
 
 message(VERBOSE "Leaving airy_cantilever subdirectory")
 # ------------------------------------------------------------------------------

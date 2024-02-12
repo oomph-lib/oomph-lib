@@ -17,7 +17,7 @@ oomph_add_executable(
 # ---------------------------------- TESTING ----------------------------------
 
 oomph_add_test(
-  TEST_NAME mpi.three_d_entry_flow
+  TEST_NAME mpi.distribution.three_d_entry_flow
   DEPENDS_ON three_d_entry_flow
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
   TEST_FILES validate.sh validata three_d_entry_flow_1_partition.dat
@@ -25,10 +25,11 @@ oomph_add_test(
   LABELS mpi three_d_entry_flow)
 
 # Don't run this test alongside any other tests
-set_tests_properties(mpi.three_d_entry_flow PROPERTIES PROCESSORS
-                                                       ${OOMPH_MPI_NUM_PROC})
+set_tests_properties(mpi.distribution.three_d_entry_flow
+                     PROPERTIES PROCESSORS ${OOMPH_MPI_NUM_PROC})
 if(APPLE)
-  set_tests_properties(mpi.three_d_entry_flow PROPERTIES DISABLED FALSE)
+  set_tests_properties(mpi.distribution.three_d_entry_flow PROPERTIES DISABLED
+                                                                      FALSE)
 endif()
 
 message(VERBOSE "Leaving three_d_entry_flow subdirectory")

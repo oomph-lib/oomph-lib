@@ -17,15 +17,15 @@ oomph_add_executable(
 # ---------------------------------- TESTING ----------------------------------
 
 oomph_add_test(
-  TEST_NAME mpi.hp_adaptive_poisson
+  TEST_NAME mpi.distribution.hp_adaptive_poisson
   DEPENDS_ON two_d_poisson_hp_adapt
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
   TEST_FILES validate.sh validata hp_adaptive_poisson_partition.dat
   LABELS mpi hp_adaptive_poisson adapt)
 
 # Don't run this test alongside any other tests
-set_tests_properties(mpi.hp_adaptive_poisson PROPERTIES PROCESSORS
-                                                        ${OOMPH_MPI_NUM_PROC})
+set_tests_properties(mpi.distribution.hp_adaptive_poisson
+                     PROPERTIES PROCESSORS ${OOMPH_MPI_NUM_PROC})
 
 message(VERBOSE "Leaving hp_adaptive_poisson subdirectory")
 # ------------------------------------------------------------------------------

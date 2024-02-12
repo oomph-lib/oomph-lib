@@ -17,14 +17,14 @@ oomph_add_executable(
 # ---------------------------------- TESTING ----------------------------------
 
 oomph_add_test(
-  TEST_NAME mpi.two_d_poisson_flux_bc_adapt
+  TEST_NAME mpi.distribution.two_d_poisson_flux_bc_adapt
   DEPENDS_ON two_d_poisson_flux_bc_adapt
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
   TEST_FILES validate.sh validata two_d_poisson_flux_partition.dat
   LABELS mpi two_d_poisson_flux_bc_adapt adapt)
 
 # Don't run this test alongside any other tests
-set_tests_properties(mpi.two_d_poisson_flux_bc_adapt
+set_tests_properties(mpi.distribution.two_d_poisson_flux_bc_adapt
                      PROPERTIES PROCESSORS ${OOMPH_MPI_NUM_PROC})
 
 message(VERBOSE "Leaving two_d_poisson_flux_bc_adapt subdirectory")

@@ -24,16 +24,17 @@ oomph_add_executable(
 # ---------------------------------- TESTING ----------------------------------
 
 oomph_add_test(
-  TEST_NAME mpi.turek_flag
+  TEST_NAME mpi.multi_domain.turek_flag
   DEPENDS_ON turek_flag turek_flag_load_balance
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
   TEST_FILES validate.sh validata turek_flag_partition.dat load_balance.mcr
   LABELS mpi turek_flag)
 
 # Don't run this test alongside any other tests
-set_tests_properties(mpi.turek_flag PROPERTIES PROCESSORS ${OOMPH_MPI_NUM_PROC})
+set_tests_properties(mpi.multi_domain.turek_flag
+                     PROPERTIES PROCESSORS ${OOMPH_MPI_NUM_PROC})
 if(APPLE)
-  set_tests_properties(mpi.turek_flag PROPERTIES DISABLED FALSE)
+  set_tests_properties(mpi.multi_domain.turek_flag PROPERTIES DISABLED FALSE)
 endif()
 
 message(VERBOSE "Leaving turek_flag subdirectory")

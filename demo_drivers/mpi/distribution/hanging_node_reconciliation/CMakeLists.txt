@@ -22,7 +22,7 @@ oomph_add_executable(
 # ---------------------------------- TESTING ----------------------------------
 
 oomph_add_test(
-  TEST_NAME mpi.hanging_node_reconciliation
+  TEST_NAME mpi.distribution.hanging_node_reconciliation
   DEPENDS_ON adaptive_driven_cavity hp_adaptive_driven_cavity
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
   TEST_FILES validate.sh validata nodes_cr.lay nodes.lay
@@ -30,7 +30,7 @@ oomph_add_test(
   LABELS mpi hanging_node_reconciliation)
 
 # Don't run this test alongside any other tests
-set_tests_properties(mpi.hanging_node_reconciliation
+set_tests_properties(mpi.distribution.hanging_node_reconciliation
                      PROPERTIES PROCESSORS ${OOMPH_MPI_NUM_PROC})
 
 message(VERBOSE "Leaving hanging_node_reconciliation subdirectory")

@@ -27,7 +27,7 @@ oomph_add_executable(
 # ---------------------------------- TESTING ----------------------------------
 
 oomph_add_test(
-  TEST_NAME mpi.two_d_unstructured_adaptive_poisson
+  TEST_NAME mpi.distribution.two_d_unstructured_adaptive_poisson
   DEPENDS_ON two_d_parallel_unstructured_adaptive_poisson
              unstructured_adaptive_mesh_two_outer_boundaries
              unstructured_adaptive_mesh_two_outer_boundaries_crossed
@@ -36,7 +36,7 @@ oomph_add_test(
   LABELS mpi two_d_unstructured_adaptive_poisson adapt)
 
 # Don't run this test alongside any other tests
-set_tests_properties(mpi.two_d_unstructured_adaptive_poisson
+set_tests_properties(mpi.distribution.two_d_unstructured_adaptive_poisson
                      PROPERTIES PROCESSORS 4)
 
 message(VERBOSE "Leaving two_d_unstructured_adaptive_poisson subdirectory")

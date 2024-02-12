@@ -17,14 +17,14 @@ oomph_add_executable(
 # ---------------------------------- TESTING ----------------------------------
 
 oomph_add_test(
-  TEST_NAME mpi.three_d_prescribed_displ_lagr_mult
+  TEST_NAME mpi.distribution.three_d_prescribed_displ_lagr_mult
   DEPENDS_ON three_d_prescribed_displ_lagr_mult
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
   TEST_FILES validate.sh validata distr_block_prescr.mcr
   LABELS mpi three_d_prescribed_displ_lagr_mult)
 
 # Don't run this test alongside any other tests
-set_tests_properties(mpi.three_d_prescribed_displ_lagr_mult
+set_tests_properties(mpi.distribution.three_d_prescribed_displ_lagr_mult
                      PROPERTIES PROCESSORS ${OOMPH_MPI_NUM_PROC})
 
 message(VERBOSE "Leaving three_d_prescribed_displ_lagr_mult subdirectory")

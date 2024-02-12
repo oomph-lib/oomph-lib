@@ -17,7 +17,7 @@ oomph_add_executable(
 # ---------------------------------- TESTING ----------------------------------
 
 oomph_add_test(
-  TEST_NAME mpi.restart
+  TEST_NAME mpi.distribution.restart
   DEPENDS_ON two_d_unsteady_heat_2adapt_load_balance
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
   TEST_FILES validate.sh
@@ -30,7 +30,8 @@ oomph_add_test(
   LABELS mpi restart)
 
 # Don't run this test alongside any other tests
-set_tests_properties(mpi.restart PROPERTIES PROCESSORS ${OOMPH_MPI_NUM_PROC})
+set_tests_properties(mpi.distribution.restart PROPERTIES PROCESSORS
+                                                         ${OOMPH_MPI_NUM_PROC})
 
 message(VERBOSE "Leaving restart subdirectory")
 # ------------------------------------------------------------------------------

@@ -17,15 +17,15 @@ oomph_add_executable(
 # ---------------------------------- TESTING ----------------------------------
 
 oomph_add_test(
-  TEST_NAME mpi.clamped_shell
+  TEST_NAME mpi.distribution.clamped_shell
   DEPENDS_ON clamped_shell_with_arclength_cont
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
   TEST_FILES validate.sh validata
   LABELS mpi clamped_shell)
 
 # Don't run this test alongside any other tests
-set_tests_properties(mpi.clamped_shell PROPERTIES PROCESSORS
-                                                  ${OOMPH_MPI_NUM_PROC})
+set_tests_properties(mpi.distribution.clamped_shell
+                     PROPERTIES PROCESSORS ${OOMPH_MPI_NUM_PROC})
 
 message(VERBOSE "Leaving clamped_shell subdirectory")
 # ------------------------------------------------------------------------------
