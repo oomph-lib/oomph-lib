@@ -988,7 +988,7 @@ namespace oomph
     // Catch any exceptions thrown in the segregated solver
     catch (SegregatedSolverError& error)
     {
-      if (!error.Ran_out_of_iterations)
+      if (!error.ran_out_of_iterations())
       {
         std::ostringstream error_stream;
         error_stream << "Error occured in Segregated solver. " << std::endl;
@@ -1082,7 +1082,7 @@ namespace oomph
     // Catch any exceptions thrown in the segregated solver
     catch (SegregatedSolverError& error)
     {
-      if (!error.Ran_out_of_iterations)
+      if (!error.ran_out_of_iterations())
       {
         std::ostringstream error_stream;
         error_stream << "Error occured in Segregated solver. " << std::endl;

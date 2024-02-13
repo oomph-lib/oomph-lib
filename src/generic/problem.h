@@ -3102,7 +3102,7 @@ namespace oomph
   //=======================================================================
   class NewtonSolverError
   {
-  public:
+  private:
     /// Error in the linear solver
     bool linear_solver_error;
 
@@ -3112,6 +3112,7 @@ namespace oomph
     /// Max. residual when Newton solver died
     double maxres;
 
+  public:
     /// Default constructor, does nothing
     NewtonSolverError() : linear_solver_error(false), iterations(0), maxres(0.0)
     {
@@ -3129,6 +3130,25 @@ namespace oomph
         iterations(Passed_iterations),
         maxres(Passed_maxres)
     {
+    }
+
+    /// Access function to the error in the linear solver
+    bool get_linear_solver_error()
+    {
+      return linear_solver_error;
+    }
+
+    /// Access function to Max. # of iterations performed when the Newton solver
+    /// died
+    unsigned get_iterations()
+    {
+      return iterations;
+    }
+
+    /// Access function to Max. residual when Newton solver died
+    double get_maxres()
+    {
+      return maxres;
     }
   };
 

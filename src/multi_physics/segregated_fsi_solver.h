@@ -149,6 +149,13 @@ namespace oomph
       Ran_out_of_iterations = ran_out_of_iterations;
     }
 
+    /// Access function to whether we ran out of iterations before giving up.
+    bool ran_out_of_iterations()
+    {
+      return Ran_out_of_iterations;
+    }
+
+  private:
     /// Boolean indicating if the error occured because
     /// we ran out of iterations
     bool Ran_out_of_iterations;
