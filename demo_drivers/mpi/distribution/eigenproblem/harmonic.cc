@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -375,10 +375,6 @@ HarmonicProblem<ELEMENT,EIGEN_SOLVER>::HarmonicProblem(
  const unsigned& n_element)
 { 
  this->eigen_solver_pt() = new EIGEN_SOLVER;
- 
- //Get the positive eigenvalues, shift is zero by default
- static_cast<EIGEN_SOLVER*>(eigen_solver_pt())
-  ->get_eigenvalues_right_of_shift(); 
 
  //Set domain length 
  double L=1.0;
@@ -436,65 +432,68 @@ void HarmonicProblem<ELEMENT,EIGEN_SOLVER>::
 solve(const unsigned& label)
 { 
  //Set external storage for the eigenvalues
- Vector<complex<double> > eigenvalues;
+ Vector<complex<double> > eigenvalue;
  //Set external storage for the eigenvectors
- Vector<DoubleVector> eigenvectors;
+ Vector<DoubleVector> eigenvector_real;
+ Vector<DoubleVector> eigenvector_imag;
  //Desired number eigenvalues
  unsigned n_eval=4;
-
+ 
  //Solve the eigenproblem
- this->solve_eigenproblem(n_eval,eigenvalues,eigenvectors);
+ this->solve_eigenproblem(n_eval,eigenvalue,eigenvector_real,eigenvector_imag);
+
 
  //We now need to sort the output based on the size of the real part
  //of the eigenvalues.
  //This is because the solver does not necessarily sort the eigenvalues
- Vector<complex<double> > sorted_eigenvalues = eigenvalues;
- sort(sorted_eigenvalues.begin(),sorted_eigenvalues.end(),
+ Vector<complex<double> > sorted_eigenvalue = eigenvalue;
+ sort(sorted_eigenvalue.begin(),sorted_eigenvalue.end(),
       ComplexLess<double>());
 
  //Read out the second smallest eigenvalue
- complex<double> temp_evalue = sorted_eigenvalues[1];
+ complex<double> temp_evalue = sorted_eigenvalue[1];
  unsigned second_smallest_index=0;
  //Loop over the unsorted eigenvalues and find the entry that corresponds
  //to our second smallest eigenvalue.
- for(unsigned i=0;i<eigenvalues.size();i++)
+ for(unsigned i=0;i<eigenvalue.size();i++)
   {
    //Note that equality tests for doubles are bad, but it was just
    //sorted data, so should be fine
-   if(eigenvalues[i] == temp_evalue) {second_smallest_index=i; break;}
+   if(eigenvalue[i] == temp_evalue) {second_smallest_index=i; break;}
   }
-
+ 
  //Normalise the eigenvector 
  {
   //Get the dimension of the eigenvector
-  unsigned dim = eigenvectors[second_smallest_index].nrow_local();
+  unsigned dim = eigenvector_real[second_smallest_index].nrow_local();
   double length=0.0;
   //Loop over all the entries
   for(unsigned i=0;i<dim;i++)
    {
     //Add the contribution to the length
-    length += std::pow(eigenvectors[second_smallest_index][i],2.0);
+    length += std::pow(eigenvector_real[second_smallest_index][i],2.0);
    }
-  //Now take the magnitude
-  length = sqrt(length);
+//Add contributions from all processors
 #ifdef OOMPH_HAS_MPI
   double length2 = length;
-  if (eigenvectors[second_smallest_index].distributed() && 
-      eigenvectors[second_smallest_index].distribution_pt()
+  if (eigenvector_real[second_smallest_index].distributed() && 
+      eigenvector_real[second_smallest_index].distribution_pt()
       ->communicator_pt()->nproc() > 1)
    {
      MPI_Allreduce(&length,&length2,1,MPI_DOUBLE,MPI_SUM,
-                   eigenvectors[second_smallest_index].distribution_pt()
+                   eigenvector_real[second_smallest_index].distribution_pt()
                    ->communicator_pt()->mpi_comm());
    }
   length = length2;
 #endif
+  //Now take the magnitude
+  length = sqrt(length);
   
   //Fix the sign
   int sign=1;
   if(this->communicator_pt()->my_rank()==0)
    {
-    if(eigenvectors[second_smallest_index][0] < 0) {sign = -1;}
+    if(eigenvector_real[second_smallest_index][0] < 0) {sign = -1;}
    }
 
 #ifdef OOMPH_HAS_MPI
@@ -505,12 +504,12 @@ solve(const unsigned& label)
   //Finally normalise
   for(unsigned i=0;i<dim;i++)
    {
-    eigenvectors[second_smallest_index][i] /= length*sign;
+    eigenvector_real[second_smallest_index][i] /= length*sign;
    }
  }
 
  //Now assign the second eigenvector to the dofs of the problem
- this->assign_eigenvector_to_dofs(eigenvectors[second_smallest_index]);
+ this->assign_eigenvector_to_dofs(eigenvector_real[second_smallest_index]);
  //Output solution for this case (label output files with "1")
  this->doc_solution(label);
 
@@ -523,11 +522,11 @@ solve(const unsigned& label)
  for(unsigned i=0;i<n_eval;i++)
   {
    //Print to screen
-   oomph_info << sorted_eigenvalues[i].real() << " " 
-              << sorted_eigenvalues[i].imag() << std::endl;
+   oomph_info << sorted_eigenvalue[i].real() << " " 
+              << sorted_eigenvalue[i].imag() << std::endl;
    //Send to file
-   evalues << sorted_eigenvalues[i].real() << " " 
-           << sorted_eigenvalues[i].imag() << std::endl;
+   evalues << sorted_eigenvalue[i].real() << " " 
+           << sorted_eigenvalue[i].imag() << std::endl;
   }
  
  evalues.close();
@@ -547,11 +546,13 @@ int main(int argc, char **argv)
 #ifdef OOMPH_HAS_MPI
  MPI_Helpers::init(argc,argv);
 #endif
+
+#ifdef OOMPH_HAS_TRILINOS
  // Set up the problem: 
  unsigned n_element=100; //Number of elements
 
-#ifdef OOMPH_HAS_TRILINOS
 //Solve with Anasazi (non distributed)
+//Note that the linear algebra will still be distributed
  clock_t t_start1 = clock();
  {
   HarmonicProblem<QHarmonicElement<3>,ANASAZI> problem(n_element);

@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -277,19 +277,25 @@ namespace oomph
   class CRComplexMatrix : public CRMatrix<std::complex<double>>,
                           public ComplexMatrixBase
   {
-  private:
-    /// Storage for the LU factors as required by SuperLU
-    void* F_factors;
-
-    ///  Info flag for the SuperLU solver
-    int Info;
-
   public:
+    /// Serial matrix multiply method enumeration
+    enum class SerialMatrixMultiplyMethod
+    {
+      Memory_efficient = 0,
+      Fastest = 1,
+      Vector_of_vectors = 2,
+    };
+
+
     /// Default constructor
     CRComplexMatrix() : CRMatrix<std::complex<double>>(), F_factors(0), Info(0)
     {
       // By default SuperLU solves linear systems quietly
       Doc_stats_during_solve = false;
+
+      // Set the serial the default matrix-matrix multiply method
+      Serial_matrix_matrix_multiply_method =
+        SerialMatrixMultiplyMethod::Fastest;
     }
 
     /// Constructor: Pass vector of values, vector of column indices,
@@ -306,6 +312,10 @@ namespace oomph
     {
       // By default SuperLU solves linear systems quietly
       Doc_stats_during_solve = false;
+
+      // Set the default serial matrix-matrix multiply method
+      Serial_matrix_matrix_multiply_method =
+        SerialMatrixMultiplyMethod::Fastest;
     }
 
 
@@ -377,10 +387,54 @@ namespace oomph
     void multiply_transpose(const Vector<std::complex<double>>& x,
                             Vector<std::complex<double>>& soln);
 
+    // \short Add the matrix to matrix_in (CRDoubleMatrix) and return result:
+    // result_matrix = A + matrix_in
+    void add(const CRDoubleMatrix& matrix_in,
+             CRComplexMatrix& result_matrix) const;
+
+    // \short Add the matrix to matrix_in (CRComplexMatrix) and return result:
+    // result_matrix = A + matrix_in
+    void add(const CRComplexMatrix& matrix_in,
+             CRComplexMatrix& result_matrix) const;
+
+    // \short Multiply the matrix by matrix_in (CRComplexMatrix) and returns
+    // result: result=A matrix_in
+    void multiply(const CRComplexMatrix& matrix_in,
+                  CRComplexMatrix& result) const;
+
+    /// \short Access function to Serial_matrix_matrix_multiply_method, the flag
+    /// which determines the matrix matrix multiplication method used for serial
+    /// matrices.
+    SerialMatrixMultiplyMethod& serial_matrix_matrix_multiply_method()
+    {
+      return Serial_matrix_matrix_multiply_method;
+    }
+
+    /// \short Read only access function (const version) to
+    /// Serial_matrix_matrix_multiply_method, the flag
+    /// which determines the matrix matrix multiplication method used for serial
+    /// matrices.
+    SerialMatrixMultiplyMethod serial_matrix_matrix_multiply_method() const
+    {
+      return Serial_matrix_matrix_multiply_method;
+    }
+
   protected:
     /// Flag to indicate if stats are to be displayed during
     /// solution of linear system with SuperLU
     bool Doc_stats_during_solve;
+
+  private:
+    /// \short Storage for the LU factors as required by SuperLU
+    void* F_factors;
+
+    /// \short  Info flag for the SuperLU solver
+    int Info;
+
+    /// \short  A switch variable for selecting the matrix multiply method for
+    /// serial (non-parallel) runs. Note that the parallel case hasn't been
+    /// implemented, so this is used in both cases.
+    SerialMatrixMultiplyMethod Serial_matrix_matrix_multiply_method;
   };
 
 

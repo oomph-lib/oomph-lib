@@ -17,6 +17,7 @@ jobs:
 
     steps:
       - name: Checkout
+<<<<<<< HEAD
         uses: actions/checkout@v3
         with:
           persist-credentials: false
@@ -37,6 +38,17 @@ jobs:
           which doxygen
           doxygen --version
 
+=======
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+
+      - name: Install requirements
+        run: |
+             sudo apt-get install make automake libtool libtool-bin autoconf gfortran g++ texlive texlive-latex-extra texlive-font-utils doxygen
+             doxygen --version
+
+>>>>>>> 9e463548c663f5e4117dda13f297f2ea746b9822
       - name: Pick configuration
         run: cp config/configure_options/build_web_version config/configure_options/current
 

@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -120,7 +120,7 @@ namespace oomph
       output(outfile, n_plot);
     }
 
-    /// Output FE representation of soln: r,w,sigma_r_r,sigma_phi_phi
+    /// Output FE representation of soln: r,w,u,sigma_r_r,sigma_phi_phi
     /// at n_plot plot points
     void output(std::ostream& outfile, const unsigned& n_plot);
 
@@ -431,14 +431,14 @@ namespace oomph
 
 
     /// Output function:
-    ///  r,w,sigma_r_r,sigma_phi_phi
+    ///  r,w,u,sigma_r_r,sigma_phi_phi
     void output(std::ostream& outfile)
     {
       AxisymFoepplvonKarmanEquations::output(outfile);
     }
 
     ///  Output function:
-    ///   r,w,sigma_r_r,sigma_phi_phi at n_plot plot points
+    ///   r,w,u,sigma_r_r,sigma_phi_phi at n_plot plot points
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
       AxisymFoepplvonKarmanEquations::output(outfile, n_plot);
