@@ -90,9 +90,9 @@ jobs:
         working-directory: ./external_distributions/
 
       - name: Upload third-party libraries build logs
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: third_party_build_logs-${{ runner.os }}-MPI_${{ matrix.build_info.enable_mpi }}
+          name: tpl_build_logs-${{ runner.os }}-ALL_TPL_${{ matrix.build_third_party_libs }}-MPI_${{ matrix.build_info.enable_mpi }}
           path: ./external_distributions/build/logs
 
       # -------------------
@@ -122,9 +122,9 @@ jobs:
       # UPLOAD STUFF:
       # -------------------
       - name: Upload validation log file
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: validation-${{ runner.os }}-THIRD_PARTY_LIBS_${{ matrix.build_third_party_libs }}-MPI_${{ matrix.build_info.enable_mpi }}.log
+          name: validation-${{ runner.os }}-TPL_${{ matrix.build_third_party_libs }}-MPI_${{ matrix.build_info.enable_mpi }}.log
           path: ./validation.log
 
       - name: Propagate CTest test status
