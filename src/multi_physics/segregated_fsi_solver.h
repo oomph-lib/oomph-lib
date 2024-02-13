@@ -140,13 +140,17 @@ namespace oomph
   //=======================================================================
   /// A class to handle errors in the Segregated solver
   //=======================================================================
-  class SegregatedSolverError
+  class SegregatedSolverError : public OomphLibError
   {
   public:
     /// Default constructor, does nothing
-    SegregatedSolverError(const bool& ran_out_of_iterations = false)
+    SegregatedSolverError(const std::string& error_description,
+                          const std::string& function_name,
+                          const char* location,
+                          const bool& ran_out_of_iterations = false)
+      : OomphLibError(error_description, function_name, location),
+        Ran_out_of_iterations(ran_out_of_iterations)
     {
-      Ran_out_of_iterations = ran_out_of_iterations;
     }
 
     /// Access function to whether we ran out of iterations before giving up.

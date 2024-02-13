@@ -3100,7 +3100,7 @@ namespace oomph
   //=======================================================================
   /// A class to handle errors in the Newton solver
   //=======================================================================
-  class NewtonSolverError
+  class NewtonSolverError : public OomphLibError
   {
   private:
     /// Error in the linear solver
@@ -3114,19 +3114,33 @@ namespace oomph
 
   public:
     /// Default constructor, does nothing
-    NewtonSolverError() : linear_solver_error(false), iterations(0), maxres(0.0)
+    NewtonSolverError()
+      : OomphLibError("There was an error in the Newton Solver.",
+                      OOMPH_CURRENT_FUNCTION,
+                      OOMPH_EXCEPTION_LOCATION),
+        linear_solver_error(false),
+        iterations(0),
+        maxres(0.0)
     {
     }
 
     /// Constructor that passes a failure of the linear solver
     NewtonSolverError(const bool& Passed_linear_failure)
-      : linear_solver_error(Passed_linear_failure), iterations(0), maxres(0.0)
+      : OomphLibError("There was an error in the Newton Solver.",
+                      OOMPH_CURRENT_FUNCTION,
+                      OOMPH_EXCEPTION_LOCATION),
+        linear_solver_error(Passed_linear_failure),
+        iterations(0),
+        maxres(0.0)
     {
     }
 
     /// Constructor that passes number of iterations and residuals
     NewtonSolverError(unsigned Passed_iterations, double Passed_maxres)
-      : linear_solver_error(false),
+      : OomphLibError("There was an error in the Newton Solver.",
+                      OOMPH_CURRENT_FUNCTION,
+                      OOMPH_EXCEPTION_LOCATION),
+        linear_solver_error(false),
         iterations(Passed_iterations),
         maxres(Passed_maxres)
     {

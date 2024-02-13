@@ -898,11 +898,19 @@ namespace oomph
           // Throw an error indicating if we ran out of iterations
           if (iter_taken == Max_picard)
           {
-            throw SegregatedSolverError(true);
+            throw SegregatedSolverError(
+              "Error occured in Segregated solver. \n",
+              OOMPH_CURRENT_FUNCTION,
+              OOMPH_EXCEPTION_LOCATION,
+              true);
           }
           else
           {
-            throw SegregatedSolverError(false);
+            throw SegregatedSolverError(
+              "Error occured in Segregated solver. \n",
+              OOMPH_CURRENT_FUNCTION,
+              OOMPH_EXCEPTION_LOCATION,
+              false);
           }
           break;
 
@@ -920,11 +928,19 @@ namespace oomph
           // Throw an error indicating if we ran out of iterations
           if (iter_taken == Max_picard)
           {
-            throw SegregatedSolverError(true);
+            throw SegregatedSolverError(
+              "Error occured in Segregated solver. \n",
+              OOMPH_CURRENT_FUNCTION,
+              OOMPH_EXCEPTION_LOCATION,
+              true);
           }
           else
           {
-            throw SegregatedSolverError(false);
+            throw SegregatedSolverError(
+              "Error occured in Segregated solver. \n",
+              OOMPH_CURRENT_FUNCTION,
+              OOMPH_EXCEPTION_LOCATION,
+              false);
           }
           break;
 
@@ -942,11 +958,19 @@ namespace oomph
           // Throw an error indicating if we ran out of iterations
           if (iter_taken == Max_picard)
           {
-            throw SegregatedSolverError(true);
+            throw SegregatedSolverError(
+              "Error occured in Segregated solver. \n",
+              OOMPH_CURRENT_FUNCTION,
+              OOMPH_EXCEPTION_LOCATION,
+              true);
           }
           else
           {
-            throw SegregatedSolverError(false);
+            throw SegregatedSolverError(
+              "Error occured in Segregated solver. \n",
+              OOMPH_CURRENT_FUNCTION,
+              OOMPH_EXCEPTION_LOCATION,
+              false);
           }
           break;
       }
@@ -988,15 +1012,15 @@ namespace oomph
     // Catch any exceptions thrown in the segregated solver
     catch (SegregatedSolverError& error)
     {
+      // If we didn't run out of iterations
       if (!error.ran_out_of_iterations())
       {
-        std::ostringstream error_stream;
-        error_stream << "Error occured in Segregated solver. " << std::endl;
-        throw OomphLibError(
-          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+        // Re-throw the error
+        throw;
       }
       else
       {
+        // Continue, but output note
         oomph_info << "Note: Ran out of iterations but continuing anyway"
                    << std::endl;
       }
@@ -1082,15 +1106,15 @@ namespace oomph
     // Catch any exceptions thrown in the segregated solver
     catch (SegregatedSolverError& error)
     {
+      // If we didn't run out of iterations
       if (!error.ran_out_of_iterations())
       {
-        std::ostringstream error_stream;
-        error_stream << "Error occured in Segregated solver. " << std::endl;
-        throw OomphLibError(
-          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+        // Re-throw the error
+        throw;
       }
       else
       {
+        // Continue, but output note
         oomph_info << "Note: Ran out of iterations but continuing anyway"
                    << std::endl;
       }
