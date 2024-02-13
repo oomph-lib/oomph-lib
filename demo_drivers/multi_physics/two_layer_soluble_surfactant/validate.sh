@@ -59,7 +59,7 @@ mv RESLT RESLT_ref_2layer
 if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/ref_2layer_sol_surf.dat.gz \
+  $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/ref_2layer_sol_surf.dat.gz \
     ref_2layer_sol_surf.dat  0.25 1.0e-14 >> validation.log
 fi
 

@@ -14,10 +14,13 @@ mkdir Validation
 
 cd Validation
 
-# Validation for complex eigensolver
-#-----------------------------------------
-echo "Running complex eigensolver validation "
-mkdir RESLT
+# Validation for eigensolver test
+#--------------------------------
+
+if [ -f ../eigen_solver_test ]; then
+    
+echo "Running eigensolver validation "
+mkdir RESLT_anasazi
 cp ../random_test_matrix.dat .
 ../solve_eigenproblem_test > OUTPUT
 echo "done"
@@ -37,7 +40,20 @@ else
 $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/solve_eigenproblem_test.dat.gz  \
          solve_eigenproblem_test.dat >> validation.log
 fi
-rm -rf RESLT
+rm -rf RESLT_anasazi
+
+
+else
+    
+echo "Not running eigensolver validation; needs trilinos "
+echo "Dummy [OK] for missing trilinos " >> validation.log
+
+fi
+
+
+
+
+#-----------------------------------------
 
 #-----------------------------------------
 

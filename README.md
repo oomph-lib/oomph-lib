@@ -3,7 +3,7 @@
     <img alt="reviewdog" src="./doc/figures/oomph_logo.png">
   </a>
 </div>
-
+ 
 <div align="center">
   <a href="./LICENCE">
     <img alt="License: LGPL v2.1" src="https://img.shields.io/badge/License-LGPL%20v2.1-blue.svg">

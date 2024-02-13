@@ -1818,15 +1818,24 @@ namespace oomph
 
 #endif
 
+    // File suffix identifying processor rank. If comm_pt is null (because
+    // oomph-lib was built with MPI but this mesh is not distributed) the
+    // string is empty.
+    std::string rank_string = "";
+    if (comm_pt != 0)
+    {
+      rank_string = "_on_proc_" + comm_pt->my_rank();
+    }
+
     // Setup output files
     std::ofstream some_file, feflux_file;
     std::ostringstream filename;
     filename << doc_info.directory() << "/flux_rec" << doc_info.number()
-             << "_on_proc_" << comm_pt->my_rank() << ".dat";
+             << rank_string << ".dat";
     some_file.open(filename.str().c_str());
     filename.str("");
     filename << doc_info.directory() << "/flux_fe" << doc_info.number()
-             << "_on_proc_" << comm_pt->my_rank() << ".dat";
+             << rank_string << ".dat";
     feflux_file.open(filename.str().c_str());
 
     unsigned nel = mesh_pt->nelement();
@@ -1909,14 +1918,13 @@ namespace oomph
           }
           feflux_file << elemental_error[e] << " " << std::endl;
         }
+
+        // Write tecplot footer (e.g. FE connectivity)
+        // Do this for each element so the output is compatible with
+        // oomph-convert
+        el_pt->write_tecplot_zone_footer(some_file, nplot);
+        el_pt->write_tecplot_zone_footer(feflux_file, nplot);
       }
-
-
-      // Write tecplot footer (e.g. FE connectivity lists)
-      // using the first element's output info.
-      FiniteElement* first_el_pt = mesh_pt->finite_element_pt(0);
-      first_el_pt->write_tecplot_zone_footer(some_file, nplot);
-      first_el_pt->write_tecplot_zone_footer(feflux_file, nplot);
     }
 
     some_file.close();
