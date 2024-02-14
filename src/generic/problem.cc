@@ -10911,11 +10911,21 @@ namespace oomph
           // Otherwise mark the step as having failed
           else
           {
-            oomph_info << "STEP REJECTED --- TRYING AGAIN" << std::endl;
+            oomph_info << "STEP REJECTED DUE TO NEWTON SOLVER --- TRYING AGAIN"
+                       << std::endl;
             STEP_REJECTED = true;
             // Let's take a smaller step
             Ds_current *= (2.0 / 3.0);
           }
+        }
+        catch (InvertedElementError const& error)
+        {
+          oomph_info
+            << "STEP REJECTED DUE TO INVENTED ELEMENTS --- TRYING AGAIN"
+            << std::endl;
+          STEP_REJECTED = true;
+          // Let's take a smaller step
+          Ds_current *= (2.0 / 3.0);
         }
       } while (STEP_REJECTED); // continue until a step is accepted
 
@@ -11370,12 +11380,22 @@ namespace oomph
         else
         {
           // Reject the timestep, if we have an exception
-          oomph_info << "TIMESTEP REJECTED" << std::endl;
+          oomph_info << "TIMESTEP REJECTED DUE TO THE NEWTON SOLVER"
+                     << std::endl;
           reject_timestep = true;
 
           // Half the time step
           dt_rescaling_factor = Timestep_reduction_factor_after_nonconvergence;
         }
+      }
+      catch (InvertedElementError const& error)
+      {
+        /// Reject the timestep, if we have an exception
+        oomph_info << "TIMESTEP REJECTED DUE TO INVERTED ELEMENTS" << std::endl;
+        reject_timestep = true;
+
+        /// Half the time step
+        dt_rescaling_factor = Timestep_reduction_factor_after_nonconvergence;
       }
 
       // Run the individual timesteppers actions, these need to be before the
