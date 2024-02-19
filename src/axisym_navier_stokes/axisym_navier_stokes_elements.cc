@@ -2520,7 +2520,8 @@ namespace oomph
       error_stream << "ReInvFr (" << ReInvFr_pt << "), ";
       error_stream << "and ReInvRo (" << ReInvRo_pt << ")\n";
       // throw OomphLibError(
-      //   error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      //   error_stream.str(), OOMPH_CURRENT_FUNCTION,
+      //   OOMPH_EXCEPTION_LOCATION);
       return;
     }
 

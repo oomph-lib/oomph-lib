@@ -1037,8 +1037,7 @@ namespace oomph
       // Zero the dres_dparam vector
       dres_dparam.initialise(0.0);
       // Add the elemental contribution to the residuals vector
-      fill_in_contribution_to_dresiduals_dparameter(parameter_pt,
-                                                          dres_dparam);
+      fill_in_contribution_to_dresiduals_dparameter(parameter_pt, dres_dparam);
     }
 
     /// Calculate the derivatives of the elemental Jacobian matrix
