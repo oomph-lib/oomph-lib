@@ -16,6 +16,8 @@ on:
     paths:
       # We only need to run this workflow if we edited the sources
       - ".github/workflows/cmake-and-clang-format.yaml"
+      - "*.cmake"
+      - "CMakeLists.txt"
       - "src/**.h"
       - "src/**.cc"
       - "src/**.tpp"
