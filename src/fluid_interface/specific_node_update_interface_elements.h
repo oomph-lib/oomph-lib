@@ -878,12 +878,13 @@ namespace oomph
                                           DenseMatrix<double>& jacobian)
     {
       // Call the generic routine with the flag set to 1
-      // EQUATION_CLASS::fill_in_generic_residual_contribution_interface(
-      //  residuals, jacobian, GeneralisedElement::Dummy_matrix, 1);
-      SolidFiniteElement::fill_in_contribution_to_jacobian(residuals, jacobian);
+      EQUATION_CLASS::fill_in_generic_residual_contribution_interface(
+        residuals, jacobian, GeneralisedElement::Dummy_matrix, 1);
+      // SolidFiniteElement::fill_in_contribution_to_jacobian(residuals,
+      // jacobian);
 
       // Call the generic finite difference routine for the solid variables
-      // this->fill_in_jacobian_from_solid_position_by_fd(jacobian);
+      this->fill_in_jacobian_from_solid_position_by_fd(jacobian);
 
       // Call generic FD routine for the external data
       // this->fill_in_jacobian_from_external_by_fd(jacobian);
