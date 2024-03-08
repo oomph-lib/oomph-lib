@@ -788,7 +788,7 @@ namespace oomph
 
       // MH: Like everything else, this hasn't been tested!
       // used to be input_string_stream<<"-pA -a" << element_area << "q30";
-      input_string_stream << "-Q -pA -a -a" << element_area << "q30";
+      input_string_stream << "-pA -a -a" << element_area << "q30";
 
       // Verify if creation of new points on boundaries is allowed
       if (!this->is_creation_of_vertices_on_boundaries_allowed())
@@ -827,12 +827,12 @@ namespace oomph
       build_from_scaffold(time_stepper_pt, use_attributes);
 
       // Kill the scaffold
-      // delete this->Tmp_mesh_pt;
-      // this->Tmp_mesh_pt = 0;
+      delete this->Tmp_mesh_pt;
+      this->Tmp_mesh_pt = 0;
 
       // Cleanup but leave hole alone
-      // bool clear_hole_data = false;
-      // TriangleHelper::clear_triangulateio(triangle_in, clear_hole_data);
+      bool clear_hole_data = false;
+      TriangleHelper::clear_triangulateio(triangle_in, clear_hole_data);
 
       // Setup boundary coordinates for boundaries
       unsigned nb = nboundary();
@@ -1019,11 +1019,6 @@ namespace oomph
       }
     }
 
-    void update_triangulateio(TriangulateIO& new_triangulate_io)
-    {
-      Triangulateio = new_triangulate_io;
-    }
-
 #ifdef OOMPH_HAS_MPI
     /// Used to dump info. related with distributed triangle meshes
     void dump_distributed_info_for_restart(std::ostream& dump_file);
@@ -1061,62 +1056,6 @@ namespace oomph
 
 #endif // #ifdef OOMPH_HAS_MPI
 
-    /// Completely regenerate the mesh from the trianglateio structure
-    void mesh_from_internal_triangulateio()
-    {
-      unsigned nbound = nboundary();
-      Boundary_coordinate_exists.resize(nbound, false);
-
-      // Now build the new scaffold
-      this->Tmp_mesh_pt = new TriangleScaffoldMesh(this->Triangulateio);
-
-      // Triangulation has been created -- remember to wipe it!
-      Triangulateio_exists = true;
-
-      this->Use_attributes = false;
-
-      // Convert mesh from scaffold to actual mesh
-      build_from_scaffold(this->Time_stepper_pt, this->Use_attributes);
-
-      // Kill the scaffold
-      delete this->Tmp_mesh_pt;
-      this->Tmp_mesh_pt = 0;
-
-#ifdef OOMPH_HAS_MPI
-      if (!this->is_mesh_distributed())
-      {
-        nbound = this->nboundary(); // The original number of boundaries
-      }
-      else
-      {
-        nbound = this->initial_shared_boundary_id();
-        // NOTE: The total number of boundaries is the number of
-        // original bondaries plus the number of shared boundaries, but
-        // here we only establish boundary coordinates for the original
-        // boundaries. Once all the info. related with the distribution
-        // has been established then the number of boundaries is reset
-        // to the correct one (after reset the halo/haloed scheme)
-      }
-#else
-      nbound = this->nboundary(); // The original number of boundaries
-#endif
-
-      // Setup boundary coordinates for boundaries
-      for (unsigned b = 0; b < nbound; b++)
-      {
-        this->template setup_boundary_coordinates<ELEMENT>(b);
-      }
-
-      // Snap nodes only if the mesh is not distributed, if the mesh is
-      // distributed it will be called after the re-establishment of the
-      // halo/haloed scheme, and the proper identification of the segments
-      // in the boundary
-      if (!this->is_mesh_distributed())
-      {
-        // Deform the boundary onto any geometric objects
-        // this->snap_nodes_onto_geometric_objects();
-      }
-    }
     /// Completely regenerate the mesh from the trianglateio structure
     void remesh_from_internal_triangulateio()
     {
@@ -1346,7 +1285,7 @@ namespace oomph
       // input_string_stream<<"-pA -a" << element_area << " -q30" << std::fixed;
       // The repeated -a allows the specification of areas for different
       // regions (if any)
-      input_string_stream << "-Q -pA -a -a" << element_area << " -q30"
+      input_string_stream << "-pA -a -a" << element_area << " -q30"
                           << std::fixed;
 
       // Verify if creation of new points on boundaries is allowed
@@ -1402,8 +1341,8 @@ namespace oomph
       this->Tmp_mesh_pt = 0;
 
       // Cleanup but leave hole and regions alone since it's still used
-      // bool clear_hole_data = false;
-      // TriangleHelper::clear_triangulateio(triangulate_io, clear_hole_data);
+      bool clear_hole_data = false;
+      TriangleHelper::clear_triangulateio(triangulate_io, clear_hole_data);
     }
 
     /// Boolean defining if Triangulateio object has been built or not
@@ -2405,7 +2344,7 @@ namespace oomph
 
       // Input string for triangle
       std::stringstream input_string_stream;
-      input_string_stream << "-Q -pq30-ra";
+      input_string_stream << "-pq30-ra";
 
       // Verify if creation of new points on boundaries is allowed
       if (!allow_automatic_creation_of_vertices_on_boundaries)
@@ -2444,8 +2383,8 @@ namespace oomph
       this->Tmp_mesh_pt = 0;
 
       // Cleanup but leave hole alone as it's still used
-      // bool clear_hole_data = false;
-      // TriangleHelper::clear_triangulateio(triangle_refine, clear_hole_data);
+      bool clear_hole_data = false;
+      TriangleHelper::clear_triangulateio(triangle_refine, clear_hole_data);
 
 #ifdef OOMPH_HAS_MPI
       // Before calling setup boundary coordinates check if the mesh
