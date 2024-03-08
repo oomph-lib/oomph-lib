@@ -10921,7 +10921,7 @@ namespace oomph
         catch (InvertedElementError const& error)
         {
           oomph_info
-            << "STEP REJECTED DUE TO INVENTED ELEMENTS --- TRYING AGAIN"
+            << "STEP REJECTED DUE TO INVERTED ELEMENTS --- TRYING AGAIN"
             << std::endl;
           STEP_REJECTED = true;
           // Let's take a smaller step
