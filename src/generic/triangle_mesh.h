@@ -845,7 +845,7 @@ namespace oomph
 
         // Split the element
         split_element_through_centroid<ELEMENT>(
-          time_stepper_pt, el_pt, new_el_pt, new_nod_pt);
+          el_pt, new_el_pt, new_nod_pt, time_stepper_pt);
 
         // Add the new elements to new the Vector of pointers
         new_or_retained_el_pt.push_back(new_el_pt[0]);
