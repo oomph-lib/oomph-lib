@@ -126,13 +126,6 @@ namespace oomph
     /// remain at the default value zero.
     virtual void get_Z2_compound_flux_indices(Vector<unsigned>& flux_index) {}
 
-    /// Number of vertex nodes in the element
-    virtual unsigned nvertex_node() const = 0;
-
-    /// Pointer to the j-th vertex node in the element. Needed for
-    /// efficient patch assmbly
-    virtual Node* vertex_node_pt(const unsigned& j) const = 0;
-
     /// Order of recovery shape functions
     virtual unsigned nrecovery_order() = 0;
 
