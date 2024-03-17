@@ -64,17 +64,16 @@ namespace oomph
   void TCrouzeixRaviartElement<DIM>::identify_load_data(
     std::set<std::pair<Data*, unsigned>>& paired_load_data)
   {
-    // Find the index at which the velocity is stored
-    unsigned u_index[DIM];
-    for (unsigned i = 0; i < DIM; i++)
-    {
-      u_index[i] = this->u_index_nst(i);
-    }
-
     // Loop over the nodes
     unsigned n_node = this->nnode();
     for (unsigned n = 0; n < n_node; n++)
     {
+      // Find the index at which the velocity is stored
+      unsigned u_index[DIM];
+      for (unsigned i = 0; i < DIM; i++)
+      {
+        u_index[i] = this->u_index_nst(n, i);
+      }
       // Loop over the velocity components and add pointer to their data
       // and indices to the vectors
       for (unsigned i = 0; i < DIM; i++)
@@ -131,6 +130,7 @@ namespace oomph
   const unsigned TTaylorHoodElement<2>::Pconv[3] = {0, 1, 2};
 
   // 3D Taylor--Hood
+
   // Set the data for the number of Variables at each node
   template<>
   const unsigned TTaylorHoodElement<3>::Initial_Nvalue[10] = {
@@ -149,14 +149,22 @@ namespace oomph
   template<unsigned DIM>
   void TTaylorHoodElement<DIM>::unpin_all_nodal_pressure_dofs()
   {
+    std::ostringstream error_message;
+    error_message
+      << "unpin_all_nodal_pressure_dofs is not implemented correctly"
+      << std::endl;
+    throw OomphLibError(
+      error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+
     unsigned n_node = this->nnode();
     // loop over nodes
     for (unsigned l = 0; l < n_node; l++)
     {
-      if (this->node_pt(l)->nvalue() == DIM + 1)
+      if (this->node_pt(l)->nvalue() ==
+          static_cast<unsigned>(this->p_nodal_index_nst() + 1))
       {
         // unpin pressure dof
-        this->node_pt(l)->unpin(DIM);
+        this->node_pt(l)->unpin(this->p_nodal_index_nst());
       }
     }
   }
@@ -169,13 +177,21 @@ namespace oomph
   template<unsigned DIM>
   void TTaylorHoodElement<DIM>::pin_all_nodal_pressure_dofs()
   {
+    std::ostringstream error_message;
+    error_message
+      << "unpin_all_nodal_pressure_dofs is not implemented correctly"
+      << std::endl;
+    throw OomphLibError(
+      error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+
     // Loop over all nodes and pin pressure
     unsigned n_node = this->nnode();
     for (unsigned n = 0; n < n_node; n++)
     {
-      if (this->node_pt(n)->nvalue() == DIM + 1)
+      if (this->node_pt(n)->nvalue() ==
+          static_cast<unsigned>(this->p_nodal_index_nst() + 1))
       {
-        this->node_pt(n)->pin(DIM);
+        this->node_pt(n)->pin(this->p_nodal_index_nst());
       }
     }
   }
@@ -190,10 +206,10 @@ namespace oomph
     unsigned n_pres = npres_nst();
     for (unsigned l = 0; l < n_pres; l++)
     {
-      Node* nod_pt = this->node_pt(Pconv[l]);
-      if (!nod_pt->is_hanging(DIM))
+      Node* nod_pt = this->node_pt(this->Pconv[l]);
+      if (!nod_pt->is_hanging(this->p_nodal_index_nst()))
       {
-        nod_pt->unpin(DIM);
+        nod_pt->unpin(this->p_nodal_index_nst());
       }
     }
   }
@@ -247,7 +263,8 @@ namespace oomph
     {
       // The DIMth entry in each nodal data is the pressure, which
       // affects the traction
-      paired_load_data.insert(std::make_pair(this->node_pt(Pconv[l]), DIM));
+      paired_load_data.insert(
+        std::make_pair(this->node_pt(Pconv[l]), this->p_nodal_index_nst()));
     }
   }
 
