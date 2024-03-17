@@ -889,7 +889,8 @@ namespace oomph
     void fix_pressure(const unsigned& p_dof, const double& p_value)
     {
       this->node_pt(Pconv[p_dof])->pin(this->p_nodal_index_nst());
-      this->node_pt(Pconv[p_dof])->set_value(this->p_nodal_index_nst(), p_value);
+      this->node_pt(Pconv[p_dof])
+        ->set_value(this->p_nodal_index_nst(), p_value);
     }
 
     /// Free p_dof-th pressure dof.
