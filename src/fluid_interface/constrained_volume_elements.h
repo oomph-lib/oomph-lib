@@ -176,6 +176,20 @@ namespace oomph
       this->fill_in_generic_contribution_to_residuals_volume_constraint(
         residuals);
     }
+
+    void output(std::ostream& output_stream)
+    {
+      if (Prescribed_volume_pt != 0)
+      {
+        output_stream << *Prescribed_volume_pt << ",";
+      }
+      else
+      {
+        output_stream << "-1,";
+      }
+      output_stream << p_traded() << ",";
+      output_stream << std::endl;
+    }
   };
 
   /// //////////////////////////////////////////////////////////////////////
@@ -549,7 +563,7 @@ namespace oomph
               this->node_pt(l)->value(
                 dynamic_cast<AxisymmetricNavierStokesEquations*>(
                   bulk_element_pt())
-                  ->u_index_nst(i)) *
+                  ->u_index_nst(l, i)) *
               psif(l);
             interpolated_t1[i] += this->nodal_position(l, i) * dpsifds(l, 0);
           }
