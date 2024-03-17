@@ -496,7 +496,7 @@ void CapProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  Trace_file << " "  << Bulk_mesh_pt->spine_pt(nspine-1)->height();
  Trace_file << " " 
             << dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(0))
-  ->p_axi_nst(0) - External_pressure_data_pt->value(0);
+  ->p_nst(0) - External_pressure_data_pt->value(0);
  Trace_file << " " << -4.0*cos(Angle)/Ca;
  Trace_file << std::endl;
  
@@ -1007,7 +1007,7 @@ void PseudoSolidCapProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
   ->node_pt(np-1)->x(1);
  Trace_file << " " 
             << 
-  dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(0))->p_axi_nst(0)-
+  dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(0))->p_nst(0)-
                External_pressure_data_pt->value(0);
  Trace_file << " " << -4.0*cos(Angle)/Ca;
  Trace_file << std::endl;
