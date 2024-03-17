@@ -614,16 +614,11 @@ namespace oomph
     void refineable_fill_in_generic_residual_contribution_fluid_traction(
       Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag)
     {
-      // Get the indices at which the velocity components are stored
-      unsigned u_nodal_index[this->Dim];
-      for (unsigned i = 0; i < this->Dim; i++)
-      {
-        u_nodal_index[i] =
-          dynamic_cast<ELEMENT*>(this->bulk_element_pt())->u_index_nst(i);
-      }
-
       // Pointer to hang info object
       HangInfo* hang_info_pt = 0;
+
+      // Get the bulk element
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->bulk_element_pt());
 
       // Find out how many nodes there are
       unsigned n_node = this->nnode();
@@ -675,6 +670,13 @@ namespace oomph
         //----------------------------------------------------
         for (unsigned l = 0; l < n_node; l++)
         {
+          // Get the indices at which the velocity components are stored
+          unsigned u_nodal_index[this->Dim];
+          for (unsigned i = 0; i < this->Dim; i++)
+          {
+            u_nodal_index[i] = el_pt->u_index_nst(this->bulk_node_number(l), i);
+          }
+
           // Local boolean to indicate whether the node is hanging
           bool is_node_hanging = this->node_pt(l)->is_hanging();
 
@@ -712,7 +714,8 @@ namespace oomph
               else
               {
                 // Local equation number
-                local_eqn = this->nodal_local_eqn(l, u_nodal_index[i]);
+                local_eqn =
+                  el_pt->momentum_local_eqn(this->bulk_node_number(l), i);
 
                 // Node contributes with full weight
                 hang_weight = 1.0;

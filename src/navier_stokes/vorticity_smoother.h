@@ -781,12 +781,12 @@ namespace oomph
       // Calculate velocities: values[0],...
       for (unsigned i = 0; i < N_dim; i++)
       {
-        // Get the index at which the i-th velocity is stored
-        unsigned u_nodal_index = this->u_index_nst(i);
-
         // Loop over the nodes
         for (unsigned l = 0; l < n_node; l++)
         {
+          // Get the index at which the i-th velocity is stored
+          unsigned u_nodal_index = this->u_index_nst(l, i);
+
           // Update the i-th entry of the value vector
           values[i] += this->nodal_value(t, l, u_nodal_index) * psif[l];
         }
