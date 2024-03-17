@@ -39,6 +39,7 @@
 // OOMPH-LIB headers
 #include "../generic/Qelements.h"
 #include "../generic/Telements.h"
+#include "navier_stokes_face_elements.h"
 
 namespace oomph
 {
@@ -51,7 +52,7 @@ namespace oomph
   //======================================================================
   template<class ELEMENT>
   class NavierStokesTractionElement : public virtual FaceGeometry<ELEMENT>,
-                                      public virtual FaceElement
+                                      public virtual NavierStokesFaceElement
   {
   private:
     /// Pointer to an imposed traction function
@@ -61,26 +62,6 @@ namespace oomph
                             Vector<double>& result);
 
   protected:
-    /// The "global" intrinsic coordinate of the element when
-    /// viewed as part of a geometric object should be given by
-    /// the FaceElement representation, by default
-    double zeta_nodal(const unsigned& n,
-                      const unsigned& k,
-                      const unsigned& i) const
-    {
-      return FaceElement::zeta_nodal(n, k, i);
-    }
-
-    /// Access function that returns the local equation numbers
-    /// for velocity components.
-    /// u_local_eqn(n,i) = local equation number or < 0 if pinned.
-    /// The default is to asssume that n is the local node number
-    /// and the i-th velocity component is the i-th unknown stored at the node.
-    virtual inline int u_local_eqn(const unsigned& n, const unsigned& i)
-    {
-      return nodal_local_eqn(n, i);
-    }
-
     /// Function to compute the shape and test functions and to return
     /// the Jacobian of mapping
     inline double shape_and_test_at_knot(const unsigned& ipt,
@@ -88,30 +69,32 @@ namespace oomph
                                          Shape& test) const
     {
       // Find number of nodes
-      unsigned n_node = nnode();
+      unsigned n_node = this->nnode();
       // Calculate the shape functions
-      shape_at_knot(ipt, psi);
+      this->shape_at_knot(ipt, psi);
       // Set the test functions to be the same as the shape functions
       for (unsigned i = 0; i < n_node; i++)
       {
         test[i] = psi[i];
       }
       // Return the value of the jacobian
-      return J_eulerian_at_knot(ipt);
+      return this->J_eulerian_at_knot(ipt);
     }
 
 
     /// Function to calculate the traction applied to the fluid
-    void get_traction(const double& time,
-                      const Vector<double>& x,
-                      const Vector<double>& n,
-                      Vector<double>& result)
+    virtual void get_traction(const double& time,
+                              const Vector<double>& x,
+                              const Vector<double>& n,
+                              Vector<double>& result)
     {
       // If the function pointer is zero return zero
       if (Traction_fct_pt == 0)
       {
         // Loop over dimensions and set body forces to zero
-        for (unsigned i = 0; i < Dim; i++)
+
+        const unsigned local_dim = this->bulk_element_pt()->dim();
+        for (unsigned i = 0; i < local_dim; i++)
         {
           result[i] = 0.0;
         }
@@ -130,9 +113,6 @@ namespace oomph
     void fill_in_generic_residual_contribution_fluid_traction(
       Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
 
-    /// The highest dimension of the problem
-    unsigned Dim;
-
   public:
     /// Constructor, which takes a "bulk" element and the value of the index
     /// and its limit
@@ -140,7 +120,7 @@ namespace oomph
       FiniteElement* const& element_pt,
       const int& face_index,
       const bool& called_from_refineable_constructor = false)
-      : FaceGeometry<ELEMENT>(), FaceElement()
+      : FaceGeometry<ELEMENT>(), NavierStokesFaceElement()
     {
       // Attach the geometrical information to the element. N.B. This function
       // also assigns nbulk_value from the required_nvalue of the bulk element
@@ -174,14 +154,23 @@ namespace oomph
 
       // Set the body force function pointer to zero
       Traction_fct_pt = 0;
-
-      // Set the dimension from the dimension of the first node
-      Dim = this->node_pt(0)->ndim();
     }
 
     /// Destructor should not delete anything
     ~NavierStokesTractionElement() {}
 
+  protected:
+    /// The "global" intrinsic coordinate of the element when
+    /// viewed as part of a geometric object should be given by
+    /// the FaceElement representation, by default
+    virtual double zeta_nodal(const unsigned& n,
+                              const unsigned& k,
+                              const unsigned& i) const
+    {
+      return FaceElement::zeta_nodal(n, k, i);
+    }
+
+  public:
     // Access function for the imposed traction pointer
     void (*&traction_fct_pt())(const double& t,
                                const Vector<double>& x,
@@ -238,16 +227,16 @@ namespace oomph
       Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag)
   {
     // Find out how many nodes there are
-    unsigned n_node = nnode();
+    unsigned n_node = this->nnode();
 
     // Get continuous time from timestepper of first node
-    double time = node_pt(0)->time_stepper_pt()->time_pt()->time();
+    double time = this->node_pt(0)->time_stepper_pt()->time_pt()->time();
 
     // Set up memory for the shape and test functions
     Shape psif(n_node), testf(n_node);
 
     // Set the value of n_intpt
-    unsigned n_intpt = integral_pt()->nweight();
+    unsigned n_intpt = this->integral_pt()->nweight();
 
     // Integers to store local equation numbers
     int local_eqn = 0;
@@ -256,7 +245,7 @@ namespace oomph
     for (unsigned ipt = 0; ipt < n_intpt; ipt++)
     {
       // Get the integral weight
-      double w = integral_pt()->weight(ipt);
+      double w = this->integral_pt()->weight(ipt);
 
       // Find the shape and test functions and return the Jacobian
       // of the mapping
@@ -266,10 +255,11 @@ namespace oomph
       double W = w * J;
 
       // Need to find position to feed into Traction function
-      Vector<double> interpolated_x(Dim);
+      const unsigned local_dim = this->bulk_element_pt()->dim();
+      Vector<double> interpolated_x(local_dim);
 
       // Initialise to zero
-      for (unsigned i = 0; i < Dim; i++)
+      for (unsigned i = 0; i < local_dim; i++)
       {
         interpolated_x[i] = 0.0;
       }
@@ -278,18 +268,18 @@ namespace oomph
       for (unsigned l = 0; l < n_node; l++)
       {
         // Loop over velocity components
-        for (unsigned i = 0; i < Dim; i++)
+        for (unsigned i = 0; i < local_dim; i++)
         {
-          interpolated_x[i] += nodal_position(l, i) * psif[l];
+          interpolated_x[i] += this->nodal_position(l, i) * psif[l];
         }
       }
 
       // Get the outer unit normal
-      Vector<double> interpolated_n(Dim);
-      outer_unit_normal(ipt, interpolated_n);
+      Vector<double> interpolated_n(local_dim);
+      this->outer_unit_normal(ipt, interpolated_n);
 
       // Get the user-defined traction terms
-      Vector<double> traction(Dim);
+      Vector<double> traction(local_dim);
       get_traction(time, interpolated_x, interpolated_n, traction);
 
       // Now add to the appropriate equations
@@ -298,9 +288,9 @@ namespace oomph
       for (unsigned l = 0; l < n_node; l++)
       {
         // Loop over the velocity components
-        for (unsigned i = 0; i < Dim; i++)
+        for (unsigned i = 0; i < local_dim; i++)
         {
-          local_eqn = u_local_eqn(l, i);
+          local_eqn = this->nst_momentum_local_eqn(l, i);
           /*IF it's not a boundary condition*/
           if (local_eqn >= 0)
           {
@@ -316,6 +306,56 @@ namespace oomph
     }
   }
 
+  /// //////////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////////
+
+  template<class ELEMENT>
+  class SolidNavierStokesTractionElement
+    : public virtual NavierStokesTractionElement<ELEMENT>,
+      public virtual SolidFaceElement
+  {
+  public:
+    SolidNavierStokesTractionElement(
+      FiniteElement* const& element_pt,
+      const int& face_index,
+      const bool& called_from_refineable_constructor = false)
+      : NavierStokesTractionElement<ELEMENT>(
+          element_pt, face_index, called_from_refineable_constructor),
+        SolidFaceElement()
+    {
+    }
+
+    /// Destructor should not delete anything
+    ~SolidNavierStokesTractionElement() {}
+
+  protected:
+    /// In a FaceElement, the "global" intrinsic coordinate
+    /// of the element along the boundary, when viewed as part of
+    /// a compound geometric object is specified using the
+    /// boundary coordinate defined by the mesh.
+    /// Final override to break indeterminancy with
+    /// SolidFiniteElement::zeta_nodal
+    virtual double zeta_nodal(const unsigned& n,
+                              const unsigned& k,
+                              const unsigned& i) const
+    {
+      return FaceElement::zeta_nodal(n, k, i);
+    }
+
+  public:
+    /// This function returns the residuals and the jacobian
+    inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                                 DenseMatrix<double>& jacobian)
+    {
+      // Call the generic routine with the flag set to 1
+      NavierStokesTractionElement<ELEMENT>::fill_in_contribution_to_jacobian(
+        residuals, jacobian);
+
+      // Fill in the solid position contribution by finite differences
+      fill_in_jacobian_from_solid_position_by_fd(jacobian);
+    }
+  };
 
   /// //////////////////////////////////////////////////////////////////////
   /// //////////////////////////////////////////////////////////////////////
@@ -398,25 +438,17 @@ namespace oomph
     refineable_fill_in_generic_residual_contribution_fluid_traction(
       Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag)
   {
-    // Get the indices at which the velocity components are stored
-    unsigned u_nodal_index[this->Dim];
-    for (unsigned i = 0; i < this->Dim; i++)
-    {
-      u_nodal_index[i] =
-        dynamic_cast<ELEMENT*>(this->bulk_element_pt())->u_index_nst(i);
-    }
-
     // Find out how many nodes there are
-    unsigned n_node = nnode();
+    unsigned n_node = this->nnode();
 
     // Get continuous time from timestepper of first node
-    double time = node_pt(0)->time_stepper_pt()->time_pt()->time();
+    double time = this->node_pt(0)->time_stepper_pt()->time_pt()->time();
 
     // Set up memory for the shape and test functions
     Shape psif(n_node), testf(n_node);
 
     // Set the value of n_intpt
-    unsigned n_intpt = integral_pt()->nweight();
+    unsigned n_intpt = this->integral_pt()->nweight();
 
     // Integers to store local equation numbers
     int local_eqn = 0;
@@ -425,7 +457,7 @@ namespace oomph
     for (unsigned ipt = 0; ipt < n_intpt; ipt++)
     {
       // Get the integral weight
-      double w = integral_pt()->weight(ipt);
+      double w = this->integral_pt()->weight(ipt);
 
       // Find the shape and test functions and return the Jacobian
       // of the mapping
@@ -435,10 +467,11 @@ namespace oomph
       double W = w * J;
 
       // Need to find position to feed into Traction function
-      Vector<double> interpolated_x(this->Dim);
+      const unsigned local_dim = this->bulk_element_pt()->dim();
+      Vector<double> interpolated_x(local_dim);
 
       // Initialise to zero
-      for (unsigned i = 0; i < this->Dim; i++)
+      for (unsigned i = 0; i < local_dim; i++)
       {
         interpolated_x[i] = 0.0;
       }
@@ -447,18 +480,18 @@ namespace oomph
       for (unsigned l = 0; l < n_node; l++)
       {
         // Loop over velocity components
-        for (unsigned i = 0; i < this->Dim; i++)
+        for (unsigned i = 0; i < local_dim; i++)
         {
-          interpolated_x[i] += nodal_position(l, i) * psif[l];
+          interpolated_x[i] += this->nodal_position(l, i) * psif[l];
         }
       }
 
       // Get the outer unit normal
-      Vector<double> interpolated_n(this->Dim);
+      Vector<double> interpolated_n(local_dim);
       this->outer_unit_normal(ipt, interpolated_n);
 
       // Get the user-defined traction terms
-      Vector<double> traction(this->Dim);
+      Vector<double> traction(local_dim);
       this->get_traction(time, interpolated_x, interpolated_n, traction);
 
       // Now add to the appropriate equations
@@ -491,11 +524,19 @@ namespace oomph
           n_master = 1;
         }
 
+        // Get the indices at which the velocity components are stored
+        unsigned u_nodal_index[local_dim];
+        for (unsigned i = 0; i < local_dim; i++)
+        {
+          u_nodal_index[i] =
+            dynamic_cast<ELEMENT*>(this->bulk_element_pt())->u_index_nst(l, i);
+        }
+
         // Loop over the master nodes
         for (unsigned m = 0; m < n_master; m++)
         {
           // Loop over velocity components for equations
-          for (unsigned i = 0; i < this->Dim; i++)
+          for (unsigned i = 0; i < local_dim; i++)
           {
             // Get the equation number
             // If the node is hanging
@@ -524,7 +565,7 @@ namespace oomph
               /*    for(unsigned l=0;l<n_node;l++) */
               /*     { */
               /*      //Loop over the velocity components */
-              /*      for(unsigned i=0;i<Dim;i++) */
+              /*      for(unsigned i=0;i<local_dim;i++) */
               /*       { */
               /*        local_eqn = u_local_eqn(l,i); */
               /*        /\*IF it's not a boundary condition*\/ */
