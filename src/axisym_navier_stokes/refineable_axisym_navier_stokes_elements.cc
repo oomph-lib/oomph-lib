@@ -51,18 +51,11 @@ namespace oomph
     double time = node_pt(0)->time_stepper_pt()->time_pt()->time();
 
     // Find out how many pressure dofs there are
-    unsigned n_pres = npres_axi_nst();
-
-    // Get the local indices of the nodal coordinates
-    unsigned u_nodal_index[3];
-    for (unsigned i = 0; i < 3; ++i)
-    {
-      u_nodal_index[i] = u_index_axi_nst(i);
-    }
+    unsigned n_pres = npres_nst();
 
     // Which nodal value represents the pressure? (Negative if pressure
     // is not based on nodal interpolation).
-    int p_index = this->p_nodal_index_axi_nst();
+    int p_index = this->p_nodal_index_nst();
 
     // Local array of booleans that are true if the l-th pressure value is
     // hanging (avoid repeated virtual function calls)
@@ -130,11 +123,11 @@ namespace oomph
       double w = integral_pt()->weight(ipt);
 
       // Call the derivatives of the shape and test functions
-      double J = dshape_and_dtest_eulerian_at_knot_axi_nst(
+      double J = dshape_and_dtest_eulerian_at_knot_nst(
         ipt, psif, dpsifdx, testf, dtestfdx);
 
       // Call the pressure shape and test functions
-      pshape_axi_nst(s, psip, testp);
+      pshape_nst(s, psip, testp);
 
       // Premultiply the weights and the Jacobian
       double W = w * J;
@@ -151,7 +144,7 @@ namespace oomph
       // Calculate pressure
       for (unsigned l = 0; l < n_pres; l++)
       {
-        interpolated_p += p_axi_nst(l) * psip[l];
+        interpolated_p += p_nst(l) * psip[l];
       }
 
 
@@ -171,9 +164,9 @@ namespace oomph
 
         for (unsigned i = 0; i < DIM + 1; i++)
         {
-          const double u_value = nodal_value(l, u_nodal_index[i]);
+          const double u_value = nodal_value(l, this->u_index_nst(l, i));
           interpolated_u[i] += u_value * psif_;
-          dudt[i] += du_dt_axi_nst(l, i) * psif_;
+          dudt[i] += du_dt_nst(l, i) * psif_;
           // Loop over derivative directions for gradients
           for (unsigned j = 0; j < DIM; j++)
           {
@@ -199,7 +192,7 @@ namespace oomph
 
       // Get the user-defined body force terms
       Vector<double> body_force(DIM + 1);
-      get_body_force_axi_nst(time, ipt, s, interpolated_x, body_force);
+      get_body_force_nst(time, ipt, s, interpolated_x, body_force);
 
       // Get the user-defined source function
       double source = get_source_fct(time, ipt, interpolated_x);
@@ -246,7 +239,7 @@ namespace oomph
             {
               // Get the equation number from the master node
               local_eqn = this->local_hang_eqn(hang_info_pt->master_node_pt(m),
-                                               u_nodal_index[i]);
+                                               this->u_index_nst(l, i));
               // Get the hang weight from the master node
               hang_weight = hang_info_pt->master_weight(m);
             }
@@ -254,7 +247,7 @@ namespace oomph
             else
             {
               // Local equation number
-              local_eqn = this->nodal_local_eqn(l, u_nodal_index[i]);
+              local_eqn = this->momentum_local_eqn(l, i);
               // Node contributes with full weight
               hang_weight = 1.0;
             }
@@ -475,13 +468,13 @@ namespace oomph
                       {
                         // Get the equation number from the master node
                         local_unknown = this->local_hang_eqn(
-                          hang_info2_pt->master_node_pt(m2), u_nodal_index[i2]);
+                          hang_info2_pt->master_node_pt(m2),
+                          this->u_index_nst(l2, i2));
                         hang_weight2 = hang_info2_pt->master_weight(m2);
                       }
                       else
                       {
-                        local_unknown =
-                          this->nodal_local_eqn(l2, u_nodal_index[i2]);
+                        local_unknown = this->u_local_unknown(l2, i2);
                         hang_weight2 = 1.0;
                       }
 
@@ -921,14 +914,14 @@ namespace oomph
                     if (is_node2_hanging)
                     {
                       // Get the equation number from the master node
-                      local_unknown = local_hang_eqn(
-                        hang_info2_pt->master_node_pt(m2), u_nodal_index[i2]);
+                      local_unknown =
+                        local_hang_eqn(hang_info2_pt->master_node_pt(m2),
+                                       this->u_index_nst(l2, m2));
                       hang_weight2 = hang_info2_pt->master_weight(m2);
                     }
                     else
                     {
-                      local_unknown =
-                        this->nodal_local_eqn(l2, u_nodal_index[i2]);
+                      local_unknown = this->u_local_unknown(l2, m2);
                       hang_weight2 = 1.0;
                     }
 
@@ -1001,18 +994,11 @@ namespace oomph
     double time = node_pt(0)->time_stepper_pt()->time_pt()->time();
 
     // Determine number of pressure dofs in element
-    const unsigned n_pres = this->npres_axi_nst();
-
-    // Find the indices at which the local velocities are stored
-    unsigned u_nodal_index[3];
-    for (unsigned i = 0; i < 3; i++)
-    {
-      u_nodal_index[i] = this->u_index_axi_nst(i);
-    }
+    const unsigned n_pres = this->npres_nst();
 
     // Which nodal value represents the pressure? (Negative if pressure
     // is not based on nodal interpolation).
-    const int p_index = this->p_nodal_index_axi_nst();
+    const int p_index = this->p_nodal_index_nst();
 
     // Local array of booleans that are true if the l-th pressure value is
     // hanging (avoid repeated virtual function calls)
@@ -1133,7 +1119,7 @@ namespace oomph
         Vector<double> u_ref(3);
         for (unsigned i = 0; i < 3; i++)
         {
-          u_ref[i] = *(nod_pt->value_pt(u_nodal_index[i]));
+          u_ref[i] = *(nod_pt->value_pt(this->u_index_nst(q, i)));
         }
 
         // FD
@@ -1154,7 +1140,8 @@ namespace oomph
           {
             // Evaluate
             d_U_dX(p, q, i) =
-              (*(nod_pt->value_pt(u_nodal_index[p])) - u_ref[p]) / eps_fd;
+              (*(nod_pt->value_pt(this->u_index_nst(q, p))) - u_ref[p]) /
+              eps_fd;
           }
 
           // Reset
@@ -1186,17 +1173,17 @@ namespace oomph
 
       // Call the derivatives of the shape and test functions
       const double J =
-        this->dshape_and_dtest_eulerian_at_knot_axi_nst(ipt,
-                                                        psif,
-                                                        dpsifdx,
-                                                        d_dpsifdx_dX,
-                                                        testf,
-                                                        dtestfdx,
-                                                        d_dtestfdx_dX,
-                                                        dJ_dX);
+        this->dshape_and_dtest_eulerian_at_knot_nst(ipt,
+                                                    psif,
+                                                    dpsifdx,
+                                                    d_dpsifdx_dX,
+                                                    testf,
+                                                    dtestfdx,
+                                                    d_dtestfdx_dX,
+                                                    dJ_dX);
 
       // Call the pressure shape and test functions
-      this->pshape_axi_nst(s, psip, testp);
+      this->pshape_nst(s, psip, testp);
 
       // Allocate storage for the position and the derivative of the
       // mesh positions w.r.t. time
@@ -1213,7 +1200,7 @@ namespace oomph
       // Calculate pressure at integration point
       for (unsigned l = 0; l < n_pres; l++)
       {
-        interpolated_p += this->p_axi_nst(l) * psip[l];
+        interpolated_p += this->p_nst(l) * psip[l];
       }
 
       // Calculate velocities and derivatives at integration point
@@ -1235,9 +1222,9 @@ namespace oomph
         for (unsigned i = 0; i < 3; i++)
         {
           // Get the nodal value
-          const double u_value = nodal_value(l, u_nodal_index[i]);
+          const double u_value = nodal_value(l, this->u_index_nst(l, i));
           interpolated_u[i] += u_value * psif_;
-          dudt[i] += this->du_dt_axi_nst(l, i) * psif_;
+          dudt[i] += this->du_dt_nst(l, i) * psif_;
 
           // Loop over derivative directions
           for (unsigned j = 0; j < 2; j++)
@@ -1280,8 +1267,8 @@ namespace oomph
               // Loop over nodes and add contribution
               for (unsigned j = 0; j < n_node; j++)
               {
-                aux +=
-                  nodal_value(j, u_nodal_index[i]) * d_dpsifdx_dX(p, q, j, k);
+                aux += nodal_value(j, this->u_index_nst(j, i)) *
+                       d_dpsifdx_dX(p, q, j, k);
               }
               d_dudx_dX(p, q, i, k) = aux;
             }
@@ -1298,14 +1285,14 @@ namespace oomph
 
       // Get the user-defined body force terms
       Vector<double> body_force(3);
-      this->get_body_force_axi_nst(time, ipt, s, interpolated_x, body_force);
+      this->get_body_force_nst(time, ipt, s, interpolated_x, body_force);
 
       // Get the user-defined source function
       const double source = this->get_source_fct(time, ipt, interpolated_x);
 
       // Get gradient of body force function
       DenseMatrix<double> d_body_force_dx(3, 2, 0.0);
-      this->get_body_force_gradient_axi_nst(
+      this->get_body_force_gradient_nst(
         time, ipt, s, interpolated_x, d_body_force_dx);
 
       // Get gradient of source function
@@ -1362,7 +1349,7 @@ namespace oomph
           {
             // Get the equation number from the master node
             local_eqn = this->local_hang_eqn(hang_info_pt->master_node_pt(m),
-                                             u_nodal_index[0]);
+                                             this->u_index_nst(l, 0));
             // Get the hang weight from the master node
             hang_weight = hang_info_pt->master_weight(m);
           }
@@ -1370,7 +1357,7 @@ namespace oomph
           else
           {
             // Local equation number
-            local_eqn = this->nodal_local_eqn(l, u_nodal_index[0]);
+            local_eqn = this->momentum_local_eqn(l, 0);
 
             // Node contributes with full weight
             hang_weight = 1.0;
@@ -1637,7 +1624,7 @@ namespace oomph
           {
             // Get the equation number from the master node
             local_eqn = this->local_hang_eqn(hang_info_pt->master_node_pt(m),
-                                             u_nodal_index[1]);
+                                             this->u_index_nst(l, 1));
             // Get the hang weight from the master node
             hang_weight = hang_info_pt->master_weight(m);
           }
@@ -1645,7 +1632,7 @@ namespace oomph
           else
           {
             // Local equation number
-            local_eqn = this->nodal_local_eqn(l, u_nodal_index[1]);
+            local_eqn = this->momentum_local_eqn(l, 1);
 
             // Node contributes with full weight
             hang_weight = 1.0;
@@ -1884,7 +1871,7 @@ namespace oomph
           {
             // Get the equation number from the master node
             local_eqn = this->local_hang_eqn(hang_info_pt->master_node_pt(m),
-                                             u_nodal_index[2]);
+                                             this->u_index_nst(l, 2));
             // Get the hang weight from the master node
             hang_weight = hang_info_pt->master_weight(m);
           }
@@ -1892,7 +1879,7 @@ namespace oomph
           else
           {
             // Local equation number
-            local_eqn = this->nodal_local_eqn(l, u_nodal_index[2]);
+            local_eqn = this->momentum_local_eqn(l, 2);
 
             // Node contributes with full weight
             hang_weight = 1.0;
