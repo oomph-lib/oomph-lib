@@ -4978,6 +4978,59 @@ namespace oomph
                            public virtual SolidFiniteElement
   {
   public:
+    void add_other_bulk_node_positions_as_external_data()
+    {
+      // Add dependence on other solide nodes of the bulk element via
+      //  external
+      // data.
+      // Find the nodes
+      std::set<SolidNode*> set_of_solid_nodes;
+      const unsigned n_node = bulk_element_pt()->nnode();
+      for (unsigned n = 0; n < n_node; n++)
+      {
+        set_of_solid_nodes.insert(
+          static_cast<SolidNode*>(bulk_element_pt()->node_pt(n)));
+      }
+
+      // Remove the nodes on the face
+      const unsigned n_node_bounding = this->nnode();
+      for (unsigned n = 0; n < n_node_bounding; n++)
+      {
+        // Now delete the nodes from the set
+        set_of_solid_nodes.erase(static_cast<SolidNode*>(this->node_pt(n)));
+      }
+
+      // Now add the rest of the nodes as external data
+      for (std::set<SolidNode*>::iterator it = set_of_solid_nodes.begin();
+           it != set_of_solid_nodes.end();
+           ++it)
+      {
+        this->add_external_data((*it)->variable_position_pt());
+      }
+    }
+
+    /// The geometric data of the parent element is included as
+    /// external data and so a (bulk) node update must take place after
+    /// the variation of any of this external data
+    inline void update_in_external_fd(const unsigned& i)
+    {
+      // Update the bulk element
+      bulk_element_pt()->node_update();
+    }
+
+    /// The only external data are these geometric data so
+    /// We can omit the reset function (relying on the next update
+    // function to take care of the remesh)
+    inline void reset_in_external_fd(const unsigned& i) {}
+
+    /// We require a final node update in the bulk element
+    /// after all finite differencing
+    inline void reset_after_external_fd()
+    {
+      // Update the bulk element
+      bulk_element_pt()->node_update();
+    }
+
     /// The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default
@@ -4988,6 +5041,23 @@ namespace oomph
                       const unsigned& i) const
     {
       return FaceElement::zeta_nodal(n, k, i);
+    }
+
+    /// Set pointer to MacroElement -- overloads generic version
+    /// and uses the MacroElement
+    /// also as the default for the "undeformed" configuration.
+    /// This assignment must be overwritten with
+    /// set_undeformed_macro_elem_pt(...) if the deformation of
+    /// the solid body is driven by a deformation of the
+    /// "current" Domain/MacroElement representation of it's boundary.
+    /// Can be overloaded in derived classes to perform additional
+    /// tasks
+    /// Need here to break the indeterminacy due to inheriting two
+    /// FiniteElements
+    virtual void set_macro_elem_pt(MacroElement* macro_elem_pt)
+    {
+      Macro_elem_pt = macro_elem_pt;
+      Undeformed_macro_elem_pt = macro_elem_pt;
     }
 
 
