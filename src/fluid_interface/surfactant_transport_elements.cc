@@ -141,7 +141,7 @@ namespace oomph
     // Surface advection-diffusion equation
 
     // Find the index at which the concentration is stored
-    Vector<unsigned> u_index = this->U_index_interface;
+    Vector<Vector<unsigned>> u_index = this->U_index_interface;
 
     // Read out the surface peclect number
     const double Pe_s = this->peclet_s();
@@ -169,7 +169,7 @@ namespace oomph
       // Velocity and Mesh Velocity
       for (unsigned j = 0; j < n_dim; j++)
       {
-        const double u_ = this->nodal_value(l, u_index[j]);
+        const double u_ = this->nodal_value(l, u_index[l][j]);
         interpolated_u[j] += u_ * psi;
         mesh_velocity[j] += this->dnodal_position_dt(l, j) * psi;
         interpolated_grad_C[j] += C_ * dpsifdS(l, j);
@@ -248,7 +248,7 @@ namespace oomph
             for (unsigned i2 = 0; i2 < n_dim; i2++)
             {
               // Get the unknown
-              local_unknown = this->nodal_local_eqn(l2, u_index[i2]);
+              local_unknown = this->nodal_local_eqn(l2, u_index[l2][i2]);
 
 
               // If not a boundary condition
@@ -278,7 +278,7 @@ namespace oomph
             for (unsigned i = 0; i < n_dim; i++)
             {
               // Add the Jacobian contribution from the surface tension
-              local_eqn = this->nodal_local_eqn(l, u_index[i]);
+              local_eqn = this->nodal_local_eqn(l, u_index[l][i]);
               if (local_eqn >= 0)
               {
                 jacobian(local_eqn, local_unknown) -=
