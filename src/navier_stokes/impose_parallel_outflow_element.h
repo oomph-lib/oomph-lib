@@ -31,6 +31,12 @@
 #include <oomph-lib-config.h>
 #endif
 
+#include <iostream>
+#include "../generic/nodes.h"
+#include "../generic/Vector.h"
+#include "../generic/elements.h"
+#include "navier_stokes_face_elements.h"
+
 namespace oomph
 {
   //========================================================================
@@ -42,7 +48,7 @@ namespace oomph
   //========================================================================
   template<class ELEMENT>
   class ImposeParallelOutflowElement : public virtual FaceGeometry<ELEMENT>,
-                                       public virtual FaceElement
+                                       public virtual NavierStokesFaceElement
   {
   private:
     /// pointer to imposed pressure -- if null then no pressure imposed.
@@ -60,7 +66,7 @@ namespace oomph
     ImposeParallelOutflowElement(FiniteElement* const& element_pt,
                                  const int& face_index,
                                  const unsigned& id = 0)
-      : FaceGeometry<ELEMENT>(), FaceElement()
+      : FaceGeometry<ELEMENT>(), NavierStokesFaceElement()
     {
       //  set the Id
       Id = id;
@@ -72,7 +78,7 @@ namespace oomph
       unsigned dim = element_pt->dim();
 
       // we need dim-1 additional values for each FaceElement node
-      Vector<unsigned> n_additional_values(nnode(), dim - 1);
+      Vector<unsigned> n_additional_values(this->nnode(), dim - 1);
 
       // add storage for lagrange multipliers and set the map containing
       // the position of the first entry of this face element's
@@ -100,35 +106,114 @@ namespace oomph
         residuals, jacobian, 1);
     }
 
-    /// Overload the output function
-    void output(std::ostream& outfile)
+    // Fix lagrange multiplier to value
+    void fix_lagrange_multiplier(const unsigned& n,
+                                 const unsigned& direction,
+                                 const double& value)
     {
-      FiniteElement::output(outfile);
+      BoundaryNodeBase* bnod_pt =
+        dynamic_cast<BoundaryNodeBase*>(this->node_pt(n));
+      unsigned first_index =
+        bnod_pt->index_of_first_value_assigned_by_face_element(Id);
+      this->node_pt(n)->pin(first_index + direction);
+      this->node_pt(n)->set_value(first_index + direction, value);
     }
-
-    /// Output function: x,y,[z],u,v,[w],p in tecplot format
-    void output(std::ostream& outfile, const unsigned& nplot)
-    {
-      FiniteElement::output(outfile, nplot);
-    }
-
-    /// The "global" intrinsic coordinate of the element when
-    /// viewed as part of a geometric object should be given by
-    /// the FaceElement representation, by default
-    /// This final over-ride is required because both SolidFiniteElements
-    /// and FaceElements overload zeta_nodal
-    double zeta_nodal(const unsigned& n,
-                      const unsigned& k,
-                      const unsigned& i) const
-    {
-      return FaceElement::zeta_nodal(n, k, i);
-    }
-
 
     ///  Access function for the pressure
     double*& pressure_pt()
     {
       return Pressure_pt;
+    }
+
+    /// Overload the output function
+    void output(std::ostream& outfile)
+    {
+      const unsigned n_plot = 5;
+      output(outfile, n_plot);
+    }
+
+    /// Output function: x,y,[z],u,v,[w],lambda in csv format
+    void output(std::ostream& outfile, const unsigned& n_plot)
+    {
+      // Number of dimensions
+      unsigned n_dim = this->nodal_dimension();
+
+      // Find out how many nodes there are
+      const unsigned n_node = this->nnode();
+
+      // Set up memory for the shape functions
+      Shape psi(n_node);
+
+      // Local and global coordinates
+      Vector<double> s(n_dim - 1);
+
+      // Loop over plot points
+      unsigned num_plot_points = this->nplot_points(n_plot);
+      for (unsigned iplot = 0; iplot < num_plot_points; iplot++)
+      {
+        // Get local coordinates of plot point
+        this->get_s_plot(iplot, n_plot, s);
+
+        // Outer unit normal
+        // Vector<Vector<double>> tang_vec(n_dim - 1, Vector<double>(n_dim));
+        Vector<double> unit_normal(n_dim);
+        this->outer_unit_normal(s, unit_normal);
+        // continuous_tangent_and_outer_unit_normal(s, tang_vec, unit_normal);
+
+        // Find the shape functions
+        this->shape(s, psi);
+
+        // Initialise to zero
+        Vector<double> interpolated_x(n_dim);
+        Vector<double> interpolated_u(n_dim);
+        Vector<double> interpolated_lambda(n_dim);
+
+        // Calculate stuff
+        for (unsigned l = 0; l < n_node; l++)
+        {
+          BoundaryNodeBase* bnod_pt =
+            dynamic_cast<BoundaryNodeBase*>(this->node_pt(l));
+          unsigned first_index =
+            bnod_pt->index_of_first_value_assigned_by_face_element(Id);
+          // Loop over directions
+          for (unsigned i = 0; i < n_dim; i++)
+          {
+            interpolated_x[i] += this->nodal_position(l, i) * psi[l];
+            interpolated_u[i] += this->nst_u(l, i) * psi[l];
+          }
+          for (unsigned i = 0; i < n_dim - 1; i++)
+          {
+            interpolated_lambda[i] +=
+              this->nodal_value(l, first_index + i) * psi[l];
+          }
+        }
+
+        // Output the x,y,..
+        for (unsigned i = 0; i < n_dim; i++)
+        {
+          outfile << interpolated_x[i] << ",";
+        }
+
+        // Output normal
+        for (unsigned i = 0; i < n_dim; i++)
+        {
+          outfile << unit_normal[i] << ",";
+        }
+
+        // Output the velocity
+        for (unsigned i = 0; i < n_dim; i++)
+        {
+          outfile << interpolated_u[i] << ",";
+        }
+
+        // Output the lagrange multiplier, don't include the comma on the final
+        // value
+        for (unsigned i = 0; i < n_dim - 2; i++)
+        {
+          outfile << interpolated_lambda[i] << ",";
+        }
+        outfile << interpolated_lambda[n_dim - 2] << std::endl;
+      }
     }
 
   protected:
@@ -140,16 +225,16 @@ namespace oomph
       const unsigned& flag)
     {
       // Find out how many nodes there are
-      unsigned n_node = nnode();
+      unsigned n_node = this->nnode();
 
       // Dimension of element
-      unsigned dim_el = dim();
+      unsigned dim_el = this->dim();
 
       // Set up memory for the shape functions
       Shape psi(n_node);
 
       // Set the value of n_intpt
-      unsigned n_intpt = integral_pt()->nweight();
+      unsigned n_intpt = this->integral_pt()->nweight();
 
       // to store local equation number
       int local_eqn = 0;
@@ -161,28 +246,20 @@ namespace oomph
       // to store tangantial vectors
       Vector<Vector<double>> tang_vec(dim_el, Vector<double>(dim_el + 1));
 
-      // get the value at which the velocities are stored
-      Vector<unsigned> u_index(dim_el + 1);
-      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->bulk_element_pt());
-      for (unsigned i = 0; i < dim_el + 1; i++)
-      {
-        u_index[i] = el_pt->u_index_nst(i);
-      }
-
       // Loop over the integration points
       for (unsigned ipt = 0; ipt < n_intpt; ipt++)
       {
         // Get the integral weight
-        double w = integral_pt()->weight(ipt);
+        double w = this->integral_pt()->weight(ipt);
 
         // Jacobian of mapping
-        double J = J_eulerian_at_knot(ipt);
+        double J = this->J_eulerian_at_knot(ipt);
 
         // Premultiply the weights and the Jacobian
         double W = w * J;
 
         // Calculate the shape functions
-        shape_at_knot(ipt, psi);
+        this->shape_at_knot(ipt, psi);
 
         // compute  the velocity and the Lagrange multiplier
         Vector<double> interpolated_u(dim_el + 1, 0.0);
@@ -193,15 +270,15 @@ namespace oomph
           // Assemble the velocity component
           for (unsigned i = 0; i < dim_el + 1; i++)
           {
-            interpolated_u[i] += nodal_value(j, u_index[i]) * psi(j);
+            interpolated_u[i] += this->nst_u(j, i) * psi[j];
           }
 
           // Cast to a boundary node
           BoundaryNodeBase* bnod_pt =
-            dynamic_cast<BoundaryNodeBase*>(node_pt(j));
+            dynamic_cast<BoundaryNodeBase*>(this->node_pt(j));
 
           // get the node
-          Node* nod_pt = node_pt(j);
+          Node* nod_pt = this->node_pt(j);
 
           // Get the index of the first nodal value associated with
           // this FaceElement
@@ -224,7 +301,7 @@ namespace oomph
         {
           // Cast to a boundary node
           BoundaryNodeBase* bnod_pt =
-            dynamic_cast<BoundaryNodeBase*>(node_pt(j));
+            dynamic_cast<BoundaryNodeBase*>(this->node_pt(j));
 
           // Get the index of the first nodal value associated with
           // this FaceElement
@@ -236,7 +313,7 @@ namespace oomph
           {
             // Local eqn number for the l-th component of lamdba
             // in the j-th element
-            local_eqn = nodal_local_eqn(j, first_index + l);
+            local_eqn = this->nodal_local_eqn(j, first_index + l);
 
             if (local_eqn >= 0)
             {
@@ -254,7 +331,7 @@ namespace oomph
                   {
                     // Local eqn number for the i-th component
                     // of the velocity in the jj-th element
-                    local_unknown = nodal_local_eqn(jj, u_index[i]);
+                    local_unknown = this->nst_u_local_unknown(jj, i);
                     if (local_unknown >= 0)
                     {
                       jacobian(local_eqn, local_unknown) +=
@@ -271,7 +348,7 @@ namespace oomph
           {
             // Local eqn number for the i-th component of the
             // velocity in the j-th element
-            local_eqn = nodal_local_eqn(j, u_index[i]);
+            local_eqn = this->nst_momentum_local_eqn(j, i);
 
             if (local_eqn >= 0)
             {
@@ -296,11 +373,11 @@ namespace oomph
                   {
                     // Cast to a boundary node
                     BoundaryNodeBase* bnode_pt =
-                      dynamic_cast<BoundaryNodeBase*>(node_pt(jj));
+                      dynamic_cast<BoundaryNodeBase*>(this->node_pt(jj));
 
                     // Local eqn number for the l-th component of lamdba
                     // in the jj-th element
-                    local_unknown = nodal_local_eqn(
+                    local_unknown = this->nodal_local_eqn(
                       jj,
                       bnode_pt->index_of_first_value_assigned_by_face_element(
                         Id) +
@@ -390,8 +467,9 @@ namespace oomph
           // element's node. The local equation number is required to check if
           // the value is pinned, if it is not pinned, the local equation number
           // is required to get the global equation number.
-          int local_eqn = Bulk_element_pt->nodal_local_eqn(
-            Bulk_node_number[node_i], velocity_i);
+          int local_eqn =
+            dynamic_cast<ELEMENT*>(this->Bulk_element_pt)
+              ->momentum_local_eqn(this->bulk_node_number(node_i), velocity_i);
 
           // Ignore pinned values.
           if (local_eqn >= 0)
@@ -401,7 +479,7 @@ namespace oomph
             // type. It is assumed that the velocity dof types comes first. We
             // do not re-classify the pressure dof types as they are not
             // constrained.
-            dof_lookup.first = Bulk_element_pt->eqn_number(local_eqn);
+            dof_lookup.first = this->Bulk_element_pt->eqn_number(local_eqn);
             dof_lookup.second = velocity_i;
             dof_lookup_list.push_front(dof_lookup);
           } // ignore pinned nodes "if(local-eqn>=0)"
@@ -410,13 +488,13 @@ namespace oomph
         // Now we classify the dof types of this face element.
         // Cast to a boundary node
         BoundaryNodeBase* bnod_pt =
-          dynamic_cast<BoundaryNodeBase*>(node_pt(node_i));
+          dynamic_cast<BoundaryNodeBase*>(this->node_pt(node_i));
 
         // Loop over directions in this Face(!)Element
         for (unsigned dim_i = 0; dim_i < dim_el; dim_i++)
         {
           // Local eqn number:
-          int local_eqn = nodal_local_eqn(
+          int local_eqn = this->nodal_local_eqn(
             node_i,
             bnod_pt->index_of_first_value_assigned_by_face_element(Id) + dim_i);
 
