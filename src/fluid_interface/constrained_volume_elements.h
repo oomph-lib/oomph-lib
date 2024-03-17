@@ -549,7 +549,7 @@ namespace oomph
               this->node_pt(l)->value(
                 dynamic_cast<AxisymmetricNavierStokesEquations*>(
                   bulk_element_pt())
-                  ->u_index_axi_nst(i)) *
+                  ->u_index_nst(i)) *
               psif(l);
             interpolated_t1[i] += this->nodal_position(l, i) * dpsifds(l, 0);
           }
