@@ -90,13 +90,6 @@ namespace oomph
     // Local coordinates
     Vector<double> s(n_dim);
 
-    // find the indices at which the local velocities are stored
-    Vector<unsigned> u_nodal_index(n_dim);
-    for (unsigned i = 0; i < n_dim; i++)
-    {
-      u_nodal_index[i] = this->u_index_nst(i);
-    }
-
     // Set up memory for veloc shape functions
     Shape psi(n_node);
 
@@ -143,7 +136,8 @@ namespace oomph
           // Loop over the velocity components
           for (unsigned i = 0; i < n_dim; i++)
           {
-            local_eqn = nodal_local_eqn(l, u_nodal_index[i]);
+            local_eqn = momentum_local_eqn(l, i);
+
 
             // If not a boundary condition
             if (local_eqn >= 0)
@@ -166,6 +160,7 @@ namespace oomph
         {
           // Get equation number
           local_eqn = p_local_eqn(l);
+
 
           // If not a boundary condition
           if (local_eqn >= 0)
@@ -717,11 +712,11 @@ namespace oomph
       {
         interpolated_x[i] = 0.0;
         interpolated_u[i] = 0.0;
-        // Get the index at which velocity i is stored
-        unsigned u_nodal_index = u_index_nst(i);
         // Loop over the local nodes and sum
         for (unsigned l = 0; l < n_node; l++)
         {
+          // Get the index at which velocity i is stored
+          unsigned u_nodal_index = u_index_nst(l, i);
           interpolated_u[i] += nodal_value(t, l, u_nodal_index) * psi[l];
           interpolated_x[i] += nodal_position(t, l, i) * psi[l];
         }
@@ -778,7 +773,7 @@ namespace oomph
       // Velocities
       for (unsigned i = 0; i < DIM; i++)
       {
-        outfile << interpolated_u_nst(s, i) << " ";
+        outfile << this->interpolated_u_nst(s, i) << " ";
       }
 
       // Pressure
@@ -824,7 +819,7 @@ namespace oomph
       // Velocities
       for (unsigned i = 0; i < DIM; i++)
       {
-        fprintf(file_pt, "%g ", interpolated_u_nst(s, i));
+        fprintf(file_pt, "%g ", this->interpolated_u_nst(s, i));
       }
 
       // Pressure
@@ -900,12 +895,13 @@ namespace oomph
       // Loop over directions
       for (unsigned i = 0; i < DIM; i++)
       {
-        // Get the index at which velocity i is stored
-        unsigned u_nodal_index = u_index_nst(i);
         // Loop over nodes
         for (unsigned l = 0; l < n_node; l++)
         {
-          dudt[i] += du_dt_nst(l, u_nodal_index) * psif[l];
+          // Get the index at which velocity i is stored
+          unsigned u_nodal_index = u_index_nst(l, i);
+
+          dudt[i] += du_dt_nst(l, i) * psif[l];
           mesh_veloc[i] += dnodal_position_dt(l, i) * psif[l];
 
           // Loop over derivative directions for velocity gradients
@@ -1223,14 +1219,14 @@ namespace oomph
     // Loop over veclocity components
     for (unsigned i = 0; i < DIM; i++)
     {
-      // Get the index at which the i-th velocity is stored
-      unsigned u_nodal_index = u_index_nst(i);
       // Loop over derivative directions
       for (unsigned j = 0; j < DIM; j++)
       {
         // Loop over nodes
         for (unsigned l = 0; l < n_node; l++)
         {
+          // Get the index at which the i-th velocity is stored
+          unsigned u_nodal_index = u_index_nst(l, i);
           dudx(i, j) += nodal_value(l, u_nodal_index) * dpsidx(l, j);
         }
       }
@@ -1298,14 +1294,14 @@ namespace oomph
     // Loop over veclocity components
     for (unsigned i = 0; i < DIM; i++)
     {
-      // Get the index at which the i-th velocity is stored
-      unsigned u_nodal_index = u_index_nst(i);
       // Loop over derivative directions
       for (unsigned j = 0; j < DIM; j++)
       {
         // Loop over nodes
         for (unsigned l = 0; l < n_node; l++)
         {
+          // Get the index at which the i-th velocity is stored
+          unsigned u_nodal_index = u_index_nst(l, i);
           dudx(i, j) += nodal_value(l, u_nodal_index) * dpsidx(l, j);
         }
       }
@@ -1385,14 +1381,14 @@ namespace oomph
     // Loop over veclocity components
     for (unsigned i = 0; i < DIM; i++)
     {
-      // Get the index at which the i-th velocity component is stored
-      unsigned u_nodal_index = u_index_nst(i);
       // Loop over derivative directions
       for (unsigned j = 0; j < DIM; j++)
       {
         // Loop over nodes
         for (unsigned l = 0; l < n_node; l++)
         {
+          // Get the index at which the i-th velocity component is stored
+          unsigned u_nodal_index = u_index_nst(l, i);
           dudx(i, j) += nodal_value(l, u_nodal_index) * dpsidx(l, j);
         }
       }
@@ -1475,13 +1471,6 @@ namespace oomph
     Shape psi(n_node);
     DShape dpsidx(n_node, DIM);
 
-    // Get the value at which the velocities are stored
-    unsigned u_index[DIM];
-    for (unsigned i = 0; i < DIM; i++)
-    {
-      u_index[i] = this->u_index_nst(i);
-    }
-
     // Loop over the integration points
     for (unsigned ipt = 0; ipt < n_intpt; ipt++)
     {
@@ -1497,6 +1486,13 @@ namespace oomph
       // Loop over the shape functions
       for (unsigned l = 0; l < n_node; l++)
       {
+        // Get the value at which the velocities are stored
+        unsigned u_index[DIM];
+        for (unsigned i = 0; i < DIM; i++)
+        {
+          u_index[i] = this->u_index_nst(l, i);
+        }
+
         // Loop over the dimensions
         for (unsigned i = 0; i < DIM; i++)
         {
@@ -1514,6 +1510,12 @@ namespace oomph
         // Loop over nodes again
         for (unsigned l = 0; l < n_node; l++)
         {
+          // Get the value at which the velocities are stored
+          unsigned u_index[DIM];
+          for (unsigned i = 0; i < DIM; i++)
+          {
+            u_index[i] = this->u_index_nst(l, i);
+          }
           for (unsigned i = 0; i < DIM; i++)
           {
             mesh_velocity[i] += this->dnodal_position_dt(l, i) * psi(l);
@@ -1614,13 +1616,6 @@ namespace oomph
     // Find out how many pressure dofs there are
     unsigned n_pres = npres_nst();
 
-    // Find the indices at which the local velocities are stored
-    unsigned u_nodal_index[DIM];
-    for (unsigned i = 0; i < DIM; i++)
-    {
-      u_nodal_index[i] = u_index_nst(i);
-    }
-
     // Set up memory for the velocity shape fcts
     Shape psif(n_node);
     DShape dpsidx(n_node, DIM);
@@ -1682,6 +1677,12 @@ namespace oomph
       // Loop over nodes
       for (unsigned l = 0; l < n_node; l++)
       {
+        // Find the indices at which the local velocities are stored
+        unsigned u_nodal_index[DIM];
+        for (unsigned i = 0; i < DIM; i++)
+        {
+          u_nodal_index[i] = u_index_nst(l, i);
+        }
         // Loop over directions
         for (unsigned i = 0; i < DIM; i++)
         {
@@ -1789,13 +1790,6 @@ namespace oomph
     // Find out how many pressure dofs there are
     unsigned n_pres = npres_nst();
 
-    // Find the indices at which the local velocities are stored
-    unsigned u_nodal_index[DIM];
-    for (unsigned i = 0; i < DIM; i++)
-    {
-      u_nodal_index[i] = u_index_nst(i);
-    }
-
     // Set up memory for the shape and test functions
     Shape psif(n_node), testf(n_node);
     DShape dpsifdx(n_node, DIM), dtestfdx(n_node, DIM);
@@ -1856,6 +1850,12 @@ namespace oomph
       // Loop over nodes
       for (unsigned l = 0; l < n_node; l++)
       {
+        // Find the indices at which the local velocities are stored
+        unsigned u_nodal_index[DIM];
+        for (unsigned i = 0; i < DIM; i++)
+        {
+          u_nodal_index[i] = u_index_nst(l, i);
+        }
         // Loop over directions
         for (unsigned i = 0; i < DIM; i++)
         {
@@ -1904,7 +1904,7 @@ namespace oomph
         for (unsigned i = 0; i < DIM; i++)
         {
           /*IF it's not a boundary condition*/
-          local_eqn = nodal_local_eqn(l, u_nodal_index[i]);
+          local_eqn = momentum_local_eqn(l, i);
           if (local_eqn >= 0)
           {
             // Add the user-defined body force terms
@@ -1952,7 +1952,7 @@ namespace oomph
                 for (unsigned i2 = 0; i2 < DIM; i2++)
                 {
                   // If at a non-zero degree of freedom add in the entry
-                  local_unknown = nodal_local_eqn(l2, u_nodal_index[i2]);
+                  local_unknown = u_local_unknown(l2, i2);
                   if (local_unknown >= 0)
                   {
                     // Add contribution to Elemental Matrix
@@ -2062,7 +2062,7 @@ namespace oomph
               for (unsigned i2 = 0; i2 < DIM; i2++)
               {
                 /*If we're at a non-zero degree of freedom add it in*/
-                local_unknown = nodal_local_eqn(l2, u_nodal_index[i2]);
+                local_unknown = u_local_unknown(l2, i2);
                 if (local_unknown >= 0)
                 {
                   jacobian(local_eqn, local_unknown) +=
@@ -2138,13 +2138,6 @@ namespace oomph
     // Determine number of pressure dofs in element
     const unsigned n_pres = npres_nst();
 
-    // Find the indices at which the local velocities are stored
-    unsigned u_nodal_index[DIM];
-    for (unsigned i = 0; i < DIM; i++)
-    {
-      u_nodal_index[i] = u_index_nst(i);
-    }
-
     // Set up memory for the shape and test functions
     Shape psif(n_node), testf(n_node);
     DShape dpsifdx(n_node, DIM), dtestfdx(n_node, DIM);
@@ -2191,6 +2184,13 @@ namespace oomph
     for (unsigned q = 0; q < n_node; q++)
     {
       Node* nod_pt = node_pt(q);
+
+      // Find the indices at which the local velocities are stored
+      unsigned u_nodal_index[DIM];
+      for (unsigned i = 0; i < DIM; i++)
+      {
+        u_nodal_index[i] = u_index_nst(q, i);
+      }
 
       // Only compute if there's a node-update fct involved
       if (nod_pt->has_auxiliary_node_update_fct_pt())
@@ -2278,6 +2278,12 @@ namespace oomph
       // Loop over nodes
       for (unsigned l = 0; l < n_node; l++)
       {
+        // Find the indices at which the local velocities are stored
+        unsigned u_nodal_index[DIM];
+        for (unsigned i = 0; i < DIM; i++)
+        {
+          u_nodal_index[i] = u_index_nst(l, i);
+        }
         // Loop over directions
         for (unsigned i = 0; i < DIM; i++)
         {
@@ -2321,6 +2327,12 @@ namespace oomph
               double aux = 0.0;
               for (unsigned j = 0; j < n_node; j++)
               {
+                // Find the indices at which the local velocities are stored
+                unsigned u_nodal_index[DIM];
+                for (unsigned i = 0; i < DIM; i++)
+                {
+                  u_nodal_index[i] = u_index_nst(j, i);
+                }
                 aux += raw_nodal_value(j, u_nodal_index[i]) *
                        d_dpsifdx_dX(p, q, j, k);
               }
@@ -2370,8 +2382,7 @@ namespace oomph
         for (unsigned i = 0; i < DIM; i++)
         {
           // Get the local equation
-          local_eqn = nodal_local_eqn(l, u_nodal_index[i]);
-          ;
+          local_eqn = momentum_local_eqn(l, i);
 
           // IF it's not a boundary condition
           if (local_eqn >= 0)
@@ -2598,17 +2609,16 @@ namespace oomph
   void QCrouzeixRaviartElement<DIM>::identify_load_data(
     std::set<std::pair<Data*, unsigned>>& paired_load_data)
   {
-    // Find the index at which the velocity is stored
-    unsigned u_index[DIM];
-    for (unsigned i = 0; i < DIM; i++)
-    {
-      u_index[i] = this->u_index_nst(i);
-    }
-
     // Loop over the nodes
     unsigned n_node = this->nnode();
     for (unsigned n = 0; n < n_node; n++)
     {
+      // Find the index at which the velocity is stored
+      unsigned u_index[DIM];
+      for (unsigned i = 0; i < DIM; i++)
+      {
+        u_index[i] = this->u_index_nst(n, i);
+      }
       // Loop over the velocity components and add pointer to their data
       // and indices to the vectors
       for (unsigned i = 0; i < DIM; i++)
@@ -2762,17 +2772,16 @@ namespace oomph
   void QTaylorHoodElement<DIM>::identify_load_data(
     std::set<std::pair<Data*, unsigned>>& paired_load_data)
   {
-    // Find the index at which the velocity is stored
-    unsigned u_index[DIM];
-    for (unsigned i = 0; i < DIM; i++)
-    {
-      u_index[i] = this->u_index_nst(i);
-    }
-
     // Loop over the nodes
     unsigned n_node = this->nnode();
     for (unsigned n = 0; n < n_node; n++)
     {
+      // Find the index at which the velocity is stored
+      unsigned u_index[DIM];
+      for (unsigned i = 0; i < DIM; i++)
+      {
+        u_index[i] = this->u_index_nst(n, i);
+      }
       // Loop over the velocity components and add pointer to their data
       // and indices to the vectors
       for (unsigned i = 0; i < DIM; i++)
