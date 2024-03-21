@@ -5043,23 +5043,6 @@ namespace oomph
       return FaceElement::zeta_nodal(n, k, i);
     }
 
-    /// Set pointer to MacroElement -- overloads generic version
-    /// and uses the MacroElement
-    /// also as the default for the "undeformed" configuration.
-    /// This assignment must be overwritten with
-    /// set_undeformed_macro_elem_pt(...) if the deformation of
-    /// the solid body is driven by a deformation of the
-    /// "current" Domain/MacroElement representation of it's boundary.
-    /// Can be overloaded in derived classes to perform additional
-    /// tasks
-    /// Need here to break the indeterminacy due to inheriting two
-    /// FiniteElements
-    virtual void set_macro_elem_pt(MacroElement* macro_elem_pt)
-    {
-      Macro_elem_pt = macro_elem_pt;
-      Undeformed_macro_elem_pt = macro_elem_pt;
-    }
-
 
     /// Return i-th FE-interpolated Lagrangian coordinate xi[i] at
     /// local coordinate s. Overloaded from SolidFiniteElement. Note that
