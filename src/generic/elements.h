@@ -5009,28 +5009,6 @@ namespace oomph
       }
     }
 
-    /// The geometric data of the parent element is included as
-    /// external data and so a (bulk) node update must take place after
-    /// the variation of any of this external data
-    inline void update_in_external_fd(const unsigned& i)
-    {
-      // Update the bulk element
-      bulk_element_pt()->node_update();
-    }
-
-    /// The only external data are these geometric data so
-    /// We can omit the reset function (relying on the next update
-    // function to take care of the remesh)
-    inline void reset_in_external_fd(const unsigned& i) {}
-
-    /// We require a final node update in the bulk element
-    /// after all finite differencing
-    inline void reset_after_external_fd()
-    {
-      // Update the bulk element
-      bulk_element_pt()->node_update();
-    }
-
     /// The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default
