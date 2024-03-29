@@ -506,12 +506,12 @@ namespace oomph
                                     const double& sigma = 0.0)
       : Problem_pt(problem_pt), Linear_solver_pt(linear_solver_pt), Sigma(sigma)
     {
-     // Before we get into the Arnoldi loop solve the shifted matrix problem
-     // Allocated Row compressed matrices for the mass matrix and shifted main
-     // matrix
-     // No need for a distribution; gets automatically set up by the Problem
-     M_pt = new CRDoubleMatrix;
-     AsigmaM_pt = new CRDoubleMatrix;
+      // Before we get into the Arnoldi loop solve the shifted matrix problem
+      // Allocated Row compressed matrices for the mass matrix and shifted main
+      // matrix
+      // No need for a distribution; gets automatically set up by the Problem
+      M_pt = new CRDoubleMatrix;
+      AsigmaM_pt = new CRDoubleMatrix;
 
 
       // Assemble the matrices

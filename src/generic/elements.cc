@@ -37,12 +37,11 @@
 
 namespace oomph
 {
+  /// Static boolean to suppress warnings about any repeated
+  /// data. Defaults to false.
+  bool GeneralisedElement::Suppress_warning_about_any_repeated_data = false;
 
- /// Static boolean to suppress warnings about any repeated 
- /// data. Defaults to false.
- bool GeneralisedElement::Suppress_warning_about_any_repeated_data = false;
- 
- 
+
   /// Static boolean to suppress warnings about repeated internal
   /// data. Defaults to false
   bool GeneralisedElement::Suppress_warning_about_repeated_internal_data =
@@ -928,28 +927,29 @@ namespace oomph
 
       // Shout?
       if (!Suppress_warning_about_any_repeated_data)
-       {
+      {
         error_stream << std::endl << std::endl;
         error_stream
-         << "---------------------------------------------------------------"
-         "--"
-         << std::endl
-         << "Note: You can suppress this warning by recompiling without"
-         << "\n      PARANOID or setting the boolean \n"
-         << "\n      "
-         "GeneralisedElement::Suppress_warning_about_any_repeated_data"
-         << "\n\n      to true." << std::endl << std::endl
-         << "Only do this if you know what you're doing; repeated equation\n"
-         << "numbers are usually a sign of trouble...\n"
-         << "---------------------------------------------------------------"
-         "--"
-         << std::endl
-         << std::endl;
-        
-        //throw hierher
+          << "---------------------------------------------------------------"
+             "--"
+          << std::endl
+          << "Note: You can suppress this warning by recompiling without"
+          << "\n      PARANOID or setting the boolean \n"
+          << "\n      "
+             "GeneralisedElement::Suppress_warning_about_any_repeated_data"
+          << "\n\n      to true." << std::endl
+          << std::endl
+          << "Only do this if you know what you're doing; repeated equation\n"
+          << "numbers are usually a sign of trouble...\n"
+          << "---------------------------------------------------------------"
+             "--"
+          << std::endl
+          << std::endl;
+
+        // throw hierher
         OomphLibWarning(
-         error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-       }
+          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
     }
 #endif
   }
