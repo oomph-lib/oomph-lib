@@ -7,9 +7,6 @@
 # what's missing from outside the code. So unfortunately can't do anything
 # fancy with hypre tests etc..
 
-# Add a check for arpack... at the moment we just assume it's not there
-# because I don't know how to look for it!
-
 
 # ASSUMPTIONS:
 
@@ -18,7 +15,6 @@
 
 # Driver requirements are currently determined by:
 # * mpi driver <=> has "mpi" in the path.
-# * arpack drivers <=> has "eigenproblem" in the path.
 # but this is easy to change by modifying e.g. check_if_mpi_driver(...)
 
 
@@ -281,10 +277,6 @@ def dispatch_dir(dirname: str, features: dict, **kwargs) -> ExitCode:
 # Functions for checking if a test needs a certain feature
 def check_if_mpi_driver(d: str) -> bool:
     return "mpi" in d
-
-
-def check_if_arpack_driver(d: str) -> bool:
-    return "eigenproblems" in d
 
 
 def check_if_hlib_driver(d: str) -> bool:

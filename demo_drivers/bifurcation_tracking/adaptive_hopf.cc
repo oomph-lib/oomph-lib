@@ -60,9 +60,8 @@ namespace Global_Parameters
  double Alpha=0.0;
 
  // Control Flag that will read in the eigenfunction from disk
- // This is required because we are not allowed to redistribute
- // ARPACK, so cannot assume that it has been installed.
  bool Read_in_eigenfunction_from_disk = true;
+ 
 }
 
 
@@ -1187,13 +1186,6 @@ FlowAroundCylinderProblem<ELEMENT>::FlowAroundCylinderProblem(
  //Increase the maximum residuals so that we can get convergence on
  //the coarsest mesh
  Max_residuals = 100.0;
- 
- if(!Global_Parameters::Read_in_eigenfunction_from_disk)
-  {
-   this->eigen_solver_pt() = new ARPACK;
-   static_cast<ARPACK*>(eigen_solver_pt())->set_shift(50.0);
-   static_cast<ARPACK*>(eigen_solver_pt())->narnoldi() = 70;
-  }
 
  // Build mesh
  Problem::mesh_pt()=

@@ -162,7 +162,7 @@ endif
 
 # Need to worry about these for dependency but they shouldn't
 # be included into the include directory
-extra_headers = cfortran.h frontal.h arpack.h lapack_qz.h mumps.h
+extra_headers = cfortran.h frontal.h lapack_qz.h mumps.h
 
 # Define name of library
 libname = generic

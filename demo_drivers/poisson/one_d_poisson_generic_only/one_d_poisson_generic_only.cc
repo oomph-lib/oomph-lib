@@ -36,6 +36,15 @@ using namespace std;
 
 using namespace oomph;
 
+
+/// Namespace for problem parameters
+namespace Parameters
+{
+ bool Use_duplicated_nodes=false;
+}
+
+
+
 //------------------------GEOMETRIC ELEMENT----------------------------------
 
 //===========================================================================
@@ -430,7 +439,7 @@ public:
     //be boundary nodes, so they are created using the construct_node
     //function, which has the same interface as
     //construct_boundary_node()
-    Node_pt.push_back(finite_element_pt(0)->construct_node(n));
+    Node_pt.push_back(finite_element_pt(0)->construct_boundary_node(n));
    }
 
   //Loop over the remaining elements apart from the last
@@ -454,7 +463,7 @@ public:
       //be boundary nodes, so they are created using the construct_node
       //function, which has the same interface as
       //construct_boundary_node()
-      Node_pt.push_back(finite_element_pt(e)->construct_node(n));
+      Node_pt.push_back(finite_element_pt(e)->construct_boundary_node(n));
      }
    } //End of loop over elements
   
@@ -476,7 +485,7 @@ public:
     //Note that these interior nodes need not (and should not)
     //be boundary nodes, so they are created using the construct_node
     //function()
-    Node_pt.push_back(finite_element_pt(n_element-1)->construct_node(n));
+    Node_pt.push_back(finite_element_pt(n_element-1)->construct_boundary_node(n));
    }
 
   //Construct the final node and add it to the Mesh::Node_pt vector.
@@ -508,6 +517,18 @@ public:
   //Boundary 1 contains the final node in the mesh:
   add_boundary_node(1,Node_pt[n_global_node-1]); 
 
+
+
+
+
+  if (Parameters::Use_duplicated_nodes)
+   {
+    Node_pt[5]->make_periodic(Node_pt[4]);
+    Node_pt[6]->make_periodic(Node_pt[4]);
+    Node_pt[7]->make_periodic(Node_pt[4]);
+    
+   }
+  
  } // End of constructor
 
 }; // End of OneDimMesh class.
@@ -599,7 +620,15 @@ class DemoPoissonProblem : public Problem
   /// Print out the result after the solve
   void actions_after_newton_solve() 
    {
-    ofstream file ("result.dat");
+    ofstream file;
+     if (Parameters::Use_duplicated_nodes)
+      {
+       file.open("result_duplicated.dat");
+      }
+     else
+      {
+       file.open("result.dat");
+      }
     mesh_pt()->output(file);
    }
 
@@ -615,10 +644,18 @@ class DemoPoissonProblem : public Problem
 
 int main()
  {
-  //Build the problem 
-  DemoPoissonProblem problem;
 
-  //Solve the problem, using Newton's method
-  problem.newton_solve();
+  // Do normal run first
+  Parameters::Use_duplicated_nodes=false;
+  for (unsigned i=0;i<2;i++)
+   {
+    //Build the problem 
+    DemoPoissonProblem problem;
+    
+    //Solve the problem, using Newton's method
+    problem.newton_solve();
 
+    // use duplicated nodes
+    Parameters::Use_duplicated_nodes=true;
+   }
  }
