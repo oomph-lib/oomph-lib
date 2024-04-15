@@ -54,9 +54,9 @@ int main()
   double box_half_length = 2.0;
   CubicTetMeshFacetedSurface cubic_faceted_surface(
     box_half_width, box_half_length, dummy_id);
+  
   // Output into the Paraview .vtu format
   cubic_faceted_surface.output_paraview("cubic_faceted.vtu");
-
 
   // DiskTetMeshFacetedSurface
   //---------------------------
@@ -64,6 +64,7 @@ int main()
   double epsilon = 0.1; // Set the amplitude
   unsigned n = 4; // Set the mode
   double z_offset = 0.0; // Set the offset in the z coordinate
+  
   // Set the number of lines discretising half of the disk's arc
   unsigned half_nsegment = 10;
 
@@ -73,6 +74,7 @@ int main()
   // Create the faceted surface
   DiskTetMeshFacetedSurface disk_faceted_surface(
     &disk, half_nsegment, dummy_id, dummy_id);
+  
   // Output into the Paraview .vtu format
   disk_faceted_surface.output_paraview("disk_faceted.vtu");
 
@@ -93,6 +95,7 @@ int main()
   Vector<double> offset(3, 0.0); // Set the rectangle at the origin
   RectangularTetMeshFacetedSurface rectangular_faceted_surface(
     half_x_width, half_y_length, offset, dummy_id);
+  
   // Output into the Paraview .vtu format
   rectangular_faceted_surface.output_paraview("rectangular_faceted.vtu");
 
@@ -102,6 +105,7 @@ int main()
   // Create a disk with two layers, looks like a coin
   DiskWithTwoLayersTetMeshFacetedSurface disk_with_two_layers_faceted_surface(
     &disk, half_nsegment, dummy_id, dummy_id, dummy_id, dummy_id, dummy_id);
+
   // Output into the Paraview .vtu format
   disk_with_two_layers_faceted_surface.output_paraview(
     "disk_with_two_layers_faceted.vtu");
