@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -1735,12 +1735,11 @@ FlowAroundCylinderProblem(
  
 
 {
- //this->linear_solver_pt() = new HSL_MA42;
  
  //Increase the maximum residuals so that we can get convergence on
  //the coarsest mesh
  Max_residuals = 100.0;
- 
+
  // Build mesh
  Base_flow_mesh_pt=
   new RefineableRectangleWithHoleMesh<BASE_ELEMENT>(cylinder_pt,length,height);

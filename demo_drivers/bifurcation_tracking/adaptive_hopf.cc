@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -50,16 +50,16 @@ using namespace QuadTreeNames;
 namespace Global_Parameters
 {
 
- // Reynolds number
+ /// Reynolds number
  double Re=75.0;
 
- // Blockage ratio
+ /// Blockage ratio
  double B=0.7;
 
- // Rotation ratio
+ /// Rotation ratio
  double Alpha=0.0;
 
- // Control Flag that will read in the eigenfunction from disk
+ /// Control Flag that will read in the eigenfunction from disk
  bool Read_in_eigenfunction_from_disk = true;
  
 }

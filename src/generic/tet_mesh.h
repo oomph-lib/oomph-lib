@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -405,6 +405,192 @@ namespace oomph
       std::ofstream outfile;
       outfile.open(filename.c_str());
       output(outfile);
+      outfile.close();
+    }
+
+
+    //========================================================
+    /// Outputs the faceted surface into a specified file
+    /// in the Paraview format for viewing in Paraview.
+    /// Make sure to output the file with a .vtu extension.
+    /// (Not particularly optimised)
+    //========================================================
+    void output_paraview(std::ostream& outfile) const
+    {
+      // Create storage for vertices, connectivity, offsets and types. These are
+      // all outputted into the .vtu file.
+      std::set<TetMeshVertex*> vertices;
+      Vector<unsigned> connectivity;
+      Vector<unsigned> offsets;
+      Vector<unsigned> types;
+
+      // Storage for the number of vertices on a facet
+      unsigned n_vertices = 0;
+
+      // Add every vertex to a set
+      unsigned n_facets = Facet_pt.size();
+      for (unsigned i = 0; i < n_facets; i++)
+      {
+        // Loop over all the vertices of the ith facet and add them to the set
+        // of vertices.
+        n_vertices = Facet_pt[i]->nvertex();
+        for (unsigned j = 0; j < n_vertices; j++)
+        {
+          vertices.insert(Facet_pt[i]->vertex_pt(j));
+        }
+      }
+
+      // Store the offset of the current facet
+      unsigned current_offset = 0;
+
+      // This iterator is used for finding the index of a chosen vertex in
+      // 'vertices'
+      std::set<TetMeshVertex*>::iterator iterator;
+
+      // Get the offset, types and connectivity
+      for (const auto& individual_facet_pt : Facet_pt)
+      {
+        // Get the type of the current facet
+        n_vertices = individual_facet_pt->nvertex();
+
+        // The types of cell (polygon, tetra, etc) in the VTK/U file format are
+        // enumerated. The type of each facet is inputted using its
+        // corresponding enumeration into the 'types' section of the .vtu file.
+
+        // The relevant types of cells and enumerations are listed below.
+        // VTK_TRIANGLE = 5
+        // VTK_QUAD = 9
+        // VTK_POLYGON = 7
+
+        // The full list of types with enumerations are listed on the following
+        // site: https://vtk.org/wp-content/uploads/2015/04/file-formats.pdf
+
+        // Append the value corresponding to the current facet's type.
+        if (n_vertices == 3)
+        {
+          types.push_back(5);
+        }
+        else if (n_vertices == 4)
+        {
+          types.push_back(9);
+        }
+        else
+        {
+          types.push_back(7);
+        }
+
+        // Find the connectivity of this facet, the 'connectivity' vector
+        // consists of indices specifying the vertices that connect to create
+        // facets.
+        for (unsigned j = 0; j < n_vertices; j++)
+        {
+          iterator = vertices.find(individual_facet_pt->vertex_pt(j));
+          connectivity.push_back(std::distance(vertices.begin(), iterator));
+        }
+
+        // The vector 'offset' specifies which consecutive elements of
+        // 'connectivity' refer to a single facet.
+        current_offset += n_vertices;
+        offsets.push_back(current_offset);
+      }
+
+      //========================================================================
+      // Output to file
+      //========================================================================
+
+      // File Declaration
+      //-----------------
+
+      // Insert the necessary lines plus the number of vertices and cells/facets
+      // The number of facets is equal to the size of 'offsets'
+      outfile << "<VTKFile type=\"UnstructuredGrid\" version=\"0.1\" "
+                 "byte_order=\"BigEndian\">\n"
+              << "<UnstructuredGrid>\n"
+              << "<Piece NumberOfPoints=\"" << vertices.size()
+              << "\" NumberOfCells=\"" << offsets.size() << "\">" << std::endl;
+
+      // Vertices
+      //---------
+
+      outfile << "<Points>\n"
+              << "<DataArray type=\"Float32\" NumberOfComponents=\"3\" "
+                 "format=\"ascii\">"
+              << std::endl;
+
+      // Output the coordinates of every distinct vertex
+      for (const auto& vertex : vertices)
+      {
+        outfile << vertex->x(0) << " " << vertex->x(1) << " " << vertex->x(2)
+                << std::endl;
+      }
+
+      outfile << "</DataArray>\n</Points>" << std::endl;
+
+      // Connectivity
+      //-------------
+
+      outfile << "<Cells>\n<DataArray type=\"Int32\" "
+                 "Name=\"connectivity\" format=\"ascii\">"
+              << std::endl;
+
+      // Output the connectivity
+      for (const auto& vertex_index : connectivity)
+      {
+        outfile << vertex_index << " ";
+      }
+      outfile << std::endl;
+
+      outfile << "</DataArray>" << std::endl;
+
+      // Offsets
+      //--------
+
+      outfile << "<DataArray type=\"Int32\" Name=\"offsets\" "
+                 "format=\"ascii\">"
+              << std::endl;
+
+      // Output the offsets
+      for (const auto& offset : offsets)
+      {
+        outfile << offset << " ";
+      }
+      outfile << std::endl;
+
+      outfile << "</DataArray>" << std::endl;
+
+      // Types
+      //------
+
+      outfile << "<DataArray type=\"Int32\" Name=\"types\" "
+                 "format=\"ascii\">"
+              << std::endl;
+
+      // Output the types
+      for (const auto& type : types)
+      {
+        outfile << type << " ";
+      }
+      outfile << std::endl;
+
+      outfile << "</DataArray>\n</Cells>" << std::endl;
+
+      // File closure
+      //-------------
+
+      outfile << "</Piece>\n</UnstructuredGrid>\n</VTKFile>";
+    }
+
+
+    //========================================================
+    /// Outputs the faceted surface into a file with the
+    /// specified name in the Paraview format.
+    /// (Not particularly optimised)
+    //========================================================
+    void output_paraview(const std::string& filename) const
+    {
+      std::ofstream outfile;
+      outfile.open(filename.c_str());
+      output_paraview(outfile);
       outfile.close();
     }
 

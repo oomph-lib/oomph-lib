@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -716,6 +716,23 @@ namespace oomph
     /// schemes. Lower scaling values will reject the time-step (and retry
     /// with a smaller dt).
     double DTSF_min_decrease;
+
+    /// Safety factor to ensure we are aiming for a target error, TARGET,
+    /// that is below our tolerance:
+    ///     TARGET = Target_error_safety_factor * TOL
+    /// For this to make sense Target_error_safety_factor should be <1.0. If
+    /// Keep_temporal_error_below_tolerance is set to true (default) then,
+    /// without this, timesteps suggested by the adaptive time-stepper can be
+    /// expected to lead to rejection (because the error exceeds TOL) about
+    /// half of the time.
+    /// Harier et al. (1993, ISBN:978-3-540-56670-0, p168) suggest a value
+    /// around 0.25-0.40 to be the most efficient, however this is highly
+    /// problem and timestepper dependent and sometimes as high as 0.95 may be
+    /// effective at improving the robustness of timestep prediction.
+    ///
+    /// Note: Despite this, we are setting this to default to 1.0 to prevent
+    /// introducing any change in the default behaviour of oomph-lib for now.
+    double Target_error_safety_factor;
 
     /// If  Minimum_dt_but_still_proceed positive, then dt will not be
     /// reduced below this value during adaptive timestepping and the
@@ -1588,6 +1605,12 @@ namespace oomph
     double& maximum_dt()
     {
       return Maximum_dt;
+    }
+
+    /// Access function to the safety factor in adaptive timestepping
+    double& target_error_safety_factor()
+    {
+      return Target_error_safety_factor;
     }
 
     /// Access function to max Newton iterations before giving up.

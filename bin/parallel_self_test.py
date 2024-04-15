@@ -7,7 +7,6 @@
 # what's missing from outside the code. So unfortunately can't do anything
 # fancy with hypre tests etc..
 
-
 # ASSUMPTIONS:
 
 # All validate.sh scripts return an appropriate exit status. Otherwise this
@@ -487,8 +486,6 @@ def main():
     # Figure out if we have various features
     # ============================================================
 
-    # ??ds there MUST be a way to detect this somehow...
-    have_arpack = False
 
     # Find out if we have mpi by looking for "OOMPH_HAS_MPI" in flags in
     # Makefile.
@@ -506,11 +503,6 @@ def main():
     # this feature and have_feature--a boolean for if we have this feature
     # or not.
     oomph_features = ([
-        {
-            'feature_name': "arpack",
-            'check_driver_function': check_if_arpack_driver,
-            'have_feature': have_arpack
-        },
         {
             'feature_name': "mpi",
             'check_driver_function': check_if_mpi_driver,

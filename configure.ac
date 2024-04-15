@@ -665,7 +665,6 @@ fi;
 AM_CONDITIONAL(HAVE_HSL_SOURCES, test x$have_hsl_sources = xtrue)
 
 
-
 # Build flags that can be set during configure stage
 #---------------------------------------------------
 
