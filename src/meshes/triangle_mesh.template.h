@@ -424,7 +424,7 @@ namespace oomph
   {
   public:
     /// Empty constructor
-    TriangleMesh()
+    TriangleMesh() : Min_element_interior_angle(30.0)
     {
 #ifdef OOMPH_HAS_TRIANGLE_LIB
       // Using this constructor no Triangulateio object is built
@@ -451,6 +451,7 @@ namespace oomph
       const std::string& poly_file_name,
       TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
       const bool& allow_automatic_creation_of_vertices_on_boundaries = true)
+      : Min_element_interior_angle(30.0)
     {
       // Mesh can only be built with 2D Telements.
       MeshChecker::assert_geometric_element<TElementGeometricBase, ELEMENT>(2);
@@ -515,6 +516,7 @@ namespace oomph
     /// TriangleMeshParameters
     TriangleMesh(TriangleMeshParameters& triangle_mesh_parameters,
                  TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : Min_element_interior_angle(30.0)
     {
       // Store the region target areas
       Regions_areas = triangle_mesh_parameters.target_area_for_region();
@@ -757,6 +759,7 @@ namespace oomph
       const double& element_area,
       TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
       const bool& allow_automatic_creation_of_vertices_on_boundaries = true)
+      : Min_element_interior_angle(30.0)
     {
       // Mesh can only be built with 2D Telements.
       MeshChecker::assert_geometric_element<TElementGeometricBase, ELEMENT>(2);
@@ -788,7 +791,8 @@ namespace oomph
 
       // MH: Like everything else, this hasn't been tested!
       // used to be input_string_stream<<"-pA -a" << element_area << "q30";
-      input_string_stream << "-pA -a -a" << element_area << "q30";
+      input_string_stream << "-pA -a -a" << element_area << "q"
+                          << this->min_element_interior_angle();
 
       // Verify if creation of new points on boundaries is allowed
       if (!this->is_creation_of_vertices_on_boundaries_allowed())
@@ -1285,8 +1289,8 @@ namespace oomph
       // input_string_stream<<"-pA -a" << element_area << " -q30" << std::fixed;
       // The repeated -a allows the specification of areas for different
       // regions (if any)
-      input_string_stream << "-pA -a -a" << element_area << " -q30"
-                          << std::fixed;
+      input_string_stream << "-pA -a -a" << element_area << " -q"
+                          << this->min_element_interior_angle() << std::fixed;
 
       // Verify if creation of new points on boundaries is allowed
       if (!this->is_automatic_creation_of_vertices_on_boundaries_allowed())
@@ -2229,6 +2233,22 @@ namespace oomph
       H.resize(k);
       return H;
     }
+
+    // Store the Min_element_interior_angle
+    double Min_element_interior_angle;
+
+  public:
+    // Provide read-only access to the min_element_interior_angle
+    double min_element_interior_angle() const
+    {
+      return this->Min_element_interior_angle;
+    }
+
+    // Provide a set function for the min_element_interior_angle
+    void set_min_element_interior_angle(const double& new_angle)
+    {
+      this->Min_element_interior_angle = new_angle;
+    }
   };
 
 
@@ -2344,7 +2364,8 @@ namespace oomph
 
       // Input string for triangle
       std::stringstream input_string_stream;
-      input_string_stream << "-pq30-ra";
+      input_string_stream << "-pq" << this->min_element_interior_angle()
+                          << "-ra";
 
       // Verify if creation of new points on boundaries is allowed
       if (!allow_automatic_creation_of_vertices_on_boundaries)
