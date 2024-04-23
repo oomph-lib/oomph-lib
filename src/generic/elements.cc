@@ -946,7 +946,7 @@ namespace oomph
           << std::endl
           << std::endl;
 
-        // throw hierher
+        // Issue warning
         OomphLibWarning(
           error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
       }

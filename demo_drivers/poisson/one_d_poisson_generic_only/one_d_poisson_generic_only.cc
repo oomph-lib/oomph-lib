@@ -430,7 +430,7 @@ public:
     //be boundary nodes, so they are created using the construct_node
     //function, which has the same interface as
     //construct_boundary_node()
-    Node_pt.push_back(finite_element_pt(0)->construct_boundary_node(n));
+    Node_pt.push_back(finite_element_pt(0)->construct_node(n));
    }
 
   //Loop over the remaining elements apart from the last
@@ -454,7 +454,7 @@ public:
       //be boundary nodes, so they are created using the construct_node
       //function, which has the same interface as
       //construct_boundary_node()
-      Node_pt.push_back(finite_element_pt(e)->construct_boundary_node(n));
+      Node_pt.push_back(finite_element_pt(e)->construct_node(n));
      }
    } //End of loop over elements
   
@@ -476,7 +476,7 @@ public:
     //Note that these interior nodes need not (and should not)
     //be boundary nodes, so they are created using the construct_node
     //function()
-    Node_pt.push_back(finite_element_pt(n_element-1)->construct_boundary_node(n));
+    Node_pt.push_back(finite_element_pt(n_element-1)->construct_node(n));
    }
 
   //Construct the final node and add it to the Mesh::Node_pt vector.
@@ -620,4 +620,5 @@ int main()
   
   //Solve the problem, using Newton's method
   problem.newton_solve();
+
  }
