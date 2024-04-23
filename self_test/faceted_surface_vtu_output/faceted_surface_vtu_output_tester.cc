@@ -58,25 +58,28 @@ int main()
   // Output into the Paraview .vtu format
   cubic_faceted_surface.output_paraview("cubic_faceted.vtu");
 
-  // DiskTetMeshFacetedSurface
-  //---------------------------
-  // Create a faceted disk with an oscillating displacement
-  double epsilon = 0.1; // Set the amplitude
-  unsigned n = 4; // Set the mode
-  double z_offset = 0.0; // Set the offset in the z coordinate
-  
-  // Set the number of lines discretising half of the disk's arc
-  unsigned half_nsegment = 10;
 
-  // Create the Geometric object
-  WarpedCircularDisk disk(epsilon, n, z_offset);
-
-  // Create the faceted surface
-  DiskTetMeshFacetedSurface disk_faceted_surface(
-    &disk, half_nsegment, dummy_id, dummy_id);
+  // TAKEN OUT: INVOLVES TRIANGLE AND IS NON-DETERMINISTIC
   
-  // Output into the Paraview .vtu format
-  disk_faceted_surface.output_paraview("disk_faceted.vtu");
+  // // DiskTetMeshFacetedSurface
+  // //---------------------------
+  // // Create a faceted disk with an oscillating displacement
+  // double epsilon = 0.1; // Set the amplitude
+  // unsigned n = 4; // Set the mode
+  // double z_offset = 0.0; // Set the offset in the z coordinate
+  
+  // // Set the number of lines discretising half of the disk's arc
+  // unsigned half_nsegment = 10;
+
+  // // Create the Geometric object
+  // WarpedCircularDisk disk(epsilon, n, z_offset);
+
+  // // Create the faceted surface
+  // DiskTetMeshFacetedSurface disk_faceted_surface(
+  //   &disk, half_nsegment, dummy_id, dummy_id);
+  
+  // // Output into the Paraview .vtu format
+  // disk_faceted_surface.output_paraview("disk_faceted.vtu");
 
 
   // SphericalTetMeshFacetedSurface
@@ -100,13 +103,17 @@ int main()
   rectangular_faceted_surface.output_paraview("rectangular_faceted.vtu");
 
 
-  // DiskWithTwoLayersTetMeshFacetedSurface
-  //----------------------------------------
-  // Create a disk with two layers, looks like a coin
-  DiskWithTwoLayersTetMeshFacetedSurface disk_with_two_layers_faceted_surface(
-    &disk, half_nsegment, dummy_id, dummy_id, dummy_id, dummy_id, dummy_id);
+  // TAKEN OUT: INVOLVES TRIANGLE AND IS NON-DETERMINISTIC4
 
-  // Output into the Paraview .vtu format
-  disk_with_two_layers_faceted_surface.output_paraview(
-    "disk_with_two_layers_faceted.vtu");
+//   // DiskWithTwoLayersTetMeshFacetedSurface
+//   //----------------------------------------
+//   // Create a disk with two layers, looks like a coin
+//   DiskWithTwoLayersTetMeshFacetedSurface disk_with_two_layers_faceted_surface(
+//     &disk, half_nsegment, dummy_id, dummy_id, dummy_id, dummy_id, dummy_id);
+
+//   // Output into the Paraview .vtu format
+//   disk_with_two_layers_faceted_surface.output_paraview(
+//     "disk_with_two_layers_faceted.vtu");
+
+
 }
