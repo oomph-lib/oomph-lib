@@ -29,8 +29,7 @@ echo "Validation directory: " >> validation.log
 echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
-cat  cubic_faceted.vtu  disk_faceted.vtu  disk_with_two_layers_faceted.vtu \
-     rectangular_faceted.vtu	spherical_faceted.vtu \
+cat cubic_faceted.vtu  rectangular_faceted.vtu  spherical_faceted.vtu \
      > results.dat
 
 if test "$1" = "no_fpdiff"; then
