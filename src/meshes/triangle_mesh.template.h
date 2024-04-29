@@ -4020,14 +4020,16 @@ namespace oomph
       TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
       const bool& use_attributes = false,
       const bool& allow_automatic_creation_of_vertices_on_boundaries = true,
-      OomphCommunicator* comm_pt = 0)
+      OomphCommunicator* comm_pt = 0,
+      const double& min_element_interior_angle_for_adaption = 30.0)
       : RefineableTriangleMesh<ELEMENT>(
           target_area,
           triangulate_io,
           time_stepper_pt,
           use_attributes,
           allow_automatic_creation_of_vertices_on_boundaries,
-          comm_pt)
+          comm_pt,
+          min_element_interior_angle_for_adaption)
     {
       // Assign the Lagrangian coordinates
       set_lagrangian_nodal_coordinates();
