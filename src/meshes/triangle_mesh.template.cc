@@ -30260,6 +30260,10 @@ namespace oomph
       // Set the element area
       triangle_mesh_parameters.element_area() = max_area;
 
+      // Set the minimum element interior angle.
+      triangle_mesh_parameters.set_min_element_interior_angle(
+        this->Min_element_interior_angle_for_adaption);
+
       // Pass information about the extra holes (not defined with closed
       // boundaries)
       triangle_mesh_parameters.extra_holes_coordinates() =
@@ -31033,7 +31037,8 @@ namespace oomph
             this->Time_stepper_pt,
             this->Use_attributes,
             this->Allow_automatic_creation_of_vertices_on_boundaries,
-            this->communicator_pt());
+            this->communicator_pt(),
+            this->Min_element_interior_angle_for_adaption);
         }
         // No solid mesh
         else
@@ -31044,7 +31049,8 @@ namespace oomph
             this->Time_stepper_pt,
             this->Use_attributes,
             this->Allow_automatic_creation_of_vertices_on_boundaries,
-            this->communicator_pt());
+            this->communicator_pt(),
+            this->Min_element_interior_angle_for_adaption);
         }
 
         // Sub-total to create new adapted mesh
