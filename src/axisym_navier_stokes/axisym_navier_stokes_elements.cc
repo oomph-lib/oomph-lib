@@ -2510,7 +2510,7 @@ namespace oomph
     }
     else
     {
-      // Die if the parameter does not contain a Reynolds number
+      // throw an error if the parameter does not contain a Reynolds number
       std::ostringstream error_stream;
       error_stream
         << "Cannot compute analytic jacobian for parameter addressed by "
@@ -2519,10 +2519,8 @@ namespace oomph
       error_stream << "ReSt (" << ReSt_pt << "), ";
       error_stream << "ReInvFr (" << ReInvFr_pt << "), ";
       error_stream << "and ReInvRo (" << ReInvRo_pt << ")\n";
-      // throw OomphLibError(
-      //   error_stream.str(), OOMPH_CURRENT_FUNCTION,
-      //   OOMPH_EXCEPTION_LOCATION);
-      return;
+      throw OomphLibError(
+        error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
     // Find out how many nodes there are
