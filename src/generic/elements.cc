@@ -1324,33 +1324,27 @@ namespace oomph
     DenseMatrix<double>& jacobian,
     DenseMatrix<double>& mass_matrix)
   {
-    fill_in_contribution_to_jacobian(residuals, jacobian);
-    //
-    //
-    //    std::string error_message =
-    //      "Empty fill_in_contribution_to_jacobian_and_mass_matrix() has been
-    //      ";
-    //    error_message += "called.\n";
-    //    error_message +=
-    //      "This function is called from the default implementation of\n";
-    //    error_message += "get_jacobian_and_mass_matrix();\n";
-    //    error_message +=
-    //      "and must calculate the residuals vector and mass and jacobian
-    //      matrices ";
-    //    error_message += "without initialising any of their entries.\n\n";
-    //
-    //    error_message +=
-    //      "If you do not wish to use these defaults, you must overload\n";
-    //    error_message +=
-    //      "get_jacobian_and_mass_matrix(), which must initialise the
-    //      entries\n";
-    //    error_message +=
-    //      "of the residuals vector, jacobian and mass matrix to zero.\n";
-    //
-    //    throw OomphLibError(
-    //      error_message,
-    //      "GeneralisedElement::fill_in_contribution_to_jacobian_and_mass_matrix()",
-    //      OOMPH_EXCEPTION_LOCATION);
+    std::string error_message =
+      "Empty fill_in_contribution_to_jacobian_and_mass_matrix() has been ";
+    error_message += "called.\n";
+    error_message +=
+      "This function is called from the default implementation of\n";
+    error_message += "get_jacobian_and_mass_matrix();\n";
+    error_message +=
+      "and must calculate the residuals vector and mass and jacobian matrices ";
+    error_message += "without initialising any of their entries.\n\n";
+
+    error_message +=
+      "If you do not wish to use these defaults, you must overload\n";
+    error_message +=
+      "get_jacobian_and_mass_matrix(), which must initialise the entries\n";
+    error_message +=
+      "of the residuals vector, jacobian and mass matrix to zero.\n";
+
+    throw OomphLibError(
+      error_message,
+      "GeneralisedElement::fill_in_contribution_to_jacobian_and_mass_matrix()",
+      OOMPH_EXCEPTION_LOCATION);
   }
 
 
@@ -1390,10 +1384,10 @@ namespace oomph
     error_message +=
       "Problem::set_analytic_dparameter() has been called in the driver code\n";
 
-    // throw OomphLibError(
-    //   error_message,
-    //   "GeneralisedElement::fill_in_contribution_to_dresiduals_dparameter()",
-    //   OOMPH_EXCEPTION_LOCATION);
+    throw OomphLibError(
+      error_message,
+      "GeneralisedElement::fill_in_contribution_to_dresiduals_dparameter()",
+      OOMPH_EXCEPTION_LOCATION);
   }
 
   //======================================================================
@@ -1895,9 +1889,7 @@ namespace oomph
         error_stream << " ii) switching OFF the PARANOID flag" << std::endl
                      << std::endl;
 
-        /// Throw an inverted error so it can be caught by the adaptive
-        /// timestepper and arc length continuation for example.
-        throw InvertedElementError(
+        throw OomphLibError(
           error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
       }
     }

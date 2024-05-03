@@ -149,7 +149,6 @@ namespace oomph
       BASIC::fill_in_contribution_to_jacobian_and_mass_matrix(
         residuals, jacobian, mass_matrix);
       // Call the solid equations
-      // SOLID::fill_in_contribution_to_jacobian(residuals, jacobian);
       SOLID::fill_in_contribution_to_jacobian_and_mass_matrix(
         residuals, jacobian, mass_matrix);
 

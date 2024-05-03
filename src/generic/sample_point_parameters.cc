@@ -31,7 +31,7 @@ namespace oomph
 {
   /// Default for "measure of" number of sample points per element
   unsigned SamplePointContainerParameters::
-    Default_nsample_points_generated_per_element = 10;
+    Default_nsample_points_generated_per_element = 5;
 
   /// Default value for max. depth
   unsigned RefineableBinArrayParameters::Default_max_depth =

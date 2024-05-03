@@ -87,9 +87,6 @@ namespace oomph
   // Forward definition for sum of matrices class
   class SumOfMatrices;
 
-  // Forward definition for inverted element errors
-  class InvertedElementError;
-
   /// //////////////////////////////////////////////////////////////////
   /// //////////////////////////////////////////////////////////////////
   /// //////////////////////////////////////////////////////////////////
@@ -3103,69 +3100,35 @@ namespace oomph
   //=======================================================================
   /// A class to handle errors in the Newton solver
   //=======================================================================
-  class NewtonSolverError : public OomphLibError
+  class NewtonSolverError
   {
-  private:
+  public:
     /// Error in the linear solver
-    bool Linear_solver_error;
+    bool linear_solver_error;
 
     /// Max. # of iterations performed when the Newton solver died
-    unsigned Iterations;
+    unsigned iterations;
 
     /// Max. residual when Newton solver died
-    double Maxres;
+    double maxres;
 
-  public:
     /// Default constructor, does nothing
-    NewtonSolverError()
-      : OomphLibError("There was an error in the Newton Solver.",
-                      OOMPH_CURRENT_FUNCTION,
-                      OOMPH_EXCEPTION_LOCATION),
-        Linear_solver_error(false),
-        Iterations(0),
-        Maxres(0.0)
+    NewtonSolverError() : linear_solver_error(false), iterations(0), maxres(0.0)
     {
     }
 
     /// Constructor that passes a failure of the linear solver
     NewtonSolverError(const bool& Passed_linear_failure)
-      : OomphLibError("There was an error in the Newton Solver.",
-                      OOMPH_CURRENT_FUNCTION,
-                      OOMPH_EXCEPTION_LOCATION),
-        Linear_solver_error(Passed_linear_failure),
-        Iterations(0),
-        Maxres(0.0)
+      : linear_solver_error(Passed_linear_failure), iterations(0), maxres(0.0)
     {
     }
 
     /// Constructor that passes number of iterations and residuals
     NewtonSolverError(unsigned Passed_iterations, double Passed_maxres)
-      : OomphLibError("There was an error in the Newton Solver.",
-                      OOMPH_CURRENT_FUNCTION,
-                      OOMPH_EXCEPTION_LOCATION),
-        Linear_solver_error(false),
-        Iterations(Passed_iterations),
-        Maxres(Passed_maxres)
+      : linear_solver_error(false),
+        iterations(Passed_iterations),
+        maxres(Passed_maxres)
     {
-    }
-
-    /// Access function to the error in the linear solver
-    bool get_linear_solver_error()
-    {
-      return Linear_solver_error;
-    }
-
-    /// Access function to Max. # of iterations performed when the Newton solver
-    /// died
-    unsigned get_iterations()
-    {
-      return Iterations;
-    }
-
-    /// Access function to Max. residual when Newton solver died
-    double get_maxres()
-    {
-      return Maxres;
     }
   };
 

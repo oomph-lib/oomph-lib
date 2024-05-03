@@ -1037,7 +1037,8 @@ namespace oomph
       // Zero the dres_dparam vector
       dres_dparam.initialise(0.0);
       // Add the elemental contribution to the residuals vector
-      fill_in_contribution_to_dresiduals_dparameter(parameter_pt, dres_dparam);
+      this->fill_in_contribution_to_dresiduals_dparameter(parameter_pt,
+                                                          dres_dparam);
     }
 
     /// Calculate the derivatives of the elemental Jacobian matrix
@@ -5256,21 +5257,6 @@ namespace oomph
   /// ////////////////////////////////////////////////////////////////////
   /// ////////////////////////////////////////////////////////////////////
   /// ////////////////////////////////////////////////////////////////////
-
-
-  //=======================================================================
-  /// A class to specify when the error is caused by an inverted element.
-  //=======================================================================
-  class InvertedElementError : public OomphLibError
-  {
-  public:
-    InvertedElementError(const std::string& error_description,
-                         const std::string& function_name,
-                         const char* location)
-      : OomphLibError(error_description, function_name, location)
-    {
-    }
-  };
 
 } // namespace oomph
 
