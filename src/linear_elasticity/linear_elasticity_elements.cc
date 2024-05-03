@@ -719,9 +719,6 @@ namespace oomph
 
 
   // Instantiate the required elements
-  template class LinearElasticityEquationsBase<1>;
-  template class LinearElasticityEquations<1>;
-
   template class LinearElasticityEquationsBase<2>;
   template class LinearElasticityEquations<2>;
 

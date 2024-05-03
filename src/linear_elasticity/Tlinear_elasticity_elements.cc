@@ -37,9 +37,6 @@ namespace oomph
   //====================================================================
   // Force build of templates
   //====================================================================
-  template class TLinearElasticityElement<1, 2>;
-  template class TLinearElasticityElement<1, 3>;
-
   template class TLinearElasticityElement<2, 2>;
   template class TLinearElasticityElement<2, 3>;
   template class TLinearElasticityElement<2, 4>;
