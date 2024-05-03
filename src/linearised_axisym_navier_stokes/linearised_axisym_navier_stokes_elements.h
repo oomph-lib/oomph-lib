@@ -100,6 +100,7 @@ namespace oomph
     /// that the mesh is stationary.
     bool ALE_is_disabled;
 
+  public:
     /// Access function for the local equation number
     /// information for the i-th component of the pressure.
     /// p_local_eqn[n,i] = local equation number or < 0 if pinned.
@@ -134,7 +135,6 @@ namespace oomph
                                            Shape& psi,
                                            Shape& test) const = 0;
 
-  public:
     /// Calculate the velocity components of the base flow solution
     /// at a given time and Eulerian position
     virtual void get_base_flow_u(const double& time,
@@ -186,7 +186,6 @@ namespace oomph
       }
     }
 
-  protected:
     /// Compute the residuals for the Navier-Stokes equations;
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     virtual void fill_in_generic_residual_contribution_linearised_axi_nst(
@@ -195,7 +194,6 @@ namespace oomph
       DenseMatrix<double>& mass_matrix,
       unsigned flag);
 
-  public:
     /// Constructor: NULL the base flow solution and the
     /// derivatives of the base flow function
     LinearisedAxisymmetricNavierStokesEquations()

@@ -1319,10 +1319,6 @@ namespace oomph
         // If it's not a boundary condition
         if (local_eqn >= 0)
         {
-          if (r < 1e-3)
-          {
-            std::cout << "WARNING" << std::endl;
-          }
           // Pressure gradient term
           residuals[local_eqn] -= k * interpolated_PS * testf_ * W;
 
