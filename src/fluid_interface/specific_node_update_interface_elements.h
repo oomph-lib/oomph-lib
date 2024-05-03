@@ -697,17 +697,6 @@ namespace oomph
       return this->nodal_local_eqn(n, this->lagrange_index(n));
     }
 
-    // void fix_lagrange_multiplier(const unsigned& n, const double& value)
-    //{
-    //  this->node_pt(n)->pin(this->lagrange_index(n));
-    //  this->node_pt(n)->set_value(this->lagrange_index(n), value);
-    //}
-
-    // void free_lagrange_multiplier(const unsigned& n)
-    //{
-    //  this->node_pt(n)->unpin(this->lagrange_index(n));
-    //}
-
     /// Hijacking the kinematic condition corresponds to hijacking the
     /// variables associated with the Lagrange multipliers that are assigned
     /// on construction of this element.
@@ -840,7 +829,7 @@ namespace oomph
     }
 
     /// Return the lagrange multiplier at local node n
-    double lagrange(const unsigned& n)
+    double& lagrange(const unsigned& n)
     {
       return *this->node_pt(n)->value_pt(this->lagrange_index(n));
     }
@@ -880,17 +869,9 @@ namespace oomph
       // Call the generic routine with the flag set to 1
       EQUATION_CLASS::fill_in_generic_residual_contribution_interface(
         residuals, jacobian, GeneralisedElement::Dummy_matrix, 1);
-      // SolidFiniteElement::fill_in_contribution_to_jacobian(residuals,
-      // jacobian);
 
       // Call the generic finite difference routine for the solid variables
       this->fill_in_jacobian_from_solid_position_by_fd(jacobian);
-
-      // Call generic FD routine for the external data
-      // this->fill_in_jacobian_from_external_by_fd(jacobian);
-
-      // Call the generic routine to handle the spine variables
-      // this->fill_in_jacobian_from_geometric_data(jacobian);
     }
 
     /// Fill in contribution to residuals and Jacobian
@@ -1005,7 +986,7 @@ namespace oomph
       // Read out the dimension of the node
       const unsigned nodal_dimension = this->nodal_dimension();
 
-      const double St = EQUATION_CLASS::st();
+      const double st_local = EQUATION_CLASS::st();
       double interpolated_lagrange = 0.0;
       for (unsigned l = 0; l < n_node; l++)
       {
@@ -1070,7 +1051,7 @@ namespace oomph
                   // Positive, due to the mass matrix being on the left-hand
                   // side.
                   mass_matrix(local_eqn, local_unknown) +=
-                    St * psif(l2) * interpolated_n[i2] * psif(l) * J * W;
+                    st_local * psif(l2) * interpolated_n[i2] * psif(l) * J * W;
                 }
               }
             }

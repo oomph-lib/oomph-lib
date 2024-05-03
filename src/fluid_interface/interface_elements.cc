@@ -129,16 +129,7 @@ namespace oomph
     }
 
     // Get the value of sigma from the parent
-    double sigma_local = 0;
-    if (Sigma_pt)
-    {
-      sigma_local = sigma();
-    }
-    else
-    {
-      sigma_local =
-        dynamic_cast<FluidInterfaceElement*>(parent_pt)->sigma(s_parent);
-    }
+    double sigma_local = sigma();
 
     // Are we doing the weak form replacement
     if (Contact_angle_flag == 2)
@@ -202,7 +193,7 @@ namespace oomph
       // MINUS the dot product computed above
       if (local_eqn >= 0)
       {
-        residuals[local_eqn] = cos(contact_angle()) - dot;
+        residuals[local_eqn] = cos(contact_angle()) + dot;
       }
       // NOTE: The jacobian entries will be computed automatically
       // by finite differences.
@@ -317,8 +308,7 @@ namespace oomph
         }
 
         // Get the value of sigma from the parent
-        const double sigma_local =
-          dynamic_cast<FluidInterfaceElement*>(parent_pt)->sigma(s_parent);
+        const double sigma_local = this->sigma();
 
         // Get the capillary number
         const double ca_local = ca();
@@ -362,8 +352,7 @@ namespace oomph
         this->outer_unit_normal(s_local, m);
 
         // Get the value of sigma from the parent
-        const double sigma_local =
-          dynamic_cast<FluidInterfaceElement*>(parent_pt)->sigma(s_parent);
+        const double sigma_local = this->sigma();
 
         // Get the capillary number
         const double ca_local = ca();
@@ -419,7 +408,7 @@ namespace oomph
           // MINUS the dot product
           if (local_eqn >= 0)
           {
-            residuals[local_eqn] += (cos(contact_angle()) - dot) * psi(l) * W;
+            residuals[local_eqn] += (cos(contact_angle()) + dot) * psi(l) * W;
           }
           // NOTE: The jacobian entries will be computed automatically
           // by finite differences.
@@ -581,7 +570,7 @@ namespace oomph
       this->outer_unit_normal(s, interpolated_n);
 
       // Now also get the (possible variable) surface tension
-      double Sigma = this->sigma(s);
+      double sigma_local = this->sigma(s);
 
       // Loop over the shape functions
       for (unsigned l = 0; l < n_node; l++)
@@ -596,7 +585,8 @@ namespace oomph
           if (local_eqn >= 0)
           {
             // Add the surface-tension contribution to the momentum equation
-            residuals[local_eqn] -= (Sigma / Ca) * dpsifdS_div(l, i) * J * W;
+            residuals[local_eqn] -=
+              (sigma_local / Ca) * dpsifdS_div(l, i) * J * W;
 
             // If the element is a free surface, add in the external pressure
             if (Pext_data_pt != 0)

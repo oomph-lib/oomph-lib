@@ -69,7 +69,6 @@ namespace oomph
     /// Pointer to the desired value of the capillary number
     double* Ca_pt;
 
-  protected:
     /// Pointer to the desired value of Sigma
     double* Sigma_pt;
 
