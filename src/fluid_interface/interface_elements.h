@@ -69,6 +69,10 @@ namespace oomph
     /// Pointer to the desired value of the capillary number
     double* Ca_pt;
 
+    /// Default sigma value for the sigma pointer to point to before it gets
+    /// changed.
+    double Default_sigma;
+
     /// Pointer to the desired value of Sigma
     double* Sigma_pt;
 
@@ -136,7 +140,8 @@ namespace oomph
       : Wall_unit_normal_fct_pt(0),
         Contact_angle_pt(0),
         Ca_pt(0),
-        Sigma_pt(0),
+        Default_sigma(1.0),
+        Sigma_pt(&Default_sigma),
         Contact_angle_flag(0)
     {
     }
@@ -206,20 +211,7 @@ namespace oomph
     /// Return the value of the capillary number
     double sigma()
     {
-#ifdef PARANOID
-      if (Sigma_pt != 0)
-      {
-#endif
-        return *Sigma_pt;
-#ifdef PARANOID
-      }
-      else
-      {
-        throw OomphLibError("Sigma has not been set",
-                            "FluidInterfaceBoundingElement::sigma()",
-                            OOMPH_EXCEPTION_LOCATION);
-      }
-#endif
+      return *Sigma_pt;
     }
 
 
