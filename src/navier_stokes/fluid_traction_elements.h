@@ -486,8 +486,8 @@ namespace oomph
         }
 
         // Get the indices at which the velocity components are stored
-        unsigned u_nodal_index[this->local_dim];
-        for (unsigned i = 0; i < this->local_dim; i++)
+        unsigned u_nodal_index[this->Dim];
+        for (unsigned i = 0; i < this->Dim; i++)
         {
           u_nodal_index[i] =
             dynamic_cast<ELEMENT*>(this->bulk_element_pt())->u_index_nst(l, i);
