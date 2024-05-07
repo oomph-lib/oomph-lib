@@ -897,41 +897,7 @@ namespace oomph
     /// Output the element
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
-      const unsigned el_dim = this->dim();
-      const unsigned n_dim = this->nodal_dimension();
-      const unsigned n_velocity = this->U_index_interface.size();
-      const unsigned n_node = this->nnode();
-      // Set output Vector
-      Vector<double> s(el_dim);
-      Shape psif(n_node);
-
-      // Loop over plot points
-      unsigned num_plot_points = this->nplot_points(n_plot);
-      for (unsigned iplot = 0; iplot < num_plot_points; iplot++)
-      {
-        // Get local coordinates of pliot point
-        this->get_s_plot(iplot, n_plot, s);
-
-        this->shape_at_knot(iplot, psif);
-
-        double interpolated_lagrange = 0.0;
-        for (unsigned l = 0; l < n_node; l++)
-        {
-          // Note same shape functions used for lagrange multiplier field
-          interpolated_lagrange += lagrange(l) * psif(l);
-        }
-
-        // Output the x,y,u,v
-        for (unsigned i = 0; i < n_dim; i++)
-          outfile << this->interpolated_x(s, i) << " ";
-        for (unsigned i = 0; i < n_velocity; i++)
-          outfile << this->interpolated_u(s, i) << " ";
-
-        // Output a dummy pressure
-        outfile << 0.0 << " ";
-
-        outfile << interpolated_lagrange << std::endl;
-      }
+      EQUATION_CLASS::output(outfile, n_plot);
     }
 
     /// Overload the C-style output function
@@ -1209,11 +1175,11 @@ namespace oomph
       // Output fields, x, y, alpha_input, alpha_output, lagrange_multiplier
       for (unsigned i = 0; i < spatial_dim; i++)
       {
-        outfile << x[i] << " ";
+        outfile << x[i] << ",";
       }
       std::streamsize ss = outfile.precision();
       outfile << std::fixed << std::setprecision(3);
-      outfile << imposed_contact_angle * 180 / MathematicalConstants::Pi << " ";
+      outfile << imposed_contact_angle * 180 / MathematicalConstants::Pi << ",";
       outfile << computed_contact_angle * 180 / MathematicalConstants::Pi;
       outfile << std::endl;
       outfile << std::fixed << std::setprecision(ss);
