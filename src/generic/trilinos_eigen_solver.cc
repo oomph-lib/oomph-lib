@@ -25,3 +25,9 @@
 // LIC//====================================================================
 
 #include "trilinos_eigen_solver.h"
+
+
+namespace Anasazi
+{
+  bool Use_temporary_code_for_andrew_legacy_version = false;
+}
