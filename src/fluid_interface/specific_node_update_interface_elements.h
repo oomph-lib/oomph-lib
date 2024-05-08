@@ -1120,6 +1120,12 @@ namespace oomph
     Vector<unsigned> Lagrange_index;
 
   public:
+
+    void fill_in_contribution_to_dresiduals_dparameter(
+      double* const& parameter_pt, Vector<double>& dres_dparam)
+    {
+    }
+
     /// Set the Id and offset
     void set_lagrange_index(const Vector<unsigned>& lagrange_index)
     {
@@ -1269,6 +1275,14 @@ namespace oomph
       // Call the generic finite difference routine to handle the solid
       // variables
       this->fill_in_jacobian_from_solid_position_by_fd(jacobian);
+    }
+
+    void fill_in_contribution_to_jacobian_and_mass_matrix(
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix)
+    {
+      fill_in_contribution_to_jacobian(residuals, jacobian);
     }
 
     /// Set the kinematic local equation
