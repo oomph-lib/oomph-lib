@@ -59,7 +59,10 @@ namespace Global_Parameters
  /// Rotation ratio
  double Alpha=0.0;
 
- /// Control Flag that will read in the eigenfunction from disk
+ 
+ /// Control flag used to determine whether the eigenfunction
+ /// is read from disk. Reading from disk avoids lengthy
+ /// eigenvalue calculations in the self-tests
  bool Read_in_eigenfunction_from_disk = true;
  
 }

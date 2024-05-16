@@ -62,8 +62,11 @@ namespace Global_Parameters
 
  //Set the normalisation for the eigenfunction
  std::complex<double> Eigenfunction_normalisation(1.0,0.0);
+
  
- // Control Flag that will read in the eigenfunction from disk
+ /// Control flag used to determine whether the eigenfunction
+ /// is read from disk. Reading from disk avoids lengthy
+ /// eigenvalue calculations in the self-tests
  bool Read_in_eigenfunction_from_disk = true;
 }
 
