@@ -98,6 +98,7 @@ namespace oomph
     TriangleMeshParameters(Vector<TriangleMeshClosedCurve*>& outer_boundary_pt)
       : Outer_boundary_pt(outer_boundary_pt),
         Element_area(0.2),
+        Min_element_interior_angle(30.0),
         Use_attributes(false),
         Boundary_refinement(true),
         Internal_boundary_refinement(true),
@@ -110,6 +111,7 @@ namespace oomph
     /// are stated with the specific parameters
     TriangleMeshParameters(TriangleMeshClosedCurve* outer_boundary_pt)
       : Element_area(0.2),
+        Min_element_interior_angle(30.0),
         Use_attributes(false),
         Boundary_refinement(true),
         Internal_boundary_refinement(true),
@@ -124,6 +126,7 @@ namespace oomph
     /// the default ones
     TriangleMeshParameters()
       : Element_area(0.2),
+        Min_element_interior_angle(30.0),
         Use_attributes(false),
         Boundary_refinement(true),
         Internal_boundary_refinement(true),
@@ -363,6 +366,18 @@ namespace oomph
       return Allow_automatic_creation_of_vertices_on_boundaries;
     }
 
+    // Provide read-only access to the min_element_interior_angle
+    const double& min_element_interior_angle()
+    {
+      return this->Min_element_interior_angle;
+    }
+
+    // Provide a set function for the min_element_interior_angle
+    void set_min_element_interior_angle(const double& new_angle)
+    {
+      this->Min_element_interior_angle = new_angle;
+    }
+
   protected:
     /// The outer boundary
     Vector<TriangleMeshClosedCurve*> Outer_boundary_pt;
@@ -373,9 +388,15 @@ namespace oomph
     /// Internal boundaries
     Vector<TriangleMeshOpenCurve*> Internal_open_curves_pt;
 
-    /// The element are when calling triangulate external routine
+    /// The element area when calling triangulate external routine
     double Element_area;
 
+  private:
+    /// The minimum element interior angle when calling triangulate external
+    /// routine
+    double Min_element_interior_angle;
+
+  protected:
     /// Store the coordinates for defining extra holes
     Vector<Vector<double>> Extra_holes_coordinates;
 
@@ -424,7 +445,7 @@ namespace oomph
   {
   public:
     /// Empty constructor
-    TriangleMesh()
+    TriangleMesh() : Min_element_interior_angle(30.0)
     {
 #ifdef OOMPH_HAS_TRIANGLE_LIB
       // Using this constructor no Triangulateio object is built
@@ -451,6 +472,7 @@ namespace oomph
       const std::string& poly_file_name,
       TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
       const bool& allow_automatic_creation_of_vertices_on_boundaries = true)
+      : Min_element_interior_angle(30.0)
     {
       // Mesh can only be built with 2D Telements.
       MeshChecker::assert_geometric_element<TElementGeometricBase, ELEMENT>(2);
@@ -515,6 +537,8 @@ namespace oomph
     /// TriangleMeshParameters
     TriangleMesh(TriangleMeshParameters& triangle_mesh_parameters,
                  TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+      : Min_element_interior_angle(
+          triangle_mesh_parameters.min_element_interior_angle())
     {
       // Store the region target areas
       Regions_areas = triangle_mesh_parameters.target_area_for_region();
@@ -757,6 +781,7 @@ namespace oomph
       const double& element_area,
       TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
       const bool& allow_automatic_creation_of_vertices_on_boundaries = true)
+      : Min_element_interior_angle(30.0)
     {
       // Mesh can only be built with 2D Telements.
       MeshChecker::assert_geometric_element<TElementGeometricBase, ELEMENT>(2);
@@ -788,7 +813,8 @@ namespace oomph
 
       // MH: Like everything else, this hasn't been tested!
       // used to be input_string_stream<<"-pA -a" << element_area << "q30";
-      input_string_stream << "-pA -a -a" << element_area << "q30";
+      input_string_stream << "-pA -a -a" << element_area << "q"
+                          << this->min_element_interior_angle();
 
       // Verify if creation of new points on boundaries is allowed
       if (!this->is_creation_of_vertices_on_boundaries_allowed())
@@ -1285,8 +1311,8 @@ namespace oomph
       // input_string_stream<<"-pA -a" << element_area << " -q30" << std::fixed;
       // The repeated -a allows the specification of areas for different
       // regions (if any)
-      input_string_stream << "-pA -a -a" << element_area << " -q30"
-                          << std::fixed;
+      input_string_stream << "-pA -a -a" << element_area << " -q"
+                          << this->Min_element_interior_angle << std::fixed;
 
       // Verify if creation of new points on boundaries is allowed
       if (!this->is_automatic_creation_of_vertices_on_boundaries_allowed())
@@ -2229,6 +2255,9 @@ namespace oomph
       H.resize(k);
       return H;
     }
+
+    // Store the Min_element_interior_angle
+    double Min_element_interior_angle;
   };
 
 
@@ -2270,7 +2299,9 @@ namespace oomph
     RefineableTriangleMesh(
       TriangleMeshParameters& triangle_mesh_parameters,
       TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
-      : TriangleMesh<ELEMENT>(triangle_mesh_parameters, time_stepper_pt)
+      : TriangleMesh<ELEMENT>(triangle_mesh_parameters, time_stepper_pt),
+        Min_element_interior_angle_for_adaption(
+          triangle_mesh_parameters.min_element_interior_angle())
     {
       // Initialise the data associated with adaptation
       initialise_adaptation_data();
@@ -2293,7 +2324,8 @@ namespace oomph
           element_file_name,
           poly_file_name,
           time_stepper_pt,
-          allow_automatic_creation_of_vertices_on_boundaries)
+          allow_automatic_creation_of_vertices_on_boundaries),
+        Min_element_interior_angle_for_adaption(30.0)
     {
       // Create and fill the data structures to give rise to polylines so that
       // the mesh can use the adapt methods
@@ -2319,7 +2351,10 @@ namespace oomph
       TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
       const bool& use_attributes = false,
       const bool& allow_automatic_creation_of_vertices_on_boundaries = true,
-      OomphCommunicator* comm_pt = 0)
+      OomphCommunicator* comm_pt = 0,
+      const double& min_element_interior_angle_for_adaption = 30.0)
+      : Min_element_interior_angle_for_adaption(
+          min_element_interior_angle_for_adaption)
     {
       // Initialise the data associated with adaptation
       initialise_adaptation_data();
@@ -2344,7 +2379,9 @@ namespace oomph
 
       // Input string for triangle
       std::stringstream input_string_stream;
-      input_string_stream << "-pq30-ra";
+      input_string_stream << "-pq"
+                          << this->Min_element_interior_angle_for_adaption
+                          << "-ra";
 
       // Verify if creation of new points on boundaries is allowed
       if (!allow_automatic_creation_of_vertices_on_boundaries)
@@ -2489,6 +2526,18 @@ namespace oomph
     double& min_permitted_angle()
     {
       return Min_permitted_angle;
+    }
+
+    /// Read-only access to the min element interior angle for adaption
+    const double& min_element_interior_angle_for_adaption() const
+    {
+      return this->Min_element_interior_angle_for_adaption;
+    }
+
+    /// Set the min element interior angle for adaption
+    void set_min_element_interior_angle_for_adaption(const double& new_angle)
+    {
+      this->Min_element_interior_angle_for_adaption = new_angle;
     }
 
     // Returns the status of using an iterative solver for the
@@ -3850,6 +3899,9 @@ namespace oomph
     /// Min angle before remesh gets triggered
     double Min_permitted_angle;
 
+    // Store the min element interior angle for adaption
+    double Min_element_interior_angle_for_adaption;
+
     /// Enable/disable solution projection during adaptation
     bool Disable_projection;
 
@@ -3968,14 +4020,16 @@ namespace oomph
       TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
       const bool& use_attributes = false,
       const bool& allow_automatic_creation_of_vertices_on_boundaries = true,
-      OomphCommunicator* comm_pt = 0)
+      OomphCommunicator* comm_pt = 0,
+      const double& min_element_interior_angle_for_adaption = 30.0)
       : RefineableTriangleMesh<ELEMENT>(
           target_area,
           triangulate_io,
           time_stepper_pt,
           use_attributes,
           allow_automatic_creation_of_vertices_on_boundaries,
-          comm_pt)
+          comm_pt,
+          min_element_interior_angle_for_adaption)
     {
       // Assign the Lagrangian coordinates
       set_lagrangian_nodal_coordinates();
