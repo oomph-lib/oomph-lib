@@ -140,7 +140,7 @@ public:
     StructuredSolidProblem(){
 
         //Create bulk mesh
-        string file_name="inputs/cantiliver.msh";
+        string file_name="inputs/cube.msh";
 
         Solid_mesh_pt =  new ElasticMesh<ELEMENT>(file_name);
 
@@ -148,13 +148,13 @@ public:
         unsigned b=1;
 
         // Make traction mesh
-        Traction_mesh_pt=new SolidMesh;
+        // Traction_mesh_pt=new SolidMesh;
 
         // How many bulk elements are adjacent to boundary b?
-        unsigned n_element = Solid_mesh_pt->nboundary_element(b);
+        //unsigned n_element = Solid_mesh_pt->nboundary_element(b);
 
         // Loop over the bulk elements adjacent to boundary b
-        for(unsigned e=0;e<n_element;e++)
+        /*for(unsigned e=0;e<n_element;e++)
         {
             // Get pointer to the bulk element that is adjacent to boundary b
             auto* bulk_elem_pt = dynamic_cast<ELEMENT*>(Solid_mesh_pt->boundary_element_pt(b,e));
@@ -166,17 +166,17 @@ public:
             SolidTractionElement<ELEMENT> *el_pt = new SolidTractionElement<ELEMENT>(bulk_elem_pt,face_index);
 
             // Add to mesh
-            Traction_mesh_pt->add_element_pt(el_pt);
+            //Traction_mesh_pt->add_element_pt(el_pt);
 
             //Set the traction function
             el_pt->traction_fct_pt() = Global_Physical_Variables::constant_pressure;
 
-        }
+        }*/
 
 
         // Add sub meshes
         add_sub_mesh(Solid_mesh_pt);
-        add_sub_mesh(Traction_mesh_pt);
+        //add_sub_mesh(Traction_mesh_pt);
 
         // Build global mesh
         build_global_mesh();
@@ -186,7 +186,7 @@ public:
         std::ofstream bc_file("pinned_nodes.dat");
 
         // Pin positions at left boundary (boundary 0)
-        unsigned ibound=0;
+        /*unsigned ibound=0;
         unsigned num_nod= Solid_mesh_pt->nboundary_node(ibound);
         for (unsigned inod=0;inod<num_nod;inod++)
         {
@@ -203,10 +203,10 @@ public:
             }
 
             bc_file << std::endl;
-        }
+        }*/
 
         // Complete the build of all elements so they are fully functional
-        n_element = Solid_mesh_pt->nelement();
+        auto n_element = Solid_mesh_pt->nelement();
         for(unsigned i=0;i<n_element;i++)
         {
             //Cast to a solid element
@@ -243,7 +243,7 @@ private:
     ElasticMesh<ELEMENT>* Solid_mesh_pt;
 
     /// Pointer to mesh of traction elements
-    SolidMesh* Traction_mesh_pt;
+    //SolidMesh* Traction_mesh_pt;
 
 };
 
@@ -266,7 +266,7 @@ void StructuredSolidProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
     // Number of plot points
     unsigned npts;
-    npts=5;
+    npts=2;
 
     // Output boundaries
     //------------------
@@ -288,11 +288,11 @@ void StructuredSolidProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
     // Output traction
     //----------------
-    sprintf(filename,"%s/traction%i.dat",doc_info.directory().c_str(),
+    /*sprintf(filename,"%s/traction%i.dat",doc_info.directory().c_str(),
             doc_info.number());
     some_file.open(filename);
     Traction_mesh_pt->output(some_file,npts);
-    some_file.close();
+    some_file.close();*/
 
 }
 
@@ -315,10 +315,10 @@ int main()
     // Create generalised Hookean constitutive equations
     Global_Physical_Variables::Constitutive_law_pt = new GeneralisedHookean(&Global_Physical_Variables::Nu);
 
-    //Set up the problem
+    // Set up the problem
     StructuredSolidProblem<QPVDElement<3,2> > problem;
 
-    //Output initial configuration
+    // Output initial configuration
     problem.doc_solution(doc_info);
     doc_info.number()++;
 
@@ -327,19 +327,15 @@ int main()
     Global_Physical_Variables::P=0.0;
     double pressure_increment=0;
 
-    unsigned nstep=2; // 10;
-    for (unsigned istep=0;istep<nstep;istep++)
-    {
-        // Solve the problem
-        problem.newton_solve();
+    // Solve the problem
+    problem.newton_solve();
 
-        //Output solution
-        problem.doc_solution(doc_info);
-        doc_info.number()++;
+    // Output solution
+    problem.doc_solution(doc_info);
+    doc_info.number()++;
 
-        // Bump up suction
-        Global_Physical_Variables::P+=pressure_increment;
-    }
+    // Bump up suction
+    Global_Physical_Variables::P+=pressure_increment;
 
 }
 
