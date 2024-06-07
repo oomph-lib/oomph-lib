@@ -4,6 +4,7 @@ mesh_from_inline_triangle_internal_boundaries \
 mesh_from_triangle \
 mesh_from_geompack \
 mesh_from_tetgen \
+mesh_from_gmsh \
 mesh_from_xfig_triangle \
 mesh_from_vmtk \
 quad_from_triangle_mesh \
