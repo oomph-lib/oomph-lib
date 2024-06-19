@@ -41,20 +41,25 @@ namespace oomph
     /// that BoundaryNodes are constructed. Any additional boundaries are
     /// determined from the face boundary information.
     //======================================================================
-    GmshScaffoldMesh::GmshScaffoldMesh(const std::string& file_name)
+    GmshScaffoldMesh::GmshScaffoldMesh(const std::string& file_name, bool verbose)
     {
         // Process the element file
         // --------------------------
-        GMSH::Gmsh rg(file_name);
-        auto& nodes= rg.getNodes();
-        auto& edges= rg.getEdges();
-        auto& faces= rg.getQuads();
-        auto& bricks= rg.getHexas();
+        GMSH::Gmsh rg(file_name, verbose);
+        std::vector<GMSH::Node> nodes = rg.getNodes();
+        std::vector<GMSH::Edge> edges = rg.getEdges();
 
         // dimension of the mesh
         const unsigned dim = rg.getMeshDim();
+        std::vector<GMSH::Quad> faces = rg.getQuads();
+        std::vector<GMSH::Hexa> bricks= rg.getHexas();
 
-        if (rg.getMeshDim()==2){
+
+        unsigned n_local_face = rg.getFacesPerElement();
+        unsigned n_local_edge = rg.getEdgesPerElement();
+
+
+        if (dim ==2){
             std::cout<< "Mesh is 2D!" <<std::endl;
             exit(-1);
         }
@@ -65,8 +70,8 @@ namespace oomph
         unsigned n_local_node = rg.getNodesPerElement();
 
 
-        // Throw an error if we have anything but linear simplices
-        if (n_local_node != Hexaheadral::nNodes)
+        // Throw an error if we have anything other than [Hexas or Quads] but linear simplices
+        if (n_local_node != Hexaheadral::nNodes && n_local_node != 4)
         {
             std::ostringstream error_stream;
             error_stream
@@ -106,7 +111,7 @@ namespace oomph
         //--------------------
 
         // Read in the number of nodes
-        unsigned n_node = rg.getNodesSize();
+        unsigned n_node = nodes.size();
 
         // Create a vector of boolean so as not to create the same node twice
         std::vector<bool> done(n_node, false);
@@ -142,7 +147,7 @@ namespace oomph
         // Process face to extract boundary faces
         //--------------------------------------------
 
-        // Number of faces in face file
+        // Number of faces in faces
         unsigned n_face = faces.size();
 
 
@@ -188,6 +193,18 @@ namespace oomph
             this->set_nboundary(n_bound);
         }
 
+        // Translate enumeration
+        Vector<unsigned> oomph_to_gmsh_node(8);
+        oomph_to_gmsh_node[0] = 0;
+        oomph_to_gmsh_node[1] = 1;
+        oomph_to_gmsh_node[2] = 3;
+        oomph_to_gmsh_node[3] = 2;
+
+        oomph_to_gmsh_node[4] = 4;
+        oomph_to_gmsh_node[5] = 5;
+        oomph_to_gmsh_node[6] = 7;
+        oomph_to_gmsh_node[7] = 6;
+
         // Create the elements
         unsigned counter = 0;
         for (unsigned e = 0; e < n_element; e++)
@@ -205,14 +222,14 @@ namespace oomph
                     if (bound[global_node_number] > 0)
                     {
                         // Construct the boundary node
-                        Node_pt[global_node_number] = finite_element_pt(e)->construct_boundary_node(j);
+                        Node_pt[global_node_number] = finite_element_pt(e)->construct_boundary_node(oomph_to_gmsh_node[j]);
 
                         // Add to the boundary lookup scheme
                         add_boundary_node(bound[global_node_number]  - 1,Node_pt[global_node_number]);
                     }
                     else
                     {
-                        Node_pt[global_node_number] = finite_element_pt(e)->construct_node(j);
+                        Node_pt[global_node_number] = finite_element_pt(e)->construct_node(oomph_to_gmsh_node[j]);
                     }
 
                     done[global_node_number] = true;
@@ -223,7 +240,7 @@ namespace oomph
                 else
                 {
                     // Otherwise copy the pointer over
-                    finite_element_pt(e)->node_pt(j) = Node_pt[global_node_number];
+                    finite_element_pt(e)->node_pt(oomph_to_gmsh_node[j]) = Node_pt[global_node_number];
                 }
                 counter++;
             }
@@ -242,7 +259,10 @@ namespace oomph
         // face nodes.
         // The faces that lie on boundaries will have already been allocated so
         // we can start from there
-        Nglobal_face = n_face;
+        for (auto face: faces) {
+            if (face.boundaries[0] == 0) Nglobal_face++;
+        }
+
 
         // Storage for the edges associated with each node.
         // Nodes are indexed using Reader's 1-based scheme, which is why
@@ -260,10 +280,10 @@ namespace oomph
         for (unsigned e = 0; e < bricks.size(); e++)
         {
             // Each element has six faces
-            Face_boundary[e].resize(rg.getFacesPerElement());
-            Face_index[e].resize(rg.getFacesPerElement());
+            Face_boundary[e].resize(n_local_face);
+            Face_index[e].resize(n_local_face);
             // By default, each face is NOT on a boundary
-            for (unsigned i = 0; i < rg.getFacesPerElement(); i++)
+            for (unsigned i = 0; i < n_local_face; i++)
             {
                 Face_boundary[e][i] = 0;
             }
@@ -273,7 +293,7 @@ namespace oomph
             // The offset is to match the offset used above
             const unsigned element_offset = e * n_local_node;
             unsigned glob_num[8] = {0, 0, 0, 0, 0, 0, 0, 0};
-            for (unsigned i = 0; i < rg.getNodesPerElement(); ++i)
+            for (unsigned i = 0; i < n_local_node; ++i)
             {
                 glob_num[i] = Global_node[element_offset + i];
             }
@@ -317,18 +337,11 @@ namespace oomph
                     // Allocate the next global index
                     Face_index[e][i] = face.quadTag;
 
-                    // Associate the new face index with the nodes
-                    for (int faceTag : facesTags)
-                    {
-                        // Don't add the omitted node
-                        //node_on_faces[faceTag].insert(Nglobal_face);
-
-                    }
                 }
             } // end of loop over the faces
 
 
-            Edge_index[e].resize(Hexaheadral::nEdges);
+            Edge_index[e].resize(n_local_edge);
 
             // Loop over the element edges and assign global edge numbers // we have 12 edges on 1 hexa element
             for (unsigned i = 0; i < brick.edgesTag.size(); ++i)
@@ -369,3 +382,4 @@ namespace oomph
 
 
 } // namespace oomph
+
