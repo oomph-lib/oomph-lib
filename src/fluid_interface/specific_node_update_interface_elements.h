@@ -1125,7 +1125,6 @@ namespace oomph
     Vector<unsigned> Lagrange_index;
 
   public:
-
     void fill_in_contribution_to_dresiduals_dparameter(
       double* const& parameter_pt, Vector<double>& dres_dparam)
     {
