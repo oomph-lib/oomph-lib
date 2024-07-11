@@ -857,6 +857,11 @@ namespace oomph
       this->node_pt(n)->set_value(this->lagrange_index(n), value);
     }
 
+    void set_lagrange_multiplier(const unsigned& n, const double& value)
+    {
+      this->node_pt(n)->set_value(this->lagrange_index(n), value);
+    }
+
     void free_lagrange_multiplier(const unsigned& n)
     {
       this->node_pt(n)->unpin(this->lagrange_index(n));
