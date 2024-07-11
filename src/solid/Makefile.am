@@ -4,7 +4,8 @@
 
 # Define the sources
 sources =  \
-solid_elements.cc refineable_solid_elements.cc solid_preconditioners.cc
+solid_elements.cc refineable_solid_elements.cc solid_preconditioners.cc \
+solid_traction_elements.h 
 
 # Include files which shouldn't be compiled
 incl_cc_files =
