@@ -327,6 +327,7 @@ namespace GMSH
 
         void hexasInfo();
 
+        int getBoundaryId(const std::string& bName);
     private:
         static bool inList(std::vector<int>& q, std::vector<Edge>& E);
 

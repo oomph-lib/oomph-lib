@@ -335,6 +335,20 @@ GMSH::Gmsh::Gmsh(const std::string &filename, bool verbose):verbose_(verbose) {
 
 }
 
+// Function to pass the name and get B.C. number
+int GMSH::Gmsh::getBoundaryId(const std::string& name)
+{
+    for (auto boundary : boundaries)
+    {
+        auto it = boundary.physicalNames.find(name);
+        if (it != boundary.physicalNames.end())
+        {
+            return orderedBC[it->second];
+        }
+    }
+    throw std::runtime_error("Boundary Name Not Found!");
+}
+
 /*! Get boundaries from entities. */
 void GMSH::Gmsh::entityTagToBoundaries() {
     for (auto &boundary: boundaries) {
