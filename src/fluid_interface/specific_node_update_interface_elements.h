@@ -867,6 +867,16 @@ namespace oomph
       this->node_pt(n)->unpin(this->lagrange_index(n));
     }
 
+    void pin()
+    {
+      for (unsigned n = 0; n < this->nnode(); n++)
+      {
+        this->node_pt(n)->pin(this->lagrange_index(n));
+        this->node_pt(n)->set_value(this->lagrange_index(n), 0.0);
+      }
+    }
+
+
     /// Fill in contribution to residuals and Jacobian
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                           DenseMatrix<double>& jacobian)
