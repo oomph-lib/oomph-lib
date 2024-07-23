@@ -703,7 +703,8 @@ namespace oomph
     // {dynamic_cast<ELEMENT*>(Element_pt[e])->add_spine(spine);}
 
     /// Assign equation numbers for spines
-    virtual unsigned long assign_global_spine_eqn_numbers(Vector<double*>& Dof_pt);
+    virtual unsigned long assign_global_spine_eqn_numbers(
+      Vector<double*>& Dof_pt);
 
     /// Function to describe the dofs of the Spine. The ostream
     /// specifies the output stream to which the description
