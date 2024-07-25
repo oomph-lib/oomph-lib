@@ -145,7 +145,7 @@ public:
         Solid_mesh_pt =  new ElasticMesh<ELEMENT>(file_name);
 
         // Traction elements are located on boundary 1:
-        unsigned b=1;
+        unsigned b= 1;//getBoundaryId("XMAX");
 
         // Make traction mesh
         Traction_mesh_pt=new SolidMesh;
@@ -186,7 +186,8 @@ public:
         std::ofstream bc_file("pinned_nodes.dat");
 
         // Pin positions at left boundary (boundary 0)
-        unsigned ibound=0;
+        unsigned ibound=0;//getBoundaryId("XMIN");
+        
         unsigned num_nod= Solid_mesh_pt->nboundary_node(ibound);
         for (unsigned inod=0;inod<num_nod;inod++)
         {

@@ -448,6 +448,15 @@ namespace oomph
                 {
                     Boundary_element_pt[boundary_id - 1].push_back(elem_pt);
                     // Need to put a shift in here because of an inconsistent naming
+                    // This face indexing is not correct hope oomph-lib dev can help here!
+                    Vector<unsigned > gmsh_face_map(6,0);
+                    gmsh_face_map[0] = -1;
+                    gmsh_face_map[1] = -2;
+                    gmsh_face_map[2] = -3;
+                    gmsh_face_map[3] =  1;
+                    gmsh_face_map[4] =  2;
+                    gmsh_face_map[5] =  3;
+                    
                     // convention between tetgen and our faces
                     // Tetgen Face 0 is our Face 3
                     // Tetgen Face 1 is our Face 2
