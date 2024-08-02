@@ -51,15 +51,27 @@ namespace oomph
   //======================================================================
   class FluidInterfaceFaceElement : public virtual FaceElement
   {
+  private:
+    /// Index at which the i-th velocity component is stored in the
+    /// element's nodes
+    Vector<unsigned> U_index_interface_boundary;
+
   public:
     FluidInterfaceFaceElement() {}
+
+    /// Access for nodal index at which the velocity components are stored
+    Vector<unsigned>& u_index_interface_boundary()
+    {
+      return U_index_interface_boundary;
+    }
 
     virtual inline unsigned u_index_nst(const unsigned& n,
                                         const unsigned& i) const
     {
-      NavierStokesFaceElement* el_pt =
-        dynamic_cast<NavierStokesFaceElement*>(this->bulk_element_pt());
-      return el_pt->u_index_nst(this->bulk_node_number(n), i);
+      // NavierStokesFaceElement* el_pt =
+      //   dynamic_cast<NavierStokesFaceElement*>(this->bulk_element_pt());
+      // return el_pt->u_index_nst(this->bulk_node_number(n), i);
+      return U_index_interface_boundary[i];
     }
 
     virtual int p_nodal_index_nst(const unsigned& n) const
@@ -72,9 +84,10 @@ namespace oomph
     virtual inline unsigned momentum_index_nst(const unsigned& n,
                                                const unsigned& i) const
     {
-      NavierStokesFaceElement* el_pt =
-        dynamic_cast<NavierStokesFaceElement*>(this->bulk_element_pt());
-      return el_pt->momentum_index_nst(this->bulk_node_number(n), i);
+      // NavierStokesFaceElement* el_pt =
+      //   dynamic_cast<NavierStokesFaceElement*>(this->bulk_element_pt());
+      // return el_pt->momentum_index_nst(this->bulk_node_number(n), i);
+      return U_index_interface_boundary[i];
     }
 
     virtual inline unsigned nst_continuity_index(const unsigned& n) const

@@ -52,7 +52,7 @@ namespace oomph
   /// These boundaries may be in contact with a solid surface, in which case
   /// the normal to that surface must be provided.
   //=========================================================================
-  class FluidInterfaceBoundingElement : public virtual FaceElement
+  class FluidInterfaceBoundingElement : public virtual FluidInterfaceFaceElement
   {
   private:
     /// Function pointer to a wall unit normal function. Returns the
@@ -77,10 +77,6 @@ namespace oomph
     /// in the momentum equations (1) or by hijacking the kinematic
     /// condition (2).
     unsigned Contact_angle_flag;
-
-    /// Index at which the i-th velocity component is stored in the
-    /// element's nodes
-    Vector<unsigned> U_index_interface_boundary;
 
     /// Function that is used to determine the local equation number of
     /// the kinematic equation associated with the nodes of the element
@@ -149,12 +145,6 @@ namespace oomph
     WallUnitNormalFctPt wall_unit_normal_fct_pt() const
     {
       return Wall_unit_normal_fct_pt;
-    }
-
-    /// Access for nodal index at which the velocity components are stored
-    Vector<unsigned>& u_index_interface_boundary()
-    {
-      return U_index_interface_boundary;
     }
 
     /// Set a pointer to the desired contact angle. Optional boolean
@@ -659,7 +649,8 @@ namespace oomph
     /// Overload the output function
     void output(std::ostream& outfile)
     {
-      FiniteElement::output(outfile);
+      const unsigned default_nplot = 5;
+      output(outfile, default_nplot);
     }
 
     /// Output function
@@ -668,7 +659,8 @@ namespace oomph
     /// Overload the C-style output function
     void output(FILE* file_pt)
     {
-      FiniteElement::output(file_pt);
+      const unsigned default_nplot = 5;
+      output(file_pt, default_nplot);
     }
 
     /// C-style Output function

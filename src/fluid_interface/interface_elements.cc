@@ -146,7 +146,7 @@ namespace oomph
       // Just add the appropriate contribution to the momentum equations
       for (unsigned i = 0; i < 2; i++)
       {
-        int local_eqn = nodal_local_eqn(0, this->U_index_interface_boundary[i]);
+        int local_eqn = nodal_local_eqn(0, this->u_index_interface_boundary()[i]);
         if (local_eqn >= 0)
         {
           residuals[local_eqn] +=
@@ -174,7 +174,7 @@ namespace oomph
       //(no slip)
       for (unsigned i = 0; i < 2; i++)
       {
-        int local_eqn = nodal_local_eqn(0, this->U_index_interface_boundary[i]);
+        int local_eqn = nodal_local_eqn(0, this->u_index_interface_boundary()[i]);
         if (local_eqn >= 0)
         {
           residuals[local_eqn] += (sigma_local / ca_local) * m[i];
@@ -328,7 +328,7 @@ namespace oomph
           {
             // Get the equation number for the momentum equation
             int local_eqn =
-              this->nodal_local_eqn(l, this->U_index_interface_boundary[i]);
+              this->nodal_local_eqn(l, this->u_index_interface_boundary()[i]);
 
             // If it's not a boundary condition
             if (local_eqn >= 0)
@@ -368,7 +368,7 @@ namespace oomph
           {
             // Get the equation number for the momentum equation
             int local_eqn =
-              this->nodal_local_eqn(l, this->U_index_interface_boundary[i]);
+              this->nodal_local_eqn(l, this->u_index_interface_boundary()[i]);
 
             // If it's not a boundary condition
             if (local_eqn >= 0)
