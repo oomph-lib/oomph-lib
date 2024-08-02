@@ -35,6 +35,7 @@
 #endif
 
 // OOMPH-LIB headers
+#include "../generic/elements.h"
 #include "../generic/Qelements.h"
 #include "../generic/spines.h"
 #include "../generic/hijacked_elements.h"
@@ -155,6 +156,11 @@ namespace oomph
       public DERIVATIVE_CLASS
   {
   private:
+    virtual double kinematic_lagrange_multiplier(const unsigned& n)
+    {
+      return this->spine_value(n);
+    }
+
     /// In spine elements, the kinematic condition is the equation
     /// used to determine the unknown spine heights. Overload the
     /// function accordingly
@@ -227,19 +233,10 @@ namespace oomph
       }
 #endif
 
-      // Find the index at which the velocity unknowns are stored
-      // from the bulk element and allocate the local storage
-      ELEMENT* cast_element_pt = dynamic_cast<ELEMENT*>(element_pt);
-      // Find number of momentum equation required
-      const unsigned n_u_index = cast_element_pt->n_u_nst();
-      this->U_index_interface.resize(n_u_index);
-      for (unsigned i = 0; i < n_u_index; i++)
-      {
-        this->U_index_interface[i] = cast_element_pt->u_index_nst(i);
-      }
+      // Read out the number of nodes on the face
+      const unsigned n_node_face = this->nnode();
 
       // Add any additional values required by the equations class
-      unsigned n_node_face = this->nnode();
       // Create an instance of the policy class that determines
       // how many additional values are required
       FluidInterfaceAdditionalValues<EQUATION_CLASS>*
@@ -320,13 +317,13 @@ namespace oomph
     }
 
     /// Overload the output function
-    void output(std::ostream& outfile)
+    virtual void output(std::ostream& outfile)
     {
       EQUATION_CLASS::output(outfile);
     }
 
     /// Output the element
-    void output(std::ostream& outfile, const unsigned& n_plot)
+    virtual void output(std::ostream& outfile, const unsigned& n_plot)
     {
       EQUATION_CLASS::output(outfile, n_plot);
     }
@@ -365,8 +362,16 @@ namespace oomph
       // Attach the geometrical information to the new element
       this->build_face_element(face_index, face_el_pt);
 
+
       // Set the index at which the velocity nodes are stored
-      face_el_pt->u_index_interface_boundary() = this->U_index_interface;
+      const unsigned n_dim = this->nodal_dimension();
+      Vector<unsigned> u_index_interface_boundary(n_dim);
+      const unsigned i_node = 0;
+      for (unsigned d = 0; d < n_dim; d++)
+      {
+        u_index_interface_boundary[d] = this->u_index_nst(i_node, d);
+      }
+      face_el_pt->u_index_interface_boundary() = u_index_interface_boundary;
 
       // Set the value of the nbulk_value, the node is not resized
       // in this bounding element,
@@ -671,20 +676,35 @@ namespace oomph
   template<class EQUATION_CLASS, class DERIVATIVE_CLASS, class ELEMENT>
   class ElasticUpdateFluidInterfaceElement
     : public virtual Hijacked<FaceGeometry<ELEMENT>>,
-      public EQUATION_CLASS,
+      public virtual EQUATION_CLASS,
+      public virtual SolidFaceElement,
       public DERIVATIVE_CLASS
   {
-  private:
-    /// Storage for the location of the Lagrange multiplier
-    /// (If other additional values have been added we need
-    /// to add the Lagrange multiplier at the end)
-    Vector<unsigned> Lagrange_index;
+  protected:
+    virtual void set_n_additional_values()
+    {
+      // Setup the addition required number of values for the underlying
+      // equation element
+      EQUATION_CLASS::set_n_additional_values();
 
+      // Add storage for the Lagrange multipler
+      for (unsigned n = 0; n < this->nnode(); n++)
+      {
+        this->N_additional_values[n] += 1;
+      }
+    }
+
+  public:
     /// Return the index at which the lagrange multiplier is
     /// stored at the n-th node
     inline unsigned lagrange_index(const unsigned& n)
     {
-      return this->Lagrange_index[n];
+      return this->additional_value_index(n, N_additional_values[n] - 1);
+    }
+
+    virtual double kinematic_lagrange_multiplier(const unsigned& n)
+    {
+      return this->nodal_value(n, this->lagrange_index(n));
     }
 
     /// Equation number of the kinematic BC associated with node j.
@@ -739,12 +759,15 @@ namespace oomph
     ElasticUpdateFluidInterfaceElement(FiniteElement* const& element_pt,
                                        const int& face_index,
                                        const unsigned& id = 0)
-      : FaceGeometry<ELEMENT>(), EQUATION_CLASS(), DERIVATIVE_CLASS()
+      : FaceGeometry<ELEMENT>(),
+        EQUATION_CLASS(),
+        SolidFaceElement(),
+        DERIVATIVE_CLASS()
     {
       // Attach the geometrical information to the element
       // This function also assigned nbulk_value from required_nvalue of the
       // bulk element
-      element_pt->build_face_element(face_index, this);
+      build(element_pt, face_index, id);
 
 #ifdef PARANOID
       // Is it refineable
@@ -761,59 +784,6 @@ namespace oomph
         }
       }
 #endif
-
-      // Find the index at which the velocity unknowns are stored
-      // from the bulk element and resize the local storage scheme
-      ELEMENT* cast_element_pt = dynamic_cast<ELEMENT*>(element_pt);
-      const unsigned n_u_index = cast_element_pt->n_u_nst();
-      this->U_index_interface.resize(n_u_index);
-      for (unsigned i = 0; i < n_u_index; i++)
-      {
-        this->U_index_interface[i] = cast_element_pt->u_index_nst(i);
-      }
-
-      // Read out the number of nodes on the face
-      unsigned n_node_face = this->nnode();
-
-      // Create an instance of the policy class that determines
-      // how many additional values are required
-      FluidInterfaceAdditionalValues<EQUATION_CLASS>*
-        interface_additional_values_pt =
-          new FluidInterfaceAdditionalValues<EQUATION_CLASS>();
-
-      // Set the additional data values in the face
-      // There is always also one additional values at each node --- the
-      // Lagrange multiplier
-      Vector<unsigned> additional_data_values(n_node_face);
-      for (unsigned n = 0; n < n_node_face; n++)
-      {
-        // Now add one to the addtional values at every single node
-        additional_data_values[n] =
-          interface_additional_values_pt->nadditional_values(n) + 1;
-      }
-
-      // Now add storage for Lagrange multipliers and set the map containing
-      // the position of the first entry of this face element's
-      // additional values.
-      this->add_additional_values(additional_data_values, id);
-
-      // Now I can just store the lagrange index offset to give the storage
-      // location of the nodes
-      Lagrange_index.resize(n_node_face);
-      for (unsigned n = 0; n < n_node_face; ++n)
-      {
-        Lagrange_index[n] =
-          additional_data_values[n] - 1 +
-          dynamic_cast<BoundaryNodeBase*>(this->node_pt(n))
-            ->index_of_first_value_assigned_by_face_element(id);
-      }
-
-      // Call any local setup from the interface policy class
-      interface_additional_values_pt->setup_equation_indices(this, id);
-
-      // Can now delete the policy class
-      delete interface_additional_values_pt;
-      interface_additional_values_pt = 0;
     }
 
     /// The "global" intrinsic coordinate of the element when
@@ -826,12 +796,77 @@ namespace oomph
       return FaceElement::zeta_nodal(n, k, i);
     }
 
+    /// Set pointer to MacroElement -- overloads generic version
+    /// and uses the MacroElement
+    /// also as the default for the "undeformed" configuration.
+    /// This assignment must be overwritten with
+    /// set_undeformed_macro_elem_pt(...) if the deformation of
+    /// the solid body is driven by a deformation of the
+    /// "current" Domain/MacroElement representation of it's boundary.
+    /// Can be overloaded in derived classes to perform additional
+    /// tasks
+    /// Need here to break the indeterminacy due to inheriting two
+    /// FiniteElements
+    virtual void set_macro_elem_pt(MacroElement* macro_elem_pt)
+    {
+      Macro_elem_pt = macro_elem_pt;
+      Undeformed_macro_elem_pt = macro_elem_pt;
+    }
+
     /// Return the lagrange multiplier at local node n
     double& lagrange(const unsigned& n)
     {
       return *this->node_pt(n)->value_pt(this->lagrange_index(n));
     }
 
+    /// Return the lagrange multiplier at local node n
+    double interpolated_lagrange(const Vector<double>& s)
+    {
+      // Find number of nodes
+      unsigned n_node = FiniteElement::nnode();
+
+      // Storage for the local shape function
+      Shape psi(n_node);
+
+      // Get values of shape function at local coordinate s
+      this->shape(s, psi);
+
+      // Initialise value of lambda
+      double interpolated_lambda = 0.0;
+
+      // Loop over the local nodes and sum
+      for (unsigned l = 0; l < n_node; l++)
+      {
+        interpolated_lambda +=
+          *this->node_pt(l)->value_pt(this->lagrange_index(l)) * psi(l);
+      }
+
+      return (interpolated_lambda);
+    }
+
+    void pin_lagrange_multiplier()
+    {
+      for (unsigned n = 0; n < this->nnode(); n++)
+      {
+        this->node_pt(n)->pin(this->lagrange_index(n));
+      }
+    }
+
+    void unpin_lagrange_multiplier()
+    {
+      for (unsigned n = 0; n < this->nnode(); n++)
+      {
+        this->node_pt(n)->unpin(this->lagrange_index(n));
+      }
+    }
+
+    /// Fill in contribution to residuals and Jacobian
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
+    {
+      // Call the generic routine with the flag set to 1
+      EQUATION_CLASS::fill_in_generic_residual_contribution_interface(
+        residuals, GeneralisedElement::Dummy_matrix, 0);
+    }
 
     /// Fill in contribution to residuals and Jacobian
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
@@ -849,12 +884,40 @@ namespace oomph
     void output(std::ostream& outfile)
     {
       EQUATION_CLASS::output(outfile);
+      // const unsigned default_n_plot = 5;
+      // output(outfile, default_n_plot);
     }
 
     /// Output the element
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
       EQUATION_CLASS::output(outfile, n_plot);
+      // const unsigned el_dim = this->dim();
+      // const unsigned n_dim = this->nodal_dimension();
+      // const unsigned n_velocity = n_dim;
+      //// Set output Vector
+      // Vector<double> s(el_dim);
+
+      //// Loop over plot points
+      // unsigned num_plot_points = this->nplot_points(n_plot);
+      // for (unsigned iplot = 0; iplot < num_plot_points; iplot++)
+      //{
+      //   // Get local coordinates of pliot point
+      //   this->get_s_plot(iplot, n_plot, s);
+
+      //  // Output the x,y,u,v
+      //  for (unsigned i = 0; i < n_dim; i++)
+      //    outfile << this->interpolated_x(s, i) << ",";
+      //  for (unsigned i = 0; i < n_velocity; i++)
+      //    outfile << this->interpolated_u(s, i) << ",";
+
+      //  // Output a dummy pressure
+      //  outfile << 0.0 << ",";
+
+      //  // Output the lagrange multiplier
+      //  outfile << interpolated_lagrange(s) << "\n";
+      //}
+      // outfile << "\n";
     }
 
     /// Overload the C-style output function
@@ -867,6 +930,41 @@ namespace oomph
     void output(FILE* file_pt, const unsigned& n_plot)
     {
       EQUATION_CLASS::output(file_pt, n_plot);
+      // const unsigned el_dim = this->dim();
+      // const unsigned n_dim = this->nodal_dimension();
+      // const unsigned n_velocity = n_dim;
+      //// Set output Vector
+      // Vector<double> s(el_dim);
+
+      //// Tecplot header info
+      // fprintf(file_pt, "%s", this->tecplot_zone_string(n_plot).c_str());
+
+      //// Loop over plot points
+      // unsigned num_plot_points = this->nplot_points(n_plot);
+      // for (unsigned iplot = 0; iplot < num_plot_points; iplot++)
+      //{
+      //   // Get local coordinates of plot point
+      //   this->get_s_plot(iplot, n_plot, s);
+
+      //  // Coordinates
+      //  for (unsigned i = 0; i < n_dim; i++)
+      //  {
+      //    fprintf(file_pt, "%g ", this->interpolated_x(s, i));
+      //  }
+
+      //  // Velocities
+      //  for (unsigned i = 0; i < n_velocity; i++)
+      //  {
+      //    fprintf(file_pt, "%g ", this->interpolated_u(s, i));
+      //  }
+
+      //  // Dummy Pressure
+      //  fprintf(file_pt, "%g \n", 0.0);
+      //}
+      // fprintf(file_pt, "\n");
+
+      //// Write tecplot footer (e.g. FE connectivity lists)
+      // this->write_tecplot_zone_footer(file_pt, n_plot);
     }
 
 
@@ -914,7 +1012,8 @@ namespace oomph
         interpolated_lagrange += lagrange(l) * psif(l);
       }
 
-      int local_eqn = 0, local_unknown = 0;
+      int local_eqn = 0;
+      int local_unknown = 0;
 
       // Loop over the shape functions to assemble contributions
       for (unsigned l = 0; l < n_node; l++)
@@ -973,7 +1072,14 @@ namespace oomph
       this->build_face_element(face_index, face_el_pt);
 
       // Set the index at which the velocity nodes are stored
-      face_el_pt->u_index_interface_boundary() = this->U_index_interface;
+      const unsigned n_dim = this->nodal_dimension();
+      Vector<unsigned> u_index_interface_boundary(n_dim);
+      const unsigned i_node = 0;
+      for (unsigned d = 0; d < n_dim; d++)
+      {
+        u_index_interface_boundary[d] = this->u_index_nst(i_node, d);
+      }
+      face_el_pt->u_index_interface_boundary() = u_index_interface_boundary;
 
       // Set the value of the nbulk_value, the node is not resized
       // in this bounding element,
@@ -988,7 +1094,7 @@ namespace oomph
         // At the moment the assumption is that it is stored at all nodes, but
         // that is consistent with the assumption in this element
         local_lagrange_index[n] =
-          this->Lagrange_index[face_el_pt->bulk_node_number(n)];
+          this->lagrange_index(face_el_pt->bulk_node_number(n));
       }
 
       // Pass the ID and offset down
@@ -1062,6 +1168,23 @@ namespace oomph
                       const unsigned& i) const
     {
       return FaceElement::zeta_nodal(n, k, i);
+    }
+
+    /// Set pointer to MacroElement -- overloads generic version
+    /// and uses the MacroElement
+    /// also as the default for the "undeformed" configuration.
+    /// This assignment must be overwritten with
+    /// set_undeformed_macro_elem_pt(...) if the deformation of
+    /// the solid body is driven by a deformation of the
+    /// "current" Domain/MacroElement representation of it's boundary.
+    /// Can be overloaded in derived classes to perform additional
+    /// tasks
+    /// Need here to break the indeterminacy due to inheriting two
+    /// FiniteElements
+    virtual void set_macro_elem_pt(MacroElement* macro_elem_pt)
+    {
+      Macro_elem_pt = macro_elem_pt;
+      Undeformed_macro_elem_pt = macro_elem_pt;
     }
 
 
@@ -1155,6 +1278,23 @@ namespace oomph
                       const unsigned& i) const
     {
       return FaceElement::zeta_nodal(n, k, i);
+    }
+
+    /// Set pointer to MacroElement -- overloads generic version
+    /// and uses the MacroElement
+    /// also as the default for the "undeformed" configuration.
+    /// This assignment must be overwritten with
+    /// set_undeformed_macro_elem_pt(...) if the deformation of
+    /// the solid body is driven by a deformation of the
+    /// "current" Domain/MacroElement representation of it's boundary.
+    /// Can be overloaded in derived classes to perform additional
+    /// tasks
+    /// Need here to break the indeterminacy due to inheriting two
+    /// FiniteElements
+    virtual void set_macro_elem_pt(MacroElement* macro_elem_pt)
+    {
+      Macro_elem_pt = macro_elem_pt;
+      Undeformed_macro_elem_pt = macro_elem_pt;
     }
 
 
