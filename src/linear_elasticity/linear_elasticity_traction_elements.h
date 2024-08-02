@@ -52,14 +52,7 @@ namespace oomph
     void Zero_traction_fct(const double& time,
                            const Vector<double>& x,
                            const Vector<double>& N,
-                           Vector<double>& load)
-    {
-      unsigned n_dim = load.size();
-      for (unsigned i = 0; i < n_dim; i++)
-      {
-        load[i] = 0.0;
-      }
-    }
+                           Vector<double>& load);
 
   } // namespace LinearElasticityTractionElementHelper
 
