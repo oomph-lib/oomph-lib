@@ -688,7 +688,7 @@ namespace oomph
     /// stored at the n-th node
     inline unsigned lagrange_index(const unsigned& n)
     {
-      return this->additional_value_index(n, 0);
+      return this->additional_value_index(n, N_additional_values[n] - 1);
     }
 
     virtual double kinematic_lagrange_multiplier(const unsigned& n)
@@ -872,39 +872,41 @@ namespace oomph
     /// Overload the output function
     void output(std::ostream& outfile)
     {
-      const unsigned default_n_plot = 5;
-      output(outfile, default_n_plot);
+      EQUATION_CLASS::output(outfile);
+      // const unsigned default_n_plot = 5;
+      // output(outfile, default_n_plot);
     }
 
     /// Output the element
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
-      const unsigned el_dim = this->dim();
-      const unsigned n_dim = this->nodal_dimension();
-      const unsigned n_velocity = n_dim;
-      // Set output Vector
-      Vector<double> s(el_dim);
+      EQUATION_CLASS::output(outfile, n_plot);
+      // const unsigned el_dim = this->dim();
+      // const unsigned n_dim = this->nodal_dimension();
+      // const unsigned n_velocity = n_dim;
+      //// Set output Vector
+      // Vector<double> s(el_dim);
 
-      // Loop over plot points
-      unsigned num_plot_points = this->nplot_points(n_plot);
-      for (unsigned iplot = 0; iplot < num_plot_points; iplot++)
-      {
-        // Get local coordinates of pliot point
-        this->get_s_plot(iplot, n_plot, s);
+      //// Loop over plot points
+      // unsigned num_plot_points = this->nplot_points(n_plot);
+      // for (unsigned iplot = 0; iplot < num_plot_points; iplot++)
+      //{
+      //   // Get local coordinates of pliot point
+      //   this->get_s_plot(iplot, n_plot, s);
 
-        // Output the x,y,u,v
-        for (unsigned i = 0; i < n_dim; i++)
-          outfile << this->interpolated_x(s, i) << ",";
-        for (unsigned i = 0; i < n_velocity; i++)
-          outfile << this->interpolated_u(s, i) << ",";
+      //  // Output the x,y,u,v
+      //  for (unsigned i = 0; i < n_dim; i++)
+      //    outfile << this->interpolated_x(s, i) << ",";
+      //  for (unsigned i = 0; i < n_velocity; i++)
+      //    outfile << this->interpolated_u(s, i) << ",";
 
-        // Output a dummy pressure
-        outfile << 0.0 << ",";
+      //  // Output a dummy pressure
+      //  outfile << 0.0 << ",";
 
-        // Output the lagrange multiplier
-        outfile << interpolated_lagrange(s) << "\n";
-      }
-      outfile << "\n";
+      //  // Output the lagrange multiplier
+      //  outfile << interpolated_lagrange(s) << "\n";
+      //}
+      // outfile << "\n";
     }
 
     /// Overload the C-style output function
@@ -916,41 +918,42 @@ namespace oomph
     /// C-style Output function
     void output(FILE* file_pt, const unsigned& n_plot)
     {
-      const unsigned el_dim = this->dim();
-      const unsigned n_dim = this->nodal_dimension();
-      const unsigned n_velocity = n_dim;
-      // Set output Vector
-      Vector<double> s(el_dim);
+      EQUATION_CLASS::output(file_pt, n_plot);
+      // const unsigned el_dim = this->dim();
+      // const unsigned n_dim = this->nodal_dimension();
+      // const unsigned n_velocity = n_dim;
+      //// Set output Vector
+      // Vector<double> s(el_dim);
 
-      // Tecplot header info
-      fprintf(file_pt, "%s", this->tecplot_zone_string(n_plot).c_str());
+      //// Tecplot header info
+      // fprintf(file_pt, "%s", this->tecplot_zone_string(n_plot).c_str());
 
-      // Loop over plot points
-      unsigned num_plot_points = this->nplot_points(n_plot);
-      for (unsigned iplot = 0; iplot < num_plot_points; iplot++)
-      {
-        // Get local coordinates of plot point
-        this->get_s_plot(iplot, n_plot, s);
+      //// Loop over plot points
+      // unsigned num_plot_points = this->nplot_points(n_plot);
+      // for (unsigned iplot = 0; iplot < num_plot_points; iplot++)
+      //{
+      //   // Get local coordinates of plot point
+      //   this->get_s_plot(iplot, n_plot, s);
 
-        // Coordinates
-        for (unsigned i = 0; i < n_dim; i++)
-        {
-          fprintf(file_pt, "%g ", this->interpolated_x(s, i));
-        }
+      //  // Coordinates
+      //  for (unsigned i = 0; i < n_dim; i++)
+      //  {
+      //    fprintf(file_pt, "%g ", this->interpolated_x(s, i));
+      //  }
 
-        // Velocities
-        for (unsigned i = 0; i < n_velocity; i++)
-        {
-          fprintf(file_pt, "%g ", this->interpolated_u(s, i));
-        }
+      //  // Velocities
+      //  for (unsigned i = 0; i < n_velocity; i++)
+      //  {
+      //    fprintf(file_pt, "%g ", this->interpolated_u(s, i));
+      //  }
 
-        // Dummy Pressure
-        fprintf(file_pt, "%g \n", 0.0);
-      }
-      fprintf(file_pt, "\n");
+      //  // Dummy Pressure
+      //  fprintf(file_pt, "%g \n", 0.0);
+      //}
+      // fprintf(file_pt, "\n");
 
-      // Write tecplot footer (e.g. FE connectivity lists)
-      this->write_tecplot_zone_footer(file_pt, n_plot);
+      //// Write tecplot footer (e.g. FE connectivity lists)
+      // this->write_tecplot_zone_footer(file_pt, n_plot);
     }
 
 
