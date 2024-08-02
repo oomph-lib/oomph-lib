@@ -146,8 +146,7 @@ namespace oomph
       // Just add the appropriate contribution to the momentum equations
       for (unsigned i = 0; i < 2; i++)
       {
-        const unsigned i_node = 0;
-        int local_eqn = this->momentum_index_nst(i_node, i);
+        int local_eqn = nodal_local_eqn(0, this->U_index_interface_boundary[i]);
         if (local_eqn >= 0)
         {
           residuals[local_eqn] +=
@@ -175,8 +174,7 @@ namespace oomph
       //(no slip)
       for (unsigned i = 0; i < 2; i++)
       {
-        const unsigned i_node = 0;
-        int local_eqn = this->momentum_index_nst(i_node, i);
+        int local_eqn = nodal_local_eqn(0, this->U_index_interface_boundary[i]);
         if (local_eqn >= 0)
         {
           residuals[local_eqn] += (sigma_local / ca_local) * m[i];
@@ -329,7 +327,8 @@ namespace oomph
           for (unsigned i = 0; i < 3; i++)
           {
             // Get the equation number for the momentum equation
-            int local_eqn = this->momentum_index_nst(l, i);
+            int local_eqn =
+              this->nodal_local_eqn(l, this->U_index_interface_boundary[i]);
 
             // If it's not a boundary condition
             if (local_eqn >= 0)
@@ -368,7 +367,8 @@ namespace oomph
           for (unsigned i = 0; i < 3; i++)
           {
             // Get the equation number for the momentum equation
-            int local_eqn = this->momentum_index_nst(l, i);
+            int local_eqn =
+              this->nodal_local_eqn(l, this->U_index_interface_boundary[i]);
 
             // If it's not a boundary condition
             if (local_eqn >= 0)
@@ -435,6 +435,33 @@ namespace oomph
   //============================================================
   double FluidInterfaceElement::Default_Physical_Constant_Value = 1.0;
 
+
+  //================================================================
+  /// Calculate the i-th velocity component at local coordinate s
+  //================================================================
+  double FluidInterfaceElement::interpolated_u(const Vector<double>& s,
+                                               const unsigned& i)
+  {
+    // Find number of nodes
+    unsigned n_node = FiniteElement::nnode();
+
+    // Storage for the local shape function
+    Shape psi(n_node);
+
+    // Get values of shape function at local coordinate s
+    this->shape(s, psi);
+
+    // Initialise value of u
+    double interpolated_u = 0.0;
+
+    // Loop over the local nodes and sum
+    for (unsigned l = 0; l < n_node; l++)
+    {
+      interpolated_u += u(l, i) * psi(l);
+    }
+
+    return (interpolated_u);
+  }
 
   //===========================================================================
   /// Calculate the contribution to the residuals from the interface
@@ -505,9 +532,8 @@ namespace oomph
       Vector<double> interpolated_x(n_dim, 0.0);
       Vector<double> interpolated_u(n_dim, 0.0);
       Vector<double> interpolated_dx_dt(n_dim, 0.0);
-
+      ;
       DenseMatrix<double> interpolated_t(el_dim, n_dim, 0.0);
-      double interpolated_lagrange_multiplier = 0.0;
 
       // Loop over the shape functions
       for (unsigned l = 0; l < n_node; l++)
@@ -529,10 +555,8 @@ namespace oomph
           }
 
           // Calculate velocity and tangent vector
-          interpolated_u[i] += this->nst_u(l, i) * psi_;
+          interpolated_u[i] += u(l, i) * psi_;
         }
-        interpolated_lagrange_multiplier +=
-          kinematic_lagrange_multiplier(l) * psi_;
       }
 
 
@@ -555,7 +579,7 @@ namespace oomph
         for (unsigned i = 0; i < n_dim; i++)
         {
           // Get the equation number for the momentum equation
-          local_eqn = this->nst_momentum_local_eqn(l, i);
+          local_eqn = this->nodal_local_eqn(l, this->U_index_interface[i]);
 
           // If it's not a boundary condition
           if (local_eqn >= 0)
@@ -591,8 +615,6 @@ namespace oomph
         local_eqn = kinematic_local_eqn(l);
         if (local_eqn >= 0)
         {
-          // std::cout << "normal residuals: " << residuals[local_eqn]
-          //           << std::endl;
           // Assemble the kinematic condition
           // The correct area is included in the normal vector
           for (unsigned k = 0; k < n_dim; k++)
@@ -611,7 +633,8 @@ namespace oomph
               // Loop over the components
               for (unsigned i2 = 0; i2 < n_dim; i2++)
               {
-                local_unknown = this->nst_u_local_unknown(l2, i2);
+                local_unknown =
+                  this->nodal_local_eqn(l2, this->U_index_interface[i2]);
                 // If it's a non-zero dof add
                 if (local_unknown >= 0)
                 {
@@ -641,7 +664,7 @@ namespace oomph
                                                       J);
 
     } // End of loop over integration points
-  } // namespace oomph
+  }
 
   //========================================================
   /// Overload the output functions generically
@@ -651,7 +674,7 @@ namespace oomph
   {
     const unsigned el_dim = this->dim();
     const unsigned n_dim = this->nodal_dimension();
-    const unsigned n_velocity = n_dim;
+    const unsigned n_velocity = this->U_index_interface.size();
     // Set output Vector
     Vector<double> s(el_dim);
 
@@ -688,7 +711,7 @@ namespace oomph
   {
     const unsigned el_dim = this->dim();
     const unsigned n_dim = this->nodal_dimension();
-    const unsigned n_velocity = n_dim;
+    const unsigned n_velocity = this->U_index_interface.size();
     // Set output Vector
     Vector<double> s(el_dim);
 

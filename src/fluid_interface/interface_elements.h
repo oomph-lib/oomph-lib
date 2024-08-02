@@ -37,8 +37,6 @@
 #include "../generic/spines.h"
 #include "../generic/shape.h"
 #include "../generic/hijacked_elements.h"
-#include "../navier_stokes/navier_stokes_face_elements.h"
-#include "fluid_interface_face_element.h"
 
 namespace oomph
 {
@@ -52,7 +50,7 @@ namespace oomph
   /// These boundaries may be in contact with a solid surface, in which case
   /// the normal to that surface must be provided.
   //=========================================================================
-  class FluidInterfaceBoundingElement : public virtual FluidInterfaceFaceElement
+  class FluidInterfaceBoundingElement : public virtual FaceElement
   {
   private:
     /// Function pointer to a wall unit normal function. Returns the
@@ -77,6 +75,10 @@ namespace oomph
     /// in the momentum equations (1) or by hijacking the kinematic
     /// condition (2).
     unsigned Contact_angle_flag;
+
+    /// Index at which the i-th velocity component is stored in the
+    /// element's nodes
+    Vector<unsigned> U_index_interface_boundary;
 
     /// Function that is used to determine the local equation number of
     /// the kinematic equation associated with the nodes of the element
@@ -145,6 +147,12 @@ namespace oomph
     WallUnitNormalFctPt wall_unit_normal_fct_pt() const
     {
       return Wall_unit_normal_fct_pt;
+    }
+
+    /// Access for nodal index at which the velocity components are stored
+    Vector<unsigned>& u_index_interface_boundary()
+    {
+      return U_index_interface_boundary;
     }
 
     /// Set a pointer to the desired contact angle. Optional boolean
@@ -301,6 +309,7 @@ namespace oomph
     LineFluidInterfaceBoundingElement() : FluidInterfaceBoundingElement() {}
   };
 
+
   //=======================================================================
   /// Base class establishing common interfaces and functions for all
   /// Navier-Stokes-like fluid
@@ -308,7 +317,7 @@ namespace oomph
   /// surface or an interface between two fluids that have distinct
   /// momentum-like equation for each velocity component.
   //======================================================================
-  class FluidInterfaceElement : public NavierStokesFaceElement
+  class FluidInterfaceElement : public virtual FaceElement
   {
     // Make the bounding element class a friend
     friend class FluidInterfaceBoundingElement;
@@ -323,7 +332,11 @@ namespace oomph
     /// Default value for physical constants
     static double Default_Physical_Constant_Value;
 
+
   protected:
+    /// Nodal index at which the i-th velocity component is stored.
+    Vector<unsigned> U_index_interface;
+
     /// The Data that contains the external  pressure is stored
     /// as external Data for the element. Which external Data item is it?
     /// (int so it can be initialised to -1, indicating that external
@@ -340,33 +353,7 @@ namespace oomph
     /// for the (scalar) kinematic equation associated with the j-th local
     /// node. This must be overloaded by specific interface elements
     /// and depends on the method for handing the free-surface deformation.
-    virtual double kinematic_lagrange_multiplier(const unsigned& n)
-    {
-      std::ostringstream error_message;
-      error_message
-        << "kinematic_lagrange_multiplier not implemented in base "
-           "FluidInterfaceElement, use one of the inherited classes depending "
-           "on how the solid displacement is implemented."
-        << std::endl;
-      throw OomphLibError(
-        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-    }
-
-    /// Access function that returns the local equation number
-    /// for the (scalar) kinematic equation associated with the j-th local
-    /// node. This must be overloaded by specific interface elements
-    /// and depends on the method for handing the free-surface deformation.
-    virtual int kinematic_local_eqn(const unsigned& n)
-    {
-      std::ostringstream error_message;
-      error_message
-        << "kinematic_local_eqn not implemented in base "
-           "FluidInterfaceElement, use one of the inherited classes depending "
-           "on how the solid displacement is implemented."
-        << std::endl;
-      throw OomphLibError(
-        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-    }
+    virtual int kinematic_local_eqn(const unsigned& n) = 0;
 
     /// Access function for the local equation number that
     /// corresponds to the external pressure.
@@ -380,8 +367,8 @@ namespace oomph
                             OOMPH_EXCEPTION_LOCATION);
       }
 #endif
-      return this->external_local_eqn(External_data_number_of_external_pressure,
-                                      Index_of_external_pressure_value);
+      return external_local_eqn(External_data_number_of_external_pressure,
+                                Index_of_external_pressure_value);
     }
 
     /// Helper function to calculate the residuals and
@@ -454,7 +441,7 @@ namespace oomph
 
   public:
     /// Constructor, set the default values of the booleans and pointers (null)
-    FluidInterfaceElement() : NavierStokesFaceElement(), Pext_data_pt(0)
+    FluidInterfaceElement() : Pext_data_pt(0)
     {
       // Initialise pointer to capillary number
       Ca_pt = 0;
@@ -518,6 +505,15 @@ namespace oomph
     {
       return St_pt;
     }
+
+    /// Return the i-th velocity component at local node j.
+    double u(const unsigned& j, const unsigned& i)
+    {
+      return node_pt(j)->value(U_index_interface[i]);
+    }
+
+    /// Calculate the i-th velocity component at the local coordinate s.
+    double interpolated_u(const Vector<double>& s, const unsigned& i);
 
     /// Return the value of the external pressure
     double pext() const
@@ -634,23 +630,12 @@ namespace oomph
     /// This is required so that contact-angle conditions can be applied
     /// by the FluidInterfaceBoundingElements.
     virtual void hijack_kinematic_conditions(
-      const Vector<unsigned>& bulk_node_number)
-    {
-      std::ostringstream error_message;
-      error_message
-        << "hijack_kinematic_conditions not implemented in base "
-           "FluidInterfaceElement, use one of the inherited classes depending "
-           "on how the solid displacement is implemented."
-        << std::endl;
-      throw OomphLibError(
-        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-    }
+      const Vector<unsigned>& bulk_node_number) = 0;
 
     /// Overload the output function
     void output(std::ostream& outfile)
     {
-      const unsigned default_nplot = 5;
-      output(outfile, default_nplot);
+      FiniteElement::output(outfile);
     }
 
     /// Output function
@@ -659,8 +644,7 @@ namespace oomph
     /// Overload the C-style output function
     void output(FILE* file_pt)
     {
-      const unsigned default_nplot = 5;
-      output(file_pt, default_nplot);
+      FiniteElement::output(file_pt);
     }
 
     /// C-style Output function
