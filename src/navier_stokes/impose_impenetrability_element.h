@@ -49,10 +49,6 @@ namespace oomph
   class ImposeImpenetrabilityElement : public virtual FaceGeometry<ELEMENT>,
                                        public virtual NavierStokesFaceElement
   {
-  private:
-    /// Lagrange Id
-    unsigned Id;
-
   public:
     /// Constructor takes a "bulk" element, the
     /// index that identifies which face the
@@ -63,19 +59,16 @@ namespace oomph
                                  const unsigned& id = 0)
       : FaceGeometry<ELEMENT>(), NavierStokesFaceElement()
     {
-      //  set the Id
-      Id = id;
+      this->build(element_pt, face_index, id);
+    }
 
-      // Build the face element
-      element_pt->build_face_element(face_index, this);
-
-      // we need 1 additional values for each FaceElement node
-      Vector<unsigned> n_additional_values(nnode(), 1);
-
-      // add storage for lagrange multipliers and set the map containing
-      // the position of the first entry of this face element's
-      // additional values.
-      add_additional_values(n_additional_values, id);
+    /// Set the number of additional values require at each node
+    virtual void set_n_additional_values()
+    {
+      for (unsigned n = 0; n < this->nnode(); n++)
+      {
+        this->N_additional_values[n] += 1;
+      }
     }
 
     /// The "global" intrinsic coordinate of the element when

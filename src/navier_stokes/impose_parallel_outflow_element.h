@@ -66,27 +66,20 @@ namespace oomph
     ImposeParallelOutflowElement(FiniteElement* const& element_pt,
                                  const int& face_index,
                                  const unsigned& id = 0)
-      : FaceGeometry<ELEMENT>(), NavierStokesFaceElement()
+      : FaceGeometry<ELEMENT>(), NavierStokesFaceElement(), Pressure_pt(0)
     {
-      //  set the Id
-      Id = id;
+      this->build(element_pt, face_index, id);
+    }
 
-      // Build the face element
-      element_pt->build_face_element(face_index, this);
-
+    /// Set the number of additional values require at each node
+    virtual void set_n_additional_values()
+    {
       // dimension of the bulk element
-      unsigned dim = element_pt->dim();
-
-      // we need dim-1 additional values for each FaceElement node
-      Vector<unsigned> n_additional_values(this->nnode(), dim - 1);
-
-      // add storage for lagrange multipliers and set the map containing
-      // the position of the first entry of this face element's
-      // additional values.
-      add_additional_values(n_additional_values, id);
-
-      // set the pressure pointer to zero
-      Pressure_pt = 0;
+      unsigned dim = this->bulk_element_pt()->dim();
+      for (unsigned n = 0; n < this->nnode(); n++)
+      {
+        this->N_additional_values[n] += dim - 1;
+      }
     }
 
     /// Fill in the residuals
