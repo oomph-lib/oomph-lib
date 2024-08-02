@@ -38,6 +38,7 @@
 #include "../generic/shape.h"
 #include "../generic/hijacked_elements.h"
 #include "../navier_stokes/navier_stokes_face_elements.h"
+#include "fluid_interface_face_element.h"
 
 namespace oomph
 {
@@ -51,7 +52,7 @@ namespace oomph
   /// These boundaries may be in contact with a solid surface, in which case
   /// the normal to that surface must be provided.
   //=========================================================================
-  class FluidInterfaceBoundingElement : public virtual FaceElement
+  class FluidInterfaceBoundingElement : public virtual FluidInterfaceFaceElement
   {
   private:
     /// Function pointer to a wall unit normal function. Returns the
@@ -76,10 +77,6 @@ namespace oomph
     /// in the momentum equations (1) or by hijacking the kinematic
     /// condition (2).
     unsigned Contact_angle_flag;
-
-    /// Index at which the i-th velocity component is stored in the
-    /// element's nodes
-    Vector<unsigned> U_index_interface_boundary;
 
     /// Function that is used to determine the local equation number of
     /// the kinematic equation associated with the nodes of the element
@@ -148,12 +145,6 @@ namespace oomph
     WallUnitNormalFctPt wall_unit_normal_fct_pt() const
     {
       return Wall_unit_normal_fct_pt;
-    }
-
-    /// Access for nodal index at which the velocity components are stored
-    Vector<unsigned>& u_index_interface_boundary()
-    {
-      return U_index_interface_boundary;
     }
 
     /// Set a pointer to the desired contact angle. Optional boolean

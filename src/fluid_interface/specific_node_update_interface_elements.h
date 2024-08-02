@@ -158,8 +158,7 @@ namespace oomph
   private:
     virtual double kinematic_lagrange_multiplier(const unsigned& n)
     {
-      // return this->geometric_data_value(Spine_geometric_index[n], 0);
-      return 1.0;
+      return this->spine_value(n);
     }
 
     /// In spine elements, the kinematic condition is the equation
@@ -362,15 +361,6 @@ namespace oomph
 
       // Attach the geometrical information to the new element
       this->build_face_element(face_index, face_el_pt);
-
-      // Set the index at which the velocity nodes are stored
-      Vector<unsigned> local_u_index_nst(this->dim());
-      for (unsigned n = 0; n < this->dim(); n++)
-      {
-        // Assume they are all stored at the same indices as the first node.
-        local_u_index_nst[n] = this->u_index_nst(0, n);
-      }
-      face_el_pt->u_index_interface_boundary() = local_u_index_nst;
 
       // Set the value of the nbulk_value, the node is not resized
       // in this bounding element,
@@ -698,7 +688,7 @@ namespace oomph
     /// stored at the n-th node
     inline unsigned lagrange_index(const unsigned& n)
     {
-      return this->additional_value_index(n, this->N_additional_values[n] - 1);
+      return this->additional_value_index(n, 0);
     }
 
     virtual double kinematic_lagrange_multiplier(const unsigned& n)
@@ -843,18 +833,20 @@ namespace oomph
       return (interpolated_lambda);
     }
 
-
-    void fix_lagrange_multiplier(const unsigned& n, const double& value)
+    void pin_lagrange_multiplier()
     {
-      // std::cout << "lagrange_index: " << this->lagrange_index(n) <<
-      // std::endl;
-      this->node_pt(n)->pin(this->lagrange_index(n));
-      this->node_pt(n)->set_value(this->lagrange_index(n), value);
+      for (unsigned n = 0; n < this->nnode(); n++)
+      {
+        this->node_pt(n)->pin(this->lagrange_index(n));
+      }
     }
 
-    void free_lagrange_multiplier(const unsigned& n)
+    void unpin_lagrange_multiplier()
     {
-      this->node_pt(n)->unpin(this->lagrange_index(n));
+      for (unsigned n = 0; n < this->nnode(); n++)
+      {
+        this->node_pt(n)->unpin(this->lagrange_index(n));
+      }
     }
 
     /// Fill in contribution to residuals and Jacobian
@@ -1064,15 +1056,6 @@ namespace oomph
 
       // Attach the geometrical information to the new element
       this->build_face_element(face_index, face_el_pt);
-
-      // Set the index at which the velocity nodes are stored
-      Vector<unsigned> local_u_index_nst(this->dim());
-      for (unsigned n = 0; n < this->dim(); n++)
-      {
-        // Assume they are all stored at the same indices as the first node.
-        local_u_index_nst[n] = this->u_index_nst(0, n);
-      }
-      face_el_pt->u_index_interface_boundary() = local_u_index_nst;
 
       // Set the value of the nbulk_value, the node is not resized
       // in this bounding element,

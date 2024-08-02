@@ -146,7 +146,8 @@ namespace oomph
       // Just add the appropriate contribution to the momentum equations
       for (unsigned i = 0; i < 2; i++)
       {
-        int local_eqn = nodal_local_eqn(0, this->U_index_interface_boundary[i]);
+        const unsigned i_node = 0;
+        int local_eqn = this->momentum_index_nst(i_node, i);
         if (local_eqn >= 0)
         {
           residuals[local_eqn] +=
@@ -174,7 +175,8 @@ namespace oomph
       //(no slip)
       for (unsigned i = 0; i < 2; i++)
       {
-        int local_eqn = nodal_local_eqn(0, this->U_index_interface_boundary[i]);
+        const unsigned i_node = 0;
+        int local_eqn = this->momentum_index_nst(i_node, i);
         if (local_eqn >= 0)
         {
           residuals[local_eqn] += (sigma_local / ca_local) * m[i];
@@ -327,8 +329,7 @@ namespace oomph
           for (unsigned i = 0; i < 3; i++)
           {
             // Get the equation number for the momentum equation
-            int local_eqn =
-              this->nodal_local_eqn(l, this->U_index_interface_boundary[i]);
+            int local_eqn = this->momentum_index_nst(l, i);
 
             // If it's not a boundary condition
             if (local_eqn >= 0)
@@ -367,8 +368,7 @@ namespace oomph
           for (unsigned i = 0; i < 3; i++)
           {
             // Get the equation number for the momentum equation
-            int local_eqn =
-              this->nodal_local_eqn(l, this->U_index_interface_boundary[i]);
+            int local_eqn = this->momentum_index_nst(l, i);
 
             // If it's not a boundary condition
             if (local_eqn >= 0)
@@ -583,27 +583,6 @@ namespace oomph
                 }
               }
             } // End of pressure contribution
-
-            // Add in the lagrange multplier contribution
-            if (kinematic_local_eqn(l) >= 0)
-            {
-              residuals[local_eqn] += interpolated_lagrange_multiplier *
-                                      interpolated_n[i] * psif(l) * J * W;
-
-              // Do the Jacobian calculation
-              if (flag)
-              {
-                for (unsigned l2 = 0; l2 < n_node; l2++)
-                {
-                  local_unknown = kinematic_local_eqn(l2);
-                  if (local_unknown >= 0)
-                  {
-                    jacobian(local_eqn, local_unknown) +=
-                      psif(l2) * interpolated_n[i] * psif(l) * J * W;
-                  }
-                }
-              }
-            }
           }
         } // End of contribution to momentum equation
 
