@@ -62,12 +62,10 @@ namespace oomph
       return el_pt->u_index_nst(this->bulk_node_number(n), i);
     }
 
-    // virtual int p_nodal_index_nst() const
     virtual int p_nodal_index_nst(const unsigned& n) const
     {
       NavierStokesFaceElement* el_pt =
         dynamic_cast<NavierStokesFaceElement*>(this->bulk_element_pt());
-      // return el_pt->p_nodal_index_nst(this->bulk_node_number(n));
       return el_pt->p_nodal_index_nst(this->bulk_node_number(n));
     }
 
