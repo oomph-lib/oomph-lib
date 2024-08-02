@@ -516,6 +516,38 @@ namespace oomph
       }
     }
 
+    inline double spine_value(const unsigned& n)
+    {
+#ifdef RANGE_CHECKING
+      const unsigned n_node = this->nnode();
+      if (n >= n_node)
+      {
+        std::ostringstream error_message;
+        error_message << "Range Error:  Node number " << n
+                      << " is not in the range (0," << n_node - 1 << ")";
+        throw OomphLibError(error_message.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+#ifdef PARANOID
+      // If there is no spine then you can't get the local equation
+      if (Spine_geometric_index[n] == this->ngeom_data())
+      {
+        std::ostringstream error_stream;
+        error_stream << "SpineNode " << n
+                     << " does not have a Spine attached,\n"
+                     << "so you can't get its local equation number.\n"
+                     << "Check that the Mesh is correctly associating Spines "
+                        "with is Nodes\n";
+        throw OomphLibError(
+          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+      return this->geometric_data_value(Spine_geometric_index[n], 0);
+    }
+
     /// Return the local equation number corresponding to the height
     /// of the spine at the n-th node
     inline int spine_local_eqn(const unsigned& n)
