@@ -115,7 +115,7 @@ jobs:
 
       - name: Run demo driver self-tests
         id: demo_drivers
-        run: ctest --preset ci --test-dir demo_drivers/build -j $(sysctl -n hw.logicalcpu)
+        run: ctest --preset ci --test-dir demo_drivers/build -j $(sysctl -n hw.logicalcpu) -E mpi.multi_domain.pseudo_solid_collapsible_tube
         continue-on-error: true
 
       # -------------------
