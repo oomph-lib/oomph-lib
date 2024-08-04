@@ -77,13 +77,6 @@ namespace oomph
     // find number of coordinates
     const unsigned n_value = 3;
 
-    // find the indices at which the local velocities are stored
-    Vector<unsigned> u_nodal_index(n_value);
-    for (unsigned i = 0; i < n_value; i++)
-    {
-      u_nodal_index[i] = this->u_index_nst(i);
-    }
-
     // Set up memory for test functions
     Shape test(n_node);
 
@@ -125,7 +118,7 @@ namespace oomph
         // Loop over the velocity components
         for (unsigned i = 0; i < n_value; i++)
         {
-          local_eqn = momentum_local_eqn(l,i);
+          local_eqn = momentum_local_eqn(l, i);
 
           // If not a boundary condition
           if (local_eqn >= 0)
@@ -455,13 +448,12 @@ namespace oomph
       // Loop over the velocity components
       for (unsigned i = 0; i < 3; i++)
       {
-        // Get the index at which the velocity is stored
-        unsigned u_nodal_index = u_index_nst(i);
         interpolated_u[i] = 0.0;
         // Loop over the local nodes and sum
         for (unsigned l = 0; l < n_node; l++)
         {
-          interpolated_u[i] += nodal_value(t, l, u_nodal_index) * psi[l];
+          interpolated_u[i] +=
+            nodal_value(t, l, this->u_index_nst(l, i)) * psi[l];
         }
       }
 
@@ -755,31 +747,24 @@ namespace oomph
     double duphidr = 0.0;
     double duphidz = 0.0;
 
-    // Get the local storage for the indices
-    unsigned u_nodal_index[3];
-    for (unsigned i = 0; i < 3; ++i)
-    {
-      u_nodal_index[i] = u_index_nst(i);
-    }
-
     // Loop over nodes to assemble velocities and their derivatives
     // w.r.t. to r and z (x_0 and x_1)
     for (unsigned l = 0; l < n_node; l++)
     {
       interpolated_r += nodal_position(l, 0) * psi[l];
 
-      ur += nodal_value(l, u_nodal_index[0]) * psi[l];
-      uz += nodal_value(l, u_nodal_index[1]) * psi[l];
-      uphi += nodal_value(l, u_nodal_index[2]) * psi[l];
+      ur += nodal_value(l, this->u_index_nst(l, 0)) * psi[l];
+      uz += nodal_value(l, this->u_index_nst(l, 1)) * psi[l];
+      uphi += nodal_value(l, this->u_index_nst(l, 2)) * psi[l];
 
-      durdr += nodal_value(l, u_nodal_index[0]) * dpsidx(l, 0);
-      durdz += nodal_value(l, u_nodal_index[0]) * dpsidx(l, 1);
+      durdr += nodal_value(l, this->u_index_nst(l, 0)) * dpsidx(l, 0);
+      durdz += nodal_value(l, this->u_index_nst(l, 0)) * dpsidx(l, 1);
 
-      duzdr += nodal_value(l, u_nodal_index[1]) * dpsidx(l, 0);
-      duzdz += nodal_value(l, u_nodal_index[1]) * dpsidx(l, 1);
+      duzdr += nodal_value(l, this->u_index_nst(l, 1)) * dpsidx(l, 0);
+      duzdz += nodal_value(l, this->u_index_nst(l, 1)) * dpsidx(l, 1);
 
-      duphidr += nodal_value(l, u_nodal_index[2]) * dpsidx(l, 0);
-      duphidz += nodal_value(l, u_nodal_index[2]) * dpsidx(l, 1);
+      duphidr += nodal_value(l, this->u_index_nst(l, 2)) * dpsidx(l, 0);
+      duphidz += nodal_value(l, this->u_index_nst(l, 2)) * dpsidx(l, 1);
     }
 
 
@@ -846,8 +831,7 @@ namespace oomph
       double veloc_squared = 0.0;
       for (unsigned i = 0; i < 3; i++)
       {
-        veloc_squared +=
-          interpolated_u_nst(s, i) * interpolated_u_nst(s, i);
+        veloc_squared += interpolated_u_nst(s, i) * interpolated_u_nst(s, i);
       }
 
       kin_en += 0.5 * veloc_squared * w * J * interpolated_x(s, 0);
@@ -918,13 +902,6 @@ namespace oomph
 
     // Find out how many pressure dofs there are
     unsigned n_pres = npres_nst();
-
-    // Get the nodal indices at which the velocity is stored
-    unsigned u_nodal_index[3];
-    for (unsigned i = 0; i < 3; ++i)
-    {
-      u_nodal_index[i] = u_index_nst(i);
-    }
 
     // Set up memory for the shape and test functions
     // Note that there are only two dimensions, r and z in this problem
@@ -1005,7 +982,8 @@ namespace oomph
         for (unsigned i = 0; i < 3; i++)
         {
           // Get the u_value
-          const double u_value = this->raw_nodal_value(l, u_nodal_index[i]);
+          const double u_value =
+            this->raw_nodal_value(l, this->u_index_nst(l, i));
           interpolated_u[i] += u_value * psif_;
           dudt[i] += du_dt_nst(l, i) * psif_;
           // Loop over derivative directions
@@ -1052,7 +1030,7 @@ namespace oomph
       for (unsigned l = 0; l < n_node; l++)
       {
         // FIRST (RADIAL) MOMENTUM EQUATION
-        local_eqn = momentum_local_eqn(l,0);
+        local_eqn = momentum_local_eqn(l, 0);
         // If it's not a boundary condition
         if (local_eqn >= 0)
         {
@@ -1113,7 +1091,8 @@ namespace oomph
             // Loop over the velocity shape functions again
             for (unsigned l2 = 0; l2 < n_node; l2++)
             {
-              local_unknown = u_local_unknown(l2,0);
+              local_unknown = u_local_unknown(l2, 0);
+
               // Radial velocity component
               if (local_unknown >= 0)
               {
@@ -1164,7 +1143,7 @@ namespace oomph
 
 
               // Axial velocity component
-              local_unknown = u_local_unknown(l2,1);
+              local_unknown = u_local_unknown(l2, 1);
               if (local_unknown >= 0)
               {
                 jacobian(local_eqn, local_unknown) -=
@@ -1178,7 +1157,7 @@ namespace oomph
               }
 
               // Azimuthal velocity component
-              local_unknown = u_local_unknown(l2,2);
+              local_unknown = u_local_unknown(l2, 2);
               if (local_unknown >= 0)
               {
                 // Convective terms
@@ -1209,7 +1188,7 @@ namespace oomph
         } // End of if not boundary condition statement
 
         // SECOND (AXIAL) MOMENTUM EQUATION
-        local_eqn = momentum_local_eqn(l,1);
+        local_eqn = momentum_local_eqn(l, 1);
         // If it's not a boundary condition
         if (local_eqn >= 0)
         {
@@ -1262,7 +1241,7 @@ namespace oomph
             // Loop over the velocity shape functions again
             for (unsigned l2 = 0; l2 < n_node; l2++)
             {
-              local_unknown = u_local_unknown(l2,0);
+              local_unknown = u_local_unknown(l2, 0);
               // Radial velocity component
               if (local_unknown >= 0)
               {
@@ -1281,7 +1260,7 @@ namespace oomph
               }
 
               // Axial velocity component
-              local_unknown = u_local_unknown(l2,1);
+              local_unknown = u_local_unknown(l2, 1);
               if (local_unknown >= 0)
               {
                 if (flag == 2)
@@ -1351,7 +1330,7 @@ namespace oomph
         } // End of AXIAL MOMENTUM EQUATION
 
         // THIRD (AZIMUTHAL) MOMENTUM EQUATION
-        local_eqn = momentum_local_eqn(l,2);
+        local_eqn = momentum_local_eqn(l, 2);
         if (local_eqn >= 0)
         {
           // Add the user-defined body force terms
@@ -1414,7 +1393,7 @@ namespace oomph
             for (unsigned l2 = 0; l2 < n_node; l2++)
             {
               // Radial velocity component
-              local_unknown = u_local_unknown(l2,0);
+              local_unknown = u_local_unknown(l2, 0);
               if (local_unknown >= 0)
               {
                 // Convective terms
@@ -1430,7 +1409,7 @@ namespace oomph
               }
 
               // Axial velocity component
-              local_unknown = u_local_unknown(l2,1);
+              local_unknown = u_local_unknown(l2, 1);
               if (local_unknown >= 0)
               {
                 // Convective terms
@@ -1440,7 +1419,7 @@ namespace oomph
               }
 
               // Azimuthal velocity component
-              local_unknown = u_local_unknown(l2,2);
+              local_unknown = u_local_unknown(l2, 2);
               if (local_unknown >= 0)
               {
                 if (flag == 2)
@@ -1527,7 +1506,7 @@ namespace oomph
             for (unsigned l2 = 0; l2 < n_node; l2++)
             {
               // Radial velocity component
-              local_unknown = u_local_unknown(l2,0);
+              local_unknown = u_local_unknown(l2, 0);
               if (local_unknown >= 0)
               {
                 jacobian(local_eqn, local_unknown) +=
@@ -1535,7 +1514,7 @@ namespace oomph
               }
 
               // Axial velocity component
-              local_unknown = u_local_unknown(l2,1);
+              local_unknown = u_local_unknown(l2, 1);
               if (local_unknown >= 0)
               {
                 jacobian(local_eqn, local_unknown) +=
@@ -1574,13 +1553,6 @@ namespace oomph
 
     // Determine number of pressure dofs in element
     const unsigned n_pres = npres_nst();
-
-    // Find the indices at which the local velocities are stored
-    unsigned u_nodal_index[3];
-    for (unsigned i = 0; i < 3; i++)
-    {
-      u_nodal_index[i] = u_index_nst(i);
-    }
 
     // Set up memory for the shape and test functions
     // Note that there are only two dimensions, r and z, in this problem
@@ -1664,7 +1636,7 @@ namespace oomph
         Vector<double> u_ref(3);
         for (unsigned i = 0; i < 3; i++)
         {
-          u_ref[i] = *(nod_pt->value_pt(u_nodal_index[i]));
+          u_ref[i] = *(nod_pt->value_pt(this->u_index_nst(q, i)));
         }
 
         // FD
@@ -1685,7 +1657,8 @@ namespace oomph
           {
             // Evaluate
             d_U_dX(p, q, i) =
-              (*(nod_pt->value_pt(u_nodal_index[i])) - u_ref[i]) / eps_fd;
+              (*(nod_pt->value_pt(this->u_index_nst(q, i))) - u_ref[i]) /
+              eps_fd;
           }
 
           // Reset
@@ -1714,13 +1687,13 @@ namespace oomph
 
       // Call the derivatives of the shape and test functions
       const double J = dshape_and_dtest_eulerian_at_knot_nst(ipt,
-                                                                 psif,
-                                                                 dpsifdx,
-                                                                 d_dpsifdx_dX,
-                                                                 testf,
-                                                                 dtestfdx,
-                                                                 d_dtestfdx_dX,
-                                                                 dJ_dX);
+                                                             psif,
+                                                             dpsifdx,
+                                                             d_dpsifdx_dX,
+                                                             testf,
+                                                             dtestfdx,
+                                                             d_dtestfdx_dX,
+                                                             dJ_dX);
 
       // Call the pressure shape and test functions
       pshape_nst(s, psip, testp);
@@ -1762,7 +1735,8 @@ namespace oomph
         for (unsigned i = 0; i < 3; i++)
         {
           // Get the nodal value
-          const double u_value = this->raw_nodal_value(l, u_nodal_index[i]);
+          const double u_value =
+            this->raw_nodal_value(l, this->u_index_nst(l, i));
           interpolated_u[i] += u_value * psif_;
           dudt[i] += du_dt_nst(l, i) * psif_;
 
@@ -1805,7 +1779,7 @@ namespace oomph
               // Loop over nodes and add contribution
               for (unsigned j = 0; j < n_node; j++)
               {
-                aux += this->raw_nodal_value(j, u_nodal_index[i]) *
+                aux += this->raw_nodal_value(j, this->u_index_nst(j, i)) *
                        d_dpsifdx_dX(p, q, j, k);
               }
               d_dudx_dX(p, q, i, k) = aux;
@@ -1859,8 +1833,7 @@ namespace oomph
         // --------------------------------
         // FIRST (RADIAL) MOMENTUM EQUATION
         // --------------------------------
-        local_eqn = momentum_local_eqn(l,0);
-        ;
+        local_eqn = momentum_local_eqn(l, 0);
 
         // If it's not a boundary condition
         if (local_eqn >= 0)
@@ -2060,8 +2033,7 @@ namespace oomph
         // --------------------------------
         // SECOND (AXIAL) MOMENTUM EQUATION
         // --------------------------------
-        local_eqn = momentum_local_eqn(l,1);
-        ;
+        local_eqn = momentum_local_eqn(l, 1);
 
         // If it's not a boundary condition
         if (local_eqn >= 0)
@@ -2235,8 +2207,7 @@ namespace oomph
         // -----------------------------------
         // THIRD (AZIMUTHAL) MOMENTUM EQUATION
         // -----------------------------------
-        local_eqn = momentum_local_eqn(l,2);
-        ;
+        local_eqn = momentum_local_eqn(l, 2);
 
         // If it's not a boundary condition
         if (local_eqn >= 0)
@@ -2550,13 +2521,6 @@ namespace oomph
     // Find out how many pressure dofs there are
     unsigned n_pres = npres_nst();
 
-    // Get the nodal indices at which the velocity is stored
-    unsigned u_nodal_index[3];
-    for (unsigned i = 0; i < 3; ++i)
-    {
-      u_nodal_index[i] = u_index_nst(i);
-    }
-
     // Set up memory for the shape and test functions
     // Note that there are only two dimensions, r and z in this problem
     Shape psif(n_node), testf(n_node);
@@ -2637,7 +2601,8 @@ namespace oomph
         for (unsigned i = 0; i < 3; i++)
         {
           // Get the u_value
-          const double u_value = this->raw_nodal_value(l, u_nodal_index[i]);
+          const double u_value =
+            this->raw_nodal_value(l, this->u_index_nst(l, i));
           interpolated_u[i] += u_value * psif_;
           dudt[i] += du_dt_nst(l, i) * psif_;
           // Loop over derivative directions
@@ -2685,7 +2650,7 @@ namespace oomph
       for (unsigned l = 0; l < n_node; l++)
       {
         // FIRST (RADIAL) MOMENTUM EQUATION
-        local_eqn = momentum_local_eqn(l,0);
+        local_eqn = momentum_local_eqn(l, 0);
         // If it's not a boundary condition
         if (local_eqn >= 0)
         {
@@ -2763,7 +2728,7 @@ namespace oomph
             // Loop over the velocity shape functions again
             for (unsigned l2 = 0; l2 < n_node; l2++)
             {
-              local_unknown = u_local_unknown(l2,0);
+              local_unknown = u_local_unknown(l2, 0);
               // Radial velocity component
               if (local_unknown >= 0)
               {
@@ -2825,7 +2790,7 @@ namespace oomph
               }
 
               // Axial velocity component
-              local_unknown = u_local_unknown(l2,1);
+              local_unknown = u_local_unknown(l2, 1);
               if (local_unknown >= 0)
               {
                 // jacobian(local_eqn,local_unknown) -=
@@ -2841,7 +2806,7 @@ namespace oomph
               }
 
               // Azimuthal velocity component
-              local_unknown = u_local_unknown(l2,2);
+              local_unknown = u_local_unknown(l2, 2);
               if (local_unknown >= 0)
               {
                 // Convective terms
@@ -2877,7 +2842,7 @@ namespace oomph
         } // End of if not boundary condition statement
 
         // SECOND (AXIAL) MOMENTUM EQUATION
-        local_eqn = momentum_local_eqn(l,1);
+        local_eqn = momentum_local_eqn(l, 1);
         // If it's not a boundary condition
         if (local_eqn >= 0)
         {
@@ -2943,7 +2908,7 @@ namespace oomph
             // Loop over the velocity shape functions again
             for (unsigned l2 = 0; l2 < n_node; l2++)
             {
-              local_unknown = u_local_unknown(l2,0);
+              local_unknown = u_local_unknown(l2, 0);
               // Radial velocity component
               if (local_unknown >= 0)
               {
@@ -2964,7 +2929,7 @@ namespace oomph
               }
 
               // Axial velocity component
-              local_unknown = u_local_unknown(l2,1);
+              local_unknown = u_local_unknown(l2, 1);
               if (local_unknown >= 0)
               {
                 if (flag == 2)
@@ -3033,7 +2998,7 @@ namespace oomph
         } // End of AXIAL MOMENTUM EQUATION
 
         // THIRD (AZIMUTHAL) MOMENTUM EQUATION
-        local_eqn = momentum_local_eqn(l,2);
+        local_eqn = momentum_local_eqn(l, 2);
         if (local_eqn >= 0)
         {
           // Add the user-defined body force terms
@@ -3111,7 +3076,7 @@ namespace oomph
             for (unsigned l2 = 0; l2 < n_node; l2++)
             {
               // Radial velocity component
-              local_unknown = u_local_unknown(l2,0);
+              local_unknown = u_local_unknown(l2, 0);
               if (local_unknown >= 0)
               {
                 // Convective terms
@@ -3133,7 +3098,7 @@ namespace oomph
               }
 
               // Axial velocity component
-              local_unknown = u_local_unknown(l2,1);
+              local_unknown = u_local_unknown(l2, 1);
               if (local_unknown >= 0)
               {
                 // Convective terms
@@ -3146,7 +3111,7 @@ namespace oomph
               }
 
               // Azimuthal velocity component
-              local_unknown = u_local_unknown(l2,2);
+              local_unknown = u_local_unknown(l2, 2);
               if (local_unknown >= 0)
               {
                 if (flag == 2)
@@ -3237,13 +3202,6 @@ namespace oomph
     // Find out how many nodes there are
     unsigned n_node = nnode();
 
-    // Get the nodal indices at which the velocity is stored
-    unsigned u_nodal_index[3];
-    for (unsigned i = 0; i < 3; ++i)
-    {
-      u_nodal_index[i] = u_index_nst(i);
-    }
-
     // Set up memory for the shape and test functions
     // Note that there are only two dimensions, r and z in this problem
     Shape psif(n_node), testf(n_node);
@@ -3312,7 +3270,8 @@ namespace oomph
         for (unsigned i = 0; i < 3; i++)
         {
           // Get the u_value
-          const double u_value = this->raw_nodal_value(l, u_nodal_index[i]);
+          const double u_value =
+            this->raw_nodal_value(l, this->u_index_nst(l, i));
           interpolated_u[i] += u_value * psif_;
           // dudt[i]+= du_dt_nst(l,i)*psif_;
           // Loop over derivative directions
@@ -3342,7 +3301,7 @@ namespace oomph
       for (unsigned l = 0; l < n_node; l++)
       {
         // FIRST (RADIAL) MOMENTUM EQUATION
-        local_eqn = momentum_local_eqn(l,0);
+        local_eqn = momentum_local_eqn(l, 0);
         // If it's not a boundary condition
         if (local_eqn >= 0)
         {
@@ -3350,7 +3309,7 @@ namespace oomph
           for (unsigned l3 = 0; l3 < n_node; l3++)
           {
             // Derivative of jacobian terms with respect to radial velocity
-            local_freedom = nodal_local_eqn(l3, u_nodal_index[0]);
+            local_freedom = u_local_unknown(l3, 0);
             if (local_freedom >= 0)
             {
               // Storage for the sums
@@ -3359,7 +3318,7 @@ namespace oomph
               // Loop over the velocity shape functions again
               for (unsigned l2 = 0; l2 < n_node; l2++)
               {
-                local_unknown = u_local_unknown(l2,0);
+                local_unknown = u_local_unknown(l2, 0);
                 // Radial velocity component
                 if (local_unknown >= 0)
                 {
@@ -3371,7 +3330,7 @@ namespace oomph
                 }
 
                 // Axial velocity component
-                local_unknown = u_local_unknown(l2,1);
+                local_unknown = u_local_unknown(l2, 1);
                 if (local_unknown >= 0)
                 {
                   // Convective terms
@@ -3385,7 +3344,7 @@ namespace oomph
 
 
             // Derivative of jacobian terms with respect to axial velocity
-            local_freedom = nodal_local_eqn(l3, u_nodal_index[1]);
+            local_freedom = u_local_unknown(l3, 1);
             if (local_freedom >= 0)
             {
               double temp = 0.0;
@@ -3393,7 +3352,7 @@ namespace oomph
               // Loop over the velocity shape functions again
               for (unsigned l2 = 0; l2 < n_node; l2++)
               {
-                local_unknown = u_local_unknown(l2,0);
+                local_unknown = u_local_unknown(l2, 0);
                 // Radial velocity component
                 if (local_unknown >= 0)
                 {
@@ -3407,7 +3366,7 @@ namespace oomph
             } // End of derivative wrt axial coordinate
 
             // Derivative of jacobian terms with respect to azimuthal velocity
-            local_freedom = nodal_local_eqn(l3, u_nodal_index[2]);
+            local_freedom = u_local_unknown(l3, 2);
             if (local_freedom >= 0)
             {
               double temp = 0.0;
@@ -3416,7 +3375,7 @@ namespace oomph
               for (unsigned l2 = 0; l2 < n_node; l2++)
               {
                 // Azimuthal velocity component
-                local_unknown = u_local_unknown(l2,2);
+                local_unknown = u_local_unknown(l2, 2);
                 if (local_unknown >= 0)
                 {
                   // Convective terms
@@ -3433,7 +3392,7 @@ namespace oomph
 
 
         // SECOND (AXIAL) MOMENTUM EQUATION
-        local_eqn = momentum_local_eqn(l,1);
+        local_eqn = momentum_local_eqn(l, 1);
         // If it's not a boundary condition
         if (local_eqn >= 0)
         {
@@ -3441,7 +3400,7 @@ namespace oomph
           for (unsigned l3 = 0; l3 < n_node; l3++)
           {
             // Derivative of jacobian terms with respect to radial velocity
-            local_freedom = nodal_local_eqn(l3, u_nodal_index[0]);
+            local_freedom = u_local_unknown(l3, 0);
             if (local_freedom >= 0)
             {
               double temp = 0.0;
@@ -3450,7 +3409,7 @@ namespace oomph
               for (unsigned l2 = 0; l2 < n_node; l2++)
               {
                 // Axial velocity component
-                local_unknown = u_local_unknown(l2,1);
+                local_unknown = u_local_unknown(l2, 1);
                 if (local_unknown >= 0)
                 {
                   // Convective terms
@@ -3465,7 +3424,7 @@ namespace oomph
 
 
             // Derivative of jacobian terms with respect to axial velocity
-            local_freedom = nodal_local_eqn(l3, u_nodal_index[1]);
+            local_freedom = u_local_unknown(l3, 1);
             if (local_freedom >= 0)
             {
               double temp = 0.0;
@@ -3473,7 +3432,7 @@ namespace oomph
               // Loop over the velocity shape functions again
               for (unsigned l2 = 0; l2 < n_node; l2++)
               {
-                local_unknown = u_local_unknown(l2,0);
+                local_unknown = u_local_unknown(l2, 0);
                 // Radial velocity component
                 if (local_unknown >= 0)
                 {
@@ -3483,7 +3442,7 @@ namespace oomph
                 }
 
                 // Axial velocity component
-                local_unknown = u_local_unknown(l2,1);
+                local_unknown = u_local_unknown(l2, 1);
                 if (local_unknown >= 0)
                 {
                   // Convective terms
@@ -3504,14 +3463,14 @@ namespace oomph
         } // End of AXIAL MOMENTUM EQUATION
 
         // THIRD (AZIMUTHAL) MOMENTUM EQUATION
-        local_eqn = momentum_local_eqn(l,2);
+        local_eqn = momentum_local_eqn(l, 2);
         if (local_eqn >= 0)
         {
           // Loop over the velocity shape functions yet again
           for (unsigned l3 = 0; l3 < n_node; l3++)
           {
             // Derivative of jacobian terms with respect to radial velocity
-            local_freedom = nodal_local_eqn(l3, u_nodal_index[0]);
+            local_freedom = u_local_unknown(l3, 0);
             if (local_freedom >= 0)
             {
               double temp = 0.0;
@@ -3520,7 +3479,7 @@ namespace oomph
               for (unsigned l2 = 0; l2 < n_node; l2++)
               {
                 // Azimuthal velocity component
-                local_unknown = u_local_unknown(l2,2);
+                local_unknown = u_local_unknown(l2, 2);
                 if (local_unknown >= 0)
                 {
                   // Convective terms
@@ -3535,7 +3494,7 @@ namespace oomph
             }
 
             // Derivative of jacobian terms with respect to axial velocity
-            local_freedom = nodal_local_eqn(l3, u_nodal_index[1]);
+            local_freedom = u_local_unknown(l3, 1);
             if (local_freedom >= 0)
             {
               double temp = 0.0;
@@ -3544,7 +3503,7 @@ namespace oomph
               for (unsigned l2 = 0; l2 < n_node; l2++)
               {
                 // Azimuthal velocity component
-                local_unknown = u_local_unknown(l2,2);
+                local_unknown = u_local_unknown(l2, 2);
                 if (local_unknown >= 0)
                 {
                   // Convective terms
@@ -3558,7 +3517,7 @@ namespace oomph
 
 
             // Derivative of jacobian terms with respect to azimuthal velocity
-            local_freedom = nodal_local_eqn(l3, u_nodal_index[2]);
+            local_freedom = u_local_unknown(l3, 2);
             if (local_freedom >= 0)
             {
               double temp = 0.0;
@@ -3568,7 +3527,7 @@ namespace oomph
               for (unsigned l2 = 0; l2 < n_node; l2++)
               {
                 // Radial velocity component
-                local_unknown = u_local_unknown(l2,0);
+                local_unknown = u_local_unknown(l2, 0);
                 if (local_unknown >= 0)
                 {
                   // Convective terms
@@ -3579,7 +3538,7 @@ namespace oomph
                 }
 
                 // Axial velocity component
-                local_unknown = u_local_unknown(l2,1);
+                local_unknown = u_local_unknown(l2, 1);
                 if (local_unknown >= 0)
                 {
                   // Convective terms

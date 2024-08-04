@@ -173,9 +173,9 @@ namespace oomph
     /// Overload the non-refineable version to take account of hanging node
     /// information
     void dinterpolated_u_nst_ddata(const Vector<double>& s,
-                                       const unsigned& i,
-                                       Vector<double>& du_ddata,
-                                       Vector<unsigned>& global_eqn_number)
+                                   const unsigned& i,
+                                   Vector<double>& du_ddata,
+                                   Vector<unsigned>& global_eqn_number)
     {
       // Find number of nodes
       unsigned n_node = this->nnode();
@@ -183,9 +183,6 @@ namespace oomph
       Shape psi(n_node);
       // Find values of shape function at the given local coordinate
       this->shape(s, psi);
-
-      // Find the index at which the velocity component is stored
-      const unsigned u_nodal_index = this->u_index_nst(i);
 
       // Storage for hang info pointer
       HangInfo* hang_info_pt = 0;
@@ -220,13 +217,13 @@ namespace oomph
           if (is_node_hanging)
           {
             // Get the equation number from the master node
-            global_eqn =
-              hang_info_pt->master_node_pt(m)->eqn_number(u_nodal_index);
+            global_eqn = hang_info_pt->master_node_pt(m)->eqn_number(
+              this->u_index_nst(l, i));
           }
           else
           {
             // Global equation number
-            global_eqn = this->node_pt(l)->eqn_number(u_nodal_index);
+            global_eqn = this->node_pt(l)->eqn_number(this->u_index_nst(l, i));
           }
 
           // If it's positive add to the count
@@ -283,13 +280,13 @@ namespace oomph
           if (is_node_hanging)
           {
             // Get the equation number from the master node
-            global_eqn =
-              hang_info_pt->master_node_pt(m)->eqn_number(u_nodal_index);
+            global_eqn = hang_info_pt->master_node_pt(m)->eqn_number(
+              this->u_index_nst(l, i));
           }
           else
           {
             // Local equation number
-            global_eqn = this->node_pt(l)->eqn_number(u_nodal_index);
+            global_eqn = this->node_pt(l)->eqn_number(this->u_index_nst(l, i));
           }
 
           if (global_eqn >= 0)
@@ -547,11 +544,9 @@ namespace oomph
       // Calculate velocities: values[0],...
       for (unsigned i = 0; i < DIM; i++)
       {
-        // Get the nodal coordinate of the velocity
-        unsigned u_nodal_index = u_index_nst(i);
         for (unsigned l = 0; l < n_node; l++)
         {
-          values[i] += nodal_value(t, l, u_nodal_index) * psif[l];
+          values[i] += nodal_value(t, l, this->u_index_nst(l, i)) * psif[l];
         }
       }
 
@@ -964,10 +959,10 @@ namespace oomph
       // Calculate velocities: values[0],...
       for (unsigned i = 0; i < DIM; i++)
       {
-        // Get the local index at which the i-th velocity is stored
-        unsigned u_local_index = u_index_nst(i);
         for (unsigned l = 0; l < n_node; l++)
         {
+          // Get the local index at which the i-th velocity is stored
+          unsigned u_local_index = u_index_nst(l, i);
           values[i] += nodal_value(t, l, u_local_index) * psif[l];
         }
       }
@@ -1036,16 +1031,16 @@ namespace oomph
 
       // The slopes get copied from father
       internal_data_pt(P_nst_internal_index)
-        ->set_value(
-          1,
-          0.5 * cast_father_el_pt->internal_data_pt(P_nst_internal_index)
-                  ->value(1));
+        ->set_value(1,
+                    0.5 *
+                      cast_father_el_pt->internal_data_pt(P_nst_internal_index)
+                        ->value(1));
 
       internal_data_pt(P_nst_internal_index)
-        ->set_value(
-          2,
-          0.5 * cast_father_el_pt->internal_data_pt(P_nst_internal_index)
-                  ->value(2));
+        ->set_value(2,
+                    0.5 *
+                      cast_father_el_pt->internal_data_pt(P_nst_internal_index)
+                        ->value(2));
     }
   };
 
