@@ -1113,7 +1113,7 @@ namespace oomph
             // Loop over the velocity shape functions again
             for (unsigned l2 = 0; l2 < n_node; l2++)
             {
-              local_unknown = nodal_local_eqn(l2, u_nodal_index[0]);
+              local_unknown = u_local_unknown(l2,0);
               // Radial velocity component
               if (local_unknown >= 0)
               {
@@ -1164,7 +1164,7 @@ namespace oomph
 
 
               // Axial velocity component
-              local_unknown = nodal_local_eqn(l2, u_nodal_index[1]);
+              local_unknown = u_local_unknown(l2,1);
               if (local_unknown >= 0)
               {
                 jacobian(local_eqn, local_unknown) -=
@@ -1178,7 +1178,7 @@ namespace oomph
               }
 
               // Azimuthal velocity component
-              local_unknown = nodal_local_eqn(l2, u_nodal_index[2]);
+              local_unknown = u_local_unknown(l2,2);
               if (local_unknown >= 0)
               {
                 // Convective terms
@@ -1262,7 +1262,7 @@ namespace oomph
             // Loop over the velocity shape functions again
             for (unsigned l2 = 0; l2 < n_node; l2++)
             {
-              local_unknown = nodal_local_eqn(l2, u_nodal_index[0]);
+              local_unknown = u_local_unknown(l2,0);
               // Radial velocity component
               if (local_unknown >= 0)
               {
@@ -1281,7 +1281,7 @@ namespace oomph
               }
 
               // Axial velocity component
-              local_unknown = nodal_local_eqn(l2, u_nodal_index[1]);
+              local_unknown = u_local_unknown(l2,1);
               if (local_unknown >= 0)
               {
                 if (flag == 2)
@@ -1414,7 +1414,7 @@ namespace oomph
             for (unsigned l2 = 0; l2 < n_node; l2++)
             {
               // Radial velocity component
-              local_unknown = nodal_local_eqn(l2, u_nodal_index[0]);
+              local_unknown = u_local_unknown(l2,0);
               if (local_unknown >= 0)
               {
                 // Convective terms
@@ -1430,7 +1430,7 @@ namespace oomph
               }
 
               // Axial velocity component
-              local_unknown = nodal_local_eqn(l2, u_nodal_index[1]);
+              local_unknown = u_local_unknown(l2,1);
               if (local_unknown >= 0)
               {
                 // Convective terms
@@ -1440,7 +1440,7 @@ namespace oomph
               }
 
               // Azimuthal velocity component
-              local_unknown = nodal_local_eqn(l2, u_nodal_index[2]);
+              local_unknown = u_local_unknown(l2,2);
               if (local_unknown >= 0)
               {
                 if (flag == 2)
@@ -1527,7 +1527,7 @@ namespace oomph
             for (unsigned l2 = 0; l2 < n_node; l2++)
             {
               // Radial velocity component
-              local_unknown = nodal_local_eqn(l2, u_nodal_index[0]);
+              local_unknown = u_local_unknown(l2,0);
               if (local_unknown >= 0)
               {
                 jacobian(local_eqn, local_unknown) +=
@@ -1535,7 +1535,7 @@ namespace oomph
               }
 
               // Axial velocity component
-              local_unknown = nodal_local_eqn(l2, u_nodal_index[1]);
+              local_unknown = u_local_unknown(l2,1);
               if (local_unknown >= 0)
               {
                 jacobian(local_eqn, local_unknown) +=
@@ -2763,7 +2763,7 @@ namespace oomph
             // Loop over the velocity shape functions again
             for (unsigned l2 = 0; l2 < n_node; l2++)
             {
-              local_unknown = nodal_local_eqn(l2, u_nodal_index[0]);
+              local_unknown = u_local_unknown(l2,0);
               // Radial velocity component
               if (local_unknown >= 0)
               {
@@ -2825,7 +2825,7 @@ namespace oomph
               }
 
               // Axial velocity component
-              local_unknown = nodal_local_eqn(l2, u_nodal_index[1]);
+              local_unknown = u_local_unknown(l2,1);
               if (local_unknown >= 0)
               {
                 // jacobian(local_eqn,local_unknown) -=
@@ -2841,7 +2841,7 @@ namespace oomph
               }
 
               // Azimuthal velocity component
-              local_unknown = nodal_local_eqn(l2, u_nodal_index[2]);
+              local_unknown = u_local_unknown(l2,2);
               if (local_unknown >= 0)
               {
                 // Convective terms
@@ -2943,7 +2943,7 @@ namespace oomph
             // Loop over the velocity shape functions again
             for (unsigned l2 = 0; l2 < n_node; l2++)
             {
-              local_unknown = nodal_local_eqn(l2, u_nodal_index[0]);
+              local_unknown = u_local_unknown(l2,0);
               // Radial velocity component
               if (local_unknown >= 0)
               {
@@ -2964,7 +2964,7 @@ namespace oomph
               }
 
               // Axial velocity component
-              local_unknown = nodal_local_eqn(l2, u_nodal_index[1]);
+              local_unknown = u_local_unknown(l2,1);
               if (local_unknown >= 0)
               {
                 if (flag == 2)
@@ -3111,7 +3111,7 @@ namespace oomph
             for (unsigned l2 = 0; l2 < n_node; l2++)
             {
               // Radial velocity component
-              local_unknown = nodal_local_eqn(l2, u_nodal_index[0]);
+              local_unknown = u_local_unknown(l2,0);
               if (local_unknown >= 0)
               {
                 // Convective terms
@@ -3133,7 +3133,7 @@ namespace oomph
               }
 
               // Axial velocity component
-              local_unknown = nodal_local_eqn(l2, u_nodal_index[1]);
+              local_unknown = u_local_unknown(l2,1);
               if (local_unknown >= 0)
               {
                 // Convective terms
@@ -3146,7 +3146,7 @@ namespace oomph
               }
 
               // Azimuthal velocity component
-              local_unknown = nodal_local_eqn(l2, u_nodal_index[2]);
+              local_unknown = u_local_unknown(l2,2);
               if (local_unknown >= 0)
               {
                 if (flag == 2)
@@ -3359,7 +3359,7 @@ namespace oomph
               // Loop over the velocity shape functions again
               for (unsigned l2 = 0; l2 < n_node; l2++)
               {
-                local_unknown = nodal_local_eqn(l2, u_nodal_index[0]);
+                local_unknown = u_local_unknown(l2,0);
                 // Radial velocity component
                 if (local_unknown >= 0)
                 {
@@ -3371,7 +3371,7 @@ namespace oomph
                 }
 
                 // Axial velocity component
-                local_unknown = nodal_local_eqn(l2, u_nodal_index[1]);
+                local_unknown = u_local_unknown(l2,1);
                 if (local_unknown >= 0)
                 {
                   // Convective terms
@@ -3393,7 +3393,7 @@ namespace oomph
               // Loop over the velocity shape functions again
               for (unsigned l2 = 0; l2 < n_node; l2++)
               {
-                local_unknown = nodal_local_eqn(l2, u_nodal_index[0]);
+                local_unknown = u_local_unknown(l2,0);
                 // Radial velocity component
                 if (local_unknown >= 0)
                 {
@@ -3416,7 +3416,7 @@ namespace oomph
               for (unsigned l2 = 0; l2 < n_node; l2++)
               {
                 // Azimuthal velocity component
-                local_unknown = nodal_local_eqn(l2, u_nodal_index[2]);
+                local_unknown = u_local_unknown(l2,2);
                 if (local_unknown >= 0)
                 {
                   // Convective terms
@@ -3450,7 +3450,7 @@ namespace oomph
               for (unsigned l2 = 0; l2 < n_node; l2++)
               {
                 // Axial velocity component
-                local_unknown = nodal_local_eqn(l2, u_nodal_index[1]);
+                local_unknown = u_local_unknown(l2,1);
                 if (local_unknown >= 0)
                 {
                   // Convective terms
@@ -3473,7 +3473,7 @@ namespace oomph
               // Loop over the velocity shape functions again
               for (unsigned l2 = 0; l2 < n_node; l2++)
               {
-                local_unknown = nodal_local_eqn(l2, u_nodal_index[0]);
+                local_unknown = u_local_unknown(l2,0);
                 // Radial velocity component
                 if (local_unknown >= 0)
                 {
@@ -3483,7 +3483,7 @@ namespace oomph
                 }
 
                 // Axial velocity component
-                local_unknown = nodal_local_eqn(l2, u_nodal_index[1]);
+                local_unknown = u_local_unknown(l2,1);
                 if (local_unknown >= 0)
                 {
                   // Convective terms
@@ -3520,7 +3520,7 @@ namespace oomph
               for (unsigned l2 = 0; l2 < n_node; l2++)
               {
                 // Azimuthal velocity component
-                local_unknown = nodal_local_eqn(l2, u_nodal_index[2]);
+                local_unknown = u_local_unknown(l2,2);
                 if (local_unknown >= 0)
                 {
                   // Convective terms
@@ -3544,7 +3544,7 @@ namespace oomph
               for (unsigned l2 = 0; l2 < n_node; l2++)
               {
                 // Azimuthal velocity component
-                local_unknown = nodal_local_eqn(l2, u_nodal_index[2]);
+                local_unknown = u_local_unknown(l2,2);
                 if (local_unknown >= 0)
                 {
                   // Convective terms
@@ -3568,7 +3568,7 @@ namespace oomph
               for (unsigned l2 = 0; l2 < n_node; l2++)
               {
                 // Radial velocity component
-                local_unknown = nodal_local_eqn(l2, u_nodal_index[0]);
+                local_unknown = u_local_unknown(l2,0);
                 if (local_unknown >= 0)
                 {
                   // Convective terms
@@ -3579,7 +3579,7 @@ namespace oomph
                 }
 
                 // Axial velocity component
-                local_unknown = nodal_local_eqn(l2, u_nodal_index[1]);
+                local_unknown = u_local_unknown(l2,1);
                 if (local_unknown >= 0)
                 {
                   // Convective terms

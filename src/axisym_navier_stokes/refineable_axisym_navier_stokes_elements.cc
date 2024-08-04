@@ -35,11 +35,10 @@ namespace oomph
   /// flag=0: compute only residual vector
   //=======================================================================
   void RefineableAxisymmetricNavierStokesEquations::
-    fill_in_generic_residual_contribution_nst(
-      Vector<double>& residuals,
-      DenseMatrix<double>& jacobian,
-      DenseMatrix<double>& mass_matrix,
-      unsigned flag)
+    fill_in_generic_residual_contribution_nst(Vector<double>& residuals,
+                                              DenseMatrix<double>& jacobian,
+                                              DenseMatrix<double>& mass_matrix,
+                                              unsigned flag)
   {
     // The dimension is actually two
     unsigned DIM = 2;
@@ -254,7 +253,7 @@ namespace oomph
             else
             {
               // Local equation number
-              local_eqn = this->momentum_local_eqn(l,i);
+              local_eqn = this->momentum_local_eqn(l, i);
               // Node contributes with full weight
               hang_weight = 1.0;
             }
@@ -480,8 +479,7 @@ namespace oomph
                       }
                       else
                       {
-                        local_unknown =
-                          this->nodal_local_eqn(l2, u_nodal_index[i2]);
+                        local_unknown = this->u_local_unknown(l2, i2);
                         hang_weight2 = 1.0;
                       }
 
@@ -927,8 +925,7 @@ namespace oomph
                     }
                     else
                     {
-                      local_unknown =
-                        this->nodal_local_eqn(l2, u_nodal_index[i2]);
+                      local_unknown = this->u_local_unknown(l2, i2);
                       hang_weight2 = 1.0;
                     }
 
@@ -1187,13 +1184,13 @@ namespace oomph
       // Call the derivatives of the shape and test functions
       const double J =
         this->dshape_and_dtest_eulerian_at_knot_nst(ipt,
-                                                        psif,
-                                                        dpsifdx,
-                                                        d_dpsifdx_dX,
-                                                        testf,
-                                                        dtestfdx,
-                                                        d_dtestfdx_dX,
-                                                        dJ_dX);
+                                                    psif,
+                                                    dpsifdx,
+                                                    d_dpsifdx_dX,
+                                                    testf,
+                                                    dtestfdx,
+                                                    d_dtestfdx_dX,
+                                                    dJ_dX);
 
       // Call the pressure shape and test functions
       this->pshape_nst(s, psip, testp);
@@ -1370,7 +1367,7 @@ namespace oomph
           else
           {
             // Local equation number
-            local_eqn = this->momentum_local_eqn(l,0);
+            local_eqn = this->momentum_local_eqn(l, 0);
 
             // Node contributes with full weight
             hang_weight = 1.0;
@@ -1645,7 +1642,7 @@ namespace oomph
           else
           {
             // Local equation number
-            local_eqn = this->momentum_local_eqn(l,1);
+            local_eqn = this->momentum_local_eqn(l, 1);
 
             // Node contributes with full weight
             hang_weight = 1.0;
@@ -1892,7 +1889,7 @@ namespace oomph
           else
           {
             // Local equation number
-            local_eqn = this->momentum_local_eqn(l,2);
+            local_eqn = this->momentum_local_eqn(l, 2);
 
             // Node contributes with full weight
             hang_weight = 1.0;
