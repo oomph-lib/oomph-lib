@@ -118,96 +118,92 @@ namespace oomph
     /// Overload the output function
     void output(std::ostream& outfile)
     {
-      FiniteElement::output(outfile);
-      // const unsigned n_plot = 5;
-      // output(outfile, n_plot);
+      const unsigned n_plot = 3;
+      output(outfile, n_plot);
     }
 
     /// Output function: x,y,[z],u,v,[w],lambda in csv format
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
-      FiniteElement::output(outfile, n_plot);
-      // // Number of dimensions
-      // unsigned n_dim = this->nodal_dimension();
+      // Number of dimensions
+      unsigned n_dim = this->nodal_dimension();
 
-      // // Find out how many nodes there are
-      // const unsigned n_node = this->nnode();
+      // Find out how many nodes there are
+      const unsigned n_node = this->nnode();
 
-      // // Set up memory for the shape functions
-      // Shape psi(n_node);
+      // Set up memory for the shape functions
+      Shape psi(n_node);
 
-      // // Local and global coordinates
-      // Vector<double> s(n_dim - 1);
+      // Local and global coordinates
+      Vector<double> s(n_dim - 1);
 
-      // // Loop over plot points
-      // unsigned num_plot_points = this->nplot_points(n_plot);
-      // for (unsigned iplot = 0; iplot < num_plot_points; iplot++)
-      // {
-      //   // Get local coordinates of plot point
-      //   this->get_s_plot(iplot, n_plot, s);
+      // Loop over plot points
+      unsigned num_plot_points = this->nplot_points(n_plot);
+      for (unsigned iplot = 0; iplot < num_plot_points; iplot++)
+      {
+        // Get local coordinates of plot point
+        this->get_s_plot(iplot, n_plot, s);
 
-      //   // Outer unit normal
-      //   // Vector<Vector<double>> tang_vec(n_dim - 1, Vector<double>(n_dim));
-      //   Vector<double> unit_normal(n_dim);
-      //   this->outer_unit_normal(s, unit_normal);
-      //   // continuous_tangent_and_outer_unit_normal(s, tang_vec,
-      //   unit_normal);
+        // Outer unit normal
+        // Vector<Vector<double>> tang_vec(n_dim - 1, Vector<double>(n_dim));
+        Vector<double> unit_normal(n_dim);
+        this->outer_unit_normal(s, unit_normal);
+        // continuous_tangent_and_outer_unit_normal(s, tang_vec, unit_normal);
 
-      //   // Find the shape functions
-      //   this->shape(s, psi);
+        // Find the shape functions
+        this->shape(s, psi);
 
-      //   // Initialise to zero
-      //   Vector<double> interpolated_x(n_dim);
-      //   Vector<double> interpolated_u(n_dim);
-      //   Vector<double> interpolated_lambda(n_dim);
+        // Initialise to zero
+        Vector<double> interpolated_x(n_dim);
+        Vector<double> interpolated_u(n_dim);
+        Vector<double> interpolated_lambda(n_dim);
 
-      //   // Calculate stuff
-      //   for (unsigned l = 0; l < n_node; l++)
-      //   {
-      //     BoundaryNodeBase* bnod_pt =
-      //       dynamic_cast<BoundaryNodeBase*>(this->node_pt(l));
-      //     unsigned first_index =
-      //       bnod_pt->index_of_first_value_assigned_by_face_element(Id);
-      //     // Loop over directions
-      //     for (unsigned i = 0; i < n_dim; i++)
-      //     {
-      //       interpolated_x[i] += this->nodal_position(l, i) * psi[l];
-      //       interpolated_u[i] += this->nst_u(l, i) * psi[l];
-      //     }
-      //     for (unsigned i = 0; i < n_dim - 1; i++)
-      //     {
-      //       interpolated_lambda[i] +=
-      //         this->nodal_value(l, first_index + i) * psi[l];
-      //     }
-      //   }
+        // Calculate stuff
+        for (unsigned l = 0; l < n_node; l++)
+        {
+          BoundaryNodeBase* bnod_pt =
+            dynamic_cast<BoundaryNodeBase*>(this->node_pt(l));
+          unsigned first_index =
+            bnod_pt->index_of_first_value_assigned_by_face_element(Additional_value_id);
+          // Loop over directions
+          for (unsigned i = 0; i < n_dim; i++)
+          {
+            interpolated_x[i] += this->nodal_position(l, i) * psi[l];
+            interpolated_u[i] += this->nst_u(l, i) * psi[l];
+          }
+          for (unsigned i = 0; i < n_dim - 1; i++)
+          {
+            interpolated_lambda[i] +=
+              this->nodal_value(l, first_index + i) * psi[l];
+          }
+        }
 
-      //   // Output the x,y,..
-      //   for (unsigned i = 0; i < n_dim; i++)
-      //   {
-      //     outfile << interpolated_x[i] << ",";
-      //   }
+        // Output the x,y,..
+        for (unsigned i = 0; i < n_dim; i++)
+        {
+          outfile << interpolated_x[i] << ",";
+        }
 
-      //   // Output normal
-      //   for (unsigned i = 0; i < n_dim; i++)
-      //   {
-      //     outfile << unit_normal[i] << ",";
-      //   }
+        // Output normal
+        for (unsigned i = 0; i < n_dim; i++)
+        {
+          outfile << unit_normal[i] << ",";
+        }
 
-      //   // Output the velocity
-      //   for (unsigned i = 0; i < n_dim; i++)
-      //   {
-      //     outfile << interpolated_u[i] << ",";
-      //   }
+        // Output the velocity
+        for (unsigned i = 0; i < n_dim; i++)
+        {
+          outfile << interpolated_u[i] << ",";
+        }
 
-      //   // Output the lagrange multiplier, don't include the comma on the
-      //   final
-      //   // value
-      //   for (unsigned i = 0; i < n_dim - 2; i++)
-      //   {
-      //     outfile << interpolated_lambda[i] << ",";
-      //   }
-      //   outfile << interpolated_lambda[n_dim - 2] << std::endl;
-      // }
+        // Output the lagrange multiplier, don't include the comma on the final
+        // value
+        for (unsigned i = 0; i < n_dim - 2; i++)
+        {
+          outfile << interpolated_lambda[i] << ",";
+        }
+        outfile << interpolated_lambda[n_dim - 2] << std::endl;
+      }
     }
 
   protected:
