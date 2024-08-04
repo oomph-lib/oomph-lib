@@ -125,7 +125,7 @@ namespace oomph
         // Loop over the velocity components
         for (unsigned i = 0; i < n_value; i++)
         {
-          local_eqn = nodal_local_eqn(l, u_nodal_index[i]);
+          local_eqn = momentum_local_eqn(l,i);
 
           // If not a boundary condition
           if (local_eqn >= 0)
@@ -1052,7 +1052,7 @@ namespace oomph
       for (unsigned l = 0; l < n_node; l++)
       {
         // FIRST (RADIAL) MOMENTUM EQUATION
-        local_eqn = nodal_local_eqn(l, u_nodal_index[0]);
+        local_eqn = momentum_local_eqn(l,0);
         // If it's not a boundary condition
         if (local_eqn >= 0)
         {
@@ -1209,7 +1209,7 @@ namespace oomph
         } // End of if not boundary condition statement
 
         // SECOND (AXIAL) MOMENTUM EQUATION
-        local_eqn = nodal_local_eqn(l, u_nodal_index[1]);
+        local_eqn = momentum_local_eqn(l,1);
         // If it's not a boundary condition
         if (local_eqn >= 0)
         {
@@ -1351,7 +1351,7 @@ namespace oomph
         } // End of AXIAL MOMENTUM EQUATION
 
         // THIRD (AZIMUTHAL) MOMENTUM EQUATION
-        local_eqn = nodal_local_eqn(l, u_nodal_index[2]);
+        local_eqn = momentum_local_eqn(l,2);
         if (local_eqn >= 0)
         {
           // Add the user-defined body force terms
@@ -1859,7 +1859,7 @@ namespace oomph
         // --------------------------------
         // FIRST (RADIAL) MOMENTUM EQUATION
         // --------------------------------
-        local_eqn = nodal_local_eqn(l, u_nodal_index[0]);
+        local_eqn = momentum_local_eqn(l,0);
         ;
 
         // If it's not a boundary condition
@@ -2060,7 +2060,7 @@ namespace oomph
         // --------------------------------
         // SECOND (AXIAL) MOMENTUM EQUATION
         // --------------------------------
-        local_eqn = nodal_local_eqn(l, u_nodal_index[1]);
+        local_eqn = momentum_local_eqn(l,1);
         ;
 
         // If it's not a boundary condition
@@ -2235,7 +2235,7 @@ namespace oomph
         // -----------------------------------
         // THIRD (AZIMUTHAL) MOMENTUM EQUATION
         // -----------------------------------
-        local_eqn = nodal_local_eqn(l, u_nodal_index[2]);
+        local_eqn = momentum_local_eqn(l,2);
         ;
 
         // If it's not a boundary condition
@@ -2685,7 +2685,7 @@ namespace oomph
       for (unsigned l = 0; l < n_node; l++)
       {
         // FIRST (RADIAL) MOMENTUM EQUATION
-        local_eqn = nodal_local_eqn(l, u_nodal_index[0]);
+        local_eqn = momentum_local_eqn(l,0);
         // If it's not a boundary condition
         if (local_eqn >= 0)
         {
@@ -2877,7 +2877,7 @@ namespace oomph
         } // End of if not boundary condition statement
 
         // SECOND (AXIAL) MOMENTUM EQUATION
-        local_eqn = nodal_local_eqn(l, u_nodal_index[1]);
+        local_eqn = momentum_local_eqn(l,1);
         // If it's not a boundary condition
         if (local_eqn >= 0)
         {
@@ -3033,7 +3033,7 @@ namespace oomph
         } // End of AXIAL MOMENTUM EQUATION
 
         // THIRD (AZIMUTHAL) MOMENTUM EQUATION
-        local_eqn = nodal_local_eqn(l, u_nodal_index[2]);
+        local_eqn = momentum_local_eqn(l,2);
         if (local_eqn >= 0)
         {
           // Add the user-defined body force terms
@@ -3342,7 +3342,7 @@ namespace oomph
       for (unsigned l = 0; l < n_node; l++)
       {
         // FIRST (RADIAL) MOMENTUM EQUATION
-        local_eqn = nodal_local_eqn(l, u_nodal_index[0]);
+        local_eqn = momentum_local_eqn(l,0);
         // If it's not a boundary condition
         if (local_eqn >= 0)
         {
@@ -3433,7 +3433,7 @@ namespace oomph
 
 
         // SECOND (AXIAL) MOMENTUM EQUATION
-        local_eqn = nodal_local_eqn(l, u_nodal_index[1]);
+        local_eqn = momentum_local_eqn(l,1);
         // If it's not a boundary condition
         if (local_eqn >= 0)
         {
@@ -3504,7 +3504,7 @@ namespace oomph
         } // End of AXIAL MOMENTUM EQUATION
 
         // THIRD (AZIMUTHAL) MOMENTUM EQUATION
-        local_eqn = nodal_local_eqn(l, u_nodal_index[2]);
+        local_eqn = momentum_local_eqn(l,2);
         if (local_eqn >= 0)
         {
           // Loop over the velocity shape functions yet again

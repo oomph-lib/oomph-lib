@@ -254,7 +254,7 @@ namespace oomph
             else
             {
               // Local equation number
-              local_eqn = this->nodal_local_eqn(l, u_nodal_index[i]);
+              local_eqn = this->momentum_local_eqn(l,i);
               // Node contributes with full weight
               hang_weight = 1.0;
             }
@@ -1370,7 +1370,7 @@ namespace oomph
           else
           {
             // Local equation number
-            local_eqn = this->nodal_local_eqn(l, u_nodal_index[0]);
+            local_eqn = this->momentum_local_eqn(l,0);
 
             // Node contributes with full weight
             hang_weight = 1.0;
@@ -1645,7 +1645,7 @@ namespace oomph
           else
           {
             // Local equation number
-            local_eqn = this->nodal_local_eqn(l, u_nodal_index[1]);
+            local_eqn = this->momentum_local_eqn(l,1);
 
             // Node contributes with full weight
             hang_weight = 1.0;
@@ -1892,7 +1892,7 @@ namespace oomph
           else
           {
             // Local equation number
-            local_eqn = this->nodal_local_eqn(l, u_nodal_index[2]);
+            local_eqn = this->momentum_local_eqn(l,2);
 
             // Node contributes with full weight
             hang_weight = 1.0;

@@ -1917,8 +1917,7 @@ namespace oomph
       }
       else
       {
-        const unsigned u_nodal_index = this->u_index_nst(fld);
-        return this->nodal_local_eqn(j, u_nodal_index);
+        return this->momentum_local_eqn(j, fld);
       }
     }
   };
@@ -2107,8 +2106,7 @@ namespace oomph
       }
       else
       {
-        const unsigned u_nodal_index = this->u_index_nst(fld);
-        return this->nodal_local_eqn(j, u_nodal_index);
+        return this->momentum_local_eqn(j, fld);
       }
     }
   };
