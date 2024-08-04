@@ -915,12 +915,12 @@ namespace oomph
                       // Get the equation number from the master node
                       local_unknown =
                         local_hang_eqn(hang_info2_pt->master_node_pt(m2),
-                                       this->u_index_nst(l2, m2));
+                                       this->u_index_nst(l2, i2));
                       hang_weight2 = hang_info2_pt->master_weight(m2);
                     }
                     else
                     {
-                      local_unknown = this->u_local_unknown(l2, m2);
+                      local_unknown = this->u_local_unknown(l2, i2);
                       hang_weight2 = 1.0;
                     }
 
