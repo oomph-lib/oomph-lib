@@ -88,7 +88,7 @@ namespace oomph
     Vector<unsigned> u_nodal_index(n_value);
     for (unsigned i = 0; i < n_value; i++)
     {
-      u_nodal_index[i] = this->u_index_axi_nst(i);
+      u_nodal_index[i] = this->u_index_nst(i);
     }
 
     // Set up memory for test functions
@@ -204,8 +204,8 @@ namespace oomph
       for (unsigned i = 0; i < 3; i++)
       {
         norm += exact_soln[i] * exact_soln[i] * W;
-        error += (exact_soln[i] - interpolated_u_axi_nst(s, i)) *
-                 (exact_soln[i] - interpolated_u_axi_nst(s, i)) * W;
+        error += (exact_soln[i] - interpolated_u_nst(s, i)) *
+                 (exact_soln[i] - interpolated_u_nst(s, i)) * W;
       }
 
       // Output x,y,...,u_exact
@@ -217,7 +217,7 @@ namespace oomph
       // Output x,y,[z],u_error,v_error,[w_error]
       for (unsigned i = 0; i < 3; i++)
       {
-        outfile << exact_soln[i] - interpolated_u_axi_nst(s, i) << " ";
+        outfile << exact_soln[i] - interpolated_u_nst(s, i) << " ";
       }
 
       outfile << std::endl;
@@ -281,8 +281,8 @@ namespace oomph
       for (unsigned i = 0; i < 3; i++)
       {
         norm += exact_soln[i] * exact_soln[i] * W;
-        error += (exact_soln[i] - interpolated_u_axi_nst(s, i)) *
-                 (exact_soln[i] - interpolated_u_axi_nst(s, i)) * W;
+        error += (exact_soln[i] - interpolated_u_nst(s, i)) *
+                 (exact_soln[i] - interpolated_u_nst(s, i)) * W;
       }
 
       // Output x,y,...,u_exact
@@ -294,7 +294,7 @@ namespace oomph
       // Output x,y,u_error,v_error,w_error
       for (unsigned i = 0; i < 3; i++)
       {
-        outfile << exact_soln[i] - interpolated_u_axi_nst(s, i) << " ";
+        outfile << exact_soln[i] - interpolated_u_nst(s, i) << " ";
       }
 
       outfile << std::endl;
@@ -463,7 +463,7 @@ namespace oomph
       for (unsigned i = 0; i < 3; i++)
       {
         // Get the index at which the velocity is stored
-        unsigned u_nodal_index = u_index_axi_nst(i);
+        unsigned u_nodal_index = u_index_nst(i);
         interpolated_u[i] = 0.0;
         // Loop over the local nodes and sum
         for (unsigned l = 0; l < n_node; l++)
@@ -522,11 +522,11 @@ namespace oomph
       // Velocities
       for (unsigned i = 0; i < 3; i++)
       {
-        outfile << interpolated_u_axi_nst(s, i) << " ";
+        outfile << interpolated_u_nst(s, i) << " ";
       }
 
       // Pressure
-      outfile << interpolated_p_axi_nst(s) << " ";
+      outfile << interpolated_p_nst(s) << " ";
 
       outfile << std::endl;
     }
@@ -570,12 +570,12 @@ namespace oomph
       for (unsigned i = 0; i < 3; i++)
       {
         // outfile << interpolated_u(s,i) << " ";
-        fprintf(file_pt, "%g ", interpolated_u_axi_nst(s, i));
+        fprintf(file_pt, "%g ", interpolated_u_nst(s, i));
       }
 
       // Pressure
       // outfile << interpolated_p(s)  << " ";
-      fprintf(file_pt, "%g ", interpolated_p_axi_nst(s));
+      fprintf(file_pt, "%g ", interpolated_p_nst(s));
 
       // outfile << std::endl;
       fprintf(file_pt, "\n");
@@ -677,7 +677,7 @@ namespace oomph
     strain_rate(s, strainrate);
 
     // Get pressure
-    double press = interpolated_p_axi_nst(s);
+    double press = interpolated_p_nst(s);
 
     // Loop over traction components
     for (unsigned i = 0; i < 3; i++)
@@ -766,7 +766,7 @@ namespace oomph
     unsigned u_nodal_index[3];
     for (unsigned i = 0; i < 3; ++i)
     {
-      u_nodal_index[i] = u_index_axi_nst(i);
+      u_nodal_index[i] = u_index_nst(i);
     }
 
     // Loop over nodes to assemble velocities and their derivatives
@@ -854,7 +854,7 @@ namespace oomph
       for (unsigned i = 0; i < 3; i++)
       {
         veloc_squared +=
-          interpolated_u_axi_nst(s, i) * interpolated_u_axi_nst(s, i);
+          interpolated_u_nst(s, i) * interpolated_u_nst(s, i);
       }
 
       kin_en += 0.5 * veloc_squared * w * J * interpolated_x(s, 0);
@@ -896,7 +896,7 @@ namespace oomph
       double W = w * J * interpolated_x(s, 0);
 
       // Get pressure
-      double press = interpolated_p_axi_nst(s);
+      double press = interpolated_p_nst(s);
 
       // Add
       press_int += press * W;
@@ -911,7 +911,7 @@ namespace oomph
   ///  Jacobian as well.
   //==============================================================
   void AxisymmetricNavierStokesEquations::
-    fill_in_generic_residual_contribution_axi_nst(
+    fill_in_generic_residual_contribution_nst(
       Vector<double>& residuals,
       DenseMatrix<double>& jacobian,
       DenseMatrix<double>& mass_matrix,
@@ -924,13 +924,13 @@ namespace oomph
     double time = node_pt(0)->time_stepper_pt()->time_pt()->time();
 
     // Find out how many pressure dofs there are
-    unsigned n_pres = npres_axi_nst();
+    unsigned n_pres = npres_nst();
 
     // Get the nodal indices at which the velocity is stored
     unsigned u_nodal_index[3];
     for (unsigned i = 0; i < 3; ++i)
     {
-      u_nodal_index[i] = u_index_axi_nst(i);
+      u_nodal_index[i] = u_index_nst(i);
     }
 
     // Set up memory for the shape and test functions
@@ -968,11 +968,11 @@ namespace oomph
       double w = integral_pt()->weight(ipt);
 
       // Call the derivatives of the shape and test functions
-      double J = dshape_and_dtest_eulerian_at_knot_axi_nst(
+      double J = dshape_and_dtest_eulerian_at_knot_nst(
         ipt, psif, dpsifdx, testf, dtestfdx);
 
       // Call the pressure shape and test functions
-      pshape_axi_nst(s, psip, testp);
+      pshape_nst(s, psip, testp);
 
       // Premultiply the weights and the Jacobian
       double W = w * J;
@@ -991,7 +991,7 @@ namespace oomph
       // Calculate pressure at integration point
       for (unsigned l = 0; l < n_pres; l++)
       {
-        interpolated_p += p_axi_nst(l) * psip[l];
+        interpolated_p += p_nst(l) * psip[l];
       }
 
       // Calculate velocities and derivatives at integration point
@@ -1014,7 +1014,7 @@ namespace oomph
           // Get the u_value
           const double u_value = this->raw_nodal_value(l, u_nodal_index[i]);
           interpolated_u[i] += u_value * psif_;
-          dudt[i] += du_dt_axi_nst(l, i) * psif_;
+          dudt[i] += du_dt_nst(l, i) * psif_;
           // Loop over derivative directions
           for (unsigned j = 0; j < 2; j++)
           {
@@ -1040,7 +1040,7 @@ namespace oomph
 
       // Get the user-defined body force terms
       Vector<double> body_force(3);
-      get_body_force_axi_nst(time, ipt, s, interpolated_x, body_force);
+      get_body_force_nst(time, ipt, s, interpolated_x, body_force);
 
       // Get the user-defined source function
       double source = get_source_fct(time, ipt, interpolated_x);
@@ -1580,13 +1580,13 @@ namespace oomph
     const unsigned n_node = nnode();
 
     // Determine number of pressure dofs in element
-    const unsigned n_pres = npres_axi_nst();
+    const unsigned n_pres = npres_nst();
 
     // Find the indices at which the local velocities are stored
     unsigned u_nodal_index[3];
     for (unsigned i = 0; i < 3; i++)
     {
-      u_nodal_index[i] = u_index_axi_nst(i);
+      u_nodal_index[i] = u_index_nst(i);
     }
 
     // Set up memory for the shape and test functions
@@ -1720,7 +1720,7 @@ namespace oomph
       const double w = integral_pt()->weight(ipt);
 
       // Call the derivatives of the shape and test functions
-      const double J = dshape_and_dtest_eulerian_at_knot_axi_nst(ipt,
+      const double J = dshape_and_dtest_eulerian_at_knot_nst(ipt,
                                                                  psif,
                                                                  dpsifdx,
                                                                  d_dpsifdx_dX,
@@ -1730,7 +1730,7 @@ namespace oomph
                                                                  dJ_dX);
 
       // Call the pressure shape and test functions
-      pshape_axi_nst(s, psip, testp);
+      pshape_nst(s, psip, testp);
 
       // Allocate storage for the position and the derivative of the
       // mesh positions w.r.t. time
@@ -1747,7 +1747,7 @@ namespace oomph
       // Calculate pressure at integration point
       for (unsigned l = 0; l < n_pres; l++)
       {
-        interpolated_p += p_axi_nst(l) * psip[l];
+        interpolated_p += p_nst(l) * psip[l];
       }
 
       // Calculate velocities and derivatives at integration point
@@ -1771,7 +1771,7 @@ namespace oomph
           // Get the nodal value
           const double u_value = this->raw_nodal_value(l, u_nodal_index[i]);
           interpolated_u[i] += u_value * psif_;
-          dudt[i] += du_dt_axi_nst(l, i) * psif_;
+          dudt[i] += du_dt_nst(l, i) * psif_;
 
           // Loop over derivative directions
           for (unsigned j = 0; j < 2; j++)
@@ -1830,7 +1830,7 @@ namespace oomph
 
       // Get the user-defined body force terms
       Vector<double> body_force(3);
-      get_body_force_axi_nst(time, ipt, s, interpolated_x, body_force);
+      get_body_force_nst(time, ipt, s, interpolated_x, body_force);
 
       // Get the user-defined source function
       const double source = get_source_fct(time, ipt, interpolated_x);
@@ -1840,7 +1840,7 @@ namespace oomph
 
       // Get gradient of body force function
       DenseMatrix<double> d_body_force_dx(3, 2, 0.0);
-      get_body_force_gradient_axi_nst(
+      get_body_force_gradient_nst(
         time, ipt, s, interpolated_x, d_body_force_dx);
 
       // Get gradient of source function
@@ -2507,7 +2507,7 @@ namespace oomph
   ///  Jacobian as well.
   //==============================================================
   void AxisymmetricNavierStokesEquations::
-    fill_in_generic_dresidual_contribution_axi_nst(
+    fill_in_generic_dresidual_contribution_nst(
       double* const& parameter_pt,
       Vector<double>& dres_dparam,
       DenseMatrix<double>& djac_dparam,
@@ -2555,13 +2555,13 @@ namespace oomph
     unsigned n_node = nnode();
 
     // Find out how many pressure dofs there are
-    unsigned n_pres = npres_axi_nst();
+    unsigned n_pres = npres_nst();
 
     // Get the nodal indices at which the velocity is stored
     unsigned u_nodal_index[3];
     for (unsigned i = 0; i < 3; ++i)
     {
-      u_nodal_index[i] = u_index_axi_nst(i);
+      u_nodal_index[i] = u_index_nst(i);
     }
 
     // Set up memory for the shape and test functions
@@ -2600,11 +2600,11 @@ namespace oomph
       double w = integral_pt()->weight(ipt);
 
       // Call the derivatives of the shape and test functions
-      double J = dshape_and_dtest_eulerian_at_knot_axi_nst(
+      double J = dshape_and_dtest_eulerian_at_knot_nst(
         ipt, psif, dpsifdx, testf, dtestfdx);
 
       // Call the pressure shape and test functions
-      pshape_axi_nst(s, psip, testp);
+      pshape_nst(s, psip, testp);
 
       // Premultiply the weights and the Jacobian
       double W = w * J;
@@ -2623,7 +2623,7 @@ namespace oomph
       // Calculate pressure at integration point
       for (unsigned l = 0; l < n_pres; l++)
       {
-        interpolated_p += p_axi_nst(l) * psip[l];
+        interpolated_p += p_nst(l) * psip[l];
       }
 
       // Calculate velocities and derivatives at integration point
@@ -2646,7 +2646,7 @@ namespace oomph
           // Get the u_value
           const double u_value = this->raw_nodal_value(l, u_nodal_index[i]);
           interpolated_u[i] += u_value * psif_;
-          dudt[i] += du_dt_axi_nst(l, i) * psif_;
+          dudt[i] += du_dt_nst(l, i) * psif_;
           // Loop over derivative directions
           for (unsigned j = 0; j < 2; j++)
           {
@@ -3248,7 +3248,7 @@ namespace oomph
     unsigned u_nodal_index[3];
     for (unsigned i = 0; i < 3; ++i)
     {
-      u_nodal_index[i] = u_index_axi_nst(i);
+      u_nodal_index[i] = u_index_nst(i);
     }
 
     // Set up memory for the shape and test functions
@@ -3286,7 +3286,7 @@ namespace oomph
       double w = integral_pt()->weight(ipt);
 
       // Call the derivatives of the shape and test functions
-      double J = dshape_and_dtest_eulerian_at_knot_axi_nst(
+      double J = dshape_and_dtest_eulerian_at_knot_nst(
         ipt, psif, dpsifdx, testf, dtestfdx);
 
       // Premultiply the weights and the Jacobian
@@ -3321,7 +3321,7 @@ namespace oomph
           // Get the u_value
           const double u_value = this->raw_nodal_value(l, u_nodal_index[i]);
           interpolated_u[i] += u_value * psif_;
-          // dudt[i]+= du_dt_axi_nst(l,i)*psif_;
+          // dudt[i]+= du_dt_nst(l,i)*psif_;
           // Loop over derivative directions
           for (unsigned j = 0; j < 2; j++)
           {
@@ -3643,7 +3643,7 @@ namespace oomph
     unsigned n_node = this->nnode();
 
     // number of pressure values
-    unsigned n_press = this->npres_axi_nst();
+    unsigned n_press = this->npres_nst();
 
     // temporary pair (used to store dof lookup prior to being added to list)
     std::pair<unsigned, unsigned> dof_lookup;

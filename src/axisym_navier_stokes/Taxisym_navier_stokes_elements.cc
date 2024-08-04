@@ -40,12 +40,12 @@ namespace oomph
   //========================================================================
   void AxisymmetricTCrouzeixRaviartElement::unpin_all_internal_pressure_dofs()
   {
-    unsigned n_pres = this->npres_axi_nst();
+    unsigned n_pres = this->npres_nst();
     // loop over pressure dofs
     for (unsigned l = 0; l < n_pres; l++)
     {
       // unpin internal pressure
-      this->internal_data_pt(P_axi_nst_internal_index)->unpin(l);
+      this->internal_data_pt(P_nst_internal_index)->unpin(l);
     }
   }
 
@@ -66,7 +66,7 @@ namespace oomph
     unsigned u_index[3];
     for (unsigned i = 0; i < 3; i++)
     {
-      u_index[i] = this->u_index_axi_nst(i);
+      u_index[i] = this->u_index_nst(i);
     }
 
     // Loop over the nodes
@@ -168,7 +168,7 @@ namespace oomph
   void AxisymmetricTTaylorHoodElement::unpin_proper_nodal_pressure_dofs()
   {
     // Loop over all pressure nodes and unpin if they're not hanging
-    unsigned n_pres = npres_axi_nst();
+    unsigned n_pres = npres_nst();
     for (unsigned l = 0; l < n_pres; l++)
     {
       Node* nod_pt = this->node_pt(Pconv[l]);
@@ -221,7 +221,7 @@ namespace oomph
     std::set<std::pair<Data*, unsigned>>& paired_load_data)
   {
     // Loop over the pressure data
-    unsigned n_pres = npres_axi_nst();
+    unsigned n_pres = npres_nst();
     for (unsigned l = 0; l < n_pres; l++)
     {
       // The DIMth entry in each nodal data is the pressure, which

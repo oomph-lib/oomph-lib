@@ -130,7 +130,7 @@ namespace oomph
       for (unsigned i = 0; i < n_dim + 1; i++)
       {
         this->U_index_axisymmetric_nst_traction[i] =
-          cast_element_pt->u_index_axi_nst(i);
+          cast_element_pt->u_index_nst(i);
       }
 
       // Zero traction
@@ -859,7 +859,7 @@ namespace oomph
     for (unsigned i = 0; i < 3; i++)
     {
       U_index_fsi_no_slip_axisym[i] =
-        dynamic_cast<FLUID_BULK_ELEMENT*>(bulk_el_pt)->u_index_axi_nst(i);
+        dynamic_cast<FLUID_BULK_ELEMENT*>(bulk_el_pt)->u_index_nst(i);
     }
 
     // We need Dim+1 additional values for each FaceElement node
