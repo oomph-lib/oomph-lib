@@ -164,7 +164,8 @@ namespace oomph
           BoundaryNodeBase* bnod_pt =
             dynamic_cast<BoundaryNodeBase*>(this->node_pt(l));
           unsigned first_index =
-            bnod_pt->index_of_first_value_assigned_by_face_element(Additional_value_id);
+            bnod_pt->index_of_first_value_assigned_by_face_element(
+              Additional_value_id);
           // Loop over directions
           for (unsigned i = 0; i < n_dim; i++)
           {
@@ -273,7 +274,8 @@ namespace oomph
           // Get the index of the first nodal value associated with
           // this FaceElement
           unsigned first_index =
-            bnod_pt->index_of_first_value_assigned_by_face_element(Additional_value_id);
+            bnod_pt->index_of_first_value_assigned_by_face_element(
+              Additional_value_id);
 
           // Assemble the Lagrange multiplier
           for (unsigned l = 0; l < dim_el; l++)
@@ -296,7 +298,8 @@ namespace oomph
           // Get the index of the first nodal value associated with
           // this FaceElement
           unsigned first_index =
-            bnod_pt->index_of_first_value_assigned_by_face_element(Additional_value_id);
+            bnod_pt->index_of_first_value_assigned_by_face_element(
+              Additional_value_id);
 
           // loop over the lagrange multiplier components
           for (unsigned l = 0; l < dim_el; l++)
@@ -486,7 +489,9 @@ namespace oomph
           // Local eqn number:
           int local_eqn = this->nodal_local_eqn(
             node_i,
-            bnod_pt->index_of_first_value_assigned_by_face_element(Additional_value_id) + dim_i);
+            bnod_pt->index_of_first_value_assigned_by_face_element(
+              Additional_value_id) +
+              dim_i);
 
           if (local_eqn >= 0)
           {
