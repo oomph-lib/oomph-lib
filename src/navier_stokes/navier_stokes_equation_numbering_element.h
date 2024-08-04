@@ -34,6 +34,7 @@
 #endif
 
 // OOMPH-LIB headers
+#include "../generic/shape.h"
 #include "../generic/elements.h"
 
 namespace oomph
@@ -44,6 +45,11 @@ namespace oomph
   //======================================================================
   class NavierStokesEquationNumberingElement : public virtual FiniteElement
   {
+  private:
+    /// Static "magic" number that indicates that the pressure is
+    /// not stored at a node
+    static int Pressure_not_stored_at_node;
+
   public:
     /// Velocity i at local node n. Uses suitably interpolated value
     /// for hanging nodes. The use of u_index_nst() permits the use of this
@@ -103,12 +109,39 @@ namespace oomph
     /// Return the index at which the pressure is stored if it is
     /// stored at the nodes. If not stored at the nodes this will return
     /// a negative number.
-    virtual int p_nodal_index_nst() const = 0;
+    virtual int p_nodal_index_nst() const
+    {
+      return Pressure_not_stored_at_node;
+    }
 
     /// Access function for the local equation number information for
     /// the pressure.
     /// p_local_eqn[n] = local equation number or < 0 if pinned
     virtual int p_local_eqn(const unsigned& n) const = 0;
+
+    /// Pressure at local pressure "node" n_p
+    /// Uses suitably interpolated value for hanging nodes.
+    virtual double p_nst(const unsigned& n_p) const = 0;
+
+    /// Pressure at local pressure "node" n_p at time level t
+    virtual double p_nst(const unsigned& t, const unsigned& n_p) const = 0;
+
+    /// Function to return number of pressure degrees of freedom
+    virtual unsigned npres_nst() const = 0;
+
+    /// Return the number of velocity components for use in
+    /// general FluidInterface clas
+    virtual inline unsigned n_u_nst() const = 0;
+
+    /// Compute the pressure shape functions at local coordinate s
+    virtual void pshape_nst(const Vector<double>& s, Shape& psi) const = 0;
+
+    /// Compute the pressure shape and test functions
+    /// at local coordinate s
+    virtual void pshape_nst(const Vector<double>& s,
+                            Shape& psi,
+                            Shape& test) const = 0;
+
 
     /// Return FE interpolated velocity u[i] at local coordinate s
     double interpolated_u_nst(const Vector<double>& s, const unsigned& i) const
@@ -186,6 +219,56 @@ namespace oomph
           veloc[i] += nodal_value(l, u_nodal_index) * psi[l];
         }
       }
+    }
+
+    /// Return FE interpolated pressure at local coordinate s
+    double interpolated_p_nst(const Vector<double>& s) const
+    {
+      // Find number of nodes
+      unsigned n_pres = npres_nst();
+      // Local shape function
+      Shape psi(n_pres);
+      // Find values of shape function
+      pshape_nst(s, psi);
+
+      // Initialise value of p
+      double interpolated_p = 0.0;
+      // Loop over the local nodes and sum
+      for (unsigned l = 0; l < n_pres; l++)
+      {
+        interpolated_p += p_nst(l) * psi[l];
+      }
+
+      return (interpolated_p);
+    }
+
+    /// i-th component of du/dt at local node n.
+    /// Uses suitably interpolated value for hanging nodes.
+    double du_dt_nst(const unsigned& n, const unsigned& i) const
+    {
+      // Get the data's timestepper
+      TimeStepper* time_stepper_pt = this->node_pt(n)->time_stepper_pt();
+
+      // Initialise dudt
+      double dudt = 0.0;
+      // Loop over the timesteps, if there is a non Steady timestepper
+      if (!time_stepper_pt->is_steady())
+      {
+        // Get the index at which the velocity is stored
+        const unsigned u_nodal_index = u_index_nst(i);
+
+        // Number of timsteps (past & present)
+        const unsigned n_time = time_stepper_pt->ntstorage();
+
+        // Add the contributions to the time derivative
+        for (unsigned t = 0; t < n_time; t++)
+        {
+          dudt +=
+            time_stepper_pt->weight(1, t) * nodal_value(t, n, u_nodal_index);
+        }
+      }
+
+      return dudt;
     }
   };
 } // namespace oomph
