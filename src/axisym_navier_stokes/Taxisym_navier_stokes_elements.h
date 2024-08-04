@@ -164,6 +164,14 @@ namespace oomph
       return this->internal_data_pt(P_nst_internal_index)->value(i);
     }
 
+    /// Return the pressure values at internal dof i_internal
+    /// (Discontinous pressure interpolation -- no need to cater for hanging
+    /// nodes).
+    double p_nst(const unsigned& t, const unsigned& i) const
+    {
+      return internal_data_pt(P_nst_internal_index)->value(t, i);
+    }
+
     /// Return number of pressure values
     unsigned npres_nst() const
     {
@@ -666,11 +674,11 @@ namespace oomph
 
     /// Pressure shape and test functions at local coordinte s
     inline void pshape_nst(const Vector<double>& s,
-                               Shape& psi,
-                               Shape& test) const;
+                           Shape& psi,
+                           Shape& test) const;
 
     /// Which nodal value represents the pressure?
-    unsigned p_index_nst()
+    unsigned p_nodal_index_nst()
     {
       return 3;
     }
@@ -682,14 +690,21 @@ namespace oomph
     /// Return the local equation numbers for the pressure values.
     inline int p_local_eqn(const unsigned& n) const
     {
-      return this->nodal_local_eqn(Pconv[n], 3);
+      return this->nodal_local_eqn(Pconv[n], p_nodal_index_nst());
     }
 
     /// Access function for the pressure values at local pressure
     /// node n_p (const version)
     double p_nst(const unsigned& n_p) const
     {
-      return this->nodal_value(Pconv[n_p], 3);
+      return this->nodal_value(Pconv[n_p], p_nodal_index_nst());
+    }
+
+    /// Access function for the pressure values at local pressure
+    /// node n_p (const version)
+    double p_nst(const unsigned& t, const unsigned& n_p) const
+    {
+      return nodal_value(t, Pconv[n_p], p_nodal_index_nst());
     }
 
     /// Set the value at which the pressure is stored in the nodes
@@ -704,11 +719,28 @@ namespace oomph
       return 3;
     }
 
+    /// Deduce whether or not the provided node is a pressure node
+    bool is_pressure_node(const unsigned& n) const
+    {
+      // The number of pressure nodes
+      unsigned n_p = npres_nst();
+
+      // See if the value n is in the array Pconv
+      return std::find(this->Pconv, this->Pconv + n_p, n) != this->Pconv + n_p;
+    } // End of is_pressure_node
+
+
     /// Pin p_dof-th pressure dof and set it to value specified by p_value.
     void fix_pressure(const unsigned& p_dof, const double& p_value)
     {
-      this->node_pt(Pconv[p_dof])->pin(3);
-      this->node_pt(Pconv[p_dof])->set_value(3, p_value);
+      this->node_pt(Pconv[p_dof])->pin(p_nodal_index_nst());
+      this->node_pt(Pconv[p_dof])->set_value(p_nodal_index_nst(), p_value);
+    }
+
+    /// Pin p_dof-th pressure dof and set it to value specified by p_value.
+    void free_pressure(const unsigned& p_dof)
+    {
+      this->node_pt(Pconv[p_dof])->unpin(p_nodal_index_nst());
     }
 
 
