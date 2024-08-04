@@ -146,7 +146,8 @@ namespace oomph
       // Just add the appropriate contribution to the momentum equations
       for (unsigned i = 0; i < 2; i++)
       {
-        int local_eqn = nodal_local_eqn(0, this->u_index_interface_boundary()[i]);
+        int local_eqn =
+          nodal_local_eqn(0, this->u_index_interface_boundary()[i]);
         if (local_eqn >= 0)
         {
           residuals[local_eqn] +=
@@ -174,7 +175,8 @@ namespace oomph
       //(no slip)
       for (unsigned i = 0; i < 2; i++)
       {
-        int local_eqn = nodal_local_eqn(0, this->u_index_interface_boundary()[i]);
+        int local_eqn =
+          nodal_local_eqn(0, this->u_index_interface_boundary()[i]);
         if (local_eqn >= 0)
         {
           residuals[local_eqn] += (sigma_local / ca_local) * m[i];
