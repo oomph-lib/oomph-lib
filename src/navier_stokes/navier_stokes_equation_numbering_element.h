@@ -48,9 +48,13 @@ namespace oomph
   private:
     /// Static "magic" number that indicates that the pressure is
     /// not stored at a node
-    static int Pressure_not_stored_at_node;
+    const int Pressure_not_stored_at_node;
 
   public:
+    NavierStokesEquationNumberingElement() : Pressure_not_stored_at_node(-100)
+    {
+    }
+
     /// Velocity i at local node n. Uses suitably interpolated value
     /// for hanging nodes. The use of u_index_nst() permits the use of this
     /// element as the basis for multi-physics elements. The default
