@@ -172,10 +172,10 @@ namespace oomph
     /// equation numbers corresponding to the data.
     /// Overload the non-refineable version to take account of hanging node
     /// information
-    void dinterpolated_u_nst_ddata(const Vector<double>& s,
-                                   const unsigned& i,
-                                   Vector<double>& du_ddata,
-                                   Vector<unsigned>& global_eqn_number)
+    void dinterpolated_u_axi_nst_ddata(const Vector<double>& s,
+                                       const unsigned& i,
+                                       Vector<double>& du_ddata,
+                                       Vector<unsigned>& global_eqn_number)
     {
       // Find number of nodes
       unsigned n_node = this->nnode();
@@ -183,6 +183,9 @@ namespace oomph
       Shape psi(n_node);
       // Find values of shape function at the given local coordinate
       this->shape(s, psi);
+
+      // Find the index at which the velocity component is stored
+      const unsigned u_nodal_index = this->u_index_axi_nst(i);
 
       // Storage for hang info pointer
       HangInfo* hang_info_pt = 0;
@@ -217,13 +220,13 @@ namespace oomph
           if (is_node_hanging)
           {
             // Get the equation number from the master node
-            global_eqn = hang_info_pt->master_node_pt(m)->eqn_number(
-              this->u_index_nst(l, i));
+            global_eqn =
+              hang_info_pt->master_node_pt(m)->eqn_number(u_nodal_index);
           }
           else
           {
             // Global equation number
-            global_eqn = this->node_pt(l)->eqn_number(this->u_index_nst(l, i));
+            global_eqn = this->node_pt(l)->eqn_number(u_nodal_index);
           }
 
           // If it's positive add to the count
@@ -280,13 +283,13 @@ namespace oomph
           if (is_node_hanging)
           {
             // Get the equation number from the master node
-            global_eqn = hang_info_pt->master_node_pt(m)->eqn_number(
-              this->u_index_nst(l, i));
+            global_eqn =
+              hang_info_pt->master_node_pt(m)->eqn_number(u_nodal_index);
           }
           else
           {
             // Local equation number
-            global_eqn = this->node_pt(l)->eqn_number(this->u_index_nst(l, i));
+            global_eqn = this->node_pt(l)->eqn_number(u_nodal_index);
           }
 
           if (global_eqn >= 0)
@@ -413,7 +416,7 @@ namespace oomph
     void unpin_elemental_pressure_dofs()
     {
       unsigned n_node = this->nnode();
-      int p_index = this->p_nodal_index_nst();
+      int p_index = this->p_nodal_index_axi_nst();
       // loop over nodes
       for (unsigned n = 0; n < n_node; n++)
       {
@@ -426,7 +429,7 @@ namespace oomph
     {
       // Loop over all nodes
       unsigned n_node = this->nnode();
-      int p_index = this->p_nodal_index_nst();
+      int p_index = this->p_nodal_index_axi_nst();
       // loop over all nodes and pin all  the nodal pressures
       for (unsigned n = 0; n < n_node; n++)
       {
@@ -434,7 +437,7 @@ namespace oomph
       }
 
       // Loop over all actual pressure nodes and unpin if they're not hanging
-      unsigned n_pres = this->npres_nst();
+      unsigned n_pres = this->npres_axi_nst();
       for (unsigned l = 0; l < n_pres; l++)
       {
         Node* nod_pt = this->node_pt(this->Pconv[l]);
@@ -508,11 +511,11 @@ namespace oomph
       // Calculate velocities: values[0],...
       for (unsigned i = 0; i < DIM; i++)
       {
-        values[i] = interpolated_u_nst(s, i);
+        values[i] = interpolated_u_axi_nst(s, i);
       }
 
       // Calculate pressure: values[DIM]
-      values[DIM] = interpolated_p_nst(s);
+      values[DIM] = interpolated_p_axi_nst(s);
     }
 
     /// Get the function value u in Vector.
@@ -544,15 +547,17 @@ namespace oomph
       // Calculate velocities: values[0],...
       for (unsigned i = 0; i < DIM; i++)
       {
+        // Get the nodal coordinate of the velocity
+        unsigned u_nodal_index = u_index_axi_nst(i);
         for (unsigned l = 0; l < n_node; l++)
         {
-          values[i] += nodal_value(t, l, this->u_index_nst(l, i)) * psif[l];
+          values[i] += nodal_value(t, l, u_nodal_index) * psif[l];
         }
       }
 
       // Calculate pressure: values[DIM]
       //(no history is carried in the pressure)
-      values[DIM] = interpolated_p_nst(s);
+      values[DIM] = interpolated_p_axi_nst(s);
     }
 
     ///  Perform additional hanging node procedures for variables
@@ -707,7 +712,7 @@ namespace oomph
       int DIM = 3;
       if (n_value == DIM)
       {
-        return this->pshape_nst(s, psi);
+        return this->pshape_axi_nst(s, psi);
       }
       else
       {
@@ -762,11 +767,11 @@ namespace oomph
     /// Unpin all the internal pressure freedoms
     void unpin_elemental_pressure_dofs()
     {
-      unsigned n_pres = this->npres_nst();
+      unsigned n_pres = this->npres_axi_nst();
       // loop over pressure dofs and unpin
       for (unsigned l = 0; l < n_pres; l++)
       {
-        this->internal_data_pt(P_nst_internal_index)->unpin(l);
+        this->internal_data_pt(P_axi_nst_internal_index)->unpin(l);
       }
     }
 
@@ -807,12 +812,12 @@ namespace oomph
         av_press += quadtree_pt()
                       ->son_pt(ison)
                       ->object_pt()
-                      ->internal_data_pt(P_nst_internal_index)
+                      ->internal_data_pt(P_axi_nst_internal_index)
                       ->value(0);
       }
 
       // Use the average
-      internal_data_pt(P_nst_internal_index)->set_value(0, 0.25 * av_press);
+      internal_data_pt(P_axi_nst_internal_index)->set_value(0, 0.25 * av_press);
 
 
       // Slope in s_0 direction
@@ -826,28 +831,28 @@ namespace oomph
       double slope1 = quadtree_pt()
                         ->son_pt(SE)
                         ->object_pt()
-                        ->internal_data_pt(P_nst_internal_index)
+                        ->internal_data_pt(P_axi_nst_internal_index)
                         ->value(0) -
                       quadtree_pt()
                         ->son_pt(SW)
                         ->object_pt()
-                        ->internal_data_pt(P_nst_internal_index)
+                        ->internal_data_pt(P_axi_nst_internal_index)
                         ->value(0);
 
       double slope2 = quadtree_pt()
                         ->son_pt(NE)
                         ->object_pt()
-                        ->internal_data_pt(P_nst_internal_index)
+                        ->internal_data_pt(P_axi_nst_internal_index)
                         ->value(0) -
                       quadtree_pt()
                         ->son_pt(NW)
                         ->object_pt()
-                        ->internal_data_pt(P_nst_internal_index)
+                        ->internal_data_pt(P_axi_nst_internal_index)
                         ->value(0);
 
 
       // Use the average
-      internal_data_pt(P_nst_internal_index)
+      internal_data_pt(P_axi_nst_internal_index)
         ->set_value(1, 0.5 * (slope1 + slope2));
 
 
@@ -862,28 +867,28 @@ namespace oomph
       slope1 = quadtree_pt()
                  ->son_pt(NE)
                  ->object_pt()
-                 ->internal_data_pt(P_nst_internal_index)
+                 ->internal_data_pt(P_axi_nst_internal_index)
                  ->value(0) -
                quadtree_pt()
                  ->son_pt(SE)
                  ->object_pt()
-                 ->internal_data_pt(P_nst_internal_index)
+                 ->internal_data_pt(P_axi_nst_internal_index)
                  ->value(0);
 
       slope2 = quadtree_pt()
                  ->son_pt(NW)
                  ->object_pt()
-                 ->internal_data_pt(P_nst_internal_index)
+                 ->internal_data_pt(P_axi_nst_internal_index)
                  ->value(0) -
                quadtree_pt()
                  ->son_pt(SW)
                  ->object_pt()
-                 ->internal_data_pt(P_nst_internal_index)
+                 ->internal_data_pt(P_axi_nst_internal_index)
                  ->value(0);
 
 
       // Use the average
-      internal_data_pt(P_nst_internal_index)
+      internal_data_pt(P_axi_nst_internal_index)
         ->set_value(2, 0.5 * (slope1 + slope2));
     }
 
@@ -921,7 +926,7 @@ namespace oomph
       // Calculate velocities: values[0],...
       for (unsigned i = 0; i < DIM; i++)
       {
-        values[i] = interpolated_u_nst(s, i);
+        values[i] = interpolated_u_axi_nst(s, i);
       }
     }
 
@@ -959,10 +964,10 @@ namespace oomph
       // Calculate velocities: values[0],...
       for (unsigned i = 0; i < DIM; i++)
       {
+        // Get the local index at which the i-th velocity is stored
+        unsigned u_local_index = u_index_axi_nst(i);
         for (unsigned l = 0; l < n_node; l++)
         {
-          // Get the local index at which the i-th velocity is stored
-          unsigned u_local_index = u_index_nst(l, i);
           values[i] += nodal_value(t, l, u_local_index) * psif[l];
         }
       }
@@ -1023,24 +1028,24 @@ namespace oomph
       RefineableAxisymmetricQCrouzeixRaviartElement* cast_father_el_pt =
         dynamic_cast<RefineableAxisymmetricQCrouzeixRaviartElement*>(
           father_el_pt);
-      double press = cast_father_el_pt->interpolated_p_nst(s_father);
+      double press = cast_father_el_pt->interpolated_p_axi_nst(s_father);
 
       // Pressure value gets copied straight into internal dof:
-      internal_data_pt(P_nst_internal_index)->set_value(0, press);
+      internal_data_pt(P_axi_nst_internal_index)->set_value(0, press);
 
 
       // The slopes get copied from father
-      internal_data_pt(P_nst_internal_index)
-        ->set_value(1,
-                    0.5 *
-                      cast_father_el_pt->internal_data_pt(P_nst_internal_index)
-                        ->value(1));
+      internal_data_pt(P_axi_nst_internal_index)
+        ->set_value(
+          1,
+          0.5 * cast_father_el_pt->internal_data_pt(P_axi_nst_internal_index)
+                  ->value(1));
 
-      internal_data_pt(P_nst_internal_index)
-        ->set_value(2,
-                    0.5 *
-                      cast_father_el_pt->internal_data_pt(P_nst_internal_index)
-                        ->value(2));
+      internal_data_pt(P_axi_nst_internal_index)
+        ->set_value(
+          2,
+          0.5 * cast_father_el_pt->internal_data_pt(P_axi_nst_internal_index)
+                  ->value(2));
     }
   };
 
