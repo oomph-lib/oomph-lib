@@ -888,11 +888,10 @@ namespace oomph
   ///  Jacobian as well.
   //==============================================================
   void AxisymmetricNavierStokesEquations::
-    fill_in_generic_residual_contribution_nst(
-      Vector<double>& residuals,
-      DenseMatrix<double>& jacobian,
-      DenseMatrix<double>& mass_matrix,
-      unsigned flag)
+    fill_in_generic_residual_contribution_nst(Vector<double>& residuals,
+                                              DenseMatrix<double>& jacobian,
+                                              DenseMatrix<double>& mass_matrix,
+                                              unsigned flag)
   {
     // Find out how many nodes there are
     unsigned n_node = nnode();
