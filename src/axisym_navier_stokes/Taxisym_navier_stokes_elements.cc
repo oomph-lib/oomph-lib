@@ -62,13 +62,6 @@ namespace oomph
   void AxisymmetricTCrouzeixRaviartElement::identify_load_data(
     std::set<std::pair<Data*, unsigned>>& paired_load_data)
   {
-    // Find the index at which the velocity is stored
-    unsigned u_index[3];
-    for (unsigned i = 0; i < 3; i++)
-    {
-      u_index[i] = this->u_index_nst(i);
-    }
-
     // Loop over the nodes
     unsigned n_node = this->nnode();
     for (unsigned n = 0; n < n_node; n++)
@@ -77,7 +70,8 @@ namespace oomph
       // and indices to the vectors
       for (unsigned i = 0; i < 3; i++)
       {
-        paired_load_data.insert(std::make_pair(this->node_pt(n), u_index[i]));
+        paired_load_data.insert(
+          std::make_pair(this->node_pt(n), this->u_index_nst(n, i)));
       }
     }
 
