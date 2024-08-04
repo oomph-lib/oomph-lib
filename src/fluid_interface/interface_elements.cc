@@ -146,7 +146,8 @@ namespace oomph
       // Just add the appropriate contribution to the momentum equations
       for (unsigned i = 0; i < 2; i++)
       {
-        int local_eqn = nodal_local_eqn(0, this->u_index_interface_boundary()[i]);
+        int local_eqn =
+          nodal_local_eqn(0, this->u_index_interface_boundary()[i]);
         if (local_eqn >= 0)
         {
           residuals[local_eqn] +=
@@ -174,7 +175,8 @@ namespace oomph
       //(no slip)
       for (unsigned i = 0; i < 2; i++)
       {
-        int local_eqn = nodal_local_eqn(0, this->u_index_interface_boundary()[i]);
+        int local_eqn =
+          nodal_local_eqn(0, this->u_index_interface_boundary()[i]);
         if (local_eqn >= 0)
         {
           residuals[local_eqn] += (sigma_local / ca_local) * m[i];
@@ -651,7 +653,7 @@ namespace oomph
   {
     const unsigned el_dim = this->dim();
     const unsigned n_dim = this->nodal_dimension();
-    const unsigned n_velocity = n_dim;
+    const unsigned n_velocity = this->n_u_nst();
     // Set output Vector
     Vector<double> s(el_dim);
 
@@ -688,7 +690,7 @@ namespace oomph
   {
     const unsigned el_dim = this->dim();
     const unsigned n_dim = this->nodal_dimension();
-    const unsigned n_velocity = n_dim;
+    const unsigned n_velocity = this->n_u_nst();
     // Set output Vector
     Vector<double> s(el_dim);
 

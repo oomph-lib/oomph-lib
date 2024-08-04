@@ -26,6 +26,14 @@ namespace oomph
   class NavierStokesFaceElement : public virtual FaceElement
   {
   public:
+    virtual inline unsigned n_u_nst() const
+    {
+      NavierStokesEquationNumberingElement* el_pt =
+        dynamic_cast<NavierStokesEquationNumberingElement*>(
+          this->bulk_element_pt());
+      return el_pt->n_u_nst();
+    }
+
     virtual inline unsigned u_index_nst(const unsigned& n,
                                         const unsigned& i) const
     {
