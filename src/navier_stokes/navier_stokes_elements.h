@@ -809,6 +809,15 @@ namespace oomph
     /// Function to return number of pressure degrees of freedom
     virtual unsigned npres_nst() const = 0;
 
+    /// Compute the pressure shape functions at local coordinate s
+    virtual void pshape_nst(const Vector<double>& s, Shape& psi) const = 0;
+
+    /// Compute the pressure shape and test functions
+    /// at local coordinate s
+    virtual void pshape_nst(const Vector<double>& s,
+                            Shape& psi,
+                            Shape& test) const = 0;
+
     /// Compute the pressure shape and test functions and derivatives
     /// w.r.t. global coords at local coordinate s.
     /// Return Jacobian of mapping between local and global coordinates.
@@ -823,6 +832,35 @@ namespace oomph
     inline unsigned n_u_nst() const
     {
       return DIM;
+    }
+
+    /// i-th component of du/dt at local node n.
+    /// Uses suitably interpolated value for hanging nodes.
+    double du_dt_nst(const unsigned& n, const unsigned& i) const
+    {
+      // Get the data's timestepper
+      TimeStepper* time_stepper_pt = this->node_pt(n)->time_stepper_pt();
+
+      // Initialise dudt
+      double dudt = 0.0;
+
+      // Loop over the timesteps, if there is a non Steady timestepper
+      if (!time_stepper_pt->is_steady())
+      {
+        // Find the index at which the dof is stored
+        const unsigned u_nodal_index = this->u_index_nst(n, i);
+
+        // Number of timsteps (past & present)
+        const unsigned n_time = time_stepper_pt->ntstorage();
+        // Loop over the timesteps
+        for (unsigned t = 0; t < n_time; t++)
+        {
+          dudt +=
+            time_stepper_pt->weight(1, t) * nodal_value(t, n, u_nodal_index);
+        }
+      }
+
+      return dudt;
     }
 
     /// Disable ALE, i.e. assert the mesh is not moving -- you do this
@@ -840,6 +878,13 @@ namespace oomph
     {
       ALE_is_disabled = false;
     }
+
+    /// Pressure at local pressure "node" n_p
+    /// Uses suitably interpolated value for hanging nodes.
+    virtual double p_nst(const unsigned& n_p) const = 0;
+
+    /// Pressure at local pressure "node" n_p at time level t
+    virtual double p_nst(const unsigned& t, const unsigned& n_p) const = 0;
 
     /// Pin p_dof-th pressure dof and set it to value specified by p_value.
     virtual void fix_pressure(const unsigned& p_dof, const double& p_value) = 0;
