@@ -40,7 +40,8 @@ namespace oomph
       NavierStokesEquationNumberingElement* el_pt =
         dynamic_cast<NavierStokesEquationNumberingElement*>(
           this->bulk_element_pt());
-      return el_pt->u_index_nst(this->bulk_node_number(n), i);
+      const unsigned N = this->bulk_node_number(n);
+      return el_pt->u_index_nst(N, i);
     }
 
     virtual int p_nodal_index_nst() const
