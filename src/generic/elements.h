@@ -4423,17 +4423,12 @@ namespace oomph
     /// not required in two spatial dimensions.
     Vector<double>* Tangent_direction_pt;
 
-    // An id to connect this element to the additional values add to the nodes
-    unsigned Additional_value_id;
-
-    // A vector storing the number of additional values added to each node
-    Vector<unsigned> N_additional_values;
-
     /// Helper function adding additional values for the unknowns
     /// associated with the FaceElement. This function also sets the map
     /// containing the position of the first entry of this face element's
     /// additional values.The inputs are the number of additional values
-    /// and the face element's ID.
+    /// and the face element's ID. Note the same number of additonal values
+    /// are allocated at ALL nodes.
     void add_additional_values(const Vector<unsigned>& nadditional_values,
                                const unsigned& id)
     {
@@ -4463,9 +4458,7 @@ namespace oomph
         Face_index(0),
         Boundary_number_in_bulk_mesh(0),
         Bulk_element_pt(0),
-        Tangent_direction_pt(0),
-        Additional_value_id(0),
-        N_additional_values(0)
+        Tangent_direction_pt(0)
     {
       // Check whether things have been set
 #ifdef PARANOID
@@ -4474,60 +4467,6 @@ namespace oomph
 
       // Bulk_position_type[0] is always 0 (the position)
       Bulk_position_type.push_back(0);
-    }
-
-    virtual void build(FiniteElement* const& element_pt,
-                       const int& face_index,
-                       const unsigned& id = 0)
-    {
-      element_pt->build_face_element(face_index, this);
-
-      // Set the Id
-      Additional_value_id = id;
-
-      // Work out how many additional values we need
-      N_additional_values.resize(this->nnode());
-      for (unsigned n = 0; n < this->nnode(); n++)
-      {
-        N_additional_values[n] = 0;
-      }
-      set_n_additional_values();
-
-      // add storage for lagrange multipliers and set the map containing
-      // the position of the first entry of this face element's
-      // additional values.
-      this->add_additional_values(N_additional_values, Additional_value_id);
-    }
-
-    // Set the number of additional values require at each node. To be
-    // overloaded in the derived elements
-    virtual void set_n_additional_values() {}
-
-  public:
-    // Return the index of the ith additional value at node n.
-    unsigned additional_value_index(const unsigned& n, const unsigned& i)
-    {
-#ifdef PARANOID
-      // Check the index of the additional value asked for is not above the
-      // number we have created
-      if (i >= N_additional_values[n])
-      {
-        std::ostringstream error_message;
-        error_message << "The additional value index asked for " << i
-                      << " is greater than the number of added values, "
-                      << N_additional_values[n] << ", at node " << n << ".\n";
-        throw OomphLibError(error_message.str(),
-                            OOMPH_CURRENT_FUNCTION,
-                            OOMPH_EXCEPTION_LOCATION);
-      }
-#endif
-
-      BoundaryNodeBase* bnod_pt =
-        dynamic_cast<BoundaryNodeBase*>(this->node_pt(n));
-      unsigned index = bnod_pt->index_of_first_value_assigned_by_face_element(
-                         this->Additional_value_id) +
-                       i;
-      return index;
     }
 
     /// Empty virtual destructor
