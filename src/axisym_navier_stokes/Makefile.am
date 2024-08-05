@@ -19,7 +19,8 @@ axisym_navier_stokes_elements.h  \
 refineable_axisym_navier_stokes_elements.h \
 Taxisym_navier_stokes_elements.h \
 axisym_fluid_traction_elements.h \
-linearised_fsi_axisym_no_slip_bc_elements.h
+linearised_fsi_axisym_no_slip_bc_elements.h \
+axisym_navier_stokes_equation_numbering_element.h
 
 # Template only files. These should be included in include directory
 # but should not be listed in combined header file
