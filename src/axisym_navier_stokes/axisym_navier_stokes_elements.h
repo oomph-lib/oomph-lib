@@ -111,7 +111,7 @@ namespace oomph
   /// tend to be used in problems involving multiple fluids).
   //======================================================================
   class AxisymmetricNavierStokesEquations
-    : public virtual NavierStokesEquationNumberingElement,
+    : public virtual AxisymNavierStokesEquationNumberingElement,
       public virtual NavierStokesElementWithDiagonalMassMatrices
   {
   private:
@@ -200,6 +200,15 @@ namespace oomph
       DShape& dtestdx,
       RankFourTensor<double>& d_dtestdx_dX,
       DenseMatrix<double>& djacobian_dX) const = 0;
+
+    /// Compute the pressure shape functions at local coordinate s
+    virtual void pshape_axi_nst(const Vector<double>& s, Shape& psi) const = 0;
+
+    /// Compute the pressure shape and test functions
+    /// at local coordinate s
+    virtual void pshape_axi_nst(const Vector<double>& s,
+                                Shape& psi,
+                                Shape& test) const = 0;
 
     /// Calculate the body force fct at a given time and Eulerian position
     virtual void get_body_force_axi_nst(const double& time,
@@ -484,11 +493,34 @@ namespace oomph
       return 3;
     }
 
+
     /// i-th component of du/dt at local node n.
     /// Uses suitably interpolated value for hanging nodes.
     double du_dt_axi_nst(const unsigned& n, const unsigned& i) const
     {
-      return du_dt_nst(n, i);
+      // Get the data's timestepper
+      TimeStepper* time_stepper_pt = this->node_pt(n)->time_stepper_pt();
+
+      // Initialise dudt
+      double dudt = 0.0;
+      // Loop over the timesteps, if there is a non Steady timestepper
+      if (!time_stepper_pt->is_steady())
+      {
+        // Get the index at which the velocity is stored
+        const unsigned u_nodal_index = u_index_axi_nst(i);
+
+        // Number of timsteps (past & present)
+        const unsigned n_time = time_stepper_pt->ntstorage();
+
+        // Add the contributions to the time derivative
+        for (unsigned t = 0; t < n_time; t++)
+        {
+          dudt +=
+            time_stepper_pt->weight(1, t) * nodal_value(t, n, u_nodal_index);
+        }
+      }
+
+      return dudt;
     }
 
     /// Disable ALE, i.e. assert the mesh is not moving -- you do this
@@ -787,44 +819,57 @@ namespace oomph
         parameter_pt, dres_dparam, djac_dparam, dmass_matrix_dparam, 2);
     }
 
-    /// Return the index at which the i-th unknown velocity component
-    /// is stored. The default value, i, is appropriate for single-physics
-    /// problems.
-    /// In derived multi-physics elements, this function should be overloaded
-    /// to reflect the chosen storage scheme. Note that these equations require
-    /// that the unknowns are always stored at the same indices at each node.
-    virtual inline unsigned u_index_axi_nst(const unsigned& i) const
-    {
-      // If this function is called we are assuming that all the velocities are
-      // indexed like node 0
-      const unsigned node_index = 0;
-      return this->u_index_nst(node_index, i);
-    }
-
-    /// Return the index at which the i-th unknown velocity component
-    /// is stored. The default value, i, is appropriate for single-physics
-    /// problems.
-    /// In derived multi-physics elements, this function should be overloaded
-    /// to reflect the chosen storage scheme.
-    virtual inline unsigned u_index_axi_nst(const unsigned& n,
-                                            const unsigned& i) const
-    {
-      return this->u_index_nst(n, i);
-    }
 
     /// Compute vector of FE interpolated velocity u at local coordinate s
     void interpolated_u_axi_nst(const Vector<double>& s,
                                 Vector<double>& veloc) const
     {
-      this->interpolated_u_nst(s, veloc);
+      // Find number of nodes
+      unsigned n_node = nnode();
+      // Local shape function
+      Shape psi(n_node);
+      // Find values of shape function
+      shape(s, psi);
+
+      for (unsigned i = 0; i < 3; i++)
+      {
+        // Index at which the nodal value is stored
+        unsigned u_nodal_index = u_index_axi_nst(i);
+        // Initialise value of u
+        veloc[i] = 0.0;
+        // Loop over the local nodes and sum
+        for (unsigned l = 0; l < n_node; l++)
+        {
+          veloc[i] += nodal_value(l, u_nodal_index) * psi[l];
+        }
+      }
     }
 
     /// Return FE interpolated velocity u[i] at local coordinate s
     double interpolated_u_axi_nst(const Vector<double>& s,
                                   const unsigned& i) const
     {
-      return this->interpolated_u_nst(s, i);
+      // Find number of nodes
+      unsigned n_node = nnode();
+      // Local shape function
+      Shape psi(n_node);
+      // Find values of shape function
+      shape(s, psi);
+
+      // Get the index at which the velocity is stored
+      unsigned u_nodal_index = u_index_axi_nst(i);
+
+      // Initialise value of u
+      double interpolated_u = 0.0;
+      // Loop over the local nodes and sum
+      for (unsigned l = 0; l < n_node; l++)
+      {
+        interpolated_u += nodal_value(l, u_nodal_index) * psi[l];
+      }
+
+      return (interpolated_u);
     }
+
 
     /// Return FE interpolated velocity u[i] at local coordinate s
     // at time level t (t=0: present, t>0: history)
@@ -832,14 +877,27 @@ namespace oomph
                                   const Vector<double>& s,
                                   const unsigned& i) const
     {
-      return interpolated_u_nst(t, s, i);
+      // Find number of nodes
+      unsigned n_node = nnode();
+      // Local shape function
+      Shape psi(n_node);
+      // Find values of shape function
+      shape(s, psi);
+
+      // Get the index at which the velocity is stored
+      unsigned u_nodal_index = u_index_axi_nst(i);
+
+      // Initialise value of u
+      double interpolated_u = 0.0;
+      // Loop over the local nodes and sum
+      for (unsigned l = 0; l < n_node; l++)
+      {
+        interpolated_u += nodal_value(t, l, u_nodal_index) * psi[l];
+      }
+
+      return (interpolated_u);
     }
 
-    /// Return FE interpolated pressure at local coordinate s
-    double interpolated_p_axi_nst(const Vector<double>& s) const
-    {
-      return interpolated_p_nst(s);
-    }
 
     /// Compute the derivatives of the i-th component of
     /// velocity at point s with respect
@@ -894,6 +952,28 @@ namespace oomph
           ++count;
         }
       }
+    }
+
+
+    /// Return FE interpolated pressure at local coordinate s
+    double interpolated_p_axi_nst(const Vector<double>& s) const
+    {
+      // Find number of nodes
+      unsigned n_pres = npres_axi_nst();
+      // Local shape function
+      Shape psi(n_pres);
+      // Find values of shape function
+      pshape_axi_nst(s, psi);
+
+      // Initialise value of p
+      double interpolated_p = 0.0;
+      // Loop over the local nodes and sum
+      for (unsigned l = 0; l < n_pres; l++)
+      {
+        interpolated_p += p_axi_nst(l) * psi[l];
+      }
+
+      return (interpolated_p);
     }
 
     /// Return FE interpolated derivatives of velocity component u[i]
@@ -1110,7 +1190,7 @@ namespace oomph
   protected:
     /// Internal index that indicates at which internal data the pressure is
     /// stored
-    unsigned P_nst_internal_index;
+    unsigned P_axi_nst_internal_index;
 
     /// Velocity shape and test functions and their derivs
     /// w.r.t. to global coords  at local coordinate s (taken from geometry)
@@ -1161,7 +1241,7 @@ namespace oomph
     {
       // Allocate and add one Internal data object that stores the three
       // pressure values
-      P_nst_internal_index = this->add_internal_data(new Data(3));
+      P_axi_nst_internal_index = this->add_internal_data(new Data(3));
     }
 
     /// Number of values (pinned or dofs) required at local node n.
@@ -1170,21 +1250,21 @@ namespace oomph
     /// Return the pressure values at internal dof i_internal
     /// (Discontinous pressure interpolation -- no need to cater for hanging
     /// nodes).
-    double p_nst(const unsigned& i) const
+    double p_axi_nst(const unsigned& i) const
     {
-      return internal_data_pt(P_nst_internal_index)->value(i);
+      return internal_data_pt(P_axi_nst_internal_index)->value(i);
     }
 
     /// Return the pressure values at internal dof i_internal
     /// (Discontinous pressure interpolation -- no need to cater for hanging
     /// nodes).
-    double p_nst(const unsigned& t, const unsigned& i) const
+    double p_axi_nst(const unsigned& t, const unsigned& i) const
     {
-      return internal_data_pt(P_nst_internal_index)->value(t, i);
+      return internal_data_pt(P_axi_nst_internal_index)->value(t, i);
     }
 
     /// Return number of pressure values
-    unsigned npres_nst() const
+    unsigned npres_axi_nst() const
     {
       return 3;
     }
@@ -1192,8 +1272,8 @@ namespace oomph
     /// Function to fix the internal pressure dof idof_internal
     void fix_pressure(const unsigned& p_dof, const double& pvalue)
     {
-      this->internal_data_pt(P_nst_internal_index)->pin(p_dof);
-      internal_data_pt(P_nst_internal_index)->set_value(p_dof, pvalue);
+      this->internal_data_pt(P_axi_nst_internal_index)->pin(p_dof);
+      internal_data_pt(P_axi_nst_internal_index)->set_value(p_dof, pvalue);
     }
 
     /// Compute traction at local coordinate s for outer unit normal N
@@ -1205,7 +1285,7 @@ namespace oomph
     /// equation numbers
     inline int p_local_eqn(const unsigned& n) const
     {
-      return internal_local_eqn(P_nst_internal_index, n);
+      return internal_local_eqn(P_axi_nst_internal_index, n);
     }
 
     /// Redirect output to NavierStokesEquations output
@@ -1473,27 +1553,27 @@ namespace oomph
     }
 
     /// Which nodal value represents the pressure?
-    virtual int p_nodal_index_nst() const
+    virtual int p_nodal_index_axi_nst() const
     {
       return 3;
     }
 
     /// Access function for the pressure values at local pressure
     /// node n_p (const version)
-    double p_nst(const unsigned& n_p) const
+    double p_axi_nst(const unsigned& n_p) const
     {
-      return nodal_value(Pconv[n_p], p_nodal_index_nst());
+      return nodal_value(Pconv[n_p], p_nodal_index_axi_nst());
     }
 
     /// Access function for the pressure values at local pressure
     /// node n_p (const version)
-    double p_nst(const unsigned& t, const unsigned& n_p) const
+    double p_axi_nst(const unsigned& t, const unsigned& n_p) const
     {
-      return nodal_value(t, Pconv[n_p], p_nodal_index_nst());
+      return nodal_value(t, Pconv[n_p], p_nodal_index_axi_nst());
     }
 
     /// Return number of pressure values
-    unsigned npres_nst() const
+    unsigned npres_axi_nst() const
     {
       return 4;
     }
@@ -1501,8 +1581,8 @@ namespace oomph
     /// Fix the pressure at local pressure node n_p
     void fix_pressure(const unsigned& n_p, const double& pvalue)
     {
-      this->node_pt(Pconv[n_p])->pin(p_nodal_index_nst());
-      this->node_pt(Pconv[n_p])->set_value(p_nodal_index_nst(), pvalue);
+      this->node_pt(Pconv[n_p])->pin(p_nodal_index_axi_nst());
+      this->node_pt(Pconv[n_p])->set_value(p_nodal_index_axi_nst(), pvalue);
     }
 
     /// Compute traction at local coordinate s for outer unit normal N
@@ -1514,7 +1594,7 @@ namespace oomph
     /// equation numbers
     inline int p_local_eqn(const unsigned& n) const
     {
-      return nodal_local_eqn(Pconv[n], p_nodal_index_nst());
+      return nodal_local_eqn(Pconv[n], p_nodal_index_axi_nst());
     }
 
     /// Redirect output to NavierStokesEquations output
@@ -1873,7 +1953,7 @@ namespace oomph
     {
       if (fld == 3)
       {
-        return this->npres_nst();
+        return this->npres_axi_nst();
       }
       else
       {
@@ -1958,12 +2038,12 @@ namespace oomph
       else
       {
         // Need to push back the internal data
-        const unsigned n_press = this->npres_nst();
+        const unsigned n_press = this->npres_axi_nst();
         // Loop over all pressure values
         for (unsigned j = 0; j < n_press; j++)
         {
           data_values.push_back(std::make_pair(
-            this->internal_data_pt(this->P_nst_internal_index), j));
+            this->internal_data_pt(this->P_axi_nst_internal_index), j));
         }
       }
 
@@ -2062,7 +2142,7 @@ namespace oomph
     {
       if (fld == 3)
       {
-        return this->npres_nst();
+        return this->npres_axi_nst();
       }
       else
       {
@@ -2138,10 +2218,10 @@ namespace oomph
       std::set<std::pair<Data*, unsigned>>& paired_pressure_data)
     {
       // Find the index at which the pressure is stored
-      unsigned p_index = static_cast<unsigned>(this->p_nodal_index_nst());
+      unsigned p_index = static_cast<unsigned>(this->p_nodal_index_axi_nst());
 
       // Loop over the pressure data
-      unsigned n_pres = npres_nst();
+      unsigned n_pres = npres_axi_nst();
       for (unsigned l = 0; l < n_pres; l++)
       {
         // The DIMth entry in each nodal data is the pressure, which

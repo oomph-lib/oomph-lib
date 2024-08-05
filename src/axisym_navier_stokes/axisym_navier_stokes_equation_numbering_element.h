@@ -73,6 +73,25 @@ namespace oomph
     {
       return this->u_index_nst(n, i);
     }
+
+    /// Function to return number of pressure degrees of freedom
+    virtual unsigned npres_axi_nst() const = 0;
+
+    /// Function to return number of pressure degrees of freedom
+    virtual unsigned npres_nst() const
+    {
+      return npres_axi_nst();
+    }
+
+    /// Which nodal value represents the pressure?
+    virtual int p_nodal_index_axi_nst() const
+    {
+      return p_nodal_index_nst();
+    }
+
+    /// Pressure at local pressure "node" n_p
+    /// Uses suitably interpolated value for hanging nodes.
+    virtual double p_axi_nst(const unsigned& n_p) const = 0;
   };
 } // namespace oomph
 #endif
