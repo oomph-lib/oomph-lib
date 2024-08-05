@@ -98,6 +98,11 @@ namespace oomph
       Traction_fct_pt(time, x, n, traction);
     }
 
+    virtual inline int axi_nst_momentum_local_eqn(const unsigned& n,
+                                                  const unsigned& i) const
+    {
+      this->nst_momentum_local_eqn(n, i);
+    }
 
     /// Helper function that actually calculates the residuals
     // This small level of indirection is required to avoid calling
@@ -552,7 +557,7 @@ namespace oomph
         for (unsigned i = 0; i < n_dim + 1; i++)
         {
           // Equation number
-          local_eqn = this->nst_momentum_local_eqn(l, i);
+          local_eqn = this->axi_nst_momentum_local_eqn(l, i);
           /*IF it's not a boundary condition*/
           if (local_eqn >= 0)
           {
