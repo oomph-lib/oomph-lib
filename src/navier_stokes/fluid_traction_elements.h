@@ -62,6 +62,15 @@ namespace oomph
                             Vector<double>& result);
 
   protected:
+    /// Access function that returns the local equation numbers
+    /// for velocity components.
+    /// u_local_eqn(n,i) = local equation number or < 0 if pinned.
+    /// Calls momentum local eqn from NS face element
+    virtual inline int u_local_eqn(const unsigned& n, const unsigned& i)
+    {
+      return this->nst_momentum_local_eqn(n, i);
+    }
+
     /// Function to compute the shape and test functions and to return
     /// the Jacobian of mapping
     inline double shape_and_test_at_knot(const unsigned& ipt,
@@ -113,6 +122,9 @@ namespace oomph
     void fill_in_generic_residual_contribution_fluid_traction(
       Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
 
+    /// The highest dimension of the problem
+    unsigned Dim;
+
   public:
     /// Constructor, which takes a "bulk" element and the value of the index
     /// and its limit
@@ -154,6 +166,9 @@ namespace oomph
 
       // Set the body force function pointer to zero
       Traction_fct_pt = 0;
+
+      // Set the dimension from the dimension of the first node
+      Dim = this->node_pt(0)->ndim();
     }
 
     /// Destructor should not delete anything

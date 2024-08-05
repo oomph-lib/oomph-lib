@@ -842,6 +842,12 @@ namespace oomph
                            Shape& psi,
                            Shape& test) const;
 
+    /// Which nodal value represents the pressure?
+    unsigned p_index_nst()
+    {
+      return DIM;
+    }
+
     /// Set the value at which the pressure is stored in the nodes
     virtual int p_nodal_index_nst() const
     {
