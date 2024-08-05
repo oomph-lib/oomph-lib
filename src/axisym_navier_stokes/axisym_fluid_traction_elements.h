@@ -39,7 +39,7 @@
 #include "../generic/shape.h"
 #include "../generic/elements.h"
 #include "../generic/element_with_external_element.h"
-
+#include "../navier_stokes/navier_stokes_face_elements.h"
 
 namespace oomph
 {
@@ -70,12 +70,9 @@ namespace oomph
   template<class ELEMENT>
   class AxisymmetricNavierStokesTractionElement
     : public virtual FaceGeometry<ELEMENT>,
-      public virtual FaceElement
+      public virtual NavierStokesFaceElement
   {
   protected:
-    /// Index at which the i-th velocity component is stored
-    Vector<unsigned> U_index_axisymmetric_nst_traction;
-
     /// Pointer to an imposed traction function. Arguments:
     /// Eulerian coordinate; outer unit normal;
     /// applied traction. (Not all of the input arguments will be
@@ -120,18 +117,6 @@ namespace oomph
       // Attach the geometrical information to the element. N.B. This function
       // also assigns nbulk_value from the required_nvalue of the bulk element
       element_pt->build_face_element(face_index, this);
-
-      // Find the dimension of the problem
-      unsigned n_dim = element_pt->nodal_dimension();
-
-      // Find the index at which the velocity unknowns are stored
-      ELEMENT* cast_element_pt = dynamic_cast<ELEMENT*>(element_pt);
-      this->U_index_axisymmetric_nst_traction.resize(n_dim + 1);
-      for (unsigned i = 0; i < n_dim + 1; i++)
-      {
-        this->U_index_axisymmetric_nst_traction[i] =
-          cast_element_pt->u_index_nst(i);
-      }
 
       // Zero traction
       Traction_fct_pt =
@@ -468,13 +453,6 @@ namespace oomph
     // Find out the dimension of the node
     unsigned n_dim = this->nodal_dimension();
 
-    // Cache the nodal indices at which the velocity components are stored
-    unsigned u_nodal_index[n_dim + 1];
-    for (unsigned i = 0; i < n_dim + 1; i++)
-    {
-      u_nodal_index[i] = this->U_index_axisymmetric_nst_traction[i];
-    }
-
     // Integer to hold the local equation number
     int local_eqn = 0;
 
@@ -574,7 +552,7 @@ namespace oomph
         for (unsigned i = 0; i < n_dim + 1; i++)
         {
           // Equation number
-          local_eqn = this->nodal_local_eqn(l, u_nodal_index[i]);
+          local_eqn = this->nst_momentum_local_eqn(l, i);
           /*IF it's not a boundary condition*/
           if (local_eqn >= 0)
           {
