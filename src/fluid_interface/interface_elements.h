@@ -78,6 +78,10 @@ namespace oomph
     /// condition (2).
     unsigned Contact_angle_flag;
 
+    /// Index at which the i-th velocity component is stored in the
+    /// element's nodes
+    Vector<unsigned> U_index_interface_boundary;
+
     /// Function that is used to determine the local equation number of
     /// the kinematic equation associated with the nodes of the element
     /// This must be overloaded depending on the node update scheme
@@ -145,6 +149,12 @@ namespace oomph
     WallUnitNormalFctPt wall_unit_normal_fct_pt() const
     {
       return Wall_unit_normal_fct_pt;
+    }
+
+    /// Access for nodal index at which the velocity components are stored
+    Vector<unsigned>& u_index_interface_boundary()
+    {
+      return U_index_interface_boundary;
     }
 
     /// Set a pointer to the desired contact angle. Optional boolean
@@ -324,6 +334,9 @@ namespace oomph
     static double Default_Physical_Constant_Value;
 
   protected:
+    /// Nodal index at which the i-th velocity component is stored.
+    Vector<unsigned> U_index_interface;
+
     /// The Data that contains the external  pressure is stored
     /// as external Data for the element. Which external Data item is it?
     /// (int so it can be initialised to -1, indicating that external
@@ -461,6 +474,17 @@ namespace oomph
 
       // Set the Strouhal number to the default value
       St_pt = &Default_Physical_Constant_Value;
+
+      // Find number of momentum equation required
+      const unsigned n_u_index = this->n_u_nst();
+      this->U_index_interface.resize(n_u_index);
+      // If we are using U_index_interface then we are assuming all velocity
+      // indices are the same across nodes. So we can used node 0 here.
+      const unsigned node_index = 0;
+      for (unsigned i = 0; i < n_u_index; i++)
+      {
+        this->U_index_interface[i] = u_index_nst(node_index, i);
+      }
     }
 
     /// Virtual function that specifies the non-dimensional
@@ -517,6 +541,12 @@ namespace oomph
     double*& st_pt()
     {
       return St_pt;
+    }
+
+    /// Return the i-th velocity component at local node j.
+    virtual double u(const unsigned& n, const unsigned& i) const
+    {
+      return nst_u(n, i);
     }
 
     /// Return the value of the external pressure
