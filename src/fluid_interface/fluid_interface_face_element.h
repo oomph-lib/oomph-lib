@@ -74,6 +74,14 @@ namespace oomph
       return U_index_interface_boundary[i];
     }
 
+    virtual inline unsigned u_index_nst(const unsigned& i) const
+    {
+      // If this function is called we are assuming that all the velocities are
+      // indexed like node 0
+      const unsigned node_index = 0;
+      return this->u_index_nst(node_index, i);
+    }
+
     virtual int p_nodal_index_nst(const unsigned& n) const
     {
       NavierStokesFaceElement* el_pt =
