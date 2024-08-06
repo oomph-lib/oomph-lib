@@ -75,13 +75,6 @@ namespace oomph
       return nodal_index;
     }
 
-
-    virtual double nst_u(const unsigned& n, const unsigned& i) const
-    {
-      const unsigned nodal_index = u_index_nst(n, i);
-      return this->nodal_value(n, nodal_index);
-    }
-
     virtual inline int nst_u_local_unknown(const unsigned& n,
                                            const unsigned& i) const
     {
@@ -100,43 +93,6 @@ namespace oomph
     {
       const unsigned nodal_index = nst_continuity_index(n);
       return this->nodal_local_eqn(n, nodal_index);
-    }
-
-    double interpolated_u(const Vector<double>& s, const unsigned& i) const
-    {
-      // Find number of nodes
-      unsigned n_node = FiniteElement::nnode();
-
-      // Storage for the local shape function
-      Shape psi(n_node);
-
-      // Get values of shape function at local coordinate s
-      this->shape(s, psi);
-
-      // Initialise value of u
-      double interpolated_u = 0.0;
-
-      // Loop over the local nodes and sum
-      for (unsigned l = 0; l < n_node; l++)
-      {
-        interpolated_u += nst_u(l, i) * psi(l);
-      }
-
-      return (interpolated_u);
-
-      // // Local coordinates in bulk element
-      // Vector<double> s_bulk(dim() + 1);
-      // s_bulk = local_coordinate_in_bulk(s);
-
-      // // Get Eulerian position vector
-      // return dynamic_cast<NavierStokesEquationNumberingElement*>(
-      //          bulk_element_pt())
-      //   ->interpolated_u_nst(s_bulk, i);
-    }
-
-    virtual double interpolated_p(const Vector<double>& s) const
-    {
-      return 0;
     }
   };
 

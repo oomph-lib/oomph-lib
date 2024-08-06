@@ -49,6 +49,10 @@ namespace oomph
   class ImposeImpenetrabilityElement : public virtual FaceGeometry<ELEMENT>,
                                        public virtual NavierStokesFaceElement
   {
+  private:
+    /// Lagrange Id
+    unsigned Id;
+
   public:
     /// Constructor takes a "bulk" element, the
     /// index that identifies which face the
@@ -59,47 +63,42 @@ namespace oomph
                                  const unsigned& id = 0)
       : FaceGeometry<ELEMENT>(), NavierStokesFaceElement()
     {
-      this->build(element_pt, face_index, id);
-    }
+      //  set the Id
+      Id = id;
 
-    /// Set the number of additional values require at each node
-    virtual void set_n_additional_values()
-    {
-      for (unsigned n = 0; n < this->nnode(); n++)
-      {
-        this->N_additional_values[n] += 1;
-      }
-    }
+      // Build the face element
+      element_pt->build_face_element(face_index, this);
 
-    /// The "global" intrinsic coordinate of the element when
-    /// viewed as part of a geometric object should be given by
-    /// the FaceElement representation, by default
-    /// This final over-ride is required because both SolidFiniteElements
-    /// and FaceElements overload zeta_nodal
-    virtual double zeta_nodal(const unsigned& n,
-                              const unsigned& k,
-                              const unsigned& i) const
-    {
-      return FaceElement::zeta_nodal(n, k, i);
+      // we need 1 additional values for each FaceElement node
+      Vector<unsigned> n_additional_values(nnode(), 1);
+
+      // add storage for lagrange multipliers and set the map containing
+      // the position of the first entry of this face element's
+      // additional values.
+      add_additional_values(n_additional_values, id);
     }
 
     const unsigned lagrange_multiplier_index(const unsigned& n)
     {
-      return this->additional_value_index(n, 0);
+      // Cast to a boundary node
+      BoundaryNodeBase* bnod_pt = dynamic_cast<BoundaryNodeBase*>(node_pt(n));
+
+      // Get the index of the first nodal value associated with
+      // this FaceElement
+      return first_index =
+               bnod_pt->index_of_first_value_assigned_by_face_element(Id);
     }
 
 
-    void fix_lagrange_multiplier(const unsigned& n, const double& value)
+    void pin_lagrange_multiplier(const unsigned& n)
     {
       this->node_pt(n)->pin(lagrange_multiplier_index(n));
-      this->node_pt(n)->set_value(lagrange_multiplier_index(n), value);
     }
 
-    void free_lagrange_multiplier(const unsigned& n)
+    void unpin_lagrange_multiplier(const unsigned& n)
     {
       this->node_pt(n)->unpin(lagrange_multiplier_index(n));
     }
-
 
     /// Fill in the residuals
     void fill_in_contribution_to_residuals(Vector<double>& residuals)
@@ -121,8 +120,7 @@ namespace oomph
     /// Overload the output function
     void output(std::ostream& outfile)
     {
-      const unsigned default_nplot = 5;
-      output(outfile, default_nplot);
+      FiniteElement::output(outfile);
     }
 
     /// Output function: x,y,[z],u,v,[w],p in tecplot format
@@ -161,6 +159,18 @@ namespace oomph
       outfile << std::endl;
     }
 
+    /// The "global" intrinsic coordinate of the element when
+    /// viewed as part of a geometric object should be given by
+    /// the FaceElement representation, by default
+    /// This final over-ride is required because both SolidFiniteElements
+    /// and FaceElements overload zeta_nodal
+    double zeta_nodal(const unsigned& n,
+                      const unsigned& k,
+                      const unsigned& i) const
+    {
+      return FaceElement::zeta_nodal(n, k, i);
+    }
+
   protected:
     /// Helper function to compute the residuals and, if flag==1, the
     /// Jacobian
@@ -170,16 +180,16 @@ namespace oomph
       const unsigned& flag)
     {
       // Find out how many nodes there are
-      unsigned n_node = this->nnode();
+      unsigned n_node = nnode();
 
       // Dimension of element
-      unsigned dim_el = this->dim();
+      unsigned dim_el = dim();
 
       // Set up memory for the shape functions
       Shape psi(n_node);
 
       // Set the value of n_intpt
-      unsigned n_intpt = this->integral_pt()->nweight();
+      unsigned n_intpt = integral_pt()->nweight();
 
       // to store local equation number
       int local_eqn = 0;
@@ -188,21 +198,21 @@ namespace oomph
       // to store normal vector
       Vector<double> norm_vec(dim_el + 1);
 
-      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->bulk_element_pt());
+
       // Loop over the integration points
       for (unsigned ipt = 0; ipt < n_intpt; ipt++)
       {
         // Get the integral weight
-        double w = this->integral_pt()->weight(ipt);
+        double w = integral_pt()->weight(ipt);
 
         // Jacobian of mapping
-        double J = this->J_eulerian_at_knot(ipt);
+        double J = J_eulerian_at_knot(ipt);
 
         // Premultiply the weights and the Jacobian
         double W = w * J;
 
         // Calculate the shape functions
-        this->shape_at_knot(ipt, psi);
+        shape_at_knot(ipt, psi);
 
         // compute  the velocity and the Lagrange multiplier
         Vector<double> interpolated_u(dim_el + 1, 0.0);
@@ -211,30 +221,55 @@ namespace oomph
         // Loop over nodes
         for (unsigned j = 0; j < n_node; j++)
         {
+          // get the value at which the velocities are stored
+          Vector<unsigned> u_index(dim_el + 1);
+          for (unsigned i = 0; i < dim_el + 1; i++)
+          {
+            u_index[i] = this->u_index_nst(j, i);
+          }
+
           // Assemble the velocity component
           for (unsigned i = 0; i < dim_el + 1; i++)
           {
-            interpolated_u[i] += this->nst_u(j, i) * psi(j);
+            interpolated_u[i] += nodal_value(j, u_index[i]) * psi(j);
           }
 
+          // Cast to a boundary node
+          BoundaryNodeBase* bnod_pt =
+            dynamic_cast<BoundaryNodeBase*>(node_pt(j));
+
           // get the node
-          Node* nod_pt = this->node_pt(j);
+          Node* nod_pt = node_pt(j);
+
+          // Get the index of the first nodal value associated with
+          // this FaceElement
+          unsigned first_index =
+            bnod_pt->index_of_first_value_assigned_by_face_element(Id);
 
           // Assemble the Lagrange multiplier
-          lambda += nod_pt->value(lagrange_multiplier_index(j)) * psi(j);
+          lambda += nod_pt->value(first_index) * psi(j);
         }
 
         // compute the normal vector
-        this->outer_unit_normal(ipt, norm_vec);
+        outer_unit_normal(ipt, norm_vec);
 
         // Assemble residuals and jacobian
 
         // Loop over the nodes
         for (unsigned j = 0; j < n_node; j++)
         {
+          // Cast to a boundary node
+          BoundaryNodeBase* bnod_pt =
+            dynamic_cast<BoundaryNodeBase*>(node_pt(j));
+
+          // Get the index of the first nodal value associated with
+          // this FaceElement
+          unsigned first_index =
+            bnod_pt->index_of_first_value_assigned_by_face_element(Id);
+
           // Local eqn number for the l-th component of lamdba
           // in the j-th element
-          local_eqn = this->nodal_local_eqn(j, lagrange_multiplier_index(j));
+          local_eqn = nodal_local_eqn(j, first_index);
 
           if (local_eqn >= 0)
           {
@@ -284,14 +319,14 @@ namespace oomph
                 {
                   // Cast to a boundary node
                   BoundaryNodeBase* bnode_pt =
-                    dynamic_cast<BoundaryNodeBase*>(this->node_pt(jj));
+                    dynamic_cast<BoundaryNodeBase*>(node_pt(jj));
 
                   // Local eqn number for the l-th component of lamdba
                   // in the jj-th element
-                  local_unknown = this->nodal_local_eqn(
+                  local_unknown = nodal_local_eqn(
                     jj,
                     bnode_pt->index_of_first_value_assigned_by_face_element(
-                      this->Additional_value_id));
+                      Id));
                   if (local_unknown >= 0)
                   {
                     jacobian(local_eqn, local_unknown) +=
@@ -349,14 +384,11 @@ namespace oomph
         {
           // Cast to a boundary node
           BoundaryNodeBase* bnod_pt =
-            dynamic_cast<BoundaryNodeBase*>(this->node_pt(j));
+            dynamic_cast<BoundaryNodeBase*>(node_pt(j));
 
           // Local eqn number:
-          int local_eqn = this->nodal_local_eqn(
-            j,
-            bnod_pt->index_of_first_value_assigned_by_face_element(
-              this->Additional_value_id) +
-              i);
+          int local_eqn = nodal_local_eqn(
+            j, bnod_pt->index_of_first_value_assigned_by_face_element(Id) + i);
           if (local_eqn >= 0)
           {
             // store dof lookup in temporary pair: First entry in pair
@@ -374,10 +406,10 @@ namespace oomph
       // Now we do the bulk elements. Each velocity component of a constrained
       // dof of a different type of FaceElement has a different dof_type. E.g.
       // Consider the Navier Stokes equations in three spatial dimensions with
-      // parallel outflow (using ImposeParallelOutflowElement with Boundary_id
-      // = 1) and tangential flow (using ImposeTangentialFlowElement with
-      // Boundary_id = 2) imposed along two different boundaries. There will
-      // be 10 dof types: 0 1 2 3 4  5  6  7  8  9 u v w p u1 v1 w1 u2 v2 w2
+      // parallel outflow (using ImposeParallelOutflowElement with Boundary_id =
+      // 1) and tangential flow (using ImposeTangentialFlowElement with
+      // Boundary_id = 2) imposed along two different boundaries. There will be
+      // 10 dof types: 0 1 2 3 4  5  6  7  8  9 u v w p u1 v1 w1 u2 v2 w2
 
       // Loop over only the nodes of the "bulk" element that are associated
       // with this "face" element.
@@ -409,7 +441,7 @@ namespace oomph
           {
             // store the dof lookup in temporary pair: First entry in pair
             // is the global equation number; second entry is the dof type
-            dof_lookup.first = this->Bulk_element_pt->eqn_number(local_eqn);
+            dof_lookup.first = Bulk_element_pt->eqn_number(local_eqn);
             dof_lookup.second = velocity_i;
             dof_lookup_list.push_front(dof_lookup);
 
