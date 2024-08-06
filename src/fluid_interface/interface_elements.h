@@ -457,16 +457,6 @@ namespace oomph
       // Set the Strouhal number to the default value
       St_pt = &Default_Physical_Constant_Value;
 
-      // Find number of momentum equation required
-      const unsigned n_u_index = this->n_u_nst();
-      this->U_index_interface.resize(n_u_index);
-      // If we are using U_index_interface then we are assuming all velocity
-      // indices are the same across nodes. So we can used node 0 here.
-      const unsigned node_index = 0;
-      for (unsigned i = 0; i < n_u_index; i++)
-      {
-        this->U_index_interface[i] = u_index_nst(node_index, i);
-      }
     }
 
     /// Virtual function that specifies the non-dimensional
