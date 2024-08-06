@@ -121,6 +121,38 @@ namespace oomph
       return Ngeom_dof;
     }
 
+    /// Return the geometric data value corresponding to the i-th
+    /// value at the n-th geometric data object.
+    inline double geometric_data_value(const unsigned& n, const unsigned& i)
+    {
+#ifdef RANGE_CHECKING
+      unsigned n_data = Geom_data_pt.size();
+      if (n >= n_data)
+      {
+        std::ostringstream error_message;
+        error_message << "Range Error:  Data number " << n
+                      << " is not in the range (0," << n_data - 1 << ")";
+        throw OomphLibError(error_message.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+      else
+      {
+        unsigned n_value = Geom_data_pt[n]->nvalue();
+        if (i >= n_value)
+        {
+          std::ostringstream error_message;
+          error_message << "Range Error: value " << i << " at data " << n
+                        << " is not in the range (0," << n_value - 1 << ")";
+          throw OomphLibError(error_message.str(),
+                              OOMPH_CURRENT_FUNCTION,
+                              OOMPH_EXCEPTION_LOCATION);
+        }
+      }
+#endif
+      return (Geom_data_pt[n])->value(i);
+    }
+
     /// Return the local equation number corresponding to the i-th
     /// value at the n-th geometric data object.
     inline int geometric_data_local_eqn(const unsigned& n, const unsigned& i)
