@@ -110,7 +110,7 @@ namespace oomph
     virtual unsigned npres_nst() const = 0;
 
     /// Return the number of velocity components for use in
-    /// general FluidInterface clas
+    /// general FluidInterface class
     virtual inline unsigned n_u_nst() const = 0;
   };
 } // namespace oomph

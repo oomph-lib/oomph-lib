@@ -134,8 +134,7 @@ namespace oomph
       BoundaryNodeBase* bnod_pt =
         dynamic_cast<BoundaryNodeBase*>(this->node_pt(n));
       unsigned first_index =
-        bnod_pt->index_of_first_value_assigned_by_face_element(
-          Additional_value_id);
+        bnod_pt->index_of_first_value_assigned_by_face_element(Id);
       this->node_pt(n)->pin(first_index + direction);
       this->node_pt(n)->set_value(first_index + direction, value);
     }
