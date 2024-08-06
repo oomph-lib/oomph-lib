@@ -16,8 +16,7 @@ incl_cc_files =
 headers = interface_elements.h \
 		  constrained_volume_elements.h \
 		  specific_node_update_interface_elements.h \
-		  fluid_interface_face_element.h \
-		  specific_node_update_interface_face_elements.h
+		  fluid_interface_face_element.h
 
 # Template only files. These should be included in include directory
 # but should not be listed in combined header file
