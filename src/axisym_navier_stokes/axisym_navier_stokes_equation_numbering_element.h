@@ -59,7 +59,7 @@ namespace oomph
       // If this function is called we are assuming that all the velocities are
       // indexed like node 0
       const unsigned node_index = 0;
-      return this->u_index_nst(node_index, i);
+      return this->u_index_axi_nst(node_index, i);
     }
 
     /// Return the index at which the i-th unknown velocity component
@@ -72,6 +72,24 @@ namespace oomph
                                             const unsigned& i) const
     {
       return this->u_index_nst(n, i);
+    }
+
+    virtual inline unsigned axi_momentum_index_nst(const unsigned& n,
+                                                   const unsigned& i) const
+    {
+      return u_index_axi_nst(n, i);
+    }
+
+    virtual inline int axi_momentum_local_eqn(const unsigned& n,
+                                              const unsigned& i) const
+    {
+      return nodal_local_eqn(n, axi_momentum_index_nst(n, i));
+    }
+
+    inline int u_axi_nst_local_unknown(const unsigned& n,
+                                       const unsigned& i) const
+    {
+      return nodal_local_eqn(n, u_index_axi_nst(n, i));
     }
 
     /// Function to return number of pressure degrees of freedom
@@ -88,10 +106,6 @@ namespace oomph
     {
       return p_nodal_index_nst();
     }
-
-    /// Pressure at local pressure "node" n_p
-    /// Uses suitably interpolated value for hanging nodes.
-    virtual double p_axi_nst(const unsigned& n_p) const = 0;
   };
 } // namespace oomph
 #endif

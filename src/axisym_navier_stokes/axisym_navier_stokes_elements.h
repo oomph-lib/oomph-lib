@@ -539,6 +539,9 @@ namespace oomph
       ALE_is_disabled = false;
     }
 
+    /// Pressure at local pressure "node" n_p
+    /// Uses suitably interpolated value for hanging nodes.
+    virtual double p_axi_nst(const unsigned& n_p) const = 0;
 
     /// Integral of pressure over element
     double pressure_integral() const;
@@ -1971,7 +1974,7 @@ namespace oomph
       }
       else
       {
-        return this->momentum_local_eqn(j, fld);
+        return this->axi_momentum_local_eqn(j, fld);
       }
     }
   };
@@ -2160,7 +2163,7 @@ namespace oomph
       }
       else
       {
-        return this->momentum_local_eqn(j, fld);
+        return this->axi_momentum_local_eqn(j, fld);
       }
     }
   };
