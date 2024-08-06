@@ -507,7 +507,7 @@ namespace oomph
       if (!time_stepper_pt->is_steady())
       {
         // Get the index at which the velocity is stored
-        const unsigned u_nodal_index = u_index_axi_nst(i);
+        const unsigned u_nodal_index = u_index_axi_nst(n, i);
 
         // Number of timsteps (past & present)
         const unsigned n_time = time_stepper_pt->ntstorage();
@@ -836,13 +836,13 @@ namespace oomph
 
       for (unsigned i = 0; i < 3; i++)
       {
-        // Index at which the nodal value is stored
-        unsigned u_nodal_index = u_index_axi_nst(i);
         // Initialise value of u
         veloc[i] = 0.0;
         // Loop over the local nodes and sum
         for (unsigned l = 0; l < n_node; l++)
         {
+          // Index at which the nodal value is stored
+          unsigned u_nodal_index = u_index_axi_nst(l, i);
           veloc[i] += nodal_value(l, u_nodal_index) * psi[l];
         }
       }
@@ -859,14 +859,13 @@ namespace oomph
       // Find values of shape function
       shape(s, psi);
 
-      // Get the index at which the velocity is stored
-      unsigned u_nodal_index = u_index_axi_nst(i);
-
       // Initialise value of u
       double interpolated_u = 0.0;
       // Loop over the local nodes and sum
       for (unsigned l = 0; l < n_node; l++)
       {
+        // Get the index at which the velocity is stored
+        unsigned u_nodal_index = u_index_axi_nst(l, i);
         interpolated_u += nodal_value(l, u_nodal_index) * psi[l];
       }
 
@@ -887,14 +886,13 @@ namespace oomph
       // Find values of shape function
       shape(s, psi);
 
-      // Get the index at which the velocity is stored
-      unsigned u_nodal_index = u_index_axi_nst(i);
-
       // Initialise value of u
       double interpolated_u = 0.0;
       // Loop over the local nodes and sum
       for (unsigned l = 0; l < n_node; l++)
       {
+        // Get the index at which the velocity is stored
+        unsigned u_nodal_index = u_index_axi_nst(l, i);
         interpolated_u += nodal_value(t, l, u_nodal_index) * psi[l];
       }
 

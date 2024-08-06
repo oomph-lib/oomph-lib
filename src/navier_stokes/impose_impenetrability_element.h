@@ -78,6 +78,36 @@ namespace oomph
       add_additional_values(n_additional_values, id);
     }
 
+    /// Return the i-th velocity component at local node j.
+    virtual double u(const unsigned& j, const unsigned& i)
+    {
+      return nodal_value(j, u_index_nst(j, i));
+    }
+
+    /// Calculate the i-th velocity component at the local coordinate s.
+    double interpolated_u(const Vector<double>& s, const unsigned& i)
+    {
+      // Find number of nodes
+      unsigned n_node = FiniteElement::nnode();
+
+      // Storage for the local shape function
+      Shape psi(n_node);
+
+      // Get values of shape function at local coordinate s
+      this->shape(s, psi);
+
+      // Initialise value of u
+      double interpolated_u = 0.0;
+
+      // Loop over the local nodes and sum
+      for (unsigned l = 0; l < n_node; l++)
+      {
+        interpolated_u += u(l, i) * psi(l);
+      }
+
+      return (interpolated_u);
+    }
+
     /// Get the nodal index of the lagrange multiplier
     const unsigned lagrange_multiplier_index(const unsigned& n)
     {
@@ -150,7 +180,7 @@ namespace oomph
         }
 
         // Pressure
-        outfile << this->interpolated_p(s) << ",";
+        // outfile << this->interpolated_p(s) << ",";
 
         // Lagrange multipliers
         outfile << interpolated_lambda(s);
