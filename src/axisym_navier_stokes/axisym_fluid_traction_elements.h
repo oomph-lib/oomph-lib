@@ -101,7 +101,7 @@ namespace oomph
     virtual inline int axi_nst_momentum_local_eqn(const unsigned& n,
                                                   const unsigned& i) const
     {
-      this->nst_momentum_local_eqn(n, i);
+      return this->nst_momentum_local_eqn(n, i);
     }
 
     /// Helper function that actually calculates the residuals
