@@ -78,10 +78,6 @@ namespace oomph
     /// condition (2).
     unsigned Contact_angle_flag;
 
-    /// Index at which the i-th velocity component is stored in the
-    /// element's nodes
-    Vector<unsigned> U_index_interface_boundary;
-
     /// Function that is used to determine the local equation number of
     /// the kinematic equation associated with the nodes of the element
     /// This must be overloaded depending on the node update scheme
@@ -149,12 +145,6 @@ namespace oomph
     WallUnitNormalFctPt wall_unit_normal_fct_pt() const
     {
       return Wall_unit_normal_fct_pt;
-    }
-
-    /// Access for nodal index at which the velocity components are stored
-    Vector<unsigned>& u_index_interface_boundary()
-    {
-      return U_index_interface_boundary;
     }
 
     /// Set a pointer to the desired contact angle. Optional boolean
