@@ -446,7 +446,6 @@ namespace oomph
 
       // Set the Strouhal number to the default value
       St_pt = &Default_Physical_Constant_Value;
-
     }
 
     /// Virtual function that specifies the non-dimensional
