@@ -311,6 +311,7 @@ namespace oomph
     LineFluidInterfaceBoundingElement() : FluidInterfaceBoundingElement() {}
   };
 
+
   //=======================================================================
   /// Base class establishing common interfaces and functions for all
   /// Navier-Stokes-like fluid
@@ -333,6 +334,7 @@ namespace oomph
     /// Default value for physical constants
     static double Default_Physical_Constant_Value;
 
+
   protected:
     /// Nodal index at which the i-th velocity component is stored.
     Vector<unsigned> U_index_interface;
@@ -353,33 +355,13 @@ namespace oomph
     /// for the (scalar) kinematic equation associated with the j-th local
     /// node. This must be overloaded by specific interface elements
     /// and depends on the method for handing the free-surface deformation.
-    virtual double kinematic_lagrange_multiplier(const unsigned& n)
-    {
-      std::ostringstream error_message;
-      error_message
-        << "kinematic_lagrange_multiplier not implemented in base "
-           "FluidInterfaceElement, use one of the inherited classes depending "
-           "on how the solid displacement is implemented."
-        << std::endl;
-      throw OomphLibError(
-        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-    }
+    virtual int kinematic_local_eqn(const unsigned& n) = 0;
 
-    /// Access function that returns the local equation number
-    /// for the (scalar) kinematic equation associated with the j-th local
-    /// node. This must be overloaded by specific interface elements
-    /// and depends on the method for handing the free-surface deformation.
-    virtual int kinematic_local_eqn(const unsigned& n)
-    {
-      std::ostringstream error_message;
-      error_message
-        << "kinematic_local_eqn not implemented in base "
-           "FluidInterfaceElement, use one of the inherited classes depending "
-           "on how the solid displacement is implemented."
-        << std::endl;
-      throw OomphLibError(
-        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-    }
+    /// Access function that returns the lagrange multiplier for the (scalar)
+    /// kinematic equation associated with the j-th local node. This must be
+    /// overloaded by specific interface elements and depends on the method for
+    /// handing the free-surface deformation.
+    virtual double kinematic_lagrange_multiplier(const unsigned& n) = 0;
 
     /// Access function for the local equation number that
     /// corresponds to the external pressure.
@@ -393,8 +375,8 @@ namespace oomph
                             OOMPH_EXCEPTION_LOCATION);
       }
 #endif
-      return this->external_local_eqn(External_data_number_of_external_pressure,
-                                      Index_of_external_pressure_value);
+      return external_local_eqn(External_data_number_of_external_pressure,
+                                Index_of_external_pressure_value);
     }
 
     /// Helper function to calculate the residuals and
@@ -544,10 +526,13 @@ namespace oomph
     }
 
     /// Return the i-th velocity component at local node j.
-    virtual double u(const unsigned& n, const unsigned& i) const
+    virtual double u(const unsigned& j, const unsigned& i)
     {
-      return nst_u(n, i);
+      return nodal_value(j, u_index_nst(j, i));
     }
+
+    /// Calculate the i-th velocity component at the local coordinate s.
+    double interpolated_u(const Vector<double>& s, const unsigned& i);
 
     /// Return the value of the external pressure
     double pext() const
@@ -664,23 +649,12 @@ namespace oomph
     /// This is required so that contact-angle conditions can be applied
     /// by the FluidInterfaceBoundingElements.
     virtual void hijack_kinematic_conditions(
-      const Vector<unsigned>& bulk_node_number)
-    {
-      std::ostringstream error_message;
-      error_message
-        << "hijack_kinematic_conditions not implemented in base "
-           "FluidInterfaceElement, use one of the inherited classes depending "
-           "on how the solid displacement is implemented."
-        << std::endl;
-      throw OomphLibError(
-        error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-    }
+      const Vector<unsigned>& bulk_node_number) = 0;
 
     /// Overload the output function
     void output(std::ostream& outfile)
     {
-      const unsigned default_nplot = 5;
-      output(outfile, default_nplot);
+      FiniteElement::output(outfile);
     }
 
     /// Output function
@@ -689,8 +663,7 @@ namespace oomph
     /// Overload the C-style output function
     void output(FILE* file_pt)
     {
-      const unsigned default_nplot = 5;
-      output(file_pt, default_nplot);
+      FiniteElement::output(file_pt);
     }
 
     /// C-style Output function
