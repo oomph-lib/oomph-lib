@@ -39,6 +39,7 @@
 #include "../generic/fsi.h"
 #include "../generic/projection.h"
 #include "../generic/generalised_newtonian_constitutive_models.h"
+#include "../navier_stokes/navier_stokes_equation_numbering_element.h"
 
 
 namespace oomph
@@ -54,7 +55,7 @@ namespace oomph
   //======================================================================
   class GeneralisedNewtonianTemplateFreeNavierStokesEquationsBase
     : public virtual NavierStokesElementWithDiagonalMassMatrices,
-      public virtual FiniteElement
+      public virtual NavierStokesEquationNumberingElement
   {
   public:
     /// Constructor (empty)
