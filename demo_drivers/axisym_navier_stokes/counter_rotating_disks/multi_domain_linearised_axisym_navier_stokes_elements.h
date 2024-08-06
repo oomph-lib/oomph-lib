@@ -99,7 +99,7 @@ public virtual LinearisedAxisymmetricQTaylorHoodElement,
    // Get the three velocity components interpolated from the external element
    for(unsigned i=0;i<3;i++)
     {
-     result[i] = base_flow_el_pt->interpolated_u_nst(s_external,i);
+     result[i] = base_flow_el_pt->interpolated_u_axi_nst(s_external,i);
     }
 
   } // End of overloaded get_base_flow_u function
@@ -137,7 +137,7 @@ public virtual LinearisedAxisymmetricQTaylorHoodElement,
      for(unsigned j=0;j<2;j++)
       {
        result(i,j)
-        = base_flow_el_pt->interpolated_dudx_nst(s_external,i,j);
+        = base_flow_el_pt->interpolated_dudx_axi_nst(s_external,i,j);
       }
     }
 
@@ -231,7 +231,7 @@ public virtual LinearisedAxisymmetricQCrouzeixRaviartElement,
    // Get the three velocity components interpolated from the external element
    for(unsigned i=0;i<3;i++)
     {
-     result[i] = base_flow_el_pt->interpolated_u_nst(s_external,i);
+     result[i] = base_flow_el_pt->interpolated_u_axi_nst(s_external,i);
     }
 
   } // End of overloaded get_base_flow_u function
@@ -269,7 +269,7 @@ public virtual LinearisedAxisymmetricQCrouzeixRaviartElement,
      for(unsigned j=0;j<2;j++)
       {
        result(i,j)
-        = base_flow_el_pt->interpolated_dudx_nst(s_external,i,j);
+        = base_flow_el_pt->interpolated_dudx_axi_nst(s_external,i,j);
       }
     }
 
@@ -365,7 +365,7 @@ public virtual RefineableLinearisedAxisymmetricQTaylorHoodElement,
    // Get the three velocity components interpolated from the external element
    for(unsigned i=0;i<3;i++)
     {
-     result[i] = base_flow_el_pt->interpolated_u_nst(s_external,i);
+     result[i] = base_flow_el_pt->interpolated_u_axi_nst(s_external,i);
     }
 
   } // End of overloaded get_base_flow_u function
@@ -403,7 +403,7 @@ public virtual RefineableLinearisedAxisymmetricQTaylorHoodElement,
      for(unsigned j=0;j<2;j++)
       {
        result(i,j)
-        = base_flow_el_pt->interpolated_dudx_nst(s_external,i,j);
+        = base_flow_el_pt->interpolated_dudx_axi_nst(s_external,i,j);
       }
     }
 
@@ -500,7 +500,7 @@ public virtual RefineableLinearisedAxisymmetricQCrouzeixRaviartElement,
    // Get the three velocity components interpolated from the external element
    for(unsigned i=0;i<3;i++)
     {
-     result[i] = base_flow_el_pt->interpolated_u_nst(s_external,i);
+     result[i] = base_flow_el_pt->interpolated_u_axi_nst(s_external,i);
     }
 
   } // End of overloaded get_base_flow_u function
@@ -538,7 +538,7 @@ public virtual RefineableLinearisedAxisymmetricQCrouzeixRaviartElement,
      for(unsigned j=0;j<2;j++)
       {
        result(i,j)
-        = base_flow_el_pt->interpolated_dudx_nst(s_external,i,j);
+        = base_flow_el_pt->interpolated_dudx_axi_nst(s_external,i,j);
       }
     }
 

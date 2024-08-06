@@ -127,7 +127,7 @@ class MyAxisymmetricFluidElement : public ELEMENT
     
     //Find the indices at which the local velocities are stored
     unsigned u_nodal_index[3];
-    for(unsigned i=0;i<3;i++) {u_nodal_index[i] = this->u_index_nst(i);}
+    for(unsigned i=0;i<3;i++) {u_nodal_index[i] = this->u_index_axi_nst(i);}
     
     //Set up memory for the velocity shape fcts
     Shape psif(n_node);
