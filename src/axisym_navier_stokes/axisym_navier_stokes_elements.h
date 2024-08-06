@@ -37,7 +37,7 @@
 #include "../generic/Qelements.h"
 #include "../generic/fsi.h"
 #include "../generic/projection.h"
-#include "../navier_stokes/navier_stokes_equation_numbering_element.h"
+#include "axisym_navier_stokes_equation_numbering_element.h"
 
 namespace oomph
 {
