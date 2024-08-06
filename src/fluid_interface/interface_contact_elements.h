@@ -118,7 +118,7 @@ namespace oomph
                const int& face_index,
                const unsigned& id = 0)
     {
-      FluidInterfaceFaceElement::build(element_pt, face_index, id);
+      // FluidInterfaceFaceElement::build(element_pt, face_index, id);
 
       Contact_angle_flag = Vector<unsigned>(nnode(), WEAK);
 
