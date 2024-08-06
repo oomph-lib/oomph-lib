@@ -223,7 +223,8 @@ namespace oomph
           else
           {
             // Global equation number
-            global_eqn = this->node_pt(l)->eqn_number(this->u_index_axi_nst(l, i));
+            global_eqn =
+              this->node_pt(l)->eqn_number(this->u_index_axi_nst(l, i));
           }
 
           // If it's positive add to the count
@@ -286,7 +287,8 @@ namespace oomph
           else
           {
             // Local equation number
-            global_eqn = this->node_pt(l)->eqn_number(this->u_index_axi_nst(l, i));
+            global_eqn =
+              this->node_pt(l)->eqn_number(this->u_index_axi_nst(l, i));
           }
 
           if (global_eqn >= 0)

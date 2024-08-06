@@ -35,10 +35,11 @@ namespace oomph
   /// flag=0: compute only residual vector
   //=======================================================================
   void RefineableAxisymmetricNavierStokesEquations::
-    fill_in_generic_residual_contribution_axi_nst(Vector<double>& residuals,
-                                              DenseMatrix<double>& jacobian,
-                                              DenseMatrix<double>& mass_matrix,
-                                              unsigned flag)
+    fill_in_generic_residual_contribution_axi_nst(
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
+      unsigned flag)
   {
     // The dimension is actually two
     unsigned DIM = 2;
@@ -1173,13 +1174,13 @@ namespace oomph
       // Call the derivatives of the shape and test functions
       const double J =
         this->dshape_and_dtest_eulerian_at_knot_axi_nst(ipt,
-                                                    psif,
-                                                    dpsifdx,
-                                                    d_dpsifdx_dX,
-                                                    testf,
-                                                    dtestfdx,
-                                                    d_dtestfdx_dX,
-                                                    dJ_dX);
+                                                        psif,
+                                                        dpsifdx,
+                                                        d_dpsifdx_dX,
+                                                        testf,
+                                                        dtestfdx,
+                                                        d_dtestfdx_dX,
+                                                        dJ_dX);
 
       // Call the pressure shape and test functions
       this->pshape_axi_nst(s, psip, testp);
