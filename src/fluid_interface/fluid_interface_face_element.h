@@ -68,10 +68,9 @@ namespace oomph
     virtual inline unsigned u_index_nst(const unsigned& n,
                                         const unsigned& i) const
     {
-      // NavierStokesFaceElement* el_pt =
-      //   dynamic_cast<NavierStokesFaceElement*>(this->bulk_element_pt());
-      // return el_pt->u_index_nst(this->bulk_node_number(n), i);
-      return U_index_interface_boundary[i];
+      NavierStokesFaceElement* el_pt =
+        dynamic_cast<NavierStokesFaceElement*>(this->bulk_element_pt());
+      return el_pt->u_index_nst(this->bulk_node_number(n), i);
     }
 
     virtual inline unsigned u_index_nst(const unsigned& i) const
@@ -92,10 +91,9 @@ namespace oomph
     virtual inline unsigned momentum_index_nst(const unsigned& n,
                                                const unsigned& i) const
     {
-      // NavierStokesFaceElement* el_pt =
-      //   dynamic_cast<NavierStokesFaceElement*>(this->bulk_element_pt());
-      // return el_pt->momentum_index_nst(this->bulk_node_number(n), i);
-      return U_index_interface_boundary[i];
+      NavierStokesFaceElement* el_pt =
+        dynamic_cast<NavierStokesFaceElement*>(this->bulk_element_pt());
+      return el_pt->momentum_index_nst(this->bulk_node_number(n), i);
     }
 
     virtual inline unsigned nst_continuity_index(const unsigned& n) const

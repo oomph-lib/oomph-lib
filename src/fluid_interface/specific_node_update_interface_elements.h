@@ -375,6 +375,7 @@ namespace oomph
       // Set the index at which the velocity nodes are stored
       const unsigned n_dim = this->nodal_dimension();
       Vector<unsigned> u_index_interface_boundary(n_dim);
+      // Assume that all the velocities are indexed as node 0.
       const unsigned i_node = 0;
       for (unsigned d = 0; d < n_dim; d++)
       {
@@ -1061,6 +1062,7 @@ namespace oomph
       // Set the index at which the velocity nodes are stored
       const unsigned n_dim = this->nodal_dimension();
       Vector<unsigned> u_index_interface_boundary(n_dim);
+      // Assume that all the velocities are indexed as node 0.
       const unsigned i_node = 0;
       for (unsigned d = 0; d < n_dim; d++)
       {
