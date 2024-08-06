@@ -87,26 +87,27 @@ namespace oomph
     }
 
     /// Get the nodal index of the lagrange multiplier
-    const unsigned lagrange_multiplier_index(const unsigned& n)
+    const unsigned lagrange_multiplier_index(const unsigned& n,
+                                             const unsigned& i)
     {
       // Cast to a boundary node
       BoundaryNodeBase* bnod_pt = dynamic_cast<BoundaryNodeBase*>(node_pt(n));
 
       // Get the index of the first nodal value associated with
       // this FaceElement
-      return bnod_pt->index_of_first_value_assigned_by_face_element(Id);
+      return bnod_pt->index_of_first_value_assigned_by_face_element(Id) + i;
     }
 
     /// Pin the lagrange multiplier at node n
-    void pin_lagrange_multiplier(const unsigned& n)
+    void pin_lagrange_multiplier(const unsigned& n, const unsigned& i)
     {
-      this->node_pt(n)->pin(lagrange_multiplier_index(n));
+      this->node_pt(n)->pin(lagrange_multiplier_index(n, i));
     }
 
     /// Unpin the lagrange multiplier at node n
-    void unpin_lagrange_multiplier(const unsigned& n)
+    void unpin_lagrange_multiplier(const unsigned& n, const unsigned& i)
     {
-      this->node_pt(n)->unpin(lagrange_multiplier_index(n));
+      this->node_pt(n)->unpin(lagrange_multiplier_index(n, i));
     }
 
     /// Fill in the residuals
@@ -124,19 +125,6 @@ namespace oomph
       // Call the generic routine with the flag set to 1
       fill_in_generic_contribution_to_residuals_parall_lagr_multiplier(
         residuals, jacobian, 1);
-    }
-
-    // Fix lagrange multiplier to value
-    void fix_lagrange_multiplier(const unsigned& n,
-                                 const unsigned& direction,
-                                 const double& value)
-    {
-      BoundaryNodeBase* bnod_pt =
-        dynamic_cast<BoundaryNodeBase*>(this->node_pt(n));
-      unsigned first_index =
-        bnod_pt->index_of_first_value_assigned_by_face_element(Id);
-      this->node_pt(n)->pin(first_index + direction);
-      this->node_pt(n)->set_value(first_index + direction, value);
     }
 
     /// Overload the output function
