@@ -78,6 +78,7 @@ namespace oomph
       add_additional_values(n_additional_values, id);
     }
 
+    /// Get the nodal index of the lagrange multiplier
     const unsigned lagrange_multiplier_index(const unsigned& n)
     {
       // Cast to a boundary node
@@ -85,16 +86,16 @@ namespace oomph
 
       // Get the index of the first nodal value associated with
       // this FaceElement
-      return first_index =
-               bnod_pt->index_of_first_value_assigned_by_face_element(Id);
+      return bnod_pt->index_of_first_value_assigned_by_face_element(Id);
     }
 
-
+    /// Pin the lagrange multiplier at node n
     void pin_lagrange_multiplier(const unsigned& n)
     {
       this->node_pt(n)->pin(lagrange_multiplier_index(n));
     }
 
+    /// Unpin the lagrange multiplier at node n
     void unpin_lagrange_multiplier(const unsigned& n)
     {
       this->node_pt(n)->unpin(lagrange_multiplier_index(n));
