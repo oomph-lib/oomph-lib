@@ -119,10 +119,6 @@ namespace oomph
       public virtual NavierStokesElementWithDiagonalMassMatrices
   {
   private:
-    /// Static "magic" number that indicates that the pressure is
-    /// not stored at a node
-    static int Pressure_not_stored_at_node;
-
     /// Static default value for the physical constants (all initialised to
     /// zero)
     static double Default_Physical_Constant_Value;
@@ -590,12 +586,6 @@ namespace oomph
     /// Pressure at local pressure "node" n_p
     /// Uses suitably interpolated value for hanging nodes.
     virtual double p_axi_nst(const unsigned& n_p) const = 0;
-
-    /// Which nodal value represents the pressure?
-    virtual int p_nodal_index_axi_nst() const
-    {
-      return Pressure_not_stored_at_node;
-    }
 
     /// Integral of pressure over element
     double pressure_integral() const;

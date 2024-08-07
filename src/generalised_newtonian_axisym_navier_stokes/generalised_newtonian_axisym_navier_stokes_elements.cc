@@ -33,14 +33,6 @@ namespace oomph
   Vector<double> GeneralisedNewtonianAxisymmetricNavierStokesEquations::Gamma(
     2, 1.0);
 
-  //=================================================================
-  /// "Magic" negative number that indicates that the pressure is
-  /// not stored at a node. This cannot be -1 because that represents
-  /// the positional hanging scheme in the hanging_pt object of nodes
-  //=================================================================
-  int GeneralisedNewtonianAxisymmetricNavierStokesEquations::
-    Pressure_not_stored_at_node = -100;
-
   /// Navier--Stokes equations static data
   double GeneralisedNewtonianAxisymmetricNavierStokesEquations::
     Default_Physical_Constant_Value = 0.0;
