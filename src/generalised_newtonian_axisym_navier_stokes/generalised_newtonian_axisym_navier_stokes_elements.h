@@ -40,6 +40,7 @@
 #include "../generic/fsi.h"
 #include "../generic/projection.h"
 #include "../generic/generalised_newtonian_constitutive_models.h"
+#include "../axisym_navier_stokes/axisym_navier_stokes_equation_numbering_element.h"
 
 namespace oomph
 {
@@ -114,7 +115,7 @@ namespace oomph
   /// tend to be used in problems involving multiple fluids).
   //======================================================================
   class GeneralisedNewtonianAxisymmetricNavierStokesEquations
-    : public virtual FiniteElement,
+    : public virtual AxisymNavierStokesEquationNumberingElement,
       public virtual NavierStokesElementWithDiagonalMassMatrices
   {
   private:
@@ -532,30 +533,6 @@ namespace oomph
     void use_extrapolated_strainrate_to_compute_second_invariant()
     {
       Use_extrapolated_strainrate_to_compute_second_invariant = true;
-    }
-
-    /// Function to return number of pressure degrees of freedom
-    virtual unsigned npres_axi_nst() const = 0;
-
-    /// Return the index at which the i-th unknown velocity component
-    /// is stored. The default value, i, is appropriate for single-physics
-    /// problems.
-    /// In derived multi-physics elements, this function should be overloaded
-    /// to reflect the chosen storage scheme. Note that these equations require
-    /// that the unknowns are always stored at the same indices at each node.
-    virtual inline unsigned u_index_axi_nst(const unsigned& i) const
-    {
-      return i;
-    }
-
-    /// Return the index at which the i-th unknown velocity component
-    /// is stored with a common interface for use in general
-    /// FluidInterface and similar elements.
-    /// To do: Merge all common storage etc to a common base class for
-    /// Navier--Stokes elements in all coordinate systems.
-    inline unsigned u_index_nst(const unsigned& i) const
-    {
-      return this->u_index_axi_nst(i);
     }
 
     /// Return the number of velocity components for use in
