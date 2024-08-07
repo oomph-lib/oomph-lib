@@ -64,17 +64,6 @@ namespace oomph
     /// Virtual destructor (empty)
     virtual ~GeneralisedNewtonianTemplateFreeNavierStokesEquationsBase(){};
 
-
-    /// Return the index at which the pressure is stored if it is
-    /// stored at the nodes. If not stored at the nodes this will return
-    /// a negative number.
-    virtual int p_nodal_index_nst() const = 0;
-
-    /// Access function for the local equation number information for
-    /// the pressure.
-    /// p_local_eqn[n] = local equation number or < 0 if pinned
-    virtual int p_local_eqn(const unsigned& n) const = 0;
-
     /// Pin all non-pressure dofs and backup eqn numbers of all Data
     virtual void pin_all_non_pressure_dofs(
       std::map<Data*, std::vector<int>>& eqn_number_backup) = 0;
@@ -139,10 +128,6 @@ namespace oomph
       const Vector<double>& x);
 
   private:
-    /// Static "magic" number that indicates that the pressure is
-    /// not stored at a node
-    static int Pressure_not_stored_at_node;
-
     /// Static default value for the physical constants (all initialised to
     /// zero)
     static double Default_Physical_Constant_Value;
@@ -543,9 +528,6 @@ namespace oomph
       Use_extrapolated_strainrate_to_compute_second_invariant = true;
     }
 
-    /// Function to return number of pressure degrees of freedom
-    virtual unsigned npres_nst() const = 0;
-
     /// Compute the pressure shape functions at local coordinate s
     virtual void pshape_nst(const Vector<double>& s, Shape& psi) const = 0;
 
@@ -570,17 +552,6 @@ namespace oomph
     double u_nst(const unsigned& t, const unsigned& n, const unsigned& i) const
     {
       return nodal_value(t, n, u_index_nst(i));
-    }
-
-    /// Return the index at which the i-th unknown velocity component
-    /// is stored. The default value, i, is appropriate for single-physics
-    /// problems.
-    /// In derived multi-physics elements, this function should be overloaded
-    /// to reflect the chosen storage scheme. Note that these equations require
-    /// that the unknowns are always stored at the same indices at each node.
-    virtual inline unsigned u_index_nst(const unsigned& i) const
-    {
-      return i;
     }
 
     /// Return the number of velocity components
@@ -644,14 +615,6 @@ namespace oomph
 
     /// Pin p_dof-th pressure dof and set it to value specified by p_value.
     virtual void fix_pressure(const unsigned& p_dof, const double& p_value) = 0;
-
-    /// Return the index at which the pressure is stored if it is
-    /// stored at the nodes. If not stored at the nodes this will return
-    /// a negative number.
-    virtual int p_nodal_index_nst() const
-    {
-      return Pressure_not_stored_at_node;
-    }
 
     /// Integral of pressure over element
     double pressure_integral() const;
