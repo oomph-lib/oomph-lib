@@ -302,7 +302,8 @@ namespace oomph
           // Assemble the velocity component
           for (unsigned i = 0; i < dim_el + 1; i++)
           {
-            interpolated_u[i] += nodal_value(j, u_index[i]) * psi(j);
+            interpolated_u[i] +=
+              nodal_value(j, this->u_index_nst(j, i)) * psi(j);
           }
 
           // Cast to a boundary node

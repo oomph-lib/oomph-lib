@@ -100,6 +100,7 @@ namespace oomph
     /// that the mesh is stationary.
     bool ALE_is_disabled;
 
+  public:
     /// Access function for the local equation number
     /// information for the i-th component of the pressure.
     /// p_local_eqn[n,i] = local equation number or < 0 if pinned.
@@ -193,7 +194,6 @@ namespace oomph
       DenseMatrix<double>& mass_matrix,
       unsigned flag);
 
-  public:
     /// Constructor: NULL the base flow solution and the
     /// derivatives of the base flow function
     LinearisedAxisymmetricNavierStokesEquations()
@@ -302,6 +302,10 @@ namespace oomph
     /// Return the number of pressure degrees of freedom
     /// associated with a single pressure component in the element
     virtual unsigned npres_linearised_axi_nst() const = 0;
+
+    /// Return the number of velocity degrees of freedom
+    /// at each node in the element
+    virtual unsigned n_u_linearised_axi_nst() const = 0;
 
     /// Return the index at which the i-th unknown velocity
     /// component is stored. The default value, i, is appropriate for
@@ -598,6 +602,12 @@ namespace oomph
       return 3;
     }
 
+    /// Return number of velocity values at each node in the element
+    unsigned n_u_linearised_axi_nst() const
+    {
+      return 6;
+    }
+
     /// Fix both components of the internal pressure degrees
     /// of freedom p_dof to pvalue
     void fix_pressure(const unsigned& p_dof, const double& pvalue)
@@ -852,6 +862,12 @@ namespace oomph
     unsigned npres_linearised_axi_nst() const
     {
       return 4;
+    }
+
+    /// Return number of velocity values at each node in the element
+    unsigned n_u_linearised_axi_nst() const
+    {
+      return 6;
     }
 
     /// Fix both components of the pressure at local pressure

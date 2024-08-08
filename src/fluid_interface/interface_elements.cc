@@ -129,8 +129,7 @@ namespace oomph
     }
 
     // Get the value of sigma from the parent
-    double sigma_local =
-      dynamic_cast<FluidInterfaceElement*>(parent_pt)->sigma(s_parent);
+    double sigma_local = sigma();
 
     // Are we doing the weak form replacement
     if (Contact_angle_flag == 2)
@@ -311,8 +310,7 @@ namespace oomph
         }
 
         // Get the value of sigma from the parent
-        const double sigma_local =
-          dynamic_cast<FluidInterfaceElement*>(parent_pt)->sigma(s_parent);
+        const double sigma_local = this->sigma();
 
         // Get the capillary number
         const double ca_local = ca();
@@ -356,8 +354,7 @@ namespace oomph
         this->outer_unit_normal(s_local, m);
 
         // Get the value of sigma from the parent
-        const double sigma_local =
-          dynamic_cast<FluidInterfaceElement*>(parent_pt)->sigma(s_parent);
+        const double sigma_local = this->sigma();
 
         // Get the capillary number
         const double ca_local = ca();
@@ -471,7 +468,10 @@ namespace oomph
   /// added from the specific elements
   //========================================================================
   void FluidInterfaceElement::fill_in_generic_residual_contribution_interface(
-    Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag)
+    Vector<double>& residuals,
+    DenseMatrix<double>& jacobian,
+    DenseMatrix<double>& mass_matrix,
+    unsigned flag)
   {
     // Find out how many nodes there are
     unsigned n_node = this->nnode();
@@ -572,7 +572,7 @@ namespace oomph
       this->outer_unit_normal(s, interpolated_n);
 
       // Now also get the (possible variable) surface tension
-      double Sigma = this->sigma(s);
+      double sigma_local = this->sigma(s);
 
       // Loop over the shape functions
       for (unsigned l = 0; l < n_node; l++)
@@ -587,7 +587,8 @@ namespace oomph
           if (local_eqn >= 0)
           {
             // Add the surface-tension contribution to the momentum equation
-            residuals[local_eqn] -= (Sigma / Ca) * dpsifdS_div(l, i) * J * W;
+            residuals[local_eqn] -=
+              (sigma_local / Ca) * dpsifdS_div(l, i) * J * W;
 
             // If the element is a free surface, add in the external pressure
             if (Pext_data_pt != 0)
@@ -653,6 +654,7 @@ namespace oomph
       // of the node update (e.g. Lagrange multpliers etc)
       add_additional_residual_contributions_interface(residuals,
                                                       jacobian,
+                                                      mass_matrix,
                                                       flag,
                                                       psif,
                                                       dpsifds,

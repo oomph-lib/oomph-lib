@@ -300,6 +300,7 @@ namespace oomph
     void add_additional_residual_contributions_interface(
       Vector<double>& residuals,
       DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
       const unsigned& flag,
       const Shape& psif,
       const DShape& dpsifds,
@@ -314,6 +315,7 @@ namespace oomph
       EQUATION_CLASS::add_additional_residual_contributions_interface(
         residuals,
         jacobian,
+        mass_matrix,
         flag,
         psif,
         dpsifds,
@@ -871,7 +873,7 @@ namespace oomph
     }
 
     /// Return the lagrange multiplier at local node n
-    double interpolated_lagrange(const Vector<double>& s)
+    double interpolated_lagrange_multiplier(const Vector<double>& s)
     {
       // Find number of nodes
       unsigned n_node = FiniteElement::nnode();
@@ -964,6 +966,7 @@ namespace oomph
     void add_additional_residual_contributions_interface(
       Vector<double>& residuals,
       DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
       const unsigned& flag,
       const Shape& psif,
       const DShape& dpsifds,
@@ -978,6 +981,7 @@ namespace oomph
       EQUATION_CLASS::add_additional_residual_contributions_interface(
         residuals,
         jacobian,
+        mass_matrix,
         flag,
         psif,
         dpsifds,
@@ -994,6 +998,7 @@ namespace oomph
       // Read out the dimension of the node
       const unsigned nodal_dimension = this->nodal_dimension();
 
+      const double st_local = EQUATION_CLASS::st();
       double interpolated_lagrange = 0.0;
       for (unsigned l = 0; l < n_node; l++)
       {
@@ -1036,7 +1041,35 @@ namespace oomph
             } // End of Jacobian calculation
           }
         }
-      } // End of loop over shape functions
+
+        // Kinematic BC
+        local_eqn = kinematic_local_eqn(l);
+        if (local_eqn >= 0)
+        {
+          // Add in the jacobian
+          if (flag == 2)
+          {
+            // Loop over shape functions
+            for (unsigned l2 = 0; l2 < n_node; l2++)
+            {
+              // Loop over the components
+              for (unsigned i2 = 0; i2 < nodal_dimension; i2++)
+              {
+                // Now using the same shape functions for the elastic
+                // equations, so we can stay in the loop
+                local_unknown = this->position_local_eqn(l2, 0, i2);
+                if (local_unknown >= 0)
+                {
+                  // Positive, due to the mass matrix being on the left-hand
+                  // side.
+                  mass_matrix(local_eqn, local_unknown) +=
+                    st_local * psif(l2) * interpolated_n[i2] * psif(l) * J * W;
+                }
+              }
+            }
+          } // End of loop over shape functions
+        }
+      }
     }
 
 
@@ -1141,6 +1174,11 @@ namespace oomph
     Vector<unsigned> Lagrange_index;
 
   public:
+    void fill_in_contribution_to_dresiduals_dparameter(
+      double* const& parameter_pt, Vector<double>& dres_dparam)
+    {
+    }
+
     /// Set the Id and offset
     void set_lagrange_index(const Vector<unsigned>& lagrange_index)
     {
@@ -1167,16 +1205,102 @@ namespace oomph
     {
     }
 
-    /// Overload the output function
-    void output(std::ostream& outfile)
-    {
-      FiniteElement::output(outfile);
-    }
-
     /// Output the element
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
       FluidInterfaceBoundingElement::output(outfile, n_plot);
+    }
+
+    /// Overload the output function
+    void output(std::ostream& outfile)
+    {
+      // Find the dimension of the problem
+      unsigned spatial_dim = this->nodal_dimension();
+
+      // Storage for the coordinate
+      Vector<double> x(spatial_dim);
+
+      // Dummy local coordinate, of size zero
+      Vector<double> s_local(0);
+
+      // Get the x coordinate
+      this->interpolated_x(s_local, x);
+
+      // Compute the contact angles
+      double imposed_contact_angle = 0.0;
+      double computed_contact_angle = 0.0;
+      calculate_contact_angle(imposed_contact_angle, computed_contact_angle);
+
+      // Output fields, x, y, alpha_input, alpha_output, lagrange_multiplier
+      for (unsigned i = 0; i < spatial_dim; i++)
+      {
+        outfile << x[i] << ",";
+      }
+      std::streamsize ss = outfile.precision();
+      outfile << std::fixed << std::setprecision(3);
+      outfile << imposed_contact_angle * 180 / MathematicalConstants::Pi << ",";
+      outfile << computed_contact_angle * 180 / MathematicalConstants::Pi;
+      outfile << std::endl;
+      outfile << std::fixed << std::setprecision(ss);
+    }
+
+    void calculate_contact_angle(double& imposed_contact_angle,
+                                 double& computed_contact_angle)
+    {
+      // Let's get the info from the parent
+      FiniteElement* parent_pt = bulk_element_pt();
+
+      // Find the dimension of the problem
+      unsigned spatial_dim = this->nodal_dimension();
+
+      // Outer unit normal to the wall
+      Vector<double> wall_normal(spatial_dim);
+
+      // Outer unit normal to the free surface
+      Vector<double> unit_normal(spatial_dim);
+
+      // Storage for the coordinate
+      Vector<double> x(spatial_dim);
+
+      // Storage for the coordinate time derivative
+      Vector<double> dx_dt(spatial_dim);
+
+      // Get the unit normal to the wall
+      wall_unit_normal(x, wall_normal);
+
+      // Find the dimension of the parent
+      unsigned n_dim = parent_pt->dim();
+
+      // Dummy local coordinate, of size zero
+      Vector<double> s_local(0);
+
+      // Get the x coordinate
+      this->interpolated_x(s_local, x);
+
+      // Get the dx/dt of the coordinate
+      const unsigned t_deriv = 1;
+      this->interpolated_dxdt(s_local, t_deriv, dx_dt);
+
+      // Find the local coordinates in the parent
+      Vector<double> s_parent(n_dim);
+      this->get_local_coordinate_in_bulk(s_local, s_parent);
+
+      // Just get the outer unit normal
+      dynamic_cast<FaceElement*>(parent_pt)->outer_unit_normal(s_parent,
+                                                               unit_normal);
+
+      // Get imposed contact angle
+      imposed_contact_angle = *this->contact_angle_pt();
+
+      // Find the dot product of the two vectors
+      double dot = 0.0;
+      for (unsigned i = 0; i < spatial_dim; i++)
+      {
+        dot += unit_normal[i] * wall_normal[i];
+      }
+
+      // Compute contact angle
+      computed_contact_angle = acos(dot);
     }
 
     /// Overload the C-style output function
@@ -1204,6 +1328,14 @@ namespace oomph
       // Call the generic finite difference routine to handle the solid
       // variables
       this->fill_in_jacobian_from_solid_position_by_fd(jacobian);
+    }
+
+    void fill_in_contribution_to_jacobian_and_mass_matrix(
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix)
+    {
+      fill_in_contribution_to_jacobian(residuals, jacobian);
     }
 
     /// Return the value of the lagrange multiplier

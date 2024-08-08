@@ -299,6 +299,84 @@ namespace oomph
   /// ////////////////////////////////////////////////////////////////////
 
 
+  class NavierStokesEquationNumberingElement : public virtual FiniteElement
+  {
+  public:
+    /// Velocity i at local node n. Uses suitably interpolated value
+    /// for hanging nodes. The use of u_index_nst() permits the use of this
+    /// element as the basis for multi-physics elements. The default
+    /// is to assume that the i-th velocity component is stored at the
+    /// i-th location of the node
+    double u_nst(const unsigned& n, const unsigned& i) const
+    {
+      return nodal_value(n, u_index_nst(n, i));
+    }
+
+    /// Velocity i at local node n at timestep t (t=0: present;
+    /// t>0: previous). Uses suitably interpolated value for hanging nodes.
+    double u_nst(const unsigned& t, const unsigned& n, const unsigned& i) const
+    {
+      return nodal_value(t, n, u_index_nst(n, i));
+    }
+
+    /// Return the index at which the i-th unknown velocity component
+    /// is stored. The default value, i, is appropriate for single-physics
+    /// problems.
+    /// In derived multi-physics elements, this function should be overloaded
+    /// to reflect the chosen storage scheme. Note that these equations require
+    /// that the unknowns are always stored at the same indices at each node.
+    virtual inline unsigned u_index_nst(const unsigned& i) const
+    {
+      return i;
+    }
+
+    /// Return the index at which the i-th unknown velocity component
+    /// is stored at the n-th node. The default value, i, is appropriate for
+    /// single-physics problems. In derived multi-physics elements, this
+    /// function should be overloaded to reflect the chosen storage scheme.
+    virtual inline unsigned u_index_nst(const unsigned& n,
+                                        const unsigned& i) const
+    {
+      return u_index_nst(i);
+    }
+
+    virtual inline unsigned momentum_index_nst(const unsigned& n,
+                                               const unsigned& i) const
+    {
+      return u_index_nst(n, i);
+    }
+
+    /// Return the index at which the pressure is stored if it is
+    /// stored at the nodes. If not stored at the nodes this will return
+    /// a negative number.
+    virtual int p_nodal_index_nst() const = 0;
+
+    virtual int p_nodal_index_nst(const unsigned& n) const
+    {
+      return p_nodal_index_nst();
+    }
+
+    virtual inline int continuity_nodal_index_nst(const unsigned& n) const
+    {
+      return p_nodal_index_nst(n);
+    }
+
+    /// Access function for the local equation number information for
+    /// the pressure.
+    /// p_local_eqn[n] = local equation number or < 0 if pinned
+    virtual int p_local_eqn(const unsigned& n) const = 0;
+
+    /// Access function for the local equation number information for
+    /// the continuity equation.
+    /// < 0 if pinned
+    /// By default, returns the p_local_eqn(n)
+    virtual int continuity_local_eqn(const unsigned& n) const
+    {
+      return p_local_eqn(n);
+    }
+  };
+
+
   //======================================================================
   /// Template-free base class for Navier-Stokes equations to avoid
   /// casting problems

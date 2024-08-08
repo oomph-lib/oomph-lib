@@ -312,7 +312,7 @@ namespace oomph
       WC += nodal_value(l, u_nodal_index[2]) * psi[l];
       WS += nodal_value(l, u_nodal_index[3]) * psi[l];
       VC += nodal_value(l, u_nodal_index[4]) * psi[l];
-      VS += nodal_value(l, u_nodal_index[4]) * psi[l];
+      VS += nodal_value(l, u_nodal_index[5]) * psi[l];
 
       dUCdr += nodal_value(l, u_nodal_index[0]) * dpsidx(l, 0);
       dUSdr += nodal_value(l, u_nodal_index[1]) * dpsidx(l, 0);

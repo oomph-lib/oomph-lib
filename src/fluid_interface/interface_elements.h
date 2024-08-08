@@ -71,6 +71,13 @@ namespace oomph
     /// Pointer to the desired value of the capillary number
     double* Ca_pt;
 
+    /// Default sigma value for the sigma pointer to point to before it gets
+    /// changed.
+    double Default_sigma;
+
+    /// Pointer to the desired value of Sigma
+    double* Sigma_pt;
+
   protected:
     /// Flag used to determine whether the contact angle is to be
     /// used (0 if not), and whether it will be applied weakly as a force term
@@ -131,6 +138,8 @@ namespace oomph
       : Wall_unit_normal_fct_pt(0),
         Contact_angle_pt(0),
         Ca_pt(0),
+        Default_sigma(1.0),
+        Sigma_pt(&Default_sigma),
         Contact_angle_flag(0)
     {
     }
@@ -166,6 +175,12 @@ namespace oomph
       return Ca_pt;
     }
 
+    /// Access function to the pointer specifying the capillary number
+    double*& sigma_pt()
+    {
+      return Sigma_pt;
+    }
+
     /// Return the value of the capillary number
     double ca()
     {
@@ -183,6 +198,12 @@ namespace oomph
                             OOMPH_EXCEPTION_LOCATION);
       }
 #endif
+    }
+
+    /// Return the value of the capillary number
+    double sigma()
+    {
+      return *Sigma_pt;
     }
 
 
@@ -375,7 +396,10 @@ namespace oomph
     /// divergence information that is overloaded in each element
     /// i.e. axisymmetric, two- or three-dimensional.
     virtual void fill_in_generic_residual_contribution_interface(
-      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
+      unsigned flag);
 
     /// Compute the surface gradient and surface divergence
     /// operators given the shape functions, derivatives,
@@ -424,6 +448,7 @@ namespace oomph
     virtual void add_additional_residual_contributions_interface(
       Vector<double>& residuals,
       DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
       const unsigned& flag,
       const Shape& psif,
       const DShape& dpsifds,
@@ -463,7 +488,10 @@ namespace oomph
     {
       // Add the residual contributions
       fill_in_generic_residual_contribution_interface(
-        residuals, GeneralisedElement::Dummy_matrix, 0);
+        residuals,
+        GeneralisedElement::Dummy_matrix,
+        GeneralisedElement::Dummy_matrix,
+        0);
     }
 
 

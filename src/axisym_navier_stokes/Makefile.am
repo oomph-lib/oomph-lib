@@ -16,6 +16,7 @@ incl_cc_files =
 # Define the headers
 headers =  \
 axisym_navier_stokes_elements.h  \
+axisym_navier_stokes_face_elements.h \
 refineable_axisym_navier_stokes_elements.h \
 Taxisym_navier_stokes_elements.h \
 axisym_fluid_traction_elements.h \
