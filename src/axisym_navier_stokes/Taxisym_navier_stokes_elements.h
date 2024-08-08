@@ -798,13 +798,6 @@ namespace oomph
       this->node_pt(Pconv[p_dof])->unpin(p_nodal_index_axi_nst());
     }
 
-    /// Pin p_dof-th pressure dof and set it to value specified by p_value.
-    void free_pressure(const unsigned& p_dof)
-    {
-      this->node_pt(Pconv[p_dof])->unpin(3);
-    }
-
-
     /// Build FaceElements that apply the Robin boundary condition
     /// to the pressure advection diffusion problem required by
     /// Fp preconditioner

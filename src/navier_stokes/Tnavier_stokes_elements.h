@@ -184,7 +184,7 @@ namespace oomph
     }
 
     /// Free p_dof-th pressure dof.
-    void free_pressure(const unsigned& p_dof)
+    virtual void free_pressure(const unsigned& p_dof)
     {
       this->internal_data_pt(P_nst_internal_index)->unpin(p_dof);
     }
@@ -900,7 +900,7 @@ namespace oomph
     }
 
     /// Free p_dof-th pressure dof.
-    void free_pressure(const unsigned& p_dof)
+    virtual void free_pressure(const unsigned& p_dof)
     {
       this->node_pt(Pconv[p_dof])->unpin(this->p_nodal_index_nst());
     }

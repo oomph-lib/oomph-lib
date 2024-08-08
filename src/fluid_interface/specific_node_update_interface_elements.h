@@ -288,7 +288,7 @@ namespace oomph
     {
       // Call the generic routine with the flag set to 1
       EQUATION_CLASS::fill_in_generic_residual_contribution_interface(
-        residuals, jacobian, 1);
+        residuals, jacobian, GeneralisedElement::Dummy_matrix, 1);
 
       // Call the generic routine to handle the shape derivatives
       this->fill_in_jacobian_from_geometric_data(jacobian);
@@ -919,7 +919,10 @@ namespace oomph
     {
       // Call the generic routine with the flag set to 1
       EQUATION_CLASS::fill_in_generic_residual_contribution_interface(
-        residuals, GeneralisedElement::Dummy_matrix, 0);
+        residuals,
+        GeneralisedElement::Dummy_matrix,
+        GeneralisedElement::Dummy_matrix,
+        0);
     }
 
     /// Fill in contribution to residuals and Jacobian
@@ -928,7 +931,7 @@ namespace oomph
     {
       // Call the generic routine with the flag set to 1
       EQUATION_CLASS::fill_in_generic_residual_contribution_interface(
-        residuals, jacobian, 1);
+        residuals, jacobian, GeneralisedElement::Dummy_matrix, 1);
 
       // Call the generic finite difference routine for the solid variables
       this->fill_in_jacobian_from_solid_position_by_fd(jacobian);
