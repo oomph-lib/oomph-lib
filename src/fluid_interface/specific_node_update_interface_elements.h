@@ -905,12 +905,33 @@ namespace oomph
       }
     }
 
+    /// Pin the lagrange multiplier across the element
+    void pin_lagrange_multiplier(const unsigned& n)
+    {
+      this->node_pt(n)->pin(this->lagrange_index(n));
+    }
+
     /// Unpin the lagrange multiplier across the element
     void unpin_lagrange_multiplier()
     {
       for (unsigned n = 0; n < this->nnode(); n++)
       {
         this->node_pt(n)->unpin(this->lagrange_index(n));
+      }
+    }
+
+    /// Pin the lagrange multiplier across the element
+    void unpin_lagrange_multiplier(const unsigned& n)
+    {
+      this->node_pt(n)->unpin(this->lagrange_index(n));
+    }
+
+    /// Pin the lagrange multiplier across the element
+    void set_lagrange_multiplier(const unsigned& n, const double& value)
+    {
+      for (unsigned n = 0; n < this->nnode(); n++)
+      {
+        this->node_pt(n)->set_value(this->lagrange_index(n), value);
       }
     }
 

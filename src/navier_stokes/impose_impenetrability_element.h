@@ -131,6 +131,12 @@ namespace oomph
       this->node_pt(n)->unpin(lagrange_multiplier_index(n));
     }
 
+    /// Set the lagrange multiplier at node n
+    void set_lagrange_multiplier(const unsigned& n, const double& value)
+    {
+      this->node_pt(n)->set_value(lagrange_multiplier_index(n), value);
+    }
+
     /// Fill in the residuals
     void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
