@@ -665,19 +665,20 @@ namespace oomph
                                                       W,
                                                       J);
 
-      add_additional_residual_with_mass_matrix_contributions_interface(residuals,
-                                                      jacobian,
-                                                      mass_matrix,
-                                                      flag,
-                                                      psif,
-                                                      dpsifds,
-                                                      dpsifdS,
-                                                      dpsifdS_div,
-                                                      s,
-                                                      interpolated_x,
-                                                      interpolated_n,
-                                                      W,
-                                                      J);
+      add_additional_residual_with_mass_matrix_contributions_interface(
+        residuals,
+        jacobian,
+        mass_matrix,
+        flag,
+        psif,
+        dpsifds,
+        dpsifdS,
+        dpsifdS_div,
+        s,
+        interpolated_x,
+        interpolated_n,
+        W,
+        J);
 
     } // End of loop over integration points
   }
