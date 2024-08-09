@@ -396,6 +396,18 @@ namespace oomph
     /// divergence information that is overloaded in each element
     /// i.e. axisymmetric, two- or three-dimensional.
     virtual void fill_in_generic_residual_contribution_interface(
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag)
+    {
+      fill_in_generic_residual_contribution_interface(
+        residuals, jacobian, GeneralisedElement::Dummy_matrix, flag);
+    }
+
+    /// Helper function to calculate the residuals and
+    /// (if flag==1) the Jacobian of the equations.
+    /// This is implemented generically using the surface
+    /// divergence information that is overloaded in each element
+    /// i.e. axisymmetric, two- or three-dimensional.
+    virtual void fill_in_generic_residual_contribution_interface(
       Vector<double>& residuals,
       DenseMatrix<double>& jacobian,
       DenseMatrix<double>& mass_matrix,
@@ -446,6 +458,37 @@ namespace oomph
     ///   along the element. (Note that in the axisymmmetric case this
     ///   includes the r term)!
     virtual void add_additional_residual_contributions_interface(
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag,
+      const Shape& psif,
+      const DShape& dpsifds,
+      const DShape& dpsifdS,
+      const DShape& dpsifdS_div,
+      const Vector<double>& s,
+      const Vector<double>& interpolated_x,
+      const Vector<double>& interpolated_n,
+      const double& W,
+      const double& J)
+    {
+    }
+
+    /// Helper function to calculate the additional contributions
+    /// to the resisuals and Jacobian that arise from specific node update
+    /// strategies. This is called within the integration loop over the
+    /// element (for efficiency) and therefore requires a fairly large
+    /// number of input parameters:
+    /// - the velocity shape functions and their derivatives w.r.t.
+    ///   the local coordinates
+    /// - the surface gradient and divergence of the velocity shape
+    ///   functions
+    /// - The local and Eulerian coordinates,
+    /// - the outer unit normal,
+    /// - the integration weight from the integration scheme
+    /// - the Jacobian of the mapping between the local and global coordinates
+    ///   along the element. (Note that in the axisymmmetric case this
+    ///   includes the r term)!
+    virtual void add_additional_residual_with_mass_matrix_contributions_interface(
       Vector<double>& residuals,
       DenseMatrix<double>& jacobian,
       DenseMatrix<double>& mass_matrix,

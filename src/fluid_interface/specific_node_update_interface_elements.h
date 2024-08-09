@@ -300,7 +300,6 @@ namespace oomph
     void add_additional_residual_contributions_interface(
       Vector<double>& residuals,
       DenseMatrix<double>& jacobian,
-      DenseMatrix<double>& mass_matrix,
       const unsigned& flag,
       const Shape& psif,
       const DShape& dpsifds,
@@ -315,7 +314,6 @@ namespace oomph
       EQUATION_CLASS::add_additional_residual_contributions_interface(
         residuals,
         jacobian,
-        mass_matrix,
         flag,
         psif,
         dpsifds,
@@ -326,6 +324,41 @@ namespace oomph
         interpolated_n,
         W,
         J);
+    }
+
+    /// \short
+    /// Helper function to calculate the additional contributions
+    /// These are those filled in by the particular equations
+    void add_additional_residual_with_mass_matrix_contributions_interface(
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
+      const unsigned& flag,
+      const Shape& psif,
+      const DShape& dpsifds,
+      const DShape& dpsifdS,
+      const DShape& dpsifdS_div,
+      const Vector<double>& s,
+      const Vector<double>& interpolated_x,
+      const Vector<double>& interpolated_n,
+      const double& W,
+      const double& J)
+    {
+      EQUATION_CLASS::
+        add_additional_residual_with_mass_matrix_contributions_interface(
+          residuals,
+          jacobian,
+          mass_matrix,
+          flag,
+          psif,
+          dpsifds,
+          dpsifdS,
+          dpsifdS_div,
+          s,
+          interpolated_x,
+          interpolated_n,
+          W,
+          J);
     }
 
     /// Overload the output function
@@ -990,7 +1023,6 @@ namespace oomph
     void add_additional_residual_contributions_interface(
       Vector<double>& residuals,
       DenseMatrix<double>& jacobian,
-      DenseMatrix<double>& mass_matrix,
       const unsigned& flag,
       const Shape& psif,
       const DShape& dpsifds,
@@ -1005,7 +1037,6 @@ namespace oomph
       EQUATION_CLASS::add_additional_residual_contributions_interface(
         residuals,
         jacobian,
-        mass_matrix,
         flag,
         psif,
         dpsifds,
@@ -1022,7 +1053,6 @@ namespace oomph
       // Read out the dimension of the node
       const unsigned nodal_dimension = this->nodal_dimension();
 
-      const double st_local = EQUATION_CLASS::st();
       double interpolated_lagrange = 0.0;
       for (unsigned l = 0; l < n_node; l++)
       {
@@ -1065,7 +1095,62 @@ namespace oomph
             } // End of Jacobian calculation
           }
         }
+      } // End of loop over shape functions
+    }
 
+    /// Helper function to calculate the additional contributions
+    /// to be added at each integration point. This deals with
+    /// Lagrange multiplier contribution, as well as any
+    /// additional contributions by the other equations.
+    void add_additional_residual_with_mass_matrix_contributions_interface(
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
+      const unsigned& flag,
+      const Shape& psif,
+      const DShape& dpsifds,
+      const DShape& dpsifdS,
+      const DShape& dpsifdS_div,
+      const Vector<double>& s,
+      const Vector<double>& interpolated_x,
+      const Vector<double>& interpolated_n,
+      const double& W,
+      const double& J)
+    {
+      EQUATION_CLASS::
+        add_additional_residual_with_mass_matrix_contributions_interface(
+          residuals,
+          jacobian,
+          mass_matrix,
+          flag,
+          psif,
+          dpsifds,
+          dpsifdS,
+          dpsifdS_div,
+          s,
+          interpolated_x,
+          interpolated_n,
+          W,
+          J);
+
+      // Assemble Lagrange multiplier by loop over the shape functions
+      const unsigned n_node = this->nnode();
+      // Read out the dimension of the node
+      const unsigned nodal_dimension = this->nodal_dimension();
+
+      const double st_local = EQUATION_CLASS::st();
+      double interpolated_lagrange = 0.0;
+      for (unsigned l = 0; l < n_node; l++)
+      {
+        // Note same shape functions used for lagrange multiplier field
+        interpolated_lagrange += lagrange(l) * psif(l);
+      }
+
+      int local_eqn = 0, local_unknown = 0;
+
+      // Loop over the shape functions to assemble contributions
+      for (unsigned l = 0; l < n_node; l++)
+      {
         // Kinematic BC
         local_eqn = kinematic_local_eqn(l);
         if (local_eqn >= 0)
@@ -1095,7 +1180,6 @@ namespace oomph
         }
       }
     }
-
 
     /// Create an "bounding" element (here actually a 2D line element
     /// of type ElasticLineFluidInterfaceBoundingElement<ELEMENT> that allows

@@ -654,6 +654,19 @@ namespace oomph
       // of the node update (e.g. Lagrange multpliers etc)
       add_additional_residual_contributions_interface(residuals,
                                                       jacobian,
+                                                      flag,
+                                                      psif,
+                                                      dpsifds,
+                                                      dpsifdS,
+                                                      dpsifdS_div,
+                                                      s,
+                                                      interpolated_x,
+                                                      interpolated_n,
+                                                      W,
+                                                      J);
+
+      add_additional_residual_with_mass_matrix_contributions_interface(residuals,
+                                                      jacobian,
                                                       mass_matrix,
                                                       flag,
                                                       psif,
