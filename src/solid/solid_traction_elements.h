@@ -34,10 +34,11 @@
 #include <oomph-lib-config.h>
 #endif
 
-
 // OOMPH-LIB headers
 #include "../generic/Qelements.h"
 #include "../generic/hermite_elements.h"
+#include "../generic/refineable_elements.h"
+#include "../generic/fsi.h"
 
 namespace oomph
 {
@@ -50,10 +51,10 @@ namespace oomph
     //=======================================================================
     /// Default load function (zero traction)
     //=======================================================================
-    void Zero_traction_fct(const Vector<double>& xi,
-                           const Vector<double>& x,
-                           const Vector<double>& N,
-                           Vector<double>& load);
+    extern void Zero_traction_fct(const Vector<double>& xi,
+                                  const Vector<double>& x,
+                                  const Vector<double>& N,
+                                  Vector<double>& load);
 
   } // namespace SolidTractionElementHelper
 
