@@ -38,30 +38,21 @@ namespace oomph
       return el_pt->u_index_axi_nst(this->bulk_node_number(n), i);
     }
 
-    virtual int p_nodal_index_axi_nst(const unsigned& n) const
+    virtual int p_nodal_index_axi_nst() const
     {
       AxisymmetricNavierStokesEquationNumberingElement* el_pt =
         dynamic_cast<AxisymmetricNavierStokesEquationNumberingElement*>(
           this->bulk_element_pt());
-      return el_pt->p_nodal_index_axi_nst(this->bulk_node_number(n));
+      return el_pt->p_nodal_index_axi_nst();
     }
 
-    virtual inline unsigned momentum_index_axi_nst(const unsigned& n,
+    virtual inline unsigned axi_momentum_index_nst(const unsigned& n,
                                                    const unsigned& i) const
     {
       AxisymmetricNavierStokesEquationNumberingElement* el_pt =
         dynamic_cast<AxisymmetricNavierStokesEquationNumberingElement*>(
           this->bulk_element_pt());
-      return el_pt->momentum_index_axi_nst(this->bulk_node_number(n), i);
-    }
-
-    virtual inline unsigned continuity_nodal_index_axi_nst(
-      const unsigned& n) const
-    {
-      AxisymmetricNavierStokesEquationNumberingElement* el_pt =
-        dynamic_cast<AxisymmetricNavierStokesEquationNumberingElement*>(
-          this->bulk_element_pt());
-      return el_pt->continuity_nodal_index_axi_nst(this->bulk_node_number(n));
+      return el_pt->axi_momentum_index_nst(this->bulk_node_number(n), i);
     }
   };
 
