@@ -115,7 +115,7 @@ namespace oomph
   /// tend to be used in problems involving multiple fluids).
   //======================================================================
   class GeneralisedNewtonianAxisymmetricNavierStokesEquations
-    : public virtual AxisymNavierStokesEquationNumberingElement,
+    : public virtual AxisymmetricNavierStokesEquationNumberingElement,
       public virtual NavierStokesElementWithDiagonalMassMatrices
   {
   private:

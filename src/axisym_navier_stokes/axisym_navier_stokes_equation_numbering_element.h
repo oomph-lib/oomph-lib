@@ -44,7 +44,7 @@ namespace oomph
   /// Template-free base class for Navier-Stokes equations to avoid
   /// casting problems
   //======================================================================
-  class AxisymNavierStokesEquationNumberingElement
+  class AxisymmetricNavierStokesEquationNumberingElement
     : public virtual NavierStokesEquationNumberingElement
   {
   public:
