@@ -544,7 +544,7 @@ int main()
  
  // Do a couple of solutions for different forcing functions
  //---------------------------------------------------------
- unsigned nstep=4;
+ unsigned nstep=1;
  for (unsigned istep=0;istep<nstep;istep++)
   {
    cout << "\n\nSolving for TanhSolnForAdvectionDiffusion::Alpha="
@@ -560,7 +560,7 @@ int main()
    doc_info.number()++; 
 
    // Increase the steepness of the step:
-   TanhSolnForAdvectionDiffusion::Alpha=double(istep+1)*5.0;
+   TanhSolnForAdvectionDiffusion::Alpha=double(1.0)*5.0;
 
   }
 

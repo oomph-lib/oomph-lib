@@ -31,13 +31,15 @@
 // The Poisson equations
 #include "poisson.h"
 
-// The mesh
-#include "meshes/simple_rectangular_quadmesh.h"
+// Include the templated mesh header only -- the mesh is
+// precompiled and instantiated with the required element type
+// in the separate file, two_d_poisson2_mesh.cc to avoid
+// recompilation.
+#include "meshes/simple_rectangular_quadmesh.template.h"
 
 using namespace std;
 
 using namespace oomph;
-
 
 //===== start_of_namespace=============================================
 /// Namespace for exact solution for Poisson equation with "sharp step" 
@@ -58,7 +60,7 @@ namespace TanhSolnForPoisson
  }
 
  /// Source function required to make the solution above an exact solution 
- void source_function(const Vector<double>& x, double& source)
+ void get_source(const Vector<double>& x, double& source)
  {
   source = 2.0*tanh(-1.0+Alpha*(TanPhi*x[0]-x[1]))*
    (1.0-pow(tanh(-1.0+Alpha*(TanPhi*x[0]-x[1])),2.0))*
@@ -121,6 +123,7 @@ PoissonProblem<ELEMENT>::
       PoissonProblem(PoissonEquations<2>::PoissonSourceFctPt source_fct_pt)
        :  Source_fct_pt(source_fct_pt)
 { 
+
  // Setup mesh
 
  // # of elements in x-direction
@@ -141,13 +144,13 @@ PoissonProblem<ELEMENT>::
  // Set the boundary conditions for this problem: All nodes are
  // free by default -- only need to pin the ones that have Dirichlet conditions
  // here. 
- unsigned n_bound = mesh_pt()->nboundary();
- for(unsigned i=0;i<n_bound;i++)
+ unsigned num_bound = mesh_pt()->nboundary();
+ for(unsigned ibound=0;ibound<num_bound;ibound++)
   {
-   unsigned n_node = mesh_pt()->nboundary_node(i);
-   for (unsigned n=0;n<n_node;n++)
+   unsigned num_nod= mesh_pt()->nboundary_node(ibound);
+   for (unsigned inod=0;inod<num_nod;inod++)
     {
-     mesh_pt()->boundary_node_pt(i,n)->pin(0); 
+     mesh_pt()->boundary_node_pt(ibound,inod)->pin(0); 
     }
   }
 
@@ -183,19 +186,19 @@ template<class ELEMENT>
 void PoissonProblem<ELEMENT>::actions_before_newton_solve()
 {
  // How many boundaries are there?
- unsigned n_bound = mesh_pt()->nboundary();
+ unsigned num_bound = mesh_pt()->nboundary();
  
  //Loop over the boundaries
- for(unsigned i=0;i<n_bound;i++)
+ for(unsigned ibound=0;ibound<num_bound;ibound++)
   {
    // How many nodes are there on this boundary?
-   unsigned n_node = mesh_pt()->nboundary_node(i);
+   unsigned num_nod=mesh_pt()->nboundary_node(ibound);
 
    // Loop over the nodes on boundary
-   for (unsigned n=0;n<n_node;n++)
+   for (unsigned inod=0;inod<num_nod;inod++)
     {
      // Get pointer to node
-     Node* nod_pt=mesh_pt()->boundary_node_pt(i,n);
+     Node* nod_pt=mesh_pt()->boundary_node_pt(ibound,inod);
 
      // Extract nodal coordinates from node:
      Vector<double> x(2);
@@ -277,8 +280,8 @@ int main()
  // Create the problem with 2D nine-node elements from the
  // QPoissonElement family. Pass pointer to source function. 
  PoissonProblem<QPoissonElement<2,3> > 
-  problem(&TanhSolnForPoisson::source_function);
-
+  problem(&TanhSolnForPoisson::get_source);
+ 
  // Create label for output
  //------------------------
  DocInfo doc_info;
@@ -289,7 +292,7 @@ int main()
  // Step number
  doc_info.number()=0;
 
- // Check that we're ready to go:
+ // Check if we're ready to go:
  //----------------------------
  cout << "\n\n\nProblem self-test ";
  if (problem.self_test()==0) 
@@ -298,8 +301,8 @@ int main()
   }
  else 
   {
-   throw OomphLibError("Self test failed",
-                       OOMPH_CURRENT_FUNCTION,
+     throw OomphLibError("Self test failed",
+                         OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -333,7 +336,6 @@ int main()
    doc_info.number()++;
  
   }
-
 
 } //end of main
 
