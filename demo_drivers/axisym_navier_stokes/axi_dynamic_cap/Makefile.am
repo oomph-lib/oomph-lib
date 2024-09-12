@@ -1,66 +1,6 @@
 #Include commands common to every Makefile.am
 include $(top_srcdir)/config/makefile_templates/demo_drivers
 
-all: run_singular_tests
-	./run_singular_tests --run_test=fix
-#gdb -ex r --args ./run_singular_tests --run_test=fix
-
-all_programs: unsteady_run \
-	steady_run \
-	obtuse_steady_run \
-	axisym_stability_run \
-	linear_steady_run \
-	linear_unsteady_run \
-	linear_stability_run \
-	obtuse_linear_stability_run \
-	create_parameter_files \
-	neutral_stability_run \
-	obtuse_neutral_stability_run \
-	neutral_stability_continuation_run \
-	axisym_neutral_stability_run \
-	perturb_z_run \
-	continuation_run \
-	adapt_run \
-	custom_continuation_run \
-	custom_ca_continuation_run \
-	arc_continuation_run \
-	bifurcation_tracking_run \
-	debug_jacobian_run \
-	debug_linear_jacobian_run \
-	perturb_by_eigensolution_run \
-	continue_neutral_stability_run \
-	continue_solution_limit_run \
-	arc_continuation_upto_limit_point_run \
-	height_continuation_run \
-	ca_height_continuation_run \
-	obtuse_bo_height_continuation_run \
-	obtuse_ca_height_continuation_run \
-	test_volume_constraint \
-	run_tests \
-	run_singular_tests
-
-lin: linear_stability_run
-	./linear_stability_run default_parameters.dat
-#./convert_and_display_perturbed.sh RESLT
-
-# gcov requires running "make check" so it is worth ensuring all the prerequisites for the code
-# coverage is in place.
-coverage.info: $(wildcard *.cc) $(wildcard *.h)
-	make clean
-	make check 
-	gcov %.cc
-	lcov --directory . --capture --output-file coverage.info	
-
-coverage/index.html: coverage.info
-	genhtml --demangle-cpp -o coverage coverage.info
-
-# Run code coverage
-coverage: coverage/index.html 
-	gopen coverage/index.html
-
-clean-coverage:
-	rm *.gcov *.gcda *.gcno
-
 # Name of executables
 check_PROGRAMS= \
 	unsteady_run \
