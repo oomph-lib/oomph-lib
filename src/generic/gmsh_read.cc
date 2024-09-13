@@ -8,12 +8,16 @@
 #include <cmath>
 #include <algorithm>
 #include <iomanip>
-#include <set>
+
 
 
 
 /*! Constructor*/
-GMSH::Gmsh::Gmsh(const std::string &filename, bool verbose):verbose_(verbose) {
+GMSH::Gmsh::Gmsh(const std::string &filename, bool verbose): verbose_(verbose)
+{
+    // start timing reading the file
+    auto start_time = std::chrono::high_resolution_clock::now();
+
     mshFile.open(filename);
     std::string line;
 
@@ -31,7 +35,7 @@ GMSH::Gmsh::Gmsh(const std::string &filename, bool verbose):verbose_(verbose) {
                     exit(EXIT_FAILURE);
                 }
             } else if (line == "$PhysicalNames") {
-                int nPhysical;
+                int nPhysical=defFlag;
                 std::getline(mshFile, line);  // Read the number of physical groups
                 std::istringstream(line) >> nPhysical;
 
@@ -187,7 +191,8 @@ GMSH::Gmsh::Gmsh(const std::string &filename, bool verbose):verbose_(verbose) {
                     }
                     vEntities.push_back(volume);
                 }
-            } else if (line == "$Nodes") {
+            } else if (line == "$Nodes")
+            {
                 int tmp;
                 int numEntityBlocks, numNodes, maxNodeTag;
                 std::getline(mshFile, line);
@@ -238,7 +243,8 @@ GMSH::Gmsh::Gmsh(const std::string &filename, bool verbose):verbose_(verbose) {
                     else
                         count += numNodesInBlock;
                 }
-            } else if (line == "$Elements") {
+            } else if (line == "$Elements")
+            {
                 int tmp;
                 int numEntityBlocks, numElem, minElementTag, maxElementTag;
                 std::getline(mshFile, line);
@@ -280,8 +286,22 @@ GMSH::Gmsh::Gmsh(const std::string &filename, bool verbose):verbose_(verbose) {
 
                         // if it's an edge/line
                         if (elements[count + j].elementType == ElementType::Line_) {
-                            for (int k = 0; k < 2; ++k) {
+                            for (int k = 0; k < 2; ++k)
+                            {
                                 iss >> tmp;
+
+                                // shift to start from zero
+                                elements[count + j].edgeTags[k] = tmp - minNodeTag;
+                            }
+                        }
+                        if (elements[count + j].elementType == ElementType::Line2ndOrder_) {
+                            // resize tags to accommodate the new element type
+                            elements[count + j].edgeTags.resize(3,-1);
+
+                            for (int k = 0; k < 3; ++k)
+                            {
+                                iss >> tmp;
+
                                 // shift to start from zero
                                 elements[count + j].edgeTags[k] = tmp - minNodeTag;
                             }
@@ -295,10 +315,30 @@ GMSH::Gmsh::Gmsh(const std::string &filename, bool verbose):verbose_(verbose) {
                                 elements[count + j].quadTags[k] = tmp - minNodeTag;
                             }
                         }
+                        if (elements[count + j].elementType == ElementType::Quadrilateral2ndOrder_) {
+                            // resize tags to accommodate the new element type
+                            elements[count + j].quadTags.resize(9,-1);
+
+                            for (int k = 0; k < 9; ++k) {
+                                iss >> tmp;
+                                // shift it to start from zero
+                                elements[count + j].quadTags[k] = tmp - minNodeTag;
+                            }
+                        }
 
                         // if it's hex
-                        if (elements[count + j].elementType == ElementType::Hexahedron_) {
+                        if (elements[count + j].elementType == ElementType::Hexahedral_) {
                             for (int k = 0; k < 8; ++k) {
+                                iss >> tmp;
+                                // shift to start from zero
+                                elements[count + j].hexTags[k] = tmp - minNodeTag;
+                            }
+                        }
+                        if (elements[count + j].elementType == ElementType::Hexahedral2ndOrder_) {
+                            // resize tags to accommodate the new element type
+                            elements[count + j].hexTags.resize(20,-1);
+
+                            for (int k = 0; k < 20; ++k) {
                                 iss >> tmp;
                                 // shift to start from zero
                                 elements[count + j].hexTags[k] = tmp - minNodeTag;
@@ -326,28 +366,20 @@ GMSH::Gmsh::Gmsh(const std::string &filename, bool verbose):verbose_(verbose) {
     // Find internals nodes and create new [Quads and/or Hexas]
     kernel();
 
-    fillInTags();
     /// renumbering B.C. section
     renumber();
+
 
     // mesh info
     printInfo(verbose_);
 
+    // end timing reading the file
+    auto end_time = std::chrono::high_resolution_clock::now();
+    duration = end_time - start_time;
+
+    std::cout <<"read "<< filename << " file in " << duration.count() << " [s]."<<std::endl;
 }
 
-// Function to pass the name and get B.C. number
-int GMSH::Gmsh::getBoundaryId(const std::string& name)
-{
-    for (auto boundary : boundaries)
-    {
-        auto it = boundary.physicalNames.find(name);
-        if (it != boundary.physicalNames.end())
-        {
-            return orderedBC[it->second];
-        }
-    }
-    throw std::runtime_error("Boundary Name Not Found!");
-}
 
 /*! Get boundaries from entities. */
 void GMSH::Gmsh::entityTagToBoundaries() {
@@ -359,9 +391,9 @@ void GMSH::Gmsh::entityTagToBoundaries() {
             for (auto &pEntity: pEntities) {
                 tuple = {};
                 if (pEntity.numPhysicalTags != 0) {
-                    tuple.tag = pEntity.pointTag;
+                    tuple.entityTag = pEntity.pointTag;
                     tuple.boundary = pEntity.physicalTags;
-                    tuple.dim = EntityType::Point_;
+                    tuple.EntityType = EntityType::Point_;
                     // save it
                     tuples.push_back(tuple);
                 }
@@ -371,9 +403,9 @@ void GMSH::Gmsh::entityTagToBoundaries() {
             for (auto &cEntity: cEntities) {
                 tuple = {};
                 if (cEntity.numPhysicalTags != 0) {
-                    tuple.tag = cEntity.curveTag;
+                    tuple.entityTag = cEntity.curveTag;
                     tuple.boundary = cEntity.physicalTags;
-                    tuple.dim = EntityType::Curve_;
+                    tuple.EntityType = EntityType::Curve_;
                     // save it
                     tuples.push_back(tuple);
                 }
@@ -383,9 +415,9 @@ void GMSH::Gmsh::entityTagToBoundaries() {
             for (auto &sEntity: sEntities) {
                 tuple = {};
                 if (sEntity.numPhysicalTags != 0) {
-                    tuple.tag = sEntity.surfaceTag;
+                    tuple.entityTag = sEntity.surfaceTag;
                     tuple.boundary = sEntity.physicalTags;
-                    tuple.dim = EntityType::Surface_;
+                    tuple.EntityType = EntityType::Surface_;
                     // save it
                     tuples.push_back(tuple);
                 }
@@ -395,9 +427,9 @@ void GMSH::Gmsh::entityTagToBoundaries() {
             for (auto &vEntity: vEntities) {
                 tuple = {};
                 if (vEntity.numPhysicalTags != 0) {
-                    tuple.tag = vEntity.volumeTag;
+                    tuple.entityTag = vEntity.volumeTag;
                     tuple.boundary = vEntity.physicalTags;
-                    tuple.dim = EntityType::Volume_;
+                    tuple.EntityType = EntityType::Volume_;
                     // save it
                     tuples.push_back(tuple);
                 }
@@ -409,21 +441,25 @@ void GMSH::Gmsh::entityTagToBoundaries() {
 /*!@brief renumberBCondition the boundaries. Gmsh gives the user the flexibility to
  * choose the numbering, however oomph-lib require the numbering starting from 0.
  * */
-void GMSH::Gmsh::renumberBCondition() {
-    for (auto &b: boundaries) {
-        renumberOld.push_back(b.tag);
+void GMSH::Gmsh::renumberBCondition()
+{
+    for (auto &b: boundaries)
+    {
+        oldNumber.push_back(b.tag);
     }
-    sort(renumberOld.begin(), renumberOld.end());
+    sort(oldNumber.begin(), oldNumber.end());
 
-    for (int i = 0; i < renumberOld.size(); ++i) {
-        orderedBC[renumberOld[i]] = i + 1; // delete the one if you want 0 based b.c.
+    for (int i = 0; i < oldNumber.size(); ++i) {
+        orderedBC[oldNumber[i]] = i + 1; // delete the one if you want 0 based b.c.
     }
 }
 
 /*! Fill in [nodes] vector */
-void GMSH::Gmsh::collectNodes() {
-    for (auto &vertex: vertices) {
-        if (vertex.nodeTag == -1) continue; // do not go down but increment i
+void GMSH::Gmsh::collectNodes()
+{
+    for (auto &vertex: vertices)
+    {
+        if (vertex.nodeTag == defFlag) continue; // do not go down but increment i
         nodes[vertex.nodeTag].nodeTag = vertex.nodeTag;
         nodes[vertex.nodeTag].coord = {vertex.x, vertex.y, vertex.z};
 
@@ -435,9 +471,11 @@ void GMSH::Gmsh::collectNodes() {
         // assign BC
         for (auto &tuple: tuples)
         {
-            if (tuple.tag == nodes[vertex.nodeTag].entityTag &&
-                tuple.dim == EntityType::Surface_) {
-                nodes[vertex.nodeTag].boundaries = tuple.boundary;
+            if (tuple.entityTag == nodes[vertex.nodeTag].entityTag && tuple.EntityType == EntityType::Point_)
+            {
+                // because node has boundary clear its boundary set
+                nodes[vertex.nodeTag].boundaries.clear();
+                nodes[vertex.nodeTag].boundaries.insert(tuple.boundary.begin(), tuple.boundary.end());
             }
         }
     }
@@ -447,15 +485,27 @@ void GMSH::Gmsh::collectNodes() {
 void GMSH::Gmsh::kernel()
 {
     /// Gmsh always put the highest element type last in order.
-    if (elements.back().elementType == ElementType::Quadrilateral_) {
-        // Set nodesPerElement
-        nodesPerElement = 4;
+    if (elements.back().elementType == ElementType::Quadrilateral_ ||
+        elements.back().elementType == ElementType::Quadrilateral2ndOrder_)
+    {
+        if (elements.back().elementType == ElementType::Quadrilateral2ndOrder_)
+        {
+            // Set nodesPerElement
+            nodesPerElement = 9;
 
-        // Set edgesPerElement
-        edgesPerElement = 4;
+            // Set edgesPerElement
+            edgesPerElement = 4;
 
-        // Set nFacePerElement keep the initial val. [No faces for Quads]
-        facesPerElement = -1;
+        } else
+        {
+            // Set nodesPerElement
+            nodesPerElement = 4;
+
+            // Set edgesPerElement
+            edgesPerElement = 4;
+
+        }
+
 
         // collect Edges
         collectEdges();
@@ -469,12 +519,14 @@ void GMSH::Gmsh::kernel()
             correctOrientation(quad);
 
             addMissingEdge(quad);
-        }
 
+            /// Fill in Tags
+            fillInTags( quad);
+        }
     }
 
     // if the last element is hexahedral
-    if (elements.back().elementType == ElementType::Hexahedron_)
+    if (elements.back().elementType == ElementType::Hexahedral_)
     {
         // Set nodesPerElement
         nodesPerElement = 8;
@@ -518,6 +570,9 @@ void GMSH::Gmsh::kernel()
 
             // Add quad if it is not in the quads list
             addMissingQuad(hex);
+
+            // Fill in Tags
+            fillInTags(hex);
         }
     }
 }
@@ -528,9 +583,9 @@ bool GMSH::Gmsh::collectEdges()
     bool isEdges = false;
     int counter = 0;
 
-    for (auto const &element: elements) {
+    std::for_each(elements.begin(), elements.end(), [&](const Element& element){
         Edge edge;
-        if (element.elementType == ElementType::Line_) {
+        if (element.elementType == ElementType::Line_ || element.elementType==ElementType::Line2ndOrder_) {
             edge.entityDim = element.entityDim;
             edge.entityTag = element.entityTag;
 
@@ -539,14 +594,22 @@ bool GMSH::Gmsh::collectEdges()
             edge.nodesTag = element.edgeTags;
 
             // assign BC
-            for (auto &tuple: tuples) {
-                if (tuple.tag == edge.entityTag && tuple.dim == EntityType::Curve_) {
-                    edge.boundaries = tuple.boundary;
+            for (auto &tuple: tuples)
+            {
+                if (tuple.entityTag == edge.entityTag && tuple.EntityType == EntityType::Curve_)
+                {
+                    auto it = edge.boundaries.find(defFlag);
+                    edge.boundaries.erase(*it);
+                    edge.boundaries.insert(tuple.boundary.begin(), tuple.boundary.end());
 
                     // and then, assign BC to nodes
-                    for (auto &nodeTag: edge.nodesTag) {
-                        nodes[nodeTag].boundaries = tuple.boundary;
+                    for (auto &nodeTag: edge.nodesTag)
+                    {
+                        it = nodes[nodeTag].boundaries.find(defFlag);
+                        nodes[nodeTag].boundaries.erase(*it);
+                        nodes[nodeTag].boundaries.insert(tuple.boundary.begin() , tuple.boundary.end());
                     }
+
                 }
             }
 
@@ -556,7 +619,7 @@ bool GMSH::Gmsh::collectEdges()
             // I found edges element
             isEdges = true;
         }
-    }
+    });
 
     return isEdges;
 }
@@ -567,8 +630,10 @@ bool GMSH::Gmsh::collectQuads()
     bool isQuad = false;
     int counter = 0;
     // if elementType = 3 add it to the list of quads
-    for (auto const &element: elements) {
-        if (element.elementType == ElementType::Quadrilateral_) {
+    for (auto const &element: elements)
+    {
+        if (element.elementType == Quadrilateral_ ||
+            element.elementType == Quadrilateral2ndOrder_) {
             Quad quad;
             quad.entityTag = element.entityTag;
             quad.entityDim = element.entityDim;
@@ -578,15 +643,22 @@ bool GMSH::Gmsh::collectQuads()
             quad.nodesTag = element.quadTags;
 
             // assign  the BC
-            for (auto &tuple: tuples) {
-                if (tuple.tag == quad.entityTag && tuple.dim == quad.entityDim) {
+            for (auto &tuple: tuples)
+            {
+                if (tuple.entityTag == quad.entityTag && tuple.EntityType == quad.entityDim)
+                {
+                    auto it = quad.boundaries.find(defFlag);
+                    quad.boundaries.erase(*it);
                     // assign  the BC to the current quad
-                    quad.boundaries = tuple.boundary;
+                    quad.boundaries.insert(tuple.boundary.begin(), tuple.boundary.end()) ;
 
                     // and then, loop over the current quad nodes and give them the
                     // same BC of the quad
-                    for (auto &nodeTag: quad.nodesTag) {
-                        nodes[nodeTag].boundaries = tuple.boundary;
+                    for (auto &nodeTag: quad.nodesTag)
+                    {
+                        it = nodes[nodeTag].boundaries.find(defFlag);
+                        nodes[nodeTag].boundaries.erase(*it);
+                        nodes[nodeTag].boundaries.insert(tuple.boundary.begin(), tuple.boundary.end()) ;
                     }
                 }
             }
@@ -603,13 +675,14 @@ bool GMSH::Gmsh::collectQuads()
 }
 
 /*! Fill in [hexas] vector */
-bool GMSH::Gmsh::collectHexas() {
+bool GMSH::Gmsh::collectHexas()
+{
     bool isHexas = false;
     int counter = 0;
     for (auto &element: elements) {
         Hexa hexa;
 
-        if (element.elementType == ElementType::Hexahedron_) {
+        if (element.elementType == Hexahedral_) {
             hexa.entityDim = element.entityDim;
             hexa.entityTag = element.entityTag;
 
@@ -619,14 +692,21 @@ bool GMSH::Gmsh::collectHexas() {
             hexa.boundaries = element.boundaries;
 
             // assign BC
-            for (auto &tuple: tuples) {
-                if (tuple.tag == hexa.entityTag && tuple.dim == hexa.entityDim) {
-                    hexa.boundaries = tuple.boundary;
+            for (auto &tuple: tuples)
+            {
+                if (tuple.entityTag == hexa.entityTag && tuple.EntityType == hexa.entityDim)
+                {
+                    auto it = hexa.boundaries.find(defFlag);
+                    hexa.boundaries.erase(*it);
+                    hexa.boundaries.insert(tuple.boundary.begin(), tuple.boundary.end()) ;
 
                     // and then, loop over the current quad nodes and give them the
                     // same BC of the quad
-                    for (auto &nodeTag: hexa.nodesTag) {
-                        nodes[nodeTag].boundaries = tuple.boundary;
+                    for (auto &nodeTag: hexa.nodesTag)
+                    {
+                        it = nodes[nodeTag].boundaries.find(defFlag);
+                        nodes[nodeTag].boundaries.erase(*it);
+                        nodes[nodeTag].boundaries.insert(tuple.boundary.begin(), tuple.boundary.end());
                     }
                 }
             }
@@ -667,40 +747,101 @@ void GMSH::Gmsh::addMissingEdge(Quad& quad)
 void GMSH::Gmsh::renumber()
 {
     // renumber nodes bc
-    for (auto &node: nodes) {
-        for (int &bound: node.boundaries) {
-            if (bound != -1)
-                bound = orderedBC[bound];
+    for (auto &node: nodes)
+    {
+        for (auto it = node.boundaries.begin(); it != node.boundaries.end(); ) {
+            int boundary = *it;
+
+            // If the current boundary needs to be replaced
+            if (boundary != defFlag) {
+                // Replace the old boundary condition with the new one
+                it = node.boundaries.erase(it);  // Erase and move to the next iterator
+                node.boundaries.insert(orderedBC[boundary]);  // Insert the new boundary
+            } else {
+                ++it;  // Move to the next element if no deletion
+            }
         }
     }
 
-    // renumber quads bc
-    for (auto &quad: quads) {
-        for (int &bound: quad.boundaries) {
-            if (bound != -1)
-                bound = orderedBC[bound];
-        }
-    }
-
-    /// Assign b.c. for edges and hexas
-    // Assign b.c. to edges
+    // Renumber the edges to the new numbering scheme
     for (auto &edge: edges)
     {
-        int n0 = edge.nodesTag[0];
-        int n1 = edge.nodesTag[1];
-        if (nodes[n0].boundaries == nodes[n1].boundaries)
+        for (int boundary : edge.boundaries)
         {
-            edge.boundaries = nodes[n0].boundaries;
+            // this erases the old b.c. value and replace it  with the new one
+            auto it = edge.boundaries.find(boundary);
+            if (it  != edge.boundaries.end() && *it != defFlag)
+            {
+                edge.boundaries.erase(*it);// delete the old b.c. value
+                edge.boundaries.insert(orderedBC[boundary]); // replace it with the new b.c.
+            }
         }
     }
 
-    // assign b.c. for hexas
-    for (auto& hexa: hexas) {
-        for (int qTag: hexa.quadsTag) {
-            if (quads[qTag].boundaries[0]>0) hexa.boundaries[0] = quads[qTag].boundaries[0];
-            if (hexa.boundaries[0] == -1) hexa.boundaries[0] = 0;
+    if (getMeshDim()==2)
+    {
+        // Renumber the Quads to the new numbering scheme
+        for (auto &quad: quads) {
+            for (int eTag: quad.edgesTag) {
+                quad.boundaries.insert(edges[eTag].boundaries.begin(), edges[eTag].boundaries.end());
+            }
+
+            // Delete the defFlag if it exists
+            if (quad.boundaries.size() > 1 && quad.boundaries.find(defFlag) != quad.boundaries.end()) {
+                quad.boundaries.erase(defFlag);
+            }
         }
     }
+
+
+    if (getMeshDim() == 3)
+    {
+        // Renumber the Quads to the new numbering scheme
+        for (auto &quad: quads)
+        {
+            for (int boundary: quad.boundaries)
+            {
+                // this erases the old b.c. value and replace it  with the new one
+                auto it = quad.boundaries.find(boundary);
+                if (it  != quad.boundaries.end() && *it != defFlag)
+                {
+                    quad.boundaries.erase(*it);  // delete the old b.c. value
+                    quad.boundaries.insert(orderedBC[boundary]); // replace it with the new b.c.
+
+                    // Assign edges B.C.
+                    for (auto eTag:quad.edgesTag)
+                    {
+                        edges[eTag].boundaries.insert(orderedBC[boundary]);
+
+                        // Delete the defFlag if it exists
+                        if (edges[eTag].boundaries.size() > 1 &&
+                            edges[eTag].boundaries.find(defFlag) != edges[eTag].boundaries.end())
+                        {
+                            edges[eTag].boundaries.erase(defFlag);
+                        }
+                    }
+                }
+
+
+            }
+        }
+
+        // Assign b.c. for hexas
+        for (auto& hex: hexas)
+        {
+            for (int qTag: hex.quadsTag)
+            {
+                hex.boundaries.insert(quads[qTag].boundaries.begin(), quads[qTag].boundaries.end());
+            }
+
+            // Delete the defFlag if it exists
+            if (hex.boundaries.size() > 1 && hex.boundaries.find(defFlag) != hex.boundaries.end())
+            {
+                hex.boundaries.erase(defFlag);
+            }
+        }
+    }
+
 }
 
 void GMSH::Gmsh::addInternalEdge(std::vector<int> &line) {
@@ -721,7 +862,7 @@ void GMSH::Gmsh::addInternalQuad(std::vector<int> &face) {
     Quad quad;
     quad.quadTag = tag + 1;
     quad.nodesTag = face;
-    quads.push_back(quad);
+    quads.emplace_back(quad);
 }
 
 /*! Function to check vectors of the same length if they are similar.
@@ -739,7 +880,7 @@ bool GMSH::Gmsh::areSimilar(std::vector<int> a, std::vector<int> b) {
 bool GMSH::Gmsh::correctOrientation(Quad &quad) {
     bool ordered = false;
     int num_ccw = 0;
-    for (int i = 0; i < quad.nodesTag.size(); ++i) {
+    for (int i = 0; i < 4; ++i) {
         const int tag1 = quad.nodesTag[i];
         const int tag2 = quad.nodesTag[(i + 1) % 4];
         const int tag3 = quad.nodesTag[(i + 2) % 4];
@@ -749,7 +890,7 @@ bool GMSH::Gmsh::correctOrientation(Quad &quad) {
         std::vector<double> node3 = nodes[tag3].coord;
         const double dotprod =
                 (node2[0] - node1[0]) * (node3[1] - node2[1]) - (node2[1] - node1[1]) * (node3[0] - node2[0]);
-        if (dotprod > 0.0) ++num_ccw;
+        if (dotprod < 0.0) ++num_ccw;
     }
 
     if (num_ccw == 0) {
@@ -771,24 +912,41 @@ bool GMSH::Gmsh::correctOrientation(Quad &quad) {
 /*! @brief Check the orientation. */
 bool GMSH::Gmsh::correctOrientation(const Hexa &hex)
 {
-    const std::vector<double> cc = getCenter(hex);
+    const std::vector<double> pyrCenter = getCenter(hex);
 
     // Get outwards pointing faces.
     std::vector<Quad> faces = getFaces(hex);
 
-    for (auto &face: faces) {
-        std::vector<double> aa = getArea(face.nodesTag);
-        std::vector<double> pp = nodes[face.nodesTag[0]].coord;
-        //std::cout << " Dot Product= " << ((pp - cc) & aa) << std::endl;
+    // we just need the first and second face (I think: two faces check is enough!)
+    std::vector<Quad> quads_ = {faces[0], faces[1]};
 
-        // Check if vector from any point on face to cc points outwards
-        if (((pp - cc) & aa) < 0) {
+    auto isCorrectOriented = [&](Quad& face) {
+        std::vector<double> aa = getArea(face.nodesTag);
+        std::vector<double> fCenter = getCenter(face.nodesTag);
+
+        if (((fCenter - pyrCenter) & aa) < 0)
+        {
             // Incorrectly oriented
             return false;
         }
-    }
+        return true;
+    };
 
-    return true;
+    return std::all_of(quads_.begin(), quads_.end(), isCorrectOriented);
+
+    /* for (auto &face: quads_) {
+         std::vector<double> aa = getArea(face.nodesTag);
+
+         std::vector<double> fCenter = getCenter(face.nodesTag);
+
+         // Check if vector from any point on face to cc points outwards
+         if (((fCenter - pyrCenter) & aa) < 0) {
+             // Incorrectly oriented
+             return false;
+         }
+     }
+
+     return true;*/
 }
 
 /*! @brief get faces form current hexa. */
@@ -806,6 +964,20 @@ std::vector<GMSH::Quad> GMSH::Gmsh::getFaces(const Hexa &hexa) {
 std::vector<GMSH::Edge> GMSH::Gmsh::getEdges(const Quad &quad) {
     std::vector<Edge> lines(4);
 
+    //for line with 3 nodes
+    if (quad.nodesTag.size() == 9){
+        lines[0].nodesTag.resize(3);
+        lines[0].nodesTag = {quad.nodesTag[0], quad.nodesTag[1], quad.nodesTag[4]};
+        lines[1].nodesTag.resize(3);
+        lines[1].nodesTag = {quad.nodesTag[1], quad.nodesTag[2], quad.nodesTag[5]};
+        lines[2].nodesTag.resize(3);
+        lines[2].nodesTag = {quad.nodesTag[2], quad.nodesTag[3], quad.nodesTag[6]};
+        lines[3].nodesTag.resize(3);
+        lines[3].nodesTag = {quad.nodesTag[3], quad.nodesTag[0], quad.nodesTag[7]};
+        return lines;
+    }
+
+    // for 2 nodes line
     lines[0].nodesTag = {quad.nodesTag[0], quad.nodesTag[1]};
     lines[1].nodesTag = {quad.nodesTag[1], quad.nodesTag[2]};
     lines[2].nodesTag = {quad.nodesTag[2], quad.nodesTag[3]};
@@ -891,68 +1063,92 @@ std::vector<double> GMSH::Gmsh::getArea(const std::vector<int> &points) {
     return 0.5 * sumA;
 }
 
-void GMSH::Gmsh::fillInTags()
+void GMSH::Gmsh::fillInTags(Hexa& hexa)
 {
-    for (auto& hexa: hexas)
-    {
-        /// filling quads tags for hexas
-        int qCount = 0;
-        // getting quads/faces for current hexa
-        for (auto &face: getFaces(hexa))
-        {
-            for (auto &quad: quads)
-            {
-                if (areSimilar(face.nodesTag, quad.nodesTag))
-                {
-                    hexa.quadsTag[qCount] = quad.quadTag;
-                    qCount++;
-                }
+    /// Filling QUADS tags for hexas
+    int qCount = 0;
 
-                /// filling edges tags for quads
-                int eCount = 0;
-                for (auto &line: getEdges(quad))
+    // Getting quads/faces for current hexa
+    for (auto &face: getFaces(hexa))
+    {
+        for (auto &quad: quads)
+        {
+            if (areSimilar(face.nodesTag, quad.nodesTag))
+            {
+                hexa.quadsTag[qCount] = quad.quadTag;
+                qCount++;
+            }
+
+            /// filling edges tags for quads
+            int eCount = 0;
+            for (auto &line: getEdges(quad))
+            {
+                for (auto & edge: edges)
                 {
-                    for (auto & edge: edges)
+                    if (areSimilar(line.nodesTag, edge.nodesTag))
                     {
-                        if (areSimilar(line.nodesTag, edge.nodesTag))
-                        {
-                            quad.edgesTag[eCount] = edge.edgeTag;
-                            eCount++;
-                        }
+                        quad.edgesTag[eCount] = edge.edgeTag;
+                        eCount++;
                     }
                 }
-
             }
-        }
 
-        /// filling edges tags for hexas
-        std::set<int> edgeSet;
-        for (auto& quad: hexa.quadsTag)
+        }
+    }
+
+    /// Filling edges tags for hexas
+    std::set<int> edgeSet;
+    for (auto& quad: hexa.quadsTag)
+    {
+        for (auto& edge: quads[quad].edgesTag)
         {
-            for (auto& edge: quads[quad].edgesTag)
+            edgeSet.insert(edge);
+        }
+    }
+
+    // If the size of the edgeSet is not 12 exit
+    if (edgeSet.size()!= 12)
+    {
+        std::cout <<"number of edges per hex is wrong!"<<std::endl;
+        exit(-1);
+    }
+
+    std::vector<int> lines(edgeSet.begin(), edgeSet.end());
+
+    for (int i = 0; i < lines.size(); ++i)
+    {
+        hexa.edgesTag[i] = lines[i];
+    }
+
+}
+
+void GMSH::Gmsh::fillInTags(Quad& quad)
+{
+    /// filling edges tags for quads
+    int eCount = 0;
+    for (auto &line: getEdges(quad))
+    {
+        for (auto & edge: edges)
+        {
+            if (areSimilar(line.nodesTag, edge.nodesTag))
             {
-                edgeSet.insert(edge);
+                quad.edgesTag[eCount] = edge.edgeTag;
+                eCount++;
             }
         }
-
-        // if the size of the edgeSet is not 12 exit
-        if (edgeSet.size()!= 12)
-        {
-            std::cout <<"number of edges per hex is wrong!"<<std::endl;
-            exit(-1);
-        }
-
-        std::vector<int> lines(edgeSet.begin(), edgeSet.end());
-
-        for (int i = 0; i < lines.size(); ++i)
-        {
-            hexa.edgesTag[i] = lines[i];
-        }
-
     }
 }
 
 /// Getters
+
+const std::vector<GMSH::Node> &GMSH::Gmsh::getNodes() const { return nodes; }
+
+const std::vector<GMSH::Edge> &GMSH::Gmsh::getEdges() const { return edges; }
+
+const std::vector<GMSH::Quad> &GMSH::Gmsh::getQuads() const { return quads; }
+
+const std::vector<GMSH::Hexa> &GMSH::Gmsh::getHexas() const{ return hexas; }
+
 unsigned GMSH::Gmsh::getBoundSize() const { return boundaries.size(); }
 
 unsigned GMSH::Gmsh::getNodesSize() const { return nodes.size(); }
@@ -963,11 +1159,14 @@ unsigned GMSH::Gmsh::getQuadsSize() const { return quads.size(); }
 
 unsigned GMSH::Gmsh::getHexasSize() const { return hexas.size(); }
 
-unsigned GMSH::Gmsh::getMeshDim() const {
+unsigned GMSH::Gmsh::getMeshDim() const
+{
     unsigned dim = 3;
-    if (elements.back().elementType == ElementType::Hexahedron_) { dim = 3; }
+    if (elements.back().elementType == ElementType::Hexahedral_||
+        elements.back().elementType == ElementType::Hexahedral2ndOrder_) { dim = 3; }
 
-    if (elements.back().elementType == ElementType::Quadrilateral_) { dim = 2; }
+    if (elements.back().elementType == ElementType::Quadrilateral_ ||
+        elements.back().elementType == ElementType::Quadrilateral2ndOrder_) { dim = 2; }
     return dim;
 }
 
@@ -977,17 +1176,10 @@ int GMSH::Gmsh::getEdgesPerElement() const { return edgesPerElement; }
 
 int GMSH::Gmsh::getFacesPerElement() const { return facesPerElement; }
 
-std::vector<GMSH::Node> &GMSH::Gmsh::getNodes() { return nodes; }
-
-std::vector<GMSH::Edge> &GMSH::Gmsh::getEdges() { return edges; }
-
-std::vector<GMSH::Quad> &GMSH::Gmsh::getQuads() { return quads; }
-
-std::vector<GMSH::Hexa> &GMSH::Gmsh::getHexas() { return hexas; }
 
 void GMSH::Gmsh::printInfo(bool info = false) {
     int width = 2, precision = 6;
-    std::cout << "GMSH Reader Info ..." << std::endl;
+    std::cout << "\nStart mesh Reader Info ..." << std::endl;
     std::cout << "   Statistics:" << std::endl;
     std::cout << "      # of Nodes: " << nodes.size() << std::endl;
     std::cout << "      # of Edges: " << edges.size() << std::endl;
@@ -995,8 +1187,9 @@ void GMSH::Gmsh::printInfo(bool info = false) {
     std::cout << "      # of Hexas: " << hexas.size() << std::endl;
     std::cout << "      # of bc   : " << boundaries.size() << std::endl;
     std::cout << "   Renumbering: " << std::endl;
+    std::cout << "End mesh Reader Info ...\n" << std::endl;
 
-    for (int i: renumberOld) {
+    for (int i: oldNumber) {
         std::cout << "      bc: " << i << " ---> " << std::setw(width)
                   << std::setfill('0') << std::setprecision(precision)
                   << orderedBC[i] << std::endl;
@@ -1099,7 +1292,7 @@ void GMSH::Gmsh::quadsInfo() {
 
 void GMSH::Gmsh::hexasInfo() {
     if (hexas.empty()) {
-        std::cout << "It is 2D mesh!";
+        std::cout << "2D mesh ";
         return;
     }
 
@@ -1141,19 +1334,23 @@ void GMSH::Gmsh::hexasInfo() {
 }
 
 /// Utilities
-bool GMSH::Gmsh::inList(std::vector<int> &q, std::vector<Edge> &E) {
+bool GMSH::Gmsh::inList(std::vector<int> &edge, std::vector<Edge>& Edges) {
     // loop over the quads and see if face is there
-    for (auto &e: E) {
-        if (areSimilar(q, e.nodesTag)) return true;
-    }
-    return false;
+    return std::any_of(Edges.begin(), Edges.end(), [&](const Edge &e)
+    {
+        return areSimilar(edge,e.nodesTag);
+    });
 }
 
 
-bool GMSH::Gmsh::inList(std::vector<int> &q, std::vector<Quad> &Q) {
+bool GMSH::Gmsh::inList(std::vector<int> &q, std::vector<Quad> &Q)
+{
     // loop over the quads and see if face is there
-    for (auto &quad: Q) {
-        if (areSimilar(q, quad.nodesTag)) return true;
-    }
-    return false;
+    return std::any_of(Q.begin(), Q.end(), [&](const Quad& quad)
+    {
+        return areSimilar(q,quad.nodesTag);
+    });
 }
+
+
+

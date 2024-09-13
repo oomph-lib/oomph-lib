@@ -12,6 +12,8 @@
 #include <map>
 #include <limits>
 #include <unordered_map>
+#include <set>
+#include <chrono>
 
 namespace GMSH
 {
@@ -19,11 +21,14 @@ namespace GMSH
     static const double small = std::numeric_limits<double>::epsilon();
     static const double vSmall= std::numeric_limits<double>::min();
 
+    // default flag to initialize all the components of the structs
+    static const int defFlag = 0;
+
     struct Tuple
     {
-        int tag = -1;
+        int entityTag = defFlag;
         std::vector<int> boundary;
-        int dim = -1;
+        int EntityType = defFlag;
     };
 
     struct Boundary
@@ -36,88 +41,88 @@ namespace GMSH
     /*! \brief: This for point entities. */
     struct Point
     {
-        int pointTag=-1, numPhysicalTags = -1;
+        int pointTag=defFlag, numPhysicalTags = defFlag;
         double x=0.0, y=0.0, z=0.0;
-        std::vector<int> physicalTags = {-1};
+        std::vector<int> physicalTags = {defFlag};
     };
 
     /*! \brief: This for curve entities. */
     struct Curve
     {
-        int curveTag=-1, numPhysicalTags=-1;
-        std::vector<int> physicalTags={-1};
-        int numBoundingPoints = -1;
-        std::vector<int> pointTags ={-1,-1};
+        int curveTag=defFlag, numPhysicalTags=defFlag;
+        std::vector<int> physicalTags={defFlag};
+        int numBoundingPoints = defFlag;
+        std::vector<int> pointTags ={defFlag,defFlag};
     };
 
     /*! \brief: This for surface entities. */
     struct Surface
     {
-        int surfaceTag=-1, numPhysicalTags=-1;
-        std::vector<int> physicalTags={-1};
-        int numBoundingCurves=-1;
-        std::vector<int> curveTags={-1,-1,-1,-1};
+        int surfaceTag=defFlag, numPhysicalTags=defFlag;
+        std::vector<int> physicalTags={defFlag};
+        int numBoundingCurves=defFlag;
+        std::vector<int> curveTags={defFlag,defFlag,defFlag,defFlag};
     };
 
     /*! \brief: This for volume entities. */
     struct Volume
     {
-        int volumeTag=-1, numPhysicalTags=-1;
-        std::vector<int> physicalTags={-1};
+        int volumeTag=defFlag, numPhysicalTags=defFlag;
+        std::vector<int> physicalTags={defFlag};
         int numBoundingSurfaces= 6;
-        std::vector<int> surfaceTags = {-1,-1,-1,-1,-1,-1};
+        std::vector<int> surfaceTags = {defFlag,defFlag,defFlag,defFlag,defFlag,defFlag};
     };
 
     /*! \brief: This for the point entity of the entity mesh. */
     struct Vertex {
-        int entityDim = -1, entityTag = -1, parametric_ = -1, numNodesInBlock = -1;
-        int nodeTag = -1;
+        int entityDim = defFlag, entityTag = defFlag, parametric_ = defFlag, numNodesInBlock = defFlag;
+        int nodeTag = defFlag;
         double x = 0.0, y = 0.0, z = 0.0;
-        std::vector<int> boundaries={-1};
+        std::vector<int> boundaries={defFlag};
     };
 
     /*! \brief: This for elements including points, edges, quads and hex elements. */
     struct Element
     {
-        int entityDim = -1, entityTag = -1, elementType = -1, numElementsInBlock = -1;
-        int elementTag = -1;
+        int entityDim = defFlag, entityTag = defFlag, elementType = defFlag, numElementsInBlock = defFlag;
+        int elementTag = defFlag;
         int nodeTag;
-        std::vector<int> edgeTags = {-1, -1};
-        std::vector<int> quadTags = {-1, -1, -1, -1};
-        std::vector<int> hexTags  = {-1, -1, -1, -1, -1, -1, -1, -1};
-        std::vector<int> boundaries = {-1};
+        std::vector<int> edgeTags = {defFlag, defFlag};
+        std::vector<int> quadTags = {defFlag, defFlag, defFlag, defFlag};
+        std::vector<int> hexTags  = {defFlag, defFlag, defFlag, defFlag, defFlag, defFlag, defFlag, defFlag};
+        std::set<int> boundaries = {defFlag};
     };
 
     /*! \brief: This for actual node of the mesh. */
     struct Node
     {
-        int entityDim = -1, nodeTag = -1, entityTag = -1;
+        int entityDim = defFlag, nodeTag = defFlag, entityTag = defFlag;
         std::vector<double> coord {0.0,0.0,0.0};
-        std::vector<int> boundaries = {0};
+        std::set<int> boundaries = {defFlag};
     };
 
     struct Edge
     {
-        int entityDim = -1, entityTag = -1, edgeTag = -1;
-        std::vector<int> nodesTag = {-1, -1};
-        std::vector<int> boundaries = {0};
+        int entityDim = defFlag, entityTag = defFlag, edgeTag = defFlag;
+        std::vector<int> nodesTag = {defFlag, defFlag};
+        std::set<int> boundaries = {defFlag};
     };
 
     struct Quad
     {
-        int entityDim = -1, entityTag = -1,  quadTag = -1;
-        std::vector<int> nodesTag = {-1, -1, -1, -1};
-        std::vector<int> edgesTag = {-1, -1, -1, -1};
-        std::vector<int> boundaries={0};
+        int entityDim = defFlag, entityTag = defFlag,  quadTag = defFlag;
+        std::vector<int> nodesTag = {defFlag, defFlag, defFlag, defFlag};
+        std::vector<int> edgesTag = {defFlag, defFlag, defFlag, defFlag};
+        std::set<int> boundaries={defFlag};
     };
 
     struct Hexa
     {
-        int entityDim = -1, entityTag = -1,  hexaTag = -1;
-        std::vector<int> nodesTag = {-1, -1, -1, -1, -1, -1, -1, -1};
-        std::vector<int> edgesTag = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
-        std::vector<int> quadsTag = {-1, -1, -1, -1, -1, -1};
-        std::vector<int> boundaries = {0};
+        int entityDim = defFlag, entityTag = defFlag,  hexaTag = defFlag;
+        std::vector<int> nodesTag = {defFlag, defFlag, defFlag, defFlag, defFlag, defFlag, defFlag, defFlag};
+        std::vector<int> edgesTag = {defFlag, defFlag, defFlag, defFlag, defFlag, defFlag, defFlag, defFlag, defFlag, defFlag, defFlag, defFlag};
+        std::vector<int> quadsTag = {defFlag, defFlag, defFlag, defFlag, defFlag, defFlag};
+        std::set<int> boundaries = {defFlag};
     };
 
     template<typename T>
@@ -272,6 +277,7 @@ namespace GMSH
 
     class Gmsh  {
     public:
+        Gmsh() = default;
 
         explicit Gmsh(const std::string &filename, bool verbose=false);
 
@@ -287,13 +293,18 @@ namespace GMSH
         /// Destructor
         ~Gmsh() = default;
 
-        std::vector<Node>& getNodes();
+        const std::vector<Node>& getNodes() const;
 
-        std::vector<Edge>& getEdges();
+        virtual Node& getNode(size_t n) { return nodes[n];}
 
-        std::vector<Quad>& getQuads();
+        const std::vector<Edge>& getEdges() const;
+        Edge& getEdge(size_t e) { return edges[e];}
 
-        std::vector<Hexa>& getHexas();
+        const std::vector<Quad>& getQuads() const;
+        Quad& getQuad(size_t q) { return quads[q];}
+
+        const std::vector<Hexa>& getHexas() const;
+        Hexa& getHexa(size_t h) { return hexas[h];}
 
         static std::vector<Quad> getFaces(const Hexa& hexa);
 
@@ -328,6 +339,10 @@ namespace GMSH
         void hexasInfo();
 
         int getBoundaryId(const std::string& bName);
+
+        std::vector<Boundary> boundaries;
+
+        std::unordered_map<int, int> orderedBC;
     private:
         static bool inList(std::vector<int>& q, std::vector<Edge>& E);
 
@@ -351,7 +366,9 @@ namespace GMSH
 
         void kernel();
 
-        void fillInTags();
+        void fillInTags(Hexa& hexa);
+
+        void fillInTags(Quad& quad);
 
         void addInternalEdge(std::vector<int>& line);
 
@@ -382,6 +399,7 @@ namespace GMSH
 
         std::vector<double> getArea(const std::vector<int>& points);
 
+
     private:
         // flag to show all info
         bool verbose_ = false;
@@ -397,7 +415,7 @@ namespace GMSH
         std::vector<Curve> cEntities;
         std::vector<Surface> sEntities;
         std::vector<Volume> vEntities;
-        std::vector<Boundary> boundaries;
+
 
 
         /// Vertex, and Elements
@@ -419,11 +437,15 @@ namespace GMSH
         std::vector<std::vector<int>> internalQuads;
 
         /// Element types
-        enum ElementType{
+        enum ElementType
+        {
             Vertex_ = 15, // point
             Line_ = 1,    // edge
             Quadrilateral_ = 3, // face
-            Hexahedron_ = 5 // brick
+            Hexahedral_ = 5 ,// brick
+            Line2ndOrder_ = 8,
+            Quadrilateral2ndOrder_ = 10,
+            Hexahedral2ndOrder_ = 12
         };
 
         enum EntityType{
@@ -433,18 +455,21 @@ namespace GMSH
             Volume_ = 3
         };
 
-        int nodesPerElement = -1;
+        int nodesPerElement = defFlag;
 
-        int edgesPerElement = -1;
+        int edgesPerElement = defFlag;
 
-        int facesPerElement = -1;
+        int facesPerElement = defFlag;
 
         //
         std::vector<Tuple> tuples;
 
-        std::vector<int> renumberOld;
-        std::unordered_map<int, int> orderedBC;
+        std::vector<int> oldNumber;
+
+        // timing
+        std::chrono::duration<double> duration {};
 
     };
 }
 #endif //GMSH_H
+
