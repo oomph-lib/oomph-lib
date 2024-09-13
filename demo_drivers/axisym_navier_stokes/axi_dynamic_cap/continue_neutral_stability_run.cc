@@ -28,7 +28,7 @@ using namespace oomph;
 
 // Define types
 typedef HijackedProjectableAxisymmetricTTaylorHoodPVDElement BASE_ELEMENT;
-typedef OverlayingMyLinearElement PERTURBED_ELEMENT;
+typedef OverlayingMyLinearElement<BASE_ELEMENT> PERTURBED_ELEMENT;
 typedef BDF<2> TIMESTEPPER;
 typedef AxisymDynamicCapProblem<BASE_ELEMENT, TIMESTEPPER> BASE_PROBLEM;
 typedef PerturbedLinearStabilityCapProblem<BASE_ELEMENT,

@@ -1318,7 +1318,7 @@ namespace oomph
           {
             for (unsigned p = 0; p < 3; p++)
             {
-              el_pt->fix_lagrange_multiplier(p, 0.0);
+              el_pt->pin_lagrange_multiplier(p);
               // Pin RC and RS
               dynamic_cast<SolidNode*>(el_pt->node_pt(p))->pin_position(0);
               dynamic_cast<SolidNode*>(el_pt->node_pt(p))->pin_position(1);
@@ -1351,7 +1351,7 @@ namespace oomph
         {
           if (el_pt->node_pt(m)->x(0) <= 0.5)
           {
-            el_pt->fix_lagrange_multiplier(m, 0.0);
+            el_pt->pin_lagrange_multiplier(m);
             // Pin RC and RS
             dynamic_cast<SolidNode*>(el_pt->node_pt(m))->pin_position(0);
             dynamic_cast<SolidNode*>(el_pt->node_pt(m))->pin_position(1);
@@ -1394,7 +1394,7 @@ namespace oomph
         for (unsigned i_nod = 0; i_nod < n_nod; i_nod++)
         {
           // Get boundary node
-          el_pt->fix_lagrange_multiplier(i_nod, value);
+          el_pt->pin_lagrange_multiplier(i_nod);
         }
       }
 
@@ -1441,7 +1441,7 @@ namespace oomph
           const unsigned n_nod = no_penetration_element_pt->nnode();
           for (unsigned i_nod = 0; i_nod < n_nod; i_nod++)
           {
-            no_penetration_element_pt->fix_lagrange_multiplier(i_nod, value);
+            no_penetration_element_pt->pin_lagrange_multiplier(i_nod);
           }
         }
       }
@@ -1462,7 +1462,7 @@ namespace oomph
                 Outer_boundary_with_slip_id))
           {
             // Get boundary node
-            el_pt->fix_lagrange_multiplier(i_nod, 0.0);
+            el_pt->pin_lagrange_multiplier(i_nod);
           }
         }
       }
@@ -1482,7 +1482,7 @@ namespace oomph
           if (el_pt->node_pt(i_nod)->is_on_boundary(Inner_boundary_id))
           {
             // Get boundary node
-            el_pt->fix_lagrange_multiplier(i_nod, 0.0);
+            el_pt->pin_lagrange_multiplier(i_nod);
           }
         }
       }
@@ -1504,7 +1504,7 @@ namespace oomph
             if (no_penetration_element_pt->node_pt(i_nod)->is_on_boundary(
                   Free_surface_boundary_id))
             {
-              no_penetration_element_pt->fix_lagrange_multiplier(i_nod, 0.0);
+              no_penetration_element_pt->pin_lagrange_multiplier(i_nod);
             }
           }
         }
