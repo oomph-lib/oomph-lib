@@ -151,7 +151,7 @@ int main(int argc, char** argv)
   base_problem.close_trace_files();
 
   // Create the linear stability problem
-  typedef OverlayingMyLinearElement PERTURBED_ELEMENT;
+  typedef OverlayingMyLinearElement<BASE_ELEMENT> PERTURBED_ELEMENT;
   PerturbedLinearStabilityCapProblem<BASE_ELEMENT,
                                      PERTURBED_ELEMENT,
                                      TIMESTEPPER>

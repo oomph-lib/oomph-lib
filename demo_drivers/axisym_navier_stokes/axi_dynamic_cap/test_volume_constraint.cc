@@ -41,7 +41,7 @@ int main()
   base_problem.steady_newton_solve();
   base_problem.doc_solution();
 
-  typedef OverlayingMyLinearElement PERTURBED_ELEMENT;
+  typedef OverlayingMyLinearElement<BASE_ELEMENT> PERTURBED_ELEMENT;
   PerturbedLinearStabilityCapProblem<BASE_ELEMENT,
                                      PERTURBED_ELEMENT,
                                      TIMESTEPPER>

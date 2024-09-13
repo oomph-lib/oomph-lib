@@ -64,7 +64,7 @@ using namespace std;
 using namespace oomph;
 
 typedef HijackedProjectableAxisymmetricTTaylorHoodPVDElement BASE_ELEMENT;
-typedef OverlayingMyLinearElement PERTURBED_ELEMENT;
+typedef OverlayingMyLinearElement<BASE_ELEMENT> PERTURBED_ELEMENT;
 typedef BDF<2> TIMESTEPPER;
 
 void solve_for_base_state(

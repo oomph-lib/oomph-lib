@@ -159,7 +159,7 @@ int main(int argc, char** argv)
   //====================================================================
 
   // Create the linear stability problem
-  typedef OverlayingMyLinearElement PERTURBED_ELEMENT;
+  typedef OverlayingMyLinearElement<BASE_ELEMENT> PERTURBED_ELEMENT;
   PerturbedLinearStabilityCapProblem<BASE_ELEMENT,
                                      PERTURBED_ELEMENT,
                                      TIMESTEPPER>
