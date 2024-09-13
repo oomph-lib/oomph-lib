@@ -2,6 +2,7 @@
 #define MY_EIGENPROBLEM_HEADER
 
 #include "generic.h"
+#include "generic/trilinos_eigen_solver.h"
 #include "complex_less.h"
 
 namespace oomph
@@ -52,9 +53,8 @@ namespace oomph
 
       std::sort(eig_index.rbegin(),
                 eig_index.rend(),
-                [&eigenvalues, &cl](unsigned i1, unsigned i2) {
-                  return cl(eigenvalues[i1], eigenvalues[i2]);
-                });
+                [&eigenvalues, &cl](unsigned i1, unsigned i2)
+                { return cl(eigenvalues[i1], eigenvalues[i2]); });
 
       for (unsigned i = 0; i < n_eval; i++)
       {
@@ -101,9 +101,8 @@ namespace oomph
 
       std::sort(eig_index.rbegin(),
                 eig_index.rend(),
-                [&eigenvalues, &cl](unsigned i1, unsigned i2) {
-                  return cl(eigenvalues[i1], eigenvalues[i2]);
-                });
+                [&eigenvalues, &cl](unsigned i1, unsigned i2)
+                { return cl(eigenvalues[i1], eigenvalues[i2]); });
 
       Vector<Vector<double>> eigenvector_magnitude;
       Vector<Vector<double>> eigenvector_argument;
@@ -206,12 +205,11 @@ namespace oomph
       Vector<unsigned>::iterator max1 =
         std::max_element(eig_index.begin(),
                          eig_index.end(),
-                         [&eigenvalues, &cl](unsigned i1, unsigned i2) {
-                           return cl(eigenvalues[i1], eigenvalues[i2]);
-                         });
+                         [&eigenvalues, &cl](unsigned i1, unsigned i2)
+                         { return cl(eigenvalues[i1], eigenvalues[i2]); });
 
-      cout << "max: " << *max1 << endl;
-      cout << "Eigenvalue: " << eigenvalues[*max1] << endl;
+      std::cout << "max: " << *max1 << std::endl;
+      std::cout << "Eigenvalue: " << eigenvalues[*max1] << std::endl;
 
       // Add eigensolution to the current state
       this->add_eigenvector_to_dofs(amplitude, eigenvector_real[*max1]);
@@ -245,9 +243,8 @@ namespace oomph
 
       std::sort(eig_index.rbegin(),
                 eig_index.rend(),
-                [&eigenvalues, &cl](unsigned i1, unsigned i2) {
-                  return cl(eigenvalues[i1], eigenvalues[i2]);
-                });
+                [&eigenvalues, &cl](unsigned i1, unsigned i2)
+                { return cl(eigenvalues[i1], eigenvalues[i2]); });
 
       check_eigensolution(sorted_eigenvalues[0],
                           eigenvector_real[eig_index[0]]);
