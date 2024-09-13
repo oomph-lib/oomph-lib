@@ -192,12 +192,39 @@ BOOST_AUTO_TEST_CASE(singular_problem_creation_obtuse)
 // ***
 // Test linear problem from a singular problem
 BOOST_AUTO_TEST_SUITE(linear_stability)
-BOOST_AUTO_TEST_CASE(linear_singular_problem)
+BOOST_AUTO_TEST_CASE(linear_singular_problem_mode_0)
 {
   shared_ptr<SINGULAR_PROBLEM> problem_pt = createSingularProblem();
+  problem_pt->adapt();
   problem_pt->steady_newton_solve();
   std::shared_ptr<PERTURBED_PROBLEM> linear_problem_pt =
-    createLinearProblem(problem_pt);
+    createLinearProblem(problem_pt, 0);
+  Vector<std::complex<double>> eigenvalue =
+    linear_problem_pt->solve_and_document_n_most_unstable_eigensolutions(1);
+  printf("%16.11g \n", eigenvalue[0].real());
+  BOOST_TEST(abs(eigenvalue[0].real() - (-0.24783965941010913)) < 1e-6);
+}
+
+BOOST_AUTO_TEST_CASE(linear_singular_problem_mode_1)
+{
+  shared_ptr<SINGULAR_PROBLEM> problem_pt = createSingularProblem();
+  problem_pt->adapt();
+  problem_pt->steady_newton_solve();
+  std::shared_ptr<PERTURBED_PROBLEM> linear_problem_pt =
+    createLinearProblem(problem_pt, 1);
+  Vector<std::complex<double>> eigenvalue =
+    linear_problem_pt->solve_and_document_n_most_unstable_eigensolutions(1);
+  printf("%16.11g \n", eigenvalue[0].real());
+  BOOST_TEST(abs(eigenvalue[0].real() - (-0.24783965941010913)) < 1e-6);
+}
+
+BOOST_AUTO_TEST_CASE(linear_singular_problem_mode_2)
+{
+  shared_ptr<SINGULAR_PROBLEM> problem_pt = createSingularProblem();
+  problem_pt->adapt();
+  problem_pt->steady_newton_solve();
+  std::shared_ptr<PERTURBED_PROBLEM> linear_problem_pt =
+    createLinearProblem(problem_pt, 1);
   Vector<std::complex<double>> eigenvalue =
     linear_problem_pt->solve_and_document_n_most_unstable_eigensolutions(1);
   printf("%16.11g \n", eigenvalue[0].real());
