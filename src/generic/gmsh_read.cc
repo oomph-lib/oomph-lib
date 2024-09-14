@@ -1192,7 +1192,7 @@ void GMSH::Gmsh::printInfo(bool info = false) {
     for (int i: oldNumber) {
         std::cout << "      bc: " << i << " ---> " << std::setw(width)
                   << std::setfill('0') << std::setprecision(precision)
-                  << orderedBC[i] << std::endl;
+                  << orderedBC[i]-1 << std::endl;
     }
 
     // print all the info
