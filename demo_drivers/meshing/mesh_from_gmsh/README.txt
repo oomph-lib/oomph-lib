@@ -1,5 +1,5 @@
 # This is discription on how to use gmsh in oomphlib
-- use gmsh software to generate .msh file (please visit gmsh.com)
+- use gmsh software to generate .msh file (please visit https://gmsh.info/)
 - oomphlib gmsh reader renumber boundaries starting from zero e.g. if you have in .msh file 
 $PhysicalNames
 6
