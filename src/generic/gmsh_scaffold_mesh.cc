@@ -25,7 +25,7 @@
 // LIC//====================================================================
 
 #include "gmsh_scaffold_mesh.h"
-#include "gmsh_read.h"
+
 
 namespace oomph
 {
@@ -46,6 +46,8 @@ namespace oomph
         // Process the element file
         // --------------------------
         GMSH::Gmsh rg(file_name, verbose);
+        boundaries = rg.boundaries;
+        orderedBC = rg.orderedBC;
         std::vector<GMSH::Node> nodes = rg.getNodes();
         std::vector<GMSH::Edge> edges = rg.getEdges();
 
@@ -124,7 +126,7 @@ namespace oomph
         Vector<double> x_node(n_node);
         Vector<double> y_node(n_node);
         Vector<double> z_node(n_node);
-        Vector<int>    bound(n_node);
+        Vector<Vector<int>>    bound(n_node);
 
         // Check if there are attributes
         // If not
@@ -134,10 +136,13 @@ namespace oomph
             y_node[i] = nodes[i].coord[1];
             z_node[i] = nodes[i].coord[2];
 
-            for (int j = 0; j < nodes[i].boundaries.size(); ++j)
-            {
-                bound[i] = nodes[i].boundaries[j];
+            bound[i].resize(nodes[i].boundaries.size());
+            int c = 0;
+            for (auto it = nodes[i].boundaries.begin(); it != nodes[i].boundaries.end(); ++it) {
+                bound[i][c] = *it;
+                c++;
             }
+
         }
 
         // Determine the highest boundary index
@@ -178,7 +183,8 @@ namespace oomph
             forth_node[i]  = faces[i].nodesTag[3];
 
             // \todo: what if more than b.c.?
-            face_boundary[i] = faces[i].boundaries[0];
+            auto it = faces[i].boundaries.begin();
+            face_boundary[i] = *it;
 
             // Add the face index to each node
             node_on_faces[first_node[i]].insert(i);
@@ -194,16 +200,16 @@ namespace oomph
         }
 
         // Translate enumeration
-        Vector<unsigned> oomph_to_gmsh_node(8);
-        oomph_to_gmsh_node[0] = 0;
-        oomph_to_gmsh_node[1] = 1;
-        oomph_to_gmsh_node[2] = 3;
-        oomph_to_gmsh_node[3] = 2;
+        Vector<unsigned> gmsh_to_oomph_node(8);
+        gmsh_to_oomph_node[0] = 0;
+        gmsh_to_oomph_node[1] = 1;
+        gmsh_to_oomph_node[2] = 3;
+        gmsh_to_oomph_node[3] = 2;
 
-        oomph_to_gmsh_node[4] = 4;
-        oomph_to_gmsh_node[5] = 5;
-        oomph_to_gmsh_node[6] = 7;
-        oomph_to_gmsh_node[7] = 6;
+        gmsh_to_oomph_node[4] = 4;
+        gmsh_to_oomph_node[5] = 5;
+        gmsh_to_oomph_node[6] = 7;
+        gmsh_to_oomph_node[7] = 6;
 
         // Create the elements
         unsigned counter = 0;
@@ -218,29 +224,34 @@ namespace oomph
                 if (!done[global_node_number])
                 {
                     // If we're on a boundary
-                    // [gmsh convention 0 or bigger is a boundary, -1 not a boundary]
-                    if (bound[global_node_number] > 0)
+                    // [gmsh convention 1 or greater is a boundary, 0 not a boundary]
+                    for (int i = 0; i < bound[global_node_number].size(); ++i)
                     {
-                        // Construct the boundary node
-                        Node_pt[global_node_number] = finite_element_pt(e)->construct_boundary_node(oomph_to_gmsh_node[j]);
+                        if (bound[global_node_number][i] > 0)
+                        {
+                            // Construct the boundary node
+                            Node_pt[global_node_number] = finite_element_pt(e)->construct_boundary_node(gmsh_to_oomph_node[j]);
 
-                        // Add to the boundary lookup scheme
-                        add_boundary_node(bound[global_node_number]  - 1,Node_pt[global_node_number]);
-                    }
-                    else
-                    {
-                        Node_pt[global_node_number] = finite_element_pt(e)->construct_node(oomph_to_gmsh_node[j]);
+                            // Add to the boundary lookup scheme.
+                            // bound[global_node_number]-1 because vector indexing starts from 0
+                            add_boundary_node(bound[global_node_number][i] - 1 ,Node_pt[global_node_number]);
+                        }
+                        else
+                        {
+                            Node_pt[global_node_number] = finite_element_pt(e)->construct_node(gmsh_to_oomph_node[j]);
+                        }
+
+                        done[global_node_number] = true;
+                        Node_pt[global_node_number]->x(0) = x_node[global_node_number];
+                        Node_pt[global_node_number]->x(1) = y_node[global_node_number];
+                        Node_pt[global_node_number]->x(2) = z_node[global_node_number];
                     }
 
-                    done[global_node_number] = true;
-                    Node_pt[global_node_number]->x(0) = x_node[global_node_number];
-                    Node_pt[global_node_number]->x(1) = y_node[global_node_number];
-                    Node_pt[global_node_number]->x(2) = z_node[global_node_number];
                 }
                 else
                 {
                     // Otherwise copy the pointer over
-                    finite_element_pt(e)->node_pt(oomph_to_gmsh_node[j]) = Node_pt[global_node_number];
+                    finite_element_pt(e)->node_pt(gmsh_to_oomph_node[j]) = Node_pt[global_node_number];
                 }
                 counter++;
             }
@@ -259,8 +270,8 @@ namespace oomph
         // face nodes.
         // The faces that lie on boundaries will have already been allocated so
         // we can start from there
-        for (auto face: faces) {
-            if (face.boundaries[0] == 0) Nglobal_face++;
+        for (auto& face: faces) {
+            if (*face.boundaries.begin() == 0) Nglobal_face++;
         }
 
 
@@ -306,28 +317,29 @@ namespace oomph
             // already been visited The global index for the i-th face will be stored
             // in Face_index[i]
 
-            GMSH::Hexa brick = bricks[e];
+            GMSH::Hexa& brick = bricks[e];
             // Loop over the local faces in the element
             for (unsigned i = 0; i < brick.quadsTag.size(); ++i)
             {
-                std::vector<int> facesTags = brick.quadsTag;
+                //std::vector<int> facesTags = brick.quadsTag;
 
                 // Otherwise we already have a face
-                GMSH::Quad face = faces[brick.quadsTag[i]];
+                GMSH::Quad& face = faces[brick.quadsTag[i]];
 
-                if (face.boundaries[0] > 0 )
+                auto it_b = face.boundaries.begin();
+                if (*it_b > 0 )
                 {
                     // Set the face index
                     Face_index[e][i] = face.quadTag;
 
                     // Allocate the boundary index, if it's a boundary
-                    Face_boundary[e][i] = face.boundaries[0];
+                    Face_boundary[e][i] = *it_b;
 
                     // Add the nodes to the boundary look-up scheme in
                     // oomph-lib (0-based) index
                     for (int nodeTag : face.nodesTag)
                     {
-                        auto b = nodes[nodeTag].boundaries[0] - 1;
+                        auto b = *it_b - 1;
                         // Don't add the omitted node
                         add_boundary_node(b, Node_pt[nodeTag]);
                     }
@@ -348,7 +360,7 @@ namespace oomph
             {
                 std::vector<int> edgesTags = brick.edgesTag;
 
-                GMSH::Edge edge = edges[edgesTags[i]];
+                GMSH::Edge& edge = edges[edgesTags[i]];
 
                 // Allocate the next global index
                 Edge_index[e][i] = edge.edgeTag;
@@ -369,16 +381,15 @@ namespace oomph
         Edge_boundary.resize(Nglobal_edge, false);
 
         // Now loop over all the boundary faces and mark that all edges
-        // must also lie on the bounadry
+        // must also lie on the boundary
         for (unsigned i = 0; i < edges.size(); ++i)
         {
-            if (edges[i].boundaries[0] > 0)
+            if (*edges[i].boundaries.begin() > 0)
             {
                 Edge_boundary[i] = true;
             }
         }
     } // end of constructor
-
 
 
 } // namespace oomph

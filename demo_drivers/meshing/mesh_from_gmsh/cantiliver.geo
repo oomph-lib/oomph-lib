@@ -2,8 +2,8 @@ lx = 0.20;
 ly = 0.02;
 lz = 0.02;
 
-nyz = 3; // number of celss in y and z directions
-nx = 20;// number of cells in x direction
+nyz = 3;
+nx = 20;
 //+
 Point(1) = {0.0, 0.0, 0.0, 1.0};
 Point(2) = {0.0, ly, 0.0, 1.0};
@@ -29,12 +29,15 @@ Extrude {lx, 0, 0} {
   Surface{1}; Layers {nx}; Recombine;
 }
 //+
-Physical Surface("XMIN", 27) = {1}; // Left boundary at x=0
+Physical Surface("XMIN", 27) = {1};
 //+
-Physical Surface("XMAX", 28) = {26}; // right boundary at x = L
+Physical Surface("XMAX", 28) = {26};
+//+
+Physical Surface("ZMAX", 33) = {17};
+//+
+Physical Surface("ZMIN", 34) = {25};
+//+
+Physical Surface("YMAX", 36) = {13};
+//+
+Physical Surface("YMIN", 35) = {21};
 
-// Meshing 
-// Open this file in gmsh and go to Mesh then press 3d , then press file 
-// on top left corner and Expoert the mesh make sure to selelct all 
-// elements option and choose the latest version 
- 

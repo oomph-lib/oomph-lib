@@ -53,15 +53,17 @@ namespace oomph
         }
 
         /// Constructor with the input files
-        explicit GmshMesh(const std::string& filename,
-                          TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
+        explicit GmshMesh(const std::string& filename, bool verbose,
+                          TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper )
         {
             // Mesh can only be built with 3D Qelements.
             MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(3);
 
 
             // Build scaffold
-            Tmp_mesh_pt = new GmshScaffoldMesh(filename);
+            Tmp_mesh_pt = new GmshScaffoldMesh(filename, verbose);
+            boundaries = Tmp_mesh_pt->boundaries;
+            orderedBC = Tmp_mesh_pt->orderedBC;
 
             // Convert mesh from scaffold to actual mesh
             build_from_scaffold(time_stepper_pt);
@@ -75,6 +77,9 @@ namespace oomph
         ~GmshMesh() override = default;
 
 
+        std::vector<GMSH::Boundary> boundaries;
+
+        std::unordered_map<int, int> orderedBC;
     protected:
         /// Temporary scaffold mesh
         GmshScaffoldMesh* Tmp_mesh_pt = nullptr;
@@ -90,38 +95,19 @@ namespace oomph
     //=========================================================================
     template<class ELEMENT>
     class SolidGmshMesh : public virtual GmshMesh<ELEMENT>,
-                            public virtual SolidMesh
+                          public virtual SolidMesh
     {
     public:
         /// Constructor. Boundary coordinates are setup
         /// automatically.
-        explicit SolidGmshMesh(const std::string& file_name,
+        explicit SolidGmshMesh(const std::string& file_name, bool verbose,
                         TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
-                : GmshMesh<ELEMENT>(file_name, time_stepper_pt)
+                : GmshMesh<ELEMENT>(file_name, verbose, time_stepper_pt)
         {
             // Assign the Lagrangian coordinates
             set_lagrangian_nodal_coordinates();
         }
 
-        /// Constructor. Boundary coordinates are re-setup
-        /// automatically, with the orientation of the outer unit
-        /// normal determined by switch_normal.
-        SolidGmshMesh(const std::string& file_name,
-                        const bool& switch_normal,
-                        TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
-                : GmshMesh<ELEMENT>(file_name, time_stepper_pt)
-        {
-            // Assign the Lagrangian coordinates
-            set_lagrangian_nodal_coordinates();
-
-            // Re-setup boundary coordinates for all boundaries with specified
-            // orientation of nnormal
-            unsigned nb = this->nboundary();
-            for (unsigned b = 0; b < nb; b++)
-            {
-                this->template setup_boundary_coordinates<ELEMENT>(b, switch_normal);
-            }
-        }
 
         /// Empty Destructor
         ~SolidGmshMesh() override = default;
@@ -131,3 +117,4 @@ namespace oomph
 } // namespace oomph
 
 #endif
+

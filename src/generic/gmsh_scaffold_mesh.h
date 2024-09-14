@@ -28,10 +28,7 @@
 
 #include "mesh.h"
 #include "Qelements.h"
-
-// Include the data structure from gmsh
-//#include "../../external_src/oomph_gmsh/gmsh.h"
-//#include "oomph_gmsh/gmsh.h" do not need this header because I am reading gmsh mesh file only 
+#include "gmsh_read.h"
 
 namespace oomph
 {
@@ -46,7 +43,7 @@ namespace oomph
         GmshScaffoldMesh() = default;
 
         /// Constructor: Pass the filename of the hexahedral file
-        GmshScaffoldMesh(const std::string& file_name);
+        GmshScaffoldMesh(const std::string& file_name, bool verbose);
 
         /// Empty destructor
         ~GmshScaffoldMesh() {}
@@ -109,6 +106,9 @@ namespace oomph
             return Element_attribute[e];
         }
 
+        std::vector<GMSH::Boundary> boundaries;
+
+        std::unordered_map<int, int> orderedBC;
 
     protected:
         /// Storage for the number of global faces
@@ -145,3 +145,4 @@ namespace oomph
 } // namespace oomph
 
 #endif
+

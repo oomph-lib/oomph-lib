@@ -107,11 +107,10 @@ namespace oomph
                     scaffold_node_pt->get_boundaries_pt(boundaries_pt);
 
                     // Is it on boundaries?
-                    if (boundaries_pt != 0)
+                    if (boundaries_pt != nullptr)
                     {
                         // Create new boundary node
-                        Node* new_node_pt =
-                                finite_element_pt(e)->construct_boundary_node(j, time_stepper_pt);
+                        Node* new_node_pt = finite_element_pt(e)->construct_boundary_node(j, time_stepper_pt);
 
                         // Give it a number (not necessarily the global node
                         // number in the scaffold mesh -- we just need something
@@ -120,14 +119,14 @@ namespace oomph
                         global_number[scaffold_node_pt] = global_count;
 
                         // Add to boundaries
-                        for (std::set<unsigned>::iterator it = boundaries_pt->begin();
-                             it != boundaries_pt->end();
+                        for(auto it = boundaries_pt->begin(); it != boundaries_pt->end();
                              ++it)
                         {
-                            add_boundary_node(*it, new_node_pt);
+                            auto b = *it;
+                            add_boundary_node(b, new_node_pt);
                         }
                     }
-                        // Build normal node
+                    // Build normal node
                     else
                     {
                         // Create new normal node
@@ -151,7 +150,7 @@ namespace oomph
                     Node_pt[global_count - 1]->x(1) = scaffold_node_pt->x(1);
                     Node_pt[global_count - 1]->x(2) = scaffold_node_pt->x(2);
                 }
-                    // This one has already been done: Copy across
+                // This one has already been done: Copy across
                 else
                 {
                     finite_element_pt(e)->node_pt(j) = Node_pt[j_global - 1];
@@ -237,11 +236,11 @@ namespace oomph
         // std::set<Node*> face_nodes_pt;
 
         // Mapping of Tetgen faces to face nodes in the enriched element
-        unsigned face_map[4] = {1, 0, 2, 3};
+         unsigned face_map[4] = {1, 0, 2, 3};
 
         // Storage for the faces shared by the edges
-        const unsigned faces_on_edge[6][2] = {
-                {0, 1}, {0, 2}, {1, 2}, {0, 3}, {2, 3}, {1, 3}};
+         const unsigned faces_on_edge[6][2] = {{0, 1}, {0, 2},{1, 2},
+                                               {0, 3}, {2, 3}, {1, 3}};
 
         // Loop over all elements
         for (unsigned e = 0; e < nelem; e++)
@@ -276,8 +275,7 @@ namespace oomph
                     std::set<unsigned> edge_boundaries;
                     for (unsigned i = 0; i < 2; ++i)
                     {
-                        unsigned face_boundary_id =
-                                Tmp_mesh_pt->face_boundary(e, faces_on_edge[j][i]);
+                        unsigned face_boundary_id = Tmp_mesh_pt->face_boundary(e, faces_on_edge[j][i]);
                         if (face_boundary_id > 0)
                         {
                             edge_boundaries.insert(face_boundary_id);
@@ -444,25 +442,26 @@ namespace oomph
                 // Find the boundary id of the face
                 boundary_id = Tmp_mesh_pt->face_boundary(e, j);
 
+
                 if (boundary_id > 0)
                 {
                     Boundary_element_pt[boundary_id - 1].push_back(elem_pt);
-                    // Need to put a shift in here because of an inconsistent naming
+
                     // This face indexing is not correct hope oomph-lib dev can help here!
                     Vector<unsigned > gmsh_face_map(6,0);
-                    gmsh_face_map[0] = -1;
-                    gmsh_face_map[1] = -2;
+                    gmsh_face_map[0] = -2;
+                    gmsh_face_map[1] = -1;
                     gmsh_face_map[2] = -3;
                     gmsh_face_map[3] =  1;
                     gmsh_face_map[4] =  2;
                     gmsh_face_map[5] =  3;
-                    
-                    // convention between tetgen and our faces
+
                     // Tetgen Face 0 is our Face 3
                     // Tetgen Face 1 is our Face 2
                     // Tetgen Face 2 is our Face 1
                     // Tetgen Face 3 is our Face 0
-                    Face_index_at_boundary[boundary_id - 1].push_back(j);
+
+                    Face_index_at_boundary[boundary_id - 1].push_back(gmsh_face_map[j]);
 
                     // If using regions set up the boundary information
                     /*if (use_attributes)
@@ -492,5 +491,7 @@ namespace oomph
 
     } // end function
 
+
 } // namespace oomph
 #endif
+
