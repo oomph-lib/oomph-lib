@@ -1361,6 +1361,8 @@ namespace oomph
       dynamic_cast<HEIGHT_ELEMENT*>(Height_mesh_pt->element_pt(0))
         ->pin_height();
       Height_step_data_pt->unpin(0);
+
+      oomph_info << "Number of unknowns: " << assign_eqn_numbers() << std::endl;
     }
     void post_height_solve()
     {
