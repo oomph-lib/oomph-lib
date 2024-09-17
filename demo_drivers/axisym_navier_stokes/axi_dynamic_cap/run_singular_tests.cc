@@ -23,8 +23,6 @@ BOOST_AUTO_TEST_CASE(singularity_without_fix)
   }
   cout << endl;
   problem_pt->doc_solution();
-
-  // BOOST_TEST(jacobians_are_equal);
 }
 
 BOOST_AUTO_TEST_CASE(singularity_with_fix)
@@ -42,8 +40,6 @@ BOOST_AUTO_TEST_CASE(singularity_with_fix)
   cout << endl;
   problem_pt->set_directory("RESLT2");
   problem_pt->doc_solution();
-
-  // BOOST_TEST(jacobians_are_equal);
 }
 BOOST_AUTO_TEST_SUITE_END()
 
@@ -154,7 +150,7 @@ BOOST_AUTO_TEST_CASE(singular_problem_creation_with_default_parameters)
   BOOST_TEST(actual_jacobian.nrow() == N);
   BOOST_TEST(actual_jacobian.ncol() == M);
   bool jacobians_are_equal =
-    compare_matrices(expected_jacobian, actual_jacobian, 1e-5);
+    compare_matrices(expected_jacobian, actual_jacobian, 1e-6);
   BOOST_TEST(jacobians_are_equal);
   output_matrices(actual_jacobian, "actual_jacobian.dat");
   save_dofs_types(problem_pt, "dofs.txt");
@@ -334,6 +330,7 @@ BOOST_AUTO_TEST_CASE(bo_height_control_singular_problem_creation_obtuse)
         HijackedProjectableAxisymmetricTTaylorHoodPVDElement>,
       BDF<2>>(Global_Physical_Parameters::Equilibrium_contact_angle, 0);
 
+  problem_pt->steady_newton_solve();
   problem_pt->set_height_step_parameter_to_bond_number();
 
   problem_pt->pre_height_solve(0.1);
@@ -348,7 +345,7 @@ BOOST_AUTO_TEST_CASE(bo_height_control_singular_problem_creation_obtuse)
   BOOST_TEST(actual_jacobian.nrow() == N);
   BOOST_TEST(actual_jacobian.ncol() == M);
   bool jacobians_are_equal =
-    compare_matrices(expected_jacobian, actual_jacobian, 2e-5);
+    compare_matrices(expected_jacobian, actual_jacobian, 1e-6);
   BOOST_TEST(jacobians_are_equal);
   output_matrices(actual_jacobian, "actual_jacobian.dat");
   save_dofs_types(problem_pt, "dofs.txt");
@@ -373,9 +370,12 @@ BOOST_AUTO_TEST_CASE(test_ca_height_step_jacobian)
       SingularAxisymNavierStokesElement<
         HijackedProjectableAxisymmetricTTaylorHoodPVDElement>,
       BDF<2>>(Global_Physical_Parameters::Equilibrium_contact_angle, 0);
+
+  problem_pt->steady_newton_solve();
+
   problem_pt->set_height_step_parameter_to_wall_velocity();
 
-  problem_pt->pre_height_solve(0.1);
+  problem_pt->pre_height_solve(0.01);
 
   DoubleVector residuals;
   DenseMatrix<double> expected_jacobian;
@@ -387,14 +387,14 @@ BOOST_AUTO_TEST_CASE(test_ca_height_step_jacobian)
   BOOST_TEST(actual_jacobian.nrow() == N);
   BOOST_TEST(actual_jacobian.ncol() == M);
   bool jacobians_are_equal =
-    compare_matrices(expected_jacobian, actual_jacobian, 2e-5);
+    compare_matrices(expected_jacobian, actual_jacobian, 1e-6);
   BOOST_TEST(jacobians_are_equal);
   output_matrices(actual_jacobian, "actual_jacobian.dat");
   save_dofs_types(problem_pt, "dofs.txt");
 
   problem_pt->post_height_solve();
 
-  problem_pt->height_step_solve(1e-3);
+  problem_pt->height_step_solve(0);
   problem_pt->doc_solution();
   Global_Physical_Parameters::Equilibrium_contact_angle =
     90.0 * MathematicalConstants::Pi / 180.0;

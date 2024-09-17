@@ -2659,7 +2659,7 @@ namespace oomph
         // Set the constitutive law
         el_pt->constitutive_law_pt() = Constitutive_law_pt;
         el_pt->disable_inertia();
-        // el_pt->enable_evaluate_jacobian_by_fd();
+        el_pt->enable_evaluate_jacobian_by_fd();
 
         el_pt->time_stepper_pt() = this->time_stepper_pt();
 
