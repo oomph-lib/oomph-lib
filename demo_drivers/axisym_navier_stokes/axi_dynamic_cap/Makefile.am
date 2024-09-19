@@ -3,8 +3,7 @@ include $(top_srcdir)/config/makefile_templates/demo_drivers
 
 # Name of executables
 check_PROGRAMS= \
-	unsteady_run \
-	steady_run \
+	axi_dynamic_cap \
 	obtuse_steady_run \
 	create_parameter_files \
 	continuation_run \
@@ -19,8 +18,7 @@ check_PROGRAMS= \
 	obtuse_ca_height_continuation_run \
 	run_tests
 
-unsteady_run_SOURCES = unsteady_run.cc 
-steady_run_SOURCES = steady_run.cc 
+axi_dynamic_cap_SOURCES = axi_dynamic_cap.cc 
 obtuse_steady_run_SOURCES = obtuse_steady_run.cc 
 create_parameter_files_SOURCES = create_parameter_files.cc
 continuation_run_SOURCES = continuation_run.cc

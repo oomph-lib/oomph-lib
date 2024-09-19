@@ -74,7 +74,7 @@ int main(int argc, char** argv)
     has_restart = true;
   }
   AxisymDynamicCapProblem<HijackedProjectableAxisymmetricTTaylorHoodPVDElement,
-                        BDF<2>>
+                          BDF<2>>
     problem(Global_Physical_Parameters::Equilibrium_contact_angle, has_restart);
 
   // Load in restart file
@@ -121,14 +121,22 @@ int main(int argc, char** argv)
   problem.doc_solution();
   problem.max_newton_iterations() = 40;
 
-  // Solve for the steady state adapting if needed by the Z2 error estimator
-  problem.steady_newton_solve_adapt_if_needed(parameters.max_adapt);
+  if (parameters.ft <= 0)
+  {
+    // Solve for the steady state adapting if needed by the Z2 error estimator
+    problem.steady_newton_solve_adapt_if_needed(parameters.max_adapt);
 
-  // Create the restart file - needed before the doc solution
-  problem.create_restart_file();
+    // Create the restart file - needed before the doc solution
+    problem.create_restart_file();
 
-  // Document the solution
-  problem.doc_solution();
+    // Document the solution
+    problem.doc_solution();
+  }
+  else
+  {
+    // Timestep until the desired final time
+    problem.timestep(parameters.dt, parameters.ft);
+  }
 
   // Close the trace files
   problem.close_trace_files();
