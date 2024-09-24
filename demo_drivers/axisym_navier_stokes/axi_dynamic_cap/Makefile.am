@@ -1,6 +1,40 @@
 #Include commands common to every Makefile.am
 include $(top_srcdir)/config/makefile_templates/demo_drivers
 
+all: unsteady_run \
+	steady_run \
+	obtuse_steady_run \
+	axisym_stability_run \
+	linear_steady_run \
+	linear_unsteady_run \
+	linear_stability_run \
+	obtuse_linear_stability_run \
+	create_parameter_files \
+	neutral_stability_run \
+	obtuse_neutral_stability_run \
+	neutral_stability_continuation_run \
+	axisym_neutral_stability_run \
+	perturb_z_run \
+	continuation_run \
+	adapt_run \
+	custom_continuation_run \
+	custom_ca_continuation_run \
+	arc_continuation_run \
+	bifurcation_tracking_run \
+	debug_jacobian_run \
+	debug_linear_jacobian_run \
+	perturb_by_eigensolution_run \
+	continue_neutral_stability_run \
+	continue_solution_limit_run \
+	arc_continuation_upto_limit_point_run \
+	height_continuation_run \
+	ca_height_continuation_run \
+	obtuse_bo_height_continuation_run \
+	obtuse_ca_height_continuation_run \
+	test_volume_constraint \
+	run_tests \
+	run_singular_tests
+
 # Name of executables
 check_PROGRAMS= \
 	unsteady_run \

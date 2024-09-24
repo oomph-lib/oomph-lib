@@ -2331,7 +2331,7 @@ namespace oomph
 
         el_pt->add_external_data(ReInvFr_data_pt);
 
-        el_pt->enable_evaluate_jacobian_by_fd();
+        //el_pt->enable_evaluate_jacobian_by_fd();
       }
     }
 
