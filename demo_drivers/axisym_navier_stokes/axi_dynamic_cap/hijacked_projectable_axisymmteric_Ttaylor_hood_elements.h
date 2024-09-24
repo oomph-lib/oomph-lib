@@ -315,7 +315,6 @@ namespace oomph
 
         outfile << std::endl;
       }
-      outfile << std::endl;
 
       // Write tecplot footer (e.g. FE connectivity lists)
       this->write_tecplot_zone_footer(outfile, nplot);
