@@ -162,30 +162,52 @@ int main(int argc, char** argv)
   for (unsigned n = 0; n < number_of_steps; n++)
   {
     TerminateHelper::setup();
-    double new_ds = problem.height_step_solve(ds);
 
-    problem.create_restart_file();
-    problem.doc_solution();
-
-    // Adapt and solve the problem by the number of intervals between adapts
-    // parameter.
-    if (n % Mesh_Control_Parameters::interval_between_adapts ==
-        Mesh_Control_Parameters::interval_between_adapts - 1)
+    // Store current state of problem
+    DoubleVector dofs;
+    problem.get_dofs(dofs);
+    bool successful_solve = false;
+    try
     {
-      // Solve for the steady state adapting if needed by the Z2 error estimator
-      problem.reset_arc_length_parameters();
-      if (string(argv[1]) == "--Bo")
-      {
-        problem.adapt();
-      }
-      problem.steady_newton_solve_adapt_if_needed(parameters.max_adapt);
+      problem.height_step_solve(ds);
+      successful_solve = true;
+    }
+    catch (OomphLibError& err)
+    {
+      problem.post_height_solve();
+
+      // Restore state of the problem
+      problem.set_dofs(dofs);
+
+      ds /= 2.0;
     }
 
-    // If the contact angle error gets too large
-    if (problem.get_contact_angle_error() > 1.0)
+    if (successful_solve)
     {
-      // Stop the loop
-      break;
+      problem.create_restart_file();
+      problem.doc_solution();
+
+      // Adapt and solve the problem by the number of intervals between adapts
+      // parameter.
+      if (n % Mesh_Control_Parameters::interval_between_adapts ==
+          Mesh_Control_Parameters::interval_between_adapts - 1)
+      {
+        // Solve for the steady state adapting if needed by the Z2 error
+        // estimator
+        problem.reset_arc_length_parameters();
+        if (string(argv[1]) == "--Bo")
+        {
+          problem.adapt();
+        }
+        problem.steady_newton_solve_adapt_if_needed(parameters.max_adapt);
+      }
+
+      // If the contact angle error gets too large
+      if (problem.get_contact_angle_error() > 1.0)
+      {
+        // Stop the loop
+        break;
+      }
     }
   }
 

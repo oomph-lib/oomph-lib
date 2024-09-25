@@ -91,7 +91,7 @@ namespace oomph
 
   namespace Newton_Solver_Parameters
   {
-    unsigned Max_newton_iterations = 20;
+    unsigned Max_newton_iterations = 40;
     double Max_residual = 1e3;
     double Newton_solver_tolerance = 1e-8; // default: 1-e8
   }; // namespace Newton_Solver_Parameters
