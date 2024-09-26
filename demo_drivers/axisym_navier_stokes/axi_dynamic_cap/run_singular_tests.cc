@@ -41,7 +41,29 @@ BOOST_AUTO_TEST_CASE(singularity_with_fix)
   problem_pt->set_directory("RESLT2");
   problem_pt->doc_solution();
 }
+
 BOOST_AUTO_TEST_SUITE_END()
+
+//***
+// Test adapt and projection
+BOOST_AUTO_TEST_CASE(adapt)
+{
+  Global_Physical_Parameters::Equilibrium_contact_angle =
+    120.0 * MathematicalConstants::Pi / 180.0;
+  shared_ptr<SINGULAR_PROBLEM> problem_pt = createSingularProblem();
+  problem_pt->steady_newton_solve();
+  problem_pt->doc_solution();
+  problem_pt->adapt();
+  DoubleVector residuals;
+  problem_pt->get_residuals(residuals);
+  residuals.output("residuals.txt");
+  save_dofs_types(problem_pt, "dofs.txt");
+  problem_pt->doc_solution();
+  // Before projection implemented
+  // Initial Maximum residuals 0.00507815
+  // 0.0116821
+  problem_pt->steady_newton_solve();
+}
 
 // ***
 // Test the system close to 90 degrees
