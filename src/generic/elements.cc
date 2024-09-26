@@ -1917,7 +1917,9 @@ namespace oomph
         error_stream << " ii) switching OFF the PARANOID flag" << std::endl
                      << std::endl;
 
-        throw OomphLibError(
+        /// Throw an inverted error so it can be caught by the adaptive
+        /// timestepper and arc length continuation for example.
+        throw InvertedElementError(
           error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
       }
     }
