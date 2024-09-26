@@ -24,6 +24,7 @@ beam \
 shell \
 linear_wave \
 eigenproblems \
+integral \
 interaction \
 meshing \
 multi_physics \
