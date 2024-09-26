@@ -307,6 +307,23 @@ namespace oomph
       IsAugmented = true;
     }
 
+    void setup_new_data()
+    {
+      // Copy over data
+      const unsigned n_node = this->nnode();
+      for (unsigned n = 0; n < n_node; n++)
+      {
+        Vector<double> local_u_bar = u_bar(this->node_pt(n)->position());
+        const unsigned n_dim = 3;
+        for (unsigned i = 0; i < n_dim; i++)
+        {
+          this->node_pt(n)->set_value(u_index_axi_nst(n, i),
+                                      u_reconstructed(n, i) - local_u_bar[i]);
+        }
+      }
+    }
+
+
     // Make element un-augmented
     void unaugment()
     {
@@ -322,8 +339,8 @@ namespace oomph
     /// Return the index at which the i-th unknown velocity component
     /// is stored. The default value, i, is appropriate for single-physics
     /// problems.
-    /// In derived multi-physics elements, this function should be overloaded
-    /// to reflect the chosen storage scheme.
+    /// In derived multi-physics elements, this function should be
+    /// overloaded to reflect the chosen storage scheme.
     virtual inline unsigned u_index_axi_nst(const unsigned& n,
                                             const unsigned& i) const
     {
@@ -421,7 +438,7 @@ namespace oomph
   public:
     void pin()
     {
-      const unsigned& n_node = this->nnode();
+      const unsigned n_node = this->nnode();
       for (unsigned i = 0; i < n_node; i++)
       {
         for (unsigned j = 0; j < 2; j++)
@@ -532,9 +549,9 @@ namespace oomph
 
     /// Add pointer to associated SingularNavierStokesSolutionElement that
     /// determines the value of the amplitude of the singular functions (and
-    /// gives access to the singular functions). The unknown amplitude becomes
-    /// external Data for this element so assign_eqn_numbers() must be
-    /// called after this function has been called.
+    /// gives access to the singular functions). The unknown amplitude
+    /// becomes external Data for this element so assign_eqn_numbers() must
+    /// be called after this function has been called.
     void add_c_equation_element_pt(
       SingularNavierStokesSolutionElement<
         SingularAxisymNavierStokesElement<BASIC_AXISYM_NAVIER_STOKES_ELEMENT>>*
@@ -565,7 +582,8 @@ namespace oomph
       // Find the dimension of the problem
       unsigned cached_dim = this->dim();
 
-      // Set up memory for the pressure shape functions and their derivatives
+      // Set up memory for the pressure shape functions and their
+      // derivatives
       Shape psip(n_pres), testp(n_pres);
       DShape dpsipdx(n_pres, cached_dim), dtestpdx(n_pres, cached_dim);
 
@@ -1089,7 +1107,8 @@ namespace oomph
       return (interpolated_duds);
     }
 
-    /// Version of interpolated pressure including the singular contributions
+    /// Version of interpolated pressure including the singular
+    /// contributions
     inline double my_interpolated_p_nst(const Vector<double>& s) const
     {
       // Initialise pressure value with fe part
@@ -1242,7 +1261,8 @@ namespace oomph
     }
 
     /// Evaluate gradient of sum of all velocity singular fcts
-    /// (incl. the amplitudes) at Eulerian position x: grad[i][j] = du_i/dx_j
+    /// (incl. the amplitudes) at Eulerian position x: grad[i][j] =
+    /// du_i/dx_j
     Vector<Vector<double>> grad_u_bar(const Vector<double>& x) const
     {
       // Find the number of singularities
@@ -1271,7 +1291,8 @@ namespace oomph
     }
 
 
-    /// Evaluate i-th "raw" velocity singular function at Eulerian position x
+    /// Evaluate i-th "raw" velocity singular function at Eulerian position
+    /// x
     Vector<double> velocity_singular_function(const unsigned& i,
                                               const Vector<double>& x) const
     {

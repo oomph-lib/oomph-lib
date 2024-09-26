@@ -52,6 +52,13 @@ BOOST_AUTO_TEST_CASE(adapt)
     120.0 * MathematicalConstants::Pi / 180.0;
   shared_ptr<SINGULAR_PROBLEM> problem_pt = createSingularProblem();
   problem_pt->steady_newton_solve();
+  problem_pt->open_trace_files(true);
+  problem_pt->doc_solution();
+  problem_pt->adapt();
+  problem_pt->steady_newton_solve();
+  problem_pt->doc_solution();
+  problem_pt->adapt();
+  problem_pt->steady_newton_solve();
   problem_pt->doc_solution();
   problem_pt->adapt();
   DoubleVector residuals;
@@ -63,6 +70,7 @@ BOOST_AUTO_TEST_CASE(adapt)
   // Initial Maximum residuals 0.00507815
   // 0.0116821
   problem_pt->steady_newton_solve();
+  problem_pt->doc_solution();
 }
 
 // ***

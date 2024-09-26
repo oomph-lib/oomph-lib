@@ -140,6 +140,7 @@ namespace oomph
         Height_mesh_pt(0),
         Backup_volume_constraint_lagrange_multiplier(1.0),
         Backup_net_flux_lagrange_multiplier(1.0),
+        Backup_singularity_scaling_lagrange_multiplier(0.0),
         Backup_point_kinematic_lagrange_multiplier(1.0),
         problem_type(Normal_problem),
         Is_steady(true),
@@ -2427,6 +2428,27 @@ namespace oomph
         dynamic_cast<HEIGHT_ELEMENT*>(Height_mesh_pt->element_pt(0))
           ->output(std::cout);
 
+        filename = this->doc_info().directory() + "/pressure_evaluation" +
+                   to_string(this->doc_info().number()) + ".dat";
+        output_stream.open(filename);
+        output_stream << "x ";
+        output_stream << "y ";
+        output_stream << "p ";
+        output_stream << endl;
+        Pressure_contribution_mesh_1_pt->output(output_stream);
+        Pressure_contribution_mesh_2_pt->output(output_stream);
+        output_stream.close();
+
+
+        filename = this->doc_info().directory() + "/singular_scaling.dat";
+        output_stream.open(filename, std::ios_base::app);
+        output_stream
+          << dynamic_cast<SingularNavierStokesSolutionElement<ELEMENT>*>(
+               Singularity_scaling_mesh_pt->element_pt(0))
+               ->c()
+          << std::endl;
+        output_stream.close();
+
         // Bump up counter
         this->doc_info().number()++;
       }
@@ -3488,6 +3510,8 @@ namespace oomph
       //======================================================================
       this->restore_lagrange_multipliers();
 
+      setup_augmented_elements();
+
       this->rebuild_global_mesh();
       oomph_info << "Number of unknowns: " << assign_eqn_numbers() << std::endl;
       //======================================================================
@@ -3539,6 +3563,23 @@ namespace oomph
 
       // Reset lagrangian coordinates
       reset_lagrange();
+    }
+
+    void setup_augmented_elements()
+    {
+      // Loop over the augmented bulk elements
+      unsigned n_aug_bulk = Augmented_bulk_element_number.size();
+      for (unsigned e = 0; e < n_aug_bulk; e++)
+      {
+        // Augment elements
+        // Upcast from GeneralisedElement to the present element
+        ELEMENT* el_pt = dynamic_cast<ELEMENT*>(
+          Bulk_mesh_pt->element_pt(Augmented_bulk_element_number[e]));
+
+        // Set the pointer to the element that determines the amplitude
+        // of the singular fct
+        el_pt->setup_new_data();
+      }
     }
 
   public:
@@ -3638,10 +3679,19 @@ namespace oomph
             ->internal_data_pt(0)
             ->value(0);
       }
+
+      Backup_singularity_scaling_lagrange_multiplier =
+        dynamic_cast<SingularNavierStokesSolutionElement<ELEMENT>*>(
+          Singularity_scaling_mesh_pt->element_pt(0))
+          ->c();
     }
 
     void restore_lagrange_multipliers()
     {
+      dynamic_cast<SingularNavierStokesSolutionElement<ELEMENT>*>(
+        Singularity_scaling_mesh_pt->element_pt(0))
+        ->set_c(Backup_singularity_scaling_lagrange_multiplier);
+
       if (Net_flux_mesh_pt)
       {
         dynamic_cast<NET_FLUX_ELEMENT*>(Net_flux_mesh_pt->element_pt(0))
@@ -4029,6 +4079,7 @@ namespace oomph
     // Backup lagrange multipliers
     double Backup_volume_constraint_lagrange_multiplier;
     double Backup_net_flux_lagrange_multiplier;
+    double Backup_singularity_scaling_lagrange_multiplier;
     double Backup_point_kinematic_lagrange_multiplier;
 
     // Enumeration of domain boundaries
