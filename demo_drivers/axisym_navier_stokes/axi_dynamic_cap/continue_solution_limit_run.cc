@@ -195,7 +195,7 @@ void arc_length_continue_to_the_limit_point(
     // Arc length step forward
     DoubleVector backup_dofs;
     base_problem_pt->get_dofs(backup_dofs);
-    double new_ds = base_problem_pt->arc_length_step_solve(stability_pt, ds);
+    base_problem_pt->arc_length_step_solve(stability_pt, ds);
 
     //====================================================================
 
