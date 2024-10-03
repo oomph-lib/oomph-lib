@@ -2,7 +2,6 @@
 #define MY_EIGENPROBLEM_HEADER
 
 #include "generic.h"
-#include "generic/trilinos_eigen_solver.h"
 #include "complex_less.h"
 
 namespace oomph
