@@ -264,14 +264,17 @@ namespace oomph
         this->add_sub_mesh(Volume_constraint_mesh_pt);
       }
 
-      Eigensolution_slip_mesh_pt = new Mesh;
-      this->add_sub_mesh(Eigensolution_slip_mesh_pt);
-      Singularity_scaling_mesh_pt = new Mesh;
-      this->add_sub_mesh(Singularity_scaling_mesh_pt);
-      Pressure_contribution_mesh_1_pt = new Mesh;
-      this->add_sub_mesh(Pressure_contribution_mesh_1_pt);
-      Pressure_contribution_mesh_2_pt = new Mesh;
-      this->add_sub_mesh(Pressure_contribution_mesh_2_pt);
+      if (Contact_angle > 90.0 * MathematicalConstants::Pi / 180.0)
+      {
+        Eigensolution_slip_mesh_pt = new Mesh;
+        this->add_sub_mesh(Eigensolution_slip_mesh_pt);
+        Singularity_scaling_mesh_pt = new Mesh;
+        this->add_sub_mesh(Singularity_scaling_mesh_pt);
+        Pressure_contribution_mesh_1_pt = new Mesh;
+        this->add_sub_mesh(Pressure_contribution_mesh_1_pt);
+        Pressure_contribution_mesh_2_pt = new Mesh;
+        this->add_sub_mesh(Pressure_contribution_mesh_2_pt);
+      }
 
       // and build the global mesh.
       // We can either build the global mesh here or create an empty mesh and
@@ -2342,16 +2345,19 @@ namespace oomph
         }
 
 
-        filename = this->doc_info().directory() + "/pressure_evaluation" +
-                   to_string(this->doc_info().number()) + ".dat";
-        output_stream.open(filename);
-        output_stream << "x ";
-        output_stream << "y ";
-        output_stream << "p ";
-        output_stream << endl;
-        Pressure_contribution_mesh_1_pt->output(output_stream);
-        Pressure_contribution_mesh_2_pt->output(output_stream);
-        output_stream.close();
+        if (!Augmented_bulk_element_number.empty())
+        {
+          filename = this->doc_info().directory() + "/pressure_evaluation" +
+                     to_string(this->doc_info().number()) + ".dat";
+          output_stream.open(filename);
+          output_stream << "x ";
+          output_stream << "y ";
+          output_stream << "p ";
+          output_stream << endl;
+          Pressure_contribution_mesh_1_pt->output(output_stream);
+          Pressure_contribution_mesh_2_pt->output(output_stream);
+          output_stream.close();
+        }
 
 
         // Bump up counter
@@ -2680,31 +2686,39 @@ namespace oomph
 
         el_pt->time_stepper_pt() = this->time_stepper_pt();
 
-        // Augmented elements close to the corner
-        // Check distance from
-        // s centre is centre of mass of a uniform triangle, so (1/3,1/3) for
-        // Triangle[(1,0),(0,1),(0,0)]
-        Vector<double> s_centre(2, 1.0 / 3.0);
-        Vector<double> element_centre_x(2, 0.0);
-        el_pt->get_x(s_centre, element_centre_x);
-        double dist = 0;
-        for (unsigned i = 0; i < 2; i++)
+        if (Contact_angle > 90.0 * MathematicalConstants::Pi / 180.0)
         {
-          dist += pow(
-            element_centre_x[i] - Contact_line_solid_node_pt->position(i), 2.0);
-        }
-        dist = pow(dist, 0.5);
+          // Augmented elements close to the corner
+          // Check distance from
+          // s centre is centre of mass of a uniform triangle, so (1/3,1/3) for
+          // Triangle[(1,0),(0,1),(0,0)]
+          Vector<double> s_centre(2, 1.0 / 3.0);
+          Vector<double> element_centre_x(2, 0.0);
+          el_pt->get_x(s_centre, element_centre_x);
+          double dist = 0;
+          for (unsigned i = 0; i < 2; i++)
+          {
+            dist +=
+              pow(element_centre_x[i] - Contact_line_solid_node_pt->position(i),
+                  2.0);
+          }
+          dist = pow(dist, 0.5);
 
-        // If the distance to the corner is within the "inner" region, ...
-        const double inner_radius = 0.3;
-        if (dist < inner_radius)
-        {
-          el_pt->augment();
-          Augmented_bulk_element_number.push_back(e);
+          // If the distance to the corner is within the "inner" region, ...
+          const double inner_radius = 0.3;
+          if (dist < inner_radius)
+          {
+            el_pt->augment();
+            Augmented_bulk_element_number.push_back(e);
+          }
         }
       }
-      oomph_info << Augmented_bulk_element_number.size()
-                 << " augmented elements" << std::endl;
+
+      if (Contact_angle > 90.0 * MathematicalConstants::Pi / 180.0)
+      {
+        oomph_info << Augmented_bulk_element_number.size()
+                   << " augmented elements" << std::endl;
+      }
     }
 
     // Find interface end node

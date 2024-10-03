@@ -4,7 +4,6 @@ include $(top_srcdir)/config/makefile_templates/demo_drivers
 # Name of executables
 check_PROGRAMS= \
 	axi_dynamic_cap \
-	obtuse_steady_run \
 	create_parameter_files \
 	continuation_run \
 	custom_continuation_run \
@@ -19,7 +18,6 @@ check_PROGRAMS= \
 	run_tests
 
 axi_dynamic_cap_SOURCES = axi_dynamic_cap.cc 
-obtuse_steady_run_SOURCES = obtuse_steady_run.cc 
 create_parameter_files_SOURCES = create_parameter_files.cc
 continuation_run_SOURCES = continuation_run.cc
 custom_continuation_run_SOURCES = custom_continuation_run.cc

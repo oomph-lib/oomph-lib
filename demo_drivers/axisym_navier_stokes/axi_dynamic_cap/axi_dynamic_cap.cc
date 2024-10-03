@@ -32,6 +32,7 @@
 // OOMPH-LIB include files
 #include "generic.h"
 #include "axisym_navier_stokes.h"
+#include "singular_axisym_navier_stokes_elements.h"
 #include "fluid_interface.h"
 #include "constitutive.h"
 #include "solid.h"
@@ -40,6 +41,7 @@
 // Local include files
 #include "hijacked_projectable_axisymmteric_Ttaylor_hood_elements.h"
 #include "axisym_dynamic_cap_problem.h"
+#include "singular_axisym_dynamic_cap_problem.h"
 #include "parameters.h"
 
 using namespace std;
@@ -73,8 +75,11 @@ int main(int argc, char** argv)
     cout << "restarting" << endl;
     has_restart = true;
   }
-  AxisymDynamicCapProblem<HijackedProjectableAxisymmetricTTaylorHoodPVDElement,
-                          BDF<2>>
+
+  SingularAxisymDynamicCapProblem<
+    SingularAxisymNavierStokesElement<
+      HijackedProjectableAxisymmetricTTaylorHoodPVDElement>,
+    BDF<2>>
     problem(Global_Physical_Parameters::Equilibrium_contact_angle, has_restart);
 
   // Load in restart file
@@ -134,8 +139,19 @@ int main(int argc, char** argv)
   }
   else
   {
-    // Timestep until the desired final time
-    problem.timestep(parameters.dt, parameters.ft);
+    if (Global_Physical_Parameters::Equilibrium_contact_angle <=
+        90.0 * MathematicalConstants::Pi / 180.0)
+    {
+      // Timestep until the desired final time
+      problem.timestep(parameters.dt, parameters.ft);
+    }
+    else
+    {
+      throw(OomphLibWarning(
+        "Timestepping is not implemented for obtuse contact angles yet.",
+        OOMPH_CURRENT_FUNCTION,
+        OOMPH_EXCEPTION_LOCATION));
+    }
   }
 
   // Close the trace files

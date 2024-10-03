@@ -5,7 +5,7 @@ OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
 
 
 #Set the number of tests to be checked
-NUM_TESTS=6
+NUM_TESTS=8
 
 
 # Setup validation directory
@@ -50,8 +50,6 @@ validate(){
            Validation/$FILE 0.1 2e-7 >> $LOG
   fi
   
-  # Append log to main validation log
-  cat $LOG >> ../../../validation.log
 }
 
 # Utility scripts
@@ -62,6 +60,12 @@ validate axi_dynamic_cap validata/parameters.dat trace.dat steady_run_parameters
 validate axi_dynamic_cap validata/parameters-with-restart.dat trace.dat steady_run_parameters-with-restart_results.dat.gz
 validate axi_dynamic_cap validata/unsteady-parameters.dat trace.dat unsteady_run_parameters_results.dat.gz
 validate axi_dynamic_cap validata/unsteady-parameters-with-restart.dat trace.dat unsteady_run_parameters-with-restart_results.dat.gz
+
+# Obtuse runs
+validate axi_dynamic_cap validata/obtuse-parameters.dat trace.dat axi_dynamic_cap_obtuse-parameters_results.dat.gz                   
+validate axi_dynamic_cap validata/obtuse-parameters-with-restart.dat trace.dat axi_dynamic_cap_obtuse-parameters-with-restart_results.dat.gz
+#validate axi_dynamic_cap validata/obtuse-unsteady-parameters.dat trace.dat unsteady_run_parameters_results.dat.gz
+#validate axi_dynamic_cap validata/obtuse-unsteady-parameters-with-restart.dat trace.dat unsteady_run_parameters-with-restart_results.dat.gz
 
 var="./run_tests > Validation/OUTPUT"
 echo $var
@@ -83,10 +87,10 @@ else
     echo "[OK] -- Unit tests passed" >> $LOG
 fi
 
+#######################################################################
+
 # Append log to main validation log
 cat $LOG >> ../../../validation.log
-
-#######################################################################
 
 #Check that we get the correct number of OKs
 # validate_ok_count will exit with status
