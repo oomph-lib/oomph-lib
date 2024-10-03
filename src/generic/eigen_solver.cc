@@ -29,7 +29,6 @@
 #include "mpi.h"
 #endif
 
-
 // Include cfortran.h and the header for the LAPACK QZ routines
 #include "cfortran.h"
 #include "lapack_qz.h"
@@ -248,6 +247,50 @@ namespace oomph
     delete[] M;
   }
 
+
+  //==========================================================================
+  /// Use LAPACK QZ to solve the real eigenproblem that is assembled by elements
+  /// in a mesh in a Problem object. Note that the assembled matrices include
+  /// the shift and are real. The eigenvalues and eigenvectors are, in general,
+  /// complex. This is a legacy version of this function that stores re & imag
+  /// parts of eigenvectors in some solver-specific collection of real vectors;
+  /// they are disentangled in the alternative version of this function that
+  /// returns Vectors of complex vectors. At least n_eval eigenvalues are
+  /// computed.
+  //==========================================================================
+  void LAPACK_QZ::solve_eigenproblem_legacy(
+    Problem* const& problem_pt,
+    const int& n_eval,
+    Vector<std::complex<double>>& eigenvalue,
+    Vector<DoubleVector>& eigenvector_aux,
+    const bool& do_adjoint_problem)
+  {
+    if (do_adjoint_problem)
+    {
+      throw OomphLibError("Solving an adjoint eigenproblem is not currently "
+                          "implemented for LAPACK_QZ.",
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+    }
+    Vector<std::complex<double>> alpha_eval;
+    Vector<double> beta_eval;
+
+    // Call raw interface to lapack qz
+    solve_eigenproblem_helper(
+      problem_pt, n_eval, alpha_eval, beta_eval, eigenvector_aux);
+
+    // Brute force computation of eigenvalues (allowing for NaNs and Infs)
+    unsigned n = problem_pt->ndof();
+    eigenvalue.resize(n);
+    for (unsigned i = 0; i < n; ++i)
+    {
+      // N.B. This is naive and dangerous according to the documentation
+      // beta could be very small giving over or under flow
+      // Shift has already been taken out in helper function
+      eigenvalue[i] = std::complex<double>(alpha_eval[i].real() / beta_eval[i],
+                                           alpha_eval[i].imag() / beta_eval[i]);
+    }
+  }
 
   //==========================================================================
   /// Solve the real eigenproblem that is assembled by elements in

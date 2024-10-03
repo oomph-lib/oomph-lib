@@ -516,6 +516,7 @@ namespace oomph
       }
     }
 
+    // Return the height of the spine at the n-th node
     inline double spine_value(const unsigned& n)
     {
 #ifdef RANGE_CHECKING
@@ -532,13 +533,13 @@ namespace oomph
 #endif
 
 #ifdef PARANOID
-      // If there is no spine then you can't get the local equation
+      // If there is no spine then you can't get its height
       if (Spine_geometric_index[n] == this->ngeom_data())
       {
         std::ostringstream error_stream;
         error_stream << "SpineNode " << n
                      << " does not have a Spine attached,\n"
-                     << "so you can't get its local equation number.\n"
+                     << "so you can't get its height.\n"
                      << "Check that the Mesh is correctly associating Spines "
                         "with is Nodes\n";
         throw OomphLibError(

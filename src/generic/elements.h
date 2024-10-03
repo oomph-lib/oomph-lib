@@ -4438,13 +4438,9 @@ namespace oomph
       // loop over the nodes
       for (unsigned n = 0; n < n_node; n++)
       {
-        // if there are additional values to add
-        if (nadditional_values[n] > 0)
-        {
-          // Assign the required number of additional nodes to the node
-          dynamic_cast<BoundaryNodeBase*>(this->node_pt(n))
-            ->assign_additional_values_with_face_id(nadditional_values[n], id);
-        }
+        // Assign the required number of additional nodes to the node
+        dynamic_cast<BoundaryNodeBase*>(this->node_pt(n))
+          ->assign_additional_values_with_face_id(nadditional_values[n], id);
       }
     }
 
@@ -4921,10 +4917,13 @@ namespace oomph
                            public virtual SolidFiniteElement
   {
   public:
+    /// Add the positions of the other nodes in the bulk element as external
+    /// data. This enables the us to fill in the dependencies of the mesh
+    /// deformation on the internal dofs and vice-versa, so that the Jacobian
+    /// is complete.
     void add_other_bulk_node_positions_as_external_data()
     {
-      // Add dependence on other solide nodes of the bulk element via
-      //  external
+      // Add dependence on other solide nodes of the bulk element as external
       // data.
       // Find the nodes
       std::set<SolidNode*> set_of_solid_nodes;
