@@ -63,39 +63,46 @@ namespace oomph
     }
 
     /// Return the index at which the i-th unknown velocity component
-    /// is stored. The default value, i, is appropriate for single-physics
-    /// problems.
-    /// In derived multi-physics elements, this function should be overloaded
-    /// to reflect the chosen storage scheme. Note that these equations require
-    /// that the unknowns are always stored at the same indices at each node.
+    /// is stored for the n-th node. The default value, i, is appropriate for
+    /// single-physics problems. In derived multi-physics elements, this
+    /// function should be overloaded to reflect the chosen storage scheme. Note
+    /// that these equations require that the unknowns are always stored at the
+    /// same indices at each node.
     virtual inline unsigned u_index_axi_nst(const unsigned& n,
                                             const unsigned& i) const
     {
       return this->u_index_nst(n, i);
     }
 
+    /// Return the index at which the i-th momentum equation component
+    /// is stored at the n-th node. The default value, i, is appropriate for
+    /// single-physics problems.
     virtual inline unsigned axi_momentum_index_nst(const unsigned& n,
                                                    const unsigned& i) const
     {
       return u_index_axi_nst(n, i);
     }
 
+    /// Return the local equation number for the i-th momentum equation
+    /// component at node n.
     virtual inline int axi_momentum_local_eqn(const unsigned& n,
                                               const unsigned& i) const
     {
       return nodal_local_eqn(n, axi_momentum_index_nst(n, i));
     }
 
+    /// Return the local unknown number for the i-th velocity
+    /// component at node n.
     inline int u_axi_nst_local_unknown(const unsigned& n,
                                        const unsigned& i) const
     {
       return nodal_local_eqn(n, u_index_axi_nst(n, i));
     }
 
-    /// Function to return number of pressure degrees of freedom
+    /// A function to return number of pressure degrees of freedom
     virtual unsigned npres_axi_nst() const = 0;
 
-    /// Function to return number of pressure degrees of freedom
+    /// A function to return number of pressure degrees of freedom
     virtual unsigned npres_nst() const
     {
       return npres_axi_nst();

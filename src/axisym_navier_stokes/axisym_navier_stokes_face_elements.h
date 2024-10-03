@@ -29,6 +29,9 @@ namespace oomph
   public:
     AxisymmetricNavierStokesFaceElement() {}
 
+    /// Return the index at which the i-th unknown velocity component
+    /// is stored for node n. The default value, i, is appropriate for
+    /// single-physics problems.
     virtual inline unsigned u_index_axi_nst(const unsigned& n,
                                             const unsigned& i) const
     {
@@ -38,6 +41,7 @@ namespace oomph
       return el_pt->u_index_axi_nst(this->bulk_node_number(n), i);
     }
 
+    /// Which nodal value represents the pressure?
     virtual int p_nodal_index_axi_nst() const
     {
       AxisymmetricNavierStokesEquationNumberingElement* el_pt =
@@ -46,6 +50,8 @@ namespace oomph
       return el_pt->p_nodal_index_axi_nst();
     }
 
+    /// Return the local equation number for the i-th momentum equation
+    /// component at node n.
     virtual inline unsigned axi_momentum_index_nst(const unsigned& n,
                                                    const unsigned& i) const
     {
