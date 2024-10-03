@@ -34,6 +34,7 @@ namespace oomph
           this->bulk_element_pt());
       return el_pt->n_u_nst();
     }
+
     /// Return the index at which the i-th unknown velocity component
     /// is stored at the n-th node.
     virtual inline unsigned u_index_nst(const unsigned& n,
