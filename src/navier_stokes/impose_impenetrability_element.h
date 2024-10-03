@@ -491,6 +491,7 @@ namespace oomph
 
     } // get unknowns...
 
+    /// Calculate the Lagrange multipler at the local coordinate s.
     double interpolated_lambda(const Vector<double>& s)
     {
       // Find the number of nodes
@@ -518,6 +519,13 @@ namespace oomph
     }
   };
 
+  //========================================================================
+  ///  SolidImposeImpenetrabilityElement
+  /// are elements that coincide with the faces of
+  /// higher-dimensional "bulk" elements. They are used on
+  /// boundaries where we would like to impose impenetrability where the bulk
+  /// is a solid.
+  //========================================================================
   template<class ELEMENT>
   class SolidImposeImpenetrabilityElement
     : public virtual ImposeImpenetrabilityElement<ELEMENT>,
@@ -528,6 +536,7 @@ namespace oomph
     /// index that identifies which face the
     /// ImposeImpenetrabilityElement is supposed
     /// to be attached to, and the face element ID
+    /// It also calls the SolidFaceElement constructor
     SolidImposeImpenetrabilityElement(FiniteElement* const& element_pt,
                                       const int& face_index,
                                       const unsigned& id = 0)
@@ -546,7 +555,6 @@ namespace oomph
                               const unsigned& i) const
     {
       return FaceElement::zeta_nodal(n, k, i);
-      // return SolidFiniteElement::zeta_nodal(n, k, i);
     }
 
     /// Set pointer to MacroElement -- overloads generic version

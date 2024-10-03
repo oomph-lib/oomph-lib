@@ -51,6 +51,7 @@ namespace oomph
     const int Pressure_not_stored_at_node;
 
   public:
+    /// Constructor
     NavierStokesEquationNumberingElement() : Pressure_not_stored_at_node(-100)
     {
     }
@@ -76,18 +77,25 @@ namespace oomph
       return i;
     }
 
+    /// Return the index at which the i-th momentum equation component
+    /// is stored at the n-th node. The default value, i, is appropriate for
+    /// single-physics problems.
     virtual inline unsigned momentum_index_nst(const unsigned& n,
                                                const unsigned& i) const
     {
       return i;
     }
 
+    /// Return the local equation number for the i-th momentum equation
+    /// component at node n.
     virtual inline int momentum_local_eqn(const unsigned& n,
                                           const unsigned& i) const
     {
       return nodal_local_eqn(n, momentum_index_nst(n, i));
     }
 
+    /// Return the local unknown number for the i-th velocity
+    /// component at node n.
     inline int u_local_unknown(const unsigned& n, const unsigned& i) const
     {
       return nodal_local_eqn(n, u_index_nst(n, i));
