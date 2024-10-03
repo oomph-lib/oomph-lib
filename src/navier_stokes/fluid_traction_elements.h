@@ -326,7 +326,7 @@ namespace oomph
       public virtual SolidFaceElement
   {
   public:
-    /// SolidNavierStokesTractionElement constructor calls child class
+    /// SolidNavierStokesTractionElement constructor calls parent class
     /// construtors only
     SolidNavierStokesTractionElement(
       FiniteElement* const& element_pt,

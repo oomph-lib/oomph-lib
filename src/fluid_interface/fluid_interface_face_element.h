@@ -57,14 +57,14 @@ namespace oomph
     Vector<unsigned> U_index_interface_boundary;
 
   public:
-    FluidInterfaceFaceElement() {}
-
     /// Access for nodal index at which the velocity components are stored
     Vector<unsigned>& u_index_interface_boundary()
     {
       return U_index_interface_boundary;
     }
 
+    /// Return the index at which the i-th unknown velocity component
+    /// is stored at the n-th node.
     virtual inline unsigned u_index_nst(const unsigned& n,
                                         const unsigned& i) const
     {
@@ -73,6 +73,8 @@ namespace oomph
       return el_pt->u_index_nst(this->bulk_node_number(n), i);
     }
 
+    /// Return the index at which the i-th unknown velocity component
+    /// is stored assuming all the nodes are indexed as node 0.
     virtual inline unsigned u_index_nst(const unsigned& i) const
     {
       // If this function is called we are assuming that all the velocities are
@@ -81,6 +83,7 @@ namespace oomph
       return this->u_index_nst(node_index, i);
     }
 
+    /// Return the index at which the pressure is stored for node n.
     virtual int p_nodal_index_nst(const unsigned& n) const
     {
       NavierStokesFaceElement* el_pt =
@@ -88,6 +91,8 @@ namespace oomph
       return el_pt->p_nodal_index_nst(this->bulk_node_number(n));
     }
 
+    /// Return the index at which the i-th momentum equation component
+    /// is stored at the n-th node.
     virtual inline unsigned momentum_index_nst(const unsigned& n,
                                                const unsigned& i) const
     {
@@ -96,18 +101,23 @@ namespace oomph
       return el_pt->momentum_index_nst(this->bulk_node_number(n), i);
     }
 
+    /// Return the index at which the continuity equation
+    /// is stored at the n-th node.
     virtual inline unsigned nst_continuity_index(const unsigned& n) const
     {
       const int nodal_index = p_nodal_index_nst(n);
       return nodal_index;
     }
 
+    /// Return the i-th velocity component value at node n.
     virtual double nst_u(const unsigned& n, const unsigned& i) const
     {
       const unsigned nodal_index = u_index_nst(n, i);
       return this->nodal_value(n, nodal_index);
     }
 
+    /// Return the local unknown number for the i-th velocity
+    /// component at node n.
     virtual inline int nst_u_local_unknown(const unsigned& n,
                                            const unsigned& i) const
     {
@@ -115,6 +125,8 @@ namespace oomph
       return this->nodal_local_eqn(n, nodal_index);
     }
 
+    /// Return the local equation number for the i-th momentum equation
+    /// component at node n.
     virtual inline int nst_momentum_local_eqn(const unsigned& n,
                                               const unsigned& i) const
     {
