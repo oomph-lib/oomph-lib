@@ -175,7 +175,7 @@ int main(int argc, char** argv)
   const unsigned number_of_steps = 10;
   for (unsigned n = 0; n < number_of_steps; n++)
   {
-    double new_ds = problem.arc_length_step_solve(parameter_pt, ds);
+    problem.arc_length_step_solve(parameter_pt, ds);
 
     problem.create_restart_file();
     problem.doc_solution();

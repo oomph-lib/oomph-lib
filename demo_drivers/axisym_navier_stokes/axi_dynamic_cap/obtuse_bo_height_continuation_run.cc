@@ -162,7 +162,7 @@ int main(int argc, char** argv)
   for (unsigned n = 0; n < number_of_steps; n++)
   {
     TerminateHelper::setup();
-    double new_ds = problem.height_step_solve(ds);
+    problem.height_step_solve(ds);
 
     problem.create_restart_file();
     problem.doc_solution();
