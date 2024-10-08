@@ -5,7 +5,7 @@ OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
 
 
 #Set the number of tests to be checked
-NUM_TESTS=8
+NUM_TESTS=14
 
 
 # Setup validation directory
@@ -66,6 +66,15 @@ validate axi_dynamic_cap validata/obtuse-parameters.dat trace.dat axi_dynamic_ca
 validate axi_dynamic_cap validata/obtuse-parameters-with-restart.dat trace.dat axi_dynamic_cap_obtuse-parameters-with-restart_results.dat.gz
 #validate axi_dynamic_cap validata/obtuse-unsteady-parameters.dat trace.dat unsteady_run_parameters_results.dat.gz
 #validate axi_dynamic_cap validata/obtuse-unsteady-parameters-with-restart.dat trace.dat unsteady_run_parameters-with-restart_results.dat.gz
+
+# Continuation runs
+validate "continuation_run --Bo 0.1 --parameters " validata/unsteady-parameters-with-restart.dat trace.dat cont-bo-results.dat.gz
+validate "continuation_run --wall_velocity 0.1 --parameters" validata/unsteady-parameters-with-restart.dat trace.dat cont-ca-results.dat.gz
+validate "continuation_run --arc --Bo 0.1 --parameters" validata/unsteady-parameters-with-restart.dat trace.dat arc-cont-bo-results.dat.gz
+validate "continuation_run --arc --wall_velocity 0.1 --parameters" validata/unsteady-parameters-with-restart.dat trace.dat arc-cont-ca-results.dat.gz
+validate "continuation_run --height_control --Bo 0.01 --parameters" validata/unsteady-parameters-with-restart.dat trace.dat height-cont-bo-results.dat.gz
+validate "continuation_run --height_control --wall_velocity 0.1 --parameters" validata/unsteady-parameters-with-restart.dat trace.dat height-cont-ca-results.dat.gz
+
 
 var="./run_tests > Validation/OUTPUT"
 echo $var
