@@ -9,7 +9,8 @@ single_layer_free_surface_axisym \
 two_layer_interface_axisym \
 rayleigh_instability \
 fibre \
-counter_rotating_disks
+counter_rotating_disks \
+temp
 
 if SUPPRESS_TRIANGLE_LIB
 else
