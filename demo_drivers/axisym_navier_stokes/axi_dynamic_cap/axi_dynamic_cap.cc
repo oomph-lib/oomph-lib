@@ -53,7 +53,7 @@ int main(int argc, char** argv)
   int number_of_arguments = argc - 1;
   if (number_of_arguments == 0 || number_of_arguments > 1)
   {
-    cout << "Wrong number of arguments." << std::endl;
+    std::cout << "Wrong number of arguments." << std::endl;
     return 1;
   }
 
@@ -72,7 +72,7 @@ int main(int argc, char** argv)
   bool has_restart = false;
   if (parameters.restart_filename != "")
   {
-    cout << "restarting" << endl;
+    std::cout << "restarting" << std::endl;
     has_restart = true;
   }
 
@@ -95,8 +95,8 @@ int main(int argc, char** argv)
     }
     catch (exception& e)
     {
-      cout << "Restart filename can't be set, or opened, or read." << endl;
-      cout << "File: " << parameters.restart_filename << endl;
+      std::cout << "Restart filename can't be set, or opened, or read." << std::endl;
+      std::cout << "File: " << parameters.restart_filename << std::endl;
       return 1;
     }
   }

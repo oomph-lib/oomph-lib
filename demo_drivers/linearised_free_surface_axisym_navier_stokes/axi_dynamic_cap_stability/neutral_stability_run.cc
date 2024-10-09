@@ -66,7 +66,7 @@ using namespace oomph;
 
 void parse_arguments(const int& argc,
                      char** const& argv,
-                     string& parameters_filename,
+                     std::string& parameters_filename,
                      double& starting_step,
                      double*& continuation_param_pt)
 {
@@ -165,7 +165,7 @@ int main(int argc, char** argv)
   MPI_Helpers::init(argc, argv, make_copy_of_mpi_comm_world);
 #endif
 
-  string parameters_filename = "";
+  std::string parameters_filename = "";
   double starting_step = 0.0;
   double* continuation_param_pt = 0;
   parse_arguments(
@@ -179,7 +179,7 @@ int main(int argc, char** argv)
   bool has_restart = false;
   if (parameters.restart_filename != "")
   {
-    cout << "restarting" << endl;
+    std::cout << "restarting" << std::endl;
     has_restart = true;
   }
   typedef SingularAxisymNavierStokesElement<
@@ -202,8 +202,8 @@ int main(int argc, char** argv)
     }
     catch (OomphLibError& e)
     {
-      cout << "Restart filename can't be set, or opened, or read." << endl;
-      cout << "File: " << parameters.restart_filename << endl;
+      std::cout << "Restart filename can't be set, or opened, or read." << std::endl;
+      std::cout << "File: " << parameters.restart_filename << std::endl;
       return 1;
     }
   }
@@ -292,12 +292,12 @@ int main(int argc, char** argv)
   while (!has_converged && n_iterations < max_n_iterations)
   {
     TerminateHelper::setup();
-    cout << "-------------" << endl;
-    cout << "Start of loop" << endl;
-    cout << "-------------" << endl;
-    cout << endl;
-    cout << n_iterations << ", " << current_param << "," << residual << ","
-         << current_param + step_param << endl;
+    std::cout << "-------------" << std::endl;
+    std::cout << "Start of loop" << std::endl;
+    std::cout << "-------------" << std::endl;
+    std::cout << std::endl;
+    std::cout << n_iterations << ", " << current_param << "," << residual << ","
+         << current_param + step_param << std::endl;
     old_param = current_param;
     current_param += step_param;
     *continuation_param_pt = current_param;
@@ -334,24 +334,24 @@ int main(int argc, char** argv)
       }
       catch (OomphLibError& e)
       {
-        cout << "Caught exception" << endl;
-        cout << "Resetting problem" << endl;
+        std::cout << "Caught exception" << std::endl;
+        std::cout << "Resetting problem" << std::endl;
         base_problem.set_dofs(dofs);
         current_param -= step_param;
         step_param /= 3.0;
         current_param += step_param;
         *continuation_param_pt = current_param;
-        cout << "Reducing step size.";
-        cout << "Number of attempts: " << base_state_iterations;
-        cout << ", Step size: " << step_param;
-        cout << ", Target wall velocity: " << current_param << endl;
+        std::cout << "Reducing step size.";
+        std::cout << "Number of attempts: " << base_state_iterations;
+        std::cout << ", Step size: " << step_param;
+        std::cout << ", Target wall velocity: " << current_param << std::endl;
       }
       base_state_iterations++;
     }
 
     if (!has_base_state)
     {
-      cout << "WARNING: Base state not found." << endl;
+      std::cout << "WARNING: Base state not found." << std::endl;
       break;
     }
 
@@ -405,7 +405,7 @@ int main(int argc, char** argv)
 
   if (!has_converged)
   {
-    cout << "WARNING: Critical Bond number not converged." << endl;
+    std::cout << "WARNING: Critical Bond number not converged." << std::endl;
   }
 
   // Close the trace files

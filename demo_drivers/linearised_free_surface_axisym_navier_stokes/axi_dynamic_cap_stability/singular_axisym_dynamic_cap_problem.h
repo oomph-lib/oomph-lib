@@ -1889,12 +1889,12 @@ namespace oomph
       Max_adapt = max_adapt;
     }
 
-    void set_directory(const string& dir_name)
+    void set_directory(const std::string& dir_name)
     {
       this->doc_info().set_directory(dir_name);
     }
 
-    string get_directory()
+    std::string get_directory()
     {
       return this->doc_info().directory();
     }
@@ -2474,7 +2474,7 @@ namespace oomph
     {
       // Save current solution
       std::ofstream dump_filestream;
-      string restart_filename = this->doc_info().directory() + "/restart" +
+      std::string restart_filename = this->doc_info().directory() + "/restart" +
                                 to_string(this->doc_info().number()) + ".dat";
       dump_filestream.open(restart_filename);
       dump_filestream.precision(16);
@@ -2483,7 +2483,7 @@ namespace oomph
       // actions_after_adapt();
       dump_filestream.close();
 
-      string triangulateio_filename =
+      std::string triangulateio_filename =
         this->doc_info().directory() + "/triangulateio" +
         to_string(this->doc_info().number()) + ".dat";
       dump_filestream.open(triangulateio_filename);
@@ -3377,11 +3377,11 @@ namespace oomph
       }
       if (Using_contact_angle_error_estimator)
       {
-        cout << "Using contact angle error estimator" << std::endl;
+        std::cout << "Using contact angle error estimator" << std::endl;
       }
       else
       {
-        cout << "Using Z2 error estimator" << std::endl;
+        std::cout << "Using Z2 error estimator" << std::endl;
       }
     }
 
@@ -3610,7 +3610,7 @@ namespace oomph
       if (!Augmented_bulk_element_number.empty())
       {
         parameters::x_centre_node_pt = Contact_line_solid_node_pt;
-        cout << "Make augmented elements" << std::endl;
+        std::cout << "Make augmented elements" << std::endl;
         create_singularity_scaling_elements();
         create_pressure_contribution_1_elements();
         create_pressure_contribution_2_elements();

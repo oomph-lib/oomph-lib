@@ -47,8 +47,8 @@ int main(int argc, char** argv)
   int number_of_arguments = argc - 1;
   if (number_of_arguments != 3)
   {
-    cout << "Wrong number of arguments." << std::endl;
-    cout << "Please provide either --wall_velocity, --Bo or --angle with a "
+    std::cout << "Wrong number of arguments." << std::endl;
+    std::cout << "Please provide either --wall_velocity, --Bo or --angle with a "
             "starting step ds."
          << std::endl;
     return 1;
@@ -69,7 +69,7 @@ int main(int argc, char** argv)
   bool has_restart = false;
   if (parameters.restart_filename != "")
   {
-    cout << "restarting" << endl;
+    std::cout << "restarting" << std::endl;
     has_restart = true;
   }
   BoHeightControlSingularAxisymDynamicCapProblem<
@@ -91,8 +91,8 @@ int main(int argc, char** argv)
     }
     catch (exception& e)
     {
-      cout << "Restart filename can't be set, or opened, or read." << endl;
-      cout << "File: " << parameters.restart_filename << endl;
+      std::cout << "Restart filename can't be set, or opened, or read." << std::endl;
+      std::cout << "File: " << parameters.restart_filename << std::endl;
       return 1;
     }
   }
@@ -139,13 +139,13 @@ int main(int argc, char** argv)
     }
     else
     {
-      cout << "Not implemented yet for this input. Arg in: " << argv[1] << endl;
+      std::cout << "Not implemented yet for this input. Arg in: " << argv[1] << std::endl;
     }
   }
   catch (exception& e)
   {
-    cout << "Couldn't set the continuation parameter. Arg in: " << argv[1]
-         << endl;
+    std::cout << "Couldn't set the continuation parameter. Arg in: " << argv[1]
+         << std::endl;
   }
 
   double ds = 0;
@@ -155,7 +155,7 @@ int main(int argc, char** argv)
   }
   catch (exception& e)
   {
-    cout << "Couldn't set arc length step. Arg in: " << argv[2] << endl;
+    std::cout << "Couldn't set arc length step. Arg in: " << argv[2] << std::endl;
   }
 
   const unsigned number_of_steps = 100;

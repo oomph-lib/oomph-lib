@@ -314,7 +314,7 @@ namespace oomph
     // Create the bulk mesh and its elements
     void create_bulk_mesh()
     {
-      oomph_info << "Creating the initial mesh" << endl;
+      oomph_info << "Creating the initial mesh" << std::endl;
 
       // Create the Outer_boundary_polyline_pt
       // If we have a 90 degree contact angle
@@ -378,7 +378,7 @@ namespace oomph
 
     void create_simple_bulk_mesh()
     {
-      oomph_info << "Creating the simple initial mesh" << endl;
+      oomph_info << "Creating the simple initial mesh" << std::endl;
 
       create_rectangle_domain();
 
@@ -831,7 +831,7 @@ namespace oomph
 
     void create_slip_eigen_elements(Mesh* const& bulk_mesh_pt)
     {
-      oomph_info << "create_slip_eigen_elements" << endl;
+      oomph_info << "create_slip_eigen_elements" << std::endl;
 
       // Loop over the free surface boundary and create the "interface elements
       unsigned b = Outer_boundary_with_slip_id;
@@ -869,7 +869,7 @@ namespace oomph
 
     void create_singularity_scaling_elements()
     {
-      oomph_info << "create_singularity_scaling_elements" << endl;
+      oomph_info << "create_singularity_scaling_elements" << std::endl;
       SingularNavierStokesSolutionElement<ELEMENT>* el_pt =
         new SingularNavierStokesSolutionElement<ELEMENT>;
 
@@ -972,7 +972,7 @@ namespace oomph
 
     void setup_mesh_interaction()
     {
-      oomph_info << "setup_mesh_interaction" << endl;
+      oomph_info << "setup_mesh_interaction" << std::endl;
       // Find corner bulk element
       unsigned element_index;
       unsigned node_index;
@@ -1003,7 +1003,7 @@ namespace oomph
       oomph_info << "First singular element point, ";
       oomph_info << "x: " << x[0] << ", ";
       oomph_info << "y: " << x[1] << ", ";
-      oomph_info << endl;
+      oomph_info << std::endl;
 
       // Loop over the augmented bulk elements
       unsigned n_aug_bulk = Augmented_bulk_element_number.size();
@@ -1022,7 +1022,7 @@ namespace oomph
 
     void setup_pressure_contribution_elements()
     {
-      oomph_info << "setup_pressure_contribution_elements" << endl;
+      oomph_info << "setup_pressure_contribution_elements" << std::endl;
       // Locate zeta for the first element
       Vector<double> zeta(1, parameters::small_r);
 
@@ -1046,7 +1046,7 @@ namespace oomph
 
     void create_pressure_contribution_1_elements()
     {
-      oomph_info << "create_pressure_contribution_1_elements" << endl;
+      oomph_info << "create_pressure_contribution_1_elements" << std::endl;
       const bool add_to_residual = true;
 
       // Loop over boundary elements
@@ -1079,7 +1079,7 @@ namespace oomph
 
     void create_pressure_contribution_2_elements()
     {
-      oomph_info << "create_pressure_contribution_2_elements" << endl;
+      oomph_info << "create_pressure_contribution_2_elements" << std::endl;
       const bool add_to_residual = false;
 
       // Loop over boundary elements
@@ -1140,7 +1140,7 @@ namespace oomph
 
     void check_mass_matrix()
     {
-      oomph_info << "check_mass_matrix" << endl;
+      oomph_info << "check_mass_matrix" << std::endl;
       {
         ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(0));
         unsigned n = el_pt->ndof();
@@ -1227,7 +1227,7 @@ namespace oomph
     // Refine the mesh for the weak contact angle constraint
     void refine_mesh_for_weak_contact_angle_constraint()
     {
-      oomph_info << "Refining the mesh about the contact line" << endl;
+      oomph_info << "Refining the mesh about the contact line" << std::endl;
 
       double max_error = 1e6;
       // double old_max_error = max_error + 1.0;
@@ -1246,7 +1246,7 @@ namespace oomph
         // old_max_error = max_error;
         compute_error_estimate(max_error, min_error);
         oomph_info << "Number of adaptions: " << i_adapt
-                   << ", Max error: " << max_error << endl;
+                   << ", Max error: " << max_error << std::endl;
 
         unsigned n_elements = Bulk_mesh_pt->nelement();
         Vector<double> elemental_error(n_elements);
@@ -1262,7 +1262,7 @@ namespace oomph
     // Solve for the initial state
     void solve_for_initial_state()
     {
-      oomph_info << "Solving for initial state" << endl;
+      oomph_info << "Solving for initial state" << std::endl;
 
       // Ensure the problem is static
       if (!this->Is_steady)
@@ -1387,7 +1387,7 @@ namespace oomph
       if (local_max_z2_error > Mesh_Control_Parameters::Max_permitted_z2_error)
       {
         // Then adapt is needed
-        oomph_info << "Adapt is needed due to Z2 error" << endl;
+        oomph_info << "Adapt is needed due to Z2 error" << std::endl;
         return true;
       }
 
@@ -1407,7 +1407,7 @@ namespace oomph
           oomph_info << "Contact angle error: "
                      << abs(expected_contact_angle - actual_contact_angle) *
                           180.0 / MathematicalConstants::Pi
-                     << endl;
+                     << std::endl;
           // If the contact angle error is not within tolerance
           if (abs(expected_contact_angle - actual_contact_angle) * 180.0 /
                 MathematicalConstants::Pi >
@@ -1421,7 +1421,7 @@ namespace oomph
             }
 
             // Then adapt is needed
-            oomph_info << "Adapt is needed due to contact angle error" << endl;
+            oomph_info << "Adapt is needed due to contact angle error" << std::endl;
             return true;
           }
         }
@@ -1442,7 +1442,7 @@ namespace oomph
           oomph_info << "Inner corner error: "
                      << abs(expected_contact_angle - actual_contact_angle) *
                           180.0 / MathematicalConstants::Pi
-                     << endl;
+                     << std::endl;
           // If the contact angle error is not within tolerance
           if (abs(expected_contact_angle - actual_contact_angle) * 180.0 /
                 MathematicalConstants::Pi >
@@ -1456,7 +1456,7 @@ namespace oomph
             }
 
             // Then adapt is needed
-            oomph_info << "Adapt is needed due to inner angle error" << endl;
+            oomph_info << "Adapt is needed due to inner angle error" << std::endl;
             return true;
           }
         }
@@ -1471,12 +1471,12 @@ namespace oomph
       //   // Then adapt is needed
       //   oomph_info << "Adapt is needed due to over-refining of the Z2
       //   error"
-      //              << endl;
+      //              << std::endl;
       //   return true;
       // }
 
 
-      oomph_info << "No further adaption is needed" << endl;
+      oomph_info << "No further adaption is needed" << std::endl;
       return false;
     }
 
@@ -1767,7 +1767,7 @@ namespace oomph
         }
       }
       // If not found, issue warning and return anyway
-      oomph_info << "Warning: No corner node found!" << endl;
+      oomph_info << "Warning: No corner node found!" << std::endl;
 
       return;
     }
@@ -1815,7 +1815,7 @@ namespace oomph
       double final_time_tolerance = 1e-6;
       while (this->time_pt()->time() < ft - final_time_tolerance)
       {
-        oomph_info << "t: " << this->time() << endl;
+        oomph_info << "t: " << this->time() << std::endl;
 
         // If (the step counter + 1) is a multiple of the number of steps
         // allowed between adapts, then ...
@@ -1854,7 +1854,7 @@ namespace oomph
         }
         catch (std::runtime_error& err)
         {
-          oomph_info << "Caught error" << endl;
+          oomph_info << "Caught error" << std::endl;
           break;
         }
 
@@ -1878,7 +1878,7 @@ namespace oomph
     // set to true
     void make_steady()
     {
-      oomph_info << "make_steady" << endl;
+      oomph_info << "make_steady" << std::endl;
 
       actions_before_adapt();
 
@@ -1892,7 +1892,7 @@ namespace oomph
     // set to false
     void make_unsteady()
     {
-      oomph_info << "make_unsteady" << endl;
+      oomph_info << "make_unsteady" << std::endl;
       actions_before_adapt();
 
       this->Is_steady = false;
@@ -1969,12 +1969,12 @@ namespace oomph
       Max_adapt = max_adapt;
     }
 
-    void set_directory(const string& dir_name)
+    void set_directory(const std::string& dir_name)
     {
       this->doc_info().set_directory(dir_name);
     }
 
-    string get_directory()
+    std::string get_directory()
     {
       return this->doc_info().directory();
     }
@@ -2023,7 +2023,7 @@ namespace oomph
 
     void debug_jacobian()
     {
-      oomph_info << "debug_jacobian" << endl;
+      oomph_info << "debug_jacobian" << std::endl;
       if (!this->Is_steady)
       {
         oomph_info << "WARNING: The problem is not steady! Expect differences "
@@ -2065,7 +2065,7 @@ namespace oomph
 
     void debug_mass_matrix()
     {
-      oomph_info << "debug_mass_matrix" << endl;
+      oomph_info << "debug_mass_matrix" << std::endl;
 
       DoubleVector residuals;
       CRDoubleMatrix jacobian;
@@ -2191,7 +2191,7 @@ namespace oomph
         Volume_trace_file.open(filename);
         Volume_trace_file << "doc_number ";
         Volume_trace_file << "prescribed_volume ";
-        Volume_trace_file << "lagrange_multiplier" << endl;
+        Volume_trace_file << "lagrange_multiplier" << std::endl;
 
         // Open trace file
         filename = this->doc_info().directory() + "/flux_trace.dat";
@@ -2199,7 +2199,7 @@ namespace oomph
         Flux_trace_file << "doc_number ";
         Flux_trace_file << "time ";
         Flux_trace_file << "prescribed_flux ";
-        Flux_trace_file << "lagrange_multiplier" << endl;
+        Flux_trace_file << "lagrange_multiplier" << std::endl;
 
         // Open trace file
         filename = this->doc_info().directory() + "/contact_angle_trace.dat";
@@ -2210,7 +2210,7 @@ namespace oomph
         Contact_angle_trace_file << "prescribed_angle ";
         Contact_angle_trace_file << "computed_angle ";
         Contact_angle_trace_file << "lagrange_multiplier";
-        Contact_angle_trace_file << endl;
+        Contact_angle_trace_file << std::endl;
 
         filename = this->doc_info().directory() + "/inner_angle_trace.dat";
         Inner_angle_trace_file.open(filename);
@@ -2220,7 +2220,7 @@ namespace oomph
         Inner_angle_trace_file << "prescribed_angle ";
         Inner_angle_trace_file << "computed_angle ";
         Inner_angle_trace_file << "lagrange_multiplier";
-        Inner_angle_trace_file << endl;
+        Inner_angle_trace_file << std::endl;
       }
       else
       {
@@ -2290,7 +2290,7 @@ namespace oomph
     // each element
     void doc_solution()
     {
-      oomph_info << "doc_solution" << endl;
+      oomph_info << "doc_solution" << std::endl;
       int local_rank = 0;
 #ifdef OOMPH_HAS_MPI
       OomphCommunicator* comm_pt = MPI_Helpers::communicator_pt();
@@ -2310,7 +2310,7 @@ namespace oomph
 
       if (local_rank == 0)
       {
-        oomph_info << "Doc Number: " << this->doc_info().number() << endl;
+        oomph_info << "Doc Number: " << this->doc_info().number() << std::endl;
 
         // Output stream
         std::ofstream output_stream;
@@ -2344,7 +2344,7 @@ namespace oomph
           output_stream << "w ";
           output_stream << "p ";
           output_stream << "lagrange_multiplier ";
-          output_stream << endl;
+          output_stream << std::endl;
           Free_surface_mesh_pt->output(output_stream, npts);
           output_stream.close();
         }
@@ -2402,7 +2402,7 @@ namespace oomph
           output_stream << "v ";
           output_stream << "w ";
           output_stream << "lagrange_multiplier ";
-          output_stream << endl;
+          output_stream << std::endl;
           No_penetration_boundary_mesh_pt->output(output_stream);
           output_stream.close();
         }
@@ -2423,7 +2423,7 @@ namespace oomph
           doc_trace(max_err, min_err);
         }
 
-        // Document height drop to cout
+        // Document height drop to std::cout
         dynamic_cast<HEIGHT_ELEMENT*>(Height_mesh_pt->element_pt(0))
           ->output(std::cout);
 
@@ -2449,7 +2449,7 @@ namespace oomph
     void doc_flux(ostream& out, const unsigned& n_plot_points)
     {
       // Output dat file header
-      out << "x y u v w" << endl;
+      out << "x y u v w" << std::endl;
 
       Flux_mesh_pt->output(out, n_plot_points);
     }
@@ -2458,7 +2458,7 @@ namespace oomph
     void doc_slip(ostream& out, const unsigned& n_plot_points)
     {
       // Output dat file header
-      out << "x y l_x l_y l_z n_x n_y u v w" << endl;
+      out << "x y l_x l_y l_z n_x n_y u v w" << std::endl;
 
       Slip_boundary_mesh_pt->output(out, n_plot_points);
     }
@@ -2607,7 +2607,7 @@ namespace oomph
     {
       // Save current solution
       std::ofstream dump_filestream;
-      string restart_filename = this->doc_info().directory() + "/restart" +
+      std::string restart_filename = this->doc_info().directory() + "/restart" +
                                 to_string(this->doc_info().number()) + ".dat";
       dump_filestream.open(restart_filename);
       dump_filestream.precision(16);
@@ -2616,7 +2616,7 @@ namespace oomph
       // actions_after_adapt();
       dump_filestream.close();
 
-      string triangulateio_filename =
+      std::string triangulateio_filename =
         this->doc_info().directory() + "/triangulateio" +
         to_string(this->doc_info().number()) + ".dat";
       dump_filestream.open(triangulateio_filename);
@@ -2873,7 +2873,7 @@ namespace oomph
 
             if (pin_bc)
             {
-              // oomph_info << u[0] << ", " << u[1] << endl;
+              // oomph_info << u[0] << ", " << u[1] << std::endl;
 
               // el_pt->pin_momentum_eqn(i, 0);
               // el_pt->pin_momentum_eqn(i, 1);
@@ -3084,7 +3084,7 @@ namespace oomph
   public:
     void pin_fluid()
     {
-      oomph_info << "pin_fluid" << endl;
+      oomph_info << "pin_fluid" << std::endl;
       unsigned n_element = Bulk_mesh_pt->nelement();
       for (unsigned n = 0; n < n_element; n++)
       {
@@ -3243,7 +3243,7 @@ namespace oomph
   public:
     void pin_solid()
     {
-      oomph_info << "pin_solid" << endl;
+      oomph_info << "pin_solid" << std::endl;
       // Pin all solid node positions
       unsigned n_node = Bulk_mesh_pt->nnode();
       for (unsigned n = 0; n < n_node; n++)
@@ -3273,7 +3273,7 @@ namespace oomph
     // needed.
     void create_error_estimators()
     {
-      oomph_info << "create_error_estimators" << endl;
+      oomph_info << "create_error_estimators" << std::endl;
       // Create the Z2 error estimator
       Z2_error_estimator_pt = new Z2ErrorEstimator;
       // And set a reference flux norm to avoid high errors for the static
@@ -3326,7 +3326,7 @@ namespace oomph
     // Set the error estimator
     void set_error_estimator()
     {
-      oomph_info << "set_error_estimator()" << endl;
+      oomph_info << "set_error_estimator()" << std::endl;
 
       double velocity_norm = 0;
       velocity_norm = global_velocity_norm();
@@ -3360,11 +3360,11 @@ namespace oomph
       }
       if (Using_contact_angle_error_estimator)
       {
-        cout << "Using contact angle error estimator" << endl;
+        std::cout << "Using contact angle error estimator" << std::endl;
       }
       else
       {
-        cout << "Using Z2 error estimator" << endl;
+        std::cout << "Using Z2 error estimator" << std::endl;
       }
     }
 
@@ -3409,7 +3409,7 @@ namespace oomph
     // Actions before adapt
     void actions_before_adapt()
     {
-      oomph_info << "actions_before_adapt" << endl;
+      oomph_info << "actions_before_adapt" << std::endl;
 
       unaugment_elements();
 
@@ -3476,7 +3476,7 @@ namespace oomph
     // Actions before adapt
     void actions_after_adapt()
     {
-      oomph_info << "actions_after_adapt" << endl;
+      oomph_info << "actions_after_adapt" << std::endl;
       //======================================================================
       // Setup the remaining parts of the bulk mesh
       //======================================================================
@@ -3599,7 +3599,7 @@ namespace oomph
       if (!Augmented_bulk_element_number.empty())
       {
         parameters::x_centre_node_pt = Contact_line_solid_node_pt;
-        cout << "Make augmented elements" << endl;
+        std::cout << "Make augmented elements" << std::endl;
         create_singularity_scaling_elements();
         create_pressure_contribution_1_elements();
         create_pressure_contribution_2_elements();

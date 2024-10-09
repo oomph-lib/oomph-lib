@@ -48,7 +48,7 @@ using namespace oomph;
 
 void parse_arguments(const int& argc,
                      char** const& argv,
-                     string& parameters_filename,
+                     std::string& parameters_filename,
                      double& starting_step,
                      double*& continuation_param_pt,
                      bool& has_arc_continuation,
@@ -154,7 +154,7 @@ void normal_continuation_run(Parameters& parameters,
   bool has_restart = false;
   if (parameters.restart_filename != "")
   {
-    cout << "restarting" << endl;
+    std::cout << "restarting" << std::endl;
     has_restart = true;
   }
   SingularAxisymDynamicCapProblem<
@@ -212,8 +212,8 @@ void normal_continuation_run(Parameters& parameters,
   while (iterations < max_iterations)
   {
     // Output info
-    cout << "Iteration: " << iterations << ", param: " << *continuation_param_pt
-         << ", step: " << step << endl;
+    std::cout << "Iteration: " << iterations << ", param: " << *continuation_param_pt
+         << ", step: " << step << std::endl;
 
     // Update iteration number
     iterations++;
@@ -267,7 +267,7 @@ void arc_continuation_run(Parameters& parameters,
   bool has_restart = false;
   if (parameters.restart_filename != "")
   {
-    cout << "restarting" << endl;
+    std::cout << "restarting" << std::endl;
     has_restart = true;
   }
 
@@ -415,7 +415,7 @@ void bond_height_control_continuation_run(Parameters& parameters,
   bool has_restart = false;
   if (parameters.restart_filename != "")
   {
-    cout << "restarting" << endl;
+    std::cout << "restarting" << std::endl;
     has_restart = true;
   }
   BoHeightControlSingularAxisymDynamicCapProblem<
@@ -525,7 +525,7 @@ void ca_height_control_continuation_run(Parameters& parameters,
   bool has_restart = false;
   if (parameters.restart_filename != "")
   {
-    cout << "restarting" << endl;
+    std::cout << "restarting" << std::endl;
     has_restart = true;
   }
   CaHeightControlSingularAxisymDynamicCapProblem<
@@ -640,7 +640,7 @@ int main(int argc, char** argv)
   MPI_Helpers::init(argc, argv, make_copy_of_mpi_comm_world);
 #endif
 
-  string parameters_filename = "";
+  std::string parameters_filename = "";
   double starting_step = 0.0;
   double* continuation_param_pt = 0;
   bool has_arc_continuation = false;

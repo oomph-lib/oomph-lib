@@ -66,11 +66,11 @@ int main()
 
   if (abs(perturbed_problem.get_volume() + 0.00875)/0.00875 < 1e-2)
   {
-    cout << "." << endl;
+    std::cout << "." << std::endl;
   }
   else
   {
-    cout << "F" << endl;
+    std::cout << "F" << std::endl;
   }
 
   Slip_Parameters::wall_velocity = 0.02;
@@ -100,11 +100,11 @@ int main()
 
   if (abs(perturbed_problem2.get_volume() + 0.00875)/0.00875 < 1e-2)
   {
-    cout << "." << endl;
+    std::cout << "." << std::endl;
   }
   else
   {
-    cout << "F" << endl;
+    std::cout << "F" << std::endl;
   }
 
   return 0;

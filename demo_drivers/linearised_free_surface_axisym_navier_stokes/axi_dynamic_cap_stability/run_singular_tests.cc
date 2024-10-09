@@ -19,9 +19,9 @@ using namespace oomph;
 //   Vector<double> pressure = problem_pt->get_pressure_around_corner();
 //   for (unsigned i = 0; i < 8; i++)
 //   {
-//     cout << pressure[i] << " ";
+//     std::cout << pressure[i] << " ";
 //   }
-//   cout << endl;
+//   std::cout << std::endl;
 //   problem_pt->doc_solution();
 //
 //   // BOOST_TEST(jacobians_are_equal);
@@ -37,9 +37,9 @@ using namespace oomph;
 //   Vector<double> pressure = problem_pt->get_pressure_around_corner();
 //   for (unsigned i = 0; i < 8; i++)
 //   {
-//     cout << pressure[i] << " ";
+//     std::cout << pressure[i] << " ";
 //   }
-//   cout << endl;
+//   std::cout << std::endl;
 
 //   // Requires RESLT2 to be there already
 //   problem_pt->set_directory("RESLT2");
@@ -62,9 +62,9 @@ using namespace oomph;
 //   Vector<double> pressure = problem_pt->get_pressure_around_corner();
 //   for (unsigned i = 0; i < 8; i++)
 //   {
-//     cout << pressure[i] << " ";
+//     std::cout << pressure[i] << " ";
 //   }
-//   cout << endl;
+//   std::cout << std::endl;
 //
 //   BOOST_TEST(abs(problem_pt->get_height_drop() + 0.0018670362255485331) <
 //   1e-6);
@@ -81,9 +81,9 @@ using namespace oomph;
 //   Vector<double> pressure = problem_pt->get_pressure_around_corner();
 //   for (unsigned i = 0; i < 8; i++)
 //   {
-//     cout << pressure[i] << " ";
+//     std::cout << pressure[i] << " ";
 //   }
-//   cout << endl;
+//   std::cout << std::endl;
 //
 //   BOOST_TEST(abs(problem_pt->get_height_drop() + 0.0018670362255485331) <
 //   1e-6);
@@ -99,9 +99,9 @@ using namespace oomph;
 //   Vector<double> pressure = problem_pt->get_pressure_around_corner();
 //   for (unsigned i = 0; i < 8; i++)
 //   {
-//     cout << pressure[i] << " ";
+//     std::cout << pressure[i] << " ";
 //   }
-//   cout << endl;
+//   std::cout << std::endl;
 //
 //   BOOST_TEST(abs(problem_pt->get_height_drop() + 0.0018670362255485331) <
 //   2e-5);
@@ -117,9 +117,9 @@ using namespace oomph;
 //   Vector<double> pressure = problem_pt->get_pressure_around_corner();
 //   for (unsigned i = 0; i < 8; i++)
 //   {
-//     cout << pressure[i] << " ";
+//     std::cout << pressure[i] << " ";
 //   }
-//   cout << endl;
+//   std::cout << std::endl;
 //
 //   BOOST_TEST(abs(problem_pt->get_height_drop() + 0.019074557268186201) <
 //   1e-6);
@@ -135,9 +135,9 @@ using namespace oomph;
 //   Vector<double> pressure = problem_pt->get_pressure_around_corner();
 //   for (unsigned i = 0; i < 8; i++)
 //   {
-//     cout << pressure[i] << " ";
+//     std::cout << pressure[i] << " ";
 //   }
-//   cout << endl;
+//   std::cout << std::endl;
 //
 //   problem_pt->doc_solution();
 //

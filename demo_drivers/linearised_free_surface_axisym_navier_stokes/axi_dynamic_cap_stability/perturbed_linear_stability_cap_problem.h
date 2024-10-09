@@ -465,7 +465,7 @@ namespace oomph
 
     void create_centre_elements()
     {
-      oomph_info << "create_centre_elements" << endl;
+      oomph_info << "create_centre_elements" << std::endl;
 
       // Loop over all the inner boundary elements and hijack the cosine
       // horizontal dofs at the inner nodes.
@@ -521,13 +521,13 @@ namespace oomph
       fs_el_pt->hijack_nodal_value(corner_element_node_index, uc_index);
       fs_el_pt->hijack_nodal_value(corner_element_node_index, us_index);
 
-      cout << visited_nodes.size() << " visited of "
-           << Fluid_mesh_pt->nboundary_node(Inner_boundary_id) << endl;
+      std::cout << visited_nodes.size() << " visited of "
+           << Fluid_mesh_pt->nboundary_node(Inner_boundary_id) << std::endl;
     }
 
     void create_contact_line_elements()
     {
-      oomph_info << "create_contact_line_elements" << endl;
+      oomph_info << "create_contact_line_elements" << std::endl;
       const unsigned n_element = Free_surface_mesh_pt->nelement();
       for (unsigned n = 0; n < n_element; n++)
       {
@@ -591,7 +591,7 @@ namespace oomph
     // This will change what boundary conditions we are imposing
     void make_steady()
     {
-      oomph_info << "make_steady" << endl;
+      oomph_info << "make_steady" << std::endl;
 
       this->Is_steady = true;
 
@@ -604,7 +604,7 @@ namespace oomph
     // This will change what boundary conditions we are imposing
     void make_unsteady()
     {
-      oomph_info << "make_unsteady" << endl;
+      oomph_info << "make_unsteady" << std::endl;
 
       this->Is_steady = false;
 
@@ -989,7 +989,7 @@ namespace oomph
         }
       }
       // If not found, issue warning and return anyway
-      oomph_info << "Warning: No corner node found!" << endl;
+      oomph_info << "Warning: No corner node found!" << std::endl;
 
       return;
     }
@@ -1017,7 +1017,7 @@ namespace oomph
 
     void set_outer_boundary_condition()
     {
-      oomph_info << "set_outer_boundary_condition" << endl;
+      oomph_info << "set_outer_boundary_condition" << std::endl;
       // Loop over the nodes on the boundary
       unsigned n_boundary_node;
       n_boundary_node =
@@ -1083,7 +1083,7 @@ namespace oomph
 
     void set_upper_boundary_condition()
     {
-      oomph_info << "set_upper_boundary_condition" << endl;
+      oomph_info << "set_upper_boundary_condition" << std::endl;
       // Velocity constraints
       unsigned n_boundary_node =
         Fluid_mesh_pt->nboundary_node(Upper_boundary_id);
@@ -1141,7 +1141,7 @@ namespace oomph
 
     void set_inner_boundary_condition()
     {
-      oomph_info << "set_inner_boundary_condition" << endl;
+      oomph_info << "set_inner_boundary_condition" << std::endl;
       unsigned n_boundary_node =
         Fluid_mesh_pt->nboundary_node(Inner_boundary_id);
       for (unsigned n = 0; n < n_boundary_node; n++)
@@ -1218,7 +1218,7 @@ namespace oomph
 
     void set_free_surface_boundary_condition()
     {
-      oomph_info << "set_free_surface_boundary_condition" << endl;
+      oomph_info << "set_free_surface_boundary_condition" << std::endl;
 
       if (this->Azimuthal_mode_number == 0)
       {
@@ -1240,7 +1240,7 @@ namespace oomph
 
     void pin_centre_pressure()
     {
-      oomph_info << "pin_centre_pressure" << endl;
+      oomph_info << "pin_centre_pressure" << std::endl;
       unsigned n_element;
       n_element = Free_surface_mesh_pt->nelement();
       for (unsigned n = 0; n < n_element; n++)
@@ -1261,7 +1261,7 @@ namespace oomph
 
     void pin_centre_corner_lagrange_multipler()
     {
-      oomph_info << "pin_centre_corner_lagrange_multipler" << endl;
+      oomph_info << "pin_centre_corner_lagrange_multipler" << std::endl;
       unsigned n_element;
       n_element = Free_surface_mesh_pt->nelement();
       for (unsigned n = 0; n < n_element; n++)
@@ -1281,7 +1281,7 @@ namespace oomph
 
     void pin_centre_corner_displacement()
     {
-      oomph_info << "pin_centre_corner_displacement" << endl;
+      oomph_info << "pin_centre_corner_displacement" << std::endl;
       unsigned n_element;
       n_element = Free_surface_mesh_pt->nelement();
       for (unsigned n = 0; n < n_element; n++)
@@ -1304,7 +1304,7 @@ namespace oomph
 
     void pin_centre_corner_horizontal_displacement()
     {
-      oomph_info << "pin_centre_corner_displacement" << endl;
+      oomph_info << "pin_centre_corner_displacement" << std::endl;
       unsigned n_element;
       n_element = Free_surface_mesh_pt->nelement();
       for (unsigned n = 0; n < n_element; n++)
@@ -1325,7 +1325,7 @@ namespace oomph
 
     void pin_centre_corner_velocities()
     {
-      oomph_info << "pin_centre_corner_velocities" << endl;
+      oomph_info << "pin_centre_corner_velocities" << std::endl;
       unsigned n_element;
       n_element = Free_surface_mesh_pt->nelement();
       for (unsigned n = 0; n < n_element; n++)
@@ -1350,7 +1350,7 @@ namespace oomph
 
     void pin_centre()
     {
-      oomph_info << "pin_centre" << endl;
+      oomph_info << "pin_centre" << std::endl;
       unsigned n_element;
       n_element = Free_surface_mesh_pt->nelement();
       for (unsigned n = 0; n < n_element; n++)
@@ -1384,7 +1384,7 @@ namespace oomph
 
     void pin_centre_element()
     {
-      oomph_info << "pin_centre_element" << endl;
+      oomph_info << "pin_centre_element" << std::endl;
       unsigned n_element;
       n_element = Free_surface_mesh_pt->nelement();
       for (unsigned n = 0; n < n_element; n++)
@@ -1459,7 +1459,7 @@ namespace oomph
 
     void pin_contact_line_and_lagrange_multiplier()
     {
-      oomph_info << "pin_contact_line_and_lagrange_multiplier" << endl;
+      oomph_info << "pin_contact_line_and_lagrange_multiplier" << std::endl;
       unsigned n_element;
       n_element = Free_surface_mesh_pt->nelement();
       for (unsigned n = 0; n < n_element; n++)
@@ -1484,7 +1484,7 @@ namespace oomph
 
     void pin_contact_line()
     {
-      oomph_info << "pin_contact_line" << endl;
+      oomph_info << "pin_contact_line" << std::endl;
       unsigned n_element;
       n_element = Free_surface_mesh_pt->nelement();
       for (unsigned n = 0; n < n_element; n++)
@@ -1608,7 +1608,7 @@ namespace oomph
 
     void set_initial_condition()
     {
-      oomph_info << "set_initial_condition" << endl;
+      oomph_info << "set_initial_condition" << std::endl;
 
       perturb_z_displacement();
     }
@@ -1795,7 +1795,7 @@ namespace oomph
       double final_time_tolerance = 1e-6;
       while (this->time_pt()->time() < ft - final_time_tolerance)
       {
-        oomph_info << "t: " << this->time() << endl;
+        oomph_info << "t: " << this->time() << std::endl;
 
         // If (the step counter + 1) is a multiple of the number of steps
         // allowed between adapts, then ...
@@ -1834,7 +1834,7 @@ namespace oomph
         }
         catch (std::runtime_error& err)
         {
-          oomph_info << "Caught error" << endl;
+          oomph_info << "Caught error" << std::endl;
           break;
         }
 
@@ -1854,7 +1854,7 @@ namespace oomph
     }
 
 
-    void set_directory(const string& dir_name)
+    void set_directory(const std::string& dir_name)
     {
       this->doc_info().set_directory(dir_name);
     }
@@ -1971,7 +1971,7 @@ namespace oomph
         }
       }
       // If not found, issue warning and return anyway
-      oomph_info << "Warning: No corner node found!" << endl;
+      oomph_info << "Warning: No corner node found!" << std::endl;
 
       return bulk_el_pt;
     }
@@ -1979,7 +1979,7 @@ namespace oomph
 
     void doc_solution()
     {
-      oomph_info << "doc_solution: " << this->doc_info().number() << endl;
+      oomph_info << "doc_solution: " << this->doc_info().number() << std::endl;
       std::ofstream output_stream;
       output_stream.precision(16);
       std::string filename;
@@ -2019,7 +2019,7 @@ namespace oomph
         filename = this->doc_info().directory() + "/perturbed_volume_trace.dat";
         output_stream.open(filename, std::ios_base::app);
         output_stream << this->doc_info().number() << " "
-                      << Volume_data_pt->value(0) << endl;
+                      << Volume_data_pt->value(0) << std::endl;
         output_stream.close();
       }
 
@@ -2028,7 +2028,7 @@ namespace oomph
         filename = this->doc_info().directory() + "/perturbed_flux_trace.dat";
         output_stream.open(filename, std::ios_base::app);
         output_stream << this->doc_info().number() << " "
-                      << Flux_lagrange_multiplier_data_pt->value(0) << endl;
+                      << Flux_lagrange_multiplier_data_pt->value(0) << std::endl;
         output_stream.close();
 
         filename = this->doc_info().directory() + "/flux_surface" +
@@ -2117,7 +2117,7 @@ namespace oomph
 
     void doc_full_eigenmatrices()
     {
-      oomph_info << "doc_eigenmatrices" << endl;
+      oomph_info << "doc_eigenmatrices" << std::endl;
       DoubleVector residuals;
       CRDoubleMatrix jacobianOnly;
       get_jacobian(residuals, jacobianOnly);
@@ -2144,7 +2144,7 @@ namespace oomph
 
     void doc_sparse_eigenmatrices()
     {
-      oomph_info << "doc_sparse_eigenmatrices" << endl;
+      oomph_info << "doc_sparse_eigenmatrices" << std::endl;
       DoubleVector residuals;
       CRDoubleMatrix jacobianOnly;
       get_jacobian(residuals, jacobianOnly);
@@ -2167,7 +2167,7 @@ namespace oomph
 
     void debug_jacobian()
     {
-      oomph_info << "debug_jacobian" << endl;
+      oomph_info << "debug_jacobian" << std::endl;
       if (!this->Is_steady)
       {
         oomph_info << "WARNING: The problem is not steady! Expect differences "
@@ -2240,7 +2240,7 @@ namespace oomph
 
     void debug_mass_matrix()
     {
-      oomph_info << "debug_mass_matrix" << endl;
+      oomph_info << "debug_mass_matrix" << std::endl;
 
       DoubleVector residuals;
       CRDoubleMatrix jacobian;

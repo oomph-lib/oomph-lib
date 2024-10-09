@@ -389,7 +389,7 @@ namespace oomph
       outfile << ca() << " ";
       outfile << contact_angle() << " ";
       outfile << azimuthal_mode_number();
-      outfile << endl;
+      outfile << std::endl;
     }
   };
 } // namespace oomph

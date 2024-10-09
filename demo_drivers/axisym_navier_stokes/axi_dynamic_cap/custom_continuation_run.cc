@@ -47,7 +47,7 @@ int main(int argc, char** argv)
   int number_of_arguments = argc - 1;
   if (number_of_arguments != 3)
   {
-    cout << "Wrong number of arguments." << std::endl;
+    std::cout << "Wrong number of arguments." << std::endl;
     return 1;
   }
 
@@ -66,7 +66,7 @@ int main(int argc, char** argv)
   bool has_restart = false;
   if (parameters.restart_filename != "")
   {
-    cout << "restarting" << endl;
+    std::cout << "restarting" << std::endl;
     has_restart = true;
   }
   AxisymDynamicCapProblem<HijackedProjectableAxisymmetricTTaylorHoodPVDElement,
@@ -86,8 +86,8 @@ int main(int argc, char** argv)
     }
     catch (exception& e)
     {
-      cout << "Restart filename can't be set, or opened, or read." << endl;
-      cout << "File: " << parameters.restart_filename << endl;
+      std::cout << "Restart filename can't be set, or opened, or read." << std::endl;
+      std::cout << "File: " << parameters.restart_filename << std::endl;
       return 1;
     }
   }
@@ -116,7 +116,7 @@ int main(int argc, char** argv)
   problem.create_restart_file();
   problem.doc_solution();
 
-  string continuation_parameter_string = "";
+  std::string continuation_parameter_string = "";
   double* continuation_param_pt = 0;
   try
   {
@@ -145,8 +145,8 @@ int main(int argc, char** argv)
   }
   catch (exception& e)
   {
-    cout << "Continuation parameter can't be set." << endl;
-    cout << "Argument in: " << continuation_parameter_string << endl;
+    std::cout << "Continuation parameter can't be set." << std::endl;
+    std::cout << "Argument in: " << continuation_parameter_string << std::endl;
     return 1;
   }
 
@@ -157,8 +157,8 @@ int main(int argc, char** argv)
   }
   catch (exception& e)
   {
-    cout << "Target step size can't be set." << endl;
-    cout << "Argument in: " << argv[2] << endl;
+    std::cout << "Target step size can't be set." << std::endl;
+    std::cout << "Argument in: " << argv[2] << std::endl;
     return 1;
   }
 
@@ -169,8 +169,8 @@ int main(int argc, char** argv)
   while (iterations < max_iterations)
   {
     // Output info
-    cout << "Iteration: " << iterations << ", param: " << *continuation_param_pt
-         << ", step: " << step << endl;
+    std::cout << "Iteration: " << iterations << ", param: " << *continuation_param_pt
+         << ", step: " << step << std::endl;
 
     // Update iteration number
     iterations++;
@@ -191,8 +191,8 @@ int main(int argc, char** argv)
       alpha = MathematicalConstants::Pi - alpha;
       custom_Bo = 0.84 * exp(1.6616 * alpha) + 0.916732472209317 * alpha;
     }
-    cout << "alpha: " << alpha << ", ";
-    cout << "Bo: " << custom_Bo << endl;
+    std::cout << "alpha: " << alpha << ", ";
+    std::cout << "Bo: " << custom_Bo << std::endl;
 
     problem.set_contact_angle(
       Global_Physical_Parameters::Equilibrium_contact_angle);

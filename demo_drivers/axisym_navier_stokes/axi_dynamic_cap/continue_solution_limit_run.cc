@@ -31,17 +31,17 @@ typedef AxisymDynamicCapProblem<BASE_ELEMENT, TIMESTEPPER> BASE_PROBLEM;
 // Parse input arguments
 bool parse_arguments(int argc,
                      char** argv,
-                     string& continuation_parameter_string,
+                     std::string& continuation_parameter_string,
                      double& parameter_step,
-                     string& neutral_stability_parameter_string,
+                     std::string& neutral_stability_parameter_string,
                      double& step_stability,
-                     string& filename)
+                     std::string& filename)
 {
   // Check number of arguments
   int number_of_arguments = argc - 1;
   if (number_of_arguments != 5)
   {
-    cout << "Wrong number of arguments." << std::endl;
+    std::cout << "Wrong number of arguments." << std::endl;
     return 1;
   }
   continuation_parameter_string = argv[1];
@@ -58,7 +58,7 @@ BASE_PROBLEM* create_base_problem(Parameters& parameters)
   bool has_restart = false;
   if (parameters.restart_filename != "")
   {
-    cout << "restarting" << endl;
+    std::cout << "restarting" << std::endl;
     has_restart = true;
   }
 
@@ -78,8 +78,8 @@ BASE_PROBLEM* create_base_problem(Parameters& parameters)
     }
     catch (exception& e)
     {
-      cout << "Restart filename can't be set, or opened, or read." << endl;
-      cout << "File: " << parameters.restart_filename << endl;
+      std::cout << "Restart filename can't be set, or opened, or read." << std::endl;
+      std::cout << "File: " << parameters.restart_filename << std::endl;
       throw(e);
     }
   }
@@ -141,23 +141,23 @@ void solve_the_steady_problem(BASE_PROBLEM* const& base_problem_pt,
     }
     catch (exception& e)
     {
-      cout << "Caught exception" << endl;
-      cout << "Resetting problem" << endl;
+      std::cout << "Caught exception" << std::endl;
+      std::cout << "Resetting problem" << std::endl;
       base_problem_pt->set_dofs(dofs);
       *stability_pt -= step_stability;
       step_stability /= 3.0;
       *stability_pt += step_stability;
-      cout << "Reducing step size.";
-      cout << "Number of attempts: " << base_state_iterations;
-      cout << ", Step size: " << step_stability;
-      cout << ", Target wall velocity: " << *stability_pt << endl;
+      std::cout << "Reducing step size.";
+      std::cout << "Number of attempts: " << base_state_iterations;
+      std::cout << ", Step size: " << step_stability;
+      std::cout << ", Target wall velocity: " << *stability_pt << std::endl;
     }
     base_state_iterations++;
   }
 
   if (!has_base_state)
   {
-    cout << "WARNING: Base state not found." << endl;
+    std::cout << "WARNING: Base state not found." << std::endl;
     throw("Base state not found");
   }
 }
@@ -181,12 +181,12 @@ void arc_length_continue_to_the_limit_point(
 
   while (!has_converged && n_iterations < max_n_iterations)
   {
-    cout << "-------------" << endl;
-    cout << "Start of loop" << endl;
-    cout << "-------------" << endl;
-    cout << endl;
-    cout << n_iterations << ", " << *stability_pt << "," << direction << ","
-         << ds << endl;
+    std::cout << "-------------" << std::endl;
+    std::cout << "Start of loop" << std::endl;
+    std::cout << "-------------" << std::endl;
+    std::cout << std::endl;
+    std::cout << n_iterations << ", " << *stability_pt << "," << direction << ","
+         << ds << std::endl;
 
     old_param = *stability_pt;
 
@@ -235,12 +235,12 @@ void arc_length_continue_to_the_limit_point(
   ofstream my_trace("my_trace.dat", std::ios_base::app);
   my_trace << base_problem_pt->get_doc_number() << " " << *param_pt << " "
            << *stability_pt << " " << old_param << " "
-           << (*stability_pt + old_param) / 2.0 << endl;
+           << (*stability_pt + old_param) / 2.0 << std::endl;
   my_trace.close();
 
   if (!has_converged)
   {
-    cout << "WARNING: Critical Bond number not converged." << endl;
+    std::cout << "WARNING: Critical Bond number not converged." << std::endl;
     throw("Critical Bond number not converged");
   }
 }
@@ -294,11 +294,11 @@ int main(int argc, char** argv)
   MPI_Helpers::init(argc, argv, make_copy_of_mpi_comm_world);
 #endif
 
-  string continuation_parameter_string;
+  std::string continuation_parameter_string;
   double step_param;
-  string neutral_stability_parameter_string;
+  std::string neutral_stability_parameter_string;
   double step_stability;
-  string filename;
+  std::string filename;
   if (parse_arguments(argc,
                       argv,
                       continuation_parameter_string,
@@ -338,8 +338,8 @@ int main(int argc, char** argv)
   }
   catch (exception& e)
   {
-    cout << "Continuation parameter can't be set." << endl;
-    cout << "Argument in: " << continuation_parameter_string << endl;
+    std::cout << "Continuation parameter can't be set." << std::endl;
+    std::cout << "Argument in: " << continuation_parameter_string << std::endl;
     return 1;
   }
 
@@ -369,8 +369,8 @@ int main(int argc, char** argv)
   }
   catch (exception& e)
   {
-    cout << "Stability parameter can't be set." << endl;
-    cout << "Argument in: " << neutral_stability_parameter_string << endl;
+    std::cout << "Stability parameter can't be set." << std::endl;
+    std::cout << "Argument in: " << neutral_stability_parameter_string << std::endl;
     return 1;
   }
 
@@ -386,7 +386,7 @@ int main(int argc, char** argv)
     base_problem_pt->steady_newton_solve_adapt_if_needed(parameters.max_adapt);
   if (exit_flag < 0)
   {
-    oomph_info << "Couldn't solve for initial state." << endl;
+    oomph_info << "Couldn't solve for initial state." << std::endl;
     throw("Couldn't solve for initial state.");
   }
 
