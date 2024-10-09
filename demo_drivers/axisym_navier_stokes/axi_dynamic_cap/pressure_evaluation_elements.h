@@ -138,6 +138,11 @@ namespace oomph
     //   this->fill_in_jacobian_from_solid_position_by_fd(jacobian);
     // }
 
+    void fill_in_contribution_to_dresiduals_dparameter(
+      double* const& parameter_pt, Vector<double>& dres_dparam)
+    {
+    }
+
     /// Specify the value of nodal zeta from the face geometry
     /// The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by

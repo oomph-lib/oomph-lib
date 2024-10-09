@@ -20,6 +20,11 @@ namespace oomph
       this->add_external_data(singular_scaling_data_pt);
     }
 
+    void fill_in_contribution_to_dresiduals_dparameter(
+      double* const& parameter_pt, Vector<double>& dres_dparam)
+    {
+    }
+
   protected:
     void get_traction(const double& time,
                       const Vector<double>& x,

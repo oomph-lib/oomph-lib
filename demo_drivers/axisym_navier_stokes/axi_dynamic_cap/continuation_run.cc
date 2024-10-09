@@ -27,6 +27,7 @@
 // OOMPH-LIB include files
 #include "generic.h"
 #include "axisym_navier_stokes.h"
+#include "singular_axisym_navier_stokes_elements.h"
 #include "fluid_interface.h"
 #include "constitutive.h"
 #include "solid.h"
@@ -35,8 +36,11 @@
 // Local include files
 #include "hijacked_projectable_axisymmteric_Ttaylor_hood_elements.h"
 #include "axisym_dynamic_cap_problem.h"
+#include "singular_axisym_dynamic_cap_problem.h"
 #include "bond_height_continuation_axisym_dynamic_cap_problem.h"
 #include "ca_height_continuation_axisym_dynamic_cap_problem.h"
+#include "bo_height_control_singular_axisym_dynamic_cap_problem.h"
+#include "ca_height_control_singular_axisym_dynamic_cap_problem.h"
 #include "parameters.h"
 
 using namespace std;
@@ -153,8 +157,10 @@ void normal_continuation_run(Parameters& parameters,
     cout << "restarting" << endl;
     has_restart = true;
   }
-  AxisymDynamicCapProblem<HijackedProjectableAxisymmetricTTaylorHoodPVDElement,
-                          BDF<2>>
+  SingularAxisymDynamicCapProblem<
+    SingularAxisymNavierStokesElement<
+      HijackedProjectableAxisymmetricTTaylorHoodPVDElement>,
+    BDF<2>>
     problem(Global_Physical_Parameters::Equilibrium_contact_angle, has_restart);
 
   // Load in restart file
@@ -264,8 +270,11 @@ void arc_continuation_run(Parameters& parameters,
     cout << "restarting" << endl;
     has_restart = true;
   }
-  AxisymDynamicCapProblem<HijackedProjectableAxisymmetricTTaylorHoodPVDElement,
-                          BDF<2>>
+
+  SingularAxisymDynamicCapProblem<
+    SingularAxisymNavierStokesElement<
+      HijackedProjectableAxisymmetricTTaylorHoodPVDElement>,
+    BDF<2>>
     problem(Global_Physical_Parameters::Equilibrium_contact_angle, has_restart);
 
   // Load in restart file
@@ -409,8 +418,9 @@ void bond_height_control_continuation_run(Parameters& parameters,
     cout << "restarting" << endl;
     has_restart = true;
   }
-  BondHeightContinuationAxisymDynamicCapProblem<
-    HijackedProjectableAxisymmetricTTaylorHoodPVDElement,
+  BoHeightControlSingularAxisymDynamicCapProblem<
+    SingularAxisymNavierStokesElement<
+      HijackedProjectableAxisymmetricTTaylorHoodPVDElement>,
     BDF<2>>
     problem(Global_Physical_Parameters::Equilibrium_contact_angle, has_restart);
 
@@ -518,8 +528,9 @@ void ca_height_control_continuation_run(Parameters& parameters,
     cout << "restarting" << endl;
     has_restart = true;
   }
-  CaHeightContinuationAxisymDynamicCapProblem<
-    HijackedProjectableAxisymmetricTTaylorHoodPVDElement,
+  CaHeightControlSingularAxisymDynamicCapProblem<
+    SingularAxisymNavierStokesElement<
+      HijackedProjectableAxisymmetricTTaylorHoodPVDElement>,
     BDF<2>>
     problem(Global_Physical_Parameters::Equilibrium_contact_angle, has_restart);
 

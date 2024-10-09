@@ -2665,27 +2665,31 @@ namespace oomph
 
         el_pt->add_external_data(ReInvFr_data_pt);
 
-        // Augmented elements close to the corner
-        // Check distance from
-        // s centre is centre of mass of a uniform triangle, so (1/3,1/3) for
-        // Triangle[(1,0),(0,1),(0,0)]
-        Vector<double> s_centre(2, 1.0 / 3.0);
-        Vector<double> element_centre_x(2, 0.0);
-        el_pt->get_x(s_centre, element_centre_x);
-        double dist = 0;
-        for (unsigned i = 0; i < 2; i++)
+        if (Contact_angle > 90.0 * MathematicalConstants::Pi / 180.0)
         {
-          dist += pow(
-            element_centre_x[i] - Contact_line_solid_node_pt->position(i), 2.0);
-        }
-        dist = pow(dist, 0.5);
+          // Augmented elements close to the corner
+          // Check distance from
+          // s centre is centre of mass of a uniform triangle, so (1/3,1/3) for
+          // Triangle[(1,0),(0,1),(0,0)]
+          Vector<double> s_centre(2, 1.0 / 3.0);
+          Vector<double> element_centre_x(2, 0.0);
+          el_pt->get_x(s_centre, element_centre_x);
+          double dist = 0;
+          for (unsigned i = 0; i < 2; i++)
+          {
+            dist +=
+              pow(element_centre_x[i] - Contact_line_solid_node_pt->position(i),
+                  2.0);
+          }
+          dist = pow(dist, 0.5);
 
-        // If the distance to the corner is within the "inner" region, ...
-        const double inner_radius = 0.3;
-        if (dist < inner_radius)
-        {
-          el_pt->augment();
-          Augmented_bulk_element_number.push_back(e);
+          // If the distance to the corner is within the "inner" region, ...
+          const double inner_radius = 0.3;
+          if (dist < inner_radius)
+          {
+            el_pt->augment();
+            Augmented_bulk_element_number.push_back(e);
+          }
         }
       }
       oomph_info << Augmented_bulk_element_number.size()
