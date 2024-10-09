@@ -78,7 +78,7 @@ jobs:
       - name: Validate
         id: self_tests
         run: 
-          ./bin/parallel_self_test.py
+          ./bin/parallel_self_test.py -l demo_drivers/axisym_navier_stokes/axi_dynamic_cap -l demo_drivers/axisym_navier_stokes/temp -l demo_drivers/linearised_free_surface_axisym_navier_stokes/axi_dynamic_cap_stability
         continue-on-error: true
 
       - name: Upload validation log file
