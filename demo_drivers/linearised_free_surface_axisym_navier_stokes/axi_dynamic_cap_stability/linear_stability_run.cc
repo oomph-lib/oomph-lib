@@ -56,6 +56,7 @@
 #include "overlaying_my_linear_element.h"
 
 //#include "axisym_linear_stability_cap_problem.h"
+#include "axisym_dynamic_cap_problem.h"
 #include "singular_axisym_dynamic_cap_problem.h"
 #include "perturbed_linear_stability_cap_problem.h"
 
