@@ -49,13 +49,14 @@
 #include "hijacked_projectable_axisymmteric_Ttaylor_hood_elements.h"
 #include "linearised_axisymmetric_fluid_interface_elements.h"
 #include "decomposed_linear_elasticity_elements.h"
+#include "singular_axisym_navier_stokes_elements.h"
 
 #include "linearised_elastic_axisym_fluid_interface_element.h"
 #include "overlaying_linearised_elastic_axisym_fluid_interface_element.h"
 #include "overlaying_my_linear_element.h"
 
 //#include "axisym_linear_stability_cap_problem.h"
-#include "axisym_dynamic_cap_problem.h"
+#include "singular_axisym_dynamic_cap_problem.h"
 #include "perturbed_linear_stability_cap_problem.h"
 
 #include "parameters.h"
@@ -63,21 +64,100 @@
 using namespace std;
 using namespace oomph;
 
+void parse_arguments(const int& argc,
+                     char** const& argv,
+                     string& parameters_filename,
+                     double& starting_step,
+                     double*& continuation_param_pt)
+{
+  CommandLineArgs::setup(argc, argv);
+
+  CommandLineArgs::specify_command_line_flag(
+    "--parameters", &parameters_filename, "Required: parameter filename");
+
+  double bo_initial_step = 0.0;
+  CommandLineArgs::specify_command_line_flag(
+    "--Bo",
+    &bo_initial_step,
+    "Optional: Continue in Bond number with initial step");
+
+  double ca_initial_step = 0.0;
+  CommandLineArgs::specify_command_line_flag(
+    "--wall_velocity",
+    &ca_initial_step,
+    "Optional: Continue in Capillary number with initial step");
+
+  double angle_initial_step = 0.0;
+  CommandLineArgs::specify_command_line_flag(
+    "--angle",
+    &angle_initial_step,
+    "Optional: Continue in angle with initial step");
+
+  double slip_length_initial_step = 0.0;
+  CommandLineArgs::specify_command_line_flag(
+    "--slip_length",
+    &slip_length_initial_step,
+    "Optional: Continue in slip length with initial step");
+
+  CommandLineArgs::specify_command_line_flag("--arc",
+                                             "Optional: Use arc continuation");
+
+  CommandLineArgs::specify_command_line_flag(
+    "--height_control", "Optional: Use height control continuation");
+
+
+  // Parse and assign command line arguments
+  bool has_unrecognised_arg = false;
+  CommandLineArgs::parse_and_assign(argc, argv, has_unrecognised_arg);
+  if (has_unrecognised_arg)
+  {
+    throw std::invalid_argument("Unrecognised args.");
+  }
+  if (parameters_filename == "")
+  {
+    throw std::invalid_argument("Parameter file not set.");
+  }
+
+  // Set continuation variables
+  try
+  {
+    if (bo_initial_step != 0)
+    {
+      starting_step = bo_initial_step;
+      continuation_param_pt = &Global_Physical_Parameters::Bo;
+    }
+    else if (angle_initial_step != 0)
+    {
+      starting_step = angle_initial_step;
+      continuation_param_pt =
+        &Global_Physical_Parameters::Equilibrium_contact_angle;
+    }
+    else if (ca_initial_step != 0)
+    {
+      starting_step = ca_initial_step;
+      continuation_param_pt = &Slip_Parameters::wall_velocity;
+    }
+    else if (slip_length_initial_step != 0)
+    {
+      starting_step = slip_length_initial_step;
+      continuation_param_pt = &Slip_Parameters::slip_length;
+    }
+    else
+    {
+      throw std::invalid_argument("No continuation parameter specified.");
+    }
+  }
+  catch (exception& e)
+  {
+    throw std::invalid_argument("Continuation parameter can't be set.");
+  }
+}
+
 //===start_of_main=======================================================
 /// Main driver: Build problem and initiate parameter study
 //======================================================================
 int main(int argc, char** argv)
 {
-  double* param_pt = 0;
-
-  // Check number of arguments
-  int number_of_arguments = argc - 1;
-  if (number_of_arguments != 3)
-  {
-    cout << "Wrong number of arguments." << std::endl;
-    return 1;
-  }
-
 #ifdef OOMPH_HAS_MPI
   // Setup mpi but don't make a copy of mpi_comm_world because
   // mumps wants to work with the real thing.
@@ -85,9 +165,15 @@ int main(int argc, char** argv)
   MPI_Helpers::init(argc, argv, make_copy_of_mpi_comm_world);
 #endif
 
+  string parameters_filename = "";
+  double starting_step = 0.0;
+  double* continuation_param_pt = 0;
+  parse_arguments(
+    argc, argv, parameters_filename, starting_step, continuation_param_pt);
+
   // Problem parameters
   Parameters parameters;
-  read_parameters_from_file(argv[3], parameters);
+  read_parameters_from_file(parameters_filename, parameters);
 
   // Construct the base problem
   bool has_restart = false;
@@ -96,9 +182,11 @@ int main(int argc, char** argv)
     cout << "restarting" << endl;
     has_restart = true;
   }
-  typedef HijackedProjectableAxisymmetricTTaylorHoodPVDElement BASE_ELEMENT;
+  typedef SingularAxisymNavierStokesElement<
+    HijackedProjectableAxisymmetricTTaylorHoodPVDElement>
+    BASE_ELEMENT;
   typedef BDF<2> TIMESTEPPER;
-  AxisymDynamicCapProblem<BASE_ELEMENT, TIMESTEPPER> base_problem(
+  SingularAxisymDynamicCapProblem<BASE_ELEMENT, TIMESTEPPER> base_problem(
     Global_Physical_Parameters::Equilibrium_contact_angle, has_restart);
 
   // Load in restart file
@@ -194,41 +282,12 @@ int main(int argc, char** argv)
 
   //====================================================================
 
-  string continuation_parameter_string = "";
-  try
-  {
-    continuation_parameter_string = argv[1];
-    if (continuation_parameter_string == "--Bo")
-    {
-      param_pt = &Global_Physical_Parameters::Bo;
-    }
-    else if (continuation_parameter_string == "--angle")
-    {
-      param_pt = &Global_Physical_Parameters::Equilibrium_contact_angle;
-    }
-    else if (continuation_parameter_string == "--wall_velocity")
-    {
-      param_pt = &Slip_Parameters::wall_velocity;
-    }
-    else
-    {
-      throw std::invalid_argument("First argument incorrect.");
-    }
-  }
-  catch (exception& e)
-  {
-    cout << "Continuation parameter can't be set." << endl;
-    cout << "Argument in: " << continuation_parameter_string << endl;
-    return 1;
-  }
-
-
   unsigned n_iterations = 0;
-  const unsigned max_n_iterations = 40;
+  const unsigned max_n_iterations = floor(abs(parameters.ft / parameters.dt));
   // const double step_tolerance = 1e-3;
-  double step_param = stod(argv[2]);
+  double step_param = starting_step;
   double old_param;
-  double current_param = *param_pt;
+  double current_param = *continuation_param_pt;
   double old_residual;
   while (!has_converged && n_iterations < max_n_iterations)
   {
@@ -241,7 +300,7 @@ int main(int argc, char** argv)
          << current_param + step_param << endl;
     old_param = current_param;
     current_param += step_param;
-    *param_pt = current_param;
+    *continuation_param_pt = current_param;
 
 
     // Solve steady problem
@@ -281,7 +340,7 @@ int main(int argc, char** argv)
         current_param -= step_param;
         step_param /= 3.0;
         current_param += step_param;
-        *param_pt = current_param;
+        *continuation_param_pt = current_param;
         cout << "Reducing step size.";
         cout << "Number of attempts: " << base_state_iterations;
         cout << ", Step size: " << step_param;

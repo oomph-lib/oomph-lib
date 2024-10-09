@@ -49,13 +49,14 @@
 #include "hijacked_projectable_axisymmteric_Ttaylor_hood_elements.h"
 #include "linearised_axisymmetric_fluid_interface_elements.h"
 #include "decomposed_linear_elasticity_elements.h"
+#include "singular_axisym_navier_stokes_elements.h"
 
 #include "linearised_elastic_axisym_fluid_interface_element.h"
 #include "overlaying_linearised_elastic_axisym_fluid_interface_element.h"
 #include "overlaying_my_linear_element.h"
 
 //#include "axisym_linear_stability_cap_problem.h"
-#include "axisym_dynamic_cap_problem.h"
+#include "singular_axisym_dynamic_cap_problem.h"
 #include "perturbed_linear_stability_cap_problem.h"
 
 #include "parameters.h"
@@ -95,9 +96,11 @@ int main(int argc, char** argv)
     cout << "restarting" << endl;
     has_restart = true;
   }
-  typedef HijackedProjectableAxisymmetricTTaylorHoodPVDElement BASE_ELEMENT;
+  typedef SingularAxisymNavierStokesElement<
+    HijackedProjectableAxisymmetricTTaylorHoodPVDElement>
+    BASE_ELEMENT;
   typedef BDF<2> TIMESTEPPER;
-  AxisymDynamicCapProblem<BASE_ELEMENT, TIMESTEPPER> base_problem(
+  SingularAxisymDynamicCapProblem<BASE_ELEMENT, TIMESTEPPER> base_problem(
     Global_Physical_Parameters::Equilibrium_contact_angle, has_restart);
 
   // Load in restart file

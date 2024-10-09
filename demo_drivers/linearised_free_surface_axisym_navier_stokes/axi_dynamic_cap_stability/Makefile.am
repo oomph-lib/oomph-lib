@@ -27,7 +27,7 @@ run_singular_tests_SOURCES = run_singular_tests.cc $(linear_sources)
 LDADD = -L@libdir@ -llinear_elasticity -llinearised_axisym_navier_stokes -laxisym_navier_stokes -lfluid_interface \
 									-lsolid -lconstitutive \
 									-lgeneric \
-									$(EXTERNAL_LIBS) $(FLIBS) -lboost_unit_test_framework -lgcov
+									$(EXTERNAL_LIBS) $(FLIBS)# -lboost_unit_test_framework -lgcov
 
 # Add the paranoid and range checking flags
 AM_CPPFLAGS +=  #-DPARANOID  -DRANGE_CHECKING #-Wfatal-errors # --coverage -O0
