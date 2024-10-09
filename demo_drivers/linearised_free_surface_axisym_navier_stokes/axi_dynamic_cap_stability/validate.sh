@@ -48,6 +48,7 @@ validate(){
   if test "$1" = "no_fpdiff"; then
     echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> $LOG
   else
+    echo "../../../bin/fpdiff.py validata/$FILE.gz Validation/$FILE 0.1 2e-7 >> $LOG"
     ../../../bin/fpdiff.py validata/$FILE.gz  \
            Validation/$FILE 0.1 2e-7 >> $LOG
   fi
@@ -107,9 +108,6 @@ if grep "run_singular_tests.cc" Validation/OUTPUT; then
 else
     echo "[OK] -- Unit tests passed" >> $LOG
 fi
-
-# Currently untested
-# neutral_stability_run.cc
 
 #######################################################################
 
