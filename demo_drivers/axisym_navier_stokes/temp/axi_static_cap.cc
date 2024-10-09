@@ -41,6 +41,8 @@
 // The mesh
 #include "meshes/single_layer_spine_mesh.h"
 
+#include "header.h"
+
 // Use the std namespace
 using namespace std;
 
@@ -1056,7 +1058,7 @@ int main()
     // Do parameter study
     problem.parameter_study(dir_name);
 
-    problem.eigen_solver_pt() = new ANASAZI; // eigensolver
+    problem.eigen_solver_pt() = &my_special_eigensolver; // eigensolver
   }
 
 } // end_of_main
