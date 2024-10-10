@@ -2379,7 +2379,7 @@ namespace oomph
     }
 
     // Document the flux on the upper boundary
-    void doc_flux(ostream& out, const unsigned& n_plot_points)
+    void doc_flux(std::ostream& out, const unsigned& n_plot_points)
     {
       // Output dat file header
       out << "x y u v w" << std::endl;
@@ -2388,7 +2388,7 @@ namespace oomph
     }
 
     // Document the slip on the slip boundary
-    void doc_slip(ostream& out, const unsigned& n_plot_points)
+    void doc_slip(std::ostream& out, const unsigned& n_plot_points)
     {
       // Output dat file header
       out << "x y l_x l_y l_z n_x n_y u v w" << std::endl;
@@ -2398,7 +2398,7 @@ namespace oomph
 
 
     // Document the slip on the slip boundary
-    void doc_contact_angle(ostream& out)
+    void doc_contact_angle(std::ostream& out)
     {
       // Output contact angle
       dynamic_cast<CONTACT_LINE_ELEMENT*>(Contact_angle_mesh_pt->element_pt(0))
@@ -2406,7 +2406,7 @@ namespace oomph
     }
 
     // Document the slip on the slip boundary
-    void doc_inner_angle(ostream& out)
+    void doc_inner_angle(std::ostream& out)
     {
       // Output contact angle
       dynamic_cast<CONTACT_LINE_ELEMENT*>(Contact_angle_mesh_pt->element_pt(1))
