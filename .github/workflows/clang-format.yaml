@@ -18,6 +18,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Install requirements
+        run: sudo apt-get install python3-distutils
+      
       - uses: actions/checkout@v2
 
       # Format all files in the src/ directory except cfortran.h, lapack_qz.h,
