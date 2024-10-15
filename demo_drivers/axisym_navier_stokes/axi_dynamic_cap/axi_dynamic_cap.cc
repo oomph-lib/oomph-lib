@@ -49,6 +49,13 @@ using namespace oomph;
 
 int main(int argc, char** argv)
 {
+#ifdef OOMPH_HAS_MPI
+  // Setup mpi but don't make a copy of mpi_comm_world because
+  // mumps wants to work with the real thing.
+  bool make_copy_of_mpi_comm_world = false;
+  MPI_Helpers::init(argc, argv, make_copy_of_mpi_comm_world);
+#endif
+
   // Check number of arguments
   int number_of_arguments = argc - 1;
   if (number_of_arguments == 0 || number_of_arguments > 1)
@@ -56,13 +63,6 @@ int main(int argc, char** argv)
     std::cout << "Wrong number of arguments." << std::endl;
     return 1;
   }
-
-#ifdef OOMPH_HAS_MPI
-  // Setup mpi but don't make a copy of mpi_comm_world because
-  // mumps wants to work with the real thing.
-  bool make_copy_of_mpi_comm_world = false;
-  MPI_Helpers::init(argc, argv, make_copy_of_mpi_comm_world);
-#endif
 
   // Problem parameters
   Parameters parameters;
@@ -95,7 +95,8 @@ int main(int argc, char** argv)
     }
     catch (exception& e)
     {
-      std::cout << "Restart filename can't be set, or opened, or read." << std::endl;
+      std::cout << "Restart filename can't be set, or opened, or read."
+                << std::endl;
       std::cout << "File: " << parameters.restart_filename << std::endl;
       return 1;
     }

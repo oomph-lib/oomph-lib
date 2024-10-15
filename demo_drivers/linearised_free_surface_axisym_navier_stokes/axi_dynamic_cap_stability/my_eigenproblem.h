@@ -31,7 +31,13 @@ namespace oomph
       oomph_info << "solve_n_most_unstable_eigensolutions" << std::endl;
       Vector<std::complex<double>> eigenvalues;
 
-      this->eigen_solver_pt() = new ANASAZI;
+
+#ifdef OOMPH_HAS_TRILINOS
+      EigenSolver* old_eigen_solver_pt = this->eigen_solver_pt();
+      ANASAZI new_eigen_solver;
+      this->eigen_solver_pt() = &new_eigen_solver;
+#endif
+
 
       this->solve_eigenproblem(n_eval,
                                eigenvalues,
@@ -65,6 +71,10 @@ namespace oomph
       }
       doc_eigenvalues(n_eval, sorted_eigenvalues);
 
+#ifdef OOMPH_HAS_TRILINOS
+      this->eigen_solver_pt() = old_eigen_solver_pt;
+#endif
+
       return sorted_eigenvalues;
     }
 
@@ -81,7 +91,11 @@ namespace oomph
       Vector<DoubleVector> eigenvector_real;
       Vector<DoubleVector> eigenvector_imag;
 
-      this->eigen_solver_pt() = new ANASAZI;
+#ifdef OOMPH_HAS_TRILINOS
+      EigenSolver* old_eigen_solver_pt = this->eigen_solver_pt();
+      ANASAZI new_eigen_solver;
+      this->eigen_solver_pt() = &new_eigen_solver;
+#endif
 
       this->solve_eigenproblem(
         n_eval, eigenvalues, eigenvector_real, eigenvector_imag);
@@ -178,6 +192,10 @@ namespace oomph
         output_stream.close();
       }
 
+#ifdef OOMPH_HAS_TRILINOS
+      this->eigen_solver_pt() = old_eigen_solver_pt;
+#endif
+
       return sorted_eigenvalues;
     }
 
@@ -189,7 +207,11 @@ namespace oomph
       Vector<DoubleVector> eigenvector_real;
       Vector<DoubleVector> eigenvector_imag;
 
-      this->eigen_solver_pt() = new ANASAZI;
+#ifdef OOMPH_HAS_TRILINOS
+      EigenSolver* old_eigen_solver_pt = this->eigen_solver_pt();
+      ANASAZI new_eigen_solver;
+      this->eigen_solver_pt() = &new_eigen_solver;
+#endif
 
       const int n_eval = 8;
       this->solve_eigenproblem(
@@ -212,6 +234,10 @@ namespace oomph
 
       // Add eigensolution to the current state
       this->add_eigenvector_to_dofs(amplitude, eigenvector_real[*max1]);
+
+#ifdef OOMPH_HAS_TRILINOS
+      this->eigen_solver_pt() = old_eigen_solver_pt;
+#endif
     }
 
     // Sanity check to ensure that anasazi is solving our problem.
@@ -222,7 +248,11 @@ namespace oomph
       Vector<DoubleVector> eigenvector_real;
       Vector<DoubleVector> eigenvector_imag;
 
-      this->eigen_solver_pt() = new ANASAZI;
+#ifdef OOMPH_HAS_TRILINOS
+      EigenSolver* old_eigen_solver_pt = this->eigen_solver_pt();
+      ANASAZI new_eigen_solver;
+      this->eigen_solver_pt() = &new_eigen_solver;
+#endif
 
       const int n_eval = 8;
       this->solve_eigenproblem(
@@ -247,6 +277,10 @@ namespace oomph
 
       check_eigensolution(sorted_eigenvalues[0],
                           eigenvector_real[eig_index[0]]);
+
+#ifdef OOMPH_HAS_TRILINOS
+      this->eigen_solver_pt() = old_eigen_solver_pt;
+#endif
     }
 
     // Broken doc solution
