@@ -2,6 +2,7 @@
 #define PRESSURE_EVALUATION_ELEMENTS_HEADER
 
 #include "generic.h"
+#include "debug_jacobian_elements.h"
 
 namespace oomph
 {
@@ -16,9 +17,11 @@ namespace oomph
   /// pin C.
   //=====================================================================
   template<class ELEMENT>
-  class PressureEvaluationElement : public virtual FaceGeometry<ELEMENT>,
-                                    public virtual FaceElement,
-                                    public virtual SolidFiniteElement
+  class PressureEvaluationElement
+    : public virtual FaceGeometry<ELEMENT>,
+      public virtual SolidFaceElement,
+      public virtual DebugJacobianSolidFiniteElement
+
   {
   private:
     // Storage for the bulk element
@@ -37,7 +40,7 @@ namespace oomph
                               const int& face_index,
                               Node* const& node_pt)
       : FaceGeometry<ELEMENT>(),
-        FaceElement(),
+        SolidFaceElement(),
         Cast_bulk_element_pt(dynamic_cast<ELEMENT*>(element_pt)),
         Pressure_index(-1),
         Is_adding_to_residuals(true),
@@ -51,7 +54,8 @@ namespace oomph
 
       // Add the nodes (which are data) where the pressure is stored in the bulk
       // element as external data.
-      add_pressure_nodes_not_on_face_as_external_data();
+      // add_pressure_nodes_not_on_face_as_external_data();
+      this->add_other_bulk_node_positions_as_external_data();
     }
 
     void compute_s(Node* const& node_pt)
