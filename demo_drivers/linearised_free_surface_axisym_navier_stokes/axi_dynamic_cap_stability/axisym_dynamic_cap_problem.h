@@ -219,9 +219,7 @@ namespace oomph
       {
         this->add_sub_mesh(Net_flux_mesh_pt);
       }
-
       this->add_sub_mesh(Bulk_mesh_pt);
-
 
       // Now need to add all the meshes
       if (Free_surface_mesh_pt)
@@ -764,7 +762,6 @@ namespace oomph
       }
     }
 
-
     void find_two_nearest_corner_surface_element_and_face_index(
       Mesh* const& surface_mesh_pt,
       const unsigned& boundary_id,
@@ -1204,8 +1201,7 @@ namespace oomph
             }
 
             // Then adapt is needed
-            oomph_info << "Adapt is needed due to contact angle error"
-                       << std::endl;
+            oomph_info << "Adapt is needed due to contact angle error" << std::endl;
             return true;
           }
         }
@@ -1240,8 +1236,7 @@ namespace oomph
             }
 
             // Then adapt is needed
-            oomph_info << "Adapt is needed due to inner angle error"
-                       << std::endl;
+            oomph_info << "Adapt is needed due to inner angle error" << std::endl;
             return true;
           }
         }
@@ -2327,8 +2322,7 @@ namespace oomph
       // Save current solution
       std::ofstream dump_filestream;
       std::string restart_filename = this->doc_info().directory() + "/restart" +
-                                     to_string(this->doc_info().number()) +
-                                     ".dat";
+                                to_string(this->doc_info().number()) + ".dat";
       dump_filestream.open(restart_filename);
       dump_filestream.precision(16);
       // actions_before_adapt();

@@ -40,6 +40,7 @@
 //#include "../generic/elements.h"
 //#include "../generic/element_with_external_element.h"
 #include "parameters.h"
+#include "debug_jacobian_elements.h"
 
 namespace oomph
 {
@@ -54,7 +55,8 @@ namespace oomph
   class AxisymmetricNavierStokesSlipElement
     : public virtual FaceGeometry<ELEMENT>,
       public virtual AxisymmetricNavierStokesFaceElement,
-      public virtual SolidFiniteElement
+      public virtual DebugJacobianSolidFiniteElement,
+      public virtual SolidFaceElement
   {
   private:
     unsigned Contact_line_data_index;
@@ -118,11 +120,15 @@ namespace oomph
     /// value of the index and its limit
     AxisymmetricNavierStokesSlipElement(FiniteElement* const& element_pt,
                                         const int& face_index)
-      : FaceGeometry<ELEMENT>(), AxisymmetricNavierStokesFaceElement()
+      : FaceGeometry<ELEMENT>(),
+        AxisymmetricNavierStokesFaceElement(),
+        SolidFaceElement()
     {
       // Attach the geometrical information to the element. N.B. This function
       // also assigns nbulk_value from the required_nvalue of the bulk element
       element_pt->build_face_element(face_index, this);
+
+      this->add_other_bulk_node_positions_as_external_data();
     }
 
     /// Constructor, which takes a "bulk" element and the

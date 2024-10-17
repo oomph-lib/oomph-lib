@@ -139,6 +139,11 @@ namespace oomph
       add_internal_data(new Data(1));
     }
 
+    void fill_in_contribution_to_dresiduals_dparameter(
+      double* const& parameter_pt, Vector<double>& dres_dparam)
+    {
+    }
+
     /// Assert that singular function satisfies the Stokes equations by setting
     /// this to true or false.
     bool& singular_function_satisfies_stokes_equation()

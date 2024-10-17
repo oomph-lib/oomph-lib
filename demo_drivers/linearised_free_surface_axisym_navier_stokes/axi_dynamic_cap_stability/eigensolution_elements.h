@@ -83,6 +83,11 @@ namespace oomph
       Is_adding_to_residuals = is_adding_to_residuals;
     }
 
+    void fill_in_contribution_to_dresiduals_dparameter(
+      double* const& parameter_pt, Vector<double>& dres_dparam)
+    {
+    }
+
     // Set and add the pressure data as external data
     void set_pressure_data_pt(Data* const& pressure_data_pt)
     {

@@ -39,6 +39,7 @@
 //#include "../generic/shape.h"
 //#include "../generic/elements.h"
 //#include "../generic/element_with_external_element.h"
+#include "debug_jacobian_elements.h"
 
 
 namespace oomph
@@ -53,7 +54,9 @@ namespace oomph
   template<class ELEMENT>
   class AxisymmetricNavierStokesFluxElement
     : public virtual FaceGeometry<ELEMENT>,
-      public virtual AxisymmetricNavierStokesFaceElement
+      public virtual AxisymmetricNavierStokesFaceElement,
+      public virtual DebugJacobianSolidFiniteElement,
+      public virtual SolidFaceElement
   {
   protected:
     /// Helper function that actually calculates the residuals
@@ -70,14 +73,17 @@ namespace oomph
     AxisymmetricNavierStokesFluxElement(FiniteElement* const& element_pt,
                                         const int& face_index,
                                         Data* const& net_flux_data_pt)
-      : FaceGeometry<ELEMENT>(), AxisymmetricNavierStokesFaceElement()
+      : FaceGeometry<ELEMENT>(),
+        AxisymmetricNavierStokesFaceElement(),
+        SolidFaceElement()
     {
       // Attach the geometrical information to the element. N.B. This function
       // also assigns nbulk_value from the required_nvalue of the bulk element
       element_pt->build_face_element(face_index, this);
 
-
       add_external_data(net_flux_data_pt);
+
+      this->add_other_bulk_node_positions_as_external_data();
     }
 
     void fill_in_contribution_to_dresiduals_dparameter(

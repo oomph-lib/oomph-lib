@@ -2,15 +2,20 @@
 #define FREE_SURFACE_ELEMENTS_HEADER
 
 #include "fluid_interface.h"
+#include "debug_jacobian_elements.h"
 
 namespace oomph
 {
   template<class ELEMENT>
   class FreeSurfaceElement
-    : public ElasticAxisymmetricFluidInterfaceElement<ELEMENT>
+    : public virtual ElasticAxisymmetricFluidInterfaceElement<ELEMENT>,
+      public virtual DebugJacobianSolidFiniteElement,
+      public virtual SolidFaceElement
+
   {
   private:
     TimeStepper* Time_stepper_pt;
+    double Error;
 
   public:
     FreeSurfaceElement(FiniteElement* const& element_pt,
@@ -19,8 +24,11 @@ namespace oomph
                        const unsigned& id = 0)
       : ElasticAxisymmetricFluidInterfaceElement<ELEMENT>(
           element_pt, face_index, id),
-        Time_stepper_pt(time_stepper_pt)
+        SolidFaceElement(),
+        Time_stepper_pt(time_stepper_pt),
+        Error(0.0)
     {
+      this->add_other_bulk_node_positions_as_external_data();
     }
 
     void fill_in_contribution_to_dresiduals_dparameter(
@@ -113,7 +121,70 @@ namespace oomph
         }
       }
     }
+
+    void compute_error()
+    {
+      // Maths from http://www.cgafaq.info/wiki/Circle_Through_Three_Points
+      double a_x = this->node_pt(0)->x(0);
+      double a_y = this->node_pt(0)->x(1);
+      double b_x = this->node_pt(1)->x(0);
+      double b_y = this->node_pt(1)->x(1);
+      double c_x = this->node_pt(2)->x(0);
+      double c_y = this->node_pt(2)->x(1);
+
+      double a = b_x - a_x;
+      double b = b_y - a_y;
+      double c = c_x - a_x;
+      double d = c_y - a_y;
+
+      double e = a * (a_x + b_x) + b * (a_y + b_y);
+      double f = c * (a_x + c_x) + d * (a_y + c_y);
+
+      double g = 2.0 * (a * (c_y - b_y) - b * (c_x - b_x));
+
+      double error = 0.0;
+      if (std::fabs(g) >= 1.0e-14)
+      {
+        double p_x = (d * e - b * f) / g;
+        double p_y = (a * f - c * e) / g;
+
+        double r = sqrt(pow((a_x - p_x), 2) + pow((a_y - p_y), 2));
+
+        double rhalfca_x = 0.5 * (a_x - c_x);
+        double rhalfca_y = 0.5 * (a_y - c_y);
+
+        double halfca_squared = pow(rhalfca_x, 2) + pow(rhalfca_y, 2);
+
+        double sticky_out_bit = r - sqrt(std::fabs((r * r) - halfca_squared));
+
+        // If sticky out bit divided by distance between end nodes
+        // is less than tolerance the boundary is so flat that we
+        // can safely kill the node
+        error = sticky_out_bit / (2.0 * sqrt(halfca_squared));
+      }
+      Error = error;
+    }
+
+    double get_error()
+    {
+      return Error;
+    }
+
+    void output(std::ostream& outfile, const unsigned& npts)
+    {
+      ElasticAxisymmetricFluidInterfaceElement<ELEMENT>::output(outfile, npts);
+
+      outfile << get_error() << endl;
+    }
+
+    void output(std::ostream& outfile)
+    {
+      ElasticAxisymmetricFluidInterfaceElement<ELEMENT>::output(outfile);
+
+      outfile << get_error() << endl;
+    }
   };
+
 } // namespace oomph
 
 #endif // FREE_SURFACE_ELEMENTS_HEADER

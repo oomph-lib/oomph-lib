@@ -264,14 +264,17 @@ namespace oomph
         this->add_sub_mesh(Volume_constraint_mesh_pt);
       }
 
-      Eigensolution_slip_mesh_pt = new Mesh;
-      this->add_sub_mesh(Eigensolution_slip_mesh_pt);
-      Singularity_scaling_mesh_pt = new Mesh;
-      this->add_sub_mesh(Singularity_scaling_mesh_pt);
-      Pressure_contribution_mesh_1_pt = new Mesh;
-      this->add_sub_mesh(Pressure_contribution_mesh_1_pt);
-      Pressure_contribution_mesh_2_pt = new Mesh;
-      this->add_sub_mesh(Pressure_contribution_mesh_2_pt);
+      if (Contact_angle > 90.0 * MathematicalConstants::Pi / 180.0)
+      {
+        Eigensolution_slip_mesh_pt = new Mesh;
+        this->add_sub_mesh(Eigensolution_slip_mesh_pt);
+        Singularity_scaling_mesh_pt = new Mesh;
+        this->add_sub_mesh(Singularity_scaling_mesh_pt);
+        Pressure_contribution_mesh_1_pt = new Mesh;
+        this->add_sub_mesh(Pressure_contribution_mesh_1_pt);
+        Pressure_contribution_mesh_2_pt = new Mesh;
+        this->add_sub_mesh(Pressure_contribution_mesh_2_pt);
+      }
 
       // and build the global mesh.
       // We can either build the global mesh here or create an empty mesh and
@@ -1170,6 +1173,116 @@ namespace oomph
       }
     }
 
+    void debug_elemental_jacobian()
+    {
+      oomph_info << "debug_elemental_jacobian" << std::endl;
+      {
+        unsigned n_element = Bulk_mesh_pt->nelement();
+        for (unsigned e = 0; e < n_element; e++)
+        {
+          ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
+          unsigned n = el_pt->ndof();
+          Vector<double> residuals(n, 0.0);
+          DenseMatrix<double> jacobian(n, n, 0.0);
+          DenseMatrix<double> jacobianFD(n, n, 0.0);
+          el_pt->debug_jacobian(n, residuals, jacobian, jacobianFD);
+          cout << "bulk: " << compare_matrices(jacobianFD, jacobian) << endl;
+        }
+      }
+      {
+        unsigned n_element = Free_surface_mesh_pt->nelement();
+        for (unsigned e = 0; e < n_element; e++)
+        {
+          FREE_SURFACE_ELEMENT* el_pt = dynamic_cast<FREE_SURFACE_ELEMENT*>(
+            Free_surface_mesh_pt->element_pt(0));
+          unsigned n = el_pt->ndof();
+          Vector<double> residuals(n, 0.0);
+          DenseMatrix<double> jacobian(n, n, 0.0);
+          DenseMatrix<double> jacobianFD(n, n, 0.0);
+          el_pt->debug_jacobian(n, residuals, jacobian, jacobianFD);
+          cout << "free: " << compare_matrices(jacobianFD, jacobian) << endl;
+        }
+      }
+      {
+        unsigned n_element = Slip_boundary_mesh_pt->nelement();
+        for (unsigned e = 0; e < n_element; e++)
+        {
+          SLIP_ELEMENT* el_pt =
+            dynamic_cast<SLIP_ELEMENT*>(Slip_boundary_mesh_pt->element_pt(0));
+          unsigned n = el_pt->ndof();
+          Vector<double> residuals(n, 0.0);
+          DenseMatrix<double> jacobian(n, n, 0.0);
+          DenseMatrix<double> jacobianFD(n, n, 0.0);
+          el_pt->debug_jacobian(n, residuals, jacobian, jacobianFD);
+          cout << "slip: " << compare_matrices(jacobianFD, jacobian) << endl;
+        }
+      }
+      if (No_penetration_boundary_mesh_pt)
+      {
+        unsigned n_element = No_penetration_boundary_mesh_pt->nelement();
+        for (unsigned e = 0; e < n_element; e++)
+        {
+          NO_PENETRATION_ELEMENT* el_pt = dynamic_cast<NO_PENETRATION_ELEMENT*>(
+            No_penetration_boundary_mesh_pt->element_pt(0));
+          unsigned n = el_pt->ndof();
+          Vector<double> residuals(n, 0.0);
+          DenseMatrix<double> jacobian(n, n, 0.0);
+          DenseMatrix<double> jacobianFD(n, n, 0.0);
+          el_pt->debug_jacobian(n, residuals, jacobian, jacobianFD);
+          cout << "no pen: " << compare_matrices(jacobianFD, jacobian) << endl;
+        }
+      }
+      if (Flux_mesh_pt)
+      {
+        FLUX_ELEMENT* el_pt =
+          dynamic_cast<FLUX_ELEMENT*>(Flux_mesh_pt->element_pt(0));
+        unsigned n = el_pt->ndof();
+        Vector<double> residuals(n, 0.0);
+        DenseMatrix<double> jacobian(n, n, 0.0);
+        DenseMatrix<double> jacobianFD(n, n, 0.0);
+        el_pt->debug_jacobian(n, residuals, jacobian, jacobianFD);
+        cout << "flux: " << compare_matrices(jacobianFD, jacobian) << endl;
+      }
+      {
+        VOLUME_COMPUTATION_ELEMENT* el_pt =
+          dynamic_cast<VOLUME_COMPUTATION_ELEMENT*>(
+            Volume_computation_mesh_pt->element_pt(0));
+        unsigned n = el_pt->ndof();
+        Vector<double> residuals(n, 0.0);
+        DenseMatrix<double> jacobian(n, n, 0.0);
+        DenseMatrix<double> jacobianFD(n, n, 0.0);
+        el_pt->debug_jacobian(n, residuals, jacobian, jacobianFD);
+        cout << "volume computation: " << compare_matrices(jacobianFD, jacobian)
+             << endl;
+      }
+      // if (Volume_constraint_mesh_pt)
+      //{
+      //   VOLUME_CONSTRAINT_ELEMENT* el_pt =
+      //     dynamic_cast<VOLUME_CONSTRAINT_ELEMENT*>(
+      //       Volume_constraint_mesh_pt->element_pt(0));
+      //   unsigned n = el_pt->ndof();
+      //   Vector<double> residuals(n, 0.0);
+      //   DenseMatrix<double> jacobian(n, n, 0.0);
+      //   DenseMatrix<double> jacobianFD(n, n, 0.0);
+      //   el_pt->debug_jacobian(n, residuals, jacobian, jacobianFD);
+      //   cout << "volume constraint: " << compare_matrices(jacobianFD,
+      //   jacobian)
+      //        << endl;
+      // }
+      // if (Net_flux_mesh_pt)
+      //{
+      //   NET_FLUX_ELEMENT* el_pt =
+      //     dynamic_cast<NET_FLUX_ELEMENT*>(Net_flux_mesh_pt->element_pt(0));
+      //   unsigned n = el_pt->ndof();
+      //   Vector<double> residuals(n, 0.0);
+      //   DenseMatrix<double> jacobian(n, n, 0.0);
+      //   DenseMatrix<double> jacobianFD(n, n, 0.0);
+      //   el_pt->debug_jacobian(n, residuals, jacobian, jacobianFD);
+      //   cout << "net flux: " << compare_matrices(jacobianFD, jacobian) <<
+      //   endl;
+      // }
+    }
+
 
     // Refine the mesh for the weak contact angle constraint
     void refine_mesh_for_weak_contact_angle_constraint()
@@ -1274,6 +1387,15 @@ namespace oomph
         oomph_info << "Adapt is needed due to Z2 error" << std::endl;
         return true;
       }
+
+      if (this->max_free_surface_error() >
+          Mesh_Control_Parameters::Polyline_refinement_tolerence)
+      {
+        // Then adapt is needed
+        oomph_info << "Adapt is needed due to polyline refinement error" << std::endl;
+        return true;
+      }
+
 
       // if the error estimator flag is 1 or 2
       // Check if the contact angle error is ok.
@@ -1622,6 +1744,29 @@ namespace oomph
       }
     }
 
+    void pin_no_penetration_lagrange_multiplier_on_upper_boundary()
+    {
+      if (No_penetration_boundary_mesh_pt)
+      {
+        const unsigned n_el = No_penetration_boundary_mesh_pt->nelement();
+        for (unsigned i_el = 0; i_el < n_el; i_el++)
+        {
+          NO_PENETRATION_ELEMENT* no_penetration_element_pt =
+            dynamic_cast<NO_PENETRATION_ELEMENT*>(
+              No_penetration_boundary_mesh_pt->element_pt(i_el));
+          const unsigned n_nod = no_penetration_element_pt->nnode();
+          for (unsigned i_nod = 0; i_nod < n_nod; i_nod++)
+          {
+            if (no_penetration_element_pt->node_pt(i_nod)->is_on_boundary(
+                  Upper_boundary_id))
+            {
+              no_penetration_element_pt->pin_lagrange_multiplier(i_nod);
+            }
+          }
+        }
+      }
+    }
+
     void find_corner_bulk_element_and_node(const unsigned& boundary_1_id,
                                            const unsigned& boundary_2_id,
                                            ELEMENT*& element_pt,
@@ -1932,13 +2077,20 @@ namespace oomph
 
       get_residuals(residuals);
 
-      oomph_info << "Residuals" << std::endl;
-      for (unsigned i = ndof() - 10; i < ndof(); i++)
+      std::ofstream output_stream(this->doc_info().directory() + "/residuals" +
+                                  to_string(this->doc_info().number()) +
+                                  ".dat");
+
+      output_stream << "i residual" << endl;
+      for (unsigned i = 0; i < ndof(); i++)
       {
-        oomph_info << "i: " << i;
-        printf(", res: %10.5g", residuals[i]);
-        oomph_info << std::endl;
+        output_stream << i << " " << residuals[i] << std::endl;
       }
+      output_stream.close();
+
+      output_stream.open(this->doc_info().directory() + "/dofs.txt");
+      this->describe_dofs(output_stream);
+      output_stream.close();
     }
 
     void debug_jacobian()
@@ -2191,12 +2343,13 @@ namespace oomph
       Trace_file << "h1 ";
       Trace_file << "H ";
       Trace_file << "ndof ";
-      Trace_file << "min_element_length ";
-      Trace_file << "inner_min_element_length ";
+      Trace_file << "desired_corner_element_length ";
+      Trace_file << "actual_corner_element_length ";
       Trace_file << "velocity_norm ";
       Trace_file << "deformation_norm ";
       Trace_file << "max_err ";
       Trace_file << "min_err ";
+      Trace_file << "max_surf_err ";
       Trace_file << "node_position_error_temporal_error ";
       Trace_file << "velocity_value_error_temporal_error ";
       Trace_file << "newton_iterations ";
@@ -2344,16 +2497,19 @@ namespace oomph
         }
 
 
-        filename = this->doc_info().directory() + "/pressure_evaluation" +
-                   to_string(this->doc_info().number()) + ".dat";
-        output_stream.open(filename);
-        output_stream << "x ";
-        output_stream << "y ";
-        output_stream << "p ";
-        output_stream << std::endl;
-        Pressure_contribution_mesh_1_pt->output(output_stream);
-        Pressure_contribution_mesh_2_pt->output(output_stream);
-        output_stream.close();
+        if (!Augmented_bulk_element_number.empty())
+        {
+          filename = this->doc_info().directory() + "/pressure_evaluation" +
+                     to_string(this->doc_info().number()) + ".dat";
+          output_stream.open(filename);
+          output_stream << "x ";
+          output_stream << "y ";
+          output_stream << "p ";
+          output_stream << std::endl;
+          Pressure_contribution_mesh_1_pt->output(output_stream);
+          Pressure_contribution_mesh_2_pt->output(output_stream);
+          output_stream.close();
+        }
 
 
         // Bump up counter
@@ -2417,7 +2573,6 @@ namespace oomph
       Node* right_hand_node_pt = 0;
       find_interface_end_node(true, right_hand_node_pt);
 
-
       // Document the contact angle (in degrees),
       Trace_file << this->doc_info().number() << " ";
       Trace_file << this->time_pt()->time() << " ";
@@ -2440,10 +2595,18 @@ namespace oomph
       Trace_file << right_hand_node_pt->x(1) - left_hand_node_pt->x(1) << " ";
       // the number of degrees of freedom
       Trace_file << this->ndof() << " ";
-      // the element length of the small elements about the contact angle
-      Trace_file << Mesh_Control_Parameters::min_element_length << " ";
-      // the element length of the small elements about the contact angle
-      Trace_file << Mesh_Control_Parameters::inner_min_element_length << " ";
+      // the desired corner element length
+      Trace_file << 5e-2 * Slip_Parameters::slip_length /
+                      Slip_Parameters::wall_velocity
+                 << " ";
+      ELEMENT* element_pt = 0;
+      int face_index = 0;
+      find_corner_bulk_element_and_face_index(Outer_boundary_with_slip_id,
+                                              Free_surface_boundary_id,
+                                              element_pt,
+                                              face_index);
+      // the actual corner element length
+      Trace_file << element_pt->size() << " ";
       // the global velocity norm
       Trace_file << this->global_velocity_norm() << " ";
       // the global deformation norm
@@ -2452,6 +2615,7 @@ namespace oomph
       Trace_file << max_err << " ";
       // the estimate of the min error.
       Trace_file << min_err << " ";
+      Trace_file << this->max_free_surface_error() << " ";
       // and the estimate of the temporal error.
       Trace_file << node_position_error_temporal_error() << " ";
       Trace_file << velocity_value_error_temporal_error() << " ";
@@ -2475,7 +2639,8 @@ namespace oomph
       // Save current solution
       std::ofstream dump_filestream;
       std::string restart_filename = this->doc_info().directory() + "/restart" +
-                                to_string(this->doc_info().number()) + ".dat";
+                                     to_string(this->doc_info().number()) +
+                                     ".dat";
       dump_filestream.open(restart_filename);
       dump_filestream.precision(16);
       // actions_before_adapt();
@@ -2678,7 +2843,7 @@ namespace oomph
         // Set the constitutive law
         el_pt->constitutive_law_pt() = Constitutive_law_pt;
         el_pt->disable_inertia();
-        // el_pt->enable_evaluate_jacobian_by_fd();
+        el_pt->enable_evaluate_jacobian_by_fd();
 
         el_pt->time_stepper_pt() = this->time_stepper_pt();
 
@@ -2686,8 +2851,8 @@ namespace oomph
         {
           // Augmented elements close to the corner
           // Check distance from
-          // s centre is centre of mass of a uniform triangle, so (1/3,1/3) for
-          // Triangle[(1,0),(0,1),(0,0)]
+          // s centre is centre of mass of a uniform triangle, so (1/3,1/3)
+          // for Triangle[(1,0),(0,1),(0,0)]
           Vector<double> s_centre(2, 1.0 / 3.0);
           Vector<double> element_centre_x(2, 0.0);
           el_pt->get_x(s_centre, element_centre_x);
@@ -2709,8 +2874,12 @@ namespace oomph
           }
         }
       }
-      oomph_info << Augmented_bulk_element_number.size()
-                 << " augmented elements" << std::endl;
+
+      if (Contact_angle > 90.0 * MathematicalConstants::Pi / 180.0)
+      {
+        oomph_info << Augmented_bulk_element_number.size()
+                   << " augmented elements" << std::endl;
+      }
     }
 
     // Find interface end node
@@ -2816,13 +2985,14 @@ namespace oomph
 
       pin_velocity_on_boundary(w_index, Outer_boundary_with_slip_id);
       pin_position_on_boundary(0, Outer_boundary_with_slip_id);
-      pin_no_penetration_lagrange_multiplier(0.0e-3);
-      pin_velocity_on_boundary(u_index, Outer_boundary_with_slip_id);
+      // pin_no_penetration_lagrange_multiplier(0.0e-3);
+      // pin_velocity_on_boundary(u_index, Outer_boundary_with_slip_id);
 
       pin_velocity_on_boundary(u_index, Upper_boundary_id);
       set_velocity_on_boundary(u_index, Upper_boundary_id, 0.0);
       pin_velocity_on_boundary(w_index, Upper_boundary_id);
       pin_position_on_boundary(1, Upper_boundary_id);
+      pin_no_penetration_lagrange_multiplier_on_upper_boundary();
 
       pin_velocity_on_boundary(u_index, Inner_boundary_id);
       set_velocity_on_boundary(u_index, Inner_boundary_id, 0.0);
@@ -2904,15 +3074,17 @@ namespace oomph
               el_pt->set_velocity_dirichlet_value_on_node(i, 1, u[1]);
 
               // The x velocity component at node j is subject to Dirichlet BC
-              // Its imposed value is 0.0 which is already the value by default
-              // in the vector Imposed_velocity_values_at_node. So there is no
-              // need to call the function set_velocity_dirichlet_value_on_node
+              // Its imposed value is 0.0 which is already the value by
+              // default in the vector Imposed_velocity_values_at_node. So
+              // there is no need to call the function
+              // set_velocity_dirichlet_value_on_node
               el_pt->impose_velocity_dirichlet_bc_on_node(i, 0);
 
               // The y velocity component at node j is subject to Dirichlet BC
-              // Its imposed value is 0.0 which is already the value by default
-              // in the vector Imposed_velocity_values_at_node. So there is no
-              // need to call the function set_velocity_dirichlet_value_on_node
+              // Its imposed value is 0.0 which is already the value by
+              // default in the vector Imposed_velocity_values_at_node. So
+              // there is no need to call the function
+              // set_velocity_dirichlet_value_on_node
               el_pt->impose_velocity_dirichlet_bc_on_node(i, 1);
             }
           }
@@ -3316,11 +3488,15 @@ namespace oomph
       // We need to know which is the corner node
       set_contact_line_node_pt();
       // Create error estimator with the mesh control parameters.
-      Corner_error_estimator_pt = new CornerErrorEstimator(
+      // Corner_error_estimator_pt = new CornerErrorEstimator(
+      //   Contact_line_solid_node_pt,
+      //   Inner_corner_solid_node_pt,
+      //   &Mesh_Control_Parameters::min_element_length,
+      //   &Mesh_Control_Parameters::inner_min_element_length,
+      //   Mesh_Control_Parameters::element_length_ratio);
+      Corner_error_estimator_pt = new ContactlineErrorEstimator(
         Contact_line_solid_node_pt,
-        Inner_corner_solid_node_pt,
-        &Mesh_Control_Parameters::min_element_length,
-        &Mesh_Control_Parameters::inner_min_element_length,
+        Mesh_Control_Parameters::min_element_length,
         Mesh_Control_Parameters::element_length_ratio);
     }
 
@@ -3528,6 +3704,12 @@ namespace oomph
       // Setup all the equation numbering and look-up schemes
       oomph_info << "Number of unknowns: " << assign_eqn_numbers() << std::endl;
     }
+
+    // void actions_after_newton_step()
+    //{
+    //   doc_solution();
+    //   debug_residuals();
+    // }
 
     // void actions_after_newton_solve()
     // {
@@ -3802,6 +3984,23 @@ namespace oomph
 
       // Return the global error
       return sqrt(velocity_value_norm);
+    }
+
+    double max_free_surface_error()
+    {
+      double max_error = 0.0;
+      // Here we have no guarantee of order so we need to loop over all
+      // surface elements to find the one that is next to the outer boundary
+      unsigned n_free_surface = Free_surface_mesh_pt->nelement();
+      for (unsigned e = 0; e < n_free_surface; e++)
+      {
+        // Locally cache the element pointer
+        FREE_SURFACE_ELEMENT* el_pt = dynamic_cast<FREE_SURFACE_ELEMENT*>(
+          Free_surface_mesh_pt->element_pt(e));
+        el_pt->compute_error();
+        max_error = std::max(el_pt->get_error(), max_error);
+      }
+      return max_error;
     }
 
     double global_deformation_norm()

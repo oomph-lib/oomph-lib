@@ -223,6 +223,7 @@ namespace oomph
     double dt;
     std::string restart_filename;
     unsigned azimuthal_mode_number;
+    double free_surface_error_tolerence;
 
     Parameters()
       : max_adapt(0),
@@ -230,7 +231,8 @@ namespace oomph
         ft(0.0),
         dt(0.0),
         restart_filename(""),
-        azimuthal_mode_number(0)
+        azimuthal_mode_number(0),
+        free_surface_error_tolerence(8e-3)
     {
     }
 
@@ -370,6 +372,20 @@ namespace oomph
       getline(parameter_filestream, input_string, '#');
       parameter_filestream.ignore(80, '\n');
       Global_Physical_Parameters::Use_strong_imposition = stoi(input_string);
+
+      try
+      {
+        getline(parameter_filestream, input_string, '#');
+        parameter_filestream.ignore(80, '\n');
+        Mesh_Control_Parameters::Polyline_refinement_tolerence =
+          stod(input_string);
+
+        Mesh_Control_Parameters::Polyline_unrefinement_tolerence =
+          0.5 * Mesh_Control_Parameters::Polyline_refinement_tolerence;
+      }
+      catch (std::exception& e)
+      {
+      }
     }
 
     void doc(std::ofstream& output_stream)
@@ -437,6 +453,9 @@ namespace oomph
         << " # Max number of adapts for initial mesh refinement" << std::endl;
       output_stream << Global_Physical_Parameters::Use_strong_imposition
                     << " # Use strong contact angle" << std::endl;
+      output_stream << Mesh_Control_Parameters::Polyline_refinement_tolerence
+                    << " # Free surface polyline refinement tolerence"
+                    << std::endl;
     }
 
     void check_for_directory()

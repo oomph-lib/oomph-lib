@@ -625,6 +625,15 @@ namespace oomph
             }
           }
         } // End of augmented
+
+        // Error
+        double local_error = 0.0;
+        this->get_error(local_error);
+        outfile << local_error << " ";
+
+        // Size
+        outfile << this->size() << " ";
+
         outfile << std::endl;
       }
 
@@ -922,7 +931,8 @@ namespace oomph
       for (unsigned l = 0; l < n_node; l++)
       {
         interpolated_duds +=
-          this->nodal_value(l, this->u_reconstructed_index(l, i)) * dpsifds(l, j);
+          this->nodal_value(l, this->u_reconstructed_index(l, i)) *
+          dpsifds(l, j);
       }
 
       return (interpolated_duds);

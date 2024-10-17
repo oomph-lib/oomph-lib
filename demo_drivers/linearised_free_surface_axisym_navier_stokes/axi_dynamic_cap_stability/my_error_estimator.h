@@ -153,11 +153,9 @@ namespace oomph
     /// applicable to solid meshes.
     ContactlineErrorEstimator(SolidNode* contact_line_node_pt,
                               const double& min_element_length,
-                              const double& element_length_ratio,
-                              const double& max_permitted_error)
+                              const double& element_length_ratio)
       : Min_element_length(min_element_length),
-        Element_length_ratio(element_length_ratio),
-        Max_permitted_error(max_permitted_error)
+        Element_length_ratio(element_length_ratio)
     {
       Contact_line_solid_node_pt = contact_line_node_pt;
     }
@@ -227,14 +225,13 @@ namespace oomph
         // refined
         // If the area is too small, the error will be small and the region
         // unrefined
-        elemental_error[e] = Max_permitted_error * area / target_area;
+        elemental_error[e] = area / target_area;
       }
     }
 
   private:
     double Min_element_length;
     double Element_length_ratio;
-    double Max_permitted_error;
     SolidNode* Contact_line_solid_node_pt;
   };
 

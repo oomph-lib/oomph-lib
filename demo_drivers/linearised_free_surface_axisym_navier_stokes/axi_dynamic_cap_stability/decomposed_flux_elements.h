@@ -148,7 +148,7 @@ namespace oomph
       const unsigned n_node = nnode();
       // Get a pointer to the parent element
       ELEMENT* bulk_el_pt = dynamic_cast<ELEMENT*>(this->bulk_element_pt());
-      const unsigned wc_index = 2;
+      const unsigned wc_index = 4 + 2;
 
       // Loop over plot points
       for (unsigned iplot = 0; iplot < nplot; iplot++)
