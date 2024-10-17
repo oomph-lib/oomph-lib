@@ -1388,6 +1388,15 @@ namespace oomph
         return true;
       }
 
+      if (this->max_free_surface_error() >
+          Mesh_Control_Parameters::Polyline_refinement_tolerence)
+      {
+        // Then adapt is needed
+        oomph_info << "Adapt is needed due to polyline refinement error" << std::endl;
+        return true;
+      }
+
+
       // if the error estimator flag is 1 or 2
       // Check if the contact angle error is ok.
       if (Contact_angle_mesh_pt)
