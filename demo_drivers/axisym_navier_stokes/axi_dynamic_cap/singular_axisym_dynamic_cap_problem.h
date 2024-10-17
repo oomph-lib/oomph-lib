@@ -600,6 +600,11 @@ namespace oomph
         // Add the external pressure data
         el_pt->set_external_pressure_data(External_pressure_data_pt);
 
+        // if (el_pt->get_node_number(Contact_line_solid_node_pt) == -1)
+        //{
+        //   el_pt->add_external_data(Contact_line_solid_node_pt);
+        // }
+
         // Add it to the mesh
         Free_surface_mesh_pt->add_element_pt(el_pt);
       }
@@ -790,6 +795,12 @@ namespace oomph
         slip_element_pt->wall_velocity_fct_pt() =
           &Slip_Parameters::prescribed_wall_velocity_fct;
 
+        // if (slip_element_pt->get_node_number(Contact_line_solid_node_pt) ==
+        // -1)
+        //{
+        //   element_pt->add_external_data(Contact_line_solid_node_pt);
+        // }
+
         // Add the prescribed-flux element to the surface mesh
         surface_mesh_pt->add_element_pt(slip_element_pt);
 
@@ -859,6 +870,20 @@ namespace oomph
       // el_pt->pin_c();
       el_pt->set_c(0.0);
 
+
+      // unsigned n_element = Bulk_mesh_pt->nelement();
+      // for (unsigned e = 0; e < n_element; e++)
+      //{
+      //   ELEMENT* bulk_elem_pt =
+      //     dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
+
+      //  unsigned n_node = bulk_elem_pt->nnode();
+      //  for (unsigned n = 0; n < n_node; n++)
+      //  {
+      //    el_pt->add_external_data(bulk_elem_pt->node_pt(n));
+      //  }
+      //}
+
       // Add element to the mesh
       Singularity_scaling_mesh_pt->add_element_pt(el_pt);
     }
@@ -912,6 +937,13 @@ namespace oomph
         NO_PENETRATION_ELEMENT* no_penetration_element_pt =
           new NO_PENETRATION_ELEMENT(
             bulk_elem_pt, face_index, Lagrange_id::No_penetration);
+
+        // if (no_penetration_element_pt->get_node_number(
+        //       Contact_line_solid_node_pt) == -1)
+        //{
+        //   no_penetration_element_pt->add_external_data(
+        //     Contact_line_solid_node_pt);
+        // }
 
         // Add the prescribed-flux element to the surface mesh
         surface_mesh_pt->add_element_pt(no_penetration_element_pt);
@@ -1032,12 +1064,28 @@ namespace oomph
         Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0));
       el_pt->set_boundary_number_in_bulk_mesh(Outer_boundary_with_slip_id);
 
+      unsigned n_element = Bulk_mesh_pt->nelement();
+      for (unsigned e = 0; e < n_element; e++)
+      {
+        ELEMENT* bulk_elem_pt =
+          dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
+
+        unsigned n_node = bulk_elem_pt->nnode();
+        for (unsigned n = 0; n < n_node; n++)
+        {
+          if (el_pt->get_node_number(bulk_elem_pt->node_pt(n)) == -1)
+          {
+            el_pt->add_external_data(bulk_elem_pt->node_pt(n));
+          }
+        }
+      }
+
       Pressure_contribution_mesh_1_pt->add_element_pt(el_pt);
     }
 
     void create_pressure_contribution_2_elements()
     {
-      oomph_info << "create_pressure_contribution_1_elements" << std::endl;
+      oomph_info << "create_pressure_contribution_2_elements" << std::endl;
 
       ELEMENT* element_pt = 0;
       int face_index = 0;
@@ -1056,6 +1104,22 @@ namespace oomph
         Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0));
       el_pt->set_boundary_number_in_bulk_mesh(Free_surface_boundary_id);
       el_pt->set_subtract_from_residuals();
+
+      unsigned n_element = Bulk_mesh_pt->nelement();
+      for (unsigned e = 0; e < n_element; e++)
+      {
+        ELEMENT* bulk_elem_pt =
+          dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
+
+        unsigned n_node = bulk_elem_pt->nnode();
+        for (unsigned n = 0; n < n_node; n++)
+        {
+          if (el_pt->get_node_number(bulk_elem_pt->node_pt(n)) == -1)
+          {
+            el_pt->add_external_data(bulk_elem_pt->node_pt(n));
+          }
+        }
+      }
 
       Pressure_contribution_mesh_1_pt->add_element_pt(el_pt);
     }
@@ -1255,6 +1319,30 @@ namespace oomph
         cout << "volume computation: " << compare_matrices(jacobianFD, jacobian)
              << endl;
       }
+      {
+        PressureEvaluationElement<ELEMENT>* el_pt =
+          dynamic_cast<PressureEvaluationElement<ELEMENT>*>(
+            Pressure_contribution_mesh_1_pt->element_pt(0));
+        unsigned n = el_pt->ndof();
+        Vector<double> residuals(n, 0.0);
+        DenseMatrix<double> jacobian(n, n, 0.0);
+        DenseMatrix<double> jacobianFD(n, n, 0.0);
+        el_pt->debug_jacobian(n, residuals, jacobian, jacobianFD);
+        cout << "pressure contribution: "
+             << compare_matrices(jacobianFD, jacobian) << endl;
+      }
+      {
+        SingularNavierStokesTractionElement<ELEMENT>* el_pt =
+          dynamic_cast<SingularNavierStokesTractionElement<ELEMENT>*>(
+            Eigensolution_slip_mesh_pt->element_pt(0));
+        unsigned n = el_pt->ndof();
+        Vector<double> residuals(n, 0.0);
+        DenseMatrix<double> jacobian(n, n, 0.0);
+        DenseMatrix<double> jacobianFD(n, n, 0.0);
+        el_pt->debug_jacobian(n, residuals, jacobian, jacobianFD);
+        cout << "singular traction: " << compare_matrices(jacobianFD, jacobian)
+             << endl;
+      }
       // if (Volume_constraint_mesh_pt)
       //{
       //   VOLUME_CONSTRAINT_ELEMENT* el_pt =
@@ -1392,7 +1480,8 @@ namespace oomph
           Mesh_Control_Parameters::Polyline_refinement_tolerence)
       {
         // Then adapt is needed
-        oomph_info << "Adapt is needed due to polyline refinement error" << std::endl;
+        oomph_info << "Adapt is needed due to polyline refinement error"
+                   << std::endl;
         return true;
       }
 
@@ -2872,6 +2961,11 @@ namespace oomph
             el_pt->augment();
             Augmented_bulk_element_number.push_back(e);
           }
+
+          // if (el_pt->get_node_number(Contact_line_solid_node_pt) == -1)
+          //{
+          //   el_pt->add_external_data(Contact_line_solid_node_pt);
+          // }
         }
       }
 

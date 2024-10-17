@@ -129,6 +129,36 @@ BOOST_AUTO_TEST_CASE(nonlinear_analytic_J_equals_fd_J_gravity_60)
   BOOST_TEST(jacobians_are_equal);
 }
 
+BOOST_AUTO_TEST_CASE(nonlinear_analytic_J_equals_fd_J_gravity_120)
+{
+  shared_ptr<AXISYM_PROBLEM> problem_pt =
+    createBaseProblem(120.0 * MathematicalConstants::Pi / 180.0);
+  // Slip_Parameters::wall_velocity = 0.01;
+  Global_Physical_Parameters::Bo = 1.0;
+  problem_pt->steady_newton_solve();
+  problem_pt->debug_elemental_jacobian();
+  DoubleVector residuals;
+  DenseMatrix<double> expected_jacobian;
+  DenseDoubleMatrix actual_jacobian;
+  problem_pt->get_fd_jacobian(residuals, expected_jacobian);
+  problem_pt->get_jacobian(residuals, actual_jacobian);
+
+  std::ofstream output_stream;
+  output_stream.open("RESLT/dofs.txt");
+  problem_pt->describe_dofs(output_stream);
+  output_stream.close();
+
+  const unsigned N = expected_jacobian.nrow();
+  const unsigned M = expected_jacobian.ncol();
+
+  BOOST_TEST(actual_jacobian.nrow() == N);
+  BOOST_TEST(actual_jacobian.ncol() == M);
+
+  bool jacobians_are_equal =
+    compare_matrices(expected_jacobian, actual_jacobian);
+  BOOST_TEST(jacobians_are_equal);
+}
+
 BOOST_AUTO_TEST_CASE(debug_elemental_jacobian)
 {
   shared_ptr<AXISYM_PROBLEM> problem_pt = createBaseProblem();
@@ -198,9 +228,70 @@ BOOST_AUTO_TEST_CASE(nonlinear_analytic_J_equals_fd_J_ca_60)
   BOOST_TEST(jacobians_are_equal);
 }
 
+BOOST_AUTO_TEST_CASE(nonlinear_analytic_J_equals_fd_J_ca_120)
+{
+  shared_ptr<AXISYM_PROBLEM> problem_pt =
+    createBaseProblem(120.0 * MathematicalConstants::Pi / 180.0);
+  Slip_Parameters::wall_velocity = 0.01;
+  problem_pt->steady_newton_solve();
+  problem_pt->debug_elemental_jacobian();
+  DoubleVector residuals;
+  DenseMatrix<double> expected_jacobian;
+  DenseDoubleMatrix actual_jacobian;
+  problem_pt->get_fd_jacobian(residuals, expected_jacobian);
+  problem_pt->get_jacobian(residuals, actual_jacobian);
+
+  std::ofstream output_stream;
+  output_stream.open("RESLT/dofs.txt");
+  problem_pt->describe_dofs(output_stream);
+  output_stream.close();
+
+  problem_pt->doc_solution();
+
+  const unsigned N = expected_jacobian.nrow();
+  const unsigned M = expected_jacobian.ncol();
+
+  BOOST_TEST(actual_jacobian.nrow() == N);
+  BOOST_TEST(actual_jacobian.ncol() == M);
+
+  bool jacobians_are_equal =
+    compare_matrices(expected_jacobian, actual_jacobian);
+  BOOST_TEST(jacobians_are_equal);
+}
+
 BOOST_AUTO_TEST_CASE(fd_solve)
 {
   shared_ptr<AXISYM_PROBLEM> problem_pt = createBaseProblem();
+  Slip_Parameters::wall_velocity = 0.1;
+  problem_pt->linear_solver_pt() = new FD_LU;
+  problem_pt->steady_newton_solve();
+  problem_pt->debug_elemental_jacobian();
+  DoubleVector residuals;
+  DenseMatrix<double> expected_jacobian;
+  DenseDoubleMatrix actual_jacobian;
+  problem_pt->get_fd_jacobian(residuals, expected_jacobian);
+  problem_pt->get_jacobian(residuals, actual_jacobian);
+
+  std::ofstream output_stream;
+  output_stream.open("RESLT/dofs.txt");
+  problem_pt->describe_dofs(output_stream);
+  output_stream.close();
+
+  const unsigned N = expected_jacobian.nrow();
+  const unsigned M = expected_jacobian.ncol();
+
+  BOOST_TEST(actual_jacobian.nrow() == N);
+  BOOST_TEST(actual_jacobian.ncol() == M);
+
+  bool jacobians_are_equal =
+    compare_matrices(expected_jacobian, actual_jacobian);
+  BOOST_TEST(jacobians_are_equal);
+}
+
+BOOST_AUTO_TEST_CASE(fd_solve_120)
+{
+  shared_ptr<AXISYM_PROBLEM> problem_pt =
+    createBaseProblem(120.0 * MathematicalConstants::Pi / 180.0);
   Slip_Parameters::wall_velocity = 0.1;
   problem_pt->linear_solver_pt() = new FD_LU;
   problem_pt->steady_newton_solve();
@@ -259,6 +350,80 @@ BOOST_AUTO_TEST_CASE(nonlinear_analytic_J_equals_fd_J)
 BOOST_AUTO_TEST_CASE(nonlinear_analytic_M_equals_fd_M)
 {
   shared_ptr<AXISYM_PROBLEM> problem_pt = createBaseProblem();
+  Slip_Parameters::wall_velocity = 0.01;
+  problem_pt->steady_newton_solve();
+  DoubleVector residuals;
+  CRDoubleMatrix actual_jacobian;
+  CRDoubleMatrix actual_mass_matrix;
+  problem_pt->get_eigenproblem_matrices(actual_mass_matrix, actual_jacobian);
+
+  problem_pt->time_stepper_pt()->make_steady();
+  DenseMatrix<double> expected_jacobian;
+  problem_pt->get_fd_jacobian(residuals, expected_jacobian);
+  problem_pt->time_stepper_pt()->undo_make_steady();
+  DenseMatrix<double> unsteady_jacobian;
+  problem_pt->get_fd_jacobian(residuals, unsteady_jacobian);
+  const double dt = problem_pt->time_stepper_pt()->time_pt()->dt();
+  const unsigned n_dof = problem_pt->ndof();
+  DenseMatrix<double> expected_mass_matrix(n_dof, n_dof, 0.0);
+  for (unsigned i = 0; i < n_dof; i++)
+  {
+    for (unsigned j = 0; j < n_dof; j++)
+    {
+      /// The 2/3 is due to the BDF<2> scheme.
+      expected_mass_matrix(j, i) +=
+        (2.0 / 3.0) * dt * (-unsteady_jacobian(j, i) + expected_jacobian(j, i));
+    }
+  }
+
+  const unsigned N = expected_jacobian.nrow();
+  const unsigned M = expected_jacobian.ncol();
+
+  BOOST_TEST(actual_jacobian.nrow() == N);
+  BOOST_TEST(actual_jacobian.ncol() == M);
+
+  bool jacobians_are_equal =
+    compare_matrices(expected_jacobian, actual_jacobian);
+  BOOST_TEST(jacobians_are_equal);
+  bool mass_matrix_are_equal =
+    compare_matrices(expected_mass_matrix, actual_mass_matrix);
+  BOOST_TEST(mass_matrix_are_equal);
+}
+
+BOOST_AUTO_TEST_CASE(nonlinear_analytic_J_equals_fd_J_120)
+{
+  shared_ptr<AXISYM_PROBLEM> problem_pt =
+    createBaseProblem(120.0 * MathematicalConstants::Pi / 180.0);
+  Slip_Parameters::wall_velocity = 0.01;
+  Global_Physical_Parameters::Bo = 1.0;
+  problem_pt->steady_newton_solve();
+  DoubleVector residuals;
+  DenseMatrix<double> expected_jacobian;
+  DenseDoubleMatrix actual_jacobian;
+  problem_pt->get_fd_jacobian(residuals, expected_jacobian);
+  problem_pt->get_jacobian(residuals, actual_jacobian);
+
+  std::ofstream output_stream;
+  output_stream.open("RESLT/dofs.txt");
+  problem_pt->describe_dofs(output_stream);
+  output_stream.close();
+
+  const unsigned N = expected_jacobian.nrow();
+  const unsigned M = expected_jacobian.ncol();
+
+  BOOST_TEST(actual_jacobian.nrow() == N);
+  BOOST_TEST(actual_jacobian.ncol() == M);
+
+  bool jacobians_are_equal =
+    compare_matrices(expected_jacobian, actual_jacobian);
+  BOOST_TEST(jacobians_are_equal);
+}
+
+BOOST_AUTO_TEST_CASE(nonlinear_analytic_M_equals_fd_M_120)
+{
+  shared_ptr<AXISYM_PROBLEM> problem_pt =
+    createBaseProblem(120.0 * MathematicalConstants::Pi / 180.0);
+  Slip_Parameters::wall_velocity = 0.01;
   Slip_Parameters::wall_velocity = 0.01;
   problem_pt->steady_newton_solve();
   DoubleVector residuals;
