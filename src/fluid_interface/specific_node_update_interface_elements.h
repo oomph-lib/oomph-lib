@@ -1232,10 +1232,16 @@ namespace oomph
 
       // Find the nodes
       std::set<SolidNode*> set_of_solid_nodes;
-      const unsigned n_node = this->nnode();
+      // const unsigned n_node = this->nnode();
+      // for (unsigned n = 0; n < n_node; n++)
+      //{
+      //   set_of_solid_nodes.insert(static_cast<SolidNode*>(this->node_pt(n)));
+      // }
+      const unsigned n_node = this->bulk_element_pt()->nnode();
       for (unsigned n = 0; n < n_node; n++)
       {
-        set_of_solid_nodes.insert(static_cast<SolidNode*>(this->node_pt(n)));
+        set_of_solid_nodes.insert(
+          static_cast<SolidNode*>(this->bulk_element_pt()->node_pt(n)));
       }
 
       // Delete the nodes from the face
@@ -1274,7 +1280,6 @@ namespace oomph
     : public FaceGeometry<FaceGeometry<ELEMENT>>,
       public PointFluidInterfaceBoundingElement,
       public virtual SolidFiniteElement
-
   {
   private:
     /// Short Storage for the index of the Lagrange multiplier at the chosen
