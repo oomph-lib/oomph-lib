@@ -12,7 +12,9 @@
 
 // Local include files
 #include "axisym_dynamic_cap_problem.h"
+#include "singular_axisym_dynamic_cap_problem.h"
 
+#include "singular_axisym_navier_stokes_elements.h"
 #include "hijacked_projectable_axisymmteric_Ttaylor_hood_elements.h"
 
 #include "parameters.h"
@@ -21,11 +23,16 @@
 
 namespace oomph
 {
-  typedef HijackedProjectableAxisymmetricTTaylorHoodPVDElement BASE_ELEMENT;
+  typedef SingularAxisymNavierStokesElement<
+    HijackedProjectableAxisymmetricTTaylorHoodPVDElement>
+    BASE_ELEMENT;
   typedef BDF<2> TIMESTEPPER;
-  typedef AxisymDynamicCapProblem<BASE_ELEMENT, TIMESTEPPER> AXISYM_PROBLEM;
+  typedef SingularAxisymDynamicCapProblem<BASE_ELEMENT, TIMESTEPPER>
+    AXISYM_PROBLEM;
 
-  std::shared_ptr<AXISYM_PROBLEM> createBaseProblem();
+  std::shared_ptr<AXISYM_PROBLEM> createBaseProblem(
+    const double& contact_angle = 90.0 * oomph::MathematicalConstants::Pi /
+                                  180.0);
 
   enum
   {
