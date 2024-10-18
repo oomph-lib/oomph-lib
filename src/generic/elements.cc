@@ -925,7 +925,7 @@ namespace oomph
       }
 
 
-      // Shout?
+      // Throw warning if there are repeated data and it is not suppressed.
       if (!Suppress_warning_about_any_repeated_data)
       {
         error_stream << std::endl << std::endl;

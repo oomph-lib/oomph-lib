@@ -139,6 +139,11 @@ namespace oomph
       add_internal_data(new Data(1));
     }
 
+    void fill_in_contribution_to_dresiduals_dparameter(
+      double* const& parameter_pt, Vector<double>& dres_dparam)
+    {
+    }
+
     /// Assert that singular function satisfies the Stokes equations by setting
     /// this to true or false.
     bool& singular_function_satisfies_stokes_equation()
@@ -401,11 +406,22 @@ namespace oomph
     }
 
     // Compute local residual and jacobian
-    // void fill_in_contribution_to_jacobian(Vector<double>& residuals,
-    //                                       DenseMatrix<double>& jacobian)
-    // {
-    //   // fill_in_generic_contribution_to_residuals(residuals, jacobian, 1);
-    // }
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
+    {
+      GeneralisedElement::fill_in_contribution_to_jacobian(residuals, jacobian);
+
+      ////      // Add the contribution to the residuals
+      //     fill_in_contribution_to_residuals(residuals);
+      //     // Allocate storage for the full residuals (residuals of entire
+      //     element) Vector<double> full_residuals(Ndof);
+      //     // Get the residuals for the entire element
+      //     get_residuals(full_residuals);
+      //     fill_in_jacobian_from_internal_by_fd(residuals, jacobian, 1);
+      //     fill_in_jacobian_from_external_by_fd(residuals, jacobian, 1);
+
+      // fill_in_generic_contribution_to_residuals(residuals, jacobian, 1);
+    }
 
   private:
     /// Compute local residual, and, if flag=1, local jacobian matrix

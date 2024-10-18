@@ -1232,10 +1232,16 @@ namespace oomph
 
       // Find the nodes
       std::set<SolidNode*> set_of_solid_nodes;
-      const unsigned n_node = this->nnode();
+      // const unsigned n_node = this->nnode();
+      // for (unsigned n = 0; n < n_node; n++)
+      //{
+      //   set_of_solid_nodes.insert(static_cast<SolidNode*>(this->node_pt(n)));
+      // }
+      const unsigned n_node = this->bulk_element_pt()->nnode();
       for (unsigned n = 0; n < n_node; n++)
       {
-        set_of_solid_nodes.insert(static_cast<SolidNode*>(this->node_pt(n)));
+        set_of_solid_nodes.insert(
+          static_cast<SolidNode*>(this->bulk_element_pt()->node_pt(n)));
       }
 
       // Delete the nodes from the face
@@ -1274,7 +1280,6 @@ namespace oomph
     : public FaceGeometry<FaceGeometry<ELEMENT>>,
       public PointFluidInterfaceBoundingElement,
       public virtual SolidFiniteElement
-
   {
   private:
     /// Short Storage for the index of the Lagrange multiplier at the chosen
@@ -1282,6 +1287,8 @@ namespace oomph
     Vector<unsigned> Lagrange_index;
 
   public:
+    /// There is no contribution to the dresiduals dparameter, we are
+    /// overwriting so that the error is not thrown from the parent class.
     void fill_in_contribution_to_dresiduals_dparameter(
       double* const& parameter_pt, Vector<double>& dres_dparam)
     {
@@ -1352,6 +1359,8 @@ namespace oomph
       outfile << std::fixed << std::setprecision(ss);
     }
 
+    /// Calculate the numerical contact angle and return it along with the
+    /// imposed contact angle.
     void calculate_contact_angle(double& imposed_contact_angle,
                                  double& computed_contact_angle)
     {
@@ -1438,6 +1447,8 @@ namespace oomph
       this->fill_in_jacobian_from_solid_position_by_fd(jacobian);
     }
 
+    /// There is no contribution to the mass matrix, so just call the one to
+    /// fill in the jacobian.
     void fill_in_contribution_to_jacobian_and_mass_matrix(
       Vector<double>& residuals,
       DenseMatrix<double>& jacobian,

@@ -26,8 +26,7 @@ namespace oomph
   class NavierStokesFaceElement : public virtual FaceElement
   {
   public:
-    NavierStokesFaceElement() : FaceElement() {}
-
+    /// Return the number of velocity components
     virtual inline unsigned n_u_nst() const
     {
       NavierStokesEquationNumberingElement* el_pt =
@@ -36,6 +35,8 @@ namespace oomph
       return el_pt->n_u_nst();
     }
 
+    /// Return the index at which the i-th unknown velocity component
+    /// is stored at the n-th node.
     virtual inline unsigned u_index_nst(const unsigned& n,
                                         const unsigned& i) const
     {
@@ -46,6 +47,9 @@ namespace oomph
       return el_pt->u_index_nst(N, i);
     }
 
+    /// Return the index at which the pressure is stored if it is
+    /// stored at the nodes. If not stored at the nodes this will return
+    /// a negative number.
     virtual int p_nodal_index_nst() const
     {
       NavierStokesEquationNumberingElement* el_pt =
@@ -54,6 +58,9 @@ namespace oomph
       return el_pt->p_nodal_index_nst();
     }
 
+    /// Return the index at which the pressure is stored at node n if it is
+    /// stored at the nodes. If not stored at the nodes this will return
+    /// a negative number.
     virtual int p_nodal_index_nst(const unsigned& n) const
     {
       NavierStokesEquationNumberingElement* el_pt =
@@ -62,6 +69,8 @@ namespace oomph
       return el_pt->p_nodal_index_nst();
     }
 
+    /// Return the index at which the i-th momentum equation component
+    /// is stored at the n-th node.
     virtual inline unsigned momentum_index_nst(const unsigned& n,
                                                const unsigned& i) const
     {
@@ -71,12 +80,16 @@ namespace oomph
       return el_pt->momentum_index_nst(this->bulk_node_number(n), i);
     }
 
+    /// Return the index at which the continuity equation
+    /// is stored at the n-th node.
     virtual inline unsigned nst_continuity_index(const unsigned& n) const
     {
       const int nodal_index = p_nodal_index_nst(n);
       return nodal_index;
     }
 
+    /// Return the local unknown number for the i-th velocity
+    /// component at node n.
     virtual inline int nst_u_local_unknown(const unsigned& n,
                                            const unsigned& i) const
     {
@@ -84,6 +97,8 @@ namespace oomph
       return this->nodal_local_eqn(n, nodal_index);
     }
 
+    /// Return the local equation number for the i-th momentum equation
+    /// component at node n.
     virtual inline int nst_momentum_local_eqn(const unsigned& n,
                                               const unsigned& i) const
     {
@@ -91,6 +106,8 @@ namespace oomph
       return this->nodal_local_eqn(n, nodal_index);
     }
 
+    /// Return the local equation number for the continuity equation
+    /// at node n.
     virtual inline int nst_continuity_local_eqn(const unsigned& n) const
     {
       const unsigned nodal_index = nst_continuity_index(n);

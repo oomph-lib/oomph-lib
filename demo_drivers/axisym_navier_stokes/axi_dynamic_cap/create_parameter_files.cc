@@ -19,8 +19,8 @@ enum
 // function declarations
 vector<double> range_string_to_numbers(string range_str);
 void create_parameter_files_over_range_for_variable_pt(
-  const string& range_str,
-  const string& folder_base,
+  const std::string& range_str,
+  const std::string& folder_base,
   oomph::Parameters& parameters,
   const bool& script_is_creating_folders,
   std::ofstream& filestream,
@@ -28,8 +28,8 @@ void create_parameter_files_over_range_for_variable_pt(
 
 // function definitions
 void create_parameter_files_over_range_for_variable_pt(
-  const string& range_str,
-  const string& folder_base,
+  const std::string& range_str,
+  const std::string& folder_base,
   oomph::Parameters& parameters,
   const bool& script_is_creating_folders,
   std::ofstream& filestream,
@@ -39,7 +39,7 @@ void create_parameter_files_over_range_for_variable_pt(
   double lower = values[0];
   double upper = values[1];
   int N = int(values[2]);
-  if (N < 0) cout << "Negative number of points in range" << endl;
+  if (N < 0) std::cout << "Negative number of points in range" << std::endl;
 
   for (int n = 0; n < N; n++)
   {
@@ -48,7 +48,7 @@ void create_parameter_files_over_range_for_variable_pt(
     //{
     const int success_flag = mkdir(parameters.dir_name.c_str(), 0777);
     if (success_flag == FAIL)
-      cout << "Failed to create directory: " << parameters.dir_name << endl;
+      std::cout << "Failed to create directory: " << parameters.dir_name << std::endl;
     //}
 
     if (CommandLineArgs::command_line_flag_has_been_set("--log"))
@@ -68,8 +68,8 @@ void create_parameter_files_over_range_for_variable_pt(
 }
 
 void create_parameter_files_over_range_for_angle_pt(
-  const string& range_str,
-  const string& folder_base,
+  const std::string& range_str,
+  const std::string& folder_base,
   oomph::Parameters& parameters,
   const bool& script_is_creating_folders,
   std::ofstream& filestream,
@@ -79,7 +79,7 @@ void create_parameter_files_over_range_for_angle_pt(
   double lower = values[0];
   double upper = values[1];
   int N = int(values[2]);
-  if (N < 0) cout << "Negative number of points in range" << endl;
+  if (N < 0) std::cout << "Negative number of points in range" << std::endl;
 
   for (int n = 0; n < N; n++)
   {
@@ -87,7 +87,7 @@ void create_parameter_files_over_range_for_angle_pt(
 
     const int success_flag = mkdir(parameters.dir_name.c_str(), 0777);
     if (success_flag == FAIL)
-      cout << "Failed to create directory: " << parameters.dir_name << endl;
+      std::cout << "Failed to create directory: " << parameters.dir_name << std::endl;
 
     if (CommandLineArgs::command_line_flag_has_been_set("--log"))
     {
@@ -110,11 +110,11 @@ void create_parameter_files_over_range_for_angle_pt(
 
 vector<double> range_string_to_numbers(string range_str)
 {
-  stringstream ss(range_str);
+  std::stringstream ss(range_str);
   vector<double> result;
   while (ss.good())
   {
-    string substr;
+    std::string substr;
     getline(ss, substr, ',');
     result.push_back(stod(substr));
   }
@@ -124,10 +124,10 @@ vector<double> range_string_to_numbers(string range_str)
 
 int main(int argc, char** argv)
 {
-  cout << "Create parameter files." << endl;
+  std::cout << "Create parameter files." << std::endl;
   CommandLineArgs::setup(argc, argv);
 
-  string folder_base = "";
+  std::string folder_base = "";
   CommandLineArgs::specify_command_line_flag(
     "--folder", &folder_base, "Optional: Folder base");
 
@@ -135,36 +135,36 @@ int main(int argc, char** argv)
     "--overwrite",
     "Optional: Overwrite values. Assumes folders have been created.");
 
-  string parameters_filename = "";
+  std::string parameters_filename = "";
   CommandLineArgs::specify_command_line_flag(
     "--parameters", &parameters_filename, "Optional: Base parameter file");
 
   // Range arguments
-  string bo_range = "";
+  std::string bo_range = "";
   CommandLineArgs::specify_command_line_flag(
     "--bo",
     &bo_range,
     "Optional: Bond number range. ie Bo0,Bo1,N = \"0,10,11\"");
 
-  string sl_range = "";
+  std::string sl_range = "";
   CommandLineArgs::specify_command_line_flag(
     "--slip_length",
     &sl_range,
     "Optional: Slip length range. ie sl0,sl1,N = \"0.1,0.01,11\"");
 
-  string ca_range = "";
+  std::string ca_range = "";
   CommandLineArgs::specify_command_line_flag(
     "--angle",
     &ca_range,
     "Optional: Contact angle range. ie lower,upper,N = \"90,60,11\"");
 
-  string min_element_range = "";
+  std::string min_element_range = "";
   CommandLineArgs::specify_command_line_flag(
     "--min_el",
     &min_element_range,
     "Optional: Min element length range. ie l0,l1,N = \"1e-1,1e-4,11\"");
 
-  string flux_range = "";
+  std::string flux_range = "";
   CommandLineArgs::specify_command_line_flag(
     "--flux", &flux_range, "Optional: Flux range. ie Q0,Q1,N = \"0,10,11\"");
 
@@ -176,7 +176,7 @@ int main(int argc, char** argv)
   CommandLineArgs::parse_and_assign(argc, argv, has_unrecognised_arg);
   if (has_unrecognised_arg)
   {
-    cout << "Unrecognised args." << endl;
+    std::cout << "Unrecognised args." << std::endl;
     return -1;
   }
 
@@ -208,24 +208,24 @@ int main(int argc, char** argv)
   std::ofstream filestream;
   if (script_is_creating_folders)
   {
-    cout << "Creating super directory." << endl;
+    std::cout << "Creating super directory." << std::endl;
     const int success_flag = mkdir(folder_base.c_str(), 0777);
     if (success_flag == FAIL)
     {
-      cout << "Failed to create directory: " << folder_base << endl;
+      std::cout << "Failed to create directory: " << folder_base << std::endl;
 
       return 1;
     }
   }
   if (script_is_creating_folders)
   {
-    cout << "Creating sub directories and parameter files." << endl;
+    std::cout << "Creating sub directories and parameter files." << std::endl;
   }
   else
   {
-    cout << "Overwriting parameter files in folders, creating the folders if "
+    std::cout << "Overwriting parameter files in folders, creating the folders if "
             "they don't exist."
-         << endl;
+         << std::endl;
   }
 
   if (bo_range != "")
@@ -285,7 +285,7 @@ int main(int argc, char** argv)
     const int success_flag = mkdir(parameters.dir_name.c_str(), 0777);
     if (success_flag == FAIL)
     {
-      cout << "Failed to create directory: " << parameters.dir_name << endl;
+      std::cout << "Failed to create directory: " << parameters.dir_name << std::endl;
 
       // return 1;
     }
@@ -295,7 +295,7 @@ int main(int argc, char** argv)
     filestream.close();
   }
 
-  cout << "End of creation of parameter files." << endl;
+  std::cout << "End of creation of parameter files." << std::endl;
 
   return 0;
 }

@@ -12,14 +12,44 @@ namespace oomph
   class DebugElasticAxisymmetricVolumeConstraintBoundingElement
     : public virtual ElasticAxisymmetricVolumeConstraintBoundingElement<
         ELEMENT>,
-      public virtual DebugJacobianSolidFiniteElement
+      public virtual DebugJacobianSolidFiniteElement,
+      public virtual SolidFaceElement
   {
   public:
     DebugElasticAxisymmetricVolumeConstraintBoundingElement(
       FiniteElement* const& element_pt, const int& face_index)
       : ElasticAxisymmetricVolumeConstraintBoundingElement<ELEMENT>(element_pt,
-                                                                    face_index)
+                                                                    face_index),
+        SolidFaceElement()
     {
+      this->add_other_bulk_node_positions_as_external_data();
+    }
+
+    /// The "global" intrinsic coordinate of the element when
+    /// viewed as part of a geometric object should be given by
+    /// the FaceElement representation, by default
+    /// This final over-ride is required because both SolidFiniteElements
+    /// and FaceElements overload zeta_nodal
+    virtual double zeta_nodal(const unsigned& n,
+                              const unsigned& k,
+                              const unsigned& i) const
+    {
+      return FaceElement::zeta_nodal(n, k, i);
+    }
+
+    /// Set pointer to MacroElement -- overloads generic version
+    /// and uses the MacroElement
+    /// also as the default for the "undeformed" configuration.
+    /// This assignment must be overwritten with
+    /// set_undeformed_macro_elem_pt(...) if the deformation of
+    /// the solid body is driven by a deformation of the
+    /// "current" Domain/MacroElement representation of it's boundary.
+    /// Can be overloaded in derived classes to perform additional
+    /// tasks
+    virtual void set_macro_elem_pt(MacroElement* macro_elem_pt)
+    {
+      Macro_elem_pt = macro_elem_pt;
+      Undeformed_macro_elem_pt = macro_elem_pt;
     }
 
     void fill_in_contribution_to_dresiduals_dparameter(
@@ -52,6 +82,15 @@ namespace oomph
   public:
     // Use base class constructor
     using ImposeImpenetrabilityElement<ELEMENT>::ImposeImpenetrabilityElement;
+
+    /// Constructor
+    ImposeImpenetrabilityElementWithOutput(FiniteElement* const& element_pt,
+                                           const int& face_index,
+                                           const unsigned& id = 0)
+      : ImposeImpenetrabilityElement<ELEMENT>(element_pt, face_index, id)
+    {
+    }
+
 
     void fill_in_contribution_to_dresiduals_dparameter(
       double* const& parameter_pt, Vector<double>& dres_dparam)
@@ -141,15 +180,61 @@ namespace oomph
   template<class ELEMENT>
   class DebugImposeImpenetrabilityElement
     : public virtual ImposeImpenetrabilityElementWithOutput<ELEMENT>,
-      public virtual DebugJacobianSolidFiniteElement
+      public virtual DebugJacobianSolidFiniteElement,
+      public virtual SolidFaceElement
   {
   public:
     DebugImposeImpenetrabilityElement(FiniteElement* const& element_pt,
                                       const int& face_index,
                                       const unsigned& id = 0)
       : ImposeImpenetrabilityElementWithOutput<ELEMENT>(
-          element_pt, face_index, id)
+          element_pt, face_index, id),
+        DebugJacobianSolidFiniteElement(),
+        SolidFaceElement()
     {
+      this->add_other_bulk_node_positions_as_external_data();
+    }
+
+    /// The "global" intrinsic coordinate of the element when
+    /// viewed as part of a geometric object should be given by
+    /// the FaceElement representation, by default
+    /// This final over-ride is required because both SolidFiniteElements
+    /// and FaceElements overload zeta_nodal
+    virtual double zeta_nodal(const unsigned& n,
+                              const unsigned& k,
+                              const unsigned& i) const
+    {
+      return FaceElement::zeta_nodal(n, k, i);
+    }
+
+    /// Set pointer to MacroElement -- overloads generic version
+    /// and uses the MacroElement
+    /// also as the default for the "undeformed" configuration.
+    /// This assignment must be overwritten with
+    /// set_undeformed_macro_elem_pt(...) if the deformation of
+    /// the solid body is driven by a deformation of the
+    /// "current" Domain/MacroElement representation of it's boundary.
+    /// Can be overloaded in derived classes to perform additional
+    /// tasks
+    virtual void set_macro_elem_pt(MacroElement* macro_elem_pt)
+    {
+      Macro_elem_pt = macro_elem_pt;
+      Undeformed_macro_elem_pt = macro_elem_pt;
+    }
+
+    /// Fill in contribution from Jacobian
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
+    {
+      // // Call the generic routine with the flag set to 1
+      // this->fill_in_generic_contribution_to_residuals_parall_lagr_multiplier(
+      //   residuals, jacobian, 1);
+
+      // // Get the solid entries in the jacobian using finite differences
+      // fill_in_jacobian_from_solid_position_by_fd(residuals, jacobian);
+
+      // FiniteElement::fill_in_contribution_to_jacobian(residuals, jacobian);
+      SolidFiniteElement::fill_in_contribution_to_jacobian(residuals, jacobian);
     }
 
     void fill_in_contribution_to_dresiduals_dparameter(
@@ -217,7 +302,8 @@ namespace oomph
   class HijackedProjectableAxisymmetricTTaylorHoodPVDElement
     : public virtual // Hijacked<
       ProjectableAxisymmetricTaylorHoodElement<
-        AxisymmetricTTaylorHoodPVDElement> //>
+        AxisymmetricTTaylorHoodPVDElement>, //>
+      public virtual DebugJacobianSolidFiniteElement
   {
   private:
     double Error;
