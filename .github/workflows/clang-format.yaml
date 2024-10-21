@@ -1,6 +1,9 @@
 name: clang-format
 
 on:
+  # Manually trigger the workflow to check a given commit as the dependencies
+  # change.
+  workflow_dispatch:
   # Trigger the workflow when a push is made to any branch except 'main'. The
   # intention here is that this workflow should be triggered in the following
   # cases:
