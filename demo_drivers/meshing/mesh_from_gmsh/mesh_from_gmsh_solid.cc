@@ -85,11 +85,10 @@ class CantileverProblem : public Problem
 public:
 
     /// Constructor:
-    CantileverProblem()
+    CantileverProblem(const string& mesh_file)
     {
 
-        std::string file = "cantilever.msh";
-        Problem::mesh_pt() = new SolidGmshBrickMesh<ELEMENT>(file, false);
+        Problem::mesh_pt() = new SolidGmshBrickMesh<ELEMENT>(mesh_file, false);
 
 
         // Complete build of elements
@@ -231,11 +230,33 @@ private:
 //======================================================================
 int main(int argc, char* argv[])
 {
+    // Store command line arguments
+    CommandLineArgs::setup(argc,argv);
+
+    // Check number of command line arguments: Need exactly three.
+    if (argc!=2)
+    {
+        std::string error_message =
+            "Wrong number of command line arguments.\n";
+        error_message +=
+            "Must specify the following file name  \n";
+        error_message += 
+            "cantilever.msh\n";
+
+   throw OomphLibError(error_message,
+                       OOMPH_CURRENT_FUNCTION,
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+
+    // Convert arguments to strings that specify the input file names
+    string Mesh_file(argv[1]);
+
+
     // Generalised Hookean constitutive equations
     Input::Constitutive_law_pt = new GeneralisedHookean(&Input::Nu, &Input::E);
 
     //Set up the problem with pure displacement based elements
-    CantileverProblem<QPVDElement<3,2> > problem;
+    CantileverProblem<QPVDElement<3,2> > problem(Mesh_file);
     problem.solve();
 
 

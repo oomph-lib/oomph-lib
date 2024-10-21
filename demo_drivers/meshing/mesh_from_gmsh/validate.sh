@@ -20,9 +20,9 @@ cd Validation
 mkdir RESLT
 
 echo "Running a 3D Gmsh version of Airy cantilever validation "
-../mesh_from_gmsh_solid > OUTPUT
+../mesh_from_gmsh_solid ../cantilever.msh > OUTPUT
 
-
+exit
 echo "done"
 echo " " >> validation.log
 echo "3D Gmsh Airy cantilever validation" >> validation.log
