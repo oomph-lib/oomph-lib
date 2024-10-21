@@ -53,7 +53,7 @@ validate(){
 }
 
 # Utility scripts
-validate "create_parameter_files --folder Validation/RESLT --overwrite --parameters" validata/unsteady-parameters-with-restart.dat parameters.dat create_parameter_files_parameters-with-restart_results.dat.gz
+validate "create_parameter_files --folder Validation/RESLT --overwrite --parameters" validata/unsteady-parameters-with-restart.dat parameters.dat create_parameter_files_unsteady-parameters-with-restart_results.dat.gz
 
 # Base state scripts
 validate axi_dynamic_cap validata/parameters.dat trace.dat steady_run_parameters_results.dat.gz                   
