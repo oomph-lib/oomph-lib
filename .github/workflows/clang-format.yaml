@@ -1,9 +1,6 @@
 name: clang-format
 
 on:
-  # Manually trigger the workflow to check a given commit as the dependencies
-  # change.
-  workflow_dispatch:
   # Trigger the workflow when a push is made to any branch except 'main'. The
   # intention here is that this workflow should be triggered in the following
   # cases:
@@ -25,7 +22,7 @@ jobs:
 
       # Format all files in the src/ directory except cfortran.h, lapack_qz.h,
       # superlu.c, superlu_dist.c, which sit in the src/generic/ subdirectory.
-      - uses: PuneetMatharu/clang-format-lint-action@master
+      - uses: PuneetMatharu/clang-format-lint-action@v0.18
         with:
           files: ^(src)\/(?!.*(cfortran|lapack_qz))(.+)\.(h|cc)$
           clangFormatVersion: 12

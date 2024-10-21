@@ -23,22 +23,9 @@
         <th><a href="../../tree/development"><code>development</code></a></th>
     </tr>
     <tr>
-        <td>Ubuntu Latest (24.04)</td>
+        <td>Ubuntu</td>
         <td>
             <a href="../../actions/workflows/self-tests-ubuntu.yaml">
-                <img alt="Ubuntu" src="../../actions/workflows/self-tests-ubuntu.yaml/badge.svg?branch=main">
-            </a>
-        </td>
-        <td>
-            <a href="../../actions/workflows/self-tests-ubuntu.yaml">
-                <img alt="Ubuntu" src="../../actions/workflows/self-tests-ubuntu.yaml/badge.svg?branch=development">
-            </a>
-        </td>
-    </tr>
-    <tr>
-        <td>Ubuntu 22.04</td>
-        <td>
-            <a href="../../actions/workflows/self-tests-ubuntu-22-04.yaml">
                 <img alt="Ubuntu" src="../../actions/workflows/self-tests-ubuntu.yaml/badge.svg?branch=main">
             </a>
         </td>
