@@ -26,7 +26,7 @@
 #ifndef OOMPH_GEOMPACK_MESH_TEMPLATE_CC
 #define OOMPH_GEOMPACK_MESH_TEMPLATE_CC
 
-#include "gmsh_mesh.template.h"
+#include "gmsh_brick_mesh.template.h"
 
 
 namespace oomph
@@ -40,7 +40,7 @@ namespace oomph
     /// Build unstructured tet mesh based on output from scaffold
     //========================================================================
     template<class ELEMENT>
-    void GmshMesh<ELEMENT>::build_from_scaffold(TimeStepper* time_stepper_pt)
+    void GmshBrickMesh<ELEMENT>::build_from_scaffold(TimeStepper* time_stepper_pt)
     {
         // Mesh can only be built with 3D Telements.
         MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(3);
@@ -449,12 +449,12 @@ namespace oomph
 
                     // This face indexing is not correct hope oomph-lib dev can help here!
                     Vector<unsigned > gmsh_face_map(6,0);
-                    gmsh_face_map[0] = -2;
-                    gmsh_face_map[1] = -1;
-                    gmsh_face_map[2] = -3;
+                    gmsh_face_map[0] = -3;
+                    gmsh_face_map[1] = 3;
+                    gmsh_face_map[2] = -2;
                     gmsh_face_map[3] =  1;
                     gmsh_face_map[4] =  2;
-                    gmsh_face_map[5] =  3;
+                    gmsh_face_map[5] = -1;
 
                     // Tetgen Face 0 is our Face 3
                     // Tetgen Face 1 is our Face 2
@@ -494,4 +494,3 @@ namespace oomph
 
 } // namespace oomph
 #endif
-

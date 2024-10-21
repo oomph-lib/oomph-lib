@@ -35,7 +35,7 @@ missing_masters.cc \
 element_with_external_element.cc \
 eigen_solver.cc \
 triangle_scaffold_mesh.cc  geompack_scaffold_mesh.cc \
-tetgen_scaffold_mesh.cc gmsh_read.cc gmsh_scaffold_mesh.cc simple_cubic_scaffold_tet_mesh.cc \
+tetgen_scaffold_mesh.cc gmsh_read.cc gmsh_brick_scaffold_mesh.cc simple_cubic_scaffold_tet_mesh.cc \
 line_mesh.cc binary_tree.cc refineable_line_element.cc \
 triangle_mesh.cc tet_mesh.cc \
 partitioning.cc communicator.cc linear_algebra_distribution.cc \
@@ -95,7 +95,7 @@ macro_element_node_update_element.h \
 mesh_as_geometric_object.h face_element_as_geometric_object.h \
 eigen_solver.h \
 Telements.h \
-triangle_scaffold_mesh.h geompack_scaffold_mesh.h tetgen_scaffold_mesh.h gmsh_scaffold_mesh.h\
+triangle_scaffold_mesh.h geompack_scaffold_mesh.h tetgen_scaffold_mesh.h gmsh_brick_scaffold_mesh.h\
 gmsh_read.h pseudo_buckling_ring.h simple_cubic_scaffold_tet_mesh.h \
 line_mesh.h binary_tree.h refineable_line_element.h \
 refineable_line_mesh.h \

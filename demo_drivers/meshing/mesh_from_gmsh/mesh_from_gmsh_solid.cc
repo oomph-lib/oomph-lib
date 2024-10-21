@@ -33,7 +33,7 @@
 #include "constitutive.h"
 
 // The mesh form gmsh
-#include "meshes/gmsh_mesh.h"
+#include "meshes/gmsh_brick_mesh.h"
 
 using namespace std;
 using namespace oomph;
@@ -88,8 +88,8 @@ public:
     CantileverProblem()
     {
 
-        std::string file = "cantiliver.msh";
-        Problem::mesh_pt() = new SolidGmshMesh<ELEMENT>(file, false);
+        std::string file = "cantilever.msh";
+        Problem::mesh_pt() = new SolidGmshBrickMesh<ELEMENT>(file, false);
 
 
         // Complete build of elements
@@ -173,9 +173,9 @@ public:
 
 
     /// Access function for the mesh
-    SolidGmshMesh<ELEMENT>* mesh_pt()
+    SolidGmshBrickMesh<ELEMENT>* mesh_pt()
     {
-        return dynamic_cast<SolidGmshMesh<ELEMENT>*>(Problem::mesh_pt());
+        return dynamic_cast<SolidGmshBrickMesh<ELEMENT>*>(Problem::mesh_pt());
     }
 
 
@@ -220,7 +220,7 @@ private:
 
     /// DocInfo object for output
     DocInfo Doc_info;
-    SolidGmshMesh<ELEMENT>* Solid_mesh_pt;
+    SolidGmshBrickMesh<ELEMENT>* Solid_mesh_pt;
 };
 
 

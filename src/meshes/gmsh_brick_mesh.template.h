@@ -28,7 +28,7 @@
 
 #include "../generic/mesh.h"
 #include "../generic/matrices.h"
-#include "../generic/gmsh_scaffold_mesh.h"
+#include "../generic/gmsh_brick_scaffold_mesh.h"
 #include "../generic/brick_mesh.h"
 
 
@@ -42,18 +42,18 @@ namespace oomph
     /// triangular meshes).
     //========================================================================
     template<class ELEMENT>
-    class GmshMesh : public virtual BrickMeshBase
+    class GmshBrickMesh : public virtual BrickMeshBase
     {
     public:
         /// Default Constructor
-        GmshMesh()
+        GmshBrickMesh()
         {
             // Mesh can only be built with 3D Telements.
             MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(3);
         }
 
         /// Constructor with the input files
-        explicit GmshMesh(const std::string& filename, bool verbose,
+        explicit GmshBrickMesh(const std::string& filename, bool verbose,
                           TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper )
         {
             // Mesh can only be built with 3D Qelements.
@@ -61,9 +61,9 @@ namespace oomph
 
 
             // Build scaffold
-            Tmp_mesh_pt = new GmshScaffoldMesh(filename, verbose);
-            boundaries = Tmp_mesh_pt->boundaries;
-            orderedBC = Tmp_mesh_pt->orderedBC;
+            Tmp_mesh_pt = new GmshBrickScaffoldMesh(filename, verbose);
+            Boundaries = Tmp_mesh_pt->Boundaries;
+            Ordered_boundary_conditions = Tmp_mesh_pt->Ordered_boundary_conditions;
 
             // Convert mesh from scaffold to actual mesh
             build_from_scaffold(time_stepper_pt);
@@ -74,15 +74,15 @@ namespace oomph
         }
 
         /// Empty destructor
-        ~GmshMesh() override = default;
+        ~GmshBrickMesh() override = default;
 
 
-        std::vector<GMSH::Boundary> boundaries;
+        std::vector<GMSH::Boundary> Boundaries;
 
-        std::unordered_map<int, int> orderedBC;
+        std::unordered_map<int, int> Ordered_boundary_conditions;
     protected:
         /// Temporary scaffold mesh
-        GmshScaffoldMesh* Tmp_mesh_pt = nullptr;
+        GmshBrickScaffoldMesh* Tmp_mesh_pt = nullptr;
 
         /// Build mesh from scaffold
         void build_from_scaffold(TimeStepper* time_stepper_pt);
@@ -94,15 +94,15 @@ namespace oomph
     /// enumerates all boundaries.
     //=========================================================================
     template<class ELEMENT>
-    class SolidGmshMesh : public virtual GmshMesh<ELEMENT>,
+    class SolidGmshBrickMesh : public virtual GmshBrickMesh<ELEMENT>,
                           public virtual SolidMesh
     {
     public:
         /// Constructor. Boundary coordinates are setup
         /// automatically.
-        explicit SolidGmshMesh(const std::string& file_name, bool verbose,
+        explicit SolidGmshBrickMesh(const std::string& file_name, bool verbose,
                         TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
-                : GmshMesh<ELEMENT>(file_name, verbose, time_stepper_pt)
+                : GmshBrickMesh<ELEMENT>(file_name,verbose, time_stepper_pt )
         {
             // Assign the Lagrangian coordinates
             set_lagrangian_nodal_coordinates();
@@ -110,11 +110,10 @@ namespace oomph
 
 
         /// Empty Destructor
-        ~SolidGmshMesh() override = default;
+        ~SolidGmshBrickMesh() override = default;
     };
 
 
 } // namespace oomph
 
 #endif
-

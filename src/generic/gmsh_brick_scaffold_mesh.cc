@@ -24,7 +24,7 @@
 // LIC//
 // LIC//====================================================================
 
-#include "gmsh_scaffold_mesh.h"
+#include "gmsh_brick_scaffold_mesh.h"
 
 
 namespace oomph
@@ -41,14 +41,14 @@ namespace oomph
     /// that BoundaryNodes are constructed. Any additional boundaries are
     /// determined from the face boundary information.
     //======================================================================
-    GmshScaffoldMesh::GmshScaffoldMesh(const std::string& file_name, bool verbose)
+    GmshBrickScaffoldMesh::GmshBrickScaffoldMesh(const std::string& file_name, bool verbose)
     {
         // Process the element file
         // --------------------------
         GMSH::Gmsh rg(file_name, verbose);
-        boundaries = rg.boundaries;
-        orderedBC = rg.orderedBC;
-        std::vector<GMSH::Node> nodes = rg.getNodes();
+        Boundaries = rg.boundaries;
+        Ordered_boundary_conditions = rg.orderedBC;
+        const std::vector<GMSH::Node>& nodes = rg.getNodes();
         std::vector<GMSH::Edge> edges = rg.getEdges();
 
         // dimension of the mesh
@@ -393,4 +393,3 @@ namespace oomph
 
 
 } // namespace oomph
-

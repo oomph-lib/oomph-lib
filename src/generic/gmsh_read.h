@@ -295,16 +295,16 @@ namespace GMSH
 
         const std::vector<Node>& getNodes() const;
 
-        virtual Node& getNode(size_t n) { return nodes[n];}
+        virtual Node& getNode(size_t n) { return Nodes[n];}
 
         const std::vector<Edge>& getEdges() const;
-        Edge& getEdge(size_t e) { return edges[e];}
+        Edge& getEdge(size_t e) { return Edges[e];}
 
         const std::vector<Quad>& getQuads() const;
-        Quad& getQuad(size_t q) { return quads[q];}
+        Quad& getQuad(size_t q) { return Quads[q];}
 
         const std::vector<Hexa>& getHexas() const;
-        Hexa& getHexa(size_t h) { return hexas[h];}
+        Hexa& getHexa(size_t h) { return Hexas[h];}
 
         static std::vector<Quad> getFaces(const Hexa& hexa);
 
@@ -402,39 +402,39 @@ namespace GMSH
 
     private:
         // flag to show all info
-        bool verbose_ = false;
+        bool Verbose = false;
 
-        std::ifstream mshFile;
-        int minNodeTag = 0;
-        std::vector<bool> found4;
-        std::vector<bool> found2;
-        std::vector<bool> found20;
+        std::ifstream Msh_file;
+        int Min_node_tag = 0;
+        std::vector<bool> Found4;
+        std::vector<bool> Found2;
+        std::vector<bool> Found20;
 
         /// Entities
-        std::vector<Point> pEntities;
-        std::vector<Curve> cEntities;
-        std::vector<Surface> sEntities;
-        std::vector<Volume> vEntities;
+        std::vector<Point> Point_entities;
+        std::vector<Curve> Curve_entities;
+        std::vector<Surface> Surface_entities;
+        std::vector<Volume> Volume_entities;
 
 
 
         /// Vertex, and Elements
-        std::vector<Vertex> vertices;
-        std::vector<Element> elements;
+        std::vector<Vertex> Vertices;
+        std::vector<Element> Elements;
 
         ///
-        std::vector<Node> nodes;
-        std::vector<Edge> edges;
-        std::vector<Quad> quads;
-        std::vector<Hexa> hexas;
-        std::vector<Quad> quadList;
-        std::vector<Edge> edgeList;
+        std::vector<Node> Nodes;
+        std::vector<Edge> Edges;
+        std::vector<Quad> Quads;
+        std::vector<Hexa> Hexas;
+        std::vector<Quad> Quad_list;
+        std::vector<Edge> Edge_list;
 
         // internal added new quads and edges
-        std::vector<std::vector<int>> fourNodesList;
-        std::vector<std::vector<int>> commonInternalEdges;
-        std::vector<std::vector<int>> twoNodesList;
-        std::vector<std::vector<int>> internalQuads;
+        std::vector<std::vector<int>> Four_nodes_list;
+        std::vector<std::vector<int>> Common_internal_edges;
+        std::vector<std::vector<int>> Two_nodes_list;
+        std::vector<std::vector<int>> Internal_quads;
 
         /// Element types
         enum ElementType
@@ -462,9 +462,9 @@ namespace GMSH
         int facesPerElement = defFlag;
 
         //
-        std::vector<Tuple> tuples;
+        std::vector<Tuple> Tuples;
 
-        std::vector<int> oldNumber;
+        std::vector<int> Old_number;
 
         // timing
         std::chrono::duration<double> duration {};
@@ -472,4 +472,3 @@ namespace GMSH
     };
 }
 #endif //GMSH_H
-

@@ -13,20 +13,20 @@
 
 
 /*! Constructor*/
-GMSH::Gmsh::Gmsh(const std::string &filename, bool verbose): verbose_(verbose)
+GMSH::Gmsh::Gmsh(const std::string &filename, bool verbose): Verbose(verbose)
 {
     // start timing reading the file
     auto start_time = std::chrono::high_resolution_clock::now();
 
-    mshFile.open(filename);
+    Msh_file.open(filename);
     std::string line;
 
-    if (mshFile.is_open()) {
-        while (std::getline(mshFile, line)) {
+    if (Msh_file.is_open()) {
+        while (std::getline(Msh_file, line)) {
             if (line == "$MeshFormat") {
                 double MeshVersion;
                 int suffix1, suffix2;
-                std::getline(mshFile, line);
+                std::getline(Msh_file, line);
                 std::istringstream(line) >> MeshVersion >> suffix1 >> suffix2;
 
                 // Check msh file format
@@ -36,13 +36,13 @@ GMSH::Gmsh::Gmsh(const std::string &filename, bool verbose): verbose_(verbose)
                 }
             } else if (line == "$PhysicalNames") {
                 int nPhysical=defFlag;
-                std::getline(mshFile, line);  // Read the number of physical groups
+                std::getline(Msh_file, line);  // Read the number of physical groups
                 std::istringstream(line) >> nPhysical;
 
                 for (int i = 0; i < nPhysical; ++i) {
                     Boundary boundary;
 
-                    std::getline(mshFile, line);
+                    std::getline(Msh_file, line);
                     std::istringstream iss(line);
                     int dim, tag;
                     std::string name;
@@ -62,14 +62,14 @@ GMSH::Gmsh::Gmsh(const std::string &filename, bool verbose): verbose_(verbose)
             } else if (line == "$Entities") {
                 int numPEntity, numCEntity, numSEntity, numVEntity;
 
-                std::getline(mshFile, line);
+                std::getline(Msh_file, line);
                 std::istringstream(line) >> numPEntity >> numCEntity >> numSEntity >> numVEntity;
 
                 /// point Entities
-                pEntities.reserve(numPEntity);
+                Point_entities.reserve(numPEntity);
                 for (int i = 0; i < numPEntity; ++i) {
                     Point p;
-                    std::getline(mshFile, line);
+                    std::getline(Msh_file, line);
                     std::istringstream iss(line);
                     iss >> p.pointTag >> p.x >> p.y >> p.z >> p.numPhysicalTags;
 
@@ -82,15 +82,15 @@ GMSH::Gmsh::Gmsh(const std::string &filename, bool verbose): verbose_(verbose)
                         }
                     }
 
-                    pEntities.push_back(p);
+                    Point_entities.push_back(p);
                 }
 
                 /// curve Entities
-                cEntities.reserve(numCEntity);
+                Curve_entities.reserve(numCEntity);
                 for (int i = 0; i < numCEntity; ++i) {
                     double tmp = 0.0;
                     Curve curve;
-                    std::getline(mshFile, line);
+                    std::getline(Msh_file, line);
 
                     std::istringstream iss(line);
                     iss >> curve.curveTag;
@@ -117,15 +117,15 @@ GMSH::Gmsh::Gmsh(const std::string &filename, bool verbose): verbose_(verbose)
                             curve.pointTags[j] = dummy;
                         }
                     }
-                    cEntities.push_back(curve);
+                    Curve_entities.push_back(curve);
                 }
 
                 /// Surface Entities
-                sEntities.reserve(numSEntity);
+                Surface_entities.reserve(numSEntity);
                 for (int i = 0; i < numSEntity; ++i) {
                     double tmp;
                     Surface surface;
-                    std::getline(mshFile, line);
+                    std::getline(Msh_file, line);
                     std::istringstream iss(line);
                     iss >> surface.surfaceTag;
                     // skip
@@ -154,15 +154,15 @@ GMSH::Gmsh::Gmsh(const std::string &filename, bool verbose): verbose_(verbose)
                         }
                     }
 
-                    sEntities.push_back(surface);
+                    Surface_entities.push_back(surface);
                 }
 
                 /// Volume Entities
-                vEntities.reserve(numVEntity);
+                Volume_entities.reserve(numVEntity);
                 for (int i = 0; i < numVEntity; ++i) {
                     double tmp;
                     Volume volume;
-                    std::getline(mshFile, line);
+                    std::getline(Msh_file, line);
                     std::istringstream iss(line);
                     iss >> volume.volumeTag;
                     // skip
@@ -189,51 +189,51 @@ GMSH::Gmsh::Gmsh(const std::string &filename, bool verbose): verbose_(verbose)
                             volume.surfaceTags.push_back(dummy);
                         }
                     }
-                    vEntities.push_back(volume);
+                    Volume_entities.push_back(volume);
                 }
             } else if (line == "$Nodes")
             {
                 int tmp;
                 int numEntityBlocks, numNodes, maxNodeTag;
-                std::getline(mshFile, line);
+                std::getline(Msh_file, line);
 
-                std::istringstream(line) >> numEntityBlocks >> numNodes >> minNodeTag >> maxNodeTag;
-                if (numNodes > numEntityBlocks) vertices.resize(numNodes);
-                else vertices.resize(numEntityBlocks);
+                std::istringstream(line) >> numEntityBlocks >> numNodes >> Min_node_tag >> maxNodeTag;
+                if (numNodes > numEntityBlocks) Vertices.resize(numNodes);
+                else Vertices.resize(numEntityBlocks);
 
                 // initialize the nodes vector [for later use in collectNodes() not here]
-                nodes.resize(numNodes);
+                Nodes.resize(numNodes);
 
                 int numNodesInBlock;
                 int count = 0;
                 for (int i = 0; i < numEntityBlocks; ++i) {
-                    std::getline(mshFile, line);
+                    std::getline(Msh_file, line);
 
                     std::istringstream(line)
-                            >> vertices[count].entityDim >> vertices[count].entityTag
-                            >> vertices[count].parametric_ >> vertices[count].numNodesInBlock;
+                            >> Vertices[count].entityDim >> Vertices[count].entityTag
+                            >> Vertices[count].parametric_ >> Vertices[count].numNodesInBlock;
 
-                    numNodesInBlock = vertices[count].numNodesInBlock;
+                    numNodesInBlock = Vertices[count].numNodesInBlock;
 
                     // Now read nodes ids
                     for (int j = 0; j < numNodesInBlock; ++j) {
-                        std::getline(mshFile, line);
+                        std::getline(Msh_file, line);
 
                         std::istringstream(line) >> tmp;
-                        vertices[count + j].nodeTag =
-                                tmp - minNodeTag; // to reset numbering to zero use [tmp - minNodeTag];
+                        Vertices[count + j].nodeTag =
+                                tmp - Min_node_tag; // to reset numbering to zero use [tmp - minNodeTag];
                     }
                     // Read the coord.
                     for (int j = 0; j < numNodesInBlock; ++j) {
-                        std::getline(mshFile, line);
+                        std::getline(Msh_file, line);
 
-                        std::istringstream(line) >> vertices[count + j].x >> vertices[count + j].y
-                                                 >> vertices[count + j].z;
+                        std::istringstream(line) >> Vertices[count + j].x >> Vertices[count + j].y
+                                                 >> Vertices[count + j].z;
                         if (j > 0) {
-                            vertices[count + j].entityDim = vertices[count + j - 1].entityDim;
-                            vertices[count + j].entityTag = vertices[count + j - 1].entityTag;
-                            vertices[count + j].parametric_ = vertices[count + j - 1].parametric_;
-                            vertices[count + j].numNodesInBlock = vertices[count + j - 1].numNodesInBlock;
+                            Vertices[count + j].entityDim = Vertices[count + j - 1].entityDim;
+                            Vertices[count + j].entityTag = Vertices[count + j - 1].entityTag;
+                            Vertices[count + j].parametric_ = Vertices[count + j - 1].parametric_;
+                            Vertices[count + j].numNodesInBlock = Vertices[count + j - 1].numNodesInBlock;
                         }
                     }
 
@@ -247,110 +247,110 @@ GMSH::Gmsh::Gmsh(const std::string &filename, bool verbose): verbose_(verbose)
             {
                 int tmp;
                 int numEntityBlocks, numElem, minElementTag, maxElementTag;
-                std::getline(mshFile, line);
+                std::getline(Msh_file, line);
 
                 std::istringstream
                         (line) >> numEntityBlocks >> numElem >> minElementTag >> maxElementTag;
-                elements.resize(numElem);
+                Elements.resize(numElem);
 
                 // counter to maintain the number of elements
                 int count = 0;
                 for (int i = 0; i < numEntityBlocks; ++i) {
-                    std::getline(mshFile, line);
+                    std::getline(Msh_file, line);
 
                     std::istringstream
-                            (line) >> elements[count].entityDim >> elements[count].entityTag
-                                   >> elements[count].elementType >> elements[count].numElementsInBlock;
+                            (line) >> Elements[count].entityDim >> Elements[count].entityTag
+                                   >> Elements[count].elementType >> Elements[count].numElementsInBlock;
 
                     // Read elem tag and node tag
-                    for (int j = 0; j < elements[count].numElementsInBlock; ++j) {
+                    for (int j = 0; j < Elements[count].numElementsInBlock; ++j) {
                         if (j > 0) {
-                            elements[count + j].entityDim = elements[count + j - 1].entityDim;
-                            elements[count + j].entityTag = elements[count + j - 1].entityTag;
-                            elements[count + j].elementType = elements[count + j - 1].elementType;
-                            elements[count + j].numElementsInBlock = elements[count + j - 1].numElementsInBlock;
+                            Elements[count + j].entityDim = Elements[count + j - 1].entityDim;
+                            Elements[count + j].entityTag = Elements[count + j - 1].entityTag;
+                            Elements[count + j].elementType = Elements[count + j - 1].elementType;
+                            Elements[count + j].numElementsInBlock = Elements[count + j - 1].numElementsInBlock;
                         }
-                        std::getline(mshFile, line);
+                        std::getline(Msh_file, line);
                         std::istringstream iss(line);
 
                         // Read the element tag and make start from zero
                         iss >> tmp;
-                        elements[count + j].elementTag = tmp - minElementTag;
+                        Elements[count + j].elementTag = tmp - minElementTag;
 
                         // if it's a node
-                        if (elements[count + j].elementType == ElementType::Vertex_) {
+                        if (Elements[count + j].elementType == ElementType::Vertex_) {
                             iss >> tmp;
                             //shift it to start from zero
-                            elements[count + j].nodeTag = tmp - minNodeTag;
+                            Elements[count + j].nodeTag = tmp - Min_node_tag;
                         }
 
                         // if it's an edge/line
-                        if (elements[count + j].elementType == ElementType::Line_) {
+                        if (Elements[count + j].elementType == ElementType::Line_) {
                             for (int k = 0; k < 2; ++k)
                             {
                                 iss >> tmp;
 
                                 // shift to start from zero
-                                elements[count + j].edgeTags[k] = tmp - minNodeTag;
+                                Elements[count + j].edgeTags[k] = tmp - Min_node_tag;
                             }
                         }
-                        if (elements[count + j].elementType == ElementType::Line2ndOrder_) {
+                        if (Elements[count + j].elementType == ElementType::Line2ndOrder_) {
                             // resize tags to accommodate the new element type
-                            elements[count + j].edgeTags.resize(3,-1);
+                            Elements[count + j].edgeTags.resize(3,-1);
 
                             for (int k = 0; k < 3; ++k)
                             {
                                 iss >> tmp;
 
                                 // shift to start from zero
-                                elements[count + j].edgeTags[k] = tmp - minNodeTag;
+                                Elements[count + j].edgeTags[k] = tmp - Min_node_tag;
                             }
                         }
 
                         // if it's quad
-                        if (elements[count + j].elementType == ElementType::Quadrilateral_) {
+                        if (Elements[count + j].elementType == ElementType::Quadrilateral_) {
                             for (int k = 0; k < 4; ++k) {
                                 iss >> tmp;
                                 // shift it to start from zero
-                                elements[count + j].quadTags[k] = tmp - minNodeTag;
+                                Elements[count + j].quadTags[k] = tmp - Min_node_tag;
                             }
                         }
-                        if (elements[count + j].elementType == ElementType::Quadrilateral2ndOrder_) {
+                        if (Elements[count + j].elementType == ElementType::Quadrilateral2ndOrder_) {
                             // resize tags to accommodate the new element type
-                            elements[count + j].quadTags.resize(9,-1);
+                            Elements[count + j].quadTags.resize(9,-1);
 
                             for (int k = 0; k < 9; ++k) {
                                 iss >> tmp;
                                 // shift it to start from zero
-                                elements[count + j].quadTags[k] = tmp - minNodeTag;
+                                Elements[count + j].quadTags[k] = tmp - Min_node_tag;
                             }
                         }
 
                         // if it's hex
-                        if (elements[count + j].elementType == ElementType::Hexahedral_) {
+                        if (Elements[count + j].elementType == ElementType::Hexahedral_) {
                             for (int k = 0; k < 8; ++k) {
                                 iss >> tmp;
                                 // shift to start from zero
-                                elements[count + j].hexTags[k] = tmp - minNodeTag;
+                                Elements[count + j].hexTags[k] = tmp - Min_node_tag;
                             }
                         }
-                        if (elements[count + j].elementType == ElementType::Hexahedral2ndOrder_) {
+                        if (Elements[count + j].elementType == ElementType::Hexahedral2ndOrder_) {
                             // resize tags to accommodate the new element type
-                            elements[count + j].hexTags.resize(20,-1);
+                            Elements[count + j].hexTags.resize(20,-1);
 
                             for (int k = 0; k < 20; ++k) {
                                 iss >> tmp;
                                 // shift to start from zero
-                                elements[count + j].hexTags[k] = tmp - minNodeTag;
+                                Elements[count + j].hexTags[k] = tmp - Min_node_tag;
                             }
                         }
                     }
 
-                    count += elements[count].numElementsInBlock;
+                    count += Elements[count].numElementsInBlock;
                 }
             }
         }
-        mshFile.close();
+        Msh_file.close();
     } else {
         std::cerr << "Unable to open " << filename << std::endl;
     }
@@ -371,7 +371,7 @@ GMSH::Gmsh::Gmsh(const std::string &filename, bool verbose): verbose_(verbose)
 
 
     // mesh info
-    printInfo(verbose_);
+    printInfo(Verbose);
 
     // end timing reading the file
     auto end_time = std::chrono::high_resolution_clock::now();
@@ -388,50 +388,50 @@ void GMSH::Gmsh::entityTagToBoundaries() {
         // get the id and the dimension of the BC from PhysicalNames
         if (boundary.dim == EntityType::Point_) {
             // loop over the entity of similar dim
-            for (auto &pEntity: pEntities) {
+            for (auto &pEntity: Point_entities) {
                 tuple = {};
                 if (pEntity.numPhysicalTags != 0) {
                     tuple.entityTag = pEntity.pointTag;
                     tuple.boundary = pEntity.physicalTags;
                     tuple.EntityType = EntityType::Point_;
                     // save it
-                    tuples.push_back(tuple);
+                    Tuples.push_back(tuple);
                 }
             }
         } else if (boundary.dim == EntityType::Curve_) {
             // loop over the entity of similar dim
-            for (auto &cEntity: cEntities) {
+            for (auto &cEntity: Curve_entities) {
                 tuple = {};
                 if (cEntity.numPhysicalTags != 0) {
                     tuple.entityTag = cEntity.curveTag;
                     tuple.boundary = cEntity.physicalTags;
                     tuple.EntityType = EntityType::Curve_;
                     // save it
-                    tuples.push_back(tuple);
+                    Tuples.push_back(tuple);
                 }
             }
         } else if (boundary.dim == EntityType::Surface_) {
             // loop over the entity of similar dim
-            for (auto &sEntity: sEntities) {
+            for (auto &sEntity: Surface_entities) {
                 tuple = {};
                 if (sEntity.numPhysicalTags != 0) {
                     tuple.entityTag = sEntity.surfaceTag;
                     tuple.boundary = sEntity.physicalTags;
                     tuple.EntityType = EntityType::Surface_;
                     // save it
-                    tuples.push_back(tuple);
+                    Tuples.push_back(tuple);
                 }
             }
         } else if (boundary.dim == EntityType::Volume_) {
             // loop over the entity of similar dim
-            for (auto &vEntity: vEntities) {
+            for (auto &vEntity: Volume_entities) {
                 tuple = {};
                 if (vEntity.numPhysicalTags != 0) {
                     tuple.entityTag = vEntity.volumeTag;
                     tuple.boundary = vEntity.physicalTags;
                     tuple.EntityType = EntityType::Volume_;
                     // save it
-                    tuples.push_back(tuple);
+                    Tuples.push_back(tuple);
                 }
             }
         }
@@ -445,37 +445,37 @@ void GMSH::Gmsh::renumberBCondition()
 {
     for (auto &b: boundaries)
     {
-        oldNumber.push_back(b.tag);
+        Old_number.push_back(b.tag);
     }
-    sort(oldNumber.begin(), oldNumber.end());
+    sort(Old_number.begin(), Old_number.end());
 
-    for (int i = 0; i < oldNumber.size(); ++i) {
-        orderedBC[oldNumber[i]] = i + 1; // delete the one if you want 0 based b.c.
+    for (int i = 0; i < Old_number.size(); ++i) {
+        orderedBC[Old_number[i]] = i + 1; // delete the one if you want 0 based b.c.
     }
 }
 
 /*! Fill in [nodes] vector */
 void GMSH::Gmsh::collectNodes()
 {
-    for (auto &vertex: vertices)
+    for (auto &vertex: Vertices)
     {
         if (vertex.nodeTag == defFlag) continue; // do not go down but increment i
-        nodes[vertex.nodeTag].nodeTag = vertex.nodeTag;
-        nodes[vertex.nodeTag].coord = {vertex.x, vertex.y, vertex.z};
+        Nodes[vertex.nodeTag].nodeTag = vertex.nodeTag;
+        Nodes[vertex.nodeTag].coord = {vertex.x, vertex.y, vertex.z};
 
         if (vertex.numNodesInBlock != 0) {
-            nodes[vertex.nodeTag].entityDim = vertex.entityDim;
-            nodes[vertex.nodeTag].entityTag = vertex.entityTag;
+            Nodes[vertex.nodeTag].entityDim = vertex.entityDim;
+            Nodes[vertex.nodeTag].entityTag = vertex.entityTag;
         }
 
         // assign BC
-        for (auto &tuple: tuples)
+        for (auto &tuple: Tuples)
         {
-            if (tuple.entityTag == nodes[vertex.nodeTag].entityTag && tuple.EntityType == EntityType::Point_)
+            if (tuple.entityTag == Nodes[vertex.nodeTag].entityTag && tuple.EntityType == EntityType::Point_)
             {
                 // because node has boundary clear its boundary set
-                nodes[vertex.nodeTag].boundaries.clear();
-                nodes[vertex.nodeTag].boundaries.insert(tuple.boundary.begin(), tuple.boundary.end());
+                Nodes[vertex.nodeTag].boundaries.clear();
+                Nodes[vertex.nodeTag].boundaries.insert(tuple.boundary.begin(), tuple.boundary.end());
             }
         }
     }
@@ -485,10 +485,10 @@ void GMSH::Gmsh::collectNodes()
 void GMSH::Gmsh::kernel()
 {
     /// Gmsh always put the highest element type last in order.
-    if (elements.back().elementType == ElementType::Quadrilateral_ ||
-        elements.back().elementType == ElementType::Quadrilateral2ndOrder_)
+    if (Elements.back().elementType == ElementType::Quadrilateral_ ||
+        Elements.back().elementType == ElementType::Quadrilateral2ndOrder_)
     {
-        if (elements.back().elementType == ElementType::Quadrilateral2ndOrder_)
+        if (Elements.back().elementType == ElementType::Quadrilateral2ndOrder_)
         {
             // Set nodesPerElement
             nodesPerElement = 9;
@@ -514,7 +514,7 @@ void GMSH::Gmsh::kernel()
         collectQuads();
 
         // Attempt to reorder quads nodes and add missing edges
-        for (auto &quad: quads)
+        for (auto &quad: Quads)
         {
             correctOrientation(quad);
 
@@ -526,7 +526,7 @@ void GMSH::Gmsh::kernel()
     }
 
     // if the last element is hexahedral
-    if (elements.back().elementType == ElementType::Hexahedral_)
+    if (Elements.back().elementType == ElementType::Hexahedral_)
     {
         // Set nodesPerElement
         nodesPerElement = 8;
@@ -547,13 +547,13 @@ void GMSH::Gmsh::kernel()
         collectHexas();
 
         /// Attempt to reorder hexas nodes and add missing quads/faces and edges
-        for (auto &hex: hexas)
+        for (auto &hex: Hexas)
         {
             if (!correctOrientation(hex)) {
                 // copy the hexa element
                 Hexa h = hex;
 
-                if (verbose_)
+                if (Verbose)
                     std::cout << "Inverting hex " << hex.hexaTag << std::endl;
 
                 // Reorder hex.
@@ -583,7 +583,7 @@ bool GMSH::Gmsh::collectEdges()
     bool isEdges = false;
     int counter = 0;
 
-    std::for_each(elements.begin(), elements.end(), [&](const Element& element){
+    std::for_each(Elements.begin(), Elements.end(), [&](const Element& element){
         Edge edge;
         if (element.elementType == ElementType::Line_ || element.elementType==ElementType::Line2ndOrder_) {
             edge.entityDim = element.entityDim;
@@ -594,7 +594,7 @@ bool GMSH::Gmsh::collectEdges()
             edge.nodesTag = element.edgeTags;
 
             // assign BC
-            for (auto &tuple: tuples)
+            for (auto &tuple: Tuples)
             {
                 if (tuple.entityTag == edge.entityTag && tuple.EntityType == EntityType::Curve_)
                 {
@@ -605,16 +605,16 @@ bool GMSH::Gmsh::collectEdges()
                     // and then, assign BC to nodes
                     for (auto &nodeTag: edge.nodesTag)
                     {
-                        it = nodes[nodeTag].boundaries.find(defFlag);
-                        nodes[nodeTag].boundaries.erase(*it);
-                        nodes[nodeTag].boundaries.insert(tuple.boundary.begin() , tuple.boundary.end());
+                        it = Nodes[nodeTag].boundaries.find(defFlag);
+                        Nodes[nodeTag].boundaries.erase(*it);
+                        Nodes[nodeTag].boundaries.insert(tuple.boundary.begin() , tuple.boundary.end());
                     }
 
                 }
             }
 
             // save the edges
-            edges.push_back(edge);
+            Edges.push_back(edge);
 
             // I found edges element
             isEdges = true;
@@ -630,7 +630,7 @@ bool GMSH::Gmsh::collectQuads()
     bool isQuad = false;
     int counter = 0;
     // if elementType = 3 add it to the list of quads
-    for (auto const &element: elements)
+    for (auto const &element: Elements)
     {
         if (element.elementType == Quadrilateral_ ||
             element.elementType == Quadrilateral2ndOrder_) {
@@ -643,7 +643,7 @@ bool GMSH::Gmsh::collectQuads()
             quad.nodesTag = element.quadTags;
 
             // assign  the BC
-            for (auto &tuple: tuples)
+            for (auto &tuple: Tuples)
             {
                 if (tuple.entityTag == quad.entityTag && tuple.EntityType == quad.entityDim)
                 {
@@ -656,15 +656,15 @@ bool GMSH::Gmsh::collectQuads()
                     // same BC of the quad
                     for (auto &nodeTag: quad.nodesTag)
                     {
-                        it = nodes[nodeTag].boundaries.find(defFlag);
-                        nodes[nodeTag].boundaries.erase(*it);
-                        nodes[nodeTag].boundaries.insert(tuple.boundary.begin(), tuple.boundary.end()) ;
+                        it = Nodes[nodeTag].boundaries.find(defFlag);
+                        Nodes[nodeTag].boundaries.erase(*it);
+                        Nodes[nodeTag].boundaries.insert(tuple.boundary.begin(), tuple.boundary.end()) ;
                     }
                 }
             }
 
             // save the quad
-            quads.push_back(quad);
+            Quads.push_back(quad);
 
             // I found quad element
             isQuad = true;
@@ -679,7 +679,7 @@ bool GMSH::Gmsh::collectHexas()
 {
     bool isHexas = false;
     int counter = 0;
-    for (auto &element: elements) {
+    for (auto &element: Elements) {
         Hexa hexa;
 
         if (element.elementType == Hexahedral_) {
@@ -692,7 +692,7 @@ bool GMSH::Gmsh::collectHexas()
             hexa.boundaries = element.boundaries;
 
             // assign BC
-            for (auto &tuple: tuples)
+            for (auto &tuple: Tuples)
             {
                 if (tuple.entityTag == hexa.entityTag && tuple.EntityType == hexa.entityDim)
                 {
@@ -704,15 +704,15 @@ bool GMSH::Gmsh::collectHexas()
                     // same BC of the quad
                     for (auto &nodeTag: hexa.nodesTag)
                     {
-                        it = nodes[nodeTag].boundaries.find(defFlag);
-                        nodes[nodeTag].boundaries.erase(*it);
-                        nodes[nodeTag].boundaries.insert(tuple.boundary.begin(), tuple.boundary.end());
+                        it = Nodes[nodeTag].boundaries.find(defFlag);
+                        Nodes[nodeTag].boundaries.erase(*it);
+                        Nodes[nodeTag].boundaries.insert(tuple.boundary.begin(), tuple.boundary.end());
                     }
                 }
             }
 
             // save the element
-            hexas.push_back(hexa);
+            Hexas.push_back(hexa);
 
             // I found hexas element
             isHexas = true;
@@ -727,7 +727,7 @@ void GMSH::Gmsh::addMissingQuad(Hexa& hex)
     std::vector<Quad> faces = getFaces(hex);
     for (auto &face: faces)
     {
-        if (!inList(face.nodesTag, quads))
+        if (!inList(face.nodesTag, Quads))
             addInternalQuad(face.nodesTag);
 
         // get edges of the current face/quad
@@ -739,7 +739,7 @@ void GMSH::Gmsh::addMissingEdge(Quad& quad)
 {
     std::vector<Edge> lines = getEdges(quad);
     for (auto &line: lines) {
-        if (!inList(line.nodesTag, edges))
+        if (!inList(line.nodesTag, Edges))
             addInternalEdge(line.nodesTag);
     }
 }
@@ -747,7 +747,7 @@ void GMSH::Gmsh::addMissingEdge(Quad& quad)
 void GMSH::Gmsh::renumber()
 {
     // renumber nodes bc
-    for (auto &node: nodes)
+    for (auto &node: Nodes)
     {
         for (auto it = node.boundaries.begin(); it != node.boundaries.end(); ) {
             int boundary = *it;
@@ -764,7 +764,7 @@ void GMSH::Gmsh::renumber()
     }
 
     // Renumber the edges to the new numbering scheme
-    for (auto &edge: edges)
+    for (auto &edge: Edges)
     {
         for (int boundary : edge.boundaries)
         {
@@ -781,9 +781,9 @@ void GMSH::Gmsh::renumber()
     if (getMeshDim()==2)
     {
         // Renumber the Quads to the new numbering scheme
-        for (auto &quad: quads) {
+        for (auto &quad: Quads) {
             for (int eTag: quad.edgesTag) {
-                quad.boundaries.insert(edges[eTag].boundaries.begin(), edges[eTag].boundaries.end());
+                quad.boundaries.insert(Edges[eTag].boundaries.begin(), Edges[eTag].boundaries.end());
             }
 
             // Delete the defFlag if it exists
@@ -797,7 +797,7 @@ void GMSH::Gmsh::renumber()
     if (getMeshDim() == 3)
     {
         // Renumber the Quads to the new numbering scheme
-        for (auto &quad: quads)
+        for (auto &quad: Quads)
         {
             for (int boundary: quad.boundaries)
             {
@@ -811,13 +811,13 @@ void GMSH::Gmsh::renumber()
                     // Assign edges B.C.
                     for (auto eTag:quad.edgesTag)
                     {
-                        edges[eTag].boundaries.insert(orderedBC[boundary]);
+                        Edges[eTag].boundaries.insert(orderedBC[boundary]);
 
                         // Delete the defFlag if it exists
-                        if (edges[eTag].boundaries.size() > 1 &&
-                            edges[eTag].boundaries.find(defFlag) != edges[eTag].boundaries.end())
+                        if (Edges[eTag].boundaries.size() > 1 &&
+                            Edges[eTag].boundaries.find(defFlag) != Edges[eTag].boundaries.end())
                         {
-                            edges[eTag].boundaries.erase(defFlag);
+                            Edges[eTag].boundaries.erase(defFlag);
                         }
                     }
                 }
@@ -827,11 +827,11 @@ void GMSH::Gmsh::renumber()
         }
 
         // Assign b.c. for hexas
-        for (auto& hex: hexas)
+        for (auto& hex: Hexas)
         {
             for (int qTag: hex.quadsTag)
             {
-                hex.boundaries.insert(quads[qTag].boundaries.begin(), quads[qTag].boundaries.end());
+                hex.boundaries.insert(Quads[qTag].boundaries.begin(), Quads[qTag].boundaries.end());
             }
 
             // Delete the defFlag if it exists
@@ -846,23 +846,23 @@ void GMSH::Gmsh::renumber()
 
 void GMSH::Gmsh::addInternalEdge(std::vector<int> &line) {
     // from edges get the last edge
-    Edge e = edges.back();
+    Edge e = Edges.back();
     int tag = e.edgeTag;
 
     Edge edge;
     edge.edgeTag = tag + 1;
     edge.nodesTag = line;
-    edges.emplace_back(edge);
+    Edges.emplace_back(edge);
 }
 
 void GMSH::Gmsh::addInternalQuad(std::vector<int> &face) {
-    Quad q = quads.back();
+    Quad q = Quads.back();
     int tag = q.quadTag;
 
     Quad quad;
     quad.quadTag = tag + 1;
     quad.nodesTag = face;
-    quads.emplace_back(quad);
+    Quads.emplace_back(quad);
 }
 
 /*! Function to check vectors of the same length if they are similar.
@@ -885,9 +885,9 @@ bool GMSH::Gmsh::correctOrientation(Quad &quad) {
         const int tag2 = quad.nodesTag[(i + 1) % 4];
         const int tag3 = quad.nodesTag[(i + 2) % 4];
 
-        std::vector<double> node1 = nodes[tag1].coord;
-        std::vector<double> node2 = nodes[tag2].coord;
-        std::vector<double> node3 = nodes[tag3].coord;
+        std::vector<double> node1 = Nodes[tag1].coord;
+        std::vector<double> node2 = Nodes[tag2].coord;
+        std::vector<double> node3 = Nodes[tag3].coord;
         const double dotprod =
                 (node2[0] - node1[0]) * (node3[1] - node2[1]) - (node2[1] - node1[1]) * (node3[0] - node2[0]);
         if (dotprod < 0.0) ++num_ccw;
@@ -899,7 +899,7 @@ bool GMSH::Gmsh::correctOrientation(Quad &quad) {
         // then the rest of the nodes
         std::reverse(quad.nodesTag.begin() + 4, quad.nodesTag.end());
 
-        if (verbose_) std::cout << "Inverting quad " << quad.quadTag << std::endl;
+        if (Verbose) std::cout << "Inverting quad " << quad.quadTag << std::endl;
     } else if (num_ccw == 4) {
         ordered = true;
     } else {
@@ -988,7 +988,7 @@ std::vector<GMSH::Edge> GMSH::Gmsh::getEdges(const Quad &quad) {
 std::vector<double> GMSH::Gmsh::getCenter(const std::vector<int> &nodesTag) {
     std::vector<double> center{0.0, 0.0, 0.0};
     for (auto &nodeTag: nodesTag) {
-        center += nodes[nodeTag].coord;
+        center += Nodes[nodeTag].coord;
     }
     return center / double(nodesTag.size());
 }
@@ -1034,7 +1034,7 @@ std::vector<double> GMSH::Gmsh::getArea(const std::vector<int> &points) {
     // If the face is a triangle, do a direct calculation
     if (points.size() == 3) {
         return 0.5 *
-               ((nodes[points[1]].coord - nodes[points[0]].coord) ^ (nodes[points[2]].coord - nodes[points[0]].coord));
+               ((Nodes[points[1]].coord - Nodes[points[0]].coord) ^ (Nodes[points[2]].coord - Nodes[points[0]].coord));
     }
 
     // For more complex faces, decompose into triangles ...
@@ -1042,7 +1042,7 @@ std::vector<double> GMSH::Gmsh::getArea(const std::vector<int> &points) {
     // Compute an estimate of the centre as the average of the points
     std::vector<double> pAvg = {0.0, 0.0, 0.0};
     for (auto point: points) {
-        pAvg += nodes[point].coord;
+        pAvg += Nodes[point].coord;
     }
     pAvg /= double(points.size());
 
@@ -1051,9 +1051,9 @@ std::vector<double> GMSH::Gmsh::getArea(const std::vector<int> &points) {
     // point average.
     std::vector<double> sumA = {0., 0., 0.};
     for (int pi = 0; pi < points.size(); ++pi) {
-        const std::vector<double> &p = nodes[points[pi]].coord;
+        const std::vector<double> &p = Nodes[points[pi]].coord;
         // Get the next point, considering cyclic indexing
-        const std::vector<double> &pNext = nodes[points[(pi + 1) % points.size()]].coord;
+        const std::vector<double> &pNext = Nodes[points[(pi + 1) % points.size()]].coord;
 
         const std::vector<double> a = (pNext - p) ^ (pAvg - p);
 
@@ -1071,7 +1071,7 @@ void GMSH::Gmsh::fillInTags(Hexa& hexa)
     // Getting quads/faces for current hexa
     for (auto &face: getFaces(hexa))
     {
-        for (auto &quad: quads)
+        for (auto &quad: Quads)
         {
             if (areSimilar(face.nodesTag, quad.nodesTag))
             {
@@ -1083,7 +1083,7 @@ void GMSH::Gmsh::fillInTags(Hexa& hexa)
             int eCount = 0;
             for (auto &line: getEdges(quad))
             {
-                for (auto & edge: edges)
+                for (auto & edge: Edges)
                 {
                     if (areSimilar(line.nodesTag, edge.nodesTag))
                     {
@@ -1100,7 +1100,7 @@ void GMSH::Gmsh::fillInTags(Hexa& hexa)
     std::set<int> edgeSet;
     for (auto& quad: hexa.quadsTag)
     {
-        for (auto& edge: quads[quad].edgesTag)
+        for (auto& edge: Quads[quad].edgesTag)
         {
             edgeSet.insert(edge);
         }
@@ -1128,7 +1128,7 @@ void GMSH::Gmsh::fillInTags(Quad& quad)
     int eCount = 0;
     for (auto &line: getEdges(quad))
     {
-        for (auto & edge: edges)
+        for (auto & edge: Edges)
         {
             if (areSimilar(line.nodesTag, edge.nodesTag))
             {
@@ -1141,32 +1141,32 @@ void GMSH::Gmsh::fillInTags(Quad& quad)
 
 /// Getters
 
-const std::vector<GMSH::Node> &GMSH::Gmsh::getNodes() const { return nodes; }
+const std::vector<GMSH::Node> &GMSH::Gmsh::getNodes() const { return Nodes; }
 
-const std::vector<GMSH::Edge> &GMSH::Gmsh::getEdges() const { return edges; }
+const std::vector<GMSH::Edge> &GMSH::Gmsh::getEdges() const { return Edges; }
 
-const std::vector<GMSH::Quad> &GMSH::Gmsh::getQuads() const { return quads; }
+const std::vector<GMSH::Quad> &GMSH::Gmsh::getQuads() const { return Quads; }
 
-const std::vector<GMSH::Hexa> &GMSH::Gmsh::getHexas() const{ return hexas; }
+const std::vector<GMSH::Hexa> &GMSH::Gmsh::getHexas() const{ return Hexas; }
 
 unsigned GMSH::Gmsh::getBoundSize() const { return boundaries.size(); }
 
-unsigned GMSH::Gmsh::getNodesSize() const { return nodes.size(); }
+unsigned GMSH::Gmsh::getNodesSize() const { return Nodes.size(); }
 
-unsigned GMSH::Gmsh::getEdgesSize() const { return edges.size(); }
+unsigned GMSH::Gmsh::getEdgesSize() const { return Edges.size(); }
 
-unsigned GMSH::Gmsh::getQuadsSize() const { return quads.size(); }
+unsigned GMSH::Gmsh::getQuadsSize() const { return Quads.size(); }
 
-unsigned GMSH::Gmsh::getHexasSize() const { return hexas.size(); }
+unsigned GMSH::Gmsh::getHexasSize() const { return Hexas.size(); }
 
 unsigned GMSH::Gmsh::getMeshDim() const
 {
     unsigned dim = 3;
-    if (elements.back().elementType == ElementType::Hexahedral_||
-        elements.back().elementType == ElementType::Hexahedral2ndOrder_) { dim = 3; }
+    if (Elements.back().elementType == ElementType::Hexahedral_||
+        Elements.back().elementType == ElementType::Hexahedral2ndOrder_) { dim = 3; }
 
-    if (elements.back().elementType == ElementType::Quadrilateral_ ||
-        elements.back().elementType == ElementType::Quadrilateral2ndOrder_) { dim = 2; }
+    if (Elements.back().elementType == ElementType::Quadrilateral_ ||
+        Elements.back().elementType == ElementType::Quadrilateral2ndOrder_) { dim = 2; }
     return dim;
 }
 
@@ -1181,15 +1181,15 @@ void GMSH::Gmsh::printInfo(bool info = false) {
     int width = 2, precision = 6;
     std::cout << "\nStart mesh Reader Info ..." << std::endl;
     std::cout << "   Statistics:" << std::endl;
-    std::cout << "      # of Nodes: " << nodes.size() << std::endl;
-    std::cout << "      # of Edges: " << edges.size() << std::endl;
-    std::cout << "      # of Quads: " << quads.size() << std::endl;
-    std::cout << "      # of Hexas: " << hexas.size() << std::endl;
+    std::cout << "      # of Nodes: " << Nodes.size() << std::endl;
+    std::cout << "      # of Edges: " << Edges.size() << std::endl;
+    std::cout << "      # of Quads: " << Quads.size() << std::endl;
+    std::cout << "      # of Hexas: " << Hexas.size() << std::endl;
     std::cout << "      # of bc   : " << boundaries.size() << std::endl;
     std::cout << "   Renumbering: " << std::endl;
     std::cout << "End mesh Reader Info ...\n" << std::endl;
 
-    for (int i: oldNumber) {
+    for (int i: Old_number) {
         std::cout << "      bc: " << i << " ---> " << std::setw(width)
                   << std::setfill('0') << std::setprecision(precision)
                   << orderedBC[i]-1 << std::endl;
@@ -1208,7 +1208,7 @@ void GMSH::Gmsh::nodesInfo() {
     int width = 2, precision = 6;
     int i = 0;
     std::cout << "Nodes: \n";
-    for (auto &node: nodes) {
+    for (auto &node: Nodes) {
         std::cout << " tag: "
                   << std::setw(width) << std::setprecision(precision) << node.nodeTag;
 
@@ -1238,7 +1238,7 @@ void GMSH::Gmsh::nodesInfo() {
 void GMSH::Gmsh::edgesInfo() {
     int i = 0;
     std::cout << "Edges: \n";
-    for (auto &edge: edges) {
+    for (auto &edge: Edges) {
         std::cout << " tag: " << std::setw(2) << std::setfill('0') << edge.edgeTag;
 
         std::cout << " BC: ";
@@ -1263,7 +1263,7 @@ void GMSH::Gmsh::edgesInfo() {
 void GMSH::Gmsh::quadsInfo() {
     int i = 0;
     std::cout << "Quads: \n";
-    for (auto &quad: quads) {
+    for (auto &quad: Quads) {
         std::cout << " tag: " << std::setw(2) << std::setfill('0') << quad.quadTag;
 
         std::cout << " BC: ";
@@ -1291,14 +1291,14 @@ void GMSH::Gmsh::quadsInfo() {
 }
 
 void GMSH::Gmsh::hexasInfo() {
-    if (hexas.empty()) {
+    if (Hexas.empty()) {
         std::cout << "2D mesh ";
         return;
     }
 
     int i = 0;
     std::cout << "Hexas: \n";
-    for (auto &hexa: hexas) {
+    for (auto &hexa: Hexas) {
         std::cout <<" tag: "
                   << std::setw(2) << std::setfill('0') << hexa.hexaTag;
 
@@ -1351,6 +1351,5 @@ bool GMSH::Gmsh::inList(std::vector<int> &q, std::vector<Quad> &Q)
         return areSimilar(q,quad.nodesTag);
     });
 }
-
 
 
