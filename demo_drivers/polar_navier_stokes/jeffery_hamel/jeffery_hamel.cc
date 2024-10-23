@@ -818,8 +818,6 @@ int main()
 
  //Desired number eigenvalues
  unsigned n_eval=6;
- //Set shift. This will need to be implemented for ANASAZI
- //static_cast<ARPACK*>( problem.eigen_solver_pt() ) -> set_shift( 0.4 );
 
  //Solve the eigenproblem
  problem.solve_eigenproblem(n_eval,eigenvalues,eigenvector_real,eigenvector_imag);

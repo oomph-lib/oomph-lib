@@ -10,10 +10,11 @@ jobs:
         # Each map in the 'mpi_options' array contains a flag indicating whether
         # to enable MPI and the name of the configuration file required for the
         # MPI case, respectively
-        mpi_options: [
-          {enable: false, config_file: default},
-          {enable: true, config_file: mpi_default_ci}
-        ]
+        mpi_options:
+          [
+            { enable: false, config_file: default },
+            { enable: true, config_file: mpi_default_ci },
+          ]
 
     runs-on: ubuntu-latest
     steps:

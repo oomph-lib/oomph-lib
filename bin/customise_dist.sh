@@ -116,7 +116,6 @@ if !(test $customisation_flag -eq 0 ) ; then
     keep_nondist_figures="n"
     keep_svn="n"
     wipe_hsl="y"
-    wipe_arpack="y"
     wipe_user_drivers="y"
     wipe_user_src="y"
     include_private_directories="n"
@@ -147,7 +146,6 @@ if (test $customisation_flag -eq 1 ) ; then
     keep_nondist_figures="y"
     keep_svn="y"
     wipe_hsl="n"
-    wipe_arpack="n"
     wipe_user_drivers="n"
     wipe_user_src="n"
     wipe_doc="n"
@@ -349,37 +347,6 @@ fi
 
 
 
-# Wipe ARPACK sources?
-#---------------------
-
-# Does the ARPACK file exist?
-if test -e `pwd`/external_src/oomph_arpack/all_arpack_sources.f; then
-    # If it exists and has zero length, kill it as it was only
-    # created (with touch) as a dummy during make dist
-    if test -s `pwd`/external_src/oomph_arpack/all_arpack_sources.f; then
-
-        if (test $customisation_flag -eq 0) ; then
-            echo " "
-            echo " "
-            echo "ARPACK sources in all_arpack_sources.f: "
-            echo "    Do you want to wipe? [y/n -- default: n]"
-            echo " "
-            wipe_arpack=`OptionRead n`
-        fi
-        if test "$wipe_arpack" = "y"  ; then
-            echo "Wiping " `pwd`/external_src/oomph_arpack/all_arpack_sources.f
-            rm -f `pwd`/external_src/oomph_arpack/all_arpack_sources.f
-        else
-            echo "Not wiping " `pwd`/external_src/oomph_arpack/all_arpack_sources.f
-        fi
-    else
-        # Wipe the dummy
-        echo "Wiping the empty dummy file " `pwd`/external_src/oomph_arpack/all_arpack_sources.f
-        rm -f `pwd`/external_src/oomph_arpack/all_arpack_sources.f
-    fi
-fi
-
-
 
 #///////////////////////////////////////////////////////////////////////////
 #///////////////////////////////////////////////////////////////////////////
@@ -542,18 +509,14 @@ fi
 # Done with the customisation, now do some clean up
 # ============================================================
 
-# Remove the temporary empty frontal.f and all_arpack_sources.f files that
+# Remove the temporary empty frontal.f that
 # might have been created in the original tree If this is not done the
-# configure scripts thinks that we do have the arpack and hsl sources and
+# configure scripts thinks that we do have the hsl sources and
 # builds the wrong thing. This is only a problem is one does a make dist
 # and then reruns the autogen stuff, but that could happen.
 frontal_file=$orig_dir/external_src/oomph_hsl/frontal.f
 if ( [ -e $frontal_file ] && [ ! -s $frontal_file ] ); then
     rm $frontal_file;
-fi;
-arpack_file=$orig_dir/external_src/oomph_arpack/all_arpack_sources.f
-if ( [ -e $arpack_file ] && [ ! -s $arpack_file ] ); then
-    rm $arpack_file;
 fi;
 
 

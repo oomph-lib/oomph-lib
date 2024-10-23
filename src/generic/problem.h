@@ -717,6 +717,23 @@ namespace oomph
     /// with a smaller dt).
     double DTSF_min_decrease;
 
+    /// Safety factor to ensure we are aiming for a target error, TARGET,
+    /// that is below our tolerance:
+    ///     TARGET = Target_error_safety_factor * TOL
+    /// For this to make sense Target_error_safety_factor should be <1.0. If
+    /// Keep_temporal_error_below_tolerance is set to true (default) then,
+    /// without this, timesteps suggested by the adaptive time-stepper can be
+    /// expected to lead to rejection (because the error exceeds TOL) about
+    /// half of the time.
+    /// Harier et al. (1993, ISBN:978-3-540-56670-0, p168) suggest a value
+    /// around 0.25-0.40 to be the most efficient, however this is highly
+    /// problem and timestepper dependent and sometimes as high as 0.95 may be
+    /// effective at improving the robustness of timestep prediction.
+    ///
+    /// Note: Despite this, we are setting this to default to 1.0 to prevent
+    /// introducing any change in the default behaviour of oomph-lib for now.
+    double Target_error_safety_factor;
+
     /// If  Minimum_dt_but_still_proceed positive, then dt will not be
     /// reduced below this value during adaptive timestepping and the
     /// computation will continue with this value, accepting the larger
@@ -1590,6 +1607,12 @@ namespace oomph
       return Maximum_dt;
     }
 
+    /// Access function to the safety factor in adaptive timestepping
+    double& target_error_safety_factor()
+    {
+      return Target_error_safety_factor;
+    }
+
     /// Access function to max Newton iterations before giving up.
     unsigned& max_newton_iterations()
     {
@@ -1914,43 +1937,6 @@ namespace oomph
       Vector<DoubleVectorWithHaloEntries>& product);
 
 
-    /// Get derivative of an element in the problem wrt a global
-    /// parameter, used in continuation problems
-    // void get_derivative_wrt_global_parameter(double* const &parameter_pt,
-    //                                         GeneralisedElement* const
-    //                                         &elem_pt, Vector<double>
-    //                                         &result);
-
-    /// Solve an eigenproblem as assembled by the Problem's constituent
-    /// elements. Calculate (at least) n_eval eigenvalues and return the
-    /// corresponding eigenvectors. The boolean flag (default true) specifies
-    /// whether the steady jacobian should be assembled. If the flag is false
-    /// then the weighted mass-matrix terms from the timestepper will
-    /// be included in the jacobian --- this is almost certainly never
-    /// wanted. Legacy version that returns real vectors which are
-    /// related in some solver-specific way to the real and imaginary parts
-    /// of the actual, usually complex eigenvalues.
-    void solve_eigenproblem_legacy(const unsigned& n_eval,
-                                   Vector<std::complex<double>>& eigenvalue,
-                                   Vector<DoubleVector>& eigenvector,
-                                   const bool& steady = true);
-
-    /// Solve an eigenproblem as assembled by the Problem's constituent
-    /// elements. Calculate (at least) n_eval eigenvalues.
-    /// The boolean flag (default true) specifies
-    /// whether the steady jacobian should be assembled. If the flag is false
-    /// then the weighted mass-matrix terms from the timestepper will
-    /// be included in the jacobian --- this is almost certainly never
-    /// wanted. Legacy version.
-    void solve_eigenproblem_legacy(const unsigned& n_eval,
-                                   Vector<std::complex<double>>& eigenvalue,
-                                   const bool& steady = true)
-    {
-      // Create temporary storage for the eigenvectors (potentially wasteful)
-      Vector<DoubleVector> eigenvector;
-      solve_eigenproblem_legacy(n_eval, eigenvalue, eigenvector, steady);
-    }
-
     /// Solve an eigenproblem as assembled by the Problem's constituent
     /// elements. Calculate (at least) n_eval eigenvalues and return the
     /// corresponding eigenvectors. The boolean flag (default true) specifies
@@ -2033,19 +2019,6 @@ namespace oomph
       solve_eigenproblem(
         n_eval, alpha, beta, eigenvector_real, eigenvector_imag, steady);
     }
-
-    /// Solve an adjoint eigenvalue problem using the same procedure as
-    /// solve_eigenproblem. See the documentation on that function for more
-    /// details.
-    /// Note: this is a legacy version of this function that stores re & imag
-    /// parts of eigenvectors in some solver-specific collection of real
-    /// vectors.
-    void solve_adjoint_eigenproblem_legacy(
-      const unsigned& n_eval,
-      Vector<std::complex<double>>& eigenvalue,
-      Vector<DoubleVector>& eigenvector,
-      const bool& make_timesteppers_steady = true);
-
 
     /// Solve an adjoint eigenvalue problem using the same procedure as
     /// solve_eigenproblem. See the documentation on that function for more

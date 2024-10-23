@@ -60,13 +60,14 @@ namespace Global_Parameters
  // Rotation ratio
  double Alpha=0.0;
 
- // Control Flag that will read in the eigenfunction from disk
- // This is required because we are not allowed to redistribute
- // ARPACK, so cannot assume that it has been installed.
- bool Read_in_eigenfunction_from_disk = true;
-
  //Set the normalisation for the eigenfunction
  std::complex<double> Eigenfunction_normalisation(1.0,0.0);
+
+ 
+ /// Control flag used to determine whether the eigenfunction
+ /// is read from disk. Reading from disk avoids lengthy
+ /// eigenvalue calculations in the self-tests
+ bool Read_in_eigenfunction_from_disk = true;
 }
 
 
@@ -1737,18 +1738,10 @@ FlowAroundCylinderProblem(
  
 
 {
- //this->linear_solver_pt() = new HSL_MA42;
  
  //Increase the maximum residuals so that we can get convergence on
  //the coarsest mesh
  Max_residuals = 100.0;
- 
- if(!Global_Parameters::Read_in_eigenfunction_from_disk)
-  {
-   this->eigen_solver_pt() = new ARPACK;
-   static_cast<ARPACK*>(eigen_solver_pt())->set_shift(50.0);
-   static_cast<ARPACK*>(eigen_solver_pt())->narnoldi() = 70;
-  }
 
  // Build mesh
  Base_flow_mesh_pt=

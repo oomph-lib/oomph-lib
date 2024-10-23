@@ -1055,9 +1055,37 @@ namespace oomph
     /// Array to hold the weights and knots (defined in cc file)
     static const double Knot[52][2], Weight[52];
 
+#ifdef PARANOID
+    /// A flag to track whether we have warned the user about the exterior knots
+    /// and negative weights in this scheme.
+    static bool User_has_been_warned;
+#endif
+
   public:
     /// Default constructor (empty)
-    TGauss(){};
+    TGauss()
+    {
+#ifdef PARANOID
+      // If the user has not been warned about the exterior knots and negative
+      // weights that this integration scheme uses then do so and set the static
+      // flag so that it does not happen again.
+      if (!User_has_been_warned)
+      {
+        std::string warning_string =
+          "The TGauss<2,16> integration scheme uses a high order Dunavant\n"
+          "scheme which results in a couple of knots (slightly) outside of\n"
+          "the element as well as some negative weights. These may be\n"
+          "undesirable features depending on the use case and may also break\n"
+          "some oomph-lib routines which expect points to be within the\n"
+          "bounds of an element (locate_zeta). Please ensure that the\n"
+          "integrand can be evaluated just outside the boundary of this\n"
+          "element.";
+        User_has_been_warned = true;
+        OomphLibWarning(
+          warning_string, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+    };
 
     /// Broken copy constructor
     TGauss(const TGauss& dummy) = delete;
