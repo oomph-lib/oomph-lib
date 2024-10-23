@@ -12,6 +12,21 @@ jobs:
       - name: Install requirements
         run: brew install make automake libtool autoconf doxygen && brew reinstall gfortran
 
+      # PM: Temporary patch to handle deprecation of Python 2.7 by GitHub runners. Should be removed
+      # as soon as we have moved to a more recent version of Trilinos. N.B. we install Python 3
+      # again after installing Python 2.7, as the installation of the latter forces the former to
+      # be unlinked, and thus Python 3 won't be found by other programs. Installing it again doesn't
+      # overwrite the Python 2 installation.
+      - name: Install Python 2.7
+        uses: LizardByte/setup-python-action@master
+        with:
+          python-version: "2.7"
+
+      - name: Install Python 3.13
+        uses: LizardByte/setup-python-action@master
+        with:
+          python-version: "3.13"
+
       - name: Extra config
         run:
           printf '%s\n' '--enable-suppress-cgal-build --disable-shared' >> config/configure_options/default \
