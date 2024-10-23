@@ -7,18 +7,13 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install requirements
         run: brew install make automake libtool autoconf doxygen && brew reinstall gfortran
 
-      - name: Extra config
-        run:
-          printf '%s\n' '--enable-suppress-cgal-build --disable-shared' >> config/configure_options/default \
-          && ( export LC_ALL=C; sort -o config/configure_options/default config/configure_options/default )
-
       - name: Build
-        run: ./non_interactive_autogen.sh -s -j$(sysctl -n hw.logicalcpu)
+        run: ./non_interactive_autogen.sh -c config/configure_options/default_macos -s -j$(sysctl -n hw.logicalcpu)
 
       # Continue running even if the test fails so that the validation.log can be
       # uploaded and reviewed later on
@@ -28,7 +23,7 @@ jobs:
         continue-on-error: true
 
       - name: Upload validation log file
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: validation-${{ runner.os }}.log
           path: ./validation.log
