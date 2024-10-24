@@ -1064,6 +1064,11 @@ namespace oomph
       el_pt->set_pressure_data_pt(
         Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0));
       el_pt->set_boundary_number_in_bulk_mesh(Outer_boundary_with_slip_id);
+      // Set the product of the Reynolds number and the inverse of the
+      // Froude number
+      el_pt->re_invfr_pt() = &ReInvFr;
+      // Set the direction of gravity
+      el_pt->g_pt() = &Global_Physical_Parameters::G;
 
       unsigned n_element = Bulk_mesh_pt->nelement();
       for (unsigned e = 0; e < n_element; e++)
@@ -1104,6 +1109,11 @@ namespace oomph
       el_pt->set_pressure_data_pt(
         Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0));
       el_pt->set_boundary_number_in_bulk_mesh(Free_surface_boundary_id);
+      // Set the product of the Reynolds number and the inverse of the
+      // Froude number
+      el_pt->re_invfr_pt() = &ReInvFr;
+      // Set the direction of gravity
+      el_pt->g_pt() = &Global_Physical_Parameters::G;
       el_pt->set_subtract_from_residuals();
 
       unsigned n_element = Bulk_mesh_pt->nelement();
@@ -1122,7 +1132,7 @@ namespace oomph
         }
       }
 
-      Pressure_contribution_mesh_1_pt->add_element_pt(el_pt);
+      Pressure_contribution_mesh_2_pt->add_element_pt(el_pt);
     }
 
     void create_mesh_as_geom_object()
