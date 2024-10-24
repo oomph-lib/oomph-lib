@@ -1308,6 +1308,7 @@ namespace oomph
         el_pt->debug_jacobian(n, residuals, jacobian, jacobianFD);
         cout << "flux: " << compare_matrices(jacobianFD, jacobian) << endl;
       }
+      if(Volume_computation_mesh_pt)
       {
         VOLUME_COMPUTATION_ELEMENT* el_pt =
           dynamic_cast<VOLUME_COMPUTATION_ELEMENT*>(
@@ -1320,6 +1321,7 @@ namespace oomph
         cout << "volume computation: " << compare_matrices(jacobianFD, jacobian)
              << endl;
       }
+      if (!Augmented_bulk_element_number.empty())
       {
         PressureEvaluationElement<ELEMENT>* el_pt =
           dynamic_cast<PressureEvaluationElement<ELEMENT>*>(
@@ -1332,6 +1334,7 @@ namespace oomph
         cout << "pressure contribution: "
              << compare_matrices(jacobianFD, jacobian) << endl;
       }
+      if (!Augmented_bulk_element_number.empty())
       {
         SingularNavierStokesTractionElement<ELEMENT>* el_pt =
           dynamic_cast<SingularNavierStokesTractionElement<ELEMENT>*>(
@@ -2599,11 +2602,7 @@ namespace oomph
           Pressure_contribution_mesh_1_pt->output(output_stream);
           Pressure_contribution_mesh_2_pt->output(output_stream);
           output_stream.close();
-        }
 
-
-        if (Singularity_scaling_mesh_pt)
-        {
           filename = this->doc_info().directory() + "/singular_scaling.dat";
           output_stream.open(filename, std::ios_base::app);
           output_stream
@@ -3962,7 +3961,7 @@ namespace oomph
             ->value(0);
       }
 
-      if (Singularity_scaling_mesh_pt)
+      if (!Augmented_bulk_element_number.empty())
       {
         Backup_singularity_scaling_lagrange_multiplier =
           dynamic_cast<SingularNavierStokesSolutionElement<ELEMENT>*>(
@@ -3973,7 +3972,7 @@ namespace oomph
 
     void restore_lagrange_multipliers()
     {
-      if (Singularity_scaling_mesh_pt)
+      if (!Augmented_bulk_element_number.empty())
       {
         dynamic_cast<SingularNavierStokesSolutionElement<ELEMENT>*>(
           Singularity_scaling_mesh_pt->element_pt(0))
