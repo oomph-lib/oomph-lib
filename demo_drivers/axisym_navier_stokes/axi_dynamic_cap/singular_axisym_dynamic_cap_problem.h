@@ -2602,14 +2602,17 @@ namespace oomph
         }
 
 
-        filename = this->doc_info().directory() + "/singular_scaling.dat";
-        output_stream.open(filename, std::ios_base::app);
-        output_stream
-          << dynamic_cast<SingularNavierStokesSolutionElement<ELEMENT>*>(
-               Singularity_scaling_mesh_pt->element_pt(0))
-               ->c()
-          << std::endl;
-        output_stream.close();
+        if (Singularity_scaling_mesh_pt)
+        {
+          filename = this->doc_info().directory() + "/singular_scaling.dat";
+          output_stream.open(filename, std::ios_base::app);
+          output_stream
+            << dynamic_cast<SingularNavierStokesSolutionElement<ELEMENT>*>(
+                 Singularity_scaling_mesh_pt->element_pt(0))
+                 ->c()
+            << std::endl;
+          output_stream.close();
+        }
 
 
         // Bump up counter
@@ -3959,17 +3962,23 @@ namespace oomph
             ->value(0);
       }
 
-      Backup_singularity_scaling_lagrange_multiplier =
-        dynamic_cast<SingularNavierStokesSolutionElement<ELEMENT>*>(
-          Singularity_scaling_mesh_pt->element_pt(0))
-          ->c();
+      if (Singularity_scaling_mesh_pt)
+      {
+        Backup_singularity_scaling_lagrange_multiplier =
+          dynamic_cast<SingularNavierStokesSolutionElement<ELEMENT>*>(
+            Singularity_scaling_mesh_pt->element_pt(0))
+            ->c();
+      }
     }
 
     void restore_lagrange_multipliers()
     {
-      dynamic_cast<SingularNavierStokesSolutionElement<ELEMENT>*>(
-        Singularity_scaling_mesh_pt->element_pt(0))
-        ->set_c(Backup_singularity_scaling_lagrange_multiplier);
+      if (Singularity_scaling_mesh_pt)
+      {
+        dynamic_cast<SingularNavierStokesSolutionElement<ELEMENT>*>(
+          Singularity_scaling_mesh_pt->element_pt(0))
+          ->set_c(Backup_singularity_scaling_lagrange_multiplier);
+      }
 
       if (Net_flux_mesh_pt)
       {
