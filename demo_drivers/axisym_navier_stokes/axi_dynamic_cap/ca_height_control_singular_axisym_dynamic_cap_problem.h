@@ -1422,7 +1422,8 @@ namespace oomph
             }
 
             // Then adapt is needed
-            oomph_info << "Adapt is needed due to contact angle error" << std::endl;
+            oomph_info << "Adapt is needed due to contact angle error"
+                       << std::endl;
             return true;
           }
         }
@@ -1457,7 +1458,8 @@ namespace oomph
             }
 
             // Then adapt is needed
-            oomph_info << "Adapt is needed due to inner angle error" << std::endl;
+            oomph_info << "Adapt is needed due to inner angle error"
+                       << std::endl;
             return true;
           }
         }
@@ -2428,26 +2430,29 @@ namespace oomph
         dynamic_cast<HEIGHT_ELEMENT*>(Height_mesh_pt->element_pt(0))
           ->output(std::cout);
 
-        filename = this->doc_info().directory() + "/pressure_evaluation" +
-                   to_string(this->doc_info().number()) + ".dat";
-        output_stream.open(filename);
-        output_stream << "x ";
-        output_stream << "y ";
-        output_stream << "p ";
-        output_stream << endl;
-        Pressure_contribution_mesh_1_pt->output(output_stream);
-        Pressure_contribution_mesh_2_pt->output(output_stream);
-        output_stream.close();
+        if (!Augmented_bulk_element_number.empty())
+        {
+          filename = this->doc_info().directory() + "/pressure_evaluation" +
+                     to_string(this->doc_info().number()) + ".dat";
+          output_stream.open(filename);
+          output_stream << "x ";
+          output_stream << "y ";
+          output_stream << "p ";
+          output_stream << endl;
+          Pressure_contribution_mesh_1_pt->output(output_stream);
+          Pressure_contribution_mesh_2_pt->output(output_stream);
+          output_stream.close();
 
 
-        filename = this->doc_info().directory() + "/singular_scaling.dat";
-        output_stream.open(filename, std::ios_base::app);
-        output_stream
-          << dynamic_cast<SingularNavierStokesSolutionElement<ELEMENT>*>(
-               Singularity_scaling_mesh_pt->element_pt(0))
-               ->c()
-          << std::endl;
-        output_stream.close();
+          filename = this->doc_info().directory() + "/singular_scaling.dat";
+          output_stream.open(filename, std::ios_base::app);
+          output_stream
+            << dynamic_cast<SingularNavierStokesSolutionElement<ELEMENT>*>(
+                 Singularity_scaling_mesh_pt->element_pt(0))
+                 ->c()
+            << std::endl;
+          output_stream.close();
+        }
 
         // Bump up counter
         this->doc_info().number()++;
@@ -2630,7 +2635,8 @@ namespace oomph
       // Save current solution
       std::ofstream dump_filestream;
       std::string restart_filename = this->doc_info().directory() + "/restart" +
-                                to_string(this->doc_info().number()) + ".dat";
+                                     to_string(this->doc_info().number()) +
+                                     ".dat";
       dump_filestream.open(restart_filename);
       dump_filestream.precision(16);
       // actions_before_adapt();
@@ -3684,17 +3690,23 @@ namespace oomph
             ->value(0);
       }
 
-      Backup_singularity_scaling_lagrange_multiplier =
-        dynamic_cast<SingularNavierStokesSolutionElement<ELEMENT>*>(
-          Singularity_scaling_mesh_pt->element_pt(0))
-          ->c();
+      if (!Augmented_bulk_element_number.empty())
+      {
+        Backup_singularity_scaling_lagrange_multiplier =
+          dynamic_cast<SingularNavierStokesSolutionElement<ELEMENT>*>(
+            Singularity_scaling_mesh_pt->element_pt(0))
+            ->c();
+      }
     }
 
     void restore_lagrange_multipliers()
     {
-      dynamic_cast<SingularNavierStokesSolutionElement<ELEMENT>*>(
-        Singularity_scaling_mesh_pt->element_pt(0))
-        ->set_c(Backup_singularity_scaling_lagrange_multiplier);
+      if (!Augmented_bulk_element_number.empty())
+      {
+        dynamic_cast<SingularNavierStokesSolutionElement<ELEMENT>*>(
+          Singularity_scaling_mesh_pt->element_pt(0))
+          ->set_c(Backup_singularity_scaling_lagrange_multiplier);
+      }
 
       if (Net_flux_mesh_pt)
       {

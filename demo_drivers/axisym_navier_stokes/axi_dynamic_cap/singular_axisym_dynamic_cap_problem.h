@@ -1318,6 +1318,7 @@ namespace oomph
         el_pt->debug_jacobian(n, residuals, jacobian, jacobianFD);
         cout << "flux: " << compare_matrices(jacobianFD, jacobian) << endl;
       }
+      if(Volume_computation_mesh_pt)
       {
         VOLUME_COMPUTATION_ELEMENT* el_pt =
           dynamic_cast<VOLUME_COMPUTATION_ELEMENT*>(
@@ -1330,6 +1331,7 @@ namespace oomph
         cout << "volume computation: " << compare_matrices(jacobianFD, jacobian)
              << endl;
       }
+      if (!Augmented_bulk_element_number.empty())
       {
         PressureEvaluationElement<ELEMENT>* el_pt =
           dynamic_cast<PressureEvaluationElement<ELEMENT>*>(
@@ -1342,6 +1344,7 @@ namespace oomph
         cout << "pressure contribution: "
              << compare_matrices(jacobianFD, jacobian) << endl;
       }
+      if (!Augmented_bulk_element_number.empty())
       {
         SingularNavierStokesTractionElement<ELEMENT>* el_pt =
           dynamic_cast<SingularNavierStokesTractionElement<ELEMENT>*>(
@@ -2609,17 +2612,16 @@ namespace oomph
           Pressure_contribution_mesh_1_pt->output(output_stream);
           Pressure_contribution_mesh_2_pt->output(output_stream);
           output_stream.close();
+
+          filename = this->doc_info().directory() + "/singular_scaling.dat";
+          output_stream.open(filename, std::ios_base::app);
+          output_stream
+            << dynamic_cast<SingularNavierStokesSolutionElement<ELEMENT>*>(
+                 Singularity_scaling_mesh_pt->element_pt(0))
+                 ->c()
+            << std::endl;
+          output_stream.close();
         }
-
-
-        filename = this->doc_info().directory() + "/singular_scaling.dat";
-        output_stream.open(filename, std::ios_base::app);
-        output_stream
-          << dynamic_cast<SingularNavierStokesSolutionElement<ELEMENT>*>(
-               Singularity_scaling_mesh_pt->element_pt(0))
-               ->c()
-          << std::endl;
-        output_stream.close();
 
 
         // Bump up counter
@@ -3969,17 +3971,23 @@ namespace oomph
             ->value(0);
       }
 
-      Backup_singularity_scaling_lagrange_multiplier =
-        dynamic_cast<SingularNavierStokesSolutionElement<ELEMENT>*>(
-          Singularity_scaling_mesh_pt->element_pt(0))
-          ->c();
+      if (!Augmented_bulk_element_number.empty())
+      {
+        Backup_singularity_scaling_lagrange_multiplier =
+          dynamic_cast<SingularNavierStokesSolutionElement<ELEMENT>*>(
+            Singularity_scaling_mesh_pt->element_pt(0))
+            ->c();
+      }
     }
 
     void restore_lagrange_multipliers()
     {
-      dynamic_cast<SingularNavierStokesSolutionElement<ELEMENT>*>(
-        Singularity_scaling_mesh_pt->element_pt(0))
-        ->set_c(Backup_singularity_scaling_lagrange_multiplier);
+      if (!Augmented_bulk_element_number.empty())
+      {
+        dynamic_cast<SingularNavierStokesSolutionElement<ELEMENT>*>(
+          Singularity_scaling_mesh_pt->element_pt(0))
+          ->set_c(Backup_singularity_scaling_lagrange_multiplier);
+      }
 
       if (Net_flux_mesh_pt)
       {

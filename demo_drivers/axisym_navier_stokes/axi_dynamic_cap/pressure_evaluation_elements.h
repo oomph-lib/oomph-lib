@@ -156,6 +156,14 @@ namespace oomph
         residuals, GeneralisedElement::Dummy_matrix, 0);
     }
 
+    void fill_in_contribution_to_jacobian_and_mass_matrix(
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix)
+    {
+      this->fill_in_contribution_to_jacobian(residuals, jacobian);
+    }
+
     // Calculate the element's residual vector and Jacobian
     // void fill_in_contribution_to_jacobian(Vector<double>& residuals,
     //                                       DenseMatrix<double>& jacobian)
