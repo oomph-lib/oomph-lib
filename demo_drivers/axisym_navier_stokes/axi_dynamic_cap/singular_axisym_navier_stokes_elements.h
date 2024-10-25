@@ -627,27 +627,34 @@ namespace oomph
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                           DenseMatrix<double>& jacobian)
     {
-      // Call the generic routine with the flag set to 1 and dummy mass
-      // matrix
-      SolidFiniteElement::fill_in_contribution_to_jacobian(residuals, jacobian);
-      // if (!this->IsAugmented)
-      // {
-      //   BASIC_AXISYM_NAVIER_STOKES_ELEMENT::fill_in_contribution_to_jacobian(
-      //     residuals, jacobian);
+      // If this is not augmented
+      if (!this->IsAugmented)
+      {
+        // Call the underlying scheme
+        BASIC_AXISYM_NAVIER_STOKES_ELEMENT::fill_in_contribution_to_jacobian(
+          residuals, jacobian);
 
-      //   this->fill_in_jacobian_from_external_by_fd(residuals, jacobian);
-      // }
+        this->fill_in_jacobian_from_external_by_fd(residuals, jacobian);
+      }
 
-      // else
-      // {
-      //   SolidFiniteElement::fill_in_contribution_to_jacobian(residuals,
-      //                                                        jacobian);
-      //   // if (this->IsAugmented)
-      //   //{
-      //   //   fill_in_generic_residual_contribution_additional_terms(
-      //   //     residuals, jacobian, 1);
-      //   // }
-      // }
+      else
+      {
+        // Construct the jacobian by finite difference
+        SolidFiniteElement::fill_in_contribution_to_jacobian(residuals,
+                                                             jacobian);
+
+        // The Jacobian is not fully implemented in
+        // fill_in_generic_residual_contribution_additional_terms.
+        // Once it is then we should be able to use the following code instead
+        // of the fd version.
+        /*
+        BASIC_AXISYM_NAVIER_STOKES_ELEMENT::fill_in_contribution_to_jacobian(
+          residuals, jacobian);
+        fill_in_generic_residual_contribution_additional_terms(
+          residuals, jacobian, 1);
+        this->fill_in_jacobian_from_external_by_fd(residuals, jacobian);
+        */
+      }
     }
 
     /// Add the element's contribution to its residual vector and
