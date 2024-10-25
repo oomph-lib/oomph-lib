@@ -135,6 +135,7 @@ BOOST_AUTO_TEST_CASE(nonlinear_analytic_J_equals_fd_J_gravity_120)
     createBaseProblem(120.0 * MathematicalConstants::Pi / 180.0);
   // Slip_Parameters::wall_velocity = 0.01;
   Global_Physical_Parameters::Bo = 1.0;
+  Slip_Parameters::slip_length = -1.0;
   problem_pt->steady_newton_solve();
   problem_pt->debug_elemental_jacobian();
   DoubleVector residuals;

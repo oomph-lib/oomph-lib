@@ -629,24 +629,25 @@ namespace oomph
     {
       // Call the generic routine with the flag set to 1 and dummy mass
       // matrix
-      if (!this->IsAugmented)
-      {
-        BASIC_AXISYM_NAVIER_STOKES_ELEMENT::fill_in_contribution_to_jacobian(
-          residuals, jacobian);
+      SolidFiniteElement::fill_in_contribution_to_jacobian(residuals, jacobian);
+      // if (!this->IsAugmented)
+      // {
+      //   BASIC_AXISYM_NAVIER_STOKES_ELEMENT::fill_in_contribution_to_jacobian(
+      //     residuals, jacobian);
 
-        this->fill_in_jacobian_from_external_by_fd(residuals, jacobian);
-      }
+      //   this->fill_in_jacobian_from_external_by_fd(residuals, jacobian);
+      // }
 
-      else
-      {
-        SolidFiniteElement::fill_in_contribution_to_jacobian(residuals,
-                                                             jacobian);
-        // if (this->IsAugmented)
-        //{
-        //   fill_in_generic_residual_contribution_additional_terms(
-        //     residuals, jacobian, 1);
-        // }
-      }
+      // else
+      // {
+      //   SolidFiniteElement::fill_in_contribution_to_jacobian(residuals,
+      //                                                        jacobian);
+      //   // if (this->IsAugmented)
+      //   //{
+      //   //   fill_in_generic_residual_contribution_additional_terms(
+      //   //     residuals, jacobian, 1);
+      //   // }
+      // }
     }
 
     /// Overload the output function
