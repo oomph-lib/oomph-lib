@@ -71,6 +71,14 @@ namespace oomph
       SolidFiniteElement::fill_in_contribution_to_jacobian(residuals, jacobian);
     }
 
+    void fill_in_contribution_to_jacobian_and_mass_matrix(
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix)
+    {
+      fill_in_contribution_to_jacobian(residuals, jacobian);
+    }
+
     /// Output function
     void output(std::ostream& outfile)
     {
