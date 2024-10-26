@@ -40,7 +40,6 @@
 // Local include files
 #include "singular_axisym_navier_stokes_elements.h"
 #include "hijacked_projectable_axisymmteric_Ttaylor_hood_elements.h"
-#include "axisym_dynamic_cap_problem.h"
 #include "singular_axisym_dynamic_cap_problem.h"
 #include "parameters.h"
 

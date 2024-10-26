@@ -26,7 +26,6 @@
 
 // OOMPH-LIB include files
 #include "generic.h"
-#include "axisym_navier_stokes.h"
 #include "singular_axisym_navier_stokes_elements.h"
 #include "fluid_interface.h"
 #include "constitutive.h"
@@ -35,7 +34,6 @@
 
 // Local include files
 #include "hijacked_projectable_axisymmteric_Ttaylor_hood_elements.h"
-#include "axisym_dynamic_cap_problem.h"
 #include "singular_axisym_dynamic_cap_problem.h"
 #include "bond_height_continuation_axisym_dynamic_cap_problem.h"
 #include "ca_height_continuation_axisym_dynamic_cap_problem.h"
@@ -212,8 +210,9 @@ void normal_continuation_run(Parameters& parameters,
   while (iterations < max_iterations)
   {
     // Output info
-    std::cout << "Iteration: " << iterations << ", param: " << *continuation_param_pt
-         << ", step: " << step << std::endl;
+    std::cout << "Iteration: " << iterations
+              << ", param: " << *continuation_param_pt << ", step: " << step
+              << std::endl;
 
     // Update iteration number
     iterations++;

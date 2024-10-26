@@ -11,7 +11,6 @@
 #include "meshes/triangle_mesh.h"
 
 // Local include files
-#include "axisym_dynamic_cap_problem.h"
 #include "singular_axisym_dynamic_cap_problem.h"
 
 #include "singular_axisym_navier_stokes_elements.h"
