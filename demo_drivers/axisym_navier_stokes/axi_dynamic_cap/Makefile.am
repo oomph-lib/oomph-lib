@@ -20,12 +20,18 @@ axi_dynamic_cap_SOURCES = axi_dynamic_cap.cc
 create_parameter_files_SOURCES = create_parameter_files.cc
 continuation_run_SOURCES = continuation_run.cc
 bifurcation_tracking_run_SOURCES = bifurcation_tracking_run.cc
-run_tests_SOURCES = run_tests.cc $(linear_sources)
+run_tests_SOURCES = run_tests.cc
 
-LDADD = -L@libdir@ -laxisym_navier_stokes -lfluid_interface \
-									-lsolid -lconstitutive \
-									-lgeneric \
-									$(EXTERNAL_LIBS) $(FLIBS) #-lboost_unit_test_framework -lgcov
+# Required libraries: 
+# $(FLIBS) is included in case the solver involves fortran sources.
+LDADD = -L@libdir@ \
+	-laxisym_navier_stokes \
+	-lfluid_interface \
+	-lsolid \
+	-lconstitutive \
+	-lgeneric \
+	$(EXTERNAL_LIBS) $(FLIBS)
+#-lboost_unit_test_framework -lgcov
 
 # Add the paranoid and range checking flags
 AM_CPPFLAGS += #-DPARANOID -DRANGE_CHECKING --coverage -O0 # -Wfatal-errors 

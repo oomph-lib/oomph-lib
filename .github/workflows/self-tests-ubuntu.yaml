@@ -10,18 +10,34 @@ jobs:
         # Each map in the 'mpi_options' array contains a flag indicating whether
         # to enable MPI and the name of the configuration file required for the
         # MPI case, respectively
-        mpi_options: [
-          {enable: false, config_file: default},
-          {enable: true, config_file: mpi_default_ci}
-        ]
+        mpi_options:
+          [
+            { enable: false, config_file: default },
+            { enable: true, config_file: mpi_default_ci },
+          ]
 
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install requirements
         run: sudo apt-get install make automake libtool libtool-bin autoconf doxygen gfortran g++
+
+      # PM: Temporary patch to handle deprecation of Python 2.7 by GitHub runners. Should be removed
+      # as soon as we have moved to a more recent version of Trilinos. N.B. we install Python 3
+      # again after installing Python 2.7, as the installation of the latter forces the former to
+      # be unlinked, and thus Python 3 won't be found by other programs. Installing it again doesn't
+      # overwrite the Python 2 installation.
+      - name: Install Python 2.7
+        uses: LizardByte/setup-python-action@master
+        with:
+          python-version: "2.7"
+
+      - name: Install Python 3.10
+        uses: LizardByte/setup-python-action@master
+        with:
+          python-version: "3.10"
 
       - name: Install MPI requirements (if required)
         if: ${{ matrix.mpi_options.enable == true }}
@@ -82,7 +98,7 @@ jobs:
         continue-on-error: true
 
       - name: Upload validation log file
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: validation-${{ runner.os }}-MPI_${{ matrix.mpi_options.enable }}.log
           path: ./validation.log

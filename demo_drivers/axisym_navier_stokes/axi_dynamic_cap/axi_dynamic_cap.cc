@@ -32,13 +32,13 @@
 // OOMPH-LIB include files
 #include "generic.h"
 #include "axisym_navier_stokes.h"
-#include "singular_axisym_navier_stokes_elements.h"
 #include "fluid_interface.h"
 #include "constitutive.h"
 #include "solid.h"
 #include "meshes/triangle_mesh.h"
 
 // Local include files
+#include "singular_axisym_navier_stokes_elements.h"
 #include "hijacked_projectable_axisymmteric_Ttaylor_hood_elements.h"
 #include "axisym_dynamic_cap_problem.h"
 #include "singular_axisym_dynamic_cap_problem.h"
@@ -68,7 +68,7 @@ int main(int argc, char** argv)
   Parameters parameters;
   read_parameters_from_file(argv[1], parameters);
 
-  // Construct the problem
+  // Check if we are restarting
   bool has_restart = false;
   if (parameters.restart_filename != "")
   {
@@ -76,6 +76,7 @@ int main(int argc, char** argv)
     has_restart = true;
   }
 
+  // Construct the problem
   SingularAxisymDynamicCapProblem<
     SingularAxisymNavierStokesElement<
       HijackedProjectableAxisymmetricTTaylorHoodPVDElement>,
@@ -102,6 +103,7 @@ int main(int argc, char** argv)
     }
   }
 
+  // Set the problem parameters
   problem.set_contact_angle(
     Global_Physical_Parameters::Equilibrium_contact_angle);
   problem.set_bond_number(Global_Physical_Parameters::Bo);
@@ -117,6 +119,7 @@ int main(int argc, char** argv)
   // Setup trace file
   problem.open_trace_files(true);
 
+  // Save a copy of the parameters
   ofstream parameters_filestream(
     (parameters.dir_name + "/parameters.dat").c_str());
   parameters.doc(parameters_filestream);
@@ -127,6 +130,7 @@ int main(int argc, char** argv)
   problem.doc_solution();
   problem.max_newton_iterations() = 40;
 
+  // If the final time is zero (or less) then we are doing a steady solve,
   if (parameters.ft <= 0)
   {
     // Solve for the steady state adapting if needed by the Z2 error estimator
@@ -138,14 +142,17 @@ int main(int argc, char** argv)
     // Document the solution
     problem.doc_solution();
   }
+  // ...otherwise, we are doing an unsteady run
   else
   {
+    // If the contact angle is acute, then timestep
     if (Global_Physical_Parameters::Equilibrium_contact_angle <=
         90.0 * MathematicalConstants::Pi / 180.0)
     {
       // Timestep until the desired final time
       problem.timestep(parameters.dt, parameters.ft);
     }
+    // otherwise, throw a warning as we haven't implemented this yet
     else
     {
       throw(OomphLibWarning(
@@ -163,5 +170,6 @@ int main(int argc, char** argv)
   MPI_Helpers::finalize();
 #endif
 
+  // Return 0 to tell everyone that the program finished successfully
   return 0;
 }

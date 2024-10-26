@@ -796,12 +796,6 @@ namespace oomph
         slip_element_pt->wall_velocity_fct_pt() =
           &Slip_Parameters::prescribed_wall_velocity_fct;
 
-        // if (slip_element_pt->get_node_number(Contact_line_solid_node_pt) ==
-        // -1)
-        //{
-        //   element_pt->add_external_data(Contact_line_solid_node_pt);
-        // }
-
         // Add the prescribed-flux element to the surface mesh
         surface_mesh_pt->add_element_pt(slip_element_pt);
 
@@ -840,6 +834,12 @@ namespace oomph
 
           el_pt->traction_fct_pt() = &parameters::eigensolution_slip_fct;
 
+          if (el_pt->get_node_number(Contact_line_solid_node_pt) == -1)
+          {
+            el_pt->add_external_data(
+              Contact_line_solid_node_pt->variable_position_pt());
+          }
+
           // Add it to the mesh
           Eigensolution_slip_mesh_pt->add_element_pt(el_pt);
         }
@@ -870,7 +870,6 @@ namespace oomph
 
       // el_pt->pin_c();
       el_pt->set_c(0.0);
-
 
       // unsigned n_element = Bulk_mesh_pt->nelement();
       // for (unsigned e = 0; e < n_element; e++)
@@ -1064,6 +1063,11 @@ namespace oomph
       el_pt->set_pressure_data_pt(
         Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0));
       el_pt->set_boundary_number_in_bulk_mesh(Outer_boundary_with_slip_id);
+      // Set the product of the Reynolds number and the inverse of the
+      // Froude number
+      el_pt->re_invfr_pt() = &ReInvFr;
+      // Set the direction of gravity
+      el_pt->g_pt() = &Global_Physical_Parameters::G;
 
       unsigned n_element = Bulk_mesh_pt->nelement();
       for (unsigned e = 0; e < n_element; e++)
@@ -1104,6 +1108,11 @@ namespace oomph
       el_pt->set_pressure_data_pt(
         Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0));
       el_pt->set_boundary_number_in_bulk_mesh(Free_surface_boundary_id);
+      // Set the product of the Reynolds number and the inverse of the
+      // Froude number
+      el_pt->re_invfr_pt() = &ReInvFr;
+      // Set the direction of gravity
+      el_pt->g_pt() = &Global_Physical_Parameters::G;
       el_pt->set_subtract_from_residuals();
 
       unsigned n_element = Bulk_mesh_pt->nelement();
@@ -1122,7 +1131,7 @@ namespace oomph
         }
       }
 
-      Pressure_contribution_mesh_1_pt->add_element_pt(el_pt);
+      Pressure_contribution_mesh_2_pt->add_element_pt(el_pt);
     }
 
     void create_mesh_as_geom_object()
@@ -1308,7 +1317,7 @@ namespace oomph
         el_pt->debug_jacobian(n, residuals, jacobian, jacobianFD);
         cout << "flux: " << compare_matrices(jacobianFD, jacobian) << endl;
       }
-      if(Volume_computation_mesh_pt)
+      if (Volume_computation_mesh_pt)
       {
         VOLUME_COMPUTATION_ELEMENT* el_pt =
           dynamic_cast<VOLUME_COMPUTATION_ELEMENT*>(
@@ -2975,10 +2984,11 @@ namespace oomph
             Augmented_bulk_element_number.push_back(e);
           }
 
-          // if (el_pt->get_node_number(Contact_line_solid_node_pt) == -1)
-          //{
-          //   el_pt->add_external_data(Contact_line_solid_node_pt);
-          // }
+          if (el_pt->get_node_number(Contact_line_solid_node_pt) == -1)
+          {
+            el_pt->add_external_data(
+              Contact_line_solid_node_pt->variable_position_pt());
+          }
         }
       }
 
@@ -3482,6 +3492,24 @@ namespace oomph
       {
         Bulk_mesh_pt->node_pt(n)->pin(w_index);
         Bulk_mesh_pt->node_pt(n)->set_value(w_index, 0.0);
+      }
+      const unsigned n_aug_bulk = Augmented_bulk_element_number.size();
+      for (unsigned e = 0; e < n_aug_bulk; e++)
+      {
+        // Augment elements
+        // Upcast from GeneralisedElement to the present element
+        ELEMENT* el_pt = dynamic_cast<ELEMENT*>(
+          Bulk_mesh_pt->element_pt(Augmented_bulk_element_number[e]));
+        for (unsigned n = 0; n < 3; n++)
+        {
+          el_pt->node_pt(n)->pin(6);
+          el_pt->node_pt(n)->set_value(6, 0.0);
+        }
+        for (unsigned n = 3; n < 6; n++)
+        {
+          el_pt->node_pt(n)->pin(5);
+          el_pt->node_pt(n)->set_value(5, 0.0);
+        }
       }
     }
 
