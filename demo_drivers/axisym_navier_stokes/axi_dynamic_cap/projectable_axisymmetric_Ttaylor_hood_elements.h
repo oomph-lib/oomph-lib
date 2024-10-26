@@ -1,5 +1,5 @@
-#ifndef HIJACKED_PROJECTABLE_AXISYMMTERIC_TTAYLOR_HOOD_ELEMENTS_HEADER
-#define HIJACKED_PROJECTABLE_AXISYMMTERIC_TTAYLOR_HOOD_ELEMENTS_HEADER
+#ifndef PROJECTABLE_AXISYMMTERIC_TTAYLOR_HOOD_ELEMENTS_HEADER
+#define PROJECTABLE_AXISYMMTERIC_TTAYLOR_HOOD_ELEMENTS_HEADER
 
 #include "solid/solid_elements.h"
 #include "navier_stokes.h"
@@ -47,17 +47,16 @@ namespace oomph
   };
 
 
-  class HijackedProjectableAxisymmetricTTaylorHoodPVDElement
-    : public virtual // Hijacked<
-      ProjectableAxisymmetricTaylorHoodElement<
-        AxisymmetricTTaylorHoodPVDElement>, //>
+  class ProjectableAxisymmetricTTaylorHoodPVDElement
+    : public virtual ProjectableAxisymmetricTaylorHoodElement<
+        AxisymmetricTTaylorHoodPVDElement>,
       public virtual DebugJacobianSolidFiniteElement
   {
   private:
     double Error;
 
   public:
-    HijackedProjectableAxisymmetricTTaylorHoodPVDElement() : Error(0.0) {}
+    ProjectableAxisymmetricTTaylorHoodPVDElement() : Error(0.0) {}
 
     // Set error value for post-processing
     void set_error(const double& error)
@@ -164,7 +163,7 @@ namespace oomph
 
   // Ensure that the FaceGeometry of the new element has been set up
   template<>
-  class FaceGeometry<HijackedProjectableAxisymmetricTTaylorHoodPVDElement>
+  class FaceGeometry<ProjectableAxisymmetricTTaylorHoodPVDElement>
     : public virtual SolidTElement<1, 3>
   {
   public:
@@ -173,8 +172,7 @@ namespace oomph
 
   // Ensure that the FaceGeometry of the new element has been set up
   template<>
-  class FaceGeometry<
-    FaceGeometry<HijackedProjectableAxisymmetricTTaylorHoodPVDElement>>
+  class FaceGeometry<FaceGeometry<ProjectableAxisymmetricTTaylorHoodPVDElement>>
     : public virtual SolidPointElement
   {
   public:

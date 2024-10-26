@@ -33,7 +33,7 @@
 #include "meshes/triangle_mesh.h"
 
 // Local include files
-#include "hijacked_projectable_axisymmteric_Ttaylor_hood_elements.h"
+#include "projectable_axisymmetric_Ttaylor_hood_elements.h"
 #include "singular_axisym_dynamic_cap_problem.h"
 #include "bond_height_continuation_axisym_dynamic_cap_problem.h"
 #include "ca_height_continuation_axisym_dynamic_cap_problem.h"
@@ -157,7 +157,7 @@ void normal_continuation_run(Parameters& parameters,
   }
   SingularAxisymDynamicCapProblem<
     SingularAxisymNavierStokesElement<
-      HijackedProjectableAxisymmetricTTaylorHoodPVDElement>,
+      ProjectableAxisymmetricTTaylorHoodPVDElement>,
     BDF<2>>
     problem(Global_Physical_Parameters::Equilibrium_contact_angle, has_restart);
 
@@ -272,7 +272,7 @@ void arc_continuation_run(Parameters& parameters,
 
   SingularAxisymDynamicCapProblem<
     SingularAxisymNavierStokesElement<
-      HijackedProjectableAxisymmetricTTaylorHoodPVDElement>,
+      ProjectableAxisymmetricTTaylorHoodPVDElement>,
     BDF<2>>
     problem(Global_Physical_Parameters::Equilibrium_contact_angle, has_restart);
 
@@ -419,7 +419,7 @@ void bond_height_control_continuation_run(Parameters& parameters,
   }
   BoHeightControlSingularAxisymDynamicCapProblem<
     SingularAxisymNavierStokesElement<
-      HijackedProjectableAxisymmetricTTaylorHoodPVDElement>,
+      ProjectableAxisymmetricTTaylorHoodPVDElement>,
     BDF<2>>
     problem(Global_Physical_Parameters::Equilibrium_contact_angle, has_restart);
 
@@ -529,7 +529,7 @@ void ca_height_control_continuation_run(Parameters& parameters,
   }
   CaHeightControlSingularAxisymDynamicCapProblem<
     SingularAxisymNavierStokesElement<
-      HijackedProjectableAxisymmetricTTaylorHoodPVDElement>,
+      ProjectableAxisymmetricTTaylorHoodPVDElement>,
     BDF<2>>
     problem(Global_Physical_Parameters::Equilibrium_contact_angle, has_restart);
 
