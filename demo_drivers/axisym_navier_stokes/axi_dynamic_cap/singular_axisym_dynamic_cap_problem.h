@@ -2979,7 +2979,7 @@ namespace oomph
           dist = pow(dist, 0.5);
 
           // If the distance to the corner is within the "inner" region, ...
-          const double inner_radius = 0.3;
+          const double inner_radius = Mesh_Control_Parameters::Augmented_radius;
           if (dist < inner_radius)
           {
             el_pt->augment();
