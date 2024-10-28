@@ -62,6 +62,8 @@ namespace oomph
     : public virtual BASIC_AXISYM_NAVIER_STOKES_ELEMENT
   {
   private:
+    double Error;
+
     bool IsAugmented;
     /// Vector of pointers to SingularNavierStokesSolutionElement objects
     Vector<SingularNavierStokesSolutionElement<
@@ -90,7 +92,7 @@ namespace oomph
   public:
     /// Constructor
     SingularAxisymNavierStokesElement()
-      : BASIC_AXISYM_NAVIER_STOKES_ELEMENT(), IsAugmented(false)
+      : BASIC_AXISYM_NAVIER_STOKES_ELEMENT(), Error(0.0), IsAugmented(false)
     {
       // Find the number of nodes in the element
       const unsigned n_node = this->nnode();
@@ -161,6 +163,107 @@ namespace oomph
       }
     } // End of constructor
 
+    // Set error value for post-processing
+    void set_error(const double& error)
+    {
+      Error = error;
+    }
+
+    void get_error(double& error)
+    {
+      error = Error;
+    }
+
+    //==============================================================
+    /// Get strain-rate tensor: \f$ e_{ij} \f$  where
+    /// \f$ i,j = r,z,\theta \f$ (in that order)
+    //==============================================================
+    void strain_rate(const Vector<double>& s,
+                     DenseMatrix<double>& strainrate) const
+    {
+#ifdef PARANOID
+      if ((strainrate.ncol() != 3) || (strainrate.nrow() != 3))
+      {
+        std::ostringstream error_message;
+        error_message << "The strain rate has incorrect dimensions "
+                      << strainrate.ncol() << " x " << strainrate.nrow()
+                      << " Not 3" << std::endl;
+
+        throw OomphLibError(error_message.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+      // Find out how many nodes there are in the element
+      unsigned n_node = this->nnode();
+
+      // Set up memory for the shape and test functions
+      Shape psi(n_node);
+      DShape dpsidx(n_node, 2);
+
+      // Call the derivatives of the shape functions
+      this->dshape_eulerian(s, psi, dpsidx);
+
+      // Radius
+      double interpolated_r = 0.0;
+
+      // Velocity components and their derivatives
+      double ur = 0.0;
+      double durdr = 0.0;
+      double durdz = 0.0;
+      double uz = 0.0;
+      double duzdr = 0.0;
+      double duzdz = 0.0;
+      double uphi = 0.0;
+      double duphidr = 0.0;
+      double duphidz = 0.0;
+
+      // Loop over nodes to assemble velocities and their derivatives
+      // w.r.t. to r and z (x_0 and x_1)
+      for (unsigned l = 0; l < n_node; l++)
+      {
+        interpolated_r += this->nodal_position(l, 0) * psi[l];
+
+        ur += u_reconstructed(l, 0) * psi[l];
+        uz += u_reconstructed(l, 1) * psi[l];
+        uphi += u_reconstructed(l, 2) * psi[l];
+
+        durdr += u_reconstructed(l, 0) * dpsidx(l, 0);
+        durdz += u_reconstructed(l, 0) * dpsidx(l, 1);
+
+        duzdr += u_reconstructed(l, 1) * dpsidx(l, 0);
+        duzdz += u_reconstructed(l, 1) * dpsidx(l, 1);
+
+        duphidr += u_reconstructed(l, 2) * dpsidx(l, 0);
+        duphidz += u_reconstructed(l, 2) * dpsidx(l, 1);
+      }
+
+
+      // Assign strain rates without negative powers of the radius
+      // and zero those with:
+      strainrate(0, 0) = durdr;
+      strainrate(0, 1) = 0.5 * (durdz + duzdr);
+      strainrate(1, 0) = strainrate(0, 1);
+      strainrate(0, 2) = 0.0;
+      strainrate(2, 0) = strainrate(0, 2);
+      strainrate(1, 1) = duzdz;
+      strainrate(1, 2) = 0.5 * duphidz;
+      strainrate(2, 1) = strainrate(1, 2);
+      strainrate(2, 2) = 0.0;
+
+
+      // Overwrite the strain rates with negative powers of the radius
+      // unless we're at the origin
+      if (std::fabs(interpolated_r) > 1.0e-16)
+      {
+        double inverse_radius = 1.0 / interpolated_r;
+        strainrate(0, 2) = 0.5 * (duphidr - inverse_radius * uphi);
+        strainrate(2, 0) = strainrate(0, 2);
+        strainrate(2, 2) = inverse_radius * ur;
+      }
+    }
+
     /// Number of values (pinned or dofs) required at node n. Can
     /// be overwritten for hanging node version
     inline virtual unsigned required_nvalue(const unsigned& n) const
@@ -204,6 +307,23 @@ namespace oomph
       IsAugmented = true;
     }
 
+    void setup_new_data()
+    {
+      // Copy over data
+      const unsigned n_node = this->nnode();
+      for (unsigned n = 0; n < n_node; n++)
+      {
+        Vector<double> local_u_bar = u_bar(this->node_pt(n)->position());
+        const unsigned n_dim = 3;
+        for (unsigned i = 0; i < n_dim; i++)
+        {
+          this->node_pt(n)->set_value(u_index_axi_nst(n, i),
+                                      u_reconstructed(n, i) - local_u_bar[i]);
+        }
+      }
+    }
+
+
     // Make element un-augmented
     void unaugment()
     {
@@ -219,8 +339,8 @@ namespace oomph
     /// Return the index at which the i-th unknown velocity component
     /// is stored. The default value, i, is appropriate for single-physics
     /// problems.
-    /// In derived multi-physics elements, this function should be overloaded
-    /// to reflect the chosen storage scheme.
+    /// In derived multi-physics elements, this function should be
+    /// overloaded to reflect the chosen storage scheme.
     virtual inline unsigned u_index_axi_nst(const unsigned& n,
                                             const unsigned& i) const
     {
@@ -318,7 +438,7 @@ namespace oomph
   public:
     void pin()
     {
-      const unsigned& n_node = this->nnode();
+      const unsigned n_node = this->nnode();
       for (unsigned i = 0; i < n_node; i++)
       {
         for (unsigned j = 0; j < 2; j++)
@@ -429,9 +549,9 @@ namespace oomph
 
     /// Add pointer to associated SingularNavierStokesSolutionElement that
     /// determines the value of the amplitude of the singular functions (and
-    /// gives access to the singular functions). The unknown amplitude becomes
-    /// external Data for this element so assign_eqn_numbers() must be
-    /// called after this function has been called.
+    /// gives access to the singular functions). The unknown amplitude
+    /// becomes external Data for this element so assign_eqn_numbers() must
+    /// be called after this function has been called.
     void add_c_equation_element_pt(
       SingularNavierStokesSolutionElement<
         SingularAxisymNavierStokesElement<BASIC_AXISYM_NAVIER_STOKES_ELEMENT>>*
@@ -462,7 +582,8 @@ namespace oomph
       // Find the dimension of the problem
       unsigned cached_dim = this->dim();
 
-      // Set up memory for the pressure shape functions and their derivatives
+      // Set up memory for the pressure shape functions and their
+      // derivatives
       Shape psip(n_pres), testp(n_pres);
       DShape dpsipdx(n_pres, cached_dim), dtestpdx(n_pres, cached_dim);
 
@@ -506,18 +627,44 @@ namespace oomph
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                           DenseMatrix<double>& jacobian)
     {
-      // Call the generic routine with the flag set to 1 and dummy mass
-      // matrix
-      BASIC_AXISYM_NAVIER_STOKES_ELEMENT::fill_in_contribution_to_jacobian(
-        residuals, jacobian);
-
-      if (this->IsAugmented)
+      // If this is not augmented
+      if (!this->IsAugmented)
       {
-        fill_in_generic_residual_contribution_additional_terms(
-          residuals, jacobian, 1);
+        // Call the underlying scheme
+        BASIC_AXISYM_NAVIER_STOKES_ELEMENT::fill_in_contribution_to_jacobian(
+          residuals, jacobian);
+
+        this->fill_in_jacobian_from_external_by_fd(residuals, jacobian);
       }
 
-      this->fill_in_jacobian_from_external_by_fd(residuals, jacobian);
+      else
+      {
+        // Construct the jacobian by finite difference
+        SolidFiniteElement::fill_in_contribution_to_jacobian(residuals,
+                                                             jacobian);
+
+        // The Jacobian is not fully implemented in
+        // fill_in_generic_residual_contribution_additional_terms.
+        // Once it is then we should be able to use the following code instead
+        // of the fd version.
+        /*
+        BASIC_AXISYM_NAVIER_STOKES_ELEMENT::fill_in_contribution_to_jacobian(
+          residuals, jacobian);
+        fill_in_generic_residual_contribution_additional_terms(
+          residuals, jacobian, 1);
+        this->fill_in_jacobian_from_external_by_fd(residuals, jacobian);
+        */
+      }
+    }
+
+    /// Add the element's contribution to its residual vector and
+    /// element Jacobian matrix (wrapper)
+    void fill_in_contribution_to_jacobian_and_mass_matrix(
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix)
+    {
+      fill_in_contribution_to_jacobian(residuals, jacobian);
     }
 
     /// Overload the output function
@@ -526,13 +673,14 @@ namespace oomph
     void output(std::ostream& outfile, const unsigned& nplot)
     {
       const bool IsStressOutputIncluded = false;
-      const bool IsSingularOutputInclude = true;
+      const bool IsSingularOutputInclude = false;
 
       // Find the dimension of the problem
       unsigned cached_dim = this->dim();
 
       // Vector of local coordinates
       Vector<double> s(cached_dim);
+      Vector<double> xi(cached_dim);
 
       // Tecplot header info
       outfile << this->tecplot_zone_string(nplot);
@@ -543,6 +691,7 @@ namespace oomph
       {
         // Get local coordinates of plot point
         this->get_s_plot(iplot, nplot, s);
+        this->interpolated_xi(s, xi);
 
         Vector<double> x(cached_dim);
         for (unsigned i = 0; i < cached_dim; i++)
@@ -570,6 +719,18 @@ namespace oomph
         // "Total" pressure
         outfile << this->interpolated_p_nst_fe_only(s) << " ";
 
+        // Lagrange coordinates
+        for (unsigned i = 0; i < 2; i++)
+        {
+          outfile << this->interpolated_x(s, i) - xi[i] << " ";
+        }
+
+        // Error
+        outfile << Error << " ";
+
+        // Size
+        outfile << this->size() << " ";
+
         if (IsStressOutputIncluded)
         {
           // Total stress
@@ -583,21 +744,21 @@ namespace oomph
           }
         }
 
-        // Finite element Velocity
-        Vector<double> velocity_fe_only(this->n_u_nst(), 0.0);
-        if (this->IsAugmented)
-        {
-          velocity_fe_only = interpolated_u_nst_fe_only(s);
-        }
-
-        for (unsigned i = 0; i < this->n_u_nst(); i++)
-        {
-          outfile << velocity_fe_only[i] << " ";
-        }
-
-        // Singular Velocity
         if (IsSingularOutputInclude)
         {
+          // Finite element Velocity
+          Vector<double> velocity_fe_only(this->n_u_nst(), 0.0);
+          if (this->IsAugmented)
+          {
+            velocity_fe_only = interpolated_u_nst_fe_only(s);
+          }
+
+          for (unsigned i = 0; i < this->n_u_nst(); i++)
+          {
+            outfile << velocity_fe_only[i] << " ";
+          }
+
+          // Singular Velocity
           Vector<double> velocity_bar(this->n_u_nst(), 0.0);
           if (this->IsAugmented)
           {
@@ -726,6 +887,49 @@ namespace oomph
           outfile << exact_soln[i] - computed_soln[i] << " ";
         }
         outfile << std::endl;
+      }
+    }
+
+    /// Get 'flux' for Z2 error recovery:   Upper triangular entries
+    /// in strain rate tensor.
+    void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
+    {
+#ifdef PARANOID
+      unsigned num_entries = 6;
+      if (flux.size() < num_entries)
+      {
+        std::ostringstream error_message;
+        error_message << "The flux vector has the wrong number of entries, "
+                      << flux.size() << ", whereas it should be at least "
+                      << num_entries << std::endl;
+        throw OomphLibError(error_message.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+      // Get strain rate matrix
+      DenseMatrix<double> strainrate(3);
+      this->strain_rate(s, strainrate);
+
+      // Pack into flux Vector
+      unsigned icount = 0;
+
+      // Start with diagonal terms
+      for (unsigned i = 0; i < 3; i++)
+      {
+        flux[icount] = strainrate(i, i);
+        icount++;
+      }
+
+      // Off diagonals row by row
+      for (unsigned i = 0; i < 3; i++)
+      {
+        for (unsigned j = i + 1; j < 3; j++)
+        {
+          flux[icount] = strainrate(i, j);
+          icount++;
+        }
       }
     }
 
@@ -938,7 +1142,8 @@ namespace oomph
       return (interpolated_duds);
     }
 
-    /// Version of interpolated pressure including the singular contributions
+    /// Version of interpolated pressure including the singular
+    /// contributions
     inline double my_interpolated_p_nst(const Vector<double>& s) const
     {
       // Initialise pressure value with fe part
@@ -1091,7 +1296,8 @@ namespace oomph
     }
 
     /// Evaluate gradient of sum of all velocity singular fcts
-    /// (incl. the amplitudes) at Eulerian position x: grad[i][j] = du_i/dx_j
+    /// (incl. the amplitudes) at Eulerian position x: grad[i][j] =
+    /// du_i/dx_j
     Vector<Vector<double>> grad_u_bar(const Vector<double>& x) const
     {
       // Find the number of singularities
@@ -1120,7 +1326,8 @@ namespace oomph
     }
 
 
-    /// Evaluate i-th "raw" velocity singular function at Eulerian position x
+    /// Evaluate i-th "raw" velocity singular function at Eulerian position
+    /// x
     Vector<double> velocity_singular_function(const unsigned& i,
                                               const Vector<double>& x) const
     {

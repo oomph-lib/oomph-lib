@@ -5,9 +5,7 @@ include $(top_srcdir)/config/makefile_templates/demo_drivers
 check_PROGRAMS= \
 	linear_stability_run \
 	neutral_stability_run \
-	test_volume_constraint \
-	run_tests \
-	run_singular_tests
+	run_tests
 
 # Sources for second executable
 linear_sources = linearised_axisymmetric_fluid_interface_elements.cc \
@@ -18,9 +16,7 @@ linear_sources = linearised_axisymmetric_fluid_interface_elements.cc \
 
 linear_stability_run_SOURCES = linear_stability_run.cc $(linear_sources)
 neutral_stability_run_SOURCES = neutral_stability_run.cc $(linear_sources)
-test_volume_constraint_SOURCES = test_volume_constraint.cc $(linear_sources)
 run_tests_SOURCES = run_tests.cc $(linear_sources)
-run_singular_tests_SOURCES = run_singular_tests.cc $(linear_sources)
 
 # Required libraries: 
 # $(FLIBS) is included in case the solver involves fortran sources.

@@ -46,7 +46,7 @@
 
 #include "linearised_axisym_navier_stokes.h"
 
-#include "hijacked_projectable_axisymmteric_Ttaylor_hood_elements.h"
+#include "projectable_axisymmetric_Ttaylor_hood_elements.h"
 #include "linearised_axisymmetric_fluid_interface_elements.h"
 #include "decomposed_linear_elasticity_elements.h"
 #include "singular_axisym_navier_stokes_elements.h"
@@ -56,7 +56,6 @@
 #include "overlaying_my_linear_element.h"
 
 //#include "axisym_linear_stability_cap_problem.h"
-#include "axisym_dynamic_cap_problem.h"
 #include "singular_axisym_dynamic_cap_problem.h"
 #include "perturbed_linear_stability_cap_problem.h"
 
@@ -98,7 +97,7 @@ int main(int argc, char** argv)
     has_restart = true;
   }
   typedef SingularAxisymNavierStokesElement<
-    HijackedProjectableAxisymmetricTTaylorHoodPVDElement>
+    ProjectableAxisymmetricTTaylorHoodPVDElement>
     BASE_ELEMENT;
   typedef BDF<2> TIMESTEPPER;
   SingularAxisymDynamicCapProblem<BASE_ELEMENT, TIMESTEPPER> base_problem(
