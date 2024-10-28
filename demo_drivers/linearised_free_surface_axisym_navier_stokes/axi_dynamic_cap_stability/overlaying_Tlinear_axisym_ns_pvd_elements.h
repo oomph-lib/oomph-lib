@@ -2,7 +2,7 @@
 #define OVERLAYING_TLINEAR_AXISYM_NS_PVD_ELEMENTS_HEADER
 
 //#include "generic.h"
-#include "hijacked_projectable_axisymmteric_Ttaylor_hood_elements.h"
+#include "projectable_axisymmetric_Ttaylor_hood_elements.h"
 #include "Tlinear_axisym_ns_pvd_elements.h"
 
 namespace oomph
@@ -11,7 +11,7 @@ namespace oomph
     : public virtual Hijacked<TLinearisedAxisymNSPVDElement>
   {
   private:
-    typedef HijackedProjectableAxisymmetricTTaylorHoodPVDElement BASE_ELEMENT;
+    typedef ProjectableAxisymmetricTTaylorHoodPVDElement BASE_ELEMENT;
 
     BASE_ELEMENT* Base_element_pt;
 

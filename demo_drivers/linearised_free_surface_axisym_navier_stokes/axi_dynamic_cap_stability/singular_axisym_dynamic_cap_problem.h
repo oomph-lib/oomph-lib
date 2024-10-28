@@ -63,7 +63,9 @@
 
 #include "utility_functions.h"
 
-#include "hijacked_projectable_axisymmteric_Ttaylor_hood_elements.h"
+#include "projectable_axisymmetric_Ttaylor_hood_elements.h"
+#include "debug_elastic_axisymmetric_volume_constraint_boundary_elements.h"
+#include "debug_impose_impenetratibility_elements.h"
 
 #include "eigensolution_functions.h"
 #include "pressure_evaluation_elements.h"
@@ -134,6 +136,7 @@ namespace oomph
         Net_flux_mesh_pt(0),
         Backup_volume_constraint_lagrange_multiplier(1.0),
         Backup_net_flux_lagrange_multiplier(1.0),
+        Backup_singularity_scaling_lagrange_multiplier(0.0),
         Backup_point_kinematic_lagrange_multiplier(1.0),
         problem_type(Normal_problem),
         Is_steady(true),
@@ -600,6 +603,11 @@ namespace oomph
         // Add the external pressure data
         el_pt->set_external_pressure_data(External_pressure_data_pt);
 
+        // if (el_pt->get_node_number(Contact_line_solid_node_pt) == -1)
+        //{
+        //   el_pt->add_external_data(Contact_line_solid_node_pt);
+        // }
+
         // Add it to the mesh
         Free_surface_mesh_pt->add_element_pt(el_pt);
       }
@@ -828,6 +836,12 @@ namespace oomph
 
           el_pt->traction_fct_pt() = &parameters::eigensolution_slip_fct;
 
+          if (el_pt->get_node_number(Contact_line_solid_node_pt) == -1)
+          {
+            el_pt->add_external_data(
+              Contact_line_solid_node_pt->variable_position_pt());
+          }
+
           // Add it to the mesh
           Eigensolution_slip_mesh_pt->add_element_pt(el_pt);
         }
@@ -858,6 +872,19 @@ namespace oomph
 
       // el_pt->pin_c();
       el_pt->set_c(0.0);
+
+      // unsigned n_element = Bulk_mesh_pt->nelement();
+      // for (unsigned e = 0; e < n_element; e++)
+      //{
+      //   ELEMENT* bulk_elem_pt =
+      //     dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
+
+      //  unsigned n_node = bulk_elem_pt->nnode();
+      //  for (unsigned n = 0; n < n_node; n++)
+      //  {
+      //    el_pt->add_external_data(bulk_elem_pt->node_pt(n));
+      //  }
+      //}
 
       // Add element to the mesh
       Singularity_scaling_mesh_pt->add_element_pt(el_pt);
@@ -912,6 +939,13 @@ namespace oomph
         NO_PENETRATION_ELEMENT* no_penetration_element_pt =
           new NO_PENETRATION_ELEMENT(
             bulk_elem_pt, face_index, Lagrange_id::No_penetration);
+
+        // if (no_penetration_element_pt->get_node_number(
+        //       Contact_line_solid_node_pt) == -1)
+        //{
+        //   no_penetration_element_pt->add_external_data(
+        //     Contact_line_solid_node_pt);
+        // }
 
         // Add the prescribed-flux element to the surface mesh
         surface_mesh_pt->add_element_pt(no_penetration_element_pt);
@@ -1031,13 +1065,34 @@ namespace oomph
       el_pt->set_pressure_data_pt(
         Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0));
       el_pt->set_boundary_number_in_bulk_mesh(Outer_boundary_with_slip_id);
+      // Set the product of the Reynolds number and the inverse of the
+      // Froude number
+      el_pt->re_invfr_pt() = &ReInvFr;
+      // Set the direction of gravity
+      el_pt->g_pt() = &Global_Physical_Parameters::G;
+
+      unsigned n_element = Bulk_mesh_pt->nelement();
+      for (unsigned e = 0; e < n_element; e++)
+      {
+        ELEMENT* bulk_elem_pt =
+          dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
+
+        unsigned n_node = bulk_elem_pt->nnode();
+        for (unsigned n = 0; n < n_node; n++)
+        {
+          if (el_pt->get_node_number(bulk_elem_pt->node_pt(n)) == -1)
+          {
+            el_pt->add_external_data(bulk_elem_pt->node_pt(n));
+          }
+        }
+      }
 
       Pressure_contribution_mesh_1_pt->add_element_pt(el_pt);
     }
 
     void create_pressure_contribution_2_elements()
     {
-      oomph_info << "create_pressure_contribution_1_elements" << std::endl;
+      oomph_info << "create_pressure_contribution_2_elements" << std::endl;
 
       ELEMENT* element_pt = 0;
       int face_index = 0;
@@ -1055,9 +1110,30 @@ namespace oomph
       el_pt->set_pressure_data_pt(
         Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0));
       el_pt->set_boundary_number_in_bulk_mesh(Free_surface_boundary_id);
+      // Set the product of the Reynolds number and the inverse of the
+      // Froude number
+      el_pt->re_invfr_pt() = &ReInvFr;
+      // Set the direction of gravity
+      el_pt->g_pt() = &Global_Physical_Parameters::G;
       el_pt->set_subtract_from_residuals();
 
-      Pressure_contribution_mesh_1_pt->add_element_pt(el_pt);
+      unsigned n_element = Bulk_mesh_pt->nelement();
+      for (unsigned e = 0; e < n_element; e++)
+      {
+        ELEMENT* bulk_elem_pt =
+          dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
+
+        unsigned n_node = bulk_elem_pt->nnode();
+        for (unsigned n = 0; n < n_node; n++)
+        {
+          if (el_pt->get_node_number(bulk_elem_pt->node_pt(n)) == -1)
+          {
+            el_pt->add_external_data(bulk_elem_pt->node_pt(n));
+          }
+        }
+      }
+
+      Pressure_contribution_mesh_2_pt->add_element_pt(el_pt);
     }
 
     void create_mesh_as_geom_object()
@@ -1243,6 +1319,7 @@ namespace oomph
         el_pt->debug_jacobian(n, residuals, jacobian, jacobianFD);
         cout << "flux: " << compare_matrices(jacobianFD, jacobian) << endl;
       }
+      if (Volume_computation_mesh_pt)
       {
         VOLUME_COMPUTATION_ELEMENT* el_pt =
           dynamic_cast<VOLUME_COMPUTATION_ELEMENT*>(
@@ -1253,6 +1330,32 @@ namespace oomph
         DenseMatrix<double> jacobianFD(n, n, 0.0);
         el_pt->debug_jacobian(n, residuals, jacobian, jacobianFD);
         cout << "volume computation: " << compare_matrices(jacobianFD, jacobian)
+             << endl;
+      }
+      if (!Augmented_bulk_element_number.empty())
+      {
+        PressureEvaluationElement<ELEMENT>* el_pt =
+          dynamic_cast<PressureEvaluationElement<ELEMENT>*>(
+            Pressure_contribution_mesh_1_pt->element_pt(0));
+        unsigned n = el_pt->ndof();
+        Vector<double> residuals(n, 0.0);
+        DenseMatrix<double> jacobian(n, n, 0.0);
+        DenseMatrix<double> jacobianFD(n, n, 0.0);
+        el_pt->debug_jacobian(n, residuals, jacobian, jacobianFD);
+        cout << "pressure contribution: "
+             << compare_matrices(jacobianFD, jacobian) << endl;
+      }
+      if (!Augmented_bulk_element_number.empty())
+      {
+        SingularNavierStokesTractionElement<ELEMENT>* el_pt =
+          dynamic_cast<SingularNavierStokesTractionElement<ELEMENT>*>(
+            Eigensolution_slip_mesh_pt->element_pt(0));
+        unsigned n = el_pt->ndof();
+        Vector<double> residuals(n, 0.0);
+        DenseMatrix<double> jacobian(n, n, 0.0);
+        DenseMatrix<double> jacobianFD(n, n, 0.0);
+        el_pt->debug_jacobian(n, residuals, jacobian, jacobianFD);
+        cout << "singular traction: " << compare_matrices(jacobianFD, jacobian)
              << endl;
       }
       // if (Volume_constraint_mesh_pt)
@@ -1392,7 +1495,8 @@ namespace oomph
           Mesh_Control_Parameters::Polyline_refinement_tolerence)
       {
         // Then adapt is needed
-        oomph_info << "Adapt is needed due to polyline refinement error" << std::endl;
+        oomph_info << "Adapt is needed due to polyline refinement error"
+                   << std::endl;
         return true;
       }
 
@@ -2509,6 +2613,15 @@ namespace oomph
           Pressure_contribution_mesh_1_pt->output(output_stream);
           Pressure_contribution_mesh_2_pt->output(output_stream);
           output_stream.close();
+
+          filename = this->doc_info().directory() + "/singular_scaling.dat";
+          output_stream.open(filename, std::ios_base::app);
+          output_stream
+            << dynamic_cast<SingularNavierStokesSolutionElement<ELEMENT>*>(
+                 Singularity_scaling_mesh_pt->element_pt(0))
+                 ->c()
+            << std::endl;
+          output_stream.close();
         }
 
 
@@ -2871,6 +2984,12 @@ namespace oomph
           {
             el_pt->augment();
             Augmented_bulk_element_number.push_back(e);
+          }
+
+          if (el_pt->get_node_number(Contact_line_solid_node_pt) == -1)
+          {
+            el_pt->add_external_data(
+              Contact_line_solid_node_pt->variable_position_pt());
           }
         }
       }
@@ -3376,6 +3495,24 @@ namespace oomph
         Bulk_mesh_pt->node_pt(n)->pin(w_index);
         Bulk_mesh_pt->node_pt(n)->set_value(w_index, 0.0);
       }
+      const unsigned n_aug_bulk = Augmented_bulk_element_number.size();
+      for (unsigned e = 0; e < n_aug_bulk; e++)
+      {
+        // Augment elements
+        // Upcast from GeneralisedElement to the present element
+        ELEMENT* el_pt = dynamic_cast<ELEMENT*>(
+          Bulk_mesh_pt->element_pt(Augmented_bulk_element_number[e]));
+        for (unsigned n = 0; n < 3; n++)
+        {
+          el_pt->node_pt(n)->pin(6);
+          el_pt->node_pt(n)->set_value(6, 0.0);
+        }
+        for (unsigned n = 3; n < 6; n++)
+        {
+          el_pt->node_pt(n)->pin(5);
+          el_pt->node_pt(n)->set_value(5, 0.0);
+        }
+      }
     }
 
   public:
@@ -3681,6 +3818,8 @@ namespace oomph
       //======================================================================
       this->restore_lagrange_multipliers();
 
+      setup_augmented_elements();
+
       this->rebuild_global_mesh();
       oomph_info << "Number of unknowns: " << assign_eqn_numbers() << std::endl;
       //======================================================================
@@ -3738,6 +3877,23 @@ namespace oomph
 
       // Reset lagrangian coordinates
       reset_lagrange();
+    }
+
+    void setup_augmented_elements()
+    {
+      // Loop over the augmented bulk elements
+      unsigned n_aug_bulk = Augmented_bulk_element_number.size();
+      for (unsigned e = 0; e < n_aug_bulk; e++)
+      {
+        // Augment elements
+        // Upcast from GeneralisedElement to the present element
+        ELEMENT* el_pt = dynamic_cast<ELEMENT*>(
+          Bulk_mesh_pt->element_pt(Augmented_bulk_element_number[e]));
+
+        // Set the pointer to the element that determines the amplitude
+        // of the singular fct
+        el_pt->setup_new_data();
+      }
     }
 
   public:
@@ -3834,10 +3990,25 @@ namespace oomph
             ->internal_data_pt(0)
             ->value(0);
       }
+
+      if (!Augmented_bulk_element_number.empty())
+      {
+        Backup_singularity_scaling_lagrange_multiplier =
+          dynamic_cast<SingularNavierStokesSolutionElement<ELEMENT>*>(
+            Singularity_scaling_mesh_pt->element_pt(0))
+            ->c();
+      }
     }
 
     void restore_lagrange_multipliers()
     {
+      if (!Augmented_bulk_element_number.empty())
+      {
+        dynamic_cast<SingularNavierStokesSolutionElement<ELEMENT>*>(
+          Singularity_scaling_mesh_pt->element_pt(0))
+          ->set_c(Backup_singularity_scaling_lagrange_multiplier);
+      }
+
       if (Net_flux_mesh_pt)
       {
         dynamic_cast<NET_FLUX_ELEMENT*>(Net_flux_mesh_pt->element_pt(0))
@@ -4227,6 +4398,7 @@ namespace oomph
     // Backup lagrange multipliers
     double Backup_volume_constraint_lagrange_multiplier;
     double Backup_net_flux_lagrange_multiplier;
+    double Backup_singularity_scaling_lagrange_multiplier;
     double Backup_point_kinematic_lagrange_multiplier;
 
     // Enumeration of domain boundaries

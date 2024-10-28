@@ -65,7 +65,9 @@
 
 #include "utility_functions.h"
 
-#include "hijacked_projectable_axisymmteric_Ttaylor_hood_elements.h"
+#include "projectable_axisymmetric_Ttaylor_hood_elements.h"
+#include "debug_elastic_axisymmetric_volume_constraint_boundary_elements.h"
+#include "debug_impose_impenetratibility_elements.h"
 
 namespace oomph
 {

@@ -4,7 +4,7 @@
 //#include "generic.h"
 #include "linearised_elastic_axisym_fluid_slip_elements.h"
 #include "axisym_fluid_slip_elements.h"
-#include "hijacked_projectable_axisymmteric_Ttaylor_hood_elements.h"
+#include "projectable_axisymmetric_Ttaylor_hood_elements.h"
 
 namespace oomph
 {

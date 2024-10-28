@@ -3,7 +3,7 @@
 
 //#include "generic.h"
 #include "MyLinearElements.h"
-#include "hijacked_projectable_axisymmteric_Ttaylor_hood_elements.h"
+#include "projectable_axisymmetric_Ttaylor_hood_elements.h"
 
 namespace oomph
 {
