@@ -2,6 +2,7 @@
 #define PRESSURE_EVALUATION_ELEMENTS_HEADER
 
 #include "generic.h"
+#include "debug_jacobian_elements.h"
 
 namespace oomph
 {
@@ -16,9 +17,11 @@ namespace oomph
   /// pin C.
   //=====================================================================
   template<class ELEMENT>
-  class PressureEvaluationElement : public virtual FaceGeometry<ELEMENT>,
-                                    public virtual FaceElement,
-                                    public virtual SolidFiniteElement
+  class PressureEvaluationElement
+    : public virtual FaceGeometry<ELEMENT>,
+      public virtual SolidFaceElement,
+      public virtual DebugJacobianSolidFiniteElement
+
   {
   private:
     // Storage for the bulk element
@@ -29,7 +32,8 @@ namespace oomph
     double evalution_point_r;
     Vector<double> evalution_point_s;
     Node* corner_node_pt;
-
+    double* ReInvFr_pt;
+    Vector<double>* G_pt;
 
   public:
     // Constructor
@@ -37,13 +41,15 @@ namespace oomph
                               const int& face_index,
                               Node* const& node_pt)
       : FaceGeometry<ELEMENT>(),
-        FaceElement(),
+        SolidFaceElement(),
         Cast_bulk_element_pt(dynamic_cast<ELEMENT*>(element_pt)),
         Pressure_index(-1),
         Is_adding_to_residuals(true),
         evalution_point_r(1e-3),
         evalution_point_s(1, 0.0),
-        corner_node_pt(node_pt)
+        corner_node_pt(node_pt),
+        ReInvFr_pt(nullptr),
+        G_pt(nullptr)
     {
       // Attach the geometrical information to the element. N.B. This function
       // also assigns nbulk_value from the required_nvalue of the bulk element
@@ -51,7 +57,32 @@ namespace oomph
 
       // Add the nodes (which are data) where the pressure is stored in the bulk
       // element as external data.
-      add_pressure_nodes_not_on_face_as_external_data();
+      // add_pressure_nodes_not_on_face_as_external_data();
+      this->add_other_bulk_node_positions_as_external_data();
+    }
+
+    /// Global inverse Froude number
+    const double& re_invfr() const
+    {
+      return *ReInvFr_pt;
+    }
+
+    /// Pointer to global inverse Froude number
+    double*& re_invfr_pt()
+    {
+      return ReInvFr_pt;
+    }
+
+    /// Vector of gravitational components
+    const Vector<double>& g() const
+    {
+      return *G_pt;
+    }
+
+    /// Pointer to Vector of gravitational components
+    Vector<double>*& g_pt()
+    {
+      return G_pt;
     }
 
     void compute_s(Node* const& node_pt)
@@ -123,6 +154,14 @@ namespace oomph
       // Call the generic routine with the flag set to 1
       fill_in_generic_residual_contribution_pressure_contribution(
         residuals, GeneralisedElement::Dummy_matrix, 0);
+    }
+
+    void fill_in_contribution_to_jacobian_and_mass_matrix(
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix)
+    {
+      this->fill_in_contribution_to_jacobian(residuals, jacobian);
     }
 
     // Calculate the element's residual vector and Jacobian
@@ -207,6 +246,8 @@ namespace oomph
       // Evaluate the pressure shape functions at the coordinate in the bulk
       // element
       Cast_bulk_element_pt->pshape_axi_nst(s_bulk, psip);
+      Vector<double> x(dim() + 2, 0.0);
+      Cast_bulk_element_pt->interpolated_x(s_bulk, x);
 
       // Set the local equation
       int local_eqn = 0;
@@ -220,7 +261,9 @@ namespace oomph
       {
         // Add (or subtract) the pressure at the evaluation point
         residuals[local_eqn] +=
-          Cast_bulk_element_pt->interpolated_p_nst_fe_only(s_bulk) * multiplier;
+          (Cast_bulk_element_pt->interpolated_p_nst_fe_only(s_bulk) +
+           (*this->ReInvFr_pt) * VectorHelpers::dot(*this->G_pt, x)) *
+          multiplier;
 
         // If the Jacobian flag is on, add to the Jacobian
         if (flag)

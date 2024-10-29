@@ -246,6 +246,8 @@ namespace oomph
       // Evaluate the pressure shape functions at the coordinate in the bulk
       // element
       Cast_bulk_element_pt->pshape_axi_nst(s_bulk, psip);
+      Vector<double> x(dim() + 2, 0.0);
+      Cast_bulk_element_pt->interpolated_x(s_bulk, x);
 
       // Set the local equation
       int local_eqn = 0;
@@ -259,7 +261,9 @@ namespace oomph
       {
         // Add (or subtract) the pressure at the evaluation point
         residuals[local_eqn] +=
-          Cast_bulk_element_pt->interpolated_p_nst_fe_only(s_bulk) * multiplier;
+          (Cast_bulk_element_pt->interpolated_p_nst_fe_only(s_bulk) +
+           (*this->ReInvFr_pt) * VectorHelpers::dot(*this->G_pt, x)) *
+          multiplier;
 
         // If the Jacobian flag is on, add to the Jacobian
         if (flag)

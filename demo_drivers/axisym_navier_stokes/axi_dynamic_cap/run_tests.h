@@ -11,11 +11,10 @@
 #include "meshes/triangle_mesh.h"
 
 // Local include files
-#include "axisym_dynamic_cap_problem.h"
 #include "singular_axisym_dynamic_cap_problem.h"
 
 #include "singular_axisym_navier_stokes_elements.h"
-#include "hijacked_projectable_axisymmteric_Ttaylor_hood_elements.h"
+#include "projectable_axisymmetric_Ttaylor_hood_elements.h"
 
 #include "parameters.h"
 
@@ -24,7 +23,7 @@
 namespace oomph
 {
   typedef SingularAxisymNavierStokesElement<
-    HijackedProjectableAxisymmetricTTaylorHoodPVDElement>
+    ProjectableAxisymmetricTTaylorHoodPVDElement>
     BASE_ELEMENT;
   typedef BDF<2> TIMESTEPPER;
   typedef SingularAxisymDynamicCapProblem<BASE_ELEMENT, TIMESTEPPER>

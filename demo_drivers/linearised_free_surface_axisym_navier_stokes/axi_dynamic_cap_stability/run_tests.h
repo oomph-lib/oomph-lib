@@ -12,10 +12,11 @@
 #include "meshes/triangle_mesh.h"
 
 // Local include files
-#include "axisym_dynamic_cap_problem.h"
+#include "singular_axisym_dynamic_cap_problem.h"
 #include "perturbed_linear_stability_cap_problem.h"
 
-#include "hijacked_projectable_axisymmteric_Ttaylor_hood_elements.h"
+#include "projectable_axisymmetric_Ttaylor_hood_elements.h"
+#include "singular_axisym_navier_stokes_elements.h"
 #include "overlaying_my_linear_element.h"
 #include "overlaying_Tlinear_axisym_ns_pvd_elements.h"
 
@@ -25,11 +26,14 @@
 
 namespace oomph
 {
-  typedef HijackedProjectableAxisymmetricTTaylorHoodPVDElement BASE_ELEMENT;
+  typedef SingularAxisymNavierStokesElement<
+    ProjectableAxisymmetricTTaylorHoodPVDElement>
+    BASE_ELEMENT;
   // typedef OverlayingTLinearisedAxisymNSPVDElement PERTURBED_ELEMENT;
   typedef OverlayingMyLinearElement<BASE_ELEMENT> PERTURBED_ELEMENT;
   typedef BDF<2> TIMESTEPPER;
-  typedef AxisymDynamicCapProblem<BASE_ELEMENT, TIMESTEPPER> AXISYM_PROBLEM;
+  typedef SingularAxisymDynamicCapProblem<BASE_ELEMENT, TIMESTEPPER>
+    AXISYM_PROBLEM;
   typedef PerturbedLinearStabilityCapProblem<BASE_ELEMENT,
                                              PERTURBED_ELEMENT,
                                              TIMESTEPPER>

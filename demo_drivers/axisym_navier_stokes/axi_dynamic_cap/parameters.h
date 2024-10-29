@@ -77,10 +77,13 @@ namespace oomph
     // Pseudo-solid Poisson ratio
     double Nu = 0.1;
 
-    // Absolute, not scaled properly
+    // Absolute - not non-dimenionsalised properly
     bool Use_adaptive_timestepping = false;
     double Temporal_tolerance = 1e0;
     double Max_timestep = 1e-1;
+
+    /// Small augmented
+    double Augmented_radius = 0.3;
   }; // namespace Mesh_Control_Parameters
 
   namespace Plot_Parameters
@@ -386,6 +389,16 @@ namespace oomph
       catch (std::exception& e)
       {
       }
+
+      try
+      {
+        getline(parameter_filestream, input_string, '#');
+        parameter_filestream.ignore(80, '\n');
+        Mesh_Control_Parameters::Augmented_radius = stod(input_string);
+      }
+      catch (std::exception& e)
+      {
+      }
     }
 
     void doc(std::ofstream& output_stream)
@@ -456,6 +469,8 @@ namespace oomph
       output_stream << Mesh_Control_Parameters::Polyline_refinement_tolerence
                     << " # Free surface polyline refinement tolerence"
                     << std::endl;
+      output_stream << Mesh_Control_Parameters::Augmented_radius
+                    << " # Augmented region's radius" << std::endl;
     }
 
     void check_for_directory()

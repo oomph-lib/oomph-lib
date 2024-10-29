@@ -63,7 +63,9 @@
 
 #include "utility_functions.h"
 
-#include "hijacked_projectable_axisymmteric_Ttaylor_hood_elements.h"
+#include "projectable_axisymmetric_Ttaylor_hood_elements.h"
+#include "debug_elastic_axisymmetric_volume_constraint_boundary_elements.h"
+#include "debug_impose_impenetratibility_elements.h"
 
 #include "eigensolution_functions.h"
 #include "pressure_evaluation_elements.h"
@@ -138,6 +140,7 @@ namespace oomph
         Backup_point_kinematic_lagrange_multiplier(1.0),
         problem_type(Normal_problem),
         Is_steady(true),
+        Is_augmented(false),
         Using_contact_angle_error_estimator(false)
     {
       //======================================================================
@@ -265,7 +268,13 @@ namespace oomph
         this->add_sub_mesh(Volume_constraint_mesh_pt);
       }
 
-      if (Contact_angle > 90.0 * MathematicalConstants::Pi / 180.0)
+      if (Contact_angle > 90.0 * MathematicalConstants::Pi / 180.0 &&
+          Mesh_Control_Parameters::Augmented_radius > 0)
+      {
+        this->Is_augmented = true;
+      }
+
+      if (this->is_augmented())
       {
         Eigensolution_slip_mesh_pt = new Mesh;
         this->add_sub_mesh(Eigensolution_slip_mesh_pt);
@@ -1330,7 +1339,7 @@ namespace oomph
         cout << "volume computation: " << compare_matrices(jacobianFD, jacobian)
              << endl;
       }
-      if (!Augmented_bulk_element_number.empty())
+      if (this->is_augmented())
       {
         PressureEvaluationElement<ELEMENT>* el_pt =
           dynamic_cast<PressureEvaluationElement<ELEMENT>*>(
@@ -1343,7 +1352,7 @@ namespace oomph
         cout << "pressure contribution: "
              << compare_matrices(jacobianFD, jacobian) << endl;
       }
-      if (!Augmented_bulk_element_number.empty())
+      if (this->is_augmented())
       {
         SingularNavierStokesTractionElement<ELEMENT>* el_pt =
           dynamic_cast<SingularNavierStokesTractionElement<ELEMENT>*>(
@@ -2067,6 +2076,11 @@ namespace oomph
       actions_after_adapt();
     }
 
+    bool is_augmented()
+    {
+      return Is_augmented;
+    }
+
     // Set the bond number represented by ReInvFr
     void set_bond_number(const double& bond_number)
     {
@@ -2599,7 +2613,7 @@ namespace oomph
         }
 
 
-        if (!Augmented_bulk_element_number.empty())
+        if (this->is_augmented())
         {
           filename = this->doc_info().directory() + "/pressure_evaluation" +
                      to_string(this->doc_info().number()) + ".dat";
@@ -2958,7 +2972,7 @@ namespace oomph
 
         el_pt->time_stepper_pt() = this->time_stepper_pt();
 
-        if (Contact_angle > 90.0 * MathematicalConstants::Pi / 180.0)
+        if (this->is_augmented())
         {
           // Augmented elements close to the corner
           // Check distance from
@@ -2977,7 +2991,7 @@ namespace oomph
           dist = pow(dist, 0.5);
 
           // If the distance to the corner is within the "inner" region, ...
-          const double inner_radius = 0.3;
+          const double inner_radius = Mesh_Control_Parameters::Augmented_radius;
           if (dist < inner_radius)
           {
             el_pt->augment();
@@ -2992,10 +3006,16 @@ namespace oomph
         }
       }
 
-      if (Contact_angle > 90.0 * MathematicalConstants::Pi / 180.0)
+      if (this->is_augmented())
       {
         oomph_info << Augmented_bulk_element_number.size()
                    << " augmented elements" << std::endl;
+        if (Augmented_bulk_element_number.size() == 0)
+        {
+          oomph_info << "WARNING: No augmented elements! Try setting the "
+                        "augmented region to be larger."
+                     << std::endl;
+        }
       }
     }
 
@@ -3943,7 +3963,7 @@ namespace oomph
 
 
       // Create the other meshes
-      if (!Augmented_bulk_element_number.empty())
+      if (this->is_augmented())
       {
         parameters::x_centre_node_pt = Contact_line_solid_node_pt;
         std::cout << "Make augmented elements" << std::endl;
@@ -3989,7 +4009,7 @@ namespace oomph
             ->value(0);
       }
 
-      if (!Augmented_bulk_element_number.empty())
+      if (this->is_augmented())
       {
         Backup_singularity_scaling_lagrange_multiplier =
           dynamic_cast<SingularNavierStokesSolutionElement<ELEMENT>*>(
@@ -4000,7 +4020,7 @@ namespace oomph
 
     void restore_lagrange_multipliers()
     {
-      if (!Augmented_bulk_element_number.empty())
+      if (this->is_augmented())
       {
         dynamic_cast<SingularNavierStokesSolutionElement<ELEMENT>*>(
           Singularity_scaling_mesh_pt->element_pt(0))
@@ -4428,6 +4448,7 @@ namespace oomph
 
     // Static problem state Boolean
     bool Is_steady;
+    bool Is_augmented;
     bool Using_contact_angle_error_estimator;
   };
 } // namespace oomph

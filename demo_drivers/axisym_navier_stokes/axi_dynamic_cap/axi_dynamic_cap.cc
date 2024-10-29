@@ -39,8 +39,7 @@
 
 // Local include files
 #include "singular_axisym_navier_stokes_elements.h"
-#include "hijacked_projectable_axisymmteric_Ttaylor_hood_elements.h"
-#include "axisym_dynamic_cap_problem.h"
+#include "projectable_axisymmetric_Ttaylor_hood_elements.h"
 #include "singular_axisym_dynamic_cap_problem.h"
 #include "parameters.h"
 
@@ -79,7 +78,7 @@ int main(int argc, char** argv)
   // Construct the problem
   SingularAxisymDynamicCapProblem<
     SingularAxisymNavierStokesElement<
-      HijackedProjectableAxisymmetricTTaylorHoodPVDElement>,
+      ProjectableAxisymmetricTTaylorHoodPVDElement>,
     BDF<2>>
     problem(Global_Physical_Parameters::Equilibrium_contact_angle, has_restart);
 

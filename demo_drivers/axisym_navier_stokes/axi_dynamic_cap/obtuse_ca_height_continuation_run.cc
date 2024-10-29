@@ -75,7 +75,7 @@ int main(int argc, char** argv)
   }
   CaHeightControlSingularAxisymDynamicCapProblem<
     SingularAxisymNavierStokesElement<
-      HijackedProjectableAxisymmetricTTaylorHoodPVDElement>,
+      ProjectableAxisymmetricTTaylorHoodPVDElement>,
     BDF<2>>
     problem(Global_Physical_Parameters::Equilibrium_contact_angle, has_restart);
 
