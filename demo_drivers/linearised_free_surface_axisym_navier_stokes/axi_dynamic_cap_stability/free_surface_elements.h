@@ -31,6 +31,25 @@ namespace oomph
       this->add_other_bulk_node_positions_as_external_data();
     }
 
+    //================================================================
+    /// Calculate the pressure component at local coordinate s
+    //================================================================
+    virtual double interpolated_p(const Vector<double>& s) override
+    {
+      // Find corresponding coordinate in the the bulk element
+      Vector<double> s_bulk(this->dim() + 1);
+      s_bulk = this->local_coordinate_in_bulk(s);
+
+      // Get cast bulk element
+      ELEMENT* bulk_el_pt = dynamic_cast<ELEMENT*>(this->bulk_element_pt());
+
+      // Get the pressure from the bulk element
+      double interpolated_p = bulk_el_pt->interpolated_p_nst(s_bulk);
+
+      /// Return the interpolated pressure
+      return (interpolated_p);
+    }
+
     void fill_in_contribution_to_dresiduals_dparameter(
       double* const& parameter_pt, Vector<double>& dres_dparam)
     {
