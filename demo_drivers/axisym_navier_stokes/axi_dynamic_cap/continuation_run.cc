@@ -356,26 +356,20 @@ void arc_continuation_run(Parameters& parameters,
   for (unsigned n = 1; n < number_of_steps; n++)
   {
     problem.arc_length_step_solve(parameter_pt, ds);
+    problem.steady_newton_solve_adapt_if_needed(parameters.max_adapt);
 
     problem.create_restart_file();
     problem.doc_solution();
 
     // Adapt and solve the problem by the number of intervals between adapts
     // parameter.
-    if (n % Mesh_Control_Parameters::interval_between_adapts ==
-        Mesh_Control_Parameters::interval_between_adapts - 1)
-    {
-      // Solve for the steady state adapting if needed by the Z2 error estimator
-      problem.reset_arc_length_parameters();
-      problem.steady_newton_solve_adapt_if_needed(parameters.max_adapt);
-    }
-
-    // If the contact angle error gets too large
-    if (problem.get_contact_angle_error() > 1.0)
-    {
-      // Stop the loop
-      break;
-    }
+    // if (n % Mesh_Control_Parameters::interval_between_adapts ==
+    //    Mesh_Control_Parameters::interval_between_adapts - 1)
+    //{
+    //  // Solve for the steady state adapting if needed by the Z2 error
+    //  estimator problem.reset_arc_length_parameters();
+    //  problem.steady_newton_solve_adapt_if_needed(parameters.max_adapt);
+    //}
   }
 
   // Close the trace files
@@ -485,30 +479,10 @@ void bond_height_control_continuation_run(Parameters& parameters,
   {
     TerminateHelper::setup();
     problem.height_step_solve(ds);
+    problem.steady_newton_solve_adapt_if_needed(parameters.max_adapt);
 
     problem.create_restart_file();
     problem.doc_solution();
-
-    // Adapt and solve the problem by the number of intervals between adapts
-    // parameter.
-    if (n % Mesh_Control_Parameters::interval_between_adapts ==
-        Mesh_Control_Parameters::interval_between_adapts - 1)
-    {
-      // Solve for the steady state adapting if needed by the Z2 error estimator
-      problem.reset_arc_length_parameters();
-      if (continuation_param_pt == &Global_Physical_Parameters::Bo)
-      {
-        problem.adapt();
-      }
-      problem.steady_newton_solve_adapt_if_needed(parameters.max_adapt);
-    }
-
-    // If the contact angle error gets too large
-    if (problem.get_contact_angle_error() > 1.0)
-    {
-      // Stop the loop
-      break;
-    }
   }
 
   // Close the trace files
@@ -597,6 +571,7 @@ void ca_height_control_continuation_run(Parameters& parameters,
     try
     {
       problem.height_step_solve(ds);
+      problem.steady_newton_solve_adapt_if_needed(parameters.max_adapt);
     }
     catch (exception& e)
     {
@@ -605,24 +580,6 @@ void ca_height_control_continuation_run(Parameters& parameters,
 
     problem.create_restart_file();
     problem.doc_solution();
-
-    // Adapt and solve the problem by the number of intervals between adapts
-    // parameter.
-    if (n % Mesh_Control_Parameters::interval_between_adapts ==
-        Mesh_Control_Parameters::interval_between_adapts - 1)
-    {
-      // Solve for the steady state adapting if needed by the Z2 error estimator
-      problem.reset_arc_length_parameters();
-      problem.adapt();
-      problem.steady_newton_solve_adapt_if_needed(parameters.max_adapt);
-    }
-
-    // If the contact angle error gets too large
-    if (problem.get_contact_angle_error() > 1.0)
-    {
-      // Stop the loop
-      break;
-    }
   }
 
   // Close the trace files

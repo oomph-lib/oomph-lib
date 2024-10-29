@@ -273,7 +273,7 @@ int main(int argc, char** argv)
 
   double residual = real(eigenvalues[0]);
 
-  const double tolerance = 1e-5;
+  const double tolerance = 1e-8;
   bool has_converged = false;
   if (abs(residual) < tolerance)
   {

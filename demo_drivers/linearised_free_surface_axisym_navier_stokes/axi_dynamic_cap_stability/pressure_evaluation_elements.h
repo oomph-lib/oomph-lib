@@ -262,7 +262,7 @@ namespace oomph
         // Add (or subtract) the pressure at the evaluation point
         residuals[local_eqn] +=
           (Cast_bulk_element_pt->interpolated_p_nst_fe_only(s_bulk) +
-           0.0 * (*this->ReInvFr_pt) * VectorHelpers::dot(*this->G_pt, x)) *
+           (*this->ReInvFr_pt) * VectorHelpers::dot(*this->G_pt, x)) *
           multiplier;
 
         // If the Jacobian flag is on, add to the Jacobian
