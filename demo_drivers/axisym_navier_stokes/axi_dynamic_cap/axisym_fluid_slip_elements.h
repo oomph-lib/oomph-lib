@@ -573,6 +573,26 @@ namespace oomph
       return node_pt(n)->value(this->u_index_axi_nst(n, i));
     }
 
+    //================================================================
+    /// Calculate the pressure component at local coordinate s
+    //================================================================
+    double interpolated_p(const Vector<double>& s)
+    {
+      // Find corresponding coordinate in the the bulk element
+      Vector<double> s_bulk(this->dim() + 1);
+      s_bulk = this->local_coordinate_in_bulk(s);
+
+      // Get cast bulk element
+      ELEMENT* bulk_el_pt = dynamic_cast<ELEMENT*>(this->bulk_element_pt());
+
+      // Get the pressure from the bulk element
+      double interpolated_p = bulk_el_pt->interpolated_p_nst(s_bulk);
+
+      /// Return the interpolated pressure
+      return (interpolated_p);
+    }
+
+
     /// Output function
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
@@ -660,11 +680,11 @@ namespace oomph
         }
 
         // Output the u,v,w
-        for (unsigned i = 0; i < n_dim; i++)
+        for (unsigned i = 0; i < n_dim + 1; i++)
         {
           outfile << interpolated_u[i] << " ";
         }
-        outfile << interpolated_u[n_dim] << std::endl;
+        outfile << interpolated_p(s) << std::endl;
       }
     }
 

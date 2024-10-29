@@ -584,6 +584,9 @@ namespace oomph
     /// Calculate the i-th velocity component at the local coordinate s.
     double interpolated_u(const Vector<double>& s, const unsigned& i);
 
+    /// Calculate the pressure component at the local coordinate s.
+    virtual double interpolated_p(const Vector<double>& s);
+
     /// Return the value of the external pressure
     double pext() const
     {

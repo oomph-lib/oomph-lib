@@ -862,7 +862,7 @@ namespace oomph
         unsigned hi_limit = this->n_u_nst();
         if (include_pressure)
         {
-          computed_soln[this->n_u_nst()] = my_interpolated_p_nst(s);
+          computed_soln[this->n_u_nst()] = interpolated_p_nst(s);
           hi_limit = this->n_u_nst() + 1;
         }
 
@@ -1144,7 +1144,7 @@ namespace oomph
 
     /// Version of interpolated pressure including the singular
     /// contributions
-    inline double my_interpolated_p_nst(const Vector<double>& s) const
+    inline double interpolated_p_nst(const Vector<double>& s) const
     {
       // Initialise pressure value with fe part
       double interpolated_p = interpolated_p_nst_fe_only(s);

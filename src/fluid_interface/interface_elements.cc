@@ -462,6 +462,15 @@ namespace oomph
     return (interpolated_u);
   }
 
+  //================================================================
+  /// Calculate the pressure component at local coordinate s
+  //================================================================
+  double FluidInterfaceElement::interpolated_p(const Vector<double>& s)
+  {
+    // Return a dummy pressure to be overloaded in inherited elements.
+    return 0.0;
+  }
+
   //===========================================================================
   /// Calculate the contribution to the residuals from the interface
   /// implemented generically with geometric information to be
@@ -696,7 +705,7 @@ namespace oomph
     Vector<double> s(el_dim);
 
     // Tecplot header info
-    outfile << tecplot_zone_string(n_plot);
+    // outfile << tecplot_zone_string(n_plot);
 
     // Loop over plot points
     unsigned num_plot_points = nplot_points(n_plot);
@@ -712,10 +721,10 @@ namespace oomph
         outfile << interpolated_u(s, i) << " ";
 
       // Output a dummy pressure
-      outfile << 0.0 << "\n";
+      outfile << interpolated_p(s);
     }
 
-    write_tecplot_zone_footer(outfile, n_plot);
+    // write_tecplot_zone_footer(outfile, n_plot);
 
     outfile << "\n";
   }
@@ -733,7 +742,7 @@ namespace oomph
     Vector<double> s(el_dim);
 
     // Tecplot header info
-    fprintf(file_pt, "%s", tecplot_zone_string(n_plot).c_str());
+    // fprintf(file_pt, "%s", tecplot_zone_string(n_plot).c_str());
 
     // Loop over plot points
     unsigned num_plot_points = nplot_points(n_plot);
@@ -755,12 +764,12 @@ namespace oomph
       }
 
       // Dummy Pressure
-      fprintf(file_pt, "%g \n", 0.0);
+      fprintf(file_pt, "%g", interpolated_p(s));
     }
     fprintf(file_pt, "\n");
 
     // Write tecplot footer (e.g. FE connectivity lists)
-    write_tecplot_zone_footer(file_pt, n_plot);
+    // write_tecplot_zone_footer(file_pt, n_plot);
   }
 
 
