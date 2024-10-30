@@ -38,6 +38,9 @@ namespace oomph
   template<class ELEMENT>
   class MyTriangleMesh : public TriangleMesh<ELEMENT>
   {
+  private:
+    ErrorEstimator* Spatial_error_estimator_pt;
+
   public:
     /// Constructor with time stepper only
     MyTriangleMesh<ELEMENT>(
@@ -50,6 +53,18 @@ namespace oomph
 
     /// Deep copy from passed mesh
     void deep_copy(Mesh* orig_mesh_pt);
+
+    /// Access to spatial error estimator
+    ErrorEstimator*& spatial_error_estimator_pt()
+    {
+      return Spatial_error_estimator_pt;
+    }
+
+    /// Access to spatial error estimator (const version
+    ErrorEstimator* spatial_error_estimator_pt() const
+    {
+      return Spatial_error_estimator_pt;
+    }
   };
 
   //======================================================================

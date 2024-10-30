@@ -8,6 +8,7 @@ namespace oomph
 {
   class TaylorHoodFullLinearisedAxisymmetricNavierStokesEquations
     : public virtual FullLinearisedAxisymmetricNavierStokesEquations,
+      public virtual ElementWithZ2ErrorEstimator,
       public virtual TElement<2, 3>
   {
   private:
@@ -151,6 +152,65 @@ namespace oomph
     virtual void output(FILE* file_pt, const unsigned& n_plot)
     {
       FullLinearisedAxisymmetricNavierStokesEquations::output(file_pt, n_plot);
+    }
+
+    /// Implementation of the Z2ErrorEstimator virtual functions
+
+    /// Number of 'flux' terms for Z2 error estimation
+    unsigned num_Z2_flux_terms()
+    {
+      // 3 diagonal strain rates, 3 off diagonal rates
+      return 6;
+    }
+
+    /// Get 'flux' for Z2 error recovery:   Upper triangular entries
+    /// in strain rate tensor.
+    void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
+    {
+#ifdef PARANOID
+      unsigned num_entries = 6;
+      if (flux.size() < num_entries)
+      {
+        std::ostringstream error_message;
+        error_message << "The flux vector has the wrong number of entries, "
+                      << flux.size() << ", whereas it should be at least "
+                      << num_entries << std::endl;
+        throw OomphLibError(error_message.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+      // Get strain rate matrix
+      DenseMatrix<double> strainrate(3);
+      this->strain_rate(s, strainrate);
+
+      // Pack into flux Vector
+      unsigned icount = 0;
+
+      // Start with diagonal terms
+      for (unsigned i = 0; i < 3; i++)
+      {
+        flux[icount] = strainrate(i, i);
+        icount++;
+      }
+
+      // Off diagonals row by row
+      for (unsigned i = 0; i < 3; i++)
+      {
+        for (unsigned j = i + 1; j < 3; j++)
+        {
+          flux[icount] = strainrate(i, j);
+          icount++;
+        }
+      }
+    }
+
+    /// Order of recovery shape functions for Z2 error estimation:
+    /// Same order as shape functions.
+    unsigned nrecovery_order()
+    {
+      return 2;
     }
   };
 

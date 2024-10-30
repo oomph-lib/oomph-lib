@@ -24,7 +24,6 @@ namespace oomph
                        const unsigned& id = 0)
       : ElasticAxisymmetricFluidInterfaceElement<ELEMENT>(
           element_pt, face_index, id),
-        SolidFaceElement(),
         Time_stepper_pt(time_stepper_pt),
         Error(0.0)
     {

@@ -48,6 +48,9 @@ namespace oomph
     : public virtual FiniteElement
   {
   private:
+    /// Store an estimate of the error
+    double Error;
+
     /// Static "magic" number that indicates that the pressure is not
     /// stored at a node
     static int Pressure_not_stored_at_node;
@@ -218,6 +221,19 @@ namespace oomph
 
     virtual void get_base_flow_u(const Vector<double>& s,
                                  Vector<double>& result) const = 0;
+
+    // Set error value for post-processing
+    void set_error(const double& error)
+    {
+      Error = error;
+    }
+
+    // Get error value
+    void get_error(double& error)
+    {
+      error = Error;
+    }
+
 
   protected:
     /// Calculate the derivatives of the velocity components of the
@@ -475,7 +491,8 @@ namespace oomph
     /// derivatives of the base flow function, as well as the base flow
     /// body force and volumetric source function pointers
     FullLinearisedAxisymmetricNavierStokesEquations()
-      : Base_flow_u_fct_pt(0),
+      : Error(0.0),
+        Base_flow_u_fct_pt(0),
         Base_flow_dudx_fct_pt(0),
         Base_flow_dudt_fct_pt(0),
         Base_flow_p_fct_pt(0),

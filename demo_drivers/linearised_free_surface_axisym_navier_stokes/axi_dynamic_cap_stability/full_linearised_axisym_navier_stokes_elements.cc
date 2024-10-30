@@ -234,6 +234,11 @@ namespace oomph
           outfile << base_flow_dudt[i] << " ";
         }
       }
+      // Error
+      outfile << Error << " ";
+
+      // Size
+      outfile << this->size() << " ";
 
       outfile << std::endl;
     }

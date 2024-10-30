@@ -174,6 +174,7 @@ namespace oomph
       Fluid_mesh_pt =
         new MyTriangleMesh<PERTURBED_ELEMENT>(this->time_stepper_pt());
       Fluid_mesh_pt->deep_copy(External_base_mesh_pt);
+      Fluid_mesh_pt->spatial_error_estimator_pt() = new Z2ErrorEstimator;
 
       // Setup up the bulk mesh elements with the parameters etc.
       setup_bulk_elements();
@@ -522,7 +523,8 @@ namespace oomph
       fs_el_pt->hijack_nodal_value(corner_element_node_index, us_index);
 
       std::cout << visited_nodes.size() << " visited of "
-           << Fluid_mesh_pt->nboundary_node(Inner_boundary_id) << std::endl;
+                << Fluid_mesh_pt->nboundary_node(Inner_boundary_id)
+                << std::endl;
     }
 
     void create_contact_line_elements()
@@ -1976,10 +1978,46 @@ namespace oomph
       return bulk_el_pt;
     }
 
+    // Compute error estimates and save to elements
+    void compute_error_estimate(double& max_err, double& min_err)
+    {
+      // Get error estimator
+      ErrorEstimator* err_est_pt = Fluid_mesh_pt->spatial_error_estimator_pt();
+
+      // Get/output error estimates
+      unsigned n_elements = Fluid_mesh_pt->nelement();
+      Vector<double> elemental_error(n_elements);
+
+      // We need a dynamic cast, get_element_errors from the Fluid_mesh_pt
+      // Dynamic cast is used because get_element_errors require a Mesh* ans
+      // not a SolidMesh*
+      Mesh* temp_mesh_pt = dynamic_cast<Mesh*>(Fluid_mesh_pt);
+      err_est_pt->get_element_errors(temp_mesh_pt, elemental_error);
+
+      // Set errors for post-processing and find extrema
+      max_err = 0.0;
+      min_err = 1e6;
+      for (unsigned e = 0; e < n_elements; e++)
+      {
+        dynamic_cast<PERTURBED_ELEMENT*>(Fluid_mesh_pt->element_pt(e))
+          ->set_error(elemental_error[e]);
+
+        max_err = std::max(max_err, elemental_error[e]);
+        min_err = std::min(min_err, elemental_error[e]);
+      }
+
+      oomph_info << "Max error is " << max_err << std::endl;
+      oomph_info << "Min error is " << min_err << std::endl;
+    }
 
     void doc_solution()
     {
       oomph_info << "doc_solution: " << this->doc_info().number() << std::endl;
+
+      double max_err = 0.0;
+      double min_err = 0.0;
+      this->compute_error_estimate(max_err, min_err);
+
       std::ofstream output_stream;
       output_stream.precision(16);
       std::string filename;
@@ -2028,7 +2066,8 @@ namespace oomph
         filename = this->doc_info().directory() + "/perturbed_flux_trace.dat";
         output_stream.open(filename, std::ios_base::app);
         output_stream << this->doc_info().number() << " "
-                      << Flux_lagrange_multiplier_data_pt->value(0) << std::endl;
+                      << Flux_lagrange_multiplier_data_pt->value(0)
+                      << std::endl;
         output_stream.close();
 
         filename = this->doc_info().directory() + "/flux_surface" +
@@ -2058,6 +2097,8 @@ namespace oomph
         output_stream << left_hand_node_pt->value(10) << " ";
         output_stream << right_hand_node_pt->value(10) << " ";
         output_stream << Tilde_external_pressure_data_pt->value(0) << " ";
+        output_stream << max_err << " ";
+        output_stream << min_err << " ";
         // output_stream << Tilde_external_pressure_data_pt->value(1) << " ";
         output_stream << std::endl;
         output_stream.close();
@@ -2206,11 +2247,11 @@ namespace oomph
         output_stream.close();
 
 
-        // unsigned n_element = Bulk_mesh_pt->nelement();
+        // unsigned n_element = Fluid_mesh_pt->nelement();
         // for (unsigned n = 0; n < n_element; n++)
         // {
         //   Vector<double> element_residuals(ndof());
-        //   dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(n))
+        //   dynamic_cast<PERTURBED_ELEMENT*>(Fluid_mesh_pt->element_pt(n))
         //     ->debug_jacobian(ndof(), element_residuals, jacobian,
         //     jacobianFD);
         // }
@@ -2220,7 +2261,7 @@ namespace oomph
         // for (unsigned n = 0; n < n_element; n++)
         //{
         //  dynamic_cast<
-        //    DebugElasticAxisymmetricVolumeConstraintBoundingElement<ELEMENT>*>(
+        //    DebugElasticAxisymmetricVolumeConstraintBoundingElement<PERTURBED_ELEMENT>*>(
         //    Volume_computation_mesh_pt->element_pt(n))
         //    ->debug_jacobian(ndof(), element_residuals, jacobian,
         //    jacobianFD);
@@ -2230,7 +2271,7 @@ namespace oomph
         // Vector<double> element_residuals(ndof());
         // for (unsigned n = 0; n < n_element; n++)
         //{
-        //  dynamic_cast<DebugImposeImpenetrabilityElement<ELEMENT>*>(
+        //  dynamic_cast<DebugImposeImpenetrabilityElement<PERTURBED_ELEMENT>*>(
         //    No_penetration_boundary_mesh_pt->element_pt(n))
         //    ->debug_jacobian(ndof(), element_residuals, jacobian,
         //    jacobianFD);
