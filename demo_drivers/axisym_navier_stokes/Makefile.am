@@ -1,6 +1,5 @@
 SUBDIRS = \
 axi_static_cap \
-axi_dynamic_cap \
 two_fluid_spherical_cap \
 rotating_ends \
 spin_up \
@@ -10,7 +9,7 @@ two_layer_interface_axisym \
 rayleigh_instability \
 fibre \
 counter_rotating_disks \
-temp
+obtuse_corner_flow
 
 if SUPPRESS_TRIANGLE_LIB
 else
