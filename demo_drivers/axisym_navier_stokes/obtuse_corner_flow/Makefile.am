@@ -1,34 +1,28 @@
 #Include commands common to every Makefile.am
 include $(top_srcdir)/config/makefile_templates/demo_drivers
 
-all: \
-	axi_dynamic_cap \
-	create_parameter_files \
-	continuation_run \
-	run_tests
+all: obtuse_corner_flow run_tests 
 
 # Name of executables
 check_PROGRAMS= \
-	axi_dynamic_cap \
-	create_parameter_files \
-	continuation_run \
+	obtuse_corner_flow \
 	run_tests
 
-axi_dynamic_cap_SOURCES = axi_dynamic_cap.cc 
-create_parameter_files_SOURCES = create_parameter_files.cc
-continuation_run_SOURCES = continuation_run.cc
+# Sources for second executable
+obtuse_corner_flow_SOURCES = obtuse_corner_flow.cc
 run_tests_SOURCES = run_tests.cc
 
 # Required libraries: 
 # $(FLIBS) is included in case the solver involves fortran sources.
 LDADD = -L@libdir@ \
-	-laxisym_navier_stokes \
-	-lfluid_interface \
-	-lsolid \
-	-lconstitutive \
-	-lgeneric \
-	$(EXTERNAL_LIBS) $(FLIBS)
-#-lboost_unit_test_framework -lgcov
+		-lnavier_stokes \
+		-laxisym_navier_stokes \
+		-lfluid_interface \
+		-lsolid \
+		-lconstitutive \
+		-lgeneric \
+		$(EXTERNAL_LIBS) $(FLIBS)
+#-lgcov 
 
 # Add the paranoid and range checking flags
-AM_CPPFLAGS += #-DPARANOID -DRANGE_CHECKING --coverage -O0 # -Wfatal-errors 
+AM_CPPFLAGS += #-DPARANOID  -DRANGE_CHECKING -ggdb -O0 -Wno-misleading-indentation --coverage
