@@ -2,45 +2,24 @@
 #define RUN_TESTS_HEADER
 
 #include <iostream>
+#include <cmath>
 
+// Oomph-lib headers
 #include "generic.h"
+#include "navier_stokes.h"
 #include "axisym_navier_stokes.h"
-#include "fluid_interface.h"
-#include "constitutive.h"
-#include "solid.h"
-#include "meshes/triangle_mesh.h"
 
-// Local include files
-#include "singular_axisym_dynamic_cap_problem.h"
+// problem headers
+#include "axisym_sector_problem.h"
+#include "singular_axisym_sector_problem.h"
 
-#include "singular_axisym_navier_stokes_elements.h"
-#include "projectable_axisymmetric_Ttaylor_hood_elements.h"
+// element headers
+#include "axisym_navier_stokes_with_singularity.h"
+#include "my_navier_stokes_elements_with_singularity.h"
 
-#include "parameters.h"
-
+// Utility headers
+#include "parameter_values.h"
+#include "parse_arguments.h"
 #include "utility_functions.h"
-
-namespace oomph
-{
-  typedef SingularAxisymNavierStokesElement<
-    ProjectableAxisymmetricTTaylorHoodPVDElement>
-    BASE_ELEMENT;
-  typedef BDF<2> TIMESTEPPER;
-  typedef SingularAxisymDynamicCapProblem<BASE_ELEMENT, TIMESTEPPER>
-    AXISYM_PROBLEM;
-
-  std::shared_ptr<AXISYM_PROBLEM> createBaseProblem(
-    const double& contact_angle = 90.0 * oomph::MathematicalConstants::Pi /
-                                  180.0);
-
-  enum
-  {
-    upper,
-    outer,
-    lower,
-    inner,
-  };
-
-} // namespace oomph
 
 #endif
