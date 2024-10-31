@@ -77,6 +77,7 @@ namespace oomph
       create_slip_elements();
       create_no_penetration_elements(Slip_boundary_id);
       create_no_penetration_elements(Free_surface_boundary_id);
+      create_far_field_elements();
     }
 
     void actions_before_adapt()
@@ -159,22 +160,38 @@ namespace oomph
 
     void debug_jacobian()
     {
-      oomph_info << "output dofs" << endl;
-      std::ofstream output_stream("dofs.txt");
-      describe_dofs(output_stream);
-      output_stream.close();
+      oomph_info << "debug_jacobian" << std::endl;
 
-      CRDoubleMatrix jac;
-      DoubleVector res;
-      oomph_info << "get_jacobian" << endl;
-      get_jacobian(res, jac);
-      jac.sparse_indexed_output("jac.dat", 15, 1);
+      DoubleVector residuals;
+      DenseDoubleMatrix jacobian;
+      DoubleVector residualsFD;
+      DenseDoubleMatrix jacobianFD(ndof());
 
-      unsigned n_dof = ndof();
-      DenseDoubleMatrix fd_jac(n_dof);
-      oomph_info << "get_fd_jacobian" << endl;
-      get_fd_jacobian(res, fd_jac);
-      fd_jac.sparse_indexed_output("fd_jac.dat", 15, 1);
+      get_jacobian(residuals, jacobian);
+      jacobian.sparse_indexed_output(
+        this->Doc_info_pt->directory() + "/jacJ.dat", 16, true);
+      get_fd_jacobian(residualsFD, jacobianFD);
+      jacobianFD.sparse_indexed_output(
+        this->Doc_info_pt->directory() + "/jacfdJ.dat", 16, true);
+
+      bool jacobians_are_equal = compare_matrices(jacobian, jacobianFD);
+
+      if (jacobians_are_equal)
+      {
+        oomph_info << "Computed Jacobian matches finite differenced Jacobian"
+                   << std::endl;
+      }
+      else
+      {
+        oomph_info << "WARNING: Computed Jacobian is different to the finite "
+                      "differenced Jacobian"
+                   << std::endl;
+
+        std::ofstream output_stream;
+        output_stream.open(this->Doc_info_pt->directory() + "/dofs.txt");
+        this->describe_dofs(output_stream);
+        output_stream.close();
+      }
     }
 
     void make_steady()
@@ -231,40 +248,39 @@ namespace oomph
     {
       oomph_info << "set_boundary_conditions" << endl;
 
+      // Pin the pressure at one point
+      this->Bulk_mesh_pt->node_pt(0)->pin(4);
+
       // Set fluid boundary conditions
       // set_dirichlet_bc_on_boundary(Far_field_boundary_id);
       // set_dirichlet_bc_on_boundary(Slip_boundary_id);
       // set_dirichlet_bc_on_boundary(Free_surface_boundary_id);
 
       // Fix end points far field boundary condition lagrange_multipliers
-      // pin_far_field_lagrange_multiplier_end_points();
+      pin_far_field_lagrange_multiplier_end_points();
     }
 
     void pin_far_field_lagrange_multiplier_end_points()
     {
-      // Non-augmented
+      const unsigned n_el = Far_field_mesh_pt->nelement();
+      for (unsigned i_el = 0; i_el < n_el; i_el++)
       {
-        const unsigned n_el = Far_field_mesh_pt->nelement();
-        const double zero_value = 0.0;
-        for (unsigned i_el = 0; i_el < n_el; i_el++)
+        FarFieldElement<ELEMENT>* el_pt =
+          dynamic_cast<FarFieldElement<ELEMENT>*>(
+            Far_field_mesh_pt->element_pt(i_el));
+        const unsigned n_nod = el_pt->nnode();
+        for (unsigned i_nod = 0; i_nod < n_nod; i_nod++)
         {
-          FarFieldElement<ELEMENT>* el_pt =
-            dynamic_cast<FarFieldElement<ELEMENT>*>(
-              Far_field_mesh_pt->element_pt(i_el));
-          const unsigned n_nod = el_pt->nnode();
-          for (unsigned i_nod = 0; i_nod < n_nod; i_nod++)
+          // Get boundary node
+          const Node* const node_pt = el_pt->node_pt(i_nod);
+          // If node is on either of the other boundaries
+          if (node_pt->is_on_boundary(Slip_boundary_id) ||
+              node_pt->is_on_boundary(Free_surface_boundary_id))
           {
-            // Get boundary node
-            const Node* const node_pt = el_pt->node_pt(i_nod);
-            // If node is on either of the other boundaries
-            if (node_pt->is_on_boundary(Slip_boundary_id) ||
-                node_pt->is_on_boundary(Free_surface_boundary_id))
-            {
-              // then fix the lagrange multiplier to zero
-              oomph_info << "Fix lagrange_multiplier" << std::endl;
-              el_pt->fix_lagrange_multiplier(i_nod, 0, zero_value);
-              el_pt->fix_lagrange_multiplier(i_nod, 1, zero_value);
-            }
+            // then fix the lagrange multiplier to zero
+            oomph_info << "Fix lagrange_multiplier" << std::endl;
+            el_pt->pin_lagrange_multiplier(i_nod, 0);
+            el_pt->pin_lagrange_multiplier(i_nod, 1);
           }
         }
       }
@@ -502,18 +518,15 @@ namespace oomph
       ELEMENT* bulk_elem_pt =
         dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(b, e));
 
-      if (!bulk_elem_pt->is_augmented())
-      {
-        // Find the index of the face of element e along boundary b
-        int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
+      // Find the index of the face of element e along boundary b
+      int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
 
-        // Create new element
-        FarFieldElement<ELEMENT>* el_pt = new FarFieldElement<ELEMENT>(
-          bulk_elem_pt, face_index, Far_field_boundary_id);
+      // Create new element
+      FarFieldElement<ELEMENT>* el_pt = new FarFieldElement<ELEMENT>(
+        bulk_elem_pt, face_index, Far_field_boundary_id);
 
-        // Add it to the mesh
-        Far_field_mesh_pt->add_element_pt(el_pt);
-      }
+      // Add it to the mesh
+      Far_field_mesh_pt->add_element_pt(el_pt);
     }
   }
 
@@ -535,6 +548,8 @@ namespace oomph
         }
       }
     }
+
+    oomph_info << "Number of unknowns: " << assign_eqn_numbers() << std::endl;
   }
 
   template<class ELEMENT>

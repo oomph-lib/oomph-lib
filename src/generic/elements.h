@@ -4475,6 +4475,43 @@ namespace oomph
     /// Broken assignment operator
     /*void operator=(const FaceElement&) = delete;*/
 
+
+    /// Add the positions of the other nodes in the bulk element as external
+    /// data. This enables the us to fill in the dependencies of the mesh
+    /// deformation on the internal dofs and vice-versa, so that the Jacobian
+    /// is complete.
+    void add_other_bulk_nodes_as_external_data()
+    {
+      // Add dependence on other solide nodes of the bulk element as external
+      // data.
+      // Find the nodes
+      std::set<Node*> set_of_nodes;
+      const unsigned n_node = bulk_element_pt()->nnode();
+      for (unsigned n = 0; n < n_node; n++)
+      {
+        set_of_nodes.insert(bulk_element_pt()->node_pt(n));
+      }
+
+      // Remove the nodes on the face
+      const unsigned n_node_bounding = this->nnode();
+      for (unsigned n = 0; n < n_node_bounding; n++)
+      {
+        // Now delete the nodes from the set
+        set_of_nodes.erase(this->node_pt(n));
+      }
+
+      // Now add the rest of the nodes as external data
+      for (std::set<Node*>::iterator it = set_of_nodes.begin();
+           it != set_of_nodes.end();
+           ++it)
+      {
+        // Add as external data, noting the the Node is a Data object and the
+        // nodal values will be added this way but not the position.
+        this->add_external_data(*it);
+      }
+    }
+
+
     /// Access function for the boundary number in bulk mesh
     inline const unsigned& boundary_number_in_bulk_mesh() const
     {

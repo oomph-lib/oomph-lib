@@ -11,7 +11,6 @@ namespace oomph
   // surface tension term
   template<class ELEMENT>
   class FarFieldElement : public virtual NavierStokesFaceElement,
-                          public virtual SolidFaceElement,
                           public virtual FaceGeometry<ELEMENT>
   {
   private:
@@ -27,10 +26,7 @@ namespace oomph
     FarFieldElement(FiniteElement* const& element_pt,
                     const int& face_index,
                     const unsigned& id = 0)
-      : NavierStokesFaceElement(),
-        SolidFaceElement(),
-        FaceGeometry<ELEMENT>(),
-        Lagrange_id(id)
+      : NavierStokesFaceElement(), FaceGeometry<ELEMENT>(), Lagrange_id(id)
     {
       // Attach the geometrical information to the element
       // This function also assigned nbulk_value from required_nvalue of the
@@ -38,16 +34,16 @@ namespace oomph
       element_pt->build_face_element(face_index, this);
 
       // Add storage for the Lagrange multipliers
-      Vector<unsigned> additional_data_values(this->nnode());
-      for (unsigned n = 0; n < this->nnode(); n++)
-      {
-        additional_data_values[n] += this->bulk_element_pt()->dim();
-      }
+      Vector<unsigned> n_additional_values(nnode(), bulk_element_pt()->dim());
 
       // Now add storage for Lagrange multipliers and set the map containing
       // the position of the first entry of this face element's
       // additional values.
-      this->add_additional_values(additional_data_values, Lagrange_id);
+      this->add_additional_values(n_additional_values, Lagrange_id);
+
+      // Add the other nodes as external data as we are imposing a constraint
+      // on dudx
+      this->add_other_bulk_nodes_as_external_data();
     }
 
     /// Return the index at which the lagrange multiplier is
@@ -100,15 +96,29 @@ namespace oomph
     }
 
     // Fill in contribution from Jacobian
-    // void fill_in_contribution_to_jacobian(Vector<double>& residuals,
-    //                                      DenseMatrix<double>& jacobian)
-    //{
-    //  // Call the generic routine with the flag set to 1
-    //  // fill_in_generic_contribution_to_residuals(residuals, jacobian, 1);
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
+    {
+      FiniteElement::fill_in_contribution_to_jacobian(residuals, jacobian);
+      // Call the generic routine with the flag set to 1
+      // fill_in_generic_contribution_to_residuals(residuals, jacobian, 1);
 
-    //  // fill_in_jacobian_from_internal_by_fd(residuals, jacobian, true);
-    //  // fill_in_jacobian_from_external_by_fd(residuals, jacobian, true);
-    //}
+      // fill_in_jacobian_from_internal_by_fd(residuals, jacobian, true);
+      // fill_in_jacobian_from_external_by_fd(residuals, jacobian, true);
+    }
+
+    /// Specify the value of nodal zeta from the face geometry
+    /// The "global" intrinsic coordinate of the element when
+    /// viewed as part of a geometric object should be given by
+    /// the FaceElement representation, by default (needed to break
+    /// indeterminacy if bulk element is SolidElement)
+    double zeta_nodal(const unsigned& n,
+                      const unsigned& k,
+                      const unsigned& i) const
+    {
+      return FaceElement::zeta_nodal(n, k, i);
+    }
+
 
     /// Overload the output function
     void output(std::ostream& outfile)

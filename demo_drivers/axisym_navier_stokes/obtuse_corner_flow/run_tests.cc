@@ -44,9 +44,10 @@ BOOST_AUTO_TEST_CASE(axisym_sector_problem)
   AxisymSectorProblem<
     ProjectableAxisymmetricTaylorHoodElement<AxisymmetricTTaylorHoodElement>>
     problem;
-  problem.pin_far_field_elements();
 
-  //problem.debug_jacobian();
+  // problem.pin_far_field_elements();
+
+  problem.debug_jacobian();
 
   // Unsteady problem
   const double dt = 2e-2;
