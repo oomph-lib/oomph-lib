@@ -35,8 +35,8 @@ int main(int argc, char** argv)
   Parameters parameters;
 
   // Create problem
-  AxisymSectorProblem<SingularAxisymNavierStokesElement<
-    ProjectableAxisymmetricTTaylorHoodPVDElement>>
+  AxisymSectorProblem<
+    ProjectableAxisymmetricTaylorHoodElement<AxisymmetricTTaylorHoodElement>>
     problem;
 
   // Unsteady problem

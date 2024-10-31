@@ -20,6 +20,8 @@
 #include "parameters.h"
 #include "pressure_evaluation_elements.h"
 #include "projectable_axisymmetric_Ttaylor_hood_elements.h"
+#include "sector_tri_mesh.template.h"
+#include "sector_tri_mesh.template.cc"
 #include "singular_fluid_traction_elements.h"
 #include "utility_functions.h"
 
@@ -31,7 +33,7 @@ namespace oomph
   {
   private:
     /// Private variables
-    RefineableTriangleMesh<ELEMENT>* Bulk_mesh_pt;
+    SectorTriMesh<ELEMENT>* Bulk_mesh_pt;
     Node* Contact_line_node_pt;
 
     Mesh* No_penetration_boundary_mesh_pt;
@@ -47,14 +49,14 @@ namespace oomph
       // Create and add the timestepper
       add_time_stepper_pt(new BDF<2>);
 
+      // Assign doc info pointer
+      Doc_info.set_directory("RESLT");
+      Doc_info.number() = 0;
+
       // Create an empty mesh
       add_bulk_mesh();
       add_non_adaptive_sub_meshes();
       build_global_mesh();
-
-      // Assign doc info pointer
-      Doc_info.set_directory("RESLT");
-      Doc_info.number() = 0;
 
       // From here should be actions_after_adapt
       actions_after_adapt();
@@ -316,8 +318,16 @@ namespace oomph
     // ---------------------------------
 
     // Generate the mesh using the template ELEMENT
-    Bulk_mesh_pt = new RefineableTriangleMesh<ELEMENT>(triangle_mesh_parameters,
-                                                       this->time_stepper_pt());
+    Bulk_mesh_pt =
+      new SectorTriMesh<ELEMENT>(10,
+                                 10,
+                                 0.9,
+                                 135.0 * MathematicalConstants::Pi / 180.0,
+                                 this->time_stepper_pt());
+
+    Bulk_mesh_pt->output_boundaries(Doc_info.directory() + "/boundaries.dat");
+    Bulk_mesh_pt->output(Doc_info.directory() + "/mesh.dat", 3);
+    Bulk_mesh_pt->output(Doc_info.directory() + "/mesh2.dat", 2);
 
     // Add mesh to problem
     add_sub_mesh(Bulk_mesh_pt);
