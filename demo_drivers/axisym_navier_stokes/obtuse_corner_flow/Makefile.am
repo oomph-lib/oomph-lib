@@ -2,6 +2,7 @@
 include $(top_srcdir)/config/makefile_templates/demo_drivers
 
 all: obtuse_corner_flow run_tests 
+	./run_tests
 
 # Name of executables
 check_PROGRAMS= \

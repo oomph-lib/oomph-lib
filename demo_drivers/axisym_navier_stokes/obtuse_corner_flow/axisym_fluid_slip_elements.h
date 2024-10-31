@@ -586,7 +586,7 @@ namespace oomph
       ELEMENT* bulk_el_pt = dynamic_cast<ELEMENT*>(this->bulk_element_pt());
 
       // Get the pressure from the bulk element
-      double interpolated_p = bulk_el_pt->interpolated_p_nst(s_bulk);
+      double interpolated_p = bulk_el_pt->interpolated_p_axi_nst(s_bulk);
 
       /// Return the interpolated pressure
       return (interpolated_p);

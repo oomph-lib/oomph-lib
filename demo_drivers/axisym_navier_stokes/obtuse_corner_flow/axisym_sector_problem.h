@@ -2,21 +2,26 @@
 #define AXISYM_SECTOR_PROBLEM_HEADER
 
 #include "generic.h"
-#include "solid.h"
-//#include "constitutive.h"
 #include "navier_stokes.h"
 #include "fluid_interface.h"
 #include "meshes/triangle_mesh.h"
 
-#include "free_surface_element.h"
-#include "far_field_element.h"
+/// Local headers
+#include "axisym_fluid_slip_elements.h"
+#include "debug_impose_impenetratibility_elements.h"
 #include "domain_boundaries.h"
-#include "parameters.h"
-#include "parameter_values.h"
-#include "parameter_functions.h"
+#include "eigensolution_elements.h"
+#include "eigensolution_functions.h"
+#include "far_field_element.h"
+#include "free_surface_element.h"
 #include "my_error_estimator.h"
-
-#include "fluid_slip_elements.h"
+#include "parameter_functions.h"
+#include "parameter_values.h"
+#include "parameters.h"
+#include "pressure_evaluation_elements.h"
+#include "projectable_axisymmetric_Ttaylor_hood_elements.h"
+#include "singular_fluid_traction_elements.h"
+#include "utility_functions.h"
 
 namespace oomph
 {
@@ -57,9 +62,6 @@ namespace oomph
       rebuild_global_mesh();
       oomph_info << "Number of unknowns: " << assign_eqn_numbers() << std::endl;
 
-      // Remove solid mesh equations and azimuthal velocity
-      pin_solid_dofs();
-
       // Set the boundary conditions
       set_boundary_conditions();
 
@@ -72,7 +74,7 @@ namespace oomph
     }
 
   private:
-    RefineableSolidTriangleMesh<ELEMENT>* Bulk_mesh_pt;
+    RefineableTriangleMesh<ELEMENT>* Bulk_mesh_pt;
     SolidNode* Contact_line_solid_node_pt;
 
     Mesh* No_penetration_boundary_mesh_pt;
@@ -229,55 +231,6 @@ namespace oomph
 
     void setup_pressure_contribution_elements();
 
-  public:
-    void pin_solid_dofs()
-    {
-      oomph_info << "pin_solid_dofs" << endl;
-
-      // Set all azimuthal velocities to zero
-      unsigned n_node = Bulk_mesh_pt->nnode();
-      for (unsigned n = 0; n < n_node; n++)
-      {
-        Bulk_mesh_pt->node_pt(n)->pin_position(0);
-        Bulk_mesh_pt->node_pt(n)->pin_position(1);
-      }
-
-
-      /* We don't have a contact angle element
-      // Fix the extra kinematic lagrange_multiplier of the contact angle
-      // point
-      dynamic_cast<PointFluidInterfaceBoundingElement*>(
-        Contact_angle_mesh_pt->element_pt(0))
-        ->fix_lagrange_multiplier(0.0);
-      */
-
-      oomph_info << "Number of unknowns: " << assign_eqn_numbers() << std::endl;
-    }
-
-    void unpin_solid_dofs()
-    {
-      oomph_info << "pin_solid_dofs" << endl;
-
-      // Set all azimuthal velocities to zero
-      unsigned n_node = Bulk_mesh_pt->nnode();
-      for (unsigned n = 0; n < n_node; n++)
-      {
-        Bulk_mesh_pt->node_pt(n)->unpin_position(0);
-        Bulk_mesh_pt->node_pt(n)->unpin_position(1);
-      }
-
-
-      /* We don't have a contact angle element
-      // Fix the extra kinematic lagrange_multiplier of the contact angle
-      // point
-      dynamic_cast<PointFluidInterfaceBoundingElement*>(
-        Contact_angle_mesh_pt->element_pt(0))
-        ->fix_lagrange_multiplier(0.0);
-      */
-
-      oomph_info << "Number of unknowns: " << assign_eqn_numbers() << std::endl;
-    }
-
   private:
     void set_boundary_conditions()
     {
@@ -389,8 +342,8 @@ namespace oomph
     // ---------------------------------
 
     // Generate the mesh using the template ELEMENT
-    Bulk_mesh_pt = new RefineableSolidTriangleMesh<ELEMENT>(
-      triangle_mesh_parameters, this->time_stepper_pt());
+    Bulk_mesh_pt = new RefineableTriangleMesh<ELEMENT>(triangle_mesh_parameters,
+                                                       this->time_stepper_pt());
 
     // Add mesh to problem
     add_sub_mesh(Bulk_mesh_pt);
@@ -419,11 +372,11 @@ namespace oomph
 
       // What is the index of the face of element e along boundary b
       int face_index = bulk_mesh_pt->face_index_at_boundary(b, e);
-      NavierStokesSlipElement<ELEMENT>* slip_element_pt = 0;
+      AxisymmetricNavierStokesSlipElement<ELEMENT>* slip_element_pt = 0;
 
       // Build the corresponding slip element
       slip_element_pt =
-        new NavierStokesSlipElement<ELEMENT>(bulk_elem_pt, face_index);
+        new AxisymmetricNavierStokesSlipElement<ELEMENT>(bulk_elem_pt, face_index);
 
       // Set the pointer to the prescribed slip function
       slip_element_pt->slip_fct_pt() = &parameters::prescribed_slip_fct;

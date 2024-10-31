@@ -3,64 +3,64 @@
 #include <iostream>
 #include <cmath>
 
+// OOMPH-LIB include files
 #include "generic.h"
-#include "navier_stokes.h"
 #include "axisym_navier_stokes.h"
+#include "fluid_interface.h"
+#include "constitutive.h"
+#include "solid.h"
+#include "meshes/triangle_mesh.h"
 
-#include "axisym_navier_stokes.h"
-#include "axisym_navier_stokes_with_singularity.h"
-#include "my_navier_stokes_elements_with_singularity.h"
-
+// Local include files
+#include "parameters.h"
+#include "projectable_axisymmetric_Ttaylor_hood_elements.h"
+#include "singular_axisym_navier_stokes_elements.h"
 #include "axisym_sector_problem.h"
-#include "parameter_values.h"
-
-#include "my_navier_stokes_elements_with_singularity.h"
-
-#include "parse_arguments.h"
 
 using namespace oomph;
 
 // Start of the main function
 int main(int argc, char** argv)
 {
-  std::cout << "Test case 1" << std::endl;
-  Arguments passed_arguments(argc, argv);
-  bool debug = passed_arguments.has_debug();
+#ifdef OOMPH_HAS_MPI
+  // Setup mpi but don't make a copy of mpi_comm_world because
+  // mumps wants to work with the real thing.
+  bool make_copy_of_mpi_comm_world = false;
+  MPI_Helpers::init(argc, argv, make_copy_of_mpi_comm_world);
+#endif
 
-  // Set parameter values
-  parameters::x_centre[0] = 2.0;
+  oomph_info << "obtuse_corner_flow" << std::endl;
+
+  // Problem parameters
+  Parameters parameters;
 
   // Create problem
-  AxisymSectorProblem<AxisymNavierStokesElementWithSingularity<
-    Hijacked<ProjectableAxisymmetricTaylorHoodElement<
-      PseudoSolidNodeUpdateElement<AxisymmetricTTaylorHoodElement,
-                                   TPVDElement<2, 3>>>>>>
+  AxisymSectorProblem<SingularAxisymNavierStokesElement<
+    ProjectableAxisymmetricTTaylorHoodPVDElement>>
     problem;
 
-  if (debug)
-  {
-    problem.debug_residuals();
-    problem.debug_jacobian();
-  }
-  else
-  {
-    // Unsteady problem
-    const double dt = 2e-2;
-    const double ft = 5 * dt;
-    const unsigned nt = std::ceil(ft / dt);
+  // Unsteady problem
+  const double dt = 2e-2;
+  const double ft = 5 * dt;
+  const unsigned nt = std::ceil(ft / dt);
 
-    for (unsigned it = 0; it < nt; it++)
-    {
-      std::cout << "unsteady_newton_solve" << std::endl;
-      problem.unsteady_newton_solve(dt);
-      problem.doc_solution();
-    }
-
-    // Steady problem
-    problem.make_steady();
-    problem.steady_newton_solve();
+  for (unsigned it = 0; it < nt; it++)
+  {
+    std::cout << "unsteady_newton_solve" << std::endl;
+    problem.unsteady_newton_solve(dt);
     problem.doc_solution();
   }
 
+  // Steady problem
+  problem.make_steady();
+  problem.steady_newton_solve();
+  problem.doc_solution();
+
+// Finalise MPI after all computations are complete
+#ifdef OOMPH_HAS_MPI
+  MPI_Helpers::finalize();
+#endif
+
+  // Return 0 to tell everyone that the program finished successfully
   return 0;
 }

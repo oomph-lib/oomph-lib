@@ -11,15 +11,14 @@
 
 // problem headers
 #include "axisym_sector_problem.h"
-#include "singular_axisym_sector_problem.h"
+//#include "singular_axisym_sector_problem.h"
 
-// element headers
-#include "axisym_navier_stokes_with_singularity.h"
-#include "my_navier_stokes_elements_with_singularity.h"
+// Element headers
+#include "projectable_axisymmetric_Ttaylor_hood_elements.h"
+#include "singular_axisym_navier_stokes_elements.h"
 
 // Utility headers
 #include "parameter_values.h"
-#include "parse_arguments.h"
 #include "utility_functions.h"
 
 #endif
