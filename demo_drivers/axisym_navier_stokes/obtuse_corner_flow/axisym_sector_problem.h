@@ -45,9 +45,6 @@ namespace oomph
       // Omega
       setup_bulk_elements();
 
-      // S1
-      create_free_surface_elements(Bulk_mesh_pt);
-
       // S2
       // create_far_field_elements(Bulk_mesh_pt);
 
@@ -56,7 +53,6 @@ namespace oomph
       create_slip_elements(Bulk_mesh_pt);
 
       // L0
-      // create_contact_angle_elements(Bulk_mesh_pt, Free_surface_mesh_pt);
 
       rebuild_global_mesh();
       oomph_info << "Number of unknowns: " << assign_eqn_numbers() << std::endl;
@@ -78,10 +74,8 @@ namespace oomph
   private:
     RefineableSolidTriangleMesh<ELEMENT>* Bulk_mesh_pt;
     SolidNode* Contact_line_solid_node_pt;
-    ConstitutiveLaw* Constitutive_law_pt;
 
     Mesh* No_penetration_boundary_mesh_pt;
-    Mesh* Free_surface_mesh_pt;
     Mesh* Far_field_mesh_pt;
     Mesh* Slip_boundary_mesh_pt;
     Mesh* Contact_angle_mesh_pt;
@@ -101,8 +95,6 @@ namespace oomph
     {
       No_penetration_boundary_mesh_pt = new Mesh;
       add_sub_mesh(No_penetration_boundary_mesh_pt);
-      Free_surface_mesh_pt = new Mesh;
-      add_sub_mesh(Free_surface_mesh_pt);
       Far_field_mesh_pt = new Mesh;
       add_sub_mesh(Far_field_mesh_pt);
       Slip_boundary_mesh_pt = new Mesh;
@@ -120,8 +112,6 @@ namespace oomph
       {
         // Upcast from GeneralisedElement to the present element
         ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
-
-        el_pt->constitutive_law_pt() = Constitutive_law_pt;
 
         // Set the Reynolds number
         el_pt->re_pt() = &parameters::reynolds_number;
@@ -143,8 +133,6 @@ namespace oomph
       }
       delete Doc_info_pt;
       Doc_info_pt = 0;
-      delete Constitutive_law_pt;
-      Constitutive_law_pt = 0;
     }
 
     // Delete the created elements
@@ -220,7 +208,6 @@ namespace oomph
     void add_bulk_mesh();
     void create_slip_elements(Mesh* const& bulk_mesh_pt);
     void create_no_penetration_elements(Mesh* const& bulk_mesh_pt);
-    void create_free_surface_elements(Mesh* const& bulk_mesh_pt);
     void create_contact_angle_elements(Mesh* const& bulk_mesh_pt,
                                        Mesh* const& surface_mesh_pt);
     void create_far_field_elements(Mesh* const& bulk_mesh_pt);
@@ -256,15 +243,6 @@ namespace oomph
       }
 
 
-      // Pin lagrange multipliers on the free surface
-      unsigned n_element = Free_surface_mesh_pt->nelement();
-      for (unsigned n = 0; n < n_element; n++)
-      {
-        dynamic_cast<MyFreeSurfaceElement<ELEMENT>*>(
-          Free_surface_mesh_pt->element_pt(n))
-          ->pin_lagrange_multiplier();
-      }
-
       /* We don't have a contact angle element
       // Fix the extra kinematic lagrange_multiplier of the contact angle
       // point
@@ -286,16 +264,6 @@ namespace oomph
       {
         Bulk_mesh_pt->node_pt(n)->unpin_position(0);
         Bulk_mesh_pt->node_pt(n)->unpin_position(1);
-      }
-
-
-      // Pin lagrange multipliers on the free surface
-      unsigned n_element = Free_surface_mesh_pt->nelement();
-      for (unsigned n = 0; n < n_element; n++)
-      {
-        dynamic_cast<MyFreeSurfaceElement<ELEMENT>*>(
-          Free_surface_mesh_pt->element_pt(n))
-          ->unpin_lagrange_multiplier();
       }
 
 
@@ -353,33 +321,6 @@ namespace oomph
       }
     }
 
-    void pin_free_surface_contact_line_point()
-    {
-      // Non-augmented
-      {
-        const unsigned n_el = Free_surface_mesh_pt->nelement();
-        const double zero_value = 0.0;
-        for (unsigned i_el = 0; i_el < n_el; i_el++)
-        {
-          MyFreeSurfaceElement<ELEMENT>* el_pt =
-            dynamic_cast<MyFreeSurfaceElement<ELEMENT>*>(
-              Free_surface_mesh_pt->element_pt(i_el));
-          const unsigned n_nod = el_pt->nnode();
-          for (unsigned i_nod = 0; i_nod < n_nod; i_nod++)
-          {
-            // Get boundary node
-            const Node* const node_pt = el_pt->node_pt(i_nod);
-            // If node is on either of the other boundaries
-            if (node_pt->is_on_boundary(Slip_boundary_id))
-            {
-              // then fix the lagrange multiplier to zero
-              oomph_info << "Fix lagrange_multiplier" << std::endl;
-              el_pt->fix_lagrange_multiplier(i_nod, zero_value);
-            }
-          }
-        }
-      }
-    }
 
     void pin_far_field_lagrange_multiplier_end_points()
     {
@@ -455,8 +396,6 @@ namespace oomph
     add_sub_mesh(Bulk_mesh_pt);
 
     // refine_mesh_for_weak_contact_angle_constraint();
-
-    Constitutive_law_pt = new GeneralisedHookean(&parameters::nu);
   }
 
   template<class ELEMENT>
@@ -527,44 +466,6 @@ namespace oomph
       // Add the prescribed-flux element to the surface mesh
       No_penetration_boundary_mesh_pt->add_element_pt(
         no_penetration_element_pt);
-    }
-  }
-
-  template<class ELEMENT>
-  void AxisymSectorProblem<ELEMENT>::create_free_surface_elements(
-    Mesh* const& bulk_mesh_pt)
-  {
-    oomph_info << "create_free_surface_elements" << endl;
-
-    // Loop over the free surface boundary and create the "interface elements
-    unsigned b = Free_surface_boundary_id;
-
-    // How many bulk fluid elements are adjacent to boundary b?
-    unsigned n_element = bulk_mesh_pt->nboundary_element(b);
-
-    // Loop over the bulk fluid elements adjacent to boundary b?
-    for (unsigned e = 0; e < n_element; e++)
-    {
-      // Get pointer to the bulk fluid element that is
-      // adjacent to boundary b
-      ELEMENT* bulk_elem_pt =
-        dynamic_cast<ELEMENT*>(bulk_mesh_pt->boundary_element_pt(b, e));
-
-      // Find the index of the face of element e along boundary b
-      int face_index = bulk_mesh_pt->face_index_at_boundary(b, e);
-
-      // Create new element
-      MyFreeSurfaceElement<ELEMENT>* el_pt = new MyFreeSurfaceElement<ELEMENT>(
-        bulk_elem_pt, face_index, Lagrange_id::Free_surface);
-
-      // Add the appropriate boundary number
-      el_pt->set_boundary_number_in_bulk_mesh(b);
-
-      // Add the capillary number
-      el_pt->ca_pt() = &parameters::capillary_number;
-
-      // Add it to the mesh
-      Free_surface_mesh_pt->add_element_pt(el_pt);
     }
   }
 
@@ -918,15 +819,6 @@ namespace oomph
     //    output_stream << "x,y,p," << endl;
     //    Pressure_contribution_mesh_2_pt->output(output_stream, npts);
     //    output_stream.close();
-    //
-    //     sprintf(filename,
-    //             "%s/free_surface%i.csv",
-    //             Doc_info_pt->directory().c_str(),
-    //             Doc_info_pt->number());
-    //     output_stream.open(filename);
-    //     output_stream << "x,y,u,v,p,lagrange_multiplier" << endl;
-    //     Free_surface_mesh_pt->output(output_stream, npts);
-    //     output_stream.close();
     //
     //     sprintf(filename,
     //             "%s/slip_surface%i.csv",
