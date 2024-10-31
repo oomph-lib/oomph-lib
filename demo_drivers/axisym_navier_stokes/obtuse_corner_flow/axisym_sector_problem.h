@@ -38,7 +38,7 @@ namespace oomph
     Mesh* Far_field_mesh_pt;
     Mesh* Slip_boundary_mesh_pt;
 
-    DocInfo* Doc_info_pt;
+    DocInfo Doc_info;
 
   public:
     // Constructor
@@ -53,8 +53,8 @@ namespace oomph
       build_global_mesh();
 
       // Assign doc info pointer
-      Doc_info_pt = new DocInfo("RESLT");
-      Doc_info_pt->number() = 0;
+      Doc_info.set_directory("RESLT");
+      Doc_info.number() = 0;
 
       // From here should be actions_after_adapt
       actions_after_adapt();
@@ -130,8 +130,6 @@ namespace oomph
         delete this->mesh_pt(i);
         this->mesh_pt(i) = 0;
       }
-      delete Doc_info_pt;
-      Doc_info_pt = 0;
     }
 
     // Delete the created elements
@@ -169,10 +167,10 @@ namespace oomph
 
       get_jacobian(residuals, jacobian);
       jacobian.sparse_indexed_output(
-        this->Doc_info_pt->directory() + "/jacJ.dat", 16, true);
+        this->Doc_info.directory() + "/jacJ.dat", 16, true);
       get_fd_jacobian(residualsFD, jacobianFD);
       jacobianFD.sparse_indexed_output(
-        this->Doc_info_pt->directory() + "/jacfdJ.dat", 16, true);
+        this->Doc_info.directory() + "/jacfdJ.dat", 16, true);
 
       bool jacobians_are_equal = compare_matrices(jacobian, jacobianFD);
 
@@ -188,7 +186,7 @@ namespace oomph
                    << std::endl;
 
         std::ofstream output_stream;
-        output_stream.open(this->Doc_info_pt->directory() + "/dofs.txt");
+        output_stream.open(this->Doc_info.directory() + "/dofs.txt");
         this->describe_dofs(output_stream);
         output_stream.close();
       }
@@ -603,7 +601,7 @@ namespace oomph
   template<class ELEMENT>
   void AxisymSectorProblem<ELEMENT>::doc_solution()
   {
-    unsigned doc_number = Doc_info_pt->number();
+    unsigned doc_number = Doc_info.number();
 
     oomph_info << "Doc Number: " << doc_number << endl;
 
@@ -613,7 +611,7 @@ namespace oomph
 
     if (doc_number == 0)
     {
-      sprintf(filename, "%s/dofs.txt", Doc_info_pt->directory().c_str());
+      sprintf(filename, "%s/dofs.txt", Doc_info.directory().c_str());
       output_stream.open(filename);
       describe_dofs(output_stream);
       output_stream.close();
@@ -621,8 +619,8 @@ namespace oomph
 
     sprintf(filename,
             "%s/soln%i.dat",
-            Doc_info_pt->directory().c_str(),
-            Doc_info_pt->number());
+            Doc_info.directory().c_str(),
+            Doc_info.number());
     output_stream.open(filename);
     output_stream.precision(15);
     Bulk_mesh_pt->output(output_stream, npts);
@@ -630,8 +628,8 @@ namespace oomph
 
     //    sprintf(filename,
     //            "%s/pressure_1_%i.csv",
-    //            Doc_info_pt->directory().c_str(),
-    //            Doc_info_pt->number());
+    //            Doc_info.directory().c_str(),
+    //            Doc_info.number());
     //    output_stream.open(filename);
     //    output_stream << "x,y,p," << endl;
     //    Pressure_contribution_mesh_1_pt->output(output_stream, npts);
@@ -639,8 +637,8 @@ namespace oomph
     //
     //    sprintf(filename,
     //            "%s/pressure_2_%i.csv",
-    //            Doc_info_pt->directory().c_str(),
-    //            Doc_info_pt->number());
+    //            Doc_info.directory().c_str(),
+    //            Doc_info.number());
     //    output_stream.open(filename);
     //    output_stream << "x,y,p," << endl;
     //    Pressure_contribution_mesh_2_pt->output(output_stream, npts);
@@ -648,8 +646,8 @@ namespace oomph
 
     sprintf(filename,
             "%s/slip_surface%i.csv",
-            Doc_info_pt->directory().c_str(),
-            Doc_info_pt->number());
+            Doc_info.directory().c_str(),
+            Doc_info.number());
     output_stream.open(filename);
     output_stream << "x,y,l_x,l_y,n_x,n_y,u,v" << endl;
     Slip_boundary_mesh_pt->output(output_stream, npts);
@@ -657,8 +655,8 @@ namespace oomph
 
     sprintf(filename,
             "%s/no_penetration_surface%i.csv",
-            Doc_info_pt->directory().c_str(),
-            Doc_info_pt->number());
+            Doc_info.directory().c_str(),
+            Doc_info.number());
     output_stream.open(filename);
     output_stream << "x,y,u,v,p,lagrange_multiplier" << endl;
     No_penetration_boundary_mesh_pt->output(output_stream, 3);
@@ -667,8 +665,8 @@ namespace oomph
     //
     //     sprintf(filename,
     //             "%s/far_field%i.dat",
-    //             Doc_info_pt->directory().c_str(),
-    //             Doc_info_pt->number());
+    //             Doc_info.directory().c_str(),
+    //             Doc_info.number());
     //     output_stream.open(filename);
     //     output_stream
     //       <<
@@ -677,7 +675,7 @@ namespace oomph
     //     Far_field_mesh_pt->output(output_stream);
     //     output_stream.close();
 
-    Doc_info_pt->number()++;
+    Doc_info.number()++;
   }
 } // namespace oomph
 #endif
