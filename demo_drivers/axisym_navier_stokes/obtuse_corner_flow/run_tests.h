@@ -11,7 +11,7 @@
 
 // problem headers
 #include "axisym_sector_problem.h"
-//#include "singular_axisym_sector_problem.h"
+#include "singular_axisym_sector_problem.h"
 
 // Element headers
 #include "projectable_axisymmetric_Ttaylor_hood_elements.h"

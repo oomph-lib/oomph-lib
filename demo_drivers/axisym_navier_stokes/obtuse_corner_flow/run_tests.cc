@@ -47,7 +47,7 @@ BOOST_AUTO_TEST_CASE(axisym_sector_problem)
 
   // problem.pin_far_field_elements();
 
-  problem.debug_jacobian();
+  // problem.debug_jacobian();
 
   // Unsteady problem
   const double dt = 2e-2;
@@ -71,35 +71,33 @@ BOOST_AUTO_TEST_SUITE_END()
 
 BOOST_AUTO_TEST_SUITE(SingularAxisymSectorProblemTest)
 
-// BOOST_AUTO_TEST_CASE(singular_axisym_sector_problem)
-//{
-//   // Set parameter values
-//   Parameters parameters;
-//
-//   // Create problem
-//   SingularAxisymSectorProblem<AxisymNavierStokesElementWithSingularity<
-//     Hijacked<ProjectableAxisymmetricTaylorHoodElement<
-//       PseudoSolidNodeUpdateElement<AxisymmetricTTaylorHoodElement,
-//                                    TPVDElement<2, 3>>>>>>
-//     problem;
-//
-//   // Unsteady problem
-//   const double dt = 2e-2;
-//   const double ft = 5 * dt;
-//   const unsigned nt = std::ceil(ft / dt);
-//
-//   for (unsigned it = 0; it < nt; it++)
-//   {
-//     std::cout << "unsteady_newton_solve" << std::endl;
-//     problem.unsteady_newton_solve(dt);
-//     problem.doc_solution();
-//   }
-//
-//   // Steady problem
-//   problem.make_steady();
-//   problem.steady_newton_solve();
-//   problem.doc_solution();
-// }
+BOOST_AUTO_TEST_CASE(singular_axisym_sector_problem)
+{
+  // Set parameter values
+  Parameters parameters;
+
+  // Create problem
+  SingularAxisymSectorProblem<SingularAxisymNavierStokesElement<
+    ProjectableAxisymmetricTaylorHoodElement<AxisymmetricTTaylorHoodElement>>>
+    problem;
+
+  // Unsteady problem
+  const double dt = 2e-2;
+  const double ft = 5 * dt;
+  const unsigned nt = std::ceil(ft / dt);
+
+  for (unsigned it = 0; it < nt; it++)
+  {
+    std::cout << "unsteady_newton_solve" << std::endl;
+    problem.unsteady_newton_solve(dt);
+    problem.doc_solution();
+  }
+
+  // Steady problem
+  problem.make_steady();
+  problem.steady_newton_solve();
+  problem.doc_solution();
+}
 //
 // BOOST_AUTO_TEST_CASE(debug)
 //{

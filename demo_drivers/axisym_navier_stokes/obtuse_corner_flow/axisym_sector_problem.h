@@ -64,15 +64,15 @@ namespace oomph
     void actions_after_adapt()
     {
       setup_bulk_elements();
-      create_refineable_elements();
+      create_nonrefineable_elements();
       set_boundary_conditions();
 
       /// Is this needed?
-      this->rebuild_global_mesh();
+      rebuild_global_mesh();
       oomph_info << "Number of unknowns: " << assign_eqn_numbers() << std::endl;
     }
 
-    void create_refineable_elements()
+    void create_nonrefineable_elements()
     {
       create_slip_elements();
       create_no_penetration_elements(Slip_boundary_id);
@@ -82,10 +82,10 @@ namespace oomph
 
     void actions_before_adapt()
     {
-      delete_non_refineable_elements();
+      delete_nonrefineable_elements();
     }
 
-    void delete_non_refineable_elements()
+    void delete_nonrefineable_elements()
     {
       delete_elements(No_penetration_boundary_mesh_pt);
       delete_elements(Slip_boundary_mesh_pt);
@@ -248,11 +248,6 @@ namespace oomph
 
       // Pin the pressure at one point
       this->Bulk_mesh_pt->node_pt(0)->pin(4);
-
-      // Set fluid boundary conditions
-      // set_dirichlet_bc_on_boundary(Far_field_boundary_id);
-      // set_dirichlet_bc_on_boundary(Slip_boundary_id);
-      // set_dirichlet_bc_on_boundary(Free_surface_boundary_id);
 
       // Fix end points far field boundary condition lagrange_multipliers
       pin_far_field_lagrange_multiplier_end_points();

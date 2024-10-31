@@ -11,19 +11,16 @@ namespace oomph
   template<class ELEMENT>
   class SingularNavierStokesTractionElement
     : public virtual NavierStokesTractionElement<ELEMENT>,
-      public virtual SolidFaceElement,
-      public virtual DebugJacobianSolidFiniteElement
+      public virtual FaceElement
   {
   public:
     SingularNavierStokesTractionElement(FiniteElement* const& element_pt,
                                         const int& face_index,
                                         Data* const& singular_scaling_data_pt)
       : NavierStokesTractionElement<ELEMENT>(element_pt, face_index),
-        SolidFaceElement()
+        FaceElement()
     {
       this->add_external_data(singular_scaling_data_pt);
-
-      this->add_other_bulk_node_positions_as_external_data();
     }
 
     /// Specify the value of nodal zeta from the face geometry
@@ -68,7 +65,7 @@ namespace oomph
       //    residuals, jacobian, 1);
 
       // this->fill_in_jacobian_from_external_by_fd(residuals, jacobian, false);
-      SolidFiniteElement::fill_in_contribution_to_jacobian(residuals, jacobian);
+      FiniteElement::fill_in_contribution_to_jacobian(residuals, jacobian);
     }
 
     void fill_in_contribution_to_jacobian_and_mass_matrix(

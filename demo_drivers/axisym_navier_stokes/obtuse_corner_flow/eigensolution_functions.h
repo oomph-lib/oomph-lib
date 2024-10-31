@@ -10,7 +10,7 @@ namespace oomph
 {
   namespace parameters
   {
-    SolidNode* x_centre_node_pt;
+    Node* x_centre_node_pt;
 
     double get_radial_distance(const Vector<double>& x,
                                const Vector<double>& x_centre)

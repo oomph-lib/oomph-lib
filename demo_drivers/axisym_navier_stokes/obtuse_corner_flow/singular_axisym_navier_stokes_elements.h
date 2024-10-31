@@ -640,8 +640,7 @@ namespace oomph
       else
       {
         // Construct the jacobian by finite difference
-        SolidFiniteElement::fill_in_contribution_to_jacobian(residuals,
-                                                             jacobian);
+        FiniteElement::fill_in_contribution_to_jacobian(residuals, jacobian);
 
         // The Jacobian is not fully implemented in
         // fill_in_generic_residual_contribution_additional_terms.
@@ -680,7 +679,6 @@ namespace oomph
 
       // Vector of local coordinates
       Vector<double> s(cached_dim);
-      Vector<double> xi(cached_dim);
 
       // Tecplot header info
       outfile << this->tecplot_zone_string(nplot);
@@ -691,7 +689,6 @@ namespace oomph
       {
         // Get local coordinates of plot point
         this->get_s_plot(iplot, nplot, s);
-        this->interpolated_xi(s, xi);
 
         Vector<double> x(cached_dim);
         for (unsigned i = 0; i < cached_dim; i++)
@@ -718,12 +715,6 @@ namespace oomph
 
         // "Total" pressure
         outfile << this->interpolated_p_nst_fe_only(s) << " ";
-
-        // Lagrange coordinates
-        for (unsigned i = 0; i < 2; i++)
-        {
-          outfile << this->interpolated_x(s, i) - xi[i] << " ";
-        }
 
         // Error
         outfile << Error << " ";
