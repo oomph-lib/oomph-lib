@@ -46,6 +46,8 @@ BOOST_AUTO_TEST_CASE(axisym_sector_problem)
     problem;
   problem.pin_far_field_elements();
 
+  //problem.debug_jacobian();
+
   // Unsteady problem
   const double dt = 2e-2;
   const double ft = 5 * dt;

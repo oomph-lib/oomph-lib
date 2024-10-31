@@ -38,40 +38,27 @@
 #include "fluid_interface.h"
 #include "constitutive.h"
 #include "solid.h"
-
-// The mesh
 #include "meshes/triangle_mesh.h"
 
-#include "my_error_estimator.h"
-
+// Local 
 #include "axisym_fluid_slip_elements.h"
-
 #include "axisym_navier_stokes_flux_elements.h"
-
-#include "net_flux_elements.h"
-
-#include "parameters.h"
-
-
 #include "complex_less.h"
-
-#include "volume_constraint_elements_with_output.h"
-
-#include "my_eigenproblem.h"
-
-#include "free_surface_elements.h"
-
-#include "utility_functions.h"
-
-#include "projectable_axisymmetric_Ttaylor_hood_elements.h"
 #include "debug_elastic_axisymmetric_volume_constraint_boundary_elements.h"
 #include "debug_impose_impenetratibility_elements.h"
-
 #include "eigensolution_functions.h"
-#include "pressure_evaluation_elements.h"
-#include "singular_fluid_traction_elements.h"
-#include "parameter_values.h"
+#include "free_surface_elements.h"
+#include "my_eigenproblem.h"
+#include "my_error_estimator.h"
+#include "net_flux_elements.h"
 #include "parameter_functions.h"
+#include "parameter_values.h"
+#include "parameters.h"
+#include "pressure_evaluation_elements.h"
+#include "projectable_axisymmetric_Ttaylor_hood_elements.h"
+#include "singular_fluid_traction_elements.h"
+#include "utility_functions.h"
+#include "volume_constraint_elements_with_output.h"
 
 
 namespace oomph

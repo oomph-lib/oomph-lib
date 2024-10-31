@@ -120,8 +120,8 @@ namespace oomph
   namespace Slip_Parameters
   {
     // Slip length
-    double slip_length = 5e-3;
-    double wall_velocity = 0;
+    double slip_length = 1.0;
+    double wall_velocity = 1.0;
     double* wall_velocity_pt = &wall_velocity;
 
     // Slip length near the on the outer wall near the contact line

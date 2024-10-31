@@ -29,9 +29,20 @@ namespace oomph
   template<class ELEMENT>
   class AxisymSectorProblem : public Problem
   {
+  private:
+    /// Private variables
+    RefineableTriangleMesh<ELEMENT>* Bulk_mesh_pt;
+    Node* Contact_line_node_pt;
+
+    Mesh* No_penetration_boundary_mesh_pt;
+    Mesh* Far_field_mesh_pt;
+    Mesh* Slip_boundary_mesh_pt;
+
+    DocInfo* Doc_info_pt;
+
   public:
     // Constructor
-    AxisymSectorProblem() : Contact_line_solid_node_pt(0)
+    AxisymSectorProblem() : Contact_line_node_pt(0)
     {
       // Create and add the timestepper
       add_time_stepper_pt(new BDF<2>);
@@ -46,53 +57,40 @@ namespace oomph
       Doc_info_pt->number() = 0;
 
       // From here should be actions_after_adapt
-
-      // Omega
-      setup_bulk_elements();
-
-      // S2
-      // create_far_field_elements(Bulk_mesh_pt);
-
-      // S0
-      create_no_penetration_elements(Bulk_mesh_pt);
-      create_slip_elements(Bulk_mesh_pt);
-
-      // L0
-
-      rebuild_global_mesh();
-      oomph_info << "Number of unknowns: " << assign_eqn_numbers() << std::endl;
-
-      // Set the boundary conditions
-      set_boundary_conditions();
-
-      // Setup all the equation numbering and look-up schemes
-      rebuild_global_mesh();
-      oomph_info << "Number of unknowns: " << assign_eqn_numbers() << std::endl;
-
-      // Document the initial conditions
-      doc_solution();
+      actions_after_adapt();
     }
 
-  private:
-    RefineableTriangleMesh<ELEMENT>* Bulk_mesh_pt;
-    SolidNode* Contact_line_solid_node_pt;
-
-    Mesh* No_penetration_boundary_mesh_pt;
-    Mesh* Far_field_mesh_pt;
-    Mesh* Slip_boundary_mesh_pt;
-    Mesh* Contact_angle_mesh_pt;
-
-    DocInfo* Doc_info_pt;
-
-    // Enumeration of Lagrangian identities
-    enum Lagrange_id
+    // Actions before adapt
+    void actions_after_adapt()
     {
-      Free_surface,
-      No_penetration,
-      Far_field,
-    };
+      setup_bulk_elements();
+      create_refineable_elements();
+      set_boundary_conditions();
 
-  public:
+      /// Is this needed?
+      this->rebuild_global_mesh();
+      oomph_info << "Number of unknowns: " << assign_eqn_numbers() << std::endl;
+    }
+
+    void create_refineable_elements()
+    {
+      create_slip_elements();
+      create_no_penetration_elements(Slip_boundary_id);
+      create_no_penetration_elements(Free_surface_boundary_id);
+    }
+
+    void actions_before_adapt()
+    {
+      delete_non_refineable_elements();
+    }
+
+    void delete_non_refineable_elements()
+    {
+      delete_elements(No_penetration_boundary_mesh_pt);
+      delete_elements(Slip_boundary_mesh_pt);
+      delete_elements(Far_field_mesh_pt);
+    }
+
     void add_non_adaptive_sub_meshes()
     {
       No_penetration_boundary_mesh_pt = new Mesh;
@@ -101,13 +99,11 @@ namespace oomph
       add_sub_mesh(Far_field_mesh_pt);
       Slip_boundary_mesh_pt = new Mesh;
       add_sub_mesh(Slip_boundary_mesh_pt);
-      Contact_angle_mesh_pt = new Mesh;
-      add_sub_mesh(Contact_angle_mesh_pt);
     }
 
     void setup_bulk_elements()
     {
-      set_contact_line_node_pt(Bulk_mesh_pt);
+      set_contact_line_node_pt();
 
       unsigned n_bulk = Bulk_mesh_pt->nelement();
       for (unsigned e = 0; e < n_bulk; e++)
@@ -180,6 +176,7 @@ namespace oomph
       get_fd_jacobian(res, fd_jac);
       fd_jac.sparse_indexed_output("fd_jac.dat", 15, 1);
     }
+
     void make_steady()
     {
       ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(8));
@@ -208,18 +205,16 @@ namespace oomph
 
   private:
     void add_bulk_mesh();
-    void create_slip_elements(Mesh* const& bulk_mesh_pt);
-    void create_no_penetration_elements(Mesh* const& bulk_mesh_pt);
-    void create_contact_angle_elements(Mesh* const& bulk_mesh_pt,
-                                       Mesh* const& surface_mesh_pt);
-    void create_far_field_elements(Mesh* const& bulk_mesh_pt);
+    void create_slip_elements();
+    void create_no_penetration_elements(const unsigned& boundary_id);
+    void create_far_field_elements();
 
   public:
     void pin_far_field_elements();
 
   private:
     void refine_mesh_for_weak_contact_angle_constraint();
-    void set_contact_line_node_pt(const Mesh* const bulk_mesh_pt);
+    void set_contact_line_node_pt();
     void compute_error_estimate(double& max_err, double& min_err);
     void find_corner_bulk_element(const unsigned& boundary_1_id,
                                   const unsigned& boundary_2_id,
@@ -241,39 +236,9 @@ namespace oomph
       // set_dirichlet_bc_on_boundary(Slip_boundary_id);
       // set_dirichlet_bc_on_boundary(Free_surface_boundary_id);
 
-      // pin_free_surface_contact_line_point();
-
       // Fix end points far field boundary condition lagrange_multipliers
       // pin_far_field_lagrange_multiplier_end_points();
     }
-
-    void pin_no_penetration_contact_line_point()
-    {
-      // Fix end points for the no pen boundary condition lagrange_multipliers
-      const unsigned n_el = No_penetration_boundary_mesh_pt->nelement();
-      const double zero_value = 0.0;
-      for (unsigned i_el = 0; i_el < n_el; i_el++)
-      {
-        ImposeImpenetrabilityElement<ELEMENT>* el_pt =
-          dynamic_cast<ImposeImpenetrabilityElement<ELEMENT>*>(
-            No_penetration_boundary_mesh_pt->element_pt(i_el));
-        const unsigned n_nod = el_pt->nnode();
-        for (unsigned i_nod = 0; i_nod < n_nod; i_nod++)
-        {
-          // Get boundary node
-          const Node* const node_pt = el_pt->node_pt(i_nod);
-          // If node is on either of the other boundaries
-          if (node_pt->is_on_boundary(Slip_boundary_id) &&
-              node_pt->is_on_boundary(Free_surface_boundary_id))
-          {
-            // then fix the lagrange multiplier to zero
-            oomph_info << "Fix lagrange_multiplier" << std::endl;
-            el_pt->fix_lagrange_multiplier(i_nod, 0.0);
-          }
-        }
-      }
-    }
-
 
     void pin_far_field_lagrange_multiplier_end_points()
     {
@@ -352,15 +317,14 @@ namespace oomph
   }
 
   template<class ELEMENT>
-  void AxisymSectorProblem<ELEMENT>::create_slip_elements(
-    Mesh* const& bulk_mesh_pt)
+  void AxisymSectorProblem<ELEMENT>::create_slip_elements()
   {
     oomph_info << "create_slip_elements" << endl;
 
     unsigned b = Slip_boundary_id;
 
     // How many bulk elements are adjacent to boundary b?
-    unsigned n_element = bulk_mesh_pt->nboundary_element(b);
+    unsigned n_element = Bulk_mesh_pt->nboundary_element(b);
 
     // Loop over the bulk elements adjacent to boundary b?
     for (unsigned e = 0; e < n_element; e++)
@@ -368,21 +332,21 @@ namespace oomph
       // Get pointer to the bulk element that is adjacent to boundary
       // b
       ELEMENT* bulk_elem_pt =
-        dynamic_cast<ELEMENT*>(bulk_mesh_pt->boundary_element_pt(b, e));
+        dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(b, e));
 
       // What is the index of the face of element e along boundary b
-      int face_index = bulk_mesh_pt->face_index_at_boundary(b, e);
+      int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
       AxisymmetricNavierStokesSlipElement<ELEMENT>* slip_element_pt = 0;
 
       // Build the corresponding slip element
-      slip_element_pt =
-        new AxisymmetricNavierStokesSlipElement<ELEMENT>(bulk_elem_pt, face_index);
+      slip_element_pt = new AxisymmetricNavierStokesSlipElement<ELEMENT>(
+        bulk_elem_pt, face_index);
 
       // Set the pointer to the prescribed slip function
-      slip_element_pt->slip_fct_pt() = &parameters::prescribed_slip_fct;
+      slip_element_pt->slip_fct_pt() = &Slip_Parameters::prescribed_slip_fct;
 
       slip_element_pt->wall_velocity_fct_pt() =
-        &parameters::prescribed_wall_velocity_fct;
+        &Slip_Parameters::prescribed_wall_velocity_fct;
 
       // Add the prescribed-flux element to the surface mesh
       Slip_boundary_mesh_pt->add_element_pt(slip_element_pt);
@@ -391,137 +355,33 @@ namespace oomph
 
   template<class ELEMENT>
   void AxisymSectorProblem<ELEMENT>::create_no_penetration_elements(
-    Mesh* const& bulk_mesh_pt)
+    const unsigned& boundary_id)
   {
     oomph_info << "create_no_penetration_elements" << endl;
 
-    unsigned b = Slip_boundary_id;
-
     // How many bulk elements are adjacent to boundary b?
-    unsigned n_element = bulk_mesh_pt->nboundary_element(b);
+    unsigned n_element = Bulk_mesh_pt->nboundary_element(boundary_id);
 
     // Loop over the bulk elements adjacent to boundary b?
     for (unsigned e = 0; e < n_element; e++)
     {
       // Get pointer to the bulk element that is adjacent to boundary
       // b
-      ELEMENT* bulk_elem_pt =
-        dynamic_cast<ELEMENT*>(bulk_mesh_pt->boundary_element_pt(b, e));
+      ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(
+        Bulk_mesh_pt->boundary_element_pt(boundary_id, e));
 
       // What is the index of the face of element e along boundary b
-      int face_index = bulk_mesh_pt->face_index_at_boundary(b, e);
+      int face_index = Bulk_mesh_pt->face_index_at_boundary(boundary_id, e);
 
       // Build the corresponding slip element
       ImposeImpenetrabilityElement<ELEMENT>* no_penetration_element_pt =
         new ImposeImpenetrabilityElement<ELEMENT>(
-          bulk_elem_pt, face_index, Lagrange_id::No_penetration);
+          bulk_elem_pt, face_index, boundary_id);
 
       // Add the prescribed-flux element to the surface mesh
       No_penetration_boundary_mesh_pt->add_element_pt(
         no_penetration_element_pt);
     }
-  }
-
-  template<class ELEMENT>
-  void AxisymSectorProblem<ELEMENT>::create_contact_angle_elements(
-    Mesh* const& bulk_mesh_pt, Mesh* const& surface_mesh_pt)
-  {
-    oomph_info << "create_contact_angle_elements" << endl;
-
-    /* WHAT I WANT
-    const unsigned surface_boundary_id = 0;
-    const unsigned n_free_surface =
-      surface_mesh_pt->nboundary_element(surface_boundary_id);
-    for (unsigned e = 0; e < n_free_surface; e++)
-    {
-      // Get pointer to the bulk fluid element that is
-      // adjacent to boundary b
-      MyFreeSurfaceElement* surface_elem_pt =
-        dynamic_cast<MyFreeSurfaceElement*>(
-          surface_mesh_pt->boundary_element_pt(surface_boundary_id, e));
-
-      // Find the index of the face of element e along boundary b
-      int face_index =
-        surface_mesh_pt->face_index_at_boundary(surface_boundary_id, e);
-
-      // Locally cache the element pointer
-      ElasticPointFluidInterfaceBoundingElement<MyFreeSurfaceElement> el_pt =
-        new ElasticPointFluidInterfaceBoundingElement<MyFreeSurfaceElement>(
-          surface_elem_pt, face_index);
-
-      // Set the contact angle function
-      const bool use_strong_imposition = false;
-      el_pt->set_contact_angle_fct(&parameters::contact_angle_fct_pt,
-                                   use_strong_imposition);
-
-      // Set the capillary number
-      el_pt->ca_pt() = &parameters::capillary_number;
-
-      // Set the wall normal of the external boundary
-      el_pt->wall_unit_normal_fct_pt() = &parameters::wall_unit_normal_fct;
-
-      // Add the element to the mesh
-      Contact_angle_mesh_pt->add_element_pt(el_pt);
-    }
-    */
-
-    /* WHAT I HAVE
-    // Inialise storage for bounding element
-    FluidInterfaceBoundingElement* el_pt = 0;
-
-    // Here we have no guarantee of order so we need to loop over all
-    // surface elements to find the one that is next to the outer boundary
-    unsigned n_free_surface = surface_mesh_pt->nelement();
-    for (unsigned e = 0; e < n_free_surface; e++)
-    {
-      // Locally cache the element pointer
-      // ElasticLineFluidInterfaceElement<ELEMENT>* bulk_el_pt =
-      //   dynamic_cast<ElasticLineFluidInterfaceElement<ELEMENT>*>(
-      //     surface_mesh_pt->element_pt(e));
-      MyFreeSurfaceElement<ELEMENT>* bulk_el_pt =
-        dynamic_cast<MyFreeSurfaceElement<ELEMENT>*>(
-          surface_mesh_pt->element_pt(e));
-
-      // Read out number of nodes in the element
-      unsigned n_node = bulk_el_pt->nnode();
-
-      // Is the "left" hand node on the boundary
-      if (bulk_el_pt->node_pt(0)->is_on_boundary(Slip_boundary_id))
-      {
-        // Create bounding element on "left" hand face, with the normal
-        // pointing into the fluid
-        el_pt = bulk_el_pt->make_bounding_element(-1);
-
-        // Exit loop
-        break;
-      }
-
-      // Is the "right" hand node on the boundary
-      if (bulk_el_pt->node_pt(n_node - 1)->is_on_boundary(Slip_boundary_id))
-      {
-        // Create bounding element on "right" hand face, with the normal
-        // pointing out of the fluid
-        el_pt = bulk_el_pt->make_bounding_element(1);
-
-        // Exit loop
-        break;
-      }
-    }
-
-    // Set the contact angle function
-    const bool use_strong_imposition = false;
-    el_pt->set_contact_angle_fct(&parameters::contact_angle_fct_pt,
-                                 use_strong_imposition);
-
-    // Set the capillary number
-    el_pt->ca_pt() = &parameters::capillary_number;
-
-    // Set the wall normal of the external boundary
-    el_pt->wall_unit_normal_fct_pt() = &parameters::wall_unit_normal_fct;
-
-    // Add the element to the mesh
-    Contact_angle_mesh_pt->add_element_pt(el_pt);
-    */
   }
 
   template<class ELEMENT>
@@ -548,12 +408,12 @@ namespace oomph
       // Check refinement
 
       // Find the contact line node
-      set_contact_line_node_pt(Bulk_mesh_pt);
+      set_contact_line_node_pt();
 
       // Get error estimator
       Bulk_mesh_pt->spatial_error_estimator_pt() =
         new ContactlineErrorEstimator(
-          Contact_line_solid_node_pt,
+          Contact_line_node_pt,
           Mesh_Control_Parameters::min_element_length,
           Mesh_Control_Parameters::element_length_ratio);
       compute_error_estimate(max_error, min_error);
@@ -575,8 +435,7 @@ namespace oomph
   }
 
   template<class ELEMENT>
-  void AxisymSectorProblem<ELEMENT>::set_contact_line_node_pt(
-    const Mesh* const bulk_mesh_pt)
+  void AxisymSectorProblem<ELEMENT>::set_contact_line_node_pt()
   {
     oomph_info << "set_contact_line_node_pt" << endl;
 
@@ -586,9 +445,9 @@ namespace oomph
     find_corner_bulk_node(
       Slip_boundary_id, Free_surface_boundary_id, element_index, node_index);
 
-    Contact_line_solid_node_pt = dynamic_cast<SolidNode*>(
-      bulk_mesh_pt->boundary_element_pt(Slip_boundary_id, element_index)
-        ->node_pt(node_index));
+    Contact_line_node_pt =
+      Bulk_mesh_pt->boundary_element_pt(Slip_boundary_id, element_index)
+        ->node_pt(node_index);
   }
 
   template<class ELEMENT>
@@ -625,8 +484,7 @@ namespace oomph
   }
 
   template<class ELEMENT>
-  void AxisymSectorProblem<ELEMENT>::create_far_field_elements(
-    Mesh* const& bulk_mesh_pt)
+  void AxisymSectorProblem<ELEMENT>::create_far_field_elements()
   {
     oomph_info << "create_far_field_elements" << endl;
 
@@ -634,7 +492,7 @@ namespace oomph
     unsigned b = Far_field_boundary_id;
 
     // How many bulk fluid elements are adjacent to boundary b?
-    unsigned n_element = bulk_mesh_pt->nboundary_element(b);
+    unsigned n_element = Bulk_mesh_pt->nboundary_element(b);
 
     // Loop over the bulk fluid elements adjacent to boundary b?
     for (unsigned e = 0; e < n_element; e++)
@@ -642,16 +500,16 @@ namespace oomph
       // Get pointer to the bulk fluid element that is
       // adjacent to boundary b
       ELEMENT* bulk_elem_pt =
-        dynamic_cast<ELEMENT*>(bulk_mesh_pt->boundary_element_pt(b, e));
+        dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(b, e));
 
       if (!bulk_elem_pt->is_augmented())
       {
         // Find the index of the face of element e along boundary b
-        int face_index = bulk_mesh_pt->face_index_at_boundary(b, e);
+        int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
 
         // Create new element
         FarFieldElement<ELEMENT>* el_pt = new FarFieldElement<ELEMENT>(
-          bulk_elem_pt, face_index, Lagrange_id::Far_field);
+          bulk_elem_pt, face_index, Far_field_boundary_id);
 
         // Add it to the mesh
         Far_field_mesh_pt->add_element_pt(el_pt);
@@ -772,36 +630,25 @@ namespace oomph
     //    output_stream << "x,y,p," << endl;
     //    Pressure_contribution_mesh_2_pt->output(output_stream, npts);
     //    output_stream.close();
-    //
-    //     sprintf(filename,
-    //             "%s/slip_surface%i.csv",
-    //             Doc_info_pt->directory().c_str(),
-    //             Doc_info_pt->number());
-    //     output_stream.open(filename);
-    //     output_stream << "x,y,l_x,l_y,n_x,n_y,u,v" << endl;
-    //     Slip_boundary_mesh_pt->output(output_stream, npts);
-    //     output_stream.close();
-    //
-    //     // ImposeImpenetrabilityElement hasn't implemented an output
-    //     function
-    //     // sprintf(filename,
-    //     //         "%s/no_penetration_surface%i.csv",
-    //     //         Doc_info_pt->directory().c_str(),
-    //     //         Doc_info_pt->number());
-    //     // output_stream.open(filename);
-    //     // output_stream << "x,y,u,v,p,lagrange_multiplier" << endl;
-    //     // No_penetration_boundary_mesh_pt->output(output_stream, 3);
-    //     // output_stream.close();
-    //
-    //     // sprintf(filename,
-    //     //        "%s/contact_angle%i.csv",
-    //     //        Doc_info_pt->directory().c_str(),
-    //     //        Doc_info_pt->number());
-    //     // output_stream.open(filename);
-    //     // output_stream << "x,y,imposed_angle,computed_angle,lambda" <<
-    //     endl;
-    //     // Contact_angle_mesh_pt->output(output_stream);
-    //     // output_stream.close();
+
+    sprintf(filename,
+            "%s/slip_surface%i.csv",
+            Doc_info_pt->directory().c_str(),
+            Doc_info_pt->number());
+    output_stream.open(filename);
+    output_stream << "x,y,l_x,l_y,n_x,n_y,u,v" << endl;
+    Slip_boundary_mesh_pt->output(output_stream, npts);
+    output_stream.close();
+
+    sprintf(filename,
+            "%s/no_penetration_surface%i.csv",
+            Doc_info_pt->directory().c_str(),
+            Doc_info_pt->number());
+    output_stream.open(filename);
+    output_stream << "x,y,u,v,p,lagrange_multiplier" << endl;
+    No_penetration_boundary_mesh_pt->output(output_stream, 3);
+    output_stream.close();
+
     //
     //     sprintf(filename,
     //             "%s/far_field%i.dat",

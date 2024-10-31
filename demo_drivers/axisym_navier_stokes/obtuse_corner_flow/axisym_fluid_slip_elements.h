@@ -54,9 +54,7 @@ namespace oomph
   template<class ELEMENT>
   class AxisymmetricNavierStokesSlipElement
     : public virtual FaceGeometry<ELEMENT>,
-      public virtual AxisymmetricNavierStokesFaceElement,
-      public virtual DebugJacobianSolidFiniteElement,
-      public virtual SolidFaceElement
+      public virtual AxisymmetricNavierStokesFaceElement
   {
   private:
     unsigned Contact_line_data_index;
@@ -120,32 +118,12 @@ namespace oomph
     /// value of the index and its limit
     AxisymmetricNavierStokesSlipElement(FiniteElement* const& element_pt,
                                         const int& face_index)
-      : FaceGeometry<ELEMENT>(),
-        AxisymmetricNavierStokesFaceElement(),
-        SolidFaceElement()
+      : FaceGeometry<ELEMENT>(), AxisymmetricNavierStokesFaceElement()
     {
       // Attach the geometrical information to the element. N.B. This function
       // also assigns nbulk_value from the required_nvalue of the bulk element
       element_pt->build_face_element(face_index, this);
-
-      this->add_other_bulk_node_positions_as_external_data();
     }
-
-    /// Constructor, which takes a "bulk" element and the
-    /// value of the index and its limit
-    AxisymmetricNavierStokesSlipElement(FiniteElement* const& element_pt,
-                                        const int& face_index,
-                                        SolidNode* const& contact_line_node_pt)
-      : FaceGeometry<ELEMENT>(), FaceElement()
-    {
-      // Attach the geometrical information to the element. N.B. This function
-      // also assigns nbulk_value from the required_nvalue of the bulk element
-      element_pt->build_face_element(face_index, this);
-
-      // Contact_line_data_index =
-      add_external_data(contact_line_node_pt->variable_position_pt());
-    }
-
 
     /// Reference to the slip function pointer
     void (*&slip_fct_pt())(const double& time,
@@ -399,9 +377,6 @@ namespace oomph
       fill_in_contribution_to_residuals_axisymmetric_nst_slip(
         residuals, jacobian, 1);
 
-      // Fill in the solid position contribution by finite differences
-      fill_in_jacobian_from_solid_position_by_fd(jacobian);
-
       // Fill in the contribution from external data by finite differences
       fill_in_jacobian_from_external_by_fd(residuals, jacobian, false);
     }
@@ -414,9 +389,6 @@ namespace oomph
       //  Fill in analytic contribution of internal equations
       fill_in_contribution_to_residuals_axisymmetric_nst_slip(
         residuals, jacobian, 1);
-
-      // Fill in the solid position contribution by finite differences
-      fill_in_jacobian_from_solid_position_by_fd(jacobian);
 
       // Fill in the contribution from external data by finite differences
       fill_in_jacobian_from_external_by_fd(residuals, jacobian, false);
@@ -862,8 +834,6 @@ namespace oomph
           interpolated_u[i] - dot * interpolated_normal[i];
       }
 
-      const bool is_pseudo_solid = false;
-
       // Loop over the test functions, nodes of the element
       for (unsigned l = 0; l < n_node; l++)
       {
@@ -901,25 +871,6 @@ namespace oomph
                       psi(l2) * W;
                   }
 
-                  // Include the solid position contributions
-                  if (is_pseudo_solid)
-                  {
-                    // Loop over the dimensions
-                    for (unsigned j = 0; j < n_dim; j++)
-                    {
-                      local_unknown = this->position_local_eqn(l2, 1, j);
-                      if (local_unknown >= 0)
-                      {
-                        // First of all for the tangential contribution. Note
-                        // that actually there is no explicit J dependence
-                        // (hence we use little w) so all we have is the
-                        // contribution to the interpolated_t s -> this is
-                        // always dpsifds(l2,0)
-                        jacobian(local_eqn, local_unknown) +=
-                          1.0 / slip[i] * psi(l) * u(i, l2) * dpsids(l2, 0) * w;
-                      }
-                    }
-                  }
                 }
               }
             }

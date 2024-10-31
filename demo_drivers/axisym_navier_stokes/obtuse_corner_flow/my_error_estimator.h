@@ -151,7 +151,7 @@ namespace oomph
     /// Optional boolean flag (defaulting to false) indicates that
     /// refinement decision is based on Lagrangian coordinates -- only
     /// applicable to solid meshes.
-    ContactlineErrorEstimator(SolidNode* contact_line_node_pt,
+    ContactlineErrorEstimator(Node* contact_line_node_pt,
                               const double& min_element_length,
                               const double& element_length_ratio)
       : Min_element_length(min_element_length),
@@ -202,9 +202,9 @@ namespace oomph
 
         // Get coords of the contact line
         double x_contact_line =
-          Contact_line_solid_node_pt->variable_position_pt()->value(0);
+          Contact_line_solid_node_pt->x(0);
         double y_contact_line =
-          Contact_line_solid_node_pt->variable_position_pt()->value(1);
+          Contact_line_solid_node_pt->x(1);
 
         // Get the area
         double area = mesh_pt->finite_element_pt(e)->size();
@@ -232,7 +232,7 @@ namespace oomph
   private:
     double Min_element_length;
     double Element_length_ratio;
-    SolidNode* Contact_line_solid_node_pt;
+    Node* Contact_line_solid_node_pt;
   };
 
   //========================================================================
@@ -251,8 +251,8 @@ namespace oomph
     /// Optional boolean flag (defaulting to false) indicates that
     /// refinement decision is based on Lagrangian coordinates -- only
     /// applicable to solid meshes.
-    CornerErrorEstimator(SolidNode*& contact_line_node_pt,
-                         SolidNode*& inner_corner_node_pt,
+    CornerErrorEstimator(Node*& contact_line_node_pt,
+                         Node*& inner_corner_node_pt,
                          double* const& min_element_length_pt,
                          double* const& inner_min_element_length_pt,
                          const double& element_length_ratio)
@@ -306,12 +306,12 @@ namespace oomph
 
         // Get coords of the contact line
         double x_contact_line =
-          Contact_line_solid_node_pt->variable_position_pt()->value(0);
+          Contact_line_solid_node_pt->x(0);
         double y_contact_line =
-          Contact_line_solid_node_pt->variable_position_pt()->value(1);
+          Contact_line_solid_node_pt->x(1);
 
-        double x_inner = Inner_corner_node_pt->variable_position_pt()->value(0);
-        double y_inner = Inner_corner_node_pt->variable_position_pt()->value(1);
+        double x_inner = Inner_corner_node_pt->x(0);
+        double y_inner = Inner_corner_node_pt->x(1);
 
         // Get the area
         double area = mesh_pt->finite_element_pt(e)->size();
@@ -346,8 +346,8 @@ namespace oomph
     double* Min_element_length_pt;
     double* Inner_min_element_length_pt;
     double Element_length_ratio;
-    SolidNode* Contact_line_solid_node_pt;
-    SolidNode* Inner_corner_node_pt;
+    Node* Contact_line_solid_node_pt;
+    Node* Inner_corner_node_pt;
   };
 
 }; // namespace oomph
