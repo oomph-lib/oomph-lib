@@ -457,7 +457,7 @@ namespace oomph
         // Loop from left to right
         for (unsigned i = 1; i < N_radial; ++i)
         {
-          if (j < N_azimuthal && i < N_radial + 1)
+          if (j < N_azimuthal && i < N_radial)
           {
             // The mid node on the right hand side always needs constructing
             // within the bounds of the mesh
@@ -476,9 +476,9 @@ namespace oomph
 
           // Set position of current (Global) Node
           Node_pt[node_count]->x(0) =
-            map_to_sector_x(double(i + 1) * xstep, double(j + 0.5) * ystep);
+            map_to_sector_x(double(i + 1.0) * xstep, double(j + 0.5) * ystep);
           Node_pt[node_count]->x(1) =
-            map_to_sector_y(double(i + 1) * xstep, double(j + 0.5) * ystep);
+            map_to_sector_y(double(i + 1.0) * xstep, double(j + 0.5) * ystep);
 
           // Add node to any applicable boundaries again - only be left/right
           if (i + 1 == N_radial)
