@@ -394,9 +394,9 @@ namespace oomph
 
           // Set position of current (Global) Node
           Node_pt[node_count]->x(0) =
-            map_to_sector_x(double(i + 0.5) * xstep, j * ystep);
+            map_to_sector_x((double(i) + 0.5) * xstep, j * ystep);
           Node_pt[node_count]->x(1) =
-            map_to_sector_y(double(i + 0.5) * xstep, j * ystep);
+            map_to_sector_y((double(i) + 0.5) * xstep, j * ystep);
 
           // Add node to any applicable boundaries (node 4's can only be top
           // or bottom boundaries)
@@ -442,9 +442,9 @@ namespace oomph
 
         // Set position of current (Global) Node
         Node_pt[node_count]->x(0) =
-          map_to_sector_x(double(i) * xstep, double(j + 0.5) * ystep);
+          map_to_sector_x(double(i) * xstep, (double(j) + 0.5) * ystep);
         Node_pt[node_count]->x(1) =
-          map_to_sector_y(double(i) * xstep, double(j + 0.5) * ystep);
+          map_to_sector_y(double(i) * xstep, (double(j) + 0.5) * ystep);
 
         // Update node_count
         node_count++;
@@ -471,9 +471,9 @@ namespace oomph
 
           // Set position of current (Global) Node
           Node_pt[node_count]->x(0) =
-            map_to_sector_x(double(i) * xstep, double(j + 0.5) * ystep);
+            map_to_sector_x(double(i) * xstep, (double(j) + 0.5) * ystep);
           Node_pt[node_count]->x(1) =
-            map_to_sector_y(double(i) * xstep, double(j + 0.5) * ystep);
+            map_to_sector_y(double(i) * xstep, (double(j) + 0.5) * ystep);
 
           // Add node to any applicable boundaries again - only be left/right
           if (i == N_radial)
@@ -516,10 +516,10 @@ namespace oomph
           // End extra left/right node construction
 
           // Set position of current (Global) Node
-          Node_pt[node_count]->x(0) =
-            map_to_sector_x(double(i + 0.5) * xstep, double(j + 0.5) * ystep);
-          Node_pt[node_count]->x(1) =
-            map_to_sector_y(double(i + 0.5) * xstep, double(j + 0.5) * ystep);
+          Node_pt[node_count]->x(0) = map_to_sector_x(
+            (double(i) + 0.5) * xstep, (double(j) + 0.5) * ystep);
+          Node_pt[node_count]->x(1) = map_to_sector_y(
+            (double(i) + 0.5) * xstep, (double(j) + 0.5) * ystep);
 
           // All nodes are internal in this structure so no boundaries
           // applicable
