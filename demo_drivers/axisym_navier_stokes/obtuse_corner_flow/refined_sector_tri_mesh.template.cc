@@ -23,14 +23,14 @@
 // LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 // LIC//
 // LIC//====================================================================
-#ifndef SECTOR_TRI_MESH_TEMPLATE_CC
-#define SECTOR_TRI_MESH_TEMPLATE_CC
+#ifndef REFINED_SECTOR_TRI_MESH_TEMPLATE_CC
+#define REFINED_SECTOR_TRI_MESH_TEMPLATE_CC
 
 #include <algorithm>
 
 // Simple 2D triangle mesh class
 #include "generic/Telements.h"
-#include "sector_tri_mesh.template.h"
+#include "refined_sector_tri_mesh.template.h"
 
 namespace oomph
 {
@@ -45,12 +45,18 @@ namespace oomph
   ///
   //====================================================================
   template<class ELEMENT>
-  SectorTriMesh<ELEMENT>::SectorTriMesh(const unsigned& n_radial,
-                                        const unsigned& n_azimuthal,
-                                        const double& radius,
-                                        const double& angle,
-                                        TimeStepper* time_stepper_pt)
-    : N_radial(n_radial), N_azimuthal(n_azimuthal), Radius(radius), Angle(angle)
+  RefinedSectorTriMesh<ELEMENT>::RefinedSectorTriMesh(
+    const unsigned& n_radial,
+    const double& radial_geometric_sequence_base,
+    const unsigned& n_azimuthal,
+    const double& radius,
+    const double& angle,
+    TimeStepper* time_stepper_pt)
+    : N_radial(n_radial),
+      Radial_geometric_sequence_base(radial_geometric_sequence_base),
+      N_azimuthal(n_azimuthal),
+      Radius(radius),
+      Angle(angle)
   {
     using namespace MathematicalConstants;
 
@@ -517,7 +523,7 @@ namespace oomph
   /// next to which boundaries (Doc to outfile if it's open).
   //================================================================
   template<class ELEMENT>
-  void SectorTriMesh<ELEMENT>::setup_boundary_element_info(
+  void RefinedSectorTriMesh<ELEMENT>::setup_boundary_element_info(
     std::ostream& outfile)
   {
     // Should we document the output here

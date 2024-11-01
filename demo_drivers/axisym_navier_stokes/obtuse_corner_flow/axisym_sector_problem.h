@@ -20,8 +20,8 @@
 #include "parameters.h"
 #include "pressure_evaluation_elements.h"
 #include "projectable_axisymmetric_Ttaylor_hood_elements.h"
-#include "sector_tri_mesh.template.h"
-#include "sector_tri_mesh.template.cc"
+#include "refined_sector_tri_mesh.template.h"
+#include "refined_sector_tri_mesh.template.cc"
 #include "singular_fluid_traction_elements.h"
 #include "utility_functions.h"
 
@@ -33,7 +33,7 @@ namespace oomph
   {
   private:
     /// Private variables
-    SectorTriMesh<ELEMENT>* Bulk_mesh_pt;
+    RefinedSectorTriMesh<ELEMENT>* Bulk_mesh_pt;
     Node* Contact_line_node_pt;
 
     Mesh* No_penetration_boundary_mesh_pt;
@@ -318,12 +318,13 @@ namespace oomph
     // ---------------------------------
 
     // Generate the mesh using the template ELEMENT
-    Bulk_mesh_pt =
-      new SectorTriMesh<ELEMENT>(10,
-                                 10,
-                                 0.9,
-                                 135.0 * MathematicalConstants::Pi / 180.0,
-                                 this->time_stepper_pt());
+    Bulk_mesh_pt = new RefinedSectorTriMesh<ELEMENT>(
+      10,
+      1.07,
+      10,
+      0.9,
+      135.0 * MathematicalConstants::Pi / 180.0,
+      this->time_stepper_pt());
 
     Bulk_mesh_pt->output_boundaries(Doc_info.directory() + "/boundaries.dat");
     Bulk_mesh_pt->output(Doc_info.directory() + "/mesh.dat", 3);
