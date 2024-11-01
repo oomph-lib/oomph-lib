@@ -198,20 +198,14 @@ namespace oomph
         Node_pt[node_count]->x(1) = map_to_sector_y(i * xstep, j * ystep);
 
         // Add node to any relevant boundaries
-        if (j == 0)
-        {
-          this->convert_to_boundary_node(Node_pt[node_count]);
-          add_boundary_node(0, Node_pt[node_count]);
-        }
-        if (j == N_azimuthal)
-        {
-          this->convert_to_boundary_node(Node_pt[node_count]);
-          add_boundary_node(2, Node_pt[node_count]);
-        }
+        this->convert_to_boundary_node(Node_pt[node_count]);
+        add_boundary_node(0, Node_pt[node_count]);
+        add_boundary_node(2, Node_pt[node_count]);
 
         // Increment counter
         node_count++;
       }
+
 
       for (unsigned i = 1; i < N_radial + 1; ++i)
       {
@@ -460,7 +454,7 @@ namespace oomph
         // Update node_count
         node_count++;
 
-        // Loop until one less
+        // Loop from left to right
         for (unsigned i = 1; i < N_radial; ++i)
         {
           if (j < N_azimuthal && i < N_radial)
@@ -487,7 +481,7 @@ namespace oomph
             map_to_sector_y(double(i + 1) * xstep, double(j + 0.5) * ystep);
 
           // Add node to any applicable boundaries again - only be left/right
-          if (i == N_radial)
+          if (i + 1 == N_radial)
           {
             this->convert_to_boundary_node(Node_pt[node_count]);
             add_boundary_node(1, Node_pt[node_count]);
@@ -506,7 +500,7 @@ namespace oomph
       // of elements in both x,y
       for (unsigned j = 0; j < N_azimuthal; ++j)
       {
-        const unsigned i = 0;
+        // const unsigned i = 0;
 
         // Increase element_count by 1
         element_count += 1;
