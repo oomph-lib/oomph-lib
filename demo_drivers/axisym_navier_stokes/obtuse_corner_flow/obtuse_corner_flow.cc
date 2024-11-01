@@ -39,6 +39,9 @@ int main(int argc, char** argv)
     ProjectableAxisymmetricTaylorHoodElement<AxisymmetricTTaylorHoodElement>>
     problem;
 
+
+  // problem.debug_jacobian();
+
   // Unsteady problem
   const double dt = 2e-2;
   const double ft = 5 * dt;

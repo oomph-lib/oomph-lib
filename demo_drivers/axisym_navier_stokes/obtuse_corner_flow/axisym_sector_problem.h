@@ -667,18 +667,16 @@ namespace oomph
     No_penetration_boundary_mesh_pt->output(output_stream, 3);
     output_stream.close();
 
-    //
-    //     sprintf(filename,
-    //             "%s/far_field%i.dat",
-    //             Doc_info.directory().c_str(),
-    //             Doc_info.number());
-    //     output_stream.open(filename);
-    //     output_stream
-    //       <<
-    //       "x,y,n_x,n_y,u_x,u_y,du_xdr,du_ydr,du_xdtheta,du_ydtheta,l_x,l_y"
-    //       << endl;
-    //     Far_field_mesh_pt->output(output_stream);
-    //     output_stream.close();
+    sprintf(filename,
+            "%s/far_field%i.dat",
+            Doc_info.directory().c_str(),
+            Doc_info.number());
+    output_stream.open(filename);
+    output_stream
+      << "x,y,n_x,n_y,u_x,u_y,du_xdr,du_ydr,du_xdtheta,du_ydtheta,l_x,l_y"
+      << endl;
+    Far_field_mesh_pt->output(output_stream);
+    output_stream.close();
 
     Doc_info.number()++;
   }

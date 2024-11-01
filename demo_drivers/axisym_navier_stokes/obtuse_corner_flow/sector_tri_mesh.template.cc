@@ -115,10 +115,10 @@ namespace oomph
     // Allocate memory for the corner node of the first element
     //(which is not created loop as all subsequent bottom corners already exist)
     Node_pt[node_count] =
-      finite_element_pt(0)->construct_node(2, time_stepper_pt);
+      finite_element_pt(0)->construct_node(0, time_stepper_pt);
 
     // Set the pointer from the element
-    finite_element_pt(0)->node_pt(2) = Node_pt[node_count];
+    finite_element_pt(0)->node_pt(0) = Node_pt[node_count];
 
     // Don't increment node_count yet as we still need its containing box
     //(position and boundaries for first node are allocated in the main loop)
@@ -154,20 +154,20 @@ namespace oomph
         {
           Node_pt[node_count + N_radial + 1] =
             finite_element_pt(element_count)
-              ->construct_node(1, time_stepper_pt);
+              ->construct_node(2, time_stepper_pt);
         }
         else
         {
           Node_pt[node_count + N_radial] =
             finite_element_pt(element_count)
-              ->construct_node(1, time_stepper_pt);
+              ->construct_node(2, time_stepper_pt);
         }
 
         // If on bottom row, allocate the bottom right corner node
         if (j == 0)
         {
           Node_pt[node_count + 1] = finite_element_pt(element_count)
-                                      ->construct_node(0, time_stepper_pt);
+                                      ->construct_node(1, time_stepper_pt);
         }
 
         // Bottom left corner node is already allocated
@@ -176,16 +176,16 @@ namespace oomph
         //----------------------------------
         if (j == 0)
         {
-          finite_element_pt(element_count)->node_pt(1) =
+          finite_element_pt(element_count)->node_pt(2) =
             Node_pt[node_count + N_radial + 1];
         }
         else
         {
-          finite_element_pt(element_count)->node_pt(1) =
+          finite_element_pt(element_count)->node_pt(2) =
             Node_pt[node_count + N_radial];
         }
-        finite_element_pt(element_count)->node_pt(2) = Node_pt[0];
-        finite_element_pt(element_count)->node_pt(0) = Node_pt[node_count + 1];
+        finite_element_pt(element_count)->node_pt(0) = Node_pt[0];
+        finite_element_pt(element_count)->node_pt(1) = Node_pt[node_count + 1];
 
         element_count += 1;
       }
@@ -281,11 +281,6 @@ namespace oomph
           this->convert_to_boundary_node(Node_pt[node_count]);
           add_boundary_node(2, Node_pt[node_count]);
         }
-        if (i == 0)
-        {
-          this->convert_to_boundary_node(Node_pt[node_count]);
-          add_boundary_node(3, Node_pt[node_count]);
-        }
         if (i == N_radial)
         {
           this->convert_to_boundary_node(Node_pt[node_count]);
@@ -320,17 +315,17 @@ namespace oomph
           if (j == 0)
           {
             Node_pt[node_count] = finite_element_pt(element_count)
-                                    ->construct_node(5, time_stepper_pt);
+                                    ->construct_node(3, time_stepper_pt);
           }
           // Always create the top node.
           Node_pt[node_count + N_radial] =
             finite_element_pt(element_count)
-              ->construct_node(4, time_stepper_pt);
+              ->construct_node(5, time_stepper_pt);
 
           // Set pointers to the top/bottom middle nodes
           // Bottom node
-          finite_element_pt(element_count)->node_pt(5) = Node_pt[node_count];
-          finite_element_pt(element_count)->node_pt(4) =
+          finite_element_pt(element_count)->node_pt(3) = Node_pt[node_count];
+          finite_element_pt(element_count)->node_pt(5) =
             Node_pt[node_count + N_radial];
 
           // Increase the element counter to add top/bottom nodes to
@@ -430,16 +425,16 @@ namespace oomph
       // elements on y-axis
       for (unsigned j = 0; j < N_azimuthal; ++j)
       {
-        const unsigned i = 0;
+        const unsigned i = 1;
 
-        if (j < N_azimuthal && i < N_radial)
+        if (j < N_azimuthal && i < N_radial + 1)
         {
           // Make the node on the right hand side
           Node_pt[node_count] = finite_element_pt(element_count)
-                                  ->construct_node(3, time_stepper_pt);
+                                  ->construct_node(4, time_stepper_pt);
 
           // Set pointers from the elements to new nodes
-          finite_element_pt(element_count)->node_pt(3) = Node_pt[node_count];
+          finite_element_pt(element_count)->node_pt(4) = Node_pt[node_count];
 
           // Increase element_count by 1
           element_count += 1;
@@ -447,17 +442,17 @@ namespace oomph
 
         // Set position of current (Global) Node
         Node_pt[node_count]->x(0) =
-          map_to_sector_x(double(i + 1.0) * xstep, double(j + 0.5) * ystep);
+          map_to_sector_x(double(i) * xstep, double(j + 0.5) * ystep);
         Node_pt[node_count]->x(1) =
-          map_to_sector_y(double(i + 1.0) * xstep, double(j + 0.5) * ystep);
+          map_to_sector_y(double(i) * xstep, double(j + 0.5) * ystep);
 
         // Update node_count
         node_count++;
 
         // Loop from left to right
-        for (unsigned i = 1; i < N_radial; ++i)
+        for (unsigned i = 2; i < N_radial + 1; ++i)
         {
-          if (j < N_azimuthal && i < N_radial)
+          if (j < N_azimuthal && i < N_radial + 1)
           {
             // The mid node on the right hand side always needs constructing
             // within the bounds of the mesh
@@ -476,12 +471,12 @@ namespace oomph
 
           // Set position of current (Global) Node
           Node_pt[node_count]->x(0) =
-            map_to_sector_x(double(i + 1.0) * xstep, double(j + 0.5) * ystep);
+            map_to_sector_x(double(i) * xstep, double(j + 0.5) * ystep);
           Node_pt[node_count]->x(1) =
-            map_to_sector_y(double(i + 1.0) * xstep, double(j + 0.5) * ystep);
+            map_to_sector_y(double(i) * xstep, double(j + 0.5) * ystep);
 
           // Add node to any applicable boundaries again - only be left/right
-          if (i + 1 == N_radial)
+          if (i == N_radial)
           {
             this->convert_to_boundary_node(Node_pt[node_count]);
             add_boundary_node(1, Node_pt[node_count]);

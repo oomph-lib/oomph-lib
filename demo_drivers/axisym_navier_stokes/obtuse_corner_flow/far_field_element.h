@@ -168,22 +168,22 @@ namespace oomph
         // Initialise to zero
         Vector<double> interpolated_x(n_dim);
         Vector<double> interpolated_u(n_dim);
-        Vector<Vector<double>> interpolated_dudx(n_dim,
-                                                 Vector<double>(n_dim, 0.0));
+        // Vector<Vector<double>> interpolated_dudx(n_dim,
+        //                                          Vector<double>(n_dim, 0.0));
         Vector<double> interpolated_lambda(n_dim);
 
         // Loop over all nodes
-        for (unsigned j = 0; j < n_bulk_node; j++)
-        {
-          // Loop over directions
-          for (unsigned i = 0; i < n_dim; i++)
-          {
-            for (unsigned k = 0; k < n_dim; k++)
-            {
-              interpolated_dudx[i][k] += this->nst_u(j, i) * dpsifdx(j, k);
-            }
-          }
-        }
+        // for (unsigned j = 0; j < n_bulk_node; j++)
+        //{
+        //  // Loop over directions
+        //  for (unsigned i = 0; i < n_dim; i++)
+        //  {
+        //    for (unsigned k = 0; k < n_dim; k++)
+        //    {
+        //      interpolated_dudx[i][k] += this->nst_u(j, i) * dpsifdx(j, k);
+        //    }
+        //  }
+        //}
 
         // Loop over local nodes
         for (unsigned j = 0; j < n_node; j++)
@@ -217,13 +217,13 @@ namespace oomph
         }
 
         // Output the velocity derivatives
-        for (unsigned i = 0; i < n_dim; i++)
-        {
-          for (unsigned k = 0; k < n_dim; k++)
-          {
-            outfile << interpolated_dudx[i][k] << ",";
-          }
-        }
+        // for (unsigned i = 0; i < n_dim; i++)
+        //{
+        //  for (unsigned k = 0; k < n_dim; k++)
+        //  {
+        //    outfile << interpolated_dudx[i][k] << ",";
+        //  }
+        //}
 
         // Output the lagrange multiplier, don't include the comma on the
         // final value
