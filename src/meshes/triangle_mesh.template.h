@@ -369,13 +369,13 @@ namespace oomph
     // Provide read-only access to the min_element_interior_angle
     const double& min_element_interior_angle()
     {
-      return this->Min_element_interior_angle;
+      return Min_element_interior_angle;
     }
 
     // Provide a set function for the min_element_interior_angle
     void set_min_element_interior_angle(const double& new_angle)
     {
-      this->Min_element_interior_angle = new_angle;
+      Min_element_interior_angle = new_angle;
     }
 
   protected:
@@ -780,8 +780,9 @@ namespace oomph
       const std::string& poly_file_name,
       const double& element_area,
       TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
-      const bool& allow_automatic_creation_of_vertices_on_boundaries = true)
-      : Min_element_interior_angle(30.0)
+      const bool& allow_automatic_creation_of_vertices_on_boundaries = true,
+      const double& min_element_interior_angle = 30.0)
+      : Min_element_interior_angle(min_element_interior_angle)
     {
       // Mesh can only be built with 2D Telements.
       MeshChecker::assert_geometric_element<TElementGeometricBase, ELEMENT>(2);
@@ -1312,7 +1313,7 @@ namespace oomph
       // The repeated -a allows the specification of areas for different
       // regions (if any)
       input_string_stream << "-pA -a -a" << element_area << " -q"
-                          << this->Min_element_interior_angle << std::fixed;
+                          << this->min_element_interior_angle() << std::fixed;
 
       // Verify if creation of new points on boundaries is allowed
       if (!this->is_automatic_creation_of_vertices_on_boundaries_allowed())
@@ -2299,9 +2300,7 @@ namespace oomph
     RefineableTriangleMesh(
       TriangleMeshParameters& triangle_mesh_parameters,
       TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
-      : TriangleMesh<ELEMENT>(triangle_mesh_parameters, time_stepper_pt),
-        Min_element_interior_angle_for_adaption(
-          triangle_mesh_parameters.min_element_interior_angle())
+      : TriangleMesh<ELEMENT>(triangle_mesh_parameters, time_stepper_pt)
     {
       // Initialise the data associated with adaptation
       initialise_adaptation_data();
@@ -2324,8 +2323,7 @@ namespace oomph
           element_file_name,
           poly_file_name,
           time_stepper_pt,
-          allow_automatic_creation_of_vertices_on_boundaries),
-        Min_element_interior_angle_for_adaption(30.0)
+          allow_automatic_creation_of_vertices_on_boundaries)
     {
       // Create and fill the data structures to give rise to polylines so that
       // the mesh can use the adapt methods
@@ -2352,9 +2350,7 @@ namespace oomph
       const bool& use_attributes = false,
       const bool& allow_automatic_creation_of_vertices_on_boundaries = true,
       OomphCommunicator* comm_pt = 0,
-      const double& min_element_interior_angle_for_adaption = 30.0)
-      : Min_element_interior_angle_for_adaption(
-          min_element_interior_angle_for_adaption)
+      const double& min_element_interior_angle = 30.0)
     {
       // Initialise the data associated with adaptation
       initialise_adaptation_data();
@@ -2377,10 +2373,11 @@ namespace oomph
       // Create refined  TriangulateIO structure based on target areas
       this->refine_triangulateio(triangulate_io, target_area, triangle_refine);
 
+      this->set_min_element_interior_angle(min_element_interior_angle);
+
       // Input string for triangle
       std::stringstream input_string_stream;
-      input_string_stream << "-pq"
-                          << this->Min_element_interior_angle_for_adaption
+      input_string_stream << "-pq" << this->min_element_interior_angle()
                           << "-ra";
 
       // Verify if creation of new points on boundaries is allowed
@@ -2529,15 +2526,15 @@ namespace oomph
     }
 
     /// Read-only access to the min element interior angle for adaption
-    const double& min_element_interior_angle_for_adaption() const
+    const double& min_element_interior_angle() const
     {
-      return this->Min_element_interior_angle_for_adaption;
+      return this->Min_element_interior_angle;
     }
 
     /// Set the min element interior angle for adaption
-    void set_min_element_interior_angle_for_adaption(const double& new_angle)
+    void set_min_element_interior_angle(const double& new_angle)
     {
-      this->Min_element_interior_angle_for_adaption = new_angle;
+      this->Min_element_interior_angle = new_angle;
     }
 
     // Returns the status of using an iterative solver for the
@@ -3900,7 +3897,7 @@ namespace oomph
     double Min_permitted_angle;
 
     // Store the min element interior angle for adaption
-    double Min_element_interior_angle_for_adaption;
+    double Min_element_interior_angle;
 
     /// Enable/disable solution projection during adaptation
     bool Disable_projection;
@@ -4004,8 +4001,7 @@ namespace oomph
     RefineableSolidTriangleMesh(
       TriangleMeshParameters& triangle_mesh_parameters,
       TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
-      : TriangleMesh<ELEMENT>(triangle_mesh_parameters, time_stepper_pt),
-        RefineableTriangleMesh<ELEMENT>(triangle_mesh_parameters,
+      : RefineableTriangleMesh<ELEMENT>(triangle_mesh_parameters,
                                         time_stepper_pt)
     {
       // Assign the Lagrangian coordinates
@@ -4021,7 +4017,7 @@ namespace oomph
       const bool& use_attributes = false,
       const bool& allow_automatic_creation_of_vertices_on_boundaries = true,
       OomphCommunicator* comm_pt = 0,
-      const double& min_element_interior_angle_for_adaption = 30.0)
+      const double& min_element_interior_angle = 30.0)
       : RefineableTriangleMesh<ELEMENT>(
           target_area,
           triangulate_io,
@@ -4029,7 +4025,7 @@ namespace oomph
           use_attributes,
           allow_automatic_creation_of_vertices_on_boundaries,
           comm_pt,
-          min_element_interior_angle_for_adaption)
+          min_element_interior_angle)
     {
       // Assign the Lagrangian coordinates
       set_lagrangian_nodal_coordinates();
