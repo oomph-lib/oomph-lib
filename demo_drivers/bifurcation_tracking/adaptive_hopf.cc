@@ -50,18 +50,21 @@ using namespace QuadTreeNames;
 namespace Global_Parameters
 {
 
- // Reynolds number
+ /// Reynolds number
  double Re=75.0;
 
- // Blockage ratio
+ /// Blockage ratio
  double B=0.7;
 
- // Rotation ratio
+ /// Rotation ratio
  double Alpha=0.0;
 
- // Control Flag that will read in the eigenfunction from disk
- // to avoid a costly solve of the eigenproblem in testing
+ 
+ /// Control flag used to determine whether the eigenfunction
+ /// is read from disk. Reading from disk avoids lengthy
+ /// eigenvalue calculations in the self-tests
  bool Read_in_eigenfunction_from_disk = true;
+ 
 }
 
 
@@ -1186,7 +1189,7 @@ FlowAroundCylinderProblem<ELEMENT>::FlowAroundCylinderProblem(
  //Increase the maximum residuals so that we can get convergence on
  //the coarsest mesh
  Max_residuals = 100.0;
- 
+
  // Build mesh
  Problem::mesh_pt()=
   new RefineableRectangleWithHoleMesh<ELEMENT>(cylinder_pt,length,height);
