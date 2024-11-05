@@ -445,7 +445,7 @@ namespace oomph
   {
   public:
     /// Empty constructor
-    TriangleMesh() : Min_element_interior_angle(30.0)
+    TriangleMesh()
     {
 #ifdef OOMPH_HAS_TRIANGLE_LIB
       // Using this constructor no Triangulateio object is built
@@ -453,6 +453,9 @@ namespace oomph
       // By default allow the automatic creation of vertices along the
       // boundaries by Triangle
       this->Allow_automatic_creation_of_vertices_on_boundaries = true;
+      // The default min element interior angle is 30 degrees. This is only
+      // needed when we have the Triangle library.
+      Min_element_interior_angle = 30.0;
 #ifdef OOMPH_HAS_MPI
       // Initialize the flag to indicate this is the first time to
       // compute the holes left by the halo elements
@@ -472,7 +475,6 @@ namespace oomph
       const std::string& poly_file_name,
       TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
       const bool& allow_automatic_creation_of_vertices_on_boundaries = true)
-      : Min_element_interior_angle(30.0)
     {
       // Mesh can only be built with 2D Telements.
       MeshChecker::assert_geometric_element<TElementGeometricBase, ELEMENT>(2);
@@ -505,6 +507,10 @@ namespace oomph
 
       // Record that the triangulateio object has been created
       Triangulateio_exists = true;
+
+      // The default min element interior angle is 30 degrees. This is only
+      // needed when we have the Triangle library.
+      Min_element_interior_angle = 30.0;
 #endif
 
       // Store the attributes
@@ -790,7 +796,6 @@ namespace oomph
       // Initialize the value for allowing creation of points on boundaries
       this->Allow_automatic_creation_of_vertices_on_boundaries =
         allow_automatic_creation_of_vertices_on_boundaries;
-
 #ifdef OOMPH_HAS_MPI
       // Initialize the flag to indicate this is the first time to
       // compute the holes left by the halo elements
@@ -1000,6 +1005,17 @@ namespace oomph
 #endif // OOMPH_HAS_MPI
 
 #ifdef OOMPH_HAS_TRIANGLE_LIB
+    // Provide read-only access to the min_element_interior_angle
+    const double& min_element_interior_angle()
+    {
+      return Min_element_interior_angle;
+    }
+
+    // Provide a set function for the min_element_interior_angle
+    void set_min_element_interior_angle(const double& new_angle)
+    {
+      Min_element_interior_angle = new_angle;
+    }
 
     /// Update the TriangulateIO object to the current nodal position
     /// and the centre hole coordinates.
@@ -1374,6 +1390,10 @@ namespace oomph
 
     /// Boolean defining if Triangulateio object has been built or not
     bool Triangulateio_exists;
+
+    /// Store the Min_element_interior_angle for the mesh generation using the
+    /// Triangle library
+    double Min_element_interior_angle;
 
 #endif // OOMPH_HAS_TRIANGLE_LIB
 
@@ -2256,9 +2276,6 @@ namespace oomph
       H.resize(k);
       return H;
     }
-
-    // Store the Min_element_interior_angle
-    double Min_element_interior_angle;
   };
 
 
