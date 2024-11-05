@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -106,6 +106,7 @@ namespace oomph
       Maximum_dt(1.0e12),
       DTSF_max_increase(4.0),
       DTSF_min_decrease(0.8),
+      Target_error_safety_factor(1.0),
       Minimum_dt_but_still_proceed(-1.0),
       Scale_arc_length(true),
       Desired_proportion_of_arc_length(0.5),
@@ -8225,123 +8226,6 @@ namespace oomph
   }
 
 
-  //================================================================
-  /// Get derivative of an element in the problem wrt a global
-  /// parameter, to be used in continuation problems
-  //================================================================
-  /*void Problem::get_derivative_wrt_global_parameter(
-   double* const &parameter_pt,
-   GeneralisedElement* const &elem_pt,
-   Vector<double> &result)
-  {
-
-  #ifdef OOMPH_HAS_MPI
-
-   if (Problem_has_been_distributed)
-    {
-     OomphLibWarning("This is unlikely to work with a distributed problem",
-                     "Problem::get_derivative_wrt_global_parameter()",
-                     OOMPH_EXCEPTION_LOCATION);
-    }
-  #endif
-
-   //Locally cache pointer to assembly handler
-   AssemblyHandler* const assembly_handler_pt = Assembly_handler_pt;
-
-   //Should definitely give this a more global scope
-   double FD_Jstep = 1.0e-8;
-
-   //Find the number of variables in the element, e
-   unsigned nvar = assembly_handler_pt->ndof(elem_pt);
-   //Create storage for residuals
-   Vector<double> residuals(nvar), newres(nvar);
-
-   //Get the "original" residuals
-   assembly_handler_pt->get_residuals(elem_pt,residuals);
-
-   //Save the old value of the global parameter
-   double old_var = *parameter_pt;
-
-   //Increment the value
-   *parameter_pt += FD_Jstep;
-
-   //Now do any possible updates
-   actions_after_change_in_global_parameter();
-
-   //Get the "new" residuals
-   assembly_handler_pt->get_residuals(elem_pt,newres);
-
-   //Do the finite differences
-   for(unsigned m=0;m<nvar;m++)
-    {
-     result[m] = (newres[m] - residuals[m])/FD_Jstep;
-    }
-
-   //Reset value of the global parameter
-   *parameter_pt = old_var;
-
-   //Now do any possible updates
-   actions_after_change_in_global_parameter();
-  }*/
-
-  //==================================================================
-  /// Solve the eigenproblem. Legacy version that returns real vectors which are
-  /// related in some solver-specific way to the real and imaginary parts
-  /// of the actual, usually complex eigenvalues.
-  /// At least n_eval eigenvalues are computed.
-  //==================================================================
-  void Problem::solve_eigenproblem_legacy(
-    const unsigned& n_eval,
-    Vector<std::complex<double>>& eigenvalue,
-    Vector<DoubleVector>& eigenvector,
-    const bool& make_timesteppers_steady)
-  {
-    // If the boolean flag is steady, then make all the timesteppers steady
-    // before solving the eigenproblem. This will "switch off" the
-    // time-derivative terms in the jacobian matrix
-    if (make_timesteppers_steady)
-    {
-      // Find out how many timesteppers there are
-      const unsigned n_time_steppers = ntime_stepper();
-
-      // Vector of bools to store the is_steady status of the various
-      // timesteppers when we came in here
-      std::vector<bool> was_steady(n_time_steppers);
-
-      // Loop over them all and make them (temporarily) static
-      for (unsigned i = 0; i < n_time_steppers; i++)
-      {
-        was_steady[i] = time_stepper_pt(i)->is_steady();
-        time_stepper_pt(i)->make_steady();
-      }
-
-      const bool do_adjoint_problem = false;
-      // Call the Eigenproblem for the eigensolver
-      Eigen_solver_pt->solve_eigenproblem_legacy(
-        this, n_eval, eigenvalue, eigenvector, do_adjoint_problem);
-
-      // Reset the is_steady status of all timesteppers that
-      // weren't already steady when we came in here and reset their
-      // weights
-      for (unsigned i = 0; i < n_time_steppers; i++)
-      {
-        if (!was_steady[i])
-        {
-          time_stepper_pt(i)->undo_make_steady();
-        }
-      }
-    }
-    // Otherwise if we don't want to make the problem steady, just
-    // assemble and solve the eigensystem
-    else
-    {
-      const bool do_adjoint_problem = false;
-      // Call the Eigenproblem for the eigensolver
-      Eigen_solver_pt->solve_eigenproblem_legacy(
-        this, n_eval, eigenvalue, eigenvector, do_adjoint_problem);
-    }
-  }
-
   //==================================================================
   /// Solve the eigenproblem
   //==================================================================
@@ -8469,63 +8353,6 @@ namespace oomph
                                           eigenvector_real,
                                           eigenvector_imag,
                                           do_adjoint_problem);
-    }
-  }
-
-
-  //==================================================================
-  /// Solve the adjoint eigenproblem
-  //==================================================================
-  void Problem::solve_adjoint_eigenproblem_legacy(
-    const unsigned& n_eval,
-    Vector<std::complex<double>>& eigenvalue,
-    Vector<DoubleVector>& eigenvector,
-    const bool& make_timesteppers_steady)
-  {
-    // If the boolean flag is steady, then make all the timesteppers steady
-    // before solving the eigenproblem. This will "switch off" the
-    // time-derivative terms in the jacobian matrix
-    if (make_timesteppers_steady)
-    {
-      // Find out how many timesteppers there are
-      const unsigned n_time_steppers = ntime_stepper();
-
-      // Vector of bools to store the is_steady status of the various
-      // timesteppers when we came in here
-      std::vector<bool> was_steady(n_time_steppers);
-
-      // Loop over them all and make them (temporarily) static
-      for (unsigned i = 0; i < n_time_steppers; i++)
-      {
-        was_steady[i] = time_stepper_pt(i)->is_steady();
-        time_stepper_pt(i)->make_steady();
-      }
-
-      const bool do_adjoint_problem = true;
-      // Call the Eigenproblem for the ajoint-problem eigensolver
-      // NB Only different to solve_eigenproblem
-      Eigen_solver_pt->solve_eigenproblem_legacy(
-        this, n_eval, eigenvalue, eigenvector, do_adjoint_problem);
-
-      // Reset the is_steady status of all timesteppers that
-      // weren't already steady when we came in here and reset their
-      // weights
-      for (unsigned i = 0; i < n_time_steppers; i++)
-      {
-        if (!was_steady[i])
-        {
-          time_stepper_pt(i)->undo_make_steady();
-        }
-      }
-    }
-    // Otherwise if we don't want to make the problem steady, just
-    // assemble and solve the eigensystem
-    else
-    {
-      const bool do_adjoint_problem = true;
-      // Call the Eigenproblem for the eigensolver
-      Eigen_solver_pt->solve_eigenproblem_legacy(
-        this, n_eval, eigenvalue, eigenvector, do_adjoint_problem);
     }
   }
 
@@ -11370,7 +11197,7 @@ namespace oomph
         {
           // Reject the timestep, if we have an exception
           oomph_info << "TIMESTEP REJECTED" << std::endl;
-          reject_timestep = 1;
+          reject_timestep = true;
 
           // Half the time step
           dt_rescaling_factor = Timestep_reduction_factor_after_nonconvergence;
@@ -11406,36 +11233,59 @@ namespace oomph
         // but use absolute value just in case.
         double error = std::max(std::abs(global_temporal_error_norm()), 1e-12);
 
-        // Calculate the scaling  factor
-        dt_rescaling_factor = std::pow(
-          (epsilon / error), (1.0 / (1.0 + time_stepper_pt()->order())));
+        // Target error that we wish our next timestep to approximately produce
+        // as a factor of the maximum error tolerance
+        double target_error = Target_error_safety_factor * epsilon;
 
-        oomph_info << "Timestep scaling factor is  " << dt_rescaling_factor
-                   << std::endl;
-        oomph_info << "Estimated timestepping error is " << error << std::endl;
+        // Calculate the scaling factor
+        dt_rescaling_factor = std::pow(
+          (target_error / error), (1.0 / (1.0 + time_stepper_pt()->order())));
+
+        oomph_info
+          << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n"
+          << "Estimated timestepping error is " << error << "\n"
+          << "Timestep scaling factor is " << dt_rescaling_factor << "\n";
 
 
         // Do we have to do it again?
         if (error > epsilon)
         {
           oomph_info << "Estimated timestepping error " << error
-                     << " exceeds tolerance " << epsilon << " ";
+                     << " exceeds tolerance " << epsilon << "\n";
           if (Keep_temporal_error_below_tolerance)
           {
-            oomph_info << " --> rejecting timestep." << std::endl;
-            reject_timestep = 1;
+            oomph_info << "    --> rejecting timestep.\n";
+            reject_timestep = true;
           }
           else
           {
-            oomph_info << " ...but we're not rejecting the timestep"
-                       << std::endl;
+            oomph_info << "    ...but we're not rejecting the timestep\n";
           }
           oomph_info
-            << "Note: This behaviour can be adjusted by changing the protected "
-            << "boolean" << std::endl
-            << std::endl
-            << "    Problem::Keep_temporal_error_below_tolerance" << std::endl;
+            << "Note: This behaviour can be adjusted by changing the\n"
+            << "protected boolean\n"
+            << "    Problem::Keep_temporal_error_below_tolerance\n\n"
+            << "Also, if you are noticing that many of your timesteps result\n"
+            << "in error > tolerance, try reducing the target error with\n"
+            << "respect to the error tolerance by reducing the value of\n"
+            << "Target_error_safety_factor from its default value of 1.0\n"
+            << "using the access function\n"
+            << "    target_error_safety_factor() = 0.5 (e.g.)\n"
+            << "The default strategy (Target_error_safety_factor=1.0) tries\n"
+            << "to suggest a timestep which will produce an error equal to\n"
+            << "the error tolerance `epsilon` which risks error > tolerance\n"
+            << "quite often. Setting the safety factor to too small a value\n"
+            << "will make the timesteps unnecessarily small; too large will\n"
+            << "not address the issue -- neither is optimal and a problem\n"
+            << "dependent compromise is needed.\n"
+            << "for more info see:\n"
+            << " Mayr et al. (2018), p5,9, DOI:10.1016/j.finel.2017.12.002\n"
+            << " Harrier et al. (1993), p168, ISBN:978-3-540-56670-0\n"
+            << " Söderlind (2002), (2.7) on p5, DOI:10.1023/A:1021160023092\n";
         }
+        oomph_info
+          << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n"
+          << std::endl;
 
 
       } // End of if adaptive flag

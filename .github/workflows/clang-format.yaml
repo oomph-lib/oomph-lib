@@ -22,7 +22,7 @@ jobs:
 
       # Format all files in the src/ directory except cfortran.h, lapack_qz.h,
       # superlu.c, superlu_dist.c, which sit in the src/generic/ subdirectory.
-      - uses: PuneetMatharu/clang-format-lint-action@v0.13
+      - uses: PuneetMatharu/clang-format-lint-action@v0.18
         with:
           files: ^(src)\/(?!.*(cfortran|lapack_qz))(.+)\.(h|cc)$
           clangFormatVersion: 12
