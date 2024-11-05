@@ -1940,43 +1940,6 @@ namespace oomph
       Vector<DoubleVectorWithHaloEntries>& product);
 
 
-    /// Get derivative of an element in the problem wrt a global
-    /// parameter, used in continuation problems
-    // void get_derivative_wrt_global_parameter(double* const &parameter_pt,
-    //                                         GeneralisedElement* const
-    //                                         &elem_pt, Vector<double>
-    //                                         &result);
-
-    /// Solve an eigenproblem as assembled by the Problem's constituent
-    /// elements. Calculate (at least) n_eval eigenvalues and return the
-    /// corresponding eigenvectors. The boolean flag (default true) specifies
-    /// whether the steady jacobian should be assembled. If the flag is false
-    /// then the weighted mass-matrix terms from the timestepper will
-    /// be included in the jacobian --- this is almost certainly never
-    /// wanted. Legacy version that returns real vectors which are
-    /// related in some solver-specific way to the real and imaginary parts
-    /// of the actual, usually complex eigenvalues.
-    void solve_eigenproblem_legacy(const unsigned& n_eval,
-                                   Vector<std::complex<double>>& eigenvalue,
-                                   Vector<DoubleVector>& eigenvector,
-                                   const bool& steady = true);
-
-    /// Solve an eigenproblem as assembled by the Problem's constituent
-    /// elements. Calculate (at least) n_eval eigenvalues.
-    /// The boolean flag (default true) specifies
-    /// whether the steady jacobian should be assembled. If the flag is false
-    /// then the weighted mass-matrix terms from the timestepper will
-    /// be included in the jacobian --- this is almost certainly never
-    /// wanted. Legacy version.
-    void solve_eigenproblem_legacy(const unsigned& n_eval,
-                                   Vector<std::complex<double>>& eigenvalue,
-                                   const bool& steady = true)
-    {
-      // Create temporary storage for the eigenvectors (potentially wasteful)
-      Vector<DoubleVector> eigenvector;
-      solve_eigenproblem_legacy(n_eval, eigenvalue, eigenvector, steady);
-    }
-
     /// Solve an eigenproblem as assembled by the Problem's constituent
     /// elements. Calculate (at least) n_eval eigenvalues and return the
     /// corresponding eigenvectors. The boolean flag (default true) specifies
@@ -2059,19 +2022,6 @@ namespace oomph
       solve_eigenproblem(
         n_eval, alpha, beta, eigenvector_real, eigenvector_imag, steady);
     }
-
-    /// Solve an adjoint eigenvalue problem using the same procedure as
-    /// solve_eigenproblem. See the documentation on that function for more
-    /// details.
-    /// Note: this is a legacy version of this function that stores re & imag
-    /// parts of eigenvectors in some solver-specific collection of real
-    /// vectors.
-    void solve_adjoint_eigenproblem_legacy(
-      const unsigned& n_eval,
-      Vector<std::complex<double>>& eigenvalue,
-      Vector<DoubleVector>& eigenvector,
-      const bool& make_timesteppers_steady = true);
-
 
     /// Solve an adjoint eigenvalue problem using the same procedure as
     /// solve_eigenproblem. See the documentation on that function for more

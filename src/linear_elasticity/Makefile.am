@@ -5,7 +5,8 @@
 # Define the sources
 sources =  \
 elasticity_tensor.cc linear_elasticity_elements.cc \
-refineable_linear_elasticity_elements.cc Tlinear_elasticity_elements.cc
+refineable_linear_elasticity_elements.cc Tlinear_elasticity_elements.cc \
+linear_elasticity_traction_elements.cc 
 
 # Include files which shouldn't be compiled
 incl_cc_files =
@@ -15,7 +16,7 @@ headers =  \
 elasticity_tensor.h linear_elasticity_elements.h \
 linear_elasticity_traction_elements.h \
 Tlinear_elasticity_elements.h \
-refineable_linear_elasticity_elements.h 
+refineable_linear_elasticity_elements.h
 
 
 # Template only files. These should be included in include directory

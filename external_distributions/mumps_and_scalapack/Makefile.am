@@ -21,7 +21,7 @@ endif
 if ALREADY_HAVE_LAPACK
 lapack_lib="$(LAPACK_LIB)"
 else
-lapack_lib="$(oomph_abs_top_srcdir)/external_src/oomph_flapack/.libs/liboomph_flapack.a" 
+lapack_lib="$(oomph_abs_top_srcdir)/external_src/oomph_flapack/.libs/liboomph_flapack.a"
 endif
 
 # Default for install directory
@@ -132,7 +132,7 @@ endif
 #OLD (PYTHON2)	echo "sed 's/.\/tmpf/date/g' script/framework.py.orig | sed 's/.\/tmpc/date/g' > script/framework.py ">> build_script.bash
 #OLD (PYTHON2)	echo "patch script/blacs.py < ../../build_scripts/blacs.py.patch  ">> build_script.bash
 	echo "echo "Building... [this can take a while!]"" >> build_script.bash
-	echo "./setup.py --notesting --downblacs --lapacklib=$(lapack_lib) --blaslib=$(blas_lib) --mpiincdir=$(mpi_include) --mpicc=$(CC) --mpif77=$(F77) --ccflags=\"$(CFLAGS)\" --fcflags=\"$(FFLAGS) -fallow-argument-mismatch\"  --ldflags_c=\"$(CFLAGS)\" --ldflags_f77=\"$(FFLAGS)\" --noopt=\"$(FFLAGS_NO_OPT)\" > scalapack.log" >> build_script.bash
+	echo "python3 setup.py --notesting --downblacs --lapacklib=$(lapack_lib) --blaslib=$(blas_lib) --mpiincdir=$(mpi_include) --mpicc=$(CC) --mpif77=$(F77) --ccflags=\"$(CFLAGS)\" --fcflags=\"$(FFLAGS) -fallow-argument-mismatch\"  --ldflags_c=\"$(CFLAGS)\" --ldflags_f77=\"$(FFLAGS)\" --noopt=\"$(FFLAGS_NO_OPT)\" > scalapack.log" >> build_script.bash
 	echo "" >> build_script.bash
 	echo "echo \"...done!\"" >> build_script.bash
 	echo "echo \"here's the scalapack.log:\"" >> build_script.bash
@@ -203,8 +203,8 @@ endif
 	echo "cp scalapack/scalapack_installer_0.94/lib/libscalapack.a scalapack/scalapack_installer_0.94/lib/blacs.a scalapack/scalapack_installer_0.94/lib/blacsC.a scalapack/scalapack_installer_0.94/lib/blacsF77.a mumps_and_scalapack_default_installation/lib "  >> build_script.bash
 	echo "cp mumps_and_scalapack_default_installation/lib/blacs.a mumps_and_scalapack_default_installation/lib/blacs_copy.a "  >> build_script.bash
 	echo "cp mumps/MUMPS_4.10.0/lib/libdmumps.a mumps/MUMPS_4.10.0/include/*  mumps_and_scalapack_default_installation/include"  >> build_script.bash
-	chmod a+x build_script.bash 
-	./build_script.bash 
+	chmod a+x build_script.bash
+	./build_script.bash
 
 clean-local:
 	rm -f build_script.bash

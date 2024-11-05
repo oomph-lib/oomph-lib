@@ -7,8 +7,6 @@
 # what's missing from outside the code. So unfortunately can't do anything
 # fancy with hypre tests etc..
 
-
-
 # ASSUMPTIONS:
 
 # All validate.sh scripts return an appropriate exit status. Otherwise this

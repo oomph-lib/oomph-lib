@@ -691,6 +691,10 @@ namespace oomph
       return Data_pt[Ninternal_data + i];
     }
 
+    /// Static boolean to suppress warnings about repeated
+    /// data. Defaults to false.
+    static bool Suppress_warning_about_any_repeated_data;
+
     /// Static boolean to suppress warnings about repeated internal
     /// data. Defaults to false.
     static bool Suppress_warning_about_repeated_internal_data;
