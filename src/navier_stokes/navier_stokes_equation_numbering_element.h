@@ -120,6 +120,12 @@ namespace oomph
     /// Return the number of velocity components for use in
     /// general FluidInterface class
     virtual inline unsigned n_u_nst() const = 0;
+
+    /// Return FE interpolated pressure at local coordinate s
+    virtual double interpolated_p_nst(const Vector<double>& s) const
+    {
+      return 0;
+    }
   };
 } // namespace oomph
 #endif

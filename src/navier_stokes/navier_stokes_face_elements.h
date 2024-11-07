@@ -113,6 +113,24 @@ namespace oomph
       const unsigned nodal_index = nst_continuity_index(n);
       return this->nodal_local_eqn(n, nodal_index);
     }
+
+    virtual double interpolated_p(const Vector<double>& s)
+    {
+      // Find corresponding coordinate in the the bulk element
+      Vector<double> s_bulk(this->dim() + 1);
+      s_bulk = this->local_coordinate_in_bulk(s);
+
+      // Get cast bulk element
+      NavierStokesEquationNumberingElement* bulk_el_pt =
+        dynamic_cast<NavierStokesEquationNumberingElement*>(
+          this->bulk_element_pt());
+
+      // Get the pressure from the bulk element
+      double interpolated_p = bulk_el_pt->interpolated_p_nst(s_bulk);
+
+      /// Return the interpolated pressure
+      return (interpolated_p);
+    }
   };
 
 } // namespace oomph

@@ -186,14 +186,13 @@ namespace oomph
         }
 
         // Pressure
-        // outfile << this->interpolated_p(s) << ",";
+        outfile << this->interpolated_p(s) << ",";
 
         // Lagrange multipliers
         outfile << interpolated_lambda(s);
 
         outfile << std::endl;
       }
-      outfile << std::endl;
     }
 
     /// The "global" intrinsic coordinate of the element when
