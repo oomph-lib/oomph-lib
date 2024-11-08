@@ -709,6 +709,13 @@ namespace oomph
         // Size
         outfile << this->size() << " ";
 
+        // Output the continuity residual
+        const double r = x[0];
+        const double cont_res = interpolated_dudx_axi_nst(s, 0, 0) +
+                                1 / r * velocity[0] +
+                                interpolated_dudx_axi_nst(s, 1, 1);
+        outfile << cont_res << " ";
+
         if (IsStressOutputIncluded)
         {
           // Total stress

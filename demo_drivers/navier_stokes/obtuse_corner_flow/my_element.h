@@ -45,6 +45,11 @@ namespace oomph
         // Output the element size
         outfile << this->size() << " ";
 
+        // Output the continuity residual
+        const double cont_res =
+          interpolated_dudx_nst(s, 0, 0) + interpolated_dudx_nst(s, 1, 1);
+        outfile << cont_res << " ";
+
         outfile << std::endl;
       }
       outfile << std::endl;
