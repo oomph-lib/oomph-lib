@@ -83,7 +83,7 @@ namespace oomph
     double Max_timestep = 1e-1;
 
     /// Small augmented
-    double Augmented_radius = 0.3;
+    double Augmented_radius = 0.00005;
   }; // namespace Mesh_Control_Parameters
 
   namespace Plot_Parameters

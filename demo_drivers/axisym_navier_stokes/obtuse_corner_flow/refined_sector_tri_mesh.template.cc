@@ -514,8 +514,6 @@ namespace oomph
     // End of extra nodes for 6 noded trianglur elements
 
     setup_boundary_element_info();
-
-    oomph_info << "check mesh: " << check_for_repeated_nodes() << std::endl;
   }
 
   //================================================================

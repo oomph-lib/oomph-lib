@@ -15,7 +15,7 @@ namespace oomph
     double reynolds_number = 0.0;
     double strouhal_reynolds_number = 1.0;
     const double small_r = 1e-4;
-    const double inner_radius = 0.3;
+    const double inner_radius = 0.001;
     const unsigned nsegment = 32;
   } // namespace parameters
 } // namespace oomph

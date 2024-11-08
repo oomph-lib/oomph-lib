@@ -20,6 +20,8 @@
 #include "parameters.h"
 #include "pressure_evaluation_elements.h"
 #include "projectable_axisymmetric_Ttaylor_hood_elements.h"
+#include "refined_sector_tri_mesh.template.h"
+#include "refined_sector_tri_mesh.template.cc"
 #include "singular_fluid_traction_elements.h"
 #include "utility_functions.h"
 
@@ -31,7 +33,7 @@ namespace oomph
   {
   private:
     /// Private variables
-    RefineableTriangleMesh<ELEMENT>* Bulk_mesh_pt;
+    RefinedSectorTriMesh<ELEMENT>* Bulk_mesh_pt;
     Node* Contact_line_node_pt;
 
     Mesh* No_penetration_boundary_mesh_pt;
@@ -39,6 +41,7 @@ namespace oomph
     Mesh* Slip_boundary_mesh_pt;
 
     DocInfo Doc_info;
+    Z2ErrorEstimator* Z2_error_estimator_pt;
 
     Vector<unsigned> Augmented_bulk_element_number;
     Mesh* Singularity_scaling_mesh_pt;
@@ -48,19 +51,21 @@ namespace oomph
 
   public:
     // Constructor
-    SingularAxisymSectorProblem() : Contact_line_node_pt(0)
+    SingularAxisymSectorProblem(const unsigned& n_radial = 10,
+                                const unsigned& n_azimuthal = 10)
+      : Contact_line_node_pt(0), Z2_error_estimator_pt(new Z2ErrorEstimator)
     {
       // Create and add the timestepper
       add_time_stepper_pt(new BDF<2>);
 
-      // Create an empty mesh
-      add_bulk_mesh();
-      add_non_adaptive_sub_meshes();
-      build_global_mesh();
-
       // Assign doc info pointer
       Doc_info.set_directory("RESLT");
       Doc_info.number() = 0;
+
+      // Create an empty mesh
+      add_bulk_mesh(n_radial, n_azimuthal);
+      add_non_adaptive_sub_meshes();
+      build_global_mesh();
 
       // From here should be actions_after_adapt
       actions_after_adapt();
@@ -172,6 +177,10 @@ namespace oomph
         delete this->mesh_pt(i);
         this->mesh_pt(i) = 0;
       }
+      if (Z2_error_estimator_pt)
+      {
+        delete Z2_error_estimator_pt;
+      }
     }
 
     // Delete the created elements
@@ -234,34 +243,8 @@ namespace oomph
       }
     }
 
-    void make_steady()
-    {
-      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(8));
-      el_pt->fix_pressure(0, 0.0);
-      Vector<double> s(2, 0.0);
-      Vector<double> x(2, 0.0);
-      el_pt->get_x(s, x);
-      oomph_info << "Pressure point, ";
-      oomph_info << "x: " << x[0] << ", ";
-      oomph_info << "y: " << x[1] << ", ";
-      oomph_info << endl;
-    }
-
-    void make_unsteady()
-    {
-      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(8));
-      el_pt->free_pressure(0);
-      Vector<double> s(2, 0.0);
-      Vector<double> x(2, 0.0);
-      el_pt->get_x(s, x);
-      oomph_info << "Pressure point, ";
-      oomph_info << "x: " << x[0] << ", ";
-      oomph_info << "y: " << x[1] << ", ";
-      oomph_info << endl;
-    }
-
   private:
-    void add_bulk_mesh();
+    void add_bulk_mesh(const unsigned& n_radial, const unsigned& n_azimuthal);
     void create_slip_elements();
     void create_no_penetration_elements(const unsigned& boundary_id);
     void create_far_field_elements();
@@ -306,8 +289,15 @@ namespace oomph
     {
       oomph_info << "set_boundary_conditions" << endl;
 
-      // Pin the pressure at one point
-      this->Bulk_mesh_pt->node_pt(0)->pin(4);
+      // Pin the pressure at one point, the top right
+      unsigned element_index = 0;
+      unsigned node_index = 0;
+      find_corner_bulk_node(
+        Slip_boundary_id, Far_field_boundary_id, element_index, node_index);
+      const unsigned pressure_index = 3;
+      this->Bulk_mesh_pt->boundary_element_pt(Slip_boundary_id, element_index)
+        ->node_pt(node_index)
+        ->pin(pressure_index);
 
       // Fix end points far field boundary condition lagrange_multipliers
       pin_far_field_lagrange_multiplier_end_points();
@@ -341,43 +331,19 @@ namespace oomph
   };
 
   template<class ELEMENT>
-  void SingularAxisymSectorProblem<ELEMENT>::add_bulk_mesh()
+  void SingularAxisymSectorProblem<ELEMENT>::add_bulk_mesh(
+    const unsigned& n_radial, const unsigned& n_azimuthal)
   {
     oomph_info << "add_bulk_mesh" << endl;
 
-    // Generate triangle_mesh_parameters
-    // ---------------------------------
-
-    // Setup the sector boundaries
-    Vector<TriangleMeshCurveSection*> boundary_polyline_pt;
-    create_sector_domain(parameters::contact_angle, boundary_polyline_pt);
-
-    // Create an interior point: Assuming the contact angle is alpha > 1e-2
-    // and the radius is > 0.5
-    Vector<double> internal_point_pt(2);
-    internal_point_pt[0] = 2 - 0.5 * sin(1e-2 * MathematicalConstants::Pi);
-    internal_point_pt[1] = 0.5 * cos(1e-2 * MathematicalConstants::Pi);
-
-    // Set up a bool for whether the internal point is fixed
-    const bool is_internal_point_fixed = true;
-
-    // True the curve sections into a closed curve
-    TriangleMeshClosedCurve* outer_closed_curve_pt =
-      new TriangleMeshClosedCurve(
-        boundary_polyline_pt, internal_point_pt, is_internal_point_fixed);
-
-    // Create the Triangle mesh generator parameters
-    // WARNING: outer_closed_curve_pt's destruction is handled by
-    // TriangleMeshParameters. This is unexpected behaviour.
-    TriangleMeshParameters triangle_mesh_parameters(outer_closed_curve_pt);
-
-    triangle_mesh_parameters.element_area() = parameters::element_area;
-
-    // ---------------------------------
-
     // Generate the mesh using the template ELEMENT
-    Bulk_mesh_pt = new RefineableTriangleMesh<ELEMENT>(triangle_mesh_parameters,
-                                                       this->time_stepper_pt());
+    Bulk_mesh_pt = new RefinedSectorTriMesh<ELEMENT>(
+      n_radial,
+      1.04,
+      n_azimuthal,
+      0.9,
+      135.0 * MathematicalConstants::Pi / 180.0,
+      this->time_stepper_pt());
 
     // Add mesh to problem
     add_sub_mesh(Bulk_mesh_pt);
@@ -902,6 +868,29 @@ namespace oomph
       output_stream.close();
     }
 
+    // Get/output error estimates
+    unsigned n_elements = Bulk_mesh_pt->nelement();
+    Vector<double> elemental_error(n_elements);
+    // We need a dynamic cast, get_element_errors from the Bulk_mesh_pt
+    // Dynamic cast is used because get_element_errors require a Mesh* ans
+    // not a SolidMesh*
+    Mesh* fluid_mesh_pt = dynamic_cast<Mesh*>(Bulk_mesh_pt);
+    Z2_error_estimator_pt->get_element_errors(fluid_mesh_pt, elemental_error);
+    // Set errors for post-processing and find extrema
+    double max_err = 0.0;
+    double min_err = 1e8;
+    for (unsigned e = 0; e < n_elements; e++)
+    {
+      dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e))
+        ->set_error(elemental_error[e]);
+
+      max_err = std::max(max_err, elemental_error[e]);
+      min_err = std::min(min_err, elemental_error[e]);
+    }
+
+    oomph_info << "Max error is " << max_err << std::endl;
+    oomph_info << "Min error is " << min_err << std::endl;
+
     sprintf(filename,
             "%s/soln%i.dat",
             Doc_info.directory().c_str(),
@@ -934,7 +923,7 @@ namespace oomph
             Doc_info.directory().c_str(),
             Doc_info.number());
     output_stream.open(filename);
-    output_stream << "x,y,l_x,l_y,n_x,n_y,u,v" << endl;
+    output_stream << "x,y,l_x,l_y,n_x,n_y,u,v,p" << endl;
     Slip_boundary_mesh_pt->output(output_stream, npts);
     output_stream.close();
 
