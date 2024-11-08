@@ -62,8 +62,6 @@ namespace oomph
     : public virtual BASIC_AXISYM_NAVIER_STOKES_ELEMENT
   {
   private:
-    double Error;
-
     bool IsAugmented;
     /// Vector of pointers to SingularNavierStokesSolutionElement objects
     Vector<SingularNavierStokesSolutionElement<
@@ -92,7 +90,7 @@ namespace oomph
   public:
     /// Constructor
     SingularAxisymNavierStokesElement()
-      : BASIC_AXISYM_NAVIER_STOKES_ELEMENT(), Error(0.0), IsAugmented(false)
+      : BASIC_AXISYM_NAVIER_STOKES_ELEMENT(), IsAugmented(false)
     {
       // Find the number of nodes in the element
       const unsigned n_node = this->nnode();
@@ -162,17 +160,6 @@ namespace oomph
         Imposed_value_at_pressure_dof[l] = 0.0;
       }
     } // End of constructor
-
-    // Set error value for post-processing
-    void set_error(const double& error)
-    {
-      Error = error;
-    }
-
-    void get_error(double& error)
-    {
-      error = Error;
-    }
 
     //==============================================================
     /// Get strain-rate tensor: \f$ e_{ij} \f$  where
@@ -672,7 +659,7 @@ namespace oomph
     void output(std::ostream& outfile, const unsigned& nplot)
     {
       const bool IsStressOutputIncluded = false;
-      const bool IsSingularOutputInclude = false;
+      const bool IsSingularOutputInclude = true;
 
       // Find the dimension of the problem
       unsigned cached_dim = this->dim();
@@ -717,7 +704,7 @@ namespace oomph
         outfile << this->interpolated_p_nst_fe_only(s) << " ";
 
         // Error
-        outfile << Error << " ";
+        outfile << this->get_error() << " ";
 
         // Size
         outfile << this->size() << " ";
@@ -778,13 +765,6 @@ namespace oomph
           }
         } // End of augmented
 
-        // Error
-        double local_error = 0.0;
-        this->get_error(local_error);
-        outfile << local_error << " ";
-
-        // Size
-        outfile << this->size() << " ";
 
         outfile << std::endl;
       }
