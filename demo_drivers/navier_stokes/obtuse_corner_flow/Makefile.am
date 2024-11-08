@@ -6,16 +6,12 @@ all: obtuse_corner_flow run_tests
 
 # Name of executables
 check_PROGRAMS= \
-	obtuse_corner_flow \
 	structured_no_correction \
-	structured_with_correction \
-	run_tests
+	structured_with_correction
 
 # Sources for second executable
-obtuse_corner_flow_SOURCES = obtuse_corner_flow.cc
 structured_no_correction_SOURCES = structured_no_correction.cc
 structured_with_correction_SOURCES = structured_with_correction.cc
-run_tests_SOURCES = run_tests.cc
 
 # Required libraries: 
 # $(FLIBS) is included in case the solver involves fortran sources.
