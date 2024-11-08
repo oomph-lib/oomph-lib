@@ -292,7 +292,7 @@ namespace oomph
     // Generate the mesh using the template ELEMENT
     Bulk_mesh_pt = new RefinedSectorTriMesh<ELEMENT>(
       n_radial,
-      1.5,
+      1.04,
       n_azimuthal,
       0.9,
       135.0 * MathematicalConstants::Pi / 180.0,

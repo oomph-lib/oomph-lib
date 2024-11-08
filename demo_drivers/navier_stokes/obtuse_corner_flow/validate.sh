@@ -12,52 +12,13 @@ touch Validation
 rm -r -f Validation
 mkdir Validation
 
-# Validation for linear stability run with restart
-#--------------------------------------------------
-validate(){
-    # Expects to be called as
-    # validate executable input actual_output_filename expected_output_filename
-  
-  mkdir Validation/RESLT
-
-  var="./$1 > Validation/OUTPUT"
-  echo $var
-  eval $var
-  echo "done"
-  LOG="Validation/validation.log"
-  echo " " >> $LOG 
-  echo "Validation run" >> $LOG
-  echo "---------------------------------------------" >> $LOG
-  echo " " >> $LOG
-  echo "Validation directory: " >> $LOG
-  echo " " >> $LOG
-  echo "  " `pwd` >> $LOG
-  echo " " >> $LOG
-
-  ## Compute expected file name 
-  #TEMP=$(basename -- $2)
-  #FILE=${1%% *}"_"${TEMP%.*}"_results.dat"
-  FILE=${3%.*}
-  echo Validation/$FILE
-  cat  Validation/RESLT/$2 > Validation/$FILE
-  rm Validation/RESLT -r
-  
-  if test "$1" = "no_fpdiff"; then
-    echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> $LOG
-  else
-    ../../../bin/fpdiff.py validata/$4  \
-           Validation/$FILE 0.1 2e-7 >> $LOG
-  fi
-  
-}
-
-# Base state scripts
-validate obtuse_corner_flow trace.dat results.dat results.dat.gz
-
-var="./run_tests > Validation/OUTPUT"
+cd Validation
+mkdir RESLT
+var="../structured_no_correction > OUTPUT_no_correction"
 echo $var
 eval $var
 echo "done"
+cd ../
 LOG="Validation/validation.log"
 echo " " >> $LOG 
 echo "Validation run" >> $LOG
@@ -67,11 +28,36 @@ echo "Validation directory: " >> $LOG
 echo " " >> $LOG
 echo "  " `pwd` >> $LOG
 echo " " >> $LOG
-if grep "run_tests.cc" Validation/OUTPUT; then
-    cat Validation/OUTPUT >> $LOG
-    echo "[FAILED] -- Unit tests failed see validation log." >> $LOG
+cat Validation/RESLT/slip_surface0.csv > Validation/structured_no_correction.dat
+if test "$1" = "no_fpdiff"; then
+    echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> $LOG
 else
-    echo "[OK] -- Unit tests passed" >> $LOG
+    ../../../bin/fpdiff.py validata/structured_no_correction.dat.gz  \
+       Validation/structured_no_correction.dat >> $LOG
+fi
+
+cd Validation
+mkdir -p RESLT
+var="../structured_with_correction > OUTPUT_with_correction"
+echo $var
+eval $var
+echo "done"
+cd ../
+LOG="Validation/validation.log"
+echo " " >> $LOG 
+echo "Validation run" >> $LOG
+echo "---------------------------------------------" >> $LOG
+echo " " >> $LOG
+echo "Validation directory: " >> $LOG
+echo " " >> $LOG
+echo "  " `pwd` >> $LOG
+echo " " >> $LOG
+cat Validation/RESLT/slip_surface0.csv > Validation/structured_with_correction.dat
+if test "$1" = "no_fpdiff"; then
+    echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> $LOG
+else
+    ../../../bin/fpdiff.py validata/structured_with_correction.dat.gz  \
+       Validation/structured_with_correction.dat >> $LOG
 fi
 
 #######################################################################
