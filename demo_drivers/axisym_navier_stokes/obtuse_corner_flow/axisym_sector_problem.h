@@ -570,14 +570,6 @@ namespace oomph
     char filename[100];
     unsigned npts = 3;
 
-    if (doc_number == 0)
-    {
-      sprintf(filename, "%s/dofs.txt", Doc_info.directory().c_str());
-      output_stream.open(filename);
-      describe_dofs(output_stream);
-      output_stream.close();
-    }
-
     // Get/output error estimates
     unsigned n_elements = Bulk_mesh_pt->nelement();
     Vector<double> elemental_error(n_elements);
