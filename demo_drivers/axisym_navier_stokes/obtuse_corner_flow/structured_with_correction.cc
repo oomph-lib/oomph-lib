@@ -13,9 +13,9 @@
 
 // Local include files
 #include "parameters.h"
-#include "projectable_axisymmetric_Ttaylor_hood_elements.h"
 #include "singular_axisym_navier_stokes_elements.h"
-#include "axisym_sector_problem.h"
+#include "singular_axisym_sector_problem.h"
+#include "my_element.h"
 
 using namespace oomph;
 
@@ -35,27 +35,10 @@ int main(int argc, char** argv)
   Parameters parameters;
 
   // Create problem
-  AxisymSectorProblem<
-    ProjectableAxisymmetricTaylorHoodElement<AxisymmetricTTaylorHoodElement>>
-    problem;
-
-
-  // problem.debug_jacobian();
-
-  // Unsteady problem
-  const double dt = 2e-2;
-  const double ft = 5 * dt;
-  const unsigned nt = std::ceil(ft / dt);
-
-  for (unsigned it = 0; it < nt; it++)
-  {
-    std::cout << "unsteady_newton_solve" << std::endl;
-    problem.unsteady_newton_solve(dt);
-    problem.doc_solution();
-  }
+  SingularAxisymSectorProblem<SingularAxisymNavierStokesElement<MyElement>>
+    problem(120, 15);
 
   // Steady problem
-  problem.make_steady();
   problem.steady_newton_solve();
   problem.doc_solution();
 

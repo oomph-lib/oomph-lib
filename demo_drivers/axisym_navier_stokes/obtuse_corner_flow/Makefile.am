@@ -1,17 +1,14 @@
 #Include commands common to every Makefile.am
 include $(top_srcdir)/config/makefile_templates/demo_drivers
 
-all: obtuse_corner_flow run_tests 
-	./run_tests
-
 # Name of executables
 check_PROGRAMS= \
-	obtuse_corner_flow \
-	run_tests
+	structured_no_correction \
+	structured_with_correction 
 
 # Sources for second executable
-obtuse_corner_flow_SOURCES = obtuse_corner_flow.cc
-run_tests_SOURCES = run_tests.cc
+structured_no_correction_SOURCES = structured_no_correction.cc
+structured_with_correction_SOURCES = structured_with_correction.cc
 
 # Required libraries: 
 # $(FLIBS) is included in case the solver involves fortran sources.
