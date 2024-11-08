@@ -684,6 +684,27 @@ namespace oomph
                                Shape& test) const;
 
     /// Return FE interpolated pressure at local coordinate s
+    double interpolated_p_axi_nst(const Vector<double>& s) const
+    {
+      // Find number of nodes
+      unsigned n_pres = npres_axi_nst();
+      // Local shape function
+      Shape psi(n_pres);
+      // Find values of shape function
+      pshape_axi_nst(s, psi);
+
+      // Initialise value of p
+      double interpolated_p = 0.0;
+      // Loop over the local nodes and sum
+      for (unsigned l = 0; l < n_pres; l++)
+      {
+        interpolated_p += p_axi_nst(l) * psi[l];
+      }
+
+      return (interpolated_p);
+    }
+
+    /// Return FE interpolated pressure at local coordinate s
     Vector<double> interpolated_dpdx_axi_nst(const Vector<double>& s) const
     {
       // Find number of nodes

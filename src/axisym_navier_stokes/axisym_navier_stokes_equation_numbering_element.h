@@ -113,6 +113,13 @@ namespace oomph
     {
       return p_nodal_index_nst();
     }
+
+    virtual double interpolated_p_axi_nst(const Vector<double>& s) const = 0;
+
+    virtual double interpolated_p_nst(const Vector<double>& s) const override
+    {
+      return interpolated_p_axi_nst(s);
+    }
   };
 } // namespace oomph
 #endif
