@@ -73,7 +73,7 @@ namespace oomph
       // Map the linear r to our increasing refinement
       const double new_r = map_radius_to_refinement(r);
 
-      const double xinit = 1.0;
+      const double xinit = 0.0;
       return xinit - new_r * sin(a);
     }
 
