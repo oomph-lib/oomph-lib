@@ -1,8 +1,11 @@
 #Include commands common to every Makefile.am
 include $(top_srcdir)/config/makefile_templates/demo_drivers
 
-all: obtuse_corner_flow run_tests 
-	./run_tests
+all: structured_no_correction structured_with_correction
+	mkdir RESLT_no_fix
+	./structured_no_correction
+	mkdir RESLT_fix
+	./structured_with_correction
 
 # Name of executables
 check_PROGRAMS= \

@@ -454,8 +454,8 @@ namespace oomph
     // u_sing, v_sing, [w_sing], p_sing
     void output(std::ostream& outfile, const unsigned& nplot)
     {
-      const bool IsStressOutputIncluded = false;
-      const bool IsSingularOutputInclude = false;
+      const bool IsStressOutputIncluded = true;
+      const bool IsSingularOutputInclude = true;
 
       // Find the dimension of the problem
       unsigned cached_dim = this->dim();
@@ -559,8 +559,8 @@ namespace oomph
         outfile << this->size() << " ";
 
         // Output the continuity residual
-        const double cont_res =
-          this->interpolated_dudx_nst(s, 0, 0) + this->interpolated_dudx_nst(s, 1, 1);
+        const double cont_res = this->interpolated_dudx_nst(s, 0, 0) +
+                                this->interpolated_dudx_nst(s, 1, 1);
         outfile << cont_res << " ";
 
         outfile << std::endl;
