@@ -36,7 +36,7 @@ int main(int argc, char** argv)
   Parameters parameters;
 
   // Create problem
-  SectorProblem<ProjectableTaylorHoodElement<MyElement>> problem(140, 15);
+  SectorProblem<ProjectableTaylorHoodElement<MyElement>> problem(200, 10);
 
   // Steady problem
   problem.steady_newton_solve();

@@ -35,8 +35,8 @@ int main(int argc, char** argv)
   Parameters parameters;
 
   // Create problem
-  SingularSectorProblem<SingularNavierStokesElement<MyElement>> problem(140,
-                                                                        15);
+  SingularSectorProblem<SingularNavierStokesElement<MyElement>> problem(200,
+                                                                        10);
 
   // Steady problem
   problem.steady_newton_solve();
