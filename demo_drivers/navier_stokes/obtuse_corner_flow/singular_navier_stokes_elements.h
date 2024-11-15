@@ -792,7 +792,7 @@ namespace oomph
         {
           for (unsigned j = 0; j < cached_dim; j++)
           {
-            const double u_value = this->u_nst(l, i);
+            const double u_value = this->u_reconstructed(l, i);
             interpolated_dudx(i, j) += u_value * dpsifdx(l, j);
           }
         }

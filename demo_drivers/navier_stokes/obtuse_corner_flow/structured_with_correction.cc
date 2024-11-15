@@ -38,6 +38,15 @@ int main(int argc, char** argv)
   SingularSectorProblem<SingularNavierStokesElement<MyElement>> problem(200,
                                                                         10);
 
+  DoubleVector residuals;
+  CRDoubleMatrix jacobian;
+  problem.get_jacobian(residuals, jacobian);
+  jacobian.sparse_indexed_output("jac.dat");
+
+  std::ofstream out("dofs.dat");
+  problem.describe_dofs(out);
+  out.close();
+
   // Steady problem
   problem.steady_newton_solve();
   problem.doc_solution();

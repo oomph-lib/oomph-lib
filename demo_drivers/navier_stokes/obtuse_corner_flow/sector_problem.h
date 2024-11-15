@@ -8,7 +8,6 @@
 
 /// Local headers
 #include "fluid_slip_elements.h"
-#include "domain_boundaries.h"
 #include "far_field_element.h"
 #include "parameter_functions.h"
 #include "parameter_values.h"
@@ -28,7 +27,6 @@ namespace oomph
   private:
     /// Private variables
     RefinedSectorTriMesh<ELEMENT>* Bulk_mesh_pt;
-    Node* Contact_line_node_pt;
 
     Mesh* No_penetration_boundary_mesh1_pt;
     Mesh* No_penetration_boundary_mesh2_pt;
@@ -39,10 +37,16 @@ namespace oomph
     Z2ErrorEstimator* Z2_error_estimator_pt;
 
   public:
+    enum
+    {
+      Slip_boundary_id,
+      Far_field_boundary_id,
+      Free_surface_boundary_id,
+    };
+
     // Constructor
-    SectorProblem(const unsigned& n_radial = 10,
-                  const unsigned& n_azimuthal = 10)
-      : Contact_line_node_pt(0), Z2_error_estimator_pt(new Z2ErrorEstimator)
+    SectorProblem(const unsigned& n_radial, const unsigned& n_azimuthal)
+      : Z2_error_estimator_pt(new Z2ErrorEstimator)
     {
       // Create and add the timestepper
       add_time_stepper_pt(new BDF<2>);
@@ -56,14 +60,7 @@ namespace oomph
       add_non_adaptive_sub_meshes();
       build_global_mesh();
 
-      // From here should be actions_after_adapt
-      actions_after_adapt();
-    }
-
-    // Actions before adapt
-    void actions_after_adapt()
-    {
-      setup_bulk_elements();
+      this->setup_bulk_elements();
       create_nonrefineable_elements();
       set_boundary_conditions();
 
@@ -71,6 +68,9 @@ namespace oomph
       rebuild_global_mesh();
       oomph_info << "Number of unknowns: " << assign_eqn_numbers() << std::endl;
     }
+
+    // Constructor
+    SectorProblem() : Z2_error_estimator_pt(new Z2ErrorEstimator) {}
 
     void create_nonrefineable_elements()
     {
@@ -80,16 +80,11 @@ namespace oomph
       create_far_field_elements();
     }
 
-    void actions_before_adapt()
-    {
-      delete_nonrefineable_elements();
-    }
-
     void delete_nonrefineable_elements()
     {
+      delete_elements(Slip_boundary_mesh_pt);
       delete_elements(No_penetration_boundary_mesh1_pt);
       delete_elements(No_penetration_boundary_mesh2_pt);
-      delete_elements(Slip_boundary_mesh_pt);
       delete_elements(Far_field_mesh_pt);
     }
 
@@ -107,8 +102,6 @@ namespace oomph
 
     void setup_bulk_elements()
     {
-      set_contact_line_node_pt();
-
       unsigned n_bulk = Bulk_mesh_pt->nelement();
       for (unsigned e = 0; e < n_bulk; e++)
       {
@@ -155,38 +148,30 @@ namespace oomph
 
     void doc_solution();
 
-    void debug_residuals()
+    DocInfo* doc_info_pt()
     {
-      DoubleVector res;
-      oomph_info << "get_residuals" << endl;
-      get_residuals(res);
-      res.output("res.dat");
+      return &Doc_info;
     }
 
-  private:
+    RefinedSectorTriMesh<ELEMENT>*& bulk_mesh_pt()
+    {
+      return Bulk_mesh_pt;
+    }
+
+
     void add_bulk_mesh(const unsigned& n_radial, const unsigned& n_azimuthal);
+
+  private:
     void create_slip_elements();
     void create_no_penetration1_elements();
     void create_no_penetration2_elements();
     void create_far_field_elements();
 
-  public:
-    void pin_far_field_elements();
-
-  private:
-    void set_contact_line_node_pt();
-    void compute_error_estimate(double& max_err, double& min_err);
-    void find_corner_bulk_element(const unsigned& boundary_1_id,
-                                  const unsigned& boundary_2_id,
-                                  unsigned& element_index);
     void find_corner_bulk_node(const unsigned& boundary_1_id,
                                const unsigned& boundary_2_id,
                                unsigned& element_index,
                                unsigned& node_index);
 
-    void setup_pressure_contribution_elements();
-
-  private:
     void pin_lagrange_multiplier_end_point(const unsigned boundary_1_id,
                                            const unsigned boundary_2_id)
     {
@@ -213,6 +198,7 @@ namespace oomph
       }
     }
 
+  public:
     void set_boundary_conditions()
     {
       oomph_info << "set_boundary_conditions" << endl;
@@ -249,6 +235,7 @@ namespace oomph
       //                                  Slip_boundary_id);
     }
 
+  private:
     void pin_far_field_lagrange_multiplier_end_points()
     {
       const unsigned n_el = Far_field_mesh_pt->nelement();
@@ -398,55 +385,6 @@ namespace oomph
   }
 
   template<class ELEMENT>
-  void SectorProblem<ELEMENT>::set_contact_line_node_pt()
-  {
-    oomph_info << "set_contact_line_node_pt" << endl;
-
-    unsigned element_index;
-    unsigned node_index;
-
-    find_corner_bulk_node(
-      Slip_boundary_id, Free_surface_boundary_id, element_index, node_index);
-
-    Contact_line_node_pt =
-      Bulk_mesh_pt->boundary_element_pt(Slip_boundary_id, element_index)
-        ->node_pt(node_index);
-  }
-
-  template<class ELEMENT>
-  void SectorProblem<ELEMENT>::compute_error_estimate(double& max_err,
-                                                      double& min_err)
-  {
-    // Get error estimator
-    ErrorEstimator* err_est_pt = Bulk_mesh_pt->spatial_error_estimator_pt();
-
-    // Get/output error estimates
-    unsigned n_elements = Bulk_mesh_pt->nelement();
-    Vector<double> elemental_error(n_elements);
-
-    // We need a dynamic cast, get_element_errors from the Bulk_mesh_pt
-    // Dynamic cast is used because get_element_errors require a Mesh* ans
-    // not a SolidMesh*
-    Mesh* fluid_mesh_pt = dynamic_cast<Mesh*>(Bulk_mesh_pt);
-    err_est_pt->get_element_errors(fluid_mesh_pt, elemental_error);
-
-    // Set errors for post-processing and find extrema
-    max_err = 0.0;
-    min_err = 1e6;
-    for (unsigned e = 0; e < n_elements; e++)
-    {
-      dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e))
-        ->set_error(elemental_error[e]);
-
-      max_err = std::max(max_err, elemental_error[e]);
-      min_err = std::min(min_err, elemental_error[e]);
-    }
-
-    oomph_info << "Max error is " << max_err << std::endl;
-    oomph_info << "Min error is " << min_err << std::endl;
-  }
-
-  template<class ELEMENT>
   void SectorProblem<ELEMENT>::create_far_field_elements()
   {
     oomph_info << "create_far_field_elements" << endl;
@@ -475,39 +413,6 @@ namespace oomph
       // Add it to the mesh
       Far_field_mesh_pt->add_element_pt(el_pt);
     }
-  }
-
-  template<class ELEMENT>
-  void SectorProblem<ELEMENT>::pin_far_field_elements()
-  {
-    const unsigned n_el = Far_field_mesh_pt->nelement();
-    for (unsigned i_el = 0; i_el < n_el; i_el++)
-    {
-      FarFieldElement<ELEMENT>* el_pt = dynamic_cast<FarFieldElement<ELEMENT>*>(
-        Far_field_mesh_pt->element_pt(i_el));
-      const unsigned n_nod = el_pt->nnode();
-      for (unsigned i_nod = 0; i_nod < n_nod; i_nod++)
-      {
-        const unsigned n_eq = 2;
-        for (unsigned i_eq = 0; i_eq < n_eq; i_eq++)
-        {
-          el_pt->pin_lagrange_multiplier(i_nod, i_eq);
-        }
-      }
-    }
-
-    oomph_info << "Number of unknowns: " << assign_eqn_numbers() << std::endl;
-  }
-
-  template<class ELEMENT>
-  void SectorProblem<ELEMENT>::find_corner_bulk_element(
-    const unsigned& boundary_1_id,
-    const unsigned& boundary_2_id,
-    unsigned& element_index)
-  {
-    unsigned dummy_node_index;
-    find_corner_bulk_node(
-      boundary_1_id, boundary_2_id, element_index, dummy_node_index);
   }
 
   template<class ELEMENT>

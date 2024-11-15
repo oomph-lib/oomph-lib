@@ -30,7 +30,6 @@ echo "  " `pwd` >> $LOG
 echo " " >> $LOG
 cat Validation/RESLT_no_fix/slip_surface0.csv > Validation/structured_no_correction.dat
 mv Validation/RESLT_no_fix/soln0.dat Validation/soln0.dat
-rm -r Validation/RESLT_no_fix
 if test "$1" = "no_fpdiff"; then
     echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> $LOG
 else
@@ -56,7 +55,6 @@ echo "  " `pwd` >> $LOG
 echo " " >> $LOG
 cat Validation/RESLT_fix/slip_surface0.csv > Validation/structured_with_correction.dat
 mv Validation/RESLT_fix/soln0.dat Validation/soln1.dat
-rm -r Validation/RESLT_fix
 if test "$1" = "no_fpdiff"; then
     echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> $LOG
 else
