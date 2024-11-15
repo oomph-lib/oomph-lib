@@ -13,7 +13,7 @@ rm -r -f Validation
 mkdir Validation
 
 cd Validation
-mkdir RESLT
+mkdir RESLT_no_fix
 var="../structured_no_correction > OUTPUT_no_correction"
 echo $var
 eval $var
@@ -28,9 +28,9 @@ echo "Validation directory: " >> $LOG
 echo " " >> $LOG
 echo "  " `pwd` >> $LOG
 echo " " >> $LOG
-cat Validation/RESLT/slip_surface0.csv > Validation/structured_no_correction.dat
-mv Validation/RESLT/soln0.dat Validation/soln0.dat
-rm -r Validation/RESLT
+cat Validation/RESLT_no_fix/slip_surface0.csv > Validation/structured_no_correction.dat
+mv Validation/RESLT_no_fix/soln0.dat Validation/soln0.dat
+rm -r Validation/RESLT_no_fix
 if test "$1" = "no_fpdiff"; then
     echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> $LOG
 else
@@ -39,7 +39,7 @@ else
 fi
 
 cd Validation
-mkdir -p RESLT
+mkdir -p RESLT_fix
 var="../structured_with_correction > OUTPUT_with_correction"
 echo $var
 eval $var
@@ -54,9 +54,9 @@ echo "Validation directory: " >> $LOG
 echo " " >> $LOG
 echo "  " `pwd` >> $LOG
 echo " " >> $LOG
-cat Validation/RESLT/slip_surface0.csv > Validation/structured_with_correction.dat
-mv Validation/RESLT/soln0.dat Validation/soln1.dat
-rm -r Validation/RESLT
+cat Validation/RESLT_fix/slip_surface0.csv > Validation/structured_with_correction.dat
+mv Validation/RESLT_fix/soln0.dat Validation/soln1.dat
+rm -r Validation/RESLT_fix
 if test "$1" = "no_fpdiff"; then
     echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> $LOG
 else
