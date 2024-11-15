@@ -8,13 +8,8 @@
 
 /// Local headers
 #include "fluid_slip_elements.h"
-#include "debug_impose_impenetratibility_elements.h"
 #include "domain_boundaries.h"
-#include "eigensolution_elements.h"
-#include "eigensolution_functions.h"
 #include "far_field_element.h"
-#include "free_surface_element.h"
-#include "my_error_estimator.h"
 #include "parameter_functions.h"
 #include "parameter_values.h"
 #include "parameters.h"
@@ -23,7 +18,6 @@
 #include "refined_sector_tri_mesh.template.h"
 #include "refined_sector_tri_mesh.template.cc"
 #include "singular_fluid_traction_elements.h"
-#include "utility_functions.h"
 
 namespace oomph
 {
@@ -169,41 +163,6 @@ namespace oomph
       res.output("res.dat");
     }
 
-    void debug_jacobian()
-    {
-      oomph_info << "debug_jacobian" << std::endl;
-
-      DoubleVector residuals;
-      DenseDoubleMatrix jacobian;
-      DoubleVector residualsFD;
-      DenseDoubleMatrix jacobianFD(ndof());
-
-      get_jacobian(residuals, jacobian);
-      jacobian.sparse_indexed_output(
-        this->Doc_info.directory() + "/jacJ.dat", 16, true);
-      get_fd_jacobian(residualsFD, jacobianFD);
-      jacobianFD.sparse_indexed_output(
-        this->Doc_info.directory() + "/jacfdJ.dat", 16, true);
-
-      bool jacobians_are_equal = compare_matrices(jacobian, jacobianFD);
-
-      if (jacobians_are_equal)
-      {
-        oomph_info << "Computed Jacobian matches finite differenced Jacobian"
-                   << std::endl;
-      }
-      else
-      {
-        oomph_info << "WARNING: Computed Jacobian is different to the finite "
-                      "differenced Jacobian"
-                   << std::endl;
-      }
-      std::ofstream output_stream;
-      output_stream.open(this->Doc_info.directory() + "/dofs.txt");
-      this->describe_dofs(output_stream);
-      output_stream.close();
-    }
-
   private:
     void add_bulk_mesh(const unsigned& n_radial, const unsigned& n_azimuthal);
     void create_slip_elements();
@@ -215,7 +174,6 @@ namespace oomph
     void pin_far_field_elements();
 
   private:
-    void refine_mesh_for_weak_contact_angle_constraint();
     void set_contact_line_node_pt();
     void compute_error_estimate(double& max_err, double& min_err);
     void find_corner_bulk_element(const unsigned& boundary_1_id,
@@ -436,55 +394,6 @@ namespace oomph
       // Add the prescribed-flux element to the surface mesh
       No_penetration_boundary_mesh2_pt->add_element_pt(
         no_penetration_element_pt);
-    }
-  }
-
-  template<class ELEMENT>
-  void SectorProblem<ELEMENT>::refine_mesh_for_weak_contact_angle_constraint()
-  {
-    oomph_info << "Refining the mesh about the contact line" << endl;
-
-    // Set the refinement tolerances
-    Bulk_mesh_pt->max_element_size() = 0.5 * pow(2e-1, 2.0);
-    Bulk_mesh_pt->min_element_size() =
-      0.5 * pow(Mesh_Control_Parameters::min_element_length, 2.0);
-    Bulk_mesh_pt->min_permitted_angle() = 15;
-    Bulk_mesh_pt->min_permitted_error() = 1.0e-2;
-    Bulk_mesh_pt->max_permitted_error() = 1.0;
-
-    double max_error = 1e5;
-    double min_error = 0;
-    const unsigned max_n_adapt = 20;
-    // Call the adapt function until the maximum of the estimated error is
-    // below 1e0 ( = Bulk_mesh->max_permitted_error)
-    for (unsigned i_adapt = 0; i_adapt < max_n_adapt; i_adapt++)
-    {
-      // Check refinement
-
-      // Find the contact line node
-      set_contact_line_node_pt();
-
-      // Get error estimator
-      Bulk_mesh_pt->spatial_error_estimator_pt() =
-        new ContactlineErrorEstimator(
-          Contact_line_node_pt,
-          Mesh_Control_Parameters::min_element_length,
-          Mesh_Control_Parameters::element_length_ratio);
-      compute_error_estimate(max_error, min_error);
-      oomph_info << "Number of adaptions: " << i_adapt
-                 << ", Max error: " << max_error << endl;
-
-      // If we haven't refined enough ...
-      if (max_error > 1e0)
-      {
-        //... refine mesh,
-        this->adapt();
-      }
-      else
-      {
-        // ... else, end loop.
-        break;
-      }
     }
   }
 

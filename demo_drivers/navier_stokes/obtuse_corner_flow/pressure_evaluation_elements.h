@@ -2,7 +2,6 @@
 #define PRESSURE_EVALUATION_ELEMENTS_HEADER
 
 #include "generic.h"
-#include "debug_jacobian_elements.h"
 
 namespace oomph
 {

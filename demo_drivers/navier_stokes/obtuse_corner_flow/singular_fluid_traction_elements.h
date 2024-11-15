@@ -3,7 +3,6 @@
 
 #include "navier_stokes.h"
 #include "singular_navier_stokes_solution_elements.h"
-#include "debug_jacobian_elements.h"
 
 namespace oomph
 {
