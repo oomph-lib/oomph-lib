@@ -1,10 +1,14 @@
 #Include commands common to every Makefile.am
 include $(top_srcdir)/config/makefile_templates/demo_drivers
 
-all: structured_no_correction structured_with_correction
-	mkdir RESLT_no_fix
+all: RESLT_no_fix/soln0.dat RESLT_fix/soln0.dat
+
+RESLT_no_fix/soln0.dat: structured_no_correction
+	mkdir -p RESLT_no_fix
 	./structured_no_correction
-	mkdir RESLT_fix
+
+RESLT_fix/soln0.dat: structured_with_correction
+	mkdir -p RESLT_fix
 	./structured_with_correction
 
 # Name of executables
@@ -25,8 +29,8 @@ LDADD = -L@libdir@ \
 		-lsolid \
 		-lconstitutive \
 		-lgeneric \
-		$(EXTERNAL_LIBS) $(FLIBS)
-#-lgcov 
+		$(EXTERNAL_LIBS) $(FLIBS) \
+		-lgcov 
 
 # Add the paranoid and range checking flags
-AM_CPPFLAGS += #-ggdb -O0 #-DPARANOID  -DRANGE_CHECKING -ggdb -O0 -Wno-misleading-indentation --coverage
+AM_CPPFLAGS += --coverage#-ggdb -O0 #-DPARANOID  -DRANGE_CHECKING -ggdb -O0 -Wno-misleading-indentation 
