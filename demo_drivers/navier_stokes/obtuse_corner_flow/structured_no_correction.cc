@@ -30,13 +30,10 @@ int main(int argc, char** argv)
   MPI_Helpers::init(argc, argv, make_copy_of_mpi_comm_world);
 #endif
 
-  oomph_info << "obtuse_corner_flow" << std::endl;
-
-  // Problem parameters
-  Parameters parameters;
+  oomph_info << "structured_no_correction" << std::endl;
 
   // Create problem
-  SectorProblem<MyElement> problem(200, 10);
+  SectorProblem<MyElement> problem;
 
   // Steady problem
   problem.steady_newton_solve();

@@ -11,12 +11,12 @@
 #include "far_field_element.h"
 #include "parameter_functions.h"
 #include "parameter_values.h"
-#include "parameters.h"
 #include "pressure_evaluation_elements.h"
 //#include "projectable_Ttaylor_hood_elements.h"
 #include "refined_sector_tri_mesh.template.h"
 #include "refined_sector_tri_mesh.template.cc"
 #include "singular_fluid_traction_elements.h"
+#include "parameter_struct.h"
 
 namespace oomph
 {
@@ -36,6 +36,8 @@ namespace oomph
     DocInfo Doc_info;
     Z2ErrorEstimator* Z2_error_estimator_pt;
 
+    Params My_params;
+
   public:
     enum
     {
@@ -45,8 +47,7 @@ namespace oomph
     };
 
     // Constructor
-    SectorProblem(const unsigned& n_radial, const unsigned& n_azimuthal)
-      : Z2_error_estimator_pt(new Z2ErrorEstimator)
+    SectorProblem() : Z2_error_estimator_pt(new Z2ErrorEstimator)
     {
       // Create and add the timestepper
       add_time_stepper_pt(new BDF<2>);
@@ -55,8 +56,11 @@ namespace oomph
       Doc_info.set_directory("RESLT_no_fix");
       Doc_info.number() = 0;
 
+      /// Create parameters from parameters file.
+      My_params = create_parameters_from_file("parameters.dat");
+
       // Create an empty mesh
-      add_bulk_mesh(n_radial, n_azimuthal);
+      add_bulk_mesh();
       add_non_adaptive_sub_meshes();
       build_global_mesh();
 
@@ -68,9 +72,6 @@ namespace oomph
       rebuild_global_mesh();
       oomph_info << "Number of unknowns: " << assign_eqn_numbers() << std::endl;
     }
-
-    // Constructor
-    SectorProblem() : Z2_error_estimator_pt(new Z2ErrorEstimator) {}
 
     void create_nonrefineable_elements()
     {
@@ -109,10 +110,10 @@ namespace oomph
         ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
         // Set the Reynolds number
-        el_pt->re_pt() = &parameters::reynolds_number;
+        el_pt->re_pt() = &My_params.reynolds_number;
 
         // Set the Reynolds Strouhal number
-        el_pt->re_st_pt() = &parameters::strouhal_reynolds_number;
+        el_pt->re_st_pt() = &My_params.strouhal_reynolds_number;
       }
     }
 
@@ -159,7 +160,7 @@ namespace oomph
     }
 
 
-    void add_bulk_mesh(const unsigned& n_radial, const unsigned& n_azimuthal);
+    void add_bulk_mesh();
 
   private:
     void create_slip_elements();
@@ -264,24 +265,21 @@ namespace oomph
   };
 
   template<class ELEMENT>
-  void SectorProblem<ELEMENT>::add_bulk_mesh(const unsigned& n_radial,
-                                             const unsigned& n_azimuthal)
+  void SectorProblem<ELEMENT>::add_bulk_mesh()
   {
     oomph_info << "add_bulk_mesh" << endl;
 
     // Generate the mesh using the template ELEMENT
     Bulk_mesh_pt = new RefinedSectorTriMesh<ELEMENT>(
-      n_radial,
-      1.07,
-      n_azimuthal,
-      10,
-      135.0 * MathematicalConstants::Pi / 180.0,
+      My_params.n_radial,
+      My_params.geometric_base,
+      My_params.n_azimuthal,
+      My_params.sector_radius,
+      My_params.sector_angle * MathematicalConstants::Pi / 180.0,
       this->time_stepper_pt());
 
     // Add mesh to problem
     add_sub_mesh(Bulk_mesh_pt);
-
-    // refine_mesh_for_weak_contact_angle_constraint();
   }
 
   template<class ELEMENT>
