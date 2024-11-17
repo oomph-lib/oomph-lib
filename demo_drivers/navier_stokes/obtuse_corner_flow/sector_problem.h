@@ -63,14 +63,16 @@ namespace oomph
       add_bulk_mesh();
       add_non_adaptive_sub_meshes();
       build_global_mesh();
+    }
 
+    virtual void setup()
+    {
       this->setup_bulk_elements();
       create_nonrefineable_elements();
       set_boundary_conditions();
 
-      /// Is this needed?
-      rebuild_global_mesh();
-      oomph_info << "Number of unknowns: " << assign_eqn_numbers() << std::endl;
+      this->rebuild_global_mesh();
+      oomph_info << "Number of unknowns: " << this->assign_eqn_numbers() << std::endl;
     }
 
     void create_nonrefineable_elements()

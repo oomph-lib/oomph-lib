@@ -34,6 +34,7 @@ int main(int argc, char** argv)
 
   // Create problem
   SectorProblem<MyElement> problem;
+  problem.setup();
 
   // Steady problem
   problem.steady_newton_solve();

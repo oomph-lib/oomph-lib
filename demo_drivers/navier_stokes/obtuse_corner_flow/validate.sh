@@ -11,6 +11,7 @@ NUM_TESTS=2
 touch Validation
 rm -r -f Validation
 mkdir Validation
+cp parameters.dat Validation/
 
 cd Validation
 mkdir RESLT_no_fix

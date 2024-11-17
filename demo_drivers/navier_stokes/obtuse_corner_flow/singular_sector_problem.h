@@ -38,32 +38,26 @@ namespace oomph
     };
 
     // Constructor
-    SingularSectorProblem(const unsigned& n_radial = 10,
-                          const unsigned& n_azimuthal = 10)
-      : Contact_line_node_pt(0)
+    SingularSectorProblem() : SectorProblem<ELEMENT>(), Contact_line_node_pt(0)
     {
-      // Create and add the timestepper
-      this->add_time_stepper_pt(new BDF<2>);
-
-      // Assign doc info pointer
+      // Re-assign doc info pointer
       this->doc_info_pt()->set_directory("RESLT_fix");
-      this->doc_info_pt()->number() = 0;
 
-      // Create an empty mesh
-      this->add_bulk_mesh(n_radial, n_azimuthal);
-      this->add_non_adaptive_sub_meshes();
       add_singular_sub_meshes();
-      this->build_global_mesh();
-
-      setup_and_augment_bulk_elements();
-      this->create_nonrefineable_elements();
-      create_singular_elements();
-      this->set_boundary_conditions();
-
-      /// Is this needed?
       this->rebuild_global_mesh();
-      oomph_info << "Number of unknowns: " << this->assign_eqn_numbers()
-                 << std::endl;
+    }
+
+    void setup()
+    {
+      // Augment the bulk elements
+      setup_and_augment_bulk_elements();
+
+      SectorProblem<ELEMENT>::setup();
+
+      create_singular_elements();
+
+      this->rebuild_global_mesh();
+      oomph_info << "Number of unknowns: " << this->assign_eqn_numbers() << std::endl;
     }
 
     void create_singular_elements()
