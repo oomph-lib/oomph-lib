@@ -57,7 +57,8 @@ namespace oomph
       create_singular_elements();
 
       this->rebuild_global_mesh();
-      oomph_info << "Number of unknowns: " << this->assign_eqn_numbers() << std::endl;
+      oomph_info << "Number of unknowns: " << this->assign_eqn_numbers()
+                 << std::endl;
     }
 
     void create_singular_elements()

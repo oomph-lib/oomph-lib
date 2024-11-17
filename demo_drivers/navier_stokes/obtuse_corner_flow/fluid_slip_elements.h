@@ -63,10 +63,11 @@ namespace oomph
     /// applied slip. (Not all of the input arguments will be
     /// required for all specific load functions but the list should
     /// cover all cases)
-    void (*Slip_fct_pt)(const double& time,
-                        const Vector<double>& x,
-                        const Vector<double>& n,
-                        Vector<double>& result);
+    std::function<void(const double&,
+                       const Vector<double>&,
+                       const Vector<double>&,
+                       Vector<double>&)>
+      Slip_function;
 
     /// Pointer to an wall velocity function. Arguments:
     /// Eulerian coordinate; outer unit normal;
@@ -87,7 +88,7 @@ namespace oomph
                           const Vector<double>& n,
                           Vector<double>& slip) const
     {
-      Slip_fct_pt(time, x, n, slip);
+      Slip_function(time, x, n, slip);
     }
 
     /// Get the wall velocity vector: Pass number of integration point
@@ -119,7 +120,6 @@ namespace oomph
       : NavierStokesFaceElement(),
         FaceGeometry<ELEMENT>(),
         Contact_line_data_index(0),
-        Slip_fct_pt(0),
         Wall_velocity_fct_pt(0)
     {
       // Build the face element
@@ -135,12 +135,13 @@ namespace oomph
 
 
     /// Reference to the slip function pointer
-    void (*&slip_fct_pt())(const double& time,
-                           const Vector<double>& x,
-                           const Vector<double>& n,
-                           Vector<double>& slip)
+    void set_slip_function(
+      const std::function<void(const double&,
+                               const Vector<double>&,
+                               const Vector<double>&,
+                               Vector<double>&)>& slip_function)
     {
-      return Slip_fct_pt;
+      Slip_function = slip_function;
     }
 
     /// Reference to the wall velocity function pointer

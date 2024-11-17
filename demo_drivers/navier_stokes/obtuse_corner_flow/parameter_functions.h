@@ -3,9 +3,27 @@
 
 #include "generic.h"
 #include "parameter_values.h"
+#include "parameter_struct.h"
 
 namespace oomph
 {
+  std::function<void(const double&,
+                     const Vector<double>&,
+                     const Vector<double>&,
+                     Vector<double>&)>
+  slip_function_factory(const double& slip_length)
+  {
+    // Return a lambda that captures 's' and takes 't' and 'x' as arguments
+    return [slip_length](const double& t,
+                         const Vector<double>& x,
+                         const Vector<double>& n,
+                         Vector<double>& slip) -> void
+    {
+      slip[0] = -1;
+      slip[1] = slip_length;
+    };
+  }
+
   namespace parameters
   {
     // Slip length near the on the outer wall near the contact line

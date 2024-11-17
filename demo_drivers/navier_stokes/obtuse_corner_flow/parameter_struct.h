@@ -60,7 +60,6 @@ namespace oomph
 
     return params;
   }
-
 }; // namespace oomph
 
 #endif

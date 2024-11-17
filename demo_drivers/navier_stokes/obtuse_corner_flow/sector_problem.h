@@ -38,6 +38,12 @@ namespace oomph
 
     Params My_params;
 
+    std::function<void(const double&,
+                       const Vector<double>&,
+                       const Vector<double>&,
+                       Vector<double>&)>
+      Slip_function;
+
   public:
     enum
     {
@@ -58,6 +64,7 @@ namespace oomph
 
       /// Create parameters from parameters file.
       My_params = create_parameters_from_file("parameters.dat");
+      Slip_function = slip_function_factory(My_params.slip_length);
 
       // Create an empty mesh
       add_bulk_mesh();
@@ -72,7 +79,8 @@ namespace oomph
       set_boundary_conditions();
 
       this->rebuild_global_mesh();
-      oomph_info << "Number of unknowns: " << this->assign_eqn_numbers() << std::endl;
+      oomph_info << "Number of unknowns: " << this->assign_eqn_numbers()
+                 << std::endl;
     }
 
     void create_nonrefineable_elements()
@@ -311,7 +319,7 @@ namespace oomph
         new NavierStokesSlipElement<ELEMENT>(bulk_elem_pt, face_index);
 
       // Set the pointer to the prescribed slip function
-      slip_element_pt->slip_fct_pt() = &Slip_Parameters::prescribed_slip_fct;
+      slip_element_pt->set_slip_function(Slip_function);
 
       slip_element_pt->wall_velocity_fct_pt() =
         &Slip_Parameters::prescribed_wall_velocity_fct;
