@@ -57,14 +57,6 @@ namespace oomph
 
       add_singular_sub_meshes();
       this->rebuild_global_mesh();
-
-      set_contact_line_node_pt();
-      Velocity_singular_function = velocity_singular_function_factory(
-        this->my_parameters().sector_angle, Contact_line_node_pt);
-      Grad_velocity_singular_function = grad_velocity_singular_function_factory(
-        this->my_parameters().sector_angle, Contact_line_node_pt);
-      Eigensolution_slip_function = eigensolution_slip_function_factory(
-        this->my_parameters().slip_length, Velocity_singular_function);
     }
 
     void setup()
@@ -73,6 +65,16 @@ namespace oomph
       setup_and_augment_bulk_elements();
 
       SectorProblem<ELEMENT>::setup();
+
+      set_contact_line_node_pt();
+      Velocity_singular_function = velocity_singular_function_factory(
+        this->my_parameters().sector_angle * MathematicalConstants::Pi / 180.0,
+        Contact_line_node_pt);
+      Grad_velocity_singular_function = grad_velocity_singular_function_factory(
+        this->my_parameters().sector_angle * MathematicalConstants::Pi / 180.0,
+        Contact_line_node_pt);
+      Eigensolution_slip_function = eigensolution_slip_function_factory(
+        this->my_parameters().slip_length, Velocity_singular_function);
 
       create_singular_elements();
 
