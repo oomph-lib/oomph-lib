@@ -64,12 +64,12 @@ namespace oomph
   {
   public:
     /// Function pointer to the velocity singular function:
-    typedef Vector<double> (*NavierStokesVelocitySingularFctPt)(
-      const Vector<double>& x);
+    typedef std::function<Vector<double>(const Vector<double>&)>
+      NavierStokesVelocitySingularFct;
 
     /// Function pointer to the gradient of the velocity singular function:
-    typedef Vector<Vector<double>> (*NavierStokesGradVelocitySingularFctPt)(
-      const Vector<double>& x);
+    typedef std::function<Vector<Vector<double>>(const Vector<double>&)>
+      NavierStokesGradVelocitySingularFct;
 
     /// Function pointer to the pressure singular function:
     typedef double (*NavierStokesPressureSingularFctPt)(
@@ -84,11 +84,11 @@ namespace oomph
     WRAPPED_NAVIER_STOKES_ELEMENT* Wrapped_navier_stokes_el_pt;
 
     /// Pointer to velocity singular function
-    NavierStokesVelocitySingularFctPt Velocity_singular_fct_pt;
+    NavierStokesVelocitySingularFct Velocity_singular_fct;
 
     /// Pointer to gradient of velocity singular function;
     /// grad[i][j] = du_i/dx_j
-    NavierStokesGradVelocitySingularFctPt Grad_velocity_singular_fct_pt;
+    NavierStokesGradVelocitySingularFct Grad_velocity_singular_fct;
 
     /// Pointer to pressure singular function
     NavierStokesPressureSingularFctPt Pressure_singular_fct_pt;
@@ -109,13 +109,6 @@ namespace oomph
     /// Constructor
     SingularNavierStokesSolutionElement()
     {
-      // Initialise Function pointer to velocity singular function to NULL
-      Velocity_singular_fct_pt = 0;
-
-      // Initialise Function pointer to gradient of velocity singular
-      // function to NULL
-      Grad_velocity_singular_fct_pt = 0;
-
       // Initialise Function pointer to pressure singular function to NULL
       Pressure_singular_fct_pt = 0;
 
@@ -212,15 +205,15 @@ namespace oomph
     }
 
     /// Access function to pointer to velocity singular function
-    NavierStokesVelocitySingularFctPt& velocity_singular_fct_pt()
+    NavierStokesVelocitySingularFct& velocity_singular_fct()
     {
-      return Velocity_singular_fct_pt;
+      return Velocity_singular_fct;
     }
 
     /// Access function to pointer to gradient of velocity singular function
-    NavierStokesGradVelocitySingularFctPt& grad_velocity_singular_fct_pt()
+    NavierStokesGradVelocitySingularFct& grad_velocity_singular_fct()
     {
-      return Grad_velocity_singular_fct_pt;
+      return Grad_velocity_singular_fct;
     }
 
     /// Access function to pointer to pressure singular function
@@ -239,7 +232,7 @@ namespace oomph
     Vector<double> velocity_singular_function(const Vector<double>& x) const
     {
 #ifdef PARANOID
-      if (Velocity_singular_fct_pt == 0)
+      if (Velocity_singular_fct == 0)
       {
         std::stringstream error_stream;
         error_stream
@@ -251,7 +244,7 @@ namespace oomph
 #endif
 
       // Evaluate velocity singular function
-      return (*Velocity_singular_fct_pt)(x);
+      return Velocity_singular_fct(x);
     }
 
     /// Evaluate gradient of velocity singular function at Eulerian
@@ -260,7 +253,7 @@ namespace oomph
       const Vector<double>& x) const
     {
 #ifdef PARANOID
-      if (Grad_velocity_singular_fct_pt == 0)
+      if (Grad_velocity_singular_fct == 0)
       {
         std::stringstream error_stream;
         error_stream << "Pointer to gradient of velocity singular function "
@@ -271,7 +264,7 @@ namespace oomph
 #endif
 
       // Evaluate gradient of velocity singular function
-      return (*Grad_velocity_singular_fct_pt)(x);
+      return Grad_velocity_singular_fct(x);
     }
 
     /// Evaluate pressure singular function at Eulerian position x

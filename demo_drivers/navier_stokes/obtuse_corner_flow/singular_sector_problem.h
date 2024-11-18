@@ -29,6 +29,18 @@ namespace oomph
     Mesh* Pressure_contribution_mesh_2_pt;
     Mesh* Eigensolution_slip_mesh_pt;
 
+    std::function<Vector<double>(const Vector<double>&)>
+      Velocity_singular_function;
+
+    std::function<Vector<Vector<double>>(const Vector<double>&)>
+      Grad_velocity_singular_function;
+
+    std::function<void(const double&,
+                       const Vector<double>&,
+                       const Vector<double>&,
+                       Vector<double>&)>
+      Eigensolution_slip_function;
+
   public:
     enum
     {
@@ -45,6 +57,14 @@ namespace oomph
 
       add_singular_sub_meshes();
       this->rebuild_global_mesh();
+
+      set_contact_line_node_pt();
+      Velocity_singular_function = velocity_singular_function_factory(
+        this->my_parameters().sector_angle, Contact_line_node_pt);
+      Grad_velocity_singular_function = grad_velocity_singular_function_factory(
+        this->my_parameters().sector_angle, Contact_line_node_pt);
+      Eigensolution_slip_function = eigensolution_slip_function_factory(
+        this->my_parameters().slip_length, Velocity_singular_function);
     }
 
     void setup()
@@ -66,7 +86,6 @@ namespace oomph
       // Create the other meshes
       if (!Augmented_bulk_element_number.empty())
       {
-        parameters::x_centre_node_pt = Contact_line_node_pt;
         cout << "Make augmented elements" << endl;
         create_singularity_scaling_elements();
         create_pressure_contribution_1_elements();
@@ -103,10 +122,10 @@ namespace oomph
           dynamic_cast<ELEMENT*>(this->bulk_mesh_pt()->element_pt(e));
 
         // Set the Reynolds number
-        el_pt->re_pt() = &parameters::reynolds_number;
+        el_pt->re_pt() = &this->my_parameters().reynolds_number;
 
         // Set the Reynolds Strouhal number
-        el_pt->re_st_pt() = &parameters::strouhal_reynolds_number;
+        el_pt->re_st_pt() = &this->my_parameters().strouhal_reynolds_number;
 
         // Make augmented elements
         // Check distance from
@@ -212,7 +231,7 @@ namespace oomph
             face_index,
             Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0));
 
-        el_pt->traction_fct_pt() = &parameters::eigensolution_slip_fct;
+        el_pt->set_traction_fct(Eigensolution_slip_function);
 
         // Add it to the mesh
         Eigensolution_slip_mesh_pt->add_element_pt(el_pt);
@@ -229,16 +248,15 @@ namespace oomph
 
     // Set the pointer to the velocity singular function for this
     // element, defined in parameters namespace
-    el_pt->velocity_singular_fct_pt() = &parameters::velocity_singular_fct;
+    el_pt->velocity_singular_fct() = Velocity_singular_function;
 
     // Set the pointer to the gradient of the velocity singular
     // function for this element, defined in parameters namespace
-    el_pt->grad_velocity_singular_fct_pt() =
-      &parameters::grad_velocity_singular_fct;
+    el_pt->grad_velocity_singular_fct() = Grad_velocity_singular_function;
 
     // Set the pointer to the first pressure singular function for this
     // element, defined in parameters namespace
-    el_pt->pressure_singular_fct_pt() = &parameters::pressure_singular_fct;
+    el_pt->pressure_singular_fct_pt() = &pressure_singular_fct;
 
     // The singular function satisfies the Stokes equation
     el_pt->singular_function_satisfies_stokes_equation() = false;

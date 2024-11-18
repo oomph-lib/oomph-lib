@@ -10,13 +10,11 @@
 #include "fluid_slip_elements.h"
 #include "far_field_element.h"
 #include "parameter_functions.h"
-#include "parameter_values.h"
+#include "parameter_struct.h"
 #include "pressure_evaluation_elements.h"
-//#include "projectable_Ttaylor_hood_elements.h"
 #include "refined_sector_tri_mesh.template.h"
 #include "refined_sector_tri_mesh.template.cc"
 #include "singular_fluid_traction_elements.h"
-#include "parameter_struct.h"
 
 namespace oomph
 {
@@ -127,7 +125,7 @@ namespace oomph
       }
     }
 
-    const Params& my_parameters()
+    Params& my_parameters()
     {
       return My_params;
     }
