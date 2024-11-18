@@ -123,7 +123,7 @@ namespace oomph
         dist = pow(dist, 0.5);
 
         // If the distance to the corner is within the "inner" region, ...
-        if (dist < parameters::inner_radius)
+        if (dist < this->my_parameters().inner_radius)
         {
           // ... augment element
           el_pt->augment();

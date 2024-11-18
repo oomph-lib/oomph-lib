@@ -127,6 +127,11 @@ namespace oomph
       }
     }
 
+    const Params& my_parameters()
+    {
+      return My_params;
+    }
+
     // Destructor
     ~SectorProblem()
     {
@@ -321,8 +326,7 @@ namespace oomph
       // Set the pointer to the prescribed slip function
       slip_element_pt->set_slip_function(Slip_function);
 
-      slip_element_pt->wall_velocity_fct_pt() =
-        &Slip_Parameters::prescribed_wall_velocity_fct;
+      slip_element_pt->set_wall_velocity_function(wall_velocity_function);
 
       // Add the prescribed-flux element to the surface mesh
       Slip_boundary_mesh_pt->add_element_pt(slip_element_pt);

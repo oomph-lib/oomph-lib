@@ -72,10 +72,11 @@ namespace oomph
     /// Pointer to an wall velocity function. Arguments:
     /// Eulerian coordinate; outer unit normal;
     /// applied velocity.
-    void (*Wall_velocity_fct_pt)(const double& time,
-                                 const Vector<double>& x,
-                                 const Vector<double>& n,
-                                 Vector<double>& result);
+    std::function<void(const double&,
+                       const Vector<double>&,
+                       const Vector<double>&,
+                       Vector<double>&)>
+      Wall_velocity_function;
 
     /// Get the slip vector: Pass number of integration point
     /// (dummy), Eulerian coordinate and normal vector and return the load
@@ -102,7 +103,7 @@ namespace oomph
                                    const Vector<double>& n,
                                    Vector<double>& wall_velocity) const
     {
-      Wall_velocity_fct_pt(time, x, n, wall_velocity);
+      Wall_velocity_function(time, x, n, wall_velocity);
     }
 
     /// Helper function that actually calculates the residuals
@@ -119,8 +120,7 @@ namespace oomph
                             const int& face_index)
       : NavierStokesFaceElement(),
         FaceGeometry<ELEMENT>(),
-        Contact_line_data_index(0),
-        Wall_velocity_fct_pt(0)
+        Contact_line_data_index(0)
     {
       // Build the face element
       element_pt->build_face_element(face_index, this);
@@ -145,12 +145,13 @@ namespace oomph
     }
 
     /// Reference to the wall velocity function pointer
-    void (*&wall_velocity_fct_pt())(const double& time,
-                                    const Vector<double>& x,
-                                    const Vector<double>& n,
-                                    Vector<double>& slip)
+    void set_wall_velocity_function(
+      const std::function<void(const double&,
+                               const Vector<double>&,
+                               const Vector<double>&,
+                               Vector<double>&)>& wall_velocity_function)
     {
-      return Wall_velocity_fct_pt;
+      Wall_velocity_function = wall_velocity_function;
     }
 
 

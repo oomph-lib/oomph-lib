@@ -24,6 +24,17 @@ namespace oomph
     };
   }
 
+  // Wall velocity
+  void wall_velocity_function(const double& t,
+                              const Vector<double>& x,
+                              const Vector<double>& n,
+                              Vector<double>& wall_velocity)
+  {
+    // Assign solution
+    wall_velocity[0] = 0.0;
+    wall_velocity[1] = -1.0;
+  }
+
   namespace parameters
   {
     // Slip length near the on the outer wall near the contact line

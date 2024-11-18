@@ -17,6 +17,7 @@ namespace oomph
     double strouhal_reynolds_number = 0;
     unsigned n_radial = 10;
     unsigned n_azimuthal = 10;
+    double inner_radius = 0;
   };
 
   Params create_parameters_from_file(const std::string& filename)
@@ -32,11 +33,11 @@ namespace oomph
 
     getline(parameter_filestream, input_string, '#');
     parameter_filestream.ignore(80, '\n');
-    params.n_radial = std::stod(input_string);
+    params.n_radial = std::stoi(input_string);
 
     getline(parameter_filestream, input_string, '#');
     parameter_filestream.ignore(80, '\n');
-    params.n_azimuthal = std::stod(input_string);
+    params.n_azimuthal = std::stoi(input_string);
 
     getline(parameter_filestream, input_string, '#');
     parameter_filestream.ignore(80, '\n');
@@ -52,11 +53,15 @@ namespace oomph
 
     getline(parameter_filestream, input_string, '#');
     parameter_filestream.ignore(80, '\n');
-    params.reynolds_number = stod(input_string);
+    params.reynolds_number = std::stod(input_string);
 
     getline(parameter_filestream, input_string, '#');
     parameter_filestream.ignore(80, '\n');
-    params.strouhal_reynolds_number = stod(input_string);
+    params.strouhal_reynolds_number = std::stod(input_string);
+
+    getline(parameter_filestream, input_string, '#');
+    parameter_filestream.ignore(80, '\n');
+    params.inner_radius = std::stod(input_string);
 
     return params;
   }
