@@ -1,7 +1,7 @@
 // Driver code for the first testcase for the obtuse angle fix
 
 #include <iostream>
-#include <cmath>
+#include <fstream>
 
 // OOMPH-LIB include files
 #include "generic.h"
@@ -15,6 +15,7 @@
 #include "singular_navier_stokes_elements.h"
 #include "singular_sector_problem.h"
 #include "my_element.h"
+#include "utility_functions.h"
 
 using namespace oomph;
 
@@ -37,6 +38,23 @@ int main(int argc, char** argv)
   // Steady problem
   problem.steady_newton_solve();
   problem.doc_solution();
+
+  // Check jacobian.
+  DoubleVector residuals;
+  CRDoubleMatrix jacobian;
+  problem.get_jacobian(residuals, jacobian);
+  std::ofstream file_stream("jac.dat");
+  jacobian.sparse_indexed_output(file_stream,16);
+  file_stream.close();
+
+  CRDoubleMatrix* exact_jacobian_pt = load_crdoublematrix(
+    "exact_jac.dat", jacobian.distribution_pt(), jacobian.ncol());
+  compare_matrices(jacobian, *exact_jacobian_pt, 1e-13);
+
+  file_stream.open("exact_jac2.dat");
+  exact_jacobian_pt->sparse_indexed_output(file_stream);
+  file_stream.close();
+  delete exact_jacobian_pt;
 
 // Finalise MPI after all computations are complete
 #ifdef OOMPH_HAS_MPI
