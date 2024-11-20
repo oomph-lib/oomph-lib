@@ -229,7 +229,7 @@ namespace oomph
       {
         // Add (or subtract) the pressure at the evaluation point
         residuals[local_eqn] +=
-          Cast_bulk_element_pt->interpolated_p_nst_fe_only(s_bulk) * multiplier;
+          Cast_bulk_element_pt->interpolated_p_nst(s_bulk) * multiplier;
 
         // If the Jacobian flag is on, add to the Jacobian
         if (flag)
@@ -265,7 +265,7 @@ namespace oomph
       Vector<double> s_bulk(dim() + 1);
       s_bulk = local_coordinate_in_bulk(s);
 
-      return Cast_bulk_element_pt->interpolated_p_nst_fe_only(s_bulk);
+      return Cast_bulk_element_pt->interpolated_p_nst(s_bulk);
     }
 
     // Overwrite the output function

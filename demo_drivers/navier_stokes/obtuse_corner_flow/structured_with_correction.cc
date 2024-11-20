@@ -47,11 +47,6 @@ int main(int argc, char** argv)
     "exact_jac.dat", jacobian.distribution_pt(), jacobian.ncol());
   compare_matrices(jacobian, *exact_jacobian_pt, 3e-6);
 
-  file_stream.open("exact_jac2.dat");
-  exact_jacobian_pt->sparse_indexed_output(file_stream);
-  file_stream.close();
-  delete exact_jacobian_pt;
-
   // Steady problem
   problem.steady_newton_solve();
   problem.doc_solution();

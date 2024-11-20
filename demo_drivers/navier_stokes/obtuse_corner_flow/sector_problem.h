@@ -81,10 +81,10 @@ namespace oomph
 
     void create_nonrefineable_elements()
     {
-      // create_slip_elements();
-      //  create_no_penetration1_elements();
-      //  create_no_penetration2_elements();
-      //  create_far_field_elements();
+      create_slip_elements();
+      create_no_penetration1_elements();
+      create_no_penetration2_elements();
+      create_far_field_elements();
     }
 
     void delete_nonrefineable_elements()
@@ -231,7 +231,7 @@ namespace oomph
         ->set_value(pressure_index, 0.0);
 
       // Fix end points far field boundary condition lagrange_multipliers
-      // pin_far_field_lagrange_multiplier_end_points();
+      pin_far_field_lagrange_multiplier_end_points();
 
       // Pin the lagrange multiplier for the no penetration condition on the
       // vertical surface at the centre

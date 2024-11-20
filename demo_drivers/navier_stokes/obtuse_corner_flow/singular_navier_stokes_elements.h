@@ -453,7 +453,7 @@ namespace oomph
         }
 
         // Total velocity
-        Vector<double> velocity;
+        Vector<double> velocity(cached_dim, 0.0);
 
         if (IsAugmented)
         {
@@ -1165,13 +1165,19 @@ namespace oomph
                 // Jacobian
                 if (flag)
                 {
+                  Vector<Vector<double>> u_hat_local2(n_sing);
+                  for (unsigned s = 0; s < n_sing; s++)
+                  {
+                    u_hat_local2[s] = this->velocity_singular_function(s, pos_n);
+                  }
+
                   // Singular contribution
                   for (unsigned ss = 0; ss < n_sing; ss++)
                   {
                     local_unknown = local_equation_number_C[ss];
                     if (local_unknown >= 0)
                     {
-                      jacobian(local_eqn, local_unknown) -= u_hat_local[ss][i];
+                      jacobian(local_eqn, local_unknown) -= u_hat_local2[ss][i];
                     }
                   }
 
