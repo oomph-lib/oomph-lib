@@ -78,6 +78,16 @@ namespace oomph
 
       create_singular_elements();
 
+      fix_c(1.0);
+      const unsigned n_element = this->bulk_mesh_pt()->nelement();
+      for (unsigned e = 0; e < n_element; e++)
+      {
+        dynamic_cast<ELEMENT*>(this->bulk_mesh_pt()->element_pt(e))
+          ->pin_fluid();
+      }
+
+      this->pin_no_penetration_conditions();
+
       this->rebuild_global_mesh();
       oomph_info << "Number of unknowns: " << this->assign_eqn_numbers()
                  << std::endl;
@@ -90,10 +100,10 @@ namespace oomph
       {
         cout << "Make augmented elements" << endl;
         create_singularity_scaling_elements();
-        create_pressure_contribution_1_elements();
-        create_pressure_contribution_2_elements();
+        // create_pressure_contribution_1_elements();
+        // create_pressure_contribution_2_elements();
 
-        create_slip_eigen_elements();
+        // create_slip_eigen_elements();
 
         // Setup the mesh interaction between the bulk and singularity meshes
         setup_mesh_interaction();
@@ -122,12 +132,6 @@ namespace oomph
         // Upcast from GeneralisedElement to the present element
         ELEMENT* el_pt =
           dynamic_cast<ELEMENT*>(this->bulk_mesh_pt()->element_pt(e));
-
-        // Set the Reynolds number
-        el_pt->re_pt() = &this->my_parameters().reynolds_number;
-
-        // Set the Reynolds Strouhal number
-        el_pt->re_st_pt() = &this->my_parameters().strouhal_reynolds_number;
 
         // Make augmented elements
         // Check distance from

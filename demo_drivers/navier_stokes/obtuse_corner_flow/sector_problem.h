@@ -81,10 +81,10 @@ namespace oomph
 
     void create_nonrefineable_elements()
     {
-      create_slip_elements();
-      create_no_penetration1_elements();
-      create_no_penetration2_elements();
-      create_far_field_elements();
+      // create_slip_elements();
+      //  create_no_penetration1_elements();
+      //  create_no_penetration2_elements();
+      //  create_far_field_elements();
     }
 
     void delete_nonrefineable_elements()
@@ -173,6 +173,72 @@ namespace oomph
 
     void add_bulk_mesh();
 
+  public:
+    void pin_no_penetration_conditions()
+    {
+      unsigned n_el = No_penetration_boundary_mesh1_pt->nelement();
+      for (unsigned i_el = 0; i_el < n_el; i_el++)
+      {
+        ImposeImpenetrabilityElement<ELEMENT>* el_pt =
+          dynamic_cast<ImposeImpenetrabilityElement<ELEMENT>*>(
+            No_penetration_boundary_mesh1_pt->element_pt(i_el));
+        const unsigned n_nod = el_pt->nnode();
+        for (unsigned i_nod = 0; i_nod < n_nod; i_nod++)
+        {
+          el_pt->pin_lagrange_multiplier(i_nod);
+        }
+      }
+
+      n_el = No_penetration_boundary_mesh2_pt->nelement();
+      for (unsigned i_el = 0; i_el < n_el; i_el++)
+      {
+        ImposeImpenetrabilityElement<ELEMENT>* el_pt =
+          dynamic_cast<ImposeImpenetrabilityElement<ELEMENT>*>(
+            No_penetration_boundary_mesh1_pt->element_pt(i_el));
+        const unsigned n_nod = el_pt->nnode();
+        for (unsigned i_nod = 0; i_nod < n_nod; i_nod++)
+        {
+          el_pt->pin_lagrange_multiplier(i_nod);
+        }
+      }
+    }
+
+    void set_boundary_conditions()
+    {
+      oomph_info << "set_boundary_conditions" << endl;
+
+      // Pin the pressure at one point, the top right
+      unsigned element_index = 0;
+      unsigned node_index = 0;
+      find_corner_bulk_node(
+        Slip_boundary_id, Far_field_boundary_id, element_index, node_index);
+      const unsigned pressure_index = 2;
+      this->Bulk_mesh_pt->boundary_element_pt(Slip_boundary_id, element_index)
+        ->node_pt(node_index)
+        ->pin(pressure_index);
+      oomph_info << this->Bulk_mesh_pt
+                      ->boundary_element_pt(Slip_boundary_id, element_index)
+                      ->node_pt(node_index)
+                      ->x(0)
+                 << ", "
+                 << this->Bulk_mesh_pt
+                      ->boundary_element_pt(Slip_boundary_id, element_index)
+                      ->node_pt(node_index)
+                      ->x(1)
+                 << " " << endl;
+      this->Bulk_mesh_pt->boundary_element_pt(Slip_boundary_id, element_index)
+        ->node_pt(node_index)
+        ->set_value(pressure_index, 0.0);
+
+      // Fix end points far field boundary condition lagrange_multipliers
+      // pin_far_field_lagrange_multiplier_end_points();
+
+      // Pin the lagrange multiplier for the no penetration condition on the
+      // vertical surface at the centre
+      // pin_lagrange_multiplier_end_point(Free_surface_boundary_id,
+      //                                  Slip_boundary_id);
+    }
+
   private:
     void create_slip_elements();
     void create_no_penetration1_elements();
@@ -210,44 +276,6 @@ namespace oomph
       }
     }
 
-  public:
-    void set_boundary_conditions()
-    {
-      oomph_info << "set_boundary_conditions" << endl;
-
-      // Pin the pressure at one point, the top right
-      unsigned element_index = 0;
-      unsigned node_index = 0;
-      find_corner_bulk_node(
-        Slip_boundary_id, Far_field_boundary_id, element_index, node_index);
-      const unsigned pressure_index = 2;
-      this->Bulk_mesh_pt->boundary_element_pt(Slip_boundary_id, element_index)
-        ->node_pt(node_index)
-        ->pin(pressure_index);
-      oomph_info << this->Bulk_mesh_pt
-                      ->boundary_element_pt(Slip_boundary_id, element_index)
-                      ->node_pt(node_index)
-                      ->x(0)
-                 << ", "
-                 << this->Bulk_mesh_pt
-                      ->boundary_element_pt(Slip_boundary_id, element_index)
-                      ->node_pt(node_index)
-                      ->x(1)
-                 << " " << endl;
-      this->Bulk_mesh_pt->boundary_element_pt(Slip_boundary_id, element_index)
-        ->node_pt(node_index)
-        ->set_value(pressure_index, 0.0);
-
-      // Fix end points far field boundary condition lagrange_multipliers
-      pin_far_field_lagrange_multiplier_end_points();
-
-      // Pin the lagrange multiplier for the no penetration condition on the
-      // vertical surface at the centre
-      // pin_lagrange_multiplier_end_point(Free_surface_boundary_id,
-      //                                  Slip_boundary_id);
-    }
-
-  private:
     void pin_far_field_lagrange_multiplier_end_points()
     {
       const unsigned n_el = Far_field_mesh_pt->nelement();

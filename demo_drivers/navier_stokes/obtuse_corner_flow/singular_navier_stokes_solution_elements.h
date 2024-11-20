@@ -408,63 +408,6 @@ namespace oomph
       fill_in_contribution_to_jacobian(residuals, jacobian);
     }
 
-  private:
-    /// Compute local residual, and, if flag=1, local jacobian matrix
-    void fill_in_generic_contribution_to_residuals(
-      Vector<double>& residuals,
-      DenseMatrix<double>& jacobian,
-      const unsigned& flag)
-    {
-      // Get the local eqn number of our one-and-only
-      // unknown
-      int eqn_number = internal_local_eqn(0, 0);
-      if (eqn_number >= 0)
-      {
-        residuals[eqn_number] = Wrapped_navier_stokes_el_pt->dpdx_fe_only(
-          S_in_wrapped_navier_stokes_element, Direction_pt);
-        std::cout << "residuals[eqn_number]: " << residuals[eqn_number]
-                  << std::endl;
-
-        // Do we want the Jacobian too?
-        if (flag)
-        {
-          // Find the number of pressure dofs in the wrapped Navier-Stokes
-          // element pointed by
-          // the SingularNavierStokesSolutionElement class
-          unsigned n_pres = Wrapped_navier_stokes_el_pt->npres_nst();
-
-          // Find the dimension of the problem
-          unsigned cached_dim = Wrapped_navier_stokes_el_pt->dim();
-
-          // Set up memory for the pressure shape functions and their
-          // derivatives
-          Shape psip(n_pres), testp(n_pres);
-          DShape dpsipdx(n_pres, cached_dim), dtestpdx(n_pres, cached_dim);
-
-          // Compute the pressure shape functions and their derivatives
-          // at the local coordinate S_in_wrapped_navier_stokes_element
-          // (Test fcts not really needed but nobody's got around to writing
-          // a fct that only picks out the basis fcts.
-          Wrapped_navier_stokes_el_pt->dpshape_and_dptest_eulerian_nst(
-            S_in_wrapped_navier_stokes_element, psip, dpsipdx, testp, dtestpdx);
-
-          // Derivs
-          for (unsigned j = 0; j < n_pres; j++)
-          {
-            // Unknown
-            int local_unknown = Wrapped_navier_stokes_el_pt->p_local_eqn(j);
-
-            // If not pinned
-            if (local_unknown >= 0)
-            {
-              // Add the contribution of the node to the local jacobian
-              jacobian(eqn_number, local_unknown) = dpsipdx(j, *Direction_pt);
-            }
-          }
-        }
-      }
-    }
-
   }; // End of SingularNavierStokesSolutionElement class
 } // namespace oomph
 #endif
