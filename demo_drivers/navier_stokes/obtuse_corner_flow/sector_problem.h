@@ -11,10 +11,8 @@
 #include "far_field_element.h"
 #include "parameter_functions.h"
 #include "parameter_struct.h"
-#include "pressure_evaluation_elements.h"
 #include "refined_sector_tri_mesh.template.h"
 #include "refined_sector_tri_mesh.template.cc"
-#include "singular_fluid_traction_elements.h"
 
 namespace oomph
 {

@@ -384,22 +384,6 @@ namespace oomph
       Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0));
     el_pt->set_boundary_number_in_bulk_mesh(Slip_boundary_id);
 
-    unsigned n_element = this->bulk_mesh_pt()->nelement();
-    for (unsigned e = 0; e < n_element; e++)
-    {
-      ELEMENT* bulk_elem_pt =
-        dynamic_cast<ELEMENT*>(this->bulk_mesh_pt()->element_pt(e));
-
-      unsigned n_node = bulk_elem_pt->nnode();
-      for (unsigned n = 0; n < n_node; n++)
-      {
-        if (el_pt->get_node_number(bulk_elem_pt->node_pt(n)) == -1)
-        {
-          el_pt->add_external_data(bulk_elem_pt->node_pt(n));
-        }
-      }
-    }
-
     Pressure_contribution_mesh_1_pt->add_element_pt(el_pt);
   }
 
@@ -421,22 +405,6 @@ namespace oomph
       Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0));
     el_pt->set_boundary_number_in_bulk_mesh(Free_surface_boundary_id);
     el_pt->set_subtract_from_residuals();
-
-    unsigned n_element = this->bulk_mesh_pt()->nelement();
-    for (unsigned e = 0; e < n_element; e++)
-    {
-      ELEMENT* bulk_elem_pt =
-        dynamic_cast<ELEMENT*>(this->bulk_mesh_pt()->element_pt(e));
-
-      unsigned n_node = bulk_elem_pt->nnode();
-      for (unsigned n = 0; n < n_node; n++)
-      {
-        if (el_pt->get_node_number(bulk_elem_pt->node_pt(n)) == -1)
-        {
-          el_pt->add_external_data(bulk_elem_pt->node_pt(n));
-        }
-      }
-    }
 
     Pressure_contribution_mesh_2_pt->add_element_pt(el_pt);
   }
