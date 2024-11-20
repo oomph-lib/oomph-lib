@@ -106,9 +106,7 @@ namespace oomph
       std::getline(ss, token, ' ');
       while (row_counter < std::stoi(token))
       {
-        row_start.push_back(value.size() + 1);
-        cout << "row start: " << row_counter << ", " << value.size() + 1
-             << endl;
+        row_start.push_back(value.size());
         row_counter++;
       }
 
