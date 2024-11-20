@@ -125,7 +125,7 @@ namespace oomph
       Direction_pt = 0;
 
       // Safe assumption: Singular fct does not satisfy Stokes eqn
-      Singular_function_satisfies_stokes_equation = false;
+      Singular_function_satisfies_stokes_equation = true;
 
       // Create a single item of internal Data, storing one unknown which
       // represents the unknown C.
