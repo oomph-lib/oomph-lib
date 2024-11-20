@@ -442,11 +442,8 @@ namespace oomph
     {
       // Call the generic routine with the flag set to 1 and dummy mass
       // matrix
-      // this->fill_in_generic_residual_contribution_wrapped_nst(
-      //   residuals, jacobian, 1);
-
-      /* FD version if you want to mess around with anything...*/
-      FiniteElement::fill_in_contribution_to_jacobian(residuals, jacobian);
+      this->fill_in_generic_residual_contribution_wrapped_nst(
+        residuals, jacobian, 1);
     }
 
     /// Overload the output function
