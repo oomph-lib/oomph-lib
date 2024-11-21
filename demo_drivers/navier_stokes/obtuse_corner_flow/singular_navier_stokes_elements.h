@@ -329,6 +329,58 @@ namespace oomph
       return nodal_value(n, this->u_reconstructed_index(n, i));
     }
 
+    // /// Idea: Everyone outside the element used this function which relates
+    // to the total velocity, and the internals swap the total velocity with
+    // the tilde part. This means that only this element needs to know that it
+    // is augmented and Dirchlet and Neumann boundary conditions would be
+    // imposed automatically.
+    // /// Compute vector of FE interpolated velocity u at local coordinate s
+    // void interpolated_u_nst(const Vector<double>& s,
+    //                         Vector<double>& veloc) const
+    // {
+    //   // Find number of nodes
+    //   unsigned n_node = nnode();
+    //   // Local shape function
+    //   Shape psi(n_node);
+    //   // Find values of shape function
+    //   shape(s, psi);
+
+    //   for (unsigned i = 0; i < DIM; i++)
+    //   {
+    //     // Initialise value of u
+    //     veloc[i] = 0.0;
+    //     // Loop over the local nodes and sum
+    //     for (unsigned l = 0; l < n_node; l++)
+    //     {
+    //       // Index at which the nodal value is stored
+    //       unsigned u_nodal_index = u_reconstructed_index(l, i);
+    //       veloc[i] += nodal_value(l, u_nodal_index) * psi[l];
+    //     }
+    //   }
+    // }
+    // /// Return FE interpolated velocity u[i] at local coordinate s
+    // double interpolated_u_nst(const Vector<double>& s, const unsigned& i)
+    // const
+    // {
+    //   // Find number of nodes
+    //   unsigned n_node = nnode();
+    //   // Local shape function
+    //   Shape psi(n_node);
+    //   // Find values of shape function
+    //   shape(s, psi);
+
+    //   // Initialise value of u
+    //   double interpolated_u = 0.0;
+    //   // Loop over the local nodes and sum
+    //   for (unsigned l = 0; l < n_node; l++)
+    //   {
+    //     // Get nodal index at which i-th velocity is stored
+    //     unsigned u_nodal_index = u_reconstructed_index(l, i);
+    //     interpolated_u += nodal_value(l, u_nodal_index) * psi[l];
+    //   }
+
+    //   return (interpolated_u);
+    // }
 
     // virtual inline int momentum_local_eqn(const unsigned& n,
     //                                       const unsigned& i) const
