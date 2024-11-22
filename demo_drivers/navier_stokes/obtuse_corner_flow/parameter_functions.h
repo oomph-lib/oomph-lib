@@ -30,7 +30,7 @@ namespace oomph
   {
     // Assign solution
     wall_velocity[0] = 0.0;
-    wall_velocity[1] = -1.0;
+    wall_velocity[1] = 1.0;
   }
 } // namespace oomph
 #endif

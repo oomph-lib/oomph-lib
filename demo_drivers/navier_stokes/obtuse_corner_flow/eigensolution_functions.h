@@ -181,30 +181,34 @@ namespace oomph
   }
 
 
-  // std::function<void(const double&,
-  //                    const Vector<double>&,
-  //                    const Vector<double>&,
-  //                    Vector<double>&)>
-  // eigensolution_traction_function_factory(const double& contact_angle,
-  //                                         Node* x_centre_node_pt)
-  //{
-  //   return [contact_angle, x_centre_node_pt](const double&,
-  //                                            const Vector<double>&,
-  //                                            const Vector<double>&,
-  //                                            Vector<double>&) -> void
-  //   {
-  //     Vector<Vector<double>> grad_u = grad_velocity_singular_fct(x);
-  //     // traction = - (grad u + grad u ^ T) dot unit normal
-  //     const unsigned dim = x.size();
-  //     for (unsigned i = 0; i < dim; i++)
-  //     {
-  //       for (unsigned j = 0; j < dim; j++)
-  //       {
-  //         result[i] -= (grad_u[i][j] + grad_u[j][i]) * n[j];
-  //       }
-  //     }
-  //   }
-  // }
+  std::function<void(const double&,
+                     const Vector<double>&,
+                     const Vector<double>&,
+                     Vector<double>&)>
+  eigensolution_traction_function_factory(
+    const double& contact_angle,
+    Node* x_centre_node_pt,
+    const std::function<Vector<Vector<double>>(const Vector<double>&)>&
+      grad_velocity_singular_fct)
+  {
+    return [contact_angle, x_centre_node_pt, grad_velocity_singular_fct](
+             const double& t,
+             const Vector<double>& x,
+             const Vector<double>& n,
+             Vector<double>& result) -> void
+    {
+      Vector<Vector<double>> grad_u = grad_velocity_singular_fct(x);
+      // traction = - (grad u + grad u ^ T) dot unit normal
+      const unsigned dim = x.size();
+      for (unsigned i = 0; i < dim; i++)
+      {
+        for (unsigned j = 0; j < dim; j++)
+        {
+          result[i] += (grad_u[i][j] + grad_u[j][i]) * n[j];
+        }
+      }
+    };
+  }
 
   std::function<void(const double&,
                      const Vector<double>&,
