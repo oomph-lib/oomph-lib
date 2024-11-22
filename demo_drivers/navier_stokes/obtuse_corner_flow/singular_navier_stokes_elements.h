@@ -1224,10 +1224,10 @@ namespace oomph
                 // -------------------
                 // if (!all_singular_functions_satisfy_stokes_equation)
                 {
-                  residuals[local_eqn] += p_bar_local * dtestfdx(l, i) * W;
+                  residuals[local_eqn] -= p_bar_local * dtestfdx(l, i) * W;
                   for (unsigned k = 0; k < cached_dim; k++)
                   {
-                    residuals[local_eqn] -=
+                    residuals[local_eqn] +=
                       visc_ratio *
                       (grad_u_bar_local[i][k] +
                        this->Gamma[i] * grad_u_bar_local[k][i]) *
@@ -1242,11 +1242,11 @@ namespace oomph
                       const int local_unknown = local_equation_number_C[ss];
                       if (local_unknown >= 0)
                       {
-                        jacobian(local_eqn, local_unknown) +=
+                        jacobian(local_eqn, local_unknown) -=
                           p_hat_local[ss] * dtestfdx(l, i) * W;
                         for (unsigned k = 0; k < cached_dim; k++)
                         {
-                          jacobian(local_eqn, local_unknown) -=
+                          jacobian(local_eqn, local_unknown) +=
                             visc_ratio *
                             (grad_u_hat_local[ss][i][k] +
                              this->Gamma[i] * grad_u_hat_local[ss][k][i]) *
@@ -1756,8 +1756,8 @@ namespace oomph
 
       if (this->IsAugmented)
       {
-        fill_in_generic_residual_contribution_additional_terms(
-          residuals, jacobian, flag);
+        //fill_in_generic_residual_contribution_additional_terms(
+        //  residuals, jacobian, flag);
         fill_in_generic_residual_contribution_total_velocity(
           residuals, jacobian, flag);
       }
