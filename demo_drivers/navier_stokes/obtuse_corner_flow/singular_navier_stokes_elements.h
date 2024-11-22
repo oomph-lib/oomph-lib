@@ -1331,69 +1331,6 @@ namespace oomph
 
               } // End of check of the Dirichlet status
             } // End of check of the pin status
-
-            // Additional velocity data
-            // ------------------------
-
-            // Find its local equation number
-            local_eqn = this->total_velocity_local_eqn(l, i);
-
-            // If it is not pinned
-            if (local_eqn >= 0)
-            {
-              // residuals[local_eqn] +=
-              //   (interpolated_u_reconstructed[i] -
-              //    (interpolated_u_tilde[i] + u_bar_local[i])) *
-              //   testf[l] * W;
-              Vector<double> pos_n(2, 0.0);
-              for (unsigned k = 0; k < 2; k++)
-              {
-                pos_n[k] = this->nodal_position(l, k);
-              }
-
-              residuals[local_eqn] +=
-                (u_reconstructed(l, i) -
-                 (nodal_value(l, u_index_nst(l, i)) + u_bar(pos_n, i)));
-
-              // Jacobian
-              if (flag)
-              {
-                Vector<Vector<double>> u_hat_local2(n_sing);
-                for (unsigned s = 0; s < n_sing; s++)
-                {
-                  u_hat_local2[s] = this->velocity_singular_function(s, pos_n);
-                }
-
-                // Singular contribution
-                for (unsigned ss = 0; ss < n_sing; ss++)
-                {
-                  local_unknown = local_equation_number_C[ss];
-                  if (local_unknown >= 0)
-                  {
-                    jacobian(local_eqn, local_unknown) -= u_hat_local2[ss][i];
-                  }
-                }
-
-                // Velocity contribution
-                // If at a non-zero degree of freedom add in the
-                // entry
-                // Loop over the velocity test functions
-                local_unknown = this->u_local_unknown(l, i);
-                if (local_unknown >= 0)
-                {
-                  jacobian(local_eqn, local_unknown) -= 1;
-                }
-
-                // Tilde velocity contribution
-                // If at a non-zero degree of freedom add in the
-                // entry
-                local_unknown = u_reconstructed_local_unknown(l, i);
-                if (local_unknown >= 0)
-                {
-                  jacobian(local_eqn, local_unknown) += 1;
-                }
-              }
-            }
           } // End of loop over velocity components
         } // End of loop over test functions
 
@@ -1605,6 +1542,208 @@ namespace oomph
       }
     }
 
+    void fill_in_generic_residual_contribution_total_velocity(
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag)
+    {
+      // Find the dimension of the problem
+      unsigned cached_dim = this->dim();
+
+      // Do all the singular functions satisfy the Stokes eqn?
+      bool all_singular_functions_satisfy_stokes_equation = true;
+
+      // Find the number of singularities
+      unsigned n_sing = C_equation_elements_pt.size();
+
+      // Find the local equation number of the additional unknowns
+      Vector<int> local_equation_number_C(n_sing);
+      for (unsigned i = 0; i < n_sing; i++)
+      {
+        local_equation_number_C[i] = this->external_local_eqn(i, 0);
+        if (!(C_equation_elements_pt[i]
+                ->singular_function_satisfies_stokes_equation()))
+        {
+          all_singular_functions_satisfy_stokes_equation = false;
+        }
+      }
+
+      // Find out how many nodes there are
+      unsigned n_node = this->nnode();
+
+      // Find out how many pressure dofs there are
+      unsigned n_pres = this->npres_nst();
+
+      // integer to store the local equations
+      int local_eqn = 0, local_unknown = 0;
+
+      // Get Physical Variables from Element
+      // Reynolds number must be multiplied by the density ratio
+      double scaled_re = this->re() * this->density_ratio();
+
+      // Set up memory for the velocity shape and test functions
+      Shape psif(n_node), testf(n_node);
+      DShape dpsifdx(n_node, cached_dim), dtestfdx(n_node, cached_dim);
+
+      // Set up memory for pressure shape and test functions
+      Shape psip(n_pres), testp(n_pres);
+
+      // Number of integration points
+      unsigned n_intpt = this->integral_pt()->nweight();
+
+      // Set the vector to hold local coordinates
+      Vector<double> s(cached_dim);
+
+      // Cachec viscosity ratio
+      double visc_ratio = this->viscosity_ratio();
+
+      // Loop over the integration points
+      for (unsigned ipt = 0; ipt < n_intpt; ipt++)
+      {
+        // Assign values of s
+        for (unsigned d = 0; d < cached_dim; d++)
+        {
+          s[d] = this->integral_pt()->knot(ipt, d);
+        }
+
+        // Get the integral weight
+        double w = this->integral_pt()->weight(ipt);
+
+        // Call the derivatives of the velocity shape and test functions
+        double J = this->dshape_and_dtest_eulerian_at_knot_nst(
+          ipt, psif, dpsifdx, testf, dtestfdx);
+
+        // Call the pressure shape and test functions
+        this->pshape_nst(s, psip, testp);
+
+        // Premultiply the weights and the Jacobian
+        double W = w * J;
+
+        // Initialise the global coordinate and velocity
+        Vector<double> interpolated_x(cached_dim, 0.0);
+        Vector<double> interpolated_u_tilde(cached_dim, 0.0);
+        Vector<double> interpolated_u_reconstructed(cached_dim, 0.0);
+        DenseMatrix<double> interpolated_dudx(cached_dim, cached_dim, 0.0);
+
+        // Calculate the global coordinate associated with s
+        // Loop over nodes
+        for (unsigned l = 0; l < n_node; l++)
+        {
+          // Loop over directions
+          for (unsigned i = 0; i < cached_dim; i++)
+          {
+            const double u_value = nodal_value(l, u_index_nst(l, i));
+            interpolated_u_tilde[i] += u_value * psif[l];
+            for (unsigned j = 0; j < cached_dim; j++)
+            {
+              interpolated_dudx(i, j) += u_value * dpsifdx(l, j);
+            }
+            interpolated_u_reconstructed[i] += u_reconstructed(l, i) * psif[l];
+            interpolated_x[i] += this->nodal_position(l, i) * psif(l);
+          }
+        }
+
+        // Get sum of singular functions
+        Vector<double> u_bar_local = this->u_bar(interpolated_x);
+        Vector<Vector<double>> grad_u_bar_local =
+          this->grad_u_bar(interpolated_x);
+        double p_bar_local = this->p_bar(interpolated_x);
+
+        // Singular functions
+        Vector<Vector<double>> u_hat_local(n_sing);
+        for (unsigned s = 0; s < n_sing; s++)
+        {
+          u_hat_local[s] = this->velocity_singular_function(s, interpolated_x);
+        }
+        Vector<Vector<Vector<double>>> grad_u_hat_local(n_sing);
+        for (unsigned s = 0; s < n_sing; s++)
+        {
+          grad_u_hat_local[s] =
+            this->grad_velocity_singular_function(s, interpolated_x);
+        }
+        Vector<double> p_hat_local(n_sing);
+        for (unsigned s = 0; s < n_sing; s++)
+        {
+          p_hat_local[s] = this->pressure_singular_function(s, interpolated_x);
+        }
+
+        // MOMENTUM EQUATIONS
+        //-------------------
+
+        // Loop over the velocity test functions
+        for (unsigned l = 0; l < n_node; l++)
+        {
+          // Loop over the velocity components
+          for (unsigned i = 0; i < cached_dim; i++)
+          {
+            // Additional velocity data
+            // ------------------------
+
+            // Find its local equation number
+            local_eqn = this->total_velocity_local_eqn(l, i);
+
+            // If it is not pinned
+            if (local_eqn >= 0)
+            {
+              // residuals[local_eqn] +=
+              //   (interpolated_u_reconstructed[i] -
+              //    (interpolated_u_tilde[i] + u_bar_local[i])) *
+              //   testf[l] * W;
+              Vector<double> pos_n(2, 0.0);
+              for (unsigned k = 0; k < 2; k++)
+              {
+                pos_n[k] = this->nodal_position(l, k);
+              }
+
+              residuals[local_eqn] +=
+                (u_reconstructed(l, i) -
+                 (nodal_value(l, u_index_nst(l, i)) + u_bar(pos_n, i)));
+
+              // Jacobian
+              if (flag)
+              {
+                Vector<Vector<double>> u_hat_local2(n_sing);
+                for (unsigned s = 0; s < n_sing; s++)
+                {
+                  u_hat_local2[s] = this->velocity_singular_function(s, pos_n);
+                }
+
+                // Singular contribution
+                for (unsigned ss = 0; ss < n_sing; ss++)
+                {
+                  local_unknown = local_equation_number_C[ss];
+                  if (local_unknown >= 0)
+                  {
+                    jacobian(local_eqn, local_unknown) -= u_hat_local2[ss][i];
+                  }
+                }
+
+                // Velocity contribution
+                // If at a non-zero degree of freedom add in the
+                // entry
+                // Loop over the velocity test functions
+                local_unknown = this->u_local_unknown(l, i);
+                if (local_unknown >= 0)
+                {
+                  jacobian(local_eqn, local_unknown) -= 1;
+                }
+
+                // Tilde velocity contribution
+                // If at a non-zero degree of freedom add in the
+                // entry
+                local_unknown = u_reconstructed_local_unknown(l, i);
+                if (local_unknown >= 0)
+                {
+                  jacobian(local_eqn, local_unknown) += 1;
+                }
+              }
+            }
+          } // End of loop over velocity components
+        } // End of loop over test functions
+
+      } // End of loop over integration points
+    }
+
     /// Overloaded fill-in function
     void fill_in_generic_residual_contribution_wrapped_nst(
       Vector<double>& residuals,
@@ -1618,6 +1757,8 @@ namespace oomph
       if (this->IsAugmented)
       {
         fill_in_generic_residual_contribution_additional_terms(
+          residuals, jacobian, flag);
+        fill_in_generic_residual_contribution_total_velocity(
           residuals, jacobian, flag);
       }
     }
