@@ -166,6 +166,23 @@ namespace oomph
           ->node_pt(node_index);
     }
 
+    void doc_solution()
+    {
+      SectorProblem<ELEMENT>::doc_solution();
+
+      char filename[100];
+      sprintf(filename,
+              "%s/eigenslip_surface%i.csv",
+              this->doc_info_pt()->directory().c_str(),
+              this->doc_info_pt()->number());
+      std::ofstream output_stream;
+      output_stream.open(filename);
+      output_stream << "x,y,n_x,n_y,t_x,t_y" << endl;
+      const unsigned npts = 3;
+      Eigensolution_slip_mesh_pt->output(output_stream, npts);
+      output_stream.close();
+    }
+
   private:
     void create_slip_eigen_elements();
     void create_singularity_scaling_elements();
@@ -317,34 +334,10 @@ namespace oomph
   void SingularSectorProblem<ELEMENT>::setup_mesh_interaction()
   {
     oomph_info << "setup_mesh_interaction" << endl;
-    // Find corner bulk element
-    unsigned element_index;
-    find_corner_bulk_element(
-      Slip_boundary_id, Free_surface_boundary_id, element_index);
-    ELEMENT* corner_bulk_element_pt =
-      dynamic_cast<ELEMENT*>(this->bulk_mesh_pt()->boundary_element_pt(
-        Slip_boundary_id, element_index));
 
-    // Tell the CEquationElement object about its associated Navier-Stokes
-    // element, the component of the velocity whose derivative will be
-    // computed in the residual, the local coordinate in the Navier_Stokes
-    // element at which the residual will be computed, and the direction of
-    // the derivative
-    Vector<double> s1_pt(2);
-    s1_pt[0] = 0.0;
-    s1_pt[1] = 0.0;
-    unsigned* const direction_pt = new unsigned(0);
     SingularNavierStokesSolutionElement<ELEMENT>* singular_el_pt =
       dynamic_cast<SingularNavierStokesSolutionElement<ELEMENT>*>(
         Singularity_scaling_mesh_pt->element_pt(0));
-    singular_el_pt->set_wrapped_navier_stokes_element_pt(
-      corner_bulk_element_pt, s1_pt, direction_pt);
-    Vector<double> x(2, 0.0);
-    corner_bulk_element_pt->get_x(s1_pt, x);
-    oomph_info << "First singular element point, ";
-    oomph_info << "x: " << x[0] << ", ";
-    oomph_info << "y: " << x[1] << ", ";
-    oomph_info << endl;
 
     // Loop over the augmented bulk elements
     unsigned n_aug_bulk = Augmented_bulk_element_number.size();
