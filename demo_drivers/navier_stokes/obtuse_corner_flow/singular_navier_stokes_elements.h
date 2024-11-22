@@ -303,13 +303,15 @@ namespace oomph
     virtual inline unsigned momentum_index_nst(const unsigned& n,
                                                const unsigned& i) const
     {
-      return u_reconstructed_index(n, i);
+      return u_index_nst(n, i);
+      // return u_reconstructed_index(n, i);
     }
 
     virtual inline unsigned total_velocity_eqn_index(const unsigned& n,
                                                      const unsigned& i) const
     {
-      return u_index_nst(n, i);
+      return u_reconstructed_index(n, i);
+      // return u_index_nst(n, i);
     }
 
     virtual inline int total_velocity_local_eqn(const unsigned& n,

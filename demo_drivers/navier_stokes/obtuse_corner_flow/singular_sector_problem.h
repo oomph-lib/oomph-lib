@@ -77,7 +77,21 @@ namespace oomph
       Eigensolution_slip_function = eigensolution_slip_function_factory(
         this->my_parameters().slip_length, Velocity_singular_function);
 
-      create_singular_elements();
+      // create_singular_elements();
+
+      for (auto e : Augmented_bulk_element_number)
+      {
+        for (unsigned n = 0; n < 6; n++)
+        {
+          for (unsigned d = 0; d < 2; d++)
+          {
+            dynamic_cast<ELEMENT*>(this->bulk_mesh_pt()->element_pt(e))
+              ->pin_total_velocity_eqn(n, d);
+          }
+        }
+      }
+
+      // fix_c(0.0);
 
       this->rebuild_global_mesh();
       oomph_info << "Number of unknowns: " << this->assign_eqn_numbers()
@@ -168,28 +182,28 @@ namespace oomph
 
     void doc_solution()
     {
-      char filename[100];
-      sprintf(filename,
-              "%s/eigenslip_surface%i.csv",
-              this->doc_info_pt()->directory().c_str(),
-              this->doc_info_pt()->number());
-      std::ofstream output_stream;
-      output_stream.open(filename);
-      output_stream << "x,y,n_x,n_y,t_x,t_y" << endl;
-      const unsigned npts = 3;
-      Eigensolution_slip_mesh_pt->output(output_stream, npts);
-      output_stream.close();
+      // char filename[100];
+      // sprintf(filename,
+      //         "%s/eigenslip_surface%i.csv",
+      //         this->doc_info_pt()->directory().c_str(),
+      //         this->doc_info_pt()->number());
+      // std::ofstream output_stream;
+      // output_stream.open(filename);
+      // output_stream << "x,y,n_x,n_y,t_x,t_y" << endl;
+      // const unsigned npts = 3;
+      // Eigensolution_slip_mesh_pt->output(output_stream, npts);
+      // output_stream.close();
 
-      sprintf(filename,
-              "%s/scaling%i.csv",
-              this->doc_info_pt()->directory().c_str(),
-              this->doc_info_pt()->number());
-      output_stream.open(filename);
-      output_stream << "scaling" << endl;
-      dynamic_cast<SingularNavierStokesSolutionElement<ELEMENT>*>(
-        Singularity_scaling_mesh_pt->element_pt(0))
-        ->output(output_stream);
-      output_stream.close();
+      // sprintf(filename,
+      //         "%s/scaling%i.csv",
+      //         this->doc_info_pt()->directory().c_str(),
+      //         this->doc_info_pt()->number());
+      // output_stream.open(filename);
+      // output_stream << "scaling" << endl;
+      // dynamic_cast<SingularNavierStokesSolutionElement<ELEMENT>*>(
+      //   Singularity_scaling_mesh_pt->element_pt(0))
+      //   ->output(output_stream);
+      // output_stream.close();
 
       SectorProblem<ELEMENT>::doc_solution();
     }
