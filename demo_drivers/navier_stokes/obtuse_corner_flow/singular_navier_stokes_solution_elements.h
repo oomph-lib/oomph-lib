@@ -80,9 +80,6 @@ namespace oomph
       const Vector<double>& x);
 
   private:
-    /// Pointer to wrapped Navier-Stokes element
-    WRAPPED_NAVIER_STOKES_ELEMENT* Wrapped_navier_stokes_el_pt;
-
     /// Pointer to velocity singular function
     NavierStokesVelocitySingularFct Velocity_singular_fct;
 
@@ -115,10 +112,6 @@ namespace oomph
       // Initialise Function pointer to gradient of pressure singular
       // function to NULL
       Grad_pressure_singular_fct_pt = 0;
-
-      // Initalise pointer to the wrapped Navier-Stokes element which will be
-      // used to compute the residual and which includes the point O
-      Wrapped_navier_stokes_el_pt = 0;
 
       // Initialise the pointer to the direction of the derivative used
       // for the residual of this element
@@ -167,41 +160,6 @@ namespace oomph
     void unpin_c()
     {
       return internal_data_pt(0)->unpin(0);
-    }
-
-    /// Set pointer to associated wrapped Navier-Stokes element which
-    /// contains the singularity (at local coordinate s). Also specify the
-    /// direction in which the slope of the FE part of the pressure is
-    /// set to zero. (Could also set a velocity derivative to zero but this
-    /// needs to be done with a separate function. Write it if you need it...)
-    void set_wrapped_navier_stokes_element_pt(
-      WRAPPED_NAVIER_STOKES_ELEMENT* wrapped_navier_stokes_el_pt,
-      const Vector<double>& s,
-      unsigned* direction_pt)
-    {
-      // Assign the pointer to the variable Wrapped_navier_stokes_el_pt
-      Wrapped_navier_stokes_el_pt = wrapped_navier_stokes_el_pt;
-
-      // Find number of nodes in the element
-      unsigned nnod = wrapped_navier_stokes_el_pt->nnode();
-
-      // Loop over the nodes of the element
-      for (unsigned j = 0; j < nnod; j++)
-      {
-        // Add the node as external data in the
-        // SingularNavierStokesSolutionElement class. Note that this
-        // assumes that the pressure is stored at the nodes (Taylor Hood type
-        // NSt elements, which is assumed elsewhere too...)
-        add_external_data(Wrapped_navier_stokes_el_pt->node_pt(j));
-      }
-
-      // Assign the pointer to the local coordinate at which the residual
-      // will be computed
-      S_in_wrapped_navier_stokes_element = s;
-
-      // Assign the pointer to the direction at which the derivative used
-      // in the residual will be computed
-      Direction_pt = direction_pt;
     }
 
     /// Access function to pointer to velocity singular function
@@ -316,7 +274,7 @@ namespace oomph
       Vector<double> u = velocity_singular_function(x);
 
       // Find the dimension of the problem
-      unsigned cached_dim = Wrapped_navier_stokes_el_pt->dim();
+      unsigned cached_dim = 2;
 
       // Multiply the components of the velocity vector by the unknown C
       for (unsigned d = 0; d < cached_dim; d++)
@@ -341,7 +299,7 @@ namespace oomph
       Vector<Vector<double>> grad_u = grad_velocity_singular_function(x);
 
       // Find the dimension of the problem
-      unsigned cached_dim = Wrapped_navier_stokes_el_pt->dim();
+      unsigned cached_dim = 2;
 
       // Multiply the components of the gradient of velocity by the unknown C
       for (unsigned d = 0; d < cached_dim; d++)
@@ -379,7 +337,7 @@ namespace oomph
       Vector<double> grad_p = grad_pressure_singular_function(x);
 
       // Find the dimension of the problem
-      unsigned cached_dim = Wrapped_navier_stokes_el_pt->dim();
+      unsigned cached_dim = 2;
 
       // Multiply the components of the gradient of pressure by the unknown C
       for (unsigned d = 0; d < cached_dim; d++)
@@ -390,6 +348,13 @@ namespace oomph
       // Value of grad_p_bar at the position x
       return grad_p;
     }
+
+    /// Overload the output function
+    void output(std::ostream& outfile)
+    {
+      outfile << internal_data_pt(0)->value(0) << endl;
+    }
+
 
     /// Compute residual
     void fill_in_contribution_to_residuals(Vector<double>& residuals) {}
