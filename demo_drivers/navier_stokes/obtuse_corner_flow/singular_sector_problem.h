@@ -168,8 +168,6 @@ namespace oomph
 
     void doc_solution()
     {
-      SectorProblem<ELEMENT>::doc_solution();
-
       char filename[100];
       sprintf(filename,
               "%s/eigenslip_surface%i.csv",
@@ -181,6 +179,19 @@ namespace oomph
       const unsigned npts = 3;
       Eigensolution_slip_mesh_pt->output(output_stream, npts);
       output_stream.close();
+
+      sprintf(filename,
+              "%s/scaling%i.csv",
+              this->doc_info_pt()->directory().c_str(),
+              this->doc_info_pt()->number());
+      output_stream.open(filename);
+      output_stream << "scaling" << endl;
+      dynamic_cast<SingularNavierStokesSolutionElement<ELEMENT>*>(
+        Singularity_scaling_mesh_pt->element_pt(0))
+        ->output(output_stream);
+      output_stream.close();
+
+      SectorProblem<ELEMENT>::doc_solution();
     }
 
   private:
