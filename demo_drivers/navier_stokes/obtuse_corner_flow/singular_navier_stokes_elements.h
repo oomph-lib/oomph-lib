@@ -679,9 +679,7 @@ namespace oomph
         outfile << this->size() << " ";
 
         // Output the continuity residual
-        const double cont_res = this->interpolated_dudx_nst(s, 0, 0) +
-                                this->interpolated_dudx_nst(s, 1, 1);
-        outfile << cont_res << " ";
+        outfile << continuity_residual(s) << " ";
 
         outfile << std::endl;
       }
@@ -889,6 +887,58 @@ namespace oomph
       }
 
       return stress_tensor;
+    }
+
+    double continuity_residual(const Vector<double>& s)
+    {
+      // Find the dimension of the problem
+      const unsigned cached_dim = this->dim();
+      DenseMatrix<double> stress_tensor(cached_dim, cached_dim, 0.0);
+
+      // Find number of nodes
+      const unsigned n_node = this->nnode();
+
+      // Local shape function
+      Shape psif(n_node);
+      DShape dpsifdx(n_node, cached_dim);
+
+      // Find values of shape function
+      this->dshape_eulerian(s, psif, dpsifdx);
+
+      // Get the velocity gradient
+      DenseMatrix<double> interpolated_dudx(cached_dim, cached_dim, 0.0);
+      // Loop over the local nodes and sum
+      for (unsigned l = 0; l < n_node; l++)
+      {
+        // Loop over the spatial directions
+        for (unsigned i = 0; i < cached_dim; i++)
+        {
+          for (unsigned j = 0; j < cached_dim; j++)
+          {
+            const double u_value = this->u_nst(l, i);
+            interpolated_dudx(i, j) += u_value * dpsifdx(l, j);
+          }
+        }
+      }
+      if (this->IsAugmented)
+      {
+        Vector<double> x(cached_dim);
+        for (unsigned i = 0; i < cached_dim; i++)
+        {
+          x[i] = this->interpolated_x(s, i);
+        }
+        Vector<Vector<double>> grad_u_bar_local = this->grad_u_bar(x);
+        // Loop over the spatial directions
+        for (unsigned i = 0; i < cached_dim; i++)
+        {
+          for (unsigned j = 0; j < cached_dim; j++)
+          {
+            interpolated_dudx(i, j) += grad_u_bar_local[i][j];
+          }
+        }
+      }
+
+      return interpolated_dudx(0, 0) + interpolated_dudx(1, 1);
     }
 
 
