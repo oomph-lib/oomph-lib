@@ -91,18 +91,6 @@ namespace oomph
 
       create_singular_elements();
 
-      for (auto e : Augmented_bulk_element_number)
-      {
-        for (unsigned n = 0; n < 6; n++)
-        {
-          for (unsigned d = 0; d < 2; d++)
-          {
-            dynamic_cast<ELEMENT*>(this->bulk_mesh_pt()->element_pt(e))
-              ->pin_total_velocity_eqn(n, d);
-          }
-        }
-      }
-
       // fix_c(0.0);
 
       this->rebuild_global_mesh();
@@ -173,6 +161,13 @@ namespace oomph
           // ... augment element
           el_pt->augment();
           Augmented_bulk_element_number.push_back(e);
+          for (unsigned n = 0; n < 6; n++)
+          {
+            for (unsigned d = 0; d < 2; d++)
+            {
+              el_pt->pin_total_velocity_eqn(n, d);
+            }
+          }
         }
       }
       oomph_info << Augmented_bulk_element_number.size()
@@ -429,7 +424,7 @@ namespace oomph
 
       // Set the pointer to the element that determines the amplitude
       // of the singular fct
-      //el_pt->add_c_equation_element_pt(singular_el_pt);
+      el_pt->add_c_equation_element_pt(singular_el_pt);
     }
   }
 
