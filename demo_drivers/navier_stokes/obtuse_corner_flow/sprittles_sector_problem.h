@@ -358,10 +358,11 @@ namespace oomph
       Slip_boundary_id, Free_surface_boundary_id, element_pt, face_index);
 
     Node* node_pt = 0;
-    for (unsigned n = 3; n < 6; n++)
+    for (unsigned n = 0; n < 3; n++)
     {
       node_pt = element_pt->node_pt(n);
-      if (node_pt->is_on_boundary(Slip_boundary_id))
+      if (node_pt->is_on_boundary(Slip_boundary_id) &&
+          !node_pt->is_on_boundary(Free_surface_boundary_id))
       {
         std::cout << node_pt->x(0) << ", " << node_pt->x(1) << std::endl;
 
@@ -388,10 +389,11 @@ namespace oomph
       Free_surface_boundary_id, Slip_boundary_id, element_pt, face_index);
 
     Node* node_pt = 0;
-    for (unsigned n = 3; n < 6; n++)
+    for (unsigned n = 0; n < 3; n++)
     {
       node_pt = element_pt->node_pt(n);
-      if (node_pt->is_on_boundary(Free_surface_boundary_id))
+      if (node_pt->is_on_boundary(Free_surface_boundary_id) &&
+          !node_pt->is_on_boundary(Slip_boundary_id))
       {
         std::cout << node_pt->x(0) << ", " << node_pt->x(1) << std::endl;
         PointPressureEvaluationElement* el_pt =
