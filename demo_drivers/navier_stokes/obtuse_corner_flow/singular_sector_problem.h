@@ -488,8 +488,6 @@ namespace oomph
     }
     PointPressureEvaluationElement* el_pt =
       new PointPressureEvaluationElement(node_pt);
-    el_pt->set_pressure_data_pt(
-      Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0));
 
     el_pt->set_pressure_data_pt(
       Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0));
