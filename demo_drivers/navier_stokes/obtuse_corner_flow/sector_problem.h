@@ -1,5 +1,7 @@
-#ifndef AXISYM_SECTOR_PROBLEM_HEADER
-#define AXISYM_SECTOR_PROBLEM_HEADER
+#ifndef SECTOR_PROBLEM_HEADER
+#define SECTOR_PROBLEM_HEADER
+
+#include <cmath>
 
 #include "generic.h"
 #include "navier_stokes.h"
@@ -207,28 +209,43 @@ namespace oomph
     {
       oomph_info << "set_boundary_conditions" << endl;
 
-      // Pin the pressure at one point, the top right
-      unsigned element_index = 0;
+      // Find a node in the interior of the domain and pin it.
+      bool has_node_been_found = false;
+      unsigned element_index =
+        std::floor(Bulk_mesh_pt->nboundary_element(Far_field_boundary_id) / 2);
       unsigned node_index = 0;
-      find_corner_bulk_node(
-        Slip_boundary_id, Far_field_boundary_id, element_index, node_index);
-      const unsigned pressure_index = 2;
-      this->Bulk_mesh_pt->boundary_element_pt(Slip_boundary_id, element_index)
-        ->node_pt(node_index)
-        ->pin(pressure_index);
-      oomph_info << this->Bulk_mesh_pt
-                      ->boundary_element_pt(Slip_boundary_id, element_index)
-                      ->node_pt(node_index)
-                      ->x(0)
-                 << ", "
-                 << this->Bulk_mesh_pt
-                      ->boundary_element_pt(Slip_boundary_id, element_index)
-                      ->node_pt(node_index)
-                      ->x(1)
-                 << " " << endl;
-      this->Bulk_mesh_pt->boundary_element_pt(Slip_boundary_id, element_index)
-        ->node_pt(node_index)
-        ->set_value(pressure_index, 0.0);
+      while (!has_node_been_found)
+      {
+        // Select a candidate
+        Node* node_pt =
+          this->Bulk_mesh_pt
+            ->boundary_element_pt(Far_field_boundary_id, element_index)
+            ->node_pt(node_index);
+
+        // Test if it is internal
+        if (!node_pt->is_on_boundary(Far_field_boundary_id))
+        {
+          // Pin the pressure at one point
+          const unsigned pressure_index = 2;
+          node_pt->pin(pressure_index);
+          node_pt->set_value(pressure_index, 0.0);
+          oomph_info << node_pt->x(0) << ", " << node_pt->x(1) << " " << endl;
+          has_node_been_found = true;
+        }
+        else
+        {
+          // Seek a new candidate
+          if (node_index < 6)
+          {
+            node_index++;
+          }
+          else
+          {
+            node_index = 0;
+            element_index++;
+          }
+        }
+      }
 
       // Fix end points far field boundary condition lagrange_multipliers
       pin_far_field_lagrange_multiplier_end_points();
