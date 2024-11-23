@@ -307,13 +307,19 @@ namespace oomph
           // Get boundary node
           const Node* const node_pt = el_pt->node_pt(i_nod);
           // If node is on either of the other boundaries
-          if (node_pt->is_on_boundary(Slip_boundary_id) ||
-              node_pt->is_on_boundary(Free_surface_boundary_id))
+          if (node_pt->is_on_boundary(Slip_boundary_id))
           {
             // then fix the lagrange multiplier to zero
             oomph_info << "Fix lagrange_multiplier" << std::endl;
             el_pt->pin_lagrange_multiplier(i_nod, 0);
-            el_pt->pin_lagrange_multiplier(i_nod, 1);
+            // el_pt->pin_lagrange_multiplier(i_nod, 1);
+          }
+          if (node_pt->is_on_boundary(Free_surface_boundary_id))
+          {
+            // then fix the lagrange multiplier to zero
+            oomph_info << "Fix lagrange_multiplier" << std::endl;
+            el_pt->pin_lagrange_multiplier(i_nod, 0);
+            // el_pt->pin_lagrange_multiplier(i_nod, 1);
           }
         }
       }
