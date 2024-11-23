@@ -86,7 +86,7 @@ namespace oomph
       create_slip_elements();
       create_no_penetration1_elements();
       create_no_penetration2_elements();
-      // create_far_field_elements();
+      create_far_field_elements();
     }
 
     void delete_nonrefineable_elements()
