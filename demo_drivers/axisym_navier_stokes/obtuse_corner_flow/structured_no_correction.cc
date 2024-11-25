@@ -35,7 +35,7 @@ int main(int argc, char** argv)
   Parameters parameters;
 
   // Create problem
-  AxisymSectorProblem<MyElement> problem(120, 15);
+  AxisymSectorProblem<MyElement> problem(200, 10);
 
   // Steady problem
   problem.steady_newton_solve();

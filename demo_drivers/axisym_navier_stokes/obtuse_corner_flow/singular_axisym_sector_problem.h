@@ -59,7 +59,7 @@ namespace oomph
       add_time_stepper_pt(new BDF<2>);
 
       // Assign doc info pointer
-      Doc_info.set_directory("RESLT");
+      Doc_info.set_directory("RESLT_axi_fix");
       Doc_info.number() = 0;
 
       // Create an empty mesh
@@ -339,7 +339,7 @@ namespace oomph
     // Generate the mesh using the template ELEMENT
     Bulk_mesh_pt = new RefinedSectorTriMesh<ELEMENT>(
       n_radial,
-      1.04,
+      1.07,
       n_azimuthal,
       0.9,
       135.0 * MathematicalConstants::Pi / 180.0,

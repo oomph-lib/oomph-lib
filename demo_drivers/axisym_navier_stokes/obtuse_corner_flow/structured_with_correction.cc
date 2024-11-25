@@ -36,7 +36,7 @@ int main(int argc, char** argv)
 
   // Create problem
   SingularAxisymSectorProblem<SingularAxisymNavierStokesElement<MyElement>>
-    problem(150, 12);
+    problem(200, 10);
 
   // Steady problem
   problem.steady_newton_solve();
