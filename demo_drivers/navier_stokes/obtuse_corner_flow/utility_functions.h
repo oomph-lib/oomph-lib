@@ -86,6 +86,28 @@ namespace oomph
     output_stream.close();
   }
 
+  template<class PROBLEM*>
+  void debug_jacobian(Problem* problem_pt)
+  {
+    std::ofstream out_stream;
+
+    DoubleVector dummy_residuals;
+    CRDoubleMatrix actual_jacobian;
+    problem_pt->get_jacobian(dummy_residuals, actual_jacobian);
+
+    problem_pt->linear_solver_pt() = new FD_LU;
+
+    DoubleVector residuals;
+    DenseMatrix<double> expected_jacobian;
+    problem_pt->get_fd_jacobian(residuals, expected_jacobian);
+
+    compare_matrices(expected_jacobian, actual_jacobian);
+
+    out_stream.open("dofs.dat");
+    problem_pt->describe_dofs(out_stream);
+    out_stream.close();
+  }
+
   CRDoubleMatrix* load_crdoublematrix(const std::string& filename,
                                       const LinearAlgebraDistribution* dist_pt,
                                       const unsigned& ncol)
