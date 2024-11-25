@@ -352,6 +352,8 @@ namespace oomph
     /// Overload the output function
     void output(std::ostream& outfile)
     {
+      outfile << std::fixed
+              << std::setprecision(std::numeric_limits<double>::max_digits10);
       outfile << internal_data_pt(0)->value(0) << endl;
     }
 
