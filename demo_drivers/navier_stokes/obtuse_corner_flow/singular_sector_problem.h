@@ -91,7 +91,7 @@ namespace oomph
 
       create_singular_elements();
 
-      // fix_c(1.0);
+      //fix_c(1.30988994216873555);
 
       this->rebuild_global_mesh();
       oomph_info << "Number of unknowns: " << this->assign_eqn_numbers()
@@ -161,13 +161,13 @@ namespace oomph
           // ... augment element
           el_pt->augment();
           Augmented_bulk_element_number.push_back(e);
-          for (unsigned n = 0; n < 6; n++)
-          {
-            for (unsigned d = 0; d < 2; d++)
-            {
-              // el_pt->pin_total_velocity_eqn(n, d);
-            }
-          }
+          // for (unsigned n = 0; n < 6; n++)
+          //{
+          //   for (unsigned d = 0; d < 2; d++)
+          //   {
+          //     el_pt->pin_total_velocity_eqn(n, d);
+          //   }
+          // }
         }
       }
       oomph_info << Augmented_bulk_element_number.size()
