@@ -272,6 +272,12 @@ namespace oomph
     virtual inline unsigned u_index_nst(const unsigned& n,
                                         const unsigned& i) const override
     {
+      return numbering_scheme(n, i);
+      // return i;
+    }
+
+    inline unsigned numbering_scheme(const unsigned& n, const unsigned& i) const
+    {
       unsigned index = -1;
       if (IsAugmented)
       {
@@ -298,6 +304,7 @@ namespace oomph
     {
       // i * [u]
       return i;
+      // return numbering_scheme(n, i);
     }
 
     virtual inline unsigned momentum_index_nst(const unsigned& n,
@@ -917,28 +924,28 @@ namespace oomph
         {
           for (unsigned j = 0; j < cached_dim; j++)
           {
-            const double u_value = this->u_nst(l, i);
+            const double u_value = u_reconstructed(l, i);
             interpolated_dudx(i, j) += u_value * dpsifdx(l, j);
           }
         }
       }
-      if (this->IsAugmented)
-      {
-        Vector<double> x(cached_dim);
-        for (unsigned i = 0; i < cached_dim; i++)
-        {
-          x[i] = this->interpolated_x(s, i);
-        }
-        Vector<Vector<double>> grad_u_bar_local = this->grad_u_bar(x);
-        // Loop over the spatial directions
-        for (unsigned i = 0; i < cached_dim; i++)
-        {
-          for (unsigned j = 0; j < cached_dim; j++)
-          {
-            interpolated_dudx(i, j) += grad_u_bar_local[i][j];
-          }
-        }
-      }
+      // if (this->IsAugmented)
+      //{
+      //   Vector<double> x(cached_dim);
+      //   for (unsigned i = 0; i < cached_dim; i++)
+      //   {
+      //     x[i] = this->interpolated_x(s, i);
+      //   }
+      //   Vector<Vector<double>> grad_u_bar_local = this->grad_u_bar(x);
+      //   // Loop over the spatial directions
+      //   for (unsigned i = 0; i < cached_dim; i++)
+      //   {
+      //     for (unsigned j = 0; j < cached_dim; j++)
+      //     {
+      //       interpolated_dudx(i, j) += grad_u_bar_local[i][j];
+      //     }
+      //   }
+      // }
 
       return interpolated_dudx(0, 0) + interpolated_dudx(1, 1);
     }
@@ -1224,10 +1231,10 @@ namespace oomph
                 // -------------------
                 // if (!all_singular_functions_satisfy_stokes_equation)
                 {
-                  residuals[local_eqn] -= p_bar_local * dtestfdx(l, i) * W;
+                  residuals[local_eqn] += p_bar_local * dtestfdx(l, i) * W;
                   for (unsigned k = 0; k < cached_dim; k++)
                   {
-                    residuals[local_eqn] +=
+                    residuals[local_eqn] -=
                       visc_ratio *
                       (grad_u_bar_local[i][k] +
                        this->Gamma[i] * grad_u_bar_local[k][i]) *
@@ -1242,11 +1249,11 @@ namespace oomph
                       const int local_unknown = local_equation_number_C[ss];
                       if (local_unknown >= 0)
                       {
-                        jacobian(local_eqn, local_unknown) -=
+                        jacobian(local_eqn, local_unknown) +=
                           p_hat_local[ss] * dtestfdx(l, i) * W;
                         for (unsigned k = 0; k < cached_dim; k++)
                         {
-                          jacobian(local_eqn, local_unknown) +=
+                          jacobian(local_eqn, local_unknown) -=
                             visc_ratio *
                             (grad_u_hat_local[ss][i][k] +
                              this->Gamma[i] * grad_u_hat_local[ss][k][i]) *
@@ -1756,8 +1763,8 @@ namespace oomph
 
       if (this->IsAugmented)
       {
-        //fill_in_generic_residual_contribution_additional_terms(
-        //  residuals, jacobian, flag);
+        fill_in_generic_residual_contribution_additional_terms(
+          residuals, jacobian, flag);
         fill_in_generic_residual_contribution_total_velocity(
           residuals, jacobian, flag);
       }
