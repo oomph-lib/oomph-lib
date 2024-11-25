@@ -1472,8 +1472,8 @@ namespace oomph
 
 
     /// Compute vector of FE interpolated velocity u at local coordinate s
-    void interpolated_u_nst(const Vector<double>& s,
-                            Vector<double>& veloc) const
+    virtual void interpolated_u_nst(const Vector<double>& s,
+                                    Vector<double>& veloc) const
     {
       // Find number of nodes
       unsigned n_node = nnode();
@@ -1497,7 +1497,8 @@ namespace oomph
     }
 
     /// Return FE interpolated velocity u[i] at local coordinate s
-    double interpolated_u_nst(const Vector<double>& s, const unsigned& i) const
+    virtual double interpolated_u_nst(const Vector<double>& s,
+                                      const unsigned& i) const
     {
       // Find number of nodes
       unsigned n_node = nnode();
@@ -1521,9 +1522,9 @@ namespace oomph
 
     /// Return FE interpolated velocity u[i] at local coordinate s
     /// at time level t (t=0: present; t>0: history)
-    double interpolated_u_nst(const unsigned& t,
-                              const Vector<double>& s,
-                              const unsigned& i) const
+    virtual double interpolated_u_nst(const unsigned& t,
+                                      const Vector<double>& s,
+                                      const unsigned& i) const
     {
       // Find number of nodes
       unsigned n_node = nnode();

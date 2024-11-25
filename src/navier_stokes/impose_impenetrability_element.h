@@ -189,7 +189,15 @@ namespace oomph
         outfile << this->interpolated_p(s) << ",";
 
         // Lagrange multipliers
-        outfile << interpolated_lambda(s);
+        outfile << interpolated_lambda(s) << ",";
+
+        // compute the normal vector
+        Vector<double> norm_vec(this->dim() + 1);
+        outer_unit_normal(iplot, norm_vec);
+        for (unsigned i = 0; i < this->dim() + 1; i++)
+        {
+          outfile << norm_vec[i] << ",";
+        }
 
         outfile << std::endl;
       }

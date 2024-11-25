@@ -35,6 +35,8 @@
 #include <oomph-lib-config.h>
 #endif
 
+#include <functional>
+
 
 // OOMPH-LIB headers
 #include "../generic/Qelements.h"
@@ -60,6 +62,13 @@ namespace oomph
                             const Vector<double>& x,
                             const Vector<double>& n,
                             Vector<double>& result);
+
+    std::function<void(const double&,
+                       const Vector<double>&,
+                       const Vector<double>&,
+                       Vector<double>&)>
+      Traction_fct;
+
 
   protected:
     /// The "global" intrinsic coordinate of the element when
@@ -107,22 +116,29 @@ namespace oomph
                               const Vector<double>& n,
                               Vector<double>& result)
     {
-      // If the function pointer is zero return zero
-      if (Traction_fct_pt == 0)
+      // Default to the traction function
+      if (Traction_fct)
       {
-        // Loop over dimensions and set body forces to zero
-        for (unsigned i = 0; i < Dim; i++)
-        {
-          result[i] = 0.0;
-        }
+        Traction_fct(time, x, n, result);
       }
-      // Otherwise call the function
       else
       {
-        (*Traction_fct_pt)(time, x, n, result);
+        // If the function pointer is zero return zero
+        if (Traction_fct_pt == 0)
+        {
+          // Loop over dimensions and set body forces to zero
+          for (unsigned i = 0; i < Dim; i++)
+          {
+            result[i] = 0.0;
+          }
+        }
+        // Otherwise call the function
+        else
+        {
+          (*Traction_fct_pt)(time, x, n, result);
+        }
       }
     }
-
 
     /// This function returns the residuals for the
     /// traction function.
@@ -189,6 +205,17 @@ namespace oomph
                                Vector<double>& result)
     {
       return Traction_fct_pt;
+    }
+
+
+    // Access function for the imposed traction pointer
+    void set_traction_fct(
+      const std::function<void(const double&,
+                               const Vector<double>&,
+                               const Vector<double>&,
+                               Vector<double>&)>& traction_fct)
+    {
+      Traction_fct = traction_fct;
     }
 
     /// This function returns just the residuals
