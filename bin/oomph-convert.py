@@ -361,7 +361,7 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
     output.write(VtkXml.pointsHeader)
     for zone in zones:
         for node in zone.nodes:
-            output.write("%e %e %e\n" %(node.coordinates[0], node.coordinates[1], node.coordinates[2]))
+            output.write("%.15e %.15e %.15e\n" %(node.coordinates[0], node.coordinates[1], node.coordinates[2]))
     output.write(VtkXml.pointsFooter)
     print("done")
 
@@ -816,7 +816,7 @@ class VtkXml:
     pieceHeader = '<Piece NumberOfPoints="%d" NumberOfCells="%d">\n'
     pieceFooter = '</Piece>'
 
-    pointsHeader = '<Points>\n<DataArray type="Float32" NumberOfComponents="3" format="ascii">\n'
+    pointsHeader = '<Points>\n<DataArray type="Float64" NumberOfComponents="3" format="ascii">\n'
     pointsFooter = '</DataArray>\n</Points>\n'
 
     cellsHeader = '<Cells>\n'
@@ -834,7 +834,7 @@ class VtkXml:
     pointDataHeader = '<PointData>\n'
     pointDataFooter = '</PointData>\n'
 
-    fieldHeader = '<DataArray type="Float32" Name="V%d" format="ascii">\n'
+    fieldHeader = '<DataArray type="Float64" Name="V%d" format="ascii">\n'
     fieldFooter = '</DataArray>\n'
 
 
@@ -922,7 +922,7 @@ def tecplot_to_vtpxml(inputFilename, outputFilename, dim):
     sys.stdout.flush()
     output.write(VtpXml.pointsHeader)
     for point in points:
-        output.write("%e %e %e\n" %(point.coordinates[0], point.coordinates[1], point.coordinates[2]))
+        output.write("%.15e %.15e %.15e\n" %(point.coordinates[0], point.coordinates[1], point.coordinates[2]))
     output.write(VtpXml.pointsFooter)
     print("done")
  
@@ -1063,7 +1063,7 @@ class VtpXml:
     pieceHeader = '<Piece NumberOfPoints="%d" NumberOfVerts="0" NumberOfLines="%d" NumberOfStrips="0" NumberOfPolys="0">\n'
     pieceFooter = '</Piece>'
 
-    pointsHeader = '<Points>\n<DataArray type="Float32" NumberOfComponents="3" format="ascii">\n'
+    pointsHeader = '<Points>\n<DataArray type="Float64" NumberOfComponents="3" format="ascii">\n'
     pointsFooter = '</DataArray>\n</Points>\n'
 
     cellDataHeader = '<CellData>\n'
@@ -1081,7 +1081,7 @@ class VtpXml:
     stripsHeader = '<Strips>\n'
     stripsFooter = '</Strips>\n'
 
-    fieldHeader = '<DataArray type="Float32" Name="V%d" format="ascii">\n'
+    fieldHeader = '<DataArray type="Float64" Name="V%d" format="ascii">\n'
     fieldFooter = '</DataArray>\n'
 
     polysHeader = '<Polys>\n'
