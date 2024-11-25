@@ -204,7 +204,7 @@ namespace oomph
       {
         for (unsigned j = 0; j < dim; j++)
         {
-          result[i] += (grad_u[i][j] + grad_u[j][i]) * n[j];
+          result[i] -= (grad_u[i][j] + grad_u[j][i]) * n[j];
         }
       }
     };
