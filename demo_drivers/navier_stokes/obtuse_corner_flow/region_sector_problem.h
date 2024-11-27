@@ -62,7 +62,7 @@ namespace oomph
       add_time_stepper_pt(new BDF<2>);
 
       // Assign doc info pointer
-      Doc_info.set_directory("RESLT_no_fix");
+      Doc_info.set_directory("RESLT_no_fix_region");
       Doc_info.number() = 0;
 
       /// Create parameters from parameters file.
@@ -91,7 +91,7 @@ namespace oomph
       create_slip_elements();
       create_no_penetration1_elements();
       create_no_penetration2_elements();
-      // create_far_field_elements();
+      create_far_field_elements();
     }
 
     void delete_nonrefineable_elements()
@@ -317,14 +317,14 @@ namespace oomph
             // then fix the lagrange multiplier to zero
             oomph_info << "Fix lagrange_multiplier" << std::endl;
             el_pt->pin_lagrange_multiplier(i_nod, 0);
-            // el_pt->pin_lagrange_multiplier(i_nod, 1);
+            el_pt->pin_lagrange_multiplier(i_nod, 1);
           }
           if (node_pt->is_on_boundary(Free_surface_boundary_id))
           {
             // then fix the lagrange multiplier to zero
             oomph_info << "Fix lagrange_multiplier" << std::endl;
             el_pt->pin_lagrange_multiplier(i_nod, 0);
-            // el_pt->pin_lagrange_multiplier(i_nod, 1);
+            el_pt->pin_lagrange_multiplier(i_nod, 1);
           }
         }
       }
@@ -357,34 +357,36 @@ namespace oomph
   {
     oomph_info << "create_slip_elements" << endl;
 
-    unsigned b = Slip_boundary_id;
-
-    // How many bulk elements are adjacent to boundary b?
-    unsigned n_element = Bulk_mesh_pt->nboundary_element(b);
-
-    // Loop over the bulk elements adjacent to boundary b?
-    for (unsigned e = 0; e < n_element; e++)
+    std::array boundary_ids = {Inner_slip_boundary_id, Slip_boundary_id};
+    for (unsigned b : boundary_ids)
     {
-      // Get pointer to the bulk element that is adjacent to boundary
-      // b
-      ELEMENT* bulk_elem_pt =
-        dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(b, e));
+      // How many bulk elements are adjacent to boundary b?
+      unsigned n_element = Bulk_mesh_pt->nboundary_element(b);
 
-      // What is the index of the face of element e along boundary b
-      int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
-      NavierStokesSlipElement<ELEMENT>* slip_element_pt = 0;
+      // Loop over the bulk elements adjacent to boundary b?
+      for (unsigned e = 0; e < n_element; e++)
+      {
+        // Get pointer to the bulk element that is adjacent to boundary
+        // b
+        ELEMENT* bulk_elem_pt =
+          dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(b, e));
 
-      // Build the corresponding slip element
-      slip_element_pt =
-        new NavierStokesSlipElement<ELEMENT>(bulk_elem_pt, face_index);
+        // What is the index of the face of element e along boundary b
+        int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
+        NavierStokesSlipElement<ELEMENT>* slip_element_pt = 0;
 
-      // Set the pointer to the prescribed slip function
-      slip_element_pt->set_slip_function(Slip_function);
+        // Build the corresponding slip element
+        slip_element_pt =
+          new NavierStokesSlipElement<ELEMENT>(bulk_elem_pt, face_index);
 
-      slip_element_pt->set_wall_velocity_function(wall_velocity_function);
+        // Set the pointer to the prescribed slip function
+        slip_element_pt->set_slip_function(Slip_function);
 
-      // Add the prescribed-flux element to the surface mesh
-      Slip_boundary_mesh_pt->add_element_pt(slip_element_pt);
+        slip_element_pt->set_wall_velocity_function(wall_velocity_function);
+
+        // Add the prescribed-flux element to the surface mesh
+        Slip_boundary_mesh_pt->add_element_pt(slip_element_pt);
+      }
     }
   }
 
