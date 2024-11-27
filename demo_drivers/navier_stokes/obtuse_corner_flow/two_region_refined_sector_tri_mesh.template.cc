@@ -74,6 +74,8 @@ namespace oomph
 
     // Create first element
     Element_pt[0] = new ELEMENT;
+    dynamic_cast<ELEMENT*>(finite_element_pt(0))
+      ->set_region_id(Inner_region_id);
 
     // Currently this mesh only works for 3 and 6 noded triangles
     if ((finite_element_pt(0)->nnode_1d() != 2) &&
@@ -163,6 +165,9 @@ namespace oomph
         if (element_count != 0) // 0th element already exists
         {
           Element_pt[element_count] = new ELEMENT;
+
+          dynamic_cast<ELEMENT*>(finite_element_pt(element_count))
+            ->set_region_id(Inner_region_id);
         }
 
         // Allocate memory for nodes in the current triangle
@@ -214,6 +219,21 @@ namespace oomph
           //------------------------------
           Element_pt[element_count] = new ELEMENT;
           Element_pt[element_count + 1] = new ELEMENT;
+
+          if (i < N_radial_region)
+          {
+            dynamic_cast<ELEMENT*>(finite_element_pt(element_count))
+              ->set_region_id(Inner_region_id);
+            dynamic_cast<ELEMENT*>(finite_element_pt(element_count + 1))
+              ->set_region_id(Inner_region_id);
+          }
+          else
+          {
+            dynamic_cast<ELEMENT*>(finite_element_pt(element_count))
+              ->set_region_id(Outer_region_id);
+            dynamic_cast<ELEMENT*>(finite_element_pt(element_count + 1))
+              ->set_region_id(Outer_region_id);
+          }
 
 
           // Allocate memory for nodes in the current box

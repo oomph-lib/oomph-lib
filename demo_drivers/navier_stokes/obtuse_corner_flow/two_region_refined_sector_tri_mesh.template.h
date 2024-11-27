@@ -58,6 +58,12 @@ namespace oomph
       Inner_boundary_id,
     };
 
+    enum
+    {
+      Inner_region_id,
+      Outer_region_id,
+    };
+
     /// Constructor
     /// n_radial    : total number of elements in the radial direction;
     /// n_radial    : number of elements in the region in the radial direction;
