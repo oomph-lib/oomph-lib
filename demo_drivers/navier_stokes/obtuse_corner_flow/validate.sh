@@ -1,67 +1,51 @@
-#! /bin/sh
+#!/usr/bin/sh
 
 # Get the OOPMH-LIB root directory from a makefile
 OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
 
 #Set the number of tests to be checked
-NUM_TESTS=2
+NUM_TESTS=6
 
 # Setup validation directory
 #---------------------------
 touch Validation
 rm -r -f Validation
 mkdir Validation
-cp parameters.dat Validation/
+cp default_parameters.dat Validation/parameters.dat
 
-cd Validation
-mkdir RESLT_no_fix
-var="../structured_no_correction > OUTPUT_no_correction"
-echo $var
-eval $var
-echo "done"
-cd ../
-LOG="Validation/validation.log"
-echo " " >> $LOG 
-echo "Validation run" >> $LOG
-echo "---------------------------------------------" >> $LOG
-echo " " >> $LOG
-echo "Validation directory: " >> $LOG
-echo " " >> $LOG
-echo "  " `pwd` >> $LOG
-echo " " >> $LOG
-cat Validation/RESLT_no_fix/slip_surface0.csv > Validation/structured_no_correction.dat
-mv Validation/RESLT_no_fix/soln0.dat Validation/soln0.dat
-if test "$1" = "no_fpdiff"; then
-    echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> $LOG
-else
-    ../../../bin/fpdiff.py validata/structured_no_correction.dat.gz  \
-       Validation/structured_no_correction.dat >> $LOG
-fi
+test_script()
+{
+    cd Validation
+    mkdir $1
+    var="../$2 > $2.out"
+    echo $var
+    eval $var
+    echo "done"
+    cd ../
+    LOG="Validation/validation.log"
+    echo " " >> $LOG 
+    echo "Validation run" >> $LOG
+    echo "---------------------------------------------" >> $LOG
+    echo " " >> $LOG
+    echo "Validation directory: " >> $LOG
+    echo " " >> $LOG
+    echo "  " `pwd` >> $LOG
+    echo " " >> $LOG
+    cat Validation/$1/slip_surface0.csv > Validation/$2.dat
+    if test "$1" = "no_fpdiff"; then
+        echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> $LOG
+    else
+        ../../../bin/fpdiff.py validata/$2.dat.gz  \
+           Validation/$2.dat >> $LOG
+    fi
+}
 
-cd Validation
-mkdir -p RESLT_fix
-var="../structured_with_correction > OUTPUT_with_correction"
-echo $var
-eval $var
-echo "done"
-cd ../
-LOG="Validation/validation.log"
-echo " " >> $LOG 
-echo "Validation run" >> $LOG
-echo "---------------------------------------------" >> $LOG
-echo " " >> $LOG
-echo "Validation directory: " >> $LOG
-echo " " >> $LOG
-echo "  " `pwd` >> $LOG
-echo " " >> $LOG
-cat Validation/RESLT_fix/slip_surface0.csv > Validation/structured_with_correction.dat
-mv Validation/RESLT_fix/soln0.dat Validation/soln1.dat
-if test "$1" = "no_fpdiff"; then
-    echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> $LOG
-else
-    ../../../bin/fpdiff.py validata/structured_with_correction.dat.gz  \
-       Validation/structured_with_correction.dat >> $LOG
-fi
+test_script RESLT_no_fix structured_no_correction 
+test_script RESLT_no_fix_region structured_no_correction_region
+test_script RESLT_fix structured_with_correction 
+test_script RESLT_fix_region structured_with_correction_region
+test_script RESLT_sprittles sprittles 
+test_script RESLT_sprittles_region sprittles_region
 
 #######################################################################
 
