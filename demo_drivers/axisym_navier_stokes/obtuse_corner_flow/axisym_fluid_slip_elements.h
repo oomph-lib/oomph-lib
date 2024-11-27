@@ -65,18 +65,20 @@ namespace oomph
     /// applied slip. (Not all of the input arguments will be
     /// required for all specific load functions but the list should
     /// cover all cases)
-    void (*Slip_fct_pt)(const double& time,
-                        const Vector<double>& x,
-                        const Vector<double>& n,
-                        Vector<double>& result);
+    std::function<void(const double&,
+                       const Vector<double>&,
+                       const Vector<double>&,
+                       Vector<double>&)>
+      Slip_function;
 
     /// Pointer to an wall velocity function. Arguments:
     /// Eulerian coordinate; outer unit normal;
     /// applied velocity.
-    void (*Wall_velocity_fct_pt)(const double& time,
-                                 const Vector<double>& x,
-                                 const Vector<double>& n,
-                                 Vector<double>& result);
+    std::function<void(const double&,
+                       const Vector<double>&,
+                       const Vector<double>&,
+                       Vector<double>&)>
+      Wall_velocity_function;
 
     /// Get the slip vector: Pass number of integration point
     /// (dummy), Eulerian coordinate and normal vector and return the load
@@ -89,7 +91,7 @@ namespace oomph
                           const Vector<double>& n,
                           Vector<double>& slip) const
     {
-      Slip_fct_pt(time, x, n, slip);
+      Slip_function(time, x, n, slip);
     }
 
     /// Get the wall velocity vector: Pass number of integration point
@@ -103,7 +105,7 @@ namespace oomph
                                    const Vector<double>& n,
                                    Vector<double>& wall_velocity) const
     {
-      Wall_velocity_fct_pt(time, x, n, wall_velocity);
+      Wall_velocity_function(time, x, n, wall_velocity);
     }
 
     /// Helper function that actually calculates the residuals
@@ -125,22 +127,32 @@ namespace oomph
       element_pt->build_face_element(face_index, this);
     }
 
-    /// Reference to the slip function pointer
-    void (*&slip_fct_pt())(const double& time,
-                           const Vector<double>& x,
-                           const Vector<double>& n,
-                           Vector<double>& slip)
+    void add_dependence_on_contact_line_node(
+      SolidNode* const& contact_line_node_pt)
     {
-      return Slip_fct_pt;
+      Contact_line_data_index =
+        add_external_data(contact_line_node_pt->variable_position_pt());
+    }
+
+
+    /// Reference to the slip function pointer
+    void set_slip_function(
+      const std::function<void(const double&,
+                               const Vector<double>&,
+                               const Vector<double>&,
+                               Vector<double>&)>& slip_function)
+    {
+      Slip_function = slip_function;
     }
 
     /// Reference to the wall velocity function pointer
-    void (*&wall_velocity_fct_pt())(const double& time,
-                                    const Vector<double>& x,
-                                    const Vector<double>& n,
-                                    Vector<double>& slip)
+    void set_wall_velocity_function(
+      const std::function<void(const double&,
+                               const Vector<double>&,
+                               const Vector<double>&,
+                               Vector<double>&)>& wall_velocity_function)
     {
-      return Wall_velocity_fct_pt;
+      Wall_velocity_function = wall_velocity_function;
     }
 
 
@@ -370,29 +382,29 @@ namespace oomph
 
 
     /// Fill in contribution from Jacobian
-    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
-                                          DenseMatrix<double>& jacobian)
-    {
-      // Fill in analytic contribution of internal equations
-      fill_in_contribution_to_residuals_axisymmetric_nst_slip(
-        residuals, jacobian, 1);
+    // void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+    //                                       DenseMatrix<double>& jacobian)
+    //{
+    //   // Fill in analytic contribution of internal equations
+    //   fill_in_contribution_to_residuals_axisymmetric_nst_slip(
+    //     residuals, jacobian, 1);
 
-      // Fill in the contribution from external data by finite differences
-      fill_in_jacobian_from_external_by_fd(residuals, jacobian, false);
-    }
+    //  // Fill in the contribution from external data by finite differences
+    //  fill_in_jacobian_from_external_by_fd(residuals, jacobian, false);
+    //}
 
-    void fill_in_contribution_to_jacobian_and_mass_matrix(
-      Vector<double>& residuals,
-      DenseMatrix<double>& jacobian,
-      DenseMatrix<double>& mass_matrix)
-    {
-      //  Fill in analytic contribution of internal equations
-      fill_in_contribution_to_residuals_axisymmetric_nst_slip(
-        residuals, jacobian, 1);
+    // void fill_in_contribution_to_jacobian_and_mass_matrix(
+    //   Vector<double>& residuals,
+    //   DenseMatrix<double>& jacobian,
+    //   DenseMatrix<double>& mass_matrix)
+    //{
+    //   //  Fill in analytic contribution of internal equations
+    //   fill_in_contribution_to_residuals_axisymmetric_nst_slip(
+    //     residuals, jacobian, 1);
 
-      // Fill in the contribution from external data by finite differences
-      fill_in_jacobian_from_external_by_fd(residuals, jacobian, false);
-    }
+    //  // Fill in the contribution from external data by finite differences
+    //  fill_in_jacobian_from_external_by_fd(residuals, jacobian, false);
+    //}
 
     /// Specify the value of nodal zeta from the face geometry
     /// The "global" intrinsic coordinate of the element when
@@ -612,104 +624,55 @@ namespace oomph
 
           for (unsigned i = 0; i < n_dim + 1; i++)
           {
-            interpolated_u[i] += this->u(l, i) * psi[l];
+            interpolated_u[i] +=
+              this->nodal_value(l, u_index_axi_nst(l, i)) * psi[l];
           }
         }
 
         // Get the imposed slip
-        Vector<double> slip(3);
+        Vector<double> slip(n_dim + 1);
 
         // Dummy integration point
         unsigned ipt = 0;
         get_slip(time, ipt, interpolated_x, unit_normal, slip);
 
-        Vector<double> wall_velocity(n_dim + 1);
-        get_wall_velocity(
-          time, ipt, interpolated_x, unit_normal, wall_velocity);
-
         // Output the x,y,..
         for (unsigned i = 0; i < n_dim; i++)
         {
-          outfile << interpolated_x[i] << " ";
+          outfile << interpolated_x[i] << ",";
         }
 
         // Output the slip components
         for (unsigned i = 0; i < n_dim + 1; i++)
         {
-          outfile << slip[i] << " ";
+          outfile << slip[i] << ",";
         }
 
         // Output normal
         for (unsigned i = 0; i < n_dim; i++)
         {
-          outfile << unit_normal[i] << " ";
+          outfile << unit_normal[i] << ",";
         }
 
         // Output the u,v,w
         for (unsigned i = 0; i < n_dim + 1; i++)
         {
-          outfile << wall_velocity[i] << " ";
+          outfile << wall_velocity[i] << ",";
         }
 
         // Output the u,v,w
         for (unsigned i = 0; i < n_dim + 1; i++)
         {
-          outfile << interpolated_u[i] << " ";
+          outfile << interpolated_u[i] << ",";
         }
         outfile << interpolated_p(s) << std::endl;
       }
     }
-
-    /// C_style output function
-    void output(FILE* file_pt)
-    {
-      FiniteElement::output(file_pt);
-    }
-
-    /// C-style output function
-    void output(FILE* file_pt, const unsigned& n_plot)
-    {
-      FiniteElement::output(file_pt, n_plot);
-    }
-
-
-    /// Compute slip vector at specified local coordinate
-    /// Should only be used for post-processing; ignores dependence
-    /// on integration point!
-    void slip(const double& time,
-              const Vector<double>& s,
-              Vector<double>& slip);
   };
 
   /// ////////////////////////////////////////////////////////////////////
   /// ////////////////////////////////////////////////////////////////////
   /// ////////////////////////////////////////////////////////////////////
-
-  //=====================================================================
-  /// Compute slip vector at specified local coordinate
-  /// Should only be used for post-processing; ignores dependence
-  /// on integration point!
-  //=====================================================================
-  template<class ELEMENT>
-  void AxisymmetricNavierStokesSlipElement<ELEMENT>::slip(
-    const double& time, const Vector<double>& s, Vector<double>& slip)
-  {
-    unsigned n_dim = this->nodal_dimension();
-
-    // Position vector
-    Vector<double> x(n_dim);
-    interpolated_x(s, x);
-
-    // Outer unit normal (only in r and z direction!)
-    Vector<double> unit_normal(n_dim);
-    outer_unit_normal(s, unit_normal);
-
-    // Dummy
-    unsigned ipt = 0;
-
-    // Slip vector
-    get_slip(time, ipt, x, unit_normal, slip);
-  }
 
 
   //=====================================================================
@@ -784,7 +747,8 @@ namespace oomph
         // Loop over directions
         for (unsigned i = 0; i < n_dim + 1; i++)
         {
-          interpolated_u[i] += u(l, i) * psi(l);
+          interpolated_u[i] +=
+            this->nodal_value(l, u_index_axi_nst(l, i)) * psi(l);
         }
       }
 
@@ -870,7 +834,6 @@ namespace oomph
                       (1 - interpolated_normal[l2] * interpolated_normal[i]) *
                       psi(l2) * W;
                   }
-
                 }
               }
             }
@@ -881,6 +844,4 @@ namespace oomph
   }
 
 } // namespace oomph
-
-
 #endif
