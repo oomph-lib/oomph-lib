@@ -8,7 +8,20 @@ namespace oomph
 {
   class MyElement : public StoreErrorElement<TTaylorHoodElement<2>>
   {
+  private:
+    unsigned Region_id;
+
   public:
+    void set_region_id(const unsigned& value)
+    {
+      Region_id = value;
+    }
+
+    const unsigned get_region_id()
+    {
+      return Region_id;
+    }
+
     void output(std::ostream& outfile, const unsigned& nplot)
     {
       // Vector of local coordinates
