@@ -1,5 +1,7 @@
-#ifndef AXISYM_SECTOR_PROBLEM_HEADER
-#define AXISYM_SECTOR_PROBLEM_HEADER
+#ifndef SECTOR_PROBLEM_HEADER
+#define SECTOR_PROBLEM_HEADER
+
+#include <cmath>
 
 #include "generic.h"
 #include "navier_stokes.h"
@@ -8,22 +10,11 @@
 
 /// Local headers
 #include "axisym_fluid_slip_elements.h"
-#include "debug_impose_impenetratibility_elements.h"
-#include "domain_boundaries.h"
-#include "eigensolution_elements.h"
-#include "eigensolution_functions.h"
 #include "far_field_element.h"
-#include "free_surface_element.h"
-#include "my_error_estimator.h"
 #include "parameter_functions.h"
-#include "parameter_values.h"
-#include "parameters.h"
-#include "pressure_evaluation_elements.h"
-#include "projectable_axisymmetric_Ttaylor_hood_elements.h"
+#include "parameter_struct.h"
 #include "refined_sector_tri_mesh.template.h"
 #include "refined_sector_tri_mesh.template.cc"
-#include "singular_fluid_traction_elements.h"
-#include "utility_functions.h"
 
 namespace oomph
 {
@@ -34,20 +25,33 @@ namespace oomph
   private:
     /// Private variables
     RefinedSectorTriMesh<ELEMENT>* Bulk_mesh_pt;
-    Node* Contact_line_node_pt;
 
-    Mesh* No_penetration_boundary_mesh_pt;
+    Mesh* No_penetration_boundary_mesh1_pt;
+    Mesh* No_penetration_boundary_mesh2_pt;
     Mesh* Far_field_mesh_pt;
     Mesh* Slip_boundary_mesh_pt;
 
     DocInfo Doc_info;
     Z2ErrorEstimator* Z2_error_estimator_pt;
 
+    Params My_params;
+
+    std::function<void(const double&,
+                       const Vector<double>&,
+                       const Vector<double>&,
+                       Vector<double>&)>
+      Slip_function;
+
   public:
+    enum
+    {
+      Slip_boundary_id,
+      Far_field_boundary_id,
+      Free_surface_boundary_id,
+    };
+
     // Constructor
-    AxisymSectorProblem(const unsigned& n_radial = 10,
-                        const unsigned& n_azimuthal = 10)
-      : Contact_line_node_pt(0), Z2_error_estimator_pt(new Z2ErrorEstimator)
+    AxisymSectorProblem() : Z2_error_estimator_pt(new Z2ErrorEstimator)
     {
       // Create and add the timestepper
       add_time_stepper_pt(new BDF<2>);
@@ -56,51 +60,49 @@ namespace oomph
       Doc_info.set_directory("RESLT_axi_no_fix");
       Doc_info.number() = 0;
 
+      /// Create parameters from parameters file.
+      My_params = create_parameters_from_file("parameters.dat");
+      Slip_function = slip_function_factory(My_params.slip_length);
+
       // Create an empty mesh
-      add_bulk_mesh(n_radial, n_azimuthal);
+      add_bulk_mesh();
       add_non_adaptive_sub_meshes();
       build_global_mesh();
-
-      // From here should be actions_after_adapt
-      actions_after_adapt();
     }
 
-    // Actions before adapt
-    void actions_after_adapt()
+    virtual void setup()
     {
-      setup_bulk_elements();
+      this->setup_bulk_elements();
       create_nonrefineable_elements();
       set_boundary_conditions();
 
-      /// Is this needed?
-      rebuild_global_mesh();
-      oomph_info << "Number of unknowns: " << assign_eqn_numbers() << std::endl;
+      this->rebuild_global_mesh();
+      oomph_info << "Number of unknowns: " << this->assign_eqn_numbers()
+                 << std::endl;
     }
 
     void create_nonrefineable_elements()
     {
       create_slip_elements();
-      create_no_penetration_elements(Slip_boundary_id);
-      create_no_penetration_elements(Free_surface_boundary_id);
+      create_no_penetration1_elements();
+      create_no_penetration2_elements();
       create_far_field_elements();
-    }
-
-    void actions_before_adapt()
-    {
-      delete_nonrefineable_elements();
     }
 
     void delete_nonrefineable_elements()
     {
-      delete_elements(No_penetration_boundary_mesh_pt);
       delete_elements(Slip_boundary_mesh_pt);
+      delete_elements(No_penetration_boundary_mesh1_pt);
+      delete_elements(No_penetration_boundary_mesh2_pt);
       delete_elements(Far_field_mesh_pt);
     }
 
     void add_non_adaptive_sub_meshes()
     {
-      No_penetration_boundary_mesh_pt = new Mesh;
-      add_sub_mesh(No_penetration_boundary_mesh_pt);
+      No_penetration_boundary_mesh1_pt = new Mesh;
+      add_sub_mesh(No_penetration_boundary_mesh1_pt);
+      No_penetration_boundary_mesh2_pt = new Mesh;
+      add_sub_mesh(No_penetration_boundary_mesh2_pt);
       Far_field_mesh_pt = new Mesh;
       add_sub_mesh(Far_field_mesh_pt);
       Slip_boundary_mesh_pt = new Mesh;
@@ -109,8 +111,6 @@ namespace oomph
 
     void setup_bulk_elements()
     {
-      set_contact_line_node_pt();
-
       unsigned n_bulk = Bulk_mesh_pt->nelement();
       for (unsigned e = 0; e < n_bulk; e++)
       {
@@ -118,11 +118,16 @@ namespace oomph
         ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
         // Set the Reynolds number
-        el_pt->re_pt() = &parameters::reynolds_number;
+        el_pt->re_pt() = &My_params.reynolds_number;
 
         // Set the Reynolds Strouhal number
-        el_pt->re_st_pt() = &parameters::strouhal_reynolds_number;
+        el_pt->re_st_pt() = &My_params.strouhal_reynolds_number;
       }
+    }
+
+    Params& my_parameters()
+    {
+      return My_params;
     }
 
     // Destructor
@@ -157,90 +162,135 @@ namespace oomph
 
     void doc_solution();
 
-    void debug_residuals()
+    DocInfo* doc_info_pt()
     {
-      DoubleVector res;
-      oomph_info << "get_residuals" << endl;
-      get_residuals(res);
-      res.output("res.dat");
+      return &Doc_info;
     }
 
-    void debug_jacobian()
+    RefinedSectorTriMesh<ELEMENT>*& bulk_mesh_pt()
     {
-      oomph_info << "debug_jacobian" << std::endl;
-
-      DoubleVector residuals;
-      DenseDoubleMatrix jacobian;
-      DoubleVector residualsFD;
-      DenseDoubleMatrix jacobianFD(ndof());
-
-      get_jacobian(residuals, jacobian);
-      jacobian.sparse_indexed_output(
-        this->Doc_info.directory() + "/jacJ.dat", 16, true);
-      get_fd_jacobian(residualsFD, jacobianFD);
-      jacobianFD.sparse_indexed_output(
-        this->Doc_info.directory() + "/jacfdJ.dat", 16, true);
-
-      bool jacobians_are_equal = compare_matrices(jacobian, jacobianFD);
-
-      if (jacobians_are_equal)
-      {
-        oomph_info << "Computed Jacobian matches finite differenced Jacobian"
-                   << std::endl;
-      }
-      else
-      {
-        oomph_info << "WARNING: Computed Jacobian is different to the finite "
-                      "differenced Jacobian"
-                   << std::endl;
-
-        std::ofstream output_stream;
-        output_stream.open(this->Doc_info.directory() + "/dofs.txt");
-        this->describe_dofs(output_stream);
-        output_stream.close();
-      }
+      return Bulk_mesh_pt;
     }
 
-  private:
-    void add_bulk_mesh(const unsigned& n_radial, const unsigned& n_azimuthal);
-    void create_slip_elements();
-    void create_no_penetration_elements(const unsigned& boundary_id);
-    void create_far_field_elements();
+
+    void add_bulk_mesh();
 
   public:
-    void pin_far_field_elements();
+    void pin_no_penetration_conditions()
+    {
+      unsigned n_el = No_penetration_boundary_mesh1_pt->nelement();
+      for (unsigned i_el = 0; i_el < n_el; i_el++)
+      {
+        ImposeImpenetrabilityElement<ELEMENT>* el_pt =
+          dynamic_cast<ImposeImpenetrabilityElement<ELEMENT>*>(
+            No_penetration_boundary_mesh1_pt->element_pt(i_el));
+        const unsigned n_nod = el_pt->nnode();
+        for (unsigned i_nod = 0; i_nod < n_nod; i_nod++)
+        {
+          el_pt->pin_lagrange_multiplier(i_nod);
+        }
+      }
+
+      n_el = No_penetration_boundary_mesh2_pt->nelement();
+      for (unsigned i_el = 0; i_el < n_el; i_el++)
+      {
+        ImposeImpenetrabilityElement<ELEMENT>* el_pt =
+          dynamic_cast<ImposeImpenetrabilityElement<ELEMENT>*>(
+            No_penetration_boundary_mesh1_pt->element_pt(i_el));
+        const unsigned n_nod = el_pt->nnode();
+        for (unsigned i_nod = 0; i_nod < n_nod; i_nod++)
+        {
+          el_pt->pin_lagrange_multiplier(i_nod);
+        }
+      }
+    }
+
+    void set_boundary_conditions()
+    {
+      oomph_info << "set_boundary_conditions" << endl;
+
+      // Find a node in the interior of the domain and pin it.
+      bool has_node_been_found = false;
+      unsigned element_index =
+        std::floor(Bulk_mesh_pt->nboundary_element(Far_field_boundary_id) / 2);
+      unsigned node_index = 0;
+      while (!has_node_been_found)
+      {
+        // Select a candidate
+        Node* node_pt =
+          this->Bulk_mesh_pt
+            ->boundary_element_pt(Far_field_boundary_id, element_index)
+            ->node_pt(node_index);
+
+        // Test if it is internal
+        if (!node_pt->is_on_boundary(Far_field_boundary_id))
+        {
+          // Pin the pressure at one point
+          const unsigned pressure_index = 2;
+          node_pt->pin(pressure_index);
+          node_pt->set_value(pressure_index, 0.0);
+          oomph_info << node_pt->x(0) << ", " << node_pt->x(1) << " " << endl;
+          has_node_been_found = true;
+        }
+        else
+        {
+          // Seek a new candidate
+          if (node_index < 6)
+          {
+            node_index++;
+          }
+          else
+          {
+            node_index = 0;
+            element_index++;
+          }
+        }
+      }
+
+      // Fix end points far field boundary condition lagrange_multipliers
+      pin_far_field_lagrange_multiplier_end_points();
+
+      // Pin the lagrange multiplier for the no penetration condition on the
+      // vertical surface at the centre
+      // pin_lagrange_multiplier_end_point(Free_surface_boundary_id,
+      //                                  Slip_boundary_id);
+    }
 
   private:
-    void refine_mesh_for_weak_contact_angle_constraint();
-    void set_contact_line_node_pt();
-    void compute_error_estimate(double& max_err, double& min_err);
-    void find_corner_bulk_element(const unsigned& boundary_1_id,
-                                  const unsigned& boundary_2_id,
-                                  unsigned& element_index);
+    void create_slip_elements();
+    void create_no_penetration1_elements();
+    void create_no_penetration2_elements();
+    void create_far_field_elements();
+
     void find_corner_bulk_node(const unsigned& boundary_1_id,
                                const unsigned& boundary_2_id,
                                unsigned& element_index,
                                unsigned& node_index);
 
-    void setup_pressure_contribution_elements();
-
-  private:
-    void set_boundary_conditions()
+    void pin_lagrange_multiplier_end_point(const unsigned boundary_1_id,
+                                           const unsigned boundary_2_id)
     {
-      oomph_info << "set_boundary_conditions" << endl;
-
-      // Pin the pressure at one point, the top right
-      unsigned element_index = 0;
-      unsigned node_index = 0;
-      find_corner_bulk_node(
-        Slip_boundary_id, Far_field_boundary_id, element_index, node_index);
-      const unsigned pressure_index = 3;
-      this->Bulk_mesh_pt->boundary_element_pt(Slip_boundary_id, element_index)
-        ->node_pt(node_index)
-        ->pin(pressure_index);
-
-      // Fix end points far field boundary condition lagrange_multipliers
-      pin_far_field_lagrange_multiplier_end_points();
+      const unsigned n_el = No_penetration_boundary_mesh1_pt->nelement();
+      for (unsigned i_el = 0; i_el < n_el; i_el++)
+      {
+        ImposeImpenetrabilityElement<ELEMENT>* el_pt =
+          dynamic_cast<ImposeImpenetrabilityElement<ELEMENT>*>(
+            No_penetration_boundary_mesh1_pt->element_pt(i_el));
+        const unsigned n_nod = el_pt->nnode();
+        for (unsigned i_nod = 0; i_nod < n_nod; i_nod++)
+        {
+          // Get boundary node
+          const Node* const node_pt = el_pt->node_pt(i_nod);
+          // If node is on either of the other boundaries
+          if (node_pt->is_on_boundary(boundary_1_id) &&
+              node_pt->is_on_boundary(boundary_2_id))
+          {
+            // then fix the lagrange multiplier to zero
+            oomph_info << "Fix lagrange_multiplier" << std::endl;
+            el_pt->pin_lagrange_multiplier(i_nod);
+          }
+        }
+      }
     }
 
     void pin_far_field_lagrange_multiplier_end_points()
@@ -257,8 +307,14 @@ namespace oomph
           // Get boundary node
           const Node* const node_pt = el_pt->node_pt(i_nod);
           // If node is on either of the other boundaries
-          if (node_pt->is_on_boundary(Slip_boundary_id) ||
-              node_pt->is_on_boundary(Free_surface_boundary_id))
+          if (node_pt->is_on_boundary(Slip_boundary_id))
+          {
+            // then fix the lagrange multiplier to zero
+            oomph_info << "Fix lagrange_multiplier" << std::endl;
+            el_pt->pin_lagrange_multiplier(i_nod, 0);
+            el_pt->pin_lagrange_multiplier(i_nod, 1);
+          }
+          if (node_pt->is_on_boundary(Free_surface_boundary_id))
           {
             // then fix the lagrange multiplier to zero
             oomph_info << "Fix lagrange_multiplier" << std::endl;
@@ -271,24 +327,21 @@ namespace oomph
   };
 
   template<class ELEMENT>
-  void AxisymSectorProblem<ELEMENT>::add_bulk_mesh(const unsigned& n_radial,
-                                                   const unsigned& n_azimuthal)
+  void AxisymSectorProblem<ELEMENT>::add_bulk_mesh()
   {
     oomph_info << "add_bulk_mesh" << endl;
 
     // Generate the mesh using the template ELEMENT
     Bulk_mesh_pt = new RefinedSectorTriMesh<ELEMENT>(
-      n_radial,
-      1.07,
-      n_azimuthal,
-      0.9,
-      135.0 * MathematicalConstants::Pi / 180.0,
+      My_params.n_radial,
+      My_params.geometric_base,
+      My_params.n_azimuthal,
+      My_params.sector_radius,
+      My_params.sector_angle * MathematicalConstants::Pi / 180.0,
       this->time_stepper_pt());
 
     // Add mesh to problem
     add_sub_mesh(Bulk_mesh_pt);
-
-    // refine_mesh_for_weak_contact_angle_constraint();
   }
 
   template<class ELEMENT>
@@ -311,17 +364,16 @@ namespace oomph
 
       // What is the index of the face of element e along boundary b
       int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
-      AxisymmetricNavierStokesSlipElement<ELEMENT>* slip_element_pt = 0;
+      AxisymNavierStokesSlipElement<ELEMENT>* slip_element_pt = 0;
 
       // Build the corresponding slip element
-      slip_element_pt = new AxisymmetricNavierStokesSlipElement<ELEMENT>(
-        bulk_elem_pt, face_index);
+      slip_element_pt =
+        new AxisymNavierStokesSlipElement<ELEMENT>(bulk_elem_pt, face_index);
 
       // Set the pointer to the prescribed slip function
-      slip_element_pt->slip_fct_pt() = &Slip_Parameters::prescribed_slip_fct;
+      slip_element_pt->set_slip_function(Slip_function);
 
-      slip_element_pt->wall_velocity_fct_pt() =
-        &Slip_Parameters::prescribed_wall_velocity_fct;
+      slip_element_pt->set_wall_velocity_function(wall_velocity_function);
 
       // Add the prescribed-flux element to the surface mesh
       Slip_boundary_mesh_pt->add_element_pt(slip_element_pt);
@@ -329,13 +381,12 @@ namespace oomph
   }
 
   template<class ELEMENT>
-  void AxisymSectorProblem<ELEMENT>::create_no_penetration_elements(
-    const unsigned& boundary_id)
+  void AxisymSectorProblem<ELEMENT>::create_no_penetration1_elements()
   {
-    oomph_info << "create_no_penetration_elements" << endl;
+    oomph_info << "create_no_penetration1_elements" << endl;
 
     // How many bulk elements are adjacent to boundary b?
-    unsigned n_element = Bulk_mesh_pt->nboundary_element(boundary_id);
+    unsigned n_element = Bulk_mesh_pt->nboundary_element(Slip_boundary_id);
 
     // Loop over the bulk elements adjacent to boundary b?
     for (unsigned e = 0; e < n_element; e++)
@@ -343,123 +394,57 @@ namespace oomph
       // Get pointer to the bulk element that is adjacent to boundary
       // b
       ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(
-        Bulk_mesh_pt->boundary_element_pt(boundary_id, e));
+        Bulk_mesh_pt->boundary_element_pt(Slip_boundary_id, e));
 
       // What is the index of the face of element e along boundary b
-      int face_index = Bulk_mesh_pt->face_index_at_boundary(boundary_id, e);
+      int face_index =
+        Bulk_mesh_pt->face_index_at_boundary(Slip_boundary_id, e);
 
       // Build the corresponding slip element
       ImposeImpenetrabilityElement<ELEMENT>* no_penetration_element_pt =
         new ImposeImpenetrabilityElement<ELEMENT>(
-          bulk_elem_pt, face_index, boundary_id);
+          bulk_elem_pt, face_index, Slip_boundary_id);
 
       // Add the prescribed-flux element to the surface mesh
-      No_penetration_boundary_mesh_pt->add_element_pt(
+      No_penetration_boundary_mesh1_pt->add_element_pt(
         no_penetration_element_pt);
     }
   }
 
   template<class ELEMENT>
-  void AxisymSectorProblem<
-    ELEMENT>::refine_mesh_for_weak_contact_angle_constraint()
+  void AxisymSectorProblem<ELEMENT>::create_no_penetration2_elements()
   {
-    oomph_info << "Refining the mesh about the contact line" << endl;
+    oomph_info << "create_no_penetration2_elements" << endl;
 
-    // Set the refinement tolerances
-    Bulk_mesh_pt->max_element_size() = 0.5 * pow(2e-1, 2.0);
-    Bulk_mesh_pt->min_element_size() =
-      0.5 * pow(Mesh_Control_Parameters::min_element_length, 2.0);
-    Bulk_mesh_pt->min_permitted_angle() = 15;
-    Bulk_mesh_pt->min_permitted_error() = 1.0e-2;
-    Bulk_mesh_pt->max_permitted_error() = 1.0;
+    // How many bulk elements are adjacent to boundary b?
+    unsigned n_element =
+      Bulk_mesh_pt->nboundary_element(Free_surface_boundary_id);
 
-    double max_error = 1e5;
-    double min_error = 0;
-    const unsigned max_n_adapt = 20;
-    // Call the adapt function until the maximum of the estimated error is
-    // below 1e0 ( = Bulk_mesh->max_permitted_error)
-    for (unsigned i_adapt = 0; i_adapt < max_n_adapt; i_adapt++)
+    // Loop over the bulk elements adjacent to boundary b?
+    for (unsigned e = 0; e < n_element; e++)
     {
-      // Check refinement
+      // Get pointer to the bulk element that is adjacent to boundary
+      // b
+      ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(
+        Bulk_mesh_pt->boundary_element_pt(Free_surface_boundary_id, e));
 
-      // Find the contact line node
-      set_contact_line_node_pt();
+      // What is the index of the face of element e along boundary b
+      int face_index =
+        Bulk_mesh_pt->face_index_at_boundary(Free_surface_boundary_id, e);
 
-      // Get error estimator
-      Bulk_mesh_pt->spatial_error_estimator_pt() =
-        new ContactlineErrorEstimator(
-          Contact_line_node_pt,
-          Mesh_Control_Parameters::min_element_length,
-          Mesh_Control_Parameters::element_length_ratio);
-      compute_error_estimate(max_error, min_error);
-      oomph_info << "Number of adaptions: " << i_adapt
-                 << ", Max error: " << max_error << endl;
+      // Build the corresponding slip element
+      ImposeImpenetrabilityElement<ELEMENT>* no_penetration_element_pt =
+        new ImposeImpenetrabilityElement<ELEMENT>(
+          bulk_elem_pt, face_index, Free_surface_boundary_id);
 
-      // If we haven't refined enough ...
-      if (max_error > 1e0)
-      {
-        //... refine mesh,
-        this->adapt();
-      }
-      else
-      {
-        // ... else, end loop.
-        break;
-      }
+      // Add the prescribed-flux element to the surface mesh
+      No_penetration_boundary_mesh2_pt->add_element_pt(
+        no_penetration_element_pt);
     }
   }
 
   template<class ELEMENT>
-  void AxisymSectorProblem<ELEMENT>::set_contact_line_node_pt()
-  {
-    oomph_info << "set_contact_line_node_pt" << endl;
-
-    unsigned element_index;
-    unsigned node_index;
-
-    find_corner_bulk_node(
-      Slip_boundary_id, Free_surface_boundary_id, element_index, node_index);
-
-    Contact_line_node_pt =
-      Bulk_mesh_pt->boundary_element_pt(Slip_boundary_id, element_index)
-        ->node_pt(node_index);
-  }
-
-  template<class ELEMENT>
-  void AxisymSectorProblem<ELEMENT>::compute_error_estimate(double& max_err,
-                                                            double& min_err)
-  {
-    // Get error estimator
-    ErrorEstimator* err_est_pt = Bulk_mesh_pt->spatial_error_estimator_pt();
-
-    // Get/output error estimates
-    unsigned n_elements = Bulk_mesh_pt->nelement();
-    Vector<double> elemental_error(n_elements);
-
-    // We need a dynamic cast, get_element_errors from the Bulk_mesh_pt
-    // Dynamic cast is used because get_element_errors require a Mesh* ans
-    // not a SolidMesh*
-    Mesh* fluid_mesh_pt = dynamic_cast<Mesh*>(Bulk_mesh_pt);
-    err_est_pt->get_element_errors(fluid_mesh_pt, elemental_error);
-
-    // Set errors for post-processing and find extrema
-    max_err = 0.0;
-    min_err = 1e6;
-    for (unsigned e = 0; e < n_elements; e++)
-    {
-      dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e))
-        ->set_error(elemental_error[e]);
-
-      max_err = std::max(max_err, elemental_error[e]);
-      min_err = std::min(min_err, elemental_error[e]);
-    }
-
-    oomph_info << "Max error is " << max_err << std::endl;
-    oomph_info << "Min error is " << min_err << std::endl;
-  }
-
-  template<class ELEMENT>
-  void AxisymSectorProblem<ELEMENT>::create_far_field_elements()
+  void SectorProblem<ELEMENT>::create_far_field_elements()
   {
     oomph_info << "create_far_field_elements" << endl;
 
@@ -487,39 +472,6 @@ namespace oomph
       // Add it to the mesh
       Far_field_mesh_pt->add_element_pt(el_pt);
     }
-  }
-
-  template<class ELEMENT>
-  void AxisymSectorProblem<ELEMENT>::pin_far_field_elements()
-  {
-    const unsigned n_el = Far_field_mesh_pt->nelement();
-    for (unsigned i_el = 0; i_el < n_el; i_el++)
-    {
-      FarFieldElement<ELEMENT>* el_pt = dynamic_cast<FarFieldElement<ELEMENT>*>(
-        Far_field_mesh_pt->element_pt(i_el));
-      const unsigned n_nod = el_pt->nnode();
-      for (unsigned i_nod = 0; i_nod < n_nod; i_nod++)
-      {
-        const unsigned n_eq = 2;
-        for (unsigned i_eq = 0; i_eq < n_eq; i_eq++)
-        {
-          el_pt->pin_lagrange_multiplier(i_nod, i_eq);
-        }
-      }
-    }
-
-    oomph_info << "Number of unknowns: " << assign_eqn_numbers() << std::endl;
-  }
-
-  template<class ELEMENT>
-  void AxisymSectorProblem<ELEMENT>::find_corner_bulk_element(
-    const unsigned& boundary_1_id,
-    const unsigned& boundary_2_id,
-    unsigned& element_index)
-  {
-    unsigned dummy_node_index;
-    find_corner_bulk_node(
-      boundary_1_id, boundary_2_id, element_index, dummy_node_index);
   }
 
   template<class ELEMENT>
@@ -634,8 +586,17 @@ namespace oomph
             Doc_info.directory().c_str(),
             Doc_info.number());
     output_stream.open(filename);
-    output_stream << "x,y,u,v,p,lagrange_multiplier" << endl;
-    No_penetration_boundary_mesh_pt->output(output_stream, 3);
+    output_stream << "x,y,u,v,p,lagrange_multiplier,nx,ny," << endl;
+    No_penetration_boundary_mesh1_pt->output(output_stream, 3);
+    output_stream.close();
+
+    sprintf(filename,
+            "%s/no_penetration_surface2_%i.csv",
+            Doc_info.directory().c_str(),
+            Doc_info.number());
+    output_stream.open(filename);
+    output_stream << "x,y,u,v,p,lagrange_multiplier,nx,ny," << endl;
+    No_penetration_boundary_mesh2_pt->output(output_stream, 3);
     output_stream.close();
 
     sprintf(filename,
