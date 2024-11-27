@@ -30,6 +30,10 @@ namespace oomph
   {
   private:
     bool IsAugmented;
+    bool IsSwappingUnknowns;
+    bool IsSwappingEquations;
+    bool IsAddingAdditionalTerms;
+
     /// Vector of pointers to SingularNavierStokesSolutionElement objects
     Vector<SingularNavierStokesSolutionElement<
       SingularNavierStokesElement<BASIC_NAVIER_STOKES_ELEMENT>>*>
@@ -56,7 +60,11 @@ namespace oomph
 
   public:
     /// Constructor
-    SingularNavierStokesElement() : IsAugmented(false)
+    SingularNavierStokesElement()
+      : IsAugmented(false),
+        IsSwappingUnknowns(false),
+        IsSwappingEquations(false),
+        IsAddingAdditionalTerms(false)
     {
       // Find the number of nodes in the element
       const unsigned n_node = this->nnode();
@@ -126,35 +134,6 @@ namespace oomph
         Imposed_value_at_pressure_dof[l] = 0.0;
       }
     } // End of constructor
-
-    // Make element augmented
-    void augment()
-    {
-      // Add extra data
-      const unsigned n_node = this->nnode();
-      for (unsigned n = 0; n < n_node; n++)
-      {
-        unsigned n_value = this->node_pt(n)->nvalue();
-        if (this->is_pressure_node(n))
-        {
-          if (n_value != this->n_u_nst() * 2 + 1)
-          {
-            n_value += this->n_u_nst();
-            this->node_pt(n)->resize(n_value);
-          }
-        }
-        else
-        {
-          if (n_value != this->n_u_nst() * 2)
-          {
-            n_value += this->n_u_nst();
-            this->node_pt(n)->resize(n_value);
-          }
-        }
-      }
-
-      IsAugmented = true;
-    }
 
     /// Get 'flux' for Z2 error recovery:   Upper triangular entries
     /// in strain rate tensor.
@@ -252,6 +231,36 @@ namespace oomph
       }
     }
 
+    // Make element augmented
+    void augment()
+    {
+      // Add extra data
+      const unsigned n_node = this->nnode();
+      for (unsigned n = 0; n < n_node; n++)
+      {
+        unsigned n_value = this->node_pt(n)->nvalue();
+        if (this->is_pressure_node(n))
+        {
+          if (n_value != this->n_u_nst() * 2 + 1)
+          {
+            n_value += this->n_u_nst();
+            this->node_pt(n)->resize(n_value);
+          }
+        }
+        else
+        {
+          if (n_value != this->n_u_nst() * 2)
+          {
+            n_value += this->n_u_nst();
+            this->node_pt(n)->resize(n_value);
+          }
+        }
+      }
+
+      IsAugmented = true;
+    }
+
+
     // Make element un-augmented
     void unaugment()
     {
@@ -264,6 +273,21 @@ namespace oomph
       return IsAugmented;
     }
 
+    void swap_equations()
+    {
+      IsSwappingEquations = true;
+    }
+
+    void swap_unknowns()
+    {
+      IsSwappingUnknowns = true;
+    }
+
+    void add_additional_terms()
+    {
+      IsAddingAdditionalTerms = true;
+    }
+
     /// Return the index at which the i-th unknown velocity component
     /// is stored. The default value, i, is appropriate for single-physics
     /// problems.
@@ -272,8 +296,14 @@ namespace oomph
     virtual inline unsigned u_index_nst(const unsigned& n,
                                         const unsigned& i) const override
     {
-      return numbering_scheme(n, i);
-      // return i;
+      if (IsSwappingUnknowns)
+      {
+        return numbering_scheme(n, i);
+      }
+      else
+      {
+        return i;
+      }
     }
 
     inline unsigned numbering_scheme(const unsigned& n, const unsigned& i) const
@@ -302,23 +332,40 @@ namespace oomph
     virtual inline unsigned u_reconstructed_index(const unsigned& n,
                                                   const unsigned& i) const
     {
-      // i * [u]
-      return i;
-      // return numbering_scheme(n, i);
+      if (IsSwappingUnknowns)
+      {
+        return i;
+      }
+      else
+      {
+        return numbering_scheme(n, i);
+      }
     }
 
     virtual inline unsigned momentum_index_nst(const unsigned& n,
                                                const unsigned& i) const
     {
-      return u_index_nst(n, i);
-      // return u_reconstructed_index(n, i);
+      if (IsSwappingEquations)
+      {
+        return numbering_scheme(n, i);
+      }
+      else
+      {
+        return i;
+      }
     }
 
     virtual inline unsigned total_velocity_eqn_index(const unsigned& n,
                                                      const unsigned& i) const
     {
-      return u_reconstructed_index(n, i);
-      // return u_index_nst(n, i);
+      if (IsSwappingEquations)
+      {
+        return i;
+      }
+      else
+      {
+        return numbering_scheme(n, i);
+      }
     }
 
     virtual inline int total_velocity_local_eqn(const unsigned& n,
@@ -1763,8 +1810,11 @@ namespace oomph
 
       if (this->IsAugmented)
       {
-        fill_in_generic_residual_contribution_additional_terms(
-          residuals, jacobian, flag);
+        if (this->IsAddingAdditionalTerms)
+        {
+          fill_in_generic_residual_contribution_additional_terms(
+            residuals, jacobian, flag);
+        }
         fill_in_generic_residual_contribution_total_velocity(
           residuals, jacobian, flag);
       }
