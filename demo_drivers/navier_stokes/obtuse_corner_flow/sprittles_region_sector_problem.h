@@ -1,5 +1,5 @@
-#ifndef SINGULAR_AXISYM_SECTOR_PROBLEM_HEADER
-#define SINGULAR_AXISYM_SECTOR_PROBLEM_HEADER
+#ifndef SPRITTLES_SECTOR_PROBLEM_HEADER
+#define SPRITTLES_SECTOR_PROBLEM_HEADER
 
 #include "generic.h"
 #include "navier_stokes.h"
@@ -7,20 +7,19 @@
 #include "meshes/triangle_mesh.h"
 
 /// Local headers
-#include "sector_problem.h"
+#include "region_sector_problem.h"
 
 #include "eigensolution_elements.h"
 #include "eigensolution_functions.h"
 #include "pressure_evaluation_elements.h"
 #include "point_pressure_evaluation_elements.h"
 #include "singular_fluid_traction_elements.h"
-#include "singular_far_field_element.h"
 
 namespace oomph
 {
   // Problem class
   template<class ELEMENT>
-  class SingularSectorProblem : public SectorProblem<ELEMENT>
+  class SprittlesRegionSectorProblem : public RegionSectorProblem<ELEMENT>
   {
   private:
     Node* Contact_line_node_pt;
@@ -30,7 +29,6 @@ namespace oomph
     Mesh* Pressure_contribution_mesh_1_pt;
     Mesh* Pressure_contribution_mesh_2_pt;
     Mesh* Eigensolution_slip_mesh_pt;
-    Mesh* Eigensolution_far_field_mesh_pt;
     Mesh* Eigensolution_traction_mesh_pt;
 
     std::function<Vector<double>(const Vector<double>&)>
@@ -57,13 +55,17 @@ namespace oomph
       Slip_boundary_id,
       Far_field_boundary_id,
       Free_surface_boundary_id,
+      Inner_free_surface_boundary_id,
+      Inner_slip_boundary_id,
+      Inner_boundary_id,
     };
 
     // Constructor
-    SingularSectorProblem() : SectorProblem<ELEMENT>(), Contact_line_node_pt(0)
+    SprittlesRegionSectorProblem()
+      : RegionSectorProblem<ELEMENT>(), Contact_line_node_pt(0)
     {
       // Re-assign doc info pointer
-      this->doc_info_pt()->set_directory("RESLT_fix");
+      this->doc_info_pt()->set_directory("RESLT_sprittles_region");
 
       add_singular_sub_meshes();
       this->rebuild_global_mesh();
@@ -74,7 +76,7 @@ namespace oomph
       // Augment the bulk elements
       setup_and_augment_bulk_elements();
 
-      SectorProblem<ELEMENT>::setup();
+      RegionSectorProblem<ELEMENT>::setup();
 
       set_contact_line_node_pt();
       Velocity_singular_function = velocity_singular_function_factory(
@@ -93,46 +95,9 @@ namespace oomph
 
       create_singular_elements();
 
-      // fix_c(1.30988994216873555);
-
       this->rebuild_global_mesh();
       oomph_info << "Number of unknowns: " << this->assign_eqn_numbers()
                  << std::endl;
-    }
-
-    void create_singular_elements()
-    {
-      // Create the other meshes
-      if (!Augmented_bulk_element_number.empty())
-      {
-        cout << "Make augmented elements" << endl;
-        create_singularity_scaling_elements();
-        create_pressure_contribution_1_elements();
-        create_pressure_contribution_2_elements();
-
-        create_slip_eigen_elements();
-        create_far_field_eigen_elements();
-        // create_traction_eigen_elements();
-
-        // Setup the mesh interaction between the bulk and singularity meshes
-        setup_mesh_interaction();
-      }
-    }
-
-    void add_singular_sub_meshes()
-    {
-      Eigensolution_slip_mesh_pt = new Mesh;
-      this->add_sub_mesh(Eigensolution_slip_mesh_pt);
-      Eigensolution_far_field_mesh_pt = new Mesh;
-      this->add_sub_mesh(Eigensolution_far_field_mesh_pt);
-      Eigensolution_traction_mesh_pt = new Mesh;
-      this->add_sub_mesh(Eigensolution_traction_mesh_pt);
-      Singularity_scaling_mesh_pt = new Mesh;
-      this->add_sub_mesh(Singularity_scaling_mesh_pt);
-      Pressure_contribution_mesh_1_pt = new Mesh;
-      this->add_sub_mesh(Pressure_contribution_mesh_1_pt);
-      Pressure_contribution_mesh_2_pt = new Mesh;
-      this->add_sub_mesh(Pressure_contribution_mesh_2_pt);
     }
 
     void setup_and_augment_bulk_elements()
@@ -161,27 +126,48 @@ namespace oomph
         dist = pow(dist, 0.5);
 
         // If the distance to the corner is within the "inner" region, ...
-        if (dist < this->my_parameters().inner_radius)
+        if (el_pt->get_region_id() ==
+            TwoRegionRefinedSectorTriMesh<ELEMENT>::Inner_region_id)
         {
           // ... augment element
           el_pt->augment();
 
-          el_pt->add_additional_terms();
-
           el_pt->swap_unknowns();
 
           Augmented_bulk_element_number.push_back(e);
-          // for (unsigned n = 0; n < 6; n++)
-          //{
-          //   for (unsigned d = 0; d < 2; d++)
-          //   {
-          //     el_pt->pin_total_velocity_eqn(n, d);
-          //   }
-          // }
         }
       }
       oomph_info << Augmented_bulk_element_number.size()
                  << " augmented elements" << std::endl;
+    }
+
+    void create_singular_elements()
+    {
+      // Create the other meshes
+      cout << "Make augmented elements" << endl;
+      create_singularity_scaling_elements();
+      create_pressure_contribution_1_elements();
+      create_pressure_contribution_2_elements();
+
+      create_slip_eigen_elements();
+      create_traction_eigen_elements();
+
+      // Setup the mesh interaction between the bulk and singularity meshes
+      setup_mesh_interaction();
+    }
+
+    void add_singular_sub_meshes()
+    {
+      Eigensolution_slip_mesh_pt = new Mesh;
+      this->add_sub_mesh(Eigensolution_slip_mesh_pt);
+      Eigensolution_traction_mesh_pt = new Mesh;
+      this->add_sub_mesh(Eigensolution_traction_mesh_pt);
+      Singularity_scaling_mesh_pt = new Mesh;
+      this->add_sub_mesh(Singularity_scaling_mesh_pt);
+      Pressure_contribution_mesh_1_pt = new Mesh;
+      this->add_sub_mesh(Pressure_contribution_mesh_1_pt);
+      Pressure_contribution_mesh_2_pt = new Mesh;
+      this->add_sub_mesh(Pressure_contribution_mesh_2_pt);
     }
 
     void set_contact_line_node_pt()
@@ -191,12 +177,14 @@ namespace oomph
       unsigned element_index;
       unsigned node_index;
 
-      find_corner_bulk_node(
-        Slip_boundary_id, Free_surface_boundary_id, element_index, node_index);
+      find_corner_bulk_node(Inner_slip_boundary_id,
+                            Inner_free_surface_boundary_id,
+                            element_index,
+                            node_index);
 
       Contact_line_node_pt =
         this->bulk_mesh_pt()
-          ->boundary_element_pt(Slip_boundary_id, element_index)
+          ->boundary_element_pt(Inner_slip_boundary_id, element_index)
           ->node_pt(node_index);
     }
 
@@ -225,12 +213,11 @@ namespace oomph
         ->output(output_stream);
       output_stream.close();
 
-      SectorProblem<ELEMENT>::doc_solution();
+      RegionSectorProblem<ELEMENT>::doc_solution();
     }
 
   private:
     void create_slip_eigen_elements();
-    void create_far_field_eigen_elements();
     void create_traction_eigen_elements();
     void create_singularity_scaling_elements();
     void create_pressure_contribution_1_elements();
@@ -248,7 +235,28 @@ namespace oomph
                                unsigned& element_index,
                                unsigned& node_index);
 
-    void setup_mesh_interaction();
+    void setup_mesh_interaction()
+    {
+      oomph_info << "setup_mesh_interaction" << endl;
+
+      SingularNavierStokesSolutionElement<ELEMENT>* singular_el_pt =
+        dynamic_cast<SingularNavierStokesSolutionElement<ELEMENT>*>(
+          Singularity_scaling_mesh_pt->element_pt(0));
+
+      // Loop over the augmented bulk elements
+      unsigned n_aug_bulk = Augmented_bulk_element_number.size();
+      for (unsigned e = 0; e < n_aug_bulk; e++)
+      {
+        // Augment elements
+        // Upcast from GeneralisedElement to the present element
+        ELEMENT* el_pt = dynamic_cast<ELEMENT*>(
+          this->bulk_mesh_pt()->element_pt(Augmented_bulk_element_number[e]));
+
+        // Set the pointer to the element that determines the amplitude
+        // of the singular fct
+        el_pt->add_c_equation_element_pt(singular_el_pt);
+      }
+    }
 
     void fix_c(const double& value)
     {
@@ -262,51 +270,12 @@ namespace oomph
   };
 
   template<class ELEMENT>
-  void SingularSectorProblem<ELEMENT>::create_slip_eigen_elements()
+  void SprittlesRegionSectorProblem<ELEMENT>::create_slip_eigen_elements()
   {
     oomph_info << "create_slip_eigen_elements" << endl;
 
     // Loop over the free surface boundary and create the "interface elements
-    unsigned b = Slip_boundary_id;
-
-    // How many bulk fluid elements are adjacent to boundary b?
-    unsigned n_element = this->bulk_mesh_pt()->nboundary_element(b);
-
-    // Loop over the bulk fluid elements adjacent to boundary b?
-    for (unsigned e = 0; e < n_element; e++)
-    {
-      // Get pointer to the bulk fluid element that is
-      // adjacent to boundary b
-      ELEMENT* bulk_elem_pt =
-        dynamic_cast<ELEMENT*>(this->bulk_mesh_pt()->boundary_element_pt(b, e));
-
-      if (bulk_elem_pt->is_augmented())
-      {
-        // Find the index of the face of element e along boundary b
-        int face_index = this->bulk_mesh_pt()->face_index_at_boundary(b, e);
-
-        // Create new element
-        SingularNavierStokesTractionElement<ELEMENT>* el_pt =
-          new SingularNavierStokesTractionElement<ELEMENT>(
-            bulk_elem_pt,
-            face_index,
-            Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0));
-
-        el_pt->set_traction_fct(Eigensolution_slip_function);
-
-        // Add it to the mesh
-        Eigensolution_slip_mesh_pt->add_element_pt(el_pt);
-      }
-    }
-  }
-
-  template<class ELEMENT>
-  void SingularSectorProblem<ELEMENT>::create_far_field_eigen_elements()
-  {
-    oomph_info << "create_far_field_eigen_elements" << endl;
-
-    // Loop over the free surface boundary and create the "interface elements
-    unsigned b = Far_field_boundary_id;
+    unsigned b = Inner_slip_boundary_id;
 
     // How many bulk fluid elements are adjacent to boundary b?
     unsigned n_element = this->bulk_mesh_pt()->nboundary_element(b);
@@ -323,27 +292,26 @@ namespace oomph
       int face_index = this->bulk_mesh_pt()->face_index_at_boundary(b, e);
 
       // Create new element
-      SingularFarFieldElement<ELEMENT>* el_pt =
-        new SingularFarFieldElement<ELEMENT>(
+      SingularNavierStokesTractionElement<ELEMENT>* el_pt =
+        new SingularNavierStokesTractionElement<ELEMENT>(
           bulk_elem_pt,
           face_index,
-          Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0),
-          Far_field_boundary_id);
+          Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0));
 
-      el_pt->set_grad_velocity_fct(Grad_velocity_singular_function);
+      el_pt->set_traction_fct(Eigensolution_slip_function);
 
       // Add it to the mesh
-      Eigensolution_far_field_mesh_pt->add_element_pt(el_pt);
+      Eigensolution_slip_mesh_pt->add_element_pt(el_pt);
     }
   }
 
   template<class ELEMENT>
-  void SingularSectorProblem<ELEMENT>::create_traction_eigen_elements()
+  void SprittlesRegionSectorProblem<ELEMENT>::create_traction_eigen_elements()
   {
     oomph_info << "create_traction_eigen_elements" << endl;
 
     // Loop over the free surface boundary and create the "interface elements
-    for (unsigned b = 0; b < 3; b++)
+    for (unsigned b = 3; b < 6; b++)
     {
       // How many bulk fluid elements are adjacent to boundary b?
       unsigned n_element = this->bulk_mesh_pt()->nboundary_element(b);
@@ -374,9 +342,9 @@ namespace oomph
     }
   }
 
-
   template<class ELEMENT>
-  void SingularSectorProblem<ELEMENT>::create_singularity_scaling_elements()
+  void SprittlesRegionSectorProblem<
+    ELEMENT>::create_singularity_scaling_elements()
   {
     oomph_info << "create_singularity_scaling_elements" << endl;
     SingularNavierStokesSolutionElement<ELEMENT>* el_pt =
@@ -405,7 +373,7 @@ namespace oomph
   }
 
   template<class ELEMENT>
-  void SingularSectorProblem<ELEMENT>::find_corner_bulk_element(
+  void SprittlesRegionSectorProblem<ELEMENT>::find_corner_bulk_element(
     const unsigned& boundary_1_id,
     const unsigned& boundary_2_id,
     unsigned& element_index)
@@ -416,7 +384,7 @@ namespace oomph
   }
 
   template<class ELEMENT>
-  void SingularSectorProblem<ELEMENT>::find_corner_bulk_node(
+  void SprittlesRegionSectorProblem<ELEMENT>::find_corner_bulk_node(
     const unsigned& boundary_1_id,
     const unsigned& boundary_2_id,
     unsigned& element_index,
@@ -453,103 +421,78 @@ namespace oomph
   }
 
   template<class ELEMENT>
-  void SingularSectorProblem<ELEMENT>::setup_mesh_interaction()
-  {
-    oomph_info << "setup_mesh_interaction" << endl;
-
-    SingularNavierStokesSolutionElement<ELEMENT>* singular_el_pt =
-      dynamic_cast<SingularNavierStokesSolutionElement<ELEMENT>*>(
-        Singularity_scaling_mesh_pt->element_pt(0));
-
-    // Loop over the augmented bulk elements
-    unsigned n_aug_bulk = Augmented_bulk_element_number.size();
-    for (unsigned e = 0; e < n_aug_bulk; e++)
-    {
-      // Augment elements
-      // Upcast from GeneralisedElement to the present element
-      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(
-        this->bulk_mesh_pt()->element_pt(Augmented_bulk_element_number[e]));
-
-      // Set the pointer to the element that determines the amplitude
-      // of the singular fct
-      el_pt->add_c_equation_element_pt(singular_el_pt);
-    }
-  }
-
-  template<class ELEMENT>
-  void SingularSectorProblem<ELEMENT>::create_pressure_contribution_1_elements()
+  void SprittlesRegionSectorProblem<
+    ELEMENT>::create_pressure_contribution_1_elements()
   {
     oomph_info << "create_pressure_contribution_1_elements" << std::endl;
 
     ELEMENT* element_pt = 0;
     int face_index = 0;
-    find_corner_bulk_element_and_face_index(
-      Slip_boundary_id, Free_surface_boundary_id, element_pt, face_index);
-
-    // PressureEvaluationElement<ELEMENT>* el_pt =
-    //   new PressureEvaluationElement<ELEMENT>(
-    //     element_pt, face_index, dynamic_cast<Node*>(Contact_line_node_pt));
-    // el_pt->set_boundary_number_in_bulk_mesh(Slip_boundary_id);
+    find_corner_bulk_element_and_face_index(Inner_slip_boundary_id,
+                                            Inner_free_surface_boundary_id,
+                                            element_pt,
+                                            face_index);
 
     Node* node_pt = 0;
     for (unsigned n = 0; n < 3; n++)
     {
       node_pt = element_pt->node_pt(n);
-      if (node_pt->is_on_boundary(Slip_boundary_id) &&
-          !node_pt->is_on_boundary(Free_surface_boundary_id))
+      if (node_pt->is_on_boundary(Inner_slip_boundary_id) &&
+          !node_pt->is_on_boundary(Inner_free_surface_boundary_id))
       {
-        break;
+        std::cout << node_pt->x(0) << ", " << node_pt->x(1) << std::endl;
+
+        PointPressureEvaluationElement* el_pt =
+          new PointPressureEvaluationElement(node_pt);
+
+        el_pt->set_pressure_data_pt(
+          Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0));
+
+        Pressure_contribution_mesh_1_pt->add_element_pt(el_pt);
       }
     }
-    PointPressureEvaluationElement* el_pt =
-      new PointPressureEvaluationElement(node_pt);
-    el_pt->set_pressure_data_pt(
-      Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0));
-
-    Pressure_contribution_mesh_1_pt->add_element_pt(el_pt);
   }
 
   template<class ELEMENT>
-  void SingularSectorProblem<ELEMENT>::create_pressure_contribution_2_elements()
+  void SprittlesRegionSectorProblem<
+    ELEMENT>::create_pressure_contribution_2_elements()
   {
     oomph_info << "create_pressure_contribution_2_elements" << std::endl;
 
     ELEMENT* element_pt = 0;
     int face_index = 0;
-    find_corner_bulk_element_and_face_index(
-      Free_surface_boundary_id, Slip_boundary_id, element_pt, face_index);
-
-    // PressureEvaluationElement<ELEMENT>* el_pt =
-    //   new PressureEvaluationElement<ELEMENT>(
-    //     element_pt, face_index, dynamic_cast<Node*>(Contact_line_node_pt));
-    // el_pt->set_boundary_number_in_bulk_mesh(Free_surface_boundary_id);
+    find_corner_bulk_element_and_face_index(Inner_free_surface_boundary_id,
+                                            Inner_slip_boundary_id,
+                                            element_pt,
+                                            face_index);
 
     Node* node_pt = 0;
     for (unsigned n = 0; n < 3; n++)
     {
       node_pt = element_pt->node_pt(n);
-      if (!node_pt->is_on_boundary(Slip_boundary_id) &&
-          node_pt->is_on_boundary(Free_surface_boundary_id))
+      if (node_pt->is_on_boundary(Inner_free_surface_boundary_id) &&
+          !node_pt->is_on_boundary(Inner_slip_boundary_id))
       {
-        break;
+        std::cout << node_pt->x(0) << ", " << node_pt->x(1) << std::endl;
+        PointPressureEvaluationElement* el_pt =
+          new PointPressureEvaluationElement(node_pt);
+
+        el_pt->set_pressure_data_pt(
+          Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0));
+
+        el_pt->set_subtract_from_residuals();
+
+        Pressure_contribution_mesh_2_pt->add_element_pt(el_pt);
       }
     }
-    PointPressureEvaluationElement* el_pt =
-      new PointPressureEvaluationElement(node_pt);
-
-    el_pt->set_pressure_data_pt(
-      Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0));
-    el_pt->set_subtract_from_residuals();
-
-    Pressure_contribution_mesh_2_pt->add_element_pt(el_pt);
   }
 
   template<class ELEMENT>
-  void SingularSectorProblem<ELEMENT>::find_corner_bulk_element_and_face_index(
-    const unsigned& boundary_1_id,
-    const unsigned& boundary_2_id,
-    ELEMENT*& element_pt,
-    int& face_index)
+  void SprittlesRegionSectorProblem<ELEMENT>::
+    find_corner_bulk_element_and_face_index(const unsigned& boundary_1_id,
+                                            const unsigned& boundary_2_id,
+                                            ELEMENT*& element_pt,
+                                            int& face_index)
   {
     unsigned n_boundary_element =
       this->bulk_mesh_pt()->nboundary_element(boundary_1_id);

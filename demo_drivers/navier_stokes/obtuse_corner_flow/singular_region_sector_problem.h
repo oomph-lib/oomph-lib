@@ -8,6 +8,7 @@
 
 /// Local headers
 #include "region_sector_problem.h"
+#include "two_region_refined_sector_tri_mesh.template.h"
 
 #include "eigensolution_elements.h"
 #include "eigensolution_functions.h"
@@ -65,9 +66,10 @@ namespace oomph
       : RegionSectorProblem<ELEMENT>(), Contact_line_node_pt(0)
     {
       // Re-assign doc info pointer
-      this->doc_info_pt()->set_directory("RESLT_fix");
+      this->doc_info_pt()->set_directory("RESLT_fix_region");
 
       add_singular_sub_meshes();
+
       this->rebuild_global_mesh();
     }
 
@@ -112,8 +114,8 @@ namespace oomph
         create_pressure_contribution_1_elements();
         create_pressure_contribution_2_elements();
 
-        // create_slip_eigen_elements();
-        create_traction_eigen_elements();
+        create_slip_eigen_elements();
+        // create_traction_eigen_elements();
 
         // Setup the mesh interaction between the bulk and singularity meshes
         setup_mesh_interaction();
@@ -159,19 +161,26 @@ namespace oomph
         }
         dist = pow(dist, 0.5);
 
+
         // If the distance to the corner is within the "inner" region, ...
-        if (dist < this->my_parameters().inner_radius)
+        if (el_pt->get_region_id() ==
+            TwoRegionRefinedSectorTriMesh<ELEMENT>::Inner_region_id)
         {
           // ... augment element
           el_pt->augment();
+
+          el_pt->add_additional_terms();
+
+          el_pt->swap_unknowns();
+
           Augmented_bulk_element_number.push_back(e);
-          for (unsigned n = 0; n < 6; n++)
-          {
-            for (unsigned d = 0; d < 2; d++)
-            {
-              el_pt->pin_total_velocity_eqn(n, d);
-            }
-          }
+          // for (unsigned n = 0; n < 6; n++)
+          //{
+          //   for (unsigned d = 0; d < 2; d++)
+          //   {
+          //     el_pt->pin_total_velocity_eqn(n, d);
+          //   }
+          // }
         }
       }
       oomph_info << Augmented_bulk_element_number.size()
@@ -192,8 +201,10 @@ namespace oomph
 
       Contact_line_node_pt =
         this->bulk_mesh_pt()
-          ->boundary_element_pt(Slip_boundary_id, element_index)
+          ->boundary_element_pt(Inner_slip_boundary_id, element_index)
           ->node_pt(node_index);
+      oomph_info << Contact_line_node_pt->x(0) << ", "
+                 << Contact_line_node_pt->x(1) << std::endl;
     }
 
     void doc_solution()
@@ -457,8 +468,8 @@ namespace oomph
     for (unsigned n = 0; n < 3; n++)
     {
       node_pt = element_pt->node_pt(n);
-      if (node_pt->is_on_boundary(Slip_boundary_id) &&
-          !node_pt->is_on_boundary(Free_surface_boundary_id))
+      if (node_pt->is_on_boundary(Inner_slip_boundary_id) &&
+          !node_pt->is_on_boundary(Inner_free_surface_boundary_id))
       {
         break;
       }
@@ -493,8 +504,8 @@ namespace oomph
     for (unsigned n = 0; n < 3; n++)
     {
       node_pt = element_pt->node_pt(n);
-      if (!node_pt->is_on_boundary(Slip_boundary_id) &&
-          node_pt->is_on_boundary(Free_surface_boundary_id))
+      if (!node_pt->is_on_boundary(Inner_slip_boundary_id) &&
+          node_pt->is_on_boundary(Inner_free_surface_boundary_id))
       {
         break;
       }

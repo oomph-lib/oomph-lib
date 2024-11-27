@@ -14,6 +14,7 @@
 #include "pressure_evaluation_elements.h"
 #include "point_pressure_evaluation_elements.h"
 #include "singular_fluid_traction_elements.h"
+#include "singular_far_field_element.h"
 
 namespace oomph
 {
@@ -29,6 +30,7 @@ namespace oomph
     Mesh* Pressure_contribution_mesh_1_pt;
     Mesh* Pressure_contribution_mesh_2_pt;
     Mesh* Eigensolution_slip_mesh_pt;
+    Mesh* Eigensolution_far_field_mesh_pt;
     Mesh* Eigensolution_traction_mesh_pt;
 
     std::function<Vector<double>(const Vector<double>&)>
@@ -70,6 +72,8 @@ namespace oomph
     void setup()
     {
       // Augment the bulk elements
+      setup_and_augment_bulk_elements();
+
       SectorProblem<ELEMENT>::setup();
 
       set_contact_line_node_pt();
@@ -94,6 +98,43 @@ namespace oomph
                  << std::endl;
     }
 
+    void setup_and_augment_bulk_elements()
+    {
+      set_contact_line_node_pt();
+
+      unsigned n_bulk = this->bulk_mesh_pt()->nelement();
+      for (unsigned e = 0; e < n_bulk; e++)
+      {
+        // Upcast from GeneralisedElement to the present element
+        ELEMENT* el_pt =
+          dynamic_cast<ELEMENT*>(this->bulk_mesh_pt()->element_pt(e));
+
+        // Make augmented elements
+        // Check distance from
+        // s centre is centre of mass of a uniform triangle, so (1/3,1/3) for
+        // Triangle[(1,0),(0,1),(0,0)]
+        Vector<double> s_centre(2, 1.0 / 3.0);
+        Vector<double> element_centre_x(2, 0.0);
+        el_pt->get_x(s_centre, element_centre_x);
+        double dist = 0;
+        for (unsigned i = 0; i < 2; i++)
+        {
+          dist += pow(element_centre_x[i] - Contact_line_node_pt->x(i), 2.0);
+        }
+        dist = pow(dist, 0.5);
+
+        // If the distance to the corner is within the "inner" region, ...
+        if (dist < this->my_parameters().inner_radius)
+        {
+          // ... augment element
+          el_pt->augment();
+          Augmented_bulk_element_number.push_back(e);
+        }
+      }
+      oomph_info << Augmented_bulk_element_number.size()
+                 << " augmented elements" << std::endl;
+    }
+
     void create_singular_elements()
     {
       // Create the other meshes
@@ -103,13 +144,19 @@ namespace oomph
       create_pressure_contribution_2_elements();
 
       create_slip_eigen_elements();
-      create_traction_eigen_elements();
+      create_far_field_eigen_elements();
+      // create_traction_eigen_elements();
+
+      // Setup the mesh interaction between the bulk and singularity meshes
+      setup_mesh_interaction();
     }
 
     void add_singular_sub_meshes()
     {
       Eigensolution_slip_mesh_pt = new Mesh;
       this->add_sub_mesh(Eigensolution_slip_mesh_pt);
+      Eigensolution_far_field_mesh_pt = new Mesh;
+      this->add_sub_mesh(Eigensolution_far_field_mesh_pt);
       Eigensolution_traction_mesh_pt = new Mesh;
       this->add_sub_mesh(Eigensolution_traction_mesh_pt);
       Singularity_scaling_mesh_pt = new Mesh;
@@ -166,6 +213,7 @@ namespace oomph
 
   private:
     void create_slip_eigen_elements();
+    void create_far_field_eigen_elements();
     void create_traction_eigen_elements();
     void create_singularity_scaling_elements();
     void create_pressure_contribution_1_elements();
@@ -183,7 +231,28 @@ namespace oomph
                                unsigned& element_index,
                                unsigned& node_index);
 
-    void setup_mesh_interaction();
+    void setup_mesh_interaction()
+    {
+      oomph_info << "setup_mesh_interaction" << endl;
+
+      SingularNavierStokesSolutionElement<ELEMENT>* singular_el_pt =
+        dynamic_cast<SingularNavierStokesSolutionElement<ELEMENT>*>(
+          Singularity_scaling_mesh_pt->element_pt(0));
+
+      // Loop over the augmented bulk elements
+      unsigned n_aug_bulk = Augmented_bulk_element_number.size();
+      for (unsigned e = 0; e < n_aug_bulk; e++)
+      {
+        // Augment elements
+        // Upcast from GeneralisedElement to the present element
+        ELEMENT* el_pt = dynamic_cast<ELEMENT*>(
+          this->bulk_mesh_pt()->element_pt(Augmented_bulk_element_number[e]));
+
+        // Set the pointer to the element that determines the amplitude
+        // of the singular fct
+        el_pt->add_c_equation_element_pt(singular_el_pt);
+      }
+    }
 
     void fix_c(const double& value)
     {
@@ -229,6 +298,43 @@ namespace oomph
 
       // Add it to the mesh
       Eigensolution_slip_mesh_pt->add_element_pt(el_pt);
+    }
+  }
+
+  template<class ELEMENT>
+  void SprittlesSectorProblem<ELEMENT>::create_far_field_eigen_elements()
+  {
+    oomph_info << "create_far_field_eigen_elements" << endl;
+
+    // Loop over the free surface boundary and create the "interface elements
+    unsigned b = Far_field_boundary_id;
+
+    // How many bulk fluid elements are adjacent to boundary b?
+    unsigned n_element = this->bulk_mesh_pt()->nboundary_element(b);
+
+    // Loop over the bulk fluid elements adjacent to boundary b?
+    for (unsigned e = 0; e < n_element; e++)
+    {
+      // Get pointer to the bulk fluid element that is
+      // adjacent to boundary b
+      ELEMENT* bulk_elem_pt =
+        dynamic_cast<ELEMENT*>(this->bulk_mesh_pt()->boundary_element_pt(b, e));
+
+      // Find the index of the face of element e along boundary b
+      int face_index = this->bulk_mesh_pt()->face_index_at_boundary(b, e);
+
+      // Create new element
+      SingularFarFieldElement<ELEMENT>* el_pt =
+        new SingularFarFieldElement<ELEMENT>(
+          bulk_elem_pt,
+          face_index,
+          Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0),
+          Far_field_boundary_id);
+
+      el_pt->set_grad_velocity_fct(Grad_velocity_singular_function);
+
+      // Add it to the mesh
+      Eigensolution_far_field_mesh_pt->add_element_pt(el_pt);
     }
   }
 
