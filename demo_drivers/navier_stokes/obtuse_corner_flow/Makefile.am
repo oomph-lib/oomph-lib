@@ -2,62 +2,51 @@
 include $(top_srcdir)/config/makefile_templates/demo_drivers
 
 all: RESLT_no_fix/soln0.dat RESLT_fix/soln0.dat RESLT_sprittles/soln0.dat \
-	RESLT_internal/soln0.dat RESLT_boundary/soln0.dat \
-	RESLT_zero_boundary/soln0.dat RESLT_zero_internal/soln0.dat
+	RESLT_fix_region/soln0.dat RESLT_sprittles_region/soln0.dat
+
+%.vtu: %.dat
+	../../../bin/oomph-convert.py $<
 
 RESLT_no_fix/soln0.dat: structured_no_correction parameters.dat
 	mkdir -p RESLT_no_fix
 	./structured_no_correction
 
+RESLT_no_fix_region/soln0.dat: structured_no_correction_region parameters.dat
+	mkdir -p RESLT_no_fix_region
+	./structured_no_correction_region
+
 RESLT_fix/soln0.dat: structured_with_correction parameters.dat
 	mkdir -p RESLT_fix
 	./structured_with_correction
+
+RESLT_fix_region/soln0.dat: structured_with_correction_region parameters.dat
+	mkdir -p RESLT_fix_region
+	./structured_with_correction_region
 
 RESLT_sprittles/soln0.dat: sprittles parameters.dat
 	mkdir -p RESLT_sprittles
 	./sprittles
 
-RESLT_internal/soln0.dat: internal_forcing parameters.dat
-	mkdir -p RESLT_internal
-	./internal_forcing
-
-RESLT_boundary/soln0.dat: boundary_forcing parameters.dat
-	mkdir -p RESLT_boundary
-	./boundary_forcing
-
-RESLT_zero_internal/soln0.dat: internal_forcing_zero parameters.dat
-	mkdir -p RESLT_zero
-	mkdir -p RESLT_internal_zero
-	./internal_forcing_zero
-
-RESLT_zero_boundary/soln0.dat: boundary_forcing_zero parameters.dat
-	mkdir -p RESLT_zero
-	mkdir -p RESLT_boundary_zero
-	./boundary_forcing_zero
-
-boundaries: structured_with_correction_regions
-	./structured_with_correction_regions
+RESLT_sprittles_region/soln0.dat: sprittles_region parameters.dat
+	mkdir -p RESLT_sprittles_region
+	./sprittles_region
 
 # Name of executables
 check_PROGRAMS= \
 	structured_no_correction \
+	structured_no_correction_region \
 	structured_with_correction \
-	structured_with_correction_regions \
+	structured_with_correction_region \
 	sprittles \
-	internal_forcing \
-	boundary_forcing \
-	internal_forcing_zero \
-	boundary_forcing_zero
+	sprittles_region
 
 # Sources for second executable
 structured_no_correction_SOURCES = structured_no_correction.cc
+structured_no_correction_region_SOURCES = structured_no_correction_region.cc
 structured_with_correction_SOURCES = structured_with_correction.cc
-structured_with_correction_regions_SOURCES = structured_with_correction_regions.cc
+structured_with_correction_region_SOURCES = structured_with_correction_region.cc
 sprittles_SOURCES = sprittles.cc
-internal_forcing_SOURCES = internal_forcing.cc
-boundary_forcing_SOURCES = boundary_forcing.cc
-internal_forcing_zero_SOURCES = internal_forcing_zero.cc
-boundary_forcing_zero_SOURCES = boundary_forcing_zero.cc
+sprittles_region_SOURCES = sprittles_region.cc
 
 # Required libraries: 
 # $(FLIBS) is included in case the solver involves fortran sources.
