@@ -86,7 +86,7 @@ namespace oomph
       create_slip_elements();
       create_no_penetration1_elements();
       create_no_penetration2_elements();
-      //create_far_field_elements();
+      create_far_field_elements();
     }
 
     void delete_nonrefineable_elements()
@@ -312,14 +312,14 @@ namespace oomph
             // then fix the lagrange multiplier to zero
             oomph_info << "Fix lagrange_multiplier" << std::endl;
             el_pt->pin_lagrange_multiplier(i_nod, 0);
-            // el_pt->pin_lagrange_multiplier(i_nod, 1);
+            el_pt->pin_lagrange_multiplier(i_nod, 1);
           }
           if (node_pt->is_on_boundary(Free_surface_boundary_id))
           {
             // then fix the lagrange multiplier to zero
             oomph_info << "Fix lagrange_multiplier" << std::endl;
             el_pt->pin_lagrange_multiplier(i_nod, 0);
-            // el_pt->pin_lagrange_multiplier(i_nod, 1);
+            el_pt->pin_lagrange_multiplier(i_nod, 1);
           }
         }
       }
