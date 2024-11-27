@@ -12,9 +12,9 @@
 #include "meshes/triangle_mesh.h"
 
 // Local include files
-#include "sprittles_sector_problem.h"
-#include "my_element.h"
 #include "singular_navier_stokes_elements.h"
+#include "singular_region_sector_problem.h"
+#include "my_element.h"
 #include "utility_functions.h"
 
 using namespace oomph;
@@ -29,10 +29,10 @@ int main(int argc, char** argv)
   MPI_Helpers::init(argc, argv, make_copy_of_mpi_comm_world);
 #endif
 
-  oomph_info << "sprittles" << std::endl;
+  oomph_info << "structured_with_correction_regions" << std::endl;
 
   // Create problem
-  SprittlesSectorProblem<SingularNavierStokesElement<MyElement>> problem;
+  SingularRegionSectorProblem<SingularNavierStokesElement<MyElement>> problem;
   problem.setup();
 
   // Steady problem

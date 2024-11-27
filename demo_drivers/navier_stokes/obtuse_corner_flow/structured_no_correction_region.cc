@@ -1,10 +1,11 @@
 // Driver code for the first testcase for the obtuse angle fix
 
 #include <iostream>
-#include <fstream>
+#include <cmath>
 
 // OOMPH-LIB include files
 #include "generic.h"
+#include "navier_stokes.h"
 #include "axisym_navier_stokes.h"
 #include "fluid_interface.h"
 #include "constitutive.h"
@@ -12,10 +13,8 @@
 #include "meshes/triangle_mesh.h"
 
 // Local include files
-#include "singular_navier_stokes_elements.h"
-#include "singular_region_sector_problem.h"
+#include "region_sector_problem.h"
 #include "my_element.h"
-#include "utility_functions.h"
 
 using namespace oomph;
 
@@ -29,18 +28,17 @@ int main(int argc, char** argv)
   MPI_Helpers::init(argc, argv, make_copy_of_mpi_comm_world);
 #endif
 
-  oomph_info << "structured_with_correction_regions" << std::endl;
+  oomph_info << "structured_no_correction" << std::endl;
 
   // Create problem
-  SingularRegionSectorProblem<SingularNavierStokesElement<MyElement>> problem;
+  RegionSectorProblem<MyElement> problem;
   problem.setup();
-  problem.doc_solution();
 
   // Steady problem
   problem.steady_newton_solve();
   problem.doc_solution();
 
-  // Finalise MPI after all computations are complete
+// Finalise MPI after all computations are complete
 #ifdef OOMPH_HAS_MPI
   MPI_Helpers::finalize();
 #endif
