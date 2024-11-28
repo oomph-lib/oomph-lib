@@ -215,161 +215,9 @@ namespace oomph
       Vector<double> unit_normal(n_dim);
       outer_unit_normal(s, unit_normal);
       Vector<double> wall_velocity(n_dim + 1);
-      get_wall_velocity(0.0, 0, interpolated_x, unit_normal, wall_velocity);
+      Wall_velocity_function(0.0, interpolated_x, unit_normal, wall_velocity);
 
-      return (wall_velocity);
-    }
-
-
-    void fill_in_contribution_to_dresiduals_dparameter(
-      double* const& parameter_pt, Vector<double>& dres_dparam)
-    {
-      if (parameter_pt == &Slip_Parameters::wall_velocity)
-      {
-        // Find out how many nodes there are
-        unsigned n_node = nnode();
-
-        // Get continuous time from timestepper of first node
-        double time = node_pt(0)->time_stepper_pt()->time_pt()->time();
-
-#ifdef PARANOID
-        // Find out how many positional dofs there are
-        unsigned n_position_type = this->nnodal_position_type();
-        if (n_position_type != 1)
-        {
-          throw OomphLibError(
-            "AxisymmetricNavierStokes is not yet implemented for "
-            "more than one position type",
-            OOMPH_CURRENT_FUNCTION,
-            OOMPH_EXCEPTION_LOCATION);
-        }
-#endif
-
-        // Find out the dimension of the node
-        unsigned n_dim = this->nodal_dimension();
-
-        // Integer to hold the local equation number
-        int local_eqn = 0;
-
-        // Set up memory for the shape functions
-        // Note that in this case, the number of lagrangian coordinates is
-        // always equal to the dimension of the nodes
-        Shape psi(n_node);
-        DShape dpsids(n_node, n_dim - 1);
-
-        // Set the value of n_intpt
-        unsigned n_intpt = integral_pt()->nweight();
-
-        // Loop over the integration points
-        for (unsigned ipt = 0; ipt < n_intpt; ipt++)
-        {
-          // Get the integral weight
-          double w = integral_pt()->weight(ipt);
-
-          // Only need to call the local derivatives
-          dshape_local_at_knot(ipt, psi, dpsids);
-
-          // Calculate the Eulerian and Lagrangian coordinates
-          Vector<double> interpolated_x(n_dim, 0.0);
-          Vector<double> interpolated_t(n_dim, 0.0);
-          Vector<double> interpolated_u(n_dim + 1, 0.0);
-
-          // Calculate positions and derivatives
-          for (unsigned l = 0; l < n_node; l++)
-          {
-            // Loop over directions
-            for (unsigned i = 0; i < n_dim; i++)
-            {
-              // Calculate the Eulerian coords
-              const double x_local = nodal_position(l, i);
-              interpolated_x[i] += x_local * psi(l);
-              interpolated_t[i] += x_local * dpsids(l, 0);
-            }
-
-            // Loop over directions
-            for (unsigned i = 0; i < n_dim + 1; i++)
-            {
-              interpolated_u[i] += u(l, i) * psi(l);
-            }
-          }
-
-          // Get the outer unit normal
-          Vector<double> interpolated_normal(n_dim);
-          outer_unit_normal(ipt, interpolated_normal);
-
-          // Add the azimuthal direction manually
-          interpolated_normal.push_back(0.0);
-
-          // Calculate the length of the tangent Vector
-          double tlength = interpolated_t[0] * interpolated_t[0] +
-                           interpolated_t[1] * interpolated_t[1];
-
-          // Set the Jacobian of the line element
-          // multiplied by r (x[0])
-          double J = sqrt(tlength) * interpolated_x[0];
-
-          // Premultiply the weights and the square-root of the determinant of
-          // the metric tensor
-          double W = w * J;
-
-          // Now calculate the load
-          Vector<double> slip(n_dim + 1);
-          get_slip(time, ipt, interpolated_x, interpolated_normal, slip);
-
-          Vector<double> wall_velocity(n_dim + 1);
-          get_wall_velocity(
-            time, ipt, interpolated_x, interpolated_normal, wall_velocity);
-
-          // Subtract off the wall velocity
-          for (unsigned i = 0; i < n_dim; i++)
-          {
-            interpolated_u[i] = interpolated_u[i] - wall_velocity[i];
-          }
-
-          // Project velocity onto tangent plane
-          Vector<double> interpolated_u_tangent(n_dim + 1, 0.0);
-          double dot = 0.0;
-          for (unsigned i = 0; i < n_dim + 1; i++)
-          {
-            dot += interpolated_u[i] * interpolated_normal[i];
-          }
-          for (unsigned i = 0; i < n_dim + 1; i++)
-          {
-            interpolated_u_tangent[i] =
-              interpolated_u[i] - dot * interpolated_normal[i];
-          }
-
-          // Loop over the test functions, nodes of the element
-          for (unsigned l = 0; l < n_node; l++)
-          {
-            // Loop over the velocity components
-            for (unsigned i = 0; i < n_dim + 1; i++)
-            {
-              // Equation number
-              local_eqn =
-                this->nodal_local_eqn(l, this->axi_momentum_index_nst(l, i));
-              /*IF it's not a boundary condition*/
-              if (local_eqn >= 0)
-              {
-                // Add the slip terms to the residuals
-                if (slip[i] > 0)
-                {
-                  dres_dparam[local_eqn] -= 1.0 / slip[i] * psi(l) * W;
-                }
-              }
-            }
-          } // End of loop over shape functions
-        } // End of loop over integration points
-      }
-    }
-
-    /// Compute the element's residual Vector and the jacobian matrix
-    /// Virtual function can be overloaded by hanging-node version
-    void fill_in_contribution_to_djacobian_dparameter(
-      double* const& parameter_pt,
-      Vector<double>& dres_dparam,
-      DenseMatrix<double>& djac_dparam)
-    {
+      return wall_velocity;
     }
 
 
@@ -653,6 +501,10 @@ namespace oomph
         {
           outfile << unit_normal[i] << ",";
         }
+
+        Vector<double> wall_velocity(n_dim + 1);
+        get_wall_velocity(
+          time, ipt, interpolated_x, unit_normal, wall_velocity);
 
         // Output the u,v,w
         for (unsigned i = 0; i < n_dim + 1; i++)

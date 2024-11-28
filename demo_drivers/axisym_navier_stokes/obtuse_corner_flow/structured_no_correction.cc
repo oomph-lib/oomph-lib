@@ -12,8 +12,6 @@
 #include "meshes/triangle_mesh.h"
 
 // Local include files
-#include "parameters.h"
-#include "singular_axisym_navier_stokes_elements.h"
 #include "axisym_sector_problem.h"
 #include "my_element.h"
 
@@ -29,13 +27,11 @@ int main(int argc, char** argv)
   MPI_Helpers::init(argc, argv, make_copy_of_mpi_comm_world);
 #endif
 
-  oomph_info << "obtuse_corner_flow" << std::endl;
-
-  // Problem parameters
-  Parameters parameters;
+  oomph_info << "structured_no_correction" << std::endl;
 
   // Create problem
-  AxisymSectorProblem<MyElement> problem(200, 10);
+  AxisymSectorProblem<MyElement> problem;
+  problem.setup();
 
   // Steady problem
   problem.steady_newton_solve();

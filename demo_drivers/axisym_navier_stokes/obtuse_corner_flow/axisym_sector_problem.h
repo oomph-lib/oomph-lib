@@ -86,7 +86,7 @@ namespace oomph
       create_slip_elements();
       create_no_penetration1_elements();
       create_no_penetration2_elements();
-      create_far_field_elements();
+      // create_far_field_elements();
     }
 
     void delete_nonrefineable_elements()
@@ -364,11 +364,11 @@ namespace oomph
 
       // What is the index of the face of element e along boundary b
       int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
-      AxisymNavierStokesSlipElement<ELEMENT>* slip_element_pt = 0;
+      AxisymmetricNavierStokesSlipElement<ELEMENT>* slip_element_pt = 0;
 
       // Build the corresponding slip element
-      slip_element_pt =
-        new AxisymNavierStokesSlipElement<ELEMENT>(bulk_elem_pt, face_index);
+      slip_element_pt = new AxisymmetricNavierStokesSlipElement<ELEMENT>(
+        bulk_elem_pt, face_index);
 
       // Set the pointer to the prescribed slip function
       slip_element_pt->set_slip_function(Slip_function);
@@ -444,7 +444,7 @@ namespace oomph
   }
 
   template<class ELEMENT>
-  void SectorProblem<ELEMENT>::create_far_field_elements()
+  void AxisymSectorProblem<ELEMENT>::create_far_field_elements()
   {
     oomph_info << "create_far_field_elements" << endl;
 
@@ -577,7 +577,7 @@ namespace oomph
             Doc_info.directory().c_str(),
             Doc_info.number());
     output_stream.open(filename);
-    output_stream << "x,y,l_x,l_y,n_x,n_y,u,v,p" << endl;
+    output_stream << "x,y,l_x,l_y,n_x,n_y,u_w,v_w,z_w,u,v,w,p" << endl;
     Slip_boundary_mesh_pt->output(output_stream, npts);
     output_stream.close();
 

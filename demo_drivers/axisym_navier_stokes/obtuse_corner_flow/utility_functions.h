@@ -2,6 +2,11 @@
 #define UTILITY_FUNCTIONS_HEADER
 
 #include <iostream>
+#include <fstream>
+#include <string>
+#include <sstream>
+
+#include "generic.h"
 
 namespace oomph
 {
@@ -79,6 +84,65 @@ namespace oomph
     std::ofstream output_stream(filename);
     problem_pt->describe_dofs(output_stream);
     output_stream.close();
+  }
+
+  template<class PROBLEM*>
+  void debug_jacobian(Problem* problem_pt)
+  {
+    std::ofstream out_stream;
+
+    DoubleVector dummy_residuals;
+    CRDoubleMatrix actual_jacobian;
+    problem_pt->get_jacobian(dummy_residuals, actual_jacobian);
+
+    problem_pt->linear_solver_pt() = new FD_LU;
+
+    DoubleVector residuals;
+    DenseMatrix<double> expected_jacobian;
+    problem_pt->get_fd_jacobian(residuals, expected_jacobian);
+
+    compare_matrices(expected_jacobian, actual_jacobian);
+
+    out_stream.open("dofs.dat");
+    problem_pt->describe_dofs(out_stream);
+    out_stream.close();
+  }
+
+  CRDoubleMatrix* load_crdoublematrix(const std::string& filename,
+                                      const LinearAlgebraDistribution* dist_pt,
+                                      const unsigned& ncol)
+  {
+    Vector<double> value;
+    Vector<int> column_index;
+    Vector<int> row_start;
+
+    std::ifstream file_stream(filename, std::ios::in);
+    std::string line;
+    int row_counter = 0;
+    row_start.push_back(0);
+    while (std::getline(file_stream, line))
+    {
+      std::istringstream ss(line);
+      std::string token;
+
+      std::getline(ss, token, ' ');
+      while (row_counter < std::stoi(token))
+      {
+        row_start.push_back(value.size());
+        row_counter++;
+      }
+
+      std::getline(ss, token, ' ');
+      column_index.push_back(std::stoi(token));
+
+      std::getline(ss, token);
+      value.push_back(std::stod(token));
+    }
+    file_stream.close();
+
+    row_start.push_back(value.size());
+
+    return new CRDoubleMatrix(dist_pt, ncol, value, column_index, row_start);
   }
 } // namespace oomph
 
