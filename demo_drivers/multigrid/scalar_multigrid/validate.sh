@@ -278,7 +278,7 @@ do
 		    then
 			echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 		    else
-			./$compare_data ../$store$validata_file_0 $result_dir$file_0 >> validation.log
+			./$compare_data ../$store$validata_file_0 $result_dir$file_0 0.1 1e-13 >> validation.log
 		    fi
 		    
 		    # Check soln1.dat
@@ -287,7 +287,7 @@ do
 		    then
 			echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 		    else
-			./$compare_data ../$store$validata_file_1 $result_dir$file_1 >> validation.log
+			./$compare_data ../$store$validata_file_1 $result_dir$file_1 0.1 1e-13 >> validation.log
 		    fi
 		    
 		    # Move the result directory into storage
@@ -378,7 +378,7 @@ do
     then
 	echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
     else
-	./$compare_data ../$store$validata_file_0 $result_dir$file_0 >> validation.log
+	./$compare_data ../$store$validata_file_0 $result_dir$file_0 0.1 1e-13 >> validation.log
     fi
     
     # Move the result directory into storage
