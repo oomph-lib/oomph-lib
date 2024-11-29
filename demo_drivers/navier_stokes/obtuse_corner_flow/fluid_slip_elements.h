@@ -247,25 +247,25 @@ namespace oomph
         // Output the x,y,..
         for (unsigned i = 0; i < n_dim; i++)
         {
-          outfile << interpolated_x[i] << ",";
+          outfile << interpolated_x[i] << " ";
         }
 
         // Output the slip components
         for (unsigned i = 0; i < n_dim; i++)
         {
-          outfile << slip[i] << ",";
+          outfile << slip[i] << " ";
         }
 
         // Output normal
         for (unsigned i = 0; i < n_dim; i++)
         {
-          outfile << unit_normal[i] << ",";
+          outfile << unit_normal[i] << " ";
         }
 
         // Output the velocity, don't include the comma on the final value
         for (unsigned i = 0; i < n_dim; i++)
         {
-          outfile << interpolated_u[i] << ",";
+          outfile << interpolated_u[i] << " ";
         }
 
         // Pressure

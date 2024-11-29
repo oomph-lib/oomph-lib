@@ -131,11 +131,11 @@ namespace oomph
       // Spatial coordinates are one higher
       for (unsigned i = 0; i < n_dim + 1; i++)
       {
-        outfile << Node_pt->x(i) << ",";
+        outfile << Node_pt->x(i) << " ";
       }
 
       // Output the pressure
-      outfile << Node_pt->value(Pressure_index) << ",";
+      outfile << Node_pt->value(Pressure_index) << " ";
 
       // End of line
       outfile << std::endl;

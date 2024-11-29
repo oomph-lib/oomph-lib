@@ -490,8 +490,8 @@ namespace oomph
 
     ELEMENT* element_pt = 0;
     int face_index = 0;
-    find_corner_bulk_element_and_face_index(Inner_slip_boundary_id,
-                                            Inner_free_surface_boundary_id,
+    find_corner_bulk_element_and_face_index(Inner_free_surface_boundary_id,
+                                            Inner_slip_boundary_id,
                                             element_pt,
                                             face_index);
 

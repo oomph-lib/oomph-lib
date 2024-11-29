@@ -277,11 +277,11 @@ namespace oomph
         // Spatial coordinates are one higher
         for (unsigned i = 0; i < n_dim + 1; i++)
         {
-          outfile << interpolated_x(s, i) << ",";
+          outfile << interpolated_x(s, i) << " ";
         }
 
         // Output the pressure
-        outfile << interpolated_p(s) << ",";
+        outfile << interpolated_p(s) << " ";
 
         // End of line
         outfile << std::endl;

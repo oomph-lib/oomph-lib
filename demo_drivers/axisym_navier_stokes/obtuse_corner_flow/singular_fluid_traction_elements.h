@@ -98,21 +98,21 @@ namespace oomph
         get_traction(local_time, x, n, traction);
 
         // Output the time
-        outfile << local_time << ",";
+        outfile << local_time << " ";
         // Output the position
         for (unsigned i = 0; i < n_dim; i++)
         {
-          outfile << x[i] << ",";
+          outfile << x[i] << " ";
         }
         // Output the normal
         for (unsigned i = 0; i < n_dim; i++)
         {
-          outfile << n[i] << ",";
+          outfile << n[i] << " ";
         }
         // Output traction, skipping the comma at the end of line
         for (unsigned i = 0; i < n_dim - 1; i++)
         {
-          outfile << traction[i] << ",";
+          outfile << traction[i] << " ";
         }
         outfile << traction[n_dim - 1];
         // End of line

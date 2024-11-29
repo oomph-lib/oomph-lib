@@ -201,19 +201,19 @@ namespace oomph
         // Output the x,y,..
         for (unsigned i = 0; i < n_dim; i++)
         {
-          outfile << interpolated_x[i] << ",";
+          outfile << interpolated_x[i] << " ";
         }
 
         // Output normal
         for (unsigned i = 0; i < n_dim; i++)
         {
-          outfile << norm_vec[i] << ",";
+          outfile << norm_vec[i] << " ";
         }
 
         // Output the velocity
         for (unsigned i = 0; i < n_dim; i++)
         {
-          outfile << interpolated_u[i] << ",";
+          outfile << interpolated_u[i] << " ";
         }
 
         // Output the velocity derivatives
@@ -221,7 +221,7 @@ namespace oomph
         //{
         //  for (unsigned k = 0; k < n_dim; k++)
         //  {
-        //    outfile << interpolated_dudx[i][k] << ",";
+        //    outfile << interpolated_dudx[i][k] << " ";
         //  }
         //}
 
@@ -229,7 +229,7 @@ namespace oomph
         // final value
         for (unsigned i = 0; i < n_dim - 1; i++)
         {
-          outfile << interpolated_lambda[i] << ",";
+          outfile << interpolated_lambda[i] << " ";
         }
         outfile << interpolated_lambda[n_dim - 1] << std::endl;
       }

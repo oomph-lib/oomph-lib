@@ -487,19 +487,19 @@ namespace oomph
         // Output the x,y,..
         for (unsigned i = 0; i < n_dim; i++)
         {
-          outfile << interpolated_x[i] << ",";
+          outfile << interpolated_x[i] << " ";
         }
 
         // Output the slip components
         for (unsigned i = 0; i < n_dim + 1; i++)
         {
-          outfile << slip[i] << ",";
+          outfile << slip[i] << " ";
         }
 
         // Output normal
         for (unsigned i = 0; i < n_dim; i++)
         {
-          outfile << unit_normal[i] << ",";
+          outfile << unit_normal[i] << " ";
         }
 
         Vector<double> wall_velocity(n_dim + 1);
@@ -509,13 +509,13 @@ namespace oomph
         // Output the u,v,w
         for (unsigned i = 0; i < n_dim + 1; i++)
         {
-          outfile << wall_velocity[i] << ",";
+          outfile << wall_velocity[i] << " ";
         }
 
         // Output the u,v,w
         for (unsigned i = 0; i < n_dim + 1; i++)
         {
-          outfile << interpolated_u[i] << ",";
+          outfile << interpolated_u[i] << " ";
         }
         outfile << interpolated_p(s) << std::endl;
       }

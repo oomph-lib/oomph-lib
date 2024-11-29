@@ -4,6 +4,9 @@ include $(top_srcdir)/config/makefile_templates/demo_drivers
 %.vtu: %.dat
 	../../../bin/oomph-convert.py $<
 
+parameters.dat: 
+	cp default_parameters.dat parameters.dat
+
 RESLT_no_fix/soln0.dat: structured_no_correction parameters.dat
 	mkdir -p RESLT_no_fix
 	./structured_no_correction
@@ -17,6 +20,7 @@ RESLT_fix/soln0.dat: structured_with_correction parameters.dat
 	./structured_with_correction
 
 RESLT_fix_region/soln0.dat: structured_with_correction_region parameters.dat
+	mkdir -p RESLT_no_fix_region
 	mkdir -p RESLT_fix_region
 	./structured_with_correction_region
 
