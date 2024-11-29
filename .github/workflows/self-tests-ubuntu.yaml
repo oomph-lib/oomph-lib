@@ -12,7 +12,7 @@ jobs:
         # MPI case, respectively
         mpi_options:
           [
-            { enable: false, config_file: default },
+            { enable: false, config_file: default_ci },
             { enable: true, config_file: mpi_default_ci },
           ]
 
@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install requirements
-        run: sudo apt-get install make automake libtool libtool-bin autoconf doxygen gfortran g++
+        run: sudo apt-get install make automake libtool libtool-bin autoconf doxygen gfortran g++ libboost-dev
 
       # PM: Temporary patch to handle deprecation of Python 2.7 by GitHub runners. Should be removed
       # as soon as we have moved to a more recent version of Trilinos. N.B. we install Python 3
