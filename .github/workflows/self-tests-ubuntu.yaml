@@ -12,7 +12,7 @@ jobs:
         # MPI case, respectively
         mpi_options:
           [
-            { enable: false, config_file: default_ci },
+            { enable: false, config_file: default },
             { enable: true, config_file: mpi_default_ci },
           ]
 
@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install requirements
-        run: sudo apt-get install make automake libtool libtool-bin autoconf doxygen gfortran g++ libboost-dev
+        run: sudo apt-get install make automake libtool libtool-bin autoconf doxygen gfortran g++ python2
 
       # PM: Temporary patch to handle deprecation of Python 2.7 by GitHub runners. Should be removed
       # as soon as we have moved to a more recent version of Trilinos. N.B. we install Python 3
@@ -93,8 +93,7 @@ jobs:
       # uploaded and reviewed later on
       - name: Validate
         id: self_tests
-        run: 
-          ./bin/parallel_self_test.py -l demo_drivers/axisym_navier_stokes/axi_dynamic_cap -l demo_drivers/axisym_navier_stokes/temp -l demo_drivers/linearised_free_surface_axisym_navier_stokes/axi_dynamic_cap_stability
+        run: ./bin/parallel_self_test.py
         continue-on-error: true
 
       - name: Upload validation log file

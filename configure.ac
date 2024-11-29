@@ -2353,44 +2353,44 @@ AC_ARG_WITH(boost,
 # Do they exist?
 have_boost=false
 if test x$check_for_boost = xtrue; then \
-    if test -d $BOOST_LIB; then \
-        have_boost=true; \
-        echo "Found the boost libraries in"; \
-        echo " "; \
-        echo "   "  $BOOST_LIB ; \
-        echo " "; \
+if test -d $BOOST_LIB; then \
+    have_boost=true; \
+    echo "Found the boost libraries in"; \
+    echo " "; \
+    echo "   "  $BOOST_LIB ; \
+    echo " "; \
+else \
+   if test "$BOOST_DIR" == "auto"; then \
+       have_boost=true; \
+       echo "Will assume that boost library is specified automatically by"; \
+       echo "compiler/linker."; \
+   else \
+       have_boost=false; \
+       echo "Did NOT find the boost libraries in"; \
+       echo " "; \
+       echo "   "  $BOOST_LIB ; \
+       echo " "; \
+   fi;\
+fi; \
+if test -d $BOOST_INCLUDE; then \
+    have_boost=true; \
+    echo "Found the boost include files in"; \
+    echo " "; \
+    echo "   "  $BOOST_INCLUDE ; \
+    echo " "; \
+else \
+   if test "$BOOST_DIR" == "auto"; then \
+       have_boost=true; \
+       echo "Will assume that boost library is specified automatically by"; \
+       echo "compiler/linker."; \
     else \
-       if test "$BOOST_DIR" == "auto"; then \
-           have_boost=true; \
-           echo "Will assume that boost library is specified automatically by"; \
-           echo "compiler/linker."; \
-       else \
-           have_boost=false; \
-           echo "Did NOT find the boost libraries in"; \
-           echo " "; \
-           echo "   "  $BOOST_LIB ; \
-           echo " "; \
-       fi;\
+      have_boost=false; \
+      echo "Did NOT find the boost include files in"; \
+      echo " "; \
+      echo "   "  $BOOST_INCLUDE ; \
+      echo " "; \
     fi; \
-    if test -d $BOOST_INCLUDE; then \
-        have_boost=true; \
-        echo "Found the boost include files in"; \
-        echo " "; \
-        echo "   "  $BOOST_INCLUDE ; \
-        echo " "; \
-    else \
-       if test "$BOOST_DIR" == "auto"; then \
-           have_boost=true; \
-           echo "Will assume that boost library is specified automatically by"; \
-           echo "compiler/linker."; \
-        else \
-          have_boost=false; \
-          echo "Did NOT find the boost include files in"; \
-          echo " "; \
-          echo "   "  $BOOST_INCLUDE ; \
-          echo " "; \
-        fi; \
-    fi; \
+fi; \
 else \
    echo "No boost library directory specified"; \
 
@@ -2433,7 +2433,7 @@ if test x$have_boost = xfalse; then
 else \
   if test "$BOOST_DIR" == "auto"; then \
     BOOST_LIB='' ; \
-    BOOST_INCLUDE='/usr/include/boost/' ;\
+    BOOST_INCLUDE='' ;\
     external_dist_libraries_include=`echo $external_dist_libraries_include " -DOOMPH_HAS_BOOST"` ; \
   else \
     external_dist_libraries=`echo $external_dist_libraries " -lpthread -lboost_thread -lboost_system "` ; \
