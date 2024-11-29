@@ -1,8 +1,6 @@
 #Include commands common to every Makefile.am
 include $(top_srcdir)/config/makefile_templates/demo_drivers
 
-all: RESLT_axi_no_fix/soln0.dat RESLT_axi_fix/soln0.dat \
-	RESLT_axi_no_fix_region/soln0.dat RESLT_axi_fix_region/soln0.dat
 
 %.vtu: %.dat
 	../../../bin/oomph-convert.py $<
