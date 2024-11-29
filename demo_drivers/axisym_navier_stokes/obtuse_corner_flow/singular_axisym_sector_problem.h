@@ -59,6 +59,7 @@ namespace oomph
       this->doc_info_pt()->set_directory("RESLT_axi_fix");
 
       add_singular_sub_meshes();
+
       this->rebuild_global_mesh();
     }
 
@@ -81,7 +82,7 @@ namespace oomph
 
       create_singular_elements();
 
-      //fix_c(1.0);
+      // fix_c(1.0);
 
       this->rebuild_global_mesh();
       oomph_info << "Number of unknowns: " << this->assign_eqn_numbers()
@@ -150,17 +151,17 @@ namespace oomph
 
           el_pt->add_additional_terms();
 
-          // el_pt->swap_unknowns();
+          el_pt->swap_unknowns();
 
           Augmented_bulk_element_number.push_back(e);
-          //el_pt->pin_fluid();
-          //  for (unsigned n = 0; n < 6; n++)
+          // el_pt->pin_fluid();
+          //   for (unsigned n = 0; n < 6; n++)
           //{
-          //    for (unsigned d = 0; d < 3; d++)
-          //    {
-          //      //el_pt->pin_total_velocity_eqn(n, d);
-          //    }
-          //  }
+          //     for (unsigned d = 0; d < 3; d++)
+          //     {
+          //       //el_pt->pin_total_velocity_eqn(n, d);
+          //     }
+          //   }
         }
       }
       oomph_info << Augmented_bulk_element_number.size()

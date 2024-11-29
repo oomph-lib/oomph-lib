@@ -385,90 +385,6 @@ namespace oomph
       return nodal_value(n, this->u_reconstructed_index(n, i));
     }
 
-    // /// Idea: Everyone outside the element used this function which relates
-    // to the total velocity, and the internals swap the total velocity with
-    // the tilde part. This means that only this element needs to know that it
-    // is augmented and Dirchlet and Neumann boundary conditions would be
-    // imposed automatically.
-    // /// Compute vector of FE interpolated velocity u at local coordinate s
-    // void interpolated_u_nst(const Vector<double>& s,
-    //                         Vector<double>& veloc) const
-    // {
-    //   // Find number of nodes
-    //   unsigned n_node = nnode();
-    //   // Local shape function
-    //   Shape psi(n_node);
-    //   // Find values of shape function
-    //   shape(s, psi);
-
-    //   for (unsigned i = 0; i < DIM; i++)
-    //   {
-    //     // Initialise value of u
-    //     veloc[i] = 0.0;
-    //     // Loop over the local nodes and sum
-    //     for (unsigned l = 0; l < n_node; l++)
-    //     {
-    //       // Index at which the nodal value is stored
-    //       unsigned u_nodal_index = u_reconstructed_index(l, i);
-    //       veloc[i] += nodal_value(l, u_nodal_index) * psi[l];
-    //     }
-    //   }
-    // }
-    // /// Return FE interpolated velocity u[i] at local coordinate s
-    // double interpolated_u_nst(const Vector<double>& s, const unsigned& i)
-    // const
-    // {
-    //   // Find number of nodes
-    //   unsigned n_node = nnode();
-    //   // Local shape function
-    //   Shape psi(n_node);
-    //   // Find values of shape function
-    //   shape(s, psi);
-
-    //   // Initialise value of u
-    //   double interpolated_u = 0.0;
-    //   // Loop over the local nodes and sum
-    //   for (unsigned l = 0; l < n_node; l++)
-    //   {
-    //     // Get nodal index at which i-th velocity is stored
-    //     unsigned u_nodal_index = u_reconstructed_index(l, i);
-    //     interpolated_u += nodal_value(l, u_nodal_index) * psi[l];
-    //   }
-
-    //   return (interpolated_u);
-    // }
-
-    // virtual inline int momentum_local_eqn(const unsigned& n,
-    //                                       const unsigned& i) const
-    // {
-    //   // Note: u_reconstructed_index references to total u
-
-    //   return nodal_local_eqn(n, u_index_nst(n, i));
-    //   // return nodal_local_eqn(n, this->u_reconstructed_index(n, i));
-    // }
-
-    /// Return the index at which the unknown pressure component
-    /// is stored.
-    // virtual inline int p_nodal_index_nst() const
-    // {
-    //   // dim * [u]
-    //   return this->dim();
-    // }
-
-
-  protected:
-    // Increase the required number of values by dim
-    //    virtual unsigned required_nvalue(const unsigned& n) const
-    //    {
-    //      // Basic element
-    //      // dim * [u] + 1 * [p]
-    //
-    //      // This element
-    //      // dim * [u] + 1 * [p_tilde] + dim * [u_tilde]
-    //
-    //      return TTaylorHoodElement<2>::required_nvalue(n) + this->dim();
-    //    }
-
 
   public:
     void pin_total_velocity_eqn(const unsigned& i_node, const unsigned& i_dim)
@@ -501,36 +417,6 @@ namespace oomph
     void pin_momentum_eqn(const unsigned& i_node, const unsigned& i_dim)
     {
       this->node_pt(i_node)->pin(this->momentum_index_nst(i_node, i_dim));
-    }
-
-    void pin_fluid()
-    {
-      for (unsigned i_node = 0; i_node < this->nnode(); i_node++)
-      {
-        for (unsigned i_dim = 0; i_dim < this->dim(); i_dim++)
-        {
-          this->node_pt(i_node)->pin(this->momentum_index_nst(i_node, i_dim));
-        }
-        if (i_node < 3)
-        {
-          this->node_pt(i_node)->pin(this->p_nodal_index_nst());
-        }
-      }
-    }
-
-    void pin_total_velocity()
-    {
-      if (this->IsAugmented)
-      {
-        for (unsigned i_node = 0; i_node < this->nnode(); i_node++)
-        {
-          for (unsigned i_dim = 0; i_dim < this->dim(); i_dim++)
-          {
-            this->node_pt(i_node)->pin(
-              this->total_velocity_eqn_index(i_node, i_dim));
-          }
-        }
-      }
     }
 
     /// Impose Dirichlet BC on the d-th component of the velocity
@@ -622,7 +508,6 @@ namespace oomph
       // matrix
       this->fill_in_generic_residual_contribution_wrapped_nst(
         residuals, jacobian, 1);
-      // FiniteElement::fill_in_contribution_to_jacobian(residuals, jacobian);
     }
 
     /// Overload the output function
@@ -688,21 +573,22 @@ namespace oomph
           }
         }
 
-        // Finite element Velocity
-        Vector<double> velocity_fe_only(cached_dim, 0.0);
-        if (this->IsAugmented)
-        {
-          this->interpolated_u_nst(s, velocity_fe_only);
-        }
-
-        for (unsigned i = 0; i < cached_dim; i++)
-        {
-          outfile << velocity_fe_only[i] << " ";
-        }
-
         // Singular Velocity
         if (IsSingularOutputInclude)
         {
+          // Finite element Velocity
+          Vector<double> velocity_fe_only(cached_dim, 0.0);
+          if (this->IsAugmented)
+          {
+            this->interpolated_u_nst(s, velocity_fe_only);
+          }
+
+          for (unsigned i = 0; i < cached_dim; i++)
+          {
+            outfile << velocity_fe_only[i] << " ";
+          }
+
+          // Singular Velocity
           Vector<double> velocity_bar(cached_dim, 0.0);
           if (this->IsAugmented)
           {
@@ -713,17 +599,20 @@ namespace oomph
             outfile << velocity_bar[i] << " ";
           }
 
-          // Singular stress
-          DenseMatrix<double> stress_tensor_bar(cached_dim, cached_dim, 0.0);
-          if (this->IsAugmented)
+          if (IsStressOutputIncluded)
           {
-            stress_tensor_bar = interpolated_stress_tensor_bar(s);
-          }
-          for (unsigned i = 0; i < cached_dim; i++)
-          {
-            for (unsigned j = 0; j < cached_dim; j++)
+            // Singular stress
+            DenseMatrix<double> stress_tensor_bar(cached_dim, cached_dim, 0.0);
+            if (this->IsAugmented)
             {
-              outfile << stress_tensor_bar(i, j) << " ";
+              stress_tensor_bar = interpolated_stress_tensor_bar(s);
+            }
+            for (unsigned i = 0; i < cached_dim; i++)
+            {
+              for (unsigned j = 0; j < cached_dim; j++)
+              {
+                outfile << stress_tensor_bar(i, j) << " ";
+              }
             }
           }
         } // End of augmented
@@ -888,9 +777,9 @@ namespace oomph
         // Loop over the spatial directions
         for (unsigned i = 0; i < cached_dim; i++)
         {
+          const double u_value = this->u_reconstructed(l, i);
           for (unsigned j = 0; j < cached_dim; j++)
           {
-            const double u_value = this->u_reconstructed(l, i);
             interpolated_dudx(i, j) += u_value * dpsifdx(l, j);
           }
         }
@@ -1739,19 +1628,9 @@ namespace oomph
             // If it is not pinned
             if (local_eqn >= 0)
             {
-              // residuals[local_eqn] +=
-              //   (interpolated_u_reconstructed[i] -
-              //    (interpolated_u_tilde[i] + u_bar_local[i])) *
-              //   testf[l] * W;
-              Vector<double> pos_n(2, 0.0);
-              for (unsigned k = 0; k < 2; k++)
-              {
-                pos_n[k] = this->nodal_position(l, k);
-              }
-
               residuals[local_eqn] +=
                 (u_reconstructed(l, i) -
-                 (nodal_value(l, u_index_nst(l, i)) + u_bar(pos_n, i)));
+                 (nodal_value(l, u_index_nst(l, i)) + u_bar_local[i]));
 
               // Jacobian
               if (flag)

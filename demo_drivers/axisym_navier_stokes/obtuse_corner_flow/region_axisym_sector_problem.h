@@ -374,8 +374,8 @@ namespace oomph
         AxisymmetricNavierStokesSlipElement<ELEMENT>* slip_element_pt = 0;
 
         // Build the corresponding slip element
-        slip_element_pt =
-          new AxisymmetricNavierStokesSlipElement<ELEMENT>(bulk_elem_pt, face_index);
+        slip_element_pt = new AxisymmetricNavierStokesSlipElement<ELEMENT>(
+          bulk_elem_pt, face_index);
 
         // Set the pointer to the prescribed slip function
         slip_element_pt->set_slip_function(Slip_function);

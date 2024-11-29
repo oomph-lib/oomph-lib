@@ -39,6 +39,9 @@
 //#include "../generic/shape.h"
 //#include "../generic/elements.h"
 //#include "../generic/element_with_external_element.h"
+#include "generic.h"
+#include "axisym_navier_stokes.h"
+
 #include "parameters.h"
 #include "debug_jacobian_elements.h"
 

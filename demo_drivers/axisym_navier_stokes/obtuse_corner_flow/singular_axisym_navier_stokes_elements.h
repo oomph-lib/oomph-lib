@@ -169,6 +169,50 @@ namespace oomph
       }
     } // End of constructor
 
+    /// Get 'flux' for Z2 error recovery:   Upper triangular entries
+    /// in strain rate tensor.
+    void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
+    {
+#ifdef PARANOID
+      unsigned num_entries =
+        this->dim() + (this->dim() * (this->dim() - 1)) / 2;
+      if (flux.size() < num_entries)
+      {
+        std::ostringstream error_message;
+        error_message << "The flux vector has the wrong number of entries, "
+                      << flux.size() << ", whereas it should be at least "
+                      << num_entries << std::endl;
+        throw OomphLibError(error_message.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+      // Get strain rate matrix
+      DenseMatrix<double> strainrate(this->n_u_nst());
+      this->strain_rate(s, strainrate);
+
+      // Pack into flux Vector
+      unsigned icount = 0;
+
+      // Start with diagonal terms
+      for (unsigned i = 0; i < this->n_u_nst(); i++)
+      {
+        flux[icount] = strainrate(i, i);
+        icount++;
+      }
+
+      // Off diagonals row by row
+      for (unsigned i = 0; i < this->n_u_nst(); i++)
+      {
+        for (unsigned j = i + 1; j < this->n_u_nst(); j++)
+        {
+          flux[icount] = strainrate(i, j);
+          icount++;
+        }
+      }
+    }
+
     //==============================================================
     /// Get strain-rate tensor: \f$ e_{ij} \f$  where
     /// \f$ i,j = r,z,\theta \f$ (in that order)
@@ -177,12 +221,13 @@ namespace oomph
                      DenseMatrix<double>& strainrate) const
     {
 #ifdef PARANOID
-      if ((strainrate.ncol() != 3) || (strainrate.nrow() != 3))
+      if ((strainrate.ncol() != this->n_u_nst()) ||
+          (strainrate.nrow() != this->n_u_nst()))
       {
         std::ostringstream error_message;
         error_message << "The strain rate has incorrect dimensions "
                       << strainrate.ncol() << " x " << strainrate.nrow()
-                      << " Not 3" << std::endl;
+                      << " Not " << this->n_u_nst() << std::endl;
 
         throw OomphLibError(error_message.str(),
                             OOMPH_CURRENT_FUNCTION,
@@ -455,7 +500,7 @@ namespace oomph
           this->node_pt(i)->pin(this->axi_momentum_index_nst(i, j));
         }
       }
-      const unsigned& n_pres = 3;
+      const unsigned& n_pres = this->npres_axi_nst();
       for (unsigned i = 0; i < n_pres; i++)
       {
         this->node_pt(i)->pin(this->p_index_axi_nst());
@@ -660,6 +705,7 @@ namespace oomph
           }
         }
 
+        // Singular Velocity
         if (IsSingularOutputInclude)
         {
           // Finite element Velocity
@@ -808,49 +854,6 @@ namespace oomph
           outfile << exact_soln[i] - computed_soln[i] << " ";
         }
         outfile << std::endl;
-      }
-    }
-
-    /// Get 'flux' for Z2 error recovery:   Upper triangular entries
-    /// in strain rate tensor.
-    void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
-    {
-#ifdef PARANOID
-      unsigned num_entries = 6;
-      if (flux.size() < num_entries)
-      {
-        std::ostringstream error_message;
-        error_message << "The flux vector has the wrong number of entries, "
-                      << flux.size() << ", whereas it should be at least "
-                      << num_entries << std::endl;
-        throw OomphLibError(error_message.str(),
-                            OOMPH_CURRENT_FUNCTION,
-                            OOMPH_EXCEPTION_LOCATION);
-      }
-#endif
-
-      // Get strain rate matrix
-      DenseMatrix<double> strainrate(3);
-      this->strain_rate(s, strainrate);
-
-      // Pack into flux Vector
-      unsigned icount = 0;
-
-      // Start with diagonal terms
-      for (unsigned i = 0; i < 3; i++)
-      {
-        flux[icount] = strainrate(i, i);
-        icount++;
-      }
-
-      // Off diagonals row by row
-      for (unsigned i = 0; i < 3; i++)
-      {
-        for (unsigned j = i + 1; j < 3; j++)
-        {
-          flux[icount] = strainrate(i, j);
-          icount++;
-        }
       }
     }
 
@@ -1046,6 +1049,7 @@ namespace oomph
       this->dshape_eulerian(s, psif, dpsifdx);
 
       // Get the velocity gradient
+      double interpolated_p = this->interpolated_p_axi_nst(s);
       DenseMatrix<double> interpolated_dudx(cached_dim, cached_dim, 0.0);
       // Loop over the local nodes and sum
       for (unsigned l = 0; l < n_node; l++)
@@ -1053,7 +1057,8 @@ namespace oomph
         // Loop over the spatial directions
         for (unsigned i = 0; i < cached_dim; i++)
         {
-          const double u_value = this->nodal_value(l, u_index_axi_nst(l, i));
+          const double u_value =
+            this->nodal_value(l, this->u_reconstructed_index(l, i));
           for (unsigned j = 0; j < cached_dim; j++)
           {
             interpolated_dudx(i, j) += u_value * dpsifdx(l, j);
@@ -1065,9 +1070,9 @@ namespace oomph
       // Loop over the spatial directions
       DenseMatrix<double> stress_tensor(cached_dim, cached_dim, 0.0);
       const double visc_ratio = this->viscosity_ratio();
-
       for (unsigned i = 0; i < cached_dim; i++)
       {
+        stress_tensor(i, i) += interpolated_p;
         for (unsigned j = 0; j < cached_dim; j++)
         {
           stress_tensor(i, j) -=
@@ -2022,7 +2027,7 @@ namespace oomph
             // If it is not pinned
             if (local_eqn >= 0)
             {
-              residuals[local_eqn] -=
+              residuals[local_eqn] +=
                 (this->nodal_value(l, u_reconstructed_index(l, i)) -
                  (this->nodal_value(l, u_index_axi_nst(l, i)) +
                   u_bar_local[i]));
@@ -2051,7 +2056,7 @@ namespace oomph
                 // If at a non-zero degree of freedom add in the
                 // entry
                 // Loop over the velocity test functions
-                local_unknown = this->u_local_unknown(l, i);
+                local_unknown = this->u_axi_nst_local_unknown(l, i);
                 if (local_unknown >= 0)
                 {
                   jacobian(local_eqn, local_unknown) -= 1;
