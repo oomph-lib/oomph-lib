@@ -419,8 +419,12 @@ namespace oomph
         break;
       }
     }
+
+    oomph_info << node_pt->x(0) << ", " << node_pt->x(1) << std::endl;
+
     PointPressureEvaluationElement* el_pt =
       new PointPressureEvaluationElement(node_pt);
+
     el_pt->set_pressure_data_pt(
       Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0));
 
@@ -435,8 +439,8 @@ namespace oomph
 
     ELEMENT* element_pt = 0;
     int face_index = 0;
-    find_corner_bulk_element_and_face_index(Inner_slip_boundary_id,
-                                            Inner_free_surface_boundary_id,
+    find_corner_bulk_element_and_face_index(Inner_free_surface_boundary_id,
+                                            Inner_slip_boundary_id,
                                             element_pt,
                                             face_index);
 
@@ -455,6 +459,9 @@ namespace oomph
         break;
       }
     }
+
+    oomph_info << node_pt->x(0) << ", " << node_pt->x(1) << std::endl;
+
     PointPressureEvaluationElement* el_pt =
       new PointPressureEvaluationElement(node_pt);
 
