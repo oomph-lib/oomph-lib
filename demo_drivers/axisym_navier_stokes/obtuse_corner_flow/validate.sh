@@ -40,10 +40,10 @@ test_script()
     fi
 }
 
-test_script RESLT_no_fix structured_no_correction 
-test_script RESLT_no_fix_region structured_no_correction_region
-test_script RESLT_fix structured_with_correction 
-test_script RESLT_fix_region structured_with_correction_region
+test_script RESLT_axi_no_fix structured_no_correction 
+test_script RESLT_axi_no_fix_region structured_no_correction_region
+test_script RESLT_axi_fix structured_with_correction 
+test_script RESLT_axi_fix_region structured_with_correction_region
 
 #######################################################################
 
