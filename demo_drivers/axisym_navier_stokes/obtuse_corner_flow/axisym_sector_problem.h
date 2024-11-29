@@ -10,7 +10,6 @@
 
 /// Local headers
 #include "axisym_fluid_slip_elements.h"
-#include "far_field_element.h"
 #include "parameter_functions.h"
 #include "parameter_struct.h"
 #include "refined_sector_tri_mesh.template.h"
@@ -28,7 +27,6 @@ namespace oomph
 
     Mesh* No_penetration_boundary_mesh1_pt;
     Mesh* No_penetration_boundary_mesh2_pt;
-    Mesh* Far_field_mesh_pt;
     Mesh* Slip_boundary_mesh_pt;
 
     DocInfo Doc_info;
@@ -86,7 +84,6 @@ namespace oomph
       create_slip_elements();
       create_no_penetration1_elements();
       create_no_penetration2_elements();
-      // create_far_field_elements();
     }
 
     void delete_nonrefineable_elements()
@@ -94,7 +91,6 @@ namespace oomph
       delete_elements(Slip_boundary_mesh_pt);
       delete_elements(No_penetration_boundary_mesh1_pt);
       delete_elements(No_penetration_boundary_mesh2_pt);
-      delete_elements(Far_field_mesh_pt);
     }
 
     void add_non_adaptive_sub_meshes()
@@ -103,8 +99,6 @@ namespace oomph
       add_sub_mesh(No_penetration_boundary_mesh1_pt);
       No_penetration_boundary_mesh2_pt = new Mesh;
       add_sub_mesh(No_penetration_boundary_mesh2_pt);
-      Far_field_mesh_pt = new Mesh;
-      add_sub_mesh(Far_field_mesh_pt);
       Slip_boundary_mesh_pt = new Mesh;
       add_sub_mesh(Slip_boundary_mesh_pt);
     }
@@ -247,9 +241,6 @@ namespace oomph
         }
       }
 
-      // Fix end points far field boundary condition lagrange_multipliers
-      pin_far_field_lagrange_multiplier_end_points();
-
       // Pin the lagrange multiplier for the no penetration condition on the
       // vertical surface at the centre
       // pin_lagrange_multiplier_end_point(Free_surface_boundary_id,
@@ -260,7 +251,6 @@ namespace oomph
     void create_slip_elements();
     void create_no_penetration1_elements();
     void create_no_penetration2_elements();
-    void create_far_field_elements();
 
     void find_corner_bulk_node(const unsigned& boundary_1_id,
                                const unsigned& boundary_2_id,
@@ -288,38 +278,6 @@ namespace oomph
             // then fix the lagrange multiplier to zero
             oomph_info << "Fix lagrange_multiplier" << std::endl;
             el_pt->pin_lagrange_multiplier(i_nod);
-          }
-        }
-      }
-    }
-
-    void pin_far_field_lagrange_multiplier_end_points()
-    {
-      const unsigned n_el = Far_field_mesh_pt->nelement();
-      for (unsigned i_el = 0; i_el < n_el; i_el++)
-      {
-        FarFieldElement<ELEMENT>* el_pt =
-          dynamic_cast<FarFieldElement<ELEMENT>*>(
-            Far_field_mesh_pt->element_pt(i_el));
-        const unsigned n_nod = el_pt->nnode();
-        for (unsigned i_nod = 0; i_nod < n_nod; i_nod++)
-        {
-          // Get boundary node
-          const Node* const node_pt = el_pt->node_pt(i_nod);
-          // If node is on either of the other boundaries
-          if (node_pt->is_on_boundary(Slip_boundary_id))
-          {
-            // then fix the lagrange multiplier to zero
-            oomph_info << "Fix lagrange_multiplier" << std::endl;
-            el_pt->pin_lagrange_multiplier(i_nod, 0);
-            el_pt->pin_lagrange_multiplier(i_nod, 1);
-          }
-          if (node_pt->is_on_boundary(Free_surface_boundary_id))
-          {
-            // then fix the lagrange multiplier to zero
-            oomph_info << "Fix lagrange_multiplier" << std::endl;
-            el_pt->pin_lagrange_multiplier(i_nod, 0);
-            el_pt->pin_lagrange_multiplier(i_nod, 1);
           }
         }
       }
@@ -440,37 +398,6 @@ namespace oomph
       // Add the prescribed-flux element to the surface mesh
       No_penetration_boundary_mesh2_pt->add_element_pt(
         no_penetration_element_pt);
-    }
-  }
-
-  template<class ELEMENT>
-  void AxisymSectorProblem<ELEMENT>::create_far_field_elements()
-  {
-    oomph_info << "create_far_field_elements" << endl;
-
-    // Loop over the free surface boundary and create the "interface elements
-    unsigned b = Far_field_boundary_id;
-
-    // How many bulk fluid elements are adjacent to boundary b?
-    unsigned n_element = Bulk_mesh_pt->nboundary_element(b);
-
-    // Loop over the bulk fluid elements adjacent to boundary b?
-    for (unsigned e = 0; e < n_element; e++)
-    {
-      // Get pointer to the bulk fluid element that is
-      // adjacent to boundary b
-      ELEMENT* bulk_elem_pt =
-        dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(b, e));
-
-      // Find the index of the face of element e along boundary b
-      int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
-
-      // Create new element
-      FarFieldElement<ELEMENT>* el_pt = new FarFieldElement<ELEMENT>(
-        bulk_elem_pt, face_index, Far_field_boundary_id);
-
-      // Add it to the mesh
-      Far_field_mesh_pt->add_element_pt(el_pt);
     }
   }
 
@@ -597,17 +524,6 @@ namespace oomph
     output_stream.open(filename);
     output_stream << "x,y,u,v,p,lagrange_multiplier,nx,ny," << endl;
     No_penetration_boundary_mesh2_pt->output(output_stream, 3);
-    output_stream.close();
-
-    sprintf(filename,
-            "%s/far_field%i.dat",
-            Doc_info.directory().c_str(),
-            Doc_info.number());
-    output_stream.open(filename);
-    output_stream
-      << "x,y,n_x,n_y,u_x,u_y,du_xdr,du_ydr,du_xdtheta,du_ydtheta,l_x,l_y"
-      << endl;
-    Far_field_mesh_pt->output(output_stream);
     output_stream.close();
 
     Doc_info.number()++;

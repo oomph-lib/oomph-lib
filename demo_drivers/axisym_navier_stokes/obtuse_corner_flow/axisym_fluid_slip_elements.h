@@ -42,9 +42,6 @@
 #include "generic.h"
 #include "axisym_navier_stokes.h"
 
-#include "parameters.h"
-#include "debug_jacobian_elements.h"
-
 namespace oomph
 {
   //======================================================================
