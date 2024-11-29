@@ -2432,8 +2432,8 @@ if test x$have_boost = xfalse; then
   BOOST_INCLUDE='' ;\
 else \
   if test "$BOOST_DIR" == "auto"; then \
-    BOOST_LIB='/usr/include/boost/' ; \
-    BOOST_INCLUDE='' ;\
+    BOOST_LIB='' ; \
+    BOOST_INCLUDE='/usr/include/boost/' ;\
     external_dist_libraries_include=`echo $external_dist_libraries_include " -DOOMPH_HAS_BOOST"` ; \
   else \
     external_dist_libraries=`echo $external_dist_libraries " -lpthread -lboost_thread -lboost_system "` ; \
