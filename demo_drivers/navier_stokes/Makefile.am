@@ -34,7 +34,8 @@ schur_complement_preconditioner \
 lagrange_enforced_flow_preconditioner \
 vorticity_smoother \
 flow_past_oscillating_cylinder \
-space_time_flow_past_oscillating_cylinder
+space_time_flow_past_oscillating_cylinder \
+obtuse_corner_flow
 
 if SUPPRESS_TRIANGLE_LIB
 else
