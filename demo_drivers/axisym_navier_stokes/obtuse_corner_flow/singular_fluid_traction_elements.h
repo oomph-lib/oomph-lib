@@ -3,7 +3,6 @@
 
 #include "navier_stokes.h"
 #include "singular_navier_stokes_solution_elements.h"
-#include "debug_jacobian_elements.h"
 
 namespace oomph
 {
@@ -46,12 +45,11 @@ namespace oomph
                                                  DenseMatrix<double>& jacobian)
     {
       // Call the generic routine with the flag set to 1
-      // NavierStokesTractionElement<ELEMENT>::
-      //  fill_in_generic_residual_contribution_fluid_traction(
-      //    residuals, jacobian, 1);
+      NavierStokesTractionElement<ELEMENT>::
+        fill_in_generic_residual_contribution_fluid_traction(
+          residuals, jacobian, 1);
 
-      // this->fill_in_jacobian_from_external_by_fd(residuals, jacobian, false);
-      FiniteElement::fill_in_contribution_to_jacobian(residuals, jacobian);
+      this->fill_in_jacobian_from_external_by_fd(residuals, jacobian, false);
     }
 
     void fill_in_contribution_to_jacobian_and_mass_matrix(

@@ -1,7 +1,6 @@
 // Driver code for the first testcase for the obtuse angle fix
 
 #include <iostream>
-#include <cmath>
 
 // OOMPH-LIB include files
 #include "generic.h"
@@ -12,10 +11,10 @@
 #include "meshes/triangle_mesh.h"
 
 // Local include files
-#include "parameters.h"
 #include "singular_axisym_navier_stokes_elements.h"
 #include "singular_axisym_sector_problem.h"
 #include "my_element.h"
+#include "utility_functions.h"
 
 using namespace oomph;
 
@@ -29,20 +28,21 @@ int main(int argc, char** argv)
   MPI_Helpers::init(argc, argv, make_copy_of_mpi_comm_world);
 #endif
 
-  oomph_info << "obtuse_corner_flow" << std::endl;
-
-  // Problem parameters
-  Parameters parameters;
+  oomph_info << "structured_with_correction" << std::endl;
 
   // Create problem
-  SingularAxisymSectorProblem<SingularAxisymNavierStokesElement<MyElement>>
-    problem(200, 10);
+  SingularAxisymSectorProblem<SingularAxisymNavierStokesElement<MyElement>>*
+    problem = new SingularAxisymSectorProblem<
+      SingularAxisymNavierStokesElement<MyElement>>;
+  problem->setup();
 
   // Steady problem
-  problem.steady_newton_solve();
-  problem.doc_solution();
+  problem->steady_newton_solve();
+  problem->doc_solution();
 
-// Finalise MPI after all computations are complete
+  delete problem;
+
+  // Finalise MPI after all computations are complete
 #ifdef OOMPH_HAS_MPI
   MPI_Helpers::finalize();
 #endif
