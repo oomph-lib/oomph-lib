@@ -10,7 +10,7 @@
 
 namespace oomph
 {
-  template<typename TA, typename TB>
+  template<class TA, class TB>
   bool compare_matrices(TA const& A,
                         TB const& B,
                         const double& abs_err_tolerance = 1e-6)
@@ -47,7 +47,7 @@ namespace oomph
     return matrices_are_equal;
   }
 
-  template<typename TA>
+  template<class TA>
   void output_matrices(std::ofstream& output_stream, TA const& A)
   {
     output_stream.precision(16);
@@ -61,7 +61,7 @@ namespace oomph
     }
   }
 
-  template<typename TA>
+  template<class TA>
   void output_matrices(TA const& A, const std::string& filename)
   {
     std::ofstream output_stream(filename);
@@ -77,8 +77,8 @@ namespace oomph
     output_stream.close();
   }
 
-  template<typename PROBLEM_PT>
-  void save_dofs_types(PROBLEM_PT const& problem_pt,
+  template<class PROBLEM_PT>
+  void save_dofs_types(const PROBLEM_PT& problem_pt,
                        const std::string& filename)
   {
     std::ofstream output_stream(filename);
@@ -86,8 +86,8 @@ namespace oomph
     output_stream.close();
   }
 
-  template<class PROBLEM*>
-  void debug_jacobian(Problem* problem_pt)
+  template<class PROBLEM_PT>
+  void debug_jacobian(const PROBLEM_PT& problem_pt)
   {
     std::ofstream out_stream;
 
@@ -95,15 +95,13 @@ namespace oomph
     CRDoubleMatrix actual_jacobian;
     problem_pt->get_jacobian(dummy_residuals, actual_jacobian);
 
-    problem_pt->linear_solver_pt() = new FD_LU;
-
     DoubleVector residuals;
     DenseMatrix<double> expected_jacobian;
     problem_pt->get_fd_jacobian(residuals, expected_jacobian);
 
     compare_matrices(expected_jacobian, actual_jacobian);
 
-    out_stream.open("dofs.dat");
+    out_stream.open("dofs.txt");
     problem_pt->describe_dofs(out_stream);
     out_stream.close();
   }
