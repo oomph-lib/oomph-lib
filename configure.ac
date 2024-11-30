@@ -652,7 +652,7 @@ if test x$have_hsl_sources = xfalse; then \
 
   if test x$have_hsl_sources_in_private_external_src = xtrue; then \
     echo "Making symlink"; \
-    ln -s ../../private/external_src/hsl/frontal.f external_src/oomph_hsl/frontal.f;\
+    ln -sf ../../private/external_src/hsl/frontal.f external_src/oomph_hsl/frontal.f;\
     have_hsl_sources=true;\
   else \
     echo "Not making symlink";\

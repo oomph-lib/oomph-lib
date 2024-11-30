@@ -141,7 +141,7 @@ fi
 
 echo "Running adaptive hopf bifurcation validation "
 cd RESLT_adaptive_hopf
-ln -s ../../adapt_hopf_eigen.dat eigen.dat
+ln -sf ../../adapt_hopf_eigen.dat eigen.dat
 ../../adaptive_hopf > ../OUTPUT_adaptive_hopf
 cd ..
 
