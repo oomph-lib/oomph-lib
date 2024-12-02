@@ -176,30 +176,30 @@ namespace oomph
         // Coordinates
         for (unsigned i = 0; i < this->dim() + 1; i++)
         {
-          outfile << this->interpolated_x(s, i) << ",";
+          outfile << this->interpolated_x(s, i) << " ";
         }
 
         // Velocities
         for (unsigned i = 0; i < this->dim() + 1; i++)
         {
-          outfile << this->interpolated_u(s, i) << ",";
+          outfile << this->interpolated_u(s, i) << " ";
         }
 
         // Pressure
-        outfile << this->interpolated_p(s) << ",";
+        outfile << this->interpolated_p(s) << " ";
 
         // Lagrange multipliers
-        outfile << interpolated_lambda(s) << ",";
+        outfile << interpolated_lambda(s) << " ";
 
         // compute the normal vector
         Vector<double> norm_vec(this->dim() + 1);
         outer_unit_normal(iplot, norm_vec);
         for (unsigned i = 0; i < this->dim() + 1; i++)
         {
-          outfile << norm_vec[i] << ",";
+          outfile << norm_vec[i] << " ";
         }
 
-        outfile << std::endl;
+        outfile << "\n";
       }
     }
 

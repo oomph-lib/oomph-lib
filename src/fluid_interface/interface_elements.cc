@@ -721,7 +721,7 @@ namespace oomph
         outfile << interpolated_u(s, i) << " ";
 
       // Output a dummy pressure
-      outfile << interpolated_p(s);
+      outfile << interpolated_p(s) << "\n";
     }
 
     write_tecplot_zone_footer(outfile, n_plot);
@@ -764,7 +764,7 @@ namespace oomph
       }
 
       // Dummy Pressure
-      fprintf(file_pt, "%g", interpolated_p(s));
+      fprintf(file_pt, "%g\n", interpolated_p(s));
     }
     fprintf(file_pt, "\n");
 

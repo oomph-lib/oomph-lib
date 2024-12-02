@@ -197,28 +197,28 @@ namespace oomph
         // Output the x,y,..
         for (unsigned i = 0; i < n_dim; i++)
         {
-          outfile << interpolated_x[i] << ",";
+          outfile << interpolated_x[i] << " ";
         }
 
         // Output normal
         for (unsigned i = 0; i < n_dim; i++)
         {
-          outfile << unit_normal[i] << ",";
+          outfile << unit_normal[i] << " ";
         }
 
         // Output the velocity
         for (unsigned i = 0; i < n_dim; i++)
         {
-          outfile << interpolated_u[i] << ",";
+          outfile << interpolated_u[i] << " ";
         }
 
         // Output the lagrange multiplier, don't include the comma on the final
         // value
         for (unsigned i = 0; i < n_dim - 2; i++)
         {
-          outfile << interpolated_lambda[i] << ",";
+          outfile << interpolated_lambda[i] << " ";
         }
-        outfile << interpolated_lambda[n_dim - 2] << std::endl;
+        outfile << interpolated_lambda[n_dim - 2] << "\n";
       }
     }
 
