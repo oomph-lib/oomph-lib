@@ -1,6 +1,7 @@
 SUBDIRS = \
 spin_up \
 axi_static_cap \
-two_layer_interface_axisym
+two_layer_interface_axisym \
+obtuse_corner_flow
 
 

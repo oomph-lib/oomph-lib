@@ -1,0 +1,97 @@
+\mainpage Axisymmetric Stokes flow with an obtuse corner
+
+See also the 2D Stokes flow in an obtuse corner.
+
+\section no-correction Without correction
+
+We define our sector domain so that it has radius \f$R\f$ and interior angle \f$\alpha\f$. One straight side is aligned with the vertical with the azimuthal angle varying counter clockwise through to \f$\alpha\f$. The corner is located at (x,y) = (1,0) and \f$R < 1\f$.
+In the bulk \f$\Omega\f$, we have the Stokes equations,
+\f[\nabla \cdot u = 0,\ \nabla \cdot \tau = 0.\f]
+where \f$\tau = -p I + \nabla \otimes u + (\nabla \otimes u)^T\f$.
+On the vertical boundary, \f$S_0\f$,
+\f[u \cdot n                 = 0,\ {t} \cdot {\tau} \cdot {n}  = \frac{1}{l} \left({u}\cdot {t} - 1\right).\f]
+where \f$l\f$ is the slip length and we have non-dimensionalised the system such that the wall velocity is unity.
+
+On the diagonal boundary, \f$S_2\f$, we have no penetration and pure slip, or equivalently, a tangential stress free condition.
+\f[{u} \cdot {n}                 = 0 , {t} \cdot {\tau} \cdot {n}  = 0.\f]
+
+On the curved far field boundary, \f$S_1\f$, we employ the natural boundary condition to give a free stress constraint,
+\f[ {\tau} \cdot {n}  = 0.\f]
+The pressure at the top of the sector is set to zero, at \f$x = 0, z = R\f$,
+\f[p = 0.\f]
+
+\section lagrange Lagrange multipliers
+
+The no-penetration conditions are imposed via Lagrange multipliers.
+On the vertical boundary, \f$S_0\f$,
+\f[\tau \cdot n = \lambda_1 n\f]
+On the diagonal boundary, \f$S_2\f$,
+\f[\tau \cdot n = \lambda_2 n\f]
+
+\section implementation Implementation
+
+
+The equations in the bulk are implemented with using `TTaylorHoodElement<2>`s.
+The no-penetration conditions are imposed through `ImposeImpenetrabilityElement`s.
+The far field conditions are imposed through new `FarFieldElement`s.
+The slip condition is imposed through `NavierStokesSlipElement`s.
+
+I am using a separate submesh for each of the conditions on the different boundaries.
+The Lagrange multipliers get stored by adding additional dofs to the nodes and using the velocities interpolation strategy.
+This is done in a way such that there can be multiple distinct Lagrange multipliers at corner nodes e.g. \f$\lambda_1\f$ and \f$\lambda_2\f$.
+
+<HR>
+<HR>
+
+\section correction With correction
+
+We include the singular eigensolution through an additional degree of freedom, \f$c\f$, which determines its scaling.
+\f[ u = c \bar{u} + \tilde{u} \f]
+\f[ p = \tilde{p} \f]
+\f[ \tau = c \bar{\tau} + \tilde{\tau} \f]
+Noting that \f$\bar{p} = 0\f$.
+The system of equations, now expressed in terms of \f$c, \bar{*}, \tilde{*}\f$ is given by:
+In the bulk \f$\Omega\f$, we have the Stokes equations,
+\f[c \nabla\bar{u} + \nabla \cdot \tilde{u} = 0,\ c \nabla \cdot \bar{\tau} + \nabla \cdot \tilde{\tau} = 0.\f]
+(By include the \f$c \nabla \cdot \bar{\tau}\f$ within the bulk,  the natural boundary condition becomes \f$c {t} \cdot \bar{\tau} \cdot {n} + {t} \cdot \tilde{\tau} \cdot {n}\f$ which matches \f${t} \cdot {\tau} \cdot {n}\f$ at the interior boundary.)
+The expressions for the additional terms are given by the [[axisymmetric Navier-Stokes equations]] with the bars substituted in.
+And the total velocity equations,
+\f[ u = c \bar{u} + \tilde{u} \f]
+On the vertical boundary, \f$S_0\f$,
+\f[\tilde{u} \cdot n                 = 0,\ c {t} \cdot \bar{\tau} \cdot {n} + {t} \cdot \tilde{\tau} \cdot {n}  = \frac{1}{l} \left(\tilde{u}\cdot {t} - 1\right) + \frac{c}{l} \bar{u}\cdot {t}.\f]
+where \f$l\f$ is the slip length and we have non-dimensionalised the system such that the wall velocity is unity.
+
+On the diagonal boundary, \f$S_2\f$, we have no penetration and pure slip, or equivalently, a tangential stress free condition.
+\f[\tilde{u} \cdot {n}                 = 0 , c {t} \cdot \bar{\tau} \cdot {n} + {t} \cdot \tilde{\tau} \cdot {n}  = 0.\f]
+On the curved far field boundary, \f$S_1\f$, we employ the following condition,
+\f[c (\bar{\tau} \cdot n) + \tilde{\tau} \cdot {n} = 0.\f]
+The pressure at the top of the sector is set to zero, at \f$x = 0, z = R\f$,
+\f[\tilde{p} = 0.\f]
+
+Additionally we would like to impose  \f$\lim_{\rho \to 0} \partial{p}/\partial{\theta} = 0\f$, however due the discrete mesh coordinates we impose the following instead,
+\f[p(\epsilon,0) = p(\epsilon,\alpha)\f]
+where \f$\epsilon \ll 1\f$ and polar coordinates are used.
+
+\section lagrange2 Lagrange multipliers
+
+The Lagrange multipliers remain the same but are imposed on \f$\tilde{u}\f$ instead of \f$u\f$.
+
+<HR>
+<HR>
+
+\section sources Source files for this tutorial
+- The source files for this tutorial are located in the directory:\n\n
+<CENTER>
+<A HREF="../../../../demo_drivers/axisym_navier_stokes/obtuse_corner_flow/">
+demo_drivers/axisym_navier_stokes/obtuse_corner_flow/
+</A>
+</CENTER>\n
+- The driver code is: \n\n
+<CENTER>
+<A HREF="../../../../demo_drivers/axisym_navier_stokes/obtuse_corner_flow/structured_no_correction.cc">
+demo_drivers/axisym_navier_stokes/obtuse_corner_flow/structured_no_correction.cc
+<A HREF="../../../../demo_drivers/axisym_navier_stokes/obtuse_corner_flow/structured_with_correction_region.cc">
+demo_drivers/axisym_navier_stokes/obtuse_corner_flow/structured_with_correction_region.cc
+</A>
+</CENTER>
+.
