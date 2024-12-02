@@ -647,7 +647,7 @@ namespace oomph
     // u_sing, v_sing, [w_sing], p_sing
     void output(std::ostream& outfile, const unsigned& nplot)
     {
-      const bool IsStressOutputIncluded = false;
+      const bool IsStressOutputIncluded = true;
       const bool IsSingularOutputInclude = true;
 
       // Find the dimension of the problem
@@ -674,7 +674,7 @@ namespace oomph
         }
 
         // Total velocity
-        Vector<double> velocity(cached_dim, 0.0);
+        Vector<double> velocity(this->n_u_nst(), 0.0);
 
         if (IsAugmented)
         {
@@ -696,7 +696,7 @@ namespace oomph
         {
           // Total stress
           DenseMatrix<double> stress_tensor = interpolated_stress_tensor(s);
-          for (unsigned i = 0; i < cached_dim; i++)
+          for (unsigned i = 0; i < this->n_u_nst(); i++)
           {
             for (unsigned j = 0; j < cached_dim; j++)
             {
@@ -709,13 +709,13 @@ namespace oomph
         if (IsSingularOutputInclude)
         {
           // Finite element Velocity
-          Vector<double> velocity_fe_only(cached_dim, 0.0);
+          Vector<double> velocity_fe_only(this->n_u_nst(), 0.0);
           if (this->IsAugmented)
           {
             this->interpolated_u_axi_nst(s, velocity_fe_only);
           }
 
-          for (unsigned i = 0; i < cached_dim; i++)
+          for (unsigned i = 0; i < this->n_u_nst(); i++)
           {
             outfile << velocity_fe_only[i] << " ";
           }
@@ -734,12 +734,13 @@ namespace oomph
           if (IsStressOutputIncluded)
           {
             // Singular stress
-            DenseMatrix<double> stress_tensor_bar(cached_dim, cached_dim, 0.0);
+            DenseMatrix<double> stress_tensor_bar(
+              this->n_u_nst(), cached_dim, 0.0);
             if (this->IsAugmented)
             {
               stress_tensor_bar = interpolated_stress_tensor_bar(s);
             }
-            for (unsigned i = 0; i < cached_dim; i++)
+            for (unsigned i = 0; i < this->n_u_nst(); i++)
             {
               for (unsigned j = 0; j < cached_dim; j++)
               {
