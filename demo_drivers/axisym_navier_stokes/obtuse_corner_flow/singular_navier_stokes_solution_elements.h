@@ -354,7 +354,7 @@ namespace oomph
     {
       outfile << std::fixed
               << std::setprecision(std::numeric_limits<double>::max_digits10);
-      outfile << internal_data_pt(0)->value(0) << endl;
+      outfile << internal_data_pt(0)->value(0) << std::endl;
     }
 
 

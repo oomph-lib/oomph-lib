@@ -201,7 +201,7 @@ namespace oomph
 
     void set_boundary_conditions()
     {
-      oomph_info << "set_boundary_conditions" << endl;
+      oomph_info << "set_boundary_conditions" << std::endl;
 
       // Find a node in the interior of the domain and pin it.
       bool has_node_been_found = false;
@@ -223,7 +223,7 @@ namespace oomph
           const unsigned pressure_index = 2;
           node_pt->pin(pressure_index);
           node_pt->set_value(pressure_index, 0.0);
-          oomph_info << node_pt->x(0) << ", " << node_pt->x(1) << " " << endl;
+          oomph_info << node_pt->x(0) << ", " << node_pt->x(1) << " " << std::endl;
           has_node_been_found = true;
         }
         else
@@ -287,7 +287,7 @@ namespace oomph
   template<class ELEMENT>
   void AxisymSectorProblem<ELEMENT>::add_bulk_mesh()
   {
-    oomph_info << "add_bulk_mesh" << endl;
+    oomph_info << "add_bulk_mesh" << std::endl;
 
     // Generate the mesh using the template ELEMENT
     Bulk_mesh_pt = new RefinedSectorTriMesh<ELEMENT>(
@@ -305,7 +305,7 @@ namespace oomph
   template<class ELEMENT>
   void AxisymSectorProblem<ELEMENT>::create_slip_elements()
   {
-    oomph_info << "create_slip_elements" << endl;
+    oomph_info << "create_slip_elements" << std::endl;
 
     unsigned b = Slip_boundary_id;
 
@@ -341,7 +341,7 @@ namespace oomph
   template<class ELEMENT>
   void AxisymSectorProblem<ELEMENT>::create_no_penetration1_elements()
   {
-    oomph_info << "create_no_penetration1_elements" << endl;
+    oomph_info << "create_no_penetration1_elements" << std::endl;
 
     // How many bulk elements are adjacent to boundary b?
     unsigned n_element = Bulk_mesh_pt->nboundary_element(Slip_boundary_id);
@@ -372,7 +372,7 @@ namespace oomph
   template<class ELEMENT>
   void AxisymSectorProblem<ELEMENT>::create_no_penetration2_elements()
   {
-    oomph_info << "create_no_penetration2_elements" << endl;
+    oomph_info << "create_no_penetration2_elements" << std::endl;
 
     // How many bulk elements are adjacent to boundary b?
     unsigned n_element =
@@ -433,7 +433,7 @@ namespace oomph
       }
     }
     // If not found, issue warning and return anyway
-    oomph_info << "Warning: No corner node found!" << endl;
+    oomph_info << "Warning: No corner node found!" << std::endl;
 
     return;
   }
@@ -443,7 +443,7 @@ namespace oomph
   {
     unsigned doc_number = Doc_info.number();
 
-    oomph_info << "Doc Number: " << doc_number << endl;
+    oomph_info << "Doc Number: " << doc_number << std::endl;
 
     std::ofstream output_stream;
     char filename[100];
@@ -486,7 +486,7 @@ namespace oomph
     //            Doc_info.directory().c_str(),
     //            Doc_info.number());
     //    output_stream.open(filename);
-    //    output_stream << "x,y,p," << endl;
+    //    output_stream << "x,y,p," << std::endl;
     //    Pressure_contribution_mesh_1_pt->output(output_stream, npts);
     //    output_stream.close();
     //
@@ -495,7 +495,7 @@ namespace oomph
     //            Doc_info.directory().c_str(),
     //            Doc_info.number());
     //    output_stream.open(filename);
-    //    output_stream << "x,y,p," << endl;
+    //    output_stream << "x,y,p," << std::endl;
     //    Pressure_contribution_mesh_2_pt->output(output_stream, npts);
     //    output_stream.close();
 
@@ -504,7 +504,7 @@ namespace oomph
             Doc_info.directory().c_str(),
             Doc_info.number());
     output_stream.open(filename);
-    output_stream << "x,y,l_x,l_y,n_x,n_y,u_w,v_w,z_w,u,v,w,p" << endl;
+    output_stream << "x,y,l_x,l_y,n_x,n_y,u_w,v_w,z_w,u,v,w,p" << std::endl;
     Slip_boundary_mesh_pt->output(output_stream, npts);
     output_stream.close();
 
@@ -513,7 +513,7 @@ namespace oomph
             Doc_info.directory().c_str(),
             Doc_info.number());
     output_stream.open(filename);
-    output_stream << "x,y,u,v,p,lagrange_multiplier,nx,ny," << endl;
+    output_stream << "x,y,u,v,p,lagrange_multiplier,nx,ny," << std::endl;
     No_penetration_boundary_mesh1_pt->output(output_stream, 3);
     output_stream.close();
 
@@ -522,7 +522,7 @@ namespace oomph
             Doc_info.directory().c_str(),
             Doc_info.number());
     output_stream.open(filename);
-    output_stream << "x,y,u,v,p,lagrange_multiplier,nx,ny," << endl;
+    output_stream << "x,y,u,v,p,lagrange_multiplier,nx,ny," << std::endl;
     No_penetration_boundary_mesh2_pt->output(output_stream, 3);
     output_stream.close();
 

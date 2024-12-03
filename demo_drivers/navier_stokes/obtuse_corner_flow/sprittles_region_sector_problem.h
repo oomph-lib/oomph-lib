@@ -144,7 +144,7 @@ namespace oomph
     void create_singular_elements()
     {
       // Create the other meshes
-      cout << "Make augmented elements" << endl;
+      cout << "Make augmented elements" << std::endl;
       create_singularity_scaling_elements();
       create_pressure_contribution_1_elements();
       create_pressure_contribution_2_elements();
@@ -172,7 +172,7 @@ namespace oomph
 
     void set_contact_line_node_pt()
     {
-      oomph_info << "set_contact_line_node_pt" << endl;
+      oomph_info << "set_contact_line_node_pt" << std::endl;
 
       unsigned element_index;
       unsigned node_index;
@@ -197,7 +197,7 @@ namespace oomph
               this->doc_info_pt()->number());
       std::ofstream output_stream;
       output_stream.open(filename);
-      output_stream << "x,y,n_x,n_y,t_x,t_y" << endl;
+      output_stream << "x,y,n_x,n_y,t_x,t_y" << std::endl;
       const unsigned npts = 3;
       Eigensolution_slip_mesh_pt->output(output_stream, npts);
       output_stream.close();
@@ -207,7 +207,7 @@ namespace oomph
               this->doc_info_pt()->directory().c_str(),
               this->doc_info_pt()->number());
       output_stream.open(filename);
-      output_stream << "scaling" << endl;
+      output_stream << "scaling" << std::endl;
       dynamic_cast<SingularNavierStokesSolutionElement<ELEMENT>*>(
         Singularity_scaling_mesh_pt->element_pt(0))
         ->output(output_stream);
@@ -237,7 +237,7 @@ namespace oomph
 
     void setup_mesh_interaction()
     {
-      oomph_info << "setup_mesh_interaction" << endl;
+      oomph_info << "setup_mesh_interaction" << std::endl;
 
       SingularNavierStokesSolutionElement<ELEMENT>* singular_el_pt =
         dynamic_cast<SingularNavierStokesSolutionElement<ELEMENT>*>(
@@ -272,7 +272,7 @@ namespace oomph
   template<class ELEMENT>
   void SprittlesRegionSectorProblem<ELEMENT>::create_slip_eigen_elements()
   {
-    oomph_info << "create_slip_eigen_elements" << endl;
+    oomph_info << "create_slip_eigen_elements" << std::endl;
 
     // Loop over the free surface boundary and create the "interface elements
     unsigned b = Inner_slip_boundary_id;
@@ -308,7 +308,7 @@ namespace oomph
   template<class ELEMENT>
   void SprittlesRegionSectorProblem<ELEMENT>::create_traction_eigen_elements()
   {
-    oomph_info << "create_traction_eigen_elements" << endl;
+    oomph_info << "create_traction_eigen_elements" << std::endl;
 
     // Loop over the free surface boundary and create the "interface elements
     for (unsigned b = 3; b < 6; b++)
@@ -346,7 +346,7 @@ namespace oomph
   void SprittlesRegionSectorProblem<
     ELEMENT>::create_singularity_scaling_elements()
   {
-    oomph_info << "create_singularity_scaling_elements" << endl;
+    oomph_info << "create_singularity_scaling_elements" << std::endl;
     SingularNavierStokesSolutionElement<ELEMENT>* el_pt =
       new SingularNavierStokesSolutionElement<ELEMENT>;
 
@@ -415,7 +415,7 @@ namespace oomph
       }
     }
     // If not found, issue warning and return anyway
-    oomph_info << "Warning: No corner node found!" << endl;
+    oomph_info << "Warning: No corner node found!" << std::endl;
 
     return;
   }

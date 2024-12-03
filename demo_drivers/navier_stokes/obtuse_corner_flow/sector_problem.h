@@ -207,7 +207,7 @@ namespace oomph
 
     void set_boundary_conditions()
     {
-      oomph_info << "set_boundary_conditions" << endl;
+      oomph_info << "set_boundary_conditions" << std::endl;
 
       // Find a node in the interior of the domain and pin it.
       bool has_node_been_found = false;
@@ -229,7 +229,7 @@ namespace oomph
           const unsigned pressure_index = 2;
           node_pt->pin(pressure_index);
           node_pt->set_value(pressure_index, 0.0);
-          oomph_info << node_pt->x(0) << ", " << node_pt->x(1) << " " << endl;
+          oomph_info << node_pt->x(0) << ", " << node_pt->x(1) << " " << std::endl;
           has_node_been_found = true;
         }
         else
@@ -329,7 +329,7 @@ namespace oomph
   template<class ELEMENT>
   void SectorProblem<ELEMENT>::add_bulk_mesh()
   {
-    oomph_info << "add_bulk_mesh" << endl;
+    oomph_info << "add_bulk_mesh" << std::endl;
 
     // Generate the mesh using the template ELEMENT
     Bulk_mesh_pt = new RefinedSectorTriMesh<ELEMENT>(
@@ -347,7 +347,7 @@ namespace oomph
   template<class ELEMENT>
   void SectorProblem<ELEMENT>::create_slip_elements()
   {
-    oomph_info << "create_slip_elements" << endl;
+    oomph_info << "create_slip_elements" << std::endl;
 
     unsigned b = Slip_boundary_id;
 
@@ -383,38 +383,7 @@ namespace oomph
   template<class ELEMENT>
   void SectorProblem<ELEMENT>::create_no_penetration1_elements()
   {
-    oomph_info << "create_no_penetration1_elements" << endl;
-
-    // How many bulk elements are adjacent to boundary b?
-    unsigned n_element = Bulk_mesh_pt->nboundary_element(Slip_boundary_id);
-
-    // Loop over the bulk elements adjacent to boundary b?
-    for (unsigned e = 0; e < n_element; e++)
-    {
-      // Get pointer to the bulk element that is adjacent to boundary
-      // b
-      ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(
-        Bulk_mesh_pt->boundary_element_pt(Slip_boundary_id, e));
-
-      // What is the index of the face of element e along boundary b
-      int face_index =
-        Bulk_mesh_pt->face_index_at_boundary(Slip_boundary_id, e);
-
-      // Build the corresponding slip element
-      ImposeImpenetrabilityElement<ELEMENT>* no_penetration_element_pt =
-        new ImposeImpenetrabilityElement<ELEMENT>(
-          bulk_elem_pt, face_index, Slip_boundary_id);
-
-      // Add the prescribed-flux element to the surface mesh
-      No_penetration_boundary_mesh1_pt->add_element_pt(
-        no_penetration_element_pt);
-    }
-  }
-
-  template<class ELEMENT>
-  void SectorProblem<ELEMENT>::create_no_penetration2_elements()
-  {
-    oomph_info << "create_no_penetration2_elements" << endl;
+    oomph_info << "create_no_penetration1_elements" << std::endl;
 
     // How many bulk elements are adjacent to boundary b?
     unsigned n_element =
@@ -446,7 +415,7 @@ namespace oomph
   template<class ELEMENT>
   void SectorProblem<ELEMENT>::create_far_field_elements()
   {
-    oomph_info << "create_far_field_elements" << endl;
+    oomph_info << "create_far_field_elements" << std::endl;
 
     // Loop over the free surface boundary and create the "interface elements
     unsigned b = Far_field_boundary_id;
@@ -506,7 +475,7 @@ namespace oomph
       }
     }
     // If not found, issue warning and return anyway
-    oomph_info << "Warning: No corner node found!" << endl;
+    oomph_info << "Warning: No corner node found!" << std::endl;
 
     return;
   }
@@ -516,7 +485,7 @@ namespace oomph
   {
     unsigned doc_number = Doc_info.number();
 
-    oomph_info << "Doc Number: " << doc_number << endl;
+    oomph_info << "Doc Number: " << doc_number << std::endl;
 
     std::ofstream output_stream;
     char filename[100];
@@ -559,7 +528,7 @@ namespace oomph
     //            Doc_info.directory().c_str(),
     //            Doc_info.number());
     //    output_stream.open(filename);
-    //    output_stream << "x,y,p," << endl;
+    //    output_stream << "x,y,p," << std::endl;
     //    Pressure_contribution_mesh_1_pt->output(output_stream, npts);
     //    output_stream.close();
     //
@@ -568,7 +537,7 @@ namespace oomph
     //            Doc_info.directory().c_str(),
     //            Doc_info.number());
     //    output_stream.open(filename);
-    //    output_stream << "x,y,p," << endl;
+    //    output_stream << "x,y,p," << std::endl;
     //    Pressure_contribution_mesh_2_pt->output(output_stream, npts);
     //    output_stream.close();
 
@@ -577,7 +546,7 @@ namespace oomph
             Doc_info.directory().c_str(),
             Doc_info.number());
     output_stream.open(filename);
-    output_stream << "x,y,l_x,l_y,n_x,n_y,u,v,p" << endl;
+    output_stream << "x,y,l_x,l_y,n_x,n_y,u,v,p" << std::endl;
     Slip_boundary_mesh_pt->output(output_stream, npts);
     output_stream.close();
 
@@ -586,7 +555,7 @@ namespace oomph
             Doc_info.directory().c_str(),
             Doc_info.number());
     output_stream.open(filename);
-    output_stream << "x,y,u,v,p,lagrange_multiplier,nx,ny," << endl;
+    output_stream << "x,y,u,v,p,lagrange_multiplier,nx,ny," << std::endl;
     No_penetration_boundary_mesh1_pt->output(output_stream, 3);
     output_stream.close();
 
@@ -595,7 +564,7 @@ namespace oomph
             Doc_info.directory().c_str(),
             Doc_info.number());
     output_stream.open(filename);
-    output_stream << "x,y,u,v,p,lagrange_multiplier,nx,ny," << endl;
+    output_stream << "x,y,u,v,p,lagrange_multiplier,nx,ny," << std::endl;
     No_penetration_boundary_mesh2_pt->output(output_stream, 3);
     output_stream.close();
 
@@ -606,7 +575,7 @@ namespace oomph
     output_stream.open(filename);
     output_stream
       << "x,y,n_x,n_y,u_x,u_y,du_xdr,du_ydr,du_xdtheta,du_ydtheta,l_x,l_y"
-      << endl;
+      << std::endl;
     Far_field_mesh_pt->output(output_stream);
     output_stream.close();
 
