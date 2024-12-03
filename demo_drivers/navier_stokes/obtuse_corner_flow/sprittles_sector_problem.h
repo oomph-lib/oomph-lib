@@ -138,7 +138,7 @@ namespace oomph
     void create_singular_elements()
     {
       // Create the other meshes
-      cout << "Make augmented elements" << std::endl;
+      std::cout << "Make augmented elements" << std::endl;
       create_singularity_scaling_elements();
       create_pressure_contribution_1_elements();
       create_pressure_contribution_2_elements();
