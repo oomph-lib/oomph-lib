@@ -65,7 +65,7 @@ $(srcdir)/frontal.f:
 	if [ ! -f $(srcdir)/frontal.f ]; then \
 	  if [ -f $(srcdir)/../../private/external_src/hsl/frontal.f ]; then \
 	      echo "Creating link to private/external_src/hsl/frontal.f"; \
-	      ln -s $(srcdir)/../../private/external_src/hsl/frontal.f $(srcdir); \
+	      ln -sf $(srcdir)/../../private/external_src/hsl/frontal.f $(srcdir); \
 	  fi; \
 	  touch $(srcdir)/frontal.f; \
 	fi; 
