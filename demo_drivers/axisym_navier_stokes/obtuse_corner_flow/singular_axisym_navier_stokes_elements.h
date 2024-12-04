@@ -507,6 +507,21 @@ namespace oomph
       }
     }
 
+    void pin_total_velocity()
+    {
+      if (this->IsAugmented)
+      {
+        for (unsigned i_node = 0; i_node < this->nnode(); i_node++)
+        {
+          for (unsigned i_u = 0; i_u < this->n_u_nst(); i_u++)
+          {
+            this->node_pt(i_node)->pin(
+              this->total_velocity_eqn_index(i_node, i_u));
+          }
+        }
+      }
+    }
+
     void pin_total_velocity_eqn(const unsigned& i_node, const unsigned& i_dim)
     {
       if (this->IsAugmented)
@@ -674,16 +689,8 @@ namespace oomph
         }
 
         // Total velocity
-        Vector<double> velocity(this->n_u_nst(), 0.0);
+        Vector<double> velocity = interpolated_u_reconstructed(s);
 
-        if (IsAugmented)
-        {
-          velocity = interpolated_u_reconstructed(s);
-        }
-        else
-        {
-          this->interpolated_u_axi_nst(s, velocity);
-        }
         for (unsigned i = 0; i < this->n_u_nst(); i++)
         {
           outfile << velocity[i] << " ";
@@ -710,14 +717,29 @@ namespace oomph
         {
           // Finite element Velocity
           Vector<double> velocity_fe_only(this->n_u_nst(), 0.0);
-          if (this->IsAugmented)
-          {
-            this->interpolated_u_axi_nst(s, velocity_fe_only);
-          }
+          this->interpolated_u_axi_nst(s, velocity_fe_only);
 
           for (unsigned i = 0; i < this->n_u_nst(); i++)
           {
             outfile << velocity_fe_only[i] << " ";
+          }
+
+          if (IsStressOutputIncluded)
+          {
+            // Singular stress
+            DenseMatrix<double> stress_tensor_tilde(
+              this->n_u_nst(), cached_dim, 0.0);
+            if (this->IsAugmented)
+            {
+              stress_tensor_tilde = interpolated_stress_tensor_tilde(s);
+            }
+            for (unsigned i = 0; i < this->n_u_nst(); i++)
+            {
+              for (unsigned j = 0; j < cached_dim; j++)
+              {
+                outfile << stress_tensor_tilde(i, j) << " ";
+              }
+            }
           }
 
           // Singular Velocity
@@ -1073,10 +1095,62 @@ namespace oomph
       const double visc_ratio = this->viscosity_ratio();
       for (unsigned i = 0; i < cached_dim; i++)
       {
-        stress_tensor(i, i) += interpolated_p;
+        stress_tensor(i, i) -= interpolated_p;
         for (unsigned j = 0; j < cached_dim; j++)
         {
-          stress_tensor(i, j) -=
+          stress_tensor(i, j) +=
+            visc_ratio * (interpolated_dudx(i, j) +
+                          this->Gamma[i] * interpolated_dudx(j, i));
+        }
+      }
+
+      return stress_tensor;
+    }
+
+    DenseMatrix<double> interpolated_stress_tensor_tilde(
+      const Vector<double>& s)
+    {
+      // Find number of nodes
+      const unsigned n_node = this->nnode();
+
+      // Find the dimension of the problem
+      const unsigned cached_dim = this->dim();
+
+      // Local shape function
+      Shape psif(n_node);
+      DShape dpsifdx(n_node, cached_dim);
+
+      // Find values of shape function
+      this->dshape_eulerian(s, psif, dpsifdx);
+
+      // Get the velocity gradient
+      double interpolated_p = this->interpolated_p_axi_nst(s);
+      DenseMatrix<double> interpolated_dudx(cached_dim, cached_dim, 0.0);
+      // Loop over the local nodes and sum
+      for (unsigned l = 0; l < n_node; l++)
+      {
+        // Loop over the spatial directions
+        for (unsigned i = 0; i < cached_dim; i++)
+        {
+          const double u_value =
+            this->nodal_value(l, this->u_index_axi_nst(l, i));
+          for (unsigned j = 0; j < cached_dim; j++)
+          {
+            interpolated_dudx(i, j) += u_value * dpsifdx(l, j);
+          }
+        }
+      }
+
+      // Construct the stress tensor
+      // Loop over the spatial directions
+      DenseMatrix<double> stress_tensor(cached_dim, cached_dim, 0.0);
+      const double visc_ratio = this->viscosity_ratio();
+      for (unsigned i = 0; i < cached_dim; i++)
+      {
+        stress_tensor(i, i) -= interpolated_p;
+        for (unsigned j = 0; j < cached_dim; j++)
+        {
+          stress_tensor(i, j) +=
             visc_ratio * (interpolated_dudx(i, j) +
                           this->Gamma[i] * interpolated_dudx(j, i));
         }
@@ -1106,7 +1180,7 @@ namespace oomph
         {
           for (unsigned j = 0; j < cached_dim; j++)
           {
-            stress_tensor(i, j) -=
+            stress_tensor(i, j) +=
               visc_ratio * (grad_u_bar_local[i][j] +
                             this->Gamma[i] * grad_u_bar_local[j][i]);
           }
@@ -2028,10 +2102,15 @@ namespace oomph
             // If it is not pinned
             if (local_eqn >= 0)
             {
+              Vector<double> pos_n(2, 0.0);
+              for (unsigned k = 0; k < 2; k++)
+              {
+                pos_n[k] = this->nodal_position(l, k);
+              }
               residuals[local_eqn] +=
                 (this->nodal_value(l, u_reconstructed_index(l, i)) -
                  (this->nodal_value(l, u_index_axi_nst(l, i)) +
-                  u_bar_local[i]));
+                  u_bar(pos_n, i)));
 
               // Jacobian
               if (flag)
@@ -2039,8 +2118,7 @@ namespace oomph
                 Vector<Vector<double>> u_hat_local2(n_sing);
                 for (unsigned s = 0; s < n_sing; s++)
                 {
-                  u_hat_local2[s] =
-                    this->velocity_singular_function(s, interpolated_x);
+                  u_hat_local2[s] = this->velocity_singular_function(s, pos_n);
                 }
 
                 // Singular contribution
