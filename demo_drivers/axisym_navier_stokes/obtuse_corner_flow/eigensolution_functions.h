@@ -198,13 +198,14 @@ namespace oomph
              Vector<double>& result) -> void
     {
       Vector<Vector<double>> grad_u = grad_velocity_singular_fct(x);
-      // traction = - (grad u + grad u ^ T) dot unit normal
+
+      // traction = dot unit normal
       const unsigned dim = x.size();
       for (unsigned i = 0; i < dim; i++)
       {
         for (unsigned j = 0; j < dim; j++)
         {
-          result[i] -= (grad_u[i][j] + grad_u[j][i]) * n[j];
+          result[i] += (grad_u[i][j] + grad_u[j][i]) * n[j];
         }
       }
     };
