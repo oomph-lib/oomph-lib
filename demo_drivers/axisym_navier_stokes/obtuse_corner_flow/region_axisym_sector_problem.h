@@ -228,7 +228,8 @@ namespace oomph
           const unsigned pressure_index = 2;
           node_pt->pin(pressure_index);
           node_pt->set_value(pressure_index, 0.0);
-          oomph_info << node_pt->x(0) << ", " << node_pt->x(1) << " " << std::endl;
+          oomph_info << node_pt->x(0) << ", " << node_pt->x(1) << " "
+                     << std::endl;
           has_node_been_found = true;
         }
         else
