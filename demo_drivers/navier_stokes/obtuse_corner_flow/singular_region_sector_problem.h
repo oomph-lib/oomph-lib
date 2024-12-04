@@ -109,7 +109,7 @@ namespace oomph
       // Create the other meshes
       if (!Augmented_bulk_element_number.empty())
       {
-        cout << "Make augmented elements" << std::endl;
+        std::cout << "Make augmented elements" << std::endl;
         create_singularity_scaling_elements();
         create_pressure_contribution_1_elements();
         create_pressure_contribution_2_elements();
