@@ -12,7 +12,7 @@
 #include "eigensolution_functions.h"
 #include "pressure_evaluation_elements.h"
 #include "point_pressure_evaluation_elements.h"
-#include "singular_fluid_traction_elements.h"
+#include "singular_axisym_fluid_traction_elements.h"
 
 namespace oomph
 {
@@ -28,6 +28,7 @@ namespace oomph
     Mesh* Pressure_contribution_mesh_1_pt;
     Mesh* Pressure_contribution_mesh_2_pt;
     Mesh* Eigensolution_slip_mesh_pt;
+    Mesh* Eigensolution_traction_mesh_pt;
 
     std::function<Vector<double>(const Vector<double>&)>
       Velocity_singular_function;
@@ -40,6 +41,12 @@ namespace oomph
                        const Vector<double>&,
                        Vector<double>&)>
       Eigensolution_slip_function;
+
+    std::function<void(const double&,
+                       const Vector<double>&,
+                       const Vector<double>&,
+                       Vector<double>&)>
+      Eigensolution_traction_function;
 
 
   public:
@@ -79,6 +86,11 @@ namespace oomph
       Eigensolution_slip_function = eigensolution_slip_function_factory(
         this->my_parameters().slip_length, Velocity_singular_function);
 
+      Eigensolution_traction_function = eigensolution_traction_function_factory(
+        this->my_parameters().sector_angle,
+        Contact_line_node_pt,
+        Grad_velocity_singular_function);
+
       create_singular_elements();
 
       // fix_c(1.0);
@@ -93,12 +105,13 @@ namespace oomph
       // Create the other meshes
       if (!Augmented_bulk_element_number.empty())
       {
-        cout << "Make augmented elements" << std::endl;
+        std::cout << "Make augmented elements" << std::endl;
         create_singularity_scaling_elements();
         create_pressure_contribution_1_elements();
         create_pressure_contribution_2_elements();
 
         create_slip_eigen_elements();
+        // create_traction_eigen_elements();
 
         // Setup the mesh interaction between the bulk and singularity meshes
         setup_mesh_interaction();
@@ -109,6 +122,8 @@ namespace oomph
     {
       Eigensolution_slip_mesh_pt = new Mesh;
       this->add_sub_mesh(Eigensolution_slip_mesh_pt);
+      Eigensolution_traction_mesh_pt = new Mesh;
+      this->add_sub_mesh(Eigensolution_traction_mesh_pt);
       Singularity_scaling_mesh_pt = new Mesh;
       this->add_sub_mesh(Singularity_scaling_mesh_pt);
       Pressure_contribution_mesh_1_pt = new Mesh;
@@ -151,6 +166,7 @@ namespace oomph
           el_pt->add_additional_terms();
 
           el_pt->swap_unknowns();
+          // el_pt->pin_total_velocity();
 
           Augmented_bulk_element_number.push_back(e);
           // el_pt->pin_fluid();
@@ -213,6 +229,7 @@ namespace oomph
 
   private:
     void create_slip_eigen_elements();
+    void create_traction_eigen_elements();
     void create_singularity_scaling_elements();
     void create_pressure_contribution_1_elements();
     void create_pressure_contribution_2_elements();
@@ -267,8 +284,8 @@ namespace oomph
         int face_index = this->bulk_mesh_pt()->face_index_at_boundary(b, e);
 
         // Create new element
-        SingularNavierStokesTractionElement<ELEMENT>* el_pt =
-          new SingularNavierStokesTractionElement<ELEMENT>(
+        SingularAxisymNavierStokesTractionElement<ELEMENT>* el_pt =
+          new SingularAxisymNavierStokesTractionElement<ELEMENT>(
             bulk_elem_pt,
             face_index,
             Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0));
@@ -277,6 +294,46 @@ namespace oomph
 
         // Add it to the mesh
         Eigensolution_slip_mesh_pt->add_element_pt(el_pt);
+      }
+    }
+  }
+
+  template<class ELEMENT>
+  void SingularAxisymSectorProblem<ELEMENT>::create_traction_eigen_elements()
+  {
+    oomph_info << "create_traction_eigen_elements" << std::endl;
+
+    // Loop over the free surface boundary and create the "interface elements
+    for (unsigned b = 0; b < 3; b++)
+    {
+      // How many bulk fluid elements are adjacent to boundary b?
+      unsigned n_element = this->bulk_mesh_pt()->nboundary_element(b);
+
+      // Loop over the bulk fluid elements adjacent to boundary b?
+      for (unsigned e = 0; e < n_element; e++)
+      {
+        // Get pointer to the bulk fluid element that is
+        // adjacent to boundary b
+        ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(
+          this->bulk_mesh_pt()->boundary_element_pt(b, e));
+
+        if (bulk_elem_pt->is_augmented())
+        {
+          // Find the index of the face of element e along boundary b
+          int face_index = this->bulk_mesh_pt()->face_index_at_boundary(b, e);
+
+          // Create new element
+          SingularAxisymNavierStokesTractionElement<ELEMENT>* el_pt =
+            new SingularAxisymNavierStokesTractionElement<ELEMENT>(
+              bulk_elem_pt,
+              face_index,
+              Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0));
+
+          el_pt->set_traction_fct(Eigensolution_traction_function);
+
+          // Add it to the mesh
+          Eigensolution_traction_mesh_pt->add_element_pt(el_pt);
+        }
       }
     }
   }
