@@ -37,7 +37,6 @@
 
 #include <functional>
 
-
 // OOMPH-LIB headers
 #include "../generic/Qelements.h"
 #include "../generic/Telements.h"
@@ -208,7 +207,7 @@ namespace oomph
     }
 
 
-    // Access function for the imposed traction pointer
+    // Access function for the imposed traction function
     void set_traction_fct(
       const std::function<void(const double&,
                                const Vector<double>&,

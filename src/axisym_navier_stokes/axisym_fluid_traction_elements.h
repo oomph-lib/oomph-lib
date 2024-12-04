@@ -34,6 +34,7 @@
 #include <oomph-lib-config.h>
 #endif
 
+#include <functional>
 
 // OOMPH-LIB headers
 #include "../generic/shape.h"
@@ -43,23 +44,6 @@
 
 namespace oomph
 {
-  //=======================================================================
-  /// Namespace containing the zero traction function for axisymmetric
-  /// Navier Stokes traction elements
-  //=======================================================================
-  namespace AxisymmetricNavierStokesTractionElementHelper
-  {
-    //=======================================================================
-    /// Default load function (zero traction)
-    //=======================================================================
-    extern void Zero_traction_fct(const double& time,
-                                  const Vector<double>& x,
-                                  const Vector<double>& N,
-                                  Vector<double>& load);
-
-  } // namespace AxisymmetricNavierStokesTractionElementHelper
-
-
   //======================================================================
   /// A class for elements that allow the imposition of an applied traction
   /// in the axisym Navier Stokes eqns.
@@ -72,6 +56,10 @@ namespace oomph
     : public virtual FaceGeometry<ELEMENT>,
       public virtual NavierStokesFaceElement
   {
+  private:
+    /// The highest dimension of the problem
+    unsigned Dim;
+
   protected:
     /// Pointer to an imposed traction function. Arguments:
     /// Eulerian coordinate; outer unit normal;
@@ -82,6 +70,12 @@ namespace oomph
                             const Vector<double>& x,
                             const Vector<double>& n,
                             Vector<double>& result);
+
+    std::function<void(const double&,
+                       const Vector<double>&,
+                       const Vector<double>&,
+                       Vector<double>&)>
+      Traction_fct;
 
 
     /// Get the traction vector: Pass number of integration point
@@ -95,7 +89,28 @@ namespace oomph
                               const Vector<double>& n,
                               Vector<double>& traction) const
     {
-      Traction_fct_pt(time, x, n, traction);
+      // Default to the traction function
+      if (Traction_fct)
+      {
+        Traction_fct(time, x, n, traction);
+      }
+      else
+      {
+        // If the function pointer is zero return zero
+        if (Traction_fct_pt == 0)
+        {
+          // Loop over dimensions and set body forces to zero
+          for (unsigned i = 0; i < Dim; i++)
+          {
+            traction[i] = 0.0;
+          }
+        }
+        // Otherwise call the function
+        else
+        {
+          (*Traction_fct_pt)(time, x, n, traction);
+        }
+      }
     }
 
     virtual inline int axi_nst_momentum_local_eqn(const unsigned& n,
@@ -124,8 +139,10 @@ namespace oomph
       element_pt->build_face_element(face_index, this);
 
       // Zero traction
-      Traction_fct_pt =
-        &AxisymmetricNavierStokesTractionElementHelper::Zero_traction_fct;
+      Traction_fct_pt = 0;
+
+      // Set the dimension from the dimension of the first node
+      Dim = this->node_pt(0)->ndim();
     }
 
 
@@ -138,6 +155,15 @@ namespace oomph
       return Traction_fct_pt;
     }
 
+    // Access function for the imposed traction function
+    void set_traction_fct(
+      const std::function<void(const double&,
+                               const Vector<double>&,
+                               const Vector<double>&,
+                               Vector<double>&)>& traction_fct)
+    {
+      Traction_fct = traction_fct;
+    }
 
     /// Return the residuals
     void fill_in_contribution_to_residuals(Vector<double>& residuals)
