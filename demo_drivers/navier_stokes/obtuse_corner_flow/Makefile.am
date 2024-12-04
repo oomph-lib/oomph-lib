@@ -1,6 +1,12 @@
 #Include commands common to every Makefile.am
 include $(top_srcdir)/config/makefile_templates/demo_drivers
 
+paraview: RESLT_fix/soln0.vtu structured_with_correction parameters.dat
+	paraview RESLT_fix/soln0.vtu 
+
+paraview_region: RESLT_fix_region/soln0.vtu structured_with_correction_region parameters.dat
+	paraview RESLT_fix_region/soln0.vtu 
+
 %.vtu: %.dat
 	../../../bin/oomph-convert.py $<
 
