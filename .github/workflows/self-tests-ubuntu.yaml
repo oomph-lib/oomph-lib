@@ -99,7 +99,7 @@ jobs:
       # uploaded and reviewed later on
       - name: Validate
         id: self_tests
-        run: ./bin/parallel_self_test.py -l demo_drivers/interaction/elastic_bretherton
+        run: ./bin/parallel_self_test.py
         continue-on-error: true
 
       - name: Upload validation log file
