@@ -35,7 +35,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/eigen_solver_test_lapack.dat.gz  \
-         eigen_solver_test_lapack.dat >> validation.log
+         eigen_solver_test_lapack.dat 0.1 1e-13 >> validation.log
 fi
 rm -rf RESLT_lapack
 #-----------------------------------------

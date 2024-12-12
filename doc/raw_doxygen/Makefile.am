@@ -10,7 +10,7 @@ noinst_SCRIPTS = html/index.html
 html/index.html: raw_doxygen.h
         # Make, then kill symbolic link, but don't delete the directory itself!
 #	if [ -L extra_latex_style_files ]; then rm -f extra_latex_style_files; fi
-#	if [ ! -d extra_latex_style_files ]; then ln -s $(top_srcdir)/doc/extra_latex_style_files; fi
+#	if [ ! -d extra_latex_style_files ]; then ln -sf $(top_srcdir)/doc/extra_latex_style_files; fi
 	doxygen
 
 EXTRA_DIST = Doxyfile
