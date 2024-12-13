@@ -3100,20 +3100,20 @@ namespace oomph
     }
 
     /// Access function to the error in the linear solver
-    bool get_linear_solver_error()
+    bool linear_solver_error()
     {
       return Linear_solver_error;
     }
 
     /// Access function to Max. # of iterations performed when the Newton solver
     /// died
-    unsigned get_iterations()
+    unsigned iterations()
     {
       return Iterations;
     }
 
     /// Access function to Max. residual when Newton solver died
-    double get_maxres()
+    double maxres()
     {
       return Maxres;
     }
