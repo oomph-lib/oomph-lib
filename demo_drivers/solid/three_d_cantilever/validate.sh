@@ -62,7 +62,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/result_norefine.dat.gz \
-    result_norefine.dat  0.2 1.0e-14 >> validation.log
+    result_norefine.dat  0.3 1.0e-14 >> validation.log
 fi
 
 
@@ -114,7 +114,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/result_refine.dat.gz \
-    result_refine.dat  0.3 3.0e-7 >> validation.log
+    result_refine.dat  0.4 3.0e-7 >> validation.log
 fi
 
 

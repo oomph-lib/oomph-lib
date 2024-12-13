@@ -1,6 +1,13 @@
 name: macOS self-tests
 
-on: push
+# IMPORTANT: A schedule workflow action *must* be placed on the default branch
+# of the repository. Only then will it run as scheduled. It is also placed in a
+# queue when scheduled, so it may not run exactly at the requested time.
+on:
+  push: # Run when the branch is pushed to
+  schedule:
+    - cron: '0 0 1 * *'  # Every month on the first at midnight UTC
+  # Calculated using crontab.guru. See here: https://crontab.guru/#1_0_1_1_*.
 
 jobs:
   build:
