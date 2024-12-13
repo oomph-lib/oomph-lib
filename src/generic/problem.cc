@@ -16364,8 +16364,7 @@ namespace oomph
           // Check to see whether we have reached Max_iterations
           if (error.iterations() == Max_newton_iterations)
           {
-            oomph_info << "MAXIMUM NUMBER OF ITERATIONS ("
-                       << error.iterations()
+            oomph_info << "MAXIMUM NUMBER OF ITERATIONS (" << error.iterations()
                        << ") REACHED WITHOUT CONVERGENCE " << std::endl;
           }
           // If not, it must be that we have exceeded the maximum residuals
