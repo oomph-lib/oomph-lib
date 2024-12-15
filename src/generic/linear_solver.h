@@ -117,7 +117,6 @@ namespace oomph
     {
       Doc_time = false;
     }
-
     /// Is documentation of solve times enabled?
     bool is_doc_time_enabled() const
     {
@@ -663,6 +662,20 @@ namespace oomph
     {
       Serial_compressed_row_flag = false;
     }
+
+    /// Wrapper to SuperLU's dgscon() which computes the (reciprocal of the)
+    /// condition number of a matrix. This version assumes we're computing the
+    /// condition number of a matrix which has already been factorised and who's
+    /// LU factors are in this object's internal storage; it therefore only
+    /// requires the infinity-norm to be passed in.
+    double compute_condition_number(const double& inf_norm);
+
+    /// Wrapper to SuperLU's dgscon() which computes the (reciprocal of the)
+    /// condition number of a matrix. This version assumes we haven't yet
+    /// factorised the matrix and so first performs the LU decomposition (the
+    /// factors of which are then stored internally), then computes the matrix
+    /// norm which is passed to the matrix-less overload of this function.
+    double compute_condition_number(DoubleMatrixBase* const& matrix_pt);
 
 #ifdef OOMPH_HAS_MPI
 
