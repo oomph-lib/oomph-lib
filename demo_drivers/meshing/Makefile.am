@@ -8,6 +8,7 @@ mesh_from_xfig_triangle \
 mesh_from_vmtk \
 quad_from_triangle_mesh \
 quadratic_vmtk_tetgen \
+mesh_from_another_mesh_poisson \
 adaptive_tet_meshes
 
 

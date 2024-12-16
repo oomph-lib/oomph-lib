@@ -37,7 +37,9 @@
 namespace oomph
 {
   //======================================================================
-  /// Build mesh from the structure and geometry of another mesh.
+  /// Build mesh from the structure and geometry of another mesh but 
+  /// replace element by a different type (passed in via the template 
+  /// parameter as usual).
   /// A lot of this code is repeated in the construction of the mesh from
   /// the scaffold mesh.
   //======================================================================
@@ -48,13 +50,22 @@ namespace oomph
   {
     /// Check original element and current element have the same number of
     /// nodes and structure etc.
+    if(!orig_mesh_pt->element_pt(0)){
+      std::ostringstream error_message;
+      error_message
+        << "Original mesh has no elements. This is odd, so I'm crashing.\n";
+      throw OomphLibError(error_message.str(),
+                          "TriangleMesh::build_from_another_mesh()",
+                          OOMPH_EXCEPTION_LOCATION);
+    }
     ORIG_ELEMENT* example_orig_element_pt =
       dynamic_cast<ORIG_ELEMENT*>(orig_mesh_pt->element_pt(0));
     const unsigned orig_n_node = example_orig_element_pt->nnode();
 
-    /// Construct the elements
 
-    /// Number of elements
+    // Construct the elements
+
+    // Number of elements
     unsigned nelem = orig_mesh_pt->nelement();
 
     if (this->Element_pt.size() != 0)
