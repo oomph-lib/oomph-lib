@@ -37,8 +37,8 @@
 namespace oomph
 {
   //======================================================================
-  /// Build mesh from the structure and geometry of another mesh but 
-  /// replace element by a different type (passed in via the template 
+  /// Build mesh from the structure and geometry of another mesh but
+  /// replace element by a different type (passed in via the template
   /// parameter as usual).
   /// A lot of this code is repeated in the construction of the mesh from
   /// the scaffold mesh.
@@ -50,7 +50,8 @@ namespace oomph
   {
     /// Check original element and current element have the same number of
     /// nodes and structure etc.
-    if(!orig_mesh_pt->element_pt(0)){
+    if (!orig_mesh_pt->element_pt(0))
+    {
       std::ostringstream error_message;
       error_message
         << "Original mesh has no elements. This is odd, so I'm crashing.\n";
