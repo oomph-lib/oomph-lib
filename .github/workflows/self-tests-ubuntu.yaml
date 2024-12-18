@@ -1,7 +1,13 @@
 name: Ubuntu self-tests
 
-on: push
-
+# IMPORTANT: A schedule workflow action *must* be placed on the default branch
+# of the repository. Only then will it run as scheduled. It is also placed in a
+# queue when scheduled, so it may not run exactly at the requested time.
+on:
+  push: # Run when the branch is pushed to
+  schedule:
+    - cron: '0 0 1 * *'  # Every month on the first at midnight UTC
+  # Calculated using crontab.guru. See here: https://crontab.guru/#1_0_1_1_*.
 jobs:
   build:
     strategy:
@@ -22,7 +28,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install requirements
-        run: sudo apt-get install make automake libtool libtool-bin autoconf doxygen gfortran g++ python2
+        run: sudo apt-get install make automake libtool libtool-bin autoconf doxygen gfortran g++
 
       # PM: Temporary patch to handle deprecation of Python 2.7 by GitHub runners. Should be removed
       # as soon as we have moved to a more recent version of Trilinos. N.B. we install Python 3

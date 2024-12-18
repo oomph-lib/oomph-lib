@@ -9343,20 +9343,20 @@ namespace oomph
       oomph_info << std::endl
                  << "USER-DEFINED ERROR IN NEWTON SOLVER " << std::endl;
       // Check whether it's the linear solver
-      if (error.linear_solver_error)
+      if (error.linear_solver_error())
       {
         oomph_info << "ERROR IN THE LINEAR SOLVER" << std::endl;
       }
       // Check to see whether we have reached Max_iterations
-      else if (error.iterations == Max_newton_iterations)
+      else if (error.iterations() == Max_newton_iterations)
       {
-        oomph_info << "MAXIMUM NUMBER OF ITERATIONS (" << error.iterations
+        oomph_info << "MAXIMUM NUMBER OF ITERATIONS (" << error.iterations()
                    << ") REACHED WITHOUT CONVERGENCE " << std::endl;
       }
       // If not, it must be that we have exceeded the maximum residuals
       else
       {
-        oomph_info << "MAXIMUM RESIDUALS: " << error.maxres
+        oomph_info << "MAXIMUM RESIDUALS: " << error.maxres()
                    << " EXCEEDS PREDEFINED MAXIMUM " << Max_residuals
                    << std::endl;
       }
@@ -10724,7 +10724,7 @@ namespace oomph
         catch (NewtonSolverError& error)
         {
           // Check whether it's the linear solver
-          if (error.linear_solver_error)
+          if (error.linear_solver_error())
           {
             std::ostringstream error_stream;
             error_stream << std::endl
@@ -11028,20 +11028,20 @@ namespace oomph
       oomph_info << std::endl
                  << "USER-DEFINED ERROR IN NEWTON SOLVER " << std::endl;
       // Check whether it's the linear solver
-      if (error.linear_solver_error)
+      if (error.linear_solver_error())
       {
         oomph_info << "ERROR IN THE LINEAR SOLVER" << std::endl;
       }
       // Check to see whether we have reached Max_iterations
-      else if (error.iterations == Max_newton_iterations)
+      else if (error.iterations() == Max_newton_iterations)
       {
-        oomph_info << "MAXIMUM NUMBER OF ITERATIONS (" << error.iterations
+        oomph_info << "MAXIMUM NUMBER OF ITERATIONS (" << error.iterations()
                    << ") REACHED WITHOUT CONVERGENCE " << std::endl;
       }
       // If not, it must be that we have exceeded the maximum residuals
       else
       {
-        oomph_info << "MAXIMUM RESIDUALS: " << error.maxres
+        oomph_info << "MAXIMUM RESIDUALS: " << error.maxres()
                    << " EXCEEDS PREDEFINED MAXIMUM " << Max_residuals
                    << std::endl;
       }
@@ -11183,7 +11183,7 @@ namespace oomph
       catch (NewtonSolverError& error)
       {
         // If it's a solver error then die
-        if (error.linear_solver_error ||
+        if (error.linear_solver_error() ||
             Time_adaptive_newton_crash_on_solve_fail)
         {
           std::string error_message = "USER-DEFINED ERROR IN NEWTON SOLVER\n";
@@ -16342,15 +16342,15 @@ namespace oomph
           oomph_info << std::endl
                      << "USER-DEFINED ERROR IN NEWTON SOLVER " << std::endl;
           // Check to see whether we have reached Max_iterations
-          if (error.iterations == Max_newton_iterations)
+          if (error.iterations() == Max_newton_iterations)
           {
-            oomph_info << "MAXIMUM NUMBER OF ITERATIONS (" << error.iterations
+            oomph_info << "MAXIMUM NUMBER OF ITERATIONS (" << error.iterations()
                        << ") REACHED WITHOUT CONVERGENCE " << std::endl;
           }
           // If not, it must be that we have exceeded the maximum residuals
           else
           {
-            oomph_info << "MAXIMUM RESIDUALS: " << error.maxres
+            oomph_info << "MAXIMUM RESIDUALS: " << error.maxres()
                        << "EXCEEDS PREDEFINED MAXIMUM " << Max_residuals
                        << std::endl;
           }

@@ -3054,31 +3054,50 @@ namespace oomph
   {
   public:
     /// Error in the linear solver
-    bool linear_solver_error;
+    bool Linear_solver_error;
 
     /// Max. # of iterations performed when the Newton solver died
-    unsigned iterations;
+    unsigned Iterations;
 
     /// Max. residual when Newton solver died
-    double maxres;
+    double Maxres;
 
     /// Default constructor, does nothing
-    NewtonSolverError() : linear_solver_error(false), iterations(0), maxres(0.0)
+    NewtonSolverError() : Linear_solver_error(false), Iterations(0), Maxres(0.0)
     {
     }
 
     /// Constructor that passes a failure of the linear solver
     NewtonSolverError(const bool& Passed_linear_failure)
-      : linear_solver_error(Passed_linear_failure), iterations(0), maxres(0.0)
+      : Linear_solver_error(Passed_linear_failure), Iterations(0), Maxres(0.0)
     {
     }
 
     /// Constructor that passes number of iterations and residuals
     NewtonSolverError(unsigned Passed_iterations, double Passed_maxres)
-      : linear_solver_error(false),
-        iterations(Passed_iterations),
-        maxres(Passed_maxres)
+      : Linear_solver_error(false),
+        Iterations(Passed_iterations),
+        Maxres(Passed_maxres)
     {
+    }
+
+    /// Access function to the error in the linear solver
+    bool linear_solver_error()
+    {
+      return Linear_solver_error;
+    }
+
+    /// Access function to Max. # of iterations performed when the Newton solver
+    /// died
+    unsigned iterations()
+    {
+      return Iterations;
+    }
+
+    /// Access function to Max. residual when Newton solver died
+    double Maxres()
+    {
+      return Maxres;
     }
   };
 
