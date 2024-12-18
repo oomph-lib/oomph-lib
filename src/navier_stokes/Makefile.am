@@ -4,11 +4,11 @@
 
 # Define the sources
 sources =  \
-navier_stokes_elements.cc \
-refineable_navier_stokes_elements.cc \
 Tnavier_stokes_elements.cc \
-navier_stokes_preconditioners.cc \
 lagrange_enforced_flow_preconditioner.cc \
+navier_stokes_elements.cc \
+navier_stokes_preconditioners.cc \
+refineable_navier_stokes_elements.cc \
 vorticity_smoother.cc
 
 # fluid_traction_elements.cc 
@@ -18,20 +18,29 @@ incl_cc_files =
 
 # Define the headers
 headers =  \
-navier_stokes_elements.h  \
-navier_stokes_face_elements.h \
-fluid_traction_elements.h \
-refineable_navier_stokes_elements.h  \
-Tnavier_stokes_elements.h \
-navier_stokes_preconditioners.h \
-navier_stokes_surface_power_elements.h \
-navier_stokes_surface_drag_torque_elements.h \
-navier_stokes_flux_control_elements.h \
-impose_parallel_outflow_element.h \
-impose_impenetrability_element.h \
-lagrange_enforced_flow_preconditioner.h \
-vorticity_smoother.h \
-navier_stokes_equation_numbering_element.h
+	Tnavier_stokes_elements.h \
+	eigensolution_functions.h \
+	fluid_slip_elements.h \
+	fluid_traction_elements.h \
+	far_field_element.h \
+	impose_impenetrability_element.h \
+	impose_parallel_outflow_element.h \
+	lagrange_enforced_flow_preconditioner.h \
+	navier_stokes_elements.h  \
+	navier_stokes_equation_numbering_element.h \
+	navier_stokes_face_elements.h \
+	navier_stokes_flux_control_elements.h \
+	navier_stokes_preconditioners.h \
+	navier_stokes_surface_drag_torque_elements.h \
+	navier_stokes_surface_power_elements.h \
+	point_pressure_evaluation_elements.h \
+	pressure_evaluation_elements.h \
+	refineable_navier_stokes_elements.h \
+	singular_far_field_element.h \
+	singular_fluid_traction_elements.h \
+	singular_navier_stokes_elements.h \
+	singular_navier_stokes_solution_elements.h \
+	vorticity_smoother.h
 
 # Template only files. These should be included in include directory
 # but should not be listed in combined header file

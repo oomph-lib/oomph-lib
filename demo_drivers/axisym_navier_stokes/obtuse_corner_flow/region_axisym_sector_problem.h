@@ -225,7 +225,7 @@ namespace oomph
         if (!node_pt->is_on_boundary(Far_field_boundary_id))
         {
           // Pin the pressure at one point
-          const unsigned pressure_index = 2;
+          const unsigned pressure_index = 3;
           node_pt->pin(pressure_index);
           node_pt->set_value(pressure_index, 0.0);
           oomph_info << node_pt->x(0) << ", " << node_pt->x(1) << " "

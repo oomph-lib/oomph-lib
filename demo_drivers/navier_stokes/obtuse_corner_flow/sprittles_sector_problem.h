@@ -473,7 +473,7 @@ namespace oomph
         std::cout << node_pt->x(0) << ", " << node_pt->x(1) << std::endl;
 
         PointPressureEvaluationElement* el_pt =
-          new PointPressureEvaluationElement(node_pt);
+          new PointPressureEvaluationElement(node_pt,2);
 
         el_pt->set_pressure_data_pt(
           Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0));
@@ -503,7 +503,7 @@ namespace oomph
       {
         std::cout << node_pt->x(0) << ", " << node_pt->x(1) << std::endl;
         PointPressureEvaluationElement* el_pt =
-          new PointPressureEvaluationElement(node_pt);
+          new PointPressureEvaluationElement(node_pt,2);
 
         el_pt->set_pressure_data_pt(
           Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0));

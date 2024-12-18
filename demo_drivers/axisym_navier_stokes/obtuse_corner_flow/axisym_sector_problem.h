@@ -220,7 +220,7 @@ namespace oomph
         if (!node_pt->is_on_boundary(Far_field_boundary_id))
         {
           // Pin the pressure at one point
-          const unsigned pressure_index = 2;
+          const unsigned pressure_index = 3;
           node_pt->pin(pressure_index);
           node_pt->set_value(pressure_index, 0.0);
           oomph_info << node_pt->x(0) << ", " << node_pt->x(1) << " "
@@ -505,7 +505,7 @@ namespace oomph
             Doc_info.directory().c_str(),
             Doc_info.number());
     output_stream.open(filename);
-    output_stream << "x,y,l_x,l_y,n_x,n_y,u_w,v_w,z_w,u,v,w,p" << std::endl;
+    output_stream << "x y l_x l_y l_z n_x n_y u_w v_w z_w u v w p" << std::endl;
     Slip_boundary_mesh_pt->output(output_stream, npts);
     output_stream.close();
 
@@ -514,7 +514,7 @@ namespace oomph
             Doc_info.directory().c_str(),
             Doc_info.number());
     output_stream.open(filename);
-    output_stream << "x,y,u,v,p,lagrange_multiplier,nx,ny," << std::endl;
+    output_stream << "x y u v p lagrange_multiplier nx ny " << std::endl;
     No_penetration_boundary_mesh1_pt->output(output_stream, 3);
     output_stream.close();
 
@@ -523,7 +523,7 @@ namespace oomph
             Doc_info.directory().c_str(),
             Doc_info.number());
     output_stream.open(filename);
-    output_stream << "x,y,u,v,p,lagrange_multiplier,nx,ny," << std::endl;
+    output_stream << "x y u v p lagrange_multiplier nx ny " << std::endl;
     No_penetration_boundary_mesh2_pt->output(output_stream, 3);
     output_stream.close();
 

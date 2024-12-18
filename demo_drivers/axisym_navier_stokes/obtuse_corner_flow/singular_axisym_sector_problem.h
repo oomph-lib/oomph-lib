@@ -467,7 +467,7 @@ namespace oomph
       }
     }
     PointPressureEvaluationElement* el_pt =
-      new PointPressureEvaluationElement(node_pt);
+      new PointPressureEvaluationElement(node_pt,3);
     el_pt->set_pressure_data_pt(
       Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0));
 
@@ -501,7 +501,7 @@ namespace oomph
       }
     }
     PointPressureEvaluationElement* el_pt =
-      new PointPressureEvaluationElement(node_pt);
+      new PointPressureEvaluationElement(node_pt,3);
 
     el_pt->set_pressure_data_pt(
       Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0));

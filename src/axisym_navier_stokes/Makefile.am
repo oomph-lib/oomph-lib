@@ -4,23 +4,27 @@
 
 # Define the sources
 sources =  \
-axisym_navier_stokes_elements.cc \
-refineable_axisym_navier_stokes_elements.cc \
-Taxisym_navier_stokes_elements.cc \
-linearised_fsi_axisym_no_slip_bc_elements.cc
+	Taxisym_navier_stokes_elements.cc \
+	axisym_navier_stokes_elements.cc \
+	linearised_fsi_axisym_no_slip_bc_elements.cc \
+	refineable_axisym_navier_stokes_elements.cc
 
 # Include files which shouldn't be compiled
 incl_cc_files =
 
 # Define the headers
 headers =  \
-axisym_navier_stokes_elements.h  \
-axisym_navier_stokes_face_elements.h \
-refineable_axisym_navier_stokes_elements.h \
-Taxisym_navier_stokes_elements.h \
-axisym_fluid_traction_elements.h \
-linearised_fsi_axisym_no_slip_bc_elements.h \
-axisym_navier_stokes_equation_numbering_element.h
+	Taxisym_navier_stokes_elements.h \
+	axisym_fluid_flux_elements.h \
+	axisym_fluid_slip_elements.h \
+	axisym_fluid_traction_elements.h \
+	axisym_navier_stokes_elements.h  \
+	axisym_navier_stokes_equation_numbering_element.h \
+	axisym_navier_stokes_face_elements.h \
+	linearised_fsi_axisym_no_slip_bc_elements.h \
+	refineable_axisym_navier_stokes_elements.h \
+	singular_axisym_fluid_traction_elements.h \
+	singular_axisym_navier_stokes_elements.h
 
 # Template only files. These should be included in include directory
 # but should not be listed in combined header file
@@ -52,6 +56,14 @@ library_includedir=$(includedir)/axisym_navier_stokes
 
 #These are the header files that are to be placed in subdirectory
 library_include_HEADERS=$(headers) $(incl_cc_files) $(templates)
+
+# Required libraries 
+#-------------------
+# Include path for library headers -- need to refer to include files
+# in src as they will not have been installed yet! 
+AM_CPPFLAGS += \
+	-I$(top_srcdir)/src/generic \
+	-I$(top_srcdir)/src/navier_stokes
 
 # Combined header file
 #---------------------

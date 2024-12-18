@@ -1289,6 +1289,13 @@ namespace oomph
       return internal_local_eqn(P_axi_nst_internal_index, n);
     }
 
+    /// Overload the access function for the pressure's local
+    /// equation numbers
+    inline int p_local_unknown(const unsigned& n) const
+    {
+      return internal_local_eqn(P_axi_nst_internal_index, n);
+    }
+
     /// Redirect output to NavierStokesEquations output
     void output(std::ostream& outfile)
     {

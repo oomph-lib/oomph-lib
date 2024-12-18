@@ -114,6 +114,11 @@ namespace oomph
     /// p_local_eqn[n] = local equation number or < 0 if pinned
     virtual int p_local_eqn(const unsigned& n) const = 0;
 
+    /// Access function for the local unknown number information for
+    /// the pressure.
+    /// p_local_unknown[n] = local unknown number or < 0 if pinned
+    virtual int p_local_unknown(const unsigned& n) const = 0;
+
     /// Function to return number of pressure degrees of freedom
     virtual unsigned npres_nst() const = 0;
 
@@ -127,5 +132,6 @@ namespace oomph
       return 0;
     }
   };
+
 } // namespace oomph
 #endif
