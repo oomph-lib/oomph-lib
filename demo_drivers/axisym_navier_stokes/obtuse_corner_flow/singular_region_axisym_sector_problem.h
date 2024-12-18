@@ -10,10 +10,6 @@
 #include "region_axisym_sector_problem.h"
 #include "two_region_refined_sector_tri_mesh.template.h"
 
-#include "eigensolution_functions.h"
-#include "pressure_evaluation_elements.h"
-#include "point_pressure_evaluation_elements.h"
-#include "singular_axisym_fluid_traction_elements.h"
 
 namespace oomph
 {

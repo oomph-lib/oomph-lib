@@ -9,10 +9,6 @@
 /// Local headers
 #include "axisym_sector_problem.h"
 
-#include "eigensolution_functions.h"
-#include "pressure_evaluation_elements.h"
-#include "point_pressure_evaluation_elements.h"
-#include "singular_axisym_fluid_traction_elements.h"
 
 namespace oomph
 {

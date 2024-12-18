@@ -52,4 +52,4 @@ LDADD = -L@libdir@ \
 		-lgcov 
 
 # Add the paranoid and range checking flags
-AM_CPPFLAGS += #-ggdb -O0 --coverage -Wno-misleading-indentation #-DPARANOID  -DRANGE_CHECKING 
+AM_CPPFLAGS += -O0 --coverage -Wno-misleading-indentation #-ggdb -DPARANOID  -DRANGE_CHECKING 
