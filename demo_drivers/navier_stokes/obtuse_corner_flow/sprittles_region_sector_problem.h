@@ -9,11 +9,6 @@
 /// Local headers
 #include "region_sector_problem.h"
 
-#include "eigensolution_elements.h"
-#include "eigensolution_functions.h"
-#include "pressure_evaluation_elements.h"
-#include "point_pressure_evaluation_elements.h"
-#include "singular_fluid_traction_elements.h"
 
 namespace oomph
 {

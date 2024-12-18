@@ -10,8 +10,6 @@
 #include "meshes/triangle_mesh.h"
 
 /// Local headers
-#include "fluid_slip_elements.h"
-#include "far_field_element.h"
 #include "parameter_functions.h"
 #include "parameter_struct.h"
 #include "two_region_refined_sector_tri_mesh.template.h"

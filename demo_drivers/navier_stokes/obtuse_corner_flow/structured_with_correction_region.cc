@@ -12,7 +12,6 @@
 #include "meshes/triangle_mesh.h"
 
 // Local include files
-#include "singular_navier_stokes_elements.h"
 #include "singular_region_sector_problem.h"
 #include "my_element.h"
 #include "utility_functions.h"
