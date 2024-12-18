@@ -3095,7 +3095,7 @@ namespace oomph
     }
 
     /// Access function to Max. residual when Newton solver died
-    double Maxres()
+    double maxres()
     {
       return Maxres;
     }
