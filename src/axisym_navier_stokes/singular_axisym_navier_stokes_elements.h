@@ -2215,7 +2215,7 @@ namespace oomph
           p_hat_local[s] = this->pressure_singular_function(s, interpolated_x);
         }
 
-        // MOMENTUM EQUATIONS
+        // TOTAL VELOCITY EQUATIONS
         //-------------------
 
         // Loop over the velocity test functions
