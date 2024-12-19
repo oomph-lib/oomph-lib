@@ -9,7 +9,6 @@
 #include "meshes/triangle_mesh.h"
 
 /// Local headers
-#include "axisym_fluid_slip_elements.h"
 #include "parameter_functions.h"
 #include "parameter_struct.h"
 #include "refined_sector_tri_mesh.template.h"

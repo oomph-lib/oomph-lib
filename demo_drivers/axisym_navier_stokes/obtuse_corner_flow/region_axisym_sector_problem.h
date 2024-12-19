@@ -5,12 +5,11 @@
 #include <array>
 
 #include "generic.h"
-#include "navier_stokes.h"
+#include "axisym_navier_stokes.h"
 #include "fluid_interface.h"
 #include "meshes/triangle_mesh.h"
 
 /// Local headers
-#include "axisym_fluid_slip_elements.h"
 #include "parameter_functions.h"
 #include "parameter_struct.h"
 #include "two_region_refined_sector_tri_mesh.template.h"
