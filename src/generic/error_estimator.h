@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -125,13 +125,6 @@ namespace oomph
     /// The default (do nothing behaviour) will mean that all indices
     /// remain at the default value zero.
     virtual void get_Z2_compound_flux_indices(Vector<unsigned>& flux_index) {}
-
-    /// Number of vertex nodes in the element
-    virtual unsigned nvertex_node() const = 0;
-
-    /// Pointer to the j-th vertex node in the element. Needed for
-    /// efficient patch assmbly
-    virtual Node* vertex_node_pt(const unsigned& j) const = 0;
 
     /// Order of recovery shape functions
     virtual unsigned nrecovery_order() = 0;

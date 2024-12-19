@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -690,6 +690,10 @@ namespace oomph
 #endif
       return Data_pt[Ninternal_data + i];
     }
+
+    /// Static boolean to suppress warnings about repeated
+    /// data. Defaults to false.
+    static bool Suppress_warning_about_any_repeated_data;
 
     /// Static boolean to suppress warnings about repeated internal
     /// data. Defaults to false.
@@ -5257,6 +5261,21 @@ namespace oomph
   /// ////////////////////////////////////////////////////////////////////
   /// ////////////////////////////////////////////////////////////////////
   /// ////////////////////////////////////////////////////////////////////
+
+
+  //=======================================================================
+  /// A class to specify when the error is caused by an inverted element.
+  //=======================================================================
+  class InvertedElementError : public OomphLibError
+  {
+  public:
+    InvertedElementError(const std::string& error_description,
+                         const std::string& function_name,
+                         const char* location)
+      : OomphLibError(error_description, function_name, location)
+    {
+    }
+  };
 
 } // namespace oomph
 

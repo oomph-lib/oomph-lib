@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -507,7 +507,7 @@ public:
 
   //Boundary 1 contains the final node in the mesh:
   add_boundary_node(1,Node_pt[n_global_node-1]); 
-
+  
  } // End of constructor
 
 }; // End of OneDimMesh class.
@@ -599,7 +599,7 @@ class DemoPoissonProblem : public Problem
   /// Print out the result after the solve
   void actions_after_newton_solve() 
    {
-    ofstream file ("result.dat");
+    ofstream file("result.dat");
     mesh_pt()->output(file);
    }
 
@@ -617,7 +617,7 @@ int main()
  {
   //Build the problem 
   DemoPoissonProblem problem;
-
+  
   //Solve the problem, using Newton's method
   problem.newton_solve();
 

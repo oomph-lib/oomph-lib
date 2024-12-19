@@ -112,20 +112,20 @@ for lambda_sq in `echo $lambda_sq_list`; do
                     if [ $count -lt 10 ]; then
                         file=animation.000`echo $count`.png
                         if [ -e $file ]; then
-                            ln -s $file frame`echo $output_label`.png
+                            ln -sf $file frame`echo $output_label`.png
                             let output_label=output_label+1
                         fi
                     else 
                         if [  $count -lt 100 ]; then
                             file=animation.00`echo $count`.png
                             if [ -e $file ]; then
-                                ln -s $file frame`echo $output_label`.png
+                                ln -sf $file frame`echo $output_label`.png
                                 let output_label=output_label+1
                             fi        
                         else 
                             file=animation.0`echo $count`.png
                             if [ -e $file ]; then
-                                ln -s $file frame`echo $output_label`.png
+                                ln -sf $file frame`echo $output_label`.png
                                 let output_label=output_label+1
                             fi
                         fi

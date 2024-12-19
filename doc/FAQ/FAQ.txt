@@ -365,7 +365,7 @@ to be passed to the compiler/linker:
 mheil@biolaptop:~/version339/demo_drivers/poisson/one_d_poisson$ make one_d_poisson
 mpic++ -DHAVE_CONFIG_H -I. -I../../..  -I/home/mheil/local/hypre_default_installation_mpi/include -DOOMPH_HAS_HYPRE -I/home/mheil/local/trilinos_default_installation_mpi/include -DOOMPH_HAS_TRILINOS -I/home/mheil/local/mumps_and_scalapack_default_installation/include -DOOMPH_HAS_MUMPS -DOOMPH_HAS_STACKTRACE -DOOMPH_HAS_MPI -DOOMPH_HAS_TRIANGLE_LIB -DOOMPH_HAS_TETGEN_LIB -DUSING_OOMPH_SUPERLU -DUSING_OOMPH_SUPERLU_DIST -I/home/mheil/version339/build/include  -DgFortran -O3 -Wall -MT one_d_poisson.o -MD -MP -MF .deps/one_d_poisson.Tpo -c -o one_d_poisson.o one_d_poisson.cc
 mv -f .deps/one_d_poisson.Tpo .deps/one_d_poisson.Po
-/bin/bash ../../../libtool --tag=CXX   --mode=link mpic++ -DgFortran -O3 -Wall -L/home/mheil/local/hypre_default_installation_mpi/lib -L/home/mheil/local/trilinos_default_installation_mpi/lib -L/home/mheil/local/mumps_and_scalapack_default_installation/lib  -o one_d_poisson one_d_poisson.o -L/home/mheil/version339/build/lib -lpoisson -lgeneric -lHYPRE -lml -lifpack -lamesos -lanasazi -laztecoo -lepetraext -ltriutils -lepetra -lteuchos -ldmumps -lmumps_common /home/mheil/local/mumps_and_scalapack_default_installation/lib/libscalapack.a /home/mheil/local/mumps_and_scalapack_default_installation/lib/blacs.a /home/mheil/local/mumps_and_scalapack_default_installation/lib/blacsF77.a /home/mheil/local/mumps_and_scalapack_default_installation/lib/blacs_copy.a /home/mheil/local/mumps_and_scalapack_default_installation/lib/libpord.a -loomph_hsl -loomph_arpack -loomph_triangle -loomph_tetgen -loomph_superlu_4.3 -loomph_parmetis_3.1.1 -loomph_superlu_dist_3.0 -loomph_metis_from_parmetis_3.1.1 /home/mheil/local/lib/lapack/lapack.a /home/mheil/local/lib/blas/blas.a -L/usr/lib/openmpi/lib -L/usr/lib/gcc/x86_64-linux-gnu/4.6.1 -L/usr/lib/gcc/x86_64-linux-gnu/4.6.1/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/4.6.1/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/4.6.1/../../.. -lmpi_f77 -lmpi -lopen-rte -lopen-pal -ldl -lnsl -lutil -lgfortran -lm -lquadmath -lpthread 
+/bin/bash ../../../libtool --tag=CXX   --mode=link mpic++ -DgFortran -O3 -Wall -L/home/mheil/local/hypre_default_installation_mpi/lib -L/home/mheil/local/trilinos_default_installation_mpi/lib -L/home/mheil/local/mumps_and_scalapack_default_installation/lib  -o one_d_poisson one_d_poisson.o -L/home/mheil/version339/build/lib -lpoisson -lgeneric -lHYPRE -lml -lifpack -lamesos -lanasazi -laztecoo -lepetraext -ltriutils -lepetra -lteuchos -ldmumps -lmumps_common /home/mheil/local/mumps_and_scalapack_default_installation/lib/libscalapack.a /home/mheil/local/mumps_and_scalapack_default_installation/lib/blacs.a /home/mheil/local/mumps_and_scalapack_default_installation/lib/blacsF77.a /home/mheil/local/mumps_and_scalapack_default_installation/lib/blacs_copy.a /home/mheil/local/mumps_and_scalapack_default_installation/lib/libpord.a -loomph_hsl -loomph_triangle -loomph_tetgen -loomph_superlu_4.3 -loomph_parmetis_3.1.1 -loomph_superlu_dist_3.0 -loomph_metis_from_parmetis_3.1.1 /home/mheil/local/lib/lapack/lapack.a /home/mheil/local/lib/blas/blas.a -L/usr/lib/openmpi/lib -L/usr/lib/gcc/x86_64-linux-gnu/4.6.1 -L/usr/lib/gcc/x86_64-linux-gnu/4.6.1/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/4.6.1/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/4.6.1/../../.. -lmpi_f77 -lmpi -lopen-rte -lopen-pal -ldl -lnsl -lutil -lgfortran -lm -lquadmath -lpthread 
 libtool: link: mpic++ -DgFortran -O3 -Wall -o one_d_poisson
 one_d_poisson.o
 -L/home/mheil/local/hypre_default_installation_mpi/lib
@@ -382,7 +382,6 @@ one_d_poisson.o
 /home/mheil/local/mumps_and_scalapack_default_installation/lib/blacs_copy.a
 /home/mheil/local/mumps_and_scalapack_default_installation/lib/libpord.a
 /home/mheil/version339/build/lib/liboomph_hsl.a
-/home/mheil/version339/build/lib/liboomph_arpack.a
 /home/mheil/version339/build/lib/liboomph_triangle.a
 /home/mheil/version339/build/lib/liboomph_tetgen.a
 /usr/lib/openmpi/lib/libmpi_cxx.so
@@ -570,7 +569,7 @@ This is achieved by defining the variable
  #
  # then replace "-loomph_blas" by "-lblas" below:
  #
- EXTERNAL_LIBS='-loomph_hsl -loomph_superlu_3.0 -loomph_metis_4.0 -loomph_arpack -loomph_lapack -loomph_flapack -loomph_blas'
+ EXTERNAL_LIBS='-loomph_hsl -loomph_superlu_3.0 -loomph_metis_4.0 -loomph_lapack -loomph_flapack -loomph_blas'
 \endcode
 
 If you wish to link against some other version of the library, edit
